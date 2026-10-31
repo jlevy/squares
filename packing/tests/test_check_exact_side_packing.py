@@ -78,6 +78,24 @@ def test_decides_the_two_square_packing_exactly(tmp_path: Path) -> None:
     assert low <= Fraction(12, 5) <= high
 
 
+def test_an_undecided_elimination_is_no_packing(tmp_path: Path) -> None:
+    """Review A1 of #817: with the off-basis elimination stopped (a CPU limit of 0), every
+    separation still holds but the touching row off the basis and the rows' side against
+    Sn/Sd are undecided, so the verdict must not be a packing and the CLI must not pass."""
+    system, box = write_system(tmp_path)
+    receipt = decide(system, box, reference(Fraction(17, 10)), digits=60, cpu_limit=0.0)
+    assert not receipt["failures"]
+    assert not receipt["touching"]["consistency"]["decided"]
+    assert not receipt["contacts_exact_without_monte_carlo"]
+    assert not receipt["decided"]
+    assert receipt["verdict"] == "not decided"
+    assert receipt["undecided"] == [
+        "a touching constraint's off-basis row is not decided at t*",
+        "the whole contact system is not decided consistent at t*",
+        "the rows' side is not decided equal to Sn/Sd",
+    ]
+
+
 def test_refuses_an_overlapping_configuration(tmp_path: Path) -> None:
     system, box = write_system(tmp_path, overlap="big(1)//100")
     receipt = decide(system, box, reference(Fraction(169, 100)), digits=60)

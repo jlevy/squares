@@ -18,8 +18,9 @@ and negative controls that his run did not have:
   changed by one, each of which must fail.
 
 The archive is untrusted data.  It is unpacked outside the repository by the caller, every
-member is held to the digest the packet pins before anything runs, the scripts are held to
-the packet's ``upstream-subtree.sha256`` and copied to a fresh directory, and each runs
+member is held to the digest the packet pins before anything runs, the scripts are copied
+from the retained packet (Git holds them; they are not compared with its
+``upstream-subtree.sha256``) to a fresh directory, and each runs
 under the given interpreter (a separate virtual environment with the author's pinned
 ``python-flint`` and ``mpmath``) with ``-I``, an empty working directory and every path
 passed as an argument.  Nothing here imports from the archive or the scripts.

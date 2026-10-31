@@ -95,7 +95,7 @@
           "3.90143354777e-799"
         ]
       },
-      "cpu_seconds": 24.8
+      "cpu_seconds": 18.6
     }
   },
   "working_digits": 120,
@@ -314,7 +314,7 @@
         "144": "identically zero",
         "148": "identically zero"
       },
-      "cpu_seconds": 9.5
+      "cpu_seconds": 5.7
     },
     "constraints": [
       {
@@ -726,6 +726,7 @@
     ]
   },
   "failures": [],
+  "undecided": [],
   "decided": true,
   "contacts_exact_without_monte_carlo": true,
   "whole_contact_system_at_tstar": {
@@ -750,9 +751,9 @@
       "149": "identically zero",
       "S - Sn/Sd": "identically zero"
     },
-    "cpu_seconds": 8.0
+    "cpu_seconds": 4.8
   },
   "verdict": "packing: every non-touching pair and wall strictly separated; every touching constraint is a contact row",
-  "cpu_seconds": 45.8,
+  "cpu_seconds": 31.7,
   "reference_witness": "resources/web/pingyou-pr622-certificate-2026-10-15/facts/n-029.yaml.gz"
 }

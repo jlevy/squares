@@ -36,6 +36,8 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
+import platform
 import sys
 import time
 from collections.abc import Sequence
@@ -633,6 +635,22 @@ def price(
                 "(their common denominator grows about 20 bits a degree, measured), "
                 "but no reduction-based route avoids an exact product per term"
             ),
+            "model_omits": [
+                "building each H: about 5,073 terms at n = 29, each a product of up to 26 "
+                "polynomials of degree at most 7212, which is not priced",
+                "quasi-linear exact division by Kronecker substitution, which this module "
+                "uses for the factorizations and which could make the division far cheaper",
+            ],
+            "timed_on": {
+                "platform": platform.platform(),
+                "machine": platform.machine(),
+                "cpus": os.cpu_count(),
+                "load_average_1_5_15": [round(v, 2) for v in os.getloadavg()],
+                "note": (
+                    "the multiplication time is wall clock on this host, so the CPU-hours "
+                    "scale with the host and its load"
+                ),
+            },
         },
         "modular_route": {
             "method": (

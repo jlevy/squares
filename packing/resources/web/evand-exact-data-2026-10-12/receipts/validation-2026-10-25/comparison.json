@@ -14,8 +14,7 @@
       "3.90143354778e-799"
     ],
     "rational_denominator_digits": 2398,
-    "sign_of_p_at_rational": -1,
-    "note": "rational_minus_root recomputed in Decimal from this run's bracket and the case's exact form after the run, whose binary64 print underflowed to 0; the signs were not re-evaluated"
+    "sign_of_p_at_rational": -1
   },
-  "cpu_seconds": 735.1
+  "cpu_seconds": 632.5
 }

@@ -16,8 +16,9 @@ encloses it, so the enclosure holds the exact centres and side at ``t*``.  Each 
 orientation class is read by matching its centre to a reference packing (for ``n = 29``,
 T-195's exact witness, ``W-pingyou-622-n029``), and every contact row is then required to
 use only the classes of the squares it names.  Squares the contact system does not
-constrain (``19`` and ``20`` at ``n = 29``, free in their cells) keep the reference
-packing's exact pose.
+constrain (``free-20`` and ``free-21`` at ``n = 29``, free in their cells) start from
+the reference packing's exact pose and are moved by small rational offsets
+(``nudge_free_squares``) until they are strictly separated inside the box.
 
 **What is decided, and how.**
 
@@ -33,9 +34,13 @@ packing's exact pose.
   identically), must be a ``Q(t)`` multiple of one contact row.  Then the gap is zero
   wherever that row holds, so the two squares touch along that axis and do not overlap.
 - A row of the basis holds at ``t*`` by construction, and so does a row proportional to
-  one.  Any other row holds at ``t*`` only if the whole system is consistent there; those
-  rows are listed separately, because their exactness is what the source's
-  ``contacts_mod.py`` identity check (Monte Carlo) supplies, and the receipt says so.
+  one through a factor with no pole in the box.  Any other row holds at ``t*`` only if
+  the whole system is consistent there, which ``symbolic_consistency`` decides exactly
+  by elimination over ``Q(t)``: each residual vanishes identically or has a numerator
+  divisible by an ``F_k``, with every pivot, every residual denominator and every
+  coefficient denominator nonzero on the box.  The verdict requires that decision for
+  the touching rows, for the whole system and for the rows' side against ``Sn/Sd``
+  (``undecided`` names what is missing), so no Monte Carlo step enters it.
 
 Run it from ``packing/``::
 
@@ -765,6 +770,20 @@ def symbolic_consistency(
     }
     for name, form in (extra or {}).items():
         goals[name] = Affine(dict(form.terms), form.constant)
+
+    def poles_excluded(form: Affine) -> bool:
+        """Whether every coefficient of ``form`` has a denominator nonzero on the box, so
+        the row means the same at ``t*`` as over ``Q(t)``."""
+        for value in [*form.terms.values(), form.constant]:
+            denominator = getattr(value, "denom", None)
+            if denominator is None:
+                continue
+            bottom = family.poly(denominator)
+            if bottom.a <= 0 <= bottom.b:
+                return False
+        return True
+
+    finite_goals = {j: poles_excluded(goal) for j, goal in goals.items()}
     pivots_nonzero = True
 
     def weight(value: Any) -> int:
@@ -797,6 +816,9 @@ def symbolic_consistency(
                 other.constant = other.constant - factor * solved.constant
     verdicts = {}
     for j, goal in goals.items():
+        if not finite_goals[j]:
+            verdicts[str(j)] = "undecided"
+            continue
         if goal.terms:
             verdicts[str(j)] = "unknowns left after elimination"
             continue
@@ -948,9 +970,18 @@ def decide(
             return "proportional-to-basis"
         return "consistency"
 
+    family = Evaluator(system.ring, box)
+
+    def finite_on_box(factor: Any) -> bool:
+        """Whether ``factor`` has no pole in the box: ``gap = factor * row`` then gives
+        ``gap(t*) = 0`` wherever the row holds at ``t*``."""
+        bottom = family.poly(factor.denom)
+        return not (bottom.a <= 0 <= bottom.b)
+
     def match(gap: Affine) -> tuple[int, str] | None:
         for row_index, form in enumerate(forms):
-            if proportional(gap, form) is not None:
+            factor = proportional(gap, form)
+            if factor is not None and finite_on_box(factor):
                 return row_index, exactness(row_index)
         return None
 
@@ -1052,11 +1083,31 @@ def decide(
         cpu_limit=cpu_limit,
         extra={"S - Sn/Sd": side_form},
     )
+    side_row = str((whole_system.get("rows") or {}).get("S - Sn/Sd", "undecided"))
+    undecided = [
+        reason
+        for reason, holds in (
+            ("the Krawczyk box's zero is not proved unique", bool(krawczyk["unique"])),
+            (
+                "a touching constraint's off-basis row is not decided at t*",
+                bool(consistency.get("decided")),
+            ),
+            (
+                "the whole contact system is not decided consistent at t*",
+                bool(whole_system.get("decided")),
+            ),
+            (
+                "the rows' side is not decided equal to Sn/Sd",
+                side_row != "undecided" and not side_row.startswith("unknowns"),
+            ),
+        )
+        if not holds
+    ]
     decided_all = (
         not failures
         and not class_problems
         and not second_opinion_disagreements
-        and bool(krawczyk["unique"])
+        and not undecided
     )
     return {
         "format": "exact-side-packing/1",
@@ -1110,6 +1161,7 @@ def decide(
         },
         "free_square_offsets": offsets,
         "failures": failures,
+        "undecided": undecided,
         "decided": decided_all,
         "contacts_exact_without_monte_carlo": bool(consistency.get("decided")),
         "whole_contact_system_at_tstar": whole_system,
