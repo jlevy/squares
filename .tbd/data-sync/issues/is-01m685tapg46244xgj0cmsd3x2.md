@@ -5,7 +5,7 @@ title: "Import Khalili and Gharabaghi: s(44) = 7 by a closed mixed cover (#842)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l3
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:09:47.344Z
-updated_at: 2026-10-31T05:23:07.656Z
+updated_at: 2026-10-31T05:52:03.980Z
 started_at: 2026-10-31T05:09:55.099Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#842 (moh63-dev, Mohsen Khalili and Sara Gharabaghi, opened 2026-10-26T23:46:23Z; one comment, 2026-10-29T15:58:14Z, announcing release v1.1; labelled `intake` on 2026-10-31 by this lane under the github-workflows grant): "s(44) = 7: registration request". Intake pass 2026-10-31 (epic think-3guf), lane L3 (bold-ritchie-l3, tbd-strong sub-agent), branch claude/bold-ritchie-xo28us-s44. Followed the #594/#610 imports (think-osvq, think-ribz) and T-066's zmx2 route (s(59) = 8).
@@ -58,3 +58,35 @@ Draft ratings (registering lane's draft, for the reviewer): enters at V3/C3 if t
 ## Acknowledgement draft (post after the PR merges, stage 7)
 
 See the answer section added when the PR is open.
+
+## Notes
+
+2026-10-31, lane L3 (bold-ritchie-l3). Claimed with tbd start --as bold-ritchie-l3 (claimed). Branch claude/bold-ritchie-xo28us-s44, pushed: 65b1f2d (packet, tools, D4 replay), 1994011 (full replay, controls, review programs), a2ee6db (register, case, requests, coverage, verifiers, views). A container restart at about 05:27Z stopped the --full sweep after 29,812 of 39,200 roots; resumed from its root log by the same command and finished at 05:35:45Z.
+
+## Stage results
+
+- Stage 1: entry #842 in campaign/result-requests.yaml (triage done, read_through the 29 Oct comment); issue labelled `intake` (no n-44 label exists; listed for the owner).
+- Stage 2: packet packing/resources/web/moh63-dev-s44-equals-7-2026-10-29 at b5b1bc9 (v1.1, head; certificate identical to v1.0 063c4d6), 212 files, acquire_source --check PACKET_MATCHES_ITS_CONTRACT; bibliography [Khalili Gharabaghi s44 cover 2026-10-29]; coverage entry; resources README rows.
+- Stage 3: T-252 (optimality, n = 44), landed 2026-10-31; E-khalili-842-cover-report, E-khalili-842-cover-replay.
+- Stage 4 replay (zmx2.rs e2bb84e9 from retained bytes, binary d68a2e35..., 2 threads): --d4 VERIFIED-D4, 4,900 roots, 16,792,446 boxes, 0 uncertified, max depth 39, 131 s wall / 222 CPU-s; --full VERIFIED, 39,200 roots, 134,880,184 boxes, 0 uncertified, max depth 39 (first run ~1,004 s wall to the restart, resume 311 s / 430 CPU-s; zmx2's own count 2,601 CPU-s). Both root logs equal the source's root for root (audit_evand_mixed_covers compare-zmx2, check_whole_case clean). Controls refused: drop-heaviest-point at d4 x23 y17 (435 uncertified), drop-heaviest-segment at d4 x8 y9 (235); held by tests/test_replay_controls.py.
+- Stage 4 review: docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md, accepted, F1-F6 notes, written as a distinct pass of this lane (disclosed: not separately prompted). Cross-checks: zmx2 6b7f0f79 (binary cba78a9e) over the D4 region, identical census at all 4,900 roots; 2,880 exact poses + 25 descents, none below 1 (least 1.003837205 at the wall tile (1/2, 3/2), tilt 1e-6 deg); the source's printed float minima reproduced exactly; mutants below 1 exactly (0.993201, 0.819939); the source's zm_mixed.py records complete (9,800 roots at depth 24, 27 closed at depth 30, 495,545 CPU-s).
+- Rating: V3/C3, confirmed, reproduced with the producer's code; S3 (review confirmed the draft). n-044 proved (reported and verified lower 7).
+- Held: zm_mixed.py complete pass, think-qvp6 (~138 CPU-h, over the cap; a subset, the 27 depth-30 roots at ~25.7 CPU-h, fits); backlog row in think-j9kg.
+
+## Reply draft for #842 (post after the merge, from main with check_requests --draft 842, checked against main and the site)
+
+@moh63-dev, thank you for the registration request, and for v1.1 with the zm_mixed.py driver and the log audit.
+
+Your result is on main: **T-252, s(44) = 7, at V3/C3 — confirmed, reproduced with the producer's code**, and [n = 44](https://squaremath.org/cases/44.html) now reads proved. The packet retains moh63-dev/s44-equals-7 at b5b1bc9 (v1.1), whose certificate is byte for byte v1.0's (c9fde0f1…cae0).
+
+What ran here: Evan Daniel's zmx2, zmx2.rs e2bb84e9 (the file at evand/square-packing 659ee62) built from this repository's retained copy, over all 4,900 D4 roots and all 39,200 unreduced roots, none uncertified; every root's census equals your published logs. Two mutated covers, each without one D4 orbit (the heaviest point orbit, the heaviest segment orbit), are refused. This is a reproduction with your checker, not a second implementation.
+
+The stage 4 review ([review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md)) found no mathematical defect and no blocking finding. Its notes: zmx2 is interval-certified (binary64 geometry widened outward, exact integer mass tests), not exact-rational as the README, the issue and the paper's section 4 say; for your cover zmx2.rs e2bb84e9 runs the same decision path as the 6b7f0f79 version earlier reviews derived, and that version gives the same census at every D4 root; both sweeps reach depth 39 of 40. Exact capture at 2,905 sampled poses was never below 1.
+
+Not run here: zm_mixed.py's complete pass, about 138 CPU-hours by your records, over this pass's compute cap. It is owned by think-qvp6; it would add a second machine method beside the rung and raises no rung. Your zm_mixed.py records were read with the review's own code: every root at depth 24, and each of the 27 open roots closed whole at depth 30.
+
+Two questions, neither holding anything open: were the zm_mixed.py runs without --cert-mode deliberate (for this cover nothing certificate mode disables is reachable), and is zeromargin.py 3cb95fb7, which zm_mixed.py flags as differing from its pin, the file at 659ee62?
+
+V4/C4 would need a second, separately prompted adversarial review and a human oversight record. With the import answered, this issue is closed; an answer to the questions is still welcome.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
