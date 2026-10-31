@@ -11737,6 +11737,204 @@ sources:
     private run that accepted all 5,377 modules on reused compiled objects; nothing here
     has built it. T-245 records the claim; n-012's reported lower lane and reported status
     take it, and its verified lanes and status are unchanged.
+- id: mishapolk-1023-refinements-2026-10-30
+  title: >-
+    Mykhailo Polkovskyi's certificates of 23 October at e386aab to fbc1749, no issue
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/52aa2672c74c91931686d60a49bdf97ec798291c
+  local: resources/web/mishapolk-1023-refinements-2026-10-30/
+  source_key: '[Mishapolk refinements 2026-10-23]'
+  scope:
+    n_values:
+    - 154
+    - 155
+    - 183
+    - 211
+    - 227
+    - 236
+    - 237
+    - 241
+    - 271
+  reviewed: '2026-10-31'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-1023-refinements-2026-10-30/acquisition/claims.json
+  evidence:
+  - E-mishapolk-1023-certificate-report
+  notes: >-
+    The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+    decides which are recorded. All 9 complete certificates are retained as the source wrote them,
+    each admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-252 records the in-horizon report. All 39 native jobs have full outcomes. No selected override
+    or superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
+- id: couzo-issue843-2026-10-28
+  title: Francisco Couzo's packing of 130 squares at 3a4d95c, issue 843
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/712c6a6e9ef58a9521784e6b7e236af813422de7
+  local: resources/web/couzo-issue843-2026-10-28/
+  source_key: '[Couzo n130 2026-10-27]'
+  scope:
+    n_values:
+    - 130
+  reviewed: '2026-10-31'
+  source_date: '2026-10-27'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-issue843-2026-10-28/acquisition/claims.json
+  evidence:
+  - E-couzo-843-certificate-report
+  notes: >-
+    The 1 complete certificate is retained as the source wrote them, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-253 records the in-horizon report.
+    The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+    decides which are recorded. All 3 native jobs have full outcomes. No selected override or
+    superseded claim is created at this source-only stage; current cases and earlier source ownership
+    remain unchanged.
+- id: couzo-a5a5d76-2026-10-28
+  title: Francisco Couzo's certificates at 260 and 307 at a5a5d76, no issue
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/a5a5d76790679902ef57270f6d4c2d01786c5a56
+  local: resources/web/couzo-a5a5d76-2026-10-28/
+  source_key: '[Couzo a5a5d76 2026-10-28]'
+  scope:
+    n_values:
+    - 260
+    - 307
+  reviewed: '2026-10-31'
+  source_date: '2026-10-28'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-a5a5d76-2026-10-28/acquisition/claims.json
+  evidence:
+  - E-couzo-a5a5d76-certificate-report
+  notes: >-
+    The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+    decides which are recorded. All 2 complete certificates are retained as the source wrote them,
+    each admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-254 records the in-horizon report. All 6 native jobs have full outcomes. No selected override
+    or superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
+- id: couzo-issue844-2026-10-28
+  title: >-
+    Francisco Couzo's certificates at 232, 260 and 307 at 712c6a6, issue 844
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/712c6a6e9ef58a9521784e6b7e236af813422de7
+  local: resources/web/couzo-issue844-2026-10-28/
+  source_key: '[Couzo issue 844 2026-10-28]'
+  scope:
+    n_values:
+    - 232
+    - 260
+    - 307
+  reviewed: '2026-10-31'
+  source_date: '2026-10-28'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-issue844-2026-10-28/acquisition/claims.json
+  evidence:
+  - E-couzo-844-certificate-report
+  notes: >-
+    The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+    decides which are recorded. All 3 complete certificates are retained as the source wrote them,
+    each admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-255 records the in-horizon report. All 9 native jobs have full outcomes. No selected override
+    or superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
+- id: evand-issue845-2026-10-29
+  title: >-
+    Evan Daniel's certificates at 172, 204, 260 and 293 at d2d5dd9, issue 845
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d
+  local: resources/web/evand-issue845-2026-10-29/
+  source_key: '[Daniel issue 845 2026-10-29]'
+  scope:
+    n_values:
+    - 172
+    - 204
+    - 260
+    - 293
+  reviewed: '2026-10-31'
+  source_date: '2026-10-29'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-issue845-2026-10-29/acquisition/claims.json
+  evidence:
+  - E-evand-845-certificate-report
+  notes: >-
+    The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+    decides which are recorded. All 4 complete certificates are retained as the source wrote them,
+    each admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-256 records the in-horizon report. All 12 native jobs have full outcomes. No selected override
+    or superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
+- id: evand-n299-update-2026-10-29
+  title: >-
+    Evan Daniel's updated packing of 299 squares at 0e76d9f, issue 824's update
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d
+  local: resources/web/evand-n299-update-2026-10-29/
+  source_key: '[Daniel n299 update 2026-10-29]'
+  scope:
+    n_values:
+    - 299
+  reviewed: '2026-10-31'
+  source_date: '2026-10-29'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n299-update-2026-10-29/acquisition/claims.json
+  evidence:
+  - E-evand-n299-update-certificate-report
+  notes: >-
+    The 1 complete certificate is retained as the source wrote them, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-257 records the in-horizon report.
+    The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+    decides which are recorded. All 3 native jobs have full outcomes. No selected override or
+    superseded claim is created at this source-only stage; current cases and earlier source ownership
+    remain unchanged.
+- id: mishapolk-issue846-2026-10-30
+  title: Mykhailo Polkovskyi's certificates of issue 846 at 52aa267
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/52aa2672c74c91931686d60a49bdf97ec798291c
+  local: resources/web/mishapolk-issue846-2026-10-30/
+  source_key: '[Mishapolk issue 846 2026-10-30]'
+  scope:
+    n_values:
+    - 105
+    - 130
+    - 146
+    - 156
+    - 229
+    - 308
+  reviewed: '2026-10-31'
+  source_date: '2026-10-30'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-issue846-2026-10-30/acquisition/claims.json
+  evidence:
+  - E-mishapolk-846-certificate-report
+  notes: >-
+    The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+    decides which are recorded. All 6 complete certificates are retained as the source wrote them,
+    each admitted only where its exact side equals, or rounds up to, the side its source prints.
+    T-258 records the in-horizon report. All 42 native jobs have full outcomes. No selected override
+    or superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

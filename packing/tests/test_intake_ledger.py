@@ -1412,7 +1412,9 @@ def test_an_entry_that_holds_some_cases_still_joins_the_start_where_it_is_pendin
             continue
         for finding in check_standing.improvements(result, records):
             if finding.direction == check_standing.UPPER and finding.n <= ledger.HORIZON:
-                wanted.setdefault(finding.n, set()).add(f"register {result['id']}, pending adoption")
+                wanted.setdefault(finding.n, set()).add(
+                    f"register {result['id']}, pending adoption"
+                )
     members = ledger.tree_members(sorted(wanted))
     for n, labels in wanted.items():
         assert labels <= {member["label"] for member in members[n]}, n

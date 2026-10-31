@@ -37,8 +37,16 @@ PACKETS: dict[str, tuple[str, list[int], list[int]]] = {
     ),
     "couzo-issue843-2026-10-28": ("[Couzo n130 2026-10-27]", [130], [130]),
     "couzo-a5a5d76-2026-10-28": ("[Couzo a5a5d76 2026-10-28]", [260, 307], [260, 307]),
-    "couzo-issue844-2026-10-28": ("[Couzo issue 844 2026-10-28]", [232, 260, 307], [232, 260, 307]),
-    "evand-issue845-2026-10-29": ("[Daniel issue 845 2026-10-29]", [172, 204, 260, 293], [172, 204, 260, 293]),
+    "couzo-issue844-2026-10-28": (
+        "[Couzo issue 844 2026-10-28]",
+        [232, 260, 307],
+        [232, 260, 307],
+    ),
+    "evand-issue845-2026-10-29": (
+        "[Daniel issue 845 2026-10-29]",
+        [172, 204, 260, 293],
+        [172, 204, 260, 293],
+    ),
     "evand-n299-update-2026-10-29": ("[Daniel n299 update 2026-10-29]", [299], [299]),
     "mishapolk-issue846-2026-10-30": (
         "[Mishapolk issue 846 2026-10-30]",
@@ -47,28 +55,49 @@ PACKETS: dict[str, tuple[str, list[int], list[int]]] = {
     ),
 }
 
+CANDIDATES = "search/packer/candidates"
 #: The SHA-256 digests the issues and the #824 update print, by packet and upstream path.
 PRINTED_DIGESTS = {
     "couzo-issue843-2026-10-28": {
-        "certificates/n130.cert": "a2618e1a7a2961cf63bf5a23ac0b006d18ef0dde00dad562b005d82a509c7fcd",
+        "certificates/n130.cert": (
+            "a2618e1a7a2961cf63bf5a23ac0b006d18ef0dde00dad562b005d82a509c7fcd"
+        ),
         "n130.txt": "6d4121d429165db50532a8ee5b1d0a20f9d49df5e9be51c614b1464e37708099",
     },
     "couzo-issue844-2026-10-28": {
-        "certificates/best/n232.cert": "23b035c34a5a93a3bf23eccaddc49e8d6e5e4003ec5e97c036153b2ca5ddbe54",
-        "certificates/n260.cert": "abd3b4e3bc4411de8b32e400f424645ad66f376dcba52ea8ba748ecdf83a0b11",
+        "certificates/best/n232.cert": (
+            "23b035c34a5a93a3bf23eccaddc49e8d6e5e4003ec5e97c036153b2ca5ddbe54"
+        ),
+        "certificates/n260.cert": (
+            "abd3b4e3bc4411de8b32e400f424645ad66f376dcba52ea8ba748ecdf83a0b11"
+        ),
         "n260.txt": "acab77d3986f0cc497b716a2eb9c9c5b7a4652dd5418e1bfbe80854ae4347d2d",
-        "certificates/n307.cert": "1fd01ff42e7679f1e5b2c8eb8af59e51d3cca0392772b81bb4d78d67a26214e9",
+        "certificates/n307.cert": (
+            "1fd01ff42e7679f1e5b2c8eb8af59e51d3cca0392772b81bb4d78d67a26214e9"
+        ),
         "n307.txt": "7629bb297f4aabcf43111b28959c0578cdf35384758c507b608e4a0651c39843",
     },
     "evand-issue845-2026-10-29": {
-        "search/packer/candidates/s172_1028.cert": "1e16ad2789538610a42ebec7f735d932fdbe8125a7c991801e644b6f072352b9",
-        "search/packer/candidates/s172_1028_regularized.cert": "0ab41bff6847fc3929e91253b9a2db021db0f9406915d32b6eec40d523d2eb1a",
-        "search/packer/candidates/s204_1028.cert": "2b371e81d568ad5c4490257dcfdb87cd1e238232bb60bd1ece4844340af0a2c3",
-        "search/packer/candidates/s260_1028.cert": "d6d6f45f600f6552416ea3708d8ee04416cfe88820ee4c3c422d8e131d7cdf87",
-        "search/packer/candidates/s293_1028.cert": "236bc05f057a28df402c09453f4ccce35d63b518f4f0305419889612f07c42bc",
+        f"{CANDIDATES}/s172_1028.cert": (
+            "1e16ad2789538610a42ebec7f735d932fdbe8125a7c991801e644b6f072352b9"
+        ),
+        f"{CANDIDATES}/s172_1028_regularized.cert": (
+            "0ab41bff6847fc3929e91253b9a2db021db0f9406915d32b6eec40d523d2eb1a"
+        ),
+        f"{CANDIDATES}/s204_1028.cert": (
+            "2b371e81d568ad5c4490257dcfdb87cd1e238232bb60bd1ece4844340af0a2c3"
+        ),
+        f"{CANDIDATES}/s260_1028.cert": (
+            "d6d6f45f600f6552416ea3708d8ee04416cfe88820ee4c3c422d8e131d7cdf87"
+        ),
+        f"{CANDIDATES}/s293_1028.cert": (
+            "236bc05f057a28df402c09453f4ccce35d63b518f4f0305419889612f07c42bc"
+        ),
     },
     "evand-n299-update-2026-10-29": {
-        "search/packer/candidates/s299_1028.cert": "ccb323dd6d69bee141d59cae4c605f45136b998dfecce1248e200b678b253db5",
+        f"{CANDIDATES}/s299_1028.cert": (
+            "ccb323dd6d69bee141d59cae4c605f45136b998dfecce1248e200b678b253db5"
+        ),
     },
 }
 
@@ -92,7 +121,9 @@ def _json(path: Path) -> Any:
 
 
 def _manifest(name: str) -> dict[str, str]:
-    text = (reports.packet_path(name) / "acquisition/upstream-subtree.sha256").read_text("utf-8")
+    text = (reports.packet_path(name) / "acquisition/upstream-subtree.sha256").read_text(
+        "utf-8"
+    )
     return {
         path.removeprefix("./"): digest
         for digest, path in (line.split(maxsplit=1) for line in text.splitlines())
@@ -116,7 +147,9 @@ def test_each_certificate_rounds_up_to_its_print_and_its_reader_rebuilds_it(name
     for row in declaration["certificates"]:
         side = certificates[row["n"]].side
         places = len(row["offered"].partition(".")[2])
-        assert Fraction(math.ceil(side * 10**places), 10**places) == Fraction(Decimal(row["offered"]))
+        assert Fraction(math.ceil(side * 10**places), 10**places) == Fraction(
+            Decimal(row["offered"])
+        )
         assert reports.house_side(key, row["n"]) == side
 
 
@@ -138,7 +171,7 @@ def test_the_ledger_records_what_the_register_records_and_nothing_else() -> None
     ledger = _json(LEDGER / "ledger.json")
     recorded: dict[int, list[str]] = {}
     for count in ledger["counts"]:
-        for claim in count["claims"]:
+        for claim in count["steps"]:
             if claim["verdict"] == "recorded":
                 recorded.setdefault(count["n"], []).append(claim["report"])
     for n, holders in RECORDED.items():
@@ -148,7 +181,8 @@ def test_the_ledger_records_what_the_register_records_and_nothing_else() -> None
     for n in (105, 146, 156, 229, 308):
         assert recorded[n] == ["#846"]
     for n in (155, 183, 211, 227, 236, 237, 241, 271):
-        assert len(recorded[n]) == 1 and recorded[n][0].startswith("Mishapolk/")
+        (holder,) = recorded[n]
+        assert holder.startswith("Mishapolk/square-packing-records@")
 
 
 def _sharp_records(name: str) -> list[dict[str, Any]]:
