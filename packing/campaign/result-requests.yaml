@@ -25231,6 +25231,7 @@ issues:
     - what: The six steps run within the 5 CPU-hour cap, each reported with what it proves and its
         price, with the re-classification of T-246 left to the owner.
       state: queued
+      source: body
       bead: think-10m1
     beads:
     - think-6gti
