@@ -1,0 +1,68 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-31T06:10Z",
+  "git_scope": "Blobless clone of Mishapolk/square-packing-records fetched on 31 October 2026, and a sparse checkout of 52aa267 (committed 2026-10-30T05:40:00Z), the repository's head. The scope is the certificates under certificates/0000-0999/ that the ten commits e386aab (2026-10-23T23:36:37Z) to fbc1749 (23:56:35Z), past the 7e82c64 read, first commit or rewrite, a publication in a watched repository that no issue reports: 211, 227, 237 and 241 (and 204, which ties T-231) at e386aab, 270 at 07b3393, 154 at 6664afc, 155 at 3d409a5, 183 at fb8b812, 236 at c695b4c, 271 at 6c0d74a, 88 at e9f3979, 126 at a0ba35f and 152 at fbc1749. Each is unchanged at the pin. 52aa267 first commits nothing here; 7e40790 (2026-10-24T00:08:09Z) and ab8e833 (2026-10-26T04:52:18Z) change no file in the scope. Retained: the twelve certificates below the case at their count when published (88 to 271 but 204 and 270) and the 270 certificate. Pinned by digest: the licence and the verifier as the issue-846 packet pins them. GitHub's activity log was not readable from this session, so no push time is recorded. No source program was executed.",
+  "sources": [
+    {
+      "id": "mishapolk-1023-refinements-2026-10-30",
+      "source_url": "https://github.com/Mishapolk/square-packing-records",
+      "source_ref": "52aa2672c74c91931686d60a49bdf97ec798291c",
+      "source_commit": "52aa2672c74c91931686d60a49bdf97ec798291c",
+      "committed_utc": "2026-10-30T05:40:00Z",
+      "git_tree": "74a46dce96900d5723d017a9853d5b4bb6fa541d",
+      "archived_path": "packing/resources/web/mishapolk-1023-refinements-2026-10-30/source",
+      "subtree_manifest": "packing/resources/web/mishapolk-1023-refinements-2026-10-30/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "BOUND_VERIFIER_LICENSE.txt",
+        "verify_bound_certificate.py",
+        "certificates/0000-0999/n88.cert",
+        "certificates/0000-0999/n126.cert",
+        "certificates/0000-0999/n152.cert",
+        "certificates/0000-0999/n154.cert",
+        "certificates/0000-0999/n155.cert",
+        "certificates/0000-0999/n183.cert",
+        "certificates/0000-0999/n211.cert",
+        "certificates/0000-0999/n227.cert",
+        "certificates/0000-0999/n236.cert",
+        "certificates/0000-0999/n237.cert",
+        "certificates/0000-0999/n241.cert",
+        "certificates/0000-0999/n270.cert",
+        "certificates/0000-0999/n271.cert"
+      ],
+      "subtree_file_count": 16,
+      "subtree_total_bytes": 508185,
+      "retained_file_count": 13,
+      "retained_total_bytes": 502462,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "BOUND_VERIFIER_LICENSE.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT licence for the verifier; byte-identical to the copy the issue-678 packet retains.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1088,
+          "sha256": "4761eb7dc9e50c13cd9a876e0a56dbe3db7b97064a354c0ac235c93293e4de0c",
+          "reason": "The source's MIT licence; byte-identical to the copy the issue-732 packet retains.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/LICENSE"
+        },
+        {
+          "path": "verify_bound_certificate.py",
+          "bytes": 3567,
+          "sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "reason": "The source's verifier; byte-identical to the copy the issue-678 packet retains, and never executed here.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Mykhailo Polkovskyi (Mishapolk): LICENSE (Git blob d81c957, SHA-256 4761eb7d...4de0c), added at 17cc220 and unchanged at the pin, byte-identical to the copy the mishapolk-issue732-2026-10-22 packet retains and pinned against it; the author's grant on issue #719 (issuecomment-6350348588, answer 5) states that it covers all certificates, catalogs, manifests and tooling and lets jlevy/squares retain and redistribute the raw certificate files. BOUND_VERIFIER_LICENSE.txt and verify_bound_certificate.py are Evan Daniel's MIT verifier as Francisco Couzo modified it, byte-identical to the copies the couzo-issue678-2026-10-18 packet retains and pinned against them. Issue #846 credits 'Mishapolk (Mikhail Polk) & Antigravity Autonomous Research Lab'; the tree names no AI-assistance terms.",
+      "claims": [
+        "Ten commits of 23 October 2026, 23:36:37Z to 23:56:35Z, each titled 'Certify world record for N=...' or 'Certify 6 world records under 308', rewrite or add certificates at 88, 126, 152, 154, 155, 183, 211, 227, 236, 237, 241, 270 and 271 under certificates/0000-0999/, and the index certified_bounds.json credits each to Mykhailo Polkovskyi (Mishapolk), at 88, 126 and 152 'packing refined from PingYou Ltd', at 154, 155, 236 and 271 'packing refined from Evan Daniel', and at 183 'packing refined from Evan Daniel & Francisco Couzo'; at 270 it credits Evan Daniel, 'strict certificate verified by Mishapolk'.",
+        "The commit titles state each side at 12 places and how far it lies below the earlier certificate: about 1.0e-19 to 1.7e-19 below Evan Daniel's at 154, 155, 183, 236 and 271, about 1e-24 below PingYou Ltd's at 88, 126 and 152, and below Couzo, Evan Daniel and PingYou at 204, 211, 227, 237 and 241. No issue reports them. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

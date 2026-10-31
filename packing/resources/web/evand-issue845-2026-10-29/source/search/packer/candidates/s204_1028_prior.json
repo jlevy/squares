@@ -1,0 +1,58 @@
+{
+ "store_id": 2667128,
+ "s": 14.808642830527896,
+ "sources": [
+  "pending:#719 (Mishapolk)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "register (Francisco Couzo)",
+  "run:runs/fault/b_all (None)",
+  "run:runs/fault/b_all2 (None)",
+  "run:runs/fault/b_all3 (None)",
+  "run:runs/fault/b_all4 (None)",
+  "run:runs/fault/b_own_lat1 (None)",
+  "run:runs/fault/b_own_latr1 (None)",
+  "run:runs/fault/b_own_strip1 (None)",
+  "run:runs/fault/b_own_strip1r (None)",
+  "run:runs/fault/b_store20 (None)",
+  "run:runs/fault/b_store3 (None)",
+  "watch:Mishapolk/square-packing-records@1851c2c (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@e386aab (Mishapolk)",
+  "watch:franciscouzo/square-packing@1c17153 (lollipoll)",
+  "later copies of the same minimum: store ids [2798295]"
+ ],
+ "ok": true,
+ "S_exact": "14.808642830513087197654329280397180858229902327763609140301316364",
+ "S_cert": "14.808642830513087197802415708703",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 204 closed unit squares pairwise disjoint inside the open box of side 14.808642830513086608 (498 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 2.177478376021366e-07,
+  "status": "inconclusive: negative curvature blocked (first order) by weakly active contacts",
+  "flat_motions": 64,
+  "flat_realised": 64.0,
+  "flat_residual": 6.1554635081412736e-61,
+  "negative_eigs": 2,
+  "corner_corner": 66,
+  "vv_milp_dS": 0.0,
+  "rattlers": 21,
+  "min_pair": 9.999999999999987e-21,
+  "min_wall": 5e-21
+ }
+}

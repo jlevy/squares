@@ -1,0 +1,159 @@
+{
+  "n": 307,
+  "packing": "n307.txt",
+  "packing_sha256": "9161aca43173de5c99f8d942048c6edbb365aa3429db11f196df4521824ac4ae",
+  "certificate": "certificates/n307.cert",
+  "certificate_sha256": "2bdbfd0f6c454ac9a8b84576c8109fb81b0bdb01f9ed3c8dbb9a07d752abed39",
+  "rational_side": "436081607184993722962197444889181982917255228924685874736959955436771335630565667211324538123/24254714520872479530466069702814569144398684321103594602674239356738890164429000000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo (square-packing web app, running its adaptation of Evan Daniel's fq optimizer, MIT); refines the packing published by ntumlnoob (\u674e\u79c9\u53e1) in the Kaggle notebook \"First 22.268681355 Public Code With Explanation\" (run 362957087); earlier construction credits retained; earlier seed and construction credits retained in provenance",
+    "source_certificate_sha256": "2bdbfd0f6c454ac9a8b84576c8109fb81b0bdb01f9ed3c8dbb9a07d752abed39",
+    "source_n": 307,
+    "source_provenance": {
+      "category": "CT105 live record",
+      "source_provenance": {
+        "category": "own refinement of another author's packing",
+        "search": "browser search",
+        "optimizer": {
+          "method": "fq",
+          "credit": "Evan Daniel",
+          "source": "evand/square-packing 77f3c0ab47, search/packer/src/fq.rs",
+          "license": "MIT",
+          "adaptation": "franciscouzo/square-packing-web core/src/fq.rs (browser adaptation: resumable outer loops, web-time clock)"
+        },
+        "live_store": {
+          "record_id": "14593d9422b35c25b4219ad6c7ca70a6",
+          "received": "20261028T004049Z",
+          "method": "fq",
+          "host": "browser",
+          "dilation": "1+1e-14",
+          "sha256": "fb104a7c95aed3c824fa5478e18198d41f37a6427428f1b3f8076a8006e17d32",
+          "previous": 17.97925371106102,
+          "previous_holder": "this project",
+          "database": "CT105 live database, read-only dump of 28 October"
+        },
+        "lineage": [
+          {
+            "record_id": "407ad00113604b7bbf07e8b45315cc95",
+            "received": "20261027T234436Z",
+            "method": "slp",
+            "side": 17.979253973651137,
+            "rational_side": "1470233930594927841251458969/81773911907000000000000000",
+            "previous": 17.979253977059464,
+            "host": "Desktopo (native search)"
+          },
+          {
+            "record_id": "0b023f276176dfa8c945b9791c5f493d",
+            "received": "20261028T003558Z",
+            "method": "fq",
+            "side": 17.979253973650422,
+            "rational_side": "13248973920875250284854762996820704909390765945117692617/736903429936100000000000007369034299361000000000000000",
+            "previous": 17.979253973651137,
+            "host": "browser (web app)"
+          },
+          {
+            "record_id": "2291731273bc9731ca8aba8683f68207",
+            "received": "20261028T003635Z",
+            "method": "fq",
+            "side": 17.979253973650366,
+            "rational_side": "754762517999941409751592913227828830770372117881006161/41979634922900000000000000419796349229000000000000000",
+            "previous": 17.979253973650422,
+            "host": "browser (web app)"
+          },
+          {
+            "record_id": "319b5c9e5f8b0e91ff109044f4a886b9",
+            "received": "20261028T004042Z",
+            "method": "fq",
+            "side": 17.97925371106102,
+            "rational_side": "26217342074889131767304167365037783393400897470919885341016890340115546898976246516438612931/1458199683714344310821665952559917323715366781036924473378210485309943771873000000000000000",
+            "previous": 17.979253973650366,
+            "host": "browser (web app)"
+          },
+          {
+            "record_id": "14593d9422b35c25b4219ad6c7ca70a6",
+            "received": "20261028T004049Z",
+            "method": "fq",
+            "side": 17.979251283692587,
+            "rational_side": "436081607184993722962197444889181982917255228924685874736959955436771335630565667211324538123/24254714520872479530466069702814569144398684321103594602674239356738890164429000000000000000",
+            "previous": 17.97925371106102,
+            "host": "browser (web app)"
+          }
+        ],
+        "starting_packing": {
+          "author": "ntumlnoob (\u674e\u79c9\u53e1)",
+          "title": "First 22.268681355 Public Code With Explanation",
+          "url": "https://www.kaggle.com/code/ntumlnoob/first-22-268681355-public-code-with-explanation?scriptVersionId=362957087",
+          "version": 3,
+          "run": 362957087,
+          "run_created": "2026-10-27T20:32:47Z",
+          "submission_sha256": "30dded7f9b2ab419c87daceb6d72f53502edbe23238caea3301dac9110720a7b",
+          "upstream_credits": "its SOURCE_NOTICES.md credits Alex Chilton (starter kit and dataset), David Ellsworth's records, Evan Daniel's catalogue and FQ/FTMC work (evand/square-packing), and public Kaggle portfolios of Nilanjan Saha, Malyshev Danil, Kirill T, lightningv08, kmmmvs, aqibrazadev, Chris Deotte and others",
+          "notebook_measured_side": "17.97925397365010082284077660366471037633593309455239",
+          "notebook_method": "cpu_refine_fq_only",
+          "notebook_parent_ids": [
+            "6bf5d1058bbc28dd4f6d09bab8e09279ba5ef4589439d550eaa2656d6dadc88c"
+          ]
+        },
+        "native_step_note": "The first step (Desktopo, 20261027T234436Z) only removed the dilation of our exact certification of the notebook packing; it is within 1.1e-12 of the side the notebook reports.",
+        "kaggle_board_comparison": {
+          "team": "Chris Deotte",
+          "side": "17.9792437288378",
+          "submitted": "2026-10-25 19:24:09 UTC",
+          "run": 362304873,
+          "note": "Lower side on the staff per-puzzle leaderboard; coordinates not public. Not in the committed public comparison."
+        },
+        "original_credits": "Starting packing: ntumlnoob (\u674e\u79c9\u53e1), Kaggle notebook \"First 22.268681355 Public Code With Explanation\"; its SOURCE_NOTICES.md credits Alex Chilton (starter kit and dataset), David Ellsworth's records, Evan Daniel's catalogue and FQ/FTMC work (evand/square-packing), and public Kaggle portfolios of Nilanjan Saha, Malyshev Danil, Kirill T, lightningv08, kmmmvs, aqibrazadev, Chris Deotte and others."
+      },
+      "previous_source": {
+        "kind": "certificate",
+        "bound": "5079043089525025965588854855384670749533446209891553958828914812678365706367750447828659505948236301410703735836408860577650796059471662187538600466589039067577898988726341701902506647581808886905117099041860146663427502829469987016102347993661980984866765436404664518503812931811982888117514608724972677349130974012995293282523585929213052790624078718478372788029111956263700101774763713179814843079413113765383019014602364571059616801899516267560050715276328743043573881171603675948278653876095307808550932134651529301725676560037309379096853596142728736109547163313714126623180152282021897694041629322770370524823180257565149664841104611467524131977034303362635/282469375942798886712948322884972047608946483662345105479843047940959922667310577885318336138172270114619928775935128421914070819145432100432060686117755333295173613145499725580090278238546505176412084640637773490275792231776403322641834648005716764718918943317748798669769896517962911874832969386608577879398405144292378712215195889675027237687786851653204545821123490109770161669300609239865395764928771909104789350715143790048045343722634349140847140364097316937112787394330003447079342401006513779356970266414348234017132875169814641100472755128195782225013183599025684227863313103536652818682110385753171214879999840385070882538938949595521741802907791437882",
+        "source_n": 307,
+        "certificate": "certificates/best/n307.cert",
+        "certificate_sha256": "0a15bf46f671b721ad25b121138a9321acb7d4dbbb8af96daf900cb4a89706f8",
+        "credit": "PingYou Ltd (BuddenPing)",
+        "provenance": {
+          "category": "native",
+          "request": "https://github.com/jlevy/squares/pull/574",
+          "construction_credit": [
+            "Nate Chaoweeraprasit (itsnaka)"
+          ]
+        },
+        "verification": {
+          "valid": true,
+          "n": 307,
+          "side": "5079043089525025965588854855384670749533446209891553958828914812678365706367750447828659505948236301410703735836408860577650796059471662187538600466589039067577898988726341701902506647581808886905117099041860146663427502829469987016102347993661980984866765436404664518503812931811982888117514608724972677349130974012995293282523585929213052790624078718478372788029111956263700101774763713179814843079413113765383019014602364571059616801899516267560050715276328743043573881171603675948278653876095307808550932134651529301725676560037309379096853596142728736109547163313714126623180152282021897694041629322770370524823180257565149664841104611467524131977034303362635/282469375942798886712948322884972047608946483662345105479843047940959922667310577885318336138172270114619928775935128421914070819145432100432060686117755333295173613145499725580090278238546505176412084640637773490275792231776403322641834648005716764718918943317748798669769896517962911874832969386608577879398405144292378712215195889675027237687786851653204545821123490109770161669300609239865395764928771909104789350715143790048045343722634349140847140364097316937112787394330003447079342401006513779356970266414348234017132875169814641100472755128195782225013183599025684227863313103536652818682110385753171214879999840385070882538938949595521741802907791437882",
+          "pairs_tested": 4360,
+          "reused_verified_sha256": true
+        },
+        "strict_verification": {
+          "valid": false,
+          "closed_valid": true,
+          "sha256": "0a15bf46f671b721ad25b121138a9321acb7d4dbbb8af96daf900cb4a89706f8",
+          "candidate_pairs": 4360,
+          "near_pairs": 680,
+          "checker": "verify_bound_certificate.py",
+          "checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "arithmetic_backend": "Python Fraction"
+        }
+      },
+      "previous_reference": {
+        "seed_credit": "PingYou Ltd (BuddenPing)",
+        "source_certificate_sha256": "0a15bf46f671b721ad25b121138a9321acb7d4dbbb8af96daf900cb4a89706f8",
+        "source_n": 307,
+        "source_provenance": {
+          "category": "native",
+          "request": "https://github.com/jlevy/squares/pull/574",
+          "construction_credit": [
+            "Nate Chaoweeraprasit (itsnaka)"
+          ]
+        },
+        "construction": null,
+        "deleted_squares": 0
+      }
+    },
+    "construction": null,
+    "deleted_squares": 0
+  },
+  "preview_note": "The exact certificate is authoritative; the numerical preview independently has zero pair overlap."
+}

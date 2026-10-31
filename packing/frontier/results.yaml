@@ -10856,6 +10856,12 @@ results:
       prints 17.53553390593274. This entry stays true as stated and is superseded there as
       a ceiling, and T-156 names it as the result whose packing it regularizes.
 
+      At 293 and 299 the catalogue's constructions, whose rational ceilings this entry
+      verifies, gave way on 31 October 2026 to Evan Daniel's certificates of issue 845
+      (T-257), 1.64e-04 below 723/41 at 293, and of his update to issue 824 (T-258),
+      2.16e-02 below 33/2 + √7/2 at 299, after the 31 October reviews of both; each case's
+      conjectured optimum was withdrawn, and this entry's ceilings there stay retained as
+      history.
   - id: T-102
     kind: lower-bound
     registered: '2026-10-06'
@@ -19541,6 +19547,7 @@ results:
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
         modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
         first_certified_in: T-101
         identity:
@@ -23153,6 +23160,22 @@ results:
       Francisco Couzo's 211 packing, 3.17e-03 below this entry's side there (T-243). After
       the 25 October review of it, the case at 182 adopted it on 25 October 2026, and this
       entry's certificate there stays retained as history.
+
+      Mykhailo Polkovskyi's issue 846 re-solves at 130 Francisco Couzo's packing of issue
+      843 (T-254), found from this entry's packing there and 2.05e-03 below it, to a side
+      2.08e-12 lower still (T-259). After the 31 October reviews of both, the case at 130
+      adopted T-259 on 31 October 2026, with the packing's credit Couzo's, and this entry's
+      certificate there stays retained as history.
+
+      Evan Daniel's issue 845 reports at 172 a new arrangement from an L-cut of the n = 199
+      record, 1.05e-03 below this entry's side there (T-257). After the 31 October review of
+      it, the case at 172 adopted it on 31 October 2026, and this entry's certificate there
+      stays retained as history.
+
+      Francisco Couzo's issue 844 reports at 307 a refinement of ntumlnoob's Kaggle notebook
+      packing 1.61e-03 below this entry's side there, another arrangement (T-256). After the
+      31 October review of it, the case at 307 adopted it on 31 October 2026, and this
+      entry's certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
@@ -26147,6 +26170,12 @@ results:
       (T-241) is 2.53e-03 below this entry's side there, another arrangement, and Evan
       Daniel's exact descent of it (T-242) 3.04e-09 lower still. After the 24 October review
       of both, the case at 304 adopted T-242 on 25 October 2026, and this entry's
+      certificate there stays retained as history.
+
+      Francisco Couzo's issue 844 reports at 232 a refinement of Alex Chilton's Kaggle
+      notebook packing 2.51e-03 below this entry's side there, another arrangement, and
+      below T-193's algebraic side, which was staged there (T-256). After the 31 October
+      review of it, the case at 232 adopted it on 31 October 2026, and this entry's
       certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
@@ -31582,6 +31611,11 @@ results:
       25.64 degrees (T-229). After the 22 October review of that certificate, the case at
       204 adopted it on 23 October 2026, and this entry's certificate there stays retained
       as history.
+
+      Evan Daniel's issue 845 reports at 260 a new arrangement 1.18e-02 below this entry's
+      side there, below Francisco Couzo's certificates of 28 October (T-255) and of issue 844 too (T-257).
+      After the 31 October review of it, the case at 260 adopted it on 31 October 2026, and
+      this entry's certificate there stays retained as history.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 21 October, is
@@ -32790,6 +32824,10 @@ results:
       (docs/project/reviews/review-2026-10-23-mishapolk-n204.md) and the replay it
       reproduced (E-mishapolk-n204-exact-feasibility), with the review's own checker
       (E-mishapolk-n204-review-exact-feasibility).
+
+      Evan Daniel's issue 845 reports at 204 a new arrangement 1.02e-03 below this entry's
+      side (T-257). After the 31 October review of it, the case at 204 adopted it on 31
+      October 2026, and this entry's certificate there stays retained as history.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 23 October, is
@@ -35206,13 +35244,14 @@ results:
       - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/contacts_mod.py
     next_rung: >-
       C1 needs the stage 4 mathematical review of N29.md recorded as this entry's read: the
-      review of 31 October 2026 (draft PR #817, think-10m1) accepts the chain with one Monte
-      Carlo step. C3 and V3 need the identities F_k(tau) = 0 and Sn(tau) = x Sd(tau) in
-      Q[x]/(p) decided deterministically. The source's five-step replay, run on 25 October
-      2026 (#817), reproduces them only modulo random primes, so it does not earn C3, and
-      no number of primes would. The exact route is priced at about 440 to 720 CPU-hours by a
-      model that leaves out building the numerators, and the modular route at about 8.8
-      million (think-10m1).
+      review of 31 October 2026 (#817, think-10m1) accepts the chain with one Monte Carlo
+      step. C3 and V3 need the identities F_k(tau) = 0 and Sn(tau) = x Sd(tau) in Q[x]/(p)
+      decided deterministically. The source's five-step replay, run on 25 October 2026
+      (#817), checks them only modulo random primes, far short of the resultant bound, so it
+      does not earn C3. Either deterministic route would: exact division, priced at about 440
+      to 720 CPU-hours by a model that leaves out building the numerators, or the modular
+      route, about 1.1e8 primes against that bound and about 8.8 million CPU-hours
+      (think-10m1).
 
       The packing at the unique zero t* of the five polynomials in the Krawczyk box is
       decided (#817), so s(29) <= S(t*), 3.9e-799 below T-195, is a separate upper bound
@@ -35400,9 +35439,19 @@ results:
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(299) <= 17.803695435332337695435314533642, 1.92e-2 below
       the case's house best packing, the Kingbird catalogue's 33/2 + √7/2, which is 17.8228756555…, as
-      T-101's exact ceiling verifies it, and below every report at 299. Complete native
-      feasibility outcomes are retained separately; the selected standing case is unchanged
-      pending independent review and record review.
+      T-101's exact ceiling verifies it, and below every report at 299.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 31 October 2026 by both maintained exact routes. Those routes share components
+      with the producer: both read the certificate through the evand-cert reader, whose line
+      filter and corner construction are transcribed from Evan Daniel's own checkers, the
+      ones the certificates name. The 31 October review decided it again on a clean-room
+      checker of its own, by separating axes over every pair and by exact clipped areas with
+      ten sharp controls each, by a Claude agent, a system family the producer also used,
+      and found no blocking defect, so the bound is confirmed, independently re-implemented.
+
+      It is recorded only: the 29 October update's certificate (T-258), which continues this
+      packing, is 2.46e-3 lower, and the house rule adopts that one.
 
       It is search/packer/candidates/s299-1025.cert in Evan Daniel's watched repository
       (https://github.com/evand/square-packing), committed on 26 October 2026 at 03:30:38Z,
@@ -35437,26 +35486,33 @@ results:
       credits say its work was produced by Claude (Anthropic) under human direction, and the
       commit carries a Co-Authored-By trailer naming Claude.
     scope: {n_values: [299]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Draft, from the stage 1 triage (think-3xn9): a new arrangement at 299, 1.92e-02
+        A new arrangement at 299, 1.92e-02
         below the house, the Kingbird catalogue's closed-form construction, and every report
         there. No symmetry pairs it one to one with T-101's certificate of that packing by
         nearest centres; the best assignment moves 124 squares beyond a tenth and turns 126,
         and it has 83 tilted squares at two tilt signs where the house has 38 at one angle,
         as T-243's 3.17e-03 at 182 and T-240's 4.45e-03 and 2.78e-03 (S3) are. No lower
         bound or optimum.
-      scored: '2026-10-26'
-      by: the stage 1 triage and records lane of think-3xn9 (w-imports-1026)
+      scored: '2026-10-31'
+      by: >-
+        the records lane of 31 October (bold-ritchie-l2), confirming the stage 1 triage's
+        draft S3 (think-3xn9) once the 31 October review of the issue 824 update
+        (docs/project/reviews/review-2026-10-31-daniel-824-299-update.md) accepted this
+        certificate (N-6); that review scored the update, so the confirmation is the records
+        lane's, and the review lane may change it
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel n299 2026-10-26]']
       published: '2026-10-26'
     evidence:
       - E-evand-n299-certificate-report
+      - E-evand-n299-exact-feasibility
+      - E-evand-n299-review-exact-feasibility
     artifacts:
       - packing/resources/web/evand-n299-2026-10-26/README.md
       - packing/resources/web/evand-n299-2026-10-26/acquisition/claims.json
@@ -35466,10 +35522,14 @@ results:
       - packing/resources/web/evand-n299-2026-10-26/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-issue824-20261026/README.md
       - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
+      - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_824.py
       - packing/resources/web/evand-n299-2026-10-26/receipts/sharp-controls.json
+      - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/check-s299-1025.json
+      - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/controls.txt
     notes: >-
       A separate complete repository replay is retained for n = 299: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -35509,28 +35569,36 @@ results:
       methods, human oversight or optimality is claimed.
 
       The case's conjectured optimum at 299, 17.82287565553229, is the catalogue's side;
-      this side is below it, so the adoption withdraws it (result-import.md, The House
-      Rule).
+      this side is below it, and T-258's adoption, 2.46e-3 lower still, withdraws it (result-import.md, The House Rule).
+
+      The 31 October review of the update (E-evand-n299-review-exact-feasibility) decided
+      this certificate again as the packing the update continues: every wall and all 44,551
+      pairs by separating axes and again by exact clipped areas, the least wall clearance
+      5e-13 and the least pair gap 1e-12, equal to the replay's, ten sharp controls as
+      expected by both methods; under the reversed rotation sense, 90 pairs overlap (N-6).
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4): a clean-room
-      exact checker, the identity against the house's packing and the lineage the issue
-      states, a mapped review whose acceptance would raise both rungs. Then adopt it at 299
-      under the house rule, with both strong generators' regularization and the flip of the
-      new house in the same change (think-8hjz).
-    unfinished_confirmations:
-      - what: >-
-          The stage 4 review: a clean-room exact checker of the certificate with sharp
-          controls, the identity against the house's packing and the lineage the issue
-          states, mapped as an adversarial review
-        rung: C3
-        link: think-8hjz
-        estimated_cost:
-          cpu_hours: 0.02
-          cpu_hours_high: 0.05
-          basis: >-
-            T-243's clean-room checker at 182, about a minute, scaled to 299 squares, and the
-            sharp controls' 3 CPU-minutes here; an estimate, not a receipt
-          priced: '2026-10-26'
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 31 October, is
+      retained. It is recorded only: the update's certificate (T-258) is 2.46e-3 lower, and
+      the house rule adopts that one at 299.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong at the xhigh reasoning setting), the stage
+        4 mathematical review lane of issue 845 and the issue 824 update
+        (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), prompted separately from the
+        import lane (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 299 of this certificate, as the packing the issue 824
+        update continues: decided again by a clean-room exact checker by two methods with
+        ten sharp controls; the maintained routes re-run against it; the side, its print and
+        its order against the update.
+      verdict: accepted
+      covers: [T-248, T-258]
   - id: T-249
     kind: formalization
     proves_kind: lower-bound
@@ -35996,6 +36064,1675 @@ results:
       says so; the second, the correctness pass of review A on pull request 851, is the
       independent one stage 4 asks for, and its programs and logs are retained in the
       packet's review/independent-2026-10-31/.
+  - id: T-253
+    kind: upper-bound
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: >-
+      Polkovskyi's sub-print re-certifications of nine house packings, 1.3e-19 to 1.7e-19 below
+      each
+    claim: >-
+      Nine complete rational source certificates report finite upper-bound improvements at the exact
+      sides they state: s(154) <= 12.9211009407616805497273710781811018832596, s(155) <= 12.9522609446505640351376570514307748530773,
+      s(183) <= 13.9995801787362525019414750957971146726967, s(211) <= 14.993549626299421038785594964633603835513,
+      s(227) <= 15.5636256523251490846368074671935498402163, s(236) <= 15.8619343906073586170851792275034202808198,
+      s(237) <= 15.9026036382595968800201182179071384887302, s(241) <= 15.9871170951502387581618869582526723489714
+      and s(271) <= 16.9489477337136575105539116351026963841491.
+
+      Each is a sub-print re-certification of the house certificate at its count: the 31
+      October review measured the margin as the house certificate's padding, the contact
+      side unchanged, and no new arrangement. The owner's ruling of 23 October (think-fwa9)
+      makes such re-certifications restatements, and the record applies it beyond the corpus
+      only; whether it reaches counts inside the corpus is the owner's question (think-ikku,
+      RV-1 of the review), and it is recorded as a question, not a verdict. Until the answer
+      the entry stays below the stage 4 exit and no count is adopted; the review accepted
+      every certificate for finite feasibility.
+
+      The certificates lie 1.3e-19 to 1.7e-19 below the houses' certificates at their counts (T-222,
+      T-197, T-220, T-188, T-225, T-218, T-190, T-182 and T-219), each a re-certification of the house's packing. At six counts every square stays within 1.6e-6 of the house's; at 154, 183 and 227 47, 24 and 16 squares move beyond 1e-3, by at most 0.078, 0.358 and 0.168, in a region that deforms without changing the side, which equals the house's contact side to within 1e-30 (RV-4).
+
+      Each commit's title calls its certificate a world record and states how far below the earlier
+      certificate it lies, and the index certified_bounds.json records each as valid and strictly
+      valid under the source's verifier, Evan Daniel's MIT separating-axis checker with Francisco
+      Couzo's modifications, byte-identical to the copy the issue-678 packet retains. Those statements
+      are the author's; no source program ran here.
+
+      Credit each packing to its finder, as the register credits the house it re-certifies, and
+      Mykhailo Polkovskyi (Mishapolk, https://github.com/Mishapolk/square-packing-records) for the
+      re-certification, as a regularization: the index says 'packing refined from Evan Daniel' at
+      154, 155, 236 and 271 and 'from Evan Daniel & Francisco Couzo' at 183, and credits Polkovskyi
+      alone at 211, 227, 237 and 241, whose houses are Daniil Ostashev's (211, 241), Joost de Winter's
+      (227) and Nate Chaoweeraprasit's (237) packings. A publication in a watched repository that
+      no issue reports, recorded from its commits by the owner's rule of 14 October 2026.
+
+      The same commits' certificates at 88 and 126 lie below the house but above an exact side a register entry states pending adoption (T-193's), 152 is undecided against T-122's exact side, and those at 204 and 270 tied the houses when published; the ledger records none of them.
+    scope:
+      n_values:
+      - 154
+      - 155
+      - 183
+      - 211
+      - 227
+      - 236
+      - 237
+      - 241
+      - 271
+    verification: V0
+    confirmation: C1
+    significance:
+      score: 1
+      rationale: >-
+        Sub-print re-certifications of the house certificates at n = 154, 155, 183, 211,
+        227, 236, 237, 241 and 271, 1.29e-19 to 1.69e-19 below them: the house certificates'
+        padding, the contact side unchanged, as T-170's (S1) is. No lower bound or optimum.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October review
+        (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md), lane
+        bold-ritchie-rv-polk, confirming the draft S1 of the stage 1 triage (think-pg1y)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Mishapolk refinements 2026-10-23]'
+      published: '2026-10-23'
+    evidence:
+    - E-mishapolk-1023-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/README.md
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/acquisition/claims.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n154.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n155.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n183.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n211.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n227.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n236.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n237.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n241.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n271.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n154.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n155.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n183.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n211.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n227.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n236.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n237.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n241.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n271.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n154.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n155.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n183.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n211.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n227.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n236.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n237.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n241.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n271.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l2_1031.py
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n154.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n155.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n183.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n211.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n227.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n236.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n237.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n241.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n271.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/out/rv-check.jsonl
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/out/rv-controls.jsonl
+    notes: >-
+      A separate complete repository replay is retained for n = 88, 126, 152, 154, 155, 183, 211,
+      227, 236, 237, 241, 270 and 271: 13 positives and 26 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 1613220 pair decisions; summed over
+      the 39 jobs, the receipt records 237.81 route CPU seconds and 256.17 job wall seconds, the
+      longest job 11.86 seconds. Every positive clears every wall by at least 5.00e-31 and every
+      pair by at least 9.99e-31.
+
+      The packet's sharp controls (receipts/sharp-controls-nNNN.json, one per count) lowered the
+      side by the least far-wall clearance, closed the least-gap pair by its gap and moved every
+      square toward the nearer near wall by its least clearance at every count it replays: both
+      routes accepted each at exact contact, margin 0, and refused each 1e-30 past it. They refused
+      one square enlarged to its pair and one to its wall at contact for its shape alone and 1e-30
+      past it for the overlap or the wall as well, and refused a duplicated square.
+
+      At n = 154 the certificate is below the case's ceiling (Evan Daniel, improved by Francisco
+      Couzo, T-222) by 1.29e-19; smallest: this certificate. At n = 155 the certificate is below
+      the case's ceiling (Evan Daniel, T-197) by 1.30e-19; smallest: this certificate. At n = 183
+      the certificate is below the case's ceiling (Evan Daniel, T-220) by 1.40e-19; smallest: this
+      certificate. At n = 211 the certificate is below the case's ceiling (Daniil Ostashev, improved
+      by Francisco Couzo, T-188) by 1.50e-19; smallest: this certificate. At n = 227 the certificate
+      is below the case's ceiling (Joost de Winter, improved by Francisco Couzo, Evan Daniel, T-225)
+      by 1.56e-19; smallest: this certificate.
+
+      At n = 236 the certificate is below the case's ceiling (Evan Daniel, T-218) by 1.59e-19; smallest:
+      this certificate. At n = 237 the certificate is below the case's ceiling (Nate Chaoweeraprasit
+      (itsnaka), improved by Francisco Couzo, Mishapolk, T-190) by 1.59e-19; smallest: this certificate.
+      At n = 241 the certificate is below the case's ceiling (Daniil Ostashev, improved by Francisco
+      Couzo, T-182) by 1.60e-19; smallest: this certificate. At n = 271 the certificate is below
+      the case's ceiling (Evan Daniel, T-219) by 1.69e-19; smallest: this certificate.
+
+      The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 154, 155, 183, 211, 227, 236, 237, 241 and 271.
+
+      Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 154,
+      nearest centres pair it one to one with T-222's packing (symmetry 0), 47 squares beyond 1e-3
+      and 60 beyond 1e-9, the largest move 7.793035e-2 and turn 0.8514 degrees; at 155, nearest
+      centres pair it one to one with T-197's packing (symmetry 0), 0 squares beyond 1e-3 and 0
+      beyond 1e-9, the largest move 8.600845e-16 and turn 5e-15 degrees; at 183, nearest centres
+      pair it one to one with T-220's packing (symmetry 0), 24 squares beyond 1e-3 and 27 beyond
+      1e-9, the largest move 3.577510e-1 and turn 6.237 degrees; at 211, nearest centres pair it
+      one to one with T-188's packing (symmetry 0), 0 squares beyond 1e-3 and 0 beyond 1e-9, the
+      largest move 8.262227e-16 and turn 1e-14 degrees; at 227, nearest centres pair it one to one
+      with T-225's packing (symmetry 2), 16 squares beyond 1e-3 and 33 beyond 1e-9, the largest
+      move 1.682026e-1 and turn 2.542 degrees; at 236, nearest centres pair it one to one with T-218's
+      packing (symmetry 0), 0 squares beyond 1e-3 and 0 beyond 1e-9, the largest move 9.794766e-16
+      and turn 5.717e-34 degrees; at 237, nearest centres pair it one to one with T-190's packing
+      (symmetry 0), 0 squares beyond 1e-3 and 0 beyond 1e-9, the largest move 1.341019e-15 and turn
+      7e-15 degrees; at 241, nearest centres pair it one to one with T-182's packing (symmetry 0),
+      0 squares beyond 1e-3 and 1 beyond 1e-9, the largest move 1.562500e-6 and turn 5e-15 degrees;
+      at 271, nearest centres pair it one to one with T-219's packing (symmetry 0), 0 squares beyond
+      1e-3 and 0 beyond 1e-9, the largest move 2.326232e-19 and turn 5.184e-34 degrees.
+
+      The same commits' certificates at 88, 126, 152, 204 and 270 are compared in the packet's claim
+      record and replayed; the ledger records none of them: 88 and 126 lie above T-193's exact algebraic
+      sides, pending adoption there, by 9.9e-30 and 1.2e-29, 152 is undecided against T-122's exact
+      side, printed at 24 places (a difference below 1e-24), and 204 and 270 tie T-231 and T-224.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent methods,
+      human oversight or optimality is claimed.
+
+      The 31 October review's clean-room checker decided all nine certificates, and the
+      other four the packet retains, by two exact routes, every wall and every pair, and its
+      seven mutants each at exact contact and 1e-60 past it as required; its least wall
+      clearances, 5e-31, and least pair gaps, 1e-30, equal the replay's. The packet's sharp
+      controls, at 1e-30, are twice the least wall clearance; the review's lie below every
+      margin. At each count the relative margin is 1e-20 to within 5.2e-12 of itself, which
+      is the house certificate's 1 + 1e-20 dilation replaced by about 1 + 1e-30 (RV-2).
+    next_rung: >-
+      Held for the owner's question (think-ikku): whether the 23 October restatement ruling
+      reaches counts inside the corpus. If it does, the entry is withdrawn and no house
+      moves; if it does not, the replay and review evidence are entered, both rungs rise to
+      V3 and C3, and each count is adopted under the house rule with both strong generators'
+      regularization. The 31 October review accepted every certificate for finite
+      feasibility and recommends reading them as restatements.
+    unfinished_confirmations:
+    - what: >-
+        The owner's answer to whether the 23 October restatement ruling reaches counts
+        inside the corpus (RV-1 of the 31 October review); then, if the counts stay
+        recorded, the replay and review evidence already run, entered as the stage 4 exit
+      rung: C3
+      link: think-ikku
+      estimated_cost:
+        cpu_hours: 0.01
+        cpu_hours_high: 0.02
+        basis: >-
+          the replay and the review's checker ran on 31 October and their receipts are
+          retained; what remains is records work
+        priced: '2026-10-31'
+    regularizations:
+    - n: 154
+      of: T-222
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n154.json
+        one_to_one: true
+        moved: 47
+        max_move: 0.07793
+        max_turn_deg: 0.8514
+    - n: 155
+      of: T-197
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n155.json
+        one_to_one: true
+        moved: 0
+        max_move: 8.601e-16
+        max_turn_deg: 5.0e-15
+    - n: 183
+      of: T-220
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n183.json
+        one_to_one: true
+        moved: 24
+        max_move: 0.3578
+        max_turn_deg: 6.237
+    - n: 211
+      of: T-188
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n211.json
+        one_to_one: true
+        moved: 0
+        max_move: 8.262e-16
+        max_turn_deg: 1.0e-14
+    - n: 227
+      of: T-225
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n227.json
+        one_to_one: true
+        moved: 16
+        max_move: 0.1682
+        max_turn_deg: 2.542
+    - n: 236
+      of: T-218
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n236.json
+        one_to_one: true
+        moved: 0
+        max_move: 9.795e-16
+        max_turn_deg: 5.717e-34
+    - n: 237
+      of: T-190
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n237.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.341e-15
+        max_turn_deg: 7.0e-15
+    - n: 241
+      of: T-182
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n241.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.563e-06
+        max_turn_deg: 5.0e-15
+    - n: 271
+      of: T-219
+      by: '[Mishapolk refinements 2026-10-23]'
+      method: >-
+        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
+        as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n271.json
+        one_to_one: true
+        moved: 0
+        max_move: 2.326e-19
+        max_turn_deg: 5.184e-34
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong sub-agent tier tbd-strong at the xhigh reasoning setting),
+        the stage 4 mathematical review lane of issue 846 and the commits of 23 October
+        (bold-ritchie-rv-polk, think-ikku), prompted separately from the import lane
+        (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 154, 155, 183, 211, 227, 236, 237, 241 and 271 of the
+        certificates of 23 October: decided again by a clean-room exact checker on two
+        routes with sharp mutants at 1e-60; the maintained replay re-run; the sides against
+        the houses and their prints; the identity and free play against each house's
+        packing; whether each is a restatement under the 23 October ruling, put to the owner
+        (RV-1).
+      verdict: accepted
+      covers: [T-253]
+  - id: T-254
+    kind: upper-bound
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: 'Couzo''s new packing of 130 squares from PR #574''s, 2.05e-3 below T-174'
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(130) <= 466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000.
+      It is 2.05e-3 below the case's house
+      best packing, PingYou Ltd's certificate of Nate Chaoweeraprasit's packing (T-174), and below every earlier report at 130.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 31 October 2026 by both maintained exact routes. Those routes share components
+      with the producer: the sqpack route decides through sqpack/verify.py, the checker the
+      source's manifest names first, and both read the certificates through the evand-cert
+      reader. The 31 October review decided it again on a clean-room checker of its own, by
+      separating axes and by exact clipped areas with ten controls, by a Claude agent, a
+      system family the producer also used, and found no blocking defect, so the bound is
+      confirmed, independently re-implemented.
+
+      Mykhailo Polkovskyi's issue 846 re-solves the
+      same arrangement 2.08e-12 lower (T-259), and the case adopts that certificate under
+      the house rule, with this packing's credit.
+
+      The issue says both of the source's exact checkers accept the certificate in exact rational
+      arithmetic: verify_bound_certificate.py, Evan Daniel's MIT separating-axis verifier with modifications
+      by Francisco Couzo with Codex, byte-identical to the copy the issue-678 packet retains (valid
+      and strictly valid, 1,624 candidate pairs), and exact_finish.py, an exact corner replay; both
+      read the same certificate format. The source's commit of 27 October says the packing was read
+      from a database salvaged after a host crash of 26 October and ends with a Co-Authored-By trailer
+      naming Claude; the issue says Claude did the certification, the comparison and the report
+      at the author's direction. Those statements are the author's; no source program ran here.
+
+      Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), after the packing
+      his searches started from, PR #574's at 130: found by Nate Chaoweeraprasit (itsnaka), improved
+      by Siddharth Gupta and PingYou Ltd, as the issue asks. The issue says thirteen successive
+      improvements of his live searches of 24 and 25 October took the side from 11.904483032516
+      to this one, ten by the web app's fq quench (a browser adaptation of Evan Daniel's fq optimizer),
+      two by its basin hopping and one by native SLP, all on his own computers, and that matched
+      one to one against PR #574's packing the largest move is 0.704, 11 squares move beyond 0.1
+      and 26 beyond 0.01, so it calls it a new packing found from #574's.
+
+      A Kaggle per-puzzle side the issue quotes, 11.902430646006 for the team Cats and boxes, states
+      no packing and is no report.
+    scope:
+      n_values:
+      - 130
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 130 found from PR #574's packing, 2.05e-03 below the house
+        (T-174), one to one with it under no symmetry, 11 squares beyond a tenth and one
+        turned 44.7 degrees, as T-162's 2.02e-03 to 1.42e-02 (S3) are. No lower bound or
+        optimum.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October review (docs/project/reviews/review-2026-10-31-couzo-843-130.md),
+        lane bold-ritchie-rv-couzo, confirming the draft S3 of the stage 1 triage
+        (think-big9)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Couzo n130 2026-10-27]'
+      published: '2026-10-27'
+    evidence:
+    - E-couzo-843-certificate-report
+    - E-couzo-843-exact-feasibility
+    - E-couzo-843-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/couzo-issue843-2026-10-28/README.md
+    - packing/resources/web/couzo-issue843-2026-10-28/acquisition/claims.json
+    - packing/resources/web/couzo-issue843-2026-10-28/source/certificates/n130.cert
+    - packing/resources/web/couzo-issue843-2026-10-28/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue843-2026-10-28/receipts/sharp-controls.json
+    - packing/resources/web/couzo-issue843-2026-10-28/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-couzo-843-130.md
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l2_1031.py
+    - packing/resources/web/couzo-issue843-2026-10-28/receipts/sharp-controls.json
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/out/check-130.json
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/out/check-all.json
+    notes: >-
+      A separate complete repository replay is retained for n = 130: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 50310 pair decisions;
+      summed over the 3 jobs, the receipt records 5.1 route CPU seconds and 8.34 job wall seconds,
+      the longest job 3.39 seconds. Every positive clears every wall by at least 1.00e-15 and every
+      pair by at least 2.07e-13.
+
+      The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least far-wall
+      clearance, closed the least-gap pair by its gap and moved every square toward the nearer near
+      wall by its least clearance at every count it replays: both routes accepted each at exact
+      contact, margin 0, and refused each 1e-30 past it. They refused one square enlarged to its
+      pair and one to its wall at contact for its shape alone and 1e-30 past it for the overlap
+      or the wall as well, and refused a duplicated square.
+
+      At n = 130 the certificate is below the case's ceiling (Nate Chaoweeraprasit (itsnaka), improved
+      by Siddharth Gupta, PingYou Ltd, T-174) by 2.05e-03, below every earlier report; issue 846's certificate of the same arrangement, re-solved, is 2.08e-12 lower (T-259).
+
+      The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 130.
+
+      Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 130,
+      no symmetry pairs it one to one with T-174's packing by nearest centres; the optimal assignment
+      moves 11 squares beyond a tenth and 21 beyond a hundredth (largest 0.711415) and turns squares
+      by up to 44.74 degrees.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent methods,
+      human oversight or optimality is claimed.
+
+      The 31 October review's clean-room checker (E-couzo-843-review-exact-feasibility)
+      decided every wall and all 8,385 pairs by separating axes, and the walls and the 280
+      pairs whose centres lie within sqrt(2) by exact clipped areas; its least wall
+      clearance, 1e-15, and least pair gap, 2.0762e-13 (squares 105 and 128), equal the
+      replay's as exact fractions, and its ten controls were decided as expected by both of
+      its routes. With every rotation reversed, 44 pairs overlap, so the certificate holds
+      under the counter-clockwise reading of the half-angle tangent, which its comment line
+      implies and does not state.
+
+      Measured by the review against T-174's packing, which the source's parent certificate
+      is exactly: 119 of the 130 squares stay within 0.1, 11 move beyond it (largest 0.710),
+      one turns by 44.7 degrees, and under no symmetry do nearest centres pair the two one
+      to one. The record keeps the issue's word, a new packing found from #574's, beside the
+      source's own manifest, which says it refines that packing (F-3). The thirteen
+      intermediate packings of the issue's lineage are not published (F-4).
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 31 October, is
+      retained. The review's questions for the author (refinement or new packing, the
+      thirteen intermediate packings, the rotation sense) hold no rung. Issue 846's
+      certificate of the same arrangement is 2.08e-12 lower (T-259), so the case adopted that certificate at 130 on 31 October 2026, with this packing's credit, and never this one.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-couzo-843-130.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong sub-agent tier tbd-strong at the xhigh reasoning setting),
+        the stage 4 mathematical review lane of issues 843 and 844 (bold-ritchie-rv-couzo,
+        think-oy8d and think-dwzb), prompted separately from the import lane
+        (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 130 of issue 843's certificate: decided again by a
+        clean-room exact checker on two routes with ten controls; agreement with the
+        maintained replay; the side and its 12-place print; the identity against T-174, the
+        source's parent and issue 846's re-solve; credit, report order and the significance.
+      verdict: accepted
+      covers: [T-254]
+  - id: T-255
+    kind: upper-bound
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: >-
+      Couzo's certificates of ntumlnoob's Kaggle packings at 260 and 307, below T-225 and T-174
+    claim: >-
+      Two complete rational source certificates report finite upper-bound improvements at the exact
+      sides they state: s(260) <= 67077942617632138527571542307/4031481829251000000000000000 and
+      s(307) <= 436081607184993722962197444889181982917255228924685874736959955436771335630565667211324538123/24254714520872479530466069702814569144398684321103594602674239356738890164429000000000000000.
+      At 260 it is 7.22e-3 below the
+      case's house best packing (T-225), and at 307 1.61e-3 below it (T-174).
+
+      The two certificates and their duplicate-square and outside-container controls were
+      decided here on 31 October 2026 by both maintained exact routes. Those routes share
+      components with the producer: the sqpack route decides through sqpack/verify.py, the
+      checker the source's manifest names first, and both read the certificates through the
+      evand-cert reader. The 31 October review decided them again on a clean-room checker of
+      its own, by separating axes and by exact clipped areas with ten controls each, by a
+      Claude agent, a system family the producer also used, and found no blocking defect, so
+      the bounds are confirmed, independently re-implemented. Both are recorded only: issue
+      844's certificates are lower at both counts (T-256), and issue 845's at 260 (T-257).
+
+      The commit message says both certificates are replayed on both of the source's exact routes.
+      It and the credit records certificates/n260.json and n307.json say neither packing is the
+      author's construction: both refine the packings ntumlnoob published in the Kaggle notebook
+      'First 22.268681355 Public Code With Explanation' (run 362957087, sides 16.638533455862 and
+      17.979253973651 by its metric), and the gains, 6.6e-7 and 2.7e-6, come from the web app's
+      fq, an adaptation of Evan Daniel's fq optimizer (MIT). The commit ends with a Co-Authored-By
+      trailer naming Claude. Those statements are the author's; no source program ran here.
+
+      Credit ntumlnoob (Kaggle) for both packings, from the notebook 'First 22.268681355 Public
+      Code With Explanation', whose own refinements of an unpublished parent they are, and Francisco
+      Couzo (https://github.com/franciscouzo/square-packing) for the refinements and the certificates,
+      as the source credits them. A publication in a watched repository that no issue reports, recorded
+      from its commit by the owner's rule of 14 October 2026; issue 844 reports lower certificates
+      at both counts the same day.
+    scope:
+      n_values:
+      - 260
+      - 307
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        Other arrangements than the houses at 260 and 307, 7.22e-03 and 1.61e-03 below T-225
+        and T-174, with 168 and 91 squares beyond a tenth, as #763's notebook-descended
+        arrangements (S3) are; the arrangements are ntumlnoob's and the refinements the
+        author's. No lower bound or optimum.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October review
+        (docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md), lane
+        bold-ritchie-rv-couzo, changing the draft S2 of the stage 1 triage (think-n61j): a
+        later lower report does not lower the score (F-2)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Couzo a5a5d76 2026-10-28]'
+      published: '2026-10-28'
+    evidence:
+    - E-couzo-a5a5d76-certificate-report
+    - E-couzo-a5a5d76-exact-feasibility
+    - E-couzo-a5a5d76-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/README.md
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/acquisition/claims.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/n260.cert
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/n307.cert
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/receipts/sharp-controls-n260.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/receipts/sharp-controls-n307.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/measure/identity-n260.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/measure/identity-n307.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l2_1031.py
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/receipts/sharp-controls-n260.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/receipts/sharp-controls-n307.json
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/out/check-all.json
+    notes: >-
+      A separate complete repository replay is retained for n = 260 and 307: 2 positives and 4 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 483846 pair
+      decisions; summed over the 6 jobs, the receipt records 85.7 route CPU seconds and 118.4 job
+      wall seconds, the longest job 29.31 seconds. Every positive clears every wall by at least
+      1.00e-15 and every pair by at least 1.23e-13.
+
+      The packet's sharp controls (receipts/sharp-controls-nNNN.json, one per count) lowered the
+      side by the least far-wall clearance, closed the least-gap pair by its gap and moved every
+      square toward the nearer near wall by its least clearance at every count it replays: both
+      routes accepted each at exact contact, margin 0, and refused each 1e-30 past it. They refused
+      one square enlarged to its pair and one to its wall at contact for its shape alone and 1e-30
+      past it for the overlap or the wall as well, and refused a duplicated square.
+
+      At n = 260 the certificate is below the case's ceiling (Francisco Couzo, improved by Evan
+      Daniel, T-225) by 7.22e-03, smallest when reported; issue 844's certificate is 1.50e-03 lower (T-256) and issue 845's 4.55e-03 (T-257). At n = 307 the certificate is below
+      the case's ceiling (Nate Chaoweeraprasit (itsnaka), improved by PingYou Ltd, T-174) by 1.61e-03, smallest when reported; issue 844's certificate, this packing mirrored and refined, is 4.56e-12 lower (T-256).
+
+      The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 260 and 307.
+
+      Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 260,
+      no symmetry pairs it one to one with T-225's packing by nearest centres; the optimal assignment
+      moves 167 squares beyond a tenth and 202 beyond a hundredth (largest 1.00448) and turns squares
+      by up to 27.39 degrees; at 307, no symmetry pairs it one to one with T-174's packing by nearest
+      centres; the optimal assignment moves 91 squares beyond a tenth and 134 beyond a hundredth
+      (largest 1.13735) and turns squares by up to 34.04 degrees.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent methods,
+      human oversight or optimality is claimed.
+
+      The 31 October review's clean-room checker (E-couzo-a5a5d76-review-exact-feasibility)
+      decided every wall and all 33,670 and 46,971 pairs by separating axes, and 610 and 731
+      pairs by exact clipped areas; its least pair gaps, 1.2316e-13 (squares 93 and 112) and
+      2.1198e-13 (85 and 260), and least wall clearances, 1e-15, equal the replay's as exact
+      fractions, and its ten controls each were decided as expected by both of its routes.
+      With every rotation reversed, 147 and 124 pairs overlap. The starting notebook
+      packings are not published, so the refinements from them are not measured here (F-5).
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 31 October, is
+      retained. Neither count is adopted from this entry: at both counts issue 844's
+      certificates are lower (T-256), and at 260 issue 845's (T-257), and the house rule
+      adopts the smallest validated side.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong sub-agent tier tbd-strong at the xhigh reasoning setting),
+        the stage 4 mathematical review lane of issues 843 and 844 (bold-ritchie-rv-couzo,
+        think-oy8d and think-dwzb), prompted separately from the import lane
+        (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 260 and 307 of Couzo's certificates of 28 October: decided again
+        by a clean-room exact checker on two routes with ten controls each; agreement with
+        the maintained replay; the sides and prints; the identity against the houses and
+        issue 844's certificates; the lineage the credit records state; report order, credit
+        and the significance.
+      verdict: accepted
+      covers: [T-255, T-256]
+  - id: T-256
+    kind: upper-bound
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: >-
+      Couzo's packings from Kaggle notebook packings at 232, 260 and 307, below T-186, T-225 and T-174
+    claim: >-
+      Three complete rational source certificates report finite upper-bound improvements at the
+      exact sides they state: s(232) <= 7617348902520572307222120733/483283363059000000000000000,
+      s(260) <= 104381051573626493618357957479/6274019722347000000000000000 and s(307) <= 2707897969116659515550794271467451840032974544063449693/150612387934832692306604131393579915999000000000000000.
+      They are 2.51e-3, 8.72e-3 and
+      1.61e-3 below the houses, T-186 at 232, T-225 at 260 and T-174 at 307, and at 260 and 307
+      below the author's certificates of 28 October (T-255).
+
+      The three certificates and their duplicate-square and outside-container controls were
+      decided here on 31 October 2026 by both maintained exact routes. Those routes share
+      components with the producer: the sqpack route decides through sqpack/verify.py, the
+      checker the source's manifest names first, and both read the certificates through the
+      evand-cert reader. The 31 October review decided them again on a clean-room checker of
+      its own, by separating axes and by exact clipped areas with ten controls each, by a
+      Claude agent, a system family the producer also used, and found no blocking defect, so
+      the bounds are confirmed, independently re-implemented. At 260 issue 845's certificate
+      is 3.05e-3 lower (T-257) and is the house; this one is recorded only there.
+
+      The issue says both of the source's exact checkers accept all three certificates in exact
+      rational arithmetic, valid and strictly valid with positive wall and pair margins: verify_bound_certificate.py,
+      Evan Daniel's MIT separating-axis verifier with modifications by Francisco Couzo with Codex,
+      byte-identical to the copy the issue-678 packet retains, and exact_finish.py, an exact corner
+      replay. The source's commit of 28 October ends with a Co-Authored-By trailer naming Claude,
+      and the issue says Claude did the certification, the comparison and the report at the author's
+      direction. Those statements are the author's; no source program ran here.
+
+      Credit the starting packings to their Kaggle authors, as the issue does: at 232 Alex Chilton's
+      notebook 'Fault-line DP + Basin Hopping - LB 22.2990' (run 362691257, side 15.763381419802),
+      and at 260 and 307 ntumlnoob's notebook 'First 22.268681355 Public Code With Explanation'
+      (version 3, run 362957087, sides 16.638533455862 and 17.979253973651), whose SOURCE_NOTICES.md
+      credits Alex Chilton, David Ellsworth, Evan Daniel and public Kaggle portfolios.
+
+      Francisco Couzo (https://github.com/franciscouzo/square-packing) is credited with the refinements at 232 and 307 and, at 260, with a new arrangement found from ntumlnoob's packing, through his refinement of it of 28 October (T-255): 1.72e-3, 1.50e-3 and 2.7e-6 of the improvements, by code the issue names: at 232 GPU
+      basin hopping with the overlap-energy kernel of Vladislav Lavrentev's (lightningv08) Kaggle
+      notebook 'CUDA Packing Search' (Apache-2.0) and an Evan Daniel fq polish; at 260 an Ellsworth-style
+      structural move modelled on David Ellsworth's tools, the author's SLP (HiGHS) and the web
+      app's fq; at 307 the web app's fq, a browser adaptation of Evan Daniel's fq optimizer (MIT).
+      The issue calls 307 a refinement and leaves 232 and 260 to the record.
+
+      Measured by the 31 October review, at 260 the source's own lineage starts from his certificate of 28 October (T-255), and one Ellsworth-style structural move and about 200 SLP steps move 170 squares beyond 0.1 of it with no symmetry pairing the two, so the record calls 260 a new arrangement found from ntumlnoob's packing (F-3); at 232 the starting packing is not published and the record keeps the source's word; at 307 the packing is that of 28 October mirrored and refined. Kaggle per-puzzle sides
+      the issue quotes below all three state no packing and are no report.
+    scope:
+      n_values:
+      - 232
+      - 260
+      - 307
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        New arrangements relative to the record at 232 and 260, 2.51e-03 and 8.72e-03 below
+        the houses (T-186, T-225), one to one with no recorded packing under any symmetry,
+        as T-162's (S3) are. At 307, the author's packing of 28 October (T-255) refined by 4.56e-12. No
+        lower bound or optimum.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October review
+        (docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md), lane
+        bold-ritchie-rv-couzo, confirming the draft S3 of the stage 1 triage (think-n61j)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Couzo issue 844 2026-10-28]'
+      published: '2026-10-28'
+    evidence:
+    - E-couzo-844-certificate-report
+    - E-couzo-844-exact-feasibility
+    - E-couzo-844-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/couzo-issue844-2026-10-28/README.md
+    - packing/resources/web/couzo-issue844-2026-10-28/acquisition/claims.json
+    - packing/resources/web/couzo-issue844-2026-10-28/source/certificates/best/n232.cert
+    - packing/resources/web/couzo-issue844-2026-10-28/source/certificates/n260.cert
+    - packing/resources/web/couzo-issue844-2026-10-28/source/certificates/n307.cert
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n232.json
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n260.json
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n307.json
+    - packing/resources/web/couzo-issue844-2026-10-28/measure/identity-n232.json
+    - packing/resources/web/couzo-issue844-2026-10-28/measure/identity-n260.json
+    - packing/resources/web/couzo-issue844-2026-10-28/measure/identity-n307.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l2_1031.py
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n232.json
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n260.json
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n307.json
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/out/check-all.json
+    notes: >-
+      A separate complete repository replay is retained for n = 232, 260 and 307: 3 positives and
+      6 duplicate-square and outside-container controls passed their required outcomes on both routes,
+      644622 pair decisions; summed over the 9 jobs, the receipt records 71.66 route CPU seconds
+      and 121.85 job wall seconds, the longest job 19.6 seconds. Every positive clears every wall
+      by at least 1.00e-15 and every pair by at least 1.85e-13.
+
+      The packet's sharp controls (receipts/sharp-controls-nNNN.json, one per count) lowered the
+      side by the least far-wall clearance, closed the least-gap pair by its gap and moved every
+      square toward the nearer near wall by its least clearance at every count it replays: both
+      routes accepted each at exact contact, margin 0, and refused each 1e-30 past it. They refused
+      one square enlarged to its pair and one to its wall at contact for its shape alone and 1e-30
+      past it for the overlap or the wall as well, and refused a duplicated square.
+
+      At n = 232 the certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou
+      Ltd, Mishapolk, T-186) by 2.51e-03; smallest: this certificate. At n = 260 the certificate
+      is below the case's ceiling (Francisco Couzo, improved by Evan Daniel, T-225) by 8.72e-03;
+      below T-255, Couzo of 28 October (no issue) (Francisco Couzo, after ntumlnoob) by 1.50e-03, smallest when reported; issue 845's certificate is 3.05e-03 lower (T-257). At n = 307 the certificate is below the case's ceiling (Nate Chaoweeraprasit
+      (itsnaka), improved by PingYou Ltd, T-174) by 1.61e-03; below T-255, Couzo of 28 October (no
+      issue) (Francisco Couzo, after ntumlnoob) by 4.56e-12; smallest: this certificate.
+
+      The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 232, 260 and 307.
+
+      Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 232,
+      no symmetry pairs it one to one with T-186's packing by nearest centres; the optimal assignment
+      moves 91 squares beyond a tenth and 123 beyond a hundredth (largest 1.08859) and turns squares
+      by up to 45 degrees; at 260, no symmetry pairs it one to one with T-225's packing by nearest
+      centres; the optimal assignment moves 192 squares beyond a tenth and 210 beyond a hundredth
+      (largest 1.08752) and turns squares by up to 27.09 degrees; no symmetry pairs it one to one
+      with T-255's packing by nearest centres; the optimal assignment moves 172 squares beyond a
+      tenth and 216 beyond a hundredth (largest 1.07764) and turns squares by up to 44.42 degrees;
+      at 307, no symmetry pairs it one to one with T-174's packing by nearest centres; the optimal
+      assignment moves 91 squares beyond a tenth and 138 beyond a hundredth (largest 1.1367) and
+      turns squares by up to 34.04 degrees; nearest centres pair it one to one with T-255's packing
+      (symmetry 4), 35 squares beyond 1e-3 and 40 beyond 1e-9, the largest move 1.667110e-2 and
+      turn 0.5525 degrees.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent methods,
+      human oversight or optimality is claimed.
+
+      The 31 October review's clean-room checker (E-couzo-844-review-exact-feasibility)
+      decided every wall and all 26,796, 33,670 and 46,971 pairs by separating axes, and
+      554, 618 and 699 pairs by exact clipped areas, the issue's near pairs; its least pair
+      gaps, 2.1162e-13, 1.8586e-13 and 2.0895e-13, and least wall clearances, 1e-15, equal
+      the replay's as exact fractions, and its ten controls each were decided as expected by
+      both of its routes. With every rotation reversed, 93, 138 and 104 pairs overlap. The
+      manifest's previous_source at 232 is the house certificate, the source's previous
+      record, and not the lineage (N-1); the starting notebook packings are not published
+      (F-5).
+
+      The case at 232 and at 307 adopted this entry's certificates as their house best
+      packings in the pass of 31 October 2026, from T-186 at 232 (and below T-193's
+      algebraic side, staged there) and from T-174 at 307, which stay retained as history,
+      with the credits of Couzo's refinements of Alex Chilton's and ntumlnoob's Kaggle
+      notebook packings. Both strong generators decided the new witnesses in the same pull
+      request (cases/regularized_drawings/think-3guf-2026-10-31): grid-slack's 1-degree view
+      is drawn at 232, at the witness's side; at 307 every view is refused at row 7 against
+      the axis tool's view, which stays drawn (decided no better), and Evan Daniel's
+      regularizer solved the witness to a KKT local minimum 3.75e-12 below its side, a
+      register candidate (think-ruu2) that is not adopted here.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 31 October, is
+      retained. It is the smallest validated side at 232 and 307, and the case adopted it
+      there on 31 October 2026 under the house rule, with both strong generators'
+      regularization of each new house; at 260 issue 845's certificate (T-257) is lower and
+      was adopted instead. The regularizer's solved view at 307, below this side, waits for
+      its own registration and review (think-ruu2). The review's questions for the author
+      (260 as a new arrangement, the starting packings, the rotation sense) hold no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong sub-agent tier tbd-strong at the xhigh reasoning setting),
+        the stage 4 mathematical review lane of issues 843 and 844 (bold-ritchie-rv-couzo,
+        think-oy8d and think-dwzb), prompted separately from the import lane
+        (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 232, 260 and 307 of issue 844's certificates: decided
+        again by a clean-room exact checker on two routes with ten controls each; agreement
+        with the maintained replay; the sides and prints; the identity against the houses,
+        the certificates of 28 October and issue 845's 260; the lineage the credit records state;
+        report order, credit and the significance.
+      verdict: accepted
+      covers: [T-255, T-256]
+  - id: T-257
+    kind: upper-bound
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: >-
+      Daniel's new packings of 172, 204, 260 and 293 squares, 1.64e-4 to 1.18e-2 below each house
+    claim: >-
+      Four complete rational source certificates report finite upper-bound improvements at the exact
+      sides they state: s(172) <= 13.617935698381415404117316038995, s(204) <= 14.807627471881579627471866771703,
+      s(260) <= 16.633982502121883982502105249666 and s(293) <= 17.633982502122781982502105147646.
+      They are 1.64e-4 to 1.18e-2 below
+      each house: 1.05e-3 below T-174 at 172, 1.02e-3 below T-231 at 204, 1.18e-2 below T-225 at
+      260 and 1.64e-4 below the Kingbird catalogue's 723/41 at 293, which T-101 verifies; at 260
+      they are below issue 844's certificate too.
+
+      The four certificates and their duplicate-square and outside-container controls were
+      decided here on 31 October 2026 by both maintained exact routes. Those routes share
+      components with the producer: both read the certificates through the evand-cert
+      reader, whose line filter and corner construction are transcribed from Evan Daniel's
+      own checkers, the ones the certificates name. The 31 October review decided them again
+      on a clean-room checker of its own, by separating axes over every pair and by exact
+      clipped areas with ten sharp controls each, by a Claude agent, a system family the
+      producer also used, and found no blocking defect, so the bounds are confirmed,
+      independently re-implemented.
+
+      The issue says the source's two exact checkers, search/exact/verify_cert.py (separating axes)
+      and verify_cert2.py (polygon intersection), byte-identical to the copies the n183 packet retains,
+      both report VALID on all five certificate files, and that they share an author and the certificate
+      format. At 172 the certificate dilates the source's 80-digit KKT point by 1 + 1e-20, with numerical evidence at
+      80 digits, not interval proofs, that it is a local minimum of S strict modulo 69 exact flat
+      motions; s172_1028_regularized.cert is a regularized view at the same side. At 204, 260 and
+      293 the exact solver did not converge and the certificates dilate the binary64 packings by
+      1.5e-11 to 1.8e-11; local optimality is not established there.
+
+      The commit ends with a Co-Authored-By trailer naming Claude. Those statements are the author's;
+      no source program ran here.
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), whose population searches over
+      his packing store found all four, after the starts the issue asks to be credited: at 172 the
+      s(199) record of Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta, from which an
+      explorer search and the removal of one L-shaped strip gave 172 at side - 1; at 204 Daniil
+      Ostashev's s(176) packing (#575), used as a seed; at 260 Kirill Tymchishin's (kirilltym) s(260) from
+      his public Kaggle notebook 'Square Packing Lab | CPU/CUDA/MPS' (side 16.638543986, 26 October),
+      whose tilted island a fault-line composition and refill at 405 improved before a composition
+      run put it in a 260 frame; and at 293 the 260 packing plus one L-shaped strip (Friedman's
+      L step), with the same credit.
+
+      The issue calls all four new packings, none a refinement of the register's. Kaggle per-puzzle
+      sides it quotes at 172, 204 and 293 state no packing and are no report. The source's credits
+      say its work was produced by Claude (Anthropic) under human direction.
+    scope:
+      n_values:
+      - 172
+      - 204
+      - 260
+      - 293
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        New arrangements below each house: 1.05e-03 at 172 and 1.02e-03 at 204, 1.18e-02 at
+        260, and 1.64e-04 at 293 below the catalogue construction 723/41 that the case
+        records as its conjectured optimum, none one to one with the house's packing under
+        any symmetry, as T-243's 3.17e-03 at 182 (S3) is. No lower bound or optimum.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October review
+        (docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md), lane
+        bold-ritchie-rv-daniel, confirming the draft S3 of the stage 1 triage (think-17wo)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel issue 845 2026-10-29]'
+      published: '2026-10-29'
+    evidence:
+    - E-evand-845-certificate-report
+    - E-evand-845-exact-feasibility
+    - E-evand-845-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-issue845-2026-10-29/README.md
+    - packing/resources/web/evand-issue845-2026-10-29/acquisition/claims.json
+    - packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s172_1028.cert
+    - packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s204_1028.cert
+    - packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s260_1028.cert
+    - packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s293_1028.cert
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n172.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n204.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n260.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n293.json
+    - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n172.json
+    - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n204.json
+    - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n260.json
+    - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n293.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l2_1031.py
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n172.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n204.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n260.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n293.json
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/check-s172_1028.json
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/check-s204_1028.json
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/check-s260_1028.json
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/check-s293_1028.json
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/controls.txt
+    notes: >-
+      A separate complete repository replay is retained for n = 172, 204, 260 and 293: 4 positives
+      and 8 duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 671160 pair decisions; summed over the 12 jobs, the receipt records 90.19 route CPU
+      seconds and 183.02 job wall seconds, the longest job 21.05 seconds. Every positive clears
+      every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+
+      The packet's sharp controls (receipts/sharp-controls-nNNN.json, one per count) lowered the
+      side by the least far-wall clearance, closed the least-gap pair by its gap and moved every
+      square toward the nearer near wall by its least clearance at every count it replays: both
+      routes accepted each at exact contact, margin 0, and refused each 1e-30 past it. They refused
+      one square enlarged to its pair and one to its wall at contact for its shape alone and 1e-30
+      past it for the overlap or the wall as well, and refused a duplicated square.
+
+      At n = 172 the certificate is below the case's ceiling (Francisco Couzo, improved by Evan
+      Daniel, PingYou Ltd, T-174) by 1.05e-03; below T-244 (#804) (Hyukdong Kim, of the house's
+      packing) by 1.05e-03; smallest: this certificate. At n = 204 the certificate is below the
+      case's ceiling (Francisco Couzo, improved by Mishapolk, T-231) by 1.02e-03; smallest: this
+      certificate. At n = 260 the certificate is below the case's ceiling (Francisco Couzo, improved
+      by Evan Daniel, T-225) by 1.18e-02; below T-255, Couzo of 28 October (no issue) (Francisco
+      Couzo, after ntumlnoob) by 4.55e-03; below T-256 (#844) (Francisco Couzo, after ntumlnoob)
+      by 3.05e-03; smallest: this certificate.
+
+      At n = 293 the certificate is below the case's ceiling (David Ellsworth's Kingbird catalogue, 723/41, verified by T-101's exact ceiling) by 1.64e-04; smallest: this certificate.
+
+      The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 172, 204, 260 and 293.
+
+      Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 172,
+      no symmetry pairs it one to one with T-174's packing by nearest centres; the optimal assignment
+      moves 42 squares beyond a tenth and 66 beyond a hundredth (largest 0.696591) and turns squares
+      by up to 44.73 degrees; at 204, no symmetry pairs it one to one with T-231's packing by nearest
+      centres; the optimal assignment moves 67 squares beyond a tenth and 109 beyond a hundredth
+      (largest 0.912662) and turns squares by up to 43.12 degrees; at 260, no symmetry pairs it
+      one to one with T-225's packing by nearest centres; the optimal assignment moves 155 squares
+      beyond a tenth and 250 beyond a hundredth (largest 1.00585) and turns squares by up to 27.31
+      degrees; no symmetry pairs it one to one with T-256's packing by nearest centres; the optimal
+      assignment moves 199 squares beyond a tenth and 233 beyond a hundredth (largest 1.09528) and
+      turns squares by up to 42.64 degrees; at 293, no symmetry pairs it one to one with T-101's
+      packing by nearest centres; the optimal assignment moves 185 squares beyond a tenth and 219
+      beyond a hundredth (largest 1.04837) and turns squares by up to 43.6 degrees.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent methods,
+      human oversight or optimality is claimed.
+
+      The 31 October review's clean-room checker (E-evand-845-review-exact-feasibility)
+      decided every wall and all 14,706, 20,706, 33,670 and 42,778 pairs by separating axes
+      with no distance filter and again by exact clipped areas; its least clearances and
+      pair gaps equal the replay's as exact fractions, and its forty sharp controls were
+      decided as expected by both methods. Under the reversed rotation sense, 57, 102, 152
+      and 152 pairs overlap. The 172 certificate is the source's 80-digit KKT point dilated
+      by exactly 1 + 1e-20 about the corner, 1.36e-19 above the point's side S*, which
+      overlaps by up to 5.6e-69 and is no packing (M-2, N-2); the other three dilate their
+      binary64 inputs by 1 + 1e-12.
+
+      The review measured the lineages the issue states. The 293 is the 260 exactly, up to a
+      mirror, plus one L-shaped strip of 33 axis-aligned squares along two walls.
+
+      Since the two certificates were dilated separately, the 260 certificate with that strip proves s(293) <= 8816991251060941991251052624833/(5 * 10^29), 8.98e-13 below this side and across its 12-place print (A3 of the senior review of #852); that construction is a register candidate (think-ruu2), not adopted here. The 172
+      fits the 199 house less a 27-square L with 14 squares beyond 0.1, as the house's own
+      172 fits the same cut with 20, so both are in the 199 record's L-cut family. The 204
+      fits the 176 house's witness, Ostashev's packing as Polkovskyi refined it, loosely: 40
+      squares beyond 0.1, consistent with a seed nine generations back (N-4).
+
+      The 260's start is not retained (N-3). Side-only Kaggle values lie below at 172, 204 and 293;
+      the issue says the best public packing, not the best known side (N-7).
+
+      The case at 172, 204, 260 and 293 adopted this entry's certificates as their house
+      best packings in the pass of 31 October 2026, from T-174, T-231, T-225 and the
+      Kingbird catalogue's construction 723/41, which stay retained as history; at 293 the
+      conjectured optimum 723/41 is withdrawn. Both strong generators decided the new
+      witnesses in the same pull request (cases/regularized_drawings/think-3guf-2026-10-31):
+      grid-slack's views are drawn, its 5-degree view at 172 and 204 and its 0.5-degree view
+      at 260 and 293, each at its witness's side and better than the axis tool's view on some goal and worse on none.
+
+      Evan Daniel's regularizer drew no adoptable view at these counts (its 204 solve is no local minimum, as the issue's own exact solver did
+      not converge there). The rigidity blocks were derived again on the new witnesses, and
+      each stays not rigid.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 31 October, is
+      retained. It is the smallest validated side at 172, 204, 260 and 293, and the case
+      adopted it there on 31 October 2026 under the house rule, with both strong generators'
+      regularization of each new house; the conjectured optimum 723/41 at 293 is withdrawn
+      (N-9). The review's questions for the author (Kirill Tymchishin's identity, the 172's
+      parent, the 204 exact point and an enclosure of the 172 KKT point) hold no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong at the xhigh reasoning setting), the stage
+        4 mathematical review lane of issue 845 and the issue 824 update
+        (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), prompted separately from the
+        import lane (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 172, 204, 260 and 293 of issue 845's certificates: decided
+        again by a clean-room exact checker by two methods with ten sharp controls each; the
+        maintained routes re-run against it; the sides and prints; the dilations and the 172
+        KKT point; the identity against each house's packing and the lineages the issue
+        states; credit, report order and the significance.
+      verdict: accepted
+      covers: [T-257]
+  - id: T-258
+    kind: upper-bound
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: >-
+      Daniel's lower packing of 299 squares from his T-248 packing, 2.46e-3 below it
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(299) <= 17.801238549388584084680137655023. It is 2.46e-3 below T-248, the source's opening certificate at 299, and
+      2.16e-2 below the case's house best packing, the Kingbird catalogue's 33/2 + √7/2.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 31 October 2026 by both maintained exact routes. Those routes share components
+      with the producer: both read the certificate through the evand-cert reader, whose line
+      filter and corner construction are transcribed from Evan Daniel's own checkers, the
+      ones the certificates name. The 31 October review decided it again on a clean-room
+      checker of its own, by separating axes over every pair and by exact clipped areas with
+      ten sharp controls each, by a Claude agent, a system family the producer also used,
+      and found no blocking defect, so the bound is confirmed, independently re-implemented.
+
+      The update says the source's two exact checkers, search/exact/verify_cert.py and verify_cert2.py,
+      byte-identical to the copies the n183 packet retains, both report VALID. It calls the certificate
+      an exact KKT point whose 80-digit point, s299_1028.exact.txt, is a local minimum of S strict
+      modulo 119 exact flat motions, with no corner-corner MILP descent, 64 corner-corner contacts
+      and 33 rattlers, by numerical evidence at 80 digits and not interval proofs. The source's
+      commit of 29 October says the regularized view failed its checkers and is not committed, and
+      ends with a Co-Authored-By trailer naming Claude. Those statements are the author's; no source
+      program ran here.
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), who reports a new packing found
+      from his T-248 packing at 299 by four generations of refill (removing a line or disc of squares,
+      re-placing them and relaxing; 17.803695 to 17.801240) and an exact descent (a corner-corner
+      MILP kick and re-solve, to 17.801238549), and asks that the credit of the opening post stand:
+      Chris Deotte for the method, his multi-gadget fault-line DP, and for the start, his public
+      Kaggle s(334) packing. A Kaggle per-puzzle side the update quotes, 17.793636991 for Cats and
+      boxes, states no packing and is no report. The source's credits say its work was produced
+      by Claude (Anthropic) under human direction.
+    scope:
+      n_values:
+      - 299
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new packing at 299, 2.16e-02 below the catalogue construction that the case
+        records as its conjectured optimum and 2.46e-03 below T-248, which it continues: no
+        symmetry pairs it one to one with T-248's packing and 78 squares lie beyond a tenth,
+        as T-243's 3.17e-03 at 182 (S3) is. No lower bound or optimum.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October review
+        (docs/project/reviews/review-2026-10-31-daniel-824-299-update.md), lane
+        bold-ritchie-rv-daniel, confirming the draft S3 of the stage 1 triage (think-3xn9)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel n299 update 2026-10-29]'
+      published: '2026-10-29'
+    evidence:
+    - E-evand-n299-update-certificate-report
+    - E-evand-n299-update-exact-feasibility
+    - E-evand-n299-update-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n299-update-2026-10-29/README.md
+    - packing/resources/web/evand-n299-update-2026-10-29/acquisition/claims.json
+    - packing/resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/s299_1028.cert
+    - packing/resources/web/evand-n299-update-2026-10-29/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n299-update-2026-10-29/receipts/sharp-controls.json
+    - packing/resources/web/evand-n299-update-2026-10-29/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l2_1031.py
+    - packing/resources/web/evand-n299-update-2026-10-29/receipts/sharp-controls.json
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/check-s299_1028.json
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/out/controls.txt
+    notes: >-
+      A separate complete repository replay is retained for n = 299: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 267306 pair
+      decisions; summed over the 3 jobs, the receipt records 37.25 route CPU seconds and 109.82
+      job wall seconds, the longest job 47.76 seconds. Every positive clears every wall by at least
+      5.00e-21 and every pair by at least 9.99e-21.
+
+      The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least far-wall
+      clearance, closed the least-gap pair by its gap and moved every square toward the nearer near
+      wall by its least clearance at every count it replays: both routes accepted each at exact
+      contact, margin 0, and refused each 1e-30 past it. They refused one square enlarged to its
+      pair and one to its wall at contact for its shape alone and 1e-30 past it for the overlap
+      or the wall as well, and refused a duplicated square.
+
+      At n = 299 the certificate is below the case's ceiling (the Kingbird catalogue's 33/2 + √7/2, verified by T-101's exact ceiling) by 2.16e-02; below T-248 (#824) (Evan
+      Daniel, after Chris Deotte) by 2.46e-03; smallest: this certificate.
+
+      The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 299.
+
+      Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 299,
+      no symmetry pairs it one to one with T-248's packing by nearest centres; the optimal assignment
+      moves 78 squares beyond a tenth and 166 beyond a hundredth (largest 0.801914) and turns squares
+      by up to 36.64 degrees; no symmetry pairs it one to one with T-101's packing by nearest centres;
+      the optimal assignment moves 134 squares beyond a tenth and 246 beyond a hundredth (largest
+      1.13312) and turns squares by up to 30.75 degrees.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent methods,
+      human oversight or optimality is claimed.
+
+      The 31 October review's clean-room checker
+      (E-evand-n299-update-review-exact-feasibility) decided every wall and all 44,551 pairs
+      by separating axes with no distance filter and again by exact clipped areas; its least
+      wall clearance, exactly 5e-21, and least pair gap, 9.999999999999987e-21 (squares 124
+      and 134, from 0), equal the replay's as exact fractions, and its ten sharp controls
+      were decided as expected by both methods. Under the reversed rotation sense, 121 pairs overlap.
+
+      The certificate is the source's 80-digit KKT point dilated by 1 + 1e-20,
+      1.78e-19 above the point's side, which overlaps by up to 6.4e-69 and is no packing
+      (N-2). The local-minimality statement is the source's numerical report at 80 digits,
+      strict only modulo 119 flat motions with 33 rattlers, and decides no rung; the
+      certificate does not settle it (M-1).
+
+      The case at 299 adopted this certificate as its house best packing in the pass of 31
+      October 2026, from the Kingbird catalogue's construction 33/2 + √7/2, whose ceiling
+      T-101 verifies and which stays retained as history; the conjectured optimum
+      17.82287565553229 is withdrawn. Both strong generators decided the new witness in the
+      same pull request (cases/regularized_drawings/think-3guf-2026-10-31): Evan Daniel's
+      regularizer's certified KKT solve at the witness's side and grid-slack's views at all
+      three thresholds are each refused at row 7 against the axis tool's view, a total of
+      shared sides falling, so that view stays drawn (decided no better). The rigidity block
+      was derived again on the new witness and stays not rigid (N-5).
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 31 October, is
+      retained. It is the smallest validated side at 299, and the case adopted it there on
+      31 October 2026 under the house rule, with both strong generators' regularization of
+      the new house; the conjectured optimum 17.82287565553229 is withdrawn and the rigidity
+      block derived again (N-5). T-248, which it continues, is recorded only. The review's
+      questions for the author (an enclosure of the KKT point, the near-active gaps) hold no
+      rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong at the xhigh reasoning setting), the stage
+        4 mathematical review lane of issue 845 and the issue 824 update
+        (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), prompted separately from the
+        import lane (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 299 of the update's certificate and of T-248's, which it
+        continues: decided again by a clean-room exact checker by two methods with ten sharp
+        controls each; the maintained routes re-run against it; the sides and prints; the
+        KKT point read against the certificate; the identity against T-248 and the house
+        witness; credit, report order and the significance.
+      verdict: accepted
+      covers: [T-248, T-258]
+  - id: T-259
+    kind: upper-bound
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: >-
+      Polkovskyi's re-solve of Couzo's packing of 130 squares, 2.08e-12 below T-254
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(130) <= 11.902430645982265758612919640554, 2.08e-12 below
+      Francisco Couzo's certificate of issue 843 (T-254), the same arrangement, and 2.05e-3
+      below the case's house best packing when it was reported, T-174.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 31 October 2026 by both maintained exact routes. Those routes share components
+      with the producer: both read the certificate through the evand-cert reader, whose line
+      filter and corner construction are transcribed from Evan Daniel's checkers, the family
+      of the source's verify_bound_certificate.py. The 31 October review decided it again on
+      a clean-room checker of its own, by separating axes and by exact clipped areas with
+      seven mutants at contact and 1e-60 past it, and found no blocking defect, so the bound
+      is confirmed, independently re-implemented. The issue does not say what its
+      Antigravity Autonomous Research Lab is, so whether the reviewer's system family
+      overlaps the producer's is not known.
+
+      The issue says the certificate is valid and strictly valid under
+      verify_bound_certificate.py --strict, Evan Daniel's MIT separating-axis verifier with
+      Francisco Couzo's modifications, byte-identical to the copy the issue-678 packet
+      retains, with least wall and pair clearances of 9.66e-15 and 1.82e-14. Its header
+      calls it a dilation, by dilate_cert.py with delta 2e-14, of
+      isolated_lab/tmp_couzo_noalm.txt, and the issue says it beats Couzo's issue 843 by
+      2.08e-12. Those statements are the author's; no source program ran here.
+
+      Credit Francisco Couzo's packing of issue 843, found from PR #574's, and Mykhailo
+      Polkovskyi (Mishapolk, https://github.com/Mishapolk/square-packing-records), with what
+      the issue calls the Antigravity Autonomous Research Lab, for the re-solve, as the
+      register credits a regularization. Measured by the 31 October review, it has Couzo's
+      contact structure within 1e-9, 304 near-contact pairs and 38 wall contacts each;
+      Couzo's pair gaps of about 2.16e-13 become about 2e-14, about ten of them making the
+      2.08e-12, and 14 squares move beyond 1e-9, the largest by 1.13e-6 (RV-6). The issue's
+      six other counts are T-260's and the eight it reports beyond them are not recorded
+      (T-260 names them).
+    scope:
+      n_values:
+      - 130
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 1
+      rationale: >-
+        A re-solve of Francisco Couzo's packing at 130 (T-254) at tighter padding, 2.08e-12
+        below it: the same contact structure, 14 squares moved by at most 1.13e-6, as
+        T-170's padding (S1) is; the arrangement and its 2.05e-03 below T-174 are T-254's,
+        scored S3 there. No lower bound or optimum.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October review
+        (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md), lane
+        bold-ritchie-rv-polk, confirming the draft S1 of the stage 1 triage (think-pg1y) and
+        giving 130's margin against T-254 (RV-5)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 846 2026-10-30]'
+      published: '2026-10-30'
+    evidence:
+    - E-mishapolk-846-certificate-report
+    - E-mishapolk-846-exact-feasibility
+    - E-mishapolk-846-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue846-2026-10-30/README.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n130.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n130.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n130.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l2_1031.py
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n130.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/out/rv-check.jsonl
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/out/rv-controls.jsonl
+    notes: >-
+      A separate complete repository replay is retained for the issue's fourteen
+      certificates, 130 among them: 14 positives and 28 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 2149266 pair
+      decisions; summed over the 42 jobs, the receipt records 338.14 route CPU seconds and
+      542.47 job wall seconds, the longest job 51.24 seconds. At 130 every wall is cleared
+      by at least 9.66e-15 and every pair by at least 1.82e-14, and the packet's sharp
+      controls (receipts/sharp-controls-n130.json) accepted each control at exact contact,
+      margin 0, on both routes and refused each 1e-30 past it.
+
+      At n = 130 the certificate is below the case's ceiling when reported (Nate
+      Chaoweeraprasit (itsnaka), improved by Siddharth Gupta, PingYou Ltd, T-174) by
+      2.05e-03 and below T-254 (#843) (Francisco Couzo, after Chaoweeraprasit, Gupta and
+      PingYou Ltd) by 2.08e-12; it is the smallest report at 130. Its print,
+      11.902430645983, differs from T-254's, 11.902430645985, so the 23 October restatement
+      ruling's words do not reach it (RV-6). The ledger of 31 October for this pass
+      (campaign/issue-intake/upper-bounds-843-846-20261031) records it after #843, whose
+      time it follows by two days and from whose file its header says it derives.
+
+      Measured pose by pose (measure/identity-n130.json in the packet; a measurement, which
+      decides nothing), nearest centres pair it one to one with #843's packing under the
+      identity, 0 squares beyond 1e-3 and 14 beyond 1e-9, the largest move 1.129810e-6 and
+      turn 5.58e-05 degrees.
+
+      The 31 October review's clean-room checker (E-mishapolk-846-review-exact-feasibility)
+      decided the certificate on two exact routes, every wall and every pair, and seven
+      mutants at exact contact and 1e-60 past it as required; its least wall clearance and
+      least pair gap equal the maintained routes'.
+
+      The source's own checker was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+
+      The case at 130 adopted this certificate as its house best packing in the pass of 31
+      October 2026, from T-174, which stays retained as history, with the packing's credit
+      Francisco Couzo's (T-254), found from PR #574's, and the re-solve Polkovskyi's. Both
+      strong generators decided the new witness in the same pull request
+      (cases/regularized_drawings/think-3guf-2026-10-31): grid-slack's 5-degree view is
+      drawn, at the witness's side; Evan Daniel's regularizer solved the witness to a KKT
+      local minimum 2.50e-13 below its side, a register candidate (think-ruu2) that is not
+      adopted here.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 31 October, is
+      retained. It is the smallest validated side at 130, and the case adopted it there on
+      31 October 2026 under the house rule, with the packing's credit Couzo's (T-254) and
+      the re-solve Polkovskyi's, and both strong generators' regularization of the new
+      house. The regularizer's solved view, 2.50e-13 below this side, waits for its own
+      registration and review (think-ruu2). The review's questions for the author hold no
+      rung.
+    regularizations:
+    - n: 130
+      of: T-254
+      by: '[Mishapolk issue 846 2026-10-30]'
+      method: >-
+        a dilation by dilate_cert.py, delta 2e-14, of the source's isolated_lab/tmp_couzo_noalm.txt,
+        as its header says, below the side of Couzo's certificate
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n130.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.13e-06
+        max_turn_deg: 5.58e-05
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong sub-agent tier tbd-strong at the xhigh reasoning setting),
+        the stage 4 mathematical review lane of issue 846 and the commits of 23 October
+        (bold-ritchie-rv-polk, think-ikku), prompted separately from the import lane
+        (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 130 of issue 846's certificate: decided again by a
+        clean-room exact checker on two routes with sharp mutants at 1e-60; the maintained
+        replay re-run; the side against T-254 and its print; the identity, contact structure
+        and gap distribution against T-254's certificate; credit, report order and the
+        significance.
+      verdict: accepted
+      covers: [T-259]
+  - id: T-260
+    kind: upper-bound
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: >-
+      Polkovskyi's sub-print re-certifications at 105, 146, 156, 229 and 308, 1e-41 to 1e-21 below each
+    claim: >-
+      Five complete rational source certificates of issue 846 report finite upper-bound
+      improvements at the exact sides they state: s(105) <=
+      10.789303783742975392483567321744, s(146) <= 12.583782190151860342291508597077, s(156)
+      <=
+      648958292691713822691804519015415761935308555406679/50000000000000000000000000000000000000000000000000,
+      s(229) <= 15.650161513876431064008548865321 and s(308) <=
+      17.997149121270908735152160752315. They lie 1e-21 to 1e-41 below the houses'
+      certificates, T-229 at 105 and T-186 at 156, both Polkovskyi's own, and T-187, T-225
+      and T-221, Evan Daniel's, at 146, 229 and 308: at 105, 146, 229 and 308 the house
+      certificate with every square unchanged and its side lowered by exactly 1e-21, and at
+      156 by exactly 1e-41 (RV-2, RV-3).
+
+      Each is a sub-print re-certification of the house certificate at its count: the 31
+      October review measured the margin as the house certificate's padding, the contact
+      side unchanged, and no new arrangement. The owner's ruling of 23 October (think-fwa9)
+      makes such re-certifications restatements, and the record applies it beyond the corpus
+      only; whether it reaches counts inside the corpus is the owner's question (think-ikku,
+      RV-1 of the review), and it is recorded as a question, not a verdict. Until the answer
+      the entry stays below the stage 4 exit and no count is adopted; the review accepted
+      every certificate for finite feasibility. These counts were registered on #852's
+      branch within T-259, as the review read it, and are split from it so that the question
+      holds only them.
+
+      The issue says every certificate yields valid and strictly valid, with positive wall
+      and pair margin signs, under verify_bound_certificate.py --strict, Evan Daniel's MIT
+      separating-axis verifier with Francisco Couzo's modifications, byte-identical to the
+      copy the issue-678 packet retains, and states the least wall and pair clearances of
+      each: 4e-21 and 1e-20 at 105, 146, 229 and 308, and 4e-41 and 1e-40 at 156. Its table
+      states larger margins at 156, 229 and 308 than the record's standing sides allow
+      (RV-7). Those statements are the author's; no source program ran here.
+
+      Credit each packing to its finder, as the register credits the house it re-certifies,
+      and Mykhailo Polkovskyi (Mishapolk,
+      https://github.com/Mishapolk/square-packing-records), with what the issue calls the
+      Antigravity Autonomous Research Lab, for the re-certification, as a regularization.
+      The issue reports eight more counts that the ledger of 31 October does not record:
+      182, 268 and 304 lie above each case's house, 204 and 260 above issue 845's
+      certificates, 299 above Evan Daniel's update to issue 824, and 211 and 241 restate the
+      source's own certificates first committed on 23 October.
+    scope:
+      n_values:
+      - 105
+      - 146
+      - 156
+      - 229
+      - 308
+    verification: V0
+    confirmation: C1
+    significance:
+      score: 1
+      rationale: >-
+        Sub-print re-certifications of the house certificates at n = 105, 146, 156, 229 and
+        308, 1.00e-41 to 1.00e-21 below them: the side lowered with every square unchanged,
+        the house certificate's padding, as T-170's (S1) is. No lower bound or optimum.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October review
+        (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md), lane
+        bold-ritchie-rv-polk, confirming the draft S1 of the stage 1 triage (think-pg1y)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 846 2026-10-30]'
+      published: '2026-10-30'
+    evidence:
+    - E-mishapolk-846-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-issue846-2026-10-30/README.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n105.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n146.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n156.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n229.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n308.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n105.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n146.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n156.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n229.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n308.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n105.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n146.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n156.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n229.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n308.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l2_1031.py
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n105.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n146.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n156.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n229.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n308.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/out/rv-check.jsonl
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/out/rv-controls.jsonl
+    notes: >-
+      A separate complete repository replay is retained for the issue's fourteen
+      certificates, these five among them: 14 positives and 28 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 2149266 pair
+      decisions; summed over the 42 jobs, the receipt records 338.14 route CPU seconds and
+      542.47 job wall seconds, the longest job 51.24 seconds. Every wall is cleared by at
+      least 4.00e-41 and every pair by at least 9.99e-41.
+
+      The packet's sharp controls (receipts/sharp-controls-nNNN.json, one per count)
+      accepted each control at exact contact, margin 0, on both routes and refused each
+      1e-30 past it. At 156 that epsilon is larger than the certificate's margins, 4e-41 at
+      the walls and 1e-40 between pairs (RV-8); the 31 October review's own mutants at 1e-60
+      lie below every margin and refuse past contact at all five counts.
+
+      At n = 105 the certificate is below the case's ceiling (Ryan Xu, improved by Francisco
+      Couzo, PingYou Ltd, Mishapolk, T-229) by 1.00e-21; at 146 (Evan Daniel, T-187) by
+      1.00e-21; at 156 (Daniil Ostashev, improved by Francisco Couzo, PingYou Ltd,
+      Mishapolk, T-186) by 1.00e-41; at 229 (Evan Daniel, T-225) by 1.00e-21; and at 308
+      (Evan Daniel, T-221) by 1.00e-21. Each rounds up to the house's 12-place print. The
+      ledger of 31 October for this pass
+      (campaign/issue-intake/upper-bounds-843-846-20261031) records each, since the
+      restatement ruling is applied beyond the corpus only.
+
+      Measured pose by pose (measure/ in the packet; a measurement, which decides nothing):
+      at each of the five counts nearest centres pair it one to one with the house's packing
+      under the identity, no square moves beyond 1e-9 and the largest move is 0. The 31
+      October review found every centre and basis equal to the house witness's digit for
+      digit.
+
+      The issue's other eight certificates, at 182, 204, 211, 241, 260, 268, 299 and 304,
+      are compared in the packet's claim record and replayed; the ledger records none of
+      them (182, 268 and 304 above the house, 204 and 260 above #845, 299 above Evan
+      Daniel's update to #824, and 211 and 241 the source's own 23 October certificates,
+      which T-253 records).
+
+      The source's own checker was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+    next_rung: >-
+      Held for the owner's question (think-ikku): whether the 23 October restatement ruling
+      reaches counts inside the corpus. If it does, the entry is withdrawn and no house
+      moves; if it does not, the replay and review evidence are entered, both rungs rise to
+      V3 and C3, and each count is adopted under the house rule with both strong generators'
+      regularization. The 31 October review accepted every certificate for finite
+      feasibility and recommends reading them as restatements.
+    unfinished_confirmations:
+    - what: >-
+        The owner's answer to whether the 23 October restatement ruling reaches counts
+        inside the corpus (RV-1 of the 31 October review); then, if the counts stay
+        recorded, the replay and review evidence already run, entered as the stage 4 exit
+      rung: C3
+      link: think-ikku
+      estimated_cost:
+        cpu_hours: 0.01
+        cpu_hours_high: 0.02
+        basis: >-
+          the replay and the review's checker ran on 31 October and their receipts are
+          retained; what remains is records work
+        priced: '2026-10-31'
+    regularizations:
+    - n: 105
+      of: T-229
+      by: '[Mishapolk issue 846 2026-10-30]'
+      method: >-
+        the house certificate with every square unchanged and its side lowered by exactly
+        1e-21, as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n105.json
+        one_to_one: true
+        moved: 0
+        max_move: 0.0
+        max_turn_deg: 0.0
+    - n: 146
+      of: T-187
+      by: '[Mishapolk issue 846 2026-10-30]'
+      method: >-
+        the house certificate with every square unchanged and its side lowered by exactly
+        1e-21, as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n146.json
+        one_to_one: true
+        moved: 0
+        max_move: 0.0
+        max_turn_deg: 0.0
+    - n: 156
+      of: T-186
+      by: '[Mishapolk issue 846 2026-10-30]'
+      method: >-
+        the house certificate with every square unchanged and its side lowered by exactly
+        1e-41, as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n156.json
+        one_to_one: true
+        moved: 0
+        max_move: 0.0
+        max_turn_deg: 0.0
+    - n: 229
+      of: T-225
+      by: '[Mishapolk issue 846 2026-10-30]'
+      method: >-
+        the house certificate with every square unchanged and its side lowered by exactly
+        1e-21, as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n229.json
+        one_to_one: true
+        moved: 0
+        max_move: 0.0
+        max_turn_deg: 0.0
+    - n: 308
+      of: T-221
+      by: '[Mishapolk issue 846 2026-10-30]'
+      method: >-
+        the house certificate with every square unchanged and its side lowered by exactly
+        1e-21, as the 31 October review measured it (the source states no method)
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n308.json
+        one_to_one: true
+        moved: 0
+        max_move: 0.0
+        max_turn_deg: 0.0
+    reviews:
+    - path: docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong sub-agent tier tbd-strong at the xhigh reasoning setting),
+        the stage 4 mathematical review lane of issue 846 and the commits of 23 October
+        (bold-ritchie-rv-polk, think-ikku), prompted separately from the import lane
+        (bold-ritchie-l2), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-31'
+      scope: >-
+        Finite feasibility at n = 105, 146, 156, 229 and 308 of issue 846's certificates:
+        decided again by a clean-room exact checker on two routes with sharp mutants at
+        1e-60; the maintained replay re-run; the sides against the houses and their prints;
+        the identity against each house's packing; whether each is a restatement under the
+        23 October ruling, put to the owner (RV-1).
+      verdict: accepted
+      covers: [T-260]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
@@ -36352,17 +38089,18 @@ regularized_drawings:
         max_turn_deg: 4.72707
       view: packing/atlas/known-best/regularized/n-129-regularized.yaml.gz
     - n: 130
-      of: T-174
+      of: T-259
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.236129e-94
-        max_turn_deg: 0.0
+        moved: 9
+        max_move: 0.02716758
+        max_turn_deg: 1.84033
       view: packing/atlas/known-best/regularized/n-130-regularized.yaml.gz
     - n: 131
       of: T-174
@@ -36494,18 +38232,18 @@ regularized_drawings:
         max_turn_deg: 3.43775e-34
       view: packing/atlas/known-best/regularized/n-171-regularized.yaml.gz
     - n: 172
-      of: T-174
+      of: T-257
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 3
-        max_move: 0.004015517
-        max_turn_deg: 4.54359e-19
+        moved: 49
+        max_move: 0.09865514
+        max_turn_deg: 1.06934
       view: packing/atlas/known-best/regularized/n-172-regularized.yaml.gz
     - n: 175
       of: T-186
@@ -36664,18 +38402,18 @@ regularized_drawings:
         max_turn_deg: 1.61089
       view: packing/atlas/known-best/regularized/n-199-regularized.yaml.gz
     - n: 204
-      of: T-231
+      of: T-257
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 45
-        max_move: 0.2730522
-        max_turn_deg: 0.0818614
+        moved: 36
+        max_move: 0.3298194
+        max_turn_deg: 1.70663
       view: packing/atlas/known-best/regularized/n-204-regularized.yaml.gz
     - n: 206
       of: T-174
@@ -36816,18 +38554,18 @@ regularized_drawings:
         max_turn_deg: 4.149e-35
       view: packing/atlas/known-best/regularized/n-230-regularized.yaml.gz
     - n: 232
-      of: T-186
+      of: T-256
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 12
-        max_move: 0.06057722
-        max_turn_deg: 0.0114592
+        moved: 37
+        max_move: 0.05499795
+        max_turn_deg: 0.869803
       view: packing/atlas/known-best/regularized/n-232-regularized.yaml.gz
     - n: 234
       of: T-155
@@ -36941,17 +38679,18 @@ regularized_drawings:
         max_turn_deg: 0.267445
       view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
     - n: 260
-      of: T-225
+      of: T-257
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.251e-19
-        max_turn_deg: 0.0
+        moved: 49
+        max_move: 0.4395523
+        max_turn_deg: 0.104723
       view: packing/atlas/known-best/regularized/n-260-regularized.yaml.gz
     - n: 261
       of: T-174
@@ -37121,18 +38860,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-292-regularized.yaml.gz
     - n: 293
-      of: T-155
+      of: T-257
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: []
-      side: solved
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 27
-        max_move: 0.03448276
-        max_turn_deg: 0.0
+        moved: 52
+        max_move: 0.4395523
+        max_turn_deg: 0.104723
       view: packing/atlas/known-best/regularized/n-293-regularized.yaml.gz
     - n: 297
       of: T-174
@@ -37147,6 +38886,19 @@ regularized_drawings:
         max_move: 2.379619e-90
         max_turn_deg: 2.96678e-90
       view: packing/atlas/known-best/regularized/n-297-regularized.yaml.gz
+    - n: 299
+      of: T-258
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 63
+        max_move: 0.3155744
+        max_turn_deg: 0.000172571
+      view: packing/atlas/known-best/regularized/n-299-regularized.yaml.gz
     - n: 301
       of: T-098
       by: project
@@ -37231,17 +38983,16 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-306-regularized.yaml.gz
     - n: 307
-      of: T-174
+      of: T-256
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 6
-        max_move: 0.0630177
+        moved: 17
+        max_move: 0.2004715
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-307-regularized.yaml.gz
     - n: 308

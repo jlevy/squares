@@ -1,0 +1,27 @@
+======== 232
+house-T186: side 15.764174317486596  tilted beyond 1 deg: 61
+c844: side 15.761661759481330  tilted beyond 1 deg: 81
+{"symmetry": "diagonal", "one_to_one_nearest": false, "beyond_0.1": 91, "beyond_0.01": 122, "beyond_1e-3": 232, "beyond_1e-9": 232, "largest_move": 1.090293419279039, "bottleneck": 1.037687879408852, "turned_beyond_1deg": 90, "largest_turn_deg": 44.99927856558662, "a": "house-T186", "b": "c844", "side_b_minus_a": -0.002512558005266701}
+======== 260
+house-T225: side 16.645753250519814  tilted beyond 1 deg: 60
+a5: side 16.638532792319296  tilted beyond 1 deg: 104
+c844: side 16.637029558870974  tilted beyond 1 deg: 100
+d845: side 16.633982502121885  tilted beyond 1 deg: 104
+p846: side 16.645753250519814  tilted beyond 1 deg: 60
+{"symmetry": "rot180", "one_to_one_nearest": false, "beyond_0.1": 168, "beyond_0.01": 198, "beyond_1e-3": 260, "beyond_1e-9": 260, "largest_move": 1.0074390961176694, "bottleneck": 0.9632378031691182, "turned_beyond_1deg": 90, "largest_turn_deg": 27.39175491695123, "a": "house-T225", "b": "a5", "side_b_minus_a": -0.007220458200517632}
+{"symmetry": "antidiagonal", "one_to_one_nearest": false, "beyond_0.1": 186, "beyond_0.01": 205, "beyond_1e-3": 260, "beyond_1e-9": 260, "largest_move": 1.0885324635805549, "bottleneck": 0.9619963508003595, "turned_beyond_1deg": 84, "largest_turn_deg": 27.0878879436955, "a": "house-T225", "b": "c844", "side_b_minus_a": -0.008723691648839241}
+{"symmetry": "identity", "one_to_one_nearest": false, "beyond_0.1": 154, "beyond_0.01": 202, "beyond_1e-3": 260, "beyond_1e-9": 260, "largest_move": 1.00304987669028, "bottleneck": 0.9648892989875453, "turned_beyond_1deg": 77, "largest_turn_deg": 27.30987553404634, "a": "house-T225", "b": "d845", "side_b_minus_a": -0.011770748397928212}
+{"symmetry": "identity", "one_to_one_nearest": true, "beyond_0.1": 0, "beyond_0.01": 0, "beyond_1e-3": 0, "beyond_1e-9": 0, "largest_move": 0.0, "bottleneck": 0.0, "turned_beyond_1deg": 0, "largest_turn_deg": 0.0, "a": "house-T225", "b": "p846", "side_b_minus_a": -1e-21}
+{"symmetry": "rot270", "one_to_one_nearest": false, "beyond_0.1": 170, "beyond_0.01": 216, "beyond_1e-3": 257, "beyond_1e-9": 260, "largest_move": 1.0771858692804286, "bottleneck": 1.0662368317467268, "turned_beyond_1deg": 119, "largest_turn_deg": 44.4242794409667, "a": "a5", "b": "c844", "side_b_minus_a": -0.0015032334483216097}
+{"symmetry": "antidiagonal", "one_to_one_nearest": false, "beyond_0.1": 187, "beyond_0.01": 209, "beyond_1e-3": 260, "beyond_1e-9": 260, "largest_move": 1.0014642865697598, "bottleneck": 0.9554285710003643, "turned_beyond_1deg": 145, "largest_turn_deg": 44.04021115330971, "a": "a5", "b": "d845", "side_b_minus_a": -0.00455029019741058}
+{"symmetry": "rot180", "one_to_one_nearest": false, "beyond_0.1": 168, "beyond_0.01": 198, "beyond_1e-3": 260, "beyond_1e-9": 260, "largest_move": 1.0074390961176694, "bottleneck": 0.9632378031691182, "turned_beyond_1deg": 90, "largest_turn_deg": 27.39175491695123, "a": "a5", "b": "p846", "side_b_minus_a": 0.007220458200517632}
+{"symmetry": "rot270", "one_to_one_nearest": false, "beyond_0.1": 200, "beyond_0.01": 233, "beyond_1e-3": 260, "beyond_1e-9": 260, "largest_move": 1.0970964204982527, "bottleneck": 1.07824364992201, "turned_beyond_1deg": 129, "largest_turn_deg": 42.64302148660816, "a": "c844", "b": "d845", "side_b_minus_a": -0.003047056749088971}
+{"symmetry": "antidiagonal", "one_to_one_nearest": false, "beyond_0.1": 186, "beyond_0.01": 205, "beyond_1e-3": 260, "beyond_1e-9": 260, "largest_move": 1.0885324635805549, "bottleneck": 0.9619963508003595, "turned_beyond_1deg": 84, "largest_turn_deg": 27.0878879436955, "a": "c844", "b": "p846", "side_b_minus_a": 0.008723691648839241}
+{"symmetry": "identity", "one_to_one_nearest": false, "beyond_0.1": 154, "beyond_0.01": 202, "beyond_1e-3": 260, "beyond_1e-9": 260, "largest_move": 1.00304987669028, "bottleneck": 0.9648892989875453, "turned_beyond_1deg": 77, "largest_turn_deg": 27.309875534046345, "a": "d845", "b": "p846", "side_b_minus_a": 0.011770748397928212}
+======== 307
+house-T174: side 17.980862784054690  tilted beyond 1 deg: 103
+a5: side 17.979251283692587  tilted beyond 1 deg: 107
+c844: side 17.979251283688026  tilted beyond 1 deg: 107
+{"symmetry": "mirror y", "one_to_one_nearest": false, "beyond_0.1": 91, "beyond_0.01": 136, "beyond_1e-3": 306, "beyond_1e-9": 307, "largest_move": 1.1377640435199692, "bottleneck": 0.9792903391765099, "turned_beyond_1deg": 121, "largest_turn_deg": 34.03755091253932, "a": "house-T174", "b": "a5", "side_b_minus_a": -0.0016115003621055021}
+{"symmetry": "rot180", "one_to_one_nearest": false, "beyond_0.1": 91, "beyond_0.01": 138, "beyond_1e-3": 306, "beyond_1e-9": 307, "largest_move": 1.1377640434401084, "bottleneck": 0.9769458769688395, "turned_beyond_1deg": 121, "largest_turn_deg": 34.037550917370794, "a": "house-T174", "b": "c844", "side_b_minus_a": -0.0016115003666659058}
+{"symmetry": "mirror x", "one_to_one_nearest": true, "beyond_0.1": 0, "beyond_0.01": 13, "beyond_1e-3": 35, "beyond_1e-9": 40, "largest_move": 0.016671096219493448, "bottleneck": 0.016671096219493448, "turned_beyond_1deg": 0, "largest_turn_deg": 0.5524571735823294, "a": "a5", "b": "c844", "side_b_minus_a": -4.560403871117057e-12}

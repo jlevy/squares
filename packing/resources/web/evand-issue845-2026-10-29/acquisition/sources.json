@@ -1,0 +1,75 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-31T06:10Z",
+  "git_scope": "Blobless clone of evand/square-packing fetched on 31 October 2026 for the import of issue #845, and a sparse checkout of 0e76d9f (committed 2026-10-29T04:44:41Z), the repository's head when fetched. The four certificate sets are first committed in d2d5dd9 (2026-10-29T04:33:59Z, 'candidates: s(172), s(204), s(260), s(293) certificates for jlevy registration (10-28)'), the commit issue #845 names, 12 minutes 41 seconds before the issue was opened; their bytes are unchanged at the pin. Retained: the licence, the credits, and the 21 files of the s172_1028, s204_1028, s260_1028 and s293_1028 sets under search/packer/candidates/. The two exact checkers the issue names are pinned against the identical copies the n183 packet retains. GitHub's activity log was not readable from this session, so no push time is recorded. The rest of the tree is pinned by the commit; no source program was executed.",
+  "sources": [
+    {
+      "id": "evand-issue845-2026-10-29",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+      "source_commit": "0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+      "committed_utc": "2026-10-29T04:44:41Z",
+      "git_tree": "2e7cf9f7aca20a0ab094c4702a466f0e80e1c29e",
+      "archived_path": "packing/resources/web/evand-issue845-2026-10-29/source",
+      "subtree_manifest": "packing/resources/web/evand-issue845-2026-10-29/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/candidates/s172_1028.cert",
+        "search/packer/candidates/s172_1028.exact.txt",
+        "search/packer/candidates/s172_1028.input.txt",
+        "search/packer/candidates/s172_1028.json",
+        "search/packer/candidates/s172_1028_prior.json",
+        "search/packer/candidates/s172_1028_regularized.cert",
+        "search/packer/candidates/s172_1028_regularized.json",
+        "search/packer/candidates/s172_1028_vs_prior.json",
+        "search/packer/candidates/s204_1028.cert",
+        "search/packer/candidates/s204_1028.exact.txt",
+        "search/packer/candidates/s204_1028.input.txt",
+        "search/packer/candidates/s204_1028.json",
+        "search/packer/candidates/s204_1028_prior.json",
+        "search/packer/candidates/s260_1028.cert",
+        "search/packer/candidates/s260_1028.input.txt",
+        "search/packer/candidates/s260_1028.json",
+        "search/packer/candidates/s260_1028_prior.json",
+        "search/packer/candidates/s293_1028.cert",
+        "search/packer/candidates/s293_1028.input.txt",
+        "search/packer/candidates/s293_1028.json",
+        "search/packer/candidates/s293_1028_prior.json"
+      ],
+      "subtree_file_count": 25,
+      "subtree_total_bytes": 358124,
+      "retained_file_count": 23,
+      "retained_total_bytes": 351622,
+      "compressed": [
+        "source/search/packer/candidates/s172_1028_vs_prior.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two standalone exact checkers, which the issue names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two standalone exact checkers, which the issue names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained, blob 52cf89d, unchanged since 8a8879a). CREDITS.md says the repository's work was 'Produced by Claude (Anthropic) in a single session under human direction'; the certificate's commit carries a Co-Authored-By trailer naming Claude.",
+      "claims": [
+        "search/packer/candidates/s172_1028.cert states s(172) <= 2723587139676283080823463207799/(2*10^29) = 13.617935698381415404...; issue #845 (opened 2026-10-29T04:46:40Z by evand) reports 13.617935698382, 1.05e-3 below the register's 13.618988956900 (Francisco Couzo), as an exact KKT point, a local minimum of S strict modulo 69 exact flat motions by numerical evidence at 80 digits, and a new packing (another local minimum from the register's) found from the s(199) record of Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta, by an L-strip removal; s172_1028_regularized.cert is a regularized view at the same side.",
+        "s204_1028.cert states s(204) <= 14807627471881579627471866771703/10^30 = 14.807627471881579627...; the issue reports 14.807627471882, 1.02e-3 below the register's 14.808642830514, a dilation certificate of s204_1028.input.txt (the exact solver did not converge), and a new packing found from Daniil Ostashev's s(176) packing (#575) used as a seed at 204.",
+        "s260_1028.cert states s(260) <= 8316991251060941991251052624833/(5*10^29) = 16.633982502121883982...; the issue reports 16.633982502122, below #844's 16.637029558871 and the register's 16.645753250520, a dilation certificate, and a new packing whose binding block came from a search started from Kirill T (kirilltym)'s s(260) in his public Kaggle notebook 'Square Packing Lab | CPU/CUDA/MPS' (side 16.638543986, 26 October).",
+        "s293_1028.cert states s(293) <= 8816991251061390991251052573823/(5*10^29) = 17.633982502122781982...; the issue reports 17.633982502123, 1.64e-4 below the register's 17.634146341464 (David Ellsworth's 723/41), a dilation certificate of the 260 packing plus one L-shaped strip (Friedman's L step), with the same credit as 260.",
+        "The issue says the source's two exact checkers, search/exact/verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), both report VALID on all five certificate files, and that they share an author and the certificate format; it quotes Kaggle per-puzzle leaderboard sides at 172, 204 and 293 below these, with no coordinates. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

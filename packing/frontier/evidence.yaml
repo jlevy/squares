@@ -52589,13 +52589,176 @@ evidence:
       both routes, 267306 pair decisions; summed over the 3 jobs, the receipt records 46.84
       route CPU seconds and 145.62 job wall seconds, the longest job 59.72 seconds. Every
       positive clears every wall by at least 4.99e-13 and every pair by at least 9.99e-13,
-      and the packet's sharp controls meet those margins on both routes. Independent review
-      and confirmation remain pending (think-8hjz). The source's own checkers were not run
+      and the packet's sharp controls meet those margins on both routes. The replay is E-evand-n299-exact-feasibility and the 31 October review's own checker E-evand-n299-review-exact-feasibility. The source's own checkers were not run
       here. The certificate is a dilation of a binary64 packing; the source's exact solver
       did not converge to a KKT point, and the issue says local optimality is not
       established. The commit carries a Co-Authored-By trailer naming Claude, and the
       source's CREDITS.md says its work was produced by Claude (Anthropic) under human
       direction. No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-824-299-update.md decided this
+        certificate again as the start of the update and accepted it for finite
+        feasibility, as recorded only: the update's certificate is 2.46e-3 smaller,
+        so the house rule never adopts it (N-6). Its clean-room run is
+        E-evand-n299-review-exact-feasibility, and the replay
+        E-evand-n299-exact-feasibility.
+  - id: E-evand-n299-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [299]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        the certificate parser and half-angle map of
+        devtools.evand_exact_certificates (the evand-cert adapter the packet's
+        acquisition/report.json names), through which both maintained routes read
+        the certificates: its reader's line filter and the corners from which the
+        independent route decides (Pose.corners) are transcribed from Evan Daniel's
+        verify_cert.py and verify_cert2.py, the checkers the certificates name
+      - >-
+        CPython's fractions.Fraction arithmetic, which both of Daniel's checkers use
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n299 2026-10-26]'
+    certificate: packing/resources/web/evand-n299-2026-10-26/source/search/packer/candidates/s299-1025.cert
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-n299-2026-10-26 certify wrote the receipt on 26 October 2026 from the packet's retained
+      certificates, and check --replay decides all 3 retained jobs, each certificate
+      with its duplicate-square and outside-container controls, again through both
+      maintained routes and holds each to its retained row; check-claims rebuilds the
+      frozen comparison. python -m devtools.upper_bound_reports evand-n299-2026-10-26
+      sharp-controls wrote the packet's sharp controls, all as expected on both
+      routes: contact accepted at margin 0 and refused 1e-30 past it. The 31 October
+      stage 4 review ran decide-job --control positive on both routes into scratch
+      after its own checker had decided
+      (docs/project/reviews/review-2026-10-31-daniel-824-299-update.md; receipts in
+      the review's out/maintained/): both routes passed over 44,551 pairs, with least
+      pair gap and containment clearance equal to the review's as exact fractions.
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 299 that T-248 cites, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in
+          the packet's receipt
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-824-299-update.md accepted the
+        certificate for finite feasibility, as recorded only, since the update's
+        certificate is smaller (N-6). The replay reads it through the evand-cert
+        reader, which transcribes two expressions of the producer's own checkers, so
+        T-248's independent re-implementation rests on
+        E-evand-n299-review-exact-feasibility.
+    limitations: >-
+      A replay of the one retained certificate by two maintained exact routes that
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the producer the evand-cert reader's line
+      filter and corner construction. The receipt's 3 jobs hold 267306 pair decisions,
+      46.84 route CPU seconds and 145.62 job wall seconds. Every wall is cleared by at
+      least 4.99e-13 and every pair by at least 9.99e-13; the receipt's controls are
+      gross, and the packet's sharp controls meet those margins. The source's own
+      checkers were not run here. Finite feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-evand-n299-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [299]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n299 2026-10-26]'
+    certificate: packing/resources/web/evand-n299-2026-10-26/source/search/packer/candidates/s299-1025.cert
+    replay: >-
+      With the project interpreter (Python 3.14.7) in isolated mode on a shared
+      four-core host, 31 October 2026, from the packet evand-issue845-2026-10-29's
+      review/review-2026-10-31/: python -I programs/exact_check.py on s299-1025.cert
+      (out/check-s299-1025.json), deciding every wall and all 44,551 pairs over Q by
+      separating axes with no distance filter and again by exact clipped areas (667
+      pairs clipped), both valid in 3.9 CPU seconds; the least wall clearance 5e-13
+      and the least pair gap 1e-12 (squares 3 and 4, from 0). programs/controls.py
+      decided ten sharp mutations by both methods, all as expected (out/controls.txt).
+    replay_status: passed
+    verifiers:
+      - V-evand-1031-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 299 that T-248 cites: every wall and every pair,
+          by two exact methods that share only the reader and the corner
+          construction, with ten sharp controls decided by both
+        checked: 1
+        of: 1
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 845 and the issue 824
+            update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+            tier (tbd-strong) at the xhigh reasoning setting
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits name Claude as co-author, and its CREDITS.md says
+          its work was produced by Claude under the author's direction. The
+          checker shares no code with the source's checkers or with this
+          repository's maintained routes, none of which its author read; the
+          source's binary64 inputs and 80-digit points were read to compare.
+    independence_record: packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-824-299-update.md decided
+        T-248's certificate as the packing the update continues and accepted it for
+        finite feasibility only, as recorded only (N-6).
+    limitations: >-
+      A clean-room decision of the one retained certificate by two exact methods in
+      one program, which share its token reader and its corner construction; under the
+      reversed rotation sense, 90 pairs overlap. Finite feasibility only.
+    source_reviewed: '2026-10-31'
   - id: E-n012-evand-s12h-lean-report
     claim: lower-bound
     scope: {n_values: [12]}
@@ -52883,4 +53046,1291 @@ evidence:
       correctly rounded binary64 arithmetic on the host. The --d4 sweep rests on the D4
       reduction, which the --full sweep does not use. Both sweeps reach depth 39 of
       zmx2's limit of 40. No Lean statement exists for this cover.
+    source_reviewed: '2026-10-31'
+  - id: E-mishapolk-1023-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 154
+      - 155
+      - 183
+      - 211
+      - 227
+      - 236
+      - 237
+      - 241
+      - 271
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk refinements 2026-10-23]'
+    certificate: packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-31'
+    limitations: >-
+      This atom records the source author's report of 9 exact rational certificates at 52aa267.
+      A separate complete repository replay is retained for n = 88, 126, 152, 154, 155, 183, 211,
+      227, 236, 237, 241, 270 and 271: 13 positives and 26 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 1613220 pair decisions; summed over
+      the 39 jobs, the receipt records 237.81 route CPU seconds and 256.17 job wall seconds, the
+      longest job 11.86 seconds. Every positive clears every wall by at least 5.00e-31 and every
+      pair by at least 9.99e-31. The packet's sharp controls, at 1e-30, take each route to exact contact and 1e-30 past it, twice the least wall clearance; the review's own controls at 1e-60 lie below every margin.
+      Whether the 23 October restatement ruling reaches counts inside the corpus is the owner's question (RV-1 of the 31 October review, think-ikku), so the replay's evidence entry and the stage 4 exit wait on the answer; the review accepted every certificate for finite feasibility. The source's own checkers
+      were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 846 and the
+        commits of 23 October (bold-ritchie-rv-polk, think-ikku), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md accepted
+        every certificate for finite feasibility, with no defect. Each of the nine
+        is a sub-print re-certification of the house certificate at its count, its
+        margin the house certificate's padding, and whether the 23 October
+        restatement ruling reaches such counts inside the corpus is the owner's
+        question (RV-1, think-ikku), which holds their adoption and no certificate.
+        Its clean-room run is E-mishapolk-1023-review-exact-feasibility, and the
+        replay E-mishapolk-1023-exact-feasibility.
+  - id: E-couzo-843-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 130
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo n130 2026-10-27]'
+    certificate: packing/resources/web/couzo-issue843-2026-10-28/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-31'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 712c6a6. A
+      separate complete repository replay is retained for n = 130: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 50310 pair decisions;
+      summed over the 3 jobs, the receipt records 5.1 route CPU seconds and 8.34 job wall seconds,
+      the longest job 3.39 seconds. Every positive clears every wall by at least 1.00e-15 and every
+      pair by at least 2.07e-13. The packet's sharp controls meet those margins on both routes.
+      The replay is E-couzo-843-exact-feasibility and the 31 October review's own checker E-couzo-843-review-exact-feasibility. The source's own checkers
+      were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-843-130.md accepted the
+        certificate for finite feasibility, with no blocking or major finding. Its
+        findings are on the record's wording (F-1, F-3), the replay's relation (F-2)
+        and the unpublished intermediate packings (F-4). Its clean-room run is
+        E-couzo-843-review-exact-feasibility, and the replay
+        E-couzo-843-exact-feasibility.
+  - id: E-couzo-843-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [130]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (verify_packing,
+        which sqpack.witness.exact_verify calls), the jlevy/squares checker the
+        source's manifest at 712c6a6 names as its first checker (sqpack/verify.py at
+        37e6757), byte-identical to the branch's, SHA-256 56bc5b9f...7337
+      - >-
+        the certificate parser and half-angle map of
+        devtools.evand_exact_certificates (the evand-cert adapter), through which
+        both maintained routes read each certificate
+      - >-
+        CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo n130 2026-10-27]'
+    certificate: packing/resources/web/couzo-issue843-2026-10-28/source/certificates/n130.cert
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports couzo-issue843-2026-10-28 certify
+      --workers 2 wrote the receipt on 31 October 2026 from the packet's retained
+      certificates, and check --replay decides all 3 retained jobs, each certificate
+      with its duplicate-square and outside-container controls, again through both
+      maintained routes and holds each to its retained row; check-claims rebuilds the
+      frozen comparison. python -m devtools.upper_bound_reports
+      couzo-issue843-2026-10-28 sharp-controls wrote the packet's sharp controls, all
+      as expected on both routes: contact accepted at margin 0 and refused 1e-30 past
+      it. The 31 October stage 4 review re-ran certify and check --replay with a
+      receipt identical to the committed one apart from its timings, and its own
+      checker found the same least wall clearance, 1e-15, and least pair gap,
+      2.0762e-13 (squares 105 and 128), as exact fractions
+      (docs/project/reviews/review-2026-10-31-couzo-843-130.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 130 that T-254 cites, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in
+          the packet's receipt
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-10-31-couzo-843-130.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-843-130.md accepted the
+        certificate for finite feasibility, with no blocking or major finding. The
+        sqpack route decides through sqpack/verify.py, which the source's manifest
+        names as its first checker, so the replay shares the producer's components
+        (F-2) and T-254's independent re-implementation rests on
+        E-couzo-843-review-exact-feasibility.
+    limitations: >-
+      A replay of the one retained certificate by two maintained exact routes that
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the source its first checker, sqpack/verify.py.
+      The receipt's 3 jobs hold 50310 pair decisions, 5.1 route CPU seconds and 8.34
+      job wall seconds. Every wall is cleared by at least 1e-15 and every pair by at
+      least 2.07e-13; the receipt's two controls are gross, and the packet's sharp
+      controls meet those margins. The source's own checkers were not run here. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or
+      human oversight.
+    source_reviewed: '2026-10-31'
+  - id: E-couzo-843-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [130]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo n130 2026-10-27]'
+    certificate: packing/resources/web/couzo-issue843-2026-10-28/source/certificates/n130.cert
+    replay: >-
+      With the project interpreter (Python 3.14.7), niced, on a shared four-core host,
+      31 October 2026, from the packet couzo-issue844-2026-10-28's
+      review/review-2026-10-31/: python -I programs/check_certs.py on the six Couzo
+      certificates of this pass (out/check-all.json), its run on n130.cert alone in
+      out/check-130.json (2.2 CPU seconds): all 130 walls and 8,385 pairs decided over
+      Q by route A, separating axes on every pair, and the walls and the 280 pairs
+      whose centres lie within sqrt(2) by route B's exact clipped areas, both valid;
+      ten controls built from the tightest pair, squares 105 and 128, each decided by
+      both routes as expected. agree.py found the side, every pose, the least pair gap
+      and the least wall clearance equal to the committed receipt's two routes, 10 of
+      10.
+    replay_status: passed
+    verifiers:
+      - V-couzo-1031-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 130: every wall and every pair, by two exact
+          routes that share only the reader, with ten controls decided by both
+        checked: 1
+        of: 1
+      read: [mathematics, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 843 and 844
+            (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+            tier (tbd-strong) at the xhigh reasoning setting
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits carry a Co-Authored-By trailer naming Claude, and
+          the issues say Claude did the certification at the author's direction.
+          The checker was written from the mathematics and the certificates'
+          comment line and decided before any maintained route's or source
+          checker's code was read; its author never read the source's checkers,
+          sqpack/verify.py, check_rational_witness_independent or
+          upper_bound_reports.
+    independence_record: packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-843-130.md accepted the
+        certificate for finite feasibility only, with no blocking or major finding,
+        four minor findings (F-1 to F-4) and six notes (N-1 to N-6).
+    limitations: >-
+      A clean-room decision of the one retained certificate by two exact routes in one
+      program, which share its token reader and the counterclockwise reading of t =
+      tan(theta/2) that the certificate's comment line implies and does not state;
+      with every rotation reversed, 44 pairs overlap. The least slacks are 1e-15 at
+      the walls and 2.0762e-13 between squares 105 and 128. Finite feasibility only:
+      no lower bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-31'
+  - id: E-couzo-a5a5d76-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 260
+      - 307
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo a5a5d76 2026-10-28]'
+    certificate: packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-31'
+    limitations: >-
+      This atom records the source author's report of 2 exact rational certificates at a5a5d76.
+      A separate complete repository replay is retained for n = 260 and 307: 2 positives and 4 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 483846 pair
+      decisions; summed over the 6 jobs, the receipt records 85.7 route CPU seconds and 118.4 job
+      wall seconds, the longest job 29.31 seconds. Every positive clears every wall by at least
+      1.00e-15 and every pair by at least 1.23e-13. The packet's sharp controls meet those margins
+      on both routes. The replay is E-couzo-a5a5d76-exact-feasibility and the 31 October review's own checker E-couzo-a5a5d76-review-exact-feasibility. The source's
+      own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md accepted
+        both certificates for finite feasibility, as recorded only, with no blocking
+        or major finding: issue 844's certificates are lower at both counts. Its
+        clean-room run is E-couzo-a5a5d76-review-exact-feasibility, and the replay
+        E-couzo-a5a5d76-exact-feasibility.
+  - id: E-couzo-a5a5d76-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [260, 307]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (verify_packing,
+        which sqpack.witness.exact_verify calls), the jlevy/squares checker the
+        source's manifest at 712c6a6 names as its first checker (sqpack/verify.py at
+        37e6757), byte-identical to the branch's, SHA-256 56bc5b9f...7337
+      - >-
+        the certificate parser and half-angle map of
+        devtools.evand_exact_certificates (the evand-cert adapter), through which
+        both maintained routes read each certificate
+      - >-
+        CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo a5a5d76 2026-10-28]'
+    certificate: packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports couzo-a5a5d76-2026-10-28 certify
+      --workers 2 wrote the receipt on 31 October 2026 from the packet's retained
+      certificates, and check --replay decides all 6 retained jobs, each certificate
+      with its duplicate-square and outside-container controls, again through both
+      maintained routes and holds each to its retained row; check-claims rebuilds the
+      frozen comparison. python -m devtools.upper_bound_reports
+      couzo-a5a5d76-2026-10-28 sharp-controls wrote the packet's sharp controls, all
+      as expected on both routes: contact accepted at margin 0 and refused 1e-30 past
+      it. The 31 October stage 4 review re-ran certify and check --replay with a
+      receipt identical to the committed one apart from its timings, and its own
+      checker found the same least wall clearances and least pair gaps, 1.2316e-13 at
+      260 and 2.1198e-13 at 307, as exact fractions
+      (docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates at n = 260 and 307 that T-255 cites, every wall and
+          every pair decided by both maintained routes; the kernel's controls are
+          retained in the packet's receipt
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md accepted
+        both certificates for finite feasibility, as recorded only, with no blocking
+        or major finding. The sqpack route decides through sqpack/verify.py, which
+        the source's manifest names as its first checker (F-4), so T-255's
+        independent re-implementation rests on
+        E-couzo-a5a5d76-review-exact-feasibility.
+    limitations: >-
+      A replay of the two retained certificates by two maintained exact routes that
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the source its first checker, sqpack/verify.py.
+      The receipt's 6 jobs hold 483846 pair decisions, 85.7 route CPU seconds and
+      118.4 job wall seconds. Every wall is cleared by at least 1e-15 and every pair
+      by at least 1.23e-13; the receipt's controls are gross, and the packet's sharp
+      controls meet those margins. The source's own checkers were not run here. Finite
+      feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-couzo-a5a5d76-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [260, 307]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo a5a5d76 2026-10-28]'
+    certificate: packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/
+    replay: >-
+      With the project interpreter (Python 3.14.7), niced, on a shared four-core host,
+      31 October 2026, from the packet couzo-issue844-2026-10-28's
+      review/review-2026-10-31/: python -I programs/check_certs.py on the six Couzo
+      certificates of this pass (out/check-all.json): at 260 all 33,670 pairs by
+      separating axes and 610 by exact clipped areas, the least gap 1.2316e-13
+      (squares 93 and 112), 9.8 CPU seconds; at 307 all 46,971 pairs and 731 by area,
+      the least gap 2.1198e-13 (85 and 260), 18.5 CPU seconds; every wall cleared by
+      1e-15; both valid on both routes, and ten controls each decided by both routes
+      as expected. agree.py found the receipt's two routes equal to route A at every
+      shared number.
+    replay_status: passed
+    verifiers:
+      - V-couzo-1031-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 260 and 307: every wall and every pair, by two
+          exact routes that share only the reader, with ten controls each decided
+          by both
+        checked: 2
+        of: 2
+      read: [mathematics, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 843 and 844
+            (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+            tier (tbd-strong) at the xhigh reasoning setting
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits carry a Co-Authored-By trailer naming Claude, and
+          the issues say Claude did the certification at the author's direction.
+          The checker was written from the mathematics and the certificates'
+          comment line and decided before any maintained route's or source
+          checker's code was read; its author never read the source's checkers,
+          sqpack/verify.py, check_rational_witness_independent or
+          upper_bound_reports.
+    independence_record: packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md accepted
+        both certificates for finite feasibility only, as recorded only, with no
+        blocking or major finding, five minor findings (F-1 to F-5) and six notes
+        (N-1 to N-6).
+    limitations: >-
+      A clean-room decision of the two retained certificates by two exact routes in
+      one program, which share its token reader and the counterclockwise reading of t
+      that the comment line implies; with every rotation reversed, 147 and 124 pairs
+      overlap. Finite feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-couzo-844-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 232
+      - 260
+      - 307
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 844 2026-10-28]'
+    certificate: packing/resources/web/couzo-issue844-2026-10-28/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-31'
+    limitations: >-
+      This atom records the source author's report of 3 exact rational certificates at 712c6a6.
+      A separate complete repository replay is retained for n = 232, 260 and 307: 3 positives and
+      6 duplicate-square and outside-container controls passed their required outcomes on both routes,
+      644622 pair decisions; summed over the 9 jobs, the receipt records 71.66 route CPU seconds
+      and 121.85 job wall seconds, the longest job 19.6 seconds. Every positive clears every wall
+      by at least 1.00e-15 and every pair by at least 1.85e-13. The packet's sharp controls meet
+      those margins on both routes. The replay is E-couzo-844-exact-feasibility and the 31 October review's own checker E-couzo-844-review-exact-feasibility.
+      The source's own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md accepted the
+        three certificates for finite feasibility, with no blocking or major
+        finding: for adoption at 232 and 307, and as recorded only at 260, where
+        issue 845's certificate is lower. Its findings are on the record's wording
+        (F-1, F-3), the significance of the a5a5d76 entry (F-2), the replay's
+        relation (F-4) and the unpublished starting packings (F-5). Its clean-room
+        run is E-couzo-844-review-exact-feasibility, and the replay
+        E-couzo-844-exact-feasibility.
+  - id: E-couzo-844-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [232, 260, 307]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (verify_packing,
+        which sqpack.witness.exact_verify calls), the jlevy/squares checker the
+        source's manifest at 712c6a6 names as its first checker (sqpack/verify.py at
+        37e6757), byte-identical to the branch's, SHA-256 56bc5b9f...7337
+      - >-
+        the certificate parser and half-angle map of
+        devtools.evand_exact_certificates (the evand-cert adapter), through which
+        both maintained routes read each certificate
+      - >-
+        CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 844 2026-10-28]'
+    certificate: packing/resources/web/couzo-issue844-2026-10-28/source/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports couzo-issue844-2026-10-28 certify
+      --workers 2 wrote the receipt on 31 October 2026 from the packet's retained
+      certificates, and check --replay decides all 9 retained jobs, each certificate
+      with its duplicate-square and outside-container controls, again through both
+      maintained routes and holds each to its retained row; check-claims rebuilds the
+      frozen comparison. python -m devtools.upper_bound_reports
+      couzo-issue844-2026-10-28 sharp-controls wrote the packet's sharp controls, all
+      as expected on both routes: contact accepted at margin 0 and refused 1e-30 past
+      it. The 31 October stage 4 review re-ran certify and check --replay with a
+      receipt identical to the committed one apart from its timings, and its own
+      checker found the same least wall clearances and least pair gaps at all three
+      counts, as exact fractions
+      (docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the three certificates at n = 232, 260 and 307 that T-256 cites, every
+          wall and every pair decided by both maintained routes; the kernel's
+          controls are retained in the packet's receipt
+        checked: 3
+        of: 3
+    independence_record: docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md accepted the
+        three certificates for finite feasibility, for adoption at 232 and 307 and
+        as recorded only at 260, where issue 845's certificate is lower, with no
+        blocking or major finding. The sqpack route decides through
+        sqpack/verify.py, which the source's manifest names as its first checker
+        (F-4), so T-256's independent re-implementation rests on
+        E-couzo-844-review-exact-feasibility.
+    limitations: >-
+      A replay of the three retained certificates by two maintained exact routes that
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the source its first checker, sqpack/verify.py.
+      The receipt's 9 jobs hold 644622 pair decisions, 71.66 route CPU seconds and
+      121.85 job wall seconds. Every wall is cleared by at least 1e-15 and every pair
+      by at least 1.85e-13; the receipt's controls are gross, and the packet's sharp
+      controls meet those margins. The source's own checkers were not run here. Finite
+      feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-couzo-844-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [232, 260, 307]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 844 2026-10-28]'
+    certificate: packing/resources/web/couzo-issue844-2026-10-28/source/
+    replay: >-
+      With the project interpreter (Python 3.14.7), niced, on a shared four-core host,
+      31 October 2026, from the packet's review/review-2026-10-31/: python -I
+      programs/check_certs.py on the six Couzo certificates of this pass
+      (out/check-all.json): at 232 all 26,796 pairs by separating axes and 554 by
+      exact clipped areas, the least gap 2.1162e-13 (squares 58 and 171); at 260
+      33,670 and 618, 1.8586e-13 (61 and 91); at 307 46,971 and 699, 2.0895e-13 (168
+      and 237); every wall cleared by 1e-15; all valid on both routes in 7.0, 9.8 and
+      12.6 CPU seconds, and ten controls each decided by both routes as expected. The
+      area counts equal the issue's near pairs, and agree.py found the receipt's two
+      routes equal to route A at every shared number.
+    replay_status: passed
+    verifiers:
+      - V-couzo-1031-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 232, 260 and 307: every wall and every pair, by
+          two exact routes that share only the reader, with ten controls each
+          decided by both
+        checked: 3
+        of: 3
+      read: [mathematics, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 843 and 844
+            (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+            tier (tbd-strong) at the xhigh reasoning setting
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits carry a Co-Authored-By trailer naming Claude, and
+          the issues say Claude did the certification at the author's direction.
+          The checker was written from the mathematics and the certificates'
+          comment line and decided before any maintained route's or source
+          checker's code was read; its author never read the source's checkers,
+          sqpack/verify.py, check_rational_witness_independent or
+          upper_bound_reports.
+    independence_record: packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 843 and
+        844 (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md accepted the
+        three certificates for finite feasibility only, with no blocking or major
+        finding, five minor findings (F-1 to F-5) and six notes (N-1 to N-6).
+    limitations: >-
+      A clean-room decision of the three retained certificates by two exact routes in
+      one program, which share its token reader and the counterclockwise reading of t
+      that the comment line implies; with every rotation reversed, 93, 138 and 104
+      pairs overlap. Finite feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-evand-845-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 172
+      - 204
+      - 260
+      - 293
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel issue 845 2026-10-29]'
+    certificate: packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-31'
+    limitations: >-
+      This atom records the source author's report of 4 exact rational certificates at 0e76d9f.
+      A separate complete repository replay is retained for n = 172, 204, 260 and 293: 4 positives
+      and 8 duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 671160 pair decisions; summed over the 12 jobs, the receipt records 90.19 route CPU
+      seconds and 183.02 job wall seconds, the longest job 21.05 seconds. Every positive clears
+      every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The packet's sharp controls
+      meet those margins on both routes. The replay is E-evand-845-exact-feasibility and the 31 October review's own checker E-evand-845-review-exact-feasibility.
+      The source's own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
+        accepted the four certificates for finite feasibility and for adoption, with
+        no blocking or major finding; its two minor findings are on the record's
+        credit name at 260 (M-1) and its wording of the 172 certificate (M-2). Its
+        clean-room run is E-evand-845-review-exact-feasibility, and the replay
+        E-evand-845-exact-feasibility.
+  - id: E-evand-845-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [172, 204, 260, 293]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        the certificate parser and half-angle map of
+        devtools.evand_exact_certificates (the evand-cert adapter the packet's
+        acquisition/report.json names), through which both maintained routes read
+        the certificates: its reader's line filter and the corners from which the
+        independent route decides (Pose.corners) are transcribed from Evan Daniel's
+        verify_cert.py and verify_cert2.py, the checkers the certificates name
+      - >-
+        CPython's fractions.Fraction arithmetic, which both of Daniel's checkers use
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel issue 845 2026-10-29]'
+    certificate: packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-issue845-2026-10-29 certify
+      --workers 2 wrote the receipt on 31 October 2026 from the packet's retained
+      certificates, and check --replay decides all 12 retained jobs, each certificate
+      with its duplicate-square and outside-container controls, again through both
+      maintained routes and holds each to its retained row; check-claims rebuilds the
+      frozen comparison. python -m devtools.upper_bound_reports
+      evand-issue845-2026-10-29 sharp-controls wrote the packet's sharp controls, all
+      as expected on both routes: contact accepted at margin 0 and refused 1e-30 past
+      it. The 31 October stage 4 review ran decide-job --control positive on both
+      routes into scratch after its own checker had decided
+      (docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md; receipts
+      in the review's out/maintained/): both routes passed at all four counts over the
+      same pair counts, with least pair gaps and containment clearances equal to the
+      review's as exact fractions, in 31.0 CPU seconds.
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the four certificates at n = 172, 204, 260 and 293 that T-257 cites,
+          every wall and every pair decided by both maintained routes; the
+          kernel's controls are retained in the packet's receipt
+        checked: 4
+        of: 4
+    independence_record: docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
+        accepted the four certificates for finite feasibility and for adoption, with
+        no blocking or major finding. The replay reads the certificates through the
+        evand-cert reader, which transcribes two expressions of the producer's own
+        checkers, so T-257's independent re-implementation rests on
+        E-evand-845-review-exact-feasibility.
+    limitations: >-
+      A replay of the four retained certificates by two maintained exact routes that
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the producer the evand-cert reader's line
+      filter and corner construction. The receipt's 12 jobs hold 671160 pair
+      decisions, 90.19 route CPU seconds and 183.02 job wall seconds. Every wall is
+      cleared by at least 5e-21 and every pair by at least 9.99e-21, below the
+      binary64 spacing of the coordinates; the receipt's controls are gross, and the
+      packet's sharp controls meet those margins. The source's own checkers were not
+      run here, and no KKT, flat-motion or second-order statement of the source is
+      checked. Finite feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-evand-845-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [172, 204, 260, 293]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel issue 845 2026-10-29]'
+    certificate: packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/
+    replay: >-
+      With the project interpreter (Python 3.14.7) in isolated mode on a shared
+      four-core host, 31 October 2026, from the packet evand-issue845-2026-10-29's
+      review/review-2026-10-31/: python -I programs/exact_check.py on the four
+      certificates (out/check-s172_1028.json and the like), deciding every wall and
+      all 14,706, 20,706, 33,670 and 42,778 pairs over Q by separating axes with no
+      distance filter and again by exact clipped areas (422, 514, 660 and 746 pairs
+      clipped), all valid, in 1.4, 2.2, 3.1 and 3.7 CPU seconds; the least wall
+      clearances 5e-21 exactly, 5.009e-13, 6.010e-13 and 4.995e-13 and the least pair
+      gaps 9.999999999999992e-21 (squares 14 and 15, from 0), 9.991e-13, 1.2016e-12
+      and 9.990e-13. programs/controls.py decided ten sharp mutations of each by both
+      methods, 40 of 40 as expected (out/controls.txt).
+    replay_status: passed
+    verifiers:
+      - V-evand-1031-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 172, 204, 260 and 293: every wall and every
+          pair, by two exact methods that share only the reader and the corner
+          construction, with ten sharp controls each decided by both
+        checked: 4
+        of: 4
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 845 and the issue 824
+            update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+            tier (tbd-strong) at the xhigh reasoning setting
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits name Claude as co-author, and its CREDITS.md says
+          its work was produced by Claude under the author's direction. The
+          checker shares no code with the source's checkers or with this
+          repository's maintained routes, none of which its author read; the
+          source's binary64 inputs and 80-digit points were read to compare.
+    independence_record: packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
+        accepted the four certificates for finite feasibility only, with no blocking
+        or major finding, two minor findings (M-1, M-2) and ten notes (N-1 to N-10).
+    limitations: >-
+      A clean-room decision of the four retained certificates by two exact methods in
+      one program, which share its token reader and its corner construction, the
+      counterclockwise reading of t = tan(theta/2) that the format line implies
+      through (c, s); under the reversed sense, 57, 102, 152 and 152 pairs overlap.
+      The source's local-minimality statement at 172 was not replayed. Finite
+      feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-evand-n299-update-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 299
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n299 update 2026-10-29]'
+    certificate: packing/resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-31'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 0e76d9f. A
+      separate complete repository replay is retained for n = 299: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 267306 pair
+      decisions; summed over the 3 jobs, the receipt records 37.25 route CPU seconds and 109.82
+      job wall seconds, the longest job 47.76 seconds. Every positive clears every wall by at least
+      5.00e-21 and every pair by at least 9.99e-21. The packet's sharp controls meet those margins
+      on both routes. The replay is E-evand-n299-update-exact-feasibility and the 31 October review's own checker E-evand-n299-update-review-exact-feasibility. The source's
+      own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-824-299-update.md accepted the
+        certificate for finite feasibility and for adoption, with no blocking or
+        major finding; its minor findings are on the update's local-optimality
+        sentence (M-1), a truncated lineage in the ledger (M-2) and the bead's claim
+        (M-3). Its clean-room run is E-evand-n299-update-review-exact-feasibility,
+        and the replay E-evand-n299-update-exact-feasibility.
+  - id: E-evand-n299-update-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [299]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        the certificate parser and half-angle map of
+        devtools.evand_exact_certificates (the evand-cert adapter the packet's
+        acquisition/report.json names), through which both maintained routes read
+        the certificates: its reader's line filter and the corners from which the
+        independent route decides (Pose.corners) are transcribed from Evan Daniel's
+        verify_cert.py and verify_cert2.py, the checkers the certificates name
+      - >-
+        CPython's fractions.Fraction arithmetic, which both of Daniel's checkers use
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n299 update 2026-10-29]'
+    certificate: packing/resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/s299_1028.cert
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-n299-update-2026-10-29
+      certify --workers 2 wrote the receipt on 31 October 2026 from the packet's
+      retained certificates, and check --replay decides all 3 retained jobs, each
+      certificate with its duplicate-square and outside-container controls, again
+      through both maintained routes and holds each to its retained row; check-claims
+      rebuilds the frozen comparison. python -m devtools.upper_bound_reports
+      evand-n299-update-2026-10-29 sharp-controls wrote the packet's sharp controls,
+      all as expected on both routes: contact accepted at margin 0 and refused 1e-30
+      past it. The 31 October stage 4 review ran decide-job --control positive on both
+      routes into scratch after its own checker had decided
+      (docs/project/reviews/review-2026-10-31-daniel-824-299-update.md; receipts in
+      the review's out/maintained/): both routes passed over 44,551 pairs, with least
+      pair gap and containment clearance equal to the review's as exact fractions.
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 299 that T-258 cites, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in
+          the packet's receipt
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-824-299-update.md accepted the
+        certificate for finite feasibility and for adoption, with no blocking or
+        major finding. The replay reads it through the evand-cert reader, which
+        transcribes two expressions of the producer's own checkers, so T-258's
+        independent re-implementation rests on
+        E-evand-n299-update-review-exact-feasibility.
+    limitations: >-
+      A replay of the one retained certificate by two maintained exact routes that
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the producer the evand-cert reader's line
+      filter and corner construction. The receipt's 3 jobs hold 267306 pair decisions,
+      37.25 route CPU seconds and 109.82 job wall seconds. Every wall is cleared by at
+      least 5e-21 and every pair by at least 9.99e-21; the receipt's controls are
+      gross, and the packet's sharp controls meet those margins. The source's own
+      checkers were not run here, and its local-minimality statement is not checked.
+      Finite feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-evand-n299-update-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [299]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n299 update 2026-10-29]'
+    certificate: packing/resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/s299_1028.cert
+    replay: >-
+      With the project interpreter (Python 3.14.7) in isolated mode on a shared
+      four-core host, 31 October 2026, from the packet evand-issue845-2026-10-29's
+      review/review-2026-10-31/: python -I programs/exact_check.py on s299_1028.cert
+      (out/check-s299_1028.json), deciding every wall and all 44,551 pairs over Q by
+      separating axes with no distance filter and again by exact clipped areas (760
+      pairs clipped), both valid in 4.7 CPU seconds; the least wall clearance exactly
+      5e-21 and the least pair gap 9.999999999999987e-21 (squares 124 and 134, from
+      0), with 561 pairs within 1e-15. programs/controls.py decided ten sharp
+      mutations by both methods, all as expected (out/controls.txt).
+    replay_status: passed
+    verifiers:
+      - V-evand-1031-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 299: every wall and every pair, by two exact
+          methods that share only the reader and the corner construction, with ten
+          sharp controls decided by both
+        checked: 1
+        of: 1
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 845 and the issue 824
+            update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+            tier (tbd-strong) at the xhigh reasoning setting
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits name Claude as co-author, and its CREDITS.md says
+          its work was produced by Claude under the author's direction. The
+          checker shares no code with the source's checkers or with this
+          repository's maintained routes, none of which its author read; the
+          source's binary64 inputs and 80-digit points were read to compare.
+    independence_record: packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 845 and the
+        issue 824 update (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-daniel-824-299-update.md accepted the
+        certificate for finite feasibility only, with no blocking or major finding,
+        three minor findings (M-1 to M-3) and seven notes (N-1 to N-7).
+    limitations: >-
+      A clean-room decision of the one retained certificate by two exact methods in
+      one program, which share its token reader and its corner construction; under the
+      reversed rotation sense, 121 pairs overlap. The source's local-minimality
+      statement was not replayed. Finite feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-mishapolk-846-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 130
+      - 146
+      - 156
+      - 229
+      - 308
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk issue 846 2026-10-30]'
+    certificate: packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-31'
+    limitations: >-
+      This atom records the source author's report of 6 exact rational certificates at 52aa267.
+      A separate complete repository replay is retained for n = 105, 130, 146, 156, 182, 204, 211,
+      229, 241, 260, 268, 299, 304 and 308: 14 positives and 28 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 2149266 pair decisions; summed over
+      the 42 jobs, the receipt records 338.14 route CPU seconds and 542.47 job wall seconds, the
+      longest job 51.24 seconds. Every positive clears every wall by at least 4.00e-41 and every
+      pair by at least 9.99e-41. The packet's sharp controls, at 1e-30, are coarser than the margins at 156, 4e-41 at the walls and 1e-40 between pairs (RV-8 of the 31 October review); the review's own controls at 1e-60 lie below every margin, and refuse past contact at all six counts.
+      The replay at 130 is E-mishapolk-846-exact-feasibility and the 31 October review's own checker E-mishapolk-846-review-exact-feasibility. At 105, 146, 156, 229 and 308 (T-260) whether the 23 October restatement ruling reaches counts inside the corpus is the owner's question (RV-1 of the review, think-ikku), and their replay evidence waits on the answer. The source's own checkers
+      were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 846 and the
+        commits of 23 October (bold-ritchie-rv-polk, think-ikku), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md accepted
+        every certificate for finite feasibility, with no defect. At 130 it is
+        accepted for adoption: Francisco Couzo's packing of issue 843 re-solved
+        2.08e-12 lower. At 105, 146, 156, 229 and 308 each is a sub-print
+        re-certification of the house certificate, and whether the 23 October
+        restatement ruling reaches such counts inside the corpus is the owner's
+        question (RV-1, think-ikku), which holds their adoption and no certificate.
+        Its clean-room run is E-mishapolk-846-review-exact-feasibility, and the
+        replay E-mishapolk-846-exact-feasibility.
+  - id: E-mishapolk-846-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [130]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        the certificate parser and half-angle map of
+        devtools.evand_exact_certificates (the evand-cert adapter), through which
+        both maintained routes read the certificates, written in Evan Daniel's
+        format: its reader's line filter and corner construction are transcribed
+        from Daniel's verify_cert.py and verify_cert2.py, and the source's own
+        checker, verify_bound_certificate.py, is Daniel's separating-axis verifier
+      - >-
+        CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk issue 846 2026-10-30]'
+    certificate: packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports mishapolk-issue846-2026-10-30
+      certify --workers 2 wrote the receipt on 31 October 2026 from the packet's
+      retained certificates, and check --replay decides all 42 retained jobs, 14
+      certificates each with its duplicate-square and outside-container controls,
+      again through both maintained routes and holds each to its retained row;
+      check-claims rebuilds the frozen comparison. python -m
+      devtools.upper_bound_reports mishapolk-issue846-2026-10-30 sharp-controls wrote
+      the packet's sharp controls, one receipt per count, all as expected on both
+      routes. The 31 October stage 4 review re-ran check --replay on all 42 jobs (340
+      CPU seconds, out/replay-mishapolk-issue846-2026-10-30.txt in its directory) and
+      check-claims, both equal
+      (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 130 that T-259 cites, every wall and every pair
+          decided by both maintained routes; the same receipt decides the issue's
+          five other counts, which T-260 holds while the owner's question stands
+          (think-ikku), and the packet's earlier comparisons; the kernel's
+          controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 846 and the
+        commits of 23 October (bold-ritchie-rv-polk, think-ikku), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md accepted
+        the certificate at 130 for finite feasibility and for adoption: Francisco
+        Couzo's packing of issue 843 re-solved 2.08e-12 lower, outside the
+        restatement ruling's words (RV-6). The replay reads it through the
+        evand-cert reader, transcribed from Daniel's checkers, so T-259's
+        independent re-implementation rests on
+        E-mishapolk-846-review-exact-feasibility. The issue's five other counts are
+        T-260's, and wait on the owner's question (RV-1, think-ikku).
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the producer's checker the evand-cert reader's
+      line filter and corner construction. The receipt's 42 jobs hold 2149266 pair
+      decisions. Every wall is cleared by at least 4.00e-41 and every pair by at least
+      9.99e-41. The packet's sharp controls, at 1e-30, are coarser than the margins at
+      156, 4e-41 at the walls and 1e-40 between pairs (RV-8 of the 31 October review);
+      the review's own controls at 1e-60 lie below every margin, and refuse past
+      contact at all six counts. The source's own checker was not run here. Finite
+      feasibility only.
+    source_reviewed: '2026-10-31'
+  - id: E-mishapolk-846-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [130]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk issue 846 2026-10-30]'
+    certificate: packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/
+    replay: >-
+      With the project interpreter (Python 3.14.7) in isolated mode, niced, on a
+      shared four-core host, 31 October 2026, from the packet
+      mishapolk-issue846-2026-10-30's review/review-2026-10-31/: python -I
+      programs/rv_check.py selftest (10 of 10 hand-built packings as required) and
+      check on all 25 certificates the two Polkovskyi packets retain
+      (out/rv-check.jsonl), each valid on both routes, route A by support functions
+      and separating axes and route B by corners and exact clipped areas;
+      programs/rv_controls.py decided seven mutants of each of the fifteen recorded
+      certificates at exact contact and 1e-60 past it on both routes, 105 of 105 as
+      required (out/rv-controls.jsonl). Their least wall clearance and least pair gap
+      equal the maintained routes' at every certificate both packets retain, 108 of
+      108 numbers.
+    replay_status: passed
+    verifiers:
+      - V-mishapolk-1031-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 130: every wall and every pair, by two exact
+          routes that share only the reader, with seven mutants decided by both at
+          contact and 1e-60 past it; the same run decides the issue's five other
+          counts, which T-260 holds
+        checked: 1
+        of: 1
+      read: [mathematics, certificate-format, earlier-review]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 846 and the commits of
+            23 October (bold-ritchie-rv-polk, think-ikku), strong sub-agent tier
+            (tbd-strong) at the xhigh reasoning setting
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 846 credits "Mishapolk (Mikhail Polk) & Antigravity Autonomous
+          Research Lab" and does not say what kind of assistance it names
+          (question 4 of the review). The checker imports nothing from this
+          repository or the source; its author read the first 160 lines of the 22
+          October review of issue 719, which names the same two methods, and never
+          the maintained routes' code, sqpack's verifiers or the source's checker.
+    independence_record: packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 846 and the
+        commits of 23 October (bold-ritchie-rv-polk, think-ikku), strong sub-agent
+        tier (tbd-strong) at the xhigh reasoning setting, prompted separately from
+        the import lane (bold-ritchie-l2)
+      note: >-
+        docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md accepted
+        all fifteen certificates of both Polkovskyi entries for finite feasibility
+        only, with eleven findings (RV-1 to RV-11), none blocking for any
+        certificate.
+    limitations: >-
+      A clean-room decision by two exact routes in one program, which share its reader
+      and the reading of t = tan(theta/2) the certificates' first line fixes. Its
+      author read the first 160 lines of the 22 October review of issue 719, which
+      names the same two methods, before writing it. Finite feasibility only: no lower
+      bound, optimum, local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-31'
