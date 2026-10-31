@@ -10006,13 +10006,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The intake pass of 31 October (think-3guf): requests entries for #836 and "
             "#847, Mohsen Karimi's v5 two-strip and V2.0 filled-end sets above 1024, at "
             "triage pending; no register entry, row, side, bound or credit changes. "
-            "Against main 3978a7f61 (#841): rendered at link revision 3978a7f6 into empty "
+            "Against main 32ef0861b (#835): rendered at link revision 32ef0861 into empty "
             "site directories, twice from this tree and once with that main's "
             "result-requests.yaml swapped in, render_packing_methods writes its 43 files "
-            "byte-identical across the three; measured again after review A's edits to the "
-            "two entries, at the same link revision against the same main: 43 files, "
-            "byte-identical. No PDF was printed; it prints from that HTML. The survey keeps "
-            "v0.2.7."
+            "byte-identical across the three. First measured the same way against main "
+            "3978a7f61 (#841), before and after review A's edits to the two entries. No PDF "
+            "was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
 )
