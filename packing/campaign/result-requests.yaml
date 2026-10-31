@@ -149,7 +149,15 @@ issues:
         so the exact bound there is useful only while that packing is pending. Confirmation priced:
         lake build of the 41 modules at the pin, about 2.1 process-hours by the author's timings,
         with the axiom receipt and a reading of the statement binding (Packs, minSide in
-        lean/Sqpack/Spec.lean); no Lean build ran in the 2026-10-11 pass.
+        lean/Sqpack/Spec.lean); no Lean build ran in the 2026-10-11 pass. Re-measured
+        against main 737d8311e on 31 October 2026 (think-63vx): at 8 of the 41 (176, 204,
+        227, 229, 232, 260, 264 and 299) a smaller packing is now the house, so the quadratic
+        form there is no longer the record; at the other 33 the house is still the quadratic
+        form and the verified bound a rational above it, at 19 still the 5 October exact
+        ceilings and at 14 the 12 and 13 October regularized-bounds decisions. The build
+        could not run here that day: Mathlib 0df444a3's cache host,
+        lakecache.blob.core.windows.net, is refused by this environment's proxy, and the
+        host had 4.6 GB of disk free (think-63vx records the probes).
     beads:
     - think-8sm2
     - think-63vx
