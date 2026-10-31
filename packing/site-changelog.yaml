@@ -13,16 +13,17 @@ entries:
       score: 3
       rationale: >-
         T-256, T-257 and T-258 are S3 finite case results: new arrangements relative to the
-        record at 172, 204, 232, 260, 293, 299 and 307, from 1.64e-04 to 2.16e-02 below the
-        packings they replace, none one to one with the house it replaces under any
-        symmetry. At 130 the new house is Couzo’s new arrangement of #843 (T-254, S3),
-        carried by Polkovskyi’s re-solve of its certificate (T-259, S1). They bring no new
-        technique and claim no optimality.
+        houses they replace at 172, 204, 232, 260, 293, 299 and 307, from 1.64e-04 to
+        2.16e-02 below them, none one to one with the house it replaces under any symmetry.
+        At 307 the arrangement is T-255’s, Couzo’s certificates of 28 October (S3), which
+        T-256 refines by 4.56e-12. At 130 the new house is Couzo’s new arrangement of #843
+        (T-254, S3), carried by Polkovskyi’s re-solve of its certificate (T-259, S1). They
+        bring no new technique and claim no optimality.
     topics: [upper-bound]
     categories: [records]
     pull_requests: [852]
     issues: [824, 843, 844, 845, 846]
-    result_ids: [T-254, T-256, T-257, T-258, T-259]
+    result_ids: [T-254, T-255, T-256, T-257, T-258, T-259]
     summary: |-
       Eight counts take new house best packings after clean-room reviews here.
       [Evan Daniel](packing/contributors/people/evan-daniel.md)’s certificates of #845 take
@@ -41,25 +42,26 @@ entries:
         $33/2 + \sqrt{7}/2$, and the case records’ conjectured optima there are withdrawn.
       - Daniel’s packings are new arrangements found by his population searches and, at 299,
         from his packing of 26 October; the 293 is his 260 plus one L-shaped strip. Couzo’s
-        refine public Kaggle notebook packings, Chilton’s at 232 and ntumlnoob’s at 307.
+        refine public Kaggle notebook packings, Chilton’s at 232 and ntumlnoob’s at 307; at
+        307 the new arrangement is his certificate of 28 October (T-255), which #844 refines.
       - This project’s two maintained exact routes decided every certificate, sharing
-        components with the sources’ checkers. Separately prompted mathematical reviews
-        decided them again on clean-room checkers of their own, by Claude agents at the
-        strong tier rather than the strongest the runbook asks for, which is the independent
-        confirmation. No source program ran here.
+        components with the sources’ checkers. Separately prompted mathematical reviews by
+        Claude agents decided them again on clean-room checkers of their own, which is the
+        independent confirmation; the reviews ran at the strong tier rather than the
+        strongest the runbook asks for. No source program ran here.
       - Six cases draw grid-slack’s views at the certificates’ sides; 299 and 307 keep the
         axis tool’s view. Fourteen sub-print re-certifications by Polkovskyi wait on the
         maintainer’s question of whether the 23 October restatement ruling reaches them, and
         move no house. Upper bounds only; no optimality, rigidity or priority is claimed.
     artifacts:
       - kind: result
-        label: Daniel’s certificates of #845
+        label: 'Daniel’s certificates of #845'
         target: https://squaremath.org/result/t-257.html
       - kind: result
         label: Daniel’s certificate at 299
         target: https://squaremath.org/result/t-258.html
       - kind: result
-        label: Couzo’s certificates of #844
+        label: 'Couzo’s certificates of #844'
         target: https://squaremath.org/result/t-256.html
       - kind: result
         label: Polkovskyi’s re-solve at 130
@@ -68,15 +70,15 @@ entries:
       date: '2026-10-31'
       evidence: https://github.com/jlevy/squares/actions/runs/41203909483
     references:
-      - label: Mathematical review of #845
+      - label: 'Mathematical review of #845'
         target: docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
-      - label: Mathematical review of the #824 update
+      - label: 'Mathematical review of the #824 update'
         target: docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
-      - label: Mathematical review of #844
+      - label: 'Mathematical review of #844'
         target: docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
-      - label: Mathematical review of #843
+      - label: 'Mathematical review of #843'
         target: docs/project/reviews/review-2026-10-31-couzo-843-130.md
-      - label: Mathematical review of #846
+      - label: 'Mathematical review of #846'
         target: docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
   - id: changelog-day-log-and-news-division
     date: '2026-10-26'
@@ -2596,7 +2598,7 @@ entries:
         target: https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays
       - label: Retained certificates and verification limits
         target: packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
-      - label: Couzo’s report, a comment on #460
+      - label: 'Couzo’s report, a comment on #460'
         target: https://github.com/jlevy/squares/pull/460#issuecomment-6070798890
   - id: ryu-polynomial-deficiency-reports
     date: '2026-10-09'

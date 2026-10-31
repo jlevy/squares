@@ -7,6 +7,7 @@ Rendering reads committed inputs only. GitHub acquisition belongs to
 from __future__ import annotations
 
 import argparse
+import bisect
 import html
 import re
 import subprocess
@@ -837,9 +838,46 @@ def backfill_issues(
     return "".join(lines)
 
 
+def inline_comments(text: str) -> list[tuple[int, str]]:
+    """The lines on which a `#` after a space, outside every scalar, is read as a comment.
+
+    YAML ends a plain scalar at a space before `#`, so `label: Mathematical review of #845`
+    loads as "Mathematical review of", and nothing reports the cut: seven of #852's News
+    labels and one of 9 October's rendered that way (#860's review A1), as the lineage
+    line of #852's ledger had (its review's M-2). The record holds no inline comments, so
+    every such `#` is refused; the value is quoted instead. Whole-line comments stand.
+    """
+    spans = [
+        (token.start_mark.index, token.end_mark.index)
+        for token in yaml.scan(text, Loader=yaml.SafeLoader)
+        if isinstance(token, yaml.ScalarToken)
+    ]
+    starts = [start for start, _ in spans]
+    found: list[tuple[int, str]] = []
+    for match in re.finditer(r"[ \t]#", text):
+        at = match.end() - 1
+        line_start = text.rfind("\n", 0, at) + 1
+        if not text[line_start:at].strip():
+            continue
+        index = bisect.bisect_right(starts, at) - 1
+        if index >= 0 and spans[index][0] <= at < spans[index][1]:
+            continue
+        line_end = text.find("\n", at)
+        line = text[line_start : len(text) if line_end < 0 else line_end].strip()
+        found.append((text.count("\n", 0, at) + 1, line))
+    return found
+
+
 def load(path: Path = SRC) -> Document:
     """Read one enforced changelog; no network or GitHub metadata discovery."""
-    document = load_yaml(path.read_text(encoding="utf-8"))
+    text = path.read_text(encoding="utf-8")
+    if cut := inline_comments(text):
+        lines = "; ".join(f"line {number}: {line}" for number, line in cut)
+        raise ValueError(
+            f"{path.name}: a ` #` outside quotes cuts the value off as a comment ({lines}); "
+            "quote the value"
+        )
+    document = load_yaml(text)
     if not isinstance(document, dict):
         raise TypeError("site changelog must be a YAML mapping")
     validate(document)
