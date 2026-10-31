@@ -5,8 +5,8 @@ title: Register the candidates below the new houses at 130, 293 and 307 (regular
 kind: task
 status: in_progress
 priority: 2
-version: 3
-delegate: bold-ritchie-l2
+version: 4
+delegate: bold-ritchie-l8
 labels:
   - validation
   - regularization
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-10-31T09:17:32.462Z
-updated_at: 2026-10-31T11:48:22.810Z
+updated_at: 2026-10-31T13:07:22.019Z
 started_at: 2026-10-31T11:48:22.244Z
 ---
 Evan Daniel's regularizer (regularize_evand run, run adopt-2026-10-31-n130-307-evand, retained under packing/cases/regularized_drawings/think-3guf-2026-10-31/ on #852) solved two of the new witnesses the 31 October adoption wrote to exact KKT local minima below the house best packing's side:
