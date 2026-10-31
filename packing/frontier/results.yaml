@@ -10856,6 +10856,12 @@ results:
       prints 17.53553390593274. This entry stays true as stated and is superseded there as
       a ceiling, and T-156 names it as the result whose packing it regularizes.
 
+      At 293 and 299 the catalogue's constructions, whose rational ceilings this entry
+      verifies, gave way on 31 October 2026 to Evan Daniel's certificates of issue 845
+      (T-257), 1.64e-04 below 723/41 at 293, and of his update to issue 824 (T-258),
+      2.16e-02 below 33/2 + √7/2 at 299, after the 31 October reviews of both; each case's
+      conjectured optimum was withdrawn, and this entry's ceilings there stay retained as
+      history.
   - id: T-102
     kind: lower-bound
     registered: '2026-10-06'
@@ -23153,6 +23159,22 @@ results:
       Francisco Couzo's 211 packing, 3.17e-03 below this entry's side there (T-243). After
       the 25 October review of it, the case at 182 adopted it on 25 October 2026, and this
       entry's certificate there stays retained as history.
+
+      Mykhailo Polkovskyi's issue 846 re-solves at 130 Francisco Couzo's packing of issue
+      843 (T-254), found from this entry's packing there and 2.05e-03 below it, to a side
+      2.08e-12 lower still (T-259). After the 31 October reviews of both, the case at 130
+      adopted T-259 on 31 October 2026, with the packing's credit Couzo's, and this entry's
+      certificate there stays retained as history.
+
+      Evan Daniel's issue 845 reports at 172 a new arrangement from an L-cut of the n = 199
+      record, 1.05e-03 below this entry's side there (T-257). After the 31 October review of
+      it, the case at 172 adopted it on 31 October 2026, and this entry's certificate there
+      stays retained as history.
+
+      Francisco Couzo's issue 844 reports at 307 a refinement of ntumlnoob's Kaggle notebook
+      packing 1.61e-03 below this entry's side there, another arrangement (T-256). After the
+      31 October review of it, the case at 307 adopted it on 31 October 2026, and this
+      entry's certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
@@ -26147,6 +26169,12 @@ results:
       (T-241) is 2.53e-03 below this entry's side there, another arrangement, and Evan
       Daniel's exact descent of it (T-242) 3.04e-09 lower still. After the 24 October review
       of both, the case at 304 adopted T-242 on 25 October 2026, and this entry's
+      certificate there stays retained as history.
+
+      Francisco Couzo's issue 844 reports at 232 a refinement of Alex Chilton's Kaggle
+      notebook packing 2.51e-03 below this entry's side there, another arrangement, and
+      below T-193's algebraic side, which was staged there (T-256). After the 31 October
+      review of it, the case at 232 adopted it on 31 October 2026, and this entry's
       certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
@@ -31582,6 +31610,11 @@ results:
       25.64 degrees (T-229). After the 22 October review of that certificate, the case at
       204 adopted it on 23 October 2026, and this entry's certificate there stays retained
       as history.
+
+      Evan Daniel's issue 845 reports at 260 a new arrangement 1.18e-02 below this entry's
+      side there, below Francisco Couzo's a5a5d76 and issue 844 certificates too (T-257).
+      After the 31 October review of it, the case at 260 adopted it on 31 October 2026, and
+      this entry's certificate there stays retained as history.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 21 October, is
@@ -32790,6 +32823,10 @@ results:
       (docs/project/reviews/review-2026-10-23-mishapolk-n204.md) and the replay it
       reproduced (E-mishapolk-n204-exact-feasibility), with the review's own checker
       (E-mishapolk-n204-review-exact-feasibility).
+
+      Evan Daniel's issue 845 reports at 204 a new arrangement 1.02e-03 below this entry's
+      side (T-257). After the 31 October review of it, the case at 204 adopted it on 31
+      October 2026, and this entry's certificate there stays retained as history.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 23 October, is

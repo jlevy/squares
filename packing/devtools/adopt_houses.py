@@ -1240,6 +1240,197 @@ RESULTS: dict[str, Prose] = {
         ),
         diversity="by a Claude agent, a system family the producer also used",
     ),
+    "T-256": Prose(
+        author="Francisco Couzo",
+        reported="on [jlevy/squares#844](https://github.com/jlevy/squares/issues/844)",
+        producer_route=True,
+        ai=(
+            "The source’s commit ends with a co-author trailer naming Claude (Anthropic), the "
+            "issue says Claude did the certification at the author’s direction, and the header "
+            "of the source’s checker says Francisco Couzo modified Evan Daniel’s verifier with "
+            "Codex."
+        ),
+        routes=(
+            "The source’s manifest names this repository’s `sqpack/verify.py`, through which "
+            "one maintained route decides, as its first checker, and both routes read the "
+            "certificate through an adapter transcribed from Evan Daniel’s checkers, so the "
+            "replay shares the producer’s components (F-4 of the 31 October review). The "
+            "review’s checker shares no code with either maintained route or the source, and "
+            "the independent re-implementation rests on it."
+        ),
+        lineage_at={
+            232: (
+                "The issue says the search started from Alex Chilton’s packing in his Kaggle "
+                "notebook “Fault-line DP + Basin Hopping - LB 22.2990” and refined it by GPU "
+                "basin hopping with the energy kernel of Vladislav Lavrentev’s “CUDA Packing "
+                "Search” and native basin hopping, polished by Evan Daniel’s fq. The notebook’s "
+                "packing is not published in the source, so the 31 October review could not "
+                "measure the lineage, and the record keeps the source’s word, a refinement "
+                "(F-5). Against T-186’s packing, the house best packing here before this "
+                "adoption, no symmetry pairs nearest centres one to one and 91 squares lie "
+                "beyond a tenth, so it is another arrangement than T-186’s."
+            ),
+            307: (
+                "The source’s credit record says the search refined ntumlnoob’s packing from "
+                "the Kaggle notebook “First 22.268681355 Public Code With Explanation” to the "
+                "author’s certificate of a5a5d76 (T-255) and then by nine SLP steps. Measured "
+                "by the 31 October review, square by square, nearest centres pair it one to "
+                "one with the a5a5d76 packing under a reflection of the box, no square moving "
+                "beyond a tenth (at most 0.0167): a refinement of it, 4.56e-12 lower. Against "
+                "T-174’s packing, the house best packing here before this adoption, no "
+                "symmetry pairs nearest centres one to one and 91 squares lie beyond a tenth, "
+                "so it is another arrangement than T-174’s."
+            ),
+        },
+        third_route=(
+            ", and the 31 October review’s clean-room checker decided it again on two routes "
+            "of its own, in rationals by separating axes over every pair and by the exact "
+            "clipped area of every pair within reach; its controls at $10^{-30}$ refused the "
+            "closest pair moved past exact contact and the box shrunk below the packing’s "
+            "extent"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-257": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#845](https://github.com/jlevy/squares/issues/845)",
+        producer_route=False,
+        ai=(
+            "The source’s commit names Claude as co-author, and its credits say the "
+            "repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage_at={
+            172: (
+                "The issue says an explorer search from the s(199) record, Nate "
+                "Chaoweeraprasit’s packing as Siddharth Gupta improved it, and the removal of "
+                "one L-shaped strip gave this packing. Measured by the 31 October review, it "
+                "fits the 199 house’s packing less a 27-square L, a column and a row along two "
+                "walls, with 14 squares beyond a tenth, as T-174’s own 172 fits the same cut "
+                "with 20: both are in the 199 record’s L-cut family. Against T-174’s packing, "
+                "the house best packing here before this adoption, no symmetry pairs nearest "
+                "centres one to one and 42 squares lie beyond a tenth, so it is another "
+                "arrangement than T-174’s. The certificate is the source’s 80-digit KKT point "
+                "dilated by $1 + 10^{-20}$; the source’s local minimality is its numerical "
+                "report."
+            ),
+            204: (
+                "The issue says the search was seeded with Daniil Ostashev’s n = 176 packing "
+                "(#575), nine generations back. Measured by the 31 October review, the 176 "
+                "house’s packing fits this one less a 28-square L loosely, 40 squares beyond a "
+                "tenth: consistent with the seed and no more. Against T-231’s packing, the "
+                "house best packing here before this adoption, no symmetry pairs nearest "
+                "centres one to one and 66 squares lie beyond a tenth, so it is another "
+                "arrangement than T-231’s."
+            ),
+            260: (
+                "The issue says the search started from Kirill Tymchishin’s packing in his "
+                "public Kaggle notebook “Square Packing Lab | CPU/CUDA/MPS”, whose tilted island "
+                "a fault-line composition and refill improved before a composition run put it "
+                "in a 260 frame. That packing is not retained, so the lineage is the author’s "
+                "word. Against T-225’s packing, the house best packing here before this "
+                "adoption, no symmetry pairs nearest centres one to one and 155 squares lie "
+                "beyond a tenth, so it is another arrangement than T-225’s, and it is 3.05e-3 "
+                "below Francisco Couzo’s issue 844 certificate (T-256), another arrangement "
+                "again."
+            ),
+            293: (
+                "The issue says it is the source’s n = 260 packing plus one L-shaped strip. "
+                "Measured by the 31 October review, 260 of its squares are the 260 "
+                "certificate’s, up to a mirror, at zero distance in binary64, and the other 33 "
+                "are axis-aligned along two walls, a column and a row of 17 sharing a corner "
+                "square. Against the Kingbird catalogue’s packing, the case’s construction "
+                "before this adoption, no symmetry pairs nearest centres one to one and 185 "
+                "squares lie beyond a tenth."
+            ),
+        },
+        third_route=(
+            ", and the 31 October review’s clean-room checker decided it again in rationals, "
+            "by separating axes over every pair and by the exact clipped area of every pair "
+            "within reach; its controls at $10^{-30}$ refused the box below the packing’s "
+            "extent, the packing moved past the near walls and the closest pair moved past "
+            "contact"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-258": Prose(
+        author="Evan Daniel",
+        reported=(
+            "in an update to [jlevy/squares#824]"
+            "(https://github.com/jlevy/squares/issues/824#issuecomment-6488202753)"
+        ),
+        producer_route=False,
+        ai=(
+            "The source’s commit names Claude as co-author, and its credits say the "
+            "repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The update says the packing came from Evan Daniel’s n = 299 packing of 26 "
+            "October (T-248), built by his implementation of Chris Deotte’s multi-gadget "
+            "fault-line DP from Deotte’s public Kaggle s(334) packing, by four generations of "
+            "refill and an exact descent. Measured by the 31 October review, no symmetry "
+            "pairs it one to one with T-248’s packing and 78 squares lie beyond a tenth, so "
+            "it is a new packing that continues T-248’s; against the Kingbird catalogue’s "
+            "packing, the case’s construction before this adoption, 134 squares lie beyond a "
+            "tenth. The certificate is the source’s 80-digit KKT point dilated by "
+            "$1 + 10^{-20}$; the update’s local minimality, strict only modulo 119 flat "
+            "motions with 33 rattlers, is its numerical report."
+        ),
+        third_route=(
+            ", and the 31 October review’s clean-room checker decided it again in rationals, "
+            "by separating axes over every pair and by the exact clipped area of every pair "
+            "within reach; its controls at $10^{-30}$ refused the box below the packing’s "
+            "extent, the packing moved past the near walls and the closest pair moved past "
+            "contact"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-259": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#846](https://github.com/jlevy/squares/issues/846)",
+        producer_route=False,
+        ai=(
+            "The issue credits the Antigravity Autonomous Research Lab with the author and "
+            "does not say what kind of assistance it names."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, so the replay shares "
+            "the producer’s components. The review’s checker shares no code with either "
+            "maintained route or the source, and the independent re-implementation rests on "
+            "it."
+        ),
+        lineage=(
+            "The certificate’s header says it dilates the source’s re-solve of Francisco "
+            "Couzo’s issue 843 packing (T-254) by $2 \\times 10^{-14}$. Measured by the 31 "
+            "October review, it has Couzo’s contact structure within $10^{-9}$, 304 "
+            "near-contact pairs and 38 wall contacts each, and pairs one to one with his "
+            "packing under the identity, no square moving beyond $1.13 \\times 10^{-6}$: the "
+            "same arrangement re-solved at tighter padding, $2.08 \\times 10^{-12}$ lower. "
+            "Couzo’s packing was found from PR #574’s, Nate Chaoweeraprasit’s packing as "
+            "Siddharth Gupta and PingYou Ltd improved it, with 11 squares beyond a tenth of it "
+            "and none paired one to one, so it is another arrangement than T-174’s."
+        ),
+        third_route=(
+            ", and the 31 October review’s clean-room checker decided it again on two routes "
+            "of its own, in rationals by separating axes and by exact clipped areas; its "
+            "controls at $10^{-60}$ refused the side lowered past the far wall, a square moved "
+            "past its wall and the tightest pair moved past contact"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1255,6 +1446,8 @@ POLKOVSKYI = "Mishapolk"
 KRISTIANSEN = "Amund Kristiansen"
 TYMCHISHIN = "Kirill Tymchishin"
 LAVRENTEV = "Vladislav Lavrentev"
+CHILTON = "Alex Chilton"
+NTUMLNOOB = "ntumlnoob"
 
 
 @dataclass(frozen=True)
@@ -1417,13 +1610,15 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 129 packing, as PingYou "
         "Ltd refined it",
     ),
-    # T-174's regularization of T-127's packing, 15 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-259 (adopted on 31 October 2026), Mykhailo Polkovskyi's re-solve of Francisco
+    # Couzo's packing of issue 843 (T-254), the same arrangement 2.08e-12 lower: T-259's
+    # item names T-254, so the packing stays with Couzo, found from PR #574's packing, 11
+    # squares beyond a tenth of it and none paired one to one (the 31 October reviews).
     130: Credit(
-        (SQUISH,),
-        ("Siddharth Gupta", PINGYOU),
-        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
-        "SQUISH packing",
+        (COUZO,),
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s re-solve of Francisco Couzo’s packing, found from Nate "
+        "Chaoweeraprasit’s SQUISH packing as Siddharth Gupta and PingYou Ltd refined it",
     ),
     # T-174's regularization of T-136's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -1487,12 +1682,14 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
         "Daniil Ostashev’s n = 156 packing, after PingYou Ltd’s",
     ),
-    # T-174's regularization of T-098's packing, 69 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-257 (adopted on 31 October 2026), Evan Daniel's packing of issue 845 from an L-cut of
+    # the s(199) record, Chaoweeraprasit's packing as Gupta improved it, which the 31
+    # October review fitted with 14 squares beyond a tenth; another arrangement than T-174's.
     172: Credit(
-        (COUZO,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from an L-cut of the n = 199 record, Nate Chaoweeraprasit’s "
+        "SQUISH packing as Siddharth Gupta refined it",
     ),
     # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
     # T-174).
@@ -1554,28 +1751,13 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of Francisco
-    # Couzo's packing, which Couzo first reported in issue 670 and refined in 675 and 678
-    # (T-226, T-228, T-223): one to one with #678's under the identity and with T-225's under
-    # a half turn, one square released and turned by 25.64 degrees (the import's measurement
-    # and the 22 October review's, its RF-3 and RF-4). The author's comment of 23 October on
-    # issue 719 says the solve started from Couzo's #678 certificate, not from Evan Daniel's
-    # view (T-225), so T-229's item names T-223 and Daniel is no antecedent here (think-xyhn).
-    # The packing stays with Couzo, whose source's manifest credits Polkovskyi's own
-    # construction as its seed (A11 of #716); Couzo's answer of 23 October 2026 on #670
-    # traces that seed to T-186's packing, Polkovskyi's refinement of Ostashev's as PingYou
-    # Ltd refined it, three rounds of basin hopping before #670's certificate, and the
-    # #670 packet's seed measurement pairs the seed file with T-186's packing (think-t5hc).
-    # The pass of 24 October 2026 adopted the
-    # release's other 204 file (T-231), T-229's packing at its solved side, which T-231's
-    # item names, so the credit is the same; Evan Daniel's exact solver, measured as its
-    # method by the 23 October review, is a method credit and no antecedent of the packing.
+    # T-257 (adopted on 31 October 2026), Evan Daniel's packing of issue 845 from a search
+    # seeded with Daniil Ostashev's n = 176 packing (#575), a loose fit by the 31 October
+    # review; another arrangement than T-231's, which held 204 before.
     204: Credit(
-        (COUZO,),
-        (POLKOVSKYI,),
-        "Mykhailo Polkovskyi’s re-solve of Francisco Couzo’s packing from a search Couzo "
-        "says began at Polkovskyi’s own refinement of Daniil Ostashev’s n = 204 packing, as "
-        "PingYou Ltd refined it",
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a search seeded with Daniil Ostashev’s n = 176 packing",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -1661,14 +1843,13 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s display regularization of his own packing from a search started from "
         "Francisco Couzo’s refinement of Joost de Winter’s packing",
     ),
-    # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
-    # regularization of T-174).
+    # T-256 (adopted on 31 October 2026), Francisco Couzo's refinement of Alex Chilton's
+    # Kaggle notebook packing, as issue 844 states it; the notebook packing is not
+    # published, so the 31 October review could not measure it (F-5).
     232: Credit(
-        (OSTASHEV,),
-        (PINGYOU, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s refinement, after PingYou Ltd’s, of Daniil Ostashev’s "
-        "composition of his 38-square rectangle with a 76-square piece of Erich Friedman’s "
-        "n = 85 packing",
+        (CHILTON,),
+        (COUZO,),
+        "Francisco Couzo’s refinement of Alex Chilton’s Kaggle notebook packing",
     ),
     # Evan Daniel's basin explorer from a rebuild of issue 481's composition to a different
     # local minimum; the issue credits the composition for the construction, which the
@@ -1724,19 +1905,14 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-193 of T-174 of T-136, SQUISH's own packing (T-174's item measured, none moved).
     259: _exact_form(SQUISH, (PINGYOU, DANIEL), "Nate Chaoweeraprasit’s SQUISH"),
-    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of issue
-    # 678's packing (T-223), solved to its exact side 2.51e-11 below #678's certificate:
-    # T-225's item names T-223, and the packing stays with Couzo. T-223 was adopted here on
-    # 21 October 2026 from Joost de Winter's T-196: its source seeded its search with Evan
-    # Daniel's exact-form certificate of de Winter's issue-668 packing (T-196), and the 20
-    # October review measured 162 of its squares within 1e-4 of that seed's, 55 beyond
-    # 1e-2, so de Winter is named in the sentence as the construction's author, as at 229,
-    # and not in the structured fields.
+    # T-257 (adopted on 31 October 2026), Evan Daniel's packing of issue 845 from a search
+    # started from Kirill Tymchishin's Kaggle s(260) packing, by the author's word (N-3 of
+    # the 31 October review); another arrangement than T-225's and T-256's.
     260: Credit(
-        (COUZO,),
         (DANIEL,),
-        "Evan Daniel’s display regularization of Francisco Couzo’s packing from a search "
-        "seeded with Evan Daniel’s exact certificate of Joost de Winter’s n = 260 packing",
+        (),
+        "Evan Daniel’s packing from a search started from Kirill Tymchishin’s Kaggle "
+        "notebook packing",
     ),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -1820,6 +1996,15 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
+    # T-257 (adopted on 31 October 2026), Evan Daniel's n = 260 packing of issue 845 plus
+    # one L-shaped strip, measured exactly by the 31 October review; the Kingbird
+    # catalogue's construction held 293 before.
+    293: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s n = 260 packing, from a search started from Kirill Tymchishin’s "
+        "Kaggle notebook packing, with one L-shaped strip added",
+    ),
     295: _exact_form(XU, (DANIEL, PINGYOU), "his display regularization of Ryan Xu’s"),
     # T-174's regularization of T-098's packing, 119 squares moved beyond 1e-3, one to
     # one; that it is that packing is the source's statement (the 14 October review of PR
@@ -1831,6 +2016,16 @@ CREDITS: dict[int, Credit] = {
     ),
     # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
     # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
+    # T-258 (adopted on 31 October 2026), Evan Daniel's packing of his update to issue 824,
+    # found from his T-248 packing, which his implementation of Chris Deotte's fault-line DP
+    # built from Deotte's public Kaggle s(334) packing; the Kingbird catalogue's
+    # construction held 299 before.
+    299: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from his n = 299 packing of 26 October, built by his "
+        "implementation of Chris Deotte’s fault-line DP from Deotte’s public Kaggle packing",
+    ),
     302: Credit(
         (PINGYOU,),
         (COUZO, POLKOVSKYI, DANIEL),
@@ -1874,12 +2069,13 @@ CREDITS: dict[int, Credit] = {
         (PINGYOU,),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
     ),
-    # T-174's regularization of T-136's packing re-solved, measured one to one, no square
-    # moved beyond 1.5e-4 (the 14 October review of PR 574).
+    # T-256 (adopted on 31 October 2026), Francisco Couzo's refinement of ntumlnoob's Kaggle
+    # notebook packing, through his a5a5d76 certificate (T-255), which the 31 October review
+    # measured one to one with it, none beyond 0.0167.
     307: Credit(
-        (SQUISH,),
-        (PINGYOU,),
-        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing",
+        (NTUMLNOOB,),
+        (COUZO,),
+        "Francisco Couzo’s refinement of ntumlnoob’s Kaggle notebook packing",
     ),
     # T-174's regularization of T-141's packing, 25 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).

@@ -281,19 +281,18 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
     # T-229 (#719) states a smaller side at 105 and 204 than T-174 and T-225, and since
     # its adoption of 23 October 2026 holds both lanes at 105; T-174 and T-225 hold
     # neither lane at those counts. At 204 the release's lower file (T-231), adopted on 24
-    # October 2026, holds both lanes, and T-229 neither. Since the intake of 31 October
-    # 2026 (lane L2) the reported lane at each of these counts is a smaller report pending
-    # adoption: T-253's at 227, T-259's at 105 and 229, and T-257's at 204 and 260. So
-    # T-225, T-229 and T-231 hold their verified lanes alone until those are adopted.
+    # October 2026, holds both lanes, and T-229 neither. The pass of 31 October 2026
+    # adopted Evan Daniel's #845 (T-257) at 204 and 260, so T-231 and T-225 hold neither
+    # lane there. At 105, 227 and 229 the reported lane is a smaller report the owner's
+    # question holds (T-260's at 105 and 229, T-253's at 227), so T-225 and T-229 keep
+    # their verified lanes alone there.
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-225"]} == {
-        (n, "upper", "verified") for n in (227, 229, 260)
+        (n, "upper", "verified") for n in (227, 229)
     }
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-229"]} == {
         (105, "upper", "verified")
     }
-    assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-231"]} == {
-        (204, "upper", "verified")
-    }
+    assert not index.facets.get("T-231")
     assert not {facet for facet in index.facets["T-174"] if facet.n == 105}
     # One report registered twice is credited as current in both entries (think-33u4):
     # T-073 and T-080 hold the verified lower bound at 101 to 105 together, and T-083

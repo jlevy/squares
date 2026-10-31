@@ -399,8 +399,8 @@ reports:
     first_committed: '2026-10-29T04:44:41Z'
     new_packing:
       source: '#824''s update: ''by our vocabulary this is a new packing, not a refinement'''
-      continues: 'the source''s own packing of #824''s opening post (T-248), by four generations
-        of refill and an exact descent'
+      continues: 'the source''s own packing of #824''s opening post, by four generations of
+        refill and an exact descent'
   note: The update names 0e76d9f, committed at 2026-10-29T04:44:41Z, 2 minutes 8 seconds before
     the comment.
 - report: '#846'

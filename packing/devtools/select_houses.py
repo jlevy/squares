@@ -218,10 +218,11 @@ class Pending:
 #: T-240's 268 by 4.48e-12, but the pass of 25 October that adopted his 304 also moved 268
 #: to T-240, and one day's archive holds one prior state a count: 268 was staged for the
 #: pass's next pull request, and the adoption of 26 October 2026 (think-3anz) took it off
-#: once it adopted T-242 there.
+#: once it adopted T-242 there. The adoption of 31 October 2026 (think-3guf) took 232 off:
+#: Francisco Couzo's certificate of issue 844 (T-256) is below T-193's algebraic side there.
 PENDING_ADOPTION: dict[int, Pending] = {
     n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
-    for n in (88, 126, 175, 199, 232, 266, 267, 292, 301)
+    for n in (88, 126, 175, 199, 266, 267, 292, 301)
 }  # fmt: skip
 
 

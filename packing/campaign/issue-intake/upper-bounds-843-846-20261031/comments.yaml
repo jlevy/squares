@@ -49,8 +49,7 @@ comments:
     notes:
       - >-
         Your 130 was below everything reported before it, so it is recorded, a new packing
-        found from PR #574's. Mykhailo Polkovskyi's #846, two days later, is a 2e-14 dilation
-        of your packing 2.08e-12 below your certificate's side; the ledger records it as a
+        found from PR #574's. Mykhailo Polkovskyi's #846, two days later, is your packing re-solved and then dilated by 2e-14, 2.08e-12 below your certificate's side; the ledger records it as a
         refinement of your packing, which keeps your credit.
   - issue: 844
     author: franciscouzo
@@ -58,8 +57,7 @@ comments:
       - >-
         Your a5a5d76 of 28 October, which no issue reports, publishes certificates at 260 and
         307 first, so the ledger records them from that commit; this issue's three are each
-        below everything before them and are recorded after them. At 260 Evan Daniel's #845,
-        the next morning, is lower again.
+        below everything before them and are recorded after them. At 260 Evan Daniel's #845, the next morning, is lower again. Measured here, this issue's 260 is a new arrangement found from ntumlnoob's packing through your a5a5d76 one, and its 307 your a5a5d76 packing mirrored and refined.
   - issue: 845
     author: evand
     notes:
@@ -88,5 +86,11 @@ comments:
         Your ten commits of 23 October, e386aab to fbc1749, are walked as publications from
         their commits: the ledger records nine of them (154, 155, 183, 211, 227, 236, 237, 241
         and 271), and not 88 and 126, which lie above the exact algebraic sides a register
-        entry states there, 152, which it cannot yet order against one, or 204 and 270, which
-        equal the houses.
+        entry states there, 152, which it cannot yet order against one, or 204 and 270, which equal the houses.
+      - >-
+        At 105, 146, 156, 229 and 308 here, and at the nine of 23 October, each certificate is
+        below the house certificate by less than one unit in the 12th place and rounds to its
+        print. The owner's ruling of 23 October calls such re-certifications restatements, and
+        the ledger applies it beyond n = 324 only; whether it reaches these counts is the
+        owner's question, and the record holds those fourteen rows until the answer. 130 is
+        outside it: its print differs, and it is recorded either way.
