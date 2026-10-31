@@ -3,9 +3,9 @@ type: is
 id: is-01m685nejvjntazeebg3zn18mt
 title: "Import Francisco Couzo: 232, 260, 307 (#844), with the a5a5d76 certificates at 260 and 307 (no issue)"
 kind: task
-status: closed
+status: open
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -16,10 +16,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:07:07.483Z
-updated_at: 2026-10-31T13:28:31.347Z
+updated_at: 2026-10-31T13:50:47.888Z
 started_at: 2026-10-31T05:07:21.590Z
-closed_at: 2026-10-31T13:28:31.346Z
-close_reason: "#844 answered and closed on 31 October after #852 merged (e482345fe) and the deploy verified (Pages run 41203909483): report-order verdict https://github.com/jlevy/squares/issues/844#issuecomment-6543926803, final reply https://github.com/jlevy/squares/issues/844#issuecomment-6543929047 (T-256 V3/C3 current; T-255 V3/C3 superseded); recorded under #844's replies on claude/bold-ritchie-xo28us-post852."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---

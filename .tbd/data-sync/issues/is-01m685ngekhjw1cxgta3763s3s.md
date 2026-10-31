@@ -3,9 +3,9 @@ type: is
 id: is-01m685ngekhjw1cxgta3763s3s
 title: "Import Evan Daniel: 172, 204, 260, 293 (#845)"
 kind: task
-status: closed
+status: open
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -16,10 +16,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:07:09.395Z
-updated_at: 2026-10-31T13:28:31.974Z
+updated_at: 2026-10-31T13:50:49.097Z
 started_at: 2026-10-31T05:07:22.523Z
-closed_at: 2026-10-31T13:28:31.974Z
-close_reason: "#845 answered and closed on 31 October after #852 merged (e482345fe) and the deploy verified (Pages run 41203909483): report-order verdict https://github.com/jlevy/squares/issues/845#issuecomment-6543930115, final reply https://github.com/jlevy/squares/issues/845#issuecomment-6543932512 (T-257 V3/C3 current); recorded under #845's replies on claude/bold-ritchie-xo28us-post852."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---

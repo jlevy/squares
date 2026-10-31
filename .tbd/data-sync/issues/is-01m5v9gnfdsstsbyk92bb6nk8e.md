@@ -3,9 +3,9 @@ type: is
 id: is-01m5v9gnfdsstsbyk92bb6nk8e
 title: "Import Evan Daniel: s(299) <= 17.803695435333, a new arrangement 1.92e-2 below the house (#824)"
 kind: task
-status: closed
+status: open
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -15,10 +15,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-26T05:04:17.389Z
-updated_at: 2026-10-31T13:28:32.682Z
+updated_at: 2026-10-31T13:50:46.038Z
 started_at: 2026-10-31T05:07:24.778Z
-closed_at: 2026-10-31T13:28:32.681Z
-close_reason: "#824's update answered and the issue closed on 31 October after #852 merged (e482345fe) and the deploy verified (Pages run 41203909483): report-order verdict https://github.com/jlevy/squares/issues/824#issuecomment-6543933233, final reply https://github.com/jlevy/squares/issues/824#issuecomment-6543935364 (T-258 V3/C3 current; T-248 V3/C3 superseded; the morning's T-248 statement corrected); recorded under #824's replies on claude/bold-ritchie-xo28us-post852."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
