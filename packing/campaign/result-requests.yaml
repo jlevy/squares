@@ -1229,6 +1229,37 @@ issues:
         status: recorded
       - result: source-valid-invalid-wrapper-correction-2026-10-07
       - result: n17-exact-form-2026-10-10
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6542830540
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: ceilings-77
+        id: T-101
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-exact-replay
+        status: confirmed
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-source-replay
+        status: confirmed
+      - result: certificates-105-130-status-2026-10-07
+        id: T-129
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: superseded
+      - result: certificate-292-status-2026-10-07
+        id: T-129
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: superseded
+      - result: n17-exact-form-2026-10-10
+      beads: [think-x4v4]
     blocked:
       type: standing-hold
       reason: >-
@@ -7583,6 +7614,13 @@ issues:
       - result: n11-window-scoreboard
       - result: lean-layer
       - result: by-products-below-record
+    - url: https://github.com/jlevy/squares/issues/522#issuecomment-6542831736
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: stratification-strategy
+      beads: [think-3m7d]
     blocked:
       type: owner-decision
       reason: >-
@@ -24267,6 +24305,38 @@ issues:
       - result: notebook-rows-325-1024
       - result: notebook-recipes-325-1024
       - result: push-earlier-sides-325-1024
+    - url: https://github.com/jlevy/squares/issues/763#issuecomment-6542832947
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n268
+        id: T-240
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n268
+        id: E-couzo-763-exact-feasibility
+        status: confirmed
+      - result: n268
+        id: E-couzo-763-review-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: T-240
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n303
+        id: E-couzo-763-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: E-couzo-763-review-exact-feasibility
+        status: confirmed
+      - result: n683
+      - result: rows-above-1024
+      beads: [think-2z2n, think-llit]
     blocked:
       type: author
       reason: >-
