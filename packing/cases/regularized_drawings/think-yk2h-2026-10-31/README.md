@@ -61,11 +61,13 @@ regularized, with the same measures; 55, 290 and 291 keep their house drawings, 
 decided no better. `SETTLED`’s four exemptions are replaced by decisions at 55, 290 and
 291 on the same witnesses, and `UNRATIFIED` is empty.
 
-**For the owner.** At 55, 290 and 291 each view is an exact packing at $U$ that the
-selection leaves undrawn because nothing visible changes, so the numerically checked
-house drawing stays the picture.
-Whether exactness alone should earn such a view the picture is the policy’s improvement
-rule to say; under today’s rule, row 10’s “no change” decides it.
+**For the owner.** At 55, 290 and 291 each view is an exact packing at $U$ that ties the
+house drawing on every measure and is better only on exactness, the improvement rule’s
+goal that an exactly verified drawing beats a numerically checked one.
+The selection adopts only row 10’s admissions, and these are row 10’s “no change”
+(nothing visible changes), so none is drawn and the numerically checked house drawing
+stays the picture. Whether exactness alone should earn such a view the picture is the
+owner’s ruling to make, bead think-j68m.
 
 ## Files
 

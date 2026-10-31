@@ -931,8 +931,10 @@ selection admits it (row 10), an exactly verified view at most $U$ replacing a
 numerically checked witness with no measure worse; at 55 its view changes nothing
 visible, and at 290 and 291 its same-side view changes nothing visible and its solved
 view is held at row 4, $1.75 \times 10^{-19}$ above $U$. So 39 is regularized and 55,
-290 and 291 are decided no better (`SETTLED`), and no count is exempt.
-The evidence is retained in
+290 and 291 are decided no better (`SETTLED`): their views tie the house drawing on
+every measure and are better only on exactness, and row 10’s “no change” keeps them out
+(whether exactness alone should earn the picture is the owner’s question, think-j68m).
+No count is exempt. The evidence is retained in
 [`cases/regularized_drawings/think-yk2h-2026-10-31/`](../../cases/regularized_drawings/think-yk2h-2026-10-31/README.md).
 The index draws 94 views: 27 by the axis tool, 39 by Evan Daniel’s regularizer, 21 by
 the grid-slack generator’s version 1 and 7 by its version 2.

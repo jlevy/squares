@@ -715,8 +715,14 @@ the reason, the bead that will settle the count, and a review date at most 14 da
 that word. The records tier fails an exemption without the owner’s word or past its
 review date, and the intake sweep lists each one for the owner.
 The four decimal Kingbird witnesses at 39, 55, 290 and 291, set aside by an agent on 15
-October 2026 without a strong run, stand without the owner’s word until 9 November 2026
-and fail after it.
+October 2026 without a strong run, stood without the owner’s word until 9 November 2026,
+to fail after it. Both strong generators settled all four on 31 October 2026
+(think-yk2h): 39 is regularized, and at 55, 290 and 291 every view ties the house
+drawing on every measure and is better only on exactness, row 10 reports no change, and
+the count is decided no better.
+No count is exempt, and `default_drawings.UNRATIFIED` is empty
+([the runs’ evidence](../../../packing/cases/regularized_drawings/think-yk2h-2026-10-31/README.md);
+whether exactness alone should earn the picture is the owner’s question, think-j68m).
 
 A change that moves a house regularizes it in the same change, generally and by flip
 ([section 13](#13-flip-regularization)): against the record of the commit it is built

@@ -494,7 +494,9 @@ _README_QL4V = (
 #: version 2 draws each in the bound frame at 39 and 55 and at the witness's side at 290
 #: and 291. The selection drew Evan Daniel's solved view at 39, exactly verified at U, which
 #: replaces the numerically checked witness, and decided 55, 290 and 291, where every view
-#: ties the house drawing (`SETTLED`). Their receipt, blocks, reports and the selection's
+#: ties the house drawing on every measure, is better only on exactness and is row 10's
+#: "no change", so none is adopted (`SETTLED`; the owner's question whether exactness
+#: alone earns the picture is think-j68m). Their receipt, blocks, reports and the selection's
 #: report are in packing/cases/regularized_drawings/think-yk2h-2026-10-31/.
 _RUNYK2H = (
     ("evand-regularize", "evand-regularize-yk2h-2026-10-31-n39-291-evand"),
@@ -543,8 +545,10 @@ SETTLED: dict[int, Settled] = {
         "7.9457710075039129789580095385274780713965449730227",
         _RUNYK2H,
         "Evan Daniel's solved view and grid-slack's views at 0.5, 1 and 5 degrees are each "
-        "exactly verified at U and one to one with the witness, and each ties the house "
-        "drawing on every goal of the improvement rule: nothing visible changes (row 10)",
+        "exactly verified at U and one to one with the witness; each ties the house drawing "
+        "on every measure and is better only on exactness, and row 10 reports no change "
+        "(nothing visible changes), so the selection adopts none; whether exactness alone "
+        "should earn the picture is the owner's question (think-j68m)",
         _README_YK2H,
     ),
     68: Settled(
@@ -1021,9 +1025,11 @@ SETTLED: dict[int, Settled] = {
         "17.53553390593273762200422181052425",
         _RUNYK2H,
         "Evan Daniel's same-side view and grid-slack's views at 0.5, 1 and 5 degrees are "
-        "each exactly verified at the witness's side, U, and one to one with it, and each "
-        "ties the house drawing on every goal of the improvement rule: nothing visible "
-        "changes (row 10); his solved view is held at row 4 (1.75e-19 above U)",
+        "each exactly verified at the witness's side, U, and one to one with it; each ties "
+        "the house drawing on every measure and is better only on exactness, and row 10 "
+        "reports no change (nothing visible changes), so the selection adopts none; his "
+        "solved view is held at row 4 (1.75e-19 above U); whether exactness alone should "
+        "earn the picture is the owner's question (think-j68m)",
         _README_YK2H,
     ),
     291: Settled(
@@ -1034,9 +1040,11 @@ SETTLED: dict[int, Settled] = {
         "17.53553390593273762200422181052425",
         _RUNYK2H,
         "Evan Daniel's same-side view and grid-slack's views at 0.5, 1 and 5 degrees are "
-        "each exactly verified at the witness's side, U, and one to one with it, and each "
-        "ties the house drawing on every goal of the improvement rule: nothing visible "
-        "changes (row 10); his solved view is held at row 4 (1.75e-19 above U)",
+        "each exactly verified at the witness's side, U, and one to one with it; each ties "
+        "the house drawing on every measure and is better only on exactness, and row 10 "
+        "reports no change (nothing visible changes), so the selection adopts none; his "
+        "solved view is held at row 4 (1.75e-19 above U); whether exactness alone should "
+        "earn the picture is the owner's question (think-j68m)",
         _README_YK2H,
     ),
     297: Settled(
