@@ -801,6 +801,7 @@ case or experiment separately.
 | [Mathematical Review: wand125’s Fine-Net Lower Bounds at n = 37, 39 and 44 and the Linear Lower Bound at n = 145](docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md) | dated review record | record | retained | — |
 | [Fang’s Excess Theorem and Direct Certificates: Mathematical Review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) | dated review record | record | retained | — |
 | [Proof Review: Benjamin Greff’s `s(76) = 9` and `s(95) = 10` by Mixed Covers](docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md) | dated review record | record | retained | — |
+| [Proof Review: Khalili and Gharabaghi’s `s(44) = 7` by a Closed Mixed Cover](docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md) | dated review record | record | retained | — |
 | [Project changelog](CHANGELOG.md) | generated status view | generated | generated | — |
 | [Site Changelog Backfill Review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md) | dated review record | record | retained | — |
 | [Feature: Project Changelog and Recent PR Backfill](docs/project/specs/active/plan-2026-10-13-site-changelog.md) | implementation plan | current | transient | — |
@@ -5018,7 +5019,7 @@ Where the program has spent effort, and what came of it.
 | 16 | proved, $4$ | $4$ | proved not-below control | The valid replacement for the old $n=12$ guard: any reported side below $4$ is known to be invalid |
 | 17 | open | $4.67553009\ldots$ (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of $0^{\circ}$, $+39.80496^{\circ}$, and $-36.62379^{\circ}$. One round: [exp-011](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports $5.0$, the trivial $5\times5$ grid, on all five binary64 screening seeds |
 | 97 | proved, $10$ | $10$ (grid) | opportunistic slot, closed | Proved on 2026-10-03 as the case $m = 10$ of Evan Daniel’s $s(m^2 - 3) = m$ ([T-064](packing/frontier/RESULTS.md)), his `Valid7` checker replayed in full and his Lean reduction built here; $n = 61$ and $n = 78$, the other two of the slot, were proved on 2026-10-02 by replayed mixed covers. The registered analytic Cleemann-style attempt at $\arctan(3/4)$ was never made |
-| 1–324 | 77 proved, 247 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); see the [Frontier corpus summary](packing/frontier/README.md#what-the-corpus-shows) for the current aggregate lower-bound counts |
+| 1–324 | 78 proved, 246 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); see the [Frontier corpus summary](packing/frontier/README.md#what-the-corpus-shows) for the current aggregate lower-bound counts |
 
 Three facts about this table drive the strategy.
 

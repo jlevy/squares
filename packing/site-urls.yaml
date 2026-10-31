@@ -7403,7 +7403,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/45.html
   canonical: cases/45.html
@@ -21912,6 +21912,40 @@ urls:
     - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Main.lean
     - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Bridge.lean
     - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/library/library.sha256
+- path: result/t-252.html
+  canonical: result/t-252.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 44
+    established: null
+    attribution:
+      source_keys:
+      - '[Khalili Gharabaghi s44 cover 2026-10-29]'
+      published: '2026-10-26'
+    builds_on: null
+    evidence:
+    - E-khalili-842-cover-report
+    - E-khalili-842-cover-replay
+    - E-basic-grid-upper
+    artifacts:
+    - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/README.md
+    - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/s44-equals-7/certificate/s44_cover_7.txt.gz
+    - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/s44-equals-7/README.md
+    - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_d4.log
+    - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_full_resume1.log
+    - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/review/README.md
+    - packing/devtools/replay_evand_zmx2.py
+    - packing/devtools/audit_evand_mixed_covers.py
+    - packing/devtools/check_basic_bounds.py
+    - docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md
 - path: results.html
   canonical: results.html
   kind: page

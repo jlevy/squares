@@ -205,7 +205,8 @@ CASES = {
         (),
         100,
         ("--uncert-cap", "200000"),
-    ),    # Mohsen Khalili and Sara Gharabaghi's cover, whose verify.sh runs zmx2 cert --d4 and
+    ),
+    # Mohsen Khalili and Sara Gharabaghi's cover, whose verify.sh runs zmx2 cert --d4 and
     # --full with no other flag at evand/square-packing@659ee62.
     44: Case(
         "n44",

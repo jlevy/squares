@@ -2114,7 +2114,9 @@ def audit_whole_zmx2(case: Case, paths: Path | Sequence[Path], mode: str) -> dic
         fields.get(k) == v for fields in headers for k, v in required.items()
     )
     result["whole_clean"] = (
-        zmx2_clean(result) and result["headers_name_this_cover"] and result["settings_as_required"]
+        zmx2_clean(result)
+        and result["headers_name_this_cover"]
+        and result["settings_as_required"]
     )
     return result
 
