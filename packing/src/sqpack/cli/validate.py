@@ -1953,8 +1953,12 @@ def _slow_tests(context: Context) -> str:
     # module-level build is billed to whichever test reaches it first *per worker*, which
     # varies run to run, and contention inflates call time. Both push measured cost up, so
     # the floor got more permissive rather than noisier, and a stale marker can now
-    # survive it. The last full reading had nothing under the floor and its cheapest
-    # member at 2.07s, about twice the margin, so nothing is masked today.
+    # survive it. Runner draws work in the other direction as well. Between 25 and 30
+    # October 2026 the floor refused one marker on main four times, at 0.85s to 0.90s
+    # on fast draws (runs 40208626081, 40294622148, 40656970104 and 41026564353),
+    # while slow draws of the same test read up to 2.86s. Its marker was deleted
+    # (think-m2th). A marker whose cost straddles 1s across draws fails here only on
+    # the fast ones.
     # Per function, not per node, because the marker is per function. `_fast_tests` keeps
     # the opposite rule for the opposite reason: one node at or above the ceiling is one
     # node the pull-request surface actually pays for, whatever its siblings cost.
