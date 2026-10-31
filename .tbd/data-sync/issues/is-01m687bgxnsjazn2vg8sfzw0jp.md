@@ -5,14 +5,14 @@ title: Review Daniel's 172, 204, 260, 293 certificates (stage 4) and adopt all f
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m685ngekhjw1cxgta3763s3s
 created_at: 2026-10-31T05:36:39.349Z
-updated_at: 2026-10-31T05:36:39.349Z
+updated_at: 2026-10-31T07:29:24.709Z
 ---
 Stage 4 review of Evan Daniel's #845 certificates at 172, 204, 260 and 293 (T-256 on the lane's branch) and the adoption at all four, where each is the smallest reported side.
 
@@ -25,3 +25,7 @@ Stage 4 review of Evan Daniel's #845 certificates at 172, 204, 260 and 293 (T-25
 - Depends on: a strong-tier review lane the coordinator launches.
 - Done when: the review is mapped on the entry, check_results derives V3/C3, and the four counts are adopted and regularized with default_drawings --check-state --base-ref origin/main and flip_regularization --check passing.
 - Machine note: minutes of CPU for the review; run the regularization apart from a gate.
+
+## Notes
+
+2026-10-31: renumbered after #851's T-252: #845 is T-257 (was T-256).

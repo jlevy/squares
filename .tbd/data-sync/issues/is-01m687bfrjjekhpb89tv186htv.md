@@ -5,14 +5,14 @@ title: Review Couzo's 232, 260, 307 certificates (#844, a5a5d76) and adopt at 23
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m685nejvjntazeebg3zn18mt
 created_at: 2026-10-31T05:36:38.162Z
-updated_at: 2026-10-31T05:36:38.162Z
+updated_at: 2026-10-31T07:29:24.205Z
 ---
 Stage 4 review of Francisco Couzo's a5a5d76 certificates at 260 and 307 (T-254 on the lane's branch) and his #844 certificates at 232, 260 and 307 (T-255), and the adoption at 232 and 307, where #844's are the smallest reported sides. At 260 Evan Daniel's #845 certificate (T-256) is lower and is adopted instead if validated (think-17wo's validation bead).
 
@@ -25,3 +25,7 @@ Stage 4 review of Francisco Couzo's a5a5d76 certificates at 260 and 307 (T-254 o
 - Depends on: a strong-tier review lane the coordinator launches.
 - Done when: the review is mapped on both entries, check_results derives V3/C3, and 232 and 307 are adopted and regularized with default_drawings --check-state --base-ref origin/main and flip_regularization --check passing.
 - Machine note: minutes of CPU for the review; run the regularization apart from a gate.
+
+## Notes
+
+2026-10-31: renumbered after #851's T-252: a5a5d76 is T-255 and #844 is T-256 (were T-254, T-255).

@@ -5,14 +5,14 @@ title: Review Couzo's s(130) certificate (stage 4) and adopt at 130 with both re
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m685msgkcqe67s8cwkqy116j
 created_at: 2026-10-31T05:36:36.849Z
-updated_at: 2026-10-31T05:36:36.849Z
+updated_at: 2026-10-31T07:29:23.596Z
 ---
 Stage 4 review of Francisco Couzo's s(130) certificate (#843, T-253 on the lane's branch) and the adoption at 130. The house rule adopts the smallest validated side: Mykhailo Polkovskyi's #846 certificate at 130 (T-258 on the branch), a 2e-14 dilation of this packing 2.08e-12 below it, is adopted in its place if its review accepts it too (think-pg1y's validation bead), credited to Couzo's packing.
 
@@ -25,3 +25,7 @@ Stage 4 review of Francisco Couzo's s(130) certificate (#843, T-253 on the lane'
 - Depends on: a strong-tier review lane the coordinator launches; the #846 review decides which certificate re-houses 130.
 - Done when: the review is mapped on the entry with verdict accepted or defects-resolved, check_results derives V3/C3, and 130 is adopted and regularized with default_drawings --check-state --base-ref origin/main and flip_regularization --check passing.
 - Machine note: minutes of CPU for the review; run the regularization apart from a gate.
+
+## Notes
+
+2026-10-31: renumbered after #851's T-252: Couzo's 130 is T-254 (was T-253); Polkovskyi's #846 refinement at 130 is in T-259.
