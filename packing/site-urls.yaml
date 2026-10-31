@@ -21777,7 +21777,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-26'
-  lastmod: '2026-10-26'
+  lastmod: '2026-10-31'
   status: live
   identity:
     kind: upper-bound
@@ -21792,6 +21792,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-n299-certificate-report
+    - E-evand-n299-exact-feasibility
+    - E-evand-n299-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n299-2026-10-26/README.md
     - packing/resources/web/evand-n299-2026-10-26/acquisition/claims.json
@@ -21801,6 +21803,34 @@ urls:
     - packing/resources/web/evand-n299-2026-10-26/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-issue824-20261026/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
+  amendments:
+  - date: '2026-10-31'
+    reason: The 31 October stage 4 review of the issue 824 update decided this certificate again;
+      its replay and clean-room checker are entered as evidence, and the review and its code as artifacts.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 299
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n299 2026-10-26]'
+        published: '2026-10-26'
+      builds_on: null
+      evidence:
+      - E-evand-n299-certificate-report
+      artifacts:
+      - packing/resources/web/evand-n299-2026-10-26/README.md
+      - packing/resources/web/evand-n299-2026-10-26/acquisition/claims.json
+      - packing/resources/web/evand-n299-2026-10-26/source/search/packer/candidates/s299-1025.cert
+      - packing/resources/web/evand-n299-2026-10-26/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-n299-2026-10-26/receipts/sharp-controls.json
+      - packing/resources/web/evand-n299-2026-10-26/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-issue824-20261026/README.md
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-249.html
   canonical: result/t-249.html
   kind: result
@@ -21974,6 +22004,8 @@ urls:
     - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n271.json
     - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
 - path: result/t-254.html
   canonical: result/t-254.html
   kind: result
@@ -21995,6 +22027,8 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-843-certificate-report
+    - E-couzo-843-exact-feasibility
+    - E-couzo-843-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue843-2026-10-28/README.md
     - packing/resources/web/couzo-issue843-2026-10-28/acquisition/claims.json
@@ -22004,6 +22038,8 @@ urls:
     - packing/resources/web/couzo-issue843-2026-10-28/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-couzo-843-130.md
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
 - path: result/t-255.html
   canonical: result/t-255.html
   kind: result
@@ -22026,6 +22062,8 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-a5a5d76-certificate-report
+    - E-couzo-a5a5d76-exact-feasibility
+    - E-couzo-a5a5d76-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-a5a5d76-2026-10-28/README.md
     - packing/resources/web/couzo-a5a5d76-2026-10-28/acquisition/claims.json
@@ -22038,6 +22076,8 @@ urls:
     - packing/resources/web/couzo-a5a5d76-2026-10-28/measure/identity-n307.json
     - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
 - path: result/t-256.html
   canonical: result/t-256.html
   kind: result
@@ -22061,6 +22101,8 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-844-certificate-report
+    - E-couzo-844-exact-feasibility
+    - E-couzo-844-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue844-2026-10-28/README.md
     - packing/resources/web/couzo-issue844-2026-10-28/acquisition/claims.json
@@ -22076,6 +22118,8 @@ urls:
     - packing/resources/web/couzo-issue844-2026-10-28/measure/identity-n307.json
     - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
+    - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
 - path: result/t-257.html
   canonical: result/t-257.html
   kind: result
@@ -22100,6 +22144,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-845-certificate-report
+    - E-evand-845-exact-feasibility
+    - E-evand-845-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-issue845-2026-10-29/README.md
     - packing/resources/web/evand-issue845-2026-10-29/acquisition/claims.json
@@ -22118,6 +22164,8 @@ urls:
     - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n293.json
     - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
 - path: result/t-258.html
   canonical: result/t-258.html
   kind: result
@@ -22139,6 +22187,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-n299-update-certificate-report
+    - E-evand-n299-update-exact-feasibility
+    - E-evand-n299-update-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n299-update-2026-10-29/README.md
     - packing/resources/web/evand-n299-update-2026-10-29/acquisition/claims.json
@@ -22148,6 +22198,8 @@ urls:
     - packing/resources/web/evand-n299-update-2026-10-29/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
+    - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
 - path: result/t-259.html
   canonical: result/t-259.html
   kind: result
@@ -22160,8 +22212,41 @@ urls:
     kind: upper-bound
     scope:
       n_values:
-      - 105
       - 130
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 846 2026-10-30]'
+      published: '2026-10-30'
+    builds_on: null
+    evidence:
+    - E-mishapolk-846-certificate-report
+    - E-mishapolk-846-exact-feasibility
+    - E-mishapolk-846-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue846-2026-10-30/README.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n130.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n130.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n130.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+- path: result/t-260.html
+  canonical: result/t-260.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 105
       - 146
       - 156
       - 229
@@ -22178,26 +22263,25 @@ urls:
     - packing/resources/web/mishapolk-issue846-2026-10-30/README.md
     - packing/resources/web/mishapolk-issue846-2026-10-30/acquisition/claims.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n105.cert
-    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n130.cert
     - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n146.cert
     - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n156.cert
     - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n229.cert
     - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n308.cert
     - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/exact-certification.json.xz
     - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n105.json
-    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n130.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n146.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n156.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n229.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n308.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n105.json
-    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n130.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n146.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n156.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n229.json
     - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n308.json
     - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
 - path: results.html
   canonical: results.html
   kind: page

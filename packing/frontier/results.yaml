@@ -19547,6 +19547,7 @@ results:
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
         modifications: []
+        modifications_unrecorded: ["retry rungs"]
         side: solved
         first_certified_in: T-101
         identity:
@@ -31612,7 +31613,7 @@ results:
       as history.
 
       Evan Daniel's issue 845 reports at 260 a new arrangement 1.18e-02 below this entry's
-      side there, below Francisco Couzo's a5a5d76 and issue 844 certificates too (T-257).
+      side there, below Francisco Couzo's certificates of 28 October (T-255) and of issue 844 too (T-257).
       After the 31 October review of it, the case at 260 adopted it on 31 October 2026, and
       this entry's certificate there stays retained as history.
     next_rung: >-
@@ -35442,6 +35443,7 @@ results:
       checker of its own, by separating axes over every pair and by exact clipped areas with
       ten sharp controls each, by a Claude agent, a system family the producer also used,
       and found no blocking defect, so the bound is confirmed, independently re-implemented.
+
       It is recorded only: the 29 October update's certificate (T-258), which continues this
       packing, is 2.46e-3 lower, and the house rule adopts that one.
 
@@ -36307,7 +36309,9 @@ results:
       reader. The 31 October review decided it again on a clean-room checker of its own, by
       separating axes and by exact clipped areas with ten controls, by a Claude agent, a
       system family the producer also used, and found no blocking defect, so the bound is
-      confirmed, independently re-implemented. Mykhailo Polkovskyi's issue 846 re-solves the
+      confirmed, independently re-implemented.
+
+      Mykhailo Polkovskyi's issue 846 re-solves the
       same arrangement 2.08e-12 lower (T-259), and the case adopts that certificate under
       the house rule, with this packing's credit.
 
@@ -36425,8 +36429,7 @@ results:
       reviewer and a retained human oversight record; one AI review, of 31 October, is
       retained. The review's questions for the author (refinement or new packing, the
       thirteen intermediate packings, the rotation sense) hold no rung. Issue 846's
-      certificate of the same arrangement is 2.08e-12 lower (T-259), so the house rule
-      adopts that certificate at 130, with this packing's credit, and never this one.
+      certificate of the same arrangement is 2.08e-12 lower (T-259), so the case adopted that certificate at 130 on 31 October 2026, with this packing's credit, and never this one.
     reviews:
     - path: docs/project/reviews/review-2026-10-31-couzo-843-130.md
       kind: adversarial
@@ -36589,7 +36592,7 @@ results:
       relation: project
       date: '2026-10-31'
       scope: >-
-        Finite feasibility at n = 260 and 307 of the certificates at a5a5d76: decided again
+        Finite feasibility at n = 260 and 307 of Couzo's certificates of 28 October: decided again
         by a clean-room exact checker on two routes with ten controls each; agreement with
         the maintained replay; the sides and prints; the identity against the houses and
         issue 844's certificates; the lineage the credit records state; report order, credit
@@ -36634,12 +36637,14 @@ results:
       (version 3, run 362957087, sides 16.638533455862 and 17.979253973651), whose SOURCE_NOTICES.md
       credits Alex Chilton, David Ellsworth, Evan Daniel and public Kaggle portfolios.
 
-      Francisco Couzo (https://github.com/franciscouzo/square-packing) is credited with the refinements at 232 and 307 and, at 260, with a new arrangement found from ntumlnoob's packing, through his a5a5d76 refinement of it (T-255): 1.72e-3, 1.50e-3 and 2.7e-6 of the improvements, by code the issue names: at 232 GPU
+      Francisco Couzo (https://github.com/franciscouzo/square-packing) is credited with the refinements at 232 and 307 and, at 260, with a new arrangement found from ntumlnoob's packing, through his refinement of it of 28 October (T-255): 1.72e-3, 1.50e-3 and 2.7e-6 of the improvements, by code the issue names: at 232 GPU
       basin hopping with the overlap-energy kernel of Vladislav Lavrentev's (lightningv08) Kaggle
       notebook 'CUDA Packing Search' (Apache-2.0) and an Evan Daniel fq polish; at 260 an Ellsworth-style
       structural move modelled on David Ellsworth's tools, the author's SLP (HiGHS) and the web
       app's fq; at 307 the web app's fq, a browser adaptation of Evan Daniel's fq optimizer (MIT).
-      The issue calls 307 a refinement and leaves 232 and 260 to the record. Measured by the 31 October review, at 260 the source's own lineage starts from the a5a5d76 certificate, and one Ellsworth-style structural move and about 200 SLP steps move 170 squares beyond 0.1 of it with no symmetry pairing the two, so the record calls 260 a new arrangement found from ntumlnoob's packing (F-3); at 232 the starting packing is not published and the record keeps the source's word; at 307 the packing is the a5a5d76 one mirrored and refined. Kaggle per-puzzle sides
+      The issue calls 307 a refinement and leaves 232 and 260 to the record.
+
+      Measured by the 31 October review, at 260 the source's own lineage starts from his certificate of 28 October (T-255), and one Ellsworth-style structural move and about 200 SLP steps move 170 squares beyond 0.1 of it with no symmetry pairing the two, so the record calls 260 a new arrangement found from ntumlnoob's packing (F-3); at 232 the starting packing is not published and the record keeps the source's word; at 307 the packing is that of 28 October mirrored and refined. Kaggle per-puzzle sides
       the issue quotes below all three state no packing and are no report.
     scope:
       n_values:
@@ -36653,7 +36658,7 @@ results:
       rationale: >-
         New arrangements relative to the record at 232 and 260, 2.51e-03 and 8.72e-03 below
         the houses (T-186, T-225), one to one with no recorded packing under any symmetry,
-        as T-162's (S3) are. At 307, the author's a5a5d76 packing refined by 4.56e-12. No
+        as T-162's (S3) are. At 307, the author's packing of 28 October (T-255) refined by 4.56e-12. No
         lower bound or optimum.
       scored: '2026-10-31'
       by: >-
@@ -36746,14 +36751,26 @@ results:
       manifest's previous_source at 232 is the house certificate, the source's previous
       record, and not the lineage (N-1); the starting notebook packings are not published
       (F-5).
+
+      The case at 232 and at 307 adopted this entry's certificates as their house best
+      packings in the pass of 31 October 2026, from T-186 at 232 (and below T-193's
+      algebraic side, staged there) and from T-174 at 307, which stay retained as history,
+      with the credits of Couzo's refinements of Alex Chilton's and ntumlnoob's Kaggle
+      notebook packings. Both strong generators decided the new witnesses in the same pull
+      request (cases/regularized_drawings/think-3guf-2026-10-31): grid-slack's 1-degree view
+      is drawn at 232, at the witness's side; at 307 every view is refused at row 7 against
+      the axis tool's view, which stays drawn (decided no better), and Evan Daniel's
+      regularizer solved the witness to a KKT local minimum 3.75e-12 below its side, a
+      register candidate (think-ruu2) that is not adopted here.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 31 October, is
-      retained. The review's questions for the author (260 as a new arrangement, the
-      starting packings, the rotation sense) hold no rung. It is the smallest validated side
-      at 232 and 307, and the case adopts it there under the house rule, with both strong
-      generators' regularization of the new house, in this pass; at 260 issue 845's
-      certificate (T-257) is lower and is adopted instead.
+      retained. It is the smallest validated side at 232 and 307, and the case adopted it
+      there on 31 October 2026 under the house rule, with both strong generators'
+      regularization of each new house; at 260 issue 845's certificate (T-257) is lower and
+      was adopted instead. The regularizer's solved view at 307, below this side, waits for
+      its own registration and review (think-ruu2). The review's questions for the author
+      (260 as a new arrangement, the starting packings, the rotation sense) hold no rung.
     reviews:
     - path: docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md
       kind: adversarial
@@ -36769,7 +36786,7 @@ results:
         Finite feasibility at n = 232, 260 and 307 of issue 844's certificates: decided
         again by a clean-room exact checker on two routes with ten controls each; agreement
         with the maintained replay; the sides and prints; the identity against the houses,
-        the a5a5d76 certificates and issue 845's 260; the lineage the credit records state;
+        the certificates of 28 October and issue 845's 260; the lineage the credit records state;
         report order, credit and the significance.
       verdict: accepted
       covers: [T-255, T-256]
@@ -36947,18 +36964,30 @@ results:
       fits the 199 house less a 27-square L with 14 squares beyond 0.1, as the house's own
       172 fits the same cut with 20, so both are in the 199 record's L-cut family. The 204
       fits the 176 house's witness, Ostashev's packing as Polkovskyi refined it, loosely: 40
-      squares beyond 0.1, consistent with a seed nine generations back (N-4). The 260's
-      start is not retained (N-3). Side-only Kaggle values lie below at 172, 204 and 293;
+      squares beyond 0.1, consistent with a seed nine generations back (N-4).
+
+      The 260's start is not retained (N-3). Side-only Kaggle values lie below at 172, 204 and 293;
       the issue says the best public packing, not the best known side (N-7).
+
+      The case at 172, 204, 260 and 293 adopted this entry's certificates as their house
+      best packings in the pass of 31 October 2026, from T-174, T-231, T-225 and the
+      Kingbird catalogue's construction 723/41, which stay retained as history; at 293 the
+      conjectured optimum 723/41 is withdrawn. Both strong generators decided the new
+      witnesses in the same pull request (cases/regularized_drawings/think-3guf-2026-10-31):
+      grid-slack's views are drawn, its 5-degree view at 172 and 204 and its 0.5-degree view
+      at 260 and 293, each at its witness's side and better than the axis tool's view on some goal and worse on none.
+
+      Evan Daniel's regularizer drew no adoptable view at these counts (its 204 solve is no local minimum, as the issue's own exact solver did
+      not converge there). The rigidity blocks were derived again on the new witnesses, and
+      each stays not rigid.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 31 October, is
-      retained. The review's questions for the author (Kirill Tymchishin's identity, the
-      172's parent, the 204 exact point and an enclosure of the 172 KKT point) hold no rung.
-      It is the smallest validated side at 172, 204, 260 and 293, and the case adopts it
-      there under the house rule, with both strong generators' regularization of each new
-      house, in this pass; the adoption withdraws the conjectured optimum 723/41 at 293
-      (N-9).
+      retained. It is the smallest validated side at 172, 204, 260 and 293, and the case
+      adopted it there on 31 October 2026 under the house rule, with both strong generators'
+      regularization of each new house; the conjectured optimum 723/41 at 293 is withdrawn
+      (N-9). The review's questions for the author (Kirill Tymchishin's identity, the 172's
+      parent, the 204 exact point and an enclosure of the 172 KKT point) hold no rung.
     reviews:
     - path: docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md
       kind: adversarial
@@ -37096,21 +37125,32 @@ results:
       by separating axes with no distance filter and again by exact clipped areas; its least
       wall clearance, exactly 5e-21, and least pair gap, 9.999999999999987e-21 (squares 124
       and 134, from 0), equal the replay's as exact fractions, and its ten sharp controls
-      were decided as expected by both methods. Under the reversed rotation sense, 121 pairs
-      overlap. The certificate is the source's 80-digit KKT point dilated by 1 + 1e-20,
+      were decided as expected by both methods. Under the reversed rotation sense, 121 pairs overlap.
+
+      The certificate is the source's 80-digit KKT point dilated by 1 + 1e-20,
       1.78e-19 above the point's side, which overlaps by up to 6.4e-69 and is no packing
       (N-2). The local-minimality statement is the source's numerical report at 80 digits,
       strict only modulo 119 flat motions with 33 rattlers, and decides no rung; the
       certificate does not settle it (M-1).
+
+      The case at 299 adopted this certificate as its house best packing in the pass of 31
+      October 2026, from the Kingbird catalogue's construction 33/2 + √7/2, whose ceiling
+      T-101 verifies and which stays retained as history; the conjectured optimum
+      17.82287565553229 is withdrawn. Both strong generators decided the new witness in the
+      same pull request (cases/regularized_drawings/think-3guf-2026-10-31): Evan Daniel's
+      regularizer's certified KKT solve at the witness's side and grid-slack's views at all
+      three thresholds are each refused at row 7 against the axis tool's view, a total of
+      shared sides falling, so that view stays drawn (decided no better). The rigidity block
+      was derived again on the new witness and stays not rigid (N-5).
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 31 October, is
-      retained. The review's questions for the author (an enclosure of the KKT point, the
-      near-active gaps) hold no rung. It is the smallest validated side at 299, and the case
-      adopts it there under the house rule in place of the Kingbird catalogue's
-      construction, with both strong generators' regularization of the new house, in this
-      pass; the adoption withdraws the conjectured optimum 17.82287565553229 and derives the
-      rigidity block again (N-5). T-248, which it continues, is recorded only.
+      retained. It is the smallest validated side at 299, and the case adopted it there on
+      31 October 2026 under the house rule, with both strong generators' regularization of
+      the new house; the conjectured optimum 17.82287565553229 is withdrawn and the rigidity
+      block derived again (N-5). T-248, which it continues, is recorded only. The review's
+      questions for the author (an enclosure of the KKT point, the near-active gaps) hold no
+      rung.
     reviews:
     - path: docs/project/reviews/review-2026-10-31-daniel-824-299-update.md
       kind: adversarial
@@ -37248,13 +37288,24 @@ results:
       certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. No two independent methods, human oversight or optimality is
       claimed.
+
+      The case at 130 adopted this certificate as its house best packing in the pass of 31
+      October 2026, from T-174, which stays retained as history, with the packing's credit
+      Francisco Couzo's (T-254), found from PR #574's, and the re-solve Polkovskyi's. Both
+      strong generators decided the new witness in the same pull request
+      (cases/regularized_drawings/think-3guf-2026-10-31): grid-slack's 5-degree view is
+      drawn, at the witness's side; Evan Daniel's regularizer solved the witness to a KKT
+      local minimum 2.50e-13 below its side, a register candidate (think-ruu2) that is not
+      adopted here.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 31 October, is
-      retained. It is the smallest validated side at 130, and the case adopts it there under
-      the house rule, with the packing's credit Couzo's (T-254) and the re-solve
-      Polkovskyi's, and both strong generators' regularization of the new house, in this
-      pass.
+      retained. It is the smallest validated side at 130, and the case adopted it there on
+      31 October 2026 under the house rule, with the packing's credit Couzo's (T-254) and
+      the re-solve Polkovskyi's, and both strong generators' regularization of the new
+      house. The regularizer's solved view, 2.50e-13 below this side, waits for its own
+      registration and review (think-ruu2). The review's questions for the author hold no
+      rung.
     regularizations:
     - n: 130
       of: T-254
@@ -37887,17 +37938,18 @@ regularized_drawings:
         max_turn_deg: 4.72707
       view: packing/atlas/known-best/regularized/n-129-regularized.yaml.gz
     - n: 130
-      of: T-174
+      of: T-259
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.236129e-94
-        max_turn_deg: 0.0
+        moved: 9
+        max_move: 0.02716758
+        max_turn_deg: 1.84033
       view: packing/atlas/known-best/regularized/n-130-regularized.yaml.gz
     - n: 131
       of: T-174
@@ -38029,18 +38081,18 @@ regularized_drawings:
         max_turn_deg: 3.43775e-34
       view: packing/atlas/known-best/regularized/n-171-regularized.yaml.gz
     - n: 172
-      of: T-174
+      of: T-257
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 3
-        max_move: 0.004015517
-        max_turn_deg: 4.54359e-19
+        moved: 49
+        max_move: 0.09865514
+        max_turn_deg: 1.06934
       view: packing/atlas/known-best/regularized/n-172-regularized.yaml.gz
     - n: 175
       of: T-186
@@ -38199,18 +38251,18 @@ regularized_drawings:
         max_turn_deg: 1.61089
       view: packing/atlas/known-best/regularized/n-199-regularized.yaml.gz
     - n: 204
-      of: T-231
+      of: T-257
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 45
-        max_move: 0.2730522
-        max_turn_deg: 0.0818614
+        moved: 36
+        max_move: 0.3298194
+        max_turn_deg: 1.70663
       view: packing/atlas/known-best/regularized/n-204-regularized.yaml.gz
     - n: 206
       of: T-174
@@ -38351,18 +38403,18 @@ regularized_drawings:
         max_turn_deg: 4.149e-35
       view: packing/atlas/known-best/regularized/n-230-regularized.yaml.gz
     - n: 232
-      of: T-186
+      of: T-256
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 12
-        max_move: 0.06057722
-        max_turn_deg: 0.0114592
+        moved: 37
+        max_move: 0.05499795
+        max_turn_deg: 0.869803
       view: packing/atlas/known-best/regularized/n-232-regularized.yaml.gz
     - n: 234
       of: T-155
@@ -38476,17 +38528,18 @@ regularized_drawings:
         max_turn_deg: 0.267445
       view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
     - n: 260
-      of: T-225
+      of: T-257
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.251e-19
-        max_turn_deg: 0.0
+        moved: 49
+        max_move: 0.4395523
+        max_turn_deg: 0.104723
       view: packing/atlas/known-best/regularized/n-260-regularized.yaml.gz
     - n: 261
       of: T-174
@@ -38656,18 +38709,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-292-regularized.yaml.gz
     - n: 293
-      of: T-155
+      of: T-257
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: []
-      side: solved
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 27
-        max_move: 0.03448276
-        max_turn_deg: 0.0
+        moved: 52
+        max_move: 0.4395523
+        max_turn_deg: 0.104723
       view: packing/atlas/known-best/regularized/n-293-regularized.yaml.gz
     - n: 297
       of: T-174
@@ -38682,6 +38735,19 @@ regularized_drawings:
         max_move: 2.379619e-90
         max_turn_deg: 2.96678e-90
       view: packing/atlas/known-best/regularized/n-297-regularized.yaml.gz
+    - n: 299
+      of: T-258
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 63
+        max_move: 0.3155744
+        max_turn_deg: 0.000172571
+      view: packing/atlas/known-best/regularized/n-299-regularized.yaml.gz
     - n: 301
       of: T-098
       by: project
@@ -38766,17 +38832,16 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-306-regularized.yaml.gz
     - n: 307
-      of: T-174
+      of: T-256
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 6
-        max_move: 0.0630177
+        moved: 17
+        max_move: 0.2004715
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-307-regularized.yaml.gz
     - n: 308

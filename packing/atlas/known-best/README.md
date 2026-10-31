@@ -916,6 +916,30 @@ The evidence is retained in
 The index draws 93 views: 27 by the axis tool, 38 by Evan Daniel’s regularizer, 21 by
 the grid-slack generator’s version 1 and 7 by its version 2.
 
+The pass of 31 October 2026 (think-3guf) adopted, after that day’s stage 4 reviews,
+Francisco Couzo’s certificates of issue 844 at 232 and 307 (T-256), Evan Daniel’s of
+issue 845 at 172, 204, 260 and 293 (T-257), his update to issue 824 at 299 (T-258) and
+Mykhailo Polkovskyi’s re-solve of Couzo’s issue 843 packing at 130 (T-259). At 293 and
+299 the houses had been the Kingbird catalogue’s constructions, whose conjectured optima
+are withdrawn. Both generators ran on the eight new witnesses.
+Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-31-n130-307-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 1,244 CPU-seconds) draws a view at every count at the
+witness’s side, and the selection admits six (row 10): the 5-degree views at 130, 172
+and 204, the 1-degree view at 232 and the half-degree views at 260 and 293, each better
+than the axis tool’s view on some goal and worse on none.
+Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-31-n130-307-evand`, 1,501
+CPU-seconds) draws no adoptable view: its solves at 204, 232, 260 and 293 fail or do not
+certify, its views at 172 and 299 are refused or go to review at row 7, and at 130 and
+307 it solves the witness to a certified KKT local minimum $2.50 \times 10^{-13}$ and
+$3.75 \times 10^{-12}$ below its side, register candidates held at row 3 (think-ruu2).
+At 299 and 307 every other view is refused at row 7, so both are decided no better on
+the axis tool’s view, and `SETTLED` takes them; its entries at 130 and 260, made on the
+earlier witnesses, are removed.
+The evidence is retained in
+[`cases/regularized_drawings/think-3guf-2026-10-31/`](../../cases/regularized_drawings/think-3guf-2026-10-31/README.md).
+The index draws 94 views: 27 by the axis tool, 36 by Evan Daniel’s regularizer, 18 by
+the grid-slack generator’s version 1 and 13 by its version 2.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

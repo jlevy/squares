@@ -1273,9 +1273,9 @@ RESULTS: dict[str, Prose] = {
             307: (
                 "The source’s credit record says the search refined ntumlnoob’s packing from "
                 "the Kaggle notebook “First 22.268681355 Public Code With Explanation” to the "
-                "author’s certificate of a5a5d76 (T-255) and then by nine SLP steps. Measured "
+                "author’s certificate of 28 October (T-255) and then by nine SLP steps. Measured "
                 "by the 31 October review, square by square, nearest centres pair it one to "
-                "one with the a5a5d76 packing under a reflection of the box, no square moving "
+                "one with that packing under a reflection of the box, no square moving "
                 "beyond a tenth (at most 0.0167): a refinement of it, 4.56e-12 lower. Against "
                 "T-174’s packing, the house best packing here before this adoption, no "
                 "symmetry pairs nearest centres one to one and 91 squares lie beyond a tenth, "
