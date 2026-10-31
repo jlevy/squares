@@ -10463,9 +10463,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "directories, twice from this tree and once with that main's "
             "result-requests.yaml swapped in, render_packing_methods writes its 43 files "
             "byte-identical across the three. Measured again after merging main "
-            "4ed88d160 (#817, #857), at the same link revision with that main's "
-            "result-requests.yaml swapped in: 43 files, byte-identical across the three. "
-            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+            "4ed88d160 (#817, #857), and again after merging main e864059f8 (#858), each "
+            "at the same link revision with that main's result-requests.yaml swapped in: "
+            "43 files, byte-identical across the three each time. No PDF was printed; it "
+            "prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
 )
