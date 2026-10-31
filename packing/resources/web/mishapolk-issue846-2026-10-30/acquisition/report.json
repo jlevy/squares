@@ -316,42 +316,42 @@
   "pending": [
     {
       "n": 130,
-      "report": "#843",
+      "report": "T-253 (#843)",
       "url": "https://github.com/jlevy/squares/issues/843",
       "holders": "Francisco Couzo, after Chaoweeraprasit, Gupta and PingYou Ltd",
       "reader": "[Couzo n130 2026-10-27]"
     },
     {
       "n": 211,
-      "report": "Mishapolk/square-packing-records@e386aab (no issue)",
+      "report": "T-252, Polkovskyi of 23 October (no issue)",
       "url": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
       "holders": "Mykhailo Polkovskyi, of the house's packing",
       "reader": "[Mishapolk refinements 2026-10-23]"
     },
     {
       "n": 241,
-      "report": "Mishapolk/square-packing-records@e386aab (no issue)",
+      "report": "T-252, Polkovskyi of 23 October (no issue)",
       "url": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
       "holders": "Mykhailo Polkovskyi, of the house's packing",
       "reader": "[Mishapolk refinements 2026-10-23]"
     },
     {
       "n": 260,
-      "report": "franciscouzo/square-packing@a5a5d76 (no issue)",
+      "report": "T-254, Couzo of 28 October (no issue)",
       "url": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
       "holders": "Francisco Couzo, after ntumlnoob",
       "reader": "[Couzo a5a5d76 2026-10-28]"
     },
     {
       "n": 260,
-      "report": "#844",
+      "report": "T-255 (#844)",
       "url": "https://github.com/jlevy/squares/issues/844",
       "holders": "Francisco Couzo, after ntumlnoob",
       "reader": "[Couzo issue 844 2026-10-28]"
     },
     {
       "n": 260,
-      "report": "#845",
+      "report": "T-256 (#845)",
       "url": "https://github.com/jlevy/squares/issues/845",
       "holders": "Evan Daniel, after Kirill T",
       "reader": "[Daniel issue 845 2026-10-29]"
@@ -366,7 +366,7 @@
     },
     {
       "n": 299,
-      "report": "#824 update (issuecomment-6488202753)",
+      "report": "T-257 (#824 update)",
       "url": "https://github.com/jlevy/squares/issues/824#issuecomment-6488202753",
       "holders": "Evan Daniel, after Chris Deotte",
       "reader": "[Daniel n299 update 2026-10-29]"

@@ -35881,9 +35881,11 @@ results:
       s(237) <= 15.9026036382595968800201182179071384887302, s(241) <= 15.9871170951502387581618869582526723489714
       and s(271) <= 16.9489477337136575105539116351026963841491. Complete native feasibility outcomes
       are retained separately; the selected standing cases are unchanged pending independent review
-      and record review. The certificates lie 1.3e-19 to 1.7e-19 below the houses' certificates
-      at their counts (T-222, T-197, T-220, T-188, T-225, T-218, T-190, T-182 and T-219), each a
-      re-certification of the house's packing.
+      and record review.
+
+      The certificates lie 1.3e-19 to 1.7e-19 below the houses' certificates at their counts (T-222,
+      T-197, T-220, T-188, T-225, T-218, T-190, T-182 and T-219), each a re-certification of the
+      house's packing.
 
       Each commit's title calls its certificate a world record and states how far below the earlier
       certificate it lies, and the index certified_bounds.json records each as valid and strictly
@@ -35897,10 +35899,11 @@ results:
       154, 155, 236 and 271 and 'from Evan Daniel & Francisco Couzo' at 183, and credits Polkovskyi
       alone at 211, 227, 237 and 241, whose houses are Daniil Ostashev's (211, 241), Joost de Winter's
       (227) and Nate Chaoweeraprasit's (237) packings. A publication in a watched repository that
-      no issue reports, recorded from its commits by the owner's rule of 14 October 2026. The same
-      commits' certificates at 88, 126 and 152 lie below the house but above an exact side a register
-      entry states pending adoption (T-193 at 88 and 126, T-122 at 152), and those at 204 and 270
-      tie the house; the ledger records none of them.
+      no issue reports, recorded from its commits by the owner's rule of 14 October 2026.
+
+      The same commits' certificates at 88, 126 and 152 lie below the house but above an exact side
+      a register entry states pending adoption (T-193 at 88 and 126, T-122 at 152), and those at
+      204 and 270 tie the house; the ledger records none of them.
     scope:
       n_values:
       - 154
@@ -35995,17 +35998,18 @@ results:
       certificate. At n = 211 the certificate is below the case's ceiling (Daniil Ostashev, improved
       by Francisco Couzo, T-188) by 1.50e-19; smallest: this certificate. At n = 227 the certificate
       is below the case's ceiling (Joost de Winter, improved by Francisco Couzo, Evan Daniel, T-225)
-      by 1.56e-19; smallest: this certificate. At n = 236 the certificate is below the case's ceiling
-      (Evan Daniel, T-218) by 1.59e-19; smallest: this certificate. At n = 237 the certificate is
-      below the case's ceiling (Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, Mishapolk,
-      T-190) by 1.59e-19; smallest: this certificate. At n = 241 the certificate is below the case's
-      ceiling (Daniil Ostashev, improved by Francisco Couzo, T-182) by 1.60e-19; smallest: this
-      certificate. At n = 271 the certificate is below the case's ceiling (Evan Daniel, T-219) by
-      1.69e-19; smallest: this certificate.
+      by 1.56e-19; smallest: this certificate.
+
+      At n = 236 the certificate is below the case's ceiling (Evan Daniel, T-218) by 1.59e-19; smallest:
+      this certificate. At n = 237 the certificate is below the case's ceiling (Nate Chaoweeraprasit
+      (itsnaka), improved by Francisco Couzo, Mishapolk, T-190) by 1.59e-19; smallest: this certificate.
+      At n = 241 the certificate is below the case's ceiling (Daniil Ostashev, improved by Francisco
+      Couzo, T-182) by 1.60e-19; smallest: this certificate. At n = 271 the certificate is below
+      the case's ceiling (Evan Daniel, T-219) by 1.69e-19; smallest: this certificate.
 
       The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
-      walks every report at these counts in report order from starts frozen at main 3978a7f61 and
-      records this entry's claims at 154, 155, 183, 211, 227, 236, 237, 241 and 271.
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 154, 155, 183, 211, 227, 236, 237, 241 and 271.
 
       Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 154,
       nearest centres pair it one to one with T-222's packing (symmetry 0), 47 squares beyond 1e-3
@@ -36190,8 +36194,8 @@ results:
       arithmetic: verify_bound_certificate.py, Evan Daniel's MIT separating-axis verifier with modifications
       by Francisco Couzo with Codex, byte-identical to the copy the issue-678 packet retains (valid
       and strictly valid, 1,624 candidate pairs), and exact_finish.py, an exact corner replay; both
-      read the same certificate format. The source's commit 3a4d95c says the packing was read from
-      a database salvaged after a host crash of 26 October and ends with a Co-Authored-By trailer
+      read the same certificate format. The source's commit of 27 October says the packing was read
+      from a database salvaged after a host crash of 26 October and ends with a Co-Authored-By trailer
       naming Claude; the issue says Claude did the certification, the comparison and the report
       at the author's direction. Those statements are the author's; no source program ran here.
 
@@ -36202,9 +36206,10 @@ results:
       to this one, ten by the web app's fq quench (a browser adaptation of Evan Daniel's fq optimizer),
       two by its basin hopping and one by native SLP, all on his own computers, and that matched
       one to one against PR #574's packing the largest move is 0.704, 11 squares move beyond 0.1
-      and 26 beyond 0.01, so it calls it a new packing found from #574's. A Kaggle per-puzzle side
-      the issue quotes, 11.902430646006 for the team Cats and boxes, states no packing and is no
-      report.
+      and 26 beyond 0.01, so it calls it a new packing found from #574's.
+
+      A Kaggle per-puzzle side the issue quotes, 11.902430646006 for the team Cats and boxes, states
+      no packing and is no report.
     scope:
       n_values:
       - 130
@@ -36255,8 +36260,8 @@ results:
       by Siddharth Gupta, PingYou Ltd, T-174) by 2.05e-03; smallest: this certificate.
 
       The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
-      walks every report at these counts in report order from starts frozen at main 3978a7f61 and
-      records this entry's claims at 130.
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 130.
 
       Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 130,
       no symmetry pairs it one to one with T-174's packing by nearest centres; the optimal assignment
@@ -36371,8 +36376,8 @@ results:
       smallest: this certificate.
 
       The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
-      walks every report at these counts in report order from starts frozen at main 3978a7f61 and
-      records this entry's claims at 260 and 307.
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 260 and 307.
 
       Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 260,
       no symmetry pairs it one to one with T-225's packing by nearest centres; the optimal assignment
@@ -36417,25 +36422,26 @@ results:
       Complete native feasibility outcomes are retained separately; the selected standing cases
       are unchanged pending independent review and record review. They are 2.51e-3, 8.72e-3 and
       1.61e-3 below the houses, T-186 at 232, T-225 at 260 and T-174 at 307, and at 260 and 307
-      below the author's a5a5d76 certificates (T-254).
+      below the author's certificates of 28 October (T-254).
 
       The issue says both of the source's exact checkers accept all three certificates in exact
       rational arithmetic, valid and strictly valid with positive wall and pair margins: verify_bound_certificate.py,
       Evan Daniel's MIT separating-axis verifier with modifications by Francisco Couzo with Codex,
       byte-identical to the copy the issue-678 packet retains, and exact_finish.py, an exact corner
-      replay. The commit 712c6a6 ends with a Co-Authored-By trailer naming Claude, and the issue
-      says Claude did the certification, the comparison and the report at the author's direction.
-      Those statements are the author's; no source program ran here.
+      replay. The source's commit of 28 October ends with a Co-Authored-By trailer naming Claude,
+      and the issue says Claude did the certification, the comparison and the report at the author's
+      direction. Those statements are the author's; no source program ran here.
 
       Credit the starting packings to their Kaggle authors, as the issue does: at 232 Alex Chilton's
       notebook 'Fault-line DP + Basin Hopping - LB 22.2990' (run 362691257, side 15.763381419802),
       and at 260 and 307 ntumlnoob's notebook 'First 22.268681355 Public Code With Explanation'
       (version 3, run 362957087, sides 16.638533455862 and 17.979253973651), whose SOURCE_NOTICES.md
-      credits Alex Chilton, David Ellsworth, Evan Daniel and public Kaggle portfolios. Francisco
-      Couzo (https://github.com/franciscouzo/square-packing) is credited with the refinements only,
-      1.72e-3, 1.50e-3 and 2.7e-6 of the improvements, by code the issue names: at 232 GPU basin
-      hopping with the overlap-energy kernel of Vladislav Lavrentev's (lightningv08) Kaggle notebook
-      'CUDA Packing Search' (Apache-2.0) and an Evan Daniel fq polish; at 260 an Ellsworth-style
+      credits Alex Chilton, David Ellsworth, Evan Daniel and public Kaggle portfolios.
+
+      Francisco Couzo (https://github.com/franciscouzo/square-packing) is credited with the refinements
+      only, 1.72e-3, 1.50e-3 and 2.7e-6 of the improvements, by code the issue names: at 232 GPU
+      basin hopping with the overlap-energy kernel of Vladislav Lavrentev's (lightningv08) Kaggle
+      notebook 'CUDA Packing Search' (Apache-2.0) and an Evan Daniel fq polish; at 260 an Ellsworth-style
       structural move modelled on David Ellsworth's tools, the author's SLP (HiGHS) and the web
       app's fq; at 307 the web app's fq, a browser adaptation of Evan Daniel's fq optimizer (MIT).
       The issue calls 307 a refinement and leaves 232 and 260 to the record. Kaggle per-puzzle sides
@@ -36499,14 +36505,14 @@ results:
       At n = 232 the certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou
       Ltd, Mishapolk, T-186) by 2.51e-03; smallest: this certificate. At n = 260 the certificate
       is below the case's ceiling (Francisco Couzo, improved by Evan Daniel, T-225) by 8.72e-03;
-      below franciscouzo/square-packing@a5a5d76 (no issue) (Francisco Couzo, after ntumlnoob) by
-      1.50e-03; smallest: this certificate. At n = 307 the certificate is below the case's ceiling
-      (Nate Chaoweeraprasit (itsnaka), improved by PingYou Ltd, T-174) by 1.61e-03; below franciscouzo/square-packing@a5a5d76
-      (no issue) (Francisco Couzo, after ntumlnoob) by 4.56e-12; smallest: this certificate.
+      below T-254, Couzo of 28 October (no issue) (Francisco Couzo, after ntumlnoob) by 1.50e-03;
+      smallest: this certificate. At n = 307 the certificate is below the case's ceiling (Nate Chaoweeraprasit
+      (itsnaka), improved by PingYou Ltd, T-174) by 1.61e-03; below T-254, Couzo of 28 October (no
+      issue) (Francisco Couzo, after ntumlnoob) by 4.56e-12; smallest: this certificate.
 
       The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
-      walks every report at these counts in report order from starts frozen at main 3978a7f61 and
-      records this entry's claims at 232, 260 and 307.
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 232, 260 and 307.
 
       Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 232,
       no symmetry pairs it one to one with T-186's packing by nearest centres; the optimal assignment
@@ -36514,11 +36520,11 @@ results:
       by up to 45 degrees; at 260, no symmetry pairs it one to one with T-225's packing by nearest
       centres; the optimal assignment moves 192 squares beyond a tenth and 210 beyond a hundredth
       (largest 1.08752) and turns squares by up to 27.09 degrees; no symmetry pairs it one to one
-      with a5a5d76's packing by nearest centres; the optimal assignment moves 172 squares beyond
-      a tenth and 216 beyond a hundredth (largest 1.07764) and turns squares by up to 44.42 degrees;
+      with T-254's packing by nearest centres; the optimal assignment moves 172 squares beyond a
+      tenth and 216 beyond a hundredth (largest 1.07764) and turns squares by up to 44.42 degrees;
       at 307, no symmetry pairs it one to one with T-174's packing by nearest centres; the optimal
       assignment moves 91 squares beyond a tenth and 138 beyond a hundredth (largest 1.1367) and
-      turns squares by up to 34.04 degrees; nearest centres pair it one to one with a5a5d76's packing
+      turns squares by up to 34.04 degrees; nearest centres pair it one to one with T-254's packing
       (symmetry 4), 35 squares beyond 1e-3 and 40 beyond 1e-9, the largest move 1.667110e-2 and
       turn 0.5525 degrees.
 
@@ -36569,8 +36575,10 @@ results:
       80 digits, not interval proofs, that it is a local minimum of S strict modulo 69 exact flat
       motions; s172_1028_regularized.cert is a regularized view at the same side. At 204, 260 and
       293 the exact solver did not converge and the certificates dilate the binary64 packings by
-      1.5e-11 to 1.8e-11; local optimality is not established there. The commit ends with a Co-Authored-By
-      trailer naming Claude. Those statements are the author's; no source program ran here.
+      1.5e-11 to 1.8e-11; local optimality is not established there.
+
+      The commit ends with a Co-Authored-By trailer naming Claude. Those statements are the author's;
+      no source program ran here.
 
       Credit Evan Daniel (https://github.com/evand/square-packing), whose population searches over
       his packing store found all four, after the starts the issue asks to be credited: at 172 the
@@ -36580,10 +36588,11 @@ results:
       his public Kaggle notebook 'Square Packing Lab | CPU/CUDA/MPS' (side 16.638543986, 26 October),
       whose tilted island a fault-line composition and refill at 405 improved before a composition
       run put it in a 260 frame; and at 293 the 260 packing plus one L-shaped strip (Friedman's
-      L step), with the same credit. The issue calls all four new packings, none a refinement of
-      the register's. Kaggle per-puzzle sides it quotes at 172, 204 and 293 state no packing and
-      are no report. The source's credits say its work was produced by Claude (Anthropic) under
-      human direction.
+      L step), with the same credit.
+
+      The issue calls all four new packings, none a refinement of the register's. Kaggle per-puzzle
+      sides it quotes at 172, 204 and 293 state no packing and are no report. The source's credits
+      say its work was produced by Claude (Anthropic) under human direction.
     scope:
       n_values:
       - 172
@@ -36650,15 +36659,16 @@ results:
       packing) by 1.05e-03; smallest: this certificate. At n = 204 the certificate is below the
       case's ceiling (Francisco Couzo, improved by Mishapolk, T-231) by 1.02e-03; smallest: this
       certificate. At n = 260 the certificate is below the case's ceiling (Francisco Couzo, improved
-      by Evan Daniel, T-225) by 1.18e-02; below franciscouzo/square-packing@a5a5d76 (no issue) (Francisco
-      Couzo, after ntumlnoob) by 4.55e-03; below #844 (Francisco Couzo, after ntumlnoob) by 3.05e-03;
-      smallest: this certificate. At n = 293 the certificate is below the case's ceiling (David
-      Ellsworth (the Kingbird catalogue), verified by T-101's exact ceiling, T-101) by 1.64e-04;
-      smallest: this certificate.
+      by Evan Daniel, T-225) by 1.18e-02; below T-254, Couzo of 28 October (no issue) (Francisco
+      Couzo, after ntumlnoob) by 4.55e-03; below T-255 (#844) (Francisco Couzo, after ntumlnoob)
+      by 3.05e-03; smallest: this certificate.
+
+      At n = 293 the certificate is below the case's ceiling (David Ellsworth (the Kingbird catalogue),
+      verified by T-101's exact ceiling, T-101) by 1.64e-04; smallest: this certificate.
 
       The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
-      walks every report at these counts in report order from starts frozen at main 3978a7f61 and
-      records this entry's claims at 172, 204, 260 and 293.
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 172, 204, 260 and 293.
 
       Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 172,
       no symmetry pairs it one to one with T-174's packing by nearest centres; the optimal assignment
@@ -36668,7 +36678,7 @@ results:
       (largest 0.912662) and turns squares by up to 43.12 degrees; at 260, no symmetry pairs it
       one to one with T-225's packing by nearest centres; the optimal assignment moves 155 squares
       beyond a tenth and 250 beyond a hundredth (largest 1.00585) and turns squares by up to 27.31
-      degrees; no symmetry pairs it one to one with #844's packing by nearest centres; the optimal
+      degrees; no symmetry pairs it one to one with T-255's packing by nearest centres; the optimal
       assignment moves 199 squares beyond a tenth and 233 beyond a hundredth (largest 1.09528) and
       turns squares by up to 42.64 degrees; at 293, no symmetry pairs it one to one with T-101's
       packing by nearest centres; the optimal assignment moves 185 squares beyond a tenth and 219
@@ -36715,9 +36725,10 @@ results:
       byte-identical to the copies the n183 packet retains, both report VALID. It calls the certificate
       an exact KKT point whose 80-digit point, s299_1028.exact.txt, is a local minimum of S strict
       modulo 119 exact flat motions, with no corner-corner MILP descent, 64 corner-corner contacts
-      and 33 rattlers, by numerical evidence at 80 digits and not interval proofs. The commit 0e76d9f
-      says the regularized view failed its checkers and is not committed, and ends with a Co-Authored-By
-      trailer naming Claude. Those statements are the author's; no source program ran here.
+      and 33 rattlers, by numerical evidence at 80 digits and not interval proofs. The source's
+      commit of 29 October says the regularized view failed its checkers and is not committed, and
+      ends with a Co-Authored-By trailer naming Claude. Those statements are the author's; no source
+      program ran here.
 
       Credit Evan Daniel (https://github.com/evand/square-packing), who reports a new packing found
       from his T-248 packing at 299 by four generations of refill (removing a line or disc of squares,
@@ -36778,8 +36789,8 @@ results:
       Daniel, after Chris Deotte) by 2.46e-03; smallest: this certificate.
 
       The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
-      walks every report at these counts in report order from starts frozen at main 3978a7f61 and
-      records this entry's claims at 299.
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 299.
 
       Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 299,
       no symmetry pairs it one to one with T-248's packing by nearest centres; the optimal assignment
@@ -36825,9 +36836,11 @@ results:
       s(146) <= 12.583782190151860342291508597077, s(156) <= 648958292691713822691804519015415761935308555406679/50000000000000000000000000000000000000000000000000,
       s(229) <= 15.650161513876431064008548865321 and s(308) <= 17.997149121270908735152160752315.
       Complete native feasibility outcomes are retained separately; the selected standing cases
-      are unchanged pending independent review and record review. At 105, 146, 156, 229 and 308
-      they lie 1e-21 to 1e-41 below the houses' certificates (T-229, T-187, T-186, T-225 and T-221),
-      and at 130 2.08e-12 below Francisco Couzo's certificate of issue 843 (T-253).
+      are unchanged pending independent review and record review.
+
+      At 105, 146, 156, 229 and 308 they lie 1e-21 to 1e-41 below the houses' certificates (T-229,
+      T-187, T-186, T-225 and T-221), and at 130 2.08e-12 below Francisco Couzo's certificate of
+      issue 843 (T-253).
 
       The issue says every certificate yields valid and strictly valid, with positive wall and pair
       margin signs, under verify_bound_certificate.py --strict, Evan Daniel's MIT separating-axis
@@ -36843,9 +36856,9 @@ results:
       the register credits a regularization: at 130 Francisco Couzo's packing of issue 843, and
       at 105, 146, 156, 229 and 308 the house packing each case holds, as the measurement here pairs
       them. The issue reports eight more counts that the ledger of 31 October does not record: 182,
-      268 and 304 lie above each case's house, 204 and 260 above issue 845's certificates, 299 above Evan
-      Daniel's update to issue 824, and 211 and 241 restate the source's own certificates
-      first committed on 23 October.
+      268 and 304 lie above each case's house, 204 and 260 above issue 845's certificates, 299 above
+      Evan Daniel's update to issue 824, and 211 and 241 restate the source's own certificates first
+      committed on 23 October.
     scope:
       n_values:
       - 105
@@ -36921,18 +36934,19 @@ results:
       At n = 105 the certificate is below the case's ceiling (Ryan Xu, improved by Francisco Couzo,
       PingYou Ltd, Mishapolk, T-229) by 1.00e-21; smallest: this certificate. At n = 130 the certificate
       is below the case's ceiling (Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta,
-      PingYou Ltd, T-174) by 2.05e-03; below #843 (Francisco Couzo, after Chaoweeraprasit, Gupta
-      and PingYou Ltd) by 2.08e-12; smallest: this certificate. At n = 146 the certificate is below
-      the case's ceiling (Evan Daniel, T-187) by 1.00e-21; smallest: this certificate. At n = 156
-      the certificate is below the case's ceiling (Daniil Ostashev, improved by Francisco Couzo,
-      PingYou Ltd, Mishapolk, T-186) by 1.00e-41; smallest: this certificate. At n = 229 the certificate
-      is below the case's ceiling (Evan Daniel, T-225) by 1.00e-21; smallest: this certificate.
-      At n = 308 the certificate is below the case's ceiling (Evan Daniel, T-221) by 1.00e-21; smallest:
-      this certificate.
+      PingYou Ltd, T-174) by 2.05e-03; below T-253 (#843) (Francisco Couzo, after Chaoweeraprasit,
+      Gupta and PingYou Ltd) by 2.08e-12; smallest: this certificate. At n = 146 the certificate
+      is below the case's ceiling (Evan Daniel, T-187) by 1.00e-21; smallest: this certificate.
+      At n = 156 the certificate is below the case's ceiling (Daniil Ostashev, improved by Francisco
+      Couzo, PingYou Ltd, Mishapolk, T-186) by 1.00e-41; smallest: this certificate.
+
+      At n = 229 the certificate is below the case's ceiling (Evan Daniel, T-225) by 1.00e-21; smallest:
+      this certificate. At n = 308 the certificate is below the case's ceiling (Evan Daniel, T-221)
+      by 1.00e-21; smallest: this certificate.
 
       The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
-      walks every report at these counts in report order from starts frozen at main 3978a7f61 and
-      records this entry's claims at 105, 130, 146, 156, 229 and 308.
+      walks every report at these counts in report order from starts frozen on main on 31 October
+      and records this entry's claims at 105, 130, 146, 156, 229 and 308.
 
       Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 105,
       nearest centres pair it one to one with T-229's packing (symmetry 0), 0 squares beyond 1e-3
@@ -36949,8 +36963,8 @@ results:
 
       The issue's other eight certificates, at 182, 204, 211, 241, 260, 268, 299 and 304, are compared
       in the packet's claim record and replayed; the ledger records none of them (182, 268 and 304
-      above the house, 204 and 260 above #845, 299 above Evan Daniel's update to #824,
-      and 211 and 241 the source's own e386aab certificates, which T-252 records).
+      above the house, 204 and 260 above #845, 299 above Evan Daniel's update to #824, and 211 and
+      241 the source's own 23 October certificates, which T-252 records).
 
       The source's own checkers were not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share certificate parsing, half-angle

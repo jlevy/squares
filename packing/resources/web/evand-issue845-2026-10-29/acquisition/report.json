@@ -118,14 +118,14 @@
     },
     {
       "n": 260,
-      "report": "franciscouzo/square-packing@a5a5d76 (no issue)",
+      "report": "T-254, Couzo of 28 October (no issue)",
       "url": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
       "holders": "Francisco Couzo, after ntumlnoob",
       "reader": "[Couzo a5a5d76 2026-10-28]"
     },
     {
       "n": 260,
-      "report": "#844",
+      "report": "T-255 (#844)",
       "url": "https://github.com/jlevy/squares/issues/844",
       "holders": "Francisco Couzo, after ntumlnoob",
       "reader": "[Couzo issue 844 2026-10-28]"

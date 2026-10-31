@@ -84,14 +84,14 @@
   "pending": [
     {
       "n": 260,
-      "report": "franciscouzo/square-packing@a5a5d76 (no issue)",
+      "report": "T-254, Couzo of 28 October (no issue)",
       "url": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
       "holders": "Francisco Couzo, after ntumlnoob",
       "reader": "[Couzo a5a5d76 2026-10-28]"
     },
     {
       "n": 307,
-      "report": "franciscouzo/square-packing@a5a5d76 (no issue)",
+      "report": "T-254, Couzo of 28 October (no issue)",
       "url": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
       "holders": "Francisco Couzo, after ntumlnoob",
       "reader": "[Couzo a5a5d76 2026-10-28]"
@@ -101,7 +101,7 @@
     "title": "Francisco Couzo's certificates at 232, 260 and 307 at 712c6a6, issue 844",
     "headline": "Couzo's refinements of Kaggle notebook packings at 232, 260 and 307, below T-186, T-225 and T-174",
     "significance": 3,
-    "source_checks": "The issue says both of the source's exact checkers accept all three certificates in exact rational arithmetic, valid and strictly valid with positive wall and pair margins: verify_bound_certificate.py, Evan Daniel's MIT separating-axis verifier with modifications by Francisco Couzo with Codex, byte-identical to the copy the issue-678 packet retains, and exact_finish.py, an exact corner replay. The commit 712c6a6 ends with a Co-Authored-By trailer naming Claude, and the issue says Claude did the certification, the comparison and the report at the author's direction. Those statements are the author's; no source program ran here.",
+    "source_checks": "The issue says both of the source's exact checkers accept all three certificates in exact rational arithmetic, valid and strictly valid with positive wall and pair margins: verify_bound_certificate.py, Evan Daniel's MIT separating-axis verifier with modifications by Francisco Couzo with Codex, byte-identical to the copy the issue-678 packet retains, and exact_finish.py, an exact corner replay. The source's commit of 28 October ends with a Co-Authored-By trailer naming Claude, and the issue says Claude did the certification, the comparison and the report at the author's direction. Those statements are the author's; no source program ran here.",
     "credit": "Credit the starting packings to their Kaggle authors, as the issue does: at 232 Alex Chilton's notebook 'Fault-line DP + Basin Hopping - LB 22.2990' (run 362691257, side 15.763381419802), and at 260 and 307 ntumlnoob's notebook 'First 22.268681355 Public Code With Explanation' (version 3, run 362957087, sides 16.638533455862 and 17.979253973651), whose SOURCE_NOTICES.md credits Alex Chilton, David Ellsworth, Evan Daniel and public Kaggle portfolios. Francisco Couzo (https://github.com/franciscouzo/square-packing) is credited with the refinements only, 1.72e-3, 1.50e-3 and 2.7e-6 of the improvements, by code the issue names: at 232 GPU basin hopping with the overlap-energy kernel of Vladislav Lavrentev's (lightningv08) Kaggle notebook 'CUDA Packing Search' (Apache-2.0) and an Evan Daniel fq polish; at 260 an Ellsworth-style structural move modelled on David Ellsworth's tools, the author's SLP (HiGHS) and the web app's fq; at 307 the web app's fq, a browser adaptation of Evan Daniel's fq optimizer (MIT). The issue calls 307 a refinement and leaves 232 and 260 to the record. Kaggle per-puzzle sides the issue quotes below all three state no packing and are no report.",
     "next_rung": "Independently review the retained replay and the certificates (stage 4): a clean-room exact checker, the identity against the house's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt each count where it is the smallest validated side (232 and 307; at 260 issue 845's certificate is lower) under the house rule, with both strong generators' regularization and the flip of each new house in the same change.",
     "bead": "think-n61j",

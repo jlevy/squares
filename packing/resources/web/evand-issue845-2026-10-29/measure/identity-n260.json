@@ -12,7 +12,7 @@
    "packet": "evand-regularized-2026-10-20",
    "side": "4161438312629953048686574163329/250000000000000000000000000000"
   },
-  "#844": {
+  "T-255": {
    "input": "packet",
    "packet": "couzo-issue844-2026-10-28",
    "side": "104381051573626493618357957479/6274019722347000000000000000"
@@ -52,7 +52,7 @@
    "near_upright": 0,
    "near_upright_beyond_1e-3_degrees": []
   },
-  "#844": {
+  "T-255": {
    "exactly_turned": 129,
    "tilted_beyond_1_degree": 100,
    "tilted_positive": 0,
@@ -123,7 +123,7 @@
   },
   {
    "view": "#845",
-   "against": "#844",
+   "against": "T-255",
    "side_difference": "-3.047057e-03",
    "side_difference_exact": "-9558647069447368053776247073775782756949/3137009861173500000000000000000000000000000",
    "nearest_centre": {

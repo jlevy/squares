@@ -5355,7 +5355,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -5579,7 +5579,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/131.html
   canonical: cases/131.html
@@ -5715,7 +5715,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/147.html
   canonical: cases/147.html
@@ -5787,7 +5787,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-20'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/155.html
   canonical: cases/155.html
@@ -5795,7 +5795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/156.html
   canonical: cases/156.html
@@ -5803,7 +5803,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/157.html
   canonical: cases/157.html
@@ -5947,7 +5947,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-25'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/173.html
   canonical: cases/173.html
@@ -6043,7 +6043,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/184.html
   canonical: cases/184.html
@@ -6235,7 +6235,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-24'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -6299,7 +6299,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/212.html
   canonical: cases/212.html
@@ -6435,7 +6435,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/228.html
   canonical: cases/228.html
@@ -6451,7 +6451,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/23.html
   canonical: cases/23.html
@@ -6483,7 +6483,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/233.html
   canonical: cases/233.html
@@ -6515,7 +6515,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/237.html
   canonical: cases/237.html
@@ -6523,7 +6523,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/238.html
   canonical: cases/238.html
@@ -6563,7 +6563,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/242.html
   canonical: cases/242.html
@@ -6731,7 +6731,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -6827,7 +6827,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/272.html
   canonical: cases/272.html
@@ -7019,7 +7019,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/294.html
   canonical: cases/294.html
@@ -7067,7 +7067,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-26'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/3.html
   canonical: cases/3.html
@@ -7147,7 +7147,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/308.html
   canonical: cases/308.html
@@ -7155,7 +7155,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-20'
+  lastmod: '2026-10-31'
   status: live
 - path: cases/309.html
   canonical: cases/309.html
@@ -21912,6 +21912,292 @@ urls:
     - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Main.lean
     - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Bridge.lean
     - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/library/library.sha256
+- path: result/t-252.html
+  canonical: result/t-252.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 154
+      - 155
+      - 183
+      - 211
+      - 227
+      - 236
+      - 237
+      - 241
+      - 271
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk refinements 2026-10-23]'
+      published: '2026-10-23'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1023-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/README.md
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/acquisition/claims.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n154.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n155.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n183.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n211.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n227.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n236.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n237.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n241.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n271.cert
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n154.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n155.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n183.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n211.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n227.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n236.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n237.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n241.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n271.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n154.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n155.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n183.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n211.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n227.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n236.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n237.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n241.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n271.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-253.html
+  canonical: result/t-253.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 130
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo n130 2026-10-27]'
+      published: '2026-10-27'
+    builds_on: null
+    evidence:
+    - E-couzo-843-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-issue843-2026-10-28/README.md
+    - packing/resources/web/couzo-issue843-2026-10-28/acquisition/claims.json
+    - packing/resources/web/couzo-issue843-2026-10-28/source/certificates/n130.cert
+    - packing/resources/web/couzo-issue843-2026-10-28/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue843-2026-10-28/receipts/sharp-controls.json
+    - packing/resources/web/couzo-issue843-2026-10-28/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-254.html
+  canonical: result/t-254.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 260
+      - 307
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo a5a5d76 2026-10-28]'
+      published: '2026-10-28'
+    builds_on: null
+    evidence:
+    - E-couzo-a5a5d76-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/README.md
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/acquisition/claims.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/n260.cert
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/n307.cert
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/receipts/sharp-controls-n260.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/receipts/sharp-controls-n307.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/measure/identity-n260.json
+    - packing/resources/web/couzo-a5a5d76-2026-10-28/measure/identity-n307.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-255.html
+  canonical: result/t-255.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 232
+      - 260
+      - 307
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo issue 844 2026-10-28]'
+      published: '2026-10-28'
+    builds_on: null
+    evidence:
+    - E-couzo-844-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-issue844-2026-10-28/README.md
+    - packing/resources/web/couzo-issue844-2026-10-28/acquisition/claims.json
+    - packing/resources/web/couzo-issue844-2026-10-28/source/certificates/best/n232.cert
+    - packing/resources/web/couzo-issue844-2026-10-28/source/certificates/n260.cert
+    - packing/resources/web/couzo-issue844-2026-10-28/source/certificates/n307.cert
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n232.json
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n260.json
+    - packing/resources/web/couzo-issue844-2026-10-28/receipts/sharp-controls-n307.json
+    - packing/resources/web/couzo-issue844-2026-10-28/measure/identity-n232.json
+    - packing/resources/web/couzo-issue844-2026-10-28/measure/identity-n260.json
+    - packing/resources/web/couzo-issue844-2026-10-28/measure/identity-n307.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-256.html
+  canonical: result/t-256.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 172
+      - 204
+      - 260
+      - 293
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel issue 845 2026-10-29]'
+      published: '2026-10-29'
+    builds_on: null
+    evidence:
+    - E-evand-845-certificate-report
+    artifacts:
+    - packing/resources/web/evand-issue845-2026-10-29/README.md
+    - packing/resources/web/evand-issue845-2026-10-29/acquisition/claims.json
+    - packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s172_1028.cert
+    - packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s204_1028.cert
+    - packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s260_1028.cert
+    - packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s293_1028.cert
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n172.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n204.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n260.json
+    - packing/resources/web/evand-issue845-2026-10-29/receipts/sharp-controls-n293.json
+    - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n172.json
+    - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n204.json
+    - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n260.json
+    - packing/resources/web/evand-issue845-2026-10-29/measure/identity-n293.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-257.html
+  canonical: result/t-257.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 299
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n299 update 2026-10-29]'
+      published: '2026-10-29'
+    builds_on: null
+    evidence:
+    - E-evand-n299-update-certificate-report
+    artifacts:
+    - packing/resources/web/evand-n299-update-2026-10-29/README.md
+    - packing/resources/web/evand-n299-update-2026-10-29/acquisition/claims.json
+    - packing/resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/s299_1028.cert
+    - packing/resources/web/evand-n299-update-2026-10-29/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n299-update-2026-10-29/receipts/sharp-controls.json
+    - packing/resources/web/evand-n299-update-2026-10-29/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-258.html
+  canonical: result/t-258.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-31'
+  lastmod: '2026-10-31'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 130
+      - 146
+      - 156
+      - 229
+      - 308
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 846 2026-10-30]'
+      published: '2026-10-30'
+    builds_on: null
+    evidence:
+    - E-mishapolk-846-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-issue846-2026-10-30/README.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n105.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n130.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n146.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n156.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n229.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n308.cert
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n105.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n130.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n146.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n156.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n229.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n308.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n105.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n130.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n146.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n156.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n229.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n308.json
+    - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

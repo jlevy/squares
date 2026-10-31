@@ -52759,10 +52759,11 @@ evidence:
       longest job 11.86 seconds. Every positive clears every wall by at least 5.00e-31 and every
       pair by at least 9.99e-31. The packet's sharp controls meet those margins on both routes.
       Independent review and confirmation remain pending (think-ikku). The source's own checkers
-      were not run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
-      arithmetic and the separating-axis method. No two independent methods, human oversight or
-      optimality is claimed.
+      were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
   - id: E-couzo-843-certificate-report
     claim: upper-bound
     scope:
@@ -52787,10 +52788,11 @@ evidence:
       the longest job 3.39 seconds. Every positive clears every wall by at least 1.00e-15 and every
       pair by at least 2.07e-13. The packet's sharp controls meet those margins on both routes.
       Independent review and confirmation remain pending (think-oy8d). The source's own checkers
-      were not run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
-      arithmetic and the separating-axis method. No two independent methods, human oversight or
-      optimality is claimed.
+      were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
   - id: E-couzo-a5a5d76-certificate-report
     claim: upper-bound
     scope:
@@ -52816,10 +52818,11 @@ evidence:
       wall seconds, the longest job 29.31 seconds. Every positive clears every wall by at least
       1.00e-15 and every pair by at least 1.23e-13. The packet's sharp controls meet those margins
       on both routes. Independent review and confirmation remain pending (think-dwzb). The source's
-      own checkers were not run here. The two maintained routes, the sqpack rational witness verifier
-      and the independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight
-      or optimality is claimed.
+      own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
   - id: E-couzo-844-certificate-report
     claim: upper-bound
     scope:
@@ -52846,10 +52849,11 @@ evidence:
       and 121.85 job wall seconds, the longest job 19.6 seconds. Every positive clears every wall
       by at least 1.00e-15 and every pair by at least 1.85e-13. The packet's sharp controls meet
       those margins on both routes. Independent review and confirmation remain pending (think-dwzb).
-      The source's own checkers were not run here. The two maintained routes, the sqpack rational
-      witness verifier and the independent rational corner checker, share certificate parsing, half-angle
-      conversion, Fraction arithmetic and the separating-axis method. No two independent methods,
-      human oversight or optimality is claimed.
+      The source's own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
   - id: E-evand-845-certificate-report
     claim: upper-bound
     scope:
@@ -52877,10 +52881,11 @@ evidence:
       seconds and 183.02 job wall seconds, the longest job 21.05 seconds. Every positive clears
       every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The packet's sharp controls
       meet those margins on both routes. Independent review and confirmation remain pending (think-nkt1).
-      The source's own checkers were not run here. The two maintained routes, the sqpack rational
-      witness verifier and the independent rational corner checker, share certificate parsing, half-angle
-      conversion, Fraction arithmetic and the separating-axis method. No two independent methods,
-      human oversight or optimality is claimed.
+      The source's own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
   - id: E-evand-n299-update-certificate-report
     claim: upper-bound
     scope:
@@ -52905,10 +52910,11 @@ evidence:
       job wall seconds, the longest job 47.76 seconds. Every positive clears every wall by at least
       5.00e-21 and every pair by at least 9.99e-21. The packet's sharp controls meet those margins
       on both routes. Independent review and confirmation remain pending (think-8hjz). The source's
-      own checkers were not run here. The two maintained routes, the sqpack rational witness verifier
-      and the independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight
-      or optimality is claimed.
+      own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
   - id: E-mishapolk-846-certificate-report
     claim: upper-bound
     scope:
@@ -52939,7 +52945,8 @@ evidence:
       longest job 51.24 seconds. Every positive clears every wall by at least 4.00e-41 and every
       pair by at least 9.99e-41. The packet's sharp controls meet those margins on both routes.
       Independent review and confirmation remain pending (think-ikku). The source's own checkers
-      were not run here. The two maintained routes, the sqpack rational witness verifier and the
-      independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
-      arithmetic and the separating-axis method. No two independent methods, human oversight or
-      optimality is claimed.
+      were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
