@@ -1148,6 +1148,7 @@ issues:
     - think-05m9
     - think-tiou
     - think-93nb
+    - think-ysif
     answer_bead: think-ybmt
     replies:
     - url: https://github.com/jlevy/squares/issues/375#issuecomment-6004562871
@@ -1173,6 +1174,11 @@ issues:
       outdated:
       - 'everything it describes is recorded on an intake branch and not merged to main, with T-098
         provisional; #369 merged it, and T-098 holds on main'
+      - 'says the two checkers that decided T-098''s replay (E-evand-exact-optima-2026-10-05-exact-replay)
+        share no code with the author''s; the evand-cert adapter both read through transcribes
+        verify_cert2.py''s corners and both checkers'' line filter (V-evand-exact-certificates, RF-1 of
+        the review of #728), and think-ysif aligns the entry; the correction of 31 October
+        (issuecomment-6543355721) states it'
     - url: https://github.com/jlevy/squares/issues/375#issuecomment-6008229686
       date: '2026-10-06'
       by: jlevy
@@ -1229,6 +1235,53 @@ issues:
         status: recorded
       - result: source-valid-invalid-wrapper-correction-2026-10-07
       - result: n17-exact-form-2026-10-10
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6542830540
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: ceilings-77
+        id: T-101
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-exact-replay
+        status: confirmed
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-source-replay
+        status: confirmed
+      - result: certificates-105-130-status-2026-10-07
+        id: T-129
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: superseded
+      - result: certificate-292-status-2026-10-07
+        id: T-129
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: superseded
+      - result: n17-exact-form-2026-10-10
+      beads: [think-x4v4]
+      outdated:
+      - 'describes E-evand-exact-ceilings-2026-10-05-exact-replay as an independent implementation
+        whose two checkers share no code with the author''s; the evand-cert adapter both read
+        through transcribes verify_cert2.py''s corners and both checkers'' line filter
+        (V-evand-exact-certificates, RF-1 of the review of #728), and think-ysif aligns the entry'
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6543355721
+      date: '2026-10-31'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-exact-replay
+      corrects:
+      - https://github.com/jlevy/squares/issues/375#issuecomment-6007913483
+      - https://github.com/jlevy/squares/issues/375#issuecomment-6542830540
+      beads: [think-ysif]
     blocked:
       type: standing-hold
       reason: >-
@@ -7583,6 +7636,13 @@ issues:
       - result: n11-window-scoreboard
       - result: lean-layer
       - result: by-products-below-record
+    - url: https://github.com/jlevy/squares/issues/522#issuecomment-6542831736
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: stratification-strategy
+      beads: [think-3m7d]
     blocked:
       type: owner-decision
       reason: >-
@@ -24266,6 +24326,38 @@ issues:
       - result: notebook-rows-325-1024
       - result: notebook-recipes-325-1024
       - result: push-earlier-sides-325-1024
+    - url: https://github.com/jlevy/squares/issues/763#issuecomment-6542832947
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n268
+        id: T-240
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n268
+        id: E-couzo-763-exact-feasibility
+        status: confirmed
+      - result: n268
+        id: E-couzo-763-review-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: T-240
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n303
+        id: E-couzo-763-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: E-couzo-763-review-exact-feasibility
+        status: confirmed
+      - result: n683
+      - result: rows-above-1024
+      beads: [think-2z2n, think-llit]
     blocked:
       type: author
       reason: >-
@@ -26054,15 +26146,29 @@ issues:
     - think-6gti
     - think-10m1
     answer_bead: think-10m1
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/816#issuecomment-6543105784
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s29-minimal-polynomial
+        id: T-246
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: s29-minimal-polynomial
+        id: E-n029-evand-minpoly-7213-report
     close_when: Each of the six steps has a status backed by receipts on main, and the owner has
       decided T-246's kind and n = 29's lanes.
     notes: >-
       The project opened this issue; it reports no result of the project's own, and no
       acknowledgement is owed on it. It is marked intake, as #811 is, as the project's own issue
       tracking the validation of a reported item that #545 has tracked since 12 October. The
-      coordinator updates its status column and log from the lane's reports; the lane does not
-      post on it.
+      coordinator updates its status column and log from the lane's reports. Its first status
+      reply, a follow-up, was posted on 31 October 2026 after #817 merged and the deploy of
+      main a8deaf1b6 was verified; a reply follows each change in the record, as that reply
+      says.
   - number: 819
     title: 's(344) ≤ 18.992567544845: registration request'
     author: amundsk
@@ -26626,7 +26732,8 @@ issues:
     title: 's(44) = 7: registration request'
     author: moh63-dev
     opened: '2026-10-26'
-    state: open
+    state: closed
+    closed: '2026-10-31'
     kind: result-report
     triage: done
     summary: >-
@@ -26661,7 +26768,25 @@ issues:
     - think-1v4b
     - think-qvp6
     answer_bead: think-1v4b
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/842#issuecomment-6542869817
+      date: '2026-10-31'
+      by: jlevy
+      kind: final
+      reported:
+      - result: s44-equals-7
+        id: T-252
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: s44-equals-7
+        id: E-khalili-842-cover-replay
+        status: confirmed
+      - result: s44-equals-7
+        id: E-khalili-842-cover-report
+      beads:
+      - think-qvp6
     close_when: >-
       The import and its disposition are on main and the site, and the reply on main reports
       T-252 at its rungs and n-044 as proved; nothing the authors asked for is queued.
@@ -26672,7 +26797,13 @@ issues:
       github-workflows grant; no n-44 case label exists, though the label policy would give
       one to an optimality claim under review, so it is left for the owner. The packet pins
       the head, v1.1, by stage 1's rule; the issue body names v1.0, whose certificate is the
-      same bytes.
+      same bytes. Closed on 31 October 2026 with the final reply, after the deploy of main
+      90b79dbe1 (#851) was verified (Pages run 41196287332, verify-deployment 5,961 of 5,961
+      checks). The reply's one question, whether the zm_mixed.py runs left out --cert-mode on
+      purpose, is informational: for this cover nothing certificate mode disables is
+      reachable, and zm_mixed.py decides nothing in the record. The issue body already
+      answers the zeromargin.py pin, both files used as they are at 659ee62, so it was not
+      asked again.
   - number: 847
     title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
     author: mohsensbu-jpg
