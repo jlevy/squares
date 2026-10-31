@@ -5,7 +5,7 @@ title: "Import Mohsen Karimi: 5,134 upper bounds at n = 1182-9946, filled-end tw
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 delegate: bold-ritchie-l4
 labels:
   - result-import
@@ -14,10 +14,11 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 child_order_hints:
   - is-01m685x87zdg13w910fy66rd68
   - is-01m685x9g3gm6q41qv9147fwb5
+  - is-01m68x7g71xe6kt00er4pczthj
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:14.372Z
-updated_at: 2026-10-31T07:43:12.674Z
+updated_at: 2026-10-31T11:58:56.225Z
 started_at: 2026-10-31T05:13:12.006Z
 ---
 New 2026-10-30 issue https://github.com/jlevy/squares/issues/847 (mohsensbu-jpg, 21:56:32Z): Mohsen Karimi's filled-end record set V2.0, 5,134 upper bounds at n = 1182 to 9946, a new construction: the two-band L packing of #836 with the band ends filled by axis-parallel layers. It supersedes V1.0, posted on #836 (comment 6433611255, 2026-10-27T04:16:22Z). Same author as #799 (think-5dc3) and #836 (think-7yrs); a different construction, which two_strip_checker does not read, so it needs W9 (think-fuwd). Stage 0 owner: bold-ritchie-l4 (intake pass 2026-10-31, think-3guf).
