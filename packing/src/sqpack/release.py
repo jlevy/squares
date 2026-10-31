@@ -10571,6 +10571,25 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "that HTML. The survey keeps v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The author's licence answer on #847 (think-nu37): #847's entry read through "
+            "his comment of 16:22:49Z on 31 October, with the licence and the preprint it "
+            "names in its summary and notes, and a note on #836's entry naming that "
+            "preprint; no register entry, row, side, bound or credit changes. Against main "
+            "bed14afa2 (#862): rendered at link revision "
+            "0000000000000000000000000000000000000000 into empty site directories, twice "
+            "from this tree and once with that main's result-requests.yaml swapped in, "
+            "render_packing_methods writes its 43 files byte-identical across the three. "
+            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 
