@@ -492,25 +492,53 @@ WORD = defaults.OwnerWord(
 DAY = date(2026, 10, 26)
 
 
-def _exempt(n: int, **change: object) -> dict[int, defaults.Settled]:
-    """`SETTLED` with count `n`'s exemption given the owner's word and a review date."""
-    held = defaults.SETTLED[n]._replace(owner_word=WORD, review_by="2026-11-06")
-    return {**defaults.SETTLED, n: held._replace(**change)}
+def _exempt(
+    n: int, base: dict[int, defaults.Settled] | None = None, **change: object
+) -> dict[int, defaults.Settled]:
+    """`SETTLED` (or `base`) with count `n`'s exemption given the owner's word and a review
+    date."""
+    settled = dict(defaults.SETTLED) if base is None else base
+    held = settled[n]._replace(owner_word=WORD, review_by="2026-11-06")
+    return {**settled, n: held._replace(**change)}
 
 
-def test_a_recorded_owner_exemption_passes_and_an_unworded_one_fails() -> None:
+def _exemption_case(tmp_path: Path) -> tuple[int, Path, dict[int, defaults.Settled]]:
+    """A count exempt without the owner's word on its own witness, the record holding it,
+    and `SETTLED` with it: the data's first exemption, or, since the four decimal Kingbird
+    witnesses were settled on 31 October 2026 (think-yk2h) and none is left, a synthetic
+    one at 55, its row made exempt in a copy of the record."""
     exempt = sorted(n for n, held in defaults.SETTLED.items() if held.state == defaults.EXEMPT)
-    if not exempt:
-        pytest.skip("the data holds no exemption")
-    n = exempt[0]
+    if exempt:
+        return exempt[0], defaults.RECORD, dict(defaults.SETTLED)
+    n = 55
+    record = _record()
+    for row in record["states"]:
+        if row["n"] == n:
+            row["state"] = defaults.EXEMPT
+    held = defaults.SETTLED[n]._replace(
+        state=defaults.EXEMPT,
+        runs=(),
+        outcome="a synthetic exemption",
+        evidence="think-yk2h",
+    )
+    return n, _write(tmp_path, record), {**defaults.SETTLED, n: held}
+
+
+def test_a_recorded_owner_exemption_passes_and_an_unworded_one_fails(
+    tmp_path: Path,
+) -> None:
+    n, record, base = _exemption_case(tmp_path)
+    exempt = sorted(k for k, held in base.items() if held.state == defaults.EXEMPT)
     unratified = frozenset(exempt) - {n}
     found, listed = defaults.state_problems(
-        settled=_exempt(n), unratified=unratified, today=DAY
+        record, settled=_exempt(n, base), unratified=unratified, today=DAY
     )
     assert found == []
     assert not any(line.startswith(f"n={n} is exempt") for line in listed)
     # Without the owner's word, and with no grace for it, the exemption fails.
-    found, _listed = defaults.state_problems(unratified=unratified, today=DAY)
+    found, _listed = defaults.state_problems(
+        record, settled=base, unratified=unratified, today=DAY
+    )
     assert found == [
         (
             f"n={n} is exempt without the owner's word: an exemption is the owner's alone. "
@@ -563,15 +591,13 @@ def test_a_recorded_owner_exemption_passes_and_an_unworded_one_fails() -> None:
     ],
 )
 def test_an_exemption_fails_without_the_owner_recorded_word_or_a_current_review(
-    change: dict[str, object], problem: str
+    tmp_path: Path, change: dict[str, object], problem: str
 ) -> None:
-    exempt = sorted(n for n, held in defaults.SETTLED.items() if held.state == defaults.EXEMPT)
-    if not exempt:
-        pytest.skip("the data holds no exemption")
-    n = exempt[0]
+    n, record, base = _exemption_case(tmp_path)
+    exempt = sorted(k for k, held in base.items() if held.state == defaults.EXEMPT)
     unratified = frozenset(exempt) - {n}
     found, _listed = defaults.state_problems(
-        settled=_exempt(n, **change), unratified=unratified, today=DAY
+        record, settled=_exempt(n, base, **change), unratified=unratified, today=DAY
     )
     assert found == [f"n={problem.format(n=n)}"]
 
@@ -583,11 +609,16 @@ def test_only_an_exemption_carries_the_owner_word() -> None:
     assert found == [f"n={n}: only an exemption carries the owner's word and a review date"]
 
 
-def test_the_four_unratified_exemptions_wait_for_the_owner_until_their_day() -> None:
+def test_the_four_unratified_exemptions_wait_for_the_owner_until_their_day(
+    tmp_path: Path,
+) -> None:
     """The four decimal Kingbird witnesses were set aside by an agent, and an exemption
-    is the owner's alone: they stand until `UNRATIFIED_UNTIL`, listed for the owner, and fail
-    after it. The set only shrinks: a count it names that is not such an exemption fails,
-    and it names no other count."""
+    is the owner's alone: they stood until `UNRATIFIED_UNTIL`, listed for the owner, and
+    would have failed after it. Both strong generators settled them on 31 October 2026
+    (think-yk2h), so the live set is empty; the gate is kept, and a synthetic unratified
+    exemption at 55 on its own witness proves it still lists such a count until the day
+    and fails it after. The set only shrinks: a count it names that is not such an
+    exemption fails, and it names no other count."""
     assert frozenset({39, 55, 290, 291}) >= defaults.UNRATIFIED
     record = _record()
     rows = {row["n"]: row for row in record["states"]}
@@ -596,13 +627,29 @@ def test_the_four_unratified_exemptions_wait_for_the_owner_until_their_day() -> 
     ) == sorted(defaults.UNRATIFIED)
     until = date.fromisoformat(defaults.UNRATIFIED_UNTIL)
     assert until - date(2026, 10, 26) == timedelta(days=defaults.EXEMPTION_REVIEW_DAYS)
-    found, listed = defaults.state_problems(today=until)
+    # A synthetic exemption without the owner's word, on 55's own witness, as the four were.
+    n = 55
+    for row in record["states"]:
+        if row["n"] == n:
+            row["state"] = defaults.EXEMPT
+    path = _write(tmp_path, record)
+    held = defaults.SETTLED[n]._replace(
+        state=defaults.EXEMPT,
+        runs=(),
+        outcome="a synthetic unratified exemption",
+        evidence="think-yk2h",
+    )
+    settled = {**defaults.SETTLED, n: held}
+    unratified = frozenset({n})
+    found, listed = defaults.state_problems(
+        path, settled=settled, unratified=unratified, today=until
+    )
     assert found == []
     waiting = [line for line in listed if defaults.AWAITING_WORD in line]
-    assert [line.split()[0] for line in waiting] == [
-        f"n={n}" for n in sorted(defaults.UNRATIFIED)
-    ]
-    found, listed = defaults.state_problems(today=until + timedelta(days=1))
+    assert [line.split()[0] for line in waiting] == [f"n={n}"]
+    found, listed = defaults.state_problems(
+        path, settled=settled, unratified=unratified, today=until + timedelta(days=1)
+    )
     assert found == [
         (
             f"n={n} is exempt without the owner's word (UNRATIFIED held it until "
@@ -611,17 +658,18 @@ def test_the_four_unratified_exemptions_wait_for_the_owner_until_their_day() -> 
             f"date within {defaults.EXEMPTION_REVIEW_DAYS} days of them, or regularize the "
             "count"
         )
-        for n in sorted(defaults.UNRATIFIED)
     ]
-    if defaults.UNRATIFIED:
-        n = min(defaults.UNRATIFIED)
-        found, _listed = defaults.state_problems(settled=_exempt(n), today=DAY)
-        assert found == [
-            (
-                f"n={n}: UNRATIFIED names it, but it is not an exemption without the owner's "
-                "word on its witness; take it off"
-            )
-        ]
+    # The owner's word takes the count off the list: UNRATIFIED naming it then fails.
+    worded = {**settled, n: held._replace(owner_word=WORD, review_by="2026-11-06")}
+    found, _listed = defaults.state_problems(
+        path, settled=worded, unratified=unratified, today=DAY
+    )
+    assert found == [
+        (
+            f"n={n}: UNRATIFIED names it, but it is not an exemption without the owner's "
+            "word on its witness; take it off"
+        )
+    ]
     m = min(n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED)
     found, _listed = defaults.state_problems(unratified=defaults.UNRATIFIED | {m}, today=DAY)
     assert found == [

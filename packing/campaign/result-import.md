@@ -1175,9 +1175,15 @@ review date at most 14 days after that word.
 The gate finds those words in that file, and fails an exemption without them or past its
 review date. The intake sweep lists each exemption for the owner.
 The four decimal Kingbird witnesses at 39, 55, 290 and 291, which an agent set aside on
-15 October 2026 with no strong run (think-yk2h), stand without the owner’s word until 9
-November 2026 (`default_drawings.UNRATIFIED`), and the gate fails each one still
-unworded after that day.
+15 October 2026 with no strong run (think-yk2h), stood without the owner’s word until 9
+November 2026 (`default_drawings.UNRATIFIED`), and the gate would have failed each one
+still unworded after that day.
+Both strong generators settled all four on 31 October 2026: 39 is regularized, and 55,
+290 and 291 are decided no better, each view tying the house drawing on every measure,
+better only on exactness, and row 10’s no change
+([the runs’ evidence](../cases/regularized_drawings/think-yk2h-2026-10-31/README.md);
+the owner’s question whether exactness alone earns the picture is think-j68m).
+`UNRATIFIED` is empty, and no count is exempt.
 It names the run directories for the adoption’s day and its lowest and highest re-housed
 count, since the layer records a run by its directory’s name and a repeated name would
 replace an earlier run’s record: the index holds only the runs merged into the branch,
@@ -1569,8 +1575,10 @@ each held open only by validation the project owned (#420, #428, #446, #594, #60
    a reservation for the owner that beads record (`basis: recorded-reservation`, pending
    the owner’s confirmation), with those beads in `beads` and a note saying what each
    records; only the owner lifts it.
-   An issue GitHub already shows closed is not posted on again: record its final comment
-   and its close (step 4).
+   An issue GitHub already shows closed with its final comment is not posted on again:
+   record that comment and its close (step 4). One GitHub closed before its final
+   comment was posted, as a merged pull request’s closing keyword does (#613 on 31
+   October 2026, think-t9uj), still gets the final comment, posted as below.
 2. **Check that `main` and the deployed site say what the final comment will say**,
    render the comment with `check_requests --draft N`, and edit it to the house style.
    It states each id at its rungs, linked into `main` and the site, and that nothing the

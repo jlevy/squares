@@ -1403,19 +1403,28 @@ def test_an_unreadable_record_or_index_needs_action_and_does_not_stop_the_sweep(
 
 @pytest.mark.parametrize("error", [KeyError("bead"), TypeError("not a bead")])
 def test_a_fault_past_the_two_reads_raises_rather_than_reading_as_a_broken_record(
-    monkeypatch: pytest.MonkeyPatch, error: Exception
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, error: Exception
 ) -> None:
     """Review B1 of #650: the A4 guard wrapped the whole section, so a fault in sorting the
     record into items, such as a bead store that raises, read as "the record or the
     layer's index could not be read", and its step sent the reader to two checks that
-    pass. Only the record's read and the gate's are guarded now; the fault raises."""
+    pass. Only the record's read and the gate's are guarded now; the fault raises. Since
+    the four unratified exemptions were settled (31 October 2026) the live record names
+    no bead, so a corrected witness's deferral gives the section one to read."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    n = _first(defaults.REGULAR_AS_PUBLISHED)
+    record = _drawings(tmp_path, n, defaults.PENDING)
+    _corrected(monkeypatch, n)
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: re-housed by a test adoption"}
+    beads = _beads(**{**_deferral_beads(), "think-aaaa": "open"})
 
     def faulty(_self: sweep.Beads, _alias: str) -> str:
         raise error
 
     monkeypatch.setattr(sweep.Beads, "state", faulty)
     with pytest.raises(type(error)) as raised:
-        sweep.regularization_section(_beads(**_deferral_beads()))
+        sweep.regularization_section(beads, record=record, allowed=allowed)
     assert raised.value is error
 
 
@@ -1506,6 +1515,8 @@ def test_the_sweep_reports_regularization_with_the_record_side_queues() -> None:
     titles = [section.title for section in sections]
     assert titles.index("Regularization owed") == titles.index("Record-side queues") + 1
     (section,) = [section for section in sections if section.title == "Regularization owed"]
-    assert section.items
-    assert {item.bead_state for item in section.items} == {"unconfirmed: no bead store"}
+    # The live record may owe nothing (no exemption or pending count since 31 October
+    # 2026); its notes still give the counts by state, and any item it lists is unconfirmed.
+    assert section.notes[0].startswith("Regularization states of 324 counts: ")
+    assert {item.bead_state for item in section.items} <= {"unconfirmed: no bead store"}
     assert "## Regularization owed" in sweep.markdown(sections, TODAY)
