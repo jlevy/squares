@@ -3,10 +3,10 @@ type: is
 id: is-01m4ymttngabkttp59yea87pj5
 title: "Validation (#610, think-ribz): build lean/S95Lower.lean on Sqpack 1718a58, held on memory (25 GB peak, host has 15 GB)"
 kind: task
-status: in_progress
+status: open
 priority: 3
-version: 2
-delegate: bold-ritchie-l5
+version: 4
+delegate: null
 labels:
   - validation
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T02:04:06.191Z
-updated_at: 2026-10-31T05:00:29.509Z
+updated_at: 2026-10-31T05:02:26.722Z
 started_at: 2026-10-31T05:00:29.508Z
 ---
 Held validation item for the #610 import (think-ribz): build the source's Lean wrapper lean/S95Lower.lean on Evan Daniel's Sqpack.
@@ -30,3 +30,8 @@ Held validation item for the #610 import (think-ribz): build the source's Lean w
 - Done when: the build succeeds from retained bytes, #print axioms lists only propext, Classical.choice and Quot.sound, and the receipt (toolchain, Mathlib revision, peak memory, wall) is committed in the packet.
 - What it would raise: no V or C rung. It would check in the kernel the cover's data facts and the reduction le_minSide_mixed from S95Cover to minSide 95 = 10, a conditional formalization; V5 needs S95Cover itself proved in Lean (wand125's kernel-discharge route for s(59) at the same Sqpack, think-xk3f; unpriced) and an expert formalization review.
 - Machine note: memory-bound (25 GB); cannot share this host.
+
+## Notes
+
+2026-10-31 bold-ritchie-l5 (intake pass of 31 October, epic think-3guf, lane L5): the sweep read #610 in this bead's title as its blocker, and #610 has closed. That was never the wait. The build is held on memory: the source measured a 25,305,596 KB (25.3 GB) peak resident set (build_summary.txt), and this pass's host has 15 GB shared by five lanes, so it still cannot run here. Its CPU cost (about 1 CPU-hour) is well under the owner's 40 CPU-hour cap. The read of Sqpack at 1718a58 that the description names as a dependency, think-ilwc, closed on 12 October. Nothing was run.
+blocked_on: a machine with at least 32 GB of memory and the owner's word on where to run it (the source's peak is 25.3 GB; this host has 15 GB); no issue or bead tracks it

@@ -3,10 +3,10 @@ type: is
 id: is-01m4ymtr7pa1sjzwftc1sjrbkt
 title: "Validation (#610, think-ribz): full zm_mixed.py pass over all 160,000 D4 roots of the s(95) cover, about 190 CPU-h, held over the 40 CPU-h cap"
 kind: task
-status: in_progress
+status: open
 priority: 3
-version: 2
-delegate: bold-ritchie-l5
+version: 4
+delegate: null
 labels:
   - validation
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T02:04:03.701Z
-updated_at: 2026-10-31T05:00:30.201Z
+updated_at: 2026-10-31T05:02:27.259Z
 started_at: 2026-10-31T05:00:30.201Z
 ---
 Held validation item for the #610 import (think-ribz): zm_mixed.py alone over the whole D4 region of the s(95) cover, the exact-rational second route the source has not run.
@@ -30,3 +30,8 @@ Held validation item for the #610 import (think-ribz): zm_mixed.py alone over th
 - Done when: every one of the 160,000 D4 roots is certified (UNCERT 0, empty unc) in the full run or a deeper rerun with the same checker digests, cover digest and settings apart from depth and region; check_full.py prints OK; receipts committed on the bead's branch; an evidence entry for the exact-rational route (performed_by repository, same-implementation) cited beside T-NNN's rung.
 - What it would raise: no rung by T-184's precedent; C3 needs the D4 composite (zmx2 + zm_mixed on the 304 sub-roots) as evidence and a review. It would give the lower half a second machine route in exact arithmetic that does not rest on zmx2's binary64 enclosures, recorded beside the rung (result-import.md: a second route is not a condition of C3), as T-066's next_rung describes for s(59).
 - Machine note: CPU only, about 200 MB per process; shares the host with a gate at one or two workers.
+
+## Notes
+
+2026-10-31 bold-ritchie-l5 (intake pass of 31 October, epic think-3guf, lane L5): the sweep read #610 in this bead's title as its blocker, and #610 has closed. That was never the wait. The full zm_mixed.py pass is priced at about 190 CPU-hours, above the owner's standing 40 CPU-hour cap per item (think-lh7d), and it stays held on that cap. It resumes when the owner raises the cap for it or approves a subset (a stratified 1,600-root sample at about 2 CPU-hours would be a diagnostic only), or when the author publishes his records, which an audit with check_full.py and an exact reader would take minutes to read. Nothing was run.
+blocked_on: the owner's word on the 40 CPU-hour cap (raise it for this item, or approve a subset), or the author's published zm_mixed records (no issue or bead tracks either)
