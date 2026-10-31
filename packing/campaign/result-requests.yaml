@@ -4653,6 +4653,18 @@ issues:
       - think-r333
       - think-u0av
       - think-f40c
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6548460193
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: superseded
+      beads: [think-u0av]
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -4689,6 +4701,16 @@ issues:
       think-ndvg; and the replay and review of the later n27 candidate at 1131/200 under
       think-ndvg. T-233's unfinished control (think-tcsl) and T-176 to T-178's census
       (think-u0av) are named with them.
+
+      The follow-up posted at 2026-10-31T20:02:48Z (issuecomment-6548460193) reports T-177's
+      one moved field: its position, pending adoption in the final comment of 26 October, is
+      superseded, by T-252 (s(44) = 7, V3/C3, #851, merged at 90b79dbe1 from #842). It was
+      rendered with `check_requests --draft 446` from main at 737d8311e, whose Pages run
+      41232002123 deployed and passed its verify-deployment job (124630005688, 6032 of 6032
+      checks, result/t-177.html, result/t-252.html and cases/44.html served);
+      `render_recent_results.standing` on that commit gives T-177 superseded by T-252. It
+      restates that T-177's census stays with think-u0av, and that the rest keeps the state
+      of 26 October.
   - number: 451
     title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
     author: franciscouzo
