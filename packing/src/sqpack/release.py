@@ -10014,6 +10014,31 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#613's ask is done (think-8krd): D-522 records the defect the owner's answer "
+            "of 23 October left owed, and the requests entry names it "
+            "(result-requests.yaml); no register entry, side, bound or credit changes. "
+            "Against main acc1cfc3d (#825): rendered at link revision acc1cfc3 into "
+            "empty site directories, twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, render_packing_methods writes all 43 files "
+            "byte-identical across the three; measured again after merging main "
+            "e54ae3e97 (#829), at link revision e54ae3e9 with that main's "
+            "result-requests.yaml swapped in, with the same outcome; and on 31 October "
+            "(think-6m6e), after merging main 3978a7f61 and then 32ef0861b (#835) and "
+            "review A's wording fixes to #613's ask note, at link revision 32ef0861 with "
+            "that main's result-requests.yaml swapped in, with the same outcome, and again "
+            "after merging main 37ede3936 (#848), at link revision 37ede393, with the same "
+            "outcome. No PDF was printed; it prints from that HTML. The survey keeps "
+            "v0.2.7."
+        ),
+    ),
 )
 
 
