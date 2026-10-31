@@ -3,16 +3,20 @@ type: is
 id: is-01m685x0n34btg2azt8bwd8d53
 title: "Validate #836: Karimi v5 two-strip rows the walk above 1024 records, both routes, six controls per K (~9.2 CPU-h)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 4
+version: 5
+delegate: bold-ritchie-l9
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m685wqakx05engdrvf9s4789
+hold: null
+hold_until: null
 created_at: 2026-10-31T05:11:15.363Z
-updated_at: 2026-10-31T12:29:46.952Z
+updated_at: 2026-10-31T17:14:05.384Z
+started_at: 2026-10-31T17:14:05.383Z
 ---
 Stage 4 validation of #836's rows (import think-7yrs), the rows think-llit's walk above 1024 records from Mohsen Karimi's two-strip v5.0 deposit.
 
