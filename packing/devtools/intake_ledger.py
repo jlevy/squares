@@ -1402,7 +1402,15 @@ def tree_members(
     any register entry pending adoption that states a smaller bound, or above the horizon
     the beyond-horizon row or the grid, and beside it Göbel's construction for a ledger
     read on ``read_on`` from `GOEBEL_FROM` (`construction_member`, refused at a count whose
-    side no build proves final). A lane's holders are credited by ``names``."""
+    side no build proves final). A lane's holders are credited by ``names``.
+
+    Pending adoption is read count by count (`check_standing.improvements`), not from the
+    entry's standing as a whole: an entry that holds some of its cases is the current best
+    (`render_recent_results.standing`), and still states a smaller bound pending adoption
+    at another. T-193 holds the exact algebraic sides of some of its sixteen counts and
+    states smaller ones, not yet adopted, at 88, 126, 199, 266, 267, 292 and 301; reading
+    the entry whole left them out of the starts, and the ledger of 31 October 2026 would
+    have recorded Mykhailo Polkovskyi's 88 and 126, each above T-193's side there."""
     wanted = sorted(set(counts))
     members: dict[int, list[StartMember]] = {}
     inside = [n for n in wanted if n <= HORIZON]
@@ -1410,8 +1418,6 @@ def tree_members(
         records = view.load_records()
         pending: dict[int, list[StartMember]] = {}
         for record in records.register.results:
-            if view.standing(record, records) != view.PENDING_ADOPTION:
-                continue
             for finding in check_standing.improvements(record, records):
                 if finding.direction == check_standing.UPPER:
                     pending.setdefault(finding.n, []).append(

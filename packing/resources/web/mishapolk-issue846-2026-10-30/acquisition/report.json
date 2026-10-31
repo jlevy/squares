@@ -1,0 +1,393 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/846",
+  "author": "Mishapolk",
+  "source_key": "[Mishapolk issue 846 2026-10-30]",
+  "report_evidence": "E-mishapolk-846-certificate-report",
+  "receipt_format": "mishapolk-846-exact-replay-v1",
+  "witness_prefix": "W-mishapolk-846-n",
+  "claim_limitations": "Complete 52aa267 rational centre/half-angle certificates in Evan Daniel's format, centres in [0, S]^2, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-31",
+  "read_at_main": "3978a7f61ca164f78291ed91534b8c9a5b9cafd7",
+  "certificates": [
+    {
+      "n": 105,
+      "path": "certificates/0000-0999/n105.cert",
+      "format": "evand-cert",
+      "offered": "10.789303783743",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 130,
+      "path": "certificates/0000-0999/n130.cert",
+      "format": "evand-cert",
+      "offered": "11.902430645983",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 146,
+      "path": "certificates/0000-0999/n146.cert",
+      "format": "evand-cert",
+      "offered": "12.583782190152",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 156,
+      "path": "certificates/0000-0999/n156.cert",
+      "format": "evand-cert",
+      "offered": "12.979165853835",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 182,
+      "path": "certificates/0000-0999/n182.cert",
+      "format": "evand-cert",
+      "offered": "13.970916436215",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 204,
+      "path": "certificates/0000-0999/n204.cert",
+      "format": "evand-cert",
+      "offered": "14.808642830514",
+      "first_committed": "2026-10-23T23:36:37Z"
+    },
+    {
+      "n": 211,
+      "path": "certificates/0000-0999/n211.cert",
+      "format": "evand-cert",
+      "offered": "14.993549626300",
+      "first_committed": "2026-10-23T23:36:37Z"
+    },
+    {
+      "n": 229,
+      "path": "certificates/0000-0999/n229.cert",
+      "format": "evand-cert",
+      "offered": "15.650161513877",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 241,
+      "path": "certificates/0000-0999/n241.cert",
+      "format": "evand-cert",
+      "offered": "15.987117095151",
+      "first_committed": "2026-10-23T23:36:37Z"
+    },
+    {
+      "n": 260,
+      "path": "certificates/0000-0999/n260.cert",
+      "format": "evand-cert",
+      "offered": "16.645753250520",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 268,
+      "path": "certificates/0000-0999/n268.cert",
+      "format": "evand-cert",
+      "offered": "16.874361715871",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 299,
+      "path": "certificates/0000-0999/n299.cert",
+      "format": "evand-cert",
+      "offered": "17.803695435316",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 304,
+      "path": "certificates/0000-0999/n304.cert",
+      "format": "evand-cert",
+      "offered": "17.926898900367",
+      "first_committed": "2026-10-30T05:40:00Z"
+    },
+    {
+      "n": 308,
+      "path": "certificates/0000-0999/n308.cert",
+      "format": "evand-cert",
+      "offered": "17.997149121271",
+      "first_committed": "2026-10-30T05:40:00Z"
+    }
+  ],
+  "requested": [
+    105,
+    130,
+    146,
+    156,
+    229,
+    308
+  ],
+  "replayed": [
+    105,
+    130,
+    146,
+    156,
+    182,
+    204,
+    211,
+    229,
+    241,
+    260,
+    268,
+    299,
+    304,
+    308
+  ],
+  "houses": [
+    {
+      "n": 105,
+      "reader": "[Mishapolk issue 719 2026-10-22]",
+      "source_key": "[Mishapolk issue 719 2026-10-22]",
+      "holders": "Ryan Xu, improved by Francisco Couzo, PingYou Ltd, Mishapolk",
+      "result": "T-229",
+      "reported_value": "10.7893037837429754",
+      "verified_value": "10.7893037837429754",
+      "evidence": [
+        "E-mishapolk-719-exact-feasibility",
+        "E-mishapolk-719-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 130,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta, PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "11.90448303251578644",
+      "verified_value": "11.90448303251578644",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    },
+    {
+      "n": 146,
+      "reader": "[Daniel n146 2026-10-14]",
+      "source_key": "[Daniel n146 2026-10-14]",
+      "holders": "Evan Daniel",
+      "result": "T-187",
+      "reported_value": "12.5837821901518604",
+      "verified_value": "12.5837821901518604",
+      "evidence": [
+        "E-evand-606-n146-exact-feasibility"
+      ]
+    },
+    {
+      "n": 156,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Daniil Ostashev, improved by Francisco Couzo, PingYou Ltd, Mishapolk",
+      "result": "T-186",
+      "reported_value": "12.97916585383427646",
+      "verified_value": "12.97916585383427646",
+      "evidence": [
+        "E-mishapolk-70a033f-exact-feasibility"
+      ]
+    },
+    {
+      "n": 182,
+      "reader": "[Daniel n182 2026-10-25]",
+      "source_key": "[Daniel n182 2026-10-25]",
+      "holders": "Evan Daniel",
+      "result": "T-243",
+      "reported_value": "13.9709164362146788",
+      "verified_value": "13.9709164362146788",
+      "evidence": [
+        "E-evand-n182-exact-feasibility",
+        "E-evand-n182-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 204,
+      "reader": "[Mishapolk n204 2026-10-22]",
+      "source_key": "[Mishapolk n204 2026-10-22]",
+      "holders": "Francisco Couzo, improved by Mishapolk",
+      "result": "T-231",
+      "reported_value": "14.8086428305130872",
+      "verified_value": "14.8086428305130872",
+      "evidence": [
+        "E-mishapolk-n204-exact-feasibility",
+        "E-mishapolk-n204-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 211,
+      "reader": "[Couzo verified bounds 2026-10-14]",
+      "source_key": "[Couzo verified bounds 2026-10-14]",
+      "holders": "Daniil Ostashev, improved by Francisco Couzo",
+      "result": "T-188",
+      "reported_value": "14.9935496262994211",
+      "verified_value": "14.9935496262994211",
+      "evidence": [
+        "E-couzo-487b058-exact-feasibility"
+      ]
+    },
+    {
+      "n": 229,
+      "reader": "[Daniel regularized lists 2026-10-20]",
+      "source_key": "[Daniel regularized lists 2026-10-20]",
+      "holders": "Evan Daniel",
+      "result": "T-225",
+      "reported_value": "15.6501615138764311",
+      "verified_value": "15.6501615138764311",
+      "evidence": [
+        "E-evand-regularized-1020-exact-feasibility",
+        "E-evand-regularized-1020-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 241,
+      "reader": "[Couzo certificates 2026-10-13]",
+      "source_key": "[Couzo certificates 2026-10-13]",
+      "holders": "Daniil Ostashev, improved by Francisco Couzo",
+      "result": "T-182",
+      "reported_value": "15.9871170951502388",
+      "verified_value": "15.9871170951502388",
+      "evidence": [
+        "E-couzo-586-exact-feasibility"
+      ]
+    },
+    {
+      "n": 260,
+      "reader": "[Daniel regularized lists 2026-10-20]",
+      "source_key": "[Daniel regularized lists 2026-10-20]",
+      "holders": "Francisco Couzo, improved by Evan Daniel",
+      "result": "T-225",
+      "reported_value": "16.6457532505198122",
+      "verified_value": "16.6457532505198122",
+      "evidence": [
+        "E-evand-regularized-1020-exact-feasibility",
+        "E-evand-regularized-1020-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 268,
+      "reader": "[Daniel Kaggle descents 2026-10-24]",
+      "source_key": "[Daniel Kaggle descents 2026-10-24]",
+      "holders": "Vladislav Lavrentev, improved by Evan Daniel",
+      "result": "T-242",
+      "reported_value": "16.8743617158693459",
+      "verified_value": "16.8743617158693459",
+      "evidence": [
+        "E-evand-kaggle-descents-exact-feasibility",
+        "E-evand-kaggle-descents-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 299,
+      "reader": "[evand exact optima 2026-10-05]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue (the Kingbird catalogue), verified by T-101's exact ceiling",
+      "result": "T-101",
+      "reported_value": "17.82287565553229",
+      "verified_value": "17.82287565553230",
+      "evidence": [
+        "E-evand-exact-ceilings-2026-10-05-exact-replay",
+        "E-evand-exact-ceilings-2026-10-05-source-replay",
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    },
+    {
+      "n": 304,
+      "reader": "[Daniel Kaggle descents 2026-10-24]",
+      "source_key": "[Daniel Kaggle descents 2026-10-24]",
+      "holders": "Kirill Tymchishin, improved by Evan Daniel",
+      "result": "T-242",
+      "reported_value": "17.9268989003567416",
+      "verified_value": "17.9268989003567416",
+      "evidence": [
+        "E-evand-kaggle-descents-exact-feasibility",
+        "E-evand-kaggle-descents-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 308,
+      "reader": "[Daniel n308 2026-10-19]",
+      "source_key": "[Daniel n308 2026-10-19]",
+      "holders": "Evan Daniel",
+      "result": "T-221",
+      "reported_value": "17.9971491212709088",
+      "verified_value": "17.9971491212709088",
+      "evidence": [
+        "E-evand-689-n308-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 130,
+      "report": "T-254 (#843)",
+      "url": "https://github.com/jlevy/squares/issues/843",
+      "holders": "Francisco Couzo, after Chaoweeraprasit, Gupta and PingYou Ltd",
+      "reader": "[Couzo n130 2026-10-27]"
+    },
+    {
+      "n": 211,
+      "report": "T-253, Polkovskyi of 23 October (no issue)",
+      "url": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "holders": "Mykhailo Polkovskyi, of the house's packing",
+      "reader": "[Mishapolk refinements 2026-10-23]"
+    },
+    {
+      "n": 241,
+      "report": "T-253, Polkovskyi of 23 October (no issue)",
+      "url": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "holders": "Mykhailo Polkovskyi, of the house's packing",
+      "reader": "[Mishapolk refinements 2026-10-23]"
+    },
+    {
+      "n": 260,
+      "report": "T-255, Couzo of 28 October (no issue)",
+      "url": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
+      "holders": "Francisco Couzo, after ntumlnoob",
+      "reader": "[Couzo a5a5d76 2026-10-28]"
+    },
+    {
+      "n": 260,
+      "report": "T-256 (#844)",
+      "url": "https://github.com/jlevy/squares/issues/844",
+      "holders": "Francisco Couzo, after ntumlnoob",
+      "reader": "[Couzo issue 844 2026-10-28]"
+    },
+    {
+      "n": 260,
+      "report": "T-257 (#845)",
+      "url": "https://github.com/jlevy/squares/issues/845",
+      "holders": "Evan Daniel, after Kirill Tymchishin",
+      "reader": "[Daniel issue 845 2026-10-29]"
+    },
+    {
+      "n": 299,
+      "report": "T-248 (#824)",
+      "url": "https://github.com/jlevy/squares/issues/824",
+      "holders": "Evan Daniel, after Chris Deotte",
+      "result": "T-248",
+      "reader": "[Daniel n299 2026-10-26]"
+    },
+    {
+      "n": 299,
+      "report": "T-258 (#824 update)",
+      "url": "https://github.com/jlevy/squares/issues/824#issuecomment-6488202753",
+      "holders": "Evan Daniel, after Chris Deotte",
+      "reader": "[Daniel n299 update 2026-10-29]"
+    }
+  ],
+  "register": {
+    "title": "Mykhailo Polkovskyi's certificates of issue 846 at 52aa267",
+    "headline": "Polkovskyi's sub-print refinements at 105, 130, 146, 156, 229 and 308 of the packings below them",
+    "significance": 1,
+    "source_checks": "The issue says every certificate yields valid and strictly valid, with positive wall and pair margin signs, under verify_bound_certificate.py --strict, Evan Daniel's MIT separating-axis verifier with Francisco Couzo's modifications, byte-identical to the copy the issue-678 packet retains, and states the least wall and pair clearances of each: 4e-21 and 1e-20 at 105, 146, 229 and 308, 4e-41 and 1e-40 at 156, 9.66e-15 and 1.82e-14 at 130. The 130 certificate's header calls it a dilation, by dilate_cert.py with delta 2e-14, of isolated_lab/tmp_couzo_noalm.txt, and the issue says it beats Couzo's issue 843 by 2.08e-12. Those statements are the author's; no source program ran here.",
+    "credit": "Credit each packing to its finder and Mykhailo Polkovskyi (Mishapolk, https://github.com/Mishapolk/square-packing-records), with what the issue calls the Antigravity Autonomous Research Lab, for the refinement, as the register credits a regularization: at 130 Francisco Couzo's packing of issue 843, and at 105, 146, 156, 229 and 308 the house packing each case holds, as the measurement here pairs them. The issue reports eight more counts that the ledger of 31 October does not record: 182, 268 and 304 lie above each case's house, 204 and 260 above issue 845's certificates, 299 above Evan Daniel's update to issue 824, and 211 and 241 restate the source's own certificates first committed on 23 October.",
+    "next_rung": "Independently review the retained replay and the certificates (stage 4): a clean-room exact checker, the identity against the house's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt each count where it is the smallest validated side under the house rule, with both strong generators' regularization and the flip of each new house in the same change.",
+    "bead": "think-pg1y",
+    "bibliography": {
+      "authors": [
+        "Polkovskyi"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy",
+      "short_credit": "Polkovskyi after Couzo et al.",
+      "note": "Fourteen complete exact certificates at Mishapolk/square-packing-records@52aa2672c74c91931686d60a49bdf97ec798291c, committed on 30 October 2026 (204, 211 and 241 first on 23 October) and reported on issue 846: refinements of others' packings below the print at 105, 146, 156, 229 and 308, a 2e-14 dilation of Francisco Couzo's issue-843 packing at 130, and eight counts the ledger does not record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-issue846-2026-10-30/."
+    }
+  }
+}

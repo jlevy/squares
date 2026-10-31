@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "07b7c25485f9da508e343d15bcd5b14c8d23e68a"
+DATA_REVISION = "e0e6c33d2dad72f855b60e63963606c32370ef41"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.34",
+        first_published="October 31, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of eight "
+            "upper-bound results from the intake of 31 October (T-253 to T-260)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.33",
         first_published="October 31, 2026",
@@ -1521,6 +1529,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.33",
+        version="v0.4.34",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of eight "
+            "upper-bound results from the intake of 31 October (T-253 to T-260)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.32",
@@ -2659,6 +2677,51 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/intake_ledger.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-130.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake pass of 31 October (think-3guf, #852): T-253 to T-260, eight "
+            "houses adopted at 130, 172, 204, 232, 260, 293, 299 and 307, their requests "
+            "and coverage entries, the n = 130 case record and the house tools, against "
+            "main a8deaf1b6 (#817). Rendered at link revision "
+            "0000000000000000000000000000000000000000 into empty site directories, once "
+            "from this tree at e0e6c33d2 and once with main's versions of the four "
+            "papers' fourteen changed inputs swapped in (these eleven paths, "
+            "bound-citations.json, composite-figure.json and cli/validate.py), 51 files "
+            "each, by render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: every file is byte-identical across the two renders. "
+            "The explainer counts the register's results and takes v0.4.34: its page and "
+            "Markdown, compared before the math pass (render's output; the pinned "
+            "Chromium is not installed on this host), differ only in that count, 252 "
+            "against 260. No PDF was printed; each prints from that HTML. Retain "
+            "v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
@@ -10323,6 +10386,29 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The follow-ups of 31 October on #375, #522 and #763 (the intake pass of 31 "
+            "October, think-3guf, lane L7) recorded under their replies; no register entry, "
+            "row, side, bound or credit changes. Against main 90b79dbe1 (#851): rendered at "
+            "link revision 90b79dbe into empty site directories, twice from this tree and "
+            "once with that main's result-requests.yaml swapped in, render_packing_methods "
+            "writes its 43 files byte-identical across the three. Measured again after "
+            "merging main a8deaf1b6 (#817), at link revision a8deaf1b with that main's "
+            "result-requests.yaml swapped in, after recording the #375 correction (review "
+            "B1), and after marking the 6 October #375 confirmation's statement outdated, "
+            "each at the same revision with that main's file swapped in, and after merging "
+            "main e482345fe (#852), at link revision e482345f with that main's file swapped "
+            "in: 43 files, byte-identical across the three each time. "
+            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
@@ -10355,8 +10441,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "its math pass in Chromium 1243 (SQPACK_CHROMIUM), "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods: 69 files each, all byte-identical across the three. "
-            "No PDF was printed; each prints from that HTML. Every paper keeps its "
-            "version: v0.4.33, v0.1.11, v0.1.4 and v0.2.7."
+            "Measured again after merging main 4ed88d160 (#857), whose explainer is "
+            "v0.4.34, at link revision 4ed88d16 with that main's two inputs swapped in: 69 "
+            "files each, byte-identical across the three. No PDF was printed; each prints "
+            "from that HTML. Every paper keeps its version: v0.4.34, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )

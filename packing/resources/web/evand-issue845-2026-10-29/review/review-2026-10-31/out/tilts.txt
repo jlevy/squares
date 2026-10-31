@@ -1,0 +1,5 @@
+s260_1028.cert upright 147 tilted 113 top tilts (deg, count): [(24.51, 60), (24.6, 11), (26.94, 3), (24.53, 3)]
+s293_1028.cert upright 180 tilted 113 top tilts (deg, count): [(-24.51, 60), (-24.6, 11), (-26.94, 3), (-24.53, 3)]
+s172_1028.cert upright 116 tilted 56 top tilts (deg, count): [(-44.61, 16), (44.61, 15), (-0.05, 2), (-39.06, 1)]
+s204_1028.cert upright 121 tilted 83 top tilts (deg, count): [(-26.43, 18), (-26.82, 14), (-27.8, 9), (-27.02, 6)]
+s299_1028.cert upright 194 tilted 105 top tilts (deg, count): [(-26.8, 50), (-0.0, 11), (-25.76, 10), (-27.45, 4)]

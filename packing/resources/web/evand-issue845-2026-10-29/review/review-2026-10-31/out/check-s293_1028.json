@@ -1,0 +1,46 @@
+{
+ "file": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-daniel/tree/packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s293_1028.cert",
+ "sha256": "236bc05f057a28df402c09453f4ccce35d63b518f4f0305419889612f07c42bc",
+ "bytes": 41538,
+ "comment": [
+  "# dilation certificate (dilate_cert.py, delta 1e-12) of /home/evand/math/square-packing/public/search/packer/runs/candidates/s293_1028/cand.txt; check with verify_cert.py"
+ ],
+ "n": 293,
+ "side": "8816991251061390991251052573823/500000000000000000000000000000",
+ "side_decimal_40": "17.6339825021227819825021051476460000000000",
+ "tilted": 163,
+ "A_walls_ok": true,
+ "least_near_wall_clearance": [
+  4.994999999999999e-13,
+  236
+ ],
+ "least_near_wall_clearance_exact": "99899999999999898100000000000051999999999999999/199999999999999800000000000000100000000000000000000000000000",
+ "least_far_wall_clearance": [
+  5e-13,
+  0
+ ],
+ "least_far_wall_clearance_exact": "499999999999999991/1000000000000000000000000000000",
+ "extent_exact": "3526796500424456396500421029531/200000000000000000000000000000",
+ "side_minus_extent": 5e-13,
+ "A_pairs": 42778,
+ "A_pairs_overlapping": 0,
+ "A_first_overlaps": [],
+ "A_valid": true,
+ "least_pair_gap": [
+  9.989999999999999e-13,
+  242,
+  282
+ ],
+ "least_pair_gap_exact": "49949999999999999050000000000049999999999999999/50000000000000000000000000000050000000000000000000000000000",
+ "pairs_within_1e-15": 0,
+ "A_cpu_s": 3.11,
+ "B_walls_bad": [],
+ "B_pairs_clipped": 746,
+ "B_pairs_far_by_discs": 42032,
+ "B_pairs_positive_area": 0,
+ "B_first_overlaps": [],
+ "B_valid": true,
+ "B_cpu_s": 0.59,
+ "total_cpu_s": 3.71,
+ "print_up_12": "17.633982502123"
+}

@@ -19368,35 +19368,37 @@ occurrences:
     path: packing/frontier/n-130.md
     record_key: '130'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Francisco Couzo
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 15
+  label: Francisco Couzo
   role: construction-finder
   disposition: resolved
   evidence:
-  - source-intake
-  - bibliography
-  contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
-    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
-    retained.
+  - primary-byline
+  note: 'Reviewed packing/frontier/n-130.md /reported_upper_bound/found_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Francisco Couzo as construction finder,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
+  contributor_id: francisco-couzo
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
+  expected_text: Mishapolk
   start: 0
-  end: 15
-  label: Siddharth Gupta
+  end: 9
+  label: Mishapolk
   role: construction-improver
   disposition: resolved
   evidence:
   - source-intake
   - bibliography
-  contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
+  note: 'Reviewed packing/frontier/n-130.md /reported_upper_bound/improved_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Mishapolk as construction improver,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
+  contributor_id: mykhailo-polkovskyi
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
@@ -19414,20 +19416,6 @@ occurrences:
   note: Reviewed packing/frontier/n-130.md [130] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-130.md
-    record_key: '130'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-131.md
     record_key: '131'
@@ -20364,27 +20352,19 @@ occurrences:
     path: packing/frontier/n-172.md
     record_key: '172'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-172.md
-    record_key: '172'
-    field: /reported_upper_bound/improved_by/0
   expected_text: Evan Daniel
   start: 0
   end: 11
   label: Evan Daniel
-  role: construction-improver
+  role: construction-finder
   disposition: resolved
   evidence:
   - repository-license
+  - bibliography
+  note: 'Reviewed packing/frontier/n-172.md /reported_upper_bound/found_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
   contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-172.md
@@ -20401,20 +20381,6 @@ occurrences:
   note: Reviewed 2026-10-21 against the named profile sources; the printed source
     text and credit role are retained.
   contributor_id: trevor-green
-- origin:
-    path: packing/frontier/n-172.md
-    record_key: '172'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-173.md
     record_key: '173'
@@ -21268,40 +21234,20 @@ occurrences:
     path: packing/frontier/n-204.md
     record_key: '204'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 11
+  label: Evan Daniel
   role: construction-finder
   disposition: resolved
-  contributor_id: francisco-couzo
   evidence:
-  - primary-byline
+  - repository-license
   - bibliography
-  note: 'Reviewed after PR 706 adoption of T-223: the adopted source and case name
-    Francisco Couzo as finder; prior construction lineage remains in the retained
-    result and case history.'
-- origin:
-    path: packing/frontier/n-204.md
-    record_key: '204'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: mykhailo-polkovskyi
-  note: 'Reviewed source credit: issue 719''s re-solve at 204 (T-229), the case''s
-    house since the adoption of 23 October 2026. Mishapolk is Mykhailo Polkovskyi,
-    the name the record gives him since issue 593 and the issue''s credit since its
-    edit of 22 October; the construction-improver role is retained. Evan Daniel''s
-    improver span left this field on 23 October: the author''s comment of that day
-    on issue 719 says the solve started from Couzo''s #678 certificate, not from Daniel''s
-    regularized view (T-225).'
+  note: 'Reviewed packing/frontier/n-204.md /reported_upper_bound/found_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-205.md
     record_key: '205'
@@ -21952,7 +21898,7 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: &id001
+  evidence:
   - repository-license
   - regularized-lists
   - bibliography
@@ -22104,48 +22050,32 @@ occurrences:
     path: packing/frontier/n-232.md
     record_key: '232'
     field: /reported_upper_bound/found_by/0
-  expected_text: Daniil Ostashev
+  expected_text: Alex Chilton
   start: 0
-  end: 15
-  label: Daniil Ostashev
+  end: 12
+  label: Alex Chilton
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-232.md
     record_key: '232'
     field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
+  expected_text: Francisco Couzo
   start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
-- origin:
-    path: packing/frontier/n-232.md
-    record_key: '232'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
+  end: 15
+  label: Francisco Couzo
   role: construction-improver
   disposition: resolved
   evidence:
-  - source-intake
+  - primary-byline
   - bibliography
-  contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
+  note: 'Reviewed packing/frontier/n-232.md /reported_upper_bound/improved_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Francisco Couzo as construction improver,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
+  contributor_id: francisco-couzo
 - origin:
     path: packing/frontier/n-233.md
     record_key: '233'
@@ -22961,19 +22891,20 @@ occurrences:
     path: packing/frontier/n-260.md
     record_key: '260'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 11
+  label: Evan Daniel
   role: construction-finder
   disposition: resolved
-  contributor_id: francisco-couzo
   evidence:
-  - primary-byline
+  - repository-license
   - bibliography
-  note: 'Reviewed after PR 706 adoption of T-223: the adopted source and case name
-    Francisco Couzo as finder; prior construction lineage remains in the retained
-    result and case history.'
+  note: 'Reviewed packing/frontier/n-260.md /reported_upper_bound/found_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-260.md
     record_key: '260'
@@ -22989,21 +22920,6 @@ occurrences:
   note: Reviewed 2026-10-21 against the named profile sources; the printed source
     text and credit role are retained.
   contributor_id: trevor-green
-- origin:
-    path: packing/frontier/n-260.md
-    record_key: '260'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence: *id001
-  note: Reviewed the case reported_upper_bound improved_by field against T-225 and
-    its retained regularized certificate lineage. The existing named profile matches
-    this construction-improver role; original found_by credit is unchanged.
-  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-261.md
     record_key: '261'
@@ -23923,32 +23839,20 @@ occurrences:
     path: packing/frontier/n-293.md
     record_key: '293'
     field: /reported_upper_bound/found_by/0
-  expected_text: David Ellsworth
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: David Ellsworth
+  end: 11
+  label: Evan Daniel
   role: construction-finder
   disposition: resolved
   evidence:
-  - catalogue-credits
-  - catalogue-byline
-  contributor_id: david-ellsworth
-- origin:
-    path: packing/frontier/n-293.md
-    record_key: '293'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: David W. Cantrell
-  start: 0
-  end: 17
-  label: David W. Cantrell
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - catalogue-credit
+  - repository-license
   - bibliography
-  note: Reviewed 2026-10-21 against the named profile sources; the printed source
-    text and credit role are retained.
-  contributor_id: david-w-cantrell
+  note: 'Reviewed packing/frontier/n-293.md /reported_upper_bound/found_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-293.md
     record_key: '293'
@@ -24155,6 +24059,24 @@ occurrences:
   note: Reviewed packing/frontier/n-299.md [299] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-299.md
+    record_key: '299'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-finder
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/frontier/n-299.md /reported_upper_bound/found_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-300.md
     record_key: '300'
@@ -24542,19 +24464,14 @@ occurrences:
     path: packing/frontier/n-307.md
     record_key: '307'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: ntumlnoob
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 9
+  label: ntumlnoob
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
-    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
-    retained.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-307.md
     record_key: '307'
@@ -24576,16 +24493,20 @@ occurrences:
     path: packing/frontier/n-307.md
     record_key: '307'
     field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
+  expected_text: Francisco Couzo
   start: 0
-  end: 11
-  label: PingYou Ltd
+  end: 15
+  label: Francisco Couzo
   role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/frontier/n-307.md /reported_upper_bound/improved_by/0: the case''s credit
+      after the house adoption of 31 October 2026 names Francisco Couzo as construction improver,
+      as the adopted result''s register entry and its stage 4 review credit them; the label
+      is the source''s.'
+  contributor_id: francisco-couzo
 - origin:
     path: packing/frontier/n-308.md
     record_key: '308'
@@ -25433,7 +25354,7 @@ occurrences:
   label: Couzo
   role: source-author
   disposition: resolved
-  evidence: &id002
+  evidence: &id001
   - primary-byline
   - bibliography
   note: Reviewed [Couzo issue 670 2026-10-17] in packing/resources/bibliography.yaml
@@ -25555,7 +25476,7 @@ occurrences:
   label: Couzo
   role: source-author
   disposition: resolved
-  evidence: *id002
+  evidence: *id001
   note: Reviewed [Couzo issue 672 2026-10-17] in packing/resources/bibliography.yaml
     against its retained source packet and the existing profile evidence. Raw label,
     span and source-author role are retained.
@@ -25570,7 +25491,7 @@ occurrences:
   label: Couzo
   role: credited-contributor
   disposition: resolved
-  evidence: *id002
+  evidence: *id001
   note: Reviewed [Couzo issue 672 2026-10-17] in packing/resources/bibliography.yaml
     against its retained source packet and the existing profile evidence. Raw label,
     span and credited-contributor role are retained.
@@ -25602,7 +25523,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: &id003
+  evidence: &id002
   - repository-license
   - bibliography
   note: Reviewed [Couzo issue 672 2026-10-17] in packing/resources/bibliography.yaml
@@ -25620,7 +25541,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: &id004
+  evidence: &id003
   - primary-byline
   - announcement-account
   - bibliography
@@ -25639,7 +25560,7 @@ occurrences:
   label: Couzo
   role: source-author
   disposition: resolved
-  evidence: *id002
+  evidence: *id001
   note: Reviewed [Couzo issue 675 2026-10-18] in packing/resources/bibliography.yaml
     against its retained source packet and the existing profile evidence. Raw label,
     span and source-author role are retained.
@@ -25759,7 +25680,7 @@ occurrences:
   label: Couzo
   role: source-author
   disposition: resolved
-  evidence: *id002
+  evidence: *id001
   note: Reviewed [Couzo issue 715 2026-10-21] in packing/resources/bibliography.yaml
     against its retained source packet and the existing profile evidence. Raw label,
     span and source-author role are retained.
@@ -25774,7 +25695,7 @@ occurrences:
   label: Couzo
   role: credited-contributor
   disposition: resolved
-  evidence: *id002
+  evidence: *id001
   note: Reviewed [Couzo issue 715 2026-10-21] in packing/resources/bibliography.yaml
     against its retained source packet and the existing profile evidence. Raw label,
     span and credited-contributor role are retained.
@@ -25807,7 +25728,7 @@ occurrences:
   label: Daniel
   role: prerequisite
   disposition: resolved
-  evidence: *id003
+  evidence: *id002
   note: Reviewed [Couzo issue 715 2026-10-21] in packing/resources/bibliography.yaml
     against its retained source packet and the existing profile evidence. Raw label,
     span and prerequisite role are retained. Daniel is credited for the named certificate
@@ -25854,7 +25775,7 @@ occurrences:
   label: Levy
   role: prerequisite
   disposition: resolved
-  evidence: *id004
+  evidence: *id003
   note: Reviewed [Couzo issue 715 2026-10-21] in packing/resources/bibliography.yaml
     against its retained source packet and the existing profile evidence. Raw label,
     span and prerequisite role are retained. This is the source-specific jlevy/squares
@@ -29819,6 +29740,778 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /authors/0
+  expected_text: Polkovskyi
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
+    /authors/0 span 0:10: the 23 October Mishapolk/square-packing-records certificates,
+    which the source and its report credit to this author. Keep finder, improver and
+    solver roles distinct.'
+  contributor_id: mykhailo-polkovskyi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
+    Levy
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
+    /credit span 0:10: the 23 October Mishapolk/square-packing-records certificates,
+    which the source and its report credit to this author. Keep finder, improver and
+    solver roles distinct.'
+  contributor_id: mykhailo-polkovskyi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
+    Levy
+  start: 17
+  end: 23
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
+    /credit span 17:23: a prerequisite credit of the 23 October Mishapolk/square-packing-records
+    certificates, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
+    Levy
+  start: 25
+  end: 30
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
+    /credit span 25:30: a prerequisite credit of the 23 October Mishapolk/square-packing-records
+    certificates, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
+    Levy
+  start: 32
+  end: 40
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
+    /credit span 32:40: a prerequisite credit of the 23 October Mishapolk/square-packing-records
+    certificates, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: daniil-ostashev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
+    Levy
+  start: 42
+  end: 51
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
+    /credit span 42:51: a prerequisite credit of the 23 October Mishapolk/square-packing-records
+    certificates, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: joost-de-winter
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
+    Levy
+  start: 53
+  end: 68
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
+    /credit span 53:68: a prerequisite credit of the 23 October Mishapolk/square-packing-records
+    certificates, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: nate-chaoweeraprasit
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
+    Levy
+  start: 70
+  end: 74
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
+    /credit span 70:74: a prerequisite credit of the 23 October Mishapolk/square-packing-records
+    certificates, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n130 2026-10-27]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo n130 2026-10-27]] /authors/0
+    span 0:5: the franciscouzo/square-packing certificate of issue 843, which the
+    source and its report credit to this author. Keep finder, improver and solver
+    roles distinct.'
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n130 2026-10-27]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Gupta, PingYou Ltd, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo n130 2026-10-27]] /credit
+    span 0:5: the franciscouzo/square-packing certificate of issue 843, which the
+    source and its report credit to this author. Keep finder, improver and solver
+    roles distinct.'
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n130 2026-10-27]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Gupta, PingYou Ltd, Levy
+  start: 12
+  end: 27
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo n130 2026-10-27]] /credit
+    span 12:27: a prerequisite credit of the franciscouzo/square-packing certificate
+    of issue 843, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: nate-chaoweeraprasit
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n130 2026-10-27]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Gupta, PingYou Ltd, Levy
+  start: 29
+  end: 34
+  label: Gupta
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo n130 2026-10-27]] /credit
+    span 29:34: a prerequisite credit of the franciscouzo/square-packing certificate
+    of issue 843, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: siddharth-gupta
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n130 2026-10-27]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Gupta, PingYou Ltd, Levy
+  start: 36
+  end: 47
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: issue 843 credits the starting packing, PR #574''s, to
+    Chaoweeraprasit, improved by Gupta and PingYou Ltd, whose certificate the record
+    holds (pingyou-pr574-certificates-2026-10-13). No individual identity is inferred
+    from the company label.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n130 2026-10-27]'
+    field: /credit
+  expected_text: Couzo after Chaoweeraprasit, Gupta, PingYou Ltd, Levy
+  start: 49
+  end: 53
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo n130 2026-10-27]] /credit
+    span 49:53: a prerequisite credit of the franciscouzo/square-packing certificate
+    of issue 843, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo a5a5d76 2026-10-28]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo a5a5d76 2026-10-28]]
+    /authors/0 span 0:5: the franciscouzo/square-packing certificates at a5a5d76,
+    which the source and its report credit to this author. Keep finder, improver and
+    solver roles distinct.'
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo a5a5d76 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after ntumlnoob, Daniel, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo a5a5d76 2026-10-28]]
+    /credit span 0:5: the franciscouzo/square-packing certificates at a5a5d76, which
+    the source and its report credit to this author. Keep finder, improver and solver
+    roles distinct.'
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo a5a5d76 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after ntumlnoob, Daniel, Levy
+  start: 12
+  end: 21
+  label: ntumlnoob
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo a5a5d76 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after ntumlnoob, Daniel, Levy
+  start: 23
+  end: 29
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo a5a5d76 2026-10-28]]
+    /credit span 23:29: a prerequisite credit of the franciscouzo/square-packing certificates
+    at a5a5d76, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo a5a5d76 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after ntumlnoob, Daniel, Levy
+  start: 31
+  end: 35
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo a5a5d76 2026-10-28]]
+    /credit span 31:35: a prerequisite credit of the franciscouzo/square-packing certificates
+    at a5a5d76, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 844 2026-10-28]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 844 2026-10-28]]
+    /authors/0 span 0:5: the franciscouzo/square-packing certificates of issue 844,
+    which the source and its report credit to this author. Keep finder, improver and
+    solver roles distinct.'
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 844 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 844 2026-10-28]]
+    /credit span 0:5: the franciscouzo/square-packing certificates of issue 844, which
+    the source and its report credit to this author. Keep finder, improver and solver
+    roles distinct.'
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 844 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
+  start: 12
+  end: 19
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 844 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
+  start: 21
+  end: 30
+  label: ntumlnoob
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 844 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
+  start: 32
+  end: 41
+  label: Lavrentev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 844 2026-10-28]]
+    /credit span 32:41: a prerequisite credit of the franciscouzo/square-packing certificates
+    of issue 844, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: vladislav-lavrentev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 844 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
+  start: 43
+  end: 52
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 844 2026-10-28]]
+    /credit span 43:52: a prerequisite credit of the franciscouzo/square-packing certificates
+    of issue 844, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: david-ellsworth
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 844 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
+  start: 54
+  end: 60
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 844 2026-10-28]]
+    /credit span 54:60: a prerequisite credit of the franciscouzo/square-packing certificates
+    of issue 844, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 844 2026-10-28]'
+    field: /credit
+  expected_text: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
+  start: 62
+  end: 66
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 844 2026-10-28]]
+    /credit span 62:66: a prerequisite credit of the franciscouzo/square-packing certificates
+    of issue 844, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 845 2026-10-29]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 845 2026-10-29]]
+    /authors/0 span 0:6: the evand/square-packing certificates of issue 845, which
+    the source and its report credit to this author. Keep finder, improver and solver
+    roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 845 2026-10-29]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Gupta, Ostashev, kirilltym, Friedman
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 845 2026-10-29]]
+    /credit span 0:6: the evand/square-packing certificates of issue 845, which the
+    source and its report credit to this author. Keep finder, improver and solver
+    roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 845 2026-10-29]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Gupta, Ostashev, kirilltym, Friedman
+  start: 13
+  end: 28
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 845 2026-10-29]]
+    /credit span 13:28: a prerequisite credit of the evand/square-packing certificates
+    of issue 845, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: nate-chaoweeraprasit
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 845 2026-10-29]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Gupta, Ostashev, kirilltym, Friedman
+  start: 30
+  end: 35
+  label: Gupta
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 845 2026-10-29]]
+    /credit span 30:35: a prerequisite credit of the evand/square-packing certificates
+    of issue 845, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: siddharth-gupta
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 845 2026-10-29]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Gupta, Ostashev, kirilltym, Friedman
+  start: 37
+  end: 45
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 845 2026-10-29]]
+    /credit span 37:45: a prerequisite credit of the evand/square-packing certificates
+    of issue 845, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: daniil-ostashev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 845 2026-10-29]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Gupta, Ostashev, kirilltym, Friedman
+  start: 47
+  end: 56
+  label: kirilltym
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 845 2026-10-29]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Gupta, Ostashev, kirilltym, Friedman
+  start: 58
+  end: 66
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 845 2026-10-29]]
+    /credit span 58:66: a prerequisite credit of the evand/square-packing certificates
+    of issue 845, as the source or its report names it; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: erich-friedman
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n299 update 2026-10-29]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel n299 update 2026-10-29]]
+    /authors/0 span 0:6: the evand/square-packing certificate of the update to issue
+    824, which the source and its report credit to this author. Keep finder, improver
+    and solver roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n299 update 2026-10-29]'
+    field: /credit
+  expected_text: Daniel after Deotte
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel n299 update 2026-10-29]]
+    /credit span 0:6: the evand/square-packing certificate of the update to issue
+    824, which the source and its report credit to this author. Keep finder, improver
+    and solver roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n299 update 2026-10-29]'
+    field: /credit
+  expected_text: Daniel after Deotte
+  start: 13
+  end: 19
+  label: Deotte
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel n299 update 2026-10-29]]
+    /credit span 13:19: a prerequisite credit of the evand/square-packing certificate
+    of the update to issue 824, as the source or its report names it; the original
+    credit role is retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: chris-deotte
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 846 2026-10-30]'
+    field: /authors/0
+  expected_text: Polkovskyi
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 846 2026-10-30]]
+    /authors/0 span 0:10: the Mishapolk/square-packing-records certificates of issue
+    846, which the source and its report credit to this author. Keep finder, improver
+    and solver roles distinct.'
+  contributor_id: mykhailo-polkovskyi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 846 2026-10-30]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 846 2026-10-30]]
+    /credit span 0:10: the Mishapolk/square-packing-records certificates of issue
+    846, which the source and its report credit to this author. Keep finder, improver
+    and solver roles distinct.'
+  contributor_id: mykhailo-polkovskyi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 846 2026-10-30]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy
+  start: 17
+  end: 22
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 846 2026-10-30]]
+    /credit span 17:22: a prerequisite credit of the Mishapolk/square-packing-records
+    certificates of issue 846, as the source or its report names it; the original
+    credit role is retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 846 2026-10-30]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy
+  start: 24
+  end: 26
+  label: Xu
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - packet
+  - owner-confirmation
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 846 2026-10-30]]
+    /credit span 24:26: a prerequisite credit of the Mishapolk/square-packing-records
+    certificates of issue 846, as the source or its report names it; the original
+    credit role is retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: ryan-xu
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 846 2026-10-30]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy
+  start: 28
+  end: 34
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 846 2026-10-30]]
+    /credit span 28:34: a prerequisite credit of the Mishapolk/square-packing-records
+    certificates of issue 846, as the source or its report names it; the original
+    credit role is retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 846 2026-10-30]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy
+  start: 36
+  end: 44
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 846 2026-10-30]]
+    /credit span 36:44: a prerequisite credit of the Mishapolk/square-packing-records
+    certificates of issue 846, as the source or its report names it; the original
+    credit role is retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: daniil-ostashev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 846 2026-10-30]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy
+  start: 46
+  end: 50
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 846 2026-10-30]]
+    /credit span 46:50: a prerequisite credit of the Mishapolk/square-packing-records
+    certificates of issue 846, as the source or its report names it; the original
+    credit role is retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: joshua-levy
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

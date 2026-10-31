@@ -1,0 +1,46 @@
+{
+ "file": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-daniel/tree/packing/resources/web/evand-n299-2026-10-26/source/search/packer/candidates/s299-1025.cert",
+ "sha256": "1ad65a494df088a86890abf3a2d593152df2439be39f1beaacf5a7e5c102bb71",
+ "bytes": 42007,
+ "comment": [
+  "# dilation certificate (dilate_cert.py, delta 1e-12) of /home/evand/math/square-packing/public/search/packer/runs/candidates/s299-1025/cand.txt; check with verify_cert.py"
+ ],
+ "n": 299,
+ "side": "8901847717666168847717657266821/500000000000000000000000000000",
+ "side_decimal_40": "17.8036954353323376954353145336420000000000",
+ "tilted": 117,
+ "A_walls_ok": true,
+ "least_near_wall_clearance": [
+  5e-13,
+  0
+ ],
+ "least_near_wall_clearance_exact": "49999999999999999/100000000000000000000000000000",
+ "least_far_wall_clearance": [
+  5e-13,
+  50
+ ],
+ "least_far_wall_clearance_exact": "49999999999999999/100000000000000000000000000000",
+ "extent_exact": "4450923858832959423858828633413/250000000000000000000000000000",
+ "side_minus_extent": 5e-13,
+ "A_pairs": 44551,
+ "A_pairs_overlapping": 0,
+ "A_first_overlaps": [],
+ "A_valid": true,
+ "least_pair_gap": [
+  1e-12,
+  3,
+  4
+ ],
+ "least_pair_gap_exact": "999999999999999979/1000000000000000000000000000000",
+ "pairs_within_1e-15": 0,
+ "A_cpu_s": 3.18,
+ "B_walls_bad": [],
+ "B_pairs_clipped": 667,
+ "B_pairs_far_by_discs": 43884,
+ "B_pairs_positive_area": 0,
+ "B_first_overlaps": [],
+ "B_valid": true,
+ "B_cpu_s": 0.68,
+ "total_cpu_s": 3.86,
+ "print_up_12": "17.803695435333"
+}

@@ -1397,6 +1397,32 @@ def test_refinements_render_with_their_packing_and_form_a_chain() -> None:
 SPAN_KEYS = ("model", "low", "high", "open_low", "open_high")
 
 
+def test_an_entry_that_holds_some_cases_still_joins_the_start_where_it_is_pending() -> None:
+    """Pending adoption is read count by count: an entry that holds a case elsewhere, and
+    so is the current best as a whole, still states a smaller bound pending adoption at
+    another count, and that bound joins the count's start (T-193 at 88 and 126 on 31 October
+    2026, where Polkovskyi's certificates lie above it). Every such bound on the tree is
+    held to it."""
+    from devtools import render_recent_results as view  # noqa: PLC0415
+
+    records = view.load_records()
+    wanted: dict[int, set[str]] = {}
+    for result in records.register.results:
+        if view.standing(result, records) == view.PENDING_ADOPTION:
+            continue
+        for finding in check_standing.improvements(result, records):
+            if finding.direction == check_standing.UPPER and finding.n <= ledger.HORIZON:
+                wanted.setdefault(finding.n, set()).add(
+                    f"register {result['id']}, pending adoption"
+                )
+    # On 31 October 2026 T-193 held cases elsewhere and was pending at 88 and 126 (A11 of
+    # the review of #852), so the check is not vacuous while think-ot5c stages them.
+    assert {88, 126} <= set(wanted)
+    members = ledger.tree_members(sorted(wanted))
+    for n, labels in wanted.items():
+        assert labels <= {member["label"] for member in members[n]}, n
+
+
 def test_a_start_frozen_from_23_october_holds_goebel_s_construction_beyond_324(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

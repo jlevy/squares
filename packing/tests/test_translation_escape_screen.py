@@ -173,6 +173,9 @@ GOLDEN_UNSTABLE = {
         232,
         241,
         259,
+        # 260, 293 and 299 joined on 31 October 2026, with the new witnesses the adoption
+        # wrote there (think-3guf), whose margins are 1e-12 and 1e-20 dilations.
+        260,
         261,
         264,
         266,
@@ -180,7 +183,9 @@ GOLDEN_UNSTABLE = {
         268,
         269,
         273,
+        293,
         297,
+        299,
         301,
         303,
         304,
