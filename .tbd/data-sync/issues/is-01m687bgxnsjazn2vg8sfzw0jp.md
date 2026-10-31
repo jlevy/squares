@@ -3,9 +3,9 @@ type: is
 id: is-01m687bgxnsjazn2vg8sfzw0jp
 title: Review Daniel's 172, 204, 260, 293 certificates (stage 4) and adopt all four with both regularizations (#845)
 kind: task
-status: open
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,10 +15,10 @@ parent_id: is-01m685ngekhjw1cxgta3763s3s
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:39.349Z
-updated_at: 2026-10-31T13:57:45.480Z
+updated_at: 2026-10-31T15:39:43.671Z
 started_at: 2026-10-31T13:35:12.641Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-31T15:39:43.671Z
+close_reason: "Stage-4 review landed in jlevy/squares#852 (merged e482345fe); results adopted; replies recorded in #860 (merged 94e36b675)."
 resolution: null
 duplicate_of: null
 ---

@@ -3,9 +3,9 @@ type: is
 id: is-01m687bfrjjekhpb89tv186htv
 title: Review Couzo's 232, 260, 307 certificates (#844, a5a5d76) and adopt at 232 and 307 with both regularizations
 kind: task
-status: open
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,10 +15,10 @@ parent_id: is-01m685nejvjntazeebg3zn18mt
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:38.162Z
-updated_at: 2026-10-31T13:57:45.472Z
+updated_at: 2026-10-31T15:39:42.980Z
 started_at: 2026-10-31T13:35:11.441Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-31T15:39:42.980Z
+close_reason: "Stage-4 review landed in jlevy/squares#852 (merged e482345fe); results adopted; replies recorded in #860 (merged 94e36b675)."
 resolution: null
 duplicate_of: null
 ---

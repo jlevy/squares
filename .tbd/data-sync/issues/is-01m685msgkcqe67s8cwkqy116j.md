@@ -3,9 +3,9 @@ type: is
 id: is-01m685msgkcqe67s8cwkqy116j
 title: "Import Francisco Couzo: s(130) <= 11.902430645985 (#843)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -16,10 +16,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:06:45.907Z
-updated_at: 2026-10-31T13:50:46.915Z
+updated_at: 2026-10-31T15:39:45.566Z
 started_at: 2026-10-31T05:07:20.327Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-31T15:39:45.565Z
+close_reason: "Answered and closed on 31 Oct after #852; final reply and close recorded in jlevy/squares#860 (merged 94e36b675)."
 resolution: null
 duplicate_of: null
 ---

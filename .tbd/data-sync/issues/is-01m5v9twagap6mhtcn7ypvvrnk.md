@@ -3,9 +3,9 @@ type: is
 id: is-01m5v9twagap6mhtcn7ypvvrnk
 title: Review Evan Daniel's s(299) update certificate (T-258, stage 4) and adopt it at 299 with both regularizations (#824 update)
 kind: task
-status: open
+status: closed
 priority: 1
-version: 9
+version: 10
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,10 +15,10 @@ parent_id: is-01m5v9gnfdsstsbyk92bb6nk8e
 hold: null
 hold_until: null
 created_at: 2026-10-26T05:09:52.080Z
-updated_at: 2026-10-31T13:57:45.483Z
+updated_at: 2026-10-31T15:39:45.010Z
 started_at: 2026-10-31T08:37:27.888Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-31T15:39:45.010Z
+close_reason: "Stage-4 review landed in jlevy/squares#852 (merged e482345fe); results adopted; replies recorded in #860 (merged 94e36b675)."
 resolution: null
 duplicate_of: null
 ---

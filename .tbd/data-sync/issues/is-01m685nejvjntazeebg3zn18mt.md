@@ -3,9 +3,9 @@ type: is
 id: is-01m685nejvjntazeebg3zn18mt
 title: "Import Francisco Couzo: 232, 260, 307 (#844), with the a5a5d76 certificates at 260 and 307 (no issue)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -16,10 +16,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:07:07.483Z
-updated_at: 2026-10-31T13:50:47.888Z
+updated_at: 2026-10-31T15:39:46.129Z
 started_at: 2026-10-31T05:07:21.590Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-31T15:39:46.129Z
+close_reason: "Answered and closed on 31 Oct after #852; final reply and close recorded in jlevy/squares#860 (merged 94e36b675)."
 resolution: null
 duplicate_of: null
 ---

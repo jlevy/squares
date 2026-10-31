@@ -3,9 +3,9 @@ type: is
 id: is-01m685ngekhjw1cxgta3763s3s
 title: "Import Evan Daniel: 172, 204, 260, 293 (#845)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -16,10 +16,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:07:09.395Z
-updated_at: 2026-10-31T13:50:49.097Z
+updated_at: 2026-10-31T15:39:46.973Z
 started_at: 2026-10-31T05:07:22.523Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-31T15:39:46.973Z
+close_reason: "Answered and closed on 31 Oct after #852; final reply and close recorded in jlevy/squares#860 (merged 94e36b675)."
 resolution: null
 duplicate_of: null
 ---
