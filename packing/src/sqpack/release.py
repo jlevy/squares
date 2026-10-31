@@ -2667,6 +2667,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_resources.py",
+            "packing/devtools/site_urls.py",
             "packing/frontier/README.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -2693,7 +2695,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "its page and Markdown, compared before the math pass (render's output; "
             "the pinned Chromium is not installed on the importing host), differ only "
             "in that count, 251 against 252. No PDF was printed; each prints from that "
-            "HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "HTML. Measured again after the source's card among the other projects "
+            "(site_resources.py) and result/t-046.html's page budget (site_urls.py), at "
+            "the same link revision with main's results.yaml, result-requests.yaml, "
+            "source-coverage.yaml, frontier/README.md, composite-figure.json, "
+            "site_resources.py and site_urls.py swapped in: the same 51 files, "
+            "byte-identical. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
