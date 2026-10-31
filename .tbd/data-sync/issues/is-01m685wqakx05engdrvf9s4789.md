@@ -5,7 +5,7 @@ title: "Import Mohsen Karimi: 5,308 upper bounds at n = 1182-9944, two-strip con
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: bold-ritchie-l4
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:05.811Z
-updated_at: 2026-10-31T07:09:49.238Z
+updated_at: 2026-10-31T07:43:11.950Z
 started_at: 2026-10-31T05:13:11.988Z
 ---
 New 2026-10-26 issue https://github.com/jlevy/squares/issues/836 (mohsensbu-jpg, 12:18:36Z): Mohsen Karimi's version 5.0 of the two-strip record set of #799, 5,308 upper bounds at n = 1182 to 9944. Same author and construction as #799 (think-5dc3): its rows are decided by the maintained devtools.two_strip_checker and land beside #799's in the walk above 1024 (think-llit). A new issue, so its own import and answer bead; think-5dc3 stays #799's. Stage 0 owner: bold-ritchie-l4 (intake pass 2026-10-31, think-3guf).
@@ -60,6 +60,8 @@ zenodo.org is denied by this session's network policy (proxy 403 on CONNECT), so
 **Answer bead:** this one. The acknowledgement draft is in its notes, to post after the pull request that carries this triage merges.
 
 ## Notes
+
+2026-10-31 bold-ritchie-l4, review A of #853 (coordinator's decisions; the posted comment is not edited). A1: if the author takes the GitHub route, any file committed loose without a stated digest (README.md; the issue states digests for the zip and records.csv only; regenerate.py can also be compared with version 2's retained copy) is checked against Zenodo's per-file listing, or a digest the author states, before any checker reads it. A2: the reply posted when the rows land must state the walk's outcome count by count, and must correct explicitly the acknowledgement's second bullet, "where v5 is lower (1,434), its row is recorded after version 2's", which stated no condition: say how many of the 1,434 the walk recorded and which it did not, and why (an earlier report or Goebel's construction).
 
 2026-10-31 bold-ritchie-l4: after #848 merged (main 37ede3936), posted the acknowledgement https://github.com/jlevy/squares/issues/836#issuecomment-6540432165 (the draft below, with zenodo.org stated unreachable for now and an optional request: a copy at a public GitHub commit, checked against the stated SHA-256; issue attachments are refused by the session gateway too). Recorded under #836 replies on claude/bold-ritchie-xo28us-acks.
 

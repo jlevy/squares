@@ -5,7 +5,7 @@ title: "Import Mohsen Karimi: 5,134 upper bounds at n = 1182-9946, filled-end tw
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: bold-ritchie-l4
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:14.372Z
-updated_at: 2026-10-31T07:09:50.128Z
+updated_at: 2026-10-31T07:43:12.674Z
 started_at: 2026-10-31T05:13:12.006Z
 ---
 New 2026-10-30 issue https://github.com/jlevy/squares/issues/847 (mohsensbu-jpg, 21:56:32Z): Mohsen Karimi's filled-end record set V2.0, 5,134 upper bounds at n = 1182 to 9946, a new construction: the two-band L packing of #836 with the band ends filled by axis-parallel layers. It supersedes V1.0, posted on #836 (comment 6433611255, 2026-10-27T04:16:22Z). Same author as #799 (think-5dc3) and #836 (think-7yrs); a different construction, which two_strip_checker does not read, so it needs W9 (think-fuwd). Stage 0 owner: bold-ritchie-l4 (intake pass 2026-10-31, think-3guf).
@@ -65,6 +65,8 @@ zenodo.org is denied by this session's network policy (proxy 403 on CONNECT), so
 **Answer bead:** this one. The acknowledgement draft is in its notes, to post after the pull request that carries this triage merges.
 
 ## Notes
+
+2026-10-31 bold-ritchie-l4, review A of #853 (coordinator's decisions; the posted comment is not edited). A1: the issue states digests for filled_records.csv and V1.0's zip only; filled_ends.py, regenerate_filled.py, check_cert.py and README_filled.md are checked against Zenodo's per-file listing, or digests the author states, before any checker reads them or W9 (think-fuwd) is written from them, whichever route (Zenodo or a GitHub commit) brings them. A2: the reply posted when the rows land must state the walk's outcome count by count, and must correct explicitly the acknowledgement's line that the new checker will work "as two_strip_checker does for #799 and #836", which was present tense for #836 although parse_records refused v5's header: say when two_strip_checker first read v5's file.
 
 2026-10-31 bold-ritchie-l4: after #848 merged (main 37ede3936), posted the acknowledgement https://github.com/jlevy/squares/issues/847#issuecomment-6540433314 (the draft below, with zenodo.org stated unreachable for now, the same optional request, and V1.0 as Q-847a decides rather than included). Recorded under #847 replies on claude/bold-ritchie-xo28us-acks.
 
