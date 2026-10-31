@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 49
+version: 50
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -38,7 +38,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T21:53:51.478Z
+updated_at: 2026-10-31T23:53:35.810Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -82,3 +82,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 19:58 hourly: merged #864 (737d8311e); 20 merged this pass. Sweep on 737d8311e (scratchpad/intake5.txt) near clean: #847 licence comment (L9), #446 follow-up owed (T-177 superseded), #485/#533 (think-flxm), #419 (think-63vx) -> lane L10; #846 'closeable' is the check_requests blocked-field bug (kept open); think-qvp6 retitled to its real wait. No new issues.
 
 2026-10-31 21:55 hourly: no new issues. L9 (#863) running think-gw1s v5 replay (4h44m in, 2 workers); L10 (#865) running sqverify_continuous n=40 (2 threads); #446 follow-up posted by L10. Host at 4/4 cores. 20 merged this pass.
+
+2026-10-31 23:55 hourly: no new issues. #865 review A: mark 'independently re-implemented' confirmed correct; A1/A2 blocking (oblique-control overclaim; #533 ask not done) -> L10 running the c6718 tau'=1001/1000 control (~1.4 CPU-h). L9 v5 replay ~13.5 CPU-h so far (est 10.9; cap 40). Freed 12 GB disk by removing 7 finished lanes' clean worktrees. New network block: lakecache.blob.core.windows.net (Mathlib cache) for #419's Lean build.
