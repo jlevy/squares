@@ -5,7 +5,7 @@ title: "Import Mohsen Karimi: 5,308 upper bounds at n = 1182-9944, two-strip con
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 13
 delegate: bold-ritchie-l4
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:05.811Z
-updated_at: 2026-10-31T12:29:43.823Z
+updated_at: 2026-10-31T15:25:09.518Z
 started_at: 2026-10-31T05:13:11.988Z
 ---
 New 2026-10-26 issue https://github.com/jlevy/squares/issues/836 (mohsensbu-jpg, 12:18:36Z): Mohsen Karimi's version 5.0 of the two-strip record set of #799, 5,308 upper bounds at n = 1182 to 9944. Same author and construction as #799 (think-5dc3): its rows are decided by the maintained devtools.two_strip_checker and land beside #799's in the walk above 1024 (think-llit). A new issue, so its own import and answer bead; think-5dc3 stays #799's. Stage 0 owner: bold-ritchie-l4 (intake pass 2026-10-31, think-3guf).
@@ -60,6 +60,8 @@ zenodo.org is denied by this session's network policy (proxy 403 on CONNECT), so
 **Answer bead:** this one. The acknowledgement draft is in its notes, to post after the pull request that carries this triage merges.
 
 ## Notes
+
+2026-10-31 bold-ritchie-l4: after #859 merged (main d7a815e86) and its Pages deploy verified (run 41213071820), posted the follow-up https://github.com/jlevy/squares/issues/836#issuecomment-6545300576 (the draft below, revised). It gives each count's outcome and explicitly corrects the acknowledgement's "where v5 is lower (1,434), its row is recorded after version 2's". It says the rows are not yet recorded, since R1 waits on the owner's D4. It also gives the first answer to the author's #799 comments of 25 October, as bold-ritchie-l1's note asked. Recorded under #836 replies on claude/bold-ritchie-xo28us-karimi-reply (PR #862). The next reply is owed when the rows land: count by count, how many of the 1,434 and 2,484 were recorded, and why each other was not.
 
 2026-10-31 bold-ritchie-l4, stage 2 and stage 4 sample (branch claude/bold-ritchie-xo28us-karimi): the author's copy at mohsensbu-jpg/square_packing_records_karimi@ad8b094 (named on #836 at 11:43:02Z) is retained as packet karimi-records-2026-10-31 by acquire_source; the zip and its records.csv have #836's two SHA-256s; regenerate.py is versions 1 and 2's byte for byte; README.md pinned by the commit alone (no Zenodo listing reachable). Counts verified in the data: 5,308 rows, 2,484 new vs version 2, 1,434 lower, 1,390 identical, 0 higher, 51 flagged no. two_strip_checker now reads a deposit kept as its archive through its own column set (V5): all 5,308 rows decided, every control refused (receipts/two-strip-decisions-v5.json, 212.9 CPU-s); replay sample 1182, 1253, 6089, 9912, 9944 on both routes, six controls refused by both (receipts/replay-sample-v5.json). Triage done in the requests entry; rows wait on R1 (think-llit) and land with R5 (think-5dc3). Re-priced validation on think-gw1s.
 

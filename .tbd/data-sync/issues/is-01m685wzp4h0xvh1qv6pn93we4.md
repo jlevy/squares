@@ -5,7 +5,7 @@ title: "Import Mohsen Karimi: 5,134 upper bounds at n = 1182-9946, filled-end tw
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: bold-ritchie-l4
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:14.372Z
-updated_at: 2026-10-31T12:46:33.293Z
+updated_at: 2026-10-31T15:25:10.032Z
 started_at: 2026-10-31T05:13:12.006Z
 ---
 New 2026-10-30 issue https://github.com/jlevy/squares/issues/847 (mohsensbu-jpg, 21:56:32Z): Mohsen Karimi's filled-end record set V2.0, 5,134 upper bounds at n = 1182 to 9946, a new construction: the two-band L packing of #836 with the band ends filled by axis-parallel layers. It supersedes V1.0, posted on #836 (comment 6433611255, 2026-10-27T04:16:22Z). Same author as #799 (think-5dc3) and #836 (think-7yrs); a different construction, which two_strip_checker does not read, so it needs W9 (think-fuwd). Stage 0 owner: bold-ritchie-l4 (intake pass 2026-10-31, think-3guf).
@@ -66,6 +66,8 @@ zenodo.org is denied by this session's network policy (proxy 403 on CONNECT), so
 **Answer bead:** this one. The acknowledgement draft is in its notes, to post after the pull request that carries this triage merges.
 
 ## Notes
+
+2026-10-31 bold-ritchie-l4: after #859 merged (main d7a815e86) and its Pages deploy verified (run 41213071820), posted the follow-up https://github.com/jlevy/squares/issues/847#issuecomment-6545302398 (the draft below, revised). It gives each count's outcome. It binds the three programs to V1.0's published bytes, with their being V2.0's files resting on the author's statement. It explicitly corrects the acknowledgement's "as two_strip_checker does for #799 and #836": the checker first read v5's file in #859. It says no V2.0 or V1.0 row is recorded: V2.0 waits on W9, then on R1, which waits on the owner's D4; V1.0 waits on Q-847a. It also asks the licence question (think-nu37). Recorded under #847 replies on claude/bold-ritchie-xo28us-karimi-reply (PR #862).
 
 2026-10-31 bold-ritchie-l4, correction to the note below: devtools.filled_end_sample does NOT hash filled_ends.py or the table at run time. OR-16 and devtools.check_integrity_ceremony keep custody of retained bytes with Git and acquire_source --check, so the stated digests were checked once, when the karimi-records-2026-10-31 packet was written (all held; the three programs equalled the V1.0 zip members), and each run reads the bytes as Git keeps them. The same holds for two_strip_checker.archived_records on v5.
 
