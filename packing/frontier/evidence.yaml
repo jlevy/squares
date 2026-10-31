@@ -50712,6 +50712,92 @@ evidence:
         Unchecked: T-124's Lean route, the 17 timeouts, and whether each configuration is its
         case's current packing.
     source_reviewed: '2026-10-23'
+  - id: E-evand-gradec-local-minima-233-review-check
+    claim: derived-structure
+    scope: {n_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 30, 31, 32, 33, 34, 35, 36, 38, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 84, 85, 86, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 104, 107, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 124, 125, 127, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 147, 148, 149, 150, 151, 153, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 175, 176, 178, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 200, 202, 203, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 229, 230, 232, 233, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 258, 260, 261, 264, 265, 267, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 293, 294, 298, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/review/README.md
+    replay: >-
+      From packing/, with P = resources/web/evand-exact-data-2026-10-12, run
+      OPENBLAS_NUM_THREADS=1 .venv/bin/python3 -I $P/review/check_theorem_c.py --minpoly-dir
+      $P/source/search/exact/minpoly/data --archive
+      $P/acquisition/release/gradec-233.tar.zst --dropzero 230,261 --out OUT.jsonl $(cat
+      $P/review/counts.txt). Every one of the 233 lines must say valid true and the program
+      must exit 0; then .venv/bin/python3 -I $P/review/compare_certificates.py --archive
+      $P/acquisition/release/gradec-233.tar.zst OUT.jsonl must print agree true and exit 0,
+      as receipts/review-theorem-c-233.jsonl and receipts/review-compare-233.json record.
+    replay_status: passed
+    verifiers: [V-evand-gradec-review-check, V-evand-gradec-review-compare, V-evand-gradec-review-derivatives]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the 233 configurations the release's grade-C archive certifies, each decided in full:
+          the record's packing property, every kept row, the multipliers, null L0 and the flat
+          family, the affine null vectors and the reduced Hessian
+    limitations: >-
+      Run here on 23 October 2026 by the stage 4 mathematical review of the #545 import
+      (think-7scz), under Python 3.14.7, numpy 2.5.2 and scipy 1.17.1, in niced processes,
+      two for most of the run and three at once near its end, with single-threaded BLAS, on the 233 exact forms retained in the packet
+      (each bound to its Git blob at 31523f8) and the archive's contacts files read in
+      memory: all 233 valid, in 1,463 CPU-seconds, at most 369 for one count (n = 294). It
+      decides the hypotheses of Theorem C in the form the review proves (the pair form of
+      the side-end relaxation) and the record's packing property; that the hypotheses imply
+      local minimality is the review's paper proof, not a mechanized one. It uses the
+      contacts files' choice of rows, which any choice of valid rows makes sound, and at each of
+      230 and 261 drops the 24 rows a linear program finds forced to zero, the same 24 as
+      the source. numpy and scipy only propose multipliers and a basis order, and a numerical
+      SVD agrees with the exact rank of L0 at every count; the identities, signs, lifts and
+      Hessian are exact. It agrees with every published certificate on rows, ranks, dim F,
+      dim W, the moving squares and the load-bearing squares. Independently re-implemented
+      after reading the producer's code, by a Claude agent, a system family the producer
+      also used. Not covered: the 17 timeouts, field degrees above 4, T-124's Lean proofs,
+      and whether each configuration is its case's current packing.
+    source_reviewed: '2026-10-23'
+  - id: E-evand-gradec-n10-recompute
+    claim: derived-structure
+    scope: {n_values: [10]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/receipts/gradec-n10-recompute.json
+    replay: >-
+      Copy gradec.py with localmin.py, verify_exact.py and geom.py from
+      packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/ to
+      a directory outside the repository, install numpy 2.4.2, scipy 1.17.0, mpmath 1.3.0,
+      sympy 1.14.0 and python-flint 0.9.0 (env.sh's versions) into a fresh virtual
+      environment, put the unzipped n-10.minpoly.json from this packet's
+      source/search/exact/minpoly/data/ beside the archive's n-10.contacts.json, and run
+      PYTHONPATH=. python3 gradec.py DIR/n-10 with OPENBLAS_NUM_THREADS=1 and
+      GRADEC_DROPZERO and GRADEC_MUTATE unset. The output must be byte-identical to the
+      archive's n-10.gradec.json, SHA-256
+      ffc0c1ee41b0c2037ab241806215b0df9d2a0111893256fa2a2116e3df02208f, as
+      receipts/gradec-n10-recompute.json records.
+    replay_status: passed
+    verifiers: [V-evand-gradec-py]
+    independence:
+      coverage:
+        extent: full
+        unit: the n = 10 certificate, recomputed with the source's checker from the committed exact form and the published contacts
+    limitations: >-
+      Run on 12 October 2026 by the records lane of the #545 import with the source's own
+      checker (gradec.py at 93374b5a, read first, run from a copy outside the repository
+      under CPython 3.13.16 with env.sh's pinned packages and without nix): VALID, output
+      byte-identical to the published n-10.gradec.json, 9.2 s of wall time and 2.5 CPU
+      seconds. It shows that the published certificate at n = 10 is what gradec.py computes
+      from the published inputs, not that Theorem C or gradec.py is sound; it is a
+      reproduction with the producer's code at one count of 233 and sets no rung.
+    source_reviewed: '2026-10-12'
   - id: E-wand125-fine-net-n31-59775-report
     claim: lower-bound
     scope: {n_values: [31]}
@@ -54333,4 +54419,128 @@ evidence:
       author read the first 160 lines of the 22 October review of issue 719, which
       names the same two methods, before writing it. Finite feasibility only: no lower
       bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-31'
+  - id: E-register-candidates-2026-10-31-views
+    claim: upper-bound
+    scope: {n_values: [130, 307]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The register's upper bounds at 130 and 307 and their houses of 31 October 2026,
+        T-259 and T-256; every certificate the record retains at those counts and at 131 and
+        308; and the issue 843, 844 and 846 packets.
+      searched: >-
+        2026-10-31, by devtools.register_candidates table against the houses, and a search of
+        the retained packets and the register for each side's numerator
+      novel_object: >-
+        Exact rational certificates of the houses' packings at 130 and 307, re-solved by
+        Evan Daniel's regularizer, 2.500e-13 and 3.752e-12 below the houses. The packings
+        are their finders'; the solver and the regularizer are Evan Daniel's.
+      gaps: >-
+        No search beyond this record and its retained sources. At 130 the side is within the
+        house's 12-place print, and whether that makes it a restatement is the owner's
+        question (think-ikku).
+    source_key: '[Daniel regularizer 2026-10-11]'
+    certificate: packing/cases/register_candidates/think-ruu2-2026-10-31/views/
+    replay: >-
+      From packing/, uv run --frozen --all-extras --group dev python -m
+      devtools.register_candidates think-ruu2-2026-10-31 check --replay, which holds each
+      retained view to its run's report, decides the kernel's three jobs again on both
+      routes and requires the receipts' outcomes, and decides the six sharp controls again
+      (receipts/exact-certification-n130.json.xz, -n307.json.xz,
+      receipts/sharp-controls-n130.json and -n307.json in the package).
+    replay_status: passed
+    verifiers: [V-sqpack-verify, V-check-rational-witness-independent, V-register-candidates]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          retained rational packing views, every wall and every pair decided by both
+          maintained checkers: 8,385 pairs at 130 and 46,971 at 307 a job, with the
+          duplicate-square and outside-container jobs and the sharp controls retained beside
+        checked: 2
+        of: 2
+    limitations: >-
+      Proves s(130) and s(307) at most the exact sides of the retained views, by deciding
+      each here, every pair and every wall over Q, by sqpack.witness.exact_verify on its
+      rational centre-basis witness and devtools.check_rational_witness_independent on its
+      rational corners, on 31 October 2026. Both refuse a duplicated square and a square
+      moved outside the box, and the six sharp controls of
+      devtools.upper_bound_sharp_controls are accepted at exact contact and refused 1e-30
+      past it on both. The two routes share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. The regularization run of 31
+      October 2026 (devtools.regularize_evand, Evan Daniel's vendored solver and regularizer
+      at evand/square-packing@675a5ea, conservative, coincide) made each view and decided it
+      with the same two checkers, so this replay reproduces the producing run's decision
+      with its own code; the solver and the regularizer decide nothing. The KKT local
+      minimality the run reports is not decided here. Identity is measured against each
+      house's certificate (measure/identity-n130.json and -n307.json): one to one under the
+      identity at both. No optimality, local minimum or rigidity is claimed.
+    source_reviewed: '2026-10-31'
+  - id: E-register-candidates-2026-10-31-l-strip-293
+    claim: upper-bound
+    scope: {n_values: [293]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components: ["the arrangement kernel's exact certificate type and its half-angle conversion to witnesses and corners (devtools.evand_exact_certificates), which builds the construction and hands it to both checkers"]
+    origin: replayed-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The register's upper bounds at 293 and 294 and the house of 31 October 2026 at 293,
+        T-257; every certificate the record retains at 293 and 294; and the issue 845
+        packet.
+      searched: >-
+        2026-10-31, by devtools.register_candidates table against the house, and a search of
+        the retained packets and the register for the side's numerator
+      novel_object: >-
+        A certificate of 293 unit squares at s_260 + 1, from Evan Daniel's issue 845
+        certificate at 260 and one L strip, 8.98e-13 below his certificate at 293, which the
+        issue reports as his 260 plus an L, dilated separately.
+      gaps: >-
+        No search beyond this record and its retained sources. The senior review of #852
+        found the construction (A3) and its scan of L steps into and out of the eight
+        counts re-housed on 31 October found no other.
+    source_key: '[Daniel issue 845 2026-10-29]'
+    certificate: packing/resources/web/evand-issue845-2026-10-29/README.md
+    replay: >-
+      From packing/, uv run --frozen --all-extras --group dev python -m
+      devtools.register_candidates think-ruu2-2026-10-31 check --replay, which rebuilds the
+      construction from the issue 845 packet's 260 certificate through that packet's
+      custody, decides the kernel's three jobs again on both routes and requires the
+      receipts' outcomes, and decides the six sharp controls again
+      (receipts/exact-certification-n293.json.xz and receipts/sharp-controls-n293.json in
+      packing/cases/register_candidates/think-ruu2-2026-10-31).
+    replay_status: passed
+    verifiers: [V-sqpack-verify, V-check-rational-witness-independent, V-register-candidates]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the construction, every wall and every pair decided by both maintained checkers:
+          42,778 pairs a job, with the duplicate-square and outside-container jobs and the
+          sharp controls retained beside
+        checked: 1
+        of: 1
+    limitations: >-
+      Proves s(293) <= s_260 + 1 for s_260 the exact side of Evan Daniel's issue 845
+      certificate at 260, by building the packing of 293 unit squares, his 260 certificate
+      in [0, s_260]^2 with 33 axis-aligned unit squares in the L strip, and deciding it
+      here, every pair and every wall over Q, by sqpack.witness.exact_verify and
+      devtools.check_rational_witness_independent, on 31 October 2026, with a duplicated
+      square and a square moved outside the box refused and the six sharp controls accepted
+      at exact contact and refused 1e-30 past it on both. The two routes share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method,
+      and the construction is built with the kernel's certificate type, which both are
+      handed. The senior review of #852 decided the same construction on the independent
+      route first (42,778 pairs). Measured against T-257's certificate at 293, nearest
+      centres pair the squares one to one under no symmetry of the box
+      (measure/identity-n293.json). No optimality, local minimum or rigidity is claimed.
     source_reviewed: '2026-10-31'

@@ -6500,3 +6500,53 @@ verifiers:
       Polkovskyi packets, with everything it printed in the mishapolk-issue846-2026-10-30
       packet's review/review-2026-10-31/. rv_identity.py, rv_gaps.py and rv_claims.py,
       kept beside it, decide nothing and are not registered.
+  - id: V-register-candidates
+    program: devtools.register_candidates
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Retains this project's certificates below a case's house best packing as a batch: a
+      regularizer's view, copied from its run only where its Git blob and exact side are
+      those the run's retained report records, or a construction of one L strip of unit
+      squares added to an import packet's certificate at a smaller count, read through
+      that packet's custody and rebuilt wherever it is read. It drives the arrangement
+      kernel's three jobs and the six sharp controls of devtools.upper_bound_sharp_controls
+      on both maintained exact routes and writes their receipts. It decides no geometry
+      itself.
+    source:
+      - packing/devtools/register_candidates.py
+      - packing/tests/test_register_candidates.py
+    note: >-
+      Written by the records lane of think-ruu2 on 31 October 2026 for the register
+      candidates of that day's adoption (T-261 to T-263). sqpack.witness.exact_verify and
+      devtools.check_rational_witness_independent decide, the checkers the regularization
+      run decided its views with.
+  - id: V-configuration-fact-replay
+    program: devtools.configuration_fact_replay
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Reads Hyukdong Kim's exact configurations for T-244, kept as derived JSON facts:
+      holds each to the member digest its comment states by rebuilding the author's file
+      byte for byte, checks that its side is T-244's (the same irreducible polynomial, a
+      root of it in K, and one root in the hull of both isolating intervals, counted by
+      SymPy), turns it into a centre-basis Witness/v2 over K through
+      devtools.algebraic_witness_reports.evand_minpoly_geometry, drives sqpack's exact
+      verifier on a positive and two controls, and runs the source's verify_exact.py
+      unchanged on the rebuilt file and on four mutated controls. It decides no geometry
+      itself.
+    source:
+      - packing/devtools/configuration_fact_replay.py
+      - packing/tests/test_configuration_fact_replay.py
+    note: >-
+      Written by the records lane of think-4rzl on 31 October 2026, the small reader
+      review B2 of #813 asked for. Its authors read the author's comments as text and the
+      retained verify_exact.py as data before running it; none of the author's own checker,
+      controls or scripts was read or run. sqpack.witness.exact_verify decides on route 1
+      and verify_exact.py, the source's checker (V-evand-verify-exact), on route 2.
