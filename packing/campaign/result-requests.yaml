@@ -1148,6 +1148,7 @@ issues:
     - think-05m9
     - think-tiou
     - think-93nb
+    - think-ysif
     answer_bead: think-ybmt
     replies:
     - url: https://github.com/jlevy/squares/issues/375#issuecomment-6004562871
@@ -1260,6 +1261,21 @@ issues:
         position: superseded
       - result: n17-exact-form-2026-10-10
       beads: [think-x4v4]
+      outdated:
+      - 'describes E-evand-exact-ceilings-2026-10-05-exact-replay as an independent implementation
+        whose two checkers share no code with the author''s; the evand-cert adapter both read
+        through transcribes verify_cert2.py''s corners and both checkers'' line filter
+        (V-evand-exact-certificates, RF-1 of the review of #728), and think-ysif aligns the entry'
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6543355721
+      date: '2026-10-31'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-exact-replay
+      corrects:
+      - https://github.com/jlevy/squares/issues/375#issuecomment-6542830540
+      beads: [think-ysif]
     blocked:
       type: standing-hold
       reason: >-
