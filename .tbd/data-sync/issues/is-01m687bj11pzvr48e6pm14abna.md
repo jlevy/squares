@@ -5,7 +5,7 @@ title: "Review Polkovskyi's 23 October and #846 refinements (stage 4): adopt 130
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m685njhfc113wb8prbg15npb
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:40.481Z
-updated_at: 2026-10-31T08:39:43.685Z
+updated_at: 2026-10-31T13:44:44.045Z
 started_at: 2026-10-31T08:37:28.980Z
 ---
 Stage 4 review of Mykhailo Polkovskyi's certificates of 23 October (T-252 on the lane's branch: 154, 155, 183, 211, 227, 236, 237, 241 and 271, each about 1.3e-19 to 1.7e-19 below its house) and of #846 (T-258: 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house, and 130, a 2e-14 dilation of Couzo's #843 packing 2.08e-12 below it), and the adoption at each of the fifteen counts where it is the smallest validated side, crediting each packing to its finder and the refinement to Polkovskyi.
@@ -44,3 +44,5 @@ QUESTION FOR THE OWNER: does the 23 October restatement ruling reach counts insi
 - (c) Only a holder's own re-certifications: 105 and 156 (Polkovskyi's own houses) are not recorded; the other twelve wait on think-oqjd.
 
 Record on #852: T-253 (the nine of 23 October) and T-260 (issue 846's five, split from T-259 so the question holds only them) stay at V0/C1, below the stage 4 exit, with the review mapped and their replay evidence not entered; nothing adopts them. #846's requests entry is blocked: owner-decision naming this bead. When the owner answers, the record follows: (a) withdraw both entries and add the ledger's ruling reach; (b) enter the replay evidence E-mishapolk-1023-exact-feasibility and E-mishapolk-846 at the five counts, raise both to V3/C3 and adopt with both regularizations; (c) split again by holder.
+
+2026-10-31 coordinator: the think-ruu2 stage-4 review (tbd-strong-max) widens this owner question (its RV-3): project re-certifications of a house's own packing with padding trimmed (130: 2.50e-13, same print; 293: 8.98e-13 and 307: 3.75e-12, print changes) are the same operation as the 14 Polkovskyi counts. Options: (a) no new result at any margin (reviewer's recommendation), (b) only across the 12-place print, (c) any margin. The same contraction takes T-257's own 260 cert 2.0e-11 below its house across the print, so (b)/(c) open an unbounded series. 293 also raises RV-4: S+1 may already be #845's own report via its stated '260 + L' recipe. All three registered as recorded only, not adopted, pending this decision.
