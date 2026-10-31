@@ -2,7 +2,7 @@
 
 # Defect log
 
-521 defects recorded across the packing toolchain.
+522 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 306 | a human or agent reading the work against a checklist |
 | `anomaly` | 16 | a result that made no sense, chased down |
-| `inspection` | 67 | reading the code or the design with intent |
+| `inspection` | 68 | reading the code or the design with intent |
 | `drift_check` | 17 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 82 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 82 of 521, and none of the 109 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 82 of 522, and none of the 109 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 82 of 521, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 15 |
-| record | 161 |
+| record | 162 |
 | tooling | 195 |
 | docs | 116 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 82 of 521, and none of
 | --- | ---: |
 | soundness | 109 |
 | validity | 128 |
-| bookkeeping | 195 |
+| bookkeeping | 196 |
 | robustness | 70 |
 | performance | 19 |
 
@@ -780,6 +780,7 @@ This is the actionable list.
 | [D-519](docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md) | 2026-10-05 | record | bookkeeping | conservative | `inspection` | medium | fixed | Three Kingbird counts held as pending catalogue intake named no owning bead, and the record trailed the catalogue for five days |
 | [D-520](packing/tests/test_gap_ranking.py) | 2026-10-12 | tooling | bookkeeping | conservative | `inspection` | medium | fixed | The open-gap ranking filtered on the reported status, so a case reported closed but open in the verified lane left the table |
 | [D-521](docs/project/reviews/review-2026-10-13-verification-gaps.md) | 2026-10-13 | verifier | soundness | flattering | `review` | medium | outstanding | Numerical witness receipts record tolerance-blurred values as the minimum clearance and pair gap |
+| [D-522](packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.md) | 2026-10-15 | record | bookkeeping | conservative | `inspection` | medium | fixed | Beyond the corpus the record compared reports only with the grid and earlier reports, so two current rows stood above Göbel's classical constructions |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
