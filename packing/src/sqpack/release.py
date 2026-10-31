@@ -2708,8 +2708,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "copies of those inputs, site_resources.py, frontier/README.md, "
             "composite-figure.json and bound-citations.json swapped in, the same 51 "
             "files, byte-identical across the three; and the same again after merging "
-            "main c94df7cef (#853), with its copies swapped in. Retain v0.1.11, v0.1.4 "
-            "and v0.2.7."
+            "main c94df7cef (#853) and then 84ba6fa9c (#850), with each one's copies "
+            "swapped in. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
