@@ -15891,7 +15891,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-31'
   status: live
   identity:
     kind: lower-bound
@@ -15910,6 +15910,7 @@ urls:
     - E-n040-guzhou-continuous-pose-finite-audit
     - E-n040-guzhou-continuous-pose-crate-axis
     - E-n040-wand125-sqverify-continuous-6715-report
+    - E-n040-wand125-sqverify-continuous-6715-replay
     artifacts:
     - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/README.md
     - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
@@ -15968,6 +15969,47 @@ urls:
       - packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
       - packing/devtools/audit_continuous_pose.py
       - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
+  - date: '2026-10-31'
+    reason: The complete replay here on 31 October 2026 of wand125's sqverify_continuous v4 on this
+      result's density, E-n040-wand125-sqverify-continuous-6715-replay, is added to its evidence;
+      the bound, scope, attribution and rungs are unchanged, and the mark moves to independently re-implemented
+      after reading the producer's code.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 40
+      established: null
+      attribution:
+        source_keys:
+        - '[Guzhou0806 n40 continuous pose 2026-10-10]'
+        published: '2026-10-10'
+      builds_on: null
+      evidence:
+      - E-n040-guzhou-continuous-pose-report
+      - E-n040-guzhou-continuous-pose-kernel-replay
+      - E-n040-guzhou-continuous-pose-finite-audit
+      - E-n040-guzhou-continuous-pose-crate-axis
+      - E-n040-wand125-sqverify-continuous-6715-report
+      artifacts:
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/README.md
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/certificate/parameters.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/continuous_pose.cpp
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/axis_integer_grid.cpp
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/results/verification.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/release-ci/results/verification.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/builds.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/axis-run.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/slabs.jsonl.gz
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/crate-runs.json.gz
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/replay-check.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/finite-audit.json
+      - packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+      - packing/devtools/audit_continuous_pose.py
+      - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
+      - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
 - path: result/t-146.html
   canonical: result/t-146.html
   kind: result
@@ -16535,7 +16577,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-12'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-31'
   status: live
   identity:
     kind: lower-bound
@@ -16554,6 +16596,7 @@ urls:
     - E-n040-guzhou-new-supports-finite-audit
     - E-n040-guzhou-new-supports-crate-axis
     - E-n040-wand125-sqverify-continuous-6718-report
+    - E-n040-wand125-sqverify-continuous-6718-replay
     artifacts:
     - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
     - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
@@ -16620,6 +16663,51 @@ urls:
       - packing/devtools/audit_n40_new_supports.py
       - packing/devtools/audit_continuous_pose.py
       - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+  - date: '2026-10-31'
+    reason: The complete replay here on 31 October 2026 of wand125's sqverify_continuous v4 on this
+      result's density, E-n040-wand125-sqverify-continuous-6718-replay, is added to its evidence;
+      the bound, scope, attribution and rungs are unchanged, and the mark moves to independently re-implemented
+      after reading the producer's code.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 40
+      established: null
+      attribution:
+        source_keys:
+        - '[Guzhou0806 n40 new supports 2026-10-11]'
+        published: '2026-10-11'
+      builds_on: null
+      evidence:
+      - E-n040-guzhou-new-supports-report
+      - E-n040-guzhou-new-supports-kernel-replay
+      - E-n040-guzhou-new-supports-finite-audit
+      - E-n040-guzhou-new-supports-crate-axis
+      - E-n040-wand125-sqverify-continuous-6718-report
+      artifacts:
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/parameters.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/continuous_pose.cpp
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/axis_integer_grid.cpp
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/results/verification.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/release-ci/results/verification.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/finite-audit.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-stage.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-check.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/builds.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-run.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/slabs.jsonl.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/crate-runs.json.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/duals.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/replay-check.json
+      - packing/devtools/audit_n40_new_supports.py
+      - packing/devtools/audit_continuous_pose.py
+      - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+      - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
 - path: result/t-158.html
   canonical: result/t-158.html
   kind: result
