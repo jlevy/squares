@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: open
 priority: 1
-version: 21
+version: 22
 labels:
   - result-import
 dependencies: []
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m68d0t3gpq5ftvzkakhjmm3h
   - is-01m68f02ycck4713n6e6pbexf6
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T07:50:13.196Z
+updated_at: 2026-10-31T07:52:38.910Z
 ---
 
 ## Notes
@@ -34,3 +34,5 @@ updated_at: 2026-10-31T07:50:13.196Z
 
 2026-10-31 06:53 hourly check: #835 merged (32ef0861b) after review A + addressing pass; think-j83l closed. #833 (c884c37d2) and #834 (41cbe77c1) reviewed, all findings addressed, CI running; #848 being re-merged with main by L4. #666/#715/#719 now record blocked: owner-decision (D3/D4/D5); labels restored after #833 merges. No new GitHub issues since 05:50. L2, L3, L5 running.
 2026-10-31 lane L5 (bold-ritchie-l5) report. PRs (draft, none merged): #817 (claude/friendly-einstein-gf9z0h-s29-validation, head 20ba351ec: main 3978a7f61 and 32ef0861b merged, step 6 review written, #816's ask source fixed; --records 54/54; hosted green at bfb16dc53); #849 (claude/bold-ritchie-xo28us-regularize, head fd03d7c89: 39 regularized, 55/290/291 decided, UNRATIFIED empty; --records 54/54; hosted green at 20c0e2c45); #850 (claude/bold-ritchie-xo28us-evidence, head fea8351b2: packets for s76 0699398, sq19 c86a991, 11SquaresOptimal 4262f07; --records 54/54; hosted at 40df512a1 red only on a crashed frontend worker). Beads: think-ojr9 and think-zn7s waits rewritten (memory; cap/owner) and released; think-6gti blocked_on think-10m1; think-10m1 carries #817's verdict (accepted with one Monte Carlo step; C1 proposed) and #816's draft reply; think-yk2h, think-osvq, think-a4x3, think-3i74, think-fddm updated (fddm triaged, packet not made).
+
+2026-10-31 08:00 deviation, disclosed: the three stage-4 reviews of #852's upper-bound certificates (Couzo, Daniel, Polkovskyi) ran at tbd-strong (xhigh), not tbd-strong-max as result-import.md 'Who reviews, and when' asks. Kept rather than re-run because each certificate is decided by two maintained exact routes plus each reviewer's clean-room exact checker; each review's reviewer line must name the tier it ran at. Owner may overrule. #851 (s(44)=7, a lower-bound proof) did get an independent tbd-strong-max review. Daniel review returned: 172/204/260/293/299-update accept for adoption, minor fixes only.
