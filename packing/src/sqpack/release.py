@@ -2720,7 +2720,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "T-244's decided configurations, #545's and #804's requests entries, the 130 "
             "case record's generated regularization sentence and a lint exclusion. Rendered "
             "at one link revision into empty site directories from this tree and with "
-            "main 86ba245b5's versions of the four paths swapped in, the three papers "
+            "main d7a815e86's versions of the four paths swapped in, the three papers "
             "write their 51 files byte-identical across the two."
         ),
     ),
