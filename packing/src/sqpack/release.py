@@ -10027,8 +10027,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "credit changes. Against main 37ede3936 (#848): rendered at link revision "
             "37ede393 into empty site directories, twice from this tree and once with that "
             "main's result-requests.yaml swapped in, render_packing_methods writes its 43 "
-            "files byte-identical across the three. No PDF was printed; it prints from "
-            "that HTML. The survey keeps v0.2.7."
+            "files byte-identical across the three; measured again after review A1's notes "
+            "on the two entries, against the same main: 43 files, byte-identical. No PDF "
+            "was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
 )
