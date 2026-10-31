@@ -4933,9 +4933,9 @@ def test_shared_print_attributions_preserve_full_roles_sources_and_corpus_scope(
         assert sorted(
             n for group in metadata["lower_bounds"]["case_groups"] for n in group["cases"]
         ) == list(range(1, 325))
-        assert len(metadata["optimality"]["sources"]) == 31
-        assert len(metadata["optimality"]["cases"]) == 77
-        assert sum(case["n"] <= 100 for case in metadata["optimality"]["cases"]) == 45
+        assert len(metadata["optimality"]["sources"]) == 32
+        assert len(metadata["optimality"]["cases"]) == 78
+        assert sum(case["n"] <= 100 for case in metadata["optimality"]["cases"]) == 46
         assert [case["n"] for case in metadata["construction"]["cases"]] == list(range(1, 325))
         method = next(
             person

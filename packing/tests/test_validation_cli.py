@@ -39,10 +39,12 @@ from tests import site_browser
 #: completed sweeps of the s(77) cover (T-067) proved n = 77 and 78, two more. 2026-10-03:
 #: the full Valid7 replay and the built Lean reduction (T-064) proved n = 97, 118, 141,
 #: 166, 193, 222, 253, 286 and 321, which meets the reported lane at every corpus.
+#: 2026-10-31: the zmx2 replays of Khalili and Gharabaghi's cover (T-252) proved n = 44 in
+#: both lanes, one more in every corpus.
 FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
-    "n=1..100": (45, 55),
-    "n=1..200": (61, 139),
-    "n=1..324": (77, 247),
+    "n=1..100": (46, 54),
+    "n=1..200": (62, 138),
+    "n=1..324": (78, 246),
 }
 
 # Source-reported closures from T-062 to T-064, and T-066 and T-067 at n = 59 and 77,
@@ -51,11 +53,11 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 # n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 in this lane only. 2026-10-12:
 # Overbeck's candidate equality s(17) = L (T-153) closes n = 17 in this lane only.
 # 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-245) closes n = 12 in this
-# lane only.
+# lane only. 2026-10-31: T-252 closes n = 44 in both lanes, so this one too.
 REPORTED_LANE_SPLIT: dict[str, tuple[int, int]] = {
-    "n=1..100": (48, 52),
-    "n=1..200": (68, 132),
-    "n=1..324": (88, 236),
+    "n=1..100": (49, 51),
+    "n=1..200": (69, 131),
+    "n=1..324": (89, 235),
 }
 
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
