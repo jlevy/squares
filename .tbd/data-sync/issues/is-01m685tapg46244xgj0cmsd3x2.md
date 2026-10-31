@@ -5,7 +5,7 @@ title: "Import Khalili and Gharabaghi: s(44) = 7 by a closed mixed cover (#842)"
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: bold-ritchie-l3
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:09:47.344Z
-updated_at: 2026-10-31T09:23:05.845Z
+updated_at: 2026-10-31T10:05:59.579Z
 started_at: 2026-10-31T05:09:55.099Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#842 (moh63-dev, Mohsen Khalili and Sara Gharabaghi, opened 2026-10-26T23:46:23Z; one comment, 2026-10-29T15:58:14Z, announcing release v1.1; labelled `intake` on 2026-10-31 by this lane under the github-workflows grant): "s(44) = 7: registration request". Intake pass 2026-10-31 (epic think-3guf), lane L3 (bold-ritchie-l3, tbd-strong sub-agent), branch claude/bold-ritchie-xo28us-s44. Followed the #594/#610 imports (think-osvq, think-ribz) and T-066's zmx2 route (s(59) = 8).
@@ -109,4 +109,4 @@ Review A on #851 (pullrequestreview-5721837491, independent tbd-strong-max lane)
 - d92977c whole-cover audit tests and refusals (A3), 110 passed.
 - 2e84251 review A's correctness pass retained as T-252's independent review, programs and logs in the packet's review/independent-2026-10-31/ (A2); F5, F6 in the report note (A5); think-rp0d filed and named for the t-046 page (A6).
 - 0babbdf merge main b95c5f69c (#833); 071d5bc re-pin; eda45bc no-change record re-measured (51 files byte-identical x3) (A8).
-- PR description corrected (A4, A7).- 69e0f6e merge main c94df7cef (#853; result-requests.yaml conflict, both sides kept); d30eeba no-change record holds there too. Head d30eeba.- 3dc3fb4 merge main 84ba6fa9c (#850; data-pin conflict); b7fb7ba re-pin; 50d2332 no-change record holds there too; records tier 54/54 at 50d2332. Head 50d2332.
+- PR description corrected (A4, A7).- 69e0f6e merge main c94df7cef (#853; result-requests.yaml conflict, both sides kept); d30eeba no-change record holds there too. Head d30eeba.- 3dc3fb4 merge main 84ba6fa9c (#850; data-pin conflict); b7fb7ba re-pin; 50d2332 no-change record holds there too; records tier 54/54 at 50d2332. Head 50d2332.- ea12f86 merge main 5b4484fe0 (#849, #854; data-pin conflict) on the coordinator go; 191d259 re-pin; f3f0dc4 no-change record holds there; records tier 54/54 at f3f0dc4. Head f3f0dc4.
