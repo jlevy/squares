@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: open
 priority: 1
-version: 15
+version: 16
 labels:
   - result-import
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
   - is-01m686kknmrk1xt97vne82cnea
   - is-01m687rz8hpgevyt6xe2j9p4bb
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T05:44:00.016Z
+updated_at: 2026-10-31T05:52:57.238Z
 ---
 
 ## Notes
@@ -31,3 +31,5 @@ updated_at: 2026-10-31T05:44:00.016Z
 Compute cap for this pass: the owner's standing 40 CPU-hours per item (think-lh7d); host has 4 cores / 15 GB shared by five lanes, so no single job above 2 cores. Kingbird capture denied (403 at proxy) - Not Checked. gh token invalid; GitHub via MCP. Lanes (coordinator: bold-ritchie): L1 drafts #833/#834 + sweep reply residue; L2 small-n reports #843-#846 + watched repos; L3 #842 s(44)=7; L4 beyond-horizon #835/#836/#847/#799/think-llit; L5 #817 s(29), regularization exemptions 39/55/290/291, resolved blockers, stalled watched-repo evidence.
 
 2026-10-31 L4 (bold-ritchie-l4): #835 merged up to main 3978a7f61 and re-measured, head 3954a5d64. Draft PR #848 (claude/bold-ritchie-xo28us-beyond, S1, intake) carries the requests entries for #836 (import think-7yrs, validation think-gw1s ~9.2 CPU-h) and #847 (import think-r94q, W9 checker think-fuwd, validation think-qczx ~11.8 to 21.3 CPU-h), both at triage pending; intake labels added on both issues. NOT CHECKED: zenodo.org (proxy 403), so none of the three Karimi deposits is read; stage 2 waits on it, and so does think-llit's R1 walk (it must read every report to date). For the owner: zenodo.org access; D4 (host Couzo's certificates above 1024 or put them in Git, about 9.1 MB stored); Q-847a (V1.0's withdrawn and restated rows). Acknowledgement drafts in think-7yrs's and think-r94q's notes, to post after #848 merges.
+
+2026-10-31 05:53 hourly check: container restart ~05:15 killed all lanes' background jobs; lanes resumed in their worktrees. L1 done (#833 f0b750b38, #834 135573384; follow-ups posted on #366/#256/#238; blocked labels removed from #666/#715/#719/#799 as unrecorded). L4 done (#835 3954a5d64, #848 63ff9d87b, both CI green; zenodo.org and codeload.github.com denied by network policy -> #836/#847 stage 2 blocked; owner decisions D4 (#715 certs hosted vs Git) and Q-847a listed). #744 tagged blocked:owner-decision (superseded in part by #746; bead filed). #599/#809 tagged blocked:owner-decision. Reviews running: #835+#848, #833+#834. L2, L3, L5 running. No new GitHub issues since the 04:45 sweep.
