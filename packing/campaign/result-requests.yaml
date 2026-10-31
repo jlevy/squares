@@ -1197,10 +1197,6 @@ issues:
         status: confirmed
       - result: ceilings-77
         id: E-evand-exact-ceilings-2026-10-05-report
-      - result: ceilings-77
-        id: E-evand-exact-ceilings-2026-10-05-exact-replay
-      - result: ceilings-77
-        id: E-evand-exact-ceilings-2026-10-05-source-replay
     - url: https://github.com/jlevy/squares/issues/375#issuecomment-6065914616
       date: '2026-10-08'
       by: jlevy
@@ -1557,12 +1553,8 @@ issues:
             status: confirmed
           - result: n18-4704
             id: E-n018-wand125-mixed-4704-report
-          - result: n18-4704
-            id: E-n018-wand125-mixed-4704-sqverify-fast-replay
           - result: n19-48229
             id: E-n019-wand125-mixed-48229-report
-          - result: n19-48229
-            id: E-n019-wand125-mixed-48229-sqverify-fast-replay
       - url: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
         date: '2026-10-06'
         by: jlevy
@@ -1850,7 +1842,7 @@ issues:
       tilted premise ValidTilt9 qx2_zm.py certifies over 16,200 D4 roots and whose reduction
       bentz4_of_validTilt9 is kernel-checked in Lean; by monotonicity also s(k^2 - 3) = k for
       k >= 5.
-    read_through: '2026-10-04T02:29:31Z'
+    read_through: '2026-10-26T14:39:55Z'
     results:
       - key: k2m4
         claim: s(k^2 - 4) = k for every integer k >= 5
@@ -1878,8 +1870,8 @@ issues:
           owner budget under think-hwpr. On 6 October the owner declined the full replay
           for now: the sample, audit, controls and review stand as the check, T-081 stays
           V0/C1 as recorded, and think-hwpr keeps the replay as a backlog item.
-    beads: [think-4uir, think-dsz4, think-hwpr]
-    answer_bead: think-4uir
+    beads: [think-4uir, think-dsz4, think-hwpr, think-s4ul]
+    answer_bead: think-s4ul
     replies:
       - url: https://github.com/jlevy/squares/issues/316#issuecomment-5971664755
         date: '2026-10-03'
@@ -1913,11 +1905,6 @@ issues:
             verification: V0
             confirmation: C1
             status: reviewed
-          - result: k2m3-by-monotonicity
-            id: T-064
-            verification: V3
-            confirmation: C3
-            status: confirmed
     close_when: >-
       T-081 is confirmed, or its standing is settled by the owner, and the reply saying
       so is posted from main, and the independent check of ValidTilt9 is done or
@@ -1926,6 +1913,22 @@ issues:
     notes: >-
       The k^2 - 3 corollary is registered by T-064 for k >= 6, and its k = 5 case, s(22) =
       5, is Bentz's; the issue's route adds no entry for it.
+
+      maximusrufus's comment of 26 October 2026, 14:39:55Z
+      (https://github.com/jlevy/squares/issues/316#issuecomment-6418796038), read on 31
+      October (think-6m6e), reports a replay of the producer's full qx2_zm.py run on
+      K4_k008_box9.txt, ValidTilt9, on a second machine: evand/square-packing at 2eb15455,
+      s12/certificates/k2m4/, with the published command and --nproc 20 on 32 logical
+      cores, exit 0, VERIFIED-D4 at 16,200 of 16,200 roots with none uncertified and
+      115,268 leaves, the published run's count, after 66,832 s of wall and 1,328,518 CPU
+      seconds. Every root's record equals the published run_k4x_k008_leaves.jsonl.gz but
+      for its CPU time. It runs the producer's code on the producer's input, so it shows
+      the run reproduces and is no separate implementation; no Lean build and no check of
+      the region statement. Its receipts, maximusrufus/openai-math-replays at 80cb822,
+      t081-rebuild/, are not retained here, so no evidence entry records the replay and
+      T-081 stays at V0/C1. Retaining them, and the owner's decision on whether a third
+      party's full replay of the producer's code moves T-081, as think-n6ga holds the
+      same question for #565, are think-s4ul's; the follow-up that reports it is owed.
 
   - number: 309
     title: >-
@@ -2112,8 +2115,6 @@ issues:
             verification: V3
             confirmation: C3
             status: confirmed
-          - result: valid7-independent
-            id: E-k2m3-wand125-valid7-independent
       - url: https://github.com/jlevy/squares/issues/296#issuecomment-5999533115
         date: '2026-10-05'
         by: jlevy
@@ -2263,10 +2264,6 @@ issues:
             verification: V3
             confirmation: C3
             status: confirmed
-          - result: lemma1-false
-            id: E-nagamochi-lower
-          - result: lemma1-false
-            id: E-nagamochi-lemma1-counterexample
           - result: karakus-2026
             id: T-083
             verification: V3
@@ -2289,8 +2286,6 @@ issues:
             verification: V3
             confirmation: C3
             status: confirmed
-          - result: chelokot-2026
-            id: E-chelokot-square-minus-two-lean
     close_when: >-
       The record holds the Lemma 1 defect against T-007, the values it supplies are
       re-derived, and the two replacement sources are registered or declined.
@@ -3451,7 +3446,6 @@ issues:
       kind: follow-up
       reported:
       - result: nine-updated-packings
-        id: T-116
         verification: V3
         confirmation: C3
         status: confirmed
@@ -3471,9 +3465,6 @@ issues:
       - result: nine-updated-packings
         id: E-squish-second-update-2026-10-07-report
         status: recorded
-      - result: nine-updated-packings
-        id: E-squish-second-update-2026-10-07-exact-replay
-        status: confirmed
       - result: ten-first-update-packings
         id: T-115
         verification: V3
@@ -3482,9 +3473,6 @@ issues:
       - result: ten-first-update-packings
         id: E-squish-update-2026-10-07-report
         status: recorded
-      - result: ten-first-update-packings
-        id: E-squish-update-2026-10-07-exact-replay
-        status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
       - https://github.com/jlevy/squares/issues/422#issuecomment-6048876876
@@ -4177,76 +4165,6 @@ issues:
         status: reviewed
       - result: fine-net-n29-582-followup
         id: T-132
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-200
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-201
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-202
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-203
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-204
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-208
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-209
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-210
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-211
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-212
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-213
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-214
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-215
-        verification: V0
-        confirmation: C0
-        status: recorded
-      - result: fine-net-18-1016
-        id: T-217
         verification: V0
         confirmation: C0
         status: recorded
@@ -8558,7 +8476,8 @@ issues:
     title: Apply the record and tool changes proposed by the 2026-10-11 rung reviews
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8701,6 +8620,11 @@ issues:
       date: '2026-10-14'
       by: jlevy
       kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/542#issuecomment-6415871518
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
       reported: []
     notes: >-
       The follow-ups of 14 October: the first updates the list from the round-1 reviews of #563
@@ -17043,28 +16967,10 @@ issues:
         verification: V3
         confirmation: C3
         status: confirmed
-      - result: n204
-        id: E-couzo-678-filtered-exact-feasibility
-        status: confirmed
-      - result: n204
-        id: E-couzo-678-source-checker-replay
-        status: confirmed
-      - result: n204
-        id: E-couzo-678-review-exact-feasibility
-        status: confirmed
       - result: n260
         id: T-223
         verification: V3
         confirmation: C3
-        status: confirmed
-      - result: n260
-        id: E-couzo-678-filtered-exact-feasibility
-        status: confirmed
-      - result: n260
-        id: E-couzo-678-source-checker-replay
-        status: confirmed
-      - result: n260
-        id: E-couzo-678-review-exact-feasibility
         status: confirmed
       - result: n330
       - result: n343
@@ -24040,12 +23946,6 @@ issues:
       - result: n268
         id: E-couzo-763-certificate-report
         status: reviewed
-      - result: n268
-        id: E-couzo-763-exact-feasibility
-        status: confirmed
-      - result: n268
-        id: E-couzo-763-review-exact-feasibility
-        status: confirmed
       - result: n303
         id: T-240
         verification: V3
@@ -24054,12 +23954,6 @@ issues:
       - result: n303
         id: E-couzo-763-certificate-report
         status: reviewed
-      - result: n303
-        id: E-couzo-763-exact-feasibility
-        status: confirmed
-      - result: n303
-        id: E-couzo-763-review-exact-feasibility
-        status: confirmed
     - url: https://github.com/jlevy/squares/issues/763#issuecomment-6392829915
       date: '2026-10-25'
       by: jlevy
@@ -24919,7 +24813,7 @@ issues:
       accepted it with findings, none blocking or major, and its programs, an independent
       clean-room re-implementation from the note, decided the bound at every k from 6 to
       250,000; the row records the review. Claude assistance disclosed.
-    read_through: '2026-10-25T00:49:19Z'
+    read_through: '2026-10-27T23:26:12Z'
     results:
     - key: theorem-a
       claim: >-
@@ -24979,6 +24873,7 @@ issues:
         neither integer bound is always the smaller.
     beads:
     - think-4tj5
+    - think-mbuh
     answer_bead: think-4tj5
     replies:
     - url: https://github.com/jlevy/squares/issues/797#issuecomment-6392638719
@@ -25000,6 +24895,26 @@ issues:
     close_when: >-
       The reported row and its credit to Evan Daniel's earlier bound are on main, the
       replay and review disposition are recorded, and the reply that reports them is posted.
+    notes: >-
+      The author's comment of 27 October 2026, 23:26:12Z
+      (https://github.com/jlevy/squares/issues/797#issuecomment-6456100829), read on 31
+      October (think-6m6e), answers the stage 4 review's six questions and the
+      acknowledgement's two. Note v0.3, doi:10.5281/zenodo.23714459, fixes the review's
+      M-1 and M-2 and most of its smaller points with the mathematics of v0.2, and the
+      bundle README and theorem-a/note/ match it at TheSnakeFang/squarepack-certs d56c9a0.
+      (1) 1e-7 was the target band_t passes as a lower bound on k - S; at k = 43,218 it
+      chose b = 293 and t = 116/33987, so k - S is about 2.008e-7, the review's second
+      reading, and v0.3 says that t is not a close one. (2) The claim about what stays
+      below 3/2 is dropped; Lemma 2's deficit 1 + 2 eta is what does. (3) v0.3 says that
+      neither integer bound is smaller at every k and cites the review's count of 346,919.
+      (4) The remark the review asked about is observed, not proved, and labelled so. (5)
+      t = Q/(bQ - 1) is rational by construction, and band_t and proof_layout choose it as
+      the review read them. (6) The "v0.3" of the TeX comment was his working file's
+      version. The k = 300 and 600 certificates are now on the v0.3 Zenodo record as
+      k300.cert.xz and k600.cert.xz, which he says match LARGE.sha256 uncompressed, and he
+      will not publish the Section 6 constructions as certificates. No answer changes the
+      row, its credit or the review's verdict. Retaining v0.3 and the two certificates,
+      and checking their digests, are think-mbuh's; the follow-up that reports it is owed.
   - number: 798
     title: 'Fourteen new upper bounds at n = 334–504 (334, 338, 343, 372, 376, 377, 379, 382, 412, 416,
       457, 458, 502, 504): registration request'
@@ -25162,7 +25077,7 @@ issues:
       on thicker strips (order L^{2/3}, no new bound) and keeps a conjecture that c*(K) is
       of order sqrt K, which the register's reported k^{2/5} and k^{3/8} bounds contradict.
       The rows wait on think-llit's walk above 1024. Claude assistance disclosed.
-    read_through: '2026-10-25T08:17:50Z'
+    read_through: '2026-10-26T14:40:33Z'
     results:
     - key: rows-1184-3775
       claim: >-
@@ -25312,6 +25227,18 @@ issues:
       fails for large K, and will withdraw it in the next version; his data show only that
       this construction reaches the records at order sqrt K for K <= 100. No answer changes a
       row, a credit or a lineage the record states.
+
+      maximusrufus's comment of 26 October 2026, 14:40:33Z
+      (https://github.com/jlevy/squares/issues/799#issuecomment-6418810958), read on 31
+      October (think-6m6e), is a third party's verification receipt: all 683 certificates
+      of version 1 (10.5281/zenodo.23624433) rebuilt with the deposit's regenerate.py and
+      checked in exact rational arithmetic, interiors pairwise disjoint and every square
+      inside [0, S]^2, 683 of 683 valid with each claimed side the exact certificate side,
+      and a sample of 272 also accepted by verify_bound_certificate.py
+      (Mishapolk/square-packing-records). It did not compare records.csv's digest. The
+      record already decides all 683 rows exactly from their parameters with
+      devtools.two_strip_checker, and no receipt of the check is published, so it is noted
+      here and records nothing; the rows still wait on think-llit's walk above 1024.
   - number: 804
     title: 'Exact values of the record sides for n = 88, 126, 172, 199, 263 (minimal polynomials): registration
       request'
@@ -25342,7 +25269,7 @@ issues:
       hyukdongkim-t244-configurations-2026-10-25 packet keeps as derived facts; deciding them
       exactly is queued (think-4rzl), and until then feasibility at either side is not shown.
       Claude assistance disclosed.
-    read_through: '2026-10-25T12:23:57Z'
+    read_through: '2026-10-26T11:50:22Z'
     results:
     - key: exact-sides-held
       claim: >-
@@ -25512,6 +25439,20 @@ issues:
       from the importing session (user-attachments 403), so the import built an exact
       configuration at the side from T-174's certificate with its own tools (route A), whose
       exact decision waits over the CPU cap (think-vv1q), and the author's file waits (route B).
+
+      The author's comment of 26 October 2026, 11:50:22Z
+      (https://github.com/jlevy/squares/issues/804#issuecomment-6415293035), read on 31
+      October (think-6m6e), restates in one place the CC0 1.0 dedication of his comments of
+      25 October, for all three of his attachments on this issue, data and code:
+      squares-exact-forms.zip (c770f9c3...4ee7), t244-exact-configurations.zip
+      (16e6ad9d...9a2d) and s297-exact-configuration.zip (e08b5d0a...47a7), each digest the
+      one the record holds. He asks again that the files themselves be kept, says
+      n172.minpoly.json and n263.minpoly.json can be decided directly on verify_exact.py
+      and exact_verify, and offers the same files, with the same digests, in a public
+      repository or gist if the attachments are unreachable from here. The offer is a route
+      to the 297 file that route B waits on, since the attachment returned 403 here; the
+      packets' custody and that route are the beads' that own them (think-9vai, think-4rzl,
+      think-ozx8). It changes no result.
   - number: 806
     title: 's(182) ≤ 13.970916436215: registration request'
     author: evand
@@ -25584,12 +25525,6 @@ issues:
       - result: n182
         id: E-evand-n182-certificate-report
         status: reviewed
-      - result: n182
-        id: E-evand-n182-exact-feasibility
-        status: confirmed
-      - result: n182
-        id: E-evand-n182-review-exact-feasibility
-        status: confirmed
     close_when: >-
       The result is registered, reviewed and adopted at 182 with its drawing regularized, and
       the reply on main says so; nothing the author asked for is queued.
@@ -25841,7 +25776,7 @@ issues:
       arrangement. The stage 4 review and the adoption at 299 with both regularizations are
       think-8hjz's; the house rule puts the adoption, the general regularization and the flip in
       one pull request, after the review. Claude assistance disclosed.
-    read_through: '2026-10-26T03:52:18Z'
+    read_through: '2026-10-29T14:46:20Z'
     results:
     - key: n299
       claim: >-
@@ -25855,6 +25790,21 @@ issues:
       - T-248
       evidence:
       - E-evand-n299-certificate-report
+    - key: n299-update-2026-10-29
+      claim: >-
+        s(299) <= 17801238549388584084680137655023/10^30 = 17.8012385493885840..., rounded up
+        to 17.801238549389, the side of s299_1028.cert (SHA-256 ccb323dd...5db5) in
+        search/packer/candidates/ at evand/square-packing 0e76d9fe, 2.46e-3 below the opening
+        post's side: an exact KKT point the source calls a new packing, found from the opening
+        post's by four generations of refill and an exact descent, with the credit request for
+        Chris Deotte unchanged.
+      source: https://github.com/jlevy/squares/issues/824#issuecomment-6488202753
+      not_registered: >-
+        Received on 29 October 2026 and read on 31 October (think-6m6e); its import, from
+        triage and the report-order ledger to a register entry, is think-3xn9's in the pass of
+        31 October.
+      queued: true
+      bead: think-3xn9
     beads:
     - think-3xn9
     - think-8hjz
@@ -25884,3 +25834,22 @@ issues:
       was not readable from the importing session, so the push of 1be69ca is not dated; the
       commit precedes the issue by 21 minutes and nothing reached 299 between them. The issue
       did not carry the intake label when read; the coordinator labels it.
+
+      Three comments followed, read on 31 October 2026 (think-6m6e). maximusrufus's of 26
+      October, 14:39:53Z (https://github.com/jlevy/squares/issues/824#issuecomment-6418795318),
+      is a third party's verification receipt for s299-1025.cert at 1be69ca8: its digest the
+      issue's, checked in exact rational arithmetic, valid, the side rounding up to the
+      issue's print at 12 places, and accepted by verify_bound_certificate.py
+      (Mishapolk/square-packing-records). Both maintained exact routes already decide that
+      certificate here, so it records nothing. The author's of 29 October, 04:46:49Z
+      (issuecomment-6488202753), reports the update s(299) <= 17.801238549389, the
+      n299-update-2026-10-29 result, queued for think-3xn9: the KKT certificate
+      s299_1028.cert at 0e76d9fe, with s299_1028.exact.txt and s299_1028.predescent.txt,
+      both of his checkers reporting VALID; a local minimum strict modulo 119 exact flat
+      motions, with 64 corner-to-corner contacts and 33 rattlers, as his numerical evidence
+      at 80 digits; and, for information, a Kaggle side-only 17.793636991 of 27 October below
+      it, which states no packing and so is no report. maximusrufus's of 29 October,
+      14:46:20Z (issuecomment-6499865941), is the same receipt for s299_1028.cert at
+      0e76d9fe: its digest the update's, valid, the side 17801238549388584084680137655023/10^30
+      rounding up to the update's print, and accepted by verify_bound_certificate.py in its
+      strict mode; it did not check the KKT or local-optimality claims.
