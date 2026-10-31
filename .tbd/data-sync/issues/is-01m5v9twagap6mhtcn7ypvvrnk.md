@@ -5,7 +5,7 @@ title: Review Evan Daniel's s(299) certificate (stage 4) and adopt it at 299 wit
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 delegate: null
 labels:
   - validation
@@ -13,7 +13,7 @@ labels:
 dependencies: []
 parent_id: is-01m5v9gnfdsstsbyk92bb6nk8e
 created_at: 2026-10-26T05:09:52.080Z
-updated_at: 2026-10-26T05:10:06.190Z
+updated_at: 2026-10-31T05:36:51.412Z
 ---
 The stage 4 mathematical review of Evan Daniel's s(299) certificate (#824), then the adoption at 299 with both regularizations, which the house rule puts in one pull request. Registered at V0/C0 by w-imports-1026 (think-3xn9) with the replay on both maintained exact routes, gross and sharp controls and the pose-by-pose measurement retained in packing/resources/web/evand-n299-2026-10-26/.
 
@@ -26,3 +26,7 @@ The stage 4 mathematical review of Evan Daniel's s(299) certificate (#824), then
 - Depends on: a strong-tier review lane (a sub-agent the coordinator launches); nothing else.
 - Done when: the review is mapped on T-NNN (the #824 entry) with verdict accepted or defects-resolved, check_results derives V3/C3, and one pull request adopts the house at 299 with default_drawings --check-state --base-ref origin/main (0 pending) and flip_regularization --check passing.
 - Machine note: the review needs minutes of CPU; the regularization runs share a 4-core host with a gate badly, so run them before or after the --edit tier.
+
+## Notes
+
+2026-10-31 bold-ritchie-l2 (intake pass think-3guf): Evan Daniel's update to #824 (issuecomment-6488202753, 2026-10-29T04:46:49Z) reports s(299) <= 17801238549388584084680137655023/10^30 = 17.801238549389, an exact KKT certificate at evand/square-packing 0e76d9f, 2.46e-3 below T-248; packet evand-n299-update-2026-10-29, both maintained exact routes with gross and sharp controls, registered on the lane's branch as T-257 (the T-NNN may be renumbered at merge). The ledger upper-bounds-843-846-20261031 records it and not Polkovskyi's #846 299 (above it). The review this bead owns now covers the update certificate as well, and the adoption at 299 takes the update's packing (T-257), the smallest reported side, with both regularizations and the flip in one pull request; T-248 stays recorded as reported or reviewed but is no longer the adoption target.
