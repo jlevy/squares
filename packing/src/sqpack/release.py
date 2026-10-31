@@ -2691,8 +2691,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods at link revision "
             "0000000000000000000000000000000000000000 into empty site directories, once from "
             "this tree at 1be3ab2a0 and once with main's result-requests.yaml swapped in: "
-            "43 files each, byte-identical across the two. No PDF was printed; it prints "
-            "from that HTML. Retain v0.2.7."
+            "43 files each, byte-identical across the two. Measured again at 39efc9991, "
+            "after the four confirmed results' finished validation owners left the file: "
+            "43 files, byte-identical. No PDF was printed; it prints from that HTML. Retain "
+            "v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
