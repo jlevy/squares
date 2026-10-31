@@ -26219,7 +26219,14 @@ issues:
     - think-x0kn
     - think-llit
     answer_bead: think-7yrs
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/836#issuecomment-6540432165
+      date: '2026-10-31'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: rows-v5
+      - result: filled-end-v1
     close_when: >-
       The v5 rows the walk above 1024 records are on main, each decided by the maintained
       two-strip checker, V1.0's rows are dispositioned with #847's, and the reply on main says
@@ -26233,7 +26240,12 @@ issues:
       packings with the producer's code; its program and receipt are not retained, so it is
       no evidence entry. The withdrawal of Conjecture 1 bears on #799's summary and
       theorem-near-integer notes, which say the note keeps its conjecture; think-x0kn
-      updates them.
+      updates them. The acknowledgement of 31 October offers a copy at a public GitHub
+      commit, checked against the SHA-256 the author stated. The issue states digests for the
+      zip and records.csv only, so a file committed loose without one (README.md;
+      regenerate.py can also be compared with version 2's retained copy) is checked against
+      Zenodo's per-file listing, or a digest the author states, before any checker reads it
+      (review A1 of #853).
   - number: 847
     title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
     author: mohsensbu-jpg
@@ -26288,7 +26300,13 @@ issues:
     - think-7yrs
     - think-llit
     answer_bead: think-r94q
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/847#issuecomment-6540433314
+      date: '2026-10-31'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: filled-end-v2
     close_when: >-
       The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
       checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
@@ -26296,4 +26314,9 @@ issues:
     notes: >-
       Not checked on 31 October 2026: zenodo.org (record 23819397), refused by the session's
       network policy; the claim counts are the issue's own until the deposit is read. The
-      author says he may be offline for some days.
+      author says he may be offline for some days. The acknowledgement of 31 October offers
+      a copy at a public GitHub commit, checked against the SHA-256 the author stated. The
+      issue states digests for filled_records.csv and V1.0's zip only, so filled_ends.py,
+      regenerate_filled.py, check_cert.py and README_filled.md are checked against Zenodo's
+      per-file listing, or digests the author states, before any checker reads them or W9
+      is written from them (review A1 of #853).
