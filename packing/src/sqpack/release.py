@@ -10565,8 +10565,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "writes its 43 files byte-identical across the three. Measured again after "
             "merging main 94e36b675 (#860), at link revision 94e36b67, twice from this tree "
             "and once with that main's result-requests.yaml swapped in: 43 files, "
-            "byte-identical across the three. No PDF was printed; it prints from that HTML. "
-            "The survey keeps v0.2.7."
+            "byte-identical across the three; and again after review A of #862 marked both "
+            "acknowledgements outdated and named them in the follow-ups' corrects, against "
+            "the same main: 43 files, byte-identical. No PDF was printed; it prints from "
+            "that HTML. The survey keeps v0.2.7."
         ),
     ),
 )

@@ -25638,7 +25638,9 @@ issues:
       row, a credit or a lineage the record states. They were first answered on #836, on 31
       October (https://github.com/jlevy/squares/issues/836#issuecomment-6545300576): the
       wording of (3) in place, the description of (1) kept, and the digests and version 4 of
-      (2) not used.
+      (2) not used. (4), the withdrawal of Conjecture 1, also stated in #836's body, was
+      acknowledged by #836's acknowledgement of 31 October (issuecomment-6540432165), and
+      think-x0kn records the withdrawal in this entry's summary and notes.
 
       maximusrufus's comment of 26 October 2026, 14:40:33Z
       (https://github.com/jlevy/squares/issues/799#issuecomment-6418810958), read on 31
@@ -26912,12 +26914,20 @@ issues:
       reported:
       - result: rows-v5
       - result: filled-end-v1
+      outdated:
+      - 'that where v5 is lower (1,434) its row is recorded after version 2''s, with no condition;
+        a lower side is recorded only where the walk finds it below every earlier report at its
+        count and Göbel''s construction (review A2 of #853), as the follow-up of 31 October
+        (issuecomment-6545300576) states'
     - url: https://github.com/jlevy/squares/issues/836#issuecomment-6545300576
       date: '2026-10-31'
       by: jlevy
       kind: follow-up
       reported:
       - result: rows-v5
+      beads: [think-llit]
+      corrects:
+      - https://github.com/jlevy/squares/issues/836#issuecomment-6540432165
     close_when: >-
       The v5 rows the walk above 1024 records are on main, each decided by the maintained
       two-strip checker, V1.0's rows are dispositioned with #847's, and the reply on main says
@@ -27099,12 +27109,19 @@ issues:
       kind: acknowledgement
       reported:
       - result: filled-end-v2
+      outdated:
+      - 'that the filled-end checker would decide each row "as two_strip_checker does for #799 and
+        #836", though two_strip_checker then refused v5''s header and first read it in #859
+        (review A2 of #853), as the follow-up of 31 October (issuecomment-6545302398) states'
     - url: https://github.com/jlevy/squares/issues/847#issuecomment-6545302398
       date: '2026-10-31'
       by: jlevy
       kind: follow-up
       reported:
       - result: filled-end-v2
+      beads: [think-llit]
+      corrects:
+      - https://github.com/jlevy/squares/issues/847#issuecomment-6540433314
     close_when: >-
       The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
       checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
