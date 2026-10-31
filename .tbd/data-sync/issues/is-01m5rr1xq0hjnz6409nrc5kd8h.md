@@ -5,7 +5,7 @@ title: "Import #804: Hyukdong Kim's exact minimal polynomials of the record side
 kind: task
 status: in_progress
 priority: 2
-version: 17
+version: 18
 delegate: c-import-804-1025
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:20:39.648Z
-updated_at: 2026-10-25T15:13:38.275Z
+updated_at: 2026-10-31T08:41:49.772Z
 started_at: 2026-10-25T05:21:00.185Z
 ---
 New 2026-10-25 issue https://github.com/jlevy/squares/issues/804 (HyukdongKim, 01:57:25Z): the record side at each of 88, 126, 172, 199 and 263 is a root of a stated irreducible polynomial (degrees 7, 2, 24, 16, 17; 126 = 15/2 + 3 sqrt 2), the register having minimal_polynomial: null there; exact_forms.json. Claude-assisted. Stage 1 triage read-only first: which houses the polynomials describe today (the record has moved since 2ec489d1e at some counts?), how to verify (exact KKT/rigidity system, PSLQ is not a proof), and the register action (new exact-value entries, or evidence on the houses).
@@ -84,3 +84,5 @@ Update 11:55Z (review B, issuecomment-6396781432): B1 to B5 fixed at d5dcd2d0e; 
 2026-10-25 coord-intake-1024: #813 deployed (Pages 40189291622 verified; live result/t-244.html 200). #804 acknowledgement posted https://github.com/jlevy/squares/issues/804#issuecomment-6397201800; recorded by think-4rzl's PR (c-decide-4rzl-1025, wt-4rzl), which decides the configurations.
 
 2026-10-25 15:25Z, coord-n12-1025: #804's comments 6397363927 and 6397593690 (HyukdongKim) answer the acknowledgement's questions 1-3 (CC0 for both bundles; a configuration at 297) and report a new result at 297; opened as think-ozx8 (unclaimed). read_through on #804's entry still needs moving to 12:23:57Z, and the 11:43:33Z acknowledgement still needs recording under replies (think-4rzl's PR per this bead's notes).
+
+2026-10-31 bold-ritchie-l1 (think-6m6e; review A of #854, A1 and A4): the #804 follow-up was posted on 31 October (issuecomment-6541022924) and recorded by #854. think-8r92 stays open as #804's answer bead (check_bead_tree holds an open issue's answer bead live), until the next #804 follow-up lands with think-4rzl's or think-ozx8's change. That next follow-up must name think-9vai as taking in squares-exact-forms.zip's files (the hyukdongkim-exact-forms-2026-10-25 packet): the 31 October reply named only think-4rzl (T-244's configurations) and think-ozx8 (297) for the three CC0 bundles.

@@ -5,12 +5,12 @@ title: "Answer Hyukdong Kim's comment of 26 October on #804: a public copy of hi
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - intake
 dependencies: []
 created_at: 2026-10-31T06:26:34.858Z
-updated_at: 2026-10-31T06:26:52.629Z
+updated_at: 2026-10-31T08:41:47.881Z
 ---
 Hyukdong Kim's comment of 2026-10-26T11:50:22Z on #804 (https://github.com/jlevy/squares/issues/804#issuecomment-6415293035), read into #804's entry on 31 October by PR #833 (think-6m6e), restates the CC0 1.0 dedication of all three of his attachments and ends with a question: he can put the same files, with the same digests, in a public repository or gist, "Just say which you prefer". Review A of #833 (A1) found that nothing owed him the answer: the last reply was posted at 10:29:17Z the same day, and check_requests.replies_due compares days (the tool defect has its own bead).
 
@@ -33,3 +33,5 @@ blocked_on: jlevy/squares#833
 > [The T-244 and T-247 status lines from the rendered draft.]
 
 Record it with `corrects: [https://github.com/jlevy/squares/issues/804#issuecomment-6413810519]`, the ids and rungs it states under `reported`, and the beads it names.
+
+2026-10-31 bold-ritchie-l1 (think-6m6e; review A of #854, A1 and A4): the #804 follow-up was posted on 31 October (issuecomment-6541022924) and recorded by #854. think-8r92 stays open as #804's answer bead (check_bead_tree holds an open issue's answer bead live), until the next #804 follow-up lands with think-4rzl's or think-ozx8's change. That next follow-up must name think-9vai as taking in squares-exact-forms.zip's files (the hyukdongkim-exact-forms-2026-10-25 packet): the 31 October reply named only think-4rzl (T-244's configurations) and think-ozx8 (297) for the three CC0 bundles.
