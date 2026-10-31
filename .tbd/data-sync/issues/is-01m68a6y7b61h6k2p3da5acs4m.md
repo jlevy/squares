@@ -5,12 +5,12 @@ title: "Answer Hyukdong Kim's comment of 26 October on #804: a public copy of hi
 kind: task
 status: open
 priority: 2
-version: 4
+version: 5
 labels:
   - intake
 dependencies: []
 created_at: 2026-10-31T06:26:34.858Z
-updated_at: 2026-10-31T14:52:57.040Z
+updated_at: 2026-10-31T18:13:13.214Z
 ---
 Hyukdong Kim's comment of 2026-10-26T11:50:22Z on #804 (https://github.com/jlevy/squares/issues/804#issuecomment-6415293035), read into #804's entry on 31 October by PR #833 (think-6m6e), restates the CC0 1.0 dedication of all three of his attachments and ends with a question: he can put the same files, with the same digests, in a public repository or gist, "Just say which you prefer". Review A of #833 (A1) found that nothing owed him the answer: the last reply was posted at 10:29:17Z the same day, and check_requests.replies_due compares days (the tool defect has its own bead).
 
@@ -46,3 +46,5 @@ Record it with `corrects: [https://github.com/jlevy/squares/issues/804#issuecomm
 > - **What it means for the record.** At 263 your exact side is 2.13×10⁻⁹⁴ below the house's rational certificate there (T-174). Once the stage 4 review of the configurations is done, the house rule adopts it, crediting the packing to its finders and the exact side to you. At 172 the house moved on 31 October to Evan Daniel's certificate of issue 845, 1.05×10⁻³ below your exact side. Your configuration there is an exact form of T-174's packing, which is no longer the record, so T-244 stands as a registered bound that a later result supersedes at 172.
 >
 > Your angle parameters for axis-aligned squares are stated as the empty list (127 squares at 172, 184 at 263). We read them as zero, as `verify_exact.py` does. Your own checker, controls and distance script were not run here.
+
+2026-10-31 bold-ritchie-l8: **posted** the #804 follow-up after #861 merged (main 3c7dd5900) and its Pages deploy verified (run 41226697869): https://github.com/jlevy/squares/issues/804#issuecomment-6547236771. It states T-244 at V3/C3 (both routes and their controls), superseded at 172 by T-257, parked at 263 (think-3trq on think-ot5c and think-ikku); the 13:27Z public copy read; and names think-9vai as taking in squares-exact-forms.zip's files (the owed point from review A4 of #854), think-4rzl for t244-exact-configurations.zip and think-ozx8 for 297's route B; T-247 unchanged. The CC0 correction was already posted on 31 October (issuecomment-6541022924, recorded by #854). Recorded on PR #864 (branch claude/bold-ritchie-xo28us-l8-replies). check_requests: no reply due on #804, not closeable (side-297 open), so this bead stays open as #804's answer bead.
