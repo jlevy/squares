@@ -11507,8 +11507,9 @@ issues:
       queued, and the issue open, until the defect was recorded; D-522 records it (26 October 2026),
       so nothing is queued and the issue closes with its final comment once that change merges.
 
-      That change, #834, merged on 31 October 2026 at 07:35:19Z, and GitHub closed the issue then,
-      reading its description's mention of closing #613 as a closing reference. The final comment
+      That change, #834, merged on 31 October 2026 at 07:35:17Z, and GitHub closed the issue at
+      07:35:18Z, reading its description's mention of closing #613 as a closing reference
+      (think-t9uj). The final comment
       (issuecomment-6540803366) followed at 07:49:25Z, after main's Pages run 41181205559 deployed
       ad84e0d2e and its verify-deployment job passed (think-6m6e).
   - number: 622
