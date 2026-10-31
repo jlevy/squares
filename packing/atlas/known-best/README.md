@@ -916,6 +916,27 @@ The evidence is retained in
 The index draws 93 views: 27 by the axis tool, 38 by Evan Daniel’s regularizer, 21 by
 the grid-slack generator’s version 1 and 7 by its version 2.
 
+On 31 October 2026 both strong generators ran on the four decimal Kingbird witnesses at
+39, 55, 290 and 291, which an agent had set aside on 15 October without a strong run
+(think-yk2h) and which stood without the owner’s word until 9 November.
+Grid-slack’s version 2 at 0.5, 1 and 5 degrees
+(`grid-slack-yk2h-2026-10-31-n39-291-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 70
+CPU-seconds in all) draws a view at every count, in the bound frame at $U$ at 39 and 55
+and at the witness’s side, which is $U$, at 290 and 291; each is exactly verified on
+both routes, one to one with the witness, and changes nothing visible (row 10, no
+change). Evan Daniel’s regularizer (`evand-regularize-yk2h-2026-10-31-n39-291-evand`,
+1,600 s of wall at one worker) solves each witness: at 39 its view, at $U$, moves eleven
+squares by at most 0.072 and turns square 26 by at most 0.0033 degrees, and the
+selection admits it (row 10), an exactly verified view at most $U$ replacing a
+numerically checked witness with no measure worse; at 55 its view changes nothing
+visible, and at 290 and 291 its same-side view changes nothing visible and its solved
+view is held at row 4, $1.75 \times 10^{-19}$ above $U$. So 39 is regularized and 55,
+290 and 291 are decided no better (`SETTLED`), and no count is exempt.
+The evidence is retained in
+[`cases/regularized_drawings/think-yk2h-2026-10-31/`](../../cases/regularized_drawings/think-yk2h-2026-10-31/README.md).
+The index draws 94 views: 27 by the axis tool, 39 by Evan Daniel’s regularizer, 21 by
+the grid-slack generator’s version 1 and 7 by its version 2.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the
