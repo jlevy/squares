@@ -3,16 +3,20 @@ type: is
 id: is-01m4ymttngabkttp59yea87pj5
 title: "Validation (#610, think-ribz): build lean/S95Lower.lean on Sqpack 1718a58, held on memory (25 GB peak, host has 15 GB)"
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 1
+version: 2
+delegate: bold-ritchie-l5
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
 created_at: 2026-10-15T02:04:06.191Z
-updated_at: 2026-10-15T02:04:06.191Z
+updated_at: 2026-10-31T05:00:29.509Z
+started_at: 2026-10-31T05:00:29.508Z
 ---
 Held validation item for the #610 import (think-ribz): build the source's Lean wrapper lean/S95Lower.lean on Evan Daniel's Sqpack.
 

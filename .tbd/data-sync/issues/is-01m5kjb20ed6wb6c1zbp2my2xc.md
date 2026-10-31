@@ -3,11 +3,11 @@ type: is
 id: is-01m5kjb20ed6wb6c1zbp2my2xc
 title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666, #715, #719, #732), with a hosted-data manifest for the bulk certificates (think-f2io, 2026-10-23)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 23
+version: 24
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
-delegate: null
+delegate: bold-ritchie-l4
 labels:
   - result-import
 dependencies:
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-26T03:02:59.837Z
+updated_at: 2026-10-31T04:58:58.237Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.

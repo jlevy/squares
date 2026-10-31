@@ -3,16 +3,20 @@ type: is
 id: is-01m4ymtr7pa1sjzwftc1sjrbkt
 title: "Validation (#610, think-ribz): full zm_mixed.py pass over all 160,000 D4 roots of the s(95) cover, about 190 CPU-h, held over the 40 CPU-h cap"
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 1
+version: 2
+delegate: bold-ritchie-l5
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
 created_at: 2026-10-15T02:04:03.701Z
-updated_at: 2026-10-15T02:04:03.701Z
+updated_at: 2026-10-31T05:00:30.201Z
+started_at: 2026-10-31T05:00:30.201Z
 ---
 Held validation item for the #610 import (think-ribz): zm_mixed.py alone over the whole D4 region of the s(95) cover, the exact-rational second route the source has not run.
 
