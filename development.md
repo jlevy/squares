@@ -1397,7 +1397,7 @@ seventeen-square case carries `n-17,intake`.
 | `tracker` | A tracking issue for a major effort |
 | `n-11`, `n-17`, `n-18` | Work on a notable case. A count gets a case label once it has a tracker issue of its own, or an optimality proof or claim under review. A new one is named `n-<k>`, coloured `7E3D1D` as the others are, and described `Work on the n = <k> case…` |
 | `deep-gate` | A pull request whose [deferred surface](#the-deep-gate-the-deferred-surface-before-the-merge) runs before merge; the label’s own description lists what that surface runs |
-| `blocked:owner-decision` | An open issue that waits on the owner’s ruling, credit choice or policy answer, or on a budget above the owner’s 40 CPU-hour item cap; the owner’s recorded word unblocks it |
+| `blocked:owner-decision` | An open issue or pull request that waits on the owner’s ruling, credit choice or policy answer, or on a budget above the owner’s 40 CPU-hour item cap; the owner’s recorded word unblocks it. Pull requests #574, #599 and #809 carry it |
 | `blocked:owner-reply` | An open issue held for the owner (`held` in the requests record): no pass posts on it or closes it until the owner posts or lifts the hold |
 | `blocked:standing-hold` | An open issue under a decided, standing suspension, such as the n = 17 intake’s of 13 October 2026; it moves when the owner lifts the suspension |
 | `blocked:author` | An open issue that waits on its author: a question under `awaiting_author`, or data only the author can publish |
