@@ -9968,8 +9968,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Against main 3978a7f61 (#841): rendered at link revision 3978a7f6 into empty "
             "site directories, twice from this tree and once with that main's "
             "result-requests.yaml swapped in, render_packing_methods writes its 43 files "
-            "byte-identical across the three. No PDF was printed; it prints from that "
-            "HTML. The survey keeps v0.2.7."
+            "byte-identical across the three; measured again after review A's edits to the "
+            "two entries, at the same link revision against the same main: 43 files, "
+            "byte-identical. No PDF was printed; it prints from that HTML. The survey keeps "
+            "v0.2.7."
         ),
     ),
 )
