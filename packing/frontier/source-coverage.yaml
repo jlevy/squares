@@ -516,6 +516,32 @@ sources:
     are not yet locally acquired. The source explicitly says its sanitized public derivative has no
     fresh full geometric replay. No verified frontier value changes on intake. This is distinct from
     Marc Leonard Overbeck's T-037 lower bound and Hiroaki Hosono's T-059 row-minimum equality.
+- id: queuingtheory-n11-optimality-paper-2026-10-09
+  title: The revised geometric manuscript of the eleven-square proof at 4262f07
+  role: source-repository
+  url: https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/4262f07c7723428c1725bb757ed06d0c4d28be1a
+  local: resources/web/n11-optimality-paper-2026-10-09/
+  source_key: '[Ahmed n11 optimality 2026]'
+  scope:
+    n_values:
+    - 11
+  reviewed: '2026-10-31'
+  source_date: '2026-10-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/n11-optimality-paper-2026-10-09/README.md
+  evidence:
+  - E-n011-global-optimality-report
+  notes: >-
+    The three commits of 8 October 2026 (local time) past f9e0de7, the commit T-060 cites,
+    through 4262f07, the head on 31 October: paper/, a revised geometric manuscript of the
+    proof (a 103-node dependency graph, simplified exclusions of ownership cases 0, 3 and
+    5), a geometric-foundations companion and a self-contained verification supplement,
+    pinned by size and digest (5,426,101 bytes). The author reports the input, quick,
+    ownership and early replays passing and the portable full replay not yet run. New
+    evidence for T-060's claim, read by think-3i74; the certificates T-060 rests on are
+    unchanged and no rating moves.
 - id: queuingtheorydotcom-11squaresformalized-2026-10-06
   title: Lean 4 formalization of the eleven-square optimality proof
   role: source-repository
@@ -6229,6 +6255,29 @@ sources:
     over the sub-roots of the four it leaves, is recorded as E-bengreff-594-cover-replay, and since
     the 16 October review T-184 holds it at V3/C1, its confirmation waiting on zm_mixed.py's
     mutated-certificate controls (finding F8); the case's lower lanes wait on them too (think-osvq).
+- id: bengreff-s76-second-route-2026-10-14
+  title: Benjamin Greff's second route for s(76) = 9, zm_mixed alone, at 0699398
+  role: source-repository
+  url: https://github.com/bengreff/s76-certificate/tree/06993982e83dba37ca12121bd876396a15571fcb
+  local: resources/web/bengreff-s76-second-route-2026-10-14/
+  source_key: '[bengreff s76 certificate 2026-10-14]'
+  scope:
+    n_values:
+    - 76
+  reviewed: '2026-10-31'
+  source_date: '2026-10-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/bengreff-s76-second-route-2026-10-14/README.md
+  evidence:
+  - E-bengreff-594-cover-report
+  notes: >-
+    The one commit past the T-184 packet's pin 1cb924f: zm_mixed.py alone over all 129,600
+    D4 roots of the unchanged cover at depth 24, 129,599 certified and one root left with 6
+    boxes, which certifies alone at depth 34, with the per-root records, the rerun and
+    tools/check_full.py; 181 CPU-hours at the source. The author's own run, new evidence for
+    T-184 owned by think-osvq; nothing here ran it or its records checker, and no rung moves.
 - id: evand-compositions-2026-10-13
   title: Evan Daniel's two-piece composition certificates at 231d41d, issue584
   role: source-repository
@@ -7382,6 +7431,29 @@ sources:
     trusts Lean's compiler for 4,320 native_decide facts and reports a kernel replay of the
     import closure; nothing here has built it. T-194 records the claim; the case's lanes and
     status are unchanged.
+- id: fitzharding-n19-clean-build-2026-10-16
+  title: The author's clean rebuild of sq19 v1.0.0 at c86a991
+  role: source-repository
+  url: https://github.com/ofitzharding/sq19/tree/c86a991ea1379d1598739182f5f26619c9b7126a
+  local: resources/web/fitzharding-n19-clean-build-2026-10-16/
+  source_key: '[Fitzharding n19 Lean 2026]'
+  scope:
+    n_values: [19]
+  reviewed: '2026-10-31'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/fitzharding-n19-clean-build-2026-10-16/README.md
+  evidence:
+  - E-n019-fitzharding-lean-report
+  notes: >-
+    The one commit past the T-194 packet's pin 34fb2b7: the author's receipt and log of a
+    clean rebuild of v1.0.0 from source with scripts/verify.py --kernel-replay on a 64-vCPU
+    machine, 16 October 2026, 5 h 18 min of wall: VERIFIED, the statement and axioms T-194
+    records, a kernel replay of 13,143 modules with 0 failures. The log's SHA-256 is the one
+    the receipt states. The author's own execution, not admitted as a source build: the
+    audit that would admit it is think-a4x3's, and T-194's rungs are unchanged.
 - id: pingyou-pr622-certificate-2026-10-15
   title: PingYou Ltd's N29 certificate refinement at 3115557, PR 622
   role: source-repository

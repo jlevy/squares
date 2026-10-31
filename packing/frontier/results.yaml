@@ -35371,9 +35371,10 @@ results:
       outside-container controls refused (think-vv1q). That would take C to C3, and a stage
       4 review of the claim and the construction V to V3; the house rule would then adopt
       the side at 297, once the algebraic writer holds the field fact
-      (upper_bound_houses.FIELD_COUNTS, think-ot5c), with its regularization owed under
-      think-mbdw as at every algebraic house. The case record is unchanged until then, so
-      this entry reads as pending adoption at 297.
+      (upper_bound_houses.FIELD_COUNTS, think-ot5c), carrying its general and flip
+      regularization at adoption, as the regularization gate now requires of every adopted
+      house. The case record is unchanged until then, so this entry reads as pending
+      adoption at 297.
 
       Route B, a second route: once the author's attachment is reachable, its digest checked
       against the comment and its n297.minpoly.json decided on exact_verify and by the
@@ -37642,6 +37643,21 @@ regularized_drawings:
         max_move: 0.1617445
         max_turn_deg: 8.41808e-35
       view: packing/atlas/known-best/regularized/n-037-regularized.yaml.gz
+    - n: 39
+      of: T-155
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
+      side: solved
+      changes: {straightened: 5, re_angled: 2}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 11
+        max_move: 0.07236459
+        max_turn_deg: 0.00326572
+      view: packing/atlas/known-best/regularized/n-039-regularized.yaml.gz
     - n: 41
       of: T-155
       by: project

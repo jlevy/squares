@@ -945,6 +945,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoptions of 31 October 2026 (think-3guf)](packing/cases/regularized_drawings/think-3guf-2026-10-31/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of T-242 at 268 (think-3anz)](packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization of the Exact Algebraic Houses (think-mbdw)](packing/cases/regularized_drawings/think-mbdw-2026-10-26/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs on the Four Decimal Kingbird Witnesses (think-yk2h)](packing/cases/regularized_drawings/think-yk2h-2026-10-31/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 24 October Adoption of T-231 (think-h01y)](packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
@@ -7444,14 +7445,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 521 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 522 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 109 | asserted something false about the mathematics |
 | validity | 128 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 195 | recorded something its own evidence contradicts |
+| bookkeeping | 196 | recorded something its own evidence contradicts |
 | robustness | 70 | did not finish, or finished only by luck |
 | performance | 19 | worked, but cost far more than it should |
 
@@ -7485,7 +7486,7 @@ Two observations the log exists to make.
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eighty-two defects in 521, and no soundness defect
+**The automated gate has caught eighty-two defects in 522, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

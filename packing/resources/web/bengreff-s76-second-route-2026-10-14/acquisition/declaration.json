@@ -1,0 +1,29 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "bengreff-s76-certificate",
+  "source_url": "https://github.com/bengreff/s76-certificate",
+  "source_ref": "refs/heads/main",
+  "source_commit": "06993982e83dba37ca12121bd876396a15571fcb",
+  "retrieved_at_utc": "2026-10-31T05:07Z",
+  "git_scope": "A full clone of the public repository (five commits), fetched at 2026-10-31T05:07Z when main was this commit, the one commit past the bengreff-s76-certificate-2026-10-14 packet's pin 1cb924f. The scope is the twelve paths that commit changes: README.md, SHA256SUMS, verify.sh and records/toolchain.txt, which it edits, and the files it adds, records/zm_full/ (the full zm_mixed pass's per-root records, manifest and log, and the depth-34 rerun of one root) and tools/check_full.py. The cover, the composite's records, the Lean wrapper and every other file are unchanged since 1cb924f, where the earlier packet retains them; this commit's tree pins them.",
+  "archived_dir": "s76-certificate",
+  "license": "MIT, copyright 2026 Benjamin Greff (LICENSE, unchanged since 1cb924f, retained by the bengreff-s76-certificate-2026-10-14 packet). The README credits Evan Daniel (method, mixed format, checkers, Lean library) and wand125 (the s(59) = 8 cover reused for the corners), and says the pipeline was built and run with Claude (Anthropic) as an AI assistant under Benjamin Greff's direction; the commit carries the trailer Co-Authored-By: Claude Opus 5.5.",
+  "claims": [
+    "The second route for T-184's covering statement: zm_mixed.py cert --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 24 (ee3e2915, exact rationals), with mixed_cover.py bb89de15 and zeromargin.py 640fe453, alone over all 129,600 D4 roots of 1/20 x 1/20 x 1/32 of cover/s76_cover_v5.txt (SHA-256 b6a1214b99f00e5dd136d74c8d87bccd178df38a1063b2c7be90517eb2b862b2), 2,227,114 boxes, certifies 129,599 roots and leaves 6 boxes in one root R = [27/20, 7/5] x [13/10, 27/20] x [1/4, 9/32], which the same checker certifies alone at depth 34 (13,767 boxes, none uncertified); so the covering statement holds by zm_mixed alone, without zmx2 (README.md, records/zm_full/, records/toolchain.txt)",
+    "The full pass took 651,314 CPU-s (181 CPU-hours) over 27,729 s of wall on 24 processes, 2026-10-13 19:31 to 2026-10-14 03:13 CDT, and the rerun of R 2,661 CPU-s (records/toolchain.txt, records/zm_full/rerun_R_depth34.log)",
+    "tools/check_full.py checks the records: every root of the region has a record, each header names the cover and the pinned checker files, and each root is certified in the full run or a rerun; verify.sh applies it to the shipped records by default and, with --full-zm, reruns the pass and the reruns listed in records/zm_full/rerun.txt (README.md, verify.sh, tools/check_full.py)"
+  ],
+  "scope": [
+    "README.md",
+    "SHA256SUMS",
+    "records/toolchain.txt",
+    "records/zm_full",
+    "tools/check_full.py",
+    "verify.sh"
+  ],
+  "original_gzip": [
+    "records/zm_full/full.log.gz",
+    "records/zm_full/roots.jsonl.gz"
+  ],
+  "pinned_only": []
+}

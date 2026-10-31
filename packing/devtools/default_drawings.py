@@ -73,7 +73,8 @@ its side), the runs that decided that witness, and one state:
   (`OwnerWord`), with the reason, the bead that owns it and a review date at most
   `EXEMPTION_REVIEW_DAYS` after that word. `--check-state` fails an exemption without the
   owner's word or past its review date. The four decimal Kingbird witnesses an agent set
-  aside on 15 October 2026 are the one exception, until `UNRATIFIED_UNTIL` (`UNRATIFIED`);
+  aside on 15 October 2026 were the one exception, until `UNRATIFIED_UNTIL`
+  (`UNRATIFIED`), until both strong generators settled them on 31 October 2026;
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
   (the index's `lapsed`, which `--update-atlas` writes) or that `PENDING_ALLOWED` names,
   even where the new house reads regular, or that only the axis tool's view, the
@@ -303,10 +304,6 @@ _T146 = (
     "grid-slack at 0.5, 1 and 5 degrees each draw no change, and the axis tool's view does "
     "not improve on it"
 )
-_REFUSED_DECIMAL = (
-    "a decimal Kingbird witness: the axis tool refuses it (its 36-digit rational pose "
-    "overlaps at dilation 1), and no strong generator's outcome on it is recorded"
-)
 _KINGBIRD = "Kingbird derived numerical facts"
 _KINGBIRD_PATH = "resources/web/known-best-packings/sources.json"
 _DANIEL = "[Daniel regularized lists 2026-10-10]"
@@ -498,6 +495,29 @@ _README_3GUF = (
 )
 
 
+#: Both generators on the four decimal Kingbird witnesses at 39, 55, 290 and 291 that an
+#: agent set aside on 15 October 2026 with no strong run (think-yk2h), run on 31 October
+#: 2026: Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees. Grid-slack's
+#: version 2 draws each in the bound frame at 39 and 55 and at the witness's side at 290
+#: and 291. The selection drew Evan Daniel's solved view at 39, exactly verified at U, which
+#: replaces the numerically checked witness, and decided 55, 290 and 291, where every view
+#: ties the house drawing on every measure, is better only on exactness and is row 10's
+#: "no change", so none is adopted (`SETTLED`; the owner's question whether exactness
+#: alone earns the picture is think-j68m). Their receipt, blocks, reports and the selection's
+#: report are in packing/cases/regularized_drawings/think-yk2h-2026-10-31/.
+_RUNYK2H = (
+    ("evand-regularize", "evand-regularize-yk2h-2026-10-31-n39-291-evand"),
+    ("regularize_grid_slack/2", "grid-slack-yk2h-2026-10-31-n39-291-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-yk2h-2026-10-31-n39-291-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-yk2h-2026-10-31-n39-291-grid-deg5"),
+)
+_README_YK2H = (
+    "packing/cases/regularized_drawings/think-yk2h-2026-10-31/README.md and "
+    "selection-yk2h-2026-10-31-n39-291.md, the selection of 31 October 2026 (think-yk2h), "
+    "beside the runs' receipt, blocks and reports"
+)
+
+
 _T225 = "[Daniel regularized lists 2026-10-20]"
 _T225_CERTS = "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/"
 _T225_REVISION = "0075967bace18a3deabcc0baa64c2fb294fc80a0"
@@ -524,25 +544,19 @@ SETTLED: dict[int, Settled] = {
         "row 4, and his same-side re-solve refuses the certificate's 2,399-digit literal",
         _README_622,
     ),
-    39: Settled(
-        EXEMPT,
-        _KINGBIRD,
-        _KINGBIRD_PATH,
-        None,
-        "6.8107220830686488516977794443517526346472763123335",
-        (),
-        _REFUSED_DECIMAL,
-        "think-yk2h",
-    ),
     55: Settled(
-        EXEMPT,
+        DECIDED,
         _KINGBIRD,
         _KINGBIRD_PATH,
         None,
         "7.9457710075039129789580095385274780713965449730227",
-        (),
-        _REFUSED_DECIMAL,
-        "think-yk2h",
+        _RUNYK2H,
+        "Evan Daniel's solved view and grid-slack's views at 0.5, 1 and 5 degrees are each "
+        "exactly verified at U and one to one with the witness; each ties the house drawing "
+        "on every measure and is better only on exactness, and row 10 reports no change "
+        "(nothing visible changes), so the selection adopts none; whether exactness alone "
+        "should earn the picture is the owner's question (think-j68m)",
+        _README_YK2H,
     ),
     68: Settled(
         DECIDED,
@@ -976,24 +990,34 @@ SETTLED: dict[int, Settled] = {
         _README_3MRY,
     ),
     290: Settled(
-        EXEMPT,
+        DECIDED,
         _KINGBIRD,
         _KINGBIRD_PATH,
         None,
         "17.53553390593273762200422181052425",
-        (),
-        _REFUSED_DECIMAL,
-        "think-yk2h",
+        _RUNYK2H,
+        "Evan Daniel's same-side view and grid-slack's views at 0.5, 1 and 5 degrees are "
+        "each exactly verified at the witness's side, U, and one to one with it; each ties "
+        "the house drawing on every measure and is better only on exactness, and row 10 "
+        "reports no change (nothing visible changes), so the selection adopts none; his "
+        "solved view is held at row 4 (1.75e-19 above U); whether exactness alone should "
+        "earn the picture is the owner's question (think-j68m)",
+        _README_YK2H,
     ),
     291: Settled(
-        EXEMPT,
+        DECIDED,
         _KINGBIRD,
         _KINGBIRD_PATH,
         None,
         "17.53553390593273762200422181052425",
-        (),
-        _REFUSED_DECIMAL,
-        "think-yk2h",
+        _RUNYK2H,
+        "Evan Daniel's same-side view and grid-slack's views at 0.5, 1 and 5 degrees are "
+        "each exactly verified at the witness's side, U, and one to one with it; each ties "
+        "the house drawing on every measure and is better only on exactness, and row 10 "
+        "reports no change (nothing visible changes), so the selection adopts none; his "
+        "solved view is held at row 4 (1.75e-19 above U); whether exactness alone should "
+        "earn the picture is the owner's question (think-j68m)",
+        _README_YK2H,
     ),
     297: Settled(
         DECIDED,
@@ -1110,7 +1134,9 @@ SETTLED: dict[int, Settled] = {
 #: being regularized or decided, which takes its `SETTLED` entry off, or by the owner's
 #: word in its entry; the gate fails a count named here that is not such an exemption, so
 #: the set only shrinks. The intake sweep lists each one for the owner, needing action.
-UNRATIFIED: frozenset[int] = frozenset({39, 55, 290, 291})
+#: Both strong generators ran on all four on 31 October 2026 (`_RUNYK2H`): 39 is
+#: regularized and 55, 290 and 291 are decided, so the set is empty.
+UNRATIFIED: frozenset[int] = frozenset()
 #: Fourteen days from the gate's first day, as an exemption's review date would be.
 UNRATIFIED_UNTIL = "2026-11-09"
 #: How the gate and the sweep say that an exemption waits for the owner's word.
@@ -1336,7 +1362,7 @@ def _axis_outcome(record: Mapping[str, Any]) -> str:
 
 #: The fields a witness identifies itself by and a `SETTLED` entry is bound to. A source
 #: that pins no revision binds by key and side alone where its path is a shared index:
-#: every Kingbird witness names `sources.json`, so the exemptions at 39, 55, 290 and 291
+#: every Kingbird witness names `sources.json`, so the decisions at 55, 290 and 291
 #: bind to the source key and the side, and 290 and 291 to the same pair. Binding its
 #: `url` and `retrieved` as well changes the record, a data commit (think-k09z; review
 #: B5 of #636).

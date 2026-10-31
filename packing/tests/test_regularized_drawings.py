@@ -930,8 +930,9 @@ def test_a_registered_item_reads_the_rungs_of_the_solve_the_layer_draws(
 def test_t155_names_daniels_earlier_certificate_where_its_side_is_his() -> None:
     """On the record: T-155's items that name `first_certified_in` are exactly the rows of
     its registration receipt whose side is that of Evan Daniel's earlier certificate
-    (`register_regularized_bounds.at_t101_side`), 33 of its 59, each naming T-101; eight
-    are drawn and 25 are not. Their case notes say the side is registered in T-155 and
+    (`register_regularized_bounds.at_t101_side`), 33 of its 59, each naming T-101; nine
+    are drawn (39 since the runs of 31 October 2026, think-yk2h) and 24 are not. Their
+    case notes say the side is registered in T-155 and
     was first certified by Evan Daniel's certificate (T-101), so it proves no new bound;
     the other 26 say it is the upper bound it proves. The layer draws T-155's own solve
     at thirteen counts, whose items read their rungs from the drawn entries; at 87 it
@@ -960,7 +961,7 @@ def test_t155_names_daniels_earlier_certificate_where_its_side_is_his() -> None:
         and any("view" in found for found in fields[n]["items"] if found["by"] == "project")
     )
     # At 293 the house moved to Evan Daniel's #845 (T-257) on 31 October 2026.
-    assert drawn_named == [83, 87, 107, 171, 198, 230, 234]
+    assert drawn_named == [39, 83, 87, 107, 171, 198, 230, 234]
     first = (
         "registered in T-155, and the same side was first certified by Evan Daniel's "
         "certificate (T-101), so it proves no new bound"

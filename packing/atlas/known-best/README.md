@@ -916,12 +916,34 @@ The evidence is retained in
 The index draws 93 views: 27 by the axis tool, 38 by Evan Daniel’s regularizer, 21 by
 the grid-slack generator’s version 1 and 7 by its version 2.
 
-The pass of 31 October 2026 (think-3guf) adopted, after that day’s stage 4 reviews,
-Francisco Couzo’s certificates of issue 844 at 232 and 307 (T-256), Evan Daniel’s of
-issue 845 at 172, 204, 260 and 293 (T-257), his update to issue 824 at 299 (T-258) and
-Mykhailo Polkovskyi’s re-solve of Couzo’s issue 843 packing at 130 (T-259). At 293 and
-299 the houses had been the Kingbird catalogue’s constructions, whose conjectured optima
-are withdrawn. Both generators ran on the eight new witnesses.
+On 31 October 2026 both strong generators ran on the four decimal Kingbird witnesses at
+39, 55, 290 and 291, which an agent had set aside on 15 October without a strong run
+(think-yk2h) and which stood without the owner’s word until 9 November.
+Grid-slack’s version 2 at 0.5, 1 and 5 degrees
+(`grid-slack-yk2h-2026-10-31-n39-291-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 70
+CPU-seconds in all) draws a view at every count, in the bound frame at $U$ at 39 and 55
+and at the witness’s side, which is $U$, at 290 and 291; each is exactly verified on
+both routes, one to one with the witness, and changes nothing visible (row 10, no
+change). Evan Daniel’s regularizer (`evand-regularize-yk2h-2026-10-31-n39-291-evand`,
+1,600 s of wall at one worker) solves each witness: at 39 its view, at $U$, moves eleven
+squares by at most 0.072 and turns square 26 by at most 0.0033 degrees, and the
+selection admits it (row 10), an exactly verified view at most $U$ replacing a
+numerically checked witness with no measure worse; at 55 its view changes nothing
+visible, and at 290 and 291 its same-side view changes nothing visible and its solved
+view is held at row 4, $1.75 \times 10^{-19}$ above $U$. So 39 is regularized and 55,
+290 and 291 are decided no better (`SETTLED`): their views tie the house drawing on
+every measure and are better only on exactness, and row 10’s “no change” keeps them out
+(whether exactness alone should earn the picture is the owner’s question, think-j68m).
+No count is exempt. The evidence is retained in
+[`cases/regularized_drawings/think-yk2h-2026-10-31/`](../../cases/regularized_drawings/think-yk2h-2026-10-31/README.md).
+The index draws 94 views: 27 by the axis tool, 39 by Evan Daniel’s regularizer, 21 by
+the grid-slack generator’s version 1 and 7 by its version 2. The pass of 31 October 2026
+(think-3guf) adopted, after that day’s stage 4 reviews, Francisco Couzo’s certificates
+of issue 844 at 232 and 307 (T-256), Evan Daniel’s of issue 845 at 172, 204, 260 and 293
+(T-257), his update to issue 824 at 299 (T-258) and Mykhailo Polkovskyi’s re-solve of
+Couzo’s issue 843 packing at 130 (T-259). At 293 and 299 the houses had been the
+Kingbird catalogue’s constructions, whose conjectured optima are withdrawn.
+Both generators ran on the eight new witnesses.
 Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-31-n130-307-grid-deg05`,
 `-grid-deg1` and `-grid-deg5`, 1,244 CPU-seconds) draws a view at every count at the
 witness’s side, and the selection admits six (row 10): the 5-degree views at 130, 172
@@ -937,7 +959,7 @@ the axis tool’s view, and `SETTLED` takes them; its entries at 130 and 260, ma
 earlier witnesses, are removed.
 The evidence is retained in
 [`cases/regularized_drawings/think-3guf-2026-10-31/`](../../cases/regularized_drawings/think-3guf-2026-10-31/README.md).
-The index draws 94 views: 27 by the axis tool, 36 by Evan Daniel’s regularizer, 18 by
+The index draws 95 views: 27 by the axis tool, 37 by Evan Daniel’s regularizer, 18 by
 the grid-slack generator’s version 1 and 13 by its version 2.
 
 ### The default picture

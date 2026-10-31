@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "093eb813eca9c5dc06365646cb5c3a7d3866a7bb"
+DATA_REVISION = "7a1b4d52d7b148f6b968b1c6cdee4ddbdeba2d3d"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -10012,6 +10012,181 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical across the three. First measured the same way against main "
             "3978a7f61 (#841), before and after review A's edits to the two entries. No PDF "
             "was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#613's ask is done (think-8krd): D-522 records the defect the owner's answer "
+            "of 23 October left owed, and the requests entry names it "
+            "(result-requests.yaml); no register entry, side, bound or credit changes. "
+            "Against main acc1cfc3d (#825): rendered at link revision acc1cfc3 into "
+            "empty site directories, twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, render_packing_methods writes all 43 files "
+            "byte-identical across the three; measured again after merging main "
+            "e54ae3e97 (#829), at link revision e54ae3e9 with that main's "
+            "result-requests.yaml swapped in, with the same outcome; and on 31 October "
+            "(think-6m6e), after merging main 3978a7f61 and then 32ef0861b (#835) and "
+            "review A's wording fixes to #613's ask note, at link revision 32ef0861 with "
+            "that main's result-requests.yaml swapped in, with the same outcome, and again "
+            "after merging main 37ede3936 (#848), at link revision 37ede393, with the same "
+            "outcome. No PDF was printed; it prints from that HTML. The survey keeps "
+            "v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The records of 26 October (w-records-1026): sixteen issues closed with their "
+            "final replies, four asks #827 did marked done, follow-ups on #804, #824, "
+            "#643, #537, #535 and #414, and #535 and #537 blocked on the owner's decision "
+            "(result-requests.yaml); T-247's next rung says its general and flip "
+            "regularization come at adoption, not under the closed think-mbdw "
+            "(results.yaml). No rung, bound, side or credit changes. Against main "
+            "e54ae3e97 (#829): rendered at link revision fbae7f3f into empty site "
+            "directories, twice from this tree and once with that main's two changed "
+            "inputs swapped in, by render_n11_lower_bounds_explainer, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: 69 files each, all byte-identical across the three. "
+            "After the replies gained the report entries their drafts state in words, "
+            "render_packing_methods, the one reader of result-requests.yaml among them, "
+            "again at link revision fe048570, twice from this tree and once with that "
+            "main's file swapped in: 43 files each, byte-identical across the three. "
+            "On 31 October (think-6m6e) the requests record also took #542's close, ten "
+            "reply records cut to the ids their text names, five issues' comments read, "
+            "three follow-ups, #804's owed reply and owner-decision blocks on #666, #715 "
+            "and #719; render_packing_methods again at link revision 3978a7f6, twice from "
+            "this tree and once with main 3978a7f61's file swapped in, and after merging "
+            "main 32ef0861b (#835) at link revision 32ef0861 with that main's file swapped "
+            "in: 43 files each time, byte-identical across the three. "
+            "No PDF was printed; each prints from that HTML. Every paper keeps its "
+            "version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The acknowledgements of #836 and #847 recorded under their replies (the "
+            "intake pass of 31 October, think-3guf); no register entry, row, side, bound or "
+            "credit changes. Against main b95c5f69c (#833): rendered at link revision "
+            "b95c5f69 into empty site directories, twice from this tree and once with that "
+            "main's result-requests.yaml swapped in, render_packing_methods writes its 43 "
+            "files byte-identical across the three. First measured the same way against "
+            "main 37ede3936 (#848), before and after review A1's notes on the two entries. "
+            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/frontier/source-coverage.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake pass of 31 October 2026 (think-3guf, lane L5): three source-coverage "
+            "entries for the packets that retain the stalled watched-repository heads "
+            "bengreff/s76-certificate 0699398, ofitzharding/sq19 c86a991 and "
+            "Queuingtheorydotcom/11SquaresOptimal 4262f07. Against main 3978a7f61 (#841): "
+            "rendered at link revision c51d06d3 into empty site directories, twice from "
+            "this tree and once with main's source-coverage.yaml swapped in: "
+            "render_packing_methods writes all 43 files byte-identical across the three. "
+            "Measured again after merging main 32ef0861b (#835), at link revision bb8d5cca "
+            "with that main's source-coverage.yaml swapped in, and after merging main "
+            "37ede3936 (#848), at link revision 9520cb50, and after merging main c94df7cef "
+            "(#853), at link revision be4b6eb3: 43 files, byte-identical across the three "
+            "each time. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/default_drawings.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The regularization of 39, 55, 290 and 291 (think-yk2h, intake pass of 31 "
+            "October 2026): SETTLED's four exemptions become a regularized view at 39 and "
+            "decisions at 55, 290 and 291, and results.yaml's regularized_drawings gains "
+            "39. Against main 3978a7f61 (#841): rendered at link revision d99e8ac0 into "
+            "empty site directories, twice from this tree and once with that main's two "
+            "inputs swapped in, by render_n11_lower_bounds_explainer, with its math pass "
+            "in Chromium 1243 (SQPACK_CHROMIUM), render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods: 69 files each, "
+            "all byte-identical across the three. Measured again after merging main "
+            "32ef0861b (#835), at link revision 5df16757 with that main's two inputs "
+            "swapped in, after merging main 37ede3936 (#848), at link revision 290ba178, "
+            "and after review A's reasons (default_drawings.py) and merging main 84ba6fa9c "
+            "(#850), at link revision 7a1b4d52 with that main's two inputs swapped in: 69 "
+            "files each, byte-identical across the three each time. No PDF was printed; "
+            "each prints from that HTML. Every paper keeps its version: v0.4.32, v0.1.11, "
+            "v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The records after #833 (think-6m6e): #613's final reply and close, and the "
+            "follow-ups of 31 October on #316, #797, #799, #804 (which corrects the 26 "
+            "October licence statement) and #824, in result-requests.yaml; no register "
+            "entry, side, bound or credit changes. Against main b95c5f69c (#833): "
+            "rendered at link revision b95c5f69 into empty site directories, twice from "
+            "this tree and once with that main's result-requests.yaml swapped in, "
+            "render_packing_methods writes its 43 files byte-identical across the three; "
+            "measured again after merging main c94df7cef (#853), at link revision "
+            "c94df7ce, after merging main 84ba6fa9c (#850), at link revision 84ba6fa9, "
+            "and after merging main 15450a44d (#849), at link revision 15450a44, with the "
+            "same outcome. "
+            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
 )

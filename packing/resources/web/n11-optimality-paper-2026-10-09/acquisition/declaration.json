@@ -1,0 +1,26 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "queuingtheorydotcom-11squaresoptimal",
+  "source_url": "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
+  "source_ref": "refs/heads/main",
+  "source_commit": "4262f07c7723428c1725bb757ed06d0c4d28be1a",
+  "retrieved_at_utc": "2026-10-31T05:07Z",
+  "git_scope": "A full clone of the public repository, fetched at 2026-10-31T05:07Z when main was this commit, the third of three commits of 8 October 2026 (local time) past f9e0de7, the commit the n11-optimality-2026-09-29 packet retains and T-060 cites. The scope is every path those three commits change: README.md, which gains a paragraph on the revised manuscript, and paper/, which they add: the revised geometric manuscript, its geometric-foundations companion, a README with the verification commands, SHA256SUMS and the self-contained verification supplement. The supplement, a 5,426,101-byte zip of 387 files (26,360,481 bytes unpacked), is pinned by size and digest and not retained. Every other file of the tree is unchanged since f9e0de7; this commit's tree pins it.",
+  "archived_dir": "11SquaresOptimal",
+  "license": "No licence file. THIRD_PARTY_NOTICES.md, unchanged since f9e0de7 and retained by the n11-optimality-2026-09-29 packet, asserts no blanket license over the collection; each file retains its applicable terms. These commits add none.",
+  "claims": [
+    "A revised geometric manuscript of the proof that the known packing of eleven unit squares is optimal (T-060's claim, s(11) attained by the known packing), paper/eleven-squares-synthesis.tex, 'Eleven squares: owners, support chains, and angle penalties': a marker-based global reduction, a support-chain inequality for independently rotating tilted squares, an early corridor and two virtual supports that leave a 103-node dependency graph (down from 119), simplified exclusions of ownership cases 0 (an elementary terminal argument), 3 (12 point assertions instead of 62) and 5 (65 instead of 170), and quantitative nonoverlap penalties replacing the late fine capture and local-isolation endpoint (paper/README.md, README.md)",
+    "A companion, paper/eleven-squares-geometric-foundations.tex, with direct proofs of the rectangle, triangle, wall and ownership rules (paper/README.md)",
+    "A self-contained verification supplement, paper/eleven-squares-publication.zip, run by verify.py --check-inputs, --quick, --ownership, --early and --full under CPython 3.12.4's standard library; the author reports input verification, all 13 quick checks, the ownership replay and the early component replay passing in a clean extraction, and the portable full command not yet executed end to end (paper/README.md)"
+  ],
+  "scope": [
+    "README.md",
+    "paper"
+  ],
+  "pinned_only": [
+    {
+      "match": "paper/eleven-squares-publication.zip",
+      "reason": "the verification supplement, a 5,426,101-byte binary archive of 387 files (26,360,481 bytes unpacked), bulk data kept out of Git (OR-18) and pinned by size and digest, which paper/SHA256SUMS also lists"
+    }
+  ]
+}
