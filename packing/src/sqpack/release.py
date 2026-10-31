@@ -10337,8 +10337,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "once with that main's result-requests.yaml swapped in, render_packing_methods "
             "writes its 43 files byte-identical across the three. Measured again after "
             "merging main a8deaf1b6 (#817), at link revision a8deaf1b with that main's "
-            "result-requests.yaml swapped in, and after recording the #375 correction "
-            "(review B1), at the same revision with that main's file swapped in: 43 files, "
+            "result-requests.yaml swapped in, after recording the #375 correction (review "
+            "B1), and after marking the 6 October #375 confirmation's statement outdated, "
+            "each at the same revision with that main's file swapped in: 43 files, "
             "byte-identical across the three each time. "
             "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),

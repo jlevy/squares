@@ -1174,6 +1174,11 @@ issues:
       outdated:
       - 'everything it describes is recorded on an intake branch and not merged to main, with T-098
         provisional; #369 merged it, and T-098 holds on main'
+      - 'says the two checkers that decided T-098''s replay (E-evand-exact-optima-2026-10-05-exact-replay)
+        share no code with the author''s; the evand-cert adapter both read through transcribes
+        verify_cert2.py''s corners and both checkers'' line filter (V-evand-exact-certificates, RF-1 of
+        the review of #728), and think-ysif aligns the entry; the correction of 31 October
+        (issuecomment-6543355721) states it'
     - url: https://github.com/jlevy/squares/issues/375#issuecomment-6008229686
       date: '2026-10-06'
       by: jlevy
@@ -1274,6 +1279,7 @@ issues:
       - result: ceilings-77
         id: E-evand-exact-ceilings-2026-10-05-exact-replay
       corrects:
+      - https://github.com/jlevy/squares/issues/375#issuecomment-6007913483
       - https://github.com/jlevy/squares/issues/375#issuecomment-6542830540
       beads: [think-ysif]
     blocked:
