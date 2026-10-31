@@ -127,14 +127,16 @@ def test_the_explainer_ends_with_the_sites_closing_credit_without_its_version(
     page: str,
 ) -> None:
     """The explainer's closing paragraph holds the two lines every page's footer is made
-    of (`render_overview.colophon_lines`): the project and its repository, then the
-    credit to Flowmark and KPress, with no version between them. The paper's own version
-    is in its credits, and the site's edition goes on no paper (the owner, 2026-10-01).
-    The paragraph keeps the paper's own class, and so its type and its print rules."""
+    of (`render_overview.colophon_lines`): the project, the site and the repository, then
+    the credit to Flowmark and KPress, with no version between them. The paper's own
+    version is in its credits, and the site's edition goes on no paper (the owner,
+    2026-10-01). The paragraph keeps the paper's own class, and so its type and its print
+    rules."""
     footer = f'<p class="col colophon centred">{render_overview.colophon_lines(edition="")}</p>'
     assert page.count(footer) == 1
     assert page.count('class="site-colophon-line"') == 2
-    assert footer.count('class="site-colophon-part"') == 3
+    assert footer.count('class="site-colophon-part"') == 4
+    assert f'<a href="{render_overview.SITE_URL}">squaremath.org</a>' in footer
     assert '<a href="https://github.com/jlevy/squares">github.com/jlevy/squares</a>' in footer
     assert "Formatted and typeset with" in footer
     assert PUBLICATION_EDITION not in footer

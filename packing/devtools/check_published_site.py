@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import http.client
 import os
 import posixpath
@@ -45,7 +46,7 @@ import urllib.request
 from collections.abc import Callable, Mapping, Sequence
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import NamedTuple, override
+from typing import Any, NamedTuple, override
 from urllib.parse import urldefrag, urljoin, urlsplit
 
 from playwright.sync_api import Browser, BrowserContext, sync_playwright
@@ -61,7 +62,6 @@ from devtools import (
     site_urls,
     social_card,
 )
-from devtools.github_references import issue_url
 from devtools.overview_sections import LOWER_BOUNDS_PAPER, OPTIMALITY_PAPER, result_fragment
 from devtools.render_n11_lower_bounds_explainer import (
     COMPOSITE_ASSETS,
@@ -546,31 +546,33 @@ def shared_descriptions(pages: Mapping[str, str]) -> list[str]:
 RECORD_PROBLEMS_SHOWN = 3
 
 
-def changelog_checks(text: str) -> list[tuple[bool, str]]:
-    """Hold the served launch index to its retained entries and public destinations."""
-    try:
-        document = render_changelog.load()
-    except ValueError as error:
-        return [(False, f"news.html: changelog record is invalid: {error}")]
-    markup = _RecordMarkup(text)
+def _entry_link_problems(
+    document: Mapping[str, Any],
+    entries: Sequence[Mapping[str, Any]],
+    markup: _RecordMarkup,
+    *,
+    supporting: Callable[[Mapping[str, Any]], bool] = lambda _entry: True,
+) -> list[str]:
+    """Each entry's own anchor, once, and every link the page is expected to carry for
+    it, which `render_changelog.entry_targets` defines so the audit and the renderer
+    cannot drift apart.
+
+    `supporting` says whether this page owes the entry its artifacts, publication
+    evidence and supporting records as well as its GitHub threads. News owes them for
+    every story it shows. The Changelog owes them for a change News never shows, which
+    makes its line that change's only reader surface; for a change News does tell, the
+    line gives the threads and links to the story, which carries the rest.
+    """
+    links = {element.attrs.get("href") for element in markup.find(tag="a")}
     problems: list[str] = []
-    if markup.ids.get("changelog") != 1:
-        problems.append("requires one changelog section")
-    anchors = markup.find(tag="a")
-    links = {element.attrs.get("href") for element in anchors}
-    entries = render_changelog.news_entries(document)
-    articles = [element.attrs.get("data-news-entry") for element in markup.find(tag="article")]
-    if sorted(item for item in articles if item is not None) != sorted(
-        entry["id"] for entry in entries
-    ):
-        problems.append("article roster differs from eligible News entries")
     for entry in entries:
         if markup.ids.get(render_changelog.entry_anchor(entry["id"])) != 1:
             problems.append(f"missing or repeated entry {entry['id']}")
         targets = [
-            *(issue_url(document["repository"], number) for number in entry.get("issues", [])),
-            *(f"{document['repository']}/pull/{number}" for number in entry["pull_requests"]),
-            *(artifact["target"] for artifact in entry.get("artifacts", [])),
+            target
+            for _label, target in render_changelog.entry_targets(
+                document, entry, supporting=supporting(entry)
+            )
         ]
         if missing := [
             target
@@ -578,8 +580,30 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
             if render_changelog.serialized_target(target, destination="site") not in links
         ]:
             problems.append(f"{entry['id']}: missing launch/issue/PR links {missing}")
-    archived = render_changelog.archived_news_targets(document)
-    for anchor, target in archived.items():
+    return problems
+
+
+def news_checks(text: str) -> list[tuple[bool, str]]:
+    """Hold the served launch index to its retained entries and public destinations."""
+    try:
+        document = render_changelog.load()
+    except ValueError as error:
+        return [(False, f"news.html: changelog record is invalid: {error}")]
+    markup = _RecordMarkup(text)
+    anchors = markup.find(tag="a")
+    entries = render_changelog.news_entries(document)
+    articles = [element.attrs.get("data-news-entry") for element in markup.find(tag="article")]
+    problems: list[str] = []
+    if sorted(item for item in articles if item is not None) != sorted(
+        entry["id"] for entry in entries
+    ):
+        problems.append("article roster differs from eligible News entries")
+    problems.extend(_entry_link_problems(document, entries, markup))
+    # The history has a page of its own, so the bookmarks News keeps without showing
+    # them -- the entries and days below its floor, and the `changelog` bookmark the
+    # section answered here -- lead there (the owner, 2026-10-26).
+    retained = render_changelog.news_forward_targets(document)
+    for anchor, target in retained.items():
         matches = [element for element in anchors if element.attrs.get("id") == anchor]
         if (
             markup.ids.get(anchor) != 1
@@ -587,12 +611,72 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
             or matches[0].attrs.get("href") != target
             or "data-news-target" not in matches[0].attrs
         ):
-            problems.append(f"missing or incorrect archived entry target {anchor}")
+            problems.append(f"missing or incorrect retained bookmark {anchor}")
+    if render_changelog.CHANGELOG_PAGE not in {
+        element.attrs.get("href") for element in anchors
+    }:
+        problems.append("no link to the Changelog page")
     line = (
         f"news.html: changelog: {'; '.join(problems[:5])}"
         if problems
         else f"news.html: all {len(entries)} News entries and launch links; "
-        f"{len(archived)} archived bookmarks"
+        f"{len(retained)} retained bookmarks"
+    )
+    return [(not problems, line)]
+
+
+def _entry_line(text: str, anchor: str) -> str:
+    """The Changelog line an entry owns, from its own `li` to that element's end.
+
+    `changelog_entry_line` writes one list item an entry, carrying the entry's anchor, so
+    the line is where its links have to be. An empty string where the anchor is absent
+    lets the caller report the missing link rather than raise.
+    """
+    opening = f'<li id="{html.escape(anchor, quote=True)}">'
+    start = text.find(opening)
+    if start < 0:
+        return ""
+    end = text.find("</li>", start)
+    return text[start:end] if end > start else text[start:]
+
+
+def changelog_checks(text: str) -> list[tuple[bool, str]]:
+    """Hold the Changelog page to the whole retained history, not only its stories."""
+    page = render_changelog.CHANGELOG_PAGE
+    try:
+        document = render_changelog.load()
+    except ValueError as error:
+        return [(False, f"{page}: changelog record is invalid: {error}")]
+    markup = _RecordMarkup(text)
+    problems: list[str] = []
+    if markup.ids.get("changelog") != 1:
+        problems.append("requires one changelog section")
+    entries = document["entries"]
+    told = {entry["id"] for entry in render_changelog.news_entries(document)}
+    problems.extend(
+        _entry_link_problems(
+            document, entries, markup, supporting=lambda entry: entry["id"] not in told
+        )
+    )
+    # Each story link is read inside the line that owes it, not against the page's own
+    # set of links: the same address written under another entry would satisfy a
+    # page-wide check while leaving this entry with no route to its story.
+    problems.extend(
+        f"story not linked for {entry['id']}"
+        for entry in entries
+        if entry["id"] in told
+        and f"{render_changelog.NEWS_PAGE}#{render_changelog.entry_anchor(entry['id'])}"
+        not in _entry_line(text, render_changelog.entry_anchor(entry["id"]))
+    )
+    problems.extend(
+        f"missing or repeated day {day}"
+        for day in sorted({entry["date"] for entry in entries})
+        if markup.ids.get(f"changelog-date-{day}") != 1
+    )
+    line = (
+        f"{page}: changelog: {'; '.join(problems[:5])}"
+        if problems
+        else f"{page}: all {len(entries)} retained entries, their days and their links"
     )
     return [(not problems, line)]
 
@@ -682,7 +766,9 @@ def head_checks(
         )
         results.append((not problems, line))
     if "news.html" in pages:
-        results.extend(changelog_checks(pages["news.html"]))
+        results.extend(news_checks(pages["news.html"]))
+    if render_changelog.CHANGELOG_PAGE in pages:
+        results.extend(changelog_checks(pages[render_changelog.CHANGELOG_PAGE]))
     return results
 
 

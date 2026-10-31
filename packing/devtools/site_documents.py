@@ -192,14 +192,15 @@ DOCUMENTS: tuple[SiteDocument, ...] = (
 #: The rendered documents by repository path, which is how the Markdown links them.
 _BY_SOURCE = {doc.source.relative_to(REPO).as_posix(): doc for doc in DOCUMENTS}
 
-#: The two generated views of the record that the site shows on a page of its own, built
-#: from the same record: the results register is the results table, and the status table
-#: is the frontier atlas. Neither file is served as a page, so a link to one leads to the
-#: page that shows what it holds.
+#: The three generated views of the record that the site shows on a page of its own,
+#: built from the same record: the results register is the results table, the status
+#: table is the frontier atlas, and the changelog is the Changelog page. None of the
+#: files is served as a page, so a link to one leads to the page that shows what it
+#: holds.
 RECORD_PAGES: dict[str, str] = {
     repo_links.RESULTS: render_overview.RESULTS_PAGE,
     repo_links.STATUS: "frontier.html",
-    repo_links.CHANGELOG: "news.html#changelog",
+    repo_links.CHANGELOG: render_changelog.CHANGELOG_PAGE,
 }
 #: Where every case's record is served, one address per case (`render_case_pages`).
 CASES_DIR = "cases"
@@ -546,12 +547,14 @@ def render_document(
 def unresolved(pages: dict[str, Page], report: LinkReport) -> list[str]:
     """Every link the render could not resolve, missing files and anchors together."""
     ids = {name: element_ids(page.html) for name, page in pages.items()}
-    # Reader documents are also rendered on their own. News is a record landing,
-    # so validate its anchors against the actual page even in that partial build.
-    if "news.html" not in ids and any(
-        name == "news.html" for name, _anchor, _url in report.anchors
-    ):
-        ids["news.html"] = element_ids(render_overview.news_page().html)
+    # Reader documents are also rendered on their own. A record's landing page
+    # (`RECORD_PAGES`, the Changelog among them) is linked from them, so validate its
+    # anchors against the actual page even in that partial build.
+    for landing in sorted({target.partition("#")[0] for target in RECORD_PAGES.values()}):
+        if landing not in ids and any(
+            name == landing for name, _anchor, _url in report.anchors
+        ):
+            ids[landing] = element_ids(render_overview.PAGES[landing]().html)
     problems = [f"no such path in the tree: {url}" for url in report.missing]
     problems += [
         f"no heading #{anchor} in {name}: {url}"

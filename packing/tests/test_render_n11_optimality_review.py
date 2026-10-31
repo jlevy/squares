@@ -162,10 +162,11 @@ def test_the_paper_ends_with_the_sites_closing_credit_without_its_version(
     rendered: tuple[str, str],
 ) -> None:
     """The paper's closing paragraph holds the two lines every page's footer is made of,
-    the project and its repository, then the credit to the two tools, with no version
-    between them: the paper's own version is in its credits, and the site's edition and
-    the data hash go nowhere on a paper (the owner, 2026-10-01). The paper's version and
-    dates are declared in `release.py`, which is therefore one of its declared inputs."""
+    the project, the site and the repository, then the credit to the two tools, with no
+    version between them: the paper's own version is in its credits, and the site's
+    edition and the data hash go nowhere on a paper (the owner, 2026-10-01). The paper's
+    version and dates are declared in `release.py`, which is therefore one of its
+    declared inputs."""
     from devtools import render_overview  # noqa: PLC0415
     from sqpack.release import (  # noqa: PLC0415
         DATA_REVISION,
@@ -177,7 +178,7 @@ def test_the_paper_ends_with_the_sites_closing_credit_without_its_version(
     footer = f'<p class="col colophon centred">{render_overview.colophon_lines(edition="")}</p>'
     assert html.count(footer) == 1
     assert html.count('class="site-colophon-line"') == 2
-    assert footer.count('class="site-colophon-part"') == 3
+    assert footer.count('class="site-colophon-part"') == 4
     assert "Formatted and typeset with" in footer
     assert PUBLICATION_EDITION not in footer
     assert PUBLICATION_EDITION not in html

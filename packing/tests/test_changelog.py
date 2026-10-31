@@ -1047,16 +1047,22 @@ def test_news_exclusion_keeps_history_and_fills_the_preview_from_eligible_entrie
     assert 'data-news-entry="later-delivery"' not in news
     assert 'data-news-entry="foundations"' in news
     assert 'data-news-entry="admission"' in news
-    archive = f"{data['repository']}/blob/main/CHANGELOG.md#{anchor}"
+    page = render_changelog.CHANGELOG_PAGE
+    archive = f"{page}#{anchor}"
     assert f'id="{anchor}" href="{archive}" data-news-target' in news
     day = "changelog-date-2026-10-14"
-    assert f'id="{day}" href="{data["repository"]}/blob/main/CHANGELOG.md#{day}"' in news
+    assert f'id="{day}" href="{page}#{day}"' in news
+    # The bookmark the section answered on News before the history took a page of its
+    # own leads there too (the owner, 26 October 2026).
+    assert f'id="changelog" href="{page}#changelog" data-news-target' in news
     assert '<p class="site-action-row"><a class="site-action"' in news
+    assert f'href="{page}">Changelog' in news
     assert f'href="{data["repository"]}/blob/main/CHANGELOG.md"' in news
-    assert 'aria-label="Full changelog on GitHub">Full changelog' in news
+    assert 'aria-label="Changelog on GitHub">Changelog on GitHub' in news
     assert 'data-arrow="external"' in news
     about = render_changelog.legacy_news_anchors(data)
     assert f'id="{anchor}" href="{archive}" data-news-target' in about
+    assert f'id="changelog" href="{page}#changelog" data-news-target' in about
     preview = render_changelog.render_news(data, limit=1)
     assert re.findall(r'data-news-entry="([^"]+)"', preview) == ["foundations"]
     assert anchor not in preview

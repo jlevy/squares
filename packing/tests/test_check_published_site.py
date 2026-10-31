@@ -95,14 +95,25 @@ REPOSITORY_LINKS = (
 
 COMMIT = "0123456789abcdef0123456789abcdef01234567"
 
-#: News carries the current retained history, including the merged launch groups.
-#: Parse only this small section; the fixture does not rebuild the site or prepare math.
-CHANGELOG_BODY = '<h1 id="changelog">News</h1>' + render_changelog.render_news(
+#: News carries the current launch stories, the merged launch groups included, and sends
+#: a reader to the Changelog for the rest. Parse only this small section; the fixture does
+#: not rebuild the site or prepare math.
+CHANGELOG_BODY = '<h1 id="news">News</h1>' + render_changelog.render_news(
     render_changelog.load()
 )
 
+#: The Changelog page carries the whole retained history, every entry at every
+#: significance, as its article's one `changelog` section (`render_overview`
+#: `changelog_page`). Since 26 October 2026 that section is the day rollup rather than a
+#: story an entry, so the fixture builds it the way the page does and nothing else of the
+#: page; building it the old way left the story links out and the audit rightly refused
+#: it.
+HISTORY_BODY = '<h1 id="changelog">Changelog</h1>' + overview_sections.changelog_rollup(
+    overview_data.load(), render_changelog.load()
+)
+
 #: The tree `main` holds at the deploy: every path a fixture page links on `main`.
-CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY)
+CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY + HISTORY_BODY)
 TREE = RepositoryTree(
     files=frozenset(
         {
@@ -194,6 +205,7 @@ def page(
         f"{head(path)}{bar}"
         f'<p>({stamp})</p><a href="{REPO_URL}/blob/{ref}/{link}">Repository</a>{index}'
         + (CHANGELOG_BODY if path == "news.html" else "")
+        + (HISTORY_BODY if path == render_changelog.CHANGELOG_PAGE else "")
     ).encode()
 
 

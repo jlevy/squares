@@ -2138,8 +2138,12 @@ website or anything else.
 
 ### Maintaining the project changelog
 
-[`CHANGELOG.md`](CHANGELOG.md) and [News](https://jlevy.github.io/squares/news.html) are
-generated from [`packing/site-changelog.yaml`](packing/site-changelog.yaml).
+[`CHANGELOG.md`](CHANGELOG.md), the site’s
+[Changelog](https://jlevy.github.io/squares/changelog.html) and
+[News](https://jlevy.github.io/squares/news.html) are generated from
+[`packing/site-changelog.yaml`](packing/site-changelog.yaml).
+The Changelog page is the whole retained history; News shows the stories rated S3 and
+above and sends a reader to that page for the rest.
 Edit the YAML, then run
 `uv run --frozen --all-extras --group dev python -m devtools.render_changelog` from
 `packing/`; its `--check` mode runs in the ordinary documentation gate.
@@ -2221,8 +2225,8 @@ rather than comparing a commit with itself.
 
 Validate as
 [Hosted CI gates a draft pull request](#hosted-ci-gates-a-draft-pull-request) says,
-review both reader views, and verify the published News page with the normal deployment
-audit after merging.
+review all three reader views, and verify the published News and Changelog pages with
+the normal deployment audit after merging.
 The
 [initial backfill review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md)
 records the disposition of the first 36 PRs.
