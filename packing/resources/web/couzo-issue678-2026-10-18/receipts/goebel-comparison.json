@@ -92,7 +92,7 @@
     "set": "issue #678 at 7b6c87e",
     "tally": {"above":0,"below":85,"equal":0}
   },
-  "families": "G\u00f6bel squares, G\u00f6bel strips and corner-touching G\u00f6bel strips, with deletion",
+  "families": "G\u00f6bel squares, G\u00f6bel strips and corner-touching strips, with deletion",
   "format": "couzo-678-goebel-comparison-v1",
   "program": "packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
 }
