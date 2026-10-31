@@ -5,15 +5,19 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: open
 priority: 1
-version: 4
+version: 8
 labels:
   - result-import
 dependencies: []
 child_order_hints:
   - is-01m685br2zhdy2p5x9fv387m0g
   - is-01m685brzc3k2t7n7fjy3ahzb0
+  - is-01m685msgkcqe67s8cwkqy116j
+  - is-01m685nejvjntazeebg3zn18mt
+  - is-01m685ngekhjw1cxgta3763s3s
+  - is-01m685njhfc113wb8prbg15npb
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T05:01:50.444Z
+updated_at: 2026-10-31T05:07:11.535Z
 ---
 
 ## Notes
