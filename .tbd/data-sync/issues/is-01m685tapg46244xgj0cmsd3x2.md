@@ -5,7 +5,7 @@ title: "Import Khalili and Gharabaghi: s(44) = 7 by a closed mixed cover (#842)"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l3
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:09:47.344Z
-updated_at: 2026-10-31T06:53:51.536Z
+updated_at: 2026-10-31T07:08:35.567Z
 started_at: 2026-10-31T05:09:55.099Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#842 (moh63-dev, Mohsen Khalili and Sara Gharabaghi, opened 2026-10-26T23:46:23Z; one comment, 2026-10-29T15:58:14Z, announcing release v1.1; labelled `intake` on 2026-10-31 by this lane under the github-workflows grant): "s(44) = 7: registration request". Intake pass 2026-10-31 (epic think-3guf), lane L3 (bold-ritchie-l3, tbd-strong sub-agent), branch claude/bold-ritchie-xo28us-s44. Followed the #594/#610 imports (think-osvq, think-ribz) and T-066's zmx2 route (s(59) = 8).
@@ -91,3 +91,11 @@ Two questions, neither holding anything open: were the zm_mixed.py runs without 
 V4/C4 would need a second, separately prompted adversarial review and a human oversight record. With the import answered, this issue is closed; an answer to the questions is still welcome.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+## After the PR opened (2026-10-31, 06:01Z to 07:05Z)
+
+- Commits since a2ee6db: f7f04d9 (views and counts), 371bf08 (atlas data), a00910f (re-pin), b61109e (corpus tripwires, synopsis row), 547a00a (explainer cut v0.4.33 and the papers' no-change record), 26ff4c3 (bound citations, curated credits at the case level, site card, t-046 page budget 450,000, pinned tests), de33224 (re-pin), e88b6e0 (no-change record extended). Head e88b6e0.
+- Papers: explainer v0.4.33 (patch; its count 251 -> 252, measured before the math pass since this host has no pinned Chromium); the other three papers rendered from this tree and with main's seven changed inputs swapped in: 51 files byte-identical, twice.
+- Poster credits: n = 44 is recorded at the case level in credit-attributions.json; the two print-credit contributor entries wait for the next infographics cut (think-10l0), since they redraw both posters.
+- Local: site render + check_published_site --local --partial --producer overview: 8,478 of 8,478 checks passed (after the t-046 budget move; 8,477 of 8,478 before). Affected pytest files pass (371 + 204 + 66 + 316).
+- Beads opened: think-qvp6 (zm_mixed.py pass, validation, held), think-j9kg (pass backlog), think-10l0 (poster credits).
