@@ -2704,8 +2704,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_threshold_bound_review and render_packing_methods (51 files each) "
             "and the explainer's render before its math pass (its page and Markdown; the "
             "pinned Chromium is not installed on this host): every file is byte-identical "
-            "across the two. No PDF was printed; each prints from that HTML. Retain "
-            "v0.4.34, v0.1.11, v0.1.4 and v0.2.7."
+            "across the two. Measured again at 39ce8fde6, once the guard scanned with "
+            "sqpack.yamlio's loader: every file byte-identical. No PDF was printed; each "
+            "prints from that HTML. Retain v0.4.34, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
