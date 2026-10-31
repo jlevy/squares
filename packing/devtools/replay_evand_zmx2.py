@@ -8,7 +8,7 @@ them in a scratch directory, refusing any file whose SHA-256 is not the one the 
 states, builds the binary with ``cargo``, and runs ``zmx2 cert`` under
 ``devtools.replay_receipt``, so every run leaves a receipt in one shape.
 
-``build --checker 6b7f0f79|92a4cfe8 --work DIR``
+``build --checker 6b7f0f79|92a4cfe8|e2bb84e9 --work DIR``
     Writes ``DIR/<checker>/verify2/`` and builds ``target/release/zmx2``; the receipt is
     ``DIR/<checker>/build.log``. Rebuilding an existing directory is a no-op apart from
     re-checking the digests.
@@ -83,6 +83,7 @@ WAND125 = WEB / "wand125-point-and-mixed-2026-10-01/square-packing-bounds/certif
 WAND125_N61 = WEB / "wand125-point-n61-2026-09-30/square-packing-bounds/point_n61_L8"
 BENGREFF_S76 = WEB / "bengreff-s76-certificate-2026-10-14/s76-certificate/cover"
 BENGREFF_S95 = WEB / "bengreff-s95-certificate-2026-10-15/s95-certificate/cover"
+KHALILI_S44 = WEB / "moh63-dev-s44-equals-7-2026-10-29/s44-equals-7/certificate"
 
 #: The crate files every checker version builds with: path in the crate, retained copy, SHA-256.
 CRATE_FILES = (
@@ -112,6 +113,12 @@ CHECKERS = {
     "92a4cfe8": (
         WEB / "evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs",
         "92a4cfe87b4e33d57ce132c9c517eded3fe62b4a5a2151b5ba250b8ee329fe64",
+    ),
+    # The version that also reads a side that is not a multiple of 1/10, unchanged from
+    # b8157df to 659ee62, which Khalili and Gharabaghi's verify.sh pins for s(44).
+    "e2bb84e9": (
+        WEB / "evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs",
+        "e2bb84e9e05938db416940ad608d2583ca9a0c248d59820937c4ce59d607ead7",
     ),
 }
 
@@ -198,6 +205,15 @@ CASES = {
         (),
         100,
         ("--uncert-cap", "200000"),
+    ),    # Mohsen Khalili and Sara Gharabaghi's cover, whose verify.sh runs zmx2 cert --d4 and
+    # --full with no other flag at evand/square-packing@659ee62.
+    44: Case(
+        "n44",
+        KHALILI_S44 / "s44_cover_7.txt.gz",
+        "c9fde0f1e7013f3f61f4a8d673b6bcaf9c5e54c914b6462164d7326ba254cae0",
+        "e2bb84e9",
+        (),
+        70,
     ),
 }
 

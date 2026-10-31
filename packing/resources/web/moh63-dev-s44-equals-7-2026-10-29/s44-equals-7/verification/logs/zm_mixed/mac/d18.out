@@ -1,0 +1,16 @@
+zeromargin.py sha256 3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc (*** DIFFERS FROM PINNED ***)
+sha256 1fd203469bb43a55ca7ce376b9717437e0970eead31941ec7fa100ab24d5ba95  zm_mixed.py
+sha256 bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5  mixed_cover.py
+sha256 3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc  zeromargin.py
+sha256 c9fde0f1e7013f3f61f4a8d673b6bcaf9c5e54c914b6462164d7326ba254cae0  input (../cert/s44_cover_7.txt)
+argv: zm_mixed.py cert ../cert/s44_cover_7.txt --d4 --nproc 1 --depth 30 --disj --chain-from 0 --cx-lo 3/2 --cx-hi 8/5 --cy-lo 2 --cy-hi 21/10 --u-lo 1/4 --u-hi 5/16 --resume ../mac/d18.jsonl --dump ../mac/d18_leaves.txt --manifest ../mac/d18_manifest.json
+settings: {"cert_mode": false, "chain": true, "chain_from": 0, "clip": true, "depth": 30, "lemma_L": true, "lemma_T": true, "mode": "D4", "pitch": "1/10", "reach": "442/625", "region": {"cx_hi": "8/5", "cx_lo": "3/2", "cy_hi": "21/10", "cy_lo": "2", "u_hi": "5/16", "u_lo": "1/4"}, "split": true, "split_maxchain": 400, "theta_bias": 4, "tprime": true, "ubins": 8}
+container [0,7]^2, 15525 points, 3912 segments on 12 lines, 0 polygons; total 2199755099/50000000 = 43.995101980
+D4: measure invariant under x -> m-x and x <-> y; roots [0,m/2]^2 x u in [0,1/2]
+PARTIAL SWEEP: cx [3/2, 8/5], cy [2, 21/10], u [1/4, 5/16] -- not a verification of the whole container
+1 root boxes x 1 cover(s), depth limit 30, pitch 1/10, u-bins 8, CHAIN on, Lemma T on, Lemma L on
+done in 1850s: boxes 4957, max depth 28, CPU 1506 s
+  leaves: PIECE 0  ADM 619  P1 0  MIX 0  CHAIN 294  SPLIT 1566  EMPTY 0  UNCERTIFIED 0   (leaves where Lemma T / Lemma L raised the piece bound: 759 / 1720; closed by Lemma T with line points: 0)
+leaves written to ../mac/d18_leaves.txt
+VERIFIED-D4 (PARTIAL)
+manifest written to ../mac/d18_manifest.json

@@ -1,4 +1,4 @@
-"""Audit the mixed covers for ``s(n)``, n = 21, 45, 59, 60, 76, 77 and 95, independently.
+"""Audit the mixed covers for ``s(n)``, n = 21, 44, 45, 59, 60, 76, 77 and 95, independently.
 
 A *mixed cover* is point masses plus mass spread uniformly along axis-parallel segments
 of the grid lines, of total below ``n``, such that every closed unit square in
@@ -18,7 +18,11 @@ three packets under ``resources/web/``:
   Benjamin Greff's ``s(76) = 9`` and ``s(95) = 10``, whose D4 region is *split*: ``zmx2``
   decides every root but a few, and ``zm_mixed.py`` the sub-roots that tile those. Each
   packet holds the source's ``zmx2`` log and sub-root records and this repository's
-  replay of both (``receipts/``).
+  replay of both (``receipts/``);
+- ``moh63-dev-s44-equals-7-2026-10-29/``: Mohsen Khalili and Sara Gharabaghi's
+  ``s(44) = 7``, which ``zmx2`` decides *whole* in both modes; the packet holds the
+  source's ``zmx2 --d4`` and ``--full`` logs and this repository's replay of each
+  (``receipts/``).
 
 This tool decides, with its own parser and exact integer arithmetic, the facts that do
 not need a sweep, and re-reads the sweeps' records without the source's summarisers:
@@ -114,7 +118,10 @@ not need a sweep, and re-reads the sweeps' records without the source's summaris
     ``s(13)`` and ``s(32)`` point covers, which must be present and whose totals must
     equal the ones ``search/ZMX2.md`` reports; the manifests; and, for the split covers,
     the source's composite and the replay's, the replay against the source root for
-    root and file for file, and the wall control's census against the replay's. What the
+    root and file for file, and the wall control's census against the replay's; for a
+    cover ``zmx2`` decides whole (``44``), the source's log and the replay's in each mode,
+    each clean, naming this cover by its hash and carrying the source's settings, and
+    the replay equal to the source root for root. What the
     retained files cannot decide (``s(59)``'s composite) is listed under ``undecided``
     and is not counted clean or failed.
 
@@ -174,6 +181,7 @@ EVAND_1001 = WEB / "evand-square-packing-2026-10-01/source/s12"
 WAND125_1001 = WEB / "wand125-point-and-mixed-2026-10-01/square-packing-bounds"
 BENGREFF_S76 = WEB / "bengreff-s76-certificate-2026-10-14"
 BENGREFF_S95 = WEB / "bengreff-s95-certificate-2026-10-15"
+KHALILI_S44 = WEB / "moh63-dev-s44-equals-7-2026-10-29"
 CHECKER_FILES = ("zm_mixed.py", "mixed_cover.py", "zeromargin.py")
 #: The checker files Hosono's ``verify.sh`` pins at evand ``b91d70b6`` (``zm_mixed.py``
 #: ``ee3e2915``), which the s(59) and s(77) manifests name; ``zeromargin.py`` is retained
@@ -240,6 +248,31 @@ class Split:
 
 
 @dataclass(frozen=True, slots=True)
+class Whole:
+    """Where a cover that ``zmx2`` decides whole keeps its runs, by mode.
+
+    The source's ``zmx2 cert`` log in each mode it published, and this repository's
+    replay's root log in the same mode.
+    """
+
+    source: tuple[tuple[str, Path], ...]
+    replay: tuple[tuple[str, Path], ...]
+    #: The ``zmx2 cert`` header fields the source's runs carry, as `Split.zmx2_settings`.
+    zmx2_settings: tuple[tuple[str, str], ...] = (
+        ("depth", "40"),
+        ("node_cap", "20000000"),
+        ("kappa", "1.5"),
+        ("K", "30"),
+    )
+
+    def source_log(self, mode: str) -> Path | None:
+        return dict(self.source).get(mode)
+
+    def replay_log(self, mode: str) -> Path | None:
+        return dict(self.replay).get(mode)
+
+
+@dataclass(frozen=True, slots=True)
 class Case:
     """One claim: the cover, the total the source states, and where the records live."""
 
@@ -268,6 +301,8 @@ class Case:
     directory: Path | None = None
     #: A split cover's records (`Split`); ``None`` for a cover one checker decides whole.
     split: Split | None = None
+    #: Where a cover ``zmx2`` decides whole keeps the source's logs and the replay's.
+    whole: Whole | None = None
 
     @property
     def bundle_dir(self) -> Path:
@@ -393,7 +428,35 @@ SPLIT_CASES = {
         split=_split(BENGREFF_S95, 95, "zmx2_s95_v2.log"),
     ),
 }
-MIXED_CASES = {**CASES, **IMPORTED_CASES, **SPLIT_CASES}
+#: Mohsen Khalili and Sara Gharabaghi's cover of 26 October, with the total and counts its
+#: README states. ``zmx2`` at evand ``659ee62`` (``zmx2.rs`` ``e2bb84e9``) certifies every
+#: root in both modes, so no ``zm_mixed.py`` record is part of the decision; the source's
+#: ``zm_mixed.py`` records are a second checker's, read by the review, not here.
+WHOLE_CASES = {
+    44: Case(
+        n=44,
+        side=7,
+        bundle="s44-equals-7",
+        cover="s44_cover_7.txt",
+        total=Fraction(2199755099, 5 * 10**7),
+        points=15525,
+        segments=3912,
+        zmx2_modes=(),
+        zm_mixed_records=False,
+        directory=KHALILI_S44 / "s44-equals-7/certificate",
+        whole=Whole(
+            source=tuple(
+                (mode, KHALILI_S44 / f"s44-equals-7/verification/logs/zmx2_{mode}.log")
+                for mode in ("d4", "full")
+            ),
+            replay=tuple(
+                (mode, KHALILI_S44 / f"receipts/n44_zmx2_{mode}_roots.log")
+                for mode in ("d4", "full")
+            ),
+        ),
+    ),
+}
+MIXED_CASES = {**CASES, **IMPORTED_CASES, **SPLIT_CASES, **WHOLE_CASES}
 #: A cover in the plain point format, audited by ``cover`` alone: its sweeps are the
 #: ``PointCoverRun`` below. Hosono's s(61) total is the one its ``provenance.json`` states.
 POINT_ONLY_CASES = {
@@ -1875,6 +1938,8 @@ def shipped_zmx2(n: int, mode: str) -> Path | None:
     case = MIXED_CASES[n]
     if case.split is not None:
         return case.split.zmx2 if mode == "d4" else None
+    if case.whole is not None:
+        return case.whole.source_log(mode)
     return case.bundle_dir / f"zmx2_{mode}/roots.log" if mode in case.zmx2_modes else None
 
 
@@ -2026,6 +2091,60 @@ def check_split_case(case: Case) -> tuple[dict[str, Any], bool]:
     return entry, clean
 
 
+def audit_whole_zmx2(case: Case, paths: Path | Sequence[Path], mode: str) -> dict[str, Any]:
+    """A ``zmx2`` log of a cover it decides whole: clean, naming this cover, as the source ran.
+
+    `audit_zmx2`, with the source's ``atoms``, plus every header naming this cover by the
+    FNV-1a 64 hash ``zmx2`` computes over its bytes and carrying the source's settings
+    (`Whole.zmx2_settings`). ``whole_clean`` is all of them.
+    """
+    if case.whole is None:
+        raise ValueError(f"s({case.n}) is not a cover zmx2 decides whole")
+    result = require_atoms(audit_zmx2(case, paths, mode), case.zmx2_atoms)
+    log = read_zmx2(paths)
+    cover_hash = _cover_fnv1a64(case.cover_path, _stamp(case.cover_path))
+    headers = [parse_zmx2_header(run.header)[0] for run in log.runs]
+    required = dict(case.whole.zmx2_settings)
+    result["cover_fnv1a64"] = cover_hash
+    result["headers_name_this_cover"] = bool(headers) and all(
+        fields.get("hash") == cover_hash for fields in headers
+    )
+    result["settings_required"] = required
+    result["settings_as_required"] = bool(headers) and all(
+        fields.get(k) == v for fields in headers for k, v in required.items()
+    )
+    result["whole_clean"] = (
+        zmx2_clean(result) and result["headers_name_this_cover"] and result["settings_as_required"]
+    )
+    return result
+
+
+def check_whole_case(case: Case) -> tuple[dict[str, Any], bool]:
+    """A cover ``zmx2`` decides whole: the cover, then in each mode the source's log and the
+    replay's, each clean (`audit_whole_zmx2`), and the replay equal to the source root for
+    root with every source root replayed."""
+    whole = case.whole
+    if whole is None:
+        raise ValueError(f"s({case.n}) is not a cover zmx2 decides whole")
+    entry: dict[str, Any] = {"cover": audit_cover(case)}
+    clean = cover_clean(entry["cover"])
+    for mode, source in whole.source:
+        entry[f"source_zmx2_{mode}"] = audit_whole_zmx2(case, source, mode)
+        clean &= entry[f"source_zmx2_{mode}"]["whole_clean"]
+        replay = whole.replay_log(mode)
+        if replay is None or not retained_exists(replay):
+            # The evidence entry replays from these receipts, so absence is a failure.
+            entry[f"replay_zmx2_{mode}"] = {"log": str(replay), "missing": True}
+            clean = False
+            continue
+        entry[f"replay_zmx2_{mode}"] = audit_whole_zmx2(case, replay, mode)
+        compared = compare_zmx2(source, replay)
+        entry[f"replay_zmx2_{mode}_vs_source"] = compared
+        clean &= entry[f"replay_zmx2_{mode}"]["whole_clean"]
+        clean &= zmx2_comparison_clean(compared) and compared["shipped_roots_not_replayed"] == 0
+    return entry, clean
+
+
 def check_packet() -> dict[str, Any]:
     """The cover, shipped-record and receipt audits over the packets' retained files."""
     report: dict[str, Any] = {}
@@ -2046,6 +2165,9 @@ def check_packet() -> dict[str, Any]:
             undecided[f"s{n}_zm_mixed"] = open_question
     for n, case in SPLIT_CASES.items():
         report[f"s{n}"], ok = check_split_case(case)
+        clean &= ok
+    for n, case in WHOLE_CASES.items():
+        report[f"s{n}"], ok = check_whole_case(case)
         clean &= ok
     for run in POINT_COVER_RUNS:
         if run.full_log is not None:
