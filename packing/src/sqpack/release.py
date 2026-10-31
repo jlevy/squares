@@ -9954,6 +9954,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/frontier/source-coverage.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake pass of 31 October 2026 (think-3guf, lane L5): three source-coverage "
+            "entries for the packets that retain the stalled watched-repository heads "
+            "bengreff/s76-certificate 0699398, ofitzharding/sq19 c86a991 and "
+            "Queuingtheorydotcom/11SquaresOptimal 4262f07. Against main 3978a7f61 (#841): "
+            "rendered at link revision c51d06d3 into empty site directories, twice from "
+            "this tree and once with main's source-coverage.yaml swapped in: "
+            "render_packing_methods writes all 43 files byte-identical across the three. "
+            "No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
 )
 
 
