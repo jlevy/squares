@@ -1540,6 +1540,14 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DANIEL_KAGGLE: "2026-10-24",
         DANIEL_806: "2026-10-25",
         DANIEL_824: "2026-10-26",
+        # Each the last first commit of its requested certificates (stage 3's first rule).
+        "mishapolk-1023-refinements-2026-10-30": "2026-10-23",
+        "couzo-issue843-2026-10-28": "2026-10-27",
+        "couzo-a5a5d76-2026-10-28": "2026-10-28",
+        "couzo-issue844-2026-10-28": "2026-10-28",
+        "evand-issue845-2026-10-29": "2026-10-29",
+        "evand-n299-update-2026-10-29": "2026-10-29",
+        "mishapolk-issue846-2026-10-30": "2026-10-30",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

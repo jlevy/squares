@@ -71,7 +71,7 @@ own child process: 6 jobs, 483,846 pair decisions, 85.7 route CPU seconds
 ([receipts/exact-certification.json.xz](receipts/exact-certification.json.xz)). Every positive passed and every control was refused on both routes.
 
 `devtools.upper_bound_reports sharp-controls` took each certificate to exact contact and
-1e-30 past it (). It lowered the side by the least far-wall clearance,
+1e-30 past it ([receipts/sharp-controls-n260.json](receipts/sharp-controls-n260.json), [receipts/sharp-controls-n307.json](receipts/sharp-controls-n307.json)). It lowered the side by the least far-wall clearance,
 closed the least-gap pair by its gap, and moved every square toward the nearer near wall
 by its least clearance: both routes accepted each at contact with margin 0 and refused
 each past it. It enlarged one square to its pair and one to its wall: both routes refused
