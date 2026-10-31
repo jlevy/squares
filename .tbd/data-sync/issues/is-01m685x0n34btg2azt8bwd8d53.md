@@ -5,14 +5,14 @@ title: "Validate #836: Karimi v5 two-strip rows the walk above 1024 records, bot
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m685wqakx05engdrvf9s4789
 created_at: 2026-10-31T05:11:15.363Z
-updated_at: 2026-10-31T05:13:02.780Z
+updated_at: 2026-10-31T06:14:12.094Z
 ---
 Stage 4 validation of #836's rows (import think-7yrs), the rows think-llit's walk above 1024 records from Mohsen Karimi's two-strip v5.0 deposit.
 
@@ -24,6 +24,6 @@ blocked_on: think-7yrs, think-llit
 - Cost: about 9.2 CPU-h (checker 0.035; positives 8.3 at 7.6 CPU-s a row; controls 0.9). Basis: W8's receipts (67 CPU-s for 2,824 rows decided) and R5's extrapolation (5.95 CPU-h for 2,825 rows, past the 3775 sample). An estimate until the 9944 measurement.
 - Budget status: gated on decision and dependencies (the deposit's retention, which needs zenodo.org; R1's walk); within the 40 CPU-h item cap.
 - Possible subset under the cap: not needed; the whole item fits. Six controls at every recorded count would be about 75 CPU-h, over the cap.
-- Depends on: think-7yrs stage 2 (zenodo.org reachable, or the owner fetches the zip); think-llit R1 (the walk above 1024); R5 (think-5dc3), with which these rows land.
+- Depends on: think-7yrs stage 2 (zenodo.org reachable, or the owner fetches the zip); a column set per deposit in two_strip_checker's reader, since parse_records refuses v5's extra below_all_reported column (review A2 of #848; code time, seconds of compute); think-llit R1 (the walk above 1024); R5 (think-5dc3), with which these rows land.
 - Done when: the decisions receipt and the replay receipts are committed in the packet, the rows are in source-coverage.yaml at the walk's verdicts, and check --replay passes for the release.
 - Machine note: about 2 cores for 4.6 wall-hours, or 1 core for 9; it can share the host with a gate if held to 1 core. Written-out certificates (~1 GB raw) go to scratch and are not retained.
