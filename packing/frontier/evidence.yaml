@@ -52575,6 +52575,122 @@ evidence:
       optimality and rigidity are not claimed or established. The source's 1,500- and
       3,000-digit runs share one code base, one active-set extraction and one KKT
       formulation.
+  - id: E-hyukdongkim-804-configurations-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [172, 263]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Kim exact forms 2026-10-25]'
+    certificate: packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.configuration_fact_replay
+      check --replay, which holds each fact to the member digest the comment states by
+      rebuilding the author's file byte for byte, rebuilds each configuration as a
+      centre-basis Witness/v2 over its field, and decides the positive, duplicate-square and
+      outside-container jobs again on sqpack's exact witness verifier, requiring the
+      retained verdicts (receipts/algebraic-route1-n172.json.xz and -n263.json.xz in the
+      packet; route1 --jobs-dir DIR --workers 2 wrote them).
+    replay_status: passed
+    verifiers: [V-sqpack-verify, V-configuration-fact-replay, V-algebraic-witness-reports]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two exact configurations, every unit-square identity, wall and pair decided
+          over each configuration's field on the one route, with its two controls each
+        checked: 2
+        of: 2
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier over
+            September and October 2026; each lane's tier and reasoning setting is not
+            retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the records lane of think-4rzl (bold-ritchie-l8, tbd-strong) on 31 October 2026,
+            which wrote the reader of the facts and read the author's comments as text
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author says Claude (Anthropic, Claude Opus 5.5) produced the construction, his
+          second checker and the controls at his direction. No route here imports or copies
+          the author's code; his checker, controls and distance script were never opened.
+    limitations: >-
+      One route over a number field: sqpack's exact witness verifier builds every square
+      in its configuration's field, of degree 24 at 172 and 17 at 263, and decides each
+      unit-square identity, wall and pair by exact signs, on 31 October 2026 under CPython
+      3.14.7 at two processes, nice, on a shared four-core host: both positives accepted
+      with every pair decided, a duplicated square refused on overlap and a square moved
+      outside the box refused on containment at both counts; 147,477 pair decisions in
+      5,197 route CPU seconds, the longest job 1,689 s. Each configuration states
+      the angle parameter of its axis-aligned squares as the empty list, 127 at 172 and 184
+      at 263, which the reader takes as zero, as verify_exact.py does; the receipt lists
+      them. Before deciding, the reader holds each fact to the member digest the comment
+      states and each side to T-244's: the same irreducible polynomial, a root of it in the
+      field, and one real root in the hull of the configuration's enclosure and T-244's
+      isolating interval (receipts/side-check.json). verify_exact.py, run unchanged on the
+      rebuilt files, is a second route beside this one
+      (E-hyukdongkim-804-configurations-verify-exact). At 172 the side is 1.053e-3 above
+      the case's house since 31 October 2026 (T-257), so the configuration realizes T-174's
+      retired packing; at 263 it is 2.126e-94 below the house, T-174's rational
+      certificate. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity or human oversight.
+    source_reviewed: '2026-10-31'
+  - id: E-hyukdongkim-804-configurations-verify-exact
+    claim: upper-bound
+    scope: {n_values: [172, 263]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Kim exact forms 2026-10-25]'
+    certificate: packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.configuration_fact_replay
+      route2 --scratch DIR --workers 2, which rebuilds each author's file byte for byte
+      from its fact, runs the retained verify_exact.py (SHA-256 a0f38ca8...bab4) unchanged
+      on it in its own python -I process, which must print VALID, and on four mutated
+      controls, each of which must print NOT VERIFIED (receipts/route2-verify-exact.json in
+      the packet); check admits the receipt.
+    replay_status: passed
+    verifiers: [V-evand-verify-exact, V-configuration-fact-replay]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two exact configurations, each decided whole by the source's checker
+    limitations: >-
+      Evan Daniel's verify_exact.py, the checker the author reports running, read first and
+      run unchanged here from the copy the evand-exact-and-local-reports-2026-10-12 packet
+      retains (byte-identical at 7d1407a and ad86d42; the author ran it at 659ee62, which
+      is not retained here), on 31 October 2026 under CPython 3.14.7: VALID at both counts.
+      At 172 it proved 1,026 touching incidences as identities in K, 4,030 strict by
+      intervals and 14,130 pairs by discs, in 7.48 CPU seconds; at 263, 1,593, 6,231 and
+      33,549, in 11.27 CPU seconds; as the author's comment states. Four mutated controls
+      at each count were refused,
+      eight in all: a square moved 1e-6 through the wall it touches (the files list no
+      contacts, so an axis-aligned square whose centre coordinate is exactly 1/2), the side
+      raised by 1e-6 in the field, the side's interval moved below its root, and a duplicate
+      square. 40.07 CPU seconds for the ten runs. Counted as a reproduction with the
+      source's check: the author built the configurations and ran this checker on them, and
+      the record does not know whether his construction reused Daniel's code. The checker
+      reads only the first n squares, which the reader holds each file to. Finite
+      feasibility only.
+    source_reviewed: '2026-10-31'
   - id: E-hyukdongkim-804-s297-report
     claim: upper-bound
     scope: {n_values: [297]}

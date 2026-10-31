@@ -502,7 +502,7 @@ def route2(scratch: Path, workers: int) -> dict[str, Any]:
             "sha256": CHECKER_SHA256,
             "upstream": CHECKER_UPSTREAM,
             "read_before_running": True,
-            "relationship_to_generator": "shared-components",
+            "relationship_to_generator": "same-implementation",
             "where": (
                 "run unchanged from the retained copy, each file in its own python -I child"
             ),

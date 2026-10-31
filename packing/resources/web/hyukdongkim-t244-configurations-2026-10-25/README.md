@@ -104,7 +104,7 @@ archive’s own checker, controls and distance script were never opened.
   becomes a centre-basis Witness/v2 over K through `evand_minpoly_geometry`, and
   `sqpack.witness.exact_verify` decides it: both positives accepted with every pair
   decided, a duplicated square refused on overlap and a square moved outside the box
-  refused on containment, {R1_SUMMARY}. The 127 squares at 172 and 184 at 263 whose angle
+  refused on containment, 147,477 pair decisions in 5,197 CPU seconds over the six jobs, the positives 733 s at 172 and 1,033 s at 263. The 127 squares at 172 and 184 at 263 whose angle
   parameter is the empty list are read as zero, as `verify_exact.py` reads them; the
   receipt lists them.
 - **Route 2** (`route2`, `receipts/route2-verify-exact.json`). The retained
@@ -112,7 +112,7 @@ archive’s own checker, controls and distance script were never opened.
   printed VALID at both counts. It refused four mutated controls at each: a square moved
   1e-6 through a wall it touches (the files list no contacts, so an axis-aligned square
   whose centre coordinate is exactly 1/2), the side raised by 1e-6 in K, the side’s
-  interval moved below its root, and a duplicated square. {R2_SUMMARY}.
+  interval moved below its root, and a duplicated square. At 172 it proved 1,026 touching incidences as identities in K and at 263 1,593, as the author’s comment states; the ten runs took 40 CPU seconds.
 
 At 172 the side is 1.053e-3 above the case’s house since 31 October 2026 (T-257), so the
 configuration realizes T-174’s retired packing. At 263 it is 2.126e-94 below the house,
