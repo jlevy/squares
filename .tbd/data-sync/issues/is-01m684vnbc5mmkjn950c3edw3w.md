@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: open
 priority: 1
-version: 17
+version: 18
 labels:
   - result-import
 dependencies: []
@@ -23,9 +23,11 @@ child_order_hints:
   - is-01m686kknmrk1xt97vne82cnea
   - is-01m687rz8hpgevyt6xe2j9p4bb
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T06:17:27.830Z
+updated_at: 2026-10-31T06:52:47.206Z
 ---
 
 ## Notes
 
 2026-10-31 L2 (bold-ritchie-l2), branch claude/bold-ritchie-xo28us-upper: #843 (think-big9), #844 + Couzo a5a5d76 (think-n61j), #845 (think-17wo), #824 update (think-3xn9), #846 + Mishapolk 23 October e386aab-fbc1749 (think-pg1y): seven packets, ledger upper-bounds-843-846-20261031, T-252..T-258 at V0/C0 (positions from main 3978a7f61; renumber if another lane registers first), both exact routes + gross and sharp controls + identity on every certificate. Validation beads (reviews, then adoption with both regularizations at 22 counts): think-oy8d, think-dwzb, think-nkt1, think-8hjz, think-ikku. intake_ledger.tree_members now reads pending adoption count by count (T-193 at 88, 126). Reads: evand 0e76d9f, franciscouzo 712c6a6, Mishapolk 52aa267, wand125 7a47ab9, TheSnakeFang d56c9a0. Owner decisions: 152 undecided vs T-122; whether in-corpus sub-print re-certifications are restatements.
+
+2026-10-31 06:53 hourly check: #835 merged (32ef0861b) after review A + addressing pass; think-j83l closed. #833 (c884c37d2) and #834 (41cbe77c1) reviewed, all findings addressed, CI running; #848 being re-merged with main by L4. #666/#715/#719 now record blocked: owner-decision (D3/D4/D5); labels restored after #833 merges. No new GitHub issues since 05:50. L2, L3, L5 running.
