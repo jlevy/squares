@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **827** evidence records. **471** are formal; **462** of those were established here. **12** are samples, counted separately.
-- **338** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **834** evidence records. **471** are formal; **462** of those were established here. **12** are samples, counted separately.
+- **345** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -850,13 +850,20 @@ results, it is a statement about what this repository has itself examined.
 | `E-k2m3-wand125-valid7-lean-v1-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-k2m3-wand125-valid7-lean-v2-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-k2m4-wand125-validtilt9-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-mishapolk-1023-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-843-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-a5a5d76-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-844-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-845-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-n299-update-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-mishapolk-846-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 340, verified 482
-- **method**: exact-algebraic 243, interval-certified 221, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 340
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 766
-- **relationship to the producer's code**: generator 5, independent-implementation 310, not-applicable 34, same-implementation 434, shared-components 38, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 347, verified 482
+- **method**: exact-algebraic 243, interval-certified 221, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 347
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 773
+- **relationship to the producer's code**: generator 5, independent-implementation 310, not-applicable 34, same-implementation 441, shared-components 38, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

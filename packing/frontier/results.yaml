@@ -36843,8 +36843,8 @@ results:
       the register credits a regularization: at 130 Francisco Couzo's packing of issue 843, and
       at 105, 146, 156, 229 and 308 the house packing each case holds, as the measurement here pairs
       them. The issue reports eight more counts that the ledger of 31 October does not record: 182,
-      268 and 304 lie above each case's house, 260 above issue 845's certificate, 299 above Evan
-      Daniel's update to issue 824, 204 ties T-231, and 211 and 241 restate the source's own certificates
+      268 and 304 lie above each case's house, 204 and 260 above issue 845's certificates, 299 above Evan
+      Daniel's update to issue 824, and 211 and 241 restate the source's own certificates
       first committed on 23 October.
     scope:
       n_values:
@@ -36949,7 +36949,7 @@ results:
 
       The issue's other eight certificates, at 182, 204, 211, 241, 260, 268, 299 and 304, are compared
       in the packet's claim record and replayed; the ledger records none of them (182, 268 and 304
-      above the house, 260 above #845, 299 above Evan Daniel's update to #824, 204 a tie with T-231,
+      above the house, 204 and 260 above #845, 299 above Evan Daniel's update to #824,
       and 211 and 241 the source's own e386aab certificates, which T-252 records).
 
       The source's own checkers were not run here. The two maintained routes, the sqpack rational

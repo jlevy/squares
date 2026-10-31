@@ -1,0 +1,92 @@
+# The report-order verdict comments of the 31 October ledger (lane L2 of the intake pass,
+# think-3guf) for #843, #844, #845, #846 and Evan Daniel's update to #824, as
+# devtools.intake_comments drafts them from the ledger.json beside this file. Each is to be
+# folded into its issue's import reply once the records pull request merges, under the
+# answer beads think-big9, think-n61j, think-17wo, think-pg1y and think-3xn9, and recorded
+# under the issue's `replies` in campaign/result-requests.yaml.
+#
+# From packing/:
+#   python -m devtools.intake_comments \
+#     campaign/issue-intake/upper-bounds-843-846-20261031/comments.yaml --out DIR
+
+ledger: packing/campaign/issue-intake/upper-bounds-843-846-20261031/ledger.json
+records_pr: jlevy/squares#RECORDS_PR
+
+names:
+  "[Kingbird]": the Kingbird catalogue
+  "register T-248, pending adoption": your opening post's certificate, registered and pending adoption
+  "register T-193, pending adoption": Evan Daniel's exact algebraic side, registered and pending adoption
+  "register T-122, pending adoption": Evan Daniel's exact side, registered and pending adoption
+  "register T-244, pending adoption": Hyukdong Kim's exact side, registered and pending adoption
+
+skip:
+  - report: Mishapolk/square-packing-records@e386aab
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@07b3393
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@6664afc
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@3d409a5
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@fb8b812
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@c695b4c
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@6c0d74a
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@e9f3979
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@a0ba35f
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: Mishapolk/square-packing-records@fbc1749
+    reason: a publication with no issue; its author's #846 reply covers it
+  - report: franciscouzo/square-packing@a5a5d76
+    reason: a publication with no issue; its author's #844 reply covers it
+
+comments:
+  - issue: 843
+    author: franciscouzo
+    notes:
+      - >-
+        Your 130 was below everything reported before it, so it is recorded, a new packing
+        found from PR #574's. Mykhailo Polkovskyi's #846, two days later, is a 2e-14 dilation
+        of your packing 2.08e-12 below your certificate's side; the ledger records it as a
+        refinement of your packing, which keeps your credit.
+  - issue: 844
+    author: franciscouzo
+    notes:
+      - >-
+        Your a5a5d76 of 28 October, which no issue reports, publishes certificates at 260 and
+        307 first, so the ledger records them from that commit; this issue's three are each
+        below everything before them and are recorded after them. At 260 Evan Daniel's #845,
+        the next morning, is lower again.
+  - issue: 845
+    author: evand
+    notes:
+      - >-
+        All four are below everything reported before them, so each is recorded, a new packing
+        as you say. At 260 the reports before yours are Francisco Couzo's a5a5d76 and #844.
+  - issue: 824
+    author: evand
+    reports: ["#824 update"]
+    notes:
+      - >-
+        Your update of 29 October is below the opening post's certificate, so it is recorded
+        as well. Mykhailo Polkovskyi's #846 states 17.803695435316 at 299, a day later and
+        above it, so it is not.
+  - issue: 846
+    author: Mishapolk
+    layout: by-count
+    notes:
+      - >-
+        Six of the fourteen are recorded: 130, below Francisco Couzo's #843 certificate, and
+        105, 146, 156, 229 and 308, each below its case's house. At 182, 268 and 304 the house
+        is lower; at 204 and 260 Evan Daniel's #845 and at 299 his update to #824 came first and are
+        lower; and 211 and 241 are the certificates you first
+        published on 23 October (e386aab), which the ledger records from that commit.
+      - >-
+        Your ten commits of 23 October, e386aab to fbc1749, are walked as publications from
+        their commits: the ledger records nine of them (154, 155, 183, 211, 227, 236, 237, 241
+        and 271), and not 88 and 126, which lie above the exact algebraic sides a register
+        entry states there, 152, which it cannot yet order against one, or 204 and 270, which
+        equal the houses.
