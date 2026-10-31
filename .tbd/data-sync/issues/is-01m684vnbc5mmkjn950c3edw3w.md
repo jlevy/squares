@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 32
+version: 33
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -34,7 +34,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T09:28:17.673Z
+updated_at: 2026-10-31T09:53:13.363Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -52,3 +52,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 07:55 hourly: sweep re-run on main 37ede3936+ (scratchpad/intake2.txt): no new issues past #847, no new watched-repo heads; remaining items are owned by open branches (#833, #849, #850, #851, #852, #853, #817). Merged so far: #835, #848, #834. #613 closed with final comment.
 
 2026-10-31 08:53 hourly: merged #833 (b95c5f69c), #853 (c94df7cef), #850 (84ba6fa9c); total this pass 6 (#835 #848 #834 #833 #853 #850). Posted: #613 final, follow-ups #316 #797 #799 #804 #824, acks #836 #847. Labels restored #666/#715/#719. Queue: #854 (re-merging main), #849 (fixes pushed), #851 (fixes in progress), #817 (fixes in progress), #852 (landing 3 stage-4 reviews + adopting 8 counts: 130 172 204 232 260 293 299 307). Owner decisions open: Polkovskyi 14 near-restatements (think-ikku), s(152) tie vs T-122, s(29) S* registration and identity funding, exactness-only regularization (think-j68m), zenodo access, D4 hosting, Q-847a, #744/#599/#809. Beads filed: think-t9uj (closing keywords), release.py append-conflict efficiency bead. No new issues since 07:50.
+
+2026-10-31 09:54 hourly: merged #849 (15450a44d); 7 merged this pass. Main's scheduled slow-lane red at c94df7cef diagnosed: 1800 s budget kill on a slow runner, standing since 24 Oct, not today's merges (think-m2th, owner options); 1 s floor flake fixed in #855 (in review fixes). #854 frontend timeout = standing contention flake (think-yriz). Rerun-failed-jobs is 403 for this integration; no empty commits (note: #850 used one earlier, before review). Queue: #854 (CI running at bfa050ffa), #851 (green incl. deep gate, needs one main merge), #855, #817, #852. No new issues since 08:50.
