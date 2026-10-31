@@ -1147,6 +1147,7 @@ issues:
     - think-00e3
     - think-05m9
     - think-tiou
+    - think-93nb
     answer_bead: think-ybmt
     replies:
     - url: https://github.com/jlevy/squares/issues/375#issuecomment-6004562871
@@ -3546,7 +3547,8 @@ issues:
     - think-yquo
     - think-kqd3
     - think-qc6y
-    answer_bead: think-qc6y
+    - think-93nb
+    answer_bead: think-93nb
     replies:
     - url: https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
       date: '2026-10-07'
@@ -16966,7 +16968,8 @@ issues:
     beads:
     - think-xu4d
     - think-fpnd
-    answer_bead: think-xu4d
+    - think-93nb
+    answer_bead: think-93nb
     replies:
     - url: https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
       date: '2026-10-19'
@@ -24048,6 +24051,7 @@ issues:
     - think-hx0e
     - think-o4m0
     - think-gn29
+    - think-93nb
     answer_bead: think-ptkk
     replies:
     - url: https://github.com/jlevy/squares/issues/763#issuecomment-6384882980
@@ -25011,7 +25015,7 @@ issues:
     beads:
     - think-4tj5
     - think-mbuh
-    answer_bead: think-4tj5
+    answer_bead: think-mbuh
     replies:
     - url: https://github.com/jlevy/squares/issues/797#issuecomment-6392638719
       date: '2026-10-25'
@@ -25647,7 +25651,8 @@ issues:
     beads:
     - think-2lzo
     - think-meci
-    answer_bead: think-2lzo
+    - think-93nb
+    answer_bead: think-93nb
     replies:
     - url: https://github.com/jlevy/squares/issues/806#issuecomment-6395681914
       date: '2026-10-25'
