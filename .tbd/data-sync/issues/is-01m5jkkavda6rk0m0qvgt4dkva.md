@@ -5,7 +5,7 @@ title: "Import Mishapolk: 5,468 certificates 328–10000 at 814fbe9, '#715 resol
 kind: task
 status: open
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: null
 labels:
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:07:20.685Z
-updated_at: 2026-10-24T10:53:10.296Z
+updated_at: 2026-10-31T11:17:55.965Z
 started_at: 2026-10-23T02:12:17.764Z
 ---
 Issue #732 (https://github.com/jlevy/squares/issues/732), opened 2026-10-22T19:55:03Z by Mishapolk (Mykhailo Polkovskyi): "328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof". Source Mishapolk/square-packing-records@814fbe9129b7abb301923cc50de621697a53940f (upper_bounds.json, certified_bounds.json, certificates/manifest.json, certificates/census.json with digests in the issue).
@@ -147,3 +147,5 @@ holds decide 369, 376, 985 and 499)
 
 2026-10-24 coord-intake-1024: #730 merged and the f1ceee4 import landed (#769). What #732 still waits on: the rows above 1024 (think-llit's code PR and walk), 985 and the deletion question D6 (think-kzme), and per-row credit beyond the corpus (D5, think-f2io). Released from c-lane-732-import-1023 (no live lane).
 blocked_on: think-llit, think-kzme, think-f2io
+
+2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner: #732's rows above 1024 are recorded by think-llit's walk (bold-ritchie-l4, live on 31 October), which needs D4 (hosting the certificates above 1024) and zenodo.org access for the #836 and #847 deposits it must read; per-row credit (D5, think-f2io) and the deletion-bound rows (think-kzme) are the owner's too. Nothing here runs before then.

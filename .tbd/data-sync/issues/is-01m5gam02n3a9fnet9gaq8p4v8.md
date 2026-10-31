@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: coord-intake-1024
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-24T08:27:00.174Z
+updated_at: 2026-10-31T11:18:14.536Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -138,3 +138,5 @@ declares yet. Packet README, Held Back and Not Recorded.
 - think-kzme's description and notes are corrected the same way.
 
 2026-10-24 coord-intake-1023: D5 now includes Polkovskyi's request, in his #732 comment of 20:35:12Z on 23 October, for sole credit at 11 counts of the f1ceee4 release. His manifest calls all 138 refinements of Couzo's topology (127 under one wording, 11 under another). #769 records the request as queued and measures it pose by pose in `receipts/pose-identity.json`; it decides nothing. The owner's D5 answer, on how per-row credit beyond the corpus names a packing it refines, decides it.
+
+2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner: D3 (whether 335 is recorded), D4 (host the certificates above 1024 or commit them; think-llit's note of 31 October), D5 (per-row credit beyond the horizon, which takes in #686's provenance ask and Polkovskyi's ask for sole credit at 11 counts), and whether the D1 answer, no ceiling, declines #732's ask to cap tracking at N = 10,000. D1, D2 and D6 are answered.
