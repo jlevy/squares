@@ -10279,9 +10279,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "the same 43 files, byte-identical across the three. Measured again after "
             "merging main 32ef0861b (#835), at link revision be1793a4 with that main's "
             "result-requests.yaml swapped in, and after merging main 37ede3936 (#848), at "
-            "link revision a66be6d2 with that main's file swapped in: 43 files, "
-            "byte-identical across the three each time. No PDF was printed; it prints from "
-            "that HTML. Retain v0.2.7."
+            "link revision a66be6d2 with that main's file swapped in, and after merging "
+            "main 90b79dbe1 (#851), at link revision 67d55d0b with that main's file swapped "
+            "in: 43 files, byte-identical across the three each time. No PDF was printed; "
+            "it prints from that HTML. Retain v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
@@ -10314,8 +10315,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_lower_bounds_explainer, with its math pass in Chromium 1243 "
             "(SQPACK_CHROMIUM), render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods: 69 files each, "
-            "all byte-identical across the three. No PDF was printed; each prints from "
-            "that HTML. Every paper keeps its version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
+            "all byte-identical across the three. Measured again after merging main "
+            "90b79dbe1 (#851), which cut the explainer's v0.4.33, at link revision 67d55d0b "
+            "with that main's two inputs swapped in: 69 files each, byte-identical across "
+            "the three. No PDF was printed; each prints from that HTML. Every paper keeps "
+            "its version: v0.4.33, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
