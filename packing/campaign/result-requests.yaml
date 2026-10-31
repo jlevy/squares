@@ -28,7 +28,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-25'
+last_reviewed: '2026-10-31'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -1610,6 +1610,93 @@ issues:
             verification: V3
             confirmation: C3
             status: confirmed
+      - url: https://github.com/jlevy/squares/issues/366#issuecomment-6539478703
+        date: '2026-10-31'
+        by: jlevy
+        kind: follow-up
+        reported:
+          - result: n18-470
+            id: T-096
+            verification: V3
+            confirmation: C3
+            position: superseded
+          - result: n18-4704
+            id: T-099
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: superseded
+          - result: n18-4704
+            id: E-n018-wand125-mixed-4704-sqverify-fast-replay
+          - result: n19-48229
+            id: T-100
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: superseded
+          - result: n19-48229
+            id: E-n019-wand125-mixed-48229-sqverify-fast-replay
+          - result: check2-t-102
+            id: T-102
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-103
+            id: T-103
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-104
+            id: T-104
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-105
+            id: T-105
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-106
+            id: T-106
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-107
+            id: T-107
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-108
+            id: T-108
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-109
+            id: T-109
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-110
+            id: T-110
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: check2-t-111
+            id: T-111
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+        beads: [think-zcnr]
     close_when: >-
       The s(18) certificate is confirmed or refuted and the reply saying so is posted from
       main, and the offered sqverify_fast change is taken in or declined; and the two
@@ -2858,6 +2945,23 @@ issues:
             verification: V3
             confirmation: C3
             status: confirmed
+      - url: https://github.com/jlevy/squares/issues/256#issuecomment-6539479320
+        date: '2026-10-31'
+        by: jlevy
+        kind: follow-up
+        reported:
+          - result: s60
+            id: T-062
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: s61
+            id: T-063
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
     close_when: T-062 and T-063 are confirmed, and the reply saying so is posted from main.
     notes: >-
       The author's comment of 2 October corrects the issue's citation of Nagamochi's general bounds
@@ -3063,6 +3167,37 @@ issues:
           - result: s32-no-fold
             id: E-n032-evand-zmx2-full-sym-replay
             status: confirmed
+      - url: https://github.com/jlevy/squares/issues/238#issuecomment-6539480052
+        date: '2026-10-31'
+        by: jlevy
+        kind: follow-up
+        reported:
+          - result: s32
+            id: T-051
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: s21
+            id: T-052
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: s32-no-fold
+            id: T-051
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
+          - result: s32-no-fold
+            id: E-n032-evand-zmx2-full-sym-replay
+          - result: s61-point-route
+            id: T-063
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: current
     close_when: >-
       A follow-up corrects the reply of 29 September (V3/C3 under the ladder of 30
       September, #245 merged, the re-sweeps restarted, the Lean builds) and states the
@@ -3078,10 +3213,12 @@ issues:
       zmx2's author could read, which that final reply said was not public, is retained in the 4 October
       evand packet and cited on T-051 (think-83zc). The author’s later wrapper fix at cca7bf1f53c038907a819815c5e441df9783e93d
       requires both exit0 and the exact VERIFIED line, stops on a failed unpiped cargo build and corrects
-      the closed-square header to interior disjointness. The verify/zmcheck exit table separates refused,
+      the header, which said "interior", to the closed square, as the code and FORMAT.md have it (this
+      note said the reverse until 31 October 2026, think-6m6e). The verify/zmcheck exit table separates refused,
       error and partial outcomes; zmx2 still returns0 for every verdict and requires reading its verdict
       line. These are recorded source packaging fixes, not new mathematical claims or an independently
-      executed wrapper check.
+      executed wrapper check. The follow-up of 31 October (issuecomment-6539480052) reports them and the
+      unchanged standing of T-051, T-052 and T-063.
 
   - number: 227
     title: 102 and 103
