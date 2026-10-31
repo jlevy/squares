@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 35
+version: 36
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -35,7 +35,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T11:14:47.655Z
+updated_at: 2026-10-31T11:22:45.552Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -57,3 +57,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 09:54 hourly: merged #849 (15450a44d); 7 merged this pass. Main's scheduled slow-lane red at c94df7cef diagnosed: 1800 s budget kill on a slow runner, standing since 24 Oct, not today's merges (think-m2th, owner options); 1 s floor flake fixed in #855 (in review fixes). #854 frontend timeout = standing contention flake (think-yriz). Rerun-failed-jobs is 403 for this integration; no empty commits (note: #850 used one earlier, before review). Queue: #854 (CI running at bfa050ffa), #851 (green incl. deep gate, needs one main merge), #855, #817, #852. No new issues since 08:50.
 
 2026-10-31 10:55 hourly: merged #854 (5b4484fe0) and #855 (49dac4354); 9 merged this pass. Closed think-8krd, think-6m6e. Sweep on main 49dac4354 (scratchpad/intake3.txt): 11 unowned (all on open PRs #851/#852), 0 closeable open, 0 regularization owed, 73 stalled-bead items -> lane L6 triage (claude/bold-ritchie-xo28us-quiet). #851 re-running CI after slow-runner timeouts; #852 in senior+correctness review (strong-max); #817 waiting its turn.
+
+2026-10-31 11:35: #851 merged (90b79dbe1): s(44)=7 T-252, n=44 proved; 10 merged this pass. L6 triage (think-ztcy): stalled 73 -> 16; 34 items owner-decision (13 new owner questions listed in think-ztcy: D5 credit naming beyond horizon, D3 #715 335, think-kzme deletion rows, #732 N=10000 cap, #593 joint credit, #573 T-173 credit, #529 T-159, #574 merge/close, #521 replayed annotation, #522 strategy catalogue, #524-#527 Summins requests, #317 umbrella close, #543 check2 retention/tolerance), 20 standing-hold, 7 author, 3 dependency, 9 actionable. Actionable now: replies #375/#522/#763 -> lane L7. After #852 merges: think-4rzl (#804 T-244 172/263, ~3 CPU-h), think-7scz (#545 grade-C registration), think-flxm (sqverify_continuous v4 replay ~1.4-5.2 CPU-h), think-63vx (Lean build 41 modules ~2.1 h + remeasure).
