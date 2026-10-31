@@ -931,7 +931,6 @@ Use the structured form to query or plot; use these tables to read.
 | 41 | 6.92669309 | annealing | 42 | 6.775 | counting | 0.1517 |
 | 42 | 7 | grid | — | 6.8475 | counting | 0.1525 |
 | 43 | 7 | grid | — | 6.9075 | counting | 0.0925 |
-| 44 | 7 | grid | — | 6.9725 | counting | 0.0275 |
 | 50 | `7 + (4/7)` = 7.57142857 | annealing | — | 7.4 | counting | 0.1714 |
 | 51 | `(16+5*√2)/3` = 7.69035594 | — | 2 | 7.47 | counting | 0.2204 |
 | 52 | `7 + (1/2)√2` = 7.70710678 | strip | — | 7.55 | counting | 0.1571 |
@@ -1187,6 +1186,7 @@ Use the structured form to query or plot; use these tables to read.
 | 34 | `6` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 35 | `6` | unavoidable points | Erich Friedman (1999) | proved |
 | 36 | `6` | perfect square | classical | proved |
+| 44 | `7` | counting | Khalili, Gharabaghi (2026) | proved |
 | 45 | `7` | counting | Evan Daniel (2026) | proved |
 | 46 | `7` | unavoidable points | Wolfram Bentz (2010) | proved |
 | 47 | `7` | Nagamochi | Hiroshi Nagamochi (2005) | proved |

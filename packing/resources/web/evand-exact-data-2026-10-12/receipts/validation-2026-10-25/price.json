@@ -1,0 +1,131 @@
+{
+  "sample_identity": {
+    "identity": "Sn(tau) - x Sd(tau) = 0 (the sample: least degree)",
+    "numerator_degree_bound": 43273,
+    "numerator_height_bits_bound": 113236,
+    "exact_numerator_gigabytes": 0.61,
+    "exact_division_cpu_hours_estimate": 6.6,
+    "resultant_bits_bound": 1546411752,
+    "bad_primes_bound": 25351013
+  },
+  "exact_route": {
+    "method": "build each cleared numerator H in Z[x] and test p | H by exact division (Gauss's lemma: p is primitive)",
+    "memory_gigabytes": {
+      "F_1(tau) = 0": 11.77,
+      "F_2(tau) = 0": 4.39,
+      "F_3(tau) = 0": 4.49,
+      "F_4(tau) = 0": 2.45,
+      "F_5(tau) = 0": 11.66,
+      "Sn(tau) - x Sd(tau) = 0 (the sample: least degree)": 0.61
+    },
+    "cpu_hours_estimate": 436.8,
+    "measured_denominator_growth_of_x_power_reductions": [
+      {
+        "power": 7213,
+        "denominator_bits": 1080,
+        "lead_bits_times_j_plus_1": 1080
+      },
+      {
+        "power": 7214,
+        "denominator_bits": 1098,
+        "lead_bits_times_j_plus_1": 2160
+      },
+      {
+        "power": 7215,
+        "denominator_bits": 1118,
+        "lead_bits_times_j_plus_1": 3240
+      },
+      {
+        "power": 7216,
+        "denominator_bits": 1134,
+        "lead_bits_times_j_plus_1": 4320
+      },
+      {
+        "power": 7217,
+        "denominator_bits": 1157,
+        "lead_bits_times_j_plus_1": 5400
+      },
+      {
+        "power": 7218,
+        "denominator_bits": 1175,
+        "lead_bits_times_j_plus_1": 6480
+      },
+      {
+        "power": 7219,
+        "denominator_bits": 1199,
+        "lead_bits_times_j_plus_1": 7560
+      }
+    ],
+    "note": "the cost is the classical exact division, quotient steps times p's coefficients, at a multiplication time measured here; the reduced representatives in Q[x]/(p) are far smaller than lc(p)^(n-1) suggests (their common denominator grows about 20 bits a degree, measured), but no reduction-based route avoids an exact product per term",
+    "model_omits": [
+      "building each H: about 5,073 terms at n = 29, each a product of up to 26 polynomials of degree at most 7212, which is not priced",
+      "quasi-linear exact division by Kronecker substitution, which this module uses for the factorizations and which could make the division far cheaper"
+    ],
+    "timed_on": {
+      "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+      "machine": "x86_64",
+      "cpus": 4,
+      "load_average_1_5_15": [
+        3.31,
+        5.68,
+        6.87
+      ],
+      "note": "the multiplication time is wall clock on this host, so the CPU-hours scale with the host and its load"
+    }
+  },
+  "modular_route": {
+    "method": "zero modulo enough primes above 2^61 that their product exceeds the resultant bound of p and H",
+    "identities": [
+      {
+        "identity": "F_1(tau) = 0",
+        "numerator_degree_bound": 187512,
+        "numerator_height_bits_bound": 502083,
+        "exact_numerator_gigabytes": 11.77,
+        "exact_division_cpu_hours_estimate": 148.7,
+        "resultant_bits_bound": 6783041916,
+        "bad_primes_bound": 111197409
+      },
+      {
+        "identity": "F_2(tau) = 0",
+        "numerator_degree_bound": 115392,
+        "numerator_height_bits_bound": 304353,
+        "exact_numerator_gigabytes": 4.39,
+        "exact_division_cpu_hours_estimate": 58.4,
+        "resultant_bits_bound": 4140872226,
+        "bad_primes_bound": 67883152
+      },
+      {
+        "identity": "F_3(tau) = 0",
+        "numerator_degree_bound": 115392,
+        "numerator_height_bits_bound": 311228,
+        "exact_numerator_gigabytes": 4.49,
+        "exact_division_cpu_hours_estimate": 54.2,
+        "resultant_bits_bound": 4190461601,
+        "bad_primes_bound": 68696092
+      },
+      {
+        "identity": "F_4(tau) = 0",
+        "numerator_degree_bound": 86544,
+        "numerator_height_bits_bound": 226411,
+        "exact_numerator_gigabytes": 2.45,
+        "exact_division_cpu_hours_estimate": 28.5,
+        "resultant_bits_bound": 3092299300,
+        "bad_primes_bound": 50693432
+      },
+      {
+        "identity": "F_5(tau) = 0",
+        "numerator_degree_bound": 187512,
+        "numerator_height_bits_bound": 497446,
+        "exact_numerator_gigabytes": 11.66,
+        "exact_division_cpu_hours_estimate": 140.4,
+        "resultant_bits_bound": 6749595235,
+        "bad_primes_bound": 110649103
+      }
+    ],
+    "primes_needed_above_2^61": 111197410,
+    "measured_seconds_per_prime_all_identities": 286.0,
+    "cpu_hours": 8834016.5,
+    "identities_checked_per_prime": 6
+  },
+  "cpu_seconds": 6.9
+}

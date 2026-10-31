@@ -649,6 +649,7 @@ key remain bound to the bytes they originally named.
 | [ofitzharding/sq19](https://github.com/ofitzharding/sq19) | Oscar Fitzharding’s Lean 4 proof that `s(19) = 3 + 4√2/3`, `Sq19.square19_optimality`, announced on 16 October 2026: the source reports a kernel replay of the theorem’s 13,143-module import closure, trusting Lean’s compiler for 4,320 `native_decide` facts | **[Fitzharding n19 Lean 2026]**; [16 October packet](web/fitzharding-n19-lean-2026-10-16/README.md), pinned `34fb2b7bc39465db368c45cb48d4db58829d3051` |
 | [bengreff/s76-certificate](https://github.com/bengreff/s76-certificate) | Benjamin Greff’s mixed cover for `s(76) = 9`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #594 | **[bengreff s76 certificate 2026-10-14]**; [14 October packet](web/bengreff-s76-certificate-2026-10-14/README.md), pinned `1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f` |
 | [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate) | Benjamin Greff’s mixed cover for `s(95) = 10`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #610 | **[bengreff s95 certificate 2026-10-15]**; [15 October packet](web/bengreff-s95-certificate-2026-10-15/README.md), pinned `dd7297d06adc664268c65005369b895e4ded7547` |
+| [moh63-dev/s44-equals-7](https://github.com/moh63-dev/s44-equals-7) | Mohsen Khalili and Sara Gharabaghi’s closed mixed cover for `s(44) = 7`, decided by Evan Daniel’s `zmx2`; issue #842 | **[Khalili Gharabaghi s44 cover 2026-10-29]**; [29 October packet](web/moh63-dev-s44-equals-7-2026-10-29/README.md), pinned `b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf` |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
 | [Guzhou0806/n40-square-packing](https://github.com/Guzhou0806/n40-square-packing) | The clipped-corner transfer `s(40) > 335427/50000` on Hosono’s `rect_n40_L67` density, with its 401-direction nodal run and exact finite checks, and then the continuous-pose kernel `s(40) > 1340000/199529` on the same density, with its 43-slab interval cover, exact axis certificate and finite checks, and the same kernels’ `s(40) > 3359/500` on a new density of 685 rectangle orbits | **[Guzhou0806 n40 clipped corner 2026-10-10]**; [10 October packet](web/guzhou-n40-clipped-corner-2026-10-10/README.md), pinned `e5abeb4d078a5c5b35df6204dd9b93378e5a7880`; **[Guzhou0806 n40 continuous pose 2026-10-10]**; [10 October continuous-pose packet](web/guzhou-n40-continuous-pose-2026-10-10/README.md), pinned `71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3`; **[Guzhou0806 n40 new supports 2026-10-11]**; [11 October new-supports packet](web/guzhou-n40-new-supports-2026-10-11/README.md), pinned `6a65957e6c5c51cdf267917d882dab7f5b4928dd` |
 | [Mira-acc/17squares](https://github.com/Mira-acc/17squares) | Exact point and weighted certificates used in the `n = 17` lineage | **[n17 weighted certificates 2026-09-20]**; [20 September packet](web/n17-weighted-certificates-2026-09-20/README.md) |
@@ -1756,6 +1757,25 @@ band-insertion construction, and says the search, LP and verification pipeline �
 built and run with Claude (Anthropic) as an AI assistant” under the author’s direction.
 The author asked for its registration in issue #610 on 15 October 2026; T-191 records it
 at V0/C0.
+
+**[Khalili Gharabaghi s44 cover 2026-10-29]**: Mohsen Khalili and Sara Gharabaghi’s
+(GitHub moh63-dev) closed mixed cover for $s(44) \ge 7$, hence $s(44) = 7$ with the
+$7 \times 7$ grid: 15,525 points and 3,912 segments of length $1/50$ on the interior
+grid lines of $[0,7]^2$ in Evan Daniel’s mixed format v1, total
+$2199755099/50000000 < 44$, D4-invariant.
+It is pinned in [moh63-dev/s44-equals-7](https://github.com/moh63-dev/s44-equals-7) at
+`b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf` (v1.1, 29 October 2026; the certificate was
+first committed on 26 October in v1.0) and retained whole but for `.gitignore`;
+[packet](web/moh63-dev-s44-equals-7-2026-10-29/README.md).
+MIT licence for the scripts, the certificate CC0. The source decides the covering
+statement with Daniel’s `zmx2` at evand/square-packing `659ee62`, over the D4 region and
+the unreduced pose space, and reports his `zm_mixed.py` over the D4 region as well.
+Its README credits Daniel for the method, the format, the checkers and the $s(45) = 7$
+cover it started from, Burns and Massaccesi for LP-weighted exact covers and Hosono for
+public mixed-cover certificates, and says the search, the certificate, the separation
+tool and the verification runs “were produced with Claude (Anthropic) under our
+direction”. The authors asked for its registration in issue #842 on 26 October 2026;
+T-252 records it.
 
 **[wand125 continuous n28 2026-10-15]**: Hiroaki Hosono’s (wand125’s) continuous-pose
 certificate for $s(28) > 1149/200 = 5.745$, pinned at

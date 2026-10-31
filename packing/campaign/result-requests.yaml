@@ -26024,6 +26024,53 @@ issues:
       tracking the intake of a reported item, Daniel's polynomial, which #545 has tracked since 12
       October; its other items are tracked where the table names them. The issue says it will be
       updated as each item lands on main, so a follow-up is owed when T-246 reaches main.
+  - number: 816
+    title: "s(29): validating Evan Daniel's degree-7213 minimal polynomial of the record side (T-246)"
+    author: jlevy
+    opened: '2026-10-25'
+    state: open
+    kind: other
+    intake: true
+    triage: done
+    summary: >-
+      The owner's tracker, opened on 25 October 2026 with the labels intake, tracker and n-29, of
+      the validation of one result: Evan Daniel's degree-7213 minimal polynomial of the side of
+      the best known packing of 29 squares, T-246. A child of #811, with #545 as the original
+      report, it tabulates six steps, irreducibility, the root of p that matches the packing,
+      the Monte Carlo identities made deterministic, the packing's non-overlap at the exact
+      side, the comparison with T-195's verified ceiling and a review of N29.md, under the
+      owner's cap of that day, set at 10 CPU-hours and revised to 5, and leaves re-classifying
+      T-246 and moving n = 29's verified lane to the owner once the evidence is in.
+    read_through: '2026-10-25T15:46:48Z'
+    results:
+    - key: s29-minimal-polynomial
+      claim: The side of the best known s(29) packing is a root of an irreducible integer polynomial
+        of degree 7213 (Evan Daniel, evand/square-packing 169a827 and the release
+        exact-data-2026-10-12); the issue tracks its validation.
+      source: body
+      register:
+      - T-246
+      evidence:
+      - E-n029-evand-minpoly-7213-report
+    asks:
+    - what: The six steps run within the 5 CPU-hour cap, each reported with what it proves and its
+        price, with the re-classification of T-246 left to the owner.
+      state: queued
+      source: body
+      bead: think-10m1
+    beads:
+    - think-6gti
+    - think-10m1
+    answer_bead: think-10m1
+    replies: []
+    close_when: Each of the six steps has a status backed by receipts on main, and the owner has
+      decided T-246's kind and n = 29's lanes.
+    notes: >-
+      The project opened this issue; it reports no result of the project's own, and no
+      acknowledgement is owed on it. It is marked intake, as #811 is, as the project's own issue
+      tracking the validation of a reported item that #545 has tracked since 12 October. The
+      coordinator updates its status column and log from the lane's reports; the lane does not
+      post on it.
   - number: 819
     title: 's(344) ≤ 18.992567544845: registration request'
     author: amundsk
@@ -26583,6 +26630,57 @@ issues:
       regenerate.py can also be compared with version 2's retained copy) is checked against
       Zenodo's per-file listing, or a digest the author states, before any checker reads it
       (review A1 of #853).
+  - number: 842
+    title: 's(44) = 7: registration request'
+    author: moh63-dev
+    opened: '2026-10-26'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mohsen Khalili and Sara Gharabaghi report s(44) = 7 by a closed mixed cover of [0,7]^2
+      in Evan Daniel's mixed format v1, 15,525 weighted points and 3,912 segments of length
+      1/50 on the interior grid lines, total 2199755099/50000000 < 44, D4-invariant, in
+      certificate/s44_cover_7.txt (SHA-256 c9fde0f1...cae0) at moh63-dev/s44-equals-7
+      063c4d6 (v1.0), decided at the source by Daniel's zmx2 at evand/square-packing
+      659ee62 with and without the symmetry reduction and by his zm_mixed.py at about 143
+      CPU-hours. The comment of 29 October announces v1.1 (b5b1bc9), the same certificate
+      with a two-stage zm_mixed.py driver and an audit of its logs, and the paper on Zenodo.
+      Triaged, imported and validated on 31 October 2026 (think-1v4b): the packet
+      moh63-dev-s44-equals-7-2026-10-29 retains v1.1 whole but for .gitignore; both zmx2
+      sweeps were replayed here from retained bytes, every root's census equal to the
+      source's log, with two mutated covers refused; two stage 4 reviews found no
+      mathematical defect, the second, review A on pull request 851, by a separately
+      prompted lane sharing no context with the import lane. Registered as T-252 at
+      V3/C3, and n-044 moves to proved.
+      zm_mixed.py's complete pass is priced and held over the pass's cap (think-qvp6); it
+      raises no rung. Claude assistance disclosed.
+    read_through: '2026-10-29T15:58:14Z'
+    results:
+    - key: s44-equals-7
+      claim: 's(44) = 7: the lower half by a closed mixed cover, the upper half by the 7 x 7 grid.'
+      source: body
+      register:
+      - T-252
+      evidence:
+      - E-khalili-842-cover-report
+      - E-khalili-842-cover-replay
+    beads:
+    - think-1v4b
+    - think-qvp6
+    answer_bead: think-1v4b
+    replies: []
+    close_when: >-
+      The import and its disposition are on main and the site, and the reply on main reports
+      T-252 at its rungs and n-044 as proved; nothing the authors asked for is queued.
+    notes: >-
+      Read on 31 October 2026 from main 3978a7f61: the issue body and its one comment, both
+      by moh63-dev; no other issue or pull request states a bound at 44 above T-090's
+      2789/400 and T-177's reported 2799/400. Labelled intake on 31 October 2026 under the
+      github-workflows grant; no n-44 case label exists, though the label policy would give
+      one to an optimality claim under review, so it is left for the owner. The packet pins
+      the head, v1.1, by stage 1's rule; the issue body names v1.0, whose certificate is the
+      same bytes.
   - number: 847
     title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
     author: mohsensbu-jpg

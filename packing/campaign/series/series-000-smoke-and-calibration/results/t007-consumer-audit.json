@@ -1624,7 +1624,7 @@
       "weakened_to_without_karakus": null
     },
     {
-      "exact_value_claim": false,
+      "exact_value_claim": true,
       "exact_value_lower_half_cites_t007": false,
       "exposure_class": "unaffected",
       "exposure_class_without_karakus": "unaffected",
@@ -1633,19 +1633,19 @@
       "family": null,
       "n": 44,
       "nagamochi": {"basis":"nagamochi-theorem-2","decimal":"6.744562646538","exact":"1 + sqrt(33)","exact_case":false},
-      "operative_lower_bound": {"cites_t007":false,"evidence":["E-n044-wand125-mixed-69725-sqverify-fast-replay"],"exact_form":"2789/400","results":["T-090"],"t007_scope_covers_n":true,"value":"6.9725"},
-      "reported_lower_bound": {"cites_t007":false,"evidence":["E-n044-wand125-mixed-69725-report"],"value":"6.9725"},
-      "reported_status": "open",
-      "status": "open",
+      "operative_lower_bound": {"cites_t007":false,"evidence":["E-khalili-842-cover-replay"],"exact_form":"7","results":["T-252"],"t007_scope_covers_n":true,"value":"7"},
+      "reported_lower_bound": {"cites_t007":false,"evidence":["E-khalili-842-cover-report"],"value":"7"},
+      "reported_status": "proved",
+      "status": "proved",
       "support": {
         "area_bound": {"basis":"area","decimal":"6.633249580710","exact":"2*sqrt(11)","nagamochi_excess":"0.111313065827"},
         "case_prose_published_proofs": null,
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.684658438426","exact":"1/2 + (3/2)*sqrt(17)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.059904208111"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-046","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-177","kind":"lower-bound","verification":"V0"}],
-        "registered_reported": {"basis":"exact-form","decimal":"6.972500000000","exact":"2789/400","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.227937353462","sources":[{"evidence":["E-n044-wand125-mixed-69725-report"],"n":44,"proved_by":["Hosono"],"results":["T-090"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"6.972500000000","exact":"2789/400","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.227937353462","sources":[{"evidence":["E-n044-wand125-mixed-69725-sqverify-fast-replay"],"n":44,"results":["T-090"],"via":"direct"}]}
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-046","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-177","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-252","kind":"optimality","verification":"V3"}],
+        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.255437353462","sources":[{"evidence":["E-khalili-842-cover-report"],"n":44,"proved_by":["Khalili","Gharabaghi"],"results":["T-252"],"via":"direct"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.255437353462","sources":[{"evidence":["E-khalili-842-cover-replay"],"n":44,"results":["T-252"],"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -1671,8 +1671,8 @@
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.764982043070","exact":"1/2 + (1/2)*sqrt(157)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.065969851774"},
         "karakus_k2_minus_1": null,
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-053","kind":"optimality","verification":"V3"},{"confirmation":"C3","id":"T-054","kind":"simplification","verification":"V3"},{"confirmation":"C1","id":"T-081","kind":"optimality","verification":"V0"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"}],
-        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.169048105155","sources":[{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.169048105155","sources":[{"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"direct"}]}
+        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.169048105155","sources":[{"evidence":["E-khalili-842-cover-report"],"n":44,"proved_by":["Khalili","Gharabaghi"],"results":["T-252"],"via":"monotonicity"},{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"direct"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.169048105155","sources":[{"evidence":["E-khalili-842-cover-replay"],"n":44,"results":["T-252"],"via":"monotonicity"},{"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -1698,8 +1698,8 @@
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.844288770224","exact":"1/2 + (1/2)*sqrt(161)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.071791012874"},
         "karakus_k2_minus_1": null,
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-004","kind":"audit","verification":"V3"},{"confirmation":"C3","id":"T-008","kind":"optimality","verification":"V3"},{"confirmation":"C3","id":"T-064","kind":"optimality","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C0","id":"T-250","kind":"formalization","verification":"V0"}],
-        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.083920216901","sources":[{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof"],"n":46,"proved_by":["Wolfram Bentz"],"results":["T-004","T-008"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-bentz46-theorem8-audit"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.083920216901","sources":[{"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof","E-bentz46-theorem8-audit","E-k2m3-evand-valid7-qx2-replay","E-k2m3-evand-bentz-lean-build"],"n":46,"results":["T-004","T-008","T-064"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-k2m3-wand125-valid7-independent"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"direct"}]}
+        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.083920216901","sources":[{"evidence":["E-khalili-842-cover-report"],"n":44,"proved_by":["Khalili","Gharabaghi"],"results":["T-252"],"via":"monotonicity"},{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof"],"n":46,"proved_by":["Wolfram Bentz"],"results":["T-004","T-008"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-bentz46-theorem8-audit"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"direct"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.083920216901","sources":[{"evidence":["E-khalili-842-cover-replay"],"n":44,"results":["T-252"],"via":"monotonicity"},{"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof","E-bentz46-theorem8-audit","E-k2m3-evand-valid7-qx2-replay","E-k2m3-evand-bentz-lean-build"],"n":46,"results":["T-004","T-008","T-064"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-k2m3-wand125-valid7-independent"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -1725,8 +1725,15 @@
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.922616289332","exact":"1/2 + (1/2)*sqrt(165)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.077383710667"},
         "karakus_k2_minus_1": null,
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-086","kind":"optimality","verification":"V3"}],
-        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000","sources":[{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof"],"n":46,"proved_by":["Wolfram Bentz"],"results":["T-004","T-008"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-bentz46-theorem8-audit"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000","sources":[{"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof","E-bentz46-theorem8-audit","E-k2m3-evand-valid7-qx2-replay","E-k2m3-evand-bentz-lean-build"],"n":46,"results":["T-004","T-008","T-064"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-k2m3-wand125-valid7-independent"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"},{"evidence":["E-chelokot-square-minus-two-lean"],"n":47,"results":["T-086"],"via":"direct"}]}
+        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000","sources":[{"evidence":["E-khalili-842-cover-report"],"n":44,"proved_by":["Khalili","Gharabaghi"],"results":["T-252"],"via":"monotonicity"},{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof"],"n":46,"proved_by":["Wolfram Bentz"],"results":["T-004","T-008"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-bentz46-theorem8-audit"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"}]},
+        "registered_verified": {
+          "basis": "exact-form",
+          "decimal": "7.000000000000",
+          "exact": "7",
+          "reaches_nagamochi": true,
+          "shortfall_below_nagamochi": "0.000000000000",
+          "sources": [{"evidence":["E-khalili-842-cover-replay"],"n":44,"results":["T-252"],"via":"monotonicity"},{"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof","E-bentz46-theorem8-audit","E-k2m3-evand-valid7-qx2-replay","E-k2m3-evand-bentz-lean-build"],"n":46,"results":["T-004","T-008","T-064"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-k2m3-wand125-valid7-independent"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"},{"evidence":["E-chelokot-square-minus-two-lean"],"n":47,"results":["T-086"],"via":"direct"}]
+        }
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -1756,14 +1763,20 @@
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000"},
         "karakus_k2_minus_1": {"statement":"s(48) = 7","value":7},
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-084","kind":"optimality","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"}],
-        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000","sources":[{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof"],"n":46,"proved_by":["Wolfram Bentz"],"results":["T-004","T-008"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-bentz46-theorem8-audit"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"}]},
+        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000","sources":[{"evidence":["E-khalili-842-cover-report"],"n":44,"proved_by":["Khalili","Gharabaghi"],"results":["T-252"],"via":"monotonicity"},{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof"],"n":46,"proved_by":["Wolfram Bentz"],"results":["T-004","T-008"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-bentz46-theorem8-audit"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"}]},
         "registered_verified": {
           "basis": "exact-form",
           "decimal": "7.000000000000",
           "exact": "7",
           "reaches_nagamochi": true,
           "shortfall_below_nagamochi": "0.000000000000",
-          "sources": [{"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof","E-bentz46-theorem8-audit","E-k2m3-evand-valid7-qx2-replay","E-k2m3-evand-bentz-lean-build"],"n":46,"results":["T-004","T-008","T-064"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-k2m3-wand125-valid7-independent"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"},{"evidence":["E-chelokot-square-minus-two-lean"],"n":47,"results":["T-086"],"via":"monotonicity"},{"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":48,"results":["T-083","T-084"],"via":"direct"}]
+          "sources": [
+            {"evidence":["E-khalili-842-cover-replay"],"n":44,"results":["T-252"],"via":"monotonicity"},
+            {"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"monotonicity"},
+            {"evidence":["E-bentz-2010-proof","E-bentz46-theorem8-audit","E-k2m3-evand-valid7-qx2-replay","E-k2m3-evand-bentz-lean-build"],"n":46,"results":["T-004","T-008","T-064"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-k2m3-wand125-valid7-independent"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"},
+            {"evidence":["E-chelokot-square-minus-two-lean"],"n":47,"results":["T-086"],"via":"monotonicity"},
+            {"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":48,"results":["T-083","T-084"],"via":"direct"}
+          ]
         }
       },
       "weakened_to": null,
@@ -1790,7 +1803,14 @@
         "karakus_explicit_bound": null,
         "karakus_k2_minus_1": null,
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"}],
-        "registered_reported": {"basis":"exact-form","decimal":"7.000000000000","exact":"7","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000","sources":[{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof"],"n":46,"proved_by":["Wolfram Bentz"],"results":["T-004","T-008"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-bentz46-theorem8-audit"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"},{"evidence":["E-basic-area-lower"],"n":49,"results":[],"via":"direct"}]},
+        "registered_reported": {
+          "basis": "exact-form",
+          "decimal": "7.000000000000",
+          "exact": "7",
+          "reaches_nagamochi": true,
+          "shortfall_below_nagamochi": "0.000000000000",
+          "sources": [{"evidence":["E-khalili-842-cover-report"],"n":44,"proved_by":["Khalili","Gharabaghi"],"results":["T-252"],"via":"monotonicity"},{"evidence":["E-n045-evand-mixed-cover-report"],"n":45,"proved_by":["Evan Daniel"],"results":["T-053"],"via":"monotonicity"},{"evidence":["E-bentz-2010-proof"],"n":46,"proved_by":["Wolfram Bentz"],"results":["T-004","T-008"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-bentz46-theorem8-audit"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"},{"evidence":["E-basic-area-lower"],"n":49,"results":[],"via":"direct"}]
+        },
         "registered_verified": {
           "basis": "exact-form",
           "decimal": "7.000000000000",
@@ -1798,6 +1818,7 @@
           "reaches_nagamochi": true,
           "shortfall_below_nagamochi": "0.000000000000",
           "sources": [
+            {"evidence":["E-khalili-842-cover-replay"],"n":44,"results":["T-252"],"via":"monotonicity"},
             {"evidence":["E-n045-evand-mixed-cover-zmx2-replay"],"n":45,"results":["T-053"],"via":"monotonicity"},
             {"evidence":["E-bentz-2010-proof","E-bentz46-theorem8-audit","E-k2m3-evand-valid7-qx2-replay","E-k2m3-evand-bentz-lean-build"],"n":46,"results":["T-004","T-008","T-064"],"shares_a_nagamochi_lemma":{"cited_at":"packing/resources/papers/bentz-2010-optimal-packings-13-and-46.md:47","evidence":"E-bentz-2010-proof","nagamochi_lemma_at":"packing/resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.raw.md:911","other_verified_evidence_in_the_same_results":["E-k2m3-wand125-valid7-independent"],"summary":"Bentz 2010, Lemma 1 is Nagamochi's Lemma 7(ii), co-credited there to Stromquist."},"via":"monotonicity"},
             {"evidence":["E-chelokot-square-minus-two-lean"],"n":47,"results":["T-086"],"via":"monotonicity"},
@@ -9270,8 +9291,8 @@
   "summary": {
     "cases": 324,
     "classes": {"k2-minus-1-reproved":0,"rests-on-t007-only":0,"unaffected":324,"weakened-to":0},
-    "classes_open": {"k2-minus-1-reproved":0,"rests-on-t007-only":0,"unaffected":247,"weakened-to":0},
-    "classes_open_without_karakus": {"k2-minus-1-reproved":0,"rests-on-t007-only":0,"unaffected":247,"weakened-to":0},
+    "classes_open": {"k2-minus-1-reproved":0,"rests-on-t007-only":0,"unaffected":246,"weakened-to":0},
+    "classes_open_without_karakus": {"k2-minus-1-reproved":0,"rests-on-t007-only":0,"unaffected":246,"weakened-to":0},
     "classes_without_karakus": {"k2-minus-1-reproved":0,"rests-on-t007-only":0,"unaffected":324,"weakened-to":0},
     "exact_value_claims_by_class": {"k2-minus-1-reproved":[],"rests-on-t007-only":[],"unaffected":[],"weakened-to":[]},
     "exact_value_claims_by_class_without_karakus": {"k2-minus-1-reproved":[],"rests-on-t007-only":[],"unaffected":[],"weakened-to":[]},
@@ -9279,7 +9300,7 @@
     "exact_value_claims_on_t007_alone": [],
     "exact_value_claims_on_t007_alone_without_karakus": [],
     "exposure_reasons": {"k2-minus-1-reproved":{},"rests-on-t007-only":{},"unaffected":{"operative-bound-independent":324},"weakened-to":{}},
-    "open_cases": 247,
+    "open_cases": 246,
     "operative_cites_t007": {"all":0,"open":0,"outside_t007_registered_scope":0,"outside_t007_registered_scope_n":"","proved":0},
     "reported_lower_bounds_citing_t007": "23, 34, 47-48, 62-63, 79-80, 98-99, 119-120, 142-143, 167-168, 194-195, 223-224, 254-255, 287-288, 322-323",
     "weakened_shortfall": null

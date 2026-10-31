@@ -1,0 +1,80 @@
+CHANGED  <prelude> (13 diff lines)
+SAME     add_hi
+SAME     add_lo
+SAME     admissible_f
+SAME     arg_val
+CHANGED  box_empty (3 diff lines)
+SAME     box_from_rats
+SAME     box_geo
+CHANGED  build_cover (125 diff lines)
+SAME     canon
+CHANGED  check_d4 (41 diff lines)
+CHANGED  cmd_cert (86 diff lines)
+SAME     die
+SAME     dn
+CHANGED  eval_node (2 diff lines)
+CHANGED  family_bound (77 diff lines)
+SAME     fline_mass
+CHANGED  float_mass (5 diff lines)
+SAME     float_min_box
+SAME     fnv
+SAME     fval
+SAME     g_at
+CHANGED  g_range (13 diff lines)
+SAME     gcd
+SAME     h_at
+SAME     h_range
+SAME     has
+SAME     initial_candidates
+SAME     lcm
+SAME     line_atoms
+SAME     line_ends
+CHANGED  main (82 diff lines)
+SAME     pair_bound
+CHANGED  parse_cover (45 diff lines)
+SAME     parse_rat
+SAME     pt_certain_in
+SAME     pt_conds
+SAME     pt_float_class
+SAME     qmax_le0
+SAME     r_pt
+CHANGED  reflect_y (3 diff lines)
+CHANGED  run_root (15 diff lines)
+CHANGED  segment_bound (46 diff lines)
+SAME     single_bound
+SAME     split
+SAME     t_pt
+SAME     tokens
+SAME     up
+ONLY-B   area_bound (169 lines)
+ONLY-B   bound0 (106 lines)
+ONLY-B   build_lines (98 lines)
+ONLY-B   cap_ub (64 lines)
+ONLY-B   cdiv (9 lines)
+ONLY-B   cmd_cert0 (125 lines)
+ONLY-B   coupled_side (131 lines)
+ONLY-B   cs_at (7 lines)
+ONLY-B   dens_range (53 lines)
+ONLY-B   e_at (6 lines)
+ONLY-B   end_rate (25 lines)
+ONLY-B   family_bound_ex (80 lines)
+ONLY-B   fdiv (3 lines)
+ONLY-B   first_order_bound (119 lines)
+ONLY-B   first_order_sig (495 lines)
+ONLY-B   float_rect_area (37 lines)
+ONLY-B   frames (43 lines)
+ONLY-B   germ_splits (43 lines)
+ONLY-B   mass_bound (22 lines)
+ONLY-B   one_bp (18 lines)
+ONLY-B   pair_sweep (13 lines)
+ONLY-B   quad_area_lb (69 lines)
+ONLY-B   rate_u1 (6 lines)
+ONLY-B   segment_bound_lines (6 lines)
+ONLY-B   shift_rates (11 lines)
+ONLY-B   side_contained (10 lines)
+ONLY-B   sweep (9 lines)
+ONLY-B   u_area_slope (128 lines)
+ONLY-B   u_line (50 lines)
+ONLY-B   u_pair_cell (156 lines)
+ONLY-B   u_slope (11 lines)
+ONLY-B   w_hi (15 lines)

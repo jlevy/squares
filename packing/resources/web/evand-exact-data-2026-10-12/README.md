@@ -387,6 +387,62 @@ Pinned by digest against the identical copies the `ad86d42` packet retains:
 `search/exact/homotopy/N29.md` and `tasks/exact-minpoly/grade-C.md`.
 The release assets are not in the Git tree; `acquisition/release.json` binds them.
 
+## The Validation of 25 October 2026
+
+[`receipts/validation-2026-10-25/`](receipts/validation-2026-10-25/) holds the receipts
+of the s(29) validation (#816, draft PR #817, bead think-10m1), which the
+[review of 31 October 2026](../../../../docs/project/reviews/review-2026-10-31-evand-s29-minpoly-validation.md)
+reads.
+Each was written by a repository tool from the release asset `s29-minpoly.tar.zst`,
+fetched to scratch, held to its pinned SHA-256 `708e1b8b…6f3729c` and unpacked outside
+the repository (`DATA` below is the unpacked `n29-minpoly/`); the asset never enters
+the tree. None of the receipts is cited by an evidence entry yet: the register records
+the review proposes are the records lane’s.
+
+| Receipt | Program and what it decides | CPU | Run |
+| --- | --- | --- | --- |
+| `replay.json` | `devtools.evand_s29_replay`: the author’s five scripts unchanged, under his pinned python-flint 0.9.0 and mpmath 1.3.0, with fresh seeds and four negative controls; same implementation | 5,852 s | 25 October 2026 |
+| `irreducibility.json` | `devtools.check_exact_side_minpoly irreducible`: distinct-degree factorization modulo primes from 40,000 until no factor degree is possible (five primes) | 1,300 s | 25 October 2026 |
+| `isolation.json` | `check_exact_side_minpoly isolate`: exactly one root of p in $S_{\mathrm{mid}} \pm 2 \times 10^{-48}$ | 252.5 s | 31 October 2026 |
+| `comparison.json` | `check_exact_side_minpoly bracket`: the root against T-195’s exact rational at 812 places | 632.5 s | 31 October 2026 |
+| `nonoverlap.json` | `devtools.check_exact_side_packing`: the configuration at $t^*$ is a packing, with the whole contact system and the side decided at $t^*$ by exact elimination | 31.7 s | 31 October 2026 |
+| `price.json` | `check_exact_side_minpoly price`: degrees, heights, resultant bounds and the cost of the deterministic identities, timed on the host it names | 6.9 s | 31 October 2026 |
+
+The last four were run again on 31 October 2026 after review A of #817, on a four-core
+Linux x86-64 cloud container shared with other lanes: the packing decision with the
+checker that review fixed (the verdict unchanged), the isolation without the comparison
+against T-155’s printed endpoint that the first run carried and that was withdrawn, the
+comparison by its tool rather than the hand-corrected copy, and the price, which had no
+receipt.
+
+From `packing/`, each after `uv run --frozen --all-extras --group dev`:
+
+```sh
+python -m devtools.evand_s29_replay --data DATA --python VENV/bin/python --work SCRATCH \
+  --jobs 3 --shards 2 --verify-primes 10 --out RECEIPTS/replay.json
+python -m devtools.check_exact_side_minpoly irreducible --poly DATA/n29_poly_q4.json \
+  --stop-when-empty --out RECEIPTS/irreducibility.json
+python -m devtools.check_exact_side_minpoly isolate --poly DATA/n29_poly_q4.json \
+  --lo 5.933833462676929189689460616352019138433834181075886974638189053221480 \
+  --hi 5.933833462676929189689460616352019138433834181079886974638189053221480 \
+  --out RECEIPTS/isolation.json
+python -m devtools.check_exact_side_minpoly bracket --poly DATA/n29_poly_q4.json \
+  --approximation DATA/n29_S0.txt --places 812 --lo LO --hi HI \
+  --case frontier/n-029.md --sign-at-rational --out RECEIPTS/comparison.json
+python -m devtools.check_exact_side_packing --system DATA/n29_system.jl \
+  --box DATA/n29_krawczyk.json \
+  --witness resources/web/pingyou-pr622-certificate-2026-10-15/facts/n-029.yaml.gz \
+  --side-digits 2600 --compare-case frontier/n-029.md --out RECEIPTS/nonoverlap.json
+python -m devtools.check_exact_side_minpoly price --poly DATA/n29_poly_q4.json \
+  --params DATA/n29_param_t1.json DATA/n29_param_t2.json DATA/n29_param_t3.json \
+  DATA/n29_param_t4.json DATA/n29_param_t5.json --system DATA/n29_system.jl \
+  --seconds-per-prime 286 --out RECEIPTS/price.json
+```
+
+`VENV` is a virtual environment with the author’s pins, `SCRATCH` an empty directory
+outside the repository, and `LO` and `HI` the hull `isolation.json` prints. The
+`--seconds-per-prime` is the replay’s measured cost of one prime for all six identities.
+
 ## Credit and Licence
 
 Evan Daniel wrote the source under the MIT licence (`LICENSE`), with credits in

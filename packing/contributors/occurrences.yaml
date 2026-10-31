@@ -16845,19 +16845,26 @@ occurrences:
     path: packing/frontier/n-044.md
     record_key: '44'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-044.md [44] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-044.md
+    record_key: '44'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-045.md
     record_key: '45'
@@ -29673,6 +29680,66 @@ occurrences:
     covering method to Gustavo Massaccesi, as T-049''s keys do; the original credit
     role is retained.'
   contributor_id: gustavo-massaccesi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi s44 cover 2026-10-29]'
+    field: /authors/0
+  expected_text: Khalili
+  start: 0
+  end: 7
+  label: Khalili
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi s44 cover 2026-10-29]'
+    field: /authors/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi s44 cover 2026-10-29]'
+    field: /credit
+  expected_text: Khalili, Gharabaghi after Daniel
+  start: 0
+  end: 7
+  label: Khalili
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi s44 cover 2026-10-29]'
+    field: /credit
+  expected_text: Khalili, Gharabaghi after Daniel
+  start: 9
+  end: 19
+  label: Gharabaghi
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi s44 cover 2026-10-29]'
+    field: /credit
+  expected_text: Khalili, Gharabaghi after Daniel
+  start: 26
+  end: 32
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk refinements 2026-10-23]'

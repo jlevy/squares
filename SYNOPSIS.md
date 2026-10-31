@@ -324,6 +324,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-241](packing/frontier/RESULTS.md) | 304 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(304) <= 42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000 = 17.92689890339264…, 2.53e-3 below T-186, the case’s house best packing when it was reported. |
 | [T-243](packing/frontier/RESULTS.md) | 182 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(182) <= 13.970916436214678735385725854133, 3.17e-3 below T-174, the case’s house best packing when it was reported, and below every report at 182. |
 | [T-248](packing/frontier/RESULTS.md) | 299 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(299) <= 17.803695435332337695435314533642, 1.92e-2 below the case’s house best packing, the Kingbird catalogue’s 33/2 + √7/2, which is 17.8228756555…, as T-101’s exact ceiling verifies it, and below every report at 299. |
+| [T-252](packing/frontier/RESULTS.md) | 44 | `V3` | `C3` | `S3` | `previously-published` | s(44) = 7: the lower half by Mohsen Khalili and Sara Gharabaghi’s closed mixed cover of 26 October 2026, the upper half by the 7 x 7 grid. |
 | [T-254](packing/frontier/RESULTS.md) | 130 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(130) <= 466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000. |
 | [T-255](packing/frontier/RESULTS.md) | 260, 307 | `V3` | `C3` | `S3` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(260) <= 67077942617632138527571542307/4031481829251000000000000000 and s(307) <= 436081607184993722962197444889181982917255228924685874736959955436771335630565667211324538123/24254714520872479530466069702814569144398684321103594602674239356738890164429000000000000000. |
 | [T-256](packing/frontier/RESULTS.md) | 232, 260, 307 | `V3` | `C3` | `S3` | `previously-published` | Three complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(232) <= 7617348902520572307222120733/483283363059000000000000000, s(260) <= 104381051573626493618357957479/6274019722347000000000000000 and s(307) <= 2707897969116659515550794271467451840032974544063449693/150612387934832692306604131393579915999000000000000000. |
@@ -462,7 +463,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 259 | 259 registered, 227 by others |
+| Frontier results | 260 | 260 registered, 228 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -722,6 +723,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: The Validation of Daniel’s Degree-7213 Minimal Polynomial of the s(29) Record Side](docs/project/reviews/review-2026-10-31-evand-s29-minpoly-validation.md) | dated review record | record | retained | — |
 | [wand125 Rectangle Certificates of 27 and 28 September: Review of T-046 and Its Census Route](docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md) | dated review record | record | retained | — |
 | [Feature: The Exact-Side Register](docs/project/specs/active/plan-2026-10-25-exact-side-register.md) | implementation plan | current | transient | — |
 | [Feature: Beyond-Horizon Rows Above n = 1024](docs/project/specs/active/plan-2026-10-24-rows-above-1024.md) | implementation plan | current | transient | — |
@@ -814,6 +816,8 @@ case or experiment separately.
 | [Mathematical Review: wand125’s Fine-Net Lower Bounds at n = 37, 39 and 44 and the Linear Lower Bound at n = 145](docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md) | dated review record | record | retained | — |
 | [Fang’s Excess Theorem and Direct Certificates: Mathematical Review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) | dated review record | record | retained | — |
 | [Proof Review: Benjamin Greff’s `s(76) = 9` and `s(95) = 10` by Mixed Covers](docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md) | dated review record | record | retained | — |
+| [Proof Review: Khalili and Gharabaghi’s `s(44) = 7` by a Closed Mixed Cover](docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md) | dated review record | record | retained | — |
+| [Independent Correctness Review: Khalili and Gharabaghi’s `s(44) = 7`](docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md) | dated review record | record | retained | — |
 | [Project changelog](CHANGELOG.md) | generated status view | generated | generated | — |
 | [Site Changelog Backfill Review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md) | dated review record | record | retained | — |
 | [Feature: Project Changelog and Recent PR Backfill](docs/project/specs/active/plan-2026-10-13-site-changelog.md) | implementation plan | current | transient | — |
@@ -5033,7 +5037,7 @@ Where the program has spent effort, and what came of it.
 | 16 | proved, $4$ | $4$ | proved not-below control | The valid replacement for the old $n=12$ guard: any reported side below $4$ is known to be invalid |
 | 17 | open | $4.67553009\ldots$ (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of $0^{\circ}$, $+39.80496^{\circ}$, and $-36.62379^{\circ}$. One round: [exp-011](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports $5.0$, the trivial $5\times5$ grid, on all five binary64 screening seeds |
 | 97 | proved, $10$ | $10$ (grid) | opportunistic slot, closed | Proved on 2026-10-03 as the case $m = 10$ of Evan Daniel’s $s(m^2 - 3) = m$ ([T-064](packing/frontier/RESULTS.md)), his `Valid7` checker replayed in full and his Lean reduction built here; $n = 61$ and $n = 78$, the other two of the slot, were proved on 2026-10-02 by replayed mixed covers. The registered analytic Cleemann-style attempt at $\arctan(3/4)$ was never made |
-| 1–324 | 77 proved, 247 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); see the [Frontier corpus summary](packing/frontier/README.md#what-the-corpus-shows) for the current aggregate lower-bound counts |
+| 1–324 | 78 proved, 246 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); see the [Frontier corpus summary](packing/frontier/README.md#what-the-corpus-shows) for the current aggregate lower-bound counts |
 
 Three facts about this table drive the strategy.
 

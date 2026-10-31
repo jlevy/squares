@@ -1,0 +1,6 @@
+s = 7, D = 1000, W = 100000000, points 15525, segments 3912
+total weight = 2199755099/50000000 = 43.995101980000  (points 11.714655, segments 32.280447)
+total < N: True
+points D4-invariant: True
+segments D4-invariant (as measures): True
+segment lines: [('h', 1000), ('h', 2000), ('h', 3000), ('h', 4000), ('h', 5000), ('h', 6000), ('v', 1000), ('v', 2000), ('v', 3000), ('v', 4000), ('v', 5000), ('v', 6000)]

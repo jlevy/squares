@@ -4373,6 +4373,36 @@ sources:
       which is not public, whose run 38849916588 accepted the theorem reusing every compiled
       object; the axioms are the three standard ones and 1,624 that native_decide generates.
       The source credits no other work and names no AI assistance. No licence.
+  - key: '[Khalili Gharabaghi s44 cover 2026-10-29]'
+    authors: [Khalili, Gharabaghi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-29'
+    credit: Khalili, Gharabaghi after Daniel
+    lineage: independent
+    note: >-
+      moh63-dev/s44-equals-7 at b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf (2026-10-29T15:20:35Z,
+      tag v1.1), Mohsen Khalili and Sara Gharabaghi's closed mixed cover for s(44) >= 7,
+      hence s(44) = 7 with the 7 x 7 grid: 15,525 weighted points and 3,912 segments of
+      length 1/50 on the grid lines x, y in {1, ..., 6} in Evan Daniel's mixed format v1,
+      total 2199755099/50000000 < 44, first committed in 063c4d6 (tag v1.0) at
+      2026-10-26T23:30:49Z and unchanged at v1.1, decided by Daniel's zmx2 pinned at
+      evand/square-packing 659ee62 in both its D4-reduced and unreduced modes, and by his
+      zm_mixed.py at the same commit at about 143 CPU-hours. Registration was requested in
+      jlevy/squares#842; the paper is also at https://doi.org/10.5281/zenodo.23769766.
+      The README credits Evan Daniel for closed mixed covers, the mixed format, zmx2,
+      zm_mixed.py, the line_cover model and the s(45) = 7 cover used as the starting
+      point; Sam Burns and Gustavo Massaccesi for LP-weighted covers checked in exact
+      rational arithmetic; Hiroaki Hosono for public mixed-cover certificates; and Göbel,
+      Stromquist, Friedman and Nagamochi for unavoidable sets and weighted measures. It
+      does not mention this project except that the README, the paper and the issue cite
+      squaremath.org/cases/44 for the standing bound, the paper cites T-066 for s(59) = 8,
+      and its acknowledgments thank "the Squares Project for its records". AI assistance, README.md: "The
+      search, the certificate, the new valley-separation tool and the verification runs
+      were produced with Claude (Anthropic) under our direction; we reviewed the method,
+      the checks and this write-up." MIT licence for the scripts; the README releases the
+      certificate into the public domain (CC0). Retained whole but for .gitignore in
+      web/moh63-dev-s44-equals-7-2026-10-29/. Dated by that revision, 2026-10-29 UTC.
   - key: '[Mishapolk refinements 2026-10-23]'
     authors:
     - Polkovskyi
@@ -4484,6 +4514,8 @@ sources:
       record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-issue846-2026-10-30/.
 credited_names:
   Benjamin Greff: Greff
+  Mohsen Khalili: Khalili
+  Sara Gharabaghi: Gharabaghi
   Hiroaki Hosono: Hosono
   Mykhailo Polkovskyi: Polkovskyi
   Oscar Fitzharding: Fitzharding

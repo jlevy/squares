@@ -410,6 +410,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-230",
         "T-239",
         "T-241",
+        # T-252's s(44) = 7 supersedes Hosono's reported 2799/400 at n = 44, its one count.
+        "T-177",
         "T-231",
         "T-248",
         "T-254",

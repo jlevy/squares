@@ -1,0 +1,99 @@
+{
+ "header": {
+  "kind": "zm_mixed cert header",
+  "version": 2,
+  "sha256": {
+   "zm_mixed.py": "1fd203469bb43a55ca7ce376b9717437e0970eead31941ec7fa100ab24d5ba95",
+   "mixed_cover.py": "bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5",
+   "zeromargin.py": "3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc",
+   "input": "c9fde0f1e7013f3f61f4a8d673b6bcaf9c5e54c914b6462164d7326ba254cae0"
+  },
+  "input": "../cert/s44_cover_7.txt",
+  "total": "2199755099/50000000",
+  "settings": {
+   "mode": "D4",
+   "depth": 30,
+   "pitch": "1/10",
+   "ubins": 8,
+   "chain": true,
+   "chain_from": 0,
+   "theta_bias": 4,
+   "clip": true,
+   "lemma_T": true,
+   "lemma_L": true,
+   "split": true,
+   "cert_mode": false,
+   "tprime": true,
+   "split_maxchain": 400,
+   "reach": "442/625",
+   "region": {
+    "cx_lo": "31/10",
+    "cx_hi": "16/5",
+    "cy_lo": "3/2",
+    "cy_hi": "8/5",
+    "u_lo": "3/8",
+    "u_hi": "7/16"
+   }
+  }
+ },
+ "argv": [
+  "zm_mixed.py",
+  "cert",
+  "../cert/s44_cover_7.txt",
+  "--d4",
+  "--nproc",
+  "1",
+  "--depth",
+  "30",
+  "--disj",
+  "--chain-from",
+  "0",
+  "--cx-lo",
+  "31/10",
+  "--cx-hi",
+  "16/5",
+  "--cy-lo",
+  "3/2",
+  "--cy-hi",
+  "8/5",
+  "--u-lo",
+  "3/8",
+  "--u-hi",
+  "7/16",
+  "--resume",
+  "../mac/d24.jsonl",
+  "--dump",
+  "../mac/d24_leaves.txt",
+  "--manifest",
+  "../mac/d24_manifest.json"
+ ],
+ "created": "2026-10-26 13:11:21",
+ "result": {
+  "roots": 1,
+  "census": {
+   "ADM": 640,
+   "CORE": 0,
+   "P1": 0,
+   "MIX": 0,
+   "CHAIN": 196,
+   "TRI": 0,
+   "PIECE": 0,
+   "EMPTY": 0,
+   "UNCERT": 0,
+   "boxes": 4915,
+   "maxdepth": 25,
+   "THR": 751,
+   "LIN": 1707,
+   "TPTS": 0,
+   "SPLIT": 1622,
+   "cpu": 1562.412311
+  },
+  "uncertified": 0,
+  "wall_s": 1648.7,
+  "verdict": "VERIFIED-D4 (PARTIAL)"
+ },
+ "records": {
+  "path": "../mac/d24.jsonl",
+  "sha256": "15376c0cc386ab74bef0fedbd09c934929c27a586937646611f2976f0d3a6365"
+ }
+}

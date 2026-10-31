@@ -1,0 +1,2 @@
+# zmx2 cert hash=bd68795e5855deda mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x12-12,y14-14,bins3-3
+ROOT 1739 pass 0 root 12/10,13/10,14/10,15/10,3/8,4/8 boxes 378875 cert 189438 empty 0 uncert 0 maxdepth 32 capped 0 ms 4387

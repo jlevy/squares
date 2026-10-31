@@ -931,7 +931,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/41.html | cases/41.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/42.html | cases/42.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/43.html | cases/43.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/44.html | cases/44.html | record | overview | 2026-10-03 | 2026-10-14 | live |
+| cases/44.html | cases/44.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/45.html | cases/45.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/46.html | cases/46.html | record | overview | 2026-10-03 | 2026-10-26 | live |
 | cases/47.html | cases/47.html | record | overview | 2026-10-03 | 2026-10-07 | live |
@@ -1392,6 +1392,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-249.html | result/t-249.html | result | overview | 2026-10-26 | 2026-10-26 | live |
 | result/t-250.html | result/t-250.html | result | overview | 2026-10-26 | 2026-10-26 | live |
 | result/t-251.html | result/t-251.html | result | overview | 2026-10-26 | 2026-10-26 | live |
+| result/t-252.html | result/t-252.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-253.html | result/t-253.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-254.html | result/t-254.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-255.html | result/t-255.html | result | overview | 2026-10-31 | 2026-10-31 | live |
@@ -1455,13 +1456,13 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
 | cases/17.html | 550,000 | Complete n=17 proof/certificate record and prepared bounds measure 501,977 bytes on 16 October 2026 with T-154's source-build evidence, 499,855 on main at 26d8bb335. The ceiling leaves room for the open n=17 intakes. |
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
-| cases/204.html | 350,000 | Ten verified certificates and a section for each of the six that have been the house, each listing every other side; prepared HTML measures 320,903 bytes on 23 October 2026 after T-231's adoption. |
+| cases/204.html | 375,000 | Eleven verified certificates and a section for each of the seven that have been the house, each listing every other side; prepared HTML measures 320,903 bytes on 23 October 2026 after T-231's adoption and 353,884 on 31 October 2026 after T-257's, whose section is 15,409 bytes. The ceiling leaves room for one more house section, and the record keeps every earlier house's section as history. |
 | frontier.html | 900,000 | On 22 October 2026 the standalone Frontier Survey measures 731,612 bytes for all 324 rows, exact native MathML, credit links, the concise reading key and the shared shell. The 900,000-byte ceiling leaves 168,388 bytes above that measurement; row details remain fetched on demand. Timing has not been re-measured for the split. |
 | index.html | 1,300,000 | The shared 100-case Atlas preview includes all 324 canonical case links and per-case SVG references, with common controls, reading and documentation cards. Retained desktop/mobile expansion checks cover the prepared shared row layout. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
 | papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
 | result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. |
-| result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. |
+| result/t-046.html | 450,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. On 31 October 2026 the page measures 401,561 bytes, past the 400,000 ceiling with T-252 listed at n = 44 among its 48 counts' register results; the ceiling moves to 450,000 as a measured choice, about 30 more listed results at 1.5 KB each. Its timing was not re-measured. How the page scales is think-rp0d. |
 | result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 509,332 bytes. |
 | result/t-083.html | 800,000 | Complete broad scope history and prepared exact bounds measure 688,505 bytes. |
 | result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 694,374 bytes. |

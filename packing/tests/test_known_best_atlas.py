@@ -808,11 +808,13 @@ RETAINED_EQUALITIES = frozenset(
         *range(97, 101),
     }
 )
-#: What a rebuild from the current records prints: the same 45, including the five cases
+#: What a rebuild from the current records prints: those 45, including the five cases
 #: proved here on 2026-10-02 by replayed mixed covers, s(59) = s(60) = s(61) = 8 and
 #: s(77) = s(78) = 9, and s(97) = 10, proved on 2026-10-03 as the case k = 10 of T-064's
-#: s(k^2 - 3) = k, the one count up to 100 that family adds.
-REBUILT_EQUALITIES = RETAINED_EQUALITIES
+#: s(k^2 - 3) = k, the one count up to 100 that family adds; and s(44) = 7, proved on
+#: 2026-10-31 by Khalili and Gharabaghi's replayed closed mixed cover (T-252), which the
+#: retained poster does not print until it is redrawn (think-10l0).
+REBUILT_EQUALITIES = RETAINED_EQUALITIES | {44}
 
 
 def _assert_current_composite_equalities(bounds: list[str], expected: frozenset[int]) -> None:
@@ -4941,9 +4943,9 @@ def test_shared_print_attributions_preserve_full_roles_sources_and_corpus_scope(
         assert sorted(
             n for group in metadata["lower_bounds"]["case_groups"] for n in group["cases"]
         ) == list(range(1, 325))
-        assert len(metadata["optimality"]["sources"]) == 31
-        assert len(metadata["optimality"]["cases"]) == 77
-        assert sum(case["n"] <= 100 for case in metadata["optimality"]["cases"]) == 45
+        assert len(metadata["optimality"]["sources"]) == 32
+        assert len(metadata["optimality"]["cases"]) == 78
+        assert sum(case["n"] <= 100 for case in metadata["optimality"]["cases"]) == 46
         assert [case["n"] for case in metadata["construction"]["cases"]] == list(range(1, 325))
         method = next(
             person

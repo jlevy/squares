@@ -35243,17 +35243,19 @@ results:
       - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/verify_mod.py
       - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/contacts_mod.py
     next_rung: >-
-      C1 needs the stage 4 mathematical review of N29.md: the elimination from the 152-row
-      contact system to the five consistency polynomials, the shape-lemma parametrization,
-      the Monte Carlo error bound and the link argument. C3 needs the source's five-step
-      replay from the pinned archive with its own scripts and a perturbed-polynomial
-      control (think-10m1): about 2.5 CPU-hours by the author's measure, a reproduction with
-      the producer's code, which waits on an owner budget.
+      C1 needs the stage 4 mathematical review of N29.md recorded as this entry's read: the
+      review of 31 October 2026 (draft PR #817, think-10m1) accepts the chain with one Monte
+      Carlo step. C3 and V3 need the identities F_k(tau) = 0 and Sn(tau) = x Sd(tau) in
+      Q[x]/(p) decided deterministically. The source's five-step replay, run on 25 October
+      2026 (#817), reproduces them only modulo random primes, so it does not earn C3, and
+      no number of primes would. The exact route is priced at about 440 to 720 CPU-hours by a
+      model that leaves out building the numerators, and the modular route at about 8.8
+      million (think-10m1).
 
-      An independent route, irreducibility and root isolation in another system and an
-      exact decision of the packing's non-overlap over the Krawczyk box, is a W7 slice of a
-      few agent-hours and similar compute; a decided non-overlap at sigma would make the
-      claim an upper bound below the case's ceiling, and the kind would change with it.
+      The packing at the unique zero t* of the five polynomials in the Krawczyk box is
+      decided (#817), so s(29) <= S(t*), 3.9e-799 below T-195, is a separate upper bound
+      for the owner to register or not. This entry stays an exact side until S(t*) = sigma
+      is decided, since sigma is the side it states.
     unfinished_confirmations:
       - what: >-
           the stage 4 mathematical review of N29.md, its elimination to the five consistency
@@ -35262,19 +35264,21 @@ results:
         rung: C1
         link: think-6gti
       - what: >-
-          the source's five-step replay from s29-minpoly.tar.zst, fetched and checked against
-          its pinned digest: irred.py over 12 primes, krawczyk.py, link.py at PREC=220000,
-          verify_mod.py over 50 primes and contacts_mod.py over 21, under env.sh's
-          python-flint 0.9.0 and mpmath 1.3.0, with a perturbed-polynomial control
+          the identities F_k(tau) = 0 and Sn(tau) = x Sd(tau) in Q[x]/(p) decided
+          deterministically, by building each cleared numerator in Z[x] and dividing it by p
+          exactly; the source's five-step replay, which reproduces them modulo random primes
+          only, ran on 25 October 2026 and does not meet this item
         rung: C3
         link: think-10m1
         estimated_cost:
-          cpu_hours: 2.5
-          cpu_hours_high: 3
+          cpu_hours: 717
           basis: >-
-            The author's measure in issue 545's comment of 12 October 2026: about 2.5
-            CPU-hours with 12, 50 and 21 primes, almost all in verify_mod.py at about 2.5
-            minutes a prime; an estimate, not a receipt
+            check_exact_side_minpoly price on 25 October 2026: 717 CPU-hours for all six
+            identities' schoolbook exact division, 23 for the sample. Its receipt of 31
+            October, receipts/validation-2026-10-25/price.json in the exact-data packet,
+            measures 437 and 6.6 on the host it names. The model times multiplications by
+            wall clock and leaves out building the numerators, so the true cost may be far
+            from either
           priced: '2026-10-25'
     notes: >-
       Registered on 25 October 2026 by the worker w-n29-poly-1025 for the coordinator
@@ -35934,6 +35938,131 @@ results:
 
       The 17 October read's lean/rectangle-k2m4/, a second Lean route to T-081's
       lower half over the same premise, is held by its own import bead (think-d5m3).
+  - id: T-252
+    kind: optimality
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: '`s(44) = 7`, by a closed mixed cover of points and grid-line segments'
+    claim: >-
+      s(44) = 7: the lower half by Mohsen Khalili and Sara Gharabaghi's closed mixed cover
+      of 26 October 2026, the upper half by the 7 x 7 grid. It is the case k = 7 of the
+      k^2 - 5 series, after T-066 (k = 8), T-184 (k = 9) and T-191 (k = 10).
+
+      The cover is 15,525 weighted points of [0,7]^2 and 3,912 segments of length 1/50 on
+      the lines x, y in {1, ..., 6}, each carrying its mass uniformly by length, total
+      2199755099/50000000 = 43.99510198 < 44, D4-invariant, in Evan Daniel's mixed format.
+      Every closed unit square in [0,7]^2 captures mass at least one, so a packing of 44 at
+      side below 7, scaled up to side 7, would capture at least 44.
+
+      The source reports the cover accepted by Daniel's zmx2, with outward-rounded binary64
+      enclosures and exact integer mass tests, over all 4,900 D4 roots and all 39,200
+      unreduced roots, none uncertified, and by his exact-rational zm_mixed.py over all
+      9,800 D4 roots at depth 24 with its 27 open roots closed at depth 30.
+
+      Both zmx2 sweeps were replayed here in full from the bytes the source pins, every
+      root's census equal to the source's log, and two mutated covers were refused: s(44)
+      >= 7 is confirmed, reproduced with the producer's code. Two reviews of 31 October
+      found no mathematical defect, one of them by a separately prompted lane with no
+      context shared with the import lane, which also replayed the D4 sweep and ran
+      controls of its own.
+
+      Mohsen Khalili and Sara Gharabaghi,
+      [s44-equals-7](https://github.com/moh63-dev/s44-equals-7/tree/b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf),
+      building on Evan Daniel's closed mixed covers, format, checkers and s(45) = 7 cover.
+      Registration was requested in jlevy/squares#842. The source says the search, the
+      certificate, the separation tool and the verification runs were produced with Claude
+      (Anthropic) under the authors' direction.
+    scope: {n_values: [44]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        An exact value for a case that was open, by Daniel's method at a new count, as T-066
+        settled s(59) = 8: a substantive case result, not a new technique or a family. Each
+        instance of the k^2 - 5 series is its own linear-programming solve, and the
+        source's separation step for near-axis wall valleys is a search method, not part of
+        the proof. The independent 31 October review confirmed the draft.
+      scored: '2026-10-31'
+      by: >-
+        the independent 31 October stage 4 review
+        (docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md),
+        confirming the #842 intake lane's draft (repository)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Khalili Gharabaghi s44 cover 2026-10-29]']
+      published: '2026-10-26'
+    composition: >-
+      Compound, and the minimum is set by the lower half: E-khalili-842-cover-replay
+      (interval-certified, zmx2 replayed here over the unreduced pose space and the D4
+      region), the upper half the grid (E-basic-grid-upper, exact-algebraic). The deciding
+      checker is Daniel's, which also decides T-053, T-062 and T-066. The source's
+      zm_mixed.py records are read, not replayed, and are not recorded as evidence.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md
+        kind: adversarial
+        reviewer: Claude (AI review), strong sub-agent tier, the records lane of the 31 October intake pass in a distinct review pass, sharing that lane's context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-31'
+        scope: >-
+          An adversarial soundness review of Mohsen Khalili and Sara Gharabaghi's s(44) = 7 by a closed mixed cover: the reduction from the cover to the claim, zmx2's trust boundary and the e2bb84e9 version that ran against the reviewed 6b7f0f79, the source's zm_mixed.py records, exact poses and mutated covers, with programs written for the review.
+        verdict: accepted
+        covers: [T-252]
+      - path: docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md
+        kind: adversarial
+        reviewer: Claude (AI review), strong tier (tbd-strong-max) at maximum reasoning, a separately prompted lane in its own worktree sharing no context with the import lane; the independent review
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-31'
+        scope: >-
+          The correctness pass of review A on pull request 851: the pin chain from upstream GitHub, an independent build of zmx2 e2bb84e9 and replay of the D4 sweep, three controls of its own (two single-row drops refused at zmx2's D4 precondition and a uniform 1% scale-down refused where the cover is tight), an exact preflight sharing no code with the source or this repository, the reduction, the D4 fold, interval certification, the checker version and the record's rung and significance.
+        verdict: accepted
+        covers: [T-252]
+    evidence:
+      - E-khalili-842-cover-report
+      - E-khalili-842-cover-replay
+      - E-basic-grid-upper
+    artifacts:
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/README.md
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/s44-equals-7/certificate/s44_cover_7.txt.gz
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/s44-equals-7/README.md
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_d4.log
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_full_resume1.log
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/review/README.md
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/review/independent-2026-10-31/README.md
+      - packing/devtools/replay_evand_zmx2.py
+      - packing/devtools/audit_evand_mixed_covers.py
+      - packing/devtools/check_basic_bounds.py
+      - docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md
+      - docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md
+    controls:
+      - packing/tests/test_replay_controls.py
+      - packing/tests/test_audit_evand_mixed_covers.py
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/controls/n44_control_drop-heaviest-point_zmx2_d4_x23-23_y17-17.log
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/controls/n44_control_drop-heaviest-segment_zmx2_d4_x8-8_y9-9.log
+    next_rung: >-
+      V4 and C4 need a human oversight record. Two adversarial AI reviews by distinct
+      reviewers are retained: one written in the import lane's context, and one by a
+      separately prompted lane that shared none of it. V5 needs the covering statement proved in a proof
+      assistant and an expert formalization review. zm_mixed.py's complete pass, about 138
+      CPU-hours by the source's records (think-qvp6), would be a second machine method by
+      the producer and raises no rung.
+    unfinished_confirmations:
+      - what: >-
+          a human oversight record that checks the trust boundary, the certificate's meaning
+          and the AI review's findings
+        rung: C4
+    notes: >-
+      Registered on 31 October 2026 at V3/C3, as T-066 was: zmx2 decides the whole
+      statement here, so no zm_mixed.py composite is part of the decision, unlike T-184 and
+      T-191, whose zm_mixed.py controls hold them at C1. The case record adopts the value,
+      so n = 44 is proved and T-090's s(44) >= 2789/400 and T-177's reported 2799/400 are
+      superseded there. The source's v1.0 and v1.1 hold the same certificate; the packet
+      pins v1.1. Of the two reviews, the first was written in the import lane's context and
+      says so; the second, the correctness pass of review A on pull request 851, is the
+      independent one stage 4 asks for, and its programs and logs are retained in the
+      packet's review/independent-2026-10-31/.
   - id: T-253
     kind: upper-bound
     registered: '2026-10-31'
