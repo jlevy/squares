@@ -5,7 +5,7 @@ title: "Intake 2026-10-31 L6: triage the sweep's 73 items owned by a stalled bea
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: bold-ritchie-l6
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-10-31T11:14:47.655Z
-updated_at: 2026-10-31T11:19:02.045Z
+updated_at: 2026-10-31T11:21:31.952Z
 started_at: 2026-10-31T11:14:53.671Z
 ---
 Lane L6 (bold-ritchie-l6) of the 2026-10-31 intake pass. Tracker audit (OR-19): owns this review bead and claims none of the beads it reviews. Input: make intake on main 49dac4354 (coordinator scratchpad intake3.txt), 73 items 'owned by a stalled bead'. For each item: read its bead and requests entry, classify the wait (owner decision, compute above cap, author, dependency, standing hold, or nothing), add a one-line dated note to each bead that waits, and price what can run now. Record changes, if any, on branch claude/bold-ritchie-xo28us-quiet in one draft PR.
@@ -32,3 +32,5 @@ Lane L6 (bold-ritchie-l6) of the 2026-10-31 intake pass. Tracker audit (OR-19): 
 | (f) runnable now, nobody holds it | 9 | think-ybmt (#375 reply), think-3m7d (#522 reply), think-ptkk (#763 reply), think-4rzl (#804), think-7scz (#545), think-flxm (#485, #533), think-63vx (#419, 2) |
 
 A dated wait note went on each of the 30 beads that wait and own no (f) item. Beads that own an (f) item got none (think-3m7d, think-ptkk, think-ybmt, think-4rzl, think-7scz, think-flxm, think-63vx), so the sweep keeps listing them until the work is scheduled. This audit claimed none of the beads it reviewed (OR-19). The claims on think-4rzl (w-exact-804-1026) and think-ptkk (c-import-763-1024b) are held by sessions that have ended, and think-4rzl has no branch on origin.
+
+2026-10-31 bold-ritchie-l6, after: make intake on 49dac4354, with the bead store synced, reads 11 unowned (the open PRs' items, unchanged), 16 stalled (73 before; each is an (f) item or shares its bead with one), 76 owned (19 before), 0 resolved blockers and 0 closeable.
