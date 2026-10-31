@@ -54761,7 +54761,7 @@ evidence:
       novel_object: The same construction, decided again in three strip placements.
       gaps: As E-register-candidates-2026-10-31-l-strip-293.
     source_key: '[Daniel issue 845 2026-10-29]'
-    certificate: packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/n293-s260-plus-L-17top+16.cert
+    certificate: packing/cases/register_candidates/think-ruu2-2026-10-31/certificates/n-293.cert
     replay: >-
       From packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/, with the
       project interpreter: python3 -I build293.py INPUTS OUT, run_checks.py INPUTS OUT and

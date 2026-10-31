@@ -37771,7 +37771,7 @@ results:
       MIT), vendored here. No optimality, local minimum or rigidity is claimed.
     scope: {n_values: [307]}
     verification: V3
-    confirmation: C1
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
@@ -37790,10 +37790,10 @@ results:
     composition: >-
       Two machine entries decide the bound: the maintained routes' replay
       (E-register-candidates-2026-10-31-solves) and the review's clean-room checker
-      (E-register-candidates-2026-10-31-review-solves), which would derive C3. The
-      confirmation is held at C1, the review's read, on the coordinator's decision of 31
-      October 2026, so that the entry stays below the stage 4 exit and no house moves until
-      the owner answers RV-3. The identity and contraction measurements are recorded
+      (E-register-candidates-2026-10-31-review-solves), C3 with two machine methods. The 31 October review that
+      ran the second is recorded on the evidence entries; on the coordinator's decision of
+      31 October 2026 it is not listed as this entry's accepted review, so the entry stays
+      below the stage 4 exit and no house moves until the owner answers RV-3. The identity and contraction measurements are recorded
       values and set no rung.
     regularizations:
       - n: 307
@@ -37826,36 +37826,16 @@ results:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/sharp-controls-n307.json
       - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/controls.json
       - packing/tests/test_register_candidates.py
-    reviews:
-      - path: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
-        kind: adversarial
-        reviewer: >-
-          AI agent (Claude, strongest sub-agent tier tbd-strong-max at maximum reasoning),
-          the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
-          prompted separately from the records lane (bold-ritchie-l8), with no shared
-          context beyond its brief
-        reviewer_kind: ai
-        relation: project
-        date: '2026-10-31'
-        scope: >-
-          Finite feasibility at 130, 293 and 307 of the project's candidates, decided by a
-          clean-room exact checker on two methods with 64 sharp controls; each side against
-          its house, its print and the ceilings above; the identity and the uniform
-          contraction of each house; the credit chains; whether each is a new result, put to
-          the owner (RV-3, RV-4).
-        verdict: accepted
-        covers: [T-261, T-262, T-263]
     next_rung: >-
       Held for the owner's answer to RV-3 of the 31 October review: is a re-certification
       of a house's own packing, with a margin no larger than the house certificate's
       padding, a new result at any print (adopt), only across the print (adopt 307 now), or
-      at none (withdraw; the review recommends this)? If the answer keeps it, the
-      confirmation rises to C3, which its evidence derives, and the house rule adopts the
-      side at 307 with both regularizations once select_houses and upper_bound_houses read
+      at none (withdraw; the review recommends this)? If the answer keeps it, the review is
+      listed and the house rule adopts the side at 307 with both regularizations once select_houses and upper_bound_houses read
       a certificate this project made (think-4z8z).
     notes: >-
       The case record is unchanged: the house at 307 stays T-256. The retained certificate
-      is the run's solve certificate, pinned in devtools.register_candidates, which the review names as
+      is the run's solve certificate, whose digest devtools.register_candidates records, which the review names as
       the natural bound certificate (RV-5); the run's drawn view, at the same side, moves 38
       squares and is a drawing under the regularization policy, retained with the review's
       inputs only. The KKT local minimality the run reports is not decided here.
@@ -37903,7 +37883,7 @@ results:
       or rigidity is claimed.
     scope: {n_values: [293]}
     verification: V3
-    confirmation: C1
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
@@ -37922,10 +37902,10 @@ results:
     composition: >-
       Two machine entries decide the bound: the maintained routes' replay
       (E-register-candidates-2026-10-31-l-strip-293) and the review's clean-room checker
-      (E-register-candidates-2026-10-31-review-l-strip-293), which would derive C3. The
-      confirmation is held at C1, the review's read, on the coordinator's decision of 31
-      October 2026, so that the entry stays below the stage 4 exit and no house moves until
-      the owner answers RV-3 and RV-4.
+      (E-register-candidates-2026-10-31-review-l-strip-293), C3 with two machine methods. The 31 October review that
+      ran the second is recorded on the evidence entries; on the coordinator's decision of
+      31 October 2026 it is not listed as this entry's accepted review, so the entry stays
+      below the stage 4 exit and no house moves until the owner answers RV-3 and RV-4.
     evidence:
       - E-register-candidates-2026-10-31-l-strip-293
       - E-register-candidates-2026-10-31-review-l-strip-293
@@ -37942,30 +37922,11 @@ results:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/sharp-controls-n293.json
       - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/controls.json
       - packing/tests/test_register_candidates.py
-    reviews:
-      - path: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
-        kind: adversarial
-        reviewer: >-
-          AI agent (Claude, strongest sub-agent tier tbd-strong-max at maximum reasoning),
-          the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
-          prompted separately from the records lane (bold-ritchie-l8), with no shared
-          context beyond its brief
-        reviewer_kind: ai
-        relation: project
-        date: '2026-10-31'
-        scope: >-
-          Finite feasibility at 130, 293 and 307 of the project's candidates, decided by a
-          clean-room exact checker on two methods with 64 sharp controls; each side against
-          its house, its print and the ceilings above; the identity and the uniform
-          contraction of each house; the credit chains; whether each is a new result, put to
-          the owner (RV-3, RV-4).
-        verdict: accepted
-        covers: [T-261, T-262, T-263]
     next_rung: >-
       Held for the owner's answers to RV-3 and RV-4 of the 31 October review. If s_260 + 1
       is issue 845's own report (RV-4), the entry names T-257 as first certifying it and
-      proves no new bound. If not, and RV-3 keeps such re-certifications, the confirmation
-      rises to C3, which its evidence derives, and the house rule adopts the side at 293
+      proves no new bound. If not, and RV-3 keeps such re-certifications, the review is
+      listed and the house rule adopts the side at 293
       with both regularizations once select_houses and upper_bound_houses read a
       certificate this project made (think-4z8z); RV-6 of the review notes the side as
       built is not tight, and RV-3's answer decides whether a tighter one replaces it.
@@ -38014,7 +37975,7 @@ results:
       vendored here. No optimality, local minimum or rigidity is claimed.
     scope: {n_values: [130]}
     verification: V3
-    confirmation: C1
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
@@ -38033,10 +37994,10 @@ results:
     composition: >-
       Two machine entries decide the bound: the maintained routes' replay
       (E-register-candidates-2026-10-31-solves) and the review's clean-room checker
-      (E-register-candidates-2026-10-31-review-solves), which would derive C3. The
-      confirmation is held at C1, the review's read, on the coordinator's decision of 31
-      October 2026, so that the entry stays below the stage 4 exit and no house moves until
-      the owner answers think-ikku's RV-1 and the review's RV-3.
+      (E-register-candidates-2026-10-31-review-solves), C3 with two machine methods. The 31 October review that
+      ran the second is recorded on the evidence entries; on the coordinator's decision of
+      31 October 2026 it is not listed as this entry's accepted review, so the entry stays
+      below the stage 4 exit and no house moves until the owner answers think-ikku's RV-1 and the review's RV-3.
     regularizations:
       - n: 130
         of: T-259
@@ -38068,36 +38029,17 @@ results:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/sharp-controls-n130.json
       - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/controls.json
       - packing/tests/test_register_candidates.py
-    reviews:
-      - path: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
-        kind: adversarial
-        reviewer: >-
-          AI agent (Claude, strongest sub-agent tier tbd-strong-max at maximum reasoning),
-          the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
-          prompted separately from the records lane (bold-ritchie-l8), with no shared
-          context beyond its brief
-        reviewer_kind: ai
-        relation: project
-        date: '2026-10-31'
-        scope: >-
-          Finite feasibility at 130, 293 and 307 of the project's candidates, decided by a
-          clean-room exact checker on two methods with 64 sharp controls; each side against
-          its house, its print and the ceilings above; the identity and the uniform
-          contraction of each house; the credit chains; whether each is a new result, put to
-          the owner (RV-3, RV-4).
-        verdict: accepted
-        covers: [T-261, T-262, T-263]
     next_rung: >-
       Held for the owner's answers to think-ikku's RV-1 (does the 23 October restatement
       ruling reach counts inside the corpus?) and the 31 October review's RV-3 (is a
       re-certification of a house's own packing within its padding a new result at all?).
       If either answer makes it a restatement, the entry is withdrawn and no house moves; if
-      both keep it, the confirmation rises to C3 and the house rule adopts the side at 130
+      both keep it, the review is listed and the house rule adopts the side at 130
       with both regularizations once select_houses and upper_bound_houses read a
       certificate this project made (think-4z8z).
     notes: >-
       The case record is unchanged: the house at 130 stays T-259. The retained certificate
-      is the run's solve certificate, pinned in devtools.register_candidates, which the review names as
+      is the run's solve certificate, whose digest devtools.register_candidates records, which the review names as
       the natural bound certificate (RV-5); the run's drawn view, at the same side, moves 35
       squares and is a drawing, retained with the review's inputs only. The KKT local
       minimality the run reports is not decided here.

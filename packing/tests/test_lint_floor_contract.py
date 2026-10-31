@@ -41,6 +41,11 @@ NAMED_EXCLUSIONS = {
     # `devtools.check_vendored_evand`: other authors' bytes, run as a generator whose every
     # output this project's exact checkers decide, and changed only by a recorded patch.
     "vendor/evand-regularize/": "vendored third-party code at a pin (its README.md)",
+    # A stage 4 review's clean-room checkers, retained verbatim beside the certificates
+    # they decided (think-ruu2): the receipts the review cites are bound to these bytes.
+    "packing/cases/register_candidates/think-ruu2-2026-10-31/review/": (
+        "a stage 4 review's retained checkers, checked by being run"
+    ),
 }
 
 

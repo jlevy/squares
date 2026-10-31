@@ -172,7 +172,7 @@ extend-exclude = [
   # A stage 4 review's clean-room checkers, retained verbatim beside the certificates they
   # decided, as a source packet's review programs are under resources/: editing them to
   # satisfy a linter would change the programs whose receipts the review cites.
-  "cases/register_candidates/*/review",
+  "cases/register_candidates/think-ruu2-2026-10-31/review",
 ]
 
 [tool.ruff.lint]
@@ -346,7 +346,7 @@ exclude = [
     # satisfy a checker would void what it is, so it is excluded here as it is from ruff.
     "cases/n12_fractional_certificate/independent_verify.py",
     # A stage 4 review's clean-room checkers, retained verbatim, as excluded from ruff.
-    "cases/register_candidates/*/review",
+    "cases/register_candidates/think-ruu2-2026-10-31/review",
 ]
 pythonVersion = "3.14"
 typeCheckingMode = "standard"

@@ -40,9 +40,10 @@ answered (31 October 2026):
 - **think-ikku’s RV-1** (130): whether the restatement ruling of 23 October reaches
   counts inside the corpus.
 
-Each entry is at V3 with its confirmation held at C1, below the stage 4 exit, so
-`devtools.select_houses` takes none of them.
-If the answers keep one, its confirmation rises to C3, which its evidence derives.
+Each entry is at V3/C3, as every project result is from its registration, and the review
+is recorded on its evidence but not listed as its accepted review.
+So each stays below the stage 4 exit, and `devtools.select_houses` takes none of them.
+If the answers keep one, the review is listed.
 Adopting it then needs `select_houses` and `upper_bound_houses` to read a certificate
 this project made (think-4z8z).
 
