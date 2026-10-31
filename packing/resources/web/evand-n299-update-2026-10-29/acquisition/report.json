@@ -1,0 +1,71 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/824#issuecomment-6488202753",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n299 update 2026-10-29]",
+  "report_evidence": "E-evand-n299-update-certificate-report",
+  "receipt_format": "evand-n299-update-exact-replay-v1",
+  "witness_prefix": "W-evand-n299-update-n",
+  "claim_limitations": "Complete 0e76d9f rational centre/half-angle certificate, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-31",
+  "read_at_main": "3978a7f61ca164f78291ed91534b8c9a5b9cafd7",
+  "certificates": [
+    {
+      "n": 299,
+      "path": "search/packer/candidates/s299_1028.cert",
+      "format": "evand-cert",
+      "offered": "17.801238549389",
+      "first_committed": "2026-10-29T04:44:41Z"
+    }
+  ],
+  "requested": [
+    299
+  ],
+  "replayed": [
+    299
+  ],
+  "houses": [
+    {
+      "n": 299,
+      "reader": "[evand exact optima 2026-10-05]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue (the Kingbird catalogue), verified by T-101's exact ceiling",
+      "result": "T-101",
+      "reported_value": "17.82287565553229",
+      "verified_value": "17.82287565553230",
+      "evidence": [
+        "E-evand-exact-ceilings-2026-10-05-exact-replay",
+        "E-evand-exact-ceilings-2026-10-05-source-replay",
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [
+    {
+      "n": 299,
+      "report": "T-248 (#824)",
+      "url": "https://github.com/jlevy/squares/issues/824",
+      "holders": "Evan Daniel, after Chris Deotte",
+      "result": "T-248",
+      "reader": "[Daniel n299 2026-10-26]"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's updated packing of 299 squares at 0e76d9f, issue 824's update",
+    "headline": "Daniel's lower packing of 299 squares from his T-248 packing, 2.46e-3 below it",
+    "significance": 3,
+    "source_checks": "The update says the source's two exact checkers, search/exact/verify_cert.py and verify_cert2.py, byte-identical to the copies the n183 packet retains, both report VALID. It calls the certificate an exact KKT point whose 80-digit point, s299_1028.exact.txt, is a local minimum of S strict modulo 119 exact flat motions, with no corner-corner MILP descent, 64 corner-corner contacts and 33 rattlers, by numerical evidence at 80 digits and not interval proofs. The source's commit of 29 October says the regularized view failed its checkers and is not committed, and ends with a Co-Authored-By trailer naming Claude. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), who reports a new packing found from his T-248 packing at 299 by four generations of refill (removing a line or disc of squares, re-placing them and relaxing; 17.803695 to 17.801240) and an exact descent (a corner-corner MILP kick and re-solve, to 17.801238549), and asks that the credit of the opening post stand: Chris Deotte for the method, his multi-gadget fault-line DP, and for the start, his public Kaggle s(334) packing. A Kaggle per-puzzle side the update quotes, 17.793636991 for Cats and boxes, states no packing and is no report. The source's credits say its work was produced by Claude (Anthropic) under human direction.",
+    "next_rung": "Independently review the retained replay and the certificate (stage 4): a clean-room exact checker, the identity against the house's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt it at 299 in place of T-248 under the house rule, with both strong generators' regularization and the flip of each new house in the same change.",
+    "bead": "think-3xn9",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "independent",
+      "credit": "Daniel after Deotte",
+      "note": "One complete exact certificate, search/packer/candidates/s299_1028.cert at evand/square-packing@0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d, committed on 29 October 2026 and reported in Evan Daniel's update to issue 824: s(299) <= 17801238549388584084680137655023/10^30, an exact KKT point of a packing found from the source's T-248 packing by refill and exact descent, with the opening post's credit to Chris Deotte for the method and the start. MIT-licensed; Claude assistance disclosed. No global optimality claim. Retained in web/evand-n299-update-2026-10-29/."
+    }
+  }
+}

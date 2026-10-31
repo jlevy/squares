@@ -1,0 +1,5 @@
+OK: 16 reports, 39 claims, 29 starts, each member's span recomputed from its stored inputs, each record relation read against its start
+
+real	0m0.878s
+user	0m0.756s
+sys	0m0.076s

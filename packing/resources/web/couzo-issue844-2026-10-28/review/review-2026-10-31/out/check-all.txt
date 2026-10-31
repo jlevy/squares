@@ -1,0 +1,66 @@
+{"label": "c843-130", "n": 130, "side_float": 11.90243064598435, "side_minus_extent": 1e-15, "cpu_s": 2.2}
+  A: True least pair [2.0761969838327356e-13, 105, 128] least wall [1e-15, 1]
+  B: True pairs by area 280 least wall [1e-15, 1]
+  reader: {'count_plus_one': 'refused: header n=131 but 130 rows', 'decimal_field': 'refused: row 1 malformed'}
+  duplicate: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  box_at_extent: A accepted; B accepted
+  box_below_extent: A refused (0 pairs, walls [20]); B refused (0 pairs, walls [20])
+  pair_contact: A accepted; B accepted
+  pair_past_contact: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  halfway: A refused (3 pairs, walls []); B refused (3 pairs, walls [])
+  rotation_reversed: A refused (44 pairs, walls []); B refused (44 pairs, walls [])
+{"label": "a5-260", "n": 260, "side_float": 16.638532792319296, "side_minus_extent": 1e-15, "cpu_s": 9.8}
+  A: True least pair [1.2316282072804543e-13, 93, 112] least wall [1e-15, 7]
+  B: True pairs by area 610 least wall [1e-15, 7]
+  reader: {'count_plus_one': 'refused: header n=261 but 260 rows', 'decimal_field': 'refused: row 1 malformed'}
+  duplicate: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  box_at_extent: A accepted; B accepted
+  box_below_extent: A refused (0 pairs, walls [34, 38, 59, 70, 82]); B refused (0 pairs, walls [34, 38, 59, 70, 82])
+  pair_contact: A accepted; B accepted
+  pair_past_contact: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  halfway: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  rotation_reversed: A refused (147 pairs, walls []); B refused (147 pairs, walls [])
+{"label": "a5-307", "n": 307, "side_float": 17.979251283692587, "side_minus_extent": 1e-15, "cpu_s": 18.5}
+  A: True least pair [2.119806626980737e-13, 85, 260] least wall [1e-15, 85]
+  B: True pairs by area 731 least wall [1e-15, 85]
+  reader: {'count_plus_one': 'refused: header n=308 but 307 rows', 'decimal_field': 'refused: row 1 malformed'}
+  duplicate: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  box_at_extent: A accepted; B accepted
+  box_below_extent: A refused (0 pairs, walls [85]); B refused (0 pairs, walls [85])
+  pair_contact: A accepted; B accepted
+  pair_past_contact: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  halfway: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  rotation_reversed: A refused (124 pairs, walls []); B refused (124 pairs, walls [])
+{"label": "c844-232", "n": 232, "side_float": 15.76166175948133, "side_minus_extent": 1e-15, "cpu_s": 7.0}
+  A: True least pair [2.1161650127193359e-13, 58, 171] least wall [1e-15, 7]
+  B: True pairs by area 554 least wall [1e-15, 7]
+  reader: {'count_plus_one': 'refused: header n=233 but 232 rows', 'decimal_field': 'refused: row 1 malformed'}
+  duplicate: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  box_at_extent: A accepted; B accepted
+  box_below_extent: A refused (0 pairs, walls [131]); B refused (0 pairs, walls [131])
+  pair_contact: A accepted; B accepted
+  pair_past_contact: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  halfway: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  rotation_reversed: A refused (93 pairs, walls []); B refused (93 pairs, walls [])
+{"label": "c844-260", "n": 260, "side_float": 16.637029558870974, "side_minus_extent": 1e-15, "cpu_s": 9.8}
+  A: True least pair [1.8585932710062233e-13, 61, 91] least wall [1e-15, 31]
+  B: True pairs by area 618 least wall [1e-15, 31]
+  reader: {'count_plus_one': 'refused: header n=261 but 260 rows', 'decimal_field': 'refused: row 1 malformed'}
+  duplicate: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  box_at_extent: A accepted; B accepted
+  box_below_extent: A refused (0 pairs, walls [44, 48, 104, 107, 109]); B refused (0 pairs, walls [44, 48, 104, 107, 109])
+  pair_contact: A accepted; B accepted
+  pair_past_contact: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  halfway: A refused (2 pairs, walls []); B refused (2 pairs, walls [])
+  rotation_reversed: A refused (138 pairs, walls []); B refused (138 pairs, walls [])
+{"label": "c844-307", "n": 307, "side_float": 17.979251283688026, "side_minus_extent": 1e-15, "cpu_s": 12.6}
+  A: True least pair [2.0895196601285994e-13, 168, 237] least wall [1e-15, 8]
+  B: True pairs by area 699 least wall [1e-15, 8]
+  reader: {'count_plus_one': 'refused: header n=308 but 307 rows', 'decimal_field': 'refused: row 1 malformed'}
+  duplicate: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  box_at_extent: A accepted; B accepted
+  box_below_extent: A refused (0 pairs, walls [116]); B refused (0 pairs, walls [116])
+  pair_contact: A accepted; B accepted
+  pair_past_contact: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  halfway: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  rotation_reversed: A refused (104 pairs, walls []); B refused (104 pairs, walls [])

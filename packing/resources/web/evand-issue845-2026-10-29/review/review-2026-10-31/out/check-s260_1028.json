@@ -1,0 +1,46 @@
+{
+ "file": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-daniel/tree/packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s260_1028.cert",
+ "sha256": "d6d6f45f600f6552416ea3708d8ee04416cfe88820ee4c3c422d8e131d7cdf87",
+ "bytes": 36826,
+ "comment": [
+  "# dilation certificate (dilate_cert.py, delta 1e-12) of /home/evand/math/square-packing/public/search/packer/runs/candidates/s260_1028/cand.txt; check with verify_cert.py"
+ ],
+ "n": 260,
+ "side": "8316991251060941991251052624833/500000000000000000000000000000",
+ "side_decimal_40": "16.6339825021218839825021052496660000000000",
+ "tilted": 148,
+ "A_walls_ok": true,
+ "least_near_wall_clearance": [
+  6.037683382552834e-13,
+  9
+ ],
+ "least_near_wall_clearance_exact": "8272420969682042977743635633993332689092823/13701316292250363937484481700000000000000000000000000000",
+ "least_far_wall_clearance": [
+  6.010000000001019e-13,
+  240
+ ],
+ "least_far_wall_clearance_exact": "601000000000101992000000000000602000000000101991/1000000000000000000000000000001000000000000000000000000000000",
+ "extent_exact": "665359300084851319300084205907625359300084851279300084205907/40000000000000000000000000000040000000000000000000000000000",
+ "side_minus_extent": 6.010000000001019e-13,
+ "A_pairs": 33670,
+ "A_pairs_overlapping": 0,
+ "A_first_overlaps": [],
+ "A_valid": true,
+ "least_pair_gap": [
+  1.2016342921610552e-12,
+  27,
+  33
+ ],
+ "least_pair_gap_exact": "20518967488086112756748968278050416825923196691708721823860642219376678663341/17075883754269516794144086763880878057810574148268377468040500000000000000000000000000000",
+ "pairs_within_1e-15": 0,
+ "A_cpu_s": 2.6,
+ "B_walls_bad": [],
+ "B_pairs_clipped": 660,
+ "B_pairs_far_by_discs": 33010,
+ "B_pairs_positive_area": 0,
+ "B_first_overlaps": [],
+ "B_valid": true,
+ "B_cpu_s": 0.47,
+ "total_cpu_s": 3.07,
+ "print_up_12": "16.633982502122"
+}

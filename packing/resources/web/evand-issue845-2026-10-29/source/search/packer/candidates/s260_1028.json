@@ -1,0 +1,27 @@
+{
+ "input": "/home/evand/math/square-packing/public/search/packer/runs/candidates/s260_1028/cand.txt",
+ "n": 260,
+ "S_input": "16.63398250210525",
+ "dps": 80,
+ "jam_threshold": 1e-07,
+ "contact_tol": 1e-07,
+ "near_parallel_tol": 0.001,
+ "vertex_vertex_used": false,
+ "n_candidates": 1229,
+ "n_vv": 53,
+ "n_active": 1196,
+ "jam_residual": 2.7514429699234047e-09,
+ "load_bearing_squares": 254,
+ "free_squares": [
+  71,
+  77,
+  93,
+  96,
+  98,
+  215
+ ],
+ "status": "solve failed",
+ "S_exact": null,
+ "cert_valid": null,
+ "vv_milp_dS": null
+}

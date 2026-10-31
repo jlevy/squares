@@ -509,20 +509,28 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # states there, and that of 21 October 2026 moved 260 on to Francisco Couzo's issue-678
     # certificate (T-223), and that of 22 October 2026 moved 227, 229 and 260 on to Evan
     # Daniel's regularized views (T-225), and that of 23 October 2026 moved 302 on to issue
-    # 639's exact form (T-193); every other side is at or below its case.
+    # 639's exact form (T-193). That of 31 October 2026 (think-3guf) moved 260 again, to
+    # Evan Daniel's issue-845 certificate (T-257), and 299 from the Kingbird catalogue's
+    # 33/2 + sqrt(7)/2, which PR #574 states, to his issue 824 update (T-258), below it;
+    # every other side is at or below its case.
     assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
         227,
         229,
         260,
+        299,
         302,
     }
-    for n in (227, 229, 260):
+    for n in (227, 229):
         assert rows[n]["case"]["reported_source_key"] == "[Daniel regularized lists 2026-10-20]"
+        assert rows[n]["case"]["reported_relation"] == "above"
+    assert rows[260]["case"]["reported_source_key"] == "[Daniel issue 845 2026-10-29]"
+    assert rows[299]["case"]["reported_source_key"] == "[Daniel n299 update 2026-10-29]"
+    for n in (260, 299):
         assert rows[n]["case"]["reported_relation"] == "above"
     assert all(
         row["case"]["verified_relation"] in {"equal", "below"}
         for n, row in rows.items()
-        if n not in {227, 229, 260, 302}
+        if n not in {227, 229, 260, 299, 302}
     )
     # 207 was below every other report until its side became the house there.
     assert sorted(n for n, row in rows.items() if row["below_every_other"]) == []

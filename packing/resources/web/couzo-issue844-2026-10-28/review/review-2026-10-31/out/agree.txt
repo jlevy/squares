@@ -1,0 +1,3 @@
+10 of 10 checks equal
+20 of 20 checks equal
+30 of 30 checks equal

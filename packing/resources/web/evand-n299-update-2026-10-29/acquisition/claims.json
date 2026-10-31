@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/824#issuecomment-6488202753",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+  "read_on": "2026-10-31",
+  "read_at_main": "3978a7f61ca164f78291ed91534b8c9a5b9cafd7",
+  "horizon": 324,
+  "results": [
+    {"n": 299, "certificate": "search/packer/candidates/s299_1028.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "17.801238549389", "printed_in": "https://github.com/jlevy/squares/issues/824#issuecomment-6488202753", "exact_side": "17801238549388584084680137655023/1000000000000000000000000000000", "ceiling": "17.8012385493885841", "first_committed": "2026-10-29T04:44:41Z", "grid_side": "18", "case": {"source_key": "[Kingbird]", "holders": "the Kingbird catalogue (the Kingbird catalogue), verified by T-101's exact ceiling", "result": "T-101", "reported_value": "17.82287565553229", "verified_value": "17.82287565553230", "evidence": ["E-evand-exact-ceilings-2026-10-05-exact-replay", "E-evand-exact-ceilings-2026-10-05-source-replay", "E-regularized-bounds-2026-10-12-exact-decision"], "reported_rounding": "unstated", "exact_side": "142583005244258362363432293067/8000000000000000000000000000", "relation": "below", "difference": "1352319133981950671806186147/62500000000000000000000000000", "reported_relation": "below"}, "pending": [{"report": "T-248 (#824)", "url": "https://github.com/jlevy/squares/issues/824", "holders": "Evan Daniel, after Chris Deotte", "result": "T-248", "exact_side": "8901847717666168847717657266821/500000000000000000000000000000", "relation": "below", "difference": "2456885943753610755176878619/1000000000000000000000000000000"}], "smallest": "this certificate"}
+  ]
+}

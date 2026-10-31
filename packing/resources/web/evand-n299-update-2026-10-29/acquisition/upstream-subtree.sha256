@@ -1,0 +1,10 @@
+778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168  ./CREDITS.md
+c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./LICENSE
+3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52  ./search/exact/verify_cert.py
+55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3  ./search/exact/verify_cert2.py
+ccb323dd6d69bee141d59cae4c605f45136b998dfecce1248e200b678b253db5  ./search/packer/candidates/s299_1028.cert
+b21482d0de2155b9b0304ba51010fbedefc4df6313bf7c50f7aa862b071de7fd  ./search/packer/candidates/s299_1028.exact.txt
+365d818c48382f9db9447708bb7ba311d76e1a8a870fd219d3dcc582782bf73a  ./search/packer/candidates/s299_1028.input.txt
+0cfe2ef51466e4dd41c807335fd87cbbe55e4182a6ec20c88ababadd4777da2c  ./search/packer/candidates/s299_1028.json
+b81ebf2b8930a333445e8f2e4414441d404a0f847c847f6b044a2873561f36fb  ./search/packer/candidates/s299_1028.predescent.txt
+fbbd7b7cb0b3f2ad1a58d6b764171aa916934661a49e149075d8456575194828  ./search/packer/candidates/s299_1028_prior.json

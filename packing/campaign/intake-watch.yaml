@@ -1589,3 +1589,81 @@ repositories:
       evand-rect-small-n-lean-2026-10-22 packet retains at 7051f4e for T-238, are unchanged.
       The rest change the packer (goal-driven search, lineage credit, relax caps,
       polish reuse, repository import), its docs and TODO.md. Nothing else to import.
+  # The intake pass of 31 October 2026, lane L2 (think-3guf, bold-ritchie-l2): the heads the
+  # sweep listed past their reads at evand, franciscouzo, Mishapolk, wand125 and TheSnakeFang.
+  - url: https://github.com/evand/square-packing
+    read_through: 0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d
+    read_on: '2026-10-31'
+    note: >-
+      The 24 commits past the 6067db5 read, 509e3fd to 0e76d9f (2026-10-26T03:52Z to
+      2026-10-29T04:44:41Z); GitHub's activity log was not readable from the importing session,
+      so no push is dated. d2d5dd9 adds search/packer/candidates/s172_1028, s204_1028,
+      s260_1028 and s293_1028 (certificates, inputs, solver reports, prior facts, and at 172 the
+      KKT point and a regularized view), which #845 reports 12 minutes later; the
+      evand-issue845-2026-10-29 packet retains all 21 files (think-17wo). 0e76d9f adds the
+      s299_1028 set, s(299) <= 17801238549388584084680137655023/10^30, an exact KKT certificate
+      that the author's update comment on #824 reports 2 minutes later; the
+      evand-n299-update-2026-10-29 packet retains its six files (think-3xn9). Both packets pin
+      0e76d9f. The other 22 change the packer only (the unit loop, the priority queue and the
+      event loop that replaces them, store and screen changes, fill and nearmiss speedups, their
+      tests), CLAUDE.md, CLAIMS.md, DESIGN.md, Completed.md and TODO.md: no certificate and no
+      published side at a count. Nothing else to import.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 712c6a6e9ef58a9521784e6b7e236af813422de7
+    read_on: '2026-10-31'
+    note: >-
+      The five commits past the 1c17153 read (2026-10-24T06:40:45Z to 2026-10-28T15:57:20Z).
+      21af2f0 changes only .gitignore, keeping new per-count files above 324 out of Git while the
+      Kaggle competition runs. dd24d4e retains Evan Daniel's s268_lightning.cert and
+      s304_pub.cert as certificates/best/n268.cert and n304.cert, the blobs the
+      evand-kaggle-descents-2026-10-24 packet retains (T-242), with index, provenance and seed
+      updates: another holder's certificates the record already holds. 3a4d95c adds
+      certificates/n130.cert, which #843 reports 7 minutes later; the couzo-issue843-2026-10-28
+      packet retains it at 712c6a6, unchanged there (think-big9). a5a5d76, which no issue
+      reports, rewrites certificates/n260.cert and adds n307.cert, the author's refinements of
+      ntumlnoob's Kaggle notebook packings at 260 and 307; the couzo-a5a5d76-2026-10-28 packet
+      retains both at a5a5d76 (think-n61j). 712c6a6 replaces them with the 232, 260 and 307
+      certificates #844 reports and keeps a5a5d76's bytes under certificates/parents/; the
+      couzo-issue844-2026-10-28 packet retains them (think-n61j). The indexes, provenance
+      records, seeds and pictures the three commits change state the same sides. Nothing else to
+      import.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: 52aa2672c74c91931686d60a49bdf97ec798291c
+    read_on: '2026-10-31'
+    note: >-
+      The 15 commits past the 7e82c64 read (2026-10-23T23:36:37Z to 2026-10-30T05:40:00Z); no
+      push is dated. The ten of 23 October, e386aab to fbc1749, rewrite or add certificates at
+      88, 126, 152, 154, 155, 183, 204, 211, 227, 236, 237, 241, 270 and 271 with no issue: the
+      mishapolk-1023-refinements-2026-10-30 packet retains them at 52aa267, unchanged there, but
+      204, which the issue-846 packet retains. The ledger of 31 October
+      (campaign/issue-intake/upper-bounds-843-846-20261031) records nine, 1.3e-19 to 1.7e-19
+      below each house, and not 88 or 126 (above T-193's exact sides), 152 (undecided against
+      T-122's) or the ties at 204 and 270 (think-pg1y). 2b741dc and 7dc39a2 change only the
+      indexes: 303's row for 7e82c64's certificate, and 260's credit for c0bf150's certificate,
+      both walked before. 7e40790 changes only credits in upper_bounds.json. ab8e833 adds
+      certificates/n11.cert, n17 to n19, n26 to n29 and n37 to n41, exact rational certificates
+      at small counts, each above its case's record (by 3.0e-12 to 5.5e-12 at 11, 17, 28, 29,
+      37, 39 and 41, and above the closed forms at the others): no claim to record. 52aa267 is
+      the release #846 reports, which the mishapolk-issue846-2026-10-30 packet retains
+      (think-pg1y). Nothing else to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: 7a47ab9a91706e3b4afdd12764262d4bdb197d3f
+    read_on: '2026-10-31'
+    note: >-
+      The three commits of 26 October (03:03Z to 03:19Z) past the 2985613 read, all under site/:
+      fa06666 adds an analytic minimization proof to the working paper Minimum Widths for Unit
+      Squares in Thin Rectangles (v3, with its Markdown, TeX, PDF and source archive), 35c31a5
+      records it in the edition history and 7a47ab9 restores the interactive figures.
+      Rectangles of height below 2 are another container, so nothing to import.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: d56c9a0ad29fd43bc10668d8b44d830f339e57fc
+    read_on: '2026-10-31'
+    note: >-
+      One commit of 27 October (23:24:29Z) past the db1ed62 read: d56c9a0 makes the Theorem A
+      note v0.3 (doi:10.5281/zenodo.23714459) after this project's review of v0.2 (#797). It
+      corrects the fixed-squeeze example of Section 6 and the comparison sentence of Section 7,
+      labels the sharpness remark as observed, and fixes wording; its CHANGELOG says the
+      mathematics, code and certificates are unchanged, and the commit touches only the note,
+      the READMEs, the CHANGELOG and the manifest's digests of them. The author's comment on
+      #797 of the same evening reports it. Evidence for the registered Theorem A row, which the
+      fang-theorem-a-2026-10-24 packet holds at db1ed62; no certificate or theorem to import.

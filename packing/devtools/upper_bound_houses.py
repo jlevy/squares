@@ -580,7 +580,8 @@ def _sources() -> dict[str, Source]:
         packet_source("T-224", "evand-n270-sweep-2026-10-20"),
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
-        packet_source("T-231", "mishapolk-n204-2026-10-22"),
+        # The adoption of 31 October 2026 moved 204, T-231's only count, to T-257, so T-231
+        # is no source here now, as T-230 and T-239 left before it.
         # The adoption of 24 October 2026 moved 303, T-230's only count, to T-239, and the
         # adoption of 25 October moved it on to T-240, so neither T-230 nor T-239 is a
         # source here now, as T-196 and T-199 left on 22 October.
@@ -592,6 +593,14 @@ def _sources() -> dict[str, Source]:
         # packing of issue 806 from an L-cut of Francisco Couzo's 211; T-174 keeps its
         # other houses.
         packet_source("T-243", "evand-n182-2026-10-25"),
+        # The adoption of 31 October 2026 moved 232 and 307 to T-256, Francisco Couzo's
+        # certificates of issue 844; 172, 204, 260 and 293 to T-257, Evan Daniel's of issue
+        # 845; 299 to T-258, his update to issue 824; and 130 to T-259, Mykhailo
+        # Polkovskyi's re-solve of Couzo's packing of issue 843.
+        packet_source("T-256", "couzo-issue844-2026-10-28"),
+        packet_source("T-257", "evand-issue845-2026-10-29"),
+        packet_source("T-258", "evand-n299-update-2026-10-29"),
+        packet_source("T-259", "mishapolk-issue846-2026-10-30"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -637,7 +646,13 @@ def _sources() -> dict[str, Source]:
 #: 268 from T-174 and at 303 from T-239, Evan Daniel's exact descent of Kirill
 #: Tymchishin's Kaggle notebook packing (T-242) at 304 from T-186, and Daniel's packing of
 #: issue 806 (T-243) at 182 from T-174. The pass of 26 October 2026 adopted Daniel's exact
-#: descent of Vladislav Lavrentev's Kaggle packing (T-242) at 268 from T-240.
+#: descent of Vladislav Lavrentev's Kaggle packing (T-242) at 268 from T-240. The pass of
+#: 31 October 2026 adopted Francisco Couzo's certificates of issue 844 (T-256) at 232 from
+#: T-186 and at 307 from T-174; Evan Daniel's certificates of issue 845 (T-257) at 172 from
+#: T-174, 204 from T-231, 260 from T-225 and 293 from the Kingbird catalogue; his update to
+#: issue 824 (T-258) at 299 from the Kingbird catalogue; and Mykhailo Polkovskyi's re-solve
+#: of Couzo's packing of issue 843 (T-259) at 130 from T-174, with the packing's credit
+#: Couzo's (T-254). T-231 keeps no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -653,7 +668,7 @@ ADOPTED: dict[int, str] = {
     126: "T-139",
     127: "T-174",
     129: "T-186",
-    130: "T-174",
+    130: "T-259",
     131: "T-174",
     132: "T-174",
     146: "T-187",
@@ -661,7 +676,7 @@ ADOPTED: dict[int, str] = {
     154: "T-222",
     155: "T-197",
     156: "T-186",
-    172: "T-174",
+    172: "T-257",
     175: "T-186",
     176: "T-186",
     179: "T-174",
@@ -669,7 +684,7 @@ ADOPTED: dict[int, str] = {
     181: "T-174",
     182: "T-243",
     183: "T-220",
-    204: "T-231",
+    204: "T-257",
     206: "T-174",
     207: "T-174",
     208: "T-174",
@@ -679,7 +694,7 @@ ADOPTED: dict[int, str] = {
     227: "T-225",
     228: "T-174",
     229: "T-225",
-    232: "T-186",
+    232: "T-256",
     236: "T-218",
     237: "T-190",
     238: "T-174",
@@ -688,7 +703,7 @@ ADOPTED: dict[int, str] = {
     241: "T-182",
     258: "T-193",
     259: "T-193",
-    260: "T-225",
+    260: "T-257",
     261: "T-174",
     263: "T-174",
     264: "T-186",
@@ -700,14 +715,16 @@ ADOPTED: dict[int, str] = {
     272: "T-174",
     273: "T-174",
     292: "T-146",
+    293: "T-257",
     295: "T-193",
     297: "T-174",
+    299: "T-258",
     302: "T-193",
     303: "T-240",
     304: "T-242",
     305: "T-174",
     306: "T-174",
-    307: "T-174",
+    307: "T-256",
     308: "T-221",
 }
 NUMBERS = tuple(sorted(ADOPTED))
@@ -806,6 +823,9 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: it: Evan Daniel's exact descent of Vladislav Lavrentev's public Kaggle packing, one
 #: arrangement with T-240's packing and another placement. It is dated by the day its pull
 #: request merges, since the pass of 25 October had already moved 268.
+#: The pass of 31 October 2026 (think-3guf) adopted the stage 4 reviews of that day: T-256
+#: at 232 and 307, T-257 at 172, 204, 260 and 293, T-258 at 299 and T-259 at 130. At 232
+#: T-256 is below T-193's algebraic side, which the writer's bead had staged there.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -885,6 +905,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-24": frozenset({204, 303}),
     "2026-10-25": frozenset({182, 268, 303, 304}),
     "2026-10-26": frozenset({268}),
+    "2026-10-31": frozenset({130, 172, 204, 232, 260, 293, 299, 307}),
 }
 
 

@@ -1,0 +1,76 @@
+[
+ {
+  "label": "c843-130",
+  "path": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-couzo/tree/packing/resources/web/couzo-issue843-2026-10-28/source/certificates/n130.cert",
+  "n": 130,
+  "side": "466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000",
+  "side_float": 11.90243064598435,
+  "route_a": {
+   "pairs": 8385,
+   "pairs_decided_exactly_on_all_axes": 304,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_pair_margin": [
+    2.0761969838327356e-13,
+    105,
+    128
+   ],
+   "least_wall": [
+    1e-15,
+    0
+   ],
+   "bad_walls": [],
+   "extent": 11.902430645984348,
+   "low": 1e-15,
+   "accepted": true
+  },
+  "route_b": {
+   "pairs_by_area": 280,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_wall": [
+    1e-15,
+    0
+   ],
+   "bad_walls": [],
+   "accepted": true
+  },
+  "side_minus_extent": 1e-15,
+  "low_corner_min": 1e-15,
+  "reader_controls": {
+   "count_plus_one": "refused: header n=131 but 130 rows",
+   "decimal_field": "refused: row 1 malformed"
+  },
+  "controls": {
+   "duplicate": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "box_at_extent": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "box_below_extent": {
+    "route_a": "refused (0 pairs, walls [19])",
+    "route_b": "refused (0 pairs, walls [20])"
+   },
+   "pair_contact": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "pair_past_contact": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "halfway": {
+    "route_a": "refused (3 pairs, walls [])",
+    "route_b": "refused (3 pairs, walls [])"
+   },
+   "rotation_reversed": {
+    "route_a": "refused (44 pairs, walls [])",
+    "route_b": "refused (44 pairs, walls [])"
+   }
+  },
+  "cpu_s": 2.3
+ }
+]

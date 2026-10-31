@@ -1,0 +1,3 @@
+n=204 S_cert - S_input = 1.4808e-11; factor - 1 = 1.0000e-12; max |centre - factor*input| = 1.235e-15; max turn vs input = 5.684e-14 deg
+n=260 S_cert - S_input = 1.6633e-11; factor - 1 = 9.9993e-13; max |centre - factor*input| = 1.657e-15; max turn vs input = 5.684e-14 deg
+n=293 S_cert - S_input = 1.7634e-11; factor - 1 = 9.9999e-13; max |centre - factor*input| = 1.447e-15; max turn vs input = 4.354e-14 deg
