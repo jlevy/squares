@@ -5,7 +5,7 @@ title: "Import Khalili and Gharabaghi: s(44) = 7 by a closed mixed cover (#842)"
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: bold-ritchie-l3
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:09:47.344Z
-updated_at: 2026-10-31T11:15:50.166Z
+updated_at: 2026-10-31T11:45:16.991Z
 started_at: 2026-10-31T05:09:55.099Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#842 (moh63-dev, Mohsen Khalili and Sara Gharabaghi, opened 2026-10-26T23:46:23Z; one comment, 2026-10-29T15:58:14Z, announcing release v1.1; labelled `intake` on 2026-10-31 by this lane under the github-workflows grant): "s(44) = 7: registration request". Intake pass 2026-10-31 (epic think-3guf), lane L3 (bold-ritchie-l3, tbd-strong sub-agent), branch claude/bold-ritchie-xo28us-s44. Followed the #594/#610 imports (think-osvq, think-ribz) and T-066's zmx2 route (s(59) = 8).
@@ -111,3 +111,8 @@ Review A on #851 (pullrequestreview-5721837491, independent tbd-strong-max lane)
 - 0babbdf merge main b95c5f69c (#833); 071d5bc re-pin; eda45bc no-change record re-measured (51 files byte-identical x3) (A8).
 - PR description corrected (A4, A7).- 69e0f6e merge main c94df7cef (#853; result-requests.yaml conflict, both sides kept); d30eeba no-change record holds there too. Head d30eeba.- 3dc3fb4 merge main 84ba6fa9c (#850; data-pin conflict); b7fb7ba re-pin; 50d2332 no-change record holds there too; records tier 54/54 at 50d2332. Head 50d2332.- ea12f86 merge main 5b4484fe0 (#849, #854; data-pin conflict) on the coordinator go; 191d259 re-pin; f3f0dc4 no-change record holds there; records tier 54/54 at f3f0dc4. Head f3f0dc4.- CI at f3f0dc4: pages 41191239506 success; packing 41191239489 failed only suite-b per-test 45 s wall guard (2 atlas tests 56 s, 53 s; shard 720 s vs 216 s recorded, all suites slower: runner draw); deep gate 41191239581 failed only deferred-slow-lane, 1800 s step timeout with no test failure (earlier heads 1450-1772 s). Reported as flakes; no empty commit.
 - dc8830b merges main 49dac4354 (#855), no conflict, pin unchanged, records 54/54. CI all green at dc8830b: pages 41193895851, packing 41193895835, deep gate 41193895854 (slow lane 1762 s). Head dc8830b.
+
+## After #851 merged (main 90b79dbe1)
+- Pages deploy run 41196287332 verified (verify-deployment 5,961/5,961). squaremath.org refused by the session proxy; local render from main shows t-252 V3/C3 with both reviews and cases/44 proved.
+- Final reply posted: https://github.com/jlevy/squares/issues/842#issuecomment-6542869817 ; #842 closed (completed), check_requests --report had marked it closeable. The zeromargin question dropped (the issue body answers it); the --cert-mode question is informational.
+- Recorded on claude/bold-ritchie-xo28us-s44-reply (8cb0d22), draft PR #856 (intake, S1). Close this bead once #856 is on main.
