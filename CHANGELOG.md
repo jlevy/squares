@@ -9,6 +9,51 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-10-31"></a>
+
+### 2026-10-31
+
+<a id="changelog-entry-eight-houses-of-october-thirty-first-adopted"></a>
+
+#### Daniel’s, Couzo’s and Polkovskyi’s Certificates Become the House Best Packings at Eight Counts
+
+Significance S3: T-256, T-257 and T-258 are S3 finite case results: new arrangements relative to the houses they replace at 172, 204, 232, 260, 293, 299 and 307, from 1.64e-04 to 2.16e-02 below them, none one to one with the house it replaces under any symmetry. At 307 the arrangement is T-255’s, Couzo’s certificates of 28 October (S3), which T-256 refines by 4.56e-12. At 130 the new house is Couzo’s new arrangement of \#843 (T-254, S3), carried by Polkovskyi’s re-solve of its certificate (T-259, S1). They bring no new technique and claim no optimality.
+
+Eight counts take new house best packings after clean-room reviews here.
+[Evan Daniel](packing/contributors/people/evan-daniel.md)’s certificates of #845 take
+172, 204, 260 and 293, and his update to #824 takes 299.
+[Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s certificates of #844
+take 232 and 307. Couzo’s #843 packing takes 130, in
+[Mykhailo Polkovskyi](packing/contributors/people/mykhailo-polkovskyi.md)’s re-solved
+certificate of #846, $2.08 \times 10^{-12}$ lower. Each is regularized for display, and
+T-254 to T-259 are confirmed at V3/C3.
+
+- The margins below the packings they replace are $2.05 \times 10^{-3}$ at 130,
+  $1.05 \times 10^{-3}$ at 172, $1.02 \times 10^{-3}$ at 204, $2.51 \times 10^{-3}$ at
+  232, $1.18 \times 10^{-2}$ at 260, $1.64 \times 10^{-4}$ at 293,
+  $2.16 \times 10^{-2}$ at 299 and $1.61 \times 10^{-3}$ at 307. At 293 and 299 the
+  houses had been the Kingbird catalogue’s constructions, $723/41$ and
+  $33/2 + \sqrt{7}/2$, and the case records’ conjectured optima there are withdrawn.
+- Daniel’s packings are new arrangements found by his population searches and, at 299,
+  from his packing of 26 October; the 293 is his 260 plus one L-shaped strip. Couzo’s
+  refine public Kaggle notebook packings, Chilton’s at 232 and ntumlnoob’s at 307; at
+  307 the new arrangement is his certificate of 28 October (T-255), which #844 refines.
+- This project’s two maintained exact routes decided every certificate, sharing
+  components with the sources’ checkers. Separately prompted mathematical reviews by
+  Claude agents decided them again on clean-room checkers of their own, which is the
+  independent confirmation; the reviews ran at the strong tier rather than the
+  strongest the runbook asks for. No source program ran here.
+- Six cases draw grid-slack’s views at the certificates’ sides; 299 and 307 keep the
+  axis tool’s view. Fourteen sub-print re-certifications by Polkovskyi wait on the
+  maintainer’s question of whether the 23 October restatement ruling reaches them, and
+  move no house. Upper bounds only; no optimality, rigidity or priority is claimed.
+
+Published artifacts: [Daniel’s certificates of \#845](https://squaremath.org/result/t-257.html) · [Daniel’s certificate at 299](https://squaremath.org/result/t-258.html) · [Couzo’s certificates of \#844](https://squaremath.org/result/t-256.html) · [Polkovskyi’s re-solve at 130](https://squaremath.org/result/t-259.html).
+
+First public: 2026-10-31 ([publication evidence](https://github.com/jlevy/squares/actions/runs/41203909483)).
+
+Issues, PRs and supporting records: [Issue \#824](https://github.com/jlevy/squares/issues/824) · [Issue \#843](https://github.com/jlevy/squares/issues/843) · [Issue \#844](https://github.com/jlevy/squares/issues/844) · [Issue \#845](https://github.com/jlevy/squares/issues/845) · [Issue \#846](https://github.com/jlevy/squares/issues/846) · [PR \#852](https://github.com/jlevy/squares/pull/852) · [Mathematical review of \#845](docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md) · [Mathematical review of the \#824 update](docs/project/reviews/review-2026-10-31-daniel-824-299-update.md) · [Mathematical review of \#844](docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md) · [Mathematical review of \#843](docs/project/reviews/review-2026-10-31-couzo-843-130.md) · [Mathematical review of \#846](docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md).
+
 <a id="changelog-date-2026-10-26"></a>
 
 ### 2026-10-26
@@ -1589,7 +1634,7 @@ adoption.
   announced in Exact Certificates and a Stronger 40-Square Bound, and on 11
   October the case records adopted three of them as the house, at 84, 86 and 105.
 
-Issues, PRs and supporting records: [Issue \#451](https://github.com/jlevy/squares/issues/451) · [PR \#469](https://github.com/jlevy/squares/pull/469) · [The later replay and confirmation (\#487)](https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-followup-refinements-2026-10-08/README.md) · [Couzo’s report, a comment on](https://github.com/jlevy/squares/pull/460#issuecomment-6070798890).
+Issues, PRs and supporting records: [Issue \#451](https://github.com/jlevy/squares/issues/451) · [PR \#469](https://github.com/jlevy/squares/pull/469) · [The later replay and confirmation (\#487)](https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-followup-refinements-2026-10-08/README.md) · [Couzo’s report, a comment on \#460](https://github.com/jlevy/squares/pull/460#issuecomment-6070798890).
 
 <a id="changelog-entry-couzo-twenty-beyond-corpus-reports"></a>
 
