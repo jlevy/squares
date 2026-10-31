@@ -3,10 +3,10 @@ type: is
 id: is-01m4wv27yed1e2wfnq55h1avr0
 title: "Import wand125: s(37) >= 2599/400, s(39) >= 533/80, s(44) >= 2799/400 (check2 fine-net) and s(145) >= 306/25 (linear measure) at wand125/square-packing aba0e59 (no issue)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 16
-delegate: bold-ritchie-l10
+version: 17
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:14:31.758Z
-updated_at: 2026-10-31T20:02:09.376Z
+updated_at: 2026-10-31T23:02:16.124Z
 started_at: 2026-10-14T09:14:41.660Z
 ---
 Found by the 2026-10-14 watch survey (think-fxs7): problems/square-lower-bounds/certificates/mixed_n37_L64975 (7a42c16, 2026-10-13T03:18Z), mixed_n39_L66625 (dfb2cf8, 03:01Z), mixed_n44_L69975 (9f24185, 03:01Z), mixed_n145_L1224 (22f06b3, 06:18Z). Against main: 37 above 161/25 = 6.44; 39 above 133/20 = 6.65; 44 above 2789/400 = 6.9725; 145 above the reported 12.2138669 (Green DS7, disputed in #308) and the verified 12.0434, and by monotonicity lifting 146-149. The 37/39/44 bundles take the T-142/T-143 route (think-i85v): stages 1-2 with the release assets, a priced stage 4 replay with sqverify-fast from reviewed source over all directions with whole-net controls, held for an owner budget.
@@ -48,3 +48,5 @@ Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-me
 Each count's replay is its own bead: think-w76a s(37) 6.53 CPU-h, think-567s s(39) 7.09 CPU-h (its control waits on think-4uun), think-ec27 s(44) 16.95 CPU-h, think-v511 s(145) ~37 CPU-h (range 24-64, run with a stop at 40). Each is within the cap; the three fine-net counts wait on the owner's #543 answer on retaining the candidates where the census reads them. The total, 67.5 CPU-h, is over 40 only summed. The whole backlog is think-lh7d.
 
 Renumbered on 14 October at review A3 of #602 (records PR, branch claude/wizardly-meitner-wqn4x3-records-1014): Kevin Fang's theorem, T-178 above, is now T-163, at Theorem 1's first commit (6028f31, 12 October); T-163 to T-177 above are now T-164 to T-178. T-179 to T-184 keep their ids.
+
+2026-10-31 bold-ritchie-l10 (intake lane L10, epic think-3guf): #446's owed follow-up posted at 2026-10-31T20:02:48Z, https://github.com/jlevy/squares/issues/446#issuecomment-6548460193: T-177 (s(44) >= 2799/400) moved from pending adoption to superseded, by T-252 (s(44) = 7, #851, merged at 90b79dbe1); its rungs (V0/C1, reviewed) and this bead's census are unchanged. Rendered with check_requests --draft 446 from main 737d8311e and edited to the one moved field; main's RESULTS.md reads "reviewed, superseded by T-252" and render_recent_results.standing gives superseded by T-252; Pages run 41232002123's verify-deployment job (124630005688) passed 6032 of 6032 checks, result/t-177.html, result/t-252.html and cases/44.html served (the hosts themselves are refused by this session's proxy). Recorded under #446's replies in PR #865 (de16c0ee4); check_requests --report: #446 reply due no. Whether T-177's census (about 17 CPU-hours) is still worth running now that s(44) = 7 is the owner's call; nothing here changes it.
