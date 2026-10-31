@@ -25303,8 +25303,22 @@ issues:
       the house's packing (124 squares beyond a tenth under the best assignment), another
       arrangement. The stage 4 review and the adoption at 299 with both regularizations are
       think-8hjz's; the house rule puts the adoption, the general regularization and the flip in
-      one pull request, after the review. Claude assistance disclosed.
-    read_through: '2026-10-26T03:52:18Z'
+      one pull request, after the review. Claude assistance disclosed. The author's update of 29
+      October (issuecomment-6488202753, 04:46:49Z) reports s(299) <=
+      17801238549388584084680137655023/10^30 = 17.801238549389, an exact KKT certificate,
+      s299_1028.cert at evand/square-packing 0e76d9f, committed 2 minutes before it: 2.46e-3
+      below T-248, a new packing found from it by four generations of refill and an exact
+      descent, with local minimality strict modulo 119 flat motions by 80-digit numerical
+      evidence. Imported on 31 October 2026 in the intake pass's lane L2 (think-3xn9,
+      think-3guf): the evand-n299-update-2026-10-29 packet retains the six files of the set at
+      0e76d9f, the digest the comment prints is the certificate's, both maintained exact routes
+      accept it and refuse its gross and sharp controls, and the ledger of 31 October
+      (upper-bounds-843-846-20261031) records it; Mykhailo Polkovskyi's #846 certificate at 299,
+      17.803695435316, reported after it and above it, is not recorded. Registered as T-257 at
+      V0/C0; the review and the adoption at 299 move to this certificate (think-8hjz).
+      maximusrufus's comments of 26 and 29 October are verification receipts of both
+      certificates by his own exact recheck, reporting no result.
+    read_through: '2026-10-29T14:46:20Z'
     results:
     - key: n299
       claim: >-
@@ -25318,11 +25332,33 @@ issues:
       - T-248
       evidence:
       - E-evand-n299-certificate-report
+    - key: n299-update
+      claim: >-
+        s(299) <= 17801238549388584084680137655023/10^30 = 17.801238549388584084680137655023,
+        the side of s299_1028.cert (SHA-256 ccb323dd...3db5) at 0e76d9f, an exact KKT point of a
+        packing the source calls new, found from its T-248 packing by refill and exact descent.
+      source: https://github.com/jlevy/squares/issues/824#issuecomment-6488202753
+      bead: think-3xn9
+      validation:
+      - think-8hjz
+      register:
+      - T-257
+      evidence:
+      - E-evand-n299-update-certificate-report
     beads:
     - think-3xn9
     - think-8hjz
     answer_bead: think-3xn9
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/824#issuecomment-6414740829
+      date: '2026-10-26'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n299
+        id: T-248
+        verification: V0
+        confirmation: C0
     close_when: >-
       The result is registered, reviewed and adopted at 299 with its drawing regularized and
       flipped, and the reply on main says so; nothing the author asked for is queued.
@@ -25332,4 +25368,235 @@ issues:
       299 is the register's, as the issue says. GitHub's activity log for evand/square-packing
       was not readable from the importing session, so the push of 1be69ca is not dated; the
       commit precedes the issue by 21 minutes and nothing reached 299 between them. The issue
-      did not carry the intake label when read; the coordinator labels it.
+      did not carry the intake label when read; the coordinator labels it. The intake pass of 31
+      October added the label (bold-ritchie-l2).
+  - number: 843
+    title: 's(130) ≤ 11.902430646: registration request'
+    author: franciscouzo
+    opened: '2026-10-27'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Francisco Couzo reports s(130) <= 11.902430645985, the exact rational side
+      466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000
+      = 11.9024306459843486... of certificates/n130.cert at franciscouzo/square-packing 3a4d95c,
+      rounded up at 12 places: 2.05e-3 below T-174, the house at 130 (PingYou Ltd's PR #574
+      certificate of Nate Chaoweeraprasit's packing, improved by Siddharth Gupta). The issue calls
+      it a new packing found from PR #574's by thirteen improvements of the author's live searches
+      (the web app's fq, basin hopping and native SLP), largest matched move 0.704, and asks for
+      credit after the starting packing's. Triaged and imported on 31 October 2026 in the intake
+      pass's lane L2 (think-big9, think-3guf): the couzo-issue843-2026-10-28 packet retains the
+      certificate, its credit record and the float packing at 712c6a6, unchanged since 3a4d95c,
+      on the presumption of permission from submission; both digests the issue prints are the
+      files', the side is the header and rounds up to the print, and both maintained exact routes
+      accept it and refuse its gross and sharp controls. The ledger of 31 October
+      (upper-bounds-843-846-20261031) records it, a new packing; Mykhailo Polkovskyi's #846
+      certificate, a 2e-14 dilation of it 2.08e-12 lower, is recorded after it as a refinement of
+      this packing. Registered as T-253 at V0/C0; the stage 4 review and the adoption at 130 are
+      think-oy8d's. The Kaggle side-only 11.902430646006 is no report. Claude assistance
+      disclosed.
+    read_through: '2026-10-27T19:49:57Z'
+    results:
+    - key: n130
+      claim: >-
+        s(130) <= 466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000
+        = 11.9024306459843486..., the side of certificates/n130.cert (SHA-256 a2618e1a...7fcd) at
+        3a4d95c, a packing the source calls new, found from PR #574's.
+      source: body
+      bead: think-big9
+      validation:
+      - think-oy8d
+      register:
+      - T-253
+      evidence:
+      - E-couzo-843-certificate-report
+    beads:
+    - think-big9
+    - think-oy8d
+    answer_bead: think-big9
+    replies: []
+    close_when: >-
+      The result is registered with its replay and its review and adoption owned by their bead,
+      and the reply on main says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 31 October 2026 from main 3978a7f61. The commit 3a4d95c precedes the issue by 7
+      minutes 48 seconds; GitHub's activity log was not readable, so its push is not dated.
+  - number: 844
+    title: '232, 260, 307: registration request'
+    author: franciscouzo
+    opened: '2026-10-28'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Francisco Couzo reports three upper bounds at franciscouzo/square-packing 712c6a6, each the
+      certificate's exact rational side rounded up at 12 places: s(232) <= 15.761661759482,
+      s(260) <= 16.637029558871 and s(307) <= 17.979251283689, 2.51e-3, 8.72e-3 and 1.61e-3
+      below the houses (T-186, T-225, T-174). He credits himself with the refinements only: each
+      starts from a Kaggle notebook packing (Alex Chilton's at 232, ntumlnoob's at 260 and 307),
+      improved with code the issue names (lightningv08's CUDA Packing Search, Evan Daniel's fq,
+      David Ellsworth's tools). Triaged and imported on 31 October 2026 in the intake pass's lane
+      L2 (think-n61j, think-3guf): the couzo-issue844-2026-10-28 packet retains the three
+      certificates and the two credit records at 712c6a6; the digests the issue prints are the
+      files', the sides are the headers and round up to the prints, and both maintained exact
+      routes accept each and refuse its gross and sharp controls. His earlier publication
+      a5a5d76 (no issue, 28 October 01:41Z) holds certificates at 260 and 307 that the ledger of
+      31 October (upper-bounds-843-846-20261031) records first, from its commit (the
+      couzo-a5a5d76-2026-10-28 packet); it then records all three of this issue's, and at 260
+      Evan Daniel's #845 certificate after them. Registered as T-255 (with a5a5d76's as T-254) at
+      V0/C0; the stage 4 review and the adoption at 232 and 307 are think-dwzb's. The Kaggle
+      side-only sides the issue quotes are no report. Claude assistance disclosed.
+    read_through: '2026-10-28T21:48:31Z'
+    results:
+    - key: n232-n260-n307
+      claim: >-
+        s(232) <= 7617348902520572307222120733/483283363059000000000000000, s(260) <=
+        104381051573626493618357957479/6274019722347000000000000000 and s(307) <=
+        2707897969116659515550794271467451840032974544063449693/150612387934832692306604131393579915999000000000000000,
+        the sides of certificates/best/n232.cert, certificates/n260.cert and n307.cert at
+        712c6a6, the author's refinements of Kaggle notebook packings by others.
+      source: body
+      bead: think-n61j
+      validation:
+      - think-dwzb
+      register:
+      - T-255
+      evidence:
+      - E-couzo-844-certificate-report
+    beads:
+    - think-n61j
+    - think-dwzb
+    answer_bead: think-n61j
+    replies: []
+    close_when: >-
+      The results are registered with their replay and their review and adoption owned by their
+      bead, and the reply on main says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 31 October 2026 from main 3978a7f61. The commit 712c6a6 precedes the issue by 5
+      hours 51 minutes, and a5a5d76, whose 260 and 307 certificates no issue reports, by 20
+      hours; GitHub's activity log was not readable, so no push is dated. Whether 232 and 260 are
+      new packings or refinements the issue leaves to the record: measured here against each
+      house (measure/identity-nNNN.json in the packet), and the Kaggle notebook packings they
+      start from are not retained, so the ledger classifies none.
+  - number: 845
+    title: '172, 204, 260, 293: registration request'
+    author: evand
+    opened: '2026-10-29'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports four upper bounds at evand/square-packing d2d5dd9, each the
+      certificate's exact rational side rounded up at 12 places: s(172) <= 13.617935698382 (an
+      exact KKT point, locally minimal by 80-digit numerical evidence), s(204) <=
+      14.807627471882, s(260) <= 16.633982502122 and s(293) <= 17.633982502123 (dilation
+      certificates), 1.05e-3, 1.02e-3, 1.18e-2 and 1.64e-4 below the houses and below every
+      report there, each a new packing by the issue's word, with the starts it asks to credit
+      (Chaoweeraprasit and Gupta's s(199) at 172, Ostashev's s(176) at 204, Kirill T's Kaggle
+      s(260) at 260 and 293). Triaged and imported on 31 October 2026 in the intake pass's lane
+      L2 (think-17wo, think-3guf): the evand-issue845-2026-10-29 packet retains the 21 files of
+      the four sets at 0e76d9f under the source's MIT licence, the digests the issue prints are
+      the certificates', the sides are the headers and round up to the prints, and both maintained
+      exact routes accept each and refuse its gross and sharp controls. The ledger of 31 October
+      (upper-bounds-843-846-20261031) records all four, at 260 after Couzo's a5a5d76 and #844
+      certificates. Registered as T-256 at V0/C0; the stage 4 review and the adoption at all four
+      counts are think-nkt1's. The Kaggle side-only sides the issue quotes are no report. Claude
+      assistance disclosed.
+    read_through: '2026-10-29T04:46:40Z'
+    results:
+    - key: n172-n204-n260-n293
+      claim: >-
+        s(172) <= 2723587139676283080823463207799/(2*10^29), s(204) <=
+        14807627471881579627471866771703/10^30, s(260) <= 8316991251060941991251052624833/(5*10^29)
+        and s(293) <= 8816991251061390991251052573823/(5*10^29), the sides of s172_1028.cert,
+        s204_1028.cert, s260_1028.cert and s293_1028.cert at d2d5dd9, four packings the source
+        calls new.
+      source: body
+      bead: think-17wo
+      validation:
+      - think-nkt1
+      register:
+      - T-256
+      evidence:
+      - E-evand-845-certificate-report
+    beads:
+    - think-17wo
+    - think-nkt1
+    answer_bead: think-17wo
+    replies: []
+    close_when: >-
+      The results are registered with their replay and their review and adoption owned by their
+      bead, and the reply on main says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 31 October 2026 from main 3978a7f61. The commit d2d5dd9 precedes the issue by 12
+      minutes 41 seconds; GitHub's activity log was not readable, so its push is not dated.
+  - number: 846
+    title: 'New packings: 14 verified upper bounds for square packing (Category A records and Category
+      B refinements, N in [105, 308]): registration request'
+    author: Mishapolk
+    opened: '2026-10-30'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mykhailo Polkovskyi (Mishapolk, with what the issue calls the Antigravity Autonomous Research
+      Lab) reports 14 upper bounds at Mishapolk/square-packing-records 52aa267, at 105, 130, 146,
+      156, 182, 204, 211, 229, 241, 260, 268, 299, 304 and 308, each a certificate's exact side
+      rounded up at 12 places: three "Category A" records at 130, 182 and 268, and eleven
+      "Category B" micro-refinements. Every print is its certificate's header rounded up; at 204,
+      211 and 241 the exact fraction the issue's table prints is not the header, and at 268 its
+      denominator has one digit too many. Triaged and imported on 31 October 2026 in the intake
+      pass's lane L2 (think-pg1y, think-3guf): the mishapolk-issue846-2026-10-30 packet retains
+      the certificates at 52aa267 under the MIT licence, and both maintained exact routes accept
+      each and refuse its gross and sharp controls. The ledger of 31 October
+      (upper-bounds-843-846-20261031) records six: 130, a 2e-14 dilation of Francisco Couzo's #843
+      packing 2.08e-12 below it, and 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house,
+      each a refinement of the packing it tightens. It records none of the other eight: 182, 268
+      and 304 are above the houses (T-243, T-242), 260 above Evan Daniel's #845, 299 above his
+      update to #824, 204 ties T-231, and 211 and 241 are the author's own certificates of 23
+      October, which the ledger records from their commit (e386aab) as refinements. Registered as
+      T-258 at V0/C0 (and the 23 October certificates as T-252); the stage 4 review and the
+      adoptions are think-ikku's.
+    read_through: '2026-10-30T05:46:42Z'
+    results:
+    - key: refinements
+      claim: >-
+        s(105), s(130), s(146), s(156), s(229) and s(308) at the exact headers of
+        certificates/0000-0999/nN.cert at 52aa267, each below every earlier report at its count:
+        refinements of the packings they tighten, at 130 of Couzo's #843 packing.
+      source: body
+      bead: think-pg1y
+      validation:
+      - think-ikku
+      register:
+      - T-258
+      evidence:
+      - E-mishapolk-846-certificate-report
+    - key: not-recorded
+      claim: >-
+        s(n) at the headers of certificates/0000-0999/nN.cert at 52aa267 for n = 182, 204, 211,
+        241, 260, 268, 299 and 304.
+      source: body
+      not_registered: >-
+        The ledger of 31 October (upper-bounds-843-846-20261031) records none: 182 is above T-243
+        by 1.40e-13, 268 above T-242 by 1.48e-12, 304 above T-242 by 1.00e-11, 260 above Evan
+        Daniel's #845 by 1.18e-2, 299 above his #824 update by 2.46e-3, 204 equals T-231's side,
+        and 211 and 241 equal the author's own certificates first committed at e386aab on 23
+        October, which the ledger records from that commit (T-252).
+      queued: false
+      bead: think-pg1y
+    beads:
+    - think-pg1y
+    - think-ikku
+    answer_bead: think-pg1y
+    replies: []
+    close_when: >-
+      The results are registered with their replay and their review and adoption owned by their
+      bead, and the reply on main says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 31 October 2026 from main 3978a7f61. The commit 52aa267 precedes the issue by 6
+      minutes 42 seconds; GitHub's activity log was not readable, so no push is dated. The ten
+      commits of 23 October past the 7e82c64 read (e386aab to fbc1749), which no issue reports,
+      are this release's predecessors; intake-watch.yaml's read of 31 October says what each
+      holds.

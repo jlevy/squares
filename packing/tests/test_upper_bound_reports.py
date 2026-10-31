@@ -153,6 +153,18 @@ DANIEL_806 = "evand-n182-2026-10-25"
 #: Evan Daniel's issue #824 at 1be69ca, unchanged at the pin 6067db5, retained under MIT by
 #: the #824 import lane of 26 October (`test_upper_bound_reports_824`).
 DANIEL_824 = "evand-n299-2026-10-26"
+#: The intake pass of 31 October 2026, lane L2 (`test_upper_bound_reports_l2_1031`):
+#: Polkovskyi's 23 October certificates and #846, Couzo's #843, a5a5d76 and #844, and
+#: Daniel's #845 and his update to #824, each retained from its pin.
+L2_1031 = (
+    "mishapolk-1023-refinements-2026-10-30",
+    "couzo-issue843-2026-10-28",
+    "couzo-a5a5d76-2026-10-28",
+    "couzo-issue844-2026-10-28",
+    "evand-issue845-2026-10-29",
+    "evand-n299-update-2026-10-29",
+    "mishapolk-issue846-2026-10-30",
+)
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -205,6 +217,7 @@ EVERY = (
     DANIEL_806,
     KRISTIANSEN_819,
     DANIEL_824,
+    *L2_1031,
 )
 
 
