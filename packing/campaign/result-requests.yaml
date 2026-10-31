@@ -8940,7 +8940,9 @@ issues:
       configurations again with a checker written here, retaining the 233 exact forms they read.
       That checker is the review lane's own, so its run is a second route beside the rung, as at
       T-225 and T-229; C3 waits on a separate replay lane, gradec.py over all 233 (about 10.6
-      CPU-hours by the source's logs, think-mtah).
+      CPU-hours by the source's logs, think-mtah). The grade-C claim is registered as T-264 (31
+      October 2026, think-7scz) at V3/C1, with the review's run and the n = 10 recomputation as its
+      evidence beside the report.
     read_through: '2026-10-12T14:15:44Z'
     results:
     - key: s29-minimal-polynomial
@@ -8956,17 +8958,14 @@ issues:
       claim: gradec.py's Theorem C local-minimality check is VALID for 233 of the source's 250
         configurations of field degree at most 4.
       source: body
-      not_registered: Not a bound; local minimality of packings. The certificates are published and
-        retained (gradec-233.tar.zst) with the 233 exact forms they read; n = 10 recomputed
-        byte-identical here with gradec.py. The review of 23 October repaired Theorem C's proof
-        (C-1) and its checker decided all 233 again (receipts/review-theorem-c-233.jsonl in the
-        exact-data packet), independently re-implemented after reading the producer's code. That
-        run is a second route beside the rung; C3 waits on the gradec.py replay of all 233 (about
-        10.6 CPU-hours, think-mtah).
-        Registering it waits for a T-NNN, with the run's evidence entries drafted in think-7scz,
-        and the reply sharing the review is drafted there too.
-      queued: true
-      bead: think-7scz
+      register:
+      - T-264
+      evidence:
+      - E-evand-gradec-local-minima-233-report
+      - E-evand-gradec-local-minima-233-review-check
+      - E-evand-gradec-n10-recompute
+      validation:
+      - think-mtah
     beads:
     - think-6gti
     - think-7scz

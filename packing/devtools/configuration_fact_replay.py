@@ -411,12 +411,31 @@ def run_checker(path: Path) -> dict[str, Any]:
     }
 
 
+def wall_contact(data: dict[str, Any]) -> tuple[int, str]:
+    """A square the configuration puts against a wall, and that wall.
+
+    Evan Daniel's forms list their contacts (``equations``) and T-193's driver takes the
+    first wall row; these configurations list none. An axis-aligned square (``u`` zero)
+    whose centre coordinate is exactly 1/2 touches the left or bottom wall, exactly.
+    """
+    if "equations" in data:
+        contact = next(item for item in data["equations"] if item[0] == "W")
+        return int(contact[1]), str(contact[3])
+    for index, square in enumerate(data["squares"]):
+        if any(Fraction(value) != 0 for value in square["u"]):
+            continue
+        for coordinate, wall in (("x", "L"), ("y", "B")):
+            values = [Fraction(value) for value in square[coordinate]]
+            if values[:1] == [Fraction(1, 2)] and not any(values[1:]):
+                return index, wall
+    raise ReplayError("no axis-aligned square touches the left or bottom wall")
+
+
 def mutate(data: dict[str, Any], kind: str) -> tuple[dict[str, Any], str]:
     """T-193's replay driver's mutation of one kind, applied to a copy of ``data``."""
     mutated = copy.deepcopy(data)
     if kind == "moved-square":
-        contact = next(item for item in mutated["equations"] if item[0] == "W")
-        square, wall = int(contact[1]), str(contact[3])
+        square, wall = wall_contact(mutated)
         coordinate, sign = THROUGH[wall]
         values = mutated["squares"][square][coordinate]
         values[0] = str(Fraction(values[0]) + sign * STEP)

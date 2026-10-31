@@ -2,11 +2,10 @@
  "format": "measure-identity-v1",
  "n": 293,
  "inputs": {
-  "l-strip": {
-   "input": "witness-center-basis",
-   "path": "l-strip-n293.yaml",
-   "outside_repository": true,
-   "sha256": "296445d8fb98aa480370bcaf772cc7a19df080f72dfe027156996f5daa13114b",
+  "candidate": {
+   "input": "evand-cert",
+   "path": "packing/cases/register_candidates/think-ruu2-2026-10-31/certificates/n-293.cert",
+   "sha256": "10eac4aaba6bd92077040bd7e61014bb302c3af71ccc99ab68481a7b43a90516",
    "side": "8816991251060941991251052624833/500000000000000000000000000000"
   },
   "T-257": {
@@ -16,7 +15,7 @@
   }
  },
  "tilts": {
-  "l-strip": {
+  "candidate": {
    "exactly_turned": 121,
    "tilted_beyond_1_degree": 104,
    "tilted_positive": 99,
@@ -61,7 +60,7 @@
  },
  "pairs": [
   {
-   "view": "l-strip",
+   "view": "candidate",
    "against": "T-257",
    "side_difference": "-8.980000e-13",
    "side_difference_exact": "-44899999999994899/50000000000000000000000000000",
@@ -73,11 +72,11 @@
     "symmetry": 6,
     "largest_move": "0.633983",
     "moved_beyond": {
-     "1e-9": 234,
-     "1e-6": 234,
-     "1e-3": 223,
-     "1e-2": 183,
-     "1e-1": 59
+     "1e-9": 250,
+     "1e-6": 250,
+     "1e-3": 239,
+     "1e-2": 199,
+     "1e-1": 75
     },
     "largest_turn_degrees": "31.99",
     "turned_beyond_1e-6": 80
@@ -86,26 +85,26 @@
     "assignment": "identity, least total squared centre displacement",
     "tilted_paired_same_sign": 2,
     "tilted_paired_same_sign_within_1e-1": 0,
-    "tilted_paired_opposite_sign": 93,
-    "tilted_paired_opposite_sign_beyond_1e-1": 90,
-    "tilted_paired_with_untilted": 9,
+    "tilted_paired_opposite_sign": 92,
+    "tilted_paired_opposite_sign_beyond_1e-1": 89,
+    "tilted_paired_with_untilted": 10,
     "tilt_angles_shared_within_1e-4_degrees": 0
    },
    "centred": {
     "alignment": "box centres",
     "symmetry": 6,
-    "total_squared": "17.6357",
+    "total_squared": "24.0666",
     "runner_up_symmetry": 4,
-    "runner_up_total_squared": "32.3005",
+    "runner_up_total_squared": "32.1064",
     "largest_move": "0.633983",
-    "rms_move": "0.245336",
+    "rms_move": "0.286598",
     "bottleneck": "0.633983",
     "moved_beyond": {
-     "1e-9": 234,
-     "1e-6": 234,
-     "1e-3": 223,
-     "1e-2": 183,
-     "1e-1": 59
+     "1e-9": 250,
+     "1e-6": 250,
+     "1e-3": 239,
+     "1e-2": 199,
+     "1e-1": 75
     },
     "nearest_one_to_one": false,
     "turned_beyond_1_degree": 18,

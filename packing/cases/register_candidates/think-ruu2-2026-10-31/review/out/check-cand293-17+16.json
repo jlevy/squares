@@ -1,0 +1,67 @@
+{
+ "label": "cand293-17+16",
+ "source": "s260_1028.cert + L 17+16",
+ "n": 293,
+ "side": {
+  "exact": "8816991251060941991251052624833/500000000000000000000000000000",
+  "approx": "1.763398e+01"
+ },
+ "A": {
+  "route": "A: separating axes over all pairs, walls by support function",
+  "n": 293,
+  "side": {
+   "exact": "8816991251060941991251052624833/500000000000000000000000000000",
+   "approx": "1.763398e+01"
+  },
+  "accepted": true,
+  "pairs_decided": 42778,
+  "non_unit": [],
+  "wall_failures": [],
+  "wall_failure_count": 0,
+  "overlap_count": 0,
+  "overlaps": [],
+  "least_wall_clearance": [
+   {
+    "exact": "0",
+    "approx": "0"
+   },
+   260,
+   "bottom"
+  ],
+  "least_pair_slack": [
+   {
+    "exact": "0",
+    "approx": "0"
+   },
+   260,
+   261,
+   1
+  ],
+  "extent_hi": {
+   "exact": "8816991251060941991251052624833/500000000000000000000000000000",
+   "approx": "1.763398e+01"
+  },
+  "extent_lo": {
+   "exact": "0",
+   "approx": "0"
+  },
+  "cpu_seconds": 1.66
+ },
+ "B": {
+  "route": "B: exact clipped area of every pair within reach, container by clipped area",
+  "n": 293,
+  "side": {
+   "exact": "8816991251060941991251052624833/500000000000000000000000000000",
+   "approx": "1.763398e+01"
+  },
+  "accepted": true,
+  "pairs_decided": 42778,
+  "pairs_clipped": 315,
+  "non_unit": [],
+  "outside": [],
+  "outside_count": 0,
+  "positive_area_count": 0,
+  "positive_area": [],
+  "cpu_seconds": 0.3
+ }
+}

@@ -1,0 +1,37 @@
+n=130: best symmetry 0 one_to_one=True largest move 5.927e-02 largest turn 1.840e+00 deg; moved beyond {'1e-12': 35, '1e-11': 35, '1e-10': 35, '1e-09': 35, '1e-06': 35, '1e-03': 16, '1e-01': 0}
+   cand 106 -> house 106: move 5.927e-02, turn +3.802e-05 deg
+   cand  37 -> house  37: move 5.152e-02, turn -1.540e-05 deg
+   cand  89 -> house  89: move 4.347e-02, turn +1.450e-12 deg
+   cand 130 -> house 130: move 2.717e-02, turn -1.840e+00 deg
+   cand 109 -> house 109: move 4.833e-03, turn +1.673e-04 deg
+   cand 108 -> house 108: move 4.186e-03, turn +2.167e-12 deg
+   cand  85 -> house  85: move 4.073e-03, turn -6.069e-05 deg
+   cand  84 -> house  84: move 3.607e-03, turn +0.000e+00 deg
+   cand  79 -> house  79: move 3.128e-03, turn +0.000e+00 deg
+   cand  71 -> house  71: move 2.643e-03, turn +0.000e+00 deg
+   cand  63 -> house  63: move 2.111e-03, turn +0.000e+00 deg
+   cand 105 -> house 105: move 1.742e-03, turn +0.000e+00 deg
+n=307: best symmetry 0 one_to_one=True largest move 3.283e-01 largest turn 5.518e-01 deg; moved beyond {'1e-12': 287, '1e-11': 39, '1e-10': 38, '1e-09': 38, '1e-06': 38, '1e-03': 38, '1e-01': 3}
+   cand  42 -> house  42: move 3.283e-01, turn +0.000e+00 deg
+   cand  56 -> house  56: move 2.402e-01, turn +0.000e+00 deg
+   cand 128 -> house 128: move 2.382e-01, turn -7.226e-12 deg
+   cand  14 -> house  14: move 9.111e-02, turn +0.000e+00 deg
+   cand 274 -> house 274: move 6.865e-02, turn +0.000e+00 deg
+   cand 203 -> house 203: move 6.865e-02, turn +0.000e+00 deg
+   cand   3 -> house   3: move 6.865e-02, turn +0.000e+00 deg
+   cand  31 -> house  31: move 6.865e-02, turn +0.000e+00 deg
+   cand 283 -> house 283: move 6.865e-02, turn +0.000e+00 deg
+   cand 185 -> house 185: move 6.865e-02, turn +0.000e+00 deg
+   cand 143 -> house 143: move 6.865e-02, turn +0.000e+00 deg
+   cand 222 -> house 222: move 6.703e-02, turn +0.000e+00 deg
+n=130-solve: best symmetry 0 one_to_one=True largest move 4.122e-07 largest turn 3.802e-05 deg; moved beyond {'1e-12': 3, '1e-11': 3, '1e-10': 2, '1e-09': 2, '1e-06': 0, '1e-03': 0, '1e-01': 0}
+   cand 106 -> house 106: move 4.122e-07, turn +3.802e-05 deg
+   cand  37 -> house  37: move 1.639e-07, turn -1.540e-05 deg
+n=307-solve: best symmetry 0 one_to_one=True largest move 1.414e-04 largest turn 5.730e-03 deg; moved beyond {'1e-12': 285, '1e-11': 5, '1e-10': 2, '1e-09': 2, '1e-06': 2, '1e-03': 0, '1e-01': 0}
+   cand  12 -> house  12: move 1.414e-04, turn -5.615e-04 deg
+   cand 256 -> house 256: move 1.384e-04, turn -5.730e-03 deg
+n=293 house: 260 block squares, 33 strip squares (ids [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293])
+n=293: s260_1028.cert against the house's block: best symmetry 1 one_to_one=True largest move 1.066e-13 largest turn 5.684e-14 deg; moved beyond {'1e-12': 0, '1e-11': 0, '1e-10': 0, '1e-09': 0, '1e-06': 0, '1e-03': 0, '1e-01': 0}
+n=293: strip 17top+16 against the house's strip: best symmetry 0 largest move 1.561e-11; moved beyond {'1e-12': 30, '1e-11': 12, '1e-10': 0, '1e-09': 0, '1e-06': 0, '1e-03': 0, '1e-01': 0}
+n=293: strip 16+16+1 against the house's strip: no one-to-one pairing under any symmetry
+n=293: strip 17+16 against the house's strip: no one-to-one pairing under any symmetry

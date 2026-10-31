@@ -32,6 +32,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-31-daniel-824-299-update.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-profile-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: attribution.md, role: conventions, authority: definitive, lifecycle: maintained}

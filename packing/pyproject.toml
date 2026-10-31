@@ -169,6 +169,10 @@ extend-exclude = [
   # someone else's style, importing nothing from this project, and checked by being
   # run rather than by being linted. Reformatting it would defeat the point.
   "cases/n12_fractional_certificate/independent_verify.py",
+  # A stage 4 review's clean-room checkers, retained verbatim beside the certificates they
+  # decided, as a source packet's review programs are under resources/: editing them to
+  # satisfy a linter would change the programs whose receipts the review cites.
+  "cases/register_candidates/*/review",
 ]
 
 [tool.ruff.lint]
@@ -341,6 +345,8 @@ exclude = [
     # An independent reviewer's verifier, retained verbatim as evidence. Editing it to
     # satisfy a checker would void what it is, so it is excluded here as it is from ruff.
     "cases/n12_fractional_certificate/independent_verify.py",
+    # A stage 4 review's clean-room checkers, retained verbatim, as excluded from ruff.
+    "cases/register_candidates/*/review",
 ]
 pythonVersion = "3.14"
 typeCheckingMode = "standard"

@@ -34817,23 +34817,29 @@ results:
       and
       s(263) <= 16.7331660078993789705122814839596734462471472483871051710853314027161147491596783918785611086390994182….
 
-      These are upper bounds as reported, and not shown. The source determined each side
-      numerically: it solved the KKT system on the active contacts to 3,000 digits from the
-      binary64 packings of Evan Daniel's atlas, and found each polynomial as an LLL relation
-      at 1,500 digits. The issue supplies no exact configuration, and says the nonnegativity
-      of its multipliers is not certified.
+      The source determined each side numerically: it solved the KKT system on the active
+      contacts to 3,000 digits from the binary64 packings of Evan Daniel's atlas, and found
+      each polynomial as an LLL relation at 1,500 digits, and says the nonnegativity of its
+      multipliers is not certified. In a later comment the same day the author attached an
+      exact configuration at each side: every centre and half-angle tangent in a number field
+      K of degree 24 at 172 and 17 at 263 that holds the side.
 
-      Feasibility at either side is not shown until an exact configuration at that side is
-      decided: every centre and half-angle tangent in a
-      number field holding the side, every contact an identity there and every other pair
-      and wall separated exactly. In a later comment on the issue the same day, the author
-      attached configurations at both counts that he reports to be of this kind; they are
-      retained here and not yet decided.
+      Both configurations were decided here on 31 October 2026 on two exact routes, so both
+      bounds are shown. sqpack's exact witness verifier, over each configuration's field,
+      decided every unit-square identity, wall and pair and refused a duplicated square and a
+      square moved outside the box; Evan Daniel's verify_exact.py, the checker the author
+      reports running, run unchanged here, printed VALID and refused four mutated controls at
+      each count. Before deciding, each configuration was held to the digest the comment
+      states, and its side to this entry's: the same polynomial, a root of it in K, and the
+      same real root.
 
       Here SymPy and sqpack.field found each polynomial primitive and irreducible, and each
       side is the root the source's 100-digit print names, decided exactly. Each lies below
-      T-174's rational certificate at its count, the case's house, by 3.898e-89 at 172 and
-      2.126e-94 at 263. It also lies below the degree-12 side of Evan Daniel's issue 639
+      T-174's rational certificate at its count, the case's house when registered, by
+      3.898e-89 at 172 and 2.126e-94 at 263. At 172 the house moved on 31 October 2026 to
+      Evan Daniel's issue 845 certificate (T-257), 1.053e-3 below this side, so the
+      configuration there realizes T-174's retired packing; at 263 T-174's certificate is
+      still the house. It also lies below the degree-12 side of Evan Daniel's issue 639
       there, by 1.185e-62 and 9.234e-63, which T-174 is already below. The atlas packings the
       source read are T-174's witnesses at both counts, to binary64 at every square. The
       ledger of 25 October for issue 804 records both in report order.
@@ -34845,8 +34851,8 @@ results:
       did the search for open cases, the pipeline, the computations and the verification
       script at the author's direction, and that he reviewed the outputs.
     scope: {n_values: [172, 263]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: >-
@@ -34861,7 +34867,10 @@ results:
     attribution:
       source_keys: ['[Kim exact forms 2026-10-25]']
       published: '2026-10-25'
-    evidence: [E-hyukdongkim-804-exact-forms-report]
+    evidence:
+      - E-hyukdongkim-804-exact-forms-report
+      - E-hyukdongkim-804-configurations-exact-feasibility
+      - E-hyukdongkim-804-configurations-verify-exact
     artifacts:
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/README.md
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
@@ -34874,50 +34883,31 @@ results:
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/atlas-poses.json
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
-    controls: [packing/tests/test_kim_exact_forms_804.py]
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/receipts/side-check.json
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/receipts/algebraic-route1-n172.json.xz
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/receipts/algebraic-route1-n263.json.xz
+      - packing/devtools/configuration_fact_replay.py
+    controls:
+      - packing/tests/test_kim_exact_forms_804.py
+      - packing/tests/test_configuration_fact_replay.py
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/receipts/route2-verify-exact.json
     next_rung: >-
-      The author's exact configurations at both sides, received on 25 October in the
-      minpoly.json format of Evan Daniel's verify_exact.py and retained as derived facts
-      (the hyukdongkim-t244-configurations-2026-10-25 packet), decided exactly here
-      (think-4rzl).
-
-      A small reader of the packet's facts comes first: derive-forms needs a
-      declaration and retained upstream bytes, which the packet keeps neither of, so the
-      reader feeds each fact's configuration to
-      devtools.algebraic_witness_reports.evand_minpoly_geometry. sqpack.witness.exact_verify
-      then decides each over its field, with the duplicate-square and outside-container
-      controls, and the retained verify_exact.py decides each form rebuilt from its fact, a
-      second route. That would take C to C3, and a stage 4 review of the configurations and
-      the claim would take V to V3.
-
-      The house rule would then adopt both sides, with their regularization items naming
-      T-174, measured against its witnesses. Only if the configurations fail would a builder
-      here be the route (think-4rzl's fallback). Local minimality of either packing at its
-      side is a separate claim and is not registered.
-    unfinished_confirmations:
-      - what: >-
-          The author's exact configuration at each side decided on
-          sqpack.witness.exact_verify over its number field, a positive and two controls a
-          count, and on the retained verify_exact.py, a second route.
-        rung: C3
-        link: think-4rzl
-        estimated_cost:
-          cpu_hours: 2.0
-          cpu_hours_high: 8.0
-          basis: >-
-            Scaled as field degree squared times count squared from T-193's 23 October
-            adoption, where 302 at degree 7 took 230.72 s a job, a scale that reproduces the
-            price of about 2 CPU-hours a job at 267, degree 41. It assumes the field degree
-            equals the side's, 24 and 17; the upper end allows a field of twice that degree
-            and Daniel's verify_exact.py as the second route. The author's configurations
-            are of degree 24 and 17, so the central estimate applies; under the 40
-            CPU-hour item cap. The reader of the packet's facts that comes first is tooling,
-            about half an agent-day, and adds no compute to speak of.
-          priced: '2026-10-25'
+      A stage 4 mathematical review of the configurations and the claim (think-3trq). Once it
+      accepts them, the house rule adopts the side at 263, 2.126e-94 below T-174's
+      certificate there, with its regularization item naming T-174, measured against its
+      witness, and both strong generators' regularization; select_houses and
+      upper_bound_houses then need an exact reader of this source's side and number-field
+      witness at 263 (think-3trq). Nothing is adopted at 172, where the house is 1.053e-3
+      lower. Local minimality of either packing at its side is a separate claim and is not
+      registered. V4 and C4 need two adversarial AI reviews by distinct reviewers and a human
+      oversight record.
     notes: >-
-      Source assertions only. Nothing of the source's code was executed here; the archive
-      states no licence, so the packet keeps the polynomials and printed sides as a derived
-      fact with the archive's digests. The polynomials' irreducibility and the exact order
+      The sides are the source's numerical determination; the configurations that realize
+      them were decided here on two routes (think-4rzl). None of the author's own code was
+      executed here: route 2 is Evan Daniel's verify_exact.py, which the author reports
+      running, retained from Daniel's repository. The archives stated no licence when
+      retained, so the packets keep derived facts with the archives' digests; the author
+      dedicated all three attachments to CC0 1.0 on 25 October. The polynomials' irreducibility and the exact order
       against T-174 and issue 639 are decided here (exact-sides.json); that each side is the
       side of a packing is not. The source's KKT multipliers are not unique and their least
       minimum-norm value is about -6e-16, with no second-order check, so stationarity is
@@ -34942,7 +34932,8 @@ results:
       Each side is stated cut at 100 places: T-174's certificate agrees with it to 88 places at
       172 and to 93 at 263, so a shorter cut, such as the 40 places T-193 prints, would not
       tell them apart. The case records are unchanged until adoption, so this entry reads as
-      pending adoption at both counts.
+      pending adoption at 263; at 172 the case holds a lower certificate since 31 October
+      (T-257), so there it is superseded.
     regularizations:
       - n: 172
         of: T-174
@@ -37739,66 +37730,66 @@ results:
     landed: '2026-10-31'
     established: '2026-10-31'
     headline: >-
-      Evan Daniel's regularizer solves the 307 house to an exact side `3.752e-12` below it
+      The 307 house re-certified with less padding, `3.752e-12` below it; held for the owner
     claim: >-
       s(307) <= 4494812820921068365908930695861/250000000000000000000000000000 =
-      17.979251283684273463635722783444, the exact side of a rational packing this project
-      made from the case's house best packing at 307 (T-256, Francisco Couzo's issue 844
-      refinement of ntumlnoob's packing) with Evan Daniel's exact solver and regularizer, and
-      decided here over Q.
+      17.979251283684273463635722783444, the exact side of the solve certificate of Evan
+      Daniel's exact solver run by this project on the case's house best packing at 307
+      (T-256, Francisco Couzo's issue 844 refinement of ntumlnoob's packing), decided here
+      over Q.
 
-      The side is 3.752e-12 below T-256's certificate, 17.979251283688025158..., and its
-      12-place print, 17.979251283685, is below the house's, 17.979251283689. So the 23
-      October restatement ruling (think-fwa9), which reaches a side below an earlier report
-      by less than one unit in the 12th place with both at the same print, does not apply.
-      No earlier certificate states this side, and the next count's ceiling,
-      17.997149121270... at 308, is above it.
+      It is the house's own packing, re-certified with less padding, not a new arrangement:
+      measured against T-256's certificate, nearest centres pair the 307 squares one to one
+      under the identity, two move by more than 1e-9 and none by more than 1.42e-4, and the
+      largest turn is 0.0057 degrees. The side is 3.752e-12 below T-256's,
+      17.979251283688025158..., and its 12-place print, 17.979251283685, is below the
+      house's, 17.979251283689, so the 23 October restatement ruling (think-fwa9) does not
+      reach it by its words. The 31 October review measured the margin as the house
+      certificate's padding: scaling T-256's own coordinates uniformly to first contact,
+      with nothing re-solved, already removes 94% of it.
 
-      The regularization run of 31 October 2026, after that day's adoption
-      (cases/regularized_drawings/think-3guf-2026-10-31), solved the house witness to a KKT
-      point of the side, which the run's own second-order check reports as a local minimum
-      strict modulo 57 exact flat motions, and the selection held its view at row 3 of the
-      regularization policy's decision table as a register candidate. Measured against
-      T-256's certificate, nearest centres pair the 307 squares one to one under the
-      identity; 38 move beyond 1e-3 and 3 beyond 1e-1, the largest by 0.328, and two squares
-      turn, the largest by 0.552 degrees.
+      Held for the owner. Whether a re-certification of a house's own packing, with a
+      margin no larger than its padding, is a new result, at any print, only across the
+      print, or at none, is the owner's question (RV-3 of the review, with think-ikku's
+      RV-1); the review recommends none. Until the answer the entry stays below the stage 4
+      exit and no house moves at 307.
 
       Decided here on 31 October 2026 by the kernel's three jobs on both maintained exact
       routes, sqpack.witness.exact_verify and devtools.check_rational_witness_independent,
-      every pair and every wall over Q: the positive accepted, a duplicated square and a
-      square moved outside the box refused; and by the six sharp controls, each accepted at
-      exact contact and refused 1e-30 past it. These are the checkers the regularization run
-      decided the view with, so the replay reproduces that decision with the producer's
-      code.
+      every pair and every wall over Q, with a duplicated square and a square moved outside
+      the box refused, and by the six sharp controls at exact contact and 1e-30 past it;
+      and again by the review's clean-room checker on two methods, separating axes and
+      exact clipped areas, with its own sharp controls at 1e-40.
 
-      Credit the packing to ntumlnoob, as Francisco Couzo improved it (T-256), and the
-      regularization to this project, made with Evan Daniel's regularizer
-      (https://github.com/evand/square-packing, MIT), vendored here. A finite packing proves
-      an upper bound and nothing more: the local minimality is the run's report and is not
-      registered, and no optimality or rigidity is claimed.
+      Credit the packing to ntumlnoob, as Francisco Couzo refined it (T-256); the re-solve
+      is this project's, with Evan Daniel's solver and regularizer (evand/square-packing,
+      MIT), vendored here. No optimality, local minimum or rigidity is claimed.
     scope: {n_values: [307]}
     verification: V3
-    confirmation: C3
+    confirmation: C1
     significance:
       score: 1
       rationale: >-
-        An exact re-solve of the packing the case already holds, 3.75e-12 below its
-        certificate and across its 12-place print: a smaller certificate of the same
-        arrangement, as T-155's and T-259's are, S1. No new arrangement, lower bound or
-        optimum. A draft for the stage 4 review to confirm.
+        The house's packing, re-certified with less padding: 3.752e-12 below T-256, 94% of
+        it the house certificate's own padding by the review's uniform contraction, with
+        the arrangement unchanged. Bookkeeping, as T-155's and T-195's are, S1.
       scored: '2026-10-31'
-      by: the registering lane (bold-ritchie-l8, think-ruu2), a draft for the stage 4 review
+      by: >-
+        the stage 4 review of 31 October
+        (docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md, lane
+        bold-ritchie-rv-ruu2), RV-2
     novelty: apparently-novel
     builds_on:
       credit: [Daniel]
       source_keys: ['[Daniel regularizer 2026-10-11]']
     composition: >-
-      One machine entry decides the bound at the case: the kernel's three jobs and the six
-      sharp controls on the two maintained exact routes, which share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method, and are the
-      checkers the producing run used, so the decision is reproduced with the producer's
-      code. That is C3 with one machine method. The identity measurement and the comparison
-      with the house's side and print are recorded values and set no rung.
+      Two machine entries decide the bound: the maintained routes' replay
+      (E-register-candidates-2026-10-31-solves) and the review's clean-room checker
+      (E-register-candidates-2026-10-31-review-solves), which would derive C3. The
+      confirmation is held at C1, the review's read, on the coordinator's decision of 31
+      October 2026, so that the entry stays below the stage 4 exit and no house moves until
+      the owner answers RV-3. The identity and contraction measurements are recorded
+      values and set no rung.
     regularizations:
       - n: 307
         of: T-256
@@ -37807,188 +37798,239 @@ results:
         modifications: []
         modifications_unrecorded: ["retry rungs"]
         side: solved
-        changes:
-          straightened: 1
-          re_angled: 1
         identity:
           basis: measured
           measured_in: packing/cases/register_candidates/think-ruu2-2026-10-31/measure/identity-n307.json
           one_to_one: true
-          moved: 38
-          max_move: 0.3283412
-          max_turn_deg: 0.5518
+          moved: 0
+          max_move: 1.414214e-4
+          max_turn_deg: 0.00573
     evidence:
-      - E-register-candidates-2026-10-31-views
+      - E-register-candidates-2026-10-31-solves
+      - E-register-candidates-2026-10-31-review-solves
     artifacts:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/README.md
-      - packing/cases/register_candidates/think-ruu2-2026-10-31/views/n-307.yaml.gz
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/certificates/n-307.cert
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/exact-certification-n307.json.xz
       - packing/cases/register_candidates/think-ruu2-2026-10-31/measure/identity-n307.json
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/contract.json
       - packing/cases/regularized_drawings/think-3guf-2026-10-31/adopt-2026-10-31-n130-307-evand/n-307/report.json.gz
       - packing/devtools/register_candidates.py
+      - docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
     controls:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/sharp-controls-n307.json
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/controls.json
       - packing/tests/test_register_candidates.py
+    reviews:
+      - path: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strongest sub-agent tier tbd-strong-max at maximum reasoning),
+          the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
+          prompted separately from the records lane (bold-ritchie-l8), with no shared
+          context beyond its brief
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-31'
+        scope: >-
+          Finite feasibility at 130, 293 and 307 of the project's candidates, decided by a
+          clean-room exact checker on two methods with 64 sharp controls; each side against
+          its house, its print and the ceilings above; the identity and the uniform
+          contraction of each house; the credit chains; whether each is a new result, put to
+          the owner (RV-3, RV-4).
+        verdict: accepted
+        covers: [T-261, T-262, T-263]
     next_rung: >-
-      The stage 4 review of the certificate, running in its own lane on 31 October
-      (think-ruu2); once it accepts it, the review is listed here and the house rule adopts
-      the side at 307 with both strong generators' regularization. Adoption first needs
-      devtools.select_houses and devtools.upper_bound_houses to read a certificate this
-      project made, which they do not yet: they read a house from an import packet's
-      attribution and declaration (think-ruu2's follow-up). V4 and C4 need two adversarial
-      AI reviews by distinct reviewers and a human oversight record.
+      Held for the owner's answer to RV-3 of the 31 October review: is a re-certification
+      of a house's own packing, with a margin no larger than the house certificate's
+      padding, a new result at any print (adopt), only across the print (adopt 307 now), or
+      at none (withdraw; the review recommends this)? If the answer keeps it, the
+      confirmation rises to C3, which its evidence derives, and the house rule adopts the
+      side at 307 with both regularizations once select_houses and upper_bound_houses read
+      a certificate this project made (think-4z8z).
     notes: >-
-      The case record is unchanged: the house at 307 stays T-256 until the review and the
-      adoption, and this entry reads as pending adoption there. The view is retained as the
-      run wrote it, bound to the Git blob and the exact side its retained report records
-      (devtools.register_candidates retain and check). No source program ran here: the
-      solver and the regularizer made the view and decide nothing.
+      The case record is unchanged: the house at 307 stays T-256. The retained certificate
+      is the run's solve certificate (SHA-256 f5474910...2884), which the review names as
+      the natural bound certificate (RV-5); the run's drawn view, at the same side, moves 38
+      squares and is a drawing under the regularization policy, retained with the review's
+      inputs only. The KKT local minimality the run reports is not decided here.
   - id: T-262
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
     established: '2026-10-31'
     headline: >-
-      The 260 house plus one L strip proves `s(293)` `8.98e-13` below the 293 house
+      The 293 house's own construction re-assembled exactly, `8.98e-13` below it; held for the owner
     claim: >-
       s(293) <= 8816991251060941991251052624833/500000000000000000000000000000 =
       17.633982502121883982502105249666, which is s_260 + 1 for s_260 the exact side of
-      Evan Daniel's issue 845 certificate at 260 (T-257), the case's house best packing
-      there since 31 October 2026: that packing in [0, s_260]^2 with one L strip of 33
-      axis-aligned unit squares, 16 in [s_260, s_260 + 1] x [0, 16], 16 in [0, 16] x
-      [s_260, s_260 + 1] and one in the corner, is a packing of 293 unit squares in the
-      square of side s_260 + 1, decided here over Q.
+      Evan Daniel's issue 845 certificate at 260 (T-257): that certificate in
+      [0, s_260]^2 with the 293 house's L strip, a column of 17 unit squares flush with the
+      top wall in [s_260, s_260 + 1] x [s_260 - 16, s_260 + 1] and a row of 16 flush with
+      the left wall in [0, 16] x [s_260, s_260 + 1], a packing of 293 unit squares decided
+      here over Q.
 
-      The side is 8.98e-13 below the 293 house, Evan Daniel's issue 845 certificate at 293
-      (T-257), 17.633982502122782..., and its 12-place print, 17.633982502122, is below the
-      house's, 17.633982502123. So the 23 October restatement ruling (think-fwa9), which
-      reaches a side below an earlier report by less than one unit in the 12th place with
-      both at the same print, does not apply by its words. Daniel's 293 is reported as his
-      260 plus an L; the two certificates were dilated separately, which is the margin. No
-      earlier certificate states this side, and the next count's ceiling, 17.6568542494...
-      at 294, is above it.
+      It is Daniel's packing and construction, re-assembled exactly: issue 845 states his
+      293 as his 260 plus one L-shaped strip, and the 31 October review found the 260 block
+      to be his 293's block mirrored, x to s_260 - x, within 1.1e-13, and the strip his to
+      1.6e-11. The side is 8.98e-13 below T-257's 293 certificate, 17.633982502122782...,
+      and its 12-place print, 17.633982502122, is below the house's, 17.633982502123. The
+      margin decomposes exactly: T-257 dilated its whole 293 input by 1 + 1e-12, so the
+      strip's extra unit of side contributes 1e-12, less a 1.02e-13 difference between his
+      two binary64 inputs.
 
-      The senior review of #852 found the construction (A3) and decided it on the
-      independent route. Decided again here on 31 October 2026 by the kernel's three jobs on
-      both maintained exact routes, every pair and every wall over Q, and by the six sharp
-      controls at exact contact and 1e-30 past it. The certificate is rebuilt from the
-      #845 packet's 260 certificate, read through its custody, wherever it is read. Measured
-      against T-257's 293 certificate, nearest centres do not pair the squares one to one
-      under any of the box's eight symmetries (the best assignment moves 223 squares beyond
-      1e-3), so the record does not call this Daniel's 293 packing re-dilated: it is a
-      packing of 293 built from his 260.
+      Held for the owner, on two questions of the review: RV-3, whether such a
+      re-certification is a new result at any print, only across it, or at none (the
+      review recommends none, and notes that the same contraction takes T-257's own 293
+      1.67e-11 below this side); and RV-4, whether s_260 + 1 is already issue 845's own
+      report, through its 260 certificate and its stated recipe, in which case T-257 first
+      certifies it. Until the answers the entry stays below the stage 4 exit and no house
+      moves at 293.
 
-      Credit Evan Daniel, whose 260 packing carries the bound, after the finders his
-      issue 845 credits there; the L strip and the registration are this project's. A
-      finite packing proves an upper bound and nothing more; no optimality or rigidity is
-      claimed.
+      Decided here on 31 October 2026 by the kernel's three jobs on both maintained exact
+      routes and the six sharp controls; again by the review's clean-room checker on two
+      methods with its own controls, in this placement and two others. The certificate the
+      review wrote is retained, and every read holds it pose for pose to the construction
+      rebuilt from the issue 845 packet's 260 certificate. No regularizer ran.
+
+      Credit Evan Daniel, whose packing and construction it is, after the finders issue
+      845 credits; the exact re-assembly is this project's. No optimality, local minimum
+      or rigidity is claimed.
     scope: {n_values: [293]}
     verification: V3
-    confirmation: C3
+    confirmation: C1
     significance:
       score: 1
       rationale: >-
-        s(n + 2 floor(s_n) + 1) <= s_n + 1 applied to the 260 house: 8.98e-13 below the
-        293 house, the padding the two certificates were dilated by, across the 12-place
-        print. A routine consequence of a packing the record holds, S1, as T-156's
-        monotone bound is. A draft for the stage 4 review to confirm.
+        The house's own packing and construction re-assembled with the strip undilated:
+        8.98e-13 below T-257, the strip's share of its 1 + 1e-12 dilation. Bookkeeping, S1,
+        as the review's RV-2 rates it.
       scored: '2026-10-31'
-      by: the registering lane (bold-ritchie-l8, think-ruu2), a draft for the stage 4 review
+      by: >-
+        the stage 4 review of 31 October
+        (docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md, lane
+        bold-ritchie-rv-ruu2), RV-2
     novelty: apparently-novel
     builds_on:
       credit: [Daniel]
       source_keys: ['[Daniel issue 845 2026-10-29]']
     composition: >-
-      One machine entry decides the bound at the case: the kernel's three jobs and the six
-      sharp controls on the two maintained exact routes, which share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method. That is C3
-      with one machine method. The senior review of #852 decided the construction on the
-      independent route first (42,778 pairs); the identity measurement and the comparison
-      with the house's side and print are recorded values and set no rung.
+      Two machine entries decide the bound: the maintained routes' replay
+      (E-register-candidates-2026-10-31-l-strip-293) and the review's clean-room checker
+      (E-register-candidates-2026-10-31-review-l-strip-293), which would derive C3. The
+      confirmation is held at C1, the review's read, on the coordinator's decision of 31
+      October 2026, so that the entry stays below the stage 4 exit and no house moves until
+      the owner answers RV-3 and RV-4.
     evidence:
       - E-register-candidates-2026-10-31-l-strip-293
+      - E-register-candidates-2026-10-31-review-l-strip-293
     artifacts:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/README.md
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/certificates/n-293.cert
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/exact-certification-n293.json.xz
       - packing/cases/register_candidates/think-ruu2-2026-10-31/measure/identity-n293.json
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/identity.json
       - packing/resources/web/evand-issue845-2026-10-29/README.md
       - packing/devtools/register_candidates.py
+      - docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
     controls:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/sharp-controls-n293.json
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/controls.json
       - packing/tests/test_register_candidates.py
+    reviews:
+      - path: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strongest sub-agent tier tbd-strong-max at maximum reasoning),
+          the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
+          prompted separately from the records lane (bold-ritchie-l8), with no shared
+          context beyond its brief
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-31'
+        scope: >-
+          Finite feasibility at 130, 293 and 307 of the project's candidates, decided by a
+          clean-room exact checker on two methods with 64 sharp controls; each side against
+          its house, its print and the ceilings above; the identity and the uniform
+          contraction of each house; the credit chains; whether each is a new result, put to
+          the owner (RV-3, RV-4).
+        verdict: accepted
+        covers: [T-261, T-262, T-263]
     next_rung: >-
-      The stage 4 review of the construction, running in its own lane on 31 October
-      (think-ruu2); once it accepts it, the review is listed here and the house rule adopts
-      the side at 293 with both strong generators' regularization. Adoption first needs
-      devtools.select_houses and devtools.upper_bound_houses to read a certificate this
-      project made (think-ruu2's follow-up). V4 and C4 need two adversarial AI reviews by
-      distinct reviewers and a human oversight record.
+      Held for the owner's answers to RV-3 and RV-4 of the 31 October review. If s_260 + 1
+      is issue 845's own report (RV-4), the entry names T-257 as first certifying it and
+      proves no new bound. If not, and RV-3 keeps such re-certifications, the confirmation
+      rises to C3, which its evidence derives, and the house rule adopts the side at 293
+      with both regularizations once select_houses and upper_bound_houses read a
+      certificate this project made (think-4z8z); RV-6 of the review notes the side as
+      built is not tight, and RV-3's answer decides whether a tighter one replaces it.
     notes: >-
-      The case record is unchanged: the house at 293 stays T-257 until the review and the
-      adoption, and this entry reads as pending adoption there. A scan of L steps into and
-      out of the eight counts re-housed on 31 October, by the same review, found no other
-      improvement. Whether the credit line should name the 293 packing's credit, as Daniel's
-      293 is his 260 plus an L, or the 260's, which carries the bound, is for the review.
+      The case record is unchanged: the house at 293 stays T-257. Measured by
+      devtools.measure_identity against T-257's 293 certificate as a whole, nearest centres
+      pair the squares one to one under no symmetry of the box (measure/identity-n293.json),
+      since the 260 block is mirrored and the strip is not; the review measured the two
+      apart (review/out/identity.json), so the entry carries no regularizations item and
+      credits Daniel through builds_on. The senior review of #852 found the construction
+      (A3) with a strip of 16 + 16 + 1; the retained certificate takes the house's own
+      placement, which the review recommends naming (RV-6).
   - id: T-263
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
     established: '2026-10-31'
     headline: >-
-      The regularizer re-solves the 130 house `2.500e-13` below it, within its print; held
+      The 130 house re-certified with less padding, `2.500e-13` below it within its print; held
     claim: >-
       s(130) <= 1487803830747751967474793359227/125000000000000000000000000000 =
-      11.902430645982015739798346873816, the exact side of a rational packing this project
-      made from the case's house best packing at 130 (T-259, Mykhailo Polkovskyi's re-solve
-      of Francisco Couzo's issue 843 packing) with Evan Daniel's exact solver and
-      regularizer, and decided here over Q.
+      11.902430645982015739798346873816, the exact side of the solve certificate of Evan
+      Daniel's exact solver run by this project on the case's house best packing at 130
+      (T-259, Mykhailo Polkovskyi's re-solve of Francisco Couzo's issue 843 packing),
+      decided here over Q.
 
-      The side is 2.500e-13 below T-259's certificate, 11.902430645982265758..., and both
-      round up to the same 12-place print, 11.902430645983. In the words of the 23 October
-      ruling (think-fwa9) such a side is a sub-print re-certification, a restatement. The
-      record applies that ruling beyond the corpus only; whether it reaches counts inside
-      the corpus is the owner's open question (think-ikku, RV-1 of the 31 October review),
-      and whether it reaches this project's own regularizations, which T-155 registered at
-      margins of 5.4e-20 to 9.9e-15, no answer has said. So the entry is registered and
-      held: no house moves at 130 until the owner answers, and its review, run with the
-      others of this batch, is not listed here until then.
+      It is the house's own packing, re-certified with less padding: measured against
+      T-259's certificate, nearest centres pair the 130 squares one to one under the
+      identity, two move by more than 1e-9 and none by more than 4.2e-7. The side is
+      2.500e-13 below T-259's, 11.902430645982265758..., and both round up to the same
+      12-place print, 11.902430645983: in the words of the 23 October ruling (think-fwa9) a
+      sub-print re-certification, a restatement. The record applies that ruling beyond the
+      corpus only, and whether it reaches counts inside it is the owner's question
+      (think-ikku, RV-1 of the review of issue 846); the 31 October review also puts RV-3,
+      whether any such re-certification is a new result, and recommends none. Uniform
+      contraction of T-259's own coordinates already removes 87% of the margin.
 
-      The regularization run of 31 October 2026, after that day's adoption
-      (cases/regularized_drawings/think-3guf-2026-10-31), solved the house witness to a KKT
-      point of the side, which the run's own second-order check reports as a local minimum
-      strict modulo 29 exact flat motions, and the selection held its view at row 3 as a
-      register candidate. Measured against T-259's certificate, nearest centres pair the 130
-      squares one to one under the identity; 16 move beyond 1e-3, the largest by 0.0593,
-      and five turn, the largest by 1.84 degrees. Decided here on 31 October 2026 by the
-      kernel's three jobs on both maintained exact routes, every pair and every wall over
-      Q, and by the six sharp controls at exact contact and 1e-30 past it, the checkers the
-      regularization run used.
+      Held for the owner: the entry stays below the stage 4 exit and no house moves at 130.
+      Decided here on 31 October 2026 by the kernel's three jobs on both maintained exact
+      routes and the six sharp controls, and again by the review's clean-room checker on
+      two methods with its own controls.
 
-      Credit the packing to Francisco Couzo, as Mykhailo Polkovskyi re-solved it (T-259),
-      and the regularization to this project, made with Evan Daniel's regularizer. No
-      optimality or rigidity is claimed.
+      Credit the packing to Francisco Couzo, as T-259 credits it; the re-solve is this
+      project's, with Evan Daniel's solver and regularizer (evand/square-packing, MIT),
+      vendored here. No optimality, local minimum or rigidity is claimed.
     scope: {n_values: [130]}
     verification: V3
-    confirmation: C3
+    confirmation: C1
     significance:
       score: 1
       rationale: >-
-        An exact re-solve of the packing the case already holds, 2.50e-13 below its
-        certificate and within its 12-place print, S1 as T-155's are; held for the owner's
-        question whether it is a restatement. A draft for the stage 4 review to confirm.
+        The house's packing, re-certified with less padding: 2.500e-13 below T-259 within
+        its 12-place print, 87% of it the house certificate's own padding by the review's
+        uniform contraction. Bookkeeping, S1, as T-155's are.
       scored: '2026-10-31'
-      by: the registering lane (bold-ritchie-l8, think-ruu2), a draft for the stage 4 review
+      by: >-
+        the stage 4 review of 31 October
+        (docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md, lane
+        bold-ritchie-rv-ruu2), RV-2
     novelty: apparently-novel
     builds_on:
       credit: [Daniel]
       source_keys: ['[Daniel regularizer 2026-10-11]']
     composition: >-
-      One machine entry decides the bound at the case: the kernel's three jobs and the six
-      sharp controls on the two maintained exact routes, which share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method, and are the
-      checkers the producing run used, so the decision is reproduced with the producer's
-      code. That is C3 with one machine method. No accepted review is listed, by the
-      owner's hold, so no house moves.
+      Two machine entries decide the bound: the maintained routes' replay
+      (E-register-candidates-2026-10-31-solves) and the review's clean-room checker
+      (E-register-candidates-2026-10-31-review-solves), which would derive C3. The
+      confirmation is held at C1, the review's read, on the coordinator's decision of 31
+      October 2026, so that the entry stays below the stage 4 exit and no house moves until
+      the owner answers think-ikku's RV-1 and the review's RV-3.
     regularizations:
       - n: 130
         of: T-259
@@ -37997,38 +38039,62 @@ results:
         modifications: []
         modifications_unrecorded: ["retry rungs"]
         side: solved
-        changes:
-          straightened: 3
-          re_angled: 2
         identity:
           basis: measured
           measured_in: packing/cases/register_candidates/think-ruu2-2026-10-31/measure/identity-n130.json
           one_to_one: true
-          moved: 16
-          max_move: 0.0592683
-          max_turn_deg: 1.84
+          moved: 0
+          max_move: 4.121537e-7
+          max_turn_deg: 3.802e-5
     evidence:
-      - E-register-candidates-2026-10-31-views
+      - E-register-candidates-2026-10-31-solves
+      - E-register-candidates-2026-10-31-review-solves
     artifacts:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/README.md
-      - packing/cases/register_candidates/think-ruu2-2026-10-31/views/n-130.yaml.gz
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/certificates/n-130.cert
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/exact-certification-n130.json.xz
       - packing/cases/register_candidates/think-ruu2-2026-10-31/measure/identity-n130.json
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/contract.json
       - packing/cases/regularized_drawings/think-3guf-2026-10-31/adopt-2026-10-31-n130-307-evand/n-130/report.json.gz
       - packing/devtools/register_candidates.py
+      - docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
     controls:
       - packing/cases/register_candidates/think-ruu2-2026-10-31/receipts/sharp-controls-n130.json
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/controls.json
       - packing/tests/test_register_candidates.py
+    reviews:
+      - path: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strongest sub-agent tier tbd-strong-max at maximum reasoning),
+          the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
+          prompted separately from the records lane (bold-ritchie-l8), with no shared
+          context beyond its brief
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-31'
+        scope: >-
+          Finite feasibility at 130, 293 and 307 of the project's candidates, decided by a
+          clean-room exact checker on two methods with 64 sharp controls; each side against
+          its house, its print and the ceilings above; the identity and the uniform
+          contraction of each house; the credit chains; whether each is a new result, put to
+          the owner (RV-3, RV-4).
+        verdict: accepted
+        covers: [T-261, T-262, T-263]
     next_rung: >-
-      Held for the owner's question (think-ikku, extended to this project's own
-      regularizations): whether the 23 October restatement ruling reaches counts inside the
-      corpus, and this project's regularized views. If it does, the entry is withdrawn and
-      no house moves; if it does not, the stage 4 review that ran with this batch is listed
-      here and the house rule adopts the side at 130 with both regularizations.
+      Held for the owner's answers to think-ikku's RV-1 (does the 23 October restatement
+      ruling reach counts inside the corpus?) and the 31 October review's RV-3 (is a
+      re-certification of a house's own packing within its padding a new result at all?).
+      If either answer makes it a restatement, the entry is withdrawn and no house moves; if
+      both keep it, the confirmation rises to C3 and the house rule adopts the side at 130
+      with both regularizations once select_houses and upper_bound_houses read a
+      certificate this project made (think-4z8z).
     notes: >-
-      The case record is unchanged: the house at 130 stays T-259. The view is retained as
-      the run wrote it, bound to the Git blob and the exact side its retained report records
-      (devtools.register_candidates retain and check). No source program ran here.
+      The case record is unchanged: the house at 130 stays T-259. The retained certificate
+      is the run's solve certificate (SHA-256 9d4b4c29...6524), which the review names as
+      the natural bound certificate (RV-5); the run's drawn view, at the same side, moves 35
+      squares and is a drawing, retained with the review's inputs only. The KKT local
+      minimality the run reports is not decided here.
   - id: T-264
     kind: restricted-optimality
     registered: '2026-10-31'

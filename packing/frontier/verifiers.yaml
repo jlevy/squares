@@ -6550,3 +6550,87 @@ verifiers:
       retained verify_exact.py as data before running it; none of the author's own checker,
       controls or scripts was read or run. sqpack.witness.exact_verify decides on route 1
       and verify_exact.py, the source's checker (V-evand-verify-exact), on route 2.
+  - id: V-ruu2-review-route-sat
+    program: route_sat.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides a packing of unit squares exactly in rationals by separating axes, with no
+      distance filter: every basis is a unit vector, every square's support-function extent
+      lies in [0, side] on both axes, and every pair is separated on one of its four edge
+      normals by at least (1 + |cos D| + |sin D|)/2.
+    source:
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/route_sat.py
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/qio.py
+    independence_record: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
+    independence:
+      read: [mathematics, certificate-format, specification, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
+            strongest sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The certificates are this project's, made with Evan Daniel's vendored solver and
+          regularizer, and both worked with Claude. Written in a file of its own that imports
+          nothing from the repository, the regularizer or Daniel's checkers, none of which
+          its author read.
+      note: >-
+        Its author read the mathematics, the certificates' header lines, the witness schema,
+        the houses' source certificates, Daniel's .json summaries and the run's retained
+        report, and read earlier reviews only after the findings were written.
+    note: >-
+      Written and run on 31 October 2026 by the review of the project's candidates at 130,
+      293 and 307 (route A), on the two solve certificates, the two views and three strip
+      placements at 293, with 64 sharp controls; kept with its README and receipts in the
+      register_candidates package's review/, excluded from the lint floor as retained
+      evidence.
+  - id: V-ruu2-review-route-area
+    program: route_area.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides a packing of unit squares again by exact clipped areas: unit edges, right
+      angles and area 1 for each square; each square clipped to the box keeps area 1; and
+      every pair whose corner bounding boxes overlap in their interiors is clipped
+      (Sutherland-Hodgman, in rationals) to area exactly 0.
+    source:
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/route_area.py
+      - packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/qio.py
+    independence_record: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
+    independence:
+      read: [mathematics, certificate-format, specification, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
+            strongest sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          As for route_sat.py; the two routes share only the reader qio.py, and this one
+          computes no projection.
+      note: >-
+        Its author read what route_sat.py's did, and wrote it beside that route so that the
+        two share the reader and nothing else.
+    note: >-
+      Written and run on 31 October 2026 by the same review (route B), on the same subjects
+      and controls; kept beside route_sat.py.

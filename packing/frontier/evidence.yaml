@@ -54420,7 +54420,7 @@ evidence:
       names the same two methods, before writing it. Finite feasibility only: no lower
       bound, optimum, local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-31'
-  - id: E-register-candidates-2026-10-31-views
+  - id: E-register-candidates-2026-10-31-solves
     claim: upper-bound
     scope: {n_values: [130, 307]}
     assurance: verified
@@ -54438,20 +54438,21 @@ evidence:
         2026-10-31, by devtools.register_candidates table against the houses, and a search of
         the retained packets and the register for each side's numerator
       novel_object: >-
-        Exact rational certificates of the houses' packings at 130 and 307, re-solved by
-        Evan Daniel's regularizer, 2.500e-13 and 3.752e-12 below the houses. The packings
-        are their finders'; the solver and the regularizer are Evan Daniel's.
+        Exact rational certificates of the houses' own packings at 130 and 307, re-solved
+        with Evan Daniel's solver, 2.500e-13 and 3.752e-12 below the houses; the packings
+        are their finders', and most of each margin is the house certificate's padding.
       gaps: >-
-        No search beyond this record and its retained sources. At 130 the side is within the
-        house's 12-place print, and whether that makes it a restatement is the owner's
-        question (think-ikku).
+        No search beyond this record and its retained sources. Whether such a
+        re-certification is a new result is the owner's question (RV-3 of the 31 October
+        review; think-ikku).
     source_key: '[Daniel regularizer 2026-10-11]'
-    certificate: packing/cases/register_candidates/think-ruu2-2026-10-31/views/
+    certificate: packing/cases/register_candidates/think-ruu2-2026-10-31/certificates/
     replay: >-
       From packing/, uv run --frozen --all-extras --group dev python -m
       devtools.register_candidates think-ruu2-2026-10-31 check --replay, which holds each
-      retained view to its run's report, decides the kernel's three jobs again on both
-      routes and requires the receipts' outcomes, and decides the six sharp controls again
+      retained certificate to its pinned SHA-256 and to the solved side its run's report
+      records, decides the kernel's three jobs again on both routes and requires the
+      receipts' outcomes, and decides the six sharp controls again
       (receipts/exact-certification-n130.json.xz, -n307.json.xz,
       receipts/sharp-controls-n130.json and -n307.json in the package).
     replay_status: passed
@@ -54460,27 +54461,99 @@ evidence:
       coverage:
         extent: full
         unit: >-
-          retained rational packing views, every wall and every pair decided by both
+          the two retained solve certificates, every wall and every pair decided by both
           maintained checkers: 8,385 pairs at 130 and 46,971 at 307 a job, with the
           duplicate-square and outside-container jobs and the sharp controls retained beside
         checked: 2
         of: 2
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude, strongest sub-agent tier tbd-strong-max at maximum reasoning), the
+        stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2), prompted
+        separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md decided
+        both certificates again with a clean-room checker on two methods
+        (E-register-candidates-2026-10-31-review-solves) and accepted both for finite
+        feasibility; it found neither a new arrangement (RV-2) and put to the owner whether
+        such a re-certification is a new result (RV-3).
     limitations: >-
-      Proves s(130) and s(307) at most the exact sides of the retained views, by deciding
-      each here, every pair and every wall over Q, by sqpack.witness.exact_verify on its
-      rational centre-basis witness and devtools.check_rational_witness_independent on its
-      rational corners, on 31 October 2026. Both refuse a duplicated square and a square
-      moved outside the box, and the six sharp controls of
+      Proves s(130) and s(307) at most the exact sides of the retained solve certificates,
+      by deciding each here, every pair and every wall over Q, by sqpack.witness.exact_verify
+      on its rational centre-basis witness and devtools.check_rational_witness_independent
+      on its rational corners, on 31 October 2026; both refuse a duplicated square and a
+      square moved outside the box, and the six sharp controls of
       devtools.upper_bound_sharp_controls are accepted at exact contact and refused 1e-30
       past it on both. The two routes share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. The regularization run of 31
-      October 2026 (devtools.regularize_evand, Evan Daniel's vendored solver and regularizer
-      at evand/square-packing@675a5ea, conservative, coincide) made each view and decided it
-      with the same two checkers, so this replay reproduces the producing run's decision
-      with its own code; the solver and the regularizer decide nothing. The KKT local
-      minimality the run reports is not decided here. Identity is measured against each
-      house's certificate (measure/identity-n130.json and -n307.json): one to one under the
-      identity at both. No optimality, local minimum or rigidity is claimed.
+      Fraction arithmetic and the separating-axis method. The certificates are the solve
+      certificates (solve/witness.cert) of the regularization run of 31 October 2026
+      (devtools.regularize_evand, Evan Daniel's vendored solver and regularizer at
+      evand/square-packing@675a5ea); that pipeline decides what it draws with these same
+      two routes, so this replay is counted, conservatively, as reproduction with the
+      producing pipeline's deciders. The KKT local minimality the run reports is not decided
+      here. No optimality, local minimum or rigidity is claimed.
+    source_reviewed: '2026-10-31'
+  - id: E-register-candidates-2026-10-31-review-solves
+    claim: upper-bound
+    scope: {n_values: [130, 307]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: As E-register-candidates-2026-10-31-solves.
+      searched: '2026-10-31, by the review''s sides.py against the case records at e482345fe'
+      novel_object: The same two certificates, decided again.
+      gaps: As E-register-candidates-2026-10-31-solves.
+    source_key: '[Daniel regularizer 2026-10-11]'
+    certificate: packing/cases/register_candidates/think-ruu2-2026-10-31/certificates/
+    replay: >-
+      From packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/, with the
+      project interpreter: python3 -I run_checks.py INPUTS OUT and controls.py INPUTS OUT,
+      INPUTS holding the two certificates as n130-solve-witness.cert and
+      n307-solve-witness.cert with the review's other inputs (code/README.md lists them);
+      every subject must pass both routes and every control come out as expected, as
+      out/check-solve130.json, check-solve307.json and controls.json record.
+    replay_status: passed
+    verifiers: [V-ruu2-review-route-sat, V-ruu2-review-route-area]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two solve certificates (and the run's two drawn views), every wall and every
+          pair decided on both methods, with the review's sharp controls at 1e-40
+        checked: 2
+        of: 2
+      read: [mathematics, certificate-format, specification, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
+            strongest sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The certificates are this project's, made with Evan Daniel's vendored solver; both
+          worked with Claude. The checker imports nothing from the repository, the
+          regularizer or Daniel's checkers, none of which its author read.
+    independence_record: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
+    limitations: >-
+      Run on 31 October 2026 by the stage 4 review, under Python 3.14.7 with the standard
+      library only: both certificates and both drawn views valid on separating axes and on
+      exact clipped areas, least pair slack 1.0e-20 and least wall clearance 5.0e-21, and
+      every one of the review's sharp controls (the box 1e-40 below the extent, the
+      closest pair 1e-40 past contact, a basis scaled by 1 + 1e-40, a square turned by
+      t = 1e-15, a duplicate) as expected. Independently re-implemented, clean-room, by a
+      Claude agent, a system family the producer also used. Finite feasibility only.
     source_reviewed: '2026-10-31'
   - id: E-register-candidates-2026-10-31-l-strip-293
     claim: upper-bound
@@ -54489,7 +54562,7 @@ evidence:
     method: exact-algebraic
     performed_by: repository
     relationship_to_generator: shared-components
-    shared_components: ["the arrangement kernel's exact certificate type and its half-angle conversion to witnesses and corners (devtools.evand_exact_certificates), which builds the construction and hands it to both checkers"]
+    shared_components: ["the arrangement kernel's exact certificate type and its half-angle conversion to witnesses and corners (devtools.evand_exact_certificates), with which the construction is rebuilt and handed to both checkers"]
     origin: replayed-here
     novelty: apparently-novel
     novelty_basis:
@@ -54501,23 +54574,25 @@ evidence:
         2026-10-31, by devtools.register_candidates table against the house, and a search of
         the retained packets and the register for the side's numerator
       novel_object: >-
-        A certificate of 293 unit squares at s_260 + 1, from Evan Daniel's issue 845
-        certificate at 260 and one L strip, 8.98e-13 below his certificate at 293, which the
-        issue reports as his 260 plus an L, dilated separately.
+        A certificate of 293 unit squares at s_260 + 1, Evan Daniel's issue 845 260
+        certificate with his 293's L strip undilated, 8.98e-13 below his 293 certificate;
+        whether issue 845 already reports it by its stated recipe is the owner's question
+        (RV-4).
       gaps: >-
         No search beyond this record and its retained sources. The senior review of #852
-        found the construction (A3) and its scan of L steps into and out of the eight
-        counts re-housed on 31 October found no other.
+        scanned L steps into and out of the eight counts re-housed on 31 October and found
+        no other.
     source_key: '[Daniel issue 845 2026-10-29]'
-    certificate: packing/resources/web/evand-issue845-2026-10-29/README.md
+    certificate: packing/cases/register_candidates/think-ruu2-2026-10-31/certificates/n-293.cert
     replay: >-
       From packing/, uv run --frozen --all-extras --group dev python -m
-      devtools.register_candidates think-ruu2-2026-10-31 check --replay, which rebuilds the
-      construction from the issue 845 packet's 260 certificate through that packet's
-      custody, decides the kernel's three jobs again on both routes and requires the
-      receipts' outcomes, and decides the six sharp controls again
+      devtools.register_candidates think-ruu2-2026-10-31 check --replay, which holds the
+      retained certificate to its pinned SHA-256 and, pose for pose, to the construction
+      rebuilt from the issue 845 packet's 260 certificate through that packet's custody,
+      decides the kernel's three jobs again on both routes and requires the receipts'
+      outcomes, and decides the six sharp controls again
       (receipts/exact-certification-n293.json.xz and receipts/sharp-controls-n293.json in
-      packing/cases/register_candidates/think-ruu2-2026-10-31).
+      the package).
     replay_status: passed
     verifiers: [V-sqpack-verify, V-check-rational-witness-independent, V-register-candidates]
     independence:
@@ -54529,18 +54604,88 @@ evidence:
           sharp controls retained beside
         checked: 1
         of: 1
+    external_review:
+      state: informally-verified
+      date: '2026-10-31'
+      reviewed_by: >-
+        AI agent (Claude, strongest sub-agent tier tbd-strong-max at maximum reasoning), the
+        stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2), prompted
+        separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md decided the
+        construction in three strip placements with a clean-room checker on two methods
+        (E-register-candidates-2026-10-31-review-l-strip-293) and wrote this certificate;
+        it found it Daniel's 293 re-assembled with the strip undilated (RV-2) and put RV-3
+        and RV-4 to the owner.
     limitations: >-
       Proves s(293) <= s_260 + 1 for s_260 the exact side of Evan Daniel's issue 845
-      certificate at 260, by building the packing of 293 unit squares, his 260 certificate
-      in [0, s_260]^2 with 33 axis-aligned unit squares in the L strip, and deciding it
+      certificate at 260, by the retained packing of 293 unit squares, his 260 certificate
+      in [0, s_260]^2 with the 293 house's L strip of 33 axis-aligned unit squares, decided
       here, every pair and every wall over Q, by sqpack.witness.exact_verify and
       devtools.check_rational_witness_independent, on 31 October 2026, with a duplicated
       square and a square moved outside the box refused and the six sharp controls accepted
       at exact contact and refused 1e-30 past it on both. The two routes share certificate
       parsing, half-angle conversion, Fraction arithmetic and the separating-axis method,
-      and the construction is built with the kernel's certificate type, which both are
-      handed. The senior review of #852 decided the same construction on the independent
-      route first (42,778 pairs). Measured against T-257's certificate at 293, nearest
-      centres pair the squares one to one under no symmetry of the box
-      (measure/identity-n293.json). No optimality, local minimum or rigidity is claimed.
+      and the construction is rebuilt with the kernel's certificate type, which both are
+      handed. No optimality, local minimum or rigidity is claimed.
+    source_reviewed: '2026-10-31'
+  - id: E-register-candidates-2026-10-31-review-l-strip-293
+    claim: upper-bound
+    scope: {n_values: [293]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: As E-register-candidates-2026-10-31-l-strip-293.
+      searched: '2026-10-31, by the review''s sides.py against the case records at e482345fe'
+      novel_object: The same construction, decided again in three strip placements.
+      gaps: As E-register-candidates-2026-10-31-l-strip-293.
+    source_key: '[Daniel issue 845 2026-10-29]'
+    certificate: packing/cases/register_candidates/think-ruu2-2026-10-31/review/out/n293-s260-plus-L-17top+16.cert
+    replay: >-
+      From packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/, with the
+      project interpreter: python3 -I build293.py INPUTS OUT, run_checks.py INPUTS OUT and
+      controls.py INPUTS OUT, INPUTS holding s260_1028.cert from the issue 845 packet with
+      the review's other inputs (code/README.md lists them); the written certificates must
+      pass both routes when read back and every control come out as expected, as
+      out/build293.log, check-cand293-*.json and controls.json record.
+    replay_status: passed
+    verifiers: [V-ruu2-review-route-sat, V-ruu2-review-route-area]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the construction in three strip placements, two written out and read back, every
+          wall and every pair decided on both methods, with the review's sharp controls
+        checked: 1
+        of: 1
+      read: [mathematics, certificate-format, specification, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of think-ruu2 (bold-ritchie-rv-ruu2),
+            strongest sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Evan Daniel's certificates are AI assisted (Claude); the checker imports nothing
+          from the repository or from his checkers, none of which its author read.
+    independence_record: docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md
+    limitations: >-
+      Run on 31 October 2026 by the stage 4 review, under Python 3.14.7 with the standard
+      library only: the construction valid on separating axes and on exact clipped areas
+      with the strip as a column of 17 flush with the top wall and a row of 16 (the
+      house's placement, the certificate retained), as 16 + 16 + 1 and as 17 + 16, the
+      strip squares touching exactly; the review's sharp controls on two placements as
+      expected, among them the strip's column moved onto the 260 block's rightmost corner
+      and 1e-40 past it. Independently re-implemented, clean-room, by a Claude agent, a
+      system family the producer also used. Finite feasibility only.
     source_reviewed: '2026-10-31'

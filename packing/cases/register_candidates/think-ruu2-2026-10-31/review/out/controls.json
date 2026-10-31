@@ -1,0 +1,514 @@
+[
+ {
+  "subject": "cand130 (view)",
+  "control": "positive at the declared side",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "box at the exact extent E",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "box at E - 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "square 1 onto the bottom wall (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "square 1 onto the bottom wall (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "pair 21,111 closed by slack 1.0e-20 (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "pair 21,111 closed by slack 1.0e-20 (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "square 111 turned by t = 1e-15",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "square 21 basis scaled by 1 + 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (view)",
+  "control": "square 1 duplicated",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "positive at the declared side",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "box at the exact extent E",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "box at E - 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "square 1 onto the bottom wall (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "square 1 onto the bottom wall (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "pair 111,112 closed by slack 1.0e-20 (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "pair 111,112 closed by slack 1.0e-20 (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "square 112 turned by t = 1e-15",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "square 111 basis scaled by 1 + 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand130 (solve cert)",
+  "control": "square 1 duplicated",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "positive at the declared side",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "box at the exact extent E",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "box at E - 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "square 8 onto the left wall (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "square 8 onto the left wall (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "pair 153,160 closed by slack 1.0e-20 (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "pair 153,160 closed by slack 1.0e-20 (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "square 160 turned by t = 1e-15",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "square 153 basis scaled by 1 + 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (view)",
+  "control": "square 1 duplicated",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "positive at the declared side",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "box at the exact extent E",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "box at E - 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "square 8 onto the left wall (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "square 8 onto the left wall (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "pair 153,160 closed by slack 1.0e-20 (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "pair 153,160 closed by slack 1.0e-20 (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "square 160 turned by t = 1e-15",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "square 153 basis scaled by 1 + 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand307 (solve cert)",
+  "control": "square 1 duplicated",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "positive at the declared side",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "box at the exact extent E",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "box at E - 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "square 261 onto the bottom wall (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "square 261 onto the bottom wall (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "pair 261,262 closed by slack 0.0e+00 (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "pair 261,262 closed by slack 0.0e+00 (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "square 262 turned by t = 1e-15",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "square 261 basis scaled by 1 + 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "square 1 duplicated",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "strip column moved onto the block's corner (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (16+16+1)",
+  "control": "strip column moved onto the block's corner (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "positive at the declared side",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "box at the exact extent E",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "box at E - 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "square 278 onto the left wall (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "square 278 onto the left wall (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "pair 261,262 closed by slack 0.0e+00 (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "pair 261,262 closed by slack 0.0e+00 (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "square 262 turned by t = 1e-15",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "square 261 basis scaled by 1 + 1e-40",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "square 1 duplicated",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "strip column moved onto the block's corner (+0)",
+  "expect": "pass",
+  "route_A": "pass",
+  "route_B": "pass",
+  "as_expected": true
+ },
+ {
+  "subject": "cand293 (17top+16)",
+  "control": "strip column moved onto the block's corner (+1/10000000000000000000000000000000000000000)",
+  "expect": "fail",
+  "route_A": "fail",
+  "route_B": "fail",
+  "as_expected": true
+ }
+]

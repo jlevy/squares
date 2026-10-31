@@ -54,3 +54,61 @@ deferrals:
       rule for zm_mixed.py. Adopting the value puts s(95) in the case''s verified lane as proved. No
       zm_mixed.py refusal of a mutated s(95) cover has run, so two are owed whatever the owner rules
       on the depth limit. The case record at 95 cites the evidence once both are held.'
+  - evidence: E-evand-gradec-local-minima-233-review-check
+    results:
+    - T-264
+    bead: think-8xy2
+    blocked_on: think-8xy2
+    recorded: '2026-10-31'
+    reason: 'The 23 October review''s checker decided all 233 grade-C configurations, a local-minimality
+      claim on no bound, and no case record has a block for local minimality, so nothing can cite it
+      yet. think-8xy2 builds the durable citing record (a rule for evidence a structural result cites,
+      or a case-record block); until then the register entry cites it.'
+  - evidence: E-evand-gradec-n10-recompute
+    results:
+    - T-264
+    bead: think-8xy2
+    blocked_on: think-8xy2
+    recorded: '2026-10-31'
+    reason: 'gradec.py''s byte-identical recomputation at n = 10, a reproduction with the producer''s
+      code at one count of the grade-C claim, which bears on no bound; it waits on the same citing record
+      as the review''s run (think-8xy2).'
+  - evidence: E-register-candidates-2026-10-31-solves
+    results:
+    - T-261
+    - T-263
+    bead: think-ruu2
+    blocked_on: think-ikku
+    recorded: '2026-10-31'
+    reason: 'The two maintained routes decided this project''s solve certificates at 130 and 307,
+      re-certifications of the houses'' own packings with less padding. They are held below the stage
+      4 exit for the owner (RV-3 of the 31 October review, with think-ikku''s RV-1), so no case record
+      adopts them; a case record cites the evidence if the answer keeps them and the house adopts them
+      (think-4z8z).'
+  - evidence: E-register-candidates-2026-10-31-review-solves
+    results:
+    - T-261
+    - T-263
+    bead: think-ruu2
+    blocked_on: think-ikku
+    recorded: '2026-10-31'
+    reason: 'The 31 October review''s clean-room run on the same two certificates, held with them for
+      the owner''s answer.'
+  - evidence: E-register-candidates-2026-10-31-l-strip-293
+    results:
+    - T-262
+    bead: think-ruu2
+    blocked_on: think-ikku
+    recorded: '2026-10-31'
+    reason: 'The two maintained routes decided T-257''s 260 certificate with its 293''s L strip
+      undilated, a re-assembly of the house''s own packing. It is held below the stage 4 exit for the
+      owner (RV-3 and RV-4 of the 31 October review), so no case record adopts it; the case record
+      at 293 cites the evidence if the answers keep it and the house adopts it (think-4z8z).'
+  - evidence: E-register-candidates-2026-10-31-review-l-strip-293
+    results:
+    - T-262
+    bead: think-ruu2
+    blocked_on: think-ikku
+    recorded: '2026-10-31'
+    reason: 'The 31 October review''s clean-room run on the same construction, held with it for the
+      owner''s answers.'

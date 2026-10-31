@@ -3,25 +3,26 @@
 The house rule (``packing/campaign/result-import.md``, The House Rule) and the
 regularization guide's Register Candidates
 (``docs/project/guides/regularization-process.md``) send every exactly verified packing
-below a house best packing to the register, however it was made: a regularizer's view
+below a house best packing to the register, however it was made: a regularizer's solve
 held at row 3, or a construction a review found. `devtools.register_regularized_bounds`
 registered the batches of 12 and 13 October 2026 and writes their case records itself;
-this module is the stage 2 to stage 4 half for a later batch, which the house rule
-adopts once reviewed, and writes no case record.
+this module is the stage 2 to stage 4 half for a later batch, and writes no case record.
 
 A batch is one package, ``packing/cases/register_candidates/<name>/``, and one `Batch`
-here naming its candidates (`Candidate`), each of one of two kinds:
+here naming its candidates (`Candidate`). Each is one certificate file in Evan Daniel's
+``n S`` / ``x y t`` format, retained as ``certificates/n-NNN.cert`` and pinned here by its
+SHA-256 (`Candidate.sha256`), so a change to its bytes fails every read. Each comes from
+one of two places:
 
-- **view**: a regularizer's view, the Witness/v2 its run wrote, retained gzipped as
-  ``views/n-NNN.yaml.gz``. ``retain`` copies it from the run directory only where its Git
-  blob and exact side are those the run's report, retained under
-  ``cases/regularized_drawings/``, records, so the view is the one the selection held at
-  row 3; ``check`` holds the retained view to the same report again;
-- **l-strip**: a house certificate at a smaller count ``m``, read through its import
-  packet's custody (`devtools.upper_bound_reports.read_facts`), with one L strip of
-  ``2 floor(S) + 1`` axis-aligned unit squares added in ``[S, S + 1] x [0, S + 1] u
-  [0, S + 1] x [S, S + 1]``, at side ``S + 1``. The certificate is rebuilt from its parent
-  wherever it is read, so the package keeps no copy of it.
+- **solve**: a regularization run's exact solve certificate, ``n-N/solve/witness.cert``
+  of `devtools.regularize_evand run`. ``retain`` copies it from the run directory, and
+  every read holds its exact side to the solved side the run's report, retained under
+  ``cases/regularized_drawings/``, records for the output the selection held at row 3;
+- **l-strip**: a house certificate at a smaller count, read through its import packet's
+  custody (`devtools.upper_bound_reports.read_facts`), with one L strip of unit squares
+  in ``[S, S + 1] x [0, S + 1] u [0, S + 1] x [S, S + 1]``, at side ``S + 1``, in a named
+  placement (`l_strip`). ``retain`` copies the file a review wrote, and every read holds
+  it, pose for pose, to the construction rebuilt from the parent.
 
 Each candidate is decided by the kernel's three jobs (`devtools.evand_arrangement_reports`:
 a positive, a duplicate square and a square moved outside the box) on both maintained
@@ -29,15 +30,12 @@ exact routes, ``sqpack.witness.exact_verify`` and
 ``devtools.check_rational_witness_independent``, each job in its own child process, into
 ``receipts/exact-certification-nNNN.json.xz``; and by the six sharp controls of
 `devtools.upper_bound_sharp_controls`, at exact contact and 1e-30 past it, into
-``receipts/sharp-controls-nNNN.json``. The routes are the ones the regularizer's run used
-to decide its views, so the replay of a view reproduces the producing run's decision with
-its own code. A finite certificate proves an upper bound and nothing more.
-
-``side`` gives each candidate's exact side for `devtools.upper_bound_reports.HOUSES`.
+``receipts/sharp-controls-nNNN.json``. A finite certificate proves an upper bound and
+nothing more.
 
 From ``packing/``, with the project interpreter::
 
-    python -m devtools.register_candidates BATCH retain --run-dir RUN
+    python -m devtools.register_candidates BATCH retain --run-dir RUN --review-out DIR
     python -m devtools.register_candidates BATCH certify --jobs-dir DIR [--workers 2]
     python -m devtools.register_candidates BATCH controls [--n N ...] [--check]
     python -m devtools.register_candidates BATCH check [--replay]
@@ -49,11 +47,12 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import hashlib
 import json
 import math
 import subprocess
 import sys
-from collections.abc import Callable, Mapping
+from collections.abc import Mapping
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from fractions import Fraction
@@ -67,7 +66,6 @@ from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import upper_bound_reports as reports
 from devtools import upper_bound_sharp_controls as sharp
-from devtools.retained_data import git_blob
 from sqpack.witness import witness_document
 
 MODULE = "devtools.register_candidates"
@@ -76,13 +74,17 @@ REPO = ROOT.parent
 PACKAGES = ROOT / "cases/register_candidates"
 DRAWINGS = ROOT / "cases/regularized_drawings"
 RECEIPT_FORMAT = "register-candidates-exact-certification-v1"
-VIEW = "view"
+SOLVE = "solve"
 L_STRIP = "l-strip"
 HALF = Fraction(1, 2)
+#: The L strip's placements, as the 31 October review of think-ruu2 names them: a column
+#: of 17 flush with the top wall and a row of 16 flush with the left wall (the 293 house's
+#: own), and a column and a row of 16 from the floor and the left wall with a corner square.
+PLACEMENTS = ("17top+16", "16+16+1")
 
 
 class CandidateError(ValueError):
-    """A view out of custody, a construction that does not count, or a receipt that differs."""
+    """A file out of custody, a construction that does not count, or a receipt that differs."""
 
 
 def _require(condition: object, message: str) -> None:
@@ -94,19 +96,21 @@ def _require(condition: object, message: str) -> None:
 class Candidate:
     """One count's certificate below its house.
 
-    - ``kind``: `VIEW` or `L_STRIP`.
+    - ``kind``: `SOLVE` or `L_STRIP`; ``sha256`` the retained file's digest.
     - ``house``: the register result whose certificate is the case's house at ``n``.
-    - ``report``: for a view, its run's report, relative to `DRAWINGS`.
-    - ``parent_packet`` and ``parent_n``: for an L strip, the import packet holding the
-      certificate at the smaller count.
+    - ``report``: for a solve, its run's report, relative to `DRAWINGS`.
+    - ``parent_packet``, ``parent_n`` and ``placement``: for an L strip, the import packet
+      holding the certificate at the smaller count, and where the strip lies.
     """
 
     n: int
     kind: str
     house: str
+    sha256: str
     report: str = ""
     parent_packet: str = ""
     parent_n: int = 0
+    placement: str = ""
 
 
 @dataclass(frozen=True)
@@ -134,9 +138,11 @@ class Batch:
         return found[0]
 
 
-#: Evan Daniel's regularizer's KKT solves at 130 and 307, held at row 3 by the runs after
-#: the adoption of 31 October 2026 (think-3guf), and the 260 house plus one L strip at 293,
-#: which the senior review of #852 found (A3).
+RUN = "think-3guf-2026-10-31/adopt-2026-10-31-n130-307-evand"
+#: Evan Daniel's regularizer's exact solves of the houses at 130 and 307, held at row 3 by
+#: the runs after the adoption of 31 October 2026 (think-3guf), and the 260 house plus one
+#: L strip at 293, which the senior review of #852 found (A3). The digests are the ones the
+#: 31 October review of think-ruu2 decided (RV-5).
 RUU2 = Batch(
     name="think-ruu2-2026-10-31",
     bead="think-ruu2",
@@ -148,103 +154,82 @@ RUU2 = Batch(
     candidates=(
         Candidate(
             130,
-            VIEW,
+            SOLVE,
             "T-259",
-            report="think-3guf-2026-10-31/adopt-2026-10-31-n130-307-evand/n-130/report.json.gz",
+            "9d4b4c29e038adc9a2d05cad4dce36477f942bdaa88636011323e7926d956524",
+            report=f"{RUN}/n-130/report.json.gz",
         ),
         Candidate(
-            293, L_STRIP, "T-257", parent_packet="evand-issue845-2026-10-29", parent_n=260
+            293,
+            L_STRIP,
+            "T-257",
+            "10eac4aaba6bd92077040bd7e61014bb302c3af71ccc99ab68481a7b43a90516",
+            parent_packet="evand-issue845-2026-10-29",
+            parent_n=260,
+            placement="17top+16",
         ),
         Candidate(
             307,
-            VIEW,
+            SOLVE,
             "T-256",
-            report="think-3guf-2026-10-31/adopt-2026-10-31-n130-307-evand/n-307/report.json.gz",
+            "f54749107b0a5ee17d11cc456c95e189e0a04f8ff8a73a24315d95e14d852884",
+            report=f"{RUN}/n-307/report.json.gz",
         ),
     ),
 )
 BATCHES = {RUU2.name: RUU2}
+#: Where ``retain`` finds each kind's file: the run directory's solve, or the review's
+#: written construction.
+REVIEW_FILES = {293: "n293-s260-plus-L-17top+16.cert"}
 
 
-# ------------------------------------------------------------------------------ views
+# ------------------------------------------------------------------------ certificates
 
 
-def view_path(batch: Batch, n: int) -> Path:
-    return batch.package / f"views/n-{n:03d}.yaml.gz"
+def certificate_path(batch: Batch, n: int) -> Path:
+    return batch.package / f"certificates/n-{n:03d}.cert"
 
 
 def run_report(candidate: Candidate) -> dict[str, Any]:
     return json.loads(gzip.decompress((DRAWINGS / candidate.report).read_bytes()))
 
 
-def _held_output(candidate: Candidate) -> dict[str, Any]:
-    """The run's solved output, refused unless the selection held it at row 3."""
+def solved_side(candidate: Candidate) -> Fraction:
+    """The side the run's report records for its solve, refused unless the selection held
+    the solved output at row 3 and both of the run's routes accepted it."""
     report = run_report(candidate)
     _require(report.get("n") == candidate.n, f"n={candidate.n}: the report is another count's")
-    output = report["outputs"]["solved"]
     decision = report["decisions"]["solved"]
     _require(
         decision["row"] == 3 and decision["decision"] == "held",
-        f"n={candidate.n}: the run did not hold its view at row 3",
+        f"n={candidate.n}: the run did not hold its solve at row 3",
     )
-    routes = output["routes"]
+    routes = report["outputs"]["solved"]["routes"]
     _require(
-        routes["exact_verify"] and routes["independent"],
-        f"n={candidate.n}: the run's routes did not accept its view",
+        routes["exact_verify"] and routes["independent"] and report["solve"]["cert_valid"],
+        f"n={candidate.n}: the run did not accept its solve",
     )
-    return output
+    return Fraction(report["solve"]["S_cert"])
 
 
-def retain(batch: Batch, run_dir: Path) -> list[Path]:
-    """Copy each view from its run directory, held to the run's retained report."""
-    written = []
-    for candidate in batch.candidates:
-        if candidate.kind != VIEW:
-            continue
-        output = _held_output(candidate)
-        source = run_dir / f"n-{candidate.n}" / output["path"]
-        raw = source.read_bytes()
-        _require(
-            git_blob(raw) == output["git_blob"],
-            f"n={candidate.n}: {source} is not the view its report names",
-        )
-        target = view_path(batch, candidate.n)
-        target.parent.mkdir(parents=True, exist_ok=True)
-        with atomic_output_file(target) as temporary:
-            temporary.write_bytes(gzip.compress(raw, mtime=0))
-        _require(view(batch, candidate.n) is not None, f"n={candidate.n}: unreadable view")
-        written.append(target)
-    return written
-
-
-@cache
-def view(batch: Batch, n: int) -> legacy.Certificate:
-    """The retained view at ``n``, held to its report's blob and exact side."""
-    candidate = batch.candidate(n)
-    output = _held_output(candidate)
-    raw = gzip.decompress(view_path(batch, n).read_bytes())
-    _require(git_blob(raw) == output["git_blob"], f"n={n}: the retained view is not the run's")
-    certificate = reports.witness_center_basis(raw, n, {})
-    _require(
-        certificate.side == Fraction(output["side_exact"]),
-        f"n={n}: the view's side is not the one its report records",
-    )
-    return certificate
-
-
-# ---------------------------------------------------------------------------- L strip
-
-
-def l_strip(parent: legacy.Certificate, n: int) -> legacy.Certificate:
+def l_strip(parent: legacy.Certificate, n: int, placement: str) -> legacy.Certificate:
     """``parent`` with one L strip of unit squares at side ``S + 1``, refused unless the
-    strip brings the count to ``n`` exactly."""
+    strip brings the count to ``n`` exactly and fits its placement."""
     side = parent.side
     whole = math.floor(side)
     _require(parent.n + 2 * whole + 1 == n, f"n={n}: one L strip from {parent.n} gives another")
-    column = [legacy.Pose(side + HALF, k + HALF, Fraction(0)) for k in range(whole)]
-    row = [legacy.Pose(k + HALF, side + HALF, Fraction(0)) for k in range(whole)]
-    corner = [legacy.Pose(side + HALF, side + HALF, Fraction(0))]
-    return legacy.Certificate(n, side + 1, (*parent.poses, *column, *row, corner[0]))
+    _require(placement in PLACEMENTS, f"unknown placement {placement}")
+    zero = Fraction(0)
+    row = [legacy.Pose(k + HALF, side + HALF, zero) for k in range(whole)]
+    if placement == "17top+16":
+        # a column of whole + 1 flush with the top wall, whose lowest square stays off
+        # the floor since whole <= side
+        column = [legacy.Pose(side + HALF, side + HALF - k, zero) for k in range(whole + 1)]
+        strip = (*column, *row)
+    else:
+        column = [legacy.Pose(side + HALF, k + HALF, zero) for k in range(whole)]
+        strip = (*column, *row, legacy.Pose(side + HALF, side + HALF, zero))
+    return legacy.Certificate(n, side + 1, (*parent.poses, *strip))
 
 
 @cache
@@ -252,21 +237,52 @@ def construction(batch: Batch, n: int) -> legacy.Certificate:
     candidate = batch.candidate(n)
     packet = reports.packet_path(candidate.parent_packet)
     parent = reports.read_facts(packet, {candidate.parent_n})[candidate.parent_n]
-    return l_strip(parent, n)
+    return l_strip(parent, n, candidate.placement)
 
 
-def certificate(batch: Batch, n: int) -> legacy.Certificate:
+def admitted(batch: Batch, n: int, raw: bytes) -> legacy.Certificate:
+    """The certificate in ``raw``, refused unless it is the candidate's pinned file and,
+    for a solve, at its report's side, or, for an L strip, its construction pose for pose."""
     candidate = batch.candidate(n)
-    return view(batch, n) if candidate.kind == VIEW else construction(batch, n)
+    _require(
+        hashlib.sha256(raw).hexdigest() == candidate.sha256,
+        f"n={n}: the certificate is not the file the review decided",
+    )
+    found = reports.evand_cert(raw, n, {})
+    if candidate.kind == SOLVE:
+        _require(found.side == solved_side(candidate), f"n={n}: not the run's solved side")
+    else:
+        _require(found == construction(batch, n), f"n={n}: not its parent plus the L strip")
+    return found
+
+
+def retain(batch: Batch, run_dir: Path, review_out: Path) -> list[Path]:
+    """Copy each candidate's file, from the run directory or the review's output."""
+    written = []
+    for candidate in batch.candidates:
+        if candidate.kind == SOLVE:
+            source = run_dir / f"n-{candidate.n}/solve/witness.cert"
+        else:
+            source = review_out / REVIEW_FILES[candidate.n]
+        raw = source.read_bytes()
+        admitted(batch, candidate.n, raw)
+        target = certificate_path(batch, candidate.n)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with atomic_output_file(target) as temporary:
+            temporary.write_bytes(raw)
+        written.append(target)
+    return written
+
+
+@cache
+def certificate(batch: Batch, n: int) -> legacy.Certificate:
+    """The retained certificate at ``n``, admitted (`admitted`)."""
+    return admitted(batch, n, certificate_path(batch, n).read_bytes())
 
 
 def side(batch: Batch, n: int) -> Fraction:
-    """The candidate's exact side, for `devtools.upper_bound_reports.HOUSES`."""
+    """The candidate's exact side."""
     return certificate(batch, n).side
-
-
-def house_reader(batch: Batch) -> Callable[[int], Fraction]:
-    return lambda n: side(batch, n)
 
 
 # ---------------------------------------------------------------------------- deciding
@@ -304,7 +320,7 @@ def certify(batch: Batch, directory: Path, workers: int) -> None:
     directory.mkdir(parents=True, exist_ok=True)
     tasks = [(item.n, control) for item in batch.candidates for control in kernel.JOBS]
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        rows = list(pool.map(lambda task: _child(batch, *task, directory), tasks))
+        rows = list(pool.map(lambda task: _child(batch, task[0], task[1], directory), tasks))
     done = dict(zip(tasks, rows, strict=True))
     for item in batch.candidates:
         found = certificate(batch, item.n)
@@ -345,13 +361,7 @@ def check_receipt(batch: Batch, n: int, *, replay: bool = False) -> dict[str, An
 
 def sharp_record(batch: Batch, n: int) -> dict[str, Any]:
     found = certificate(batch, n)
-    candidate = batch.candidate(n)
-    if candidate.kind == VIEW:
-        where = view_path(batch, n).relative_to(REPO).as_posix()
-    else:
-        where = (
-            f"{candidate.parent_packet}'s n = {candidate.parent_n} certificate plus one L strip"
-        )
+    where = certificate_path(batch, n).relative_to(REPO).as_posix()
     rows = sharp.control_rows(found, batch.profile)
     return {
         "format": sharp.FORMAT,
@@ -437,6 +447,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = parser.add_subparsers(dest="action", required=True)
     keep = sub.add_parser("retain")
     keep.add_argument("--run-dir", type=Path, required=True)
+    keep.add_argument("--review-out", type=Path, required=True)
     run = sub.add_parser("certify")
     run.add_argument("--jobs-dir", type=Path, required=True)
     run.add_argument("--workers", type=int, default=2)
@@ -458,7 +469,7 @@ def main(argv: list[str] | None = None) -> int:
     numbers = [item.n for item in batch.candidates]
     try:
         if args.action == "retain":
-            for path in retain(batch, args.run_dir):
+            for path in retain(batch, args.run_dir, args.review_out):
                 print(path.relative_to(REPO))
         elif args.action == "certify":
             certify(batch, args.jobs_dir, args.workers)
