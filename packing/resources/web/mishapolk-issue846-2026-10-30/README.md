@@ -58,17 +58,17 @@ is well under a megabyte, so it is kept in Git.
 2026):
 
 - **105:** exact side 10.7893037837429754…, below the case’s house (T-229) by 1.00e-21 (requested).
-- **130:** exact side 11.9024306459822658…, below the case’s house (T-174) by 2.05e-03; below T-253 (#843) by 2.08e-12 (requested).
+- **130:** exact side 11.9024306459822658…, below the case’s house (T-174) by 2.05e-03; below T-254 (#843) by 2.08e-12 (requested).
 - **146:** exact side 12.5837821901518604…, below the case’s house (T-187) by 1.00e-21 (requested).
 - **156:** exact side 12.9791658538342765…, below the case’s house (T-186) by 1.00e-41 (requested).
 - **182:** exact side 13.9709164362148191…, above the case’s house (T-243) by 1.40e-13 (compared, not requested).
 - **204:** exact side 14.8086428305130872…, equal the case’s house (T-231) (compared, not requested).
-- **211:** exact side 14.9935496262994211…, below the case’s house (T-188) by 1.50e-19; equal T-252, Polkovskyi of 23 October (no issue) (compared, not requested).
+- **211:** exact side 14.9935496262994211…, below the case’s house (T-188) by 1.50e-19; equal T-253, Polkovskyi of 23 October (no issue) (compared, not requested).
 - **229:** exact side 15.6501615138764311…, below the case’s house (T-225) by 1.00e-21 (requested).
-- **241:** exact side 15.9871170951502388…, below the case’s house (T-182) by 1.60e-19; equal T-252, Polkovskyi of 23 October (no issue) (compared, not requested).
-- **260:** exact side 16.6457532505198122…, below the case’s house (T-225) by 1.00e-21; above T-254, Couzo of 28 October (no issue) by 7.22e-03; above T-255 (#844) by 8.72e-03; above T-256 (#845) by 1.18e-02 (compared, not requested).
+- **241:** exact side 15.9871170951502388…, below the case’s house (T-182) by 1.60e-19; equal T-253, Polkovskyi of 23 October (no issue) (compared, not requested).
+- **260:** exact side 16.6457532505198122…, below the case’s house (T-225) by 1.00e-21; above T-255, Couzo of 28 October (no issue) by 7.22e-03; above T-256 (#844) by 8.72e-03; above T-257 (#845) by 1.18e-02 (compared, not requested).
 - **268:** exact side 16.8743617158708279…, above the case’s house (T-242) by 1.48e-12 (compared, not requested).
-- **299:** exact side 17.8036954353157388…, below the case’s house (T-101) by 1.92e-02; below T-248 (#824) by 1.66e-11; above T-257 (#824 update) by 2.46e-03 (compared, not requested).
+- **299:** exact side 17.8036954353157388…, below the case’s house (T-101) by 1.92e-02; below T-248 (#824) by 1.66e-11; above T-258 (#824 update) by 2.46e-03 (compared, not requested).
 - **304:** exact side 17.9268989003667642…, above the case’s house (T-242) by 1.00e-11 (compared, not requested).
 - **308:** exact side 17.9971491212709088…, below the case’s house (T-221) by 1.00e-21 (requested).
 

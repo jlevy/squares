@@ -1392,13 +1392,13 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-249.html | result/t-249.html | result | overview | 2026-10-26 | 2026-10-26 | live |
 | result/t-250.html | result/t-250.html | result | overview | 2026-10-26 | 2026-10-26 | live |
 | result/t-251.html | result/t-251.html | result | overview | 2026-10-26 | 2026-10-26 | live |
-| result/t-252.html | result/t-252.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-253.html | result/t-253.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-254.html | result/t-254.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-255.html | result/t-255.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-256.html | result/t-256.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-257.html | result/t-257.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-258.html | result/t-258.html | result | overview | 2026-10-31 | 2026-10-31 | live |
+| result/t-259.html | result/t-259.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |

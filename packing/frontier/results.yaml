@@ -35866,7 +35866,7 @@ results:
 
       The 17 October read's lean/rectangle-k2m4/, a second Lean route to T-081's
       lower half over the same premise, is held by its own import bead (think-d5m3).
-  - id: T-252
+  - id: T-253
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
@@ -36177,7 +36177,7 @@ results:
         moved: 0
         max_move: 2.326e-19
         max_turn_deg: 5.184e-34
-  - id: T-253
+  - id: T-254
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
@@ -36291,7 +36291,7 @@ results:
           T-243's clean-room checker at 182, about a minute a certificate, and the sharp controls'
           few CPU-minutes a count here; an estimate, not a receipt
         priced: '2026-10-31'
-  - id: T-254
+  - id: T-255
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
@@ -36408,7 +36408,7 @@ results:
           T-243's clean-room checker at 182, about a minute a certificate, and the sharp controls'
           few CPU-minutes a count here; an estimate, not a receipt
         priced: '2026-10-31'
-  - id: T-255
+  - id: T-256
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
@@ -36422,7 +36422,7 @@ results:
       Complete native feasibility outcomes are retained separately; the selected standing cases
       are unchanged pending independent review and record review. They are 2.51e-3, 8.72e-3 and
       1.61e-3 below the houses, T-186 at 232, T-225 at 260 and T-174 at 307, and at 260 and 307
-      below the author's certificates of 28 October (T-254).
+      below the author's certificates of 28 October (T-255).
 
       The issue says both of the source's exact checkers accept all three certificates in exact
       rational arithmetic, valid and strictly valid with positive wall and pair margins: verify_bound_certificate.py,
@@ -36505,9 +36505,9 @@ results:
       At n = 232 the certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou
       Ltd, Mishapolk, T-186) by 2.51e-03; smallest: this certificate. At n = 260 the certificate
       is below the case's ceiling (Francisco Couzo, improved by Evan Daniel, T-225) by 8.72e-03;
-      below T-254, Couzo of 28 October (no issue) (Francisco Couzo, after ntumlnoob) by 1.50e-03;
+      below T-255, Couzo of 28 October (no issue) (Francisco Couzo, after ntumlnoob) by 1.50e-03;
       smallest: this certificate. At n = 307 the certificate is below the case's ceiling (Nate Chaoweeraprasit
-      (itsnaka), improved by PingYou Ltd, T-174) by 1.61e-03; below T-254, Couzo of 28 October (no
+      (itsnaka), improved by PingYou Ltd, T-174) by 1.61e-03; below T-255, Couzo of 28 October (no
       issue) (Francisco Couzo, after ntumlnoob) by 4.56e-12; smallest: this certificate.
 
       The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
@@ -36520,11 +36520,11 @@ results:
       by up to 45 degrees; at 260, no symmetry pairs it one to one with T-225's packing by nearest
       centres; the optimal assignment moves 192 squares beyond a tenth and 210 beyond a hundredth
       (largest 1.08752) and turns squares by up to 27.09 degrees; no symmetry pairs it one to one
-      with T-254's packing by nearest centres; the optimal assignment moves 172 squares beyond a
+      with T-255's packing by nearest centres; the optimal assignment moves 172 squares beyond a
       tenth and 216 beyond a hundredth (largest 1.07764) and turns squares by up to 44.42 degrees;
       at 307, no symmetry pairs it one to one with T-174's packing by nearest centres; the optimal
       assignment moves 91 squares beyond a tenth and 138 beyond a hundredth (largest 1.1367) and
-      turns squares by up to 34.04 degrees; nearest centres pair it one to one with T-254's packing
+      turns squares by up to 34.04 degrees; nearest centres pair it one to one with T-255's packing
       (symmetry 4), 35 squares beyond 1e-3 and 40 beyond 1e-9, the largest move 1.667110e-2 and
       turn 0.5525 degrees.
 
@@ -36552,7 +36552,7 @@ results:
           T-243's clean-room checker at 182, about a minute a certificate, and the sharp controls'
           few CPU-minutes a count here; an estimate, not a receipt
         priced: '2026-10-31'
-  - id: T-256
+  - id: T-257
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
@@ -36659,8 +36659,8 @@ results:
       packing) by 1.05e-03; smallest: this certificate. At n = 204 the certificate is below the
       case's ceiling (Francisco Couzo, improved by Mishapolk, T-231) by 1.02e-03; smallest: this
       certificate. At n = 260 the certificate is below the case's ceiling (Francisco Couzo, improved
-      by Evan Daniel, T-225) by 1.18e-02; below T-254, Couzo of 28 October (no issue) (Francisco
-      Couzo, after ntumlnoob) by 4.55e-03; below T-255 (#844) (Francisco Couzo, after ntumlnoob)
+      by Evan Daniel, T-225) by 1.18e-02; below T-255, Couzo of 28 October (no issue) (Francisco
+      Couzo, after ntumlnoob) by 4.55e-03; below T-256 (#844) (Francisco Couzo, after ntumlnoob)
       by 3.05e-03; smallest: this certificate.
 
       At n = 293 the certificate is below the case's ceiling (David Ellsworth (the Kingbird catalogue),
@@ -36678,7 +36678,7 @@ results:
       (largest 0.912662) and turns squares by up to 43.12 degrees; at 260, no symmetry pairs it
       one to one with T-225's packing by nearest centres; the optimal assignment moves 155 squares
       beyond a tenth and 250 beyond a hundredth (largest 1.00585) and turns squares by up to 27.31
-      degrees; no symmetry pairs it one to one with T-255's packing by nearest centres; the optimal
+      degrees; no symmetry pairs it one to one with T-256's packing by nearest centres; the optimal
       assignment moves 199 squares beyond a tenth and 233 beyond a hundredth (largest 1.09528) and
       turns squares by up to 42.64 degrees; at 293, no symmetry pairs it one to one with T-101's
       packing by nearest centres; the optimal assignment moves 185 squares beyond a tenth and 219
@@ -36708,7 +36708,7 @@ results:
           T-243's clean-room checker at 182, about a minute a certificate, and the sharp controls'
           few CPU-minutes a count here; an estimate, not a receipt
         priced: '2026-10-31'
-  - id: T-257
+  - id: T-258
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
@@ -36823,7 +36823,7 @@ results:
           T-243's clean-room checker at 182, about a minute a certificate, and the sharp controls'
           few CPU-minutes a count here; an estimate, not a receipt
         priced: '2026-10-31'
-  - id: T-258
+  - id: T-259
     kind: upper-bound
     registered: '2026-10-31'
     landed: '2026-10-31'
@@ -36840,7 +36840,7 @@ results:
 
       At 105, 146, 156, 229 and 308 they lie 1e-21 to 1e-41 below the houses' certificates (T-229,
       T-187, T-186, T-225 and T-221), and at 130 2.08e-12 below Francisco Couzo's certificate of
-      issue 843 (T-253).
+      issue 843 (T-254).
 
       The issue says every certificate yields valid and strictly valid, with positive wall and pair
       margin signs, under verify_bound_certificate.py --strict, Evan Daniel's MIT separating-axis
@@ -36934,7 +36934,7 @@ results:
       At n = 105 the certificate is below the case's ceiling (Ryan Xu, improved by Francisco Couzo,
       PingYou Ltd, Mishapolk, T-229) by 1.00e-21; smallest: this certificate. At n = 130 the certificate
       is below the case's ceiling (Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta,
-      PingYou Ltd, T-174) by 2.05e-03; below T-253 (#843) (Francisco Couzo, after Chaoweeraprasit,
+      PingYou Ltd, T-174) by 2.05e-03; below T-254 (#843) (Francisco Couzo, after Chaoweeraprasit,
       Gupta and PingYou Ltd) by 2.08e-12; smallest: this certificate. At n = 146 the certificate
       is below the case's ceiling (Evan Daniel, T-187) by 1.00e-21; smallest: this certificate.
       At n = 156 the certificate is below the case's ceiling (Daniil Ostashev, improved by Francisco
@@ -36964,7 +36964,7 @@ results:
       The issue's other eight certificates, at 182, 204, 211, 241, 260, 268, 299 and 304, are compared
       in the packet's claim record and replayed; the ledger records none of them (182, 268 and 304
       above the house, 204 and 260 above #845, 299 above Evan Daniel's update to #824, and 211 and
-      241 the source's own 23 October certificates, which T-252 records).
+      241 the source's own 23 October certificates, which T-253 records).
 
       The source's own checkers were not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share certificate parsing, half-angle
@@ -37005,7 +37005,7 @@ results:
         max_move: 0.0
         max_turn_deg: 0.0
     - n: 130
-      of: T-253
+      of: T-254
       by: '[Mishapolk issue 846 2026-10-30]'
       method: >-
         a dilation by dilate_cert.py, delta 2e-14, of the source's isolated_lab/tmp_couzo_noalm.txt,

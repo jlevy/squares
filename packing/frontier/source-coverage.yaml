@@ -11768,7 +11768,7 @@ sources:
     The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
     decides which are recorded. All 9 complete certificates are retained as the source wrote them,
     each admitted only where its exact side equals, or rounds up to, the side its source prints.
-    T-252 records the in-horizon report. All 39 native jobs have full outcomes. No selected override
+    T-253 records the in-horizon report. All 39 native jobs have full outcomes. No selected override
     or superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
 - id: couzo-issue843-2026-10-28
@@ -11791,7 +11791,7 @@ sources:
   - E-couzo-843-certificate-report
   notes: >-
     The 1 complete certificate is retained as the source wrote them, admitted only where its exact
-    side equals, or rounds up to, the side its source prints. T-253 records the in-horizon report.
+    side equals, or rounds up to, the side its source prints. T-254 records the in-horizon report.
     The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
     decides which are recorded. All 3 native jobs have full outcomes. No selected override or
     superseded claim is created at this source-only stage; current cases and earlier source ownership
@@ -11819,7 +11819,7 @@ sources:
     The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
     decides which are recorded. All 2 complete certificates are retained as the source wrote them,
     each admitted only where its exact side equals, or rounds up to, the side its source prints.
-    T-254 records the in-horizon report. All 6 native jobs have full outcomes. No selected override
+    T-255 records the in-horizon report. All 6 native jobs have full outcomes. No selected override
     or superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
 - id: couzo-issue844-2026-10-28
@@ -11847,7 +11847,7 @@ sources:
     The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
     decides which are recorded. All 3 complete certificates are retained as the source wrote them,
     each admitted only where its exact side equals, or rounds up to, the side its source prints.
-    T-255 records the in-horizon report. All 9 native jobs have full outcomes. No selected override
+    T-256 records the in-horizon report. All 9 native jobs have full outcomes. No selected override
     or superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
 - id: evand-issue845-2026-10-29
@@ -11876,7 +11876,7 @@ sources:
     The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
     decides which are recorded. All 4 complete certificates are retained as the source wrote them,
     each admitted only where its exact side equals, or rounds up to, the side its source prints.
-    T-256 records the in-horizon report. All 12 native jobs have full outcomes. No selected override
+    T-257 records the in-horizon report. All 12 native jobs have full outcomes. No selected override
     or superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
 - id: evand-n299-update-2026-10-29
@@ -11900,7 +11900,7 @@ sources:
   - E-evand-n299-update-certificate-report
   notes: >-
     The 1 complete certificate is retained as the source wrote them, admitted only where its exact
-    side equals, or rounds up to, the side its source prints. T-257 records the in-horizon report.
+    side equals, or rounds up to, the side its source prints. T-258 records the in-horizon report.
     The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
     decides which are recorded. All 3 native jobs have full outcomes. No selected override or
     superseded claim is created at this source-only stage; current cases and earlier source ownership
@@ -11932,7 +11932,7 @@ sources:
     The ledger of 31 October for this pass (campaign/issue-intake/upper-bounds-843-846-20261031)
     decides which are recorded. All 6 complete certificates are retained as the source wrote them,
     each admitted only where its exact side equals, or rounds up to, the side its source prints.
-    T-258 records the in-horizon report. All 42 native jobs have full outcomes. No selected override
+    T-259 records the in-horizon report. All 42 native jobs have full outcomes. No selected override
     or superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
 selected_overrides:

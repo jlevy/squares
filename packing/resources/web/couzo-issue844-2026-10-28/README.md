@@ -46,8 +46,8 @@ is well under a megabyte, so it is kept in Git.
 2026):
 
 - **232:** exact side 15.7616617594813300…, below the case’s house (T-186) by 2.51e-03 (requested).
-- **260:** exact side 16.6370295588709730…, below the case’s house (T-225) by 8.72e-03; below T-254, Couzo of 28 October (no issue) by 1.50e-03 (requested).
-- **307:** exact side 17.9792512836880252…, below the case’s house (T-174) by 1.61e-03; below T-254, Couzo of 28 October (no issue) by 4.56e-12 (requested).
+- **260:** exact side 16.6370295588709730…, below the case’s house (T-225) by 8.72e-03; below T-255, Couzo of 28 October (no issue) by 1.50e-03 (requested).
+- **307:** exact side 17.9792512836880252…, below the case’s house (T-174) by 1.61e-03; below T-255, Couzo of 28 October (no issue) by 4.56e-12 (requested).
 
 ## Report Order
 
@@ -63,8 +63,8 @@ ledger compares it with, and wrote the receipts under [measure/](measure/). A
 measurement for credit; it decides nothing.
 
 - **232** ([measure/identity-n232.json](measure/identity-n232.json)): against T-186, no symmetry one to one; the optimal assignment (symmetry 7) moves 91 squares beyond 0.1 and 123 beyond 0.01 (largest 1.08859) and turns squares by up to 45 degrees. Tilted beyond 1 degree: #844 81, T-186 61.
-- **260** ([measure/identity-n260.json](measure/identity-n260.json)): against T-225, no symmetry one to one; the optimal assignment (symmetry 5) moves 192 squares beyond 0.1 and 210 beyond 0.01 (largest 1.08752) and turns squares by up to 27.09 degrees; against T-254, no symmetry one to one; the optimal assignment (symmetry 3) moves 172 squares beyond 0.1 and 216 beyond 0.01 (largest 1.07764) and turns squares by up to 44.42 degrees. Tilted beyond 1 degree: #844 100, T-225 60, T-254 104.
-- **307** ([measure/identity-n307.json](measure/identity-n307.json)): against T-174, no symmetry one to one; the optimal assignment (symmetry 2) moves 91 squares beyond 0.1 and 138 beyond 0.01 (largest 1.1367) and turns squares by up to 34.04 degrees; against T-254, one to one by nearest centres (symmetry 4), 35 squares beyond 1e-3 and 40 beyond 1e-9, the largest move 1.667110e-2 and turn 0.5525 degrees. Tilted beyond 1 degree: #844 107, T-174 103, T-254 107.
+- **260** ([measure/identity-n260.json](measure/identity-n260.json)): against T-225, no symmetry one to one; the optimal assignment (symmetry 5) moves 192 squares beyond 0.1 and 210 beyond 0.01 (largest 1.08752) and turns squares by up to 27.09 degrees; against T-255, no symmetry one to one; the optimal assignment (symmetry 3) moves 172 squares beyond 0.1 and 216 beyond 0.01 (largest 1.07764) and turns squares by up to 44.42 degrees. Tilted beyond 1 degree: #844 100, T-225 60, T-255 104.
+- **307** ([measure/identity-n307.json](measure/identity-n307.json)): against T-174, no symmetry one to one; the optimal assignment (symmetry 2) moves 91 squares beyond 0.1 and 138 beyond 0.01 (largest 1.1367) and turns squares by up to 34.04 degrees; against T-255, one to one by nearest centres (symmetry 4), 35 squares beyond 1e-3 and 40 beyond 1e-9, the largest move 1.667110e-2 and turn 0.5525 degrees. Tilted beyond 1 degree: #844 107, T-174 103, T-255 107.
 
 ## Exact Replay
 

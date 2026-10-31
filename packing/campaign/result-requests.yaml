@@ -25410,7 +25410,7 @@ issues:
       0e76d9f, the digest the comment prints is the certificate's, both maintained exact routes
       accept it and refuse its gross and sharp controls, and the ledger of 31 October
       (upper-bounds-843-846-20261031) records it; Mykhailo Polkovskyi's #846 certificate at 299,
-      17.803695435316, reported after it and above it, is not recorded. Registered as T-257 at
+      17.803695435316, reported after it and above it, is not recorded. Registered as T-258 at
       V0/C0; the review and the adoption at 299 move to this certificate (think-8hjz).
       maximusrufus's comments of 26 and 29 October are verification receipts of both
       certificates by his own exact recheck, reporting no result.
@@ -25438,7 +25438,7 @@ issues:
       validation:
       - think-8hjz
       register:
-      - T-257
+      - T-258
       evidence:
       - E-evand-n299-update-certificate-report
     beads:
@@ -25489,7 +25489,7 @@ issues:
       accept it and refuse its gross and sharp controls. The ledger of 31 October
       (upper-bounds-843-846-20261031) records it, a new packing; Mykhailo Polkovskyi's #846
       certificate, a 2e-14 dilation of it 2.08e-12 lower, is recorded after it as a refinement of
-      this packing. Registered as T-253 at V0/C0; the stage 4 review and the adoption at 130 are
+      this packing. Registered as T-254 at V0/C0; the stage 4 review and the adoption at 130 are
       think-oy8d's. The Kaggle side-only 11.902430646006 is no report. Claude assistance
       disclosed.
     read_through: '2026-10-27T19:49:57Z'
@@ -25504,7 +25504,7 @@ issues:
       validation:
       - think-oy8d
       register:
-      - T-253
+      - T-254
       evidence:
       - E-couzo-843-certificate-report
     beads:
@@ -25540,7 +25540,7 @@ issues:
       a5a5d76 (no issue, 28 October 01:41Z) holds certificates at 260 and 307 that the ledger of
       31 October (upper-bounds-843-846-20261031) records first, from its commit (the
       couzo-a5a5d76-2026-10-28 packet); it then records all three of this issue's, and at 260
-      Evan Daniel's #845 certificate after them. Registered as T-255 (with a5a5d76's as T-254) at
+      Evan Daniel's #845 certificate after them. Registered as T-256 (with a5a5d76's as T-255) at
       V0/C0; the stage 4 review and the adoption at 232 and 307 are think-dwzb's. The Kaggle
       side-only sides the issue quotes are no report. Claude assistance disclosed.
     read_through: '2026-10-28T21:48:31Z'
@@ -25557,7 +25557,7 @@ issues:
       validation:
       - think-dwzb
       register:
-      - T-255
+      - T-256
       evidence:
       - E-couzo-844-certificate-report
     beads:
@@ -25596,7 +25596,7 @@ issues:
       the certificates', the sides are the headers and round up to the prints, and both maintained
       exact routes accept each and refuse its gross and sharp controls. The ledger of 31 October
       (upper-bounds-843-846-20261031) records all four, at 260 after Couzo's a5a5d76 and #844
-      certificates. Registered as T-256 at V0/C0; the stage 4 review and the adoption at all four
+      certificates. Registered as T-257 at V0/C0; the stage 4 review and the adoption at all four
       counts are think-nkt1's. The Kaggle side-only sides the issue quotes are no report. Claude
       assistance disclosed.
     read_through: '2026-10-29T04:46:40Z'
@@ -25613,7 +25613,7 @@ issues:
       validation:
       - think-nkt1
       register:
-      - T-256
+      - T-257
       evidence:
       - E-evand-845-certificate-report
     beads:
@@ -25652,7 +25652,7 @@ issues:
       and 304 are above the houses (T-243, T-242), 204 and 260 above Evan Daniel's #845, 299 above his
       update to #824, and 211 and 241 are the author's own certificates of 23
       October, which the ledger records from their commit (e386aab) as refinements. Registered as
-      T-258 at V0/C0 (and the 23 October certificates as T-252); the stage 4 review and the
+      T-259 at V0/C0 (and the 23 October certificates as T-253); the stage 4 review and the
       adoptions are think-ikku's.
     read_through: '2026-10-30T05:46:42Z'
     results:
@@ -25666,7 +25666,7 @@ issues:
       validation:
       - think-ikku
       register:
-      - T-258
+      - T-259
       evidence:
       - E-mishapolk-846-certificate-report
     - key: not-recorded
@@ -25679,7 +25679,7 @@ issues:
         by 1.40e-13, 268 above T-242 by 1.48e-12, 304 above T-242 by 1.00e-11, 260 above Evan
         Daniel's #845 by 1.18e-2, 204 above #845 by 1.02e-3, 299 above his #824 update by 2.46e-3,
         and 211 and 241 equal the author's own certificates first committed at e386aab on 23
-        October, which the ledger records from that commit (T-252).
+        October, which the ledger records from that commit (T-253).
       queued: false
       bead: think-pg1y
     beads:

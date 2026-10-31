@@ -61,7 +61,7 @@ is well under a megabyte, so it is kept in Git.
 
 - **172:** exact side 13.6179356983814155…, below the case’s house (T-174) by 1.05e-03; below T-244 (#804) by 1.05e-03 (requested).
 - **204:** exact side 14.8076274718815797…, below the case’s house (T-231) by 1.02e-03 (requested).
-- **260:** exact side 16.6339825021218840…, below the case’s house (T-225) by 1.18e-02; below T-254, Couzo of 28 October (no issue) by 4.55e-03; below T-255 (#844) by 3.05e-03 (requested).
+- **260:** exact side 16.6339825021218840…, below the case’s house (T-225) by 1.18e-02; below T-255, Couzo of 28 October (no issue) by 4.55e-03; below T-256 (#844) by 3.05e-03 (requested).
 - **293:** exact side 17.6339825021227820…, below the case’s house (T-101) by 1.64e-04 (requested).
 
 ## Report Order
@@ -79,7 +79,7 @@ measurement for credit; it decides nothing.
 
 - **172** ([measure/identity-n172.json](measure/identity-n172.json)): against T-174, no symmetry one to one; the optimal assignment (symmetry 0) moves 42 squares beyond 0.1 and 66 beyond 0.01 (largest 0.696591) and turns squares by up to 44.73 degrees. Tilted beyond 1 degree: #845 49, T-174 45.
 - **204** ([measure/identity-n204.json](measure/identity-n204.json)): against T-231, no symmetry one to one; the optimal assignment (symmetry 0) moves 67 squares beyond 0.1 and 109 beyond 0.01 (largest 0.912662) and turns squares by up to 43.12 degrees. Tilted beyond 1 degree: #845 79, T-231 61.
-- **260** ([measure/identity-n260.json](measure/identity-n260.json)): against T-225, no symmetry one to one; the optimal assignment (symmetry 0) moves 155 squares beyond 0.1 and 250 beyond 0.01 (largest 1.00585) and turns squares by up to 27.31 degrees; against T-255, no symmetry one to one; the optimal assignment (symmetry 3) moves 199 squares beyond 0.1 and 233 beyond 0.01 (largest 1.09528) and turns squares by up to 42.64 degrees. Tilted beyond 1 degree: #845 104, T-225 60, T-255 100.
+- **260** ([measure/identity-n260.json](measure/identity-n260.json)): against T-225, no symmetry one to one; the optimal assignment (symmetry 0) moves 155 squares beyond 0.1 and 250 beyond 0.01 (largest 1.00585) and turns squares by up to 27.31 degrees; against T-256, no symmetry one to one; the optimal assignment (symmetry 3) moves 199 squares beyond 0.1 and 233 beyond 0.01 (largest 1.09528) and turns squares by up to 42.64 degrees. Tilted beyond 1 degree: #845 104, T-225 60, T-256 100.
 - **293** ([measure/identity-n293.json](measure/identity-n293.json)): against T-101, no symmetry one to one; the optimal assignment (symmetry 6) moves 185 squares beyond 0.1 and 219 beyond 0.01 (largest 1.04837) and turns squares by up to 43.6 degrees. Tilted beyond 1 degree: #845 104, T-101 60.
 
 ## Exact Replay
