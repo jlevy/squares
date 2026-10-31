@@ -636,7 +636,8 @@ def _sources() -> dict[str, Source]:
 #: pass of 25 October 2026 adopted Francisco Couzo's certificates of issue 763 (T-240) at
 #: 268 from T-174 and at 303 from T-239, Evan Daniel's exact descent of Kirill
 #: Tymchishin's Kaggle notebook packing (T-242) at 304 from T-186, and Daniel's packing of
-#: issue 806 (T-243) at 182 from T-174.
+#: issue 806 (T-243) at 182 from T-174. The pass of 26 October 2026 adopted Daniel's exact
+#: descent of Vladislav Lavrentev's Kaggle packing (T-242) at 268 from T-240.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -692,7 +693,7 @@ ADOPTED: dict[int, str] = {
     263: "T-174",
     264: "T-186",
     267: "T-134",
-    268: "T-240",
+    268: "T-242",
     269: "T-174",
     270: "T-224",
     271: "T-219",
@@ -795,12 +796,16 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: Francisco Couzo certified (T-241), which Couzo's index credits to Kirill Tymchishin's Kaggle
 #: notebook, another arrangement than T-186's. Its pull request merged after T-240's, and 304
 #: joined that day's pass, whose archive takes a row for each count. T-242's 268, below
-#: T-240's there, waits for a pass on or after 26 October (`select_houses.PENDING_ADOPTION`),
-#: since this pass moves 268 to T-240 and one day's archive holds one prior state a count.
+#: T-240's there, waited for a pass on or after 26 October (`select_houses.PENDING_ADOPTION`),
+#: since this pass moved 268 to T-240 and one day's archive holds one prior state a count.
 #: The same pass adopted Evan Daniel's certificate of issue 806 (T-243) after the 25 October
 #: review of it, at 182 from T-174, 3.17e-03 below it: a new arrangement found from an L-cut
 #: of Francisco Couzo's 211 packing (T-188). 182 had not moved that day, so it joined the
 #: pass, whose archive takes a row for each count.
+#: The pass of 26 October 2026 adopted T-242 at 268 (think-3anz), from T-240, 4.48e-12 below
+#: it: Evan Daniel's exact descent of Vladislav Lavrentev's public Kaggle packing, one
+#: arrangement with T-240's packing and another placement. It is dated by the day its pull
+#: request merges, since the pass of 25 October had already moved 268.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -879,6 +884,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-23": frozenset({70, 102, 105, 123, 153, 204, 207, 258, 259, 295, 302, 303}),
     "2026-10-24": frozenset({204, 303}),
     "2026-10-25": frozenset({182, 268, 303, 304}),
+    "2026-10-26": frozenset({268}),
 }
 
 

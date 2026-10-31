@@ -61,19 +61,27 @@ its side), the runs that decided that witness, and one state:
 - `decided-no-better`: the strong generators ran on this very witness and drew nothing
   the improvement rule takes: the layer holds a strong generator's view of it and does
   not draw it, or `SETTLED` says so, by the witness's source and side;
-- `regularization-owed`: the strong generators ran on this very witness and none drew a
-  view the improvement rule could judge, for want of a capability rather than by a
-  judgement, so the drawing is not regularized and its regularization is owed to the
-  open bead `owed` names (`SETTLED`, by the witness's source and side). The exact
-  algebraic houses are the case (review A4 of #756): grid-slack has no exact frame on a
-  number-field witness, and Evan Daniel's regularizer solves each to a rational side
-  above the algebraic `U`, which is not drawn, so the exact house is drawn until
-  think-mbdw's regularizer draws one;
-- `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
+- `regularization-owed`: retired. The exact algebraic houses rested here from 23 to 26
+  October 2026, owed to an open bead, until grid-slack's version 2 drew them in their own
+  number fields (review A4 of #756, think-mbdw). The owner, 26 October 2026: "When
+  something lands on our main rendered lists, the regularization should be done." The
+  name stays in the record's totals, at 0, so the record keeps its shape, and
+  `--check-state` fails a count in it, a `SETTLED` entry that gives it, and a decision
+  that still owes runs or an outcome (`owed`);
+- `exempt`: the count is set aside on the owner's word alone (`SETTLED`): the owner's
+  words, the day given and the repository file that records them, which must hold them
+  (`OwnerWord`), with the reason, the bead that owns it and a review date at most
+  `EXEMPTION_REVIEW_DAYS` after that word. `--check-state` fails an exemption without the
+  owner's word or past its review date. The four decimal Kingbird witnesses an agent set
+  aside on 15 October 2026 are the one exception, until `UNRATIFIED_UNTIL` (`UNRATIFIED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
   (the index's `lapsed`, which `--update-atlas` writes) or that `PENDING_ALLOWED` names,
   even where the new house reads regular, or that only the axis tool's view, the
   reference and fallback, has drawn.
+
+So a count on `main` rests in one of the first three states (`RESTING`), or is exempt on
+the owner's word, or is pending only as a corrected witness `PENDING_ALLOWED` names with
+an open bead.
 
 `--check-state` is the gate, reading the record and the index, measuring nothing. The
 pending counts must be exactly `PENDING_ALLOWED`: it fails on a pending count the list
@@ -98,19 +106,30 @@ copies the block into the evidence (`SETTLED_RUNS`) while the index still has it
 the record lists the counts the run covered, a receipt's counts or the reports beside a
 block, the settled count must be one of them. A copy there that no `SETTLED` entry
 names fails too, since the directory holds the blocks settlements rest on (review G2 of
-#644). Each bead the list, an exemption, or a decided or regularization-owed count's
-`owed` names must be open, which `devtools.check_bead_tree` holds through `deferrals`, and
-a regularization-owed entry must name one. Since the house rule, each entry is
+#644). Each bead the list or an exemption names must be open, which
+`devtools.check_bead_tree` holds through `deferrals`. Since the house rule, each entry is
 a corrected witness's (`CORRECTED`), which names the witness it replaced; with
 `--base-ref REF` the gate reads the record of the commit the change is built on, the merge
 base of `REF` and `HEAD`, and holds each entry to it (`deferral_problems`), so a house moved
 by any import, a Kingbird catalogue intake or a re-solve as much as an adoption, cannot be
 deferred as a correction (review C3 of #660). The records tier passes `origin/main`, or the
-first parent on `main` itself. A record older than a
-witness is `--check`'s to catch, by deciding every count again. A witness is identified by what
-it says of itself -- its source's key, path and revision, and its side -- never by a
-digest of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no
-house, so the gate's comparison of it only holds each row to its count.
+first parent on `main` itself.
+
+**A change that moves a house** carries both its regularizations (`moved_problems`). With
+`--base-ref`, every count whose witness file differs from the base or whose witness
+identifies itself otherwise is one the change moves: an adoption, a Kingbird intake, a
+re-solve or a correction. Each must rest on the new witness, regularized, regular as
+published or decided no better, or carry the owner's exemption, or be pending only as a
+correction `PENDING_ALLOWED` names; and its flip pose (`flip_regularization`, policy
+section 13) is decided again from its picture and must be the one the flip record holds.
+So adoption, general regularization and flip regularization land in one change, and the
+base is read whatever is deferred: a shallow clone fails, naming the remedy.
+
+A record older than a witness is `--check`'s to catch, by deciding every count again. A
+witness is identified by what it says of itself -- its source's key, path and revision,
+and its side -- never by a digest of its bytes (OR-16); its id is the count's
+(`W-known-best-nNNN`) and names no house, so the gate's comparison of it only holds each
+row to its count.
 
 `--compare EARLIER` reads two records, measuring nothing, and lists each count whose
 state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
@@ -139,8 +158,9 @@ import argparse
 import gzip
 import json
 import re
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
+from datetime import UTC, date, datetime, timedelta
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
@@ -189,30 +209,62 @@ ABOVE_BOUND = "above U, not in the exceptions"
 REGULARIZED_STATE = "regularized"
 REGULAR_AS_PUBLISHED = "regular-as-published"
 DECIDED = "decided-no-better"
-#: Not regularized, with the runs done and no view the improvement rule could judge; its
-#: regularization is owed to the bead its `SETTLED` entry's `owed` names (review A4 of
-#: #756). Counted apart from `DECIDED`, since nothing judged a view no better.
+#: Retired on 26 October 2026: not regularized, with its regularization owed to an open
+#: bead, as the exact algebraic houses were from 23 to 26 October (review A4 of #756). An
+#: open bead let them rest on `main` unregularized, which the owner called a serious
+#: process failure. The name stays in `STATES`, so the record's totals keep their shape
+#: and count it at 0, and `--check-state` fails a count in it (`RETIRED`).
 OWED = "regularization-owed"
 EXEMPT = "exempt"
 PENDING = "pending"
 STATES = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED, OWED, EXEMPT, PENDING)
+#: The states a count rests in on `main` by its own record: regularized, regular as
+#: published, or decided no better by the strong generators' runs on its witness. An
+#: exemption rests only on the owner's word (`OwnerWord`), and a pending count only as a
+#: corrected witness `PENDING_ALLOWED` names.
+RESTING = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED)
+#: The states nothing may rest in.
+RETIRED = frozenset({OWED})
+#: How long after the owner's word an exemption stands before the owner reviews it (review E4 of
+#: the intake review of 26 October 2026).
+EXEMPTION_REVIEW_DAYS = 14
 #: The generators whose drawn view makes a count `regularized`: Evan Daniel's regularizer
 #: and the grid-slack port of his placement. The axis tool is the reference and fallback
 #: (policy section 4); a drawing it alone made waits for these to decide its witness.
 STRONG_GENERATORS = frozenset(
-    {"evand-regularize", "regularize_grid_slack/0", "regularize_grid_slack/1"}
+    {
+        "evand-regularize",
+        "regularize_grid_slack/0",
+        "regularize_grid_slack/1",
+        "regularize_grid_slack/2",
+    }
 )
-#: A bead id, which every `PENDING_ALLOWED` entry, exemption and `owed` names.
+#: A bead id, which every `PENDING_ALLOWED` entry and exemption names.
 BEAD = re.compile(r"\bthink-[0-9a-z]{4}\b")
+
+
+class OwnerWord(NamedTuple):
+    """The owner's word that exempts a count: the owner's words exactly as given, the day
+    given (`YYYY-MM-DD`), and the repository-relative file that records them,
+    optionally with a `#fragment`. The gate finds the words in that file, so an exemption
+    rests on what the record shows the owner said, not on an agent's summary of it."""
+
+    quote: str
+    said_on: str
+    recorded_in: str
 
 
 class Settled(NamedTuple):
     """A count the strong generators decided, or that is set aside, on one witness: its
-    state (`DECIDED`, `OWED` or `EXEMPT`); that witness as it identifies itself, exactly as it
+    state (`DECIDED` or `EXEMPT`); that witness as it identifies itself, exactly as it
     writes them -- its source's key, path and revision (`None` where the source pins
     none) and its side; the runs that decided it as (generator, run id); what they
-    found; where the record says so; and, where a decision still owes runs or a recorded
-    outcome, the open bead that owns them and what it owes (`owed`)."""
+    found; and where the record says so, or for an exemption, the bead that owns it.
+
+    An exemption carries the owner's word (`owner_word`) and the day it is to be reviewed
+    by (`review_by`, `YYYY-MM-DD`), at most `EXEMPTION_REVIEW_DAYS` after that word. `owed`
+    is retired with `OWED`: a decision that still owes runs or a recorded outcome is not a
+    decision, and the gate fails one that names it."""
 
     state: str
     source: str
@@ -223,6 +275,8 @@ class Settled(NamedTuple):
     outcome: str
     evidence: str
     owed: str | None = None
+    owner_word: OwnerWord | None = None
+    review_by: str | None = None
 
 
 #: Both generators ran again on 16 October 2026 at the ten counts decided on 15 October
@@ -429,75 +483,12 @@ _README_QL4V = (
     "packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, the selection of 22 "
     "October 2026 (think-ql4v), beside the runs' receipt, blocks and reports"
 )
-#: Both generators on the algebraic houses the pass of 23 October 2026 adopted once the
-#: house writer wrote an algebraic side (think-ot5c): grid-slack at 0.5, 1 and 5 degrees,
-#: which has no exact frame on a number-field witness and draws no view, and Evan Daniel's
-#: regularizer, whose solves are rational sides above the algebraic `U`, held at row 4:
-#: no rational view is `same` or `bound` at an irrational side (result-import.md, "The
-#: House Rule"). Its first run timed out at 258, 259 and 302 on a host at a load of about
-#: 25, and a second ran them at 2,400 seconds. Each count draws its exact house. At 153,
-#: 207, 259 and 302 a strong view of the earlier rational house lapsed just above the new
-#: `U`. The owner answered question 13 (think-r8cn) on 23 October 2026: the best record is
-#: always the record, and a regularized drawing may change the side only as a strict
-#: improvement. So no view above `U` is kept or drawn and `ABOVE_U` gains no entry. Each
-#: entry is `OWED`, not `DECIDED`: no view was judged no better, and the exact house drawn
-#: is not regularized (review A4 of #756). Its `owed` names think-mbdw for the
-#: regularization of the exact house, which needs a regularizer for number-field witnesses
-#: and a second exact route to admit its view. `PENDING_ALLOWED` cannot hold them:
-#: since the house rule it defers only a corrected witness (`deferral_problems`), and an
-#: adoption moved these. The runs' receipts, blocks, reports and the selection's report
-#: are in packing/cases/regularized_drawings/think-ot5c-2026-10-23/.
-_RUNOT5C = (
-    ("evand-regularize", "evand-regularize-adopt-2026-10-23-n70-302-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg05"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg5"),
-)
-_RUNOT5C_B = (
-    *_RUNOT5C,
-    ("evand-regularize", "evand-regularize-adopt-2026-10-23-n258-302-evand"),
-)
-_README_OT5C = (
-    "packing/cases/regularized_drawings/think-ot5c-2026-10-23/README.md, the selection of 23 "
-    "October 2026 (think-ot5c), beside the runs' receipts, blocks and reports"
-)
-_OWED_MBDW = (
-    "think-mbdw: the regularization of the exact house, which needs a regularizer that "
-    "draws an exact view of a number-field witness at or below the record's side, and a "
-    "second exact route that admits it; until then the exact house is drawn"
-)
-_DANIEL_639 = "[Daniel exact current records 2026-10-16]"
-_DANIEL_639_REVISION = "7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1"
-_PINGYOU_574 = "[PingYou PR 574 certificates 2026-10-13]"
-_PINGYOU_574_REVISION = "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde"
-_NO_FRAME = (
-    "grid-slack has no exact frame on the number-field witness and draws no view at 0.5, 1 "
-    "and 5 degrees"
-)
-#: Why a rational view above an algebraic `U` is not drawn: the owner's answer to question
-#: 13 (think-r8cn), and row 4 of the policy's obligation 2.
-_NOT_DRAWN = (
-    "which is not drawn: a regularized drawing changes the side only as a strict "
-    "improvement, and no rational view is same or bound at an irrational side"
-)
-
-
-def _held_again(margin: str) -> str:
-    """`_held`, where the regularizer's first run timed out and its second solved it."""
-    return (
-        f"{_NO_FRAME}; Evan Daniel's regularizer timed out at 600 seconds in its first run, "
-        f"on a host at a load of about 25, and in its second solves it to a rational side "
-        f"{margin} above U, {_NOT_DRAWN}"
-    )
-
-
-def _held(margin: str) -> str:
-    """An algebraic house's outcome where Evan Daniel's regularizer solved it to a rational
-    side `margin` above `U`, which is not drawn."""
-    return (
-        f"{_NO_FRAME}, and Evan Daniel's regularizer solves it to a rational side {margin} "
-        f"above U, {_NOT_DRAWN}"
-    )
+#: The algebraic houses the pass of 23 October 2026 adopted (think-ot5c) at 102, 123, 153,
+#: 207, 258, 259 and 302 were `OWED` here, to think-mbdw, from 23 to 26 October 2026:
+#: grid-slack's version 1 had no exact frame on a number-field witness, and Evan Daniel's
+#: solves are rational sides above the algebraic `U`. Version 2 draws each in its own
+#: field, and the layer draws all seven, so no entry is left (evidence in
+#: packing/cases/regularized_drawings/think-mbdw-2026-10-26/).
 
 
 _T225 = "[Daniel regularized lists 2026-10-20]"
@@ -609,17 +600,6 @@ SETTLED: dict[int, Settled] = {
         "above U)",
         _README_3MRY,
     ),
-    102: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-102.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['67/4', '25/4', '-105/4', '-27/4']",
-        _RUNOT5C,
-        _held("1.06e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
-    ),
     108: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",
@@ -666,17 +646,6 @@ SETTLED: dict[int, Settled] = {
         "the axis tool's view on light and uneven squares and both totals of shared "
         "sides",
         _README_3MRY,
-    ),
-    123: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-123.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['33/4', '10', '-6', '23/2', '-33/4', '1/2']",
-        _RUNOT5C,
-        _held("1.16e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
     ),
     127: Settled(
         DECIDED,
@@ -747,17 +716,6 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
-    153: Settled(
-        OWED,
-        _PINGYOU_574,
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-153.yaml.gz",
-        _PINGYOU_574_REVISION,
-        "['2043/164', '155/164', '27/82', '87/82', '-243/164', '355/164', '-19/82']",
-        _RUNOT5C,
-        _held("1.29e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
-    ),
     176: Settled(
         DECIDED,
         "[Mishapolk KKT refinements 2026-10-14]",
@@ -809,17 +767,6 @@ SETTLED: dict[int, Settled] = {
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
-    ),
-    207: Settled(
-        OWED,
-        _PINGYOU_574,
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-207.yaml.gz",
-        _PINGYOU_574_REVISION,
-        "['1288/89', '209/178', '-78/89', '335/178', '-12/89']",
-        _RUNOT5C,
-        _held("1.49e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
     ),
     208: Settled(
         DECIDED,
@@ -956,29 +903,6 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed rows "
         "overlap at this side)",
         _README_3MRY,
-    ),
-    258: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-258.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['8681/544', '2003/136', '-26795/544', '-10137/272', '163247/544', '-25131/68', "
-        "'87875/544', '-6877/272']",
-        _RUNOT5C_B,
-        _held_again("1.66e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
-    ),
-    259: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-259.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['53/4', '-10', '-6', '-23/2', '-33/4', '-1/2']",
-        _RUNOT5C_B,
-        _held_again("1.66e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
     ),
     260: Settled(
         DECIDED,
@@ -1132,17 +1056,6 @@ SETTLED: dict[int, Settled] = {
         "rows overlap at this side)",
         _README_3MRY,
     ),
-    302: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-302.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['2863/164', '155/164', '27/82', '87/82', '-243/164', '355/164', '-19/82']",
-        _RUNOT5C_B,
-        _held_again("1.79e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
-    ),
     304: Settled(
         DECIDED,
         "[Daniel Kaggle descents 2026-10-24]",
@@ -1187,6 +1100,20 @@ SETTLED: dict[int, Settled] = {
         _README_3MRY,
     ),
 }
+
+#: The exemptions made before an exemption needed the owner's word, which stand without
+#: it until `UNRATIFIED_UNTIL` and fail the gate after it. An agent set the four decimal
+#: Kingbird witnesses aside on 15 October 2026 (think-y1x3's audit; think-yk2h), on the
+#: axis tool's refusal alone: no strong generator was run on them, and the owner never
+#: gave their word (section E of the intake review of 26 October 2026). Each leaves by
+#: being regularized or decided, which takes its `SETTLED` entry off, or by the owner's
+#: word in its entry; the gate fails a count named here that is not such an exemption, so
+#: the set only shrinks. The intake sweep lists each one for the owner, needing action.
+UNRATIFIED: frozenset[int] = frozenset({39, 55, 290, 291})
+#: Fourteen days from the gate's first day, as an exemption's review date would be.
+UNRATIFIED_UNTIL = "2026-11-09"
+#: How the gate and the sweep say that an exemption waits for the owner's word.
+AWAITING_WORD = "without the owner's word until"
 
 
 #: The counts allowed to stay `pending`, each naming the bead whose runs will decide it.
@@ -1271,7 +1198,9 @@ def _routes(entry: Mapping[str, Any]) -> bool:
     )
 
 
-def _against(view: Fraction, house: Fraction | None) -> str | None:
+def _against(view: Any, house: Any) -> str | None:
+    """The view's exact side against the house's: rationals, or elements of the count's
+    number field (`exact_scalars`)."""
     if house is None:
         return None
     return "smaller" if view < house else "larger" if view > house else "same"
@@ -1296,8 +1225,16 @@ def judged(
 
     if view["drawing"]["kind"] != "regularized-view" or house["drawing"]["kind"] != "witness":
         raise ValueError(f"n={n}: the view and the house drawing were not both measured")
-    side = Fraction(str(view["side"]))
-    house_side = None if house["side"] is None else Fraction(str(house["side"]))
+    from devtools import exact_scalars as scalars  # noqa: PLC0415
+    from devtools import regularize_select as select  # noqa: PLC0415
+
+    # Over a number field both sides are elements of the count's field (think-mbdw).
+    listed = any(str(text).startswith("[") for text in (view["side"], house["side"]) if text)
+    field = select.count_field(n) if listed else None
+    side = scalars.parse_text(str(view["side"]), field)
+    house_side = (
+        None if house["side"] is None else scalars.parse_text(str(house["side"]), field)
+    )
     upper = drive.verified_bound(drive.case_facts(n))
     order = None if upper is None else upper.compare(side)
     gains, worse = improvement_rule.compare(view, house)
@@ -1731,14 +1668,20 @@ def state_problems(
     evidence: Path = EVIDENCE,
     corrected: Mapping[int, Correction] | None = None,
     base: Base | None = None,
+    unratified: frozenset[int] | None = None,
+    today: date | None = None,
+    poses: Callable[[Sequence[int]], Mapping[int, Mapping[str, Any]]] | None = None,
 ) -> tuple[list[str], list[str]]:
-    """What fails the regularization-state gate, and the pending counts it lists: the
-    retained record against the index, `SETTLED` and `PENDING_ALLOWED`, and each deferral
-    against the witness it defers, held to `base` where one is given
-    (`deferral_problems`), nothing measured and no witness read (`--check` holds the
-    record to the data by deciding it again)."""
+    """What fails the regularization-state gate, and the pending counts and unratified
+    exemptions it lists: the retained record against the index, `SETTLED`,
+    `PENDING_ALLOWED` and `UNRATIFIED` on `today`, and each deferral against the witness it
+    defers, held to `base` where one is given (`deferral_problems`), as is each count the
+    change moves (`moved_problems`, its flip poses from `poses`). Nothing is measured and
+    no witness read (`--check` holds the record to the data by deciding it again)."""
     settled = SETTLED if settled is None else settled
     allowed = PENDING_ALLOWED if allowed is None else allowed
+    unratified = UNRATIFIED if unratified is None else unratified
+    today = datetime.now(UTC).date() if today is None else today
     found = json.loads(record.read_text(encoding="utf-8"))
     if found.get("contract") != CONTRACT:
         return [f"{RECORD_PATH} is not a {CONTRACT} record"], []
@@ -1764,6 +1707,12 @@ def state_problems(
             )
         if row["state"] not in STATES:
             problems.append(f"n={n}: state {row['state']!r}")
+        elif row["state"] in RETIRED:
+            problems.append(
+                f"n={n} is {row['state']}, which is retired: nothing on main rests "
+                "unregularized behind an open bead. Regularize it or decide it on its "
+                "witness, or record the owner's exemption"
+            )
         if row["drawn"] == VIEW and row["generator"] != entry.get("generator"):
             problems.append(
                 f"n={n}: the record draws another view than the index holds; {stale}"
@@ -1771,6 +1720,7 @@ def state_problems(
         held = settled.get(n)
         if held is not None:
             problems.extend(_settled_problems(n, held, row, entry, recorded))
+            problems.extend(_exemption_problems(n, held, unratified, today))
     problems.extend(
         f"{EVIDENCE_PATH}{SETTLED_RUNS}/{run}/run.json is not the copy of a run a "
         "SETTLED entry names; delete it with the settlement it was retained for"
@@ -1778,12 +1728,209 @@ def state_problems(
     )
     problems.extend(_list_problems(rows, allowed))
     problems.extend(deferral_problems(rows, allowed, corrected=corrected, base=base))
+    waiting = unratified_exemptions(rows, settled, unratified)
+    problems.extend(
+        f"n={n}: UNRATIFIED names it, but it is not an exemption without the owner's word "
+        "on its witness; take it off"
+        for n in sorted(unratified - set(waiting))
+    )
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
     listed = [
         f"n={n} is pending, allowed: {allowed[n]}" for n in sorted(pending & set(allowed))
     ]
+    if base is not None:
+        problems.extend(moved_problems(rows, base, settled=settled, poses=poses))
+        moved = moved_counts(rows, base)
+        listed.append(
+            f"{HELD_TO_BASE} {base.ref}: this change moves "
+            f"{len(moved)} house{'' if len(moved) == 1 else 's'}"
+            + (f" ({', '.join(map(str, moved))})" if moved else "")
+        )
+    listed.extend(
+        f"n={n} is exempt {AWAITING_WORD} {UNRATIFIED_UNTIL}, and the gate fails it "
+        f"after: {settled[n].outcome} ({settled[n].evidence})"
+        for n in waiting
+        if today.isoformat() <= UNRATIFIED_UNTIL
+    )
     summary = f"regularization states: {_states_summary(list(rows.values()))}"
     return problems, [*listed, f"PENDING_ALLOWED: {len(allowed)} counts", summary]
+
+
+def unratified_exemptions(
+    rows: Mapping[int, Mapping[str, Any]],
+    settled: Mapping[int, Settled],
+    unratified: frozenset[int],
+) -> list[int]:
+    """The counts `UNRATIFIED` names that are what it is for: exempt on their witness by a
+    `SETTLED` entry that carries no owner's word."""
+    return [
+        n
+        for n in sorted(unratified)
+        if (held := settled.get(n)) is not None
+        and held.state == EXEMPT
+        and held.owner_word is None
+        and (rows.get(n) or {}).get("state") == EXEMPT
+    ]
+
+
+def _iso_day(text: object) -> date | None:
+    try:
+        return date.fromisoformat(str(text))
+    except ValueError:
+        return None
+
+
+#: Typography a formatter may change in a recorded quote: curly quotes and apostrophes.
+_TYPOGRAPHY = str.maketrans({"\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"'})
+
+
+def _plain(text: str) -> str:
+    """Text as a quote is matched: straight quotes, and whitespace collapsed, since Flowmark
+    reflows and retypes the Markdown that records the owner's words."""
+    return " ".join(text.translate(_TYPOGRAPHY).split())
+
+
+def owner_word_problems(n: int, word: OwnerWord, repo: Path = REPO) -> list[str]:
+    """What is wrong with the owner's word an exemption carries: no words, no day, or a
+    record that does not hold them."""
+    problems: list[str] = []
+    if not word.quote.strip():
+        problems.append(f"n={n}: the owner's word quotes nothing")
+    if _iso_day(word.said_on) is None:
+        problems.append(f"n={n}: the owner's word gives no day (YYYY-MM-DD): {word.said_on!r}")
+    path = word.recorded_in.partition("#")[0]
+    source = repo / path
+    if not path or path.startswith("/") or ".." in Path(path).parts or not source.is_file():
+        problems.append(
+            f"n={n}: the owner's word is recorded in {word.recorded_in!r}, which names no "
+            "file in the repository"
+        )
+    elif word.quote.strip() and _plain(word.quote) not in _plain(
+        source.read_text(encoding="utf-8")
+    ):
+        problems.append(
+            f"n={n}: {path} does not hold the owner's words the exemption quotes: "
+            f"{word.quote[:80]!r}"
+        )
+    return problems
+
+
+def _exemption_problems(
+    n: int, held: Settled, unratified: frozenset[int], today: date
+) -> list[str]:
+    """What fails one `SETTLED` entry as an exemption: an exemption is the owner's alone,
+    on the owner's recorded word, reviewed within `EXEMPTION_REVIEW_DAYS` of it; and only an
+    exemption carries the owner's word or a review date."""
+    if held.state != EXEMPT:
+        if held.owner_word is not None or held.review_by is not None:
+            return [f"n={n}: only an exemption carries the owner's word and a review date"]
+        return []
+    if held.owner_word is None:
+        if n in unratified and today.isoformat() <= UNRATIFIED_UNTIL:
+            return []
+        until = f" (UNRATIFIED held it until {UNRATIFIED_UNTIL})" if n in unratified else ""
+        return [
+            (
+                f"n={n} is exempt without the owner's word{until}: an exemption is the "
+                "owner's alone. Record the owner's words, the day and the file that holds them "
+                f"(OwnerWord), and a review date within {EXEMPTION_REVIEW_DAYS} days of "
+                "them, or regularize the count"
+            )
+        ]
+    problems = owner_word_problems(n, held.owner_word)
+    said, review = _iso_day(held.owner_word.said_on), _iso_day(held.review_by)
+    if review is None:
+        problems.append(
+            f"n={n}: an exemption names the day it is reviewed by (YYYY-MM-DD): "
+            f"{held.review_by!r}"
+        )
+    elif said is not None and review > said + timedelta(days=EXEMPTION_REVIEW_DAYS):
+        problems.append(
+            f"n={n}: the exemption's review date, {review}, is more than "
+            f"{EXEMPTION_REVIEW_DAYS} days after the owner's word of {said}"
+        )
+    elif review < today:
+        problems.append(
+            f"n={n}: the exemption's review date, {review}, has passed: review it with the "
+            "owner and record the owner's word again, or regularize the count"
+        )
+    return problems
+
+
+def moved_counts(rows: Mapping[int, Mapping[str, Any]], base: Base) -> list[int]:
+    """The counts whose house a change moves: its witness file differs from the base's
+    (`base.changed`), which is how a correction shows at a source that pins no revision,
+    or its witness identifies itself otherwise than the base record's row (`IDENTITY`)."""
+    return sorted(
+        n
+        for n, row in rows.items()
+        if n in base.changed
+        or _identity((base.rows.get(n) or {}).get("witness") or {})
+        != _identity(row.get("witness") or {})
+    )
+
+
+def moved_problems(
+    rows: Mapping[int, Mapping[str, Any]],
+    base: Base,
+    *,
+    settled: Mapping[int, Settled],
+    poses: Callable[[Sequence[int]], Mapping[int, Mapping[str, Any]]] | None = None,
+) -> list[str]:
+    """Where a change moves a house (`moved_counts`) without both its regularizations.
+
+    Its general regularization is its state on the new witness: one of `RESTING`, or an
+    exemption on the owner's word, which `_exemption_problems` holds; a pending count is
+    `_list_problems`'s and `deferral_problems`'s to judge, since only a correction
+    `PENDING_ALLOWED` names may be pending. Its flip regularization is the pose
+    `flip_regularization` decides from its picture now, which must be the flip record's
+    row, so that the change that moves a house also poses it (`poses`, by default
+    `flip_poses`; the record by `recorded_poses`)."""
+    moved = moved_counts(rows, base)
+    if not moved:
+        return []
+    problems: list[str] = []
+    rule = (
+        f"this change moves its house since {base.ref}'s record, and a change that moves a "
+        "house regularizes it, generally and by flip, in the same change"
+    )
+    for n in moved:
+        state, held = rows[n]["state"], settled.get(n)
+        worded = state == EXEMPT and held is not None and held.owner_word is not None
+        if state not in (*RESTING, PENDING) and not worded:
+            problems.append(
+                f"n={n} reads {state}: {rule}. Run both strong generators on the new "
+                "witness and select, or settle it decided no better, before it lands "
+                '(result-import.md, "Adopt a House, Then Regularize It")'
+            )
+    try:
+        decided = (flip_poses if poses is None else poses)(moved)
+        recorded = recorded_poses()
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        return [*problems, f"the flip poses of {moved} could not be decided: {error}"]
+    problems.extend(
+        f"n={n}: {rule}; the flip record's pose is not the one its picture takes now. Run "
+        "`python -m devtools.flip_regularization --update`"
+        for n in moved
+        if recorded.get(n) != decided.get(n)
+    )
+    return problems
+
+
+def flip_poses(counts: Sequence[int]) -> dict[int, dict[str, Any]]:
+    """Each count's flip regularization row, decided again from its default picture's
+    retained rendering (`flip_regularization.decide_counts`): milliseconds a count."""
+    from devtools import flip_regularization  # noqa: PLC0415
+
+    return {int(row["n"]): row for row in flip_regularization.decide_counts(counts)}
+
+
+def recorded_poses() -> dict[int, dict[str, Any]]:
+    """The flip record's rows, by count."""
+    from devtools import flip_regularization  # noqa: PLC0415
+
+    found = json.loads(flip_regularization.RECORD.read_text(encoding="utf-8"))
+    return {int(row["n"]): row for row in found.get("entries") or []}
 
 
 class RunRecord(NamedTuple):
@@ -1949,14 +2096,21 @@ def _settled_problems(
             f"n={n}: SETTLED names it, but the layer holds the {entry['generator']} view of "
             "this witness, which decides it unaided; take it off"
         )
-    if held.state not in (DECIDED, OWED, EXEMPT):
+    if held.state in RETIRED:
+        problems.append(
+            f"n={n}: SETTLED gives state {held.state!r}, which is retired: settle the count "
+            "decided no better on its runs, or exempt it on the owner's word"
+        )
+    elif held.state not in (DECIDED, EXEMPT):
         problems.append(f"n={n}: SETTLED gives state {held.state!r}")
     if held.state == EXEMPT and not BEAD.search(held.evidence):
         problems.append(f"n={n}: an exemption names the bead that owns it")
-    if held.state == OWED and held.owed is None:
-        problems.append(f"n={n}: a regularization owed names the bead that owes it in `owed`")
-    if held.owed is not None and not BEAD.match(held.owed):
-        problems.append(f"n={n}: SETTLED's owed names no bead first: {held.owed!r}")
+    if held.owed is not None:
+        problems.append(
+            f"n={n}: SETTLED still owes {held.owed!r}: a decision that owes runs or an "
+            "outcome is not settled, and owed work does not rest on main. Run or record "
+            "it, then drop `owed`"
+        )
     return problems
 
 
@@ -2243,32 +2397,37 @@ def deferrals(
 
 #: The words `--check-state --base-ref` prints, which the records tier's step requires,
 #: so a step that stops passing the base fails (review D4 of #660).
-HELD_TO_BASE = "CORRECTED is held to the record at the merge base of"
+HELD_TO_BASE = "moved houses and CORRECTED are held to the record at the merge base of"
 
 
 def check_state(base_ref: str | None = None) -> int:
-    # The base is read only where a count is deferred, so a clone without the merge base
-    # passes while nothing is (review D5 of #660).
-    deferring = bool(PENDING_ALLOWED or CORRECTED)
-    base = base_record(base_ref) if base_ref is not None and deferring else None
+    # The base is read whatever is deferred, since every house the change moves is held
+    # to it (`moved_problems`). That reverses review D5 of #660, which read it only where
+    # a count was deferred: a shallow clone now fails, naming `git fetch --unshallow`.
+    base = base_record(base_ref) if base_ref is not None else None
     found, listed = state_problems(base=base)
-    if base_ref is None:
-        listed.append("CORRECTED is checked as declared: no --base-ref to hold it to")
-    elif base is None:
-        listed.append(f"{HELD_TO_BASE} {base_ref}; nothing is deferred, so none was read")
-    else:
-        listed.append(f"{HELD_TO_BASE} {base_ref}")
+    if base is None:
+        listed.append(
+            "moved houses and CORRECTED are checked as declared: no --base-ref to hold them to"
+        )
     for line in listed:
         print(line)
     if found:
         for problem in found:
             print(f"regularization state: {problem}")
         return 1
+    waiting = sum(1 for line in listed if AWAITING_WORD in line)
+    unratified = (
+        f" ({waiting} exemptions {AWAITING_WORD} {UNRATIFIED_UNTIL}, UNRATIFIED)"
+        if waiting
+        else ""
+    )
     print(
         "regularization state check passed: every count is regularized, regular as "
-        "published, decided, owed to an open bead or exempt, or pending and named in "
-        "PENDING_ALLOWED, which equals the pending set and grows only by a reviewed change "
-        "naming its bead"
+        f"published or decided no better, or exempt on the owner's word{unratified}, or "
+        "pending and named in PENDING_ALLOWED as a corrected witness; nothing is "
+        "regularization-owed; and every house this change moves is regularized and "
+        "flip-posed in it"
     )
     return 0
 
@@ -2443,8 +2602,9 @@ def parser() -> argparse.ArgumentParser:
         "--base-ref",
         metavar="REF",
         help=(
-            "with --check-state: hold each CORRECTED entry to the record at the merge base "
-            "of REF and HEAD, which the records tier passes as origin/main"
+            "with --check-state: hold each house the change moves, and each CORRECTED "
+            "entry, to the record at the merge base of REF and HEAD, which the records "
+            "tier passes as origin/main"
         ),
     )
     mode.add_argument(

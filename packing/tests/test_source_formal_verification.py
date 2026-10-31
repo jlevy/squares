@@ -167,6 +167,7 @@ def test_deeper_source_review_changes_v_without_claiming_a_confirming_build() ->
         "verdict": "accepted",
         "independent_of_author": True,
         "checked": ["statement-fidelity", "definitions", "axioms", "build"],
+        "formalization_of": entry["id"],
     }
     reviews.append(expert)
     assert derive_verification([entry], reviews) == "V5"
@@ -304,6 +305,8 @@ def test_recursive_source_premises_use_the_weakest_proof_rung() -> None:
         "verdict": "accepted",
         "independent_of_author": True,
         "checked": ["statement-fidelity", "definitions", "axioms", "build"],
+        # The review reads the whole formalization: the entry and the premises it rests on.
+        "formalization_of": entry["id"],
     }
     assert conditional_problems({row["id"]: row for row in entries}) == []
     assert derive_verification(entries, [expert], record=ONE_CASE) == "V5"

@@ -167,6 +167,7 @@ GENERATOR_KINDS = {
     EVAND_GENERATOR: "evand",
     "regularize_grid_slack/0": "grid",
     "regularize_grid_slack/1": "grid",
+    "regularize_grid_slack/2": "grid",
 }
 #: The credit line of a view this project's axis tool made (policy section 7); the other
 #: generators' lines are their index blocks' `credit`.
@@ -695,10 +696,20 @@ def recorded_solves(
             and receipt_run is not None
             and same_receipt(block, receipt_run, blocks)
             and str(run.get("output")) == str(row.get("output"))
-            and Fraction(str(view)) == Fraction(str(row.get("side")))
+            and _same_side(view, row.get("side"))
         ):
             found[(rid, n)] = entry
     return found
+
+
+def _same_side(first: object, second: object) -> bool:
+    """Whether two sides as an entry and a receipt write them are one number: exactly over
+    `Q`, and as written over a number field (`exact_scalars.text`), whose coefficient list
+    in the power basis is the element's one form."""
+    try:
+        return Fraction(str(first)) == Fraction(str(second))
+    except ValueError, ZeroDivisionError:
+        return str(first) == str(second)
 
 
 def registered_lines(found: list[str] | None, unrecorded: Sequence[str]) -> list[str]:

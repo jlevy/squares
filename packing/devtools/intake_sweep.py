@@ -42,16 +42,18 @@ The sources, one section of the report each:
   the reply, not the import), triage and replies owed, the questions awaiting an author
   that hold an issue open (the answer bead owns them; one awaited longer than
   `AWAITED_DAYS` is listed for a decision), every closeable issue still open, each issue
-  held for the owner (listed for the owner: no pass posts on it or closes it), and the
-  validation backlog.
-- **Regularization owed**: from `atlas/known-best/default-drawings.json`, each count
-  whose drawing is `pending` regularization, with the bead its
-  `default_drawings.PENDING_ALLOWED` entry names; each decision that still owes runs or
-  an outcome, each count whose regularization is owed (`regularization-owed`), and each
-  exemption, with its bead; and whatever else the records tier's
-  regularization-state gate fails on. Every new house leaves its count pending until the
-  strong generators decide it or a bead owns the runs, so this is where a pass sees what
-  its adoptions owe (`campaign/result-import.md`, Adopt a House, Then Regularize It).
+  held for the owner (listed for the owner: no pass posts on it or closes it), each
+  closed issue that owes a follow-up (owned by a bead that owns what remains of its
+  results' validation, else its answer bead), and the validation backlog.
+- **Regularization owed**: from `atlas/known-best/default-drawings.json`, empty but for
+  the exemptions on the owner's word, each listed for the owner with the quoted words and
+  its review date. Everything else here needs action: each count whose drawing is `pending`
+  regularization, with the bead its `default_drawings.PENDING_ALLOWED` entry names, each
+  exemption without the owner's word, and whatever else the records tier's
+  regularization-state gate fails on, a `regularization-owed` count or a decision that
+  still owes something among them. A change that moves a house regularizes it, so a
+  count here is what an earlier change left undone (`campaign/result-import.md`, Adopt a
+  House, Then Regularize It).
 - **Blocked imports**: a queued result or ask's `blocked_on`, and what an open
   `result-import` bead says it waits on: a `blocked_on:` line in its description or
   notes, the last one standing, else a present-tense sentence with a waiting word in its
@@ -62,15 +64,19 @@ The sources, one section of the report each:
   labelled `result-import` first, so the open ones are listed as the bead queue.
 
 An item **needs action** when the record is behind a source and no open bead owns the
-difference, when the bead a deferral names is no longer open, when a wait's blocker
-has resolved, or when an open issue is closeable: settled, with nothing its author asked
-for queued and no question awaiting the author's answer, so its final comment and close
-are owed (`campaign/result-import.md`, stage 7). The owner's instruction of 23 October
-2026 put that last one here, after twelve closeable issues were found open with nothing
-listing them; where GitHub already shows such an issue closed, the step is to record the
-close, not to post it again. The command then exits 1. Items an open bead owns, an issue
-held for the owner, a question awaited for a decision, the backlog and the bead queue are
-listed and do not fail it. A source this run could not read is listed under
+difference, when the bead a deferral names is no longer open, when that bead has gone
+quiet (no update in `STALE_DAYS`, or a claim whose delegate's session is gone: no update
+in `CLAIM_LEASE_DAYS`), when a regularization is owed on main, when a wait's blocker
+has resolved, or when an open issue is closeable: answered, with nothing queued for
+import, every result settled or its remaining validation owned by named beads, nothing
+its author asked for queued and no question awaiting the author's answer, so its final
+comment and close are owed (`campaign/result-import.md`, stage 7). The owner's instruction
+of 23 October 2026 put that last one here, after twelve closeable issues were found open
+with nothing listing them; where GitHub already shows such an issue closed, the step is
+to record the close, not to post it again. The command then exits 1. Items an open bead
+owns, with someone acting on it, an exemption on the owner's word, an issue held for the
+owner, a question awaited for a decision, the backlog and the bead queue are listed and
+do not fail it. A source this run could not read is listed under
 **Not Checked**, so a quiet report is not mistaken for a clean one.
 
 Usage, from `packing/`, or `make intake` at the root, which captures the catalogue first::
@@ -101,6 +107,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass, field, replace
 from datetime import UTC, date, datetime
 from decimal import Decimal
+from functools import partial
 from pathlib import Path
 from typing import Any
 
@@ -130,9 +137,28 @@ STALE = "awaited, for a decision"
 #: How long a question may await its author before the sweep lists it for a decision
 #: (review A9 of #747: #470's question had waited since 12 October, listed as owned).
 AWAITED_DAYS = 14
-#: The states that make the sweep exit 1: work nobody owns, a wait that is over, or an
-#: issue owed its close.
-ACTION = frozenset({NEEDS_OWNER, RESOLVED, CLOSEABLE})
+#: An item a live bead is named to own, where nobody is acting on the bead (`STALE_DAYS`,
+#: `CLAIM_LEASE_DAYS`): the open bead no longer hides the work (section E of the intake
+#: review of 26 October 2026).
+STALLED = "owned by a stalled bead"
+#: A count on `main` whose regularization is not done, though the gate allows it: a
+#: corrected witness `PENDING_ALLOWED` defers. The owner, 26 October 2026: "When
+#: something lands on our main rendered lists, the regularization should be done."
+OWED_ON_MAIN = "regularization owed on main"
+#: How long a live bead may go without an update before it owns nothing. think-mbdw went
+#: from 16 to 24 October 2026 without one, under a delegate whose session had ended,
+#: while seven counts rested owed on it, and the sweep read it as owned throughout.
+STALE_DAYS = 7
+#: How long a claim (`in_progress`, with a delegate) may go without an update before its
+#: delegate's session counts as gone. OR-19 has the tracker owner update a claimed bead at
+#: each commit and each worker report, and no session here runs two days (the longest
+#: planned, think-ipel's overnight, is ten hours), so a claim silent that long names a
+#: session that has ended. The bead store keeps no session, so this is how the sweep
+#: tells one has gone.
+CLAIM_LEASE_DAYS = 2
+#: The states that make the sweep exit 1: work nobody owns or nobody is acting on, a
+#: regularization owed on main, a wait that is over, or an issue owed its close.
+ACTION = frozenset({NEEDS_OWNER, STALLED, OWED_ON_MAIN, RESOLVED, CLOSEABLE})
 
 #: The register's roles for a source that publishes many results and is read as a whole.
 CATALOGUE_ROLES = frozenset({"current-catalogue", "first-party-release"})
@@ -233,13 +259,38 @@ def queued_bead(bead: Mapped, alias: str, blocked_by: Iterable[str] = ()) -> Que
 
 @dataclass(frozen=True)
 class Beads:
-    """Bead states by `think-` alias, and the open beads labelled `result-import`."""
+    """Bead states by `think-` alias, and the open beads labelled `result-import`; and,
+    where the sweep's day is given (`today`), when each bead was last updated and who
+    holds its claim, so a bead gone quiet owns nothing (`stalled`)."""
 
     states: dict[str, str]
     queue: tuple[QueuedBead, ...]
+    updated: dict[str, str] = field(default_factory=dict)
+    delegates: dict[str, str] = field(default_factory=dict)
+    today: date | None = None
+
+    def stalled(self, alias: str) -> str:
+        """Why a live bead owns nothing, or "" while it does: no update in `STALE_DAYS`,
+        or a claim (`in_progress` with a delegate) with no update in `CLAIM_LEASE_DAYS`,
+        whose delegate's session is gone. Without the sweep's day or the bead's last
+        update, nothing is stalled."""
+        if self.today is None:
+            return ""
+        try:
+            updated = date.fromisoformat(self.updated.get(alias, "")[:10])
+        except ValueError:
+            return ""
+        days = (self.today - updated).days
+        last = f"no update since {updated} ({days} days)"
+        if days >= STALE_DAYS:
+            return last
+        delegate = self.delegates.get(alias, "")
+        if self.states.get(alias) == "in_progress" and delegate and days >= CLAIM_LEASE_DAYS:
+            return f"claimed by {delegate}, whose session is gone: {last}"
+        return ""
 
     @classmethod
-    def load(cls) -> Beads | None:
+    def load(cls, today: date | None = None) -> Beads | None:
         found = check_bead_tree.load()
         if found is None:
             return None
@@ -270,7 +321,9 @@ class Beads:
                 key=lambda queued: queued.alias,
             )
         )
-        return cls(states, queue)
+        updated = {alias_by_id[str(b["id"])]: str(b.get("updated_at") or "") for b in beads}
+        delegates = {alias_by_id[str(b["id"])]: str(b.get("delegate") or "") for b in beads}
+        return cls(states, queue, updated, delegates, today)
 
     def state(self, alias: str) -> str:
         return self.states.get(alias, "no such bead")
@@ -279,13 +332,21 @@ class Beads:
 def owned(
     what: str, alias: str, beads: Beads | None, *, since: str = "", step: str = ""
 ) -> Item:
-    """An item a bead is named to own: owned while that bead is open, else orphaned."""
+    """An item a bead is named to own: owned while that bead is open and someone is
+    acting on it, else orphaned. A live bead with no update in `STALE_DAYS`, or a claim
+    whose delegate's session is gone, owns nothing (`Beads.stalled`, section E of the
+    intake review of 26 October 2026): think-mbdw sat claimed by a session gone since 16
+    October while seven counts rested owed on it, and an open bead read as owned."""
     if not alias:
         return Item(what, NEEDS_OWNER, since=since, step=step)
     if beads is None:
         return Item(what, OWNED, alias, "unconfirmed: no bead store", since, step)
     state = beads.state(alias)
-    return Item(what, OWNED if state in LIVE else NEEDS_OWNER, alias, state, since, step)
+    if state not in LIVE:
+        return Item(what, NEEDS_OWNER, alias, state, since, step)
+    if why := beads.stalled(alias):
+        return Item(what, STALLED, alias, f"{state}; {why}", since, step)
+    return Item(what, OWNED, alias, state, since, step)
 
 
 def age(since: str, today: date) -> str:
@@ -446,7 +507,27 @@ def _github_step(difference: str) -> str:
             "record the close: the final comment under replies as final, and the entry's "
             "state and closed; post nothing"
         )
-    return "reconcile result-requests.yaml with the issue"
+    return _record_step(difference) or "reconcile result-requests.yaml with the issue"
+
+
+def _record_step(difference: str) -> str:
+    """The step for a difference in what the record says of a block, a reply or an ask
+    (rules P1 and P2 and #541, 26 October 2026), or nothing for any other."""
+    if check_requests.BLOCKED_LABEL in difference:
+        number = difference.split(" ", 1)[0].removeprefix("#")
+        return (
+            "make the issue's blocked: label the one its record's blocked names, under the "
+            f"github-workflows grant (gh issue edit {number} --add-label or --remove-label); "
+            "without the grant, list the issue for the owner"
+        )
+    if "is recorded as stating" in difference:
+        return (
+            "correct the reply's reported items and beads to what its text names (as for a "
+            "renumbered id); a reply due then follows from what no reply has named"
+        )
+    if "cites" in difference and "the ask" in difference:
+        return "cite where the author asked it, or remove an ask the author did not make"
+    return ""
 
 
 #: How `check_requests.compare_github` says an issue open in the record is closed there.
@@ -987,6 +1068,7 @@ def queues_section(
     repository = str(record.get("repository", ""))
     for issue in record["issues"]:
         if issue["state"] != "open":
+            section.items.extend(_closed_follow_up(issue, register, beads))
             continue
         number = issue["number"]
         for result in issue.get("results") or ():
@@ -1040,6 +1122,34 @@ def queues_section(
         if state.closeable:
             section.items.append(_closeable(issue, beads, closed_there=number in closed_there))
     return section
+
+
+def _closed_follow_up(
+    issue: Mapped, register: check_requests.Register, beads: Beads | None
+) -> list[Item]:
+    """A closed issue that owes a follow-up: an answer is kept true after the close
+    (epistemics.md, Import, Integration, and Reply), and since rule P1 of 26 October
+    2026 an issue closes while its results' validation is still owned by beads, whose
+    moves its replies must report. The first bead that owns what remains owns the
+    follow-up, else the answer bead; a closed one leaves it needing an owner."""
+    state = check_requests.issue_state(issue, register)
+    if not state.replies_due:
+        return []
+    owners = check_requests.remaining_owners(state.results)
+    return [
+        owned(
+            f"#{issue['number']} (closed) owes a follow-up: {state.replies_due[0]}"
+            + (
+                f" (and {len(state.replies_due) - 1} more)"
+                if len(state.replies_due) > 1
+                else ""
+            ),
+            owners[0] if owners else str(issue["answer_bead"]),
+            beads,
+            since=str(issue.get("closed") or issue["opened"]),
+            step="draft the follow-up with check_requests --draft N, post it, and record it",
+        )
+    ]
 
 
 def _asked_on(issue: Mapped, url: str) -> str:
@@ -1107,8 +1217,9 @@ def _held(
 def _closeable(issue: Mapped, beads: Beads | None, *, closed_there: bool = False) -> Item:
     """An open issue that is closeable, owed its final comment and close (stage 7).
 
-    It needs action whoever owns it: every result is settled, nothing its author asked for
-    is queued and no question awaits the author, so nothing but the close is left. Where
+    It needs action whoever owns it: the issue is answered (every result settled or its
+    remaining validation owned by named beads, nothing its author asked for queued and no
+    question awaiting the author), so nothing but the close is left. Where
     GitHub already shows the issue closed (`closed_there`), the close was posted and the
     record lacks it, so the step is to record it, not to post a second final comment.
     """
@@ -1166,7 +1277,7 @@ def _queued(
     )
     if resolved:
         detail = f"{item.what}; it waits on {'; '.join(resolved)}"
-        state = RESOLVED if item.state == OWNED else item.state
+        state = RESOLVED if item.state in (OWNED, STALLED) else item.state
         return replace(
             item, what=detail, state=state, step="resume it, or say what it waits on"
         )
@@ -1195,31 +1306,43 @@ def regularization_section(
     index: Path = default_drawings.INDEX,
     allowed: Mapping[int, str] | None = None,
     settled: Mapping[int, default_drawings.Settled] | None = None,
+    unratified: frozenset[int] | None = None,
+    today: date | None = None,
 ) -> Section:
     """What the drawings still owe the regularized layer, from the default-drawings
     record's `states` and the lists the records tier holds them to (`default_drawings`).
 
-    A new house is a new witness, and its count reads `pending` until the strong
-    generators decide it; the owner, 16 October 2026, made regularizing every new house
-    part of the standard intake (think-9qm5). So each `pending` count is an item, owned
-    by the bead its `PENDING_ALLOWED` entry names, and needing an owner where the list
-    names none or that bead is no longer open; each `decided-no-better` decision that
-    still owes runs or an outcome, and each exemption, is owned by its bead; and anything
-    else the regularization-state gate fails on needs action. The notes give the counts
-    by state. Nothing is measured: `--check` in the records tier holds the record to the
-    data. A missing record is not checked; one that cannot be read, or an index the gate
-    cannot read, is not checked and needs action, and the sweep goes on (review A4 of
-    #650). Only those two reads are guarded: an error in sorting what they hold into
-    items is a fault of the sweep, and raises as one (review B1 of #650)."""
+    The owner, 26 October 2026: "When something lands on our main rendered lists, the
+    regularization should be done." So the section shows nothing that does not need
+    action but the exemptions on the owner's word, listed for the owner with the quoted words
+    and the day each is to be reviewed by. Every other item needs action: a `pending` count,
+    needing an owner where `PENDING_ALLOWED` does not name it or its bead is no longer
+    open, and owed on main where it does; an exemption without the owner's word
+    (`default_drawings.UNRATIFIED`); and whatever else the regularization-state gate
+    fails on, a `regularization-owed` count or a decision that still owes something
+    among them. The notes give the counts by state. Nothing is measured: `--check` in the
+    records tier holds the record to the data. A missing record is not checked; one that
+    cannot be read, or an index the gate cannot read, is not checked and needs action,
+    and the sweep goes on (review A4 of #650). Only those two reads are guarded: an error
+    in sorting what they hold into items is a fault of the sweep, and raises as one
+    (review B1 of #650)."""
     section = Section("Regularization owed")
     allowed = default_drawings.PENDING_ALLOWED if allowed is None else allowed
     settled = default_drawings.SETTLED if settled is None else settled
+    unratified = default_drawings.UNRATIFIED if unratified is None else unratified
     if not record.is_file():
         section.unchecked.append(f"regularization: {default_drawings.RECORD_PATH} is missing")
         return section
     try:
         document = _read_record(record)
-        gate = default_drawings.state_problems(record, index, settled=settled, allowed=allowed)
+        gate = default_drawings.state_problems(
+            record,
+            index,
+            settled=settled,
+            allowed=allowed,
+            unratified=unratified,
+            today=today,
+        )
     except (OSError, ValueError, KeyError, TypeError) as error:
         detail = f"{type(error).__name__}: {str(error).strip()[:200]}"
         section.unchecked.append(
@@ -1250,6 +1373,43 @@ def _read_record(record: Path) -> Mapping[str, Any]:
     return document
 
 
+#: What an exemption without the owner's word needs before the gate fails it.
+_RATIFY_STEP = (
+    "ask the owner: record the owner's words, the day and the file that holds them "
+    "(default_drawings.OwnerWord) with a review date, or run both strong generators on its "
+    "witness and settle it, before {until}, when the gate fails it"
+)
+
+
+def _exemption_item(n: int, held: default_drawings.Settled, beads: Beads | None) -> Item:
+    """An exemption, listed for the owner with the quoted words where it has them, and needing
+    action where it has none."""
+    found = default_drawings.BEAD.search(held.evidence)
+    bead = found[0] if found else ""
+    state = (
+        "unconfirmed: no bead store" if beads is None else (beads.state(bead) if bead else "")
+    )
+    word = held.owner_word
+    if word is None:
+        return Item(
+            f"n = {n} is exempt {default_drawings.AWAITING_WORD} "
+            f"{default_drawings.UNRATIFIED_UNTIL}: {held.outcome}",
+            NEEDS_OWNER,
+            bead,
+            state,
+            step=_RATIFY_STEP.format(until=default_drawings.UNRATIFIED_UNTIL),
+        )
+    return Item(
+        f"n = {n} is exempt on the owner's word of {word.said_on} ({word.recorded_in}): "
+        f"\u201c{word.quote}\u201d; {held.outcome}",
+        LISTED,
+        bead,
+        state,
+        since=word.said_on,
+        step=f"review it with the owner by {held.review_by}, or regularize the count",
+    )
+
+
 def _regularization_owed(
     section: Section,
     beads: Beads | None,
@@ -1263,8 +1423,6 @@ def _regularization_owed(
     regularization-state gate found (`default_drawings.state_problems`)."""
     rows = document.get("states") or []
     pending: list[Item] = []
-    decided: list[Item] = []
-    owing: list[Item] = []
     exempt: list[Item] = []
     itemized: set[int] = set()
     for row in rows:
@@ -1290,40 +1448,16 @@ def _regularization_owed(
                 )
                 continue
             bead, why = _owner(allowed[n])
-            pending.append(owned(f"n = {n} pending: {why}", bead, beads, step=_REGULARIZE_STEP))
-        elif row["state"] == default_drawings.DECIDED and held is not None and held.owed:
-            bead, owed = _owner(held.owed)
-            decided.append(
-                owned(
-                    f"n = {n} decided no better on its witness, still owed: {owed}",
-                    bead,
-                    beads,
-                    step="run or record what the decision owes, then drop its `owed`",
-                )
-            )
-        elif row["state"] == default_drawings.OWED and held is not None and held.owed:
-            bead, owed = _owner(held.owed)
-            owing.append(
-                owned(
-                    f"n = {n} not regularized on its witness, regularization owed: {owed}",
-                    bead,
-                    beads,
-                    step="run the regularization its bead owes, then settle the count again",
-                )
-            )
+            item = owned(f"n = {n} pending on main: {why}", bead, beads, step=_REGULARIZE_STEP)
+            pending.append(replace(item, state=OWED_ON_MAIN) if item.state == OWNED else item)
         elif row["state"] == default_drawings.EXEMPT and held is not None:
-            found = default_drawings.BEAD.search(held.evidence)
-            exempt.append(
-                owned(
-                    f"n = {n} exempt: {held.outcome}",
-                    found[0] if found else "",
-                    beads,
-                    step="decide it once its bead's blocker is resolved",
-                )
-            )
-    section.items.extend([*pending, *decided, *owing, *exempt])
+            itemized.add(n)
+            exempt.append(_exemption_item(n, held, beads))
+    section.items.extend([*pending, *exempt])
     problems, listed = gate
-    itemized_problem = re.compile(r"n=(\d+)(?: is pending:|: PENDING_ALLOWED names no bead)")
+    itemized_problem = re.compile(
+        r"n=(\d+)(?: is pending:|: PENDING_ALLOWED names no bead| is exempt without)"
+    )
     for problem in problems:
         found = itemized_problem.match(problem)
         if found and int(found[1]) in itemized:
@@ -1338,11 +1472,14 @@ def _regularization_owed(
     states = (
         listed[-1].removeprefix("regularization states: ") if listed else f"{len(rows)} counts"
     )
+    worded = sum(item.state == LISTED for item in exempt)
     section.notes.append(
-        f"Regularization states of {states}. Owed: {_count(len(pending), 'pending count')}, "
+        f"Regularization states of {states}. On main: "
+        f"{_count(len(pending), 'pending count')}, "
         f"{len(itemized & set(allowed))} of them in PENDING_ALLOWED; "
-        f"{_count(len(decided), 'decision')} still owing runs or an outcome; "
-        f"{_count(len(exempt), 'exemption')}."
+        f"{_count(worded, 'exemption')} on the owner's word; "
+        f"{_count(len(exempt) - worded, 'exemption')} without it, until "
+        f"{default_drawings.UNRATIFIED_UNTIL}."
     )
     return section
 
@@ -1448,9 +1585,13 @@ def sweep(
     coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
     watch = safe_load(WATCH.read_text(encoding="utf-8"))
     record = check_requests.load_record()
-    register = check_requests.load_register()
+    # With positions, a reply owed for an adoption or a supersession is listed (#540).
+    register = check_requests.load_register(positions=True)
     blockers = Blockers(beads, None if offline else fetch)
     repository = str(record["repository"])
+    if compare_github is check_requests.compare_github:
+        # The register says which report entries a reply states in words (#541).
+        compare_github = partial(check_requests.compare_github, register=register)
     github = github_section(record, offline=offline, compare_github=compare_github)
     return [
         github,
@@ -1468,7 +1609,7 @@ def sweep(
             blockers=blockers,
             closed_there=closed_on_github(github),
         ),
-        regularization_section(beads),
+        regularization_section(beads, today=today),
         blocked_section(beads, blockers, repository),
         backlog_section(record, register, beads),
         bead_queue_section(beads),
@@ -1493,10 +1634,14 @@ def markdown(sections: Sequence[Section], today: date) -> str:
     orphans = sum(item.state == NEEDS_OWNER for _, item in action)
     resolved = sum(item.state == RESOLVED for _, item in action)
     closeable = sum(item.state == CLOSEABLE for _, item in action)
+    stalled = sum(item.state == STALLED for _, item in action)
+    owed = sum(item.state == OWED_ON_MAIN for _, item in action)
     owned_count = sum(item.state == OWNED for s in sections for item in s.items)
     unchecked = [line for section in sections for line in section.unchecked]
     summary = (
         f"{_count(orphans, 'item')} without an open bead to own it, "
+        f"{_count(stalled, 'item')} whose bead has gone quiet, "
+        f"{_count(owed, 'regularization')} owed on main, "
         f"{_count(resolved, 'item')} whose blocker has resolved, "
         f"{_count(closeable, 'closeable issue')} still open, "
         f"{_count(owned_count, 'item')} owned by an open bead, and "
@@ -1556,7 +1701,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         capture = (match[1] if match else today.isoformat(), args.capture / f"{STEM}.md")
     else:
         capture = newest_capture()
-    sections = sweep(today=today, offline=args.offline, capture=capture, beads=Beads.load())
+    sections = sweep(
+        today=today, offline=args.offline, capture=capture, beads=Beads.load(today)
+    )
     if args.json:
         document = {
             "date": today.isoformat(),

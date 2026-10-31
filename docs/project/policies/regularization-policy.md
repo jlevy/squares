@@ -46,7 +46,7 @@ the import runbook’s
 | Term | Meaning |
 | --- | --- |
 | Source witness | The atlas witness `packing/witnesses/known-best/n-NNN.yaml` a view is derived from |
-| $s_W$ | The source witness’s side: its exact side, or for a decimal witness the printed side of its stated rational promotion, the 36-digit pose at dilation 1 |
+| $s_W$ | The source witness’s side: its exact side, a rational or an element of the number field it is stated in, or for a decimal witness the printed side of its stated rational promotion, the 36-digit pose at dilation 1 |
 | $U$ | The case’s verified upper bound when the view is decided |
 | $s_V$ | The view’s exact certified side |
 | Generator | The code that made a view: `regularize_axis_components/2` in `packing/devtools/regularize_axis_components.py`, or Evan Daniel’s exact solver and regularizer vendored under `vendor/evand-regularize/`, driven by `packing/devtools/regularize_evand.py` and brought to the witness’s side by `packing/devtools/regularize_same_side.py`. A generator’s version is its own version, or for the vendored code the pin plus its ordered local patches. |
@@ -65,13 +65,18 @@ A view enters the drawing layer only if every obligation holds.
 They are checked in this order, and the first that fails is the refusal the index
 records.
 
-1. **Exact validity.** The retained view is decided valid over $\mathbb{Q}$ by both
-   maintained exact routes, `sqpack.witness.exact_verify` and the independent checker
-   `packing/devtools/check_rational_witness_independent.py`; a view converted from Evan
-   Daniel’s format is also decided by the third route, `check_half_angle_area.py`. His
-   own checkers may be replayed as evidence about the source and never decide.
-   A view that two routes here cannot decide, such as a pose over a number field today,
-   is not admitted. The index’s digest binds the verdict to the view’s bytes.
+1. **Exact validity.** The retained view is decided valid by both maintained exact
+   routes. Over $\mathbb{Q}$ they are `sqpack.witness.exact_verify` and the independent
+   checker `packing/devtools/check_rational_witness_independent.py`. Over a real number
+   field $\mathbb{Q}(\alpha)$, the field an algebraic house’s witness is stated in, they
+   are `sqpack.witness.exact_verify` over `sqpack.field` and the independent checker
+   `packing/devtools/check_algebraic_witness_independent.py`, which reads the view’s own
+   text and shares no arithmetic, root isolation or geometry with the first (think-mbdw,
+   26 October 2026). A view converted from Evan Daniel’s format is also decided by the
+   third route, `check_half_angle_area.py`. His own checkers may be replayed as evidence
+   about the source and never decide.
+   A view that two routes here cannot decide is not admitted.
+   The index’s digest binds the verdict to the view’s bytes.
 2. **Side relation.** $s_V$ is computed exactly and the relation recorded.
    A drawing needs `same` or `bound`, and $s_V \ge U$. A view with $s_V < U$ is
    registered as a result first and drawn after (owner, 12 October 2026: “regularize and
@@ -123,7 +128,7 @@ still measured and named, and decides nothing.
 | 2. Exact solve | The vendored exact solver, through the driver | 80 digits and a timeout per count; a count that will not certify is reported, never polished |
 | 3. Regularize | The vendored regularizer, through the driver | `conservative`, `coincide` placement, the source orientation |
 | 4. Import | The driver converts each certificate to a rational Witness/v2 view | Decided on three routes; identity and shades measured |
-| 5. Same side | `regularize_same_side.py` re-solves the view’s tight contacts over $\mathbb{Q}$ at $s_W$ | Wherever every rotation in the view is rational in the witness’s frame |
+| 5. Same side | `regularize_same_side.py` re-solves the view’s tight contacts over $\mathbb{Q}$ at $s_W$ | Wherever every rotation in the view is rational in the witness’s frame; the grid-slack generator re-solves over the witness’s own number field where its house is algebraic |
 | 6. Reference | `regularize_axis_components/2` | Unchanged: the fallback, and the reference for non-regression |
 | 7. Classify | The driver applies the table below | Index entries, the review queue, the candidate list and the receipt |
 
@@ -338,7 +343,7 @@ says how the runs fit the compute cap and which deferrals `--check-state` allows
 | `regularized atlas views match their index` | The index against the manifest, the witnesses and the views, by digest; with the layer’s contract, also the generator, method, side relation, identity and review-record fields; every drawn view’s exact side against $s_W$ and against the case record’s $U$, decided exactly, with the views above $U$ named in `ABOVE_U` | Records tier, every pull request |
 | `regularized atlas drawings match their index` | Every drawing re-rendered from its retained view | Records tier, every pull request |
 | `default pictures improve on their house drawings` | Every drawn view measured against its house drawing again, each count’s default picture decided under the improvement rule ([section 11](#11-the-improvement-rule)) and held to `default-drawings.json` | Records tier, every pull request |
-| `every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt` | Every count’s regularization state in `default-drawings.json` against the index; no count pending unless `default_drawings.PENDING_ALLOWED` names it with its bead, and no named count that is no longer pending ([section 12](#12-the-default-picture)) | Records tier, every pull request |
+| `every drawn picture is regularized, regular as published, decided or exempt on the owner's word` | Every count’s regularization state in `default-drawings.json` against the index; no count `regularization-owed`, no decision that still owes something, and no exemption without the owner’s recorded word or past its review date; no count pending unless `default_drawings.PENDING_ALLOWED` names it with its bead, and no named count that is no longer pending; and each house the change moves since its base regularized and flip-posed in it ([section 12](#12-the-default-picture)) | Records and fast tiers, every pull request |
 | `results rungs are earned and the view agrees` | `devtools.check_results` on each register result’s `regularizations` items, and on `regularized_drawings` and every case record’s `regularization` note against the layer’s index | Records tier, every pull request |
 | `regularized atlas views re-derive exactly` | Every `regularize_axis_components/2` view re-derived byte for byte; every other generator’s view decided again over $\mathbb{Q}$ on the maintained routes, its square count, identity and shades re-measured and its digests held | Deferred: the `regularized-views` job, whose 450 s ceiling bead think-uomm revisits |
 | The generator run | The views reproduced from the pinned code and inputs | On request only, with a receipt |
@@ -366,10 +371,19 @@ policy applies until there is one.
    witnesses’ printed sides, about $10^{-14}$ below bounds rounded up at fourteen
    decimals.
 
-4. **Irrational optima:** the status quo.
-   A dilated certificate is not a drawing frame (row 4), and views over a number field
-   are a follow-up, $\mathbb{Q}(\sqrt{2})$ first; $n = 11$, whose proved optimum lies in
-   a field of degree 8, stays drawn from its witness.
+4. **Irrational optima:** a dilated certificate is not a drawing frame (row 4). A
+   witness stated over a real number field is regularized in that field: since 26
+   October 2026 the grid-slack generator starts from such a witness’s own exact pose,
+   re-solves the placement’s contacts over the field at $s_W$, and writes the view in
+   the witness’s field, where the two number-field routes of obligation 1 decide it
+   (think-mbdw). The owner, 26 October 2026, on seeing algebraic houses drawn
+   unregularized on the home page: “When something lands on our main rendered lists, the
+   regularization should be done.
+   There’s no excuse not to, because it should be cheap to calculate.
+   We should do flipper regularization as well as the general regularization, and that
+   process should be well defined.”
+   $n = 11$, whose proved optimum lies in a field of degree 8, is drawn from its
+   witness, which reads regular as published.
 
 5. **Orientation:** every witness and view keeps its source’s frame; any isometry of a
    frame is recorded as `atlas_orientation` records one.
@@ -554,7 +568,8 @@ recorded where it is implemented, and reversing one is a change to that layer.
    coincidence placement, started from the witness’s exact frame (near-axis squares
    straightened under 0.5 degrees where a placement stays feasible), brought to the
    record’s side by the same exact re-solve, and credited to his method (section 7)
-   (#530).
+   (#530). Over a witness stated in a number field, the frame and the re-solve are in
+   that field (think-mbdw, 26 October 2026).
 4. **Choosing between generators:** where both yield an admissible view, Evan Daniel’s
    is drawn unless the grid-slack view is better on a measure of the drawing (light,
    uneven or near-axis squares, or a house or stage total) and worse on none (#548). The
@@ -676,11 +691,44 @@ regularized. So the same record states, for every count, whether the picture it 
 `regular-as-published` (the house drawing has no uneven and no near-axis square, no
 strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
 bead’s runs), `decided-no-better` (the strong generators ran on that witness and drew
-nothing the improvement rule takes), `regularization-owed` (they ran and drew no view
-the rule could judge, so the drawing is not regularized and its regularization is owed
-to the open bead its entry names), `exempt` (with a reason and the bead that owns it) or
+nothing the improvement rule takes), `exempt` (on the owner’s word alone, below) or
 `pending`, with the witness it was decided on (its source’s key, path and revision and
 its side, never a digest of the file, under OR-16) and the runs that decided it.
+
+The owner, 26 October 2026: “When something lands on our main rendered lists, the
+regularization should be done.
+There’s no excuse not to, because it should be cheap to calculate.
+We should do flipper regularization as well as the general regularization, and that
+process should be well defined.”
+The record had a sixth state, `regularization-owed`, for a count whose runs drew no view
+the rule could judge, its regularization owed to an open bead.
+The seven exact algebraic houses rested there from 23 to 26 October, and n = 259 and 302
+were drawn unregularized on the homepage, which the owner called a serious process
+failure that must never recur.
+So no count rests owed on `main`. The state’s name stays in the record’s totals at 0,
+and the records tier fails a count in it and a `SETTLED` decision that still owes runs
+or an outcome. A count whose witness no strong generator can draw waits for that
+capability in the change that moves its house, or carries the owner’s exemption.
+An exemption is the owner’s alone: its entry carries the owner’s words exactly, the day
+they were given and the repository file that records them, which must hold them, with
+the reason, the bead that will settle the count, and a review date at most 14 days after
+that word. The records tier fails an exemption without the owner’s word or past its
+review date, and the intake sweep lists each one for the owner.
+The four decimal Kingbird witnesses at 39, 55, 290 and 291, set aside by an agent on 15
+October 2026 without a strong run, stand without the owner’s word until 9 November 2026
+and fail after it.
+
+A change that moves a house regularizes it in the same change, generally and by flip
+([section 13](#13-flip-regularization)): against the record of the commit it is built
+on, each count whose witness has changed must land regularized, regular as published or
+decided no better on the new witness, or exempt on the owner’s word, or pending only as
+a corrected witness `default_drawings.PENDING_ALLOWED` names; and its flip pose, decided
+again from its picture, must be the one the flip record holds.
+The import runbook’s
+[Adopt a House, Then Regularize It](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)
+gives the step: the tools, the receipts kept, the states allowed and what a reviewer
+checks.
+
 The index’s `status: regularized` says only that the layer holds a view.
 A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
 and the count is pending until the generators decide the new witness.

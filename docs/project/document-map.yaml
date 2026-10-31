@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-25-exact-side-register.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md, role: review, authority: record, lifecycle: retained}
@@ -79,8 +80,11 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-couzo-43f666c-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-issue798-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue819-20261026/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue824-20261026/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}
@@ -219,6 +223,8 @@ documents:
   - {path: packing/cases/regularized_drawings/think-bk9r-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-hx0e-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-2lzo-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-mbdw-2026-10-26/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}

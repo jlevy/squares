@@ -1,8 +1,12 @@
-"""The home page's Recently Added, read from the record at render time.
+"""The Changelog page's log, read from the record at render time.
 
 The owner, 22 October 2026: "It should be clear if you come to the site and see all the
-things that have recently merged now." The section covers the newest day anything reached
-`main` and the seven before it, one disclosure a day: every result that reached the site,
+things that have recently merged now." This was the home page's Recently Added until
+26 October 2026, when the owner asked for it on the Changelog instead -- "the Recently
+Added section is closer to what the changelog should look like and we should move that to
+changelog not put it on the homepage" -- and for the home page to carry a button here.
+The log now covers the whole record rather than a seven-day window, one disclosure a
+day: every result that reached the site,
 at any significance, by its `landed`; each count whose house best packing changed, and
 each source's dated beyond-horizon rows, by the day `main` first held them
 (`frontier/landings.yaml`, which `devtools.stamp_landed` writes from the merge; #736's
@@ -42,17 +46,23 @@ from devtools.overview_sections import (
 )
 from tests import site_renders
 
-#: One day's disclosure: its date, whether it starts open, the rest.
-DAY = re.compile(r'<details data-day="(\d{4}-\d{2}-\d{2})"( open)?>(.*?)</details>', re.DOTALL)
+#: One day's disclosure: its date, its own bookmark, whether it starts open, the rest.
+#: The anchor has to agree with the date, since `archived_news_targets` forwards retired
+#: day bookmarks to `changelog-date-<day>` on this page.
+DAY = re.compile(
+    r'<details data-day="(\d{4}-\d{2}-\d{2})" id="changelog-date-\1"( open)?>(.*?)</details>',
+    re.DOTALL,
+)
 #: One result in a day (`added_entry`), linked to its row in All Results: its id, its V,
 #: C and S rungs.
 ENTRY = re.compile(
     r'<li(?: class="site-rollup-superseded")?><a href="results\.html#(t-\d{3})"'
     r'(?: title="Superseded")?>(T-\d{3})</a> .*?<small>[^<]* · (V\d) (C\d) (?:<b>)?(S\d)'
 )
-#: One house move: the result and the rest of the line, its counts' case links.
+#: One house move: the result and the rest of the line, its counts' case links. The line
+#: calls it the record packing (`house_entry`, the owner, 26 October 2026).
 HOUSE = re.compile(
-    r'<li><a href="results\.html#(t-\d{3})">(T-\d{3})</a> is now the house best packing at '
+    r'<li><a href="results\.html#(t-\d{3})">(T-\d{3})</a> is now the record packing at '
     r"(.*?)</li>"
 )
 #: One source's rows: the packet's address, the claims, the counts' span and the credit.
@@ -60,12 +70,15 @@ ROWS = re.compile(
     r'<li><a href="([^"]+)" target="_blank" rel="noopener noreferrer">([^<]+)</a> '
     rf"beyond n = (\d+)<small>n = ([0-9{EN_DASH}]+) · (.*?)</small></li>"
 )
-#: The most bytes the section may weigh. On 22 October 2026, over 15-22 October, it
-#: measured 23,651 bytes: 45 results, 61 counts' house best packings on seven days and 11
-#: sources' 876 rows. The results page's seven days, retired with #737, had held 71
-#: results, about 22,000 bytes alone. Past this the section is becoming a second results
-#: table; the remedy is a shorter entry, not a higher number.
-RECENT_BYTES = 40_000
+#: The most bytes the log may weigh. The home page's 40,000-byte ceiling was argued to
+#: stop a *section of the home page* becoming a second results table. This page's job is
+#: to be the complete log, so that argument does not carry over and the ceiling is
+#: re-argued from measurement here, as `OR-17` asks. Measured on 26 October 2026, the day
+#: it moved: 147,729 bytes over 35 day blocks, 2,332 line items and 69 changes, against
+#: the 23,651 bytes the seven-day section weighed on 22 October. The number below leaves
+#: the record about a third to grow before it binds. Past it the remedy is still a
+#: shorter line, not a higher number: a line is one item, and a story belongs to News.
+RECENT_BYTES = 200_000
 #: The most bytes the News box may weigh: the newest three News articles of each level,
 #: nine cards, three shown and six behind the filter. It measured 42,550 bytes on 22
 #: October 2026 and 55,692 on 24 October, after #787's two S3 stories, when the three S3
@@ -77,7 +90,7 @@ NEWS_BOX_BYTES = 64_000
 
 @pytest.fixture(scope="module")
 def home() -> str:
-    return site_renders.html("index.html")
+    return site_renders.html(render_changelog.CHANGELOG_PAGE)
 
 
 @pytest.fixture(scope="module")
@@ -87,8 +100,8 @@ def overview() -> overview_data.Overview:
 
 @pytest.fixture(scope="module")
 def section(home: str) -> str:
-    """The section, from its heading to the end of its last disclosure."""
-    begin = home.index('id="recently-added"')
+    """The log, from the page's heading to the end of its last disclosure."""
+    begin = home.index('id="changelog"')
     end = home.index("</details></div>", begin) + len("</details></div>")
     return home[begin:end]
 
@@ -99,9 +112,8 @@ def days(section: str) -> dict[str, tuple[bool, str]]:
 
 
 def _window(overview: overview_data.Overview) -> tuple[date, date]:
-    """The section's window: the newest arrival of any kind and the seven days before."""
-    until = arrival_reference(overview)
-    return until - timedelta(days=overview_sections.ADDED_DAYS), until
+    """The log's window: the whole record, up to the newest arrival of any kind."""
+    return date.min, arrival_reference(overview)
 
 
 def test_every_result_of_the_seven_days_is_listed_on_its_day_with_its_rungs(
@@ -231,7 +243,7 @@ def test_an_unstamped_house_or_source_is_left_out_and_the_render_carries_on(
         ],
     }
     monkeypatch.setattr(overview_sections, "_landings", lambda: trimmed)
-    rendered = overview_sections.recently_added(overview)
+    rendered = overview_sections.changelog_rollup(overview, render_changelog.load())
     assert rendered.startswith('<div class="site-rollup site-added">')
     assert source not in {kept.source["id"] for kept in beyond_rows(since, until)}
     assert all(n not in move.counts for move in house_moves(since, until))
@@ -248,7 +260,7 @@ def test_a_stale_house_landing_is_left_out_and_the_render_carries_on(
     """A landing that names a result the count's verified upper bound no longer rests on,
     as `main` would hold after a pull request moved the house without stamping it, is
     left out as an unstamped one is: the page never says a superseded result "is now the
-    house best packing" (#736's review B, finding B2)."""
+    record packing" (#736's review B, finding B2)."""
     since, until = _window(overview)
     moves = house_moves(since, until)
     assert moves
@@ -268,27 +280,28 @@ def test_a_stale_house_landing_is_left_out_and_the_render_carries_on(
     monkeypatch.setattr(overview_sections, "_landings", lambda: moved)
     assert all(n not in move.counts for move in house_moves(since, until))
     assert stale not in {move.result for move in house_moves(since, until)}
-    rendered = overview_sections.recently_added(overview)
+    rendered = overview_sections.changelog_rollup(overview, render_changelog.load())
     assert rendered.startswith('<div class="site-rollup site-added">')
-    assert f">{stale}</a> is now the house best packing" not in rendered
+    assert f">{stale}</a> is now the record packing" not in rendered
 
 
 def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
     overview: overview_data.Overview, section: str, days: dict[str, tuple[bool, str]]
 ) -> None:
-    """Results, houses and rows share one window, from seven days before the newest
-    arrival of any kind to it, read from the record and never the clock; the
-    introduction's span runs from the oldest day shown to the newest, so no block sits
-    outside it (#736's review A, finding A3)."""
+    """Results, houses, rows and changes share one window, the whole record up to the
+    newest arrival of any kind, read from the record and never the clock; the
+    introduction opens on the oldest day shown, so no block sits before it (#736's
+    review A, finding A3, under the owner's wording of 26 October 2026)."""
     since, until = _window(overview)
     shown = sorted(date.fromisoformat(day) for day in days)
     assert shown
     assert since <= shown[0]
     assert shown[-1] == until
-    assert f"over {overview_sections.span_label(shown[0], shown[-1])}," in section
-    assert overview_sections.recent_span(overview) == overview_sections.span_label(
-        shown[0], shown[-1]
+    document = render_changelog.load()
+    assert overview_sections.changelog_since(overview, document) == overview_sections.day_label(
+        shown[0]
     )
+    assert f"since {overview_sections.changelog_since(overview, document)}," in section
     # Bounded at both ends: a move or a source outside the window is left out.
     early = until - timedelta(days=1)
     assert all(move.day <= early for move in house_moves(since, early))
@@ -303,26 +316,36 @@ def test_the_newest_day_starts_open_and_each_day_tallies_what_it_holds(
     assert [opened for opened, _ in days.values()] == [
         index < RECENT_OPEN for index in range(len(days))
     ]
-    for recent in overview_sections.recent_days(overview):
-        _, body = days[recent.day.isoformat()]
-        counts = " ".join(
-            f'<span class="site-rollup-count">· {part}</span>' for part in recent_tally(recent)
-        )
+    changes = Counter(entry["date"] for entry in render_changelog.load()["entries"])
+    for recent in overview_sections.recent_days(overview, days=None):
+        day = recent.day.isoformat()
+        _, body = days[day]
+        tally = [*recent_tally(recent)]
+        if changes[day]:
+            noun = f"change{'' if changes[day] == 1 else 's'}"
+            tally.append(overview_sections.tally_count(changes[day], noun))
+        counts = " ".join(f'<span class="site-rollup-count">· {part}</span>' for part in tally)
         assert f"{counts}</span></summary>" in body
 
 
-def test_a_tally_counts_results_house_best_packings_and_rows_where_a_day_has_them() -> None:
+def test_a_tally_counts_results_record_packings_and_rows_where_a_day_has_them() -> None:
+    """Each part carries its count in bold and its noun in the summary's own case
+    (`tally_count`, the owner's 26 October 2026 wording), and a count of record packings
+    says *new records* rather than naming the house."""
     day = date(2026, 10, 22)
     move = HouseMove(day, "T-225", (204, 227, 229, 260))
     rows = BeyondRows(day, {"id": "s"}, tuple({"n": 330 + i} for i in range(111)))
     corpus = overview_sections.corpus_end()
     assert recent_tally(RecentDay(day, (), (move,), (rows,))) == (
-        "4 house best packings",
-        f"111 bounds beyond {corpus}",
+        "<b>4</b> new records",
+        f"<b>111</b> bounds beyond {corpus}",
     )
     assert recent_tally(RecentDay(day, (), (HouseMove(day, "T-1", (5,)),), ())) == (
-        "1 house best packing",
+        "<b>1</b> new record",
     )
+    assert overview_sections.counted(17) == "<b>17</b> results"
+    assert overview_sections.counted(1) == "<b>1</b> result"
+    assert overview_sections.counted(0) == "no results"
 
 
 def test_house_moves_list_each_count_once_under_its_house() -> None:
@@ -338,10 +361,9 @@ def test_house_moves_list_each_count_once_under_its_house() -> None:
 def test_the_section_links_all_results_and_news(
     section: str, days: dict[str, tuple[bool, str]]
 ) -> None:
-    """The introduction links All Results and News, never the results page's seven days,
-    which #737 retired; each day with results opens All Results on that day alone, a day
-    its Added on preset offers."""
-    assert 'href="results.html#all-results"' in section
+    """The introduction links News, never the results page's seven days, which #737
+    retired; each day with results opens All Results on that day alone, a day its Added
+    on preset offers."""
     assert 'href="news.html"' in section
     assert "added-in-the-last-seven-days" not in section
     results = site_renders.html("results.html")
@@ -366,7 +388,7 @@ def test_the_home_page_additions_stay_brief(section: str) -> None:
     news = news_highlights.render(render_changelog.load())
     weight, box = len(section.encode("utf-8")), len(news.encode("utf-8"))
     print(
-        f"recently added: {weight:,} / {RECENT_BYTES:,}; news box: {box:,} / {NEWS_BOX_BYTES:,}"
+        f"changelog log: {weight:,} / {RECENT_BYTES:,}; news box: {box:,} / {NEWS_BOX_BYTES:,}"
     )
     assert weight < RECENT_BYTES
     assert box < NEWS_BOX_BYTES

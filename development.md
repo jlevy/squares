@@ -1397,10 +1397,29 @@ seventeen-square case carries `n-17,intake`.
 | `tracker` | A tracking issue for a major effort |
 | `n-11`, `n-17`, `n-18` | Work on a notable case. A count gets a case label once it has a tracker issue of its own, or an optimality proof or claim under review. A new one is named `n-<k>`, coloured `7E3D1D` as the others are, and described `Work on the n = <k> case…` |
 | `deep-gate` | A pull request whose [deferred surface](#the-deep-gate-the-deferred-surface-before-the-merge) runs before merge; the label’s own description lists what that surface runs |
+| `blocked:owner-decision` | An open issue that waits on the owner’s ruling, credit choice or policy answer, or on a budget above the owner’s 40 CPU-hour item cap; the owner’s recorded word unblocks it |
+| `blocked:owner-reply` | An open issue held for the owner (`held` in the requests record): no pass posts on it or closes it until the owner posts or lifts the hold |
+| `blocked:standing-hold` | An open issue under a decided, standing suspension, such as the n = 17 intake’s of 13 October 2026; it moves when the owner lifts the suspension |
+| `blocked:author` | An open issue that waits on its author: a question under `awaiting_author`, or data only the author can publish |
+| `blocked:dependency` | An open issue that waits on another lane’s issue, pull request, bead or code landing first |
+| `blocked:compute` | An open issue whose next step is priced above a pass’s cap and within the owner’s item cap, or needs a host a pass lacks; a compute lane runs it, with no owner word needed |
 | `bug`, `enhancement`, `documentation`, `question`, `duplicate`, `invalid`, `wontfix`, `good first issue`, `help wanted` | GitHub’s defaults, in their usual senses; `question` also marks a list of decisions for the owner, such as jlevy/squares#543 |
 
 An intake pass adds `intake` and any case label under the `github-workflows` grant
 ([the runbook’s stage 0](packing/campaign/result-import.md#stage-0-sweep)).
+
+The six `blocked:` labels are the owner’s taxonomy of 26 October 2026: “If issues are
+definitely clearly blocked on me … add a tag or something to indicate the nature of the
+block”. An issue carries at most one, and only while someone other than the pass must
+act: work that is the project’s own and that nobody holds is not blocked.
+The requests record states it as the issue’s `blocked` entry, a type and a one-line
+reason, and `check_requests --github` lists every open issue whose live `blocked:` label
+differs from the record
+([The Requests Record](packing/campaign/result-import.md#the-requests-record)). The
+labels are coloured `B60205` (`owner-decision`), `D93F0B` (`owner-reply`), `5319E7`
+(`standing-hold`), `FBCA04` (`author`), `0052CC` (`dependency`) and `C5DEF5`
+(`compute`), and the pass that changes a `blocked` entry changes the label after its
+merge.
 
 ## The Published Site
 
@@ -2119,8 +2138,12 @@ website or anything else.
 
 ### Maintaining the project changelog
 
-[`CHANGELOG.md`](CHANGELOG.md) and [News](https://jlevy.github.io/squares/news.html) are
-generated from [`packing/site-changelog.yaml`](packing/site-changelog.yaml).
+[`CHANGELOG.md`](CHANGELOG.md), the site’s
+[Changelog](https://jlevy.github.io/squares/changelog.html) and
+[News](https://jlevy.github.io/squares/news.html) are generated from
+[`packing/site-changelog.yaml`](packing/site-changelog.yaml).
+The Changelog page is the whole retained history; News shows the stories rated S3 and
+above and sends a reader to that page for the rest.
 Edit the YAML, then run
 `uv run --frozen --all-extras --group dev python -m devtools.render_changelog` from
 `packing/`; its `--check` mode runs in the ordinary documentation gate.
@@ -2202,8 +2225,8 @@ rather than comparing a commit with itself.
 
 Validate as
 [Hosted CI gates a draft pull request](#hosted-ci-gates-a-draft-pull-request) says,
-review both reader views, and verify the published News page with the normal deployment
-audit after merging.
+review all three reader views, and verify the published News and Changelog pages with
+the normal deployment audit after merging.
 The
 [initial backfill review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md)
 records the disposition of the first 36 PRs.

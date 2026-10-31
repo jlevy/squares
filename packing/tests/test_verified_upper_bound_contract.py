@@ -435,6 +435,11 @@ DECLARED_CONSUMERS = {
         "the verified lane among them, to show where the start needs both; it describes the "
         "field and reads no value of it as s(n)"
     ),
+    "packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/review/side_297.py": (
+        "the #804 297 review decides Kim's reported degree-21 side against the case's "
+        "verified lane, T-174's exact rational ceiling, and reports the margin below it; it "
+        "reads the field as a ceiling the record proves, never as s(297)"
+    ),
     "docs/project/reviews/review-2026-10-13-verification-gaps.md": (
         "the verification-gaps review measures each drawn side and each reported side "
         "against the field as U, the best side the record verifies exactly; it reads it "

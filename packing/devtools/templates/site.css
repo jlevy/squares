@@ -1713,8 +1713,11 @@ body {
    the last piece and its comma go on together. Nothing in the piece moves, and every
    other piece stays a box, so the formula still ends a line only where KaTeX lets it.
    Across windows of 320 to 1600 pixels no line of either table begins with punctuation
-   after a formula, where with the last piece a box 148 of 214 widths had one. */
-.site-results .site-col-result :is(.kpress-math-inline, .katex-html > .base:last-child) {
+   after a formula, where with the last piece a box 148 of 214 widths had one. A News
+   item's prose takes the same rule: at 390 pixels the 19-square entry's formula had sent
+   its period to a line of its own. */
+:is(.site-results .site-col-result, .site-news-prose)
+:is(.kpress-math-inline, .katex-html > .base:last-child) {
   display: inline;
 } /* A result's records, its case link, the register, its evidence, source and reviews,
    are the last entry of its row's popover (`overview_sections._detail`): one line, a dot
@@ -4161,6 +4164,7 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
 }
+
 .kpress :is(h2, h3, h4).site-navigation-heading {
   font-family: var(--kpress-font-sans);
   font-style: normal;

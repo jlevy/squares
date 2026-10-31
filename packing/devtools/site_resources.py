@@ -155,7 +155,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Mykhailo Polkovskyi",
         (
             "The lower of the two 204 certificates issue 719's release published, retained"
-            " and replayed here, and the house best packing at 204 (T-231)."
+            " and replayed here, and the record packing at 204 (T-231)."
         ),
     ),
     (
@@ -349,6 +349,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             " twelve are rows beyond the corpus."
         ),
     ),
+    (
+        "https://gist.github.com/amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6",
+        "Amund Kristiansen",
+        (
+            "An exact certificate at 344, beyond the corpus, of the 307 record design"
+            " stretched one step, the author says (#819); the row at the count."
+        ),
+    ),
 )
 
 #: David Ellsworth's Squares in Squares catalogue, the record's `[Kingbird]`.
@@ -433,6 +441,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         (
             "Minimal polynomials of the record sides at n = 88, 126, 172, 199 and 263,"
             " found numerically, in an archive attached to the issue."
+        ),
+    ),
+    (
+        "https://github.com/jlevy/squares/issues/804#issuecomment-6397593690",
+        "Exact Side of the Record Packing at 297",
+        "Hyukdong Kim",
+        (
+            "The degree-21 minimal polynomial of the record side at n = 297, with an exact"
+            " configuration attached."
         ),
     ),
     (

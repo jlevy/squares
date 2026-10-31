@@ -1,0 +1,23 @@
+{
+ "format": "issue-attachment-sources-v1",
+ "issue": "https://github.com/jlevy/squares/issues/804",
+ "comment": "https://github.com/jlevy/squares/issues/804#issuecomment-6397593690",
+ "attachment": {
+  "url": "https://github.com/user-attachments/files/33925868/s297-exact-configuration.zip",
+  "bytes": null,
+  "sha256": "e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7",
+  "sha256_stated_by_comment": true,
+  "sha256_measured": false,
+  "raw_asset_retained": false,
+  "licence": "CC0 1.0 (stated by the comment)",
+  "not_read": "The importing session's proxy answers user-attachments URLs with 403, so the archive was neither downloaded nor measured; under CC0 it may be kept once it is reachable."
+ },
+ "members": [
+  {
+   "path": "n297.minpoly.json",
+   "sha256": "e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826",
+   "stated_by_comment": true,
+   "retained": false
+  }
+ ]
+}

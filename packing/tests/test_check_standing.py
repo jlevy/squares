@@ -238,18 +238,19 @@ def test_a_superseded_entry_whose_bound_still_stands_is_refused(records: view.Re
 
 
 def test_a_superseded_report_is_held_to_the_reported_lane_alone(records: view.Records) -> None:
-    """T-046 reports Hosono's rectangle certificates at C0. Its replays (T-045, T-070)
-    held verified bounds equal to some of its values, the last at n = 52 until T-082's
-    certificate was decided there on 6 October, and every one is beaten in the reported
-    lane, so it is superseded without a problem. The rule is held on the same entry
-    stating n = 96's verified 997/100, below the reported 10 there: superseded as a
+    """T-046 reported Hosono's rectangle certificates at V0/C0 until its census entries
+    raised it to V3/C3 on 26 October; it is held here as it stood then. Its replays
+    (T-045, T-070) held verified bounds equal to some of its values, the last at n = 52
+    until T-082's certificate was decided there on 6 October, and every one is beaten in
+    the reported lane, so it is superseded without a problem. The rule is held on the same
+    entry stating n = 96's verified 997/100, below the reported 10 there: superseded as a
     report, and refused at a replayed rung."""
-    record = records.results["T-046"]
+    record = {**records.results["T-046"], "verification": "V0", "confirmation": "C0"}
     assert record["confirmation"] in check_standing.UNREPLAYED
     assert view.standing(record, records) == view.SUPERSEDED
     assert check_standing.problems(record, view.SUPERSEDED, records) == []
     assert "beaten at n = 18" in check_standing.summary(record, view.SUPERSEDED, records)
-    tied = _entry(records, "T-046", headline="`s(96) ≥ 997/100`", scope={"n_values": [96]})
+    tied = {**record, "headline": "`s(96) ≥ 997/100`", "scope": {"n_values": [96]}}
     assert check_standing.problems(tied, view.SUPERSEDED, records) == []
     assert "equals the verified bound at n = 96" in check_standing.summary(
         tied, view.SUPERSEDED, records

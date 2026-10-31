@@ -34,6 +34,17 @@ allowlist:
       These two comparisons bind runtime inputs and build products across saved
       recordings, not Git source. The historical source digest remains reported
       build metadata; current crate source and Git revisions do not gate acceptance.
+  - path: packing/devtools/audit_valid7_roots.py
+    kind: download
+    boundary: >-
+      `scan` reads two files the repository does not retain: the release asset
+      v7cert.tar.zst of wand125/square-packing's data/valid7-lean-certs-v1, downloaded
+      and held to the SHA-256 pinned at review on 26 October 2026, and version 2's
+      generated-sources.sha256 from a checkout of wand125/square-packing at 649a920,
+      held to the digest the wand125-valid7-lean-v2-2026-10-17 packet's manifest pins;
+      it also checks each pickle's bytes against the archive's own v7cert.sha256 line,
+      without loading it. The retained leaves file and X-mode list are read from Git
+      and compared with nothing but the receipt's counts.
   - path: packing/devtools/couzo_678_replay.py
     kind: download
     boundary: >-

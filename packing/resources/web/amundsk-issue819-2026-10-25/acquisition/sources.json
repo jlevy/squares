@@ -1,0 +1,36 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-26T02:35Z",
+  "git_scope": "Blobless clone of the gist amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6, checked out at the revision issue #819 pins, f916f69 (committed 2026-10-25T19:04:50Z, 24 seconds before the issue), which is the gist's only revision and its head when read on 26 October. All 3 files are retained, each bound to its Git blob at the pin: the dilation certificate the claim rests on (s344_amund.cert), the binary64 packing it was made from (s344_amund.input.txt) and the gist's README. No source program was executed.",
+  "sources": [
+    {
+      "id": "amundsk-issue819-gist",
+      "source_url": "https://gist.github.com/amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6",
+      "source_ref": "main",
+      "source_commit": "f916f69f0ae570935991440712a08ad930469da3",
+      "committed_utc": "2026-10-25T19:04:50Z",
+      "git_tree": "17d88948244316f1b4623d5d7b2ff91bd0d087c5",
+      "archived_path": "packing/resources/web/amundsk-issue819-2026-10-25/source",
+      "subtree_manifest": "packing/resources/web/amundsk-issue819-2026-10-25/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "s344_amund.cert",
+        "s344_amund.input.txt"
+      ],
+      "subtree_file_count": 3,
+      "subtree_total_bytes": 72754,
+      "retained_file_count": 3,
+      "retained_total_bytes": 72754,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "CC0 1.0: the gist's README and issue #819 both dedicate the certificate, the input packing and the README to the public domain under CC0 1.0. The gist's README and issue #819 credit Amund Kristiansen (GitHub @amundsk) and name Evan Daniel's MIT-licensed evand/square-packing at 7982d7a for the certificate format, the dilation producer search/packer/dilate_cert.py, the fq quench and the two checkers search/exact/verify_cert.py and verify_cert2.py; the issue says the packing is the register's 307 record design (Nate Chaoweeraprasit (itsnaka) / PingYou Ltd, PR #574) stretched one K-step and polished, a lineage other than Francisco Couzo's packing at 344. The issue discloses that the search, the certificate and the report were done by Claude (Anthropic) in Claude Code at the author's direction.",
+      "claims": [
+        "Issue #819 (opened 2026-10-25T19:05:14Z by amundsk, no comments when read) reports one upper bound beyond the case corpus, s(344) <= 18.992567544845, the exact rational side of s344_amund.cert, 9496283772422138783772412642309/500000000000000000000000000000, rounded up at 12 places; it prints the SHA-256 of the certificate and of its binary64 input, and calls it below Francisco Couzo's certificates/best/n344.cert at franciscouzo/square-packing 1c17153 (the same file as at 964ee2b, #763), 18.992727809347, by 1.60e-4, the smallest public bound it found.",
+        "The issue says the certificate is a dilation made with Evan Daniel's search/packer/dilate_cert.py (evand/square-packing at 7982d7a) on macOS arm64 with Python 3.14.6 and Apple libm, from the binary64 packing beside it, with delta 1e-12, and that only the comment line was edited afterwards; it certifies the upper bound only.",
+        "The author reports that Evan Daniel's two exact checkers at 7982d7a, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate, with least wall clearance 6.054e-13, least pair separation 1.215e-12 and 794 close pairs, re-checked on the file downloaded from the gist, and that no full line of 19 upright squares occurs; the two checkers share an author and the certificate format, which also made the certificate.",
+        "The issue says the packing is a new packing of another lineage than Couzo's at 344: the register's 307 record design (Nate Chaoweeraprasit (itsnaka) / PingYou Ltd, PR #574; a 6+6 two-band family-A packing) stretched one K-step, started from 307 minima of that design and polished in float32 GPU batches of kicked variants with Daniel's fq quench in 64-bit. Matched one to one with Couzo's 344 by an optimal assignment over the eight symmetries, it moves 67 squares beyond 0.1 and 122 beyond 0.01 (largest 0.993), with 114 tilted squares against 125.",
+        "The issue states no exact KKT solve and no rigidity or local-optimality analysis: only the upper bound is claimed."
+      ]
+    }
+  ]
+}

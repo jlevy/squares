@@ -172,8 +172,8 @@ houses:
     result: T-134
     landed: '2026-10-12'
   - n: 268
-    result: T-240
-    landed: '2026-10-25'
+    result: T-242
+    landed: '2026-10-26'
   - n: 269
     result: T-174
     landed: '2026-10-19'
@@ -224,6 +224,8 @@ sources:
     landed: '2026-10-24'
   - id: amundsk-issue798-2026-10-24
     landed: '2026-10-25'
+  - id: amundsk-issue819-2026-10-25
+    landed: '2026-10-26'
   - id: aqibrazadev-blending-2026-10-23
     landed: '2026-10-24'
   - id: couzo-02f9690-2026-10-09

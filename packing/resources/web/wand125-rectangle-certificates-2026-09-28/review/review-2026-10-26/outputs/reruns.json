@@ -1,0 +1,13 @@
+{
+  "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+  "kind": "t046-review-reruns/v1",
+  "runs": [
+  {"certificate": "rect_n95_L98418", "fields_compared": 12, "fields_differing": [], "min_certified_lower_bound": 1.000100000737471, "nodes": 181943, "r": 192, "returncode": 0, "summary_build": {"profile": "release", "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)", "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88", "target": "x86_64-unknown-linux-gnu"}, "verdict": "verified", "wall_seconds": 3.03},
+  {"certificate": "rect_n95_L98418", "fields_compared": 12, "fields_differing": [], "min_certified_lower_bound": 1.000100135927386, "nodes": 184235, "r": 200, "returncode": 0, "summary_build": {"profile": "release", "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)", "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88", "target": "x86_64-unknown-linux-gnu"}, "verdict": "verified", "wall_seconds": 3.19},
+  {"certificate": "rect_n72_L874", "fields_compared": 12, "fields_differing": [], "min_certified_lower_bound": 1.000100000114479, "nodes": 101741, "r": 80, "returncode": 0, "summary_build": {"profile": "release", "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)", "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88", "target": "x86_64-unknown-linux-gnu"}, "verdict": "verified", "wall_seconds": 2.5},
+  {"certificate": "rect_n27_L56", "fields_compared": 9, "fields_differing": [], "min_certified_lower_bound": 1.0017456045669246, "nodes": null, "r": 0, "returncode": 0, "summary_build": {"profile": "release", "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)", "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88", "target": "x86_64-unknown-linux-gnu"}, "verdict": "verified", "wall_seconds": 0.36},
+  {"certificate": "rect_n27_L56", "fields_compared": 12, "fields_differing": [], "min_certified_lower_bound": 1.000100059876816, "nodes": 83901, "r": 197, "returncode": 0, "summary_build": {"profile": "release", "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)", "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88", "target": "x86_64-unknown-linux-gnu"}, "verdict": "verified", "wall_seconds": 1.18},
+  {"certificate": "rect_n94_L9795", "fields_compared": 12, "fields_differing": [], "min_certified_lower_bound": 1.0001000000378433, "nodes": 175377, "r": 193, "returncode": 0, "summary_build": {"profile": "release", "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)", "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88", "target": "x86_64-unknown-linux-gnu"}, "verdict": "verified", "wall_seconds": 2.74}
+  ],
+  "status": "PASS"
+}

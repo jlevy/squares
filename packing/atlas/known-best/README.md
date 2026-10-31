@@ -872,7 +872,49 @@ at 182, made on T-174’s witness, is removed.
 The evidence is retained in
 [`cases/regularized_drawings/think-2lzo-2026-10-25/`](../../cases/regularized_drawings/think-2lzo-2026-10-25/README.md).
 The index draws 86 views: 27 by the axis tool, 38 by Evan Daniel’s regularizer and 21 by
-the grid-slack generator’s version 1.
+the grid-slack generator’s version 1. The pass of 26 October 2026 adopted Evan Daniel’s
+certificate at 268 (T-242, think-3anz), his exact descent of Vladislav Lavrentev’s
+public Kaggle packing, which the pass of 25 October could not adopt there, since it
+moved 268 to T-240 and one day’s archive holds one prior state a count.
+It moves the house best packing from T-240 by $4.48 \times 10^{-12}$: one arrangement
+with T-240’s packing and another placement of it.
+Both generators ran on the new witness.
+Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-26-n268-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 28 CPU-seconds) draws views at the witness’s side, and
+the selection admits the 1 degree view (row 10): it takes the axis tool’s light, uneven
+and near-axis counts from 18, 30 and 23 to 5, 19 and 0, and its sides from 611 / 721 to
+751 / 759, worse on no goal.
+Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-26-n268-evand`, 132
+CPU-seconds) solves the witness to a certified KKT local minimum within the source’s
+relative padding of $10^{-20}$, about $1.7 \times 10^{-19}$ below its side, and its view
+at the side goes to review (row 7: two squares’ contact counts fall while no total
+does); no view is below the house.
+The evidence is retained in
+[`cases/regularized_drawings/think-3anz-2026-10-25/`](../../cases/regularized_drawings/think-3anz-2026-10-25/README.md).
+The index still draws 86 views.
+
+On 26 October 2026 the seven exact algebraic houses that 23 October left owed were
+regularized (think-mbdw): T-174 at 153 and 207 and T-193 at 102, 123, 258, 259 and 302.
+The grid-slack generator’s version 2 draws a witness over a number field in its own
+field: its frame is the witness’s exact pose over $\mathbb{Q}(\alpha)$, the placement
+works in binary64 as before, and the re-solve and the view are in the field, at the
+witness’s side, which is $U$ exactly.
+Each view is decided by `exact_verify` over `sqpack.field` and by
+`devtools.check_algebraic_witness_independent`, the policy’s second route over a number
+field, which shares no arithmetic with it.
+Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-mbdw-2026-10-26-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 28 CPU-minutes) draws a view at every count, and the
+selection admits the half-degree view at six and the 5-degree view at 302 (row 10), each
+better than the house drawing on some goal and worse on none: at 302 the light, uneven
+and near-axis squares go from 142, 204 and 29 to none, and the sides from 284 / 948 to
+960 / 962; at 259 from 111, 163 and 26 to 4, 20 and 0, and 264 / 678 to 777 / 787; at
+153 and 207, whose houses had no light, uneven or near-axis square, the sides rise from
+446 to 474 and from 640 to 662. `SETTLED`’s seven `regularization-owed` entries are
+removed, and no count owes a regularization.
+The evidence is retained in
+[`cases/regularized_drawings/think-mbdw-2026-10-26/`](../../cases/regularized_drawings/think-mbdw-2026-10-26/README.md).
+The index draws 93 views: 27 by the axis tool, 38 by Evan Daniel’s regularizer, 21 by
+the grid-slack generator’s version 1 and 7 by its version 2.
 
 ### The default picture
 
@@ -893,7 +935,7 @@ Every default picture is drawn in its canonical pose, which
 [flip regularization](../../../docs/project/policies/regularization-policy.md#13-flip-regularization)
 chooses: turned by one of the container’s eight symmetries so that its heaviest quadrant
 is lower right and the heavier of that quadrant’s neighbours lower left, which keeps the
-published pose of 252 counts, n = 11 and the integer grids among them.
+published pose of 250 counts, n = 11 and the integer grids among them.
 The pose is kept in its own record,
 [`flip-regularization.json`](flip-regularization.json), as `rotate` and `flip`, and is
 applied to the drawn picture’s coordinates when the composites and the site draw it; the
@@ -921,11 +963,13 @@ The same file’s `states` says, for every count n = 1..324, whether the picture
 is regularized: `regularized` where a view of Evan Daniel’s regularizer or the
 grid-slack generator is drawn, `regular-as-published` where the house drawing has no
 uneven and no near-axis square, `decided-no-better` where the strong generators ran on
-that very witness and drew nothing better, `regularization-owed` where they ran and drew
-no view the improvement rule could judge, so the drawing is not regularized and its
-`SETTLED` entry names the bead that owes it (the exact algebraic houses, under
-think-mbdw), `exempt` with the bead that owns it, and `pending` otherwise.
-The totals count each state apart.
+that very witness and drew nothing better, `exempt` on the owner’s word with the bead
+that owns it, and `pending` otherwise.
+`regularization-owed`, where the runs drew no view the improvement rule could judge and
+the drawing waited on an open bead, is retired: the exact algebraic houses were so from
+23 to 26 October 2026, under think-mbdw, and since then the records tier fails a count
+in it (the owner, 26 October 2026: “When something lands on our main rendered lists, the
+regularization should be done.”). The totals count each state apart.
 Each state carries the drawn picture’s measures, the witness’s id, its source’s key,
 path and revision, and its side, and the runs that decided it.
 The index’s `status: regularized` means only that the layer holds a view: at n = 176 it
@@ -933,10 +977,12 @@ held the axis tool’s view while the raw house was drawn.
 A view that lapses with its witness is now recorded on the axis tool’s record (`lapsed`)
 rather than only printed.
 The records-tier step
-`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+`every drawn picture is regularized, regular as published, decided or exempt on the owner's word`
 fails on a pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name
-with its bead, and on a named count that is no longer pending; `bead tree` holds each
-bead the list names open.
+with its bead, and on a named count that is no longer pending; on an exemption without
+the owner’s recorded word or past its review date; and on a house the change moves
+without regularizing and flip-posing it.
+`bead tree` holds each bead the list names open.
 
 `--check-atlas` runs in the records tier on every pull request: it holds the index to
 the manifest, the witnesses and the views by digest, and reads each other generator’s

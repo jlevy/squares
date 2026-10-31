@@ -3389,6 +3389,24 @@ sources:
       of 964ee2b''s packings, are above Couzo''s 43f666c and are not recorded. Retained under the author''s
       CC0 1.0 dedication (#755, issuecomment-6388401978). Claude assistance disclosed. No local or global
       optimality claim.'
+  - key: '[Kristiansen issue 819 2026-10-25]'
+    authors:
+    - Kristiansen
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-25'
+    lineage: builds-on-project
+    credit: Kristiansen after Chaoweeraprasit, PingYou Ltd, Daniel, Levy
+    short_credit: Kristiansen after Chaoweeraprasit et al.
+    note: >-
+      One exact dilation certificate in the gist amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6 at
+      f916f69f0ae570935991440712a08ad930469da3, beyond the case corpus at 344, a packing the
+      issue says it found by stretching the register's 307 record design (Nate Chaoweeraprasit,
+      with PingYou Ltd's certificate, PR #574) one K-step and polishing it with Evan Daniel's fq
+      quench, made with Daniel's dilate_cert.py and checked with his checkers. A beyond-horizon
+      row below Francisco Couzo's 964ee2b packing at the count. Retained under the author's CC0
+      1.0 dedication in the gist and the issue. Claude assistance disclosed. No local or global
+      optimality claim.
   - key: '[Muglich issue 686 2026-10-19]'
     authors:
     - Muglich
@@ -4009,6 +4027,63 @@ sources:
       the same repository's, credits-project, and the credit carries the cover's
       antecedents, as [wand125 exact covers 2026-10-01] credits them; the commit names Claude
       as co-author. Not built here.
+  - key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-16'
+    credit: Hosono after Daniel, Levy, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
+    lineage: credits-project
+    note: >-
+      Hiroaki Hosono's Lean kernel proof of Evan Daniel's ValidTilt9, and with Daniel's
+      reduction of s(k^2 - 4) = k for every k >= 8 (validTilt9, valid9, bentz4), in
+      wand125/square-packing problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/,
+      added by 2c75edc and e99f5e3 and retained at the pin
+      319a779efcc78db2f92bffc87844446f8723b01d (2026-10-16T04:47:29Z) in
+      web/wand125-validtilt9-lean-2026-10-16/: Daniel's k2m4 certificate on his library
+      (evand/square-packing 060c1a1..44a105e) with a faster row-minimum check, over 1,275,911
+      generated files the source lists by digest in the release validtilt9-lean-v1. The
+      source's receipts give about 7,390 CPU-hours. The lineage is the same repository's,
+      credits-project, so the credit names this project as [wand125 n59 Lean kernel
+      2026-10-11] does, and carries the method's antecedents, as Daniel's own keys for T-081
+      do; the commits name Claude as co-author. Not built here.
+  - key: '[wand125 Valid7 Lean 2026-10-11]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-11'
+    credit: Hosono after Daniel, Burns, Massaccesi
+    short_credit: Hosono after Daniel et al.
+    lineage: independent
+    note: >-
+      Hiroaki Hosono's Lean kernel proof of Evan Daniel's Valid7, and with Daniel's reduction
+      of s(k^2 - 3) = k for every k >= 6 (valid7, bentz, validTilt7), contributed as PR #6 to
+      evand/square-packing and merged at 060c1a1052029f81f30c8a97134ee03666b1bb77
+      (2026-10-11T02:36:49Z), retained in web/evand-valid7-lean-2026-10-11/: the closure, the
+      generators and VALID7.md; the 9,800 root modules and Main.lean are generated from the
+      release data/valid7-lean-certs-v1, whose v7cert.tar.zst is pinned by SHA-256 in the
+      packet's root-name audit. MIT, under Daniel's repository's licence; the lineage is that
+      repository's, as Daniel's keys for T-064 have it. The merge names Claude as co-author.
+      Not built here.
+  - key: '[wand125 Valid7 Lean v2 2026-10-17]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-17'
+    credit: Hosono after Daniel, Levy, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
+    lineage: credits-project
+    note: >-
+      Version 2 of Hiroaki Hosono's Lean kernel proof of Evan Daniel's Valid7, in
+      wand125/square-packing lean/valid7/ at 649a92042b4b79dda1eca1749c34029aee60990e
+      (2026-10-17T23:45:52Z): the same theorem from the same 9,800 certificates with
+      re-certified leaves on Daniel's library at wand125 c5c7f00, 62,626 generated files in
+      the release valid7-lean-v2, a recorded run of about 798 CPU-hours. The folder states no
+      licence; web/wand125-valid7-lean-v2-2026-10-17/ pins its files by digest and retains
+      none. The lineage is that repository's, credits-project, so the credit names this
+      project, as for [wand125 ValidTilt9 Lean 2026-10-16]. The commit names Claude as
+      co-author. Not built here.
   - key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     authors: [Daniel]
     year: 2026
@@ -4183,6 +4258,47 @@ sources:
       retained beside it. MIT-licensed; Claude assistance disclosed. The KKT and
       local-minimum statements are the author's numerical evidence; no global optimality
       claim. Retained in web/evand-n182-2026-10-25/.
+  - key: '[Daniel S12H Lean 2026-09-28]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-09-28'
+    credit: Daniel after Burns, Massaccesi
+    short_credit: Daniel after Burns et al.
+    lineage: independent
+    ai_assistance:
+      sentence: 'The source’s `CREDITS.md` says the work was produced by Claude (Anthropic) in a single session under human direction.'
+      marker: 'Claude (Anthropic)'
+      anchor: 'Evan Daniel'
+    note: >-
+      Evan Daniel's Lean kernel proof SquarePacking.s12_ge_15680_3951 : (15680/3951 : ℝ) ≤
+      minSide 12 (S12HLower.lean), first committed at evand/square-packing 513bb66 on 28
+      September 2026 under s12/lean/, from T-049's weighted point certificate through the
+      generic BoxTree verifier; the 320 part files are generated and not stored. Retained in
+      web/evand-exact-and-local-reports-2026-10-07/ at f58a017, with its nine-module closure
+      receipt. Its LICENSE names Evan Daniel and its CREDITS.md credits the weighted
+      exact-rational covering method to Sam Burns and Gustavo Massaccesi, as the keys of
+      T-049 do. Not built here.
+  - key: '[Daniel n299 2026-10-26]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-26'
+    lineage: independent
+    credit: Daniel after Deotte
+    note: >-
+      One complete exact certificate at evand/square-packing@1be69ca8a088035ccced0e279e40abea81e1d9f3,
+      unchanged at the head 6067db5bf4d41dab7f0e1475e9fa845c0c6d2133 that the packet pins,
+      reported on issue 824: s(299) <= 8901847717666168847717657266821/(5*10^29), a
+      dilation of a binary64 packing the source calls new, built by its implementation of
+      Chris Deotte's multi-gadget fault-line DP from a start the issue credits to Deotte's
+      public Kaggle s(334) packing. The binary64 packing it dilates, the pre-descent
+      packing, the exact solver's failed 80-digit point and its report, and the source
+      store's prior facts at 299 are retained beside it. For this certificate the source
+      names nothing of this project's beyond the comparison its _prior.json draws from the
+      register, so the key is independent, as the 24 October key of its Kaggle descents is.
+      MIT-licensed; Claude assistance disclosed. Local optimality is not established, by the
+      issue's word; no global optimality claim. Retained in web/evand-n299-2026-10-26/.
   - key: '[Kim exact forms 2026-10-25]'
     authors: [Kim]
     year: 2026
@@ -4205,6 +4321,26 @@ sources:
       exact configurations at 172 and 263, attached to a comment the same day, are kept as
       derived facts by the same rule in web/hyukdongkim-t244-configurations-2026-10-25/.
       Claude assistance disclosed. Upper bounds only; no optimality claim.
+  - key: '[Kim s297 2026-10-25]'
+    authors: [Kim]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-25'
+    lineage: builds-on-project
+    credit: Kim after Couzo, Daniel, PingYou Ltd, Levy
+    short_credit: Kim after Couzo et al.
+    note: >-
+      Issue 804, comment of 12:23:57Z (issuecomment-6397593690), with the comment of 12:00:41Z
+      before it: Hyukdong Kim's exact side of the best-known packing at 297, the only real root
+      of an irreducible degree-21 integer polynomial printed in the comment, the stationary side
+      of Francisco Couzo's packing as Evan Daniel and PingYou Ltd improved it (T-174), and
+      3.36e-90 below PingYou Ltd's certificate. The comment attaches an exact configuration,
+      s297-exact-configuration.zip (SHA-256
+      e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7, the comment's digest),
+      under CC0 1.0; the importing session could not download it. The comment's text, the
+      polynomial as a derived fact and this repository's own exact construction of the same
+      side from T-174's certificate are in web/hyukdongkim-s297-2026-10-25/. Claude assistance
+      disclosed. An upper bound only; no optimality claim.
   - key: '[Jatloe n12 Lean 2026-10-16]'
     authors: [Jatloe, Gurevitch, Lewis, Ahmed]
     year: 2026
@@ -4286,3 +4422,4 @@ credited_names:
   Kirill Tymchishin: Tymchishin
   Vladislav Lavrentev: Lavrentev
   Hyukdong Kim: Kim
+  Chris Deotte: Deotte

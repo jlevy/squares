@@ -33,9 +33,10 @@ W1 phase on one branch:
    [`devtools.intake_sweep`](../devtools/intake_sweep.py), which reads every source in
    [the table below](#intake-sources) and prints each item the record has not taken in,
    and under **Regularization owed** each count whose drawing still waits for the strong
-   generators, with the bead that owns its runs.
-   It exits nonzero while any item lacks an open bead to own it, or waits on something
-   that has already happened.
+   generators, with the bead that owns its runs, and each exemption for the owner.
+   It exits nonzero while any item lacks an open bead to own it, its bead has gone quiet
+   (no update in 7 days, or a claim whose session is gone), a regularization is owed on
+   main, or it waits on something that has already happened.
    Read **Needs Action** first, then **Not Checked**: a source the sweep could not read
    is not a clean source.
 2. **Own each item** as [stage 0](#stage-0-sweep) says: a bead for each new result, a
@@ -94,7 +95,7 @@ W1 phase on one branch:
    counts, each result issue also gets a
    [report-order verdict comment](#report-order-verdict-comments).
    Once the deploy is verified, run `check_requests --report` and close each closeable
-   issue with its final comment ([Close a Settled Issue](#close-a-settled-issue)).
+   issue with its final comment ([Close an Answered Issue](#close-an-answered-issue)).
 8. **Sweep again** with `make intake`, after the branch’s changes to the records and
    again after the merge.
    The sweep, like `check_requests --report`, is what finds the replies due: it lists
@@ -102,9 +103,9 @@ W1 phase on one branch:
    closeable issue still open under **Needs Action** until it is closed.
    Each new item it finds is triaged read-only, with a proposed disposition, before any
    of it is worked ([stage 1](#stage-1-triage)). The pass is done when nothing needs
-   action, every count it re-housed is regularized or owned by an open bead under
-   **Regularization owed**, and every reply it owes is posted and recorded, or when the
-   pull request says why each remaining item waits.
+   action, every count it re-housed is regularized, regular as published or decided no
+   better, or exempt on the owner’s word, and every reply it owes is posted and
+   recorded, or when the pull request says why each remaining item waits.
 
 The pass needs network access to `github.com`, for Git and for the API through `gh`;
 `kingbird.myphotos.cc`, for the catalogue capture; `evand.github.io`, for imports from
@@ -214,7 +215,7 @@ claude/intake-YYYY-MM-DD, with today's date.
    decided the pass's counts, draft each result issue's verdict comment with
    devtools.intake_comments (stage 7, "Report-Order Verdict Comments"). Once the
    deploy is verified, run `check_requests --report` and close each closeable issue
-   with its final comment (stage 7, "Close a Settled Issue"). A question to the
+   with its final comment (stage 7, "Close an Answered Issue"). A question to the
    author goes under the issue's awaiting_author and holds it open only when the
    record asserts something the answer could falsify and no measurement here can
    settle it; any other goes in the closing comment. Post nothing on, and close
@@ -252,7 +253,7 @@ Every input reaches the record through one of these sources, and the sweep reads
 | Other catalogues and releases | Read by hand: the register’s other `current-catalogue` and `first-party-release` sources, UnitSquare’s release today. The sweep prints when each was last reviewed | A later release: an import. Nothing new: the source’s `reviewed` date moves |
 | Watched repositories | Every repository the source register, a packet’s acquisition record, or the site’s list of other projects names. `git ls-remote` reads each head, and a fetch of commits and trees finds the commits past every pin and every read, and the commits a pin contains whose changed paths no packet at or after them retains | A new result: an import bead, then a packet at the head. New evidence for a registered entry: an evidence update. Nothing to import: a read in [`intake-watch.yaml`](intake-watch.yaml) |
 | The record’s own queues | Counts pending catalogue intake, deferred conflicts, results and asks queued on open issues, triage and replies owed, the validation backlog | Nothing new: each names an open bead, and one whose bead has closed gets a new owner |
-| The regularized layer | `atlas/known-best/default-drawings.json`’s `states` against `default_drawings.PENDING_ALLOWED` and `SETTLED`: each count pending regularization, each decision that still owes runs or an outcome, each exemption, and whatever the regularization-state gate fails on | Nothing new: each names an open bead. A pending count the list does not name, or whose bead has closed, gets its runs or an owner |
+| The regularized layer | `atlas/known-best/default-drawings.json`’s `states` against `default_drawings.PENDING_ALLOWED`, `SETTLED` and `UNRATIFIED`: each count pending regularization, each exemption, and whatever the regularization-state gate fails on | Nothing, or exemptions on the owner’s word, listed for the owner. Anything else needs action: a pending count gets its runs, and an exemption without the owner’s word gets that word or its runs |
 | Blocked imports | A queued result’s or ask’s `blocked_on`, and what an open `result-import` bead says it waits on or depends on, read through `gh` and the bead store | A blocker that merged or closed: the wait resumes, or the bead says what it waits on now |
 
 The capture is the network half of the dated research survey that refreshes the retained
@@ -367,16 +368,17 @@ happened:
   decide it, whichever import made the house: an adoption, a Kingbird catalogue intake
   or an exact re-solve.
   The sweep’s **Regularization owed** lists each pending count with the bead its
-  `default_drawings.PENDING_ALLOWED` entry names, each decision whose `owed` names a
-  bead, and each exemption.
-  A pending count that the list does not name, or whose bead is no longer open, needs
-  action: its runs in this pass, or an open bead that owns them, labelled
-  `regularization` (and `validation`, with stage 4’s block and a backlog row, where the
-  runs are held above the cap) and named in the count’s `PENDING_ALLOWED` entry
-  ([stage 5](#adopt-a-house-then-regularize-it)). The entry is made by the pull request
-  that corrects the witness, never by one that re-houses the count, whose runs are owed
-  in that pull request ([the house rule](#the-house-rule)); for a count re-housed
-  earlier whose bead has since closed, this pass’s pull request names the new bead.
+  `default_drawings.PENDING_ALLOWED` entry names, and each exemption; only an exemption
+  on the owner’s word stands there without needing action.
+  A pending count needs action: one the list names is owed on main, and one it does not
+  name, or whose bead is no longer open or has gone quiet, needs its runs in this pass,
+  or an open bead that owns them, labelled `regularization` (and `validation`, with
+  stage 4’s block and a backlog row, where the runs are held above the cap) and named in
+  the count’s `PENDING_ALLOWED` entry ([stage 5](#adopt-a-house-then-regularize-it)).
+  The entry is made by the pull request that corrects the witness, never by one that
+  re-houses the count, whose runs are owed in that pull request
+  ([the house rule](#the-house-rule)); for a count re-housed earlier whose bead has
+  since closed, this pass’s pull request names the new bead.
   The owner, 16 October 2026: “we should make sure all of the intake process covers the
   regularization and we update that for any other new packings we have.
   That should be part of our standard process to do the regularization.”
@@ -719,11 +721,10 @@ The eight record rules are:
 - **A new house best packing or new beyond-horizon rows get a landing.** After changing
   `upper_bound_houses.ADOPTED` or adding a source’s beyond-horizon rows to
   `source-coverage.yaml`, run `python -m devtools.stamp_landed --apply` from `packing/`,
-  which dates them in `packing/frontier/landings.yaml`, the record the home page’s
-  Recently Added places them by.
-  `tests/test_stamp_landed.py` fails until every adopted count and row source has its
-  day, and the merge step re-dates them ([stage 5](#stage-5-publish)); run it again
-  after merging `main`.
+  which dates them in `packing/frontier/landings.yaml`, the record the Changelog page
+  places them by. `tests/test_stamp_landed.py` fails until every adopted count and row
+  source has its day, and the merge step re-dates them ([stage 5](#stage-5-publish));
+  run it again after merging `main`.
 - **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
   `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and the same with `=`
   for an exact value, where $v$ is the value the source certifies, written as a fraction
@@ -1031,12 +1032,11 @@ No adoption waits for the owner’s word, and each case that once did is decided
     [section 5](../../docs/project/policies/regularization-policy.md#5-manual-review-and-adjustment),
     and a view the owner admits is drawn on its review record, as at n = 211 on 16
     October 2026: “Admit it.”
-  - Where the house best packing has an algebraic side, the count draws its exact house
-    and its regularization stays owed under think-mbdw: its `SETTLED` entry’s state is
-    `regularization-owed`, not decided, and its `owed` names the bead: no rational view
-    is `same` or `bound` at an irrational side, and no number-field view is decided on
-    two exact routes yet (the policy’s obligation 1; think-mbdw is that second route).
-    A rational view just above an algebraic U is not drawn.
+  - Where the house best packing has an algebraic side, it is regularized like any
+    other: the grid-slack generator draws its view in the witness’s own number field at
+    $s_W$, and the policy’s two number-field routes decide it (obligation 1; think-mbdw,
+    26 October 2026). No rational view is `same` or `bound` at an irrational side, and a
+    rational view just above an algebraic U is not drawn.
     The owner answered question 13 so on 23 October 2026 (think-r8cn): the best record
     is always the record, and a regularized drawing may change the side only as a strict
     improvement.
@@ -1097,15 +1097,87 @@ changes it, whichever import made the new packing a house:
 
 None of them defers its runs but a witness corrected or re-solved with its house’s side
 unchanged, as below.
-The steps are the regularization guide’s
-[When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes):
-`build_known_best_atlas --update` writes the new witness, the axis tool’s
-`--update-atlas` redraws its view, `default_drawings --update` records each count’s
-state, and `--check-state` names each count left `pending`. Then both strong generators
-run on each pending count, and the selection admits what improves on the drawing.
-Where neither draws better, the count is settled as the guide says.
-`adopt_houses` prints the re-housed counts and these commands when it writes, and with
-`--dry-run` before it does.
+The owner, 26 October 2026: “When something lands on our main rendered lists, the
+regularization should be done.
+There’s no excuse not to, because it should be cheap to calculate.
+We should do flipper regularization as well as the general regularization, and that
+process should be well defined.”
+The owner called n = 259 and 302 drawn unregularized on the home page a serious process
+failure that must never recur: the seven exact algebraic houses rested
+`regularization-owed` on an open bead from 23 to 26 October.
+
+**The regularization step.** Every pull request that moves a house runs it for each
+count it moves, from `packing/`; `adopt_houses` prints these commands with the counts
+and run directories filled in when it writes, and with `--dry-run` before it does.
+The regularization guide’s
+[When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes)
+gives each command’s detail.
+
+1. **Redraw.** `build_known_best_atlas --update` writes the new witness,
+   `regularize_axis_components --update-atlas --n N...` draws the axis tool’s view of
+   it, and `default_drawings --update` records each count’s state.
+   `default_drawings --check-state` names each count left `pending`.
+2. **Run both strong generators** on each pending count, into run directories no run in
+   the index has named: `regularize_grid_slack` at 0.5, 1 and 5 degrees
+   (`--near-axis-degrees`), and Evan Daniel’s driver, `regularize_evand run`. They cost
+   5 to 25 CPU-minutes a count (below).
+   `adopt_houses` names the run directories for the adoption’s day and its lowest and
+   highest re-housed count, since the layer records a run by its directory’s name and a
+   repeated name would replace an earlier run’s record: the index holds only the runs
+   merged into the branch, so two adoptions in flight on one day would otherwise print
+   the same names.
+3. **Select and admit.** `regularize_select` over the four runs, then the `layer`
+   commands it prints. A count whose view the selection admits reads `regularized`.
+4. **Settle the rest.** A count the runs drew nothing better for is settled
+   `decided-no-better` in `default_drawings.SETTLED`, with its runs and the new
+   witness’s source key, path, revision and side.
+   Keep the receipts: each run’s `run.json` or `receipt.json` with its per-count reports
+   under `packing/cases/regularized_drawings/<bead>-<date>/<run directory>/`, and, for a
+   run only the index records, its block, copied by `default_drawings --retain-runs`.
+   Where no strong generator can draw the witness at all, as the number-field houses
+   were before grid-slack’s version 2, stop: land the capability first, or record the
+   owner’s exemption (below).
+   There is no owed state.
+5. **Render and record**, which flip-regularizes every default picture:
+   `render_regularized_atlas --update`, `default_drawings --update`,
+   `flip_regularization --update`, `regularized_drawings` and `render_results --update`
+   (the guide’s
+   [step 5](../../docs/project/guides/regularization-process.md#5-render-and-record)).
+6. **Check.** `default_drawings --check`, `default_drawings --check-state --base-ref
+   origin/main` and `flip_regularization --check`, all three in the records and fast
+   tiers.
+
+**The states a moved count may land in.** `--check-state --base-ref` reads the record of
+the commit the change is built on and takes every count whose witness file differs from
+it, or whose witness identifies itself otherwise, as one the change moves.
+Each lands `regularized`, `regular-as-published` or `decided-no-better` on the new
+witness, or `exempt` on the owner’s word, or `pending` only as a corrected witness
+`PENDING_ALLOWED` names (below).
+Its flip pose is decided again from its picture and must be the one
+`flip-regularization.json` records.
+`regularization-owed` is retired: the gate fails a count in it, and a `SETTLED` decision
+that still owes runs or an outcome.
+
+**What a reviewer checks.** The pull request lists each moved count’s drawing before and
+after with `default_drawings --compare` (below), and its flip pose with
+`flip_regularization --n N`; it names the run directories and the selection’s table, and
+links the retained receipts.
+The reviewer confirms that each moved count’s state is one of those above on the new
+witness, that each settlement’s runs are retained and cover the count, that each
+exemption quotes the owner, and that the state step,
+`every drawn picture is regularized, regular as published, decided or exempt on the owner's word`,
+printed `this change moves N houses` with the counts expected.
+
+**An exemption is the owner’s alone.** An `exempt` entry in `SETTLED` carries the
+owner’s words exactly, the day they were given and the repository file that records them
+(`default_drawings.OwnerWord`), the reason, the bead that will settle the count, and a
+review date at most 14 days after that word.
+The gate finds those words in that file, and fails an exemption without them or past its
+review date. The intake sweep lists each exemption for the owner.
+The four decimal Kingbird witnesses at 39, 55, 290 and 291, which an agent set aside on
+15 October 2026 with no strong run (think-yk2h), stand without the owner’s word until 9
+November 2026 (`default_drawings.UNRATIFIED`), and the gate fails each one still
+unworded after that day.
 It names the run directories for the adoption’s day and its lowest and highest re-housed
 count, since the layer records a run by its directory’s name and a repeated name would
 replace an earlier run’s record: the index holds only the runs merged into the branch,
@@ -1169,9 +1241,10 @@ and holds this one to the base record ([The House Rule](#the-house-rule)). It ru
 reason, then the guide’s render step, and lists the drawings as above.
 
 The records tier’s
-`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+`every drawn picture is regularized, regular as published, decided or exempt on the owner's word`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
-so an adoption cannot pass until its runs have decided every count it re-houses.
+so an adoption cannot pass until its runs have decided every count it re-houses, and on
+a count the change moves whose flip pose the flip record does not hold.
 It also fails on a listed count that is no longer pending and on a `SETTLED` entry
 decided on the earlier witness.
 So the adoption’s pull request takes each count its runs decided off the list, and
@@ -1189,8 +1262,8 @@ gate was added (think-sfas).
 Fourteen of the twenty lost a strong view before the index recorded lapses, and their
 entries in the list are the record of it.
 The sweep’s **Regularization owed** lists every count still pending, with the bead that
-owns its runs, so each pass sees what its own houses and earlier ones still owe
-([stage 0](#stage-0-sweep)).
+owns its runs, as needing action, and each exemption for the owner, so each pass sees
+what its own houses and earlier ones still owe ([stage 0](#stage-0-sweep)).
 
 ### Label the PR and Prepare News
 
@@ -1247,10 +1320,13 @@ concise News entry before merge, or record an editorial omission when the PR is 
 intermediate research checkpoint without a distinct reader-facing development.
 Name what changed, why it matters, the source PR and relevant `result_ids`, direct
 public artifact links where available, and the actual verification or publication
-limits.
-Use surnames throughout News titles, summaries, details and display labels unless
-two distinct people share one; retain handles, organization names and literal cited
-titles. Canonical attribution keeps full identities.
+limits. List in `issues` each issue that reported one of those results, as
+`campaign/result-requests.yaml` maps it, and each issue the entry links; News links them
+beside the PRs, and `python -m devtools.render_changelog --backfill-issues` writes any
+that are missing, which the records tier otherwise fails on.
+Use surnames throughout News titles, summaries, details and display labels unless two
+distinct people share one; retain handles, organization names and literal cited titles.
+Canonical attribution keeps full identities.
 Use the real event date once known.
 The merged delivery date and the independently verified publication date are separate
 facts. A merged PR alone does not establish a live website, released artifact or
@@ -1341,9 +1417,9 @@ After merge:
    [Label the PR and Prepare News](#label-the-pr-and-prepare-news).
    For an S4 or S5 result that change is required, and stage 7’s
    [Announce a Significant Result](#announce-a-significant-result) says who opens it.
-   Retain the actual merge date, source PR, `result_ids`, artifact links and limits.
-   After that change deploys, check the live News entry and its public artifact links
-   against the merged record, and retain the deployment receipt.
+   Retain the actual merge date, source PR, `result_ids`, reporting `issues`, artifact
+   links and limits. After that change deploys, check the live News entry and its public
+   artifact links against the merged record, and retain the deployment receipt.
    Claim publication only after this check.
 
 ## Stage 6: Explain
@@ -1425,31 +1501,70 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   Two follow-ups it cannot see are the pass’s to post by hand: the one a comparison owes
   once settled, since it leaves the view as it settles (#603 for T-163), and those owed
   where an issue names a result only in an ask, not in its `results` (#532 for T-142 to
-  T-144).
-- **A settled issue is closed with its final comment**, after the verified deploy, once
-  nothing the author asked for is queued and no question to the author would change the
-  record: [Close a Settled Issue](#close-a-settled-issue).
+  T-144). A reporter’s issue goes on tracking its result’s review after it closes: it
+  closes once answered, its follow-ups continue on the closed issue, and the view counts
+  it. A **review track** is different: an issue the project opened for a pending review
+  of a result no author reported to it (#772 to #786, `review_track: true` in the
+  record). It has no author to answer, so it closes only when the review it tracks is
+  done and its result stands confirmed or refuted.
+- **An answered issue is closed with its final comment**, after the verified deploy:
+  [Close an Answered Issue](#close-an-answered-issue).
+  A result still below `V3/C3` does not hold it open once the beads that own the rest of
+  its validation are named.
+  An import still queued, a queued ask of the author’s, an awaited question or the
+  owner’s hold does hold it open.
 - **Every S4 or S5 result gets a News item** in the first change after the merge that
   registered or raised it:
   [Announce a Significant Result](#announce-a-significant-result).
 
-### Close a Settled Issue
+### Close an Answered Issue
 
-The owner’s instruction of 23 October 2026: “if we have actually imported something,
-it’s already on the website, and we validated that, we should close the issues.
+An issue closes once it is **answered**, not once its results are confirmed.
+Answered means four things:
+
+- Its import and its disposition are on `main`: every reported result is registered,
+  recorded as evidence, or recorded as not registered with the reason, and nothing is
+  still queued for import.
+- The final comment reports them: each id at its rungs as they stand, what remains, and
+  the beads that own it.
+- Nothing the author asked for is still queued, and no question to the author awaits an
+  answer that could falsify the record.
+- The owner does not hold the issue.
+
+A result below `V3/C3` does not hold its issue open once its `validation` names the open
+beads that own the rest of its review and replay.
+Those beads, not the issue, carry the unfinished work.
+`check_bead_tree` holds them open after the issue closes, and the closing comment names
+them.
+Every later move of an id, a rung, a status or a position the comment stated gets a
+follow-up on the closed issue
+([epistemics.md](../../epistemics.md#import-integration-and-reply): an answer is kept
+true). A **review track** (`review_track: true`) is the exception: it exists to track a
+review, has no author to answer, and closes only when its result is confirmed or
+refuted.
+
+The owner’s instruction of 23 October 2026 made the close the standard step: “if we have
+actually imported something, it’s already on the website, and we validated that, we
+should close the issues.
 That should be our standard process.”
-What is unresolved, or needs the reporter’s answer, stays open.
 That morning twelve issues were closeable and open: nothing ran the closing step, the
 sweep did not list them, and lanes had kept issues open for questions to their authors
 that the record did not track and whose answers would change nothing in it.
+The owner’s direction of 26 October 2026 moved the line from confirmed to answered:
+“making sure that all closable things are closed and the process is clear about that (so
+we don’t have a backlog of so many open issues where it’s partly imported or already
+imported, but the issue is left open)”. That day nine issues were imported and answered,
+each held open only by validation the project owned (#420, #428, #446, #594, #600, #607,
+#610, #640, #810).
 
 1. **After the verified deploy**
    ([Verify the Published Result](#verify-the-published-result)), run
    `check_requests --report` from `main` and take each issue it marks closeable that is
    still open on GitHub.
-   An issue held for the owner (`held` in the record) is never closeable: no pass posts
-   on it or closes it, `check_requests --draft` and `intake_comments --out` refuse it,
-   and the sweep lists it for the owner with what would otherwise be owed.
+   It marks an issue closeable only once every id it maps to is on `main`. An issue held
+   for the owner (`held` in the record) is never closeable: no pass posts on it or
+   closes it, `check_requests --draft` and `intake_comments --out` refuse it, and the
+   sweep lists it for the owner with what would otherwise be owed.
    A hold is set on the owner’s recorded instruction (`basis: owner-instruction`), or on
    a reservation for the owner that beads record (`basis: recorded-reservation`, pending
    the owner’s confirmation), with those beads in `beads` and a note saying what each
@@ -1457,9 +1572,15 @@ that the record did not track and whose answers would change nothing in it.
    An issue GitHub already shows closed is not posted on again: record its final comment
    and its close (step 4).
 2. **Check that `main` and the deployed site say what the final comment will say**,
-   render the comment with `check_requests --draft N`, and edit it to the house style:
-   what is settled and where, linked into `main` and the site, then that nothing the
+   render the comment with `check_requests --draft N`, and edit it to the house style.
+   It states each id at its rungs, linked into `main` and the site, and that nothing the
    author asked for is queued, so the comment closes the issue.
+   Where a result is still below `V3/C3`, the draft lists what remains with the beads
+   that own it, and says that closing confirms nothing still open.
+   Keep both: the rungs are stated as they stand and never rounded up.
+   A result with no named owner keeps the issue open: name the open bead that owns its
+   review and replay (with its `## Validation` block) under the result’s `validation`
+   first, or leave the issue open.
 3. **Put an informational question in the closing comment**, saying that an answer is
    still welcome and holds nothing open.
    A question holds the issue open only when the record asserts something the answer
@@ -1480,13 +1601,21 @@ that the record did not track and whose answers would change nothing in it.
 4. **Post the comment and close the issue** under the `github-workflows` grant, then
    record the comment under the issue’s `replies` as `final` and set the entry’s `state`
    and `closed` in the next change.
+   Record each id, rung, status and position it stated under `reported`, and the beads
+   it named under `beads`; a closed issue owes a reply until some reply names each bead
+   its results’ `validation` names.
    Close the answer bead once the record no longer names it on an open issue, which
    `check_bead_tree` checks.
+   A `validation` bead stays open until the review or replay it owns has landed; then
+   drop the field (the result is confirmed or refuted) or name the bead that takes over,
+   and post the follow-up the moved rung owes.
 
 Each six-hourly check-in of a running pass does the same.
 Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1;
 once GitHub shows it closed and the record does not, the item says to record the close
 and post nothing. An issue held for the owner is listed for the owner and fails nothing.
+A closed issue that owes a follow-up is listed too, owned by the first bead that owns
+what remains of its results’ validation, else its answer bead.
 
 ### Announce a Significant Result
 
@@ -1614,16 +1743,62 @@ A reply that mentions the result without naming the entry, or names the entry wi
 stating a field, leaves the earlier statement standing.
 Each reason quotes the one reply it holds a field to, by its date, and by its kind or
 its address where the issue has another reply that day.
-An issue is **closeable** when triage is done, every result is confirmed or refuted (a
-reported defect: recorded against the entry it names), no `ask` is queued, and no
-question under `awaiting_author` awaits the author’s answer, and the owner does not hold
-it (`held`). `awaiting_author` holds only the questions whose answers could falsify what
-the record asserts and that no measurement here can settle: `changes` says whether the
+A **reply is also due** when a position a reply stated has moved: the entry is adopted
+on its case (`pending adoption` to `current`) or superseded.
+It is due too when a comment was read into the record (`read_through`) on a later day
+than the last reply, and, on a closed issue, until some reply names each bead its
+results’ `validation` names.
+`--report`, `--draft`, `--pending` and the sweep read positions from the case records.
+The gate’s one-line summary does not, so it leaves out a moved position.
+A reply recorded before 26 October 2026 states no position, so the first reply that
+states one is the baseline.
+
+An issue is **closeable** once it is answered
+([Close an Answered Issue](#close-an-answered-issue)):
+
+- triage is done, and nothing is queued for import;
+- every result is confirmed or refuted (a reported defect: recorded against the entry it
+  names), or its `validation` names the open beads that own what remains of its review
+  and replay;
+- no `ask` is queued, and no question under `awaiting_author` awaits the author’s
+  answer;
+- the owner does not hold it (`held`).
+
+`--report` adds one more: every id the issue maps to is on `main`. A **review track**
+(`review_track: true`), which the project opened to track a pending review of a result
+no author reported, has no author to answer: it closes only when every result it tracks
+is confirmed or refuted, `validation` or not.
+`close_when` is descriptive.
+It says what closing would take as the entry was written; where it says more or less,
+the rule above governs.
+The texts were not rewritten when rule P1 came in on 26 October 2026 (think-3b9v): at
+least ten already said an issue closes once its validation is owned while the code
+waited for `V3/C3`, and others name conditions the rule does not.
+
+An **ask** records only what the issue’s author asked of the project: a change to the
+record, a credit, a decision, a piece of research.
+On an open issue a queued ask names its `source`, `body` or the author’s own comment,
+which `--github` checks.
+The project’s own review or replay of a result is that result’s `validation`, never an
+ask: the gate refuses a queued ask whose bead a result’s `validation` names.
+A question the project puts to the author goes under `awaiting_author` or in the closing
+comment. `awaiting_author` holds only the questions whose answers could falsify what the
+record asserts and that no measurement here can settle: `changes` says whether the
 credit, the lineage, or which file or commit a claim names, and `asked` is the recorded
 reply that asked it.
 `held` holds an issue for the owner, on the owner’s recorded instruction or on a
 reservation for the owner that beads record, with its `basis`, the day it was recorded
 here, the beads and a note: while it stands no pass posts on the issue or closes it.
+A held issue carries `blocked` of type `owner-reply` or `owner-decision`.
+
+`blocked` marks an open issue that someone other than the pass must move.
+Its `type` is the GitHub label `blocked:<type>`
+([development.md](../../development.md#issue-and-pull-request-labels)), and its `reason`
+says in one line what it waits on.
+`--github` lists an open issue whose live `blocked:` labels differ from its record.
+Work that is the project’s own and that nobody holds is not blocked, whatever it costs
+below the pass’s cap.
+Remove `blocked` once the block lifts; a closed issue carries none.
 
 A confirmation is described from the confirming evidence’s `relationship_to_generator`:
 *reproduced with the author’s own checker* for `same-implementation`, *re-verified by an
@@ -1638,11 +1813,11 @@ Run each command from `packing/` as
 | Option | What it does |
 | --- | --- |
 | none | The gate step: the schema holds and every id resolves; one line per issue |
-| `--report` | A table per issue: each result’s entries, rungs, state, how it was confirmed and whether its id is on `main`; the replies due; whether it is closeable |
+| `--report` | A table per issue: each result’s entries, rungs, state, how it was confirmed and whether its id is on `main`; the replies due; the beads that own what remains; its block; whether it is closeable, which needs its ids on `main` |
 | `--backlog` | Every register entry below `V3` or `C3`, with its `next_rung`, its `activity`, the beads it names and the issues it serves |
 | `--pending` | Every pending review (stage 7): the backlog’s entries, any entry naming an unfinished confirmation or activity, and the record index’s unassessed comparisons, each with its beads, its tracking issues and whether one states its present state; then the count with no tracking issue, the stale, those held for the owner and those tracked only on closed issues. It does not see the follow-up a settled comparison owes, nor a result an issue names only in an ask |
-| `--draft N` | The status comment for issue N, ending in the Claude Code footer; it refuses unless `HEAD` is on `origin/main` |
-| `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label |
+| `--draft N` | The status comment for issue N, ending in the Claude Code footer: each entry’s rungs and position, and on a closeable issue what remains with the beads that own it; it refuses unless `HEAD` is on `origin/main` |
+| `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label; a recorded reply whose text does not name an id or bead the record says it stated; an open issue whose `blocked:` labels differ from its `blocked`; an ask whose `source` comment is not its author’s |
 
 A reply due is reported and never fails the gate: it is owed after the merge, not a
 broken record.
@@ -1654,16 +1829,19 @@ broken record.
 2. For each issue that `--report` marks reply due, and each other issue the merged
    change touched, render `--draft N`, check that `main` and the deployed site say what
    it says, and post it; an agent does as part of the pass, or the owner does.
-   `--report` marks what the register shows: no reply yet, a new or renumbered id, a
-   moved rung or status, an `outdated` statement.
-   A change it does not show, such as a case adopting the result, a supersession or a
-   comment read into the record, is followed up by the pass that makes it.
+   `--report` marks no reply yet, a new or renumbered id, a moved rung, status or
+   position (an adoption or a supersession), an `outdated` statement, a comment read
+   into the record since the last reply, and on a closed issue a bead that owns what
+   remains and that no reply has named.
+   Closed issues are included: an answer is kept true after the close.
 3. Record the reply under the issue’s `replies` in the next change: its URL, date and
-   kind, and in `reported` the id, rungs and status it stated for each result.
+   kind, in `reported` the id, rungs, status and position it stated for each result, and
+   in `beads` the beads it named as owning what remains.
    Name in `corrects` any earlier reply whose `outdated` statements it corrects.
+   `--github` then checks that the posted text names every id and bead recorded.
 4. When `--report` says an issue is closeable, close it with the final comment and set
-   the entry’s `state` and `closed`, as [Close a Settled Issue](#close-a-settled-issue)
-   says.
+   the entry’s `state` and `closed`, as
+   [Close an Answered Issue](#close-an-answered-issue) says.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

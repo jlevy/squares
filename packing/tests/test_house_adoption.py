@@ -178,12 +178,11 @@ MOVED_LATER = {
     303: ("T-240", "2026-10-25"),
 }
 
-#: The counts staged for the pass's next pull request, with the result each moves to and
-#: the bead that adopts it: the pass of 25 October 2026 validated Evan Daniel's 268 (T-242)
-#: below T-240's, which the same pass adopts there, and one day's archive holds one prior
-#: state a count, so 268 moves on or after 26 October, under the bead that adopts it
-#: (think-3anz, H2 of think-hx0e).
-STAGED_NEXT = {268: ("T-242", "think-3anz")}
+#: The counts a pass staged for its next pull request, with the result each moved to and
+#: the day it moved: the pass of 25 October 2026 validated Evan Daniel's 268 (T-242) below
+#: T-240's, which the same pass adopted there, and one day's archive holds one prior state a
+#: count, so 268 was staged under think-3anz and moved on 26 October 2026.
+ADOPTED_NEXT_DAY = {268: ("T-242", "2026-10-26")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -247,13 +246,15 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # (T-193), below T-174's sides there, once the writer wrote an algebraic side; 39
     # since the adoption of 25 October 2026 moved 268 to Francisco Couzo's issue-763
     # certificate (T-240), below T-174's side there; 38 since the same pass moved 182 to
-    # Evan Daniel's issue-806 certificate (T-243), below T-174's side there.
+    # Evan Daniel's issue-806 certificate (T-243), below T-174's side there. The adoption of
+    # 26 October 2026 moved 268 on to his descent of Vladislav Lavrentev's packing (T-242).
     assert len(held_counts) == 38
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
     t193 = {n for n, house in ALGEBRAIC_ADOPTED.items() if house == "T-193"}
-    # 268, which T-240 took from the hold, is staged again, for T-242 (`STAGED_NEXT`).
-    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(STAGED_NEXT) == (
+    # 268, which T-240 took from the hold, was staged again and adopted for T-242
+    # (`ADOPTED_NEXT_DAY`), so it is on neither side.
+    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 == (
         set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
@@ -262,7 +263,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         105: "T-229",
         155: "T-197",
         182: "T-243",
-        268: "T-240",
+        268: "T-242",
         270: "T-224",
         308: "T-221",
     }
@@ -1593,17 +1594,16 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     certificate and 155 to issue 669's, the adoption of 20 October 2026 took 308 to issue
     689's, the adoption of 21 October 2026 took 270 to issue 703's, the adoption of 23
     October 2026 took 105 to issue 719's, and the adoption of 25 October 2026 took 268 to
-    issue 763's. The same pass validated Evan Daniel's 268 (T-242) and stages it for its next
-    pull request under the bead that adopts it (`STAGED_NEXT`)."""
+    issue 763's. The same pass validated Evan Daniel's 268 (T-242) and staged it for its next
+    pull request, and the adoption of 26 October 2026 (think-3anz) took it off
+    (`ADOPTED_NEXT_DAY`)."""
+    for n, (result, day) in ADOPTED_NEXT_DAY.items():
+        assert (houses.ADOPTED[n], houses.adopted_on(n)) == (result, day)
+        assert n not in select.PENDING_ADOPTION
+        assert n not in defaults.PENDING_ALLOWED
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = pending.house == "T-193"
-        if n in STAGED_NEXT:
-            assert (pending.house, pending.bead, pending.why) == (
-                *STAGED_NEXT[n],
-                select.NEXT_PULL_REQUEST,
-            ), n
-            continue
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
             if algebraic
@@ -1624,9 +1624,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert all(houses.algebraic(n) for n in ALGEBRAIC_ADOPTED)
     assert set(ALGEBRAIC_ADOPTED) <= houses.LATER_PASSES["2026-10-23"]
     assert not set(ALGEBRAIC_ADOPTED) & set(select.PENDING_ADOPTION)
-    assert sorted(select.PENDING_ADOPTION) == sorted(
-        [88, 126, 175, 199, 232, 266, 267, 292, 301, *STAGED_NEXT]
-    )
+    assert sorted(select.PENDING_ADOPTION) == [88, 126, 175, 199, 232, 266, 267, 292, 301]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
@@ -1689,12 +1687,13 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # certificate (T-239), and the adoption of 25 October 2026 moved 268 and 303 to
     # Francisco Couzo's issue-763 certificates (T-240), 304 to Evan Daniel's exact descent
     # of the packing T-241 certifies (T-242) and 182 to his issue-806 certificate (T-243),
-    # after this receipt was retained.
+    # and the adoption of 26 October 2026 moved 268 again, to his exact descent of Vladislav
+    # Lavrentev's packing (T-242), after this receipt was retained.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
         182: "T-243",
-        268: "T-240",
+        268: "T-242",
         303: "T-240",
         304: "T-242",
         155: "T-197",
@@ -2237,8 +2236,14 @@ def _later_rewrite_projection(key: tuple[int, str], body: str) -> str:
 #: adopts at the count the key no longer matches and that replay reads it as prior state.
 #: Review A of pull request 781 (think-ist2) cites the replay of Kevin Fang's 18 pieces
 #: (E-fang-excess-pieces-exact-replay) at 241 and 273, beside the sibling replay of his
-#: inventory that those records already cite, so that a case record cites it.
+#: inventory that those records already cite, so that a case record cites it. T-046's
+#: census entries of 26 October (think-buaj) are cited at each count they cover, four of
+#: them adopted houses.
 LATER_CITATIONS: dict[tuple[int, str], tuple[str, ...]] = {
+    (29, "T-195"): ("E-n029-wand125-rect-579-sqverify-fast-replay",),
+    (68, "T-174"): ("E-n068-wand125-rect-8495-sqverify-fast-replay",),
+    (70, "T-174"): ("E-n070-wand125-rect-862-sqverify-fast-replay",),
+    (86, "T-174"): ("E-n086-wand125-rect-9355-sqverify-fast-replay",),
     (241, "T-182"): ("E-fang-excess-pieces-exact-replay",),
     (273, "T-174"): ("E-fang-excess-pieces-exact-replay",),
 }

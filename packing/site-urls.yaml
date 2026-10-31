@@ -5459,7 +5459,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/118.html
   canonical: cases/118.html
@@ -5467,7 +5467,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/119.html
   canonical: cases/119.html
@@ -5483,7 +5483,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-25'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/120.html
   canonical: cases/120.html
@@ -5667,7 +5667,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/141.html
   canonical: cases/141.html
@@ -5675,7 +5675,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/142.html
   canonical: cases/142.html
@@ -5883,7 +5883,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/166.html
   canonical: cases/166.html
@@ -5891,7 +5891,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/167.html
   canonical: cases/167.html
@@ -6123,7 +6123,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/193.html
   canonical: cases/193.html
@@ -6131,7 +6131,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/194.html
   canonical: cases/194.html
@@ -6387,7 +6387,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/222.html
   canonical: cases/222.html
@@ -6395,7 +6395,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/223.html
   canonical: cases/223.html
@@ -6659,7 +6659,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/253.html
   canonical: cases/253.html
@@ -6667,7 +6667,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/254.html
   canonical: cases/254.html
@@ -6795,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-25'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -6947,7 +6947,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/286.html
   canonical: cases/286.html
@@ -6955,7 +6955,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/287.html
   canonical: cases/287.html
@@ -7051,7 +7051,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/298.html
   canonical: cases/298.html
@@ -7067,7 +7067,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/3.html
   canonical: cases/3.html
@@ -7267,7 +7267,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/321.html
   canonical: cases/321.html
@@ -7275,7 +7275,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/322.html
   canonical: cases/322.html
@@ -7307,7 +7307,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/34.html
   canonical: cases/34.html
@@ -7419,7 +7419,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/47.html
   canonical: cases/47.html
@@ -7547,7 +7547,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/61.html
   canonical: cases/61.html
@@ -7555,7 +7555,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/62.html
   canonical: cases/62.html
@@ -7691,7 +7691,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/78.html
   canonical: cases/78.html
@@ -7699,7 +7699,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/79.html
   canonical: cases/79.html
@@ -7859,7 +7859,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/97.html
   canonical: cases/97.html
@@ -7867,7 +7867,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/98.html
   canonical: cases/98.html
@@ -7901,6 +7901,14 @@ urls:
       kind: page
       canonical: cases/
       target: ''
+- path: changelog.html
+  canonical: changelog.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-26'
+  lastmod: '2026-10-26'
+  status: live
 - path: contributors/erich-friedman.html
   canonical: profiles/erich-friedman.html
   kind: forwarder
@@ -8656,6 +8664,14 @@ urls:
   status: live
 - path: profiles/can-li.html
   canonical: profiles/can-li.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/chris-deotte.html
+  canonical: profiles/chris-deotte.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -10620,7 +10636,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-09-29'
+  lastmod: '2026-10-26'
   status: live
   identity:
     kind: lower-bound
@@ -10685,12 +10701,139 @@ urls:
     - E-wand125-rectangle-report
     - E-wand125-rectangle-2026-09-28-report
     - E-wand125-rectangle-2026-09-28-monotone-report
+    - E-n018-wand125-rect-4695-sqverify-fast-replay
+    - E-n019-wand125-rect-4815-sqverify-fast-replay
+    - E-n020-wand125-rect-4895-sqverify-fast-replay
+    - E-n026-wand125-rect-553-sqverify-fast-replay
+    - E-n027-wand125-rect-56-sqverify-fast-replay
+    - E-n028-wand125-rect-572-sqverify-fast-replay
+    - E-n029-wand125-rect-579-sqverify-fast-replay
+    - E-n030-wand125-rect-5865-sqverify-fast-replay
+    - E-n031-wand125-rect-5935-sqverify-fast-replay
+    - E-n037-wand125-rect-6425-sqverify-fast-replay
+    - E-n038-wand125-rect-654-sqverify-fast-replay
+    - E-n039-wand125-rect-663-sqverify-fast-replay
+    - E-n040-wand125-rect-6695-sqverify-fast-replay
+    - E-n041-wand125-rect-6755-sqverify-fast-replay
+    - E-n042-wand125-rect-679-sqverify-fast-replay
+    - E-n043-wand125-rect-6865-sqverify-fast-replay
+    - E-n044-wand125-rect-6935-sqverify-fast-replay
+    - E-n051-wand125-rect-74425-sqverify-fast-replay
+    - E-n052-wand125-rect-7535-sqverify-fast-replay
+    - E-n053-wand125-rect-7595-sqverify-fast-replay
+    - E-n054-wand125-rect-76675-sqverify-fast-replay
+    - E-n055-wand125-rect-771-sqverify-fast-replay
+    - E-n056-wand125-rect-777-sqverify-fast-replay
+    - E-n057-wand125-rect-7835-sqverify-fast-replay
+    - E-n058-wand125-rect-789-sqverify-fast-replay
+    - E-n059-wand125-rect-792-sqverify-fast-replay
+    - E-n060-wand125-rect-794-sqverify-fast-replay
+    - E-n061-wand125-rect-796-sqverify-fast-replay
+    - E-n066-wand125-rect-8375-sqverify-fast-replay
+    - E-n067-wand125-rect-8455-sqverify-fast-replay
+    - E-n068-wand125-rect-8495-sqverify-fast-replay
+    - E-n069-wand125-rect-8575-sqverify-fast-replay
+    - E-n070-wand125-rect-862-sqverify-fast-replay
+    - E-n071-wand125-rect-8685-sqverify-fast-replay
+    - E-n072-wand125-rect-874-sqverify-fast-replay
+    - E-n073-wand125-rect-878-sqverify-fast-replay
+    - E-n074-wand125-rect-884-sqverify-fast-replay
+    - E-n075-wand125-rect-889-sqverify-fast-replay
+    - E-n076-wand125-rect-892-sqverify-fast-replay
+    - E-n078-wand125-rect-8955-sqverify-fast-replay
+    - E-n086-wand125-rect-9355-sqverify-fast-replay
+    - E-n088-wand125-rect-945-sqverify-fast-replay
+    - E-n089-wand125-rect-955-sqverify-fast-replay
+    - E-n091-wand125-rect-9645-sqverify-fast-replay
+    - E-n094-wand125-rect-9795-sqverify-fast-replay
+    - E-n095-wand125-rect-98418-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-rectangle-certificates-2026-09-27/README.md
     - packing/resources/web/wand125-rectangle-certificates-2026-09-28/README.md
     - packing/resources/web/wand125-rectangle-certificates-2026-09-28/receipts/preflight/audit.json.gz
     - packing/devtools/audit_wand125_rectangles.py
     - packing/devtools/apply_wand125_rectangles.py
+    - packing/benchmarks/measure-verifier/census/census.json
+    - packing/devtools/sqverify_fast_census.py
+    - docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md
+    - docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md
+    - packing/resources/web/wand125-rectangle-certificates-2026-09-28/review/review-2026-10-26/README.md
+  amendments:
+  - date: '2026-10-26'
+    reason: sqverify-fast's census decides all 46 standing certificates here, one replay evidence
+      entry each, after the review of 26 October read the 28 September certificates and the census
+      route's mass condition at n - 1/1000 (think-buaj); the result rises to V3/C3 citing them, with
+      the census, its driver and both reviews among its artifacts. The values, scope and attribution
+      are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 18
+        - 19
+        - 20
+        - 26
+        - 27
+        - 28
+        - 29
+        - 30
+        - 31
+        - 37
+        - 38
+        - 39
+        - 40
+        - 41
+        - 42
+        - 43
+        - 44
+        - 51
+        - 52
+        - 53
+        - 54
+        - 55
+        - 56
+        - 57
+        - 58
+        - 59
+        - 60
+        - 61
+        - 66
+        - 67
+        - 68
+        - 69
+        - 70
+        - 71
+        - 72
+        - 73
+        - 74
+        - 75
+        - 76
+        - 77
+        - 78
+        - 86
+        - 88
+        - 89
+        - 90
+        - 91
+        - 94
+        - 95
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 rectangle bounds 2026]'
+        - '[wand125 rectangle bounds 2026-09-28]'
+        published: '2026-09-27'
+      builds_on: null
+      evidence:
+      - E-wand125-rectangle-report
+      - E-wand125-rectangle-2026-09-28-report
+      - E-wand125-rectangle-2026-09-28-monotone-report
+      artifacts:
+      - packing/resources/web/wand125-rectangle-certificates-2026-09-27/README.md
+      - packing/resources/web/wand125-rectangle-certificates-2026-09-28/README.md
+      - packing/resources/web/wand125-rectangle-certificates-2026-09-28/receipts/preflight/audit.json.gz
+      - packing/devtools/audit_wand125_rectangles.py
+      - packing/devtools/apply_wand125_rectangles.py
 - path: result/t-047.html
   canonical: result/t-047.html
   kind: result
@@ -21122,7 +21265,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-24'
-  lastmod: '2026-10-24'
+  lastmod: '2026-10-25'
   status: live
   identity:
     kind: optimality
@@ -21141,6 +21284,7 @@ urls:
     builds_on: null
     evidence:
     - E-n005-gobel-proof
+    - E-n005-friedman-theorem2-audit
     - E-n005-gobel-upper
     - E-side2-center-lower
     - E-basic-area-lower
@@ -21150,9 +21294,46 @@ urls:
     - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
     - packing/cases/gobel5/packing.py
     - packing/cases/gobel5/verify_exact.py
+    - packing/cases/friedman5/verify_cover.py
+    - packing/cases/friedman5/certificate.json
     - packing/cases/small_n/optimal_moduli.py
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
     - packing/devtools/check_basic_bounds.py
+  amendments:
+  - date: '2026-10-25'
+    reason: An exact audit of Friedman's Theorem 2 here (E-n005-friedman-theorem2-audit, cases/friedman5)
+      decides every premise of the s(5) lower half's four-point proof, and the result rises to C3
+      citing it, with the audit's checker and record among its artifacts and its test among its controls.
+      The values, scope and attribution are unchanged.
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 2
+        - 3
+        - 4
+        - 5
+      established: null
+      attribution:
+        source_keys:
+        - '[Göbel 1979]'
+        - '[Friedman DS7]'
+        published: '1979'
+      builds_on: null
+      evidence:
+      - E-n005-gobel-proof
+      - E-n005-gobel-upper
+      - E-side2-center-lower
+      - E-basic-area-lower
+      - E-basic-grid-upper
+      artifacts:
+      - packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
+      - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
+      - packing/cases/gobel5/packing.py
+      - packing/cases/gobel5/verify_exact.py
+      - packing/cases/small_n/optimal_moduli.py
+      - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+      - packing/devtools/check_basic_bounds.py
 - path: result/t-238.html
   canonical: result/t-238.html
   kind: result
@@ -21558,6 +21739,179 @@ urls:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/link.py
     - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/verify_mod.py
     - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/contacts_mod.py
+- path: result/t-247.html
+  canonical: result/t-247.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-26'
+  lastmod: '2026-10-26'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 297
+    established: null
+    attribution:
+      source_keys:
+      - '[Kim s297 2026-10-25]'
+      published: '2026-10-25'
+    builds_on: null
+    evidence:
+    - E-hyukdongkim-804-s297-report
+    artifacts:
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/README.md
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/acquisition/comments-804.json
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/acquisition/sources.json
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/facts/s297-polynomial.json
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/facts/route-a-n297.json.gz
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/receipts/build.json
+    - packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/README.md
+    - packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/exact-sides.json
+    - packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/review/side_297.py
+    - packing/devtools/build_field_configuration.py
+- path: result/t-248.html
+  canonical: result/t-248.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-26'
+  lastmod: '2026-10-26'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 299
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n299 2026-10-26]'
+      published: '2026-10-26'
+    builds_on: null
+    evidence:
+    - E-evand-n299-certificate-report
+    artifacts:
+    - packing/resources/web/evand-n299-2026-10-26/README.md
+    - packing/resources/web/evand-n299-2026-10-26/acquisition/claims.json
+    - packing/resources/web/evand-n299-2026-10-26/source/search/packer/candidates/s299-1025.cert
+    - packing/resources/web/evand-n299-2026-10-26/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n299-2026-10-26/receipts/sharp-controls.json
+    - packing/resources/web/evand-n299-2026-10-26/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-issue824-20261026/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-249.html
+  canonical: result/t-249.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-26'
+  lastmod: '2026-10-26'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 12
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel S12H Lean 2026-09-28]'
+      published: '2026-09-28'
+    builds_on: null
+    evidence:
+    - E-n012-evand-s12h-lean-report
+    artifacts:
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/S12HLower.lean
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/BoxTree.lean
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/LADDER.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/receipts/s12h-lean-closure.json
+    - packing/devtools/lean_closure.py
+- path: result/t-250.html
+  canonical: result/t-250.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-26'
+  lastmod: '2026-10-26'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 33
+      - 46
+      - 61
+      - 78
+      - 97
+      - 118
+      - 141
+      - 166
+      - 193
+      - 222
+      - 253
+      - 286
+      - 321
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 Valid7 Lean 2026-10-11]'
+      - '[wand125 Valid7 Lean v2 2026-10-17]'
+      published: '2026-10-17'
+    builds_on: null
+    evidence:
+    - E-k2m3-wand125-valid7-lean-v1-report
+    - E-k2m3-wand125-valid7-lean-v2-report
+    artifacts:
+    - packing/resources/web/evand-valid7-lean-2026-10-11/README.md
+    - packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/VALID7.md
+    - packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/Sqpack/V7/Bridge.lean
+    - packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/Sqpack/ValidSplit7.lean
+    - packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/scripts/gen_main.py
+    - packing/resources/web/evand-valid7-lean-2026-10-11/receipts/lean-closure.json
+    - packing/resources/web/evand-valid7-lean-2026-10-11/receipts/root-names.json
+    - packing/resources/web/wand125-valid7-lean-v2-2026-10-17/README.md
+    - packing/devtools/audit_valid7_roots.py
+    - packing/devtools/lean_closure.py
+- path: result/t-251.html
+  canonical: result/t-251.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-26'
+  lastmod: '2026-10-26'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 60
+      - 77
+      - 96
+      - 117
+      - 140
+      - 165
+      - 192
+      - 221
+      - 252
+      - 285
+      - 320
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 ValidTilt9 Lean 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-k2m4-wand125-validtilt9-lean-report
+    artifacts:
+    - packing/resources/web/wand125-validtilt9-lean-2026-10-16/README.md
+    - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/README.md
+    - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Main.lean
+    - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Bridge.lean
+    - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/library/library.sha256
 - path: results.html
   canonical: results.html
   kind: page

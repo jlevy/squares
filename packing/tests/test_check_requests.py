@@ -12,6 +12,7 @@ from __future__ import annotations
 import copy
 import re
 from collections.abc import Mapping
+from types import SimpleNamespace
 from typing import Any
 
 import pytest
@@ -675,7 +676,9 @@ def test_closeable_needs_every_result_settled_triage_done_and_no_ask_queued() ->
     assert state.blockers == ("asked: change the text",)
     assert not check_requests.issue_state(issue(triage="pending"), REGISTER).closeable
     open_result = issue(results=[{"key": "b", "claim": "c", "register": ["T-002"]}])
-    assert check_requests.issue_state(open_result, REGISTER).blockers == ("b is open",)
+    assert check_requests.issue_state(open_result, REGISTER).blockers == (
+        "b is open, and no bead is named for what remains of its validation",
+    )
 
 
 def question(state: str = "awaiting", **over: Any) -> Record:
@@ -768,6 +771,8 @@ HOLD = {
     "beads": ["think-abcd"],
     "note": "Reserved for the owner (think-abcd).",
 }
+#: The block a held issue carries: the owner's word lifts both (`HELD_BLOCKS`).
+REPLY = {"type": "owner-reply", "reason": "Held for the owner (think-abcd)."}
 
 
 def _without(mapping: Record, key: str) -> Record:
@@ -814,8 +819,8 @@ def test_an_issue_held_for_the_owner_is_never_closeable_and_is_marked_so() -> No
 def test_a_hold_is_for_the_owner_with_its_basis_date_beads_and_note(
     hold: Record, expected: str
 ) -> None:
-    assert check_requests.problems(record(asking(held=HOLD)), REGISTER) == []
-    found = check_requests.problems(record(asking(held=hold)), REGISTER)
+    assert check_requests.problems(record(asking(held=HOLD, blocked=REPLY)), REGISTER) == []
+    found = check_requests.problems(record(asking(held=hold, blocked=REPLY)), REGISTER)
     assert any(expected in problem for problem in found), found
 
 
@@ -829,7 +834,7 @@ def test_the_draft_refuses_an_issue_held_for_the_owner(
     tmp_path: Any, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     path = tmp_path / "requests.yaml"
-    path.write_text(yaml.safe_dump(record(asking(held=HOLD))), encoding="utf-8")
+    path.write_text(yaml.safe_dump(record(asking(held=HOLD, blocked=REPLY))), encoding="utf-8")
     monkeypatch.setattr(check_requests, "head_on_main", lambda: True)
     assert check_requests.main(["--record", str(path), "--draft", "7"]) == 2
     err = capsys.readouterr().err
@@ -1634,3 +1639,416 @@ def test_a_run_not_made_here_is_not_worded_as_work_done_here(origin: str, actor:
     state = check_requests.entry_state("T-900", register)
     words = check_requests._plain(state, record, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     assert "the replay of E-run has passed" in words, words
+
+
+# -- Rule P1 of 26 October 2026: an issue closes once answered ----------------------------
+
+OWNED = {"key": "b", "claim": "s(9) >= 2", "register": ["T-002"], "validation": ["think-wxyz"]}
+
+
+def test_an_open_result_whose_validation_names_its_beads_does_not_hold_the_issue_open() -> None:
+    """The owner's direction of 26 October 2026: an issue closes once answered, and a
+    result below V3/C3 holds it open only until beads own what remains of it."""
+    state = check_requests.issue_state(issue(results=[OWNED]), REGISTER)
+    assert state.closeable, state.blockers
+    assert not state.results[0].settled
+    assert check_requests.remaining_owners(state.results) == ["think-wxyz"]
+
+
+def test_a_review_track_closes_only_when_its_result_is_confirmed_or_refuted() -> None:
+    """#772 to #786 track a pending review and have no author to answer: P3, which would
+    replace them, waits on the owner, so P1 does not close them."""
+    track = issue(results=[OWNED], review_track=True)
+    state = check_requests.issue_state(track, REGISTER)
+    assert state.blockers == ("b is open, and the review this issue tracks is not done",)
+    assert check_requests.issue_state(issue(review_track=True), REGISTER).closeable
+
+
+def test_an_import_still_queued_holds_the_issue_open_whatever_else_is_owned() -> None:
+    queued = {
+        "key": "later",
+        "claim": "c",
+        "not_registered": "Queued for the next packet.",
+        "queued": True,
+        "bead": "think-wxyz",
+    }
+    state = check_requests.issue_state(issue(results=[OWNED, queued]), REGISTER)
+    assert state.blockers == ("later is queued",)
+
+
+def test_the_closing_draft_names_the_beads_and_says_closing_confirms_nothing_open() -> None:
+    """The closing reply states each id at its rungs, names the beads that own what
+    remains, and says the close confirms nothing still open (epistemics.md: never
+    overstate a rung; an answer is kept true)."""
+    text = check_requests.draft(issue(results=[OWNED]), REGISTER, "owner/repo")
+    assert "  - T-002, reviewed: its argument has been read here" in text
+    assert "no replay here has passed yet (V0/C1)." in text
+    assert "**What remains, and which beads own it.**" in text
+    assert "- T-002: T-002's next rung. Owned by `think-wxyz`." in text
+    assert (
+        "Nothing you asked for is queued, so this issue is closed with this comment. "
+        "Closing it confirms nothing above that is still open: each entry stands at the "
+        "rungs given, what remains of its validation is owned by `think-wxyz`, and a "
+        "follow-up will be posted on this issue whenever an id, a rung, a status or a "
+        "position above changes." in text
+    )
+    still = check_requests.draft(issue(results=[{**OWNED, "validation": []}]), REGISTER, "o/r")
+    assert "**What is still queued, and how it will be completed.**" in still
+    assert "think-wxyz" not in still
+
+
+def test_an_evidence_only_result_is_listed_with_its_owner_in_the_closing_draft() -> None:
+    """#428's v1.2 obligations map to report entries alone, which have no next rung."""
+    evidence_only = {
+        "key": "v12",
+        "claim": "c",
+        "evidence": ["E-report"],
+        "validation": ["think-wxyz"],
+    }
+    # #446's four report-only counts share one report entry, which is listed once.
+    twice = [evidence_only, {**evidence_only, "key": "v13"}]
+    text = check_requests.draft(issue(results=twice), REGISTER, "owner/repo")
+    line = "- E-report: recorded as evidence, not yet confirmed here. Owned by `think-wxyz`."
+    assert text.count(line) == 1, text
+
+
+def test_a_closed_issue_owes_a_reply_until_one_names_each_owning_bead() -> None:
+    closed = {"state": "closed", "closed": "2026-10-26", "results": [OWNED]}
+    named = {"result": "b", "id": "T-002", "verification": "V0", "confirmation": "C1"}
+    first = reply(1, reported=[{**named, "status": "reviewed"}])
+    assert due(issue(**closed, replies=[first])) == [
+        "b: no reply has named think-wxyz, which owns what remains of its validation"
+    ]
+    final = reply(2, "2026-10-26", kind="final", reported=[], beads=["think-wxyz"])
+    assert due(issue(**closed, replies=[first, final])) == []
+
+
+def test_the_report_names_the_owners_and_holds_an_import_not_yet_on_main() -> None:
+    entry = issue(results=[OWNED])
+    section = "\n".join(check_requests.report(record(entry), REGISTER, {"T-002"}))
+    assert "What remains of the validation is owned by: b: think-wxyz." in section
+    assert "Closeable: yes, with a final comment." in section
+    assert "Close when (descriptive; the rule decides): T-001 is confirmed." in section
+    early = "\n".join(check_requests.report(record(entry), REGISTER, set()))
+    assert "Closeable: no; T-002 is not on main yet." in early
+    assert "| #7 | open | 0 of 1 | yes | no |" in early
+
+
+def test_validation_names_beads_and_a_result_not_registered_takes_none() -> None:
+    assert check_requests.problems(record(issue(results=[OWNED])), REGISTER) == []
+    unregistered = {"key": "x", "claim": "c", "not_registered": "n", "queued": False}
+    bad = [{**unregistered, "validation": ["think-wxyz"]}, {**OWNED, "validation": ["wxyz"]}]
+    found = check_requests.problems(record(issue(results=bad)), REGISTER)
+    assert any("results/0" in problem for problem in found), found
+    assert any("results/1/validation/0" in problem for problem in found), found
+
+
+# -- Rule P2: an ask is the author's ----------------------------------------------------
+
+
+def test_a_queued_ask_on_an_open_issue_says_where_the_author_asked_it() -> None:
+    queued = {"what": "Credit the arrangement.", "state": "queued", "bead": "think-wxyz"}
+    found = check_requests.problems(record(issue(asks=[queued])), REGISTER)
+    assert any('"source" is a required property' in problem for problem in found), found
+    for source in ("body", URL.format(3)):
+        asked = issue(asks=[{**queued, "source": source}])
+        assert check_requests.problems(record(asked), REGISTER) == []
+    closed = issue(asks=[queued], state="closed", closed="2026-10-03")
+    assert check_requests.problems(record(closed), REGISTER) == []
+    elsewhere = issue(asks=[{**queued, "source": URL.replace("/7#", "/8#").format(3)}])
+    found = check_requests.problems(record(elsewhere), REGISTER)
+    assert any("not this issue" in problem for problem in found), found
+
+
+def test_the_projects_validation_restated_as_an_ask_is_refused() -> None:
+    """#428's v1.2 replay and #446's four census asks were the project's own validation
+    filed as the author's asks, and held both issues open (the review of 26 October)."""
+    restated = {"what": "Replay it.", "state": "queued", "bead": "think-wxyz", "source": "body"}
+    found = check_requests.problems(record(issue(results=[OWNED], asks=[restated])), REGISTER)
+    assert found == [
+        (
+            "#7: the queued ask 'Replay it.' is work think-wxyz owns as b's validation; asks "
+            "record what the author asked, so remove it or mark it done"
+        )
+    ]
+
+
+def test_the_github_comparison_holds_an_asks_source_to_the_authors_own_comment() -> None:
+    asks = [
+        {"what": "a", "state": "queued", "bead": "think-wxyz", "source": URL.format(5)},
+        {"what": "b", "state": "queued", "bead": "think-wxyz", "source": URL.format(6)},
+        {"what": "c", "state": "queued", "bead": "think-wxyz", "source": URL.format(9)},
+        {"what": "d", "state": "done", "source": "body"},
+    ]
+    recorded = record(issue(asks=asks, read_through="2026-10-03T00:00:00Z"))
+    live = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": [INTAKE]},
+        ],
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(5, "someone", "2026-10-02T10:00:00Z", "please credit it"),
+            comment(6, "agent", "2026-10-02T11:00:00Z", f"we will\n\n{FOOTER}"),
+        ],
+    }
+    differences = check_requests.compare_github(recorded, live.__getitem__)
+    assert differences == [
+        f"#7: reply missing from the record: {URL.format(6)} (agent, 2026-10-02)",
+        (
+            f"#7: the ask 'b' cites {URL.format(6)}, which is not the author's own comment "
+            "(agent, a reply)"
+        ),
+        f"#7: the ask 'c' cites {URL.format(9)}, not on the issue",
+    ]
+
+
+def test_the_live_record_files_no_validation_as_an_ask_and_sources_every_queued_ask() -> None:
+    """The migration of 26 October holds: on every open issue, each queued ask says where
+    its author asked it, and none is work a result's validation bead owns."""
+    for entry in check_requests.load_record()["issues"]:
+        owners = {
+            bead
+            for result in entry.get("results", ())
+            for bead in result.get("validation") or ()
+        }
+        for ask in entry.get("asks", ()):
+            if entry["state"] == "open" and ask["state"] == "queued":
+                assert ask.get("source"), (entry["number"], ask["what"])
+                assert ask["bead"] not in owners, (entry["number"], ask["what"])
+
+
+# -- #540: adoption, supersession and comments read since the last reply ------------------
+
+
+def test_a_position_a_reply_stated_is_due_again_when_an_adoption_or_supersession_moves_it() -> (
+    None
+):
+    """#540: a reply drafted from now on states each entry's position, so a case adopting
+    the result, or a later result superseding it, is a reply due as a moved rung is."""
+    said = {"result": "bound", "id": "T-001", "position": "pending adoption"}
+    entry = issue(replies=[reply(1, reported=[said])])
+    adopted = Register(REGISTER.results, REGISTER.evidence, positions={"T-001": "current"})
+    states = [check_requests.result_state(r, adopted) for r in entry["results"]]
+    assert check_requests.replies_due(entry, states) == [
+        "bound: the reply of 2026-10-02 stated T-001 at pending adoption; it is now current"
+    ]
+    same = Register(
+        REGISTER.results, REGISTER.evidence, positions={"T-001": "pending adoption"}
+    )
+    states = [check_requests.result_state(r, same) for r in entry["results"]]
+    assert check_requests.replies_due(entry, states) == []
+    # Without positions loaded, as in the gate's summary, nothing is compared.
+    assert due(entry) == []
+
+
+def test_the_draft_states_the_position_a_reply_records() -> None:
+    placed = Register(
+        REGISTER.results, REGISTER.evidence, REGISTER.verifiers, {"T-001": "superseded"}
+    )
+    text = check_requests.draft(issue(), placed, "owner/repo")
+    assert "On the frontier it is superseded by a later result." in text
+    assert "On the frontier" not in check_requests.draft(issue(), REGISTER, "owner/repo")
+
+
+def test_a_comment_read_into_the_record_after_the_last_reply_is_due_a_follow_up() -> None:
+    """#540: #238, #256, #366 and #522 each had an author's comment read into the record
+    (`read_through`) with no reply since; a comment read the day of the reply is taken
+    as answered by it, since reply dates are days."""
+    current = [_named(verification="V3", confirmation="C3", status="confirmed")]
+    later = issue(
+        replies=[reply(1, "2026-10-02", reported=current)], read_through="2026-10-05T09:00:00Z"
+    )
+    assert due(later) == [
+        (
+            "a follow-up: a comment of 2026-10-05 was read into the record after the last "
+            "reply (2026-10-02)"
+        )
+    ]
+    same_day = issue(
+        replies=[reply(1, "2026-10-05", reported=current)], read_through="2026-10-05T09:00:00Z"
+    )
+    assert due(same_day) == []
+
+
+def test_frontier_positions_name_each_standing_in_a_replys_words(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import render_recent_results as recent  # noqa: PLC0415
+
+    standings = {
+        "T-1": recent.HOLDS,
+        "T-2": recent.HOLDS_REPORTED,
+        "T-3": recent.PENDING_ADOPTION,
+        "T-4": recent.SECOND_CERTIFICATE_REPORTED,
+        "T-5": recent.SUPERSEDED,
+        "T-6": recent.NO_STANDING,
+        "T-7": recent.NO_STANDING,
+    }
+    marks = {"T-5": recent.SUPERSEDED, "T-7": recent.SUPERSEDED_IN_PART}
+
+    records = SimpleNamespace(results={ident: {"id": ident} for ident in standings})
+
+    def supersessions(record: Mapping[str, str], _held: str, _records: object) -> list[Any]:
+        ident = record["id"]
+        return [recent.Supersession(marks[ident], ())] if ident in marks else []
+
+    monkeypatch.setattr(recent, "load_records", lambda: records)
+    monkeypatch.setattr(recent, "standing", lambda record, _: standings[record["id"]])
+    monkeypatch.setattr(recent, "supersessions", supersessions)
+    positions = check_requests.frontier_positions()
+    assert positions == {
+        "T-1": "current",
+        "T-2": "current",
+        "T-3": "pending adoption",
+        "T-4": "second certificate",
+        "T-5": "superseded",
+        "T-7": "superseded in part",
+    }
+    assert set(check_requests.POSITION_WORDS) == set(positions.values())
+
+
+# -- #541: a recorded reply's text names what the record says it stated ------------------
+
+
+def test_the_github_comparison_fails_a_reply_whose_text_lacks_an_id_it_is_recorded_with() -> (
+    None
+):
+    """#541, from review A5 of #519: the record could claim a reply stated an id it never
+    did. A renumbered entry is held to the id the reply used (`as`), and an id is matched
+    whole, so T-001 is not found in T-0011."""
+    stated = [
+        {"result": "bound", "id": "T-001", "verification": "V3"},
+        {"result": "bound", "id": "E-replay", "status": "confirmed"},
+    ]
+    renamed = [{"result": "bound", "id": "T-001", "as": "T-009"}]
+    mapped = {"key": "bound", "claim": "c", "register": ["T-001"], "evidence": ["E-replay"]}
+    recorded = record(
+        issue(
+            results=[mapped],
+            replies=[
+                reply(1, "2026-10-01", reported=stated),
+                reply(2, "2026-10-02", reported=renamed, beads=["think-wxyz"]),
+            ],
+            read_through="2026-10-02T12:00:00Z",
+        )
+    )
+    live = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": [INTAKE]},
+        ],
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(1, "owner", "2026-10-01T10:00:00Z", "T-0011 at V3/C3; `E-replay-2` passed"),
+            comment(2, "owner", "2026-10-02T10:00:00Z", "T-009, now owned by `think-wxyz`."),
+        ],
+    }
+    assert check_requests.compare_github(recorded, live.__getitem__) == [
+        (
+            f"#7: reply {URL.format(1)} is recorded as stating T-001, E-replay, which its text "
+            "does not name"
+        )
+    ]
+
+
+# -- The block taxonomy of 26 October 2026 ------------------------------------------------
+
+
+def test_the_github_comparison_holds_the_live_blocked_labels_to_the_record() -> None:
+    blocked = {"type": "owner-decision", "reason": "The owner rules on the credit."}
+    recorded = record(
+        issue(number=7, blocked=blocked),
+        issue(number=8),
+        issue(number=9, blocked=blocked),
+    )
+    label = {"id": 3, "name": "blocked:owner-decision", "color": "b60205"}
+    compute = {"id": 4, "name": "blocked:compute", "color": "fbca04"}
+    live: dict[str, Any] = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "a", "labels": [INTAKE]},
+            {"number": 8, "state": "open", "title": "b", "labels": [INTAKE, compute]},
+            {"number": 9, "state": "open", "title": "c", "labels": [INTAKE, label]},
+        ],
+        **{f"repos/owner/repo/issues/{n}/comments?per_page=100": [] for n in (7, 8, 9)},
+    }
+    assert check_requests.compare_github(recorded, live.__getitem__) == [
+        "#7 lacks the `blocked:owner-decision` label its `blocked` names",
+        "#8 carries `blocked:compute`, which its record does not name",
+    ]
+
+
+HELD_ONLY = "#7: held for the owner, so `blocked` must name owner-decision or owner-reply"
+
+
+@pytest.mark.parametrize(
+    ("entry", "expected"),
+    [
+        (
+            issue(
+                blocked={"type": "author", "reason": "r"}, state="closed", closed="2026-10-03"
+            ),
+            "#7: closed while blocked; remove `blocked`",
+        ),
+        (asking(held=HOLD), HELD_ONLY),
+        (asking(held=HOLD, blocked={"type": "compute", "reason": "r"}), HELD_ONLY),
+        (issue(blocked={"type": "waiting", "reason": "r"}), "blocked/type"),
+        (issue(blocked={"type": "author"}), '"reason" is a required property'),
+    ],
+)
+def test_a_block_is_typed_lifted_by_the_close_and_matches_a_hold(
+    entry: Record, expected: str
+) -> None:
+    found = check_requests.problems(record(entry), REGISTER)
+    assert any(expected in problem for problem in found), found
+
+
+def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> None:
+    """Section B of the intake review of 26 October 2026 lists 37 open issues as blocked;
+    each carries its type, and the label taxonomy names every type the record uses."""
+    by_type: dict[str, set[int]] = {}
+    for entry in check_requests.load_record()["issues"]:
+        if entry.get("blocked"):
+            assert entry["state"] == "open", entry["number"]
+            by_type.setdefault(entry["blocked"]["type"], set()).add(entry["number"])
+    assert {kind: len(numbers) for kind, numbers in by_type.items()} == {
+        "owner-decision": 18,
+        "owner-reply": 2,
+        "standing-hold": 9,
+        "author": 1,
+        "compute": 7,
+    }
+    assert set(by_type) <= set(check_requests.BLOCK_TYPES)
+
+
+def test_a_run_of_ids_names_each_and_a_report_entry_beside_its_register_entry_is_worded() -> (
+    None
+):
+    """Replies write runs (`T-120` to `T-123` joined by an en dash on #419, `T-102 to
+    T-111` on #366), and a draft states a report entry beside its register entry by the
+    register entry's word (`_shown`), so neither is a reply that failed to name what it
+    stated."""
+    mapped = {"key": "bound", "claim": "c", "register": ["T-002"], "evidence": ["E-report"]}
+    said = [
+        {"result": "bound", "id": "T-002", "verification": "V0", "confirmation": "C1"},
+        {"result": "bound", "id": "E-report", "status": "recorded"},
+    ]
+    recorded = record(
+        issue(
+            results=[mapped],
+            replies=[reply(1, "2026-10-01", reported=said)],
+            read_through="2026-10-01T12:00:00Z",
+        )
+    )
+    live = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": [INTAKE]},
+        ],
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(1, "owner", "2026-10-01T10:00:00Z", "T-001\N{EN DASH}T-003 are registered"),
+        ],
+    }
+    assert check_requests.compare_github(recorded, live.__getitem__, REGISTER) == []
+    assert check_requests.compare_github(recorded, live.__getitem__) == [
+        (
+            f"#7: reply {URL.format(1)} is recorded as stating E-report, which its text does "
+            "not name"
+        )
+    ]
+    assert check_requests.worded(recorded["issues"][0], REGISTER) == {"E-report"}

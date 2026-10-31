@@ -52,6 +52,7 @@ from devtools.check_published_site import (
     absent_links,
     cross_paper_link_checks,
     heading_ids,
+    issue_links,
     paper_citations,
     paper_files,
     pdf_pages,
@@ -94,14 +95,25 @@ REPOSITORY_LINKS = (
 
 COMMIT = "0123456789abcdef0123456789abcdef01234567"
 
-#: News carries the current retained history, including the merged launch groups.
-#: Parse only this small section; the fixture does not rebuild the site or prepare math.
-CHANGELOG_BODY = '<h1 id="changelog">News</h1>' + render_changelog.render_news(
+#: News carries the current launch stories, the merged launch groups included, and sends
+#: a reader to the Changelog for the rest. Parse only this small section; the fixture does
+#: not rebuild the site or prepare math.
+CHANGELOG_BODY = '<h1 id="news">News</h1>' + render_changelog.render_news(
     render_changelog.load()
 )
 
+#: The Changelog page carries the whole retained history, every entry at every
+#: significance, as its article's one `changelog` section (`render_overview`
+#: `changelog_page`). Since 26 October 2026 that section is the day rollup rather than a
+#: story an entry, so the fixture builds it the way the page does and nothing else of the
+#: page; building it the old way left the story links out and the audit rightly refused
+#: it.
+HISTORY_BODY = '<h1 id="changelog">Changelog</h1>' + overview_sections.changelog_rollup(
+    overview_data.load(), render_changelog.load()
+)
+
 #: The tree `main` holds at the deploy: every path a fixture page links on `main`.
-CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY)
+CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY + HISTORY_BODY)
 TREE = RepositoryTree(
     files=frozenset(
         {
@@ -193,6 +205,7 @@ def page(
         f"{head(path)}{bar}"
         f'<p>({stamp})</p><a href="{REPO_URL}/blob/{ref}/{link}">Repository</a>{index}'
         + (CHANGELOG_BODY if path == "news.html" else "")
+        + (HISTORY_BODY if path == render_changelog.CHANGELOG_PAGE else "")
     ).encode()
 
 
@@ -2667,3 +2680,15 @@ def test_check_fails_a_forwarder_whose_canonical_link_is_not_its_targets_address
     assert heads.startswith(
         f"forwarder {name}: head: the canonical link is '../papers/n11-optimality-review"
     )
+
+
+def test_issue_links_reads_the_served_pages_unquoted_attributes() -> None:
+    """The deploy minifies its pages, which writes `href=https://...` with no quotes; the
+    issue check of 26 October first read only quoted links and failed T-245's page."""
+    issue = "https://github.com/jlevy/squares/issues/810"
+    built = f'<dd><a href="{issue}" data-site-github-kind="issue">Issue #810</a></dd>'
+    served = f"<dd><a href={issue} data-site-github-kind=issue>Issue #810</a></dd>"
+    assert issue_links(built) == issue_links(served) == {issue}
+    assert issue_links(f"<a href={issue}1>Issue #8101</a>") == {issue + "1"}
+    assert issue_links(f'<a href="{issue}#issuecomment-1">a comment</a>') == {issue}
+    assert issue_links("<a href=https://github.com/other/repo/issues/810>x</a>") == set()

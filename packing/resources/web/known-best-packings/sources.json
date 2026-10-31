@@ -1821,19 +1821,19 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/02f969075f79d5e13fa21e09e381a44e8647b452/certificates/n267.cert"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certificates/best/n268.cert at 964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/8a8879a2972c32cbd2d906049228cc9f0762b02a/search/packer/candidates/s268_lightning.cert at 8a8879a2972c32cbd2d906049228cc9f0762b02a",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         268
       ],
       "n": 268,
-      "path": "resources/web/couzo-issue763-2026-10-23/source/certificates/best/n268.cert",
+      "path": "resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s268_lightning.cert",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
       "retrieved": "2026-10-24",
       "source_n": 268,
-      "url": "https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certificates/best/n268.cert"
+      "url": "https://github.com/evand/square-packing/blob/8a8879a2972c32cbd2d906049228cc9f0762b02a/search/packer/candidates/s268_lightning.cert"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n269.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

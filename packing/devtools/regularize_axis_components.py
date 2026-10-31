@@ -119,7 +119,9 @@ from typing import Any
 from strif import atomic_output_file
 
 from devtools import census_atlas_contact_shades as shades
+from devtools import check_algebraic_witness_independent as algebraic
 from devtools import check_rational_witness_independent as independent
+from devtools import exact_scalars as scalars
 from devtools.atlas_orientation import (
     geometry_transform,
     orient_regularized_view,
@@ -171,7 +173,10 @@ GRID_GENERATOR_V1 = "regularize_grid_slack/1"
 """Its second version (#530): a failed re-solve holds the unchanged squares exactly and
 the identity is also measured under its own pairing. Views of each version keep the
 version that made them, so the layer names both."""
-GRID_GENERATORS = (GRID_GENERATOR, GRID_GENERATOR_V1)
+GRID_GENERATOR_V2 = "regularize_grid_slack/2"
+"""Its third version (think-mbdw, 26 October 2026): a witness over a number field is drawn
+in its own field, and each unchanged tilted square keeps its own exact rotation."""
+GRID_GENERATORS = (GRID_GENERATOR, GRID_GENERATOR_V1, GRID_GENERATOR_V2)
 GENERATORS = (ALGORITHM, EVAND_GENERATOR, *GRID_GENERATORS)
 POLICY_DOCUMENT = "docs/project/policies/regularization-policy.md"
 EVAND_CREDIT = (
@@ -2493,7 +2498,7 @@ def _regularization_problems(
     if not isinstance(item, dict):
         return [f"n={n}: a drawn view carries no regularization record"]
     problems: list[str] = []
-    expected = "same" if own is not None and side == own else "solved"
+    expected = "same" if own is not None and scalars.equal(side, own) else "solved"
     if item.get("side") != expected:
         problems.append(
             f"n={n}: the regularization's side is {item.get('side')!r}, and the view is "
@@ -2515,6 +2520,7 @@ METHOD_MARKS = {
     EVAND_GENERATOR: "devtools.regularize_evand",
     GRID_GENERATOR: GRID_GENERATOR,
     GRID_GENERATOR_V1: GRID_GENERATOR_V1,
+    GRID_GENERATOR_V2: GRID_GENERATOR_V2,
 }
 """What each generator's regularization `method` names, so a record says who made it."""
 
@@ -2556,7 +2562,8 @@ def _drawn_view_problems(
     side = record["side"]
     if str(view.get("side")) != side["view"]:
         problems.append(f"n={n}: the view's side is not its entry's")
-    if (side["relation"] == "same") != (Fraction(side["view"]) == own):
+    stated = scalars.parse_text(side["view"], scalars.field_of(view))
+    if (side["relation"] == "same") != (own is not None and scalars.equal(stated, own)):
         problems.append(f"n={n}: the side relation {side['relation']!r} is not the view's")
     if (side["relation"] == "same") != (record["regularization"]["side"] == "same"):
         problems.append(f"n={n}: the regularization's side does not match the relation")
@@ -2582,10 +2589,14 @@ def _drawn_view_problems(
 def witness_side(witness: dict[str, Any]) -> Fraction | None:
     """`s_W`, the witness's own exact side as the policy defines it (section 2): a rational
     witness's side, or a decimal witness's 36-digit rational promotion at centre dilation
-    1, built as the generators build it and not verified here; None over a number field."""
+    1, built as the generators build it and not verified here; over a number field its
+    side in its field (`exact_scalars`), at which grid-slack draws an algebraic house's
+    view (think-mbdw)."""
     kind = witness["scalar"]["kind"]
     if kind == "rational":
         return Fraction(str(witness["side"]))
+    if kind == scalars.NUMBER_FIELD:
+        return scalars.parse(witness["side"], scalars.field_of(witness))  # pyright: ignore[reportReturnType]
     if kind == "decimal":
         _squares, side = _promoted_candidate(
             witness, rational_digits=RATIONAL_DIGITS, dilation=Fraction(1)
@@ -2595,12 +2606,12 @@ def witness_side(witness: dict[str, Any]) -> Fraction | None:
 
 
 def view_side(text: str) -> Fraction:
-    """A view's exact side `s_V`, read from the document's head, before its squares."""
-    head = text.split("\n  squares:\n", 1)[0]
-    found = (load_yaml(head).get("witness") or {}).get("side")
-    if found is None:
-        found = load_yaml(text)["witness"]["side"]
-    return Fraction(str(found))
+    """A view's exact side `s_V`, read from the document's head, before its squares; over
+    a number field, in the field its head states (`exact_scalars.field_of`)."""
+    head = load_yaml(text.split("\n  squares:\n", 1)[0]).get("witness") or {}
+    if head.get("side") is None:
+        head = load_yaml(text)["witness"]
+    return scalars.parse(head["side"], scalars.field_of(head))  # pyright: ignore[reportReturnType]
 
 
 def case_bound(frontier: Path, n: int) -> dict[str, Any] | None:
@@ -2945,7 +2956,7 @@ def measured_identity(witness: dict[str, Any], view: dict[str, Any]) -> dict[str
     from devtools import regularize_evand as driver  # noqa: PLC0415 - it imports this module
 
     frame = driver.source_frame(witness)
-    side, placements, _corners = driver.view_geometry(view)
+    side, placements = driver.measured_geometry(view)
     reference = frame.side if frame.side is not None else Fraction(frame.side_text)
     found = driver.identity((side, placements), (reference, frame.placements), (), "witness")
     measured: dict[str, Any] = {"one_to_one": bool(found.get("one_to_one"))}
@@ -2968,10 +2979,23 @@ def decide_drawn_view(
     path = layout.repo / record["view"]["path"]
     text = gzip.decompress(path.read_bytes()).decode("utf-8")
     view = load_yaml(text)["witness"]
-    side, squares = view_corners(view)
     problems: list[str] = []
-    if len(squares) != n:
-        problems.append(f"n={n}: the drawn view holds {len(squares)} squares")
+    if scalars.field_of(view) is not None:
+        # A view over a number field (think-mbdw): the repository's verifier over its
+        # field and the independent checker for number fields, on the view's own text.
+        if view["n"] != n or len(view["squares"]) != n:
+            problems.append(f"n={n}: the drawn view holds {len(view['squares'])} squares")
+        first, _report = exact_verify(view)
+        if not first["verification_passed"]:
+            problems.append(f"n={n}: the repository verifier refuses the drawn view")
+        if not algebraic.check_witness(view)["verification_passed"]:
+            problems.append(f"n={n}: the independent checker refuses the drawn view")
+        squares: list[Corners] = []
+        side: Any = None
+    else:
+        side, squares = view_corners(view)
+        if len(squares) != n:
+            problems.append(f"n={n}: the drawn view holds {len(squares)} squares")
     source = load_yaml((layout.repo / record["source"]["witness"]).read_text(encoding="utf-8"))
     recorded = record["regularization"]["identity"]
     measured = measured_identity(source["witness"], view)
@@ -2980,9 +3004,9 @@ def decide_drawn_view(
             f"n={n}: the drawn view's identity measures {measured}, its entry records "
             f"{ {key: recorded.get(key) for key in IDENTITY_FIELDS} }"
         )
-    if not verify_packing(squares, side, sign=rational_sign, bucket=True).valid:
+    if squares and not verify_packing(squares, side, sign=rational_sign, bucket=True).valid:
         problems.append(f"n={n}: the repository verifier refuses the drawn view")
-    if not independent.check_squares(squares, side)["verification_passed"]:
+    if squares and not independent.check_squares(squares, side)["verification_passed"]:
         problems.append(f"n={n}: the independent checker refuses the drawn view")
     with tempfile.TemporaryDirectory() as scratch:
         plain = Path(scratch) / "view.yaml"

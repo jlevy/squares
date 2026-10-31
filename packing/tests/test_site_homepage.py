@@ -67,7 +67,14 @@ def payloads() -> dict[str, bytes]:
     """The real destination pages and exercised cases, with every browser dependency."""
     documents = {
         name: site_renders.html(name)
-        for name in ("index.html", "news.html", "atlas.html", "about.html", "results.html")
+        for name in (
+            "index.html",
+            "news.html",
+            "changelog.html",
+            "atlas.html",
+            "about.html",
+            "results.html",
+        )
     }
     documents.update(
         {
@@ -238,6 +245,36 @@ def _pointer_cases(page: Any, cases: tuple[int, ...]) -> list[dict[str, Any]]:
     return readings
 
 
+def _choose_theme(page: Any, mode: str) -> None:
+    """Choose `mode` from the theme menu, waiting on the menu's own state at each step.
+
+    The menu is a native popover that the gear toggles. `theme.js` marks the gear
+    `aria-expanded` as the popover changes state, and its `toggle` handler, a queued task,
+    then places the menu under the gear and focuses the checked choice. The fixture used to
+    press the gear and then a choice and wait on neither: a choice was pressed while the
+    handler could still move the menu, and nothing checked that a press had closed it. The
+    staged rounds checked nothing after a press, and a System round's resolved-theme check
+    passes without the press when the OS scheme already resolves to it. A press the menu
+    did not take left it open, the next press on the gear closed it, and the next choice
+    stayed hidden for the whole 30 s click timeout: the shape of #550's failure, whose
+    trigger has not been reproduced. So the gear must read closed before it is pressed and
+    open after, the checked choice must have the handler's focus before a choice is
+    pressed, and the gear must read closed and the root carry the mode after: a press that
+    does not take fails at that press, with the menu's state in the message.
+    """
+    sync_api = site_browser.api()
+    button = page.locator(".site-theme-button")
+    menu = page.locator("#site-theme-menu")
+    sync_api.expect(button).to_have_attribute("aria-expanded", "false")
+    button.click()
+    sync_api.expect(button).to_have_attribute("aria-expanded", "true")
+    sync_api.expect(menu.locator('[aria-checked="true"]')).to_be_focused()
+    menu.locator(f'[data-theme-choice="{mode}"]').click()
+    sync_api.expect(button).to_have_attribute("aria-expanded", "false")
+    sync_api.expect(menu).to_be_hidden()
+    sync_api.expect(page.locator("html")).to_have_attribute("data-kpress-theme", mode)
+
+
 def _themes(page: Any) -> list[dict[str, Any]]:
     """Switch the actual theme controls and OS scheme in each view of every case."""
     sync_api = site_browser.api()
@@ -254,8 +291,7 @@ def _themes(page: Any) -> list[dict[str, Any]]:
         ):
             page.emulate_media(color_scheme=scheme)
             page.evaluate(THEME, {"scroll_top": True})
-            page.locator(".site-theme-button").click()
-            page.locator(f'[data-theme-choice="{mode}"]').click()
+            _choose_theme(page, mode)
             resolved = scheme if mode == "system" else mode
             sync_api.expect(page.locator("html")).to_have_attribute(
                 "data-kpress-resolved-theme", resolved
@@ -585,8 +621,7 @@ def atlas_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[s
                 page.evaluate(TRANSITION, {"install": False, "settle": True})
                 page.emulate_media(color_scheme=scheme)
                 page.evaluate(THEME, {"scroll_top": True})
-                page.locator(".site-theme-button").click()
-                page.locator(f'[data-theme-choice="{mode}"]').click()
+                _choose_theme(page, mode)
                 report["staged_themes"].append(
                     {
                         **page.evaluate(THEME, {"scroll_top": False}),
@@ -687,7 +722,6 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     home = seen[width]["initial"]
     assert home["headings"] == [
         "the-atlas-of-square-packings",
-        "recently-added",
         "news",
         "recent-results",
         "papers",
@@ -700,7 +734,9 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "more-resources",
         "about-the-squares-project",
     ]
-    assert len(home["section_title_styles"]) == 10
+    # Nine since 26 October 2026: Recently Added's title left with the block, which the
+    # Changelog page now carries.
+    assert len(home["section_title_styles"]) == 9
     carried = news_highlights.carried(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
         entry["id"] for entry in carried
@@ -937,7 +973,7 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         assert footer is not None
         assert footer["family"] == news["family"]
         assert footer["arrow"] == "external"
-        assert footer["label"] == "Full changelog on GitHub"
+        assert footer["label"] == "Changelog on GitHub"
         assert footer["href"] == f"{document['repository']}/blob/main/CHANGELOG.md"
         assert preview["reference_article_title"] is not None
         for surface in (preview, news):
@@ -1298,11 +1334,21 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
 def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts(
     browser: Any, payloads: dict[str, bytes], width: int
 ) -> None:
-    """Recently Added sits above News, opens on its newest day and keeps every line
-    inside the page at both widths, in both schemes and without scripts; its days are
-    native disclosures, so the older ones open by keyboard with or without scripts."""
+    """The log opens on its newest day and keeps every line inside the page at both
+    widths, in both schemes and without scripts; its days are native disclosures, so the
+    older ones open by keyboard with or without scripts.
+
+    It read the home page's Recently Added until 26 October 2026, when the owner moved
+    the block to the Changelog and left the home page a button to it.
+    """
     overview = site_renders.overview()
-    days = [recent.day.isoformat() for recent in overview_sections.recent_days(overview)]
+    document = render_changelog.load()
+    landed = overview_sections.recent_days(overview, days=None)
+    days = sorted(
+        {recent.day.isoformat() for recent in landed}
+        | {entry["date"] for entry in document["entries"]},
+        reverse=True,
+    )
     for scripts in (True, False):
         page = browser.new_page(
             viewport={"width": width, "height": 900},
@@ -1311,10 +1357,8 @@ def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts
         )
         _serve(page, payloads)
         try:
-            page.goto(ORIGIN, wait_until="load")
-            section = page.locator("#recently-added")
-            news = page.locator("#news")
-            assert section.bounding_box()["y"] < news.bounding_box()["y"]
+            page.goto(f"{ORIGIN}{render_changelog.CHANGELOG_PAGE}", wait_until="load")
+            section = page.locator("#changelog")
             blocks = page.locator(".site-added details[data-day]")
             assert blocks.count() == len(days)
             shown = [blocks.nth(index).get_attribute("data-day") for index in range(len(days))]
@@ -1346,16 +1390,18 @@ def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts
 def test_excluded_news_bookmarks_reach_the_retained_changelog(
     browser: Any, payloads: dict[str, bytes]
 ) -> None:
+    """The bookmarks News keeps without showing them now land on this site's own
+    Changelog page rather than on `CHANGELOG.md` at GitHub (the owner, 2026-10-26), and
+    the `changelog` bookmark the section answered on News leads there too."""
     sync_api = site_browser.api()
     document = render_changelog.load()
-    targets = render_changelog.archived_news_targets(document)
+    targets = render_changelog.news_forward_targets(document)
     assert targets
+    assert all(
+        target.startswith(render_changelog.CHANGELOG_PAGE) for target in targets.values()
+    )
     page = browser.new_page(viewport={"width": 1280, "height": 900})
     _serve(page, payloads)
-    page.route(
-        f"{document['repository']}/blob/main/CHANGELOG.md",
-        lambda route: route.fulfill(body="<p>Retained project changelog</p>"),
-    )
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     try:
@@ -1364,7 +1410,7 @@ def test_excluded_news_bookmarks_reach_the_retained_changelog(
                 encoded = f"%{ord(anchor[0]):02X}{anchor[1:]}"
                 for fragment in (anchor, encoded):
                     page.goto(f"{ORIGIN}{surface}#{fragment}", wait_until="load")
-                    sync_api.expect(page).to_have_url(target)
+                    sync_api.expect(page).to_have_url(f"{ORIGIN}{target}")
             malformed = f"{ORIGIN}{surface}#%E0%A4%A"
             page.goto(malformed, wait_until="load")
             sync_api.expect(page).to_have_url(malformed)

@@ -11,7 +11,7 @@ import html
 import re
 import subprocess
 import sys
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from datetime import date, datetime
 from functools import cache
 from html.parser import HTMLParser
@@ -33,6 +33,12 @@ from mdit_py_plugins.attrs import attrs_block_plugin, attrs_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin
 from strif import atomic_output_file
 
+from devtools.github_references import (
+    cited_issues,
+    issue_opened,
+    issue_url,
+    issues_reporting,
+)
 from devtools.migrate_math import classify
 from devtools.overview_data import MATH, breakable_quotients, prose_tex
 from devtools.repo_links import path_kind, repo_url
@@ -77,6 +83,15 @@ NEWS_FLOOR = 3
 #: The levels the News archive opens on, and what an address without `news-s` means
 #: there (`news-filters.js`).
 NEWS_LEVELS = (4, 5)
+#: Where the retained history is served: the page that owns the `changelog` bookmark and
+#: an anchor for every entry, whatever its significance
+#: (`render_overview.changelog_page`). News shows the S3+ stories and sends a reader here
+#: for the rest (the owner, 2026-10-26); before that the section lived on News itself and
+#: the only full view was `CHANGELOG.md` on GitHub.
+CHANGELOG_PAGE = "changelog.html"
+#: Where the stories are served. A change the Changelog lists and News tells links to
+#: the story rather than repeating it (`changelog_entry_line`).
+NEWS_PAGE = "news.html"
 
 
 def news_rubric_meanings(text: str) -> dict[int, str]:
@@ -108,8 +123,12 @@ def news_significance_tooltip(score: int) -> str:
     return f"{news_significance_meanings()[score]}."
 
 
-def entry_significance(entry: Document) -> Significance:
-    """The typed significance view of a structurally validated entry."""
+def entry_significance(entry: Mapping[str, Any]) -> Significance:
+    """The typed significance view of a structurally validated entry.
+
+    Any mapping, since it only reads: a `Document` satisfies it, and so does an entry a
+    publication audit holds as a read-only mapping.
+    """
     return {
         "score": entry["significance"]["score"],
         "rationale": entry["significance"]["rationale"],
@@ -692,6 +711,132 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
         )
 
 
+#: A GitHub address written in an entry's prose, up to the Markdown that closes it.
+_GITHUB_URL = re.compile(r"https://github\.com/[^\s)\]<>\"']+")
+#: An entry's first line in the YAML as written.
+_ENTRY_LINE = re.compile(r"^  - id: (\S+)$")
+
+
+def required_issues(
+    document: Document,
+    entry: Document,
+    reporting: dict[str, tuple[int, ...]] | None = None,
+    opened: Mapping[int, str] | None = None,
+) -> tuple[int, ...]:
+    """The issues an entry must list in `issues`: each issue that reported one of its
+    `result_ids` (`campaign/result-requests.yaml`, `github_references.reporting_issues`)
+    and was opened by the entry's date, and each issue of this repository its own
+    summary, details or references link.
+
+    An entry may list more; editorial links to other issues stay the author's choice."""
+    texts = [
+        entry["summary"],
+        entry.get("details", ""),
+        *(item["target"] for item in entry.get("references", [])),
+    ]
+    linked = cited_issues(
+        document["repository"], (url for text in texts for url in _GITHUB_URL.findall(text))
+    )
+    reported = issues_reporting(
+        entry.get("result_ids", ()),
+        reporting,
+        on_or_before=str(entry["date"]),
+        opened=_opening_days(reporting, opened),
+    )
+    return tuple(sorted({*reported, *linked}))
+
+
+def _opening_days(
+    reporting: dict[str, tuple[int, ...]] | None, opened: Mapping[int, str] | None
+) -> Mapping[int, str]:
+    """The issues' opening days: the committed record's, unless a caller passes its own
+    table, and none for a caller's own `reporting` table with no days of its own."""
+    if opened is not None:
+        return opened
+    return issue_opened() if reporting is None else {}
+
+
+def issue_findings(
+    document: Document,
+    reporting: dict[str, tuple[int, ...]] | None = None,
+    opened: Mapping[int, str] | None = None,
+) -> list[str]:
+    """Each entry whose `issues` omits an issue `required_issues` names, or lists one
+    opened after the entry's date, which it cannot have come from."""
+    findings = []
+    days = _opening_days(reporting, opened)
+    for entry in document["entries"]:
+        listed = set(entry.get("issues", ()))
+        if missing := [
+            n for n in required_issues(document, entry, reporting, days) if n not in listed
+        ]:
+            findings.append(
+                f"{entry['id']}: issues omits {', '.join(f'#{number}' for number in missing)}"
+            )
+        if later := sorted(n for n in listed if days.get(n, "") > str(entry["date"])):
+            findings.append(
+                f"{entry['id']}: issues lists {', '.join(f'#{number}' for number in later)}, "
+                "opened after the entry's date"
+            )
+    return findings
+
+
+def backfill_issues(
+    text: str, document: Document, reporting: dict[str, tuple[int, ...]] | None = None
+) -> str:
+    """The changelog's YAML with each entry's `issues` widened to `required_issues`.
+
+    The edit is textual so the hand-written layout survives: an existing `issues` field is
+    rewritten in place and a missing one goes directly under `pull_requests`, in the same
+    flow or block style. Entries already complete, and `frozen_entries`, are untouched."""
+    entries = {entry["id"]: entry for entry in document["entries"]}
+    lines = text.splitlines(keepends=True)
+    start = next(index for index, line in enumerate(lines) if line.rstrip("\n") == "entries:")
+    end = next(
+        (
+            index
+            for index in range(start + 1, len(lines))
+            if re.match(r"^[a-z_]+:", lines[index])
+        ),
+        len(lines),
+    )
+    heads = [
+        index for index in range(start + 1, end) if _ENTRY_LINE.match(lines[index].rstrip("\n"))
+    ]
+
+    def field(first: int, last: int, key: str) -> tuple[int, int] | None:
+        """The lines a top-level field of an entry spans: its key and any block items."""
+        for index in range(first, last):
+            if lines[index].startswith(f"    {key}:"):
+                stop = index + 1
+                while stop < last and lines[stop].startswith("      "):
+                    stop += 1
+                return index, stop
+        return None
+
+    edits: list[tuple[int, int, list[str]]] = []
+    for head, tail in zip(heads, [*heads[1:], end], strict=True):
+        match = _ENTRY_LINE.match(lines[head].rstrip("\n"))
+        assert match is not None
+        entry = entries[match[1]]
+        listed = set(entry.get("issues", ()))
+        wanted = sorted(listed | set(required_issues(document, entry, reporting)))
+        if wanted == sorted(listed):
+            continue
+        pulls = field(head, tail, "pull_requests")
+        if pulls is None:
+            raise ValueError(f"{entry['id']}: no pull_requests to place issues under")
+        if "[" in lines[pulls[0]]:
+            rendered = [f"    issues: [{', '.join(map(str, wanted))}]\n"]
+        else:
+            rendered = ["    issues:\n", *(f"      - {number}\n" for number in wanted)]
+        span = field(head, tail, "issues") or (pulls[1], pulls[1])
+        edits.append((*span, rendered))
+    for first, last, replacement in sorted(edits, reverse=True):
+        lines[first:last] = replacement
+    return "".join(lines)
+
+
 def load(path: Path = SRC) -> Document:
     """Read one enforced changelog; no network or GitHub metadata discovery."""
     document = load_yaml(path.read_text(encoding="utf-8"))
@@ -1070,39 +1215,56 @@ def _entry_lines(
             )
         else:
             out.extend([evidence + ending, ""])
+    issues = sorted(entry.get("issues", []))
+    issue_targets = {issue_url(document["repository"], number) for number in issues}
     links = [
         _markdown_link(
-            f"#{number}", f"{document['repository']}/pull/{number}", destination=destination
+            f"Issue #{number}",
+            issue_url(document["repository"], number),
+            destination=destination,
+        )
+        for number in issues
+    ]
+    links.extend(
+        _markdown_link(
+            f"PR #{number}", f"{document['repository']}/pull/{number}", destination=destination
         )
         for number in sorted(entry["pull_requests"])
-    ]
+    )
+    # A reference to a listed issue's thread is that issue's link, already given.
     links.extend(
         _markdown_link(item["label"], item["target"], destination=destination)
         for item in entry.get("references", [])
+        if item["target"].rstrip("/") not in issue_targets
     )
-    out.extend(
-        [
-            "PRs and supporting records:"
-            + label_separator
-            + link_separator.join(links)
-            + ending,
-            "",
-        ]
-    )
+    heading = "Issues, PRs and supporting records:" if issues else "PRs and supporting records:"
+    out.extend([heading + label_separator + link_separator.join(links) + ending, ""])
     return out
 
 
 def render_markdown(
-    document: Document, *, destination: Destination = "github", heading_level: int = 2
+    document: Document,
+    *,
+    destination: Destination = "github",
+    heading_level: int = 2,
+    include_heading: bool = True,
 ) -> str:
-    """A shared, date-grouped section; stable anchors are independent of titles."""
+    """A shared, date-grouped section; stable anchors are independent of titles.
+
+    `include_heading` writes the section's own Changelog heading and the `changelog`
+    anchor with it. The site's Changelog page is titled by its own article, which owns
+    that anchor there, so it asks for the days and their entries alone and the days sit
+    one level under `heading_level` as they do in a section."""
     if destination not in ("github", "site") or heading_level not in (1, 2, 3, 4):
         raise ValueError("invalid changelog destination or heading depth")
     validate(document)
-    if destination == "site":
-        out = [f'<h{heading_level} id="changelog">Changelog</h{heading_level}>', ""]
-    else:
-        out = ['<a id="changelog"></a>', "", "#" * heading_level + " Changelog", ""]
+    out: list[str] = []
+    if include_heading:
+        out = (
+            [f'<h{heading_level} id="changelog">Changelog</h{heading_level}>', ""]
+            if destination == "site"
+            else ['<a id="changelog"></a>', "", "#" * heading_level + " Changelog", ""]
+        )
     last_date = ""
     for entry in ordered_entries(document):
         if entry["date"] != last_date:
@@ -1168,7 +1330,8 @@ def news_entries(document: Document) -> list[Document]:
 
 
 def archived_news_targets(document: Document) -> dict[str, str]:
-    """Retired article and day bookmarks still reach their retained changelog entries."""
+    """Retired article and day bookmarks still reach their retained changelog entries,
+    which the site now serves itself (`CHANGELOG_PAGE`)."""
     public_ids = {entry["id"] for entry in news_entries(document)}
     excluded = [entry for entry in document["entries"] if entry["id"] not in public_ids]
     anchors = [entry_anchor(entry["id"]) for entry in excluded]
@@ -1177,10 +1340,94 @@ def archived_news_targets(document: Document) -> dict[str, str]:
         f"changelog-date-{day}"
         for day in sorted({entry["date"] for entry in excluded} - public_days)
     )
-    return {
-        anchor: f"{document['repository']}/blob/main/CHANGELOG.md#{anchor}"
-        for anchor in anchors
-    }
+    return {anchor: f"{CHANGELOG_PAGE}#{anchor}" for anchor in anchors}
+
+
+def news_forward_targets(document: Document) -> dict[str, str]:
+    """Every bookmark News keeps without showing it, by anchor: the `changelog` bookmark
+    the section answered here before the history took a page of its own, then each entry
+    and day below the News floor (`archived_news_targets`)."""
+    return {"changelog": f"{CHANGELOG_PAGE}#changelog", **archived_news_targets(document)}
+
+
+def entry_targets(
+    document: Mapping[str, Any], entry: Mapping[str, Any], *, supporting: bool
+) -> list[tuple[str, str]]:
+    """An entry's GitHub threads as `(label, target)`, issues then pull requests, and
+    with `supporting` its artifacts, publication evidence and supporting records too.
+
+    A change News tells carries the second group in its story, so its Changelog line
+    asks for `supporting=False` and gives the threads alone. A change News never shows
+    has no other reader surface, so its line carries everything it declares and
+    `check_published_site.changelog_checks` holds it to that.
+    """
+    issues = sorted(entry.get("issues", []))
+    issue_targets = {issue_url(document["repository"], number) for number in issues}
+    pairs = [
+        (f"Issue #{number}", issue_url(document["repository"], number)) for number in issues
+    ]
+    pairs.extend(
+        (f"PR #{number}", f"{document['repository']}/pull/{number}")
+        for number in sorted(entry["pull_requests"])
+    )
+    if not supporting:
+        return pairs
+    pairs.extend((item["label"], item["target"]) for item in entry.get("artifacts", []))
+    publication = entry.get("publication", {})
+    if publication:
+        pairs.append(("Publication evidence", publication["evidence"]))
+    # A reference naming a listed issue is that issue's own link, already given.
+    pairs.extend(
+        (item["label"], item["target"])
+        for item in entry.get("references", [])
+        if item["target"].rstrip("/") not in issue_targets
+    )
+    return pairs
+
+
+def _changelog_link(label: str, target: str) -> str:
+    """One link on a Changelog line. A place off the site opens in a new tab, as every
+    other off-site link on the site does (`overview_sections.external_link`)."""
+    url = serialized_target(target)
+    away = ' target="_blank" rel="noopener noreferrer"' if url.startswith("http") else ""
+    return f'<a href="{html.escape(url, quote=True)}"{away}>{html.escape(label)}</a>'
+
+
+def changelog_entry_line(
+    document: Mapping[str, Any], entry: Mapping[str, Any], *, in_news: bool
+) -> str:
+    """One site or project change in its day's block on the Changelog page: its title,
+    then on the quieter line its score and every GitHub thread behind it.
+
+    The title links to the change's own News story where it has one, so the detail is one
+    click away and is written once. Where News never shows the change this line is its
+    only reader surface, so it carries the supporting records as well
+    (`entry_targets`). The line holds the entry's anchor, which keeps the retired
+    article and day bookmarks that `archived_news_targets` forwards here resolving.
+
+    The Changelog is "concise, mostly complete, linked to github issues and PRs clearly",
+    and a story belongs to News rather than to both surfaces (the owner, 26 October 2026).
+    """
+    anchor = entry_anchor(entry["id"])
+    title = inline_html(entry["title"], allow_links=False)
+    head = f'<a href="{NEWS_PAGE}#{anchor}">{title}</a>' if in_news else title
+    parts = [
+        _changelog_link(label, target)
+        for label, target in entry_targets(document, entry, supporting=not in_news)
+    ]
+    # A release News never announces is named here, since this line is then the only
+    # reader surface that could carry its component editions.
+    if not in_news and entry.get("releases"):
+        editions = "; ".join(
+            f"{html.escape(_component_label(item['component']))} {html.escape(item['version'])}"
+            for item in entry["releases"]
+        )
+        parts.append(editions)
+    score = entry_significance(entry)["score"]
+    return (
+        f'<li id="{html.escape(anchor, quote=True)}">{head}'
+        f"<small>S{score} · {' · '.join(parts)}</small></li>"
+    )
 
 
 def _news_forward_anchors(targets: dict[str, str]) -> str:
@@ -1441,14 +1688,19 @@ def render_news(
             )
         out.append(card)
     out.append("</div>")
-    if limit is None and (archived := archived_news_targets(document)):
-        out.append(_news_forward_anchors(archived))
-        target = html.escape(f"{document['repository']}/blob/main/CHANGELOG.md", quote=True)
+    if limit is None:
+        out.append(_news_forward_anchors(news_forward_targets(document)))
+        source = html.escape(f"{document['repository']}/blob/main/CHANGELOG.md", quote=True)
         from devtools.overview_sections import arrow_icon  # noqa: PLC0415
 
+        # The archive closes on the whole history: this site's Changelog page first, then
+        # the generated file on GitHub (the owner, 2026-10-26).
         out.append(
-            f'<p class="site-action-row"><a class="site-action" href="{target}" '
-            'aria-label="Full changelog on GitHub">Full changelog '
+            '<p class="site-action-row">'
+            f'<a class="site-action" href="{CHANGELOG_PAGE}">Changelog'
+            f"{arrow_icon('right')}</a>"
+            f'<a class="site-action" href="{source}" '
+            'aria-label="Changelog on GitHub">Changelog on GitHub'
             f"{arrow_icon('external')}</a></p>"
         )
     return "\n".join(out)
@@ -1456,12 +1708,12 @@ def render_news(
 
 def legacy_news_anchors(document: Document) -> str:
     """Keep old About bookmarks navigable without duplicating the history there."""
-    anchors = ["changelog", *(entry_anchor(entry["id"]) for entry in document["entries"])]
+    anchors = [entry_anchor(entry["id"]) for entry in document["entries"]]
     anchors.extend(
         f"changelog-date-{day}" for day in sorted({e["date"] for e in document["entries"]})
     )
     targets = {anchor: f"news.html#{anchor}" for anchor in anchors}
-    targets.update(archived_news_targets(document))
+    targets.update(news_forward_targets(document))
     return _news_forward_anchors(targets)
 
 
@@ -1519,9 +1771,31 @@ def main(argv: Sequence[str] | None = None) -> int:
         "raised since HEAD's merge base with REF are owed after the merge, not failed, "
         f"and with {MAIN_DELIVERY_BASE}, main's own delivery, owed results only warn",
     )
+    parser.add_argument(
+        "--backfill-issues",
+        action="store_true",
+        help="Write into the source each issue an entry must list and does not "
+        "(`required_issues`), then continue",
+    )
     options = parser.parse_args(argv)
     try:
         document = load(options.source)
+        if options.backfill_issues:
+            text = options.source.read_text(encoding="utf-8")
+            if (filled := backfill_issues(text, document)) != text:
+                with atomic_output_file(options.source) as output:
+                    output.write_text(filled, encoding="utf-8")
+                print(f"wrote missing issues into {options.source}")
+            document = load(options.source)
+        if findings := issue_findings(document):
+            for finding in findings:
+                print(f"changelog: {finding}", file=sys.stderr)
+            print(
+                "changelog: an entry lists each issue that reported its results or that it "
+                "links; run python -m devtools.render_changelog --backfill-issues",
+                file=sys.stderr,
+            )
+            return 1
         if options.baseline:
             validate_frozen(document, load(options.baseline))
         if options.baseline_ref:

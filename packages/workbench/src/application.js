@@ -3804,6 +3804,7 @@ const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
       holdSquareColors: ANIMATE.holdSquare,
       classes: paintOut.classes,
       centres: paintOut.centres.slice(),
+      sharedCentres: COLOUR.angleCentres.slice(),
       sizes: paintOut.sizes.slice(),
       slots: paintOut.slots.slice(),
       contacts: paintOut.contacts.slice(),

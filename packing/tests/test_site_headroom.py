@@ -199,7 +199,10 @@ def test_focus_and_open_theme_menu_keep_header_visible(
         page.locator(".site-headroom").wait_for(state="attached")
         page.evaluate(SCROLL, 600)
         page.locator(
-            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+            # The bar's own row: the mobile toggle where it is shown, otherwise the
+            # first category's disclosure. Overview moved into the Project menu on
+            # 26 October 2026, so its link is not visible until that menu is opened.
+            ".site-nav :is(.site-nav-mobile-toggle, .site-nav-disclosure):visible"
         ).first.focus()
         assert not page.evaluate(STATE)["hidden"]
         page.evaluate(SCROLL, 700)
@@ -232,7 +235,10 @@ def test_anchor_target_clears_the_whole_header(browser: Any, shells: dict[str, P
         page.locator(".site-headroom").wait_for(state="attached")
         page.evaluate(ANCHOR)
         page.locator(
-            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+            # The bar's own row: the mobile toggle where it is shown, otherwise the
+            # first category's disclosure. Overview moved into the Project menu on
+            # 26 October 2026, so its link is not visible until that menu is opened.
+            ".site-nav :is(.site-nav-mobile-toggle, .site-nav-disclosure):visible"
         ).first.focus()
         state = page.evaluate(STATE)
         assert state["targetTop"] >= state["bottom"], state
@@ -336,7 +342,10 @@ def test_header_measurement_does_not_restyle_the_native_math_document(
         assert wide["offset"] == pytest.approx(wide["height"] + 8, abs=0.01)
         page.evaluate(ANCHOR)
         page.locator(
-            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+            # The bar's own row: the mobile toggle where it is shown, otherwise the
+            # first category's disclosure. Overview moved into the Project menu on
+            # 26 October 2026, so its link is not visible until that menu is opened.
+            ".site-nav :is(.site-nav-mobile-toggle, .site-nav-disclosure):visible"
         ).first.focus()
         anchored = page.evaluate(STATE)
         assert anchored["targetTop"] >= anchored["bottom"], anchored
@@ -397,7 +406,7 @@ def test_header_is_usable_without_javascript(browser: Any, shells: dict[str, Pat
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
         nav = page.locator(".site-nav")
         assert nav.is_visible()
-        assert nav.locator('a[data-page="project"]').is_visible()
+        assert nav.locator('a[data-page="about-project"]').is_visible()
         assert nav.locator('a[data-page="github"]').is_visible()
     finally:
         page.close()

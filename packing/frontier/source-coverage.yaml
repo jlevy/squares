@@ -219,10 +219,15 @@ sources:
   - E-evand-exact-form-n152-report
   - E-evand-exact-form-n177-report
   - E-evand-local-minima-178-report
-  notes: T120–T123 retain the four new exact-form feasible-side claims as V0/C0; T124 retains the
+  notes: >-
+    T120–T123 retain the four new exact-form feasible-side claims as V0/C0; T124 retains the
     actual178 non-strict local-minimum roster as V0/C0. Catalogue metadata accounts for all269 exact
     and258 Lean flags as source assertions. Canonical algebraic registry integration belongs to PR403;
-    no source geometry, minimality or full Lean replay was admitted here.
+    no source geometry, minimality or full Lean replay was admitted here. Since 26 October 2026 the
+    retained s12/lean/Sqpack/S12HLower.lean, Daniel's kernel proof of s(12) >= 15680/3951, is T-249's
+    evidence (E-n012-evand-s12h-lean-report, issue 535), a formalization of T-049, with its closure
+    in the packet's receipts/s12h-lean-closure.json, under its own coverage entry and key,
+    evand-s12h-lean-2026-09-28 and [Daniel S12H Lean 2026-09-28]; not built here (think-yzl3).
 - id: evand-exact-and-local-reports-2026-10-12
   title: >-
     Grade-C local minima of 233 source configurations of field degree at most 4 (Theorem C), and
@@ -1480,7 +1485,9 @@ sources:
     certificates that revision ad43d29 pinned and added six counts from n = 86 to 95, in
     Tokoharu's format and accepted by his unchanged checker; the packet retains what is new at
     39d8ecc and reads the rest from the 27 September packet. T-046 registers the reported
-    values, and T-070 the 25 counts whose complete replay passed here
+    values, which sqverify-fast's census decided here for all 46 standing certificates of
+    both packets (26 October 2026, review-2026-10-26-wand125-rectangle-certificates-t046.md),
+    and T-070 the 25 counts whose complete replay passed here
     (E-wand125-rectangle-2026-09-28-source-replay); n = 77 and 90 take the n = 76 and 89
     certificates, whose masses lie below them (E-wand125-rectangle-2026-09-28-monotone-report).
     The point-only and mixed bundles of the same revision are
@@ -9914,6 +9921,78 @@ sources:
     19 closure modules are retained byte for byte in the 7 October evand packet. T-235 records
     it as a formalization of T-066. Not built here (think-cs9x, held); the case record is
     unchanged.
+- id: wand125-validtilt9-lean-2026-10-16
+  title: Hosono's Lean kernel proof of Daniel's ValidTilt9, s(k^2 - 4) = k for every k >= 8
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/319a779efcc78db2f92bffc87844446f8723b01d/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean
+  local: resources/web/wand125-validtilt9-lean-2026-10-16/
+  source_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+  scope:
+    n_values: [60, 77, 96, 117, 140, 165, 192, 221, 252, 285, 320]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-k2m4-wand125-validtilt9-lean-report
+  notes: >-
+    wand125/square-packing at 319a779, 16 October 2026: validTilt9, valid9 and bentz4 : ∀ k ≥ 8,
+    minSide (k^2 - 4) = k, on Evan Daniel's k2m4 certificate and library, over 1,275,911
+    generated files the source lists by digest and does not store. MIT. The packet retains
+    the lean/ directory (Main.lean as built, the V9 data, bridge and tilt modules, the two
+    changed library files, the generators, the environment and the receipts) and pins the
+    release validtilt9-lean-v1's assets by digest; every file of the closure is retained
+    here. T-251 records it as a formalization of T-081 at k >= 8. Not built here
+    (think-rw3i, held); the case records are unchanged.
+- id: evand-valid7-lean-2026-10-11
+  title: Hosono's Lean kernel proof of Daniel's Valid7 as merged at evand/square-packing 060c1a1
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/060c1a1052029f81f30c8a97134ee03666b1bb77/lean
+  local: resources/web/evand-valid7-lean-2026-10-11/
+  source_key: '[wand125 Valid7 Lean 2026-10-11]'
+  scope:
+    n_values: [33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-k2m3-wand125-valid7-lean-v1-report
+  notes: >-
+    evand/square-packing at 060c1a1, 11 October 2026: the merge of wand125's PR #6, Valid7 in
+    the Lean kernel and with Daniel's reduction s(k^2 - 3) = k for every k >= 6, the 9,800
+    root modules and Main.lean generated from the release data/valid7-lean-certs-v1. MIT.
+    The packet retains the Valid7 closure (55 modules and the three build pins), VALID7.md
+    and the generators, and pins the release asset v7cert.tar.zst by SHA-256 in its
+    root-name audit. T-250 records it as a formalization of T-064, with version 2. Not built
+    here (think-qu37, an owner decision); the case records are unchanged.
+- id: wand125-valid7-lean-v2-2026-10-17
+  title: Hosono's Lean kernel proof of Daniel's Valid7, version 2
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/649a92042b4b79dda1eca1749c34029aee60990e/lean/valid7
+  local: resources/web/wand125-valid7-lean-v2-2026-10-17/
+  source_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+  scope:
+    n_values: [33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-k2m3-wand125-valid7-lean-v2-report
+  notes: >-
+    wand125/square-packing at 649a920, 17 October 2026: version 2 of the Valid7 kernel proof,
+    the same theorem from the same certificates with re-certified leaves, 62,626 generated
+    files in the release valid7-lean-v2, and a recorded run of about 798 CPU-hours. The
+    folder states no licence, so the packet pins its twelve files by digest and retains
+    none. T-250 records it with version 1. Not built here (think-qu37); the case records are
+    unchanged.
 - id: evand-fang-ryu-lean-2026-10-18
   title: Daniel's Lean proofs of Fang's Theorems 1 and 2 and of Ryu's Theorem 1.4
   role: source-repository
@@ -10593,8 +10672,9 @@ sources:
     (campaign/issue-intake/upper-bounds-evand-20261024) records 268 below T-240 and 304
     below T-241, and does not record 303, which is above T-240's 303; the 303 certificate is
     retained as credit evidence. The case at 304 adopted the 304 certificate on 25 October
-    2026, the selected override there; 268 is staged for the pass's next pull request
-    (select_houses.PENDING_ADOPTION), since the same pass adopted T-240 there.
+    2026, and the case at 268 the 268 certificate on 26 October 2026, staged for the pass's
+    next pull request since the pass of 25 October adopted T-240 there; each is the selected
+    override at its count.
 
 - id: couzo-efef7d1-2026-10-23
   title: Francisco Couzo's own sides at efef7d1 at the counts of the Kaggle notebook rows
@@ -11449,6 +11529,40 @@ sources:
     identity measurements support this (measure/identity-nNNN.json), except at 376, where
     the packing lies nearer 43f666c's and the author is asked. Claude assistance disclosed.
   claims_record: resources/web/amundsk-issue798-2026-10-24/acquisition/beyond-horizon-claims.json
+- id: amundsk-issue819-2026-10-25
+  title: Amund Kristiansen's beyond-horizon certificate at 344, f916f69, issue819
+  role: source-repository
+  url: https://gist.github.com/amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6/f916f69f0ae570935991440712a08ad930469da3
+  local: resources/web/amundsk-issue819-2026-10-25/
+  source_key: '[Kristiansen issue 819 2026-10-25]'
+  scope:
+    n_values: [344]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/amundsk-issue819-2026-10-25/README.md
+  - resources/web/amundsk-issue819-2026-10-25/acquisition/claims.json
+  evidence:
+  - E-amundsk-819-beyond-horizon-report
+  notes: >-
+    Issue 819's dilation certificate, s344_amund.cert in the gist at f916f69, is retained as
+    the author wrote it under the CC0 1.0 dedication the gist and the issue state, admitted
+    only where its exact side rounds up at 12 places to the side the issue prints. 344 lies
+    beyond the case corpus, so no register entry records it. The ledger of 26 October for
+    the issue (campaign/issue-intake/upper-bounds-issue819-20261026), walked from starts
+    frozen at main 5c50803d6 with Göbel's construction beside the row, records it as the
+    current row at the exact side rounded up at 12 places, 1.60e-04 below the row of
+    couzo-964ee2b-2026-10-23, which it supersedes, and 0.200 below Göbel's construction.
+    Both maintained routes accept it and refuse its duplicate-square and outside-container
+    controls (receipts/exact-certification.json.xz), and the sharp controls at exact contact
+    and 1e-30 past it are as expected on both (receipts/sharp-controls.json). The issue
+    calls it a new packing of another lineage than Couzo's, the register's 307 design
+    (Nate Chaoweeraprasit, with PingYou Ltd's certificate, PR #574) stretched one step; the
+    packet's identity measurement finds no symmetry pairing it with Couzo's packing by
+    nearest centres (measure/identity-n344.json). Claude assistance disclosed.
+  claims_record: resources/web/amundsk-issue819-2026-10-25/acquisition/beyond-horizon-claims.json
 - id: evand-n182-2026-10-25
   title: Evan Daniel's new packing at 182, at d99925d, issue 806
   role: source-repository
@@ -11479,6 +11593,58 @@ sources:
     a new packing. T-243 records it at V3/C3 since the 25 October review
     (E-evand-n182-exact-feasibility, E-evand-n182-review-exact-feasibility), and the case
     at 182 adopted it as its house best packing in the pass of 25 October 2026.
+- id: evand-s12h-lean-2026-09-28
+  title: Daniel's Lean kernel proof of s(12) >= 15680/3951 (S12HLower)
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/f58a01774a733b232a88576470332185d8d11641/s12/lean
+  local: resources/web/evand-exact-and-local-reports-2026-10-07/
+  source_key: '[Daniel S12H Lean 2026-09-28]'
+  scope:
+    n_values: [12]
+  reviewed: '2026-10-26'
+  source_date: '2026-09-28'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-n012-evand-s12h-lean-report
+  notes: >-
+    evand/square-packing's S12HLower.lean, first committed on 28 September 2026 and retained in
+    the 7 October evand packet: s12_ge_15680_3951 from T-049's certificate through the BoxTree
+    verifier, the 320 part files generated by gen_data.sh S12H and not stored. MIT. Its
+    nine-module closure is retained in the packet (receipts/s12h-lean-closure.json). T-249
+    records it as a formalization of T-049. Not built here (think-yzl3, an owner decision);
+    the case record is unchanged.
+- id: evand-n299-2026-10-26
+  title: Evan Daniel's new packing at 299, at 1be69ca, issue 824
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/6067db5bf4d41dab7f0e1475e9fa845c0c6d2133/search/packer/candidates
+  local: resources/web/evand-n299-2026-10-26/
+  source_key: '[Daniel n299 2026-10-26]'
+  scope:
+    n_values: [299]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-26'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n299-2026-10-26/acquisition/claims.json
+  evidence:
+  - E-evand-n299-certificate-report
+  notes: >-
+    The certificate at 299 that 1be69ca adds under search/packer/candidates/, committed on
+    26 October 2026 at 03:30:38Z, 21 minutes before issue 824 reported it, and unchanged at
+    6067db5, the pin; retained as the source wrote it with the binary64 packing it dilates,
+    the pre-descent packing, the exact solver's failed 80-digit point and report, and the
+    source store's prior facts, and admitted at its exact side. All 3 native jobs have full
+    outcomes, and the packet's sharp controls meet its margins on both routes. The ledger
+    of 26 October for this import (campaign/issue-intake/upper-bounds-issue824-20261026)
+    records it 1.92e-02 below the case's ceiling, a new packing. T-248 records it at V0/C0;
+    the stage 4 review and the adoption at 299 with both regularizations are think-8hjz's.
+    No selected override or superseded claim is created at this source-only stage; the
+    case is unchanged.
 - id: hyukdongkim-exact-forms-2026-10-25
   title: Hyukdong Kim's exact sides at 88, 126, 172, 199 and 263 in the issue 804 attachment
   role: first-party-release
@@ -11513,6 +11679,35 @@ sources:
     (think-4rzl), so no packing at either side has been decided here. The author's comment of
     07:22:16Z concedes 88, 126 and 199 to issue 639. The case records are unchanged until
     adoption.
+- id: hyukdongkim-s297-2026-10-25
+  title: Hyukdong Kim's exact degree-21 side at 297 in two issue 804 comments
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/804#issuecomment-6397593690
+  local: resources/web/hyukdongkim-s297-2026-10-25/
+  source_key: '[Kim s297 2026-10-25]'
+  scope:
+    n_values: [297]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - campaign/issue-intake/upper-bounds-issue804-297-20261025/ledger.json
+  evidence:
+  - E-hyukdongkim-804-s297-report
+  notes: >-
+    The comment of 12:23:57Z prints the polynomial and the side to 100 places and attaches an
+    exact configuration under CC0 1.0, which the importing session could not download; the
+    packet keeps both comments' text, the polynomial as a derived fact and the attachment's
+    stated digests. The polynomial is irreducible over Q by SymPy and by sqpack.field, with
+    one real root, 3.359e-90 below T-174's certificate, the house, and 6.624e-63 below issue
+    639's degree-12 side (campaign/issue-intake/upper-bounds-issue804-297-20261025/exact-sides.json);
+    the ledger of that directory records it and T-247 registers it as reported. This
+    repository built its own exact configuration at the side from T-174's certificate (route
+    A), every contact an identity in the degree-21 field; its exact decision waits over the
+    CPU cap (think-vv1q), and the author's file waits until it is reachable (route B). The
+    case record is unchanged until adoption.
 - id: jatloe-n12-lean-2026-10-16
   title: Jatloe12SquaresFormalized, a Lean 4 proof that s(12) = 4
   role: source-repository
@@ -11909,11 +12104,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-134).
 - n: 268
-  source_id: couzo-issue763-2026-10-23-in-corpus
-  value: '16.8743617158738255'
-  evidence: E-couzo-763-certificate-report
+  source_id: evand-kaggle-descents-2026-10-24
+  value: '16.8743617158693459'
+  evidence: E-evand-kaggle-descents-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-25 (T-240).
+    a replay here and an accepted review, adopted on 2026-10-26 (T-242).
 - n: 269
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.901513582189132199'
@@ -12959,14 +13154,14 @@ superseded_reports:
 - n: 268
   source_id: casson-square-packing-2026
   value: '16.87895510935973675'
-  superseded_by: couzo-issue763-2026-10-23-in-corpus
+  superseded_by: evand-kaggle-descents-2026-10-24
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 268
   source_id: franciscouzo-square-packing-2026
   value: '16.878814821018413'
-  superseded_by: couzo-issue763-2026-10-23-in-corpus
+  superseded_by: evand-kaggle-descents-2026-10-24
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 269
@@ -14182,9 +14377,9 @@ superseded_reports:
 - n: 268
   source_id: evand-square-packing-2026-10-05
   value: '16.878814821006764724747121053018'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-240's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-242's exact
     side is smaller.
-  superseded_by: couzo-issue763-2026-10-23-in-corpus
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 269
   source_id: evand-regularized-2026-10-10
   value: '16.9015135821891322'
@@ -14399,8 +14594,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.8788148210067647246'
   reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
-    and T-240's exact side is smaller.
-  superseded_by: couzo-issue763-2026-10-23-in-corpus
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 303
   source_id: amundsk-n303-2026-10-23
   value: '17.9097623274752568'
@@ -14419,6 +14614,12 @@ superseded_reports:
   reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
     and T-243's exact side is smaller.
   superseded_by: evand-n182-2026-10-25
+- n: 268
+  source_id: couzo-issue763-2026-10-23-in-corpus
+  value: '16.8743617158738255'
+  reason: The house from 2026-10-25 until 2026-10-26; its certificate stays retained and verified,
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
@@ -27510,7 +27711,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.992727809347'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue819-2026-10-25
   bead: think-ptkk
 - n: 379
   source_id: couzo-964ee2b-2026-10-23
@@ -30032,4 +30234,11 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-2l0q
+- n: 344
+  source_id: amundsk-issue819-2026-10-25
+  claim: upper-bound
+  value: '18.992567544845'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-p7cq
 pending_catalogue_intake: []

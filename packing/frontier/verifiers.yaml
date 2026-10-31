@@ -1163,6 +1163,7 @@ verifiers:
     source:
       - packing/src/sqpack/cover.py
       - packing/cases/bentz46/verify_cover.py
+      - packing/cases/friedman5/verify_cover.py
       - packing/cases/bentz13/verify_cover.py
       - packing/cases/green17/verify_cover.py
       - packing/cases/stromquist/repaired_cover.py
@@ -3574,6 +3575,34 @@ verifiers:
       it writes says so. The review of PR 574
       (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) ran its compare
       and check --replay and found every job equal to its retained row (RP-3).
+
+  - id: V-build-field-configuration
+    program: devtools.build_field_configuration
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Builds an exact number-field configuration from a tight rational centre-basis
+      certificate: types its contact graph and refuses an undecided margin, solves the
+      contacts with the side's stationarity (the KKT system) at high precision by
+      mixed-precision Gauss-Newton, pins the directions the side is constant along to small
+      rationals, finds the field's generator and every class tangent in it by integer
+      relation under a full-precision residual test, and solves the centres and the side
+      exactly in the field, refusing unless every contact is an identity there. It decides no
+      feasibility: sqpack's exact witness verifier does, through
+      devtools.algebraic_witness_reports' jobs and controls.
+    source:
+      - packing/devtools/build_field_configuration.py
+      - packing/tests/test_build_field_configuration.py
+    note: >-
+      Written by the think-ozx8 import lane on 25 October 2026 to decide issue 804's side at
+      297 without the author's attachment, from T-174's retained certificate. Its authors
+      read the issue's comments as text (the printed polynomial, the side and the description
+      of the author's field) and none of the author's code; the polynomial is used only as a
+      final comparison, after the side is found in the field
+      (resources/web/hyukdongkim-s297-2026-10-25/README.md, Route A).
 
   - id: V-upper-bound-reports
     program: devtools.upper_bound_reports

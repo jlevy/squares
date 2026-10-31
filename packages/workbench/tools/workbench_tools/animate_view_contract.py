@@ -175,31 +175,6 @@ def angle_gap(a: float, b: float) -> float:
     return min(90 - d, d)
 
 
-def split_across_band_edge(
-    first: tuple[float, int], second: tuple[float, int], band: float, tolerance: float
-) -> bool:
-    """Whether two classes within the tolerance of each other may sit in two palette slots.
-
-    Each argument is a class's (centre, slot). The colourer clusters each frame's tilts on
-    their own and then cuts the folded quarter turn into fixed bands, so two centres less than
-    the tolerance apart can fall either side of a band edge: n = 29's 64.9387 and n = 272's
-    65.2889 do, in slots 14 and 15. That split is admitted, and nothing else is: the centres
-    lie in adjacent bands, the edge between them is within the tolerance of both, and their
-    slots differ by exactly one. Both the four core frames and the wide check over all five
-    frames hold their shared angles to this one rule.
-
-    #554 (bead think-9xhw) tracks the fuller fix, slots assigned from shared atlas-wide class
-    centres, after which no shared angle splits and this allowance can go.
-    """
-    (centre_a, slot_a), (centre_b, slot_b) = first, second
-    folded_a, folded_b = fold_angle(centre_a), fold_angle(centre_b)
-    band_a, band_b = int(folded_a // band), int(folded_b // band)
-    if abs(band_a - band_b) != 1 or abs(slot_a - slot_b) != 1:
-        return False
-    edge = band * max(band_a, band_b)
-    return abs(folded_a - edge) <= tolerance and abs(folded_b - edge) <= tolerance
-
-
 # ---------------------------------------------------------------- the force law, written out
 # The law from its formula rather than read off the page, so `lawForce` is checked against
 # something independent of itself. `steep` is derived from the rigidity: zero at a rigidity of
@@ -740,6 +715,14 @@ def colours(session: Session) -> str:
         f"the map is not distinct five-shade families: {len(family)} hexes in {len(palette)}",
     )
     band = 90 / (len(palette) - 2)
+    shared_list = book["sharedCentres"]
+    shared_centres = set(shared_list)
+    session.require(
+        len(shared_list) > 0
+        and all(0 < centre < 90 for centre in shared_list)
+        and all(b - a > tol for a, b in pairwise(shared_list)),
+        f"the page carries no sorted, separated shared angle centres: {shared_list[:4]}",
+    )
 
     frames: dict[int, dict[str, Any]] = {}
     for n in (17, 29, 100, 110, 272):
@@ -776,6 +759,14 @@ def colours(session: Session) -> str:
             if hexed != shades[slot][4]
         ]
         session.require(wrong == [], f"n = {n}: a class's slot is not its angle alone: {wrong}")
+        # A retained frame is an atlas witness, so every class it has is a shared one: a pin,
+        # or a centre the whole atlas shares (#554).
+        own = [
+            centre
+            for centre in centres
+            if centre not in (0, 45) and centre not in shared_centres
+        ]
+        session.require(own == [], f"n = {n} has classes no shared centre holds: {own[:4]}")
 
     def shared_angles(sizes: tuple[int, ...]) -> list[tuple[int, float, int, int, float, int]]:
         found_pairs = []
@@ -788,24 +779,23 @@ def colours(session: Session) -> str:
                             found_pairs.append((a, ca, sa, b, cb, sb))
         return found_pairs
 
-    def only_band_edge_splits(pairs: list[tuple[int, float, int, int, float, int]]) -> None:
-        for a, ca, sa, b, cb, sb in pairs:
-            session.require(
-                split_across_band_edge((ca, sa), (cb, sb), band, tol),
-                f"n = {a}'s {ca:.4f} (slot {sa}) and n = {b}'s {cb:.4f} (slot {sb}) disagree "
-                "without a band edge between them",
-            )
-
-    # The core frames take the wide check's band-edge allowance (#553 C1); #554 tracks the fix
-    # that would make every shared angle agree.
+    # Every angle two frames share takes one slot in both. The colourer once clustered each
+    # frame on its own and cut fixed bands, so n = 29's 64.9387 and T-151's 65.2889 at n = 272
+    # fell either side of the 65-degree edge, and #553 (C1) admitted such a split; its classes
+    # now come from the centres the atlas shares, and the split, and the allowance, are gone
+    # (#554).
     core = shared_angles((17, 29, 100, 272))
     split = [pair for pair in core if pair[2] != pair[5]]
-    only_band_edge_splits(split)
-    agreed = [pair for pair in core if pair[2] == pair[5]]
     session.require(
-        len(agreed) >= 6,
-        f"the four frames share {len(core)} angles, {len(split)} of them in two slots",
+        split == [],
+        "a shared angle sits in two slots: "
+        + "; ".join(
+            f"n = {a}'s {ca:.4f} (slot {sa}) and n = {b}'s {cb:.4f} (slot {sb})"
+            for a, ca, sa, b, cb, sb in split[:3]
+        ),
     )
+    agreed = core
+    session.require(len(agreed) >= 6, f"the four frames share only {len(core)} angles")
     both = session.look("colour/fills-for-pairs", pairs=[[pair[1], pair[4]] for pair in agreed])
     session.require(
         len(both) == len(agreed) and all(x == y for rows in both for x, y in rows),
@@ -813,10 +803,10 @@ def colours(session: Session) -> str:
     )
     wide = shared_angles(tuple(frames))
     straddles = [pair for pair in wide if pair[2] != pair[5]]
-    only_band_edge_splits(straddles)
     session.require(
-        len(wide) - len(straddles) >= 10 and len(straddles) <= 2,
-        f"{len(wide) - len(straddles)} shared angles agree and {len(straddles)} straddle",
+        len(wide) - len(straddles) >= 10 and straddles == [],
+        f"{len(wide) - len(straddles)} shared angles agree and {len(straddles)} straddle: "
+        f"{straddles[:3]}",
     )
     sweep = [0.0, 0.4, 0.6, 12.3, 23.4513, 44.4, 44.6, 45.0, 45.3, 64.9387, 65.1299, 89.7]
     tables = []
@@ -1006,9 +996,9 @@ def colours(session: Session) -> str:
     )
     restore(session, found, "colours")
     return (
-        f"five retained frames painted as colour() says, {len(core)} angles shared by four and "
-        f"{len(wide) - len(straddles)} agreeing over five ({len(straddles)} straddling a band "
-        f"edge); {held} held square-instants keep their hue; greens hold through a settle; "
+        f"five retained frames painted as colour() says from {len(shared_list)} shared angle "
+        f"centres, {len(core)} angles shared by four and {len(wide)} by five, each in one "
+        f"slot; {held} held square-instants keep their hue; greens hold through a settle; "
         f"holding square colors keeps {kept} green mid-step where releasing keeps {drained}"
     )
 

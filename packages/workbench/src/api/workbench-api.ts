@@ -211,6 +211,8 @@ export interface AtlasColour {
   /** How many angle classes the frame's angles fell into. */
   classes: number;
   centres: number[];
+  /** The angle classes the whole atlas shares, whose centres a frame's classes take (#554). */
+  sharedCentres: number[];
   sizes: number[];
   slots: number[];
   contacts: number[];

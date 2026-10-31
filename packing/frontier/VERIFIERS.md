@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **212** programs: **52** external and **160** first-party; **143** decide claims and **69** check premises.
-- **606** of **773** evidence entries name the programs that verified them: 284 reproduced with the producer’s code, 263 independently re-implemented, 38 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **213** programs: **52** external and **161** first-party; **143** decide claims and **70** check premises.
+- **653** of **827** evidence entries name the programs that verified them: 310 independently re-implemented, 284 reproduced with the producer’s code, 38 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -86,7 +86,7 @@ second implementation agrees.
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
 | [`V-upper-bound-intervals`](#v-upper-bound-intervals) | devtools.upper_bound_intervals | Squares Project (Levy) | first-party | decides | 3 | 3 |
-| [`V-sqpack-cover`](#v-sqpack-cover) | sqpack.cover | Squares Project (Levy) | first-party | decides | 4 | 8 |
+| [`V-sqpack-cover`](#v-sqpack-cover) | sqpack.cover | Squares Project (Levy) | first-party | decides | 5 | 9 |
 | [`V-green17-interval-audit`](#v-green17-interval-audit) | cases.green17.interval_audit | Squares Project (Levy) | first-party | decides | 1 | 3 |
 | [`V-kingbird29-verify-svg`](#v-kingbird29-verify-svg) | cases.kingbird29.verify_svg | Squares Project (Levy) | first-party | decides | 2 | 0 |
 | [`V-screen-translation-escape`](#v-screen-translation-escape) | devtools.screen_translation_escape | Squares Project (Levy) | first-party | decides | 1 | 0 |
@@ -165,7 +165,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 116 | 28 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 162 | 29 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 7 | 7 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 11 | 10 |
@@ -183,6 +183,7 @@ second implementation agrees.
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 70 | 70 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-build-field-configuration`](#v-build-field-configuration) | devtools.build_field_configuration | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 65 | 65 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
@@ -1501,12 +1502,13 @@ Decides a source's printed pose as printed, by outward-rounded decimal interval 
 
 Certifies a point set unavoidable for unit squares in a container, cell by cell under the lemmas of Bentz's method, exactly over the field the points need.
 
-- Source: [`packing/src/sqpack/cover.py`](../../packing/src/sqpack/cover.py), [`packing/cases/bentz46/verify_cover.py`](../../packing/cases/bentz46/verify_cover.py), [`packing/cases/bentz13/verify_cover.py`](../../packing/cases/bentz13/verify_cover.py), [`packing/cases/green17/verify_cover.py`](../../packing/cases/green17/verify_cover.py), [`packing/cases/stromquist/repaired_cover.py`](../../packing/cases/stromquist/repaired_cover.py)
+- Source: [`packing/src/sqpack/cover.py`](../../packing/src/sqpack/cover.py), [`packing/cases/bentz46/verify_cover.py`](../../packing/cases/bentz46/verify_cover.py), [`packing/cases/friedman5/verify_cover.py`](../../packing/cases/friedman5/verify_cover.py), [`packing/cases/bentz13/verify_cover.py`](../../packing/cases/bentz13/verify_cover.py), [`packing/cases/green17/verify_cover.py`](../../packing/cases/green17/verify_cover.py), [`packing/cases/stromquist/repaired_cover.py`](../../packing/cases/stromquist/repaired_cover.py)
 - Versions run: this repository's commits, which Git holds
 - Note: Bentz's and Stromquist's arguments are published proofs with no verification code.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
+| `E-n005-friedman-theorem2-audit` | audited here | independently re-implemented, clean-room | full, 10 of 10: the premises of Theorem 2's proof: the ten cells of its partition of [0, 2 + 1/sqrt 2]^2 (four Lemma 1 corners, four Lemma 2 wall rectangles, two Lemma 3 triangles), each against its lemma's hypotheses, and the tiling | T-237 |
 | `E-n011-repaired-lower` | replayed here | reproduced with the producer’s code | not recorded | T-010 |
 | `E-bentz46-theorem8-audit` | audited here | independently re-implemented | not recorded | T-004, T-008 |
 | `E-bentz13-figure2-audit` | audited here | independently re-implemented | not recorded | T-005, T-006 |
@@ -2842,6 +2844,52 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
+| `E-n018-wand125-rect-4695-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n18_L4695's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n019-wand125-rect-4815-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n19_L4815's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n020-wand125-rect-4895-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n20_L4895's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n026-wand125-rect-553-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n26_L553's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n027-wand125-rect-56-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n27_L56's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n030-wand125-rect-5865-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n30_L5865's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n040-wand125-rect-6695-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n40_L6695's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n061-wand125-rect-796-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n61_L796's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n075-wand125-rect-889-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n75_L889's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n078-wand125-rect-8955-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n78_L8955's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n028-wand125-rect-572-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n28_L572's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n029-wand125-rect-579-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n29_L579's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n031-wand125-rect-5935-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n31_L5935's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n037-wand125-rect-6425-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n37_L6425's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n038-wand125-rect-654-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n38_L654's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n039-wand125-rect-663-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n39_L663's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n041-wand125-rect-6755-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n41_L6755's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n042-wand125-rect-679-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n42_L679's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n043-wand125-rect-6865-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n43_L6865's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n044-wand125-rect-6935-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n44_L6935's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n051-wand125-rect-74425-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n51_L74425's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n052-wand125-rect-7535-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n52_L7535's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n053-wand125-rect-7595-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n53_L7595's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n054-wand125-rect-76675-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n54_L76675's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n055-wand125-rect-771-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n55_L771's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n056-wand125-rect-777-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n56_L777's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n057-wand125-rect-7835-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n57_L7835's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n058-wand125-rect-789-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n58_L789's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n059-wand125-rect-792-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n59_L792's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n060-wand125-rect-794-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n60_L794's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n066-wand125-rect-8375-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n66_L8375's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n067-wand125-rect-8455-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n67_L8455's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n068-wand125-rect-8495-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n68_L8495's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n069-wand125-rect-8575-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n69_L8575's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n070-wand125-rect-862-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n70_L862's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n071-wand125-rect-8685-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n71_L8685's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n072-wand125-rect-874-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n72_L874's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n073-wand125-rect-878-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n73_L878's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n074-wand125-rect-884-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n74_L884's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n076-wand125-rect-892-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n76_L892's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n086-wand125-rect-9355-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n86_L9355's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n088-wand125-rect-945-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n88_L945's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n089-wand125-rect-955-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n89_L955's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n091-wand125-rect-9645-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n91_L9645's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n094-wand125-rect-9795-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n94_L9795's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
+| `E-n095-wand125-rect-98418-sqverify-fast-replay` | replayed here | independently re-implemented, clean-room | full, 201 of 201: rect_n95_L98418's complete legal core-centre domains, Tokoharu's, at every direction of the standard net of 201, decided at Tokoharu's threshold 10001/10000 | T-046 |
 | `E-n019-wand125-rect-48175-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
 | `E-n020-wand125-rect-48975-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
 | `E-n026-wand125-rect-55325-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
@@ -3276,6 +3324,18 @@ Imports a packet's algebraic-number-field witnesses from its declaration: derive
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-pingyou-574-algebraic-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | T-174 |
+
+### `V-build-field-configuration`
+
+**devtools.build_field_configuration** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Builds an exact number-field configuration from a tight rational centre-basis certificate: types its contact graph and refuses an undecided margin, solves the contacts with the side's stationarity (the KKT system) at high precision by mixed-precision Gauss-Newton, pins the directions the side is constant along to small rationals, finds the field's generator and every class tangent in it by integer relation under a full-precision residual test, and solves the centres and the side exactly in the field, refusing unless every contact is an identity there. It decides no feasibility: sqpack's exact witness verifier does, through devtools.algebraic_witness_reports' jobs and controls.
+
+- Source: [`packing/devtools/build_field_configuration.py`](../../packing/devtools/build_field_configuration.py), [`packing/tests/test_build_field_configuration.py`](../../packing/tests/test_build_field_configuration.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Written by the think-ozx8 import lane on 25 October 2026 to decide issue 804's side at 297 without the author's attachment, from T-174's retained certificate. Its authors read the issue's comments as text (the printed polynomial, the side and the description of the author's field) and none of the author's code; the polynomial is used only as a final comparison, after the side is found in the field (resources/web/hyukdongkim-s297-2026-10-25/README.md, Route A).
+
+No evidence entry names it yet.
 
 ### `V-upper-bound-reports`
 

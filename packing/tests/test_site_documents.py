@@ -7,7 +7,13 @@ import re
 
 import pytest
 
-from devtools import check_published_site, render_overview, site_assets, site_documents
+from devtools import (
+    check_published_site,
+    render_changelog,
+    render_overview,
+    site_assets,
+    site_documents,
+)
 from devtools.repo_links import RAW_URL, REPO_URL, RepositoryTree
 from devtools.site_documents import (
     INTRO,
@@ -162,7 +168,9 @@ def _record_context(base: str = "") -> LinkContext:
 @pytest.mark.parametrize(
     ("url", "anchor"),
     [
-        ("CHANGELOG.md", "changelog"),
+        # The whole page is the history, so a link to the file alone needs no fragment.
+        ("CHANGELOG.md", ""),
+        ("CHANGELOG.md#changelog", "changelog"),
         (
             "CHANGELOG.md#regularization-foundations",
             "changelog-entry-regularization-foundations",
@@ -170,20 +178,25 @@ def _record_context(base: str = "") -> LinkContext:
         ("CHANGELOG.md#missing-entry", "changelog-entry-missing-entry"),
     ],
 )
-def test_changelog_alias_preserves_and_checks_the_news_landing(url: str, anchor: str) -> None:
+def test_changelog_alias_preserves_and_checks_the_changelog_landing(
+    url: str, anchor: str
+) -> None:
+    """A Markdown link to `CHANGELOG.md` lands on the page that shows the history, which
+    is the site's own Changelog since 26 October 2026 rather than a section of News."""
+    landing = render_changelog.CHANGELOG_PAGE
     report = LinkReport()
     rewritten = rewrite_link(url, tag="a", context=_record_context(), report=report)
-    assert rewritten == f"news.html#{anchor}"
-    assert report.anchors == [("news.html", anchor, url)]
+    assert rewritten == landing + (f"#{anchor}" if anchor else "")
+    assert report.anchors == ([(landing, anchor, url)] if anchor else [])
     assert not report.missing
     page = render_overview.Page(
-        "news.html",
-        '<article><h2 id="changelog">Changelog</h2>'
-        '<h4 id="changelog-entry-regularization-foundations">Regularization</h4></article>',
+        landing,
+        '<article><h1 id="changelog">Changelog</h1>'
+        '<h3 id="changelog-entry-regularization-foundations">Regularization</h3></article>',
     )
-    problems = unresolved({"news.html": page}, report)
+    problems = unresolved({landing: page}, report)
     assert problems == (
-        [f"no heading #{anchor} in news.html: {url}"]
+        [f"no heading #{anchor} in {landing}: {url}"]
         if anchor == "changelog-entry-missing-entry"
         else []
     )
