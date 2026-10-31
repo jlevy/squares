@@ -1,0 +1,45 @@
+{
+  "checker": "packing/devtools/two_strip_checker.py",
+  "control_rule": "at each K, the row with the least fit slack, its side less binding_side, the smallest count among equals: the packing nearest the edge the lemma allows",
+  "controlled": 1189,
+  "controls": ["duplicate-square","square-outside-container","side-below-least-clearance","square-enlarged","one-coordinate-overlap","near-contact-overlap"],
+  "doi": "10.5281/zenodo.23664800",
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "filter_lemma": "A unit square lies in the closed disc of radius sqrt(2)/2 about its centre and its interior in the open disc, so squares whose centres are at least sqrt(2) apart have disjoint interiors. Pairs are kept for decision when dx^2 + dy^2 < 2, compared exactly over Q from the certificate's centres; both routes check that every square is a unit square whose corner mean is that centre.",
+  "format": "two-strip-replay-part-v1",
+  "issue": "https://github.com/jlevy/squares/issues/836",
+  "k": 35,
+  "packet": "packing/resources/web/karimi-records-2026-10-31",
+  "records": "packing/resources/web/karimi-records-2026-10-31/source/karimi_two_strip_records_v3_lite.zip:records.csv",
+  "routes": "packing/devtools/couzo_678_replay.py (decide and decide_controls)",
+  "rows": [
+    {"candidate_pairs":2766,"certificate_sha256":"145908238bc41331a6006614107ca9efdb32d464f1b0faccc1748a99f16ee0ad","cpu_seconds":{"routes":1.41,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1182,"sqpack":{"container_contacts":161,"failure_count":0,"passed":true,"strict_pairs":87,"touching_pairs":2679},"verified":true},
+    {"candidate_pairs":2769,"certificate_sha256":"f253015258f33626b625875bacc034bab1b568a3f641062d1f522de567496936","cpu_seconds":{"routes":1.39,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1183,"sqpack":{"container_contacts":161,"failure_count":0,"passed":true,"strict_pairs":88,"touching_pairs":2681},"verified":true},
+    {"candidate_pairs":2850,"certificate_sha256":"bfc10201378945357c135e3b3c12250db643be316a114abf6784b896b5458ef0","cpu_seconds":{"routes":1.73,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1184,"sqpack":{"container_contacts":153,"failure_count":0,"passed":true,"strict_pairs":80,"touching_pairs":2770},"verified":true},
+    {"candidate_pairs":2804,"certificate_sha256":"a992736367608a0d7003bb845ca792e1353a172b24a99a182a584af58808233f","cpu_seconds":{"routes":1.34,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1186,"sqpack":{"container_contacts":158,"failure_count":0,"passed":true,"strict_pairs":77,"touching_pairs":2727},"verified":true},
+    {"candidate_pairs":2764,"certificate_sha256":"85b3635e6d9e10dfbf77e56a7f3a6fa9c0125fd2a783c5134b4d787c9b5c9392","cpu_seconds":{"routes":1.27,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1188,"sqpack":{"container_contacts":162,"failure_count":0,"passed":true,"strict_pairs":82,"touching_pairs":2682},"verified":true},
+    {
+      "candidate_pairs": 2859,
+      "certificate_sha256": "60ff943e6146dc5f42bdce26395a31846aac7553b6405be2640d3deeeefce2e3",
+      "controls": [
+        {"candidate_pairs":2857,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":2857,"control":"square-outside-container","independent_failures":["container penetration -4609/1429"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":2859,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 193 crosses a wall","square 194 crosses a wall","square 195 crosses a wall"]},
+        {"candidate_pairs":2859,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":2857,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":2859,"closed_distance":"0.000e+00","control":"near-contact-overlap","independent_failures":["2 overlapping pairs; worst -1/1000000000000000000000000000000 at 1, 2"],"pair":[1,2],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap","squares 2 and 23 overlap"]}
+      ],
+      "cpu_seconds": {"controls":11.13,"routes":1.42,"write_out":0.01},
+      "independent": {"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},
+      "n": 1189,
+      "sqpack": {"container_contacts":156,"failure_count":0,"passed":true,"strict_pairs":90,"touching_pairs":2769},
+      "verified": true
+    },
+    {"candidate_pairs":2826,"certificate_sha256":"a4ead01692e3765dbdd3cba225e5d9f094cbe53cc013101980fc0395a75de35e","cpu_seconds":{"routes":1.35,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1190,"sqpack":{"container_contacts":158,"failure_count":0,"passed":true,"strict_pairs":88,"touching_pairs":2738},"verified":true},
+    {"candidate_pairs":2752,"certificate_sha256":"dbc1130da8598bbbcfbc95cbf0689859ab11efe338626b3fb54277be61095da8","cpu_seconds":{"routes":1.25,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1191,"sqpack":{"container_contacts":165,"failure_count":0,"passed":true,"strict_pairs":93,"touching_pairs":2659},"verified":true},
+    {"candidate_pairs":2820,"certificate_sha256":"a077b049a406c545a78a828b8ae29f7dcfb74619e8f17e59293022e63e42431e","cpu_seconds":{"routes":1.27,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1192,"sqpack":{"container_contacts":161,"failure_count":0,"passed":true,"strict_pairs":92,"touching_pairs":2728},"verified":true},
+    {"candidate_pairs":2754,"certificate_sha256":"e8cdb577811e9fff7ea4e71b4755002fe4c37a3bb7913e37157fd7c56653cfcc","cpu_seconds":{"routes":1.22,"write_out":0.01},"independent":{"failure_count":0,"least_pair_gap":"0","least_wall_clearance":"0","passed":true},"n":1193,"sqpack":{"container_contacts":165,"failure_count":0,"passed":true,"strict_pairs":96,"touching_pairs":2658},"verified":true}
+  ],
+  "workers": 2,
+  "written_utc": "2026-10-31T17:08:54Z"
+}

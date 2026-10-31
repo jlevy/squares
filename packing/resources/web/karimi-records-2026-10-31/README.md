@@ -124,10 +124,27 @@ adds axis-parallel layers in the band ends, Evan Daniel’s idea (evand/square-p
 `certificates/k2-minus-c/`), written as in Kevin Fang’s note
 (doi:10.5281/zenodo.23624565, Sections 2–3). Claude assistance is disclosed in both.
 
-The v5 README states “License: data CC BY 4.0; code MIT.” `README_filled.md` states no
-licence, and the repository has no licence file. The author submitted these files on
-#836 and #847, so they are retained under the owner’s presumption of permission for a
-submitted source (think-cnn7); the filled-end licence is followed up on think-nu37.
+Every file is under CC BY 4.0, and the code also under MIT, as the author states it:
+
+- **v5:** its README states “License: data CC BY 4.0; code MIT.”
+- **V2.0 and V1.0:** `README_filled.md` states no licence, so it was asked. The author
+  answered on
+  [#847](https://github.com/jlevy/squares/issues/847#issuecomment-6546015739) at
+  16:22:49Z on 31 October: both records are published under CC BY 4.0, which covers all
+  their files, data and code, and the code files may also be used under the MIT licence,
+  as with v5.
+
+The repository has no licence file, and Zenodo’s licence metadata was unreachable from
+this environment, so the licence rests on the author’s statements. The files were
+retained before his answer, under the owner’s presumption of permission for a submitted
+source (think-cnn7). The answer settles the follow-up on think-nu37.
+
+For citation, the same comment names his preprint
+[doi:10.20944/preprints202610.2669.v1](https://doi.org/10.20944/preprints202610.2669.v1)
+as describing the two-strip records. It is pinned by its DOI alone: doi.org was
+unreachable from this environment, so neither its title nor its text was read.
+`bibliography.yaml` keeps only the keys a record cites, and no row cites these sets until
+the walk above 1024 records them, so the preprint enters it with those rows.
 
 ## Commands
 

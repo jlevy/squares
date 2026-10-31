@@ -26955,6 +26955,9 @@ issues:
       think-llit, waits on the owner's D4). The reply when the rows land says count by count
       how many of the 1,434 and 2,484 were recorded and why each other was not (review A2 of
       #853). The same follow-up first answers the author's #799 comments of 25 October.
+      The author's comment on #847 of 16:22:49Z on 31 October names his preprint
+      doi:10.20944/preprints202610.2669.v1 as the citation for the two-strip records; the
+      karimi-records-2026-10-31 packet pins it by its DOI alone.
   - number: 842
     title: 's(44) = 7: registration request'
     author: moh63-dev
@@ -27071,7 +27074,12 @@ issues:
       at 1182, 2505, 4990, 7500 and 9946 with the author's own builder and decides each on
       both maintained exact routes, all six controls refused by both
       (receipts/filled-end-replay-sample.json): 5 of 5,134 rows, nothing about the rest.
-    read_through: '2026-10-31T11:43:36Z'
+      The author's comment of 16:22:49Z on 31 October answers the follow-up's licence
+      question: V2.0 and V1.0 are published under CC BY 4.0, covering all files of each
+      record, data and code, and the code may also be used under MIT, as with v5. It also
+      names his preprint doi:10.20944/preprints202610.2669.v1 as the citation for the
+      two-strip records.
+    read_through: '2026-10-31T16:22:49Z'
     results:
     - key: filled-end-v2
       claim: >-
@@ -27128,8 +27136,15 @@ issues:
       zenodo.org (records 23819397 and 23681705) was refused by the session's network
       policy on 31 October 2026, so no Zenodo listing was read; the deposits are read from
       the author's GitHub copy at ad8b094, whose stated digests hold. The filled-end
-      licence is followed up on think-nu37. The author says he may be offline for some
-      days. The acknowledgement of 31 October offers
+      licence was followed up on think-nu37, and the author's comment of 16:22:49Z on 31
+      October answers it (CC BY 4.0 for all files of V2.0 and V1.0, the code also MIT); the
+      packet's declaration and README record it, resting on his statement since Zenodo's
+      licence metadata was unreachable. The preprint that comment names for the two-strip
+      records, doi:10.20944/preprints202610.2669.v1, is pinned by its DOI alone (doi.org
+      unreachable), and enters bibliography.yaml with the first row that cites it. The
+      answer closes a question that held nothing open and was read on the day of the last
+      reply, so no reply is due for it; the reply when the rows land acknowledges it. The
+      author says he may be offline for some days. The acknowledgement of 31 October offers
       a copy at a public GitHub commit, checked against the SHA-256 the author stated. The
       issue states digests for filled_records.csv and V1.0's zip only, so filled_ends.py,
       regenerate_filled.py, check_cert.py and README_filled.md are checked against Zenodo's

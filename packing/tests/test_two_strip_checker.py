@@ -6,9 +6,11 @@ control at every row of #799 for the reason it names, the parameters the lemma d
 state, a control the checker would accept reported as accepted, and a packet whose bytes
 are not the captured ones. Then the agreements: Ryu's own packings at equal bands, and
 small packings written out and decided on both exact routes of
-`devtools.couzo_678_replay`, a lowered side refused by both. The receipts are read back
-in the quick lane, the sample's digests among them; the replay of a sample count and
-every count's digest are in the slow lane.
+`devtools.couzo_678_replay`, a lowered side refused by both. A full replay is run over a
+small deposit of two Ks, resumed, and read back with each fault it can carry named. The
+receipts are read back in the quick lane, the sample's digests and version 5's full
+replay among them; the replay of a sample count and every count's digest are in the
+slow lane.
 """
 
 from __future__ import annotations
@@ -20,9 +22,11 @@ import shutil
 import warnings
 import zipfile
 import zlib
+from collections.abc import Callable
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -377,6 +381,124 @@ def test_an_altered_version_5_receipt_is_refused(
     assert checker.check(deposits=(checker.V5,)) == [
         "v5.0: the author's columns are not counted as the rows",
         "v5.0 n=1253: the written-out certificate failed a route",
+    ]
+
+
+#: A small deposit at two Ks, `SMALL`'s strips at decimal sides: (n, side). At K = 9,
+#: 9.2 is the least slack; at K = 10, 88 and 91 share it and 88 is the smaller.
+ROUTED = ((66, "9.3"), (70, "9.25"), (72, "9.2"), (82, "10.3"), (88, "10.2"), (91, "10.2"))
+
+
+def _routed_deposit(tmp_path: Path) -> tuple[checker.Deposit, list[dict[str, object]]]:
+    """`ROUTED` as an archived deposit with version 5's columns and a full replay, and
+    the rows its decisions receipt would hold."""
+    lines = []
+    for n, side in ROUTED:
+        exact = Fraction(side)
+        k = 9 if n <= 81 else 10
+        strips = ("3", "1/8", "1/4", "2", "1/9", "3/4", "yes")
+        lines.append(
+            (str(n), f"{exact.numerator}/{exact.denominator}", side, "10.5", str(k), *strips)
+        )
+    (tmp_path / "source").mkdir()
+    with zipfile.ZipFile(tmp_path / "source/routed.zip", "w") as written:
+        written.writestr("records.csv", _csv(*lines, header=checker.V5.header))
+    deposit = replace(
+        checker.V5,
+        packet=str(tmp_path),
+        archived="source/routed.zip",
+        rows=len(ROUTED),
+        full_replay="replay-routed",
+    )
+    return deposit, [checker.decision_row(row)[0] for row in checker.records(deposit)]
+
+
+def test_a_full_replay_writes_a_receipt_per_k_resumes_and_is_read_back(
+    tmp_path: Path,
+) -> None:
+    """`replay_all` writes one receipt per K, each row decided on both routes and the
+    controls only at the count `CONTROL_RULE` chooses (the least slack, the smaller count
+    among equals); run again, it skips a K whose receipt names its rows, and writes the
+    summary once every K has one. `route_problems` reads the receipts back clean, and
+    names each fault: a route's failure, a certificate that is not the decided one, the
+    controls at another count, an accepted control, a summary that is not what its
+    receipts say, a receipt for no K of the deposit, and a summary over a missing K."""
+    deposit, stored = _routed_deposit(tmp_path)
+    groups = checker.by_k(checker.records(deposit))
+    assert {k: checker.controlled_count(rows) for k, rows in groups.items()} == {9: 72, 10: 88}
+    logged: list[str] = []
+    assert checker.replay_all(deposit, 1, [9], log=logged.append) is None
+    assert sorted(path.name for path in deposit.route_parts.iterdir()) == ["k009.json"]
+    assert checker.route_problems(deposit, stored) == []
+    logged.clear()
+    summary = checker.replay_all(deposit, 1, log=logged.append)
+    assert logged[0] == "v5.0: 2 values of K, 1 to replay: [10]"
+    assert logged[-2:] == [
+        "K=10: receipt written, k010.json",
+        "v5.0: summary written, replay-routed.json",
+    ]
+    assert summary is not None
+    assert summary == json.loads(deposit.route_summary.read_text(encoding="utf-8"))
+    assert summary["coverage"] == {
+        "rows": 6,
+        "deposit_rows": 6,
+        "verified": 6,
+        "passed_sqpack": 6,
+        "passed_independent": 6,
+        "ks": 2,
+        "controlled_counts": 2,
+        "controls": 12,
+        "refused_by_sqpack": 12,
+        "refused_by_independent": 12,
+    }
+    assert [line["controlled"] for line in summary["by_k"]] == [72, 88]
+    assert checker.route_problems(deposit, stored) == []
+    part = deposit.route_part(10)
+    kept = part.read_text(encoding="utf-8")
+
+    def problems_with(change: Callable[[dict[str, Any]], None]) -> list[str]:
+        receipt = json.loads(kept)
+        change(receipt)
+        part.write_text(json.dumps(receipt), encoding="utf-8")
+        try:
+            return checker.route_problems(deposit, stored)
+        finally:
+            part.write_text(kept, encoding="utf-8")
+
+    def failed(receipt: dict[str, Any]) -> None:
+        receipt["rows"][0]["independent"]["passed"] = False
+
+    def other(receipt: dict[str, Any]) -> None:
+        receipt["rows"][1]["certificate_sha256"] = "0" * 64
+
+    def moved(receipt: dict[str, Any]) -> None:
+        receipt["controlled"] = 91
+
+    def accepted(receipt: dict[str, Any]) -> None:
+        receipt["rows"][1]["controls"][2]["refused_by_sqpack"] = False
+
+    def slower(receipt: dict[str, Any]) -> None:
+        receipt["rows"][2]["cpu_seconds"]["routes"] += 1
+
+    assert problems_with(failed) == ["v5.0 n=82: the written-out certificate failed a route"]
+    assert problems_with(other) == [
+        "v5.0 n=88: the replayed certificate is not the decided one"
+    ]
+    assert problems_with(moved) == [
+        "v5.0 K=10: the controlled count is not the rule's",
+        "v5.0 n=88: controls are kept at a count not chosen",
+        "v5.0 n=91: the controlled count carries no controls",
+    ]
+    assert problems_with(accepted) == ["v5.0 n=88: a route accepted a control"]
+    assert problems_with(slower) == [
+        "v5.0: the full replay's summary is not what its receipts say"
+    ]
+    shutil.copy(part, deposit.route_parts / "k011.json")
+    assert checker.route_problems(deposit, stored) == ["v5.0: k011.json is no K of the deposit"]
+    (deposit.route_parts / "k011.json").unlink()
+    deposit.route_part(9).unlink()
+    assert checker.route_problems(deposit, stored) == [
+        "v5.0: the summary stands over no receipt for K = [9]"
     ]
 
 
