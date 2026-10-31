@@ -897,6 +897,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.33",
+        first_published="October 31, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Mohsen Khalili "
+            "and Sara Gharabaghi's s(44) = 7 (T-252)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.32",
         first_published="October 26, 2026",
         result_scope=(
@@ -1513,6 +1521,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.32",
+        version="v0.4.33",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Mohsen Khalili "
+            "and Sara Gharabaghi's s(44) = 7 (T-252)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.31",
@@ -2641,6 +2659,43 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/README.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #842's s(44) = 7 (think-1v4b): T-252, its coverage entry, "
+            "#842's requests entry, and the frontier README's corpus counts and "
+            "smallest-gaps table with n = 44 proved, against main 3978a7f61 (#841). "
+            "Rendered at link revision 0000000000000000000000000000000000000000 into "
+            "empty site directories, once from this tree at a00910fb4 and once with "
+            "main's results.yaml, result-requests.yaml, source-coverage.yaml, "
+            "frontier/README.md and composite-figure.json swapped in, 51 files each, by "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: every file is byte-identical across the two "
+            "renders. The explainer counts the register's results and takes v0.4.33: "
+            "its page and Markdown, compared before the math pass (render's output; "
+            "the pinned Chromium is not installed on the importing host), differ only "
+            "in that count, 251 against 252. No PDF was printed; each prints from that "
+            "HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
