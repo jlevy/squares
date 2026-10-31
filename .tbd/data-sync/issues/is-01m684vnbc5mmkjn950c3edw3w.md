@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 29
+version: 30
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -32,7 +32,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T08:47:36.548Z
+updated_at: 2026-10-31T08:52:34.489Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -48,3 +48,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 08:00 deviation, disclosed: the three stage-4 reviews of #852's upper-bound certificates (Couzo, Daniel, Polkovskyi) ran at tbd-strong (xhigh), not tbd-strong-max as result-import.md 'Who reviews, and when' asks. Kept rather than re-run because each certificate is decided by two maintained exact routes plus each reviewer's clean-room exact checker; each review's reviewer line must name the tier it ran at. Owner may overrule. #851 (s(44)=7, a lower-bound proof) did get an independent tbd-strong-max review. Daniel review returned: 172/204/260/293/299-update accept for adoption, minor fixes only.
 
 2026-10-31 07:55 hourly: sweep re-run on main 37ede3936+ (scratchpad/intake2.txt): no new issues past #847, no new watched-repo heads; remaining items are owned by open branches (#833, #849, #850, #851, #852, #853, #817). Merged so far: #835, #848, #834. #613 closed with final comment.
+
+2026-10-31 08:53 hourly: merged #833 (b95c5f69c), #853 (c94df7cef), #850 (84ba6fa9c); total this pass 6 (#835 #848 #834 #833 #853 #850). Posted: #613 final, follow-ups #316 #797 #799 #804 #824, acks #836 #847. Labels restored #666/#715/#719. Queue: #854 (re-merging main), #849 (fixes pushed), #851 (fixes in progress), #817 (fixes in progress), #852 (landing 3 stage-4 reviews + adopting 8 counts: 130 172 204 232 260 293 299 307). Owner decisions open: Polkovskyi 14 near-restatements (think-ikku), s(152) tie vs T-122, s(29) S* registration and identity funding, exactness-only regularization (think-j68m), zenodo access, D4 hosting, Q-847a, #744/#599/#809. Beads filed: think-t9uj (closing keywords), release.py append-conflict efficiency bead. No new issues since 07:50.
