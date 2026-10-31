@@ -5,7 +5,7 @@ title: "Import Evan Daniel: grade-C local minima at 233 configurations of field 
 kind: task
 status: in_progress
 priority: 3
-version: 11
+version: 12
 delegate: bold-ritchie-l8
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:56:06.761Z
-updated_at: 2026-10-31T13:07:23.450Z
+updated_at: 2026-10-31T13:42:28.283Z
 started_at: 2026-10-12T14:33:44.161Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
@@ -148,3 +148,13 @@ claude/intake-2026-10-23-theorem-c-review (draft PR https://github.com/jlevy/squ
 ```
 
 **2026-10-23, review A of #751 addressed (c-review-thmc-1023, parent think-qa9c).** https://github.com/jlevy/squares/pull/751#issuecomment-6368595518. A1: C3 waits on the gradec.py replay (think-mtah), the review's run is the second route beside the rung; the request entry, the review's For the Records Lane, the evidence and verifier notes, this bead and the PR's Limits say so. A2: the key [Daniel exact and local reports 2026-10-12] is builds-on-project, credited Daniel after Schadt, Ellsworth, Levy, with its occurrence spans; the 7 October key is think-588u. A3: coverage entry evand-exact-and-local-reports-2026-10-12. A4: the citation wording, and think-8xy2. A5: the 23 October fetch dated in the packet. A6: the process count, 24 rows at each, and the timeouts reworded. A7: independence blocks for the two premise programs.
+
+2026-10-31 bold-ritchie-l8 (lane L8 of the 31 October intake, epic think-3guf), taking over from c-review-thmc-1023 (ended 23 October), branch claude/bold-ritchie-xo28us-l8: REGISTERED as T-264 (restricted-optimality, S2, attribution [Daniel exact and local reports 2026-10-12], published 2026-10-12) from this bead's drafts.
+
+- **Evidence**: E-evand-gradec-local-minima-233-report (already on main), plus the two drafted entries entered verbatim, E-evand-gradec-local-minima-233-review-check and E-evand-gradec-n10-recompute. Both carry deferrals in certificate-citation-deferrals.yaml naming think-8xy2, which lapse 30 days after evidence.yaml's last_reviewed.
+- **Rungs**: V3/C1. The review's checker would derive C3, but it is held at C1 with a composition note: stage 4 takes the source's own checker as the replay, and the review's run is a second route beside the rung (review A1 of #751).
+- **Review**: listed as adversarial, verdict defects-resolved (C-1 repaired in the review with no check changed).
+- **unfinished_confirmations**: think-mtah at C3, 10.6 CPU-hours by the source's logs (high 21.0).
+- **Requests**: #545's grade-c-local-minima result maps to T-264 with validation [think-mtah].
+- **think-mtah NOT run**: about 10.6 CPU-hours, roughly 5.3 hours of wall time at two cores on a host shared with other lanes, so it stays priced and needs the coordinator's or owner's budget.
+- **Reply**: the updated #545 reply draft is in think-6gti (answer bead). It supersedes the 23 October draft here; post it after merge, on the owner's word.

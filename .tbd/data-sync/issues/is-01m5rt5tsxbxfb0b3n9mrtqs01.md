@@ -5,17 +5,19 @@ title: Decide Kim's exact configurations for T-244 at 172 and 263 on both exact 
 kind: task
 status: in_progress
 priority: 3
-version: 10
+version: 11
 delegate: bold-ritchie-l8
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+child_order_hints:
+  - is-01m692s0e5n34n064hq32vb0fs
 deferred_until: null
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:57:44.893Z
-updated_at: 2026-10-31T13:07:22.769Z
+updated_at: 2026-10-31T13:35:52.772Z
 started_at: 2026-10-25T11:43:46.219Z
 ---
 Decide Hyukdong Kim's exact configurations for T-244 (issue #804) at 172 and 263 on both exact routes. T-244 registers s(172) <= S*_172 and s(263) <= S*_263 as reported (V0/C0); each S* is the root of #804's irreducible polynomial of degree 24 and 17.
