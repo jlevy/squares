@@ -3,16 +3,24 @@ type: is
 id: is-01m687befj0g6hrrfg6jxz126x
 title: Review Couzo's s(130) certificate (stage 4) and adopt at 130 with both regularizations (#843)
 kind: task
-status: open
+status: closed
 priority: 1
-version: 2
+version: 4
+delegate: bold-ritchie-l2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m685msgkcqe67s8cwkqy116j
+hold: null
+hold_until: null
 created_at: 2026-10-31T05:36:36.849Z
-updated_at: 2026-10-31T07:29:23.596Z
+updated_at: 2026-10-31T13:35:21.962Z
+started_at: 2026-10-31T13:35:10.390Z
+closed_at: 2026-10-31T13:35:21.962Z
+close_reason: "Done in #852 (merged e482345fe): the stage 4 review docs/project/reviews/review-2026-10-31-couzo-843-130.md is mapped, T-254 is at V3/C3, and the case at 130 adopted the smaller validated certificate T-259 (Couzo's packing re-solved by Polkovskyi), drawn by grid-slack's regularized view; the 130 regularizer solve 2.50e-13 below is a register candidate on think-ruu2."
+resolution: null
+duplicate_of: null
 ---
 Stage 4 review of Francisco Couzo's s(130) certificate (#843, T-253 on the lane's branch) and the adoption at 130. The house rule adopts the smallest validated side: Mykhailo Polkovskyi's #846 certificate at 130 (T-258 on the branch), a 2e-14 dilation of this packing 2.08e-12 below it, is adopted in its place if its review accepts it too (think-pg1y's validation bead), credited to Couzo's packing.
 

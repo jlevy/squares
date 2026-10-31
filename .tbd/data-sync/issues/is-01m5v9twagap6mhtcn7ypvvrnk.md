@@ -3,9 +3,9 @@ type: is
 id: is-01m5v9twagap6mhtcn7ypvvrnk
 title: Review Evan Daniel's s(299) update certificate (T-258, stage 4) and adopt it at 299 with both regularizations (#824 update)
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m5v9gnfdsstsbyk92bb6nk8e
 hold: null
 hold_until: null
 created_at: 2026-10-26T05:09:52.080Z
-updated_at: 2026-10-31T08:38:43.940Z
+updated_at: 2026-10-31T13:35:25.844Z
 started_at: 2026-10-31T08:37:27.888Z
+closed_at: 2026-10-31T13:35:25.843Z
+close_reason: "Done in #852 (merged e482345fe): the stage 4 review docs/project/reviews/review-2026-10-31-daniel-824-299-update.md is mapped, T-248 and T-258 are at V3/C3, and 299 adopted T-258, decided no better (the axis tool's view drawn). #824 answered and closed."
+resolution: null
+duplicate_of: null
 ---
 The stage 4 mathematical review of Evan Daniel's s(299) certificate of the 29 October update on #824 (T-258), and of T-248's, which it continues, then the adoption at 299 with both regularizations, which the house rule puts in one pull request. The update's certificate is registered as T-258 on #852 (lane L2, think-3guf) with the replay on both maintained exact routes, gross and sharp controls and the pose-by-pose measurement retained in packing/resources/web/evand-n299-update-2026-10-29/; T-248's is in packing/resources/web/evand-n299-2026-10-26/.
 

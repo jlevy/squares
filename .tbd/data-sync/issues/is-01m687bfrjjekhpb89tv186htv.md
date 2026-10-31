@@ -3,16 +3,24 @@ type: is
 id: is-01m687bfrjjekhpb89tv186htv
 title: Review Couzo's 232, 260, 307 certificates (#844, a5a5d76) and adopt at 232 and 307 with both regularizations
 kind: task
-status: open
+status: closed
 priority: 1
-version: 2
+version: 4
+delegate: bold-ritchie-l2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m685nejvjntazeebg3zn18mt
+hold: null
+hold_until: null
 created_at: 2026-10-31T05:36:38.162Z
-updated_at: 2026-10-31T07:29:24.205Z
+updated_at: 2026-10-31T13:35:23.182Z
+started_at: 2026-10-31T13:35:11.441Z
+closed_at: 2026-10-31T13:35:23.182Z
+close_reason: "Done in #852 (merged e482345fe): the stage 4 review docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md is mapped, T-255 and T-256 are at V3/C3, and 232 and 307 adopted T-256 (232 regularized by grid-slack, 307 decided no better); 260 went to T-257. The 307 regularizer solve 3.75e-12 below is a register candidate on think-ruu2."
+resolution: null
+duplicate_of: null
 ---
 Stage 4 review of Francisco Couzo's a5a5d76 certificates at 260 and 307 (T-254 on the lane's branch) and his #844 certificates at 232, 260 and 307 (T-255), and the adoption at 232 and 307, where #844's are the smallest reported sides. At 260 Evan Daniel's #845 certificate (T-256) is lower and is adopted instead if validated (think-17wo's validation bead).
 
