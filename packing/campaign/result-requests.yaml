@@ -26202,6 +26202,8 @@ issues:
       - T-248
       evidence:
       - E-evand-n299-certificate-report
+      - E-evand-n299-exact-feasibility
+      - E-evand-n299-review-exact-feasibility
     - key: n299-update-2026-10-29
       claim: >-
         s(299) <= 17801238549388584084680137655023/10^30 = 17.8012385493885840..., rounded up
@@ -26270,6 +26272,12 @@ issues:
       - result: n299
         id: E-evand-n299-certificate-report
         status: reviewed
+      - result: n299
+        id: E-evand-n299-exact-feasibility
+        status: confirmed
+      - result: n299
+        id: E-evand-n299-review-exact-feasibility
+        status: confirmed
       - result: n299-update-2026-10-29
         id: T-258
         verification: V3
@@ -26315,6 +26323,10 @@ issues:
       0e76d9fe: its digest the update's, valid, the side 17801238549388584084680137655023/10^30
       rounding up to the update's print, and accepted by verify_bound_certificate.py in its
       strict mode; it did not check the KKT or local-optimality claims.
+
+      The final reply of 31 October (issuecomment-6543935364) was edited the same
+      afternoon, after #860's review (A4), to name the confirmed replay and review
+      entries this entry now lists; the reply as recorded is the edited one.
   - number: 843
     title: 's(130) ≤ 11.902430646: registration request'
     author: franciscouzo
@@ -26353,6 +26365,8 @@ issues:
       - T-254
       evidence:
       - E-couzo-843-certificate-report
+      - E-couzo-843-exact-feasibility
+      - E-couzo-843-review-exact-feasibility
     beads:
     - think-big9
     - think-oy8d
@@ -26378,12 +26392,22 @@ issues:
       - result: n130
         id: E-couzo-843-certificate-report
         status: reviewed
+      - result: n130
+        id: E-couzo-843-exact-feasibility
+        status: confirmed
+      - result: n130
+        id: E-couzo-843-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The result is registered with its replay and its review and adoption owned by their bead,
       and the reply on main says so; nothing the author asked for is queued.
     notes: >-
       Read on 31 October 2026 from main 3978a7f61. The commit 3a4d95c precedes the issue by 7
       minutes 48 seconds; GitHub's activity log was not readable, so its push is not dated.
+
+      The final reply of 31 October (issuecomment-6543925668) was edited the same
+      afternoon, after #860's review (A4), to name the confirmed replay and review
+      entries this entry now lists; the reply as recorded is the edited one.
   - number: 844
     title: '232, 260, 307: registration request'
     author: franciscouzo
@@ -26424,6 +26448,8 @@ issues:
       - T-256
       evidence:
       - E-couzo-844-certificate-report
+      - E-couzo-844-exact-feasibility
+      - E-couzo-844-review-exact-feasibility
     beads:
     - think-n61j
     - think-dwzb
@@ -26449,6 +26475,12 @@ issues:
       - result: n232-n260-n307
         id: E-couzo-844-certificate-report
         status: reviewed
+      - result: n232-n260-n307
+        id: E-couzo-844-exact-feasibility
+        status: confirmed
+      - result: n232-n260-n307
+        id: E-couzo-844-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The results are registered with their replay and their review and adoption owned by their
       bead, and the reply on main says so; nothing the author asked for is queued.
@@ -26459,6 +26491,10 @@ issues:
       new packings or refinements the issue leaves to the record: measured here against each
       house (measure/identity-nNNN.json in the packet), and the Kaggle notebook packings they
       start from are not retained, so the ledger classifies none.
+
+      The final reply of 31 October (issuecomment-6543929047) was edited the same
+      afternoon, after #860's review (A4), to name the confirmed replay and review
+      entries this entry now lists; the reply as recorded is the edited one.
   - number: 845
     title: '172, 204, 260, 293: registration request'
     author: evand
@@ -26498,6 +26534,8 @@ issues:
       - T-257
       evidence:
       - E-evand-845-certificate-report
+      - E-evand-845-exact-feasibility
+      - E-evand-845-review-exact-feasibility
     beads:
     - think-17wo
     - think-nkt1
@@ -26523,12 +26561,22 @@ issues:
       - result: n172-n204-n260-n293
         id: E-evand-845-certificate-report
         status: reviewed
+      - result: n172-n204-n260-n293
+        id: E-evand-845-exact-feasibility
+        status: confirmed
+      - result: n172-n204-n260-n293
+        id: E-evand-845-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The results are registered with their replay and their review and adoption owned by their
       bead, and the reply on main says so; nothing the author asked for is queued.
     notes: >-
       Read on 31 October 2026 from main 3978a7f61. The commit d2d5dd9 precedes the issue by 12
       minutes 41 seconds; GitHub's activity log was not readable, so its push is not dated.
+
+      The final reply of 31 October (issuecomment-6543932512) was edited the same
+      afternoon, after #860's review (A4), to name the confirmed replay and review
+      entries this entry now lists; the reply as recorded is the edited one.
   - number: 846
     title: 'New packings: 14 verified upper bounds for square packing (Category A records and Category
       B refinements, N in [105, 308]): registration request'
@@ -26559,8 +26607,6 @@ issues:
         s(130) at the exact header of certificates/0000-0999/n130.cert at 52aa267, below every earlier report: a refinement of Couzo's #843 packing.
       source: body
       bead: think-pg1y
-      validation:
-      - think-ikku
       register:
       - T-259
       evidence:
