@@ -2707,7 +2707,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "at the same link revision, twice from this tree and once with b95c5f69c's "
             "copies of those inputs, site_resources.py, frontier/README.md, "
             "composite-figure.json and bound-citations.json swapped in, the same 51 "
-            "files, byte-identical across the three. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "files, byte-identical across the three; and the same again after merging "
+            "main c94df7cef (#853), with its copies swapped in. Retain v0.1.11, v0.1.4 "
+            "and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
