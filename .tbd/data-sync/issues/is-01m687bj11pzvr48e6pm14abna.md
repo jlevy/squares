@@ -1,18 +1,22 @@
 ---
 type: is
 id: is-01m687bj11pzvr48e6pm14abna
-title: "Review Polkovskyi's 23 October and #846 refinements (stage 4) and adopt at 15 counts with both regularizations"
+title: "Review Polkovskyi's 23 October and #846 refinements (stage 4): adopt 130; owner's question on the other fourteen counts"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 2
+version: 4
+delegate: bold-ritchie-l2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m685njhfc113wb8prbg15npb
+hold: null
+hold_until: null
 created_at: 2026-10-31T05:36:40.481Z
-updated_at: 2026-10-31T07:29:23.075Z
+updated_at: 2026-10-31T08:39:43.685Z
+started_at: 2026-10-31T08:37:28.980Z
 ---
 Stage 4 review of Mykhailo Polkovskyi's certificates of 23 October (T-252 on the lane's branch: 154, 155, 183, 211, 227, 236, 237, 241 and 271, each about 1.3e-19 to 1.7e-19 below its house) and of #846 (T-258: 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house, and 130, a 2e-14 dilation of Couzo's #843 packing 2.08e-12 below it), and the adoption at each of the fifteen counts where it is the smallest validated side, crediting each packing to its finder and the refinement to Polkovskyi.
 
@@ -29,3 +33,14 @@ Stage 4 review of Mykhailo Polkovskyi's certificates of 23 October (T-252 on the
 ## Notes
 
 2026-10-31: renumbered on the branch after #851's T-252: the 23 October refinements are T-253 and #846's are T-259 (were T-252 and T-258).
+
+2026-10-31 (bold-ritchie-l2), the owner's question, recorded as a question and not a verdict. The stage 4 review (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md, lane bold-ritchie-rv-polk, tbd-strong at xhigh) accepted all fifteen certificates for finite feasibility. At 130 (T-259, issue 846's re-solve of Couzo's #843 packing, 2.08e-12 below it, a different 12-place print) it is accepted for adoption, and the case adopts it on #852 with the packing's credit Couzo's (T-254).
+
+At the other fourteen counts, 105, 146, 154, 155, 156, 183, 211, 227, 229, 236, 237, 241, 271 and 308, each certificate is a sub-print re-certification of the house certificate: below it by 1e-41 to 1.7e-19, the same 12-place print, the margin the house certificate's padding (RV-2). The owner's ruling of 23 October (think-fwa9) makes such re-certifications restatements, and the record applies it beyond the horizon only (intake_ledger.Ruling.applies; result-import.md's rulings paragraph); its words name no horizon. RV-1 (major) asks the owner:
+
+QUESTION FOR THE OWNER: does the 23 October restatement ruling reach counts inside the corpus, n <= 324?
+- (a) Yes: the fourteen are not recorded; T-253 and T-260 are withdrawn, T-259 keeps 130, no house moves, and the ledger's ruling gains a reach into the corpus. The review recommends (a).
+- (b) No: record and adopt all fourteen, with both regularizations (75 to 375 CPU-minutes), and the runbook's refinement bullet gains the beyond-horizon limit.
+- (c) Only a holder's own re-certifications: 105 and 156 (Polkovskyi's own houses) are not recorded; the other twelve wait on think-oqjd.
+
+Record on #852: T-253 (the nine of 23 October) and T-260 (issue 846's five, split from T-259 so the question holds only them) stay at V0/C1, below the stage 4 exit, with the review mapped and their replay evidence not entered; nothing adopts them. #846's requests entry is blocked: owner-decision naming this bead. When the owner answers, the record follows: (a) withdraw both entries and add the ledger's ruling reach; (b) enter the replay evidence E-mishapolk-1023-exact-feasibility and E-mishapolk-846 at the five counts, raise both to V3/C3 and adopt with both regularizations; (c) split again by holder.
