@@ -41,8 +41,8 @@ then the three `layer` commands the selection printed (grid-slack’s 0.5-degree
 260 and 293, its 1-degree run at 232 and its 5-degree run at 130, 172 and 204), then
 `render_regularized_atlas --update`, `default_drawings --update`,
 `flip_regularization --update`, `regularized_drawings` and `render_results --update`,
-and `default_drawings --retain-runs`, which keeps the grid-slack runs’ index blocks
-under [`settled-runs/`](../settled-runs/).
+and `default_drawings --retain-runs`, whose copies of the grid-slack runs’ index blocks
+are kept here, as each run’s `run.json`, beside its reports.
 
 Grid-slack took 448, 308 and 488 CPU seconds at 0.5, 1 and 5 degrees.
 Evan Daniel’s driver took 1,501 CPU seconds over 1,600 s of wall at one worker, 562 of
@@ -73,8 +73,8 @@ asks.
 
 - `adopt-2026-10-31-n130-307-evand/`: the driver’s `receipt.json` and each count’s
   `report.json.gz`.
-- `adopt-2026-10-31-n130-307-grid-{deg05,deg1,deg5}/`: each count’s `report.json.gz`;
-  the runs’ blocks are in `../settled-runs/` and the layer’s index.
+- `adopt-2026-10-31-n130-307-grid-{deg05,deg1,deg5}/`: each run’s block, `run.json`, and
+  each count’s `report.json.gz`.
 - `selection-adopt-2026-10-31-n130-307.{json.gz,md}`: the selection’s report and table.
 
 <!-- This document follows common-doc-guidelines.md.

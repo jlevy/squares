@@ -95,7 +95,7 @@ from sqpack.yamlio import safe_load
 #: n = 229 onto Evan Daniel's issue 674 packet (T-199), and that of 20 October n = 227 and
 #: 260 onto Joost de Winter's issue 668 packet (T-196), and that of 21 October n = 260 onto
 #: Francisco Couzo's issue 678 packet (T-223).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 43}
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 41}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -128,11 +128,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # grid), to Evan Daniel's issue 680 packet (T-220, think-jh4w), and 229 (from
     # Kingbird), to his issue 674 packet (T-199), and on 20 October 227 and 260 (both from
     # Kingbird), to Joost de Winter's issue 668 packet (T-196), and on 21 October 260 again,
-    # to Francisco Couzo's issue 678 packet (T-223, think-xu4d).
+        # to Francisco Couzo's issue 678 packet (T-223, think-xu4d), and on 31 October 293 and
+    # 299 (both from Kingbird), to Evan Daniel's issue 845 and issue 824 update packets.
     "n=1..324": {
         "exact-grid": 174,
-        "kingbird-derived-facts": 72,
-        "packet-derived-facts": 78,
+        "kingbird-derived-facts": 70,
+        "packet-derived-facts": 80,
     },
 }
 
@@ -2376,8 +2377,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # Kristiansen packing, and his name joined it. On 25 October 2026 the adoption at 268 and
     # 303 (T-240) credits Kirill Tymchishin's and Vladislav Lavrentev's Kaggle notebook
     # packings as Francisco Couzo refined them, so both names join it, and Kristiansen's,
-    # which held only 303, leaves.
-    assert len(expected_names) == 28
+        # which held only 303, leaves. On 31 October 2026 the adoption at 232 and 307 (T-256)
+    # credits Alex Chilton's and ntumlnoob's Kaggle notebook packings as Francisco Couzo
+    # refined them, so both names join it.
+    assert len(expected_names) == 30
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
     # re-housed still holds another count. The adoption of 20 October draws from three
@@ -2414,8 +2417,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # longer from Mishapolk's KKT refinements there, which still hold other counts. The same
     # pass draws 182 from Evan Daniel's issue 806 packet (T-243), one more source with no new
     # name, and no longer from PingYou Ltd's PR 574 certificates there, which still hold
-    # other counts.
-    assert len(expected_sources) == 29
+        # other counts. The adoption of 31 October draws from four more, Couzo's issue 844
+    # packet (232, 307), Evan Daniel's issue 845 and issue 824 update packets (172, 204, 260,
+    # 293; 299) and Polkovskyi's issue 846 packet (130), and no longer from his n204 packet
+    # (T-231), which held nothing else.
+    assert len(expected_sources) == 32
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2441,11 +2447,13 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Hajba",
         "Schadt",
         "Chaoweeraprasit",
+        "Chilton",
         "Couzo",
         "Daniel",
         "de Winter",
         "Gupta",
         "Lavrentev",
+        "ntumlnoob",
         "Ostashev",
         "PingYou Ltd",
         "Tymchishin",
@@ -4613,10 +4621,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 28 since the adoption at 268 and 303 of 25 October 2026 (see the credits test above).
+        # 30 since the adoption at 232 and 307 of 31 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 28
+        == 30
     )
 
 

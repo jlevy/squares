@@ -716,11 +716,12 @@ def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> N
     assert (
         f"n={n}: SETTLED names run grid-slack-adopt174-deg1-1017, which no record holds"
     ) in "\n".join(found)
-    # Views were drawn from the driver run (172) and the 0.5-degree run, so the index holds
-    # their blocks, and that is all that holds them here.
+    # A view was drawn from the 0.5-degree run, so the index holds its block, and that is
+    # all that holds it here. The driver run drew 172 until the adoption of 31 October 2026
+    # redrew it, so the index holds its block no longer, and nothing does without the
+    # evidence.
     assert (
-        f"n={n}: SETTLED names run evand-regularize-adopt174-1017, which only the layer's "
-        "index holds"
+        f"n={n}: SETTLED names run evand-regularize-adopt174-1017, which no record holds"
     ) in "\n".join(found)
     assert (
         f"n={n}: SETTLED names run grid-slack-adopt174-deg05-1017, which only the layer's "
@@ -743,13 +744,15 @@ def test_a_settlement_keeps_its_record_when_the_index_drops_a_run(tmp_path: Path
             assert records[run].generator == generator, (n, run)
             assert records[run].retained, (n, run)
     assert not (defaults.EVIDENCE / defaults.SETTLED_RUNS).exists()
-    run = "evand-regularize-adopt174-1017"
+    # The copy is made of the 0.5-degree grid run, whose block the index still holds: the
+    # driver run's left the index on 31 October 2026, once 172's view was redrawn.
+    run = "grid-slack-adopt174-deg05-1017"
     evidence = tmp_path / "evidence"
     shutil.copytree(
         defaults.EVIDENCE,
         evidence,
         ignore=lambda directory, _names: (
-            ["receipt.json"] if Path(directory).name == "adopt174-1017" else []
+            ["run.json"] if Path(directory).name == "adopt174-deg05-1017" else []
         ),
     )
     found, _listed = defaults.state_problems(evidence=evidence)

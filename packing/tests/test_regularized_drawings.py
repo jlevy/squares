@@ -959,7 +959,8 @@ def test_t155_names_daniels_earlier_certificate_where_its_side_is_his() -> None:
         if not registration.readopted(n)
         and any("view" in found for found in fields[n]["items"] if found["by"] == "project")
     )
-    assert drawn_named == [83, 87, 107, 171, 198, 230, 234, 293]
+    # At 293 the house moved to Evan Daniel's #845 (T-257) on 31 October 2026.
+    assert drawn_named == [83, 87, 107, 171, 198, 230, 234]
     first = (
         "registered in T-155, and the same side was first certified by Evan Daniel's "
         "certificate (T-101), so it proves no new bound"
@@ -974,7 +975,7 @@ def test_t155_names_daniels_earlier_certificate_where_its_side_is_his() -> None:
             assert "first certified" not in note, n
     solves = drawings.recorded_solves(drawn, register.results, index.get("runs") or [])
     assert sorted(n for _rid, n in solves) == [
-        37, 41, 50, 54, 71, 83, 107, 171, 178, 198, 230, 234, 293,
+        37, 41, 50, 54, 71, 83, 107, 171, 178, 198, 230, 234,
     ]  # fmt: skip
     for n, item in items.items():
         assert ("modifications_unrecorded" in item) == (("T-155", n) not in solves), n

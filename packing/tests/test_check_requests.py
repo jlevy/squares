@@ -2000,7 +2000,8 @@ def test_a_block_is_typed_lifted_by_the_close_and_matches_a_hold(
 
 
 def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> None:
-    """Section B of the intake review of 26 October 2026 lists 37 open issues as blocked;
+    """Section B of the intake review of 26 October 2026 lists 37 open issues as blocked,
+    and #846 joined them as an owner decision on 31 October 2026 (think-ikku);
     each carries its type, and the label taxonomy names every type the record uses."""
     by_type: dict[str, set[int]] = {}
     for entry in check_requests.load_record()["issues"]:
@@ -2008,7 +2009,7 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
             assert entry["state"] == "open", entry["number"]
             by_type.setdefault(entry["blocked"]["type"], set()).add(entry["number"])
     assert {kind: len(numbers) for kind, numbers in by_type.items()} == {
-        "owner-decision": 18,
+        "owner-decision": 19,
         "owner-reply": 2,
         "standing-hold": 9,
         "author": 1,

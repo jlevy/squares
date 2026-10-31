@@ -191,11 +191,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: against T-230's 10 and 27. The pass of 25 October 2026 moved 268 and 303 to Francisco
 #: Couzo's issue-763 certificates (T-240, think-bk9r): 28 separating and 100 translating
 #: squares at 268 against T-174's 10 and 22, and 57 and 92 at 303 against T-239's 12 and
-#: 37.
+#: 37. The pass of 31 October 2026 (think-3guf) moved 130, 172, 204, 232, 260, 293, 299
+#: and 307 to the certificates of that day's reviews (T-256 to T-259): n=1..200 to 429
+#: separating and 2,151 translating squares, n=1..324 to 125 records with a separating
+#: square, 1,407 such squares and 5,721 translating squares.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 402, 182, 2046),
-    "n=1..324": (124, 1326, 302, 5356),
+    "n=1..200": (67, 429, 182, 2151),
+    "n=1..324": (125, 1407, 302, 5721),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
