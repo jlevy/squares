@@ -5,7 +5,7 @@ title: Decide Kim's exact configurations for T-244 at 172 and 263 on both exact 
 kind: task
 status: in_progress
 priority: 3
-version: 12
+version: 13
 delegate: bold-ritchie-l8
 labels:
   - result-import
@@ -17,7 +17,7 @@ deferred_until: null
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:57:44.893Z
-updated_at: 2026-10-31T14:52:53.234Z
+updated_at: 2026-10-31T15:10:49.431Z
 started_at: 2026-10-25T11:43:46.219Z
 ---
 Decide Hyukdong Kim's exact configurations for T-244 (issue #804) at 172 and 263 on both exact routes. T-244 registers s(172) <= S*_172 and s(263) <= S*_263 as reported (V0/C0); each S* is the root of #804's irreducible polynomial of degree 24 and 17.
@@ -58,3 +58,5 @@ Done when: both configurations are decided on both routes and recorded on T-244,
 - **263**: S*_263 is 2.126e-94 below the house (T-174's rational certificate). It is adopted once a stage 4 review accepts the configurations, and select_houses/upper_bound_houses read Kim's side and field witness; both are think-3trq (new).
 - **Cost**: about 1.45 CPU-hours against the bead's 2 to 8 estimate.
 - **Reply**: the #804 reply draft is in think-8r92.
+
+2026-10-31 bold-ritchie-l8, later: on the coordinator's decision the 263 adoption is parked (think-3trq now depends on think-ot5c and think-ikku; no review lane), since S*_263 is the exact value of the house's own arrangement. The author's comment of 13:27Z publishes all three attachments at HyukdongKim/square-packing-exact-sides f480441e (CC0 1.0); #804's read_through moved there. A later packet may retain the files themselves from that commit (the decision here stands on the derived facts, whose rebuilt bytes have the stated digests), and route B at 297 (think-ozx8) can now fetch n297.minpoly.json. PR #861 head 096027cb0.
