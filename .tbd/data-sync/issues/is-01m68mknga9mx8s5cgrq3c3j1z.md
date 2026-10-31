@@ -5,12 +5,12 @@ title: "CI: main's slow lane killed at its 1800 s budget (schedule run 411842904
 kind: bug
 status: open
 priority: 2
-version: 4
+version: 5
 labels: []
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-10-31T09:28:17.673Z
-updated_at: 2026-10-31T10:43:54.356Z
+updated_at: 2026-10-31T11:15:48.912Z
 ---
 The scheduled Packing validation run 41184290497 (main at c94df7cef, 31 October 2026) failed only in `slow-lane` (job 124487895179) and in `post-merge-required`, which depends on it. No test failed. 297 tests had passed when `packing-validate` killed the step at its 1800 s hard budget: `FAST_SUITE_BUDGET_SECONDS`, the `budget_seconds` of the "slow behavioral tests" Step in `packing/src/sqpack/cli/validate.py`. The step printed "command timed out after 1800 seconds", and the 298th test was still running. Twenty minutes later the push run of the same tree (41184251410, job 124492073199) reported 298 passed in 1696.48 s.
 
@@ -35,3 +35,4 @@ PR #851 (lane L3), deep-gate deferred-slow-lane readings on 31 October, by job w
 - d30eeba, run 41185900782: success, 1535 s.
 - 50d2332, run 41188373400: success, 1450 s.
 - f3f0dc4, run 41191239581 (job 124508391290): killed at the 1800 s step timeout with no test failure shown (about 296 tests had passed). The same push's suite jobs all ran slower than at 50d2332, which points to a slow runner: suite-b 792 s against 652 s, suite-c 733 s against 435 s, suite-a 447 s against 351 s. suite-b also failed the 45 s per-test guard on two atlas tests (56.08 s, 53.15 s), with the shard at 720 s against a recorded 216 s.
+- dc8830b (#851 merged with main 49dac4354), run 41193895854 (job 124516184668): success, 1762 s, again within 40 s of the cap; suite walls on that push were a 459 s, b 378 s, c 726 s, d 507 s.
