@@ -26149,7 +26149,8 @@ issues:
     title: 's(299) ≤ 17.803695435333: registration request'
     author: evand
     opened: '2026-10-26'
-    state: open
+    state: closed
+    closed: '2026-10-31'
     kind: result-report
     triage: done
     summary: >-
@@ -26251,6 +26252,41 @@ issues:
         position: pending adoption
       - result: n299-update-2026-10-29
       beads: [think-3xn9, think-8hjz]
+    - url: https://github.com/jlevy/squares/issues/824#issuecomment-6543933233
+      date: '2026-10-31'
+      by: jlevy
+      kind: other
+      reported:
+      - result: n299-update-2026-10-29
+    - url: https://github.com/jlevy/squares/issues/824#issuecomment-6543935364
+      date: '2026-10-31'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n299
+        id: T-248
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n299
+        id: E-evand-n299-certificate-report
+        status: reviewed
+      - result: n299-update-2026-10-29
+        id: T-258
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n299-update-2026-10-29
+        id: E-evand-n299-update-certificate-report
+        status: reviewed
+      - result: n299-update-2026-10-29
+        id: E-evand-n299-update-exact-feasibility
+        status: confirmed
+      - result: n299-update-2026-10-29
+        id: E-evand-n299-update-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The result is registered, reviewed and adopted at 299 with its drawing regularized and
       flipped, and the reply on main says so; nothing the author asked for is queued.
@@ -26285,7 +26321,8 @@ issues:
     title: 's(130) ≤ 11.902430646: registration request'
     author: franciscouzo
     opened: '2026-10-27'
-    state: open
+    state: closed
+    closed: '2026-10-31'
     kind: result-report
     triage: done
     summary: >-
@@ -26324,7 +26361,27 @@ issues:
     - think-big9
     - think-oy8d
     answer_bead: think-big9
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/843#issuecomment-6543923500
+      date: '2026-10-31'
+      by: jlevy
+      kind: other
+      reported:
+      - result: n130
+    - url: https://github.com/jlevy/squares/issues/843#issuecomment-6543925668
+      date: '2026-10-31'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n130
+        id: T-254
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n130
+        id: E-couzo-843-certificate-report
+        status: reviewed
     close_when: >-
       The result is registered with its replay and its review and adoption owned by their bead,
       and the reply on main says so; nothing the author asked for is queued.
@@ -26335,7 +26392,8 @@ issues:
     title: '232, 260, 307: registration request'
     author: franciscouzo
     opened: '2026-10-28'
-    state: open
+    state: closed
+    closed: '2026-10-31'
     kind: result-report
     triage: done
     summary: >-
@@ -26376,7 +26434,27 @@ issues:
     - think-n61j
     - think-dwzb
     answer_bead: think-n61j
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/844#issuecomment-6543926803
+      date: '2026-10-31'
+      by: jlevy
+      kind: other
+      reported:
+      - result: n232-n260-n307
+    - url: https://github.com/jlevy/squares/issues/844#issuecomment-6543929047
+      date: '2026-10-31'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n232-n260-n307
+        id: T-256
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n232-n260-n307
+        id: E-couzo-844-certificate-report
+        status: reviewed
     close_when: >-
       The results are registered with their replay and their review and adoption owned by their
       bead, and the reply on main says so; nothing the author asked for is queued.
@@ -26391,7 +26469,8 @@ issues:
     title: '172, 204, 260, 293: registration request'
     author: evand
     opened: '2026-10-29'
-    state: open
+    state: closed
+    closed: '2026-10-31'
     kind: result-report
     triage: done
     summary: >-
@@ -26431,7 +26510,27 @@ issues:
     - think-17wo
     - think-nkt1
     answer_bead: think-17wo
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/845#issuecomment-6543930115
+      date: '2026-10-31'
+      by: jlevy
+      kind: other
+      reported:
+      - result: n172-n204-n260-n293
+    - url: https://github.com/jlevy/squares/issues/845#issuecomment-6543932512
+      date: '2026-10-31'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n172-n204-n260-n293
+        id: T-257
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n172-n204-n260-n293
+        id: E-evand-845-certificate-report
+        status: reviewed
     close_when: >-
       The results are registered with their replay and their review and adoption owned by their
       bead, and the reply on main says so; nothing the author asked for is queued.
@@ -26504,7 +26603,44 @@ issues:
     - think-pg1y
     - think-ikku
     answer_bead: think-pg1y
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/846#issuecomment-6543938921
+      date: '2026-10-31'
+      by: jlevy
+      kind: other
+      reported:
+      - result: refinements
+      - result: sub-print
+      - result: not-recorded
+    - url: https://github.com/jlevy/squares/issues/846#issuecomment-6543941452
+      date: '2026-10-31'
+      by: jlevy
+      kind: final
+      reported:
+      - result: refinements
+        id: T-259
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: refinements
+        id: E-mishapolk-846-certificate-report
+        status: reviewed
+      - result: refinements
+        id: E-mishapolk-846-exact-feasibility
+        status: confirmed
+      - result: refinements
+        id: E-mishapolk-846-review-exact-feasibility
+        status: confirmed
+      - result: sub-print
+        id: T-260
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: sub-print
+        id: E-mishapolk-846-certificate-report
+        status: reviewed
     blocked:
       type: owner-decision
       reason: >-
@@ -26521,6 +26657,12 @@ issues:
       commits of 23 October past the 7e82c64 read (e386aab to fbc1749), which no issue reports,
       are this release's predecessors; intake-watch.yaml's read of 31 October says what each
       holds.
+
+      The reply of 31 October (after #852 merged and the deploy of e482345fe verified) states
+      T-259 at V3/C3 and T-253 and T-260 reviewed at V0/C1, and leaves the issue open:
+      `check_requests --report` counts it closeable, but the owner's question (think-ikku) is
+      a `blocked: owner-decision` the close condition names, so the issue closes once the
+      record follows the answer.
   - number: 836
     title: '1182–9944: 2484 new and 1434 lowered upper bounds, two-strip construction (Zenodo v5): registration request'
     author: mohsensbu-jpg
