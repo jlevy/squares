@@ -3,9 +3,9 @@ type: is
 id: is-01m685msgkcqe67s8cwkqy116j
 title: "Import Francisco Couzo: s(130) <= 11.902430645985 (#843)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:06:45.907Z
-updated_at: 2026-10-31T08:43:53.814Z
+updated_at: 2026-10-31T13:28:30.719Z
 started_at: 2026-10-31T05:07:20.327Z
+closed_at: 2026-10-31T13:28:30.719Z
+close_reason: "#843 answered and closed on 31 October after #852 merged (e482345fe) and the deploy verified (Pages run 41203909483): report-order verdict https://github.com/jlevy/squares/issues/843#issuecomment-6543923500, final reply https://github.com/jlevy/squares/issues/843#issuecomment-6543925668 (T-254 V3/C3, superseded by T-259 at 130); recorded under #843's replies on claude/bold-ritchie-xo28us-post852."
+resolution: null
+duplicate_of: null
 ---
 Issue jlevy/squares#843 (franciscouzo, 2026-10-27T19:49:57Z): certificates/n130.cert at franciscouzo/square-packing 3a4d95c (committed 2026-10-27T19:42:09Z, 7 min before the issue), SHA-256 a2618e1a...7fcd, exact side 466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000 = 11.9024306459843486..., 2.05e-3 below the house (PingYou Ltd's PR #574 certificate of Chaoweeraprasit's packing, improved by Gupta). The issue calls it a new packing found from #574's (largest matched move 0.704, 11 squares > 0.1) by the web app's fq, basin hopping and native SLP on the author's computers. Stage 1-3 and the stage 4 replay in the 2026-10-31 intake pass, lane L2 (think-3guf); review and adoption follow. Kaggle side-only 11.902430646006 (Cats and boxes) is no report.
 
