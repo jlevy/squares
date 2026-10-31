@@ -270,10 +270,12 @@ def test_small_records_rescreen_to_the_retained_result() -> None:
 
 
 # Back on the pull-request surface since 31 October 2026. The slow lane's 1s floor
-# refused its marker on main at 0.86s (run 40656970104) and 0.85s (run 41026564353);
-# other hosted draws read 1.14s to 2.86s and a shared four-cpu box 1.75s, all inside
-# the quick lane's classification ceiling. The 3.18s that earned the marker was T-130's
-# screen, before T-174 became the house.
+# refused its marker on main four times between 25 and 30 October, at 0.85s to 0.90s
+# (runs 40208626081, 40294622148, 40656970104 and 41026564353). Other hosted draws read
+# 1.14s to 2.86s and a shared four-cpu box 1.75s, all inside the quick lane's
+# classification ceiling. History of the marker: it was set at 14.52s when the case was
+# SQUISH's n = 108 (run 37739373988), and kept at 3.18s once the 11 October adoption
+# moved the case to T-130 at n = 84. T-174 has been the house since 17 October.
 def test_an_adopted_house_retains_its_replayed_tolerance_instability() -> None:
     """A fresh screen of an unstable adopted house reproduces the retained result.
 
