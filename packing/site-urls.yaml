@@ -7901,6 +7901,14 @@ urls:
       kind: page
       canonical: cases/
       target: ''
+- path: changelog.html
+  canonical: changelog.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-26'
+  lastmod: '2026-10-26'
+  status: live
 - path: contributors/erich-friedman.html
   canonical: profiles/erich-friedman.html
   kind: forwarder

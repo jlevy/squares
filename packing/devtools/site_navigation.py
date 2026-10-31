@@ -22,8 +22,16 @@ class NavigationItem:
 
 
 NAVIGATION = (
-    NavigationItem("overview", "Overview", "./"),
-    NavigationItem("news", "News", "news.html"),
+    NavigationItem(
+        "project",
+        "Project",
+        "",
+        (
+            NavigationItem("overview", "Overview", "./"),
+            NavigationItem("news", "News", "news.html"),
+            NavigationItem("changelog", "Changelog", "changelog.html"),
+        ),
+    ),
     NavigationItem(
         "results",
         "Results",
@@ -54,7 +62,7 @@ NAVIGATION = (
         "About",
         "",
         (
-            NavigationItem("project", "The Squares Project", "about.html"),
+            NavigationItem("about-project", "The Squares Project", "about.html"),
             NavigationItem("profiles", "Contributor Profiles", "profiles/"),
             NavigationItem("documentation", "Project Documentation", "documentation.html"),
         ),
@@ -73,6 +81,7 @@ _SELF_NAMED = frozenset({"./"})
 _LEGACY_PATHS = {
     "overview": "./",
     "news": "news.html",
+    "changelog": "changelog.html",
     "results": "results.html",
     "recent-results": "results.html",
     "verification": "verification.html",
@@ -92,6 +101,8 @@ _LEGACY_PATHS = {
 }
 # The same parent declarations drive the group indication and visible/structured trails.
 _PARENTS = {
+    "news.html": ("project",),
+    "changelog.html": ("project",),
     "about.html": ("about",),
     "results.html": ("results",),
     "atlas.html": ("results",),
@@ -165,11 +176,17 @@ def _parents(path: str) -> tuple[str, ...]:
     return ()
 
 
+def _serves(item: NavigationItem, path: str) -> bool:
+    """Whether `item` is the page being served.
+
+    Fragment destinations are not the current page unless a reader follows that location
+    explicitly; never mark both Atlas and its Bounds section as current."""
+    return bool(item.path) and "#" not in item.path and _path(item.path) == path
+
+
 def _link(item: NavigationItem, path: str, ancestors: tuple[str, ...], root: str) -> str:
     current = ""
-    # Fragment destinations are not the current page unless a reader follows that
-    # location explicitly; never mark both Atlas and its Bounds section as current.
-    if "#" not in item.path and _path(item.path) == path:
+    if _serves(item, path):
         current = ' aria-current="page"'
     elif item.key in ancestors:
         current = ' aria-current="true"'
@@ -188,7 +205,12 @@ def navigation_links(current: str, root: str = "") -> str:
         contents = _link(item, path, ancestors, root)
         if item.children:
             target = f"site-nav-{item.key}"
-            active = item.key in ancestors or bool(item.path and _path(item.path) == path)
+            # A group is current when the page is its own or one of its children's. The
+            # homepage declares no parents, so it carries no trail, and Project still
+            # reads as current there (the owner, 2026-10-26).
+            active = item.key in ancestors or any(
+                _serves(child, path) for child in (item, *item.children)
+            )
             current = ' aria-current="true"' if active else ""
             fallback = (
                 contents.replace("<a ", '<a class="site-nav-fallback" ', 1).replace(

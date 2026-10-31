@@ -23,7 +23,7 @@ from datetime import date, timedelta
 from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Any, Literal, NamedTuple, get_args
+from typing import TYPE_CHECKING, Any, Literal, NamedTuple, get_args
 from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
@@ -32,6 +32,9 @@ from devtools.artifact_dates import long_date, written_date
 from devtools.check_results import KINDS
 from devtools.contributor_credit import occurrence_registry
 from devtools.github_references import parse_github_reference
+
+if TYPE_CHECKING:  # `render_changelog` imports this module, so only the type.
+    from devtools.render_changelog import Document as ChangelogDocument
 from devtools.overview_data import (
     APOSTROPHE,
     BIBLIOGRAPHY,
@@ -1321,29 +1324,23 @@ def added_days(results: Iterable[Result], since: date) -> list[AddedDay]:
     ]
 
 
-def span_label(first: date, last: date) -> str:
-    """A run of days as a summary names it, joined by an en dash, closed up within a
-    month and spaced across two: `5-11 October 2026`, `28 September - 4 October 2026`
-    (each `-` an en dash on the page), across a new year both years, and one day alone,
-    `5 October 2026`."""
-    if first == last:
-        return day_label(first)
-    if first.year != last.year:
-        return f"{first.day} {first:%B %Y} {EN_DASH} {last.day} {last:%B %Y}"
-    if first.month != last.month:
-        return f"{first.day} {first:%B} {EN_DASH} {last.day} {last:%B %Y}"
-    return f"{first.day}{EN_DASH}{last.day} {last:%B %Y}"
-
-
 def counted(count: int) -> str:
-    """A block's count as its summary ends: `1 result`, `14 results`, `no results`."""
-    return f"{count} result{'' if count == 1 else 's'}" if count else "no results"
+    """A block's count as its summary ends: `1 result`, `14 results`, `no results`. The
+    number is the part a reader scans, so it carries the weight (`tally_count`)."""
+    return tally_count(count, f"result{'' if count == 1 else 's'}") if count else "no results"
+
+
+def tally_count(count: int, noun: str) -> str:
+    """One part of a tally: the number in bold, then its noun in the summary's own case.
+    Every tally is written this way, so one reads like the next (the owner,
+    26 October 2026)."""
+    return f"<b>{count}</b> {_esc(noun)}"
 
 
 def tallied_summary(label: str, tally: Sequence[str]) -> str:
     """A day's summary with its tally (`recent_tally`), each part a count of its own
-    (`.site-rollup-count`): a summary that wraps breaks between parts, never inside
-    one."""
+    (`.site-rollup-count`, markup from `tally_count`): a summary that wraps breaks
+    between parts, never inside one, and its toggle keeps the first line."""
     counts = " ".join(f'<span class="site-rollup-count">· {part}</span>' for part in tally)
     return f"<summary><span>{_esc(label)} {counts}</span></summary>"
 
@@ -1583,11 +1580,14 @@ def beyond_rows(since: date, until: date) -> list[BeyondRows]:
     )
 
 
-def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay]:
+def recent_days(overview: Overview, *, days: int | None = ADDED_DAYS) -> list[RecentDay]:
     """Every day from `days` before the newest arrival (`arrival_reference`) to it on
-    which a result, a house best packing or rows reached `main`, newest first."""
+    which a result, a house best packing or rows reached `main`, newest first.
+
+    `days=None` is the whole record, which is what the Changelog page shows.
+    """
     until = arrival_reference(overview)
-    since = until - timedelta(days=days)
+    since = date.min if days is None else until - timedelta(days=days)
     results = {added.day: added.results for added in added_days(overview.results, since)}
     houses: dict[date, list[HouseMove]] = {}
     for move in house_moves(since, until):
@@ -1603,44 +1603,42 @@ def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay
     ]
 
 
-def recent_span(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The days Recently Added shows, as its introduction names them: its oldest shown day
-    to its newest (`span_label`), so no block can sit outside the span."""
-    shown = [recent.day for recent in recent_days(overview, days=days)]
-    if not shown:
-        return day_label(arrival_reference(overview))
-    return span_label(min(shown), max(shown))
-
-
 def corpus_end() -> int:
     """The largest count the case corpus holds, past which a row is beyond the horizon."""
     return int(_coverage()["case_corpus"]["n_max"])
 
 
 def recent_tally(recent: RecentDay) -> tuple[str, ...]:
-    """A day's summary counts: its results, its counts with a new house best packing and
-    its rows beyond the corpus, each where it has any: `5 results`, `4 house best
-    packings`, `425 bounds beyond 324`. A summary is set in capitals, so no count names
-    a variable."""
+    """A day's summary counts: its results, its counts with a new record packing
+    (`house_entry`) and its rows beyond the corpus, each where it has any: `5 results`,
+    `4 new records`, `425 bounds beyond 324`, each written by `tally_count`. A count
+    never names a variable, since a summary's own label is set in capitals."""
     moved = sum(len(move.counts) for move in recent.houses)
     rows = sum(len(found.rows) for found in recent.rows)
     parts = (
         counted(len(recent.results)) if recent.results else "",
-        f"{moved} house best packing{'' if moved == 1 else 's'}" if moved else "",
-        f"{rows} bound{'' if rows == 1 else 's'} beyond {corpus_end()}" if rows else "",
+        tally_count(moved, f"new record{'' if moved == 1 else 's'}") if moved else "",
+        tally_count(rows, f"bound{'' if rows == 1 else 's'} beyond {corpus_end()}")
+        if rows
+        else "",
     )
     return tuple(part for part in parts if part)
 
 
 def house_entry(move: HouseMove) -> str:
     """A day's house move: the result, linking to its row on the results page, and the
-    counts whose house best packing it now is, each linking to its case."""
+    counts whose house best packing it now is, each linking to its case.
+
+    The line says *record packing*, not *house best packing*: by the import runbook's
+    house rule the house best is the smallest packing this record holds for a count, so
+    it is the record here, and *house best* reads as a term a reader has to look up (the
+    owner, 26 October 2026)."""
     from devtools.render_case_pages import case_link  # noqa: PLC0415
 
     counts = listed([case_link(n, str(n)) for n in move.counts])
     return (
         f'<li><a href="{_esc(result_url(move.result))}">{_esc(move.result)}</a> '
-        f"is now the house best packing at {counts}</li>"
+        f"is now the record packing at {counts}</li>"
     )
 
 
@@ -1694,31 +1692,65 @@ def beyond_entry(found: BeyondRows, sources: Mapping[str, Mapping[str, Any]]) ->
     )
 
 
-def recently_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The home page's Recently Added (`recent_days`): one disclosure a day, newest
-    first, the `RECENT_OPEN` newest open, its summary the date and its tally
-    (`recent_tally`), its body the day's results (`added_entry`, each linked to its row
-    in All Results), then its house moves (`house_entry`) and its sources' rows
-    (`beyond_entry`), and, for a day with results, the link that opens All Results on
-    that day (`added_day_link`). It draws with `results.css`'s rollup classes."""
+def changelog_rollup(overview: Overview, document: ChangelogDocument) -> str:
+    """The Changelog page's whole log: one disclosure a day over the entire record,
+    newest first, holding that day's results, its new record packings and its rows
+    beyond the corpus, as `added_entry`, `house_entry` and `beyond_entry` write them, and
+    then its site and project changes as one brief line each
+    (`render_changelog.changelog_entry_line`).
+
+    This is the section that used to open the home page as Recently Added. It moved here
+    on 26 October 2026, when the owner asked for the Changelog to be "concise, mostly
+    complete, linked to github issues and PRs clearly" rather than a story an entry, and
+    for the home page to carry a button here instead of the block itself.
+
+    Every day block keeps `changelog-date-<day>`, so the day bookmarks that
+    `render_changelog.archived_news_targets` forwards to this page resolve.
+    """
+    from devtools import render_changelog  # noqa: PLC0415
     from devtools.render_results import load_sources  # noqa: PLC0415
 
     sources = load_sources()
+    public = {entry["id"] for entry in render_changelog.news_entries(document)}
+    changes: dict[date, list[Mapping[str, Any]]] = {}
+    for entry in render_changelog.ordered_entries(document):
+        changes.setdefault(date.fromisoformat(entry["date"]), []).append(entry)
+    recents = {recent.day: recent for recent in recent_days(overview, days=None)}
     blocks = []
-    for index, recent in enumerate(recent_days(overview, days=days)):
+    for index, day in enumerate(sorted({*recents, *changes}, reverse=True)):
+        recent = recents.get(day)
+        today = changes.get(day, [])
+        entries: list[str] = []
+        if recent is not None:
+            entries.extend(added_entry(result) for result in recent.results)
+            entries.extend(house_entry(move) for move in recent.houses)
+            entries.extend(beyond_entry(found, sources) for found in recent.rows)
+        entries.extend(
+            render_changelog.changelog_entry_line(
+                document, entry, in_news=entry["id"] in public
+            )
+            for entry in today
+        )
+        tally = [*(recent_tally(recent) if recent else ())]
+        if today:
+            tally.append(tally_count(len(today), f"change{'' if len(today) == 1 else 's'}"))
+        shown = added_day_link(day, len(recent.results)) if recent and recent.results else ""
         state = " open" if index < RECENT_OPEN else ""
-        entries = [
-            *(added_entry(result) for result in recent.results),
-            *(house_entry(move) for move in recent.houses),
-            *(beyond_entry(found, sources) for found in recent.rows),
-        ]
-        shown = added_day_link(recent.day, len(recent.results)) if recent.results else ""
         blocks.append(
-            f'<details data-day="{recent.day.isoformat()}"{state}>'
-            f"{tallied_summary(day_label(recent.day), recent_tally(recent))}"
+            f'<details data-day="{day.isoformat()}" '
+            f'id="changelog-date-{day.isoformat()}"{state}>'
+            f"{tallied_summary(day_label(day), tally)}"
             f"<ul>{''.join(entries)}</ul>{shown}</details>"
         )
     return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
+
+
+def changelog_since(overview: Overview, document: ChangelogDocument) -> str:
+    """The day the Changelog opens on: the oldest day it shows, over results and changes
+    alike, as its introduction names it."""
+    days = [recent.day for recent in recent_days(overview, days=None)]
+    days.extend(date.fromisoformat(entry["date"]) for entry in document["entries"])
+    return day_label(min(days) if days else arrival_reference(overview))
 
 
 #: The rubric's three scored dimensions, in the site's order, significance first: the

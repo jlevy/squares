@@ -155,7 +155,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Mykhailo Polkovskyi",
         (
             "The lower of the two 204 certificates issue 719's release published, retained"
-            " and replayed here, and the house best packing at 204 (T-231)."
+            " and replayed here, and the record packing at 204 (T-231)."
         ),
     ),
     (

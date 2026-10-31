@@ -400,10 +400,12 @@ def test_the_name_stands_on_the_links_baseline(
             where = f"{name} at {width}"
             assert baseline_problems(found) == [], where
             labels = [link["label"] for link in found["links"]]
+            # Overview and News moved into the Project menu on 26 October 2026, so the
+            # bar's own row is four categories and the GitHub link.
             assert labels == (
                 ["Menu", "GitHub"]
                 if width < 768
-                else ["Overview", "News", "Results", "Learn", "About", "GitHub"]
+                else ["Project", "Results", "Learn", "About", "GitHub"]
             ), where
             first = min(found["links"], key=lambda link: link["top"])
             assert abs(found["name"] - first["baseline"]) <= BASELINE_TOLERANCE, where
