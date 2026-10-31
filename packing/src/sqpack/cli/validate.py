@@ -117,10 +117,13 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # lane open, so only the reported-open count falls, by one in every corpus.
     # 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-245) made n = 12
     # reported-proved in the same way, its verified lane open, so the reported-open count
-    # falls by one again in every corpus.
-    "n=1..100": (55, 52, 0),
-    "n=1..200": (139, 132, 0),
-    "n=1..324": (247, 236, 0),
+    # falls by one again in every corpus. 2026-10-31: the zmx2 replays of Khalili and
+    # Gharabaghi's closed mixed cover (T-252) proved s(44) = 7 in both lanes; n = 44 was
+    # open in both and not Nagamochi-bounded, so the formal-open and reported-open counts
+    # fall by one in every corpus.
+    "n=1..100": (54, 51, 0),
+    "n=1..200": (138, 131, 0),
+    "n=1..324": (246, 235, 0),
 }
 #: n = 68, 103, 105, 110 and 131 left the exclusions on 2026-09-29, when their records
 #: moved from UnitSquare renderings to Francisco Couzo's packings (T-056), and n = 69, the
