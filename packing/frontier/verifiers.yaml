@@ -6327,3 +6327,168 @@ verifiers:
       242a77a9affc9d1e9ef7baba232850053c28413892857d31b956afe269b58f2d as run, which its
       receipt out/check-s182-1024.json records), and kept with everything it printed in the
       evand-n182-2026-10-25 packet's review/review-2026-10-25/.
+  - id: V-couzo-1031-review-check
+    program: check_certs.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 31 October reviews' standard-library exact checker of Francisco Couzo's six
+      certificates of this pass (issue 843 at 130, commit a5a5d76 at 260 and 307, issue 844
+      at 232, 260 and 307), with a strict reader of its own (comment line, n S, n rows x y
+      t), deciding each on two routes over Q: route A by separating axes over every pair
+      and support functions at every wall; route B by exact corners at the walls and the
+      exact clipped area of every pair whose centres are closer than sqrt(2), the rest
+      disjoint by their discs. It decides ten controls per certificate built from the
+      tightest pair: a copy of one square in place of the other, a square moved halfway to
+      its neighbour, the pair closed to exact contact (accepted) and 1e-30 past it, the box
+      at the packing's extent (accepted) and 1e-30 below it, the header count raised by
+      one and a decimal field.
+    source:
+      - packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/programs/check_certs.py
+    independence_record: packing/resources/web/couzo-issue844-2026-10-28/review/review-2026-10-31/README.md
+    independence:
+      read: [mathematics, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 843 and 844
+            (bold-ritchie-rv-couzo, think-oy8d and think-dwzb), strong sub-agent tier
+            (tbd-strong) at the xhigh reasoning setting
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits carry a Co-Authored-By trailer naming Claude, and both
+          issues say Claude did the certification at the author's direction; the source's
+          verify_bound_certificate.py is Evan Daniel's verifier with modifications by
+          Francisco Couzo with Codex. The checker was written from the mathematics and the
+          certificates' comment line and decided before any maintained route's or source
+          checker's code was read; its author never read the source's checkers,
+          sqpack/verify.py, check_rational_witness_independent or upper_bound_reports.
+          Route A shares the separating-axis method with the maintained routes; route B's
+          clipped area is a second method.
+    note: >-
+      Written and run on 31 October 2026 for
+      docs/project/reviews/review-2026-10-31-couzo-843-130.md and
+      docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md (SHA-256
+      a1864f8ee0b99b1d02062f7f3776d21fc55714775708954168d3386ea003ffcf as retained, in the
+      directory's programs.sha256), and kept with everything it printed in the
+      couzo-issue844-2026-10-28 packet's review/review-2026-10-31/. agree.py, identity.py
+      and sides.py, kept beside it, decide nothing and are not registered.
+  - id: V-evand-1031-review-check
+    program: exact_check.py and controls.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 31 October reviews' standard-library exact checker of Evan Daniel's certificates
+      of issue 845 (172, 204, 260 and 293) and of the 29 October update on issue 824 (299),
+      and of T-248's 299 certificate, with a strict reader of its own that admits only
+      integer and integer-fraction tokens: every frame on the unit circle exactly, the
+      corners (x, y) + u (c, s) + v (-s, c), every wall by its corners and every pair twice,
+      by separating axes on the edge normals with no distance filter and by exact clipped
+      areas (Sutherland-Hodgman over Q), farther pairs disjoint by their discs.
+      controls.py decides ten sharp mutations per certificate by both methods against an
+      outcome fixed in the program: the box at the extent and 1e-30 below it, every square
+      onto the near walls and 1e-30 further, the closest pair closed by its gap and 1e-30
+      further, square 0 moved 1e-30 past its wall, square 0 duplicated, the rotation sense
+      reversed and the mirror image.
+    source:
+      - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/programs/exact_check.py
+      - packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/programs/controls.py
+    independence_record: packing/resources/web/evand-issue845-2026-10-29/review/review-2026-10-31/README.md
+    independence:
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 845 and the issue 824 update
+            (bold-ritchie-rv-daniel, think-nkt1 and think-8hjz), strong tier (tbd-strong)
+            at the xhigh reasoning setting
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits d2d5dd9 and 0e76d9f carry a Co-Authored-By trailer naming
+          Claude, and its CREDITS.md says the repository's work was produced by Claude
+          under the author's direction. The programs were written from the mathematics and
+          the certificates' format line; the source's binary64 inputs and 80-digit
+          .exact.txt points were read to compare. None of the source's programs
+          (verify_cert.py, verify_cert2.py, the search code) and none of this repository's
+          maintained exact routes was opened.
+    note: >-
+      Written and run on 31 October 2026 for
+      docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md and
+      docs/project/reviews/review-2026-10-31-daniel-824-299-update.md (SHA-256
+      60dfb08a1ce41c55aa80d6a67a8a424cf97fd12e7f4d6afc72dc5f82bd1f55ef for exact_check.py
+      and eac939de0fbe292bcff5196637405ff73ae78e46cb0ef3b4f3e82d4616f85430 for controls.py
+      as retained, in the directory's programs.sha256), and kept once, with everything they
+      printed, in the evand-issue845-2026-10-29 packet's review/review-2026-10-31/.
+      identity.py, kkt_consistency.py, dilation.py, tilts.py and sides.py, kept beside
+      them, decide nothing and are not registered.
+  - id: V-mishapolk-1031-review-check
+    program: rv_check.py and rv_controls.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 31 October review's standard-library exact checker of Mykhailo Polkovskyi's
+      fifteen certificates of this pass (nine of his commits of 23 October and six of issue
+      846) and the ten other certificates both packets retain, deciding each on two routes
+      over Q that share only the reader: route A by support functions at the walls and the
+      largest projection gap over the four unit edge normals of every pair whose centres
+      lie within 3/2; route B by all four corners at the walls and the exact clipped area
+      (Sutherland-Hodgman) of every pair whose bounding boxes overlap. Its selftest decides
+      ten hand-built packings at contact and 1e-30 past it. rv_controls.py decides seven
+      mutants of each certificate at exact contact and 1e-60 past it, below every margin
+      including 156's 4e-41, on both routes.
+    source:
+      - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/programs/rv_check.py
+      - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/programs/rv_controls.py
+    independence_record: packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    independence:
+      read: [mathematics, certificate-format, earlier-review]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 846 and the commits of 23
+            October (bold-ritchie-rv-polk, think-ikku), strong sub-agent tier (tbd-strong)
+            at the xhigh reasoning setting
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 846 credits "Mishapolk (Mikhail Polk) & Antigravity Autonomous Research
+          Lab" and does not say what kind of assistance it names. The checker was written
+          from the mathematics and the certificates' first line, after reading the first
+          160 lines of the 22 October review of issue 719, which names the same two
+          methods; its author never read the code of either maintained route, sqpack's
+          verifiers or the source's verify_bound_certificate.py.
+    note: >-
+      Written and run on 31 October 2026 for
+      docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md (SHA-256
+      b2bb8d68235945cc0b7cb122969a1bda350de18148f3dd6910f0f631580692b5 for rv_check.py and
+      8e3d24853c486e503dbfbb24ea21e414da87268e10f49e2b6fd13208fe4881de for rv_controls.py,
+      as out/program-digests.sha256 records them), and kept once, for both of the pass's
+      Polkovskyi packets, with everything it printed in the mishapolk-issue846-2026-10-30
+      packet's review/review-2026-10-31/. rv_identity.py, rv_gaps.py and rv_claims.py,
+      kept beside it, decide nothing and are not registered.

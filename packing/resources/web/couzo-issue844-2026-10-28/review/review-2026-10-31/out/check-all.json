@@ -1,0 +1,446 @@
+[
+ {
+  "label": "c843-130",
+  "path": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-couzo/tree/packing/resources/web/couzo-issue843-2026-10-28/source/certificates/n130.cert",
+  "n": 130,
+  "side": "466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000",
+  "side_float": 11.90243064598435,
+  "route_a": {
+   "pairs": 8385,
+   "pairs_decided_exactly_on_all_axes": 304,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_pair_margin": [
+    2.0761969838327356e-13,
+    105,
+    128
+   ],
+   "least_wall": [
+    1e-15,
+    1
+   ],
+   "bad_walls": [],
+   "extent": 11.902430645984348,
+   "low": 1e-15,
+   "accepted": true
+  },
+  "route_b": {
+   "pairs_by_area": 280,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_wall": [
+    1e-15,
+    1
+   ],
+   "bad_walls": [],
+   "accepted": true
+  },
+  "side_minus_extent": 1e-15,
+  "low_corner_min": 1e-15,
+  "reader_controls": {
+   "count_plus_one": "refused: header n=131 but 130 rows",
+   "decimal_field": "refused: row 1 malformed"
+  },
+  "controls": {
+   "duplicate": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "box_at_extent": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "box_below_extent": {
+    "route_a": "refused (0 pairs, walls [20])",
+    "route_b": "refused (0 pairs, walls [20])"
+   },
+   "pair_contact": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "pair_past_contact": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "halfway": {
+    "route_a": "refused (3 pairs, walls [])",
+    "route_b": "refused (3 pairs, walls [])"
+   },
+   "rotation_reversed": {
+    "route_a": "refused (44 pairs, walls [])",
+    "route_b": "refused (44 pairs, walls [])"
+   }
+  },
+  "cpu_s": 2.2
+ },
+ {
+  "label": "a5-260",
+  "path": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-couzo/tree/packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/n260.cert",
+  "n": 260,
+  "side": "67077942617632138527571542307/4031481829251000000000000000",
+  "side_float": 16.638532792319296,
+  "route_a": {
+   "pairs": 33670,
+   "pairs_decided_exactly_on_all_axes": 480,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_pair_margin": [
+    1.2316282072804543e-13,
+    93,
+    112
+   ],
+   "least_wall": [
+    1e-15,
+    7
+   ],
+   "bad_walls": [],
+   "extent": 16.638532792319292,
+   "low": 1e-15,
+   "accepted": true
+  },
+  "route_b": {
+   "pairs_by_area": 610,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_wall": [
+    1e-15,
+    7
+   ],
+   "bad_walls": [],
+   "accepted": true
+  },
+  "side_minus_extent": 1e-15,
+  "low_corner_min": 1e-15,
+  "reader_controls": {
+   "count_plus_one": "refused: header n=261 but 260 rows",
+   "decimal_field": "refused: row 1 malformed"
+  },
+  "controls": {
+   "duplicate": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "box_at_extent": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "box_below_extent": {
+    "route_a": "refused (0 pairs, walls [34, 38, 59, 70, 82])",
+    "route_b": "refused (0 pairs, walls [34, 38, 59, 70, 82])"
+   },
+   "pair_contact": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "pair_past_contact": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "halfway": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "rotation_reversed": {
+    "route_a": "refused (147 pairs, walls [])",
+    "route_b": "refused (147 pairs, walls [])"
+   }
+  },
+  "cpu_s": 9.8
+ },
+ {
+  "label": "a5-307",
+  "path": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-couzo/tree/packing/resources/web/couzo-a5a5d76-2026-10-28/source/certificates/n307.cert",
+  "n": 307,
+  "side": "436081607184993722962197444889181982917255228924685874736959955436771335630565667211324538123/24254714520872479530466069702814569144398684321103594602674239356738890164429000000000000000",
+  "side_float": 17.979251283692587,
+  "route_a": {
+   "pairs": 46971,
+   "pairs_decided_exactly_on_all_axes": 824,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_pair_margin": [
+    2.119806626980737e-13,
+    85,
+    260
+   ],
+   "least_wall": [
+    1e-15,
+    85
+   ],
+   "bad_walls": [],
+   "extent": 17.979251283692584,
+   "low": 1e-15,
+   "accepted": true
+  },
+  "route_b": {
+   "pairs_by_area": 731,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_wall": [
+    1e-15,
+    85
+   ],
+   "bad_walls": [],
+   "accepted": true
+  },
+  "side_minus_extent": 1e-15,
+  "low_corner_min": 1e-15,
+  "reader_controls": {
+   "count_plus_one": "refused: header n=308 but 307 rows",
+   "decimal_field": "refused: row 1 malformed"
+  },
+  "controls": {
+   "duplicate": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "box_at_extent": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "box_below_extent": {
+    "route_a": "refused (0 pairs, walls [85])",
+    "route_b": "refused (0 pairs, walls [85])"
+   },
+   "pair_contact": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "pair_past_contact": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "halfway": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "rotation_reversed": {
+    "route_a": "refused (124 pairs, walls [])",
+    "route_b": "refused (124 pairs, walls [])"
+   }
+  },
+  "cpu_s": 18.5
+ },
+ {
+  "label": "c844-232",
+  "path": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-couzo/tree/packing/resources/web/couzo-issue844-2026-10-28/source/certificates/best/n232.cert",
+  "n": 232,
+  "side": "7617348902520572307222120733/483283363059000000000000000",
+  "side_float": 15.76166175948133,
+  "route_a": {
+   "pairs": 26796,
+   "pairs_decided_exactly_on_all_axes": 524,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_pair_margin": [
+    2.1161650127193359e-13,
+    58,
+    171
+   ],
+   "least_wall": [
+    1e-15,
+    7
+   ],
+   "bad_walls": [],
+   "extent": 15.76166175948133,
+   "low": 1e-15,
+   "accepted": true
+  },
+  "route_b": {
+   "pairs_by_area": 554,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_wall": [
+    1e-15,
+    7
+   ],
+   "bad_walls": [],
+   "accepted": true
+  },
+  "side_minus_extent": 1e-15,
+  "low_corner_min": 1e-15,
+  "reader_controls": {
+   "count_plus_one": "refused: header n=233 but 232 rows",
+   "decimal_field": "refused: row 1 malformed"
+  },
+  "controls": {
+   "duplicate": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "box_at_extent": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "box_below_extent": {
+    "route_a": "refused (0 pairs, walls [131])",
+    "route_b": "refused (0 pairs, walls [131])"
+   },
+   "pair_contact": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "pair_past_contact": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "halfway": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "rotation_reversed": {
+    "route_a": "refused (93 pairs, walls [])",
+    "route_b": "refused (93 pairs, walls [])"
+   }
+  },
+  "cpu_s": 7.0
+ },
+ {
+  "label": "c844-260",
+  "path": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-couzo/tree/packing/resources/web/couzo-issue844-2026-10-28/source/certificates/n260.cert",
+  "n": 260,
+  "side": "104381051573626493618357957479/6274019722347000000000000000",
+  "side_float": 16.637029558870974,
+  "route_a": {
+   "pairs": 33670,
+   "pairs_decided_exactly_on_all_axes": 472,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_pair_margin": [
+    1.8585932710062233e-13,
+    61,
+    91
+   ],
+   "least_wall": [
+    1e-15,
+    31
+   ],
+   "bad_walls": [],
+   "extent": 16.63702955887097,
+   "low": 1e-15,
+   "accepted": true
+  },
+  "route_b": {
+   "pairs_by_area": 618,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_wall": [
+    1e-15,
+    31
+   ],
+   "bad_walls": [],
+   "accepted": true
+  },
+  "side_minus_extent": 1e-15,
+  "low_corner_min": 1e-15,
+  "reader_controls": {
+   "count_plus_one": "refused: header n=261 but 260 rows",
+   "decimal_field": "refused: row 1 malformed"
+  },
+  "controls": {
+   "duplicate": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "box_at_extent": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "box_below_extent": {
+    "route_a": "refused (0 pairs, walls [44, 48, 104, 107, 109])",
+    "route_b": "refused (0 pairs, walls [44, 48, 104, 107, 109])"
+   },
+   "pair_contact": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "pair_past_contact": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "halfway": {
+    "route_a": "refused (2 pairs, walls [])",
+    "route_b": "refused (2 pairs, walls [])"
+   },
+   "rotation_reversed": {
+    "route_a": "refused (138 pairs, walls [])",
+    "route_b": "refused (138 pairs, walls [])"
+   }
+  },
+  "cpu_s": 9.8
+ },
+ {
+  "label": "c844-307",
+  "path": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-couzo/tree/packing/resources/web/couzo-issue844-2026-10-28/source/certificates/n307.cert",
+  "n": 307,
+  "side": "2707897969116659515550794271467451840032974544063449693/150612387934832692306604131393579915999000000000000000",
+  "side_float": 17.979251283688026,
+  "route_a": {
+   "pairs": 46971,
+   "pairs_decided_exactly_on_all_axes": 828,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_pair_margin": [
+    2.0895196601285994e-13,
+    168,
+    237
+   ],
+   "least_wall": [
+    1e-15,
+    8
+   ],
+   "bad_walls": [],
+   "extent": 17.979251283688026,
+   "low": 1e-15,
+   "accepted": true
+  },
+  "route_b": {
+   "pairs_by_area": 699,
+   "bad_pairs": [],
+   "n_bad_pairs": 0,
+   "least_wall": [
+    1e-15,
+    8
+   ],
+   "bad_walls": [],
+   "accepted": true
+  },
+  "side_minus_extent": 1e-15,
+  "low_corner_min": 1e-15,
+  "reader_controls": {
+   "count_plus_one": "refused: header n=308 but 307 rows",
+   "decimal_field": "refused: row 1 malformed"
+  },
+  "controls": {
+   "duplicate": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "box_at_extent": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "box_below_extent": {
+    "route_a": "refused (0 pairs, walls [116])",
+    "route_b": "refused (0 pairs, walls [116])"
+   },
+   "pair_contact": {
+    "route_a": "accepted",
+    "route_b": "accepted"
+   },
+   "pair_past_contact": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "halfway": {
+    "route_a": "refused (1 pairs, walls [])",
+    "route_b": "refused (1 pairs, walls [])"
+   },
+   "rotation_reversed": {
+    "route_a": "refused (104 pairs, walls [])",
+    "route_b": "refused (104 pairs, walls [])"
+   }
+  },
+  "cpu_s": 12.6
+ }
+]

@@ -1,0 +1,30 @@
+== 130: house witness side 11.904483032515786
+  #843 (T-254): 11.9024306459843494  up12 11.902430645985  print ok  terminates@12: False  minus house -2.052387e-03
+  #846 (T-259): 11.9024306459822657  up12 11.902430645983    terminates@12: False  minus house -2.052387e-03
+  ascending: #846 (T-259) < #843 (T-254)
+    #843 (T-254) - #846 (T-259) = 2.082800e-12
+  (n=153: side not a rational or decimal; not compared)
+  least house side at 131..169: n=131 11.949659588036; above every claimed side here by >= 4.722894e-02
+== 232: house witness side 15.764174317486596
+  #844 (T-256): 15.7616617594813295  up12 15.761661759482  print ok  terminates@12: False  minus house -2.512558e-03
+  ascending: #844 (T-256)
+  (n=258: side not a rational or decimal; not compared)
+  (n=259: side not a rational or decimal; not compared)
+  least house side at 233..271: n=233 15.778174593052; above every claimed side here by >= 1.651283e-02
+== 260: house witness side 16.645753250519814
+  a5a5d76 (T-255): 16.6385327923192960  up12 16.638532792320  print ok  terminates@12: False  minus house -7.220458e-03
+  #844 (T-256): 16.6370295588709745  up12 16.637029558871  print ok  terminates@12: False  minus house -8.723692e-03
+  #845 (T-257): 16.6339825021218850  up12 16.633982502122    terminates@12: False  minus house -1.177075e-02
+  #846 (T-259): 16.6457532505198138  up12 16.645753250520    terminates@12: False  minus house -1.000000e-21
+  ascending: #845 (T-257) < #844 (T-256) < a5a5d76 (T-255) < #846 (T-259)
+    #844 (T-256) - #845 (T-257) = 3.047057e-03
+    a5a5d76 (T-255) - #844 (T-256) = 1.503233e-03
+    #846 (T-259) - a5a5d76 (T-255) = 7.220458e-03
+  (n=295: side not a rational or decimal; not compared)
+  least house side at 261..299: n=261 16.678779875343; above every claimed side here by >= 3.302662e-02
+== 307: house witness side 17.980862784054690
+  a5a5d76 (T-255): 17.9792512836925873  up12 17.979251283693  print ok  terminates@12: False  minus house -1.611500e-03
+  #844 (T-256): 17.9792512836880256  up12 17.979251283689  print ok  terminates@12: False  minus house -1.611500e-03
+  ascending: #844 (T-256) < a5a5d76 (T-255)
+    a5a5d76 (T-255) - #844 (T-256) = 4.560404e-12
+  least house side at 308..346: n=308 17.997149121271; above every claimed side here by >= 1.789784e-02

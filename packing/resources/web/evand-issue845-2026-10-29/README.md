@@ -115,7 +115,7 @@ MIT, copyright (c) 2026 Evan Daniel. `CREDITS.md` says the repository’s work w
 “Produced by Claude (Anthropic) in a single session under human direction”, and the
 commit carries a Co-Authored-By trailer naming Claude. The packings are Daniel’s, after
 the starts the issue credits: Chaoweeraprasit and Gupta’s s(199) at 172, Ostashev’s
-s(176) at 204, Kirill T’s Kaggle s(260) at 260 and 293. The bibliography key is
+s(176) at 204, Kirill Tymchishin’s Kaggle s(260) at 260 and 293. The bibliography key is
 **[Daniel issue 845 2026-10-29]**.
 
 ## Commands

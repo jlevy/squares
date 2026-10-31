@@ -1,0 +1,18 @@
+[
+ {
+  "symmetry": "diagonal",
+  "one_to_one_nearest": false,
+  "beyond_0.1": 91,
+  "beyond_0.01": 122,
+  "beyond_1e-3": 232,
+  "beyond_1e-9": 232,
+  "largest_move": 1.090293419279039,
+  "median_move": 0.022960807953880422,
+  "bottleneck": 1.037687879408852,
+  "turned_beyond_1deg": 90,
+  "largest_turn_deg": 44.99927856558662,
+  "a": "house-T186",
+  "b": "c844",
+  "side_b_minus_a": -0.002512558005266701
+ }
+]

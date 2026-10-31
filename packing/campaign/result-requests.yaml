@@ -25395,11 +25395,9 @@ issues:
       certificate's, the side is its header and rounds up to the issue's print, both maintained
       exact routes accept it and refuse its gross and sharp controls, and the ledger of 26
       October for the issue (upper-bounds-issue824-20261026) records it, a new packing.
-      Registered as T-248 at V0/C0; measured pose by pose, no symmetry pairs it one to one with
+      Registered as T-248; measured pose by pose, no symmetry pairs it one to one with
       the house's packing (124 squares beyond a tenth under the best assignment), another
-      arrangement. The stage 4 review and the adoption at 299 with both regularizations are
-      think-8hjz's; the house rule puts the adoption, the general regularization and the flip in
-      one pull request, after the review. Claude assistance disclosed. The author's update of 29
+      arrangement. The 31 October stage 4 review accepted it for finite feasibility, as recorded only, since the update below is smaller. Claude assistance disclosed. The author's update of 29
       October (issuecomment-6488202753, 04:46:49Z) reports s(299) <=
       17801238549388584084680137655023/10^30 = 17.801238549389, an exact KKT certificate,
       s299_1028.cert at evand/square-packing 0e76d9f, committed 2 minutes before it: 2.46e-3
@@ -25410,8 +25408,7 @@ issues:
       0e76d9f, the digest the comment prints is the certificate's, both maintained exact routes
       accept it and refuse its gross and sharp controls, and the ledger of 31 October
       (upper-bounds-843-846-20261031) records it; Mykhailo Polkovskyi's #846 certificate at 299,
-      17.803695435316, reported after it and above it, is not recorded. Registered as T-258 at
-      V0/C0; the review and the adoption at 299 move to this certificate (think-8hjz).
+      17.803695435316, reported after it and above it, is not recorded. Registered as T-258. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-daniel-824-299-update.md) accepted it for finite feasibility and for adoption, with no blocking or major finding; it is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 299 under the house rule in this pass, withdrawing the conjectured optimum. The review's M-1 notes that the certificate does not settle the local-optimality question, which stays the author's numerical report.
       maximusrufus's comments of 26 and 29 October are verification receipts of both
       certificates by his own exact recheck, reporting no result.
     read_through: '2026-10-29T14:46:20Z'
@@ -25488,9 +25485,7 @@ issues:
       files', the side is the header and rounds up to the print, and both maintained exact routes
       accept it and refuse its gross and sharp controls. The ledger of 31 October
       (upper-bounds-843-846-20261031) records it, a new packing; Mykhailo Polkovskyi's #846
-      certificate, a 2e-14 dilation of it 2.08e-12 lower, is recorded after it as a refinement of
-      this packing. Registered as T-254 at V0/C0; the stage 4 review and the adoption at 130 are
-      think-oy8d's. The Kaggle side-only 11.902430646006 is no report. Claude assistance
+      certificate, this packing re-solved and then dilated by 2e-14, 2.08e-12 lower, is recorded after it as a refinement of this packing. Registered as T-254. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-couzo-843-130.md) accepted it for finite feasibility, with no blocking or major finding; it is confirmed, independently re-implemented, at V3/C3. The case adopts #846's re-solve at 130 (T-259) under the house rule, with this packing's credit Couzo's. The Kaggle side-only 11.902430646006 is no report. Claude assistance
       disclosed.
     read_through: '2026-10-27T19:49:57Z'
     results:
@@ -25540,8 +25535,7 @@ issues:
       a5a5d76 (no issue, 28 October 01:41Z) holds certificates at 260 and 307 that the ledger of
       31 October (upper-bounds-843-846-20261031) records first, from its commit (the
       couzo-a5a5d76-2026-10-28 packet); it then records all three of this issue's, and at 260
-      Evan Daniel's #845 certificate after them. Registered as T-256 (with a5a5d76's as T-255) at
-      V0/C0; the stage 4 review and the adoption at 232 and 307 are think-dwzb's. The Kaggle
+      Evan Daniel's #845 certificate after them. Registered as T-256 (with a5a5d76's as T-255). The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md) accepted all five certificates for finite feasibility, with no blocking or major finding: both entries are confirmed, independently re-implemented, at V3/C3. The case adopts this issue's at 232 and 307 under the house rule in this pass; at 260 Evan Daniel's #845 is lower, and the record calls this issue's 260 a new arrangement found from ntumlnoob's packing (F-3). The Kaggle
       side-only sides the issue quotes are no report. Claude assistance disclosed.
     read_through: '2026-10-28T21:48:31Z'
     results:
@@ -25589,15 +25583,14 @@ issues:
       14.807627471882, s(260) <= 16.633982502122 and s(293) <= 17.633982502123 (dilation
       certificates), 1.05e-3, 1.02e-3, 1.18e-2 and 1.64e-4 below the houses and below every
       report there, each a new packing by the issue's word, with the starts it asks to credit
-      (Chaoweeraprasit and Gupta's s(199) at 172, Ostashev's s(176) at 204, Kirill T's Kaggle
+      (Chaoweeraprasit and Gupta's s(199) at 172, Ostashev's s(176) at 204, Kirill Tymchishin's Kaggle
       s(260) at 260 and 293). Triaged and imported on 31 October 2026 in the intake pass's lane
       L2 (think-17wo, think-3guf): the evand-issue845-2026-10-29 packet retains the 21 files of
       the four sets at 0e76d9f under the source's MIT licence, the digests the issue prints are
       the certificates', the sides are the headers and round up to the prints, and both maintained
       exact routes accept each and refuse its gross and sharp controls. The ledger of 31 October
       (upper-bounds-843-846-20261031) records all four, at 260 after Couzo's a5a5d76 and #844
-      certificates. Registered as T-257 at V0/C0; the stage 4 review and the adoption at all four
-      counts are think-nkt1's. The Kaggle side-only sides the issue quotes are no report. Claude
+      certificates. Registered as T-257. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md) accepted all four for finite feasibility and for adoption, with no blocking or major finding; the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at all four counts under the house rule in this pass, withdrawing the conjectured optimum 723/41 at 293. The Kaggle side-only sides the issue quotes are no report. Claude
       assistance disclosed.
     read_through: '2026-10-29T04:46:40Z'
     results:
@@ -25646,27 +25639,34 @@ issues:
       pass's lane L2 (think-pg1y, think-3guf): the mishapolk-issue846-2026-10-30 packet retains
       the certificates at 52aa267 under the MIT licence, and both maintained exact routes accept
       each and refuse its gross and sharp controls. The ledger of 31 October
-      (upper-bounds-843-846-20261031) records six: 130, a 2e-14 dilation of Francisco Couzo's #843
-      packing 2.08e-12 below it, and 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house,
-      each a refinement of the packing it tightens. It records none of the other eight: 182, 268
+      (upper-bounds-843-846-20261031) records six: 130, Francisco Couzo's #843 packing re-solved 2.08e-12 below it, and 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house, each a re-certification of the house certificate with every square unchanged. It records none of the other eight: 182, 268
       and 304 are above the houses (T-243, T-242), 204 and 260 above Evan Daniel's #845, 299 above his
       update to #824, and 211 and 241 are the author's own certificates of 23
-      October, which the ledger records from their commit (e386aab) as refinements. Registered as
-      T-259 at V0/C0 (and the 23 October certificates as T-253); the stage 4 review and the
-      adoptions are think-ikku's.
+      October, which the ledger records from their commit (e386aab) as refinements. Registered as T-259 (130) and T-260 (the five others), and the 23 October certificates as T-253. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md) accepted all fifteen certificates for finite feasibility. At 130 T-259 is confirmed, independently re-implemented, at V3/C3, and the case adopts it under the house rule, with the packing's credit Couzo's. At the fourteen other counts each certificate is a sub-print re-certification of the house certificate, and whether the owner's 23 October restatement ruling reaches counts inside the corpus is the owner's question (think-ikku); T-253 and T-260 wait on it below the stage 4 exit, and no house moves there.
     read_through: '2026-10-30T05:46:42Z'
     results:
     - key: refinements
       claim: >-
-        s(105), s(130), s(146), s(156), s(229) and s(308) at the exact headers of
-        certificates/0000-0999/nN.cert at 52aa267, each below every earlier report at its count:
-        refinements of the packings they tighten, at 130 of Couzo's #843 packing.
+        s(130) at the exact header of certificates/0000-0999/n130.cert at 52aa267, below every earlier report: a refinement of Couzo's #843 packing.
       source: body
       bead: think-pg1y
       validation:
       - think-ikku
       register:
       - T-259
+      evidence:
+      - E-mishapolk-846-certificate-report
+      - E-mishapolk-846-exact-feasibility
+      - E-mishapolk-846-review-exact-feasibility
+    - key: sub-print
+      claim: >-
+        s(105), s(146), s(156), s(229) and s(308) at the exact headers of certificates/0000-0999/nN.cert at 52aa267, each below the house certificate at its count by less than one unit in the 12th place: re-certifications of the house certificates, held for the owner's question (think-ikku).
+      source: body
+      bead: think-pg1y
+      validation:
+      - think-ikku
+      register:
+      - T-260
       evidence:
       - E-mishapolk-846-certificate-report
     - key: not-recorded
@@ -25687,9 +25687,16 @@ issues:
     - think-ikku
     answer_bead: think-pg1y
     replies: []
+    blocked:
+      type: owner-decision
+      reason: >-
+        Whether the owner's 23 October restatement ruling (think-fwa9), applied beyond the
+        corpus, reaches counts inside it, which decides whether T-253 and T-260 are recorded
+        at 105, 146, 154, 155, 156, 183, 211, 227, 229, 236, 237, 241, 271 and 308; the
+        31 October review reads them as restatements (RV-1), a reading and not a verdict
+        (think-ikku).
     close_when: >-
-      The results are registered with their replay and their review and adoption owned by their
-      bead, and the reply on main says so; nothing the author asked for is queued.
+      The results are registered with their replay and their review, 130 is adopted, the owner has answered think-ikku's question and the record follows the answer, and the reply on main says so; nothing the author asked for is queued.
     notes: >-
       Read on 31 October 2026 from main 3978a7f61. The commit 52aa267 precedes the issue by 6
       minutes 42 seconds; GitHub's activity log was not readable, so no push is dated. The ten

@@ -304,6 +304,11 @@ reports:
     exact_from: packing/resources/web/couzo-issue844-2026-10-28/acquisition/claims.json at
       claude/bold-ritchie-xo28us-upper@3978a7f61ca164f78291ed91534b8c9a5b9cafd7
     first_committed: '2026-10-28T15:57:20Z'
+    new_packing:
+      source: 'the 31 October review (F-3): ''at 260 the #844 packing is a new arrangement
+        found from ntumlnoob''s packing, not a refinement of it'''
+      continues: ntumlnoob's Kaggle packing, through the author's a5a5d76 refinement of it,
+        by an Ellsworth-style structural move and SLP
   - n: 307
     printed: '17.979251283689'
     rounding: up
@@ -311,11 +316,18 @@ reports:
     exact_from: packing/resources/web/couzo-issue844-2026-10-28/acquisition/claims.json at
       claude/bold-ritchie-xo28us-upper@3978a7f61ca164f78291ed91534b8c9a5b9cafd7
     first_committed: '2026-10-28T15:57:20Z'
+    refines:
+      packing_of: ntumlnoob
+      entry: franciscouzo/square-packing@a5a5d76
+      source: '#844 calls 307 a refinement; the 31 October review: ''the #844 packing is your
+        a5a5d76 packing, mirrored (x ↦ s − x) and refined'''
   note: 'The issue names 712c6a6, committed at 2026-10-28T15:57:20Z, 5 hours 51 minutes before
     the issue. It says none of the three packings is the author''s construction: each refines
     a Kaggle notebook packing no report here holds (Alex Chilton''s at 232, ntumlnoob''s at
-    260 and 307); it calls 307 a refinement and leaves 232 and 260 to the record, so none
-    is classified as a refinement of a recorded packing.'
+    260 and 307); it calls 307 a refinement and leaves 232 and 260 to the record. The 31 October
+    review measured 307 as the author''s a5a5d76 packing mirrored and refined, and 260 as
+    a new arrangement, 170 squares beyond 0.1 of it; 232''s start is not published, and it
+    is not classified.'
 - report: '#845'
   url: https://github.com/jlevy/squares/issues/845
   kind: issue
@@ -356,8 +368,8 @@ reports:
     new_packing:
       source: '#845: ''a new packing found by our search ... It is not a refinement of #844''s
         packing'''
-      continues: Kirill T's (kirilltym) s(260) from his public Kaggle notebook 'Square Packing
-        Lab | CPU/CUDA/MPS'
+      continues: Kirill Tymchishin's (kirilltym) s(260) from his public Kaggle notebook 'Square
+        Packing Lab | CPU/CUDA/MPS'
   - n: 293
     printed: '17.633982502123'
     rounding: up
@@ -387,7 +399,8 @@ reports:
     first_committed: '2026-10-29T04:44:41Z'
     new_packing:
       source: '#824''s update: ''by our vocabulary this is a new packing, not a refinement'''
-      continues: the source's own packing of
+      continues: 'the source''s own packing of #824''s opening post (T-248), by four generations
+        of refill and an exact descent'
   note: The update names 0e76d9f, committed at 2026-10-29T04:44:41Z, 2 minutes 8 seconds before
     the comment.
 - report: '#846'

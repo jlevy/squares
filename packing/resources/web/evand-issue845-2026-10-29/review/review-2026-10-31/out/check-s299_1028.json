@@ -1,0 +1,46 @@
+{
+ "file": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/rv-daniel/tree/packing/resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/s299_1028.cert",
+ "sha256": "ccb323dd6d69bee141d59cae4c605f45136b998dfecce1248e200b678b253db5",
+ "bytes": 50626,
+ "comment": [
+  "# exact certificate: unit squares, centre (x, y), rotation (c, s) = ((1-t^2)/(1+t^2), 2t/(1+t^2)); check with verify_cert.py"
+ ],
+ "n": 299,
+ "side": "17801238549388584084680137655023/1000000000000000000000000000000",
+ "side_decimal_40": "17.8012385493885840846801376550230000000000",
+ "tilted": 118,
+ "A_walls_ok": true,
+ "least_near_wall_clearance": [
+  5e-21,
+  0
+ ],
+ "least_near_wall_clearance_exact": "1/200000000000000000000",
+ "least_far_wall_clearance": [
+  5.00000000083482e-21,
+  30
+ ],
+ "least_far_wall_clearance_exact": "250000000041741/50000000000000000000000000000000000",
+ "extent_exact": "890061927469429204233756882751108259/50000000000000000000000000000000000",
+ "side_minus_extent": 5.00000000083482e-21,
+ "A_pairs": 44551,
+ "A_pairs_overlapping": 0,
+ "A_first_overlaps": [],
+ "A_valid": true,
+ "least_pair_gap": [
+  9.999999999999987e-21,
+  124,
+  134
+ ],
+ "least_pair_gap_exact": "2630750223936731881585557684234354097856809596857626104777016242871220232610725224179/263075022393673509645076127712494811726228604939191703138417245182768900000000000000000000000000000000000",
+ "pairs_within_1e-15": 561,
+ "A_cpu_s": 3.91,
+ "B_walls_bad": [],
+ "B_pairs_clipped": 760,
+ "B_pairs_far_by_discs": 43791,
+ "B_pairs_positive_area": 0,
+ "B_first_overlaps": [],
+ "B_valid": true,
+ "B_cpu_s": 0.74,
+ "total_cpu_s": 4.65,
+ "print_up_12": "17.801238549389"
+}
