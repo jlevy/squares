@@ -103,9 +103,11 @@ in version 2. The receipts are:
 **#836's version 5** (`V5`, record 23664800, 5,308 rows at 1182 to 9944) is kept by
 another packet, ``karimi-records-2026-10-31``, which ``devtools.acquire_source`` wrote
 from the author's GitHub copy of his Zenodo records at ad8b094, since zenodo.org was
-unreachable. It keeps the archive itself, so `archived_records` reads ``records.csv``
-from it after both have the SHA-256s #836 states, the trust boundary between the
-author's statement and the copy. Its header adds the author's ``below_all_reported``
+unreachable. The archive and its ``records.csv`` had the SHA-256s #836 states when the
+packet was written, which is where the author's statement meets the copy; from then on
+Git keeps the bytes and ``acquire_source --check`` holds them to the packet's manifest
+(OR-16), so `archived_records` compares no digest. It reads ``records.csv`` from the
+retained archive as untrusted data. Its header adds the author's ``below_all_reported``
 after the eleven columns (`AUTHOR_COLUMNS`): each deposit names its own header, so a
 column the checker does not know is still refused, and the flag is read as one of its
 literals, counted in the receipt and decided by nothing. Its receipts are that packet's
@@ -210,8 +212,7 @@ class Deposit:
     A deposit kept by #799's packet (`PACKET`, the default) is the archive's members as a
     Zenodo capture extracted them. One kept by another packet (``packet``) is its archive
     itself, retained by ``devtools.acquire_source`` at ``archived`` inside that packet,
-    and its rows are read from the archive's ``records.csv`` after both are held to the
-    SHA-256s the reporting issue states (``archive_sha256``, ``records_sha256``).
+    and its rows are read from the archive's ``records.csv`` (`archived_records`).
     ``columns`` is the header its ``records.csv`` must have exactly; `COLUMNS` unless the
     deposit adds an author's column the checker reads and decides nothing by
     (`AUTHOR_COLUMNS`). ``replay`` names its replay-sample receipt, when it has one, and
@@ -229,8 +230,6 @@ class Deposit:
     columns: tuple[str, ...] = ()
     packet: str = PACKET_PATH
     archived: str = ""
-    archive_sha256: str = ""
-    records_sha256: str = ""
     replay: str = ""
     replayed: tuple[int, ...] = ()
 
@@ -311,8 +310,9 @@ RECORDS_PACKET = "packing/resources/web/karimi-records-2026-10-31"
 ISSUE_836 = "https://github.com/jlevy/squares/issues/836"
 #: Version 5.0, reported by #836 (2026-10-26T12:18:36Z): 5,308 rows at 1182 to 9944, its
 #: records.csv with the author's ``below_all_reported`` column after the eleven. Zenodo
-#: was unreachable, so it is read from the author's copy of the archive at ad8b094, held
-#: to the two SHA-256s #836 states. The quick check writes out 1182, the first count,
+#: was unreachable, so it is read from the author's copy of the archive at ad8b094, whose
+#: bytes had the two SHA-256s #836 states when retained. The quick check writes out 1182,
+#: the first count,
 #: new in version 5, and 9912, lowered from version 2's; the replay sample adds 1253, the
 #: first lowered count, 6089, a new count in the middle, and 9944, the largest.
 V5 = Deposit(
@@ -341,8 +341,6 @@ V5 = Deposit(
     ),
     packet=RECORDS_PACKET,
     archived="source/karimi_two_strip_records_v3_lite.zip",
-    archive_sha256="9c70c4d84c8fb9795a00d1a792210f4bd6e44bf17de245351f2f03a69fcc6325",
-    records_sha256="7e78c15de4c2acc6e6313e4954a4454eb13825b4c0cd1ad2334ec86caef3e941",
     replay="replay-sample-v5.json",
     replayed=(1182, 1253, 6089, 9912, 9944),
 )
@@ -584,15 +582,12 @@ def _read(path: Path) -> Any:
 
 
 def archived_records(deposit: Deposit) -> str:
-    """The text of ``records.csv`` inside a deposit kept as its archive, read as untrusted
-    data. The retained archive must have the SHA-256 its issue states, hold exactly one
-    member of that name, at most `MAX_RECORDS_BYTES` long, whose bytes have the SHA-256
-    the issue states for it, and be UTF-8. These are the trust boundary between the
-    author's statement and the copy (OR-16); Git keeps the bytes from then on. Any
-    refusal is a `CustodyError`."""
+    """The text of ``records.csv`` inside a deposit kept as its archive, read from Git as
+    untrusted data: the archive must open, hold exactly one member of that name, at most
+    `MAX_RECORDS_BYTES` long, and be UTF-8. Its bytes are the packet's custody
+    (``acquire_source --check``), so no digest is compared here (OR-16). Any refusal is a
+    `CustodyError`."""
     data = read_retained_bytes(deposit.home / deposit.archived)
-    if _sha256(data) != deposit.archive_sha256:
-        raise CustodyError(f"{deposit.archive} is not the archive the issue states")
     try:
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
             found = [info for info in archive.infolist() if info.filename == "records.csv"]
@@ -604,8 +599,8 @@ def archived_records(deposit: Deposit) -> str:
                 text = member.read(MAX_RECORDS_BYTES + 1)
     except (zipfile.BadZipFile, zipfile.LargeZipFile, OSError) as error:
         raise CustodyError(f"{deposit.archive}: {error}") from error
-    if len(text) > MAX_RECORDS_BYTES or _sha256(text) != deposit.records_sha256:
-        raise CustodyError(f"{deposit.archive}'s records.csv is not the one the issue states")
+    if len(text) > MAX_RECORDS_BYTES:
+        raise CustodyError(f"{deposit.archive}'s records.csv is too large")
     try:
         return text.decode("utf-8")
     except UnicodeDecodeError as error:

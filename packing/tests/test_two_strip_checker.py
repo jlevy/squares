@@ -13,7 +13,6 @@ every count's digest are in the slow lane.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 import shutil
@@ -280,33 +279,19 @@ def test_version_5_is_read_through_its_own_column_set() -> None:
     assert not any(version_5[n].side > version_2[n].side for n in shared)
 
 
-def test_a_deposit_kept_as_its_archive_is_held_to_the_stated_digests(tmp_path: Path) -> None:
-    """Version 5 is read from the author's copy of its archive only after the archive and
-    its ``records.csv`` have the SHA-256s #836 states. Either digest stated otherwise, an
-    archive holding ``records.csv`` twice or none, a member past `MAX_RECORDS_BYTES`, and
-    bytes that are no archive are each refused as custody before any row is read."""
+def test_a_deposit_kept_as_its_archive_is_read_as_untrusted_data(tmp_path: Path) -> None:
+    """Version 5 is read from the author's copy of its archive, retained in Git, whose
+    custody is the packet's (`acquire_source --check`), so no digest is compared here.
+    The archive is still another party's: one holding ``records.csv`` twice or none, a
+    member past `MAX_RECORDS_BYTES`, bytes that are no archive, and an archive whose table
+    holds another number of rows are each refused as custody."""
     assert len(checker.records(checker.V5)) == 5308
-    for field, reason in (
-        ("archive_sha256", "is not the archive the issue states"),
-        ("records_sha256", "is not the one the issue states"),
-    ):
-        with pytest.raises(checker.CustodyError, match=reason):
-            checker.records(replace(checker.V5, **{field: "0" * 64}))
 
     def archive(name: str, members: dict[str, bytes]) -> checker.Deposit:
-        path = tmp_path / name
-        with zipfile.ZipFile(path, "w") as written:
+        with zipfile.ZipFile(tmp_path / name, "w") as written:
             for member, data in members.items():
                 written.writestr(member, data)
-        data = path.read_bytes()
-        text = members.get("records.csv", b"")
-        return replace(
-            checker.V5,
-            packet=str(tmp_path),
-            archived=name,
-            archive_sha256=hashlib.sha256(data).hexdigest(),
-            records_sha256=hashlib.sha256(text).hexdigest(),
-        )
+        return replace(checker.V5, packet=str(tmp_path), archived=name)
 
     flagged = _csv((*FIRST, "yes"), header=checker.V5.header).encode()
     small = archive("one.zip", {"records.csv": flagged, "README.md": b"x"})
@@ -315,29 +300,18 @@ def test_a_deposit_kept_as_its_archive_is_held_to_the_stated_digests(tmp_path: P
         checker.records(small)
     with pytest.raises(checker.CustodyError, match=re.escape("holds 0 records.csv")):
         checker.archived_records(archive("none.zip", {"README.md": b"x"}))
-    twice = tmp_path / "twice.zip"
-    with zipfile.ZipFile(twice, "w") as written, warnings.catch_warnings():
+    with zipfile.ZipFile(tmp_path / "twice.zip", "w") as written, warnings.catch_warnings():
         warnings.simplefilter("ignore")
         written.writestr("records.csv", flagged)
         written.writestr("records.csv", flagged)
-    doubled = replace(
-        small,
-        archived="twice.zip",
-        archive_sha256=hashlib.sha256(twice.read_bytes()).hexdigest(),
-    )
     with pytest.raises(checker.CustodyError, match=re.escape("holds 2 records.csv")):
-        checker.archived_records(doubled)
+        checker.archived_records(replace(small, archived="twice.zip"))
     large = archive("large.zip", {"records.csv": b"0" * (checker.MAX_RECORDS_BYTES + 1)})
     with pytest.raises(checker.CustodyError, match=re.escape("records.csv is too large")):
         checker.archived_records(large)
     (tmp_path / "plain.zip").write_bytes(b"not an archive")
-    plain = replace(
-        small,
-        archived="plain.zip",
-        archive_sha256=hashlib.sha256(b"not an archive").hexdigest(),
-    )
     with pytest.raises(checker.CustodyError, match="File is not a zip file"):
-        checker.archived_records(plain)
+        checker.archived_records(replace(small, archived="plain.zip"))
 
 
 def test_write_out_builds_no_square_past_n() -> None:

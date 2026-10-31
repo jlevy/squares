@@ -13,20 +13,22 @@ packing out and decides the certificate on both maintained exact routes of
 `devtools.two_strip_checker.replay_row` does for the two-strip family.
 
 **Who wrote what.** The packing is written out by the author's own builder, ``build``
-in his ``filled_ends.py``, read before it runs and loaded from the packet's copy, which
-must have `BUILDER_SHA256`. That is the SHA-256 of the ``filled_ends.py`` member of the
-V1.0 archive, ``karimi_filled_end_v2.zip``, whose own SHA-256 the author stated on #836
-on 27 October; V2.0 states no digest for it, and its copy is that member byte for byte.
-The decision is first-party: the routes and their controls are this repository's, and
-they share nothing with the author's checker, ``check_cert.py``, which does not run
-here. So each sampled certificate is the producer's construction, decided by code that
-is not the producer's, and the run decides those certificates and nothing else.
+in his ``filled_ends.py``, read before it runs and made from the packet's copy. V2.0
+states no digest for that file; when the packet was written its bytes were the
+``filled_ends.py`` member of the V1.0 archive, ``karimi_filled_end_v2.zip``, whose own
+SHA-256 the author stated on #836 on 27 October. From then on Git keeps the bytes and
+``acquire_source --check`` holds them to the packet's manifest (OR-16), so this module
+compares no digest. The decision is first-party: the routes and their controls are this
+repository's, and they share nothing with the author's checker, ``check_cert.py``, which
+does not run here. So each sampled certificate is the producer's construction, decided
+by code that is not the producer's, and the run decides those certificates and nothing
+else.
 
-**The table.** ``filled_records.csv`` is another party's file, read as untrusted data:
-it must have the SHA-256 #847 states (`TABLE_SHA256`), its header exactly `COLUMNS`,
-each sampled row's literals matched whole, K equal to ceil(sqrt(n)), and each count once.
-The builder's side must equal the row's ``side_exact``, and the certificate must hold n
-squares; any other outcome is a `SampleError`.
+**The table.** ``filled_records.csv`` is another party's file, whose bytes had the
+SHA-256 #847 states when retained, read as untrusted data: its header exactly
+`COLUMNS`, each sampled row's literals matched whole, K equal to ceil(sqrt(n)), and each
+count once. The builder's side must equal the row's ``side_exact``, and the certificate
+must hold n squares; any other outcome is a `SampleError`.
 
 **What it does not do.** A sample decides the counts it ran and says nothing about the
 rest: 5 of 5,134 rows. Whether a row is below every earlier report at its count is the
@@ -73,11 +75,10 @@ PACKET = REPO / PACKET_PATH
 ISSUE = "https://github.com/jlevy/squares/issues/847"
 DOI = "10.5281/zenodo.23819397"
 FORMAT = "filled-end-replay-sample-v1"
-#: The author's table and builder in the packet, and the digests they are held to.
+#: The author's table and builder in the packet, and the commit the packet pins.
 TABLE = "source/filled_records.csv"
-TABLE_SHA256 = "1cbfecf886a2000bd9d5f54304813d7422f785a2fb9a15655f2119a33f8c48f5"
 BUILDER = "source/filled_ends.py"
-BUILDER_SHA256 = "91ac075875a2638ef362995c8b7d990f122fddd66d206460b048ca9387259210"
+SOURCE_COMMIT = "ad8b094be0785ed47fd90f5b965bc84c077d5bb1"
 #: The columns of V2.0's ``filled_records.csv``, exactly and in order.
 COLUMNS = (
     "n",
@@ -111,13 +112,10 @@ def _sha256(data: bytes) -> str:
 
 
 def builder() -> ModuleType:
-    """The author's ``filled_ends`` module, made from the packet's copy once its bytes
-    have `BUILDER_SHA256`: those same bytes are compiled and run, so nothing between the
-    check and the run can change them, and no bytecode is written into the packet."""
+    """The author's ``filled_ends`` module, made from the packet's copy: its bytes are
+    read once from Git, compiled and run, so no bytecode is written into the packet."""
     path = PACKET / BUILDER
     data = read_retained_bytes(path)
-    if _sha256(data) != BUILDER_SHA256:
-        raise SampleError(f"{BUILDER} is not the V1.0 archive's filled_ends.py")
     module = ModuleType("karimi_filled_ends")
     module.__file__ = str(path)
     exec(compile(data, str(path), "exec"), module.__dict__)
@@ -125,10 +123,8 @@ def builder() -> ModuleType:
 
 
 def rows() -> dict[int, dict[str, str]]:
-    """V2.0's rows by count, from the packet's table once it has `TABLE_SHA256`."""
+    """V2.0's rows by count, from the packet's table."""
     data = read_retained_bytes(PACKET / TABLE)
-    if _sha256(data) != TABLE_SHA256:
-        raise SampleError(f"{TABLE} is not the table #847 states")
     try:
         lines = list(csv.reader(io.StringIO(data.decode("utf-8"), newline=""), strict=True))
     except (UnicodeDecodeError, csv.Error) as error:
@@ -238,9 +234,8 @@ def replay(workers: int) -> dict[str, Any]:
         "doi": DOI,
         "packet": PACKET_PATH,
         "table": f"{PACKET_PATH}/{TABLE}",
-        "table_sha256": TABLE_SHA256,
         "builder": f"{PACKET_PATH}/{BUILDER}",
-        "builder_sha256": BUILDER_SHA256,
+        "source_commit": SOURCE_COMMIT,
         "builder_note": (
             "the author's own build(), read before it ran; it writes the packing out and "
             "decides nothing. The routes decide, and they share no code with the author's "
@@ -272,18 +267,14 @@ def stable(row: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def check(*, again: bool = False) -> list[str]:
-    """Problems with the receipt: the custody digests, the counts, every certificate
+    """Problems with the receipt: its format and pin, the counts, every certificate
     verified on both routes and every control refused by both; with ``again``, each count
     replayed and compared, timings aside. Empty when it holds."""
     from devtools import couzo_678_replay as base  # noqa: PLC0415
 
     receipt = json.loads((PACKET / RECEIPT).read_text(encoding="utf-8"))
     problems = []
-    if (receipt["format"], receipt["table_sha256"], receipt["builder_sha256"]) != (
-        FORMAT,
-        TABLE_SHA256,
-        BUILDER_SHA256,
-    ):
+    if (receipt["format"], receipt.get("source_commit")) != (FORMAT, SOURCE_COMMIT):
         problems.append("the receipt's header is not this module's")
     if receipt["coverage"] != {"checked": len(SAMPLE), "of": len(rows()), "unit": "rows"}:
         problems.append("the receipt's coverage is not the sample's")

@@ -1,11 +1,10 @@
-"""#847's filled-end sample: the author's builder, held to a digest, decided by our routes.
+"""#847's filled-end sample: the author's builder writes out, our routes decide.
 
 `devtools.filled_end_sample` writes out five of V2.0's rows with the author's own
 ``build`` and decides each certificate on both maintained exact routes. The refusals
-come first: a builder or a table whose bytes are not the ones the author's digests bind,
-a malformed sampled row, and a builder whose packing is not the row's. Then the
-agreements: 1182 built again to the receipt's digest and accepted by both routes, and
-the receipt read back.
+come first: a malformed table, a malformed sampled row, and a builder whose packing is
+not the row's. Then the agreements: 1182 built again to the receipt's digest and
+accepted by both routes, and the receipt read back.
 """
 
 from __future__ import annotations
@@ -32,23 +31,24 @@ def _moved(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     return copied
 
 
-def test_a_builder_or_table_other_than_the_bound_one_is_refused(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """The builder runs only with the SHA-256 of the V1.0 archive's member, and the table
-    is read only with the SHA-256 #847 states; one byte changed in either is refused
-    before anything runs or is read."""
+def test_a_malformed_table_is_refused(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """The table's bytes are the packet's custody (`acquire_source --check`), so no
+    digest is compared here; the table is still read as untrusted data, and a header
+    other than `COLUMNS`, a short row or a count given twice is refused."""
     copied = _moved(tmp_path, monkeypatch)
-    builder = copied / sample.BUILDER
-    builder.write_bytes(builder.read_bytes() + b"\n")
-    with pytest.raises(
-        sample.SampleError, match=re.escape("is not the V1.0 archive's filled_ends.py")
-    ):
-        sample.builder()
     table = copied / sample.TABLE
-    table.write_bytes(table.read_bytes().replace(b"1182,35,", b"1182,36,", 1))
-    with pytest.raises(sample.SampleError, match="is not the table #847 states"):
-        sample.rows()
+    original = table.read_bytes()
+    first, _, rest = original.partition(b"\n")
+    second = rest.split(b"\n", 1)[0]
+    cases = {
+        "the header is not": first.replace(b"side_exact", b"side_exactly") + b"\n" + rest,
+        "row 1: 11 fields": first + b"\n" + second.rsplit(b",", 1)[0] + b"\n",
+        "n = 1182 appears twice": first + b"\n" + second + b"\n" + second + b"\n",
+    }
+    for reason, data in cases.items():
+        table.write_bytes(data)
+        with pytest.raises(sample.SampleError, match=re.escape(reason)):
+            sample.rows()
 
 
 def test_a_row_the_builder_does_not_reproduce_is_refused() -> None:

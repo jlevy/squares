@@ -39,15 +39,16 @@ Each digest the author stated holds:
 | `karimi_filled_end_v2.zip` (V1.0) | `f1684581…7cfa97` | #836’s comment of 27 October |
 | its member `filled_records.csv` | `f047c44b…0b56` | #836’s comment of 27 October |
 
-Review A1 of #853 asked that a file with no stated digest be checked against Zenodo’s
-per-file listing, or a digest the author states, before any checker reads it. Zenodo’s
-listing was unreachable, so:
+These were checked once, when the packet was written. From then on Git keeps the bytes
+and `acquire_source --check` holds every retained file to the manifest (OR-16), so no
+program here compares a digest when it runs. Review A1 of #853 asked that a file with no
+stated digest be checked against Zenodo’s per-file listing, or a digest the author
+states, before any checker reads it. Zenodo’s listing was unreachable, so:
 
 - V2.0’s `filled_ends.py`, `regenerate_filled.py` and `check_cert.py` state no digest
   of their own, but each is byte-identical to the member of the same name in the V1.0
-  archive, whose SHA-256 the author stated on 27 October, before this copy existed.
-  `devtools.filled_end_sample` holds `filled_ends.py` to that member’s SHA-256,
-  `91ac0758…9210`, before it runs.
+  archive, whose SHA-256 the author stated on 27 October, before this copy existed
+  (`filled_ends.py`: `91ac0758…9210`).
 - The v5 archive’s `regenerate.py` is versions 1 and 2’s byte for byte (`67c861dc…a04f`,
   retained by `karimi-two-strip-2026-10-24`).
 - V2.0’s `README_filled.md` and the v5 archive’s `README.md` have no stated digest and no
@@ -76,8 +77,8 @@ whatever the project’s owner decides”), are the walk’s and the owner’s, 
 ## Decided Here
 
 **v5, every row** (`receipts/two-strip-decisions-v5.json`): `devtools.two_strip_checker`
-reads the archive’s `records.csv` through version 5’s own column set, after both
-digests hold, and decides all 5,308 rows exactly from their parameters, each row’s seven
+reads the retained archive’s `records.csv` through version 5’s own column set and
+decides all 5,308 rows exactly from their parameters, each row’s seven
 controls refused (212.9 CPU-seconds with the digests of every written-out certificate,
 which are not kept). Least fit slack: 1.0e-8 in both strips. The author’s flag is
 counted and decides nothing.
@@ -90,8 +91,7 @@ count costs 14.7 CPU-seconds for the positive and 120 for the controls.
 
 **V2.0, a sample on both routes** (`receipts/filled-end-replay-sample.json`):
 `devtools.filled_end_sample` writes out the rows at 1182, 2505, 4990, 7500 and 9946 with
-the author’s own `build`, from the retained `filled_ends.py` after its digest holds, and
-checks that each has the row’s exact side and n squares. Each certificate passes both
+the author’s own `build`, from the retained `filled_ends.py`, and checks that each has the row’s exact side and n squares. Each certificate passes both
 maintained exact routes, and both refuse all six of its controls. The builder is the
 author’s, so this reproduces his construction; the decision is first-party, and his
 `check_cert.py` did not run. It decides those five certificates, 5 of 5,134 rows, and

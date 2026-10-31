@@ -26532,6 +26532,5 @@ issues:
       per-file listing, or digests the author states, before any checker reads them or W9
       is written from them (review A1 of #853). Zenodo's listing was unreachable; the three
       programs are bound instead by the V1.0 archive's stated digest, whose members they
-      equal byte for byte, and devtools.filled_end_sample holds filled_ends.py to that
-      member's SHA-256 before it runs. README_filled.md is pinned by the commit alone, and
-      no checker reads it.
+      equalled byte for byte when the packet was written; from then on Git keeps the bytes
+      (OR-16). README_filled.md is pinned by the commit alone, and no checker reads it.
