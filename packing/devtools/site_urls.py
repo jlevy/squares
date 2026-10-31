@@ -176,13 +176,25 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-180.html": (
-        450_000,
+        500_000,
         (
             "The closed form's result, its scope of 264 counts and prepared math measure "
             "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
             "counts reached 138 results. At about 1.5 KB a listed result the room is about 32 "
             "more; think-v4me owns the runway and re-measures the page, its timing included, "
-            "before it passes 440,000 bytes."
+            "before it passes 440,000 bytes. On 31 October 2026 it measures 452,260 bytes, "
+            "past the 450,000 ceiling with T-264 listed at 233 of its counts; the ceiling "
+            "moves to 500,000 as a measured choice, as T-046's did. Its timing was not "
+            "re-measured, and think-v4me still owns it."
+        ),
+    ),
+    "result/t-264.html": (
+        550_000,
+        (
+            "The grade-C local minima at 233 counts, the scopes of its three evidence "
+            "entries and prepared math measure 471,093 bytes on 31 October 2026, as T-124's "
+            "roster of 178 configurations needs its own exception. Its timing was not "
+            "measured; how such pages scale is think-v4me's."
         ),
     ),
     "tutorial-advanced.html": (
