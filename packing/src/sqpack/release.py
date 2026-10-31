@@ -10122,9 +10122,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods writes all 43 files byte-identical across the three. "
             "Measured again after merging main 32ef0861b (#835), at link revision bb8d5cca "
             "with that main's source-coverage.yaml swapped in, and after merging main "
-            "37ede3936 (#848), at link revision 9520cb50: 43 files, byte-identical across "
-            "the three each time. No PDF was printed; it prints from that HTML. Retain "
-            "v0.2.7."
+            "37ede3936 (#848), at link revision 9520cb50, and after merging main c94df7cef "
+            "(#853), at link revision be4b6eb3: 43 files, byte-identical across the three "
+            "each time. No PDF was printed; it prints from that HTML. Retain v0.2.7."
         ),
     ),
 )
