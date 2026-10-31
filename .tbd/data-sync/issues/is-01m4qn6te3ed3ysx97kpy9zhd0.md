@@ -3,10 +3,10 @@ type: is
 id: is-01m4qn6te3ed3ysx97kpy9zhd0
 title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record side, polynomial unpublished (#545)"
 kind: task
-status: in_progress
+status: open
 priority: 3
-version: 13
-delegate: bold-ritchie-l5
+version: 14
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:55:58.146Z
-updated_at: 2026-10-31T05:02:11.361Z
+updated_at: 2026-10-31T07:02:21.589Z
 started_at: 2026-10-12T14:33:40.570Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.

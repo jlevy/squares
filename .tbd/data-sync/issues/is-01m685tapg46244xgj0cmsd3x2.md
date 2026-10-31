@@ -5,7 +5,7 @@ title: "Import Khalili and Gharabaghi: s(44) = 7 by a closed mixed cover (#842)"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l3
 labels:
   - result-import
@@ -13,10 +13,11 @@ dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 child_order_hints:
   - is-01m686jr88t8k44ka04rczse21
+  - is-01m68brwhg67e0znzz0snrfz8a
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:09:47.344Z
-updated_at: 2026-10-31T06:01:35.702Z
+updated_at: 2026-10-31T06:53:51.536Z
 started_at: 2026-10-31T05:09:55.099Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#842 (moh63-dev, Mohsen Khalili and Sara Gharabaghi, opened 2026-10-26T23:46:23Z; one comment, 2026-10-29T15:58:14Z, announcing release v1.1; labelled `intake` on 2026-10-31 by this lane under the github-workflows grant): "s(44) = 7: registration request". Intake pass 2026-10-31 (epic think-3guf), lane L3 (bold-ritchie-l3, tbd-strong sub-agent), branch claude/bold-ritchie-xo28us-s44. Followed the #594/#610 imports (think-osvq, think-ribz) and T-066's zmx2 route (s(59) = 8).

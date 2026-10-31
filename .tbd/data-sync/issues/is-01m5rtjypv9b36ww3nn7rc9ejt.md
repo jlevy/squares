@@ -3,10 +3,10 @@ type: is
 id: is-01m5rtjypv9b36ww3nn7rc9ejt
 title: "Validate Daniel's s(29) degree-7213 minimal polynomial (T-246, #816, #817): replay, independent checks, packing at the exact side"
 kind: task
-status: in_progress
+status: open
 priority: 3
-version: 7
-delegate: bold-ritchie-l5
+version: 8
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-25T06:04:54.875Z
-updated_at: 2026-10-31T06:24:56.164Z
+updated_at: 2026-10-31T07:02:21.103Z
 started_at: 2026-10-25T15:41:58.506Z
 ---
 The validation of Evan Daniel's degree-7213 minimal polynomial of the s(29) record side, T-246, from the release exact-data-2026-10-12 of evand/square-packing (tag commit 31523f87316bdfda00f5459dd9077928e264f133), tracked by the owner's issue #816 and delivered on draft PR #817 (branch claude/friendly-einstein-gf9z0h-s29-validation), owner w-s29-validate-1025.
