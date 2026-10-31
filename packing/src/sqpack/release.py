@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "3909549820866dcf2f4f2ee7fb89b54aac824f7d"
+DATA_REVISION = "002e3a188c4708e7e593cfd5fed4b277a58dedd8"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -9952,6 +9952,47 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "swapped in: 69 files each, all byte-identical across the three. No PDF was "
             "printed; each prints from that HTML. Every paper keeps its version: v0.4.32, "
             "v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/couzo_678_replay.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "think-llit after #793: the requests entries of #666, #715, #719 and #732 say "
+            "that the owner answered D1 and that their rows above 1024 wait on think-llit's "
+            "records slices, blocked on think-llit, and #678's Göbel receipt is rebuilt by "
+            "its writer, which check now holds byte for byte (couzo_678_replay); no "
+            "register entry, row, side, bound or credit changes. Against main e54ae3e97 "
+            "(#829): rendered at link revision e54ae3e9 into empty site directories, "
+            "twice from this tree and once with that main's two changed inputs swapped "
+            "in, render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write their 69 "
+            "files byte-identical across the three. Measured again after merging main "
+            "3978a7f61 (#841), at link revision 3978a7f6 with that main's two inputs "
+            "swapped in and the explainer's math pass on the host's headless shell "
+            "through SQPACK_CHROMIUM: 69 files each, all byte-identical across the three. "
+            "Measured again after review A's requests edits (#732's block, #715's D2 and D4 "
+            "wording), at the same link revision against the same main: 69 files, "
+            "byte-identical. No PDF was printed; each prints from that HTML. Every paper "
+            "keeps its version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

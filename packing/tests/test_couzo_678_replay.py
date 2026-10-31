@@ -191,6 +191,22 @@ def test_the_committed_receipts_hold() -> None:
     assert replay.check(replay=False) == []
 
 
+def test_a_goebel_receipt_that_is_not_its_rebuild_is_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """think-llit (#793's review A, A13): ``check`` holds the committed Göbel receipt to
+    its writer's rebuild byte for byte, so the families sentence it carried until it was
+    rebuilt, one word longer than the writer's, is refused; the comparison is unchanged."""
+    committed = replay.GOEBEL.read_text(encoding="utf-8")
+    old = committed.replace("corner-touching strips", "corner-touching G\\u00f6bel strips")
+    assert old != committed
+    assert json.loads(old)["comparison"] == json.loads(committed)["comparison"]
+    receipt = tmp_path / "goebel-comparison.json"
+    receipt.write_text(old, encoding="utf-8")
+    monkeypatch.setattr(replay, "GOEBEL", receipt)
+    assert replay.check(replay=False) == ["the Göbel receipt differs from its rebuild"]
+
+
 def test_the_claims_record_holds_the_rows_beyond_the_corpus() -> None:
     record = replay.beyond_horizon_claims()
     rows = {row.n: row for row in replay.claims()}
