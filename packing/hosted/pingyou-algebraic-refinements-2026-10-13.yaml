@@ -1,0 +1,13 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+
+repository: BuddenPing/square-packing-certificates
+tag: data/pingyou-algebraic-refinements-2026-10-13-v1
+description: Sixty exact certificate refinements submitted by PingYou Ltd in PR 574, with preserved per-case attribution; pending maintainer review.
+objects:
+- path: attic/pingyou-algebraic-refinements-2026-10-13/pingyou-algebraic-refinements-2026-10-13.zip
+  asset: pingyou-algebraic-refinements-2026-10-13.zip
+  size: 2815986
+  sha256: 26b31abea665a7d22547f61eb041392b2bde303a9a702ac1a7ae35dc5f319062
