@@ -10046,7 +10046,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_threshold_bound_review and render_packing_methods: 69 files each, "
             "all byte-identical across the three. Measured again after merging main "
             "32ef0861b (#835), at link revision 5df16757 with that main's two inputs "
-            "swapped in: 69 files each, byte-identical across the three. No PDF was "
+            "swapped in, and after merging main 37ede3936 (#848), at link revision "
+            "290ba178: 69 files each, byte-identical across the three each time. No PDF was "
             "printed; each prints from that HTML. Every paper keeps its version: v0.4.32, "
             "v0.1.11, v0.1.4 and v0.2.7."
         ),
