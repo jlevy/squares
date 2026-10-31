@@ -45,7 +45,7 @@ from devtools.overview_data import MATH, breakable_quotients, prose_tex
 from devtools.repo_links import path_kind, repo_url
 from devtools.site_topics import NEWS_TOPICS, topic_chip
 from sqpack import release
-from sqpack.yamlio import load_yaml
+from sqpack.yamlio import BaseLoader, load_yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
@@ -849,7 +849,7 @@ def inline_comments(text: str) -> list[tuple[int, str]]:
     """
     spans = [
         (token.start_mark.index, token.end_mark.index)
-        for token in yaml.scan(text, Loader=yaml.SafeLoader)
+        for token in yaml.scan(text, Loader=BaseLoader)
         if isinstance(token, yaml.ScalarToken)
     ]
     starts = [start for start, _ in spans]
