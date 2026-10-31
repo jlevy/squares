@@ -10260,6 +10260,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#842's final reply and close (think-1v4b), after #851 registered T-252: the "
+            "reply, its state and its date in result-requests.yaml; no register entry, "
+            "side, bound or credit changes. Against main 90b79dbe1 (#851): rendered at "
+            "link revision 0000000000000000000000000000000000000000 into empty site "
+            "directories, twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, render_packing_methods writes its 43 files "
+            "byte-identical across the three. No PDF was printed; it prints from that "
+            "HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 

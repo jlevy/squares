@@ -26332,7 +26332,8 @@ issues:
     title: 's(44) = 7: registration request'
     author: moh63-dev
     opened: '2026-10-26'
-    state: open
+    state: closed
+    closed: '2026-10-31'
     kind: result-report
     triage: done
     summary: >-
@@ -26367,7 +26368,25 @@ issues:
     - think-1v4b
     - think-qvp6
     answer_bead: think-1v4b
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/842#issuecomment-6542869817
+      date: '2026-10-31'
+      by: jlevy
+      kind: final
+      reported:
+      - result: s44-equals-7
+        id: T-252
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: s44-equals-7
+        id: E-khalili-842-cover-replay
+        status: confirmed
+      - result: s44-equals-7
+        id: E-khalili-842-cover-report
+      beads:
+      - think-qvp6
     close_when: >-
       The import and its disposition are on main and the site, and the reply on main reports
       T-252 at its rungs and n-044 as proved; nothing the authors asked for is queued.
@@ -26378,7 +26397,13 @@ issues:
       github-workflows grant; no n-44 case label exists, though the label policy would give
       one to an optimality claim under review, so it is left for the owner. The packet pins
       the head, v1.1, by stage 1's rule; the issue body names v1.0, whose certificate is the
-      same bytes.
+      same bytes. Closed on 31 October 2026 with the final reply, after the deploy of main
+      90b79dbe1 (#851) was verified (Pages run 41196287332, verify-deployment 5,961 of 5,961
+      checks). The reply's one question, whether the zm_mixed.py runs left out --cert-mode on
+      purpose, is informational: for this cover nothing certificate mode disables is
+      reachable, and zm_mixed.py decides nothing in the record. The issue body already
+      answers the zeromargin.py pin, both files used as they are at 659ee62, so it was not
+      asked again.
   - number: 847
     title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
     author: mohsensbu-jpg
