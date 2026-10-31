@@ -9991,6 +9991,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods, the one reader of result-requests.yaml among them, "
             "again at link revision fe048570, twice from this tree and once with that "
             "main's file swapped in: 43 files each, byte-identical across the three. "
+            "On 31 October (think-6m6e) the requests record also took #542's close, ten "
+            "reply records cut to the ids their text names, five issues' comments read, "
+            "three follow-ups, #804's owed reply and owner-decision blocks on #666, #715 "
+            "and #719; render_packing_methods again at link revision 3978a7f6, twice from "
+            "this tree and once with main 3978a7f61's file swapped in: 43 files each, "
+            "byte-identical across the three. "
             "No PDF was printed; each prints from that HTML. Every paper keeps its "
             "version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
         ),
