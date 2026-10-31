@@ -10385,6 +10385,29 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "its version: v0.4.33, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The follow-ups of 31 October on #375, #522 and #763 (the intake pass of 31 "
+            "October, think-3guf, lane L7) recorded under their replies; no register entry, "
+            "row, side, bound or credit changes. Against main 90b79dbe1 (#851): rendered at "
+            "link revision 90b79dbe into empty site directories, twice from this tree and "
+            "once with that main's result-requests.yaml swapped in, render_packing_methods "
+            "writes its 43 files byte-identical across the three. Measured again after "
+            "merging main a8deaf1b6 (#817), at link revision a8deaf1b with that main's "
+            "result-requests.yaml swapped in, after recording the #375 correction (review "
+            "B1), and after marking the 6 October #375 confirmation's statement outdated, "
+            "each at the same revision with that main's file swapped in, and after merging "
+            "main e482345fe (#852), at link revision e482345f with that main's file swapped "
+            "in: 43 files, byte-identical across the three each time. "
+            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 
