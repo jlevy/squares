@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: bold-ritchie-l7
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-10-31T11:31:43.778Z
+updated_at: 2026-10-31T11:44:40.360Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -101,3 +101,6 @@ The rows above 1024 (think-llit) and the import's earlier questions stay open on
 2026-10-25 coord-intake-1024: PR B's reply posted https://github.com/jlevy/squares/issues/763#issuecomment-6391800383 after #794 merged (755ef426b, 01:00:47Z) and Pages run 40148939396 verified (live result/t-240.html V3; cases/268 and 303 at T-240's sides). Changes from the draft: the previous_source sentence (the record held before, which at 268 and 303 is the parent) and question 7 (what previous_source means; think-vm3m M-1). Recorded under #763's replies by c-map-hx0e-1024's H1 PR, with #794's S3 News.
 
 2026-10-25 coord-intake-1024 (from #807 review A, A2): after #807 merges on 26 October and deploys, post a #763 follow-up saying T-242 (Daniel's exact descent of Lavrentev's placement) supersedes T-240 as the house at 268 in the pass of 26 October; T-240 stays the house at 303. Record it in the next records change.
+
+
+2026-10-31 bold-ritchie-l7 (intake pass think-3guf, lane L7; took over the claim of the ended session c-import-763-1024b): posted the #763 follow-up from main 90b79dbe1 (Pages run 41196287332, verify-deployment passed): https://github.com/jlevy/squares/issues/763#issuecomment-6542832947. It names T-240 (V3/C3, current) with E-couzo-763-exact-feasibility and E-couzo-763-review-exact-feasibility, both confirmed, and reports the 26 October move of the house at 268 to T-242 (T-240 stays the house at 303), which discharges the intake-1024 follow-up noted above; 683 (think-2z2n, after think-kzme) and the rows above 1024 (think-llit) remain, and the five credit questions await the author. Recorded on branch claude/bold-ritchie-xo28us-replies2. check_requests --report: no reply due; not closeable.
