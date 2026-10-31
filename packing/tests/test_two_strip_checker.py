@@ -13,9 +13,13 @@ every count's digest are in the slow lane.
 
 from __future__ import annotations
 
+import io
 import json
 import re
 import shutil
+import warnings
+import zipfile
+import zlib
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
@@ -237,6 +241,145 @@ def test_the_ingest_refuses_every_malformed_deposit_as_custody() -> None:
             checker.row_from_record(broken)
 
 
+def test_version_5_is_read_through_its_own_column_set() -> None:
+    """#836's version 5 adds the author's ``below_all_reported`` after the eleven
+    columns. Read with its own header it parses, the flag counted and decided by nothing;
+    read as #799's deposits are, its header is refused. An author's column must hold one
+    of its literals, and a column the checker does not know, or the eleven out of order,
+    is refused as custody. Its 5,308 rows are version 2's at 1,390 counts, side and
+    parameters alike, lower at 1,434 and new at 2,484, as #836 states; none is higher."""
+    flagged = checker.V5.header
+    assert flagged == (*checker.COLUMNS, "below_all_reported")
+    rows = checker.parse_table(_csv((*FIRST, "no"), header=flagged), flagged)
+    assert rows == [(checker.parse_records(_csv(FIRST))[0], {"below_all_reported": "no"})]
+    refused = {
+        "the header is": (_csv((*FIRST, "no"), header=flagged), checker.COLUMNS),
+        "below_all_reported 'maybe' is not one of": (
+            _csv((*FIRST, "maybe"), header=flagged),
+            flagged,
+        ),
+        "the checker reads no records.csv with columns": (
+            _csv((*FIRST, "x"), header=(*checker.COLUMNS, "comment")),
+            (*checker.COLUMNS, "comment"),
+        ),
+        "the checker reads no records.csv with columns ": (
+            _csv(FIRST, header=checker.COLUMNS[::-1]),
+            checker.COLUMNS[::-1],
+        ),
+    }
+    for reason, (text, columns) in refused.items():
+        with pytest.raises(checker.CustodyError, match=re.escape(reason.strip())):
+            checker.parse_table(text, columns)
+    assert checker.author_flags(checker.V5) == {"below_all_reported": {"no": 51, "yes": 5257}}
+    version_2 = {row.n: row for row in checker.records(checker.V2)}
+    version_5 = {row.n: row for row in checker.records(checker.V5)}
+    assert len(version_5) == checker.V5.rows == 5308
+    shared = set(version_5) & set(version_2)
+    assert len(set(version_5) - set(version_2)) == 2484
+    assert sum(version_5[n] == version_2[n] for n in shared) == 1390
+    assert sum(version_5[n].side < version_2[n].side for n in shared) == 1434
+    assert not any(version_5[n].side > version_2[n].side for n in shared)
+
+
+def test_a_deposit_kept_as_its_archive_is_read_as_untrusted_data(tmp_path: Path) -> None:
+    """Version 5 is read from the author's copy of its archive, retained in Git, whose
+    custody is the packet's (`acquire_source --check`), so no digest is compared here.
+    The archive is still another party's: one holding ``records.csv`` twice or none, a
+    member past `MAX_RECORDS_BYTES`, bytes that are no archive, and an archive whose table
+    holds another number of rows are each refused as custody."""
+    assert len(checker.records(checker.V5)) == 5308
+
+    def archive(name: str, members: dict[str, bytes]) -> checker.Deposit:
+        with zipfile.ZipFile(tmp_path / name, "w") as written:
+            for member, data in members.items():
+                written.writestr(member, data)
+        return replace(checker.V5, packet=str(tmp_path), archived=name)
+
+    flagged = _csv((*FIRST, "yes"), header=checker.V5.header).encode()
+    small = archive("one.zip", {"records.csv": flagged, "README.md": b"x"})
+    assert checker.archived_records(small) == flagged.decode()
+    with pytest.raises(checker.CustodyError, match="holds 1 rows, not 5308"):
+        checker.records(small)
+    with pytest.raises(checker.CustodyError, match=re.escape("holds 0 records.csv")):
+        checker.archived_records(archive("none.zip", {"README.md": b"x"}))
+    with zipfile.ZipFile(tmp_path / "twice.zip", "w") as written, warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        written.writestr("records.csv", flagged)
+        written.writestr("records.csv", flagged)
+    with pytest.raises(checker.CustodyError, match=re.escape("holds 2 records.csv")):
+        checker.archived_records(replace(small, archived="twice.zip"))
+    large = archive("large.zip", {"records.csv": b"0" * (checker.MAX_RECORDS_BYTES + 1)})
+    with pytest.raises(checker.CustodyError, match=re.escape("records.csv is too large")):
+        checker.archived_records(large)
+    (tmp_path / "plain.zip").write_bytes(b"not an archive")
+    with pytest.raises(checker.CustodyError, match="File is not a zip file"):
+        checker.archived_records(replace(small, archived="plain.zip"))
+
+
+def _patched(data: bytearray, change: str) -> None:
+    """One archive fault, in place: 40 bytes of the deflate stream inverted, the
+    encryption flag set, or the compression method made 99, in both headers."""
+    local, central = data.index(b"PK\x03\x04"), data.index(b"PK\x01\x02")
+    if change == "corrupt":
+        start = local + 30 + len("records.csv") + 1000
+        data[start : start + 40] = bytes(byte ^ 0xFF for byte in data[start : start + 40])
+    elif change == "encrypted":
+        data[local + 6] |= 1
+        data[central + 8] |= 1
+    else:
+        data[local + 8] = data[central + 10] = 99
+
+
+def test_a_corrupt_encrypted_or_unknown_member_is_refused_as_custody(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Version 5's own ``records.csv``, deflated, with its stream corrupted, its member
+    marked encrypted, or its compression method one ``zipfile`` does not know: each is a
+    `CustodyError`, caused by ``zlib.error``, ``RuntimeError`` and
+    ``NotImplementedError``. ``check`` names the deposit's custody failure and goes on,
+    and the command prints FAILED rather than a traceback."""
+    text = checker.archived_records(checker.V5).encode("utf-8")
+    causes = {"corrupt": zlib.error, "encrypted": RuntimeError, "unknown": NotImplementedError}
+    broken = {}
+    for change, cause in causes.items():
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as written:
+            written.writestr("records.csv", text)
+        data = bytearray(buffer.getvalue())
+        _patched(data, change)
+        (tmp_path / f"{change}.zip").write_bytes(bytes(data))
+        broken[change] = replace(checker.V5, packet=str(tmp_path), archived=f"{change}.zip")
+        with pytest.raises(checker.CustodyError) as refused:
+            checker.archived_records(broken[change])
+        assert isinstance(refused.value.__cause__, cause), change
+    (problem,) = checker.check(deposits=(broken["encrypted"],))
+    assert problem.startswith("v5.0: custody: karimi_two_strip_records_v3_lite.zip: File ")
+    assert problem.endswith("is encrypted, password required for extraction")
+    monkeypatch.setattr(checker, "DEPOSITS", (broken["unknown"],))
+    assert checker.main(["check"]) == 1
+    assert capsys.readouterr().out.splitlines()[-1] == "FAILED"
+
+
+def test_an_altered_version_5_receipt_is_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """In a copy of version 5's packet, its decisions receipt counting the author's flag
+    otherwise, and its replay receipt saying a route failed at 1253, are each named."""
+    copied = tmp_path / checker.V5.packet
+    shutil.copytree(checker.V5.home, copied)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+    receipt = json.loads(checker.V5.decisions.read_text(encoding="utf-8"))
+    receipt["author_columns"]["counts"]["below_all_reported"]["no"] += 1
+    checker.V5.decisions.write_text(json.dumps(receipt), encoding="utf-8")
+    sample = json.loads(checker.replay_path(checker.V5).read_text(encoding="utf-8"))
+    sample["rows"][1]["verified"] = False
+    checker.replay_path(checker.V5).write_text(json.dumps(sample), encoding="utf-8")
+    assert checker.check(deposits=(checker.V5,)) == [
+        "v5.0: the author's columns are not counted as the rows",
+        "v5.0 n=1253: the written-out certificate failed a route",
+    ]
+
+
 def test_write_out_builds_no_square_past_n() -> None:
     """At K = 1000, the checker's bound, the construction holds about a million squares;
     written out at n = 1 it builds one, since `poses` places them one at a time."""
@@ -290,26 +433,38 @@ def test_a_small_packing_written_out_agrees_with_both_routes() -> None:
     assert "overlapping pairs" in shrunk["independent"]["failures"][0]
 
 
+def _summary_holds(deposit: checker.Deposit, expected: tuple[int, int, int, int]) -> None:
+    """A deposit's decisions summary: every row decided, its squares, how many rows are
+    filled to the capacity and the most surplus, and every control refused at every row."""
+    rows, squares, tight, most = expected
+    summary = json.loads(deposit.decisions.read_text(encoding="utf-8"))["summary"]
+    assert (summary["rows"], summary["decided"], summary["squares"]) == (rows, rows, squares)
+    assert (summary["surplus_zero"], summary["surplus_most"]) == (tight, most)
+    assert summary["side_below_k"] == summary["k_is_ceil_sqrt_n"] == rows
+    assert all(item["refused"] == rows for item in summary["controls"].values())
+
+
+def test_version_5_s_receipts_hold() -> None:
+    """Version 5's two receipts read back: every decision and control of its 5,308 rows
+    derived again and its author's column counted again (51 no, 5,257 yes), 1182's and
+    9912's certificates written out again to the digests stated, and the replay sample's
+    five counts decided on both routes with their six controls refused."""
+    assert checker.check(deposits=(checker.V5,)) == []
+    _summary_holds(checker.V5, (5308, 31499439, 4618, 4))
+    sample = json.loads(checker.replay_path(checker.V5).read_text(encoding="utf-8"))
+    assert [row["n"] for row in sample["rows"]] == [1182, 1253, 6089, 9912, 9944]
+    pairs = [row["decision"]["candidate_pairs"] for row in sample["rows"]]
+    assert pairs == [2766, 2895, 13869, 22246, 22513]
+
+
 def test_the_receipts_hold_with_the_sample_s_digests() -> None:
-    """The three receipts read back: every decision and control of both deposits derived
-    again; the sample certificates written out again to the digests the receipts state,
-    the five of version 1, which are also version 2's rows there, and version 2's 2459 and
-    9944; and the five replayed on both routes with their six controls refused."""
-    assert checker.check() == []
-    expected = {
-        checker.V1: (683, 1749915, 403, 19),
-        checker.V2: (2824, 16603112, 1366, 42),
-    }
-    for deposit, (rows, squares, tight, most) in expected.items():
-        summary = json.loads(deposit.decisions.read_text(encoding="utf-8"))["summary"]
-        assert (summary["rows"], summary["decided"], summary["squares"]) == (
-            rows,
-            rows,
-            squares,
-        )
-        assert (summary["surplus_zero"], summary["surplus_most"]) == (tight, most)
-        assert summary["side_below_k"] == summary["k_is_ceil_sqrt_n"] == rows
-        assert all(item["refused"] == rows for item in summary["controls"].values())
+    """#799's three receipts read back: every decision and control of both deposits
+    derived again; the sample certificates written out again to the digests the receipts
+    state, the five of version 1, which are also version 2's rows there, and version 2's
+    2459 and 9944; and the five replayed on both routes with their six controls refused."""
+    assert checker.check(deposits=(checker.V1, checker.V2)) == []
+    _summary_holds(checker.V1, (683, 1749915, 403, 19))
+    _summary_holds(checker.V2, (2824, 16603112, 1366, 42))
     first = {row.n: row for row in checker.records(checker.V1)}
     later = {row.n: row for row in checker.records(checker.V2)}
     changed = sorted(n for n, row in first.items() if later[n] != row)
@@ -340,10 +495,10 @@ def test_an_altered_receipt_or_packet_is_refused(
     checker.replay_path().write_text(json.dumps(sample), encoding="utf-8")
     first = json.loads(checker.V1.decisions.read_text(encoding="utf-8"))["rows"][5]["n"]
     later = json.loads(checker.V2.decisions.read_text(encoding="utf-8"))["rows"][2000]["n"]
-    assert checker.check() == [
+    assert checker.check(deposits=(checker.V1, checker.V2)) == [
         f"V1.0 n={first}: the decision differs from the receipt",
+        "V1.0 n=1813: the replayed certificate is not the decided one",
         f"version 2 n={later}: the decision differs from the receipt",
-        "n=1813: the replayed certificate is not the decided one",
     ]
     (checker.V2.extracted / "regenerate.py").write_text("", encoding="utf-8")
     with pytest.raises(checker.CustodyError, match="the packet keeps"):
@@ -367,5 +522,7 @@ def test_every_written_out_certificate_has_the_digest_its_receipt_states(
 ) -> None:
     """Every certificate of a deposit written out again, 683 in about 8 CPU-seconds and
     2,824 in about 70, has the SHA-256 and size its decisions receipt records, which is
-    how the record holds bytes it does not keep."""
+    how the record holds bytes it does not keep. Version 5's 5,308 would take about 200
+    (its decide-all took 212.9 with every control), so this lane leaves them to
+    ``check --digests`` and the quick check writes its sample's two again."""
     assert checker.decisions_problems(deposit, digests=True)[0] == []

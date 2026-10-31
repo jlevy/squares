@@ -82,9 +82,10 @@ checks that each capture is its deposit's record and that the packet keeps exact
 files the capture names.
 
 **The ingest.** ``records.csv`` is another party's file, read as untrusted data by
-`parse_records`. The header must be the eleven columns exactly, each row exactly eleven
-fields, each literal matched whole with at most `MAX_DIGITS` digits in each part, K at
-most `MAX_K` and equal to ceil(sqrt(n)), and each count once. Every refusal is a
+`parse_table`. The header must be the deposit's columns exactly, the eleven of
+`COLUMNS` for #799's deposits, each row exactly that many fields, each literal matched
+whole with at most `MAX_DIGITS` digits in each part, K at most `MAX_K` and equal to
+ceil(sqrt(n)), and each count once. Every refusal is a
 `CustodyError`. `records` reads a deposit's rows through it: 683 in version 1 and 2,824
 in version 2. The receipts are:
 
@@ -99,14 +100,30 @@ in version 2. The receipts are:
   `beyond_horizon_replay.decide_row` decides a row, so the lemma's verdict and the
   routes' agree where both are run. Version 2 states the same row at all five.
 
+**#836's version 5** (`V5`, record 23664800, 5,308 rows at 1182 to 9944) is kept by
+another packet, ``karimi-records-2026-10-31``, which ``devtools.acquire_source`` wrote
+from the author's GitHub copy of his Zenodo records at ad8b094, since zenodo.org was
+unreachable. The archive and its ``records.csv`` had the SHA-256s #836 states when the
+packet was written, which is where the author's statement meets the copy; from then on
+Git keeps the bytes and ``acquire_source --check`` holds them to the packet's manifest
+(OR-16), so `archived_records` compares no digest. It reads ``records.csv`` from the
+retained archive as untrusted data. Its header adds the author's ``below_all_reported``
+after the eleven columns (`AUTHOR_COLUMNS`): each deposit names its own header, so a
+column the checker does not know is still refused, and the flag is read as one of its
+literals, counted in the receipt and decided by nothing. Its receipts are that packet's
+``receipts/two-strip-decisions-v5.json`` and ``receipts/replay-sample-v5.json``, the
+latter at 1182, 1253, 6089, 9912 and 9944: the first count, new in version 5; the first
+lowered from version 2's; a new count in the middle; the last lowered; and the largest.
+
 ``check`` reads the receipts back: every decision and control derived again, the
-digests at each deposit's sample written out again (every count's with ``--digests``),
-and with ``--replay`` the sample decided again on both routes.
+author's columns counted again, the digests at each deposit's sample written out again
+(every count's with ``--digests``), and with ``--replay`` each replay sample decided
+again on both routes.
 
 From ``packing/``, with the project interpreter::
 
-    python -m devtools.two_strip_checker decide-all [--version 1] [--version 2]
-    python -m devtools.two_strip_checker replay-sample [--n 1184 ...] [--workers 2]
+    python -m devtools.two_strip_checker decide-all [--version 1] [--version 2] [--version 5]
+    python -m devtools.two_strip_checker replay-sample [--version 5] [--n N ...] [--workers 2]
     python -m devtools.two_strip_checker check [--digests] [--replay]
 
 A finite packing certifies an upper bound and nothing more. Whether a row is below every
@@ -124,11 +141,14 @@ import math
 import platform
 import re
 import time
+import zipfile
+import zlib
 from collections.abc import Callable, Iterator, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from fractions import Fraction
+from functools import partial
 from itertools import islice
 from pathlib import Path
 from typing import Any
@@ -185,11 +205,19 @@ REPLAY_FORMAT = "two-strip-replay-sample-v1"
 
 @dataclass(frozen=True, slots=True)
 class Deposit:
-    """One version of the Zenodo deposit the packet keeps: its record, its archive, the
+    """One version of the Zenodo deposit a packet keeps: its record, its archive, the
     record's other files kept beside the archive's members (``others``), how many rows
     its ``records.csv`` holds, the comment that reported it, its decisions receipt, and
     the counts whose written-out certificates the quick check writes again (``sample``).
-    Paths resolve under `PACKET` when read."""
+
+    A deposit kept by #799's packet (`PACKET`, the default) is the archive's members as a
+    Zenodo capture extracted them. One kept by another packet (``packet``) is its archive
+    itself, retained by ``devtools.acquire_source`` at ``archived`` inside that packet,
+    and its rows are read from the archive's ``records.csv`` (`archived_records`).
+    ``columns`` is the header its ``records.csv`` must have exactly; `COLUMNS` unless the
+    deposit adds an author's column the checker reads and decides nothing by
+    (`AUTHOR_COLUMNS`). ``replay`` names its replay-sample receipt, when it has one, and
+    ``replayed`` the counts that sample decides on both routes."""
 
     label: str
     record: int
@@ -199,6 +227,22 @@ class Deposit:
     reported: str
     receipt: str
     sample: tuple[int, ...]
+    issue: str = ISSUE
+    columns: tuple[str, ...] = ()
+    packet: str = PACKET_PATH
+    archived: str = ""
+    replay: str = ""
+    replayed: tuple[int, ...] = ()
+
+    @property
+    def header(self) -> tuple[str, ...]:
+        """The exact header of the deposit's ``records.csv``."""
+        return self.columns or COLUMNS
+
+    @property
+    def home(self) -> Path:
+        """The packet on disk; #799's is read through `PACKET`, which a test may move."""
+        return PACKET if self.packet == PACKET_PATH else REPO / self.packet
 
     @property
     def doi(self) -> str:
@@ -206,7 +250,7 @@ class Deposit:
 
     @property
     def extracted(self) -> Path:
-        return PACKET / f"zenodo/zenodo-{self.record}"
+        return self.home / f"zenodo/zenodo-{self.record}"
 
     @property
     def records(self) -> Path:
@@ -215,15 +259,22 @@ class Deposit:
     @property
     def records_name(self) -> str:
         """The rows' file as the receipts name it, from the repository root."""
-        return f"{PACKET_PATH}/zenodo/zenodo-{self.record}/records.csv"
+        if self.archived:
+            return f"{self.packet}/{self.archived}:records.csv"
+        return f"{self.packet}/zenodo/zenodo-{self.record}/records.csv"
 
     @property
     def capture(self) -> Path:
-        return PACKET / f"zenodo/zenodo-{self.record}-receipt.json"
+        return self.home / f"zenodo/zenodo-{self.record}-receipt.json"
 
     @property
     def decisions(self) -> Path:
-        return PACKET / "receipts" / self.receipt
+        return self.home / "receipts" / self.receipt
+
+    @property
+    def replay_receipt(self) -> Path:
+        """The replay sample's receipt, when the deposit has one."""
+        return self.home / "receipts" / self.replay
 
 
 #: The counts the stage 1 triage replayed, from 1184 to 3775: the cross-check's sample.
@@ -238,6 +289,8 @@ V1 = Deposit(
     reported=ISSUE,
     receipt="two-strip-decisions.json",
     sample=SAMPLE,
+    replay="replay-sample.json",
+    replayed=SAMPLE,
 )
 #: Version 2, reported in the comment of 2026-10-24T22:34:47Z: 2,824 rows at 1184 to
 #: 9944. Its regenerate.py is version 1's, byte for byte, so the packet keeps it once.
@@ -252,7 +305,49 @@ V2 = Deposit(
     receipt="two-strip-decisions-v2.json",
     sample=(2459, 9944),
 )
-DEPOSITS = (V1, V2)
+#: The packet that keeps version 5 and the filled-end sets (#836, #847): the author's
+#: GitHub copies of his Zenodo records at ad8b094, retained by ``devtools.acquire_source``.
+RECORDS_PACKET = "packing/resources/web/karimi-records-2026-10-31"
+ISSUE_836 = "https://github.com/jlevy/squares/issues/836"
+#: Version 5.0, reported by #836 (2026-10-26T12:18:36Z): 5,308 rows at 1182 to 9944, its
+#: records.csv with the author's ``below_all_reported`` column after the eleven. Zenodo
+#: was unreachable, so it is read from the author's copy of the archive at ad8b094, whose
+#: bytes had the two SHA-256s #836 states when retained. The quick check writes out 1182,
+#: the first count,
+#: new in version 5, and 9912, lowered from version 2's; the replay sample adds 1253, the
+#: first lowered count, 6089, a new count in the middle, and 9944, the largest.
+V5 = Deposit(
+    label="v5.0",
+    record=23664800,
+    archive="karimi_two_strip_records_v3_lite.zip",
+    others=(),
+    rows=5308,
+    reported=ISSUE_836,
+    receipt="two-strip-decisions-v5.json",
+    sample=(1182, 9912),
+    issue=ISSUE_836,
+    columns=(
+        "n",
+        "new_side_exact",
+        "new_side",
+        "previous_best_side",
+        "K",
+        "mH",
+        "tH",
+        "phH",
+        "mV",
+        "tV",
+        "phV",
+        "below_all_reported",
+    ),
+    packet=RECORDS_PACKET,
+    archived="source/karimi_two_strip_records_v3_lite.zip",
+    replay="replay-sample-v5.json",
+    replayed=(1182, 1253, 6089, 9912, 9944),
+)
+DEPOSITS = (V1, V2, V5)
+#: The deposits by the label the command line takes.
+VERSIONS = {"1": V1, "2": V2, "5": V5}
 
 #: The columns of a deposit's ``records.csv``, exactly and in order.
 COLUMNS = (
@@ -268,6 +363,14 @@ COLUMNS = (
     "tV",
     "phV",
 )
+#: Columns an author adds after `COLUMNS` that the checker reads and decides nothing by,
+#: with the literals each may hold. Version 5's flag says whether the author found the
+#: side below every side two catalogues list, Kaggle values with no coordinates among
+#: them; the walk decides that, so a row's flag is counted in the receipt and no more.
+AUTHOR_COLUMNS: dict[str, frozenset[str]] = {"below_all_reported": frozenset({"yes", "no"})}
+#: The most bytes a deposit archive's ``records.csv`` may decompress to; version 5's is
+#: 446,724.
+MAX_RECORDS_BYTES = 8 * 1024 * 1024
 #: The most digits in any one part of a literal (a numerator, a denominator, either side
 #: of a decimal point). The deposits' longest run is 12 digits, in the comparison column.
 MAX_DIGITS = 30
@@ -479,11 +582,50 @@ def _read(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def archived_records(deposit: Deposit) -> str:
+    """The text of ``records.csv`` inside a deposit kept as its archive, read from Git as
+    untrusted data: the archive must open, hold exactly one member of that name, at most
+    `MAX_RECORDS_BYTES` long, readable without a password by a method `zipfile` knows,
+    and be UTF-8. Its bytes are the packet's custody (``acquire_source --check``), so no
+    digest is compared here (OR-16). Any refusal is a `CustodyError`: a corrupt stream
+    (`zlib.error`, a bad CRC, a truncation), an encrypted member (`RuntimeError`) and an
+    unknown compression method (`NotImplementedError`) included."""
+    data = read_retained_bytes(deposit.home / deposit.archived)
+    try:
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            found = [info for info in archive.infolist() if info.filename == "records.csv"]
+            if len(found) != 1:
+                raise CustodyError(f"{deposit.archive} holds {len(found)} records.csv")
+            if found[0].file_size > MAX_RECORDS_BYTES:
+                raise CustodyError(f"{deposit.archive}'s records.csv is too large")
+            with archive.open(found[0]) as member:
+                text = member.read(MAX_RECORDS_BYTES + 1)
+    except (
+        zipfile.BadZipFile,
+        zipfile.LargeZipFile,
+        OSError,
+        EOFError,
+        RuntimeError,
+        NotImplementedError,
+        zlib.error,
+    ) as error:
+        raise CustodyError(f"{deposit.archive}: {error}") from error
+    if len(text) > MAX_RECORDS_BYTES:
+        raise CustodyError(f"{deposit.archive}'s records.csv is too large")
+    try:
+        return text.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise CustodyError(f"records.csv is not UTF-8: {error}") from error
+
+
 def custody(deposit: Deposit = V1) -> None:
     """Hold a deposit's files to its capture by name: the capture is the deposit's
     record, its files are the archive and the deposit's ``others``, and the packet keeps
     exactly the archive's members the capture extracted, with the ``others``. Git keeps
-    the bytes (OR-16)."""
+    the bytes (OR-16). A deposit kept as its archive is held by `archived_records`."""
+    if deposit.archived:
+        archived_records(deposit)
+        return
     capture = _read(deposit.capture)
     if (capture.get("record"), capture.get("doi")) != (deposit.record, deposit.doi):
         raise CustodyError(f"the capture is not record {deposit.record}")
@@ -545,43 +687,94 @@ def row_from_record(item: Mapping[str, object]) -> TwoStrip:
     )
 
 
-def parse_records(text: str) -> list[TwoStrip]:
-    """A deposit's rows from its ``records.csv`` text, read as untrusted data: the header
-    exactly `COLUMNS`, so no column is missing, extra or given twice; each row exactly
-    that many fields; each row by `row_from_record`; and each count once. Every refusal
-    is a `CustodyError`, including the csv module's own, as for a field past its size
-    limit."""
+def parse_table(
+    text: str, columns: Sequence[str] = COLUMNS
+) -> list[tuple[TwoStrip, dict[str, str]]]:
+    """A deposit's rows from its ``records.csv`` text, read as untrusted data, each with
+    the author's columns it carries: the header exactly ``columns``, so no column is
+    missing, extra or given twice; ``columns`` itself `COLUMNS` followed by columns
+    `AUTHOR_COLUMNS` names, each once; each row exactly that many fields; each row by
+    `row_from_record`, and each author's field one of its column's literals; and each
+    count once. Every refusal is a `CustodyError`, including the csv module's own, as for
+    a field past its size limit."""
+    header = tuple(columns)
+    extra = header[len(COLUMNS) :]
+    if (
+        header[: len(COLUMNS)] != COLUMNS
+        or len(set(extra)) != len(extra)
+        or not set(extra) <= set(AUTHOR_COLUMNS)
+    ):
+        raise CustodyError(f"the checker reads no records.csv with columns {list(header)}")
     try:
-        table = list(csv.reader(io.StringIO(text, newline=""), strict=True))
+        lines = list(csv.reader(io.StringIO(text, newline=""), strict=True))
     except csv.Error as error:
         raise CustodyError(f"records.csv: {error}") from error
-    if not table or tuple(table[0]) != COLUMNS:
-        header = repr(table[0] if table else [])[:200]
-        raise CustodyError(f"records.csv: the header is {header}, not {list(COLUMNS)}")
+    if not lines or tuple(lines[0]) != header:
+        shown = repr(lines[0] if lines else [])[:200]
+        raise CustodyError(f"records.csv: the header is {shown}, not {list(header)}")
     rows = []
-    for number, fields in enumerate(table[1:], start=1):
-        if len(fields) != len(COLUMNS):
+    for number, fields in enumerate(lines[1:], start=1):
+        if len(fields) != len(header):
             raise CustodyError(
-                f"records.csv row {number}: {len(fields)} fields, not {len(COLUMNS)}"
+                f"records.csv row {number}: {len(fields)} fields, not {len(header)}"
             )
-        rows.append(row_from_record(dict(zip(COLUMNS, fields, strict=True))))
-    counts = [row.n for row in rows]
+        named = dict(zip(header, fields, strict=True))
+        row = row_from_record({name: named[name] for name in COLUMNS})
+        authors = {name: named[name] for name in extra}
+        for name, value in authors.items():
+            if value not in AUTHOR_COLUMNS[name]:
+                raise CustodyError(
+                    f"records.csv n={row.n}: {name} {value[:40]!r} is not one of "
+                    f"{sorted(AUTHOR_COLUMNS[name])}"
+                )
+        rows.append((row, authors))
+    counts = [row.n for row, _ in rows]
     if len(set(counts)) != len(counts):
         raise CustodyError("records.csv: a count appears in more than one row")
     return rows
 
 
-def records(deposit: Deposit = V1) -> list[TwoStrip]:
-    """A deposit's rows, from its retained ``records.csv`` once `custody` holds."""
+def parse_records(text: str, columns: Sequence[str] = COLUMNS) -> list[TwoStrip]:
+    """A deposit's rows from its ``records.csv`` text, by `parse_table`."""
+    return [row for row, _ in parse_table(text, columns)]
+
+
+def _records_text(deposit: Deposit) -> str:
+    """A deposit's ``records.csv`` text once `custody` holds."""
+    if deposit.archived:
+        return archived_records(deposit)
     custody(deposit)
     try:
-        text = read_retained_bytes(deposit.records).decode("utf-8")
+        return read_retained_bytes(deposit.records).decode("utf-8")
     except UnicodeDecodeError as error:
         raise CustodyError(f"records.csv is not UTF-8: {error}") from error
-    rows = parse_records(text)
+
+
+def table(deposit: Deposit = V1) -> list[tuple[TwoStrip, dict[str, str]]]:
+    """A deposit's rows with the author's columns each carries, from its retained
+    ``records.csv`` once `custody` holds, at the deposit's row count."""
+    rows = parse_table(_records_text(deposit), deposit.header)
     if len(rows) != deposit.rows:
         raise CustodyError(f"records.csv holds {len(rows)} rows, not {deposit.rows}")
     return rows
+
+
+def records(deposit: Deposit = V1) -> list[TwoStrip]:
+    """A deposit's rows, from its retained ``records.csv`` once `custody` holds."""
+    return [row for row, _ in table(deposit)]
+
+
+def author_flags(
+    deposit: Deposit, rows: Sequence[tuple[TwoStrip, Mapping[str, str]]] | None = None
+) -> dict[str, dict[str, int]]:
+    """How many of a deposit's rows hold each literal of each author's column; empty for
+    a deposit with none. ``rows`` is the deposit's `table` when already read."""
+    counted: dict[str, dict[str, int]] = {}
+    for _, authors in table(deposit) if rows is None else rows:
+        for name, value in authors.items():
+            column = counted.setdefault(name, {})
+            column[value] = column.get(value, 0) + 1
+    return {name: dict(sorted(values.items())) for name, values in counted.items()}
 
 
 # --------------------------------------------------------------------------- the receipts
@@ -658,11 +851,11 @@ def decide_all(deposit: Deposit = V1) -> dict[str, Any]:
     found = [item for item, _ in decided]
     receipt = {
         "format": DECISIONS_FORMAT,
-        "issue": ISSUE,
+        "issue": deposit.issue,
         "reported": deposit.reported,
         "version": deposit.label,
         "doi": deposit.doi,
-        "packet": PACKET_PATH,
+        "packet": deposit.packet,
         "records": deposit.records_name,
         "checker": "packing/devtools/two_strip_checker.py",
         "lemma": LEMMA,
@@ -677,17 +870,27 @@ def decide_all(deposit: Deposit = V1) -> dict[str, Any]:
         "rows": found,
         "summary": decisions_summary(found, [checked for _, checked in decided]),
     }
+    flags = author_flags(deposit)
+    if flags:
+        receipt["author_columns"] = {
+            "counts": flags,
+            "note": (
+                "the author's own columns, read and counted; the checker decides nothing "
+                "by them, and whether a row is below every earlier report is the walk's"
+            ),
+        }
     _write(deposit.decisions, receipt)
     return receipt
 
 
-def replay_row(n: int) -> dict[str, Any]:
-    """One count of the sample: the row decided by the lemma, its certificate written out
-    and decided on both routes of `devtools.couzo_678_replay`, and the six controls."""
+def replay_row(n: int, deposit: Deposit = V1) -> dict[str, Any]:
+    """One count of a deposit's sample: the row decided by the lemma, its certificate
+    written out and decided on both routes of `devtools.couzo_678_replay`, and the six
+    controls."""
     # The replay module costs about two seconds to import; the checker needs none of it.
     from devtools import couzo_678_replay as base  # noqa: PLC0415
 
-    row = next(row for row in records(V1) if row.n == n)
+    row = next(row for row in records(deposit) if row.n == n)
     found = decide(row)
     cert = write_out(row)
     text = legacy.serialize(cert).encode("utf-8")
@@ -712,18 +915,21 @@ def replay_row(n: int) -> dict[str, Any]:
     }
 
 
-def replay_sample(counts: Sequence[int], workers: int) -> dict[str, Any]:
-    """Replay the sample's certificates on both routes and write the replay receipt."""
+def replay_sample(counts: Sequence[int], workers: int, deposit: Deposit = V1) -> dict[str, Any]:
+    """Replay a deposit's sample certificates on both routes and write its replay
+    receipt."""
     from devtools import couzo_678_replay as base  # noqa: PLC0415
 
+    if not deposit.replay:
+        raise ValueError(f"{deposit.label} has no replay sample")
     started, wall = _now(), time.monotonic()
     with ProcessPoolExecutor(max_workers=workers) as pool:
-        rows = list(pool.map(replay_row, counts))
+        rows = list(pool.map(partial(replay_row, deposit=deposit), counts))
     receipt = {
         "format": REPLAY_FORMAT,
-        "issue": ISSUE,
-        "doi": V1.doi,
-        "packet": PACKET_PATH,
+        "issue": deposit.issue,
+        "doi": deposit.doi,
+        "packet": deposit.packet,
         "checker": "packing/devtools/two_strip_checker.py",
         "routes": "packing/devtools/couzo_678_replay.py (decide and decide_controls)",
         "filter_lemma": base.FILTER_LEMMA,
@@ -734,7 +940,7 @@ def replay_sample(counts: Sequence[int], workers: int) -> dict[str, Any]:
         "workers": workers,
         "rows": rows,
     }
-    _write(replay_path(), receipt)
+    _write(replay_path(deposit), receipt)
     return receipt
 
 
@@ -746,18 +952,19 @@ def stable(row: Mapping[str, Any]) -> dict[str, Any]:
     return copy
 
 
-def replay_path() -> Path:
-    """The replay sample's receipt."""
-    return PACKET / "receipts/replay-sample.json"
+def replay_path(deposit: Deposit = V1) -> Path:
+    """A deposit's replay-sample receipt."""
+    return deposit.replay_receipt
 
 
 def decisions_problems(
     deposit: Deposit, *, digests: bool = False
 ) -> tuple[list[str], list[dict[str, Any]]]:
     """Problems with a deposit's decisions receipt, every decision and control derived
-    again and the written-out certificates at its sample (at every count with
-    ``digests``) written again; and the receipt's rows."""
-    rows = records(deposit)
+    again, the author's columns counted again and the written-out certificates at its
+    sample (at every count with ``digests``) written again; and the receipt's rows."""
+    parsed = table(deposit)
+    rows = [row for row, _ in parsed]
     receipt = _read(deposit.decisions)
     problems = []
     header = (receipt["format"], receipt["doi"], receipt["records"], receipt["lemma"])
@@ -770,6 +977,9 @@ def decisions_problems(
         problems.append(
             f"{deposit.label}: the decisions receipt's header is not this checker's"
         )
+    flags = author_flags(deposit, parsed)
+    if receipt.get("author_columns", {}).get("counts", {}) != flags:
+        problems.append(f"{deposit.label}: the author's columns are not counted as the rows")
     stored: list[dict[str, Any]] = receipt["rows"]
     if [item["n"] for item in stored] != [row.n for row in rows]:
         return [*problems, f"{deposit.label}: the receipt's rows are not the records'"], stored
@@ -786,28 +996,30 @@ def decisions_problems(
     return problems, stored
 
 
-def check(*, digests: bool = False, replay: bool = False) -> list[str]:
-    """Problems with the receipts against the packet, both deposits' decisions and the
-    replay sample's; empty when they hold."""
+def replay_problems(
+    deposit: Deposit, stored: Sequence[Mapping[str, Any]], *, replay: bool = False
+) -> list[str]:
+    """Problems with a deposit's replay-sample receipt against its decisions receipt's
+    rows (``stored``), each count replayed again with ``replay``."""
     from devtools import couzo_678_replay as base  # noqa: PLC0415
 
-    problems, stored = decisions_problems(V1, digests=digests)
-    problems += decisions_problems(V2, digests=digests)[0]
-    sample = _read(replay_path())
-    if [item["n"] for item in sample["rows"]] != list(SAMPLE):
-        return [*problems, "the replay receipt's counts are not the sample"]
+    label = deposit.label
+    sample = _read(replay_path(deposit))
+    if [item["n"] for item in sample["rows"]] != list(deposit.replayed):
+        return [f"{label}: the replay receipt's counts are not the sample"]
+    problems = []
     if sample["controls"] != list(base.CONTROLS):
-        problems.append("the replay receipt's controls are not the routes' six")
+        problems.append(f"{label}: the replay receipt's controls are not the routes' six")
     by_n = {item["n"]: item for item in stored}
     for kept in sample["rows"]:
         n = kept["n"]
         if not kept["verified"]:
-            problems.append(f"n={n}: the written-out certificate failed a route")
+            problems.append(f"{label} n={n}: the written-out certificate failed a route")
         if [item["control"] for item in kept["controls"]] != list(base.CONTROLS) or not all(
             item["refused_by_sqpack"] and item["refused_by_independent"]
             for item in kept["controls"]
         ):
-            problems.append(f"n={n}: a route accepted a control")
+            problems.append(f"{label} n={n}: a route accepted a control")
         # The certificate is written out and never retained, so its digest is its name
         # (a generated artifact under OR-16): the replayed one must be the decided one.
         decided = by_n[n]
@@ -815,9 +1027,31 @@ def check(*, digests: bool = False, replay: bool = False) -> list[str]:
             decided["certificate_sha256"],
             decided["capacity"],
         ):
-            problems.append(f"n={n}: the replayed certificate is not the decided one")
-        if replay and stable(replay_row(n)) != stable(kept):
-            problems.append(f"n={n}: the replay differs from the receipt")
+            problems.append(f"{label} n={n}: the replayed certificate is not the decided one")
+        if replay and stable(replay_row(n, deposit)) != stable(kept):
+            problems.append(f"{label} n={n}: the replay differs from the receipt")
+    return problems
+
+
+def check(
+    *,
+    digests: bool = False,
+    replay: bool = False,
+    deposits: Sequence[Deposit] | None = None,
+) -> list[str]:
+    """Problems with the receipts against the packets: each deposit's decisions and
+    replay sample, every deposit's (`DEPOSITS`) by default; empty when they hold. A
+    deposit whose files fail custody is one problem, and the rest are still checked."""
+    problems: list[str] = []
+    for deposit in DEPOSITS if deposits is None else deposits:
+        try:
+            found, stored = decisions_problems(deposit, digests=digests)
+        except CustodyError as error:
+            problems.append(f"{deposit.label}: custody: {error}")
+            continue
+        problems += found
+        if deposit.replay:
+            problems += replay_problems(deposit, stored, replay=replay)
     return problems
 
 
@@ -825,9 +1059,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n", 1)[0])
     commands = parser.add_subparsers(dest="command", required=True)
     every = commands.add_parser("decide-all")
-    every.add_argument("--version", choices=("1", "2"), action="append")
+    every.add_argument("--version", choices=tuple(VERSIONS), action="append")
     sample = commands.add_parser("replay-sample")
-    sample.add_argument("--n", type=int, nargs="+", default=list(SAMPLE))
+    replayed = tuple(key for key, deposit in VERSIONS.items() if deposit.replay)
+    sample.add_argument("--version", choices=replayed, default="1")
+    sample.add_argument("--n", type=int, nargs="+")
     sample.add_argument("--workers", type=int, default=2)
     audit = commands.add_parser("check")
     audit.add_argument("--digests", action="store_true")
@@ -837,21 +1073,23 @@ def main(argv: Sequence[str] | None = None) -> int:
         problems = check(digests=args.digests, replay=args.replay)
         for problem in problems:
             print(problem)
-        decided = " and ".join(f"{deposit.rows} {deposit.label} rows" for deposit in DEPOSITS)
+        decided = ", ".join(f"{deposit.rows} {deposit.label} rows" for deposit in DEPOSITS)
         print("FAILED" if problems else f"OK: {decided} decided, every control refused")
         return 1 if problems else 0
     actions: dict[str, Callable[[], Any]] = {
         "decide-all": lambda: {
             deposit.label: decide_all(deposit)["summary"]
             for deposit in (
-                [DEPOSITS[int(version) - 1] for version in args.version]
-                if args.version
-                else DEPOSITS
+                [VERSIONS[version] for version in args.version] if args.version else DEPOSITS
             )
         },
         "replay-sample": lambda: [
             {key: row[key] for key in ("n", "verified", "certificate_sha256", "cpu_seconds")}
-            for row in replay_sample(args.n, args.workers)["rows"]
+            for row in replay_sample(
+                args.n or list(VERSIONS[args.version].replayed),
+                args.workers,
+                VERSIONS[args.version],
+            )["rows"]
         ],
     }
     print(json.dumps(actions[args.command](), indent=1))
