@@ -10097,12 +10097,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The acknowledgements of #836 and #847 recorded under their replies (the "
             "intake pass of 31 October, think-3guf); no register entry, row, side, bound or "
-            "credit changes. Against main 37ede3936 (#848): rendered at link revision "
-            "37ede393 into empty site directories, twice from this tree and once with that "
+            "credit changes. Against main b95c5f69c (#833): rendered at link revision "
+            "b95c5f69 into empty site directories, twice from this tree and once with that "
             "main's result-requests.yaml swapped in, render_packing_methods writes its 43 "
-            "files byte-identical across the three; measured again after review A1's notes "
-            "on the two entries, against the same main: 43 files, byte-identical. No PDF "
-            "was printed; it prints from that HTML. The survey keeps v0.2.7."
+            "files byte-identical across the three. First measured the same way against "
+            "main 37ede3936 (#848), before and after review A1's notes on the two entries. "
+            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
 )
