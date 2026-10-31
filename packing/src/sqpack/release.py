@@ -9985,9 +9985,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "twice from this tree and once with that main's two changed inputs swapped "
             "in, render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write their 69 "
-            "files byte-identical across the three. No PDF was printed; each prints from "
-            "that HTML. Every paper keeps its version: v0.4.32, v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "files byte-identical across the three. Measured again after merging main "
+            "3978a7f61 (#841), at link revision 3978a7f6 with that main's two inputs "
+            "swapped in and the explainer's math pass on the host's headless shell "
+            "through SQPACK_CHROMIUM: 69 files each, all byte-identical across the three. "
+            "No PDF was printed; each prints from that HTML. Every paper keeps its "
+            "version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
