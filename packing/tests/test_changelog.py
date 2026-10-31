@@ -1689,3 +1689,28 @@ def test_import_draft_lists_the_issues_that_reported_its_results() -> None:
     (entry,) = drafted["entries"]
     assert entry["result_ids"] == ["T-245"]
     assert entry["issues"] == [810]
+
+
+def test_a_space_hash_outside_quotes_is_refused_rather_than_cut(tmp_path: Path) -> None:
+    """YAML loads `label: Mathematical review of #845` as "Mathematical review of": the
+    ` #` starts a comment. #860's review (A1) found eight News labels cut so, and #852's
+    ledger had the same fault (its review's M-2). `load` refuses such a source; quoted,
+    the label loads whole, and whole-line comments and quoted or block text stand."""
+    text = "entries:\n  - label: Mathematical review of #845\n    target: x\n"
+    assert render_changelog.inline_comments(text) == [
+        (2, "- label: Mathematical review of #845")
+    ]
+    quoted = text.replace("Mathematical review of #845", "'Mathematical review of #845'")
+    assert render_changelog.inline_comments(quoted) == []
+    assert yaml.safe_load(quoted)["entries"][0]["label"] == "Mathematical review of #845"
+    kept = "# a whole-line comment\nnote: |-\n  block text #1\ntitle: 'quoted #2'\n"
+    assert render_changelog.inline_comments(kept) == []
+    source = tmp_path / "site-changelog.yaml"
+    source.write_text(text, encoding="utf-8")
+    with pytest.raises(ValueError, match="quote the value"):
+        render_changelog.load(source)
+
+
+def test_no_committed_changelog_value_is_cut_by_a_comment() -> None:
+    text = render_changelog.SRC.read_text(encoding="utf-8")
+    assert render_changelog.inline_comments(text) == []

@@ -2679,6 +2679,62 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/render_changelog.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "render_changelog.load refuses a changelog value a ` #` cuts off as a comment "
+            "(#860's review A1); the papers render no changelog. Rendered at link revision "
+            "0000000000000000000000000000000000000000 into empty site directories, once "
+            "from this tree at 72bb026ff and once with e482345fe's render_changelog.py and "
+            "result-requests.yaml swapped in, by render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods (51 files each) "
+            "and the explainer's render before its math pass (its page and Markdown; the "
+            "pinned Chromium is not installed on this host): every file is byte-identical "
+            "across the two. Measured again at 39ce8fde6, once the guard scanned with "
+            "sqpack.yamlio's loader, and after merging main d7a815e86 (#856 to #859), at "
+            "a53e072a1 with that main's render_changelog.py and result-requests.yaml "
+            "swapped in: every file byte-identical each time. No PDF was printed; each "
+            "prints from that HTML. Retain v0.4.34, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The replies of 31 October on #824 and #843 to #846, recorded after #852 merged: "
+            "each issue's verdict comment and final reply under its replies, four issues "
+            "closed, and #846's note, against main e482345fe (#852). Rendered by "
+            "render_packing_methods at link revision "
+            "0000000000000000000000000000000000000000 into empty site directories, once from "
+            "this tree at 1be3ab2a0 and once with main's result-requests.yaml swapped in: "
+            "43 files each, byte-identical across the two. Measured again at 39efc9991, "
+            "after the four confirmed results' finished validation owners left the file, "
+            "and at 72bb026ff, after #860's review A3 and A4, with main 4ed88d160's file "
+            "swapped in, and after merging main d7a815e86, at a53e072a1 with that main's "
+            "file swapped in: 43 files, byte-identical each time. No PDF was printed; it "
+            "prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
