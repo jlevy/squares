@@ -26154,15 +26154,29 @@ issues:
     - think-6gti
     - think-10m1
     answer_bead: think-10m1
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/816#issuecomment-6543105784
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s29-minimal-polynomial
+        id: T-246
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: s29-minimal-polynomial
+        id: E-n029-evand-minpoly-7213-report
     close_when: Each of the six steps has a status backed by receipts on main, and the owner has
       decided T-246's kind and n = 29's lanes.
     notes: >-
       The project opened this issue; it reports no result of the project's own, and no
       acknowledgement is owed on it. It is marked intake, as #811 is, as the project's own issue
       tracking the validation of a reported item that #545 has tracked since 12 October. The
-      coordinator updates its status column and log from the lane's reports; the lane does not
-      post on it.
+      coordinator updates its status column and log from the lane's reports. Its first status
+      reply, a follow-up, was posted on 31 October 2026 after #817 merged and the deploy of
+      main a8deaf1b6 was verified; a reply follows each change in the record, as that reply
+      says.
   - number: 819
     title: 's(344) ≤ 18.992567544845: registration request'
     author: amundsk
