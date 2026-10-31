@@ -5,7 +5,7 @@ title: Register the candidates below the new houses at 130, 293 and 307 (regular
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: bold-ritchie-l8
 labels:
   - validation
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T09:17:32.462Z
-updated_at: 2026-10-31T14:01:17.141Z
+updated_at: 2026-10-31T17:38:10.875Z
 started_at: 2026-10-31T11:48:22.244Z
 ---
 Evan Daniel's regularizer (regularize_evand run, run adopt-2026-10-31-n130-307-evand, retained under packing/cases/regularized_drawings/think-3guf-2026-10-31/ on #852) solved two of the new witnesses the 31 October adoption wrote to exact KKT local minima below the house best packing's side:
@@ -56,3 +56,5 @@ The decision table held both at row 3 (register first), and the selection lists 
 - **Coordinator's decision (31 October)**: do not adopt. T-261 (307), T-262 (293) and T-263 (130) are registered at S1, V3 with C held at C1 (below the stage 4 exit, so select_houses takes none), with the review listed (accepted) and credits per the review: 130 Couzo's packing as T-259 credits it; 307 ntumlnoob's refined by Couzo; 293 Daniel's packing and construction (builds_on, exact re-assembly only, no regularizer).
 - **Certificates (RV-5)**: the run's solve certificates at 130 and 307 (9d4b4c29..., f5474910...) and the review's written 293 with the house's own strip placement, a column of 17 flush top plus a row of 16 (10eac4aa...), held pose for pose to T-257's 260 plus the strip. The drawn views are no longer registered; they are kept only as the review's inputs.
 - **Owner questions**: RV-3 (all three: is such a re-certification a new result at any print, only across it, or at none? The review recommends none); RV-4 (293: is s_260 + 1 already #845's own report via its recipe?); think-ikku RV-1 (130). think-4z8z (adoption plumbing) applies only if the answers keep any of them.
+
+2026-10-31 bold-ritchie-l8, after review A of #861 (A1 blocking): **held unregistered.** The coordinator chose review A's option (a), which is the stage 4 review's own proposal: none of the three candidates is registered until the owner answers RV-3 (all), RV-4 (293) and think-ikku's RV-1 (130). Removed from #861 (commit 6454ae2e7): T-261 to T-263, the four E-register-candidates-2026-10-31-* evidence entries and their deferrals, the census rows, and the review's two route verifiers (V-ruu2-review-route-sat/-area), which wait with the evidence. Kept: the package packing/cases/register_candidates/think-ruu2-2026-10-31/ (certificates n-130/n-293/n-307.cert, the receipts on both maintained routes and the sharp controls, measure/, the review's code, out/ and inputs/), the mapped review record with a dated disposition note, V-register-candidates (text corrected: the 293 certificate was written by the review lane, whose routes share qio.py with the builder, so they are not clean-room there), and the tool and its tests. The earlier notes' T-261/T-262/T-263 numbers no longer exist; T-261 is now #545's grade-C claim. The select_houses KeyError that registration would expose, review A's A8 credit point at 293, and the registration order are on think-4z8z. This bead stays open for the owner's answers.

@@ -5,7 +5,7 @@ title: "Import Evan Daniel: grade-C local minima at 233 configurations of field 
 kind: task
 status: in_progress
 priority: 3
-version: 13
+version: 14
 delegate: bold-ritchie-l8
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:56:06.761Z
-updated_at: 2026-10-31T16:04:49.605Z
+updated_at: 2026-10-31T17:38:13.449Z
 started_at: 2026-10-12T14:33:44.161Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
@@ -160,3 +160,5 @@ claude/intake-2026-10-23-theorem-c-review (draft PR https://github.com/jlevy/squ
 - **Reply**: the updated #545 reply draft is in think-6gti (answer bead). It supersedes the 23 October draft here; post it after merge, on the owner's word.
 
 **2026-10-31 (L8, #861): what this replay clears on the site.** T-264 is registered at V3/C1. By `devtools.result_status.open_issues`, its report entry's 23 October read (external_review defect-found, C-1, repaired in that review) stands while the entry is below C2, so the results page shows T-264 as *incomplete*, the second such result after T-007; `tests/test_site_result_filters.py` pins `["t-264", "t-007"]`. Passing this replay moves T-264 to C3, makes it *confirmed*, and that test's list goes back to `["t-007"]`.
+
+2026-10-31 bold-ritchie-l8, after review A of #861: **the grade-C claim is T-261** (it was T-264 on the branch; the three project candidates ahead of it were taken out unregistered). Everything else stands: V3/C1, S2, the three evidence entries, the two think-8xy2 deferrals, C3 on think-mtah. The *incomplete* status noted above is now an owner question, think-xyek (review A's A4: the replay would clear it mechanically without touching C-1). The reply draft in think-6gti is to read T-261.

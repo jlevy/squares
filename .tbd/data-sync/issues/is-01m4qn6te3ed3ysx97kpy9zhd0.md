@@ -5,7 +5,7 @@ title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record s
 kind: task
 status: open
 priority: 3
-version: 15
+version: 16
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:55:58.146Z
-updated_at: 2026-10-31T13:37:24.926Z
+updated_at: 2026-10-31T17:37:32.720Z
 started_at: 2026-10-12T14:33:40.570Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
@@ -63,3 +63,5 @@ blocked_on: think-10m1
 > We wrote a checker from the theorem after reading gradec.py. It shares no code with yours (Python fractions, no python-flint), so the confirmation is an independent re-implementation. It decided all 233 VALID, including that each record is a packing, which gradec.py leaves to verify_exact.py. It agrees with your certificates on rows, ranks, dim F, dim W and the moving squares, and took 24 CPU-minutes for all 233. Row by row, the quadratic identities for the affine null vectors reduce to the lifts vanishing at the angle of each square that owns a slipping side. So each lift is one linear solve, and an LDL^T replaces the permutation sums. The two walls your 17 timeouts hit should be avoidable this way. None of the 17 was run here, though, and most are larger than anything that was: dim F up to 274 against at most 212 here, and dim W up to 16 against 11. If you publish their contacts files, we can run them.
 >
 > The claim is registered as T-264: your 233 configurations as reported local minima under IsLocalMinPacking, verified by our checker, at V3/C1. It reaches C3 once gradec.py itself is replayed here on all 233. By your logs that is about 10.6 CPU-hours, which waits for a budget. Five questions are at the end of the review; the first is whether you would adopt the repaired step in grade-C.md.
+
+2026-10-31 bold-ritchie-l8, after review A of #861: **the grade-C claim is now T-261, not T-264.** The three project candidates that held T-261 to T-263 were taken out of #861 unregistered (held for the owner), so the grade-C entry was renumbered before merge. In the updated draft reply for #545 above, read T-261 wherever it says T-264, including the posting condition ("only if T-261 is still T-261 on main"). Nothing else in the draft changes: V3/C1, C3 on gradec.py's replay (think-mtah, about 10.6 CPU-hours, priced). One addition for the owner before posting: the results page shows the entry as *incomplete* until that replay runs, by result_status's rule for a defect-found read below C2 (see the status-vocabulary bead filed from review A's A4); the reply need not mention it.
