@@ -10010,7 +10010,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "rendered at link revision c51d06d3 into empty site directories, twice from "
             "this tree and once with main's source-coverage.yaml swapped in: "
             "render_packing_methods writes all 43 files byte-identical across the three. "
-            "No PDF was printed; it prints from that HTML. Retain v0.2.7."
+            "Measured again after merging main 32ef0861b (#835), at link revision bb8d5cca "
+            "with that main's source-coverage.yaml swapped in: 43 files, byte-identical "
+            "across the three. No PDF was printed; it prints from that HTML. Retain v0.2.7."
         ),
     ),
 )
