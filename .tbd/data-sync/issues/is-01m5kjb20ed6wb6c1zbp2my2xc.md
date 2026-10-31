@@ -5,7 +5,7 @@ title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666,
 kind: task
 status: in_progress
 priority: 1
-version: 24
+version: 25
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: bold-ritchie-l4
 labels:
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-31T04:58:58.237Z
+updated_at: 2026-10-31T05:19:59.387Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -69,3 +69,10 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 2026-10-24 c-w7-1024, PR #793 round 2 (review D, follow-up; one push): head b28584668e4a55df4e6202694c959ae8be39c15c. Fixed in 4e7a218b3: D1 (stream allowance starts at MAX_HEADERS and grows per admitted member; C1 test at the shipped bounds; review C 512 MiB records refused at the defaults, peak RSS 55 MiB), D2 (member-read errors are ShardError), D3 (a link anywhere below the members directory refused), D4 (release_sides clone branch tested), D5 (receipt without limit refused), D6 (header_side in both branches). 5 of 5 mutations detected. Merged main 3480b5fd3 (#792) as 96bbef3b5: one conflict, two no-change records in release.py, both kept; W7 record re-measured in b28584668 (51/51 identical); release_pin current (3a9c5b60); site_urls --history-ref origin/main passes. Validation: 1,059 tests passed, rebuild driver clean, --records 53/53 (148 s). CI green first attempt: Packing validation 40120155316, Certificate page 40120155325, mergeability 40120151956; PR MERGEABLE. Reply D: issuecomment-6387969029.
 
 2026-10-24 coord-intake-1024: W7 landed as PR #793 (dd0061553, merged 2026-10-24T18:32:59Z) after review A (senior), B (correctness), C (security) and follow-up D, all dispositioned; hosted CI green first attempt at b28584668. Phase 1 done. Next: R1 (records: #666, #719, #715, Couzo 5a299b4, Fang, Barnett; owner to publish data/couzo-715-certificates-v1 first, D4), then R2 (#732 under N2, owner publishes the #732 shards), R3 (#763's 233 rows, 964ee2b's 6, 43f666c's 831 recipes after think-gn29), R4 (held rows after D5/kzme/N1/N5). Open: think-z236, think-j83l, think-eyrn, think-nnk7, think-tj3x.
+
+2026-10-31 bold-ritchie-l4 (intake pass think-3guf, lane L4). PR #835 brought up to main 3978a7f61 (one conflict in release.py, both no-change records kept), its record re-measured (69 files byte-identical), --records and 204 affected tests green locally; pushed 3954a5d64. R1 NOT started; its readiness, read-only:
+- Repository access: in this sandbox a blobless clone of a watched repository into the worktree's ignored attic/ works (tested on TheSnakeFang/squarepack-certs), and raw.githubusercontent.com serves files at a pin. codeload tarballs and zenodo.org are refused by the proxy (403). So the 26 October blocker "read access to five watched repositories" no longer holds here.
+- New reports above 1024 since the plan: #836 (Karimi v5.0, 5,308 rows at 1182-9944, 2026-10-26T12:18:36Z; think-7yrs), V1.0 of his filled-end set (comment on #836, 2026-10-27T04:16:22Z, 4,571 rows), #847 (V2.0, 2026-10-30T21:56:32Z, 5,134 rows at 1182-9946; think-r94q); the issues also name newer heads, Couzo 712c6a6 (28 October) and Mishapolk ab8e833. The walk is read on the day R1 starts from every report to date, so it must read the three Karimi deposits, all on zenodo.org: R1's walk needs #836's and #847's stage 2 first (zenodo.org reachable, or the owner supplies the three files). Reading the walk at a date before #836 to avoid them would break the plan's rule.
+- D4 (hosting Couzo's certificates above 1024): the 23 October disposition is a hosted release the owner publishes after a lane stages its manifest; no lane has staged it, so the owner has had nothing to publish. By OR-18's count the set is about 9.1 MB as zlib stores it (think-cyal, 98 certificates, 51.2 MB checkout), where the #715 packet kept its certificates to 1024 in Git at 4.42 MB stored, and check_added_blobs admits 48 MiB a pull request and 5 MiB a blob. DECISION for the coordinator or owner: keep hosting (R1 stages the manifest, the owner publishes before R1 merges) or commit them to Git, which removes the owner's step.
+- R5 grows (think-5dc3): #836's v5 rows, which two_strip_checker reads, land with #799's, about 9.2 CPU-h more (think-gw1s). The filled-end sets need W9 (think-fuwd) and a slice of their own after R5, about 11.8 CPU-h for V2.0, up to 21.3 with V1.0 (think-qczx); the owner question Q-847a (how V1.0's withdrawn and restated rows stand) is on think-r94q.
+- Requests entries for #836 and #847 (triage pending) and their intake labels: branch claude/bold-ritchie-xo28us-beyond.
