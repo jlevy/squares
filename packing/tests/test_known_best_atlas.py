@@ -128,7 +128,7 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # grid), to Evan Daniel's issue 680 packet (T-220, think-jh4w), and 229 (from
     # Kingbird), to his issue 674 packet (T-199), and on 20 October 227 and 260 (both from
     # Kingbird), to Joost de Winter's issue 668 packet (T-196), and on 21 October 260 again,
-        # to Francisco Couzo's issue 678 packet (T-223, think-xu4d), and on 31 October 293 and
+    # to Francisco Couzo's issue 678 packet (T-223, think-xu4d), and on 31 October 293 and
     # 299 (both from Kingbird), to Evan Daniel's issue 845 and issue 824 update packets.
     "n=1..324": {
         "exact-grid": 174,
@@ -2377,7 +2377,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # Kristiansen packing, and his name joined it. On 25 October 2026 the adoption at 268 and
     # 303 (T-240) credits Kirill Tymchishin's and Vladislav Lavrentev's Kaggle notebook
     # packings as Francisco Couzo refined them, so both names join it, and Kristiansen's,
-        # which held only 303, leaves. On 31 October 2026 the adoption at 232 and 307 (T-256)
+    # which held only 303, leaves. On 31 October 2026 the adoption at 232 and 307 (T-256)
     # credits Alex Chilton's and ntumlnoob's Kaggle notebook packings as Francisco Couzo
     # refined them, so both names join it.
     assert len(expected_names) == 30
@@ -2417,7 +2417,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # longer from Mishapolk's KKT refinements there, which still hold other counts. The same
     # pass draws 182 from Evan Daniel's issue 806 packet (T-243), one more source with no new
     # name, and no longer from PingYou Ltd's PR 574 certificates there, which still hold
-        # other counts. The adoption of 31 October draws from four more, Couzo's issue 844
+    # other counts. The adoption of 31 October draws from four more, Couzo's issue 844
     # packet (232, 307), Evan Daniel's issue 845 and issue 824 update packets (172, 204, 260,
     # 293; 299) and Polkovskyi's issue 846 packet (130), and no longer from his n204 packet
     # (T-231), which held nothing else.
@@ -4621,7 +4621,7 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-        # 30 since the adoption at 232 and 307 of 31 October 2026 (see the credits test above).
+    # 30 since the adoption at 232 and 307 of 31 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
         == 30
