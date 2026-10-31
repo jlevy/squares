@@ -25635,7 +25635,12 @@ issues:
       did not know the k^{2/5} and k^{3/8} reports, agrees that if either holds Conjecture 1
       fails for large K, and will withdraw it in the next version; his data show only that
       this construction reaches the records at order sqrt K for K <= 100. No answer changes a
-      row, a credit or a lineage the record states.
+      row, a credit or a lineage the record states. They were first answered on #836, on 31
+      October (https://github.com/jlevy/squares/issues/836#issuecomment-6545300576): the
+      wording of (3) in place, the description of (1) kept, and the digests and version 4 of
+      (2) not used. (4), the withdrawal of Conjecture 1, also stated in #836's body, was
+      acknowledged by #836's acknowledgement of 31 October (issuecomment-6540432165), and
+      think-x0kn records the withdrawal in this entry's summary and notes.
 
       maximusrufus's comment of 26 October 2026, 14:40:33Z
       (https://github.com/jlevy/squares/issues/799#issuecomment-6418810958), read on 31
@@ -26909,6 +26914,20 @@ issues:
       reported:
       - result: rows-v5
       - result: filled-end-v1
+      outdated:
+      - 'that where v5 is lower (1,434) its row is recorded after version 2''s, with no condition;
+        a lower side is recorded only where the walk finds it below every earlier report at its
+        count and Göbel''s construction (review A2 of #853), as the follow-up of 31 October
+        (issuecomment-6545300576) states'
+    - url: https://github.com/jlevy/squares/issues/836#issuecomment-6545300576
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: rows-v5
+      beads: [think-llit]
+      corrects:
+      - https://github.com/jlevy/squares/issues/836#issuecomment-6540432165
     close_when: >-
       The v5 rows the walk above 1024 records are on main, each decided by the maintained
       two-strip checker, V1.0's rows are dispositioned with #847's, and the reply on main says
@@ -26931,6 +26950,13 @@ issues:
       (review A1 of #853). At ad8b094 the zip is committed whole, so no file is loose; its
       regenerate.py is version 2's retained copy byte for byte, and its README.md, with no
       digest and no listing to check, is pinned by the commit alone and read by no checker.
+      The follow-up of 31 October (after #859) corrects the acknowledgement's bullet "where
+      v5 is lower (1,434), its row is recorded after version 2's", which stated no
+      condition: a lower side is recorded only where the walk finds it below every earlier
+      report and Göbel's construction, and none of the 5,308 rows is recorded yet (R1,
+      think-llit, waits on the owner's D4). The reply when the rows land says count by count
+      how many of the 1,434 and 2,484 were recorded and why each other was not (review A2 of
+      #853). The same follow-up first answers the author's #799 comments of 25 October.
   - number: 842
     title: 's(44) = 7: registration request'
     author: moh63-dev
@@ -27083,6 +27109,19 @@ issues:
       kind: acknowledgement
       reported:
       - result: filled-end-v2
+      outdated:
+      - 'that the filled-end checker would decide each row "as two_strip_checker does for #799 and
+        #836", though two_strip_checker then refused v5''s header and first read it in #859
+        (review A2 of #853), as the follow-up of 31 October (issuecomment-6545302398) states'
+    - url: https://github.com/jlevy/squares/issues/847#issuecomment-6545302398
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: filled-end-v2
+      beads: [think-llit]
+      corrects:
+      - https://github.com/jlevy/squares/issues/847#issuecomment-6540433314
     close_when: >-
       The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
       checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
@@ -27100,4 +27139,9 @@ issues:
       is written from them (review A1 of #853). Zenodo's listing was unreachable; the three
       programs are bound instead by the V1.0 archive's stated digest, whose members they
       equalled byte for byte when the packet was written; from then on Git keeps the bytes
-      (OR-16). README_filled.md is pinned by the commit alone, and no checker reads it.
+      (OR-16). README_filled.md is pinned by the commit alone, and no checker reads it. The
+      follow-up of 31 October (after #859) corrects the acknowledgement's line that the
+      filled-end checker would work "as two_strip_checker does for #799 and #836": then
+      two_strip_checker refused v5's header, and it first read v5's records.csv in #859. It
+      says no V2.0 or V1.0 row is recorded yet (W9, then R1, which waits on the owner's D4;
+      V1.0 on Q-847a), and asks the V2.0 and V1.0 licence (think-nu37).
