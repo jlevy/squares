@@ -2678,6 +2678,24 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The replies of 31 October on #824 and #843 to #846, recorded after #852 merged: "
+            "each issue's verdict comment and final reply under its replies, four issues "
+            "closed, and #846's note, against main e482345fe (#852). Rendered by "
+            "render_packing_methods at link revision "
+            "0000000000000000000000000000000000000000 into empty site directories, once from "
+            "this tree at 1be3ab2a0 and once with main's result-requests.yaml swapped in: "
+            "43 files each, byte-identical across the two. No PDF was printed; it prints "
+            "from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
