@@ -5,7 +5,7 @@ title: "Import Khalili and Gharabaghi: s(44) = 7 by a closed mixed cover (#842)"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l3
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:09:47.344Z
-updated_at: 2026-10-31T05:52:03.980Z
+updated_at: 2026-10-31T06:01:35.702Z
 started_at: 2026-10-31T05:09:55.099Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#842 (moh63-dev, Mohsen Khalili and Sara Gharabaghi, opened 2026-10-26T23:46:23Z; one comment, 2026-10-29T15:58:14Z, announcing release v1.1; labelled `intake` on 2026-10-31 by this lane under the github-workflows grant): "s(44) = 7: registration request". Intake pass 2026-10-31 (epic think-3guf), lane L3 (bold-ritchie-l3, tbd-strong sub-agent), branch claude/bold-ritchie-xo28us-s44. Followed the #594/#610 imports (think-osvq, think-ribz) and T-066's zmx2 route (s(59) = 8).
@@ -61,7 +61,7 @@ See the answer section added when the PR is open.
 
 ## Notes
 
-2026-10-31, lane L3 (bold-ritchie-l3). Claimed with tbd start --as bold-ritchie-l3 (claimed). Branch claude/bold-ritchie-xo28us-s44, pushed: 65b1f2d (packet, tools, D4 replay), 1994011 (full replay, controls, review programs), a2ee6db (register, case, requests, coverage, verifiers, views). A container restart at about 05:27Z stopped the --full sweep after 29,812 of 39,200 roots; resumed from its root log by the same command and finished at 05:35:45Z.
+2026-10-31, lane L3 (bold-ritchie-l3). Draft PR https://github.com/jlevy/squares/pull/851 (labels intake, S3). Claimed with tbd start --as bold-ritchie-l3 (claimed). Branch claude/bold-ritchie-xo28us-s44, pushed: 65b1f2d (packet, tools, D4 replay), 1994011 (full replay, controls, review programs), a2ee6db (register, case, requests, coverage, verifiers, views). A container restart at about 05:27Z stopped the --full sweep after 29,812 of 39,200 roots; resumed from its root log by the same command and finished at 05:35:45Z.
 
 ## Stage results
 
@@ -77,7 +77,7 @@ See the answer section added when the PR is open.
 
 @moh63-dev, thank you for the registration request, and for v1.1 with the zm_mixed.py driver and the log audit.
 
-Your result is on main: **T-252, s(44) = 7, at V3/C3 — confirmed, reproduced with the producer's code**, and [n = 44](https://squaremath.org/cases/44.html) now reads proved. The packet retains moh63-dev/s44-equals-7 at b5b1bc9 (v1.1), whose certificate is byte for byte v1.0's (c9fde0f1…cae0).
+Your result is on main (PR #851): **T-252, s(44) = 7, at V3/C3 — confirmed, reproduced with the producer's code**, and [n = 44](https://squaremath.org/cases/44.html) now reads proved. The packet retains moh63-dev/s44-equals-7 at b5b1bc9 (v1.1), whose certificate is byte for byte v1.0's (c9fde0f1…cae0).
 
 What ran here: Evan Daniel's zmx2, zmx2.rs e2bb84e9 (the file at evand/square-packing 659ee62) built from this repository's retained copy, over all 4,900 D4 roots and all 39,200 unreduced roots, none uncertified; every root's census equals your published logs. Two mutated covers, each without one D4 orbit (the heaviest point orbit, the heaviest segment orbit), are refused. This is a reproduction with your checker, not a second implementation.
 
