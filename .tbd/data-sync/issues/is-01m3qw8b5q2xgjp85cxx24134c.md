@@ -5,7 +5,7 @@ title: Independently validate or refute the n11 global-optimality claim
 kind: task
 status: in_progress
 priority: 0
-version: 29
+version: 30
 spec_path: docs/project/reviews/review-2026-09-29-n11-optimality.md
 delegate: codex-coordinator
 labels:
@@ -34,7 +34,7 @@ due_date: 2026-09-30T00:00:00.000Z
 hold: null
 hold_until: null
 created_at: 2026-09-30T00:43:26.262Z
-updated_at: 2026-10-07T06:11:55.442Z
+updated_at: 2026-10-31T05:54:49.179Z
 started_at: 2026-09-30T00:55:24.787Z
 ---
 TOP PRIORITY per user: independently validate or refute
@@ -67,3 +67,4 @@ future exposition children; it does not indicate an unresolved proof premise.
 Current CI repair is think-dh2d; fresh replay automation think-e2ot is under tooling
 epic think-7nkq. Optional Rust performance and full separate external rectangle replay
 do not block T-060.
+2026-10-31 bold-ritchie-l5 (intake pass of 31 October, epic think-3guf, lane L5): the 8 October commits of Queuingtheorydotcom/11SquaresOptimal are retained. The packet n11-optimality-paper-2026-10-09 pins 4262f07c7723428c1725bb757ed06d0c4d28be1a (still the head, full clone 2026-10-31T05:07Z) and retains README.md and paper/ (the revised manuscript eleven-squares-synthesis.tex, the geometric-foundations companion, paper/README.md and SHA256SUMS); the verification supplement eleven-squares-publication.zip (5,426,101 bytes, 387 files, SHA-256 9ece0254a4c08cb3d68bd2332f4250b935cf5b6e02ce4c1bccabbff2914fba03) is pinned by size and digest only (OR-18). acquire_source --check passes. The evidence update: E-n011-global-optimality-report's limitations name the revision as changing none of the payloads T-060 cites; a source-coverage entry names the packet. No rating moves; nothing was extracted or run. Open for this bead: a reading of the revised manuscript against the record's review, and the supplement's --full replay, which the author reports not yet run end to end. Branch claude/bold-ritchie-xo28us-evidence, draft PR #850.
