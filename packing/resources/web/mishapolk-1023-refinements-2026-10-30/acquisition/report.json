@@ -343,7 +343,7 @@
         "Polkovskyi"
       ],
       "lineage": "builds-on-project",
-      "credit": "Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit",
+      "credit": "Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit, Levy",
       "short_credit": "Polkovskyi after Daniel et al.",
       "note": "Thirteen complete exact certificates first committed in ten commits of 23 October 2026 (e386aab to fbc1749) at Mishapolk/square-packing-records and unchanged at 52aa2672c74c91931686d60a49bdf97ec798291c, which the packet pins, with no issue: re-certifications about 1e-19 below the houses at 154, 155, 183, 211, 227, 236, 237, 241 and 271, and certificates at 88, 126, 152, 204 and 270 the ledger does not record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-1023-refinements-2026-10-30/."
     }

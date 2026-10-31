@@ -110,7 +110,7 @@
         "Couzo"
       ],
       "lineage": "builds-on-project",
-      "credit": "Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel",
+      "credit": "Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy",
       "short_credit": "Couzo after Chilton et al.",
       "note": "Three complete exact certificates at franciscouzo/square-packing@712c6a6e9ef58a9521784e6b7e236af813422de7, committed on 28 October 2026 and reported on issue 844: refinements, by the author's searches with code the issue names, of Alex Chilton's (232) and ntumlnoob's (260, 307) Kaggle notebook packings. Retained on the presumption of permission from submission (think-cnn7; think-m8f4) and as factual data. Claude assistance disclosed. No optimality claim. Retained in web/couzo-issue844-2026-10-28/."
     }

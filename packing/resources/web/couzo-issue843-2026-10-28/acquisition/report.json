@@ -52,7 +52,7 @@
         "Couzo"
       ],
       "lineage": "builds-on-project",
-      "credit": "Couzo after Chaoweeraprasit, Gupta, PingYou Ltd",
+      "credit": "Couzo after Chaoweeraprasit, Gupta, PingYou Ltd, Levy",
       "short_credit": "Couzo after Chaoweeraprasit et al.",
       "note": "One complete exact certificate, certificates/n130.cert, first committed at franciscouzo/square-packing@3a4d95c72083da3c3fd5acc4b1d0e94479c5422d on 27 October 2026 and unchanged at the head 712c6a6e9ef58a9521784e6b7e236af813422de7 the packet pins, reported on issue 843: s(130) <= 466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000, a packing the issue calls new, found from PR #574's by the author's searches. Retained on the presumption of permission from submission (think-cnn7; the licence follow-up is think-m8f4) and as factual data. Claude assistance disclosed. No local or global optimality claim. Retained in web/couzo-issue843-2026-10-28/."
     }

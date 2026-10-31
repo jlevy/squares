@@ -76,7 +76,7 @@
         "Couzo"
       ],
       "lineage": "builds-on-project",
-      "credit": "Couzo after ntumlnoob, Daniel",
+      "credit": "Couzo after ntumlnoob, Daniel, Levy",
       "short_credit": "Couzo after ntumlnoob et al.",
       "note": "Two complete exact certificates, certificates/n260.cert and n307.cert at franciscouzo/square-packing@a5a5d76790679902ef57270f6d4c2d01786c5a56, committed on 28 October 2026 with no issue: refinements by the author's web app, with an adaptation of Evan Daniel's fq, of ntumlnoob's Kaggle notebook packings at 260 and 307. 712c6a6, the head, replaces both with issue 844's lower certificates and keeps these bytes under certificates/parents/. Retained as factual data, and on the presumption of permission the author's submissions of the repository (issues 843 and 844) carry (think-cnn7; think-m8f4). Claude assistance disclosed. Retained in web/couzo-a5a5d76-2026-10-28/."
     }

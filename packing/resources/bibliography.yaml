@@ -4380,7 +4380,7 @@ sources:
     venue: GitHub
     dated: '2026-10-30'
     lineage: builds-on-project
-    credit: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit
+    credit: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit, Levy
     short_credit: Polkovskyi after Daniel et al.
     note: >-
       Thirteen complete exact certificates first committed in ten commits of 23 October 2026 (e386aab
@@ -4395,7 +4395,7 @@ sources:
     venue: GitHub
     dated: '2026-10-28'
     lineage: builds-on-project
-    credit: Couzo after Chaoweeraprasit, Gupta, PingYou Ltd
+    credit: Couzo after Chaoweeraprasit, Gupta, PingYou Ltd, Levy
     short_credit: Couzo after Chaoweeraprasit et al.
     note: >-
       One complete exact certificate, certificates/n130.cert, first committed at franciscouzo/square-packing@3a4d95c72083da3c3fd5acc4b1d0e94479c5422d
@@ -4412,7 +4412,7 @@ sources:
     venue: GitHub
     dated: '2026-10-28'
     lineage: builds-on-project
-    credit: Couzo after ntumlnoob, Daniel
+    credit: Couzo after ntumlnoob, Daniel, Levy
     short_credit: Couzo after ntumlnoob et al.
     note: >-
       Two complete exact certificates, certificates/n260.cert and n307.cert at franciscouzo/square-packing@a5a5d76790679902ef57270f6d4c2d01786c5a56,
@@ -4429,7 +4429,7 @@ sources:
     venue: GitHub
     dated: '2026-10-28'
     lineage: builds-on-project
-    credit: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel
+    credit: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
     short_credit: Couzo after Chilton et al.
     note: >-
       Three complete exact certificates at franciscouzo/square-packing@712c6a6e9ef58a9521784e6b7e236af813422de7,
@@ -4474,7 +4474,7 @@ sources:
     venue: GitHub
     dated: '2026-10-30'
     lineage: builds-on-project
-    credit: Polkovskyi after Couzo, Xu, Daniel, Ostashev
+    credit: Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy
     short_credit: Polkovskyi after Couzo et al.
     note: >-
       Fourteen complete exact certificates at Mishapolk/square-packing-records@52aa2672c74c91931686d60a49bdf97ec798291c,

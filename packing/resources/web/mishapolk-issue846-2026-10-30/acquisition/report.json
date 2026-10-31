@@ -385,7 +385,7 @@
         "Polkovskyi"
       ],
       "lineage": "builds-on-project",
-      "credit": "Polkovskyi after Couzo, Xu, Daniel, Ostashev",
+      "credit": "Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy",
       "short_credit": "Polkovskyi after Couzo et al.",
       "note": "Fourteen complete exact certificates at Mishapolk/square-packing-records@52aa2672c74c91931686d60a49bdf97ec798291c, committed on 30 October 2026 (204, 211 and 241 first on 23 October) and reported on issue 846: refinements of others' packings below the print at 105, 146, 156, 229 and 308, a 2e-14 dilation of Francisco Couzo's issue-843 packing at 130, and eight counts the ledger does not record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-issue846-2026-10-30/."
     }
