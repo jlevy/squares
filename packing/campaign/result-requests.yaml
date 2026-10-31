@@ -25511,7 +25511,14 @@ issues:
     - think-x0kn
     - think-llit
     answer_bead: think-7yrs
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/836#issuecomment-6540432165
+      date: '2026-10-31'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: rows-v5
+      - result: filled-end-v1
     close_when: >-
       The v5 rows the walk above 1024 records are on main, each decided by the maintained
       two-strip checker, V1.0's rows are dispositioned with #847's, and the reply on main says
@@ -25580,7 +25587,13 @@ issues:
     - think-7yrs
     - think-llit
     answer_bead: think-r94q
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/847#issuecomment-6540433314
+      date: '2026-10-31'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: filled-end-v2
     close_when: >-
       The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
       checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
