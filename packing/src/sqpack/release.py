@@ -10087,6 +10087,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The records after #833 (think-6m6e): #613's final reply and close, and the "
+            "follow-ups of 31 October on #316, #797, #799, #804 (which corrects the 26 "
+            "October licence statement) and #824, in result-requests.yaml; no register "
+            "entry, side, bound or credit changes. Against main b95c5f69c (#833): "
+            "rendered at link revision b95c5f69 into empty site directories, twice from "
+            "this tree and once with that main's result-requests.yaml swapped in, "
+            "render_packing_methods writes its 43 files byte-identical across the three. "
+            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 
