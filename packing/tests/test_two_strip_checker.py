@@ -567,16 +567,44 @@ def _summary_holds(deposit: checker.Deposit, expected: tuple[int, int, int, int]
 
 
 def test_version_5_s_receipts_hold() -> None:
-    """Version 5's two receipts read back: every decision and control of its 5,308 rows
+    """Version 5's receipts read back: every decision and control of its 5,308 rows
     derived again and its author's column counted again (51 no, 5,257 yes), 1182's and
     9912's certificates written out again to the digests stated, and the replay sample's
-    five counts decided on both routes with their six controls refused."""
+    five counts decided on both routes with their six controls refused. The full replay
+    (think-gw1s) covers all 5,308 rows in 66 receipts, one per K from 35 to 100, every
+    certificate the decided one and passed by both routes, and both routes refuse all
+    396 controls at its 66 controlled counts; the replay sample's counts are its rows
+    too, with the same certificates and candidate pairs."""
     assert checker.check(deposits=(checker.V5,)) == []
     _summary_holds(checker.V5, (5308, 31499439, 4618, 4))
     sample = json.loads(checker.replay_path(checker.V5).read_text(encoding="utf-8"))
     assert [row["n"] for row in sample["rows"]] == [1182, 1253, 6089, 9912, 9944]
     pairs = [row["decision"]["candidate_pairs"] for row in sample["rows"]]
     assert pairs == [2766, 2895, 13869, 22246, 22513]
+    summary = json.loads(checker.V5.route_summary.read_text(encoding="utf-8"))
+    assert summary["coverage"] == {
+        "rows": 5308,
+        "deposit_rows": 5308,
+        "verified": 5308,
+        "passed_sqpack": 5308,
+        "passed_independent": 5308,
+        "ks": 66,
+        "controlled_counts": 66,
+        "controls": 396,
+        "refused_by_sqpack": 396,
+        "refused_by_independent": 396,
+    }
+    assert [line["k"] for line in summary["by_k"]] == list(range(35, 101))
+    assert summary["squares"] == 31499439
+    routed = {
+        item["n"]: item
+        for k in range(35, 101)
+        for item in json.loads(checker.V5.route_part(k).read_text(encoding="utf-8"))["rows"]
+    }
+    for row in sample["rows"]:
+        found = routed[row["n"]]
+        assert found["certificate_sha256"] == row["certificate_sha256"]
+        assert found["candidate_pairs"] == row["decision"]["candidate_pairs"]
 
 
 def test_the_receipts_hold_with_the_sample_s_digests() -> None:

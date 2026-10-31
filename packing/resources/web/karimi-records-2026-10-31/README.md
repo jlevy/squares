@@ -20,16 +20,20 @@ zenodo.org was still refused by the session’s network policy when the packet w
 written, so no Zenodo listing was read. The rows are above 1024, where the record keeps
 upper bounds as dated rows of its coverage register, decided in report order by
 think-llit’s walk above 1024, which does not exist yet. So this packet records no row and
-no register entry; it retains the sources and the stage 4 samples that rest on them.
+no register entry; it retains the sources and the stage 4 checks that rest on them: two
+samples, and the full replay of v5 on both routes.
 
 ## Custody
 
 `devtools.acquire_source` wrote the packet from the declaration in `acquisition/`, from a
 full clone at the pin; every file is bound to its Git blob at `ad8b094`, and
 `acquisition/upstream-subtree.sha256` lists all seven. The scope is the whole tree:
-990,199 bytes, all retained. The three receipts add 2,156,813 bytes, 2,128,349 of them
-`two-strip-decisions-v5.json`, so the packet is about 3.16 MB in a checkout; OR-18 admits
-it, and `check_added_blobs` passes.
+990,199 bytes, all retained. The receipts add 4,488,333 bytes: 2,128,349 for
+`two-strip-decisions-v5.json`, 28,464 for the two samples, and 2,331,520 for the full
+replay of v5, 66 receipts of at most 169 lines each and their summary. So the packet is
+about 5.5 MB in a checkout; OR-18 admits it, and `check_added_blobs` passes. No receipt
+is stored as gzip: `two-strip-decisions-v5.json` is over the 1,000 lines at which
+`devtools.retained_data` would, and think-rsqv moves the family to that convention.
 
 Each digest the author stated holds:
 
@@ -94,6 +98,21 @@ lowered and the largest, the written-out certificate passes both maintained exac
 of `devtools.couzo_678_replay`, and both refuse all six of its controls. Near 9944 a
 count costs 14.7 CPU-seconds for the positive and 120 for the controls.
 
+**v5, every row on both routes** (`receipts/replay-v5/k035.json` to `k100.json`, one
+receipt per K, and their summary `receipts/replay-v5.json`; think-gw1s):
+`two_strip_checker replay-all` writes out the certificates of all 5,308 rows, and both
+maintained exact routes pass every one. Each certificate is the one the decisions
+receipt names, by its SHA-256. At one count per K, 66 in all, chosen by the checker’s
+rule (the least fit slack, then the smallest count), both routes refuse all six
+controls: 396 of 396 by each. The routes decided 31,499,439 squares and 71,808,283
+candidate pairs, 70,690,393 of them touching. The least wall clearance and the least
+pair gap are both 0, since squares touch the walls and each other, which the closed
+contract allows. The run took 47,031.4 CPU-seconds, 13.1 CPU-hours (12.1 for the
+positives, 0.9 for the controls), on two workers from 17:08:54Z to 23:54:32Z on 31
+October. Six controls at every count would have cost about eight times the positives,
+over the compute cap. This decides that each written-out packing is a packing; which
+rows the record takes is still the walk’s.
+
 **V2.0, a sample on both routes** (`receipts/filled-end-replay-sample.json`):
 `devtools.filled_end_sample` writes out the rows at 1182, 2505, 4990, 7500 and 9946 with
 the author’s own `build`, from the retained `filled_ends.py`, and checks that each has
@@ -113,7 +132,9 @@ the full validation is think-qczx’s.
 
 These programs are not yet registered in `frontier/verifiers.yaml` and no evidence entry
 cites their receipts: the rows they serve are not recorded until the walk above 1024
-records them (R5 for v5 with #799’s, a later slice for the filled-end sets).
+records them (R5 for v5 with #799’s, a later slice for the filled-end sets). For v5 the
+full replay is the stage 4 evidence those rows will cite, whichever of them the walk
+records.
 
 ## Credit and Licence
 
@@ -154,6 +175,7 @@ From `packing/`, with the project interpreter:
 python -m devtools.acquire_source karimi-records-2026-10-31 --check
 python -m devtools.two_strip_checker check            # every deposit, v5 included
 python -m devtools.two_strip_checker replay-sample --version 5 --workers 2
+python -m devtools.two_strip_checker replay-all --version 5 --workers 2   # resumes by K
 python -m devtools.filled_end_sample check [--replay]
 python -m devtools.filled_end_sample replay --workers 2
 ```
