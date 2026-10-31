@@ -5,11 +5,11 @@ title: "Result status: does a defect-found read stay open after a review that en
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-10-31T17:37:52.341Z
-updated_at: 2026-10-31T17:37:52.341Z
+updated_at: 2026-10-31T18:43:09.428Z
 ---
 Owner question on the result-status vocabulary (plan-2026-10-01-result-status, provisional), raised by review A of #861 (A4, https://github.com/jlevy/squares/pull/861#pullrequestreview-5724017016).
 
@@ -28,3 +28,7 @@ Owner question on the result-status vocabulary (plan-2026-10-01-result-status, p
 - Budget status: gated on decision (owner).
 - Depends on: the owner's answer.
 - Done when: rule 1 and epistemics.md say which of the two holds, and T-261's status follows it.
+
+## Notes
+
+2026-10-31 bold-ritchie-l8, from review A of #864 (A2, no change made): the #545 reply of 31 October (https://github.com/jlevy/squares/issues/545#issuecomment-6547240858) says "The replay would clear the label by moving T-261 to C3, not by settling the gap", true under today's rule 1, and the next bullet says the label will follow this bead's answer. **If the owner picks option 2** (the replay must not clear T-261's *incomplete*), T-261's status stops moving with C3, and the #545 follow-up that change owes must say that the replay no longer clears the label.

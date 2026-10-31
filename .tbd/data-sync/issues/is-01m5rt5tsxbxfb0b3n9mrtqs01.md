@@ -5,7 +5,7 @@ title: Decide Kim's exact configurations for T-244 at 172 and 263 on both exact 
 kind: task
 status: in_progress
 priority: 3
-version: 13
+version: 14
 delegate: bold-ritchie-l8
 labels:
   - result-import
@@ -17,7 +17,7 @@ deferred_until: null
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:57:44.893Z
-updated_at: 2026-10-31T15:10:49.431Z
+updated_at: 2026-10-31T18:43:11.985Z
 started_at: 2026-10-25T11:43:46.219Z
 ---
 Decide Hyukdong Kim's exact configurations for T-244 (issue #804) at 172 and 263 on both exact routes. T-244 registers s(172) <= S*_172 and s(263) <= S*_263 as reported (V0/C0); each S* is the root of #804's irreducible polynomial of degree 24 and 17.
@@ -60,3 +60,5 @@ Done when: both configurations are decided on both routes and recorded on T-244,
 - **Reply**: the #804 reply draft is in think-8r92.
 
 2026-10-31 bold-ritchie-l8, later: on the coordinator's decision the 263 adoption is parked (think-3trq now depends on think-ot5c and think-ikku; no review lane), since S*_263 is the exact value of the house's own arrangement. The author's comment of 13:27Z publishes all three attachments at HyukdongKim/square-packing-exact-sides f480441e (CC0 1.0); #804's read_through moved there. A later packet may retain the files themselves from that commit (the decision here stands on the derived facts, whose rebuilt bytes have the stated digests), and route B at 297 (think-ozx8) can now fetch n297.minpoly.json. PR #861 head 096027cb0.
+
+2026-10-31 bold-ritchie-l8: **this bead now owns a queued ask on #804** (PR #864, review A's A3): keep the files of t244-exact-configurations.zip themselves (CC0 1.0) in the hyukdongkim-t244-configurations-2026-10-25 packet, from Kim's public copy HyukdongKim/square-packing-exact-sides at f480441e (source: issuecomment-6415293035). The configurations are already decided from the derived facts (T-244 V3/C3, #861); this is custody only and changes no result. check_bead_tree fails a queued ask whose bead has closed, so do not close think-4rzl until the files are in the packet, their digests checked against the record, and the ask marked done in result-requests.yaml #804. The sibling asks are think-9vai (squares-exact-forms.zip) and think-ozx8 (s297-exact-configuration.zip).
