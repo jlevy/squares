@@ -20183,13 +20183,15 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus, and above 1024, where the record holds no row yet. The owner
-        answered on 23 October that these counts are tracked, with no ceiling (D1), and that a
-        construction a source states without a certificate file of its own is a row once a
-        checker this project maintains decides it exactly (D2; think-f2io): 856 of the 1112 are
-        L-border constructions, and the pin writes out an explicit certificate at only 90
-        counts. The 98 certificates they rest on (9.1 MB as zlib stores them) are to be hosted,
-        by the record's D4 disposition, as data/couzo-715-certificates-v1, which the owner
-        publishes. #793 (merged 24 October) lifted the code's ceiling of 1024, carries Göbel's
+        answered on 23 October that these counts are tracked, with no ceiling (D1), and that
+        recipe-only rows (a tiling or L-border recipe on a certificate) become rows, "decided
+        exactly from the recipe by a checker this project maintains" (D2; think-f2io): 856 of
+        the 1112 are L-border constructions, and the pin writes out an explicit certificate at
+        only 90 counts. The 98 certificates they rest on (9.1 MB as zlib stores them) are to be
+        hosted, by the record's D4 disposition of 23 October, as
+        data/couzo-715-certificates-v1, which the owner publishes; think-llit's note of 31
+        October puts that disposition back to the owner, to keep hosting or commit them to
+        Git. #793 (merged 24 October) lifted the code's ceiling of 1024, carries Göbel's
         construction to every count, and adds devtools.construction_checker and the hosted
         reader. The rows wait on R1, the first records slice of think-llit's plan, which walks
         every count above 1024 in report order, adds the #715 release above 1024, stages the
@@ -23022,12 +23024,10 @@ issues:
     blocked:
       type: owner-decision
       reason: >-
-        The owner decides whether counts above 1024 are tracked and where tracking stops,
-        and the credit the author asks for at 11 counts (think-f2io).
+        The owner decides the credit the author asks for at 11 counts (D5, think-f2io).
     close_when: >-
-      The rows at or below 1024 are recorded in report order, the owner has answered whether
-      counts above 1024 are tracked and where tracking stops (think-f2io), and the replies
-      reporting each are posted.
+      The rows at or below 1024 are recorded in report order, the rows above 1024 have their
+      disposition in think-llit's walk (R2), and the replies reporting each are posted.
     notes: >-
       The issue opened at 2026-10-22T19:55:03Z; edits at 19:58:20Z and 20:00:59Z changed only
       LaTeX braces, and the edit at 20:07:33Z replaced the attached-archive line with a link to
