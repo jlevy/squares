@@ -44,10 +44,18 @@ then the three `layer` commands the selection printed (grid-slack’s 0.5-degree
 and `default_drawings --retain-runs`, whose copies of the grid-slack runs’ index blocks
 are kept here, as each run’s `run.json`, beside its reports.
 
-Grid-slack took 448, 308 and 488 CPU seconds at 0.5, 1 and 5 degrees.
-Evan Daniel’s driver took 1,501 CPU seconds over 1,600 s of wall at one worker, 562 of
-them at 204. The selection took 372 s of wall at two workers, at most 12.4 CPU-minutes.
-That is about 66 CPU-minutes in all, under the 40 CPU-hour item cap.
+By the receipts:
+- Grid-slack took 577.31, 438.95 and 564.99 seconds at 0.5, 1 and 5 degrees.
+  Each figure is the per-count seconds its reports record, summed, as each run’s
+  `run.json` keeps it; the run has no receipt of its own.
+- Evan Daniel’s driver took 1,500.65 CPU seconds over 1,600.39 s of wall at one worker,
+  by its `receipt.json` (resource usage of each count’s worker and its children).
+  562 of them were at 204.
+- The selection writes no cost.
+  It took 372 s of wall at two workers, so at most 12.4 CPU-minutes.
+
+That is about 64 CPU-minutes in all (3,082 receipt seconds and at most 744 for the
+selection), under the 40 CPU-hour item cap.
 
 ## What They Decided
 

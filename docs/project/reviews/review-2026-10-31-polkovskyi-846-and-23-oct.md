@@ -1,5 +1,14 @@
 # Review: Mykhailo Polkovskyi’s Certificates of 23 October and of Issue #846 (T-253, T-259)
 
+> **Addendum, 31 October 2026 (the records lane, `bold-ritchie-l2`; A4 of the senior
+> review of #852).** This review names register ids as #852’s branch registered them at
+> `e2adcd8f7`: T-253 for the nine certificates of 23 October, T-254 for #843 and T-259
+> for #846’s six. The ids follow #851’s T-252 and are not yet on `main`. After this
+> review, the records lane split #846’s five sub-print counts, 105, 146, 156, 229 and
+> 308, from T-259 into T-260, so that the owner’s question holds them alone.
+> Where this review names T-259 at those five counts, read T-260. T-259 now holds 130
+> alone. The review text below is unchanged.
+
 **Date:** 31 October 2026. **Verdict: all fifteen certificates accepted, for finite
 feasibility only. At 130 the certificate is accepted for adoption.
 At the other fourteen counts adoption is the owner’s decision, because each of them is a

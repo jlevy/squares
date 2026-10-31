@@ -35486,15 +35486,20 @@ results:
     significance:
       score: 3
       rationale: >-
-        Draft, from the stage 1 triage (think-3xn9): a new arrangement at 299, 1.92e-02
+        A new arrangement at 299, 1.92e-02
         below the house, the Kingbird catalogue's closed-form construction, and every report
         there. No symmetry pairs it one to one with T-101's certificate of that packing by
         nearest centres; the best assignment moves 124 squares beyond a tenth and turns 126,
         and it has 83 tilted squares at two tilt signs where the house has 38 at one angle,
         as T-243's 3.17e-03 at 182 and T-240's 4.45e-03 and 2.78e-03 (S3) are. No lower
         bound or optimum.
-      scored: '2026-10-26'
-      by: the stage 1 triage and records lane of think-3xn9 (w-imports-1026)
+      scored: '2026-10-31'
+      by: >-
+        the records lane of 31 October (bold-ritchie-l2), confirming the stage 1 triage's
+        draft S3 (think-3xn9) once the 31 October review of the issue 824 update
+        (docs/project/reviews/review-2026-10-31-daniel-824-299-update.md) accepted this
+        certificate (N-6); that review scored the update, so the confirmation is the records
+        lane's, and the review lane may change it
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel n299 2026-10-26]']
@@ -35970,9 +35975,7 @@ results:
       (227) and Nate Chaoweeraprasit's (237) packings. A publication in a watched repository that
       no issue reports, recorded from its commits by the owner's rule of 14 October 2026.
 
-      The same commits' certificates at 88, 126 and 152 lie below the house but above an exact side
-      a register entry states pending adoption (T-193 at 88 and 126, T-122 at 152), and those at
-      204 and 270 tie the house; the ledger records none of them.
+      The same commits' certificates at 88 and 126 lie below the house but above an exact side a register entry states pending adoption (T-193's), 152 is undecided against T-122's exact side, and those at 204 and 270 tied the houses when published; the ledger records none of them.
     scope:
       n_values:
       - 154
@@ -36961,7 +36964,9 @@ results:
       binary64 inputs by 1 + 1e-12.
 
       The review measured the lineages the issue states. The 293 is the 260 exactly, up to a
-      mirror, plus one L-shaped strip of 33 axis-aligned squares along two walls. The 172
+      mirror, plus one L-shaped strip of 33 axis-aligned squares along two walls.
+
+      Since the two certificates were dilated separately, the 260 certificate with that strip proves s(293) <= 8816991251060941991251052624833/(5 * 10^29), 8.98e-13 below this side and across its 12-place print (A3 of the senior review of #852); that construction is a register candidate (think-ruu2), not adopted here. The 172
       fits the 199 house less a 27-square L with 14 squares beyond 0.1, as the house's own
       172 fits the same cut with 20, so both are in the 199 record's L-cut family. The 204
       fits the 176 house's witness, Ostashev's packing as Polkovskyi refined it, loosely: 40

@@ -1415,6 +1415,9 @@ def test_an_entry_that_holds_some_cases_still_joins_the_start_where_it_is_pendin
                 wanted.setdefault(finding.n, set()).add(
                     f"register {result['id']}, pending adoption"
                 )
+    # On 31 October 2026 T-193 held cases elsewhere and was pending at 88 and 126 (A11 of
+    # the review of #852), so the check is not vacuous while think-ot5c stages them.
+    assert {88, 126} <= set(wanted)
     members = ledger.tree_members(sorted(wanted))
     for n, labels in wanted.items():
         assert labels <= {member["label"] for member in members[n]}, n

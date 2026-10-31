@@ -2017,8 +2017,6 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
-    # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
     # T-258 (adopted on 31 October 2026), Evan Daniel's packing of his update to issue 824,
     # found from his T-248 packing, which his implementation of Chris Deotte's fault-line DP
     # built from Deotte's public Kaggle s(334) packing; the Kingbird catalogue's
@@ -2029,6 +2027,8 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s packing from his n = 299 packing of 26 October, built by his "
         "implementation of Chris Deotte’s fault-line DP from Deotte’s public Kaggle packing",
     ),
+    # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
+    # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
     302: Credit(
         (PINGYOU,),
         (COUZO, POLKOVSKYI, DANIEL),

@@ -133,7 +133,10 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     n = 229 Evan Daniel's dilation certificate (T-199) was adopted on 19 October 2026, and
     at n = 227 and 260 Joost de Winter's certificates (T-196) on 20 October 2026, each the
     first adoption at its count, from the catalogue's packing T-155's view had certified; at
-    260 Francisco Couzo's issue-678 certificate (T-223) replaced T-196 on 21 October 2026."""
+    260 Francisco Couzo's issue-678 certificate (T-223) replaced T-196 on 21 October 2026.
+    At n = 293 and 299 Evan Daniel's certificates of issue 845 and of his issue 824 update
+    (T-257, T-258) replaced the catalogue's packings on 31 October 2026, the first adoption
+    at each."""
     assert [n for n in registered.committed() if registered.readopted(n)] == [
         29,
         204,
@@ -141,7 +144,12 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
         229,
         260,
         264,
+        293,
+        299,
     ]
+    for n in (293, 299):
+        text = (registered.FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
+        assert registered.apply_case(n, text) == text
     assert registered.readopted_by(229, "T-155")
     text = (registered.FRONTIER / "n-229.md").read_text(encoding="utf-8")
     assert registered.apply_case(229, text) == text
