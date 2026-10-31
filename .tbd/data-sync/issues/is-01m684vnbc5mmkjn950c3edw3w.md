@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 44
+version: 45
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -38,7 +38,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T15:53:18.242Z
+updated_at: 2026-10-31T16:53:05.320Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -72,3 +72,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 14:55 hourly: merged #858 (e864059f8) and #856 (86ba245b5); 15 merged this pass. think-1v4b closed; its children think-qvp6/think-10l0 re-parented here (qvp6 now waits on cap/owner). Sweep on 86ba245b5 (scratchpad/intake4.txt): 18 unowned, nearly all owned by open #860 (#824/#843-#846 replies+closes) and #859 (#836/#847 comments); new: #804 Kim comment 13:27Z and wand125 ea1c454 -> L8. Open: #859 (merging main), #860 (A1 News label fix), L8 PR. #846 labelled blocked:owner-decision.
 
 2026-10-31 15:54 hourly: merged #859 (d7a815e86, Karimi retained+sampled) and #860 (94e36b675, #852 News entry + replies; YAML '#' label guard); 17 merged this pass. Closed 8 review/answer beads for #843/#844/#845/#824; bead tree ok. Posted: #836/#847 follow-ups with corrections (L4) -> #862 addressing review A. #861 (L8: T-261..T-264, T-244 V3/C3; think-3trq parked on think-ot5c + think-ikku) finishing. No new issues.
+
+2026-10-31 16:55 hourly: merged #862 (bed14afa2); 18 merged this pass. #861 (L8) in senior+correctness review (strong-max), incl. whether its hold mechanism (review omitted from reviews to block select_houses) is honest. Karimi answered the #847 licence question (CC BY 4.0, code MIT; preprint) -> lane L9 records it and runs think-gw1s (#836 v5 full replay, ~10.9 CPU-h). No new issues.
