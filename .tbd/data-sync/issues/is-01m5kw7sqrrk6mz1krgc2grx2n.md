@@ -3,10 +3,10 @@ type: is
 id: is-01m5kw7sqrrk6mz1krgc2grx2n
 title: Replay sqverify_continuous v4 on T-145's and T-157's densities (the second route for the continuous cover)
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 5
-delegate: null
+version: 6
+delegate: bold-ritchie-l10
 labels:
   - validation
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T07:57:34.328Z
-updated_at: 2026-10-31T23:04:03.247Z
+updated_at: 2026-10-31T23:43:38.345Z
 started_at: 2026-10-31T20:02:09.390Z
 ---
 The second route for the continuous cover of T-145 and T-157: a complete run here of wand125's sqverify_continuous, reviewed on 23 October 2026 (think-xzob; docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) with no blocking or major finding. A replay moves the cover's mark to independently re-implemented after reading the producer's code, and no rung.
