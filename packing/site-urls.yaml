@@ -21942,10 +21942,12 @@ urls:
     - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_d4.log
     - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_full_resume1.log
     - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/review/README.md
+    - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/review/independent-2026-10-31/README.md
     - packing/devtools/replay_evand_zmx2.py
     - packing/devtools/audit_evand_mixed_covers.py
     - packing/devtools/check_basic_bounds.py
     - docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md
+    - docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md
 - path: results.html
   canonical: results.html
   kind: page

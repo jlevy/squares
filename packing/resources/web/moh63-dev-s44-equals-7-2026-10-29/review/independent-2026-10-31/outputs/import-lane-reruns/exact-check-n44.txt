@@ -1,0 +1,8 @@
+side 7/1, D 1000, W 100000000, points 15525, segments 3912, polygons 0, trailing rows 0
+point mass 117146551/10000000 = 11.714655100; segment mass 201752793/6250000 = 32.280446880
+total 2199755099/50000000 = 43.99510198000; total < 44: True; slack 0.00489802
+lines carrying segments: [('h', 1000), ('h', 2000), ('h', 3000), ('h', 4000), ('h', 5000), ('h', 6000), ('v', 1000), ('v', 2000), ('v', 3000), ('v', 4000), ('v', 5000), ('v', 6000)]
+point weights min/max: 2 998176 segment weights min/max: 2 9198265
+point measure D4-invariant (8 symmetries, aggregated): True
+line measure D4-invariant (8 symmetries, canonical step densities): True
+RESULT: PASS

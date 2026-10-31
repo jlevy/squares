@@ -15,8 +15,11 @@ It is the case $k = 7$ of $s(k^2 - 5) = k$, after T-066 ($k = 8$), T-184 ($k = 9
 T-191 ($k = 10$), and its import follows T-066’s, whose cover `zmx2` also decides whole
 in both modes. Its Frontier key is **[Khalili Gharabaghi s44 cover 2026-10-29]**. The
 claim below is stated as the source states it; what was checked here is in
-[Checks Made Here](#checks-made-here), and the stage 4 review is
-[review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md](../../../../docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md).
+[Checks Made Here](#checks-made-here). Two stage 4 reviews exist. The independent one is
+[review-2026-10-31-s44-independent-correctness-pass.md](../../../../docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md),
+by a separately prompted lane that shared no context with the import lane. The other,
+[review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md](../../../../docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md),
+was written in the import lane’s context.
 
 ## Source and Pin
 
@@ -151,7 +154,10 @@ audits, both replays’ audits and the root-for-root comparisons from the retain
 
 ## Review Programs
 
-The stage 4 review’s programs and outputs are in [`review/`](review/README.md).
+The import lane’s review programs and outputs are in [`review/`](review/README.md). The
+independent review’s programs, its `zmx2 --d4` run and its control logs are in
+[`review/independent-2026-10-31/`](review/independent-2026-10-31/README.md). Neither set
+decides anything.
 
 ## Compressed Files
 
@@ -169,6 +175,7 @@ re-derives every row.
 | `receipts/n44_zmx2_full_roots.log.gz` | receipt | `51cbb7c28e853eaf0b81befc1ce171b795990882` | `48cf17905103926f2a0b48fe75cfd640a73f0e67969febffe703ac9598c030af` |
 | `receipts/n44_zmx2_full.log.gz` | receipt | `067db4168e2878189559bd4c55674797b3aafd1d` | `9d8d507fc04fb6ba5d894f32dd79721bad3469b721fc4ef8ec422c5e87dda078` |
 | `review/outputs/zmx2/n44_zmx2_6b7f0f79_d4_roots.log.gz` | receipt | `4dfca2877a49c0e2e4e8151a0b11dba0e2b8de45` | `eb659564d71bdf198e30ed5672ec12e98ff6edc9f9902f945a479afd88772633` |
+| `review/independent-2026-10-31/outputs/d4_roots.log.gz` | receipt | `82a4cec38d49689613f0ae3172bc3a38ab9f8abd` | `b09128e74a30da5285ac8c6e2a3421b39827fc68f97e0d82d5ae060bbf815865` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

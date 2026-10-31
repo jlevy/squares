@@ -35889,8 +35889,10 @@ results:
 
       Both zmx2 sweeps were replayed here in full from the bytes the source pins, every
       root's census equal to the source's log, and two mutated covers were refused: s(44)
-      >= 7 is confirmed, reproduced with the producer's code. The review of 31 October
-      found no mathematical defect.
+      >= 7 is confirmed, reproduced with the producer's code. Two reviews of 31 October
+      found no mathematical defect, one of them by a separately prompted lane with no
+      context shared with the import lane, which also replayed the D4 sweep and ran
+      controls of its own.
 
       Mohsen Khalili and Sara Gharabaghi,
       [s44-equals-7](https://github.com/moh63-dev/s44-equals-7/tree/b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf),
@@ -35908,11 +35910,11 @@ results:
         settled s(59) = 8: a substantive case result, not a new technique or a family. Each
         instance of the k^2 - 5 series is its own linear-programming solve, and the
         source's separation step for near-axis wall valleys is a search method, not part of
-        the proof. The 31 October review confirmed the draft.
+        the proof. The independent 31 October review confirmed the draft.
       scored: '2026-10-31'
       by: >-
-        the 31 October stage 4 review
-        (docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md),
+        the independent 31 October stage 4 review
+        (docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md),
         confirming the #842 intake lane's draft (repository)
     novelty: previously-published
     attribution:
@@ -35935,6 +35937,16 @@ results:
           An adversarial soundness review of Mohsen Khalili and Sara Gharabaghi's s(44) = 7 by a closed mixed cover: the reduction from the cover to the claim, zmx2's trust boundary and the e2bb84e9 version that ran against the reviewed 6b7f0f79, the source's zm_mixed.py records, exact poses and mutated covers, with programs written for the review.
         verdict: accepted
         covers: [T-252]
+      - path: docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md
+        kind: adversarial
+        reviewer: Claude (AI review), strong tier (tbd-strong-max) at maximum reasoning, a separately prompted lane in its own worktree sharing no context with the import lane; the independent review
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-31'
+        scope: >-
+          The correctness pass of review A on pull request 851: the pin chain from upstream GitHub, an independent build of zmx2 e2bb84e9 and replay of the D4 sweep, three controls of its own (two single-row drops refused at zmx2's D4 precondition and a uniform 1% scale-down refused where the cover is tight), an exact preflight sharing no code with the source or this repository, the reduction, the D4 fold, interval certification, the checker version and the record's rung and significance.
+        verdict: accepted
+        covers: [T-252]
     evidence:
       - E-khalili-842-cover-report
       - E-khalili-842-cover-replay
@@ -35946,27 +35958,25 @@ results:
       - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_d4.log
       - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_full_resume1.log
       - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/review/README.md
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/review/independent-2026-10-31/README.md
       - packing/devtools/replay_evand_zmx2.py
       - packing/devtools/audit_evand_mixed_covers.py
       - packing/devtools/check_basic_bounds.py
       - docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md
+      - docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md
     controls:
       - packing/tests/test_replay_controls.py
       - packing/tests/test_audit_evand_mixed_covers.py
       - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/controls/n44_control_drop-heaviest-point_zmx2_d4_x23-23_y17-17.log
       - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/controls/n44_control_drop-heaviest-segment_zmx2_d4_x8-8_y9-9.log
     next_rung: >-
-      V4 and C4 need a second adversarial AI review by a distinct reviewer, separately
-      prompted, and a human oversight record; one adversarial review is retained, written
-      in the records lane's context. V5 needs the covering statement proved in a proof
+      V4 and C4 need a human oversight record. Two adversarial AI reviews by distinct
+      reviewers are retained: one written in the import lane's context, and one by a
+      separately prompted lane that shared none of it. V5 needs the covering statement proved in a proof
       assistant and an expert formalization review. zm_mixed.py's complete pass, about 138
       CPU-hours by the source's records (think-qvp6), would be a second machine method by
       the producer and raises no rung.
     unfinished_confirmations:
-      - what: >-
-          a second adversarial AI review of the cover and the zmx2 decision, by a reviewer
-          distinct from the 31 October one and prompted separately from the records lane
-        rung: C4
       - what: >-
           a human oversight record that checks the trust boundary, the certificate's meaning
           and the AI review's findings
@@ -35977,7 +35987,10 @@ results:
       T-191, whose zm_mixed.py controls hold them at C1. The case record adopts the value,
       so n = 44 is proved and T-090's s(44) >= 2789/400 and T-177's reported 2799/400 are
       superseded there. The source's v1.0 and v1.1 hold the same certificate; the packet
-      pins v1.1.
+      pins v1.1. Of the two reviews, the first was written in the import lane's context and
+      says so; the second, the correctness pass of review A on pull request 851, is the
+      independent one stage 4 asks for, and its programs and logs are retained in the
+      packet's review/independent-2026-10-31/.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

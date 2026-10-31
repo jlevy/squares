@@ -96,6 +96,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md, role: review, authority: record, lifecycle: retained}
   - {path: CHANGELOG.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-13-site-changelog-backfill.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-13-site-changelog.md, role: plan, authority: current, lifecycle: transient}

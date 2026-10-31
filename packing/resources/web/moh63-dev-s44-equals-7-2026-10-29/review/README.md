@@ -4,7 +4,8 @@ These are the programs written for the stage 4 review
 [review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md](../../../../../docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md)
 of the closed mixed cover for $s(44) = 7$, with everything they printed.
 The reviewer is Claude, strong sub-agent tier, in a distinct pass of the intake lane that
-retained the source.
+retained the source, so this review is not independent. The independent review’s programs
+and logs are in [`independent-2026-10-31/`](independent-2026-10-31/README.md).
 
 **They decide nothing.** Every number they report is exact (Python integers and
 `fractions.Fraction`); floating point only chooses where to look, and no output is a

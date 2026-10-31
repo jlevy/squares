@@ -25548,8 +25548,10 @@ issues:
       Triaged, imported and validated on 31 October 2026 (think-1v4b): the packet
       moh63-dev-s44-equals-7-2026-10-29 retains v1.1 whole but for .gitignore; both zmx2
       sweeps were replayed here from retained bytes, every root's census equal to the
-      source's log, with two mutated covers refused; the stage 4 review found no
-      mathematical defect. Registered as T-252 at V3/C3, and n-044 moves to proved.
+      source's log, with two mutated covers refused; two stage 4 reviews found no
+      mathematical defect, the second, review A on pull request 851, by a separately
+      prompted lane sharing no context with the import lane. Registered as T-252 at
+      V3/C3, and n-044 moves to proved.
       zm_mixed.py's complete pass is priced and held over the pass's cap (think-qvp6); it
       raises no rung. Claude assistance disclosed.
     read_through: '2026-10-29T15:58:14Z'

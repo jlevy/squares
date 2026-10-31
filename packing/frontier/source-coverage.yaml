@@ -11758,8 +11758,8 @@ sources:
     byte for byte v1.0's (063c4d6, 26 October). The cover is reported to settle s(44) = 7
     with the grid. The intake's replay of the source's checker, zmx2 over the D4 region
     and over the unreduced pose space, each root equal to the source's log, is
-    E-khalili-842-cover-replay; with the 31 October review it puts T-252 at V3/C3 and
-    n-044 at proved. The source's zm_mixed.py records were read and not replayed
+    E-khalili-842-cover-replay; with the two 31 October reviews, the independent one by
+    a separately prompted lane, it puts T-252 at V3/C3 and n-044 at proved. The source's zm_mixed.py records were read and not replayed
     (think-qvp6).
 selected_overrides:
 - n: 29

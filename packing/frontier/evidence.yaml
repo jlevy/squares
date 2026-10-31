@@ -52774,9 +52774,13 @@ evidence:
         never below 1 (lowest 1.003837). Findings F1 to F6 are notes: zmx2 is
         interval-certified, not exact-rational as the source says (F1); e2bb84e9 had not
         run here (F2); both sweeps reach depth 39 of 40 (F3); the zm_mixed.py runs used no
-        --cert-mode and an unpinned zeromargin.py (F4). Not machine-checked: zmx2's lemmas
-        and program, the host's IEEE-754 behaviour, and the reduction's Lean proofs, which
-        were not read.
+        --cert-mode and an unpinned zeromargin.py (F4); the source README's 0.4% is the
+        linear programme's gap, while the certificate's slack is 0.011% (F5); and the
+        reduction's Lean proofs were not read (F6). Not machine-checked: zmx2's lemmas and
+        program and the host's IEEE-754 behaviour. The independent review of the same day,
+        by a separately prompted lane with no shared context
+        (docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md),
+        agrees with all six.
     source_reviewed: '2026-10-31'
   - id: E-khalili-842-cover-replay
     claim: lower-bound
@@ -52807,7 +52811,10 @@ evidence:
       at the source's settings, and audits the cover. The controls are python3 -m
       devtools.replay_evand_zmx2 control --case 44 --mutation M --work W --out OUT for M
       drop-heaviest-point and drop-heaviest-segment, each of which must read NOT VERIFIED;
-      tests/test_replay_controls.py holds the retained ones.
+      tests/test_replay_controls.py holds the retained ones, and
+      tests/test_audit_evand_mixed_covers.py holds check's judgement of this case
+      (check_whole_case) and its refusals of a header naming another cover, other
+      settings, a source root left unreplayed, a differing census and a missing replay.
     replay_status: passed
     verifiers: [V-evand-zmx2, V-replay-evand-zmx2, V-audit-evand-mixed-covers]
     independence:
@@ -52827,7 +52834,8 @@ evidence:
         s44-equals-7/README.md, paper/s44.tex sections 2 to 4 and verification/verify.sh;
         Daniel's certificates/s21/FORMAT.md (the mixed format and the reduction) and
         search/ZMX2.md sections 2 to 7, retained in the 2026-09-28 evand packet; the packet
-        README's Checks Made Here; the 31 October review, sections 3 to 8; the replay
+        README's Checks Made Here; the import lane's 31 October review, sections 3 to 8,
+        and the independent review's correctness pass, sections 1 to 5; the replay
         receipts and controls in the packet's receipts/.
       assumptions:
         - The mixed cover is nonnegative, exactly D4-invariant as a measure and totals 2199755099/50000000 < 44, which zmx2 d4, this repository's audit (devtools.audit_evand_mixed_covers cover --case 44) and the review's own parser each re-check.
@@ -52835,8 +52843,8 @@ evidence:
         - The D4 reduction for measures carries the D4 region to every centre and angle (proved in Lean upstream, not built here); the --full sweep does not use it.
         - Scaling a packing at side s < 7 by 7/s and shrinking each square about its centre makes 44 pairwise disjoint closed unit squares, so a total below 44 excludes it.
         - zmx2's acceptances are exact integer tests on binary64 enclosures widened outward (its Lemma R), which assumes correctly rounded IEEE-754 arithmetic without contraction or wider evaluation, as Rust guarantees for f64 on x86-64; the program is not formally verified.
-        - For this cover, with no polygons, an integer side and the default flags, zmx2.rs e2bb84e9 runs the decision path of 6b7f0f79, whose lemmas the 28 September and 2 October reviews derived (the 31 October review, section 6).
-      audit_record: docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md
+        - For this cover, with no polygons, an integer side and the default flags, zmx2.rs e2bb84e9 runs the decision path of 6b7f0f79, whose lemmas the 28 September and 2 October reviews derived (the import lane's 31 October review, section 6, and the independent review's correctness pass, section 5, item 4).
+      audit_record: docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md
     limitations: >-
       Reproduces the source's own verification: Evan Daniel's zmx2, which the source's
       verify.sh builds at evand/square-packing 659ee62 and ran unchanged, run here from
