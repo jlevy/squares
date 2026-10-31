@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 42
+version: 43
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -38,7 +38,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T14:43:28.626Z
+updated_at: 2026-10-31T14:54:46.962Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -68,3 +68,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 12:54 hourly: no new issues. #852 green, review A addressed, deep gate running (run 41202009305, started 12:38). Reply PRs reviewed: #857 (with #375 correction issuecomment-6543355721 for an overstated independence claim), #856, #858 (nits being addressed). Merge order: #852, #857, #856, #858. L4 importing Karimi deposits from GitHub ad8b094.
 
 2026-10-31 13:54 hourly: merged #852 (e482345fe, 8 houses adopted + regularized; deep gate green) and #857 (4ed88d160); 13 merged this pass. #843/#844/#845/#824 answered and closed by L2 after deploy; their answer beads were closed early and broke check_bead_tree on all branches -> reopened (think-3xn9, -big9, -n61j, -17wo) until L2's records PR merges. think-ruu2 review (strong-max): 130/293/307 valid but padding re-certifications of the houses' own packings; registered recorded-only, not adopted; owner question widened on think-ikku (RV-3, RV-4). Queue: #858, #856, #859 (Karimi, review A addressing), L2 post852, L8 PR. No new issues.
+
+2026-10-31 14:55 hourly: merged #858 (e864059f8) and #856 (86ba245b5); 15 merged this pass. think-1v4b closed; its children think-qvp6/think-10l0 re-parented here (qvp6 now waits on cap/owner). Sweep on 86ba245b5 (scratchpad/intake4.txt): 18 unowned, nearly all owned by open #860 (#824/#843-#846 replies+closes) and #859 (#836/#847 comments); new: #804 Kim comment 13:27Z and wand125 ea1c454 -> L8. Open: #859 (merging main), #860 (A1 News label fix), L8 PR. #846 labelled blocked:owner-decision.
