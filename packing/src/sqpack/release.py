@@ -2700,7 +2700,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "the same link revision with main's results.yaml, result-requests.yaml, "
             "source-coverage.yaml, frontier/README.md, composite-figure.json, "
             "site_resources.py and site_urls.py swapped in: the same 51 files, "
-            "byte-identical. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "byte-identical. Measured again on 31 October after review A's fixes (the "
+            "independent review mapped in results.yaml, evidence.yaml, n-044.md, "
+            "source-coverage.yaml and result-requests.yaml; think-rp0d named in "
+            "site_urls.py) and after merging main ad84e0d2e (#834) and b95c5f69c (#833): "
+            "at the same link revision, twice from this tree and once with b95c5f69c's "
+            "copies of those inputs, site_resources.py, frontier/README.md, "
+            "composite-figure.json and bound-citations.json swapped in, the same 51 "
+            "files, byte-identical across the three. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
