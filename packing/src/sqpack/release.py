@@ -9989,8 +9989,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "3978a7f61 (#841), at link revision 3978a7f6 with that main's two inputs "
             "swapped in and the explainer's math pass on the host's headless shell "
             "through SQPACK_CHROMIUM: 69 files each, all byte-identical across the three. "
-            "No PDF was printed; each prints from that HTML. Every paper keeps its "
-            "version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
+            "Measured again after review A's requests edits (#732's block, #715's D2 and D4 "
+            "wording), at the same link revision against the same main: 69 files, "
+            "byte-identical. No PDF was printed; each prints from that HTML. Every paper "
+            "keeps its version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
