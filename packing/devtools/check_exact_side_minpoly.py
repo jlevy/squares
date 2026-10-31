@@ -636,10 +636,15 @@ def price(
                 "but no reduction-based route avoids an exact product per term"
             ),
             "model_omits": [
-                "building each H: about 5,073 terms at n = 29, each a product of up to 26 "
-                "polynomials of degree at most 7212, which is not priced",
-                "quasi-linear exact division by Kronecker substitution, which this module "
-                "uses for the factorizations and which could make the division far cheaper",
+                (
+                    "building each H: about 5,073 terms at n = 29, each a product of up to "
+                    "26 polynomials of degree at most 7212, which is not priced"
+                ),
+                (
+                    "quasi-linear exact division by Kronecker substitution, which this "
+                    "module uses for the factorizations and which could make the division "
+                    "far cheaper"
+                ),
             ],
             "timed_on": {
                 "platform": platform.platform(),
