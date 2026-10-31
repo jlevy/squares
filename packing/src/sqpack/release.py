@@ -10003,6 +10003,25 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
+            "The intake pass of 31 October (think-3guf): requests entries for #836 and "
+            "#847, Mohsen Karimi's v5 two-strip and V2.0 filled-end sets above 1024, at "
+            "triage pending; no register entry, row, side, bound or credit changes. "
+            "Against main 32ef0861b (#835): rendered at link revision 32ef0861 into empty "
+            "site directories, twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, render_packing_methods writes its 43 files "
+            "byte-identical across the three. First measured the same way against main "
+            "3978a7f61 (#841), before and after review A's edits to the two entries. No PDF "
+            "was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
             "The s(29) exact-side validation (think-10m1, #816): the requests record "
             "enters #816, the owner's tracker of T-246's validation. Against main "
             "2f974835a (#818) it was measured at link revisions a1bf7a77 and 064b9534 (43 "

@@ -25476,3 +25476,163 @@ issues:
       was not readable from the importing session, so the push of 1be69ca is not dated; the
       commit precedes the issue by 21 minutes and nothing reached 299 between them. The issue
       did not carry the intake label when read; the coordinator labels it.
+  - number: 836
+    title: '1182–9944: 2484 new and 1434 lowered upper bounds, two-strip construction (Zenodo v5): registration request'
+    author: mohsensbu-jpg
+    opened: '2026-10-26'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Mohsen Karimi (ORCID 0009-0004-1055-8267), following #799, asks for the registration of
+      version v5.0 of his two-strip record set, Zenodo 10.5281/zenodo.23664800 (2026-10-26):
+      5,308 upper bounds at n = 1182 to 9944, one exact side per count with the construction's
+      seven parameters, from a search widened to sides in [K - 0.5, K). By the issue, 2,484
+      counts are new against version 2 (record 23628190, on #799), 1,434 of version 2's 2,824
+      sides are lowered and 1,390 are unchanged; 51 rows are marked as not below a side
+      Couzo's index derives from a Kaggle value with no coordinates. The issue states the
+      zip's SHA-256 (9c70c4d8...6325) and records.csv's (7e78c15d...e941), says regenerate.py
+      is unchanged from version 2, and credits the construction as instances of Sungjoon
+      Ryu's L-shaped packing (Theorem 1.3), found independently. Claude assistance and MATLAB
+      Online disclosed. It also withdraws two conjectures: frac(s(n)) > 1/2 whenever s(n) <
+      ceil(sqrt n), and the conjecture that c*(K) is of order sqrt K (#799). A comment of 26
+      October by maximusrufus reports rebuilding all 5,308 with the submitter's regenerate.py
+      and checking them in exact rationals, with a 398-row sample through Mishapolk's
+      verifier. The author's comment of 27 October posts a filled-end set V1.0 (Zenodo
+      10.5281/zenodo.23681705, 4,571 rows at 1184 to 9946), the comment of 30 October 17:38Z
+      sets 45 of its rows aside against Couzo's 712c6a6, and the comment of 21:57Z says V1.0
+      is superseded by #847. Stage 1 began on 31 October 2026 (think-7yrs) from the issue's
+      text alone: zenodo.org was not reachable from the session (the proxy refused the
+      connection), so neither deposit was fetched, hashed or read, and no row is compared yet.
+    read_through: '2026-10-30T21:57:59Z'
+    results:
+    - key: rows-v5
+      claim: >-
+        5,308 upper bounds s(n) <= S at n = 1182 to 9944, each at the exact side records.csv
+        states in Zenodo 10.5281/zenodo.23664800 v5.0, by the two-strip construction with the
+        parameters K, mH, tH, phH, mV, tV and phV in the same row.
+      source: body
+      not_registered: >-
+        Above 1024: rows of source-coverage.yaml once think-llit's walk above 1024 records
+        them, not register entries. Dated by this issue and pinned at record 23664800, once
+        retained. At the 1,390 counts version 2 states identically, a tie stays with the
+        earlier report (version 1's or version 2's); the 1,434 lower sides and the 2,484 new
+        counts are recorded wherever the walk finds them below every earlier report and
+        Göbel's construction, so at most 3,918 rows. The parameters are #799's, which
+        devtools.two_strip_checker decides, and each row is one once it decides it (D2 on
+        think-f2io). By the issue, v5's records.csv adds a column below_all_reported, which
+        parse_records refuses today (its header must be exactly the 11 columns), so its ingest
+        needs a column set per deposit, a small code change to make on fetch, once the header
+        is read. They land with #799's rows (think-5dc3).
+      queued: true
+      bead: think-7yrs
+      blocked_on:
+      - think-llit
+    - key: filled-end-v1
+      claim: >-
+        4,571 upper bounds s(n) <= S at n = 1184 to 9946, each at the exact side
+        filled_records.csv states in Zenodo 10.5281/zenodo.23681705 V1.0, by the two-band L
+        packing with its band ends filled by axis-parallel layers, with the parameters K, bV,
+        tV, yV, bH, tH and yH in the same row; 45 of them set aside by the author on 30
+        October.
+      source: https://github.com/jlevy/squares/issues/836#issuecomment-6433611255
+      not_registered: >-
+        Above 1024, and superseded by the author's V2.0 in #847. #847 asks that V1.0 be ignored
+        and V2.0 used alone if no V1.0 row has been taken in, and otherwise that V1.0's rows be
+        replaced by V2.0's and 40 of them withdrawn. No V1.0 row has been taken in, so the
+        first branch applies. Whether a published deposit its author asks, before any intake,
+        to be ignored still counts as an earlier report in report order is the owner's
+        question Q-847a on think-r94q; think-8m4k covers only a withdrawn file followed by a
+        lower one. Imported with #847's set (think-r94q), since no maintained checker reads
+        the construction yet (W9, think-fuwd).
+      queued: true
+      bead: think-r94q
+      blocked_on:
+      - think-fuwd
+      - think-llit
+    beads:
+    - think-7yrs
+    - think-gw1s
+    - think-r94q
+    - think-5dc3
+    - think-x0kn
+    - think-llit
+    answer_bead: think-7yrs
+    replies: []
+    close_when: >-
+      The v5 rows the walk above 1024 records are on main, each decided by the maintained
+      two-strip checker, V1.0's rows are dispositioned with #847's, and the reply on main says
+      so; nothing the author asked for is queued.
+    notes: >-
+      Not checked on 31 October 2026: zenodo.org (records 23664800 and 23681705), refused by
+      the session's network policy; the triage's claim counts are the issue's own until the
+      deposit is read. The comparison the issue states is against
+      Mishapolk/square-packing-records 7e82c64 and franciscouzo/square-packing 1c17153; the
+      walk reads every report in order. The third-party check of 26 October reproduced the
+      packings with the producer's code; its program and receipt are not retained, so it is
+      no evidence entry. The withdrawal of Conjecture 1 bears on #799's summary and
+      theorem-near-integer notes, which say the note keeps its conjecture; think-x0kn
+      updates them.
+  - number: 847
+    title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
+    author: mohsensbu-jpg
+    opened: '2026-10-30'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Mohsen Karimi (ORCID 0009-0004-1055-8267), following #799 and #836, asks for the
+      registration of his filled-end record set V2.0, Zenodo 10.5281/zenodo.23819397
+      (2026-10-30): 5,134 upper bounds at n = 1182 to 9946 by the two-band L packing of #836
+      with the band ends filled by axis-parallel layers and an independent width, tilt and
+      lift split for each band, each row an exact side with seven parameters. By the issue,
+      4,841 rows lower a v5 row of #836 and 293 are at counts v5 lacks, every row strictly
+      below the verified entries of franciscouzo/square-packing 712c6a6 and
+      Mishapolk/square-packing-records ab8e833, where an entry exists. The 467 v5 rows with no
+      V2.0 row stand as submitted in #836, and the two sets give 5,601 distinct counts. It
+      supersedes V1.0 (10.5281/zenodo.23681705, posted on #836) and drops 40 of V1.0's rows
+      (listed). It asks that V1.0 be ignored and V2.0 used alone if no V1.0 row has been taken
+      in, and otherwise that V1.0's rows be replaced by V2.0's and the 40 withdrawn; no V1.0
+      row has been taken in, so the first applies. It states filled_records.csv's SHA-256
+      (1cbfecf8...48f5) and credits the construction to Ryu's Theorem 1.3, with the band-end
+      fill as Evan Daniel's idea written as in Kevin Fang's note (10.5281/zenodo.23624565),
+      and the parameters and search to the author. Claude assistance, MATLAB Online and a
+      Python reproduction disclosed. Stage 1 began on 31 October 2026 (think-r94q) from the
+      issue's text alone: zenodo.org was not reachable from the session, so the deposit was
+      not fetched, hashed or read, and no row is compared yet.
+    read_through: '2026-10-30T21:56:32Z'
+    results:
+    - key: filled-end-v2
+      claim: >-
+        5,134 upper bounds s(n) <= S at n = 1182 to 9946, each at the exact side
+        filled_records.csv states in Zenodo 10.5281/zenodo.23819397 V2.0, by the filled-end
+        two-band L packing with the parameters K, bV, tV, yV, bH, tH and yH in the same row.
+      source: body
+      not_registered: >-
+        Above 1024: rows of source-coverage.yaml once think-llit's walk above 1024 records
+        them, not register entries. Dated by this issue and pinned at record 23819397, once
+        retained. No checker this project maintains reads the construction, so each is a row
+        once W9's checker (think-fuwd) decides it (D2 on think-f2io). Each is recorded where
+        the walk finds it below every earlier report, #836's v5 row included and V1.0's as
+        Q-847a on think-r94q decides, and below Göbel's construction.
+      queued: true
+      bead: think-r94q
+      blocked_on:
+      - think-fuwd
+      - think-llit
+    beads:
+    - think-r94q
+    - think-fuwd
+    - think-qczx
+    - think-7yrs
+    - think-llit
+    answer_bead: think-r94q
+    replies: []
+    close_when: >-
+      The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
+      checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
+      main says so; nothing the author asked for is queued.
+    notes: >-
+      Not checked on 31 October 2026: zenodo.org (record 23819397), refused by the session's
+      network policy; the claim counts are the issue's own until the deposit is read. The
+      author says he may be offline for some days.
