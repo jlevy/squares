@@ -116,8 +116,9 @@ archive’s own checker, controls and distance script were never opened.
 
 At 172 the side is 1.053e-3 above the case’s house since 31 October 2026 (T-257), so the
 configuration realizes T-174’s retired packing. At 263 it is 2.126e-94 below the house,
-T-174’s rational certificate, which the house rule adopts once a stage 4 review accepts
-the configuration (think-3trq).
+T-174’s rational certificate, the exact value of the house's own arrangement. Its adoption is parked on the
+algebraic-house writer (think-ot5c) and the owner's restatement question
+(think-ikku), with the stage 4 review after them (think-3trq).
 
 ## Commands
 

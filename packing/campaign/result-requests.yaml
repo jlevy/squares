@@ -25680,9 +25680,15 @@ issues:
       exact routes (devtools.configuration_fact_replay; think-4rzl): sqpack's exact verifier over
       each field and the retained verify_exact.py, each with its controls refused, so T-244 is
       at V3/C3. At 172 the house moved the same day to issue 845's certificate (T-257), 1.053e-3
-      below S*_172; at 263 S*_263 is 2.126e-94 below the house, which adopts it once a stage 4
-      review accepts the configurations (think-3trq).
-    read_through: '2026-10-26T11:50:22Z'
+      below S*_172; at 263 S*_263 is 2.126e-94 below the house, the exact value of the house's
+      own arrangement, whose adoption is parked on think-ot5c and the owner's question on
+      think-ikku (think-3trq). The author's comment of 31 October, 13:27:28Z
+      (issuecomment-6543970419), answers the follow-up's request for a public copy:
+      HyukdongKim/square-packing-exact-sides at f480441e73824668fb18779151369e4d3ba6179a, CC0
+      1.0, holds the three attachments with the digests the record holds and their files
+      unpacked, n297.minpoly.json among them. It states no new result; it lets the packets
+      keep the files themselves and unblocks route B at 297 (think-ozx8).
+    read_through: '2026-10-31T13:27:28Z'
     results:
     - key: exact-sides-held
       claim: >-
