@@ -6,6 +6,83 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: changelog-day-log-and-news-division
+    date: '2026-10-26'
+    title: 'A Concise Changelog, and News for the Stories'
+    significance:
+      score: 2
+      rationale: Two reader surfaces divide work they had been sharing. The Changelog becomes the
+        day log the home page carried, over the whole record, one brief line an item; News keeps the
+        mathematical and newsworthy items with the detail on each and stops carrying site-only
+        changes. No result, explanation, verification, policy or tool is new, and no paper's content
+        changes.
+    pull_requests:
+      - 840
+    categories:
+      - site
+    topics:
+      - project
+    news_exclusion: >-
+      A reader surface and how two of its pages divide their work, with no new result,
+      explanation or verification; a site-only change is a Changelog line (the owner,
+      26 October 2026).
+    summary: |
+      The Changelog page is now the day log the home page carried as Recently Added,
+      covering the whole record rather than seven days: one disclosure a day, newest
+      first, its summary the date and its tally, its body one brief line an item. News
+      keeps the stories.
+    details: |
+      - A site or project change is one line in its day, carrying its score, its GitHub
+        issues and pull requests, and a link to its News story where it has one, so the
+        detail is written once instead of on both surfaces. Where News never shows the
+        change, the line also carries its artifacts, its publication evidence, its
+        supporting records and its component editions, since it is then the only reader
+        surface for them.
+      - Seven site, documentation and tooling changes left News, each with its recorded
+        reason, taking it from 55 entries to 48. Nothing touching the records, their
+        regularization or the mathematics is among them.
+      - The home page offers the log beside All News rather than carrying it, and the
+        page it opens weighs 178,634 bytes against the 309,359 the story-per-entry
+        version weighed.
+  - id: changelog-page-and-project-menu
+    date: '2026-10-26'
+    title: The Project Changelog Gets a Page, Under a Project Menu
+    significance:
+      score: 2
+      rationale: >-
+        A reader surface and the bar's structure. The retained history takes a page of
+        the site, Overview, News and Changelog move under a Project menu, Recently Added
+        takes a shorter introduction, a tally leaves the toggles' small caps and the
+        credits line names the site. The history itself was already public in
+        CHANGELOG.md and already linked from News, so no result, explanation,
+        verification, policy or tool is new here. It adds no mathematical result and
+        changes no paper's content.
+    pull_requests:
+      - 837
+    categories:
+      - site
+    topics:
+      - project
+    summary: >-
+      The whole retained history is now a page of this site: every entry at every
+      significance, day by day, each with the GitHub issues and pull requests behind it.
+      News keeps the stories rated S3 and above and closes on a button to it. Overview,
+      News and Changelog sit together under Project in the navigation bar, and the
+      homepage keeps its own address and its own name.
+    details: |-
+      - A tally of results is out of the toggles' small caps everywhere it appears, its
+        count set in bold and its noun in the summary's own case, and a disclosure's
+        toggle keeps the first line of a summary that wraps.
+      - Recently Added's introduction names the day its window opens rather than the
+        span of days it shows.
+      - The lines that said a result "is now the house best packing" say "is now the
+        record packing"; the project term itself is unchanged where `conventions.md`
+        and `SYNOPSIS.md` own it.
+      - The credits line on every page, and in the four papers' PDFs, names
+        squaremath.org before the repository.
+    references:
+      - label: The site design record
+        target: packing/devtools/templates/paper-design.md
   - id: jatloe-n12-reported-proof
     date: '2026-10-25'
     title: Jatloe Reports a Lean Proof for 12 Squares
@@ -431,6 +508,10 @@ entries:
     topics: [project]
     categories: [site]
     pull_requests: [578]
+    news_exclusion: >-
+      A site surface, profile pages for contributors, with no new result, explanation or
+      verification; News carries the mathematical and newsworthy items and a site-only
+      change is a Changelog line (the owner, 26 October 2026).
     summary: |-
       The profile directory lists the 75 people whose work the record cites or credits, in
       a sortable table of records, results, credits, years active, resources and accounts.
@@ -800,6 +881,9 @@ entries:
     topics: [project]
     categories: [site, documentation]
     pull_requests: [621]
+    news_exclusion: >-
+      A labelling process for News and pull requests, not a mathematical result; a
+      site-only change is a Changelog line (the owner, 26 October 2026).
     summary: |-
       Every pull request now carries one significance label, S1 to S5, scored by the same
       conservative rubric that scores News items. News shows S3 to S5 with a filter by
@@ -832,6 +916,9 @@ entries:
     topics: [project, engineering]
     categories: [pipeline]
     pull_requests: [620]
+    news_exclusion: >-
+      Validation tooling, with nothing reader-facing and no mathematics; a tooling-only
+      change is a Changelog line (the owner, 26 October 2026).
     summary: |-
       Validation now executes every check it selects. Before, a verdict could be reused
       across runs, so an unauthenticated artifact name or a legacy environment variable
@@ -1471,6 +1558,9 @@ entries:
     topics:
       - project
       - engineering
+    news_exclusion: >-
+      Release-history surfaces for the site, the papers and the posters: a project record
+      rather than a result, so a Changelog line (the owner, 26 October 2026).
     summary: |-
       The public changelog links releases to papers, posters and result pages. Each paper and
       the site have separate edition histories; the poster pair shares one. Readers can
@@ -2148,6 +2238,9 @@ entries:
     topics:
       - project
       - engineering
+    news_exclusion: >-
+      The site's navigation bar, with no new result or explanation; a site-only change is
+      a Changelog line (the owner, 26 October 2026).
     summary: |-
       Shared navigation connects homepage packing previews with the Atlas, result records,
       papers and exports. Readable formulas and consistent layouts present the mathematical
@@ -2828,6 +2921,16 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 840
+  title: "feat: the Changelog is the day log, News keeps the stories"
+  merged_at: '2026-10-26T23:37:43Z'
+  base_ref: main
+  merge_commit: 1e9a7104c5e452a49855e55b5fe48dddbf366fc5
+- number: 837
+  title: "feat: a Changelog page under a Project menu, and the site's address in the credits line"
+  merged_at: '2026-10-26T20:23:35Z'
+  base_ref: main
+  merge_commit: eb37c8076f4aa370d387de35bdb8ca56c61e025f
 - number: 812
   title: "intake(think-4l14, think-6gti): T-245, Jatloe's Lean proof that s(12) = 4 (#810), and T-246, Daniel's s(29) minimal polynomial (#545, #811)"
   merged_at: '2026-10-25T14:28:27Z'
@@ -3598,6 +3701,8 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 840
+  - 837
   - 812
   - 814
   - 794

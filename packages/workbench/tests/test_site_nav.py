@@ -102,7 +102,9 @@ def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: st
         build_site.with_head("<html><head></head><body></body></html>")
 
 
-def test_the_bar_has_the_shared_five_destinations_and_direct_learning_links(page: str) -> None:
+def test_the_bar_has_the_shared_four_categories_and_direct_learning_links(page: str) -> None:
+    """Every destination sits in a category since 26 October 2026: Overview, News and
+    Changelog moved under Project, so the bar's own row is four menu buttons."""
     nav = paper_structure.parse(page).find("nav", "site-nav")
     assert nav is not None
     menu = nav.find("ul", "site-nav-links")
@@ -113,8 +115,7 @@ def test_the_bar_has_the_shared_five_destinations_and_direct_learning_links(page
         if isinstance(child, paper_structure.Node)
     ]
     assert [(link.text(), link.attrs.get("href")) for link in entries if link] == [
-        ("Overview", ".././"),
-        ("News", "../news.html"),
+        ("Project", None),
         ("Results", None),
         ("Learn", None),
         ("About", None),
@@ -125,6 +126,9 @@ def test_the_bar_has_the_shared_five_destinations_and_direct_learning_links(page
         if "data-page" in link.attrs
     }
     for key, href in (
+        ("overview", ".././"),
+        ("news", "../news.html"),
+        ("changelog", "../changelog.html"),
         ("atlas", "../atlas.html"),
         ("resources", "../resources.html"),
         ("film", "../visualize.html"),

@@ -213,7 +213,9 @@ def test_footer_links_keep_destinations_without_decorative_marks(
         page.goto(github_site, wait_until="load")
         footer = page.locator(".site-colophon")
         links = footer.evaluate(LAYOUT)
+        # The credits line names the site before the repository (the owner, 2026-10-26).
         assert [link["href"] for link in links] == [
+            render_overview.SITE_URL,
             "https://github.com/jlevy/squares",
             render_overview.FLOWMARK_URL,
             render_overview.KPRESS_URL,

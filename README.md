@@ -11,6 +11,7 @@ Its homepage links every other major resource on square packing.
 All of it is generated from the record in this repository.
 
 **On the website:** [News](https://squaremath.org/news.html) ·
+[Changelog](https://squaremath.org/changelog.html) ·
 [Atlas](https://squaremath.org/atlas.html) ·
 [Results](https://squaremath.org/results.html) ·
 [Frontier Survey](https://squaremath.org/atlas.html#the-frontier-survey) ·
@@ -126,7 +127,7 @@ every claim is graded, and every defect is logged
 
 | Where | What |
 | --- | --- |
-| [**Changelog**](CHANGELOG.md) | Noteworthy merged contributions and launched papers, PDFs, results and site features; also on [News](https://squaremath.org/news.html) |
+| [**Changelog**](CHANGELOG.md) | Noteworthy merged contributions and launched papers, PDFs, results and site features; also on [Changelog](https://squaremath.org/changelog.html), whose stories rated S3 and above are [News](https://squaremath.org/news.html) |
 | [**Basic tutorial**](TUTORIAL.md) | First-principles introduction to packings, bounds, rotation, overlap, and proof versus best-known results |
 | [**Advanced tutorial**](TUTORIAL-ADVANCED.md) | Linear programs, exact arithmetic, certificates, regularization, search, and global proofs |
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |

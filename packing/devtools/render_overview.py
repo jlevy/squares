@@ -89,6 +89,7 @@ OVERVIEW_ARTICLE = TEMPLATES / "overview-article.md"
 ATLAS_ARTICLE = TEMPLATES / "atlas-article.md"
 ABOUT_ARTICLE = TEMPLATES / "about-article.md"
 NEWS_ARTICLE = TEMPLATES / "news-article.md"
+CHANGELOG_ARTICLE = TEMPLATES / "changelog-article.md"
 #: The invitation to report results, with its button: About's and the overview's alike.
 REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
@@ -460,6 +461,7 @@ LEGACY_PROFILES: dict[str, str] = {
 SITE_PAGES: tuple[str, ...] = (
     "index.html",
     "news.html",
+    "changelog.html",
     "atlas.html",
     "frontier.html",
     "about.html",
@@ -586,6 +588,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     ATLAS_ARTICLE,
     ABOUT_ARTICLE,
     NEWS_ARTICLE,
+    CHANGELOG_ARTICLE,
     REPORT_RESULTS,
     RESULTS_ARTICLE,
     VERIFICATION_ARTICLE,
@@ -1120,7 +1123,10 @@ def favicon_html(*, inline: bool = False, root: str = "") -> str:
 def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
     """Project attribution, typesetting credit, then the optional edition on separate lines.
 
-    Papers omit the site edition because their own edition appears in their credits.
+    The attribution names the site before the repository, since a credits line with room
+    for both says where to read the work first and where it is kept second (the owner,
+    2026-10-26). Papers omit the site edition because their own edition appears in their
+    credits.
     """
 
     def part(markup: str) -> str:
@@ -1130,11 +1136,15 @@ def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
         shown = [part(markup) for markup in parts if markup]
         return f'<span class="site-colophon-line">{" · ".join(shown)}</span>'
 
-    repository = repo_links.REPO_URL
+    def address(url: str) -> str:
+        shown = url.removeprefix("https://").removesuffix("/")
+        return f'<a href="{url}">{html.escape(shown)}</a>'
+
     return (
         line(
             html.escape(PROJECT_NAME),
-            f'<a href="{repository}">{html.escape(repository.removeprefix("https://"))}</a>',
+            address(SITE_URL),
+            address(repo_links.REPO_URL),
         )
         + line(
             f'Formatted and typeset with <a href="{FLOWMARK_URL}">Flowmark</a> '
@@ -1466,11 +1476,6 @@ def overview_page() -> Page:
     values = {
         "HERO": overview_sections.hero(),
         "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
-        # What reached the site over the seven days to its newest arrival, from the records
-        # (the owner, 22 October 2026): results, house best packings, dated rows.
-        "RECENTLY_ADDED": overview_sections.recently_added(overview),
-        "RECENT_SPAN": overview_sections.recent_span(overview),
-        "CORPUS_END": str(overview_sections.corpus_end()),
         "ATLAS_GRID": overview_sections.atlas_preview(),
         "PAPER_CARDS": overview_sections.homepage_paper_cards(),
         "PDF_CARDS": overview_sections.homepage_pdf_card(),
@@ -1490,7 +1495,8 @@ def overview_page() -> Page:
         description=OVERVIEW_DESCRIPTION,
         toc=False,
         rewrite_body=_case_links,
-        # `results.css`'s rollup classes draw Recently Added.
+        # `results.css` draws the Recent Major Results table; the rollup it also styles
+        # moved to the Changelog on 26 October 2026.
         page_styles=(HOMEPAGE_CSS, RESULTS_CSS),
         page_scripts=(
             NEWS_CARDS_SCRIPT,
@@ -1548,8 +1554,8 @@ def news_page() -> Page:
         current="news",
         title="News",
         description=(
-            "Project news: newly launched results, papers, downloads and site features, "
-            "with the retained contribution history."
+            "Project news: newly launched results, papers and downloads, rated S3 and "
+            "above, with the detail on each. The Changelog lists every change."
         ),
         toc=False,
         page_scripts=(
@@ -1559,6 +1565,49 @@ def news_page() -> Page:
             NEWS_FORWARD_SCRIPT,
         ),
         rewrite_body=_case_links,
+    )
+
+
+def changelog_page() -> Page:
+    """The whole record as one concise log: a disclosure a day, newest first, holding
+    that day's results, new record packings and rows beyond the corpus, then its site and
+    project changes as one line each (`overview_sections.changelog_rollup`).
+
+    News and this page divide the work rather than share it. News carries the
+    mathematical and newsworthy items, fewer of them and with the detail on each; this
+    page is concise and close to complete, and links each change to its GitHub issues and
+    pull requests, and to its News story where it has one. The section was the home
+    page's Recently Added until 26 October 2026, when the owner moved it here and asked
+    the home page for a button instead.
+    """
+    from devtools import overview_data, overview_sections, render_changelog  # noqa: PLC0415
+
+    overview = overview_data.load()
+    document = render_changelog.load()
+    markdown = _template_markdown(
+        CHANGELOG_ARTICLE,
+        {
+            "CHANGELOG": overview_sections.changelog_rollup(overview, document),
+            "CHANGELOG_SINCE": overview_sections.changelog_since(overview, document),
+            "CHANGELOG_FILE": repo_url(repo_links.CHANGELOG),
+            "ARROW_EXTERNAL": overview_sections.arrow_icon("external"),
+        },
+    )
+    return kpress_page(
+        markdown,
+        name=render_changelog.CHANGELOG_PAGE,
+        current="changelog",
+        title="Changelog",
+        description=(
+            "The Squares Project changelog: every retained contribution and launch, "
+            "newest merge date first, with the issues and pull requests behind each one."
+        ),
+        toc=False,
+        rewrite_body=_case_links,
+        # The log draws with the rollup classes `results.css` defines, which the home
+        # page loaded while it carried the block.
+        page_styles=(RESULTS_CSS,),
+        page_scripts=(POPOVER_SCRIPT,),
     )
 
 
@@ -1926,6 +1975,7 @@ def _document_page(name: str) -> Callable[[], Page]:
 PAGES: dict[str, Callable[[], Page]] = {
     "index.html": overview_page,
     "news.html": news_page,
+    "changelog.html": changelog_page,
     "atlas.html": atlas_page,
     "frontier.html": frontier_page,
     "about.html": about_page,

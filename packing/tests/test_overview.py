@@ -456,7 +456,8 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     landings = [
         "the-problem",
         "the-atlas-of-square-packings",
-        "recently-added",
+        # Recently Added moved to the Changelog page on 26 October 2026; the home page
+        # offers it beside All News instead of carrying the block.
         "news",
         "recent-results",
         "papers",
@@ -471,6 +472,8 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     # The owner dropped "View" from these action labels on 2026-10-23.
     assert 'href="atlas.html">Visual Atlas' in page
     assert 'href="news.html" data-news-carry>All News' in page
+    assert 'href="changelog.html">Changelog' in page
+    assert 'id="recently-added"' not in page
     assert 'href="papers.html">All Papers' in page
     assert ">View " not in page
     assert '<a class="site-action" href="results.html#all-results" data-all-results' in page
@@ -2876,10 +2879,10 @@ def test_the_nav_links_only_to_served_pages() -> None:
     assert nav.count('aria-current="page"') == 1
 
 
-#: The five top-level destinations; collection links are nested beneath them.
+#: The four top-level destinations; collection links are nested beneath them. Overview,
+#: News and Changelog sit under Project (the owner, 26 October 2026).
 NAV_ENTRIES = [
-    ("overview", "./", "Overview"),
-    ("news", "news.html", "News"),
+    ("project", None, "Project"),
     ("results", None, "Results"),
     ("learn", None, "Learn"),
     ("about", None, "About"),
@@ -2929,7 +2932,12 @@ def test_the_nav_groups_learning_materials_under_one_landing_page() -> None:
         for tag, attrs in _Tags(nav).tags
         if tag == "button" and attrs.get("class") == "site-nav-disclosure"
     ]
-    assert [control["data-page"] for control in controls] == ["results", "learn", "about"]
+    assert [control["data-page"] for control in controls] == [
+        "project",
+        "results",
+        "learn",
+        "about",
+    ]
     assert {control["aria-controls"] for control in controls} <= {
         attrs["id"] for _, attrs in _Tags(nav).tags if "id" in attrs
     }
@@ -3085,18 +3093,23 @@ COLOPHON_PART = re.compile(r'<span class="site-colophon-part">(.*?)</span>(?= ·
 
 
 def test_the_closing_credit_separates_attribution_typesetting_and_version() -> None:
-    """The shared footer keeps its version on the bottom line and retains tool links."""
+    """The shared footer keeps its version on the bottom line and retains tool links.
+
+    The attribution names the site before the repository: a credits line with room for
+    both says where to read the work first and where it is kept second (the owner,
+    2026-10-26)."""
     from devtools.paper_structure import parse  # noqa: PLC0415
     from sqpack import release  # noqa: PLC0415
 
     footer = parse(render_overview.colophon_html())
     lines = footer.find_all("span", "site-colophon-line")
     assert [line.text() for line in lines] == [
-        "The Squares Project · github.com/jlevy/squares",
+        "The Squares Project · squaremath.org · github.com/jlevy/squares",
         "Formatted and typeset with Flowmark and KPress",
         release.PUBLICATION_EDITION,
     ]
     assert [link.attrs["href"] for link in footer.find_all("a")] == [
+        render_overview.SITE_URL,
         "https://github.com/jlevy/squares",
         render_overview.FLOWMARK_URL,
         render_overview.KPRESS_URL,
@@ -4534,6 +4547,46 @@ def test_the_project_statements_case_links_land_on_case_records(
         assert render_case_pages.case_url(n) in case_pages, n
 
 
+def test_the_changelog_page_carries_the_whole_history_and_news_sends_a_reader_to_it(
+    rendered: Callable[[str], str],
+) -> None:
+    """The retained history is a page of its own, every entry at every significance, each
+    with the GitHub issues and pull requests behind it; News shows the S3 and above
+    stories and closes with a button to that page (the owner, 26 October 2026). The
+    bookmarks News keeps without showing them lead there rather than to `CHANGELOG.md`
+    on GitHub."""
+    from devtools import render_changelog  # noqa: PLC0415
+
+    document = render_changelog.load()
+    changelog = rendered(render_changelog.CHANGELOG_PAGE)
+    news = rendered("news.html")
+    assert '<h1 id="changelog" class="site-title">Changelog</h1>' in changelog, (
+        "the article owns the bookmark"
+    )
+    assert changelog.count('id="changelog"') == 1
+    stories = {entry["id"] for entry in render_changelog.news_entries(document)}
+    retained = {entry["id"] for entry in document["entries"]}
+    assert stories < retained, "a page of every entry is more than the stories"
+    for identifier in retained:
+        assert f'id="{render_changelog.entry_anchor(identifier)}"' in changelog, identifier
+    for day in {entry["date"] for entry in document["entries"]}:
+        assert f'id="changelog-date-{day}"' in changelog, day
+    issues = {number for entry in document["entries"] for number in entry.get("issues", ())}
+    pulls = {number for entry in document["entries"] for number in entry["pull_requests"]}
+    assert issues
+    assert pulls
+    for number in issues:
+        assert f'href="{document["repository"]}/issues/{number}"' in changelog, number
+    for number in pulls:
+        assert f'href="{document["repository"]}/pull/{number}"' in changelog, number
+    # News keeps its own cards and sends a reader on for the rest.
+    assert sorted(re.findall(r'data-news-entry="([^"]+)"', news)) == sorted(stories)
+    assert f'href="{render_changelog.CHANGELOG_PAGE}">Changelog' in news
+    for anchor, target in render_changelog.news_forward_targets(document).items():
+        assert f'id="{anchor}" href="{target}" data-news-target' in news, anchor
+    assert "CHANGELOG.md#" not in news
+
+
 def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor(
     page: str, about: str
 ) -> None:
@@ -4544,7 +4597,7 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     ]
     assert all('class="site-title"' in tag for tag in re.findall(r"<h1\b[^>]*>", about))
     assert re.search(r"<h2\b", about) is None
-    assert 'id="changelog" href="news.html#changelog" data-news-target' in about
+    assert 'id="changelog" href="changelog.html#changelog" data-news-target' in about
     assert "data-news-entry=" not in about
     assert '<a id="news"></a>' in about
     following = about.split(heading, 1)[1].lstrip()
@@ -7713,7 +7766,8 @@ def test_menu_page_headers_and_metadata_use_the_same_labels(
             name = render_overview.PROJECT_NAME if path == "index.html" else item.label
             assert f"<title>{render_overview.page_title(name)}</title>" in page, path
             assert f'property="og:title" content="{html.escape(name, quote=True)}"' in page
-            if path in {"index.html", "news.html"}:
+            if path == "index.html":
+                # The homepage is where a trail would start, so it carries none.
                 assert 'aria-label="Breadcrumb"' not in page, path
                 continue
             breadcrumb = page.split('aria-label="Breadcrumb"', 1)[1].split("</nav>", 1)[0]

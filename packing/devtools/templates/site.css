@@ -4164,6 +4164,7 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
 }
+
 .kpress :is(h2, h3, h4).site-navigation-heading {
   font-family: var(--kpress-font-sans);
   font-style: normal;

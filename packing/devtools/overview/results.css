@@ -1,8 +1,9 @@
 /* The results page's overview above its table, two stacks of KPress's own disclosure:
    the last seven days' registrations, one a day (overview_sections.recent_added), then
    the weekly rollup before them, one a week (recent_rollup). Two blocks of a stack share
-   one rule. The home page's Recently Added is the first stack again, with its house best
-   packings and dated rows (recently_added). */
+   one rule. The Changelog page's log is the first stack again, over the whole record,
+   with its new record packings, dated rows and site changes
+   (overview_sections.changelog_rollup); it drew on the home page until 26 October 2026. */
 .kpress .site-rollup {
   margin-block: 1rem var(--site-table-space);
 }
@@ -35,9 +36,41 @@
   content: none;
 }
 
-/* A summary that wraps breaks before its count, never inside it. */
+/* A tally is a count, not a toggle's label. KPress sets a summary in the shared
+   section-label treatment -- real uppercase, tracked out, at the canonical label size --
+   and a count carries none of it: `17 results` reads at the note size in its own case,
+   with the number in the sans bold weight, and reads the same wherever a tally appears
+   (the owner, 26 October 2026). The same four declarations set a case record's own
+   disclosures apart from their labels (`site.css`, `.site-case details > summary`).
+   A summary that wraps breaks before its count, never inside it. */
 .kpress .site-rollup-count {
+  font-size: var(--site-font-size-note);
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  text-transform: none;
   white-space: nowrap;
+}
+
+.kpress .site-rollup-count b {
+  font-weight: var(--site-font-weight-sans-bold);
+}
+
+/* A day's toggle sits on the first line of its summary, not centred against a summary
+   that wrapped (the owner, 26 October 2026). KPress centres the glyph in the summary's
+   flex box, which reads right on the one-line summaries it was drawn for and leaves the
+   glyph stranded in the middle of a tallied day on a narrow screen. The offset centres
+   it on the first line: KPress's own line box for a summary, less its own glyph, halved.
+   Both rules stay on the rollup, because that geometry is what holds here and is what
+   was measured here: a result's or a case's disclosure sets its own line height and
+   draws its glyph inline rather than as a flex item (`site-result.css`, and
+   `.site-case details` in `site.css`), and the same offset would push those down their
+   line instead of centring them. */
+.kpress .site-rollup summary {
+  align-items: flex-start;
+}
+
+.kpress .site-rollup summary::before {
+  margin-block-start: calc((var(--kpress-caps-heading-line-height, 1.2) * 1em - 0.85em) / 2);
 }
 
 .kpress .site-rollup .site-rollup-who {

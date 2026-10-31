@@ -454,7 +454,7 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     ):
         if value:
             assert f"<dt>{label}</dt><dd>{result_overview.prose_html(value)}</dd>" in body
-    assert "Lean proof. Not priced.</dd>" in body
+    assert "of which none is on record. Not priced.</dd>" in body
     members = result_overview.chain(overview, cases)
     assert len(members) >= 67
     assert [identity for identity, _ in STEP.findall(body)] == [

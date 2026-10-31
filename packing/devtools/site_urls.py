@@ -32,8 +32,10 @@ REPO = PACKING.parent
 REGISTRY = PACKING / "site-urls.yaml"
 DOCUMENT = REPO / "docs/project/site-urls.md"
 FIRST_SITE_DATE = "2026-09-29"
-# The declared registration day for this URL migration, never the render clock.
-REGISTRATION_DATE = "2026-10-08"
+# The declared registration day for this URL migration, never the render clock. The
+# Changelog page took an address of its own on 26 October 2026; a retained row keeps the
+# day it was first published, so only a new registration reads this.
+REGISTRATION_DATE = "2026-10-26"
 HARD_HTML_LIMIT = 2_000_000
 # Measured exceptions retain the global two-megabyte ceiling.
 PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {

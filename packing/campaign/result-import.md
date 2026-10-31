@@ -721,11 +721,10 @@ The eight record rules are:
 - **A new house best packing or new beyond-horizon rows get a landing.** After changing
   `upper_bound_houses.ADOPTED` or adding a source’s beyond-horizon rows to
   `source-coverage.yaml`, run `python -m devtools.stamp_landed --apply` from `packing/`,
-  which dates them in `packing/frontier/landings.yaml`, the record the home page’s
-  Recently Added places them by.
-  `tests/test_stamp_landed.py` fails until every adopted count and row source has its
-  day, and the merge step re-dates them ([stage 5](#stage-5-publish)); run it again
-  after merging `main`.
+  which dates them in `packing/frontier/landings.yaml`, the record the Changelog page
+  places them by. `tests/test_stamp_landed.py` fails until every adopted count and row
+  source has its day, and the merge step re-dates them ([stage 5](#stage-5-publish));
+  run it again after merging `main`.
 - **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
   `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and the same with `=`
   for an exact value, where $v$ is the value the source certifies, written as a fraction
