@@ -9970,7 +9970,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "result-requests.yaml swapped in, render_packing_methods writes all 43 files "
             "byte-identical across the three; measured again after merging main "
             "e54ae3e97 (#829), at link revision e54ae3e9 with that main's "
-            "result-requests.yaml swapped in, with the same outcome. No PDF was printed; "
+            "result-requests.yaml swapped in, with the same outcome; and on 31 October "
+            "(think-6m6e), after merging main 3978a7f61 and then 32ef0861b (#835) and "
+            "review A's wording fixes to #613's ask note, at link revision 32ef0861 with "
+            "that main's result-requests.yaml swapped in, with the same outcome. No PDF "
+            "was printed; "
             "it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),

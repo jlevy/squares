@@ -17590,7 +17590,8 @@ defects:
     (42 of Couzo's 487b058, 47 of his 4e4c8ce index), and every count above 1024 that the
     owner's D1 answer opened would have been decided against the grid alone.
   fix: >-
-    The owner answered #613 on 23 October 2026 (think-8krd): Göbel's constructions are
+    The owner answered #613's question in conversation on 23 October 2026, as think-8krd
+    records: Göbel's constructions are
     earlier reports beyond 324, and a rational row above Göbel's exact side is not
     recorded. #754 (merged 2026-10-24) makes the answer a ruling of the report-order walks
     (devtools.intake_ledger, classical-constructions), so Göbel's construction joins each

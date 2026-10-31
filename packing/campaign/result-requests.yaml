@@ -10925,7 +10925,8 @@ issues:
       state: done
       source: body
       note: >-
-        Answered by the owner on 23 October 2026 (think-8krd): yes, Göbel's classical constructions
+        The owner answered #613's question in conversation on 23 October 2026, as think-8krd
+        records (nothing was posted on #613): yes, Göbel's classical constructions
         count as earlier reports beyond n = 324, and a rational row above Göbel's exact side at its
         count is not recorded. The owner-answers records change (PR #754) delivers the baseline and
         the correction. It makes the answer a ruling of the report-order walks
@@ -10937,8 +10938,9 @@ issues:
         measures the excess over what the record holds (think-a75a). And it corrects 369 and 376:
         nine rows of 8 to 13 October above Göbel's construction, at 369 (1), 375 (4) and 376 (4),
         stay listed as printed and are marked above-classical-construction, so 369 and 376 have
-        no current row. #793 carries Göbel's construction past the retained program's reach of
-        1073 to every count (devtools.goebel_construction), so the baseline holds above 1024 too.
+        no current row. #793 carries Göbel's construction past the retained program's largest
+        member, 1073, to every count (devtools.goebel_construction), so the baseline holds above
+        1024 too.
         The defect is D-522 (26 October 2026): beyond 324 the record compared reports only with
         the grid and earlier reports, so two current rows stood above Göbel's sides.
       bead: think-8krd
