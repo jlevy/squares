@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 45
+version: 46
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -38,7 +38,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T16:53:05.320Z
+updated_at: 2026-10-31T17:53:51.230Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -74,3 +74,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 15:54 hourly: merged #859 (d7a815e86, Karimi retained+sampled) and #860 (94e36b675, #852 News entry + replies; YAML '#' label guard); 17 merged this pass. Closed 8 review/answer beads for #843/#844/#845/#824; bead tree ok. Posted: #836/#847 follow-ups with corrections (L4) -> #862 addressing review A. #861 (L8: T-261..T-264, T-244 V3/C3; think-3trq parked on think-ot5c + think-ikku) finishing. No new issues.
 
 2026-10-31 16:55 hourly: merged #862 (bed14afa2); 18 merged this pass. #861 (L8) in senior+correctness review (strong-max), incl. whether its hold mechanism (review omitted from reviews to block select_houses) is honest. Karimi answered the #847 licence question (CC BY 4.0, code MIT; preprint) -> lane L9 records it and runs think-gw1s (#836 v5 full replay, ~10.9 CPU-h). No new issues.
+
+2026-10-31 17:54 hourly: merged #861 (3c7dd5900): T-244 V3/C3 (superseded 172, 263 parked think-3trq), #545 grade-C as T-261; the 130/293/307 candidates held UNREGISTERED (package, receipts, review kept) per review A of #861 (hold-by-omitting-review rejected; select_houses KeyError -> think-4z8z). 19 merged this pass. New owner bead think-xyek (status vocabulary). L8 posting #804/#545 replies; L9 recording Karimi licence + think-gw1s v5 full replay. No new issues.
