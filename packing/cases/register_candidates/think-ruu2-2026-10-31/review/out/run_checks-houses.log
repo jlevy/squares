@@ -1,0 +1,6 @@
+house130               route A: accepted=True n=130 pairs=8385 least pair slack 1.823000e-14 (squares 33,41) least wall 9.664410e-15 (square 20 top) side-extent 9.664410e-15 cpu=0.28s
+house130               route B: accepted=True n=130 pairs=8385 clipped 88 cpu=0.07s
+house293               route A: accepted=True n=293 pairs=42778 least pair slack 9.990000e-13 (squares 243,283) least wall 4.995000e-13 (square 237 left) side-extent 5.000000e-13 cpu=1.61s
+house293               route B: accepted=True n=293 pairs=42778 clipped 315 cpu=0.25s
+house307               route A: accepted=True n=307 pairs=46971 least pair slack 2.089520e-13 (squares 168,237) least wall 1.000000e-15 (square 8 left) side-extent 1.000000e-15 cpu=1.79s
+house307               route B: accepted=True n=307 pairs=46971 clipped 295 cpu=0.3s

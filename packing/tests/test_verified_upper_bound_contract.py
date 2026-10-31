@@ -440,6 +440,16 @@ DECLARED_CONSUMERS = {
         "verified lane, T-174's exact rational ceiling, and reports the margin below it; it "
         "reads the field as a ceiling the record proves, never as s(297)"
     ),
+    "docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md": (
+        "the stage 4 review of the 31 October candidates at 130, 293 and 307 checks that "
+        "each house side equals its case's verified lane exactly, and measures each "
+        "candidate below it; it reads the field as a ceiling, never as s(n)"
+    ),
+    "packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/sides.py": (
+        "that review's retained side program evaluates each case's verified lane exactly, "
+        "to show the house equals it and the candidate is below it; it reads the field as "
+        "a ceiling the record proves, never as s(n)"
+    ),
     "docs/project/reviews/review-2026-10-13-verification-gaps.md": (
         "the verification-gaps review measures each drawn side and each reported side "
         "against the field as U, the best side the record verifies exactly; it reads it "

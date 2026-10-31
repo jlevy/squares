@@ -1667,3 +1667,13 @@ repositories:
       the READMEs, the CHANGELOG and the manifest's digests of them. The author's comment on
       #797 of the same evening reports it. Evidence for the registered Theorem A row, which the
       fang-theorem-a-2026-10-24 packet holds at db1ed62; no certificate or theorem to import.
+  # The intake pass of 31 October 2026, lane L8 (think-3guf), from the 14:52 sweep.
+  - url: https://github.com/wand125/square-packing
+    read_through: ea1c45419d1889b097c211ca6b076481f125cd8b
+    read_on: '2026-10-31'
+    note: >-
+      One commit of 31 October (14:19:09Z) past the 7a47ab9 head: ea1c454 changes only
+      docs/data/themes.json, the source's site data, closing its n = 44 theme because s(44) = 7
+      was proved by Mohsen Khalili and Sara Gharabaghi (#842, T-252) and saying its own lower
+      bound s(44) > 6.9975 stands; the list of counts it works on drops 44. No certificate,
+      bound or theorem to import.

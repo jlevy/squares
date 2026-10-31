@@ -1,0 +1,67 @@
+cand130 (view)         positive at the declared side                              expect pass: A pass, B pass ok
+cand130 (view)         box at the exact extent E                                  expect pass: A pass, B pass ok
+cand130 (view)         box at E - 1e-40                                           expect fail: A fail, B fail ok
+cand130 (view)         square 1 onto the bottom wall (+0)                         expect pass: A pass, B pass ok
+cand130 (view)         square 1 onto the bottom wall (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand130 (view)         pair 21,111 closed by slack 1.0e-20 (+0)                   expect pass: A pass, B pass ok
+cand130 (view)         pair 21,111 closed by slack 1.0e-20 (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand130 (view)         square 111 turned by t = 1e-15                             expect fail: A fail, B fail ok
+cand130 (view)         square 21 basis scaled by 1 + 1e-40                        expect fail: A fail, B fail ok
+cand130 (view)         square 1 duplicated                                        expect fail: A fail, B fail ok
+cand130 (solve cert)   positive at the declared side                              expect pass: A pass, B pass ok
+cand130 (solve cert)   box at the exact extent E                                  expect pass: A pass, B pass ok
+cand130 (solve cert)   box at E - 1e-40                                           expect fail: A fail, B fail ok
+cand130 (solve cert)   square 1 onto the bottom wall (+0)                         expect pass: A pass, B pass ok
+cand130 (solve cert)   square 1 onto the bottom wall (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand130 (solve cert)   pair 111,112 closed by slack 1.0e-20 (+0)                  expect pass: A pass, B pass ok
+cand130 (solve cert)   pair 111,112 closed by slack 1.0e-20 (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand130 (solve cert)   square 112 turned by t = 1e-15                             expect fail: A fail, B fail ok
+cand130 (solve cert)   square 111 basis scaled by 1 + 1e-40                       expect fail: A fail, B fail ok
+cand130 (solve cert)   square 1 duplicated                                        expect fail: A fail, B fail ok
+cand307 (view)         positive at the declared side                              expect pass: A pass, B pass ok
+cand307 (view)         box at the exact extent E                                  expect pass: A pass, B pass ok
+cand307 (view)         box at E - 1e-40                                           expect fail: A fail, B fail ok
+cand307 (view)         square 8 onto the left wall (+0)                           expect pass: A pass, B pass ok
+cand307 (view)         square 8 onto the left wall (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand307 (view)         pair 153,160 closed by slack 1.0e-20 (+0)                  expect pass: A pass, B pass ok
+cand307 (view)         pair 153,160 closed by slack 1.0e-20 (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand307 (view)         square 160 turned by t = 1e-15                             expect fail: A fail, B fail ok
+cand307 (view)         square 153 basis scaled by 1 + 1e-40                       expect fail: A fail, B fail ok
+cand307 (view)         square 1 duplicated                                        expect fail: A fail, B fail ok
+cand307 (solve cert)   positive at the declared side                              expect pass: A pass, B pass ok
+cand307 (solve cert)   box at the exact extent E                                  expect pass: A pass, B pass ok
+cand307 (solve cert)   box at E - 1e-40                                           expect fail: A fail, B fail ok
+cand307 (solve cert)   square 8 onto the left wall (+0)                           expect pass: A pass, B pass ok
+cand307 (solve cert)   square 8 onto the left wall (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand307 (solve cert)   pair 153,160 closed by slack 1.0e-20 (+0)                  expect pass: A pass, B pass ok
+cand307 (solve cert)   pair 153,160 closed by slack 1.0e-20 (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand307 (solve cert)   square 160 turned by t = 1e-15                             expect fail: A fail, B fail ok
+cand307 (solve cert)   square 153 basis scaled by 1 + 1e-40                       expect fail: A fail, B fail ok
+cand307 (solve cert)   square 1 duplicated                                        expect fail: A fail, B fail ok
+cand293 (16+16+1)      positive at the declared side                              expect pass: A pass, B pass ok
+cand293 (16+16+1)      box at the exact extent E                                  expect pass: A pass, B pass ok
+cand293 (16+16+1)      box at E - 1e-40                                           expect fail: A fail, B fail ok
+cand293 (16+16+1)      square 261 onto the bottom wall (+0)                       expect pass: A pass, B pass ok
+cand293 (16+16+1)      square 261 onto the bottom wall (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand293 (16+16+1)      pair 261,262 closed by slack 0.0e+00 (+0)                  expect pass: A pass, B pass ok
+cand293 (16+16+1)      pair 261,262 closed by slack 0.0e+00 (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand293 (16+16+1)      square 262 turned by t = 1e-15                             expect fail: A fail, B fail ok
+cand293 (16+16+1)      square 261 basis scaled by 1 + 1e-40                       expect fail: A fail, B fail ok
+cand293 (16+16+1)      square 1 duplicated                                        expect fail: A fail, B fail ok
+cand293 (16+16+1)      block right extent 16.633982502121281044 at y [13.63398250211887, 14.63398250211887, 2.000000000003016, 3.000000000003016, 6.000000000007841, 7.000000000007841, 7.000000000009047, 8.000000000009047, 10.63398250211525, 11.63398250211525, 8.633982502112838, 9.633982502112838, 14.633982502120077, 15.633982502120077, 5.000000000006634, 6.000000000006634, 3.000000000004222, 4.000000000004222, 4.000000000005429, 5.000000000005429]; column at x = S; gap 6.020000e-13; corner faces a column square: True
+cand293 (16+16+1)      strip column moved onto the block's corner (+0)            expect pass: A pass, B pass ok
+cand293 (16+16+1)      strip column moved onto the block's corner (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand293 (17top+16)     positive at the declared side                              expect pass: A pass, B pass ok
+cand293 (17top+16)     box at the exact extent E                                  expect pass: A pass, B pass ok
+cand293 (17top+16)     box at E - 1e-40                                           expect fail: A fail, B fail ok
+cand293 (17top+16)     square 278 onto the left wall (+0)                         expect pass: A pass, B pass ok
+cand293 (17top+16)     square 278 onto the left wall (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand293 (17top+16)     pair 261,262 closed by slack 0.0e+00 (+0)                  expect pass: A pass, B pass ok
+cand293 (17top+16)     pair 261,262 closed by slack 0.0e+00 (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+cand293 (17top+16)     square 262 turned by t = 1e-15                             expect fail: A fail, B fail ok
+cand293 (17top+16)     square 261 basis scaled by 1 + 1e-40                       expect fail: A fail, B fail ok
+cand293 (17top+16)     square 1 duplicated                                        expect fail: A fail, B fail ok
+cand293 (17top+16)     block right extent 16.633982502121281044 at y [13.63398250211887, 14.63398250211887, 2.000000000003016, 3.000000000003016, 6.000000000007841, 7.000000000007841, 7.000000000009047, 8.000000000009047, 10.63398250211525, 11.63398250211525, 8.633982502112838, 9.633982502112838, 14.633982502120077, 15.633982502120077, 5.000000000006634, 6.000000000006634, 3.000000000004222, 4.000000000004222, 4.000000000005429, 5.000000000005429]; column at x = S; gap 6.020000e-13; corner faces a column square: True
+cand293 (17top+16)     strip column moved onto the block's corner (+0)            expect pass: A pass, B pass ok
+cand293 (17top+16)     strip column moved onto the block's corner (+1/10000000000000000000000000000000000000000) expect fail: A fail, B fail ok
+64 controls, 64 as expected, 0 not

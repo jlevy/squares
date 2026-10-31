@@ -34817,26 +34817,35 @@ results:
       and
       s(263) <= 16.7331660078993789705122814839596734462471472483871051710853314027161147491596783918785611086390994182….
 
-      These are upper bounds as reported, and not shown. The source determined each side
-      numerically: it solved the KKT system on the active contacts to 3,000 digits from the
-      binary64 packings of Evan Daniel's atlas, and found each polynomial as an LLL relation
-      at 1,500 digits. The issue supplies no exact configuration, and says the nonnegativity
-      of its multipliers is not certified.
+      The source determined each side numerically: it solved the KKT system on the active
+      contacts to 3,000 digits from the binary64 packings of Evan Daniel's atlas, and found
+      each polynomial as an LLL relation at 1,500 digits, and says the nonnegativity of its
+      multipliers is not certified. In a later comment the same day the author attached an
+      exact configuration at each side: every centre and half-angle tangent in a number field
+      K of degree 24 at 172 and 17 at 263 that holds the side.
 
-      Feasibility at either side is not shown until an exact configuration at that side is
-      decided: every centre and half-angle tangent in a
-      number field holding the side, every contact an identity there and every other pair
-      and wall separated exactly. In a later comment on the issue the same day, the author
-      attached configurations at both counts that he reports to be of this kind; they are
-      retained here and not yet decided.
+      Both configurations were decided here on 31 October 2026 on two exact routes, so both
+      bounds are shown. sqpack's exact witness verifier, over each configuration's field,
+      decided every unit-square identity, wall and pair and refused a duplicated square and a
+      square moved outside the box; Evan Daniel's verify_exact.py, the checker the author
+      reports running, run unchanged here, printed VALID and refused four mutated controls at
+      each count.
+
+      Before deciding, each configuration was held to the digest the comment states, and its
+      side to this entry's: the same polynomial, a root of it in K, and the
+      same real root.
 
       Here SymPy and sqpack.field found each polynomial primitive and irreducible, and each
       side is the root the source's 100-digit print names, decided exactly. Each lies below
-      T-174's rational certificate at its count, the case's house, by 3.898e-89 at 172 and
-      2.126e-94 at 263. It also lies below the degree-12 side of Evan Daniel's issue 639
-      there, by 1.185e-62 and 9.234e-63, which T-174 is already below. The atlas packings the
-      source read are T-174's witnesses at both counts, to binary64 at every square. The
-      ledger of 25 October for issue 804 records both in report order.
+      T-174's rational certificate at its count, the case's house when registered, by
+      3.898e-89 at 172 and 2.126e-94 at 263. It also lies below the degree-12 side of Evan
+      Daniel's issue 639 there, by 1.185e-62 and 9.234e-63, which T-174 is already below. The
+      atlas packings the source read are T-174's witnesses at both counts, to binary64 at
+      every square. The ledger of 25 October for issue 804 records both in report order.
+
+      At 172 the house moved on 31 October 2026 to Evan Daniel's issue 845 certificate
+      (T-257), 1.053e-3 below this side, so the configuration there realizes T-174's retired
+      packing; at 263 T-174's certificate is still the house.
 
       Credit Hyukdong Kim with each exact side, a refinement of the packing it solves, after
       that packing's finders as the case records credit them: Francisco Couzo's at 172, as
@@ -34845,8 +34854,8 @@ results:
       did the search for open cases, the pipeline, the computations and the verification
       script at the author's direction, and that he reviewed the outputs.
     scope: {n_values: [172, 263]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: >-
@@ -34854,14 +34863,19 @@ results:
         below the houses' rational certificates: a citable detail of each case that changes
         no theorem, S2 as T-193's and T-120 to T-123's exact forms are. It also places the
         reported stationary side of both packings below issue 639's sides, which the
-        record's final reply there asked about. No lower bound or optimum.
+        record's final reply there asked about. No lower bound or optimum. Since 31 October
+        2026 the house at 172 is T-257's, 1.053e-3 below the side there, so only the side at
+        263 is below its house; the score is unchanged.
       scored: '2026-10-25'
       by: think-9vai triage (draft), adopted by the #804 import (c-import-804-1025)
     novelty: previously-published
     attribution:
       source_keys: ['[Kim exact forms 2026-10-25]']
       published: '2026-10-25'
-    evidence: [E-hyukdongkim-804-exact-forms-report]
+    evidence:
+      - E-hyukdongkim-804-exact-forms-report
+      - E-hyukdongkim-804-configurations-exact-feasibility
+      - E-hyukdongkim-804-configurations-verify-exact
     artifacts:
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/README.md
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
@@ -34874,52 +34888,35 @@ results:
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/atlas-poses.json
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
-    controls: [packing/tests/test_kim_exact_forms_804.py]
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/receipts/side-check.json
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/receipts/algebraic-route1-n172.json.xz
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/receipts/algebraic-route1-n263.json.xz
+      - packing/devtools/configuration_fact_replay.py
+    controls:
+      - packing/tests/test_kim_exact_forms_804.py
+      - packing/tests/test_configuration_fact_replay.py
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/receipts/route2-verify-exact.json
     next_rung: >-
-      The author's exact configurations at both sides, received on 25 October in the
-      minpoly.json format of Evan Daniel's verify_exact.py and retained as derived facts
-      (the hyukdongkim-t244-configurations-2026-10-25 packet), decided exactly here
-      (think-4rzl).
-
-      A small reader of the packet's facts comes first: derive-forms needs a
-      declaration and retained upstream bytes, which the packet keeps neither of, so the
-      reader feeds each fact's configuration to
-      devtools.algebraic_witness_reports.evand_minpoly_geometry. sqpack.witness.exact_verify
-      then decides each over its field, with the duplicate-square and outside-container
-      controls, and the retained verify_exact.py decides each form rebuilt from its fact, a
-      second route. That would take C to C3, and a stage 4 review of the configurations and
-      the claim would take V to V3.
-
-      The house rule would then adopt both sides, with their regularization items naming
-      T-174, measured against its witnesses. Only if the configurations fail would a builder
-      here be the route (think-4rzl's fallback). Local minimality of either packing at its
-      side is a separate claim and is not registered.
-    unfinished_confirmations:
-      - what: >-
-          The author's exact configuration at each side decided on
-          sqpack.witness.exact_verify over its number field, a positive and two controls a
-          count, and on the retained verify_exact.py, a second route.
-        rung: C3
-        link: think-4rzl
-        estimated_cost:
-          cpu_hours: 2.0
-          cpu_hours_high: 8.0
-          basis: >-
-            Scaled as field degree squared times count squared from T-193's 23 October
-            adoption, where 302 at degree 7 took 230.72 s a job, a scale that reproduces the
-            price of about 2 CPU-hours a job at 267, degree 41. It assumes the field degree
-            equals the side's, 24 and 17; the upper end allows a field of twice that degree
-            and Daniel's verify_exact.py as the second route. The author's configurations
-            are of degree 24 and 17, so the central estimate applies; under the 40
-            CPU-hour item cap. The reader of the packet's facts that comes first is tooling,
-            about half an agent-day, and adds no compute to speak of.
-          priced: '2026-10-25'
+      Parked (think-3trq, 31 October 2026): the side at 263 is the exact value of the
+      house's own arrangement, 2.126e-94 below T-174's certificate there, not a new packing.
+      It waits on the algebraic-house writer (think-ot5c) and on the owner's restatement
+      question (think-ikku). If those make it adoptable, a stage 4 review of the
+      configurations comes first, then the house rule adopts the side at 263 with both
+      strong generators' regularization. Nothing is adopted at 172, where the house is
+      1.053e-3 lower. Local minimality of either packing at its side is a separate claim and is not
+      registered. V4 and C4 need two adversarial AI reviews by distinct reviewers and a human
+      oversight record.
     notes: >-
-      Source assertions only. Nothing of the source's code was executed here; the archive
-      states no licence, so the packet keeps the polynomials and printed sides as a derived
-      fact with the archive's digests. The polynomials' irreducibility and the exact order
-      against T-174 and issue 639 are decided here (exact-sides.json); that each side is the
-      side of a packing is not. The source's KKT multipliers are not unique and their least
+      The sides are the source's numerical determination; the configurations that realize
+      them were decided here on two routes (think-4rzl). None of the author's own code was
+      executed here: route 2 is Evan Daniel's verify_exact.py, which the author reports
+      running, retained from Daniel's repository.
+
+      The archives stated no licence when retained, so the packets keep derived facts with the archives' digests; the author
+      dedicated all three attachments to CC0 1.0 on 25 October. The polynomials' irreducibility and the exact order
+      against T-174 and issue 639 are decided here (exact-sides.json); that each side is
+      realized by a packing is decided by the configurations (think-4rzl), and local
+      minimality is not. The source's KKT multipliers are not unique and their least
       minimum-norm value is about -6e-16, with no second-order check, so stationarity is
       numerical and local minimality is not recorded. No global optimality or rigidity is
       claimed.
@@ -34935,14 +34932,15 @@ results:
 
       The author's comment of 07:22:16Z concedes 88, 126 and 199 to issue 639 and withdraws
       the issue's paragraph claiming a gap of 1.2e-22 at 126; his comment of 09:06:23Z
-      attaches the exact configurations at 172 and 263, which no licence covers, so the
-      configurations packet keeps their content as derived facts with the attachment's
-      digests, and none of their checker, controls or scripts ran here.
+      attaches the exact configurations at 172 and 263; the configurations packet keeps
+      their content as derived facts with the attachments' digests, and none of the author's
+      checker, controls or scripts ran here.
 
       Each side is stated cut at 100 places: T-174's certificate agrees with it to 88 places at
       172 and to 93 at 263, so a shorter cut, such as the 40 places T-193 prints, would not
       tell them apart. The case records are unchanged until adoption, so this entry reads as
-      pending adoption at both counts.
+      pending adoption at 263; at 172 the case holds a lower certificate since 31 October
+      (T-257), so there it is superseded.
     regularizations:
       - n: 172
         of: T-174
@@ -37733,6 +37731,120 @@ results:
         23 October ruling, put to the owner (RV-1).
       verdict: accepted
       covers: [T-260]
+
+  - id: T-261
+    kind: restricted-optimality
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: Reported grade-C local minima for 233 source configurations of field degree at most 4
+    claim: >-
+      Evan Daniel reports that 233 source configurations of field degree at most 4 are
+      local minima of the side under the source's matched-index convention
+      (IsLocalMinPacking: a pose ball, squares matched by index, angles modulo 90 degrees,
+      non-strict), by Theorem C of grade-C.md, a second-order sufficient condition that
+      allows exact flat motions, checked exactly in each configuration's number field by
+      gradec.py; at 230 and 261 after dropping the 24 rows at each that carry zero force.
+
+      The stage 4 review of 23 October found Theorem C true under its hypotheses as
+      gradec.py checks them, and repaired one gap in its paper proof: the last two steps do
+      not control rows whose corner sits at a side end, which the pair form of the
+      relaxation and a bootstrap close with no check changed. A checker written for that
+      review, independently re-implemented after reading the producer's code, decided all
+      233 again, including that each record is a packing, which gradec.py leaves to
+      verify_exact.py, and agrees with every certificate on rows, ranks, dim F, dim W and
+      the moving squares. That run is a second route beside the rung; the C3 replay is
+      gradec.py's own over all 233 (think-mtah), of which n = 10 was reproduced with the
+      producer's code, byte for byte.
+
+      At eleven counts the configuration has since been superseded on its case (70, 84, 86,
+      127, 153, 175, 176, 232, 258, 261 and 267), and at 230 the side is the case's ceiling
+      643/41. The certificates are summaries. No global bound, rigidity or strict
+      minimality is claimed.
+    scope:
+      n_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 30, 31, 32, 33, 34, 35, 36, 38, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 84, 85, 86, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 104, 107, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 124, 125, 127, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 147, 148, 149, 150, 151, 153, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 175, 176, 178, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 200, 202, 203, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 229, 230, 232, 233, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 258, 260, 261, 264, 265, 267, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 293, 294, 298, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324]
+    verification: V3
+    confirmation: C1
+    significance:
+      score: 2
+      rationale: >-
+        Reported local structure for a named configuration roster, as T-124 is: a non-strict
+        local minimum under a stated perturbation convention, short of rigidity or
+        optimality, at 233 configurations, 64 of them outside T-124's roster. Weaker than
+        T-012 to T-014 and T-036 (S3) at every count, so S2. Kept by the 23 October review.
+      scored: '2026-10-23'
+      by: >-
+        the stage 4 mathematical review of 23 October
+        (docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md, lane
+        c-review-thmc-1023), confirming the triage's draft
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel exact and local reports 2026-10-12]']
+      published: '2026-10-12'
+    evidence:
+      - E-evand-gradec-local-minima-233-report
+      - E-evand-gradec-local-minima-233-review-check
+      - E-evand-gradec-n10-recompute
+    artifacts:
+      - packing/resources/web/evand-exact-data-2026-10-12/README.md
+      - packing/resources/web/evand-exact-data-2026-10-12/review/README.md
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/tasks/exact-minpoly/grade-C.md
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec_runs/_status.txt
+      - docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
+    controls:
+      - packing/resources/web/evand-exact-data-2026-10-12/receipts/review-compare-233.json
+    composition: >-
+      The review's checker, an independent re-implementation, decided all 233 in full, and
+      its evidence would derive C3; it is held at C1, the review's read, because stage 4
+      takes the source's own checker as the replay (result-import.md, Stage 4) and the
+      review's checker is that lane's own, whose soundness no one else has reviewed, so its
+      run is a second route beside the rung, as at T-225 and T-229 (review A1 of #751). The
+      n = 10 recomputation is a reproduction with the producer's code at one count and sets
+      no rung. C3 waits on gradec.py's replay of all 233 (think-mtah).
+    reviews:
+      - path: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, Anthropic), the stage 4 mathematical review lane (W2) of the
+          #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier at maximum
+          reasoning, prompted separately from the import and records lanes
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-23'
+        scope: >-
+          Theorem C of grade-C.md re-derived from its statement, gradec.py and the three
+          modules it imports read as data, and all 233 certificates decided again by a
+          checker written for the review, with the record's packing property.
+        verdict: defects-resolved
+        covers: [T-261]
+    next_rung: >-
+      Replay gradec.py, the source's checker, from its retained copy on all 233
+      configurations, 230 and 261 with GRADEC_DROPZERO=1, comparing each output with the
+      published n-N.gradec.json (think-mtah, about 10.6 CPU-hours by the source's logs):
+      that is the C3 replay. The author's adoption of the review's repaired step in
+      grade-C.md would close C-1 at the source.
+    unfinished_confirmations:
+      - what: >-
+          gradec.py replayed from its retained copy on all 233 configurations, each output
+          compared with the published certificate
+        rung: C3
+        link: think-mtah
+        estimated_cost:
+          cpu_hours: 10.6
+          cpu_hours_high: 21.0
+          basis: >-
+            The source's logs: 38,026 s of build time for the VALID runs on the author's
+            machine at 8 jobs; the upper end allows a slower host here
+          priced: '2026-10-12'
+    notes: >-
+      Found in the watched-repository read of evand/square-packing for the 12 October
+      intake (think-mq0k) and tracked on issue 545. 169 of the 233 counts are in T-124's
+      roster, whose Lean proofs are a separate route; 64 are not. The 17 configurations
+      whose runs timed out at 30 minutes (174, 201, 204, 231, 234, 257, 262, 274, 275, 295,
+      296, 299 and 308 to 312) are outside the claim, as are field degrees above 4. Each
+      configuration keeps its case's finder credit; the claim is about the configuration
+      the source checked, and at 222 counts its side equals the case's reported upper bound
+      within 1e-9 when read on 12 October.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

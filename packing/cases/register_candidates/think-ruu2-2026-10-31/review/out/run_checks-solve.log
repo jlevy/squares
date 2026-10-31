@@ -1,0 +1,4 @@
+solve130               route A: accepted=True n=130 pairs=8385 least pair slack 1.000000e-20 (squares 111,112) least wall 5.000000e-21 (square 1 bottom) side-extent 5.000000e-21 cpu=0.29s
+solve130               route B: accepted=True n=130 pairs=8385 clipped 87 cpu=0.1s
+solve307               route A: accepted=True n=307 pairs=46971 least pair slack 1.000000e-20 (squares 153,160) least wall 5.000000e-21 (square 8 left) side-extent 5.000000e-21 cpu=1.8s
+solve307               route B: accepted=True n=307 pairs=46971 clipped 295 cpu=0.32s

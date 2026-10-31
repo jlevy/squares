@@ -1,0 +1,10 @@
+cand130                route A: accepted=True n=130 pairs=8385 least pair slack 1.000000e-20 (squares 21,111) least wall 5.000000e-21 (square 1 bottom) side-extent 5.000000e-21 cpu=0.33s
+cand130                route B: accepted=True n=130 pairs=8385 clipped 86 cpu=0.1s
+cand307                route A: accepted=True n=307 pairs=46971 least pair slack 1.000000e-20 (squares 153,160) least wall 5.000000e-21 (square 8 left) side-extent 5.000000e-21 cpu=2.13s
+cand307                route B: accepted=True n=307 pairs=46971 clipped 296 cpu=0.32s
+s260                   route A: accepted=True n=260 pairs=33670 least pair slack 1.201634e-12 (squares 28,34) least wall 6.010000e-13 (square 241 top) side-extent 6.010000e-13 cpu=1.24s
+s260                   route B: accepted=True n=260 pairs=33670 clipped 315 cpu=0.23s
+cand293-16+16+1        route A: accepted=True n=293 pairs=42778 least pair slack 0.000000e+00 (squares 261,262) least wall 0.000000e+00 (square 261 bottom) side-extent 0.000000e+00 cpu=1.47s
+cand293-16+16+1        route B: accepted=True n=293 pairs=42778 clipped 315 cpu=0.24s
+cand293-17+16          route A: accepted=True n=293 pairs=42778 least pair slack 0.000000e+00 (squares 261,262) least wall 0.000000e+00 (square 261 bottom) side-extent 0.000000e+00 cpu=1.66s
+cand293-17+16          route B: accepted=True n=293 pairs=42778 clipped 315 cpu=0.3s

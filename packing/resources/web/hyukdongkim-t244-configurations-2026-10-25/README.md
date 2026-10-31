@@ -10,13 +10,11 @@ $S^*$. They are in
 the `minpoly.json` format of Evan Daniel’s `verify_exact.py`, the checker reviewed for
 T-193.
 
-**Nothing here decides them.** This packet keeps them; deciding them exactly on this
-repository’s two routes is the next step, owned by think-4rzl. It first needs a small
-reader of these facts: `devtools.algebraic_witness_reports derive-forms` reads a packet’s
-declaration and retained upstream bytes, which this packet keeps neither of, so the reader
-feeds each fact’s `configuration` to `evand_minpoly_geometry`, with
-`configurations --check` against the zip as the facts’ custody. Until then T-244 stays
-reported, and the comment’s statements, below, are the author’s.
+**Both are decided, on 31 October 2026, on two exact routes** (think-4rzl), by
+`devtools.configuration_fact_replay`, the small reader these facts needed:
+`devtools.algebraic_witness_reports derive-forms` reads a packet’s declaration and
+retained upstream bytes, which this packet keeps neither of. See
+[What Was Decided](#what-was-decided). The comment’s statements, below, are the author’s.
 
 | n | Field | Certificate | SHA-256, as the comment states it |
 | ---: | --- | --- | --- |
@@ -87,16 +85,57 @@ the rule #755’s packet followed before its CC0: no byte of the archive is kept
 The archive’s `check_field_packing.py`, `controls.py` and `distance_to_record.py` are
 pinned by digest and were never run or opened as code.
 
+## What Was Decided
+
+`devtools.configuration_fact_replay`, on 31 October 2026, from `packing/` under CPython
+3.14.7, at two processes, `nice`, on a four-core host shared with other lanes.
+Its authors read the comments as text and the retained `verify_exact.py` as data; the
+archive’s own checker, controls and distance script were never opened.
+
+- **Custody** (`custody`). `json.dumps` of each fact’s `configuration` rebuilds the
+  author’s file byte for byte: its SHA-256 is the member digest the comment states and
+  `acquisition/sources.json` records.
+- **The side** (`side --write`, `receipts/side-check.json`). Each `S.poly` is T-244’s
+  polynomial as `exact-sides.json` holds it. `S.in_K` is a root of it exactly in K, and
+  its enclosure lies in the stated interval. The polynomial has one real root in the hull
+  of that enclosure and T-244’s isolating interval, counted by SymPy, so each side is
+  T-244’s.
+- **Route 1** (`route1`, `receipts/algebraic-route1-nNNN.json.xz`). Each configuration
+  becomes a centre-basis Witness/v2 over K through `evand_minpoly_geometry`, and
+  `sqpack.witness.exact_verify` decides it: both positives accepted with every pair
+  decided, a duplicated square refused on overlap and a square moved outside the box
+  refused on containment, 147,477 pair decisions in 5,197 CPU seconds over the six jobs, the positives 733 s at 172 and 1,033 s at 263. The 127 squares at 172 and 184 at 263 whose angle
+  parameter is the empty list are read as zero, as `verify_exact.py` reads them; the
+  receipt lists them.
+- **Route 2** (`route2`, `receipts/route2-verify-exact.json`). The retained
+  `verify_exact.py`, run unchanged on each rebuilt file in its own `python -I` process,
+  printed VALID at both counts. It refused four mutated controls at each: a square moved
+  1e-6 through a wall it touches (the files list no contacts, so an axis-aligned square
+  whose centre coordinate is exactly 1/2), the side raised by 1e-6 in K, the side’s
+  interval moved below its root, and a duplicated square. At 172 it proved 1,026 touching incidences as identities in K and at 263 1,593, as the author’s comment states; the ten runs took 40 CPU seconds.
+
+At 172 the side is 1.053e-3 above the case’s house since 31 October 2026 (T-257), so the
+configuration realizes T-174’s retired packing. At 263 it is 2.126e-94 below the house,
+T-174’s rational certificate, the exact value of the house's own arrangement. Its adoption is parked on the
+algebraic-house writer (think-ot5c) and the owner's restatement question
+(think-ikku), with the stage 4 review after them (think-3trq).
+
 ## Commands
 
 From `packing/`:
 
 ```sh
 uv run --frozen --all-extras --group dev python campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py configurations --archive ZIP --check
+python -m devtools.configuration_fact_replay custody
+python -m devtools.configuration_fact_replay side --write
+python -m devtools.configuration_fact_replay route1 --jobs-dir SCRATCH/jobs --workers 2
+python -m devtools.configuration_fact_replay route2 --scratch SCRATCH/route2 --workers 2
+python -m devtools.configuration_fact_replay check [--replay]
 ```
 
-It refuses an archive without the comment’s SHA-256 and the measured size, and a
-certificate without its stated digest.
+The first refuses an archive without the comment’s SHA-256 and the measured size, and a
+certificate without its stated digest. `check` admits all three receipts again, and
+`--replay` decides route 1’s jobs again.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -54,3 +54,40 @@ deferrals:
       rule for zm_mixed.py. Adopting the value puts s(95) in the case''s verified lane as proved. No
       zm_mixed.py refusal of a mutated s(95) cover has run, so two are owed whatever the owner rules
       on the depth limit. The case record at 95 cites the evidence once both are held.'
+  - evidence: E-evand-gradec-local-minima-233-review-check
+    results:
+    - T-261
+    bead: think-8xy2
+    blocked_on: think-8xy2
+    recorded: '2026-10-31'
+    reason: 'The 23 October review''s checker decided all 233 grade-C configurations, a local-minimality
+      claim on no bound, and no case record has a block for local minimality, so nothing can cite it
+      yet. think-8xy2 builds the durable citing record (a rule for evidence a structural result cites,
+      or a case-record block); until then the register entry cites it.'
+  - evidence: E-evand-gradec-n10-recompute
+    results:
+    - T-261
+    bead: think-8xy2
+    blocked_on: think-8xy2
+    recorded: '2026-10-31'
+    reason: 'gradec.py''s byte-identical recomputation at n = 10, a reproduction with the producer''s
+      code at one count of the grade-C claim, which bears on no bound; it waits on the same citing record
+      as the review''s run (think-8xy2).'
+  - evidence: E-hyukdongkim-804-configurations-exact-feasibility
+    results:
+    - T-244
+    bead: think-3trq
+    blocked_on: think-3trq
+    recorded: '2026-10-31'
+    reason: 'Kim''s exact configurations at 172 and 263, decided on sqpack''s exact verifier over each
+      field. At 172 the case holds a lower certificate (T-257), so no case record there will cite
+      it; at 263 the case record cites it when the house adopts T-244, after the stage 4 review of the
+      configurations (think-3trq).'
+  - evidence: E-hyukdongkim-804-configurations-verify-exact
+    results:
+    - T-244
+    bead: think-3trq
+    blocked_on: think-3trq
+    recorded: '2026-10-31'
+    reason: 'The same configurations decided by the retained verify_exact.py, the second route; cited
+      with route 1 when 263 adopts T-244 (think-3trq).'
