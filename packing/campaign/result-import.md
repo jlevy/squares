@@ -1575,8 +1575,10 @@ each held open only by validation the project owned (#420, #428, #446, #594, #60
    a reservation for the owner that beads record (`basis: recorded-reservation`, pending
    the owner’s confirmation), with those beads in `beads` and a note saying what each
    records; only the owner lifts it.
-   An issue GitHub already shows closed is not posted on again: record its final comment
-   and its close (step 4).
+   An issue GitHub already shows closed with its final comment is not posted on again:
+   record that comment and its close (step 4). One GitHub closed before its final
+   comment was posted, as a merged pull request’s closing keyword does (#613 on 31
+   October 2026, think-t9uj), still gets the final comment, posted as below.
 2. **Check that `main` and the deployed site say what the final comment will say**,
    render the comment with `check_requests --draft N`, and edit it to the house style.
    It states each id at its rungs, linked into `main` and the site, and that nothing the
