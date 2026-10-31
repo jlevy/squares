@@ -9966,7 +9966,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "enters #816, the owner's tracker of T-246's validation. Against main "
             "2f974835a (#818) it was measured at link revisions a1bf7a77 and 064b9534 (43 "
             "files byte-identical across three renders each). After merging main 3978a7f61 "
-            "(#841), rendered at link revision MERGEREV into empty site directories, twice "
+            "(#841), rendered at link revision e2bad14f into empty site directories, twice "
             "from this tree and once with that main's result-requests.yaml swapped in: "
             "render_packing_methods writes all 43 files byte-identical across the three. "
             "No PDF was printed; it prints from that HTML. Retain v0.2.7."
