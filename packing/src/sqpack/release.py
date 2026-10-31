@@ -10469,6 +10469,29 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake of 31 October (think-7yrs, think-r94q): #836's and #847's entries "
+            "triaged, read through the author's comments of 11:43Z and pointed at the "
+            "karimi-records-2026-10-31 packet; no register entry, row, side, bound or "
+            "credit changes. Against main a8deaf1b6 (#817): rendered at link revision "
+            "a8deaf1b into empty site directories, twice from this tree and once with that "
+            "main's result-requests.yaml swapped in, render_packing_methods writes its 43 "
+            "files byte-identical across the three; measured again after the custody "
+            "wording of #847's notes changed, and again after review A of #859 reworded "
+            "#847's summary, each against the same main: 43 files, byte-identical. Measured "
+            "again after merging main 86ba245b5 (#852, #856, #857, #858), at link revision "
+            "86ba245b, twice from this tree and once with that main's result-requests.yaml "
+            "swapped in: 43 files, byte-identical across the three. No PDF was printed; it "
+            "prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 
