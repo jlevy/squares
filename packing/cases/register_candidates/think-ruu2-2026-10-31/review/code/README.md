@@ -99,3 +99,7 @@ If the record cites this review’s decisions, `route_sat.py` and `route_area.py
 deciding programs (clean room: their authors read the certificate formats from the
 files’ headers and the record’s prose, never the producer’s checkers or the maintained
 routes); the others decide nothing.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

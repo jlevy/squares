@@ -34829,20 +34829,23 @@ results:
       decided every unit-square identity, wall and pair and refused a duplicated square and a
       square moved outside the box; Evan Daniel's verify_exact.py, the checker the author
       reports running, run unchanged here, printed VALID and refused four mutated controls at
-      each count. Before deciding, each configuration was held to the digest the comment
-      states, and its side to this entry's: the same polynomial, a root of it in K, and the
+      each count.
+
+      Before deciding, each configuration was held to the digest the comment states, and its
+      side to this entry's: the same polynomial, a root of it in K, and the
       same real root.
 
       Here SymPy and sqpack.field found each polynomial primitive and irreducible, and each
       side is the root the source's 100-digit print names, decided exactly. Each lies below
       T-174's rational certificate at its count, the case's house when registered, by
-      3.898e-89 at 172 and 2.126e-94 at 263. At 172 the house moved on 31 October 2026 to
-      Evan Daniel's issue 845 certificate (T-257), 1.053e-3 below this side, so the
-      configuration there realizes T-174's retired packing; at 263 T-174's certificate is
-      still the house. It also lies below the degree-12 side of Evan Daniel's issue 639
-      there, by 1.185e-62 and 9.234e-63, which T-174 is already below. The atlas packings the
-      source read are T-174's witnesses at both counts, to binary64 at every square. The
-      ledger of 25 October for issue 804 records both in report order.
+      3.898e-89 at 172 and 2.126e-94 at 263. It also lies below the degree-12 side of Evan
+      Daniel's issue 639 there, by 1.185e-62 and 9.234e-63, which T-174 is already below. The
+      atlas packings the source read are T-174's witnesses at both counts, to binary64 at
+      every square. The ledger of 25 October for issue 804 records both in report order.
+
+      At 172 the house moved on 31 October 2026 to Evan Daniel's issue 845 certificate
+      (T-257), 1.053e-3 below this side, so the configuration there realizes T-174's retired
+      packing; at 263 T-174's certificate is still the house.
 
       Credit Hyukdong Kim with each exact side, a refinement of the packing it solves, after
       that packing's finders as the case records credit them: Francisco Couzo's at 172, as
@@ -34905,8 +34908,9 @@ results:
       The sides are the source's numerical determination; the configurations that realize
       them were decided here on two routes (think-4rzl). None of the author's own code was
       executed here: route 2 is Evan Daniel's verify_exact.py, which the author reports
-      running, retained from Daniel's repository. The archives stated no licence when
-      retained, so the packets keep derived facts with the archives' digests; the author
+      running, retained from Daniel's repository.
+
+      The archives stated no licence when retained, so the packets keep derived facts with the archives' digests; the author
       dedicated all three attachments to CC0 1.0 on 25 October. The polynomials' irreducibility and the exact order
       against T-174 and issue 639 are decided here (exact-sides.json); that each side is the
       side of a packing is not. The source's KKT multipliers are not unique and their least
@@ -37850,7 +37854,7 @@ results:
       a certificate this project made (think-4z8z).
     notes: >-
       The case record is unchanged: the house at 307 stays T-256. The retained certificate
-      is the run's solve certificate (SHA-256 f5474910...2884), which the review names as
+      is the run's solve certificate, pinned in devtools.register_candidates, which the review names as
       the natural bound certificate (RV-5); the run's drawn view, at the same side, moves 38
       squares and is a drawing under the regularization policy, retained with the review's
       inputs only. The KKT local minimality the run reports is not decided here.
@@ -37992,8 +37996,9 @@ results:
       identity, two move by more than 1e-9 and none by more than 4.2e-7. The side is
       2.500e-13 below T-259's, 11.902430645982265758..., and both round up to the same
       12-place print, 11.902430645983: in the words of the 23 October ruling (think-fwa9) a
-      sub-print re-certification, a restatement. The record applies that ruling beyond the
-      corpus only, and whether it reaches counts inside it is the owner's question
+      sub-print re-certification, a restatement.
+
+      The record applies that ruling beyond the corpus only, and whether it reaches counts inside it is the owner's question
       (think-ikku, RV-1 of the review of issue 846); the 31 October review also puts RV-3,
       whether any such re-certification is a new result, and recommends none. Uniform
       contraction of T-259's own coordinates already removes 87% of the margin.
@@ -38091,7 +38096,7 @@ results:
       certificate this project made (think-4z8z).
     notes: >-
       The case record is unchanged: the house at 130 stays T-259. The retained certificate
-      is the run's solve certificate (SHA-256 9d4b4c29...6524), which the review names as
+      is the run's solve certificate, pinned in devtools.register_candidates, which the review names as
       the natural bound certificate (RV-5); the run's drawn view, at the same side, moves 35
       squares and is a drawing, retained with the review's inputs only. The KKT local
       minimality the run reports is not decided here.

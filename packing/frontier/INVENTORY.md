@@ -8,10 +8,10 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **850** evidence records. **486** are formal; **477** of those were established here. **12** are samples, counted separately.
+- **858** evidence records. **494** are formal; **485** of those were established here. **12** are samples, counted separately.
 - **346** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
-- **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **47** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -807,6 +807,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-small-n-chelokot-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-small-n-daniel-rect-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-gradec-local-minima-233-report` | 0 | derived-structure | reported | - | elsewhere | defect-found | previously-published | producer’s code | not recorded | `V-evand-gradec-py`, `V-evand-verify-exact` |
+| `E-evand-gradec-local-minima-233-review-check` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the 233 configurations the release's grade-C archive certifies, each decided in full: the record's packing property, every kept row, the multipliers, null L0 and the flat family, the affine null vectors and the reduced Hessian | `V-evand-gradec-review-check`, `V-evand-gradec-review-compare`, `V-evand-gradec-review-derivatives` |
+| `E-evand-gradec-n10-recompute` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full: the n = 10 certificate, recomputed with the source's checker from the committed exact form and the published contacts | `V-evand-gradec-py` |
 | `E-wand125-fine-net-n31-59775-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-446-n19-n20-n26-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-446-review-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full: the exact premises of each of the four candidates: custody, the claim, the field order, the measure and its D4 expansion, lemma N0 (a) to (e), the sharp extent, the last bin, the per-bin domains, F3's caps and the semantic digest; the net's coverage at 10,363 exact orientations; the archived verifier's files against this repository's crate by digest | `V-wand125-446-review-premises` |
@@ -843,6 +845,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-evand-n182-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 1 of 1: the certificate at n = 182 that T-243 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-evand-n182-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 182: every wall and every pair, decided by two exact methods that share only the reader and the corner construction, with fourteen sharp controls decided by both | `V-evand-n182-review-check` |
 | `E-hyukdongkim-804-exact-forms-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-hyukdongkim-804-configurations-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | `V-sqpack-verify`, `V-configuration-fact-replay`, `V-algebraic-witness-reports` |
+| `E-hyukdongkim-804-configurations-verify-exact` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full: the two exact configurations, each decided whole by the source's checker | `V-evand-verify-exact`, `V-configuration-fact-replay` |
 | `E-hyukdongkim-804-s297-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-n029-evand-minpoly-7213-report` | 0 | derived-structure | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-n299-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
@@ -873,13 +877,17 @@ results, it is a statement about what this repository has itself examined.
 | `E-mishapolk-846-certificate-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-mishapolk-846-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 1 of 1: the certificate at n = 130 that T-259 cites, every wall and every pair decided by both maintained routes; the same receipt decides the issue's five other counts, which T-260 holds while the owner's question stands (think-ikku), and the packet's earlier comparisons; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-mishapolk-846-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 130: every wall and every pair, by two exact routes that share only the reader, with seven mutants decided by both at contact and 1e-60 past it; the same run decides the issue's five other counts, which T-260 holds | `V-mishapolk-1031-review-check` |
+| `E-register-candidates-2026-10-31-solves` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | apparently-novel | producer’s code | full, 2 of 2: the two retained solve certificates, every wall and every pair decided by both maintained checkers: 8,385 pairs at 130 and 46,971 at 307 a job, with the duplicate-square and outside-container jobs and the sharp controls retained beside | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-register-candidates` |
+| `E-register-candidates-2026-10-31-review-solves` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | independent | full, 2 of 2: the two solve certificates (and the run's two drawn views), every wall and every pair decided on both methods, with the review's sharp controls at 1e-40 | `V-ruu2-review-route-sat`, `V-ruu2-review-route-area` |
+| `E-register-candidates-2026-10-31-l-strip-293` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | apparently-novel | shared components | full, 1 of 1: the construction, every wall and every pair decided by both maintained checkers: 42,778 pairs a job, with the duplicate-square and outside-container jobs and the sharp controls retained beside | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-register-candidates` |
+| `E-register-candidates-2026-10-31-review-l-strip-293` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | independent | full, 1 of 1: the construction in three strip placements, two written out and read back, every wall and every pair decided on both methods, with the review's sharp controls | `V-ruu2-review-route-sat`, `V-ruu2-review-route-area` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 348, verified 497
-- **method**: exact-algebraic 257, interval-certified 222, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 348
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 789
-- **relationship to the producer's code**: generator 5, independent-implementation 317, not-applicable 34, same-implementation 443, shared-components 45, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 348, verified 505
+- **method**: exact-algebraic 265, interval-certified 222, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 348
+- **novelty**: apparently-novel 47, common-knowledge 4, not assessed 14, previously-published 793
+- **relationship to the producer's code**: generator 5, independent-implementation 321, not-applicable 34, same-implementation 446, shared-components 46, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -932,6 +940,10 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n021-fractional-certificate-122-25` | 21 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the previous rung this project's own; what is new is a certificate at 122/25, found by the stock generator on auto grids (34, 46, 56) at inset 1/2 with no seed and no windows, after a T-021-seeded site set at the same side ran out its deadline unconverged. | 0 | verified |
 | `E-n029-interval-certified-upper` | 29 | An interval certificate for a square-in-square bound; the packing is Kingbird's | 0 | verified |
 | `E-n029-schadt-rational-upper` | 29 | A rational certificate for an n = 29 bound; the pose is Schadt's | 0 | verified |
+| `E-register-candidates-2026-10-31-l-strip-293` | 293 | A certificate of 293 unit squares at s_260 + 1, Evan Daniel's issue 845 260 certificate with his 293's L strip undilated, 8.98e-13 below his 293 certificate; whether issue 845 already reports it by its stated recipe is the owner's question (RV-4). | 0 | verified |
+| `E-register-candidates-2026-10-31-review-l-strip-293` | 293 | The same construction, decided again in three strip placements. | 0 | verified |
+| `E-register-candidates-2026-10-31-review-solves` | 130, 307 | The same two certificates, decided again. | 0 | verified |
+| `E-register-candidates-2026-10-31-solves` | 130, 307 | Exact rational certificates of the houses' own packings at 130 and 307, re-solved with Evan Daniel's solver, 2.500e-13 and 3.752e-12 below the houses; the packings are their finders', and most of each margin is the house certificate's padding. | 0 | verified |
 
 The `n` column is what each covers and `cases` is how many frontier records cite it, which are different numbers: a screen can span eighty sizes and be cited by none, because a screen reports structure rather than settling a bound.
 

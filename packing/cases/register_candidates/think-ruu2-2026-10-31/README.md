@@ -85,7 +85,10 @@ python -m devtools.register_candidates $B check
 ```
 
 The 293 and 307 identity measurements are taken the same way, against
-`packet:evand-issue845-2026-10-29` and `packet:couzo-issue844-2026-10-28`. {RECEIPTS}
+`packet:evand-issue845-2026-10-29` and `packet:couzo-issue844-2026-10-28`. The receipts:
+all nine jobs came out as required on both routes, 294,402 pair decisions a route in
+83.5 route CPU seconds; and all 33 sharp-control decisions as expected, in 313 CPU
+seconds.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

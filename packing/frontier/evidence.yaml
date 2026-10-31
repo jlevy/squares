@@ -52627,6 +52627,7 @@ evidence:
           The author says Claude (Anthropic, Claude Opus 5.5) produced the construction, his
           second checker and the controls at his direction. No route here imports or copies
           the author's code; his checker, controls and distance script were never opened.
+    independence_record: packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
     limitations: >-
       One route over a number field: sqpack's exact witness verifier builds every square
       in its configuration's field, of degree 24 at 172 and 17 at 263, and decides each

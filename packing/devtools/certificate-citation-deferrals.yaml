@@ -112,3 +112,21 @@ deferrals:
     recorded: '2026-10-31'
     reason: 'The 31 October review''s clean-room run on the same construction, held with it for the
       owner''s answers.'
+  - evidence: E-hyukdongkim-804-configurations-exact-feasibility
+    results:
+    - T-244
+    bead: think-3trq
+    blocked_on: think-3trq
+    recorded: '2026-10-31'
+    reason: 'Kim''s exact configurations at 172 and 263, decided on sqpack''s exact verifier over each
+      field. At 172 the case holds a lower certificate (T-257), so no case record there will cite
+      it; at 263 the case record cites it when the house adopts T-244, after the stage 4 review of the
+      configurations (think-3trq).'
+  - evidence: E-hyukdongkim-804-configurations-verify-exact
+    results:
+    - T-244
+    bead: think-3trq
+    blocked_on: think-3trq
+    recorded: '2026-10-31'
+    reason: 'The same configurations decided by the retained verify_exact.py, the second route; cited
+      with route 1 when 263 adopts T-244 (think-3trq).'
