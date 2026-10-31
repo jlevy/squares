@@ -5,7 +5,7 @@ title: "Import Mohsen Karimi: 5,308 upper bounds at n = 1182-9944, two-strip con
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: bold-ritchie-l4
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:05.811Z
-updated_at: 2026-10-31T06:13:59.890Z
+updated_at: 2026-10-31T07:09:49.238Z
 started_at: 2026-10-31T05:13:11.988Z
 ---
 New 2026-10-26 issue https://github.com/jlevy/squares/issues/836 (mohsensbu-jpg, 12:18:36Z): Mohsen Karimi's version 5.0 of the two-strip record set of #799, 5,308 upper bounds at n = 1182 to 9944. Same author and construction as #799 (think-5dc3): its rows are decided by the maintained devtools.two_strip_checker and land beside #799's in the walk above 1024 (think-llit). A new issue, so its own import and answer bead; think-5dc3 stays #799's. Stage 0 owner: bold-ritchie-l4 (intake pass 2026-10-31, think-3guf).
@@ -60,6 +60,8 @@ zenodo.org is denied by this session's network policy (proxy 403 on CONNECT), so
 **Answer bead:** this one. The acknowledgement draft is in its notes, to post after the pull request that carries this triage merges.
 
 ## Notes
+
+2026-10-31 bold-ritchie-l4: after #848 merged (main 37ede3936), posted the acknowledgement https://github.com/jlevy/squares/issues/836#issuecomment-6540432165 (the draft below, with zenodo.org stated unreachable for now and an optional request: a copy at a public GitHub commit, checked against the stated SHA-256; issue attachments are refused by the session gateway too). Recorded under #836 replies on claude/bold-ritchie-xo28us-acks.
 
 2026-10-31 bold-ritchie-l4, after review A of #848 (A2, A4): the checker claim is corrected in the description (v5's below_all_reported column needs an ingest change on fetch) and the draft below says so; ties stay with the earlier report, version 1's or version 2's.
 

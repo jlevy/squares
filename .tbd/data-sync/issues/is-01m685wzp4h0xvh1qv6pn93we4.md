@@ -5,7 +5,7 @@ title: "Import Mohsen Karimi: 5,134 upper bounds at n = 1182-9946, filled-end tw
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: bold-ritchie-l4
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:14.372Z
-updated_at: 2026-10-31T06:14:58.530Z
+updated_at: 2026-10-31T07:09:50.128Z
 started_at: 2026-10-31T05:13:12.006Z
 ---
 New 2026-10-30 issue https://github.com/jlevy/squares/issues/847 (mohsensbu-jpg, 21:56:32Z): Mohsen Karimi's filled-end record set V2.0, 5,134 upper bounds at n = 1182 to 9946, a new construction: the two-band L packing of #836 with the band ends filled by axis-parallel layers. It supersedes V1.0, posted on #836 (comment 6433611255, 2026-10-27T04:16:22Z). Same author as #799 (think-5dc3) and #836 (think-7yrs); a different construction, which two_strip_checker does not read, so it needs W9 (think-fuwd). Stage 0 owner: bold-ritchie-l4 (intake pass 2026-10-31, think-3guf).
@@ -65,6 +65,8 @@ zenodo.org is denied by this session's network policy (proxy 403 on CONNECT), so
 **Answer bead:** this one. The acknowledgement draft is in its notes, to post after the pull request that carries this triage merges.
 
 ## Notes
+
+2026-10-31 bold-ritchie-l4: after #848 merged (main 37ede3936), posted the acknowledgement https://github.com/jlevy/squares/issues/847#issuecomment-6540433314 (the draft below, with zenodo.org stated unreachable for now, the same optional request, and V1.0 as Q-847a decides rather than included). Recorded under #847 replies on claude/bold-ritchie-xo28us-acks.
 
 2026-10-31 bold-ritchie-l4, after review A of #848 (A1): Q-847a restated in the description (the first branch of #847's conditional applies: ignore V1.0); the draft below says so.
 
