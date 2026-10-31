@@ -27,6 +27,14 @@ Commands (each prints JSON):
       coverage of the D4 region at the header's pitch and bins, census, uncertified boxes,
       digests in each header, and whether every root uncertified at depth 24 has a deeper
       run of the whole root with none. A read of the producer's records, not a replay.
+  mutants COVER
+      This program's own removal of the heaviest point orbit and of the heaviest segment
+      orbit (rewriting the file line by line), the mutants' SHA-256, and for each a
+      rational pose near the removed pieces where the mutant captures less than 1
+      exactly, with the published cover's mass at the same pose.
+  source-minima COVER
+      Exact mu at the six float minima the source prints (verification/logs/stress.out),
+      each pose rounded to a rational one, beside this program's float value.
 
 Usage: python3 -I s44_review.py COMMAND ...
 """

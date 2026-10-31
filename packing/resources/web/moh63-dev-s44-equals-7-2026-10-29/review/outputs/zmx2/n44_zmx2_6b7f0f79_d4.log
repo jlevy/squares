@@ -1,0 +1,10 @@
+# binary sha256: cba78a9eb5a30e7baf7901b2745fc7cf65b027e54bfc945cfddf53b53abf8525
+# cover sha256: c9fde0f1e7013f3f61f4a8d673b6bcaf9c5e54c914b6462164d7326ba254cae0
+# started 2026-10-31T05:43:01Z
+D4: measure invariant under x->s-x and x<->y (exact)
+# zmx2 cert hash=bd68795e5855deda mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-34,y0-34,bins0-3
+cover: s = 7/1, 15525 points, 3912 segments, total 2199755099/50000000 = 43.99510198000
+roots: 4900 in region, 0 already done (log), 4900 to run, 2 threads
+done in 146s wall: roots 4900 (missing 0), boxes 16792446, certified 8321795, empty 76878, uncertified 0, max depth 39, cpu 290s
+VERIFIED-D4: every closed unit square in [0,s]^2 has mu >= 1 (D4-reduced sweep, all roots)
+# finished 2026-10-31T05:45:27Z

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-26'
+last_reviewed: '2026-10-31'
 results:
   - id: T-001
     kind: lower-bound
@@ -35866,6 +35866,118 @@ results:
 
       The 17 October read's lean/rectangle-k2m4/, a second Lean route to T-081's
       lower half over the same premise, is held by its own import bead (think-d5m3).
+  - id: T-252
+    kind: optimality
+    registered: '2026-10-31'
+    landed: '2026-10-31'
+    headline: '`s(44) = 7`, by a closed mixed cover of points and grid-line segments'
+    claim: >-
+      s(44) = 7: the lower half by Mohsen Khalili and Sara Gharabaghi's closed mixed cover
+      of 26 October 2026, the upper half by the 7 x 7 grid. It is the case k = 7 of the
+      k^2 - 5 series, after T-066 (k = 8), T-184 (k = 9) and T-191 (k = 10).
+
+      The cover is 15,525 weighted points of [0,7]^2 and 3,912 segments of length 1/50 on
+      the lines x, y in {1, ..., 6}, each carrying its mass uniformly by length, total
+      2199755099/50000000 = 43.99510198 < 44, D4-invariant, in Evan Daniel's mixed format.
+      Every closed unit square in [0,7]^2 captures mass at least one, so a packing of 44 at
+      side below 7, scaled up to side 7, would capture at least 44.
+
+      The source reports the cover accepted by Daniel's zmx2, with outward-rounded binary64
+      enclosures and exact integer mass tests, over all 4,900 D4 roots and all 39,200
+      unreduced roots, none uncertified, and by his exact-rational zm_mixed.py over all
+      9,800 D4 roots at depth 24 with its 27 open roots closed at depth 30.
+
+      Both zmx2 sweeps were replayed here in full from the bytes the source pins, every
+      root's census equal to the source's log, and two mutated covers were refused: s(44)
+      >= 7 is confirmed, reproduced with the producer's code. The review of 31 October
+      found no mathematical defect.
+
+      Mohsen Khalili and Sara Gharabaghi,
+      [s44-equals-7](https://github.com/moh63-dev/s44-equals-7/tree/b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf),
+      building on Evan Daniel's closed mixed covers, format, checkers and s(45) = 7 cover.
+      Registration was requested in jlevy/squares#842. The source says the search, the
+      certificate, the separation tool and the verification runs were produced with Claude
+      (Anthropic) under the authors' direction.
+    scope: {n_values: [44]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        An exact value for a case that was open, by Daniel's method at a new count, as T-066
+        settled s(59) = 8: a substantive case result, not a new technique or a family. Each
+        instance of the k^2 - 5 series is its own linear-programming solve, and the
+        source's separation step for near-axis wall valleys is a search method, not part of
+        the proof. The 31 October review confirmed the draft.
+      scored: '2026-10-31'
+      by: >-
+        the 31 October stage 4 review
+        (docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md),
+        confirming the #842 intake lane's draft (repository)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Khalili Gharabaghi s44 cover 2026-10-29]']
+      published: '2026-10-26'
+    composition: >-
+      Compound, and the minimum is set by the lower half: E-khalili-842-cover-replay
+      (interval-certified, zmx2 replayed here over the unreduced pose space and the D4
+      region), the upper half the grid (E-basic-grid-upper, exact-algebraic). The deciding
+      checker is Daniel's, which also decides T-053, T-062 and T-066. The source's
+      zm_mixed.py records are read, not replayed, and are not recorded as evidence.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md
+        kind: adversarial
+        reviewer: Claude (AI review), strong sub-agent tier, the records lane of the 31 October intake pass in a distinct review pass, sharing that lane's context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-31'
+        scope: >-
+          An adversarial soundness review of Mohsen Khalili and Sara Gharabaghi's s(44) = 7 by a closed mixed cover: the reduction from the cover to the claim, zmx2's trust boundary and the e2bb84e9 version that ran against the reviewed 6b7f0f79, the source's zm_mixed.py records, exact poses and mutated covers, with programs written for the review.
+        verdict: accepted
+        covers: [T-252]
+    evidence:
+      - E-khalili-842-cover-report
+      - E-khalili-842-cover-replay
+      - E-basic-grid-upper
+    artifacts:
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/README.md
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/s44-equals-7/certificate/s44_cover_7.txt.gz
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/s44-equals-7/README.md
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_d4.log
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_full_resume1.log
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/review/README.md
+      - packing/devtools/replay_evand_zmx2.py
+      - packing/devtools/audit_evand_mixed_covers.py
+      - packing/devtools/check_basic_bounds.py
+      - docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md
+    controls:
+      - packing/tests/test_replay_controls.py
+      - packing/tests/test_audit_evand_mixed_covers.py
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/controls/n44_control_drop-heaviest-point_zmx2_d4_x23-23_y17-17.log
+      - packing/resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/controls/n44_control_drop-heaviest-segment_zmx2_d4_x8-8_y9-9.log
+    next_rung: >-
+      V4 and C4 need a second adversarial AI review by a distinct reviewer, separately
+      prompted, and a human oversight record; one adversarial review is retained, written
+      in the records lane's context. V5 needs the covering statement proved in a proof
+      assistant and an expert formalization review. zm_mixed.py's complete pass, about 138
+      CPU-hours by the source's records (think-qvp6), would be a second machine method by
+      the producer and raises no rung.
+    unfinished_confirmations:
+      - what: >-
+          a second adversarial AI review of the cover and the zmx2 decision, by a reviewer
+          distinct from the 31 October one and prompted separately from the records lane
+        rung: C4
+      - what: >-
+          a human oversight record that checks the trust boundary, the certificate's meaning
+          and the AI review's findings
+        rung: C4
+    notes: >-
+      Registered on 31 October 2026 at V3/C3, as T-066 was: zmx2 decides the whole
+      statement here, so no zm_mixed.py composite is part of the decision, unlike T-184 and
+      T-191, whose zm_mixed.py controls hold them at C1. The case record adopts the value,
+      so n = 44 is proved and T-090's s(44) >= 2789/400 and T-177's reported 2799/400 are
+      superseded there. The source's v1.0 (063c4d6) and v1.1 (b5b1bc9) hold the same
+      certificate; the packet pins v1.1.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

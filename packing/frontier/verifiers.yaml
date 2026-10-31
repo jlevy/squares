@@ -301,7 +301,9 @@ verifiers:
         note: >-
           the version that accepts a side that is not a multiple of 1/10, with which the
           source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and
-          not run here
+          at 659ee62, the commit Mohsen Khalili and Sara Gharabaghi's verify.sh builds, and
+          run here on their s(44) cover on 31 October 2026 (E-khalili-842-cover-replay),
+          where its decision path is 6b7f0f79's
     note: >-
       Hosono verified his own covers with zmx2 as well, so a zmx2 replay of one of
       Hosono's covers is a replay of the producer's code.
@@ -325,6 +327,12 @@ verifiers:
       - sha256: 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab
         path: packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py
         note: zeromargin.py, which zm_mixed.py imports (V-evand-zeromargin-py's program)
+      - sha256: 1fd203469bb43a55ca7ce376b9717437e0970eead31941ec7fa100ab24d5ba95
+        path: packing/resources/web/evand-square-packing-2026-10-01/source/s12/search/zm_mixed.py
+        note: >-
+          the version at evand 08e8a5fa and at 659ee62, with which Mohsen Khalili and Sara
+          Gharabaghi checked their s(44) cover, beside zeromargin.py 3cb95fb7, which it does
+          not pin and which is not retained here; not run here on that cover
     note: >-
       Benjamin Greff verified his s(76) and s(95) covers with it, on the sub-roots of the
       D4 roots zmx2 leaves, at the three digests his verify.sh pins, so its runs there

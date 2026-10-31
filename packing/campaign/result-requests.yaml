@@ -25333,3 +25333,52 @@ issues:
       was not readable from the importing session, so the push of 1be69ca is not dated; the
       commit precedes the issue by 21 minutes and nothing reached 299 between them. The issue
       did not carry the intake label when read; the coordinator labels it.
+  - number: 842
+    title: 's(44) = 7: registration request'
+    author: moh63-dev
+    opened: '2026-10-26'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mohsen Khalili and Sara Gharabaghi report s(44) = 7 by a closed mixed cover of [0,7]^2
+      in Evan Daniel's mixed format v1, 15,525 weighted points and 3,912 segments of length
+      1/50 on the interior grid lines, total 2199755099/50000000 < 44, D4-invariant, in
+      certificate/s44_cover_7.txt (SHA-256 c9fde0f1...cae0) at moh63-dev/s44-equals-7
+      063c4d6 (v1.0), decided at the source by Daniel's zmx2 at evand/square-packing
+      659ee62 with and without the symmetry reduction and by his zm_mixed.py at about 143
+      CPU-hours. The comment of 29 October announces v1.1 (b5b1bc9), the same certificate
+      with a two-stage zm_mixed.py driver and an audit of its logs, and the paper on Zenodo.
+      Triaged, imported and validated on 31 October 2026 (think-1v4b): the packet
+      moh63-dev-s44-equals-7-2026-10-29 retains v1.1 whole but for .gitignore; both zmx2
+      sweeps were replayed here from retained bytes, every root's census equal to the
+      source's log, with two mutated covers refused; the stage 4 review found no
+      mathematical defect. Registered as T-252 at V3/C3, and n-044 moves to proved.
+      zm_mixed.py's complete pass is priced and held over the pass's cap (think-qvp6); it
+      raises no rung. Claude assistance disclosed.
+    read_through: '2026-10-29T15:58:14Z'
+    results:
+    - key: s44-equals-7
+      claim: 's(44) = 7: the lower half by a closed mixed cover, the upper half by the 7 x 7 grid.'
+      source: body
+      register:
+      - T-252
+      evidence:
+      - E-khalili-842-cover-report
+      - E-khalili-842-cover-replay
+    beads:
+    - think-1v4b
+    - think-qvp6
+    answer_bead: think-1v4b
+    replies: []
+    close_when: >-
+      The import and its disposition are on main and the site, and the reply on main reports
+      T-252 at its rungs and n-044 as proved; nothing the authors asked for is queued.
+    notes: >-
+      Read on 31 October 2026 from main 3978a7f61: the issue body and its one comment, both
+      by moh63-dev; no other issue or pull request states a bound at 44 above T-090's
+      2789/400 and T-177's reported 2799/400. Labelled intake on 31 October 2026 under the
+      github-workflows grant; no n-44 case label exists, though the label policy would give
+      one to an optimality claim under review, so it is left for the owner. The packet pins
+      the head, v1.1, by stage 1's rule; the issue body names v1.0, whose certificate is the
+      same bytes.

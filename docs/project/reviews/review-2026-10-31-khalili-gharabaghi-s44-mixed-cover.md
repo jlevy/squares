@@ -40,14 +40,15 @@ published log’s (§5). I found no mathematical defect and no blocking finding 
 total, slack and $D_4$ invariance recomputed exactly (§4). The `zmx2.rs` that ran,
 `e2bb84e9`, had not run in this record before; for a cover with no polygons, an integer
 side and the default flags, its code path is the version that the reviews of 28
-September and 2 October derived, function for function (§6, F2). ⟦REVIEW-6b7f-SENTENCE⟧
-Exact capture at ⟦POSES⟧ sampled admissible poses, including the near-axis wall
-“valleys” your separation step targets, was never below 1, lowest ⟦LEASTMU⟧ (§7). Two
-mutated covers are refused by `zmx2`, and at a pose in each refused root the mutant
-captures less than 1 exactly while the published cover captures more (§8). Your
-`zm_mixed.py` records, read with this review’s own code, cover all 9,800 roots of their
-grid once, and every root left uncertified at depth 24 is certified whole at depth 30
-(§6.3).
+September and 2 October derived, function for function (§6, F2). The reviewed
+`6b7f0f79`, built from retained bytes and run on the cover over the $D_4$ region, gives
+every root the same census as `e2bb84e9`. Exact capture at 2,880 sampled admissible
+poses, including the near-axis wall “valleys” your separation step targets, was never
+below 1, lowest 1.003837 (§7). Two mutated covers are refused by `zmx2`, and at a pose
+in each refused root the mutant captures less than 1 exactly while the published cover
+captures more (§8). Your `zm_mixed.py` records, read with this review’s own code, cover
+all 9,800 roots of their grid once, and every root left uncertified at depth 24 is
+certified whole at depth 30 (§6.3).
 
 **What is not established here.** No proof assistant checked anything.
 `zmx2` is interval-certified, not exact-rational: its geometry is enclosed in binary64
@@ -185,7 +186,7 @@ container:
 | Mode | Roots | Boxes | Certified leaves | Empty leaves | Uncertified | Max depth | Wall, CPU |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `--d4` | 4,900 | 16,792,446 | 8,321,795 | 76,878 | 0 | 39 | 131 s, 222 CPU-s |
-| `--full` | 39,200 | ⟦FULLBOXES⟧ | ⟦FULLCERT⟧ | ⟦FULLEMPTY⟧ | 0 | ⟦FULLDEPTH⟧ | ⟦FULLWALL⟧ |
+| `--full` | 39,200 | 134,880,184 | 66,848,724 | 610,968 | 0 | 39 | a run stopped by a container restart after 29,812 roots, and its resume: 311 s and 430 CPU-s for the last 9,388; 2,601 CPU-s by `zmx2`’s own count |
 
 `VERIFIED-D4` and `VERIFIED`. `devtools.audit_evand_mixed_covers check` reads each root
 log as one record of its region, every root once with no uncertified and no capped box,
@@ -221,9 +222,9 @@ this bears on how close the cover is to what `zmx2` can decide, not on soundness
 ### 6.1 `e2bb84e9` against `6b7f0f79`
 
 `zmx2.rs` grew from 2,069 lines at `6b7f0f79` to 4,342 at `e2bb84e9`. This review’s
-`zmx2_fn_diff.py` lists every top-level function in both: 44 are the same, 13 changed,
-and 32 are new (`review/outputs/zmx2-fn-diff.txt`). Each change was read (`--show`), and
-for this cover each reduces to the earlier code:
+`zmx2_fn_diff.py` lists every top-level function in both: 34 are the same, 13 changed
+besides the module prelude, and 32 are new (`review/outputs/zmx2-fn-diff.txt`). Each
+change was read (`--show`), and for this cover each reduces to the earlier code:
 
 | Changed | For this cover |
 | --- | --- |
@@ -237,7 +238,17 @@ The new functions (`area_bound`, `first_order_bound`, `cmd_cert0` and the rest) 
 reached only through rectangles, `--first-order`, `--sym-atoms`, `--mirror-only` or the
 `cert0` and `boxes0` commands, none of which this run used: the header’s `atoms=grid`
 and the absence of `area=` and `umin=` say so, and the source’s logs carry the same
-header. ⟦REVIEW-6B7F-PARA⟧
+header.
+
+The reading has an empirical check.
+`zmx2.rs` `6b7f0f79`, built from the 28 September packet’s bytes (binary `cba78a9e…`,
+the build of the $s(76)$ and $s(95)$ replays), accepts this cover, since its side is a
+multiple of $1/5$ and it has no polygons.
+Run over the $D_4$ region by `review/programs/run_zmx2_6b7f0f79.sh`, it certified all
+4,900 roots, 16,792,446 boxes, none uncertified, maximum depth 39, and
+`audit_evand_mixed_covers compare-zmx2` finds every root’s census and the header
+identical to the `e2bb84e9` replay’s (`review/outputs/zmx2/`). The two versions decide
+this region box for box.
 
 ### 6.2 The trust boundary, then
 
@@ -281,7 +292,23 @@ at most $1/2$ in absolute value, and a segment contributes its density times the
 of its line’s intersection with the square, both exact
 (`review/outputs/poses-n44.json`).
 
-⟦POSES-TABLE⟧
+| Family | Poses | Least exact $\mu$ |
+| --- | --- | --- |
+| Uniform in the $D_4$ region ($u \le \tan(\pi/8)$) | 1,500 | 1.004888 |
+| Near the grid tiles: tilts $0$ to $5 \times 10^{-3}$, offsets up to $3 \times 10^{-3}$ | 448 | 1.003837 |
+| Flush against the wall $x = 0$ at tilts of 0.01° to 3°, along the wall | 532 | 1.003897 |
+| Near 45° | 400 | 1.007839 |
+| Float descents from the 25 lowest, ends evaluated exactly | 25 | 1.003837 |
+
+None of the 2,905 exact values is below 1. The least, $1.003837205$, is a square at
+centre $(1/2 + 8 \times 10^{-9}, 3/2)$ tilted by $10^{-6}$ degrees: the wall tile
+centred at $(1/2, 3/2)$, the $D_4$ image of the tile at $(3/2, 1/2)$ where the paper
+says its search stalled.
+As a check on this evaluator, `s44_review.py source-minima` evaluates the source’s six
+printed float minima exactly (`review/outputs/source-minima-n44.json`): the three that
+are admissible as printed give $1.003088543$, $1.003354014$ and $1.003921031$, the
+source’s values to every digit it prints; the other three round to just outside the
+container.
 
 The source’s own floating-point search reports a least mass of 1.0031 over 675,000 poses
 (`verification/logs/stress.out`) and 1.0034 along the wall valleys
@@ -295,7 +322,18 @@ Two mutations remove one $D_4$ orbit each, keeping the cover invariant: the eigh
 at the images of $(1.812, 2.430)$, carrying $0.00998176$ each, and the eight segments at
 the images of $(0.98, 1)$–$(1, 1)$, carrying $0.09198265$ each.
 
-⟦MUTANTS-TABLE⟧
+| Mutation | Mass removed | Mutant SHA-256 | `zmx2 --d4` on its cell | A pose where the mutant is short | $\mu$ there, mutant / published |
+| --- | --- | --- | --- | --- | --- |
+| `drop-heaviest-point` | $31193/390625 = 0.0798541$ | `85678ee6…` | $x$ 23, $y$ 17: NOT VERIFIED, 435 uncertified | centre $(2.494, 1.693)$, $\theta = 33.69°$, root $x$ 24, $y$ 16, bin 2 | 0.993201 / 1.003182 |
+| `drop-heaviest-segment` | $1839653/2500000 = 0.7358612$ | `eca3c3f3…` | $x$ 8, $y$ 9: NOT VERIFIED, 235 uncertified | centre $(0.50401, 0.50401)$, $\theta = 0.46°$, root $x$ 5, $y$ 5, bin 0 | 0.819939 / 1.003904 |
+
+This review’s `mutants` removes each orbit with its own code; its mutants’ SHA-256 equal
+the digests in the retained control receipts, so the two describe the same covers.
+Each mutant was swept over the roots around its removed orbit to choose the retained
+cell (the point mutant over $x$ 11–25, $y$ 17–31, 32,355 uncertified boxes; the segment
+mutant over $x, y$ 0–19, 48,952). Both roots that hold the poses above are refused as
+well: the segment mutant’s in that sweep (233 uncertified), the point mutant’s in a run
+of its own (cell $x$ 24, $y$ 16: 661 uncertified, 228 of them in bin 2).
 
 Each refusal is true: at a pose in the refused root the mutant captures less than 1,
 exactly, so `zmx2` refused a cover that is not a cover.
@@ -317,9 +355,10 @@ host’s IEEE-754 arithmetic.
 ### F2. `zmx2.rs` `e2bb84e9` had not run here (note, for the record)
 
 The registry listed the version as retained and not run.
-For this cover its decision path is `6b7f0f79`’s, function for function
-(§6.1)⟦F2-EMPIRICAL⟧. A cover with rectangles, a side not a multiple of $1/5$, or any of
-the new flags would need its own read of the new code.
+For this cover its decision path is `6b7f0f79`’s, function for function (§6.1), and the
+reviewed `6b7f0f79` decides every $D_4$ root of this cover with the same census.
+A cover with rectangles, a side not a multiple of $1/5$, or any of the new flags would
+need its own read of the new code.
 
 ### F3. Both sweeps reach depth 39 of 40 (note, for the record)
 
@@ -385,6 +424,8 @@ They decide nothing on their own.
 | `s44_review.py zm-records` | §6.3: the source’s `zm_mixed.py` records |
 | `s44_review.py poses` | §7: exact $\mu$ at sampled poses, with float descents |
 | `s44_review.py mutants` | §8: this review’s own orbit removal, and an exact pose where each mutant captures less than 1 |
+| `s44_review.py source-minima` | §7: exact $\mu$ at the source’s printed float minima |
+| `run_zmx2_6b7f0f79.sh` | §6.1: the reviewed `zmx2` version over the $D_4$ region, for comparison with the replay |
 | `zmx2_fn_diff.py` | §6.1: the two `zmx2.rs` versions function by function |
 
 ## 13. For the Records Lane

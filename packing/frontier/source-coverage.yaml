@@ -11737,6 +11737,30 @@ sources:
     private run that accepted all 5,377 modules on reused compiled objects; nothing here
     has built it. T-245 records the claim; n-012's reported lower lane and reported status
     take it, and its verified lanes and status are unchanged.
+- id: moh63-dev-s44-equals-7-2026-10-29
+  title: Mohsen Khalili and Sara Gharabaghi's closed mixed cover for s(44) = 7, issue842
+  role: source-repository
+  url: https://github.com/moh63-dev/s44-equals-7/tree/b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf
+  local: resources/web/moh63-dev-s44-equals-7-2026-10-29/
+  source_key: '[Khalili Gharabaghi s44 cover 2026-10-29]'
+  scope: {n_values: [44]}
+  reviewed: '2026-10-31'
+  source_date: '2026-10-26'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-044.md
+  - frontier/results.yaml
+  - resources/web/moh63-dev-s44-equals-7-2026-10-29/README.md
+  evidence: [E-khalili-842-cover-report, E-khalili-842-cover-replay]
+  notes: >-
+    The whole tree but .gitignore is retained at v1.1 (b5b1bc9), whose certificate is
+    byte for byte v1.0's (063c4d6, 26 October). The cover is reported to settle s(44) = 7
+    with the grid. The intake's replay of the source's checker, zmx2 over the D4 region
+    and over the unreduced pose space, each root equal to the source's log, is
+    E-khalili-842-cover-replay; with the 31 October review it puts T-252 at V3/C3 and
+    n-044 at proved. The source's zm_mixed.py records were read and not replayed
+    (think-qvp6).
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

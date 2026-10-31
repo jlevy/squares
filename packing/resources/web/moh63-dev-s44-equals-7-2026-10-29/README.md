@@ -168,6 +168,7 @@ re-derives every row.
 | `receipts/n44_zmx2_d4_roots.log.gz` | receipt | `7d7acd70cf53757d5fe193abf1aab56feddeb97f` | `cbcf1dbc693ad0537ff03741f640df71513838c15dae363d5c8452559534ab32` |
 | `receipts/n44_zmx2_full_roots.log.gz` | receipt | `51cbb7c28e853eaf0b81befc1ce171b795990882` | `48cf17905103926f2a0b48fe75cfd640a73f0e67969febffe703ac9598c030af` |
 | `receipts/n44_zmx2_full.log.gz` | receipt | `067db4168e2878189559bd4c55674797b3aafd1d` | `9d8d507fc04fb6ba5d894f32dd79721bad3469b721fc4ef8ec422c5e87dda078` |
+| `review/outputs/zmx2/n44_zmx2_6b7f0f79_d4_roots.log.gz` | receipt | `4dfca2877a49c0e2e4e8151a0b11dba0e2b8de45` | `eb659564d71bdf198e30ed5672ec12e98ff6edc9f9902f945a479afd88772633` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
