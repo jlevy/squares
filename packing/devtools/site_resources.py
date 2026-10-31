@@ -207,6 +207,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/moh63-dev/s44-equals-7",
+        "Mohsen Khalili and Sara Gharabaghi",
+        (
+            "A closed mixed cover of points and grid-line segments for s(44) = 7, with the"
+            " run records of both of Evan Daniel's checkers; zmx2 replayed here (T-252)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (

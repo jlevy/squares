@@ -931,7 +931,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/41.html | cases/41.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/42.html | cases/42.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/43.html | cases/43.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/44.html | cases/44.html | record | overview | 2026-10-03 | 2026-10-14 | live |
+| cases/44.html | cases/44.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/45.html | cases/45.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/46.html | cases/46.html | record | overview | 2026-10-03 | 2026-10-26 | live |
 | cases/47.html | cases/47.html | record | overview | 2026-10-03 | 2026-10-07 | live |
@@ -1392,6 +1392,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-249.html | result/t-249.html | result | overview | 2026-10-26 | 2026-10-26 | live |
 | result/t-250.html | result/t-250.html | result | overview | 2026-10-26 | 2026-10-26 | live |
 | result/t-251.html | result/t-251.html | result | overview | 2026-10-26 | 2026-10-26 | live |
+| result/t-252.html | result/t-252.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |
@@ -1453,7 +1454,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
 | papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
 | result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. |
-| result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. |
+| result/t-046.html | 450,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. On 31 October 2026 the page measures 401,561 bytes, past the 400,000 ceiling with T-252 listed at n = 44 among its 48 counts' register results; the ceiling moves to 450,000 as a measured choice, about 30 more listed results at 1.5 KB each. Its timing was not re-measured. How the page scales is think-rp0d. |
 | result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 509,332 bytes. |
 | result/t-083.html | 800,000 | Complete broad scope history and prepared exact bounds measure 688,505 bytes. |
 | result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 694,374 bytes. |

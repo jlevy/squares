@@ -1,0 +1,39 @@
+{
+ "sha256": "c9fde0f1e7013f3f61f4a8d673b6bcaf9c5e54c914b6462164d7326ba254cae0",
+ "side": "7",
+ "D": 1000,
+ "W": 100000000,
+ "points": 15525,
+ "segments": 3912,
+ "polygons": 0,
+ "trailing_tokens": 0,
+ "total": "2199755099/50000000",
+ "total_decimal": "43.9951019800",
+ "slack_below_44": "244901/50000000",
+ "slack_fraction": "0.011132%",
+ "point_mass": "117146551/10000000",
+ "segment_mass": "201752793/6250000",
+ "segment_lengths": {
+  "1/50": 3912
+ },
+ "segment_lines": [
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "H5",
+  "H6",
+  "V1",
+  "V2",
+  "V3",
+  "V4",
+  "V5",
+  "V6"
+ ],
+ "wall_segments": 0,
+ "points_on_loaded_lines": 0,
+ "zero_or_negative_weights": 0,
+ "d4_invariant_as_measure_all_eight": true,
+ "point_positions": 15525,
+ "lines_with_density": 12
+}

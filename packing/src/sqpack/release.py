@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "7a1b4d52d7b148f6b968b1c6cdee4ddbdeba2d3d"
+DATA_REVISION = "ea12f866361907a44789a4a347deef676a6bb0be"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.33",
+        first_published="October 31, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Mohsen Khalili "
+            "and Sara Gharabaghi's s(44) = 7 (T-252)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.32",
         first_published="October 26, 2026",
@@ -1513,6 +1521,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.32",
+        version="v0.4.33",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Mohsen Khalili "
+            "and Sara Gharabaghi's s(44) = 7 (T-252)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.31",
@@ -2641,6 +2659,59 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_resources.py",
+            "packing/devtools/site_urls.py",
+            "packing/frontier/README.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #842's s(44) = 7 (think-1v4b): T-252, its coverage entry, "
+            "#842's requests entry, and the frontier README's corpus counts and "
+            "smallest-gaps table with n = 44 proved, against main 3978a7f61 (#841). "
+            "Rendered at link revision 0000000000000000000000000000000000000000 into "
+            "empty site directories, once from this tree at a00910fb4 and once with "
+            "main's results.yaml, result-requests.yaml, source-coverage.yaml, "
+            "frontier/README.md and composite-figure.json swapped in, 51 files each, by "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: every file is byte-identical across the two "
+            "renders. The explainer counts the register's results and takes v0.4.33: "
+            "its page and Markdown, compared before the math pass (render's output; "
+            "the pinned Chromium is not installed on the importing host), differ only "
+            "in that count, 251 against 252. No PDF was printed; each prints from that "
+            "HTML. Measured again after the source's card among the other projects "
+            "(site_resources.py) and result/t-046.html's page budget (site_urls.py), at "
+            "the same link revision with main's results.yaml, result-requests.yaml, "
+            "source-coverage.yaml, frontier/README.md, composite-figure.json, "
+            "site_resources.py and site_urls.py swapped in: the same 51 files, "
+            "byte-identical. Measured again on 31 October after review A's fixes (the "
+            "independent review mapped in results.yaml, evidence.yaml, n-044.md, "
+            "source-coverage.yaml and result-requests.yaml; think-rp0d named in "
+            "site_urls.py) and after merging main ad84e0d2e (#834) and b95c5f69c (#833): "
+            "at the same link revision, twice from this tree and once with b95c5f69c's "
+            "copies of those inputs, site_resources.py, frontier/README.md, "
+            "composite-figure.json and bound-citations.json swapped in, the same 51 "
+            "files, byte-identical across the three; and the same again after merging "
+            "main c94df7cef (#853), 84ba6fa9c (#850) and 5b4484fe0 (#849, #854), with "
+            "each one's copies swapped in. Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",

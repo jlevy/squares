@@ -21,6 +21,13 @@ equal root for root, and a composite is refused when a sub-root is missing, unce
 run on another cover, at other settings or outside its region, or when the ``zmx2`` log
 falls short of its region or leaves a root no sub-root covers.
 
+Mohsen Khalili and Sara Gharabaghi's ``s(44)`` cover is one ``zmx2`` decides whole, in
+both modes. The cover audits clean, and the source's logs and this repository's replay
+are each one clean decision under headers that name this cover at the source's settings,
+equal root for root; on a toy case, a header naming another cover, other settings, a
+source root the replay leaves out, a census that differs and a missing replay are each
+refused.
+
 `tests/test_evand_mixed_covers.py` holds the controls for ``s(21)`` and ``s(45)``.
 """
 
@@ -45,11 +52,14 @@ from devtools.audit_evand_mixed_covers import (
     POINT_ONLY_CASES,
     REPO,
     SPLIT_CASES,
+    WHOLE_CASES,
     ZM_MIXED_SETTINGS,
     Case,
     MixedCover,
+    Whole,
     audit_cover,
     audit_split_composite,
+    audit_whole_zmx2,
     audit_zm_mixed,
     audit_zm_mixed_composite,
     audit_zm_mixed_manifests,
@@ -57,8 +67,10 @@ from devtools.audit_evand_mixed_covers import (
     audit_zmx2_manifest,
     check_imported_case,
     check_split_case,
+    check_whole_case,
     compare_sub_roots,
     cover_clean,
+    fnv1a64,
     main,
     parse_cover,
     read_record_bytes,
@@ -959,3 +971,160 @@ def test_a_replayed_sub_root_whose_census_differs_is_refused(tmp_path: Path) -> 
     result = compare_sub_roots(split.zm_mixed, records)
     assert result["files_that_differ"] == ["j005.jsonl"]
     assert not sub_root_comparison_clean(result)
+
+
+# --- a cover zmx2 decides whole: s(44) ---------------------------------------------------
+
+#: Total, points, segments, the side and segment lengths the source states.
+WHOLE_STATED = {44: ("2199755099/50000000", 15525, 3912, 7, {"1/50": 3912})}
+
+
+@pytest.mark.parametrize("n", sorted(WHOLE_STATED))
+def test_a_whole_cover_is_well_formed_light_and_symmetric(n: int) -> None:
+    total, points, segments, side, lengths = WHOLE_STATED[n]
+    result = audit_cover(WHOLE_CASES[n])
+    assert cover_clean(result), result
+    assert (result["total"], result["points"], result["segments"]) == (total, points, segments)
+    assert Fraction(total) < n
+    assert result["d4_invariant_entry_by_entry"]
+    assert result["d4_invariant_as_measure"]
+    assert result["points_on_segment_lines"] == 0
+    # Segment mass on the interior grid lines only, not on the container's walls.
+    interior = [str(c) for c in range(1, side)]
+    assert result["lines_carrying_segments"] == {"x": interior, "y": interior}
+    assert result["segment_lengths"] == lengths
+
+
+@pytest.mark.parametrize("n", sorted(WHOLE_STATED))
+def test_the_source_and_the_replay_of_a_whole_cover_are_one_decision_and_agree(n: int) -> None:
+    # This is the s(44) part of `audit_evand_mixed_covers check`, which
+    # E-khalili-842-cover-replay's replay names as what judges the retained receipts.
+    case = WHOLE_CASES[n]
+    side = WHOLE_STATED[n][3]
+    report, clean = check_whole_case(case)
+    assert clean, report
+    for mode in ("d4", "full"):
+        region = len(zmx2_roots(side, mode))
+        for name in (f"source_zmx2_{mode}", f"replay_zmx2_{mode}"):
+            audited = report[name]
+            assert audited["whole_clean"], audited
+            assert audited["headers_name_this_cover"]
+            assert audited["settings_as_required"]
+            assert audited["roots_present"] == region
+            assert audited["uncertified_boxes"] == 0
+        compared = report[f"replay_zmx2_{mode}_vs_source"]
+        assert compared["headers_identical"]
+        assert compared["roots_identical"] == region
+        assert compared["shipped_roots_not_replayed"] == 0
+
+
+def _toy_whole(tmp_path: Path) -> Case:
+    """A side-2 cover with one point at the centre, and a clean source and replay log.
+
+    The logs are `_zmx2_lines`' with the header's hash set to the toy cover's FNV-1a 64,
+    as ``zmx2 cert`` would write it, so the case is clean until a fault is applied.
+    """
+    cover = tmp_path / "toy.txt"
+    cover.write_text("mixed 1\n2 1\n1000\n2\n1\n1000 1000 5\n0\n0\n", encoding="ascii")
+    stamp = f"hash={fnv1a64(cover.read_bytes())}"
+    lines = [_zmx2_lines(2, "d4")[0].replace("hash=0123456789abcdef", stamp)]
+    lines += _zmx2_lines(2, "d4")[1:]
+    source = _write(tmp_path / "source.log", lines)
+    replay = _write(tmp_path / "replay.log", lines)
+    return Case(
+        n=3,
+        side=2,
+        bundle="toy",
+        cover="toy.txt",
+        total=Fraction(5, 2),
+        points=1,
+        segments=0,
+        zmx2_modes=(),
+        zm_mixed_records=False,
+        directory=tmp_path,
+        whole=Whole(source=(("d4", source),), replay=(("d4", replay),)),
+    )
+
+
+def _whole_logs(case: Case) -> tuple[Path, Path]:
+    assert case.whole is not None
+    source, replay = case.whole.source_log("d4"), case.whole.replay_log("d4")
+    assert source is not None
+    assert replay is not None
+    return source, replay
+
+
+def test_a_toy_whole_case_is_clean_before_a_fault(tmp_path: Path) -> None:
+    report, clean = check_whole_case(_toy_whole(tmp_path))
+    assert clean, report
+    assert report["replay_zmx2_d4_vs_source"]["roots_identical"] == 400
+
+
+@pytest.mark.parametrize("log", [0, 1], ids=["source", "replay"])
+def test_a_whole_log_whose_header_names_another_cover_is_refused(
+    tmp_path: Path, log: int
+) -> None:
+    case = _toy_whole(tmp_path)
+    path = _whole_logs(case)[log]
+    other = "hash=0123456789abcdef"
+    _edit_log(path, lambda lines: [re.sub(r"hash=\w+", other, lines[0]), *lines[1:]])
+    audited = audit_whole_zmx2(case, path, "d4")
+    assert zmx2_clean(audited), audited
+    assert not audited["headers_name_this_cover"]
+    assert not audited["whole_clean"]
+    _, clean = check_whole_case(case)
+    assert not clean
+
+
+@pytest.mark.parametrize(
+    ("old", "new"),
+    [
+        (" depth=40 ", " depth=30 "),
+        (" node_cap=20000000 ", " node_cap=1000 "),
+        (" kappa=1.5 ", " kappa=0.5 "),
+        (" K=30 ", " K=7 "),
+    ],
+)
+def test_a_whole_log_at_other_settings_than_the_sources_is_refused(
+    tmp_path: Path, old: str, new: str
+) -> None:
+    case = _toy_whole(tmp_path)
+    _, replay = _whole_logs(case)
+    _edit_log(replay, lambda lines: _with_header(lines, old, new))
+    audited = audit_whole_zmx2(case, replay, "d4")
+    assert audited["headers_name_this_cover"]
+    assert not audited["settings_as_required"]
+    assert not audited["whole_clean"]
+    _, clean = check_whole_case(case)
+    assert not clean
+
+
+def test_a_source_root_the_replay_leaves_out_is_refused(tmp_path: Path) -> None:
+    case = _toy_whole(tmp_path)
+    _, replay = _whole_logs(case)
+    _edit_log(replay, _drop_root)
+    report, clean = check_whole_case(case)
+    assert not clean
+    assert report["replay_zmx2_d4_vs_source"]["shipped_roots_not_replayed"] == 1
+
+
+def test_a_replayed_root_whose_census_differs_from_the_source_is_refused(
+    tmp_path: Path,
+) -> None:
+    case = _toy_whole(tmp_path)
+    _, replay = _whole_logs(case)
+    _edit_log(replay, _replace_in_root(" boxes 3 ", " boxes 5 "))
+    report, clean = check_whole_case(case)
+    # The replay is itself a clean decision; it is refused for disagreeing with the source.
+    assert report["replay_zmx2_d4"]["whole_clean"]
+    assert not clean
+    assert report["replay_zmx2_d4_vs_source"]["roots_identical"] == 399
+
+
+def test_a_whole_case_without_its_replay_is_refused(tmp_path: Path) -> None:
+    case = _toy_whole(tmp_path)
+    _, replay = _whole_logs(case)
+    replay.unlink()
+    report, clean = check_whole_case(case)
+    assert not clean
+    assert report["replay_zmx2_d4"]["missing"]

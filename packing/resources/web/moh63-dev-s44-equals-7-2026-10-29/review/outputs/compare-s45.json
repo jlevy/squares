@@ -1,0 +1,20 @@
+{
+ "s44": {
+  "D": 1000,
+  "W": 100000000,
+  "points": 15525,
+  "segments": 3912
+ },
+ "s45": {
+  "D": 1000,
+  "W": 100000000,
+  "points": 19989,
+  "segments": 3912,
+  "total": "2238676387/50000000"
+ },
+ "same_coordinate_denominator": true,
+ "segment_supports_identical": false,
+ "point_positions_shared": 13085,
+ "s44_point_positions": 15525,
+ "s45_point_positions": 19989
+}

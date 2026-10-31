@@ -1,0 +1,4 @@
+old 68 fns, new 100 fns: identical 57, changed 11, removed 0, added 32
+changed: parse_cover, build_cover, reflect_y, check_d4, new, family_bound, segment_bound_lines, float_mass, eval_node, main, cmd_cert
+removed: 
+added: family_bound_ex, frames, mass_bound, cs_at, e_at, w_hi, side_contained, cap_ub, coupled_side, quad_area_lb, area_bound, float_rect_area, dens_range, shift_rates, u_line, one_bp, sweep, end_rate, rate_u1, u_slope, pair_sweep, u_pair_cell, u_area_slope, eval, kinks, first_order_sig, germ_splits, first_order_bound, fdiv, cdiv, bound0, cmd_cert0

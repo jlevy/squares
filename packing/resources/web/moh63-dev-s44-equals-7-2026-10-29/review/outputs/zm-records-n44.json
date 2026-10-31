@@ -1,0 +1,251 @@
+{
+ "files": 62,
+ "distinct_digest_sets": [
+  {
+   "input": "c9fde0f1e7013f3f61f4a8d673b6bcaf9c5e54c914b6462164d7326ba254cae0",
+   "mixed_cover.py": "bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5",
+   "zeromargin.py": "3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc",
+   "zm_mixed.py": "1fd203469bb43a55ca7ce376b9717437e0970eead31941ec7fa100ab24d5ba95"
+  }
+ ],
+ "settings_apart_from_region": [
+  {
+   "cert_mode": false,
+   "chain": true,
+   "chain_from": 0,
+   "clip": true,
+   "depth": 24,
+   "lemma_L": true,
+   "lemma_T": true,
+   "mode": "D4",
+   "pitch": "1/10",
+   "reach": "442/625",
+   "split": true,
+   "split_maxchain": 400,
+   "theta_bias": 4,
+   "tprime": true,
+   "ubins": 8
+  },
+  {
+   "cert_mode": false,
+   "chain": true,
+   "chain_from": 0,
+   "clip": true,
+   "depth": 30,
+   "lemma_L": true,
+   "lemma_T": true,
+   "mode": "D4",
+   "pitch": "1/10",
+   "reach": "442/625",
+   "split": true,
+   "split_maxchain": 400,
+   "theta_bias": 4,
+   "tprime": true,
+   "ubins": 8
+  }
+ ],
+ "d4_roots_expected": 9800,
+ "depth24_roots_recorded": 9800,
+ "depth24_roots_missing": 0,
+ "depth24_roots_outside_region": 0,
+ "depth24_roots_recorded_more_than_once": 0,
+ "depth24_boxes": 2110180,
+ "depth24_uncert_boxes": 1265,
+ "depth24_maxdepth": 24,
+ "depth24_cpu_seconds": 403191.8,
+ "roots_uncertified_at_depth24": 27,
+ "deep_records": 27,
+ "deep_cpu_seconds": 92353.4,
+ "every_uncertified_root_closed_by_deeper_run": true,
+ "closure": {
+  "1/2|3/5|7/5|3/2|0|1/16": {
+   "depth24_uncert": 2,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 25,
+   "deep_volume_equals_root": true
+  },
+  "11/5|23/10|3/2|8/5|5/16|3/8": {
+   "depth24_uncert": 31,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "12/5|5/2|6/5|13/10|1/4|5/16": {
+   "depth24_uncert": 34,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 29,
+   "deep_volume_equals_root": true
+  },
+  "12/5|5/2|6/5|13/10|3/8|7/16": {
+   "depth24_uncert": 5,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 28,
+   "deep_volume_equals_root": true
+  },
+  "12/5|5/2|6/5|13/10|5/16|3/8": {
+   "depth24_uncert": 236,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 28,
+   "deep_volume_equals_root": true
+  },
+  "13/10|7/5|13/10|7/5|1/4|5/16": {
+   "depth24_uncert": 359,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 29,
+   "deep_volume_equals_root": true
+  },
+  "13/10|7/5|13/10|7/5|3/16|1/4": {
+   "depth24_uncert": 111,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "13/10|7/5|7/5|3/2|1/4|5/16": {
+   "depth24_uncert": 30,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "13/10|7/5|7/5|3/2|3/16|1/4": {
+   "depth24_uncert": 35,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "17/5|7/2|6/5|13/10|1/4|5/16": {
+   "depth24_uncert": 11,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "17/5|7/2|6/5|13/10|5/16|3/8": {
+   "depth24_uncert": 26,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 29,
+   "deep_volume_equals_root": true
+  },
+  "3/2|8/5|2|21/10|1/4|5/16": {
+   "depth24_uncert": 4,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 28,
+   "deep_volume_equals_root": true
+  },
+  "31/10|16/5|3/2|8/5|3/8|7/16": {
+   "depth24_uncert": 1,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 25,
+   "deep_volume_equals_root": true
+  },
+  "5/2|13/5|6/5|13/10|7/16|1/2": {
+   "depth24_uncert": 8,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 27,
+   "deep_volume_equals_root": true
+  },
+  "6/5|13/10|12/5|5/2|7/16|1/2": {
+   "depth24_uncert": 202,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 27,
+   "deep_volume_equals_root": true
+  },
+  "6/5|13/10|17/5|7/2|7/16|1/2": {
+   "depth24_uncert": 21,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 27,
+   "deep_volume_equals_root": true
+  },
+  "6/5|13/10|3/2|8/5|3/8|7/16": {
+   "depth24_uncert": 1,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "6/5|13/10|3/2|8/5|5/16|3/8": {
+   "depth24_uncert": 3,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 25,
+   "deep_volume_equals_root": true
+  },
+  "6/5|13/10|5/2|13/5|1/4|5/16": {
+   "depth24_uncert": 3,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "6/5|13/10|5/2|13/5|5/16|3/8": {
+   "depth24_uncert": 82,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 27,
+   "deep_volume_equals_root": true
+  },
+  "6/5|13/10|7/5|3/2|3/8|7/16": {
+   "depth24_uncert": 5,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "6/5|13/10|7/5|3/2|7/16|1/2": {
+   "depth24_uncert": 20,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 28,
+   "deep_volume_equals_root": true
+  },
+  "7/5|3/2|13/10|7/5|1/4|5/16": {
+   "depth24_uncert": 3,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "7/5|3/2|16/5|33/10|3/8|7/16": {
+   "depth24_uncert": 1,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 26,
+   "deep_volume_equals_root": true
+  },
+  "7/5|3/2|6/5|13/10|1/4|5/16": {
+   "depth24_uncert": 3,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 28,
+   "deep_volume_equals_root": true
+  },
+  "7/5|3/2|6/5|13/10|3/8|7/16": {
+   "depth24_uncert": 11,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 27,
+   "deep_volume_equals_root": true
+  },
+  "7/5|3/2|6/5|13/10|5/16|3/8": {
+   "depth24_uncert": 17,
+   "deep_records": 1,
+   "deep_uncert": 0,
+   "deep_maxdepth": 27,
+   "deep_volume_equals_root": true
+  }
+ }
+}

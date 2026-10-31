@@ -43,6 +43,7 @@ PACKETS = {
     76: WEB / "bengreff-s76-certificate-2026-10-14",
     77: WEB / "wand125-point-and-mixed-2026-10-01",
     95: WEB / "bengreff-s95-certificate-2026-10-15",
+    44: WEB / "moh63-dev-s44-equals-7-2026-10-29",
 }
 
 #: The checker build receipt each packet's controls ran with, and where the packet keeps it.
@@ -56,6 +57,7 @@ BUILDS = {
     WEB / "wand125-point-n61-2026-09-30": ("6b7f0f79", "controls/zmx2_6b7f0f79_build.log"),
     WEB / "bengreff-s76-certificate-2026-10-14": ("6b7f0f79", "n76_zmx2_build.log"),
     WEB / "bengreff-s95-certificate-2026-10-15": ("6b7f0f79", "n95_zmx2_build.log"),
+    WEB / "moh63-dev-s44-equals-7-2026-10-29": ("e2bb84e9", "n44_zmx2_build.log"),
 }
 
 #: The s(76) and s(95) packets' other controls: zmx2 on the cover without its wall

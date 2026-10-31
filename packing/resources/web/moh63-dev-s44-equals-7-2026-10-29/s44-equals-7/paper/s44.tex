@@ -1,0 +1,231 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amssymb,booktabs,xcolor}
+\usepackage[colorlinks,urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Forty-four unit squares need a square of side seven}
+\author{Mohsen Khalili}
+\address{Independent researcher}
+\email{mkhalili63@yahoo.com}
+\author{Sara Gharabaghi}
+\address{Independent researcher}
+\date{October 2026}
+
+\begin{document}
+\begin{abstract}
+Let $s(n)$ be the side of the smallest square into which $n$ unit squares with pairwise disjoint interiors can be
+packed, rotations allowed. We prove $s(44)=7$. The proof is a weighted closed cover of $[0,7]^2$: an explicit
+measure made of $15{,}525$ weighted points and $3{,}912$ uniformly weighted pieces of the interior grid lines, of
+total mass $2199755099/50000000<44$, such that every closed unit square in $[0,7]^2$ has mass at least one. The
+covering property is verified by two independently written exact rational-arithmetic checkers, one of them both
+with and without symmetry reduction. The certificate has only $0.4\%$ of slack, and finding it required a new
+separation step for low-mass ``valleys'' formed by nearly axis-parallel squares resting on the walls. We describe
+that step because the same obstruction should appear in other cases with a thin margin.
+\end{abstract}
+\maketitle
+
+\section{The result}
+
+Write $s(n)$ for the side of the smallest square containing $n$ unit squares with pairwise disjoint interiors,
+each free to rotate. Since $s$ is nondecreasing and $s(k^2)=k$, every $n$ with $(k-1)^2<n\le k^2$ has $s(n)\le k$,
+and a natural question is how many squares can be removed from the $k\times k$ grid before a smaller container
+suffices. Friedman's survey~\cite{friedman} records the history of the problem. Nagamochi~\cite{nagamochi} stated
+$s(k^2-1)=s(k^2-2)=k$, but his Lemma~1 is false~\cite{karakus}; $s(k^2-1)=k$ has been re-proved by
+Karaku\c{s}~\cite{karakus}, and $s(k^2-2)=k$ for $k\ge4$ follows from the results on $s(k^2-3)$ below. The family $s(k^2-3)=k$ is due to Kearney and Shiu for $k=3$~\cite{kearney},
+Bentz for $4\le k\le7$~\cite{bentz,bentz2}, and Daniel for all $k\ge6$~\cite{daniel}, who also proved
+$s(k^2-4)=k$ for all $k\ge5$ by computer-assisted weighted covers (the case $k=9$ was first proved by Hosono; see
+the record in~\cite{daniel}). Hosono proved $s(59)=8$~\cite{hosono59}. Before
+this note the best bounds for $n=44$ were $6.9725\le s(44)\le7$~\cite{case44}.
+
+\begin{theorem}\label{thm:main}
+$s(44)=7$.
+\end{theorem}
+
+The upper bound is the $7\times7$ grid with five cells empty. The lower bound follows from two standard lemmas and
+one finite certificate.
+
+\section{The method}
+
+For $c\in\mathbb R^2$, an angle $\theta$ and a side $L>0$, let $S(c,\theta,L)$ be the closed square of side $L$
+centered at $c$ with sides at angle $\theta$ to the axes, that is, the set of points whose coordinates
+$(u,v)$ in the frame rotated by $\theta$ about $c$ satisfy $|u|,|v|\le L/2$; its interior is given by strict
+inequalities. A \emph{pose} in $[0,k]^2$ is a closed unit square $S(c,\theta,1)\subseteq[0,k]^2$.
+
+The two lemmas below are the standard reduction behind every lower bound proved by unavoidable sets, from
+Göbel's original argument~\cite{goebel} through Stromquist~\cite{stromquist} and the survey~\cite{friedman};
+Nagamochi~\cite{nagamochi} already weighted points, segments and areas, and the use of weights found by linear
+programming, checked in exact arithmetic, comes from Burns~\cite{burns} and Massaccesi~\cite{massaccesi}. We use
+them in the closed form of Daniel~\cite{daniel}, where both are proved in Lean~4 with Mathlib
+(\texttt{packing\_le\_measure} and \texttt{not\_packs\_of\_measure} in \texttt{lean/Sqpack/MixedMeasure.lean}).
+We include the short proofs to keep the note self-contained.
+
+\begin{lemma}[scaling]\label{lem:scale}
+If $n$ unit squares with pairwise disjoint interiors lie in a square of side $s<k$, then there are $n$ poses in
+$[0,k]^2$ that are pairwise disjoint as closed sets.
+\end{lemma}
+
+\begin{proof}
+Translate the container to $[0,s]^2$ and apply the homothety $x\mapsto\lambda x$ with $\lambda=k/s>1$. It maps the
+container onto $[0,k]^2$ and the $i$-th unit square $S(c_i,\theta_i,1)$ onto $S(\lambda c_i,\theta_i,\lambda)$,
+and it maps interiors to interiors, so the $n$ squares $S(\lambda c_i,\theta_i,\lambda)$ still have pairwise
+disjoint interiors and lie in $[0,k]^2$. Now let $P_i=S(\lambda c_i,\theta_i,1)$ be the concentric unit square with
+the same orientation. A point of $P_i$ has rotated coordinates with $|u|,|v|\le\frac12<\frac\lambda2$, so $P_i$ lies
+in the interior of $S(\lambda c_i,\theta_i,\lambda)$. Hence the $P_i$ are pairwise disjoint, and each lies in
+$[0,k]^2$.
+\end{proof}
+
+The closedness matters. Two tiles of the $k\times k$ grid that share an edge both contain that edge, so a measure
+that counts closed squares may put mass on the grid lines; Lemma~\ref{lem:scale} is what allows us to assume that
+no two squares of a packing at side $s<k$ share a point.
+
+\begin{lemma}[weighted counting]\label{lem:count}
+Let $\mu$ be a finite Borel measure on $[0,k]^2$ with $\mu(P)\ge1$ for every pose $P$. Then at most
+$\mu([0,k]^2)$ poses can be pairwise disjoint.
+\end{lemma}
+
+\begin{proof}
+Closed squares are Borel sets. If $P_1,\dots,P_m$ are pairwise disjoint poses, then by additivity
+$m\le\sum_{i=1}^m\mu(P_i)=\mu\bigl(\bigcup_i P_i\bigr)\le\mu([0,k]^2)$.
+\end{proof}
+
+\begin{corollary}\label{cor:lower}
+If $\mu$ is as in Lemma~\ref{lem:count} and $\mu([0,k]^2)<n$, then $s(n)\ge k$.
+\end{corollary}
+
+\begin{proof}
+If $s(n)<k$, some square of side $s<k$ holds $n$ unit squares with disjoint interiors. Lemma~\ref{lem:scale} gives
+$n$ pairwise disjoint poses in $[0,k]^2$, and Lemma~\ref{lem:count} gives $n\le\mu([0,k]^2)<n$.
+\end{proof}
+
+All our measures are finite sums of point masses and of measures spread uniformly by length on axis-parallel
+segments; such a measure is \emph{valid} on $[0,k]^2$ if every pose has mass at least one.
+
+\begin{remark}[a limit of the method]
+By linear-programming duality, the least total mass of a valid measure is at least the fractional packing number
+of $[0,k]^2$. A cover can therefore prove $s(n)=k$ only when that number is below $n$. For $n=12$ and $k=4$ it is at
+least $12.2688$~\cite{daniel}, so no cover of this kind proves $s(12)=4$. For $n=44$ and $k=7$ our search puts the
+optimum at about $43.82$, which leaves $0.4\%$ of room.
+\end{remark}
+
+\section{The certificate}
+
+The file \texttt{s44\_cover\_7.txt}~\cite{repo} (SHA-256 \texttt{c9fde0f1\ldots ba254cae0}), written in Daniel's
+mixed-cover format~\cite{daniel}, lists, with coordinate denominator $1000$ and mass denominator $10^8$,
+\begin{itemize}
+\item $15{,}525$ point masses, of total $11.714655$, and
+\item $3{,}912$ pieces of the lines $x=i$ and $y=i$, $1\le i\le6$, each carrying its mass uniformly by length, of
+total $32.280447$.
+\end{itemize}
+The total is exactly $2199755099/50000000=43.99510198<44$. The measure is invariant under the eight symmetries
+of the square, as checked exactly by the script \texttt{sanity.py} in~\cite{repo}. The claim to verify is:
+
+\smallskip
+\noindent($\star$)\quad \emph{every closed unit square $P\subseteq[0,7]^2$, at every center and angle, has
+$\mu(P)\ge1$.}
+\smallskip
+
+\noindent Given ($\star$), Corollary~\ref{cor:lower} with $n=44$ and $k=7$ gives $s(44)\ge7$, which proves
+Theorem~\ref{thm:main}.
+
+\section{Verification}
+
+The space of poses is three-dimensional (center and angle). Both checkers subdivide it into boxes and certify each
+box in exact rational arithmetic, using primitives that have paper proofs in~\cite{daniel}: a point, or a chord of
+a segment, that lies in every square of the box; lemmas for squares against the walls; and a threshold lemma for
+squares close to a grid tile, where the mass of a measure on lines jumps as the angle tends to $0$.
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+checker & mode & result & time \\
+\midrule
+\texttt{zmx2} (Rust) & D4-reduced & VERIFIED, 0 uncertified & 191 s \\
+\texttt{zmx2} (Rust) & full, no symmetry & VERIFIED, 0 uncertified & 27.6 min \\
+\texttt{zm\_mixed.py} (Python) & D4-reduced, depth 24, then 30 & VERIFIED, 0 uncertified$^*$ & $\approx$143 CPU-h \\
+\bottomrule
+\end{tabular}
+\end{center}
+{\small $^*$All $9{,}800$ root boxes were swept at depth $24$. That sweep left $1{,}265$ boxes in $27$ roots
+uncertified, and each of those $27$ roots was swept again in full at depth $30$, with no uncertified boxes (deepest
+leaf at depth $29$). Floating-point minima of $\mu(P)$ in those roots range from $1.0008$ to $1.0041$.}
+
+\medskip
+Both exact checkers are by Daniel~\cite{daniel}. They were written separately and were used unmodified at commit
+\texttt{659ee62}. They share the closed-square conventions and the reduction by the eight symmetries; the full
+\texttt{zmx2} sweep does not use that reduction. As a check that shares no code with either, a floating-point
+evaluation of $\mu(P)$ at $675{,}000$ random, near-tile and near-$45^\circ$ poses found a minimum mass of $1.0031$.
+All logs are in~\cite{repo}.
+
+\section{How the certificate was found}
+
+We solved the linear program ``minimize $\mu([0,7]^2)$ subject to $\mu(P)\ge1$'' over symmetric point and segment
+variables by constraint generation. Each round solves the LP, scales the solution to total $43.995$, runs
+\texttt{zmx2}, and adds the poses of uncertified boxes as new constraints. The starting point was Daniel's cover
+proving $s(45)=7$~\cite{daniel}.
+
+\subsection*{Near-wall valleys}
+Progress stalled after four rounds. The worst floating-point coverage in uncertified boxes crept from $0.975$ to
+$0.992$, and every failure sat at the wall tile centered at $(3/2,1/2)$ and its images. The cause is a family of
+poses that the standard separation misses. A nearly axis-parallel square resting on a wall beside a corner tile,
+tilted by $\theta\in[0.01^\circ,3^\circ]$ and displaced by about $0.28\,\theta$ along the wall, captured only
+$0.989$. The lattice separation (pitch $0.01$, steps of $0.5^\circ$) steps over such valleys, and the family of
+near-tile poses samples only $\theta=10^{-5}$. With a slack of several percent, scaling the cover up hides them;
+with $0.4\%$ it does not.
+
+Our separation step, \texttt{tilesep.py}, scans for each tile in a fundamental domain both signs of the tilt,
+$36$ tilts in $[10^{-5},0.05]$, and displacements $\theta\cdot(t,u)$ on a grid, keeping only poses inside the
+container, and then refines the worst ones locally. Once it was added, the number of uncertified roots fell
+$141\to88\to46\to\dots\to7\to0$ within ten rounds (with one setback, to $181$, after a restart that dropped
+temporary constraints), while the LP value rose only from $43.806$ to $43.824$.
+
+\section{Remarks}
+
+Even the optimal cover is only $0.4\%$ below $44$, and our certificate's total is within $0.011\%$ of $44$. Searches at a comparable
+margin should expect obstructions, like the valleys above, that uniform sampling does not see; here, separation
+aimed at the geometry of the walls and the grid tiles made the difference.
+
+\section*{Acknowledgments and AI assistance}
+The search, the certificate, the valley separation step and the verification runs were produced with Claude
+(Anthropic) under the authors' direction; the authors reviewed the method, the checks and the text. We thank
+Evan Daniel for the open-source checkers, format and covers this work builds on, Hiroaki Hosono for his public
+certificates, and the Squares Project for its records.
+
+\begin{thebibliography}{99}
+\bibitem{bentz} W.~Bentz, Optimal packings of 13 and 46 unit squares in a square, \emph{Electron.\ J.\ Combin.}
+\textbf{17} (2010), \#R126.
+\url{https://www.combinatorics.org/ojs/index.php/eljc/article/view/v17i1r126}
+\bibitem{bentz2} W.~Bentz, Optimal packings of 22 and 33 unit squares in a square, preprint,
+\href{https://arxiv.org/abs/1606.03746}{arXiv:1606.03746} (2016).
+\bibitem{burns} S.~Burns, Proposing a better lower bound for $n=17$ square packing (August 6, 2026),
+\url{https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/}
+\bibitem{daniel} E.~Daniel, square-packing: certificates, exact checkers and Lean proofs, commit \texttt{659ee62},
+\url{https://github.com/evand/square-packing/tree/659ee62e4a9d39542a1146e8b011cc3ab6407ede} (2026);
+write-up at \url{https://evand.github.io/square-packing/}.
+\bibitem{friedman} E.~Friedman, Packing unit squares in squares: a survey and new results,
+\emph{Electron.\ J.\ Combin.}, Dynamic Survey DS7 (last revised 2009).
+\url{https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7}
+\bibitem{goebel} F.~G\"obel, Geometrical packing and covering problems, in \emph{Packing and Covering in
+Combinatorics} (A.~Schrijver, ed.), Math.\ Centre Tracts \textbf{106} (1979), 179--199.
+\bibitem{hosono59} H.~Hosono, certificate \texttt{k2m5\_n59\_L8} for $s(59)=8$ (October 1, 2026),
+\url{https://github.com/wand125/square-packing-bounds/tree/1a25a5ed745fdd905a52f48fcc48150a0669032d/certificates/k2m5_n59_L8};
+registered as \href{https://squaremath.org/result/t-066.html}{T-066} of~\cite{case44}.
+\bibitem{karakus} H.~Karaku\c{s}, A counterexample to Nagamochi's scoring lemma and a new rectangle packing
+bound, \href{https://arxiv.org/abs/2609.37410}{arXiv:2609.37410} (2026).
+\bibitem{kearney} M.~J.~Kearney and P.~Shiu, Efficient packing of unit squares in a square, \emph{Electron.\ J.\
+Combin.} \textbf{9} (2002), \#R14. \url{https://www.combinatorics.org/ojs/index.php/eljc/article/view/v9i1r14}
+\bibitem{massaccesi} G.~Massaccesi, Linear programming for square packing (August 2026),
+\url{https://gus-massa.blogspot.com/2026/08/linear-programing-for-square-packing.html}
+\bibitem{nagamochi} H.~Nagamochi, Packing unit squares in a rectangle, \emph{Electron.\ J.\ Combin.}
+\textbf{12} (2005), \#R37. \url{https://www.combinatorics.org/ojs/index.php/eljc/article/view/v12i1r37}
+\bibitem{stromquist} W.~Stromquist, Packing 10 or 11 unit squares in a square, \emph{Electron.\ J.\ Combin.}
+\textbf{10} (2003), \#R8. \url{https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8}
+\bibitem{case44} J.~Levy et al., The Squares Project, case $n=44$, \url{https://squaremath.org/cases/44.html}
+(accessed October 26, 2026).
+\bibitem{repo} M.~Khalili and S.~Gharabaghi, s44-equals-7, \url{https://github.com/moh63-dev/s44-equals-7} (2026).
+\end{thebibliography}
+\end{document}

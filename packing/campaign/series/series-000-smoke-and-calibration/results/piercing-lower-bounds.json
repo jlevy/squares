@@ -44,7 +44,7 @@
     {"n":41,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.775","holds":false,"improves":false},
     {"n":42,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.8475","holds":false,"improves":false},
     {"n":43,"bound":"13/2","decimal":"6.5","verified_lower":"6.9075","holds":false,"improves":false},
-    {"n":44,"bound":"13/2","decimal":"6.5","verified_lower":"6.9725","holds":false,"improves":false},
+    {"n":44,"bound":"13/2","decimal":"6.5","verified_lower":"7","holds":false,"improves":false},
     {"n":45,"bound":"13/2","decimal":"6.5","verified_lower":"7","holds":false,"improves":false},
     {"n":46,"bound":"7","decimal":"7","verified_lower":"7","holds":true,"improves":false},
     {"n":47,"bound":"7","decimal":"7","verified_lower":"7","holds":true,"improves":false},
