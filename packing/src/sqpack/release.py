@@ -897,6 +897,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.35",
+        first_published="October 31, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of four results "
+            "from the intake of 31 October (T-261 to T-264)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.34",
         first_published="October 31, 2026",
         result_scope=(
@@ -1529,6 +1537,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.34",
+        version="v0.4.35",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of four results "
+            "from the intake of 31 October (T-261 to T-264)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.33",
@@ -2677,6 +2695,35 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/n-130.md",
+            "packing/frontier/results.yaml",
+            "packing/pyproject.toml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Lane L8 of the intake pass of 31 October (think-3guf, #861): T-261 to T-264, "
+            "T-244's decided configurations, #545's and #804's requests entries, the 130 "
+            "case record's generated regularization sentence and a lint exclusion. Rendered "
+            "at one link revision into empty site directories from this tree and with "
+            "main 86ba245b5's versions of the four paths swapped in, the three papers "
+            "write their 51 files byte-identical across the two."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
