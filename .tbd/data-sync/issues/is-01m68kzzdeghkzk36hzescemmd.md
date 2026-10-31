@@ -5,7 +5,7 @@ title: Register the candidates below the new houses at 130, 293 and 307 (regular
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: bold-ritchie-l8
 labels:
   - validation
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T09:17:32.462Z
-updated_at: 2026-10-31T13:42:31.465Z
+updated_at: 2026-10-31T14:01:17.141Z
 started_at: 2026-10-31T11:48:22.244Z
 ---
 Evan Daniel's regularizer (regularize_evand run, run adopt-2026-10-31-n130-307-evand, retained under packing/cases/regularized_drawings/think-3guf-2026-10-31/ on #852) solved two of the new witnesses the 31 October adoption wrote to exact KKT local minima below the house best packing's side:
@@ -49,3 +49,10 @@ The decision table held both at row 3 (register first), and the selection lists 
 - **Credit choice for the review**: measured against T-257's 293 certificate, nearest centres pair the L-strip packing one to one under no box symmetry (measure/identity-n293.json), so T-262 carries no regularizations item. It credits Daniel through builds_on ([Daniel issue 845 2026-10-29]). 307 and 130 are regularizations of T-256 and T-259 (one to one under the identity).
 - **Adoption is held** (coordinator, 31 October: the review lane rv-ruu2 is running on all three). Besides the review, adopting a project-made certificate needs select_houses and upper_bound_houses to read it: select_houses reads entry["attribution"], which a project result lacks, and upper_bound_houses writes houses only from import packets. That slice is think-4z8z (new, child of this bead). When the review returns, list it on T-261 and T-262 only. T-263 waits for the owner.
 - **Owner question** (to carry with think-ikku RV-1): does the 23 October restatement ruling reach (a) counts inside the corpus and (b) this project's own regularized views below a house within its 12-place print? 130 is the one live case; T-155's 26 sub-print same-side views predate the ruling.
+
+2026-10-31 bold-ritchie-l8, after the stage 4 review (supersedes the adoption plan in the note above). The review (bold-ritchie-rv-ruu2, tbd-strong-max) is mapped at docs/project/reviews/review-2026-10-31-project-candidates-130-293-307.md, with its code, receipts and run inputs in packing/cases/register_candidates/think-ruu2-2026-10-31/review/.
+
+- **Verdict**: all three valid; none a new arrangement. Each is its house's own packing with less padding (RV-2); uniform contraction of the house removes 87% of the margin at 130 and 94% at 307, and at 293 it overshoots.
+- **Coordinator's decision (31 October)**: do not adopt. T-261 (307), T-262 (293) and T-263 (130) are registered at S1, V3 with C held at C1 (below the stage 4 exit, so select_houses takes none), with the review listed (accepted) and credits per the review: 130 Couzo's packing as T-259 credits it; 307 ntumlnoob's refined by Couzo; 293 Daniel's packing and construction (builds_on, exact re-assembly only, no regularizer).
+- **Certificates (RV-5)**: the run's solve certificates at 130 and 307 (9d4b4c29..., f5474910...) and the review's written 293 with the house's own strip placement, a column of 17 flush top plus a row of 16 (10eac4aa...), held pose for pose to T-257's 260 plus the strip. The drawn views are no longer registered; they are kept only as the review's inputs.
+- **Owner questions**: RV-3 (all three: is such a re-certification a new result at any print, only across it, or at none? The review recommends none); RV-4 (293: is s_260 + 1 already #845's own report via its recipe?); think-ikku RV-1 (130). think-4z8z (adoption plumbing) applies only if the answers keep any of them.
