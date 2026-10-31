@@ -5,7 +5,7 @@ title: "Import Mohsen Karimi: 5,134 upper bounds at n = 1182-9946, filled-end tw
 kind: task
 status: in_progress
 priority: 2
-version: 13
+version: 14
 delegate: bold-ritchie-l4
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:14.372Z
-updated_at: 2026-10-31T12:29:44.974Z
+updated_at: 2026-10-31T12:46:33.293Z
 started_at: 2026-10-31T05:13:12.006Z
 ---
 New 2026-10-30 issue https://github.com/jlevy/squares/issues/847 (mohsensbu-jpg, 21:56:32Z): Mohsen Karimi's filled-end record set V2.0, 5,134 upper bounds at n = 1182 to 9946, a new construction: the two-band L packing of #836 with the band ends filled by axis-parallel layers. It supersedes V1.0, posted on #836 (comment 6433611255, 2026-10-27T04:16:22Z). Same author as #799 (think-5dc3) and #836 (think-7yrs); a different construction, which two_strip_checker does not read, so it needs W9 (think-fuwd). Stage 0 owner: bold-ritchie-l4 (intake pass 2026-10-31, think-3guf).
@@ -66,6 +66,8 @@ zenodo.org is denied by this session's network policy (proxy 403 on CONNECT), so
 **Answer bead:** this one. The acknowledgement draft is in its notes, to post after the pull request that carries this triage merges.
 
 ## Notes
+
+2026-10-31 bold-ritchie-l4, correction to the note below: devtools.filled_end_sample does NOT hash filled_ends.py or the table at run time. OR-16 and devtools.check_integrity_ceremony keep custody of retained bytes with Git and acquire_source --check, so the stated digests were checked once, when the karimi-records-2026-10-31 packet was written (all held; the three programs equalled the V1.0 zip members), and each run reads the bytes as Git keeps them. The same holds for two_strip_checker.archived_records on v5.
 
 2026-10-31 bold-ritchie-l4, stage 2 and stage 4 sample (branch claude/bold-ritchie-xo28us-karimi): the copy at ad8b094 (named on #847 at 11:43:36Z) is retained as packet karimi-records-2026-10-31. filled_records.csv (1cbfecf8...48f5), V1.0's zip (f1684581...7cfa97) and its filled_records.csv (f047c44b...0b56) have the stated digests; filled_ends.py, regenerate_filled.py and check_cert.py state none of their own but equal the V1.0 zip's members byte for byte (bound by its stated digest); README_filled.md pinned by the commit alone (Zenodo unreachable; review A1 of #853 recorded so). Counts verified: V2.0 5,134 rows, 4,841 lower than v5 and none not lower, 293 new, 467 v5 rows without V2.0, 5,601 distinct; V1.0 4,571 rows, 4,261 lower than v5, 310 not in v5, 40 dropped in V2.0, and of 4,531 shared counts V2.0 equals V1.0 at 598 and is lower at 3,933. The author is "content with whatever the project's owner decides" on V1.0 (Q-847a stays the owner's). Stage 4 sample: devtools.filled_end_sample writes 1182, 2505, 4990, 7500 and 9946 out with the author's build() (held to the V1.0 member's SHA-256 91ac0758...9210; the exact bytes hashed are the bytes run) and decides each on both routes, six controls refused by both (receipts/filled-end-replay-sample.json): 5 of 5,134 rows. W9 (think-fuwd) not started in this lane. Licence follow-up: think-nu37.
 
