@@ -3,9 +3,9 @@ type: is
 id: is-01m685xayb6rmzxwj5c5vrt8p2
 title: "Intake 2026-10-31 L1: refresh #833 and #834 onto main; record the GitHub reply residue (closes, reply ids, unread comments, blocked labels, follow-ups #366 #256 #238)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l1
 labels:
   - intake
@@ -14,8 +14,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:25.899Z
-updated_at: 2026-10-31T06:48:24.541Z
+updated_at: 2026-10-31T09:58:12.195Z
 started_at: 2026-10-31T05:11:31.802Z
+closed_at: 2026-10-31T09:58:12.194Z
+close_reason: "Lane L1 complete: jlevy/squares#833, #834 and #854 merged 2026-10-31; replies, closes, follow-ups and labels recorded; remaining follow-up notes live on think-8r92, think-9vai, think-5dc3, think-7yrs, think-93nb."
+resolution: null
+duplicate_of: null
 ---
 Lane L1 (bold-ritchie-l1) of the 2026-10-31 intake pass (think-3guf). Merge origin/main into the drafts #833 (claude/friendly-einstein-gf9z0h-records-1026) and #834 (claude/friendly-einstein-gf9z0h-613), re-run packing-validate --records and the affected tests, get hosted CI green, leave both as drafts. On #833's branch: record #542's close and final reply; correct ten reply records to the ids their posted text names (#375, #366, #316, #296, #295, #422 x2, #446, #678, #763, #806); read the unread comments (#316, #797, #799, #804, #824 x3) into their entries and move read_through; align blocked: labels with the record (#666, #715, #719, #799) and add intake to #824; post the follow-ups owed on closed #366, #256 and #238 from main and record them. Done when make intake lists none of these, or the PR says why each remaining one waits.
 
