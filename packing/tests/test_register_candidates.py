@@ -4,12 +4,14 @@
 and 307, each pinned by the SHA-256 the 31 October review decided and held to the solved
 side its run's retained report records, and the review's written 293, held pose for pose
 to T-257's 260 certificate plus the 293 house's L strip. This holds each certificate to
-what the register states, the construction to its count, the receipts to their
-certificates, and refuses a certificate whose bytes are not the pinned file's.
+what the register states and to the digest the review decided, the construction to its
+count, and the receipts to their certificates, and refuses a construction that is not its
+parent plus the strip.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 from fractions import Fraction
 
@@ -70,11 +72,19 @@ def test_the_retained_293_is_its_parent_plus_the_houses_strip() -> None:
     assert candidates.certificate(BATCH, 293) == candidates.construction(BATCH, 293)
 
 
-def test_a_certificate_that_is_not_the_pinned_file_is_refused() -> None:
-    raw = candidates.certificate_path(BATCH, 307).read_bytes()
-    forged = raw.replace(b"\n", b"\n\n", 1)
-    with pytest.raises(candidates.CandidateError, match="not the file the review decided"):
-        candidates.admitted(BATCH, 307, forged)
+def test_each_retained_file_is_the_one_the_review_decided() -> None:
+    for candidate in BATCH.candidates:
+        raw = candidates.certificate_path(BATCH, candidate.n).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == candidate.sha256
+
+
+def test_a_construction_that_is_not_its_parent_plus_the_strip_is_refused() -> None:
+    raw = candidates.certificate_path(BATCH, 293).read_bytes()
+    lines = raw.decode("utf-8").splitlines(keepends=True)
+    last = lines[-1].split()
+    lines[-1] = f"{last[0]} {last[1]} 1/1000000\n"
+    with pytest.raises(candidates.CandidateError, match="not its parent plus the L strip"):
+        candidates.admitted(BATCH, 293, "".join(lines).encode("utf-8"))
 
 
 def test_each_receipt_holds_its_certificates_three_jobs() -> None:

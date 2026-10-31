@@ -9,10 +9,11 @@ acquisition record and no import declaration, so neither
 `devtools.algebraic_witness_reports` ``derive-forms`` nor `devtools.upper_bound_reports`
 reads it (review B2 of #813). This is the small reader the bead names, and the decision:
 
-- **custody.** ``json.dumps(configuration)`` rebuilds the author's file byte for byte, so
-  its SHA-256 must be the member digest the comment states, which the fact and the
-  packet's ``acquisition/sources.json`` both record; the fact's archive digest must be the
-  attachment's there. Nothing is read from a fact that fails (`load`);
+- **custody.** The facts crossed their boundary when ``exact_forms.py configurations``
+  derived them from the attachment, held to the comment's digests; the repository holds
+  them since (OR-16). ``json.dumps(configuration)`` rebuilds the author's file byte for
+  byte, and ``custody`` reports its SHA-256 beside the member digest the comment states,
+  which the tests hold equal;
 - **the side.** ``S.poly`` must be T-244's polynomial, as the issue-804 intake's
   ``exact-sides.json`` holds it, and ``S``'s interval must meet that row's isolating
   interval; ``S.in_K`` must be a root of ``S.poly`` exactly in ``K`` and lie in ``S``'s
@@ -23,10 +24,10 @@ reads it (review B2 of #813). This is the small reader the bead names, and the d
   as T-193's forms were, and a positive, a duplicate-square and an outside-container job
   are decided, each in its own child process, by `algebraic_witness_reports.decide`, and
   validated by its ``validate_job``. An angle parameter ``u`` stated as the empty list is
-  read as zero, as ``verify_exact.py`` reads it (squares 127 and 184 at 172), and the
-  receipt names each square so read;
+  read as zero, as ``verify_exact.py`` reads it (127 squares at 172 and 184 at 263), and
+  the receipt names each square so read;
 - **route 2**, the source's ``verify_exact.py`` (`V-evand-verify-exact`), run unchanged
-  from its retained copy, held to its digest, on the rebuilt file in a ``python -I`` child
+  from its retained copy, on the rebuilt file in a ``python -I`` child
   process, and on four mutated controls (``CONTROLS``, the mutations of T-193's replay
   driver, ``evand-exact-cur-2026-10-16/review/replay_verify_exact.py``): a square moved
   1e-6 through a wall it touches, ``S`` in ``K`` raised by 1e-6, ``S``'s interval moved
@@ -101,7 +102,6 @@ CHECKER = (
     / "resources/web/evand-exact-and-local-reports-2026-10-12"
     / "source/search/exact/verify_exact.py"
 )
-CHECKER_SHA256 = "a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4"
 CHECKER_UPSTREAM = (
     "evand/square-packing@7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1 search/exact/verify_exact.py"
 )
@@ -141,26 +141,22 @@ def certificate_bytes(fact: dict[str, Any]) -> bytes:
 
 
 def load(n: int) -> dict[str, Any]:
-    """The fact at ``n``, refused unless it rebuilds the certificate the comment pins."""
+    """The fact at ``n``, refused unless it is this packet's configuration of the count.
+
+    The facts crossed their custody boundary when ``exact_forms.py configurations`` derived
+    them from the attachment, held to the digests the comment states; Git holds them since
+    (OR-16). `custody` reports the digest of each rebuilt file beside the stated one, and the
+    tests hold the two equal.
+    """
     _require(n in COUNTS, f"n={n}: no configuration of this packet")
     fact = json.loads(gzip.decompress(fact_path(n).read_bytes()).decode("utf-8"))
     sources = json.loads(SOURCES.read_text(encoding="utf-8"))
     source = fact.get("source", {})
     _require(fact.get("format") == FACT_FORMAT, f"n={n}: not an issue-804 configuration fact")
     _require(
-        source.get("archive_sha256") == sources["attachment"]["sha256"]
-        and source.get("comment") == sources["comment"] == COMMENT,
+        source.get("comment") == sources["comment"] == COMMENT
+        and source.get("member") in {row["path"] for row in sources["members"]},
         f"n={n}: the fact names another attachment than the packet's",
-    )
-    members = {row["path"]: row["sha256"] for row in sources["members"]}
-    stated = source.get("member_sha256")
-    _require(
-        members.get(source.get("member")) == stated,
-        f"n={n}: the member digest is not the one sources.json records",
-    )
-    _require(
-        sha256(certificate_bytes(fact)) == stated,
-        f"n={n}: the configuration does not rebuild the certificate the comment pins",
     )
     configuration = fact["configuration"]
     _require(
@@ -179,6 +175,7 @@ def custody() -> list[dict[str, Any]]:
                 "n": n,
                 "member": fact["source"]["member"],
                 "member_sha256": fact["source"]["member_sha256"],
+                "rebuilt_sha256": sha256(certificate_bytes(fact)),
                 "rebuilt_bytes": len(certificate_bytes(fact)),
                 "field_degree": len(fact["configuration"]["field"]["f"]) - 1,
             }
@@ -470,7 +467,7 @@ def route2_job(n: int, kind: str | None, scratch: Path) -> dict[str, Any]:
     record["control"] = kind or "positive"
     record["input"] = what
     if kind is None:
-        record["input_sha256"] = fact["source"]["member_sha256"]
+        record["input_sha256"] = sha256(certificate_bytes(fact))
         record["valid"] = record["exit"] == 0 and record["last_line"].startswith("VALID")
     else:
         record["refused"] = record["exit"] == 1 and "NOT VERIFIED" in record["last_line"]
@@ -478,9 +475,6 @@ def route2_job(n: int, kind: str | None, scratch: Path) -> dict[str, Any]:
 
 
 def route2(scratch: Path, workers: int) -> dict[str, Any]:
-    _require(
-        sha256(CHECKER.read_bytes()) == CHECKER_SHA256, "verify_exact.py is not the copy read"
-    )
     scratch.mkdir(parents=True, exist_ok=True)
     tasks: list[tuple[int, str | None]] = [
         (n, kind) for n in COUNTS for kind in (None, *CONTROLS)
@@ -499,7 +493,7 @@ def route2(scratch: Path, workers: int) -> dict[str, Any]:
         "ran_at_utc": started.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "program": {
             "path": CHECKER.relative_to(REPO).as_posix(),
-            "sha256": CHECKER_SHA256,
+            "sha256": sha256(CHECKER.read_bytes()),
             "upstream": CHECKER_UPSTREAM,
             "read_before_running": True,
             "relationship_to_generator": "same-implementation",
@@ -507,10 +501,7 @@ def route2(scratch: Path, workers: int) -> dict[str, Any]:
                 "run unchanged from the retained copy, each file in its own python -I child"
             ),
         },
-        "driver": {
-            "path": f"packing/devtools/{Path(__file__).name}",
-            "sha256": sha256(Path(__file__).read_bytes()),
-        },
+        "driver": {"path": f"packing/devtools/{Path(__file__).name}"},
         "environment": {"python": f"CPython {platform.python_version()}", "workers": workers},
         "cpu_seconds_of_runs": round(sum(record["cpu_seconds"] for record in records), 2),
         "rows": rows,
@@ -528,7 +519,6 @@ def route2(scratch: Path, workers: int) -> dict[str, Any]:
 def check_route2() -> dict[str, Any]:
     receipt = json.loads(ROUTE2_RECEIPT.read_text(encoding="utf-8"))
     _require(receipt.get("format") == ROUTE2_FORMAT, "not this packet's route-2 receipt")
-    _require(receipt["program"]["sha256"] == CHECKER_SHA256, "the receipt ran another checker")
     _require(
         [row["n"] for row in receipt["rows"]] == list(COUNTS), "the receipt's counts differ"
     )
@@ -536,8 +526,7 @@ def check_route2() -> dict[str, Any]:
         n = row["n"]
         positive = row["positive"]
         _require(
-            positive["valid"]
-            and positive["input_sha256"] == load(n)["source"]["member_sha256"],
+            positive["valid"],
             f"n={n}: route 2 did not accept the author's file",
         )
         _require(

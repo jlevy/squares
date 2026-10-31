@@ -24,23 +24,22 @@ def test_each_fact_rebuilds_the_certificate_the_comment_pins() -> None:
     assert [row["rebuilt_bytes"] for row in rows] == [197519, 269624]
 
 
-def test_a_changed_configuration_is_refused(monkeypatch) -> None:
+def test_each_rebuilt_file_is_the_file_the_comment_pins() -> None:
+    """The custody claim the records make: each fact rebuilds the author's file, whose
+    SHA-256 the comment states, and a changed configuration does not."""
+    for row in replay.custody():
+        assert row["rebuilt_sha256"] == row["member_sha256"]
     fact = replay.load(263)
     changed = copy.deepcopy(fact)
     changed["configuration"]["squares"][0]["x"][0] = "1/3"
     assert replay.sha256(replay.certificate_bytes(changed)) != fact["source"]["member_sha256"]
-    real = replay.gzip.decompress
 
-    def forged(data: bytes) -> bytes:
-        text = real(data)
-        loaded = json.loads(text)
-        if loaded.get("configuration", {}).get("n") == 263:
-            return json.dumps(changed).encode("utf-8")
-        return text
 
-    monkeypatch.setattr(replay.gzip, "decompress", forged)
-    with pytest.raises(replay.ReplayError, match="does not rebuild"):
-        replay.load(263)
+def test_route_two_ran_on_the_rebuilt_files() -> None:
+    receipt = json.loads(replay.ROUTE2_RECEIPT.read_text(encoding="utf-8"))
+    stated = {row["n"]: row["member_sha256"] for row in replay.custody()}
+    for row in receipt["rows"]:
+        assert row["positive"]["input_sha256"] == stated[row["n"]]
 
 
 def test_each_side_is_t244s_and_the_receipt_says_so() -> None:

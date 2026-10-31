@@ -10,9 +10,10 @@ this module is the stage 2 to stage 4 half for a later batch, and writes no case
 
 A batch is one package, ``packing/cases/register_candidates/<name>/``, and one `Batch`
 here naming its candidates (`Candidate`). Each is one certificate file in Evan Daniel's
-``n S`` / ``x y t`` format, retained as ``certificates/n-NNN.cert`` and pinned here by its
-SHA-256 (`Candidate.sha256`), so a change to its bytes fails every read. Each comes from
-one of two places:
+``n S`` / ``x y t`` format, retained as ``certificates/n-NNN.cert``. `Candidate.sha256`
+records the digest of the file the stage 4 review decided; the tests hold the retained
+file to it, and the repository holds the file since (OR-16). Each comes from one of two
+places:
 
 - **solve**: a regularization run's exact solve certificate, ``n-N/solve/witness.cert``
   of `devtools.regularize_evand run`. ``retain`` copies it from the run directory, and
@@ -47,7 +48,6 @@ from __future__ import annotations
 
 import argparse
 import gzip
-import hashlib
 import json
 import math
 import subprocess
@@ -241,13 +241,9 @@ def construction(batch: Batch, n: int) -> legacy.Certificate:
 
 
 def admitted(batch: Batch, n: int, raw: bytes) -> legacy.Certificate:
-    """The certificate in ``raw``, refused unless it is the candidate's pinned file and,
-    for a solve, at its report's side, or, for an L strip, its construction pose for pose."""
+    """The certificate in ``raw``, refused unless, for a solve, it is at its report's
+    solved side, or, for an L strip, it is its construction pose for pose."""
     candidate = batch.candidate(n)
-    _require(
-        hashlib.sha256(raw).hexdigest() == candidate.sha256,
-        f"n={n}: the certificate is not the file the review decided",
-    )
     found = reports.evand_cert(raw, n, {})
     if candidate.kind == SOLVE:
         _require(found.side == solved_side(candidate), f"n={n}: not the run's solved side")
