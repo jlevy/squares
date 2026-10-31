@@ -9954,6 +9954,66 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/couzo_678_replay.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "think-llit after #793: the requests entries of #666, #715, #719 and #732 say "
+            "that the owner answered D1 and that their rows above 1024 wait on think-llit's "
+            "records slices, blocked on think-llit, and #678's Göbel receipt is rebuilt by "
+            "its writer, which check now holds byte for byte (couzo_678_replay); no "
+            "register entry, row, side, bound or credit changes. Against main e54ae3e97 "
+            "(#829): rendered at link revision e54ae3e9 into empty site directories, "
+            "twice from this tree and once with that main's two changed inputs swapped "
+            "in, render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write their 69 "
+            "files byte-identical across the three. Measured again after merging main "
+            "3978a7f61 (#841), at link revision 3978a7f6 with that main's two inputs "
+            "swapped in and the explainer's math pass on the host's headless shell "
+            "through SQPACK_CHROMIUM: 69 files each, all byte-identical across the three. "
+            "Measured again after review A's requests edits (#732's block, #715's D2 and D4 "
+            "wording), at the same link revision against the same main: 69 files, "
+            "byte-identical. No PDF was printed; each prints from that HTML. Every paper "
+            "keeps its version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake pass of 31 October (think-3guf): requests entries for #836 and "
+            "#847, Mohsen Karimi's v5 two-strip and V2.0 filled-end sets above 1024, at "
+            "triage pending; no register entry, row, side, bound or credit changes. "
+            "Against main 32ef0861b (#835): rendered at link revision 32ef0861 into empty "
+            "site directories, twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, render_packing_methods writes its 43 files "
+            "byte-identical across the three. First measured the same way against main "
+            "3978a7f61 (#841), before and after review A's edits to the two entries. No PDF "
+            "was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 

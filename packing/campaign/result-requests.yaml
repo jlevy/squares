@@ -11521,7 +11521,8 @@ issues:
       licensed successor 643dc9a, whose folder b9cdc16b holds unchanged; its filtered exact
       replay decided the 11 at or below 1024 on two routes with every control refused, and the
       backlog ledger records each in report order as a beyond-horizon row, superseded on entry
-      by a later report. The 8 above 1024 wait on the owner (think-f2io).
+      by a later report. The 8 above 1024 wait on think-llit's walk above 1024: the owner
+      answered on 23 October that counts above 1024 are tracked (D1, think-f2io).
     read_through: '2026-10-17T07:06:07Z'
     results:
     - key: n464
@@ -11649,74 +11650,122 @@ issues:
       claim: s(1061) <= 32.996048342114, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io). Its
-        certificate is retained in the de-winter-issue666-2026-10-17 packet, since the issue's pin
-        is on no branch; it is not replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window and replays the certificate on both
+        maintained routes. The certificate is retained in the de-winter-issue666-2026-10-17
+        packet, since the issue's pin is on no branch; it is not replayed or recorded yet.
       queued: true
       bead: think-3m10
+      blocked_on:
+      - think-llit
     - key: n1128
       claim: s(1128) <= 33.998294117981, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io). Its
-        certificate is retained in the de-winter-issue666-2026-10-17 packet, since the issue's pin
-        is on no branch; it is not replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window and replays the certificate on both
+        maintained routes. The certificate is retained in the de-winter-issue666-2026-10-17
+        packet, since the issue's pin is on no branch; it is not replayed or recorded yet.
       queued: true
       bead: think-3m10
+      blocked_on:
+      - think-llit
     - key: n1196
       claim: s(1196) <= 34.998294118334, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io). Its
-        certificate is retained in the de-winter-issue666-2026-10-17 packet, since the issue's pin
-        is on no branch; it is not replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window and replays the certificate on both
+        maintained routes. The certificate is retained in the de-winter-issue666-2026-10-17
+        packet, since the issue's pin is on no branch; it is not replayed or recorded yet.
       queued: true
       bead: think-3m10
+      blocked_on:
+      - think-llit
     - key: n1266
       claim: s(1266) <= 35.996046404219, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io). Its
-        certificate is retained in the de-winter-issue666-2026-10-17 packet, since the issue's pin
-        is on no branch; it is not replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window and replays the certificate on both
+        maintained routes. The certificate is retained in the de-winter-issue666-2026-10-17
+        packet, since the issue's pin is on no branch; it is not replayed or recorded yet.
       queued: true
       bead: think-3m10
+      blocked_on:
+      - think-llit
     - key: n1339
       claim: s(1339) <= 36.997865207179, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io). Its
-        certificate is retained in the de-winter-issue666-2026-10-17 packet, since the issue's pin
-        is on no branch; it is not replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window and replays the certificate on both
+        maintained routes. The certificate is retained in the de-winter-issue666-2026-10-17
+        packet, since the issue's pin is on no branch; it is not replayed or recorded yet.
       queued: true
       bead: think-3m10
+      blocked_on:
+      - think-llit
     - key: n1413
       claim: s(1413) <= 37.999463832123, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io). Its
-        certificate is retained in the de-winter-issue666-2026-10-17 packet, since the issue's pin
-        is on no branch; it is not replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window and replays the certificate on both
+        maintained routes. The certificate is retained in the de-winter-issue666-2026-10-17
+        packet, since the issue's pin is on no branch; it is not replayed or recorded yet.
       queued: true
       bead: think-3m10
+      blocked_on:
+      - think-llit
     - key: n1489
       claim: s(1489) <= 38.997600184483, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io). Its
-        certificate is retained in the de-winter-issue666-2026-10-17 packet, since the issue's pin
-        is on no branch; it is not replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window and replays the certificate on both
+        maintained routes. The certificate is retained in the de-winter-issue666-2026-10-17
+        packet, since the issue's pin is on no branch; it is not replayed or recorded yet.
       queued: true
       bead: think-3m10
+      blocked_on:
+      - think-llit
     - key: n1568
       claim: s(1568) <= 39.999336626159, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io). Its
-        certificate is retained in the de-winter-issue666-2026-10-17 packet, since the issue's pin
-        is on no branch; it is not replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window and replays the certificate on both
+        maintained routes. The certificate is retained in the de-winter-issue666-2026-10-17
+        packet, since the issue's pin is on no branch; it is not replayed or recorded yet.
       queued: true
       bead: think-3m10
+      blocked_on:
+      - think-llit
     beads:
     - think-3m10
     answer_bead: think-3m10
@@ -18413,7 +18462,8 @@ issues:
       beyond-horizon rows. 30 re-certify the author's 4e4c8ce certificates under the print's
       resolution and restate them (the owner's answer of 23 October, think-fwa9); 34 restate earlier
       publications; the 1112 above 1024
-      wait on the owner.
+      wait on think-llit's walk above 1024, since the owner answered on 23 October that counts
+      above 1024 are tracked (D1, think-f2io).
     read_through: '2026-10-24T06:12:05Z'
     results:
     - key: n328
@@ -20132,16 +20182,26 @@ issues:
         upward at twelve places, listed in the issue's table.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus, and above 1024, where the record holds no row. Whether the
-        record tracks these counts, whether a construction without its own certificate file
-        becomes a row (856 of the 1112 are L-border constructions, and the pin writes out an
-        explicit certificate at only 90 counts), and where the 98 certificates they rest on (9.1
-        MB as zlib stores them) are hosted wait on the owner; nothing is retained or replayed
-        above 1024.
+        Beyond the n <= 324 corpus, and above 1024, where the record holds no row yet. The owner
+        answered on 23 October that these counts are tracked, with no ceiling (D1), and that
+        recipe-only rows (a tiling or L-border recipe on a certificate) become rows, "decided
+        exactly from the recipe by a checker this project maintains" (D2; think-f2io): 856 of
+        the 1112 are L-border constructions, and the pin writes out an explicit certificate at
+        only 90 counts. The 98 certificates they rest on (9.1 MB as zlib stores them) are to be
+        hosted, by the record's D4 disposition of 23 October, as
+        data/couzo-715-certificates-v1, which the owner publishes; think-llit's note of 31
+        October puts that disposition back to the owner, to keep hosting or commit them to
+        Git. #793 (merged 24 October) lifted the code's ceiling of 1024, carries Göbel's
+        construction to every count, and adds devtools.construction_checker and the hosted
+        reader. The rows wait on R1, the first records slice of think-llit's plan, which walks
+        every count above 1024 in report order, adds the #715 release above 1024, stages the
+        hosted manifest, replays each certificate on both maintained routes and decides each
+        recipe; the deletion bounds the issue claims wait on think-kzme. Nothing is retained or
+        replayed above 1024 yet.
       queued: true
       bead: think-cyal
       blocked_on:
-      - think-f2io
+      - think-llit
     beads:
     - think-cyal
     - think-fwa9
@@ -20771,7 +20831,7 @@ issues:
       the manifest at 1c17153 for that credit, not the comment. The follow-up of 07:02Z
       (issuecomment-6381214428) thanked him for the restoration and said this comment would
       be read into the record in a change of its own; the follow-up after that change merges
-      says it has been. The issue stays open while the rows above 1024 wait (think-f2io).
+      says it has been. The issue stays open while the rows above 1024 wait (think-llit).
 
       The follow-up posted at 2026-10-24T12:19:56Z (issuecomment-6384131133), after #790
       merged (90a543771), thanked the author for restoring the construction credits his
@@ -20802,7 +20862,9 @@ issues:
       commit, which the author claimed on the issue; 111 of the 112 rows beyond the corpus at or
       below 1024 are beyond-horizon rows, each current on import, after the filtered exact
       replay decided every one on two routes with every control refused; 366 is not recorded,
-      below Couzo's 4e4c8ce certificate; the 8 rows above 1024 wait on the owner.
+      below Couzo's 4e4c8ce certificate; the 8 rows above 1024 wait on think-llit's walk above
+      1024, since the owner answered on 23 October that counts above 1024 are tracked (D1,
+      think-f2io).
     read_through: '2026-10-23T01:52:40Z'
     results:
     - key: n105
@@ -22057,90 +22119,122 @@ issues:
       claim: s(1061) <= 32.9956811739297748, binary64; the exact header side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
-        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
-        not derived, replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window, derives the fact and replays it on
+        both maintained routes. Its certificate is pinned by digest in the
+        mishapolk-issue719-2026-10-22 packet; it is not derived, replayed or recorded yet.
       queued: true
       bead: think-9vr8
       blocked_on:
-      - think-f2io
+      - think-llit
     - key: n1128
       claim: s(1128) <= 33.9972722117471022, binary64; the exact header side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
-        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
-        not derived, replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window, derives the fact and replays it on
+        both maintained routes. Its certificate is pinned by digest in the
+        mishapolk-issue719-2026-10-22 packet; it is not derived, replayed or recorded yet.
       queued: true
       bead: think-9vr8
       blocked_on:
-      - think-f2io
+      - think-llit
     - key: n1196
       claim: s(1196) <= 34.9966951712759240, binary64; the exact header side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
-        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
-        not derived, replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window, derives the fact and replays it on
+        both maintained routes. Its certificate is pinned by digest in the
+        mishapolk-issue719-2026-10-22 packet; it is not derived, replayed or recorded yet.
       queued: true
       bead: think-9vr8
       blocked_on:
-      - think-f2io
+      - think-llit
     - key: n1266
       claim: s(1266) <= 35.9951719516850943, binary64; the exact header side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
-        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
-        not derived, replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window, derives the fact and replays it on
+        both maintained routes. Its certificate is pinned by digest in the
+        mishapolk-issue719-2026-10-22 packet; it is not derived, replayed or recorded yet.
       queued: true
       bead: think-9vr8
       blocked_on:
-      - think-f2io
+      - think-llit
     - key: n1339
       claim: s(1339) <= 36.9972433771151188, binary64; the exact header side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
-        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
-        not derived, replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window, derives the fact and replays it on
+        both maintained routes. Its certificate is pinned by digest in the
+        mishapolk-issue719-2026-10-22 packet; it is not derived, replayed or recorded yet.
       queued: true
       bead: think-9vr8
       blocked_on:
-      - think-f2io
+      - think-llit
     - key: n1413
       claim: s(1413) <= 37.9987133186672281, binary64; the exact header side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
-        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
-        not derived, replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window, derives the fact and replays it on
+        both maintained routes. Its certificate is pinned by digest in the
+        mishapolk-issue719-2026-10-22 packet; it is not derived, replayed or recorded yet.
       queued: true
       bead: think-9vr8
       blocked_on:
-      - think-f2io
+      - think-llit
     - key: n1489
       claim: s(1489) <= 38.9972984908123834, binary64; the exact header side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
-        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
-        not derived, replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window, derives the fact and replays it on
+        both maintained routes. Its certificate is pinned by digest in the
+        mishapolk-issue719-2026-10-22 packet; it is not derived, replayed or recorded yet.
       queued: true
       bead: think-9vr8
       blocked_on:
-      - think-f2io
+      - think-llit
     - key: n1568
       claim: s(1568) <= 39.9986704693230806, binary64; the exact header side is authoritative.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
-        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
-        not derived, replayed or recorded here.
+        Above 1024. The owner answered on 23 October that counts above 1024 are tracked, with no
+        ceiling (D1, think-f2io), and think-llit applies the answer: #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and carries Göbel's construction to every count. The row
+        waits on R1, the first records slice of think-llit's plan, which walks every count above
+        1024 in report order, lifts this release's window, derives the fact and replays it on
+        both maintained routes. Its certificate is pinned by digest in the
+        mishapolk-issue719-2026-10-22 packet; it is not derived, replayed or recorded yet.
       queued: true
       bead: think-9vr8
       blocked_on:
-      - think-f2io
+      - think-llit
     beads:
     - think-xyhn
     - think-4h23
@@ -22423,9 +22517,9 @@ issues:
         22 October; which file the record retains changes if he says otherwise.
     close_when: >-
       T-229 is reviewed and adopted at 105 and 204 (think-4h23), T-231 is reviewed and adopted
-      at 204 (think-tetq, think-h01y), the owner has answered whether counts above 1024 are
-      tracked (think-f2io) and the 8 rows above 1024 have their disposition (think-9vr8), and
-      the replies reporting each are posted.
+      at 204 (think-tetq, think-h01y), the 8 rows above 1024 have their disposition in
+      think-llit's walk above 1024 (think-9vr8; the owner answered on 23 October that counts
+      above 1024 are tracked, think-f2io), and the replies reporting each are posted.
     notes: >-
       The issue opened at 2026-10-22T05:30:47Z with 221 counts to 4035 pinned at 1851c2c, was edited
       at 05:35:31Z (credit name Mykhailo Polkovskyi) and at 06:05:31Z to 122 counts pinned at
@@ -22761,15 +22855,19 @@ issues:
         listed in manifest.json and census.json; 5,077 since 7b6366f withdrew 3426.
       source: body
       not_registered: >-
-        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (D1,
-        think-f2io), which the issue's proposal to stop at N = 10,000 joins. Index-level custody
-        holds; nine files were read and 3426's certificate states a side above its own grid side.
-        Not derived, replayed or recorded. On 23 October the owner answered that rows above 1024
-        are tracked; think-llit applies the answer.
+        Above 1024. On 23 October the owner answered that rows above 1024 are tracked, with no
+        ceiling (D1, think-f2io), which settles the issue's proposal to stop at N = 10,000, and
+        think-llit applies the answer. Index-level custody holds; nine files were read and
+        3426's certificate states a side above its own grid side. #793 (merged 24 October)
+        lifted the code's ceiling of 1024 and adds the reader of hosted shards. The rows wait on
+        R2, the second records slice of think-llit's plan, after R1: the owner publishes the
+        certificates above 1024 as nine tar.xz shards (data/mishapolk-issue732-above-1024-v1,
+        N3), and the slice replays every recorded row on both maintained routes with six
+        controls on a stratified 10% (N2). Not derived, replayed or recorded yet.
       queued: true
       bead: think-0gp6
       blocked_on:
-      - think-f2io
+      - think-llit
     - key: rows-f1ceee4
       claim: >-
         138 upper bounds at n = 328 to 989, each the exact side of
@@ -22926,12 +23024,10 @@ issues:
     blocked:
       type: owner-decision
       reason: >-
-        The owner decides whether counts above 1024 are tracked and where tracking stops,
-        and the credit the author asks for at 11 counts (think-f2io).
+        The owner decides the credit the author asks for at 11 counts (D5, think-f2io).
     close_when: >-
-      The rows at or below 1024 are recorded in report order, the owner has answered whether
-      counts above 1024 are tracked and where tracking stops (think-f2io), and the replies
-      reporting each are posted.
+      The rows at or below 1024 are recorded in report order, the rows above 1024 have their
+      disposition in think-llit's walk (R2), and the replies reporting each are posted.
     notes: >-
       The issue opened at 2026-10-22T19:55:03Z; edits at 19:58:20Z and 20:00:59Z changed only
       LaTeX braces, and the edit at 20:07:33Z replaced the attached-archive line with a link to
@@ -25600,3 +25696,163 @@ issues:
       commits of 23 October past the 7e82c64 read (e386aab to fbc1749), which no issue reports,
       are this release's predecessors; intake-watch.yaml's read of 31 October says what each
       holds.
+  - number: 836
+    title: '1182–9944: 2484 new and 1434 lowered upper bounds, two-strip construction (Zenodo v5): registration request'
+    author: mohsensbu-jpg
+    opened: '2026-10-26'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Mohsen Karimi (ORCID 0009-0004-1055-8267), following #799, asks for the registration of
+      version v5.0 of his two-strip record set, Zenodo 10.5281/zenodo.23664800 (2026-10-26):
+      5,308 upper bounds at n = 1182 to 9944, one exact side per count with the construction's
+      seven parameters, from a search widened to sides in [K - 0.5, K). By the issue, 2,484
+      counts are new against version 2 (record 23628190, on #799), 1,434 of version 2's 2,824
+      sides are lowered and 1,390 are unchanged; 51 rows are marked as not below a side
+      Couzo's index derives from a Kaggle value with no coordinates. The issue states the
+      zip's SHA-256 (9c70c4d8...6325) and records.csv's (7e78c15d...e941), says regenerate.py
+      is unchanged from version 2, and credits the construction as instances of Sungjoon
+      Ryu's L-shaped packing (Theorem 1.3), found independently. Claude assistance and MATLAB
+      Online disclosed. It also withdraws two conjectures: frac(s(n)) > 1/2 whenever s(n) <
+      ceil(sqrt n), and the conjecture that c*(K) is of order sqrt K (#799). A comment of 26
+      October by maximusrufus reports rebuilding all 5,308 with the submitter's regenerate.py
+      and checking them in exact rationals, with a 398-row sample through Mishapolk's
+      verifier. The author's comment of 27 October posts a filled-end set V1.0 (Zenodo
+      10.5281/zenodo.23681705, 4,571 rows at 1184 to 9946), the comment of 30 October 17:38Z
+      sets 45 of its rows aside against Couzo's 712c6a6, and the comment of 21:57Z says V1.0
+      is superseded by #847. Stage 1 began on 31 October 2026 (think-7yrs) from the issue's
+      text alone: zenodo.org was not reachable from the session (the proxy refused the
+      connection), so neither deposit was fetched, hashed or read, and no row is compared yet.
+    read_through: '2026-10-30T21:57:59Z'
+    results:
+    - key: rows-v5
+      claim: >-
+        5,308 upper bounds s(n) <= S at n = 1182 to 9944, each at the exact side records.csv
+        states in Zenodo 10.5281/zenodo.23664800 v5.0, by the two-strip construction with the
+        parameters K, mH, tH, phH, mV, tV and phV in the same row.
+      source: body
+      not_registered: >-
+        Above 1024: rows of source-coverage.yaml once think-llit's walk above 1024 records
+        them, not register entries. Dated by this issue and pinned at record 23664800, once
+        retained. At the 1,390 counts version 2 states identically, a tie stays with the
+        earlier report (version 1's or version 2's); the 1,434 lower sides and the 2,484 new
+        counts are recorded wherever the walk finds them below every earlier report and
+        Göbel's construction, so at most 3,918 rows. The parameters are #799's, which
+        devtools.two_strip_checker decides, and each row is one once it decides it (D2 on
+        think-f2io). By the issue, v5's records.csv adds a column below_all_reported, which
+        parse_records refuses today (its header must be exactly the 11 columns), so its ingest
+        needs a column set per deposit, a small code change to make on fetch, once the header
+        is read. They land with #799's rows (think-5dc3).
+      queued: true
+      bead: think-7yrs
+      blocked_on:
+      - think-llit
+    - key: filled-end-v1
+      claim: >-
+        4,571 upper bounds s(n) <= S at n = 1184 to 9946, each at the exact side
+        filled_records.csv states in Zenodo 10.5281/zenodo.23681705 V1.0, by the two-band L
+        packing with its band ends filled by axis-parallel layers, with the parameters K, bV,
+        tV, yV, bH, tH and yH in the same row; 45 of them set aside by the author on 30
+        October.
+      source: https://github.com/jlevy/squares/issues/836#issuecomment-6433611255
+      not_registered: >-
+        Above 1024, and superseded by the author's V2.0 in #847. #847 asks that V1.0 be ignored
+        and V2.0 used alone if no V1.0 row has been taken in, and otherwise that V1.0's rows be
+        replaced by V2.0's and 40 of them withdrawn. No V1.0 row has been taken in, so the
+        first branch applies. Whether a published deposit its author asks, before any intake,
+        to be ignored still counts as an earlier report in report order is the owner's
+        question Q-847a on think-r94q; think-8m4k covers only a withdrawn file followed by a
+        lower one. Imported with #847's set (think-r94q), since no maintained checker reads
+        the construction yet (W9, think-fuwd).
+      queued: true
+      bead: think-r94q
+      blocked_on:
+      - think-fuwd
+      - think-llit
+    beads:
+    - think-7yrs
+    - think-gw1s
+    - think-r94q
+    - think-5dc3
+    - think-x0kn
+    - think-llit
+    answer_bead: think-7yrs
+    replies: []
+    close_when: >-
+      The v5 rows the walk above 1024 records are on main, each decided by the maintained
+      two-strip checker, V1.0's rows are dispositioned with #847's, and the reply on main says
+      so; nothing the author asked for is queued.
+    notes: >-
+      Not checked on 31 October 2026: zenodo.org (records 23664800 and 23681705), refused by
+      the session's network policy; the triage's claim counts are the issue's own until the
+      deposit is read. The comparison the issue states is against
+      Mishapolk/square-packing-records 7e82c64 and franciscouzo/square-packing 1c17153; the
+      walk reads every report in order. The third-party check of 26 October reproduced the
+      packings with the producer's code; its program and receipt are not retained, so it is
+      no evidence entry. The withdrawal of Conjecture 1 bears on #799's summary and
+      theorem-near-integer notes, which say the note keeps its conjecture; think-x0kn
+      updates them.
+  - number: 847
+    title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
+    author: mohsensbu-jpg
+    opened: '2026-10-30'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Mohsen Karimi (ORCID 0009-0004-1055-8267), following #799 and #836, asks for the
+      registration of his filled-end record set V2.0, Zenodo 10.5281/zenodo.23819397
+      (2026-10-30): 5,134 upper bounds at n = 1182 to 9946 by the two-band L packing of #836
+      with the band ends filled by axis-parallel layers and an independent width, tilt and
+      lift split for each band, each row an exact side with seven parameters. By the issue,
+      4,841 rows lower a v5 row of #836 and 293 are at counts v5 lacks, every row strictly
+      below the verified entries of franciscouzo/square-packing 712c6a6 and
+      Mishapolk/square-packing-records ab8e833, where an entry exists. The 467 v5 rows with no
+      V2.0 row stand as submitted in #836, and the two sets give 5,601 distinct counts. It
+      supersedes V1.0 (10.5281/zenodo.23681705, posted on #836) and drops 40 of V1.0's rows
+      (listed). It asks that V1.0 be ignored and V2.0 used alone if no V1.0 row has been taken
+      in, and otherwise that V1.0's rows be replaced by V2.0's and the 40 withdrawn; no V1.0
+      row has been taken in, so the first applies. It states filled_records.csv's SHA-256
+      (1cbfecf8...48f5) and credits the construction to Ryu's Theorem 1.3, with the band-end
+      fill as Evan Daniel's idea written as in Kevin Fang's note (10.5281/zenodo.23624565),
+      and the parameters and search to the author. Claude assistance, MATLAB Online and a
+      Python reproduction disclosed. Stage 1 began on 31 October 2026 (think-r94q) from the
+      issue's text alone: zenodo.org was not reachable from the session, so the deposit was
+      not fetched, hashed or read, and no row is compared yet.
+    read_through: '2026-10-30T21:56:32Z'
+    results:
+    - key: filled-end-v2
+      claim: >-
+        5,134 upper bounds s(n) <= S at n = 1182 to 9946, each at the exact side
+        filled_records.csv states in Zenodo 10.5281/zenodo.23819397 V2.0, by the filled-end
+        two-band L packing with the parameters K, bV, tV, yV, bH, tH and yH in the same row.
+      source: body
+      not_registered: >-
+        Above 1024: rows of source-coverage.yaml once think-llit's walk above 1024 records
+        them, not register entries. Dated by this issue and pinned at record 23819397, once
+        retained. No checker this project maintains reads the construction, so each is a row
+        once W9's checker (think-fuwd) decides it (D2 on think-f2io). Each is recorded where
+        the walk finds it below every earlier report, #836's v5 row included and V1.0's as
+        Q-847a on think-r94q decides, and below Göbel's construction.
+      queued: true
+      bead: think-r94q
+      blocked_on:
+      - think-fuwd
+      - think-llit
+    beads:
+    - think-r94q
+    - think-fuwd
+    - think-qczx
+    - think-7yrs
+    - think-llit
+    answer_bead: think-r94q
+    replies: []
+    close_when: >-
+      The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
+      checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
+      main says so; nothing the author asked for is queued.
+    notes: >-
+      Not checked on 31 October 2026: zenodo.org (record 23819397), refused by the session's
+      network policy; the claim counts are the issue's own until the deposit is read. The
+      author says he may be offline for some days.
