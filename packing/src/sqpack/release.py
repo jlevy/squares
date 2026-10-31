@@ -10322,6 +10322,23 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "its version: v0.4.33, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#816's first reply (think-10m1), recorded in result-requests.yaml: T-246 at "
+            "V0/C0, recorded, with its report entry; no register entry, side, bound or "
+            "credit changes. Against main a8deaf1b6 (#817): rendered at link revision "
+            "a8deaf1b into empty site directories, twice from this tree and once with that "
+            "main's result-requests.yaml swapped in, render_packing_methods writes its 43 "
+            "files byte-identical across the three. No PDF was printed; it prints from "
+            "that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 

@@ -26062,7 +26062,19 @@ issues:
     - think-6gti
     - think-10m1
     answer_bead: think-10m1
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/816#issuecomment-6543105784
+      date: '2026-10-31'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: s29-minimal-polynomial
+        id: T-246
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: s29-minimal-polynomial
+        id: E-n029-evand-minpoly-7213-report
     close_when: Each of the six steps has a status backed by receipts on main, and the owner has
       decided T-246's kind and n = 29's lanes.
     notes: >-
