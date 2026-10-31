@@ -10618,6 +10618,25 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "that HTML. The survey keeps v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The follow-ups of 31 October on #804 and #545 after #861 (think-8r92, "
+            "think-6gti), recorded under their replies; no register entry, row, side, bound "
+            "or credit changes. Against main 3c7dd5900 (#861): rendered at one link "
+            "revision into empty site directories, once from this tree and once with that "
+            "main's result-requests.yaml swapped in, render_packing_methods writes its 43 "
+            "files byte-identical across the two. Measured again after review A of #864 "
+            "added #804's three queued asks, changed both replies' kinds and noted the edit "
+            "of the #804 reply, against the same main: 43 files, byte-identical. No PDF was "
+            "printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 
