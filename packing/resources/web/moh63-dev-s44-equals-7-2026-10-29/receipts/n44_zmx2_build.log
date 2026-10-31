@@ -1,0 +1,9 @@
+# command: cargo build --release --bin zmx2
+# cwd: verify2/ assembled from retained bytes: zmx2.rs e2bb84e9e05938db416940ad608d2583ca9a0c248d59820937c4ce59d607ead7 (packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs), Cargo.toml, Cargo.lock and src/main.rs from packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify2
+# python3: not used by this command
+# host: 4 cores; load 5.44 3.85 2.24; started 2026-10-31T05:07:45Z
+   Compiling verify2 v0.1.0 (/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/zmx2work/e2bb84e9/verify2)
+    Finished `release` profile [optimized] target(s) in 27.10s
+# finished 2026-10-31T05:08:13Z; exit 0; wall 27.158 s; CPU 17.1 s (user 16.407 + sys 0.723); load 6.08 4.16 2.39
+# rustc: rustc 1.97.0 (2d8144b78 2026-07-07)
+# binary sha256: d68a2e3540344a0e5ad8af33847e3c473b099cf922b150afd184cc715e038787

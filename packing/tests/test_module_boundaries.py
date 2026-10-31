@@ -1478,13 +1478,6 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             # quick lane keeps the custody receipt's own checks (test_house_adoption).
             "test_adopted_houses_survive_native_worker_boundaries",  # 24.95s
         },
-        # Hosted run37739373988/job113186283659: 14.52s; 68 full geometry replays
-        # cover 85,204 pair decisions across the n108 translation/tolerance surface.
-        # Since the house adoption of 11 October 2026 (think-fvz4) the case is n84's
-        # unstable T-130 house: its screen measured 3.18s on a loaded four-cpu box.
-        "test_translation_escape_screen.py": {
-            "test_an_adopted_house_retains_its_replayed_tolerance_instability",  # 3.18s
-        },
         # Hosted run37743601485/job113199788788, 2026-10-08: 25.04s for the
         # actual complete clone, all three #399 houses/native custody and two private
         # producer/native refusal transactions; 45/30/45s child deadlines unchanged.

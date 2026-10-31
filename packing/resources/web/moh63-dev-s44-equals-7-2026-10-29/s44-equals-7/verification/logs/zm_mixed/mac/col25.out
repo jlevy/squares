@@ -1,0 +1,27 @@
+zeromargin.py sha256 3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc (*** DIFFERS FROM PINNED ***)
+sha256 1fd203469bb43a55ca7ce376b9717437e0970eead31941ec7fa100ab24d5ba95  zm_mixed.py
+sha256 bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5  mixed_cover.py
+sha256 3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc  zeromargin.py
+sha256 c9fde0f1e7013f3f61f4a8d673b6bcaf9c5e54c914b6462164d7326ba254cae0  input (../cert/s44_cover_7.txt)
+argv: zm_mixed.py cert ../cert/s44_cover_7.txt --d4 --nproc 1 --depth 24 --disj --chain-from 0 --cx-lo 25/10 --cx-hi 26/10 --resume ../mac/col25.jsonl --dump ../mac/col25_uncert.txt --manifest ../mac/col25_manifest.json
+settings: {"cert_mode": false, "chain": true, "chain_from": 0, "clip": true, "depth": 24, "lemma_L": true, "lemma_T": true, "mode": "D4", "pitch": "1/10", "reach": "442/625", "region": {"cx_hi": "26/10", "cx_lo": "25/10", "cy_hi": null, "cy_lo": null, "u_hi": null, "u_lo": null}, "split": true, "split_maxchain": 400, "theta_bias": 4, "tprime": true, "ubins": 8}
+container [0,7]^2, 15525 points, 3912 segments on 12 lines, 0 polygons; total 2199755099/50000000 = 43.995101980
+D4: measure invariant under x -> m-x and x <-> y; roots [0,m/2]^2 x u in [0,1/2]
+PARTIAL SWEEP: cx [25/10, 26/10], cy [None, None], u [None, None] -- not a verification of the whole container
+280 root boxes x 1 cover(s), depth limit 24, pitch 1/10, u-bins 8, CHAIN on, Lemma T on, Lemma L on
+  100/280 roots, 3520 boxes, uncert 0, 689s
+  200/280 roots, 52558 boxes, uncert 8, 10543s
+done in 25951s: boxes 112278, max depth 24, CPU 25592 s
+  leaves: PIECE 0  ADM 15243  P1 0  MIX 0  CHAIN 28183  SPLIT 12694  EMPTY 151  UNCERTIFIED 8   (leaves where Lemma T / Lemma L raised the piece bound: 11879 / 44221; closed by Lemma T with line points: 0)
+uncertified boxes (cover cx0 cx1 cy0 cy1 theta0 theta1 deg):
+   - 2.537109 2.537500 1.217969 1.218359 52.5692 52.5917
+   - 2.537500 2.537891 1.218359 1.218750 52.6591 52.6816
+   - 2.537891 2.538281 1.218359 1.218750 52.7041 52.7265
+   - 2.538281 2.538672 1.218750 1.219141 52.8163 52.8388
+   - 2.538672 2.539062 1.219141 1.219531 52.9061 52.9285
+   - 2.539062 2.539453 1.219141 1.219531 52.9509 52.9733
+   - 2.539453 2.539844 1.219531 1.219922 53.0629 53.0853
+   - 2.539453 2.539844 1.219531 1.219922 53.0853 53.1077
+leaves written to ../mac/col25_uncert.txt
+NOT VERIFIED (PARTIAL)
+manifest written to ../mac/col25_manifest.json

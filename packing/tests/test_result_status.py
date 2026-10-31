@@ -410,6 +410,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-230",
         "T-239",
         "T-241",
+        # T-252's s(44) = 7 supersedes Hosono's reported 2799/400 at n = 44, its one count.
+        "T-177",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets

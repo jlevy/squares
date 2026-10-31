@@ -1397,7 +1397,7 @@ seventeen-square case carries `n-17,intake`.
 | `tracker` | A tracking issue for a major effort |
 | `n-11`, `n-17`, `n-18` | Work on a notable case. A count gets a case label once it has a tracker issue of its own, or an optimality proof or claim under review. A new one is named `n-<k>`, coloured `7E3D1D` as the others are, and described `Work on the n = <k> case…` |
 | `deep-gate` | A pull request whose [deferred surface](#the-deep-gate-the-deferred-surface-before-the-merge) runs before merge; the label’s own description lists what that surface runs |
-| `blocked:owner-decision` | An open issue that waits on the owner’s ruling, credit choice or policy answer, or on a budget above the owner’s 40 CPU-hour item cap; the owner’s recorded word unblocks it |
+| `blocked:owner-decision` | An open issue or pull request that waits on the owner’s ruling, credit choice or policy answer, or on a budget above the owner’s 40 CPU-hour item cap; the owner’s recorded word unblocks it |
 | `blocked:owner-reply` | An open issue held for the owner (`held` in the requests record): no pass posts on it or closes it until the owner posts or lifts the hold |
 | `blocked:standing-hold` | An open issue under a decided, standing suspension, such as the n = 17 intake’s of 13 October 2026; it moves when the owner lifts the suspension |
 | `blocked:author` | An open issue that waits on its author: a question under `awaiting_author`, or data only the author can publish |
@@ -1410,11 +1410,16 @@ An intake pass adds `intake` and any case label under the `github-workflows` gra
 
 The six `blocked:` labels are the owner’s taxonomy of 26 October 2026: “If issues are
 definitely clearly blocked on me … add a tag or something to indicate the nature of the
-block”. An issue carries at most one, and only while someone other than the pass must
-act: work that is the project’s own and that nobody holds is not blocked.
-The requests record states it as the issue’s `blocked` entry, a type and a one-line
-reason, and `check_requests --github` lists every open issue whose live `blocked:` label
-differs from the record
+block”. On 31 October 2026 the owner added that `blocked:owner-decision` applies to pull
+requests as well as issues.
+An issue or pull request carries at most one, and only while someone other than the pass
+must act: work that is the project’s own and that nobody holds is not blocked.
+The requests record states it in the entry’s `blocked` field, a type and a one-line
+reason, for each issue and for each pull request the record holds, such as an external
+pull request that submits results (jlevy/squares#574); any other pull request states its
+block in its description.
+`check_requests --github` lists every open issue or pull request the record holds whose
+live `blocked:` label differs from the record
 ([The Requests Record](packing/campaign/result-import.md#the-requests-record)). The
 labels are coloured `B60205` (`owner-decision`), `D93F0B` (`owner-reply`), `5319E7`
 (`standing-hold`), `FBCA04` (`author`), `0052CC` (`dependency`) and `C5DEF5`

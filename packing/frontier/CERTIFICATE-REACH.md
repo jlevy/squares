@@ -143,8 +143,8 @@ their own site sets only. 90 heterogeneous reports across a side band
 this register has ever been claimed from one. Rank on `prize` to choose where to
 look; measure and retain the run before believing any extrapolation.
 
-Of 324 registered cases, 77 are foreclosed and 247 are
-not. 74 of the foreclosed sit at the grid bound `ceil(sqrt(n))`,
+Of 324 registered cases, 78 are foreclosed and 246 are
+not. 75 of the foreclosed sit at the grid bound `ceil(sqrt(n))`,
 which is where the refuting grid fits — so that foreclosure costs nothing except
 where the case is open and its conjectured value is that bound.
 The other 3 — n = 5, 10, 11 — are foreclosed by their own packing:
@@ -398,7 +398,6 @@ lower bound, so nothing was on offer.
 | 12 | 4 | 3.9715 | 4.0000 | 3.9908 | 3.9908 | 3.9908 | ceiling | +0.0193 |
 | 76 | 9 | 8.9650 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.0143 |
 | 95 | 10 | 9.9650 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0120 |
-| 44 | 7 | 6.9725 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.0114 |
 | 17 | 5 | 4.6604 | 4.6755 | 4.9885 | 4.6710 | 4.6710 | cap | +0.0106 |
 | 31 | 6 | 5.9775 | 6.0000 | 5.9862 | 5.9862 | 5.9862 | ceiling | +0.0087 |
 | 96 | 10 | 9.9700 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0070 |
@@ -634,7 +633,6 @@ reaches, not this extrapolation.
 | 40 | 7 | 6.7180 | 6.8284 | 6.9839 | — | 6.9839 | packing | +0.1104 | 6.6795 | +0.0000 |
 | 42 | 7 | 6.8475 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.1364 | 6.8473 | +0.0000 |
 | 43 | 7 | 6.9075 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.0764 | 6.8473 | +0.0000 |
-| 44 | 7 | 6.9725 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.0114 | 6.8473 | +0.0000 |
 | 52 | 8 | 7.5500 | 7.7071 | 7.9816 | — | 7.9816 | packing | +0.1571 | 7.5390 | +0.0000 |
 | 54 | 8 | 7.6850 | 7.8467 | 7.9816 | — | 7.9816 | packing | +0.1617 | 7.6755 | +0.0000 |
 | 57 | 8 | 7.8725 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.1091 | 7.8255 | +0.0000 |
@@ -730,6 +728,7 @@ reaches, not this extrapolation.
 | 34 | 6 | 6.0000 | 5.9862 | — | ceiling |
 | 35 | 6 | 6.0000 | 5.9862 | — | ceiling |
 | 36 | 6 | 6.0000 | 5.9862 | 5.9862 | ceiling |
+| 44 | 7 | 7.0000 | 6.9839 | 6.9839 | ceiling |
 | 45 | 7 | 7.0000 | 6.9839 | 6.9839 | ceiling |
 | 46 | 7 | 7.0000 | 6.9839 | — | ceiling |
 | 47 | 7 | 7.0000 | 6.9839 | 6.9839 | ceiling |

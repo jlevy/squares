@@ -169,8 +169,9 @@ def test_the_register_counts_match_the_frontier_readme() -> None:
     summary = audit.build_document()["summary"]
     operative = summary["operative_cites_t007"]
     # 261 open cases at the correction; 247 since the merge of 2026-10-03, whose replayed
-    # covers and families proved n = 59 to 61, 77, 78 and nine k^2 - 3 cases.
-    assert (operative["all"], operative["open"], summary["open_cases"]) == (0, 0, 247)
+    # covers and families proved n = 59 to 61, 77, 78 and nine k^2 - 3 cases; 246 since
+    # 2026-10-31, when the replayed s(44) cover (T-252) proved n = 44.
+    assert (operative["all"], operative["open"], summary["open_cases"]) == (0, 0, 246)
     assert operative["outside_t007_registered_scope_n"] == ""
     assert summary["classes"] == {
         audit.UNAFFECTED: 324,
@@ -242,13 +243,16 @@ def test_case_rows_carry_each_kind_of_support_separately() -> None:
 
 def test_an_independent_route_through_a_nagamochi_lemma_says_so() -> None:
     sources = rows()[47]["support"]["registered_verified"]["sources"]
+    # n = 44 joined on 2026-10-31 with T-252's s(44) = 7.
     assert [(source["n"], source["results"]) for source in sources] == [
+        (44, ["T-252"]),
         (45, ["T-053"]),
         (46, ["T-004", "T-008", "T-064"]),
         (47, ["T-086"]),
     ]
     assert "shares_a_nagamochi_lemma" not in sources[0]
-    caveat = sources[1]["shares_a_nagamochi_lemma"]
+    assert "shares_a_nagamochi_lemma" not in sources[1]
+    caveat = sources[2]["shares_a_nagamochi_lemma"]
     for key, needle in (("cited_at", "Nagamochi [7]"), ("nagamochi_lemma_at", "Lemma 7")):
         path, line = caveat[key].rsplit(":", 1)
         assert needle in (REPO / path).read_text(encoding="utf-8").split("\n")[int(line) - 1]

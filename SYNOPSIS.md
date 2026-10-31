@@ -323,6 +323,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-240](packing/frontier/RESULTS.md) | 268, 303 | `V3` | `C3` | `S3` | `previously-published` | Two complete rational source certificates of issue #763 report finite upper-bound improvements at the exact sides they state: s(268) <= 78645658458105249171306580101/4660659750118000000000000000 = 16.87436171587383, 4.45e-3 below T-174, and s(303) <= 55035101387261868285958438488216555614454417144023299/3073388523105741896887024831655729584500000000000000 = 17.90697823379890, 2.78e-3 below T-239, the case’s house best packings when they were reported; both decimals are the exact sides rounded at 14 places. |
 | [T-241](packing/frontier/RESULTS.md) | 304 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(304) <= 42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000 = 17.92689890339264…, 2.53e-3 below T-186, the case’s house best packing when it was reported. |
 | [T-243](packing/frontier/RESULTS.md) | 182 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(182) <= 13.970916436214678735385725854133, 3.17e-3 below T-174, the case’s house best packing when it was reported, and below every report at 182. |
+| [T-252](packing/frontier/RESULTS.md) | 44 | `V3` | `C3` | `S3` | `previously-published` | s(44) = 7: the lower half by Mohsen Khalili and Sara Gharabaghi’s closed mixed cover of 26 October 2026, the upper half by the 7 x 7 grid. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -454,7 +455,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 251 | 251 registered, 219 by others |
+| Frontier results | 252 | 252 registered, 220 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -801,6 +802,8 @@ case or experiment separately.
 | [Mathematical Review: wand125’s Fine-Net Lower Bounds at n = 37, 39 and 44 and the Linear Lower Bound at n = 145](docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md) | dated review record | record | retained | — |
 | [Fang’s Excess Theorem and Direct Certificates: Mathematical Review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) | dated review record | record | retained | — |
 | [Proof Review: Benjamin Greff’s `s(76) = 9` and `s(95) = 10` by Mixed Covers](docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md) | dated review record | record | retained | — |
+| [Proof Review: Khalili and Gharabaghi’s `s(44) = 7` by a Closed Mixed Cover](docs/project/reviews/review-2026-10-31-khalili-gharabaghi-s44-mixed-cover.md) | dated review record | record | retained | — |
+| [Independent Correctness Review: Khalili and Gharabaghi’s `s(44) = 7`](docs/project/reviews/review-2026-10-31-s44-independent-correctness-pass.md) | dated review record | record | retained | — |
 | [Project changelog](CHANGELOG.md) | generated status view | generated | generated | — |
 | [Site Changelog Backfill Review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md) | dated review record | record | retained | — |
 | [Feature: Project Changelog and Recent PR Backfill](docs/project/specs/active/plan-2026-10-13-site-changelog.md) | implementation plan | current | transient | — |
@@ -931,6 +934,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of T-243 at 182 (think-2lzo)](packing/cases/regularized_drawings/think-2lzo-2026-10-25/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of T-242 at 268 (think-3anz)](packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization of the Exact Algebraic Houses (think-mbdw)](packing/cases/regularized_drawings/think-mbdw-2026-10-26/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs on the Four Decimal Kingbird Witnesses (think-yk2h)](packing/cases/regularized_drawings/think-yk2h-2026-10-31/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 24 October Adoption of T-231 (think-h01y)](packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
@@ -5018,7 +5022,7 @@ Where the program has spent effort, and what came of it.
 | 16 | proved, $4$ | $4$ | proved not-below control | The valid replacement for the old $n=12$ guard: any reported side below $4$ is known to be invalid |
 | 17 | open | $4.67553009\ldots$ (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of $0^{\circ}$, $+39.80496^{\circ}$, and $-36.62379^{\circ}$. One round: [exp-011](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports $5.0$, the trivial $5\times5$ grid, on all five binary64 screening seeds |
 | 97 | proved, $10$ | $10$ (grid) | opportunistic slot, closed | Proved on 2026-10-03 as the case $m = 10$ of Evan Daniel’s $s(m^2 - 3) = m$ ([T-064](packing/frontier/RESULTS.md)), his `Valid7` checker replayed in full and his Lean reduction built here; $n = 61$ and $n = 78$, the other two of the slot, were proved on 2026-10-02 by replayed mixed covers. The registered analytic Cleemann-style attempt at $\arctan(3/4)$ was never made |
-| 1–324 | 77 proved, 247 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); see the [Frontier corpus summary](packing/frontier/README.md#what-the-corpus-shows) for the current aggregate lower-bound counts |
+| 1–324 | 78 proved, 246 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](packing/frontier/README.md); see the [Frontier corpus summary](packing/frontier/README.md#what-the-corpus-shows) for the current aggregate lower-bound counts |
 
 Three facts about this table drive the strategy.
 
@@ -7430,14 +7434,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 521 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 522 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 109 | asserted something false about the mathematics |
 | validity | 128 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 195 | recorded something its own evidence contradicts |
+| bookkeeping | 196 | recorded something its own evidence contradicts |
 | robustness | 70 | did not finish, or finished only by luck |
 | performance | 19 | worked, but cost far more than it should |
 
@@ -7471,7 +7475,7 @@ Two observations the log exists to make.
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eighty-two defects in 521, and no soundness defect
+**The automated gate has caught eighty-two defects in 522, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

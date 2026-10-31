@@ -176,7 +176,7 @@ The ones that carry the most weight:
   writes it.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
   bounds match exactly.
-  There are currently 77 proved and 247 open formal cases.
+  There are currently 78 proved and 246 open formal cases.
 - `reported_upper_bound.catalogue_rigid` transcribes what the catalogue says about
   rigidity, in the catalogue’s own three-valued vocabulary: `rigid`, `semi-rigid`, or
   `not-stated`. `not-stated` is source silence and never a claim that a packing can
@@ -615,7 +615,7 @@ lower-bound side has underused methods.
 
 Counts below are computed from the artifacts, not asserted.
 
-Of the 247 open cases, **0** have Nagamochi’s formula as their verified lower bound, and
+Of the 246 open cases, **0** have Nagamochi’s formula as their verified lower bound, and
 **187** have Karakuş’s weaker general bound in its place (T-083). Until 2 October 2026
 those 187 rested on Nagamochi’s formula; that day his Lemma 1 was found false
 ([review](../../docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md),
@@ -629,11 +629,11 @@ above them; they are counted below.
 Two others use certificates already integrated into the register: at $n = 12$
 squarepacker’s re-weighting of Evan Daniel’s points ($7943/2000$), and at $n = 17$ the
 current external certificate bound ($18641771/4000000$). Complete interval and exact
-replays of external certificates hold the other 58: Hosono’s mixed rectangle-measure
+replays of external certificates hold the other 57: Hosono’s mixed rectangle-measure
 certificates at $n = 37$, 50, 65, 66, 76, 83 to 85, 87, 90 to 92 and 96, and by
 monotonicity at $n = 51$ from $n = 50$, at $n = 86$ from $n = 85$, at $n = 88$ from
 $n = 87$ and at $n = 93$ from $n = 92$, and its rectangle-density certificates, directly
-or by monotonicity, at $n = 18$ to 20, 26 to 31, 38 to 44, 52 to 58, 67 to 75, 89, 94
+or by monotonicity, at $n = 18$ to 20, 26 to 31, 38 to 43, 52 to 58, 67 to 75, 89, 94
 and 95, and its linear certificates at $n = 82$ and 101, and by monotonicity at 102 to
 105\. On 2026-10-02 those replays superseded this repository’s first-party bounds at
 $n = 18$, 19 and 20 ($4679/1000$, $24/5$ and $97/20$), Tokoharu’s at $n = 26$, 29 and
@@ -649,13 +649,14 @@ $s(45) = 7$; $n = 59$, 60 and 61 left them on 2026-10-02, when replayed mixed co
 proved $s(59) = s(60) = s(61) = 8$, and $n = 77$ and 78 later that day, when the
 replayed $s(77)$ cover proved $s(77) = s(78) = 9$; and nine more, $n = 97$, 118, 141,
 166, 193, 222, 253, 286 and 321, left them on 2026-10-03, when the replayed `Valid7` and
-the built Lean reduction proved $s(k^2 - 3) = k$ for every $k \ge 6$ (T-064). Within the
-original $n \le 100$ corpus, the corresponding Nagamochi count is 0, and 38 until 2
-October 2026. The count is checked against the case records by
+the built Lean reduction proved $s(k^2 - 3) = k$ for every $k \ge 6$ (T-064); and
+$n = 44$ left them on 2026-10-31, when a replayed closed mixed cover proved $s(44) = 7$
+(T-252). Within the original $n \le 100$ corpus, the corresponding Nagamochi count is 0,
+and 38 until 2 October 2026. The count is checked against the case records by
 `devtools.check_nagamochi_bounds` (`D-430`), because earlier hand-maintained counts
 outlived their case promotions.
 
-Of the 247 open cases, 102 are still held by the trivial grid.
+Of the 246 open cases, 101 are still held by the trivial grid.
 The other 145 carry non-grid constructions.
 Within $n \le 100$, the 33 non-grid open cases comprise 13 hand-built, 11 from simulated
 annealing (ten of the eleven dated 2024–2026; $n = 53$ is Cantrell’s from 2002), 5
@@ -670,16 +671,16 @@ most 2.
 
 Ranked by gap—the best-known packing minus the verified lower bound, which is what
 `devtools.gap_ranking` computes—the six smallest open cases at $n \le 100$ are below;
-$n = 95$ ties $n = 76$ at $0.0350$ and follows it in the tool’s order:
+$n = 95$ ties $n = 76$ at $0.0350$ and follows it in the tool’s order.
 
 | $n$ | gap | record | note |
 | --- | --- | --- | --- |
 | 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Overbeck |
 | 31 | 0.0225 | grid | $6^2 - 5$, carried to $\frac{2391}{400}$ by Hosono after Tokoharu and Levy (T-232) |
-| 44 | 0.0275 | grid | $7^2 - 5$, carried to $\frac{2789}{400}$ by Hosono after Tokoharu |
 | 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
 | 96 | 0.0300 | grid | $10^2 - 4$, carried to $\frac{997}{100}$ by Hosono after Tokoharu; reported proved by Evan Daniel (T-081) |
 | 76 | 0.0350 | grid | $9^2 - 5$, carried to $\frac{1793}{200}$ by Hosono after Tokoharu |
+| 95 | 0.0350 | grid | $10^2 - 5$, carried to $\frac{1993}{200}$ by Hosono after Tokoharu |
 
 The $n = 17$ bound is Guzhou0806 / N17 project’s R071, continuing Overbeck’s charge
 (Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806): an exact
@@ -703,6 +704,9 @@ here for every $m \ge 6$ (T-064): his exact checker of the finite premise `Valid
 replayed in full and his Lean reduction from it was built.
 $n = 31$ entered it second, at $0.0225$, when T-232 landed and raised its verified floor
 to $2391/400$, and moved $n = 95$ to seventh.
+$n = 44$, third at $0.0275$, left it on 2026-10-31, when Mohsen Khalili and Sara
+Gharabaghi’s closed mixed cover, decided by Evan Daniel’s `zmx2` and replayed here in
+both its modes, proved $s(44) = 7$ (T-252), and $n = 95$ returned to sixth.
 With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved exactly for every
 $m \ge 3$**.
 

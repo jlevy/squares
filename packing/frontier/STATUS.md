@@ -53,7 +53,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`41`](n-041.md) | `6.92669309446880` | `479768440817958626045142953622937499897065243765211133296503125758084818291688464353501845122603783894278481/69263706977442076582141718006995605133664448137108429896191176062896089000000000000000000000000000000000000` | `271/40` | `271/40` | open | upper: replayed here; lower: replayed here | — | 2026-10-06 |
 | [`42`](n-042.md) | `7` | `7` | `2739/400` | `2739/400` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |
 | [`43`](n-043.md) | `7` | `7` | `2763/400` | `2763/400` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |
-| [`44`](n-044.md) | `7` | `7` | `2789/400` | `2789/400` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |
+| [`44`](n-044.md) | `7` | `7` | `7` | `7` | proved | upper: replayed here; lower: replayed here | — | 2026-10-31 |
 | [`45`](n-045.md) | `7` | `7` | `7` | `7` | proved | upper: replayed here; lower: replayed here | — | 2026-09-28 |
 | [`46`](n-046.md) | `7` | `7` | `7.0` | `7` | proved | upper: replayed here; lower: external proof (read here, defect recorded), audited here, replayed here | — | 2026-08-25 |
 | [`47`](n-047.md) | `7` | `7` | `7` | `7` | proved | upper: replayed here; lower: replayed here | — | 2026-08-24 |

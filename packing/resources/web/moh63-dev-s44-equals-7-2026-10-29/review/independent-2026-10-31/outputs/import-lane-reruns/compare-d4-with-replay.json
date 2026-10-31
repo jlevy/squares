@@ -1,0 +1,34 @@
+{
+ "shipped": "resources/web/moh63-dev-s44-equals-7-2026-10-29/receipts/n44_zmx2_d4_roots.log",
+ "shipped_sha256": "cbcf1dbc693ad0537ff03741f640df71513838c15dae363d5c8452559534ab32",
+ "replay": "resources/web/moh63-dev-s44-equals-7-2026-10-29/review/independent-2026-10-31/outputs/d4_roots.log",
+ "replay_sha256": "b09128e74a30da5285ac8c6e2a3421b39827fc68f97e0d82d5ae060bbf815865",
+ "replay_runs": [
+  {
+   "log": "resources/web/moh63-dev-s44-equals-7-2026-10-29/review/independent-2026-10-31/outputs/d4_roots.log",
+   "line": 1,
+   "region": "x0-34,y0-34,bins0-3",
+   "roots": 4900
+  }
+ ],
+ "not_compared": {
+  "region": "the header field naming the run's limits: a replay joined from region runs, or a partial re-sweep, names its own; the zmx2 command audits their union",
+  "ms": "each ROOT line's wall-clock time"
+ },
+ "headers_equal": true,
+ "headers_identical": true,
+ "shipped_roots": 4900,
+ "replay_roots": 4900,
+ "roots_compared": 4900,
+ "roots_identical": 4900,
+ "roots_whose_census_differs": [],
+ "root_ids_differ": 0,
+ "replay_roots_recorded_more_than_once": 0,
+ "shipped_roots_recorded_more_than_once": 0,
+ "replay_roots_not_in_shipped": 0,
+ "shipped_roots_not_replayed": 0,
+ "shipped_uncert_lines": 0,
+ "replay_uncert_lines": 0,
+ "shipped_unparsed_lines": 0,
+ "replay_unparsed_lines": 0
+}

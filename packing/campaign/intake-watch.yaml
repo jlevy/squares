@@ -253,18 +253,6 @@ repositories:
       comparison and replay. #425's entry already records both corrections: T-117 keeps
       the n = 105 and 292 witnesses, and T-125 covers Ryan Xu's n = 105. Nothing new to
       import.
-  - url: https://github.com/Queuingtheorydotcom/11SquaresOptimal
-    read_through: 4262f07c7723428c1725bb757ed06d0c4d28be1a
-    read_on: '2026-10-09'
-    bead: think-3i74
-    note: >-
-      Three commits of 8 October past the f9e0de7 read add paper/: a revised geometric
-      manuscript of the n = 11 proof (marker-based reduction, support chains, angle
-      penalties and a 103-node dependency graph), a geometric-foundations companion and a
-      self-contained verification supplement; 4262f07 simplifies the ownership-case 0, 3
-      and 5 exclusions. The author reports component replays passing and the portable
-      full replay not yet run end to end. This is new evidence for the claim T-060 cites,
-      owned by think-3i74's independent validation; no rating changes.
   - url: https://github.com/evand/square-packing
     read_through: ed01e0d35f12168435fa9963e3c499721122492e
     read_on: '2026-10-09'
@@ -751,18 +739,6 @@ repositories:
       no commit's and think-p2cy owns it. Nothing else to import.
   # The intake pass of 2026-10-15 (think-mq0k): the reads lane's (think-gue4) and the n = 28
   # intake's (think-zb5w), written by the records lane that registers T-188 to T-192.
-  - url: https://github.com/bengreff/s76-certificate
-    read_through: 06993982e83dba37ca12121bd876396a15571fcb
-    read_on: '2026-10-15'
-    bead: think-osvq
-    note: >-
-      One commit of 14 October (08:16Z) past the bengreff-s76-certificate-2026-10-14 packet's
-      1cb924f: the second route #594's comment of that day describes, zm_mixed.py alone over
-      all 129,600 D4 roots at depth 24 (129,599 certified, six boxes left in one root, which
-      certifies alone at depth 34), with records/zm_full/, tools/check_full.py and verify.sh's
-      --full-zm; 181 CPU-hours at the source. The cover, the composite's records and the Lean
-      are unchanged. New evidence for T-184, owned by think-osvq until a packet pins this
-      commit.
   - url: https://github.com/BuddenPing/square-packing-certificates
     read_through: 318ab94e821ba7280a68fa8ce2942c9ecdbda41d
     read_on: '2026-10-15'
@@ -965,20 +941,6 @@ repositories:
       hunts LH1 and LH2 found nothing below the register at 50 to 324 and name no certificate. 757b40b (17 October, 04:29Z) adds
       search/packer/candidates/s271_ex1*, the certificate of s(271) <= 16.948947733714 that #664
       reports, which think-8o5j holds until a packet pins this commit. Nothing else to import.
-  - url: https://github.com/ofitzharding/sq19
-    read_through: c86a991ea1379d1598739182f5f26619c9b7126a
-    read_on: '2026-10-17'
-    bead: think-a4x3
-    note: >-
-      One commit of 16 October (14:28Z) past the fitzharding-n19-lean-2026-10-16 packet's pin 34fb2b7
-      (v1.0.0). It adds verification/clean-build-receipt.json, verification/clean-build.log and a README
-      paragraph: a fresh clone of v1.0.0 with the release's certificates, rebuilt from source by
-      scripts/verify.py --kernel-replay on a 64-vCPU machine in 5 h 18 min (about 340 CPU-hours),
-      VERIFIED, 13,143 modules replayed with no failure, statement and axioms as T-194 records them, and
-      every generated certificate module byte-identical to the research build. The author's own
-      rebuild of the proof T-194 registers, not a replay here: new evidence for T-194, which
-      think-a4x3 holds until a packet pins this commit, and the measure think-nqnl's held rebuild can
-      be priced against. The Lean proof itself is unchanged.
   - url: https://github.com/wand125/square-packing
     read_through: 718887cfaa8727cc75108c5924fa1330df4fa098
     read_on: '2026-10-17'
