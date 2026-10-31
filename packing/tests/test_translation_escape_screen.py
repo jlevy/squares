@@ -269,7 +269,11 @@ def test_small_records_rescreen_to_the_retained_result() -> None:
         assert screened == (True, cases[n])
 
 
-@pytest.mark.slow
+# Back on the pull-request surface since 31 October 2026. The slow lane's 1s floor
+# refused its marker on main at 0.86s (run 40656970104) and 0.85s (run 41026564353);
+# other hosted draws read 1.14s to 2.86s and a shared four-cpu box 1.75s, all inside
+# the quick lane's classification ceiling. The 3.18s that earned the marker was T-130's
+# screen, before T-174 became the house.
 def test_an_adopted_house_retains_its_replayed_tolerance_instability() -> None:
     """A fresh screen of an unstable adopted house reproduces the retained result.
 
