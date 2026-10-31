@@ -9000,7 +9000,7 @@ issues:
       configurations again with a checker written here, retaining the 233 exact forms they read.
       That checker is the review lane's own, so its run is a second route beside the rung, as at
       T-225 and T-229; C3 waits on a separate replay lane, gradec.py over all 233 (about 10.6
-      CPU-hours by the source's logs, think-mtah). The grade-C claim is registered as T-264 (31
+      CPU-hours by the source's logs, think-mtah). The grade-C claim is registered as T-261 (31
       October 2026, think-7scz) at V3/C1, with the review's run and the n = 10 recomputation as its
       evidence beside the report.
     read_through: '2026-10-12T14:15:44Z'
@@ -9019,7 +9019,7 @@ issues:
         configurations of field degree at most 4.
       source: body
       register:
-      - T-264
+      - T-261
       evidence:
       - E-evand-gradec-local-minima-233-report
       - E-evand-gradec-local-minima-233-review-check

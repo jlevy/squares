@@ -108,9 +108,9 @@ CASES_MEASURE = 224.8
 CASES_MIN = 120.4
 CASES_LINES = {ROOMY: 11, FITS: 13}
 #: The result with the longest list of cases, and the five whose quotients are long.
-MOST_CASES = "T-264"
+MOST_CASES = "T-261"
 #: The results whose lists determine the maximum line count. T-101's and T-155's lists
-#: held it at nine and ten lines until T-264's 49 values were registered (2026-10-31).
+#: held it at nine and ten lines until T-261's 49 values were registered (2026-10-31).
 CASES_LINES_HELD_BY = (MOST_CASES,)
 LONG_QUOTIENTS = ("T-022", "T-024", "T-026", "T-033", "T-114")
 #: The 1112.3-pixel floor exceeds the 944/688-pixel frames by 168.3/424.3 pixels.
@@ -315,7 +315,7 @@ def test_on_a_phone_a_long_list_of_cases_takes_a_line_of_its_own(
     The main-branch CSS on this same 116-row corpus also takes five lines. The old
     four-line assertion selected the short-list class and never measured these cells;
     C7 / think-7fbg now checks the actual wrapping group without changing its layout.
-    T-264's 49 values, registered on 31 October 2026, take seven.
+    T-261's 49 values, registered on 31 October 2026, take seven.
     """
     table = laid[name, PHONE].table
     cases = _column(table, "site-n-wraps")
@@ -389,7 +389,7 @@ def test_a_cell_of_cases_holds_each_value_in_a_box_and_reads_as_the_register_doe
         values = boxes.findall(cell)
         assert " ".join(values) == html.escape(result.scope, quote=False)
         assert all(" " not in value for value in values)
-    # T-264's 49 values since 31 October; T-155's 44 from 12 October, T-101's 39 from
+    # T-261's 49 values since 31 October; T-155's 44 from 12 October, T-101's 39 from
     # 6 October; T-056 and T-098 have 23 each.
     most = max(
         overview.results,

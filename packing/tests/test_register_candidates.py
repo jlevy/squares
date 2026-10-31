@@ -1,4 +1,4 @@
-"""The register candidates of 31 October 2026 (T-261 to T-263): custody, construction, receipts.
+"""The candidates of 31 October 2026, held unregistered: custody, construction, receipts.
 
 `devtools.register_candidates` retains the regularization run's solve certificates at 130
 and 307, each pinned by the SHA-256 the 31 October review decided and held to the solved
@@ -22,7 +22,7 @@ from devtools import evand_exact_certificates as legacy
 from devtools import register_candidates as candidates
 
 BATCH = candidates.RUU2
-#: Each candidate's exact side, as T-261, T-262 and T-263 state it, and its house's.
+#: Each candidate's exact side, as the 31 October review decided it, and its house's.
 SIDES = {
     130: (
         Fraction(1487803830747751967474793359227, 125 * 10**27),

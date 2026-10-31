@@ -5,15 +5,15 @@ Three packings below three of them were found the same day.
 The house rule asks the record to register every exactly verified packing below a house,
 however it was made
 ([result-import.md](../../../campaign/result-import.md#the-house-rule);
-[Register Candidates](../../../../docs/project/guides/regularization-process.md#register-candidates)),
-so each is registered here.
-**All three are held for the owner, and no house moves.**
+[Register Candidates](../../../../docs/project/guides/regularization-process.md#register-candidates)).
+**All three are held unregistered for the owner, and no house moves.** This package
+retains what a registration would cite.
 
-| n | Result | Certificate | Side | Below the house | 12-place print | House |
-| ---: | --- | --- | --- | ---: | --- | --- |
-| 130 | T-263 | The run’s solve of the house, `certificates/n-130.cert` | 1487803830747751967474793359227/(1.25·10²⁹) | 2.500e-13 | …983, the house’s | T-259 |
-| 293 | T-262 | T-257’s 260 certificate with its 293’s L strip, `certificates/n-293.cert` | 8816991251060941991251052624833/(5·10²⁹) | 8.980e-13 | …122 against …123 | T-257 |
-| 307 | T-261 | The run’s solve of the house, `certificates/n-307.cert` | 4494812820921068365908930695861/(2.5·10²⁹) | 3.752e-12 | …685 against …689 | T-256 |
+| n | Certificate | Side | Below the house | 12-place print | House |
+| ---: | --- | --- | ---: | --- | --- |
+| 130 | The run’s solve of the house, `certificates/n-130.cert` | 1487803830747751967474793359227/(1.25·10²⁹) | 2.500e-13 | …983, the house’s | T-259 |
+| 293 | T-257’s 260 certificate with its 293’s L strip, `certificates/n-293.cert` | 8816991251060941991251052624833/(5·10²⁹) | 8.980e-13 | …122 against …123 | T-257 |
+| 307 | The run’s solve of the house, `certificates/n-307.cert` | 4494812820921068365908930695861/(2.5·10²⁹) | 3.752e-12 | …685 against …689 | T-256 |
 
 ## Why They Are Held
 
@@ -29,8 +29,8 @@ Each is its house’s own packing, certified with less padding (RV-2):
   The margin is the strip’s share of T-257’s 1 + 1e-12 dilation, less a 1.02e-13
   difference between his two binary64 inputs.
 
-The questions are the owner’s, and the coordinator held all three until they are
-answered (31 October 2026):
+The questions are the owner’s, and all three are held unregistered until they are
+answered (31 October 2026), as the review proposes:
 
 - **RV-3**: whether such a re-certification is a new result at any print, only across
   the print, or at none.
@@ -40,12 +40,15 @@ answered (31 October 2026):
 - **think-ikku’s RV-1** (130): whether the restatement ruling of 23 October reaches
   counts inside the corpus.
 
-Each entry is at V3/C3, as every project result is from its registration, and the review
-is recorded on its evidence but not listed as its accepted review.
-So each stays below the stage 4 exit, and `devtools.select_houses` takes none of them.
-If the answers keep one, the review is listed.
-Adopting it then needs `select_houses` and `upper_bound_houses` to read a certificate
-this project made (think-4z8z).
+None has a register entry or an evidence entry, as T-253 and T-260 entered no replay
+evidence while they were held.
+A register entry would be confirmed (C3) from the day it was registered, as every
+project result is, with this review listed as its accepted stage 4 review.
+`devtools.select_houses` would then see it, and today it would raise a `KeyError` on the
+entry’s missing `attribution`: think-4z8z teaches it and `upper_bound_houses` to read a
+certificate this project made before any of the three is registered.
+If the answers keep one, the registration cites this package’s certificate and receipts,
+the review’s run as a second route, and the review itself.
 
 ## What Is Retained
 
@@ -68,7 +71,9 @@ this project made (think-4z8z).
   (`out/`), and the run files it read that the repository holds nowhere else
   (`inputs/`): the two drawn views and the two regularized certificates.
   The programs are kept verbatim and excluded from the lint floor in
-  `packing/pyproject.toml`.
+  `packing/pyproject.toml`. No evidence entry cites them yet; at 293 they are the check
+  of the lane that wrote the certificate, sharing its reader `qio.py`, not a clean-room
+  route.
 
 ## Commands
 

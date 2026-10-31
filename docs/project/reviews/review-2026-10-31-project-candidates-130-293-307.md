@@ -36,6 +36,14 @@
   The other inputs are files at `e482345fe` and the run’s two solve certificates, which
   the package retains as `certificates/n-130.cert` and `n-307.cert`.
 
+- **Record disposition (31 October 2026, records lane, after review A of #861):** none
+  of the three is registered.
+  All three are held unregistered until the owner answers RV-3 and RV-4 and think-ikku’s
+  RV-1, as Proposed Record Changes below proposes, and no evidence entry cites this
+  review’s programs yet.
+  The package retains the three certificates, the receipts on both maintained routes and
+  this review’s code.
+
 ## Summary for the Author
 
 The authors here are this project’s own lanes, and Evan Daniel and Francisco Couzo,

@@ -900,8 +900,8 @@ EXPLAINER_HISTORY = (
         version="v0.4.35",
         first_published="October 31, 2026",
         result_scope=(
-            "Update the registered result count after the registration of four results "
-            "from the intake of 31 October (T-261 to T-264)."
+            "Update the registered result count after the registration of one result "
+            "from the intake of 31 October (T-261)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1543,8 +1543,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.4.35",
         impact="patch",
         reason=(
-            "Update the registered result count after the registration of four results "
-            "from the intake of 31 October (T-261 to T-264)."
+            "Update the registered result count after the registration of one result "
+            "from the intake of 31 October (T-261)."
         ),
     ),
     ReleaseImpactDecision(

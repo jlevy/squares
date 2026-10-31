@@ -15869,57 +15869,6 @@ occurrences:
     the repository whose retained licence names Evan Daniel. Keep finder, improver
     and solver roles distinct.
 - origin:
-    path: packing/frontier/results.yaml
-    record_key: T-261
-    field: /builds_on/credit/0
-  expected_text: Daniel
-  start: 0
-  end: 6
-  label: Daniel
-  role: prerequisite
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/results.yaml [T-261] /builds_on/credit/0 span 0:6.
-    The solver and regularizer, vendored (evand/square-packing, MIT) matches the repository whose retained licence names Evan Daniel. Keep
-    finder, improver and solver roles distinct.
-- origin:
-    path: packing/frontier/results.yaml
-    record_key: T-262
-    field: /builds_on/credit/0
-  expected_text: Daniel
-  start: 0
-  end: 6
-  label: Daniel
-  role: prerequisite
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/results.yaml [T-262] /builds_on/credit/0 span 0:6.
-    The issue 845 260 certificate, whose bibliography key names Evan Daniel matches the repository whose retained licence names Evan Daniel. Keep
-    finder, improver and solver roles distinct.
-- origin:
-    path: packing/frontier/results.yaml
-    record_key: T-263
-    field: /builds_on/credit/0
-  expected_text: Daniel
-  start: 0
-  end: 6
-  label: Daniel
-  role: prerequisite
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/results.yaml [T-263] /builds_on/credit/0 span 0:6.
-    The solver and regularizer, vendored (evand/square-packing, MIT) matches the repository whose retained licence names Evan Daniel. Keep
-    finder, improver and solver roles distinct.
-- origin:
     path: packing/frontier/n-005.md
     record_key: '5'
     field: /reported_upper_bound/found_by/0

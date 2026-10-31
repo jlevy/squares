@@ -122,8 +122,8 @@ def test_an_entry_that_claims_no_bound_has_no_standing(records: view.Records) ->
     # T-124 reports local minima of source configurations, without a global bound.
     assert without["T-124"] == "restricted-optimality"
     assert without["T-246"] == "exact-side"
-    # T-264, from 2026-10-31: Evan Daniel's grade-C local minima, as T-124 reports others.
-    assert without["T-264"] == "restricted-optimality"
+    # T-261, from 2026-10-31: Evan Daniel's grade-C local minima, as T-124 reports others.
+    assert without["T-261"] == "restricted-optimality"
     assert len(without) == 14
 
 
