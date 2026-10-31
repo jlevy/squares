@@ -1,0 +1,26 @@
+{
+  "result": "VERIFIED",
+  "what": "Fresh clone of https://github.com/ofitzharding/sq19 at v1.0.0; bash scripts/fetch.sh (certificate sources downloaded from the public release, hash-checked); python3 scripts/verify.py --kernel-replay. No precompiled project objects were used; only the pinned Mathlib build cache.",
+  "commit_built": "34fb2b7bc39465db368c45cb48d4db58829d3051",
+  "started_utc": "2026-10-16T07:23:41Z",
+  "finished_utc": "2026-10-16T12:42:15Z",
+  "wall_seconds": 19114,
+  "machine": {
+    "os": "Ubuntu 24.04 (Linux x86-64)",
+    "vcpus": 64,
+    "memory_gb": 512,
+    "lean": "4.34.1"
+  },
+  "modules_compiled_from_source": 2400,
+  "statement": "Sq19.square19_optimality : ∀ (L : ℝ), Sq19.Feasible19 L ↔ 3 + 4 * √2 / 3 ≤ L",
+  "axioms": "Classical.choice, Quot.sound, propext + 4320 native_decide checks",
+  "kernel_replay": "13143 modules, 0 failures",
+  "comparison_with_research_build": {
+    "modules_compared": 2399,
+    "byte_identical": 2177,
+    "different": 222,
+    "note": "All generated certificate modules are byte-identical. The differing modules are hand-written ones, which this route builds with Lake while the research build used direct lean invocations and caches from separate sessions."
+  },
+  "log": "verification/clean-build.log",
+  "log_sha256": "9ad3ac1e4853aa633ceb231330fab145bc3db257c649a982c6971be86e194dfb"
+}

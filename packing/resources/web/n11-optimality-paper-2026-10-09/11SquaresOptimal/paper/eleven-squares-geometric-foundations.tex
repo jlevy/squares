@@ -1,0 +1,259 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\title{Geometric foundations for the eleven-square proof}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give direct proofs of the nonavoidance and continuous-marker rules used
+in the eleven-square reduction. All square interiors are open; center
+regions are closed, and wall contact is allowed. The wall rule is proved
+only in the parameter range needed for the reduction. These geometric
+foundations are separate from the finite exclusions needed for optimality.
+\end{abstract}
+
+The first two rules correspond to Stromquist's Lemmas~1 and~2
+\cite[ p.~2]{stromquist}. The triangle proof below also treats the boundary
+and gives a finite-set generalization. The third rule is a directly proved variant of Lemma~4: it assumes
+$b\ge1/2$ but permits every width $0<w<1$, whereas the published
+lemma assumes $2\sqrt2-2<w<1$. Complete proofs are included, so the applications
+depend on the stated hypotheses rather than an unchecked external theorem.
+
+\section*{The two elementary nonavoidance rules}
+\paragraph{Rectangle rule, with all boundaries included.}
+Let $0<A,B\le1$. An open square of side $\lambda>1$ centered at
+$(X,Y)\in[0,A]\times[0,B]$ either meets a coordinate axis or contains
+$P=(A,B)$. Suppose it avoids both axes. Choose edge axes
+$u=(c,s),v=(-s,c)$ with $c,s\ge0$, $c^2+s^2=1$, and put $\rho=c+s$.
+Avoidance of both axes implies $X,Y\ge\lambda\rho/2$. Thus the
+coordinates of $d=P-(X,Y)$ are nonnegative and at most
+$M=1-\lambda\rho/2$. In a feasible instance $M\ge0$, and both edge
+projections satisfy
+\[
+ |u\cdot d|,\ |v\cdot d|\le\rho M<\lambda/2.
+\]
+Indeed, the strict inequality is equivalent to
+$2\rho<\lambda(\rho^2+1)$, which follows from
+$\rho^2+1\ge2\rho>0$ and $\lambda>1$. Therefore $P$ belongs to the
+open square, even if the square touches an axis or its center lies on
+an edge of the center rectangle.
+
+\paragraph{Triangle rule, including edges and vertices.}
+Let a triangle have all side lengths at most one. An open square of
+side $\lambda>1$ whose center lies in the \emph{closed} triangle
+contains one of its vertices. In fact, the statement holds with a finite
+set $V$ of diameter at most one in place of the three vertices and its
+convex hull in place of the triangle.
+Translate the square's center to zero and use its edge coordinates.
+Suppose every point of $V$ avoids its open interior. Every point then
+satisfies one of $x\ge\lambda/2$, $x\le-\lambda/2$,
+$y\ge\lambda/2$, $y\le-\lambda/2$. Both opposite inequalities in either
+coordinate cannot occur at different points, as they would give a pair
+at distance at least $\lambda>1$. Reflecting coordinates if necessary,
+all violations are therefore of types $x\ge\lambda/2$ and
+$y\ge\lambda/2$.
+If only one type occurs, that coordinate is strictly positive throughout
+$V$, excluding zero from its convex hull. If both types occur, the
+pairwise-distance bound forces every point to satisfy
+$x> -\lambda/2$ and $y> -\lambda/2$. Each point thus satisfies $x+y>0$,
+again excluding zero from the convex hull. This contradiction proves the
+open-ownership conclusion without any separate center-edge argument.
+
+\section*{A direct proof of the required wall-quadrilateral rule}
+Let $0<w<1$, $1/2\le b<1$, and
+\[
+ w^2+(1-b)^2\le1.
+\]
+Suppose that for every $0<\theta<\pi/2$,
+\begin{equation}\label{eq:independent-wall-hypothesis}
+ b\le \frac{\cos\theta}{1+\cos\theta}
+       +\frac{1-w\cos\theta}{\sin\theta}.
+\end{equation}
+Write
+\[
+ P=(0,1),\qquad R=(w,b),\qquad
+ D=\operatorname{conv}\{(0,0),(w,0),R,P\}.
+\]
+Then the open interior of every square of side $\lambda>1$ whose center
+lies in the closed quadrilateral $D$ meets the $x$-axis or contains $P$ or
+$R$. This is a directly proved variant of Stromquist\textup{~\cite[Lemma~4, pp.~3--4]{stromquist}} in the range $b\ge1/2$; its wider width range is justified by the proof below. Its scalar hypothesis is stated for every angle, so no assertion about the location or uniqueness of a minimum is required.
+
+\paragraph{Coordinates and boundary convention.}
+Suppose, for a contradiction, that the square's open interior avoids all
+three targets. Let its center be $Z=(X,Y)$. Choose its orthonormal edge
+axes as
+\[
+ u=(c,s),\qquad v=(-s,c),\qquad c,s\ge0,\quad c^2+s^2=1,
+\]
+and put $\rho=c+s$. Such a choice covers every square orientation modulo
+$\pi/2$. The center hypotheses give
+\[
+ 0\le X\le w,\qquad 0\le Y\le1-(1-b)X/w\le1.
+\]
+The square's vertical half-width is $\lambda\rho/2$. Since it avoids the
+$x$-axis and its center is above it,
+\begin{equation}\label{eq:wall-bottom}
+ Y\ge\lambda\rho/2.
+\end{equation}
+Equality, corresponding to a vertex or edge on the wall, is allowed.
+Put $U=u\cdot Z$, $V=v\cdot Z$, and let the edge coordinates of the two
+markers relative to $Z$ be
+\[
+ p=u\cdot(P-Z)=s-U,\quad q=v\cdot(P-Z)=c-V,
+\]
+\[
+ r=u\cdot(R-Z)=cw+sb-U,\quad t=v\cdot(R-Z)=-sw+cb-V.
+\]
+Avoidance of an \emph{open} square means at least one coordinate has
+absolute value at least $\lambda/2$. No strict outside assumption is made.
+
+\paragraph{Only four face combinations remain.}
+First, $q=c(1-Y)+sX\ge0$, whereas
+\[
+ p=s(1-Y)-cX\le s(1-\lambda\rho/2)<\lambda/2.
+\]
+The strict inequality follows from
+$1+s\rho-2s=(1-s)^2+sc\ge0$ and $\lambda>1$.
+Consequently the first marker can be avoided only through
+\[
+ \text{(A)}\ p\le-\lambda/2,
+ \qquad\hbox{or}\qquad
+ \text{(B)}\ q\ge\lambda/2.
+\]
+For the second marker,
+\[
+ r=c(w-X)+s(b-Y)\ge-s(1-b)\ge-1/2>-\lambda/2,
+\]
+using $b\ge1/2$, and
+\[
+ t=-s(w-X)+c(b-Y)\le c(1-\lambda\rho/2)<\lambda/2.
+\]
+Here $1+c\rho-2c=(1-c)^2+cs\ge0$ gives the final inequality.
+Thus its only avoidance possibilities are
+\[
+ \text{(C)}\ r\ge\lambda/2,
+ \qquad\hbox{or}\qquad
+ \text{(D)}\ t\le-\lambda/2.
+\]
+If a marker violates two faces, choose either one; the four combinations
+below exhaust all possibilities, including marker-on-boundary cases.
+
+\paragraph{Three combinations are impossible.}
+Set $\delta=1-b$ and
+\[
+ d=u\cdot(R-P)=cw-s\delta,
+ \qquad E=-v\cdot(R-P)=sw+c\delta>0.
+\]
+Then $r=p+d$, $t=q-E$, and
+\begin{equation}\label{eq:wall-short-top}
+ d^2+E^2=w^2+\delta^2\le1<\lambda^2.
+\end{equation}
+Combination (A),(C) gives $d=r-p\ge\lambda$, contradicting
+\eqref{eq:wall-short-top}. Combination (B),(D) similarly gives
+$E=q-t\ge\lambda$.
+
+For combination (A),(D), (A) yields $U\ge s+\lambda/2$.
+Since the maximum of $u\cdot Z$ on $D$ is $\max(s,cw+sb)$,
+we get $d\ge\lambda/2>0$. In particular $0<d,E<\lambda$ by
+\eqref{eq:wall-short-top}. The top-edge condition on the center says
+\[
+ (\delta,w)\cdot(P-Z)\ge0.
+\]
+Since $(\delta,w)=E u+d v$, this is $Ep+dq\ge0$.
+But (A),(D) give $p\le-\lambda/2$ and $q\le E-\lambda/2$, so
+\[
+ Ep+dq\le dE-\frac\lambda2(d+E)<0.
+\]
+The last inequality uses $d,E<\lambda$:
+$2dE<\lambda E+\lambda d$. This is a contradiction.
+This step is exactly where the center's position below the sloping edge
+is needed; it cannot be omitted or replaced by a coarse rectangle.
+
+\paragraph{The remaining combination gives the scalar condition.}
+In combination (B),(C),
+\[
+ V\le c-\lambda/2,\qquad U\le cw+sb-\lambda/2.
+\]
+Since $Y=sU+cV$, these inequalities together with
+\eqref{eq:wall-bottom} imply
+\begin{equation}\label{eq:wall-final-inequality}
+ \lambda(c+s)\le c^2+scw+s^2b.
+\end{equation}
+If $s=0$, this is $\lambda\le1$, impossible. If $c=0$, it is
+$\lambda\le b<1$, also impossible. Otherwise $s,c>0$ and
+$\lambda>1$ make \eqref{eq:wall-final-inequality} imply
+\[
+ b>\frac{c+s-c^2-scw}{s^2}
+   =\frac{c}{1+c}+\frac{1-wc}{s},
+\]
+contradicting \eqref{eq:independent-wall-hypothesis}.
+Thus the open square meets the wall or owns an endpoint, as claimed.
+All center boundaries, marker boundaries, wall contacts, and the two
+axis-aligned orientations have been included explicitly.
+
+
+\paragraph{The initial wall parameters.}
+For the twelve-marker cover, take $w=47/50$ and $b=3/4$.
+The short top-edge condition is
+$(47/50)^2+(1/4)^2=9461/10000<1$.
+With $z=\tan(\theta/2)\in(0,1)$, the scalar hypothesis follows from
+\[
+100z\left(\frac{\cos\theta}{1+\cos\theta}
+ +\frac{1-w\cos\theta}{\sin\theta}-b\right)
+=3-25z+97z^2-50z^3>0.
+\]
+For $z\le1/2$ the polynomial is at least $3-25z+72z^2$, whose
+discriminant is $-239$. For $z\ge1/2$ it is at least
+$3-25z+47z^2$, which is increasing there and equals $9/4$ at $1/2$.
+Other marker positions require their own scalar checks.
+If the left endpoint has height $H$ instead of one, scale all lengths by
+$H$; the required strict side inequality is then $a/H>1$.
+
+\section*{Continuous markers preserve ownership}
+The following generalized form of Bentz's Theorem~8\cite[pp.~3--4]{bentz} applies to
+fixed open sets, and in particular to the interiors of packed squares.
+
+Let $B_1,\ldots,B_m$ be pairwise disjoint open sets, and let
+$p_1,\ldots,p_n:[0,1]\to\mathbb R^2$ be continuous curves.
+Suppose every $B_i$ contains at least one $p_j(t)$ at every time $t$.
+Keep each initially unowned marker fixed, and also keep every marker
+fixed whose initial owner contains another marker. Then every initially
+owned marker stays in its initial owner for the entire interval.
+
+To prove this, suppose an exit occurs. For each marker initially in an
+owner, its set of exit times is closed; hence, among the finitely many
+markers that exit, there is a first exit time $\tau>0$. Let $p_j$ leave
+$B_i$ then. At time $\tau$, another marker $p_k$ lies strictly inside
+$B_i$, because that set must still contain a marker. Openness and
+continuity put $p_k(t)$ in $B_i$ just before $\tau$ as well.
+This marker cannot have been initially unowned: it would have been fixed
+outside every owner. If it was initially in $B_l$, minimality of $\tau$
+puts it in $B_l$ just before $\tau$. Disjointness forces $l=i$.
+Thus $p_j$ and $p_k$ initially shared an owner, so $p_j$ was fixed and
+could not exit. This is a contradiction. Simultaneous exits and points
+on square boundaries are covered by the same argument.
+
+For a continuously unavoidable marker configuration, the premise about
+every fixed packed square holds automatically. If an owner is convex,
+it consequently contains the convex hull of the entire path of any
+marker it owns. The moving objects in this argument are the markers;
+the packed squares stay fixed. In particular, the freezing assumptions
+must be checked before a marker deformation can force a new owned region.
+
+\begin{thebibliography}{2}
+\bibitem{stromquist}
+W.~Stromquist, \emph{Packing 10 or 11 Unit Squares in a Square},
+Electronic Journal of Combinatorics \textbf{10} (2003), R8,
+\href{https://doi.org/10.37236/1701}{doi:10.37236/1701}.
+The relevant statements are Lemmas~1, 2 and~4; no other result from that
+paper is needed for the proofs above.
+\bibitem{bentz}
+W.~Bentz, \emph{Optimal Packings of 22 and 33 Unit Squares in a Square},
+\href{https://arxiv.org/abs/1606.03746v1}{arXiv:1606.03746v1}, Theorem~8,
+pp.~3--4. The versioned record was submitted in 2016; its PDF title page
+is dated 20 October 2018.
+\end{thebibliography}
+\end{document}

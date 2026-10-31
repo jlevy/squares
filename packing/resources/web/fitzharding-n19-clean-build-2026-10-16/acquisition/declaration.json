@@ -1,0 +1,20 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "ofitzharding-sq19",
+  "source_url": "https://github.com/ofitzharding/sq19",
+  "source_ref": "refs/heads/main",
+  "source_commit": "c86a991ea1379d1598739182f5f26619c9b7126a",
+  "retrieved_at_utc": "2026-10-31T05:07Z",
+  "git_scope": "A full clone of the public repository (seven commits), fetched at 2026-10-31T05:07Z when main was this commit, the one commit past the fitzharding-n19-lean-2026-10-16 packet's pin 34fb2b7 (v1.0.0). The scope is the three paths that commit changes: README.md, which gains a paragraph on the rebuild, and the two files it adds, verification/clean-build-receipt.json and verification/clean-build.log. Every other file of the tree is unchanged since 34fb2b7, where the earlier packet retains it; this commit's tree pins them.",
+  "archived_dir": "sq19",
+  "license": "MIT. LICENSE (unchanged since 34fb2b7, retained by the fitzharding-n19-lean-2026-10-16 packet): \"Copyright (c) 2026 Oscar Fitzharding\"; README.md: \"MIT License.\"",
+  "claims": [
+    "The author's clean rebuild of T-194's proof: a fresh clone of v1.0.0 (34fb2b7bc39465db368c45cb48d4db58829d3051) with the release's certificate sources fetched and hash-checked by scripts/fetch.sh, built from source with python3 scripts/verify.py --kernel-replay on a 64-vCPU, 512 GB Ubuntu 24.04 machine under Lean 4.34.1, from 2026-10-16T07:23:41Z to 12:42:15Z (19,114 s of wall): VERIFIED, 2,400 modules compiled from source, statement Sq19.square19_optimality, axioms Classical.choice, Quot.sound and propext with 4,320 native_decide checks, kernel replay of 13,143 modules with 0 failures, and every generated certificate module byte-identical to the research build (verification/clean-build-receipt.json, verification/clean-build.log, README.md)"
+  ],
+  "scope": [
+    "README.md",
+    "verification/clean-build-receipt.json",
+    "verification/clean-build.log"
+  ],
+  "pinned_only": []
+}
