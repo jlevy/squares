@@ -1,0 +1,6 @@
+house-T174: side 11.904483032515786  tilted beyond 1 deg: 32
+c843: side 11.902430645984349  tilted beyond 1 deg: 33
+p846: side 11.902430645982266  tilted beyond 1 deg: 33
+{"symmetry": "diagonal", "one_to_one_nearest": false, "beyond_0.1": 11, "beyond_0.01": 18, "beyond_1e-3": 128, "beyond_1e-9": 130, "largest_move": 0.7104033271915386, "median_move": 0.0014512564354411113, "bottleneck": 0.7104033271915386, "turned_beyond_1deg": 19, "largest_turn_deg": 44.74296152125501, "a": "house-T174", "b": "c843", "side_b_minus_a": -0.002052386531437881}
+{"symmetry": "diagonal", "one_to_one_nearest": false, "beyond_0.1": 11, "beyond_0.01": 18, "beyond_1e-3": 128, "beyond_1e-9": 130, "largest_move": 0.7104033271910851, "median_move": 0.0014512564356169615, "bottleneck": 0.7104033271910851, "turned_beyond_1deg": 19, "largest_turn_deg": 44.74298372568904, "a": "house-T174", "b": "p846", "side_b_minus_a": -0.0020523865335206814}
+{"symmetry": "identity", "one_to_one_nearest": true, "beyond_0.1": 0, "beyond_0.01": 0, "beyond_1e-3": 0, "beyond_1e-9": 14, "largest_move": 1.1298086955070338e-06, "median_move": 9.741304252334688e-13, "bottleneck": 1.1298086955070338e-06, "turned_beyond_1deg": 0, "largest_turn_deg": 5.579970955693625e-05, "a": "c843", "b": "p846", "side_b_minus_a": -2.0828003801509908e-12}

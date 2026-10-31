@@ -1,0 +1,22 @@
+n=172 new side 2723587139676283080823463207799/200000000000000000000000000000
+   house T-174 (reported/verified lane): other - new = 1.053259e-03  (new below)
+n=204 new side 14807627471881579627471866771703/1000000000000000000000000000000
+   house T-231: other - new = 1.015359e-03  (new below)
+   #846 / e386aab 204: other - new = 1.015359e-03  (new below)
+n=260 new side 8316991251060941991251052624833/500000000000000000000000000000
+   house T-225: other - new = 1.177075e-02  (new below)
+   T-255 a5a5d76: other - new = 4.550290e-03  (new below)
+   T-256 #844: other - new = 3.047057e-03  (new below)
+   #846 260: other - new = 1.177075e-02  (new below)
+n=293 new side 8816991251061390991251052573823/500000000000000000000000000000
+   Kingbird 723/41 (reported lane): other - new = 1.638393e-04  (new below)
+   verified lane T-101: other - new = 1.638393e-04  (new below)
+n=299 new side 17801238549388584084680137655023/1000000000000000000000000000000
+   verified lane T-101: other - new = 2.163711e-02  (new below)
+   T-248 #824: other - new = 2.456886e-03  (new below)
+   #846 299: other - new = 2.456886e-03  (new below)
+299 vs 33/2+sqrt(7)/2: 2s-33 = 2.602477098777168  below: True
+T-248 vs 33/2+sqrt(7)/2 below: True
+172 vs T-244 print (100 digits, +-1e-100): 1.053259e-03
+S293 - S260 - 1 = 8.980000e-13
+T-248 - T-258 = 2.456886e-03

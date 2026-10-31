@@ -1,0 +1,84 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Francisco Couzo",
+  "source_key": "[Couzo a5a5d76 2026-10-28]",
+  "report_evidence": "E-couzo-a5a5d76-certificate-report",
+  "receipt_format": "couzo-a5a5d76-exact-replay-v1",
+  "witness_prefix": "W-couzo-a5a5d76-n",
+  "claim_limitations": "Complete a5a5d76 rational centre/half-angle certificates, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-31",
+  "read_at_main": "3978a7f61ca164f78291ed91534b8c9a5b9cafd7",
+  "certificates": [
+    {
+      "n": 260,
+      "path": "certificates/n260.cert",
+      "format": "evand-cert",
+      "offered": "16.638532792320",
+      "printed_in": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
+      "first_committed": "2026-10-28T01:41:35Z"
+    },
+    {
+      "n": 307,
+      "path": "certificates/n307.cert",
+      "format": "evand-cert",
+      "offered": "17.979251283693",
+      "printed_in": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
+      "first_committed": "2026-10-28T01:41:35Z"
+    }
+  ],
+  "requested": [
+    260,
+    307
+  ],
+  "replayed": [
+    260,
+    307
+  ],
+  "houses": [
+    {
+      "n": 260,
+      "reader": "[Daniel regularized lists 2026-10-20]",
+      "source_key": "[Daniel regularized lists 2026-10-20]",
+      "holders": "Francisco Couzo, improved by Evan Daniel",
+      "result": "T-225",
+      "reported_value": "16.6457532505198122",
+      "verified_value": "16.6457532505198122",
+      "evidence": [
+        "E-evand-regularized-1020-exact-feasibility",
+        "E-evand-regularized-1020-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 307,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "17.98086278405469107",
+      "verified_value": "17.98086278405469107",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Francisco Couzo's certificates at 260 and 307 at a5a5d76, no issue",
+    "headline": "Couzo's certificates of ntumlnoob's Kaggle packings at 260 and 307, below T-225 and T-174",
+    "significance": 2,
+    "source_checks": "The commit message says both certificates are replayed on both of the source's exact routes. It and the credit records certificates/n260.json and n307.json say neither packing is the author's construction: both refine the packings ntumlnoob published in the Kaggle notebook 'First 22.268681355 Public Code With Explanation' (run 362957087, sides 16.638533455862 and 17.979253973651 by its metric), and the gains, 6.6e-7 and 2.7e-6, come from the web app's fq, an adaptation of Evan Daniel's fq optimizer (MIT). The commit ends with a Co-Authored-By trailer naming Claude. Those statements are the author's; no source program ran here.",
+    "credit": "Credit ntumlnoob (Kaggle) for both packings, from the notebook 'First 22.268681355 Public Code With Explanation', whose own refinements of an unpublished parent they are, and Francisco Couzo (https://github.com/franciscouzo/square-packing) for the refinements and the certificates, as the source credits them. A publication in a watched repository that no issue reports, recorded from its commit by the owner's rule of 14 October 2026; issue 844 reports lower certificates at both counts the same day.",
+    "next_rung": "Independently review the retained replay and the certificates (stage 4). Neither count is adopted from this entry: issue 844's certificates and, at 260, issue 845's are lower, and the house rule adopts the smallest validated side.",
+    "bead": "think-n61j",
+    "bibliography": {
+      "authors": [
+        "Couzo"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Couzo after ntumlnoob, Daniel, Levy",
+      "short_credit": "Couzo after ntumlnoob et al.",
+      "note": "Two complete exact certificates, certificates/n260.cert and n307.cert at franciscouzo/square-packing@a5a5d76790679902ef57270f6d4c2d01786c5a56, committed on 28 October 2026 with no issue: refinements by the author's web app, with an adaptation of Evan Daniel's fq, of ntumlnoob's Kaggle notebook packings at 260 and 307. 712c6a6, the head, replaces both with issue 844's lower certificates and keeps these bytes under certificates/parents/. Retained as factual data, and on the presumption of permission the author's submissions of the repository (issues 843 and 844) carry (think-cnn7; think-m8f4). Claude assistance disclosed. Retained in web/couzo-a5a5d76-2026-10-28/."
+    }
+  }
+}

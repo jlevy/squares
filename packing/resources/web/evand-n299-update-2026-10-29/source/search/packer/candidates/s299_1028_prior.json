@@ -1,0 +1,162 @@
+{
+ "store_id": 1044269,
+ "s": 17.822875655532297,
+ "sources": [
+  "goal-ref:gap299-335-412-453 (ours)",
+  "kaggle:alexchilton__certified-witnesses-basin-hopping-lb-22-3084__merged (alexchilton)",
+  "kaggle:alexchilton__certified-witnesses-basin-hopping-lb-22-3084__merged2 (alexchilton)",
+  "kaggle:alexchilton__certified-witnesses-basin-hopping-lb-22-3084__submission (alexchilton)",
+  "kaggle:alexchilton__certified-witnesses-basin-hopping-lb-22-58__merged (None)",
+  "kaggle:alexchilton__certified-witnesses-basin-hopping-lb-22-58__merged2 (None)",
+  "kaggle:alexchilton__certified-witnesses-basin-hopping-lb-22-58__submission (None)",
+  "kaggle:alexchilton__fault-line-dp-basin-hopping-lb-22-3747__cq (None)",
+  "kaggle:alexchilton__fault-line-dp-basin-hopping-lb-22-3747__merged (None)",
+  "kaggle:alexchilton__fault-line-dp-basin-hopping-lb-22-3747__mq (None)",
+  "kaggle:aqibrazadev__squares-in-squares-top-lb-blending-visualization__2026-10-24 (aqibrazadev)",
+  "kaggle:aqibrazadev__squares-in-squares-top-lb-blending-visualization__submission (None)",
+  "kaggle:avazaku__22-3043-lb-square-packing-with-tilt-engine__baseline (avazaku)",
+  "kaggle:avazaku__22-3043-lb-square-packing-with-tilt-engine__float64_roundtrip (avazaku)",
+  "kaggle:avazaku__22-3043-lb-square-packing-with-tilt-engine__submission (avazaku)",
+  "kaggle:avazaku__22-3073-lb-square-packing-seam-surgery__baseline (avazaku)",
+  "kaggle:avazaku__22-3073-lb-square-packing-seam-surgery__float64_roundtrip (avazaku)",
+  "kaggle:avazaku__22-3073-lb-square-packing-seam-surgery__submission (avazaku)",
+  "kaggle:avazaku__squarecraft-ii-unjam-the-grid-22-408597-lb__baseline (None)",
+  "kaggle:avazaku__squarecraft-ii-unjam-the-grid-22-408597-lb__float64_roundtrip (None)",
+  "kaggle:avazaku__squarecraft-ii-unjam-the-grid-22-408597-lb__submission (None)",
+  "kaggle:janiogomesribeiro__notebook87513fb5d4__2026-10-24 (janiogomesribeiro)",
+  "kaggle:janiogomesribeiro__notebook87513fb5d4__submission (janiogomesribeiro)",
+  "kaggle:kirilltym__22-3661-cpu-cuda-mps-eda-edge-lp__float64_roundtrip (None)",
+  "kaggle:kirilltym__22-3661-cpu-cuda-mps-eda-edge-lp__inputs__round19__lightning__submission (None)",
+  "kaggle:kirilltym__22-3661-cpu-cuda-mps-eda-edge-lp__submission (None)",
+  "kaggle:kirilltym__22-3856-cpu-cuda-mps-eda-seam-lp__float64_roundtrip (None)",
+  "kaggle:kirilltym__22-3856-cpu-cuda-mps-eda-seam-lp__inputs__round9__lightning__submission (None)",
+  "kaggle:kirilltym__22-3856-cpu-cuda-mps-eda-seam-lp__submission (None)",
+  "kaggle:kmmmvs__squares-dashboard-public-batch-20261024__2026-10-24 (kmmmvs)",
+  "kaggle:kmmmvs__squares-dashboard-public-batch-20261026__submission (kmmmvs)",
+  "kaggle:kozykappa__subset-transfer-contact-refinement-and-compaction__candidate (None)",
+  "kaggle:kozykappa__subset-transfer-contact-refinement-and-compaction__float64_roundtrip (None)",
+  "kaggle:kozykappa__subset-transfer-contact-refinement-and-compaction__submission (None)",
+  "kaggle:lightningv08__squares-in-squares-cuda-packing-search__submission (None)",
+  "kaggle:lightningv08__squares-in-squares-cuda-packing-search__submission (lightningv08)",
+  "kaggle:lightningv08_v12 (None)",
+  "kaggle:lucifer19__think-select-reclose__submission (lucifer19)",
+  "kaggle:malyshevdanil__squares-in-squares-fresh-records-certified__submission (None)",
+  "kaggle:malyshevdanil__squares-in-squares-neighbour-transfer-squeeze__submission (None)",
+  "kaggle:malyshevdanil__squares-in-squares-neighbour-transfer-squeeze__submission_merged (None)",
+  "kaggle:malyshevdanil__squares-in-squares-neighbour-transfer-squeeze__submission_ours (None)",
+  "kaggle:nilanjansaha123__improved-notebook__submission (nilanjansaha123)",
+  "kaggle:ridhamkavani__squares-in-squares-neighbour-transfer-squeeze__submission_ours (ridhamkavani)",
+  "kaggle:rushikeshpundkar__squares-in-squares-cpu-cuda-mps-eda-projunion__float64_roundtrip (rushikeshpundkar)",
+  "kaggle:rushikeshpundkar__squares-in-squares-cpu-cuda-mps-eda-projunion__inputs__round25__leader__submission (rushikeshpundkar)",
+  "kaggle:rushikeshpundkar__squares-in-squares-cpu-cuda-mps-eda-projunion__submission (rushikeshpundkar)",
+  "kaggle:seshurajup__1000-puzzles-ensemble-lb-22-374662__submission (None)",
+  "kaggle:ujjwalupreti__squares-in-squares-geometric-optimization__submission (ujjwalupreti)",
+  "kaggle:yangkuangou__squares-workbench-choose-a-patch-test-a-shrink__squares_workbench__atlas_reference_741d026143694becbdc14c1d156f0324__revisions__r6aadc1d508e24f1fbcaa5361cff4c965__submission (None)",
+  "kaggle:yangkuangou__squares-workbench-choose-a-patch-test-a-shrink__squares_workbench__run_5653b7c12a644ca495c7a886046065b0__session__attempts__a0d0aa8bc1af44863954d1e4b0758db96__candidate (None)",
+  "kaggle:yangkuangou__squares-workbench-choose-a-patch-test-a-shrink__squares_workbench__run_5653b7c12a644ca495c7a886046065b0__session__attempts__adb691ba281b741fe8ec4734b068798bf__candidate (None)",
+  "kaggle:yangkuangou__squares-workbench-choose-a-patch-test-a-shrink__squares_workbench__run_5653b7c12a644ca495c7a886046065b0__session__revisions__r6aadc1d508e24f1fbcaa5361cff4c965__submission (None)",
+  "kaggle:yangkuangou__squares-workbench-choose-a-patch-test-a-shrink__squares_workbench__run_5653b7c12a644ca495c7a886046065b0__session__revisions__rddbd891aa5c24f26910624100323205e__submission (None)",
+  "kaggle:yangkuangou__squares-workbench-choose-a-patch-test-a-shrink__squares_workbench__run_5653b7c12a644ca495c7a886046065b0__submission (None)",
+  "pending:#624 (mstrmg)",
+  "watch:franciscouzo/square-packing@1c17153 (lollipoll)",
+  "watch:franciscouzo/square-packing@23aff0c (lollipoll)",
+  "watch:franciscouzo/square-packing@4e4c8ce (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@58a7833 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@7b6c87e (lollipoll)",
+  "watch:franciscouzo/square-packing@af8cb79 (lollipoll)",
+  "watch:franciscouzo/square-packing@c6da0fc (lollipoll)",
+  "later copies of the same minimum: store ids [131, 2667427]"
+ ],
+ "ok": true,
+ "S_exact": "17.82287565553229529525080787681963021285512959154122509018416723",
+ "S_cert": "17.822875655532295295429036633375",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 299 closed unit squares pairwise disjoint inside the open box of side 17.82287565553229669 (581 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 0.004381919240923464,
+  "status": "local minimum of S, strict modulo 45 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 45,
+  "flat_realised": 45.0,
+  "flat_residual": 1.218713939450428e-35,
+  "negative_eigs": 0,
+  "corner_corner": 420,
+  "vv_milp_dS": 0.0,
+  "rattlers": 6,
+  "min_pair": 9.999999999999984e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "17.8228756555322952952508078768196302128551295915412250901842",
+  "S_cert": "142583005244258362363432293067/8000000000000000000000000000",
+  "groups": [
+   8,
+   2
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 299 closed unit squares pairwise disjoint inside the open box of side 17.82287565553229669 (575 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.021637106143710838,
+  "matching_distance_regularized": 0.3942928289323186,
+  "symmetry": 6,
+  "moved_gt_1e4": 260,
+  "moved_gt_1e2": 210,
+  "moved_gt_1e1": 114,
+  "moved_gt_1e1_all": 133,
+  "max_move": 1.1451433809158573,
+  "max_move_all": 1.1451433809158573,
+  "max_angle_change": 30.751393989127823,
+  "rattler_status_swaps": 39,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "25.7631",
+   "26.3863",
+   "26.7917",
+   "26.7992",
+   "27.0877",
+   "27.3252",
+   "27.4456",
+   "28.0884",
+   "28.4444",
+   "28.7087",
+   "29.0864",
+   "29.6162",
+   "30.7514"
+  ],
+  "prior_only_angles": [
+   "24.2952"
+  ],
+  "contacts": {
+   "symmetry": 6,
+   "edges_ours": 541,
+   "edges_prior": 611,
+   "shared": 374,
+   "ours_only": 167,
+   "prior_only": 237,
+   "rattlers_ours": 33,
+   "rattlers_prior": 6,
+   "rattlers_shared": 0
+  }
+ }
+}

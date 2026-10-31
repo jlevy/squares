@@ -1,0 +1,422 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "(no issue)",
+  "source": "https://github.com/Mishapolk/square-packing-records",
+  "revision": "52aa2672c74c91931686d60a49bdf97ec798291c",
+  "read_on": "2026-10-31",
+  "read_at_main": "3978a7f61ca164f78291ed91534b8c9a5b9cafd7",
+  "horizon": 324,
+  "results": [
+    {
+      "n": 88,
+      "certificate": "certificates/0000-0999/n88.cert",
+      "format": "evand-cert",
+      "requested": false,
+      "replayed": true,
+      "offered_side": "9.882451030482",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e9f397908922f7c3560e77bfff5019826aa43b51",
+      "exact_side": "98824510304812468193284571557017794178999/10000000000000000000000000000000000000000",
+      "ceiling": "9.8824510304812469",
+      "first_committed": "2026-10-23T23:56:18Z",
+      "grid_side": "10",
+      "case": {
+        "source_key": "[Gupta rational refinements 2026-10-08]",
+        "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta",
+        "result": "T-127",
+        "reported_value": "9.8824510304812469",
+        "verified_value": "9.8824510304812469",
+        "evidence": [
+          "E-gupta-438-exact-feasibility"
+        ],
+        "exact_side": "9882451030481246819427281665997/1000000000000000000000000000000",
+        "relation": "below",
+        "difference": "988245102952205821001/10000000000000000000000000000000000000000"
+      },
+      "pending": [
+        {
+          "report": "T-193 (#639)",
+          "url": "https://github.com/jlevy/squares/issues/639",
+          "holders": "Evan Daniel, of the house's packing",
+          "result": "T-193",
+          "printed": "9.8824510304812468193284571556918969668693",
+          "rounding": "unstated",
+          "relation": "above",
+          "difference": "-49412255153/5000000000000000000000000000000000000000"
+        }
+      ],
+      "smallest": "T-193 (#639)"
+    },
+    {
+      "n": 126,
+      "certificate": "certificates/0000-0999/n126.cert",
+      "format": "evand-cert",
+      "requested": false,
+      "replayed": true,
+      "offered_side": "11.742640687120",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/a0ba35f6faa9887804c5202f2f33dde7d2f38b6e",
+      "exact_side": "58713203435596425732025330863204184381981/5000000000000000000000000000000000000000",
+      "ceiling": "11.7426406871192852",
+      "first_committed": "2026-10-23T23:56:28Z",
+      "grid_side": "12",
+      "case": {
+        "source_key": "[Daniel trio126 2026-10-09]",
+        "holders": "Ryan Xu, improved by Evan Daniel",
+        "result": "T-139",
+        "reported_value": "11.7426406871192852",
+        "verified_value": "11.7426406871192852",
+        "evidence": [
+          "E-evand-trio126-exact-feasibility"
+        ],
+        "exact_side": "11742640687119285146522492579501/1000000000000000000000000000000",
+        "relation": "below",
+        "difference": "587132034300815618019/5000000000000000000000000000000000000000"
+      },
+      "pending": [
+        {
+          "report": "T-193 (#639)",
+          "url": "https://github.com/jlevy/squares/issues/639",
+          "holders": "Evan Daniel, of the house's packing",
+          "result": "T-193",
+          "printed": "11.742640687119285146405066172629094235709",
+          "rounding": "unstated",
+          "relation": "above",
+          "difference": "-14678300859/1250000000000000000000000000000000000000"
+        }
+      ],
+      "smallest": "T-193 (#639)"
+    },
+    {
+      "n": 152,
+      "certificate": "certificates/0000-0999/n152.cert",
+      "format": "evand-cert",
+      "requested": false,
+      "replayed": true,
+      "offered_side": "12.830718800977",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/fbc17493797da81361d95d5534cac37c67e496b8",
+      "exact_side": "4009599625305190610895473892316899817543/312500000000000000000000000000000000000",
+      "ceiling": "12.8307188009766100",
+      "first_committed": "2026-10-23T23:56:35Z",
+      "grid_side": "13",
+      "case": {
+        "source_key": "[evand exact optima 2026-10-05]",
+        "holders": "Francisco Couzo, improved by Evan Daniel",
+        "result": "T-098",
+        "reported_value": "12.830718800976609954993823643412",
+        "verified_value": "12.830718800976609954993823643412",
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-exact-replay",
+          "E-evand-exact-optima-2026-10-05-source-replay"
+        ],
+        "exact_side": "3207679700244152488748455910853/250000000000000000000000000000",
+        "relation": "below",
+        "difference": "40095996249350182457/312500000000000000000000000000000000000"
+      },
+      "pending": [
+        {
+          "report": "T-122 (#419)",
+          "url": "https://github.com/jlevy/squares/issues/419",
+          "holders": "Evan Daniel, of the house's packing",
+          "result": "T-122",
+          "printed": "12.830718800976609954865516",
+          "rounding": "unstated",
+          "relation": "undecided",
+          "difference": "-142316899817543/312500000000000000000000000000000000000"
+        }
+      ],
+      "smallest": null,
+      "undecided_among": [
+        "this certificate",
+        "T-122 (#419)"
+      ]
+    },
+    {
+      "n": 154,
+      "certificate": "certificates/0000-0999/n154.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "12.921100940762",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/6664afc379e11d3865ca0892e112898a6706dc92",
+      "exact_side": "32302752351904201374318427695452754708149/2500000000000000000000000000000000000000",
+      "ceiling": "12.9211009407616806",
+      "first_committed": "2026-10-23T23:52:59Z",
+      "grid_side": "13",
+      "case": {
+        "source_key": "[Daniel n154 sweep 2026-10-20]",
+        "holders": "Evan Daniel, improved by Francisco Couzo",
+        "result": "T-222",
+        "reported_value": "12.9211009407616806",
+        "verified_value": "12.9211009407616806",
+        "evidence": [
+          "E-evand-694-n154-exact-feasibility"
+        ],
+        "exact_side": "1615137617595210068732072760947/125000000000000000000000000000",
+        "relation": "below",
+        "difference": "323027523487245291851/2500000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    },
+    {
+      "n": 155,
+      "certificate": "certificates/0000-0999/n155.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "12.952260944651",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/3d409a5909a48907fbac8d22af6ffe29fbe4c44d",
+      "exact_side": "129522609446505640351376570514307748530773/10000000000000000000000000000000000000000",
+      "ceiling": "12.9522609446505641",
+      "first_committed": "2026-10-23T23:53:26Z",
+      "grid_side": "13",
+      "case": {
+        "source_key": "[Daniel n155 explorer 2026-10-17]",
+        "holders": "Evan Daniel",
+        "result": "T-197",
+        "reported_value": "12.9522609446505641",
+        "verified_value": "12.9522609446505641",
+        "evidence": [
+          "E-evand-669-n155-exact-feasibility",
+          "E-evand-669-n155-source-checker-replay"
+        ],
+        "exact_side": "2590452188930112807053435932173/200000000000000000000000000000",
+        "relation": "below",
+        "difference": "1295226094342251469227/10000000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    },
+    {
+      "n": 183,
+      "certificate": "certificates/0000-0999/n183.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "13.999580178737",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/fb8b812b5adb9d6b5e9fa334b8c27d8005357fc0",
+      "exact_side": "139995801787362525019414750957971146726967/10000000000000000000000000000000000000000",
+      "ceiling": "13.9995801787362526",
+      "first_committed": "2026-10-23T23:53:42Z",
+      "grid_side": "14",
+      "case": {
+        "source_key": "[Daniel n183 subgrid 2026-10-19]",
+        "holders": "Evan Daniel",
+        "result": "T-220",
+        "reported_value": "13.9995801787362526",
+        "verified_value": "13.9995801787362526",
+        "evidence": [
+          "E-evand-680-n183-primary-exact-feasibility"
+        ],
+        "exact_side": "13999580178736252502081470897571/1000000000000000000000000000000",
+        "relation": "below",
+        "difference": "1399958017738853273033/10000000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    },
+    {
+      "n": 211,
+      "certificate": "certificates/0000-0999/n211.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "14.993549626300",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "exact_side": "14993549626299421038785594964633603835513/1000000000000000000000000000000000000000",
+      "ceiling": "14.9935496262994211",
+      "first_committed": "2026-10-23T23:36:37Z",
+      "grid_side": "15",
+      "case": {
+        "source_key": "[Couzo verified bounds 2026-10-14]",
+        "holders": "Daniil Ostashev, improved by Francisco Couzo",
+        "result": "T-188",
+        "reported_value": "14.9935496262994211",
+        "verified_value": "14.9935496262994211",
+        "evidence": [
+          "E-couzo-487b058-exact-feasibility"
+        ],
+        "exact_side": "7496774813149710519467765230441/500000000000000000000000000000",
+        "relation": "below",
+        "difference": "149935496248396164487/1000000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    },
+    {
+      "n": 227,
+      "certificate": "certificates/0000-0999/n227.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "15.563625652326",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "exact_side": "155636256523251490846368074671935498402163/10000000000000000000000000000000000000000",
+      "ceiling": "15.5636256523251491",
+      "first_committed": "2026-10-23T23:36:37Z",
+      "grid_side": "16",
+      "case": {
+        "source_key": "[Daniel regularized lists 2026-10-20]",
+        "holders": "Joost de Winter, improved by Francisco Couzo, Evan Daniel",
+        "result": "T-225",
+        "reported_value": "15.5636256523251491",
+        "verified_value": "15.5636256523251491",
+        "evidence": [
+          "E-evand-regularized-1020-exact-feasibility",
+          "E-evand-regularized-1020-review-exact-feasibility"
+        ],
+        "exact_side": "7781812826162574542396221861851/500000000000000000000000000000",
+        "relation": "below",
+        "difference": "1556362565084501597837/10000000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    },
+    {
+      "n": 236,
+      "certificate": "certificates/0000-0999/n236.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "15.861934390608",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/c695b4c79f41d2f029f0ecd4d6b74bb01293aec8",
+      "exact_side": "79309671953036793085425896137517101404099/5000000000000000000000000000000000000000",
+      "ceiling": "15.8619343906073587",
+      "first_committed": "2026-10-23T23:54:00Z",
+      "grid_side": "16",
+      "case": {
+        "source_key": "[Daniel n236 2026-10-16]",
+        "holders": "Evan Daniel",
+        "result": "T-218",
+        "reported_value": "15.8619343906073587",
+        "verified_value": "15.8619343906073587",
+        "evidence": [
+          "E-evand-659-n236-exact-feasibility"
+        ],
+        "exact_side": "7930967195303679308621899285697/500000000000000000000000000000",
+        "relation": "below",
+        "difference": "793096719452898595901/5000000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    },
+    {
+      "n": 237,
+      "certificate": "certificates/0000-0999/n237.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "15.902603638260",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "exact_side": "79513018191297984400100591089535692443651/5000000000000000000000000000000000000000",
+      "ceiling": "15.9026036382595969",
+      "first_committed": "2026-10-23T23:36:37Z",
+      "grid_side": "16",
+      "case": {
+        "source_key": "[Couzo n237 2026-10-15]",
+        "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, Mishapolk",
+        "result": "T-190",
+        "reported_value": "15.9026036382595969",
+        "verified_value": "15.9026036382595969",
+        "evidence": [
+          "E-couzo-4e4c8ce-n237-exact-feasibility"
+        ],
+        "exact_side": "7951301819129798440089572127137/500000000000000000000000000000",
+        "relation": "below",
+        "difference": "795130181834307556349/5000000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    },
+    {
+      "n": 241,
+      "certificate": "certificates/0000-0999/n241.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "15.987117095151",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "exact_side": "79935585475751193790809434791263361744857/5000000000000000000000000000000000000000",
+      "ceiling": "15.9871170951502388",
+      "first_committed": "2026-10-23T23:36:37Z",
+      "grid_side": "16",
+      "case": {
+        "source_key": "[Couzo certificates 2026-10-13]",
+        "holders": "Daniil Ostashev, improved by Francisco Couzo",
+        "result": "T-182",
+        "reported_value": "15.9871170951502388",
+        "verified_value": "15.9871170951502388",
+        "evidence": [
+          "E-couzo-586-exact-feasibility"
+        ],
+        "exact_side": "15987117095150238758321758129189/1000000000000000000000000000000",
+        "relation": "below",
+        "difference": "799355854681638255143/5000000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    },
+    {
+      "n": 270,
+      "certificate": "certificates/0000-0999/n270.cert",
+      "format": "evand-cert",
+      "requested": false,
+      "replayed": true,
+      "offered_side": "16.928162252197",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/07b339381b9528847a9f737461e51b7db9878436",
+      "exact_side": "16928162252196750114897964982713/1000000000000000000000000000000",
+      "ceiling": "16.9281622521967502",
+      "first_committed": "2026-10-23T23:49:31Z",
+      "grid_side": "17",
+      "case": {
+        "source_key": "[Daniel n270 sweep 2026-10-20]",
+        "holders": "Evan Daniel",
+        "reported_value": "16.9281622521967502",
+        "verified_value": "16.9281622521967502",
+        "evidence": [
+          "E-evand-703-n270-exact-feasibility"
+        ],
+        "exact_side": "16928162252196750114897964982713/1000000000000000000000000000000",
+        "relation": "equal",
+        "difference": "0"
+      },
+      "pending": [],
+      "smallest": null,
+      "tied": [
+        "this certificate",
+        "case: Evan Daniel"
+      ]
+    },
+    {
+      "n": 271,
+      "certificate": "certificates/0000-0999/n271.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "16.948947733714",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/6c0d74aa4f6431db178f68d547b1adf44d74574d",
+      "exact_side": "169489477337136575105539116351026963841491/10000000000000000000000000000000000000000",
+      "ceiling": "16.9489477337136576",
+      "first_committed": "2026-10-23T23:54:23Z",
+      "grid_side": "17",
+      "case": {
+        "source_key": "[Daniel n271 2026-10-17]",
+        "holders": "Evan Daniel",
+        "result": "T-219",
+        "reported_value": "16.9489477337136576",
+        "verified_value": "16.9489477337136576",
+        "evidence": [
+          "E-evand-664-n271-exact-feasibility"
+        ],
+        "exact_side": "16948947733713657510723401112423/1000000000000000000000000000000",
+        "relation": "below",
+        "difference": "1694894773203036158509/10000000000000000000000000000000000000000"
+      },
+      "pending": [],
+      "smallest": "this certificate"
+    }
+  ]
+}
+
+real	0m1.160s
+user	0m0.966s
+sys	0m0.131s

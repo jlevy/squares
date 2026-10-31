@@ -218,10 +218,11 @@ class Pending:
 #: T-240's 268 by 4.48e-12, but the pass of 25 October that adopted his 304 also moved 268
 #: to T-240, and one day's archive holds one prior state a count: 268 was staged for the
 #: pass's next pull request, and the adoption of 26 October 2026 (think-3anz) took it off
-#: once it adopted T-242 there.
+#: once it adopted T-242 there. The adoption of 31 October 2026 (think-3guf) took 232 off:
+#: Francisco Couzo's certificate of issue 844 (T-256) is below T-193's algebraic side there.
 PENDING_ADOPTION: dict[int, Pending] = {
     n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
-    for n in (88, 126, 175, 199, 232, 266, 267, 292, 301)
+    for n in (88, 126, 175, 199, 266, 267, 292, 301)
 }  # fmt: skip
 
 
@@ -261,13 +262,15 @@ REVIEW_639 = "docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
 #: not be the house: at 204 Francisco Couzo's issue 678 (T-223) is below it, adopted on 20
 #: October 2026, so T-193's item there no longer waits on an adoption, and `--check`
 #: refuses an entry whose count another result houses. The item itself, Polkovskyi's
-#: T-186 named where the review measured T-162, stays think-8ido's to correct.
+#: T-186 named where the review measured T-162, stays think-8ido's to correct. The
+#: adoption of 31 October 2026 took 232 to Francisco Couzo's issue 844 (T-256), below
+#: T-193's side there, so its entry went too; T-193's item at 232 stays think-8ido's.
 CORRECTIONS_OWED: dict[int, Correction] = {
     n: Correction(result="T-193", named=named, measured=measured, bead=RE1_BEAD,
                   measured_in=REVIEW_639)
     for n, named, measured in (
         (88, "T-174", "T-127"), (126, "T-174", "T-139"), (175, "T-186", "T-158"),
-        (199, "T-174", "T-127"), (232, "T-186", "T-158"),
+        (199, "T-174", "T-127"),
         (266, "T-174", "T-119"), (292, "T-174", "T-146"), (301, "T-174", "T-098"),
     )
 }  # fmt: skip

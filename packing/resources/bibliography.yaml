@@ -4403,6 +4403,115 @@ sources:
       the checks and this write-up." MIT licence for the scripts; the README releases the
       certificate into the public domain (CC0). Retained whole but for .gitignore in
       web/moh63-dev-s44-equals-7-2026-10-29/. Dated by that revision, 2026-10-29 UTC.
+  - key: '[Mishapolk refinements 2026-10-23]'
+    authors:
+    - Polkovskyi
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-30'
+    lineage: builds-on-project
+    credit: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit, Levy
+    short_credit: Polkovskyi after Daniel et al.
+    note: >-
+      Thirteen complete exact certificates first committed in ten commits of 23 October 2026 (e386aab
+      to fbc1749) at Mishapolk/square-packing-records and unchanged at 52aa2672c74c91931686d60a49bdf97ec798291c,
+      which the packet pins, with no issue: re-certifications about 1e-19 below the houses at 154,
+      155, 183, 211, 227, 236, 237, 241 and 271, and certificates at 88, 126, 152, 204 and 270 the
+      ledger does not record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-1023-refinements-2026-10-30/.
+  - key: '[Couzo n130 2026-10-27]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-28'
+    lineage: builds-on-project
+    credit: Couzo after Chaoweeraprasit, Gupta, PingYou Ltd, Levy
+    short_credit: Couzo after Chaoweeraprasit et al.
+    note: >-
+      One complete exact certificate, certificates/n130.cert, first committed at franciscouzo/square-packing@3a4d95c72083da3c3fd5acc4b1d0e94479c5422d
+      on 27 October 2026 and unchanged at the head 712c6a6e9ef58a9521784e6b7e236af813422de7 the
+      packet pins, reported on issue 843: s(130) <= 466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000,
+      a packing the issue calls new, found from PR #574's by the author's searches. Retained on
+      the presumption of permission from submission (think-cnn7; the licence follow-up is think-m8f4)
+      and as factual data. Claude assistance disclosed. No local or global optimality claim. Retained
+      in web/couzo-issue843-2026-10-28/.
+  - key: '[Couzo a5a5d76 2026-10-28]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-28'
+    lineage: builds-on-project
+    credit: Couzo after ntumlnoob, Daniel, Levy
+    short_credit: Couzo after ntumlnoob et al.
+    note: >-
+      Two complete exact certificates, certificates/n260.cert and n307.cert at franciscouzo/square-packing@a5a5d76790679902ef57270f6d4c2d01786c5a56,
+      committed on 28 October 2026 with no issue: refinements by the author's web app, with an adaptation
+      of Evan Daniel's fq, of ntumlnoob's Kaggle notebook packings at 260 and 307. 712c6a6, the
+      head, replaces both with issue 844's lower certificates and keeps these bytes under certificates/parents/.
+      Retained as factual data, and on the presumption of permission the author's submissions of
+      the repository (issues 843 and 844) carry (think-cnn7; think-m8f4). Claude assistance disclosed.
+      Retained in web/couzo-a5a5d76-2026-10-28/.
+  - key: '[Couzo issue 844 2026-10-28]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-28'
+    lineage: builds-on-project
+    credit: Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel, Levy
+    short_credit: Couzo after Chilton et al.
+    note: >-
+      Three complete exact certificates at franciscouzo/square-packing@712c6a6e9ef58a9521784e6b7e236af813422de7,
+      committed on 28 October 2026 and reported on issue 844: refinements, by the author's searches
+      with code the issue names, of Alex Chilton's (232) and ntumlnoob's (260, 307) Kaggle notebook
+      packings. Retained on the presumption of permission from submission (think-cnn7; think-m8f4)
+      and as factual data. Claude assistance disclosed. No optimality claim. Retained in web/couzo-issue844-2026-10-28/.
+  - key: '[Daniel issue 845 2026-10-29]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-29'
+    lineage: independent
+    credit: Daniel after Chaoweeraprasit, Gupta, Ostashev, kirilltym, Friedman
+    short_credit: Daniel after Chaoweeraprasit et al.
+    note: >-
+      Four complete exact certificates first committed at evand/square-packing@d2d5dd96cfdbded476050f8ba8577773a91c6ac1
+      on 29 October 2026, unchanged at the head 0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d the packet
+      pins, reported on issue 845: the exact KKT point at 172 and dilation certificates at 204,
+      260 and 293, each a new packing by the source's word, with the starts the issue credits. MIT-licensed;
+      Claude assistance disclosed. No global optimality claim. Retained in web/evand-issue845-2026-10-29/.
+  - key: '[Daniel n299 update 2026-10-29]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-29'
+    lineage: independent
+    credit: Daniel after Deotte
+    note: >-
+      One complete exact certificate, search/packer/candidates/s299_1028.cert at evand/square-packing@0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d,
+      committed on 29 October 2026 and reported in Evan Daniel's update to issue 824: s(299) <=
+      17801238549388584084680137655023/10^30, an exact KKT point of a packing found from the source's
+      T-248 packing by refill and exact descent, with the opening post's credit to Chris Deotte
+      for the method and the start. MIT-licensed; Claude assistance disclosed. No global optimality
+      claim. Retained in web/evand-n299-update-2026-10-29/.
+  - key: '[Mishapolk issue 846 2026-10-30]'
+    authors:
+    - Polkovskyi
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-30'
+    lineage: builds-on-project
+    credit: Polkovskyi after Couzo, Xu, Daniel, Ostashev, Levy
+    short_credit: Polkovskyi after Couzo et al.
+    note: >-
+      Fourteen complete exact certificates at Mishapolk/square-packing-records@52aa2672c74c91931686d60a49bdf97ec798291c,
+      committed on 30 October 2026 (204, 211 and 241 first on 23 October) and reported on issue
+      846: refinements of others' packings below the print at 105, 146, 156, 229 and 308, a 2e-14
+      dilation of Francisco Couzo's issue-843 packing at 130, and eight counts the ledger does not
+      record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-issue846-2026-10-30/.
 credited_names:
   Benjamin Greff: Greff
   Mohsen Khalili: Khalili
@@ -4455,3 +4564,5 @@ credited_names:
   Vladislav Lavrentev: Lavrentev
   Hyukdong Kim: Kim
   Chris Deotte: Deotte
+  Alex Chilton: Chilton
+  ntumlnoob: ntumlnoob
