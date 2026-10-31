@@ -444,6 +444,10 @@ CONTROLS: dict[tuple[int, str], Control] = {
     (76, "drop-heaviest-segment"): Control("d4", "5-5", "35-35"),
     (95, "drop-heaviest-point"): Control("d4", "15-15", "15-15"),
     (95, "drop-heaviest-segment"): Control("d4", "5-5", "45-45"),
+    # Run at intake on 31 October by this module's control command, the region found by
+    # sweeping each mutant over the roots around its removed orbit.
+    (44, "drop-heaviest-point"): Control("d4", "23-23", "17-17"),
+    (44, "drop-heaviest-segment"): Control("d4", "8-8", "9-9"),
 }
 
 

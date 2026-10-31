@@ -668,8 +668,48 @@ def cmd_mutants(path: str, seed: int) -> dict:
     return out
 
 
+#: The least floating-point masses the source reports, verification/logs/stress.out:
+#: (label, x, y, theta in radians), as printed.
+SOURCE_MINIMA = (
+    ("random 300000", 4.554412827950355, 5.117327539844629, 1.2423897061974727),
+    ("near-tile 300000", 4.499999502429363, 0.5000005182754007, -1.0365513385827142e-06),
+    ("near-45 75000", 0.707071005337892, 3.7747439817517177, 0.7753388277318225),
+    ("near-tile 2000", 0.5000008246043217, 5.499999251934642, 1.6492100032384228e-06),
+    ("random 2000", 0.565505643430089, 3.541950770398206, 0.14147342512837216),
+    ("near-45 500", 6.292893219689965, 3.7486020992883042, 0.7854479544968138),
+)
+
+
+def cmd_source_minima(path: str) -> dict:
+    """Exact mu at the source's reported float minima, each pose taken to a rational one.
+
+    A square at angle theta is the square at theta mod 90 degrees; the pose is used as
+    printed, with its centre and u = tan(theta/2) rounded to 1e-12, and is reported
+    inadmissible if rounding put it outside the container.
+    """
+    cov = Cover(parse(read_bytes(path)))
+    out = []
+    for label, x, y, th in SOURCE_MINIMA:
+        th = th % (math.pi / 2)
+        X, Y, U = rat(x, 10**12), rat(y, 10**12), rat(math.tan(th / 2), 10**12)
+        ok = cov.admissible(X, Y, U)
+        m = cov.mu(X, Y, U) if ok else None
+        out.append({
+            "source": label,
+            "pose_as_printed": [x, y, th],
+            "admissible": ok,
+            "mu_exact": None if m is None else str(m),
+            "mu": None if m is None else f"{float(m):.9f}",
+            "float_mu_here": f"{fmu(cov, x, y, math.tan(th / 2)):.9f}",
+        })
+    return {"poses": out}
+
+
 def main(argv: list[str]) -> None:
     cmd = argv[0]
+    if cmd == "source-minima":
+        print(json.dumps(cmd_source_minima(argv[1]), indent=1, default=str))
+        return
     if cmd == "mutants":
         print(json.dumps(cmd_mutants(argv[1], 842), indent=1, default=str))
         return
