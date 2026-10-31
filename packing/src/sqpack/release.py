@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "e0e6c33d2dad72f855b60e63963606c32370ef41"
+DATA_REVISION = "872f3a9813a3061b024557efb8fbf6cf17ea7c74"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -10406,6 +10406,46 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "main e482345fe (#852), at link revision e482345f with that main's file swapped "
             "in: 43 files, byte-identical across the three each time. "
             "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#816's first reply (think-10m1), recorded in result-requests.yaml as a "
+            "follow-up: T-246 at V0/C0, recorded, with its report entry; and review A3 of "
+            "#858, T-246's next_rung saying that either deterministic route earns C3 and "
+            "that the replay's random primes fall short of the resultant bound, and no "
+            "longer calling #817 a draft. No side, bound, rung or credit changes. Against main "
+            "a8deaf1b6 (#817): rendered at link revision a8deaf1b into empty site "
+            "directories, twice from this tree and once with that main's results.yaml and "
+            "result-requests.yaml swapped in, by render_n11_lower_bounds_explainer, with "
+            "its math pass in Chromium 1243 (SQPACK_CHROMIUM), "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: 69 files each, all byte-identical across the three. "
+            "Measured again after merging main 4ed88d160 (#857), whose explainer is "
+            "v0.4.34, at link revision 4ed88d16 with that main's two inputs swapped in: 69 "
+            "files each, byte-identical across the three. No PDF was printed; each prints "
+            "from that HTML. Every paper keeps its version: v0.4.34, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )
