@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 38
+version: 39
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -35,7 +35,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T12:53:25.763Z
+updated_at: 2026-10-31T13:53:07.934Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -63,3 +63,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 11:55 hourly: merged #817 (a8deaf1b6); 11 merged this pass. #842 closed with its final comment (issuecomment-6542869817). Karimi put #836/#847 deposits on GitHub at mohsensbu-jpg/square_packing_records_karimi@ad8b094 (unblocks the Zenodo wait) -> L4 resumed on claude/bold-ritchie-xo28us-karimi. #852 addressing review A (8 adoptions confirmed). Replies in flight: #816 (L5), #375/#522/#763 (L7).
 
 2026-10-31 12:54 hourly: no new issues. #852 green, review A addressed, deep gate running (run 41202009305, started 12:38). Reply PRs reviewed: #857 (with #375 correction issuecomment-6543355721 for an overstated independence claim), #856, #858 (nits being addressed). Merge order: #852, #857, #856, #858. L4 importing Karimi deposits from GitHub ad8b094.
+
+2026-10-31 13:54 hourly: merged #852 (e482345fe, 8 houses adopted + regularized; deep gate green) and #857 (4ed88d160); 13 merged this pass. #843/#844/#845/#824 answered and closed by L2 after deploy; their answer beads were closed early and broke check_bead_tree on all branches -> reopened (think-3xn9, -big9, -n61j, -17wo) until L2's records PR merges. think-ruu2 review (strong-max): 130/293/307 valid but padding re-certifications of the houses' own packings; registered recorded-only, not adopted; owner question widened on think-ikku (RV-3, RV-4). Queue: #858, #856, #859 (Karimi, review A addressing), L2 post852, L8 PR. No new issues.
