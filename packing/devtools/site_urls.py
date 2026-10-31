@@ -182,7 +182,19 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
             "counts reached 138 results. At about 1.5 KB a listed result the room is about 32 "
             "more; think-v4me owns the runway and re-measures the page, its timing included, "
-            "before it passes 440,000 bytes."
+            "before it passes 440,000 bytes. It passed that mark unmeasured: 448,598 bytes "
+            "on 31 October 2026 before T-261, and 449,867 with T-261 listed at 233 of its "
+            "counts (1,269 bytes). Those are byte measurements only; the timing is owed "
+            "under think-v4me, whose trigger has passed."
+        ),
+    ),
+    "result/t-261.html": (
+        500_000,
+        (
+            "The grade-C local minima at 233 counts, the scopes of its three evidence "
+            "entries and prepared math measure 470,189 bytes on 31 October 2026, as T-124's "
+            "roster of 178 configurations needs its own exception. A byte measurement only; "
+            "the page's timing is owed under think-v4me."
         ),
     ),
     "tutorial-advanced.html": (

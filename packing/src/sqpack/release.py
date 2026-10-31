@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "872f3a9813a3061b024557efb8fbf6cf17ea7c74"
+DATA_REVISION = "6454ae2e71c7f82a55f3b6f9b7c2051eb8d30b0b"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.35",
+        first_published="October 31, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of one result "
+            "from the intake of 31 October (T-261)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.34",
         first_published="October 31, 2026",
@@ -1529,6 +1537,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.34",
+        version="v0.4.35",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of one result "
+            "from the intake of 31 October (T-261)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.33",
@@ -2731,6 +2749,35 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "swapped in, and after merging main d7a815e86, at a53e072a1 with that main's "
             "file swapped in: 43 files, byte-identical each time. No PDF was printed; it "
             "prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_urls.py",
+            "packing/frontier/results.yaml",
+            "packing/pyproject.toml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Lane L8 of the intake pass of 31 October (think-3guf, #861): T-261, "
+            "T-244's decided configurations, #545's and #804's requests entries, a lint "
+            "exclusion and two result pages' measured byte budgets. Rendered at one link "
+            "revision into empty site directories from this tree and with main bed14afa2's "
+            "versions of the four paths swapped in, the three papers write their 51 files "
+            "byte-identical across the two."
         ),
     ),
     ReleaseNoPublicChange(

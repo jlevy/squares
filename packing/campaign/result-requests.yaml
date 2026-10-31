@@ -9000,7 +9000,9 @@ issues:
       configurations again with a checker written here, retaining the 233 exact forms they read.
       That checker is the review lane's own, so its run is a second route beside the rung, as at
       T-225 and T-229; C3 waits on a separate replay lane, gradec.py over all 233 (about 10.6
-      CPU-hours by the source's logs, think-mtah).
+      CPU-hours by the source's logs, think-mtah). The grade-C claim is registered as T-261 (31
+      October 2026, think-7scz) at V3/C1, with the review's run and the n = 10 recomputation as its
+      evidence beside the report.
     read_through: '2026-10-12T14:15:44Z'
     results:
     - key: s29-minimal-polynomial
@@ -9016,17 +9018,14 @@ issues:
       claim: gradec.py's Theorem C local-minimality check is VALID for 233 of the source's 250
         configurations of field degree at most 4.
       source: body
-      not_registered: Not a bound; local minimality of packings. The certificates are published and
-        retained (gradec-233.tar.zst) with the 233 exact forms they read; n = 10 recomputed
-        byte-identical here with gradec.py. The review of 23 October repaired Theorem C's proof
-        (C-1) and its checker decided all 233 again (receipts/review-theorem-c-233.jsonl in the
-        exact-data packet), independently re-implemented after reading the producer's code. That
-        run is a second route beside the rung; C3 waits on the gradec.py replay of all 233 (about
-        10.6 CPU-hours, think-mtah).
-        Registering it waits for a T-NNN, with the run's evidence entries drafted in think-7scz,
-        and the reply sharing the review is drafted there too.
-      queued: true
-      bead: think-7scz
+      register:
+      - T-261
+      evidence:
+      - E-evand-gradec-local-minima-233-report
+      - E-evand-gradec-local-minima-233-review-check
+      - E-evand-gradec-n10-recompute
+      validation:
+      - think-mtah
     beads:
     - think-6gti
     - think-7scz
@@ -25682,8 +25681,19 @@ issues:
       172 and 263, in the minpoly.json format of Daniel's verify_exact.py, which the
       hyukdongkim-t244-configurations-2026-10-25 packet keeps as derived facts; deciding them
       exactly is queued (think-4rzl), and until then feasibility at either side is not shown.
-      Claude assistance disclosed.
-    read_through: '2026-10-26T11:50:22Z'
+      Claude assistance disclosed. Both configurations were decided on 31 October 2026 on two
+      exact routes (devtools.configuration_fact_replay; think-4rzl): sqpack's exact verifier over
+      each field and the retained verify_exact.py, each with its controls refused, so T-244 is
+      at V3/C3. At 172 the house moved the same day to issue 845's certificate (T-257), 1.053e-3
+      below S*_172; at 263 S*_263 is 2.126e-94 below the house, the exact value of the house's
+      own arrangement, whose adoption is parked on think-ot5c and the owner's question on
+      think-ikku (think-3trq). The author's comment of 31 October, 13:27:28Z
+      (issuecomment-6543970419), answers the follow-up's request for a public copy:
+      HyukdongKim/square-packing-exact-sides at f480441e73824668fb18779151369e4d3ba6179a, CC0
+      1.0, holds the three attachments with the digests the record holds and their files
+      unpacked, n297.minpoly.json among them. It states no new result; it lets the packets
+      keep the files themselves and unblocks route B at 297 (think-ozx8).
+    read_through: '2026-10-31T13:27:28Z'
     results:
     - key: exact-sides-held
       claim: >-
@@ -25729,25 +25739,13 @@ issues:
         their controls refused; the configurations are the records' own arrangements, within
         1.8e-12 and 3.5e-13 of T-174's witnesses.
       source: https://github.com/jlevy/squares/issues/804#issuecomment-6395743853
-      not_registered: >-
-        Evidence for T-244, received and not yet decided. The attachment
-        (https://github.com/user-attachments/files/33922338/t244-exact-configurations.zip,
-        96,347 bytes, SHA-256 16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d,
-        the comment's digest) states no licence of its own, so the
-        hyukdongkim-t244-configurations-2026-10-25 packet keeps both certificates' content as
-        derived facts with every member's digest, and none of its checker, controls or scripts
-        ran. The author's comment of 25 October, 12:00:41Z (issuecomment-6397363927), dedicates
-        the attachment, data and code, to CC0 1.0 and asks that the files themselves be kept,
-        which the packet may now do. Deciding them exactly is think-4rzl's.
-        It first adds a small reader of the packet's facts: derive-forms needs a declaration and
-        retained upstream bytes, which the packet keeps neither of, so the reader feeds each
-        fact's configuration to devtools.algebraic_witness_reports.evand_minpoly_geometry, with
-        configurations --check against the zip as the facts' custody, about half an agent-day
-        of tooling. sqpack.witness.exact_verify then decides each over its field, and the
-        retained verify_exact.py decides each form rebuilt from its fact as a second route,
-        about 2 CPU-hours for both counts, up to about 8. That would take T-244 to C3.
-      queued: true
-      bead: think-4rzl
+      register:
+      - T-244
+      evidence:
+      - E-hyukdongkim-804-configurations-exact-feasibility
+      - E-hyukdongkim-804-configurations-verify-exact
+      validation:
+      - think-3trq
     - key: side-297
       claim: >-
         s(297) <= S*, the only real root of the degree-21 integer polynomial the comment

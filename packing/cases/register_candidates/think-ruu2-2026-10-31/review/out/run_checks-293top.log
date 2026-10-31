@@ -1,0 +1,2 @@
+cand293-17top+16       route A: accepted=True n=293 pairs=42778 least pair slack 0.000000e+00 (squares 261,262) least wall 0.000000e+00 (square 261 right) side-extent 0.000000e+00 cpu=1.61s
+cand293-17top+16       route B: accepted=True n=293 pairs=42778 clipped 315 cpu=0.26s

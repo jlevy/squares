@@ -272,10 +272,12 @@ def test_it_composes_with_status_and_neither_sets_the_other(
             superseded.add(result.id.lower())
     # No result was incomplete from 2 October 2026, when the replays of T-058 and T-059
     # confirmed the last two, until the same day's finding that Nagamochi's Lemma 1 is
-    # false (T-085) left T-007 at V0 with its C1 read, merged here on 3 October 2026; it is
-    # the one incomplete result since. Status offers only the statuses some result has.
+    # false (T-085) left T-007 at V0 with its C1 read, merged here on 3 October 2026; it was
+    # the one incomplete result until T-261 was registered on 31 October 2026 at C1, its
+    # report read with a defect (C-1, repaired in that review) and gradec.py's replay of
+    # all 233 not yet run (think-mtah). Status offers only the statuses some result has.
     assert set(by_status) == set(result_status.STATUSES)
-    assert by_status[result_status.INCOMPLETE] == ["t-007"]
+    assert by_status[result_status.INCOMPLETE] == ["t-261", "t-007"]
     offered = [status for status in result_status.STATUSES if status in by_status]
     # Some confirmed results are superseded and some are not, so the two controls differ.
     assert set(by_status["confirmed"]) & superseded

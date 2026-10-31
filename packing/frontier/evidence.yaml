@@ -50712,6 +50712,92 @@ evidence:
         Unchecked: T-124's Lean route, the 17 timeouts, and whether each configuration is its
         case's current packing.
     source_reviewed: '2026-10-23'
+  - id: E-evand-gradec-local-minima-233-review-check
+    claim: derived-structure
+    scope: {n_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 30, 31, 32, 33, 34, 35, 36, 38, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 84, 85, 86, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 104, 107, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 124, 125, 127, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 147, 148, 149, 150, 151, 153, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 175, 176, 178, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 200, 202, 203, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 229, 230, 232, 233, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 258, 260, 261, 264, 265, 267, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 293, 294, 298, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/review/README.md
+    replay: >-
+      From packing/, with P = resources/web/evand-exact-data-2026-10-12, run
+      OPENBLAS_NUM_THREADS=1 .venv/bin/python3 -I $P/review/check_theorem_c.py --minpoly-dir
+      $P/source/search/exact/minpoly/data --archive
+      $P/acquisition/release/gradec-233.tar.zst --dropzero 230,261 --out OUT.jsonl $(cat
+      $P/review/counts.txt). Every one of the 233 lines must say valid true and the program
+      must exit 0; then .venv/bin/python3 -I $P/review/compare_certificates.py --archive
+      $P/acquisition/release/gradec-233.tar.zst OUT.jsonl must print agree true and exit 0,
+      as receipts/review-theorem-c-233.jsonl and receipts/review-compare-233.json record.
+    replay_status: passed
+    verifiers: [V-evand-gradec-review-check, V-evand-gradec-review-compare, V-evand-gradec-review-derivatives]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the 233 configurations the release's grade-C archive certifies, each decided in full:
+          the record's packing property, every kept row, the multipliers, null L0 and the flat
+          family, the affine null vectors and the reduced Hessian
+    limitations: >-
+      Run here on 23 October 2026 by the stage 4 mathematical review of the #545 import
+      (think-7scz), under Python 3.14.7, numpy 2.5.2 and scipy 1.17.1, in niced processes,
+      two for most of the run and three at once near its end, with single-threaded BLAS, on the 233 exact forms retained in the packet
+      (each bound to its Git blob at 31523f8) and the archive's contacts files read in
+      memory: all 233 valid, in 1,463 CPU-seconds, at most 369 for one count (n = 294). It
+      decides the hypotheses of Theorem C in the form the review proves (the pair form of
+      the side-end relaxation) and the record's packing property; that the hypotheses imply
+      local minimality is the review's paper proof, not a mechanized one. It uses the
+      contacts files' choice of rows, which any choice of valid rows makes sound, and at each of
+      230 and 261 drops the 24 rows a linear program finds forced to zero, the same 24 as
+      the source. numpy and scipy only propose multipliers and a basis order, and a numerical
+      SVD agrees with the exact rank of L0 at every count; the identities, signs, lifts and
+      Hessian are exact. It agrees with every published certificate on rows, ranks, dim F,
+      dim W, the moving squares and the load-bearing squares. Independently re-implemented
+      after reading the producer's code, by a Claude agent, a system family the producer
+      also used. Not covered: the 17 timeouts, field degrees above 4, T-124's Lean proofs,
+      and whether each configuration is its case's current packing.
+    source_reviewed: '2026-10-23'
+  - id: E-evand-gradec-n10-recompute
+    claim: derived-structure
+    scope: {n_values: [10]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/receipts/gradec-n10-recompute.json
+    replay: >-
+      Copy gradec.py with localmin.py, verify_exact.py and geom.py from
+      packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/ to
+      a directory outside the repository, install numpy 2.4.2, scipy 1.17.0, mpmath 1.3.0,
+      sympy 1.14.0 and python-flint 0.9.0 (env.sh's versions) into a fresh virtual
+      environment, put the unzipped n-10.minpoly.json from this packet's
+      source/search/exact/minpoly/data/ beside the archive's n-10.contacts.json, and run
+      PYTHONPATH=. python3 gradec.py DIR/n-10 with OPENBLAS_NUM_THREADS=1 and
+      GRADEC_DROPZERO and GRADEC_MUTATE unset. The output must be byte-identical to the
+      archive's n-10.gradec.json, SHA-256
+      ffc0c1ee41b0c2037ab241806215b0df9d2a0111893256fa2a2116e3df02208f, as
+      receipts/gradec-n10-recompute.json records.
+    replay_status: passed
+    verifiers: [V-evand-gradec-py]
+    independence:
+      coverage:
+        extent: full
+        unit: the n = 10 certificate, recomputed with the source's checker from the committed exact form and the published contacts
+    limitations: >-
+      Run on 12 October 2026 by the records lane of the #545 import with the source's own
+      checker (gradec.py at 93374b5a, read first, run from a copy outside the repository
+      under CPython 3.13.16 with env.sh's pinned packages and without nix): VALID, output
+      byte-identical to the published n-10.gradec.json, 9.2 s of wall time and 2.5 CPU
+      seconds. It shows that the published certificate at n = 10 is what gradec.py computes
+      from the published inputs, not that Theorem C or gradec.py is sound; it is a
+      reproduction with the producer's code at one count of 233 and sets no rung.
+    source_reviewed: '2026-10-12'
   - id: E-wand125-fine-net-n31-59775-report
     claim: lower-bound
     scope: {n_values: [31]}
@@ -52489,6 +52575,124 @@ evidence:
       optimality and rigidity are not claimed or established. The source's 1,500- and
       3,000-digit runs share one code base, one active-set extraction and one KKT
       formulation.
+  - id: E-hyukdongkim-804-configurations-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [172, 263]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Kim exact forms 2026-10-25]'
+    certificate: packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.configuration_fact_replay
+      check --replay, which rebuilds the author's file byte for byte from each fact and
+      records its digest (tests/test_configuration_fact_replay.py holds it to the member
+      digest the comment states), rebuilds each configuration as a
+      centre-basis Witness/v2 over its field, and decides the positive, duplicate-square and
+      outside-container jobs again on sqpack's exact witness verifier, requiring the
+      retained verdicts (receipts/algebraic-route1-n172.json.xz and -n263.json.xz in the
+      packet; route1 --jobs-dir DIR --workers 2 wrote them).
+    replay_status: passed
+    verifiers: [V-sqpack-verify, V-configuration-fact-replay, V-algebraic-witness-reports]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two exact configurations, every unit-square identity, wall and pair decided
+          over each configuration's field on the one route, with its two controls each
+        checked: 2
+        of: 2
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier over
+            September and October 2026; each lane's tier and reasoning setting is not
+            retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the records lane of think-4rzl (bold-ritchie-l8, tbd-strong) on 31 October 2026,
+            which wrote the reader of the facts and read the author's comments as text
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author says Claude (Anthropic, Claude Opus 5.5) produced the construction, his
+          second checker and the controls at his direction. No route here imports or copies
+          the author's code; his checker, controls and distance script were never opened.
+    independence_record: packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
+    limitations: >-
+      One route over a number field: sqpack's exact witness verifier builds every square
+      in its configuration's field, of degree 24 at 172 and 17 at 263, and decides each
+      unit-square identity, wall and pair by exact signs, on 31 October 2026 under CPython
+      3.14.7 at two processes, nice, on a shared four-core host: both positives accepted
+      with every pair decided, a duplicated square refused on overlap and a square moved
+      outside the box refused on containment at both counts; 147,477 pair decisions in
+      5,197 route CPU seconds, the longest job 1,689 s. Each configuration states
+      the angle parameter of its axis-aligned squares as the empty list, 127 at 172 and 184
+      at 263, which the reader takes as zero, as verify_exact.py does; the receipt lists
+      them. Before deciding, the reader holds each side to T-244's: the same irreducible
+      polynomial, a root of it in the
+      field, and one real root in the hull of the configuration's enclosure and T-244's
+      isolating interval (receipts/side-check.json). verify_exact.py, run unchanged on the
+      rebuilt files, is a second route beside this one
+      (E-hyukdongkim-804-configurations-verify-exact). At 172 the side is 1.053e-3 above
+      the case's house since 31 October 2026 (T-257), so the configuration realizes T-174's
+      retired packing; at 263 it is 2.126e-94 below the house, T-174's rational
+      certificate. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity or human oversight.
+    source_reviewed: '2026-10-31'
+  - id: E-hyukdongkim-804-configurations-verify-exact
+    claim: upper-bound
+    scope: {n_values: [172, 263]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Kim exact forms 2026-10-25]'
+    certificate: packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.configuration_fact_replay
+      route2 --scratch DIR --workers 2, which rebuilds each author's file byte for byte
+      from its fact, runs the retained verify_exact.py (SHA-256 a0f38ca8...bab4) unchanged
+      on it in its own python -I process, which must print VALID, and on four mutated
+      controls, each of which must print NOT VERIFIED (receipts/route2-verify-exact.json in
+      the packet); check admits the receipt.
+    replay_status: passed
+    verifiers: [V-evand-verify-exact, V-configuration-fact-replay]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two exact configurations, each decided whole by the source's checker
+    limitations: >-
+      Evan Daniel's verify_exact.py, the checker the author reports running, read first and
+      run unchanged here from the copy the evand-exact-and-local-reports-2026-10-12 packet
+      retains (byte-identical at 7d1407a and ad86d42; the author ran it at 659ee62, which
+      is not retained here), on 31 October 2026 under CPython 3.14.7: VALID at both counts.
+      At 172 it proved 1,026 touching incidences as identities in K, 4,030 strict by
+      intervals and 14,130 pairs by discs, in 7.48 CPU seconds; at 263, 1,593, 6,231 and
+      33,549, in 11.27 CPU seconds; as the author's comment states. Four mutated controls
+      at each count were refused,
+      eight in all: a square moved 1e-6 through the wall it touches (the files list no
+      contacts, so an axis-aligned square whose centre coordinate is exactly 1/2), the side
+      raised by 1e-6 in the field, the side's interval moved below its root, and a duplicate
+      square. 40.07 CPU seconds for the ten runs. Counted as a reproduction with the
+      source's check: the author built the configurations and ran this checker on them, and
+      the record does not know whether his construction reused Daniel's code. The checker
+      reads only the first n squares, which the reader holds each file to. Finite
+      feasibility only.
+    source_reviewed: '2026-10-31'
   - id: E-hyukdongkim-804-s297-report
     claim: upper-bound
     scope: {n_values: [297]}

@@ -1,0 +1,4 @@
+house130: lambda* = 1 - 1.823000e-14 (pair 33,41); contracted side 11.902430645982047253; house - contracted 2.183057e-13; contracted - candidate +3.171309e-14; route A True route B True; cpu 0.59s
+house293: lambda* = 1 - 9.990000e-13 (pair 243,283); contracted side 17.633982502105165935; house - contracted 1.761685e-11; contracted - candidate -1.671885e-11; route A True route B True; cpu 4.11s
+house307: lambda* = 1 - 2.089520e-13 (pair 168,237); contracted side 17.979251283684497764; house - contracted 3.528959e-12; contracted - candidate +2.227357e-13; route A True route B True; cpu 3.79s
+s260: lambda* = 1 - 1.201634e-12 (pair 28,34); contracted side 16.633982502101893886; house - contracted 1.999110e-11; contracted - candidate -1.999110e-11; route A True route B True; cpu 3.17s
