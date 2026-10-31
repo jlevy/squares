@@ -1,0 +1,351 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Mishapolk",
+  "source_key": "[Mishapolk refinements 2026-10-23]",
+  "report_evidence": "E-mishapolk-1023-certificate-report",
+  "receipt_format": "mishapolk-1023-exact-replay-v1",
+  "witness_prefix": "W-mishapolk-1023-n",
+  "claim_limitations": "Complete rational centre/half-angle certificates in Evan Daniel's format first committed at e386aab to fbc1749 and unchanged at 52aa267, centres in [0, S]^2, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-31",
+  "read_at_main": "3978a7f61ca164f78291ed91534b8c9a5b9cafd7",
+  "certificates": [
+    {
+      "n": 88,
+      "path": "certificates/0000-0999/n88.cert",
+      "format": "evand-cert",
+      "offered": "9.882451030482",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e9f397908922f7c3560e77bfff5019826aa43b51",
+      "first_committed": "2026-10-23T23:56:18Z"
+    },
+    {
+      "n": 126,
+      "path": "certificates/0000-0999/n126.cert",
+      "format": "evand-cert",
+      "offered": "11.742640687120",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/a0ba35f6faa9887804c5202f2f33dde7d2f38b6e",
+      "first_committed": "2026-10-23T23:56:28Z"
+    },
+    {
+      "n": 152,
+      "path": "certificates/0000-0999/n152.cert",
+      "format": "evand-cert",
+      "offered": "12.830718800977",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/fbc17493797da81361d95d5534cac37c67e496b8",
+      "first_committed": "2026-10-23T23:56:35Z"
+    },
+    {
+      "n": 154,
+      "path": "certificates/0000-0999/n154.cert",
+      "format": "evand-cert",
+      "offered": "12.921100940762",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/6664afc379e11d3865ca0892e112898a6706dc92",
+      "first_committed": "2026-10-23T23:52:59Z"
+    },
+    {
+      "n": 155,
+      "path": "certificates/0000-0999/n155.cert",
+      "format": "evand-cert",
+      "offered": "12.952260944651",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/3d409a5909a48907fbac8d22af6ffe29fbe4c44d",
+      "first_committed": "2026-10-23T23:53:26Z"
+    },
+    {
+      "n": 183,
+      "path": "certificates/0000-0999/n183.cert",
+      "format": "evand-cert",
+      "offered": "13.999580178737",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/fb8b812b5adb9d6b5e9fa334b8c27d8005357fc0",
+      "first_committed": "2026-10-23T23:53:42Z"
+    },
+    {
+      "n": 211,
+      "path": "certificates/0000-0999/n211.cert",
+      "format": "evand-cert",
+      "offered": "14.993549626300",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "first_committed": "2026-10-23T23:36:37Z"
+    },
+    {
+      "n": 227,
+      "path": "certificates/0000-0999/n227.cert",
+      "format": "evand-cert",
+      "offered": "15.563625652326",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "first_committed": "2026-10-23T23:36:37Z"
+    },
+    {
+      "n": 236,
+      "path": "certificates/0000-0999/n236.cert",
+      "format": "evand-cert",
+      "offered": "15.861934390608",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/c695b4c79f41d2f029f0ecd4d6b74bb01293aec8",
+      "first_committed": "2026-10-23T23:54:00Z"
+    },
+    {
+      "n": 237,
+      "path": "certificates/0000-0999/n237.cert",
+      "format": "evand-cert",
+      "offered": "15.902603638260",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "first_committed": "2026-10-23T23:36:37Z"
+    },
+    {
+      "n": 241,
+      "path": "certificates/0000-0999/n241.cert",
+      "format": "evand-cert",
+      "offered": "15.987117095151",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "first_committed": "2026-10-23T23:36:37Z"
+    },
+    {
+      "n": 270,
+      "path": "certificates/0000-0999/n270.cert",
+      "format": "evand-cert",
+      "offered": "16.928162252197",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/07b339381b9528847a9f737461e51b7db9878436",
+      "first_committed": "2026-10-23T23:49:31Z"
+    },
+    {
+      "n": 271,
+      "path": "certificates/0000-0999/n271.cert",
+      "format": "evand-cert",
+      "offered": "16.948947733714",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/commit/6c0d74aa4f6431db178f68d547b1adf44d74574d",
+      "first_committed": "2026-10-23T23:54:23Z"
+    }
+  ],
+  "requested": [
+    154,
+    155,
+    183,
+    211,
+    227,
+    236,
+    237,
+    241,
+    271
+  ],
+  "replayed": [
+    88,
+    126,
+    152,
+    154,
+    155,
+    183,
+    211,
+    227,
+    236,
+    237,
+    241,
+    270,
+    271
+  ],
+  "houses": [
+    {
+      "n": 88,
+      "reader": "[Gupta rational refinements 2026-10-08]",
+      "source_key": "[Gupta rational refinements 2026-10-08]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta",
+      "result": "T-127",
+      "reported_value": "9.8824510304812469",
+      "verified_value": "9.8824510304812469",
+      "evidence": [
+        "E-gupta-438-exact-feasibility"
+      ]
+    },
+    {
+      "n": 126,
+      "reader": "[Daniel trio126 2026-10-09]",
+      "source_key": "[Daniel trio126 2026-10-09]",
+      "holders": "Ryan Xu, improved by Evan Daniel",
+      "result": "T-139",
+      "reported_value": "11.7426406871192852",
+      "verified_value": "11.7426406871192852",
+      "evidence": [
+        "E-evand-trio126-exact-feasibility"
+      ]
+    },
+    {
+      "n": 152,
+      "reader": "[evand exact optima 2026-10-05]",
+      "source_key": "[evand exact optima 2026-10-05]",
+      "holders": "Francisco Couzo, improved by Evan Daniel",
+      "result": "T-098",
+      "reported_value": "12.830718800976609954993823643412",
+      "verified_value": "12.830718800976609954993823643412",
+      "evidence": [
+        "E-evand-exact-optima-2026-10-05-exact-replay",
+        "E-evand-exact-optima-2026-10-05-source-replay"
+      ]
+    },
+    {
+      "n": 154,
+      "reader": "[Daniel n154 sweep 2026-10-20]",
+      "source_key": "[Daniel n154 sweep 2026-10-20]",
+      "holders": "Evan Daniel, improved by Francisco Couzo",
+      "result": "T-222",
+      "reported_value": "12.9211009407616806",
+      "verified_value": "12.9211009407616806",
+      "evidence": [
+        "E-evand-694-n154-exact-feasibility"
+      ]
+    },
+    {
+      "n": 155,
+      "reader": "[Daniel n155 explorer 2026-10-17]",
+      "source_key": "[Daniel n155 explorer 2026-10-17]",
+      "holders": "Evan Daniel",
+      "result": "T-197",
+      "reported_value": "12.9522609446505641",
+      "verified_value": "12.9522609446505641",
+      "evidence": [
+        "E-evand-669-n155-exact-feasibility",
+        "E-evand-669-n155-source-checker-replay"
+      ]
+    },
+    {
+      "n": 183,
+      "reader": "[Daniel n183 subgrid 2026-10-19]",
+      "source_key": "[Daniel n183 subgrid 2026-10-19]",
+      "holders": "Evan Daniel",
+      "result": "T-220",
+      "reported_value": "13.9995801787362526",
+      "verified_value": "13.9995801787362526",
+      "evidence": [
+        "E-evand-680-n183-primary-exact-feasibility"
+      ]
+    },
+    {
+      "n": 211,
+      "reader": "[Couzo verified bounds 2026-10-14]",
+      "source_key": "[Couzo verified bounds 2026-10-14]",
+      "holders": "Daniil Ostashev, improved by Francisco Couzo",
+      "result": "T-188",
+      "reported_value": "14.9935496262994211",
+      "verified_value": "14.9935496262994211",
+      "evidence": [
+        "E-couzo-487b058-exact-feasibility"
+      ]
+    },
+    {
+      "n": 227,
+      "reader": "[Daniel regularized lists 2026-10-20]",
+      "source_key": "[Daniel regularized lists 2026-10-20]",
+      "holders": "Joost de Winter, improved by Francisco Couzo, Evan Daniel",
+      "result": "T-225",
+      "reported_value": "15.5636256523251491",
+      "verified_value": "15.5636256523251491",
+      "evidence": [
+        "E-evand-regularized-1020-exact-feasibility",
+        "E-evand-regularized-1020-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 236,
+      "reader": "[Daniel n236 2026-10-16]",
+      "source_key": "[Daniel n236 2026-10-16]",
+      "holders": "Evan Daniel",
+      "result": "T-218",
+      "reported_value": "15.8619343906073587",
+      "verified_value": "15.8619343906073587",
+      "evidence": [
+        "E-evand-659-n236-exact-feasibility"
+      ]
+    },
+    {
+      "n": 237,
+      "reader": "[Couzo n237 2026-10-15]",
+      "source_key": "[Couzo n237 2026-10-15]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, Mishapolk",
+      "result": "T-190",
+      "reported_value": "15.9026036382595969",
+      "verified_value": "15.9026036382595969",
+      "evidence": [
+        "E-couzo-4e4c8ce-n237-exact-feasibility"
+      ]
+    },
+    {
+      "n": 241,
+      "reader": "[Couzo certificates 2026-10-13]",
+      "source_key": "[Couzo certificates 2026-10-13]",
+      "holders": "Daniil Ostashev, improved by Francisco Couzo",
+      "result": "T-182",
+      "reported_value": "15.9871170951502388",
+      "verified_value": "15.9871170951502388",
+      "evidence": [
+        "E-couzo-586-exact-feasibility"
+      ]
+    },
+    {
+      "n": 270,
+      "reader": "[Daniel n270 sweep 2026-10-20]",
+      "source_key": "[Daniel n270 sweep 2026-10-20]",
+      "holders": "Evan Daniel",
+      "reported_value": "16.9281622521967502",
+      "verified_value": "16.9281622521967502",
+      "evidence": [
+        "E-evand-703-n270-exact-feasibility"
+      ]
+    },
+    {
+      "n": 271,
+      "reader": "[Daniel n271 2026-10-17]",
+      "source_key": "[Daniel n271 2026-10-17]",
+      "holders": "Evan Daniel",
+      "result": "T-219",
+      "reported_value": "16.9489477337136576",
+      "verified_value": "16.9489477337136576",
+      "evidence": [
+        "E-evand-664-n271-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 88,
+      "report": "T-193 (#639)",
+      "url": "https://github.com/jlevy/squares/issues/639",
+      "holders": "Evan Daniel, of the house's packing",
+      "result": "T-193",
+      "printed": "9.8824510304812468193284571556918969668693",
+      "rounding": "unstated"
+    },
+    {
+      "n": 126,
+      "report": "T-193 (#639)",
+      "url": "https://github.com/jlevy/squares/issues/639",
+      "holders": "Evan Daniel, of the house's packing",
+      "result": "T-193",
+      "printed": "11.742640687119285146405066172629094235709",
+      "rounding": "unstated"
+    },
+    {
+      "n": 152,
+      "report": "T-122 (#419)",
+      "url": "https://github.com/jlevy/squares/issues/419",
+      "holders": "Evan Daniel, of the house's packing",
+      "result": "T-122",
+      "printed": "12.830718800976609954865516",
+      "rounding": "unstated"
+    }
+  ],
+  "register": {
+    "title": "Mykhailo Polkovskyi's certificates of 23 October at e386aab to fbc1749, no issue",
+    "headline": "Polkovskyi's sub-print re-certifications of nine house packings, 1.3e-19 to 1.7e-19 below each",
+    "significance": 1,
+    "source_checks": "Each commit's title calls its certificate a world record and states how far below the earlier certificate it lies, and the index certified_bounds.json records each as valid and strictly valid under the source's verifier, Evan Daniel's MIT separating-axis checker with Francisco Couzo's modifications, byte-identical to the copy the issue-678 packet retains. Those statements are the author's; no source program ran here.",
+    "credit": "Credit each packing to its finder, as the register credits the house it re-certifies, and Mykhailo Polkovskyi (Mishapolk, https://github.com/Mishapolk/square-packing-records) for the re-certification, as a regularization: the index says 'packing refined from Evan Daniel' at 154, 155, 236 and 271 and 'from Evan Daniel & Francisco Couzo' at 183, and credits Polkovskyi alone at 211, 227, 237 and 241, whose houses are Daniil Ostashev's (211, 241), Joost de Winter's (227) and Nate Chaoweeraprasit's (237) packings. A publication in a watched repository that no issue reports, recorded from its commits by the owner's rule of 14 October 2026. The same commits' certificates at 88, 126 and 152 lie below the house but above an exact side a register entry states pending adoption (T-193 at 88 and 126, T-122 at 152), and those at 204 and 270 tie the house; the ledger records none of them.",
+    "next_rung": "Independently review the retained replay and the certificates (stage 4): a clean-room exact checker, the identity against the house's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt each count where it is the smallest validated side under the house rule, with both strong generators' regularization and the flip of each new house in the same change.",
+    "bead": "think-pg1y",
+    "bibliography": {
+      "authors": [
+        "Polkovskyi"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit",
+      "short_credit": "Polkovskyi after Daniel et al.",
+      "note": "Thirteen complete exact certificates first committed in ten commits of 23 October 2026 (e386aab to fbc1749) at Mishapolk/square-packing-records and unchanged at 52aa2672c74c91931686d60a49bdf97ec798291c, which the packet pins, with no issue: re-certifications about 1e-19 below the houses at 154, 155, 183, 211, 227, 236, 237, 241 and 271, and certificates at 88, 126, 152, 204 and 270 the ledger does not record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-1023-refinements-2026-10-30/."
+    }
+  }
+}

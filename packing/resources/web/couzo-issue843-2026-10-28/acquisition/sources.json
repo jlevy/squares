@@ -1,0 +1,67 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-31T06:10Z",
+  "git_scope": "Blobless clone of franciscouzo/square-packing fetched on 31 October 2026 for the import of issue #843, and a sparse checkout of 712c6a6 (committed 2026-10-28T15:57:20Z), the repository's head when fetched. certificates/n130.cert is first committed at 3a4d95c (2026-10-27T19:42:09Z, 'Land the browser record at 130'), the commit issue #843 names, 7 minutes 48 seconds before the issue was opened; its bytes, its credit record certificates/n130.json and the float packing n130.txt are unchanged at the pin. Retained: those three files and the README. Pinned by digest: certificates/best/n130.cert, the same bytes as certificates/n130.cert, and the two exact checkers the issue names, exact_finish.py and verify_bound_certificate.py (with its licence, against the issue-678 packet's copies), never run here. GitHub's activity log was not readable from this session, so no push time is recorded. The rest of the tree is pinned by the commit; no source program was executed.",
+  "sources": [
+    {
+      "id": "couzo-issue843-2026-10-28",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "712c6a6e9ef58a9521784e6b7e236af813422de7",
+      "source_commit": "712c6a6e9ef58a9521784e6b7e236af813422de7",
+      "committed_utc": "2026-10-28T15:57:20Z",
+      "git_tree": "8e382d5762fbeb17ca5cdd9a0e69ebd6b3a5d5ff",
+      "archived_path": "packing/resources/web/couzo-issue843-2026-10-28/source",
+      "subtree_manifest": "packing/resources/web/couzo-issue843-2026-10-28/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "BOUND_VERIFIER_LICENSE.txt",
+        "verify_bound_certificate.py",
+        "exact_finish.py",
+        "n130.txt",
+        "certificates/n130.cert",
+        "certificates/n130.json",
+        "certificates/best/n130.cert"
+      ],
+      "subtree_file_count": 8,
+      "subtree_total_bytes": 67365,
+      "retained_file_count": 4,
+      "retained_total_bytes": 35517,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "BOUND_VERIFIER_LICENSE.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT licence for the verifier; byte-identical to the copy the issue-678 packet retains.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+        },
+        {
+          "path": "certificates/best/n130.cert",
+          "bytes": 15970,
+          "sha256": "a2618e1a7a2961cf63bf5a23ac0b006d18ef0dde00dad562b005d82a509c7fcd",
+          "reason": "The same bytes as certificates/n130.cert, which is retained; pinned by digest."
+        },
+        {
+          "path": "exact_finish.py",
+          "bytes": 11243,
+          "sha256": "9ee0c735ca9a7632b825b9a7dc9a3621088bd4a2bcd0174274b46b2bdab61d5d",
+          "reason": "The source's exact corner replay the issue names; pinned by digest and never executed here."
+        },
+        {
+          "path": "verify_bound_certificate.py",
+          "bytes": 3567,
+          "sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "reason": "The source's separating-axis checker the issue names; byte-identical to the copy the issue-678 packet retains, and never executed here.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+        }
+      ],
+      "license": "The repository states no licence for its data or prose. BOUND_VERIFIER_LICENSE.txt is Evan Daniel's MIT licence for the verifier verify_bound_certificate.py ('modifications by Francisco Couzo with Codex'); both are byte-identical to the copies the couzo-issue678-2026-10-18 packet retains and are pinned against them. Francisco Couzo submitted this source to the repository in issue #843, and the owner ruled on 24 October 2026 that a source its author submitted carries a presumption of permission to retain and import it (think-cnn7); the exact licence is followed up on think-m8f4 without holding the import. The certificates are factual data under the owner decision of 2026-10-09 as well (resources/web/known-best-packings/README.md, Retained Factual Data). The presumption covers Couzo's own material: the certificates are his exact certifications of his refinements, whose starting packings the issue credits to others.",
+      "claims": [
+        "certificates/n130.cert states s(130) <= 466915711841738962256077475351530705109199164124122993/39228601764570445403995003040207131754000000000000000 = 11.902430645984348558990...; issue #843 (opened 2026-10-27T19:49:57Z by franciscouzo) reports it rounded up at 12 places, 11.902430645985, 2.05e-3 below the register's 11.904483032516 (PingYou Ltd's PR #574 certificate), and prints its SHA-256 and that of n130.txt.",
+        "The issue says both of the repository's exact checkers accept it in exact rational arithmetic: verify_bound_certificate.py (separating axes, projection test; valid and strictly valid, 1,624 candidate pairs) and exact_finish.py (exact corner replay); they are the repository's code and read the same format.",
+        "The issue calls it a new packing found from PR #574's by thirteen successive improvements of the author's live searches of 24-25 October (ten by the web app's fq quench, two by its basin hopping, one by native SLP), matched one to one against PR #574's packing with the largest move 0.704, 11 squares beyond 0.1 and 26 beyond 0.01, 35 tilted squares against 32, and asks for credit to Francisco Couzo after the starting packing's credits (Nate Chaoweeraprasit (itsnaka); Siddharth Gupta; PingYou Ltd).",
+        "The issue quotes Kaggle's staff per-puzzle leaderboard at 11.902430646006 for the team Cats and boxes (24 October 17:28 UTC), with no coordinates. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

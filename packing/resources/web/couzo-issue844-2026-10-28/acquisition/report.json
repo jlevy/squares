@@ -1,0 +1,118 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/844",
+  "author": "Francisco Couzo",
+  "source_key": "[Couzo issue 844 2026-10-28]",
+  "report_evidence": "E-couzo-844-certificate-report",
+  "receipt_format": "couzo-844-exact-replay-v1",
+  "witness_prefix": "W-couzo-844-n",
+  "claim_limitations": "Complete 712c6a6 rational centre/half-angle certificates, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-31",
+  "read_at_main": "3978a7f61ca164f78291ed91534b8c9a5b9cafd7",
+  "certificates": [
+    {
+      "n": 232,
+      "path": "certificates/best/n232.cert",
+      "format": "evand-cert",
+      "offered": "15.761661759482",
+      "first_committed": "2026-10-28T15:57:20Z"
+    },
+    {
+      "n": 260,
+      "path": "certificates/n260.cert",
+      "format": "evand-cert",
+      "offered": "16.637029558871",
+      "first_committed": "2026-10-28T15:57:20Z"
+    },
+    {
+      "n": 307,
+      "path": "certificates/n307.cert",
+      "format": "evand-cert",
+      "offered": "17.979251283689",
+      "first_committed": "2026-10-28T15:57:20Z"
+    }
+  ],
+  "requested": [
+    232,
+    260,
+    307
+  ],
+  "replayed": [
+    232,
+    260,
+    307
+  ],
+  "houses": [
+    {
+      "n": 232,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Daniil Ostashev, improved by PingYou Ltd, Mishapolk",
+      "result": "T-186",
+      "reported_value": "15.76417431748659663",
+      "verified_value": "15.76417431748659663",
+      "evidence": [
+        "E-mishapolk-70a033f-exact-feasibility"
+      ]
+    },
+    {
+      "n": 260,
+      "reader": "[Daniel regularized lists 2026-10-20]",
+      "source_key": "[Daniel regularized lists 2026-10-20]",
+      "holders": "Francisco Couzo, improved by Evan Daniel",
+      "result": "T-225",
+      "reported_value": "16.6457532505198122",
+      "verified_value": "16.6457532505198122",
+      "evidence": [
+        "E-evand-regularized-1020-exact-feasibility",
+        "E-evand-regularized-1020-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 307,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "17.98086278405469107",
+      "verified_value": "17.98086278405469107",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 260,
+      "report": "franciscouzo/square-packing@a5a5d76 (no issue)",
+      "url": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
+      "holders": "Francisco Couzo, after ntumlnoob",
+      "reader": "[Couzo a5a5d76 2026-10-28]"
+    },
+    {
+      "n": 307,
+      "report": "franciscouzo/square-packing@a5a5d76 (no issue)",
+      "url": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
+      "holders": "Francisco Couzo, after ntumlnoob",
+      "reader": "[Couzo a5a5d76 2026-10-28]"
+    }
+  ],
+  "register": {
+    "title": "Francisco Couzo's certificates at 232, 260 and 307 at 712c6a6, issue 844",
+    "headline": "Couzo's refinements of Kaggle notebook packings at 232, 260 and 307, below T-186, T-225 and T-174",
+    "significance": 3,
+    "source_checks": "The issue says both of the source's exact checkers accept all three certificates in exact rational arithmetic, valid and strictly valid with positive wall and pair margins: verify_bound_certificate.py, Evan Daniel's MIT separating-axis verifier with modifications by Francisco Couzo with Codex, byte-identical to the copy the issue-678 packet retains, and exact_finish.py, an exact corner replay. The commit 712c6a6 ends with a Co-Authored-By trailer naming Claude, and the issue says Claude did the certification, the comparison and the report at the author's direction. Those statements are the author's; no source program ran here.",
+    "credit": "Credit the starting packings to their Kaggle authors, as the issue does: at 232 Alex Chilton's notebook 'Fault-line DP + Basin Hopping - LB 22.2990' (run 362691257, side 15.763381419802), and at 260 and 307 ntumlnoob's notebook 'First 22.268681355 Public Code With Explanation' (version 3, run 362957087, sides 16.638533455862 and 17.979253973651), whose SOURCE_NOTICES.md credits Alex Chilton, David Ellsworth, Evan Daniel and public Kaggle portfolios. Francisco Couzo (https://github.com/franciscouzo/square-packing) is credited with the refinements only, 1.72e-3, 1.50e-3 and 2.7e-6 of the improvements, by code the issue names: at 232 GPU basin hopping with the overlap-energy kernel of Vladislav Lavrentev's (lightningv08) Kaggle notebook 'CUDA Packing Search' (Apache-2.0) and an Evan Daniel fq polish; at 260 an Ellsworth-style structural move modelled on David Ellsworth's tools, the author's SLP (HiGHS) and the web app's fq; at 307 the web app's fq, a browser adaptation of Evan Daniel's fq optimizer (MIT). The issue calls 307 a refinement and leaves 232 and 260 to the record. Kaggle per-puzzle sides the issue quotes below all three state no packing and are no report.",
+    "next_rung": "Independently review the retained replay and the certificates (stage 4): a clean-room exact checker, the identity against the house's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt each count where it is the smallest validated side (232 and 307; at 260 issue 845's certificate is lower) under the house rule, with both strong generators' regularization and the flip of each new house in the same change.",
+    "bead": "think-n61j",
+    "bibliography": {
+      "authors": [
+        "Couzo"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Couzo after Chilton, ntumlnoob, Lavrentev, Ellsworth, Daniel",
+      "short_credit": "Couzo after Chilton et al.",
+      "note": "Three complete exact certificates at franciscouzo/square-packing@712c6a6e9ef58a9521784e6b7e236af813422de7, committed on 28 October 2026 and reported on issue 844: refinements, by the author's searches with code the issue names, of Alex Chilton's (232) and ntumlnoob's (260, 307) Kaggle notebook packings. Retained on the presumption of permission from submission (think-cnn7; think-m8f4) and as factual data. Claude assistance disclosed. No optimality claim. Retained in web/couzo-issue844-2026-10-28/."
+    }
+  }
+}

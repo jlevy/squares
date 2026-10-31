@@ -1,0 +1,157 @@
+{
+  "n": 260,
+  "packing": "n260.txt",
+  "packing_sha256": "b9b84ae2a0ef7deb4ffb728d3f59de5002a81c85cf01746f7e74ab6243b9699a",
+  "certificate": "certificates/n260.cert",
+  "certificate_sha256": "36d22bac73285d71abcdcf823a823c0de170601e31ddec2cfc1b94b19ccafa27",
+  "rational_side": "67077942617632138527571542307/4031481829251000000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo (square-packing web app, running its adaptation of Evan Daniel's fq optimizer, MIT); refines the packing published by ntumlnoob (\u674e\u79c9\u53e1) in the Kaggle notebook \"First 22.268681355 Public Code With Explanation\" (run 362957087); earlier construction credits retained; earlier seed and construction credits retained in provenance",
+    "source_certificate_sha256": "36d22bac73285d71abcdcf823a823c0de170601e31ddec2cfc1b94b19ccafa27",
+    "source_n": 260,
+    "source_provenance": {
+      "category": "CT105 live record",
+      "source_provenance": {
+        "category": "own refinement of another author's packing",
+        "search": "browser search",
+        "optimizer": {
+          "method": "fq",
+          "credit": "Evan Daniel",
+          "source": "evand/square-packing 77f3c0ab47, search/packer/src/fq.rs",
+          "license": "MIT",
+          "adaptation": "franciscouzo/square-packing-web core/src/fq.rs (browser adaptation: resumable outer loops, web-time clock)"
+        },
+        "live_store": {
+          "record_id": "0ab37bc140f56f7956d408c49591c67c",
+          "received": "20261028T012501Z",
+          "method": "fq",
+          "host": "browser",
+          "dilation": "1+1e-14",
+          "sha256": "4093ef7c60d58d279d0e4d7d0613eb5db7b7b87a292206e6966130ebc2b5e256",
+          "previous": 16.638532992078687,
+          "previous_holder": "this project",
+          "database": "CT105 live database, read-only dump of 28 October"
+        },
+        "lineage": [
+          {
+            "record_id": "d960af8a273140c3aa1ac5c05a5c4438",
+            "received": "20261027T234151Z",
+            "method": "hop",
+            "side": 16.638533455860667,
+            "rational_side": "123198723146863672751855478937/7404421998711000000000000000",
+            "previous": 16.638533459000755,
+            "host": "Desktopo (native search)"
+          },
+          {
+            "record_id": "4ba0edb37293671330684543abc515cc",
+            "received": "20261028T012457Z",
+            "method": "fq",
+            "side": 16.638532992078687,
+            "rational_side": "2546321378756284238912880761/153037613350200000000000000",
+            "previous": 16.638533455860667,
+            "host": "browser (web app)"
+          },
+          {
+            "record_id": "0ab37bc140f56f7956d408c49591c67c",
+            "received": "20261028T012501Z",
+            "method": "fq",
+            "side": 16.638532792319296,
+            "rational_side": "67077942617632138527571542307/4031481829251000000000000000",
+            "previous": 16.638532992078687,
+            "host": "browser (web app)"
+          }
+        ],
+        "starting_packing": {
+          "author": "ntumlnoob (\u674e\u79c9\u53e1)",
+          "title": "First 22.268681355 Public Code With Explanation",
+          "url": "https://www.kaggle.com/code/ntumlnoob/first-22-268681355-public-code-with-explanation?scriptVersionId=362957087",
+          "version": 3,
+          "run": 362957087,
+          "run_created": "2026-10-27T20:32:47Z",
+          "submission_sha256": "30dded7f9b2ab419c87daceb6d72f53502edbe23238caea3301dac9110720a7b",
+          "upstream_credits": "its SOURCE_NOTICES.md credits Alex Chilton (starter kit and dataset), David Ellsworth's records, Evan Daniel's catalogue and FQ/FTMC work (evand/square-packing), and public Kaggle portfolios of Nilanjan Saha, Malyshev Danil, Kirill T, lightningv08, kmmmvs, aqibrazadev, Chris Deotte and others",
+          "notebook_measured_side": "16.63853345586118186812102148400491793095398976635960",
+          "notebook_method": "cpu_refine_fq_only",
+          "notebook_parent_ids": [
+            "521c3b2906d6146022daf6f29e27f43906e637580af7f3f47ac1b8ff873af992"
+          ]
+        },
+        "native_step_note": "The first step (Desktopo, 20261027T234151Z) only removed the dilation of our exact certification of the notebook packing; it is within 1.1e-12 of the side the notebook reports.",
+        "kaggle_board_comparison": {
+          "team": "Chris Deotte",
+          "side": "16.6355708646242",
+          "submitted": "2026-10-25 19:24:09 UTC",
+          "run": 362304873,
+          "note": "Lower side on the staff per-puzzle leaderboard; coordinates not public. Not in the committed public comparison."
+        },
+        "original_credits": "Starting packing: ntumlnoob (\u674e\u79c9\u53e1), Kaggle notebook \"First 22.268681355 Public Code With Explanation\"; its SOURCE_NOTICES.md credits Alex Chilton (starter kit and dataset), David Ellsworth's records, Evan Daniel's catalogue and FQ/FTMC work (evand/square-packing), and public Kaggle portfolios of Nilanjan Saha, Malyshev Danil, Kirill T, lightningv08, kmmmvs, aqibrazadev, Chris Deotte and others."
+      },
+      "previous_source": {
+        "kind": "certificate",
+        "bound": "4161438312629953048686574163329/250000000000000000000000000000",
+        "source_n": 260,
+        "certificate": "certificates/best/n260.cert",
+        "certificate_sha256": "ba7b521b15d086f1504e0575e946027984d486a35ce6e5f7a8dc080f5628785e",
+        "credit": "Evan Daniel; start: Francisco Couzo",
+        "provenance": {
+          "category": "evand",
+          "request": "https://github.com/jlevy/squares/issues/678",
+          "source_url": "https://github.com/evand/square-packing/blob/1d2bb82035af4b7eb4658488543e46b67d1099ca/search/regularize/lists/certs/n-260.cert.gz",
+          "certificate_credit": "Evan Daniel",
+          "construction_credit": [
+            "Francisco Couzo (jlevy/squares#678 packing, start)",
+            "Joost de Winter (jlevy/squares#668 packing, seed of #678 in Evan Daniel's exact form)"
+          ],
+          "source_revision": "1d2bb82035af4b7eb4658488543e46b67d1099ca",
+          "original_source_sha256": "098be6c5f9ce5b8d2990584187823d808ce153e433b8fa1884ce679da720f037",
+          "original_source_sha256_kind": "gzip bytes",
+          "original_source_decompressed_sha256": "7b0cdf6c1d8ef8a4a87377c5674b622196522613a053ceac80d0ef921c219b8d",
+          "original_source_file": "evand/search/regularize/lists/certs/n-260.cert.gz"
+        },
+        "verification": {
+          "n": 260,
+          "side": "4161438312629953048686574163329/250000000000000000000000000000",
+          "valid": true,
+          "pairs_tested": 3349,
+          "arithmetic_backend": "GMP exact rationals via gmpy2 2.3.2"
+        },
+        "strict_verification": {
+          "valid": true,
+          "closed_valid": true,
+          "sha256": "ba7b521b15d086f1504e0575e946027984d486a35ce6e5f7a8dc080f5628785e",
+          "candidate_pairs": 3349,
+          "near_pairs": 531,
+          "checker": "verify_bound_certificate.py",
+          "checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "arithmetic_backend": "GMP exact rationals via gmpy2 2.3.2"
+        }
+      },
+      "previous_reference": {
+        "seed_credit": "Francisco Couzo (franciscouzo)",
+        "source_certificate_sha256": "ba7b521b15d086f1504e0575e946027984d486a35ce6e5f7a8dc080f5628785e",
+        "source_n": 260,
+        "source_provenance": {
+          "category": "evand",
+          "request": "https://github.com/jlevy/squares/issues/678",
+          "source_url": "https://github.com/evand/square-packing/blob/1d2bb82035af4b7eb4658488543e46b67d1099ca/search/regularize/lists/certs/n-260.cert.gz",
+          "certificate_credit": "Evan Daniel",
+          "construction_credit": [
+            "Francisco Couzo (jlevy/squares#678 packing, start)",
+            "Joost de Winter (jlevy/squares#668 packing, seed of #678 in Evan Daniel's exact form)"
+          ],
+          "source_revision": "1d2bb82035af4b7eb4658488543e46b67d1099ca",
+          "original_source_sha256": "098be6c5f9ce5b8d2990584187823d808ce153e433b8fa1884ce679da720f037",
+          "original_source_sha256_kind": "gzip bytes",
+          "original_source_decompressed_sha256": "7b0cdf6c1d8ef8a4a87377c5674b622196522613a053ceac80d0ef921c219b8d",
+          "original_source_file": "evand/search/regularize/lists/certs/n-260.cert.gz"
+        },
+        "construction": null,
+        "deleted_squares": 0
+      }
+    },
+    "construction": null,
+    "deleted_squares": 0
+  },
+  "preview_note": "The exact certificate is authoritative; the numerical preview independently has zero pair overlap."
+}

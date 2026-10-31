@@ -1,0 +1,113 @@
+{
+ "store_id": 335,
+ "s": 13.618988956899399,
+ "sources": [
+  "pending:#476 (Francisco Couzo)",
+  "pending:#488 (Francisco Couzo)",
+  "pending:#506 (Francisco Couzo)",
+  "pending:#561 (Francisco Couzo)",
+  "pending:#570 (Francisco Couzo)",
+  "pending:#583 (Francisco Couzo)",
+  "pending:#586 (Francisco Couzo)",
+  "pending:#624 (mstrmg)",
+  "run:runs/night1014/nh/r0062_n172 (ours)",
+  "run:runs/night1014/nh/r0519_n172 (ours)",
+  "run:runs/night1014/nh/r0525_n172 (ours)",
+  "run:runs/night1014/nh/r0531_n172 (ours)",
+  "run:runs/night1015/nh3/n172/explore0 (ours)",
+  "watch:franciscouzo/square-packing@1c17153 (lollipoll)",
+  "watch:franciscouzo/square-packing@23aff0c (lollipoll)",
+  "watch:franciscouzo/square-packing@43ac7d2 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@487b058 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@4e4c8ce (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@58a7833 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@7b6c87e (lollipoll)",
+  "watch:franciscouzo/square-packing@af8cb79 (lollipoll)",
+  "watch:franciscouzo/square-packing@b85dee2 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@c6da0fc (lollipoll)",
+  "later copies of the same minimum: store ids [291687, 69]"
+ ],
+ "ok": true,
+ "S_exact": "13.618988956899398428863501629350489899504015052196179381477954904",
+ "S_cert": "13.61898895689939842899969151892",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 172 closed unit squares pairwise disjoint inside the open box of side 13.618988956899398701 (391 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 0.00014262283585132171,
+  "status": "local minimum of S, strict modulo 60 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 60,
+  "flat_realised": 60.0,
+  "flat_residual": 5.684260837281762e-62,
+  "negative_eigs": 0,
+  "corner_corner": 74,
+  "vv_milp_dS": 4.264210215270999e-18,
+  "rattlers": 14,
+  "min_pair": 9.99999999999999e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "13.618988956899398428863501629350489899504015052196179381478",
+  "S_cert": "340474723922484960724992287973/25000000000000000000000000000",
+  "groups": [
+   20,
+   6
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 172 closed unit squares pairwise disjoint inside the open box of side 13.618988956899398701 (342 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.0010532585179827691,
+  "matching_distance_regularized": 0.2855825426017119,
+  "symmetry": 0,
+  "moved_gt_1e4": 140,
+  "moved_gt_1e2": 24,
+  "moved_gt_1e1": 23,
+  "moved_gt_1e1_all": 40,
+  "max_move": 0.7010196088785035,
+  "max_move_all": 0.7013135341620069,
+  "max_angle_change": 44.7301486582208,
+  "rattler_status_swaps": 17,
+  "shared_angles": [
+   "45.0000"
+  ],
+  "ours_only_angles": [
+   "44.6064"
+  ],
+  "prior_only_angles": [
+   "44.7301",
+   "44.9703"
+  ],
+  "contacts": {
+   "symmetry": 5,
+   "edges_ours": 302,
+   "edges_prior": 322,
+   "shared": 213,
+   "ours_only": 89,
+   "prior_only": 109,
+   "rattlers_ours": 25,
+   "rattlers_prior": 14,
+   "rattlers_shared": 11
+  }
+ }
+}

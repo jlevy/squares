@@ -1,0 +1,73 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-31T06:10Z",
+  "git_scope": "Blobless clone of franciscouzo/square-packing fetched on 31 October 2026, and a sparse checkout of a5a5d76 (committed 2026-10-28T01:41:35Z, 'Land the browser records at 260 and 307, refining ntumlnoob's packings'), a publication in a watched repository that no issue reports: the claim depends on this revision, since 712c6a6, the head, rewrites certificates/n260.cert and n307.cert with the certificates issue #844 reports (it keeps these bytes as certificates/parents/36d22bac...cert and 2bdbfd0f...cert). Retained: the two certificates and their credit records certificates/n260.json and n307.json, and the README. Pinned by digest: the same bytes as certificates/best/n260.cert and n307.cert, the float packings n260.txt and n307.txt, and the verifier's licence against the issue-678 packet's copy. GitHub's activity log was not readable from this session, so no push time is recorded. The rest of the tree is pinned by the commit; no source program was executed.",
+  "sources": [
+    {
+      "id": "couzo-a5a5d76-2026-10-28",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "a5a5d76790679902ef57270f6d4c2d01786c5a56",
+      "source_commit": "a5a5d76790679902ef57270f6d4c2d01786c5a56",
+      "committed_utc": "2026-10-28T01:41:35Z",
+      "git_tree": "659cea50dbe834af701a37460eb4e5de73d8f4c8",
+      "archived_path": "packing/resources/web/couzo-a5a5d76-2026-10-28/source",
+      "subtree_manifest": "packing/resources/web/couzo-a5a5d76-2026-10-28/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "BOUND_VERIFIER_LICENSE.txt",
+        "n260.txt",
+        "n307.txt",
+        "certificates/n260.cert",
+        "certificates/n260.json",
+        "certificates/n307.cert",
+        "certificates/n307.json",
+        "certificates/best/n260.cert",
+        "certificates/best/n307.cert"
+      ],
+      "subtree_file_count": 10,
+      "subtree_total_bytes": 305329,
+      "retained_file_count": 5,
+      "retained_total_bytes": 150760,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "BOUND_VERIFIER_LICENSE.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT licence for the verifier; byte-identical to the copy the issue-678 packet retains.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+        },
+        {
+          "path": "certificates/best/n260.cert",
+          "bytes": 33347,
+          "sha256": "36d22bac73285d71abcdcf823a823c0de170601e31ddec2cfc1b94b19ccafa27",
+          "reason": "The same bytes as certificates/n260.cert and n307.cert, which are retained; pinned by digest."
+        },
+        {
+          "path": "certificates/best/n307.cert",
+          "bytes": 89224,
+          "sha256": "2bdbfd0f6c454ac9a8b84576c8109fb81b0bdb01f9ed3c8dbb9a07d752abed39",
+          "reason": "The same bytes as certificates/n260.cert and n307.cert, which are retained; pinned by digest."
+        },
+        {
+          "path": "n260.txt",
+          "bytes": 12533,
+          "sha256": "b9b84ae2a0ef7deb4ffb728d3f59de5002a81c85cf01746f7e74ab6243b9699a",
+          "reason": "The float packings of the two certificates; pinned by digest."
+        },
+        {
+          "path": "n307.txt",
+          "bytes": 18397,
+          "sha256": "9161aca43173de5c99f8d942048c6edbb365aa3429db11f196df4521824ac4ae",
+          "reason": "The float packings of the two certificates; pinned by digest."
+        }
+      ],
+      "license": "The repository states no licence for its data or prose. BOUND_VERIFIER_LICENSE.txt is Evan Daniel's MIT licence for the verifier verify_bound_certificate.py ('modifications by Francisco Couzo with Codex'); both are byte-identical to the copies the couzo-issue678-2026-10-18 packet retains and are pinned against them. Francisco Couzo submitted this source to the repository in issues #843 and #844 two days later (this commit itself is reported by no issue), and the owner ruled on 24 October 2026 that a source its author submitted carries a presumption of permission to retain and import it (think-cnn7); the exact licence is followed up on think-m8f4 without holding the import. The certificates are factual data under the owner decision of 2026-10-09 as well (resources/web/known-best-packings/README.md, Retained Factual Data). The presumption covers Couzo's own material: the certificates are his exact certifications of his refinements, whose starting packings the issue credits to others.",
+      "claims": [
+        "certificates/n260.cert states s(260) <= 67077942617632138527571542307/4031481829251000000000000000 = 16.6385327923192945...; the commit message prints 16.638532792320, below the committed public comparison's 16.645753250520 (Evan Daniel).",
+        "certificates/n307.cert states s(307) <= 436081607184993722962197444889181982917255228924685874736959955436771335630565667211324538123/24254714520872479530466069702814569144398684321103594602674239356738890164429000000000000000 = 17.9792512836925855...; the commit message prints 17.979251283693, below #593's 17.980862784055.",
+        "The commit message says neither packing is the author's construction: both refine the packings ntumlnoob published in the Kaggle notebook 'First 22.268681355 Public Code With Explanation' (run 362957087; its metric gives 16.638533455862 and 17.979253973651), and the gains (6.6e-7 and 2.7e-6) come from the web app's fq, an adaptation of Evan Daniel's fq optimizer (MIT); certificates/n260.json and n307.json say so. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}
