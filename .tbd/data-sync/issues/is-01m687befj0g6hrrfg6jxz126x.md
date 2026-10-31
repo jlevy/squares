@@ -3,9 +3,9 @@ type: is
 id: is-01m687befj0g6hrrfg6jxz126x
 title: Review Couzo's s(130) certificate (stage 4) and adopt at 130 with both regularizations (#843)
 kind: task
-status: closed
+status: open
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,10 +15,10 @@ parent_id: is-01m685msgkcqe67s8cwkqy116j
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:36.849Z
-updated_at: 2026-10-31T13:35:21.962Z
+updated_at: 2026-10-31T13:57:45.455Z
 started_at: 2026-10-31T13:35:10.390Z
-closed_at: 2026-10-31T13:35:21.962Z
-close_reason: "Done in #852 (merged e482345fe): the stage 4 review docs/project/reviews/review-2026-10-31-couzo-843-130.md is mapped, T-254 is at V3/C3, and the case at 130 adopted the smaller validated certificate T-259 (Couzo's packing re-solved by Polkovskyi), drawn by grid-slack's regularized view; the 130 regularizer solve 2.50e-13 below is a register candidate on think-ruu2."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -37,3 +37,5 @@ Stage 4 review of Francisco Couzo's s(130) certificate (#843, T-253 on the lane'
 ## Notes
 
 2026-10-31: renumbered after #851's T-252: Couzo's 130 is T-254 (was T-253); Polkovskyi's #846 refinement at 130 is in T-259.
+
+Reopened: Reopened by bold-ritchie-l2: main's result-requests.yaml still names these as validation owners until #860 merges; close them with the answer beads after it does (coordinator).

@@ -3,9 +3,9 @@ type: is
 id: is-01m5v9twagap6mhtcn7ypvvrnk
 title: Review Evan Daniel's s(299) update certificate (T-258, stage 4) and adopt it at 299 with both regularizations (#824 update)
 kind: task
-status: closed
+status: open
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,10 +15,10 @@ parent_id: is-01m5v9gnfdsstsbyk92bb6nk8e
 hold: null
 hold_until: null
 created_at: 2026-10-26T05:09:52.080Z
-updated_at: 2026-10-31T13:35:25.844Z
+updated_at: 2026-10-31T13:57:45.483Z
 started_at: 2026-10-31T08:37:27.888Z
-closed_at: 2026-10-31T13:35:25.843Z
-close_reason: "Done in #852 (merged e482345fe): the stage 4 review docs/project/reviews/review-2026-10-31-daniel-824-299-update.md is mapped, T-248 and T-258 are at V3/C3, and 299 adopted T-258, decided no better (the axis tool's view drawn). #824 answered and closed."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -39,3 +39,5 @@ The stage 4 mathematical review of Evan Daniel's s(299) certificate of the 29 Oc
 2026-10-31: renumbered after #851's T-252: the #824 update is T-258 (was T-257).
 
 2026-10-31 (bold-ritchie-l2): M-3 of docs/project/reviews/review-2026-10-31-daniel-824-299-update.md fixed: the title, Claim and pins now name the update's certificate (T-258), not T-248's. The review (lane bold-ritchie-rv-daniel, tbd-strong at xhigh) accepted both certificates for finite feasibility, T-258 for adoption and T-248 as recorded only; it is mapped on both on #852 (359ed1687), which raises both to V3/C3. The adoption at 299 and its regularization run in the same pull request.
+
+Reopened: Reopened by bold-ritchie-l2: main's result-requests.yaml still names these as validation owners until #860 merges; close them with the answer beads after it does (coordinator).

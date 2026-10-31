@@ -3,9 +3,9 @@ type: is
 id: is-01m687bfrjjekhpb89tv186htv
 title: Review Couzo's 232, 260, 307 certificates (#844, a5a5d76) and adopt at 232 and 307 with both regularizations
 kind: task
-status: closed
+status: open
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,10 +15,10 @@ parent_id: is-01m685nejvjntazeebg3zn18mt
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:38.162Z
-updated_at: 2026-10-31T13:35:23.182Z
+updated_at: 2026-10-31T13:57:45.472Z
 started_at: 2026-10-31T13:35:11.441Z
-closed_at: 2026-10-31T13:35:23.182Z
-close_reason: "Done in #852 (merged e482345fe): the stage 4 review docs/project/reviews/review-2026-10-31-couzo-844-232-260-307.md is mapped, T-255 and T-256 are at V3/C3, and 232 and 307 adopted T-256 (232 regularized by grid-slack, 307 decided no better); 260 went to T-257. The 307 regularizer solve 3.75e-12 below is a register candidate on think-ruu2."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -37,3 +37,5 @@ Stage 4 review of Francisco Couzo's a5a5d76 certificates at 260 and 307 (T-254 o
 ## Notes
 
 2026-10-31: renumbered after #851's T-252: a5a5d76 is T-255 and #844 is T-256 (were T-254, T-255).
+
+Reopened: Reopened by bold-ritchie-l2: main's result-requests.yaml still names these as validation owners until #860 merges; close them with the answer beads after it does (coordinator).

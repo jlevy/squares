@@ -3,9 +3,9 @@ type: is
 id: is-01m687bgxnsjazn2vg8sfzw0jp
 title: Review Daniel's 172, 204, 260, 293 certificates (stage 4) and adopt all four with both regularizations (#845)
 kind: task
-status: closed
+status: open
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -15,10 +15,10 @@ parent_id: is-01m685ngekhjw1cxgta3763s3s
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:39.349Z
-updated_at: 2026-10-31T13:35:24.424Z
+updated_at: 2026-10-31T13:57:45.480Z
 started_at: 2026-10-31T13:35:12.641Z
-closed_at: 2026-10-31T13:35:24.424Z
-close_reason: "Done in #852 (merged e482345fe): the stage 4 review docs/project/reviews/review-2026-10-31-daniel-845-172-204-260-293.md is mapped, T-257 is at V3/C3 and adopted at 172, 204, 260 and 293, each drawn by grid-slack's regularized view; the 172 review-queue view is the owner's (think-ruu2) and the 293 L-strip candidate is on think-ruu2."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -37,3 +37,5 @@ Stage 4 review of Evan Daniel's #845 certificates at 172, 204, 260 and 293 (T-25
 ## Notes
 
 2026-10-31: renumbered after #851's T-252: #845 is T-257 (was T-256).
+
+Reopened: Reopened by bold-ritchie-l2: main's result-requests.yaml still names these as validation owners until #860 merges; close them with the answer beads after it does (coordinator).
