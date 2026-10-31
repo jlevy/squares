@@ -11417,7 +11417,8 @@ issues:
       constructions'
     author: jlevy
     opened: '2026-10-15'
-    state: open
+    state: closed
+    closed: '2026-10-31'
     kind: defect-report
     intake: true
     triage: done
@@ -11464,6 +11465,11 @@ issues:
       by: jlevy
       kind: other
       reported: []
+    - url: https://github.com/jlevy/squares/issues/613#issuecomment-6540803366
+      date: '2026-10-31'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: 'The owner has decided the question, and the record holds the decision: Göbel''s sides as
       the baseline beyond 324 with 369 and 376 corrected, or the 42 rows recorded.'
     notes: >-
@@ -11483,6 +11489,11 @@ issues:
       off-centre constructions count the same way was not asked; think-zkxy asks it. The ask stayed
       queued, and the issue open, until the defect was recorded; D-522 records it (26 October 2026),
       so nothing is queued and the issue closes with its final comment once that change merges.
+
+      That change, #834, merged on 31 October 2026 at 07:35:19Z, and GitHub closed the issue then,
+      reading its description's mention of closing #613 as a closing reference. The final comment
+      (issuecomment-6540803366) followed at 07:49:25Z, after main's Pages run 41181205559 deployed
+      ad84e0d2e and its verify-deployment job passed (think-6m6e).
   - number: 622
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing
