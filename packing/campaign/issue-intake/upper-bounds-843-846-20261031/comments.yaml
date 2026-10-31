@@ -10,7 +10,7 @@
 #     campaign/issue-intake/upper-bounds-843-846-20261031/comments.yaml --out DIR
 
 ledger: packing/campaign/issue-intake/upper-bounds-843-846-20261031/ledger.json
-records_pr: jlevy/squares#RECORDS_PR
+records_pr: jlevy/squares#852
 
 names:
   "[Kingbird]": the Kingbird catalogue
