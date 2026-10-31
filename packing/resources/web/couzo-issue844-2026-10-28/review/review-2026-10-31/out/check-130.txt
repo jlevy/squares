@@ -1,0 +1,11 @@
+{"label": "c843-130", "n": 130, "side_float": 11.90243064598435, "side_minus_extent": 1e-15, "cpu_s": 2.3}
+  A: True least pair [2.0761969838327356e-13, 105, 128] least wall [1e-15, 0]
+  B: True pairs by area 280 least wall [1e-15, 0]
+  reader: {'count_plus_one': 'refused: header n=131 but 130 rows', 'decimal_field': 'refused: row 1 malformed'}
+  duplicate: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  box_at_extent: A accepted; B accepted
+  box_below_extent: A refused (0 pairs, walls [19]); B refused (0 pairs, walls [20])
+  pair_contact: A accepted; B accepted
+  pair_past_contact: A refused (1 pairs, walls []); B refused (1 pairs, walls [])
+  halfway: A refused (3 pairs, walls []); B refused (3 pairs, walls [])
+  rotation_reversed: A refused (44 pairs, walls []); B refused (44 pairs, walls [])

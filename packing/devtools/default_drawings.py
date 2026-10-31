@@ -463,29 +463,36 @@ _README_HX0E = (
     "beside the runs' receipts and reports"
 )
 
-#: Both generators on the three witnesses the adoption of 22 October 2026 moved to Evan
-#: Daniel's regularized views of 20 October (T-225, think-ql4v): his regularizer and
-#: grid-slack at 0.5, 1 and 5 degrees on 204, 229 and 260. The selection drew grid-slack's
-#: 0.5-degree view at 229 and decided 204 and 260 (`SETTLED`); 204's entry left when the
-#: pass of 23 October 2026 adopted T-229 there and regularized it. Their receipt, run blocks,
-#: reports and the selection's report are in
-#: packing/cases/regularized_drawings/think-ql4v-2026-10-22/.
-_RUNQL4V = (
-    ("evand-regularize", "evand-regularize-adopt-2026-10-22-n204-260-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-22-n204-260-grid-deg05"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-22-n204-260-grid-deg1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-22-n204-260-grid-deg5"),
-)
-_README_QL4V = (
-    "packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, the selection of 22 "
-    "October 2026 (think-ql4v), beside the runs' receipt, blocks and reports"
-)
+#: Both generators ran on the three witnesses the adoption of 22 October 2026 moved to Evan
+#: Daniel's regularized views of 20 October (T-225, think-ql4v), 204, 229 and 260, and drew
+#: grid-slack's 0.5-degree view at 229; 204's and 260's decisions left when the passes of
+#: 23 and 31 October 2026 moved those counts (evidence in
+#: packing/cases/regularized_drawings/think-ql4v-2026-10-22/).
 #: The algebraic houses the pass of 23 October 2026 adopted (think-ot5c) at 102, 123, 153,
 #: 207, 258, 259 and 302 were `OWED` here, to think-mbdw, from 23 to 26 October 2026:
 #: grid-slack's version 1 had no exact frame on a number-field witness, and Evan Daniel's
 #: solves are rational sides above the algebraic `U`. Version 2 draws each in its own
 #: field, and the layer draws all seven, so no entry is left (evidence in
 #: packing/cases/regularized_drawings/think-mbdw-2026-10-26/).
+
+#: Both generators on the eight witnesses the adoption of 31 October 2026 wrote (think-3guf):
+#: Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees on 130, 172, 204, 232,
+#: 260, 293, 299 and 307. The selection drew grid-slack's views at six counts and decided
+#: 299 and 307 (`SETTLED`); 130's and 260's entries, decided on the earlier witnesses, left.
+#: The regularizer's solved views at 130 and 307 lie below the new houses and are register
+#: candidates (think-ruu2). Their receipts, run blocks, reports and the selection's report
+#: are in packing/cases/regularized_drawings/think-3guf-2026-10-31/.
+_RUN3GUF = (
+    ("evand-regularize", "evand-regularize-adopt-2026-10-31-n130-307-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-10-31-n130-307-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-10-31-n130-307-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-10-31-n130-307-grid-deg5"),
+)
+_README_3GUF = (
+    "packing/cases/regularized_drawings/think-3guf-2026-10-31/README.md and "
+    "selection-adopt-2026-10-31-n130-307.md, the selection of 31 October 2026 (think-3guf), "
+    "beside the runs' receipts and reports"
+)
 
 
 #: Both generators on the four decimal Kingbird witnesses at 39, 55, 290 and 291 that an
@@ -679,29 +686,6 @@ SETTLED: dict[int, Settled] = {
         "884574231106787879705830596466720112479423463036006094003783613697035648679089"
         "255034048384043441345133675219950369224788645308472728992856849918581294863698"
         "036325476448808712",
-        _RUN3MRY,
-        "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
-        "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
-        _README_3MRY,
-    ),
-    130: Settled(
-        DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-130.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "250921464426882526303653169444097829020975824604307281852283011150757058972142"
-        "559969508496172961666302963431279497075633541250382195347705070483299813279732"
-        "120803415845130053665317070347794000297375467816283442942105324756902590703389"
-        "762189595274660221120162013731841444785581667218733460781039048372045906093721"
-        "641915027738610404907366317458762709749494320115312427695750893237805080173259"
-        "921618987357336278548606212241918660577652398872568422877877379895579591535822"
-        "3826791/2107789676725298666193661675755847082298554798063725330136427543187126"
-        "674954075453066950489002673582475888549692886919732983408156930751180612925892"
-        "073217848812306928019525930798318698961001915305820299106403652691400131087029"
-        "853506075984904755752346967894631198747712195221280373396628964268330754468916"
-        "035604179611823576547135236151090337594307674661313709595700408396816941459410"
-        "703443698843111009821340837624580865588367194479454858056853771905732163621753"
-        "60455585267880",
         _RUN3MRY,
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
@@ -918,18 +902,6 @@ SETTLED: dict[int, Settled] = {
         "overlap at this side)",
         _README_3MRY,
     ),
-    260: Settled(
-        DECIDED,
-        _T225,
-        _T225_CERTS + "n-260.cert.gz",
-        _T225_REVISION,
-        "4161438312629953048686574163329/250000000000000000000000000000",
-        _RUNQL4V,
-        "the house is Evan Daniel's own display regularization (T-225): his regularizer's "
-        "same-side and solved views and grid-slack's at 0.5, 1 and 5 degrees each draw no "
-        "change",
-        _README_QL4V,
-    ),
     263: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",
@@ -1080,6 +1052,21 @@ SETTLED: dict[int, Settled] = {
         "rows overlap at this side)",
         _README_3MRY,
     ),
+    299: Settled(
+        DECIDED,
+        "[Daniel n299 update 2026-10-29]",
+        "resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/"
+        "s299_1028.cert",
+        "0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+        "17801238549388584084680137655023/1000000000000000000000000000000",
+        _RUN3GUF,
+        "every view is refused at row 7 against the axis tool's view of this witness, a "
+        "house or stage total of shared sides falling: Evan Daniel's certified KKT solve "
+        "at the witness's side and grid-slack's at all three thresholds each draw more "
+        "light and uneven squares, though fewer near-axis squares and angle classes; none "
+        "is below the side",
+        _README_3GUF,
+    ),
     304: Settled(
         DECIDED,
         "[Daniel Kaggle descents 2026-10-24]",
@@ -1122,6 +1109,20 @@ SETTLED: dict[int, Settled] = {
         "grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed rows overlap at this "
         "side)",
         _README_3MRY,
+    ),
+    307: Settled(
+        DECIDED,
+        "[Couzo issue 844 2026-10-28]",
+        "resources/web/couzo-issue844-2026-10-28/source/certificates/n307.cert",
+        "712c6a6e9ef58a9521784e6b7e236af813422de7",
+        "2707897969116659515550794271467451840032974544063449693/"
+        "150612387934832692306604131393579915999000000000000000",
+        _RUN3GUF,
+        "grid-slack's views at all three thresholds are refused at row 7 against the axis "
+        "tool's view of this witness, a house total of shared sides falling and more light "
+        "and uneven squares drawn; Evan Daniel's certified KKT solve is 3.75e-12 below the "
+        "side and held at row 3 as a register candidate (think-ruu2), never admitted here",
+        _README_3GUF,
     ),
 }
 

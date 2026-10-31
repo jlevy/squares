@@ -1,0 +1,354 @@
+# What `python -m devtools.intake_ledger gather` reads: the upper bounds at n <= 324 that lane
+# L2 of the intake pass of 31 October 2026 (think-3guf) imports. Four issues (#843 to #846), Evan
+# Daniel's update comment on #824, and three watched repositories' publications that no issue
+# reports: Mykhailo Polkovskyi's ten commits of 23 October (e386aab to fbc1749) past the 7e82c64
+# read, and Francisco Couzo's a5a5d76 of 28 October. GitHub's activity log was not readable from
+# this session (the API refused the repositories), so no push time is recorded: each publication
+# is dated by its commit, and each issue or comment by its creation; at every count the order
+# would be the same with any push between its commit and the next report's time. The starts are
+# frozen at main 3978a7f61 (#841's merge). Each claim's exact side is its certificate's header,
+# read by the packets' claim records (acquisition/claims.json), which the lane wrote from main
+# 3978a7f61 on 31 October. The Kaggle per-puzzle sides the issues quote state no packing and are
+# no report. Polkovskyi's ab8e833 (2026-10-26T04:52:18Z) adds certificates at 11, 17 to 19, 26 to
+# 29 and 37 to 41, each above its case's record (by 3.0e-12 to 5.5e-12 where the record is
+# rational or a closed form the lane evaluated), so none is walked here; intake-watch.yaml says so.
+format: intake-ledger-sources-v1
+read_at_main: 3978a7f61ca164f78291ed91534b8c9a5b9cafd7
+read_on: '2026-10-31'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l2
+  branch: claude/bold-ritchie-xo28us-upper
+  commit: 3978a7f61ca164f78291ed91534b8c9a5b9cafd7
+  note: The packets' claim records, written on the lane's branch from main 3978a7f61 and read here by path.
+reports:
+- report: Mishapolk/square-packing-records@e386aab
+  url: https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898
+  reported_at: '2026-10-23T23:36:37Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [211, 227, 237, 241]
+  - lane: l2
+    packet: mishapolk-issue846-2026-10-30
+    record: claims.json
+    counts: [204]
+  claims:
+  - n: 211
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-188
+      source: "the commit's title, 'Certify 6 world records under 308 ... beating Couzo, Evan Daniel, and PingYou'"
+  - n: 227
+    refines:
+      packing_of: Joost de Winter
+      entry: T-225
+      source: "the commit's title, 'Certify 6 world records under 308 ... beating Couzo, Evan Daniel, and PingYou'"
+  - n: 237
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-190
+      source: "the commit's title, 'Certify 6 world records under 308 ... beating Couzo, Evan Daniel, and PingYou'"
+  - n: 241
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-182
+      source: "the commit's title, 'Certify 6 world records under 308 ... beating Couzo, Evan Daniel, and PingYou'"
+  note: >-
+    A publication in a watched repository with no issue (the owner, 2026-10-14), dated by its commit
+    (committed 2026-10-23T23:36:37Z); its push is not read. The commit rewrites five certificates and the
+    index's 105 row, which restates T-229's side.
+- report: Mishapolk/square-packing-records@07b3393
+  url: https://github.com/Mishapolk/square-packing-records/commit/07b339381b9528847a9f737461e51b7db9878436
+  reported_at: '2026-10-23T23:49:31Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [270]
+  note: A publication in a watched repository with no issue, dated by its commit; the index credits the 270
+    certificate to Evan Daniel, 'strict certificate verified by Mishapolk'.
+- report: Mishapolk/square-packing-records@6664afc
+  url: https://github.com/Mishapolk/square-packing-records/commit/6664afc379e11d3865ca0892e112898a6706dc92
+  reported_at: '2026-10-23T23:52:59Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [154]
+  claims:
+  - n: 154
+    refines:
+      packing_of: Evan Daniel
+      entry: T-222
+      source: "the index certified_bounds.json at 52aa267, 'packing refined from Evan Daniel'"
+  note: A publication in a watched repository with no issue, dated by its commit.
+- report: Mishapolk/square-packing-records@3d409a5
+  url: https://github.com/Mishapolk/square-packing-records/commit/3d409a5909a48907fbac8d22af6ffe29fbe4c44d
+  reported_at: '2026-10-23T23:53:26Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [155]
+  claims:
+  - n: 155
+    refines:
+      packing_of: Evan Daniel
+      entry: T-197
+      source: "the index certified_bounds.json at 52aa267, 'packing refined from Evan Daniel'"
+  note: A publication in a watched repository with no issue, dated by its commit.
+- report: Mishapolk/square-packing-records@fb8b812
+  url: https://github.com/Mishapolk/square-packing-records/commit/fb8b812b5adb9d6b5e9fa334b8c27d8005357fc0
+  reported_at: '2026-10-23T23:53:42Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [183]
+  claims:
+  - n: 183
+    refines:
+      packing_of: Evan Daniel
+      entry: T-220
+      source: "the index certified_bounds.json at 52aa267, 'packing refined from Evan Daniel & Francisco Couzo'"
+  note: A publication in a watched repository with no issue, dated by its commit.
+- report: Mishapolk/square-packing-records@c695b4c
+  url: https://github.com/Mishapolk/square-packing-records/commit/c695b4c79f41d2f029f0ecd4d6b74bb01293aec8
+  reported_at: '2026-10-23T23:54:00Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [236]
+  claims:
+  - n: 236
+    refines:
+      packing_of: Evan Daniel
+      entry: T-218
+      source: "the index certified_bounds.json at 52aa267, 'packing refined from Evan Daniel'"
+  note: A publication in a watched repository with no issue, dated by its commit.
+- report: Mishapolk/square-packing-records@6c0d74a
+  url: https://github.com/Mishapolk/square-packing-records/commit/6c0d74aa4f6431db178f68d547b1adf44d74574d
+  reported_at: '2026-10-23T23:54:23Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [271]
+  claims:
+  - n: 271
+    refines:
+      packing_of: Evan Daniel
+      entry: T-219
+      source: "the index certified_bounds.json at 52aa267, 'packing refined from Evan Daniel'"
+  note: A publication in a watched repository with no issue, dated by its commit.
+- report: Mishapolk/square-packing-records@e9f3979
+  url: https://github.com/Mishapolk/square-packing-records/commit/e9f397908922f7c3560e77bfff5019826aa43b51
+  reported_at: '2026-10-23T23:56:18Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [88]
+  note: A publication in a watched repository with no issue, dated by its commit; the index says 'packing
+    refined from PingYou Ltd'.
+- report: Mishapolk/square-packing-records@a0ba35f
+  url: https://github.com/Mishapolk/square-packing-records/commit/a0ba35f6faa9887804c5202f2f33dde7d2f38b6e
+  reported_at: '2026-10-23T23:56:28Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [126]
+  note: A publication in a watched repository with no issue, dated by its commit; the index says 'packing
+    refined from PingYou Ltd'.
+- report: Mishapolk/square-packing-records@fbc1749
+  url: https://github.com/Mishapolk/square-packing-records/commit/fbc17493797da81361d95d5534cac37c67e496b8
+  reported_at: '2026-10-23T23:56:35Z'
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-1023-refinements-2026-10-30
+    record: claims.json
+    counts: [152]
+  note: A publication in a watched repository with no issue, dated by its commit; the index says 'packing
+    refined from PingYou Ltd'.
+- report: '#843'
+  issue: 843
+  holders: Francisco Couzo
+  bead: think-big9
+  lanes:
+  - lane: l2
+    packet: couzo-issue843-2026-10-28
+    record: claims.json
+    counts: [130]
+  claims:
+  - n: 130
+    new_packing:
+      source: "#843's lineage: 'By your convention that makes it a new packing found from #574's, not a refinement'"
+      continues: "PR #574's packing (Nate Chaoweeraprasit, improved by Siddharth Gupta and PingYou Ltd), by the
+        author's fq, basin-hopping and SLP searches"
+  note: >-
+    The issue names 3a4d95c, committed at 2026-10-27T19:42:09Z, 7 minutes 48 seconds before the issue;
+    the push time was not read.
+- report: franciscouzo/square-packing@a5a5d76
+  url: https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56
+  reported_at: '2026-10-28T01:41:35Z'
+  holders: Francisco Couzo, after ntumlnoob
+  bead: think-n61j
+  lanes:
+  - lane: l2
+    packet: couzo-a5a5d76-2026-10-28
+    record: claims.json
+    counts: [260, 307]
+  note: >-
+    A publication in a watched repository with no issue, dated by its commit. Its message and credit records
+    say both certificates refine the packings ntumlnoob published in the Kaggle notebook 'First 22.268681355
+    Public Code With Explanation' (run 362957087), which no report here holds, so neither is classified as a
+    refinement of a recorded packing.
+- report: '#844'
+  issue: 844
+  holders: Francisco Couzo, after Alex Chilton and ntumlnoob
+  bead: think-n61j
+  lanes:
+  - lane: l2
+    packet: couzo-issue844-2026-10-28
+    record: claims.json
+    counts: [232, 260, 307]
+  claims:
+  - n: 260
+    new_packing:
+      source: "the 31 October review (F-3): 'at 260 the #844 packing is a new arrangement found from ntumlnoob's
+        packing, not a refinement of it'"
+      continues: "ntumlnoob's Kaggle packing, through the author's a5a5d76 refinement of it, by an Ellsworth-style
+        structural move and SLP"
+  - n: 307
+    refines:
+      packing_of: ntumlnoob
+      entry: franciscouzo/square-packing@a5a5d76
+      source: "#844 calls 307 a refinement; the 31 October review: 'the #844 packing is your a5a5d76 packing,
+        mirrored (x ↦ s − x) and refined'"
+  note: >-
+    The issue names 712c6a6, committed at 2026-10-28T15:57:20Z, 5 hours 51 minutes before the issue. It says
+    none of the three packings is the author's construction: each refines a Kaggle notebook packing no report
+    here holds (Alex Chilton's at 232, ntumlnoob's at 260 and 307); it calls 307 a refinement and leaves 232 and
+    260 to the record. The 31 October review measured 307 as the author's a5a5d76 packing mirrored and refined,
+    and 260 as a new arrangement, 170 squares beyond 0.1 of it; 232's start is not published, and it is not
+    classified.
+- report: '#845'
+  issue: 845
+  holders: Evan Daniel
+  bead: think-17wo
+  lanes:
+  - lane: l2
+    packet: evand-issue845-2026-10-29
+    record: claims.json
+    counts: [172, 204, 260, 293]
+  claims:
+  - n: 172
+    new_packing:
+      source: "#845: 'a new packing (a different local minimum from the register's ...), found by our search'"
+      continues: the s(199) record of Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta, less one
+        L-shaped strip
+  - n: 204
+    new_packing:
+      source: "#845: 'a new packing found by our search ... It is not a refinement of the register's packing'"
+      continues: Daniil Ostashev's s(176) packing (#575), used as a seed at 204
+  - n: 260
+    new_packing:
+      source: "#845: 'a new packing found by our search ... It is not a refinement of #844's packing'"
+      continues: Kirill Tymchishin's (kirilltym) s(260) from his public Kaggle notebook 'Square Packing Lab | CPU/CUDA/MPS'
+  - n: 293
+    new_packing:
+      source: "#845: 'our 260 packing plus one L-shaped strip (a row and a column, Friedman's L step)'"
+      continues: the source's own 260 packing of this report, plus an L-shaped strip
+  note: >-
+    The issue names d2d5dd9, committed at 2026-10-29T04:33:59Z, 12 minutes 41 seconds before the issue.
+- report: '#824 update'
+  comment: 6488202753
+  issue: 824
+  holders: Evan Daniel
+  bead: think-3xn9
+  lanes:
+  - lane: l2
+    packet: evand-n299-update-2026-10-29
+    record: claims.json
+    counts: [299]
+  claims:
+  - n: 299
+    new_packing:
+      source: "#824's update: 'by our vocabulary this is a new packing, not a refinement'"
+      continues: "the source's own packing of #824's opening post, by four generations of refill and an exact descent"
+  note: >-
+    The update names 0e76d9f, committed at 2026-10-29T04:44:41Z, 2 minutes 8 seconds before the comment.
+- report: '#846'
+  issue: 846
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  bead: think-pg1y
+  lanes:
+  - lane: l2
+    packet: mishapolk-issue846-2026-10-30
+    record: claims.json
+    counts: [105, 130, 146, 156, 182, 204, 211, 229, 241, 260, 268, 299, 304, 308]
+  claims:
+  - n: 105
+    refines:
+      packing_of: Ryan Xu
+      entry: T-229
+      source: "#846, Category B: 'Micro-Refinement Packings ... refining standing certificates'"
+  - n: 130
+    refines:
+      packing_of: Francisco Couzo
+      entry: '#843'
+      source: "the certificate's header: 'dilation certificate (dilate_cert.py, delta 2e-14) of
+        isolated_lab/tmp_couzo_noalm.txt'; #846: 'beats Couzo Issue #843 by -2.08 picometers'"
+  - n: 146
+    refines:
+      packing_of: Evan Daniel
+      entry: T-187
+      source: "#846, Category B: 'Micro-Refinement Packings ... refining standing certificates'"
+  - n: 156
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-186
+      source: "#846, Category B: 'Micro-Refinement Packings ... refining standing certificates'"
+  - n: 229
+    refines:
+      packing_of: Evan Daniel
+      entry: T-225
+      source: "#846, Category B: 'Micro-Refinement Packings ... refining standing certificates'"
+  - n: 308
+    refines:
+      packing_of: Evan Daniel
+      entry: T-221
+      source: "#846, Category B: 'Micro-Refinement Packings ... refining standing certificates'"
+  note: >-
+    The issue names 52aa267, committed at 2026-10-30T05:40:00Z, 6 minutes 42 seconds before the issue. Its 204,
+    211 and 241 certificates are first committed at e386aab, unchanged since; at 204, 211 and 241 the exact
+    fraction the issue's table prints is not the certificate's header (the header is read here), and at 268 the
+    printed fraction's denominator has one digit more than the header's.
+exceptions: []
+other_items: []

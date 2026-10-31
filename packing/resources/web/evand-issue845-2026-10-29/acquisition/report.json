@@ -1,0 +1,152 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/845",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel issue 845 2026-10-29]",
+  "report_evidence": "E-evand-845-certificate-report",
+  "receipt_format": "evand-845-exact-replay-v1",
+  "witness_prefix": "W-evand-845-n",
+  "claim_limitations": "Complete d2d5dd9 rational centre/half-angle certificates, unchanged at 0e76d9f, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-31",
+  "read_at_main": "3978a7f61ca164f78291ed91534b8c9a5b9cafd7",
+  "certificates": [
+    {
+      "n": 172,
+      "path": "search/packer/candidates/s172_1028.cert",
+      "format": "evand-cert",
+      "offered": "13.617935698382",
+      "first_committed": "2026-10-29T04:33:59Z"
+    },
+    {
+      "n": 204,
+      "path": "search/packer/candidates/s204_1028.cert",
+      "format": "evand-cert",
+      "offered": "14.807627471882",
+      "first_committed": "2026-10-29T04:33:59Z"
+    },
+    {
+      "n": 260,
+      "path": "search/packer/candidates/s260_1028.cert",
+      "format": "evand-cert",
+      "offered": "16.633982502122",
+      "first_committed": "2026-10-29T04:33:59Z"
+    },
+    {
+      "n": 293,
+      "path": "search/packer/candidates/s293_1028.cert",
+      "format": "evand-cert",
+      "offered": "17.633982502123",
+      "first_committed": "2026-10-29T04:33:59Z"
+    }
+  ],
+  "requested": [
+    172,
+    204,
+    260,
+    293
+  ],
+  "replayed": [
+    172,
+    204,
+    260,
+    293
+  ],
+  "houses": [
+    {
+      "n": 172,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Francisco Couzo, improved by Evan Daniel, PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "13.6189889568993984289",
+      "verified_value": "13.6189889568993984289",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    },
+    {
+      "n": 204,
+      "reader": "[Mishapolk n204 2026-10-22]",
+      "source_key": "[Mishapolk n204 2026-10-22]",
+      "holders": "Francisco Couzo, improved by Mishapolk",
+      "result": "T-231",
+      "reported_value": "14.8086428305130872",
+      "verified_value": "14.8086428305130872",
+      "evidence": [
+        "E-mishapolk-n204-exact-feasibility",
+        "E-mishapolk-n204-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 260,
+      "reader": "[Daniel regularized lists 2026-10-20]",
+      "source_key": "[Daniel regularized lists 2026-10-20]",
+      "holders": "Francisco Couzo, improved by Evan Daniel",
+      "result": "T-225",
+      "reported_value": "16.6457532505198122",
+      "verified_value": "16.6457532505198122",
+      "evidence": [
+        "E-evand-regularized-1020-exact-feasibility",
+        "E-evand-regularized-1020-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 293,
+      "reader": "[evand exact optima 2026-10-05]",
+      "source_key": "[Kingbird]",
+      "holders": "David Ellsworth (the Kingbird catalogue), verified by T-101's exact ceiling",
+      "result": "T-101",
+      "reported_value": "17.63414634146341",
+      "verified_value": "17.63414634146342",
+      "evidence": [
+        "E-evand-exact-ceilings-2026-10-05-exact-replay",
+        "E-evand-exact-ceilings-2026-10-05-source-replay",
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [
+    {
+      "n": 172,
+      "report": "T-244 (#804)",
+      "url": "https://github.com/jlevy/squares/issues/804",
+      "holders": "Hyukdong Kim, of the house's packing",
+      "result": "T-244",
+      "printed": "13.6189889568993984288635016293504898995040150521961793814779549035630128682876859236484103034563728798",
+      "rounding": "unstated"
+    },
+    {
+      "n": 260,
+      "report": "T-255, Couzo of 28 October (no issue)",
+      "url": "https://github.com/franciscouzo/square-packing/commit/a5a5d76790679902ef57270f6d4c2d01786c5a56",
+      "holders": "Francisco Couzo, after ntumlnoob",
+      "reader": "[Couzo a5a5d76 2026-10-28]"
+    },
+    {
+      "n": 260,
+      "report": "T-256 (#844)",
+      "url": "https://github.com/jlevy/squares/issues/844",
+      "holders": "Francisco Couzo, after ntumlnoob",
+      "reader": "[Couzo issue 844 2026-10-28]"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's certificates at 172, 204, 260 and 293 at d2d5dd9, issue 845",
+    "headline": "Daniel's new packings of 172, 204, 260 and 293 squares, 1.64e-4 to 1.18e-2 below each house",
+    "significance": 3,
+    "source_checks": "The issue says the source's two exact checkers, search/exact/verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), byte-identical to the copies the n183 packet retains, both report VALID on all five certificate files, and that they share an author and the certificate format. At 172 the certificate is the source's exact KKT point, with numerical evidence at 80 digits, not interval proofs, that it is a local minimum of S strict modulo 69 exact flat motions; s172_1028_regularized.cert is a regularized view at the same side. At 204, 260 and 293 the exact solver did not converge and the certificates dilate the binary64 packings by 1.5e-11 to 1.8e-11; local optimality is not established there. The commit ends with a Co-Authored-By trailer naming Claude. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose population searches over his packing store found all four, after the starts the issue asks to be credited: at 172 the s(199) record of Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta, from which an explorer search and the removal of one L-shaped strip gave 172 at side - 1; at 204 Daniil Ostashev's s(176) packing (#575), used as a seed; at 260 Kirill Tymchishin's (kirilltym) s(260) from his public Kaggle notebook 'Square Packing Lab | CPU/CUDA/MPS' (side 16.638543986, 26 October), whose tilted island a fault-line composition and refill at 405 improved before a composition run put it in a 260 frame; and at 293 the 260 packing plus one L-shaped strip (Friedman's L step), with the same credit. The issue calls all four new packings, none a refinement of the register's. Kaggle per-puzzle sides it quotes at 172, 204 and 293 state no packing and are no report. The source's credits say its work was produced by Claude (Anthropic) under human direction.",
+    "next_rung": "Independently review the retained replay and the certificates (stage 4): a clean-room exact checker, the identity against the house's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt it at 172, 204, 260 and 293 under the house rule, with both strong generators' regularization and the flip of each new house in the same change.",
+    "bead": "think-17wo",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "independent",
+      "credit": "Daniel after Chaoweeraprasit, Gupta, Ostashev, kirilltym, Friedman",
+      "short_credit": "Daniel after Chaoweeraprasit et al.",
+      "note": "Four complete exact certificates first committed at evand/square-packing@d2d5dd96cfdbded476050f8ba8577773a91c6ac1 on 29 October 2026, unchanged at the head 0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d the packet pins, reported on issue 845: the exact KKT point at 172 and dilation certificates at 204, 260 and 293, each a new packing by the source's word, with the starts the issue credits. MIT-licensed; Claude assistance disclosed. No global optimality claim. Retained in web/evand-issue845-2026-10-29/."
+    }
+  }
+}

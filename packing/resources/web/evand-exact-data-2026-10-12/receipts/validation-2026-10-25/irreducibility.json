@@ -1,0 +1,102 @@
+{
+  "method": "distinct-degree factorization modulo primes below 2^16 (gmpy2 Kronecker multiplication, numpy); degree-pattern certificate",
+  "degree": 7213,
+  "content": 1,
+  "primes": [
+    {
+      "q": 40009,
+      "factor_count": 15,
+      "degrees": [
+        1,
+        2,
+        4,
+        6,
+        17,
+        23,
+        36,
+        191,
+        248,
+        272,
+        293,
+        501,
+        698,
+        1991,
+        2930
+      ],
+      "possible_left": 6140,
+      "cpu_seconds": 217.9
+    },
+    {
+      "q": 40013,
+      "factor_count": 4,
+      "degrees": [
+        3,
+        4,
+        86,
+        7120
+      ],
+      "possible_left": 10,
+      "cpu_seconds": 333.2
+    },
+    {
+      "q": 40031,
+      "factor_count": 10,
+      "degrees": [
+        2,
+        2,
+        10,
+        57,
+        128,
+        135,
+        417,
+        472,
+        2536,
+        3454
+      ],
+      "possible_left": 2,
+      "cpu_seconds": 258.0
+    },
+    {
+      "q": 40037,
+      "factor_count": 15,
+      "degrees": [
+        1,
+        2,
+        4,
+        8,
+        8,
+        13,
+        15,
+        26,
+        35,
+        123,
+        188,
+        574,
+        1363,
+        1874,
+        2979
+      ],
+      "possible_left": 2,
+      "cpu_seconds": 207.1
+    },
+    {
+      "q": 40039,
+      "factor_count": 6,
+      "degrees": [
+        24,
+        28,
+        88,
+        147,
+        1011,
+        5915
+      ],
+      "possible_left": 0,
+      "cpu_seconds": 278.6
+    }
+  ],
+  "skipped": [],
+  "possible_proper_factor_degrees": [],
+  "certificate_empty_after_primes": 5,
+  "irreducible_over_Q": true,
+  "cpu_seconds": 1299.8
+}

@@ -1,0 +1,35 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n299-update-2026-10-29",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+  "source_commit": "0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+  "retrieved_at_utc": "2026-10-31T06:10Z",
+  "git_scope": "Blobless clone of evand/square-packing fetched on 31 October 2026 for the update to issue #824, and a sparse checkout of 0e76d9f (committed 2026-10-29T04:44:41Z, 'candidates: s(299) 17.801238549389 (update to jlevy#824; KKT certificate)'), the repository's head and the commit the update comment names, 2 minutes 8 seconds before it was posted. Retained: the licence, the credits, and the six files of the s299_1028 set under search/packer/candidates/. The two exact checkers are pinned against the identical copies the n183 packet retains. GitHub's activity log was not readable from this session, so no push time is recorded. The rest of the tree is pinned by the commit; no source program was executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained, blob 52cf89d, unchanged since 8a8879a). CREDITS.md says the repository's work was 'Produced by Claude (Anthropic) in a single session under human direction'; the certificate's commit carries a Co-Authored-By trailer naming Claude.",
+  "claims": [
+    "search/packer/candidates/s299_1028.cert states s(299) <= 17801238549388584084680137655023/10^30 = 17.801238549388584084680137655023; Evan Daniel's update comment on issue #824 (issuecomment-6488202753, 2026-10-29T04:46:49Z) reports it rounded up at 12 places, 17.801238549389, 2.46e-3 below the opening post's 17.803695435333 (T-248), and prints its SHA-256.",
+    "The comment calls it an exact KKT certificate whose 80-digit point s299_1028.exact.txt is a local minimum of S strict modulo 119 exact flat motions, with no corner-corner MILP descent, 64 corner-corner contacts and 33 rattlers, by numerical evidence at 80 digits and not interval proofs; and a new packing found from the opening post's packing by four generations of refill and an exact descent, with the credit request of the opening post unchanged (Chris Deotte for the method and the start).",
+    "The comment says verify_cert.py and verify_cert2.py both report VALID, and quotes Kaggle's per-puzzle leaderboard at 17.793636991 for Cats and boxes, below this, with no coordinates. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/packer/candidates/s299_1028.cert",
+    "search/packer/candidates/s299_1028.exact.txt",
+    "search/packer/candidates/s299_1028.input.txt",
+    "search/packer/candidates/s299_1028.json",
+    "search/packer/candidates/s299_1028.predescent.txt",
+    "search/packer/candidates/s299_1028_prior.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/exact/verify_cert*.py",
+      "reason": "The source's two standalone exact checkers, which the comment names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact"
+    }
+  ]
+}

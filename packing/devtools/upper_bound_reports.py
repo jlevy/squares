@@ -1508,6 +1508,18 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel n182 2026-10-25]": _import("evand-n182-2026-10-25"),
     # T-248: Evan Daniel's new arrangement at 299 of issue 824, at 1be69ca (think-3xn9).
     "[Daniel n299 2026-10-26]": _import("evand-n299-2026-10-26"),
+    # The intake pass of 31 October 2026, lane L2 (think-3guf): Mykhailo Polkovskyi's
+    # certificates of 23 October at e386aab to fbc1749, which no issue reports, and of issue
+    # 846 (think-pg1y); Francisco Couzo's 130 of issue 843 (think-big9), his a5a5d76, which
+    # no issue reports, and issue 844 (think-n61j); Evan Daniel's issue 845 (think-17wo) and
+    # his update to issue 824 (think-3xn9).
+    "[Mishapolk refinements 2026-10-23]": _import("mishapolk-1023-refinements-2026-10-30"),
+    "[Couzo n130 2026-10-27]": _import("couzo-issue843-2026-10-28"),
+    "[Couzo a5a5d76 2026-10-28]": _import("couzo-a5a5d76-2026-10-28"),
+    "[Couzo issue 844 2026-10-28]": _import("couzo-issue844-2026-10-28"),
+    "[Daniel issue 845 2026-10-29]": _import("evand-issue845-2026-10-29"),
+    "[Daniel n299 update 2026-10-29]": _import("evand-n299-update-2026-10-29"),
+    "[Mishapolk issue 846 2026-10-30]": _import("mishapolk-issue846-2026-10-30"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
