@@ -88,9 +88,27 @@ def test_the_first_count_builds_to_the_receipt_s_digest_and_passes_both_routes()
 
 
 def test_the_receipt_holds() -> None:
-    """The receipt reads back: the digests the custody binds, five counts of 5,134 rows,
-    each certificate verified on both routes and every control refused by both."""
+    """The receipt reads back: its header, five counts of 5,134 rows, each certificate
+    written out again to the size, side and SHA-256 the receipt names, verified on both
+    routes, and every control refused by both."""
     assert sample.check() == []
     receipt = json.loads((sample.PACKET / sample.RECEIPT).read_text(encoding="utf-8"))
     assert receipt["coverage"] == {"checked": 5, "of": 5134, "unit": "rows"}
     assert [row["n"] for row in receipt["rows"]] == list(sample.SAMPLE)
+
+
+def test_an_altered_receipt_is_refused(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """In a copy of the packet, a receipt naming another record, another certificate at
+    2505, or a route that accepted a control at 7500 is named for each."""
+    copied = _moved(tmp_path, monkeypatch)
+    path = copied / sample.RECEIPT
+    receipt = json.loads(path.read_text(encoding="utf-8"))
+    receipt["doi"] = "10.5281/zenodo.23681705"
+    receipt["rows"][1]["certificate_sha256"] = "0" * 64
+    receipt["rows"][3]["controls"][0]["refused_by_independent"] = False
+    path.write_text(json.dumps(receipt), encoding="utf-8")
+    assert sample.check() == [
+        "the receipt's header is not this module's",
+        "n=2505: the builder writes another certificate than the receipt's",
+        "n=7500: a route accepted a control",
+    ]

@@ -267,14 +267,25 @@ def stable(row: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def check(*, again: bool = False) -> list[str]:
-    """Problems with the receipt: its format and pin, the counts, every certificate
-    verified on both routes and every control refused by both; with ``again``, each count
-    replayed and compared, timings aside. Empty when it holds."""
+    """Problems with the receipt: its header (format, issue, record, table, builder and
+    pin), the counts, every certificate verified on both routes and every control refused
+    by both, and each certificate written out again by the builder to the size, side and
+    SHA-256 the receipt names (about 0.4 CPU-seconds for the five); with ``again``, each
+    count replayed and compared, timings aside. Empty when it holds."""
     from devtools import couzo_678_replay as base  # noqa: PLC0415
 
     receipt = json.loads((PACKET / RECEIPT).read_text(encoding="utf-8"))
     problems = []
-    if (receipt["format"], receipt.get("source_commit")) != (FORMAT, SOURCE_COMMIT):
+    header = ("format", "issue", "doi", "table", "builder", "source_commit")
+    wanted = (
+        FORMAT,
+        ISSUE,
+        DOI,
+        f"{PACKET_PATH}/{TABLE}",
+        f"{PACKET_PATH}/{BUILDER}",
+        SOURCE_COMMIT,
+    )
+    if tuple(receipt.get(key) for key in header) != wanted:
         problems.append("the receipt's header is not this module's")
     if receipt["coverage"] != {"checked": len(SAMPLE), "of": len(rows()), "unit": "rows"}:
         problems.append("the receipt's coverage is not the sample's")
@@ -282,8 +293,20 @@ def check(*, again: bool = False) -> list[str]:
         return [*problems, "the receipt's counts are not the sample"]
     if receipt["controls"] != list(base.CONTROLS):
         problems.append("the receipt's controls are not the routes' six")
+    build = builder().build
     for kept in receipt["rows"]:
         n = kept["n"]
+        # The certificate is written out and never retained, so its digest is its name
+        # (a generated artifact under OR-16): the builder must write the one decided.
+        cert = certificate(n, build)
+        text = legacy.serialize(cert).encode("utf-8")
+        written = (_sha256(text), len(text), legacy.literal(cert.side))
+        if written != (
+            kept["certificate_sha256"],
+            kept["certificate_bytes"],
+            kept["exact_side"],
+        ):
+            problems.append(f"n={n}: the builder writes another certificate than the receipt's")
         if not kept["verified"]:
             problems.append(f"n={n}: the certificate failed a route")
         if [item["control"] for item in kept["controls"]] != list(base.CONTROLS) or not all(

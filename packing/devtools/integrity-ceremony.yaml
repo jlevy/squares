@@ -100,6 +100,14 @@ allowlist:
       decided on both routes to the one the decisions receipt names, so the cross-check
       is of the packing the lemma decided. The retained packet files are read from Git
       and compared with nothing.
+  - path: packing/devtools/filled_end_sample.py
+    kind: generated-artifact
+    boundary: >-
+      The five certificates the author's builder writes out from #847's rows are derived
+      and not retained (OR-18), so no Git revision names them: the replay receipt names
+      each by its SHA-256, size and side, and `check` writes each again with the retained
+      builder and holds it to the receipt, so the receipt is of the packings the routes
+      decided. The retained packet files are read from Git and compared with nothing.
   - path: packing/devtools/hosted_shards.py
     kind: download
     boundary: >-

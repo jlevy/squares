@@ -13,11 +13,13 @@ every count's digest are in the slow lane.
 
 from __future__ import annotations
 
+import io
 import json
 import re
 import shutil
 import warnings
 import zipfile
+import zlib
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
@@ -312,6 +314,70 @@ def test_a_deposit_kept_as_its_archive_is_read_as_untrusted_data(tmp_path: Path)
     (tmp_path / "plain.zip").write_bytes(b"not an archive")
     with pytest.raises(checker.CustodyError, match="File is not a zip file"):
         checker.archived_records(replace(small, archived="plain.zip"))
+
+
+def _patched(data: bytearray, change: str) -> None:
+    """One archive fault, in place: 40 bytes of the deflate stream inverted, the
+    encryption flag set, or the compression method made 99, in both headers."""
+    local, central = data.index(b"PK\x03\x04"), data.index(b"PK\x01\x02")
+    if change == "corrupt":
+        start = local + 30 + len("records.csv") + 1000
+        data[start : start + 40] = bytes(byte ^ 0xFF for byte in data[start : start + 40])
+    elif change == "encrypted":
+        data[local + 6] |= 1
+        data[central + 8] |= 1
+    else:
+        data[local + 8] = data[central + 10] = 99
+
+
+def test_a_corrupt_encrypted_or_unknown_member_is_refused_as_custody(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Version 5's own ``records.csv``, deflated, with its stream corrupted, its member
+    marked encrypted, or its compression method one ``zipfile`` does not know: each is a
+    `CustodyError`, caused by ``zlib.error``, ``RuntimeError`` and
+    ``NotImplementedError``. ``check`` names the deposit's custody failure and goes on,
+    and the command prints FAILED rather than a traceback."""
+    text = checker.archived_records(checker.V5).encode("utf-8")
+    causes = {"corrupt": zlib.error, "encrypted": RuntimeError, "unknown": NotImplementedError}
+    broken = {}
+    for change, cause in causes.items():
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as written:
+            written.writestr("records.csv", text)
+        data = bytearray(buffer.getvalue())
+        _patched(data, change)
+        (tmp_path / f"{change}.zip").write_bytes(bytes(data))
+        broken[change] = replace(checker.V5, packet=str(tmp_path), archived=f"{change}.zip")
+        with pytest.raises(checker.CustodyError) as refused:
+            checker.archived_records(broken[change])
+        assert isinstance(refused.value.__cause__, cause), change
+    (problem,) = checker.check(deposits=(broken["encrypted"],))
+    assert problem.startswith("v5.0: custody: karimi_two_strip_records_v3_lite.zip: File ")
+    assert problem.endswith("is encrypted, password required for extraction")
+    monkeypatch.setattr(checker, "DEPOSITS", (broken["unknown"],))
+    assert checker.main(["check"]) == 1
+    assert capsys.readouterr().out.splitlines()[-1] == "FAILED"
+
+
+def test_an_altered_version_5_receipt_is_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """In a copy of version 5's packet, its decisions receipt counting the author's flag
+    otherwise, and its replay receipt saying a route failed at 1253, are each named."""
+    copied = tmp_path / checker.V5.packet
+    shutil.copytree(checker.V5.home, copied)
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+    receipt = json.loads(checker.V5.decisions.read_text(encoding="utf-8"))
+    receipt["author_columns"]["counts"]["below_all_reported"]["no"] += 1
+    checker.V5.decisions.write_text(json.dumps(receipt), encoding="utf-8")
+    sample = json.loads(checker.replay_path(checker.V5).read_text(encoding="utf-8"))
+    sample["rows"][1]["verified"] = False
+    checker.replay_path(checker.V5).write_text(json.dumps(sample), encoding="utf-8")
+    assert checker.check(deposits=(checker.V5,)) == [
+        "v5.0: the author's columns are not counted as the rows",
+        "v5.0 n=1253: the written-out certificate failed a route",
+    ]
 
 
 def test_write_out_builds_no_square_past_n() -> None:

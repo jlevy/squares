@@ -27,7 +27,9 @@ no register entry; it retains the sources and the stage 4 samples that rest on t
 `devtools.acquire_source` wrote the packet from the declaration in `acquisition/`, from a
 full clone at the pin; every file is bound to its Git blob at `ad8b094`, and
 `acquisition/upstream-subtree.sha256` lists all seven. The scope is the whole tree:
-990,199 bytes, all retained (OR-18 admits them; `check_added_blobs` passed).
+990,199 bytes, all retained. The three receipts add 2,156,813 bytes, 2,128,349 of them
+`two-strip-decisions-v5.json`, so the packet is about 3.16 MB in a checkout; OR-18 admits
+it, and `check_added_blobs` passes.
 
 Each digest the author stated holds:
 
@@ -48,7 +50,10 @@ states, before any checker reads it. Zenodo’s listing was unreachable, so:
 - V2.0’s `filled_ends.py`, `regenerate_filled.py` and `check_cert.py` state no digest
   of their own, but each is byte-identical to the member of the same name in the V1.0
   archive, whose SHA-256 the author stated on 27 October, before this copy existed
-  (`filled_ends.py`: `91ac0758…9210`).
+  (`filled_ends.py`: `91ac0758…9210`). That binds them to the V1.0 programs he
+  published; that they are also V2.0’s files rests on his statement that `ad8b094`
+  holds unchanged copies, as `README_filled.md`’s does. No decision rests on it: the
+  routes decide, and the builder only writes the certificates out.
 - The v5 archive’s `regenerate.py` is versions 1 and 2’s byte for byte (`67c861dc…a04f`,
   retained by `karimi-two-strip-2026-10-24`).
 - V2.0’s `README_filled.md` and the v5 archive’s `README.md` have no stated digest and no
@@ -78,9 +83,9 @@ whatever the project’s owner decides”), are the walk’s and the owner’s, 
 
 **v5, every row** (`receipts/two-strip-decisions-v5.json`): `devtools.two_strip_checker`
 reads the retained archive’s `records.csv` through version 5’s own column set and
-decides all 5,308 rows exactly from their parameters, each row’s seven
-controls refused (212.9 CPU-seconds with the digests of every written-out certificate,
-which are not kept). Least fit slack: 1.0e-8 in both strips. The author’s flag is
+decides all 5,308 rows exactly from their parameters, each row’s seven controls refused
+(212.9 CPU-seconds with the digests of every written-out certificate, which are not
+kept). Least fit slack: 1.0e-8 in both strips. The author’s flag is
 counted and decides nothing.
 
 **v5, a sample on both routes** (`receipts/replay-sample-v5.json`): at 1182, 1253, 6089,
@@ -91,12 +96,17 @@ count costs 14.7 CPU-seconds for the positive and 120 for the controls.
 
 **V2.0, a sample on both routes** (`receipts/filled-end-replay-sample.json`):
 `devtools.filled_end_sample` writes out the rows at 1182, 2505, 4990, 7500 and 9946 with
-the author’s own `build`, from the retained `filled_ends.py`, and checks that each has the row’s exact side and n squares. Each certificate passes both
-maintained exact routes, and both refuse all six of its controls. The builder is the
-author’s, so this reproduces his construction; the decision is first-party, and his
-`check_cert.py` did not run. It decides those five certificates, 5 of 5,134 rows, and
-nothing about the rest. At 9946 a count costs 15.4 CPU-seconds for the positive and 127
-for the controls.
+the author’s own `build`, from the retained `filled_ends.py`, and checks that each has
+the row’s exact side and n squares. Each certificate passes both maintained exact
+routes, and both refuse all six of its controls. The builder is the author’s, so this
+reproduces his construction; the decision is first-party, and his `check_cert.py` did
+not run. It decides those five certificates, 5 of 5,134 rows, and nothing about the
+rest. In the committed receipt, 9946 costs 16.5 CPU-seconds for the positive and 124.1
+for the controls. Its `check` writes the five out again with the retained builder, about
+0.4 CPU-seconds, and holds each to the size, side and SHA-256 the receipt names. The
+builder is third-party code that runs in the quick tests and in CI; it was read whole
+first: it imports only `math`, `sys` and `fractions`, its module level defines and does
+nothing else, and its one writer, `write_cert`, is never called.
 
 No program here decides a V2.0 row from its parameters: that is W9’s (think-fuwd), and
 the full validation is think-qczx’s.

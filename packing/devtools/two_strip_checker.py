@@ -142,6 +142,7 @@ import platform
 import re
 import time
 import zipfile
+import zlib
 from collections.abc import Callable, Iterator, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, replace
@@ -584,9 +585,11 @@ def _read(path: Path) -> Any:
 def archived_records(deposit: Deposit) -> str:
     """The text of ``records.csv`` inside a deposit kept as its archive, read from Git as
     untrusted data: the archive must open, hold exactly one member of that name, at most
-    `MAX_RECORDS_BYTES` long, and be UTF-8. Its bytes are the packet's custody
-    (``acquire_source --check``), so no digest is compared here (OR-16). Any refusal is a
-    `CustodyError`."""
+    `MAX_RECORDS_BYTES` long, readable without a password by a method `zipfile` knows,
+    and be UTF-8. Its bytes are the packet's custody (``acquire_source --check``), so no
+    digest is compared here (OR-16). Any refusal is a `CustodyError`: a corrupt stream
+    (`zlib.error`, a bad CRC, a truncation), an encrypted member (`RuntimeError`) and an
+    unknown compression method (`NotImplementedError`) included."""
     data = read_retained_bytes(deposit.home / deposit.archived)
     try:
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
@@ -597,7 +600,15 @@ def archived_records(deposit: Deposit) -> str:
                 raise CustodyError(f"{deposit.archive}'s records.csv is too large")
             with archive.open(found[0]) as member:
                 text = member.read(MAX_RECORDS_BYTES + 1)
-    except (zipfile.BadZipFile, zipfile.LargeZipFile, OSError) as error:
+    except (
+        zipfile.BadZipFile,
+        zipfile.LargeZipFile,
+        OSError,
+        EOFError,
+        RuntimeError,
+        NotImplementedError,
+        zlib.error,
+    ) as error:
         raise CustodyError(f"{deposit.archive}: {error}") from error
     if len(text) > MAX_RECORDS_BYTES:
         raise CustodyError(f"{deposit.archive}'s records.csv is too large")
@@ -753,11 +764,13 @@ def records(deposit: Deposit = V1) -> list[TwoStrip]:
     return [row for row, _ in table(deposit)]
 
 
-def author_flags(deposit: Deposit) -> dict[str, dict[str, int]]:
+def author_flags(
+    deposit: Deposit, rows: Sequence[tuple[TwoStrip, Mapping[str, str]]] | None = None
+) -> dict[str, dict[str, int]]:
     """How many of a deposit's rows hold each literal of each author's column; empty for
-    a deposit with none."""
+    a deposit with none. ``rows`` is the deposit's `table` when already read."""
     counted: dict[str, dict[str, int]] = {}
-    for _, authors in table(deposit):
+    for _, authors in table(deposit) if rows is None else rows:
         for name, value in authors.items():
             column = counted.setdefault(name, {})
             column[value] = column.get(value, 0) + 1
@@ -950,7 +963,8 @@ def decisions_problems(
     """Problems with a deposit's decisions receipt, every decision and control derived
     again, the author's columns counted again and the written-out certificates at its
     sample (at every count with ``digests``) written again; and the receipt's rows."""
-    rows = records(deposit)
+    parsed = table(deposit)
+    rows = [row for row, _ in parsed]
     receipt = _read(deposit.decisions)
     problems = []
     header = (receipt["format"], receipt["doi"], receipt["records"], receipt["lemma"])
@@ -963,7 +977,7 @@ def decisions_problems(
         problems.append(
             f"{deposit.label}: the decisions receipt's header is not this checker's"
         )
-    flags = author_flags(deposit)
+    flags = author_flags(deposit, parsed)
     if receipt.get("author_columns", {}).get("counts", {}) != flags:
         problems.append(f"{deposit.label}: the author's columns are not counted as the rows")
     stored: list[dict[str, Any]] = receipt["rows"]
@@ -1023,13 +1037,18 @@ def check(
     *,
     digests: bool = False,
     replay: bool = False,
-    deposits: Sequence[Deposit] = DEPOSITS,
+    deposits: Sequence[Deposit] | None = None,
 ) -> list[str]:
     """Problems with the receipts against the packets: each deposit's decisions and
-    replay sample, every deposit's by default; empty when they hold."""
+    replay sample, every deposit's (`DEPOSITS`) by default; empty when they hold. A
+    deposit whose files fail custody is one problem, and the rest are still checked."""
     problems: list[str] = []
-    for deposit in deposits:
-        found, stored = decisions_problems(deposit, digests=digests)
+    for deposit in DEPOSITS if deposits is None else deposits:
+        try:
+            found, stored = decisions_problems(deposit, digests=digests)
+        except CustodyError as error:
+            problems.append(f"{deposit.label}: custody: {error}")
+            continue
         problems += found
         if deposit.replay:
             problems += replay_problems(deposit, stored, replay=replay)
@@ -1042,7 +1061,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     every = commands.add_parser("decide-all")
     every.add_argument("--version", choices=tuple(VERSIONS), action="append")
     sample = commands.add_parser("replay-sample")
-    sample.add_argument("--version", choices=("1", "5"), default="1")
+    replayed = tuple(key for key, deposit in VERSIONS.items() if deposit.replay)
+    sample.add_argument("--version", choices=replayed, default="1")
     sample.add_argument("--n", type=int, nargs="+")
     sample.add_argument("--workers", type=int, default=2)
     audit = commands.add_parser("check")
