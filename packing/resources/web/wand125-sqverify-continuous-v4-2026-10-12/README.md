@@ -3,13 +3,13 @@
 Commit `d4a1981` of wand125/square-packing (12 October 2026) is v4 of
 `tools/sqverify_continuous`: this repository’s `sqverify_fast` crate with a
 continuous-angle mode, `sqverify-fast --continuous`, which checks a rectangle-density
-certificate at every orientation and every centre and concludes $s(n) > L/B$.
-v4 adds `--resume` to v3 (`f30cc2c`, the packet
+certificate at every orientation and every centre and concludes $s(n) > L/B$. v4 adds
+`--resume` to v3 (`f30cc2c`, the packet
 [`wand125-sqverify-continuous-v3-2026-10-12`](../wand125-sqverify-continuous-v3-2026-10-12/README.md));
 the search is the same.
 It is the source’s first program for T-192 (route A, think-0arj) and a second route for
-T-145 and T-157 (think-xzob, jlevy/squares#533).
-The [soundness review of 23 October 2026](../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+T-145 and T-157 (think-xzob, jlevy/squares#533). The
+[soundness review of 23 October 2026](../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
 read it, and its programs and receipts are in [`review/`](review/README.md).
 
 | Item | Value |
@@ -33,10 +33,10 @@ Twenty-nine are retained byte for byte under
 [`square-packing/`](square-packing/tools/sqverify_continuous/): all 28 files of
 `tools/sqverify_continuous` (the crate with its sources, tests, lockfile, toolchain pin,
 build script and documents, `patches/continuous.diff`, `examples/n40/`, `README.md` and
-`PROVENANCE.md`) and `tools/THIRD_PARTY_NOTICES.md`.
-Two are pinned by digest only, each byte-identical to a copy the
-[closed-form cfcheck packet](../wand125-closed-form-cfcheck-2026-10-14/README.md) retains:
-the repository’s licence index `LICENSE.md` and wand125’s MIT `tools/LICENSE`.
+`PROVENANCE.md`) and `tools/THIRD_PARTY_NOTICES.md`. Two are pinned by digest only, each
+byte-identical to a copy the
+[closed-form cfcheck packet](../wand125-closed-form-cfcheck-2026-10-14/README.md)
+retains: the repository’s licence index `LICENSE.md` and wand125’s MIT `tools/LICENSE`.
 No file is compressed.
 
 Not retained: the rest of the repository, which the pin binds, and the n = 28 release
@@ -50,22 +50,36 @@ Copyright (c) 2026 wand125. `PROVENANCE.md` gives the crate’s code as MIT, the
 code by Joshua Levy and wand125’s changes under the repository’s MIT, and the copied
 upstream documentation (`sqverify_fast/README.md`, `SOUNDNESS.md`, `INDEPENDENCE.md`,
 `independence-record.yaml`) as CC BY 4.0 to “Joshua Levy, the squares project”;
-`tools/THIRD_PARTY_NOTICES.md` states the same. `CONTINUOUS.md`, `PROVENANCE.md`,
-`README.md`, `patches/` and `examples/` are wand125’s, MIT.
+`tools/THIRD_PARTY_NOTICES.md` states the same.
+`CONTINUOUS.md`, `PROVENANCE.md`, `README.md`, `patches/` and `examples/` are wand125’s,
+MIT.
 
 The commit is authored by Hiroaki Hosono (wand125) and names Claude (Anthropic) as
 co-author; `PROVENANCE.md` says the mode’s author read Guzhou0806’s
 `verifier/continuous_pose.cpp` while reviewing T-145 (jlevy/squares#485) before writing
-it, that it shares no code with that kernel, and that it is “independent code, but not an
-independent method”. Its `README.md` names this repository’s `sqverify_fast` as its base
-and Guzhou0806/n40-square-packing as the first all-angle n = 40 bound.
+it, that it shares no code with that kernel, and that it is “independent code, but not
+an independent method”.
+Its `README.md` names this repository’s `sqverify_fast` as its base and
+Guzhou0806/n40-square-packing as the first all-angle n = 40 bound.
 
 ## The Review’s Programs and Receipts
 
-The [review](../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+The
+[review](../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
 ran only programs it wrote and the verifier built from this packet;
 [`review/README.md`](review/README.md) says what each program does, what it read, how to
-run it and what it printed. None of them decides a claim.
+run it and what it printed.
+None of them decides a claim.
+
+## The Replay Here
+
+On 31 October 2026 both n = 40 examples were run here in full with v4, built from this
+packet, on the candidates the review’s `candidates.py` builds, each judged by the
+review’s `judge_run.py`, with the source’s mass controls; a threshold-shift run per
+claim, meant as the oblique control, verified as well, so no counted oblique control has
+run yet (think-flxm).
+[`replay/README.md`](replay/README.md) gives the commands, the receipts and the run
+outputs.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

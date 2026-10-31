@@ -1,0 +1,35 @@
+{
+  "command": [
+    "sh",
+    "-c",
+    "exec nice -n 10 '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/build-v4/tools/sqverify_continuous/sqverify_fast/target/release/sqverify-fast' --candidate '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/cand/c6715.json' --n 40 --continuous --core 199529/200000 --tau 24997/25000 --threads 2 --max-nodes 4000000 > '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/runs/c6715_oblique.jsonl'"
+  ],
+  "cwd": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc",
+  "started_utc": "2026-10-31T22:06:37Z",
+  "exit_status": 0,
+  "wall_seconds": 1623.235,
+  "cpu_user_seconds": 3155.987,
+  "cpu_system_seconds": 0.484,
+  "max_rss_kib": 18716,
+  "load_average": [
+    3.50830078125,
+    3.86279296875,
+    3.9521484375
+  ],
+  "digests": {
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/build-v4/tools/sqverify_continuous/sqverify_fast/target/release/sqverify-fast": "31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618",
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/cand/c6715.json": "f4a1ae9b05eeac7fbaca2138237e5ce313cc8e463b930e927d8e5623e3e12c34",
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/runs/c6715_oblique.jsonl": "4eb835ff0788cc4d6624cc8dd64cf0532f994c7ad5d7ab133b84771dd0bf0c0c"
+  },
+  "stdout_lines": 0,
+  "stdout_head": [],
+  "stdout_tail": [],
+  "stderr_lines": 86,
+  "stderr_tail": [
+    "{\"angle_splits\":471395,\"index\":81,\"kind\":\"root\",\"leaves\":1279700,\"max_depth\":33,\"min_certified_lower_bound\":0.9998800006378206,\"nodes\":2559399,\"run_key\":\"6d9d1860152f4bf9f2da7f59c7e5ac851fd42ce026277b8f76635dce76ac82a8\",\"seconds\":92.2978306,\"t\":[\"39/100\",\"79/200\"],\"verdict\":\"verified\",\"witness\":null}",
+    "{\"angle_splits\":486577,\"index\":82,\"kind\":\"root\",\"leaves\":1324615,\"max_depth\":34,\"min_certified_lower_bound\":0.9998800025217023,\"nodes\":2649229,\"run_key\":\"6d9d1860152f4bf9f2da7f59c7e5ac851fd42ce026277b8f76635dce76ac82a8\",\"seconds\":96.38062442,\"t\":[\"79/200\",\"2/5\"],\"verdict\":\"verified\",\"witness\":null}",
+    "{\"angle_splits\":475667,\"index\":83,\"kind\":\"root\",\"leaves\":1296224,\"max_depth\":33,\"min_certified_lower_bound\":0.9998800019572162,\"nodes\":2592447,\"run_key\":\"6d9d1860152f4bf9f2da7f59c7e5ac851fd42ce026277b8f76635dce76ac82a8\",\"seconds\":94.470813124,\"t\":[\"2/5\",\"81/200\"],\"verdict\":\"verified\",\"witness\":null}",
+    "{\"angle_splits\":471859,\"index\":84,\"kind\":\"root\",\"leaves\":1290390,\"max_depth\":32,\"min_certified_lower_bound\":0.9998800067405389,\"nodes\":2580779,\"run_key\":\"6d9d1860152f4bf9f2da7f59c7e5ac851fd42ce026277b8f76635dce76ac82a8\",\"seconds\":95.083857854,\"t\":[\"81/200\",\"41/100\"],\"verdict\":\"verified\",\"witness\":null}",
+    "{\"angle_splits\":472796,\"index\":85,\"kind\":\"root\",\"leaves\":1296633,\"max_depth\":32,\"min_certified_lower_bound\":0.9998800000750528,\"nodes\":2593265,\"run_key\":\"6d9d1860152f4bf9f2da7f59c7e5ac851fd42ce026277b8f76635dce76ac82a8\",\"seconds\":95.644568168,\"t\":[\"41/100\",\"83/200\"],\"verdict\":\"verified\",\"witness\":null}"
+  ]
+}

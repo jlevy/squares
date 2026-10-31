@@ -1,0 +1,29 @@
+{
+  "command": [
+    "sh",
+    "-c",
+    "exec nice -n 10 '/home/user/squares/.claude/worktrees/agent-a2c72e0af89eb2b3b/packing/.venv/bin/python3' -I '/home/user/squares/.claude/worktrees/agent-a2c72e0af89eb2b3b/packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/judge_run.py' '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/runs/c6718_oblique.jsonl' '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/cand/c6718.json' --core 3350/3359 --tau 1 --expect VERIFIED > '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/receipts/judge-c6718_oblique.json'"
+  ],
+  "cwd": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc",
+  "started_utc": "2026-10-31T22:03:17Z",
+  "exit_status": 0,
+  "wall_seconds": 0.12,
+  "cpu_user_seconds": 0.115,
+  "cpu_system_seconds": 0.004,
+  "max_rss_kib": 22272,
+  "load_average": [
+    2.861328125,
+    3.74658203125,
+    4.00634765625
+  ],
+  "digests": {
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/runs/c6718_oblique.jsonl": "f64a8addd53eae21496a1d1aa2e7e209fd0b70747c57b86f221a0e92209dfe69",
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/cand/c6718.json": "38e0eff1ccb0dd156c43ec24a2292b2e770600ba704881c335d4e3e649a094ba",
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/receipts/judge-c6718_oblique.json": "b9e232a11591dacbc8b314152051745f4dcd22db034c8458eb25028e2b2562eb"
+  },
+  "stdout_lines": 0,
+  "stdout_head": [],
+  "stdout_tail": [],
+  "stderr_lines": 0,
+  "stderr_tail": []
+}
