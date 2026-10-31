@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 37
+version: 38
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -35,7 +35,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-10-31T11:53:21.409Z
+updated_at: 2026-10-31T12:53:25.763Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -61,3 +61,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 11:35: #851 merged (90b79dbe1): s(44)=7 T-252, n=44 proved; 10 merged this pass. L6 triage (think-ztcy): stalled 73 -> 16; 34 items owner-decision (13 new owner questions listed in think-ztcy: D5 credit naming beyond horizon, D3 #715 335, think-kzme deletion rows, #732 N=10000 cap, #593 joint credit, #573 T-173 credit, #529 T-159, #574 merge/close, #521 replayed annotation, #522 strategy catalogue, #524-#527 Summins requests, #317 umbrella close, #543 check2 retention/tolerance), 20 standing-hold, 7 author, 3 dependency, 9 actionable. Actionable now: replies #375/#522/#763 -> lane L7. After #852 merges: think-4rzl (#804 T-244 172/263, ~3 CPU-h), think-7scz (#545 grade-C registration), think-flxm (sqverify_continuous v4 replay ~1.4-5.2 CPU-h), think-63vx (Lean build 41 modules ~2.1 h + remeasure).
 
 2026-10-31 11:55 hourly: merged #817 (a8deaf1b6); 11 merged this pass. #842 closed with its final comment (issuecomment-6542869817). Karimi put #836/#847 deposits on GitHub at mohsensbu-jpg/square_packing_records_karimi@ad8b094 (unblocks the Zenodo wait) -> L4 resumed on claude/bold-ritchie-xo28us-karimi. #852 addressing review A (8 adoptions confirmed). Replies in flight: #816 (L5), #375/#522/#763 (L7).
+
+2026-10-31 12:54 hourly: no new issues. #852 green, review A addressed, deep gate running (run 41202009305, started 12:38). Reply PRs reviewed: #857 (with #375 correction issuecomment-6543355721 for an overstated independence claim), #856, #858 (nits being addressed). Merge order: #852, #857, #856, #858. L4 importing Karimi deposits from GitHub ad8b094.
