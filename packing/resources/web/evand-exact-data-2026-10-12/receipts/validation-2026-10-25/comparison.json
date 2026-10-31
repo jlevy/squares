@@ -1,0 +1,20 @@
+{
+  "places": 812,
+  "bracket_half_width": "1e-810",
+  "inside_isolating_hull": true,
+  "signs_at_ends": [
+    1,
+    -1
+  ],
+  "brackets_the_root": true,
+  "against_rational": {
+    "order": "root below rational",
+    "rational_minus_root": [
+      "3.90143354776e-799",
+      "3.90143354778e-799"
+    ],
+    "rational_denominator_digits": 2398,
+    "sign_of_p_at_rational": -1
+  },
+  "cpu_seconds": 632.5
+}

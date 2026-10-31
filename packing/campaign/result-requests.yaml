@@ -26024,6 +26024,53 @@ issues:
       tracking the intake of a reported item, Daniel's polynomial, which #545 has tracked since 12
       October; its other items are tracked where the table names them. The issue says it will be
       updated as each item lands on main, so a follow-up is owed when T-246 reaches main.
+  - number: 816
+    title: "s(29): validating Evan Daniel's degree-7213 minimal polynomial of the record side (T-246)"
+    author: jlevy
+    opened: '2026-10-25'
+    state: open
+    kind: other
+    intake: true
+    triage: done
+    summary: >-
+      The owner's tracker, opened on 25 October 2026 with the labels intake, tracker and n-29, of
+      the validation of one result: Evan Daniel's degree-7213 minimal polynomial of the side of
+      the best known packing of 29 squares, T-246. A child of #811, with #545 as the original
+      report, it tabulates six steps, irreducibility, the root of p that matches the packing,
+      the Monte Carlo identities made deterministic, the packing's non-overlap at the exact
+      side, the comparison with T-195's verified ceiling and a review of N29.md, under the
+      owner's cap of that day, set at 10 CPU-hours and revised to 5, and leaves re-classifying
+      T-246 and moving n = 29's verified lane to the owner once the evidence is in.
+    read_through: '2026-10-25T15:46:48Z'
+    results:
+    - key: s29-minimal-polynomial
+      claim: The side of the best known s(29) packing is a root of an irreducible integer polynomial
+        of degree 7213 (Evan Daniel, evand/square-packing 169a827 and the release
+        exact-data-2026-10-12); the issue tracks its validation.
+      source: body
+      register:
+      - T-246
+      evidence:
+      - E-n029-evand-minpoly-7213-report
+    asks:
+    - what: The six steps run within the 5 CPU-hour cap, each reported with what it proves and its
+        price, with the re-classification of T-246 left to the owner.
+      state: queued
+      source: body
+      bead: think-10m1
+    beads:
+    - think-6gti
+    - think-10m1
+    answer_bead: think-10m1
+    replies: []
+    close_when: Each of the six steps has a status backed by receipts on main, and the owner has
+      decided T-246's kind and n = 29's lanes.
+    notes: >-
+      The project opened this issue; it reports no result of the project's own, and no
+      acknowledgement is owed on it. It is marked intake, as #811 is, as the project's own issue
+      tracking the validation of a reported item that #545 has tracked since 12 October. The
+      coordinator updates its status column and log from the lane's reports; the lane does not
+      post on it.
   - number: 819
     title: 's(344) ≤ 18.992567544845: registration request'
     author: amundsk

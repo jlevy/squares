@@ -1,0 +1,393 @@
+{
+  "format": "evand-s29-replay/1",
+  "route": "same-implementation",
+  "started_utc": "2026-10-25T16:21:15+00:00",
+  "finished_utc": "2026-10-25T17:42:49+00:00",
+  "archive": {
+    "asset": "s29-minpoly.tar.zst",
+    "sha256": "708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c",
+    "members_checked": 21,
+    "members_match_pinned_record": true
+  },
+  "scripts": {
+    "retained_at": "ad86d42",
+    "sha256": {
+      "irred.py": "901b181e7d039b133beab9b247d3e89a4b195eac014f2cab5eea2ecad8f02ad7",
+      "krawczyk.py": "8b73caf09914945dd7ace2ee643548ec7c2864a2f6eede6dba787bd502903059",
+      "link.py": "fbd1444e7b2a7ecaae7e2a4626da4874310d883facba898994604113cb8f4815",
+      "verify_mod.py": "066ae79b1f075fdbaa0719354d6c9258e8a0e3a4f1792003d094131f7ba894f5",
+      "contacts_mod.py": "c6d2433c72e44bd55d18031582f4068dccda6ca189ca9dc0a654e9692ec265ef"
+    }
+  },
+  "environment": {
+    "python": "3.13.17",
+    "python-flint": "0.9.0",
+    "sympy": "1.14.0",
+    "mpmath": "1.3.0",
+    "flags": "-I, empty working directory, paths as arguments",
+    "machine": {
+      "cpus": 4,
+      "jobs": 3
+    }
+  },
+  "controls": {
+    "perturbed": "coefficient of x^3606 increased by one",
+    "reducible": "p * (x + 1), degree 7214"
+  },
+  "prime_counts": {
+    "irred": 12,
+    "contacts": 21,
+    "verify": 10,
+    "readme": {
+      "irred": 12,
+      "contacts": 21,
+      "verify": 50
+    }
+  },
+  "krawczyk_output_matches_archive": true,
+  "steps": [
+    {
+      "name": "krawczyk",
+      "script": "krawczyk.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_system.jl",
+        "1e-50",
+        "WORK/krawczyk-out.json"
+      ],
+      "env": {},
+      "seed": null,
+      "started_utc": "2026-10-25T16:21:20+00:00",
+      "wall_seconds": 135.7,
+      "cpu_seconds": 112.5,
+      "max_rss_mb": 253.6,
+      "exit_code": 0,
+      "expect": "UNIQUE ZERO of F in X",
+      "expect_failure": false,
+      "passed": true,
+      "tail": [
+        "t1: |K - m| <= 9.190e-71 vs radius 1.0e-50: True",
+        "t2: |K - m| <= 4.738e-72 vs radius 1.0e-50: True",
+        "t3: |K - m| <= 1.943e-71 vs radius 1.0e-50: True",
+        "t4: |K - m| <= 1.360e-72 vs radius 1.0e-50: True",
+        "t5: |K - m| <= 3.315e-71 vs radius 1.0e-50: True",
+        "UNIQUE ZERO of F in X",
+        "S(t*) in [5.93383346267692918968946061635201913843383418108 +/- 3.19e-48]"
+      ]
+    },
+    {
+      "name": "link",
+      "script": "link.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_system.jl",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_poly_q4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_krawczyk.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_S0.txt",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t1.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t2.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t3.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t5.json"
+      ],
+      "env": {
+        "PREC": "220000"
+      },
+      "seed": null,
+      "started_utc": "2026-10-25T16:21:20+00:00",
+      "wall_seconds": 19.5,
+      "cpu_seconds": 19.0,
+      "max_rss_mb": 254.2,
+      "exit_code": 0,
+      "expect": "LINKED: S(t*) is a root of p",
+      "expect_failure": false,
+      "passed": true,
+      "tail": [
+        "p(S0 - eps) +, p(S0 + eps) -: sign change True",
+        "p'(I) excludes 0: True",
+        "t1: tau(I) = [-0.224063983394147289565516409783 +/- 9.31e-32]; |tau - tstar| <= 9.190e-71 < 1e-50: True",
+        "t2: tau(I) = [-0.221352159960922740228445336966 +/- 4.59e-31]; |tau - tstar| <= 4.738e-72 < 1e-50: True",
+        "t3: tau(I) = [-0.183535488063463373029447279054 +/- 4.37e-31]; |tau - tstar| <= 1.943e-71 < 1e-50: True",
+        "t4: tau(I) = [0.153970720196158833194331760099 +/- 4.27e-31]; |tau - tstar| <= 1.360e-72 < 1e-50: True",
+        "t5: tau(I) = [-0.215370689980517641016178590750 +/- 1.76e-31]; |tau - tstar| <= 3.315e-71 < 1e-50: True",
+        "Sd(X) excludes 0: True",
+        "LINKED: S(t*) is a root of p"
+      ]
+    },
+    {
+      "name": "irred",
+      "script": "irred.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_poly_q4.json",
+        "12"
+      ],
+      "env": {},
+      "seed": null,
+      "started_utc": "2026-10-25T16:21:20+00:00",
+      "wall_seconds": 2555.2,
+      "cpu_seconds": 1254.2,
+      "max_rss_mb": 123.4,
+      "exit_code": 0,
+      "expect": "IRREDUCIBLE over Q",
+      "expect_failure": false,
+      "passed": true,
+      "tail": [
+        "degree 7213; content 1",
+        "p=2305843009213693967: 6 factors, degrees [1, 1, 39, 1108, 1799, 4265] (120 s); possible proper factor degrees left: 46",
+        "p=2305843009213693973: 16 factors, degrees [1, 1, 2, 5, 6, 11, 17, 75, 210, 243, 295, 298]... (116 s); possible proper factor degrees left: 46",
+        "p=2305843009213694009: 12 factors, degrees [1, 1, 7, 8, 10, 19, 128, 201, 298, 442, 2368, 3730] (176 s); possible proper factor degrees left: 14",
+        "p=2305843009213694017: 14 factors, degrees [1, 1, 4, 5, 10, 12, 25, 43, 86, 106, 703, 769]... (130 s); possible proper factor degrees left: 6",
+        "p=2305843009213694087: 9 factors, degrees [1, 1, 4, 5, 23, 109, 111, 802, 6157] (269 s); possible proper factor degrees left: 4",
+        "p=2305843009213694149: 8 factors, degrees [1, 2, 51, 182, 356, 479, 2436, 3706] (168 s); possible proper factor degrees left: 4",
+        "p=2305843009213694173: 8 factors, degrees [1, 5, 5, 14, 22, 129, 220, 6817] (276 s); possible proper factor degrees left: 2",
+        "p=2305843009213694207: 6 factors, degrees [4, 234, 393, 1105, 1645, 3832] (268 s); possible proper factor degrees left: 0",
+        "p=2305843009213694257: 12 factors, degrees [1, 3, 11, 16, 56, 82, 168, 239, 708, 1091, 1582, 3256] (284 s); possible proper factor degrees left: 0",
+        "p=2305843009213694317: 4 factors, degrees [86, 400, 2686, 4041] (348 s); possible proper factor degrees left: 0",
+        "p=2305843009213694323: 13 factors, degrees [1, 1, 1, 1, 2, 4, 14, 35, 179, 237, 1035, 2374]... (223 s); possible proper factor degrees left: 0",
+        "p=2305843009213694381: 7 factors, degrees [4, 7, 14, 17, 164, 2088, 4919] (174 s); possible proper factor degrees left: 0",
+        "IRREDUCIBLE over Q"
+      ]
+    },
+    {
+      "name": "contacts_mod",
+      "script": "contacts_mod.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_system.jl",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_poly_q4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t1.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t2.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t3.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t5.json",
+        "21",
+        "3564184957"
+      ],
+      "env": {},
+      "seed": 3564184957,
+      "started_utc": "2026-10-25T16:21:39+00:00",
+      "wall_seconds": 1708.7,
+      "cpu_seconds": 882.4,
+      "max_rss_mb": 281.7,
+      "exit_code": 0,
+      "expect": "contact system consistent with S = x",
+      "expect_failure": false,
+      "passed": true,
+      "tail": [
+        "152 rows, 55 unknowns",
+        "q=4010558833484311013: unknowns determined True; 97 leftover rows consistent True; S = x True (46 s)",
+        "q=2380648159879628911: unknowns determined True; 97 leftover rows consistent True; S = x True (59 s)",
+        "q=2980673730769135631: unknowns determined True; 97 leftover rows consistent True; S = x True (60 s)",
+        "q=4570797087577488143: unknowns determined True; 97 leftover rows consistent True; S = x True (44 s)",
+        "q=3735760398692629661: unknowns determined True; 97 leftover rows consistent True; S = x True (54 s)",
+        "q=2383700932580435029: unknowns determined True; 97 leftover rows consistent True; S = x True (64 s)",
+        "q=3096797684822776391: unknowns determined True; 97 leftover rows consistent True; S = x True (100 s)",
+        "q=3558012249730062703: unknowns determined True; 97 leftover rows consistent True; S = x True (56 s)",
+        "q=4019238441547143293: unknowns determined True; 97 leftover rows consistent True; S = x True (60 s)",
+        "q=3966984408088567343: unknowns determined True; 97 leftover rows consistent True; S = x True (86 s)",
+        "q=4315236587018376949: unknowns determined True; 97 leftover rows consistent True; S = x True (102 s)",
+        "q=2531140490989083047: unknowns determined True; 97 leftover rows consistent True; S = x True (104 s)",
+        "q=4275381051973705139: unknowns determined True; 97 leftover rows consistent True; S = x True (61 s)",
+        "q=4109595002599419679: unknowns determined True; 97 leftover rows consistent True; S = x True (51 s)",
+        "q=2672392055824122733: unknowns determined True; 97 leftover rows consistent True; S = x True (84 s)",
+        "q=2903462352114053531: unknowns determined True; 97 leftover rows consistent True; S = x True (90 s)",
+        "q=4457634181066089487: unknowns determined True; 97 leftover rows consistent True; S = x True (89 s)",
+        "q=4377092311851943571: unknowns determined True; 97 leftover rows consistent True; S = x True (114 s)",
+        "q=4456977370263356009: unknowns determined True; 97 leftover rows consistent True; S = x True (111 s)",
+        "q=4081825164351566011: unknowns determined True; 97 leftover rows consistent True; S = x True (127 s)",
+        "q=4060976176673645767: unknowns determined True; 97 leftover rows consistent True; S = x True (137 s)",
+        "contact system consistent with S = x modulo 21 random 62-bit primes"
+      ]
+    },
+    {
+      "name": "control-link-perturbed",
+      "script": "link.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_system.jl",
+        "WORK/perturbed.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_krawczyk.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_S0.txt",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t1.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t2.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t3.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t5.json"
+      ],
+      "env": {
+        "PREC": "220000"
+      },
+      "seed": null,
+      "started_utc": "2026-10-25T16:23:36+00:00",
+      "wall_seconds": 28.9,
+      "cpu_seconds": 18.6,
+      "max_rss_mb": 254.2,
+      "exit_code": 0,
+      "expect": "NOT LINKED",
+      "expect_failure": true,
+      "passed": true,
+      "tail": [
+        "p(S0 - eps) +, p(S0 + eps) +: sign change False",
+        "p'(I) excludes 0: True",
+        "t1: tau(I) = [-0.224063983394147289565516409783 +/- 9.31e-32]; |tau - tstar| <= 9.190e-71 < 1e-50: True",
+        "t2: tau(I) = [-0.221352159960922740228445336966 +/- 4.59e-31]; |tau - tstar| <= 4.738e-72 < 1e-50: True",
+        "t3: tau(I) = [-0.183535488063463373029447279054 +/- 4.37e-31]; |tau - tstar| <= 1.943e-71 < 1e-50: True",
+        "t4: tau(I) = [0.153970720196158833194331760099 +/- 4.27e-31]; |tau - tstar| <= 1.360e-72 < 1e-50: True",
+        "t5: tau(I) = [-0.215370689980517641016178590750 +/- 1.76e-31]; |tau - tstar| <= 3.315e-71 < 1e-50: True",
+        "Sd(X) excludes 0: True",
+        "NOT LINKED"
+      ]
+    },
+    {
+      "name": "control-verify-perturbed",
+      "script": "verify_mod.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_system.jl",
+        "WORK/perturbed.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t1.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t2.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t3.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t5.json",
+        "1",
+        "3785714499"
+      ],
+      "env": {},
+      "seed": 3785714499,
+      "started_utc": "2026-10-25T16:24:05+00:00",
+      "wall_seconds": 603.9,
+      "cpu_seconds": 358.4,
+      "max_rss_mb": 386.7,
+      "exit_code": 1,
+      "expect": "IDENTITY FAILS mod q",
+      "expect_failure": true,
+      "passed": true,
+      "tail": [
+        "5 polynomials, 5073 terms; max degree per variable [4, 8, 10, 6, 4]",
+        "q=3838720976561512277: F_k(tau) = 0: [False, False, False, False, False]; Sn - x Sd = 0: False (514.9 s)",
+        "IDENTITY FAILS mod q"
+      ]
+    },
+    {
+      "name": "control-contacts-perturbed",
+      "script": "contacts_mod.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_system.jl",
+        "WORK/perturbed.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t1.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t2.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t3.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t5.json",
+        "1",
+        "3785714499"
+      ],
+      "env": {},
+      "seed": 3785714499,
+      "started_utc": "2026-10-25T16:34:08+00:00",
+      "wall_seconds": 119.8,
+      "cpu_seconds": 50.6,
+      "max_rss_mb": 281.5,
+      "exit_code": 1,
+      "expect": "CONTACT CHECK FAILS mod q",
+      "expect_failure": true,
+      "passed": true,
+      "tail": [
+        "152 rows, 55 unknowns",
+        "q=3838720976561512277: unknowns determined True; 97 leftover rows consistent False; S = x False (103 s)",
+        "CONTACT CHECK FAILS mod q"
+      ]
+    },
+    {
+      "name": "control-irred-reducible",
+      "script": "irred.py",
+      "args": [
+        "WORK/reducible.json",
+        "3"
+      ],
+      "env": {},
+      "seed": null,
+      "started_utc": "2026-10-25T16:36:08+00:00",
+      "wall_seconds": 623.8,
+      "cpu_seconds": 290.0,
+      "max_rss_mb": 123.4,
+      "exit_code": 0,
+      "expect": "not proven",
+      "expect_failure": true,
+      "passed": true,
+      "tail": [
+        "degree 7214; content 1",
+        "p=2305843009213693967: 7 factors, degrees [1, 1, 1, 39, 1108, 1799, 4265] (136 s); possible proper factor degrees left: 62",
+        "p=2305843009213693973: 17 factors, degrees [1, 1, 1, 2, 5, 6, 11, 17, 75, 210, 243, 295]... (198 s); possible proper factor degrees left: 62",
+        "p=2305843009213694009: 13 factors, degrees [1, 1, 1, 7, 8, 10, 19, 128, 201, 298, 442, 2368]... (288 s); possible proper factor degrees left: 24",
+        "not proven: [1, 2, 3, 39, 40, 1108, 1109, 2907, 2946, 2947, 2948, 2949, 4265, 4266, 4267, 4268, 4307, 6105, 6106, 7174]"
+      ]
+    },
+    {
+      "name": "verify_mod-1",
+      "script": "verify_mod.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_system.jl",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_poly_q4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t1.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t2.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t3.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t5.json",
+        "5",
+        "1172909554"
+      ],
+      "env": {},
+      "seed": 1172909554,
+      "started_utc": "2026-10-25T16:46:32+00:00",
+      "wall_seconds": 3296.1,
+      "cpu_seconds": 1431.9,
+      "max_rss_mb": 386.7,
+      "exit_code": 0,
+      "expect": "all identities hold modulo 5 random 62-bit primes",
+      "expect_failure": false,
+      "passed": true,
+      "tail": [
+        "5 polynomials, 5073 terms; max degree per variable [4, 8, 10, 6, 4]",
+        "q=3972449926907055527: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (655.3 s)",
+        "q=2539335543161090897: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (385.4 s)",
+        "q=2589654024060973553: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (750.6 s)",
+        "q=2704916401561035863: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (668.6 s)",
+        "q=4015161900326763383: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (562.9 s)",
+        "all identities hold modulo 5 random 62-bit primes"
+      ]
+    },
+    {
+      "name": "verify_mod-2",
+      "script": "verify_mod.py",
+      "args": [
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_system.jl",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_poly_q4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t1.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t2.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t3.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t4.json",
+        "/tmp/claude-0/-home-user/3117c4a6-d1eb-550f-8b43-8cba8543f94a/scratchpad/s29/data/n29-minpoly/n29_param_t5.json",
+        "5",
+        "302757706"
+      ],
+      "env": {},
+      "seed": 302757706,
+      "started_utc": "2026-10-25T16:50:08+00:00",
+      "wall_seconds": 3160.8,
+      "cpu_seconds": 1434.2,
+      "max_rss_mb": 388.4,
+      "exit_code": 0,
+      "expect": "all identities hold modulo 5 random 62-bit primes",
+      "expect_failure": false,
+      "passed": true,
+      "tail": [
+        "5 polynomials, 5073 terms; max degree per variable [4, 8, 10, 6, 4]",
+        "q=3801974460552745583: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (545.7 s)",
+        "q=2852164577157434573: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (500.6 s)",
+        "q=3194476985899496039: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (719.2 s)",
+        "q=4301646415253277533: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (651.8 s)",
+        "q=2600277310474000687: F_k(tau) = 0: [True, True, True, True, True]; Sn - x Sd = 0: True (477.2 s)",
+        "all identities hold modulo 5 random 62-bit primes"
+      ]
+    }
+  ],
+  "all_passed": true,
+  "cpu_seconds_total": 5851.8
+}
