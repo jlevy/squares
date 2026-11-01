@@ -5,13 +5,19 @@ states that the stationary side of T-174's packing at 297 is the only real root 
 irreducible degree-21 integer polynomial ``P297``, prints the polynomial and the root to
 100 places, and attaches ``s297-exact-configuration.zip`` under CC0 1.0, giving its SHA-256
 and that of its one certificate. The attachment could not be read from the session that
-imported it (the proxy refuses user-attachments URLs), so nothing of it is retained or run
-here; the comment's text is retained in the packet (``acquisition/comments-804.json``).
+imported it (the proxy refuses user-attachments URLs); the comment's text is retained in the
+packet (``acquisition/comments-804.json``). On 31 October the author served the same bytes
+from a public copy, `PUBLIC_COPY` at `PUBLIC_COMMIT`, and since 1 November the packet keeps
+the archive's six files under ``source/`` (think-ozx8). None of them is run here.
 
+- ``retain --archive ZIP [--check]`` holds ``ZIP``, the public copy's
+  ``attachments/s297-exact-configuration.zip``, to the SHA-256 the comment states, and its
+  certificate ``n297.minpoly.json`` to the certificate's stated SHA-256, then writes every
+  member byte-identical under the packet's ``source/`` (with ``--check``, compares it there).
 - ``derive [--check]`` reads that comment from the packet as data and writes the packet's
   ``facts/s297-polynomial.json`` (the polynomial, highest degree first, and the printed side)
-  and ``acquisition/sources.json`` (the attachment's address and the digests the comment
-  states, not measured here).
+  and ``acquisition/sources.json`` (the attachment's address, its public copy, the digests
+  the comment states, and each retained member's path, size and SHA-256 as kept).
 - ``sides [--check]`` is offline. It decides ``P297`` primitive and irreducible over Q twice,
   by SymPy's ``factor_list`` and by ``sqpack.field`` through ``devtools.exact_sides.algebraic``;
   counts its real roots; isolates the root the print names below ``10^-130``; and writes
@@ -33,6 +39,7 @@ import json
 import math
 import re
 import sys
+import zipfile
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -64,6 +71,17 @@ ATTACHMENT = "https://github.com/user-attachments/files/33925868/s297-exact-conf
 ARCHIVE_SHA256 = "e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7"
 MEMBER = "n297.minpoly.json"
 MEMBER_SHA256 = "e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826"
+#: The archive's one directory; the packet keeps its members under ``source/`` at their paths.
+ARCHIVE_DIR = "s297-exact-configuration"
+RETAINED = PACKET / "source"
+#: The author's public copy of his three issue-804 attachments (issuecomment-6543970419);
+#: its ``attachments/s297-exact-configuration.zip`` is the attachment the comment pins.
+PUBLIC_COPY = "https://github.com/HyukdongKim/square-packing-exact-sides"
+PUBLIC_COMMIT = "f480441e73824668fb18779151369e4d3ba6179a"
+PUBLIC_PATH = "attachments/s297-exact-configuration.zip"
+PUBLIC_BLOB = "a939215c4f759cf37094aefdbd935cea2c1a1ade"
+PUBLIC_RETRIEVED = "2026-11-01T15:56Z"
+ARCHIVE_BYTES = 77_023
 
 N = 297
 PLACES = 120
@@ -112,42 +130,91 @@ def derive(*, check: bool) -> int:
         },
         "note": (
             "The polynomial and printed side as the comment states them, read as text. "
-            "The attachment holds the author's exact configuration; it was not read here."
+            "The attachment holds the author's exact configuration, kept under source/ "
+            "since 1 November 2026; this fact reads the comment only."
         ),
         "n": N,
         "degree": len(coefficients) - 1,
         "polynomial_high_to_low": [str(c) for c in coefficients],
         "printed_side": printed.group(1),
     }
+    kept = sorted(path for path in (RETAINED / ARCHIVE_DIR).glob("*") if path.is_file())
+    if not kept:
+        sys.exit("the archive's members are not retained; run retain first")
     sources = {
         "format": "issue-attachment-sources-v1",
         "issue": "https://github.com/jlevy/squares/issues/804",
         "comment": str(item["html_url"]),
         "attachment": {
             "url": ATTACHMENT,
-            "bytes": None,
+            "bytes": ARCHIVE_BYTES,
             "sha256": ARCHIVE_SHA256,
             "sha256_stated_by_comment": True,
-            "sha256_measured": False,
+            "sha256_measured": True,
             "raw_asset_retained": False,
-            "licence": "CC0 1.0 (stated by the comment)",
-            "not_read": (
-                "The importing session's proxy answers user-attachments URLs with 403, so "
-                "the archive was neither downloaded nor measured; under CC0 it may be kept "
-                "once it is reachable."
+            "members_retained": "every member, byte-identical, under source/",
+            "licence": (
+                "CC0 1.0: stated by the comment, and again for all three issue-804 "
+                "attachments in issuecomment-6415293035 (2026-10-26T11:50:22Z); the public "
+                "copy's LICENSE is CC0 1.0 Universal"
             ),
+            "not_read": (
+                "The importing session's proxy answers user-attachments URLs with 403; the "
+                "same bytes, held to the comment's digest, were read from the author's "
+                "public copy instead."
+            ),
+            "public_copy": {
+                "repository": PUBLIC_COPY,
+                "commit": PUBLIC_COMMIT,
+                "path": PUBLIC_PATH,
+                "git_blob": PUBLIC_BLOB,
+                "retrieved_at_utc": PUBLIC_RETRIEVED,
+            },
         },
         "members": [
             {
-                "path": MEMBER,
-                "sha256": MEMBER_SHA256,
-                "stated_by_comment": True,
-                "retained": False,
+                "path": f"{ARCHIVE_DIR}/{path.name}",
+                "bytes": path.stat().st_size,
+                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                "stated_by_comment": path.name == MEMBER,
+                **({"sha256_stated": MEMBER_SHA256} if path.name == MEMBER else {}),
+                "retained": True,
+                "retained_at": f"source/{ARCHIVE_DIR}/{path.name}",
             }
+            for path in kept
         ],
     }
     status = written(FACT, fact, check=check)
     return status | written(SOURCES, sources, check=check)
+
+
+def retain(archive: Path, *, check: bool) -> int:
+    """Hold the public copy's archive to the comment's digests, then keep its members."""
+    data = archive.read_bytes()
+    stated = hashlib.sha256(data).hexdigest() == ARCHIVE_SHA256
+    if not stated or len(data) != ARCHIVE_BYTES:
+        sys.exit(f"{archive}: {len(data)} bytes; not the attachment the comment pins")
+    status = 0
+    with zipfile.ZipFile(archive) as bundle:
+        members = [info for info in bundle.infolist() if not info.is_dir()]
+        certificate = bundle.read(f"{ARCHIVE_DIR}/{MEMBER}")
+        if hashlib.sha256(certificate).hexdigest() != MEMBER_SHA256:
+            sys.exit(f"{MEMBER}: not the certificate the comment pins")
+        for info in members:
+            directory, _, name = info.filename.partition("/")
+            if directory != ARCHIVE_DIR or name in {"", ".", ".."} or "/" in name:
+                sys.exit(f"{info.filename}: outside the archive's one directory")
+            body = bundle.read(info)
+            path = RETAINED / info.filename
+            if check:
+                if not path.is_file() or path.read_bytes() != body:
+                    print(f"{path.relative_to(REPO)}: differs from the archive's member")
+                    status = 1
+                continue
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(body)
+            print(f"wrote {path.relative_to(REPO)}")
+    return status
 
 
 def value_at(poly: list[int], x: Fraction) -> Fraction:
@@ -292,10 +359,15 @@ def sides(*, check: bool) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
-    parser.add_argument("command", choices=("derive", "sides"))
+    parser.add_argument("command", choices=("retain", "derive", "sides"))
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--archive", type=Path, help="the public copy's zip, for retain")
     args = parser.parse_args(argv)
     mp.mp.dps = 50
+    if args.command == "retain":
+        if args.archive is None:
+            parser.error("retain needs --archive")
+        return retain(args.archive, check=args.check)
     if args.command == "derive":
         return derive(check=args.check)
     return sides(check=args.check)

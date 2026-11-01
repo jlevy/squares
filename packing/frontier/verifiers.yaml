@@ -30,6 +30,12 @@ verifiers:
       - sha256: a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4
         revision: 7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1
         note: byte-identical at ad86d42, the revision whose packet retains the copy that ran
+      - sha256: a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4
+        revision: 659ee62e4a9d39542a1146e8b011cc3ab6407ede
+        note: >-
+          The same bytes at 659ee62, the revision Hyukdong Kim reports running it at for
+          T-247's configuration (issue 804), read from raw.githubusercontent.com on 1
+          November 2026 and not retained; the retained copy is what ran here.
     note: >-
       Run unchanged from the retained copy on issue 639's 23 exact forms, each in its own
       python -I process (receipts/replay-verify-exact.json in the evand-exact-cur-2026-10-16
@@ -6541,10 +6547,11 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Reads Hyukdong Kim's exact configurations for T-244, kept as derived JSON facts:
+      Reads Hyukdong Kim's exact configurations for T-244, kept as derived JSON facts, and,
+      with --packet s297, his configuration for T-247 at 297, kept as his own file:
       rebuilds the author's file byte for byte from each and records its digest, which
       tests/test_configuration_fact_replay.py holds to the one the comment states, checks
-      that its side is T-244's (the same irreducible polynomial, a
+      that its side is its result's (the same irreducible polynomial, a
       root of it in K, and one root in the hull of both isolating intervals, counted by
       SymPy), turns it into a centre-basis Witness/v2 over K through
       devtools.algebraic_witness_reports.evand_minpoly_geometry, drives sqpack's exact
@@ -6559,4 +6566,6 @@ verifiers:
       review B2 of #813 asked for. Its authors read the author's comments as text and the
       retained verify_exact.py as data before running it; none of the author's own checker,
       controls or scripts was read or run. sqpack.witness.exact_verify decides on route 1
-      and verify_exact.py, the source's checker (V-evand-verify-exact), on route 2.
+      and verify_exact.py, the source's checker (V-evand-verify-exact), on route 2. The
+      second packet, T-247's at 297, was added by lane L14 of the 1 November intake
+      (think-ozx8), which read the author's README as text and ran none of his programs.

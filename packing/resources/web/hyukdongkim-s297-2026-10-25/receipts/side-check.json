@@ -1,0 +1,20 @@
+{
+ "format": "issue-804-configuration-side-v1",
+ "tool": "packing/devtools/configuration_fact_replay.py",
+ "sides": "packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/exact-sides.json",
+ "rows": [
+  {
+   "n": 297,
+   "field_degree": 21,
+   "side_degree": 21,
+   "same_polynomial_as_t247": true,
+   "root_of_polynomial_in_K": true,
+   "enclosure_digits": 120,
+   "enclosure_in_stated_interval": true,
+   "t247_interval_width": "6.019e-131",
+   "roots_in_hull_of_enclosure_and_t247_interval": 1,
+   "decimal": "17.7404172875438018509758015948842895936406549234461952734252"
+  }
+ ],
+ "agrees": true
+}

@@ -25,8 +25,9 @@ It is a numerical determination with no exact configuration, and the issue says 
 | Bibliography key | **[Kim exact forms 2026-10-25]** |
 | Human credit | Hyukdong Kim (ORCID [0000-0001-5787-8066](https://orcid.org/0000-0001-5787-8066)), for the exact sides; the packings are their finders’, as the issue credits them from the case records |
 | AI assistance | The issue says the search for open cases, the KKT and LLL pipeline, the computations and the verification script were done by Claude (Anthropic) in a chat session at the author’s direction, and that he reviewed the outputs |
-| Licence | None stated, in the issue or the archive |
-| Retrieved | 25 October 2026 at 05:47Z, through `gh` with `NO_PROXY` set for GitHub’s hosts |
+| Licence | None stated in the issue or the archive. The author dedicated the archive, data and code, to the public domain under CC0 1.0 on 25 October (issuecomment-6397363927) and again on 26 October (issuecomment-6415293035), asking that the files be kept |
+| Public copy | [HyukdongKim/square-packing-exact-sides](https://github.com/HyukdongKim/square-packing-exact-sides/tree/f480441e73824668fb18779151369e4d3ba6179a) at `f480441e73824668fb18779151369e4d3ba6179a` (2026-10-31T13:24:45Z), whose `attachments/squares-exact-forms.zip` (blob `c6a5694a`) is the attachment byte for byte; its `LICENSE` is CC0 1.0 Universal |
+| Retrieved | 25 October 2026 at 05:47Z, through `gh` with `NO_PROXY` set for GitHub’s hosts; the public copy on 1 November 2026 at 15:56Z |
 
 ## What the Issue Reports
 
@@ -71,26 +72,32 @@ It is a numerical determination with no exact configuration, and the issue says 
 
 ## Custody
 
-The issue and the archive state no licence. This packet follows the derived-only rule the
-amundsk-n303 packet followed for #755 before its author’s CC0 dedication, and the one
-Darius Muglich’s and SQUISH’s attachments followed: it keeps an exact fact derived from
-the archive and the archive’s address and digests, and no byte of the archive.
-`devtools.acquire_source` keeps only Git checkouts, and an attachment has none.
+The issue and the archive stated no licence when they were read, so this packet first
+followed the derived-only rule the amundsk-n303 packet followed for #755 before its
+author’s CC0 dedication: an exact fact derived from the archive, the archive’s address and
+digests, and no byte of it. The author then dedicated the archive to the public domain
+under CC0 1.0 and asked that its files be kept, and on 31 October served the same bytes
+from a public copy. Since 1 November 2026 the packet keeps all seven files themselves
+(think-9vai, the ask of issuecomment-6415293035).
 
+- [source/squares-exact-forms/](source/squares-exact-forms/): the archive’s seven members,
+  byte-identical at their member paths, written by `exact_forms.py derive` from the public
+  copy’s `attachments/squares-exact-forms.zip` after holding it to the issue’s SHA-256 and
+  the size triage measured. They are also the public copy’s `files/squares-exact-forms/`,
+  byte for byte.
 - [facts/exact-forms.json](facts/exact-forms.json): each count’s polynomial and the
   100-digit side the source prints, read from `exact_forms.json` as JSON data.
 - [acquisition/sources.json](acquisition/sources.json): the attachment’s address, size
-  and SHA-256 with `raw_asset_retained: false`; the path, size and SHA-256 of each of the
-  seven members; and the five inputs the source read, pinned by Git blob, size and
-  SHA-256 at evand/square-packing `659ee62`, where each was last changed at `122d0ba` on
-  10 October. Those inputs are MIT-licensed upstream and pinned only.
+  and SHA-256, its public copy at `f480441e`, and the licence; the path, size, SHA-256 and
+  retained path of each of the seven members; and the five inputs the source read, pinned
+  by Git blob, size and SHA-256 at evand/square-packing `659ee62`, where each was last
+  changed at `122d0ba` on 10 October. Those inputs are MIT-licensed upstream and pinned
+  only. The zip itself is not kept (`raw_asset_retained: false`); its members are.
 - [acquisition/issue-804.json](acquisition/issue-804.json): the issue as read.
 
 `exact_forms.json` has SHA-256
 `531e7077b3242aa56e959031824fb435693deaf8d73f7e33016d49c9e1709202`.
-The five Python files of the archive are pinned by digest and were never run or opened as
-code. The acknowledgement on the issue asks whether the author will dedicate the archive
-to the public domain or license it; with an answer, the files would join this packet.
+The five Python files of the archive are kept as text; none was run here.
 
 ## What Was Checked Here
 
@@ -177,8 +184,10 @@ uv run --frozen --all-extras --group dev python campaign/issue-intake/upper-boun
 uv run --frozen --all-extras --group dev python campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py poses --atlas DIR --check
 ```
 
-`derive` refuses an archive without the issue’s SHA-256 and the measured size, and
-`poses` an input without its pinned blob and digest.
+`ZIP` is the issue’s attachment or the public copy’s
+`attachments/squares-exact-forms.zip`, the same bytes. `derive` refuses an archive without
+the issue’s SHA-256 and the measured size, and with `--check` compares every retained
+member with the archive’s; `poses` refuses an input without its pinned blob and digest.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

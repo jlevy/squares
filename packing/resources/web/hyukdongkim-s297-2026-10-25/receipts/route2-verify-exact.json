@@ -1,0 +1,110 @@
+{
+ "format": "issue-804-configuration-route2-v1",
+ "bead": "think-ozx8",
+ "issue": "https://github.com/jlevy/squares/issues/804",
+ "ran_at_utc": "2026-11-01T16:02:00Z",
+ "program": {
+  "path": "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py",
+  "sha256": "a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4",
+  "upstream": "evand/square-packing@7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1 search/exact/verify_exact.py",
+  "read_before_running": true,
+  "relationship_to_generator": "same-implementation",
+  "where": "run unchanged from the retained copy, each file in its own python -I child"
+ },
+ "driver": {
+  "path": "packing/devtools/configuration_fact_replay.py"
+ },
+ "environment": {
+  "python": "CPython 3.14.7",
+  "workers": 1
+ },
+ "cpu_seconds_of_runs": 25.26,
+ "rows": [
+  {
+   "n": 297,
+   "positive": {
+    "command": [
+     "python",
+     "-I",
+     "verify_exact.py",
+     "n297.positive.minpoly.json"
+    ],
+    "exit": 0,
+    "last_line": "VALID.  n = 297: s(297) <= S*, S* the unique root of p (degree 21) in [17.7404172875438, 17.7404172875438]; field degree 21; 1750 touching incidences proved as identities in K, 7138 strict by intervals, 42922 pairs by discs",
+    "wall_seconds": 14.46,
+    "cpu_seconds": 13.58,
+    "control": "positive",
+    "input": "the author's file, rebuilt byte for byte",
+    "input_sha256": "e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826",
+    "valid": true
+   },
+   "controls": [
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n297.moved-square.minpoly.json"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: square 0: corner outside the box (or not proved inside)",
+     "wall_seconds": 2.96,
+     "cpu_seconds": 2.91,
+     "control": "moved-square",
+     "input": "square 0 moved 1e-6 through the L wall it touches",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n297.enlarged-side.minpoly.json"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: p(S) != 0 mod f",
+     "wall_seconds": 2.65,
+     "cpu_seconds": 2.61,
+     "control": "enlarged-side",
+     "input": "S in K raised by 1e-6, so p(S) is not 0 mod f",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n297.side-below-root.minpoly.json"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: S(t*) not inside [Sa, Sb]",
+     "wall_seconds": 3.13,
+     "cpu_seconds": 3.09,
+     "control": "side-below-root",
+     "input": "S's interval replaced by one wholly below the source's",
+     "refused": true
+    },
+    {
+     "command": [
+      "python",
+      "-I",
+      "verify_exact.py",
+      "n297.duplicate-square.minpoly.json"
+     ],
+     "exit": 1,
+     "last_line": "NOT VERIFIED: pair (0, 1): no separating line proved",
+     "wall_seconds": 3.15,
+     "cpu_seconds": 3.07,
+     "control": "duplicate-square",
+     "input": "square 1 replaced by square 0",
+     "refused": true
+    }
+   ]
+  }
+ ],
+ "summary": {
+  "positives_valid": 1,
+  "controls_refused": 4,
+  "controls": 4
+ }
+}
