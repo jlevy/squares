@@ -26,13 +26,13 @@ second implementation agrees.
 ## The Short Version
 
 - **218** programs: **52** external and **166** first-party; **146** decide claims and **72** check premises.
-- **675** of **856** evidence entries name the programs that verified them: 321 independently re-implemented, 288 reproduced with the producer’s code, 45 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **676** of **857** evidence entries name the programs that verified them: 321 independently re-implemented, 289 reproduced with the producer’s code, 45 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
 | id | program | author | provenance | role | evidence | results |
 | --- | --- | --- | --- | --- | ---: | ---: |
-| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 3 | 3 |
+| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 4 | 4 |
 | [`V-evand-gradec-py`](#v-evand-gradec-py) | gradec.py | Evan Daniel | external | decides | 2 | 1 |
 | [`V-evand-639-replay-driver`](#v-evand-639-replay-driver) | replay_verify_exact.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
@@ -249,7 +249,7 @@ second implementation agrees.
 | [`V-evand-1031-review-check`](#v-evand-1031-review-check) | exact_check.py and controls.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
 | [`V-mishapolk-1031-review-check`](#v-mishapolk-1031-review-check) | rv_check.py and rv_controls.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-register-candidates`](#v-register-candidates) | devtools.register_candidates | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-configuration-fact-replay`](#v-configuration-fact-replay) | devtools.configuration_fact_replay | Squares Project (Levy) | first-party | premises | 2 | 1 |
+| [`V-configuration-fact-replay`](#v-configuration-fact-replay) | devtools.configuration_fact_replay | Squares Project (Levy) | first-party | premises | 3 | 2 |
 
 ## By Program
 
@@ -268,6 +268,7 @@ The source's standard-library checker of an exact configuration over a number fi
 | `E-evand-639-verify-exact-replay` | replayed here | reproduced with the producer’s code | full: the source's exact forms, one exact configuration a count: all 23 files of search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole | T-193 |
 | `E-evand-gradec-local-minima-233-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-261 |
 | `E-hyukdongkim-804-configurations-verify-exact` | replayed here | reproduced with the producer’s code | full: the two exact configurations, each decided whole by the source's checker | T-244 |
+| `E-hyukdongkim-804-s297-verify-exact` | replayed here | reproduced with the producer’s code | full: the author's exact configuration at 297, decided whole by the source's checker | T-247 |
 
 ### `V-evand-gradec-py`
 
@@ -4446,16 +4447,17 @@ No evidence entry names it yet.
 
 **devtools.configuration_fact_replay** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Reads Hyukdong Kim's exact configurations for T-244, kept as derived JSON facts: rebuilds the author's file byte for byte from each and records its digest, which tests/test_configuration_fact_replay.py holds to the one the comment states, checks that its side is T-244's (the same irreducible polynomial, a root of it in K, and one root in the hull of both isolating intervals, counted by SymPy), turns it into a centre-basis Witness/v2 over K through devtools.algebraic_witness_reports.evand_minpoly_geometry, drives sqpack's exact verifier on a positive and two controls, and runs the source's verify_exact.py unchanged on the rebuilt file and on four mutated controls. It decides no geometry itself.
+Reads Hyukdong Kim's exact configurations for T-244, kept as derived JSON facts, and, with --packet s297, his configuration for T-247 at 297, kept as his own file: rebuilds the author's file byte for byte from each and records its digest, which tests/test_configuration_fact_replay.py holds to the one the comment states, checks that its side is its result's (the same irreducible polynomial, a root of it in K, and one root in the hull of both isolating intervals, counted by SymPy), turns it into a centre-basis Witness/v2 over K through devtools.algebraic_witness_reports.evand_minpoly_geometry, drives sqpack's exact verifier on a positive and two controls, and runs the source's verify_exact.py unchanged on the rebuilt file and on four mutated controls. It decides no geometry itself.
 
 - Source: [`packing/devtools/configuration_fact_replay.py`](../../packing/devtools/configuration_fact_replay.py), [`packing/tests/test_configuration_fact_replay.py`](../../packing/tests/test_configuration_fact_replay.py)
 - Versions run: this repository's commits, which Git holds
-- Note: Written by the records lane of think-4rzl on 31 October 2026, the small reader review B2 of #813 asked for. Its authors read the author's comments as text and the retained verify_exact.py as data before running it; none of the author's own checker, controls or scripts was read or run. sqpack.witness.exact_verify decides on route 1 and verify_exact.py, the source's checker (V-evand-verify-exact), on route 2.
+- Note: Written by the records lane of think-4rzl on 31 October 2026, the small reader review B2 of #813 asked for. Its authors read the author's comments as text and the retained verify_exact.py as data before running it; none of the author's own checker, controls or scripts was read or run. sqpack.witness.exact_verify decides on route 1 and verify_exact.py, the source's checker (V-evand-verify-exact), on route 2. The second packet, T-247's at 297, was added by lane L14 of the 1 November intake (think-ozx8), which read the author's README as text and ran none of his programs.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
 | `E-hyukdongkim-804-configurations-verify-exact` | replayed here | reproduced with the producer’s code | full: the two exact configurations, each decided whole by the source's checker | T-244 |
+| `E-hyukdongkim-804-s297-verify-exact` | replayed here | reproduced with the producer’s code | full: the author's exact configuration at 297, decided whole by the source's checker | T-247 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
