@@ -5,7 +5,7 @@ title: Replay sqverify_continuous v4 on T-145's and T-157's densities (the secon
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: bold-ritchie-l10
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T07:57:34.328Z
-updated_at: 2026-10-31T23:43:38.345Z
+updated_at: 2026-11-01T00:46:19.554Z
 started_at: 2026-10-31T20:02:09.390Z
 ---
 The second route for the continuous cover of T-145 and T-157: a complete run here of wand125's sqverify_continuous, reviewed on 23 October 2026 (think-xzob; docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) with no blocking or major finding. A replay moves the cover's mark to independently re-implemented after reading the producer's code, and no rung.
@@ -47,3 +47,5 @@ Receipts and outputs: packing/resources/web/wand125-sqverify-continuous-v4-2026-
 **Drafted replies, to post after #865 merges and its deploy verifies** (render with check_requests --draft 485 / --draft 533 from main first; footer per house style):
 - #485 (answer bead think-3oi5; reply due): T-157 and T-145 stay V3/C3, confirmed; wand125's sqverify_continuous v4 was run here in full on both densities (110,877,174 and 118,717,888 nodes, the README's totals, mass controls refused at every root), so both now read independently re-implemented after reading the producer's code; the continuous-angle report maps to T-157; not a second method. check_requests --report marks #485 closeable after merge.
 - #533 (answer bead think-flxm; third person, owner's tracking issue): the ask is done (retained, reviewed, built, both examples replayed with mass controls; receipts in the v4 packet's replay/); the counted oblique control stays with think-flxm; closeable after merge.
+
+2026-11-01 bold-ritchie-l10, after review A of #865 (https://github.com/jlevy/squares/pull/865#pullrequestreview-5725482992). A1: the earlier note's "the threshold shift does not work for these densities" holds for c6715 only; for c6718 the tau = 1 run bounded the oblique minimum from below. Ran c6718 at tau 1001/1000 (review A1's proposal; budget 4,000,000 a root, two threads): REFUSED with the patch verified, 169,336,387 nodes, 6,624.9 CPU-s, judged faithful, **no refutation**: 69 roots verified; roots 3, 4 and 75-85 stopped at the node budget (captures 1.0017-1.016); roots 49-52 (t in [23/100, 1/4]) reached resolution at legal poses capturing 1001/1000 + 1.9e-13 to 2.9e-12, where the density's least oblique capture lies. **Next step here:** c6718 at tau 2503/2500 (between that capture and the patch minimum 1.00149865; those four witnesses already capture less than it), about 2 CPU-hours at this budget; for c6715, a density mutant. A2: #533's ask is split; "this repository's own mass controls" is a queued ask owned by this bead (the 985/1000 controls are the source's, rebuilt here), and either counted control above would discharge it for its density; the source's B = 3348/3359 control stands on the 23 October review's run alone. A3: the 23 October review joins T-145's and T-157's reviews (covers T-145, T-157, T-192); T-157's rung 4 now waits only on the human oversight record, whose AI-findings check should cover SC-1, SC-2 and this open control. The #533 draft in the note above no longer applies: #533 stays open on the queued ask; the #485 draft stands.
