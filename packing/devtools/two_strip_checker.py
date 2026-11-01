@@ -923,13 +923,14 @@ def decisions_summary(
     }
 
 
-def decide_all(deposit: Deposit = V1) -> dict[str, Any]:
-    """Decide every row of a deposit with its controls and write its decisions receipt."""
-    rows = records(deposit)
-    started, cpu = _now(), time.process_time()
-    decided = [decision_row(row) for row in rows]
-    found = [item for item, _ in decided]
-    receipt = {
+def decisions_header(deposit: Deposit) -> dict[str, Any]:
+    """Every field a deposit's decisions receipt states but its run's (``environment``,
+    ``started_utc``, ``cpu_seconds``), rows, summary and the author's columns, which
+    `decisions_problems` compares on their own: its format, the deposit's issue, report,
+    version, DOI, packet and rows' file, this checker, its lemma and controls, and what
+    the certificates are. A receipt with another header was written of something else, or
+    by something else (review A1 of #870)."""
+    return {
         "format": DECISIONS_FORMAT,
         "issue": deposit.issue,
         "reported": deposit.reported,
@@ -944,6 +945,17 @@ def decide_all(deposit: Deposit = V1) -> dict[str, Any]:
             "written out by write_out and serialized in the n S / x y t format; not "
             "retained, each pinned here by its SHA-256 and size"
         ),
+    }
+
+
+def decide_all(deposit: Deposit = V1) -> dict[str, Any]:
+    """Decide every row of a deposit with its controls and write its decisions receipt."""
+    rows = records(deposit)
+    started, cpu = _now(), time.process_time()
+    decided = [decision_row(row) for row in rows]
+    found = [item for item, _ in decided]
+    receipt = {
+        **decisions_header(deposit),
         "environment": _environment(),
         "started_utc": started,
         "cpu_seconds": round(time.process_time() - cpu, 1),
@@ -1503,15 +1515,11 @@ def decisions_problems(
     rows = [row for row, _ in parsed]
     receipt = _read(deposit.decisions)
     problems = []
-    header = (receipt["format"], receipt["doi"], receipt["records"], receipt["lemma"])
-    if header != (
-        DECISIONS_FORMAT,
-        deposit.doi,
-        deposit.records_name,
-        LEMMA,
-    ) or receipt["controls"] != list(CONTROLS):
+    drift = _header_drift(receipt, decisions_header(deposit))
+    if drift:
         problems.append(
-            f"{deposit.label}: the decisions receipt's header is not this checker's"
+            f"{deposit.label}: the decisions receipt's header is not this checker's "
+            f"({', '.join(drift)})"
         )
     flags = author_flags(deposit, parsed)
     if receipt.get("author_columns", {}).get("counts", {}) != flags:

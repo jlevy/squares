@@ -1,0 +1,108 @@
+{
+  "checker": "packing/devtools/filled_end_checker.py",
+  "controls": ["duplicate-square","square-outside-container","side-below-least-clearance","square-enlarged","one-coordinate-overlap","near-contact-overlap"],
+  "doi": "10.5281/zenodo.23819397",
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "filter_lemma": "A unit square lies in the closed disc of radius sqrt(2)/2 about its centre and its interior in the open disc, so squares whose centres are at least sqrt(2) apart have disjoint interiors. Pairs are kept for decision when dx^2 + dy^2 < 2, compared exactly over Q from the certificate's centres; both routes check that every square is a unit square whose corner mean is that centre.",
+  "format": "filled-end-checker-replay-sample-v1",
+  "issue": "https://github.com/jlevy/squares/issues/847",
+  "packet": "packing/resources/web/karimi-records-2026-10-31",
+  "records": "packing/resources/web/karimi-records-2026-10-31/source/filled_records.csv",
+  "routes": "packing/devtools/couzo_678_replay.py (decide and decide_controls)",
+  "rows": [
+    {
+      "certificate_bytes": 29622,
+      "certificate_sha256": "9aaeecf3510f203b1802b814be942a179fd8d9e76b31d1ecea796ed2040d22c8",
+      "controls": [
+        {"candidate_pairs":2633,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":2632,"control":"square-outside-container","independent_failures":["container penetration -3"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":2634,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 818 crosses a wall","square 826 crosses a wall","square 834 crosses a wall"]},
+        {"candidate_pairs":2634,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":2633,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 31"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 31 overlap"]},
+        {"candidate_pairs":2635,"closed_distance":"0.000e+00","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -1/1000000000000000000000000000000 at 1, 2"],"pair":[1,2],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]}
+      ],
+      "cpu_seconds": {"controls":9.83,"positive":1.26,"write_out":0.01},
+      "decision": {"all_pairs":705078,"candidate_pairs":2634,"cpu_seconds":{"filter":0.293,"independent":0.336,"sqpack":0.559},"independent":{"failure_count":0,"failures":[],"least_pair":[1,2],"least_pair_gap":"0","least_wall_clearance":"0","pairs_decided":2634,"passed":true},"n":1188,"passed":true,"side":"7034623/201317","sqpack":{"container_contacts":174,"failure_count":0,"failures":[],"pairs_decided":2634,"passed":true,"strict_pairs":54,"touching_pairs":2580}},
+      "exact_side": "7034623/201317",
+      "lemma": {"capacity":1188,"verdict":"decided"},
+      "n": 1188,
+      "verified": true
+    },
+    {
+      "certificate_bytes": 145465,
+      "certificate_sha256": "a02120cbebcd83396413c5ec5d99eb19be0dcd6bbb7c04a49f164357b0d04af9",
+      "controls": [
+        {"candidate_pairs":12110,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":12109,"control":"square-outside-container","independent_failures":["container penetration -3"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":12111,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 3433 crosses a wall","square 3450 crosses a wall","square 3467 crosses a wall"]},
+        {"candidate_pairs":12111,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":12110,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 62"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 62 overlap"]},
+        {"candidate_pairs":12112,"closed_distance":"0.000e+00","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -1/1000000000000000000000000000000 at 1, 2"],"pair":[1,2],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]}
+      ],
+      "cpu_seconds": {"controls":58.2,"positive":7.73,"write_out":0.04},
+      "decision": {"all_pairs":13857480,"candidate_pairs":12111,"cpu_seconds":{"filter":2.907,"independent":1.727,"sqpack":2.631},"independent":{"failure_count":0,"failures":[],"least_pair":[1,2],"least_pair_gap":"0","least_wall_clearance":"0","pairs_decided":12111,"passed":true},"n":5265,"passed":true,"side":"3396941391/46584569","sqpack":{"container_contacts":365,"failure_count":0,"failures":[],"pairs_decided":12111,"passed":true,"strict_pairs":122,"touching_pairs":11989}},
+      "exact_side": "3396941391/46584569",
+      "lemma": {"capacity":5265,"verdict":"decided"},
+      "n": 5265,
+      "verified": true
+    },
+    {
+      "certificate_bytes": 190968,
+      "certificate_sha256": "bfafde784597116b67b3b61dfd8eb4b18ea12139d8b69ba6342123bd5970eb91",
+      "controls": [
+        {"candidate_pairs":16903,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":16902,"control":"square-outside-container","independent_failures":["container penetration -3"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":16904,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 5051 crosses a wall","square 5070 crosses a wall","square 5089 crosses a wall"]},
+        {"candidate_pairs":16904,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":16903,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 75"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 75 overlap"]},
+        {"candidate_pairs":16905,"closed_distance":"0.000e+00","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -1/1000000000000000000000000000000 at 1, 2"],"pair":[1,2],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]}
+      ],
+      "cpu_seconds": {"controls":87.87,"positive":11.81,"write_out":0.05},
+      "decision": {"all_pairs":27665641,"candidate_pairs":16904,"cpu_seconds":{"filter":5.369,"independent":2.295,"sqpack":3.452},"independent":{"failure_count":0,"failures":[],"least_pair":[1,2],"least_pair_gap":"0","least_wall_clearance":"0","pairs_decided":16904,"passed":true},"n":7439,"passed":true,"side":"317615561/3664289","sqpack":{"container_contacts":453,"failure_count":0,"failures":[],"pairs_decided":16904,"passed":true,"strict_pairs":134,"touching_pairs":16770}},
+      "exact_side": "317615561/3664289",
+      "lemma": {"capacity":7439,"verdict":"decided"},
+      "n": 7439,
+      "verified": true
+    },
+    {
+      "certificate_bytes": 214259,
+      "certificate_sha256": "dbd8a307fd3e4b152be5ea5d989cda0fef304694661e0d74db90f72f6daf051d",
+      "controls": [
+        {"candidate_pairs":19130,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":19129,"control":"square-outside-container","independent_failures":["container penetration -3"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":19131,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 6093 crosses a wall","square 6111 crosses a wall","square 6129 crosses a wall"]},
+        {"candidate_pairs":19131,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":19130,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 82"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 82 overlap"]},
+        {"candidate_pairs":19132,"closed_distance":"0.000e+00","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -1/1000000000000000000000000000000 at 1, 2"],"pair":[1,2],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]}
+      ],
+      "cpu_seconds": {"controls":104.52,"positive":13.75,"write_out":0.05},
+      "decision": {"all_pairs":36325026,"candidate_pairs":19131,"cpu_seconds":{"filter":6.629,"independent":2.811,"sqpack":3.698},"independent":{"failure_count":0,"failures":[],"least_pair":[1,2],"least_pair_gap":"0","least_wall_clearance":"0","pairs_decided":19131,"passed":true},"n":8524,"passed":true,"side":"195048993/2103529","sqpack":{"container_contacts":476,"failure_count":0,"failures":[],"pairs_decided":19131,"passed":true,"strict_pairs":147,"touching_pairs":18984}},
+      "exact_side": "195048993/2103529",
+      "lemma": {"capacity":8524,"verdict":"decided"},
+      "n": 8524,
+      "verified": true
+    },
+    {
+      "certificate_bytes": 215645,
+      "certificate_sha256": "1401a399634bf064f7a036932393bd294745564e9fbfd45edf59599f93dbafd2",
+      "controls": [
+        {"candidate_pairs":20833,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":20832,"control":"square-outside-container","independent_failures":["container penetration -3"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":20834,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 7406 crosses a wall","square 7417 crosses a wall","square 7428 crosses a wall"]},
+        {"candidate_pairs":20834,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":20833,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 86"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 86 overlap"]},
+        {"candidate_pairs":20835,"closed_distance":"0.000e+00","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -1/1000000000000000000000000000000 at 1, 2"],"pair":[1,2],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]}
+      ],
+      "cpu_seconds": {"controls":120.8,"positive":14.95,"write_out":0.07},
+      "decision": {"all_pairs":45281886,"candidate_pairs":20834,"cpu_seconds":{"filter":7.245,"independent":2.687,"sqpack":4.203},"independent":{"failure_count":0,"failures":[],"least_pair":[1,2],"least_pair_gap":"0","least_wall_clearance":"0","pairs_decided":20834,"passed":true},"n":9517,"passed":true,"side":"77060524/787169","sqpack":{"container_contacts":484,"failure_count":0,"failures":[],"pairs_decided":20834,"passed":true,"strict_pairs":153,"touching_pairs":20681}},
+      "exact_side": "77060524/787169",
+      "lemma": {"capacity":9517,"verdict":"decided"},
+      "n": 9517,
+      "verified": true
+    }
+  ],
+  "sample_rule": {"a lift of zero":1188,"the least H fit slack":9517,"the least H lift room":7439,"the least V lift room":8524,"the least layer slack":5265},
+  "started_utc": "2026-11-01T16:00:14Z",
+  "wall_seconds": 337.9,
+  "workers": 2
+}

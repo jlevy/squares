@@ -1,0 +1,348 @@
+{
+ "program": "fe_all_rows.py",
+ "program_sha256": "c086e64b89ed6f722182eb00646c6a76da0ebcf1dfc0e94f46a80fdd046047bb",
+ "uses": "fe_independent.py",
+ "uses_sha256": "4b1544c9ad52053c10dbfa833be78268f85021a0bf6f5cbc715b05ce3e621b0d",
+ "environment": {
+  "python": "3.14.7",
+  "machine": "x86_64"
+ },
+ "started_utc": "2026-11-01T19:00:14Z",
+ "cpu_seconds": 5.6,
+ "deposits": [
+  {
+   "deposit": "V2.0",
+   "table_sha256": "1cbfecf886a2000bd9d5f54304813d7422f785a2fb9a15655f2119a33f8c48f5",
+   "receipt": "receipts/filled-end-decisions-v2.json.gz",
+   "receipt_sha256_decompressed": "1287454cd141af7af9f79a0d1d694d9afbe6bbadea02540031c93bcce9b13a85",
+   "rows": 5134,
+   "receipt_rows": 5134,
+   "fields_compared": [
+    "capacity",
+    "grid",
+    "v_band",
+    "h_band",
+    "v_rows",
+    "h_rows",
+    "v_layers",
+    "h_layers",
+    "v_slack",
+    "h_slack",
+    "v_free",
+    "h_free",
+    "layer_slack",
+    "surplus",
+    "side",
+    "k"
+   ],
+   "mismatches": [],
+   "mismatch_count": 0,
+   "counts": {
+    "hypotheses_hold": 5134,
+    "side_is_K_minus_bV_plus_WV": 5134,
+    "side_below_K": 5134,
+    "K_is_ceil_sqrt_n": 5134,
+    "yV_zero": 1658,
+    "yH_zero": 1489,
+    "yV_at_F": 0,
+    "yH_at_F": 0,
+    "layer_slack_zero": 0,
+    "zero_inside_counts": 0,
+    "a_clipped_at_zero": 0,
+    "levels_bound_above_L": 0
+   },
+   "decimal_side": {
+    "relations": {
+     "equal": 4,
+     "above": 2616,
+     "below": 2514
+    },
+    "within_half_unit_of_last_place": 5119,
+    "rounded_up_within_one_unit": 2620,
+    "largest_gap_in_units_of_last_place": "0.502758",
+    "below_exact_examples": [
+     {
+      "n": 1185,
+      "decimal": "34.904551105548",
+      "exact": "28890113/827689"
+     },
+     {
+      "n": 1188,
+      "decimal": "34.943015244614",
+      "exact": "7034623/201317"
+     },
+     {
+      "n": 1190,
+      "decimal": "34.958620689655",
+      "exact": "5069/145"
+     }
+    ]
+   },
+   "smallest_count_with_a_zero_lift": 1188,
+   "extremes": {
+    "H fit slack": {
+     "value": "19492/1268016693833",
+     "approx": "1.537204e-08",
+     "n": 9517
+    },
+    "H length minus h": {
+     "value": "695629/41849",
+     "approx": "1.662236e+01",
+     "n": 1252
+    },
+    "H lift room": {
+     "value": "1636831/25584247039",
+     "approx": "6.397808e-05",
+     "n": 7439
+    },
+    "H rows": {
+     "value": "16",
+     "approx": "1.600000e+01",
+     "n": 1190
+    },
+    "V fit slack": {
+     "value": "0",
+     "approx": "0.000000e+00",
+     "n": 1182
+    },
+    "V length minus h": {
+     "value": "5081584/163249",
+     "approx": "3.112781e+01",
+     "n": 1182
+    },
+    "V lift room": {
+     "value": "10137521/252877718527",
+     "approx": "4.008863e-05",
+     "n": 8524
+    },
+    "V rows": {
+     "value": "30",
+     "approx": "3.000000e+01",
+     "n": 1182
+    },
+    "layer slack": {
+     "value": "453161/316775069200",
+     "approx": "1.430545e-06",
+     "n": 5265
+    },
+    "surplus largest": {
+     "value": "7",
+     "approx": "7.000000e+00",
+     "n": 9218
+    },
+    "tH": {
+     "value": "477/7600",
+     "approx": "6.276316e-02",
+     "n": 8964
+    },
+    "tH largest": {
+     "value": "691/2400",
+     "approx": "2.879167e-01",
+     "n": 2217
+    },
+    "tV": {
+     "value": "501/10000",
+     "approx": "5.010000e-02",
+     "n": 8775
+    },
+    "tV largest": {
+     "value": "93/400",
+     "approx": "2.325000e-01",
+     "n": 2124
+    }
+   }
+  },
+  {
+   "deposit": "V1.0",
+   "table_sha256": "f047c44b7d627d7d5e2e990136931a6d8cf4c19ded439482ab1ef9f8bd030b56",
+   "receipt": "receipts/filled-end-decisions-v1.json.gz",
+   "receipt_sha256_decompressed": "1f8b88ace8495a3444795bf30a63d04239b6c6a396e82469f6368d80285d1f92",
+   "rows": 4571,
+   "receipt_rows": 4571,
+   "fields_compared": [
+    "capacity",
+    "grid",
+    "v_band",
+    "h_band",
+    "v_rows",
+    "h_rows",
+    "v_layers",
+    "h_layers",
+    "v_slack",
+    "h_slack",
+    "v_free",
+    "h_free",
+    "layer_slack",
+    "surplus",
+    "side",
+    "k"
+   ],
+   "mismatches": [],
+   "mismatch_count": 0,
+   "counts": {
+    "hypotheses_hold": 4571,
+    "side_is_K_minus_bV_plus_WV": 4571,
+    "side_below_K": 4571,
+    "K_is_ceil_sqrt_n": 4571,
+    "yV_zero": 1602,
+    "yH_zero": 1514,
+    "yV_at_F": 0,
+    "yH_at_F": 0,
+    "layer_slack_zero": 0,
+    "zero_inside_counts": 0,
+    "a_clipped_at_zero": 0,
+    "levels_bound_above_L": 0
+   },
+   "decimal_side": {
+    "relations": {
+     "equal": 9,
+     "above": 2358,
+     "below": 2204
+    },
+    "within_half_unit_of_last_place": 4547,
+    "rounded_up_within_one_unit": 2367,
+    "largest_gap_in_units_of_last_place": "0.506273",
+    "below_exact_examples": [
+     {
+      "n": 1184,
+      "decimal": "34.899135993933",
+      "exact": "115598537/3312361"
+     },
+     {
+      "n": 1185,
+      "decimal": "34.906335672046",
+      "exact": "4621913/132409"
+     },
+     {
+      "n": 1187,
+      "decimal": "34.934310073136",
+      "exact": "171389437/4906049"
+     }
+    ]
+   },
+   "smallest_count_with_a_zero_lift": 1184,
+   "extremes": {
+    "H fit slack": {
+     "value": "100234134/293194108469441",
+     "approx": "3.418695e-07",
+     "n": 9624
+    },
+    "H length minus h": {
+     "value": "1000749/60409",
+     "approx": "1.656622e+01",
+     "n": 1322
+    },
+    "H lift room": {
+     "value": "7849496789/15231709008853",
+     "approx": "5.153392e-04",
+     "n": 5877
+    },
+    "H rows": {
+     "value": "16",
+     "approx": "1.600000e+01",
+     "n": 1190
+    },
+    "V fit slack": {
+     "value": "0",
+     "approx": "0.000000e+00",
+     "n": 1184
+    },
+    "V length minus h": {
+     "value": "11410903/365329",
+     "approx": "3.123459e+01",
+     "n": 1244
+    },
+    "V lift room": {
+     "value": "36968768/238743304213",
+     "approx": "1.548474e-04",
+     "n": 5488
+    },
+    "V rows": {
+     "value": "30",
+     "approx": "3.000000e+01",
+     "n": 1184
+    },
+    "layer slack": {
+     "value": "11347193/1044373736400",
+     "approx": "1.086507e-05",
+     "n": 5408
+    },
+    "surplus largest": {
+     "value": "5",
+     "approx": "5.000000e+00",
+     "n": 9802
+    },
+    "tH": {
+     "value": "211/3000",
+     "approx": "7.033333e-02",
+     "n": 7516
+    },
+    "tH largest": {
+     "value": "57/200",
+     "approx": "2.850000e-01",
+     "n": 1314
+    },
+    "tV": {
+     "value": "231/4600",
+     "approx": "5.021739e-02",
+     "n": 9350
+    },
+    "tV largest": {
+     "value": "371/1600",
+     "approx": "2.318750e-01",
+     "n": 2124
+    }
+   }
+  }
+ ],
+ "geometry_receipts": [
+  {
+   "receipt": "all-rows-geometry-v2.json",
+   "receipt_program_sha256": "4b1544c9ad52053c10dbfa833be78268f85021a0bf6f5cbc715b05ce3e621b0d",
+   "table_sha256": "1cbfecf886a2000bd9d5f54304813d7422f785a2fb9a15655f2119a33f8c48f5",
+   "rows": 5134,
+   "problems": [],
+   "problem_count": 0,
+   "squares": 30445623,
+   "pairs_decided": 141533725,
+   "touching_pairs_per_row": [
+    3893,
+    36700
+   ],
+   "wall_contacts_per_row": [
+    171,
+    532
+   ],
+   "denominator_digits": [
+    10,
+    41
+   ],
+   "cpu_seconds_rows": 2206.5,
+   "wall_seconds": 2346.5
+  },
+  {
+   "receipt": "all-rows-geometry-v1.json",
+   "receipt_program_sha256": "4b1544c9ad52053c10dbfa833be78268f85021a0bf6f5cbc715b05ce3e621b0d",
+   "table_sha256": "f047c44b7d627d7d5e2e990136931a6d8cf4c19ded439482ab1ef9f8bd030b56",
+   "rows": 4571,
+   "problems": [],
+   "problem_count": 0,
+   "squares": 27149538,
+   "pairs_decided": 126095237,
+   "touching_pairs_per_row": [
+    3893,
+    36700
+   ],
+   "wall_contacts_per_row": [
+    171,
+    538
+   ],
+   "denominator_digits": [
+    11,
+    37
+   ],
+   "cpu_seconds_rows": 1985.4,
+   "wall_seconds": 2101.3
+  }
+ ]
+}

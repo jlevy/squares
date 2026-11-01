@@ -1,0 +1,43 @@
+{
+ "cases": {
+  "two touching along an edge": {
+   "expected_pass": true,
+   "passed": true,
+   "failures": []
+  },
+  "two overlapping by 1e-30": {
+   "expected_pass": false,
+   "passed": false,
+   "failures": [
+    "squares 0 (case) and 1 (case) overlap"
+   ]
+  },
+  "a square 1e-30 through the wall": {
+   "expected_pass": false,
+   "passed": false,
+   "failures": [
+    "square 0 (case) crosses a wall"
+   ]
+  },
+  "a tilted square corner-touching an axis one": {
+   "expected_pass": true,
+   "passed": true,
+   "failures": []
+  },
+  "the same tilted square 1e-30 lower": {
+   "expected_pass": false,
+   "passed": false,
+   "failures": [
+    "squares 0 (case) and 1 (case) overlap"
+   ]
+  },
+  "a polygon of side 1 + 1e-30": {
+   "expected_pass": false,
+   "passed": false,
+   "failures": [
+    "square 0 (case) is not a unit square"
+   ]
+  }
+ },
+ "all_as_expected": true
+}

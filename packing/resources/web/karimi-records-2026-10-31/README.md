@@ -21,7 +21,8 @@ written, so no Zenodo listing was read. The rows are above 1024, where the recor
 upper bounds as dated rows of its coverage register, decided in report order by
 think-llit’s walk above 1024, which does not exist yet. So this packet records no row and
 no register entry; it retains the sources and the stage 4 checks that rest on them: two
-samples, and the full replay of v5 on both routes.
+samples, the full replay of v5 on both routes, and W9’s decisions of every filled-end
+row.
 
 ## Custody
 
@@ -34,7 +35,13 @@ replay of v5, 66 receipts of at most 169 lines each and their summary. So the pa
 about 3.8 MB in a checkout; OR-18 admits it, and `check_added_blobs` passes. The
 decisions receipt, 5,339 lines and 2,128,349 bytes, is stored as deterministic gzip, as
 `devtools.retained_data` keeps a retained file of more than 1,000 lines
-([Compressed Files](#compressed-files)); every other receipt is under that threshold.
+([Compressed Files](#compressed-files)); every other two-strip receipt is under that
+threshold.
+
+W9’s receipts (below) add 1,352,523 bytes stored: its two decisions receipts, each over
+1,000 lines, are stored the same way, 722,184 bytes for V2.0’s and 615,884 for V1.0’s,
+and the replay sample is 14,455 bytes, plain. The stage 4 review’s programs and receipts
+under `review/` add 604,175 bytes in 14 files, so the packet is about 5.8 MB.
 
 Each digest the author stated holds:
 
@@ -134,8 +141,80 @@ builder is third-party code that runs in the quick tests and in CI; it was read 
 first: it imports only `math`, `sys` and `fractions`, its module level defines and does
 nothing else, and its one writer, `write_cert`, is never called.
 
-No program here decides a V2.0 row from its parameters: that is W9’s (think-fuwd), and
-the full validation is think-qczx’s.
+## W9: The Filled-End Checker
+
+`devtools.filled_end_checker` (think-fuwd) decides a filled-end row exactly from its
+parameters, by a lemma its module docstring states and proves and
+[research-2026-11-01-filled-end-lemma.md](../../../../docs/project/research/research-2026-11-01-filled-end-lemma.md)
+writes out. Each band’s rows and its two ends’ layers are interior-disjoint inside the
+band; the grid and the two placed bands are disjoint inside $[0, S]^2$ when both fit
+inequalities hold; and every count up to the capacity is packed. It was written from
+`filled_ends.py` read as data and shares no code with it.
+
+**The stage 4 review accepted the lemma** on 1 November, with no defect
+([review-2026-11-01-filled-end-lemma.md](../../../../docs/project/reviews/review-2026-11-01-filled-end-lemma.md)).
+A separately prompted lane wrote its own exact geometry, sharing no code with the checker
+or the author, and verified every row of both deposits with it: 30,445,623 squares
+placed in V2.0 and 27,149,538 in V1.0, no pair overlapping and no wall crossed. Its
+programs and receipts are under
+[`review/filled-end-lemma-2026-11-01/`](review/filled-end-lemma-2026-11-01/README.md).
+Its gaps and notes, F1 to F7, are carried into the checker, the write-up and the
+receipts below. So under D2 (think-f2io) each decided row is a row once the walk records
+it, and the decisions still record none.
+
+**The decimal side is no bound** (the review’s F2). The ingest holds the author’s decimal
+`side` within one unit of its last place of `side_exact`, as a consistency check only.
+He rounded to nearest, so it is below `side_exact` at 2,514 of V2.0’s 5,134 rows and
+2,204 of V1.0’s 4,571, by up to 0.502 units of its twelfth place (0.504 in V1.0). The V
+fit binds at every row, so a square of that side does not hold the construction there.
+Each decisions receipt counts this under `author_columns.side`. The walk records a row at
+`side_exact`, or at a decimal rounded up from it, never at `side`.
+
+**V2.0, every row** (`receipts/filled-end-decisions-v2.json.gz`): all 5,134 rows decided
+by the lemma, none refused. Each row’s eighteen controls are refused, each by the check
+it names, which `check` derives again. Seven were added after the review found that
+seven of the lemma’s eleven hypotheses had no per-row control (F3):
+
+- the H band one square narrower (the H fit);
+- a negative tilt;
+- a lift 10^-15 below zero;
+- a layer of -1 squares;
+- an H band K wide;
+- K = 1;
+- an H band left shorter than its depth.
+
+The layer controls make one change for every level of a band end and one for the level
+after it, 85,174 in all (21,764, 23,228, 19,458 and 20,724 for the four ends), each
+refused. 4,851 rows are filled to the capacity and none has a surplus above 7. The least
+slacks: the V fit 0 at every row, since $S = K - b_V + W_V$ exactly; the H fit
+$1.5 \times 10^{-8}$ (9517); a layer $1.4 \times 10^{-6}$ (5265). 284.2 CPU-seconds,
+with the SHA-256 and size of every written-out certificate, which are not kept.
+
+**V1.0, every row, apart** (`receipts/filled-end-decisions-v1.json.gz`): all 4,571 rows
+decided, none refused, every control refused by its own check (76,268 layer changes);
+246.0 CPU-seconds. It is decided and labelled apart because whether V1.0 counts as a
+report at all is the owner’s question Q-847a (think-r94q). The receipt says only that the
+lemma decides each of its packings, and `check` holds its note, which names Q-847a, to
+the checker’s on every pull request.
+
+The review’s `fe_all_rows.py` compared 16 fields of these receipts as they stood at
+`7db2baa55`, with eleven controls, and holds a row to eleven refused. The receipts now
+carry eighteen, so that program reads the receipts at that commit; every other field it
+compared is unchanged.
+
+**The cross-checks.** At five V2.0 counts nearest the lemma’s edges, 1188 (a lift of
+zero), 5265 (the least layer slack), 7439 and 8524 (the least H and V lift room) and 9517
+(the least H fit slack), the certificate `write_out` writes passes both maintained exact
+routes, and both refuse its six controls (`receipts/filled-end-checker-replay-sample.json`;
+430.9 CPU-seconds on two workers, 49.5 of them for the positives and 381.2 for the
+controls). And at the five counts of the author-built sample above, `write_out` writes
+the author’s certificates byte for byte, which `check` holds by their SHA-256s without
+running his code. A row the lemma refuses is no row: `check` names it, and no route
+decides it in the lemma’s place. No row of either deposit is refused.
+
+They decide that each stated packing is a packing; which rows the record takes,
+and in what order, is still the walk’s (think-llit), after the owner’s D4 and Q-847a.
+think-qczx’s full validation on both routes waits for those.
 
 These programs are not yet registered in `frontier/verifiers.yaml` and no evidence entry
 cites their receipts: the rows they serve are not recorded until the walk above 1024
@@ -187,9 +266,15 @@ A rerun records new timings, so the receipt is not pinned by digest: Git keeps i
 bytes (OR-16), and `acquire_source --check` asks that it is listed, carries no name or
 timestamp, and decompresses.
 
+W9’s two decisions receipts are stored the same way, through
+`filled_end_checker`, which reads and writes them by `devtools.retained_data`, and are
+listed here on the same terms.
+
 | Stored file | Origin | Git blob | SHA-256 |
 | --- | --- | --- | --- |
 | `receipts/two-strip-decisions-v5.json.gz` | receipt |  |  |
+| `receipts/filled-end-decisions-v1.json.gz` | receipt |  |  |
+| `receipts/filled-end-decisions-v2.json.gz` | receipt |  |  |
 
 ## Commands
 
@@ -202,6 +287,9 @@ python -m devtools.two_strip_checker replay-sample --version 5 --workers 2
 python -m devtools.two_strip_checker replay-all --version 5 --workers 2   # resumes by K
 python -m devtools.filled_end_sample check [--replay]
 python -m devtools.filled_end_sample replay --workers 2
+python -m devtools.filled_end_checker check [--digests] [--replay]
+python -m devtools.filled_end_checker decide-all [--version 2] [--version 1]
+python -m devtools.filled_end_checker replay-sample --workers 2
 ```
 
 <!-- This document follows common-doc-guidelines.md.
