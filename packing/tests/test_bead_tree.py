@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -394,3 +395,82 @@ def test_the_gate_reads_the_staged_house_adoptions(
     assert "FAIL select_houses.PENDING_ADOPTION n=68 (T-174) names think-bbbb (closed)" in (
         capsys.readouterr().out
     )
+
+
+def _guarded(monkeypatch: pytest.MonkeyPatch, off_main: list[str] | None) -> None:
+    """Records whose one deferral, an open issue's answer bead, names think-aaaa, and a
+    checkout whose deferral records differ from `origin/main` at `off_main`."""
+    named = [("result-requests.yaml open issue #836", "think-aaaa")]
+    monkeypatch.setattr(check_bead_tree, "deferrals", lambda: named)
+    monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
+    monkeypatch.setattr(check_bead_tree, "adoption_deferrals", list)
+    monkeypatch.setattr(check_bead_tree, "records_off_main", lambda: off_main)
+
+
+def test_a_bead_the_records_on_main_still_name_may_not_close(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """think-13ew: on 31 October lanes closed answer beads once their issues were answered
+    on GitHub, while `main`'s requests record still listed the issues open under them, so
+    every records branch failed this check until the coordinator reopened them. The guard
+    stage 7 runs before closing a bead holds it while a record on `main` names it."""
+    _guarded(monkeypatch, [])
+    guard = check_bead_tree.BEFORE_CLOSE
+    assert check_bead_tree.main([guard, "think-aaaa", "think-bbbb"]) == 1
+    shown = capsys.readouterr().out.splitlines()
+    assert [line.split(";")[0] for line in shown if "HOLD" in line] == [
+        "  HOLD result-requests.yaml open issue #836 names think-aaaa on main"
+    ]
+    assert "  ok  no record on main names think-bbbb; it may close" in shown
+    assert check_bead_tree.main([guard, "think-bbbb"]) == 0
+    assert "ok  no record on main names think-bbbb" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    ("off_main", "expected"),
+    [
+        (["packing/campaign/result-requests.yaml"], "differ from origin/main"),
+        (None, "origin/main does not resolve"),
+    ],
+)
+def test_the_close_guard_reads_only_the_records_main_holds(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    off_main: list[str] | None,
+    expected: str,
+) -> None:
+    """A branch that already marks the issue closed is not `main`: closing the bead from
+    it is the 31 October failure, so the guard refuses a checkout whose deferral records
+    are not `origin/main`'s, and one where `origin/main` does not resolve."""
+    _guarded(monkeypatch, off_main)
+    assert check_bead_tree.main([check_bead_tree.BEFORE_CLOSE, "think-bbbb"]) == 2
+    assert expected in capsys.readouterr().err
+    assert check_bead_tree.main([check_bead_tree.BEFORE_CLOSE]) == 2
+
+
+def _git(repo: Path, *arguments: str) -> None:
+    subprocess.run(["git", "-C", str(repo), *arguments], check=True, capture_output=True)
+
+
+def test_the_records_off_main_are_read_from_git(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """In a repository of its own: none while the records are `origin/main`'s, the edited
+    one once the working tree changes it, and None with no `origin/main`."""
+    _git(tmp_path, "init", "-q")
+    for path in check_bead_tree.DEFERRAL_RECORDS:
+        (tmp_path / path).parent.mkdir(parents=True, exist_ok=True)
+        (tmp_path / path).write_text("issues: []\n", encoding="utf-8")
+    _git(tmp_path, "add", ".")
+    _git(tmp_path, "-c", "user.name=t", "-c", "user.email=t@example.com", "commit", "-qm", "r")
+    monkeypatch.setattr(check_bead_tree, "REPO", tmp_path)
+    assert check_bead_tree.records_off_main() is None
+    _git(tmp_path, "update-ref", "refs/remotes/origin/main", "HEAD")
+    assert check_bead_tree.records_off_main() == []
+    edited = "packing/campaign/result-requests.yaml"
+    (tmp_path / edited).write_text("issues: [{number: 836}]\n", encoding="utf-8")
+    assert check_bead_tree.records_off_main() == [edited]
+
+
+def test_the_close_guard_and_the_gate_read_the_same_records() -> None:
+    assert check_bead_tree.DEFERRAL_RECORDS == validate.DEFERRAL_RECORDS
