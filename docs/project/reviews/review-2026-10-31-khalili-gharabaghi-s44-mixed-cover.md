@@ -59,7 +59,8 @@ is trusted. `zm_mixed.py` was not run here; its complete pass is priced at about
 
 **Questions, none blocking.** Whether the `zm_mixed.py` runs without `--cert-mode` were
 deliberate (F4), and whether you can say which `zeromargin.py` the README’s
-`DIFFERS FROM PINNED` note refers to beyond its digest (§11).
+`DIFFERS FROM PINNED` note refers to beyond its digest (§11). The authors answered the
+first on 1 November 2026: not deliberate (F4).
 
 ## 1. What Was Reviewed
 
@@ -352,6 +353,10 @@ The record rates the replay interval-certified, and the trust boundary includes 
 host’s IEEE-754 arithmetic.
 `zm_mixed.py` is the exact-rational one.
 
+On 1 November 2026 the authors accepted the correction and said they will fix the
+wording of the README, the issue and the paper’s §4 in their next release
+([comment](https://github.com/jlevy/squares/issues/842#issuecomment-6553028920)).
+
 ### F2. `zmx2.rs` `e2bb84e9` had not run here (note, for the record)
 
 The registry listed the version as retained and not run.
@@ -377,6 +382,18 @@ The second means the route ran a `zeromargin.py`, `3cb95fb7`, that `zm_mixed.py`
 pinned against and that no review here has read.
 Neither affects the claim, which `zmx2` decides; both would matter to a record that
 rested on the `zm_mixed.py` route.
+
+**Answered, 1 November 2026.** The authors say the runs left out `--cert-mode` because
+they kept the flags of their earlier runs, not by choice.
+They add that it cannot change this cover’s outcome: `zm_mixed.Cover` finds no weighted
+point on a segment-carrying line (`line_points` is empty) and no polygon, and all 62
+recorded runs print “closed by Lemma T with line points: 0”
+([comment](https://github.com/jlevy/squares/issues/842#issuecomment-6553028920)). That
+agrees with §4 and §6.3: each of the 62 `.out` logs the packet retains prints that line
+and “0 polygons”. They offer a certificate-mode pass.
+In `zm_mixed.py` `1fd20346` that mode only refuses a cover with polygons and skips the
+Corollary T′ branch, which also needs `line_points`. A pass in it would decide every box
+of this cover as these runs did, so the record does not need one.
 
 ### F5. The README’s “0.4 % slack” is the linear program’s gap (note, in the source)
 
@@ -407,6 +424,9 @@ None holds anything open.
 1. Were the `zm_mixed.py` runs without `--cert-mode` deliberate (F4)? A rerun of the 27
    deepest roots in certificate mode would align the route with the record’s other
    `zm_mixed.py` evidence.
+   Answered on 1 November 2026: not deliberate.
+   For this cover a certificate-mode run decides the same boxes the same way (F4), so no
+   rerun is needed.
 2. Is `zeromargin.py` `3cb95fb7` the file at evand/square-packing `659ee62`, as the
    records’ headers say, and did you run any check of it against `640fe453`?
 
