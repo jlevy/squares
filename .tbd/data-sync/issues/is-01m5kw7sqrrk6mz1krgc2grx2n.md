@@ -3,10 +3,10 @@ type: is
 id: is-01m5kw7sqrrk6mz1krgc2grx2n
 title: Replay sqverify_continuous v4 on T-145's and T-157's densities (the second route for the continuous cover)
 kind: task
-status: in_progress
+status: open
 priority: 2
-version: 9
-delegate: bold-ritchie-l10
+version: 11
+delegate: null
 labels:
   - validation
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T07:57:34.328Z
-updated_at: 2026-11-01T01:19:07.381Z
+updated_at: 2026-11-01T02:24:15.172Z
 started_at: 2026-10-31T20:02:09.390Z
 ---
 The second route for the continuous cover of T-145 and T-157: a complete run here of wand125's sqverify_continuous, reviewed on 23 October 2026 (think-xzob; docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) with no blocking or major finding. A replay moves the cover's mark to independently re-implemented after reading the producer's code, and no rung.
@@ -49,3 +49,5 @@ Receipts and outputs: packing/resources/web/wand125-sqverify-continuous-v4-2026-
 - #533 (answer bead think-flxm; third person, owner's tracking issue): the ask is done (retained, reviewed, built, both examples replayed with mass controls; receipts in the v4 packet's replay/); the counted oblique control stays with think-flxm; closeable after merge.
 
 2026-11-01 bold-ritchie-l10, after review A of #865 (https://github.com/jlevy/squares/pull/865#pullrequestreview-5725482992). A1: the earlier note's "the threshold shift does not work for these densities" holds for c6715 only; for c6718 the tau = 1 run bounded the oblique minimum from below. Ran c6718 at tau 1001/1000 (review A1's proposal; budget 4,000,000 a root, two threads): REFUSED with the patch verified, 169,336,387 nodes, 6,624.9 CPU-s, judged faithful, **no refutation**: 69 roots verified; roots 3, 4 and 75-85 stopped at the node budget (captures 1.0017-1.016); roots 49-52 (t in [23/100, 1/4]) reached resolution at legal poses capturing 1001/1000 + 1.9e-13 to 2.9e-12, where the density's least oblique capture lies. **Next step here:** c6718 at tau 2503/2500 (between that capture and the patch minimum 1.00149865; those four witnesses already capture less than it), about 2 CPU-hours at this budget; for c6715, a density mutant. A2: #533's ask is split; "this repository's own mass controls" is a queued ask owned by this bead (the 985/1000 controls are the source's, rebuilt here), and either counted control above would discharge it for its density; the source's B = 3348/3359 control stands on the 23 October review's run alone. A3: the 23 October review joins T-145's and T-157's reviews (covers T-145, T-157, T-192); T-157's rung 4 now waits only on the human oversight record, whose AI-findings check should cover SC-1, SC-2 and this open control. The #533 draft in the note above no longer applies: #533 stays open on the queued ask; the #485 draft stands.
+
+2026-11-01 bold-ritchie-l10 (branch claude/bold-ritchie-xo28us-l10b, after #865 merged at 68f25b17a): **c6718 at tau 2503/2500: REFUSED, patch verified, no legal refutation** (budget 4,000,000 a root, two threads; 171,796,970 nodes, 6,487.3 CPU-s; judged faithful). 67 roots verified; 11 at the node budget (3-5, 76, 79-85); 8 at resolution (49-52, 74, 75, 77, 78) at legal poses capturing 2503/2500 + 3.4e-13 to 3.0e-12. So the earlier reading "least oblique capture at or just above 1001/1000" was too strong: the witnesses track tau', not the minimum; the minimum lies in [1, 1001/1000 + 2.9e-12]. The 1001/1000 run's witnesses at roots 49-52 are legal poses capturing less than 2503/2500, so that statement is false at oblique poses with the patch holding, yet this program's refusals report the path centre of a box straddling the level set at tau' (SC-6), so the judge counts none. **Conclusion:** no threshold shift near the least capture gives a counted control with this program; #533's queued ask ("this repository's own mass controls") stays queued. **Remaining here:** a density mutant lowering oblique captures well below tau' over a region the search reaches first (both densities), or a witness rule reporting the least capture found (an upstream suggestion to the author, or a first-party judge pass over a refused box); no further threshold run is proposed. #485's final comment posted and the issue closed: https://github.com/jlevy/squares/issues/485#issuecomment-6551827600 (01:34:34Z), after the Pages deploy of 68f25b17a verified (run 41260521565, verify-deployment 124714341387, 6034/6034). #533 stays open on the queued ask; no #533 reply owed by this change beyond its next follow-up.
