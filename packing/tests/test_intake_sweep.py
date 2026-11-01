@@ -1012,12 +1012,75 @@ def test_an_issue_held_for_the_owner_is_listed_for_the_owner_and_never_as_a_clos
     )
     assert item.step == "for the owner: Reserved for the owner (think-cccc)."
     assert sweep.needing_action([sweep.Section("queues", items=[item])]) == []
+    # The block a held issue carries is the hold's, so it hides no close (think-u4bm).
+    reply = {"type": "owner-reply", "reason": "Held for the owner (think-cccc)."}
+    (blocked,) = _queues([_settled(held=HOLD, blocked=reply)], beads).items
+    assert blocked.what == item.what
     unanswered = {**_settled(held=HOLD), "replies": []}
     (owed,) = _queues([unanswered], beads).items
     assert "confirmation (a reply and its close otherwise owed)" in owed.what
     _result, queued_ask, held = _queues([_issue(held=HOLD)], beads).items
     assert queued_ask.what == "#300 queued ask: a correction"
     assert "confirmation (a reply otherwise owed)" in held.what
+
+
+#: #574's close condition: held and blocked on the owner, it names the same decision.
+DECIDED = (
+    "The import and its disposition are on main, the owner has decided the pull request and "
+    "posted the resulting state."
+)
+
+
+def test_a_held_issue_s_close_condition_on_the_owner_hides_no_close() -> None:
+    """Review A1 of #869: #574 is held, `blocked: owner-decision`, and its close_when names
+    the owner's decision on the pull request. That clause is the hold's too, so the close
+    a pass would otherwise owe is still listed for the owner."""
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    decision = {"type": "owner-decision", "reason": "The owner decides the pull request."}
+    (plain,) = _queues([_settled(held=HOLD, blocked=decision)], beads).items
+    (worded,) = _queues(
+        [_settled(held=HOLD, blocked=decision, close_when=DECIDED)], beads
+    ).items
+    assert worded.what == plain.what
+    assert "(its close otherwise owed)" in worded.what
+
+
+@pytest.mark.parametrize(
+    ("extra", "shown"),
+    [
+        (
+            {"blocked": {"type": "dependency", "reason": "Waits on another lane's change."}},
+            "#300 is blocked:dependency: Waits on another lane's change",
+        ),
+        (
+            {"close_when": DECIDED},
+            (
+                "#300 is held by close_when, which waits on an owner decision no `blocked` "
+                "records (the owner has decided the pull request and posted the resulting "
+                "state)"
+            ),
+        ),
+    ],
+)
+def test_an_answered_issue_held_open_by_a_block_is_listed_with_the_close_it_would_owe(
+    extra: dict[str, Any], shown: str
+) -> None:
+    """Review A1 of #869: an answered open issue with a `blocked` entry, or a close
+    condition naming an owner decision, is no longer closeable (think-u4bm), and the sweep
+    then listed nothing for it, so a stale block hid an owed close. It is listed with
+    what holds it and the close it would otherwise owe, and fails nothing."""
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    (item,) = _queues([_settled(**extra)], beads).items
+    assert (item.what, item.state, item.bead) == (
+        f"{shown} (its close otherwise owed): listed until it lifts, nothing closed",
+        sweep.LISTED,
+        "think-bbbb",
+    )
+    assert item.step == (
+        "lift the block, or reword close_when, once what it waits on is done; then close "
+        "the issue with its final comment"
+    )
+    assert sweep.needing_action([sweep.Section("queues", items=[item])]) == []
 
 
 def test_a_close_github_already_shows_is_recorded_not_posted_again() -> None:

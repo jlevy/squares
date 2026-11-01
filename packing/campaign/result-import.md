@@ -956,6 +956,17 @@ head ([development.md](../../development.md#hosted-ci-gates-a-draft-pull-request
 merges on the owner’s word, by
 [the merge policy](../../development.md#merging-a-pull-request).
 
+**An intake pull request names its issues without a closing keyword.** Its title, its
+description and the commit messages it merges say `answers #N` or `records #N`, never
+`closes`, `fixes` or `resolves`, in any tense, bold or not, before an issue reference or
+a link to one: GitHub would close the issue at the merge, before the final comment that
+stage 7 closes it with.
+The merge commit’s message carries the title.
+#834’s description said so of #613, and its merge on 31 October 2026 closed #613
+fourteen minutes before the final comment was posted (think-t9uj). From `packing/`,
+`python -m devtools.check_pr_description --file BODY.md --label intake --title "TITLE"`
+refuses one in either.
+
 ### The House Rule
 
 A case record’s two upper lanes hold one certificate, that of the case’s **house best
@@ -1517,8 +1528,8 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   [Close an Answered Issue](#close-an-answered-issue).
   A result still below `V3/C3` does not hold it open once the beads that own the rest of
   its validation are named.
-  An import still queued, a queued ask of the author’s, an awaited question or the
-  owner’s hold does hold it open.
+  An import still queued, a queued ask of the author’s, an awaited question, the owner’s
+  hold or a `blocked` entry does hold it open.
 - **Every S4 or S5 result gets a News item** in the first change after the merge that
   registered or raised it:
   [Announce a Significant Result](#announce-a-significant-result).
@@ -1535,7 +1546,8 @@ Answered means four things:
   the beads that own it.
 - Nothing the author asked for is still queued, and no question to the author awaits an
   answer that could falsify the record.
-- The owner does not hold the issue.
+- The owner does not hold the issue, and nobody else must act first: it carries no
+  `blocked`, of any type.
 
 A result below `V3/C3` does not hold its issue open once its `validation` names the open
 beads that own the rest of its review and replay.
@@ -1578,7 +1590,8 @@ each held open only by validation the project owned (#420, #428, #446, #594, #60
    An issue GitHub already shows closed with its final comment is not posted on again:
    record that comment and its close (step 4). One GitHub closed before its final
    comment was posted, as a merged pull request’s closing keyword does (#613 on 31
-   October 2026, think-t9uj), still gets the final comment, posted as below.
+   October 2026, think-t9uj), still gets the final comment, posted as below; stage 5
+   keeps closing keywords out of intake pull requests so that this stays rare.
 2. **Check that `main` and the deployed site say what the final comment will say**,
    render the comment with `check_requests --draft N`, and edit it to the house style.
    It states each id at its rungs, linked into `main` and the site, and that nothing the
@@ -1612,11 +1625,20 @@ each held open only by validation the project owned (#420, #428, #446, #594, #60
    Record each id, rung, status and position it stated under `reported`, and the beads
    it named under `beads`; a closed issue owes a reply until some reply names each bead
    its results’ `validation` names.
-   Close the answer bead once the record no longer names it on an open issue, which
-   `check_bead_tree` checks.
+   Close the answer bead only after the records pull request that marks the issue closed
+   has merged, never when the issue closes on GitHub.
+   The bead store is shared, so a bead that `main`’s record still names on an open issue
+   fails `check_bead_tree` on every branch that edits a record: on 31 October 2026 lanes
+   closed five answer beads early and the coordinator reopened them (think-13ew). Before
+   closing any bead a record names, run
+   `uv run --frozen --all-extras --group dev python -m devtools.check_bead_tree
+   --before-close think-xxxx` from `packing/` on `main`, after `git fetch origin main`.
+   It names each record on `main` that still names the bead, and refuses a checkout
+   whose records are not `main`’s, since a branch that drops the bead has not merged.
    A `validation` bead stays open until the review or replay it owns has landed; then
    drop the field (the result is confirmed or refuted) or name the bead that takes over,
-   and post the follow-up the moved rung owes.
+   post the follow-up the moved rung owes, and close the bead by the same guard once
+   that change has merged.
 
 Each six-hourly check-in of a running pass does the same.
 Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1;
@@ -1770,7 +1792,9 @@ An issue is **closeable** once it is answered
   and replay;
 - no `ask` is queued, and no question under `awaiting_author` awaits the author’s
   answer;
-- the owner does not hold it (`held`).
+- the owner does not hold it (`held`);
+- it carries no `blocked`, of any type, and its `close_when` waits on no owner decision
+  that no `blocked` records.
 
 `--report` adds one more: every id the issue maps to is on `main`. A **review track**
 (`review_track: true`), which the project opened to track a pending review of a result
@@ -1779,9 +1803,18 @@ is confirmed or refuted, `validation` or not.
 `close_when` is descriptive.
 It says what closing would take as the entry was written; where it says more or less,
 the rule above governs.
-The texts were not rewritten when rule P1 came in on 26 October 2026 (think-3b9v): at
-least ten already said an issue closes once its validation is owned while the code
-waited for `V3/C3`, and others name conditions the rule does not.
+The one clause the rule reads is one that waits on the owner’s decision or answer (“the
+owner has answered”, “has decided”, “an owner decision”, “the owner’s call”, “settled by
+the owner”): with no `blocked` to say whether that decision stands, the issue is not
+closeable, so record `blocked: owner-decision` while it stands and reword `close_when`
+once it is met. The sweep lists such an issue, and one a `blocked` entry holds, with the
+close it would otherwise owe, so a block that has gone stale stays in view.
+On 31 October 2026 `--report` listed #846 closeable while it was `blocked:
+owner-decision` and its `close_when` waited on the owner’s answer, and a lane kept it
+open by hand (think-u4bm). The texts were not rewritten when rule P1 came in on 26
+October 2026 (think-3b9v): at least ten already said an issue closes once its validation
+is owned while the code waited for `V3/C3`, and others name conditions the rule does
+not.
 
 An **ask** records only what the issue’s author asked of the project: a change to the
 record, a credit, a decision, a piece of research.
