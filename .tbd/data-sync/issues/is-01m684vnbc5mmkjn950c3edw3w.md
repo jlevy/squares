@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 67
+version: 68
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -42,7 +42,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T22:49:58.359Z
+updated_at: 2026-11-01T22:54:28.094Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -114,3 +114,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-01 21:52: renewal. Merged #872 (b9257eb44): #847 follow-up posted 21:01Z after the ea5b27c95 deploy verified, recorded; think-r94q stays open (claimed by bold-ritchie-l4; #847 open until rows land). Sweep intake18 run; no new issues since 20:50Z. Gradec replay 56/236, 0 failures. L17 (think-nrp6) running.
 
 2026-11-01 ~23:00: merged #874 (4abadb18e; squarepack-certs strip-even read, nothing to import) and #873 (d46fc6f29; think-nrp6 closed): no-public-change records now one file each under packing/release-records/no-public-change/, append-only gate, numbered set frozen at 247, new records date-named with lane/bead. Owner-held PRs #744 and #599 append to the old tuple; when either is revived it must run `python -m devtools.release_records migrate --slug <lane>` (the gate names the command). Next efficiency candidate filed: think-l6lt (DATA_REVISION pin conflicts). 30 PRs merged this pass.
+
+2026-11-01 22:52: renewal. Gradec replay complete 22:39Z: 233/233 valid, byte-identical, logs match, 3/3 controls refused, 39,647 CPU-s (11.0 CPU-h). L19 lands the receipt in the packet, holding the register evidence/rung for think-xyek (precedent T-253/T-260). 297 route 1 running (reniced to 0). Sweep intake19 run; no new issues since 21:50Z.
