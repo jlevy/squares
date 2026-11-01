@@ -5,14 +5,18 @@ title: "Validate: chelokot's and Daniel's Lean proofs of s(2) to s(5) (think-7l2
 kind: task
 status: open
 priority: 3
-version: 2
+version: 5
+delegate: null
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-23T07:14:00.796Z
-updated_at: 2026-10-23T07:20:50.035Z
+updated_at: 2026-10-26T11:22:02.354Z
+started_at: 2026-10-26T11:21:28.603Z
 ---
 Validation part of think-7l2j (chelokot's and Evan Daniel's Lean proofs that s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/sqrt 2; no issue). Created by c-lean-1023 under the 23 October intake epic, as the lane rules allow; it serves think-7l2j.
 
@@ -27,3 +31,7 @@ Validation part of think-7l2j (chelokot's and Evan Daniel's Lean proofs that s(2
 - Machine note: small; not alongside a validation gate.
 
 blocked_on: none
+
+## Notes
+
+2026-10-26 ~11:25Z w-val-1026 (moderate-tier sub-agent of coord-n12-1025, the 26 October intake review's validation lane): NOT STARTED, disk. The run needs two Lean toolchains (v4.33.0 for chelokot's 753079eb, v4.33.1 for Daniel's 7051f4e) and two Mathlib caches (db584cd6 and 0df444a3), about 10 GB each by the two packets' READMEs (chelokot-small-n-lean-2026-09-05/README.md lines 155-159, evand-rect-small-n-lean-2026-10-22/README.md lines 137-139): about 20 GB for both routes, about 10 GB for either alone. This host (four cores, shared) had 5.1 GB free on / at 11:21Z on 26 October (`df -h /`: 252G size, 34G used, 5.1G avail), so neither route fits; no toolchain (~/.elan absent) or Mathlib cache is present to reuse. CPU price unchanged: under 1 CPU-hour for both (an estimate from size). Runnable on a host with at least 12 GB free for one route or 22 GB for both; nothing else blocks it. #786 stays open on it (review track: it closes only when T-238 is confirmed or refuted).

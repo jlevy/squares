@@ -3,10 +3,10 @@ type: is
 id: is-01m4qhcybbrt2fnj26vxs9595n
 title: Apply the record and tool changes proposed by the 2026-10-11 rung reviews (R1 RR-1..RR-9, R2 section 8)
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
-delegate: w-542-1026
+version: 5
+delegate: w-records-1026
 labels:
   - result-import
   - review
@@ -15,8 +15,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T07:49:24.458Z
-updated_at: 2026-10-26T09:21:48.402Z
+updated_at: 2026-10-26T12:37:03.966Z
 started_at: 2026-10-26T09:21:48.401Z
+closed_at: 2026-10-26T12:37:03.966Z
+close_reason: "Done in #832 (merged at 9e1ce9be8): RR-2 to RR-7, LR-7 and section 8 applied; RR-1, the distinctness question, the activity field and the SquaresLean watch row declined with reasons. #542 closed with its final reply (issuecomment-6415871518), recorded in #833."
+resolution: null
+duplicate_of: null
 ---
 The two rung reviews of the 2026-10-11 intake pass propose record and tool changes they do not make, and layer 5 (think-gn16) picked the reviews without applying them (checked: layer5 results.yaml still has the RR-1 wording and T-133's stale rationale). R1: docs/project/reviews/review-2026-10-11-recent-register-rungs.md (think-18b8; Proposed Record Changes: RR-1, RR-3, RR-5, RR-6, RR-7, RR-9 for the records lane; RR-2, RR-3, RR-4 for a tool lane; RR-8 is done by #518's adoption, which removed every deferral). R2: docs/project/reviews/review-2026-10-11-lean-backed-rungs.md section 8 (think-66e5: T-060 second adversarial review entry and next_rung line, E-n011-lean-statement-closure-build limitations, intake-watch row for the private n = 11 source repository, LR-7 formalization_of field, T-055 and T-120 next_rung). RR-2 overlaps think-viqd. RR-1's wording waits on the owner's decision. Done when each item is on main or recorded as declined, with check_results and packing-validate --records passing.
 

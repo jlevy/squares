@@ -3,9 +3,9 @@ type: is
 id: is-01m5vqd6g9mk0zx0x00fgef8bd
 title: "Regularization gate: no count rests owed on main; flip + general regularization required with a house change; sweep owned() staleness"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: w-reg-gate-1026
 labels:
   - regularization
@@ -13,8 +13,12 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-26T09:07:03.817Z
-updated_at: 2026-10-26T10:48:30.891Z
+updated_at: 2026-10-26T11:40:20.694Z
 started_at: 2026-10-26T09:07:10.279Z
+closed_at: 2026-10-26T11:40:20.693Z
+close_reason: "Gate merged in #831 (main f028ba8ed): owed retired and refused on main, exemptions need the owner's recorded word, moved houses carry general and flip regularization, sweep surfaces stalled beads. Remaining: owner word or strong runs for 39/55/290/291 by 2026-11-09 (think-yk2h)."
+resolution: null
+duplicate_of: null
 ---
 Owner, 26 Oct 2026: 'When something lands on our main rendered lists, the regularization should be done.' Gate: retire regularization-owed (fail validation); exemptions only on the owner's recorded word (OwnerWord: quote, date, file that holds it) with review_by <= 14 days; the four unratified Kingbird exemptions (39, 55, 290, 291; think-yk2h) stand until 2026-11-09; a change that moves a house must land it regularized/regular-as-published/decided-no-better (or owner-exempt, or a PENDING_ALLOWED correction) and its flip pose recorded (--check-state --base-ref). Sweep: owned() treats a bead with no update in 7 days, or an in_progress claim silent for 2 days, as STALLED (needs action). Runbook: result-import.md regularization step. Branch claude/friendly-einstein-gf9z0h-regularization-gate.
 
