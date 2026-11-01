@@ -2204,9 +2204,10 @@ lane or bead that writes it, so that two lanes on one day cannot choose the same
 Give it `components`, `paths`, `outputs` and `reason`, and copy the shape of any record
 there. `no-public-change.schema.yaml` beside the directory is the contract, and
 `python -m devtools.release_records check` reads every record.
-`0000-` to `0246-` are the records moved from the tuple, and the gate refuses any other
-numbered name. The records are append-only: the gate refuses a head that deletes or
-rewrites a record its base holds, so a later finding is a new record.
+The numbered files, `0000-render-changelog.yaml` to `0246-result-requests.yaml`, are the
+records moved from the tuple, and the gate refuses any other numbered name.
+The records are append-only: the gate refuses a head that deletes or rewrites a record
+its base holds, so a later finding is a new record.
 The records were one tuple at the end of `release.py` until 1 November 2026, and every
 two open records pull requests conflicted there at each merge of `main`: 64 of the 174
 merges in the week before, across 33 pull requests (think-nrp6). As files, two additions
