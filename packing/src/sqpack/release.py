@@ -10795,8 +10795,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_n11_lower_bounds_explainer, its "
             "math pass in Google Chrome for Testing 153 (SQPACK_CHROMIUM): 69 files, all "
-            "byte-identical across the three. No PDF was printed; each prints from that "
-            "HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7."
+            "byte-identical across the three. Measured again after review A of #869 had "
+            "write_retained make its gzip in-process and check_packet admit a receipt row "
+            "with no digest, against the same main the same way: 69 files, byte-identical "
+            "across the three. No PDF was printed; each prints from that HTML. Every paper "
+            "keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
