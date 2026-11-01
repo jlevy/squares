@@ -115,15 +115,41 @@ literals, counted in the receipt and decided by nothing. Its receipts are that p
 latter at 1182, 1253, 6089, 9912 and 9944: the first count, new in version 5; the first
 lowered from version 2's; a new count in the middle; the last lowered; and the largest.
 
+**The full replay** (``replay-all``, think-gw1s) is the routes' decision of every row
+of a deposit, not a sample: each row's certificate written out by `write_out` and
+decided on both exact routes of `devtools.couzo_678_replay`, and the routes' six controls
+at one count per K, chosen by `CONTROL_RULE` (`controlled_count`). Six controls at every
+count would cost about eight times the positives, over the compute cap. It runs as
+one job per row on a process pool and writes one receipt per K (`route_part`) as soon as
+that K's rows are all decided. A rerun keeps every receipt that is current
+(`part_is_current`: this checker's header, the routes and their filter lemma included,
+and the K's counts) and replays every K without one, so a killed run loses at most the
+Ks in flight. A job that raises stops the run at once, cancelling the rows not yet
+started and keeping the receipts written. Each receipt keeps a row's verdicts compactly
+(`route_row`): the certificate's SHA-256, which `check` holds to the decisions receipt's,
+both routes' counts and least clearances, and its CPU-seconds. When every K has a
+receipt, `replay_summary` writes the coverage from them. ``replay-all`` reads what it
+wrote back as `check` does and exits 1 on any problem. Version 5's receipts are the
+packet's ``receipts/replay-v5/k035.json`` to ``k100.json`` and ``receipts/replay-v5.json``.
+The replay decides whether each written-out packing is one; whether a row is below every
+earlier report is still the walk's.
+
 ``check`` reads the receipts back: every decision and control derived again, the
 author's columns counted again, the digests at each deposit's sample written out again
 (every count's with ``--digests``), and with ``--replay`` each replay sample decided
-again on both routes.
+again on both routes. A full replay's receipts are read back without deciding again
+(`route_problems`): a complete one needs a receipt for every K and its summary; each
+receipt has this checker's header and the K's counts, each certificate is the decided
+one and each verdict a pass that agrees with its own failure counts, the controlled
+count is the rule's and its six controls are refused by both routes, and the summary is
+what its receipts say. A receipt too damaged to read is named, not raised. The OK line
+states the coverage.
 
 From ``packing/``, with the project interpreter::
 
     python -m devtools.two_strip_checker decide-all [--version 1] [--version 2] [--version 5]
     python -m devtools.two_strip_checker replay-sample [--version 5] [--n N ...] [--workers 2]
+    python -m devtools.two_strip_checker replay-all [--version 5] [--k K ...] [--workers 2]
     python -m devtools.two_strip_checker check [--digests] [--replay]
 
 A finite packing certifies an upper bound and nothing more. Whether a row is below every
@@ -144,7 +170,7 @@ import time
 import zipfile
 import zlib
 from collections.abc import Callable, Iterator, Mapping, Sequence
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import Executor, ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from fractions import Fraction
@@ -201,6 +227,27 @@ PACKET = REPO / PACKET_PATH
 ISSUE = "https://github.com/jlevy/squares/issues/799"
 DECISIONS_FORMAT = "two-strip-decisions-v1"
 REPLAY_FORMAT = "two-strip-replay-sample-v1"
+#: A full replay's receipt for one K, and its summary over every K.
+ROUTE_PART_FORMAT = "two-strip-replay-part-v1"
+ROUTE_SUMMARY_FORMAT = "two-strip-replay-summary-v1"
+#: How a full replay chooses the one count per K whose certificate carries the routes'
+#: six controls (`controlled_count`).
+CONTROL_RULE = (
+    "at each K, the row with the least fit slack, its side less binding_side, the "
+    "smallest count among equals: the packing nearest the edge the lemma allows"
+)
+#: The parts of each route's verdict a full replay's receipt keeps for a row; the
+#: failures themselves are kept only for a row a route refused.
+SQPACK_KEPT = (
+    "passed",
+    "touching_pairs",
+    "strict_pairs",
+    "container_contacts",
+    "failure_count",
+)
+INDEPENDENT_KEPT = ("passed", "least_wall_clearance", "least_pair_gap", "failure_count")
+ROUTES = "packing/devtools/couzo_678_replay.py (decide and decide_controls)"
+CHECKER = "packing/devtools/two_strip_checker.py"
 
 
 @dataclass(frozen=True, slots=True)
@@ -217,7 +264,12 @@ class Deposit:
     ``columns`` is the header its ``records.csv`` must have exactly; `COLUMNS` unless the
     deposit adds an author's column the checker reads and decides nothing by
     (`AUTHOR_COLUMNS`). ``replay`` names its replay-sample receipt, when it has one, and
-    ``replayed`` the counts that sample decides on both routes."""
+    ``replayed`` the counts that sample decides on both routes. ``full_replay`` names its
+    full replay, when it has one: the directory of its receipts per K and, with ``.json``
+    added, their summary. ``full_replay_complete`` is False only while a run is in flight
+    and its checkpoints are committed: `check` then accepts a K without a receipt and
+    reports the replay as partial; once True, it requires every K's receipt and the
+    summary."""
 
     label: str
     record: int
@@ -233,6 +285,8 @@ class Deposit:
     archived: str = ""
     replay: str = ""
     replayed: tuple[int, ...] = ()
+    full_replay: str = ""
+    full_replay_complete: bool = True
 
     @property
     def header(self) -> tuple[str, ...]:
@@ -275,6 +329,20 @@ class Deposit:
     def replay_receipt(self) -> Path:
         """The replay sample's receipt, when the deposit has one."""
         return self.home / "receipts" / self.replay
+
+    @property
+    def route_parts(self) -> Path:
+        """The directory of the full replay's receipts, one per K."""
+        return self.home / "receipts" / self.full_replay
+
+    @property
+    def route_summary(self) -> Path:
+        """The full replay's summary, written once every K has its receipt."""
+        return self.home / "receipts" / f"{self.full_replay}.json"
+
+    def route_part(self, k: int) -> Path:
+        """The full replay's receipt for the rows at one K."""
+        return self.route_parts / f"k{k:03d}.json"
 
 
 #: The counts the stage 1 triage replayed, from 1184 to 3775: the cross-check's sample.
@@ -344,6 +412,7 @@ V5 = Deposit(
     archived="source/karimi_two_strip_records_v3_lite.zip",
     replay="replay-sample-v5.json",
     replayed=(1182, 1253, 6089, 9912, 9944),
+    full_replay="replay-v5",
 )
 DEPOSITS = (V1, V2, V5)
 #: The deposits by the label the command line takes.
@@ -944,6 +1013,459 @@ def replay_sample(counts: Sequence[int], workers: int, deposit: Deposit = V1) ->
     return receipt
 
 
+# --------------------------------------------------------------------------- the full replay
+
+
+def by_k(rows: Sequence[TwoStrip]) -> dict[int, list[TwoStrip]]:
+    """A deposit's rows grouped by K, each group in count order, the Ks in order."""
+    groups: dict[int, list[TwoStrip]] = {}
+    for row in sorted(rows, key=lambda row: row.n):
+        groups.setdefault(row.k, []).append(row)
+    return dict(sorted(groups.items()))
+
+
+def controlled_count(rows: Sequence[TwoStrip]) -> int:
+    """The count among one K's rows whose certificate carries the routes' six controls,
+    by `CONTROL_RULE`: the least fit slack, then the smallest count."""
+    return min(rows, key=lambda row: (row.side - binding_side(row), row.n)).n
+
+
+def route_row(row: TwoStrip, *, with_controls: bool = False) -> dict[str, Any]:
+    """One row of a full replay: its certificate written out and decided on both routes of
+    `devtools.couzo_678_replay`, kept compactly (`SQPACK_KEPT`, `INDEPENDENT_KEPT`), a
+    route's failures only where it refused; with ``with_controls`` the routes' six
+    controls too. The CPU-seconds split the write-out from the routes and the controls."""
+    from devtools import couzo_678_replay as base  # noqa: PLC0415
+
+    began = time.process_time()
+    cert = write_out(row)
+    text = legacy.serialize(cert).encode("utf-8")
+    written = time.process_time()
+    result = base.decide(base.geometry(cert))
+    routed = time.process_time()
+    item: dict[str, Any] = {
+        "n": row.n,
+        "certificate_sha256": _sha256(text),
+        "verified": result["passed"],
+        "candidate_pairs": result["candidate_pairs"],
+        "sqpack": {key: result["sqpack"][key] for key in SQPACK_KEPT},
+        "independent": {key: result["independent"][key] for key in INDEPENDENT_KEPT},
+        "cpu_seconds": {
+            "write_out": round(written - began, 2),
+            "routes": round(routed - written, 2),
+        },
+    }
+    for route in ("sqpack", "independent"):
+        if result[route]["failure_count"]:
+            item[route]["failures"] = result[route]["failures"]
+    if with_controls:
+        item["controls"] = base.decide_controls(cert)
+        item["cpu_seconds"]["controls"] = round(time.process_time() - routed, 2)
+    return item
+
+
+def route_part(
+    deposit: Deposit, k: int, items: Sequence[dict[str, Any]], controlled: int, workers: int
+) -> dict[str, Any]:
+    """The full replay's receipt for one K: its header (`part_header`), its rows'
+    verdicts in count order, and which count carries the controls."""
+    return {
+        **part_header(deposit, k),
+        "controlled": controlled,
+        "environment": _environment(),
+        "written_utc": _now(),
+        "workers": workers,
+        "rows": sorted(items, key=lambda item: item["n"]),
+    }
+
+
+def part_header(deposit: Deposit, k: int) -> dict[str, Any]:
+    """What a K's receipt must say it was decided by and of: its format, the deposit and
+    its rows' file, this checker, the routes and their filter lemma, the controls and the
+    rule that places them, and the K. A receipt with another header was decided by
+    something else and is not current."""
+    from devtools import couzo_678_replay as base  # noqa: PLC0415
+
+    return {
+        "format": ROUTE_PART_FORMAT,
+        "issue": deposit.issue,
+        "doi": deposit.doi,
+        "packet": deposit.packet,
+        "records": deposit.records_name,
+        "checker": CHECKER,
+        "routes": ROUTES,
+        "filter_lemma": base.FILTER_LEMMA,
+        "controls": list(base.CONTROLS),
+        "control_rule": CONTROL_RULE,
+        "k": k,
+    }
+
+
+#: What reading a receipt someone else's bytes may have damaged can raise.
+_UNREADABLE = (ValueError, KeyError, TypeError, AttributeError)
+
+
+def _header_drift(receipt: Mapping[str, Any], header: Mapping[str, Any]) -> list[str]:
+    """The header fields in which a receipt differs from the one expected."""
+    return [key for key, value in header.items() if receipt.get(key) != value]
+
+
+def _counts(receipt: Mapping[str, Any]) -> list[Any]:
+    rows = receipt["rows"]
+    if not isinstance(rows, list):
+        raise TypeError(f"rows is a {type(rows).__name__}, not a list")
+    return [item["n"] for item in rows]
+
+
+def part_is_current(deposit: Deposit, k: int, rows: Sequence[TwoStrip]) -> bool:
+    """Whether a K's receipt exists, reads, has this checker's header and names exactly
+    its rows, so a resumed run keeps it; one that is partial, damaged or decided by other
+    routes, another filter lemma or another rule is decided again. Whether its verdicts
+    hold is `route_problems`'s."""
+    path = deposit.route_part(k)
+    if not path.is_file():
+        return False
+    try:
+        receipt = _read(path)
+        return not _header_drift(receipt, part_header(deposit, k)) and _counts(receipt) == [
+            row.n for row in rows
+        ]
+    except _UNREADABLE:
+        return False
+
+
+def _cpu(item: Mapping[str, Any]) -> float:
+    return sum(item["cpu_seconds"].values())
+
+
+def replay_summary(
+    deposit: Deposit, groups: Mapping[int, Sequence[TwoStrip]]
+) -> dict[str, Any]:
+    """The full replay's coverage, from its receipt for every K: rows decided on both
+    routes, the controls each route refused, the squares and pairs decided and the
+    CPU-seconds spent, and one line per K."""
+    from devtools import couzo_678_replay as base  # noqa: PLC0415
+
+    parts = [_read(deposit.route_part(k)) for k in groups]
+    rows = [item for part in parts for item in part["rows"]]
+    controlled = [
+        next(item for item in part["rows"] if item["n"] == part["controlled"]) for part in parts
+    ]
+    clearances = [Fraction(item["independent"]["least_wall_clearance"]) for item in rows]
+    gaps = [
+        Fraction(item["independent"]["least_pair_gap"])
+        for item in rows
+        if item["independent"]["least_pair_gap"] is not None
+    ]
+    spent = {
+        key: round(sum(item["cpu_seconds"].get(key, 0.0) for item in rows), 1)
+        for key in ("write_out", "routes", "controls")
+    }
+    return {
+        "format": ROUTE_SUMMARY_FORMAT,
+        "issue": deposit.issue,
+        "doi": deposit.doi,
+        "packet": deposit.packet,
+        "records": deposit.records_name,
+        "checker": CHECKER,
+        "routes": ROUTES,
+        "controls": list(base.CONTROLS),
+        "control_rule": CONTROL_RULE,
+        "parts": f"{deposit.packet}/receipts/{deposit.full_replay}/kNNN.json, one per K",
+        "coverage": {
+            "rows": len(rows),
+            "deposit_rows": deposit.rows,
+            "verified": sum(1 for item in rows if item["verified"]),
+            "passed_sqpack": sum(1 for item in rows if item["sqpack"]["passed"]),
+            "passed_independent": sum(1 for item in rows if item["independent"]["passed"]),
+            "ks": len(parts),
+            "controlled_counts": len(controlled),
+            "controls": len(base.CONTROLS) * len(controlled),
+            "refused_by_sqpack": sum(
+                item["refused_by_sqpack"] for row in controlled for item in row["controls"]
+            ),
+            "refused_by_independent": sum(
+                item["refused_by_independent"] for row in controlled for item in row["controls"]
+            ),
+        },
+        "squares": sum(item["n"] for item in rows),
+        "candidate_pairs": sum(item["candidate_pairs"] for item in rows),
+        "touching_pairs": sum(item["sqpack"]["touching_pairs"] for item in rows),
+        "least_wall_clearance": legacy.literal(min(clearances)),
+        "least_pair_gap": legacy.literal(min(gaps)) if gaps else None,
+        "cpu_seconds": {**spent, "total": round(sum(spent.values()), 1)},
+        "written_utc": {
+            "first": min(part["written_utc"] for part in parts),
+            "last": max(part["written_utc"] for part in parts),
+        },
+        "by_k": [
+            {
+                "k": part["k"],
+                "counts": [part["rows"][0]["n"], part["rows"][-1]["n"]],
+                "rows": len(part["rows"]),
+                "verified": sum(1 for item in part["rows"] if item["verified"]),
+                "controlled": part["controlled"],
+                "controls_refused_by_both": sum(
+                    item["refused_by_sqpack"] and item["refused_by_independent"]
+                    for item in row["controls"]
+                ),
+                "cpu_seconds": round(sum(_cpu(item) for item in part["rows"]), 1),
+            }
+            for part, row in zip(parts, controlled, strict=True)
+        ],
+    }
+
+
+class ReplayStoppedError(RuntimeError):
+    """A full replay's job raised, so the run stopped: the rows not yet started were
+    cancelled and the receipts already written were kept."""
+
+
+def _route_jobs(
+    deposit: Deposit,
+    groups: Mapping[int, Sequence[TwoStrip]],
+    *,
+    todo: Sequence[int],
+    chosen: Mapping[int, int],
+    workers: int,
+    pool: Executor,
+    log: Callable[[str], None],
+) -> None:
+    """Submit every row of the Ks to replay and write each K's receipt as its last row is
+    decided; a row whose job raised is `ReplayStoppedError`."""
+    jobs = {}
+    for k in todo:
+        # The controlled count first, since its controls are a K's longest job, then the
+        # largest counts first, so the two workers finish a K together.
+        for row in sorted(groups[k], key=lambda row: (row.n != chosen[k], -row.n)):
+            job = pool.submit(route_row, row, with_controls=row.n == chosen[k])
+            jobs[job] = (k, row.n)
+    found: dict[int, list[dict[str, Any]]] = {k: [] for k in todo}
+    for job in as_completed(jobs):
+        k, n = jobs[job]
+        try:
+            item = job.result()
+        except Exception as error:
+            log(f"K={k} n={n} raised {error!r}: stopping, the rows not yet started cancelled")
+            raise ReplayStoppedError(
+                f"{deposit.label} K={k} n={n}: {error!r}; the receipts written stay, and a "
+                "rerun replays every K without a current one"
+            ) from error
+        found[k].append(item)
+        log(
+            f"K={k} n={n} verified={item['verified']} "
+            f"cpu={_cpu(item):.1f} ({len(found[k])}/{len(groups[k])})"
+        )
+        if len(found[k]) == len(groups[k]):
+            _write(deposit.route_part(k), route_part(deposit, k, found[k], chosen[k], workers))
+            log(f"K={k}: receipt written, {deposit.route_part(k).name}")
+
+
+def replay_all(
+    deposit: Deposit,
+    workers: int,
+    ks: Sequence[int] | None = None,
+    log: Callable[[str], None] = print,
+) -> dict[str, Any] | None:
+    """Replay every row of a deposit at the chosen Ks (all by default) on both routes,
+    one job per row on ``workers`` processes (in this one when ``workers`` is 1, which
+    spawns nothing), writing each K's receipt as soon as its rows are decided and
+    keeping a K whose receipt is current (`part_is_current`). A job that raises stops the
+    run at once: the rows not yet started are cancelled, the receipts already written
+    stay, and `ReplayStoppedError` names the row, so a rerun resumes. Once every K of the
+    deposit has a current receipt, write and return the summary; until then, None."""
+    if not deposit.full_replay:
+        raise ValueError(f"{deposit.label} has no full replay")
+    groups = by_k(records(deposit))
+    unknown = sorted(set(ks or ()) - set(groups))
+    if unknown:
+        raise ValueError(f"{deposit.label} has no row at K = {unknown}")
+    todo = [
+        k
+        for k in (sorted(set(ks)) if ks else groups)
+        if not part_is_current(deposit, k, groups[k])
+    ]
+    log(f"{deposit.label}: {len(groups)} values of K, {len(todo)} to replay: {todo}")
+    chosen = {k: controlled_count(groups[k]) for k in todo}
+    runner: Executor = (
+        ProcessPoolExecutor(max_workers=workers) if workers > 1 else ThreadPoolExecutor(1)
+    )
+    with runner as pool:
+        try:
+            _route_jobs(
+                deposit, groups, todo=todo, chosen=chosen, workers=workers, pool=pool, log=log
+            )
+        except BaseException:
+            # Without this the pool's exit would decide every queued row and drop it.
+            pool.shutdown(wait=False, cancel_futures=True)
+            raise
+    if not all(part_is_current(deposit, k, rows) for k, rows in groups.items()):
+        return None
+    summary = replay_summary(deposit, groups)
+    _write(deposit.route_summary, summary)
+    log(f"{deposit.label}: summary written, {deposit.route_summary.name}")
+    return summary
+
+
+def _row_problems(
+    label: str,
+    item: Mapping[str, Any],
+    controlled: int,
+    decided: Mapping[str, Any],
+    names: Sequence[str],
+) -> list[str]:
+    """One row of a K's receipt: a pass on both routes, verdicts that agree with their
+    own counts, the decided certificate, and the routes' six controls (``names``), all
+    refused, at the controlled count and nowhere else."""
+    n = item["n"]
+    routes = (item["sqpack"], item["independent"])
+    passed = all(route["passed"] for route in routes)
+    found = []
+    if not (item["verified"] and passed):
+        found.append(f"{label} n={n}: the written-out certificate failed a route")
+    if item["verified"] != passed or any(
+        route["passed"] != (route["failure_count"] == 0)
+        or ("failures" in route) != (route["failure_count"] > 0)
+        for route in routes
+    ):
+        found.append(f"{label} n={n}: the row's verdicts contradict its failure counts")
+    if item["certificate_sha256"] != decided.get("certificate_sha256"):
+        found.append(f"{label} n={n}: the replayed certificate is not the decided one")
+    if "controls" not in item:
+        if n == controlled:
+            found.append(f"{label} n={n}: the controlled count carries no controls")
+        return found
+    if n != controlled:
+        found.append(f"{label} n={n}: controls are kept at a count not chosen")
+    kept = [control["control"] for control in item["controls"]]
+    if kept != list(names):
+        missing = [name for name in names if name not in kept]
+        found.append(
+            f"{label} n={n}: the controls are not the routes' six"
+            + (f", missing {', '.join(missing)}" if missing else "")
+        )
+    if not all(
+        control["refused_by_sqpack"] and control["refused_by_independent"]
+        for control in item["controls"]
+    ):
+        found.append(f"{label} n={n}: a route accepted a control")
+    return found
+
+
+def _part_problems(
+    deposit: Deposit,
+    k: int,
+    rows: Sequence[TwoStrip],
+    by_n: Mapping[int, Mapping[str, Any]],
+    names: Sequence[str],
+) -> list[str]:
+    """One K's receipt: this checker's header, the K's counts, the rule's controlled
+    count, and each row (`_row_problems`). Raises one of `_UNREADABLE` on a receipt too
+    damaged to read."""
+    label = deposit.label
+    part = _read(deposit.route_part(k))
+    found = []
+    drift = _header_drift(part, part_header(deposit, k))
+    if drift:
+        found.append(
+            f"{label} K={k}: the receipt's header is not this checker's ({', '.join(drift)})"
+        )
+    if _counts(part) != [row.n for row in rows]:
+        return [*found, f"{label} K={k}: the receipt's counts are not the deposit's"]
+    if part["controlled"] != controlled_count(rows):
+        found.append(f"{label} K={k}: the controlled count is not the rule's")
+    for item in part["rows"]:
+        found += _row_problems(label, item, part["controlled"], by_n.get(item["n"], {}), names)
+    return found
+
+
+def route_problems(
+    deposit: Deposit, stored: Sequence[Mapping[str, Any]], ks: Sequence[int] | None = None
+) -> list[str]:
+    """Problems with a deposit's full replay against its decisions receipt's rows
+    (``stored``), nothing decided again (`_part_problems`): each K's receipt has this
+    checker's header and the K's counts, each certificate is the decided one and each
+    verdict a pass on both routes that agrees with its own counts, the controlled count is
+    `CONTROL_RULE`'s, both routes refuse its six controls, and only it carries them. A
+    receipt too damaged to read is named, not raised.
+
+    With ``ks``, only those Ks, each of which must have a receipt. Without, every K: a
+    replay that is complete (`Deposit.full_replay_complete`) must have a receipt for
+    every K and its summary, and the summary must be what they say; one still in flight
+    may lack some, which `route_coverage` reports as partial."""
+    from devtools import couzo_678_replay as base  # noqa: PLC0415
+
+    label = deposit.label
+    groups = by_k(records(deposit))
+    by_n = {item["n"]: item for item in stored}
+    present = {path.stem for path in deposit.route_parts.glob("*.json")}
+    named = {deposit.route_part(k).stem: k for k in groups}
+    problems = (
+        [
+            f"{label}: {stem}.json is no K of the deposit"
+            for stem in sorted(present - set(named))
+        ]
+        if ks is None
+        else []
+    )
+    wanted = list(groups) if ks is None else sorted(set(ks))
+    missing = [k for k in wanted if deposit.route_part(k).stem not in present]
+    if missing and (ks is not None or deposit.full_replay_complete):
+        problems.append(f"{label}: the full replay has no receipt for K = {missing}")
+    for k in wanted:
+        if k in missing:
+            continue
+        try:
+            problems += _part_problems(deposit, k, groups[k], by_n, base.CONTROLS)
+        except _UNREADABLE as error:
+            problems.append(
+                f"{label} K={k}: the receipt is not readable ({type(error).__name__}: {error})"
+            )
+    if ks is not None:
+        return problems
+    summary = deposit.route_summary
+    if not summary.is_file():
+        if deposit.full_replay_complete:
+            problems.append(f"{label}: the full replay has no summary, {summary.name}")
+        return problems
+    if missing:
+        if not deposit.full_replay_complete:
+            problems.append(f"{label}: the summary stands over no receipt for K = {missing}")
+        return problems
+    # Only receipts that hold are summarized again: the faults above are the answer.
+    if not problems:
+        try:
+            if _read(summary) != replay_summary(deposit, groups):
+                problems.append(
+                    f"{label}: the full replay's summary is not what its receipts say"
+                )
+        except _UNREADABLE as error:
+            problems.append(
+                f"{label}: the full replay's summary is not readable "
+                f"({type(error).__name__}: {error})"
+            )
+    return problems
+
+
+def route_coverage(deposit: Deposit) -> str:
+    """A deposit's full replay in a line, for `check`'s report: from its summary once
+    written, else the rows its current receipts cover and the Ks still without one."""
+    if deposit.route_summary.is_file():
+        coverage = _read(deposit.route_summary)["coverage"]
+        return (
+            f"{coverage['verified']} of {coverage['deposit_rows']} {deposit.label} rows "
+            f"replayed on both routes, {coverage['refused_by_sqpack']} of "
+            f"{coverage['controls']} controls refused by each"
+        )
+    groups = by_k(records(deposit))
+    done = [k for k, rows in groups.items() if part_is_current(deposit, k, rows)]
+    covered = sum(len(groups[k]) for k in done)
+    return (
+        f"{deposit.label} full replay partial: {covered} of {deposit.rows} rows, no current "
+        f"receipt for K = {[k for k in groups if k not in done]}"
+    )
+
+
 def stable(row: Mapping[str, Any]) -> dict[str, Any]:
     """A replay row without its timings."""
     copy = json.loads(json.dumps(row))
@@ -1052,6 +1574,8 @@ def check(
         problems += found
         if deposit.replay:
             problems += replay_problems(deposit, stored, replay=replay)
+        if deposit.full_replay:
+            problems += route_problems(deposit, stored)
     return problems
 
 
@@ -1065,6 +1589,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     sample.add_argument("--version", choices=replayed, default="1")
     sample.add_argument("--n", type=int, nargs="+")
     sample.add_argument("--workers", type=int, default=2)
+    full = commands.add_parser("replay-all")
+    whole = tuple(key for key, deposit in VERSIONS.items() if deposit.full_replay)
+    full.add_argument("--version", choices=whole, default="5")
+    full.add_argument("--k", type=int, nargs="+")
+    full.add_argument("--workers", type=int, default=2)
     audit = commands.add_parser("check")
     audit.add_argument("--digests", action="store_true")
     audit.add_argument("--replay", action="store_true")
@@ -1073,8 +1602,33 @@ def main(argv: Sequence[str] | None = None) -> int:
         problems = check(digests=args.digests, replay=args.replay)
         for problem in problems:
             print(problem)
+        if problems:
+            print("FAILED")
+            return 1
         decided = ", ".join(f"{deposit.rows} {deposit.label} rows" for deposit in DEPOSITS)
-        print("FAILED" if problems else f"OK: {decided} decided, every control refused")
+        replays = [route_coverage(deposit) for deposit in DEPOSITS if deposit.full_replay]
+        print(
+            f"OK: {decided} decided, every control refused" + "".join(f"; {r}" for r in replays)
+        )
+        return 0
+    if args.command == "replay-all":
+        deposit = VERSIONS[args.version]
+        try:
+            summary = replay_all(
+                deposit,
+                args.workers,
+                args.k,
+                log=lambda line: print(f"{_now()} {line}", flush=True),
+            )
+        except ReplayStoppedError as error:
+            print(f"STOPPED: {error}")
+            return 1
+        # The receipts just written, read back as `check` reads them; a partial --k run
+        # is held only to its own Ks.
+        problems = route_problems(deposit, _read(deposit.decisions)["rows"], args.k)
+        for problem in problems:
+            print(problem)
+        print(json.dumps(summary and summary["coverage"], indent=1))
         return 1 if problems else 0
     actions: dict[str, Callable[[], Any]] = {
         "decide-all": lambda: {

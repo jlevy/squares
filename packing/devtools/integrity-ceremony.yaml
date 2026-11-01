@@ -98,8 +98,10 @@ allowlist:
       each deposit's decisions receipt names each
       by its SHA-256 and size, and `check` holds the certificate the replay receipt
       decided on both routes to the one the decisions receipt names, so the cross-check
-      is of the packing the lemma decided. The retained packet files are read from Git
-      and compared with nothing.
+      is of the packing the lemma decided. The full replay's receipt for each K names
+      each row's certificate by its SHA-256 alone, and `check` holds it to the decisions
+      receipt's the same way. The retained packet files are read from Git and compared
+      with nothing.
   - path: packing/devtools/filled_end_sample.py
     kind: generated-artifact
     boundary: >-
