@@ -3,17 +3,20 @@ type: is
 id: is-01m5v9twagap6mhtcn7ypvvrnk
 title: Review Evan Daniel's s(299) certificate (stage 4) and adopt it at 299 with both regularizations (#824)
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 2
-delegate: null
+version: 3
+delegate: w-299-1026
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m5v9gnfdsstsbyk92bb6nk8e
+hold: null
+hold_until: null
 created_at: 2026-10-26T05:09:52.080Z
-updated_at: 2026-10-26T05:10:06.190Z
+updated_at: 2026-10-26T11:38:39.029Z
+started_at: 2026-10-26T11:38:39.029Z
 ---
 The stage 4 mathematical review of Evan Daniel's s(299) certificate (#824), then the adoption at 299 with both regularizations, which the house rule puts in one pull request. Registered at V0/C0 by w-imports-1026 (think-3xn9) with the replay on both maintained exact routes, gross and sharp controls and the pose-by-pose measurement retained in packing/resources/web/evand-n299-2026-10-26/.
 

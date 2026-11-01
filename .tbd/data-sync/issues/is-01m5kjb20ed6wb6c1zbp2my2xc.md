@@ -3,11 +3,11 @@ type: is
 id: is-01m5kjb20ed6wb6c1zbp2my2xc
 title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666, #715, #719, #732), with a hosted-data manifest for the bulk certificates (think-f2io, 2026-10-23)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 23
+version: 26
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
-delegate: null
+delegate: w-llit-1026
 labels:
   - result-import
 dependencies:
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-26T03:02:59.837Z
+updated_at: 2026-10-26T12:01:46.167Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -69,3 +69,24 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 2026-10-24 c-w7-1024, PR #793 round 2 (review D, follow-up; one push): head b28584668e4a55df4e6202694c959ae8be39c15c. Fixed in 4e7a218b3: D1 (stream allowance starts at MAX_HEADERS and grows per admitted member; C1 test at the shipped bounds; review C 512 MiB records refused at the defaults, peak RSS 55 MiB), D2 (member-read errors are ShardError), D3 (a link anywhere below the members directory refused), D4 (release_sides clone branch tested), D5 (receipt without limit refused), D6 (header_side in both branches). 5 of 5 mutations detected. Merged main 3480b5fd3 (#792) as 96bbef3b5: one conflict, two no-change records in release.py, both kept; W7 record re-measured in b28584668 (51/51 identical); release_pin current (3a9c5b60); site_urls --history-ref origin/main passes. Validation: 1,059 tests passed, rebuild driver clean, --records 53/53 (148 s). CI green first attempt: Packing validation 40120155316, Certificate page 40120155325, mergeability 40120151956; PR MERGEABLE. Reply D: issuecomment-6387969029.
 
 2026-10-24 coord-intake-1024: W7 landed as PR #793 (dd0061553, merged 2026-10-24T18:32:59Z) after review A (senior), B (correctness), C (security) and follow-up D, all dispositioned; hosted CI green first attempt at b28584668. Phase 1 done. Next: R1 (records: #666, #719, #715, Couzo 5a299b4, Fang, Barnett; owner to publish data/couzo-715-certificates-v1 first, D4), then R2 (#732 under N2, owner publishes the #732 shards), R3 (#763's 233 rows, 964ee2b's 6, 43f666c's 831 recipes after think-gn29), R4 (held rows after D5/kzme/N1/N5). Open: think-z236, think-j83l, think-eyrn, think-nnk7, think-tj3x.
+
+2026-10-26 w-llit-1026 (claimed think-llit as w-llit-1026; brief: PR-1 "lift LIMIT = 1024 and extend Göbel's reach past 1073", PR-2 "the rows" if it fits moderate tokens and 5 CPU-h).
+
+**PR-1 had already landed** as W7, #793 (dd0061553, merged 2026-10-24T18:32:59Z): FROZEN_THROUGH replaces LIMIT for the frozen walks and releases, Release.decided_above/decided_through/walk_above/hosted, devtools.goebel_construction (Göbel's side proved final to 10,345 and further on demand), construction_checker, hosted_shards. Nothing of that was redone.
+
+**This run's PR: draft #835 (https://github.com/jlevy/squares/pull/835), branch claude/friendly-einstein-gf9z0h-llit-pr1, head b0165216e, labels intake and S2** (post-W7 records housekeeping, no rows): (1) think-j83l: #678's Göbel receipt rebuilt by its writer, one word of the families sentence ("corner-touching strips", as goebel_construction.FAMILIES and every frozen receipt say it); couzo_678_replay splits goebel_comparison (build) from goebel (write), and check holds the committed receipt to its rebuild byte for byte (goebel_problems), with a test that the old sentence is refused through check; both mutations (wiring dropped, old receipt restored) fail a test. (2) The requests entries of #666, #715, #719 and #732: the not_registered text of their rows above 1024 says D1 is answered and what #793 delivered, and that the rows wait on R1 (R2 for #732); blocked_on think-f2io becomes think-llit (added on #666's eight rows); the summaries of #666, #715 and #719, #715's note on staying open and #719's close_when no longer say the rows wait on the owner. #799 unchanged: its three results already wait on think-llit, and its rows land in R5 (think-5dc3) after R1. A no-public-change record covers both inputs (four papers, 69 files byte-identical against main e54ae3e97).
+
+**PR-2 (R1) did not fit and was not started.** Reasons: it is a code-and-records slice of the W7 size, not a records pass (below); it reads the watched repositories (franciscouzo/square-packing history above 1024, TheSnakeFang/squarepack-certs, Barnett's, evand's, Mishapolk/square-packing-records at 17cc220), which this session's GitHub access does not reach (gh api: "GitHub access to this repository is not enabled for this session"; add_repo needed per repository); the owner has not published data/couzo-715-certificates-v1 (releases list on 2026-10-26: no such tag), which R1 stages and the owner publishes before R1 merges; and the host had about 5 GB free with other lanes running.
+
+**R1, precisely (the next lane's plan; spec Phase 2, row R1; about 4.3 CPU-hours):**
+1. Preconditions. Attach read access to the watched repositories (add_repo) and clone them blobless where large (Mishapolk's tree is 5.2 GB of certificates; the walk needs its index files only). Settle D4 before the first commit: hosted (the record's disposition) or Git (9 to 13 MB passes check_added_blobs).
+2. Code (one commit series before any record): (a) the walk above 1024 in WALKS, above=1024, through=None, named upper-bounds-above-1024-YYYYMMDD, with WALK_READ_AT_MAIN and, if its sources come from claim maps, CLAIM_MAP_WALKS entries; (b) history-publications and earlier scan the watched repositories above 1024 (today HISTORY_COUNTS = range(325, 1025), beyond_horizon_replay.py:574), and Barnett's repository joins WATCHED_HOLDERS (:3912) unless 2043 comes through an issue; (c) think-z236 (#793 A11): for a walk with through None, check requires each RECIPE-held count to be one construction_checker.decide refuses, read from the release's claim map and its replayed parents, before the walk records any RECIPE hold; (d) the release "#715" above 1024 in RELEASES (decided_above=1024, decided_through=None, hosted=packing/hosted/couzo-715-certificates-v1.yaml) with a second coverage source in the #715 packet (couzo_715_replay.LIMIT, still 1024, stays #715's frozen window); (e) walk_above set on #666, #719, TheSnakeFang/squarepack-certs@bef5c42 and franciscouzo/square-packing@5a299b4, and their decided_through lifted to None in the same commit as their receipts.
+3. Custody: stage data/couzo-715-certificates-v1 (#715's 6b7391d and 5a299b4's certificates above 1024) with python -m devtools.hosted_data stage, manifest committed, payload under a git-ignored directory; Fang's 4 MB and Barnett's file into Git after check_added_blobs.
+4. The walk: gather, render, check over every count above 1024 any report reaches, every report in report order: the Kingbird capture of 2026-08-22 (1453, 1765, 1850, 2043 held on N1, CATALOGUE), Fang bef5c42 (62), Daniel 49907ec (1092 and 1228, above Göbel's construction, not recorded, think-jtlq), Barnett d2356fa (2043), #666 (8), #715 at 6b7391d (1,112: certificates, recipes, deletions on think-kzme), Couzo's 5a299b4 index (5,078), #719 (8), #732 at 17cc220 with 7b6366f's withdrawal of 3426, #763 and 964ee2b's unrequested rows, 43f666c (831 recipes), #799 versions 1 and 2 (two reports; their rows land in R5). answer_problems must hold with both rulings untopped; the 66 counts where #732 is under #715's print by less than 1e-12 are restatements; Göbel's construction is in every start. The README renders as a summary (SUMMARY_FROM = 400).
+5. Receipts and rows for the lifted releases: filtered (both routes, six controls each), exhaustive at a sample, recipe-decisions (parents that are not rows replayed first, about 0.3 CPU-h for some 13), goebel (v2 receipt above 1024), claims-record, declare-rows, coverage-plan, stamp_landed --apply for each new row source, check --replay for the slice's releases. Rows: #666 (8; credit at 1061, 1413 and 1489 cites 1c17153's manifest, per-row credit waits on D5), #719 (8, derived facts), #715 above 1024, 5a299b4's watched publications, Fang (62), Barnett (2043).
+6. Gate cost: measure the records tier and suite-file-costs for tests/test_beyond_horizon_replay.py and tests/test_intake_ledger.py against the plan's budgets (Gate Cost) before and after.
+7. Requests: move the rows that land from queued to recorded on #666, #715 and #719 (their not_registered now names R1), keep #732's on R2, and draft the stage 7 replies for after the merge.
+Price: about 4.3 CPU-hours (the plan's figure: about 4 for every source but #732, positives with all six controls, of which #666, #719, #715, Fang and Barnett are about 3.5, plus about 0.3 for some 13 recipe parents); tokens: a W7-sized lane, with a correctness review of the walk and the new release.
+Open questions that do not block R1: D5, think-kzme, N1, N5; think-tj3x (Fang composites stay refused).
+
+The #613 records change (D-522, #613's ask done; think-8krd) is draft #834 (https://github.com/jlevy/squares/pull/834), branch claude/friendly-einstein-gf9z0h-613, head 30363986c, hosted CI green there (Packing validation 40315300031, Certificate page 40315300175, Branch mergeability 40315293475); the coordinator posts #613's final reply after it merges.
