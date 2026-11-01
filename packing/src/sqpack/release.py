@@ -10835,9 +10835,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and source-coverage.yaml swapped in, by render_packing_methods, "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_n11_lower_bounds_explainer, its math pass in /usr/bin/google-chrome "
-            "(SQPACK_CHROMIUM): 69 files each, all byte-identical across the three. No PDF "
-            "was printed; each prints from that HTML. Every paper keeps its version: "
-            "v0.4.35, v0.1.11, v0.1.4 and v0.2.7."
+            "(SQPACK_CHROMIUM): 69 files each, all byte-identical across the three. Measured "
+            "again after review A of #868 rewrote T-247's claim and next step and #842's "
+            "read-through, against main 83a2b9132 (#869) the same way: 69 files, "
+            "byte-identical across the three. No PDF was printed; each prints from that "
+            "HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
