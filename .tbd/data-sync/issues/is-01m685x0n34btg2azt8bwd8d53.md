@@ -5,7 +5,7 @@ title: "Validate #836: Karimi v5 two-strip rows the walk above 1024 records, bot
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: bold-ritchie-l9
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m685wqakx05engdrvf9s4789
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:15.363Z
-updated_at: 2026-10-31T17:26:51.234Z
+updated_at: 2026-11-01T00:01:42.833Z
 started_at: 2026-10-31T17:14:05.383Z
 ---
 Stage 4 validation of #836's rows (import think-7yrs), the rows think-llit's walk above 1024 records from Mohsen Karimi's two-strip v5.0 deposit.
@@ -33,6 +33,8 @@ blocked_on: think-7yrs, think-llit
 - Machine note: about 2 cores for 4.6 wall-hours, or 1 core for 9; it can share the host with a gate if held to 1 core. Written-out certificates (~1 GB raw) go to scratch and are not retained.
 
 ## Notes
+
+2026-11-01 bold-ritchie-l9: THE FULL REPLAY IS DONE (PR https://github.com/jlevy/squares/pull/863; receipts f266dba91, head 4338e85f8 after merging main 737d8311e). All 5,308 v5 rows' certificates written out by two_strip_checker.write_out pass both maintained exact routes of devtools.couzo_678_replay (5,308 of 5,308 by sqpack.verify's predicates and by the independent checker's), each the certificate the decisions receipt names by SHA-256; at the 66 controlled counts (one per K, CONTROL_RULE) both routes refuse all six controls, 396 of 396 each. 31,499,439 squares and 71,808,283 candidate pairs decided (70,690,393 touching; least wall clearance and least pair gap 0, the closed contract). CPU: 47,031.4 s = 13.1 CPU-h (positives 12.1, controls 0.9), two workers at nice 5, 17:08:54Z to 23:54:32Z on 31 October; under the 40 CPU-h cap; above the 10.9 priced, since the positives cover all 5,308 rows rather than the at most 3,918 recordable. Receipts: karimi-records-2026-10-31/receipts/replay-v5/k035.json..k100.json (66, at most 169 lines each, plain JSON per the family's convention since think-rsqv has not landed) and receipts/replay-v5.json (summary); `two_strip_checker check` reads them back (0.34 CPU-s). Recorded as stage 4 evidence in the packet README (Decided Here) and #836's entry (summary, rows-v5 not_registered). NOT done, by the brief: no row in source-coverage.yaml, no frontier evidence entry (none exists above 1024; R1/R5 write them with the rows), no `check --replay` for the release. Remaining for this bead's Done-when: stage 3 (think-llit R1, the owner's D4; R5 think-5dc3) records the rows at the walk's verdicts and cites these receipts. The walk records at most 3,918 of these 5,308; this replay covers whichever it picks.
 
 2026-10-31 bold-ritchie-l9 (lane L9 of think-3guf; PR https://github.com/jlevy/squares/pull/863, branch claude/bold-ritchie-xo28us-l9): the full replay of all 5,308 v5 rows is running, ahead of the walk (no row is recorded; stage 3 waits on think-llit's R1 and the owner's D4). Tool: `python -m devtools.two_strip_checker replay-all --version 5 --workers 2` (commit b0fe65eae), one job per row on both maintained exact routes of devtools.couzo_678_replay, with the routes' six controls at one count per K (CONTROL_RULE: the least fit slack, then the smallest count; 66 values of K). It writes karimi-records-2026-10-31/receipts/replay-v5/kNNN.json per K as each K completes and receipts/replay-v5.json (the coverage summary) once all 66 are in; `two_strip_checker check` reads them back. RESUMABLE: if the container restarts, rerun the same command from packing/ on the branch; it skips every K whose receipt names its rows. Receipts are committed and pushed as they land (K = 35 to 50 in b0fe65eae). Re-priced from the first 254 rows (cost ~ n^1.06): about 12 CPU-h for all 5,308 positives plus the 66 controlled counts, at two workers about 6 wall-hours. Log in the lane's scratch, out of Git (OR-18). think-rsqv (gzip receipts over 1,000 lines) has not landed; each per-K receipt is under 1,000 lines (at most 134 rows a K), so none is a retained_data candidate.
 
