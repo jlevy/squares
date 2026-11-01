@@ -75,8 +75,8 @@ None of them decides a claim.
 
 On 31 October 2026 both n = 40 examples were run here in full with v4, built from this
 packet, on the candidates the review’s `candidates.py` builds, each judged by the
-review’s `judge_run.py`, with the source’s mass controls; of three threshold-shift runs
-meant as the oblique control, two verified and one was refused without a refutation, so
+review’s `judge_run.py`, with the source’s mass controls; of four threshold-shift runs
+meant as the oblique control, two verified and two were refused without a refutation, so
 no counted oblique control has run yet (think-flxm).
 [`replay/README.md`](replay/README.md) gives the commands, the receipts and the run
 outputs.

@@ -20149,9 +20149,23 @@ results:
       legal pose, so a counted oblique control here still needs a threshold in (1, 1.00149865)
       or a density mutant. The density at tau 1001/1000, inside that window, was refused with
       the patch verified but with no refutation: 4 roots at t in [23/100, 1/4] reached
-      resolution at legal poses capturing 1001/1000 plus at most 2.9e-12, where its least
-      oblique capture lies, and 13 stopped at the node budget; a threshold such as 2503/2500
-      is the next try (think-flxm).
+      resolution at legal poses capturing 1001/1000 plus at most 2.9e-12, so its least
+      oblique capture lies in [1, 1001/1000 + 1.9e-13] (root 51), and 13 stopped at the node
+      budget.
+
+      At tau 2503/2500, on 1 November, it was refused again with the patch verified and no
+      refutation, 8 roots reaching resolution at poses capturing 2503/2500 plus at most
+      3.0e-12. A refusal at resolution reports the centre of the first unaccepted box in the
+      search's upper-half-first, depth-first order (slab.rs:582-667): reached from accepted
+      territory, as here and at 84 of the core-3348/3359 control's roots (SC-9), it sits on
+      the rim of the region below tau', and it refutes only when that region holds the pose
+      a root searches first, as for the mass controls.
+
+      So a threshold shift near the least capture gives no counted control; one needs a
+      density mutant whose oblique captures are
+      below tau' at the pose some root searches first, with the axis patch holding, or a
+      witness rule reporting the least capture found, whose run would test a build other than
+      the v4 that decided this result (think-flxm).
 
       With the mode now a deciding route, review A of #865 settled that
       the 23 October review joins this result's reviews, as the note above anticipated, and it
