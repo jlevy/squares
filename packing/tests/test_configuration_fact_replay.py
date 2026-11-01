@@ -68,3 +68,69 @@ def test_route_one_receipts_hold_each_rebuilt_witness() -> None:
 def test_route_two_accepts_both_files_and_refuses_every_control() -> None:
     summary = replay.check_route2()
     assert summary == {"positives_valid": 2, "controls_refused": 8, "controls": 8}
+
+
+# ------------------------------------------------------- T-247's configuration at 297
+
+
+S297 = replay.S297
+
+
+def test_the_retained_297_file_is_the_one_the_comment_pins() -> None:
+    """Route B of T-247 (think-ozx8): Kim's n297.minpoly.json, kept itself since his CC0
+    dedication and public copy, is the file whose SHA-256 his comment states."""
+    rows = replay.custody(S297)
+    assert [row["n"] for row in rows] == [297]
+    assert (
+        rows[0]["rebuilt_sha256"]
+        == rows[0]["member_sha256"]
+        == ("e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826")
+    )
+    assert rows[0]["field_degree"] == 21
+    assert rows[0]["rebuilt_bytes"] == 347690
+    sources = json.loads(S297.sources.read_text(encoding="utf-8"))
+    assert sources["attachment"]["sha256"] == (
+        "e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7"
+    )
+    assert sources["attachment"]["public_copy"]["commit"] == (
+        "f480441e73824668fb18779151369e4d3ba6179a"
+    )
+    assert all(member["retained"] for member in sources["members"])
+    assert len(sources["members"]) == 6
+
+
+def test_the_297_side_is_t247s_and_the_receipt_says_so() -> None:
+    record = replay.side_check(S297)
+    assert record["agrees"] is True
+    assert record["rows"][0]["same_polynomial_as_t247"] is True
+    stored = json.loads(S297.side_receipt.read_text(encoding="utf-8"))
+    assert stored == record
+
+
+def test_route_two_accepts_the_297_file_and_refuses_every_control() -> None:
+    assert replay.check_route2(S297) == {
+        "positives_valid": 1,
+        "controls_refused": 4,
+        "controls": 4,
+    }
+    receipt = json.loads(S297.route2_receipt.read_text(encoding="utf-8"))
+    assert receipt["bead"] == "think-ozx8"
+    stated = replay.custody(S297)[0]["member_sha256"]
+    assert receipt["rows"][0]["positive"]["input_sha256"] == stated
+
+
+def test_the_297_witness_names_the_public_copy() -> None:
+    built = replay.witness(297, S297)
+    assert built["id"] == "W-kim-t247-configuration-n297"
+    assert built["source"]["url"].startswith(
+        "https://github.com/HyukdongKim/square-packing-exact-sides/blob/f480441e"
+    )
+    assert built["source"]["path"].endswith("source/s297-exact-configuration/n297.minpoly.json")
+
+
+@pytest.mark.skipif(
+    not replay.receipt_path(297, S297).exists(), reason="route 1 at 297 has not landed"
+)
+def test_route_one_receipt_holds_the_297_witness() -> None:
+    record = replay.check_route1(297, packet=S297)
+    assert record["cases"][0]["exact_verify"]["verification_passed"] is True
