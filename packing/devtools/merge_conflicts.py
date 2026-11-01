@@ -70,13 +70,18 @@ class Census:
     conflicts: tuple[Conflict, ...]
 
 
-def _git(repo: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
-    result = subprocess.run(
-        ["git", *args], cwd=repo, capture_output=True, text=True, check=False
-    )
+def _git(repo: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[bytes]:
+    """Git's output as bytes: a conflicted file can be binary, and one undecodable file
+    must not stop the census (review A of #873)."""
+    result = subprocess.run(["git", *args], cwd=repo, capture_output=True, check=False)
     if check and result.returncode:
-        raise ValueError(f"git {args[0]} failed: {result.stderr.strip()}")
+        raise ValueError(f"git {args[0]} failed: {_text(result.stderr).strip()}")
     return result
+
+
+def _text(output: bytes) -> str:
+    """Output as text, every undecodable byte kept, so a path read here names its file."""
+    return output.decode("utf-8", errors="surrogateescape")
 
 
 def _label(path: str, line: str) -> str | None:
@@ -124,14 +129,14 @@ def conflicted_blocks(
     if result.returncode == 0:
         return ()
     if result.returncode != 1:
-        raise ValueError(f"git merge-tree failed: {result.stderr.strip()}")
-    tree, *names = [line for line in result.stdout.splitlines() if line]
+        raise ValueError(f"git merge-tree failed: {_text(result.stderr).strip()}")
+    tree, *names = [line for line in _text(result.stdout).splitlines() if line]
     counted: dict[tuple[str, str], int] = defaultdict(int)
     for name in dict.fromkeys(names):
         if paths and name not in paths:
             continue
         shown = _git(repo, "cat-file", "-p", f"{tree}:{name}", check=False)
-        lines = shown.stdout.splitlines() if shown.returncode == 0 else []
+        lines = _text(shown.stdout).splitlines() if shown.returncode == 0 else []
         starts = [index for index, line in enumerate(lines) if line.startswith("<<<<<<< ")]
         if not starts:
             # A modify/delete or binary conflict leaves no markers in the file.
@@ -147,13 +152,13 @@ def union_verdict(repo: Path, merge: str, first: str, second: str, path: str) ->
     A union driver keeps both sides of every conflicting hunk, with no markers. That is
     the right answer only where both sides' lines belong in the file in that order.
     """
-    base = _git(repo, "merge-base", first, second).stdout.split()[0]
+    base = _text(_git(repo, "merge-base", first, second).stdout).split()[0]
     with tempfile.TemporaryDirectory() as scratch:
         sides = []
         for name, revision in (("ours", first), ("base", base), ("theirs", second)):
             shown = _git(repo, "show", f"{revision}:{path}", check=False)
             side = Path(scratch) / name
-            side.write_text(shown.stdout if shown.returncode == 0 else "")
+            side.write_bytes(shown.stdout if shown.returncode == 0 else b"")
             sides.append(str(side))
         union = _git(repo, "merge-file", "--union", "-p", *sides, check=False).stdout
     resolved = _git(repo, "show", f"{merge}:{path}", check=False).stdout
@@ -182,8 +187,8 @@ def census(
     owner: dict[str, int] = {}
     first_parent = _git(
         repo, "log", "--first-parent", "--merges", f"--since={since}", "--format=%H %s", ref
-    ).stdout.splitlines()
-    for line in first_parent:
+    ).stdout
+    for line in _text(first_parent).splitlines():
         commit, _, subject = line.partition(" ")
         match = _PULL_REQUEST.match(subject)
         if match is None:
@@ -191,11 +196,12 @@ def census(
         number = int(match.group(1))
         owner[commit] = number
         inside = _git(repo, "log", "--merges", "--format=%H", f"{commit}^1..{commit}^2")
-        for merge in inside.stdout.split():
+        for merge in _text(inside.stdout).split():
             owner.setdefault(merge, number)
-    rows = _git(
+    listed = _git(
         repo, "log", "--merges", f"--since={since}", "--format=%H%x09%P%x09%as%x09%s", ref
-    ).stdout.splitlines()
+    ).stdout
+    rows = _text(listed).splitlines()
     conflicts = []
     for row in rows:
         commit, parents, date, subject = row.split("\t", 3)
@@ -239,14 +245,27 @@ def summary(report: Census) -> list[str]:
             f"in {len(numbers)} PRs ({', '.join(f'#{number}' for number in numbers)})"
         )
     verdicts: dict[str, Counter[str]] = defaultdict(Counter)
+    alone: dict[tuple[str, str], Counter[str]] = defaultdict(Counter)
     for conflict in report.conflicts:
         for path, verdict in conflict.union:
             verdicts[path][verdict] += 1
-    for path, counted in sorted(verdicts.items()):
-        lines.append(
-            f"{path} under merge=union: "
-            + ", ".join(f"{verdict} {count}" for verdict, count in sorted(counted.items()))
-        )
+            # The merges a block was the only conflict in are the ones a driver for that
+            # block alone would have had to get right (review A of #873, finding 8).
+            if len(conflict.blocks) == 1 and conflict.blocks[0][0] == path:
+                alone[path, conflict.blocks[0][1]][verdict] += 1
+
+    def counts(counted: Counter[str]) -> str:
+        return ", ".join(f"{verdict} {count}" for verdict, count in sorted(counted.items()))
+
+    lines += [
+        f"{path} under merge=union: {counts(counted)}"
+        for path, counted in sorted(verdicts.items())
+    ]
+    lines += [
+        f"{path} :: {block}, where it was the only conflict, under merge=union: "
+        + counts(counted)
+        for (path, block), counted in sorted(alone.items())
+    ]
     return lines
 
 

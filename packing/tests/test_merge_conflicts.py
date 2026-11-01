@@ -110,7 +110,41 @@ def test_a_union_driver_interleaves_two_records_that_share_lines(tmp_path: Path)
     report = merge_conflicts.census(repo.root, ref="main", since="2000-01-01", union=True)
     (conflict,) = report.conflicts
     assert conflict.union == (("release.py", "broken"),)
-    assert merge_conflicts.summary(report)[-1] == "release.py under merge=union: broken 1"
+    # Review A of #873, finding 8: the figure quoted for the tuple, the merges where it
+    # was the only conflict, is one the summary prints, not one read off `--json`.
+    assert merge_conflicts.summary(report)[-2:] == [
+        "release.py under merge=union: broken 1",
+        "release.py :: RECORDS, where it was the only conflict, under merge=union: broken 1",
+    ]
+
+
+def test_a_binary_conflict_is_counted_whole_and_does_not_stop_the_census(
+    tmp_path: Path,
+) -> None:
+    """Finding 7: Git writes no markers into a conflicted binary file, and its bytes are
+    not text, so the census reads git's output as bytes and counts the file whole."""
+    repo = Checkout(tmp_path)
+    blob = repo.root / "poster.png"
+    blob.write_bytes(b"\x89PNG\x00\xff base")
+    repo.git("add", "poster.png")
+    repo.git("commit", "-qm", "base")
+    repo.git("checkout", "-qb", "lane-b")
+    blob.write_bytes(b"\x89PNG\x00\xfe lane B")
+    repo.git("commit", "-qam", "lane B")
+    repo.git("checkout", "-qb", "lane-a", "main")
+    blob.write_bytes(b"\x89PNG\x00\xfd lane A")
+    repo.git("commit", "-qam", "lane A")
+    repo.git("merge", "-q", "-s", "ours", "--no-edit", "lane-b")
+
+    report = merge_conflicts.census(repo.root, ref="lane-a", since="2000-01-01", union=True)
+
+    (conflict,) = report.conflicts
+    assert conflict.blocks == (("poster.png", "(whole file)", 1),)
+    assert conflict.union == (("poster.png", "differs"),)
+    filtered = merge_conflicts.census(
+        repo.root, ref="lane-a", since="2000-01-01", paths=("release.py",)
+    )
+    assert filtered.conflicts == ()
 
 
 def test_a_conflict_is_named_by_the_statement_the_hunk_starts() -> None:
