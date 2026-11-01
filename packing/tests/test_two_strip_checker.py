@@ -6,23 +6,31 @@ control at every row of #799 for the reason it names, the parameters the lemma d
 state, a control the checker would accept reported as accepted, and a packet whose bytes
 are not the captured ones. Then the agreements: Ryu's own packings at equal bands, and
 small packings written out and decided on both exact routes of
-`devtools.couzo_678_replay`, a lowered side refused by both. The receipts are read back
-in the quick lane, the sample's digests among them; the replay of a sample count and
-every count's digest are in the slow lane.
+`devtools.couzo_678_replay`, a lowered side refused by both. A full replay is run over a
+small deposit of two Ks: incomplete, it fails the check unless marked in flight; stopped
+by a raising job, it keeps the receipts written; resumed, it decides again a partial,
+damaged or stale receipt; and read back, each fault a receipt can carry is named, a
+damaged one included, and the command's exit says whether it held. The
+receipts are read back in the quick lane, the sample's digests and version 5's full
+replay among them; the replay of a sample count and every count's digest are in the
+slow lane.
 """
 
 from __future__ import annotations
 
 import io
 import json
+import math
 import re
 import shutil
 import warnings
 import zipfile
 import zlib
+from collections.abc import Callable
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -380,6 +388,342 @@ def test_an_altered_version_5_receipt_is_refused(
     ]
 
 
+#: A small deposit at two Ks, `SMALL`'s strips at decimal sides: (n, side). At K = 5,
+#: 5.2 is the least slack; at K = 6, 28 and 30 share it and 28 is the smaller.
+ROUTED = ((17, "5.3"), (18, "5.25"), (19, "5.2"), (26, "6.3"), (28, "6.2"), (30, "6.2"))
+#: `ROUTED`'s deposit, at a path relative to `checker.REPO` so that its receipts' header
+#: (which names the packet) holds wherever a test copies the tree.
+ROUTED_DEPOSIT = replace(
+    checker.V5,
+    packet="routed",
+    archived="source/routed.zip",
+    rows=len(ROUTED),
+    sample=(),
+    replay="",
+    replayed=(),
+    full_replay="replay-routed",
+)
+
+
+def _write_routed(repo: Path) -> checker.Deposit:
+    """`ROUTED` as an archived deposit with version 5's columns under ``repo``, which must
+    be `checker.REPO`, with its decisions receipt written."""
+    lines = []
+    for n, side in ROUTED:
+        exact = Fraction(side)
+        k = math.isqrt(n - 1) + 1
+        strips = ("3", "1/8", "1/4", "2", "1/9", "3/4", "yes")
+        lines.append(
+            (str(n), f"{exact.numerator}/{exact.denominator}", side, "6.5", str(k), *strips)
+        )
+    (repo / "routed/source").mkdir(parents=True)
+    with zipfile.ZipFile(repo / "routed/source/routed.zip", "w") as written:
+        written.writestr("records.csv", _csv(*lines, header=checker.V5.header))
+    checker.decide_all(ROUTED_DEPOSIT)
+    return ROUTED_DEPOSIT
+
+
+def _stored(deposit: checker.Deposit) -> list[dict[str, Any]]:
+    return json.loads(deposit.decisions.read_text(encoding="utf-8"))["rows"]
+
+
+@pytest.fixture(scope="module")
+def routed_tree(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """A repository holding `ROUTED`'s deposit with its full replay done, once a module."""
+    repo = tmp_path_factory.mktemp("repo")
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(checker, "REPO", repo)
+        checker.replay_all(_write_routed(repo), 1, log=lambda _: None)
+    return repo
+
+
+@pytest.fixture
+def routed(
+    routed_tree: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> checker.Deposit:
+    """A copy of `routed_tree` of the test's own, made `checker.REPO`."""
+    repo = tmp_path / "repo"
+    shutil.copytree(routed_tree, repo)
+    monkeypatch.setattr(checker, "REPO", repo)
+    return ROUTED_DEPOSIT
+
+
+def _mutated(path: Path, change: Callable[[dict[str, Any]], None]) -> None:
+    receipt = json.loads(path.read_text(encoding="utf-8"))
+    change(receipt)
+    path.write_text(json.dumps(receipt), encoding="utf-8")
+
+
+def test_a_full_replay_writes_a_receipt_per_k_resumes_and_is_read_back(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`replay_all` writes one receipt per K, each row decided on both routes and the
+    controls only at the count `CONTROL_RULE` chooses (the least slack, the smaller count
+    among equals). A complete replay with a K's receipt and the summary still to come
+    fails `check`; marked in flight, it passes and is reported as partial. Run again, the
+    replay keeps the current receipt, replays the rest and writes the summary, and the
+    whole reads back clean, its coverage on the OK line."""
+    monkeypatch.setattr(checker, "REPO", tmp_path)
+    deposit = _write_routed(tmp_path)
+    stored = _stored(deposit)
+    groups = checker.by_k(checker.records(deposit))
+    assert {k: checker.controlled_count(rows) for k, rows in groups.items()} == {5: 19, 6: 28}
+    logged: list[str] = []
+    assert checker.replay_all(deposit, 1, [5], log=logged.append) is None
+    assert sorted(path.name for path in deposit.route_parts.iterdir()) == ["k005.json"]
+    assert checker.route_problems(deposit, stored, [5]) == []
+    assert checker.route_problems(deposit, stored) == [
+        "v5.0: the full replay has no receipt for K = [6]",
+        "v5.0: the full replay has no summary, replay-routed.json",
+    ]
+    in_flight = replace(deposit, full_replay_complete=False)
+    assert checker.route_problems(in_flight, stored) == []
+    assert checker.route_coverage(in_flight) == (
+        "v5.0 full replay partial: 3 of 6 rows, no current receipt for K = [6]"
+    )
+    logged.clear()
+    summary = checker.replay_all(deposit, 1, log=logged.append)
+    assert logged[0] == "v5.0: 2 values of K, 1 to replay: [6]"
+    assert logged[-2:] == [
+        "K=6: receipt written, k006.json",
+        "v5.0: summary written, replay-routed.json",
+    ]
+    assert summary is not None
+    assert summary == json.loads(deposit.route_summary.read_text(encoding="utf-8"))
+    assert summary["coverage"] == {
+        "rows": 6,
+        "deposit_rows": 6,
+        "verified": 6,
+        "passed_sqpack": 6,
+        "passed_independent": 6,
+        "ks": 2,
+        "controlled_counts": 2,
+        "controls": 12,
+        "refused_by_sqpack": 12,
+        "refused_by_independent": 12,
+    }
+    assert [line["controlled"] for line in summary["by_k"]] == [19, 28]
+    assert checker.check(deposits=(deposit,)) == []
+    assert checker.route_coverage(deposit) == (
+        "6 of 6 v5.0 rows replayed on both routes, 12 of 12 controls refused by each"
+    )
+
+
+def test_route_problems_names_each_fault_in_a_receipt(routed: checker.Deposit) -> None:
+    """Each fault a K's receipt can carry is named: a route's failure, verdicts that
+    contradict their own failure counts, a certificate that is not the decided one, the
+    controls at another count, a control missing, a control accepted, a header from other
+    routes, another filter lemma or another format, counts that are not the K's (the
+    partial receipt a resume replays), and a summary that is not what its receipts say."""
+    stored = _stored(routed)
+    part = routed.route_part(6)
+    kept = part.read_text(encoding="utf-8")
+
+    def problems_with(change: Callable[[dict[str, Any]], None]) -> list[str]:
+        _mutated(part, change)
+        try:
+            return checker.route_problems(routed, stored)
+        finally:
+            part.write_text(kept, encoding="utf-8")
+
+    def failed(receipt: dict[str, Any]) -> None:
+        receipt["rows"][0]["verified"] = False
+        receipt["rows"][0]["independent"].update(
+            passed=False, failure_count=1, failures=["1 overlapping pairs"]
+        )
+
+    def contradicted(receipt: dict[str, Any]) -> None:
+        receipt["rows"][0]["sqpack"]["failure_count"] = 3
+
+    def other(receipt: dict[str, Any]) -> None:
+        receipt["rows"][1]["certificate_sha256"] = "0" * 64
+
+    def moved(receipt: dict[str, Any]) -> None:
+        receipt["controlled"] = 30
+
+    def dropped(receipt: dict[str, Any]) -> None:
+        receipt["rows"][1]["controls"].pop()
+
+    def accepted(receipt: dict[str, Any]) -> None:
+        receipt["rows"][1]["controls"][2]["refused_by_sqpack"] = False
+
+    def stale(receipt: dict[str, Any]) -> None:
+        receipt.update(filter_lemma="an older filter", routes="other routes")
+
+    def renamed(receipt: dict[str, Any]) -> None:
+        receipt["format"] = "two-strip-replay-part-v0"
+
+    def partial(receipt: dict[str, Any]) -> None:
+        receipt["rows"].pop()
+
+    def slower(receipt: dict[str, Any]) -> None:
+        receipt["rows"][2]["cpu_seconds"]["routes"] += 1
+
+    assert checker.route_problems(routed, stored) == []
+    assert problems_with(failed) == ["v5.0 n=26: the written-out certificate failed a route"]
+    assert problems_with(contradicted) == [
+        "v5.0 n=26: the row's verdicts contradict its failure counts"
+    ]
+    assert problems_with(other) == [
+        "v5.0 n=28: the replayed certificate is not the decided one"
+    ]
+    assert problems_with(moved) == [
+        "v5.0 K=6: the controlled count is not the rule's",
+        "v5.0 n=28: controls are kept at a count not chosen",
+        "v5.0 n=30: the controlled count carries no controls",
+    ]
+    assert problems_with(dropped) == [
+        "v5.0 n=28: the controls are not the routes' six, missing near-contact-overlap"
+    ]
+    assert problems_with(accepted) == ["v5.0 n=28: a route accepted a control"]
+    assert problems_with(stale) == [
+        "v5.0 K=6: the receipt's header is not this checker's (routes, filter_lemma)"
+    ]
+    assert problems_with(renamed) == [
+        "v5.0 K=6: the receipt's header is not this checker's (format)"
+    ]
+    assert problems_with(partial) == ["v5.0 K=6: the receipt's counts are not the deposit's"]
+    assert problems_with(slower) == [
+        "v5.0: the full replay's summary is not what its receipts say"
+    ]
+
+
+def test_a_missing_damaged_or_stray_receipt_is_named_not_raised(
+    routed: checker.Deposit, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A receipt truncated, emptied, missing a key or with rows that are not a list is
+    named as unreadable rather than raised, and so is a damaged summary; a receipt for no
+    K of the deposit is named; and a complete replay missing a K's receipt, or its
+    summary, fails, and the command prints FAILED."""
+    stored = _stored(routed)
+    part = routed.route_part(6)
+    kept = part.read_text(encoding="utf-8")
+    damaged = {
+        "truncated": kept[: len(kept) // 2],
+        "empty": "",
+        "keyless": json.dumps(
+            {key: value for key, value in json.loads(kept).items() if key != "rows"}
+        ),
+        "rows not a list": json.dumps({**json.loads(kept), "rows": {}}),
+    }
+    found = {}
+    for name, text in damaged.items():
+        part.write_text(text, encoding="utf-8")
+        (found[name],) = checker.route_problems(routed, stored)
+    part.write_text(kept, encoding="utf-8")
+    assert all(
+        problem.startswith("v5.0 K=6: the receipt is not readable (")
+        for problem in found.values()
+    )
+    assert "JSONDecodeError" in found["truncated"]
+    assert "JSONDecodeError" in found["empty"]
+    assert found["keyless"] == "v5.0 K=6: the receipt is not readable (KeyError: 'rows')"
+    assert found["rows not a list"] == (
+        "v5.0 K=6: the receipt is not readable (TypeError: rows is a dict, not a list)"
+    )
+    summary = routed.route_summary.read_text(encoding="utf-8")
+    routed.route_summary.write_text(summary[:100], encoding="utf-8")
+    (problem,) = checker.route_problems(routed, stored)
+    assert problem.startswith(
+        "v5.0: the full replay's summary is not readable (JSONDecodeError"
+    )
+    routed.route_summary.unlink()
+    assert checker.route_problems(routed, stored) == [
+        "v5.0: the full replay has no summary, replay-routed.json"
+    ]
+    routed.route_summary.write_text(summary, encoding="utf-8")
+    shutil.copy(part, routed.route_parts / "k007.json")
+    assert checker.route_problems(routed, stored) == ["v5.0: k007.json is no K of the deposit"]
+    (routed.route_parts / "k007.json").unlink()
+    routed.route_part(5).unlink()
+    assert checker.route_problems(routed, stored) == [
+        "v5.0: the full replay has no receipt for K = [5]"
+    ]
+    monkeypatch.setattr(checker, "DEPOSITS", (routed,))
+    assert checker.main(["check"]) == 1
+    assert capsys.readouterr().out.splitlines()[-2:] == [
+        "v5.0: the full replay has no receipt for K = [5]",
+        "FAILED",
+    ]
+
+
+def test_a_resumed_run_replays_a_partial_damaged_or_stale_receipt(
+    routed: checker.Deposit,
+) -> None:
+    """A rerun keeps a current receipt and decides again one that is partial, truncated,
+    or decided under another filter lemma, other routes or another format; the receipt
+    it writes reads back clean."""
+    groups = checker.by_k(checker.records(routed))
+    part = routed.route_part(6)
+    kept = part.read_text(encoding="utf-8")
+    assert checker.part_is_current(routed, 6, groups[6])
+    changes: dict[str, Callable[[dict[str, Any]], None]] = {
+        "partial": lambda receipt: receipt["rows"].pop(),
+        "filter lemma": lambda receipt: receipt.update(filter_lemma="an older filter"),
+        "routes": lambda receipt: receipt.update(routes="other routes"),
+        "format": lambda receipt: receipt.update(format="two-strip-replay-part-v0"),
+    }
+    for name, change in changes.items():
+        _mutated(part, change)
+        assert not checker.part_is_current(routed, 6, groups[6]), name
+        part.write_text(kept, encoding="utf-8")
+    part.write_text(kept[: len(kept) // 2], encoding="utf-8")
+    assert not checker.part_is_current(routed, 6, groups[6])
+    _mutated(routed.route_part(5), lambda receipt: receipt.update(filter_lemma="older"))
+    part.write_text(kept[: len(kept) // 2], encoding="utf-8")
+    logged: list[str] = []
+    assert checker.replay_all(routed, 1, log=logged.append) is not None
+    assert logged[0] == "v5.0: 2 values of K, 2 to replay: [5, 6]"
+    assert checker.route_problems(routed, _stored(routed)) == []
+
+
+def test_a_raising_job_stops_the_run_and_keeps_the_receipts_written(
+    routed: checker.Deposit, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Over current receipts the command replays nothing and exits 0. With both receipts
+    and the summary gone, a run whose first K = 6 job raises stops there: K = 5's
+    receipt, written before, is kept, at most one more row starts before the queue is
+    cancelled, `ReplayStoppedError` names the row, and the command exits 1. A rerun in
+    which a route refuses a row writes the receipt and exits 1, naming the row."""
+    monkeypatch.setattr(checker, "VERSIONS", {"5": routed})
+    command = ["replay-all", "--version", "5", "--workers", "1"]
+    assert checker.main(command) == 0
+    assert "2 values of K, 0 to replay: []" in capsys.readouterr().out
+    for k in (5, 6):
+        routed.route_part(k).unlink()
+    routed.route_summary.unlink()
+    real = checker.route_row
+    calls: list[int] = []
+
+    def raising(row: checker.TwoStrip, *, with_controls: bool = False) -> dict[str, Any]:
+        calls.append(row.n)
+        if row.n == 28:
+            raise RuntimeError("boom")
+        return real(row, with_controls=with_controls)
+
+    monkeypatch.setattr(checker, "route_row", raising)
+    with pytest.raises(checker.ReplayStoppedError, match=r"v5\.0 K=6 n=28: RuntimeError"):
+        checker.replay_all(routed, 1, log=lambda _: None)
+    assert calls[:4] == [19, 18, 17, 28]
+    assert len(calls) <= 5
+    assert sorted(path.name for path in routed.route_parts.iterdir()) == ["k005.json"]
+    assert checker.main(command) == 1
+    assert "STOPPED: v5.0 K=6 n=28" in capsys.readouterr().out
+
+    def refused(row: checker.TwoStrip, *, with_controls: bool = False) -> dict[str, Any]:
+        item = real(row, with_controls=with_controls)
+        if row.n == 30:
+            item["verified"] = False
+            item["sqpack"].update(
+                passed=False, failure_count=1, failures=["squares 1 and 2 overlap"]
+            )
+        return item
+
+    monkeypatch.setattr(checker, "route_row", refused)
+    assert checker.main(command) == 1
+    assert "v5.0 n=30: the written-out certificate failed a route" in capsys.readouterr().out
+
+
 def test_write_out_builds_no_square_past_n() -> None:
     """At K = 1000, the checker's bound, the construction holds about a million squares;
     written out at n = 1 it builds one, since `poses` places them one at a time."""
@@ -445,16 +789,44 @@ def _summary_holds(deposit: checker.Deposit, expected: tuple[int, int, int, int]
 
 
 def test_version_5_s_receipts_hold() -> None:
-    """Version 5's two receipts read back: every decision and control of its 5,308 rows
+    """Version 5's receipts read back: every decision and control of its 5,308 rows
     derived again and its author's column counted again (51 no, 5,257 yes), 1182's and
     9912's certificates written out again to the digests stated, and the replay sample's
-    five counts decided on both routes with their six controls refused."""
+    five counts decided on both routes with their six controls refused. The full replay
+    (think-gw1s) covers all 5,308 rows in 66 receipts, one per K from 35 to 100, every
+    certificate the decided one and passed by both routes, and both routes refuse all
+    396 controls at its 66 controlled counts; the replay sample's counts are its rows
+    too, with the same certificates and candidate pairs."""
     assert checker.check(deposits=(checker.V5,)) == []
     _summary_holds(checker.V5, (5308, 31499439, 4618, 4))
     sample = json.loads(checker.replay_path(checker.V5).read_text(encoding="utf-8"))
     assert [row["n"] for row in sample["rows"]] == [1182, 1253, 6089, 9912, 9944]
     pairs = [row["decision"]["candidate_pairs"] for row in sample["rows"]]
     assert pairs == [2766, 2895, 13869, 22246, 22513]
+    summary = json.loads(checker.V5.route_summary.read_text(encoding="utf-8"))
+    assert summary["coverage"] == {
+        "rows": 5308,
+        "deposit_rows": 5308,
+        "verified": 5308,
+        "passed_sqpack": 5308,
+        "passed_independent": 5308,
+        "ks": 66,
+        "controlled_counts": 66,
+        "controls": 396,
+        "refused_by_sqpack": 396,
+        "refused_by_independent": 396,
+    }
+    assert [line["k"] for line in summary["by_k"]] == list(range(35, 101))
+    assert summary["squares"] == 31499439
+    routed = {
+        item["n"]: item
+        for k in range(35, 101)
+        for item in json.loads(checker.V5.route_part(k).read_text(encoding="utf-8"))["rows"]
+    }
+    for row in sample["rows"]:
+        found = routed[row["n"]]
+        assert found["certificate_sha256"] == row["certificate_sha256"]
+        assert found["candidate_pairs"] == row["decision"]["candidate_pairs"]
 
 
 def test_the_receipts_hold_with_the_sample_s_digests() -> None:
