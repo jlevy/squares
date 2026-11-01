@@ -27187,7 +27187,7 @@ issues:
       V3/C3, and n-044 moves to proved.
       zm_mixed.py's complete pass is priced and held over the pass's cap (think-qvp6); it
       raises no rung. Claude assistance disclosed.
-    read_through: '2026-10-29T15:58:14Z'
+    read_through: '2026-11-01T03:46:21Z'
     results:
     - key: s44-equals-7
       claim: 's(44) = 7: the lower half by a closed mixed cover, the upper half by the 7 x 7 grid.'
@@ -27200,7 +27200,8 @@ issues:
     beads:
     - think-1v4b
     - think-qvp6
-    answer_bead: think-1v4b
+    - think-dxqa
+    answer_bead: think-dxqa
     replies:
     - url: https://github.com/jlevy/squares/issues/842#issuecomment-6542869817
       date: '2026-10-31'
@@ -27220,6 +27221,20 @@ issues:
         id: E-khalili-842-cover-report
       beads:
       - think-qvp6
+    - url: https://github.com/jlevy/squares/issues/842#issuecomment-6553233874
+      date: '2026-11-01'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s44-equals-7
+        id: T-252
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: s44-equals-7
+        id: E-khalili-842-cover-replay
+        status: confirmed
     close_when: >-
       The import and its disposition are on main and the site, and the reply on main reports
       T-252 at its rungs and n-044 as proved; nothing the authors asked for is queued.
@@ -27237,6 +27252,34 @@ issues:
       reachable, and zm_mixed.py decides nothing in the record. The issue body already
       answers the zeromargin.py pin, both files used as they are at 659ee62, so it was not
       asked again.
+      The authors' comment of 1 November 2026, 03:46:21Z
+      (https://github.com/jlevy/squares/issues/842#issuecomment-6553028920), read the same
+      day (think-dxqa), answers it: leaving out --cert-mode was not deliberate, since they
+      kept the flags of their earlier runs. They say it cannot change this cover's outcome,
+      since zm_mixed.Cover finds no weighted point on a segment-carrying line (line_points
+      empty) and no polygon, and all 62 recorded runs (36 stage-1 jobs and 26 stage-2 runs,
+      by their count) report "closed by Lemma T with line points: 0". The record agrees: the
+      review's cover-n44.json has points_on_loaded_lines 0 and polygons 0, and each of the
+      62 .out logs the packet retains (35 colNN, deep, 24 dNN, and cloud_deep's a and b; deep
+      is a depth-30 run, so its file names group them 35 and 27) prints that line and "0
+      polygons". In zm_mixed.py 1fd20346, certificate mode does two things. It refuses a cover
+      with polygons, and it skips the Corollary T' branch, which also needs line_points. So a
+      pass in that mode decides every box of this cover as these runs did, and the
+      cert-mode pass they offer adds nothing the record needs; the follow-up of 1 November
+      (issuecomment-6553233874), posted from main fd8ccb96c after the verified deploy of
+      Pages run 41270393592 (verify-deployment 6,034 of 6,034 checks), says so. They
+      accept review F1, that zmx2 is interval-certified (binary64 widened outward, exact
+      integer mass tests) and not exact-rational, and will fix the wording of their README,
+      the issue and the paper's section 4 in their next release. Nothing in the record
+      changes: T-252 stays at V3/C3, and its evidence already calls zmx2 interval-certified.
+      The follow-up was posted at 04:09:12Z, before the pull request carrying this read-in
+      (#867) merged, departing from stage 7's rule that a reply follows that merge. Its
+      status block, its F1 point and the cert-mode code path were already on main. Two of
+      its statements were not: the 62-log observation (the logs were on main, but no main
+      document stated it) and "the record does not need one", which goes beyond main's
+      section 11 Q1, where a rerun "would align the route". #867 adds both to the review's
+      F4 and section 11. It was edited at 04:49:59Z to fix a broken F1 link (review A1 of
+      #867), with a visible note saying so; its ids and statements are unchanged.
   - number: 847
     title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
     author: mohsensbu-jpg
