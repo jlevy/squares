@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 58
+version: 59
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -41,7 +41,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T15:55:06.763Z
+updated_at: 2026-11-01T16:56:41.178Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -97,3 +97,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-01 05:20: merged #867 (e36ecf29d): #842 authors' --cert-mode answer read in, follow-up recorded (F1 link fixed in place), squarepack-certs f6b9499 read. 24 PRs merged this pass; no open intake PR; no lane running. Tool note: mcp add_issue_comment wrapped a URL in stray backticks twice (L11); update_issue_comment came through clean — read comments back after posting.
 
 2026-11-01 15:52: renewal. Lanes started ~15:10: L12 tooling (think-u4bm, -13ew, -t9uj, -rsqv), L13 W9 checker for #847 (think-fuwd), L14 #545 grade-C gradec replay (think-mtah), #804 Kim imports (think-ozx8, think-9vai) and watched reads. Sweep intake12: one new item, moh63-dev/s44-equals-7 29622595a773 (v1.2, docs only: zmx2 reworded to interval-certified, which T-252 already says; cites T-252 and Zenodo 10.5281/zenodo.23769766; certificate unchanged; nothing to import), assigned to L14 as a read. #846 closeable = known false positive (think-u4bm). No new issues since 14:45Z; open PRs only owner-blocked #574/#599/#744/#809.
+
+2026-11-01 16:52: renewal. PRs: #869 (L12 tooling; review A posted, no blockers, 3 should-fix + 3 nits sent back to L12), #868 (L14: Kim's 297 route B + squares-exact-forms + watched reads + gradec replay tool; strong-max correctness review running; first question is T-247's V0/C0 -> V3/C3 without a stage-4 review). Grade-C replay running (5/236 at 16:48Z, 0 failures, 3 controls refused). HOLD: T-261 stays at C1 after the replay until the owner answers think-xyek (note on think-mtah). Sweep intake13: #842 comment 6560351462 (v1.2 announcement; same as the watched read) -> #868's addressing pass; #847 comment 6560655638 (3D unit cubes in a cube, Zenodo 23862003; outside the register's scope, read only) -> L13; watched reads in #868; #846 -> #869.
