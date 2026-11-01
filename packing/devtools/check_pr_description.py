@@ -19,11 +19,19 @@ The first #201 rewrite had the headings and still opened Cost with every coverin
 wall. #196 and #197 open Cost with what the slice is and what it does not do.
 Filled mode refuses the former.
 
+Given the pull request's labels (`--label`, once each), a description labelled `intake`
+may not use a GitHub closing keyword: `closes`, `fixes` or `resolves`, in any tense, before
+an issue reference. #834's said `closes #613`, so its merge closed #613 fourteen minutes
+before the pass posted the final comment that stage 7 closes an issue with (think-t9uj).
+An intake pull request names its issues as `answers #N` or `records #N`.
+
 Usage, from `packing/`:
 
 ```
 uv run --frozen --all-extras --group dev python -m devtools.check_pr_description
 uv run --frozen --all-extras --group dev python -m devtools.check_pr_description --file BODY.md
+uv run --frozen --all-extras --group dev python -m devtools.check_pr_description \
+    --file BODY.md --label intake
 ```
 """
 
@@ -48,6 +56,17 @@ WALL_BULLET = re.compile(
 )
 MAX_COST_EXPERIMENTS = 3
 MAX_COST_WALL_BULLETS = 3
+#: The label of a pull request that brings in results (development.md, Issue and
+#: Pull-Request Labels), whose issues close only with their final comments.
+INTAKE_LABEL = "intake"
+#: A GitHub closing keyword before an issue reference, as GitHub reads one in a pull
+#: request's description: any tense of close, fix or resolve, an optional colon, then
+#: `#N`, `owner/repository#N` or the issue's URL.
+CLOSING_KEYWORD = re.compile(
+    r"\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b:?\s+"
+    r"(?:[\w.-]+/[\w.-]+#\d+|#\d+|https://github\.com/[\w.-]+/[\w.-]+/issues/\d+)",
+    re.IGNORECASE,
+)
 
 REQUIRED_HEADINGS = (
     "What this branch cost",
@@ -122,14 +141,28 @@ def _section(text: str, heading: str) -> str:
     return rest if next_heading < 0 else rest[:next_heading]
 
 
-def check(text: str, *, filled: bool) -> list[str]:
-    """Problems in `text`. Empty means the description matches the contract."""
+def closing_problems(text: str, labels: Sequence[str]) -> list[str]:
+    """Each GitHub closing keyword in an intake description, comments included, since a
+    keyword anywhere in the body closes the issue at the merge (think-t9uj)."""
+    if INTAKE_LABEL not in labels:
+        return []
+    return [
+        f"an intake description uses a GitHub closing keyword ({match.group(0)}), which "
+        "closes the issue at the merge, before its final comment; write 'answers #N' or "
+        "'records #N'"
+        for match in CLOSING_KEYWORD.finditer(text)
+    ]
+
+
+def check(text: str, *, filled: bool, labels: Sequence[str] = ()) -> list[str]:
+    """Problems in `text`, a description carrying `labels`. Empty means it matches the
+    contract."""
     body = strip_comments(text)
     found = headings(body)
-    problems: list[str] = []
+    problems: list[str] = closing_problems(text, labels)
 
     if not found:
-        return ["no `##` headings; the description is not the pull-request template"]
+        return [*problems, "no `##` headings; the description is not the pull-request template"]
     if found[0] != REQUIRED_HEADINGS[0]:
         problems.append(f"first heading is {found[0]!r}, not {REQUIRED_HEADINGS[0]!r}")
 
@@ -212,6 +245,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="treat --file as a template even if it has empty rows",
     )
+    parser.add_argument(
+        "--label",
+        action="append",
+        default=[],
+        help="a label the pull request carries; with intake, closing keywords are refused",
+    )
     args = parser.parse_args(argv)
 
     path = args.file if args.file is not None else TEMPLATE
@@ -222,7 +261,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"error: {error}", file=sys.stderr)
         return 2
 
-    problems = check(text, filled=filled)
+    problems = check(text, filled=filled, labels=args.label)
     label = path if path != TEMPLATE else "pull-request template"
     if problems:
         for problem in problems:
