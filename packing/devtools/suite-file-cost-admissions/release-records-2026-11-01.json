@@ -1,0 +1,60 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 16,
+  "seconds": 0.606,
+  "files": [
+    {
+      "file": "packing/tests/test_merge_conflicts.py",
+      "tests": 3,
+      "seconds": 0.276
+    },
+    {
+      "file": "packing/tests/test_release_records.py",
+      "tests": 13,
+      "seconds": 0.33
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_release_records.py",
+      "packing/tests/test_merge_conflicts.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_merge_conflicts.py": 3,
+      "packing/tests/test_release_records.py": 13
+    },
+    "deselected_tests": 0
+  }
+}
