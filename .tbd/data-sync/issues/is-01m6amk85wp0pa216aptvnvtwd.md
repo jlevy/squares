@@ -5,7 +5,7 @@ title: "Intake 2026-10-31 L11: read #842's cert-mode answer (moh63-dev, 2026-11-
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: bold-ritchie-l11
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-01T04:06:32.892Z
-updated_at: 2026-11-01T04:13:13.882Z
+updated_at: 2026-11-01T04:51:35.447Z
 started_at: 2026-11-01T04:06:37.898Z
 ---
 Two items from the 2026-11-01 03:53 intake sweep (epic think-3guf, lane L11, bold-ritchie-l11).
@@ -36,3 +36,12 @@ Stage 7 decision: a follow-up is owed. The pass touches the issue by reading its
 TheSnakeFang/squarepack-certs f6b9499 (strip-n6, six unit squares in an L x H rectangle, 1.87 <= H < 2): it is another container and touches no theorem-a/ or composites/ path, so it does not bear on Theorem A's row, T-163, T-236 or think-mbuh. Its read is recorded in intake-watch.yaml.
 
 Close this bead only after the PR merges.
+
+E-khalili-842-cover-report needs no change, so evidence.yaml is untouched: its limitations already say the zm_mixed.py runs "ran without --cert-mode, which for this cover leaves out nothing", its reported_method is interval-certified, and its review note's F1/F4 wording stays true (review A4 of #867).
+
+Review A of #867 (approve with fixes; pullrequestreview-5726520254) is addressed.
+- A1: the follow-up's broken F1 link is fixed by an edit at 04:49:59Z, with a visible "(Edited: fixed a broken link.)" note.
+- A2: the review's 1 November notes are attributed to lane L11 (bold-ritchie-l11, think-dxqa) and give the grep commands (62 of 62) and zm_mixed.py lines 943, 1107, 1358, 1528 and 1596-1598. They no longer imply that section 6.3 holds the log reading.
+- A3: #842's notes say the follow-up went up before #867 merged, and name the two statements not yet on main.
+- A4: the line above.
+- A5: section 11 Q1 ends "and the route decides nothing in the record (section 6.3)".
