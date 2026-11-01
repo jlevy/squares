@@ -68,7 +68,37 @@ verifiers:
       Run here once, at n = 10, from a copy outside the repository on 12 October 2026
       (receipts/gradec-n10-recompute.json in the evand-exact-data-2026-10-12 packet), with
       output byte-identical to the published certificate. The source ran it on all 250
-      configurations of field degree at most 4 (gradec_runs/run.sh).
+      configurations of field degree at most 4 (gradec_runs/run.sh). Run here on all 233
+      configurations the release certifies, and on its three GRADEC_MUTATE rejection tests
+      at n = 10, by devtools.evand_gradec_replay (V-evand-gradec-replay) for think-mtah.
+  - id: V-evand-gradec-replay
+    program: devtools.evand_gradec_replay
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Runs the source's gradec.py, unchanged, from a fresh copy of the four retained modules
+      outside the repository, on each count the release's gradec-233 archive certifies (230
+      and 261 with GRADEC_DROPZERO=1, as the release ran them), each in its own process
+      under -E -s with an empty working directory and the author's pinned packages; compares
+      every certificate it writes with the published n-N.gradec.json byte for byte and every
+      log, paths and times aside, line for line with the release's; and runs the source's
+      three rejection tests (GRADEC_MUTATE tight, droprow and neghess) at n = 10, each of
+      which must be refused. Resumable from its ledger, held to one environment, longest
+      runs first, and it starts a run only while the recorded CPU time, the worst case of
+      every run still going and its own fit its cap. It decides nothing itself: gradec.py
+      decides.
+    source:
+      - packing/devtools/evand_gradec_replay.py
+      - packing/tests/test_evand_gradec_replay.py
+    note: >-
+      Written by lane L14 of the 1 November 2026 intake (think-mtah), after reading
+      gradec.py, its three modules, run.sh, env.sh and the archive's README as data. Its
+      run of 1 November is receipts/gradec-replay-233.json in the evand-exact-data-2026-10-12
+      packet. No evidence entry cites it until T-261's replay evidence is entered, which
+      waits on the owner's question think-xyek.
   - id: V-evand-639-replay-driver
     program: replay_verify_exact.py
     author: Squares Project (Levy)

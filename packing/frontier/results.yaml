@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-31'
+last_reviewed: '2026-11-01'
 results:
   - id: T-001
     kind: lower-bound
@@ -37945,24 +37945,28 @@ results:
         verdict: defects-resolved
         covers: [T-261]
     next_rung: >-
-      Replay gradec.py, the source's checker, from its retained copy on all 233
-      configurations, 230 and 261 with GRADEC_DROPZERO=1, comparing each output with the
-      published n-N.gradec.json (think-mtah, about 10.6 CPU-hours by the source's logs):
-      that is the C3 replay. The author's adoption of the review's repaired step in
+      Held for the owner's question (think-xyek): whether a defect-found read stays open
+      after a review that ends defects-resolved. gradec.py's replay of all 233, the C3
+      route, ran on 1 November and reproduced every certificate byte for byte (think-mtah);
+      its receipt is retained in the packet and its evidence is not entered, since at C3
+      today's status rule would clear the incomplete read the question is about. Once the
+      owner answers, the replay evidence is entered, the confirmation rises to C3, and the
+      status follows the answer. The author's adoption of the review's repaired step in
       grade-C.md would close C-1 at the source.
     unfinished_confirmations:
       - what: >-
-          gradec.py replayed from its retained copy on all 233 configurations, each output
-          compared with the published certificate
+          The owner's answer to whether a defect-found read stays open after a review that
+          ends defects-resolved (think-xyek); then gradec.py's replay of all 233, already
+          run, entered as the C3 evidence
         rung: C3
         link: think-mtah
         estimated_cost:
-          cpu_hours: 10.6
-          cpu_hours_high: 21.0
+          cpu_hours: 0.01
+          cpu_hours_high: 0.02
           basis: >-
-            The source's logs: 38,026 s of build time for the VALID runs on the author's
-            machine at 8 jobs; the upper end allows a slower host here
-          priced: '2026-10-12'
+            gradec.py's replay of all 233 ran on 1 November (11.0 CPU-hours) and its receipt
+            is retained; what remains is records work
+          priced: '2026-11-01'
     notes: >-
       Found in the watched-repository read of evand/square-packing for the 12 October
       intake (think-mq0k) and tracked on issue 545. 169 of the 233 counts are in T-124's

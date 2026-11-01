@@ -122,6 +122,66 @@ ranks, flat families and $\dim W$.
 The programs and how to run them are in [review/](review/README.md), and their receipts
 in `receipts/review-*`.
 
+## The Replay of 1 November 2026
+
+`devtools.evand_gradec_replay` (bead think-mtah, the tool of #868) ran the source’s
+`gradec.py`, unchanged, on every one of the 233 counts in
+[review/counts.txt](review/counts.txt). Each run read the exact form retained here and
+the archive’s contacts file, and 230 and 261 ran with `GRADEC_DROPZERO=1`, as the
+release ran them. The four modules were copied out of the `ad86d42` packet to a
+directory outside the repository and held byte for byte to the retained copy.
+The source’s three rejection tests ran at n = 10: `GRADEC_MUTATE=tight` moves one
+load-bearing square by $10^{-30}$, `droprow` drops every right-wall row, and `neghess`
+negates the Hessian.
+
+**Environment.** CPython 3.13.18 in a fresh virtual environment holding `env.sh`’s pins:
+numpy 2.4.2, scipy 1.17.0, mpmath 1.3.0, sympy 1.14.0 and python-flint 0.9.0. Each run
+had its own process under `-E -s`, an empty working directory and single-threaded BLAS.
+Two ran at a time on a four-core Linux x86-64 host shared with other lanes, under a
+three-hour limit per run and a 40 CPU-hour cap.
+
+**Result.** All 233 certificates are VALID and byte-identical to the archive’s
+`n-N.gradec.json`, the two `GRADEC_DROPZERO` runs among them. Every log matches the
+release’s line for line, paths and times aside (`n-N.dropzero.log` at 230 and 261).
+Each of the three controls was refused with an `AssertionError` and wrote no
+certificate.
+
+**Cost.** The 233 replays took 39,646 CPU-seconds (11.0 CPU-hours), 1.04 times the
+38,026 seconds the release’s logs print; the controls took one second more.
+The longest was n = 313, at 1,839 CPU-seconds (the release’s log prints 1,741) and a
+2.7 GB peak. The runs went from 15:48Z to 22:39Z on 1 November 2026.
+
+**The receipt** is
+[receipts/gradec-replay-233.json](receipts/gradec-replay-233.json), stored plain: at 548
+lines it is under `devtools.retained_data`’s threshold for gzip.
+The ledger was written before its records named their environment (review A of #868).
+The tool adopted its 236 records once, with `--adopt-unstamped`, on a copy of the work
+directory, and wrote the receipt from it. `environment.adopted_unstamped` lists those
+records, and `last_invocation` is the adopting run, at 22:59Z.
+Every run’s record equals the one the first driver’s receipt held; the hardened tool
+only added fields.
+
+**What it decides.** Each published certificate is what `gradec.py` computes from the
+published inputs. That is a reproduction with the producer’s code at all 233, not a
+check that Theorem C or `gradec.py` is sound. It does not touch C-1, the gap in
+`grade-C.md`’s paper proof at side-end rows that the 23 October review repaired.
+The record’s packing property is `verify_exact.py`’s, not `gradec.py`’s.
+The 17 timeouts and the field degrees above 4 stay outside the claim.
+
+**Held.** No evidence entry cites the receipt yet. Entered, it would raise T-261 to C3,
+and under today’s status rule that clears the *incomplete* read that the owner’s
+question, think-xyek, is about. The entry waits on that answer (think-mtah), as the
+replay evidence of T-253 and T-260 waits on think-ikku.
+
+From `packing/`, after `uv run --frozen --all-extras --group dev`, with `VENV` a
+virtual environment holding `env.sh`’s pins and `SCRATCH` a directory outside the
+repository:
+
+```sh
+python -m devtools.evand_gradec_replay --python VENV/bin/python --work SCRATCH \
+  --jobs 2 --out resources/web/evand-exact-data-2026-10-12/receipts/gradec-replay-233.json
+```
+
 ## Original Gzip Files
 
 | Stored path | Origin | Git blob | SHA-256 |
