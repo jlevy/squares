@@ -10887,6 +10887,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Intake lane L16 of 1 November (think-r94q): #847's follow-up of 1 November "
+            "recorded under its replies, with what it states and the bead it names, and "
+            "sentences in its notes; no register entry, row, side, bound, rung or credit "
+            "changes. Against main ea5b27c95 (#870): rendered at link revision "
+            "0000000000000000000000000000000000000000 into empty site directories, twice "
+            "from this tree and once with that main's result-requests.yaml swapped in, "
+            "render_packing_methods writes its 43 files byte-identical across the three. "
+            "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 
