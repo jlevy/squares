@@ -10,11 +10,21 @@ that ran and to its controls; and refuses a fact that no longer rebuilds the aut
 from __future__ import annotations
 
 import copy
+import hashlib
+import importlib.util
 import json
+import zipfile
+from pathlib import Path
+from types import ModuleType
+from typing import Any
 
 import pytest
 
 from devtools import configuration_fact_replay as replay
+
+SIDE_297 = (
+    replay.ROOT / "campaign/issue-intake/upper-bounds-issue804-297-20261025/review/side_297.py"
+)
 
 
 def test_each_fact_rebuilds_the_certificate_the_comment_pins() -> None:
@@ -70,6 +80,26 @@ def test_route_two_accepts_both_files_and_refuses_every_control() -> None:
     assert summary == {"positives_valid": 2, "controls_refused": 8, "controls": 8}
 
 
+@pytest.mark.parametrize("kind", [None, "duplicate-square"])
+def test_route_two_runs_nothing_on_a_file_that_is_not_the_stated_one(
+    kind: str | None, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Finding 10 of review A on #868: the job refuses a rebuilt file whose SHA-256 is not
+    the one the comment states before the checker sees it, not only in a test afterwards."""
+    fact = replay.load(263)
+    changed = copy.deepcopy(fact)
+    changed["configuration"]["squares"][0]["x"][0] = "1/3"
+    monkeypatch.setattr(replay, "load", lambda _n, _packet=replay.T244: changed)
+
+    def never(_path: Path) -> dict[str, Any]:
+        raise AssertionError("the checker ran on a file out of custody")
+
+    monkeypatch.setattr(replay, "run_checker", never)
+    with pytest.raises(replay.ReplayError, match="nothing was run"):
+        replay.route2_job(263, kind, tmp_path)
+    assert list(tmp_path.iterdir()) == []
+
+
 # ------------------------------------------------------- T-247's configuration at 297
 
 
@@ -97,6 +127,67 @@ def test_the_retained_297_file_is_the_one_the_comment_pins() -> None:
     )
     assert all(member["retained"] for member in sources["members"])
     assert len(sources["members"]) == 6
+
+
+def side_297() -> ModuleType:
+    spec = importlib.util.spec_from_file_location("side_297_804", SIDE_297)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_the_297_bundle_is_kept_as_the_member_digests_name_them() -> None:
+    """Finding 10 of review A on #868, as T-244's exact-forms packet's test holds its own:
+    the packet keeps exactly the six members ``sources.json`` names, each at its size and
+    SHA-256; the bundle's own SHA256SUMS checks; the certificate is the file the comment
+    pins; and ``side_297.py derive --check`` finds the record what it would write."""
+    source = S297.directory / "source"
+    sources = json.loads(S297.sources.read_text(encoding="utf-8"))
+    kept = sorted(p.relative_to(source).as_posix() for p in source.rglob("*") if p.is_file())
+    assert kept == sorted(member["path"] for member in sources["members"])
+    for member in sources["members"]:
+        data = (S297.directory / member["retained_at"]).read_bytes()
+        assert len(data) == member["bytes"]
+        assert hashlib.sha256(data).hexdigest() == member["sha256"]
+    bundle = source / "s297-exact-configuration"
+    for line in (bundle / "SHA256SUMS").read_text(encoding="utf-8").splitlines():
+        digest, name = line.split("  ", 1)
+        assert hashlib.sha256((bundle / name).read_bytes()).hexdigest() == digest
+    certificate = bundle / "n297.minpoly.json"
+    assert hashlib.sha256(certificate.read_bytes()).hexdigest() == (
+        "e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826"
+    )
+    assert side_297().main(["derive", "--check"]) == 0
+
+
+@pytest.mark.parametrize(
+    "member",
+    [
+        "../escape.txt",
+        "s297-exact-configuration/../../escape.txt",
+        "s297-exact-configuration/..",
+        "other/README.md",
+        "s297-exact-configuration/sub/x.py",
+    ],
+)
+def test_the_297_retain_refuses_a_member_outside_its_one_directory(
+    member: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    program = side_297()
+    certificate = S297.directory / "source/s297-exact-configuration/n297.minpoly.json"
+    archive = tmp_path / "bundle.zip"
+    with zipfile.ZipFile(archive, "w") as bundle:
+        bundle.writestr("s297-exact-configuration/n297.minpoly.json", certificate.read_bytes())
+        bundle.writestr(member, b"x")
+    # Only the guard is under test: the stand-in zip is admitted as if it were pinned.
+    monkeypatch.setattr(
+        program, "ARCHIVE_SHA256", hashlib.sha256(archive.read_bytes()).hexdigest()
+    )
+    monkeypatch.setattr(program, "ARCHIVE_BYTES", archive.stat().st_size)
+    with pytest.raises(SystemExit, match="outside the archive's one directory"):
+        program.retain(archive, check=True)
 
 
 def test_the_297_side_is_t247s_and_the_receipt_says_so() -> None:

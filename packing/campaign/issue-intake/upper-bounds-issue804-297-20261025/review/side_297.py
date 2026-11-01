@@ -202,7 +202,7 @@ def retain(archive: Path, *, check: bool) -> int:
             sys.exit(f"{MEMBER}: not the certificate the comment pins")
         for info in members:
             directory, _, name = info.filename.partition("/")
-            if directory != ARCHIVE_DIR or not name or "/" in name:
+            if directory != ARCHIVE_DIR or name in {"", ".", ".."} or "/" in name:
                 sys.exit(f"{info.filename}: outside the archive's one directory")
             body = bundle.read(info)
             path = RETAINED / info.filename

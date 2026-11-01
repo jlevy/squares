@@ -28,7 +28,8 @@ reads it (review B2 of #813). This is the small reader the bead names, and the d
   the receipt names each square so read;
 - **route 2**, the source's ``verify_exact.py`` (`V-evand-verify-exact`), run unchanged
   from its retained copy, on the rebuilt file in a ``python -I`` child
-  process, and on four mutated controls (``CONTROLS``, the mutations of T-193's replay
+  process, which is refused before anything runs unless its SHA-256 is the one the
+  comment states, and on four mutated controls (``CONTROLS``, the mutations of T-193's replay
   driver, ``evand-exact-cur-2026-10-16/review/replay_verify_exact.py``): a square moved
   1e-6 through a wall it touches, ``S`` in ``K`` raised by 1e-6, ``S``'s interval moved
   wholly below the root, and square 1 replaced by square 0. Each control must be refused;
@@ -586,6 +587,13 @@ def route2_job(
 ) -> dict[str, Any]:
     fact = load(n, packet)
     data = fact["configuration"]
+    rebuilt = sha256(certificate_bytes(fact))
+    stated = fact["source"]["member_sha256"]
+    _require(
+        rebuilt == stated,
+        f"n={n}: the rebuilt file's SHA-256 {rebuilt} is not the stated {stated}; "
+        "nothing was run",
+    )
     what = "the author's file, rebuilt byte for byte"
     if kind is not None:
         data, what = mutate(data, kind)
@@ -598,7 +606,7 @@ def route2_job(
     record["control"] = kind or "positive"
     record["input"] = what
     if kind is None:
-        record["input_sha256"] = sha256(certificate_bytes(fact))
+        record["input_sha256"] = rebuilt
         record["valid"] = record["exit"] == 0 and record["last_line"].startswith("VALID")
     else:
         record["refused"] = record["exit"] == 1 and "NOT VERIFIED" in record["last_line"]

@@ -88,6 +88,27 @@ def test_the_archive_files_are_kept_as_the_member_digests_name_them() -> None:
     )
 
 
+@pytest.mark.parametrize(
+    "member",
+    [
+        "../escape.txt",
+        "squares-exact-forms/../../escape.txt",
+        "squares-exact-forms/..",
+        "squares-exact-forms/",
+        "other/README.md",
+        "squares-exact-forms/sub/kkt.py",
+        "/abs/kkt.py",
+    ],
+)
+def test_a_member_outside_the_archives_one_directory_is_refused(member: str) -> None:
+    """Finding 10 of review A on #868: ``derive`` keeps a member only directly in the
+    archive's one directory, as ``side_297.py retain`` does, not only because the zip's
+    digest is checked first."""
+    with pytest.raises(SystemExit, match="outside the archive's one directory"):
+        program().retained(member, b"", check=True)
+    assert program().retained("squares-exact-forms/kkt.py", b"", check=True) == 1
+
+
 def test_the_receipt_reads_the_retained_fact() -> None:
     digest = hashlib.sha256((PACKET / "facts/exact-forms.json").read_bytes()).hexdigest()
     assert receipt()["fact_sha256"] == digest

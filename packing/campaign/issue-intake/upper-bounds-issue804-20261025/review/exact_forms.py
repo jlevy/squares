@@ -100,7 +100,9 @@ ATTACHMENT = "https://github.com/user-attachments/files/33917140/squares-exact-f
 #: The digest the issue states, and the size triage measured on 25 October 2026.
 ARCHIVE_SHA256 = "c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7"
 ARCHIVE_BYTES = 14_112
-FORMS_MEMBER = "squares-exact-forms/exact_forms.json"
+#: The archive's one directory, which holds every member; nothing is kept outside it.
+ARCHIVE_DIR = "squares-exact-forms"
+FORMS_MEMBER = f"{ARCHIVE_DIR}/exact_forms.json"
 #: Where the packet keeps the archive's files, at their member paths, since 1 November 2026.
 RETAINED = PACKET / "source"
 #: The author's public copy of his three issue-804 attachments (issuecomment-6543970419),
@@ -312,7 +314,14 @@ def derive(archive: Path, *, check: bool) -> int:
 
 
 def retained(member: str, body: bytes, *, check: bool) -> int:
-    """Keep one archive member byte-identical under ``source/``, or compare it there."""
+    """Keep one archive member byte-identical under ``source/``, or compare it there.
+
+    A member must be a file directly in the archive's one directory, so no name the
+    archive gives can place a file elsewhere (review A of #868, finding 10).
+    """
+    directory, _, name = member.partition("/")
+    if directory != ARCHIVE_DIR or name in {"", ".", ".."} or "/" in name or "\\" in name:
+        sys.exit(f"{member}: outside the archive's one directory")
     path = RETAINED / member
     if check:
         if not path.is_file() or path.read_bytes() != body:
