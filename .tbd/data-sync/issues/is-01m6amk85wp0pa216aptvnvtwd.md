@@ -3,9 +3,9 @@ type: is
 id: is-01m6amk85wp0pa216aptvnvtwd
 title: "Intake 2026-10-31 L11: read #842's cert-mode answer (moh63-dev, 2026-11-01T03:46Z) and post its follow-up; read TheSnakeFang/squarepack-certs f6b9499 (strip-n6)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: bold-ritchie-l11
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-01T04:06:32.892Z
-updated_at: 2026-11-01T04:51:35.447Z
+updated_at: 2026-11-01T05:15:26.776Z
 started_at: 2026-11-01T04:06:37.898Z
+closed_at: 2026-11-01T05:15:26.774Z
+close_reason: "#842's --cert-mode answer read in and its follow-up recorded in jlevy/squares#867 (merged e36ecf29d)."
+resolution: null
+duplicate_of: null
 ---
 Two items from the 2026-11-01 03:53 intake sweep (epic think-3guf, lane L11, bold-ritchie-l11).
 
