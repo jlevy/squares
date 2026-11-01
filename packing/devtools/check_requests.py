@@ -25,9 +25,11 @@ register together and stores none of it:
   the beads that own what remains of its validation (`validation`), nothing the author
   asked for is queued, no question put to the author awaits an answer that could falsify
   what the record asserts and that no measurement here can settle (`awaiting_author`:
-  credit, lineage, or which file), and the issue is not held for the owner (`held`). A
-  review track (`review_track`), which the project opened to track a pending review and
-  which has no author to answer, closes only when its result is confirmed or refuted.
+  credit, lineage, or which file), the issue is not held for the owner (`held`), and it
+  carries no `blocked` entry, of any type, nor a `close_when` that waits on an owner
+  decision no `blocked` records (think-u4bm). A review track (`review_track`), which the
+  project opened to track a pending review and which has no author to answer, closes
+  only when its result is confirmed or refuted.
 
 A closeable issue still open is owed its final comment and its close, at stage 7 after
 the verified deploy. The final comment is the answer: drafted with ``--draft`` from
@@ -56,7 +58,12 @@ An ask (`asks`) records only what the issue's author asked of the project, with 
 queued ask under a bead a result names there is refused. An issue someone other than the
 pass must unblock carries `blocked`, its type the GitHub label `blocked:<type>`
 (development.md, Issue and Pull-Request Labels), which ``--github`` holds the live labels
-to. `close_when` is descriptive: the rule above decides when an issue closes.
+to; while it stands the issue is not closeable. `close_when` is descriptive: the rule
+above decides when an issue closes. The one thing it is read for is a clause waiting on
+the owner's decision or answer (`owner_decision_named`): with no `blocked` to say whether
+that decision stands, the issue does not read closeable until the record says which.
+#846 read closeable on 31 October 2026 while blocked on the owner's answer, and a lane
+kept it open by hand.
 
 Modes, from ``packing/`` with the project interpreter::
 
@@ -193,6 +200,14 @@ BLOCK_TYPES = (
 BLOCKED_LABEL = "blocked:"
 #: The block types an issue held for the owner carries: only the owner's word lifts both.
 HELD_BLOCKS = frozenset({"owner-decision", "owner-reply"})
+#: A clause of `close_when` that waits on the owner's decision or answer, in the forms the
+#: record's entries use (`owner_decision_named`).
+OWNER_DECISION = re.compile(
+    r"[^.;,]*\b(?:the owner has (?:answered|decided|ruled|budgeted|declined)"
+    r"|an owner decision|the owner's (?:call|decision|ruling|answer)"
+    r"|the owner (?:decides|answers|rules|declines))\b[^.;,]*",
+    re.IGNORECASE,
+)
 
 BEAD = re.compile(r"\bthink-[a-z0-9]{4}\b")
 _ID_ON_MAIN = re.compile(r"\bid: (T-\d{3}|E-[A-Za-z0-9.-]+)")
@@ -888,17 +903,40 @@ def _unanswered(state: ResultState, *, review_track: bool) -> str:
     return ""
 
 
+def owner_decision_named(close_when: str) -> str:
+    """The clause of `close_when` that waits on the owner's decision or answer, or "".
+
+    `close_when` is descriptive, so this reads only the forms an entry uses for a decision
+    still to come: "the owner has answered", "has decided", "has ruled", "has budgeted or
+    declined", "an owner decision", "the owner's call". A decision in the past tense ("the
+    owner answered on 23 October") or the owner posting a state waits on nothing here."""
+    match = OWNER_DECISION.search(" ".join(close_when.split()))
+    return match.group(0).strip() if match else ""
+
+
 def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[str]]:
     """Whether the issue can be closed with a final comment, and what stops it.
 
     An issue is closeable once it is answered (P1): what it reports is imported and
     disposed of, and the final comment reports it. A result below `V3/C3` does not hold
     it open once its `validation` names the beads that own the rest; a review track
-    (`review_track`) waits for its result to be confirmed or refuted."""
+    (`review_track`) waits for its result to be confirmed or refuted. A `blocked` entry of
+    any type holds it open, since someone other than the pass must act first, and so does
+    a `close_when` that waits on an owner decision no `blocked` records (think-u4bm: #846
+    read closeable on 31 October while blocked on the owner's answer)."""
     blockers: list[str] = []
     hold = held(issue)
     if hold is not None:
         blockers.append(hold_text(hold))
+    block = issue.get("blocked")
+    if block:
+        blockers.append(f"{BLOCKED_LABEL}{block['type']}: {str(block['reason']).rstrip('.')}")
+    elif waiting := owner_decision_named(str(issue.get("close_when", ""))):
+        blockers.append(
+            f"close_when waits on an owner decision no `blocked` records ({waiting}): "
+            "record `blocked: owner-decision` while it stands, or reword close_when once it "
+            "is met"
+        )
     if issue["triage"] == "pending":
         blockers.append("triage is pending")
     review_track = bool(issue.get("review_track"))

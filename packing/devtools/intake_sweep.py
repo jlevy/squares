@@ -1196,9 +1196,11 @@ def _held(
     """An issue held for the owner: listed for the owner, never as a reply or close owed.
 
     What a pass would otherwise owe it is named, for the owner to decide; nothing is
-    posted on it or closed while the hold stands (review A1 of #747).
+    posted on it or closed while the hold stands (review A1 of #747). The hold's block,
+    which a held issue carries (`check_requests.HELD_BLOCKS`), is the owner's to lift
+    with it, so it is set aside too.
     """
-    unheld = {key: value for key, value in issue.items() if key != "held"}
+    unheld = {key: value for key, value in issue.items() if key not in {"held", "blocked"}}
     settled, _ = check_requests.closeable(unheld, state.results)
     would = [*owed, *(["its close"] if settled else [])]
     alias = str(issue["answer_bead"])

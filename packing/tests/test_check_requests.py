@@ -824,6 +824,89 @@ def test_a_hold_is_for_the_owner_with_its_basis_date_beads_and_note(
     assert any(expected in problem for problem in found), found
 
 
+#: A block as the record states one (`blocked`), by the owner's ruling it waits on.
+DECISION = {
+    "type": "owner-decision",
+    "reason": "Whether the owner's ruling reaches these counts (think-abcd).",
+}
+
+
+@pytest.mark.parametrize("kind", check_requests.BLOCK_TYPES)
+def test_an_open_issue_that_carries_a_block_is_never_closeable(kind: str) -> None:
+    """think-u4bm: on 31 October `--report` listed #846 closeable while its entry carried
+    `blocked: owner-decision` and its close_when waited on the owner's answer; a lane kept
+    it open by hand. A block of any type says someone other than the pass must act before
+    the issue moves, so it holds the issue open, and every output says so."""
+    entry = asking(blocked={**DECISION, "type": kind})
+    assert check_requests.problems(record(entry), REGISTER) == []
+    assert check_requests.issue_state(asking(), REGISTER).closeable
+    state = check_requests.issue_state(entry, REGISTER)
+    assert not state.closeable
+    blocker = f"blocked:{kind}: Whether the owner's ruling reaches these counts (think-abcd)"
+    assert state.blockers == (blocker,)
+    (line,) = check_requests.summary_lines(record(entry), REGISTER)
+    assert line.endswith(f"blocked:{kind}")
+    assert "closeable" not in line
+    section = "\n".join(check_requests.report(record(entry), REGISTER, None))
+    assert "| #7 | open | 1 of 1 | yes | no |" in section
+    assert f"Closeable: no; {blocker}." in section
+    text = check_requests.draft(entry, REGISTER, "owner/repo")
+    assert "closed with this comment" not in text
+    assert "This issue stays open while anything above is queued" in text
+
+
+def test_a_close_condition_naming_an_owner_decision_holds_an_unblocked_issue_open() -> None:
+    """think-u4bm: `close_when` is descriptive, but where it waits on the owner's decision
+    or answer and no `blocked` records that, the report cannot tell a met decision from an
+    unmet one, so the issue does not read closeable until the record says which: the
+    block while the decision stands, or a close_when reworded once it is met. A decision
+    in the past tense, or the owner posting a state, waits on nothing."""
+    waiting = (
+        "The reply on main says so, and the owner has answered think-abcd's question.",
+        "The packet is on main, and the owner has decided on a sample or a full rebuild.",
+        (
+            "Both reports are on main, and the replay is either run or priced with an "
+            "owner decision."
+        ),
+        "The owner's call: the open beads are closed or moved.",
+    )
+    for text in waiting:
+        state = check_requests.issue_state(asking(close_when=text), REGISTER)
+        assert not state.closeable, text
+        (blocker,) = state.blockers
+        assert blocker.startswith(
+            "close_when waits on an owner decision no `blocked` records ("
+        ), text
+        assert blocker.endswith(
+            "): record `blocked: owner-decision` while it stands, or reword close_when "
+            "once it is met"
+        )
+    blocked = check_requests.issue_state(
+        asking(close_when=waiting[0], blocked=DECISION), REGISTER
+    )
+    assert blocked.blockers == (
+        "blocked:owner-decision: Whether the owner's ruling reaches these counts (think-abcd)",
+    )
+    for text in (
+        "The owner answered on 23 October that counts above 1024 are tracked.",
+        (
+            "The import and its disposition are on main and the owner has posted the "
+            "resulting state."
+        ),
+        "T-001 is confirmed.",
+    ):
+        assert check_requests.issue_state(asking(close_when=text), REGISTER).closeable, text
+
+
+def test_no_open_issue_in_the_live_record_reads_closeable_while_blocked() -> None:
+    """An invariant over whatever blocks the record carries, so lifting one edits the
+    record and fails no test."""
+    register = check_requests.load_register()
+    for issue in check_requests.load_record()["issues"]:
+        if issue["state"] == "open" and issue.get("blocked"):
+            assert not check_requests.issue_state(issue, register).closeable, issue["number"]
+
+
 def test_a_closed_issue_cannot_carry_a_hold() -> None:
     closed = asking(held=HOLD, state="closed", closed="2026-10-24")
     found = check_requests.problems(record(closed), REGISTER)

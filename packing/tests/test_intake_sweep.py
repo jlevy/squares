@@ -1012,6 +1012,10 @@ def test_an_issue_held_for_the_owner_is_listed_for_the_owner_and_never_as_a_clos
     )
     assert item.step == "for the owner: Reserved for the owner (think-cccc)."
     assert sweep.needing_action([sweep.Section("queues", items=[item])]) == []
+    # The block a held issue carries is the hold's, so it hides no close (think-u4bm).
+    reply = {"type": "owner-reply", "reason": "Held for the owner (think-cccc)."}
+    (blocked,) = _queues([_settled(held=HOLD, blocked=reply)], beads).items
+    assert blocked.what == item.what
     unanswered = {**_settled(held=HOLD), "replies": []}
     (owed,) = _queues([unanswered], beads).items
     assert "confirmation (a reply and its close otherwise owed)" in owed.what
