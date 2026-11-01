@@ -5,7 +5,7 @@ title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666,
 kind: task
 status: in_progress
 priority: 1
-version: 27
+version: 28
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: bold-ritchie-l4
 labels:
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-11-01T07:03:39.466Z
+updated_at: 2026-11-01T19:31:41.201Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -76,3 +76,5 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 - D4 (hosting Couzo's certificates above 1024): the 23 October disposition is a hosted release the owner publishes after a lane stages its manifest; no lane has staged it, so the owner has had nothing to publish. By OR-18's count the set is about 9.1 MB as zlib stores it (think-cyal, 98 certificates, 51.2 MB checkout), where the #715 packet kept its certificates to 1024 in Git at 4.42 MB stored, and check_added_blobs admits 48 MiB a pull request and 5 MiB a blob. DECISION for the coordinator or owner: keep hosting (R1 stages the manifest, the owner publishes before R1 merges) or commit them to Git, which removes the owner's step.
 - R5 grows (think-5dc3): #836's v5 rows, which two_strip_checker reads, land with #799's, about 9.2 CPU-h more (think-gw1s). The filled-end sets need W9 (think-fuwd) and a slice of their own after R5, about 11.8 CPU-h for V2.0, up to 21.3 with V1.0 (think-qczx); the owner question Q-847a (how V1.0's withdrawn and restated rows stand) is on think-r94q.
 - Requests entries for #836 and #847 (triage pending) and their intake labels: branch claude/bold-ritchie-xo28us-beyond.
+
+2026-11-01 bold-ritchie-l13 (addressing pass of PR #870, W9, think-fuwd), from the stage 4 review's F2 (docs/project/reviews/review-2026-11-01-filled-end-lemma.md): **the walk must record a filled-end row at side_exact, or at a decimal rounded up from it (as couzo_678_replay.rounds_up_to requires of a printed side), never at the author's decimal `side` column.** Karimi rounded the exact side to nearest, so his decimal is below side_exact at 2,514 of V2.0's 5,134 rows and 2,204 of V1.0's 4,571, by up to 0.502 units of its twelfth place (0.504 in V1.0; the review's 0.503 and 0.506 are the largest gaps either way, which are above). The V fit binds at every row, so where the decimal is below, a square of that side does not hold the construction (1190: decimal 34.958620689655, exact 5069/145 = 34.95862068965517...). devtools.filled_end_checker decides and reports side_exact alone, and each decisions receipt counts the decimal against it under author_columns.side, which `check` derives again. The review accepted the lemma with no defect, so under D2 each decided row is a row once this walk records it.
