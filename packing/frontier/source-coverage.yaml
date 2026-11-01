@@ -7368,6 +7368,8 @@ sources:
   evidence:
   - E-n040-wand125-sqverify-continuous-6715-report
   - E-n040-wand125-sqverify-continuous-6718-report
+  - E-n040-wand125-sqverify-continuous-6715-replay
+  - E-n040-wand125-sqverify-continuous-6718-replay
   notes: >-
     tools/sqverify_continuous at f30cc2cf (v3, the version the README's n = 40 examples
     ran) and d4a19815 (v4, which adds --resume), retained in the two packets. Its README
@@ -7375,9 +7377,11 @@ sources:
     VERIFIED at all 86 root ranges with no run output published. The two reported
     entries record them: the first is below T-157's 3359/500, which holds both lanes, and
     the second equals it, so neither moves a lane. The 23 October soundness review found
-    no blocking or major defect and reproduced the README's controls here; the replay of
-    both examples is think-flxm's. The same v4 is the first program of T-192's n = 28
-    report, whose coverage entry is wand125-continuous-n28-5745-2026-10-15.
+    no blocking or major defect and reproduced the README's controls here; on 31 October
+    2026 both examples were replayed here in full with v4, their node totals the README's,
+    with their mass controls refused (think-flxm; the two replay entries, receipts in the v4
+    packet's replay/); no counted oblique control has run. The same v4 is the first program of T-192's n = 28 report,
+    whose coverage entry is wand125-continuous-n28-5745-2026-10-15.
 - id: evand-exact-cur-2026-10-16
   title: Evan Daniel's exact algebraic sides for 23 current records at 7d1407a, issue 639
   role: source-repository

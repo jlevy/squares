@@ -4684,8 +4684,10 @@ verifiers:
           720869758013ac3cc86343f0603817ee36298be7696e40bb1d164a511f383a08), whose build
           reports source_sha256
           619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5; built here with
-          rustc 1.98.0 (cargo build --release --locked) on 15 and on 23 October into
-          31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618.
+          rustc 1.98.0 (cargo build --release --locked) on 15, 23 and 31 October into
+          31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618; the build of
+          31 October ran the complete replays of both n = 40 examples
+          (E-n040-wand125-sqverify-continuous-6715-replay and -6718-replay).
     independence_record: packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/PROVENANCE.md
     independence:
       read:
@@ -4777,9 +4779,10 @@ verifiers:
           nothing of it; it re-types the definitions its shares name, to test or recompute
           them, so its code is not separate in the registry's sense.
     note: >-
-      Kept in the review's packet with its receipts; cited by the review and by no evidence
-      entry, since what it decides is premises that the registered audits and the review
-      already carry.
+      Kept in the review's packet with its receipts; cited by the review, and since 31 October
+      2026 by E-n040-wand125-sqverify-continuous-6715-replay and -6718-replay, whose
+      candidates candidates.py builds; what it decides is premises that the registered audits
+      and the review already carry.
 
   - id: V-sqverify-continuous-review-probe
     program: bounds_probe.py and probe_suite.py, the 23 October review's adversarial probe of sqverify_continuous's box bound
@@ -4875,8 +4878,9 @@ verifiers:
           for T-192 that source is the producer's code. In files of its own, importing and
           copying nothing of it.
     note: >-
-      Kept in the review's packet with its receipts; cited by the review and by no evidence
-      entry. Written to judge a replay of the mode as well (the review's section 11).
+      Kept in the review's packet with its receipts; cited by the review, and since 31 October
+      2026 by E-n040-wand125-sqverify-continuous-6715-replay and -6718-replay, whose runs it
+      judged. Written to judge a replay of the mode as well (the review's section 11).
 
   - id: V-wand125-contpose-check3
     program: >-

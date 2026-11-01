@@ -1,0 +1,42 @@
+{
+  "run": "c6715_oblique.jsonl",
+  "candidate": "c6715.json",
+  "core": "199529/200000",
+  "tau": "24997/25000",
+  "status": "VERIFIED",
+  "nodes": 113317246,
+  "leaves": 56658666,
+  "roots": 86,
+  "refused_roots": 0,
+  "min_certified_lower_bound": 0.9998800000750528,
+  "build": {
+    "profile": "release",
+    "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+    "source_sha256": "619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5",
+    "target": "x86_64-unknown-linux-gnu"
+  },
+  "run_key": "6d9d1860152f4bf9f2da7f59c7e5ac851fd42ce026277b8f76635dce76ac82a8",
+  "legal_refutations": 0,
+  "least_refuting_capture": null,
+  "witnesses": [],
+  "notes": {
+    "axis_patch": {
+      "verified": true,
+      "min_certified_lower_bound": 0.9998826251900828,
+      "vertices": 4897369
+    }
+  },
+  "checks": {
+    "premises equal this review's": true,
+    "one line per root, in the default cuts": true,
+    "no inherited line": true,
+    "verified roots are complete binary covers at or above tau": true,
+    "every witness capture equals the run's exact_capture": true,
+    "every witness flag agrees": true,
+    "summary status follows from the lines": true,
+    "summary totals are the sums": true,
+    "summary claim": true,
+    "status is the expected one": true
+  },
+  "all_hold": true
+}

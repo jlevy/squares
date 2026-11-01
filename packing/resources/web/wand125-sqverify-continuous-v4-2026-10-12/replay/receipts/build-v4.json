@@ -1,0 +1,39 @@
+{
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "cargo",
+    "build",
+    "--release",
+    "--locked",
+    "-j",
+    "2"
+  ],
+  "cwd": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/build-v4/tools/sqverify_continuous/sqverify_fast",
+  "started_utc": "2026-10-31T20:09:17Z",
+  "exit_status": 0,
+  "wall_seconds": 25.564,
+  "cpu_user_seconds": 29.803,
+  "cpu_system_seconds": 2.362,
+  "max_rss_kib": 357496,
+  "load_average": [
+    2.6396484375,
+    2.33544921875,
+    2.21923828125
+  ],
+  "digests": {
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/build-v4/tools/sqverify_continuous/sqverify_fast/target/release/sqverify-fast": "31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618"
+  },
+  "stdout_lines": 0,
+  "stdout_head": [],
+  "stdout_tail": [],
+  "stderr_lines": 52,
+  "stderr_tail": [
+    "   Compiling itoa v1.0.18",
+    "   Compiling memchr v2.8.3",
+    "   Compiling flate2 v1.1.2",
+    "   Compiling num-rational v0.4.2",
+    "    Finished `release` profile [optimized] target(s) in 25.50s"
+  ]
+}
