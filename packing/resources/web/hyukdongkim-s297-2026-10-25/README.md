@@ -111,8 +111,11 @@ certificate to the certificate’s, and wrote the six members byte-identical und
   side is $S^*$.
 - **route 2** (`receipts/route2-verify-exact.json`): Evan Daniel’s `verify_exact.py`, the
   checker the author reports running, run unchanged from its retained copy in a
-  `python -I` child, printed VALID: 1,750 touching incidences proved as identities in K,
-  7,138 strict by intervals, the rest by discs, in 13.6 CPU-seconds. It refused all four
+  `python -I` child, printed VALID in 13.6 CPU-seconds. Of the 8,888 corner inequalities
+  it decided (4,752 of corners against the walls, and 4 for each of the 1,034 pairs a side
+  line separates), 1,750 are touching incidences proved as identities in K and 7,138
+  strict by intervals; the other 42,922 of the 43,956 pairs are separated by discs. Its
+  file is byte-identical at 659ee62, the revision the author ran it at. It refused all four
   mutated controls of T-193’s replay driver: a square moved 1e-6 through a wall it
   touches, $S$ raised by 1e-6 in $K$, $S$’s interval moved below the root, and square 1
   replaced by square 0. Run on 1 November 2026.

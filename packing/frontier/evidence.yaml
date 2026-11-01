@@ -52921,16 +52921,20 @@ evidence:
     limitations: >-
       Evan Daniel's verify_exact.py, the checker the author reports running, read first and
       run unchanged here from the copy the evand-exact-and-local-reports-2026-10-12 packet
-      retains (byte-identical at 7d1407a and ad86d42; the author ran it at 659ee62, which
-      is not retained here), on 1 November 2026 under CPython 3.14.7, on Hyukdong Kim's
-      n297.minpoly.json as the packet keeps it: read from the author's public copy at
-      f480441e, its archive held to the SHA-256 his comment states and the file to the
-      certificate's (e5c340b8...2826). VALID: 1,750 touching incidences proved as identities
-      in K, a field of degree 21, 7,138 strict by intervals and the remaining pairs by discs,
-      in 13.6 CPU seconds, as the author's README states. Four mutated controls were
-      refused: a square moved 1e-6 through the wall it touches, the side raised by 1e-6 in
-      the field, the side's interval moved below its root, and a duplicate square. 26
-      CPU seconds for the five runs. Before deciding, the reader holds the file's side to
+      retains (SHA-256 a0f38ca8...bab4, byte-identical at 7d1407a and ad86d42, and at
+      659ee62, the revision the author ran it at, whose file was read from
+      raw.githubusercontent.com on 1 November 2026 and not retained), on 1 November 2026
+      under CPython 3.14.7, on Hyukdong Kim's n297.minpoly.json as the packet keeps it:
+      read from the author's public copy at f480441e, its archive held to the SHA-256 his
+      comment states and the file to the certificate's (e5c340b8...2826). VALID in K, a
+      field of degree 21, in 13.6 CPU seconds. Of the 8,888 corner inequalities it decided,
+      4,752 of corners against the box's walls and 4 for each of the 1,034 pairs a side line
+      separates, 1,750 are touching incidences proved as identities and 7,138 strict by
+      intervals; the other 42,922 of the 43,956 pairs are separated by discs. Those are the
+      counts the author's README states. Four mutated controls were refused: a square moved
+      1e-6 through the wall it touches, the side raised by 1e-6 in the field, the side's
+      interval moved below its root, and a duplicate square. The five runs took 25.3 CPU
+      seconds (26.4 s of wall time). Before deciding, the reader holds the file's side to
       T-247's: the same irreducible polynomial, a root of it in K, and one real root in the
       hull of the file's enclosure and T-247's isolating interval. Counted as a reproduction
       with the source's check: the author built the configuration and ran this checker on

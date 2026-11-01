@@ -35449,9 +35449,10 @@ results:
       the packet keeps since 1 November 2026.
 
       The author's configuration was decided here on 1 November 2026 (route B): Evan Daniel's
-      verify_exact.py, the checker the author reports running, run unchanged, printed VALID,
-      with 1,750 touching incidences proved as identities in a field of degree 21, and
-      refused four mutated controls. Before deciding, the file was held to the digests the
+      verify_exact.py, the checker the author reports running, run unchanged, printed VALID
+      in a field of degree 21, with the 1,750 corner incidences it counts as touching (a
+      square's corner on a wall or on a separating side) proved as identities, and refused
+      four mutated controls. Before deciding, the file was held to the digests the
       comment states and its side to this entry's: the same polynomial, a root of it in the
       field, and the same real root. So the bound is shown, reproduced with the source's
       check.
@@ -35511,16 +35512,18 @@ results:
     next_rung: >-
       Route 1 of route B: the author's file decided on sqpack.witness.exact_verify over its
       degree-21 field, with the duplicate-square and outside-container controls, through
-      configuration_fact_replay --packet s297 route1 (think-ozx8, running), as T-244's
-      configurations were. Route A, this repository's own configuration on exact_verify, is
-      a further route (think-vv1q).
+      configuration_fact_replay --packet s297 route1 (think-ozx8, queued behind the lane's
+      gradec replay), as T-244's configurations were. Route A, this repository's own
+      configuration on exact_verify, is a further route (think-vv1q).
 
-      Then, as T-244 at 263: a stage 4 review of the
-      configuration, and adoption by the house rule once the algebraic writer holds the
-      field fact (upper_bound_houses.FIELD_COUNTS, think-ot5c), carrying its general and flip
-      regularization at adoption, as the regularization gate requires of every adopted house.
-      The case record is unchanged until then, so this entry reads as pending adoption at
-      297. Local minimality of the packing at its side is a separate claim and is not
+      Then, as T-244 at 263: the side at 297 is the exact value of the house's own
+      arrangement, 3.359e-90 below T-174's certificate there, not a new packing. Its
+      adoption waits on the algebraic-house writer (upper_bound_houses.FIELD_COUNTS,
+      think-ot5c) and on the owner's restatement question (think-ikku). If those make it
+      adoptable, a stage 4 review of the configuration comes first, then the house rule
+      adopts the side at 297, carrying its general and flip regularization at adoption, as
+      the regularization gate requires of every adopted house. The case record is unchanged
+      until then, so this entry reads as pending adoption at 297. Local minimality of the packing at its side is a separate claim and is not
       registered. V4 and C4 need two adversarial AI reviews by distinct reviewers and a human
       oversight record.
     notes: >-

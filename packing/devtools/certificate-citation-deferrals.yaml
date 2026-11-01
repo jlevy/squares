@@ -95,9 +95,10 @@ deferrals:
     results:
     - T-247
     bead: think-vv1q
-    blocked_on: think-ot5c
+    blocked_on: think-ot5c, think-ikku
     recorded: '2026-11-01'
     reason: 'Kim''s exact configuration at 297, decided by the retained verify_exact.py (route B, think-ozx8).
-      The side is 3.359e-90 below T-174''s rational certificate, the house; the case record cites it
-      when the house adopts T-247, which waits on the algebraic-house writer (think-ot5c) and a stage
-      4 review of the configuration, as T-244 at 263 does (think-vv1q owns that adoption).'
+      The side is 3.359e-90 below T-174''s rational certificate, the house''s own arrangement; the
+      case record cites it when the house adopts T-247, which waits, as T-244 at 263 does (think-3trq),
+      on the algebraic-house writer (think-ot5c) and on the owner''s restatement question (think-ikku),
+      and then on a stage 4 review of the configuration (think-vv1q owns that adoption).'

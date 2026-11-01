@@ -260,7 +260,7 @@ second implementation agrees.
 The source's standard-library checker of an exact configuration over a number field Q[t]/f: every touching inequality an identity mod f, every other one by rational interval arithmetic at the root of f, each pair separated by a side line or by circumscribed discs, and the side the unique root of p in its interval.
 
 - Source: [`packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py`](../../packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py)
-- Versions run: SHA-256 `a0f38ca87c13…`, revision `7d1407a0b66c` (byte-identical at ad86d42, the revision whose packet retains the copy that ran)
+- Versions run: SHA-256 `a0f38ca87c13…`, revision `7d1407a0b66c` (byte-identical at ad86d42, the revision whose packet retains the copy that ran); SHA-256 `a0f38ca87c13…`, revision `659ee62e4a9d` (The same bytes at 659ee62, the revision Hyukdong Kim reports running it at for T-247's configuration (issue 804), read from raw.githubusercontent.com on 1 November 2026 and not retained; the retained copy is what ran here.)
 - Note: Run unchanged from the retained copy on issue 639's 23 exact forms, each in its own python -I process (receipts/replay-verify-exact.json in the evand-exact-cur-2026-10-16 packet). The replay's evidence entry is added at T-193's stage 4 exit, after the review lane think-7qxm.
 
 | evidence | run | code | coverage | results |
