@@ -10783,6 +10783,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision 0000000000000000000000000000000000000000 into empty site directories, "
             "twice from this tree and once with that main's result-requests.yaml swapped "
             "in, render_packing_methods writes its 43 files byte-identical across the "
+            "three. Measured again after #847's read_through advanced to the author's "
+            "comment of 16:26:36Z on 1 November, read as outside the register's scope, "
+            "against the same main the same way: 43 files, byte-identical across the "
             "three. No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),

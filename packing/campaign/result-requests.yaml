@@ -27336,7 +27336,7 @@ issues:
       record, data and code, and the code may also be used under MIT, as with v5. It also
       names his preprint doi:10.20944/preprints202610.2669.v1 as the citation for the
       two-strip records.
-    read_through: '2026-10-31T16:22:49Z'
+    read_through: '2026-11-01T16:26:36Z'
     results:
     - key: filled-end-v2
       claim: >-
@@ -27415,4 +27415,12 @@ issues:
       filled-end checker would work "as two_strip_checker does for #799 and #836": then
       two_strip_checker refused v5's header, and it first read v5's records.csv in #859. It
       says no V2.0 or V1.0 row is recorded yet (W9, then R1, which waits on the owner's D4;
-      V1.0 on Q-847a), and asks the V2.0 and V1.0 licence (think-nu37).
+      V1.0 on Q-847a), and asks the V2.0 and V1.0 licence (think-nu37). The author's
+      comment of 16:26:36Z on 1 November (issuecomment-6560655638) reports that the
+      filled-end bands extend to unit cubes in a cube: three bands along three walls,
+      with exact certificates for K = 4, 8, 9 and 10 (n = 34, 386-390, 569-584 and
+      802-819), 45-degree lattice packings for n = 73-76, 137-143 and 231-239 and a
+      reconstruction of Friedman's n = 33, at doi:10.5281/zenodo.23862003, which was not
+      fetched (zenodo.org unreachable). Cubes in a cube are outside the register's scope,
+      s(n) for unit squares in a square, so nothing is imported and no bead is created;
+      the next reply to #847 acknowledges it in one sentence.
