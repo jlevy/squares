@@ -108,10 +108,15 @@ controls: 396 of 396 by each. The routes decided 31,499,439 squares and 71,808,2
 candidate pairs, 70,690,393 of them touching. The least wall clearance and the least
 pair gap are both 0, since squares touch the walls and each other, which the closed
 contract allows. The run took 47,031.4 CPU-seconds, 13.1 CPU-hours (12.1 for the
-positives, 0.9 for the controls), on two workers from 17:08:54Z to 23:54:32Z on 31
-October. Six controls at every count would have cost about eight times the positives,
-over the compute cap. This decides that each written-out packing is a packing; which
-rows the record takes is still the walk’s.
+positives, 0.9 for the controls), on two workers. K = 35 ran from 17:08:39Z and the
+rest from 17:09:33Z on 31 October; the receipts were written from 17:08:54Z to
+23:54:32Z. It ran from the working tree that `b0fe65eae` committed at 17:26:15Z, and
+its deciding code (`write_out`, `route_row`, the receipt it writes and
+`couzo_678_replay`’s routes) is unchanged at the head. Review A of #863 changed only
+how the receipts are read back, resumed and stopped, and the stricter read-back accepts
+all 66 as written. Six controls at every count would have cost about eight times the
+positives, over the compute cap. This decides that each written-out packing is a
+packing; which rows the record takes is still the walk’s.
 
 **V2.0, a sample on both routes** (`receipts/filled-end-replay-sample.json`):
 `devtools.filled_end_sample` writes out the rows at 1182, 2505, 4990, 7500 and 9946 with
@@ -145,7 +150,9 @@ adds axis-parallel layers in the band ends, Evan Daniel’s idea (evand/square-p
 `certificates/k2-minus-c/`), written as in Kevin Fang’s note
 (doi:10.5281/zenodo.23624565, Sections 2–3). Claude assistance is disclosed in both.
 
-Every file is under CC BY 4.0, and the code also under MIT, as the author states it:
+V2.0 and V1.0 are under CC BY 4.0 for every file, the code also under MIT, as the author
+states it on #847; v5 is under CC BY 4.0 for its data and MIT for its code, as its
+README states:
 
 - **v5:** its README states “License: data CC BY 4.0; code MIT.”
 - **V2.0 and V1.0:** `README_filled.md` states no licence, so it was asked. The author
@@ -165,7 +172,8 @@ For citation, the same comment names his preprint
 as describing the two-strip records. It is pinned by its DOI alone: doi.org was
 unreachable from this environment, so neither its title nor its text was read.
 `bibliography.yaml` keeps only the keys a record cites, and no row cites these sets until
-the walk above 1024 records them, so the preprint enters it with those rows.
+the walk above 1024 records them, so the preprint enters it with those rows. Fetching it
+and reading its metadata before then is think-rf6h’s.
 
 ## Commands
 
