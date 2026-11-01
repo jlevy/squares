@@ -3,9 +3,9 @@ type: is
 id: is-01m68a6y7b61h6k2p3da5acs4m
 title: "Answer Hyukdong Kim's comment of 26 October on #804: a public copy of his attachments, and the CC0 correction to our 26 October follow-up"
 kind: task
-status: closed
+status: open
 priority: 2
-version: 8
+version: 9
 delegate: bold-ritchie-l15
 labels:
   - intake
@@ -13,10 +13,10 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-31T06:26:34.858Z
-updated_at: 2026-11-01T19:44:14.698Z
+updated_at: 2026-11-01T19:44:33.865Z
 started_at: 2026-11-01T18:59:31.153Z
-closed_at: 2026-11-01T19:44:14.697Z
-close_reason: "#804 follow-up posted (issuecomment-6562502956) after b02ca7f7a deployed; recorded in https://github.com/jlevy/squares/pull/871 (merged bb005c9a4)."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
