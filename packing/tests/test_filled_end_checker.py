@@ -177,11 +177,10 @@ def _without(check: str) -> object:
     """`_refuse` with one check (`CHECKS`) deleted: a refusal whose words are that
     check's is passed over, as if its line were gone."""
     pattern = re.compile(checker.CHECKS[check])
-    original = checker._refuse  # noqa: SLF001
 
     def refuse(condition: object, message: str) -> None:
-        if pattern.match(message) is None:
-            original(condition, message)
+        if not condition and pattern.match(message) is None:
+            raise checker.FilledEndRefusedError(message)
 
     return refuse
 
