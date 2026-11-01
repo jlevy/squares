@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 51
+version: 52
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -38,7 +38,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T00:52:33.257Z
+updated_at: 2026-11-01T01:53:16.084Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -86,3 +86,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-10-31 23:55 hourly: no new issues. #865 review A: mark 'independently re-implemented' confirmed correct; A1/A2 blocking (oblique-control overclaim; #533 ask not done) -> L10 running the c6718 tau'=1001/1000 control (~1.4 CPU-h). L9 v5 replay ~13.5 CPU-h so far (est 10.9; cap 40). Freed 12 GB disk by removing 7 finished lanes' clean worktrees. New network block: lakecache.blob.core.windows.net (Mathlib cache) for #419's Lean build.
 
 2026-11-01 00:53 hourly: no new issues. #863 (L9): v5 full replay done — 5,308/5,308 on both routes, 396/396 controls refused, 13.1 CPU-h; review A approve-with-fixes (replay-all check/resume/pool robustness A1-A7, licence wording A8) being addressed. #865 (L10) addressing review A incl. the c6718 oblique control. 20 merged this pass.
+
+2026-11-01 01:54 hourly: merged #865 (68f25b17a) and #863 (e7ccc8cc4); 22 merged this pass. think-nu37 closed. #485 reply posted (L10). L10 running the c6718 tau'=2503/2500 oblique control on claude/bold-ritchie-xo28us-l10b. No new issues. Disk 21 GB free.
