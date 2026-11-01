@@ -1,0 +1,328 @@
+{
+ "program": "fe_checker_mutation.py",
+ "program_sha256": "6db1db1d12a610e085bc8f19a548786ecc2126e15dbf39ce23d494f551bdf2f5",
+ "checker_sha256": "6bf305b2a4df4bfdac5eae288b3952ec037c8a0dcffe2cc09b935b8fd3a0f9ae",
+ "environment": {
+  "python": "3.14.7",
+  "machine": "x86_64"
+ },
+ "started_utc": "2026-11-01T19:00:00Z",
+ "rows": [
+  1188,
+  5265,
+  7439,
+  8524,
+  9517,
+  1244,
+  1807,
+  2154,
+  2266,
+  2447,
+  2944,
+  3317,
+  3501,
+  3650,
+  3747,
+  4807,
+  5528,
+  6247,
+  6564,
+  7080,
+  7748,
+  8227,
+  8306,
+  9141,
+  9929
+ ],
+ "baseline_checks_over_sample": {
+  "count above the capacity": {
+   "n <= capacity": 25
+  },
+  "side below the binding fit": {
+   "V fit": 25
+  },
+  "V lift past its free length": {
+   "y <= F": 25
+  },
+  "H lift past its free length": {
+   "y <= F": 25
+  },
+  "a V near-end layer one over": {
+   "m_i <= W - a_i": 25
+  },
+  "a V far-end layer one over": {
+   "m_i <= W - a_i": 25
+  },
+  "an H near-end layer one over": {
+   "m_i <= W - a_i": 25
+  },
+  "an H far-end layer one over": {
+   "m_i <= W - a_i": 25
+  },
+  "no tilt": {
+   "0 < t < 1": 25
+  },
+  "a right angle": {
+   "0 < t < 1": 25
+  },
+  "unknown kind": {
+   "kind": 25
+  }
+ },
+ "negative_tilt_probe": {
+  "tH -> -tH | unmodified: 0 < t < 1 | without the tilt check: accepted": 24,
+  "tH -> -tH | unmodified: 0 < t < 1 | without the tilt check: y <= F": 1,
+  "tV -> -tV | unmodified: 0 < t < 1 | without the tilt check: accepted": 24,
+  "tV -> -tV | unmodified: 0 < t < 1 | without the tilt check: y <= F": 1
+ },
+ "baseline_all_v2": {
+  "rows": 5134,
+  "verdicts": {
+   "count above the capacity": {
+    "refused": 5134
+   },
+   "side below the binding fit": {
+    "refused": 5134
+   },
+   "V lift past its free length": {
+    "refused": 5134
+   },
+   "H lift past its free length": {
+    "refused": 5134
+   },
+   "a V near-end layer one over": {
+    "refused": 5134
+   },
+   "a V far-end layer one over": {
+    "refused": 5134
+   },
+   "an H near-end layer one over": {
+    "refused": 5134
+   },
+   "an H far-end layer one over": {
+    "refused": 5134
+   },
+   "no tilt": {
+    "refused": 5134
+   },
+   "a right angle": {
+    "refused": 5134
+   },
+   "unknown kind": {
+    "refused": 5134
+   }
+  },
+  "changes_by_check": {
+   "count above the capacity": {
+    "n <= capacity": 5134
+   },
+   "side below the binding fit": {
+    "V fit": 5134
+   },
+   "V lift past its free length": {
+    "y <= F": 5134
+   },
+   "H lift past its free length": {
+    "y <= F": 5134
+   },
+   "a V near-end layer one over": {
+    "m_i <= W - a_i": 21764
+   },
+   "a V far-end layer one over": {
+    "m_i <= W - a_i": 23228
+   },
+   "an H near-end layer one over": {
+    "m_i <= W - a_i": 19458
+   },
+   "an H far-end layer one over": {
+    "m_i <= W - a_i": 20724
+   },
+   "no tilt": {
+    "0 < t < 1": 5134
+   },
+   "a right angle": {
+    "0 < t < 1": 5134
+   },
+   "unknown kind": {
+    "kind": 5134
+   }
+  },
+  "every_change_refused_by_the_check_named": true
+ },
+ "sites": [
+  {
+   "function": "_stated",
+   "line": 474,
+   "condition": "held >= 0",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "_stated",
+   "line": 477,
+   "condition": "over <= 0",
+   "controls_no_longer_refused": {
+    "a V near-end layer one over": {
+     "accepted": 25
+    },
+    "a V far-end layer one over": {
+     "accepted": 25
+    },
+    "an H near-end layer one over": {
+     "accepted": 25
+    },
+    "an H far-end layer one over": {
+     "accepted": 25
+    }
+   },
+   "refused_instead_by": {}
+  },
+  {
+   "function": "band",
+   "line": 509,
+   "condition": "deep <= length",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "band",
+   "line": 514,
+   "condition": "lift >= 0",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "band",
+   "line": 515,
+   "condition": "lift <= free",
+   "controls_no_longer_refused": {
+    "V lift past its free length": {
+     "accepted": 12,
+     "refused": 13
+    },
+    "H lift past its free length": {
+     "refused": 19,
+     "accepted": 6
+    }
+   },
+   "refused_instead_by": {
+    "V lift past its free length": {
+     "n <= capacity": 13
+    },
+    "H lift past its free length": {
+     "n <= capacity": 19
+    }
+   }
+  },
+  {
+   "function": "decide",
+   "line": 574,
+   "condition": "row.kind == KIND",
+   "controls_no_longer_refused": {
+    "unknown kind": {
+     "accepted": 25
+    }
+   },
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 575,
+   "condition": "row.n >= 1",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 576,
+   "condition": "row.side > 0",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 577,
+   "condition": "1 < row.k <= MAX_K",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 578,
+   "condition": "row.side <= row.k",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 583,
+   "condition": "row.layers is None or len(row.layers) == len(ENDS)",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 591,
+   "condition": "slack_v >= 0",
+   "controls_no_longer_refused": {
+    "side below the binding fit": {
+     "accepted": 25
+    }
+   },
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 596,
+   "condition": "slack_h >= 0",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 604,
+   "condition": "row.n <= held",
+   "controls_no_longer_refused": {
+    "count above the capacity": {
+     "accepted": 25
+    }
+   },
+   "refused_instead_by": {}
+  },
+  {
+   "function": "decide",
+   "line": 580,
+   "condition": "0 < tilt < 1",
+   "controls_no_longer_refused": {
+    "a right angle": {
+     "crashed": 25
+    }
+   },
+   "refused_instead_by": {
+    "no tilt": {
+     "H fit": 25
+    }
+   }
+  },
+  {
+   "function": "decide",
+   "line": 582,
+   "condition": "0 < width < row.k",
+   "controls_no_longer_refused": {},
+   "refused_instead_by": {}
+  }
+ ],
+ "unexercised_checks": [
+  "_stated:474 held >= 0",
+  "band:509 deep <= length",
+  "band:514 lift >= 0",
+  "decide:575 row.n >= 1",
+  "decide:576 row.side > 0",
+  "decide:577 1 < row.k <= MAX_K",
+  "decide:578 row.side <= row.k",
+  "decide:583 row.layers is None or len(row.layers) == len(ENDS)",
+  "decide:596 slack_h >= 0",
+  "decide:582 0 < width < row.k"
+ ],
+ "cpu_seconds": 14.9
+}
