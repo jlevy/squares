@@ -27438,6 +27438,13 @@ issues:
       beads: [think-llit]
       corrects:
       - https://github.com/jlevy/squares/issues/847#issuecomment-6540433314
+    - url: https://github.com/jlevy/squares/issues/847#issuecomment-6563822478
+      date: '2026-11-01'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: filled-end-v2
+      beads: [think-llit]
     close_when: >-
       The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
       checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
@@ -27453,7 +27460,7 @@ issues:
       records, doi:10.20944/preprints202610.2669.v1, is pinned by its DOI alone (doi.org
       unreachable), and enters bibliography.yaml with the first row that cites it. The
       answer closes a question that held nothing open and was read on the day of the last
-      reply, so no reply is due for it; the reply when the rows land acknowledges it. The
+      reply, so no reply was due for it; the follow-up of 1 November acknowledges it. The
       author says he may be offline for some days. The acknowledgement of 31 October offers
       a copy at a public GitHub commit, checked against the SHA-256 the author stated. The
       issue states digests for filled_records.csv and V1.0's zip only, so filled_ends.py,
@@ -27475,4 +27482,15 @@ issues:
       reconstruction of Friedman's n = 33, at doi:10.5281/zenodo.23862003, which was not
       fetched (zenodo.org unreachable). Cubes in a cube are outside the register's scope,
       s(n) for unit squares in a square, so nothing is imported and no bead is created;
-      the next reply to #847 acknowledges it in one sentence.
+      the follow-up of 1 November acknowledges it in one sentence. That follow-up, posted
+      at 21:01:08Z (issuecomment-6563822478) after #870 merged as ea5b27c95 and its Pages
+      deployment (run 41348783098, verify-deployment 6,035 of 6,035 checks) passed, thanks
+      the author for the licence answer, which the packet now records; says W9's checker
+      decides all 5,134 V2.0 rows and, apart, all 4,571 V1.0 rows from their seven
+      parameters, none refused and all eighteen controls refused at every row, and that
+      the lemma's stage 4 review accepted it with no defect, its own exact geometry
+      verifying every row of both deposits; notes that the decimal side column is below
+      side_exact at 2,514 V2.0 rows (2,204 in V1.0), by up to about half a unit in its
+      twelfth place, so the record uses side_exact or a decimal rounded up from it; and
+      says no row is recorded yet, the rows waiting on the walk above 1024 (think-llit) and
+      the owner's D4, and V1.0's also on Q-847a.
