@@ -27102,8 +27102,11 @@ issues:
         question Q-847a on think-r94q; think-8m4k covers only a withdrawn file followed by a
         lower one. The author said on #847 on 31 October that he is content with whatever the
         owner decides. Imported with #847's set (think-r94q); W9's
-        devtools.filled_end_checker (think-fuwd) decides all 4,571 rows apart from V2.0's,
-        its lemma awaiting review; the karimi-records-2026-10-31 packet
+        devtools.filled_end_checker (think-fuwd) decides all 4,571 rows, separately from
+        V2.0's and labelled for Q-847a, by a lemma its stage 4 review accepted on 1 November
+        (docs/project/reviews/review-2026-11-01-filled-end-lemma.md). The author's decimal
+        side is below the exact side at 2,204 of them, so a row is recorded at side_exact or
+        a decimal rounded up from it, never at side. The karimi-records-2026-10-31 packet
         retains the zip, which, with its filled_records.csv, has the SHA-256 the comment
         states.
       queued: true
@@ -27335,14 +27338,22 @@ issues:
       V1.0 at 598 and is lower at 3,933. W9's devtools.filled_end_checker (think-fuwd)
       decides a row exactly from its parameters by a lemma it states and proves (written
       out for review in docs/project/research/research-2026-11-01-filled-end-lemma.md), and
-      decides all 5,134 V2.0 rows, none refused, each row's eleven controls refused
-      (receipts/filled-end-decisions-v2.json.gz), and, apart and labelled since Q-847a is
-      the owner's, all 4,571 V1.0 rows (filled-end-decisions-v1.json.gz). At five V2.0
-      counts nearest the lemma's edges (1188, 5265, 7439, 8524, 9517) its written-out
-      certificates pass both maintained exact routes with their six controls refused
+      decides all 5,134 V2.0 rows, none refused, each row's eighteen controls refused by
+      the checks they name (receipts/filled-end-decisions-v2.json.gz), and, apart and
+      labelled since Q-847a is the owner's, all 4,571 V1.0 rows
+      (filled-end-decisions-v1.json.gz). At five V2.0 counts nearest the lemma's edges
+      (1188, 5265, 7439, 8524, 9517) its written-out certificates pass both maintained
+      exact routes with their six controls refused
       (receipts/filled-end-checker-replay-sample.json), and at the author-built sample's
-      five counts it writes the author's certificates byte for byte. The lemma awaits its
-      stage 4 mathematical review, and the decisions record no row. As stage 4's sample,
+      five counts it writes the author's certificates byte for byte. The lemma's stage 4
+      mathematical review accepted it on 1 November with no defect
+      (docs/project/reviews/review-2026-11-01-filled-end-lemma.md); its independent exact
+      geometry, sharing no code with the checker, verifies every row of both deposits. The
+      author's decimal side column is a consistency check, not a bound: rounded to
+      nearest, it is below side_exact at 2,514 of the 5,134 V2.0 rows and 2,204 of the
+      4,571 V1.0 rows, by up to 0.502 units of its twelfth place (0.504 in V1.0), so a row
+      is recorded at side_exact, or at a decimal rounded up from it, never at side. The
+      decisions record no row. As stage 4's sample,
       devtools.filled_end_sample writes out the rows
       at 1182, 2505, 4990, 7500 and 9946 with the author's own builder and decides each on
       both maintained exact routes, all six controls refused by both
@@ -27364,11 +27375,13 @@ issues:
         Above 1024: rows of source-coverage.yaml once think-llit's walk above 1024 records
         them, not register entries. Dated by this issue, and pinned at record 23819397
         through the author's copy at ad8b094 (the karimi-records-2026-10-31 packet). W9's
-        devtools.filled_end_checker (think-fuwd) decides every row from its parameters, so
-        each is a row once its lemma's stage 4 review accepts it (D2 on think-f2io). Each
-        is recorded where
-        the walk finds it below every earlier report, #836's v5 row included and V1.0's as
-        Q-847a on think-r94q decides, and below Göbel's construction.
+        devtools.filled_end_checker (think-fuwd) decides every row from its parameters, and
+        its lemma's stage 4 review accepted it on 1 November, so each decided row is a row
+        under D2 (think-f2io) once the walk records it. Each is recorded where the walk finds
+        it below every earlier report, #836's v5 row included and V1.0's as Q-847a on
+        think-r94q decides, and below Göbel's construction, at side_exact or a decimal
+        rounded up from it, never at the author's decimal side, which is below side_exact at
+        2,514 rows.
       queued: true
       bead: think-r94q
       blocked_on:
