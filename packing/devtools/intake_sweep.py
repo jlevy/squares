@@ -1121,6 +1121,10 @@ def queues_section(
             )
         if state.closeable:
             section.items.append(_closeable(issue, beads, closed_there=number in closed_there))
+        elif hold is None and (holding := check_requests.block_holds(issue)):
+            unblocked = check_requests.without_block(issue)
+            if check_requests.closeable(unblocked, state.results)[0]:
+                section.items.append(_blocked(issue, holding, beads))
     return section
 
 
@@ -1197,10 +1201,15 @@ def _held(
 
     What a pass would otherwise owe it is named, for the owner to decide; nothing is
     posted on it or closed while the hold stands (review A1 of #747). The hold's block,
-    which a held issue carries (`check_requests.HELD_BLOCKS`), is the owner's to lift
-    with it, so it is set aside too.
+    which a held issue carries (`check_requests.HELD_BLOCKS`), and a `close_when` clause
+    naming the owner's decision (#574's) are the owner's to lift with it, so both are set
+    aside too (`check_requests.without_block`, review A1 of #869).
     """
-    unheld = {key: value for key, value in issue.items() if key not in {"held", "blocked"}}
+    unheld = {
+        key: value
+        for key, value in check_requests.without_block(issue).items()
+        if key != "held"
+    }
     settled, _ = check_requests.closeable(unheld, state.results)
     would = [*owed, *(["its close"] if settled else [])]
     alias = str(issue["answer_bead"])
@@ -1213,6 +1222,30 @@ def _held(
         beads.state(alias) if beads is not None else "unconfirmed: no bead store",
         since=str(hold["since"]),
         step=f"for the owner: {hold['note']}",
+    )
+
+
+def _blocked(issue: Mapped, holding: str, beads: Beads | None) -> Item:
+    """An answered open issue that only a block holds open: its `blocked` entry, or a
+    `close_when` clause waiting on an owner decision (`check_requests.block_holds`).
+
+    Listed with the close it would otherwise owe, and failing nothing, since someone
+    other than the pass must act. A record block carries no date and no bead, so without
+    this a stale one hid the owed close (review A1 of #869).
+    """
+    alias = str(issue["answer_bead"])
+    replies = issue.get("replies") or ()
+    return Item(
+        f"#{issue['number']} is {holding} (its close otherwise owed): listed until it "
+        "lifts, nothing closed",
+        LISTED,
+        alias,
+        beads.state(alias) if beads is not None else "unconfirmed: no bead store",
+        since=str(replies[-1]["date"]) if replies else str(issue["opened"]),
+        step=(
+            "lift the block, or reword close_when, once what it waits on is done; then "
+            "close the issue with its final comment"
+        ),
     )
 
 

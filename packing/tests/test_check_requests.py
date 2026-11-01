@@ -875,7 +875,7 @@ def test_a_close_condition_naming_an_owner_decision_holds_an_unblocked_issue_ope
         assert not state.closeable, text
         (blocker,) = state.blockers
         assert blocker.startswith(
-            "close_when waits on an owner decision no `blocked` records ("
+            "held by close_when, which waits on an owner decision no `blocked` records ("
         ), text
         assert blocker.endswith(
             "): record `blocked: owner-decision` while it stands, or reword close_when "

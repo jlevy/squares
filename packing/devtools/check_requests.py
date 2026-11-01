@@ -914,6 +914,32 @@ def owner_decision_named(close_when: str) -> str:
     return match.group(0).strip() if match else ""
 
 
+def block_holds(issue: Mapped) -> str:
+    """What someone other than the pass must act on before the issue can close, or "":
+    its `blocked` entry, else a `close_when` clause waiting on an owner decision that no
+    `blocked` records (`owner_decision_named`)."""
+    block = issue.get("blocked")
+    if block:
+        return f"{BLOCKED_LABEL}{block['type']}: {str(block['reason']).rstrip('.')}"
+    if waiting := owner_decision_named(str(issue.get("close_when", ""))):
+        return (
+            "held by close_when, which waits on an owner decision no `blocked` records "
+            f"({waiting})"
+        )
+    return ""
+
+
+def without_block(issue: Mapped) -> dict[str, Any]:
+    """The issue as `closeable` reads it once what `block_holds` names has lifted: no
+    `blocked`, and no `close_when` clause to read. The sweep asks this what a held or
+    blocked issue would otherwise owe, so a stale block cannot hide an owed close
+    (review A1 of #869)."""
+    return {
+        **{key: value for key, value in issue.items() if key != "blocked"},
+        "close_when": "",
+    }
+
+
 def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[str]]:
     """Whether the issue can be closed with a final comment, and what stops it.
 
@@ -928,14 +954,12 @@ def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[
     hold = held(issue)
     if hold is not None:
         blockers.append(hold_text(hold))
-    block = issue.get("blocked")
-    if block:
-        blockers.append(f"{BLOCKED_LABEL}{block['type']}: {str(block['reason']).rstrip('.')}")
-    elif waiting := owner_decision_named(str(issue.get("close_when", ""))):
+    if holding := block_holds(issue):
         blockers.append(
-            f"close_when waits on an owner decision no `blocked` records ({waiting}): "
-            "record `blocked: owner-decision` while it stands, or reword close_when once it "
-            "is met"
+            holding
+            if issue.get("blocked")
+            else f"{holding}: record `blocked: owner-decision` while it stands, or reword "
+            "close_when once it is met"
         )
     if issue["triage"] == "pending":
         blockers.append("triage is pending")
