@@ -1690,3 +1690,26 @@ repositories:
       theorem-a/ or composites/, so it does not bear on Theorem A's row, T-163, T-236 or
       think-mbuh's retain. Rectangles of height below 2 are another container. Nothing to
       import.
+  # The intake pass of 1 November 2026, lane L14 (think-3guf, think-bw8b), from the 13:53
+  # sweep and the coordinator's read of moh63-dev/s44-equals-7.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: 1be9489ad2651dcb313ecd67d062e21513d54b64
+    read_on: '2026-11-01'
+    note: >-
+      One commit of 1 November (12:29:53Z) past the f6b9499 read: 1be9489 adds the Zenodo
+      DOI 10.5281/zenodo.23852984 to strip-n6/README.md as the archive of Kevin Fang's strip
+      note and updates that file's line in MANIFEST.sha256; nothing else changes. Rectangles
+      of height below 2 are another container. Nothing to import.
+  - url: https://github.com/moh63-dev/s44-equals-7
+    read_through: 29622595a773847c000d802bc99c69837e2c7a90
+    read_on: '2026-11-01'
+    note: >-
+      One commit of 1 November (15:42:10Z) past b5b1bc9, the commit the
+      moh63-dev-s44-equals-7-2026-10-29 packet retains and T-252 cites: 29622595, tagged by its
+      message v1.2, changes only README.md, paper/s44.tex, paper/s44.pdf and a comment in
+      verification/verify.sh. The certificate is unchanged. It describes zmx2 as binary64
+      interval arithmetic rounded outward with masses compared as exact integers, where it
+      had said exact rational, which T-252 already states (outward-rounded binary64
+      enclosures and exact integer mass tests), so no record correction is owed; and it
+      cites T-252's registration and the Zenodo DOI 10.5281/zenodo.23769766 for the paper and
+      release. T-252's pin stays at b5b1bc9. Nothing to import.

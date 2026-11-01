@@ -52881,8 +52881,10 @@ evidence:
       an exact configuration at that side, attached as s297-exact-configuration.zip (SHA-256
       e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7, the comment's digest)
       under CC0 1.0, passed evand/square-packing's verify_exact.py at 659ee62 and a checker of
-      the author's. The attachment could not be downloaded from the importing session, so none
-      of it is retained or was run here, and its digest is the comment's, not measured. Decided
+      the author's. The attachment could not be downloaded from the importing session; on 1
+      November 2026 the same bytes, with the comment's digest, were read from the author's
+      public copy HyukdongKim/square-packing-exact-sides at f480441e and kept in the packet's
+      source/ (think-ozx8), and E-hyukdongkim-804-s297-verify-exact decides the file. Decided
       here from the printed polynomial: primitive and irreducible over Q (SymPy and
       sqpack.field), one real root, the root the comment's 100-place print names, 3.359e-90
       below T-174's rational certificate and 6.624e-63 below issue 639's degree-12 side
@@ -52890,6 +52892,56 @@ evidence:
       comment of 12:00:41Z reported the same side numerically with no relation found; the
       comment of 12:23:57Z withdraws that as an LLL acceptance error. Local minimality, global
       optimality and rigidity are not claimed.
+  - id: E-hyukdongkim-804-s297-verify-exact
+    claim: upper-bound
+    scope: {n_values: [297]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Kim s297 2026-10-25]'
+    certificate: packing/resources/web/hyukdongkim-s297-2026-10-25/source/s297-exact-configuration/n297.minpoly.json
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.configuration_fact_replay
+      --packet s297 route2 --scratch DIR --workers 1, which runs the retained verify_exact.py
+      unchanged on the author's retained n297.minpoly.json in its own python -I process,
+      which must print VALID, and on four mutated controls, each of which must print NOT
+      VERIFIED (receipts/route2-verify-exact.json in the hyukdongkim-s297-2026-10-25
+      packet), which tests/test_configuration_fact_replay.py admits; --packet s297 side
+      holds the file's side to T-247's (receipts/side-check.json).
+    replay_status: passed
+    verifiers: [V-evand-verify-exact, V-configuration-fact-replay]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the author's exact configuration at 297, decided whole by the source's checker
+    limitations: >-
+      Evan Daniel's verify_exact.py, the checker the author reports running, read first and
+      run unchanged here from the copy the evand-exact-and-local-reports-2026-10-12 packet
+      retains (SHA-256 a0f38ca8...bab4, byte-identical at 7d1407a and ad86d42, and at
+      659ee62, the revision the author ran it at, whose file was read from
+      raw.githubusercontent.com on 1 November 2026 and not retained), on 1 November 2026
+      under CPython 3.14.7, on Hyukdong Kim's n297.minpoly.json as the packet keeps it:
+      read from the author's public copy at f480441e, its archive held to the SHA-256 his
+      comment states and the file to the certificate's (e5c340b8...2826). VALID in K, a
+      field of degree 21, in 13.6 CPU seconds. Of the 8,888 corner inequalities it decided,
+      4,752 of corners against the box's walls and 4 for each of the 1,034 pairs a side line
+      separates, 1,750 are touching incidences proved as identities and 7,138 strict by
+      intervals; the other 42,922 of the 43,956 pairs are separated by discs. Those are the
+      counts the author's README states. Four mutated controls were refused: a square moved
+      1e-6 through the wall it touches, the side raised by 1e-6 in the field, the side's
+      interval moved below its root, and a duplicate square. The five runs took 25.3 CPU
+      seconds (26.4 s of wall time). Before deciding, the reader holds the file's side to
+      T-247's: the same irreducible polynomial, a root of it in K, and one real root in the
+      hull of the file's enclosure and T-247's isolating interval. Counted as a reproduction
+      with the source's check: the author built the configuration and ran this checker on
+      it, and the record does not know whether his construction reused Daniel's code. The
+      checker reads only the first n squares, which the reader holds the file to. Finite
+      feasibility only: no lower bound, optimum, local minimum or rigidity.
+    source_reviewed: '2026-11-01'
   - id: E-n029-evand-minpoly-7213-report
     claim: derived-structure
     scope: {n_values: [29]}

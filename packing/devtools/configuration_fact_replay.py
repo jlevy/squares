@@ -28,7 +28,8 @@ reads it (review B2 of #813). This is the small reader the bead names, and the d
   the receipt names each square so read;
 - **route 2**, the source's ``verify_exact.py`` (`V-evand-verify-exact`), run unchanged
   from its retained copy, on the rebuilt file in a ``python -I`` child
-  process, and on four mutated controls (``CONTROLS``, the mutations of T-193's replay
+  process, which is refused before anything runs unless its SHA-256 is the one the
+  comment states, and on four mutated controls (``CONTROLS``, the mutations of T-193's replay
   driver, ``evand-exact-cur-2026-10-16/review/replay_verify_exact.py``): a square moved
   1e-6 through a wall it touches, ``S`` in ``K`` raised by 1e-6, ``S``'s interval moved
   wholly below the root, and square 1 replaced by square 0. Each control must be refused;
@@ -37,15 +38,24 @@ reads it (review B2 of #813). This is the small reader the bead names, and the d
 
 A finite configuration certifies an upper bound and nothing more. The receipts are
 ``receipts/algebraic-route1-nNNN.json.xz``, ``receipts/route2-verify-exact.json`` and
-``receipts/side-check.json`` in the packet; ``check`` admits them again. From
-``packing/``, with the project interpreter::
+``receipts/side-check.json`` in the packet; ``check`` admits them again.
 
-    python -m devtools.configuration_fact_replay custody
-    python -m devtools.configuration_fact_replay side [--write]
-    python -m devtools.configuration_fact_replay route1 --jobs-dir DIR [--n N ...] [--workers 2]
-    python -m devtools.configuration_fact_replay route2 --scratch DIR [--workers 2]
-    python -m devtools.configuration_fact_replay poses --out DIR
-    python -m devtools.configuration_fact_replay check
+``--packet s297`` runs the same steps on T-247's configuration at 297 (think-ozx8, route
+B): Kim's ``n297.minpoly.json``, which the ``hyukdongkim-s297-2026-10-25`` packet keeps
+itself under ``source/`` since the author's CC0 1.0 dedication and public copy, held to
+T-247's side (``upper-bounds-issue804-297-20261025/exact-sides.json``). Its custody is the
+retained file's, read from Git; ``custody`` reports its SHA-256 beside the one the comment
+states. ``--packet t244``, the default, is the packet above. From ``packing/``, with the
+project interpreter::
+
+    python -m devtools.configuration_fact_replay [--packet P] custody
+    python -m devtools.configuration_fact_replay [--packet P] side [--write]
+    python -m devtools.configuration_fact_replay [--packet P] route1 --jobs-dir DIR \
+        [--n N ...] [--workers 2]
+    python -m devtools.configuration_fact_replay [--packet P] route2 --scratch DIR \
+        [--workers 2]
+    python -m devtools.configuration_fact_replay [--packet P] poses --out DIR
+    python -m devtools.configuration_fact_replay [--packet P] check
 """
 
 from __future__ import annotations
@@ -62,6 +72,7 @@ import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from fractions import Fraction
 from pathlib import Path
@@ -114,6 +125,75 @@ THROUGH = {"L": ("x", -1), "R": ("x", 1), "B": ("y", -1), "T": ("y", 1)}
 DIGITS = 120
 
 
+@dataclass(frozen=True)
+class Packet:
+    """One packet's configurations and where their receipts go.
+
+    ``retained`` names, per count, the author's own file kept under the packet's
+    ``source/``; a packet without it keeps each configuration as a derived fact,
+    ``facts/nNNN.json.gz``.
+    """
+
+    name: str
+    directory: Path
+    counts: tuple[int, ...]
+    sides: Path
+    result: str
+    witness_prefix: str
+    source_key: str
+    comment: str
+    bead: str
+    retrieved: str
+    claim_limitations: str
+    retained: tuple[tuple[int, str], ...] = ()
+
+    @property
+    def sources(self) -> Path:
+        return self.directory / "acquisition/sources.json"
+
+    @property
+    def side_receipt(self) -> Path:
+        return self.directory / "receipts/side-check.json"
+
+    @property
+    def route2_receipt(self) -> Path:
+        return self.directory / "receipts/route2-verify-exact.json"
+
+
+T244 = Packet(
+    name="t244",
+    directory=PACKET,
+    counts=COUNTS,
+    sides=SIDES,
+    result="T-244",
+    witness_prefix=WITNESS_PREFIX,
+    source_key=SOURCE_KEY,
+    comment=COMMENT,
+    bead="think-4rzl",
+    retrieved="2026-10-25",
+    claim_limitations=CLAIM_LIMITATIONS,
+)
+S297 = Packet(
+    name="s297",
+    directory=ROOT / "resources/web/hyukdongkim-s297-2026-10-25",
+    counts=(297,),
+    sides=ROOT / "campaign/issue-intake/upper-bounds-issue804-297-20261025/exact-sides.json",
+    result="T-247",
+    witness_prefix="W-kim-t247-configuration-n",
+    source_key="[Kim s297 2026-10-25]",
+    comment="https://github.com/jlevy/squares/issues/804#issuecomment-6397593690",
+    bead="think-ozx8",
+    retrieved="2026-11-01",
+    claim_limitations=(
+        "Hyukdong Kim's exact configuration of T-174's packing at T-247's side, reported on "
+        "issue 804 and retained under CC0 1.0; a finite configuration certifies an upper "
+        "bound and nothing more."
+    ),
+    retained=((297, "s297-exact-configuration/n297.minpoly.json"),),
+)
+PACKETS = {packet.name: packet for packet in (T244, S297)}
+
+
 class ReplayError(ValueError):
     """Refuse a fact out of custody, a side that is not T-244's, or a receipt that differs."""
 
@@ -127,12 +207,16 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def fact_path(n: int) -> Path:
-    return PACKET / f"facts/n{n}.json.gz"
+def fact_path(n: int, packet: Packet = T244) -> Path:
+    """The file a configuration is read from: the retained file, or the derived fact."""
+    retained = dict(packet.retained)
+    if n in retained:
+        return packet.directory / "source" / retained[n]
+    return packet.directory / f"facts/n{n}.json.gz"
 
 
-def receipt_path(n: int) -> Path:
-    return PACKET / f"receipts/algebraic-route1-n{n:03d}.json.xz"
+def receipt_path(n: int, packet: Packet = T244) -> Path:
+    return packet.directory / f"receipts/algebraic-route1-n{n:03d}.json.xz"
 
 
 def certificate_bytes(fact: dict[str, Any]) -> bytes:
@@ -140,21 +224,53 @@ def certificate_bytes(fact: dict[str, Any]) -> bytes:
     return json.dumps(fact["configuration"]).encode("utf-8")
 
 
-def load(n: int) -> dict[str, Any]:
-    """The fact at ``n``, refused unless it is this packet's configuration of the count.
+def load_retained(n: int, packet: Packet) -> dict[str, Any]:
+    """The author's retained file at ``n``, in the shape of a derived fact.
+
+    The file crossed its custody boundary when ``side_297.py retain`` kept it from the
+    public copy, held to the digests the comment states; Git holds it since (OR-16).
+    """
+    sources = json.loads(packet.sources.read_text(encoding="utf-8"))
+    member = dict(packet.retained)[n]
+    row = next((item for item in sources["members"] if item["path"] == member), None)
+    _require(row is not None and row.get("retained"), f"n={n}: the packet keeps no {member}")
+    assert row is not None
+    stated = row.get("sha256_stated")
+    _require(stated is not None, f"n={n}: the comment states no digest for {member}")
+    return {
+        "format": "retained-file",
+        "source": {
+            "comment": sources["comment"],
+            "attachment": sources["attachment"]["url"],
+            "public_copy": sources["attachment"].get("public_copy"),
+            "member": member,
+            "member_sha256": stated,
+        },
+        "configuration": json.loads(fact_path(n, packet).read_bytes().decode("utf-8")),
+    }
+
+
+def load(n: int, packet: Packet = T244) -> dict[str, Any]:
+    """The configuration at ``n``, refused unless it is this packet's configuration of it.
 
     The facts crossed their custody boundary when ``exact_forms.py configurations`` derived
     them from the attachment, held to the digests the comment states; Git holds them since
     (OR-16). `custody` reports the digest of each rebuilt file beside the stated one, and the
-    tests hold the two equal.
+    tests hold the two equal. A packet that keeps the author's file itself is read by
+    `load_retained`.
     """
-    _require(n in COUNTS, f"n={n}: no configuration of this packet")
-    fact = json.loads(gzip.decompress(fact_path(n).read_bytes()).decode("utf-8"))
-    sources = json.loads(SOURCES.read_text(encoding="utf-8"))
+    _require(n in packet.counts, f"n={n}: no configuration of this packet")
+    sources = json.loads(packet.sources.read_text(encoding="utf-8"))
+    if n in dict(packet.retained):
+        fact = load_retained(n, packet)
+    else:
+        fact = json.loads(gzip.decompress(fact_path(n, packet).read_bytes()).decode("utf-8"))
+        _require(
+            fact.get("format") == FACT_FORMAT, f"n={n}: not an issue-804 configuration fact"
+        )
     source = fact.get("source", {})
-    _require(fact.get("format") == FACT_FORMAT, f"n={n}: not an issue-804 configuration fact")
     _require(
-        source.get("comment") == sources["comment"] == COMMENT
+        source.get("comment") == sources["comment"] == packet.comment
         and source.get("member") in {row["path"] for row in sources["members"]},
         f"n={n}: the fact names another attachment than the packet's",
     )
@@ -166,10 +282,10 @@ def load(n: int) -> dict[str, Any]:
     return fact
 
 
-def custody() -> list[dict[str, Any]]:
+def custody(packet: Packet = T244) -> list[dict[str, Any]]:
     rows = []
-    for n in COUNTS:
-        fact = load(n)
+    for n in packet.counts:
+        fact = load(n, packet)
         rows.append(
             {
                 "n": n,
@@ -192,15 +308,19 @@ def _field(configuration: dict[str, Any]) -> NumberField:
     return NumberField(list(reversed(low_to_high)), (low, high))
 
 
-def side_check() -> dict[str, Any]:
-    """Each configuration's side is T-244's: the same polynomial, a root of it in ``K``
-    whose enclosure lies in the configuration's interval, and one root only of that
-    polynomial, counted exactly (SymPy's Sturm count), in the hull of the enclosure and
-    T-244's isolating interval, so the two name the same real root."""
-    sides = {row["n"]: row for row in json.loads(SIDES.read_text(encoding="utf-8"))["rows"]}
+def side_check(packet: Packet = T244) -> dict[str, Any]:
+    """Each configuration's side is the packet's result's (T-244's, or T-247's at 297): the
+    same polynomial, a root of it in ``K`` whose enclosure lies in the configuration's
+    interval, and one root only of that polynomial, counted exactly (SymPy's Sturm count), in
+    the hull of the enclosure and the result's isolating interval, so the two name the same
+    real root. Each row's keys name the result, ``t244`` or ``t247``."""
+    tag = packet.result.lower().replace("-", "")
+    sides = {
+        row["n"]: row for row in json.loads(packet.sides.read_text(encoding="utf-8"))["rows"]
+    }
     rows = []
-    for n in COUNTS:
-        configuration = load(n)["configuration"]
+    for n in packet.counts:
+        configuration = load(n, packet)["configuration"]
         stated = configuration["S"]
         poly_low_to_high = [int(value) for value in stated["poly"]]
         t244 = sides[n]
@@ -227,25 +347,25 @@ def side_check() -> dict[str, Any]:
                 "n": n,
                 "field_degree": degree,
                 "side_degree": len(poly_low_to_high) - 1,
-                "same_polynomial_as_t244": same_polynomial,
+                f"same_polynomial_as_{tag}": same_polynomial,
                 "root_of_polynomial_in_K": root_in_k,
                 "enclosure_digits": DIGITS,
                 "enclosure_in_stated_interval": stated_low <= low and high <= stated_high,
-                "t244_interval_width": f"{float(t_high - t_low):.3e}",
-                "roots_in_hull_of_enclosure_and_t244_interval": roots_in_hull,
+                f"{tag}_interval_width": f"{float(t_high - t_low):.3e}",
+                f"roots_in_hull_of_enclosure_and_{tag}_interval": roots_in_hull,
                 "decimal": field.decimal(side, 40),
             }
         )
     return {
         "format": SIDE_FORMAT,
         "tool": f"packing/devtools/{Path(__file__).name}",
-        "sides": SIDES.relative_to(REPO).as_posix(),
+        "sides": packet.sides.relative_to(REPO).as_posix(),
         "rows": rows,
         "agrees": all(
-            row["same_polynomial_as_t244"]
+            row[f"same_polynomial_as_{tag}"]
             and row["root_of_polynomial_in_K"]
             and row["enclosure_in_stated_interval"]
-            and row["roots_in_hull_of_enclosure_and_t244_interval"] == 1
+            and row[f"roots_in_hull_of_enclosure_and_{tag}_interval"] == 1
             for row in rows
         ),
     }
@@ -259,13 +379,19 @@ def zero_parameters(configuration: dict[str, Any]) -> list[int]:
     return [index for index, square in enumerate(configuration["squares"]) if square["u"] == []]
 
 
-def witness(n: int) -> dict[str, Any]:
+def witness(n: int, packet: Packet = T244) -> dict[str, Any]:
     """The configuration as a centre-basis Witness/v2 over ``K``, held to the schema."""
-    fact = load(n)
+    fact = load(n, packet)
     configuration = copy.deepcopy(fact["configuration"])
     for index in zero_parameters(configuration):
         configuration["squares"][index]["u"] = ["0"]
     degree = len(configuration["field"]["f"]) - 1
+    public = fact["source"].get("public_copy")
+    url = (
+        f"{public['repository']}/blob/{public['commit']}/{public['path']}"
+        if public
+        else fact["source"]["attachment"]
+    )
     row = cast(
         "algebraic.Witness",
         {"n": n, "path": fact["source"]["member"], "fact": "", "degree": degree},
@@ -280,7 +406,7 @@ def witness(n: int) -> dict[str, Any]:
             "status": "enforced",
         },
         "witness": {
-            "id": f"{WITNESS_PREFIX}{n:03d}",
+            "id": f"{packet.witness_prefix}{n:03d}",
             "n": n,
             "side": geometry["side"],
             "square_size": "1",
@@ -295,13 +421,13 @@ def witness(n: int) -> dict[str, Any]:
             "claim": {
                 "coordinate_provenance": "reported",
                 "method": "exact-algebraic",
-                "limitations": CLAIM_LIMITATIONS,
+                "limitations": packet.claim_limitations,
             },
             "source": {
-                "key": SOURCE_KEY,
-                "path": fact_path(n).relative_to(REPO).as_posix(),
-                "url": fact["source"]["attachment"],
-                "retrieved": "2026-10-25",
+                "key": packet.source_key,
+                "path": fact_path(n, packet).relative_to(REPO).as_posix(),
+                "url": url,
+                "retrieved": packet.retrieved,
                 "revision": fact["source"]["member"],
                 "revision_sha256": fact["source"]["member_sha256"],
             },
@@ -315,20 +441,21 @@ def witness(n: int) -> dict[str, Any]:
         raise ReplayError(f"n={n}: not a valid witness: {error}") from error
 
 
-def decide_job(n: int, control: str, output: Path) -> None:
+def decide_job(n: int, control: str, output: Path, packet: Packet = T244) -> None:
     _require(not output.exists(), "refusing to overwrite a deciding job")
-    built = witness(n)
+    built = witness(n, packet)
     row = algebraic.decide(built, control)
     algebraic.validate_job(row, built, control)
     output.write_text(json.dumps(row, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def run_job(n: int, control: str, directory: Path) -> dict[str, Any]:
+def run_job(n: int, control: str, directory: Path, packet: Packet = T244) -> dict[str, Any]:
     """One job in its own child process, resumed from ``directory`` where it finished."""
     output = directory / f"n{n}-{control}.json"
     if output.exists():
         return json.loads(output.read_text(encoding="utf-8"))
-    command = [sys.executable, "-m", MODULE, "decide-job", "--n", str(n), "--control", control]
+    command = [sys.executable, "-m", MODULE, "--packet", packet.name, "decide-job"]
+    command += ["--n", str(n), "--control", control]
     command += ["--output", str(output)]
     completed = subprocess.run(command, capture_output=True, check=False)
     output.with_suffix(".stdout.log").write_bytes(completed.stdout)
@@ -337,37 +464,40 @@ def run_job(n: int, control: str, directory: Path) -> dict[str, Any]:
     return json.loads(output.read_text(encoding="utf-8"))
 
 
-def route1(directory: Path, numbers: list[int], workers: int) -> None:
+def route1(directory: Path, numbers: list[int], workers: int, packet: Packet = T244) -> None:
     directory.mkdir(parents=True, exist_ok=True)
     tasks = [(n, control) for n in numbers for control in kernel.JOBS]
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        results = list(pool.map(lambda task: run_job(task[0], task[1], directory), tasks))
+        results = list(
+            pool.map(lambda task: run_job(task[0], task[1], directory, packet), tasks)
+        )
     done = dict(zip(tasks, results, strict=True))
     for n in numbers:
-        built = witness(n)
+        built = witness(n, packet)
         side = algebraic.side_of(built)
         rows = [done[(n, control)] for control in kernel.JOBS]
         for row, control in zip(rows, kernel.JOBS, strict=True):
             algebraic.validate_job(row, built, control, side=side)
         kernel.save_xz(
-            receipt_path(n),
+            receipt_path(n, packet),
             {
                 "format": RECEIPT_FORMAT,
                 "routes": [algebraic.ROUTE],
-                "zero_angle_parameters": zero_parameters(load(n)["configuration"]),
+                "zero_angle_parameters": zero_parameters(load(n, packet)["configuration"]),
                 "cases": rows,
             },
         )
 
 
-def check_route1(n: int, *, replay: bool = False) -> dict[str, Any]:
-    built = witness(n)
+def check_route1(n: int, *, replay: bool = False, packet: Packet = T244) -> dict[str, Any]:
+    built = witness(n, packet)
     side = algebraic.side_of(built)
-    record = kernel.read_xz(receipt_path(n))
+    record = kernel.read_xz(receipt_path(n, packet))
+    zeros = zero_parameters(load(n, packet)["configuration"])
     _require(
         record.get("format") == RECEIPT_FORMAT
         and record.get("routes") == [algebraic.ROUTE]
-        and record.get("zero_angle_parameters") == zero_parameters(load(n)["configuration"])
+        and record.get("zero_angle_parameters") == zeros
         and len(record.get("cases", [])) == len(kernel.JOBS),
         f"n={n}: not this packet's route-1 receipt",
     )
@@ -452,9 +582,18 @@ def mutate(data: dict[str, Any], kind: str) -> tuple[dict[str, Any], str]:
     raise ReplayError(f"unknown control {kind}")
 
 
-def route2_job(n: int, kind: str | None, scratch: Path) -> dict[str, Any]:
-    fact = load(n)
+def route2_job(
+    n: int, kind: str | None, scratch: Path, packet: Packet = T244
+) -> dict[str, Any]:
+    fact = load(n, packet)
     data = fact["configuration"]
+    rebuilt = sha256(certificate_bytes(fact))
+    stated = fact["source"]["member_sha256"]
+    _require(
+        rebuilt == stated,
+        f"n={n}: the rebuilt file's SHA-256 {rebuilt} is not the stated {stated}; "
+        "nothing was run",
+    )
     what = "the author's file, rebuilt byte for byte"
     if kind is not None:
         data, what = mutate(data, kind)
@@ -467,28 +606,30 @@ def route2_job(n: int, kind: str | None, scratch: Path) -> dict[str, Any]:
     record["control"] = kind or "positive"
     record["input"] = what
     if kind is None:
-        record["input_sha256"] = sha256(certificate_bytes(fact))
+        record["input_sha256"] = rebuilt
         record["valid"] = record["exit"] == 0 and record["last_line"].startswith("VALID")
     else:
         record["refused"] = record["exit"] == 1 and "NOT VERIFIED" in record["last_line"]
     return record
 
 
-def route2(scratch: Path, workers: int) -> dict[str, Any]:
+def route2(scratch: Path, workers: int, packet: Packet = T244) -> dict[str, Any]:
     scratch.mkdir(parents=True, exist_ok=True)
     tasks: list[tuple[int, str | None]] = [
-        (n, kind) for n in COUNTS for kind in (None, *CONTROLS)
+        (n, kind) for n in packet.counts for kind in (None, *CONTROLS)
     ]
     started = datetime.now(UTC)
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        records = list(pool.map(lambda task: route2_job(task[0], task[1], scratch), tasks))
+        records = list(
+            pool.map(lambda task: route2_job(task[0], task[1], scratch, packet), tasks)
+        )
     rows = []
-    for n in COUNTS:
+    for n in packet.counts:
         mine = [record for (m, _), record in zip(tasks, records, strict=True) if m == n]
         rows.append({"n": n, "positive": mine[0], "controls": mine[1:]})
     receipt = {
         "format": ROUTE2_FORMAT,
-        "bead": "think-4rzl",
+        "bead": packet.bead,
         "issue": "https://github.com/jlevy/squares/issues/804",
         "ran_at_utc": started.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "program": {
@@ -511,16 +652,17 @@ def route2(scratch: Path, workers: int) -> dict[str, Any]:
             "controls": sum(len(row["controls"]) for row in rows),
         },
     }
-    with atomic_output_file(ROUTE2_RECEIPT) as temporary:
+    with atomic_output_file(packet.route2_receipt) as temporary:
         temporary.write_text(json.dumps(receipt, indent=1) + "\n", encoding="utf-8")
     return receipt["summary"]
 
 
-def check_route2() -> dict[str, Any]:
-    receipt = json.loads(ROUTE2_RECEIPT.read_text(encoding="utf-8"))
+def check_route2(packet: Packet = T244) -> dict[str, Any]:
+    receipt = json.loads(packet.route2_receipt.read_text(encoding="utf-8"))
     _require(receipt.get("format") == ROUTE2_FORMAT, "not this packet's route-2 receipt")
     _require(
-        [row["n"] for row in receipt["rows"]] == list(COUNTS), "the receipt's counts differ"
+        [row["n"] for row in receipt["rows"]] == list(packet.counts),
+        "the receipt's counts differ",
     )
     for row in receipt["rows"]:
         n = row["n"]
@@ -540,13 +682,13 @@ def check_route2() -> dict[str, Any]:
 # ----------------------------------------------------------------------------- poses
 
 
-def poses(directory: Path) -> list[Path]:
+def poses(directory: Path, packet: Packet = T244) -> list[Path]:
     """Each configuration in binary64, ``n side`` then ``x y degrees`` rows, for
     ``devtools.measure_identity``'s ``binary64-xyd`` input. A measurement, not a decision."""
     directory.mkdir(parents=True, exist_ok=True)
     written = []
-    for n in COUNTS:
-        configuration = load(n)["configuration"]
+    for n in packet.counts:
+        configuration = load(n, packet)["configuration"]
         field = _field(configuration)
         field.refine_to(40)
 
@@ -559,7 +701,7 @@ def poses(directory: Path) -> list[Path]:
             u = value(square["u"])
             degrees = math.degrees(2 * math.atan(u)) + 90 * square["m"]
             lines.append(f"{value(square['x'])!r} {value(square['y'])!r} {degrees!r}")
-        target = directory / f"kim-t244-n{n}.xyd.txt"
+        target = directory / f"kim-{packet.result.lower().replace('-', '')}-n{n}.xyd.txt"
         target.write_text("\n".join(lines) + "\n", encoding="utf-8")
         written.append(target)
     return written
@@ -572,13 +714,14 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
+    parser.add_argument("--packet", choices=sorted(PACKETS), default=T244.name)
     sub = parser.add_subparsers(dest="action", required=True)
     sub.add_parser("custody")
     sides = sub.add_parser("side")
     sides.add_argument("--write", action="store_true")
     first = sub.add_parser("route1")
     first.add_argument("--jobs-dir", type=Path, required=True)
-    first.add_argument("--n", type=int, nargs="+", default=list(COUNTS))
+    first.add_argument("--n", type=int, nargs="+", default=None)
     first.add_argument("--workers", type=int, default=2)
     second = sub.add_parser("route2")
     second.add_argument("--scratch", type=Path, required=True)
@@ -592,36 +735,48 @@ def main(argv: list[str] | None = None) -> int:
     job.add_argument("--control", choices=kernel.JOBS, required=True)
     job.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
+    packet = PACKETS[args.packet]
     try:
         if args.action == "custody":
-            print(json.dumps(custody(), indent=1))
+            print(json.dumps(custody(packet), indent=1))
         elif args.action == "side":
-            record = side_check()
+            record = side_check(packet)
+            receipt = packet.side_receipt
             if args.write:
-                SIDE_RECEIPT.parent.mkdir(exist_ok=True)
-                with atomic_output_file(SIDE_RECEIPT) as temporary:
+                receipt.parent.mkdir(exist_ok=True)
+                with atomic_output_file(receipt) as temporary:
                     temporary.write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8")
             else:
-                stored = json.loads(SIDE_RECEIPT.read_text(encoding="utf-8"))
+                stored = json.loads(receipt.read_text(encoding="utf-8"))
                 _require(stored == record, "the side receipt is not what the facts derive")
             print(json.dumps(record, indent=1))
-            _require(record["agrees"], "a configuration's side is not T-244's")
+            _require(record["agrees"], f"a configuration's side is not {packet.result}'s")
         elif args.action == "route1":
-            route1(args.jobs_dir, args.n, args.workers)
-            print(json.dumps({n: check_route1(n)["cases"][0]["cpu_seconds"] for n in args.n}))
+            numbers = args.n or list(packet.counts)
+            route1(args.jobs_dir, numbers, args.workers, packet)
+            print(
+                json.dumps(
+                    {
+                        n: check_route1(n, packet=packet)["cases"][0]["cpu_seconds"]
+                        for n in numbers
+                    }
+                )
+            )
         elif args.action == "route2":
-            print(json.dumps(route2(args.scratch, args.workers)))
+            print(json.dumps(route2(args.scratch, args.workers, packet)))
         elif args.action == "poses":
-            for path in poses(args.out):
+            for path in poses(args.out, packet):
                 print(path)
         elif args.action == "check":
-            for n in COUNTS:
-                check_route1(n, replay=args.replay)
-            stored = json.loads(SIDE_RECEIPT.read_text(encoding="utf-8"))
-            _require(stored == side_check() and stored["agrees"], "the side receipt differs")
-            print(json.dumps({"route1": list(COUNTS), "route2": check_route2()}))
+            for n in packet.counts:
+                check_route1(n, replay=args.replay, packet=packet)
+            stored = json.loads(packet.side_receipt.read_text(encoding="utf-8"))
+            _require(
+                stored == side_check(packet) and stored["agrees"], "the side receipt differs"
+            )
+            print(json.dumps({"route1": list(packet.counts), "route2": check_route2(packet)}))
         else:
-            decide_job(args.n, args.control, args.output)
+            decide_job(args.n, args.control, args.output, packet)
     except (ReplayError, algebraic.ReportError, OSError, KeyError, ValueError) as error:
         print(f"{MODULE}: {error}", file=sys.stderr)
         return 2

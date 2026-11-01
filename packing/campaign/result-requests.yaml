@@ -25888,6 +25888,7 @@ issues:
       - T-247
       evidence:
       - E-hyukdongkim-804-s297-report
+      - E-hyukdongkim-804-s297-verify-exact
     - key: negative-searches
       claim: >-
         LLL at 1,500 digits on the KKT-solved side found no relation of degree <= 80 at 55, 130 and
@@ -25904,13 +25905,17 @@ issues:
         Keep the files of squares-exact-forms.zip themselves (CC0 1.0), not only derived
         facts, in the hyukdongkim-exact-forms-2026-10-25 packet; the public copy
         HyukdongKim/square-packing-exact-sides at f480441e serves them.
-      state: queued
+      state: done
       source: https://github.com/jlevy/squares/issues/804#issuecomment-6415293035
       bead: think-9vai
       note: >-
         Asked first in the comment of 25 October, 12:00:41Z (issuecomment-6397363927), and
         again on 26 October; the confirmation of 31 October (issuecomment-6547236771) names
-        think-9vai for it.
+        think-9vai for it. Done on 1 November 2026: the packet keeps all seven files under
+        source/squares-exact-forms/, byte-identical, read from the public copy's
+        attachments/squares-exact-forms.zip at f480441e, which has the issue's SHA-256
+        c770f9c3...4ee7 (exact_forms.py derive); the derived fact and the sides are
+        unchanged.
     - what: >-
         Keep the files of t244-exact-configurations.zip themselves (CC0 1.0), not only
         derived facts, in the hyukdongkim-t244-configurations-2026-10-25 packet, from the
@@ -25925,14 +25930,20 @@ issues:
     - what: >-
         Keep the files of s297-exact-configuration.zip themselves (CC0 1.0) for 297, from
         the same public copy.
-      state: queued
+      state: done
       source: https://github.com/jlevy/squares/issues/804#issuecomment-6415293035
       bead: think-ozx8
       note: >-
         The attachment returned 403 here; the public copy of 31 October, 13:27Z
         (issuecomment-6543970419), serves it. Taking it in also unblocks route B of T-247,
         n297.minpoly.json decided on exact_verify and the retained verify_exact.py, which
-        is this project's validation and not the author's ask.
+        is this project's validation and not the author's ask. Done on 1 November 2026: the
+        hyukdongkim-s297-2026-10-25 packet keeps all six files under
+        source/s297-exact-configuration/, read from the public copy at f480441e, the zip held
+        to the comment's SHA-256 e08b5d0a...47a7 and n297.minpoly.json to e5c340b8...2826
+        (side_297.py retain). Route B's verify_exact.py run then printed VALID with four
+        mutated controls refused, which puts T-247 at V3/C3; its exact_verify route is
+        think-ozx8's.
     beads:
     - think-9vai
     - think-4rzl
@@ -27187,7 +27198,7 @@ issues:
       V3/C3, and n-044 moves to proved.
       zm_mixed.py's complete pass is priced and held over the pass's cap (think-qvp6); it
       raises no rung. Claude assistance disclosed.
-    read_through: '2026-11-01T03:46:21Z'
+    read_through: '2026-11-01T16:01:00Z'
     results:
     - key: s44-equals-7
       claim: 's(44) = 7: the lower half by a closed mixed cover, the upper half by the 7 x 7 grid.'
@@ -27280,6 +27291,11 @@ issues:
       section 11 Q1, where a rerun "would align the route". #867 adds both to the review's
       F4 and section 11. It was edited at 04:49:59Z to fix a broken F1 link (review A1 of
       #867), with a visible note saying so; its ids and statements are unchanged.
+      The authors' comment of 1 November 2026, 16:01:00Z
+      (https://github.com/jlevy/squares/issues/842#issuecomment-6560351462), read the same
+      day (think-bw8b), announces v1.2 at 29622595, the commit the watched read of
+      moh63-dev/s44-equals-7 records (intake-watch.yaml): the certificate unchanged and zmx2
+      described as interval-certified, per F1. It asks nothing and needs no reply.
   - number: 847
     title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
     author: mohsensbu-jpg

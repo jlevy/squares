@@ -6,7 +6,7 @@
   "created_at": "2026-10-25T12:23:57Z",
   "comments_sha256": "a18b11d17706c2081b9eac435dab7f74b0e6473fe828f70fac616dcc7f3de4c9"
  },
- "note": "The polynomial and printed side as the comment states them, read as text. The attachment holds the author's exact configuration; it was not read here.",
+ "note": "The polynomial and printed side as the comment states them, read as text. The attachment holds the author's exact configuration, kept under source/ since 1 November 2026; this fact reads the comment only.",
  "n": 297,
  "degree": 21,
  "polynomial_high_to_low": [
