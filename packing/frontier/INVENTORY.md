@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **854** evidence records. **490** are formal; **481** of those were established here. **12** are samples, counted separately.
+- **856** evidence records. **492** are formal; **483** of those were established here. **12** are samples, counted separately.
 - **346** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
@@ -573,6 +573,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n040-guzhou-continuous-pose-finite-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-audit-continuous-pose` |
 | `E-n040-guzhou-continuous-pose-crate-axis` | 0 | derived-structure | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqverify-fast`, `V-audit-continuous-pose` |
 | `E-n040-wand125-sqverify-continuous-6715-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | independent | full: root ranges of t and the near-axis patch | `V-wand125-sqverify-continuous` |
+| `E-n040-wand125-sqverify-continuous-6715-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | full: all 86 root ranges of t = tan(theta/2) over [10^-7, 83/200] at side 199529/200000, and the near-axis patch at side 77941/78125 for t in [0, 10^-7] | `V-wand125-sqverify-continuous`, `V-sqverify-continuous-review-premises`, `V-sqverify-continuous-review-judge` |
 | `E-evand-regularized-certificate-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-regularized-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | not recorded | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-exact-certificates`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area` |
 | `E-pingyou-503-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
@@ -614,6 +615,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n040-guzhou-new-supports-finite-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: every finite step of the claim: the density's orbit facts, its D4 expansion, both kernel inputs' identity and enclosures, the dominated measure, the scalar chain and every value of both release receipts | `V-audit-n40-new-supports`, `V-audit-continuous-pose` |
 | `E-n040-guzhou-new-supports-crate-axis` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the near-axis statement at side 249329659/250000000, decided by sqverify-fast's exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with the 401-direction necessary condition at side 3350/3359 over all 401 directions | `V-sqverify-fast`, `V-guzhou-n40-axis-integer-grid`, `V-audit-n40-new-supports` |
 | `E-n040-wand125-sqverify-continuous-6718-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | independent | full: root ranges of t and the near-axis patch | `V-wand125-sqverify-continuous` |
+| `E-n040-wand125-sqverify-continuous-6718-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | full: all 86 root ranges of t = tan(theta/2) over [10^-7, 83/200] at side 3350/3359, and the near-axis patch at side 997320431/10^9 for t in [0, 10^-7] | `V-wand125-sqverify-continuous`, `V-sqverify-continuous-review-premises`, `V-sqverify-continuous-review-judge` |
 | `E-ostashev-528-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-ostashev-528-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 3 of 3: the three complete certificates at n = 175, 232 and 264, every wall and every pair decided by both maintained routes and again by the third route; the six kernel controls and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
 | `E-calle-529-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
@@ -880,10 +882,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 348, verified 501
-- **method**: exact-algebraic 261, interval-certified 222, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 348
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 793
-- **relationship to the producer's code**: generator 5, independent-implementation 319, not-applicable 34, same-implementation 445, shared-components 45, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 348, verified 503
+- **method**: exact-algebraic 261, interval-certified 224, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 348
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 795
+- **relationship to the producer's code**: generator 5, independent-implementation 321, not-applicable 34, same-implementation 445, shared-components 45, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

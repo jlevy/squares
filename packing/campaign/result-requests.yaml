@@ -149,7 +149,15 @@ issues:
         so the exact bound there is useful only while that packing is pending. Confirmation priced:
         lake build of the 41 modules at the pin, about 2.1 process-hours by the author's timings,
         with the axiom receipt and a reading of the statement binding (Packs, minSide in
-        lean/Sqpack/Spec.lean); no Lean build ran in the 2026-10-11 pass.
+        lean/Sqpack/Spec.lean); no Lean build ran in the 2026-10-11 pass. Re-measured
+        against main 737d8311e on 31 October 2026 (think-63vx): at 8 of the 41 (176, 204,
+        227, 229, 232, 260, 264 and 299) a smaller packing is now the house, so the quadratic
+        form there is no longer the record; at the other 33 the house is still the quadratic
+        form and the verified bound a rational above it, at 19 still the 5 October exact
+        ceilings and at 14 the 12 and 13 October regularized-bounds decisions. The build
+        could not run here that day: Mathlib 0df444a3's cache host,
+        lakecache.blob.core.windows.net, is refused by this environment's proxy, and the
+        host had 4.6 GB of disk free (think-63vx records the probes).
     beads:
     - think-8sm2
     - think-63vx
@@ -4653,6 +4661,18 @@ issues:
       - think-r333
       - think-u0av
       - think-f40c
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6548460193
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: superseded
+      beads: [think-u0av]
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -4689,6 +4709,16 @@ issues:
       think-ndvg; and the replay and review of the later n27 candidate at 1131/200 under
       think-ndvg. T-233's unfinished control (think-tcsl) and T-176 to T-178's census
       (think-u0av) are named with them.
+
+      The follow-up posted at 2026-10-31T20:02:48Z (issuecomment-6548460193) reports T-177's
+      one moved field: its position, pending adoption in the final comment of 26 October, is
+      superseded, by T-252 (s(44) = 7, V3/C3, #851, merged at 90b79dbe1 from #842). It was
+      rendered with `check_requests --draft 446` from main at 737d8311e, whose Pages run
+      41232002123 deployed and passed its verify-deployment job (124630005688, 6032 of 6032
+      checks, result/t-177.html, result/t-252.html and cases/44.html served);
+      `render_recent_results.standing` on that commit gives T-177 superseded by T-252. It
+      restates that T-177's census stays with think-u0av, and that the rest keeps the state
+      of 26 October.
   - number: 451
     title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
     author: franciscouzo
@@ -5843,7 +5873,11 @@ issues:
       release reviewed with no blocking defect; it is registered as T-157, and n = 40's reported and
       verified lower bounds move to 3359/500 (think-tln9). wand125 edited the 17:14
       UTC comment at 02:19 UTC on 12 October to link the continuous-angle mode at
-      wand125/square-packing f30cc2c (think-xzob).
+      wand125/square-packing f30cc2c (think-xzob). That mode, retained and reviewed for
+      soundness on 23 October, was replayed here in full on both n = 40 densities on 31
+      October 2026 with its mass controls (think-flxm): its report on this issue maps to T-157,
+      whose mark moves to independently re-implemented after reading the producer's code, and
+      no rung moves.
     read_through: '2026-10-14T12:03:14Z'
     results:
     - key: s40-clipped-corner
@@ -5920,15 +5954,11 @@ issues:
         B = 3350/3359 and tau = 4999/5000 over all 86 root ranges and an exact axis sweep for t in
         [0, 10^-7], and refused both controls (every weight x 985/1000, and B = 3348/3359).
       source: https://github.com/jlevy/squares/issues/485#issuecomment-6111583905
-      not_registered: >-
-        A third party's second decision of s40-new-supports's continuous cover, not a bound of its
-        own: code distinct from the release's kernel but the same method in outline, as its author
-        says, built on this repository's sqverify-fast crate. Retained (v3 and v4), reviewed for
-        soundness and built here on 23 October 2026 (think-xzob, #752); its replay of the n = 40
-        examples is think-flxm's and waits on an owner budget. wand125's runs stay a third party's
-        report until a run directory with receipts is published or the mode is replayed here.
-      queued: true
-      bead: think-flxm
+      register:
+      - T-157
+      evidence:
+      - E-n040-wand125-sqverify-continuous-6718-report
+      - E-n040-wand125-sqverify-continuous-6718-replay
     beads:
     - think-3oi5
     - think-xms6
@@ -8204,20 +8234,39 @@ issues:
     results: []
     asks:
     - what: Retain sqverify_continuous at f30cc2c, review its soundness, build it and replay both
-        n = 40 examples with their controls and this repository's own mass controls.
+        n = 40 examples with their controls.
+      state: done
+      source: body
+      note: >-
+        Split on 31 October 2026 from the issue's one ask, which also asked for this
+        repository's own mass controls (the next ask), after review A2 of #865. Retained (v3
+        and v4), reviewed for soundness with no blocking or major finding, built to the
+        recorded digest and run here on the source's controls on 23 October 2026 (think-xzob,
+        docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md). On
+        31 October 2026 both examples were replayed here in full (think-flxm, intake lane L10,
+        under the pass's 40 CPU-hour item cap), each with the source's 985/1000 mass control
+        rebuilt from this repository's copy of its density and refused at every root, judged
+        by the review's judge_run.py: E-n040-wand125-sqverify-continuous-6715-replay for T-145
+        and -6718-replay for T-157, receipts in the v4 packet's replay/. The source's third
+        control, T-157's density at core 3348/3359, was not run again and stands on the 23
+        October review's run alone (refused, 12,364,148 nodes). The same mode's 86-root run
+        for T-192 is think-0arj's and is not this ask.
+      bead: think-flxm
+    - what: Add this repository's own mass controls to the replay of both n = 40 examples.
       state: queued
       source: body
       note: >-
-        Retained (v3 and v4), reviewed for soundness with no blocking or major finding, built
-        to the recorded digest and run here on the source's controls on 23 October 2026
-        (think-xzob,
-        docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md). The
-        replay of both examples is think-flxm's, about 0.7 CPU-hours each, and the same mode's
-        86-root run for T-192 is think-0arj's; both wait for the owner's continuous-angle
-        budget on jlevy/squares#543.
+        Split from the ask above on 31 October 2026 (review A2 of #865): the 985/1000 controls
+        that ran are the source's, rebuilt here, so no control designed here has been counted on
+        either density. Of this lane's threshold-shift runs, each the same as scaling every
+        weight by tau/tau', c6715 at 24997/25000 and c6718 at 1 verified, and c6718 at
+        1001/1000 refused with no refutation, its four refusals at t in [23/100, 1/4] stopping
+        at exact captures of 1001/1000 plus at most 2.9e-12. For c6718 a threshold just above
+        1001/1000, such as 2503/2500, below the patch minimum 1.00149865, is the next try,
+        about 1.5 CPU-hours; for c6715, whose least capture is within 2.6e-6 of its patch
+        minimum, a density mutant that lowers the oblique captures alone. Either, once refused
+        at an oblique root with a legal refutation and the patch verified, would count here.
       bead: think-flxm
-      blocked_on:
-      - jlevy/squares#543
     beads:
     - think-xzob
     - think-tln9

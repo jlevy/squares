@@ -16271,6 +16271,13 @@ results:
       second way on the original density. The 10 October review re-derived the kernel's lemmas and
       found no blocking defect. No second method decided the continuous cover.
 
+      On 31 October 2026 the whole claim was decided here again by Hiroaki Hosono's
+      sqverify_continuous v4, code other than the producer's with the same method, written after
+      its author read the producer's kernel: all 86 root ranges of t over [10^-7, 83/200] at side
+      199529/200000 and its own near-axis patch verified, in 110,877,174 nodes, the source's
+      reported total, and its mass control was refused at every root: confirmed,
+      independently re-implemented after reading the producer's code.
+
       Guzhou0806 after Hosono, Tokoharu and Levy,
       [n40-square-packing](https://github.com/Guzhou0806/n40-square-packing/tree/71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3).
       The source credits the density to Hosono (as wand125), the rectangle-density method and the
@@ -16314,16 +16321,27 @@ results:
       repository's exact audit, independently re-implemented with respect to exact.py, and are
       recorded as structure.
 
-      The result takes the part closest to the producer's code: confirmed, reproduced with the
-      producer's code. C3 rests on the complete replay of both kernels and its controls, and the
-      kernel's lemmas on the 10 October review. No second method decides the continuous cover; the
-      401-direction run of sqverify-fast at the new parameters is a necessary condition it passed.
+      The whole claim, cover, near-axis patch and counting together, is decided again by
+      Hosono's sqverify_continuous v4 over 86 root ranges and its own patch at side
+      77941/78125, interval-certified, replayed here in full: code other than the producer's,
+      with the same method, written after reading that kernel, and sharing this repository's
+      axis, exact, interval, oracle and rotated modules.
+
+      The result takes the part closest to the producer's code: confirmed, independently
+      re-implemented after reading the producer's code, by a program a person and a Claude agent
+      wrote, the person being Hosono, who also made the density, beside a producer whose AI
+      system is not named, so the overlap of authorship is unknown. C3 rests on the complete
+      replay of both kernels and its controls, and the kernel's lemmas on the 10 October review;
+      the second route's on the 23 October soundness review. No
+      second method decides the continuous cover; the 401-direction run of sqverify-fast at the
+      new parameters is a necessary condition it passed.
     evidence:
       - E-n040-guzhou-continuous-pose-report
       - E-n040-guzhou-continuous-pose-kernel-replay
       - E-n040-guzhou-continuous-pose-finite-audit
       - E-n040-guzhou-continuous-pose-crate-axis
       - E-n040-wand125-sqverify-continuous-6715-report
+      - E-n040-wand125-sqverify-continuous-6715-replay
     reviews:
       - path: docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
         kind: adversarial
@@ -16358,6 +16376,25 @@ results:
           steps recomputed independently.
         verdict: accepted
         covers: [T-145]
+      - path: docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+        kind: adversarial
+        reviewer: AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), prompted separately from the imports of T-145, T-157 and T-192 and from every earlier review of them; it opened no earlier review document before writing its sections 1 to 9, and saw the earlier reviews' findings by title only, in the external_review notes of the reported entries
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-23'
+        scope: >-
+          The second route for this result's continuous cover, wand125's sqverify_continuous,
+          v3 at f30cc2c and v4 at d4a1981: lemmas C1 to C6 and the counting re-derived from the
+          source; slab.rs, the continuous path of main.rs and the admission it reads, read line
+          by line against this repository's copies of the modules it reuses; the exact premises
+          at this result's parameters and this density's facts decided with the reviewer's own
+          code; the box bound held to an exact oracle on adversarial boxes and on this density;
+          the binary rebuilt to the recorded digest, the crate's tests run, and the source's
+          mass control reproduced node for node with every witness re-evaluated exactly. Not
+          Guzhou0806's kernels, nor the claim's 86-root run, which
+          E-n040-wand125-sqverify-continuous-6715-replay decides.
+        verdict: accepted
+        covers: [T-145, T-157, T-192]
     artifacts:
       - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/README.md
       - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
@@ -16377,23 +16414,26 @@ results:
       - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
       - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
       - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/README.md
     controls:
       - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/controls.jsonl.gz
       - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/control-G-release.json
       - packing/tests/test_audit_continuous_pose.py
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/runs/c6715_control.jsonl
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/receipts/judge-c6715_control.json
     next_rung: >-
       V4 and C4 need a human oversight record: the two adversarial AI reviews by distinct
       reviewers are retained, the 10 October review and the 11 October final review
-      (docs/project/reviews/review-2026-10-11-final-lower-bounds.md), both accepting. A method-distinct decision of the
+      (docs/project/reviews/review-2026-10-11-final-lower-bounds.md), both accepting, beside
+      the 23 October review of the second route. A method-distinct decision of the
       continuous cover would stand beside the rung: a first-party interval kernel with the angle
       as an interval dimension (GC-4 of the review, its specification), a W7 slice and a budget
       the owner sets.
 
-      A code-distinct decision of it, by wand125's sqverify_continuous, was reviewed for
-      soundness on 23 October 2026 with no blocking defect and is reported verified without a
-      receipt (E-n040-wand125-sqverify-continuous-6715-report); its replay here, think-flxm,
-      about 0.7 CPU-hours (high 2.4) and waiting for the owner's budget, would make the cover
-      independently re-implemented after reading the producer's code, beside the rung.
+      A code-distinct decision of it, Hosono's sqverify_continuous v4, reviewed for soundness on
+      23 October 2026, was replayed here in full on 31 October
+      (E-n040-wand125-sqverify-continuous-6715-replay); it moved the mark to independently
+      re-implemented after reading the producer's code, and no rung.
     notes: >-
       Registered on 10 October 2026 by the records lane of the issue 485 follow-up (think-xms6),
       after the complete replay of both kernels, the finite audit and the crate's two runs, whose
@@ -16424,6 +16464,19 @@ results:
       publishes no receipt and has not been replayed here, so it moves no rung and no mark. It is
       cited here and listed among T-192's reviews only, until a replay here (think-flxm) makes the
       mode a deciding route for this result.
+
+      On 31 October 2026 the intake lane L10 (think-flxm) replayed the mode here in full on this
+      density, with the soundness review's own candidate builder and judge, and the source's
+      mass control (E-n040-wand125-sqverify-continuous-6715-replay; receipts in
+      packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/). The mark moves
+      to independently re-implemented after reading the producer's code; the rung does not.
+
+      The run meant as its oblique control, the density at tau 24997/25000, just below the
+      near-axis patch's minimum of 0.99988263, verified as well: every legal pose captures at
+      least 0.99988, so only a threshold in (0.99988, 0.99988263), a window of 2.6e-6, could
+      fail at the oblique roots alone, and a counted oblique control here needs a density
+      mutant. With the mode now a deciding route, review A of #865 settled that the 23
+      October review joins this result's reviews, as the note above anticipated.
 
   - id: T-146
     kind: upper-bound
@@ -19905,6 +19958,13 @@ results:
       the density itself and verified the 401-direction nodal statement at the new side. The 12
       October review found no blocking defect. No second method decided the continuous cover.
 
+      On 31 October 2026 the whole claim was decided here again by Hiroaki Hosono's
+      sqverify_continuous v4, code other than the producer's with the same method, written after
+      its author read the producer's kernel: all 86 root ranges of t over [10^-7, 83/200] at side
+      3350/3359 and its own near-axis patch verified, in 118,717,888 nodes, the source's
+      reported total, and its mass control was refused at every root: confirmed, independently
+      re-implemented after reading the producer's code.
+
       Guzhou0806 after Hosono, Tokoharu and Levy,
       [n40-square-packing](https://github.com/Guzhou0806/n40-square-packing/tree/6a65957e6c5c51cdf267917d882dab7f5b4928dd).
       The source credits the original density and pool to Hosono (as wand125), the translation-derivative
@@ -19943,22 +20003,27 @@ results:
       The finite steps, the density's orbit facts, both inputs' identity, the near-axis
       containment, the slab partition, the threshold and the counting margin, are decided by this
       repository's exact audit, independently re-implemented with respect to exact.py, and are
-      recorded as structure.
+      recorded as structure. The whole claim, cover, near-axis patch and counting together, is
+      decided again by Hosono's sqverify_continuous v4 over 86 root ranges and its own patch at
+      side 997320431/10^9, interval-certified, replayed here in full: code other than the
+      producer's, with the same method, written after reading that kernel, and sharing this
+      repository's axis, exact, interval, oracle and rotated modules.
 
-      The result takes the part closest to the producer's code: confirmed, reproduced with the
-      producer's code. C3 rests on the complete replay of both kernels and its controls, and the
-      kernels' lemmas on the 10 October review of T-145, which read the same bytes. No second
+      The result takes the part closest to the producer's code: confirmed, independently
+      re-implemented after reading the producer's code, by a program a person and a Claude agent
+      wrote, beside a producer whose AI system is not named, so the overlap of authorship is
+      unknown. C3 rests on the complete replay of both kernels and its controls, and the
+      kernels' lemmas on the 10 October review of T-145, which read the same bytes; the second
+      route's on the 23 October soundness review. No second
       method decides the continuous cover; the 401-direction run of sqverify-fast at the new side
-      is a necessary condition it passed. Hosono's sqverify_continuous, retained and reviewed
-      for soundness on 23 October with no blocking defect, would, once replayed here
-      (think-flxm), make the cover independently re-implemented after reading the producer's
-      code and move the mark, not the rung.
+      is a necessary condition it passed.
     evidence:
       - E-n040-guzhou-new-supports-report
       - E-n040-guzhou-new-supports-kernel-replay
       - E-n040-guzhou-new-supports-finite-audit
       - E-n040-guzhou-new-supports-crate-axis
       - E-n040-wand125-sqverify-continuous-6718-report
+      - E-n040-wand125-sqverify-continuous-6718-replay
     reviews:
       - path: docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
         kind: adversarial
@@ -19978,6 +20043,25 @@ results:
           sqverify_continuous would change.
         verdict: accepted
         covers: [T-157]
+      - path: docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+        kind: adversarial
+        reviewer: AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), prompted separately from the imports of T-145, T-157 and T-192 and from every earlier review of them; it opened no earlier review document before writing its sections 1 to 9, and saw the earlier reviews' findings by title only, in the external_review notes of the reported entries
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-23'
+        scope: >-
+          The second route for this result's continuous cover, wand125's sqverify_continuous,
+          v3 at f30cc2c and v4 at d4a1981: lemmas C1 to C6 and the counting re-derived from the
+          source; slab.rs, the continuous path of main.rs and the admission it reads, read line
+          by line against this repository's copies of the modules it reuses; the exact premises
+          at this result's parameters and this density's facts decided with the reviewer's own
+          code; the box bound held to an exact oracle on adversarial boxes; the binary rebuilt
+          to the recorded digest, the crate's tests run, and the source's two controls, the
+          985/1000 mass control and the density at core 3348/3359, reproduced node for node
+          with every witness re-evaluated exactly. Not Guzhou0806's kernels, nor the claim's
+          86-root run, which E-n040-wand125-sqverify-continuous-6718-replay decides.
+        verdict: accepted
+        covers: [T-145, T-157, T-192]
     artifacts:
       - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
       - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
@@ -20001,21 +20085,27 @@ results:
       - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
       - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
       - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/README.md
     controls:
       - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/controls.jsonl.gz
       - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/control-G-release.json
       - packing/tests/test_audit_n40_new_supports.py
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/runs/c6718_control.jsonl
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/receipts/judge-c6718_control.json
     next_rung: >-
-      V4 and C4 need a second retained adversarial AI review of this result's evidence by a
-      distinct reviewer (the 11 October final review covers T-145's kernel and density, not this
-      density) and a human oversight record.
+      V4 and C4 need only a human oversight record: the two retained adversarial AI reviews by
+      distinct reviewers are the 12 October stage 4 review and the 23 October review of the
+      second route, both accepting. Its check of the AI findings should cover the 23 October
+      review's SC-1 (--resume counts lines from any file with the public run_key) and SC-2 (the
+      y-derivative enclosure is untested), and the counted oblique control still open on
+      think-flxm.
 
-      Beside the rung: a decision of the continuous cover by code other than the producer's, by
-      a replay here of Hosono's sqverify_continuous, retained and reviewed for soundness on 23
-      October (think-flxm, about 0.7 CPU-hours, high 2.8, waiting for the owner's budget), or by
-      a first-party interval kernel with the angle as an interval dimension (GC-4 of the 10
-      October review); either would make the result independently re-implemented after reading
-      the producer's code and leave the rung where it is.
+      Beside the rung: a decision of the continuous cover by code other than the producer's,
+      Hosono's sqverify_continuous v4, reviewed for soundness on 23 October, was replayed here in
+      full on 31 October (E-n040-wand125-sqverify-continuous-6718-replay); it moved the mark to
+      independently re-implemented after reading the producer's code, and no rung. A
+      method-distinct decision, a first-party interval kernel with the angle as an interval
+      dimension (GC-4 of the 10 October review), is still open.
     notes: >-
       Registered on 12 October 2026 by the records lane of the 2026-10-11 intake pass after the
       complete replay of both kernels, the finite audit, the crate's two runs and the release's
@@ -20047,6 +20137,26 @@ results:
       continuous cover and read neither of its kernels, so it is cited here and listed among
       T-192's reviews only, until a replay here (think-flxm) makes the mode a deciding route for
       this result.
+
+      On 31 October 2026 the intake lane L10 (think-flxm) replayed the mode here in full on this
+      density, with the soundness review's own candidate builder and judge, and the source's
+      mass control (E-n040-wand125-sqverify-continuous-6718-replay; receipts in
+      packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/). The mark moves
+      to independently re-implemented after reading the producer's code; the rung does not.
+
+      The run meant as its oblique control, the density at tau 1, just below the near-axis
+      patch's minimum of 1.00149865, verified as well: the density captures at least 1 at every
+      legal pose, so a counted oblique control here still needs a threshold in (1, 1.00149865)
+      or a density mutant. The density at tau 1001/1000, inside that window, was refused with
+      the patch verified but with no refutation: 4 roots at t in [23/100, 1/4] reached
+      resolution at legal poses capturing 1001/1000 plus at most 2.9e-12, where its least
+      oblique capture lies, and 13 stopped at the node budget; a threshold such as 2503/2500
+      is the next try (think-flxm).
+
+      With the mode now a deciding route, review A of #865 settled that
+      the 23 October review joins this result's reviews, as the note above anticipated, and it
+      is the second retained adversarial AI review of this result's evidence by a distinct
+      reviewer, so rung 4 waits only on the human oversight record.
 
       Registered as T-153 on the intake branch of 12 October and renumbered to T-157 when that
       branch merged with main, where T-153 to T-156 had been registered in the meantime, in every
@@ -27335,7 +27445,7 @@ results:
           root by root with every witness re-evaluated exactly. Not the 86-root run of the
           claim, nor the second program, contpose_check3.
         verdict: accepted
-        covers: [T-192]
+        covers: [T-145, T-157, T-192]
     artifacts:
       - packing/resources/web/wand125-continuous-n28-2026-10-15/README.md
       - packing/resources/web/wand125-continuous-n28-2026-10-15/acquisition/sources.json

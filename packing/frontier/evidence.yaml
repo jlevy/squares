@@ -37393,7 +37393,8 @@ evidence:
       with the producer's kernel and has the same method, its author having read that kernel; it
       shares this repository's interval, exact, axis and oracle modules, and its near-axis
       decision is the axis sweep that E-n040-guzhou-continuous-pose-crate-axis also runs. Not a
-      second method and no rung rests on it; a complete replay here is think-flxm.
+      second method and no rung rests on it; the complete replay here of 31 October 2026 is
+      E-n040-wand125-sqverify-continuous-6715-replay (think-flxm).
     external_review:
       state: informally-verified
       date: '2026-10-23'
@@ -37418,6 +37419,76 @@ evidence:
         reproduced the source's control row (7,714 nodes, patch minimum 0.98488, least refuting
         capture 0.98711), every witness a legal pose computed exactly here. Unchecked: the
         claim's own run, which no receipt shows and a replay here would decide (think-flxm).
+    source_reviewed: '2026-10-23'
+
+  - id: E-n040-wand125-sqverify-continuous-6715-replay
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 sqverify continuous 2026-10-12]'
+    certificate: packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay: >-
+      As packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/README.md gives
+      it: cargo build --release --locked in a scratch copy of that packet's
+      tools/sqverify_continuous/sqverify_fast with rustc 1.98.0 (binary 31936c4d...); the
+      review's candidates.py writes c6715.json (SHA-256 f4a1ae9b...) and c6715_mass0985.json
+      from this record's copy of the density in the source's row order; then sqverify-fast
+      --candidate c6715.json --n 40 --continuous --core 199529/200000 --tau 4999/5000 --threads 2
+      --max-nodes 30000000, with no --resume, and the review's judge_run.py on its output with
+      --expect VERIFIED must exit 0 with every check held. The control is the same command on
+      c6715_mass0985.json, judged with --expect REFUSED; the threshold-shift run on c6715.json
+      at --tau 24997/25000 --max-nodes 4000000 is judged with --expect VERIFIED, as it ran.
+    replay_status: passed
+    verifiers: [V-wand125-sqverify-continuous, V-sqverify-continuous-review-premises, V-sqverify-continuous-review-judge]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          all 86 root ranges of t = tan(theta/2) over [10^-7, 83/200] at side 199529/200000,
+          and the near-axis patch at side 77941/78125 for t in [0, 10^-7]
+    proof:
+      source: packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/CONTINUOUS.md
+      theorem: >-
+        Every closed square of side 199529/200000 inside [0, 67/10]^2, at any angle and any legal
+        centre, captures at least 4999/5000 of Hosono's rect_n40_L67 density; since 40 x 4999/5000
+        - 3999/100 = 1/500 > 0, no 40 unit squares pack in a square of side 1340000/199529, so
+        s(40) > 1340000/199529.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        CONTINUOUS.md's lemmas C1 to C6 and the counting step, re-derived by the 23 October
+        soundness review, which read src/slab.rs, the continuous path of src/main.rs and the
+        admission in src/certificate.rs it depends on; that review's section 11 for what a replay
+        must show; the receipts named in replay.
+      assumptions:
+        - IEEE-754 binary64 with round-to-nearest and subnormals kept, which the directed steps of interval.rs assume and the program does not assert (SC-12 of the review).
+        - The modules the mode shares with this repository's sqverify_fast (axis.rs, exact.rs, interval.rs, oracle.rs, rotated.rs), whose lemmas the 3 October soundness reviews accepted.
+      audit_record: docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    limitations: >-
+      Run here on 2026-10-31 by the intake lane L10 (think-flxm) at two threads on a shared
+      four-core x86-64 Linux container: VERIFIED at all 86 root ranges and the near-axis patch
+      (4,897,369 vertices, least 0.99988263), 110,877,174 nodes and 55,438,630 leaves, every
+      root a complete binary cover, least certified bound 0.9998000000015764, inherited_roots 0,
+      source_sha256 619b3c00..., input_sha256 f4a1ae9b...; 1,624 s of wall time and 3,143.9
+      CPU-seconds. The node total and the least bound are the source's README row for v3, which
+      published no run output. judge_run.py held every check. The controls: every weight times
+      985/1000, REFUSED at the patch (0.98488) and at all 86 roots in 7,714 nodes, every witness
+      a legal pose whose exact capture, computed apart from the crate, is below tau. A
+      threshold-shift run meant as the oblique control, the same density at tau 24997/25000,
+      below the patch's minimum, came back VERIFIED at every root, 113,317,246 nodes, least
+      certified bound 0.99988000008, 3,156.5 CPU-seconds, judged faithful: every legal pose
+      captures at least 0.99988, so only a threshold in (0.99988, 0.99988263), a window of
+      2.6e-6, could fail at the oblique roots alone, and the run counts as no control. A
+      counted oblique control for this density needs a density mutant (think-flxm). The program is Hosono's,
+      independent code with the producer's method, written
+      after reading Guzhou0806's kernel (PROVENANCE.md), so not clean-room; it shares this
+      repository's axis, exact, interval, oracle and rotated modules byte for byte, and its
+      near-axis decision is the axis sweep E-n040-guzhou-continuous-pose-crate-axis also runs.
+      Not a second method.
     source_reviewed: '2026-10-23'
 
   - id: E-evand-regularized-certificate-report
@@ -39746,7 +39817,8 @@ evidence:
       producer's kernel and has the same method, its author having read that kernel; it shares
       this repository's interval, exact, axis and oracle modules, and its near-axis decision is
       the axis sweep that E-n040-guzhou-continuous-pose-crate-axis also runs. Not a second
-      method and no rung rests on it; a complete replay here is think-flxm.
+      method and no rung rests on it; the complete replay here of 31 October 2026 is
+      E-n040-wand125-sqverify-continuous-6718-replay (think-flxm).
     external_review:
       state: informally-verified
       date: '2026-10-23'
@@ -39773,6 +39845,84 @@ evidence:
         nodes, patch 0.98421, least refuting capture 0.99856, with 84 of its 86 refusals
         stopping above tau, SC-9). Unchecked: the claim's own run, which no receipt shows and a
         replay here would decide (think-flxm).
+    source_reviewed: '2026-10-23'
+
+  - id: E-n040-wand125-sqverify-continuous-6718-replay
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 sqverify continuous 2026-10-12]'
+    certificate: packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+    replay: >-
+      As packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/README.md gives
+      it: cargo build --release --locked in a scratch copy of that packet's
+      tools/sqverify_continuous/sqverify_fast with rustc 1.98.0 (binary 31936c4d...); the
+      review's candidates.py writes c6718.json (SHA-256 38e0eff1...) and c6718_mass0985.json
+      from this record's copy of the density in the source's row order; then sqverify-fast
+      --candidate c6718.json --n 40 --continuous --core 3350/3359 --tau 4999/5000 --threads 2
+      --max-nodes 30000000, with no --resume, and the review's judge_run.py on its output with
+      --expect VERIFIED must exit 0 with every check held. The control is the same command on
+      c6718_mass0985.json, judged with --expect REFUSED; the threshold-shift run on c6718.json
+      at --tau 1 --max-nodes 4000000 is judged with --expect VERIFIED, as it ran.
+    replay_status: passed
+    verifiers: [V-wand125-sqverify-continuous, V-sqverify-continuous-review-premises, V-sqverify-continuous-review-judge]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          all 86 root ranges of t = tan(theta/2) over [10^-7, 83/200] at side 3350/3359, and the
+          near-axis patch at side 997320431/10^9 for t in [0, 10^-7]
+    proof:
+      source: packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/CONTINUOUS.md
+      theorem: >-
+        Every closed square of side 3350/3359 inside [0, 67/10]^2, at any angle and any legal
+        centre, captures at least 4999/5000 of Guzhou0806's 685-orbit density; since 40 x
+        4999/5000 - 3999/100 = 1/500 > 0, no 40 unit squares pack in a square of side 3359/500,
+        so s(40) > 3359/500.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        CONTINUOUS.md's lemmas C1 to C6 and the counting step, re-derived by the 23 October
+        soundness review, which read src/slab.rs, the continuous path of src/main.rs and the
+        admission in src/certificate.rs it depends on; that review's section 11 for what a replay
+        must show; the receipts named in replay.
+      assumptions:
+        - IEEE-754 binary64 with round-to-nearest and subnormals kept, which the directed steps of interval.rs assume and the program does not assert (SC-12 of the review).
+        - The modules the mode shares with this repository's sqverify_fast (axis.rs, exact.rs, interval.rs, oracle.rs, rotated.rs), whose lemmas the 3 October soundness reviews accepted.
+      audit_record: docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    limitations: >-
+      Run here on 2026-10-31 by the intake lane L10 (think-flxm) at two threads on a shared
+      four-core x86-64 Linux container: VERIFIED at all 86 root ranges and the near-axis patch
+      (10,929,636 vertices, least 1.00149865), 118,717,888 nodes and 59,358,987 leaves, every
+      root a complete binary cover, least certified bound 0.9998000000075916, inherited_roots
+      0, source_sha256 619b3c00..., input_sha256 38e0eff1...; 2,448 s of wall time and 4,746.8
+      CPU-seconds. The node total and the least bound are the source's README row for v3,
+      which published no run output. judge_run.py held every check. The controls: every
+      weight times 985/1000, REFUSED at the patch (0.98648) and at all 86 roots in 5,979 nodes,
+      every witness a legal pose whose exact capture, computed apart from the crate, is below
+      tau. The source's other control, the density at core 3348/3359, was not run again: it
+      stands on the 23 October review's run alone, REFUSED in 12,364,148 nodes with 2 of its 86
+      refusals refuting (SC-9). A threshold-shift run meant as the oblique control, the same density at tau 1,
+      below the patch's minimum, came back VERIFIED at every root, 124,136,598 nodes, least
+      certified bound 1.0000000001025, 4,935.5 CPU-seconds, judged faithful: this density
+      captures at least 1 at every legal pose, so only a threshold in (1, 1.00149865) could
+      fail at the oblique roots alone, and the run counts as no control. Inside that window,
+      the density at tau 1001/1000 (review A1 of #865) came back REFUSED with the patch
+      verified, 169,336,387 nodes, 6,624.9 CPU-seconds, judged faithful and with no
+      refutation: 69 roots verified, 13 stopped at the node budget, and 4, at t in [23/100,
+      1/4], reached resolution at legal poses capturing 1001/1000 plus at most 2.9e-12, where
+      the density's least oblique capture lies. A threshold such as 2503/2500, between that
+      capture and the patch's minimum, is the next try at a counted oblique control
+      (think-flxm).
+      The program is Hosono's, independent code with the producer's method,
+      written after reading Guzhou0806's kernel (PROVENANCE.md), so not clean-room; it shares
+      this repository's axis, exact, interval, oracle and rotated modules byte for byte, and its
+      near-axis decision is the axis sweep E-n040-guzhou-new-supports-crate-axis also runs. Not
+      a second method.
     source_reviewed: '2026-10-23'
 
   - id: E-ostashev-528-certificate-report

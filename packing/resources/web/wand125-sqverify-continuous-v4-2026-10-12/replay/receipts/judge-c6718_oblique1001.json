@@ -1,0 +1,230 @@
+{
+  "run": "c6718_oblique1001.jsonl",
+  "candidate": "c6718.json",
+  "core": "3350/3359",
+  "tau": "1001/1000",
+  "status": "REFUSED",
+  "nodes": 169336387,
+  "leaves": 84668059,
+  "roots": 86,
+  "refused_roots": 17,
+  "min_certified_lower_bound": 1.0010000000000001,
+  "build": {
+    "profile": "release",
+    "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+    "source_sha256": "619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5",
+    "target": "x86_64-unknown-linux-gnu"
+  },
+  "run_key": "e794354c408ec4b75c90ebc7ef4f67eaa14f17af54ce9c11ce785bd2b2d119c9",
+  "legal_refutations": 0,
+  "least_refuting_capture": null,
+  "witnesses": [
+    {
+      "index": 3,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 0.2560743599006273,
+      "capture_here": 1.0130410045385145,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 4,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 0.05278623919659336,
+      "capture_here": 1.0020533171634418,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 49,
+      "reason": "box below resolution",
+      "legal": true,
+      "legal_margin": 0.7489123143628446,
+      "capture_here": 1.0010000000010932,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 50,
+      "reason": "box below resolution",
+      "legal": true,
+      "legal_margin": 0.7479161570251005,
+      "capture_here": 1.0010000000029493,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 51,
+      "reason": "box below resolution",
+      "legal": true,
+      "legal_margin": 0.7483852277293026,
+      "capture_here": 1.0010000000001922,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 52,
+      "reason": "box below resolution",
+      "legal": true,
+      "legal_margin": 0.7480468138365683,
+      "capture_here": 1.0010000000002024,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 75,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 1.7653219216824123,
+      "capture_here": 1.0043939920883995,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 76,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.41172103406401,
+      "capture_here": 1.0087252827479252,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 77,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.3990910288584884,
+      "capture_here": 1.0016743531819767,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 78,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.431698142054015,
+      "capture_here": 1.0160125769416848,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 79,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.453329177437724,
+      "capture_here": 1.0031225176093856,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 80,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.452310021905304,
+      "capture_here": 1.0027718798747645,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 81,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.4406624288406515,
+      "capture_here": 1.002527605405817,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 82,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.4351598943829886,
+      "capture_here": 1.0019604240252256,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 83,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.3905263938420735,
+      "capture_here": 1.0052022020593767,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 84,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.4666102553096882,
+      "capture_here": 1.0058809318749267,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    },
+    {
+      "index": 85,
+      "reason": "node budget",
+      "legal": true,
+      "legal_margin": 2.4097548033810066,
+      "capture_here": 1.0051971197144014,
+      "equals_run": true,
+      "below_tau": false,
+      "agrees_with_flag": true,
+      "counts_as_refutation": false
+    }
+  ],
+  "notes": {
+    "axis_patch": {
+      "verified": true,
+      "min_certified_lower_bound": 1.001498645507767,
+      "vertices": 10929636
+    }
+  },
+  "checks": {
+    "premises equal this review's": true,
+    "one line per root, in the default cuts": true,
+    "no inherited line": true,
+    "verified roots are complete binary covers at or above tau": true,
+    "every witness capture equals the run's exact_capture": true,
+    "every witness flag agrees": true,
+    "summary status follows from the lines": true,
+    "summary totals are the sums": true,
+    "summary claim": true,
+    "status is the expected one": true
+  },
+  "all_hold": true
+}

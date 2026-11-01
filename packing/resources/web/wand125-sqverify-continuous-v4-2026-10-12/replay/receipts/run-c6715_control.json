@@ -1,0 +1,35 @@
+{
+  "command": [
+    "sh",
+    "-c",
+    "exec nice -n 10 '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/build-v4/tools/sqverify_continuous/sqverify_fast/target/release/sqverify-fast' --candidate '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/cand/c6715_mass0985.json' --n 40 --continuous --core 199529/200000 --tau 4999/5000 --threads 2 --max-nodes 30000000 > '/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/runs/c6715_control.jsonl'"
+  ],
+  "cwd": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc",
+  "started_utc": "2026-10-31T20:10:34Z",
+  "exit_status": 1,
+  "wall_seconds": 1.457,
+  "cpu_user_seconds": 2.085,
+  "cpu_system_seconds": 0.043,
+  "max_rss_kib": 18536,
+  "load_average": [
+    2.3564453125,
+    2.29833984375,
+    2.21044921875
+  ],
+  "digests": {
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/build-v4/tools/sqverify_continuous/sqverify_fast/target/release/sqverify-fast": "31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618",
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/cand/c6715_mass0985.json": "d4aa4dbd83a383df2f41f71b596ef4eaa2ad3c0bcd8b030b538e4994a76f604c",
+    "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l10-sqvc/runs/c6715_control.jsonl": "5fc62a8f1ccc88b8b610858165cc4deac41aef0527a74ddfa48ea61676dd02fa"
+  },
+  "stdout_lines": 0,
+  "stdout_head": [],
+  "stdout_tail": [],
+  "stderr_lines": 86,
+  "stderr_tail": [
+    "{\"angle_splits\":43,\"index\":81,\"kind\":\"root\",\"leaves\":0,\"max_depth\":62,\"min_certified_lower_bound\":null,\"nodes\":63,\"run_key\":\"96226226e242554eb102a299ef2e8c3a32fcb9e261680bc9fc2499a483f7c9c7\",\"seconds\":0.015204011,\"t\":[\"39/100\",\"79/200\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.9881656406856398,\"centre_part\":0.0,\"dt\":2.7755575615628914e-16,\"du\":0.00048828125,\"dv\":0.0009765625,\"exact_below_threshold\":true,\"exact_capture\":\"3157415925448362517868601/3195229418478440896894400\",\"exact_pose\":[5.993651544665632,5.992360068581283,0.39499999999999974],\"loss_x\":5e-324,\"loss_y\":5e-324,\"lower\":0.9881656406856392,\"reason\":\"box below resolution\",\"t\":0.39499999999999974,\"u\":0.99951171875,\"v\":0.9990234375}}",
+    "{\"angle_splits\":43,\"index\":82,\"kind\":\"root\",\"leaves\":0,\"max_depth\":61,\"min_certified_lower_bound\":null,\"nodes\":62,\"run_key\":\"96226226e242554eb102a299ef2e8c3a32fcb9e261680bc9fc2499a483f7c9c7\",\"seconds\":0.019720094,\"t\":[\"79/200\",\"2/5\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.9881656406856398,\"centre_part\":0.0,\"dt\":2.7755575615628914e-16,\"du\":0.0009765625,\"dv\":0.0009765625,\"exact_below_threshold\":true,\"exact_capture\":\"3157415925448362517868601/3195229418478440896894400\",\"exact_pose\":[5.992185408219962,5.992185408219962,0.39999999999999974],\"loss_x\":5e-324,\"loss_y\":5e-324,\"lower\":0.9881656406856392,\"reason\":\"box below resolution\",\"t\":0.39999999999999974,\"u\":0.9990234375,\"v\":0.9990234375}}",
+    "{\"angle_splits\":43,\"index\":83,\"kind\":\"root\",\"leaves\":0,\"max_depth\":61,\"min_certified_lower_bound\":null,\"nodes\":62,\"run_key\":\"96226226e242554eb102a299ef2e8c3a32fcb9e261680bc9fc2499a483f7c9c7\",\"seconds\":0.015515297,\"t\":[\"2/5\",\"81/200\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.9881656406856398,\"centre_part\":0.0,\"dt\":2.7755575615628914e-16,\"du\":0.0009765625,\"dv\":0.0009765625,\"exact_below_threshold\":true,\"exact_capture\":\"3157415925448362517868601/3195229418478440896894400\",\"exact_pose\":[5.992063617175617,5.992063617175617,0.40499999999999975],\"loss_x\":5e-324,\"loss_y\":5e-324,\"lower\":0.9881656406856392,\"reason\":\"box below resolution\",\"t\":0.40499999999999975,\"u\":0.9990234375,\"v\":0.9990234375}}",
+    "{\"angle_splits\":43,\"index\":84,\"kind\":\"root\",\"leaves\":0,\"max_depth\":60,\"min_certified_lower_bound\":null,\"nodes\":61,\"run_key\":\"96226226e242554eb102a299ef2e8c3a32fcb9e261680bc9fc2499a483f7c9c7\",\"seconds\":0.017416771,\"t\":[\"81/200\",\"41/100\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.9881656406856398,\"centre_part\":0.0,\"dt\":2.7755575615628914e-16,\"du\":0.0009765625,\"dv\":0.001953125,\"exact_below_threshold\":true,\"exact_capture\":\"3157415925448362517868601/3195229418478440896894400\",\"exact_pose\":[5.9919941645619,5.989411570070637,0.40999999999999975],\"loss_x\":5e-324,\"loss_y\":5e-324,\"lower\":0.9881656406856392,\"reason\":\"box below resolution\",\"t\":0.40999999999999975,\"u\":0.9990234375,\"v\":0.998046875}}",
+    "{\"angle_splits\":43,\"index\":85,\"kind\":\"root\",\"leaves\":0,\"max_depth\":60,\"min_certified_lower_bound\":null,\"nodes\":61,\"run_key\":\"96226226e242554eb102a299ef2e8c3a32fcb9e261680bc9fc2499a483f7c9c7\",\"seconds\":0.015461386,\"t\":[\"41/100\",\"83/200\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.9881656406856396,\"centre_part\":0.0,\"dt\":2.7755575615628914e-16,\"du\":0.001953125,\"dv\":0.0009765625,\"exact_below_threshold\":true,\"exact_capture\":\"3157415925448362517868601/3195229418478440896894400\",\"exact_pose\":[5.989393936197617,5.991976513434602,0.41499999999999976],\"loss_x\":5e-324,\"loss_y\":5e-324,\"lower\":0.988165640685639,\"reason\":\"box below resolution\",\"t\":0.41499999999999976,\"u\":0.998046875,\"v\":0.9990234375}}"
+  ]
+}
