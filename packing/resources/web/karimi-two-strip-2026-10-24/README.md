@@ -149,9 +149,9 @@ Three receipts under [`receipts/`](receipts/), each written by
 exact, in integers and fractions.
 
 - **[`two-strip-decisions.json`](receipts/two-strip-decisions.json)** (version 1) and
-  **[`two-strip-decisions-v2.json`](receipts/two-strip-decisions-v2.json)** (version 2),
-  `decide-all` (7.4 and 67.0 CPU-seconds, most of it writing out the certificates for
-  their digests). Every row is decided by the checker’s lemma: no two squares of a strip
+  **[`two-strip-decisions-v2.json`](receipts/two-strip-decisions-v2.json.gz)** (version
+  2, stored as gzip: [Compressed Files](#compressed-files)), `decide-all` (7.4 and 67.0
+  CPU-seconds, most of it writing out the certificates for their digests). Every row is decided by the checker’s lemma: no two squares of a strip
   overlap, the three regions are disjoint inside $[0, S]^2$ by the two fit inequalities,
   and the count is at most the capacity.
   - In version 1, the capacity equals $n$ at 403 rows and exceeds it by at most 19. In
@@ -205,6 +205,21 @@ python -m devtools.two_strip_checker check [--digests] [--replay]
 - the receipts’ check, both versions’ decisions included.
 
 The replay of 1184 and every count’s digest are in the slow lane.
+
+## Compressed Files
+
+Version 2’s decisions receipt, 2,854 lines, is stored as gzip with no file name or
+timestamp in the header, as `devtools.retained_data` keeps a retained file of more than
+1,000 lines (think-rsqv); it decompresses to the receipt as written on 25 October.
+`two_strip_checker` reads and writes it through that module, so `check` takes the plain
+path and `decide-all` writes the gzip again.
+A rerun records new timings, so the receipt is not pinned by digest: Git keeps its
+bytes (OR-16), and `python -m devtools.retained_data check` asks that it is listed,
+carries no name or timestamp, and decompresses.
+
+| Stored file | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `receipts/two-strip-decisions-v2.json.gz` | receipt |  |  |
 
 ## Limitations
 
