@@ -17,18 +17,46 @@ machine, a comparison of every run log with the release's (paths and timings asi
 the three rejection tests the source builds in (``GRADEC_MUTATE=tight``, ``droprow`` and
 ``neghess``), each of which must make the checker refuse n = 10.
 
-Each run copies its two inputs to a fresh directory, outside the repository, and runs
-``gradec.py`` from a fresh copy of the four modules under the given interpreter (a separate
-virtual environment with ``env.sh``'s pinned packages), with ``-E -s``, an empty working
-directory and the input path as its argument.  Isolated mode's ``-P`` is left out because
-gradec.py imports its three modules from its own directory, the copy, which holds nothing
-else.  Nothing here imports from the source.
+Each run copies its two inputs to a fresh directory of its own, one per attempt, outside
+the repository, and runs ``gradec.py`` from a fresh copy of the four modules under the
+given interpreter (a separate virtual environment with ``env.sh``'s pinned packages), with
+``-E -s``, an empty working directory and the input path as its argument.  Isolated mode's
+``-P`` is left out because gradec.py imports its three modules from its own directory, the
+copy, which holds nothing else.  Nothing here imports from the source.  Each child runs in
+a session of its own, and the driver kills every running child's group when it stops, so
+no orphan outlives it; an attempt's directory is never reused, so an orphan of a killed
+driver cannot write into a later attempt's.
 
-The work is resumable: each finished run appends one line to ``WORK/runs.jsonl``, and a
-later invocation with the same ``--work`` skips every run recorded there.  Runs are
-started longest first, by the build time the release's log prints, and no run starts once
-the recorded CPU time reaches ``--cpu-cap-hours``.  The receipt written to ``--out`` holds
-the environment and every run's record; its ``complete`` says whether all ran.
+**The ledger.** The work is resumable: each finished run appends one line to
+``WORK/runs.jsonl``, and a later invocation with the same ``--work`` skips every run
+recorded there (``--retry-failed`` runs a failed one again, and the ledger keeps both
+attempts).  Only the last line may be torn, by a driver killed mid-write; it is cut off
+before anything is appended, and an unreadable line anywhere else is refused.  One
+invocation holds ``WORK/lock`` (``flock``) while it runs, and a second is refused.
+
+**The environment.** ``WORK/environment.json`` names the environment the work was begun
+under: the interpreter's version and the five packages ``env.sh`` pins, its platform, the
+SHA-256 of each module copied out and of the archive.  Each run's record carries that
+identity's digest (``environment_sha256``).  An invocation whose ``--python`` or inputs
+give another identity is refused before anything runs, as is a ledger holding a record of
+another identity, so one receipt never merges runs from two environments; the identity is
+measured again before the receipt is written.  A work directory begun before the ledger
+recorded its environment (the replay started on 1 November 2026) has records without the
+digest and no ``environment.json``: it is adopted once with ``--adopt-unstamped``, under
+the ``--python`` those runs were launched with, which writes ``environment.json`` and names
+the records adopted; the receipt carries the list.  Records without the digest that were
+appended after ``environment.json`` was written, by an older driver, are refused.  An older
+driver takes no lock, so this one cannot see it: point it at a work directory only once any
+older driver using it has exited.
+
+**The cap.** Runs are started longest first, by the build time the release's log prints.
+A run starts only if the CPU time the ledger records, plus the worst case of every run
+still going, plus its own worst case, stays within ``--cpu-cap-hours``; a run that cannot
+fit even with nothing else running is not started, and the receipt is then incomplete.  The
+worst case of a run is ``--timeout`` seconds of CPU, which each child is held to by
+``RLIMIT_CPU`` where the platform allows (``resource.prlimit``) as well as to the same wall
+time, so the recorded CPU time cannot pass the cap.  The receipt written to ``--out``
+holds the environment and every run's record; its ``complete`` says whether all ran.
 
 Run it from ``packing/``::
 
@@ -40,21 +68,29 @@ Run it from ``packing/``::
 from __future__ import annotations
 
 import argparse
+import contextlib
+import fcntl
 import gzip
+import hashlib
 import json
 import os
 import re
+import resource
 import shutil
+import signal
 import subprocess
 import tarfile
 import threading
 import time
-from collections.abc import Iterable, Mapping, Sequence
+import uuid
+from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, TextIO, cast
+
+from strif import atomic_output_file
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parent
@@ -80,6 +116,12 @@ CONTROLS = ("tight", "droprow", "neghess")
 DEFAULT_TIMEOUT = 3 * 3600
 DEFAULT_CPU_CAP_HOURS = 40.0
 TAIL_LINES = 3
+
+RECEIPT_FORMAT = "evand-gradec-replay/2"
+ENVIRONMENT_FORMAT = "evand-gradec-replay-environment/1"
+LEDGER = "runs.jsonl"
+ENVIRONMENT = "environment.json"
+LOCK = "lock"
 
 _TIME = re.compile(r"\((\d+(?:\.\d+)?) s\)")
 _VALID_LINE = "=> grade C certificate VALID"
@@ -191,17 +233,125 @@ def copy_modules(destination: Path, source: Path = SCRIPTS_DIR) -> None:
         shutil.copyfile(source / name, destination / name)
 
 
+def file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def interpreter_versions(python: str) -> dict[str, str]:
+    """The interpreter's version, the five packages ``env.sh`` pins, and its platform."""
     probe = (
-        "import json, sys, numpy, scipy, mpmath, sympy, flint; print(json.dumps({"
+        "import json, platform, sys, numpy, scipy, mpmath, sympy, flint; print(json.dumps({"
         "'python': sys.version.split()[0], 'numpy': numpy.__version__, "
         "'scipy': scipy.__version__, 'mpmath': mpmath.__version__, "
-        "'sympy': sympy.__version__, 'python-flint': flint.__version__}))"
+        "'sympy': sympy.__version__, 'python-flint': flint.__version__, "
+        "'platform': platform.system() + ' ' + platform.machine()}))"
     )
     result = subprocess.run(
         [python, "-I", "-c", probe], capture_output=True, text=True, check=True
     )
     return json.loads(result.stdout)
+
+
+def environment_identity(
+    versions: Mapping[str, str], modules: Path, archive: Path = ARCHIVE
+) -> dict[str, Any]:
+    """What a run's bytes depend on beyond its inputs: the interpreter and its packages,
+    the module copies that run and the archive the inputs and certificates come from."""
+    return {
+        "interpreter": dict(sorted(versions.items())),
+        "modules_sha256": {name: file_sha256(modules / name) for name in MODULES},
+        "archive_sha256": file_sha256(archive),
+    }
+
+
+def identity_digest(identity: Mapping[str, Any]) -> str:
+    return hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+
+
+def identity_differences(
+    old: Mapping[str, Any], new: Mapping[str, Any], prefix: str = ""
+) -> list[str]:
+    """The leaves where two identities differ, as ``path: old -> new``."""
+    found: list[str] = []
+    for key in sorted(set(old) | set(new)):
+        before, after = old.get(key), new.get(key)
+        if isinstance(before, Mapping) and isinstance(after, Mapping):
+            found += identity_differences(
+                cast("Mapping[str, Any]", before),
+                cast("Mapping[str, Any]", after),
+                f"{prefix}{key}.",
+            )
+        elif before != after:
+            found.append(f"{prefix}{key}: {before} -> {after}")
+    return found
+
+
+def check_environment(
+    work: Path,
+    identity: Mapping[str, Any],
+    attempts: Sequence[Mapping[str, Any]],
+    *,
+    adopt_unstamped: bool,
+) -> dict[str, Any]:
+    """Hold the work directory to one environment, and return its ``environment.json``.
+
+    The file is written when the work begins, or once, with ``adopt_unstamped``, for a
+    ledger whose records were written before it recorded one; ``attempts`` is every
+    record the ledger holds.
+    """
+    digest = identity_digest(identity)
+    path = work / ENVIRONMENT
+    header: dict[str, Any] | None = json.loads(path.read_text()) if path.exists() else None
+    if header is not None and header.get("sha256") != digest:
+        changes = "; ".join(identity_differences(header.get("identity", {}), identity))
+        raise SystemExit(
+            f"{work} was begun under environment {str(header.get('sha256'))[:12]}, and this "
+            f"invocation's is {digest[:12]} ({changes}); resume it under the same "
+            "--python and inputs, or begin a new --work"
+        )
+    other = sorted(
+        {
+            str(record["key"])
+            for record in attempts
+            if record.get("environment_sha256") not in (None, digest)
+        }
+    )
+    if other:
+        raise SystemExit(f"{work}: runs recorded under another environment: {other}")
+    unstamped = sorted({str(r["key"]) for r in attempts if "environment_sha256" not in r})
+    if header is None:
+        if unstamped and not adopt_unstamped:
+            raise SystemExit(
+                f"{work}: {len(unstamped)} recorded runs carry no environment, since they "
+                "were written before the ledger recorded one; if they ran under this "
+                "--python, pass --adopt-unstamped once to record it for them"
+            )
+        header = {
+            "format": ENVIRONMENT_FORMAT,
+            "sha256": digest,
+            "identity": dict(identity),
+            "written_utc": datetime.now(UTC).isoformat(timespec="seconds"),
+            "adopted_unstamped": unstamped,
+        }
+        if unstamped:
+            header["adopted_basis"] = (
+                "asserted by the invocation that adopted them: these runs were launched "
+                "under the --python that gave this identity, before records carried it"
+            )
+        with atomic_output_file(path) as temporary:
+            temporary.write_text(json.dumps(header, indent=1) + "\n")
+        return header
+    late = sorted(set(unstamped) - set(header.get("adopted_unstamped", [])))
+    if late:
+        raise SystemExit(
+            f"{work}: runs without an environment were recorded after {ENVIRONMENT} was "
+            f"written, so an older driver wrote to this work directory: {late}"
+        )
+    return header
 
 
 def differing_keys(output: bytes, published: bytes) -> list[str]:
@@ -214,6 +364,65 @@ def differing_keys(output: bytes, published: bytes) -> list[str]:
     return [key for key in keys if ours.get(key) != theirs.get(key)]
 
 
+@dataclass
+class Children:
+    """The process groups of the running children, so a stopping driver can end them.
+
+    A child is listed from its start until it has exited and before it is reaped, and
+    every kill is made under the lock, so no kill can reach a process that took a reaped
+    child's pid.
+    """
+
+    groups: set[int] = field(default_factory=set[int])
+    #: Re-entrant, since the SIGTERM handler kills from the main thread.
+    lock: threading.RLock = field(default_factory=threading.RLock)
+    stopping: threading.Event = field(default_factory=threading.Event)
+
+    def discard(self, pid: int) -> None:
+        with self.lock:
+            self.groups.discard(pid)
+
+    def kill(self, pid: int) -> None:
+        """Kill one child's process group, if it has not exited."""
+        with self.lock:
+            if pid in self.groups:
+                _killpg(pid)
+
+    def kill_all(self) -> None:
+        """Mark the driver stopping and kill every running child's process group."""
+        self.stopping.set()
+        with self.lock:
+            for group in sorted(self.groups):
+                _killpg(group)
+
+
+def _killpg(group: int) -> None:
+    with contextlib.suppress(OSError):
+        os.killpg(group, signal.SIGKILL)
+
+
+def hold_cpu(pid: int, seconds: float) -> bool:
+    """Hold a child to ``seconds`` of CPU by ``RLIMIT_CPU``, where the platform allows."""
+    limit = getattr(resource, "prlimit", None)
+    if limit is None:
+        return False
+    soft = max(1, int(seconds))
+    try:
+        limit(pid, resource.RLIMIT_CPU, (soft, soft + 5))
+    except OSError, ValueError:
+        return False
+    return True
+
+
+def attempt_directory(work: Path, run: Run) -> Path:
+    """A directory no other attempt uses; earlier attempts' directories are removed."""
+    parent = work / "runs" / run.key
+    if parent.exists():
+        shutil.rmtree(parent)
+    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+    return parent / f"attempt-{stamp}-{os.getpid()}-{uuid.uuid4().hex[:8]}"
+
+
 def execute(
     run: Run,
     *,
@@ -222,12 +431,18 @@ def execute(
     work: Path,
     release: Release,
     timeout: float,
+    cpu_limit: float | None = None,
     minpoly_dir: Path = MINPOLY_DIR,
+    children: Children | None = None,
 ) -> dict[str, Any]:
-    """Run gradec.py once in a fresh directory and judge what it wrote."""
-    directory = work / "runs" / run.key
-    if directory.exists():
-        shutil.rmtree(directory)
+    """Run gradec.py once in a fresh directory and judge what it wrote.
+
+    The child is held to ``timeout`` seconds of wall time and to ``cpu_limit`` seconds of
+    CPU (``timeout`` unless given), and runs in a session of its own, whose group is
+    killed at either limit.
+    """
+    cpu_limit = timeout if cpu_limit is None else cpu_limit
+    directory = attempt_directory(work, run)
     cwd = directory / "cwd"
     cwd.mkdir(parents=True)
     base = directory / f"n-{run.n}"
@@ -245,22 +460,22 @@ def execute(
     started = datetime.now(UTC)
     wall = time.monotonic()
     with log_path.open("w") as log:
-        process = subprocess.Popen(
+        status, usage, cpu_held = _supervise(
             [python, "-E", "-s", str(modules / "gradec.py"), str(base)],
             cwd=cwd,
             env=env,
-            stdout=log,
-            stderr=subprocess.STDOUT,
+            log=log,
+            timeout=timeout,
+            cpu_limit=cpu_limit,
+            children=children,
         )
-        timer = threading.Timer(timeout, process.kill)
-        timer.start()
-        try:
-            _, status, usage = os.wait4(process.pid, 0)
-        finally:
-            timer.cancel()
-        process.returncode = os.waitstatus_to_exitcode(status)
+    exit_code = os.waitstatus_to_exitcode(status)
     wall_seconds = time.monotonic() - wall
-    timed_out = wall_seconds >= timeout and process.returncode != 0
+    cpu_seconds = usage.ru_utime + usage.ru_stime
+    timed_out = wall_seconds >= timeout and exit_code != 0
+    cpu_limited = exit_code in (-signal.SIGXCPU, -signal.SIGKILL) and (
+        cpu_seconds >= cpu_limit - 1
+    )
     text = log_path.read_text(errors="replace")
     lines = [line for line in text.splitlines() if line.strip()]
     output_path = Path(f"{base}.gradec.json")
@@ -272,18 +487,22 @@ def execute(
         "env": run.env,
         "started_utc": started.isoformat(timespec="seconds"),
         "wall_seconds": round(wall_seconds, 1),
-        "cpu_seconds": round(usage.ru_utime + usage.ru_stime, 1),
+        "cpu_seconds": round(cpu_seconds, 1),
         "max_rss_mb": round(usage.ru_maxrss / 1024, 1),
-        "exit_code": process.returncode,
+        "exit_code": exit_code,
         "timed_out": timed_out,
+        "cpu_limit_seconds": cpu_limit if cpu_held else None,
+        "cpu_limited": cpu_limited,
+        "attempt": directory.name,
         "last_lines": [line.replace(str(directory), "WORK") for line in lines[-TAIL_LINES:]],
     }
     if run.control:
         refused = (
-            process.returncode != 0
+            exit_code != 0
             and output is None
             and "AssertionError" in text
             and not timed_out
+            and not cpu_limited
         )
         record["refused"] = refused
         record["passed"] = refused
@@ -299,35 +518,230 @@ def execute(
     theirs = normalized_log(release.logs[run.n], f"minpoly/solve/n-{run.n}", run.n)
     record["log_matches_release"] = ours == theirs
     record["release_build_seconds"] = release_seconds(release.logs[run.n])
-    record["passed"] = process.returncode == 0 and identical and bool(record["valid"])
+    record["passed"] = exit_code == 0 and identical and bool(record["valid"])
     return record
 
 
-def load_records(path: Path) -> dict[str, dict[str, Any]]:
-    """The runs a previous invocation finished, by key; a torn last line is ignored."""
-    records: dict[str, dict[str, Any]] = {}
+def _supervise(
+    command: list[str],
+    *,
+    cwd: Path,
+    env: Mapping[str, str],
+    log: TextIO,
+    timeout: float,
+    cpu_limit: float,
+    children: Children | None,
+) -> tuple[int, resource.struct_rusage, bool]:
+    """Start the child in a session of its own, hold it to both limits, and reap it.
+
+    It is waited for without being reaped first, and delisted before it is reaped, so
+    the wall timer and a stopping driver kill only while its pid is still its own.
+    """
+    children = Children() if children is None else children
+    with children.lock:
+        process = subprocess.Popen(
+            command,
+            cwd=cwd,
+            env=dict(env),
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
+        children.groups.add(process.pid)
+    cpu_held = hold_cpu(process.pid, cpu_limit)
+    timer = threading.Timer(timeout, children.kill, args=(process.pid,))
+    timer.start()
+    try:
+        if children.stopping.is_set():
+            children.kill(process.pid)
+        os.waitid(os.P_PID, process.pid, os.WEXITED | os.WNOWAIT)
+    finally:
+        timer.cancel()
+        children.discard(process.pid)
+    _, status, usage = os.wait4(process.pid, 0)
+    process.returncode = os.waitstatus_to_exitcode(status)
+    return status, usage, cpu_held
+
+
+# ---------------------------------------------------------------------------- the ledger
+
+
+def repair_torn_tail(path: Path) -> bool:
+    """Cut a torn last line (no newline: a driver killed mid-write) before appending."""
     if not path.exists():
-        return records
-    for line in path.read_text().splitlines():
+        return False
+    data = path.read_bytes()
+    if not data or data.endswith(b"\n"):
+        return False
+    with path.open("r+b") as handle:
+        handle.truncate(data.rfind(b"\n") + 1)
+    return True
+
+
+def load_attempts(path: Path) -> list[dict[str, Any]]:
+    """Every record the ledger holds, in order; a torn last line is ignored.
+
+    An unreadable line anywhere else is refused, since it means the ledger was damaged
+    and its records cannot be trusted to be what ran.
+    """
+    if not path.exists():
+        return []
+    text = path.read_text()
+    lines = text.splitlines()
+    attempts: list[dict[str, Any]] = []
+    for number, line in enumerate(lines, start=1):
         try:
             record = json.loads(line)
         except ValueError:
-            continue
-        records[record["key"]] = record
-    return records
+            if number == len(lines) and not text.endswith("\n"):
+                continue
+            raise SystemExit(f"{path}:{number}: not a record; the ledger is damaged") from None
+        if not isinstance(record, dict) or "key" not in record:
+            raise SystemExit(f"{path}:{number}: not a record; the ledger is damaged")
+        attempts.append(cast("dict[str, Any]", record))
+    return attempts
+
+
+def load_records(path: Path) -> dict[str, dict[str, Any]]:
+    """The runs a previous invocation finished, by key, the last attempt of each."""
+    return {str(record["key"]): record for record in load_attempts(path)}
+
+
+@contextlib.contextmanager
+def locked(work: Path) -> Iterator[None]:
+    """Hold ``WORK/lock`` for the invocation, refusing a second one."""
+    path = work / LOCK
+    with path.open("a+") as handle:
+        try:
+            fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            handle.seek(0)
+            holder = handle.read().strip() or "another invocation"
+            raise SystemExit(f"{work} is in use ({holder}); one invocation at a time") from None
+        handle.seek(0)
+        handle.truncate()
+        handle.write(f"pid {os.getpid()}, since {datetime.now(UTC).isoformat()}\n")
+        handle.flush()
+        try:
+            yield
+        finally:
+            fcntl.flock(handle, fcntl.LOCK_UN)
+
+
+@dataclass
+class Budget:
+    """The CPU cap, counting the worst case of each run still going (``reserved``)."""
+
+    cap: float
+    worst: float
+    spent: float = 0.0
+    reserved: float = 0.0
+    condition: threading.Condition = field(default_factory=threading.Condition)
+
+    def admit(self) -> bool:
+        """Reserve a run's worst case, waiting while running runs hold the room it needs.
+
+        False once it cannot fit even with nothing else running.
+        """
+        with self.condition:
+            while self.spent + self.reserved + self.worst > self.cap:
+                if self.reserved == 0:
+                    return False
+                self.condition.wait()
+            self.reserved += self.worst
+            return True
+
+    def release(self, cpu_seconds: float) -> None:
+        with self.condition:
+            self.reserved -= self.worst
+            self.spent += cpu_seconds
+            self.condition.notify_all()
+
+
+def run_all(
+    runs: Sequence[Run],
+    records: dict[str, dict[str, Any]],
+    *,
+    start: Callable[[Run], dict[str, Any]],
+    budget: Budget,
+    jobs: int,
+    append: Callable[[dict[str, Any]], None],
+    children: Children,
+    retry_failed: bool = False,
+) -> list[str]:
+    """Run every run the ledger has not finished, within the budget; the keys not started.
+
+    A run is recorded only if the driver is not stopping, so a run killed by a stopping
+    driver runs again on resume.
+    """
+    lock = threading.Lock()
+    not_started: list[str] = []
+
+    def perform(run: Run) -> None:
+        with lock:
+            done = records.get(run.key)
+        if children.stopping.is_set() or (
+            done is not None and (done.get("passed") or not retry_failed)
+        ):
+            return
+        if not budget.admit():
+            with lock:
+                not_started.append(run.key)
+            return
+        if children.stopping.is_set():
+            budget.release(0.0)
+            return
+        cpu = 0.0
+        try:
+            record = start(run)
+            cpu = float(record["cpu_seconds"])
+        finally:
+            budget.release(cpu)
+        if children.stopping.is_set():
+            return
+        with lock:
+            records[run.key] = record
+            append(record)
+        print(
+            f"{run.key}: passed={record['passed']} cpu={record['cpu_seconds']}s "
+            f"wall={record['wall_seconds']}s",
+            flush=True,
+        )
+
+    pool = ThreadPoolExecutor(max_workers=jobs)
+    try:
+        list(pool.map(perform, runs))
+    finally:
+        # Nothing runs once the map has finished; on an interruption this ends the
+        # children first, since the pool's shutdown waits for them.
+        children.kill_all()
+        pool.shutdown(wait=True, cancel_futures=True)
+    return sorted(not_started)
 
 
 def summarize(
     runs: Sequence[Run],
     records: Mapping[str, Mapping[str, Any]],
     header: Mapping[str, Any],
+    attempts: Sequence[Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """The receipt: the header, the totals and every run's record, controls first."""
+    """The receipt: the header, the totals and every run's record, controls first.
+
+    ``attempts``, every record the ledger holds, counts the CPU of attempts a retry
+    superseded; without it the records are taken to be every attempt.
+    """
     ordered = [records[run.key] for run in runs if run.key in records]
     controls = [record for record in ordered if record["control"]]
     replays = sorted((r for r in ordered if not r["control"]), key=lambda r: r["n"])
     expected = sum(1 for run in runs if not run.control)
     starts = [record["started_utc"] for record in ordered]
+    keys = {run.key for run in runs}
+    every = (
+        list(ordered)
+        if attempts is None
+        else [record for record in attempts if record["key"] in keys]
+    )
+    superseded = len(every) - len(ordered)
     return {
         **header,
         "complete": len(ordered) == len(runs),
@@ -340,11 +754,13 @@ def summarize(
             ),
             "logs_match_release": sum(1 for r in replays if r.get("log_matches_release")),
             "timed_out": sorted(r["n"] for r in replays if r.get("timed_out")),
+            "cpu_limited": sorted(r["n"] for r in replays if r.get("cpu_limited")),
             "failed": sorted(r["n"] for r in replays if not r["passed"]),
             "controls_refused": sum(1 for r in controls if r["passed"]),
             "controls_run": len(controls),
-            "cpu_seconds_total": round(sum(float(r["cpu_seconds"]) for r in ordered), 1),
+            "cpu_seconds_total": round(sum(float(r["cpu_seconds"]) for r in every), 1),
             "cpu_seconds_replays": round(sum(float(r["cpu_seconds"]) for r in replays), 1),
+            "superseded_attempts": superseded,
             "release_build_seconds_total": round(
                 sum(float(r.get("release_build_seconds") or 0.0) for r in replays), 1
             ),
@@ -357,17 +773,21 @@ def summarize(
 
 
 def write_receipt(path: Path, receipt: Mapping[str, Any]) -> None:
-    """Indented JSON with each run's record on one line, so a diff reads by run."""
+    """Indented JSON with each run's record on one line, so a diff reads by run.
+
+    Written to a sibling and renamed into place, so a reader never sees half a receipt.
+    """
     head = {key: value for key, value in receipt.items() if key not in ("controls", "replays")}
     text = json.dumps(head, indent=2)[:-2]
     for name in ("controls", "replays"):
         rows = ",\n".join("    " + json.dumps(record) for record in receipt[name])
         text += f',\n  "{name}": [\n{rows}\n  ]'
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text + "\n}\n")
+    with atomic_output_file(path) as temporary:
+        temporary.write_text(text + "\n}\n")
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def _arguments(argv: Sequence[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
     parser.add_argument(
         "--python", required=True, help="interpreter of the author's pinned environment"
@@ -380,7 +800,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--out", type=Path, required=True, help="the receipt JSON to write")
     parser.add_argument("--jobs", type=int, default=2)
-    parser.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT)
+    parser.add_argument(
+        "--timeout",
+        type=float,
+        default=DEFAULT_TIMEOUT,
+        help="each run's wall limit, and its CPU limit and worst case against the cap",
+    )
     parser.add_argument("--cpu-cap-hours", type=float, default=DEFAULT_CPU_CAP_HOURS)
     parser.add_argument(
         "--counts", type=int, nargs="*", default=None, help="replay only these counts"
@@ -388,8 +813,24 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--no-controls", action="store_true", help="skip the three rejection tests"
     )
-    args = parser.parse_args(argv)
+    parser.add_argument(
+        "--retry-failed",
+        action="store_true",
+        help="run again each recorded run that failed; the ledger keeps both attempts",
+    )
+    parser.add_argument(
+        "--adopt-unstamped",
+        action="store_true",
+        help=(
+            "once, for a ledger written before records carried their environment: record "
+            "this --python's environment for those runs, which must have run under it"
+        ),
+    )
+    return parser.parse_args(argv)
 
+
+def main(argv: Sequence[str] | None = None) -> int:
+    args = _arguments(argv)
     work = args.work.resolve()
     if work.is_relative_to(REPO):
         raise SystemExit("--work must be outside the repository")
@@ -404,21 +845,33 @@ def main(argv: Sequence[str] | None = None) -> int:
     runs = schedule(counts, release)
     if args.no_controls:
         runs = [run for run in runs if not run.control]
+    with locked(work):
+        return _replay(args, work, release, runs)
+
+
+def _replay(args: argparse.Namespace, work: Path, release: Release, runs: list[Run]) -> int:
     modules = work / "modules"
     copy_modules(modules)
-    ledger = work / "runs.jsonl"
-    records = load_records(ledger)
-    lock = threading.Lock()
-    cap = args.cpu_cap_hours * 3600
+    versions = interpreter_versions(args.python)
+    identity = environment_identity(versions, modules)
+    ledger = work / LEDGER
+    if repair_torn_tail(ledger):
+        print(f"{ledger}: cut a torn last line", flush=True)
+    attempts = load_attempts(ledger)
+    environment = check_environment(
+        work, identity, attempts, adopt_unstamped=args.adopt_unstamped
+    )
+    digest = environment["sha256"]
+    records = {str(record["key"]): record for record in attempts}
     started = datetime.now(UTC)
+    children = Children()
+    budget = Budget(
+        cap=args.cpu_cap_hours * 3600,
+        worst=args.timeout,
+        spent=sum(float(record["cpu_seconds"]) for record in attempts),
+    )
 
-    def spent() -> float:
-        return sum(float(record["cpu_seconds"]) for record in records.values())
-
-    def perform(run: Run) -> None:
-        with lock:
-            if run.key in records or spent() >= cap:
-                return
+    def start(run: Run) -> dict[str, Any]:
         record = execute(
             run,
             python=args.python,
@@ -426,47 +879,79 @@ def main(argv: Sequence[str] | None = None) -> int:
             work=work,
             release=release,
             timeout=args.timeout,
+            children=children,
         )
-        with lock:
-            records[run.key] = record
-            with ledger.open("a") as handle:
-                handle.write(json.dumps(record) + "\n")
-        print(
-            f"{run.key}: passed={record['passed']} cpu={record['cpu_seconds']}s "
-            f"wall={record['wall_seconds']}s",
-            flush=True,
-        )
+        return {**record, "environment_sha256": digest}
 
-    with ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        list(pool.map(perform, runs))
+    def append(record: dict[str, Any]) -> None:
+        attempts.append(record)
+        with ledger.open("a") as handle:
+            handle.write(json.dumps(record) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+
+    def stop(signum: int, _frame: object) -> None:
+        children.kill_all()
+        raise SystemExit(128 + signum)
+
+    previous = signal.signal(signal.SIGTERM, stop)
+    try:
+        not_started = run_all(
+            runs,
+            records,
+            start=start,
+            budget=budget,
+            jobs=args.jobs,
+            append=append,
+            children=children,
+            retry_failed=args.retry_failed,
+        )
+    finally:
+        signal.signal(signal.SIGTERM, previous)
+    for key in not_started:
+        print(f"{key}: not started, its worst case would pass the CPU cap", flush=True)
+    if identity_digest(environment_identity(interpreter_versions(args.python), modules)) != (
+        digest
+    ):
+        raise SystemExit("the environment changed during the invocation; no receipt written")
     header = {
-        "format": "evand-gradec-replay/1",
+        "format": RECEIPT_FORMAT,
         "route": "same-implementation",
         "bead": "think-mtah",
         "last_invocation": {
             "started_utc": started.isoformat(timespec="seconds"),
             "finished_utc": datetime.now(UTC).isoformat(timespec="seconds"),
+            "not_started_for_the_cap": not_started,
         },
         "program": {
             "retained": str(SCRIPTS_DIR.relative_to(REPO)),
             "modules": list(MODULES),
+            "modules_sha256": identity["modules_sha256"],
             "upstream_revision": UPSTREAM_REVISION,
             "ran_from": "a fresh copy of the four modules outside the repository",
         },
         "inputs": {
             "archive": str(ARCHIVE.relative_to(REPO)),
+            "archive_sha256": identity["archive_sha256"],
             "exact_forms": str(MINPOLY_DIR.relative_to(REPO)),
             "counts": str(COUNTS_FILE.relative_to(REPO)),
             "dropzero": sorted(DROPZERO),
         },
         "environment": {
-            **interpreter_versions(args.python),
+            **versions,
+            "identity_sha256": digest,
+            "adopted_unstamped": environment.get("adopted_unstamped", []),
             "packages_source": "env.sh's pins, installed into a fresh virtual environment",
             "flags": "-E -s, an empty working directory, the input path as the argument",
             "threads": "OPENBLAS_NUM_THREADS=1, OMP_NUM_THREADS=1, as env.sh sets",
             "machine": {"cpus": os.cpu_count(), "jobs": args.jobs, "niceness": os.nice(0)},
             "timeout_seconds": args.timeout,
             "cpu_cap_hours": args.cpu_cap_hours,
+            "cap_rule": (
+                "a run starts only if the recorded CPU, the worst case of every run still "
+                "going and its own stay within the cap; each run's worst case is its "
+                "timeout, held by RLIMIT_CPU and the wall timer"
+            ),
         },
         "comparison": (
             "each certificate byte for byte with the archive's n-N.gradec.json; each log, "
@@ -474,7 +959,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "with the archive's n-N.log (n-N.dropzero.log at 230 and 261)"
         ),
     }
-    receipt = summarize(runs, records, header)
+    receipt = summarize(runs, records, header, attempts)
     write_receipt(args.out, receipt)
     summary = receipt["summary"]
     print(json.dumps(summary))
