@@ -947,8 +947,9 @@ the claim documents are not regenerated for an intake either.
 A paper or the posters still take their own cut, or a no-change record, when the import
 changes what they print.
 **A no-change record is a new file, never an entry in `release.py`**:
-`packing/release-records/no-public-change/<YYYY-MM-DD>-<slug>.yaml`, named for the day
-and the lane, so parallel lanes’ records merge without touching one hunk
+`packing/release-records/no-public-change/<YYYY-MM-DD>-<lane or bead>-<topic>.yaml`,
+named for the day and the lane, so parallel lanes’ records merge without touching one
+hunk
 ([Maintaining the project changelog](../../development.md#maintaining-the-project-changelog);
 think-nrp6).
 

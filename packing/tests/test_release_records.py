@@ -10,6 +10,7 @@ branches merging clean.
 
 from __future__ import annotations
 
+import datetime
 import os
 import subprocess
 from pathlib import Path
@@ -182,13 +183,77 @@ def test_migration_keeps_every_record_in_order_and_removes_the_tuple(tmp_path: P
     assert release_records.load(repo.root) == records
 
 
-def test_migration_refuses_to_overwrite_a_different_record(tmp_path: Path) -> None:
+DAY = datetime.date(2026, 11, 2)
+
+
+def _branch_from_an_older_main(
+    tmp_path: Path,
+) -> tuple[Checkout, tuple[release.ReleaseNoPublicChange, ...]]:
+    """Main after the move holds A, B and C as files. A branch cut before it kept its own
+    tuple, whose order main later changed: C before A, no B, and the lane's own record."""
+    held = (_record("Record A."), _record("Record B."), _record("Record C."))
     repo = Checkout(tmp_path)
-    repo.write(gate.RELEASE_PATH, _literal((_record("The tuple's record."),)))
-    repo.add_record("0000-result-requests.yaml", _record("A different record."))
-    with pytest.raises(ValueError, match="already holds a different record"):
-        release_records.migrate(repo.root)
+    for index, record in enumerate(held):
+        repo.add_record(f"{index:04d}-result-requests.yaml", record)
+    repo.write(gate.RELEASE_PATH, _literal((held[2], held[0], _record("The lane's record."))))
+    return repo, held
+
+
+def test_migration_on_a_tree_with_records_moves_only_what_the_files_lack(
+    tmp_path: Path,
+) -> None:
+    """Review A of #873, finding 2: a branch whose tuple was cut from an older main, as
+    #599's and #744's were, has indexes that no longer line up. Its records are matched by
+    value, so the ones main holds are dropped wherever they sit, and only the lane's own is
+    written, under a dated name."""
+    repo, held = _branch_from_an_older_main(tmp_path)
+
+    written = release_records.migrate(repo.root, slug="l99-think-test", day=DAY)
+
+    assert [path.name for path in written] == ["2026-11-02-l99-think-test.yaml"]
+    assert release_records.load(repo.root) == (*held, _record("The lane's record."))
+    assert "RELEASE_NO_PUBLIC_CHANGES" not in (repo.root / gate.RELEASE_PATH).read_text()
+
+
+def test_migration_on_a_tree_with_records_needs_a_slug_and_says_how(tmp_path: Path) -> None:
+    repo, held = _branch_from_an_older_main(tmp_path)
+    with pytest.raises(ValueError, match="1 of the tuple's 3 records") as refusal:
+        release_records.migrate(repo.root, day=DAY)
+    assert "--slug" in str(refusal.value)
+    assert release_records.load(repo.root) == held
     assert "RELEASE_NO_PUBLIC_CHANGES" in (repo.root / gate.RELEASE_PATH).read_text()
+
+
+def test_migration_of_a_tuple_the_files_already_hold_writes_nothing(tmp_path: Path) -> None:
+    repo, held = _branch_from_an_older_main(tmp_path)
+    repo.write(gate.RELEASE_PATH, _literal((held[1], held[0])))
+    assert release_records.migrate(repo.root, day=DAY) == ()
+    assert release_records.load(repo.root) == held
+    assert "RELEASE_NO_PUBLIC_CHANGES" not in (repo.root / gate.RELEASE_PATH).read_text()
+
+
+def test_migration_refuses_to_overwrite_a_different_record(tmp_path: Path) -> None:
+    repo, held = _branch_from_an_older_main(tmp_path)
+    repo.add_record("2026-11-02-l99-think-test.yaml", _record("Another lane's record."))
+    with pytest.raises(ValueError, match="already holds a different record"):
+        release_records.migrate(repo.root, slug="l99-think-test", day=DAY)
+    assert "RELEASE_NO_PUBLIC_CHANGES" in (repo.root / gate.RELEASE_PATH).read_text()
+    assert len(release_records.load(repo.root)) == len(held) + 1
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "0000-result-requests.yaml",
+        "0246-result-requests.yaml",
+        "2026-11-02-l17-think-nrp6.yaml",
+    ],
+)
+def test_a_dated_or_migrated_name_is_accepted(tmp_path: Path, name: str) -> None:
+    directory = tmp_path / release_records.DIRECTORY
+    directory.mkdir(parents=True)
+    (directory / name).write_text(release_records.render(_record("Fine.")), encoding="utf-8")
+    assert release_records.load(tmp_path) == (_record("Fine."),)
 
 
 @pytest.mark.parametrize(
@@ -196,6 +261,39 @@ def test_migration_refuses_to_overwrite_a_different_record(tmp_path: Path) -> No
     [
         ("2026-11-01-lane.yml", None, "name a record"),
         ("Lane A.yaml", None, "name a record"),
+        # Review A of #873, finding 1: a lane copying the listing's last name would write
+        # 0247-result-requests.yaml, and two lanes doing so collide; the numbered names are
+        # the 247 records the move wrote, and every later record is dated.
+        ("0247-result-requests.yaml", None, "a new record is dated"),
+        ("9999-zzz.yaml", None, "a new record is dated"),
+        ("2026-99-99-not-a-date.yaml", None, "not a calendar date"),
+        ("2026-02-30-l17-lane.yaml", None, "not a calendar date"),
+        # Finding 5: the schema refuses what the gate would refuse anyway, so `check` says so.
+        (
+            "2026-11-01-lane.yaml",
+            "components: []\npaths: [b]\noutputs: [c]\nreason: r\n",
+            "components",
+        ),
+        (
+            "2026-11-01-lane.yaml",
+            "components: [a, a]\npaths: [b]\noutputs: [c]\nreason: r\n",
+            "components",
+        ),
+        (
+            "2026-11-01-lane.yaml",
+            "components: [a]\npaths: ['']\noutputs: [c]\nreason: r\n",
+            "paths",
+        ),
+        (
+            "2026-11-01-lane.yaml",
+            "components: [a]\npaths: [b]\noutputs: [c]\nreason: ''\n",
+            "reason",
+        ),
+        (
+            "2026-11-01-lane.yaml",
+            "components: [a]\npaths: [b]\noutputs: [c]\nreason: ' r'\n",
+            "reason",
+        ),
         ("2026-11-01-lane.yaml", "components: [a]\npaths: [b]\noutputs: [c]\n", "reason"),
         (
             "2026-11-01-lane.yaml",
@@ -264,8 +362,9 @@ def test_the_repository_records_load_and_release_py_keeps_no_tuple() -> None:
     records = release_records.load()
     directory = release_records.REPO / release_records.DIRECTORY
     names = sorted(path.name for path in directory.iterdir())
-    assert len(records) == len(names) >= 246
-    assert names[0].startswith("0000-")
+    assert len(records) == len(names) >= release_records.MIGRATED == 247
+    numbered = [name for name in names if not name.startswith("20")]
+    assert [name[:4] for name in numbered] == [f"{index:04d}" for index in range(247)]
     fields = gate._assignments(Path(release.__file__).read_bytes())  # noqa: SLF001
     assert "RELEASE_NO_PUBLIC_CHANGES" not in fields
     assert not hasattr(release, "RELEASE_NO_PUBLIC_CHANGES")

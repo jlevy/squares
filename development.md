@@ -2198,15 +2198,24 @@ producer-owned inputs against the comparison merge base and requires a dispositi
 each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
 review naming the exact changed paths, outputs examined and reason.
 **A no-change review is a file of its own**, never an entry in `release.py`: write it as
-`packing/release-records/no-public-change/<YYYY-MM-DD>-<slug>.yaml`, dated the day it is
-written, with `components`, `paths`, `outputs` and `reason`, and copy the shape of any
-record there. `no-public-change.schema.yaml` beside the directory is the contract, and
+`packing/release-records/no-public-change/<YYYY-MM-DD>-<lane or bead>-<topic>.yaml`,
+such as `2026-11-02-l16-think-r94q-survey.yaml`. Use the real date it is written and the
+lane or bead that writes it, so that two lanes on one day cannot choose the same name.
+Give it `components`, `paths`, `outputs` and `reason`, and copy the shape of any record
+there. `no-public-change.schema.yaml` beside the directory is the contract, and
 `python -m devtools.release_records check` reads every record.
+`0000-` to `0246-` are the records moved from the tuple, and the gate refuses any other
+numbered name. The records are append-only: the gate refuses a head that deletes or
+rewrites a record its base holds, so a later finding is a new record.
 The records were one tuple at the end of `release.py` until 1 November 2026, and every
 two open records pull requests conflicted there at each merge of `main`: 64 of the 174
 merges in the week before, across 33 pull requests (think-nrp6). As files, two additions
 are two new paths and merge cleanly; `devtools.release_records` says why a union merge
 driver was refused, and the gate refuses a tuple put back.
+A branch cut before the move meets one conflict there at its next merge of `main`. Keep
+its side, then run `python -m devtools.release_records migrate --slug <lane or
+bead>-<topic>` from `packing/`. That writes only the records the files lack, as dated
+files, matching by value since the tuple’s indexes shifted, and deletes the tuple.
 The site is never a candidate: it deploys continuously from `main`, so a change only the
 site reads needs no disposition.
 The gate refuses any edit to the frozen `PUBLICATION_HISTORY` and

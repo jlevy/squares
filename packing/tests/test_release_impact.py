@@ -523,7 +523,11 @@ def test_moving_the_tuple_into_record_files_leaves_nothing_fresh_and_nothing_to_
         assert report.errors == ()
     altered = written[1]
     altered.write_text(altered.read_text().replace("A second", "An altered second"))
-    assert any("without candidate changes" in error for error in repo.inspect().errors)
+    errors = repo.inspect().errors
+    assert any("without candidate changes" in error for error in errors)
+    # The tuple's entry the move altered is gone from the head, which the gate refuses.
+    removed = f"{gate.RELEASE_PATH} {release_records.TUPLE}[1]: {gate.RECORD_REMOVED}"
+    assert removed in errors
 
 
 def test_a_tuple_added_back_to_release_py_is_refused_with_the_remedy(
@@ -540,7 +544,69 @@ def test_a_tuple_added_back_to_release_py_is_refused_with_the_remedy(
     report = repo.inspect()
     assert gate.TUPLE_MOVED in report.errors
     assert release_records.DIRECTORY in gate.TUPLE_MOVED
+    assert "python -m devtools.release_records migrate --slug" in gate.TUPLE_MOVED
     assert any(f"{PAPER}: candidate public inputs" in error for error in report.errors)
+
+
+def _retained_record(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[Repository, Path, str]:
+    """A base whose one record reviewed a change, and a head changing that input again."""
+    repo = Repository(tmp_path, monkeypatch)
+    paper_path = repo.inputs[PAPER][0]
+    repo.write(paper_path, "A paper change the record found invisible.\n")
+    repo.exempt((PAPER,), (paper_path,), "Reviewed at the base")
+    repo.base = repo.commit("the base's reviewed record")
+    repo.git("update-ref", "refs/remotes/origin/main", repo.base)
+    repo.write(paper_path, "A later paper change.\n")
+    record = repo.root / release_records.DIRECTORY / "0000-fixture.yaml"
+    return repo, record, f"{release_records.DIRECTORY}/0000-fixture.yaml"
+
+
+def test_a_record_the_base_holds_cannot_be_deleted(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review A of #873, finding 3: the records are append-only. Main never dropped one,
+    and the project has no supersession for them, so a deletion is refused outright."""
+    repo, record, where = _retained_record(tmp_path, monkeypatch)
+    record.unlink()
+    report = repo.inspect()
+    deleted = [error for error in report.errors if "append-only" in error]
+    assert deleted == [f"{where}: {gate.RECORD_REMOVED}"]
+
+
+def test_a_record_the_base_holds_cannot_be_rewritten_to_cover_a_new_change(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A rewrite reads as the old record gone and a fresh one in its place: the fresh one
+    would exempt the head's change, so the removal is what refuses it."""
+    repo, record, where = _retained_record(tmp_path, monkeypatch)
+    record.write_text(record.read_text().replace("at the base", "again, now"))
+    report = repo.inspect()
+    assert PAPER in report.exempt_components
+    assert f"{where}: {gate.RECORD_REMOVED}" in report.errors
+    # A record the head adds beside it, as re-measuring does in its own PR, is untouched.
+    record.write_text(record.read_text().replace("again, now", "at the base"))
+    repo.write(
+        f"{release_records.DIRECTORY}/2026-11-02-l99-again.yaml",
+        release_records.render(repo.no_changes[0]._replace(reason="Reviewed again")),
+    )
+    assert repo.inspect().errors == ()
+
+
+def test_a_fresh_record_error_names_its_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Finding 4: each record is a file, so its refusal says which."""
+    repo = Repository(tmp_path, monkeypatch)
+    path = repo.inputs[PAPER][0]
+    repo.write(path, "A candidate paper-body change.\n")
+    repo.exempt((PAPER,), ("articles/not-the-changed-input.md",))
+    report = repo.inspect()
+    assert (
+        f"{release_records.DIRECTORY}/0000-fixture.yaml: fresh no-public-change paths "
+        "must exactly name candidate inputs"
+    ) in report.errors
 
 
 def test_fresh_about_only_review_exempts_papers_on_broad_inputs(
@@ -570,7 +636,6 @@ def test_old_and_incomplete_reviews_do_not_excuse_new_changes(
     repo.git("update-ref", "refs/remotes/origin/main", baseline)
     repo.write(paper_path, "A new paper-body delta after the old review.\n")
     assert any(PAPER in error for error in repo.inspect().errors)
-    repo.no_changes.clear()
     repo.exempt((PAPER,), (paper_path,), "Fresh review of this body's output")
     repo.write("shared.css", "body { color: blue; }\n")
     report = repo.inspect()
