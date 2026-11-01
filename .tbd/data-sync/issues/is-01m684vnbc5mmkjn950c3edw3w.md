@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 63
+version: 64
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -41,7 +41,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T20:03:39.786Z
+updated_at: 2026-11-01T20:55:05.077Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -107,3 +107,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-01 18:53: renewal. Sweep intake15: one item, the #847 read, already in #870. No new issues since 17:50Z. Gradec replay 13/236 runs. L15 (#804 reply) and the #870 lemma review are running.
 
 2026-11-01 19:53: renewal. Merged #871 (bb005c9a4): #804 confirmation posted 19:05Z after the b02ca7f7a deploy verified (6,035/6,035) and recorded. Coordinator slip: closed think-8r92 (#804 answer bead, still named on main) despite --before-close HOLD (commands chained with ; not &&); reopened at once, check_bead_tree ok on main. Sweep intake16: one item, the #847 read, in #870. #870 addressing pass (both reviews) running. Gradec replay 19/236, 0 failures.
+
+2026-11-01 20:53: renewal. Merged #870 (ea5b27c95): W9 filled-end checker, all 5,134 V2.0 + 4,571 V1.0 rows decided by the lemma (18 controls/row), lemma accepted at stage 4; no rows recorded (think-llit, D4, Q-847a); think-fuwd closed after --before-close. Lanes: L16 posts #847 reply after deploy (think-r94q stays open); L17 efficiency block think-nrp6 (release.py append conflicts). Sweep intake17: 0 items needing action. Gradec replay 33/236, 0 failures. think-4z8z stays gated on the owner (think-ikku / RV-3, RV-4).
