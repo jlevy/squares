@@ -1607,6 +1607,18 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_a_sample_count_replays_as_its_receipt_states",
             "test_every_written_out_certificate_has_the_digest_its_receipt_states",
         },
+        # 1,175.7s of call time across 4 on 2026-11-01 (think-fuwd, W9), locally on a
+        # shared four-core host with two workers: every certificate of #847's V2.0 (5,134,
+        # 581.04s) and V1.0 (4,571, 546.31s) written out again to the digests its receipt
+        # names; V1.0's receipt read back, every decision and control derived again
+        # (24.68s); and 1188's written-out certificate decided on both maintained exact
+        # routes with its six controls (23.18s). V2.0's receipts, every refusal and control
+        # and both deposits' sample digests stay on the pull-request surface.
+        "test_filled_end_checker.py": {
+            "test_a_sample_count_replays_as_its_receipt_states",
+            "test_every_written_out_certificate_has_the_digest_its_receipt_states",
+            "test_v1_s_receipt_holds",
+        },
         # Full run 38756833833, head 15548357, measured only these complete reads.
         # The plan's #593/#70a cases cost 23.91s/14.92s; its other parameters stay quick.
         # #593's full comparison cost 12.76s. Fresh local #593 plan CALL was 18.18s.
