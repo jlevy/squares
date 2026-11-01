@@ -257,7 +257,8 @@ def test_running_runs_count_toward_the_cpu_cap() -> None:
     case of every run still going, so the recorded CPU cannot pass the cap."""
     runs = [replay.Run(n) for n in (10, 19, 230, 313)]
     # Each run may take 10 s; with 15 s of cap only one may ever be going, and once it
-    # has spent 8 s no other fits, though the old start gate (spent < cap) ran them all.
+    # has spent 8 s no other fits. The old start gate (finished CPU < cap) started two at
+    # once and a third if one finished first, ending at 16 s or 24 s against the 15.
     not_started, appended, budget = drive(runs, cap=15, worst=10, cpu=8)
     assert len(appended) == 1
     assert sorted(not_started) == sorted(run.key for run in runs[1:])
