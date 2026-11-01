@@ -1,0 +1,58 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/evand_arrangement_reports.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+reason: >-
+  For PR #704 (T-196's replay, its stage 4 review and its adoption at 227 and 260) against
+  main 99cfcc8a: both reviews read results.yaml only through paper_figures.ladder_records,
+  which selects the n11 ladder rungs LADDER_RUNGS names; T-196 is outside that ladder and
+  no ladder row changes. The house writer, house sources, adapter docstring and the kernel's
+  sharp controls are not called by these producers. Rendered at link revision 9acc078a, this
+  branch after its merge of main 99cfcc8a (#699, site v0.8.6) and its v0.8.7 cut, once from
+  this branch's tree and once from a scratch copy holding main's bytes of the fifteen changed
+  inputs (the five claim documents, bound-citations.json, composite-figure.json, adopt_houses,
+  evand_arrangement_reports, upper_bound_houses, upper_bound_reports, validate.py, results.yaml,
+  result-requests.yaml and source-coverage.yaml): render_n11_optimality_review, render_n11_threshold_bound_review,
+  render_packing_methods and render_n11_lower_bounds_explainer write 68 files. 67 are byte-identical
+  between the trees, and the explainer's HTML is identical once each tag's attributes are
+  sorted: its browser math step orders a math span's style attribute differently from run
+  to run, as three renders of main's tree showed on the branch's earlier head. No PDF was
+  printed; each prints from that HTML. Re-taken by source review after the merge of main 4851d8193
+  (#705, site v0.8.7), which changes none of these inputs, and after the merge of main e7de85ff6
+  (#701, site v0.8.8), which adds T-223 to results.yaml outside the n11 ladder; this branch
+  edits only T-223's notes there. run_negative_controls.py, changed after that merge, changes
+  only the worker snapshot's UNREAD_WORKER_OUTPUTS and its comments, and importing each of
+  the four producers loads no devtools.run_negative_controls. Re-taken by source review after
+  review B of #704: its fixes change T-196's notes in results.yaml, outside the n11 ladder,
+  the house writer's override reason, check and refresh in adopt_houses, and comments in upper_bound_houses
+  and run_negative_controls, none of which these producers call. Re-taken by source review
+  after the merge of main 6b825f441 (#707, site v0.8.9), whose results.yaml prose is outside
+  the n11 ladder and whose adopt_houses.py prose these producers do not call. Re-taken after
+  the merge of main 51ac9d7ee (#708 to #713, site v0.8.13, explainer v0.4.13). That merge
+  withdrew this branch's site v0.8.10 cut, so the five claim documents are main's and leave
+  these paths, and the next commit withdrew its change to run_negative_controls.py (review
+  B4). Rendered at link revision fd7f939e, once from this branch's tree and once with main's
+  bytes of the ten changed inputs (bound-citations.json, composite-figure.json, result-requests.yaml,
+  adopt_houses, evand_arrangement_reports, upper_bound_houses, upper_bound_reports, results.yaml,
+  source-coverage.yaml and validate.py): render_n11_optimality_review, render_n11_threshold_bound_review,
+  render_packing_methods and render_n11_lower_bounds_explainer, the last with its pinned Chromium
+  math pass, write 68 files, all byte-identical between the trees. No PDF was printed; each
+  prints from that HTML. Re-taken after the merge of main 7eeab1f5e (#714, #712, site v0.8.14)
+  and this branch's site v0.8.15 cut, which regenerates the five claim documents with only
+  their source-link revision changed, 642464f8 to 5e16f345, and after the custody note's new
+  reading in upper_bound_houses. Rendered at link revision 30ba79d8, the cut, once from this
+  branch's tree and once with main's bytes of the fifteen changed inputs (the ten above and
+  the five claim documents): the four renderers write 68 files, all byte-identical between
+  the trees. No PDF was printed. Retain v0.1.7 and v0.1.0.

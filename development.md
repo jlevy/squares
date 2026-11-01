@@ -2196,7 +2196,17 @@ navigation or footer update keeps the paper’s content edition and needs no rel
 The ordinary documentation gate runs `devtools.check_release_impact`. It compares
 producer-owned inputs against the comparison merge base and requires a disposition for
 each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
-review in `release.py` naming the exact changed paths, outputs examined and reason.
+review naming the exact changed paths, outputs examined and reason.
+**A no-change review is a file of its own**, never an entry in `release.py`: write it as
+`packing/release-records/no-public-change/<YYYY-MM-DD>-<slug>.yaml`, dated the day it is
+written, with `components`, `paths`, `outputs` and `reason`, and copy the shape of any
+record there. `no-public-change.schema.yaml` beside the directory is the contract, and
+`python -m devtools.release_records check` reads every record.
+The records were one tuple at the end of `release.py` until 1 November 2026, and every
+two open records pull requests conflicted there at each merge of `main`: 64 of the 174
+merges in the week before, across 33 pull requests (think-nrp6). As files, two additions
+are two new paths and merge cleanly; `devtools.release_records` says why a union merge
+driver was refused, and the gate refuses a tuple put back.
 The site is never a candidate: it deploys continuously from `main`, so a change only the
 site reads needs no disposition.
 The gate refuses any edit to the frozen `PUBLICATION_HISTORY` and

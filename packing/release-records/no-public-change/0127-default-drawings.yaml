@@ -1,0 +1,54 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/devtools/default_drawings.py
+  - packing/devtools/regularize_evand.py
+  - packing/frontier/results.yaml
+  - packing/frontier/n-105.md
+  - packing/frontier/n-129.md
+  - packing/frontier/n-146.md
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  The regularization run of 16 October 2026 (think-la7h) changes data only: default_drawings
+  gains three SETTLED counts (204, 272, 303) and drops nine from PENDING_ALLOWED, results.yaml
+  changes only its regularized_drawings items at 105, 129, 146, 156, 176 and 271, and the
+  case records change only their generated regularization note. The papers read results.yaml's
+  results (the counts of registered and novel results and the headline bound ladder), never
+  regularized_drawings, reach default_drawings only through shared import discovery and read
+  neither constant, and the survey cites n = 105, 129 and 146 by link only, as its results
+  table's count links. Manuscripts, figures, credits and print rules are unchanged by source
+  review. Rendered at one link revision (e2e018f3), once from main e2e018f3's tree and once
+  from this branch's at 780d81b8, the survey's and both reviews' HTML, before the browser's
+  math pass, their Markdown and the other 40 files each render writes are byte-identical (42
+  of 42 files each); the explainer, whose render needs a browser this host lacks, is source-reviewed
+  only, and no PDF was rebuilt. Review D's pass (#644) then added default_drawings.recorded_runs,
+  which holds each SETTLED entry's runs to a record, reworded the 272 and 303 outcomes, and
+  added regularize_evand's read-only `rungs --check`; the papers read none of them, and rendered
+  again at link revision e2e018f3 from this branch at ebe50691 and from main e2e018f3's tree,
+  the survey's and both reviews' 42 files each are byte-identical. Review F's pass added default_drawings.run_records
+  and --retain-runs, which hold a settlement's runs to the retained evidence, and regularize_evand.run_reports,
+  which lets `rungs --check` read retained reports; the papers read none of them, and rendered
+  at link revision e2e018f3 from this branch at 6079926b, the survey's and both reviews' 42
+  files each are byte-identical to main e2e018f3's. Review G's pass added the retained run
+  evidence to the regularization-state step's touches in sqpack.cli.validate, which only the
+  explainer declares, as part of the whole sqpack package, and made `rungs --check` account
+  for each run directory; the papers read neither, the explainer is source-reviewed only,
+  and rendered at link revision e2e018f3 from this branch at 2f31507c, the survey's and both
+  reviews' 42 files each are byte-identical to main e2e018f3's. All four papers keep v0.4.7,
+  v0.1.7, v0.1.0 and v0.2.2; the site takes the patch.

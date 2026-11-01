@@ -1,0 +1,29 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ReleaseNoPublicChange/v1
+title: A reviewed, path-scoped finding that named component outputs did not change
+description: >-
+  One file per record in no-public-change/, named <YYYY-MM-DD>-<slug>.yaml and read in
+  name order by devtools.release_records (think-nrp6). The schema holds the shape;
+  whether a fresh record covers its change is devtools.check_release_impact's question:
+  the components with candidate inputs, the exact changed paths, the outputs examined,
+  and the measurement that found them unchanged.
+type: object
+additionalProperties: false
+required: [components, paths, outputs, reason]
+properties:
+  components:
+    description: The release components reviewed, such as paper:square-packing-methods-survey.
+    $ref: '#/$defs/strings'
+  paths:
+    description: The changed inputs the review covers, repository-relative and exact.
+    $ref: '#/$defs/strings'
+  outputs:
+    description: The recognized outputs examined, such as papers/<slug>.html.
+    $ref: '#/$defs/strings'
+  reason:
+    description: What changed, against which main, and how the outputs were found unchanged.
+    type: string
+$defs:
+  strings:
+    type: array
+    items: {type: string}

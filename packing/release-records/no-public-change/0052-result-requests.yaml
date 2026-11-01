@@ -1,0 +1,30 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/frontier/n-154.md
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  Reviewed October 21, 2026 against main e7de85ff for the records lane of 21 October (think-8z7k,
+  #664's credit at 271, #669's by-field answer, #689 and #694 closed, #702 triaged). results.yaml
+  changes only T-197's, T-219's, T-221's and T-222's prose, outside the n11 ladder rungs paper_figures
+  reads; adopt_houses.py only the 271 credit and T-219's and T-222's prose; n-154.md one sentence
+  of T-222's section; and result-requests.yaml only the #664, #669, #674, #678, #689, #694
+  and #702 entries. Rendered with render_n11_optimality_review, render_n11_threshold_bound_review
+  and render_packing_methods at link revision e7de85ff, at the branch head db61aefd, once
+  from its tree and once with main's copies of those four inputs and bound-citations.json:
+  the files the three write are byte-identical. No PDF was printed; each prints from that
+  HTML. Retain v0.1.7, v0.1.0 and v0.2.3.

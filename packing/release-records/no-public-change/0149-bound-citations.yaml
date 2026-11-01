@@ -1,0 +1,30 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/apply_closed_form.py
+  - packing/devtools/census_atlas_contact_shades.py
+  - packing/devtools/check_half_angle_area.py
+  - packing/devtools/generate_frontier_case.py
+  - packing/devtools/regularize_axis_components.py
+  - packing/devtools/select_houses.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  Rendered from main at c4c690a3 and from this branch with the browser's math pass, every
+  file the explainer writes is byte-identical but its HTML, which differs only in where an
+  empty style attribute falls within one formula's span, as it does between any two renders.
+  The 14 October records and the house adoption of 15 October 2026, with the site's v0.7.3
+  cut, do not reach the explainer, which keeps v0.4.6.

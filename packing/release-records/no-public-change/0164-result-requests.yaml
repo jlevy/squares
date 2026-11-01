@@ -1,0 +1,44 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/evand_arrangement_reports.py
+  - packing/devtools/generate_frontier_case.py
+  - packing/devtools/overview_sections.py
+  - packing/devtools/run_negative_controls.py
+  - packing/devtools/site_urls.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/n-105.md
+  - packing/frontier/n-108.md
+  - packing/frontier/n-126.md
+  - packing/frontier/n-127.md
+  - packing/frontier/n-129.md
+  - packing/frontier/n-130.md
+  - packing/frontier/n-131.md
+  - packing/frontier/n-153.md
+  - packing/frontier/n-154.md
+  - packing/frontier/n-175.md
+  - packing/frontier/n-179.md
+  - packing/frontier/n-180.md
+  - packing/frontier/n-207.md
+  - packing/frontier/n-208.md
+  - packing/frontier/n-209.md
+  - packing/frontier/n-236.md
+  - packing/frontier/n-237.md
+  - packing/frontier/n-238.md
+  - packing/frontier/n-239.md
+  - packing/frontier/n-261.md
+  - packing/frontier/n-267.md
+  - packing/frontier/n-295.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Rendered from main at 16ea3bd0 and from this branch at one link revision, the HTML before
+  the browser's math pass and the Markdown are byte-identical; the PDF prints from that HTML.
+  Each case record gains the closed form's reported lower bound, its evidence and resource,
+  a later source_reviewed date and a dated paragraph, which the case generator now replays;
+  no house moves, so the survey's account of the adopted houses is unchanged and it keeps
+  v0.2.2.

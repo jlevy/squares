@@ -1,0 +1,21 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+reason: >-
+  For PR407 against main 6833d05aa, the five generated claim documents differ only in GitHub
+  source-link revisions, from a450742e to c0fc4f9d, the clean integration checkpoint before
+  the site cut. Their claims, proofs, embedded certificates and verifier text are unchanged.
+  The explainer checks these documents' presence and links to them; it does not inline their
+  bodies. Its manuscript, certificate inputs, figures, renderer and own release metadata are
+  unchanged, so it retains v0.4.8. This is a source-based review of the HTML, Markdown and
+  PDF producers; no PDF redraw, proof rerun or artifact byte identity is claimed. Site v0.7.30
+  owns the published development-guide correction.

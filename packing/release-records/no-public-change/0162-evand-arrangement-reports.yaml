@@ -1,0 +1,22 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/evand_arrangement_reports.py
+  - packing/devtools/generate_frontier_case.py
+  - packing/devtools/overview_sections.py
+  - packing/devtools/run_negative_controls.py
+  - packing/devtools/site_urls.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+reason: >-
+  Rendered from main at 16ea3bd0 and from this branch at one link revision, both papers' HTML
+  before the browser's math pass and their Markdown are byte-identical; the math pass and
+  the PDF take that same HTML. The register gains T-161 to T-184, the importer reads longer
+  literals, the case generator replays the closed form, and the site gains two project cards
+  and two page budgets, none of which either review cites.

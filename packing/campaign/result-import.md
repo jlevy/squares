@@ -946,6 +946,11 @@ and refuses an edit to the frozen `PUBLICATION_HISTORY` or `PUBLICATION_REVISION
 the claim documents are not regenerated for an intake either.
 A paper or the posters still take their own cut, or a no-change record, when the import
 changes what they print.
+**A no-change record is a new file, never an entry in `release.py`**:
+`packing/release-records/no-public-change/<YYYY-MM-DD>-<slug>.yaml`, named for the day
+and the lane, so parallel lanes’ records merge without touching one hunk
+([Maintaining the project changelog](../../development.md#maintaining-the-project-changelog);
+think-nrp6).
 
 The pull request’s `--fast` surface runs on CI’s runners, not on a machine that is also
 running a replay, where a tier’s wall measures the contention rather than the branch

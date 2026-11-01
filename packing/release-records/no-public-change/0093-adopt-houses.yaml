@@ -1,0 +1,25 @@
+components:
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/check_case_prose.py
+  - packing/devtools/check_rung_figures.py
+  - packing/devtools/check_standing.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/regularize_axis_components.py
+  - packing/devtools/result_overview.py
+  - packing/devtools/run_negative_controls.py
+  - packing/devtools/select_houses.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+reason: >-
+  For PR665 against landed main e0319ffd, source review of the HTML, Markdown and PDF producers
+  finds the consumed n11 ladder, including the T060 claim used for its gap caption, unchanged.
+  The T169, T170, T171 and T174 claim edits are outside those consumed rows. Its manuscript,
+  certificates, retained figure inputs, renderer and own publication metadata are unchanged.
+  Changed house-selection, regularization, result-page and control tools are not called by
+  this producer. Retain v0.1.0; no proof rerun, PDF redraw or artifact byte identity is claimed.

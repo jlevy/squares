@@ -1,0 +1,20 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  The site cut v0.7.25 for the house rule (PR 660, think-sa5r) regenerated the five claim
+  documents at PUBLICATION_REVISION 83b4720e, this branch's merge of main 6a3a7d8f, kept reachable
+  from main by the merge commit the PR merges with. With that revision read back as v0.7.24's
+  d421bac7, each is byte-identical to main's 6a3a7d8f, and between the two revisions those
+  case directories change only in the five documents themselves, so the 32 repository links
+  they pin are the only change, and no claim, certificate or command moves. A link revision
+  follows the site's edition and is not a revision of the explainer, so it keeps v0.4.7. Source-compared;
+  no render of the claim documents was taken.

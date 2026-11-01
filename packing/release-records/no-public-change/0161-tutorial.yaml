@@ -1,0 +1,42 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - TUTORIAL.md
+  - packing/devtools/news_highlights.py
+  - packing/devtools/overview_sections.py
+  - packing/devtools/probes/measure_atlas_views/layout.js
+  - packing/devtools/probes/measure_atlas_views/widen.js
+  - packing/devtools/render_changelog.py
+  - packing/devtools/render_overview.py
+  - packing/devtools/repo_links.py
+  - packing/devtools/run_negative_controls.py
+  - packing/devtools/site_documents.py
+  - packing/devtools/site_topics.py
+  - packing/devtools/site_urls.py
+  - packing/devtools/templates/site-nav.css
+  - packing/devtools/templates/site-nav.html
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  The four standalone paper manuscripts, mathematical figures and paper-owned styles are unchanged.
+  The split tutorials publish through the reader-document pipeline; existing links retain
+  their legacy section landings. Shared import and page inventories include those reader sources
+  conservatively. News, topic labels, significance meters, article disclosures, reading-card
+  discovery and navigation are site chrome. Shared chooser styles also serve the print-hidden
+  navigation; the paper-owned typography is unchanged. The retained claim documents and their
+  source-link pin match main. No byte-identical PDF rebuild is claimed.

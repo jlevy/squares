@@ -1,0 +1,37 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+  - site
+paths:
+  - packing/devtools/upper_bound_reports.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - about.html
+  - atlas.html
+  - conventions.html
+  - development.html
+  - epistemics.html
+  - index.html
+  - news.html
+  - papers.html
+  - readme.html
+  - results.html
+  - synopsis.html
+  - tutorial-advanced.html
+  - tutorial.html
+  - visualize.html
+reason: >-
+  Rendered on this branch over main 0dd9003e at one link revision, once with this branch's
+  importer and once with main's in its place, the four papers' HTML and Markdown and every
+  page, result overview and case record render_overview writes (1,452 files) are byte-identical.
+  The importer gains an exact algebraic pending report and the house readers of two new packets,
+  which no record or page reads yet.

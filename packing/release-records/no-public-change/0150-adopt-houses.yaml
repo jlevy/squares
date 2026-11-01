@@ -1,0 +1,25 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/apply_closed_form.py
+  - packing/devtools/census_atlas_contact_shades.py
+  - packing/devtools/check_half_angle_area.py
+  - packing/devtools/generate_frontier_case.py
+  - packing/devtools/regularize_axis_components.py
+  - packing/devtools/select_houses.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+reason: >-
+  Rendered from main at c4c690a3 and from this branch at one link revision, both papers' HTML,
+  Markdown and PDF are byte-identical. The register's rungs and the house adoption of 15 October
+  2026 change the record and its writers; neither review cites them.

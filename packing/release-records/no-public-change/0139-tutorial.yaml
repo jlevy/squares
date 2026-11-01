@@ -1,0 +1,13 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - TUTORIAL.md
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  The survey declares TUTORIAL.md because its unchanged manuscript cites that file. Citation
+  discovery checks the path and pins its URL; it does not import tutorial prose. The five
+  actively cited aliases remain beside relevant current topic links. Survey manuscript, figures
+  and front matter are unchanged; no PDF rebuild or byte-identity comparison is claimed.

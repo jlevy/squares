@@ -1,0 +1,13 @@
+components:
+  - site
+paths:
+  - packing/pyproject.toml
+outputs:
+  - atlas.html
+  - index.html
+  - results.html
+reason: >-
+  Reviewed October 20, 2026 against main b16ddeb0 (think-46yk): the only change is to [tool.pytest.ini_options],
+  which loads the devtools.pytest_tmp test plugin and sets tmp_path_retention_policy and tmp_path_retention_count.
+  Pytest reads them; the site build reads none of them, and no dependency, version or build
+  setting changes, so no page's input changes. No site rebuild byte comparison is claimed.

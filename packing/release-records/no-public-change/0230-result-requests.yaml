@@ -1,0 +1,21 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The s(29) exact-side validation (think-10m1, #816): the requests record enters #816, the
+  owner's tracker of T-246's validation. Against main 2f974835a (#818) it was measured at
+  link revisions a1bf7a77 and 064b9534 (43 files byte-identical across three renders each).
+  After merging main 3978a7f61 (#841), rendered at link revision e2bad14f into empty site
+  directories, twice from this tree and once with that main's result-requests.yaml swapped
+  in: render_packing_methods writes all 43 files byte-identical across the three. Measured
+  again at link revision bae6f8df, after #816's ask gained its source: the same 43 files,
+  byte-identical across the three. Measured again after merging main 32ef0861b (#835), at
+  link revision be1793a4 with that main's result-requests.yaml swapped in, and after merging
+  main 37ede3936 (#848), at link revision a66be6d2 with that main's file swapped in, and after
+  merging main 90b79dbe1 (#851), at link revision 67d55d0b with that main's file swapped in:
+  43 files, byte-identical across the three each time. No PDF was printed; it prints from
+  that HTML. Retain v0.2.7.

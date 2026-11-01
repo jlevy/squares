@@ -1,0 +1,24 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/devtools/regularized_drawings.py
+  - packing/devtools/upper_bound_reports.py
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  PR620 changes validation input reuse and exact imported-side admission, with retained claim
+  equality and drawing refusal/freshness controls. The same predicates validate every own
+  certificate and each imported fact used by a comparison. The three manuscripts, figures
+  and rendering helpers are unchanged, so their editions remain v0.1.7, v0.1.0 and v0.2.2.
+  This is a source-based no-public-change review; these paper exports were not rebuilt or
+  compared for byte identity in this slice.

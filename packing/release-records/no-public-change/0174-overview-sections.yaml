@@ -1,0 +1,16 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/devtools/overview_sections.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  Rendered on this branch over its base 71f6a413 with the browser's math pass, once with the
+  base's versions of every changed record and once with this branch's, the Markdown and HTML
+  differ only in the live register count beside T-018, 192 results registered so far and now
+  194, and the HTML also in where an empty style attribute falls in one formula's span, which
+  moves between two renders of the same input; rendered again after #639's replay and the
+  sq19 card, the same holds. A register count follows the site's data and is not a revision
+  of the paper, so the explainer keeps v0.4.7.

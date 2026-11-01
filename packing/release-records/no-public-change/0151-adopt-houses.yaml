@@ -1,0 +1,54 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/apply_closed_form.py
+  - packing/devtools/census_atlas_contact_shades.py
+  - packing/devtools/check_half_angle_area.py
+  - packing/devtools/generate_frontier_case.py
+  - packing/devtools/regularize_axis_components.py
+  - packing/devtools/select_houses.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/n-070.md
+  - packing/frontier/n-084.md
+  - packing/frontier/n-086.md
+  - packing/frontier/n-088.md
+  - packing/frontier/n-102.md
+  - packing/frontier/n-103.md
+  - packing/frontier/n-105.md
+  - packing/frontier/n-108.md
+  - packing/frontier/n-123.md
+  - packing/frontier/n-126.md
+  - packing/frontier/n-127.md
+  - packing/frontier/n-129.md
+  - packing/frontier/n-130.md
+  - packing/frontier/n-131.md
+  - packing/frontier/n-146.md
+  - packing/frontier/n-153.md
+  - packing/frontier/n-154.md
+  - packing/frontier/n-175.md
+  - packing/frontier/n-179.md
+  - packing/frontier/n-180.md
+  - packing/frontier/n-199.md
+  - packing/frontier/n-207.md
+  - packing/frontier/n-208.md
+  - packing/frontier/n-209.md
+  - packing/frontier/n-236.md
+  - packing/frontier/n-237.md
+  - packing/frontier/n-238.md
+  - packing/frontier/n-239.md
+  - packing/frontier/n-261.md
+  - packing/frontier/n-267.md
+  - packing/frontier/n-295.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  Rendered from main at c4c690a3 and from this branch at one link revision, the survey's HTML,
+  Markdown and PDF are byte-identical. Its account of the adopted houses is dated 11 and 12
+  October; the case records the house adoption of 15 October 2026 moves and the register's
+  rungs reach none of its text.

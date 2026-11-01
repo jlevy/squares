@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import os
 import shlex
+import shutil
 import subprocess
 import sys
 from collections.abc import Sequence
@@ -21,6 +22,7 @@ import pytest
 import yaml
 
 from devtools import check_release_impact as gate
+from devtools import release_records
 from sqpack import release
 from sqpack.cli import validate
 
@@ -240,20 +242,32 @@ class Repository:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(text, encoding="utf-8")
 
-    def write_release(self, *, suffix: str = "") -> None:
+    def write_release(self, *, suffix: str = "", literal: bool = False) -> None:
+        """Write `release.py` and one file per no-change record, or with `literal`, the
+        tuple at the end of `release.py` that held them before 1 November 2026."""
         lines = [
             f"{release.COMPONENT_HISTORY_NAMES[component]} = {history!r}"
             for component, history in self.histories.items()
         ]
         lines += [
             f"RELEASE_IMPACTS: tuple = {tuple(self.decisions)!r}",
-            f"RELEASE_NO_PUBLIC_CHANGES: tuple = {tuple(self.no_changes)!r}",
+            *(
+                [f"{release_records.TUPLE}: tuple = {tuple(self.no_changes)!r}"]
+                if literal
+                else []
+            ),
             "DATA_REVISION = 'old-pin'",
             "PUBLICATION_REVISION = 'old-publication-pin'",
             "raise RuntimeError('previous source must never execute')",
             suffix,
         ]
         self.write(gate.RELEASE_PATH, "\n".join(lines))
+        shutil.rmtree(self.root / release_records.DIRECTORY, ignore_errors=True)
+        for index, record in enumerate([] if literal else self.no_changes):
+            self.write(
+                f"{release_records.DIRECTORY}/{index:04d}-fixture.yaml",
+                release_records.render(record),
+            )
 
     def commit(self, message: str) -> str:
         self.git("add", ".")
@@ -473,6 +487,60 @@ def test_the_real_release_record_retains_site_decisions_and_none_is_fresh() -> N
     records = gate._records(fields, "RELEASE_IMPACTS")  # noqa: SLF001
     assert any(record[0] == gate.SITE for record in records)
     assert gate.frozen_site_errors(fields, fields) == []
+
+
+def test_moving_the_tuple_into_record_files_leaves_nothing_fresh_and_nothing_to_review(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The move itself (think-nrp6). A base whose `release.py` holds the literal tuple and a
+    head holding the same records as files read the same: the files equal the tuple in
+    order, `release.py` loses only bookkeeping, and the gate asks nothing. Had the move
+    altered one record, it would be fresh, and refused for naming no candidate change."""
+    repo = Repository(tmp_path, monkeypatch)
+    helper = "packing/src/sqpack/helper.py"
+    for reason in ("A first reviewed finding", 'A second, with "quotes": and a #hash'):
+        repo.no_changes.append(
+            release.ReleaseNoPublicChange(
+                PAPERS,
+                (helper, repo.inputs[PAPER][0]),
+                tuple(f"papers/{paper.removeprefix('paper:')}.html" for paper in PAPERS),
+                reason,
+            )
+        )
+    repo.write_release(literal=True)
+    repo.base = repo.commit("the records in the tuple")
+    repo.git("update-ref", "refs/remotes/origin/main", repo.base)
+
+    written = release_records.migrate(repo.root)
+
+    assert len(written) == 2
+    assert release_records.load(repo.root) == tuple(repo.no_changes)
+    assert release_records.load(repo.root) == release_records.literal(
+        repo.git("show", f"{repo.base}:{gate.RELEASE_PATH}").encode()
+    )
+    for report in (repo.inspect(), gate.inspect(repo=repo.root, base=repo.base)):
+        assert report.candidate_paths == {}
+        assert report.errors == ()
+    altered = written[1]
+    altered.write_text(altered.read_text().replace("A second", "An altered second"))
+    assert any("without candidate changes" in error for error in repo.inspect().errors)
+
+
+def test_a_tuple_added_back_to_release_py_is_refused_with_the_remedy(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A branch that still appends its record to the tuple, as one open before the move
+    would on merging main, is told where the record goes now."""
+    repo = Repository(tmp_path, monkeypatch)
+    paper_path = repo.inputs[PAPER][0]
+    repo.write(paper_path, "A paper change the record claims is invisible.\n")
+    repo.exempt((PAPER,), (paper_path,))
+    assert repo.inspect().errors == ()
+    repo.write_release(literal=True)
+    report = repo.inspect()
+    assert gate.TUPLE_MOVED in report.errors
+    assert release_records.DIRECTORY in gate.TUPLE_MOVED
+    assert any(f"{PAPER}: candidate public inputs" in error for error in report.errors)
 
 
 def test_fresh_about_only_review_exempts_papers_on_broad_inputs(

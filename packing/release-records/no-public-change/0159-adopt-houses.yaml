@@ -1,0 +1,19 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/register_ryxu_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+reason: >-
+  Rendered from main at 9b32da04 and from this branch, both papers' HTML, Markdown and PDF
+  are byte-identical once the build commit their source links pin is normalized. The register
+  credits Ryan Xu by name, T-174 and T-180 cite new receipts and evidence, and the house writers
+  name him in the records they replay; neither review cites any of them.
