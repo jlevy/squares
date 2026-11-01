@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 66
+version: 67
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -42,7 +42,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T22:49:39.327Z
+updated_at: 2026-11-01T22:49:58.359Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -112,3 +112,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-01 20:53: renewal. Merged #870 (ea5b27c95): W9 filled-end checker, all 5,134 V2.0 + 4,571 V1.0 rows decided by the lemma (18 controls/row), lemma accepted at stage 4; no rows recorded (think-llit, D4, Q-847a); think-fuwd closed after --before-close. Lanes: L16 posts #847 reply after deploy (think-r94q stays open); L17 efficiency block think-nrp6 (release.py append conflicts). Sweep intake17: 0 items needing action. Gradec replay 33/236, 0 failures. think-4z8z stays gated on the owner (think-ikku / RV-3, RV-4).
 
 2026-11-01 21:52: renewal. Merged #872 (b9257eb44): #847 follow-up posted 21:01Z after the ea5b27c95 deploy verified, recorded; think-r94q stays open (claimed by bold-ritchie-l4; #847 open until rows land). Sweep intake18 run; no new issues since 20:50Z. Gradec replay 56/236, 0 failures. L17 (think-nrp6) running.
+
+2026-11-01 ~23:00: merged #874 (4abadb18e; squarepack-certs strip-even read, nothing to import) and #873 (d46fc6f29; think-nrp6 closed): no-public-change records now one file each under packing/release-records/no-public-change/, append-only gate, numbered set frozen at 247, new records date-named with lane/bead. Owner-held PRs #744 and #599 append to the old tuple; when either is revived it must run `python -m devtools.release_records migrate --slug <lane>` (the gate names the command). Next efficiency candidate filed: think-l6lt (DATA_REVISION pin conflicts). 30 PRs merged this pass.
