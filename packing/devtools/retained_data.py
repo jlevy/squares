@@ -10,13 +10,16 @@ Readers go through `read_retained_bytes`, which takes the upstream path ``X`` an
 ``X`` or ``X.gz``, whichever is present, so a tree restored by ``gunzip -k`` and the
 compressed tree read the same. Where both are present they must agree. Both reads are
 bounded, before and after decompression. A tool that writes a receipt goes through
-`write_retained`, which stores it plain or as ``X.gz`` by the same threshold and removes
-the other form, so the same bytes are always stored the same way (think-rsqv).
+`write_retained`, which stores it plain or as ``X.gz`` by the same threshold, removes the
+other form, and keeps a stored file that already holds the bytes (think-rsqv).
 
 Each packet that stores files this way lists them in a README section headed
 ``## Compressed Files``: every row names the stored ``.gz`` path relative to the packet,
 the origin of the bytes (``upstream`` or ``receipt``), and the Git blob and SHA-256 of
-the decompressed bytes. ``check`` re-derives every row from the stored files.
+the decompressed bytes. ``check`` re-derives every row from the stored files. A receipt
+the repository writes again, with new timings at each run, may leave both digest cells
+empty: Git keeps its bytes (OR-16), and ``check`` asks only that it is listed, carries no
+name or timestamp, and decompresses (review A2 of #869). An upstream row states both.
 An explicitly retained upstream gzip belongs instead to ``## Original Gzip Files``:
 its Git blob and SHA-256 name the original compressed bytes, including its header.
 Readers still decompress gzip normally; only that separate custody table binds raw bytes.
@@ -130,21 +133,40 @@ def compress(path: Path) -> Path:
     return stored
 
 
+def _holds(stored: Path, data: bytes) -> bool:
+    """Whether ``stored`` already reads back as ``data``, as a deterministic gzip where
+    it is one."""
+    try:
+        if stored.name.endswith(GZIP_SUFFIX) and not is_deterministic_gzip(
+            _bounded_read(stored, MAX_COMPRESSED)
+        ):
+            return False
+        return read_retained_bytes(stored) == data
+    except OSError, ValueError, EOFError, zlib.error:
+        return False
+
+
 def write_retained(path: Path, data: bytes) -> Path:
     """Store ``data`` as the retained file ``path`` and return the stored path.
 
     A data file (`DATA_SUFFIXES`) of more than `LINE_THRESHOLD` lines is stored as
-    ``path.gz`` by `compress`, ``gzip -9n``, so the same bytes give the same archive
-    whenever they are written; anything else is stored plain. The other form is removed,
-    so one copy stands and `read_retained_bytes` reads it."""
+    ``path.gz``, made here by Python's gzip at level 9 with mtime 0 and no file name, so
+    it carries no name or timestamp; anything else is stored plain. What is guaranteed is
+    that the stored file decompresses to ``data``, not one deflate stream across zlib
+    builds (`compress`, for upstream bytes, runs ``gzip -9n``). A stored file that
+    already reads back as ``data`` is kept, so writing the same bytes again churns nothing
+    (review A4 of #869). The other form is removed, so one copy stands and
+    `read_retained_bytes` reads it."""
     packed = compressed_path(path)
+    large = path.suffix in DATA_SUFFIXES and data.count(b"\n") > LINE_THRESHOLD
+    stored, other = (packed, path) if large else (path, packed)
+    if not other.exists() and stored.is_file() and _holds(stored, data):
+        return stored
     path.parent.mkdir(parents=True, exist_ok=True)
-    packed.unlink(missing_ok=True)
-    with atomic_output_file(path) as temporary:
-        temporary.write_bytes(data)
-    if path.suffix in DATA_SUFFIXES and data.count(b"\n") > LINE_THRESHOLD:
-        return compress(path)
-    return path
+    other.unlink(missing_ok=True)
+    with atomic_output_file(stored) as temporary:
+        temporary.write_bytes(gzip.compress(data, compresslevel=9, mtime=0) if large else data)
+    return stored
 
 
 @dataclass(frozen=True, slots=True)
@@ -225,6 +247,18 @@ def check_packet(packet: Path) -> list[str]:
             continue
         if not is_deterministic_gzip(path.read_bytes()):
             problems.append(f"{packet.name}: {row.stored} carries a name or timestamp")
+        if not row.blob and not row.sha256:
+            if row.origin != "receipt":
+                problems.append(
+                    f"{packet.name}: {row.stored} is an {row.origin} row and must state "
+                    "its digests"
+                )
+                continue
+            try:
+                read_retained_bytes(path)
+            except OSError, ValueError, EOFError, zlib.error:
+                problems.append(f"{packet.name}: {row.stored} does not decompress")
+            continue
         if describe(packet, path, row.origin) != row:
             problems.append(f"{packet.name}: {row.stored} differs from its table row")
     for row in originals:

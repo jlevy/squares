@@ -208,18 +208,18 @@ The replay of 1184 and every count’s digest are in the slow lane.
 
 ## Compressed Files
 
-Version 2’s decisions receipt, 2,854 lines, is stored as deterministic gzip made by
-`gzip -9n`, with no file name or timestamp in the header, as `devtools.retained_data`
-keeps a retained file of more than 1,000 lines (think-rsqv).
+Version 2’s decisions receipt, 2,854 lines, is stored as gzip with no file name or
+timestamp in the header, as `devtools.retained_data` keeps a retained file of more than
+1,000 lines (think-rsqv); it decompresses to the receipt as written on 25 October.
 `two_strip_checker` reads and writes it through that module, so `check` takes the plain
-path and `decide-all` stores the same bytes the same way.
-The table gives the Git blob and SHA-256 of the decompressed bytes, which are the
-receipt’s as written on 25 October; `python -m devtools.retained_data check` re-derives
-the row.
+path and `decide-all` writes the gzip again.
+A rerun records new timings, so the receipt is not pinned by digest: Git keeps its
+bytes (OR-16), and `python -m devtools.retained_data check` asks that it is listed,
+carries no name or timestamp, and decompresses.
 
 | Stored file | Origin | Git blob | SHA-256 |
 | --- | --- | --- | --- |
-| `receipts/two-strip-decisions-v2.json.gz` | receipt | `e447b74bd7804bfec647fc0e579877d46e8ffac4` | `3aa40285b2b051072c0fd1e411f111237c10a136445e6f03f9b7c4bc32c407f8` |
+| `receipts/two-strip-decisions-v2.json.gz` | receipt |  |  |
 
 ## Limitations
 

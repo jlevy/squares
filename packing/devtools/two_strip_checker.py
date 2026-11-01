@@ -102,7 +102,9 @@ in version 2. The receipts are:
 
 Every receipt is read and written through `devtools.retained_data` (think-rsqv): one of
 more than 1,000 lines, as version 2's and version 5's decisions receipts are, is stored
-as deterministic gzip, ``X.gz`` made by ``gzip -9n``, and read at its plain path ``X``.
+as ``X.gz`` with no file name or timestamp, and read at its plain path ``X``. A rerun
+records new timings, so the packets pin no digest of a receipt; Git keeps its bytes
+(OR-16, review A2 of #869).
 
 **#836's version 5** (`V5`, record 23664800, 5,308 rows at 1182 to 9944) is kept by
 another packet, ``karimi-records-2026-10-31``, which ``devtools.acquire_source`` wrote

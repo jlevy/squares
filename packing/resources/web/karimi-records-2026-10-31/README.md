@@ -179,16 +179,17 @@ and reading its metadata before then is think-rf6h’s.
 
 ## Compressed Files
 
-Version 5’s decisions receipt is stored as deterministic gzip made by `gzip -9n`, with no
-file name or timestamp in the header (think-rsqv). `two_strip_checker` reads and writes
-it through `devtools.retained_data`, so `check` takes the plain path and `decide-all`
-stores the same bytes the same way.
-The table gives the Git blob and SHA-256 of the decompressed bytes, which are the
-receipt’s as written on 31 October; `acquire_source --check` re-derives the row.
+Version 5’s decisions receipt is stored as gzip with no file name or timestamp in the
+header (think-rsqv); it decompresses to the receipt as written on 31 October.
+`two_strip_checker` reads and writes it through `devtools.retained_data`, so `check`
+takes the plain path and `decide-all` writes the gzip again.
+A rerun records new timings, so the receipt is not pinned by digest: Git keeps its
+bytes (OR-16), and `acquire_source --check` asks that it is listed, carries no name or
+timestamp, and decompresses.
 
 | Stored file | Origin | Git blob | SHA-256 |
 | --- | --- | --- | --- |
-| `receipts/two-strip-decisions-v5.json.gz` | receipt | `b4d85df0a24792e3d0f7aded64559ebe12389fc6` | `ac1b57128facda511194e8a65ce081dd03ccf7e8ef391a38bf13bac3314bdd3f` |
+| `receipts/two-strip-decisions-v5.json.gz` | receipt |  |  |
 
 ## Commands
 
