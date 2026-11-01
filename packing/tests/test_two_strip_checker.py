@@ -37,6 +37,7 @@ import pytest
 from cases.asymptotic import ryu_upper_l_packing as ryu
 from devtools import couzo_678_replay as base
 from devtools import evand_exact_certificates as legacy
+from devtools import retained_data
 from devtools import two_strip_checker as checker
 
 #: A small packing with every phase the source uses but 0, at its binding side.
@@ -51,6 +52,16 @@ SMALL = checker.TwoStrip(
     tilt_v=Fraction(1, 9),
     phase_v=Fraction(3, 4),
 )
+
+
+def _receipt(path: Path) -> Any:
+    """A receipt as `two_strip_checker` reads it: plain, or from its ``.gz``."""
+    return json.loads(retained_data.read_retained_text(path))
+
+
+def _rewrite(path: Path, value: Any) -> None:
+    """A receipt stored as `two_strip_checker` stores one (think-rsqv)."""
+    retained_data.write_retained(path, json.dumps(value).encode("utf-8"))
 
 
 def _small() -> checker.TwoStrip:
@@ -376,9 +387,9 @@ def test_an_altered_version_5_receipt_is_refused(
     copied = tmp_path / checker.V5.packet
     shutil.copytree(checker.V5.home, copied)
     monkeypatch.setattr(checker, "REPO", tmp_path)
-    receipt = json.loads(checker.V5.decisions.read_text(encoding="utf-8"))
+    receipt = _receipt(checker.V5.decisions)
     receipt["author_columns"]["counts"]["below_all_reported"]["no"] += 1
-    checker.V5.decisions.write_text(json.dumps(receipt), encoding="utf-8")
+    _rewrite(checker.V5.decisions, receipt)
     sample = json.loads(checker.replay_path(checker.V5).read_text(encoding="utf-8"))
     sample["rows"][1]["verified"] = False
     checker.replay_path(checker.V5).write_text(json.dumps(sample), encoding="utf-8")
@@ -424,7 +435,7 @@ def _write_routed(repo: Path) -> checker.Deposit:
 
 
 def _stored(deposit: checker.Deposit) -> list[dict[str, Any]]:
-    return json.loads(deposit.decisions.read_text(encoding="utf-8"))["rows"]
+    return _receipt(deposit.decisions)["rows"]
 
 
 @pytest.fixture(scope="module")
@@ -507,6 +518,35 @@ def test_a_full_replay_writes_a_receipt_per_k_resumes_and_is_read_back(
     assert checker.route_coverage(deposit) == (
         "6 of 6 v5.0 rows replayed on both routes, 12 of 12 controls refused by each"
     )
+
+
+def test_receipts_past_the_threshold_are_stored_as_gzip_and_read_back(
+    routed: checker.Deposit, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """think-rsqv: the family's receipts are written and read through
+    `devtools.retained_data`, so one past its line threshold is stored as deterministic
+    gzip, as #799's version 2 and #836's version 5 decisions receipts are, and every reader
+    takes the plain path. The threshold is lowered so this small deposit's receipts cross
+    it; a receipt written again is the same archive."""
+    monkeypatch.setattr(retained_data, "LINE_THRESHOLD", 5)
+    checker.decide_all(routed)
+    packed = retained_data.compressed_path(routed.decisions)
+    assert packed.is_file()
+    assert not routed.decisions.exists()
+    assert retained_data.is_deterministic_gzip(packed.read_bytes())
+    for path in [*routed.route_parts.glob("*.json"), routed.route_summary]:
+        assert retained_data.write_retained(path, path.read_bytes()).name.endswith(".gz")
+    assert not list(routed.route_parts.glob("*.json"))
+    stored = _stored(routed)
+    assert checker.route_problems(routed, stored) == []
+    groups = checker.by_k(checker.records(routed))
+    assert all(checker.part_is_current(routed, k, rows) for k, rows in groups.items())
+    assert checker.check(deposits=(routed,)) == []
+    assert checker.route_coverage(routed).startswith("6 of 6 v5.0 rows replayed")
+    first = packed.read_bytes()
+    data = retained_data.read_retained_bytes(routed.decisions)
+    assert retained_data.write_retained(routed.decisions, data) == packed
+    assert packed.read_bytes() == first
 
 
 def test_route_problems_names_each_fault_in_a_receipt(routed: checker.Deposit) -> None:
@@ -781,7 +821,7 @@ def _summary_holds(deposit: checker.Deposit, expected: tuple[int, int, int, int]
     """A deposit's decisions summary: every row decided, its squares, how many rows are
     filled to the capacity and the most surplus, and every control refused at every row."""
     rows, squares, tight, most = expected
-    summary = json.loads(deposit.decisions.read_text(encoding="utf-8"))["summary"]
+    summary = _receipt(deposit.decisions)["summary"]
     assert (summary["rows"], summary["decided"], summary["squares"]) == (rows, rows, squares)
     assert (summary["surplus_zero"], summary["surplus_most"]) == (tight, most)
     assert summary["side_below_k"] == summary["k_is_ceil_sqrt_n"] == rows
@@ -859,14 +899,14 @@ def test_an_altered_receipt_or_packet_is_refused(
     shutil.copytree(checker.PACKET, copied)
     monkeypatch.setattr(checker, "PACKET", copied)
     for deposit, index in ((checker.V1, 5), (checker.V2, 2000)):
-        receipt = json.loads(deposit.decisions.read_text(encoding="utf-8"))
+        receipt = _receipt(deposit.decisions)
         receipt["rows"][index]["capacity"] += 1
-        deposit.decisions.write_text(json.dumps(receipt), encoding="utf-8")
+        _rewrite(deposit.decisions, receipt)
     sample = json.loads(checker.replay_path().read_text(encoding="utf-8"))
     sample["rows"][2]["certificate_sha256"] = "0" * 64
     checker.replay_path().write_text(json.dumps(sample), encoding="utf-8")
-    first = json.loads(checker.V1.decisions.read_text(encoding="utf-8"))["rows"][5]["n"]
-    later = json.loads(checker.V2.decisions.read_text(encoding="utf-8"))["rows"][2000]["n"]
+    first = _receipt(checker.V1.decisions)["rows"][5]["n"]
+    later = _receipt(checker.V2.decisions)["rows"][2000]["n"]
     assert checker.check(deposits=(checker.V1, checker.V2)) == [
         f"V1.0 n={first}: the decision differs from the receipt",
         "V1.0 n=1813: the replayed certificate is not the decided one",

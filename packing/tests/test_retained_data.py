@@ -12,6 +12,7 @@ import pytest
 
 from devtools import audit_tokoharu_density as tokoharu
 from devtools.retained_data import (
+    LINE_THRESHOLD,
     candidates,
     check_packet,
     compressed_path,
@@ -19,6 +20,7 @@ from devtools.retained_data import (
     is_deterministic_gzip,
     read_retained_bytes,
     read_table,
+    write_retained,
 )
 
 WEB = Path(__file__).resolve().parents[1] / "resources" / "web"
@@ -38,6 +40,10 @@ PACKETS = (
     "casson-square-packing-2026-09-23",
     "wang-li-n11-2026-09-29",
     "n11-optimality-gpt6-pro-review-2026-10-03",
+    # The two-strip family's decisions receipts (think-rsqv): #799's version 2 and #836's
+    # version 5, written by `devtools.two_strip_checker` through `write_retained`.
+    "karimi-two-strip-2026-10-24",
+    "karimi-records-2026-10-31",
 )
 
 
@@ -72,6 +78,33 @@ def test_missing_and_oversized_files_are_refused(tmp_path: Path) -> None:
     compressed_path(path).write_bytes(gzip.compress(b"0" * 4096, mtime=0))
     with pytest.raises(ValueError, match="exceeds"):
         read_retained_bytes(path, limit=1024)
+
+
+def test_a_retained_write_is_plain_below_the_threshold_and_reproducible_gzip_above(
+    tmp_path: Path,
+) -> None:
+    """think-rsqv: a writer keeps one form of a retained file, plain at or below
+    `LINE_THRESHOLD` lines and ``gzip -9n`` above it, so the same bytes are stored the
+    same way whenever they are written; the other form is removed, and readers read
+    either."""
+    path = tmp_path / "receipts" / "decisions.json"
+    small = b'{"a": 1}\n' * LINE_THRESHOLD
+    large = small + b'{"b": 2}\n'
+    assert write_retained(path, small) == path
+    assert path.read_bytes() == small
+    assert not compressed_path(path).exists()
+    stored = write_retained(path, large)
+    assert stored == compressed_path(path)
+    assert not path.exists()
+    first = stored.read_bytes()
+    assert is_deterministic_gzip(first)
+    assert read_retained_bytes(path) == large
+    assert write_retained(path, large).read_bytes() == first
+    assert write_retained(path, small) == path
+    assert not compressed_path(path).exists()
+    assert read_retained_bytes(path) == small
+    source = tmp_path / "large.py"
+    assert write_retained(source, large) == source
 
 
 def test_header_and_blob_helpers() -> None:

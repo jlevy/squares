@@ -9,7 +9,9 @@ precedent is the R052 packet, whose source ships its certificate that way.
 Readers go through `read_retained_bytes`, which takes the upstream path ``X`` and reads
 ``X`` or ``X.gz``, whichever is present, so a tree restored by ``gunzip -k`` and the
 compressed tree read the same. Where both are present they must agree. Both reads are
-bounded, before and after decompression.
+bounded, before and after decompression. A tool that writes a receipt goes through
+`write_retained`, which stores it plain or as ``X.gz`` by the same threshold and removes
+the other form, so the same bytes are always stored the same way (think-rsqv).
 
 Each packet that stores files this way lists them in a README section headed
 ``## Compressed Files``: every row names the stored ``.gz`` path relative to the packet,
@@ -39,6 +41,8 @@ import sys
 import zlib
 from dataclasses import dataclass
 from pathlib import Path
+
+from strif import atomic_output_file
 
 GZIP_SUFFIX = ".gz"
 MAX_COMPRESSED = 16 * 1024 * 1024
@@ -124,6 +128,23 @@ def compress(path: Path) -> Path:
     if not is_deterministic_gzip(stored.read_bytes()):
         raise ValueError(f"{stored} is not a deterministic gzip")
     return stored
+
+
+def write_retained(path: Path, data: bytes) -> Path:
+    """Store ``data`` as the retained file ``path`` and return the stored path.
+
+    A data file (`DATA_SUFFIXES`) of more than `LINE_THRESHOLD` lines is stored as
+    ``path.gz`` by `compress`, ``gzip -9n``, so the same bytes give the same archive
+    whenever they are written; anything else is stored plain. The other form is removed,
+    so one copy stands and `read_retained_bytes` reads it."""
+    packed = compressed_path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    packed.unlink(missing_ok=True)
+    with atomic_output_file(path) as temporary:
+        temporary.write_bytes(data)
+    if path.suffix in DATA_SUFFIXES and data.count(b"\n") > LINE_THRESHOLD:
+        return compress(path)
+    return path
 
 
 @dataclass(frozen=True, slots=True)
