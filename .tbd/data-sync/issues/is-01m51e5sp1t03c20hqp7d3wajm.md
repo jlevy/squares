@@ -5,7 +5,7 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: open
 priority: 1
-version: 23
+version: 26
 delegate: null
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-19T23:56:13.304Z
+updated_at: 2026-10-31T05:55:12.243Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
@@ -107,3 +107,4 @@ Findings to mention with it: N19-1 (witness credit, question 1), N19-2 (unpublis
 2026-10-19 lane-658: stage 7 import reply posted after #658 merged and the site checked (v0.7.34; t-194.html shows V0/C1): https://github.com/jlevy/squares/issues/640#issuecomment-6278993930. It reports T-194 V0/C1, the report entry and the six review entries, the queued build (think-nqnl), and notes the author's c86a991 clean rebuild receipt as not yet read. NOT posted: the review's five author questions, which stage 4 says go out on the owner's word (question 5 also needs rewording per the 2026-10-18 note). Recorded under #640's replies (kind import) in branch lane-658/replies-639-640.
 
 2026-10-19 ~23:55Z lane-658: released (status open, no delegate) at the end of the lane. Remaining here: the review's five author questions on the owner's word (reword question 5, which c86a991's clean rebuild receipt answers); reading c86a991 into T-194 with think-nqnl; #640's reply record lands with PR #690 (open, CI green, awaiting its review A).
+2026-10-31 bold-ritchie-l5 (intake pass of 31 October, epic think-3guf, lane L5): c86a991 retained. The packet fitzharding-n19-clean-build-2026-10-16 pins ofitzharding/sq19 at c86a991ea1379d1598739182f5f26619c9b7126a (still the head, full clone 2026-10-31T05:07Z) and retains the three files that commit changes: README.md, verification/clean-build-receipt.json and verification/clean-build.log (stored gzip); acquire_source --check passes. Checked from the retained bytes: the log's SHA-256 9ad3ac1e4853aa633ceb231330fab145bc3db257c649a982c6971be86e194dfb is the receipt's log_sha256; the log ends with the statement, the axiom list, "kernel replay: 13143 modules, 0 failures" and VERIFIED. The evidence update: E-n019-fitzharding-lean-report's limitations say the author's rebuild is reported, not admitted and not repeated; a source-coverage entry names the packet. T-194's rungs are unchanged. Still owed here: (1) the source-build admission audit epistemics.md describes (a source-build entry with build_receipt, axioms_receipt, full coverage and a dated audit of pins, completeness, statement fidelity and trust boundary), which could raise T-194 to V3 and no C rung; (2) reword the review's author question 5 (the rebuild ran); (3) think-nqnl's held build, now priceable at about 340 CPU-hours (64 vCPUs x 5 h 18 min). Branch claude/bold-ritchie-xo28us-evidence, draft PR #850.

@@ -3,9 +3,9 @@ type: is
 id: is-01m5kcx4ampkzwwy5h447fcb2e
 title: "Close settled intake issues as a standard step: closeable issues close at stage 7 after the verified deploy; only record-blocking questions to the reporter keep an issue open"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 11
 delegate: c-close-1023
 labels:
   - process
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T03:29:36.084Z
-updated_at: 2026-10-23T22:20:56.061Z
+updated_at: 2026-10-28T06:11:27.545Z
 started_at: 2026-10-23T03:30:24.440Z
+closed_at: 2026-10-28T06:11:27.544Z
+close_reason: "superseded by #747 and #828"
+resolution: null
+duplicate_of: null
 ---
 Owner, 23 Oct 03:3xZ: 'if we have actually imported something, it's already on the website, and we validated that, we should close the issues. That should be our standard process.' Things that are unresolved, or need the reporter's feedback, stay open. Finding: check_requests already defines closeable (triage done, every result confirmed or refuted, no ask queued), but 12 issues were closeable and open (317, 470, 529, 570, 573, 582, 584, 624, 670, 672, 675, 728): nothing runs the closing step, intake_sweep does not list closeable issues, and lanes kept issues open for informational questions to the author that the record does not track. Fix: (1) a recorded 'awaiting the author' item for questions whose answer would change the record (credit, lineage, which file), which keeps an issue open and which check_requests counts; informational questions go in the closing comment; (2) intake_sweep's Needs Action lists every closeable issue still open; (3) result-import.md stage 7: after the verified deploy, run check_requests --report and close each closeable issue with its final comment; the six-hourly check-in does the same; (4) a closing pass now. #570 is owner-reserved (#557, #565, #570, #574): never close or reply; list for the owner.
 
@@ -31,3 +35,5 @@ Part 4, the closing pass: none closed, nothing posted. #570 owner-reserved. #582
 2026-10-23 c-addr-747-1023: review A of #747 added an entry-level owner hold (held) to the requests record; #557, #565, #570 and #574 carry it, with a note saying this bead is where the previous coordinator recorded the owner's reservation. The admission test for awaiting_author is narrowed (the record asserts something the answer could falsify and no measurement here can settle it). #670's and #470's questions are withdrawn (#470 measured pose by pose), #672's stays. Commits 712bbbd0a, cdefdcdba, 1a5fe2b2c, ef43bf583.
 
 2026-10-23 coord-intake-1023: OWNER ASKED about the four holds. In conversation at about 22:00Z on 23 October, the coordinator asked "Which of these four should stay reserved for you? A reserved issue gets no comments and is never closed by the intake ...", with the options #557, #565, #570 and #574. The owner answered "[No preference]". As with think-qh3s, no preference keeps the status quo: all four stay held (basis recorded-reservation). The records' "pending the owner's confirmation" should now say that the owner, asked on 23 October, stated no preference and the holds stand. This rides the next records PR (#753 on merge day).
+
+2026-10-28 06:15Z coord-intake-1021b: this session hit the weekly usage limit at about 04:05Z on 23 Oct and resumed 28 Oct 06:08Z. Its lane (c-lane-close-issues-1023) never pushed; the local branch claude/intake-close-settled-issues is abandoned. The rule landed through other sessions: #747 (close settled issues, 23 Oct) and #828 (close an issue once answered; asks are the author's; blocked labels, 26 Oct). Closing as superseded; reopen if #828 leaves a gap.

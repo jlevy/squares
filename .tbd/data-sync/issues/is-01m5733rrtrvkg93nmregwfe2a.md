@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 156
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:34.680Z
-updated_at: 2026-10-22T08:30:22.744Z
+updated_at: 2026-10-31T11:18:02.666Z
 started_at: 2026-10-18T13:04:20.646Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/666
@@ -123,3 +123,5 @@ Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at
 
 2026-10-22 08:30 coord-intake-1021b: after #720 merged (0281e7763; deploy run 39745544894, check_published_site 4806/4806), the import reply with the report-order verdicts was posted: #666 https://github.com/jlevy/squares/issues/666#issuecomment-6336294534. Its record edit is in the coordinator scratchpad replies/0122d.md (validate0122d/), carried by #719's records PR (think-xyhn).
 blocked_on: think-f2io
+
+2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner: #666's eight rows above 1024 are recorded by think-llit's walk (bold-ritchie-l4, live on 31 October) once the owner decides D4 (hosting) and D5 (per-row credit beyond the horizon, think-f2io), and once zenodo.org is reachable for the #836 and #847 deposits the walk must read.

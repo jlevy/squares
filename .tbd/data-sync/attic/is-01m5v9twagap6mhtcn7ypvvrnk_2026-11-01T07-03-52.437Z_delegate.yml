@@ -1,0 +1,11 @@
+entity_id: is-01m5v9twagap6mhtcn7ypvvrnk
+timestamp: 2026-11-01T07:03:52.437Z
+field: delegate
+lost_value: '"w-299-1026"'
+winner_source: remote
+loser_source: local
+context:
+  local_version: 3
+  remote_version: 10
+  local_updated_at: 2026-10-26T11:38:39.029Z
+  remote_updated_at: 2026-10-31T15:39:45.010Z

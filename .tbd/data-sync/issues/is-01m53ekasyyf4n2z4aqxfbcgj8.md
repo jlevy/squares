@@ -5,18 +5,20 @@ title: "Algebraic house writer: adopt T-174 at 70, 153 and 207 (and T-193's 16 o
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: c-houses-1023
 labels:
   - regularization
   - validation
   - result-import
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m692s0e5n34n064hq32vb0fs
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T22:51:21.278Z
-updated_at: 2026-10-23T18:47:55.164Z
+updated_at: 2026-10-31T15:01:10.054Z
 started_at: 2026-10-21T17:42:18.505Z
 ---
 The writer gap the house rule names, and its one code-gap staging (packing/campaign/result-import.md, "The House Rule"): `adopt_houses` writes rational houses only and refuses an algebraic one (`plan`, `rational`). PR #660 stages T-174's algebraic houses at 70, 153 and 207 under this bead as `no writer`. After #658 lands with a T-193 reader, T-193's 16 algebraic houses join them (88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302). Opened by #660's addressing pass for its review A1.

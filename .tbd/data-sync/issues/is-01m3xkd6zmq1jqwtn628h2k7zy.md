@@ -5,7 +5,7 @@ title: "BC-418: coordinate the n17 phase after Session 167 (close H-261/H-266, b
 kind: task
 status: in_progress
 priority: 0
-version: 75
+version: 76
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels: []
@@ -79,7 +79,7 @@ child_order_hints:
 hold: paused
 hold_until: null
 created_at: 2026-10-02T06:04:15.220Z
-updated_at: 2026-10-13T00:55:50.548Z
+updated_at: 2026-10-31T11:18:42.756Z
 started_at: 2026-10-03T22:35:58.665Z
 ---
 Selected next entry after Session 167. Lanes: (1) close H-266's single-state item and H-268's slide bound, then re-record H-261 and H-266 for acceptance with independent review; (2) build the H-267 sub-pattern selector as a retained tool and adapt the n11 v9 kernel as prover, with n11 mask 0 as method control; (3) a capture contraction-rate pilot on the endpoint's H-266 occupancy state; (4) optionally the widened-projection dual-sheet certificate on a coarse patching (patch count only). Read the Session 167 record first.
@@ -109,3 +109,5 @@ Selected next entry after Session 167. Lanes: (1) close H-266's single-state ite
 2026-10-05 07:35 UTC (bead bookkeeper). Review B round 1 landed on all six PRs at 07:04 UTC. #347 (head 9d2f05582): think-segb, whose B1 is think-jhgi (hosted objects unpublished; blocked on the owner allowing uploads.github.com) and whose CI child think-umlx covers the wall-time verdicts on every layer. Stack layers #354-#360: think-i45l (parents think-qh0i, think-114f, think-a0pu, think-dm11; certifications think-q0z7). Leaf #350 (wand125 native kernel, head 9179aab7d): think-gs47. #325, #333, #351 and #361 are closed (replaced by #354, #355, #356, #350); #352 stays open until #360 is green. Merge order: #336 any time; stack 357 by gh stack merge 360 --yes --merge (the owner runs it) after #347 B1, green CI and the session certifications; then #350 retargeted to main.
 
 2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. BC-418 coordinates the n17 proof phase; its own scope is new s(17) research. Its non-research children (think-1111, think-b0ef, think-b6pe, think-h8oz, think-vre9, think-wcqs, think-7hy3 via think-ipel, think-ypk2, think-9ntw) stay live and are not suspended by this hold.
+
+2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner's standing n = 17 hold of 13 October (pending T-153); #405's global-proof ask stays queued under it, while this bead's non-research children stay live.
