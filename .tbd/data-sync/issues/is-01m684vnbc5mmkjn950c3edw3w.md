@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 57
+version: 58
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -41,7 +41,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T13:56:15.358Z
+updated_at: 2026-11-01T15:55:06.763Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -95,3 +95,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-01 03:50 PASS STATE: all lanes finished; 23 PRs merged (#835 #848 #834 #833 #853 #850 #849 #854 #855 #851 #817 #852 #857 #858 #856 #859 #860 #862 #861 #864 #865 #863 #866); no open intake PR. Headline: s(44) = 7 (T-252, n = 44 proved); 8 new houses adopted+regularized (130 172 204 232 260 293 299 307); exemptions 39/55/290/291 settled; Karimi deposits retained, v5 fully replayed (rows await R1/D4). Open owner decisions: think-ikku (restatements: 14 Polkovskyi counts + 130/293/307 candidates, held unregistered; RV-3/RV-4), s(152) tie, s(29) S* registration + identity funding, think-j68m (exactness-only drawing), think-xyek (status vocabulary), think-m2th (slow-lane 1800 s budget), D3/D4/D5 + Q-847a + #732 N cap + kzme deletion rows, credit decisions (#593, #573, #529), #574, #521, #522, #524-#527, #317, #543, PRs #744/#599/#809, network access (zenodo.org, lakecache.blob.core.windows.net), think-qvp6 (138 CPU-h over cap). Process beads filed: release.py append conflicts, closing keywords (think-t9uj), check_requests closeable-while-blocked (think-u4bm), early answer-bead closes, YAML '#' label guard (landed in #860).
 
 2026-11-01 05:20: merged #867 (e36ecf29d): #842 authors' --cert-mode answer read in, follow-up recorded (F1 link fixed in place), squarepack-certs f6b9499 read. 24 PRs merged this pass; no open intake PR; no lane running. Tool note: mcp add_issue_comment wrapped a URL in stray backticks twice (L11); update_issue_comment came through clean — read comments back after posting.
+
+2026-11-01 15:52: renewal. Lanes started ~15:10: L12 tooling (think-u4bm, -13ew, -t9uj, -rsqv), L13 W9 checker for #847 (think-fuwd), L14 #545 grade-C gradec replay (think-mtah), #804 Kim imports (think-ozx8, think-9vai) and watched reads. Sweep intake12: one new item, moh63-dev/s44-equals-7 29622595a773 (v1.2, docs only: zmx2 reworded to interval-certified, which T-252 already says; cites T-252 and Zenodo 10.5281/zenodo.23769766; certificate unchanged; nothing to import), assigned to L14 as a read. #846 closeable = known false positive (think-u4bm). No new issues since 14:45Z; open PRs only owner-blocked #574/#599/#744/#809.
