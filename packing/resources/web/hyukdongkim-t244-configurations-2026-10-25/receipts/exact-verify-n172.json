@@ -1,0 +1,208 @@
+{
+ "format": "minpoly-configuration-route-v1",
+ "route": "exact_verify",
+ "n": 172,
+ "fact_member_sha256": "9230aa7aa4c6d4f4e31de4543b87e19db1e57bf4f8e105974c8bd45b203f02db",
+ "witness_id": "W-kim-804-n172",
+ "cases": [
+  {
+   "control": "positive",
+   "cpu_seconds": 950.140661463,
+   "exact_verify": {
+    "coordinate_provenance": "verified",
+    "failures": [],
+    "field_certificate": {
+     "declared_isolating_interval": [
+      "82291462424371288210968248631545907928095344778348835596891245515505331044963/200000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "82291462424371288210968248631545907928135344778348835596891245515505331044963/200000000000000000000000000000000000000000000000000000000000000000000000000000"
+     ],
+     "endpoints_are_not_roots": true,
+     "irreducibility_method": "irreducible-reduction-mod-prime",
+     "irreducibility_prime": 29,
+     "irreducible_over_q": true,
+     "normalized_minimal_polynomial": [
+      "1",
+      "-357488/42049",
+      "1451484/42049",
+      "-3979856/42049",
+      "8425826/42049",
+      "-13947152/42049",
+      "17764524/42049",
+      "-17208752/42049",
+      "11466479/42049",
+      "-406688/6007",
+      "-2980168/42049",
+      "2907872/42049",
+      "325980/42049",
+      "-117472/6007",
+      "17720/42049",
+      "351392/42049",
+      "175535/42049",
+      "33744/42049",
+      "-14996/42049",
+      "-11152/42049",
+      "-2974/42049",
+      "-464/42049",
+      "4/6007",
+      "16/42049",
+      "1/42049"
+     ],
+     "root_count_in_open_interval": 1,
+     "root_count_method": "sturm-sequence-over-q"
+    },
+    "id": "W-kim-804-n172-positive",
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality.",
+    "method": "exact-algebraic",
+    "minimum_best_pair_gap": "0",
+    "minimum_containment_clearance": "0",
+    "n": 172,
+    "operation": "verify",
+    "pairs_tested": 14706,
+    "side": "13.6189889568993984288635016293504898995040150",
+    "verification_passed": true
+   },
+   "n": 172,
+   "wall_seconds": 2046.4963569770007
+  },
+  {
+   "control": "duplicate-square-overlap",
+   "cpu_seconds": 840.640642729,
+   "exact_verify": {
+    "coordinate_provenance": "not-established",
+    "failures": [
+     [
+      "overlap",
+      "squares 0 and 1 overlap"
+     ]
+    ],
+    "field_certificate": {
+     "declared_isolating_interval": [
+      "82291462424371288210968248631545907928095344778348835596891245515505331044963/200000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "82291462424371288210968248631545907928135344778348835596891245515505331044963/200000000000000000000000000000000000000000000000000000000000000000000000000000"
+     ],
+     "endpoints_are_not_roots": true,
+     "irreducibility_method": "irreducible-reduction-mod-prime",
+     "irreducibility_prime": 29,
+     "irreducible_over_q": true,
+     "normalized_minimal_polynomial": [
+      "1",
+      "-357488/42049",
+      "1451484/42049",
+      "-3979856/42049",
+      "8425826/42049",
+      "-13947152/42049",
+      "17764524/42049",
+      "-17208752/42049",
+      "11466479/42049",
+      "-406688/6007",
+      "-2980168/42049",
+      "2907872/42049",
+      "325980/42049",
+      "-117472/6007",
+      "17720/42049",
+      "351392/42049",
+      "175535/42049",
+      "33744/42049",
+      "-14996/42049",
+      "-11152/42049",
+      "-2974/42049",
+      "-464/42049",
+      "4/6007",
+      "16/42049",
+      "1/42049"
+     ],
+     "root_count_in_open_interval": 1,
+     "root_count_method": "sturm-sequence-over-q"
+    },
+    "id": "W-kim-804-n172-duplicate-square-overlap",
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality.",
+    "method": "exact-algebraic",
+    "minimum_best_pair_gap": "-1",
+    "minimum_containment_clearance": "0",
+    "n": 172,
+    "operation": "verify",
+    "pairs_tested": 14706,
+    "side": "13.6189889568993984288635016293504898995040150",
+    "verification_passed": false
+   },
+   "n": 172,
+   "wall_seconds": 2328.3798595999997
+  },
+  {
+   "control": "square-translated-outside-container",
+   "cpu_seconds": 1009.7718229989999,
+   "exact_verify": {
+    "coordinate_provenance": "not-established",
+    "failures": [
+     [
+      "container",
+      "square 0 violates x<=s"
+     ],
+     [
+      "container",
+      "square 0 violates x<=s"
+     ],
+     [
+      "container",
+      "square 0 violates x<=s"
+     ],
+     [
+      "container",
+      "square 0 violates x<=s"
+     ]
+    ],
+    "field_certificate": {
+     "declared_isolating_interval": [
+      "82291462424371288210968248631545907928095344778348835596891245515505331044963/200000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "82291462424371288210968248631545907928135344778348835596891245515505331044963/200000000000000000000000000000000000000000000000000000000000000000000000000000"
+     ],
+     "endpoints_are_not_roots": true,
+     "irreducibility_method": "irreducible-reduction-mod-prime",
+     "irreducibility_prime": 29,
+     "irreducible_over_q": true,
+     "normalized_minimal_polynomial": [
+      "1",
+      "-357488/42049",
+      "1451484/42049",
+      "-3979856/42049",
+      "8425826/42049",
+      "-13947152/42049",
+      "17764524/42049",
+      "-17208752/42049",
+      "11466479/42049",
+      "-406688/6007",
+      "-2980168/42049",
+      "2907872/42049",
+      "325980/42049",
+      "-117472/6007",
+      "17720/42049",
+      "351392/42049",
+      "175535/42049",
+      "33744/42049",
+      "-14996/42049",
+      "-11152/42049",
+      "-2974/42049",
+      "-464/42049",
+      "4/6007",
+      "16/42049",
+      "1/42049"
+     ],
+     "root_count_in_open_interval": 1,
+     "root_count_method": "sturm-sequence-over-q"
+    },
+    "id": "W-kim-804-n172-square-translated-outside-container",
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality.",
+    "method": "exact-algebraic",
+    "minimum_best_pair_gap": "0",
+    "minimum_containment_clearance": "-3",
+    "n": 172,
+    "operation": "verify",
+    "pairs_tested": 14706,
+    "side": "13.6189889568993984288635016293504898995040150",
+    "verification_passed": false
+   },
+   "n": 172,
+   "wall_seconds": 1970.7454033560007
+  }
+ ]
+}

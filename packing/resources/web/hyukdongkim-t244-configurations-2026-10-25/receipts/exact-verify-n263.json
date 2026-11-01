@@ -1,0 +1,187 @@
+{
+ "format": "minpoly-configuration-route-v1",
+ "route": "exact_verify",
+ "n": 263,
+ "fact_member_sha256": "de646870e0ecd0d6c042e4742de023ebbcdddb28aac4aa51469dbf53dc264686",
+ "witness_id": "W-kim-804-n263",
+ "cases": [
+  {
+   "control": "positive",
+   "cpu_seconds": 1321.4540844169999,
+   "exact_verify": {
+    "coordinate_provenance": "verified",
+    "failures": [],
+    "field_certificate": {
+     "declared_isolating_interval": [
+      "-40209356170916115477093348437838684904773950214926367660028509032275538252799/100000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "-40209356170916115477093348437838684904753950214926367660028509032275538252799/100000000000000000000000000000000000000000000000000000000000000000000000000000"
+     ],
+     "endpoints_are_not_roots": true,
+     "irreducibility_method": "irreducible-reduction-mod-prime",
+     "irreducibility_prime": 29,
+     "irreducible_over_q": true,
+     "normalized_minimal_polynomial": [
+      "1",
+      "237/65",
+      "9193/325",
+      "26086/325",
+      "37943/325",
+      "17458/325",
+      "-23431/325",
+      "-41402/325",
+      "-18127/325",
+      "12604/325",
+      "27283/325",
+      "1738/25",
+      "15397/325",
+      "22",
+      "2059/325",
+      "402/325",
+      "46/325",
+      "3/325"
+     ],
+     "root_count_in_open_interval": 1,
+     "root_count_method": "sturm-sequence-over-q"
+    },
+    "id": "W-kim-804-n263-positive",
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality.",
+    "method": "exact-algebraic",
+    "minimum_best_pair_gap": "0",
+    "minimum_containment_clearance": "0",
+    "n": 263,
+    "operation": "verify",
+    "pairs_tested": 34453,
+    "side": "16.7331660078993789705122814839596734462471472483",
+    "verification_passed": true
+   },
+   "n": 263,
+   "wall_seconds": 3316.4013093559997
+  },
+  {
+   "control": "duplicate-square-overlap",
+   "cpu_seconds": 1286.4587532399999,
+   "exact_verify": {
+    "coordinate_provenance": "not-established",
+    "failures": [
+     [
+      "overlap",
+      "squares 0 and 1 overlap"
+     ]
+    ],
+    "field_certificate": {
+     "declared_isolating_interval": [
+      "-40209356170916115477093348437838684904773950214926367660028509032275538252799/100000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "-40209356170916115477093348437838684904753950214926367660028509032275538252799/100000000000000000000000000000000000000000000000000000000000000000000000000000"
+     ],
+     "endpoints_are_not_roots": true,
+     "irreducibility_method": "irreducible-reduction-mod-prime",
+     "irreducibility_prime": 29,
+     "irreducible_over_q": true,
+     "normalized_minimal_polynomial": [
+      "1",
+      "237/65",
+      "9193/325",
+      "26086/325",
+      "37943/325",
+      "17458/325",
+      "-23431/325",
+      "-41402/325",
+      "-18127/325",
+      "12604/325",
+      "27283/325",
+      "1738/25",
+      "15397/325",
+      "22",
+      "2059/325",
+      "402/325",
+      "46/325",
+      "3/325"
+     ],
+     "root_count_in_open_interval": 1,
+     "root_count_method": "sturm-sequence-over-q"
+    },
+    "id": "W-kim-804-n263-duplicate-square-overlap",
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality.",
+    "method": "exact-algebraic",
+    "minimum_best_pair_gap": "-1",
+    "minimum_containment_clearance": "0",
+    "n": 263,
+    "operation": "verify",
+    "pairs_tested": 34453,
+    "side": "16.7331660078993789705122814839596734462471472483",
+    "verification_passed": false
+   },
+   "n": 263,
+   "wall_seconds": 2723.2216554900006
+  },
+  {
+   "control": "square-translated-outside-container",
+   "cpu_seconds": 1371.441997294,
+   "exact_verify": {
+    "coordinate_provenance": "not-established",
+    "failures": [
+     [
+      "container",
+      "square 0 violates x<=s"
+     ],
+     [
+      "container",
+      "square 0 violates x<=s"
+     ],
+     [
+      "container",
+      "square 0 violates x<=s"
+     ],
+     [
+      "container",
+      "square 0 violates x<=s"
+     ]
+    ],
+    "field_certificate": {
+     "declared_isolating_interval": [
+      "-40209356170916115477093348437838684904773950214926367660028509032275538252799/100000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "-40209356170916115477093348437838684904753950214926367660028509032275538252799/100000000000000000000000000000000000000000000000000000000000000000000000000000"
+     ],
+     "endpoints_are_not_roots": true,
+     "irreducibility_method": "irreducible-reduction-mod-prime",
+     "irreducibility_prime": 29,
+     "irreducible_over_q": true,
+     "normalized_minimal_polynomial": [
+      "1",
+      "237/65",
+      "9193/325",
+      "26086/325",
+      "37943/325",
+      "17458/325",
+      "-23431/325",
+      "-41402/325",
+      "-18127/325",
+      "12604/325",
+      "27283/325",
+      "1738/25",
+      "15397/325",
+      "22",
+      "2059/325",
+      "402/325",
+      "46/325",
+      "3/325"
+     ],
+     "root_count_in_open_interval": 1,
+     "root_count_method": "sturm-sequence-over-q"
+    },
+    "id": "W-kim-804-n263-square-translated-outside-container",
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality.",
+    "method": "exact-algebraic",
+    "minimum_best_pair_gap": "0",
+    "minimum_containment_clearance": "-17",
+    "n": 263,
+    "operation": "verify",
+    "pairs_tested": 34453,
+    "side": "16.7331660078993789705122814839596734462471472483",
+    "verification_passed": false
+   },
+   "n": 263,
+   "wall_seconds": 2062.0130944089997
+  }
+ ]
+}
