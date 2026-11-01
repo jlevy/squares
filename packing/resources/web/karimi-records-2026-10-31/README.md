@@ -29,18 +29,18 @@ row.
 `devtools.acquire_source` wrote the packet from the declaration in `acquisition/`, from a
 full clone at the pin; every file is bound to its Git blob at `ad8b094`, and
 `acquisition/upstream-subtree.sha256` lists all seven. The scope is the whole tree:
-990,199 bytes, all retained. The receipts add 4,488,333 bytes: 2,128,349 for
-`two-strip-decisions-v5.json`, 28,464 for the two samples, and 2,331,520 for the full
+990,199 bytes, all retained. The receipts add 2,780,357 bytes: 420,373 for
+`two-strip-decisions-v5.json.gz`, 28,464 for the two samples, and 2,331,520 for the full
 replay of v5, 66 receipts of at most 169 lines each and their summary. So the packet is
-about 5.5 MB in a checkout; OR-18 admits it, and `check_added_blobs` passes. No
-two-strip receipt is stored as gzip: `two-strip-decisions-v5.json` is over the 1,000
-lines at which `devtools.retained_data` would, and think-rsqv moves the family to that
-convention.
+about 3.8 MB in a checkout; OR-18 admits it, and `check_added_blobs` passes. The
+decisions receipt, 5,339 lines and 2,128,349 bytes, is stored as deterministic gzip, as
+`devtools.retained_data` keeps a retained file of more than 1,000 lines
+([Compressed Files](#compressed-files)); every other two-strip receipt is under that
+threshold.
 
-W9’s receipts follow the convention from the start: its two decisions receipts are
-stored as deterministic gzip, read through `devtools.retained_data`
-([Compressed Files](#compressed-files)), and the three add 1,356,592 bytes stored: 724,448 and 617,689 for V2.0's and V1.0's
-decisions, 14,455 for the replay sample.
+W9’s receipts (below) add 1,356,592 bytes stored, so the packet is about 5.1 MB: its two
+decisions receipts, each over 1,000 lines, are stored the same way, 724,448 bytes for
+V2.0’s and 617,689 for V1.0’s, and the replay sample is 14,455 bytes, plain.
 
 Each digest the author stated holds:
 
@@ -92,7 +92,8 @@ whatever the project’s owner decides”), are the walk’s and the owner’s, 
 
 ## Decided Here
 
-**v5, every row** (`receipts/two-strip-decisions-v5.json`): `devtools.two_strip_checker`
+**v5, every row** (`receipts/two-strip-decisions-v5.json`, stored as `.gz`):
+`devtools.two_strip_checker`
 reads the retained archive’s `records.csv` through version 5’s own column set and
 decides all 5,308 rows exactly from their parameters, each row’s seven controls refused
 (212.9 CPU-seconds with the digests of every written-out certificate, which are not
@@ -220,6 +221,26 @@ unreachable from this environment, so neither its title nor its text was read.
 the walk above 1024 records them, so the preprint enters it with those rows. Fetching it
 and reading its metadata before then is think-rf6h’s.
 
+## Compressed Files
+
+Version 5’s decisions receipt is stored as gzip with no file name or timestamp in the
+header (think-rsqv); it decompresses to the receipt as written on 31 October.
+`two_strip_checker` reads and writes it through `devtools.retained_data`, so `check`
+takes the plain path and `decide-all` writes the gzip again.
+A rerun records new timings, so the receipt is not pinned by digest: Git keeps its
+bytes (OR-16), and `acquire_source --check` asks that it is listed, carries no name or
+timestamp, and decompresses.
+
+W9’s two decisions receipts are stored the same way, through
+`filled_end_checker`, which reads and writes them by `devtools.retained_data`, and are
+listed here on the same terms.
+
+| Stored file | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `receipts/two-strip-decisions-v5.json.gz` | receipt |  |  |
+| `receipts/filled-end-decisions-v1.json.gz` | receipt |  |  |
+| `receipts/filled-end-decisions-v2.json.gz` | receipt |  |  |
+
 ## Commands
 
 From `packing/`, with the project interpreter:
@@ -235,16 +256,6 @@ python -m devtools.filled_end_checker check [--digests] [--replay]
 python -m devtools.filled_end_checker decide-all [--version 2] [--version 1]
 python -m devtools.filled_end_checker replay-sample --workers 2
 ```
-
-## Compressed Files
-
-W9’s two decisions receipts are stored as deterministic gzip (`gzip -9n`);
-`gunzip -k` restores each beside it.
-
-| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
-| --- | --- | --- | --- |
-| `receipts/filled-end-decisions-v1.json.gz` | receipt | `f197eac32335636f56b73070587c80c76260f88e` | `1f8b88ace8495a3444795bf30a63d04239b6c6a396e82469f6368d80285d1f92` |
-| `receipts/filled-end-decisions-v2.json.gz` | receipt | `13cc14f2e612c91474342063f2a9d91484372776` | `1287454cd141af7af9f79a0d1d694d9afbe6bbadea02540031c93bcce9b13a85` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

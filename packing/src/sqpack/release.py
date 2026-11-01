@@ -10768,6 +10768,41 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/retained_data.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Intake lane L12 of 1 November (think-rsqv): retained_data gains "
+            "write_retained, a writer the two-strip checker stores its receipts through, "
+            "and reads nothing differently; the papers reach it only through their builders' "
+            "import closure. Against main e36ecf29d (#867): rendered at link revision "
+            "0000000000000000000000000000000000000000 into empty site directories, twice "
+            "from this tree and once with that main's retained_data.py swapped in, by "
+            "render_packing_methods, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_n11_lower_bounds_explainer, its "
+            "math pass in Google Chrome for Testing 153 (SQPACK_CHROMIUM): 69 files, all "
+            "byte-identical across the three. Measured again after review A of #869 had "
+            "write_retained make its gzip in-process and check_packet admit a receipt row "
+            "with no digest, against the same main the same way: 69 files, byte-identical "
+            "across the three. No PDF was printed; each prints from that HTML. Every paper "
+            "keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=("packing/campaign/result-requests.yaml",),
         outputs=(

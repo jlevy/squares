@@ -222,7 +222,8 @@ $defs:
           What someone other than the pass must do before the open issue can move: the
           type is the GitHub label `blocked:<type>` the issue carries (development.md,
           Issue and Pull-Request Labels), and `check_requests --github` holds the live
-          labels to it. Work that is the project's own and that nobody holds is not
+          labels to it. While it stands, of any type, the issue is not closeable
+          (think-u4bm). Work that is the project's own and that nobody holds is not
           blocked. Removed once the block lifts; a closed issue carries none.
         properties:
           type:
@@ -246,7 +247,9 @@ $defs:
           What closing the issue would take, as the entry was written. Descriptive only:
           `check_requests.closeable` and the rule in campaign/result-import.md (The
           Requests Record) decide when an issue closes, and where this text says more or
-          less, the rule governs.
+          less, the rule governs. One clause is read: one that waits on the owner's
+          decision or answer holds an issue with no `blocked` open, so record the block
+          while the decision stands and reword this once it is met (think-u4bm).
       notes: {type: string, minLength: 1}
     allOf:
       - if:

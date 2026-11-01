@@ -100,6 +100,12 @@ in version 2. The receipts are:
   `beyond_horizon_replay.decide_row` decides a row, so the lemma's verdict and the
   routes' agree where both are run. Version 2 states the same row at all five.
 
+Every receipt is read and written through `devtools.retained_data` (think-rsqv): one of
+more than 1,000 lines, as version 2's and version 5's decisions receipts are, is stored
+as ``X.gz`` with no file name or timestamp, and read at its plain path ``X``. A rerun
+records new timings, so the packets pin no digest of a receipt; Git keeps its bytes
+(OR-16, review A2 of #869).
+
 **#836's version 5** (`V5`, record 23664800, 5,308 rows at 1182 to 9944) is kept by
 another packet, ``karimi-records-2026-10-31``, which ``devtools.acquire_source`` wrote
 from the author's GitHub copy of his Zenodo records at ad8b094, since zenodo.org was
@@ -179,10 +185,14 @@ from itertools import islice
 from pathlib import Path
 from typing import Any
 
-from strif import atomic_output_file
-
 from devtools import evand_exact_certificates as legacy
-from devtools.retained_data import read_retained_bytes
+from devtools.retained_data import (
+    GZIP_SUFFIX,
+    read_retained_bytes,
+    read_retained_text,
+    retained_exists,
+    write_retained,
+)
 from sqpack.retained_json import dumps as retained_dumps
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -648,7 +658,8 @@ def _sha256(data: bytes) -> str:
 
 
 def _read(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+    """A receipt, read plain or from its ``.gz`` (`devtools.retained_data`)."""
+    return json.loads(read_retained_text(path))
 
 
 def archived_records(deposit: Deposit) -> str:
@@ -850,9 +861,9 @@ def author_flags(
 
 
 def _write(path: Path, value: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with atomic_output_file(path) as temporary:
-        temporary.write_text(retained_dumps(value, sort_keys=True), encoding="utf-8")
+    """A receipt, stored plain or, past 1,000 lines, as deterministic gzip
+    (`devtools.retained_data.write_retained`, think-rsqv)."""
+    write_retained(path, retained_dumps(value, sort_keys=True).encode("utf-8"))
 
 
 def _environment() -> dict[str, str]:
@@ -1123,7 +1134,7 @@ def part_is_current(deposit: Deposit, k: int, rows: Sequence[TwoStrip]) -> bool:
     routes, another filter lemma or another rule is decided again. Whether its verdicts
     hold is `route_problems`'s."""
     path = deposit.route_part(k)
-    if not path.is_file():
+    if not retained_exists(path):
         return False
     try:
         receipt = _read(path)
@@ -1398,7 +1409,10 @@ def route_problems(
     label = deposit.label
     groups = by_k(records(deposit))
     by_n = {item["n"]: item for item in stored}
-    present = {path.stem for path in deposit.route_parts.glob("*.json")}
+    present = {
+        Path(path.name.removesuffix(GZIP_SUFFIX)).stem
+        for path in deposit.route_parts.glob("*.json*")
+    }
     named = {deposit.route_part(k).stem: k for k in groups}
     problems = (
         [
@@ -1424,7 +1438,7 @@ def route_problems(
     if ks is not None:
         return problems
     summary = deposit.route_summary
-    if not summary.is_file():
+    if not retained_exists(summary):
         if deposit.full_replay_complete:
             problems.append(f"{label}: the full replay has no summary, {summary.name}")
         return problems
@@ -1450,7 +1464,7 @@ def route_problems(
 def route_coverage(deposit: Deposit) -> str:
     """A deposit's full replay in a line, for `check`'s report: from its summary once
     written, else the rows its current receipts cover and the Ks still without one."""
-    if deposit.route_summary.is_file():
+    if retained_exists(deposit.route_summary):
         coverage = _read(deposit.route_summary)["coverage"]
         return (
             f"{coverage['verified']} of {coverage['deposit_rows']} {deposit.label} rows "

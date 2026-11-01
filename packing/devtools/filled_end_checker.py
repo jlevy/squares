@@ -129,8 +129,10 @@ nothing.
   (``decide-all``): every row of each deposit decided by the lemma, every control
   refused, and the SHA-256 and size of each written-out certificate, which the record
   does not keep (OR-18: they are derived, and `write_out` writes them again byte for
-  byte). Over 1,000 lines each, they are stored as deterministic gzip and read through
-  `devtools.retained_data`. V1.0's is decided and labelled apart: whether V1.0 counts as
+  byte). Over 1,000 lines each, they are read and written through
+  `devtools.retained_data` and stored as ``X.gz`` with no file name or timestamp; a
+  rerun records new timings, so the packet pins no digest of them and Git keeps their
+  bytes (OR-16). V1.0's is decided and labelled apart: whether V1.0 counts as
   a report at all is the owner's question Q-847a (think-r94q), and neither receipt
   records a row of the coverage register.
 - ``receipts/filled-end-checker-replay-sample.json`` (``replay-sample``): the
@@ -179,8 +181,6 @@ from functools import lru_cache, partial
 from itertools import islice
 from pathlib import Path
 from typing import Any
-
-from strif import atomic_output_file
 
 from devtools import evand_exact_certificates as legacy
 from devtools import retained_data
@@ -918,17 +918,11 @@ def read_receipt(path: Path) -> Any:
 
 
 def _write(path: Path, value: Any) -> Path:
-    """Write a receipt; one of more than `retained_data.LINE_THRESHOLD` lines is stored as
-    deterministic gzip, ``X.gz``, by `retained_data.compress`. Returns the stored path."""
-    text = retained_dumps(value, sort_keys=True)
-    packed = retained_data.compressed_path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    packed.unlink(missing_ok=True)
-    with atomic_output_file(path) as temporary:
-        temporary.write_text(text, encoding="utf-8")
-    if text.count("\n") > retained_data.LINE_THRESHOLD:
-        return retained_data.compress(path)
-    return path
+    """Write a receipt by `retained_data.write_retained`: one of more than
+    `retained_data.LINE_THRESHOLD` lines is stored as ``X.gz`` with no file name or
+    timestamp, anything else plain, and a stored file that already holds the bytes is
+    kept. Returns the stored path."""
+    return retained_data.write_retained(path, retained_dumps(value, sort_keys=True).encode())
 
 
 def _environment() -> dict[str, str]:

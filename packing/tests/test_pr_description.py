@@ -9,12 +9,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from devtools.check_pr_description import (
     CHANGE_COLUMNS,
     DISPOSITION_COLUMNS,
     TEMPLATE,
     check,
     headings,
+    main,
 )
 from devtools.render_pr_rollup import render_agenda_closeout
 
@@ -206,6 +209,99 @@ def test_an_agenda_closeout_render_fills_the_contract() -> None:
     }
     rendered = "## What this branch cost\n\nstub\n" + render_agenda_closeout(agenda)
     assert check(rendered, filled=True) == []
+
+
+@pytest.mark.parametrize(
+    ("phrase", "keyword"),
+    [
+        ("Closes #613.", "Closes #613"),
+        ("fixes #613", "fixes #613"),
+        ("Fixed: #613", "Fixed: #613"),
+        ("This resolves jlevy/squares#613.", "resolves jlevy/squares#613"),
+        (
+            "closed https://github.com/jlevy/squares/issues/613",
+            "closed https://github.com/jlevy/squares/issues/613",
+        ),
+    ],
+)
+def test_an_intake_description_may_not_use_a_closing_keyword(phrase: str, keyword: str) -> None:
+    """think-t9uj: #834's description said `closes #613`, so its merge closed #613
+    fourteen minutes before the pass posted the final comment, which stage 7 closes the
+    issue with. An intake pull request names its issues without a closing keyword."""
+    body = FILLED.replace("This does not move s(11).", f"This does not move s(11). {phrase}")
+    problems = check(body, filled=True, labels=("S2", "intake"))
+    assert [item for item in problems if "closing keyword" in item] == [
+        (
+            f"an intake description uses a GitHub closing keyword ({keyword}), "
+            "which closes the issue at the merge, before its final comment; write "
+            "'answers #N' or 'records #N'"
+        )
+    ]
+    assert check(body, filled=True) == []
+
+
+@pytest.mark.parametrize(
+    "phrase",
+    [
+        "**Closes** #613.",
+        "Closes:#613",
+        "closes [#613](https://github.com/jlevy/squares/issues/613)",
+        "_Fixes_: jlevy/squares#613",
+    ],
+)
+def test_a_closing_keyword_in_markdown_dress_is_refused(phrase: str) -> None:
+    """Review A3 of #869: bold, a colon with no space, and this repository's own link
+    style each still close the issue, and each slipped past the first pattern."""
+    body = FILLED.replace("This does not move s(11).", f"This does not move s(11). {phrase}")
+    problems = check(body, filled=True, labels=("intake",))
+    assert len([item for item in problems if "closing keyword" in item]) == 1, problems
+
+
+@pytest.mark.parametrize(
+    "phrase", ["A fixed-width #12 column.", "The enclosed #12.", "An unresolved #12."]
+)
+def test_a_word_that_only_contains_a_keyword_is_not_one(phrase: str) -> None:
+    body = FILLED.replace("This does not move s(11).", f"This does not move s(11). {phrase}")
+    assert check(body, filled=True, labels=("intake",)) == []
+
+
+def test_an_intake_title_may_not_use_a_closing_keyword(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review A3 of #869: the merge commit's message carries the title, and a closing
+    keyword in a commit that lands on main closes the issue too."""
+    title = "records(#613): Göbel's sides beyond 324, closes #613"
+    problems = check(FILLED, filled=True, labels=("intake",), title=title)
+    assert problems == [
+        (
+            "an intake title uses a GitHub closing keyword (closes #613), which closes the "
+            "issue at the merge, before its final comment; write 'answers #N' or 'records #N'"
+        )
+    ]
+    assert check(FILLED, filled=True, title=title) == []
+    assert check(FILLED, filled=True, labels=("intake",), title="records(#613)") == []
+    path = tmp_path / "BODY.md"
+    path.write_text(FILLED)
+    assert main(["--file", str(path), "--label", "intake", "--title", title]) == 1
+    assert "intake title uses a GitHub closing keyword" in capsys.readouterr().out
+
+
+def test_an_intake_description_may_answer_or_record_its_issues() -> None:
+    body = FILLED.replace(
+        "This does not move s(11).",
+        "Answers #613 and records #614; each closes with its final comment after the merge.",
+    )
+    assert check(body, filled=True, labels=("intake",)) == []
+
+
+def test_the_command_takes_the_pull_request_s_labels(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    path = tmp_path / "BODY.md"
+    path.write_text(FILLED.replace("This does not move", "Closes #613. This does not move"))
+    assert main(["--file", str(path)]) == 0
+    assert main(["--file", str(path), "--label", "S2", "--label", "intake"]) == 1
+    assert "closing keyword (Closes #613)" in capsys.readouterr().out
 
 
 def test_the_template_lives_at_the_repository_root() -> None:
