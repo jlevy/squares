@@ -63,6 +63,7 @@ not kept: `candidates.py` rebuilds them byte for byte from the retained densitie
 | `c6718_control` | c6718, every weight × 985/1000 | 3350/3359, 4999/5000 | REFUSED, 86 of 86 | 5,979 | 0.98648, refused | holds; 86 refutations, least 0.98648 | 2.5 |
 | `c6715_oblique` | c6715 | 199529/200000, 24997/25000 | VERIFIED, 86 of 86 roots | 113,317,246 | 0.99988263 | holds, as VERIFIED | 3,156.5 |
 | `c6718_oblique` | c6718 | 3350/3359, 1 | VERIFIED, 86 of 86 roots | 124,136,598 | 1.00149865 | holds, as VERIFIED | 4,935.5 |
+| `c6718_oblique1001` | c6718 | 3350/3359, 1001/1000 | REFUSED, 17 of 86 roots, the patch verified | 169,336,387 | 1.00149865 | holds; 0 refutations | 6,624.9 |
 
 **The claims.** Both runs verify at all 86 roots and at the patch, no root inherited,
 every verified root a complete binary cover ($\text{nodes} = 2\,\text{leaves} - 1$)
@@ -78,6 +79,11 @@ shared with another lane’s two-thread replay throughout.
 **The mass controls** reproduce the review’s rows node for node and the source’s README
 rows for v3. Each is refused at the axis patch and at every root within a few dozen
 boxes, so, as the review’s §11 says, it is a coarse test of the oblique search.
+They are the source’s controls, rebuilt here from this repository’s copies of the
+densities, not controls designed here.
+The source’s third control, T-157’s density at core 3348/3359, was not run again: it
+stands on the 23 October review’s run alone, refused in 12,364,148 nodes with 2 of its
+86 refusals refuting (the review’s SC-9).
 
 ## The Oblique Controls
 
@@ -88,7 +94,8 @@ at its own core, with $\tau'$ a round rational strictly between $\tau = 4999/500
 the axis patch’s minimum that the claim’s run printed.
 
 - **c6715**: the patch minimum is 0.99988263, and $\tau' = 24997/25000 = 0.99988$.
-- **c6718**: the patch minimum is 1.00149865, and $\tau' = 1$.
+- **c6718**: the patch minimum is 1.00149865, and $\tau' = 1$; then, after review A1 of
+  #865, $\tau' = 1001/1000$.
 
 Since $\tau' > \tau$, every premise still holds ($40\tau' > 3999/100$), and since
 $\tau'$ is below the patch minimum, the patch verifies.
@@ -126,15 +133,31 @@ of T-145’s density, within $2.6 \times 10^{-6}$ of the patch’s minimum, so f
 density the axis is the binding constraint, or nearly: only a threshold in
 $(0.99988, 0.99988263)$ could fail at the oblique roots alone.
 
-**So neither run is a control, and the design does not give one for these densities.** A
-threshold shift is the same as scaling every weight, and both densities are tightest at
-or near the axis, so it cannot fail at an oblique root without failing at the patch
-first. What these two runs do show is that both densities’ least captures over all
-oblique poses are known to within the gaps above, which a density mutant can now be
-aimed at: a counted oblique control needs one that lowers the capture at oblique poses
-alone, for instance by moving weight off rows that only tilted squares rely on, and an
-exact check that the mutant still passes the patch.
-That design, and its run, stay with think-flxm.
+**So neither run is a control.** A threshold shift is the same as scaling every weight
+by $\tau/\tau'$. For c6715 the design cannot give one: the density is tightest at or
+within $2.6 \times 10^{-6}$ of the axis, so a counted oblique control there needs a
+density mutant that lowers the capture at oblique poses alone, with an exact check that
+it still passes the patch.
+For c6718 the $\tau' = 1$ run bounds the oblique minimum only from below, at 1, against
+a patch minimum of 1.00149865, so the window $(1, 1.00149865)$ was still open after it
+(review A1 of #865).
+
+**c6718 at $\tau' = 1001/1000$, inside that window, came back REFUSED with no
+refutation** (review A1’s proposal): the patch and 69 roots verified, 17 roots refused,
+169,336,387 nodes, 6,624.9 CPU-seconds, judged faithful, every witness a legal pose and
+none below $\tau'$. It is no counted control, but it locates the oblique minimum.
+At the four roots of $t$ in $[23/100, 1/4]$ the search reached resolution at legal poses
+whose exact captures are $1001/1000$ plus $1.9 \times 10^{-13}$ to
+$2.9 \times 10^{-12}$, so T-157’s density has its least oblique capture there, at or
+just above $1001/1000$, as the uniform toy of the review’s §8.2 refuses at
+$\tau = 81/100$ without a refutation.
+The other 13 refusals, roots 3 and 4 ($t$ in $[1/1000, 1/100]$) and 75 to 85 ($t$ in
+$[9/25, 83/200]$), stopped at the node budget at poses capturing 1.0017 to 1.016, which
+decides nothing there.
+A threshold just above $1001/1000$ and below the patch minimum, such as $2503/2500$,
+should refute at those four roots while the patch holds, since their witnesses already
+capture less than it: that run, about 2 CPU-hours at this budget, is think-flxm’s next
+step toward a counted oblique control for c6718.
 
 ## What This Does Not Establish
 
@@ -146,8 +169,8 @@ clean-room. They share this repository’s `axis.rs`, `exact.rs`, `interval.rs`,
 `axis.rs` sweep that `E-n040-guzhou-continuous-pose-crate-axis` and
 `E-n040-guzhou-new-supports-crate-axis` already run.
 No counted oblique control has run: the mass controls are refused at the patch and at
-every root within a few dozen boxes, and the threshold-shift runs, this lane’s design
-and not yet read by a review, verified.
+every root within a few dozen boxes, and of the three threshold-shift runs, this lane’s
+design, two verified and the third refused without a refutation.
 Nothing here is a second method, a formal verification or human oversight, and no rung
 moves.
 

@@ -1,20 +1,25 @@
 # The Review’s Programs and Receipts
 
-The programs the [soundness review of 23 October 2026](../../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
-of wand125’s `sqverify_continuous` wrote and ran, and what they printed. They were
-written by Claude (Anthropic), the stage 4 validation lane `c-review-sqvc-1023` of the 23
-October 2026 intake pass (think-xzob), tier `tbd-strong-max`, maximum reasoning, after
-reading the verifier’s source in this packet and its v3 sibling, this repository’s copies
-of the modules it reuses, and the source’s published summaries and logs; they import and
-copy none of the source’s code. `bounds_probe.py` transcribes the source’s box bound,
-because the transcription is what it tests.
+The programs the
+[soundness review of 23 October 2026](../../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+of wand125’s `sqverify_continuous` wrote and ran, and what they printed.
+They were written by Claude (Anthropic), the stage 4 validation lane
+`c-review-sqvc-1023` of the 23 October 2026 intake pass (think-xzob), tier
+`tbd-strong-max`, maximum reasoning, after reading the verifier’s source in this packet
+and its v3 sibling, this repository’s copies of the modules it reuses, and the source’s
+published summaries and logs; they import and copy none of the source’s code.
+`bounds_probe.py` transcribes the source’s box bound, because the transcription is what
+it tests.
 
-None of them decides a claim. Three are registered in
-[`verifiers.yaml`](../../../../frontier/verifiers.yaml) as premise programs:
-`V-sqverify-continuous-review-premises` (`premises.py`, `candidates.py`, `custody.py`),
-`V-sqverify-continuous-review-probe` (`bounds_probe.py`, `probe_suite.py`) and
-`V-sqverify-continuous-review-judge` (`judge_run.py`). No evidence entry cites them; the
-review does. `run_timed.py` is the clock and decides nothing.
+None of them decides a claim.
+Three are registered in [`verifiers.yaml`](../../../../frontier/verifiers.yaml) as
+premise programs: `V-sqverify-continuous-review-premises` (`premises.py`,
+`candidates.py`, `custody.py`), `V-sqverify-continuous-review-probe` (`bounds_probe.py`,
+`probe_suite.py`) and `V-sqverify-continuous-review-judge` (`judge_run.py`). The review
+cites them, and since 31 October 2026 the replay entries
+`E-n040-wand125-sqverify-continuous-6715-replay` and `-6718-replay` cite the first and
+the third, which built their candidates and judged their runs
+([`../replay/`](../replay/README.md)). `run_timed.py` is the clock and decides nothing.
 
 Every program runs on Python 3.14 with the standard library only, from any directory,
 and reads untrusted inputs, so run it with `-I`. Paths below are relative to this
@@ -64,15 +69,17 @@ $PY -I programs/judge_run.py receipts/runs/c6715_control.jsonl CAND/c6715_mass09
     --core 199529/200000 --tau 4999/5000 --expect REFUSED > receipts/judge-c6715_control.json
 ```
 
-The other runs differ only in candidate, core and threshold, as the table below gives; the
-n = 28 control ran with `--n 28 --core 499/500 --tau 1 --max-nodes 200000000`, the
-source’s own command. Each run went through `run_timed.py`, whose receipts keep the
-absolute scratch paths the run used.
+The other runs differ only in candidate, core and threshold, as the table below gives;
+the n = 28 control ran with `--n 28 --core 499/500 --tau 1 --max-nodes 200000000`, the
+source’s own command.
+Each run went through `run_timed.py`, whose receipts keep the absolute scratch paths the
+run used.
 
 ## What They Printed
 
-**Custody** (`custody.json`): v3 `1266a8b90f9a355d74772e211a7b9a52d0236b0d33cc4113d2f897d8a1044f33`
-and v4 `619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5`; `axis.rs`,
+**Custody** (`custody.json`): v3
+`1266a8b90f9a355d74772e211a7b9a52d0236b0d33cc4113d2f897d8a1044f33` and v4
+`619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5`; `axis.rs`,
 `exact.rs`, `interval.rs`, `oracle.rs` and `rotated.rs` the same blobs as this
 repository’s at `dee22b88`, `910b6b12c` and `origin/main`; from v3 to v4, only `Params`
 and `run` of `slab.rs` changed, with `run_key` and `inherited` added.
@@ -91,8 +98,8 @@ admissible rows, mass 2799999/100000, 7,068 images, its control the candidate ti
 failure; 9 of 10 mutations detected, the midpoint rule not (the review’s §8.1 says why).
 623 CPU-seconds.
 
-**The verifier** (binary `31936c4d…`; `build-v4.json`, 34 CPU-seconds;
-`test-v4.json` and `test-v4.log`, 36 tests passed, 85 CPU-seconds):
+**The verifier** (binary `31936c4d…`; `build-v4.json`, 34 CPU-seconds; `test-v4.json`
+and `test-v4.log`, 36 tests passed, 85 CPU-seconds):
 
 | Run | Candidate | Core, threshold | Status | Nodes | Refusals that refute | CPU-s |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -104,9 +111,9 @@ failure; 9 of 10 mutations detected, the midpoint rule not (the review’s §8.1
 | `c6718_B3348` | c6718 | 3348/3359, 4999/5000 | REFUSED | 12,364,148 | 2 of 86 | 266 |
 | `n28_control` | the asset’s control | 499/500, 1 | REFUSED | 5,478 | 86 of 86 | 3.7 |
 
-Every judge receipt holds all its checks; all 516 refusal witnesses are legal poses whose
-exact capture equals the run’s. The n = 40 rows equal the source’s README rows for v3, and
-the n = 28 run equals the source’s `control.jsonl` root by root.
+Every judge receipt holds all its checks; all 516 refusal witnesses are legal poses
+whose exact capture equals the run’s. The n = 40 rows equal the source’s README rows for
+v3, and the n = 28 run equals the source’s `control.jsonl` root by root.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
