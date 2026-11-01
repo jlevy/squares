@@ -382,18 +382,23 @@ def test_a_corrupt_encrypted_or_unknown_member_is_refused_as_custody(
 def test_an_altered_version_5_receipt_is_refused(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """In a copy of version 5's packet, its decisions receipt counting the author's flag
-    otherwise, and its replay receipt saying a route failed at 1253, are each named."""
+    """In a copy of version 5's packet, its decisions receipt relabelled as another
+    version reported elsewhere (every header field `decide_all` writes is compared, review
+    A1 of #870) and counting the author's flag otherwise, and its replay receipt saying a
+    route failed at 1253, are each named."""
     copied = tmp_path / checker.V5.packet
     shutil.copytree(checker.V5.home, copied)
     monkeypatch.setattr(checker, "REPO", tmp_path)
     receipt = _receipt(checker.V5.decisions)
     receipt["author_columns"]["counts"]["below_all_reported"]["no"] += 1
+    receipt["version"] = "v6.0"
+    receipt["reported"] = "https://github.com/jlevy/squares/issues/1"
     _rewrite(checker.V5.decisions, receipt)
     sample = json.loads(checker.replay_path(checker.V5).read_text(encoding="utf-8"))
     sample["rows"][1]["verified"] = False
     checker.replay_path(checker.V5).write_text(json.dumps(sample), encoding="utf-8")
     assert checker.check(deposits=(checker.V5,)) == [
+        "v5.0: the decisions receipt's header is not this checker's (reported, version)",
         "v5.0: the author's columns are not counted as the rows",
         "v5.0 n=1253: the written-out certificate failed a route",
     ]

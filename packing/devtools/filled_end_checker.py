@@ -7,10 +7,14 @@ states an exact side S, K = ceil(sqrt(n)), and six parameters bV, tV, yV, bH, tH
 one packing. It is Sungjoon Ryu's L-shaped packing (his Theorem 1.3) with two tilted bands
 of independent width, tilt and lift, and each band's two ends filled with axis-parallel
 layers, Evan Daniel's idea as Kevin Fang's note writes it. By the owner's D2 answer
-(think-f2io) such a row is a row once a checker this project maintains decides it exactly
-from its recipe; this module is that checker for the filled-end kind.
-`devtools.two_strip_checker` decides the two-strip rows of #799 and #836 and does not read
-these.
+(think-f2io) a row stated without a certificate is a row once a checker this project
+maintains decides it exactly from its recipe. This module is that checker for the
+filled-end kind, and its decisions count under D2 only once its lemma's stage 4 review
+accepts it. The review of 1 November accepted it, with no defect
+(``docs/project/reviews/review-2026-11-01-filled-end-lemma.md``). Which rows the record
+takes, and in what order, is still the walk's (think-llit), after the owner's D4 and, for
+V1.0, Q-847a. `devtools.two_strip_checker` decides the two-strip rows of #799 and #836
+and does not read these.
 
 **The construction.** The author's ``filled_ends.py`` states it; this module was written
 from that file read as data, and shares no code with it. For a tilt t = tan(theta/2),
@@ -37,22 +41,23 @@ placed by the reflection (X, Y) -> (Y, K - bH + X), which turns each of its squa
 
 **The lemma** (`LEMMA`). Let 2 <= K, 1 <= bV, bH <= K - 1, 0 < tV, tH < 1, and let S
 satisfy the fit inequalities K - bV + WV <= S and K - bH + WH <= S. Let each band have
-h <= L and 0 <= y <= F, and let each end of each band hold, at each level i, any number
-m_i of layer squares with 0 <= m_i <= W - a_i, placed as above (the construction takes
-the floor, the most). Then the grid, both bands' rows and all their layer squares are
-unit squares with pairwise disjoint interiors inside [0, S]^2. So s(n) <= S for every n
-up to their number, the capacity (K - bV)(K - bH) + bV RV + bH RH + every layer's m_i.
+h <= L and 0 <= y <= F, and let each end of each band hold, at each level i, m_i >= 0
+layer squares placed as above, finitely many levels holding any, with m_i <= W - a_i
+whenever m_i > 0 (the construction takes m_i = floor(W - a_i) while that is positive, the
+most). Then the grid, both bands' rows and all their layer squares are unit squares with
+pairwise disjoint interiors inside [0, S]^2. So s(n) <= S for every n up to their number,
+the capacity (K - bV)(K - bH) + bV RV + bH RH + every layer's m_i.
 
 *Proof.* In a band, take coordinates relative to its row 0: u and v are the components
-of (X, Y) - P_0 along (c, s) and (-s, c), so v = c (Y - y) - s (X - s).
+of (X, Y) - P_0 along (c, s) and (-s, c), so v = c (Y - y) - s (X - s). As h <= L,
+R >= 1, so F = L - (R - 1) p - h <= L - h.
 
 1. *Rows.* P_j - P_0 = (0, j p) has (u, v) = (j s/c, j), so square i of row j is
    {j s/c + i <= u <= j s/c + i + 1, j <= v <= j + 1}. Two squares of one row are
    separated by their u-intervals and two of different rows by their v-intervals. Row
    j's corners have X = s, s + b c, 0 and b c, so its X-extent is [0, W], and its
    Y-extent is [y + j p, y + j p + h]. Since y >= 0 and y + (R - 1) p + h = L - F + y
-   <= L, every row lies in [0, W] x [0, L], and every row lies in the half-plane
-   v >= 0.
+   <= L, every row lies in [0, W] x [0, L], and every row lies in 0 <= v <= R.
 2. *Near-end layers.* A level-i square is [X0, X0 + 1] x [i, i + 1] with
    W - m_i <= X0 <= W - 1. On it v grows with Y and falls with X, so its largest v is at
    the corner (X0, i + 1): c (i + 1 - y) - s (X0 - s) <= c (i + 1 - y) - s (W - m_i - s)
@@ -60,45 +65,86 @@ of (X, Y) - P_0 along (c, s) and (-s, c), so v = c (Y - y) - s (X - s).
    layer square lies in v <= 0 and meets no row's interior. Two layer squares of
    different levels are separated by their Y-intervals, of one level by their
    X-intervals. Each lies in [0, W] x [0, L]: X0 >= W - m_i >= a_i >= 0, X0 + 1 <= W,
-   i >= 0, and from v <= 0 and X <= W, Y <= y + (W - s) s/c = y + b s < y + h <= L.
-3. *Far-end layers.* The point reflection r(X, Y) = (W - X, L - Y) maps the band of lift
-   y' = F - y (also in [0, F], with the same R and F) onto the band of lift y: it sends
-   row j's corner P'_j + b (c, s) + (-s, c) = (b c, y' + j p + h) to
+   i >= 0, and from v <= 0 and X <= W, Y <= y + (W - s) s/c = y + b s < y + h <= L, the
+   last as y <= F <= L - h.
+3. *Far-end layers.* Let y' = F - y, also in [0, F], and let v' be v for the band of
+   lift y', which has the same R and F. The point reflection r(X, Y) = (W - X, L - Y)
+   satisfies v(r(X, Y)) = R - v'(X, Y): the sum is c (L - F) - s (W - 2 s) =
+   (R - 1) + c h - b c s + s^2 = R. It sends row j's corner
+   P'_j + b (c, s) + (-s, c) = (b c, y' + j p + h) to
    (s, L - h - y' - j p) = (s, y + (R - 1 - j) p) = P_{R - 1 - j}, and keeps edge
-   directions, so it maps row j onto row R - 1 - j and the edge v' = 0 of the former's
-   row 0 onto the edge v = R of row R - 1. The lift-y' band's near-end layers lie in
-   v' <= 0 (step 2), so the far-end layers lie in v >= R, away from every row, and in
-   [0, W] x [0, L], which r maps onto itself. As R >= 1, they meet no near-end layer's
-   interior, which lies in v < 0.
+   directions, so it maps row j of the band of lift y' onto row R - 1 - j of the band of
+   lift y. That band's near-end layers lie in v' <= 0 (step 2), so by the identity the
+   far-end layers lie in v >= R, where no row's interior is, and in [0, W] x [0, L],
+   which r maps onto itself. As R >= 1, they meet no near-end layer's interior, which
+   lies in v < 0.
 4. *The box.* A translation and the reflection in y = x are isometries, so each placed
-   band keeps its squares interior-disjoint. The V band lies in
-   [K - bV, K - bV + WV] x [0, S], the H band in [0, K - bV] x [K - bH, K - bH + WH] and
-   the grid in [0, K - bV] x [0, K - bH]: the V band is right of x = K - bV and the other
-   two left of it, and the H band is above y = K - bH and the grid below it. The fit
-   inequalities put all three inside [0, S]^2 (they give K - bV < S and K - bH < S).
+   band keeps its squares interior-disjoint. The H band's placement maps a square with
+   edges along (c, s) and (-s, c) onto one with edges along (s, c) and (c, -s): the
+   reflection turns the square turned by theta into the one turned by pi/2 - theta, and
+   a square is unchanged by a quarter-turn, so that is the square of the same centre
+   turned by -theta. The V band lies in [K - bV, K - bV + WV] x [0, S], the H band in
+   [0, K - bV] x [K - bH, K - bH + WH] and the grid in [0, K - bV] x [0, K - bH]: the V
+   band is right of x = K - bV and the other two left of it, and the H band is above
+   y = K - bH and the grid below it. The fit inequalities put all three inside [0, S]^2
+   (they give K - bV < S and K - bH < S).
 5. *Count.* Deleting squares from a packing leaves a packing. QED
 
 `decide` holds a row to the lemma in `Fraction`s and returns its capacity, each part's
 count, each band's rows and layers, both fit slacks, each band's free length and the least
 layer slack, or raises `FilledEndRefusedError` saying why not. It refuses any other kind; a
 K above `MAX_K`; a side above K, which bounds nothing the K x K grid does not and keeps the
-work a hostile row can ask for to about K levels a band end; a tilt outside (0, 1); a band
-of no rows or of K or more across; a side that fails either fit inequality; a band shorter
-than h; a lift outside [0, F]; a stated layer count outside [0, W - a_i]; and a count above
-the capacity. Whether S < K and whether K is ceil(sqrt(n)) are reported, not required: they
-say whether the bound beats the grid, not whether the packing is one. A checker of a lemma
-is sound, not complete: it refuses some genuine packings the lemma does not state, and
-must.
+work a hostile row can ask for to at most K levels a band end (a band end is examined at
+most at levels i <= floor(y + b s), fewer than L + 1 of them, since y + b s < L); a tilt
+outside (0, 1); a band of no rows or of K or more across; a side that fails either fit
+inequality; a band shorter than h; a lift outside [0, F]; a stated layer count below 0,
+or above W - a_i where positive; and a count above the capacity. Whether S < K and whether
+K is ceil(sqrt(n)) are reported, not required: they say whether the bound beats the grid,
+not whether the packing is one. A checker of a lemma is sound, not complete: it refuses
+some genuine packings the lemma does not state, and must. The order of its checks decides
+only which reason a refusal names, with one constraint: the tilt check comes before any
+division by c or s, since t = 1 makes p = 1/c and t = 0 makes c/s divide by zero, and a
+crash is not a refusal.
 
 `mutants` are a row's negative controls (`CONTROLS`), each a change `decide` must refuse,
-and `controls` decides them: the count one above the capacity; the side 10^-15 below the
-binding fit inequality (the V fit, which every row of both deposits meets with equality);
-each band's lift 10^-15 past its free length, so its last row passes the band's far end;
-each of the four band ends with one layer one square over, at every level in turn and at
-the level after its last; no tilt (tH = 0); a right angle (tV = 1); and an unknown kind. A
-layer one over always breaks the bound, since the construction's m_i is the floor of
-W - a_i. A control `decide` accepts is reported, ``refused`` False, so a check fails rather
-than passing it over.
+and `controls` decides them. Each names the check that must refuse it (`CONTROL_CHECKS`,
+read from the refusal's own words), and counts as refused only when every one of its
+changes is refused by that check: a change `decide` accepts, or refuses for another
+reason, is reported, ``refused`` False, so a check fails rather than passing it over. The
+controls, each with its check:
+
+- the count one above the capacity (n <= capacity);
+- the side 10^-15 below the binding fit inequality, the V fit, which every row of both
+  deposits meets with equality (the V fit);
+- each band's lift set to its free length plus 10^-15, from wherever it was, so its last
+  row passes the band's far end (y <= F). That moves the lift by all its room, sets the
+  far lift to -10^-15 and moves layers from one end to the other, so the change is more
+  than the lift;
+- each of the four band ends with one layer one square over, at every level in turn and
+  at the level after its last (m_i <= W - a_i). A layer one over always breaks the bound,
+  since the construction's m_i is the floor of W - a_i;
+- no tilt, tH = 0, and a right angle, tV = 1 (0 < t < 1);
+- an unknown kind (the kind);
+- the H band one square narrower (the H fit). That raises the band's top by 1 - cH, which
+  is more than the H fit's slack at every row, while the V fit holds. No change of the
+  side alone reaches the H fit, since the V fit binds first;
+- tH negated (0 < t < 1);
+- the V lift 10^-15 below zero (y >= 0);
+- a V near-end layer of -1 squares, at the level after its last (m_i >= 0);
+- the H band K wide (1 <= b <= K - 1);
+- K = 1 (2 <= K);
+- the V band K - 1 wide with its lift 0 (h <= L), which leaves the H band 1 long, less
+  than its depth bH sH + cH > 1.
+
+Some are refused by more than their own check, which `controls` does not ask about. At
+1188 with the named check deleted, the count, the side, the kind, each layer one over,
+the V lift past F, the narrower H band, the negative tilt and the lift below zero are
+accepted, and the right angle raises ZeroDivisionError. The other six are then refused
+by another check: the H lift past F and the H band K wide by the capacity, no tilt by the
+H fit, the -1 layer by m_i <= W - a_i, K of one by S <= K and the short H band by
+y <= F. A negative count places no square, so m_i >= 0 keeps the statement exact rather
+than the packing sound. Every control is still refused at every row by the check it
+names, which is what `controls` asks.
 
 `write_out` builds the packing the lemma states as a certificate in the ``n S`` / ``x y t``
 format with t = tan(theta/2): the grid column by column, then the V band (its rows, its
@@ -123,36 +169,48 @@ author's ``previous_source`` one of `SOURCES`, and each count once. Every refusa
 `CustodyError`. The author's comparison columns are counted in the receipt and decide
 nothing.
 
+The decimal ``side`` is a consistency check and never a bound. The author rounded the
+exact side to nearest, so the decimal is below ``side_exact`` at 2,514 of V2.0's 5,134
+rows and 2,204 of V1.0's 4,571, by up to 0.502 units of its twelfth place (0.504 in
+V1.0; the largest gap either way, 0.503 and 0.506, is above), and the V fit binds at
+every row: where the decimal is below, a square of that side does not hold the
+construction. `decide` decides ``side_exact`` and reports it alone, the receipt
+counts the decimal's place against it (`author_columns`), and a row is recorded at
+``side_exact``, or at a decimal rounded up from it, never at ``side``.
+
 **The receipts**, in the packet:
 
 - ``receipts/filled-end-decisions-v2.json.gz`` and ``filled-end-decisions-v1.json.gz``
   (``decide-all``): every row of each deposit decided by the lemma, every control
-  refused, and the SHA-256 and size of each written-out certificate, which the record
-  does not keep (OR-18: they are derived, and `write_out` writes them again byte for
-  byte). Over 1,000 lines each, they are read and written through
+  refused by its own check, and the SHA-256 and size of each written-out certificate,
+  which the record does not keep (OR-18: they are derived, and `write_out` writes them
+  again byte for byte). Over 1,000 lines each, they are read and written through
   `devtools.retained_data` and stored as ``X.gz`` with no file name or timestamp; a
   rerun records new timings, so the packet pins no digest of them and Git keeps their
-  bytes (OR-16). V1.0's is decided and labelled apart: whether V1.0 counts as
-  a report at all is the owner's question Q-847a (think-r94q), and neither receipt
-  records a row of the coverage register.
+  bytes (OR-16). V1.0's is decided and labelled apart: whether V1.0 counts as a report
+  at all is the owner's question Q-847a (think-r94q), and neither receipt records a row
+  of the coverage register.
 - ``receipts/filled-end-checker-replay-sample.json`` (``replay-sample``): the
   cross-check. At five V2.0 counts nearest the lemma's edges (`SAMPLE`), the certificate
   `write_out` writes is decided on both exact routes of `devtools.couzo_678_replay` with
   their six controls, as `two_strip_checker.replay_row` decides a two-strip row, so the
-  lemma's verdict and the routes' agree where both are run. A row the lemma refuses would
-  be decided this way instead (``replay-sample --n``), and `check` accepts a refused row
-  only where the replay sample passes it on both routes; no row of either deposit needs it.
+  lemma's verdict and the routes' agree where both are run.
 
-``check`` reads the receipts back: every decision and control derived again, the author's
-columns counted again, the certificates at each deposit's quick sample written again
-(every count's with ``--digests``), the author-built sample's five certificates written
-again to its digests, and with ``--replay`` each count of the replay sample decided again
-on both routes.
+A row the lemma refuses is no row of this checker's: `check` names it, and no route
+decides it in the lemma's place. No row of either deposit is refused.
+
+``check`` reads the receipts back: every header field compared with the deposit's and this
+checker's (`decisions_header`, `replay_header`), every decision and control derived
+again, the author's columns counted again, the certificates at each deposit's quick sample
+written again (every count's with ``--digests``), each replayed certificate held to the
+decided one, the author-built sample's five certificates written again to its digests, and
+with ``--replay`` each count of the replay sample decided again on both routes. A receipt
+missing a field, or holding one this checker does not write, is a problem it names.
 
 From ``packing/``, with the project interpreter::
 
     python -m devtools.filled_end_checker decide-all [--version 2] [--version 1]
-    python -m devtools.filled_end_checker replay-sample [--n N ...] [--workers 2]
+    python -m devtools.filled_end_checker replay-sample [--workers 2]
     python -m devtools.filled_end_checker check [--digests] [--replay]
 
 A finite packing certifies an upper bound and nothing more. Whether a row is below every
@@ -177,10 +235,10 @@ from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from fractions import Fraction
-from functools import lru_cache, partial
+from functools import lru_cache
 from itertools import islice
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 from devtools import evand_exact_certificates as legacy
 from devtools import retained_data
@@ -208,20 +266,49 @@ LEMMA = (
     "[0, S]^2 when K - bV + WV <= S and K - bH + WH <= S; deleting squares leaves a "
     "packing"
 )
-#: The controls every row carries (`mutants`), in order.
-CONTROLS = (
-    "count above the capacity",
-    "side below the binding fit",
-    "V lift past its free length",
-    "H lift past its free length",
-    "a V near-end layer one over",
-    "a V far-end layer one over",
-    "an H near-end layer one over",
-    "an H far-end layer one over",
-    "no tilt",
-    "a right angle",
-    "unknown kind",
-)
+#: Each check a control names, by the words its refusal opens with.
+CHECKS = {
+    "n <= capacity": r"n = \d+ is above the capacity \d+$",
+    "V fit": r"the V band, \S+ wide from x = K - bV, passes the right wall by ",
+    "H fit": r"the H band, \S+ high from y = K - bH, passes the top wall by ",
+    "V y <= F": r"the V lift passes its free length by ",
+    "H y <= F": r"the H lift passes its free length by ",
+    "V near m_i <= W - a_i": r"the V near-end layer \d+, -?\d+ squares, crosses the band",
+    "V far m_i <= W - a_i": r"the V far-end layer \d+, -?\d+ squares, crosses the band",
+    "H near m_i <= W - a_i": r"the H near-end layer \d+, -?\d+ squares, crosses the band",
+    "H far m_i <= W - a_i": r"the H far-end layer \d+, -?\d+ squares, crosses the band",
+    "0 < t < 1": r"t[VH] = \S+: a band's tan\(theta/2\) must lie in \(0, 1\)$",
+    "kind": r"kind '[^']*': not a filled-end packing$",
+    "y >= 0": r"the V lift -\S+ is negative$",
+    "m_i >= 0": r"the V near-end layer \d+ holds -1 squares$",
+    "1 <= b <= K - 1": r"bH = \d+: a band is 1 to K - 1 = \d+ wide$",
+    "2 <= K": r"K = 1: the checker decides 2 <= K <= \d+$",
+    "h <= L": r"the H band, \S+ deep, is longer than its length ",
+}
+#: The controls every row carries (`mutants`), in order, each with the check that must
+#: refuse every one of its changes.
+CONTROL_CHECKS = {
+    "count above the capacity": "n <= capacity",
+    "side below the binding fit": "V fit",
+    "V lift past its free length": "V y <= F",
+    "H lift past its free length": "H y <= F",
+    "a V near-end layer one over": "V near m_i <= W - a_i",
+    "a V far-end layer one over": "V far m_i <= W - a_i",
+    "an H near-end layer one over": "H near m_i <= W - a_i",
+    "an H far-end layer one over": "H far m_i <= W - a_i",
+    "no tilt": "0 < t < 1",
+    "a right angle": "0 < t < 1",
+    "unknown kind": "kind",
+    "the H band one square narrower": "H fit",
+    "a negative tilt": "0 < t < 1",
+    "a V lift below zero": "y >= 0",
+    "a V near-end layer of -1 squares": "m_i >= 0",
+    "an H band K wide": "1 <= b <= K - 1",
+    "K of one": "2 <= K",
+    "an H band shorter than its depth": "h <= L",
+}
+CONTROLS = tuple(CONTROL_CHECKS)
+_CHECKS = {name: re.compile(pattern) for name, pattern in CHECKS.items()}
 #: The four band ends whose layers a row may state, in `FilledEnd.layers` order.
 ENDS = ("V near", "V far", "H near", "H far")
 #: How far below the binding fit inequality the side control puts the side, and how far
@@ -240,6 +327,20 @@ CHECKER = "packing/devtools/filled_end_checker.py"
 ROUTES = "packing/devtools/couzo_678_replay.py (decide and decide_controls)"
 DECISIONS_FORMAT = "filled-end-decisions-v1"
 REPLAY_FORMAT = "filled-end-checker-replay-sample-v1"
+#: What a decisions receipt says of the certificates it names.
+CERTIFICATES = (
+    "written out by write_out and serialized in the n S / x y t format; not retained, each "
+    "pinned here by its SHA-256 and size"
+)
+#: The fields a decisions receipt holds besides its header: when and where it ran, its
+#: rows and their summary.
+RUN_FIELDS = ("environment", "started_utc", "cpu_seconds", "rows", "summary")
+#: The fields a replay receipt holds besides its header.
+REPLAY_RUN_FIELDS = ("environment", "started_utc", "wall_seconds", "workers", "rows")
+#: The fields `decision_row` writes for a decided row, besides the decision's own.
+DIGEST_FIELDS = ("certificate_sha256", "certificate_bytes")
+#: What reading a receipt someone may have damaged can raise.
+_UNREADABLE = (KeyError, TypeError, AttributeError, ValueError)
 #: The replay sample: five V2.0 counts nearest the lemma's edges, each the smallest count
 #: attaining its extreme over V2.0's rows (`edge_counts`).
 SAMPLE = (1188, 5265, 7439, 8524, 9517)
@@ -576,6 +677,8 @@ def decide(row: FilledEnd) -> dict[str, Any]:
     _refuse(row.side > 0, f"the side {row.side} is not positive")
     _refuse(1 < row.k <= MAX_K, f"K = {row.k}: the checker decides 2 <= K <= {MAX_K}")
     _refuse(row.side <= row.k, f"the side {float(row.side):.12g} is above K = {row.k}")
+    # The tilt check must come before every division by c or s: at t = 1, `frame`'s
+    # p = 1/c, and at t = 0, `edge`'s c/s, would raise ZeroDivisionError, not refuse.
     for name, tilt in (("tH", row.tilt_h), ("tV", row.tilt_v)):
         _refuse(0 < tilt < 1, f"{name} = {tilt}: a band's tan(theta/2) must lie in (0, 1)")
     for name, width in (("bV", row.width_v), ("bH", row.width_h)):
@@ -654,10 +757,11 @@ def _one_over(row: FilledEnd, end: int, layers: tuple[tuple[int, ...], ...]) -> 
 
 def mutants(row: FilledEnd) -> list[tuple[str, list[FilledEnd]]]:
     """A row's negative controls, each one change or a few (`CONTROLS`), every one of
-    which `decide` must refuse."""
+    which `decide` must refuse by the check `CONTROL_CHECKS` names."""
     held = capacity(row)
     v, h = bands(row)
     layers = (v.near, v.far, h.near, h.far)
+    below = (*layers[0], -1)
     changed = [
         [replace(row, n=held + 1)],
         [replace(row, side=binding_side(row) - FIT_MARGIN)],
@@ -667,30 +771,51 @@ def mutants(row: FilledEnd) -> list[tuple[str, list[FilledEnd]]]:
         [replace(row, tilt_h=Fraction(0))],
         [replace(row, tilt_v=Fraction(1))],
         [replace(row, kind="two-strip")],
+        [replace(row, width_h=row.width_h - 1)],
+        [replace(row, tilt_h=-row.tilt_h)],
+        [replace(row, lift_v=-FIT_MARGIN)],
+        [replace(row, layers=(below, *layers[1:]))],
+        [replace(row, width_h=row.k)],
+        [replace(row, k=1)],
+        [replace(row, width_v=row.k - 1, lift_v=Fraction(0))],
     ]
     return list(zip(CONTROLS, changed, strict=True))
 
 
+def refused_by(check: str, changed: FilledEnd) -> tuple[bool, str]:
+    """Whether `decide` refuses a change by the named check (`CHECKS`), and its reason;
+    an accepted change has none."""
+    try:
+        decide(changed)
+    except FilledEndRefusedError as error:
+        reason = str(error)
+        return _CHECKS[check].match(reason) is not None, reason
+    return False, ""
+
+
 def controls(row: FilledEnd) -> list[dict[str, Any]]:
-    """Each control (`mutants`): refused when `decide` refuses every one of its changes,
-    with the first change's reason and how many changes it made; ``refused`` False marks
-    one with a change `decide` accepted, which a check refuses."""
+    """Each control (`mutants`): refused when `decide` refuses every one of its changes
+    by the check it names, with the first change's reason and how many changes it made.
+    ``refused`` False marks one with a change `decide` accepted, whose reason is empty, or
+    refused by another check, whose reason it is; a check refuses either."""
     found = []
     for name, changes in mutants(row):
-        reasons = []
-        for changed in changes:
-            try:
-                decide(changed)
-            except FilledEndRefusedError as error:
-                reasons.append(str(error))
-            else:
+        check = CONTROL_CHECKS[name]
+        reason = ""
+        refused = True
+        for index, changed in enumerate(changes):
+            named, said = refused_by(check, changed)
+            if index == 0 or not named:
+                reason = said
+            if not named:
+                refused = False
                 break
-        refused = len(reasons) == len(changes)
         found.append(
             {
                 "control": name,
+                "check": check,
                 "refused": refused,
-                "reason": reasons[0] if refused else "",
+                "reason": reason,
                 "changes": len(changes),
             }
         )
@@ -739,14 +864,6 @@ def write_out(row: FilledEnd) -> legacy.Certificate:
     places them, so the surplus is dropped from the start of the grid."""
     surplus = int(decide(row)["surplus"])
     return legacy.Certificate(row.n, row.side, tuple(islice(poses(row), surplus, None)))
-
-
-def construction(row: FilledEnd) -> legacy.Certificate:
-    """The construction's last n squares written out whether or not the lemma decides the
-    row, for the routes to decide; a construction of fewer squares is refused."""
-    placed = tuple(poses(row))
-    _refuse(len(placed) >= row.n, f"the construction places {len(placed)} squares")
-    return legacy.Certificate(row.n, row.side, placed[len(placed) - row.n :])
 
 
 def certificate_text(row: FilledEnd) -> str:
@@ -858,11 +975,20 @@ def row_from_record(item: Mapping[str, object]) -> FilledEnd:
     )
 
 
-def parse_table(text: str) -> list[tuple[FilledEnd, str]]:
+class Record(NamedTuple):
+    """One row of a deposit's table, with the two author's columns read beside it, which
+    decide nothing: ``previous_source`` and the decimal ``side``, as stated."""
+
+    row: FilledEnd
+    source: str
+    decimal: str
+
+
+def parse_table(text: str) -> list[Record]:
     """A deposit's rows from its ``filled_records.csv`` text, read as untrusted data, each
-    with the author's ``previous_source``: the header exactly `COLUMNS`, each row exactly
-    that many fields, each row by `row_from_record`, and each count once. Every refusal
-    is a `CustodyError`, including the csv module's own."""
+    with the author's ``previous_source`` and decimal side: the header exactly `COLUMNS`,
+    each row exactly that many fields, each row by `row_from_record`, and each count once.
+    Every refusal is a `CustodyError`, including the csv module's own."""
     try:
         lines = list(csv.reader(io.StringIO(text, newline=""), strict=True))
     except csv.Error as error:
@@ -877,15 +1003,15 @@ def parse_table(text: str) -> list[tuple[FilledEnd, str]]:
                 f"filled_records.csv row {number}: {len(fields)} fields, not {len(COLUMNS)}"
             )
         named: dict[str, str] = dict(zip(COLUMNS, fields, strict=True))
-        rows.append((row_from_record(named), named["previous_source"]))
-    counts = [row.n for row, _ in rows]
+        rows.append(Record(row_from_record(named), named["previous_source"], named["side"]))
+    counts = [item.row.n for item in rows]
     if len(set(counts)) != len(counts):
         raise CustodyError("filled_records.csv: a count appears in more than one row")
     return rows
 
 
-def table(deposit: Deposit = V2) -> list[tuple[FilledEnd, str]]:
-    """A deposit's rows with their ``previous_source``, at the deposit's row count."""
+def table(deposit: Deposit = V2) -> list[Record]:
+    """A deposit's rows with the author's columns, at the deposit's row count."""
     rows = parse_table(_records_text(deposit))
     if len(rows) != deposit.rows:
         raise CustodyError(f"filled_records.csv holds {len(rows)} rows, not {deposit.rows}")
@@ -894,15 +1020,60 @@ def table(deposit: Deposit = V2) -> list[tuple[FilledEnd, str]]:
 
 def records(deposit: Deposit = V2) -> list[FilledEnd]:
     """A deposit's rows, from its retained ``filled_records.csv``."""
-    return [row for row, _ in table(deposit)]
+    return [item.row for item in table(deposit)]
 
 
-def sources(rows: Sequence[tuple[FilledEnd, str]]) -> dict[str, int]:
+def rows_at(deposit: Deposit, counts: Sequence[int]) -> list[FilledEnd]:
+    """A deposit's rows at the given counts, its table read once; a count the deposit has
+    no row at is named."""
+    by_n = {row.n: row for row in records(deposit)}
+    missing = [str(n) for n in counts if n not in by_n]
+    if missing:
+        raise ValueError(f"{deposit.label} has no row at n = {', '.join(missing)}")
+    return [by_n[n] for n in counts]
+
+
+def sources(rows: Sequence[Record]) -> dict[str, int]:
     """How many rows name each ``previous_source``."""
     counted: dict[str, int] = {}
-    for _, source in rows:
-        counted[source] = counted.get(source, 0) + 1
+    for item in rows:
+        counted[item.source] = counted.get(item.source, 0) + 1
     return dict(sorted(counted.items()))
+
+
+def decimal_sides(rows: Sequence[Record]) -> dict[str, Any]:
+    """Where the author's decimal side lies against the exact side: how many rows state it
+    below, at and above ``side_exact``, and the most it is below and above, in units of its
+    own last place. It is a consistency check and no bound (the module docstring, The
+    ingest)."""
+    counted = {"below_exact": 0, "equal": 0, "above_exact": 0}
+    lowest = highest = Fraction(0)
+    for item in rows:
+        gap = (Fraction(item.decimal) - item.row.side) * 10 ** len(item.decimal.split(".")[1])
+        counted["below_exact" if gap < 0 else "equal" if gap == 0 else "above_exact"] += 1
+        lowest, highest = min(lowest, gap), max(highest, gap)
+    return {
+        **counted,
+        "most_below_units": f"{float(-lowest):.3f}",
+        "most_above_units": f"{float(highest):.3f}",
+    }
+
+
+def author_columns(rows: Sequence[Record]) -> dict[str, Any]:
+    """The author's own columns as a decisions receipt counts them."""
+    return {
+        "previous_source": sources(rows),
+        "side": decimal_sides(rows),
+        "note": (
+            "the author's own columns, read and counted; the checker decides nothing by "
+            "them. previous_source names his comparison, and whether a row is below every "
+            "earlier report is the walk's. The decimal side is a consistency check, within "
+            "one unit of its last place of side_exact, and no bound: rounded to nearest, it "
+            "is below side_exact at the rows counted here, where a square of that side does "
+            "not hold the construction, so a row is recorded at side_exact, or at a decimal "
+            "rounded up from it, never at side"
+        ),
+    }
 
 
 # --------------------------------------------------------------------------- the receipts
@@ -941,9 +1112,10 @@ def decision_row(
     row: FilledEnd, *, digest: bool = True
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """One row of the decisions receipt, with its controls decided once: the decision,
-    how many controls were refused and, with ``digest``, the written-out certificate's
-    SHA-256 and size; and the controls themselves, for the summary. A row the lemma
-    refuses is kept with its reason and no controls."""
+    how many controls were refused by the check each names and, with ``digest``, the
+    written-out certificate's SHA-256 and size; and the controls themselves, for the
+    summary. A row the lemma refuses is kept with its reason and no controls, and `check`
+    names it."""
     try:
         found = decide(row)
     except FilledEndRefusedError as error:
@@ -965,8 +1137,9 @@ def _least(found: Sequence[Mapping[str, Any]], key: str) -> str | None:
 def decisions_summary(
     found: Sequence[Mapping[str, Any]], checked: Sequence[Sequence[Mapping[str, Any]]]
 ) -> dict[str, Any]:
-    """Counts over the decisions, and each control's refusals over the decided rows'
-    controls (``checked``, as `decision_row` decided them) with its reason at the first."""
+    """Counts over the decisions, and each control's refusals by its named check over the
+    decided rows' controls (``checked``, as `decision_row` decided them) with its reason at
+    the first."""
     decided = [item for item in found if item["verdict"] == DECIDED]
     tallies: dict[str, int] = dict.fromkeys(CONTROLS, 0)
     changes: dict[str, int] = dict.fromkeys(CONTROLS, 0)
@@ -998,6 +1171,7 @@ def decisions_summary(
         ),
         "controls": {
             item["control"]: {
+                "check": item["check"],
                 "refused": tallies[item["control"]],
                 "changes": changes[item["control"]],
                 "first_reason": item["reason"],
@@ -1007,13 +1181,14 @@ def decisions_summary(
     }
 
 
-def decide_all(deposit: Deposit = V2) -> dict[str, Any]:
-    """Decide every row of a deposit with its controls and write its decisions receipt."""
-    parsed = table(deposit)
-    started, cpu = _now(), time.process_time()
-    decided = [decision_row(row) for row, _ in parsed]
-    found = [item for item, _ in decided]
-    receipt = {
+def decisions_header(deposit: Deposit, parsed: Sequence[Record]) -> dict[str, Any]:
+    """Every field a deposit's decisions receipt states besides `RUN_FIELDS`: its format;
+    the deposit's issue, report, version, DOI, packet and rows' file, and how its receipt
+    is to be read (``note``, which for V1.0 names Q-847a); this checker, its lemma, its
+    controls and the check each names; what the certificates are; and the author's columns
+    counted. A receipt with another header was written of something else, or by something
+    else."""
+    return {
         "format": DECISIONS_FORMAT,
         "issue": ISSUE,
         "reported": deposit.reported,
@@ -1024,19 +1199,21 @@ def decide_all(deposit: Deposit = V2) -> dict[str, Any]:
         "checker": CHECKER,
         "lemma": LEMMA,
         "controls": list(CONTROLS),
+        "control_checks": dict(CONTROL_CHECKS),
         "note": deposit.note,
-        "certificates": (
-            "written out by write_out and serialized in the n S / x y t format; not "
-            "retained, each pinned here by its SHA-256 and size"
-        ),
-        "author_columns": {
-            "previous_source": sources(parsed),
-            "note": (
-                "the author's own comparison columns, read and counted; the checker "
-                "decides nothing by them, and whether a row is below every earlier report "
-                "is the walk's"
-            ),
-        },
+        "certificates": CERTIFICATES,
+        "author_columns": author_columns(parsed),
+    }
+
+
+def decide_all(deposit: Deposit = V2) -> dict[str, Any]:
+    """Decide every row of a deposit with its controls and write its decisions receipt."""
+    parsed = table(deposit)
+    started, cpu = _now(), time.process_time()
+    decided = [decision_row(item.row) for item in parsed]
+    found = [item for item, _ in decided]
+    receipt = {
+        **decisions_header(deposit, parsed),
         "environment": _environment(),
         "started_utc": started,
         "cpu_seconds": round(time.process_time() - cpu, 1),
@@ -1047,10 +1224,13 @@ def decide_all(deposit: Deposit = V2) -> dict[str, Any]:
     return receipt
 
 
-def edge_counts(rows: Sequence[FilledEnd]) -> tuple[int, ...]:
+def edge_counts(
+    rows: Sequence[FilledEnd], decided: Mapping[int, Mapping[str, Any]] | None = None
+) -> tuple[int, ...]:
     """The replay sample's rule (`EDGES`): the smallest count with a lift of zero, then
-    the smallest count attaining each least slack, in `EDGES` order."""
-    found = {row.n: decide(row) for row in rows}
+    the smallest count attaining each least slack, in `EDGES` order. ``decided`` holds the
+    rows' decisions by count, when they are already made."""
+    found = {row.n: decide(row) for row in rows} if decided is None else dict(decided)
     by_n = {row.n: row for row in rows}
 
     def least(value: Any) -> int:
@@ -1066,20 +1246,17 @@ def edge_counts(rows: Sequence[FilledEnd]) -> tuple[int, ...]:
     )
 
 
-def replay_row(n: int, deposit: Deposit = V2) -> dict[str, Any]:
-    """One count of the replay sample: the row decided by the lemma (or its refusal), its
-    certificate written out and decided on both routes of `devtools.couzo_678_replay`,
-    and the six controls."""
+def replay_row(row: FilledEnd) -> dict[str, Any]:
+    """One count of the replay sample: the row decided by the lemma, its certificate
+    written out (`write_out`) and decided on both routes of `devtools.couzo_678_replay`,
+    and the six controls. A row the lemma refuses raises `FilledEndRefusedError`: no route
+    decides a row in the lemma's place."""
     # The replay module costs about two seconds to import; the checker needs none of it.
     from devtools import couzo_678_replay as base  # noqa: PLC0415
 
-    row = next(row for row in records(deposit) if row.n == n)
-    try:
-        lemma: dict[str, Any] = {"verdict": DECIDED, "capacity": decide(row)["capacity"]}
-    except FilledEndRefusedError as error:
-        lemma = {"verdict": REFUSED, "reason": str(error)}
+    found = decide(row)
     began = time.process_time()
-    cert = construction(row)
+    cert = write_out(row)
     text = legacy.serialize(cert).encode("utf-8")
     started = time.process_time()
     result = base.decide(base.geometry(cert))
@@ -1087,8 +1264,8 @@ def replay_row(n: int, deposit: Deposit = V2) -> dict[str, Any]:
     checked = base.decide_controls(cert)
     ended = time.process_time()
     return {
-        "n": n,
-        "lemma": lemma,
+        "n": row.n,
+        "lemma": {"verdict": DECIDED, "capacity": found["capacity"]},
         "certificate_sha256": _sha256(text),
         "certificate_bytes": len(text),
         "exact_side": legacy.literal(cert.side),
@@ -1103,16 +1280,29 @@ def replay_row(n: int, deposit: Deposit = V2) -> dict[str, Any]:
     }
 
 
-def replay_sample(counts: Sequence[int], workers: int, deposit: Deposit = V2) -> dict[str, Any]:
-    """Replay the sample's certificates on both routes and write the replay receipt."""
+#: The fields of one replay row, as `replay_row` writes them.
+REPLAY_ROW_FIELDS = frozenset(
+    (
+        "n",
+        "lemma",
+        "certificate_sha256",
+        "certificate_bytes",
+        "exact_side",
+        "verified",
+        "decision",
+        "controls",
+        "cpu_seconds",
+    )
+)
+
+
+def replay_header(deposit: Deposit) -> dict[str, Any]:
+    """Every field a deposit's replay receipt states besides `REPLAY_RUN_FIELDS`: its
+    format, the deposit, this checker, the routes, their filter lemma and six controls,
+    and the sample's rule (`EDGES` and `SAMPLE`)."""
     from devtools import couzo_678_replay as base  # noqa: PLC0415
 
-    if not deposit.replay:
-        raise ValueError(f"{deposit.label} has no replay sample")
-    started, wall = _now(), time.monotonic()
-    with ProcessPoolExecutor(max_workers=workers) as pool:
-        rows = list(pool.map(partial(replay_row, deposit=deposit), counts))
-    receipt = {
+    return {
         "format": REPLAY_FORMAT,
         "issue": ISSUE,
         "doi": deposit.doi,
@@ -1123,11 +1313,25 @@ def replay_sample(counts: Sequence[int], workers: int, deposit: Deposit = V2) ->
         "filter_lemma": base.FILTER_LEMMA,
         "controls": list(base.CONTROLS),
         "sample_rule": dict(zip(EDGES, SAMPLE, strict=True)),
+    }
+
+
+def replay_sample(workers: int, deposit: Deposit = V2) -> dict[str, Any]:
+    """Replay the sample's certificates (`SAMPLE`) on both routes and write the replay
+    receipt; the deposit's table is read once."""
+    if not deposit.replay:
+        raise ValueError(f"{deposit.label} has no replay sample")
+    rows = rows_at(deposit, SAMPLE)
+    started, wall = _now(), time.monotonic()
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        replayed = list(pool.map(replay_row, rows))
+    receipt = {
+        **replay_header(deposit),
         "environment": _environment(),
         "started_utc": started,
         "wall_seconds": round(time.monotonic() - wall, 1),
         "workers": workers,
-        "rows": rows,
+        "rows": replayed,
     }
     _write(deposit.replay_receipt, receipt)
     return receipt
@@ -1144,35 +1348,70 @@ def stable(row: Mapping[str, Any]) -> dict[str, Any]:
 # --------------------------------------------------------------------------- the check
 
 
+def drift(
+    receipt: Mapping[str, Any], header: Mapping[str, Any], run: Sequence[str]
+) -> list[str]:
+    """The fields in which a receipt differs from the header expected, then the run fields
+    it lacks, then the fields it holds that neither names."""
+    found = [key for key, value in header.items() if receipt.get(key) != value]
+    found += [key for key in run if key not in receipt]
+    return found + sorted(str(key) for key in receipt if key not in header and key not in run)
+
+
+def header_problems(
+    deposit: Deposit, receipt: Mapping[str, Any], parsed: Sequence[Record]
+) -> list[str]:
+    """Problems with a decisions receipt's header against the deposit and this checker
+    (`decisions_header`), every field but `RUN_FIELDS` compared and no other field
+    allowed. Reads no row."""
+    if not isinstance(receipt, Mapping):
+        return [f"{deposit.label}: the decisions receipt is not an object"]
+    found = drift(receipt, decisions_header(deposit, parsed), RUN_FIELDS)
+    if not found:
+        return []
+    fields = ", ".join(found)
+    return [f"{deposit.label}: the decisions receipt's header is not this checker's ({fields})"]
+
+
+def row_differs(kept: Mapping[str, Any], wanted: Mapping[str, Any]) -> bool:
+    """Whether a stored decision row is not the one derived again: it must hold exactly
+    the fields `decision_row` writes, the digest fields included for a decided row whose
+    certificate was not written again, and each derived field must be equal."""
+    fields = set(wanted) | (set(DIGEST_FIELDS) if wanted.get("verdict") == DECIDED else set())
+    return set(kept) != fields or any(kept[key] != value for key, value in wanted.items())
+
+
 def decisions_problems(
     deposit: Deposit, *, digests: bool = False
 ) -> tuple[list[str], list[dict[str, Any]]]:
-    """Problems with a deposit's decisions receipt, every decision and control derived
-    again, the author's column counted again and the written-out certificates at its
-    sample (at every count with ``digests``) written again; and the receipt's rows."""
+    """Problems with a deposit's decisions receipt: its header (`header_problems`), every
+    decision and control derived again, a row the lemma refuses named, and the
+    written-out certificates at its sample (at every count with ``digests``) written
+    again; and the receipt's rows. Raises one of `_UNREADABLE` on a receipt too damaged to
+    read."""
     parsed = table(deposit)
     receipt = read_receipt(deposit.decisions)
     label = deposit.label
-    problems = []
-    header = (receipt["format"], receipt["doi"], receipt["records"], receipt["lemma"])
-    if header != (DECISIONS_FORMAT, deposit.doi, deposit.records_name, LEMMA) or receipt[
-        "controls"
-    ] != list(CONTROLS):
-        problems.append(f"{label}: the decisions receipt's header is not this checker's")
-    if receipt["author_columns"]["previous_source"] != sources(parsed):
-        problems.append(f"{label}: the author's column is not counted as the rows")
-    stored: list[dict[str, Any]] = receipt["rows"]
-    if [item["n"] for item in stored] != [row.n for row, _ in parsed]:
-        return [*problems, f"{label}: the receipt's rows are not the records'"], stored
+    problems = header_problems(deposit, receipt, parsed)
+    stored = receipt.get("rows") if isinstance(receipt, Mapping) else None
+    if (
+        not isinstance(stored, list)
+        or not all(isinstance(item, dict) for item in stored)
+        or [item.get("n") for item in stored] != [item.row.n for item in parsed]
+    ):
+        return [*problems, f"{label}: the receipt's rows are not the records'"], []
     every: list[list[dict[str, Any]]] = []
-    for (row, _), kept in zip(parsed, stored, strict=True):
+    for item, kept in zip(parsed, stored, strict=True):
+        row = item.row
         wanted, checked = decision_row(row, digest=digests or row.n in deposit.sample)
         every.append(checked)
-        if {key: kept.get(key) for key in wanted} != wanted:
+        if wanted["verdict"] != DECIDED:
+            problems.append(f"{label} n={row.n}: refused by the lemma: {wanted['reason']}")
+        if row_differs(kept, wanted):
             problems.append(f"{label} n={row.n}: the decision differs from the receipt")
         if wanted["verdict"] == DECIDED and kept.get("controls_refused") != len(CONTROLS):
-            problems.append(f"{label} n={row.n}: a control was accepted")
-    if receipt["summary"] != decisions_summary(stored, every):
+            problems.append(f"{label} n={row.n}: a control was not refused by its own check")
+    if receipt.get("summary") != decisions_summary(stored, every):
         problems.append(f"{label}: the decisions summary does not match the rows")
     return problems, stored
 
@@ -1181,64 +1420,54 @@ def replay_problems(
     deposit: Deposit, stored: Sequence[Mapping[str, Any]], *, replay: bool = False
 ) -> list[str]:
     """Problems with the replay sample against the decisions receipt's rows (``stored``):
-    its counts, a pass on both routes with all six controls refused by both at each, the
-    certificate the decided one (or, for a row the lemma refused, the construction's);
-    and each count replayed again with ``replay``."""
-    from devtools import couzo_678_replay as base  # noqa: PLC0415
-
+    its header (`replay_header`) and counts, a pass on both routes with all six controls
+    refused by both at each, and the certificate, capacity and side the decided ones; and
+    each count replayed again with ``replay``. Raises one of `_UNREADABLE` on a receipt
+    too damaged to read."""
     label = deposit.label
     sample = read_receipt(deposit.replay_receipt)
+    if not isinstance(sample, Mapping):
+        return [f"{label}: the replay receipt is not an object"]
     problems = []
-    if [item["n"] for item in sample["rows"]] != list(SAMPLE) or sample["sample_rule"] != dict(
-        zip(EDGES, SAMPLE, strict=True)
-    ):
-        problems.append(f"{label}: the replay receipt's counts are not the sample's")
-    if sample["controls"] != list(base.CONTROLS):
-        problems.append(f"{label}: the replay receipt's controls are not the routes' six")
+    found = drift(sample, replay_header(deposit), REPLAY_RUN_FIELDS)
+    if found:
+        problems.append(
+            f"{label}: the replay receipt's header is not this checker's ({', '.join(found)})"
+        )
+    kept_rows = sample.get("rows")
+    if not isinstance(kept_rows, list) or [
+        item.get("n") if isinstance(item, Mapping) else None for item in kept_rows
+    ] != list(SAMPLE):
+        return [*problems, f"{label}: the replay receipt's counts are not the sample's"]
     by_n = {item["n"]: item for item in stored}
-    for kept in sample["rows"]:
+    rows = dict(zip(SAMPLE, rows_at(deposit, SAMPLE), strict=True)) if replay else {}
+    for kept in kept_rows:
         n = kept["n"]
+        if set(kept) != REPLAY_ROW_FIELDS:
+            problems.append(f"{label} n={n}: the replay row's fields are not this checker's")
+            continue
         if not kept["verified"]:
             problems.append(f"{label} n={n}: the written-out certificate failed a route")
-        if [item["control"] for item in kept["controls"]] != list(base.CONTROLS) or not all(
+        if [item["control"] for item in kept["controls"]] != sample["controls"] or not all(
             item["refused_by_sqpack"] and item["refused_by_independent"]
             for item in kept["controls"]
         ):
             problems.append(f"{label} n={n}: a route accepted a control")
         decided = by_n.get(n, {})
-        if decided.get("verdict") == DECIDED and (
+        if decided.get("verdict") != DECIDED or (
+            kept["lemma"],
             kept["certificate_sha256"],
-            kept["lemma"].get("capacity"),
-        ) != (decided.get("certificate_sha256"), decided.get("capacity")):
-            problems.append(f"{label} n={n}: the replayed certificate is not the decided one")
-        if replay and stable(replay_row(n, deposit)) != stable(kept):
-            problems.append(f"{label} n={n}: the replay differs from the receipt")
-    return problems
-
-
-def refused_problems(deposit: Deposit, stored: Sequence[Mapping[str, Any]]) -> list[str]:
-    """A row the lemma refuses is decided only where the replay sample passes its
-    written-out construction on both routes, all six controls refused by both."""
-    refused = [item["n"] for item in stored if item["verdict"] != DECIDED]
-    if not refused:
-        return []
-    routed = {}
-    if deposit.replay and retained_data.retained_exists(deposit.replay_receipt):
-        routed = {item["n"]: item for item in read_receipt(deposit.replay_receipt)["rows"]}
-    problems = []
-    for n in refused:
-        item = routed.get(n)
-        if (
-            item is None
-            or not item["verified"]
-            or not all(
-                control["refused_by_sqpack"] and control["refused_by_independent"]
-                for control in item["controls"]
-            )
+            kept["certificate_bytes"],
+            kept["exact_side"],
+        ) != (
+            {"verdict": DECIDED, "capacity": decided.get("capacity")},
+            decided.get("certificate_sha256"),
+            decided.get("certificate_bytes"),
+            decided.get("side"),
         ):
-            problems.append(
-                f"{deposit.label} n={n}: refused by the lemma and not decided on both routes"
-            )
+            problems.append(f"{label} n={n}: the replayed certificate is not the decided one")
+        elif replay and stable(replay_row(rows[n])) != stable(kept):
+            problems.append(f"{label} n={n}: the replay differs from the receipt")
     return problems
 
 
@@ -1261,16 +1490,20 @@ def author_sample_problems() -> list[str]:
     return problems
 
 
+def _unreadable(label: str, what: str, error: BaseException) -> str:
+    return f"{label}: the {what} does not read: {type(error).__name__}: {str(error)[:200]}"
+
+
 def check(
     *,
     digests: bool = False,
     replay: bool = False,
     deposits: Sequence[Deposit] | None = None,
 ) -> list[str]:
-    """Problems with the receipts against the packet: each deposit's decisions, any row
-    the lemma refused, and the replay sample; and, with V2.0, the author-built sample's
-    certificates. Empty when they hold. A deposit whose files fail custody is one
-    problem, and the rest are still checked."""
+    """Problems with the receipts against the packet: each deposit's decisions, a row the
+    lemma refused named, and the replay sample; and, with V2.0, the author-built sample's
+    certificates. Empty when they hold. A deposit whose files fail custody is one problem,
+    and a receipt too damaged to read another, and the rest are still checked."""
     problems: list[str] = []
     chosen = DEPOSITS if deposits is None else deposits
     for deposit in chosen:
@@ -1279,12 +1512,20 @@ def check(
         except CustodyError as error:
             problems.append(f"{deposit.label}: custody: {error}")
             continue
+        except _UNREADABLE as error:
+            problems.append(_unreadable(deposit.label, "decisions receipt", error))
+            continue
         problems += found
-        problems += refused_problems(deposit, stored)
         if deposit.replay:
-            problems += replay_problems(deposit, stored, replay=replay)
+            try:
+                problems += replay_problems(deposit, stored, replay=replay)
+            except _UNREADABLE as error:
+                problems.append(_unreadable(deposit.label, "replay receipt", error))
     if V2 in chosen:
-        problems += author_sample_problems()
+        try:
+            problems += author_sample_problems()
+        except _UNREADABLE as error:
+            problems.append(_unreadable(V2.label, "author-built sample's receipt", error))
     return problems
 
 
@@ -1294,7 +1535,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     every = commands.add_parser("decide-all")
     every.add_argument("--version", choices=tuple(VERSIONS), action="append")
     sample = commands.add_parser("replay-sample")
-    sample.add_argument("--n", type=int, nargs="+")
     sample.add_argument("--workers", type=int, default=2)
     audit = commands.add_parser("check")
     audit.add_argument("--digests", action="store_true")
@@ -1309,9 +1549,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
         decided = ", ".join(f"{deposit.rows} {deposit.label} rows" for deposit in DEPOSITS)
         print(
-            f"OK: {decided} decided by the lemma, every control refused; {len(SAMPLE)} V2.0 "
-            "counts written out and passed by both routes, their controls refused; the "
-            "author-built sample written out byte for byte"
+            f"OK: {decided} decided by the lemma, every control refused by its own check; "
+            f"{len(SAMPLE)} V2.0 counts written out and passed by both routes, their "
+            "controls refused; the author-built sample written out byte for byte"
         )
         return 0
     if args.command == "decide-all":
@@ -1322,7 +1562,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         )
         return 0
-    receipt = replay_sample(args.n or list(SAMPLE), args.workers)
+    receipt = replay_sample(args.workers)
     print(
         json.dumps(
             [
