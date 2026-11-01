@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 68
+version: 69
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -42,7 +42,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T22:54:28.094Z
+updated_at: 2026-11-01T23:54:07.737Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -116,3 +116,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-01 ~23:00: merged #874 (4abadb18e; squarepack-certs strip-even read, nothing to import) and #873 (d46fc6f29; think-nrp6 closed): no-public-change records now one file each under packing/release-records/no-public-change/, append-only gate, numbered set frozen at 247, new records date-named with lane/bead. Owner-held PRs #744 and #599 append to the old tuple; when either is revived it must run `python -m devtools.release_records migrate --slug <lane>` (the gate names the command). Next efficiency candidate filed: think-l6lt (DATA_REVISION pin conflicts). 30 PRs merged this pass.
 
 2026-11-01 22:52: renewal. Gradec replay complete 22:39Z: 233/233 valid, byte-identical, logs match, 3/3 controls refused, 39,647 CPU-s (11.0 CPU-h). L19 lands the receipt in the packet, holding the register evidence/rung for think-xyek (precedent T-253/T-260). 297 route 1 running (reniced to 0). Sweep intake19 run; no new issues since 21:50Z.
+
+2026-11-01 23:52: renewal. #875 (gradec receipt + T-261 hold + squarepack-certs 4522fc6 read) under senior review. 297 route 1 complete 23:44Z: positive verified, duplicate and outside-container controls refused; L20 records it for T-247 (think-ozx8). No new issues since 22:50Z.
