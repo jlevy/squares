@@ -154,6 +154,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-n17-session-186-storage.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md, role: research-report, authority: supporting, lifecycle: retained}
+  - {path: docs/project/research/research-2026-11-01-filled-end-lemma.md, role: research-report, authority: supporting, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-11-evand-regularization-assessment.md, role: research-report, authority: supporting, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-11-regularization-state-and-approach.md, role: research-report, authority: supporting, lifecycle: retained}
   - {path: vendor/evand-regularize/README.md, role: component-guide, authority: definitive, lifecycle: maintained}

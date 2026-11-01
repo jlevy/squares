@@ -102,6 +102,16 @@ allowlist:
       each row's certificate by its SHA-256 alone, and `check` holds it to the decisions
       receipt's the same way. The retained packet files are read from Git and compared
       with nothing.
+  - path: packing/devtools/filled_end_checker.py
+    kind: generated-artifact
+    boundary: >-
+      The certificates `write_out` builds from #847's parameters (5,134 V2.0 rows and
+      4,571 V1.0 rows) are derived and not retained (OR-18), so no Git revision names them:
+      each deposit's decisions receipt names each by its SHA-256 and size, `check` holds
+      the certificate the replay receipt decided on both routes to the one the decisions
+      receipt names, and the author-built sample's five certificates to the ones
+      `write_out` writes. The retained packet files are read from Git and compared with
+      nothing.
   - path: packing/devtools/filled_end_sample.py
     kind: generated-artifact
     boundary: >-

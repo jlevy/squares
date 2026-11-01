@@ -21,7 +21,8 @@ written, so no Zenodo listing was read. The rows are above 1024, where the recor
 upper bounds as dated rows of its coverage register, decided in report order by
 think-llit’s walk above 1024, which does not exist yet. So this packet records no row and
 no register entry; it retains the sources and the stage 4 checks that rest on them: two
-samples, and the full replay of v5 on both routes.
+samples, the full replay of v5 on both routes, and W9’s decisions of every filled-end
+row.
 
 ## Custody
 
@@ -31,9 +32,15 @@ full clone at the pin; every file is bound to its Git blob at `ad8b094`, and
 990,199 bytes, all retained. The receipts add 4,488,333 bytes: 2,128,349 for
 `two-strip-decisions-v5.json`, 28,464 for the two samples, and 2,331,520 for the full
 replay of v5, 66 receipts of at most 169 lines each and their summary. So the packet is
-about 5.5 MB in a checkout; OR-18 admits it, and `check_added_blobs` passes. No receipt
-is stored as gzip: `two-strip-decisions-v5.json` is over the 1,000 lines at which
-`devtools.retained_data` would, and think-rsqv moves the family to that convention.
+about 5.5 MB in a checkout; OR-18 admits it, and `check_added_blobs` passes. No
+two-strip receipt is stored as gzip: `two-strip-decisions-v5.json` is over the 1,000
+lines at which `devtools.retained_data` would, and think-rsqv moves the family to that
+convention.
+
+W9’s receipts follow the convention from the start: its two decisions receipts are
+stored as deterministic gzip, read through `devtools.retained_data`
+([Compressed Files](#compressed-files)), and the three add 1,356,592 bytes stored: 724,448 and 617,689 for V2.0's and V1.0's
+decisions, 14,455 for the replay sample.
 
 Each digest the author stated holds:
 
@@ -132,8 +139,46 @@ builder is third-party code that runs in the quick tests and in CI; it was read 
 first: it imports only `math`, `sys` and `fractions`, its module level defines and does
 nothing else, and its one writer, `write_cert`, is never called.
 
-No program here decides a V2.0 row from its parameters: that is W9’s (think-fuwd), and
-the full validation is think-qczx’s.
+## W9: The Filled-End Checker
+
+`devtools.filled_end_checker` (think-fuwd) decides a filled-end row exactly from its
+parameters, by a lemma its module docstring states and proves and
+[research-2026-11-01-filled-end-lemma.md](../../../../docs/project/research/research-2026-11-01-filled-end-lemma.md)
+writes out for review. Each band’s rows and its two ends’ layers are interior-disjoint
+inside the band; the grid and the two placed bands are disjoint inside $[0, S]^2$ when
+both fit inequalities hold; and every count up to the capacity is packed. It was written
+from `filled_ends.py` read as data and shares no code with it. The lemma has not yet had
+its stage 4 mathematical review, which a separate lane runs; until it does, these
+decisions are evidence for the walk and the review, and record no row.
+
+**V2.0, every row** (`receipts/filled-end-decisions-v2.json.gz`): all 5,134 rows decided
+by the lemma, none refused, each row’s eleven controls refused. The layer controls make
+one change for every level of a band end and one for the level after it, 85,174 in all
+(21,764, 23,228, 19,458 and 20,724 for the four ends), each refused. 4,851 rows are
+filled to the capacity and none has a surplus above 7. The least slacks: the V fit 0 at
+every row, since $S = K - b_V + W_V$ exactly; the H fit $1.5 \times 10^{-8}$ (9517); a
+layer $1.4 \times 10^{-6}$ (5265). 269.8 CPU-seconds, with the SHA-256 and size of every
+written-out certificate, which are not kept.
+
+**V1.0, every row, apart** (`receipts/filled-end-decisions-v1.json.gz`): all 4,571 rows
+decided, none refused, every control refused (76,268 layer changes); 237.6 CPU-seconds.
+It is decided and labelled apart because whether V1.0 counts as a report at all is the
+owner’s question Q-847a (think-r94q); the receipt says only that the lemma decides each
+of its packings.
+
+**The cross-checks.** At five V2.0 counts nearest the lemma’s edges, 1188 (a lift of
+zero), 5265 (the least layer slack), 7439 and 8524 (the least H and V lift room) and 9517
+(the least H fit slack), the certificate `write_out` writes passes both maintained exact
+routes, and both refuse its six controls (`receipts/filled-end-checker-replay-sample.json`;
+430.9 CPU-seconds on two workers, 49.5 of them for the positives and 381.2 for the
+controls). And at the five counts of the author-built sample above, `write_out`
+writes the author’s certificates byte for byte, which `check` holds by their SHA-256s
+without running his code. No row of either deposit needed the routes in the lemma’s
+place.
+
+They decide that each stated packing is a packing; which rows the record takes,
+and in what order, is still the walk’s (think-llit), after the owner’s D4 and Q-847a.
+think-qczx’s full validation on both routes waits for those.
 
 These programs are not yet registered in `frontier/verifiers.yaml` and no evidence entry
 cites their receipts: the rows they serve are not recorded until the walk above 1024
@@ -186,7 +231,20 @@ python -m devtools.two_strip_checker replay-sample --version 5 --workers 2
 python -m devtools.two_strip_checker replay-all --version 5 --workers 2   # resumes by K
 python -m devtools.filled_end_sample check [--replay]
 python -m devtools.filled_end_sample replay --workers 2
+python -m devtools.filled_end_checker check [--digests] [--replay]
+python -m devtools.filled_end_checker decide-all [--version 2] [--version 1]
+python -m devtools.filled_end_checker replay-sample --workers 2
 ```
+
+## Compressed Files
+
+W9’s two decisions receipts are stored as deterministic gzip (`gzip -9n`);
+`gunzip -k` restores each beside it.
+
+| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
+| --- | --- | --- | --- |
+| `receipts/filled-end-decisions-v1.json.gz` | receipt | `f197eac32335636f56b73070587c80c76260f88e` | `1f8b88ace8495a3444795bf30a63d04239b6c6a396e82469f6368d80285d1f92` |
+| `receipts/filled-end-decisions-v2.json.gz` | receipt | `13cc14f2e612c91474342063f2a9d91484372776` | `1287454cd141af7af9f79a0d1d694d9afbe6bbadea02540031c93bcce9b13a85` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
