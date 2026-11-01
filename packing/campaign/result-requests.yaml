@@ -25889,8 +25889,6 @@ issues:
       evidence:
       - E-hyukdongkim-804-s297-report
       - E-hyukdongkim-804-s297-verify-exact
-      validation:
-      - think-ozx8
     - key: negative-searches
       claim: >-
         LLL at 1,500 digits on the KKT-solved side found no relation of degree <= 80 at 55, 130 and
