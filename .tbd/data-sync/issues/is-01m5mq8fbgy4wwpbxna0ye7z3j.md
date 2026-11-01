@@ -5,7 +5,7 @@ title: "Replay gradec.py on the 233 grade-C configurations: the C3 route of #545
 kind: task
 status: in_progress
 priority: 3
-version: 3
+version: 4
 delegate: bold-ritchie-l14
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:49:48.015Z
-updated_at: 2026-11-01T16:48:31.122Z
+updated_at: 2026-11-01T16:50:04.825Z
 started_at: 2026-11-01T15:42:05.081Z
 ---
 The C3 replay of Evan Daniel's grade-C local-minimality claim (#545, think-7scz): the source's own checker, search/exact/gradec.py at ad86d42 (byte-identical at 31523f8; V-evand-gradec-py), run from its retained copy on all 233 configurations the release's gradec-233.tar.zst certifies, 230 and 261 with GRADEC_DROPZERO=1, each output compared with the published n-N.gradec.json. Priced from the source's logs at 38,026 s, about 10.6 CPU-hours (author's machine, 8 jobs; may be slower here); 154 runs are under a minute (about 21 CPU-minutes), the longest is n = 313 at 1,741 s. Above a lane's 2 CPU-hour single-run limit, so it needs the coordinator's or owner's budget; at most 2 workers on the shared host. Result-import.md Stage 4 accepts the source's checker as the replay without a soundness review; the 23 October review's check_theorem_c.py run (receipts/review-theorem-c-233.jsonl, V-evand-gradec-review-check) is the second route beside the rung, as at T-225 and T-229 (review A1 of PR #751, https://github.com/jlevy/squares/pull/751#issuecomment-6368595518). Waits on: a T-NNN for the claim and a budget.
@@ -21,3 +21,5 @@ The C3 replay of Evan Daniel's grade-C local-minimality claim (#545, think-7scz)
 ## Notes
 
 2026-11-01 bold-ritchie-l14 (PR #868, branch claude/bold-ritchie-xo28us-l14): devtools.evand_gradec_replay committed (76d72c594) and RUNNING detached (PID 10126, setsid, 2 jobs, reniced to 0) in /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/gradec-replay (ledger runs.jsonl, resumable: relaunch with scratchpad/launch-replay.sh), receipt to scratchpad/gradec-replay-233.json. At 16:48Z: 3 controls refused, n=313 and n=276 byte-identical with logs matching (CPU 1839 s and 1653 s vs release 1741/1633), 0 failures; expect ~11 CPU-h total. When complete: copy receipt to packing/resources/web/evand-exact-data-2026-10-12/receipts/gradec-replay-233.json, run scratchpad/patch_t261.py from packing/ (evidence E-evand-gradec-local-minima-233-replay, T-261 to C3, #545 summary, deferral), commit the uncommitted V-evand-gradec-replay verifier entry in frontier/verifiers.yaml, amend site-urls result/t-261.html, regenerate RESULTS/INVENTORY/VERIFIERS/SYNOPSIS headline, update tests/test_site_result_filters.py incomplete list to [t-007], packet README replay section, re-measure release (scratchpad/release-measure.sh), note think-xyek (draft in scratchpad/drafts.md).
+
+2026-11-01 coordinator: HOLD on the rung change. When the replay completes, record its receipt and evidence entry (coverage, controls, CPU) in the packet and register, but do NOT move T-261 to C3 or run scratchpad/patch_t261.py's status flip until the owner answers think-xyek. Under today's rule 1, C3 would flip T-261 from incomplete to confirmed, which is exactly the question think-xyek puts to the owner (option 2 says the replay must not clear it), and the 31 Oct #545 reply told the author the label follows that answer. The tool (devtools/evand_gradec_replay.py) lands in #868; the records follow-up comes in a separate PR after the replay.
