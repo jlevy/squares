@@ -5,7 +5,7 @@ title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record s
 kind: task
 status: open
 priority: 3
-version: 17
+version: 18
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:55:58.146Z
-updated_at: 2026-10-31T18:13:16.353Z
+updated_at: 2026-11-01T23:25:49.229Z
 started_at: 2026-10-12T14:33:40.570Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
@@ -67,3 +67,9 @@ blocked_on: think-10m1
 2026-10-31 bold-ritchie-l8, after review A of #861: **the grade-C claim is now T-261, not T-264.** The three project candidates that held T-261 to T-263 were taken out of #861 unregistered (held for the owner), so the grade-C entry was renumbered before merge. In the updated draft reply for #545 above, read T-261 wherever it says T-264, including the posting condition ("only if T-261 is still T-261 on main"). Nothing else in the draft changes: V3/C1, C3 on gradec.py's replay (think-mtah, about 10.6 CPU-hours, priced). One addition for the owner before posting: the results page shows the entry as *incomplete* until that replay runs, by result_status's rule for a defect-found read below C2 (see the status-vocabulary bead filed from review A's A4); the reply need not mention it.
 
 2026-10-31 bold-ritchie-l8: **posted** the #545 follow-up after #861 merged (main 3c7dd5900) and its Pages deploy verified (run 41226697869): https://github.com/jlevy/squares/issues/545#issuecomment-6547240858. It supersedes the drafts above: grade-C as T-261 at V3/C1, with what V3 and C1 rest on; why the results page reads T-261 *incomplete* (the 23 October read is recorded defect-found and T-261 is below C2), that think-mtah's replay would clear the label mechanically and not the proof gap, and that the question is the owner's (think-xyek); think-mtah priced at about 10.6 CPU-hours (up to 21); T-246 unchanged. It invites, without asking as an awaited question, a word if the author adopts the repaired step. Recorded on PR #864 (branch claude/bold-ritchie-xo28us-l8-replies). check_requests: no reply due on #545, not closeable (s29-minimal-polynomial open), so this bead stays open as #545's answer bead.
+
+2026-11-01 bold-ritchie-l19 (think-mtah, PR #875): **draft #545 follow-up, NOT posted.** Post it from main after PR #875 merges and its Pages deploy is verified, on the coordinator's or owner's word. It is a follow-up to the 31 October reply (https://github.com/jlevy/squares/issues/545#issuecomment-6547240858), and it asks the author nothing:
+
+> A short follow-up on the grade-C certificates. We ran your `gradec.py`, unchanged, from the copy retained at `ad86d42`, on all 233 configurations in `gradec-233.tar.zst`. It ran under the versions `env.sh` pins (Python 3.13, numpy 2.4.2, scipy 1.17.0, mpmath 1.3.0, sympy 1.14.0, python-flint 0.9.0), with `GRADEC_DROPZERO=1` at 230 and 261 as your release ran them. All 233 certificates came out byte for byte identical to the published `n-N.gradec.json`. Every log matched yours line for line, apart from paths and timings, and the three `GRADEC_MUTATE` rejection tests at n = 10 were each refused. It took 11.0 CPU-hours here, against the 10.6 your logs print. The record keeps the receipt in the packet for your release: https://github.com/jlevy/squares/blob/main/packing/resources/web/evand-exact-data-2026-10-12/README.md#the-replay-of-1-november-2026. As our 31 October reply said, T-261's label waits on the owner's question about how a repaired defect is recorded, so T-261 stays at V3/C1 until it is answered. The replay does not bear on the side-end-row gap in `grade-C.md`; your adoption of the repaired step would close that at the source.
+
+If the owner picks option 2 of think-xyek before this is posted, the second-to-last sentence must also say that the replay no longer clears the label.
