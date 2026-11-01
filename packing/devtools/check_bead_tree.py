@@ -70,7 +70,9 @@ found -- a checkout without the `tbd-sync` branch is a normal state, not a failu
 
 from __future__ import annotations
 
+import argparse
 import json
+import re
 import subprocess
 import sys
 from collections import defaultdict
@@ -102,6 +104,8 @@ DEFERRAL_RECORDS = (
 )
 #: The guard stage 7 runs before closing beads (think-13ew): the beads follow it.
 BEFORE_CLOSE = "--before-close"
+#: A bead as the records name it, the alias the agenda schema's `bead` pattern takes.
+BEAD_ALIAS = re.compile(r"think-[a-z0-9]+")
 # The agenda schema's `bead` pattern is `^think-[a-z0-9]+$`; the part after the prefix
 # is the alias table's key.
 ALIAS_PREFIX = "think-"
@@ -404,6 +408,18 @@ def records_off_main() -> list[str] | None:
     return None if found.returncode != 0 else found.stdout.split()
 
 
+def main_tip() -> str:
+    """`origin/main`'s short commit and its date, as last fetched, which the guard
+    prints so that a stale fetch is visible (review A5 of #869)."""
+    found = subprocess.run(
+        ["git", "-C", str(REPO), "log", "-1", "--format=%h %cs", "origin/main"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return found.stdout.strip() if found.returncode == 0 else "unknown"
+
+
 def before_close(closing: Sequence[str]) -> int:
     """Whether `closing` may close: none may while a deferral record on `main` names it.
 
@@ -434,6 +450,7 @@ def before_close(closing: Sequence[str]) -> int:
             file=sys.stderr,
         )
         return 2
+    print(f"  reading the deferral records at origin/main {main_tip()}, as last fetched")
     wanted = set(closing)
     held = [
         (where, alias)
@@ -484,12 +501,35 @@ def check(beads: list[dict[str, Any]]) -> list[dict[str, str]]:
     return problems
 
 
+def _alias(text: str) -> str:
+    if BEAD_ALIAS.fullmatch(text) is None:
+        message = f"{text!r} is not a bead alias such as think-abcd"
+        raise argparse.ArgumentTypeError(message)
+    return text
+
+
 def main(argv: Sequence[str] | None = None) -> int:
-    arguments = sys.argv[1:] if argv is None else argv
-    if BEFORE_CLOSE in arguments:
-        return before_close(arguments[arguments.index(BEFORE_CLOSE) + 1 :])
-    as_json = "--json" in arguments
-    warn_deferrals = WARN_DEAD_DEFERRALS in arguments
+    parser = argparse.ArgumentParser(description="Check the bead tree and its deferrals.")
+    parser.add_argument("--json", action="store_true", help="machine-readable output")
+    parser.add_argument(
+        WARN_DEAD_DEFERRALS,
+        action="store_true",
+        help="report a dead deferral without failing on it (the gate's flag)",
+    )
+    parser.add_argument(
+        BEFORE_CLOSE,
+        nargs="+",
+        type=_alias,
+        metavar="BEAD",
+        help="the guard stage 7 runs before closing these beads; takes no other option",
+    )
+    args = parser.parse_args(sys.argv[1:] if argv is None else argv)
+    if args.before_close is not None:
+        if args.json or args.warn_dead_deferrals:
+            parser.error(f"{BEFORE_CLOSE} takes bead aliases and no other option")
+        return before_close(args.before_close)
+    as_json: bool = args.json
+    warn_deferrals: bool = args.warn_dead_deferrals
     found = load()
     if found is None:
         msg = "SKIP no bead store found (no tbd-sync worktree or branch); bead tree unchecked"

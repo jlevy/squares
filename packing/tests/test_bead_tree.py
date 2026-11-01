@@ -405,6 +405,7 @@ def _guarded(monkeypatch: pytest.MonkeyPatch, off_main: list[str] | None) -> Non
     monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
     monkeypatch.setattr(check_bead_tree, "adoption_deferrals", list)
     monkeypatch.setattr(check_bead_tree, "records_off_main", lambda: off_main)
+    monkeypatch.setattr(check_bead_tree, "main_tip", lambda: "e36ecf29d 2026-11-01")
 
 
 def test_a_bead_the_records_on_main_still_name_may_not_close(
@@ -422,6 +423,9 @@ def test_a_bead_the_records_on_main_still_name_may_not_close(
         "  HOLD result-requests.yaml open issue #836 names think-aaaa on main"
     ]
     assert "  ok  no record on main names think-bbbb; it may close" in shown
+    assert shown[0] == (
+        "  reading the deferral records at origin/main e36ecf29d 2026-11-01, as last fetched"
+    )
     assert check_bead_tree.main([guard, "think-bbbb"]) == 0
     assert "ok  no record on main names think-bbbb" in capsys.readouterr().out
 
@@ -445,7 +449,30 @@ def test_the_close_guard_reads_only_the_records_main_holds(
     _guarded(monkeypatch, off_main)
     assert check_bead_tree.main([check_bead_tree.BEFORE_CLOSE, "think-bbbb"]) == 2
     assert expected in capsys.readouterr().err
-    assert check_bead_tree.main([check_bead_tree.BEFORE_CLOSE]) == 2
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        ["think-bbbb", "--json"],
+        ["--json"],
+        ["think-bbbb", "--warn-dead-deferrals"],
+        ["is-01m6ah2k5saw21a8r8hycw869k"],
+        [],
+    ],
+    ids=["a flag after a bead", "a flag alone", "the gate's flag", "a full id", "nothing"],
+)
+def test_the_close_guard_takes_only_bead_aliases(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], arguments: list[str]
+) -> None:
+    """Review A5 of #869: `--before-close think-zzzz --json` read `--json` as a bead and
+    said it may close. A flag is not a bead, and an id is not the alias a record names, so
+    each is refused, exit 2, and nothing is said to be free to close."""
+    _guarded(monkeypatch, [])
+    with pytest.raises(SystemExit) as refused:
+        check_bead_tree.main([check_bead_tree.BEFORE_CLOSE, *arguments])
+    assert refused.value.code == 2
+    assert "may close" not in capsys.readouterr().out
 
 
 def _git(repo: Path, *arguments: str) -> None:
