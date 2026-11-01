@@ -869,6 +869,7 @@ case or experiment separately.
 | [PR410 Integration Review for the n17 Continuation](docs/project/reviews/review-2026-10-07-n17-pr410-integration.md) | dated review record | record | retained | — |
 | [Session186 storage disposition](docs/project/reviews/review-2026-10-07-n17-session-186-storage.md) | dated review record | record | retained | — |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | research synthesis | supporting | retained | — |
+| [The Filled-End Lemma: Deciding Karimi’s Two-Band L Packings From Their Parameters](docs/project/research/research-2026-11-01-filled-end-lemma.md) | research synthesis | supporting | retained | — |
 | [Assessment: Evan Daniel’s regularization process, and adapting it to every packing n = 1..324](docs/project/research/research-2026-10-11-evand-regularization-assessment.md) | research synthesis | supporting | retained | — |
 | [Research: Regularizing Every Known-Best Packing for Display](docs/project/research/research-2026-10-11-regularization-state-and-approach.md) | research synthesis | supporting | retained | — |
 | [Evan Daniel’s Regularizer, Vendored](vendor/evand-regularize/README.md) | component scope and use | definitive | maintained | — |
