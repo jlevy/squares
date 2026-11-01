@@ -4,20 +4,71 @@
  "comment": "https://github.com/jlevy/squares/issues/804#issuecomment-6397593690",
  "attachment": {
   "url": "https://github.com/user-attachments/files/33925868/s297-exact-configuration.zip",
-  "bytes": null,
+  "bytes": 77023,
   "sha256": "e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7",
   "sha256_stated_by_comment": true,
-  "sha256_measured": false,
+  "sha256_measured": true,
   "raw_asset_retained": false,
-  "licence": "CC0 1.0 (stated by the comment)",
-  "not_read": "The importing session's proxy answers user-attachments URLs with 403, so the archive was neither downloaded nor measured; under CC0 it may be kept once it is reachable."
+  "members_retained": "every member, byte-identical, under source/",
+  "licence": "CC0 1.0: stated by the comment, and again for all three issue-804 attachments in issuecomment-6415293035 (2026-10-26T11:50:22Z); the public copy's LICENSE is CC0 1.0 Universal",
+  "not_read": "The importing session's proxy answers user-attachments URLs with 403; the same bytes, held to the comment's digest, were read from the author's public copy instead.",
+  "public_copy": {
+   "repository": "https://github.com/HyukdongKim/square-packing-exact-sides",
+   "commit": "f480441e73824668fb18779151369e4d3ba6179a",
+   "path": "attachments/s297-exact-configuration.zip",
+   "git_blob": "a939215c4f759cf37094aefdbd935cea2c1a1ade",
+   "retrieved_at_utc": "2026-11-01T15:56Z"
+  }
  },
  "members": [
   {
-   "path": "n297.minpoly.json",
+   "path": "s297-exact-configuration/README.md",
+   "bytes": 1344,
+   "sha256": "db45b0425fd50bbc3e79bcd24eec187fa094e8a6900f8195d6a44a4c05c59224",
+   "stated_by_comment": false,
+   "retained": true,
+   "retained_at": "source/s297-exact-configuration/README.md"
+  },
+  {
+   "path": "s297-exact-configuration/SHA256SUMS",
+   "bytes": 339,
+   "sha256": "6c5537491cfbdd1c9f596886392857a6c3dbd2dc82b5a69a8ffcdaf7d5965517",
+   "stated_by_comment": false,
+   "retained": true,
+   "retained_at": "source/s297-exact-configuration/SHA256SUMS"
+  },
+  {
+   "path": "s297-exact-configuration/check_field_packing.py",
+   "bytes": 7478,
+   "sha256": "8335f9a624458ee770208d06a773aea14ac0d5554731ed2375370c747d31aacf",
+   "stated_by_comment": false,
+   "retained": true,
+   "retained_at": "source/s297-exact-configuration/check_field_packing.py"
+  },
+  {
+   "path": "s297-exact-configuration/controls.py",
+   "bytes": 2144,
+   "sha256": "503117b0121655eaad3b96d7c1b2b65b4c1c0ca05cacdd3915656699069d3800",
+   "stated_by_comment": false,
+   "retained": true,
+   "retained_at": "source/s297-exact-configuration/controls.py"
+  },
+  {
+   "path": "s297-exact-configuration/distance_to_record.py",
+   "bytes": 823,
+   "sha256": "460b3074d75b5793b2bd8d8d196e890b66eb94f25dbbf5a4f12468739385fe75",
+   "stated_by_comment": false,
+   "retained": true,
+   "retained_at": "source/s297-exact-configuration/distance_to_record.py"
+  },
+  {
+   "path": "s297-exact-configuration/n297.minpoly.json",
+   "bytes": 347690,
    "sha256": "e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826",
    "stated_by_comment": true,
-   "retained": false
+   "sha256_stated": "e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826",
+   "retained": true,
+   "retained_at": "source/s297-exact-configuration/n297.minpoly.json"
   }
  ]
 }

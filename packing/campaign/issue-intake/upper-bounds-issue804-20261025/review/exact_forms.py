@@ -4,16 +4,23 @@
 Hyukdong Kim's issue 804 states that the side of the best-known packing at 88, 126, 172,
 199 and 263 is a stated root of a stated integer polynomial, irreducible over Q, and
 attaches ``squares-exact-forms.zip``, whose ``exact_forms.json`` gives each polynomial,
-highest degree first, with the side to 100 digits. The archive states no licence, so the
-``hyukdongkim-exact-forms-2026-10-25`` packet keeps no byte of it: only the polynomials
-and printed sides, as an exact fact, with the archive's address and digests. Nothing in
-the archive is executed: ``exact_forms.json`` is read as JSON data, and the five Python
-files in it are pinned by their digests and never opened as code.
+highest degree first, with the side to 100 digits. The archive stated no licence when it
+was read, so the ``hyukdongkim-exact-forms-2026-10-25`` packet first kept no byte of it:
+only the polynomials and printed sides, as an exact fact, with the archive's address and
+digests. The author dedicated it to the public domain under CC0 1.0 on 25 October and
+served the same bytes from a public copy, `PUBLIC_COPY` at `PUBLIC_COMMIT`, on 31 October;
+since 1 November the packet keeps its seven files under ``source/`` (think-9vai). Nothing
+in the archive is executed: ``exact_forms.json`` is read as JSON data, and the five Python
+files in it are retained as text and never run.
 
 - ``derive --archive ZIP [--check]`` holds ``ZIP`` to the issue's SHA-256 and the size
-  measured at triage, and writes the packet's ``acquisition/sources.json`` (the attachment,
-  every member's path, size and SHA-256, and the source's inputs pinned by Git blob, size
-  and SHA-256) and ``facts/exact-forms.json`` (each count's polynomial and printed side).
+  measured at triage, writes every member byte-identical under the packet's ``source/``
+  (with ``--check``, compares it with the retained file), and writes the packet's
+  ``acquisition/sources.json`` (the attachment, its public copy, every member's path, size,
+  SHA-256 and retained path, and the source's inputs pinned by Git blob, size and SHA-256)
+  and ``facts/exact-forms.json`` (each count's polynomial and printed side). ``ZIP`` is
+  the issue's attachment or the public copy's ``attachments/squares-exact-forms.zip``,
+  which are the same bytes.
 - ``configurations --archive ZIP [--check]`` holds the author's later attachment,
   ``t244-exact-configurations.zip`` (2026-10-25T09:06:23Z), to the SHA-256 his comment
   states and the size measured when it was read, and each of its two certificates to its
@@ -94,6 +101,22 @@ ATTACHMENT = "https://github.com/user-attachments/files/33917140/squares-exact-f
 ARCHIVE_SHA256 = "c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7"
 ARCHIVE_BYTES = 14_112
 FORMS_MEMBER = "squares-exact-forms/exact_forms.json"
+#: Where the packet keeps the archive's files, at their member paths, since 1 November 2026.
+RETAINED = PACKET / "source"
+#: The author's public copy of his three issue-804 attachments (issuecomment-6543970419),
+#: whose ``attachments/squares-exact-forms.zip`` is the attachment byte for byte, and the
+#: CC0 1.0 dedication that lets the packet keep the files themselves.
+PUBLIC_COPY = "https://github.com/HyukdongKim/square-packing-exact-sides"
+PUBLIC_COMMIT = "f480441e73824668fb18779151369e4d3ba6179a"
+PUBLIC_PATH = "attachments/squares-exact-forms.zip"
+PUBLIC_BLOB = "c6a5694a2df6ff93514d80388de9681713e117f1"
+PUBLIC_RETRIEVED = "2026-11-01T15:56Z"
+LICENCE = (
+    "CC0 1.0: the author's public-domain dedication of his issue-804 attachments, data and "
+    "code, in issuecomment-6397363927 (2026-10-25T12:00:41Z) and again in "
+    "issuecomment-6415293035 (2026-10-26T11:50:22Z), which asks that the files be kept; the "
+    "public copy's LICENSE is CC0 1.0 Universal"
+)
 #: The configurations the author attached to issue 804 at 2026-10-25T09:06:23Z, the
 #: digests the comment states for the archive and its two certificates, and the size
 #: measured when they were read; and where the second packet keeps what is derived.
@@ -199,17 +222,20 @@ def derive(archive: Path, *, check: bool) -> int:
     if digest != ARCHIVE_SHA256 or len(data) != ARCHIVE_BYTES:
         sys.exit(f"{archive}: SHA-256 {digest}, {len(data)} bytes; not the issue's attachment")
     members: list[dict[str, Any]] = []
+    status = 0
     with zipfile.ZipFile(archive) as bundle:
         for info in bundle.infolist():
             if info.is_dir():
                 continue
             body = bundle.read(info)
+            status |= retained(info.filename, body, check=check)
             members.append(
                 {
                     "path": info.filename,
                     "bytes": len(body),
                     "sha256": hashlib.sha256(body).hexdigest(),
-                    "retained": False,
+                    "retained": True,
+                    "retained_at": f"source/{info.filename}",
                 }
             )
         rows = json.loads(bundle.read(FORMS_MEMBER).decode("utf-8"))
@@ -241,7 +267,8 @@ def derive(archive: Path, *, check: bool) -> int:
         },
         "note": (
             "Each count's polynomial and printed side as exact_forms.json states them, read "
-            "as JSON data; the archive states no licence, so its bytes are not retained."
+            "as JSON data. The archive stated no licence when this fact was first derived; "
+            "under the author's CC0 1.0 dedication the packet keeps its files under source/."
         ),
         "forms": forms,
     }
@@ -254,7 +281,16 @@ def derive(archive: Path, *, check: bool) -> int:
             "sha256": ARCHIVE_SHA256,
             "sha256_stated_by_issue": True,
             "raw_asset_retained": False,
-            "licence": "none stated",
+            "members_retained": "every member, byte-identical, under source/",
+            "licence": LICENCE,
+            "public_copy": {
+                "repository": PUBLIC_COPY,
+                "commit": PUBLIC_COMMIT,
+                "path": PUBLIC_PATH,
+                "git_blob": PUBLIC_BLOB,
+                "retrieved_at_utc": PUBLIC_RETRIEVED,
+                "same_bytes_as_attachment": True,
+            },
         },
         "members": members,
         "inputs": {
@@ -272,7 +308,21 @@ def derive(archive: Path, *, check: bool) -> int:
             ],
         },
     }
-    return written(FACT, fact, check=check) | written(SOURCES, sources, check=check)
+    return status | written(FACT, fact, check=check) | written(SOURCES, sources, check=check)
+
+
+def retained(member: str, body: bytes, *, check: bool) -> int:
+    """Keep one archive member byte-identical under ``source/``, or compare it there."""
+    path = RETAINED / member
+    if check:
+        if not path.is_file() or path.read_bytes() != body:
+            print(f"{path.relative_to(REPO)} differs from the archive's member")
+            return 1
+        return 0
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(body)
+    print(f"wrote {path.relative_to(REPO)}")
+    return 0
 
 
 def written_gzip(path: Path, document: Any, *, check: bool) -> int:

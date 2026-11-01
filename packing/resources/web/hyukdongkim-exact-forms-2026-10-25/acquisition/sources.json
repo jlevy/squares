@@ -7,50 +7,66 @@
   "sha256": "c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7",
   "sha256_stated_by_issue": true,
   "raw_asset_retained": false,
-  "licence": "none stated"
+  "members_retained": "every member, byte-identical, under source/",
+  "licence": "CC0 1.0: the author's public-domain dedication of his issue-804 attachments, data and code, in issuecomment-6397363927 (2026-10-25T12:00:41Z) and again in issuecomment-6415293035 (2026-10-26T11:50:22Z), which asks that the files be kept; the public copy's LICENSE is CC0 1.0 Universal",
+  "public_copy": {
+   "repository": "https://github.com/HyukdongKim/square-packing-exact-sides",
+   "commit": "f480441e73824668fb18779151369e4d3ba6179a",
+   "path": "attachments/squares-exact-forms.zip",
+   "git_blob": "c6a5694a2df6ff93514d80388de9681713e117f1",
+   "retrieved_at_utc": "2026-11-01T15:56Z",
+   "same_bytes_as_attachment": true
+  }
  },
  "members": [
   {
    "path": "squares-exact-forms/kkt.py",
    "bytes": 6048,
    "sha256": "78bf71539627f2c32ef72106e049abb4a14ab57269234601cba5134af3c4b0e6",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/squares-exact-forms/kkt.py"
   },
   {
    "path": "squares-exact-forms/README.md",
    "bytes": 1533,
    "sha256": "d11e8534c3404bdcf507138ef5a6017f2fe29e3e77ba9d4bea49ffdd9b1ebe14",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/squares-exact-forms/README.md"
   },
   {
    "path": "squares-exact-forms/exactform.py",
    "bytes": 6893,
    "sha256": "f21f38ed4a712c3fbf74dd3f14d21b85c04506639dfd702e6acc0884901ecd26",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/squares-exact-forms/exactform.py"
   },
   {
    "path": "squares-exact-forms/kkt_fast.py",
    "bytes": 4348,
    "sha256": "110e6aad52c6328d9e5d883642904f331a9de3f1105cdfa17383576b19ee47ee",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/squares-exact-forms/kkt_fast.py"
   },
   {
    "path": "squares-exact-forms/verify_exact_forms.py",
    "bytes": 3056,
    "sha256": "7ffaa7f7f566499e1909175d3bd84801226242ac227281c1ae1929ae0ad22ccc",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/squares-exact-forms/verify_exact_forms.py"
   },
   {
    "path": "squares-exact-forms/exact_forms.json",
    "bytes": 2833,
    "sha256": "531e7077b3242aa56e959031824fb435693deaf8d73f7e33016d49c9e1709202",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/squares-exact-forms/exact_forms.json"
   },
   {
    "path": "squares-exact-forms/lppolish.py",
    "bytes": 7878,
    "sha256": "bef07562fe4f9d2002e3d5806033f5b30913da08eec04b34daaca1e8ce6043e4",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/squares-exact-forms/lppolish.py"
   }
  ],
  "inputs": {

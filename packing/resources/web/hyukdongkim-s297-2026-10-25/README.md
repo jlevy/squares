@@ -11,19 +11,22 @@ He attached an exact configuration at $S^*$ under CC0 1.0.
 The attachment could not be downloaded from the importing session, because the session
 proxy answers user-attachments URLs with 403. **Route A** builds an exact configuration at
 $S^*$ from T-174’s own retained certificate, with this repository’s tools. Deciding that
-configuration exactly is the next step, which exceeded this import’s CPU cap. **Route B**,
-deciding the author’s file, waits until the file is reachable.
+configuration exactly is the next step, which exceeded this import’s CPU cap. **Route B**
+decides the author’s file. On 31 October the author served the same bytes from a public
+copy, and since 1 November 2026 the packet keeps the archive’s six files under `source/`
+(think-ozx8).
 
 ## Source and Credit
 
 | Field | Value |
 | --- | --- |
 | Comments | [issuecomment-6397363927](https://github.com/jlevy/squares/issues/804#issuecomment-6397363927), 12:00:41Z, and [issuecomment-6397593690](https://github.com/jlevy/squares/issues/804#issuecomment-6397593690), 12:23:57Z, both by HyukdongKim on 25 October 2026. Neither had been edited when they were read at 15:46:55Z. Their text is in `acquisition/comments-804.json`. |
-| Attachment | [`s297-exact-configuration.zip`](https://github.com/user-attachments/files/33925868/s297-exact-configuration.zip), SHA-256 `e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7` as the comment states it, holding `n297.minpoly.json` (`e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826`). Not downloaded, not measured and not retained. |
+| Attachment | [`s297-exact-configuration.zip`](https://github.com/user-attachments/files/33925868/s297-exact-configuration.zip), SHA-256 `e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7` as the comment states it, holding `n297.minpoly.json` (`e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826`). The attachment URL returned 403 here. |
+| Public copy | [HyukdongKim/square-packing-exact-sides](https://github.com/HyukdongKim/square-packing-exact-sides/tree/f480441e73824668fb18779151369e4d3ba6179a) at `f480441e73824668fb18779151369e4d3ba6179a` (2026-10-31T13:24:45Z), offered in issuecomment-6415293035 and announced in issuecomment-6543970419. Its `attachments/s297-exact-configuration.zip` (blob `a939215c`, 77,023 bytes) has the comment’s SHA-256, and its `n297.minpoly.json` the certificate’s; read on 1 November 2026 at 15:56Z. |
 | Bibliography key | **[Kim s297 2026-10-25]** |
 | Human credit | Hyukdong Kim, for the exact side, after the packing’s finder and improvers as the case record credits them: Francisco Couzo, improved by Evan Daniel and PingYou Ltd (T-174) |
 | AI assistance | The comment says Claude (Anthropic) did the computation, the construction and the checks at the author’s direction, and that he reviewed and reran them |
-| Licence | CC0 1.0, stated in the comment for this bundle. The 12:00:41Z comment states the same for the two earlier bundles, whose packets belong to think-4rzl and think-9vai. |
+| Licence | CC0 1.0, stated in the comment for this bundle, and again for all three issue-804 bundles in issuecomment-6415293035 (26 October, 11:50:22Z), which asks that the files be kept. The public copy’s `LICENSE` is CC0 1.0 Universal. |
 
 ## What the Comments Report
 
@@ -95,21 +98,43 @@ certificate, whose strict margins are at least 1e-11. It does not decide feasibi
 
 ### Route B
 
-Route B waits on the author’s attachment. Once the file is reachable, check its digest
-against the comment. Then decide `n297.minpoly.json` on `exact_verify` through
-`evand_minpoly_geometry`, and replay the retained `verify_exact.py` unchanged in a
-separate directory under `python -I`, as T-193’s replay did. Under CC0 the files may be
-kept.
+`side_297.py retain` read the public copy’s zip, held it to the comment’s SHA-256 and its
+certificate to the certificate’s, and wrote the six members byte-identical under
+`source/s297-exact-configuration/`; they are also the public copy’s
+`files/s297-exact-configuration/`, byte for byte. `devtools.configuration_fact_replay
+--packet s297`, the reader T-244’s configurations use, then decides that file:
+
+- **custody and side** (`receipts/side-check.json`): the retained file has the
+  certificate’s SHA-256; its `S.poly` is $P_{297}$, $S$ is a root of it exactly in $K$, its
+  120-digit enclosure lies in the file’s interval, and one root of $P_{297}$ lies in the
+  hull of that enclosure and the isolating interval of `exact-sides.json`, so the file’s
+  side is $S^*$.
+- **route 2** (`receipts/route2-verify-exact.json`): Evan Daniel’s `verify_exact.py`, the
+  checker the author reports running, run unchanged from its retained copy in a
+  `python -I` child, printed VALID: 1,750 touching incidences proved as identities in K,
+  7,138 strict by intervals, the rest by discs, in 13.6 CPU-seconds. It refused all four
+  mutated controls of T-193’s replay driver: a square moved 1e-6 through a wall it
+  touches, $S$ raised by 1e-6 in $K$, $S$’s interval moved below the root, and square 1
+  replaced by square 0. Run on 1 November 2026.
+- **route 1** (`receipts/algebraic-route1-n297.json.xz`): `sqpack.witness.exact_verify`
+  over $K$ on the configuration as a centre-basis Witness/v2, with the duplicate-square
+  and outside-container controls, each job in its own child process. Queued behind the
+  lane’s gradec replay on 1 November 2026; not yet decided.
+
+None of the author’s own programs (`check_field_packing.py`, `controls.py`,
+`distance_to_record.py`) was run here; they are kept as text.
 
 ## Files
 
 | Path | What it is |
 | --- | --- |
 | `acquisition/comments-804.json` | The two comments, as the GitHub API returned them |
-| `acquisition/sources.json` | The attachment’s address and the digests the comment states; nothing measured |
+| `acquisition/sources.json` | The attachment’s address, its public copy, the digests the comment states, and each retained member’s path, size and SHA-256 |
+| `source/s297-exact-configuration/` | The archive’s six files, byte-identical: `n297.minpoly.json`, its README and `SHA256SUMS`, and three programs kept as text |
 | `facts/s297-polynomial.json` | $P_{297}$, highest degree first, and the printed side |
 | `facts/route-a-n297.json.gz` | Route A’s exact configuration, a centre-basis Witness/v2 over $K$ |
-| `receipts/*.json` | Route A’s receipts, one a step |
+| `receipts/contacts.json`, `solve.json`, `field.json`, `build.json` | Route A’s receipts, one a step |
+| `receipts/side-check.json`, `route2-verify-exact.json` | Route B’s side check and its `verify_exact.py` run with controls |
 | `route-a.sh` | The commands that wrote them, from `packing/` |
 
 <!-- This document follows common-doc-guidelines.md.

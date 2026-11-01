@@ -8,7 +8,7 @@
   "member": "squares-exact-forms/exact_forms.json",
   "member_sha256": "531e7077b3242aa56e959031824fb435693deaf8d73f7e33016d49c9e1709202"
  },
- "note": "Each count's polynomial and printed side as exact_forms.json states them, read as JSON data; the archive states no licence, so its bytes are not retained.",
+ "note": "Each count's polynomial and printed side as exact_forms.json states them, read as JSON data. The archive stated no licence when this fact was first derived; under the author's CC0 1.0 dedication the packet keeps its files under source/.",
  "forms": [
   {
    "n": 88,

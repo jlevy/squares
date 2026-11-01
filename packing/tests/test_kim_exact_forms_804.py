@@ -61,8 +61,31 @@ def test_the_fact_names_the_issue_attachment() -> None:
     assert [form["n"] for form in fact["forms"]] == [88, 126, 172, 199, 263]
     sources = json.loads((PACKET / "acquisition/sources.json").read_text(encoding="utf-8"))
     assert sources["attachment"]["raw_asset_retained"] is False
+    assert sources["attachment"]["licence"].startswith("CC0 1.0")
+    public = sources["attachment"]["public_copy"]
+    assert public["commit"] == "f480441e73824668fb18779151369e4d3ba6179a"
     assert len(sources["members"]) == 7
-    assert not any(member["retained"] for member in sources["members"])
+    assert all(member["retained"] for member in sources["members"])
+
+
+def test_the_archive_files_are_kept_as_the_member_digests_name_them() -> None:
+    """Since 1 November 2026 the packet keeps the seven files themselves (CC0 1.0, think-9vai):
+    each is the member the triage measured, and the forms member is the fact's source."""
+    sources = json.loads((PACKET / "acquisition/sources.json").read_text(encoding="utf-8"))
+    kept = sorted(
+        path.relative_to(PACKET / "source").as_posix()
+        for path in (PACKET / "source").rglob("*")
+        if path.is_file()
+    )
+    assert kept == sorted(member["path"] for member in sources["members"])
+    for member in sources["members"]:
+        data = (PACKET / member["retained_at"]).read_bytes()
+        assert len(data) == member["bytes"]
+        assert hashlib.sha256(data).hexdigest() == member["sha256"]
+    forms = PACKET / "source/squares-exact-forms/exact_forms.json"
+    assert hashlib.sha256(forms.read_bytes()).hexdigest() == (
+        "531e7077b3242aa56e959031824fb435693deaf8d73f7e33016d49c9e1709202"
+    )
 
 
 def test_the_receipt_reads_the_retained_fact() -> None:

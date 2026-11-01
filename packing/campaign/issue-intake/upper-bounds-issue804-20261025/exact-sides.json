@@ -2,7 +2,7 @@
  "format": "issue-804-exact-sides-v1",
  "tool": "packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py",
  "fact": "packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json",
- "fact_sha256": "4aa822d1caae178cc47db591c05fbb8effaa127557be0a055c6de15187af5c56",
+ "fact_sha256": "fd4927155fb0506aa22d3edf4bce50ac94aa75f9594cde9424c42061973eb12b",
  "starts": "packing/campaign/issue-intake/upper-bounds-issue804-20261025/starts.yaml",
  "places": 120,
  "claim_places": 100,
