@@ -968,12 +968,6 @@ def _least(found: Sequence[Mapping[str, Any]], key: str) -> str | None:
     return f"{min(values):.6e}" if values else None
 
 
-def lift_room(row: FilledEnd, decided: Mapping[str, Any]) -> Fraction:
-    """How near a decided row's lifts are to either end of [0, F]."""
-    v_free, h_free = Fraction(decided["v_free"]), Fraction(decided["h_free"])
-    return min(row.lift_v, v_free - row.lift_v, row.lift_h, h_free - row.lift_h)
-
-
 def decisions_summary(
     found: Sequence[Mapping[str, Any]], checked: Sequence[Sequence[Mapping[str, Any]]]
 ) -> dict[str, Any]:
