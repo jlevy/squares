@@ -1,0 +1,24 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/devtools/build_known_best_atlas.py
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  The shared atlas producer changes only SUMMARY_PROSE, the descriptions written into the
+  two composite SVGs. These three papers use its shared typography and publication helpers
+  but consume neither composite. Their manuscripts, figures, mathematical inputs and helper
+  implementations are unchanged, as confirmed by independent source and artifact reviews.
+  They retain v0.1.7, v0.1.0 and v0.2.2 respectively. The lower-bounds explainer does embed
+  the refreshed atlas and takes its own v0.4.7 patch. No byte-identity claim is made for unrebuilt
+  PDFs.

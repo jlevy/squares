@@ -1,0 +1,25 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+  - packing/devtools/overview_sections.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  Rendered on this branch over main 6e73ef1c with the browser's math pass, once with main's
+  versions of these paths and once with the branch's, the Markdown and HTML differ only in
+  the live register count beside T-018, 187 results registered so far and now 192. Over main
+  4c9af690 the HTML also differed in where an empty style attribute falls in one formula's
+  span, which moves between two renders of the branch alone. The claim documents change only
+  the revision their links pin. A register count follows the site's data and is not a revision
+  of the paper, so the explainer keeps v0.4.7; the site takes v0.7.11. Rendered again after
+  the PR #627 review fixes, with the register and source register as they stood at 52f02f5b
+  and as fixed (T-188 to T-192's notes, significance and regularizations, two source notes),
+  the Markdown is byte-identical and the HTML differs only in that same empty style attribute.

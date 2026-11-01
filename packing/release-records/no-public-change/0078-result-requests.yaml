@@ -1,0 +1,18 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/run_negative_controls.py
+  - packing/frontier/n-084.md
+  - packing/frontier/results.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  Reviewed October 19, 2026 against main 926cd764 for the #446 landing of T-205, T-206 and
+  T-207: the #446 request entry, the n84 case record and the three register entries are citation
+  targets whose existence the producer checks, not inlined text, and every cited path exists
+  at both revisions; run_negative_controls.py changes only the snapshot cap and its comment.
+  Its HTML and Markdown rendered at the base record tree and at the candidate head with the
+  same source-link revision are byte-identical. Retain v0.2.3; no PDF redraw is claimed.

@@ -1,0 +1,31 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+reason: >-
+  For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154, both raised to V3/C3
+  and adopted as houses) against main d588ad98: both reviews read results.yaml only through
+  paper_figures.ladder_records, which selects the n11 ladder rungs LADDER_RUNGS names and
+  holds them to LADDER_DIGEST; T-221 and T-222 are added entries outside that ladder, and
+  no ladder row changes. upper_bound_reports.py gains only two house readers, adopt_houses.py
+  and upper_bound_houses.py only the 20 October pass's prose, credits and houses at 154 and
+  308, and default_drawings.py loses only 308's settlement, none of which these producers
+  call. Rendered at link revision 5ee03750, at the adoption's head febe2913, once from this
+  branch's tree and once with main's copies of the eight changed inputs the three papers read
+  (adopt_houses.py, default_drawings.py, upper_bound_houses.py, upper_bound_reports.py, results.yaml,
+  result-requests.yaml, source-coverage.yaml and n-154.md): render_n11_optimality_review,
+  render_n11_threshold_bound_review and render_packing_methods write 50 byte-identical files
+  on both trees, and none of them names T-221, T-222, #689, #694 or either packet. No PDF
+  was printed; each prints from that HTML. Retain v0.1.7 and v0.1.0.

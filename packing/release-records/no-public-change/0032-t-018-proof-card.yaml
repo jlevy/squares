@@ -1,0 +1,16 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  The v0.8.20 cut for PR-B moved the claim documents' link revision, d39f458c to cadf73fd,
+  in 22 lines. Rendered into empty site directories from this tree after the cut and from
+  main 7359fa8b's: the explainer and the other three papers write 68 byte-identical files.
+  Retain v0.4.15.

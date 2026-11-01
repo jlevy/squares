@@ -1,0 +1,21 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/check_half_angle_area.py
+  - packing/devtools/overview_sections.py
+  - packing/devtools/register_regularized_bounds.py
+  - packing/devtools/regularized_drawings.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+reason: >-
+  Rendered from main and from this branch at one link revision, both papers' HTML and Markdown
+  are byte-identical, and each PDF prints from that HTML. The helpers adopt and draw upper-bound
+  houses and the register gains T-157 to T-160, none of which either review cites.

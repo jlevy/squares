@@ -1,0 +1,14 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Reviewed render_packing_methods: render_all_facts returns no substitutions, and these request/source
+  records are citation inputs without rendered content. The 18 October change adds queued
+  issue claims and reads, records the already posted 432 reply and corrects the 446 transcription;
+  none enters the manuscript. PR 667's paired 42-file comparison established the same boundary.
+  The current review preserves the survey's v0.2.2 edition.

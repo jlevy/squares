@@ -1,0 +1,19 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/check_source_coverage.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  Rendered from this branch at 05ef0f60 and from main 804eff36 with the browser's math pass,
+  the Markdown and HTML differ only in the live register count beside T-018, 194 results registered
+  so far and now 195. A register count follows the site's data and is not a revision of the
+  paper, so the explainer keeps v0.4.7.

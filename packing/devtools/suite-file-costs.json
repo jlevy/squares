@@ -364,6 +364,7 @@
     "packing/tests/test_measure_atlas_views.py": 0.03,
     "packing/tests/test_measure_release_assets.py": 1.323,
     "packing/tests/test_measure_threshold_net_refinement.py": 0.557,
+    "packing/tests/test_merge_conflicts.py": 0.276,
     "packing/tests/test_migrate_math.py": 0.692,
     "packing/tests/test_minimal_verify.py": 1.109,
     "packing/tests/test_minus_w_row_jets.py": 0.002,
@@ -594,6 +595,7 @@
     "packing/tests/test_release_components.py": 0.008,
     "packing/tests/test_release_impact.py": 4.617,
     "packing/tests/test_release_pin.py": 0.154,
+    "packing/tests/test_release_records.py": 0.33,
     "packing/tests/test_render_angle_hue_registry.py": 0.004,
     "packing/tests/test_render_announcement.py": 16.952,
     "packing/tests/test_render_colors.py": 2.113,
@@ -899,6 +901,21 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-755-2026-10-23.json",
           "provenance": {},
           "tests": 12
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_merge_conflicts.py",
+        "packing/tests/test_release_records.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/release-records-2026-11-01.json",
+          "provenance": {},
+          "tests": 16
         }
       ]
     }

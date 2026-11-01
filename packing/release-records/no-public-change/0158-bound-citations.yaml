@@ -1,0 +1,22 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/register_ryxu_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+reason: >-
+  Rendered from main at 9b32da04 and from this branch with the browser's math pass, all 55
+  files the explainer writes, its HTML, Markdown and PDF among them, are byte-identical. The
+  site v0.7.2 cut moves the claim documents' link revision; the bound citations credit Xu
+  by name at counts above 11; the register's credit prose, T-174 and T-180 change; none reaches
+  the explainer, which keeps v0.4.6.

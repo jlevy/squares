@@ -1,0 +1,18 @@
+components:
+  - site
+paths:
+  - packing/devtools/build_known_best_atlas.py
+  - packing/src/sqpack/witness.py
+outputs:
+  - atlas.html
+  - index.html
+  - results.html
+reason: >-
+  Reviewed October 19, 2026 against main 14fd9e27 (think-ev4k): _margin_summary computes each
+  square's axes and projections once and stops measuring a pair once its partial best gap
+  exceeds the running minimum, and the atlas builder memoizes built cases and draws the composite
+  test's poster from its own cases. An interleaved A/B rebuild of all 324 cases produced byte-identical
+  witness and rendering text for 324 of 324, and build_known_best_atlas --check found every
+  retained witness, margins included, byte-equal to the rebuild. The atlas, home and results
+  pages draw those retained records, which do not change. This is a measured disposition of
+  the records; no site rebuild byte comparison is claimed.

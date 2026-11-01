@@ -1,0 +1,13 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  Reviewed the explainer's RENDER_INPUTS, which broadly includes the sqpack tree: this file's
+  only change selects the validation step's release-impact baseline. The paper renderers do
+  not call _synopsis; its caller is the validation step registry. No theorem, geometry, paper
+  content or source-link revision changes, and the five generated claim documents remain byte-identical
+  to the PR #661 parent. This is a source-path review, not an HTML/PDF byte comparison.

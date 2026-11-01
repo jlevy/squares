@@ -1,0 +1,17 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L11 of 1 November (think-dxqa): #842's entry read through the authors' comment
+  of 03:46:21Z on --cert-mode, with the answer in its notes, think-dxqa as its answer bead
+  and the follow-up of 1 November under its replies; no register entry, row, side, bound,
+  rung or credit changes. Against main fd8ccb96c (#866): rendered at link revision 0000000000000000000000000000000000000000
+  into empty site directories, twice from this tree and once with that main's result-requests.yaml
+  swapped in, render_packing_methods writes its 43 files byte-identical across the three.
+  Measured again after review A of #867 added to #842's notes, against the same main the same
+  way: 43 files, byte-identical across the three. No PDF was printed; it prints from that
+  HTML. The survey keeps v0.2.7.

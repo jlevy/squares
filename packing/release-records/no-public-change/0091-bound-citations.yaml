@@ -1,0 +1,36 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/check_case_prose.py
+  - packing/devtools/check_rung_figures.py
+  - packing/devtools/check_standing.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/regularize_axis_components.py
+  - packing/devtools/result_overview.py
+  - packing/devtools/run_negative_controls.py
+  - packing/devtools/select_houses.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/frontier/results.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+reason: >-
+  For PR665 against landed main e0319ffd, a source-based review of the HTML, Markdown and
+  PDF producers finds the consumed values unchanged: 217 registered results, 32 novel results,
+  the n11 verified-lower citation, and Figure 2 caption totals 81 recent lower bounds and
+  zero first proved here. Its n11 manuscripts, certificates, verifier text, figures and paper
+  metadata are unchanged. Changed claim documents carry only refreshed source-link revisions
+  and are linked rather than inlined. Changed house-selection, regularization, result-page
+  and control tools are outside the paper output paths; the CLI validation change selects
+  checks. The site patch owns the adopted houses. Retain v0.4.8; no render, PDF redraw or
+  artifact byte identity is claimed.

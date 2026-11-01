@@ -1,0 +1,36 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ReleaseNoPublicChange/v1
+title: A reviewed, path-scoped finding that named component outputs did not change
+description: >-
+  One file per record in no-public-change/, read in name order by devtools.release_records
+  (think-nrp6). A new record is named <YYYY-MM-DD>-<lane or bead>-<topic>.yaml; 0000- to
+  0246- are the records moved from the tuple in release.py, and the records are append-only.
+  The schema holds the shape; whether a fresh record covers its change is
+  devtools.check_release_impact's question: the components with candidate inputs, the exact
+  changed paths, the outputs examined, and the measurement that found them unchanged.
+type: object
+additionalProperties: false
+required: [components, paths, outputs, reason]
+properties:
+  components:
+    description: The release components reviewed, such as paper:square-packing-methods-survey.
+    $ref: '#/$defs/names'
+  paths:
+    description: The changed inputs the review covers, repository-relative and exact.
+    $ref: '#/$defs/names'
+  outputs:
+    description: The recognized outputs examined, such as papers/<slug>.html.
+    $ref: '#/$defs/names'
+  reason:
+    description: What changed, against which main, and how the outputs were found unchanged.
+    $ref: '#/$defs/text'
+$defs:
+  text:
+    description: Non-empty, with no leading or trailing white space.
+    type: string
+    pattern: '^\S(?:[\s\S]*\S)?$'
+  names:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {$ref: '#/$defs/text'}

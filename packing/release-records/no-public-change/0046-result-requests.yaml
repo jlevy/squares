@@ -1,0 +1,27 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/render_n11_lower_bounds_explainer_pdf.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  For the #703 lane of 21 October (T-224 at n = 270, its stage 4 review and its adoption as
+  the house best packing at 270) against main a5bdb96a: result requests, source coverage and
+  results are citation targets whose existence the producer checks, not inlined text, and
+  every cited path exists at both revisions; the #703 request, the n270 coverage source and
+  the 270 override, and T-224 are not cited by the survey. adopt_houses.py, upper_bound_houses.py
+  and upper_bound_reports.py change only the 270 adoption's writer inputs and one house reader,
+  which do not enter its output; render_n11_lower_bounds_explainer_pdf.py, a render input,
+  changes only EXPECTED_PAGE_COUNT, which the survey's producer does not read. Rendered at
+  link revision 667fed68, once from this branch's tree and once with main's copies of the
+  seven changed inputs: render_n11_optimality_review, render_n11_threshold_bound_review and
+  render_packing_methods leave the 50 files they write byte-identical between the trees. No
+  PDF was printed; it prints from that HTML. Retain v0.2.3.

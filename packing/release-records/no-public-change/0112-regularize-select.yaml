@@ -1,0 +1,22 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/regularize_select.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+reason: >-
+  The think-3zi3 run's fix changes only how regularize_select orders a driver count with no
+  view among its candidates. The three papers reach the module only through shared import
+  discovery and never run the selection, so their manuscripts, figures, credits and print
+  rules are unchanged by source review. No render was taken, and they keep v0.4.7, v0.1.7
+  and v0.1.0.

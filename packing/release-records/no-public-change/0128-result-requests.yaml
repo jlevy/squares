@@ -1,0 +1,69 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/exact_sides.py
+  - packing/devtools/select_houses.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/frontier/README.md
+  - packing/frontier/n-070.md
+  - packing/frontier/n-084.md
+  - packing/frontier/n-086.md
+  - packing/frontier/n-088.md
+  - packing/frontier/n-102.md
+  - packing/frontier/n-103.md
+  - packing/frontier/n-105.md
+  - packing/frontier/n-108.md
+  - packing/frontier/n-123.md
+  - packing/frontier/n-126.md
+  - packing/frontier/n-127.md
+  - packing/frontier/n-129.md
+  - packing/frontier/n-130.md
+  - packing/frontier/n-131.md
+  - packing/frontier/n-146.md
+  - packing/frontier/n-153.md
+  - packing/frontier/n-175.md
+  - packing/frontier/n-179.md
+  - packing/frontier/n-180.md
+  - packing/frontier/n-199.md
+  - packing/frontier/n-207.md
+  - packing/frontier/n-208.md
+  - packing/frontier/n-209.md
+  - packing/frontier/n-236.md
+  - packing/frontier/n-238.md
+  - packing/frontier/n-239.md
+  - packing/frontier/n-261.md
+  - packing/frontier/n-267.md
+  - packing/frontier/n-295.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The house rule (think-sa5r) changes what `select_houses.select` derives, adds `exact_sides`,
+  stages T-174's 53 counts in `PENDING_ADOPTION`, holds `default_drawings`' deferrals to the
+  base record and measures staged witnesses (`upper_bound_houses sizes`); its records passes
+  (reviews A2, C4 and C7 of #660) reword the notes of the 63 case records the hold and RP-3
+  named, ten of them moved below T-174 by #657, nine register entries, five source-register
+  passages, two requests entries and one evidence limitation to say the hold of 15 October
+  and RP-3's wait ended. Rendered at link revision 6a3a7d8f from main 6a3a7d8f and from this
+  branch, as at 3301a1cf, 5012a97d and c593e2bf before, the optimality review's, the threshold-bound
+  review's and the survey's HTML and Markdown are byte-identical, as are all 50 files the
+  three renderers write; their PDFs print from that HTML and were not rebuilt. The explainer,
+  which renders through a browser this host lacks, reads the register only to count its results
+  and the new ones among them, which no edit here changes, and none of the other inputs: source-compared.
+  All four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2. The site's case and result pages
+  print the reworded notes, so the site needs an edition, cut in merge order.

@@ -4,6 +4,12 @@ Producer declarations select candidates; they do not prove that public output ch
 A candidate needs an owning successor decision or a fresh, path-scoped no-change
 review naming the examined outputs. Prior source is parsed as data, never executed.
 
+A no-change review is a record file of its own in
+`packing/release-records/no-public-change/`, read by `devtools.release_records`; a record
+is fresh when the base holds no equal one, as a file or, for a base from before
+1 November 2026, as an entry of the literal tuple `release.py` held then (think-nrp6).
+A tuple added back to `release.py` is refused with the remedy.
+
 The site is never a candidate. Site editions are retired as of 22 October 2026
 (think-wdqo): the site deploys continuously from `main` and needs no disposition, and
 its edition record, `PUBLICATION_HISTORY`, and the claim documents' link commit,
@@ -27,12 +33,12 @@ from itertools import pairwise
 from pathlib import Path, PurePosixPath
 from typing import override
 
-from devtools import pages_scope, render_overview
+from devtools import pages_scope, release_records, render_overview
 from sqpack import release
 from sqpack.known_best import KNOWN_BEST_COMPOSITES
 
 REPO = pages_scope.REPO
-RELEASE_PATH = "packing/src/sqpack/release.py"
+RELEASE_PATH = release_records.RELEASE_PATH
 #: The retired component, whose inputs select nothing and whose record is frozen.
 SITE = "site"
 #: What the site's record keeps frozen: its editions, and the commit the claim documents
@@ -44,6 +50,21 @@ SITE_EDITIONS_RETIRED = (
     "continuously from main and takes no edition, PUBLICATION_HISTORY and "
     "PUBLICATION_REVISION are frozen as history, and only the papers and the art "
     "(posters, films) keep versions"
+)
+#: The one message for a no-public-change record added to the tuple that left `release.py`.
+TUPLE_MOVED = (
+    f"{release_records.TUPLE} in {release_records.RELEASE_PATH}: the no-public-change "
+    f"records moved on November 1, 2026 to one file each in {release_records.DIRECTORY}/ "
+    "(think-nrp6); from packing/, `python -m devtools.release_records migrate --slug "
+    "<lane or bead>-<topic>` writes this branch's own records there, dated, skipping those "
+    "the files already hold, and deletes the tuple; or write each by hand as "
+    f"{release_records.NEW_NAME}"
+)
+#: The one message for a record the base holds and the head does not (review A of #873).
+RECORD_REMOVED = (
+    "the base holds this reviewed no-public-change record and the head does not: the "
+    "records are append-only, with no supersession, so restore it and write any later "
+    f"finding as a new record, {release_records.NEW_NAME}"
 )
 
 
@@ -433,6 +454,8 @@ def baseline_versions(repo: Path, base: str) -> dict[str, str]:
 
 
 def _records(fields: Mapping[str, ast.expr], name: str) -> tuple[tuple, ...]:
+    """The literal `ReleaseImpactDecision` records `name` holds; the no-public-change
+    records are files, read by `release_records`."""
     node = fields.get(name)
     if node is None:
         return ()
@@ -440,22 +463,12 @@ def _records(fields: Mapping[str, ast.expr], name: str) -> tuple[tuple, ...]:
         raise TypeError(f"{name} must retain a literal tuple of decisions")
     records = []
     for call in node.elts:
-        constructor = (
-            "ReleaseNoPublicChange"
-            if name == "RELEASE_NO_PUBLIC_CHANGES"
-            else "ReleaseImpactDecision"
-        )
         if (
             not isinstance(call, ast.Call)
             or not isinstance(call.func, ast.Name)
-            or call.func.id != constructor
+            or call.func.id != "ReleaseImpactDecision"
         ):
             raise TypeError(f"{name} requires named literal records")
-        fields_type = (
-            release.ReleaseNoPublicChange
-            if name == "RELEASE_NO_PUBLIC_CHANGES"
-            else release.ReleaseImpactDecision
-        )
         if any(keyword.arg is None for keyword in call.keywords):
             raise TypeError(f"{name} requires explicit literal fields")
         keywords = {
@@ -463,17 +476,9 @@ def _records(fields: Mapping[str, ast.expr], name: str) -> tuple[tuple, ...]:
             for keyword in call.keywords
             if keyword.arg is not None
         }
-        record = fields_type(
+        record = release.ReleaseImpactDecision(
             *(ast.literal_eval(argument) for argument in call.args), **keywords
         )
-        if name == "RELEASE_NO_PUBLIC_CHANGES" and (
-            not all(
-                isinstance(field, tuple) and all(isinstance(item, str) for item in field)
-                for field in record[:3]
-            )
-            or not isinstance(record[3], str)
-        ):
-            raise TypeError(f"{name} requires tuple-of-string scopes and a string reason")
         records.append(tuple(record))
     return tuple(records)
 
@@ -498,10 +503,32 @@ def _without_site(
     )
 
 
+def no_public_changes(
+    repo: Path, base: str, previous_release: bytes | None
+) -> tuple[tuple[release_records.Named, ...], list[str]]:
+    """The working tree's fresh no-public-change records, and the base's it dropped.
+
+    The base retains the record files it holds and, before 1 November 2026, the literal
+    `RELEASE_NO_PUBLIC_CHANGES` tuple in its `release.py`, which the files replaced
+    record for record (think-nrp6): a base on either side of the move reads the same.
+    A record is fresh when the base holds no equal one. The records are append-only, so
+    each the base holds and the head does not, deleted or rewritten, is an error.
+    """
+    retained = (
+        *release_records.literal_named(previous_release),
+        *release_records.load_at_named(repo, base),
+    )
+    current = release_records.load_named(repo)
+    kept = {record for _where, record in retained}
+    held = {record for _where, record in current}
+    fresh = tuple((where, record) for where, record in current if record not in kept)
+    removed = [f"{where}: {RECORD_REMOVED}" for where, record in retained if record not in held]
+    return fresh, removed
+
+
 def _exemptions(
     candidates: Mapping[str, tuple[str, ...]],
-    current: Mapping[str, ast.expr],
-    previous: Mapping[str, ast.expr],
+    fresh: Sequence[release_records.Named],
 ) -> tuple[set[str], list[str], list[str]]:
     """The components fresh no-change records exempt, the records' errors, and warnings.
 
@@ -510,26 +537,24 @@ def _exemptions(
     below, so the coverage it reviewed still counts; a record naming only the site is
     refused, since nothing in it applies.
     """
-    old = set(_records(previous, "RELEASE_NO_PUBLIC_CHANGES"))
     outputs = component_outputs()
     covered: dict[str, set[str]] = {component: set() for component in candidates}
     errors: list[str] = []
     warnings: list[str] = []
-    for record in _records(current, "RELEASE_NO_PUBLIC_CHANGES"):
-        if record in old:
-            continue
-        decision = release.ReleaseNoPublicChange(*record)
+    for where, record in fresh:
+        decision = record
         if SITE in decision.components:
             decision = _without_site(decision, outputs)
             if not decision.components:
                 errors.append(
-                    f"{SITE}: fresh no-public-change record names only the retired site; "
-                    f"{SITE_EDITIONS_RETIRED}; remove the record"
+                    f"{SITE}: {where}: fresh no-public-change record names only the "
+                    f"retired site; {SITE_EDITIONS_RETIRED}; remove the record"
                 )
                 continue
             warnings.append(
-                f"{SITE}: fresh no-public-change record also names the retired site, whose "
-                f"part is ignored; {SITE_EDITIONS_RETIRED}; a new record names no site and "
+                f"{SITE}: {where}: fresh no-public-change record also names the retired "
+                f"site, whose part is ignored; {SITE_EDITIONS_RETIRED}; a new record names "
+                "no site and "
                 "none of its outputs"
             )
         if (
@@ -539,13 +564,14 @@ def _exemptions(
             or not decision.reason.strip()
         ):
             errors.append(
-                "fresh no-public-change decision needs components, exact paths, "
+                f"{where}: fresh no-public-change decision needs components, exact paths, "
                 "examined outputs and reason"
             )
             continue
         if any(component not in candidates for component in decision.components):
             errors.append(
-                "fresh no-public-change decision names a component without candidate changes"
+                f"{where}: fresh no-public-change decision names a component without "
+                "candidate changes"
             )
             continue
         scoped = {path for component in decision.components for path in candidates[component]}
@@ -555,7 +581,9 @@ def _exemptions(
             or any(character in path for character in "*?[]")
             for path in decision.paths
         ):
-            errors.append("fresh no-public-change paths must exactly name candidate inputs")
+            errors.append(
+                f"{where}: fresh no-public-change paths must exactly name candidate inputs"
+            )
             continue
         declared_outputs = {
             output for component in decision.components for output in outputs[component]
@@ -565,8 +593,8 @@ def _exemptions(
             for component in decision.components
         ):
             errors.append(
-                "fresh no-public-change decision must name recognized examined outputs "
-                "for every component"
+                f"{where}: fresh no-public-change decision must name recognized examined "
+                "outputs for every component"
             )
             continue
         for component in decision.components:
@@ -597,9 +625,14 @@ def inspect(
     baseline = resolve_base(repo, baseline_ref=baseline_ref, base=base)
     candidates = candidate_paths(repo, baseline)
     versions = baseline_versions(repo, baseline)
-    previous = _assignments(_previous(repo, baseline, RELEASE_PATH))
+    previous_release = _previous(repo, baseline, RELEASE_PATH)
+    previous = _assignments(previous_release)
     current = _assignments(_current(repo, RELEASE_PATH))
-    exempt, errors, warnings = _exemptions(candidates, current, previous)
+    fresh, removed = no_public_changes(repo, baseline, previous_release)
+    exempt, errors, warnings = _exemptions(candidates, fresh)
+    errors.extend(removed)
+    if release_records.TUPLE in current:
+        errors.append(TUPLE_MOVED)
     errors.extend(frozen_site_errors(current, previous))
     old_decisions = set(_records(previous, "RELEASE_IMPACTS"))
     fresh_decisions = {
@@ -625,7 +658,8 @@ def inspect(
         if not required or not required <= fresh_decisions:
             errors.append(
                 f"{component}: candidate public inputs need a fresh owning successor "
-                "or reviewed no-public-change decision"
+                "or reviewed no-public-change decision, a new record file in "
+                f"{release_records.DIRECTORY}/ named <YYYY-MM-DD>-<slug>.yaml"
             )
             continue
         try:

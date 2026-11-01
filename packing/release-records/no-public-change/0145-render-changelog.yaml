@@ -1,0 +1,33 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/devtools/render_changelog.py
+  - packing/devtools/site_topics.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  Result headlines use surnames, and T-153/T-154 descriptive prose is clearer. The lower-bounds
+  explainer reads result and novelty counts, which are unchanged, and its n17 paragraph is
+  fixed manuscript text. The optimality and threshold papers' ladder figures select none of
+  the changed results. The methods survey substitutes no result record text. No paper manuscript,
+  selected ladder value, figure input or result count changes. The changed news_entries, archived_news_targets
+  and news_filters functions govern News eligibility, bookmark forwarding and topic controls;
+  standalone paper renderers call none of them. The shared topic vocabulary adds only Project;
+  existing result-kind labels and chip markup are unchanged. Papers retain their own styles
+  and do not render project-topic chips. This reviewed source-consumer finding does not claim
+  byte identity for unrebuilt PDFs.

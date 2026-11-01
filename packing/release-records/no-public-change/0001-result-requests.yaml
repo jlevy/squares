@@ -1,0 +1,17 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The replies of 31 October on #824 and #843 to #846, recorded after #852 merged: each issue's
+  verdict comment and final reply under its replies, four issues closed, and #846's note,
+  against main e482345fe (#852). Rendered by render_packing_methods at link revision 0000000000000000000000000000000000000000
+  into empty site directories, once from this tree at 1be3ab2a0 and once with main's result-requests.yaml
+  swapped in: 43 files each, byte-identical across the two. Measured again at 39efc9991, after
+  the four confirmed results' finished validation owners left the file, and at 72bb026ff,
+  after #860's review A3 and A4, with main 4ed88d160's file swapped in, and after merging
+  main d7a815e86, at a53e072a1 with that main's file swapped in: 43 files, byte-identical
+  each time. No PDF was printed; it prints from that HTML. Retain v0.2.7.

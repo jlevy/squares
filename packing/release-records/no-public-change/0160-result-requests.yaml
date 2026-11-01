@@ -1,0 +1,35 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/register_ryxu_reports.py
+  - packing/frontier/n-051.md
+  - packing/frontier/n-070.md
+  - packing/frontier/n-084.md
+  - packing/frontier/n-086.md
+  - packing/frontier/n-102.md
+  - packing/frontier/n-103.md
+  - packing/frontier/n-105.md
+  - packing/frontier/n-108.md
+  - packing/frontier/n-123.md
+  - packing/frontier/n-126.md
+  - packing/frontier/n-127.md
+  - packing/frontier/n-129.md
+  - packing/frontier/n-131.md
+  - packing/frontier/n-146.md
+  - packing/frontier/n-175.md
+  - packing/frontier/n-261.md
+  - packing/frontier/n-267.md
+  - packing/frontier/n-295.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+  - papers/square-packing-methods-survey.pdf
+reason: >-
+  Rendered from main at 9b32da04 and from this branch, the HTML, Markdown and PDF are byte-identical
+  once the build commit their source links pin is normalized. The case records name Ryan Xu
+  in place of his handle, the requests record gains the 14 October replies, and Kevin Fang's
+  rows beyond the corpus become verified; the survey prints none of them and keeps v0.2.2.

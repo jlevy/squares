@@ -1,0 +1,29 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+  - packing/devtools/run_negative_controls.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+reason: >-
+  Reviewed October 19, 2026 against main 926cd764 for the #446 landing of T-205, T-206 and
+  T-207: results.yaml changes only those three n68, n84 and n85 lower-bound entries and last_reviewed.
+  The explainer reads the register for its count of 217 results and of apparently or confirmed
+  novel ones, both unchanged since the three stay previously-published. The composite figure
+  record and bound citations change only the n68, n84 and n85 lower displays and citations;
+  Figure 2's totals and the n11 citation the paper reads are unchanged. The site v0.8.1 cut
+  regenerated the five claim and card documents, which change only their source-link commit
+  and are linked from the paper, not inlined. run_negative_controls.py changes only the snapshot
+  cap and its comment and is not a paper producer. Its Markdown rendered at the base record
+  tree and at the candidate head is identical, and its HTML differs at most in where the browser
+  math preparation serializes one empty style attribute; the PDF prints that HTML. Retain
+  v0.4.8; no PDF redraw or byte identity of the PDF is claimed.

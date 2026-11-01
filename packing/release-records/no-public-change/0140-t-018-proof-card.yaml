@@ -1,0 +1,16 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/cases/n11_fractional_certificate/t-018-proof-card.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+  - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
+  - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+  - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-lower-bounds-explainer.pdf
+reason: >-
+  The native site cut regenerates these five claim documents with only GitHub source-link
+  revision substitutions. Mathematical statements, certificate inputs and paper content are
+  unchanged. No paper PDF was rebuilt or compared for byte identity.

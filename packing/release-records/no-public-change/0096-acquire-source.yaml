@@ -1,0 +1,18 @@
+components:
+  - paper:n11-optimality-review
+paths:
+  - packing/devtools/acquire_source.py
+  - packing/devtools/apply_closed_form.py
+  - packing/devtools/render_n11_lower_bounds_explainer_pdf.py
+  - packing/devtools/site_urls.py
+  - packing/devtools/verifier_registry.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+reason: >-
+  For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate e22a9f9f4 and the
+  current integration tree, using source-link revision e22a9f9f4 in both. Both outputs are
+  byte-identical. The n11 optimality review retains its article, selected facts and figures,
+  so its edition remains v0.1.7. The fine-net records, monotone case planning, safe packet
+  publication and explainer pagination guard do not change these outputs.

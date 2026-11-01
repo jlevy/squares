@@ -1,0 +1,28 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/run_negative_controls.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/n11-threshold-bound-review.pdf
+reason: >-
+  For PR687 (T-220 at n = 183) against main 012dcf9e: both reviews read results.yaml only
+  through paper_figures.ladder_records, which selects the n11 ladder rungs LADDER_RUNGS names
+  and holds them to LADDER_DIGEST; T-220 is an added n183 entry outside that ladder, and no
+  ladder row changes. The house reader, writer and source changes are not called by these
+  producers, and run_negative_controls.py changes only the snapshot cap and its comments.
+  Rendered at link revision af1987e9, this branch after its merge of main 012dcf9e (#692,
+  site v0.8.3) and its edition cuts, once from this branch's tree and once with main's copies
+  of the seven changed inputs (adopt_houses, run_negative_controls, upper_bound_houses and
+  upper_bound_reports, results.yaml, result-requests.yaml and source-coverage.yaml): render_n11_optimality_review,
+  render_n11_threshold_bound_review and render_packing_methods write 50 files, byte-identical
+  between the trees. No PDF was printed; each prints from that HTML. Retain v0.1.7 and v0.1.0.

@@ -79,8 +79,9 @@ comments that date it are in `upper_bound_houses.py`, `adopt_houses.py`,
 `sqpack/cli/validate.py` (`SCREEN_FINDINGS`), `test_known_best_atlas.py` and
 `test_translation_escape_screen.py`, and the prose in the two packets’ READMEs, the
 atlas README, `resources/README.md`, `source-coverage.yaml` and #719’s requests entry;
-`release.py` dates it in the papers’ no-change record and in v0.4.22’s first
-publication. `git grep -e 2026-10-24 -e '24 October'` finds every place.
+`release.py` dates it in v0.4.22’s first publication, and the papers’ no-change records,
+files in `packing/release-records/no-public-change/` since 1 November 2026, date it too.
+`git grep -e 2026-10-24 -e '24 October'` finds every place.
 `stamp_landed --apply --date` the merge day writes T-231’s `landed`, and
 `release_pin --update` follows it as the last commit.
 

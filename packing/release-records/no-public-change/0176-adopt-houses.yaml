@@ -1,0 +1,21 @@
+components:
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/check_source_coverage.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+reason: >-
+  Rendered from this branch at 05ef0f60 and from main 804eff36 at link revision 804eff36,
+  the two reviews' HTML and Markdown are byte-identical; each PDF prints from that HTML. The
+  register gains T-195, PR #622's N29 certificate, the house writer adopts it at 29, the coverage
+  check reads a catalogue print to its last place, and the drawings record settles 29; neither
+  review prints any of it, so each keeps its edition: v0.1.7 and v0.1.0.

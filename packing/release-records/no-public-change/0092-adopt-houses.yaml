@@ -1,0 +1,26 @@
+components:
+  - paper:n11-optimality-review
+paths:
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/check_case_prose.py
+  - packing/devtools/check_rung_figures.py
+  - packing/devtools/check_standing.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/regularize_axis_components.py
+  - packing/devtools/result_overview.py
+  - packing/devtools/run_negative_controls.py
+  - packing/devtools/select_houses.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-optimality-review.pdf
+reason: >-
+  For PR665 against landed main e0319ffd, source review of the HTML, Markdown and PDF producers
+  finds the complete consumed n11 ladder rows T010, T018, T025, T026, T033, T037, T060 and
+  T061 unchanged. Changed result claims are T169, T170, T171 and T174, outside that ladder.
+  Its manuscript, retained proof and figure inputs, renderers and own publication metadata
+  are unchanged. The house-selection, regularization, result-page and control changes are
+  not called by this paper producer. Retain v0.1.7; this is a source-based review, with no
+  proof rerun, PDF redraw or artifact byte-identity claim.
