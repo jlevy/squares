@@ -20151,6 +20151,7 @@ results:
       the patch verified but with no refutation: 4 roots at t in [23/100, 1/4] reached
       resolution at legal poses capturing 1001/1000 plus at most 2.9e-12, so its least
       oblique capture lies in [1, 1001/1000 + 2.9e-12], and 13 stopped at the node budget.
+
       At tau 2503/2500, on 1 November, it was refused again with the patch verified and no
       refutation, 8 roots reaching resolution at poses capturing 2503/2500 plus at most
       3.0e-12: the program's refusals report a pose on the level set at tau, so a threshold
