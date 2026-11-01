@@ -3,14 +3,18 @@ type: is
 id: is-01m68a6y7b61h6k2p3da5acs4m
 title: "Answer Hyukdong Kim's comment of 26 October on #804: a public copy of his attachments, and the CC0 correction to our 26 October follow-up"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 5
+version: 6
+delegate: bold-ritchie-l15
 labels:
   - intake
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-31T06:26:34.858Z
-updated_at: 2026-10-31T18:13:13.214Z
+updated_at: 2026-11-01T18:59:31.153Z
+started_at: 2026-11-01T18:59:31.153Z
 ---
 Hyukdong Kim's comment of 2026-10-26T11:50:22Z on #804 (https://github.com/jlevy/squares/issues/804#issuecomment-6415293035), read into #804's entry on 31 October by PR #833 (think-6m6e), restates the CC0 1.0 dedication of all three of his attachments and ends with a question: he can put the same files, with the same digests, in a public repository or gist, "Just say which you prefer". Review A of #833 (A1) found that nothing owed him the answer: the last reply was posted at 10:29:17Z the same day, and check_requests.replies_due compares days (the tool defect has its own bead).
 
