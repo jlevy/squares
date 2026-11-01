@@ -27272,6 +27272,14 @@ issues:
       integer mass tests) and not exact-rational, and will fix the wording of their README,
       the issue and the paper's section 4 in their next release. Nothing in the record
       changes: T-252 stays at V3/C3, and its evidence already calls zmx2 interval-certified.
+      The follow-up was posted at 04:09:12Z, before the pull request carrying this read-in
+      (#867) merged, departing from stage 7's rule that a reply follows that merge. Its
+      status block, its F1 point and the cert-mode code path were already on main. Two of
+      its statements were not: the 62-log observation (the logs were on main, but no main
+      document stated it) and "the record does not need one", which goes beyond main's
+      section 11 Q1, where a rerun "would align the route". #867 adds both to the review's
+      F4 and section 11. It was edited at 04:49:59Z to fix a broken F1 link (review A1 of
+      #867), with a visible note saying so; its ids and statements are unchanged.
   - number: 847
     title: '1182–9946: 5134 lowered or new upper bounds, filled-end two-band L packings (Zenodo V2.0): registration request'
     author: mohsensbu-jpg

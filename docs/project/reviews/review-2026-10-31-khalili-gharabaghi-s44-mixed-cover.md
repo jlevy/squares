@@ -60,7 +60,7 @@ is trusted. `zm_mixed.py` was not run here; its complete pass is priced at about
 **Questions, none blocking.** Whether the `zm_mixed.py` runs without `--cert-mode` were
 deliberate (F4), and whether you can say which `zeromargin.py` the README’s
 `DIFFERS FROM PINNED` note refers to beyond its digest (§11). The authors answered the
-first on 1 November 2026: not deliberate (F4).
+first on 1 November 2026: not deliberate (F4; noted by intake lane L11, `think-dxqa`).
 
 ## 1. What Was Reviewed
 
@@ -355,7 +355,8 @@ host’s IEEE-754 arithmetic.
 
 On 1 November 2026 the authors accepted the correction and said they will fix the
 wording of the README, the issue and the paper’s §4 in their next release
-([comment](https://github.com/jlevy/squares/issues/842#issuecomment-6553028920)).
+([comment](https://github.com/jlevy/squares/issues/842#issuecomment-6553028920); noted
+by intake lane L11, `think-dxqa`).
 
 ### F2. `zmx2.rs` `e2bb84e9` had not run here (note, for the record)
 
@@ -383,17 +384,25 @@ pinned against and that no review here has read.
 Neither affects the claim, which `zmx2` decides; both would matter to a record that
 rested on the `zm_mixed.py` route.
 
-**Answered, 1 November 2026.** The authors say the runs left out `--cert-mode` because
-they kept the flags of their earlier runs, not by choice.
+**Answered, 1 November 2026** (intake lane L11, bold-ritchie-l11, `think-dxqa`; not part
+of the 31 October review).
+The authors say the runs left out `--cert-mode` because they kept the flags of their
+earlier runs, not by choice.
 They add that it cannot change this cover’s outcome: `zm_mixed.Cover` finds no weighted
 point on a segment-carrying line (`line_points` is empty) and no polygon, and all 62
 recorded runs print “closed by Lemma T with line points: 0”
-([comment](https://github.com/jlevy/squares/issues/842#issuecomment-6553028920)). That
-agrees with §4 and §6.3: each of the 62 `.out` logs the packet retains prints that line
-and “0 polygons”. They offer a certificate-mode pass.
-In `zm_mixed.py` `1fd20346` that mode only refuses a cover with polygons and skips the
-Corollary T′ branch, which also needs `line_points`. A pass in it would decide every box
-of this cover as these runs did, so the record does not need one.
+([comment](https://github.com/jlevy/squares/issues/842#issuecomment-6553028920)). §4
+found the first two facts: `review/outputs/cover-n44.json` has `points_on_loaded_lines`
+0 and `polygons` 0. Lane L11 checked the third against the packet’s logs.
+Over `s44-equals-7/verification/logs/zm_mixed/*/*.out`, the 35 `colNN`, `deep`, the 24
+`dNN` and `cloud_deep`’s `a` and `b`, both
+`grep -l "closed by Lemma T with line points: 0"` and `grep -l ", 0 polygons;"` list 62
+of the 62 files. They offer a certificate-mode pass.
+In `zm_mixed.py` `1fd20346` that mode refuses a cover with polygons (l. 943 and
+1596–1598), asserts that the polygon code is not reached (l. 1107), and skips the
+Corollary T′ branch, which also needs `line_points` (l. 1358). Nothing else reads it
+except the run header (l. 1528). A pass in it would decide every box of this cover as
+these runs did, so the record does not need one.
 
 ### F5. The README’s “0.4 % slack” is the linear program’s gap (note, in the source)
 
@@ -424,9 +433,10 @@ None holds anything open.
 1. Were the `zm_mixed.py` runs without `--cert-mode` deliberate (F4)? A rerun of the 27
    deepest roots in certificate mode would align the route with the record’s other
    `zm_mixed.py` evidence.
-   Answered on 1 November 2026: not deliberate.
+   Answered on 1 November 2026: not deliberate (noted by intake lane L11,
+   bold-ritchie-l11, `think-dxqa`; not part of the 31 October review).
    For this cover a certificate-mode run decides the same boxes the same way (F4), so no
-   rerun is needed.
+   rerun is needed, and the route decides nothing in the record (§6.3).
 2. Is `zeromargin.py` `3cb95fb7` the file at evand/square-packing `659ee62`, as the
    records’ headers say, and did you run any check of it against `640fe453`?
 
