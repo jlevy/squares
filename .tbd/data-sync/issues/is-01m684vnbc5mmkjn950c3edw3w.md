@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 53
+version: 54
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -39,7 +39,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T03:05:01.369Z
+updated_at: 2026-11-01T03:45:40.175Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -89,3 +89,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-01 00:53 hourly: no new issues. #863 (L9): v5 full replay done — 5,308/5,308 on both routes, 396/396 controls refused, 13.1 CPU-h; review A approve-with-fixes (replay-all check/resume/pool robustness A1-A7, licence wording A8) being addressed. #865 (L10) addressing review A incl. the c6718 oblique control. 20 merged this pass.
 
 2026-11-01 01:54 hourly: merged #865 (68f25b17a) and #863 (e7ccc8cc4); 22 merged this pass. think-nu37 closed. #485 reply posted (L10). L10 running the c6718 tau'=2503/2500 oblique control on claude/bold-ritchie-xo28us-l10b. No new issues. Disk 21 GB free.
+
+2026-11-01 03:50 PASS STATE: all lanes finished; 23 PRs merged (#835 #848 #834 #833 #853 #850 #849 #854 #855 #851 #817 #852 #857 #858 #856 #859 #860 #862 #861 #864 #865 #863 #866); no open intake PR. Headline: s(44) = 7 (T-252, n = 44 proved); 8 new houses adopted+regularized (130 172 204 232 260 293 299 307); exemptions 39/55/290/291 settled; Karimi deposits retained, v5 fully replayed (rows await R1/D4). Open owner decisions: think-ikku (restatements: 14 Polkovskyi counts + 130/293/307 candidates, held unregistered; RV-3/RV-4), s(152) tie, s(29) S* registration + identity funding, think-j68m (exactness-only drawing), think-xyek (status vocabulary), think-m2th (slow-lane 1800 s budget), D3/D4/D5 + Q-847a + #732 N cap + kzme deletion rows, credit decisions (#593, #573, #529), #574, #521, #522, #524-#527, #317, #543, PRs #744/#599/#809, network access (zenodo.org, lakecache.blob.core.windows.net), think-qvp6 (138 CPU-h over cap). Process beads filed: release.py append conflicts, closing keywords (think-t9uj), check_requests closeable-while-blocked (think-u4bm), early answer-bead closes, YAML '#' label guard (landed in #860).
