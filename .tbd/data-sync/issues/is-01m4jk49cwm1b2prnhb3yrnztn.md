@@ -3,9 +3,9 @@ type: is
 id: is-01m4jk49cwm1b2prnhb3yrnztn
 title: "Import Guzhou0806: s(40) > 335427/50000 from wand125's rect_n40_L67 density with a clipped-corner estimate (#485)"
 kind: task
-status: closed
+status: open
 priority: 1
-version: 12
+version: 13
 delegate: bold-ritchie-l10
 labels:
   - result-import
@@ -14,9 +14,9 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:25.852Z
-updated_at: 2026-11-01T02:24:14.629Z
+updated_at: 2026-11-01T03:05:01.134Z
 started_at: 2026-10-10T09:49:28.112Z
-closed_at: 2026-11-01T02:24:14.629Z
+closed_at: null
 close_reason: null
 resolution: null
 duplicate_of: null
