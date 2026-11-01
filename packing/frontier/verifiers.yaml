@@ -4779,9 +4779,10 @@ verifiers:
           nothing of it; it re-types the definitions its shares name, to test or recompute
           them, so its code is not separate in the registry's sense.
     note: >-
-      Kept in the review's packet with its receipts; cited by the review and by no evidence
-      entry, since what it decides is premises that the registered audits and the review
-      already carry.
+      Kept in the review's packet with its receipts; cited by the review, and since 31 October
+      2026 by E-n040-wand125-sqverify-continuous-6715-replay and -6718-replay, whose
+      candidates candidates.py builds; what it decides is premises that the registered audits
+      and the review already carry.
 
   - id: V-sqverify-continuous-review-probe
     program: bounds_probe.py and probe_suite.py, the 23 October review's adversarial probe of sqverify_continuous's box bound
@@ -4877,8 +4878,9 @@ verifiers:
           for T-192 that source is the producer's code. In files of its own, importing and
           copying nothing of it.
     note: >-
-      Kept in the review's packet with its receipts; cited by the review and by no evidence
-      entry. Written to judge a replay of the mode as well (the review's section 11).
+      Kept in the review's packet with its receipts; cited by the review, and since 31 October
+      2026 by E-n040-wand125-sqverify-continuous-6715-replay and -6718-replay, whose runs it
+      judged. Written to judge a replay of the mode as well (the review's section 11).
 
   - id: V-wand125-contpose-check3
     program: >-

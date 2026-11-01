@@ -8234,23 +8234,38 @@ issues:
     results: []
     asks:
     - what: Retain sqverify_continuous at f30cc2c, review its soundness, build it and replay both
-        n = 40 examples with their controls and this repository's own mass controls.
+        n = 40 examples with their controls.
       state: done
       source: body
       note: >-
-        Retained (v3 and v4), reviewed for soundness with no blocking or major finding, built
-        to the recorded digest and run here on the source's controls on 23 October 2026
-        (think-xzob,
+        Split on 31 October 2026 from the issue's one ask, which also asked for this
+        repository's own mass controls (the next ask), after review A2 of #865. Retained (v3
+        and v4), reviewed for soundness with no blocking or major finding, built to the
+        recorded digest and run here on the source's controls on 23 October 2026 (think-xzob,
         docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md). On
         31 October 2026 both examples were replayed here in full (think-flxm, intake lane L10,
         under the pass's 40 CPU-hour item cap), each with the source's 985/1000 mass control
-        built from this repository's copy of its density, refused at every root, judged by
-        the review's judge_run.py: E-n040-wand125-sqverify-continuous-6715-replay for T-145
-        and -6718-replay for T-157, receipts in the v4 packet's replay/. The counted oblique
-        control the review's section 11 asks for, which is the project's own validation and
-        not this ask, stays with think-flxm: a threshold-shift run per density verified, so
-        it needs a density mutant. The same mode's 86-root run for T-192 is think-0arj's and
-        is not this ask.
+        rebuilt from this repository's copy of its density and refused at every root, judged
+        by the review's judge_run.py: E-n040-wand125-sqverify-continuous-6715-replay for T-145
+        and -6718-replay for T-157, receipts in the v4 packet's replay/. The source's third
+        control, T-157's density at core 3348/3359, was not run again and stands on the 23
+        October review's run alone (refused, 12,364,148 nodes). The same mode's 86-root run
+        for T-192 is think-0arj's and is not this ask.
+      bead: think-flxm
+    - what: Add this repository's own mass controls to the replay of both n = 40 examples.
+      state: queued
+      source: body
+      note: >-
+        Split from the ask above on 31 October 2026 (review A2 of #865): the 985/1000 controls
+        that ran are the source's, rebuilt here, so no control designed here has been counted on
+        either density. Of this lane's threshold-shift runs, each the same as scaling every
+        weight by tau/tau', c6715 at 24997/25000 and c6718 at 1 verified, and c6718 at
+        1001/1000 refused with no refutation, its four refusals at t in [23/100, 1/4] stopping
+        at exact captures of 1001/1000 plus at most 2.9e-12. For c6718 a threshold just above
+        1001/1000, such as 2503/2500, below the patch minimum 1.00149865, is the next try,
+        about 1.5 CPU-hours; for c6715, whose least capture is within 2.6e-6 of its patch
+        minimum, a density mutant that lowers the oblique captures alone. Either, once refused
+        at an oblique root with a legal refutation and the patch verified, would count here.
       bead: think-flxm
     beads:
     - think-xzob

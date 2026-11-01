@@ -39904,12 +39904,20 @@ evidence:
       which published no run output. judge_run.py held every check. The controls: every
       weight times 985/1000, REFUSED at the patch (0.98648) and at all 86 roots in 5,979 nodes,
       every witness a legal pose whose exact capture, computed apart from the crate, is below
-      tau. A threshold-shift run meant as the oblique control, the same density at tau 1,
+      tau. The source's other control, the density at core 3348/3359, was not run again: it
+      stands on the 23 October review's run alone, REFUSED in 12,364,148 nodes with 2 of its 86
+      refusals refuting (SC-9). A threshold-shift run meant as the oblique control, the same density at tau 1,
       below the patch's minimum, came back VERIFIED at every root, 124,136,598 nodes, least
       certified bound 1.0000000001025, 4,935.5 CPU-seconds, judged faithful: this density
       captures at least 1 at every legal pose, so only a threshold in (1, 1.00149865) could
-      fail at the oblique roots alone, and the run counts as no control. A counted oblique control for
-      this density needs a threshold in (1, 1.00149865) or a density mutant (think-flxm).
+      fail at the oblique roots alone, and the run counts as no control. Inside that window,
+      the density at tau 1001/1000 (review A1 of #865) came back REFUSED with the patch
+      verified, 169,336,387 nodes, 6,624.9 CPU-seconds, judged faithful and with no
+      refutation: 69 roots verified, 13 stopped at the node budget, and 4, at t in [23/100,
+      1/4], reached resolution at legal poses capturing 1001/1000 plus at most 2.9e-12, where
+      the density's least oblique capture lies. A threshold such as 2503/2500, between that
+      capture and the patch's minimum, is the next try at a counted oblique control
+      (think-flxm).
       The program is Hosono's, independent code with the producer's method,
       written after reading Guzhou0806's kernel (PROVENANCE.md), so not clean-room; it shares
       this repository's axis, exact, interval, oracle and rotated modules byte for byte, and its

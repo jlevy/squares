@@ -15930,6 +15930,7 @@ urls:
     - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
     - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
     - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+    - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/README.md
   amendments:
   - date: '2026-10-23'
     reason: The 23 October soundness review of wand125's sqverify_continuous, a second route for this
@@ -15971,9 +15972,9 @@ urls:
       - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
   - date: '2026-10-31'
     reason: The complete replay here on 31 October 2026 of wand125's sqverify_continuous v4 on this
-      result's density, E-n040-wand125-sqverify-continuous-6715-replay, is added to its evidence;
-      the bound, scope, attribution and rungs are unchanged, and the mark moves to independently re-implemented
-      after reading the producer's code.
+      result's density, E-n040-wand125-sqverify-continuous-6715-replay, is added to its evidence,
+      and the replay's README to its artifacts; the bound, scope, attribution and rungs are unchanged,
+      and the mark moves to independently re-implemented after reading the producer's code.
     previous:
       kind: lower-bound
       scope:
@@ -16620,6 +16621,7 @@ urls:
     - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
     - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
     - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+    - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/replay/README.md
   amendments:
   - date: '2026-10-23'
     reason: The 23 October soundness review of wand125's sqverify_continuous, a second route for this
@@ -16665,9 +16667,9 @@ urls:
       - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
   - date: '2026-10-31'
     reason: The complete replay here on 31 October 2026 of wand125's sqverify_continuous v4 on this
-      result's density, E-n040-wand125-sqverify-continuous-6718-replay, is added to its evidence;
-      the bound, scope, attribution and rungs are unchanged, and the mark moves to independently re-implemented
-      after reading the producer's code.
+      result's density, E-n040-wand125-sqverify-continuous-6718-replay, is added to its evidence,
+      and the replay's README to its artifacts; the bound, scope, attribution and rungs are unchanged,
+      and the mark moves to independently re-implemented after reading the producer's code.
     previous:
       kind: lower-bound
       scope:

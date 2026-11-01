@@ -3848,7 +3848,7 @@ Decides in exact rationals, for T-145's, T-157's and T-192's parameters and a co
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md)
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares the default cut, near-axis side and run_key rules of main.rs and slab.rs, re-typed to recompute what the source prints; written by Claude (Anthropic) (the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), tier tbd-strong-max, maximum reasoning), with its own prompt; authorship in common with the producer’s: system-family, Written after reading the source of wand125's sqverify_continuous, whose commits name Claude as co-author, and this repository's copies of the modules it reuses; for T-192 that source is the producer's code. In files of its own, importing nothing of it; it re-types the definitions its shares name, to test or recompute them, so its code is not separate in the registry's sense.
-- Note: Kept in the review's packet with its receipts; cited by the review and by no evidence entry, since what it decides is premises that the registered audits and the review already carry.
+- Note: Kept in the review's packet with its receipts; cited by the review, and since 31 October 2026 by E-n040-wand125-sqverify-continuous-6715-replay and -6718-replay, whose candidates candidates.py builds; what it decides is premises that the registered audits and the review already carry.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -3879,7 +3879,7 @@ Holds one run's output to exact arithmetic: the premises line to the review's va
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md)
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), tier tbd-strong-max, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Written after reading the source of wand125's sqverify_continuous, whose commits name Claude as co-author, and this repository's copies of the modules it reuses; for T-192 that source is the producer's code. In files of its own, importing and copying nothing of it.
-- Note: Kept in the review's packet with its receipts; cited by the review and by no evidence entry. Written to judge a replay of the mode as well (the review's section 11).
+- Note: Kept in the review's packet with its receipts; cited by the review, and since 31 October 2026 by E-n040-wand125-sqverify-continuous-6715-replay and -6718-replay, whose runs it judged. Written to judge a replay of the mode as well (the review's section 11).
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
