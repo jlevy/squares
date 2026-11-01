@@ -196,9 +196,10 @@ LEGACY_RECORD = (
 )
 
 IDENTITY = {
-    "interpreter": {"python": "3.13.18", "numpy": "2.4.2", "python-flint": "0.9.0"},
-    "modules_sha256": {"gradec.py": "61dcf21c"},
-    "archive_sha256": "00",
+    "python": "3.13.18",
+    "numpy": "2.4.2",
+    "python-flint": "0.9.0",
+    "platform": "Linux x86_64",
 }
 
 
@@ -360,18 +361,16 @@ def test_one_invocation_holds_the_work_directory(tmp_path: Path) -> None:
 
 def test_the_ledger_is_held_to_one_environment(tmp_path: Path) -> None:
     """Finding 5(a) of review A: a resumed invocation under another interpreter or other
-    inputs is refused before it runs, so one receipt never merges two environments."""
+    packages is refused before it runs, so one receipt never merges two environments."""
     header = replay.check_environment(tmp_path, IDENTITY, [], adopt_unstamped=False)
-    digest = replay.identity_digest(IDENTITY)
-    assert header["sha256"] == digest
+    assert header["interpreter"] == IDENTITY
     assert header["adopted_unstamped"] == []
-    stamped = {"key": "n-19", "environment_sha256": digest}
+    stamped = {"key": "n-19", "interpreter": dict(IDENTITY)}
     assert replay.check_environment(tmp_path, IDENTITY, [stamped], adopt_unstamped=False)
-    other = json.loads(json.dumps(IDENTITY))
-    other["interpreter"]["numpy"] = "2.5.2"
-    with pytest.raises(SystemExit, match=r"interpreter\.numpy: 2\.4\.2 -> 2\.5\.2"):
+    other = {**IDENTITY, "numpy": "2.5.2"}
+    with pytest.raises(SystemExit, match=r"numpy: 2\.4\.2 -> 2\.5\.2"):
         replay.check_environment(tmp_path, other, [stamped], adopt_unstamped=False)
-    foreign = {"key": "n-19", "environment_sha256": "f" * 64}
+    foreign = {"key": "n-19", "interpreter": other}
     with pytest.raises(SystemExit, match="another environment"):
         replay.check_environment(tmp_path, IDENTITY, [foreign], adopt_unstamped=False)
 
@@ -466,9 +465,9 @@ def test_the_retained_receipt_reproduces_every_certificate() -> None:
     for name, version in ENV_SH_PINS.items():
         assert environment[name] == version
     assert environment["python"].startswith("3.13.")
-    digest = environment["identity_sha256"]
+    interpreter = {key: environment[key] for key in (*ENV_SH_PINS, "python", "platform")}
     for record in receipt["controls"] + receipt["replays"]:
-        stamped = record.get("environment_sha256")
-        assert stamped == digest or (
+        stamped = record.get("interpreter")
+        assert stamped == interpreter or (
             stamped is None and record["key"] in environment["adopted_unstamped"]
         )

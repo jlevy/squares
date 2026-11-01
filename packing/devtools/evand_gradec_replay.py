@@ -35,17 +35,19 @@ before anything is appended, and an unreadable line anywhere else is refused.  O
 invocation holds ``WORK/lock`` (``flock``) while it runs, and a second is refused.
 
 **The environment.** ``WORK/environment.json`` names the environment the work was begun
-under: the interpreter's version and the five packages ``env.sh`` pins, its platform, the
-SHA-256 of each module copied out and of the archive.  Each run's record carries that
-identity's digest (``environment_sha256``).  An invocation whose ``--python`` or inputs
-give another identity is refused before anything runs, as is a ledger holding a record of
-another identity, so one receipt never merges runs from two environments; the identity is
-measured again before the receipt is written.  A work directory begun before the ledger
-recorded its environment (the replay started on 1 November 2026) has records without the
-digest and no ``environment.json``: it is adopted once with ``--adopt-unstamped``, under
-the ``--python`` those runs were launched with, which writes ``environment.json`` and names
-the records adopted; the receipt carries the list.  Records without the digest that were
-appended after ``environment.json`` was written, by an older driver, are refused.  An older
+under: the interpreter's version, the five packages ``env.sh`` pins and the platform, as
+the given ``--python`` reports them.  Each run's record names the same (``interpreter``).
+An invocation whose ``--python`` reports another is refused before anything runs, as is a
+ledger holding a record of another, so one receipt never merges runs from two
+environments; the interpreter is asked again before the receipt is written.  The module
+copies are held byte for byte to the retained copy on every invocation (`copy_modules`),
+and the archive and the exact forms are read from Git, which identifies them (OR-16).  A
+work directory begun before records named their environment (the replay started on
+1 November 2026) has records without ``interpreter`` and no ``environment.json``: it is
+adopted once with ``--adopt-unstamped``, under the ``--python`` those runs were launched
+with, which writes ``environment.json`` and names the records adopted; the receipt carries
+the list.  Records without ``interpreter`` appended after ``environment.json`` was
+written, by an older driver, are refused.  An older
 driver takes no lock, so this one cannot see it: point it at a work directory only once any
 older driver using it has exited.
 
@@ -71,7 +73,6 @@ import argparse
 import contextlib
 import fcntl
 import gzip
-import hashlib
 import json
 import os
 import re
@@ -233,14 +234,6 @@ def copy_modules(destination: Path, source: Path = SCRIPTS_DIR) -> None:
         shutil.copyfile(source / name, destination / name)
 
 
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
 def interpreter_versions(python: str) -> dict[str, str]:
     """The interpreter's version, the five packages ``env.sh`` pins, and its platform."""
     probe = (
@@ -253,46 +246,21 @@ def interpreter_versions(python: str) -> dict[str, str]:
     result = subprocess.run(
         [python, "-I", "-c", probe], capture_output=True, text=True, check=True
     )
-    return json.loads(result.stdout)
+    return dict(sorted(json.loads(result.stdout).items()))
 
 
-def environment_identity(
-    versions: Mapping[str, str], modules: Path, archive: Path = ARCHIVE
-) -> dict[str, Any]:
-    """What a run's bytes depend on beyond its inputs: the interpreter and its packages,
-    the module copies that run and the archive the inputs and certificates come from."""
-    return {
-        "interpreter": dict(sorted(versions.items())),
-        "modules_sha256": {name: file_sha256(modules / name) for name in MODULES},
-        "archive_sha256": file_sha256(archive),
-    }
-
-
-def identity_digest(identity: Mapping[str, Any]) -> str:
-    return hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
-
-
-def identity_differences(
-    old: Mapping[str, Any], new: Mapping[str, Any], prefix: str = ""
-) -> list[str]:
-    """The leaves where two identities differ, as ``path: old -> new``."""
-    found: list[str] = []
-    for key in sorted(set(old) | set(new)):
-        before, after = old.get(key), new.get(key)
-        if isinstance(before, Mapping) and isinstance(after, Mapping):
-            found += identity_differences(
-                cast("Mapping[str, Any]", before),
-                cast("Mapping[str, Any]", after),
-                f"{prefix}{key}.",
-            )
-        elif before != after:
-            found.append(f"{prefix}{key}: {before} -> {after}")
-    return found
+def interpreter_differences(old: Mapping[str, Any], new: Mapping[str, Any]) -> list[str]:
+    """Where two environments differ, as ``name: old -> new``."""
+    return [
+        f"{key}: {old.get(key)} -> {new.get(key)}"
+        for key in sorted(set(old) | set(new))
+        if old.get(key) != new.get(key)
+    ]
 
 
 def check_environment(
     work: Path,
-    identity: Mapping[str, Any],
+    interpreter: Mapping[str, str],
     attempts: Sequence[Mapping[str, Any]],
     *,
     adopt_unstamped: bool,
@@ -300,47 +268,45 @@ def check_environment(
     """Hold the work directory to one environment, and return its ``environment.json``.
 
     The file is written when the work begins, or once, with ``adopt_unstamped``, for a
-    ledger whose records were written before it recorded one; ``attempts`` is every
-    record the ledger holds.
+    ledger whose records were written before they named their environment; ``attempts``
+    is every record the ledger holds.
     """
-    digest = identity_digest(identity)
+    current = dict(sorted(interpreter.items()))
     path = work / ENVIRONMENT
     header: dict[str, Any] | None = json.loads(path.read_text()) if path.exists() else None
-    if header is not None and header.get("sha256") != digest:
-        changes = "; ".join(identity_differences(header.get("identity", {}), identity))
+    if header is not None and header.get("interpreter") != current:
+        changes = "; ".join(interpreter_differences(header.get("interpreter") or {}, current))
         raise SystemExit(
-            f"{work} was begun under environment {str(header.get('sha256'))[:12]}, and this "
-            f"invocation's is {digest[:12]} ({changes}); resume it under the same "
-            "--python and inputs, or begin a new --work"
+            f"{work} was begun under another environment ({changes}); resume it under the "
+            "same --python, or begin a new --work"
         )
     other = sorted(
         {
             str(record["key"])
             for record in attempts
-            if record.get("environment_sha256") not in (None, digest)
+            if record.get("interpreter") not in (None, current)
         }
     )
     if other:
         raise SystemExit(f"{work}: runs recorded under another environment: {other}")
-    unstamped = sorted({str(r["key"]) for r in attempts if "environment_sha256" not in r})
+    unstamped = sorted({str(r["key"]) for r in attempts if "interpreter" not in r})
     if header is None:
         if unstamped and not adopt_unstamped:
             raise SystemExit(
-                f"{work}: {len(unstamped)} recorded runs carry no environment, since they "
+                f"{work}: {len(unstamped)} recorded runs name no environment, since they "
                 "were written before the ledger recorded one; if they ran under this "
                 "--python, pass --adopt-unstamped once to record it for them"
             )
         header = {
             "format": ENVIRONMENT_FORMAT,
-            "sha256": digest,
-            "identity": dict(identity),
+            "interpreter": current,
             "written_utc": datetime.now(UTC).isoformat(timespec="seconds"),
             "adopted_unstamped": unstamped,
         }
         if unstamped:
             header["adopted_basis"] = (
                 "asserted by the invocation that adopted them: these runs were launched "
-                "under the --python that gave this identity, before records carried it"
+                "under this --python, before records named their environment"
             )
         with atomic_output_file(path) as temporary:
             temporary.write_text(json.dumps(header, indent=1) + "\n")
@@ -853,15 +819,13 @@ def _replay(args: argparse.Namespace, work: Path, release: Release, runs: list[R
     modules = work / "modules"
     copy_modules(modules)
     versions = interpreter_versions(args.python)
-    identity = environment_identity(versions, modules)
     ledger = work / LEDGER
     if repair_torn_tail(ledger):
         print(f"{ledger}: cut a torn last line", flush=True)
     attempts = load_attempts(ledger)
     environment = check_environment(
-        work, identity, attempts, adopt_unstamped=args.adopt_unstamped
+        work, versions, attempts, adopt_unstamped=args.adopt_unstamped
     )
-    digest = environment["sha256"]
     records = {str(record["key"]): record for record in attempts}
     started = datetime.now(UTC)
     children = Children()
@@ -881,7 +845,7 @@ def _replay(args: argparse.Namespace, work: Path, release: Release, runs: list[R
             timeout=args.timeout,
             children=children,
         )
-        return {**record, "environment_sha256": digest}
+        return {**record, "interpreter": versions}
 
     def append(record: dict[str, Any]) -> None:
         attempts.append(record)
@@ -910,9 +874,7 @@ def _replay(args: argparse.Namespace, work: Path, release: Release, runs: list[R
         signal.signal(signal.SIGTERM, previous)
     for key in not_started:
         print(f"{key}: not started, its worst case would pass the CPU cap", flush=True)
-    if identity_digest(environment_identity(interpreter_versions(args.python), modules)) != (
-        digest
-    ):
+    if interpreter_versions(args.python) != versions:
         raise SystemExit("the environment changed during the invocation; no receipt written")
     header = {
         "format": RECEIPT_FORMAT,
@@ -926,20 +888,20 @@ def _replay(args: argparse.Namespace, work: Path, release: Release, runs: list[R
         "program": {
             "retained": str(SCRIPTS_DIR.relative_to(REPO)),
             "modules": list(MODULES),
-            "modules_sha256": identity["modules_sha256"],
             "upstream_revision": UPSTREAM_REVISION,
-            "ran_from": "a fresh copy of the four modules outside the repository",
+            "ran_from": (
+                "a fresh copy of the four modules outside the repository, held byte for "
+                "byte to the retained copy on every invocation"
+            ),
         },
         "inputs": {
             "archive": str(ARCHIVE.relative_to(REPO)),
-            "archive_sha256": identity["archive_sha256"],
             "exact_forms": str(MINPOLY_DIR.relative_to(REPO)),
             "counts": str(COUNTS_FILE.relative_to(REPO)),
             "dropzero": sorted(DROPZERO),
         },
         "environment": {
             **versions,
-            "identity_sha256": digest,
             "adopted_unstamped": environment.get("adopted_unstamped", []),
             "packages_source": "env.sh's pins, installed into a fresh virtual environment",
             "flags": "-E -s, an empty working directory, the input path as the argument",
