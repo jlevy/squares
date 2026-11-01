@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 60
+version: 61
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -41,7 +41,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-01T17:55:36.661Z
+updated_at: 2026-11-01T18:54:31.878Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -101,3 +101,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-01 16:52: renewal. PRs: #869 (L12 tooling; review A posted, no blockers, 3 should-fix + 3 nits sent back to L12), #868 (L14: Kim's 297 route B + squares-exact-forms + watched reads + gradec replay tool; strong-max correctness review running; first question is T-247's V0/C0 -> V3/C3 without a stage-4 review). Grade-C replay running (5/236 at 16:48Z, 0 failures, 3 controls refused). HOLD: T-261 stays at C1 after the replay until the owner answers think-xyek (note on think-mtah). Sweep intake13: #842 comment 6560351462 (v1.2 announcement; same as the watched read) -> #868's addressing pass; #847 comment 6560655638 (3D unit cubes in a cube, Zenodo 23862003; outside the register's scope, read only) -> L13; watched reads in #868; #846 -> #869.
 
 2026-11-01 17:53: renewal. Merged #869 (83a2b9132; review A addressed in 5 commits, CI green); closed think-u4bm, -13ew, -t9uj, -rsqv after `check_bead_tree --before-close` passed on main. Sweep intake14: 0 closeable (the #846 false positive is gone); 4 items, all in flight (#842 read + 2 watched reads in #868's addressing pass; #847 read with L13). #868: review A (strong-max) found T-247 V3/C3 correct with nothing adopted, custody verified; 1 blocking (DATA_REVISION pin) + 4 should-fix, addressing pass running. Grade-C replay 7/236 done, all byte-identical; host load ~10.
+
+2026-11-01 ~19:00: merged #868 (b02ca7f7a): Kim's two CC0 bundles kept (f480441e), T-247 at V3/C3 by verify_exact.py (route B route 2), adoption parked on think-ot5c + think-ikku (think-vv1q now depends on think-ikku), gradec replay tool hardened (cap counts running runs, env-stamped ledger, flock, atomic receipt), two watched reads, #842 read through 16:01Z. Closed think-bw8b, think-9vai after --before-close passed; think-ozx8 stays open for route 1 (queued behind the replay). Follow-up must run evand_gradec_replay --adopt-unstamped once after the live driver exits. L15 posts the #804 follow-up (think-8r92) after deploy verifies. #870 (W9 checker): engineering review posted (4 should-fix), stage-4 lemma review in progress; one addressing pass after both.
