@@ -5,7 +5,7 @@ title: "Review Polkovskyi's 23 October and #846 refinements (stage 4): adopt 130
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -13,11 +13,13 @@ labels:
 dependencies:
   - type: blocks
     target: is-01m692s0e5n34n064hq32vb0fs
+  - type: blocks
+    target: is-01m5tv6pzmhzj7t4pgtwgdk8m9
 parent_id: is-01m685njhfc113wb8prbg15npb
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:40.481Z
-updated_at: 2026-10-31T15:01:10.067Z
+updated_at: 2026-11-01T18:53:47.125Z
 started_at: 2026-10-31T08:37:28.980Z
 ---
 Stage 4 review of Mykhailo Polkovskyi's certificates of 23 October (T-252 on the lane's branch: 154, 155, 183, 211, 227, 236, 237, 241 and 271, each about 1.3e-19 to 1.7e-19 below its house) and of #846 (T-258: 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house, and 130, a 2e-14 dilation of Couzo's #843 packing 2.08e-12 below it), and the adoption at each of the fifteen counts where it is the smallest validated side, crediting each packing to its finder and the refinement to Polkovskyi.
