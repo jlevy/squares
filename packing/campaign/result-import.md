@@ -956,13 +956,16 @@ head ([development.md](../../development.md#hosted-ci-gates-a-draft-pull-request
 merges on the owner’s word, by
 [the merge policy](../../development.md#merging-a-pull-request).
 
-**An intake pull request names its issues without a closing keyword.** Its description
-and the commit messages it merges say `answers #N` or `records #N`, never `closes`,
-`fixes` or `resolves`, in any tense, before an issue reference: GitHub would close the
-issue at the merge, before the final comment that stage 7 closes it with.
+**An intake pull request names its issues without a closing keyword.** Its title, its
+description and the commit messages it merges say `answers #N` or `records #N`, never
+`closes`, `fixes` or `resolves`, in any tense, bold or not, before an issue reference or
+a link to one: GitHub would close the issue at the merge, before the final comment that
+stage 7 closes it with.
+The merge commit’s message carries the title.
 #834’s description said so of #613, and its merge on 31 October 2026 closed #613
 fourteen minutes before the final comment was posted (think-t9uj). From `packing/`,
-`python -m devtools.check_pr_description --file BODY.md --label intake` refuses one.
+`python -m devtools.check_pr_description --file BODY.md --label intake --title "TITLE"`
+refuses one in either.
 
 ### The House Rule
 

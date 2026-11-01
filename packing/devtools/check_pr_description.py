@@ -21,17 +21,19 @@ Filled mode refuses the former.
 
 Given the pull request's labels (`--label`, once each), a description labelled `intake`
 may not use a GitHub closing keyword: `closes`, `fixes` or `resolves`, in any tense, before
-an issue reference. #834's said `closes #613`, so its merge closed #613 fourteen minutes
-before the pass posted the final comment that stage 7 closes an issue with (think-t9uj).
-An intake pull request names its issues as `answers #N` or `records #N`.
+an issue reference, bold or italic, with or without a colon, or as a link. #834's said
+`closes #613`, so its merge closed #613 fourteen minutes before the pass posted the final
+comment that stage 7 closes an issue with (think-t9uj). Nor may its title (`--title`),
+which the merge commit's message carries (review A3 of #869). An intake pull request
+names its issues as `answers #N` or `records #N`.
 
 Usage, from `packing/`:
 
 ```
 uv run --frozen --all-extras --group dev python -m devtools.check_pr_description
 uv run --frozen --all-extras --group dev python -m devtools.check_pr_description --file BODY.md
-uv run --frozen --all-extras --group dev python -m devtools.check_pr_description \
-    --file BODY.md --label intake
+uv run --frozen --all-extras --group dev python -m devtools.check_pr_description \\
+    --file BODY.md --label intake --title "the pull request's title"
 ```
 """
 
@@ -60,10 +62,11 @@ MAX_COST_WALL_BULLETS = 3
 #: Pull-Request Labels), whose issues close only with their final comments.
 INTAKE_LABEL = "intake"
 #: A GitHub closing keyword before an issue reference, as GitHub reads one in a pull
-#: request's description: any tense of close, fix or resolve, an optional colon, then
-#: `#N`, `owner/repository#N` or the issue's URL.
+#: request's description or a commit message: any tense of close, fix or resolve, not
+#: inside a longer word, in bold or italic or not, an optional colon, then `#N`,
+#: `owner/repository#N` or the issue's URL, bare or as a link's text.
 CLOSING_KEYWORD = re.compile(
-    r"\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b:?\s+"
+    r"(?<![\w-])[*_]*(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)[*_]*:?[*_]*\s*\[?"
     r"(?:[\w.-]+/[\w.-]+#\d+|#\d+|https://github\.com/[\w.-]+/[\w.-]+/issues/\d+)",
     re.IGNORECASE,
 )
@@ -141,25 +144,28 @@ def _section(text: str, heading: str) -> str:
     return rest if next_heading < 0 else rest[:next_heading]
 
 
-def closing_problems(text: str, labels: Sequence[str]) -> list[str]:
-    """Each GitHub closing keyword in an intake description, comments included, since a
-    keyword anywhere in the body closes the issue at the merge (think-t9uj)."""
+def closing_problems(text: str, labels: Sequence[str], where: str = "description") -> list[str]:
+    """Each GitHub closing keyword in an intake description or title, comments included,
+    since a keyword anywhere in either closes the issue at the merge (think-t9uj)."""
     if INTAKE_LABEL not in labels:
         return []
     return [
-        f"an intake description uses a GitHub closing keyword ({match.group(0)}), which "
+        f"an intake {where} uses a GitHub closing keyword ({match.group(0)}), which "
         "closes the issue at the merge, before its final comment; write 'answers #N' or "
         "'records #N'"
         for match in CLOSING_KEYWORD.finditer(text)
     ]
 
 
-def check(text: str, *, filled: bool, labels: Sequence[str] = ()) -> list[str]:
-    """Problems in `text`, a description carrying `labels`. Empty means it matches the
-    contract."""
+def check(text: str, *, filled: bool, labels: Sequence[str] = (), title: str = "") -> list[str]:
+    """Problems in `text`, a description carrying `labels` under `title`. Empty means it
+    matches the contract."""
     body = strip_comments(text)
     found = headings(body)
-    problems: list[str] = closing_problems(text, labels)
+    problems: list[str] = [
+        *closing_problems(title, labels, "title"),
+        *closing_problems(text, labels),
+    ]
 
     if not found:
         return [*problems, "no `##` headings; the description is not the pull-request template"]
@@ -251,6 +257,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         default=[],
         help="a label the pull request carries; with intake, closing keywords are refused",
     )
+    parser.add_argument(
+        "--title",
+        default="",
+        help="the pull request's title, which the merge commit carries; checked as the body",
+    )
     args = parser.parse_args(argv)
 
     path = args.file if args.file is not None else TEMPLATE
@@ -261,7 +272,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"error: {error}", file=sys.stderr)
         return 2
 
-    problems = check(text, filled=filled, labels=args.label)
+    problems = check(text, filled=filled, labels=args.label, title=args.title)
     label = path if path != TEMPLATE else "pull-request template"
     if problems:
         for problem in problems:
