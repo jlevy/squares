@@ -8304,12 +8304,15 @@ issues:
         that ran are the source's, rebuilt here, so no control designed here has been counted on
         either density. Of this lane's threshold-shift runs, each the same as scaling every
         weight by tau/tau', c6715 at 24997/25000 and c6718 at 1 verified, and c6718 at
-        1001/1000 refused with no refutation, its four refusals at t in [23/100, 1/4] stopping
-        at exact captures of 1001/1000 plus at most 2.9e-12. For c6718 a threshold just above
-        1001/1000, such as 2503/2500, below the patch minimum 1.00149865, is the next try,
-        about 1.5 CPU-hours; for c6715, whose least capture is within 2.6e-6 of its patch
-        minimum, a density mutant that lowers the oblique captures alone. Either, once refused
-        at an oblique root with a legal refutation and the patch verified, would count here.
+        1001/1000 and, on 1 November, at 2503/2500 refused with the patch verified and no
+        refutation, their refusals at resolution stopping at legal poses capturing tau' plus
+        at most 3.0e-12. The 1001/1000 witnesses capture less than 2503/2500, so that
+        statement is false at oblique poses alone, but the program's refusals report a pose on
+        the level set at tau', which the judge cannot count. A counted control here needs a
+        density mutant that lowers the oblique captures well below tau' over a region (for
+        c6715 too, whose least capture is within 2.6e-6 of its patch minimum), or a witness
+        rule that reports the least capture found; once refused at an oblique root with a
+        legal refutation and the patch verified, it would count.
       bead: think-flxm
     beads:
     - think-xzob

@@ -10682,6 +10682,42 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Intake lane L10 after #865 (think-flxm, think-3oi5): #485's final comment and "
+            "close recorded, T-157's notes and #533's queued ask note carry the c6718 run at "
+            "tau 2503/2500; no register entry's side, bound, rung, status, mark or credit "
+            "changes. Against main 68f25b17a (#865): rendered at link revision "
+            "0000000000000000000000000000000000000000 into empty site directories, twice "
+            "from this tree and once with that main's results.yaml, result-requests.yaml "
+            "and source-coverage.yaml swapped in, by render_packing_methods, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_n11_lower_bounds_explainer, its math pass in Google Chrome for Testing "
+            "153 (SQPACK_CHROMIUM): 69 files each, all byte-identical across the three. No "
+            "PDF was printed; each prints from that HTML. Every paper keeps its version: "
+            "v0.4.35, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
 )
 
 

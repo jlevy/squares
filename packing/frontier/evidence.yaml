@@ -39914,10 +39914,17 @@ evidence:
       the density at tau 1001/1000 (review A1 of #865) came back REFUSED with the patch
       verified, 169,336,387 nodes, 6,624.9 CPU-seconds, judged faithful and with no
       refutation: 69 roots verified, 13 stopped at the node budget, and 4, at t in [23/100,
-      1/4], reached resolution at legal poses capturing 1001/1000 plus at most 2.9e-12, where
-      the density's least oblique capture lies. A threshold such as 2503/2500, between that
-      capture and the patch's minimum, is the next try at a counted oblique control
-      (think-flxm).
+      1/4], reached resolution at legal poses capturing 1001/1000 plus at most 2.9e-12, so
+      the least oblique capture lies in [1, 1001/1000 + 2.9e-12]. At tau 2503/2500 (1
+      November 2026), between those witnesses and the patch's minimum, it came back REFUSED
+      with the patch verified, 171,796,970 nodes, 6,487.3 CPU-seconds, judged faithful and
+      again with no refutation: 67 roots verified, 11 stopped at the node budget, and 8 (49
+      to 52, 74, 75, 77 and 78) reached resolution at legal poses capturing 2503/2500 plus at
+      most 3.0e-12. The 1001/1000 run's witnesses already show the statement at 2503/2500
+      false at oblique poses with the patch holding, but this program's refusals report a
+      pose on the level set at tau, not below it, so a threshold shift near the least
+      capture gives no counted control; one needs a density mutant or a witness rule that
+      reports the least capture found (think-flxm).
       The program is Hosono's, independent code with the producer's method,
       written after reading Guzhou0806's kernel (PROVENANCE.md), so not clean-room; it shares
       this repository's axis, exact, interval, oracle and rotated modules byte for byte, and its
