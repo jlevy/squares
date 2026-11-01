@@ -35523,9 +35523,11 @@ results:
       adoptable, a stage 4 review of the configuration comes first, then the house rule
       adopts the side at 297, carrying its general and flip regularization at adoption, as
       the regularization gate requires of every adopted house. The case record is unchanged
-      until then, so this entry reads as pending adoption at 297. Local minimality of the packing at its side is a separate claim and is not
-      registered. V4 and C4 need two adversarial AI reviews by distinct reviewers and a human
-      oversight record.
+      until then, so this entry reads as pending adoption at 297.
+
+      Local minimality of the packing at its side is a separate claim and is not registered.
+      V4 and C4 need two adversarial AI reviews by distinct reviewers and a human oversight
+      record.
     notes: >-
       The bound rests on the author's file, kept since 1 November 2026 from his public copy
       and decided by the source's checker (route B); route A's configuration, this
