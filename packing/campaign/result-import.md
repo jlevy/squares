@@ -1801,9 +1801,11 @@ is confirmed or refuted, `validation` or not.
 It says what closing would take as the entry was written; where it says more or less,
 the rule above governs.
 The one clause the rule reads is one that waits on the owner’s decision or answer (“the
-owner has answered”, “has decided”, “an owner decision”, “the owner’s call”): with no
-`blocked` to say whether that decision stands, the issue is not closeable, so record
-`blocked: owner-decision` while it stands and reword `close_when` once it is met.
+owner has answered”, “has decided”, “an owner decision”, “the owner’s call”, “settled by
+the owner”): with no `blocked` to say whether that decision stands, the issue is not
+closeable, so record `blocked: owner-decision` while it stands and reword `close_when`
+once it is met. The sweep lists such an issue, and one a `blocked` entry holds, with the
+close it would otherwise owe, so a block that has gone stale stays in view.
 On 31 October 2026 `--report` listed #846 closeable while it was `blocked:
 owner-decision` and its `close_when` waited on the owner’s answer, and a lane kept it
 open by hand (think-u4bm). The texts were not rewritten when rule P1 came in on 26

@@ -869,6 +869,10 @@ def test_a_close_condition_naming_an_owner_decision_holds_an_unblocked_issue_ope
             "owner decision."
         ),
         "The owner's call: the open beads are closed or moved.",
+        # Review A6 of #869: the passive forms the record also uses.
+        "T-153 is on main, and the remaining replays are done or dispositioned by the owner.",
+        "T-081 is confirmed, or its standing is settled by the owner.",
+        "The reply is posted once the kind is decided by the owner.",
     )
     for text in waiting:
         state = check_requests.issue_state(asking(close_when=text), REGISTER)

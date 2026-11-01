@@ -205,7 +205,8 @@ HELD_BLOCKS = frozenset({"owner-decision", "owner-reply"})
 OWNER_DECISION = re.compile(
     r"[^.;,]*\b(?:the owner has (?:answered|decided|ruled|budgeted|declined)"
     r"|an owner decision|the owner's (?:call|decision|ruling|answer)"
-    r"|the owner (?:decides|answers|rules|declines))\b[^.;,]*",
+    r"|the owner (?:decides|answers|rules|declines)"
+    r"|(?:dispositioned|settled|decided) by the owner)\b[^.;,]*",
     re.IGNORECASE,
 )
 
@@ -908,7 +909,8 @@ def owner_decision_named(close_when: str) -> str:
 
     `close_when` is descriptive, so this reads only the forms an entry uses for a decision
     still to come: "the owner has answered", "has decided", "has ruled", "has budgeted or
-    declined", "an owner decision", "the owner's call". A decision in the past tense ("the
+    declined", "an owner decision", "the owner's call", and the passive "dispositioned,
+    settled or decided by the owner" (review A6 of #869). A decision in the past tense ("the
     owner answered on 23 October") or the owner posting a state waits on nothing here."""
     match = OWNER_DECISION.search(" ".join(close_when.split()))
     return match.group(0).strip() if match else ""
