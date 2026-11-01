@@ -125,9 +125,10 @@ controls, each with its check:
   since the construction's m_i is the floor of W - a_i;
 - no tilt, tH = 0, and a right angle, tV = 1 (0 < t < 1);
 - an unknown kind (the kind);
-- the H band one square narrower (the H fit). That raises the band's top by 1 - cH, which
-  is more than the H fit's slack at every row, while the V fit holds. No change of the
-  side alone reaches the H fit, since the V fit binds first;
+- the H band one square narrower (the H fit). That raises the band's top by 1 - cH while
+  the V fit holds, and the H fit's slack is at most 0.315 of 1 - cH in V2.0 (at 8565) and
+  0.451 in V1.0 (at 2984), so the top passes the wall at every row of both deposits. No
+  change of the side alone reaches the H fit, since the V fit binds first;
 - tH negated (0 < t < 1);
 - the V lift 10^-15 below zero (y >= 0);
 - a V near-end layer of -1 squares, at the level after its last (m_i >= 0);
