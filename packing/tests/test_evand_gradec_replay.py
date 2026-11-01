@@ -31,8 +31,7 @@ assert pathlib.Path(base + ".minpoly.json").is_file()
 mode = (here / "mode.txt").read_text().strip()
 if mode == "refuse":
     raise AssertionError("row not tight at the record")
-print(base + ": 36 rows")
-print("  => grade C certificate VALID: local minimum (3 s)")
+print((here / "log.txt").read_text().replace("BASE", base), end="")
 pathlib.Path(base + ".gradec.json").write_bytes((here / "out.json").read_bytes())
 """
 
@@ -80,50 +79,68 @@ def test_a_log_is_compared_without_its_path_or_timings(release: replay.Release) 
     assert replay.normalized_log(changed, "/scratch/runs/n-10/n-10", 10) != theirs
 
 
-def stub_release(published: bytes) -> replay.Release:
-    log = "minpoly/solve/n-10: 36 rows\n  => grade C certificate VALID: local minimum (6 s)\n"
-    return replay.Release({10: b"{}"}, {10: published}, {10: log})
-
-
-def run_stub(tmp_path: Path, run: replay.Run, mode: str, out: bytes, published: bytes) -> dict:
+def run_stub(
+    tmp_path: Path,
+    run: replay.Run,
+    mode: str,
+    *,
+    out: bytes,
+    published: bytes,
+    log: str,
+) -> dict:
+    """Run a stand-in gradec.py that prints the release's n = 10 log at its own path, with
+    other build times, and writes ``out``; the release it is judged against publishes
+    ``published`` with the release's own log."""
     modules = tmp_path / "modules"
     modules.mkdir(exist_ok=True)
     (modules / "gradec.py").write_text(STUB)
     (modules / "mode.txt").write_text(mode)
     (modules / "out.json").write_bytes(out)
+    ours = log.replace("minpoly/solve/n-10", "BASE").replace("(0 s)", "(3 s)")
+    (modules / "log.txt").write_text(ours)
     return replay.execute(
         run,
         python=sys.executable,
         modules=modules,
         work=tmp_path / "work",
-        release=stub_release(published),
+        release=replay.Release({10: b"{}"}, {10: published}, {10: log}),
         timeout=60,
     )
 
 
-def test_a_matching_certificate_passes_and_a_differing_one_fails(tmp_path: Path) -> None:
+def test_a_matching_certificate_passes_and_a_differing_one_fails(
+    tmp_path: Path, release: replay.Release
+) -> None:
+    log = release.logs[10]
     published = json.dumps({"n": 10, "dim_F": 2, "valid": True}).encode()
-    record = run_stub(tmp_path, replay.Run(10), "valid", published, published)
+    record = run_stub(
+        tmp_path, replay.Run(10), "valid", out=published, published=published, log=log
+    )
     assert record["passed"]
     assert record["identical_to_published"]
     assert record["valid"]
     assert record["log_matches_release"] is True
-    assert record["release_build_seconds"] == 6
+    assert record["release_build_seconds"] == 0
     other = json.dumps({"n": 10, "dim_F": 3, "valid": True}).encode()
-    record = run_stub(tmp_path, replay.Run(10), "valid", other, published)
+    record = run_stub(
+        tmp_path, replay.Run(10), "valid", out=other, published=published, log=log
+    )
     assert not record["passed"]
     assert record["differing_keys"] == ["dim_F"]
 
 
-def test_a_control_passes_only_when_the_checker_refuses(tmp_path: Path) -> None:
+def test_a_control_passes_only_when_the_checker_refuses(
+    tmp_path: Path, release: replay.Release
+) -> None:
+    log = release.logs[10]
     published = json.dumps({"n": 10, "valid": True}).encode()
     control = replay.Run(10, "tight")
-    record = run_stub(tmp_path, control, "refuse", published, published)
+    record = run_stub(tmp_path, control, "refuse", out=published, published=published, log=log)
     assert record["refused"]
     assert record["passed"]
     assert record["exit_code"] != 0
     assert record["last_lines"][-1].startswith("AssertionError")
-    record = run_stub(tmp_path, control, "valid", published, published)
+    record = run_stub(tmp_path, control, "valid", out=published, published=published, log=log)
     assert not record["passed"]
 
 
