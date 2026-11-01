@@ -10767,6 +10767,25 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "printed; it prints from that HTML. The survey keeps v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Intake lane L13 of 1 November (think-fuwd, W9): #847's summary and its "
+            "filled-end-v2 result, and #836's filled-end-v1 result, state that "
+            "devtools.filled_end_checker decides every V2.0 and V1.0 row from its "
+            "parameters, its lemma awaiting review; no register entry, row, side, bound, "
+            "rung or credit changes. Against main e36ecf29d (#867): rendered at link "
+            "revision 0000000000000000000000000000000000000000 into empty site directories, "
+            "twice from this tree and once with that main's result-requests.yaml swapped "
+            "in, render_packing_methods writes its 43 files byte-identical across the "
+            "three. No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 
