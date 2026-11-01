@@ -10740,8 +10740,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "153 (SQPACK_CHROMIUM): 69 files each, all byte-identical across the three. "
             "Measured again after merging main e7ccc8cc4 (#863), the same way with that "
             "main's three inputs swapped in: 69 files each, byte-identical across the "
-            "three. No PDF was printed; each prints from that HTML. Every paper keeps its "
-            "version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7."
+            "three; and again after review A of #866 rewrote T-157's notes and #533's "
+            "queued ask note, against the same main: 69 files, byte-identical. No PDF was "
+            "printed; each prints from that HTML. Every paper keeps its version: v0.4.35, "
+            "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )

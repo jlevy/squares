@@ -153,31 +153,50 @@ $2.9 \times 10^{-12}$; the other 13 refusals, roots 3 and 4 ($t$ in $[1/1000, 1/
 and 75 to 85 ($t$ in $[9/25, 83/200]$), stopped at the node budget at poses capturing
 1.0017 to 1.016, which decides nothing there.
 With the $\tau' = 1$ run, T-157’s least oblique capture lies in
-$[1, 1001/1000 + 2.9 \times 10^{-12}]$.
+$[1, 1001/1000 + 1.9 \times 10^{-13}]$, the upper end root 51’s witness.
 
 **c6718 at $\tau' = 2503/2500$, between those witnesses and the patch minimum, came back
 REFUSED with no refutation too**: the patch and 67 roots verified, 19 roots refused,
 171,796,970 nodes, 6,487.3 CPU-seconds, judged faithful, every witness a legal pose and
 none below $\tau'$. Eleven refusals stopped at the node budget (roots 3 to 5, 76 and 79
-to 85). The other eight, roots 49 to 52 and 74, 75, 77 and 78 ($t$ in $[71/200, 19/50]$
-for the last four), reached resolution at legal poses capturing $2503/2500$ plus
-$3.4 \times 10^{-13}$ to $3.0 \times 10^{-12}$.
+to 85). The other eight, roots 49 to 52 and 74, 75, 77 and 78 ($t$ in $[71/200, 73/200]$
+and $[37/100, 19/50]$ for the last four), reached resolution at legal poses capturing
+$2503/2500$ plus $3.4 \times 10^{-13}$ to $3.0 \times 10^{-12}$.
 
 **What the two runs show about the design.** At both thresholds the same four roots were
 refused at resolution with a witness just above $\tau'$, though the $\tau' = 1001/1000$
 run had already exhibited, at those roots, legal poses capturing less than $2503/2500$:
 the statement at $2503/2500$ is false at oblique poses alone, with the patch holding,
 but the program’s refusals do not show it.
-Witnesses within $3 \times 10^{-12}$ above $\tau'$ at both thresholds are what a box
-straddling the level set where the capture equals $\tau'$ would report, since the
-program’s witness is the refused box’s path centre (the review’s SC-6), on that level
-set rather than inside the region below it; this is an inference from the two runs, not
-something the program states.
+The source says why.
+`run_root` (`slab.rs:582-667`) takes boxes from a stack, accepts one whose lower bound
+reaches $\tau'$, and splits the rest, pushing the lower half and then the upper, so the
+upper half is searched first.
+At the first box still unaccepted when it falls below resolution or the node budget runs
+out, it evaluates the exact capture once, at that box’s path centre (the review’s SC-6),
+and returns. So the witness is the first unaccepted box in an upper-half-first,
+depth-first order, and there are two cases:
+
+- When that order reaches the region below $\tau'$ from accepted territory, the box sits
+  on the region’s rim, just above $\tau'$. Every resolution refusal of the 1001/1000 and
+  2503/2500 runs is of this kind, and so are 84 of the 86 roots of the source’s
+  core-3348/3359 control, which the review recorded as SC-9.
+- When the region holds the pose the root searches first, the box lies inside it and the
+  witness refutes. The mass controls are of this kind, and so are the 3348/3359 control’s
+  roots 0 and 1, whose refuting witnesses (captures 0.99856 and 0.99963) sit with $u$
+  and $v$ within $10^{-12}$ of 1 at the top of each root’s $t$ range, after 106 and 109
+  nodes.
+
+This is read from the source and borne out by the receipts in this packet and the
+review’s, not proved.
 So a threshold shift near the density’s least capture yields refusals the judge cannot
-count, and a counted oblique control for c6718 needs captures well below $\tau'$ over a
-region the search reaches first, from a density mutant, as for c6715, or from a witness
-rule that reports the least capture it found.
-That design stays with think-flxm; no further threshold run is proposed.
+count. A counted oblique control needs captures below $\tau'$ at the pose some root
+searches first ($u$ and $v$ near 1 at the top of its $t$ range), with the axis patch
+holding: from a density mutant, for c6718 as for c6715, or from a witness rule that
+reports the least capture found.
+That rule would be a change to `slab.rs:611-630`, so a control run with it would test a
+build other than the v4 that decided T-145 and T-157, and the record would have to say
+so. That design stays with think-flxm; no further threshold run is proposed.
 
 ## What This Does Not Establish
 

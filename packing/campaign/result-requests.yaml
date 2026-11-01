@@ -8307,12 +8307,19 @@ issues:
         1001/1000 and, on 1 November, at 2503/2500 refused with the patch verified and no
         refutation, their refusals at resolution stopping at legal poses capturing tau' plus
         at most 3.0e-12. The 1001/1000 witnesses capture less than 2503/2500, so that
-        statement is false at oblique poses alone, but the program's refusals report a pose on
-        the level set at tau', which the judge cannot count. A counted control here needs a
-        density mutant that lowers the oblique captures well below tau' over a region (for
-        c6715 too, whose least capture is within 2.6e-6 of its patch minimum), or a witness
-        rule that reports the least capture found; once refused at an oblique root with a
-        legal refutation and the patch verified, it would count.
+        statement is false at oblique poses alone, but a refusal at resolution reports the
+        centre of the first unaccepted box in the search's upper-half-first, depth-first order
+        (slab.rs:582-667): reached from accepted territory, as at every resolution refusal of
+        both runs and at 84 of the core-3348/3359 control's roots (SC-9), it sits on the rim
+        of the region below tau', just above it, and the judge cannot count it; it refutes only
+        when that region holds the pose a root searches first, as for the mass controls. A
+        counted control here needs a density mutant whose oblique captures are below tau' at
+        the pose some root searches first (u and v near 1 at the top of its t range), with the
+        axis patch holding, for c6715 too, whose least capture is within 2.6e-6 of its patch
+        minimum; or a witness rule that reports the least capture found, a change to
+        slab.rs:611-630 whose run would test a build other than the v4 that decided T-145 and
+        T-157. Once refused at an oblique root with a legal refutation and the patch verified,
+        it would count.
       bead: think-flxm
     beads:
     - think-xzob
