@@ -201,10 +201,10 @@ def test_what_each_control_depends_on(monkeypatch: pytest.MonkeyPatch) -> None:
         "K of one": r"the side \S+ is above K = 1",
         "an H band shorter than its depth": "H y <= F",
     }
-    found = {}
+    found: dict[str, set[str]] = {}
     for name, changes in checker.mutants(row):
         monkeypatch.setattr(checker, "_refuse", _without(checker.CONTROL_CHECKS[name]))
-        verdicts = set()
+        verdicts: set[str] = set()
         for changed in changes:
             try:
                 checker.decide(changed)
