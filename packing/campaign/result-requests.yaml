@@ -5832,7 +5832,8 @@ issues:
     title: 's(40) > 3359/500 = 6.718: updated registration request'
     author: Guzhou0806
     opened: '2026-10-10'
-    state: open
+    state: closed
+    closed: '2026-11-01'
     kind: result-report
     triage: done
     summary: >-
@@ -6045,6 +6046,49 @@ issues:
         status: confirmed
       - result: s40-support-family-obstruction
       - result: s40-continuous-angle-mode
+    - url: https://github.com/jlevy/squares/issues/485#issuecomment-6551827600
+      date: '2026-11-01'
+      by: jlevy
+      kind: final
+      reported:
+      - result: s40-clipped-corner
+        id: T-133
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: s40-full-core
+        id: T-133
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: s40-continuous-pose
+        id: T-145
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: s40-new-supports
+        id: T-157
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: s40-support-family-obstruction
+      - result: s40-continuous-angle-mode
+        id: T-157
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: s40-continuous-angle-mode
+        id: E-n040-wand125-sqverify-continuous-6718-report
+        status: reviewed
+      - result: s40-continuous-angle-mode
+        id: E-n040-wand125-sqverify-continuous-6718-replay
+        status: confirmed
+      beads: [think-flxm]
     close_when: The import and its review disposition are on main and the owner has posted the resulting
       state; optimality and first-publication priority are outside this request.
   - number: 486
