@@ -5,7 +5,7 @@ title: "Validate #836: Karimi v5 two-strip rows the walk above 1024 records, bot
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: bold-ritchie-l9
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m685wqakx05engdrvf9s4789
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:11:15.363Z
-updated_at: 2026-11-01T00:01:42.833Z
+updated_at: 2026-11-01T00:53:57.145Z
 started_at: 2026-10-31T17:14:05.383Z
 ---
 Stage 4 validation of #836's rows (import think-7yrs), the rows think-llit's walk above 1024 records from Mohsen Karimi's two-strip v5.0 deposit.
@@ -30,6 +30,10 @@ blocked_on: think-7yrs, think-llit
 - Possible subset under the cap: not needed; the whole item fits. Six controls at every recorded count would be about 75 CPU-h, over the cap.
 - Depends on: think-7yrs stage 2 (zenodo.org reachable, or the owner fetches the zip); a column set per deposit in two_strip_checker's reader, since parse_records refuses v5's extra below_all_reported column (review A2 of #848; code time, seconds of compute); think-llit R1 (the walk above 1024); R5 (think-5dc3), with which these rows land.
 - Done when: the decisions receipt and the replay receipts are committed in the packet, the rows are in source-coverage.yaml at the walk's verdicts, and check --replay passes for the release.
+- Stage 3 items (review A10 of #863, 2026-11-01):
+  - the recorded v5 rows cite karimi-records-2026-10-31/receipts/replay-v5.json (the full replay, PR #863) as their route evidence;
+  - devtools.two_strip_checker is registered in frontier/verifiers.yaml at b0fe65eae, the commit the full replay ran from, beside couzo_678_replay (already V-couzo-678-replay).
+  Both are R5's (think-5dc3) to carry out when it records the rows.
 - Machine note: about 2 cores for 4.6 wall-hours, or 1 core for 9; it can share the host with a gate if held to 1 core. Written-out certificates (~1 GB raw) go to scratch and are not retained.
 
 ## Notes
