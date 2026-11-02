@@ -97,8 +97,10 @@ verifiers:
       Written by lane L14 of the 1 November 2026 intake (think-mtah), after reading
       gradec.py, its three modules, run.sh, env.sh and the archive's README as data. Its
       run of 1 November is receipts/gradec-replay-233.json in the evand-exact-data-2026-10-12
-      packet. No evidence entry cites it until T-261's replay evidence is entered, which
-      waits on the owner's question think-xyek.
+      packet. That run was made by its first version, launched before 76d72c594, with the
+      wall timer only, a cap on recorded CPU and no environment on its records; this
+      version adopted the records and wrote the receipt. No evidence entry cites it until
+      T-261's replay evidence is entered, which waits on the owner's question think-xyek.
   - id: V-evand-639-replay-driver
     program: replay_verify_exact.py
     author: Squares Project (Levy)

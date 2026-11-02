@@ -294,7 +294,7 @@ Runs the source's gradec.py, unchanged, from a fresh copy of the four retained m
 
 - Source: [`packing/devtools/evand_gradec_replay.py`](../../packing/devtools/evand_gradec_replay.py), [`packing/tests/test_evand_gradec_replay.py`](../../packing/tests/test_evand_gradec_replay.py)
 - Versions run: this repository's commits, which Git holds
-- Note: Written by lane L14 of the 1 November 2026 intake (think-mtah), after reading gradec.py, its three modules, run.sh, env.sh and the archive's README as data. Its run of 1 November is receipts/gradec-replay-233.json in the evand-exact-data-2026-10-12 packet. No evidence entry cites it until T-261's replay evidence is entered, which waits on the owner's question think-xyek.
+- Note: Written by lane L14 of the 1 November 2026 intake (think-mtah), after reading gradec.py, its three modules, run.sh, env.sh and the archive's README as data. Its run of 1 November is receipts/gradec-replay-233.json in the evand-exact-data-2026-10-12 packet. That run was made by its first version, launched before 76d72c594, with the wall timer only, a cap on recorded CPU and no environment on its records; this version adopted the records and wrote the receipt. No evidence entry cites it until T-261's replay evidence is entered, which waits on the owner's question think-xyek.
 
 No evidence entry names it yet.
 

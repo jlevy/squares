@@ -3,8 +3,8 @@
   "route": "same-implementation",
   "bead": "think-mtah",
   "last_invocation": {
-    "started_utc": "2026-11-01T22:59:56+00:00",
-    "finished_utc": "2026-11-01T22:59:57+00:00",
+    "started_utc": "2026-11-02T00:08:12+00:00",
+    "finished_utc": "2026-11-02T00:08:12+00:00",
     "not_started_for_the_cap": []
   },
   "program": {
@@ -273,6 +273,7 @@
       "n-98",
       "n-99"
     ],
+    "adopted_basis": "asserted by the invocation that adopted them: these runs were launched under this --python, before records named their environment",
     "packages_source": "env.sh's pins, installed into a fresh virtual environment",
     "flags": "-E -s, an empty working directory, the input path as the argument",
     "threads": "OPENBLAS_NUM_THREADS=1, OMP_NUM_THREADS=1, as env.sh sets",
