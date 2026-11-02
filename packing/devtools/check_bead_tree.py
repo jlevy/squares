@@ -48,7 +48,10 @@ A third invariant joins the tree to the records:
    reopen them (think-13ew). `--before-close BEAD...` is the guard stage 7 runs before
    closing a bead: from a checkout whose deferral records are `origin/main`'s, it exits
    1 naming every record that still names one, and 2 when the records here are not
-   `main`'s, since a branch that drops the bead has not merged. It reads no bead store.
+   `main`'s, since a branch that drops the bead has not merged. It also exits 1 naming
+   each live child of a bead, read from the bead store, since closing a parent over an
+   open child breaks the first invariant for everyone (think-ysi4), and 2 when the store
+   or the bead cannot be found.
 
 None needs the `tbd` binary. The beads are Markdown-with-frontmatter files, and this
 reads them straight out of git, preferring the local sync worktree so it works offline.
@@ -420,8 +423,36 @@ def main_tip() -> str:
     return found.stdout.strip() if found.returncode == 0 else "unknown"
 
 
+def live_children(
+    closing: Sequence[str], beads: list[dict[str, Any]], aliases: dict[str, str]
+) -> tuple[list[tuple[str, str, dict[str, Any]]], list[str]]:
+    """Each live child of a bead in `closing`, as (the closing alias, the child's alias or
+    id, the child), and each alias in `closing` the store holds no bead for.
+
+    Live is `LIVE`: open, in progress or blocked. A closed or deferred child tracks no work
+    and leaves its parent free to close."""
+    by_tail = {str(b["id"]).rpartition("-")[2]: b for b in beads}
+    alias_of = {tail: f"{ALIAS_PREFIX}{short}" for short, tail in aliases.items()}
+    children: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for b in beads:
+        if b.get("parent_id") and str(b.get("status")) in LIVE:
+            children[str(b["parent_id"])].append(b)
+    held: list[tuple[str, str, dict[str, Any]]] = []
+    unknown: list[str] = []
+    for alias in closing:
+        parent = by_tail.get(aliases.get(alias.removeprefix(ALIAS_PREFIX)) or "")
+        if parent is None:
+            unknown.append(alias)
+            continue
+        for child in children.get(str(parent["id"]), ()):
+            tail = str(child["id"]).rpartition("-")[2]
+            held.append((alias, alias_of.get(tail, str(child["id"])), child))
+    return held, unknown
+
+
 def before_close(closing: Sequence[str]) -> int:
-    """Whether `closing` may close: none may while a deferral record on `main` names it.
+    """Whether `closing` may close: none may while a deferral record on `main` names it,
+    nor while it has a live child.
 
     Stage 7 runs this before closing an answer bead or any bead a record names
     (think-13ew). On 31 October 2026 lanes closed answer beads once their issues were
@@ -429,8 +460,15 @@ def before_close(closing: Sequence[str]) -> int:
     them; the bead store is shared, so every branch whose change touched a record failed
     the dead-deferral check until the coordinator reopened them. A branch that already
     drops the bead is not `main` until it merges, so the guard reads only a checkout whose
-    records are `origin/main`'s. Exits 0 when every bead may close, 1 when a record on
-    `main` still names one, and 2 when it cannot tell."""
+    records are `origin/main`'s.
+
+    It reads the bead store for the second hold (think-ysi4): on 2 November 2026 the
+    coordinator closed think-4rzl once no record named it, and its open child think-3trq
+    then sat under a closed parent, failing the tree's first invariant on `main` and every
+    branch until it was re-parented. A child named in the same call still holds its
+    parent: close or re-parent it first, then run the guard again. Exits 0 when every bead
+    may close, 1 when a record on `main` names one or one has a live child, and 2 when it
+    cannot tell."""
     if not closing:
         print(f"usage: {BEFORE_CLOSE} think-xxxx [think-yyyy ...]", file=sys.stderr)
         return 2
@@ -450,7 +488,25 @@ def before_close(closing: Sequence[str]) -> int:
             file=sys.stderr,
         )
         return 2
+    found = load()
+    if found is None:
+        print(
+            "REFUSE no bead store found (no tbd-sync worktree or branch), so no child can be "
+            "read; `tbd sync` and run again",
+            file=sys.stderr,
+        )
+        return 2
+    beads, source, aliases = found
+    parented, unknown = live_children(closing, beads, aliases)
+    if unknown:
+        print(
+            f"REFUSE {', '.join(unknown)} names no bead in the store at {source}; check the "
+            "alias, or `tbd sync` and run again",
+            file=sys.stderr,
+        )
+        return 2
     print(f"  reading the deferral records at origin/main {main_tip()}, as last fetched")
+    print(f"  reading each bead's children from the bead store at {source}")
     wanted = set(closing)
     held = [
         (where, alias)
@@ -462,11 +518,17 @@ def before_close(closing: Sequence[str]) -> int:
             f"  HOLD {where} names {alias} on main; close it once the change that drops it "
             "has merged"
         )
-    named = {alias for _, alias in held}
+    for alias, child, bead in parented:
+        print(
+            f"  HOLD {alias} has a live child, {child} ({bead.get('status')}) "
+            f"{str(bead.get('title', ''))!r}; re-parent it or close it first, since an open "
+            "bead under a closed parent fails this check on every branch"
+        )
+    blocked = {alias for _, alias in held} | {alias for alias, _, _ in parented}
     for alias in closing:
-        if alias not in named:
-            print(f"  ok  no record on main names {alias}; it may close")
-    return 1 if held else 0
+        if alias not in blocked:
+            print(f"  ok  no record on main names {alias} and no live child; it may close")
+    return 1 if blocked else 0
 
 
 def check(beads: list[dict[str, Any]]) -> list[dict[str, str]]:
