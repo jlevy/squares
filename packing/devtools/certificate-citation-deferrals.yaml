@@ -102,3 +102,12 @@ deferrals:
       case record cites it when the house adopts T-247, which waits, as T-244 at 263 does (think-3trq),
       on the algebraic-house writer (think-ot5c) and on the owner''s restatement question (think-ikku),
       and then on a stage 4 review of the configuration (think-vv1q owns that adoption).'
+  - evidence: E-hyukdongkim-804-s297-exact-feasibility
+    results:
+    - T-247
+    bead: think-vv1q
+    blocked_on: think-ot5c, think-ikku
+    recorded: '2026-11-02'
+    reason: 'The same configuration at 297 decided on sqpack''s exact verifier over its field (route 1
+      of route B, think-ozx8); cited with route B''s verify_exact.py run when the house adopts T-247
+      (think-vv1q owns that adoption).'
