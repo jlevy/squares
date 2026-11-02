@@ -5,7 +5,7 @@ title: "Validate: chelokot's and Daniel's Lean proofs of s(2) to s(5) (think-7l2
 kind: task
 status: open
 priority: 3
-version: 8
+version: 10
 delegate: null
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T07:14:00.796Z
-updated_at: 2026-11-02T13:16:43.162Z
+updated_at: 2026-11-02T14:09:31.797Z
 started_at: 2026-10-26T11:21:28.603Z
 ---
 Validation part of think-7l2j (chelokot's and Evan Daniel's Lean proofs that s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/sqrt 2; no issue). Created by c-lean-1023 under the 23 October intake epic, as the lane rules allow; it serves think-7l2j.
@@ -30,8 +30,6 @@ Validation part of think-7l2j (chelokot's and Evan Daniel's Lean proofs that s(2
 - Done when: receipts are committed on a branch this bead names and registered as `replayed-here` entries on the register entry that think-4o9c's decision makes (T-237 is allocated and held), or the owner dispositions them.
 - Machine note: small; not alongside a validation gate.
 
-blocked_on: none
-
 ## Notes
 
 2026-10-26 ~11:25Z w-val-1026 (moderate-tier sub-agent of coord-n12-1025, the 26 October intake review's validation lane): NOT STARTED, disk. The run needs two Lean toolchains (v4.33.0 for chelokot's 753079eb, v4.33.1 for Daniel's 7051f4e) and two Mathlib caches (db584cd6 and 0df444a3), about 10 GB each by the two packets' READMEs (chelokot-small-n-lean-2026-09-05/README.md lines 155-159, evand-rect-small-n-lean-2026-10-22/README.md lines 137-139): about 20 GB for both routes, about 10 GB for either alone. This host (four cores, shared) had 5.1 GB free on / at 11:21Z on 26 October (`df -h /`: 252G size, 34G used, 5.1G avail), so neither route fits; no toolchain (~/.elan absent) or Mathlib cache is present to reuse. CPU price unchanged: under 1 CPU-hour for both (an estimate from size). Runnable on a host with at least 12 GB free for one route or 22 GB for both; nothing else blocks it. #786 stays open on it (review track: it closes only when T-238 is confirmed or refuted).
@@ -43,4 +41,4 @@ Without the cache each route needs Mathlib built from source (Daniel's Basic.lea
 What landed, on claude/bold-ritchie-xo28us-l29 (draft PR https://github.com/jlevy/squares/pull/887): devtools.replay_lean_packet, with routes chelokot-small-n and evand-rect-small-n. `stage` writes each project from the retained bytes (both ok: every module at the closure receipt's upstream Git blob, pins at the receipt's toolchain and package revisions, 0 kernel-escape tokens); `run` does lake exe cache get, lake build of the route's modules, a probe of the theorems' axioms (accepted only as propext, Classical.choice, Quot.sound) and three negative controls each (a mutated statement given the theorem's term; a module copy with one statement made false: s5_ge_goebel's side + 1/100, rect5_pts_lower's a + b < 4 + 2√2; the statement proved by sorry), under devtools.replay_receipt, with --cpus for taskset; `check` validates the receipt offline. The controls are written but have never run against Lean.
 To finish, on a host that reaches the cache: from packing/, `.venv/bin/python3 -m devtools.replay_lean_packet stage chelokot-small-n --out W1`, then `run chelokot-small-n --out W1 --cpus 2,3` (receipts go to the packet's receipts/lean-build by default), and the same for evand-rect-small-n with W2; then the replayed-here proof-assistant-checked evidence entries on T-238 and a control path, and let check_results derive the rung. Price unchanged: under 1 CPU-hour for both, an estimate.
 No reply is owed on #786: no rung moved. Draft, if the coordinator wants a status line there: "The receipt-bound builds of both routes are not yet run: Mathlib's prebuilt cache is outside the network policy of the host that tried on 2 November. The build tool is in #887; T-238 stays V0/C0."
-blocked_on: network policy — lakecache.blob.core.windows.net:443 (Mathlib cache), release.lean-lang.org:443 (elan)
+blocked_on: network policy — lakecache.blob.core.windows.net:443 (Mathlib's prebuilt cache; the toolchain installs from its GitHub release asset)

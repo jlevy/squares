@@ -5,7 +5,7 @@ title: "Validate: Hosono's zero-margin Lean proof of s(21) = 5 (T-234), build an
 kind: task
 status: open
 priority: 3
-version: 4
+version: 6
 delegate: null
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T07:13:50.094Z
-updated_at: 2026-11-02T13:16:43.767Z
+updated_at: 2026-11-02T14:09:32.540Z
 started_at: 2026-11-02T11:10:50.716Z
 ---
 Validation part of think-f2bm (Hiroaki Hosono's hypothesis-free Lean proof that s(21) = 5, a formalization of T-055's point-only route; no issue). Created by c-lean-1023 under the 23 October intake epic, as the lane rules allow; it serves think-f2bm.
@@ -30,8 +30,6 @@ Validation part of think-f2bm (Hiroaki Hosono's hypothesis-free Lean proof that 
 - Done when: a build and axiom receipt is committed on a branch this bead names and registered as a `proof-assistant-checked`, `replayed-here` entry on T-234 (same-implementation: the source's recipe), or the owner dispositions it.
 - Machine note: near 6 GB per part; one part at a time fits a 15 GB host. Not alongside a validation gate.
 
-blocked_on: none
-
 ## Notes
 
 2026-11-02 ~13:20Z bold-ritchie-l29 (strong-tier lane L29 of the 31 October intake pass, think-3guf; claimed 11:13Z): GENERATION RUN AND MATCHED; KERNEL CHECK NOT RUN, network policy.
@@ -44,4 +42,4 @@ To finish, on a host that reaches the cache, from packing/: `.venv/bin/python3 -
 
 No reply is owed on #782: no rung moved. Draft, if the coordinator wants a status line there: "We regenerated the 64 parts of the zero-margin tree here from the retained generator and certificate on 2 November: all 66 files match data-sha256.txt. The kernel check has not run yet, because the host lacked network access to Mathlib's cache; T-234 stays V0/C0 until it does. The tool and receipt are in #887."
 
-blocked_on: network policy — lakecache.blob.core.windows.net:443 (Mathlib cache), release.lean-lang.org:443 (elan)
+blocked_on: network policy — lakecache.blob.core.windows.net:443 (Mathlib's prebuilt cache; the toolchain installs from its GitHub release asset)
