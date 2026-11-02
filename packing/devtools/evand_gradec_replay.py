@@ -47,10 +47,10 @@ work directory begun before records named their environment (the replay started 
 adopted once with ``--adopt-unstamped``, under the ``--python`` those runs were launched
 with, which writes ``environment.json`` and names the records adopted; the receipt carries
 the list and the basis of the adoption (``adopted_basis``, null when nothing was adopted),
-since the adopted environment is asserted by that invocation, not stamped by the runs.  Records without ``interpreter`` appended after ``environment.json`` was
-written, by an older driver, are refused.  An older
-driver takes no lock, so this one cannot see it: point it at a work directory only once any
-older driver using it has exited.
+since the adopted environment is asserted by that invocation, not stamped by the runs.
+Records without ``interpreter`` appended after ``environment.json`` was written, by an
+older driver, are refused.  An older driver takes no lock, so this one cannot see it:
+point it at a work directory only once any older driver using it has exited.
 
 **The cap.** Runs are started longest first, by the build time the release's log prints.
 A run starts only if the CPU time the ledger records, plus the worst case of every run
