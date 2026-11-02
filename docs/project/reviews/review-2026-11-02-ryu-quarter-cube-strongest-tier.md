@@ -157,11 +157,11 @@ I recomputed the numbering (`c_citations.py`), and C cites it correctly.
 | Scale flows and T* | Definitions 3.20–3.22, Lemma 3.23 | Truncations of the one master flow; T_s = {T* ≤ s} exactly, which needs R1 decided once and “M before T” (Remark 3.34) | true |
 | Height identity | Theorem 4.2, Corollary 4.4 | q_y − m = −Σ(1 − cos φ_i) + Σ g_i cos φ_i, the first sum at most (sec α − 1) q_y because Σ cos φ_i ≤ q_y | true |
 | Quantization | Lemma 4.8, Theorem 4.11, Lemma 4.12, Theorem 4.13 | Any F_s path touching Bot(Z) puts both ramps of Z within w(s, Z; q) < w0 − 10^-12 of an integer; a square of Z(s) has a ramp height in H at distance ≥ w0; so no F_s path meets Bot(Z), and μ_Z ≡ 0 | true |
-| End collisions | Lemmas 5.5, 5.9, Proposition 5.10 | Per source–target pair, | E_{X,Y} |
+| End collisions | Lemmas 5.5, 5.9, Proposition 5.10 | Per source–target pair, \|E_{X,Y}\| ≤ δ tan\|Δ\| by injectivity and expansion of the exit coordinate; 40 tan\|Δ\| ≤ 41.933 θ(2 − θ) in both ranges of \|Δ\|; floor and ceiling pairs are disjoint because no square meets both {y ≤ h_max} and {y ≥ k − h_max} | true |
 | Shadow inequality | Theorem 6.9, Proposition 6.10 | The two bookkeeping identities; μ_Z ≤ c_Z by R1’s unique winner and slope ≥ 1; outside the finite set Exc, Sh = L_T + Λ − U; the wall loss of F_s is at most 2y tan α(s) | true |
-| Deaths, merges, overlap | Lemmas 7.4–7.11, Theorem 7.1, Corollary 7.2 | Two sources need δ ≤ ½ cos 2α_max (C6); at most two paths through a point; a double point lies in a δ × w_e rectangle above the upper left vertex; δ | D |
-| Tilt terminations | Lemmas 8.5–8.12, Theorem 8.3, Corollary 8.13 | Exit coordinates are injective with slope ≥ 1; the hull slit is waste (a square meeting it would project onto n_X in an interval shorter than δ); the vertical slits are disjoint components of the vertical waste; s_e ≥ θ_e | J′_e |
-| Per-scale count | Theorems 9.1, 9.2, Lemma 9.9 | Z(s) ⊂ ℝ × V_s and receives no F_s entry; integrating Σ c_Z ≤ N(s) + Λ*(s) over V_s gives | Z(s) |
+| Deaths, merges, overlap | Lemmas 7.4–7.11, Theorem 7.1, Corollary 7.2 | Two sources need δ ≤ ½ cos 2α_max (C6); at most two paths through a point; a double point lies in a δ × w_e rectangle above the upper left vertex; δ\|D\| ≤ \|waste ∩ S_b\| + δ Σ w_e; at most four squares per valley pair; the coefficients add to 1185.5002 ≤ 1185.6 (K = 9) and 1712.52 ≤ 1712.6 (K = 13) | true |
+| Tilt terminations | Lemmas 8.5–8.12, Theorem 8.3, Corollary 8.13 | Exit coordinates are injective with slope ≥ 1; the hull slit is waste (a square meeting it would project onto n_X in an interval shorter than δ); the vertical slits are disjoint components of the vertical waste; s_e ≥ θ_e \|J′_e\|²/2; Cauchy–Schwarz with Σ s_e ≤ W and Σ f_e ≤ 9W | true |
+| Per-scale count | Theorems 9.1, 9.2, Lemma 9.9 | Z(s) ⊂ ℝ × V_s and receives no F_s entry; integrating Σ c_Z ≤ N(s) + Λ*(s) over V_s gives \|Z(s)\| ≤ (εs + b_W)(N(s) + Λ*(s)); [R, Lemmas 3.4, 3.5] give \|Z(s)\| ≥ ((1−ε)s)^{3/4} ∫ f / c1 | true |
 | Integration | Theorem 10.3, Steps 1–12 | Kinds (i)–(iii) of lines; [R, Lemma 4.13] for kind (ii) and [R, Lemma 4.15] pointwise for kind (iii); two uses of Tonelli; the window integral ∫_y^{y/(1−ε)} s^{-7/4} ds gives invF; the bracket B and Ψ_π(k) of (10.3) | true |
 | Assembly | Lemma 11.1, Propositions 11.2, 11.5, 11.6 | Raising A, A′, C_Λ only lowers Ψ; φ′(k) > y1^{-1}(y1^{1/4} D1 − K_W/(2B)); the family π_n = (c0^opt, c1^opt, n, n^{-1/2}, n^{-1/4}) sends Ψ_∞(π_n) to c_∞, a supremum not attained; Corollary A by [R, Lemma 2.1] | true |
 
@@ -193,13 +193,13 @@ W.
 | --- | --- | --- | --- |
 | Parameters | Lemma 2.1 | π_θ meets (C0)–(C7), (Q1), (Q2) for 0 < θ ≤ β̄ and k ≥ 14: (C3) is 2^{-1/4}θ < θ; w0 < 1.13·10^-5; (C7) is 2 ≤ (k/2 − 3)/2 | true |
 | Choosing θ from W | Section 2.2 | Every result of Q used holds for each closed packing and each admissible π; θ(W) is a number fixed by the packing, the same for ρ𝒫, so the joint floor and ceiling statements apply | sound |
-| Tilt budget | Lemma 2.3 | On the disjoint height ranges I_j the line meets Z_j; [R, Lemma 4.13] with β̄ := θ on {ω < ½}, and | {ω ≥ ½} |
+| Tilt budget | Lemma 2.3 | On the disjoint height ranges I_j the line meets Z_j; [R, Lemma 4.13] with β̄ := θ on {ω < ½}, and \|{ω ≥ ½}\| ≤ 2W off it, give Σ a(Z_j)\|I_j\| ≤ (A/2 + 2θ)W | true |
 | One path | Lemma 2.4 | The pass segments’ height ranges are disjoint (heights increase strictly) and have length cos φ_j; Σ a(Z_j) ≤ B1 W with B1 = (Ā/2 + 2β̄)/cos β̄ | true |
-| Lateral drift | Lemma 2.5 | A pass moves a path sideways by | sin φ_j |
+| Lateral drift | Lemma 2.5 | A pass moves a path sideways by \|sin φ_j\| ≤ a(Z_j), and all gap segments together by at most δ; so L_W ≤ 2(B1W + δ) | true |
 | Quantization | Definition 2.6, Lemma 2.7 | D ≤ Σ φ_j²/2 ≤ (θ/2) B1 W ≤ τ1 for θ = min(β̄, 2τ1/(B1W)); at an entry candidate dist(q_y, ℤ) ≤ max(D, δ) ≤ τ1 | true |
-| Unreachable squares | Lemma 3.1 | A ramp height y with dist(y, ℤ) ≥ τ0 puts every point of Bot(S) at distance > τ0 − 1.0001β > τ1 from ℤ, using | z_y − y |
-| Short chords, budget, terminations | Lemmas 3.2–3.4 | [R, Lemmas 3.5, 4.15] give β | 𝒵_K |
-| Main inequality | Theorem 4.1 |  | ℋ |
+| Unreachable squares | Lemma 3.1 | A ramp height y with dist(y, ℤ) ≥ τ0 puts every point of Bot(S) at distance > τ0 − 1.0001β > τ1 from ℤ, using \|z_y − y\| ≤ sin a or \|z_y − (y − 1)\| ≤ sin a + (1 − cos a); so no entry candidate on S and μ_S ≡ 0 | true |
+| Short chords, budget, terminations | Lemmas 3.2–3.4 | [R, Lemmas 3.5, 4.15] give β\|𝒵_K\| ≥ (1 − ν0 − E*)\|K\|; integrating Q’s shadow inequality over (0, h) gives \|𝒵\| ≤ h(L_T + Λ_b); Q’s Theorem 8.3 with ζ ≡ θ, Theorem 7.1 and Proposition 5.10 give L_tot ≤ Ā′W/θ + L1W + 4δ | true |
+| Main inequality | Theorem 4.1 | \|ℋ\| = (1 − 2τ0)(k − 6) for both parities of k; the three kinds of lines; squares of 𝒵_{K_b} lie in ℝ × [0, k/2 − 1.9999] | true |
 | Reduction | Proposition 5.1 | β(k) and E fall with k, R⁺(k)/k does not rise (for p = ½ because (iv) keeps W ≤ W1, so 1/θ = 1/β̄), (1 − 2τ0)(k − 6)/k rises; the right side of (4.1) does not fall in W | true |
 | Liminf | Section 5 | With b optimal, R⁺(k)/k → γ^{3/2}(ĀĀ′B1/(2τ1(1 − ν0)))^{1/2}; max τ(1 − 2τ)² = 2/27 at τ = 1/6 gives c̄_∞ = ((4/27)/(ĀĀ′B1))^{1/3} | true |
 
