@@ -25797,7 +25797,8 @@ issues:
       request'
     author: HyukdongKim
     opened: '2026-10-25'
-    state: open
+    state: closed
+    closed: '2026-11-02'
     kind: result-report
     triage: done
     summary: >-
@@ -26078,6 +26079,44 @@ issues:
         id: E-hyukdongkim-804-s297-verify-exact
         status: confirmed
       beads: [think-ozx8, think-vv1q, think-ot5c, think-ikku, think-4rzl]
+    - url: https://github.com/jlevy/squares/issues/804#issuecomment-6568517923
+      date: '2026-11-02'
+      by: jlevy
+      kind: final
+      reported:
+      - result: exact-sides-held
+      - result: exact-sides-new
+        id: T-244
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: pending adoption
+      - result: configurations-172-263
+        id: T-244
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: pending adoption
+      - result: configurations-172-263
+        id: E-hyukdongkim-804-configurations-exact-feasibility
+        status: confirmed
+      - result: configurations-172-263
+        id: E-hyukdongkim-804-configurations-verify-exact
+        status: confirmed
+      - result: side-297
+        id: T-247
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: pending adoption
+      - result: side-297
+        id: E-hyukdongkim-804-s297-exact-feasibility
+        status: confirmed
+      - result: side-297
+        id: E-hyukdongkim-804-s297-verify-exact
+        status: confirmed
+      - result: negative-searches
+      beads: [think-3trq, think-ot5c, think-ikku, think-vv1q]
     close_when: >-
       The 88, 126 and 199 sides have been answered as values T-193 holds. The author's
       configurations at 172 and 263 are decided exactly (think-4rzl), and T-244 is validated, or
@@ -26152,6 +26191,22 @@ issues:
       waiting on think-ot5c and think-ikku, then a stage 4 review; and the t244 files ask
       still queued (think-4rzl). The deployed row was not fetched from the session host,
       whose proxy refuses squaremath.org.
+
+      The final comment, posted at 03:43:08Z on 2 November 2026
+      (issuecomment-6568517923) after #878 merged (eead891eb) and its Pages deployment
+      passed (run 41383509001, verify-deployment job 125081398725), was rendered with
+      check_requests --draft 804 from that main and reconciled with think-8r92's draft. It
+      reports route 1 at 297 (#876, merged as 43ad863b5; E-hyukdongkim-804-s297-exact-feasibility)
+      and the t244 bundle's seven files kept from the public copy at f480441e (#878), with
+      T-244 and T-247 each at V3/C3, confirmed, independently re-implemented, and pending
+      adoption, T-244 superseded at 172 by T-257. It says the project's verifier was written
+      by Claude agents, a system family the author also used (separate code and prompts, not
+      a clean room). It names what remains with its beads: adoption at 263 (think-3trq, on
+      think-ot5c and think-ikku), adoption at 297 (think-ot5c and think-ikku) and route A at
+      297 (think-vv1q). Nothing the author asked for was queued, check_requests --report on
+      main gave the issue closeable with a final comment, and it was closed as completed at
+      03:43:26Z. It asks no question. The deployed pages were not fetched from the session
+      host, whose proxy refuses squaremath.org; verify-deployment checked them.
   - number: 806
     title: 's(182) ≤ 13.970916436215: registration request'
     author: evand
