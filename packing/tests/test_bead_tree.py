@@ -397,15 +397,22 @@ def test_the_gate_reads_the_staged_house_adoptions(
     )
 
 
-def _guarded(monkeypatch: pytest.MonkeyPatch, off_main: list[str] | None) -> None:
+def _guarded(
+    monkeypatch: pytest.MonkeyPatch, off_main: list[str] | None, *, store: bool = True
+) -> None:
     """Records whose one deferral, an open issue's answer bead, names think-aaaa, and a
-    checkout whose deferral records differ from `origin/main` at `off_main`."""
+    checkout whose deferral records differ from `origin/main` at `off_main`. With `store`,
+    a bead store holding think-aaaa and think-bbbb, neither with a child."""
     named = [("result-requests.yaml open issue #836", "think-aaaa")]
     monkeypatch.setattr(check_bead_tree, "deferrals", lambda: named)
     monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
     monkeypatch.setattr(check_bead_tree, "adoption_deferrals", list)
     monkeypatch.setattr(check_bead_tree, "records_off_main", lambda: off_main)
     monkeypatch.setattr(check_bead_tree, "main_tip", lambda: "e36ecf29d 2026-11-01")
+    if store:
+        beads = [_bead("is-01aaaa", "open", "an answer"), _bead("is-01bbbb", "open", "free")]
+        found = (beads, "fixture", {"aaaa": "01aaaa", "bbbb": "01bbbb"})
+        monkeypatch.setattr(check_bead_tree, "load", lambda: found)
 
 
 def test_a_bead_the_records_on_main_still_name_may_not_close(
@@ -422,12 +429,102 @@ def test_a_bead_the_records_on_main_still_name_may_not_close(
     assert [line.split(";")[0] for line in shown if "HOLD" in line] == [
         "  HOLD result-requests.yaml open issue #836 names think-aaaa on main"
     ]
-    assert "  ok  no record on main names think-bbbb; it may close" in shown
+    assert "  ok  no record on main names think-bbbb and no live child; it may close" in shown
     assert shown[0] == (
         "  reading the deferral records at origin/main e36ecf29d 2026-11-01, as last fetched"
     )
     assert check_bead_tree.main([guard, "think-bbbb"]) == 0
     assert "ok  no record on main names think-bbbb" in capsys.readouterr().out
+
+
+def _tracker(root: Path, beads: dict[str, tuple[str, str, str]]) -> Path:
+    """A bead store on disk, as `tbd` lays out its sync worktree: alias -> (status, parent
+    alias or "", title). Returns the issues directory, which `WORKTREE` names."""
+    issues = root / "issues"
+    issues.mkdir()
+    (root / "mappings").mkdir()
+    (root / "mappings" / "ids.yml").write_text(
+        "".join(f"{alias}: 01{alias}\n" for alias in beads), encoding="utf-8"
+    )
+    for alias, (status, parent, title) in beads.items():
+        parent_id = f"is-01{parent}" if parent else "null"
+        (issues / f"is-01{alias}.md").write_text(
+            f"---\nid: is-01{alias}\ntitle: {title}\nstatus: {status}\n"
+            f"parent_id: {parent_id}\n---\nbody\n",
+            encoding="utf-8",
+        )
+    return issues
+
+
+def test_a_bead_with_an_open_child_may_not_close(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """think-ysi4: on 2 November the coordinator closed think-4rzl once the guard said no
+    record named it, and its open child think-3trq then sat under a closed parent, which
+    failed this check on `main` and every branch until it was re-parented. A child the tree
+    treats as live -- open, in progress or blocked -- holds its parent open; a closed or a
+    deferred child does not."""
+    _guarded(monkeypatch, [], store=False)
+    store = _tracker(
+        tmp_path,
+        {
+            "pppp": ("in_progress", "", "the epic being closed"),
+            "cccc": ("open", "pppp", "an open child"),
+            "dddd": ("in_progress", "pppp", "a started child"),
+            "eeee": ("blocked", "pppp", "a blocked child"),
+            "ffff": ("closed", "pppp", "a closed child"),
+            "gggg": ("deferred", "pppp", "a deferred child"),
+            "bbbb": ("open", "", "a bead with no children"),
+        },
+    )
+    monkeypatch.setattr(check_bead_tree, "WORKTREE", store)
+    guard = check_bead_tree.BEFORE_CLOSE
+    assert check_bead_tree.main([guard, "think-pppp", "think-bbbb"]) == 1
+    shown = capsys.readouterr().out.splitlines()
+    assert [line.split(";")[0] for line in shown if "HOLD" in line] == [
+        "  HOLD think-pppp has a live child, think-cccc (open) 'an open child'",
+        "  HOLD think-pppp has a live child, think-dddd (in_progress) 'a started child'",
+        "  HOLD think-pppp has a live child, think-eeee (blocked) 'a blocked child'",
+    ]
+    holds = [line for line in shown if "HOLD" in line]
+    assert all("re-parent it or close it first" in line for line in holds)
+    # Review A3 of #882: the tree check fails only an open bead under a closed parent, so
+    # only the open child's hold says so; the others say what holding the parent keeps.
+    assert "fails check_bead_tree" in holds[0]
+    assert all("fails check_bead_tree" not in line for line in holds[1:])
+    assert all("every live child under a live parent" in line for line in holds)
+    assert not any("think-pppp" in line and "may close" in line for line in shown)
+    assert "  ok  no record on main names think-bbbb and no live child; it may close" in shown
+    assert check_bead_tree.main([guard, "think-bbbb"]) == 0
+    assert check_bead_tree.main([guard, "think-ffff"]) == 0
+    capsys.readouterr()
+    # A bead named twice is read once: each hold and each verdict is printed once.
+    assert check_bead_tree.main([guard, "think-pppp", "think-bbbb", "think-pppp"]) == 1
+    shown = capsys.readouterr().out.splitlines()
+    assert len([line for line in shown if "HOLD" in line]) == 3
+    assert len([line for line in shown if "think-bbbb" in line and "may close" in line]) == 1
+
+
+@pytest.mark.parametrize(
+    ("store", "expected"),
+    [(None, "no bead store"), ([], "names no bead in the store")],
+    ids=["no store", "an alias the store does not hold"],
+)
+def test_the_close_guard_refuses_when_it_cannot_read_the_children(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    store: list[dict[str, object]] | None,
+    expected: str,
+) -> None:
+    """Without the store, or without the bead in it, the guard cannot say the bead has no
+    live child, so it says it cannot tell (exit 2) rather than that the bead may close."""
+    _guarded(monkeypatch, [])
+    found = None if store is None else (store, "fixture", {})
+    monkeypatch.setattr(check_bead_tree, "load", lambda: found)
+    assert check_bead_tree.main([check_bead_tree.BEFORE_CLOSE, "think-bbbb"]) == 2
+    shown = capsys.readouterr()
+    assert expected in shown.err
+    assert "may close" not in shown.out
 
 
 @pytest.mark.parametrize(

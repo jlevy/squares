@@ -13,6 +13,11 @@ pre-commit:
     # transparent rather than a gate the author has to satisfy by hand.
     # Formatting drift deliberately does NOT fail CI; it is fixed here instead.
     #
+    # One thing does fail the commit: `make format` first runs `table-cells-check`, which
+    # refuses a table row with more cells than its header, naming the file and line,
+    # because the pinned formatter would silently drop the extra cells (think-7y5x).
+    # Write a bar inside a cell as `\|`, or in math as `\lvert` and `\rvert`.
+    #
     # Why the whole repo (`make format`) and not `{staged_files}`?
     # flowmark reads .flowmarkignore relative to its target argument, so passing
     # explicit file paths bypasses the exclusion list. That would be actively

@@ -1668,10 +1668,13 @@ each held open only by validation the project owned (#420, #428, #446, #594, #60
    --before-close think-xxxx` from `packing/` on `main`, after `git fetch origin main`.
    It names each record on `main` that still names the bead, and refuses a checkout
    whose records are not `main`’s, since a branch that drops the bead has not merged.
-   A `validation` bead stays open until the review or replay it owns has landed; then
-   drop the field (the result is confirmed or refuted) or name the bead that takes over,
-   post the follow-up the moved rung owes, and close the bead by the same guard once
-   that change has merged.
+   It also names each live child of the bead (open, in progress or blocked) from the
+   bead store: re-parent or close each one first, since a parent closed over an open
+   child fails `check_bead_tree` on every branch, as closing think-4rzl over think-3trq
+   did on 2 November 2026 (think-ysi4). A `validation` bead stays open until the review
+   or replay it owns has landed; then drop the field (the result is confirmed or
+   refuted) or name the bead that takes over, post the follow-up the moved rung owes,
+   and close the bead by the same guard once that change has merged.
 
 Each six-hourly check-in of a running pass does the same.
 Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1;

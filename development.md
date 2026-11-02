@@ -2394,10 +2394,13 @@ section before changing either.
 Markdown is owned by Flowmark at repository root.
 Durable documentation follows the common documentation guidelines and carries their
 footer. Run the repository hook or `make format`; do not introduce a second Markdown
-formatter. The auto-staging commit hook runs on Markdown and Python source changes and
-checks paper titles against the reviewed Chicago title case in `render_overview.PAPERS`
-and `render_overview.REFERENCED_PAPER_TITLES`. The reference check covers authored
-reader documents and article templates while preserving quoted source text and archives.
+formatter. `make format` first runs `devtools.check_table_cells`, which refuses a table
+row with more cells than its header, since the pinned formatter would drop the extra
+cells without a word.
+The auto-staging commit hook runs on Markdown and Python source changes and checks paper
+titles against the reviewed Chicago title case in `render_overview.PAPERS` and
+`render_overview.REFERENCED_PAPER_TITLES`. The reference check covers authored reader
+documents and article templates while preserving quoted source text and archives.
 Generated version histories use the same Flowmark typography before insertion into the
 HTML and Markdown editions; formatting the source Markdown alone cannot reach prose
 stored in Python metadata.

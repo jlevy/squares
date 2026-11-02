@@ -250,6 +250,14 @@ Formatting drift deliberately **does not fail CI**. It is fixed at commit time i
 so style never blocks a build.
 `make format-check` exists for ad-hoc checking, not as a gate.
 
+One thing does fail, at commit and in CI: **a table row with more cells than its
+header**. The pinned formatter reads every unescaped `|` in a row as a column separator,
+`$|x|$` included, and silently drops each cell past the header’s count, or leaves the
+whole file unformatted when a dropped cell holds code or math.
+`devtools.check_table_cells` runs before it, as a prerequisite of `make format`, and in
+the fast tier, naming the file and line.
+Write a bar inside a cell as `\|`, or in math as `\lvert` and `\rvert` (think-7y5x).
+
 Two rules worth knowing before changing any of this:
 
 - **Exclusions are evidence-based, not precautionary.** The policy is to format the
