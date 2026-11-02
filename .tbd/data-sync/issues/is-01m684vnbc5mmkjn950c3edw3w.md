@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 98
+version: 99
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T14:30:39.354Z
+updated_at: 2026-11-02T15:47:27.041Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -172,3 +172,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 ~14:00: correction: release.lean-lang.org is not needed (the Lean toolchain installs from the GitHub release asset); the only host the Lean builds need is lakecache.blob.core.windows.net (Mathlib cache), already on the owner allow-list item. #887 review A: no blockers, A1-A5/A7 should-fix before merge (controls must fail for the intended reason; statements checked; run re-hashes parts; forged receipts refused; OR-16 entry replaced by blob bindings) sent back to L29.
 
 2026-11-02 14:28: renewal. Sweep intake33 run; no new issues since 12:50Z. L29 (#887 addressing), L30 running.
+
+2026-11-02 15:45: renewal. Sweep intake34 run; no new issues since 14:20Z. Open: #886 (L30, draft), #887 (L29 addressing).
