@@ -5,7 +5,7 @@ title: "Answer Sungjoon Ryu: two asymptotic deficiency preprints (#414)"
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: codex@spud10.local
 labels:
   - result-import
@@ -14,11 +14,13 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:22:22.715Z
-updated_at: 2026-11-02T04:28:29.739Z
+updated_at: 2026-11-02T05:18:20.596Z
 started_at: 2026-10-18T08:47:56.034Z
 ---
 
 ## Notes
+
+2026-11-02, lane L25 (bold-ritchie-l25): #414's final comment is posted and the issue closed. Posted at 05:11:12Z, https://github.com/jlevy/squares/issues/414#issuecomment-6569593647, after #879 merged (f54c74f6b) and its Pages run 41391360284 passed verify-deployment (job 125105691468, 6,036 of 6,036 checks). Rendered with check_requests --draft 414 from that main and reconciled with think-u1kq's L23 draft; a stray pair of backticks the post put around the receipts link was removed at 05:11:46Z, and the comment then read back identical to the draft. check_requests --report on main gave #414 closeable with a final comment; closed as completed at 05:11:58Z. The reply (kind final, beads [think-k3tk]) and the close are recorded in packing/campaign/result-requests.yaml on draft PR #881 (claude/bold-ritchie-xo28us-l25, labels intake + S1). Not closed here: the coordinator closes this bead after #881 merges and check_bead_tree --before-close passes.
 
 ## Stage 7 draft for the strongest-tier review, 2026-11-02 (think-yf8j, lane L23) — not posted
 
