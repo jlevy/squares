@@ -5,7 +5,7 @@ title: Review Ryu's quarter-power and cube-root preprint chains, statement conve
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: bold-ritchie-l23
 labels:
   - validation
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-26T05:39:55.812Z
-updated_at: 2026-11-02T01:53:36.425Z
+updated_at: 2026-11-02T03:09:59.749Z
 started_at: 2026-11-02T01:53:36.425Z
 ---
 The review #414's ask still needs: "Review the full preprint chain, statement conventions and numerical constants" of Sungjoon Ryu's quarter-power and cube-root deficiency preprints (squarepacker/k2-minus-c-quarter abbedcf, 5,471 TeX lines; squarepacker/k2-minus-c-cube-root 15045f9, 584 lines; both v1.0, retained in packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/ and squarepacker-k2-minus-c-cube-root-2026-10-07/). Opened on 26 October 2026 by w-imports-1026 to own the ask in place of think-6ptr, an in_progress lane bead under a delegate that is gone (codex@spud10.local, last update 18 October).
@@ -29,3 +29,7 @@ What is retained and done: the 8 October review (docs/project/reviews/review-202
 - Depends on: nothing; think-k3tk's per-box labelling stays a separate obligation the review names.
 - Done when: the review is mapped, #414's ask in result-requests.yaml is marked done with its verdict, and the reply is posted.
 - Machine note: none; reading only.
+
+## Notes
+
+2026-11-02, lane L23 (bold-ritchie-l23): review done, draft PR #879 (claude/bold-ritchie-xo28us-l23), labels intake + S2. Verdict: accepted, both preprints, conditional on the v1.2 lemmas, and for Theorem A and C's Theorem 1.1 on v1.2 Lemma 4.10's box computation (think-k3tk). Eight notes F1-F8, no defect or gap. Q's supplementary Tables 4, 5 and Section 12.6 reproduce (118 of 118); all 108 predicates of quarter_cube_constants.py hold on the review's own intervals. #414's ask is done on the branch. Remaining for 'done when': merge, then post the reply drafted in think-u1kq's notes (stage 7). Not closed by the lane.
