@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 104
+version: 105
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T18:58:38.386Z
+updated_at: 2026-11-02T19:55:05.114Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -184,3 +184,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 18:00: renewal. L31 posted replies on #446, #594, #610 (~17:58Z); sweep intake36 lists them as unrecorded plus #446 T-178 follow-up, all in L31 record PR. No new issues.
 
 2026-11-02 18:52: renewal (session resumed after a container restart; tools intact). Merged #888 (e6e8d5772): #446/#594/#610 follow-ups recorded. 45 PRs merged this pass. Sweep intake37 clean. Old worktrees removed. L32 started: think-u0av (T-176 s(39) census; T-179 s(145) only within cap), think-r333 (T-132 s(29)).
+
+2026-11-02 19:53: renewal. Sweep intake38 run; no new issues since 18:50Z. L32 running.
