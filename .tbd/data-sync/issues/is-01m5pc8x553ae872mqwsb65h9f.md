@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: open
 priority: 1
-version: 18
+version: 19
 delegate: null
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: blocked
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-11-02T01:09:46.751Z
+updated_at: 2026-11-02T02:13:22.079Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -109,3 +109,6 @@ The rows above 1024 (think-llit) and the import's earlier questions stay open on
 
 2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Waits on the author's answers to the five credit questions of 24 and 25 October (#763's awaiting_author; #763 is blocked: author on main, and the sweep lists the chase-or-withdraw decision on its own 14 days on), on the deletion bound at 683 (think-2z2n, which waits on think-kzme), and on #763's rows above 1024 (think-llit). PR #857, the reply record, merged on 31 October (4ed88d160) and finished only the reply. Not done: check_bead_tree --before-close think-ptkk exits 1, since #763 names it on main as its answer bead. Held (`hold: blocked`), and the claim of bold-ritchie-l7, an ended session of an earlier lane or coordinator, released (status open, no delegate), so the bead names no one acting on it while it waits; the sweep had read the lapsed claim as stalled every two days since 2 November.
 blocked_on: think-llit, think-2z2n
+
+2026-11-02 bold-ritchie-l21 (think-n20n, addressing review A of #877, A4): the author's wait goes on the blocked_on line too. The five credit questions of 24 and 25 October still await Couzo under #763's awaiting_author, and #763 is blocked: author on main, so this bead does not wait only on beads, and the sweep reads its own silence again: seven days without an update, besides AWAITED_DAYS for the questions themselves. think-2z2n is now held on think-kzme in turn (review A10). This line replaces the one in the note above.
+blocked_on: think-llit, think-2z2n, jlevy/squares#763 (the author's answers)
