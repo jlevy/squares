@@ -51,8 +51,8 @@ The other 22 are pinned by digest only, each with its reason in the record:
 Each release asset holds the candidate, the check2 receipt, run log and control, the
 sealed inner bundle, the pre-publication receipt and the nested verifier archive
 `sqverify-proof-net-fe12e036c.tar.gz`, and the receipts below inventory every member.
-The n = 39 and n = 44 assets are not retained: they stay with their author, pinned here
-by size and digest.
+The n = 44 asset is not retained: it stays with its author, pinned here by size and
+digest.
 
 The n = 37 asset’s data members are retained under
 [`release/`](release/certificates/mixed_n37_L64975/), at their paths in the asset, so
@@ -60,12 +60,16 @@ that the census can read the candidate (T-178’s replay, think-w76a, 2 November
 `devtools.fine_net_followup retain` held the asset to its pinned size and SHA-256 and
 copied six members: the candidate (as deterministic gzip, 32,844 bytes for 173,053),
 the check2 receipt, run log, control and control log, and the pre-publication receipt.
-The nested verifier archive and the sealed inner bundle are pinned by digest only, with
-their reasons, in the [retention record](acquisition/release-assets.json), which
-`devtools.fine_net_followup check-retained` re-derives from the packet.
-The six members come to about 230 kB, within `OR-18`’s size rule, by the owner’s answer
-of 17 October to retain fine-net candidates where the census reads them, as the n31 and
-#446 release packets do.
+The n = 39 asset’s six data members are retained the same way under
+[`release/`](release/certificates/mixed_n39_L66625/) (T-176’s census, think-567s, 2
+November 2026), the candidate as deterministic gzip of the 192,393 bytes whose SHA-256,
+`03eef5c3…`, the n = 39 premises receipt pins.
+In both, the nested verifier archive and the sealed inner bundle are pinned by digest
+only, with their reasons, in the [retention record](acquisition/release-assets.json),
+which `devtools.fine_net_followup check-retained` re-derives from the packet.
+Each asset’s six members come to about 230 kB, within `OR-18`’s size rule, by the
+owner’s answer of 17 October to retain fine-net candidates where the census reads them,
+as the n31 and #446 release packets do.
 
 ## What Was Checked
 

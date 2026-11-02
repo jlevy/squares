@@ -1316,17 +1316,37 @@ def test_the_446_release_packet_is_read_from_its_retained_release_members() -> N
     assert packet not in census.INDEPENDENT_MIXED_PACKETS
 
 
-def test_the_13_october_packet_is_read_from_its_retained_n37_members() -> None:
-    """T-178's mixed_n37_L64975 is read from the 13 October packet's release members, as
-    the n31 packet's is. That packet's n39 and n44 members are not retained, so it holds
-    one case, and it shares the producer's crate."""
+def test_the_13_october_packet_is_read_from_its_retained_n37_and_n39_members() -> None:
+    """T-178's mixed_n37_L64975 and T-176's mixed_n39_L66625 are read from the 13 October
+    packet's release members, as the n31 packet's is. That packet's n44 member is not
+    retained, so it holds two cases, and it shares the producer's crate."""
     packet = "wand125-fine-net-n37-n39-n44-2026-10-13"
     found = {name: case for name, case in cases().items() if case.packet == packet}
-    assert list(found) == ["mixed_n37_L64975"]
-    case = found["mixed_n37_L64975"]
+    assert sorted(found) == ["mixed_n37_L64975", "mixed_n39_L66625"]
     root = census.WEB / packet / "release/certificates"
-    assert case.candidate == root / "mixed_n37_L64975" / "candidate.json.gz"
-    assert (case.n, case.side) == (37, "2599/400")
+    for name, n, side in (
+        ("mixed_n37_L64975", 37, "2599/400"),
+        ("mixed_n39_L66625", 39, "533/80"),
+    ):
+        case = found[name]
+        assert case.candidate == root / name / "candidate.json.gz"
+        assert (case.n, case.side) == (n, side)
+        assert census.net_directions(case) == 2073
+    assert packet in census.SHARED_CRATE_PACKETS
+    assert packet not in census.INDEPENDENT_MIXED_PACKETS
+
+
+def test_the_10_october_n29_packet_is_read_from_its_retained_members() -> None:
+    """T-132's mixed_n29_L582 is read from the 10 October n29 packet's release members,
+    which `fine_net_followup retain` copied from the pinned asset, and the packet shares
+    the producer's crate, as the other fine-net release packets do."""
+    packet = "wand125-fine-net-n29-2026-10-10"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert list(found) == ["mixed_n29_L582"]
+    case = found["mixed_n29_L582"]
+    root = census.WEB / packet / "release/certificates"
+    assert case.candidate == root / "mixed_n29_L582" / "candidate.json.gz"
+    assert (case.n, case.side) == (29, "291/50")
     assert census.net_directions(case) == 2073
     assert packet in census.SHARED_CRATE_PACKETS
     assert packet not in census.INDEPENDENT_MIXED_PACKETS
