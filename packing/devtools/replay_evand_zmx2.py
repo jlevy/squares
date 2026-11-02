@@ -46,6 +46,16 @@ states, builds the binary with ``cargo``, and runs ``zmx2 cert`` under
     records, through ``--resume``). ``--only`` runs the named jobs, so the list can be
     split across processes. ``zm_mixed.py`` needs numpy, so ``--python`` (default: this
     interpreter) must have it; it runs with ``-I``.
+``zm-control --case N --scale P/Q --work DIR --out OUT [--cell 6 BOUNDS] [--pose CX CY U]``
+    Stage 4's negative control for ``zm_mixed.py`` on a split cover: stages it as
+    ``zm-mixed`` does, writes the cover with every mass scaled by ``P/Q`` (``scale``),
+    and runs ``zm_mixed.py cert`` with the same flags on one sub-root cell for the
+    published cover and for the scaled one, then ``zm_mixed.py pose`` on each at one
+    pose, writing ``OUT/<name>_zm_control_<which>_<cell>.log`` and ``.jsonl`` and
+    ``OUT/<name>_zm_pose_<which>_at_scaled-P-Q.log``. The cell and pose default to the
+    retained control's (``ZM_CONTROLS``); ``--time-limit`` bounds each ``cert`` run. A
+    retained control must certify the published cover and leave the scaled one with
+    uncertified boxes, which ``tests/test_replay_controls.py`` holds.
 
 What a run decides is read afterwards by ``devtools.audit_evand_mixed_covers``. This
 tool decides nothing about a cover: it only guarantees which bytes were run.
@@ -556,6 +566,56 @@ def mutate(text: str, kind: str) -> Mutation:
     return Mutation(out, Fraction(removed, mass_denominator), len(dropped), detail)
 
 
+def scale(text: str, factor: Fraction) -> Mutation:
+    """Every mass of a mixed cover times ``factor``, with ``0 < factor < 1``.
+
+    Each point's and segment's weight is multiplied by the factor's numerator and the
+    mass denominator by its denominator; no other row changes, and each rewritten row
+    keeps its comment. Every mass shrinks by the same factor, so a D4-invariant cover
+    stays invariant. ``removed`` is the total lost, ``(1 - factor)`` times the total, in
+    the cover's own unit; ``rows`` counts the weight rows rewritten.
+    """
+    if not 0 < factor < 1:
+        raise ValueError(f"the factor {factor} is not in (0, 1)")
+    lines = text.splitlines(keepends=True)
+    rows = [(i, line.split("#", 1)[0].split()) for i, line in enumerate(lines)]
+    rows = [(i, tokens) for i, tokens in rows if tokens]
+    if not rows or rows[0][1] != ["mixed", "1"]:
+        raise ValueError("scale reads a cover in the mixed format")
+    widths = [2, 1, 1, 1]
+    if len(rows) < 6 or [len(tokens) for _, tokens in rows[1:5]] != widths:
+        raise ValueError("expected the side, D, W and the point count after the format row")
+    points = int(rows[4][1][0])
+    weights = list(range(5, 5 + points))
+    segment_count = 5 + points
+    if segment_count >= len(rows) or len(rows[segment_count][1]) != 1:
+        raise ValueError("expected the segment count after the points")
+    first = segment_count + 1
+    segments = list(range(first, first + int(rows[segment_count][1][0])))
+    if len(rows) != segment_count + len(segments) + 2 or rows[-1][1] != ["0"]:
+        raise ValueError("expected one row, a polygon count of 0, after the segments")
+    if any(len(rows[r][1]) != 3 for r in weights) or any(
+        len(rows[r][1]) != 5 for r in segments
+    ):
+        raise ValueError("a point row is not three integers or a segment row not five")
+    new: dict[int, str] = {}
+    total = 0
+    for r in (*weights, *segments):
+        index, tokens = rows[r]
+        values = [int(token) for token in tokens]
+        total += values[-1]
+        new[index] = _rewrite(lines[index], [*values[:-1], values[-1] * factor.numerator])
+    mass_index, (mass_denominator,) = rows[3][0], [int(token) for token in rows[3][1]]
+    new[mass_index] = _rewrite(lines[mass_index], [mass_denominator * factor.denominator])
+    out = "".join(new.get(i, line) for i, line in enumerate(lines))
+    detail = (
+        f"scales every mass by {factor}: {len(weights)} point and {len(segments)} "
+        "segment weights"
+    )
+    removed = Fraction(total, mass_denominator) * (1 - factor)
+    return Mutation(out, removed, len(weights) + len(segments), detail)
+
+
 def control_case(
     n: int,
     kind: str,
@@ -730,6 +790,170 @@ def zm_mixed_case(
     return worst
 
 
+@dataclass(frozen=True, slots=True)
+class ZmControl:
+    """A stage 4 control for ``zm_mixed.py``: a scaled cover and where it is refused."""
+
+    #: Every mass is multiplied by this (``scale``).
+    factor: Fraction
+    #: The one sub-root cell run, as a jobs line gives it: cx, cy and u, low and high.
+    cell: tuple[str, str, str, str, str, str]
+    #: A pose in that cell where the scaled cover captures less than one, exactly.
+    pose: tuple[str, str, str]
+
+    @property
+    def tag(self) -> str:
+        """The mutation's name in file names: ``scaled-P-Q``."""
+        return f"scaled-{self.factor.numerator}-{self.factor.denominator}"
+
+    @property
+    def cell_name(self) -> str:
+        """The cell by its lower corner in grid units: ``cx*20``, ``cy*20``, ``u*32``."""
+        cx, cy, u = (Fraction(self.cell[i]) for i in (0, 2, 4))
+        corner = (cx * 20, cy * 20, u * 32)
+        if any(value.denominator != 1 for value in corner):
+            raise ValueError(f"{self.cell} is not a cell of the 1/20 x 1/20 x 1/32 grid")
+        return "c" + "-".join(str(value.numerator) for value in corner)
+
+
+#: The retained ``zm_mixed.py`` controls of the split covers, in ``receipts/controls/`` of
+#: each case's packet. Each factor puts the scaled cover just below one at a low pose of
+#: the published cover, so its hole is a small neighbourhood of that pose, and
+#: ``zm_mixed.py`` at the source's depth limit of 24 must refuse the one cell holding it,
+#: where it certifies the published cover with the same flags. A deeper hole is not
+#: affordable at that limit: the 16 October review's 199/200 mutant ran 15 minutes on one
+#: cell without a verdict (its finding F8). The first control of each case is at the
+#: lowest pose that review's descent found in the D4 region (``k2m5_review.py poses``), in
+#: a cell ``zmx2`` decides in the composite; the second at the lowest pose its
+#: ``k2m5_review.py cellmin`` found in one of the cells ``zm_mixed.py`` decides there
+#: (jobs 056 of s(76) and 153 of s(95)). Each factor is the largest ``P/50000`` that puts
+#: the pose below one. Run on 2 November 2026 by ``zm-control``.
+ZM_CONTROLS: dict[int, tuple[ZmControl, ...]] = {
+    76: (
+        ZmControl(
+            Fraction(49979, 50000),
+            ("7/2", "71/20", "1/2", "11/20", "0", "1/32"),
+            (
+                "7168055663917/2048000000000",
+                "204836586297/409600000000",
+                "3663019/102400000000",
+            ),
+        ),
+        ZmControl(
+            Fraction(49301, 50000),
+            ("89/20", "9/2", "11/5", "9/4", "1/4", "9/32"),
+            (
+                "364560116595781/81920000000000",
+                "367923197340749/163840000000000",
+                "22907851734307/81920000000000",
+            ),
+        ),
+    ),
+    95: (
+        ZmControl(
+            Fraction(49831, 50000),
+            ("7/2", "71/20", "5/2", "51/20", "0", "1/32"),
+            (
+                "3584027897753/1024000000000",
+                "51202117179/20480000000",
+                "141141631/1024000000000",
+            ),
+        ),
+        ZmControl(
+            Fraction(49207, 50000),
+            ("91/20", "23/5", "11/5", "9/4", "13/32", "7/16"),
+            (
+                "149439156976813/32768000000000",
+                "73383743219813/32768000000000",
+                "35250313694903/81920000000000",
+            ),
+        ),
+    ),
+}
+
+
+def zm_control_case(
+    n: int,
+    control: ZmControl,
+    *,
+    work: Path,
+    out: Path,
+    python: str = sys.executable,
+    time_limit: float | None = None,
+) -> int:
+    """Run ``zm_mixed.py`` on one cell for the published and the scaled cover of case ``n``.
+
+    Each cover gets ``zm_mixed.py cert`` with the source's flags on ``control.cell`` and
+    ``zm_mixed.py pose`` at ``control.pose``, each under ``devtools.replay_receipt``:
+    ``OUT/<name>_zm_control_<which>_<cell>.log`` and ``.jsonl``, and
+    ``OUT/<name>_zm_pose_<which>_at_<tag>.log``, where ``which`` is ``published`` or the
+    control's tag. Returns the largest exit status.
+    """
+    case = CASES[n]
+    stage = work / "zm_mixed"
+    for name, retained, expected in ZM_MIXED_FILES:
+        _write_checked(stage / name, _checked(retained.read_bytes(), expected, str(retained)))
+    data = _checked(
+        gzip.decompress(case.cover.read_bytes()), case.sha256, f"{case.cover} (decompressed)"
+    )
+    stem = case.cover.name.removesuffix(".gz").removesuffix(".txt")
+    published = stage / f"{stem}.txt"
+    _write_checked(published, data)
+    mutation = scale(data.decode("ascii"), control.factor)
+    mutated = mutation.text.encode("ascii")
+    digest = hashlib.sha256(mutated).hexdigest()
+    scaled = stage / f"{stem}_{control.tag}.txt"
+    _write_checked(scaled, mutated)
+    out.mkdir(parents=True, exist_ok=True)
+    version = subprocess.run(
+        [python, "--version"], capture_output=True, text=True, check=True
+    ).stdout.strip()
+    staged = (
+        "zm_mixed/ staged by devtools.replay_evand_zmx2 zm-control: "
+        + ", ".join(f"{name} {sha}" for name, _, sha in ZM_MIXED_FILES)
+        + " (retained evand packets); cover "
+    )
+    covers = (
+        (
+            "published",
+            published,
+            f"{case.sha256} decompressed from {case.cover.relative_to(REPO)}",
+        ),
+        (
+            control.tag,
+            scaled,
+            f"{digest}, the {control.tag} mutation (scale) of {case.sha256}: {mutation.detail}",
+        ),
+    )
+    worst = 0
+    for which, cover, described in covers:
+        name = f"{case.name}_zm_control_{which}_{control.cell_name}"
+        records = out / f"{name}.jsonl"
+        records.unlink(missing_ok=True)
+        fields = replay_receipt.run(
+            zm_mixed_command(python, stage, cover, control.cell, records),
+            receipt=out / f"{name}.log",
+            cwd_label=staged + described,
+            python_note=f"{python} ({version}), run with -I",
+            chdir=stage,
+            time_limit=time_limit,
+        )
+        worst = max(worst, int(fields["exit"]))  # type: ignore[call-overload]
+        cx, cy, u = control.pose
+        fields = replay_receipt.run(
+            [
+                *(python, "-I", "-u", str(stage / "zm_mixed.py"), "pose", str(cover)),
+                *("--cx", cx, "--cy", cy, "--u", u),
+            ],
+            receipt=out / f"{case.name}_zm_pose_{which}_at_{control.tag}.log",
+            cwd_label=staged + described,
+            python_note=f"{python} ({version}), run with -I",
+            chdir=stage,
+        )
+        worst = max(worst, int(fields["exit"]))  # type: ignore[call-overload]
+    return worst
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     commands = parser.add_subparsers(dest="command", required=True)
@@ -766,11 +990,36 @@ def main(argv: Sequence[str] | None = None) -> int:
     zm_parser.add_argument("--out", type=Path, required=True)
     zm_parser.add_argument("--only", nargs="+", help="job ids from the source's jobs.txt")
     zm_parser.add_argument("--python", default=sys.executable, help="an interpreter with numpy")
+    zc_parser = commands.add_parser(
+        "zm-control", help="zm_mixed.py on one cell, published and scaled (stage 4)"
+    )
+    zc_parser.add_argument("--case", type=int, choices=sorted(ZM_MIXED_JOBS), required=True)
+    zc_parser.add_argument("--scale", type=Fraction, required=True, help="the factor P/Q")
+    zc_parser.add_argument("--cell", nargs=6, help="default: the retained control's")
+    zc_parser.add_argument("--pose", nargs=3, help="default: the retained control's")
+    zc_parser.add_argument("--work", type=Path, required=True)
+    zc_parser.add_argument("--out", type=Path, required=True)
+    zc_parser.add_argument("--python", default=sys.executable, help="an interpreter with numpy")
+    zc_parser.add_argument("--time-limit", type=float, help="seconds for each cert run")
     args = parser.parse_args(argv)
     try:
         if args.command == "build":
             print(build(args.checker, args.work.resolve()))
             return 0
+        if args.command == "zm-control":
+            retained = {c.factor: c for c in ZM_CONTROLS.get(args.case, ())}.get(args.scale)
+            cell = tuple(args.cell) if args.cell else retained.cell if retained else None
+            pose = tuple(args.pose) if args.pose else retained.pose if retained else None
+            if cell is None or pose is None:
+                raise SystemExit("a new control needs --cell and --pose")
+            return zm_control_case(
+                args.case,
+                ZmControl(args.scale, cell, pose),  # type: ignore[arg-type]
+                work=args.work.resolve(),
+                out=args.out.resolve(),
+                python=args.python,
+                time_limit=args.time_limit,
+            )
         if args.command == "zm-mixed":
             return zm_mixed_case(
                 args.case,

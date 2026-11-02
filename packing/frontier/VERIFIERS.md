@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **224** programs: **52** external and **172** first-party; **150** decide claims and **74** check premises.
-- **677** of **858** evidence entries name the programs that verified them: 322 independently re-implemented, 289 reproduced with the producer’s code, 45 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **678** of **859** evidence entries name the programs that verified them: 322 independently re-implemented, 289 reproduced with the producer’s code, 46 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -166,7 +166,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 162 | 29 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 163 | 30 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 8 | 8 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 12 | 11 |
@@ -3060,6 +3060,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-wand125-fine-net-n84-94225-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-206 |
 | `E-wand125-fine-net-n85-9475-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-207 |
 | `E-wand125-fine-net-n31-59775-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-232 |
+| `E-wand125-fine-net-n37-64975-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-178 |
 
 ### `V-replay-chelokot-lean`
 
@@ -3078,7 +3079,7 @@ Clones chelokot's archive at the pinned commit, checks the toolchain, manifest, 
 
 **devtools.replay_evand_zmx2** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls; for a split cover it also stages zm_mixed.py and the files it imports, digests checked, and runs it on the source's sub-roots.
+Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls; for a split cover it also stages zm_mixed.py and the files it imports, digests checked, and runs it on the source's sub-roots, and its zm-control command runs zm_mixed.py's own controls: the published cover and a cover with every mass scaled below one, on one cell at the source's settings, and the exact capture of both at a pose in that cell.
 
 - Source: [`packing/devtools/replay_evand_zmx2.py`](../../packing/devtools/replay_evand_zmx2.py)
 - Versions run: this repository's commits, which Git holds

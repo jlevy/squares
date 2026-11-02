@@ -40,11 +40,13 @@ from tests import site_browser
 #: the full Valid7 replay and the built Lean reduction (T-064) proved n = 97, 118, 141,
 #: 166, 193, 222, 253, 286 and 321, which meets the reported lane at every corpus.
 #: 2026-10-31: the zmx2 replays of Khalili and Gharabaghi's cover (T-252) proved n = 44 in
-#: both lanes, one more in every corpus.
+#: both lanes, one more in every corpus. 2026-11-02: zm_mixed.py's scaled-cover controls
+#: brought Greff's covers (T-184, T-191) to C3, which proved n = 76 and 95, two more in
+#: every corpus, and the s(95) cover's total below 96 proved n = 96 too (T-191), one more.
 FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
-    "n=1..100": (46, 54),
-    "n=1..200": (62, 138),
-    "n=1..324": (78, 246),
+    "n=1..100": (49, 51),
+    "n=1..200": (65, 135),
+    "n=1..324": (81, 243),
 }
 
 # Source-reported closures from T-062 to T-064, and T-066 and T-067 at n = 59 and 77,
@@ -53,11 +55,13 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 # n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 in this lane only. 2026-10-12:
 # Overbeck's candidate equality s(17) = L (T-153) closes n = 17 in this lane only.
 # 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-245) closes n = 12 in this
-# lane only. 2026-10-31: T-252 closes n = 44 in both lanes, so this one too.
+# lane only. 2026-10-31: T-252 closes n = 44 in both lanes, so this one too. 2026-11-02:
+# T-184 and T-191 at C3 close n = 76 and 95 in both lanes; n = 96, which T-191 also
+# closes, was reported-proved already (T-081), so this lane does not move for it.
 REPORTED_LANE_SPLIT: dict[str, tuple[int, int]] = {
-    "n=1..100": (49, 51),
-    "n=1..200": (69, 131),
-    "n=1..324": (89, 235),
+    "n=1..100": (51, 49),
+    "n=1..200": (71, 129),
+    "n=1..324": (91, 233),
 }
 
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"

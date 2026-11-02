@@ -7339,7 +7339,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-11-02'
   status: live
 - path: cases/38.html
   canonical: cases/38.html
@@ -7683,7 +7683,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-02'
   status: live
 - path: cases/77.html
   canonical: cases/77.html
@@ -7851,7 +7851,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-02'
   status: live
 - path: cases/96.html
   canonical: cases/96.html
@@ -7859,7 +7859,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-02'
   status: live
 - path: cases/97.html
   canonical: cases/97.html
@@ -17972,7 +17972,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-11-02'
   status: live
   identity:
     kind: lower-bound
@@ -17987,15 +17987,49 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n37-64975-report
+    - E-wand125-fine-net-n37-64975-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n37_L64975/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n37_L64975/check2/receipt.json
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n37_L64975/bundle.json
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/premises-n37.json
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/sample-diagnostic-n37.json
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/control-sample-n37.json
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n37_L64975.jsonl.gz
     - packing/devtools/fine_net_followup.py
     - packing/devtools/audit_wand125_declared_net.py
+  amendments:
+  - date: '2026-11-02'
+    reason: The complete sqverify-fast census replay of mixed_n37_L64975 at all 2,073 directions and
+      its whole-net controls (think-w76a) are cited as replay evidence, and the retained candidate,
+      the census and its receipt join the artifacts; the result rises to V3/C3. The value, scope and
+      attribution are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 37
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net n37 n39 n44 2026-10-13]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n37-64975-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
+      - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n37_L64975/bundle.json
+      - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/premises-n37.json
+      - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/sample-diagnostic-n37.json
+      - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/control-sample-n37.json
+      - packing/devtools/fine_net_followup.py
+      - packing/devtools/audit_wand125_declared_net.py
 - path: result/t-179.html
   canonical: result/t-179.html
   kind: result
@@ -19250,13 +19284,14 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-16'
+  lastmod: '2026-11-02'
   status: live
   identity:
     kind: optimality
     scope:
       n_values:
       - 95
+      - 96
     established: null
     attribution:
       source_keys:
@@ -19301,6 +19336,36 @@ urls:
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+  - date: '2026-11-02'
+    reason: The s(95) cover's total is below 96, so the result takes in n = 96 at C3, as T-067 took
+      in n = 78, and the verified bound there cites its replay (E-bengreff-610-cover-replay, whose
+      scope widens to 95 and 96); s(96) = 10 with the grid. The attribution, the cover and the value
+      at 95 are unchanged.
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 95
+      established: null
+      attribution:
+        source_keys:
+        - '[bengreff s95 certificate 2026-10-15]'
+        published: '2026-10-15'
+      builds_on: null
+      evidence:
+      - E-bengreff-610-cover-report
+      - E-bengreff-610-cover-replay
+      - E-basic-grid-upper
+      artifacts:
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_cover_audit.json
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_zmx2_d4.log
+      - packing/devtools/replay_evand_zmx2.py
+      - packing/devtools/audit_evand_mixed_covers.py
+      - packing/devtools/check_basic_bounds.py
+      - docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
 - path: result/t-192.html
   canonical: result/t-192.html
   kind: result

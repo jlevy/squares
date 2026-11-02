@@ -8170,8 +8170,11 @@ results:
       standard axioms. Nothing here has yet replayed either run of ValidTilt9 in full, and
       the verified lower bounds are unchanged.
 
-      At n = 96 a second route to the lower half is reported: Benjamin Greff's cover for
-      95 squares at side 10 (T-191) gives s(96) >= 10 by monotonicity.
+      At n = 96 a second route to the lower half is verified: Benjamin Greff's cover for
+      95 squares at side 10, whose total is below 96 too, replayed here with both of
+      Daniel's checkers and its controls (T-191, C3 on 2 November 2026), gives s(96) = 10
+      with the grid, and the verified bound there cites it. This entry's own route at 96
+      stays reported.
 
       Evan Daniel,
       [evand/square-packing](https://github.com/evand/square-packing/tree/2eb15455a6f178213287a84ab4d0576c060baabe/s12/certificates/k2m4),
@@ -24695,46 +24698,47 @@ results:
     registered: '2026-10-14'
     landed: '2026-10-14'
     headline: >-
-      Mixed rectangle-measure lower bound `s(37) ≥ 2599/400` reported, on a 2,073-direction
+      Mixed rectangle-measure lower bound `s(37) ≥ 2599/400` verified, on a 2,073-direction
       declared net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 13 October 2026 and
-      reported on no issue, is reported to prove s(37) >= 2599/400 = 6.4975.
+      reported on no issue, proves s(37) >= 2599/400 = 6.4975.
 
       The certificate, mixed_n37_L64975, is a density of 612 uniform rectangles in D4
-      orbits, and no point mass, of total mass 3699999/100000, on a net its candidate
-      declares: core side 4999/5000 and 2,073 half-angle tangents of step 1/5002, the net of
-      T-132, T-142 and T-143. Since 4999/5000 (1 + 1/5002) = 25009997/25010000 < 1, and the
-      last tangent 1036/2501 is past tan(pi/8), every unit square contains a concentric core
-      at a net angle strictly in its interior.
+      orbits, 4,896 distinct rectangles after expansion, and no point mass, of total mass
+      3699999/100000 < 37, on a net its candidate declares: core side 4999/5000 and 2,073
+      half-angle tangents of step 1/5002, the net of T-132, T-142 and T-143. Since
+      4999/5000 (1 + 1/5002) = 25009997/25010000 < 1, and the last tangent 1036/2501 is past
+      tan(pi/8), every unit square contains a concentric core at a net angle strictly in
+      its interior.
 
-      The source reports every such core capturing mass at least one at all 2,073
-      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast changed
-      to read the declared net, in two complete runs, and a control with every mass scaled
-      by 197/200 refused at 32 sampled directions.
+      The retained maintained sqverify-fast capture verifies all 2,073 directions at
+      threshold one, every core centred in its per-bin domain capturing mass at least one,
+      with the source's node count and least certified bound at every direction. Its
+      whole-net controls record 2,073 coverage refusals of the 99/100 mutant and no verified
+      mutant direction, and the near-threshold mutant is refused. The mathematical review of
+      14 October accepts the argument and the exact premises.
 
-      The value is above T-069's 161/25 = 6.44, the verified and reported lower bound at n =
-      37, by 23/400.
-
-      Here the maintained readers accepted its exact mass, declared-net and check2 premises,
-      and sqverify-fast, this repository's clean-room measure verifier, verified it at eight
-      sampled directions with the source's node counts and least certified bounds: a
-      diagnostic, not a replay. No complete replay has run here, so the value stands as
-      reported.
+      This raises the verified and reported lower lanes at n = 37 from 161/25 (T-069) to
+      2599/400, by 23/400. The bound is confirmed by a re-implementation sharing components
+      with the producer's checker, sqverify-proof-net, which is Hosono's adaptation of this
+      repository's sqverify_fast crate: the two share the crate apart from their
+      declared-net readers. No independent full implementation, second method,
+      proof-assistant check or optimality theorem is claimed.
 
       Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/7a42c16eacaab112b537ab09e89d3485f6f4c75f/problems/square-lower-bounds/certificates/mixed_n37_L64975).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [37]}
-    verification: V0
-    confirmation: C1
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower bound on
-        record at n = 37, 23/400 above T-069, by the certificate kind and declared net of
-        T-132, T-142 and T-143, with no new technique, at S3 as they are.
+        The strongest lower bound on record at n = 37, 23/400 above T-069, by the
+        certificate kind and declared net of T-132, T-142 and T-143, with no new technique,
+        at S3 as they are; scored as a claim on 14 October.
       scored: '2026-10-14'
       by: >-
         the 14 October review
@@ -24745,15 +24749,23 @@ results:
       source_keys: ['[wand125 fine-net n37 n39 n44 2026-10-13]']
       published: '2026-10-13'
     composition: >-
-      One reported certificate on its reported entry. The source's check is a copy of this
-      repository's sqverify_fast crate with one change, so a sqverify-fast replay here would
-      be re-implemented sharing the producer's components, as T-104's is, and no second
-      implementation stands beside it.
-    evidence: [E-wand125-fine-net-n37-64975-report]
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, Hosono's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers, as T-104's
+      does; no second implementation stands beside it.
+    evidence:
+      - E-wand125-fine-net-n37-64975-report
+      - E-wand125-fine-net-n37-64975-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
       - >-
         packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/sources.json
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/release-assets.json
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n37_L64975/candidate.json.gz
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n37_L64975/check2/receipt.json
       - >-
         packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n37_L64975/bundle.json
       - >-
@@ -24762,45 +24774,34 @@ results:
         packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/sample-diagnostic-n37.json
       - >-
         packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/control-sample-n37.json
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n37_L64975.jsonl.gz
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_declared_net.py
     next_rung: >-
-      C3 needs a complete sqverify-fast census run at all 2,073 directions from a retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every direction,
-      FC-1) and a review that reads this certificate, by the checklist of the 6 October
-      declared-net soundness review. The eight-direction sample prices the run and its
-      controls at about 6.5 CPU-hours. It waits for an owner budget and the candidate's
-      retention where the census reads it (jlevy/squares#543), in think-u0av.
-    unfinished_confirmations:
-      - what: >-
-          a complete sqverify-fast census at all 2,073 directions from a retained candidate,
-          with its whole-net control receipt (the 99/100 mutant at every direction, FC-1)
-          and a review that reads this certificate, by the checklist of the 6 October
-          declared-net soundness review
-        rung: C3
-        link: think-u0av
-        estimated_cost:
-          cpu_hours: 6.53
-          cpu_hours_high: 7.49
-          basis: >-
-            The eight-direction sqverify-fast sample of 14 October (directions 0, 296, ...,
-            2072; 43.08 CPU-s here against the source's 49.45, ratio 0.871, on an idle host)
-            applied to the source's 13,474 CPU-s over the net: a complete capture 11,739
-            CPU-s and the whole-net controls 11,759
-            (packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md and
-            receipts/sample-diagnostic-n37.json). The upper end is the source's own CPU,
-            twice over the net. The control's mutant at the axis and at direction 1919 was
-            refused and counted (receipts/control-sample-n37.json; axis gap 6.9e-11).
-          priced: '2026-10-14'
+      None for the bound. V4 and C4 need a second qualifying adversarial AI review by a
+      distinct reviewer and an explicit human oversight record; one AI review, of 14
+      October, is retained. An independent full implementation would add implementation
+      diversity.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported, replay
-      not attempted. C1 because the 14 October review read the certificate and the reported
-      entry records that reading as its external_review. The case records' lanes are
-      unchanged, so the entry is pending adoption at n = 37 while T-069 holds both lanes.
-      The pre-publication receipt is a second complete run of the same source on a fresh
-      machine (619 s), not the run the check2 receipt embeds, so two complete author runs
-      are reported. The release asset is pinned by size and digest and kept outside Git; the
-      directory's MIT documents are retained.
+      From the complete maintained capture of 2 November 2026 (two threads, 12,667.7 CPU
+      seconds, 864,953,550 boxes, least certified bound 1.0000000000165958 at direction
+      1919, each direction's node count and least bound equal to the source's check2 log),
+      its whole-net control receipt and the mapped mathematical review of 14 October, which
+      priced the run at about 6.5 CPU-hours and said the n = 37 receipt can pass under the
+      present axis rule (axis gap 6.9e-11, within AXIS_ROUNDING; its F-1).
+
+      The score of 14 October was given to the claim; the complete replay of 2 November
+      passed after it and leaves the score as it was. The case records' lower lanes move to
+      2599/400; T-069 keeps its claim at n = 37, now superseded there. The pre-publication receipt is a second complete run of the same
+      source on a fresh machine (619 s), not the run the check2 receipt embeds. The release
+      asset's data members are retained in Git under OR-18; the adapted verifier archive
+      inside it is pinned by digest and not opened.
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n37_L64975.control.json
+      - packing/tests/test_sqverify_fast_census.py
     reviews:
       - path: >-
           docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
@@ -25756,11 +25757,12 @@ results:
 
       At retention here the cover's data facts were recomputed, zmx2 was replayed over all
       8,100 roots and zm_mixed.py over the 64 sub-roots from the bytes the source pins, each
-      equal to the source's records, with two mutations refused by zmx2. The two checkers'
-      runs are read as one decision over the D4 region, every cell certified once: a
-      reproduction with the producer's code, counted as a confirmation once zm_mixed.py's
-      mutated-certificate controls are held. The review of 16 October found no
-      mathematical defect.
+      equal to the source's records. The two checkers' runs are read as one decision over
+      the D4 region, every cell certified once: confirmed, reproduced with the producer's
+      code. zmx2 refuses two mutated covers, and zm_mixed.py, at the source's own settings
+      and depth limit of 24, refuses two covers with every mass scaled just below one at a
+      low pose, each on a cell where it certifies the published cover. The review of 16
+      October found no mathematical defect.
 
       Credit Benjamin Greff (https://github.com/bengreff/s76-certificate), building on Evan
       Daniel's method at margin zero, mixed format, checkers and Lean library, and on
@@ -25770,7 +25772,7 @@ results:
       under the author's direction.
     scope: {n_values: [76]}
     verification: V3
-    confirmation: C1
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
@@ -25790,14 +25792,12 @@ results:
       (E-basic-grid-upper, exact-algebraic). Both deciding programs are Daniel's and each
       cell rests on one of them.
 
-      The cited replay derives C3; the record declares C1, because stage 4 counts a replay
-      as a confirmation only when two mutated certificates are refused by every checker
-      that accepted the original and a test holds them (result-import.md, stage 4), and
-      zm_mixed.py, which decides the 64 sub-roots, has refused one, the review's depth-12
-      pair, whose standing is owner question 16 (think-l3oo). The rung for a replay
-      without a machine certificate does not fit a machine replay that is complete but for
-      its controls. C1 is the review's read of the reported entry. V3 stands, since the
-      certificate replays, which is what V3 asks of evidence of any origin.
+      The cited replay derives C3, and stage 4's control rule holds for both checkers
+      (result-import.md, stage 4): zmx2 refuses the drop-heaviest-point and
+      drop-heaviest-segment covers, and zm_mixed.py refuses two scaled covers at the
+      source's depth limit of 24 (receipts/controls/n76_zm_*, 2 November 2026), so no
+      owner ruling on the review's depth-12 pair (its F8, owner question 16 of think-l3oo)
+      is needed. Until then the record declared C1.
     reviews:
       - path: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
         kind: adversarial
@@ -25834,23 +25834,14 @@ results:
       - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/controls/n76_control_drop-heaviest-point_zmx2_d4_x15-15_y15-15.log
       - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/controls/n76_control_drop-heaviest-segment_zmx2_d4_x5-5_y35-35.log
       - packing/resources/web/bengreff-s76-certificate-2026-10-14/review/outputs/zm_control/n76_scaled-199-200_j054_depth12.log
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/controls/n76_zm_control_scaled-49979-50000_c70-10-0.log
+      - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/controls/n76_zm_control_scaled-49301-50000_c89-44-8.log
     next_rung: >-
-      C3 waits on stage 4's control rule for zm_mixed.py, which decides the 64 sub-roots:
-      two mutated certificates refused by it and held by a test. The review's depth-12 pair
-      is one if a refusal at a depth limit of 12 counts, which is owner question 16
-      (think-l3oo, the review's finding F8); a second is owed either way, and refusals at
-      the source's limit of 24 did not finish. The rule is met for zmx2. V4 and C4 then
-      need a second adversarial AI review by a distinct reviewer and a human oversight
-      record; one adversarial review is retained. An unreduced zmx2 --full sweep (about 6
-      CPU-hours with its follow-up, think-eucc) would take the D4 reduction off the zmx2
-      part.
+      V4 and C4 need a second adversarial AI review by a distinct reviewer and a human
+      oversight record; one adversarial review is retained. An unreduced zmx2 --full sweep
+      (about 6 CPU-hours with its follow-up, think-eucc) would take the D4 reduction off
+      the zmx2 part.
     unfinished_confirmations:
-      - what: >-
-          zm_mixed.py's refusals of two mutated s(76) covers, held by a test, at a depth
-          limit the owner accepts: the review's depth-12 pair and one more, or two at the
-          accepted limit
-        rung: C3
-        link: think-l3oo
       - what: >-
           a second adversarial AI review of the cover and the composite, by a reviewer
           distinct from the 16 October one
@@ -25862,16 +25853,18 @@ results:
     notes: >-
       Raised from V0/C0 to V3/C1 on 16 October 2026, when the intake's reproduction of the
       source's two checkers was recorded as evidence and the stage 4 review of the cover
-      and the composite found no mathematical defect and no blocking finding. The
-      confirmation is held at C1 until zm_mixed.py's mutated-certificate controls are
-      held, as the composition says.
+      and the composite found no mathematical defect and no blocking finding, and to C3 on
+      2 November 2026, when zm_mixed.py's two refusals of scaled covers at the source's
+      depth limit were run and held by tests/test_replay_controls.py (think-l3oo, lane
+      L30).
 
-      The case record's lanes keep Hosono's 1793/200 until the case adopts the value
-      (devtools/certificate-citation-deferrals.yaml), so the entry is pending adoption at
-      n = 76. The source's full zm_mixed.py pass over all 129,600 D4 roots, published
-      after the pin on 14 October 2026 with one cell closed at depth 34, is not retained
-      here (review section 7.5); retained and audited, it would put every cell under
-      zm_mixed.py and all but 64 under both checkers (think-osvq).
+      The case record adopts the value, so n = 76 is proved and Hosono's 1793/200 (T-091)
+      is superseded there. The source's full zm_mixed.py pass over all 129,600 D4 roots,
+      published after the pin on 14 October 2026 with one cell closed at depth 34, has been
+      retained as reported since 31 October 2026 (packet
+      bengreff-s76-second-route-2026-10-14, E-bengreff-594-cover-report), and is not run or
+      audited here; audited, it would put every cell under zm_mixed.py and all but 64 under
+      both checkers (think-osvq).
   - id: T-185
     kind: upper-bound
     registered: '2026-10-15'
@@ -27235,7 +27228,8 @@ results:
       in Evan Daniel's mixed format, total 3791753447/40000000 = 94.793836175 < 95,
       exactly D4-invariant. Every closed unit square in [0,10]^2 captures mass at least
       one, so a packing of 95 at side below 10, scaled up to side 10, would capture at
-      least 95.
+      least 95. The cover's total is below 96 too, so it gives s(96) = 10 as well, a second
+      route to the k = 10 case of the family Evan Daniel reports (T-081).
 
       The source reports the covering statement decided by two of Daniel's checkers:
       zmx2, in outward-rounded binary64, on 9,981 of the 10,000 root cells of the D4
@@ -27245,11 +27239,12 @@ results:
 
       At retention here the cover's data facts were recomputed, zmx2 was replayed over
       all 10,000 roots and zm_mixed.py over the 304 sub-roots from the bytes the source
-      pins, each equal to the source's records, with two mutations refused by zmx2. The two
-      checkers' runs are read as one decision over the D4 region, every cell certified
-      once: a reproduction with the producer's code, counted as a confirmation once
-      zm_mixed.py's mutated-certificate controls are held. The review of 16 October found
-      no mathematical defect.
+      pins, each equal to the source's records. The two checkers' runs are read as one
+      decision over the D4 region, every cell certified once: confirmed, reproduced with
+      the producer's code. zmx2 refuses two mutated covers, and zm_mixed.py, at the
+      source's own settings and depth limit of 24, refuses two covers with every mass
+      scaled just below one at a low pose, each on a cell where it certifies the published
+      cover. The review of 16 October found no mathematical defect.
 
       Credit Benjamin Greff (https://github.com/bengreff/s95-certificate), building on
       Evan Daniel's method at margin zero, mixed format, checkers and Lean library, and
@@ -27257,9 +27252,9 @@ results:
       construction. Registration was requested in jlevy/squares#610. The source's README
       states: "Benjamin Greff directed the work. The search, LP and verification
       pipeline were built and run with Claude (Anthropic) as an AI assistant."
-    scope: {n_values: [95]}
+    scope: {n_values: [95, 96]}
     verification: V3
-    confirmation: C1
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
@@ -27281,13 +27276,18 @@ results:
       (E-basic-grid-upper, exact-algebraic). Both deciding programs are Daniel's and each
       cell rests on one of them.
 
-      The cited replay derives C3; the record declares C1, because stage 4 counts a replay
-      as a confirmation only when two mutated certificates are refused by every checker
-      that accepted the original and a test holds them (result-import.md, stage 4), and
-      zm_mixed.py, which decides the 304 sub-roots, has refused none. The rung for a
-      replay without a machine certificate does not fit a machine replay that is complete
-      but for its controls. C1 is the review's read of the reported entry. V3 stands,
-      since the certificate replays, which is what V3 asks of evidence of any origin.
+      The cited replay derives C3, and stage 4's control rule holds for both checkers
+      (result-import.md, stage 4): zmx2 refuses the drop-heaviest-point and
+      drop-heaviest-segment covers, and zm_mixed.py refuses two scaled covers at the
+      source's depth limit of 24 (receipts/controls/n95_zm_*, 2 November 2026). Until then
+      the record declared C1.
+
+      n = 96 takes the same certificate directly, its total being below 96, so no step is
+      added. At registration this entry's scope was n = 95 alone, since T-081 registers
+      s(96) = 10 (result-import.md, register table); it took in n = 96 at C3, on 2 November
+      2026, as T-067 took in n = 78, because the verified bound there rests on this replay
+      alone, T-081's own route being reported and unreplayed. T-081 keeps its claim, which
+      names this route.
     reviews:
       - path: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
         kind: adversarial
@@ -27315,21 +27315,14 @@ results:
       - packing/tests/test_audit_evand_mixed_covers.py
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/controls/n95_control_drop-heaviest-point_zmx2_d4_x15-15_y15-15.log
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/controls/n95_control_drop-heaviest-segment_zmx2_d4_x5-5_y45-45.log
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/controls/n95_zm_control_scaled-49831-50000_c70-50-0.log
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/controls/n95_zm_control_scaled-49207-50000_c91-44-13.log
     next_rung: >-
-      C3 waits on stage 4's control rule for zm_mixed.py, which decides the 304 sub-roots:
-      two mutated certificates refused by it and held by a test. None has run for this
-      cover, so two are owed whatever the answer to owner question 16 (think-l3oo, the
-      review's finding F8) on whether a refusal at a depth limit of 12 counts. The rule is
-      met for zmx2. V4 and C4 then need a second adversarial AI review by a distinct
-      reviewer and a human oversight record; one adversarial review is retained. An
-      unreduced zmx2 --full sweep (about 6 CPU-hours with its follow-up, think-eucc) would
-      take the D4 reduction off the zmx2 part.
+      V4 and C4 need a second adversarial AI review by a distinct reviewer and a human
+      oversight record; one adversarial review is retained. An unreduced zmx2 --full sweep
+      (about 6 CPU-hours with its follow-up, think-eucc) would take the D4 reduction off
+      the zmx2 part.
     unfinished_confirmations:
-      - what: >-
-          zm_mixed.py's refusals of two mutated s(95) covers, held by a test, at a depth
-          limit the owner accepts; none has run
-        rung: C3
-        link: think-l3oo
       - what: >-
           a second adversarial AI review of the cover and the composite, by a reviewer
           distinct from the 16 October one
@@ -27341,13 +27334,16 @@ results:
     notes: >-
       Raised from V0/C0 to V3/C1 on 16 October 2026, when the intake's reproduction of the
       source's two checkers was recorded as evidence and the stage 4 review of the cover
-      and the composite found no mathematical defect and no blocking finding. The
-      confirmation is held at C1 until zm_mixed.py's mutated-certificate controls are
-      held, as the composition says. The case
-      record's lanes keep Hosono's 1993/200 until the case adopts the value
-      (devtools/certificate-citation-deferrals.yaml), so the entry is pending adoption at n
-      = 95. At n = 96 it gives s(96) >= 10 by monotonicity, which T-081 registers
-      already. No full zm_mixed.py pass over the 160,000 D4 roots is at the pinned
+      and the composite found no mathematical defect and no blocking finding, and to C3 on
+      2 November 2026, when zm_mixed.py's two refusals of scaled covers at the source's
+      depth limit were run and held by tests/test_replay_controls.py (think-l3oo, lane
+      L30).
+
+      The case record adopts the value, so n = 95 is proved and Hosono's 1993/200
+      (T-090) is superseded there. At n = 96 the same cover, its total below 96, gives
+      s(96) = 10 with the grid, so that case record adopts the value too and is proved, and
+      T-082's 997/100 is superseded there; the reported lane keeps T-081. No full
+      zm_mixed.py pass over the 160,000 D4 roots is at the pinned
       revision (think-zn7s), and the Lean wrapper is unbuilt here (think-ojr9).
 
       The retention's other receipts, receipts/n95_triage_checks.log, the zmx2 root logs
@@ -27356,8 +27352,8 @@ results:
 
       The issue was filed on 15 October 2026, minutes after the cover's first commit and
       after Francisco Couzo's certificate at 237 of the same day (T-190), so the entry
-      follows T-190 in report order. Every lower bound the register holds at 95 is below
-      10: T-090's 1993/200, which holds both lanes of the case, T-091's 199/20 by
+      follows T-190 in report order. At registration every lower bound the register held
+      at 95 was below 10: T-090's 1993/200, which held both lanes of the case, T-091's 199/20 by
       monotonicity from 94, T-082's 249/25, T-068's and T-074's 49259/5000, T-046's and T-070's 49209/5000,
       and the closed forms of T-007, T-083 and T-180.
   - id: T-192
@@ -36197,7 +36193,8 @@ results:
     notes: >-
       Registered on 31 October 2026 at V3/C3, as T-066 was: zmx2 decides the whole
       statement here, so no zm_mixed.py composite is part of the decision, unlike T-184 and
-      T-191, whose zm_mixed.py controls hold them at C1. The case record adopts the value,
+      T-191, whose zm_mixed.py controls held them at C1 until 2 November 2026. The case
+      record adopts the value,
       so n = 44 is proved and T-090's s(44) >= 2789/400 and T-177's reported 2799/400 are
       superseded there. The source's v1.0 and v1.1 hold the same certificate; the packet
       pins v1.1. Of the two reviews, the first was written in the import lane's context and

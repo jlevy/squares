@@ -21,7 +21,9 @@ is stated as the source states it. What was checked here at retention is in
 the result. The register entries the records lane would apply are drafted in
 [`register-plan.yaml`](register-plan.yaml); the records lane of 15 October applied them,
 registering the result as T-191 at V0/C0 and adding T-081’s sentence on 96. The case
-record at 95 is unchanged until a review.
+record at 95 was unchanged until a review. On 2 November 2026 the controls below brought
+T-191 to C3, and the case records at 95 and 96 adopted $s(95) = s(96) = 10$: the cover’s
+total is below 96 as well, so T-191 took in $n = 96$, as T-067 took in $n = 78$.
 
 ## Source and Pin
 
@@ -205,8 +207,30 @@ as arguments; registering cases 76 and 95 in `devtools.replay_evand_zmx2` and
   published cover certifies those roots. `zm_mixed.py pose` finds a pose where each
   captures less than one, exactly ($0.99736$ and $0.84619$), where the published cover
   captures $1.00993$ and $1.01200$. The heaviest point is the corner atom of #594’s
-  control; the heaviest segment lies on the centre line $y = 5$, $x \in [15/16, 1]$. No
-  `zm_mixed.py` sweep of a mutation was run: refusal at depth 24 is not affordable.
+  control; the heaviest segment lies on the centre line $y = 5$, $x \in [15/16, 1]$.
+  Those holes are too deep for a `zm_mixed.py` refusal at depth 24 to be affordable, so
+  on 2 November 2026 `devtools.replay_evand_zmx2 zm-control` ran two shallow ones: every
+  mass scaled by $49831/50000$ and by $49207/50000$, each the largest factor $P/50000$
+  that puts a low pose of the published cover below one. On the one cell that holds each
+  pose, with the flags of `verify.sh` and its depth limit of 24, `zm_mixed.py`
+  certifies the published cover and leaves the scaled one uncertified
+  ([`receipts/controls/n95_zm_*`](receipts/controls/)):
+
+  | Scaled by | Cell (cx, cy, u) | Published | Scaled | $\mu$ at the pose, published and scaled |
+  | --- | --- | --- | --- | --- |
+  | $49831/50000$ | $[7/2, 71/20] \times [5/2, 51/20] \times [0, 1/32]$, `zmx2`’s in the composite | 147 boxes, depth 10 | 811 boxes, 9 uncertified, 155 CPU-s | $1.0033895$, $0.9999980$ |
+  | $49207/50000$ | $[91/20, 23/5] \times [11/5, 9/4] \times [13/32, 7/16]$, job 153 | 37 boxes, depth 8, as the source’s record | 2,789 boxes, 540 uncertified, 576 CPU-s | $1.0161014$, $0.9999861$ |
+
+  The first pose is the lowest the 16 October review’s descent found in the D4 region;
+  the second is the lowest its `k2m5_review.py cellmin` found in job 153’s cell
+  ([`receipts/controls/n95_cellmin_j153.json`](receipts/controls/n95_cellmin_j153.json),
+  run here on 2 November with the review’s retained program, `4fa7ed60…` in the s(76)
+  packet, over 1,508 sampled poses). That program’s exact evaluator shares no code with
+  `zm_mixed.py`, and its capture at the pose, $1.016101428384$, equals `zm_mixed.py
+  pose`’s exactly, so by linearity the scaled cover captures less than one there whatever
+  `zm_mixed.py` computes; the review’s own capture at the first pose does the same for
+  that one. The probe chose the pose and decides nothing. `tests/test_replay_controls.py`
+  holds both pairs.
 - **The wall control.** No closed unit square in $[0,10]^2$ needs mass on the
   container’s walls: a square flush with a wall is the limit of squares moved off it,
   each capturing at least one, and in the limit that mass lies off the wall. `zmx2 cert

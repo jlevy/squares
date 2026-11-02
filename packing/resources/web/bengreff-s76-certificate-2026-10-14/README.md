@@ -159,8 +159,30 @@ slice it owes.
   `devtools.replay_evand_zmx2.mutate` are refused by `zmx2` at one root each
   ([`receipts/controls/`](receipts/controls/)), and `zm_mixed.py pose` finds a pose
   where each captures less than one, exactly ($0.99736$ and $0.89682$), where the
-  published cover captures $1.00993$ and $1.00726$. No `zm_mixed.py` sweep of a
-  mutation was run: refusal at depth 24 is not affordable.
+  published cover captures $1.00993$ and $1.00726$. Those holes are too deep for a
+  `zm_mixed.py` refusal at depth 24 to be affordable, so on 2 November 2026
+  `devtools.replay_evand_zmx2 zm-control` ran two shallow ones: every mass scaled by
+  $49979/50000$ and by $49301/50000$, each the largest factor $P/50000$ that puts a low
+  pose of the published cover below one. On the one cell that holds each pose, with the
+  flags of `verify.sh` and its depth limit of 24, `zm_mixed.py` certifies the published
+  cover and leaves the scaled one uncertified
+  ([`receipts/controls/n76_zm_*`](receipts/controls/)):
+
+  | Scaled by | Cell (cx, cy, u) | Published | Scaled | $\mu$ at the pose, published and scaled |
+  | --- | --- | --- | --- | --- |
+  | $49979/50000$ | $[7/2, 71/20] \times [1/2, 11/20] \times [0, 1/32]$, `zmx2`’s in the composite | 219 boxes, depth 16 | 999 boxes, 130 uncertified, 104 CPU-s | $1.0004175$, $0.9999974$ |
+  | $49301/50000$ | $[89/20, 9/2] \times [11/5, 9/4] \times [1/4, 9/32]$, job 056 | 11 boxes, depth 5, as the source’s record | 433 boxes, 60 uncertified, 97 CPU-s | $1.0141613$, $0.9999833$ |
+
+  The first pose is the lowest the review’s descent found, near the bottom wall;
+  the second is the lowest `k2m5_review.py cellmin` found in job 056’s cell
+  ([`receipts/controls/n76_cellmin_j056.json`](receipts/controls/n76_cellmin_j056.json),
+  run here on 2 November with the review’s retained program, `4fa7ed60…`, over 1,508
+  sampled poses). That program’s exact evaluator shares no code with `zm_mixed.py`, and
+  its capture at the pose, $1.014161252515$, equals `zm_mixed.py pose`’s exactly, so by
+  linearity the scaled cover captures less than one there whatever `zm_mixed.py`
+  computes; the review’s own capture at the first pose does the same for that one. The
+  probe chose the pose and decides nothing. `tests/test_replay_controls.py` holds both
+  pairs.
 - **The wall segments.** No closed unit square in $[0,9]^2$ needs mass on the container’s
   walls: a square flush with a wall is the limit of squares moved off it, each capturing
   at least one, and in the limit that mass lies off the wall. None of the five other

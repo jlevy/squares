@@ -51,8 +51,9 @@ WIDTHS = (1280, 1024, 768, 390)
 #: that day; n = 12's has terminated since 5 October, and is the verified cell's alone
 #: since T-245 of 25 October. The verified bound beside the reported one was n = 51's,
 #: 37/5 and from the morning of 6 October 2977/400 (T-070), until sqverify-fast decided
-#: its own certificate (T-090) later that day, and is n = 96's since.
-CASES = (1, 5, 11, 12, 51, 70, 88, 96, 108, 230)
+#: its own certificate (T-090) later that day, and then n = 96's, until T-191's cover
+#: proved s(96) = 10 on 2 November 2026; it is n = 104's since.
+CASES = (1, 5, 11, 12, 51, 70, 88, 104, 108, 230)
 ROWS = [f"n-{n}" for n in CASES]
 #: The drawing's side before it had a column: 2.6rem.
 OLD_THUMB = 41.6
@@ -242,10 +243,13 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     # n = 50's replayed mixed certificate below its own reported mixed certificate,
     # 747/100 (T-090; 373/50, T-082, until 5 October), and from the morning of 6 October
     # its own replayed rectangle certificate, 2977/400 (T-070), until sqverify-fast
-    # decided T-090's certificates later that day. Since then it is n = 96, 1993/200 by
-    # mass from n = 95 (T-090) below the reported s(96) = 10 (T-081), and from later that
-    # day its own certificate's 997/100 (T-082), decided here by sqverify-fast.
-    assert rows["n-96"]["cells"][column("Verified lower")]["approx"] == ["= 9.97"]
+    # decided T-090's certificates later that day. Then it was n = 96, 1993/200 by mass
+    # from n = 95 (T-090) below the reported s(96) = 10 (T-081), and from later that day
+    # its own certificate's 997/100 (T-082), until T-191's cover proved s(96) = 10 on 2
+    # November 2026. Since then it is n = 104, 257/25 by monotonicity from n = 101's
+    # replayed linear certificate (T-073, T-080), beside its own reported bound of about
+    # 10.2885.
+    assert rows["n-104"]["cells"][column("Verified lower")]["approx"] == ["= 10.28"]
     assert rows["n-88"]["cells"][column("Reported lower")]["approx"] == ["= 9.62"]
     assert all(cell["approx"] == [] for cell in rows["n-1"]["cells"])
     assert rows["n-11"]["cells"][column("Reported lower")]["broken"] == []

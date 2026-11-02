@@ -22,15 +22,15 @@ the platform supplies no direction CPU.
 | `mixed_n18_L470` | M | 18 | 47/10 | VERIFIED | 168.3 | 168.2 | 1.0000000000740676 | complete | no |
 | `mixed_n18_L4704` | M | 18 | 588/125 | VERIFIED | 701.7 | 701.6 | 1.000000001132137 | complete | no |
 | `mixed_n18_L4705` | M | 18 | 941/200 | VERIFIED | 2884.7 | 2884.3 | 1.0000000000680034 | none | yes |
-| `rect_n18_L4695` | T | 18 | 939/200 | VERIFIED | 213.2 | unavailable | 1.0001000024649946 | complete | no |
+| `rect_n18_L4695` | T | 18 | 939/200 | VERIFIED | 151.1 | 150.9 | 1.0001000008931253 | complete | no |
 | `mixed_n19_L48229` | M | 19 | 48229/10000 | VERIFIED | 512.1 | 511.9 | 1.000000000833015 | none | yes |
 | `mixed_n19_L4825` | M | 19 | 193/40 | VERIFIED | 2841.2 | 2840.9 | 1.0000000001230112 | none | yes |
 | `mixed_n19_L48275` | M | 19 | 1931/400 | VERIFIED | 2539.7 | 2539.4 | 1.0000000001405505 | none | yes |
-| `rect_n19_L4815` | T | 19 | 963/200 | VERIFIED | 138.2 | unavailable | 1.000100001265513 | complete | no |
+| `rect_n19_L4815` | T | 19 | 963/200 | VERIFIED | 157.3 | 157.2 | 1.0001000012655128 | complete | no |
 | `rect_n19_L48175` | T | 19 | 1927/400 | VERIFIED | 255.4 | 255.2 | 1.0001000003934286 | complete | no |
 | `mixed_n20_L4905` | M | 20 | 981/200 | VERIFIED | 1420.5 | 1420.2 | 1.000000000154736 | none | yes |
 | `mixed_n20_L49125` | M | 20 | 393/80 | VERIFIED | 5987.4 | 5987.1 | 1.0000000001231197 | none | yes |
-| `rect_n20_L4895` | T | 20 | 979/200 | VERIFIED | 103.7 | unavailable | 1.0001000055866192 | complete | no |
+| `rect_n20_L4895` | T | 20 | 979/200 | VERIFIED | 121.7 | 121.5 | 1.000100005586619 | complete | no |
 | `rect_n20_L48975` | T | 20 | 1959/400 | VERIFIED | 106.9 | 106.7 | 1.0001000001810014 | complete | no |
 | `rect_n20_L49` | T | 20 | 49/10 | VERIFIED | 214.1 | 213.9 | 1.0001000010273078 | complete | no |
 | `rect_n21_L4985` | T | 21 | 997/200 | VERIFIED | 254.0 | 253.9 | 1.0001000008057672 | none | yes |
@@ -38,11 +38,11 @@ the platform supplies no direction CPU.
 | `cert_n26_L5508` | T | 26 | 1377/250 | VERIFIED | 40.4 | unavailable | 1.0001000057290834 | complete | no |
 | `mixed_n26_L5545` | M | 26 | 1109/200 | VERIFIED | 2235.6 | 2235.3 | 1.0000000003495713 | none | yes |
 | `mixed_n26_L5555` | M | 26 | 1111/200 | VERIFIED | 6115.2 | 6114.8 | 1.0000000000340534 | none | yes |
-| `rect_n26_L553` | T | 26 | 553/100 | VERIFIED | 116.4 | unavailable | 1.0001000010935819 | complete | no |
+| `rect_n26_L553` | T | 26 | 553/100 | VERIFIED | 136.6 | 136.3 | 1.0001000010935817 | complete | no |
 | `rect_n26_L55325` | T | 26 | 2213/400 | VERIFIED | 129.9 | 129.8 | 1.0001000000788831 | complete | no |
 | `mixed_n27_L56435` | M | 27 | 11287/2000 | VERIFIED | 2824.1 | 2823.9 | 1.0000000000168654 | none | yes |
 | `mixed_n27_L5655` | M | 27 | 1131/200 | VERIFIED | 9257.6 | 9257.2 | 1.0000000000149065 | none | yes |
-| `rect_n27_L56` | T | 27 | 28/5 | VERIFIED | 80.6 | unavailable | 1.000100000125862 | complete | no |
+| `rect_n27_L56` | T | 27 | 28/5 | VERIFIED | 94.7 | 94.6 | 1.0001000001258618 | complete | no |
 | `rect_n27_L5635` | T | 27 | 1127/200 | VERIFIED | 171.3 | 171.2 | 1.0001000006538547 | complete | no |
 | `mixed_n28_L5735` | M | 28 | 1147/200 | VERIFIED | 1540.9 | 1540.6 | 1.0000000000381999 | none | yes |
 | `rect_n28_L5695` | T | 28 | 1139/200 | VERIFIED | 79.7 | 79.5 | 1.000100001727597 | none | yes |
@@ -51,10 +51,10 @@ the platform supplies no direction CPU.
 | `cert_n29_L571` | T | 29 | 571/100 | VERIFIED | 31.7 | unavailable | 1.0001000124838866 | complete | no |
 | `mixed_n29_L581` | M | 29 | 581/100 | VERIFIED | 1632.3 | 1632.1 | 1.0000000000094453 | none | yes |
 | `rect_n29_L5785` | T | 29 | 1157/200 | VERIFIED | 91.6 | 91.5 | 1.000100003150306 | none | yes |
-| `rect_n29_L579` | T | 29 | 579/100 | VERIFIED | 96.1 | unavailable | 1.0001000015468269 | complete | no |
+| `rect_n29_L579` | T | 29 | 579/100 | VERIFIED | 113.1 | 113.0 | 1.0001000015468267 | complete | no |
 | `rect_n29_L57975` | T | 29 | 2319/400 | VERIFIED | 170.9 | 170.8 | 1.0001000002454083 | complete | no |
 | `mixed_n30_L58835` | M | 30 | 11767/2000 | VERIFIED | 3890.8 | 3890.6 | 1.0000000000570795 | none | yes |
-| `rect_n30_L5865` | T | 30 | 1173/200 | VERIFIED | 98.3 | unavailable | 1.000100002112256 | complete | no |
+| `rect_n30_L5865` | T | 30 | 1173/200 | VERIFIED | 118.6 | 118.4 | 1.0001000021122557 | complete | no |
 | `rect_n30_L5875` | T | 30 | 47/8 | VERIFIED | 252.4 | 252.2 | 1.0001000004862441 | complete | no |
 | `mixed_n31_L59775` | M | 31 | 2391/400 | VERIFIED | 14607.6 | 14607.3 | 1.000000000022577 | none | yes |
 | `rect_n31_L592` | T | 31 | 148/25 | VERIFIED | 50.7 | unavailable | 1.0001000019260526 | complete | no |
@@ -62,20 +62,21 @@ the platform supplies no direction CPU.
 | `rect_n31_L59525` | T | 31 | 2381/400 | VERIFIED | 167.4 | 167.3 | 1.0001000003283942 | complete | no |
 | `rect_n32_L595` | T | 32 | 119/20 | VERIFIED | 34.2 | unavailable | 1.0001000045052235 | complete | no |
 | `mixed_n37_L644` | M | 37 | 161/25 | VERIFIED | 621.1 | 620.9 | 1.000000001365918 | complete | no |
+| `mixed_n37_L64975` | M | 37 | 2599/400 | VERIFIED | 12667.7 | 12667.1 | 1.0000000000165958 | none | yes |
 | `rect_n37_L64` | T | 37 | 32/5 | VERIFIED | 120.8 | 120.6 | 1.0001000010304752 | none | yes |
 | `rect_n37_L6425` | T | 37 | 257/40 | VERIFIED | 184.8 | 184.6 | 1.0001000008561982 | none | yes |
 | `rect_n38_L652` | T | 38 | 163/25 | VERIFIED | 123.6 | 123.5 | 1.0001000011311802 | none | yes |
-| `rect_n38_L654` | T | 38 | 327/50 | VERIFIED | 163.4 | unavailable | 1.0001000009335435 | complete | no |
+| `rect_n38_L654` | T | 38 | 327/50 | VERIFIED | 193.7 | 193.5 | 1.0001000009335432 | complete | no |
 | `rect_n38_L6545` | T | 38 | 1309/200 | VERIFIED | 195.5 | 195.3 | 1.0001000000846751 | complete | no |
 | `mixed_n39_L665` | M | 39 | 133/20 | VERIFIED | 3869.8 | 3869.4 | 1.0000000001966394 | none | yes |
 | `rect_n39_L662` | T | 39 | 331/50 | VERIFIED | 127.0 | 126.8 | 1.0001000023739663 | none | yes |
-| `rect_n39_L663` | T | 39 | 663/100 | VERIFIED | 168.9 | unavailable | 1.0001000005511531 | complete | no |
+| `rect_n39_L663` | T | 39 | 663/100 | VERIFIED | 212.4 | 212.1 | 1.000100000551153 | complete | no |
 | `rect_n39_L6635` | T | 39 | 1327/200 | VERIFIED | 246.0 | 245.7 | 1.0001000009846581 | complete | no |
-| `rect_n40_L6695` | T | 40 | 1339/200 | VERIFIED | 167.4 | unavailable | 1.0001000001762095 | complete | no |
+| `rect_n40_L6695` | T | 40 | 1339/200 | VERIFIED | 203.6 | 203.2 | 1.0001000001762093 | complete | no |
 | `rect_n40_L67` | T | 40 | 67/10 | VERIFIED | 197.4 | 197.2 | 1.0001000018843231 | complete | no |
 | `mixed_n41_L6775` | M | 41 | 271/40 | VERIFIED | 2135.3 | 2135.1 | 1.0000000000604714 | none | yes |
 | `rect_n41_L6745` | T | 41 | 1349/200 | VERIFIED | 146.2 | 146.1 | 1.0001000001413833 | none | yes |
-| `rect_n41_L6755` | T | 41 | 1351/200 | VERIFIED | 169.3 | unavailable | 1.0001000036794614 | complete | no |
+| `rect_n41_L6755` | T | 41 | 1351/200 | VERIFIED | 221.9 | 221.6 | 1.0001000036794612 | complete | no |
 | `rect_n41_L676` | T | 41 | 169/25 | VERIFIED | 228.6 | 228.3 | 1.0001000009531718 | complete | no |
 | `mixed_n42_L68475` | M | 42 | 2739/400 | VERIFIED | 1671.9 | 1671.7 | 1.0000000002195921 | none | yes |
 | `rect_n42_L676` | T | 42 | 169/25 | VERIFIED | 74.3 | 74.1 | 1.0001000107159737 | none | yes |
@@ -100,10 +101,10 @@ the platform supplies no direction CPU.
 | `rect_n51_L74425` | T | 51 | 2977/400 | VERIFIED | 182.3 | 182.1 | 1.0001000002568405 | complete | no |
 | `mixed_n52_L755` | M | 52 | 151/20 | VERIFIED | 1108.4 | 1108.2 | 1.0000000001604281 | none | yes |
 | `rect_n52_L7505` | T | 52 | 1501/200 | VERIFIED | 130.0 | 129.8 | 1.0001000020793203 | none | yes |
-| `rect_n52_L7535` | T | 52 | 1507/200 | VERIFIED | 236.8 | unavailable | 1.0001000012991306 | complete | no |
+| `rect_n52_L7535` | T | 52 | 1507/200 | VERIFIED | 285.1 | 284.8 | 1.0001000012991303 | complete | no |
 | `mixed_n53_L76275` | M | 53 | 3051/400 | VERIFIED | 1352.4 | 1352.2 | 1.0000000001795013 | none | yes |
 | `rect_n53_L758` | T | 53 | 379/50 | VERIFIED | 144.9 | 144.7 | 1.00010000038974 | none | yes |
-| `rect_n53_L7595` | T | 53 | 1519/200 | VERIFIED | 202.9 | unavailable | 1.0001000005722172 | complete | no |
+| `rect_n53_L7595` | T | 53 | 1519/200 | VERIFIED | 245.8 | 245.3 | 1.000100000572217 | complete | no |
 | `rect_n53_L76075` | T | 53 | 3043/400 | VERIFIED | 257.9 | 257.6 | 1.0001000005003464 | complete | no |
 | `mixed_n54_L7685` | M | 54 | 1537/200 | VERIFIED | 1413.6 | 1413.4 | 1.0000000007300995 | none | yes |
 | `rect_n54_L7665` | T | 54 | 1533/200 | VERIFIED | 199.6 | 199.4 | 1.0001000002090057 | none | yes |
@@ -125,12 +126,12 @@ the platform supplies no direction CPU.
 | `rect_n58_L788` | T | 58 | 197/25 | VERIFIED | 191.4 | 191.1 | 1.000100004157506 | none | yes |
 | `rect_n58_L789` | T | 58 | 789/100 | VERIFIED | 256.4 | 256.2 | 1.0001000032359766 | complete | no |
 | `rect_n59_L7905` | T | 59 | 1581/200 | VERIFIED | 162.3 | 162.1 | 1.0001000010464953 | none | yes |
-| `rect_n59_L792` | T | 59 | 198/25 | VERIFIED | 191.2 | unavailable | 1.0001000019592972 | complete | no |
+| `rect_n59_L792` | T | 59 | 198/25 | VERIFIED | 235.9 | 235.5 | 1.000100001959297 | complete | no |
 | `rect_n59_L79325` | T | 59 | 3173/400 | VERIFIED | 238.9 | 238.5 | 1.0001000006839356 | none | yes |
 | `rect_n59_L79375` | T | 59 | 127/16 | VERIFIED | 320.8 | 320.5 | 1.000100002281957 | none | yes |
 | `rect_n60_L792` | T | 60 | 198/25 | VERIFIED | 116.1 | 115.9 | 1.000100001366674 | none | yes |
 | `rect_n60_L794` | T | 60 | 397/50 | VERIFIED | 191.9 | 191.7 | 1.0001000038080838 | none | yes |
-| `rect_n61_L796` | T | 61 | 199/25 | VERIFIED | 109.0 | unavailable | 1.000100005068861 | complete | no |
+| `rect_n61_L796` | T | 61 | 199/25 | VERIFIED | 131.4 | 131.2 | 1.0001000050688609 | complete | no |
 | `mixed_n65_L835` | M | 65 | 167/20 | VERIFIED | 1629.0 | 1628.5 | 1.000000000539362 | complete | no |
 | `mixed_n66_L842` | M | 66 | 421/50 | VERIFIED | 1460.1 | 1459.8 | 1.0000000000012201 | complete | no |
 | `mixed_n66_L843` | M | 66 | 843/100 | VERIFIED | 2104.9 | 2104.6 | 1.0000000006737138 | partial (12 of 201) | yes |
@@ -140,7 +141,7 @@ the platform supplies no direction CPU.
 | `mixed_n67_L8475` | M | 67 | 339/40 | VERIFIED | 1299.0 | 1298.6 | 1.0000000006600718 | none | yes |
 | `mixed_n67_L848` | M | 67 | 212/25 | VERIFIED | 1388.3 | 1388.1 | 1.000000000605981 | none | yes |
 | `rect_n67_L844` | T | 67 | 211/25 | VERIFIED | 219.8 | 219.5 | 1.0001000010838108 | none | yes |
-| `rect_n67_L8455` | T | 67 | 1691/200 | VERIFIED | 257.1 | unavailable | 1.0001000007618854 | complete | no |
+| `rect_n67_L8455` | T | 67 | 1691/200 | VERIFIED | 348.9 | 348.3 | 1.0001000007618852 | complete | no |
 | `mixed_n68_L853` | M | 68 | 853/100 | VERIFIED | 855.9 | unavailable | 1.0000000000889968 | none | yes |
 | `rect_n68_L846` | T | 68 | 423/50 | VERIFIED | 166.2 | 166.0 | 1.000100000608853 | none | yes |
 | `rect_n68_L8495` | T | 68 | 1699/200 | VERIFIED | 235.7 | 235.4 | 1.0001000035563214 | none | yes |
@@ -148,7 +149,7 @@ the platform supplies no direction CPU.
 | `mixed_n69_L8612` | M | 69 | 2153/250 | VERIFIED | 1859.1 | 1858.9 | 1.0000000004388068 | none | yes |
 | `mixed_n69_L862` | M | 69 | 431/50 | VERIFIED | 2198.3 | 2198.0 | 1.000000000173938 | none | yes |
 | `rect_n69_L8545` | T | 69 | 1709/200 | VERIFIED | 229.3 | 229.0 | 1.000100000179333 | none | yes |
-| `rect_n69_L8575` | T | 69 | 343/40 | VERIFIED | 307.7 | unavailable | 1.0001000005653509 | complete | no |
+| `rect_n69_L8575` | T | 69 | 343/40 | VERIFIED | 409.1 | 408.2 | 1.0001000005653506 | complete | no |
 | `rect_n69_L8585` | T | 69 | 1717/200 | VERIFIED | 339.2 | 338.7 | 1.0001000000646423 | complete | no |
 | `mixed_n70_L86475` | M | 70 | 3459/400 | VERIFIED | 1753.5 | 1753.3 | 1.0000000002290894 | none | yes |
 | `mixed_n70_L86575` | M | 70 | 3463/400 | VERIFIED | 1938.6 | 1938.3 | 1.0000000000402047 | none | yes |
@@ -159,7 +160,7 @@ the platform supplies no direction CPU.
 | `mixed_n71_L8705` | M | 71 | 1741/200 | VERIFIED | 1678.5 | 1678.2 | 1.0000000006115706 | none | yes |
 | `mixed_n71_L8721` | M | 71 | 8721/1000 | VERIFIED | 2098.9 | 2098.6 | 1.0000000002314637 | none | yes |
 | `rect_n71_L8645` | T | 71 | 1729/200 | VERIFIED | 217.2 | 216.9 | 1.000100000419955 | none | yes |
-| `rect_n71_L8685` | T | 71 | 1737/200 | VERIFIED | 317.3 | unavailable | 1.0001000016144455 | complete | no |
+| `rect_n71_L8685` | T | 71 | 1737/200 | VERIFIED | 359.6 | 359.1 | 1.0001000016144452 | complete | no |
 | `mixed_n72_L876` | M | 72 | 219/25 | VERIFIED | 2259.5 | 2259.2 | 1.000000000071343 | none | yes |
 | `rect_n72_L8705` | T | 72 | 1741/200 | VERIFIED | 241.1 | 240.8 | 1.0001000023832398 | none | yes |
 | `rect_n72_L874` | T | 72 | 437/50 | VERIFIED | 328.4 | 328.0 | 1.000100000114479 | complete | no |
@@ -173,7 +174,7 @@ the platform supplies no direction CPU.
 | `rect_n74_L88475` | T | 74 | 3539/400 | VERIFIED | 333.9 | 333.5 | 1.0001000002730311 | complete | no |
 | `mixed_n75_L892` | M | 75 | 223/25 | VERIFIED | 715.9 | 715.7 | 1.0000000001483238 | none | yes |
 | `mixed_n75_L894` | M | 75 | 447/50 | VERIFIED | 2704.8 | 2704.5 | 1.000000000005104 | none | yes |
-| `rect_n75_L889` | T | 75 | 889/100 | VERIFIED | 291.2 | unavailable | 1.000100000092212 | complete | no |
+| `rect_n75_L889` | T | 75 | 889/100 | VERIFIED | 344.4 | 344.0 | 1.0001000000922118 | complete | no |
 | `rect_n75_L89` | T | 75 | 89/10 | VERIFIED | 303.4 | 303.0 | 1.0001000012091874 | complete | no |
 | `mixed_n76_L894` | M | 76 | 447/50 | VERIFIED | 758.5 | 758.3 | 1.0000000029480338 | complete | no |
 | `mixed_n76_L896` | M | 76 | 224/25 | VERIFIED | 700.2 | 700.1 | 1.0000000001194138 | none | yes |
@@ -185,7 +186,7 @@ the platform supplies no direction CPU.
 | `rect_n77_L891` | T | 77 | 891/100 | VERIFIED | 169.5 | 169.2 | 1.0001000012862522 | none | yes |
 | `rect_n77_L89325` | T | 77 | 3573/400 | VERIFIED | 235.1 | 234.8 | 1.0001000022464466 | none | yes |
 | `rect_n77_L894` | T | 77 | 447/50 | VERIFIED | 269.8 | 269.4 | 1.0001000029952136 | none | yes |
-| `rect_n78_L8955` | T | 78 | 1791/200 | VERIFIED | 271.1 | unavailable | 1.0001000000494495 | complete | no |
+| `rect_n78_L8955` | T | 78 | 1791/200 | VERIFIED | 324.6 | 324.3 | 1.0001000000494493 | complete | no |
 | `rect_n78_L8965` | T | 78 | 1793/200 | VERIFIED | 361.1 | 360.8 | 1.0001000003867002 | none | yes |
 | `mixed_n82_L932` | L | 82 | 233/25 | VERIFIED | 3387.6 | 3387.0 | 1.0000000001085079 | complete | no |
 | `mixed_n83_L935` | L | 83 | 187/20 | VERIFIED | 3068.8 | 3068.3 | 1.0000000006450585 | complete | no |
@@ -199,7 +200,7 @@ the platform supplies no direction CPU.
 | `mixed_n85_L9475` | M | 85 | 379/40 | VERIFIED | 1414.0 | unavailable | 1.000000000004128 | none | yes |
 | `mixed_n86_L950` | M | 86 | 19/2 | VERIFIED | 1366.1 | 1365.8 | 1.0000000005619347 | none | yes |
 | `mixed_n86_L9503` | M | 86 | 9503/1000 | VERIFIED | 1457.9 | 1457.6 | 1.00000000020883 | none | yes |
-| `rect_n86_L9355` | T | 86 | 1871/200 | VERIFIED | 213.3 | unavailable | 1.0001000005089622 | complete | no |
+| `rect_n86_L9355` | T | 86 | 1871/200 | VERIFIED | 263.4 | 263.0 | 1.000100000508962 | complete | no |
 | `rect_n86_L9365` | T | 86 | 1873/200 | VERIFIED | 240.9 | 240.5 | 1.000100000512849 | none | yes |
 | `mixed_n87_L948` | M | 87 | 237/25 | VERIFIED | 451.1 | 450.9 | 1.0000000000698703 | complete | no |
 | `mixed_n87_L955` | M | 87 | 191/20 | VERIFIED | 1395.3 | 1395.1 | 1.000000000093562 | none | yes |
@@ -236,14 +237,14 @@ the platform supplies no direction CPU.
 | `rect_n94_L9805` | T | 94 | 1961/200 | VERIFIED | 283.9 | 283.5 | 1.0001000020831263 | complete | no |
 | `mixed_n95_L996` | M | 95 | 249/25 | VERIFIED | 906.8 | 906.6 | 1.0000000007947085 | none | yes |
 | `mixed_n95_L9965` | M | 95 | 1993/200 | VERIFIED | 1053.5 | 1053.3 | 1.0000000013097659 | none | yes |
-| `rect_n95_L98418` | T | 95 | 49209/5000 | VERIFIED | 283.4 | unavailable | 1.0001000007374712 | complete | no |
+| `rect_n95_L98418` | T | 95 | 49209/5000 | VERIFIED | 356.4 | 355.7 | 1.000100000737471 | complete | no |
 | `rect_n95_L98518` | T | 95 | 49259/5000 | VERIFIED | 270.5 | 270.1 | 1.0001000049027422 | complete | no |
 | `mixed_n96_L996` | M | 96 | 249/25 | VERIFIED | 456.4 | 456.2 | 1.000000000121414 | complete | no |
 | `mixed_n96_L997` | M | 96 | 997/100 | VERIFIED | 978.8 | 978.7 | 1.0000000000057894 | none | yes |
 | `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 128.0 | 1.000000000300333 | complete | no |
 | `mixed_n108_L1062` | M | 108 | 531/50 | VERIFIED | 2086.8 | 2086.5 | 1.0000000001765084 | none | yes |
 
-224 of 224 certificates verified; 138 of them are the first complete check of their
+225 of 225 certificates verified; 139 of them are the first complete check of their
 certificate in this repository.
 
 <!-- This document follows common-doc-guidelines.md.

@@ -48,10 +48,24 @@ The other 22 are pinned by digest only, each with its reason in the record:
   `cadf59b6` and `9b60b4af`), the edition before `f007d7afd` added lemma N0 for declared
   nets.
 
-The release assets are not retained: each holds the candidate, the check2 receipt, run
-log and control, the sealed inner bundle, the pre-publication receipt and the nested
-verifier archive `sqverify-proof-net-fe12e036c.tar.gz`. They stay with their author,
-pinned here by size and digest, and the receipts below inventory every member.
+Each release asset holds the candidate, the check2 receipt, run log and control, the
+sealed inner bundle, the pre-publication receipt and the nested verifier archive
+`sqverify-proof-net-fe12e036c.tar.gz`, and the receipts below inventory every member.
+The n = 39 and n = 44 assets are not retained: they stay with their author, pinned here
+by size and digest.
+
+The n = 37 asset’s data members are retained under
+[`release/`](release/certificates/mixed_n37_L64975/), at their paths in the asset, so
+that the census can read the candidate (T-178’s replay, think-w76a, 2 November 2026).
+`devtools.fine_net_followup retain` held the asset to its pinned size and SHA-256 and
+copied six members: the candidate (as deterministic gzip, 32,844 bytes for 173,053),
+the check2 receipt, run log, control and control log, and the pre-publication receipt.
+The nested verifier archive and the sealed inner bundle are pinned by digest only, with
+their reasons, in the [retention record](acquisition/release-assets.json), which
+`devtools.fine_net_followup check-retained` re-derives from the packet.
+The six members come to about 230 kB, within `OR-18`’s size rule, by the owner’s answer
+of 17 October to retain fine-net candidates where the census reads them, as the n31 and
+#446 release packets do.
 
 ## What Was Checked
 
@@ -150,10 +164,18 @@ A maintained replay must retain the complete direction outcomes of a census run 
 reviewed source, from a candidate retained where the census reads it, with the whole-net
 controls and restored positives, and must be followed by a review that reads each
 certificate, by the checklist of the 6 October declared-net soundness review. The census
-reads candidates from packets, which retaining these candidates in Git would need: the
-owner’s question on jlevy/squares#543 for T-132, T-142 and T-143 applies here as well. The
-n = 39 control needs the `AXIS_ROUNDING` decision first. That work, with a budget for it,
-belongs to the import’s bead, think-u0av.
+reads candidates from packets, so each needs its candidate retained here first.
+
+n = 37’s replay ran on 2 November 2026 (think-w76a), from the retained candidate: every
+one of the 2,073 directions verified, 864,953,550 nodes and least certified bound
+1.0000000000165958 at direction 1919, each direction’s node count and least bound equal
+to the source’s check2 log, in 12,667.7 CPU-seconds at two threads, against the 11,739
+priced above; the whole-net controls ended `CONTROLS_REFUSED`. Its receipts are in the
+[census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md),
+and with the review of 14 October they put T-178 at V3/C3.
+The n = 39 control needs the `AXIS_ROUNDING` decision first. That work, with a budget
+for it, belongs to the import’s bead, think-u0av; n = 44’s is of little value now that
+$s(44) = 7$ is proved (T-252).
 
 ## Sources and Notices
 

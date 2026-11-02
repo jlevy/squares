@@ -176,7 +176,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-180.html": (
-        450_000,
+        475_000,
         (
             "The closed form's result, its scope of 264 counts and prepared math measure "
             "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
@@ -184,8 +184,20 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "more; think-v4me owns the runway and re-measures the page, its timing included, "
             "before it passes 440,000 bytes. It passed that mark unmeasured: 448,598 bytes "
             "on 31 October 2026 before T-261, and 449,867 with T-261 listed at 233 of its "
-            "counts (1,269 bytes). Those are byte measurements only; the timing is owed "
+            "counts (1,269 bytes). On 2 November 2026 it measures 450,697 bytes, after T-184 "
+            "and T-191 settled 76 and 95 among its counts, so the ceiling moves to 475,000 "
+            "as a measured choice. Those are byte measurements only; the timing is owed "
             "under think-v4me, whose trigger has passed."
+        ),
+    ),
+    "result/t-068.html": (
+        350_000,
+        (
+            "The rectangle-density result's 34 counts, each with every register result on "
+            "it, and prepared math measure 300,689 bytes on 2 November 2026, after T-184 and "
+            "T-191 settled 76 and 95 among them, past the 300,000 a result page is given; "
+            "the ceiling is a measured choice. A byte measurement only; the page's timing "
+            "is owed under think-v4me."
         ),
     ),
     "result/t-261.html": (

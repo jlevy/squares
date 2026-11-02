@@ -14,12 +14,20 @@ each to ``mutate``. Those covers are also decided in part by ``zm_mixed.py``, so
 packets keep, beside the ``zmx2`` controls, ``zm_mixed.py pose``'s exact evaluation of
 each mutated cover at a pose where it captures less than one, and of the published
 cover at the same pose, where it captures more.
+
+``zm_mixed.py`` has its own two controls per split cover, ``ZM_CONTROLS``, which
+``devtools.replay_evand_zmx2 zm-control`` ran on 2 November 2026: on one cell, with every
+run setting of the source's own records apart from the cell, it certifies the published
+cover and leaves the cover with every mass scaled by the control's factor uncertified,
+and ``zm_mixed.py pose`` evaluates both covers exactly at a pose in that cell. The tests
+below read those receipts too; nothing here runs ``zm_mixed.py``.
 """
 
 from __future__ import annotations
 
 import gzip
 import hashlib
+import json
 import re
 import shlex
 from collections import Counter
@@ -258,8 +266,65 @@ def test_the_controls_directories_hold_only_the_controls() -> None:
     for n, kind in driver.CONTROLS:
         receipt = control_receipt(n, kind)
         expected[PACKETS[n]] |= {receipt.name, receipt.name.removesuffix(".log") + "_roots.log"}
+    for n, controls in driver.ZM_CONTROLS.items():
+        for control in controls:
+            expected[PACKETS[n]] |= zm_control_files(n, control)
+    for (n, _), probe in ZM_POSE_PROBES.items():
+        expected[PACKETS[n]].add(probe)
     for packet, names in expected.items():
         assert {p.name for p in (packet / "receipts/controls").iterdir()} == names
+
+
+#: The ``k2m5_review.py cellmin`` outputs, run with the 16 October review's retained
+#: program, that chose the pose of each control whose cell is a ``zm_mixed.py`` job's.
+#: The other two controls' poses are the review's own, in ``review/outputs/poses-n*.json``.
+ZM_POSE_PROBES = {
+    (76, "scaled-49301-50000"): "n76_cellmin_j056.json",
+    (95, "scaled-49207-50000"): "n95_cellmin_j153.json",
+}
+#: The review program that wrote them, retained in the s(76) packet.
+REVIEW_PROGRAM = PACKETS[76] / "review/programs/k2m5_review.py"
+
+
+@pytest.mark.parametrize(("key", "probe"), sorted(ZM_POSE_PROBES.items()), ids=str)
+def test_each_zm_control_pose_is_corroborated_outside_zm_mixed(
+    key: tuple[int, str], probe: str
+) -> None:
+    """The review program's own exact evaluator, which shares no code with
+    ``zm_mixed.py``, found the pose and its capture: the published cover's there equals
+    ``zm_mixed.py pose``'s exactly, so the scaled cover's, that times the factor, is
+    below one whatever ``zm_mixed.py`` computes. The probe chose the pose; it decides
+    nothing."""
+    n, tag = key
+    (control,) = [c for c in driver.ZM_CONTROLS[n] if c.tag == tag]
+    data = json.loads((PACKETS[n] / "receipts/controls" / probe).read_text(encoding="utf-8"))
+    assert data["program"]["name"] == REVIEW_PROGRAM.name
+    assert data["program"]["sha256"] == hashlib.sha256(REVIEW_PROGRAM.read_bytes()).hexdigest()
+    assert tuple(Fraction(v) for v in data["box"].split(",")) == tuple(
+        Fraction(v) for v in control.cell
+    )
+    assert tuple(Fraction(v) for v in data["argmin"]) == tuple(
+        Fraction(v) for v in control.pose
+    )
+    name = driver.CASES[n].name
+    log = (
+        PACKETS[n] / "receipts/controls" / f"{name}_zm_pose_published_at_{tag}.log"
+    ).read_text(encoding="utf-8")
+    pose = POSE.search(log)
+    assert pose is not None
+    assert Fraction(data["min_mu"]) == Fraction(pose["mu"])
+    assert Fraction(data["min_mu"]) * control.factor < 1
+
+
+def zm_control_files(n: int, control: driver.ZmControl) -> set[str]:
+    """The receipts ``replay_evand_zmx2 zm-control`` writes for one ``zm_mixed.py`` control."""
+    name = driver.CASES[n].name
+    files: set[str] = set()
+    for which in ("published", control.tag):
+        stem = f"{name}_zm_control_{which}_{control.cell_name}"
+        pose = f"{name}_zm_pose_{which}_at_{control.tag}.log"
+        files |= {f"{stem}.log", f"{stem}.jsonl", pose}
+    return files
 
 
 def control_receipt(n: int, kind: str) -> Path:
@@ -448,3 +513,113 @@ def test_zm_mixed_refuses_the_reviews_scaled_cover_where_it_certifies_the_publis
     )
     assert "\nNOT VERIFIED (PARTIAL)\n" in log
     assert f"{mutant['sha256']['input']}  input " in log
+
+
+#: The cover digest a ``zm-control`` receipt's ``cwd`` line names.
+ZM_CONTROL_CWD = re.compile(
+    r"^# cwd: zm_mixed/ staged by devtools\.replay_evand_zmx2 zm-control: .*; "
+    r"cover (?P<cover>[0-9a-f]{64})",
+    re.MULTILINE,
+)
+ZM_CELL_KEYS = ("cx_lo", "cx_hi", "cy_lo", "cy_hi", "u_lo", "u_hi")
+
+
+@cache
+def source_zm_settings(n: int) -> tuple[tuple[str, object], ...]:
+    """Every run setting but the cell, as each of the source's own ``zm_mixed.py`` record
+    files for the case states it: the configuration that accepted the original."""
+    found = set()
+    for path in sorted(driver.ZM_MIXED_JOBS[n].parent.glob("j*.jsonl")):
+        with path.open(encoding="utf-8") as handle:
+            header = json.loads(handle.readline())
+        assert header["kind"] == "zm_mixed cert header"
+        found.add(tuple(sorted((k, v) for k, v in header["settings"].items() if k != "region")))
+    assert len(found) == 1, f"the source's records for {n} disagree on their settings"
+    return found.pop()
+
+
+def test_every_split_cover_has_two_zm_mixed_controls() -> None:
+    """Stage 4's rule, for the checker that decides the split covers' other cells."""
+    assert {n: len(controls) for n, controls in driver.ZM_CONTROLS.items()} == dict.fromkeys(
+        driver.ZM_MIXED_JOBS, 2
+    )
+    for controls in driver.ZM_CONTROLS.values():
+        assert len({control.factor for control in controls}) == len(controls)
+
+
+ZM_CONTROL_CASES = [
+    (n, control) for n, controls in sorted(driver.ZM_CONTROLS.items()) for control in controls
+]
+
+
+@pytest.mark.parametrize(
+    ("n", "control"),
+    ZM_CONTROL_CASES,
+    ids=lambda value: value.tag if isinstance(value, driver.ZmControl) else str(value),
+)
+def test_zm_mixed_refuses_each_scaled_cover_where_it_certifies_the_published_one(
+    n: int, control: driver.ZmControl
+) -> None:
+    """With the source's flags and depth limit of 24, on one cell, zm_mixed.py certifies
+    the published cover and leaves the scaled cover with uncertified boxes; at a pose in
+    that cell the scaled cover captures less than one and the published at least one."""
+    from devtools.audit_evand_mixed_covers import (  # noqa: PLC0415
+        CHECKER_B91D70B6,
+        ZM_MIXED_SETTINGS,
+        read_zm_mixed,
+    )
+
+    controls = PACKETS[n] / "receipts/controls"
+    name = driver.CASES[n].name
+    pinned = {
+        path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in CHECKER_B91D70B6
+    }
+    mutation = driver.scale(cover_text(n), control.factor)
+    assert mutation.removed == total(as_mixed(cover_text(n))) * (1 - control.factor)
+    assert d4_invariant(as_mixed(mutation.text))
+    digests = {
+        "published": driver.CASES[n].sha256,
+        control.tag: hashlib.sha256(mutation.text.encode("ascii")).hexdigest(),
+    }
+    cell = dict(zip(ZM_CELL_KEYS, control.cell, strict=True))
+    census: dict[str, dict[str, object]] = {}
+    for which, digest in digests.items():
+        stem = controls / f"{name}_zm_control_{which}_{control.cell_name}"
+        header, records = read_zm_mixed(stem.with_suffix(".jsonl"))
+        assert header["sha256"] == {**pinned, "input": digest}
+        settings = header["settings"]
+        assert settings["region"] == cell
+        assert all(settings[k] == v for k, v in ZM_MIXED_SETTINGS.items())
+        assert tuple(
+            sorted((k, v) for k, v in settings.items() if k != "region")
+        ) == source_zm_settings(n)
+        assert list(records) == [control.cell]
+        census[which] = next(iter(records.values()))["st"]
+        log = stem.with_suffix(".log").read_text(encoding="utf-8")
+        found = ZM_CONTROL_CWD.search(log)
+        assert found is not None
+        assert found["cover"] == digest
+        assert re.search(r"^# finished \S+; exit 0; ", log, re.MULTILINE)
+        verdict = "VERIFIED-D4 (PARTIAL)" if which == "published" else "NOT VERIFIED (PARTIAL)"
+        assert f"\n{verdict}\n" in log
+    assert census["published"]["UNCERT"] == 0
+    assert census[control.tag]["UNCERT"] > 0  # type: ignore[operator]
+    captures: dict[str, Fraction] = {}
+    for which, digest in digests.items():
+        log = (controls / f"{name}_zm_pose_{which}_at_{control.tag}.log").read_text(
+            encoding="utf-8"
+        )
+        found, pose = ZM_CONTROL_CWD.search(log), POSE.search(log)
+        assert found is not None
+        assert pose is not None
+        assert found["cover"] == digest
+        assert re.search(r"^# finished \S+; exit 0; ", log, re.MULTILINE)
+        assert tuple(Fraction(pose[k]) for k in ("cx", "cy", "u")) == tuple(
+            Fraction(v) for v in control.pose
+        )
+        captures[which] = Fraction(pose["mu"])
+    assert captures[control.tag] < 1 <= captures["published"]
+    assert captures[control.tag] == captures["published"] * control.factor
+    low = [Fraction(cell[k]) for k in ("cx_lo", "cy_lo", "u_lo")]
+    high = [Fraction(cell[k]) for k in ("cx_hi", "cy_hi", "u_hi")]
+    assert all(a <= Fraction(v) <= b for a, v, b in zip(low, control.pose, high, strict=True))
