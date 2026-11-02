@@ -3,17 +3,17 @@ type: is
 id: is-01m51h5ydcrsw8z91pfmrrw0mw
 title: Owner decisions pending from the 2026-10-15/16 intake passes (each blocks a reply or a record change)
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 17
-delegate: bold-ritchie-l30
+version: 18
+delegate: null
 labels: []
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:57:59.468Z
-updated_at: 2026-11-02T14:38:19.536Z
+updated_at: 2026-11-02T14:39:41.965Z
 started_at: 2026-11-02T14:37:15.698Z
 ---
 Collected by the coordinator 2026-10-16 so another agent can pick them up. Each item names the bead that owns it; act only on the owner's word.
