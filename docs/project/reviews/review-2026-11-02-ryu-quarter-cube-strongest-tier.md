@@ -639,7 +639,7 @@ The programs and receipts are in
 In all, well under a CPU-minute.
 F8’s cross-check in mpmath, `l49_mpmath_crosscheck.py`, is a float computation that
 decides nothing. It is kept with its output, `l49-mpmath-crosscheck.txt`, and registered
-nowhere. Each receipt records the SHA-256 of the programs that wrote it.
+nowhere. Each receipt in the table records the SHA-256 of the programs that wrote it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -968,8 +968,8 @@ issues:
           every constant and threshold; the eight cube-root cases; Q's supplementary
           Tables 4 and 5 and its Section 12.6 sensitivity record, never run before; v1.2
           Lemma 4.9's finite check; and all 108 predicates of quarter_cube_constants.py.
-          The explicit quarter-power threshold holds from k* = 4616673963026.36, a
-          relative margin of 1.05*10^-4.
+          The explicit quarter-power threshold 4.62*10^12 rounds up k* =
+          4616673963026.36, with a relative margin of 1.05*10^-4 in the bracket B.
           The reply is drafted in think-u1kq for stage 7.
           Before: the intake merged in PRs #439 and #441 on 9 October. The 8 October review
           accepted the chains at source-review scope, conditional, and its addendum's
