@@ -37927,7 +37927,8 @@ results:
       review's checker is that lane's own, whose soundness no one else has reviewed, so its
       run is a second route beside the rung, as at T-225 and T-229 (review A1 of #751). The
       n = 10 recomputation is a reproduction with the producer's code at one count and sets
-      no rung. C3 waits on gradec.py's replay of all 233 (think-mtah).
+      no rung. C3 waits on entering gradec.py's replay of all 233, run on 1 November and
+      held for think-xyek (think-mtah).
     reviews:
       - path: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
         kind: adversarial
@@ -37949,7 +37950,7 @@ results:
       after a review that ends defects-resolved. gradec.py's replay of all 233, the C3
       route, ran on 1 November and reproduced every certificate byte for byte (think-mtah);
       its receipt is retained in the packet and its evidence is not entered, since at C3
-      today's status rule would clear the incomplete read the question is about. Once the
+      today's status rule would clear the incomplete status the question is about. Once the
       owner answers, the replay evidence is entered, the confirmation rises to C3, and the
       status follows the answer. The author's adoption of the review's repaired step in
       grade-C.md would close C-1 at the source.
