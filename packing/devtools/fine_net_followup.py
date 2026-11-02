@@ -62,6 +62,14 @@ a packet's retained copies:
   (never the asset's ``code/``), and prices the complete replay and the route's control
   from the source's per-angle seconds. It is a diagnostic of the angles it ran.
 
+Once a census capture of a retained check2 candidate is complete,
+``capture-agreement`` compares it with the source's own run log, retained beside the
+candidate as ``check2/run.jsonl.gz``, direction by direction: verdict, method, nodes,
+leaves, maximum depth, least certified bound and, at the axis, vertices and least
+vertex, and the two summaries' node totals. It runs nothing; the capture decides the
+certificate, and the comparison says whether the two runs of one crate on one candidate
+agree everywhere, as the source's log claims.
+
 From ``packing/``::
 
     .venv/bin/python3 -m devtools.fine_net_followup premises \\
@@ -77,6 +85,10 @@ From ``packing/``::
         --packet resources/web/PACKET --work WORK \\
         --release square-lower-bounds-v1 --repository wand125/square-packing
     .venv/bin/python3 -m devtools.fine_net_followup check-retained resources/web/PACKET
+    .venv/bin/python3 -m devtools.fine_net_followup capture-agreement \
+        --capture benchmarks/measure-verifier/census-mixed/PACKET/CERT.jsonl.gz \
+        --source-run resources/web/PACKET/release/certificates/CERT/check2/run.jsonl.gz \
+        --out resources/web/PACKET/receipts/capture-agreement-nN.json
     .venv/bin/python3 -m devtools.fine_net_followup linear-premises \\
         --asset ASSET.tar.gz --sha256 HEX --bytes N --documents CERT_DIR \\
         --name mixed_n122_L1126 --n 122 --side 563/50 --orbits 502,1268,3 \\
@@ -731,6 +743,79 @@ def source_rows(run_log: Path) -> dict[int, dict[str, Any]]:
     return {int(row["r"]): row for row in rows if "r" in row}
 
 
+#: The fields of a direction's row that two runs of one crate on one candidate must share,
+#: whatever their thread counts and hosts: everything but timing and audit cadence.
+AGREEING_FIELDS = (
+    "verdict",
+    "method",
+    "nodes",
+    "leaves",
+    "max_depth",
+    "min_certified_lower_bound",
+    "vertices",
+    "argmin",
+)
+
+
+def jsonl_gz(path: Path) -> list[dict[str, Any]]:
+    """Every JSON line of a gzip file."""
+    with gzip.open(path, "rt", encoding="utf-8") as stream:
+        return [json.loads(line) for line in stream if line.strip()]
+
+
+def capture_agreement(capture: Path, source_run: Path) -> dict[str, Any]:
+    """A census capture against the source's run log, at every direction.
+
+    Each direction both runs hold must agree on every field of `AGREEING_FIELDS` that
+    either row carries, and the two runs must hold the same directions, every one
+    verified, with the same node total. It runs no program: it says whether the
+    maintained capture and the source's run of the crate it adapts saw the same branch and
+    bound everywhere, which the source's log claims and the capture alone does not show.
+    """
+    ours = jsonl_gz(capture)
+    theirs = jsonl_gz(source_run)
+    our_rows = {int(row["r"]): row for row in ours if "r" in row}
+    their_rows = {int(row["r"]): row for row in theirs if "r" in row}
+    summary = next((row for row in ours if row.get("kind") == "sqverify-fast-summary/v1"), {})
+    source = next((row for row in theirs if row.get("kind") == "sqverify-fast-summary/v1"), {})
+    differing: dict[str, list[int]] = {}
+    for index in sorted(set(our_rows) & set(their_rows)):
+        mine, yours = our_rows[index], their_rows[index]
+        for field in AGREEING_FIELDS:
+            if (field in mine or field in yours) and mine.get(field) != yours.get(field):
+                differing.setdefault(field, []).append(index)
+    least = min(our_rows.values(), key=lambda row: row["min_certified_lower_bound"])
+    agree = (
+        set(our_rows) == set(their_rows)
+        and not differing
+        and all(row.get("verdict") == "verified" for row in our_rows.values())
+        and summary.get("nodes") == source.get("nodes")
+    )
+    return {
+        "kind": "fine-net-capture-agreement/v1",
+        "capture": capture.name,
+        "capture_sha256": file_digest(capture),
+        "source_run_sha256": file_digest(source_run),
+        "directions": len(our_rows),
+        "source_directions": len(their_rows),
+        "only_in_capture": sorted(set(our_rows) - set(their_rows)),
+        "only_in_source": sorted(set(their_rows) - set(our_rows)),
+        "fields": list(AGREEING_FIELDS),
+        "differing": differing,
+        "nodes": summary.get("nodes"),
+        "source_nodes": source.get("nodes"),
+        "least_certified_bound": least["min_certified_lower_bound"],
+        "least_certified_bound_at": int(least["r"]),
+        "builds": {"capture": summary.get("build"), "source": source.get("build")},
+        "threads": {"capture": summary.get("threads"), "source": source.get("threads")},
+        "status": "CAPTURE_AGREES_WITH_SOURCE_LOG" if agree else "CAPTURE_DIFFERS",
+        "scope": (
+            "A comparison of two recorded runs: it runs nothing and decides nothing the"
+            " capture does not; the capture's own census row decides the certificate."
+        ),
+    }
+
+
 def direction(binary: Path, candidate: Path, n: int, side: str, index: int) -> dict[str, Any]:
     """One direction at one thread with ``--confirm``, timed by ``wait4``; a direction
     still running after `DIRECTION_TIMEOUT` seconds is killed and the sample abandoned."""
@@ -1196,9 +1281,25 @@ def main(argv: list[str] | None = None) -> int:
     keep.add_argument("--work", type=Path, required=True)
     keep.add_argument("--release", required=True, help="the release tag, as the asset names it")
     keep.add_argument("--repository", required=True, help="owner/name of the source")
+    agreeing = commands.add_parser(
+        "capture-agreement", help="a census capture against the source's run log"
+    )
+    agreeing.add_argument("--capture", type=Path, required=True)
+    agreeing.add_argument("--source-run", type=Path, required=True)
+    agreeing.add_argument("--out", type=Path, required=True)
     kept = commands.add_parser("check-retained", help="a packet's retained members")
     kept.add_argument("packets", type=Path, nargs="+")
     args = parser.parse_args(argv)
+    if args.command == "capture-agreement":
+        receipt = capture_agreement(args.capture, args.source_run)
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        atomic_write_text(args.out, json.dumps(receipt, indent=2) + "\n")
+        print(
+            f"{receipt['capture']}: {receipt['status']}, {receipt['directions']} directions, "
+            f"{receipt['nodes']} nodes, least {receipt['least_certified_bound']} at "
+            f"{receipt['least_certified_bound_at']}"
+        )
+        return 0 if receipt["status"] == "CAPTURE_AGREES_WITH_SOURCE_LOG" else 1
     if args.command == "check-retained":
         problems = [
             f"{packet}: {problem}"
