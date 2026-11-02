@@ -1,0 +1,383 @@
+{
+  "budget": 4096,
+  "passed": true,
+  "controls": [
+    {
+      "control": "A: threshold 8 on the sharp box, bnb_n2_T9_0of1 line 24",
+      "claim that should fail": "E_II + W_I + sum D_i* <= 8 on the box",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 122,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "closed": 1
+        },
+        "max_bound": 9,
+        "max_level": 9,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": true,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 1,
+        "W_I_at_least": 0,
+        "D_at_least": [
+          4,
+          4
+        ],
+        "U_at_least": 9
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "B: inf box bnb_n2_T9_0of1 line 1, angle 2 widened down from 7pi/4 to 3pi/2",
+      "claim that should fail": "no admissible configuration in the widened box",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 129,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "inf": 1
+        },
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": false,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 1,
+        "W_I_at_least": 0,
+        "D_at_least": [
+          0,
+          0
+        ],
+        "U_at_least": 1
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "C: nowall box bnbw_n2_T9_0of1 line 290, h widened down to 0",
+      "claim that should fail": "no admissible configuration of the widened box has a side edge",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 212,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "nowall": 1
+        },
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": false,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 1,
+        "W_I_at_least": 1,
+        "D_at_least": [
+          0,
+          0
+        ],
+        "U_at_least": 2
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "D: the sharp box with the count's separation halved, gamma0/2",
+      "claim that should fail": "E_II + W_I + sum D_i* <= 9 with directions only gamma0/2 apart",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 122,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "closed": 1
+        },
+        "max_bound": 9,
+        "max_level": 9,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": true,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 1,
+        "W_I_at_least": 0,
+        "D_at_least": [
+          6,
+          6
+        ],
+        "U_at_least": 13
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "E: threshold 8 on the sharp box's neighbour, bnb_n2_T9_0of1 line 32 (review A)",
+      "claim that should fail": "E_II + W_I + sum D_i* <= 8 on the box",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 122,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "closed": 1
+        },
+        "max_bound": 9,
+        "max_level": 9,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": true,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 1,
+        "W_I_at_least": 0,
+        "D_at_least": [
+          4,
+          4
+        ],
+        "U_at_least": 9
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "F: inf box bnbw_n2_T9_0of1 line 4, inadmissible by the side, angle 2 widened down from 3pi/2 to 3.5 (review A)",
+      "claim that should fail": "no admissible configuration in the widened box",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 212,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "inf": 1
+        },
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": false,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 1,
+        "W_I_at_least": 0,
+        "D_at_least": [
+          0,
+          0
+        ],
+        "U_at_least": 1
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "G: E_II's Lambda, a pair 1.413 apart with a side 1/10 below p",
+      "claim that should fail": "E_II + W_I + sum D_i* <= 0 about the configuration",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 56,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "closed": 1
+        },
+        "max_bound": 1,
+        "max_level": 5,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": true,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 1,
+        "W_I_at_least": 0,
+        "D_at_least": [
+          0,
+          0
+        ],
+        "U_at_least": 1
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "H: W_I's d + sqrt2/2, a centre with c_y + h = 0.705",
+      "claim that should fail": "E_II + W_I + sum D_i* <= 0 about the configuration",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 34,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "closed": 1
+        },
+        "max_bound": 1,
+        "max_level": 5,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": true,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 0,
+        "W_I_at_least": 1,
+        "D_at_least": [
+          0
+        ],
+        "U_at_least": 1
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "I: the outer centres' side condition, an outer centre with x_y + h = 0.594",
+      "claim that should fail": "E_II + W_I + sum D_i* <= 0 about the configuration",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 34,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "closed": 1
+        },
+        "max_bound": 1,
+        "max_level": 5,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": true,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 0,
+        "W_I_at_least": 0,
+        "D_at_least": [
+          1
+        ],
+        "U_at_least": 1
+      },
+      "witness_refutes": true
+    },
+    {
+      "control": "J: |x| > rho1, an outer centre with |x|^2 = 0.790",
+      "claim that should fail": "E_II + W_I + sum D_i* <= 2 about the configuration",
+      "perturbed refused": true,
+      "perturbed": {
+        "certified": false,
+        "leaves": {},
+        "max_bound": -1,
+        "max_level": 0,
+        "pieces": 12,
+        "reason": "a piece too small to cut stays undecided"
+      },
+      "unperturbed certified": true,
+      "unperturbed": {
+        "certified": true,
+        "leaves": {
+          "closed": 1
+        },
+        "max_bound": 3,
+        "max_level": 6,
+        "pieces": 1,
+        "reason": ""
+      },
+      "witness": {
+        "in_box": true,
+        "in_original_box": true,
+        "admissible": true,
+        "in_domain": true,
+        "E_II_at_least": 0,
+        "W_I_at_least": 0,
+        "D_at_least": [
+          3
+        ],
+        "U_at_least": 3
+      },
+      "witness_refutes": true
+    }
+  ]
+}

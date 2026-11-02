@@ -35,7 +35,9 @@ at source-review scope, and
 which accepted it and keeps its programs and receipts in this packet’s
 [`review/quarter-cube-strongest-tier-2026-11-02/`](review/quarter-cube-strongest-tier-2026-11-02/README.md).
 They ran none of the source’s programs.
-The independent per-box labelling of v1.2’s Lemma 4.10 remains think-k3tk’s.
+The independent per-box labelling of v1.2’s Lemma 4.10 was done on 2 November
+(think-k3tk), and certified every box as labelled
+([receipts](../squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/README.md)).
 
 ## Credit and Licence
 

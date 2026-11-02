@@ -1,0 +1,79 @@
+# command: .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels summarize --out /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/labels-run --receipts resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels
+# cwd: packing/ of jlevy/squares at 4fd07e1b3 (branch claude/bold-ritchie-xo28us-l26); the two workers' rows from a scratch directory
+# python3: CPython 3.14.7, the project interpreter (packing/.venv): numpy 2.x and mpmath 1.3.0; no python-flint
+# host: 4 cores; load 1.80 2.01 2.10; started 2026-11-02T08:39:07Z
+{
+  "boxes": 78673,
+  "missing": [],
+  "classes": {
+    "inf": {
+      "certified-as-labelled": 72174,
+      "certified-otherwise": 0,
+      "not-certified": 0
+    },
+    "nowall": {
+      "certified-as-labelled": 1094,
+      "certified-otherwise": 0,
+      "not-certified": 0
+    },
+    "closed": {
+      "certified-as-labelled": 5405,
+      "certified-otherwise": 0,
+      "not-certified": 0
+    }
+  },
+  "all_certified": true,
+  "all_as_labelled": true,
+  "largest_closed_bound": 9,
+  "closed_bounds": {
+    "5": 1,
+    "6": 3,
+    "7": 15,
+    "8": 199,
+    "9": 2576
+  },
+  "finest_levels": {
+    "5": 161,
+    "6": 335,
+    "7": 362,
+    "8": 435,
+    "9": 579,
+    "10": 296,
+    "11": 322,
+    "12": 165,
+    "13": 139
+  },
+  "pieces": {
+    "1": 74659,
+    "2-16": 2820,
+    ">16": 1194
+  },
+  "cpu_s": 1870.5,
+  "constants": {
+    "Lambda_hi": 1.4143135623730951,
+    "Lambda_sq_hi": 2.0002828527124747,
+    "rho1_sq_lo": 0.7501414313562372,
+    "d_plus_sqrt2_over_2_hi": 0.7072067811865476,
+    "separation_turns": "2121711696491977773/2^64",
+    "gamma0_degrees": [
+      41.40655975304113,
+      41.40655975304114
+    ]
+  }
+}
+0 boxes not certified as labelled
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/summary.json
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnb_n1_T9_0of1.jsonl
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnb_n2_T9_0of1.jsonl
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnb_n3_T9_0of1.jsonl.gz
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnb_n4_T9_0of2.jsonl.gz
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnb_n4_T9_1of2.jsonl.gz
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnb_n5_T9_0of2.jsonl.gz
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnb_n5_T9_1of2.jsonl.gz
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnbw_n1_T9_0of1.jsonl
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnbw_n2_T9_0of1.jsonl
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnbw_n3_T9_0of1.jsonl.gz
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnbw_n4_T9_0of2.jsonl.gz
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnbw_n4_T9_1of2.jsonl.gz
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/labels/bnbw_n5_T9_0of1.jsonl.gz
+# finished 2026-11-02T08:39:10Z; exit 0; wall 3.175 s; CPU 3.3 s (user 3.059 + sys 0.273); load 1.80 2.01 2.10

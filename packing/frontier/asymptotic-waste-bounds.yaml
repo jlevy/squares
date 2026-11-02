@@ -206,9 +206,22 @@ lower_bounds:
       coverage programs, coverage_check.py (which shares the search's split rule) and the
       exact-volume and recursive-cover checks of code/coverage_independent/, found no
       gap, and the source's verify_v10.py passed its 132 checks on these outputs. This
-      reproduces the computation with the producer's code; the labelling of the boxes
-      has one implementation, and no independent one has run (review finding RF-1;
-      think-k3tk).
+      reproduces the computation with the producer's code (review finding RF-1).
+      SECOND ROUTE 2026-11-02 (think-k3tk). cases/asymptotic/ryu_k2_minus_c_labels.py,
+      written here from the proof of Lemma 4.10 and the TeX's disc model without reading
+      the source's programs, decided all 78,673 boxes again, in binary64 with one-ulp
+      outward rounding and mpmath interval constants, with an exact integer count of the
+      directions: every box certified as labelled (72,174 inf, 1,094 nowall, 5,405 closed,
+      largest bound 9), 1,880.8 CPU seconds, and ten negative controls refused by
+      decision with exactly checked refuting witnesses in their boxes, four of which each
+      catch a labeller that moves one threshold of the model; after review A of #884 a
+      seeded sample of 1,000 boxes was decided again with identical rows
+      (receipts/independent-labels/, V-ryu-k2-minus-c-independent-labels). Lemma 4.10's
+      labels are thus independently re-implemented, clean-room, in full, by a Claude
+      agent, a system family the producer also used. Its authors read no program of the
+      source, but they read the 5 October review, which describes the source's checker at
+      the level of its code. That the boxes cover the domain still rests on the source's
+      three coverage programs, and the reduction to U(I) on the proof.
       (2) Two controls were refused: the box holding the nine-pair configuration, at
       threshold 8, and the n = 2 box list without that box (receipts/controls/).
       (3) Every numerical step from the lemmas' stated inputs to the constants was
@@ -220,7 +233,9 @@ lower_bounds:
       computational lemma is a machine certificate that replays (V3); this project's
       confirmation of the whole is one AI read of the analytic chain (C1), with Lemma
       4.10's computation reproduced with the producer's code, which would be C3 for that
-      part alone. V4 and C4 need a second adversarial AI review by a distinct reviewer
+      part alone. Its independent re-implementation of 2 November (think-k3tk) is stated
+      beside that part's rung and changes no rung (epistemics.md, The Independence
+      Ladder). V4 and C4 need a second adversarial AI review by a distinct reviewer
       and a named human's oversight record; nothing here reaches rung 5. The checker does
       not derive these rungs, because the result is not in the register.
       NOT IN THE REGISTER: results.yaml and source-coverage.yaml hold results by the
@@ -265,14 +280,20 @@ lower_bounds:
       docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md. The maintained
       cases/asymptotic/quarter_cube_constants.py checks the two threshold margins,
       derivative conditions and asymptotic floors in interval arithmetic. These
-      numerical consequences remain conditional on the reviewed geometric premises;
-      independent per-box labelling remains think-k3tk. No source checker ran here.
+      numerical consequences remain conditional on the reviewed geometric premises.
+      The box labels of v1.2's Lemma 4.10, which Theorem A needs, were decided again on
+      2 November 2026 by an independent implementation (think-k3tk; the v1.1 packet's
+      receipts/independent-labels/): all 78,673 boxes certified as labelled. No source
+      checker ran here.
       REVIEWED 2026-11-02 at the strongest tier (think-yf8j):
       docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md
       re-derived the chain and the v1.2 lemmas it imports, except two parts: v1.2's
       Proposition 4.5 was read in full with its numbers recomputed, and the box labels
       of v1.2's Lemma 4.10 were not decided (think-k3tk). It accepted the chain, with
-      eight notes and no defect or gap. On exact-rational intervals of its own it
+      eight notes and no defect or gap; its F3, that Theorem A and the cube-root
+      Theorem 1.1 need those labels, is met for the labels by think-k3tk's run, while the
+      coverage of Lemma 4.10's domain still rests on the source's three programs. On
+      exact-rational intervals of its own it
       reproduced every constant and threshold. It also reproduced Tables 4 and 5 and the
       Section 12.6 sensitivity record, which had not been run before, and all 108
       predicates of quarter_cube_constants.py. The explicit threshold has little margin.
@@ -322,8 +343,10 @@ lower_bounds:
       scoped review recorded in docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md.
       The maintained quarter_cube_constants.py checks all eight published ranges,
       outward table bounds and both asymptotic floors. Its numerical consequences
-      remain conditional on the reviewed geometric premises; independent per-box
-      labelling remains think-k3tk. No source checker ran here.
+      remain conditional on the reviewed geometric premises. The box labels of v1.2's
+      Lemma 4.10, which Theorem 1.1 needs, were decided again on 2 November 2026 by an
+      independent implementation (think-k3tk): all 78,673 boxes certified as labelled.
+      No source checker ran here.
       REVIEWED 2026-11-02 at the strongest tier (think-yf8j):
       docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md
       re-derived the argument, its inheritance from the quarter-power Sections 3-8 and
@@ -372,7 +395,10 @@ lower_bounds:
       The revised argument adds Lemmas 3.5 and 4.15 and the cutoff 236000. The scoped review and maintained floating-count checker
       cover all 25,929 finite angular comparisons under explicit binary64 premises.
       They certify current-host constants, not an unobserved historical libm output;
-      independent per-box labelling remains think-k3tk. All thirteen deciding leaf lists and their checking programs are byte-identical
+      the per-box labels were decided again on 2 November 2026 by an independent
+      implementation (think-k3tk; the v1.1 packet's receipts/independent-labels/), every
+      box certified as labelled, which covers this version: its data/kw9_data.zip has the
+      same SHA-256 and its Lemma 4.10 the same model. All thirteen deciding leaf lists and their checking programs are byte-identical
       to the earlier replay; that subclaim can reuse its recorded runtime and
       outcomes, while the changed whole-source manifest is not reused.
       The earlier version's V3/C1 record and replay remain unchanged. No upstream

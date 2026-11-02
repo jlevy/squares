@@ -1,0 +1,60 @@
+{
+  "boxes": 78673,
+  "missing": [],
+  "classes": {
+    "inf": {
+      "certified-as-labelled": 72174,
+      "certified-otherwise": 0,
+      "not-certified": 0
+    },
+    "nowall": {
+      "certified-as-labelled": 1094,
+      "certified-otherwise": 0,
+      "not-certified": 0
+    },
+    "closed": {
+      "certified-as-labelled": 5405,
+      "certified-otherwise": 0,
+      "not-certified": 0
+    }
+  },
+  "all_certified": true,
+  "all_as_labelled": true,
+  "exceptions": [],
+  "largest_closed_bound": 9,
+  "closed_bounds": {
+    "5": 1,
+    "6": 3,
+    "7": 15,
+    "8": 199,
+    "9": 2576
+  },
+  "finest_levels": {
+    "5": 161,
+    "6": 335,
+    "7": 362,
+    "8": 435,
+    "9": 579,
+    "10": 296,
+    "11": 322,
+    "12": 165,
+    "13": 139
+  },
+  "pieces": {
+    "1": 74659,
+    "2-16": 2820,
+    ">16": 1194
+  },
+  "cpu_s": 1870.5,
+  "constants": {
+    "Lambda_hi": 1.4143135623730951,
+    "Lambda_sq_hi": 2.0002828527124747,
+    "rho1_sq_lo": 0.7501414313562372,
+    "d_plus_sqrt2_over_2_hi": 0.7072067811865476,
+    "separation_turns": "2121711696491977773/2^64",
+    "gamma0_degrees": [
+      41.40655975304113,
+      41.40655975304114
+    ]
+  }
+}

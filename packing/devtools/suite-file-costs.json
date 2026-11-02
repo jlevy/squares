@@ -660,6 +660,7 @@
     "packing/tests/test_ryu_k2_minus_c_constants.py": 0.019,
     "packing/tests/test_ryu_k2_minus_c_constants_v12.py": 0.036,
     "packing/tests/test_ryu_k2_minus_c_float_gap.py": 0.478,
+    "packing/tests/test_ryu_k2_minus_c_labels.py": 5.907,
     "packing/tests/test_ryu_upper_certificates.py": 3.256,
     "packing/tests/test_ryu_upper_constants.py": 0.05,
     "packing/tests/test_ryu_upper_l_packing.py": 0.969,
@@ -916,6 +917,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/release-records-2026-11-01.json",
           "provenance": {},
           "tests": 16
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_ryu_k2_minus_c_labels.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/ryu-k2-minus-c-labels-2026-11-02.json",
+          "provenance": {},
+          "tests": 20
         }
       ]
     }

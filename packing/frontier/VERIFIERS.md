@@ -25,7 +25,7 @@ second implementation agrees.
 
 ## The Short Version
 
-- **223** programs: **52** external and **171** first-party; **149** decide claims and **74** check premises.
+- **224** programs: **52** external and **172** first-party; **150** decide claims and **74** check premises.
 - **677** of **858** evidence entries name the programs that verified them: 322 independently re-implemented, 289 reproduced with the producer’s code, 45 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
@@ -255,6 +255,7 @@ second implementation agrees.
 | [`V-ryu-v12-lemma49-review-check`](#v-ryu-v12-lemma49-review-check) | r_lemmas_check.py (with iv.py and checks.py) | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-ryu-quarter-cube-review-qcc`](#v-ryu-quarter-cube-review-qcc) | qcc_predicates.py (with iv.py, qmodel.py, c_constants.py and checks.py) | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-ryu-quarter-cube-review-text-checks`](#v-ryu-quarter-cube-review-text-checks) | q_quotes.py and c_citations.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-ryu-k2-minus-c-independent-labels`](#v-ryu-k2-minus-c-independent-labels) | ryu_k2_minus_c_labels.py (run, summarize, price, controls and recheck) | Squares Project (Levy) | first-party | decides | 0 | 0 |
 
 ## By Program
 
@@ -4531,6 +4532,20 @@ Two text checks of the 2 November 2026 review: q_quotes.py finds each of the qua
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md)
 - Note: Written and run on 2 November 2026 for docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md (its F2, and its check that the cube-root preprint cites the quarter-power preprint's numbering correctly). No evidence entry cites them.
+
+No evidence entry names it yet.
+
+### `V-ryu-k2-minus-c-independent-labels`
+
+**ryu_k2_minus_c_labels.py (run, summarize, price, controls and recheck)** · Squares Project (Levy) · first-party · decides · Python · interval-certified, exact-algebraic
+
+Decides again each of the 78,673 boxes of the certificate of Lemma 4.10 of Sungjoon Ryu's k2-minus-c (version 1.1; version 1.2's lemma states the same model over the same 13 lists, in a byte-identical data/kw9_data.zip): inf (no admissible configuration), nowall (with a side, no side edge is possible) or closed (E_II + W_I + sum D_i* <= 9), by bisection into pieces each decided by one label. Binary64 with one-ulp outward rounding after every operation, transcendental values from mpmath intervals at 200 bits, dyadic direction cells tested without a grid in the radius t, by roots rounded inward, and the point count of the directions done exactly in integers, with a rational separation certified below gamma0. Its run certified every box as labelled. Ten negative controls are refused by decision, each with an exactly checked refuting witness in its box; four of them each catch a labeller that moves one threshold of the model. After review A of #884, a seeded sample of 1,000 boxes was decided again with identical rows.
+
+- Source: [`packing/cases/asymptotic/ryu_k2_minus_c_labels.py`](../../packing/cases/asymptotic/ryu_k2_minus_c_labels.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/README.md`](../../packing/resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/README.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (lane L26 of the 2 November 2026 intake (bold-ritchie-l26, think-k3tk), strong sub-agent tier (tbd-strong-max) at maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The preprint and its README say its programs, including the computation for Lemma 4.10, were written with extensive assistance from Claude. This program was written from the proof of Lemma 4.10 and the disc model in paper/paper.tex. The source's verify_leaves.py, verify_leaves2.py, bnb.py, bnb_wall.py and its other programs were never read or run, and it imports none of them, nor python-flint. Its authors read the 5 October review, which describes the source's checker at the level of its code (its routines and their line numbers, the cell-closure rule, the greedy count's closing test, the radial pieces and the tolerances), the packet README's report of the replay and one line of a receipt of the source's checker, which decided nothing here, and the docstring of cases/asymptotic/ryu_k2_minus_c_float_gap.py, which describes the source's float count; the read log is in the independence record.
+- Note: Written and run on 2 November 2026 (think-k3tk), with its receipts in the v1.1 packet's receipts/independent-labels/. clean_room stays true because no program of the source was read, which is epistemics.md's test; read lists specification for the 5 October review's code-level account of the checker, so the second reading was not made wholly without the first. Recording clean_room false instead is the owner's call (review A of #884, finding 3). No evidence entry cites it: the result is recorded in frontier/asymptotic-waste-bounds.yaml, which takes no evidence entries, and the evidence schema scopes every entry by the counts it settles, of which this theorem settles none, as with V-ryu-quarter-cube-review-constants.
 
 No evidence entry names it yet.
 
