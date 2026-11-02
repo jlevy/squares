@@ -17,12 +17,15 @@ outputs:
   - papers/square-packing-methods-survey.md
 reason: >-
   Intake lane L20 of 2 November (think-ozx8): route 1 of T-247's route B recorded, its new
-  evidence on T-247 and on #804's side-297 result, with T-247's claim, next step and notes
-  saying so; no side, bound, rung, mark or credit changes, and no case record moves. Against
-  main d46fc6f29 (#873): rendered at link revision 0000000000000000000000000000000000000000 into
-  empty site directories, twice from this tree and once with that main's results.yaml and
+  evidence cited by T-247 and by #804's side-297 result, with T-247's claim, next step and
+  notes saying so, and #804's s297 ask note. No side, bound, rung, status or credit changes,
+  and no case record moves; T-247's mark changes, from reproduced with the producer's code to
+  independently re-implemented, and no paper prints it. Against main bdf52188a (#875):
+  rendered at link revision 0000000000000000000000000000000000000000 into empty site
+  directories, twice from this tree and once with that main's results.yaml and
   result-requests.yaml swapped in, by render_packing_methods, render_n11_optimality_review,
   render_n11_threshold_bound_review and render_n11_lower_bounds_explainer, its math pass in
   /usr/bin/google-chrome (SQPACK_CHROMIUM): 69 files each, all byte-identical across the
-  three. No PDF was printed; each prints from that HTML. Every paper keeps its version:
+  three. The same measurement against main d46fc6f29 (#873), before review A of #876, gave
+  the same. No PDF was printed; each prints from that HTML. Every paper keeps its version:
   v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
