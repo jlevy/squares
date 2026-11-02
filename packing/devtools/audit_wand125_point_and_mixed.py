@@ -2495,10 +2495,44 @@ def _files_in(directory: Path) -> list[Path]:
     return sorted(path for path in directory.iterdir() if path.is_file())
 
 
+#: The record `devtools.fine_net_followup retain` writes of a release asset's members.
+RELEASE_RECORD = "acquisition/release-assets.json"
+
+
+def release_members(certificate: MixedCertificate) -> dict[Path, dict[str, Any]]:
+    """The members of a certificate's release asset that its packet records, by upstream
+    path under the certificate's directory: the files a release holds and the pinned Git
+    tree does not, each stored in the packet or pinned by digest only. Empty where the
+    packet records no asset for this certificate."""
+    path = certificate.packet / RELEASE_RECORD
+    if not path.is_file():
+        return {}
+    name = certificate.directory.name
+    found: dict[Path, dict[str, Any]] = {}
+    for asset in json.loads(path.read_text(encoding="utf-8"))["assets"]:
+        if asset["certificate"] != name:
+            continue
+        for member in asset["members"]:
+            relative = PurePosixPath(member["path"]).relative_to(f"certificates/{name}")
+            _require(".." not in relative.parts, f"{member['path']} leaves its directory")
+            found[certificate.directory / relative] = member
+    return found
+
+
+def retained_path(certificate: MixedCertificate, name: str) -> Path:
+    """Where the packet keeps one small file of a certificate's directory: where the
+    release record stores it, for a file only the release asset holds, and otherwise
+    beside the pinned tree's documents."""
+    member = release_members(certificate).get(certificate.directory / name)
+    if member is not None and "stored" in member:
+        return certificate.packet / member["stored"]
+    return certificate.source / certificate.directory / name
+
+
 def mixed_retained(certificate: MixedCertificate) -> dict[str, bytes]:
     """The retained small files of one certificate directory, decompressed."""
     return {
-        name: read_retained_bytes(certificate.source / certificate.directory / name)
+        name: read_retained_bytes(retained_path(certificate, name))
         for name in certificate.files
     }
 
@@ -2851,8 +2885,16 @@ def _file_sha256(path: Path) -> str:
 
 
 def tarball_pin(certificate: MixedCertificate) -> tuple[str, int]:
-    """The tarball's SHA-256 and size as the packet's acquisition files pin them."""
-    digest = read_subtree_manifest(certificate.subtree)[certificate.upstream_tarball]
+    """The tarball's SHA-256 and size as the packet's acquisition files pin them: the
+    pinned Git tree's, or, for a bundle only its release asset holds, the release
+    record's (`release_members`)."""
+    tree = read_subtree_manifest(certificate.subtree)
+    if certificate.upstream_tarball not in tree:
+        member = release_members(certificate).get(certificate.upstream_tarball)
+        if member is None:
+            raise ValueError("the acquisition record does not pin the tarball")
+        return str(member["sha256"]), int(member["bytes"])
+    digest = tree[certificate.upstream_tarball]
     entries = json.loads(certificate.record.read_text())["sources"][0]["pinned_only"]
     sizes = [
         entry["bytes"]

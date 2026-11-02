@@ -55,11 +55,26 @@ of `code/` with `requirements.txt`, byte-identical to the reviewed copies the 2 
 linear packet (seven files and `requirements.txt`) and the 28 September point-and-mixed
 packet (six) retain.
 
-The release asset is not retained: it holds `candidate.json` (516,199 bytes),
-`certificate.json` (39,867 bytes, SHA-256 `e3c58aa2…92ca`) and the proof bundle
-`n145-L12.24-proof-bundle.tar.gz` (47,407,937 bytes, SHA-256 `4dc4f673…0a0b`, the digest
-the README and `completion-audit.json` state). It stays with its author, pinned here by
-size and digest.
+The release asset holds `candidate.json` (516,199 bytes), `certificate.json` (39,867
+bytes, SHA-256 `e3c58aa2…92ca`) and the proof bundle `n145-L12.24-proof-bundle.tar.gz`
+(47,407,937 bytes, SHA-256 `4dc4f673…0a0b`, the digest the README and
+`completion-audit.json` state). Until 2 November it stayed with its author, pinned here
+by size and digest.
+
+On 2 November 2026 (T-179’s preparation, think-v511) `devtools.fine_net_followup retain`
+held the asset to its pinned size and SHA-256 and copied its candidate and certificate to
+[`release/`](release/certificates/mixed_n145_L1224/), each as deterministic gzip (51,539
+and 11,393 bytes), as the MIT notice permits. The proof bundle, beyond `OR-18`’s size
+rule, is pinned by digest only in the
+[retention record](acquisition/release-assets.json), which
+`devtools.fine_net_followup check-retained` re-derives from the packet.
+`devtools.audit_wand125_linear` registers the certificate as `n145`: it reads the four
+documents here and the two members there, and for a replay fetches the asset from the
+release, holds it to its pin, and copies out the bundle, which it holds to the record’s
+digest before anything runs. Its exact audit of the retained bytes is
+[`receipts/linear-audit.json`](receipts/linear-audit.json), and its pre-replay checks
+over all 201 angles, which bind the bundle’s 810 files and every input to the candidate,
+are [`receipts/n145/fetch.json`](receipts/n145/fetch.json).
 
 ## What Was Checked
 

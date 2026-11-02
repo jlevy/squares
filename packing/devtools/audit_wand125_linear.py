@@ -69,7 +69,9 @@ import resource
 import shutil
 import subprocess
 import sys
+import tarfile
 import time
+import urllib.request
 from collections import Counter
 from collections.abc import Iterable, Mapping
 from concurrent.futures import Future, ProcessPoolExecutor
@@ -94,6 +96,15 @@ LINEAR_REVISION = "0c35d909764997ead04dfd90081c9fe9af8d07f2"
 LINEAR_PACKET = mixed.WEB / "wand125-linear-certificates-2026-10-02"
 N82_REVISION = "b00fc70f1904e9b1b567afee056d347f911209e8"
 N82_PACKET = mixed.WEB / "wand125-linear-n82-2026-10-02"
+#: ``mixed_n145_L1224`` of wand125/square-packing (T-179), whose candidate, certificate
+#: and proof bundle only its release asset holds: the packet retains the first two and
+#: pins the bundle in its release record (`mixed.release_members`).
+N145_REVISION = "22f06b31a9295c8185be5d30a1a7b19982b16847"
+N145_PACKET = mixed.WEB / "wand125-linear-n145-2026-10-13"
+#: Where a packet of wand125/square-packing keeps the source's tree, and the certificate
+#: directories' folder in it; every other packet is of wand125/square-packing-bounds.
+SQUARE_PACKING_LAYOUT = ("square-packing", Path("problems/square-lower-bounds"))
+LAYOUTS = {N145_PACKET: SQUARE_PACKING_LAYOUT}
 LINEAR_SCHEMA = "point_line_rectangle_v1"
 #: ``unified_linear_verify.cpp``, the checker every linear certificate names.
 LINEAR_CHECKER_SHA256 = "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d"
@@ -140,11 +151,19 @@ class LinearCertificate(mixed.MixedCertificate):
 
     ``rectangles`` counts rectangle orbits, as ``points`` and ``segments`` count theirs;
     the rest is the mixed certificate's pin, so the tarball fetch, the range driver and
-    the merge are the mixed ones.
+    the merge are the mixed ones. ``root`` is the packet's folder for the source's tree:
+    ``square-packing-bounds`` for that repository's packets, ``square-packing`` for one of
+    wand125/square-packing, whose certificate directories sit under
+    ``problems/square-lower-bounds/``.
     """
 
     points: int
     segments: int
+    root: str = "square-packing-bounds"
+
+    @property
+    def source(self) -> Path:
+        return self.packet / self.root
 
 
 #: Each row is the packet, the pinned revision, n, the side as the directory names it, the
@@ -184,24 +203,43 @@ _LINEAR_ROWS: tuple[tuple[Path, str, int, str, Fraction, int, int, int, str], ..
         774,
         "5ddb7ed328ca3250e8d0ffaab577a68acd8a2debfa600a43500e05e5ee019606",
     ),
+    (
+        N145_PACKET,
+        N145_REVISION,
+        145,
+        "12.24",
+        Fraction(306, 25),
+        594,
+        1541,
+        9,
+        "31788dc7f098d82f5a60bae49a5a3afcd329cf3f792f44883dc11518d95eca69",
+    ),
 )
-LINEAR: dict[str, LinearCertificate] = {
-    f"n{n}": LinearCertificate(
-        name=f"n{n}",
-        packet=packet,
-        revision=revision,
-        directory=Path(f"certificates/mixed_n{n}_L{label.replace('.', '')}"),
-        n=n,
-        side=side,
-        rectangles=rectangles,
-        candidate_digest=digest,
-        tarball=f"n{n}-L{label}-proof-bundle.tar.gz",
-        source_audit=True,
-        points=points,
-        segments=segments,
-    )
-    for packet, revision, n, label, side, points, segments, rectangles, digest in _LINEAR_ROWS
-}
+
+
+def _linear_table() -> dict[str, LinearCertificate]:
+    table: dict[str, LinearCertificate] = {}
+    for packet, revision, n, label, side, points, segments, rectangles, digest in _LINEAR_ROWS:
+        root, folder = LAYOUTS.get(packet, ("square-packing-bounds", Path()))
+        table[f"n{n}"] = LinearCertificate(
+            name=f"n{n}",
+            packet=packet,
+            revision=revision,
+            directory=folder / f"certificates/mixed_n{n}_L{label.replace('.', '')}",
+            n=n,
+            side=side,
+            rectangles=rectangles,
+            candidate_digest=digest,
+            tarball=f"n{n}-L{label}-proof-bundle.tar.gz",
+            source_audit=True,
+            points=points,
+            segments=segments,
+            root=root,
+        )
+    return table
+
+
+LINEAR: dict[str, LinearCertificate] = _linear_table()
 
 
 # --------------------------------------------------------------------------- the measure
@@ -337,11 +375,25 @@ def centre_half_widths(side: Fraction, core: Fraction) -> list[Fraction]:
 
 
 def linear_retained(certificate: LinearCertificate) -> dict[str, bytes]:
-    """The retained small files of one certificate directory, decompressed."""
+    """The retained small files of one certificate directory, decompressed: beside the
+    pinned tree's documents, or where the release record stores a file only the release
+    asset holds (`mixed.retained_path`)."""
     return {
-        name: read_retained_bytes(certificate.source / certificate.directory / name)
+        name: read_retained_bytes(mixed.retained_path(certificate, name))
         for name in mixed.MIXED_FILES
     }
+
+
+def linear_tree(certificate: LinearCertificate) -> dict[Path, str]:
+    """Every pinned file's SHA-256 by its upstream path: the pinned Git tree's, and the
+    members only the certificate's release asset holds (`mixed.release_members`), the
+    candidate, certificate and proof bundle of a release-held certificate. A path pinned
+    by both must have one digest."""
+    tree = dict(mixed.read_subtree_manifest(certificate.subtree))
+    for path, member in mixed.release_members(certificate).items():
+        digest = str(member["sha256"])
+        _require(tree.setdefault(path, digest) == digest, f"{path} is pinned twice, apart")
+    return tree
 
 
 def code_sources(certificate: LinearCertificate, tree: Mapping[Path, str]) -> dict[str, Path]:
@@ -420,7 +472,7 @@ def linear_certificate(
     must carry a replay record for every angle, and the source's audit must bind the
     certificate's and the tarball's digests.
     """
-    tree = tree if tree is not None else mixed.read_subtree_manifest(certificate.subtree)
+    tree = tree if tree is not None else linear_tree(certificate)
     files = files if files is not None else linear_retained(certificate)
     directory = certificate.directory
     for name in mixed.MIXED_FILES:
@@ -591,7 +643,7 @@ def bundle_bindings(
     checker; every angle's ``candidate.json`` the top-level one; and its summary must
     record all 201 angles verified on the stated candidate.
     """
-    tree = tree if tree is not None else mixed.read_subtree_manifest(certificate.subtree)
+    tree = tree if tree is not None else linear_tree(certificate)
     top = {
         "candidate.json",
         "certificate.json",
@@ -830,12 +882,84 @@ class Prepared:
     bundle: Path
 
 
+#: The address of a release asset, as GitHub serves it.
+RELEASE_URL = "https://github.com/{repository}/releases/download/{release}/{asset}"
+
+
+def _file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def release_bundle(
+    certificate: LinearCertificate, work: Path, supplied: Path | None
+) -> tuple[Path | None, str | None]:
+    """A proof bundle only the certificate's release asset holds, put in ``work``.
+
+    For a bundle the pinned Git tree holds, nothing is done. Otherwise the bundle comes
+    from the release asset the packet's release record names: ``supplied`` when that is
+    the asset (a supplied file of any other name is taken as the bundle itself), else one
+    an earlier run left in ``work``, else the release's own address. The asset is refused
+    unless its size and SHA-256 are the record's, and its one bundle member is copied out
+    to ``work``. Returns what `mixed.fetch_tarball` is then given, which pins the bundle
+    to the record as it pins any tarball, and where the bundle came from.
+    """
+    if certificate.upstream_tarball in mixed.read_subtree_manifest(certificate.subtree):
+        return supplied, None
+    record = json.loads((certificate.packet / mixed.RELEASE_RECORD).read_text("utf-8"))
+    (asset,) = (
+        row for row in record["assets"] if row["certificate"] == certificate.directory.name
+    )
+    name = str(asset["asset"])
+    target = work / certificate.tarball
+    if supplied is not None and supplied.name != name:
+        return supplied, None
+    if supplied is None and target.is_file():
+        return None, None
+    work.mkdir(parents=True, exist_ok=True)
+    held = supplied if supplied is not None else work / name
+    how = "supplied"
+    if not held.is_file():
+        url = RELEASE_URL.format(
+            repository=record["repository"], release=record["release"], asset=name
+        )
+        partial = held.with_name(held.name + ".part")
+        with urllib.request.urlopen(url, timeout=600) as response, partial.open("wb") as out:
+            shutil.copyfileobj(response, out, 1 << 20)
+        partial.replace(held)
+        how = url
+    found, size = _file_sha256(held), held.stat().st_size
+    _require(
+        (found, size) == (asset["sha256"], asset["bytes"]),
+        f"{name} has SHA-256 {found} and {size} bytes; the release record pins "
+        f"{asset['sha256']} and {asset['bytes']}",
+    )
+    member = f"certificates/{certificate.directory.name}/{certificate.tarball}"
+    partial = target.with_name(target.name + ".part")
+    with tarfile.open(held, "r:gz") as archive:
+        info = archive.getmember(member)
+        _require(info.isfile(), f"{member} is not a regular file of {name}")
+        source = archive.extractfile(info)
+        if source is None:
+            raise ValueError(f"{member} cannot be read from {name}")
+        with partial.open("wb") as out:
+            shutil.copyfileobj(source, out, 1 << 20)
+    partial.replace(target)
+    return None, f"{member} of the release asset {name} ({how}), held to its pin {found}"
+
+
 def prepare(
     certificate: LinearCertificate, work: Path, supplied: Path | None, via: str
 ) -> Prepared:
     """The tarball at its pin, unpacked afresh, bound, with code and preconditions."""
-    tree = mixed.read_subtree_manifest(certificate.subtree)
+    tree = linear_tree(certificate)
+    supplied, extracted = release_bundle(certificate, work, supplied)
     tarball = mixed.fetch_tarball(certificate, work, supplied, via)
+    if extracted is not None:
+        tarball["origin"] = extracted
     bundle = mixed.unpack_bundle(certificate, work / certificate.tarball, work / "unpacked")
     bindings = bundle_bindings(certificate, bundle, tree)
     code = assemble_code(certificate, work / "code", tree)
@@ -850,7 +974,7 @@ def linear_fetch(
     """Every check a replay makes before its first angle, over all 201, and nothing run."""
     runtime = mixed.replay_runtime()
     prepared = prepare(certificate, work, supplied, via)
-    tree = mixed.read_subtree_manifest(certificate.subtree)
+    tree = linear_tree(certificate)
     shipped = mixed.shipped_results(certificate)
     inputs = check_inputs(
         prepared.driver.root,
@@ -965,7 +1089,7 @@ def linear_replay(
         summary = mixed.range_summary(certificate, folder, first, last, shipped)
         atomic_write_text(folder / "summary.json", json.dumps(summary, indent=2) + "\n")
         return summary
-    tree = mixed.read_subtree_manifest(certificate.subtree)
+    tree = linear_tree(certificate)
     prepared = prepare(certificate, work, supplied, via)
     driver = prepared.driver
     inputs = check_inputs(
@@ -1033,7 +1157,7 @@ PRICE_SAMPLES: tuple[tuple[str, int, float, float], ...] = (
 #: The source's own seconds for each complete run, summed over its bundle's 201 records.
 #: n = 82's run was resumed and finished on other machines (its ``completion-audit.json``),
 #: and has no sampled angle here.
-UPSTREAM_SECONDS = {"n101": 31303.5, "n83": 75685.9, "n82": 118941.6}
+UPSTREAM_SECONDS = {"n101": 31303.5, "n83": 75685.9, "n82": 118941.6, "n145": 109342.3}
 
 
 def linear_costs(certificate: LinearCertificate) -> list[float]:
@@ -1342,7 +1466,7 @@ def linear_control(
     oblique = {i: shipped[str(i)] for i in range(1, LAST + 1)}
     chosen = min(oblique, key=lambda i: (oblique[i]["nodes"], i)) if index is None else index
     _require(chosen in oblique, "a control runs one oblique net direction")
-    tree = mixed.read_subtree_manifest(certificate.subtree)
+    tree = linear_tree(certificate)
     check_inputs(driver.root, tree[certificate.directory / "candidate.json"], [chosen], shipped)
     stored = json.loads((driver.root / f"net{chosen:03}" / "result.json").read_text())
     spec = stored["manifest"]

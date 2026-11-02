@@ -1,0 +1,15 @@
+{
+  "format": "release-asset-retention-v1",
+  "repository": "wand125/square-packing",
+  "release": "square-lower-bounds-v1",
+  "retained_dir": "release",
+  "assets": [
+    {
+      "asset": "certificates__mixed_n145_L1224.tar.gz",
+      "certificate": "mixed_n145_L1224",
+      "bytes": 38598220,
+      "sha256": "6a937dc726a392ead0c9f94a892025da2ac891816d8d9560f8e9364b01922a49",
+      "members": [{"path":"certificates/mixed_n145_L1224/candidate.json","bytes":516199,"sha256":"3cd54c438616d280307d6571cb1aeb35225347751ae651141a96ff7da3b2b360","stored":"release/certificates/mixed_n145_L1224/candidate.json.gz","form":"gzip"},{"path":"certificates/mixed_n145_L1224/certificate.json","bytes":39867,"sha256":"e3c58aa2318a0c9a65aac770cdaac65366d31ea99a7023a465efadc87a9592ca","stored":"release/certificates/mixed_n145_L1224/certificate.json.gz","form":"gzip"},{"path":"certificates/mixed_n145_L1224/n145-L12.24-proof-bundle.tar.gz","bytes":47407937,"sha256":"4dc4f6731151ec5a0a109c24a3223626824702dd5c8f4f9e9965130be2969a0b","pinned_only":"a linear certificate's proof bundle, tens of megabytes and beyond OR-18's size rule, whose candidate, certificate and manifest the packet holds beside it; devtools.audit_wand125_linear fetches it from the release and binds it to this digest before any replay"}]
+    }
+  ]
+}

@@ -16,7 +16,9 @@ packet keeps. Its check2 commands run no program of the source.
   ``.gz`` as published, anything else byte for byte), except the members `PINNED_MEMBERS`
   names, which it pins with their reasons. ``acquisition/release-assets.json`` records
   every member of every asset; ``check-retained PACKET`` re-derives it from the packet
-  alone, and compares each asset with the retained ``ASSET.json`` that names it.
+  alone, and compares each asset with the retained ``ASSET.json`` that names it. A linear
+  asset is retained the same way, its proof bundle pinned by digest
+  (`devtools.audit_wand125_linear` reads the record to fetch and bind it).
 
 - ``premises`` refuses the asset unless its size and SHA-256 are the pinned ones, unpacks
   it safely (plain files and directories under ``certificates/<name>/`` only), lays the
@@ -451,6 +453,12 @@ PINNED_MEMBERS = {
         "the sealed inner bundle, whose payloads repeat this directory's files and whose "
         "members the premises receipt inventories"
     ),
+    PROOF_BUNDLE_SUFFIX: (
+        "a linear certificate's proof bundle, tens of megabytes and beyond OR-18's size "
+        "rule, whose candidate, certificate and manifest the packet holds beside it; "
+        "devtools.audit_wand125_linear fetches it from the release and binds it to this "
+        "digest before any replay"
+    ),
 }
 
 
@@ -522,7 +530,8 @@ def retain(
     release_tag: str,
     repository: str,
 ) -> dict[str, Any]:
-    """Copy one pinned check2 asset's data members into ``packet`` and record them.
+    """Copy one pinned check2 or linear asset's data members into ``packet`` and record
+    them.
 
     The asset is refused unless its size and SHA-256 are the pinned ones, and unpacked
     safely as ``premises`` unpacks it. Every member is either retained under

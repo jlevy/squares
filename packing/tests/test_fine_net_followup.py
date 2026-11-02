@@ -589,6 +589,15 @@ def test_check_retained_reports_changed_stray_and_misnamed_members(tmp_path: Pat
     assert followup.main(["check-retained", str(packet)]) == 1
 
 
+def test_a_linear_proof_bundle_is_pinned_by_digest_and_never_copied() -> None:
+    """A linear asset's proof bundle, tens of megabytes, is pinned by its digest (OR-18);
+    its candidate and certificate are retained."""
+    folder = "certificates/mixed_n145_L1224"
+    assert followup.pinned_reason(f"{folder}/n145-L12.24-proof-bundle.tar.gz") is not None
+    assert followup.pinned_reason(f"{folder}/candidate.json") is None
+    assert followup.pinned_reason(f"{folder}/certificate.json") is None
+
+
 def test_retain_refuses_an_asset_that_is_not_the_pinned_one(tmp_path: Path) -> None:
     asset, data = retained_asset(tmp_path)
     packet = tmp_path / "packet"
