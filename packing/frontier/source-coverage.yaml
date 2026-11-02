@@ -11729,7 +11729,7 @@ sources:
   source_key: '[Kim exact forms 2026-10-25]'
   scope:
     n_values: [88, 126, 172, 199, 263]
-  reviewed: '2026-11-01'
+  reviewed: '2026-11-02'
   source_date: '2026-10-25'
   disposition: current-report
   replay_disposition: case-specific
@@ -11753,11 +11753,14 @@ sources:
     1.185e-62 and 9.234e-63 below issue 639's degree-12 sides; the ledger of 25 October for
     issue 804 records them and T-244 registers them as reported. The issue supplied no exact
     configuration; the author's configurations at both sides, attached to a comment of
-    2026-10-25T09:06:23Z, are kept as derived facts in
-    resources/web/hyukdongkim-t244-configurations-2026-10-25/ and not yet decided
-    (think-4rzl), so no packing at either side has been decided here. The author's comment of
-    07:22:16Z concedes 88, 126 and 199 to issue 639. The case records are unchanged until
-    adoption.
+    2026-10-25T09:06:23Z, are kept in
+    resources/web/hyukdongkim-t244-configurations-2026-10-25/ as derived facts and, since 2
+    November 2026, as the archive's seven files themselves, read from his public copy at
+    f480441e and held to the comment's digest (CC0 1.0, think-4rzl). Both were decided
+    exactly on two routes on 31 October from the facts, whose rebuilt certificates are the
+    retained files byte for byte (E-hyukdongkim-804-configurations-exact-feasibility and
+    E-hyukdongkim-804-configurations-verify-exact). The author's comment of 07:22:16Z
+    concedes 88, 126 and 199 to issue 639. The case records are unchanged until adoption.
 - id: hyukdongkim-s297-2026-10-25
   title: Hyukdong Kim's exact degree-21 side at 297 in two issue 804 comments
   role: first-party-release

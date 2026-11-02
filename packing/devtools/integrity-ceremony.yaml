@@ -162,17 +162,21 @@ allowlist:
     boundary: >-
       Issue 804's attachment squares-exact-forms.zip, downloaded into a scratch directory
       from the issue or from the author's public copy at f480441e (the same bytes), is held
-      to the SHA-256 the issue states and the size triage measured before `derive` reads a
+      to the SHA-256 the issue states, the size triage measured and the public copy's Git
+      blob that sources.json records before `derive` reads a
       member or keeps it under the hyukdongkim-exact-forms-2026-10-25 packet's source/
       (CC0 1.0 since 25 October; kept since 1 November); and each atlas file the source
       read, evand/square-packing site/www/data/p/best-<n>.json at 659ee62, fetched into a
       scratch directory, is held to its pinned Git blob, size and SHA-256 before `poses`
-      reads it; and the author's later t244-exact-configurations.zip, which the
-      hyukdongkim-t244-configurations-2026-10-25 packet keeps none of either, is held to
-      the SHA-256 his comment states and the measured size, and each of its two
-      certificates to its stated digest, before `configurations` parses one. The derived
-      facts and the receipts are this repository's files, read from Git and compared with
-      nothing.
+      reads it; and the author's later t244-exact-configurations.zip, downloaded into a
+      scratch directory from the comment or from the public copy at f480441e (the same
+      bytes), is held to the SHA-256 his comment states, the measured size and the public
+      copy's recorded Git blob, every member
+      to the archive's one directory, and each of its two certificates to its stated
+      digest, before `configurations` parses one or keeps any member under the
+      hyukdongkim-t244-configurations-2026-10-25 packet's source/ (CC0 1.0 since
+      25 October; kept since 2 November). The derived facts, the retained members and the
+      receipts are this repository's files, read from Git and compared with nothing.
   - path: packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/review/side_297.py
     kind: download
     boundary: >-

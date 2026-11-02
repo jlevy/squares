@@ -149,15 +149,16 @@ side; the value is T-193’s either way. A measurement, which decides nothing.
 
 ## What Is Not Established
 
-- **Feasibility at the stated root.** The issue supplied no exact configuration at 172
-  or 263, so $s(172) \le S^*$ and $s(263) \le S^*$ are reported, not shown. What would
-  show them is a configuration with every centre and half-angle tangent in a number field
-  holding $S^*$, every contact an identity there and every other pair and wall separated
-  exactly. On 25 October at 09:06:23Z the author attached configurations he reports to be
-  of this kind; they are kept in the
-  [configurations packet](../hyukdongkim-t244-configurations-2026-10-25/README.md) and
-  not yet decided here. Deciding them on this repository’s two exact routes is
-  think-4rzl’s.
+- **Feasibility at the stated root, from this packet alone.** The issue supplied no exact
+  configuration at 172 or 263, so this packet reports $s(172) \le S^*$ and
+  $s(263) \le S^*$ and does not show them. What shows them is a configuration with every
+  centre and half-angle tangent in a number field holding $S^*$, every contact an
+  identity there and every other pair and wall separated exactly. On 25 October at
+  09:06:23Z the author attached configurations of this kind. The
+  [configurations packet](../hyukdongkim-t244-configurations-2026-10-25/README.md) keeps
+  them, as derived facts and, since 2 November 2026, as his files themselves. Both were
+  decided on this repository’s two exact routes on 31 October 2026 (think-4rzl), which
+  puts T-244 at V3/C3; that packet’s README says how.
 - **Stationarity and local minimality.** The multipliers are not unique, the least is
   about $-6 \times 10^{-16}$, and no second-order condition was checked, so nothing is
   recorded about either.
