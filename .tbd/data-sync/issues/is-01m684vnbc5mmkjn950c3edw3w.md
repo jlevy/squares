@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 95
+version: 96
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T12:58:01.578Z
+updated_at: 2026-11-02T13:32:52.982Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -166,3 +166,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 11:55: renewal. Sweep intake31 run; no new issues since 10:50Z. Lanes: L29 (think-tq3g, think-tpbd Lean builds), L30 (think-w76a s(37) census; think-l3oo/eucc T-184/T-191 controls).
 
 2026-11-02 12:55: renewal. Sweep intake32 run; no new issues since 11:50Z. L29, L30 running.
+
+2026-11-02 ~13:30: L29 (Lean builds) blocked by network policy: lakecache.blob.core.windows.net (Mathlib cache) and release.lean-lang.org (elan toolchains) return proxy 403; add release.lean-lang.org to the owner allow-list item. Did the generation step for T-234 (2.41 CPU-h, 66/66 files match data-sha256.txt) and a replay tool; no rung moved. PR #887 under senior review. think-tq3g/think-tpbd released, blocked on network. L30 running.
