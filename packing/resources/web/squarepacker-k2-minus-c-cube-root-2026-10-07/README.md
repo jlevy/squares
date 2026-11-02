@@ -36,7 +36,9 @@ which accepted it. That review’s programs, which recompute this paper’s cons
 all eight cases of its Table 1, are kept in
 [the quarter-power packet](../squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md).
 Neither review ran the source’s programs.
-The independent per-box labelling of v1.2’s Lemma 4.10 remains think-k3tk’s.
+The independent per-box labelling of v1.2’s Lemma 4.10 was done on 2 November
+(think-k3tk), and certified every box as labelled
+([receipts](../squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/README.md)).
 
 ## Credit and Licence
 

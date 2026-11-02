@@ -1,0 +1,41 @@
+# command: nice -n 10 .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels price --sample 500 --seed 20261102 --receipts resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels
+# cwd: packing/ of jlevy/squares at 0f3a027f5 (branch claude/bold-ritchie-xo28us-l26)
+# python3: CPython 3.14.7, the project interpreter (packing/.venv): numpy 2.x and mpmath 1.3.0; no python-flint
+# host: 4 cores; load 0.47 1.33 2.06; started 2026-11-02T08:22:19Z
+{
+  "sample": 500,
+  "seed": 20261102,
+  "cpu_s": 12.68895558,
+  "outcomes": {
+    "closed:certified-as-labelled": 35,
+    "inf:certified-as-labelled": 458,
+    "nowall:certified-as-labelled": 7
+  },
+  "classes": {
+    "inf": {
+      "sampled": 458,
+      "population": 72174,
+      "mean_cpu_s": 0.0013740174672489081,
+      "max_cpu_s": 0.0157,
+      "extrapolated_cpu_s": 99.1683366812227
+    },
+    "nowall": {
+      "sampled": 7,
+      "population": 1094,
+      "mean_cpu_s": 0.0005428571428571429,
+      "max_cpu_s": 0.0008,
+      "extrapolated_cpu_s": 0.5938857142857144
+    },
+    "closed": {
+      "sampled": 35,
+      "population": 5405,
+      "mean_cpu_s": 0.3436485714285714,
+      "max_cpu_s": 3.9919,
+      "extrapolated_cpu_s": 1857.4205285714286
+    }
+  },
+  "extrapolated_cpu_hours": 0.5436618752685936
+}
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/price-500.json
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/price-500-rows.jsonl
+# finished 2026-11-02T08:22:34Z; exit 0; wall 14.343 s; CPU 14.4 s (user 14.141 + sys 0.237); load 0.59 1.31 2.05

@@ -170,11 +170,12 @@ exit status, wall and CPU).
 | Recursive cover, written apart from the search | `coverage_independent/recursive_cover/coverage_lowmem.py ../.. OUT --slabs 32` | 171.5 s | 108.2 s | All 258 slabs, 0 gaps, 4,568,856 nodes. Each row equals the author’s apart from timing and memory ([receipt](receipts/coverage/coverage-lowmem.log), [rows](receipts/coverage/results-replay.jsonl)) |
 
 This reproduces the computation with the producer’s code.
-It does not re-implement it: the labelling of the boxes has one implementation,
-`verify_leaves2.py`, which imports the search’s cell grid, its float prefilter, its split
-rule and its float point count `max_points` (the review’s RF-1 and RF-2). The two
-independent coverage programs were written by AI reviewers in sessions apart from the
-search, as `code/coverage_independent/README.md` says.
+It does not re-implement it: `verify_leaves2.py` imports the search’s cell grid, its float
+prefilter, its split rule and its float point count `max_points` (the review’s RF-1 and
+RF-2). The two independent coverage programs were written by AI reviewers in sessions
+apart from the search, as `code/coverage_independent/README.md` says.
+[A second implementation of the labelling](#an-independent-labelling-of-lemma-410),
+written here on 2 November, is below.
 
 `summarize.py` prints its totals and then exits 1 on Linux.
 Its memory guard reports unlimited free memory off Windows, and the summary’s last line
@@ -197,6 +198,39 @@ with `U = 1 + 4 + 4 = 9`.
 | The n = 2 list without that box | `coverage_check.py` | Refused: “FAIL: reached a tiny unmatched box”, exit 1 ([receipt](receipts/controls/coverage-check-n2-drop.log); the retained list passes, [receipt](receipts/controls/coverage-check-n2-base.log)) |
 | The same | `indep_cover.py` | Refused: Method A fails, the volume short by `1/256` of the domain, uncovered points found ([receipt](receipts/controls/indep-cover-n2-drop.log); the retained list passes) |
 | The same | `coverage_lowmem.py --only 0,2` | Refused: gaps in slabs 17 and 18, two in all ([receipt](receipts/controls/coverage-lowmem-n2-drop-summary.log); the retained list has none) |
+
+## An Independent Labelling of Lemma 4.10
+
+On 2 November 2026 (`think-k3tk`) every box was decided again by
+[`cases/asymptotic/ryu_k2_minus_c_labels.py`](../../../cases/asymptotic/ryu_k2_minus_c_labels.py),
+written here from the proof of Lemma 4.10 and the disc model of the TeX. Its authors never
+read or ran the source’s programs; [its receipts and read log](receipts/independent-labels/README.md)
+say what they did read. It shares with `verify_leaves2.py` the box lists and the proof’s
+model, and nothing of its code: no cell grid, prefilter, split rule or float count, and no
+Arb. It works in binary64 with one-ulp outward rounding after every operation and with
+constants from mpmath intervals. It tests dyadic direction cells exactly in the radius `t`,
+and it counts directions exactly, in integers.
+
+| Label | Boxes | Certified as labelled |
+| --- | ---: | ---: |
+| `inf` | 72,174 | 72,174 |
+| `nowall` | 1,094 | 1,094 |
+| `closed` | 5,405 | 5,405 |
+
+Every box was certified under its own label: none needed another label, and none failed.
+The largest bound of a `closed` piece is 9. The run took 1,880.8 CPU seconds on two
+cores, 16 minutes of wall time. A price came first: 500 boxes
+extrapolated to 0.54 CPU-hours, against a cap of 40. Four negative controls are refused,
+each with an exactly checked witness that its claim is false: the sharp box at threshold 8,
+an `inf` box widened to hold an admissible pair, a `nowall` box widened to hold a side
+edge, and the count’s separation halved.
+
+So the labels of Lemma 4.10 have two implementations: the replay above, with the
+producer’s code, and this one, independently re-implemented, clean-room, by a Claude agent,
+a system family the producer also used. That the boxes cover the domain still rests on the
+source’s three coverage programs. That the bound `U(I)` is the right one still rests on the
+proof, which the review re-derived. Version 1.2’s Lemma 4.10 decides the same lists under
+the same model, so this run covers it too.
 
 ## The Constants
 
@@ -236,6 +270,27 @@ unzip -j -d SCRATCH/code \
 uv run --frozen --all-extras --group dev python -m cases.asymptotic.ryu_k2_minus_c_constants
 uv run --frozen --all-extras --group dev python -m devtools.write_k2_minus_c_controls SCRATCH/controls
 ```
+
+The independent labelling runs with the project interpreter alone; its commands are in
+[its README](receipts/independent-labels/README.md#reproduce).
+
+## Compressed Files
+
+The label rows of the nine lists of more than 1,000 boxes are stored as deterministic
+gzip by `devtools.retained_data.write_retained`. They are receipts the labeller writes
+again with new timings at each run, so their digest cells are empty.
+
+| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
+| --- | --- | --- | --- |
+| `receipts/independent-labels/labels/bnb_n3_T9_0of1.jsonl.gz` | receipt |  |  |
+| `receipts/independent-labels/labels/bnb_n4_T9_0of2.jsonl.gz` | receipt |  |  |
+| `receipts/independent-labels/labels/bnb_n4_T9_1of2.jsonl.gz` | receipt |  |  |
+| `receipts/independent-labels/labels/bnb_n5_T9_0of2.jsonl.gz` | receipt |  |  |
+| `receipts/independent-labels/labels/bnb_n5_T9_1of2.jsonl.gz` | receipt |  |  |
+| `receipts/independent-labels/labels/bnbw_n3_T9_0of1.jsonl.gz` | receipt |  |  |
+| `receipts/independent-labels/labels/bnbw_n4_T9_0of2.jsonl.gz` | receipt |  |  |
+| `receipts/independent-labels/labels/bnbw_n4_T9_1of2.jsonl.gz` | receipt |  |  |
+| `receipts/independent-labels/labels/bnbw_n5_T9_0of1.jsonl.gz` | receipt |  |  |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

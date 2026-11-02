@@ -50,7 +50,9 @@ All thirteen original deciding leaf lists and their checking programs are byte-i
 to the earlier replay inputs.
 Its Lemma 4.10 subclaim therefore retains the original runtime and outcomes; this does
 not transfer the changed whole-source manifest to the new proof.
-The independent per-box labelling obligation remains `think-k3tk`. The maintained `cases/asymptotic/ryu_k2_minus_c_float_gap.py` checks all 25,929
+The independent per-box labelling obligation was met on 2 November by `think-k3tk`,
+which certified every box as labelled
+([receipts](../squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/README.md)). The maintained `cases/asymptotic/ryu_k2_minus_c_float_gap.py` checks all 25,929
 finite angular comparisons and the specified binary64 operation budget. This certifies
 current-host constants; the historical libm output was not recorded. The scoped
 review preserves that limit and the independent per-box obligation.

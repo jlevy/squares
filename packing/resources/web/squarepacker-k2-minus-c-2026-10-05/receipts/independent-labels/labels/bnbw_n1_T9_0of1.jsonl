@@ -1,0 +1,4 @@
+{"U":6,"bound":7,"cpu_s":0.0006,"label":"closed","leaves":{"closed":1},"level":5,"line":1,"outcome":"certified-as-labelled","pieces":1}
+{"U":6,"bound":6,"cpu_s":0.0005,"label":"closed","leaves":{"closed":1},"level":5,"line":2,"outcome":"certified-as-labelled","pieces":1}
+{"U":8,"bound":8,"cpu_s":0.0011,"label":"closed","leaves":{"closed":1},"level":5,"line":3,"outcome":"certified-as-labelled","pieces":1}
+{"U":8,"bound":8,"cpu_s":0.0004,"label":"closed","leaves":{"closed":1},"level":5,"line":4,"outcome":"certified-as-labelled","pieces":1}
