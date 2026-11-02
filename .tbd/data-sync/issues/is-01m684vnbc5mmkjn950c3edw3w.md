@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 101
+version: 102
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T17:01:47.056Z
+updated_at: 2026-11-02T17:41:26.842Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -178,3 +178,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 ~16:10: merged #887 (9aba63255): receipt-bound Lean build tool (controls fail for their own reason, statements recorded, generated parts re-hashed, forged logs refused, blob-bound, OR-16 entry removed); T-234 generation 66/66 match; no Lean built (Mathlib cache blocked); think-tq3g/think-tpbd open, blocked on lakecache.blob.core.windows.net only. 43 PRs merged this pass. #886 (L30: T-178 V3/C3; T-184/T-191 C3; n-076/n-095 proved) under strong-max review; main moved, #886 will need main merged.
 
 2026-11-02 16:59: renewal. Sweep intake35 run; no new issues since 15:40Z. #886 addressing (L30; incl. closing n=96 per T-067 precedent) running.
+
+2026-11-02 ~18:00: merged #886 (86ed750b8): T-178 s(37) >= 2599/400 V3/C3; T-184 s(76)=9 and T-191 s(95)=10 at C3 via zm_mixed controls; n = 76, 95 and 96 proved (T-191 widened to [95,96] per T-067); record now 81 proved, 243 open. think-w76a closed. S2 kept (S3 owner call). L31 posts #594/#610 (and #446 if owed) replies after deploy. 44 PRs merged this pass.
