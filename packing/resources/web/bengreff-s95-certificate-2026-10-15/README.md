@@ -21,7 +21,9 @@ is stated as the source states it. What was checked here at retention is in
 the result. The register entries the records lane would apply are drafted in
 [`register-plan.yaml`](register-plan.yaml); the records lane of 15 October applied them,
 registering the result as T-191 at V0/C0 and adding T-081’s sentence on 96. The case
-record at 95 is unchanged until a review.
+record at 95 was unchanged until a review. On 2 November 2026 the controls below brought
+T-191 to C3, and the case records at 95 and 96 adopted $s(95) = s(96) = 10$: the cover’s
+total is below 96 as well, so T-191 took in $n = 96$, as T-067 took in $n = 78$.
 
 ## Source and Pin
 
@@ -220,8 +222,15 @@ as arguments; registering cases 76 and 95 in `devtools.replay_evand_zmx2` and
   | $49207/50000$ | $[91/20, 23/5] \times [11/5, 9/4] \times [13/32, 7/16]$, job 153 | 37 boxes, depth 8, as the source’s record | 2,789 boxes, 540 uncertified, 576 CPU-s | $1.0161014$, $0.9999861$ |
 
   The first pose is the lowest the 16 October review’s descent found in the D4 region;
-  the second is the lowest its `k2m5_review.py cellmin` found in job 153’s cell.
-  `tests/test_replay_controls.py` holds both pairs.
+  the second is the lowest its `k2m5_review.py cellmin` found in job 153’s cell
+  ([`receipts/controls/n95_cellmin_j153.json`](receipts/controls/n95_cellmin_j153.json),
+  run here on 2 November with the review’s retained program, `4fa7ed60…` in the s(76)
+  packet, over 1,508 sampled poses). That program’s exact evaluator shares no code with
+  `zm_mixed.py`, and its capture at the pose, $1.016101428384$, equals `zm_mixed.py
+  pose`’s exactly, so by linearity the scaled cover captures less than one there whatever
+  `zm_mixed.py` computes; the review’s own capture at the first pose does the same for
+  that one. The probe chose the pose and decides nothing. `tests/test_replay_controls.py`
+  holds both pairs.
 - **The wall control.** No closed unit square in $[0,10]^2$ needs mass on the
   container’s walls: a square flush with a wall is the limit of squares moved off it,
   each capturing at least one, and in the limit that mass lies off the wall. `zmx2 cert

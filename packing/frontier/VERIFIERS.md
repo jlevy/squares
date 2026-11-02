@@ -3079,7 +3079,7 @@ Clones chelokot's archive at the pinned commit, checks the toolchain, manifest, 
 
 **devtools.replay_evand_zmx2** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls; for a split cover it also stages zm_mixed.py and the files it imports, digests checked, and runs it on the source's sub-roots.
+Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls; for a split cover it also stages zm_mixed.py and the files it imports, digests checked, and runs it on the source's sub-roots, and its zm-control command runs zm_mixed.py's own controls: the published cover and a cover with every mass scaled below one, on one cell at the source's settings, and the exact capture of both at a pose in that cell.
 
 - Source: [`packing/devtools/replay_evand_zmx2.py`](../../packing/devtools/replay_evand_zmx2.py)
 - Versions run: this repository's commits, which Git holds

@@ -14,12 +14,20 @@ each to ``mutate``. Those covers are also decided in part by ``zm_mixed.py``, so
 packets keep, beside the ``zmx2`` controls, ``zm_mixed.py pose``'s exact evaluation of
 each mutated cover at a pose where it captures less than one, and of the published
 cover at the same pose, where it captures more.
+
+``zm_mixed.py`` has its own two controls per split cover, ``ZM_CONTROLS``, which
+``devtools.replay_evand_zmx2 zm-control`` ran on 2 November 2026: on one cell, with every
+run setting of the source's own records apart from the cell, it certifies the published
+cover and leaves the cover with every mass scaled by the control's factor uncertified,
+and ``zm_mixed.py pose`` evaluates both covers exactly at a pose in that cell. The tests
+below read those receipts too; nothing here runs ``zm_mixed.py``.
 """
 
 from __future__ import annotations
 
 import gzip
 import hashlib
+import json
 import re
 import shlex
 from collections import Counter
@@ -473,6 +481,20 @@ ZM_CONTROL_CWD = re.compile(
 ZM_CELL_KEYS = ("cx_lo", "cx_hi", "cy_lo", "cy_hi", "u_lo", "u_hi")
 
 
+@cache
+def source_zm_settings(n: int) -> tuple[tuple[str, object], ...]:
+    """Every run setting but the cell, as each of the source's own ``zm_mixed.py`` record
+    files for the case states it: the configuration that accepted the original."""
+    found = set()
+    for path in sorted(driver.ZM_MIXED_JOBS[n].parent.glob("j*.jsonl")):
+        with path.open(encoding="utf-8") as handle:
+            header = json.loads(handle.readline())
+        assert header["kind"] == "zm_mixed cert header"
+        found.add(tuple(sorted((k, v) for k, v in header["settings"].items() if k != "region")))
+    assert len(found) == 1, f"the source's records for {n} disagree on their settings"
+    return found.pop()
+
+
 def test_every_split_cover_has_two_zm_mixed_controls() -> None:
     """Stage 4's rule, for the checker that decides the split covers' other cells."""
     assert {n: len(controls) for n, controls in driver.ZM_CONTROLS.items()} == dict.fromkeys(
@@ -525,6 +547,9 @@ def test_zm_mixed_refuses_each_scaled_cover_where_it_certifies_the_published_one
         settings = header["settings"]
         assert settings["region"] == cell
         assert all(settings[k] == v for k, v in ZM_MIXED_SETTINGS.items())
+        assert tuple(
+            sorted((k, v) for k, v in settings.items() if k != "region")
+        ) == source_zm_settings(n)
         assert list(records) == [control.cell]
         census[which] = next(iter(records.values()))["st"]
         log = stem.with_suffix(".log").read_text(encoding="utf-8")

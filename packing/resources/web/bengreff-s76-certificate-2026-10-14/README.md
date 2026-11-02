@@ -174,8 +174,15 @@ slice it owes.
   | $49301/50000$ | $[89/20, 9/2] \times [11/5, 9/4] \times [1/4, 9/32]$, job 056 | 11 boxes, depth 5, as the source’s record | 433 boxes, 60 uncertified, 97 CPU-s | $1.0141613$, $0.9999833$ |
 
   The first pose is the lowest the review’s descent found, near the bottom wall;
-  the second is the lowest `k2m5_review.py cellmin` found in job 056’s cell.
-  `tests/test_replay_controls.py` holds both pairs.
+  the second is the lowest `k2m5_review.py cellmin` found in job 056’s cell
+  ([`receipts/controls/n76_cellmin_j056.json`](receipts/controls/n76_cellmin_j056.json),
+  run here on 2 November with the review’s retained program, `4fa7ed60…`, over 1,508
+  sampled poses). That program’s exact evaluator shares no code with `zm_mixed.py`, and
+  its capture at the pose, $1.014161252515$, equals `zm_mixed.py pose`’s exactly, so by
+  linearity the scaled cover captures less than one there whatever `zm_mixed.py`
+  computes; the review’s own capture at the first pose does the same for that one. The
+  probe chose the pose and decides nothing. `tests/test_replay_controls.py` holds both
+  pairs.
 - **The wall segments.** No closed unit square in $[0,9]^2$ needs mass on the container’s
   walls: a square flush with a wall is the limit of squares moved off it, each capturing
   at least one, and in the limit that mass lies off the wall. None of the five other
