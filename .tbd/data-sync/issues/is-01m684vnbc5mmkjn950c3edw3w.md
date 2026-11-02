@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 87
+version: 88
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T07:55:06.326Z
+updated_at: 2026-11-02T08:23:40.161Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -150,3 +150,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 ~08:00: merged #882 (6062867b1): --before-close refuses open/in-progress/blocked children; check_table_cells (fast tier + hook prerequisite incl. untracked drafts; MEASURED_WITH pinned to flowmark-rs 0.4.0); two files first-formatted (typography only, verified). think-ysi4, think-7y5x closed. 39 PRs merged this pass. No lane running; sweep clean; remaining items are owner decisions.
 
 2026-11-02 07:53: renewal. Sweep intake27 run; no new issues since 06:50Z. Lanes: L26 think-k3tk (independent Lemma 4.10 labeller, priced first, cap 40 CPU-h), L27 think-l6lt (DATA_REVISION conflicts).
+
+2026-11-02 ~08:45: merged #883 (b1b0c3a09; merge_conflicts --data, pin-conflict doc); think-l6lt closed as superseded by think-070d (owner-decided P1, sizeable, reader-facing footer change; offered to the owner, not started). 40 PRs merged this pass. L26 (think-k3tk) running.
