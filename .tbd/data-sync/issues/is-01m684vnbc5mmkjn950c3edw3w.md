@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 89
+version: 90
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T08:54:26.316Z
+updated_at: 2026-11-02T09:54:31.736Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -154,3 +154,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 ~08:45: merged #883 (b1b0c3a09; merge_conflicts --data, pin-conflict doc); think-l6lt closed as superseded by think-070d (owner-decided P1, sizeable, reader-facing footer change; offered to the owner, not started). 40 PRs merged this pass. L26 (think-k3tk) running.
 
 2026-11-02 08:52: renewal. Sweep intake28 run; no new issues since 07:50Z. L26 (think-k3tk) running.
+
+2026-11-02 09:52: renewal. Sweep intake29 run; no new issues since 08:50Z. #884 (think-k3tk: independent Lemma 4.10 labeller, 78,673/78,673 certified, 0.52 CPU-h) under strong-max correctness review.
