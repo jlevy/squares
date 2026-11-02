@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
 status: open
 priority: 1
-version: 13
+version: 14
 delegate: null
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-11-02T14:39:18.179Z
+updated_at: 2026-11-02T16:46:44.995Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.
@@ -113,10 +113,12 @@ Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-me
 
 > @bengreff, a follow-up to [our comment of 26 October](https://github.com/jlevy/squares/issues/594#issuecomment-6412988864), which gave your result as V3/C1, reviewed and pending adoption. With #886 merged, it has moved on `main`:
 >
-> - **[T-184](https://jlevy.github.io/squares/result/t-184.html), V3/C3, confirmed:** s(76) = 9, the lower half by your mixed cover and the upper half by the 9 × 9 grid, credited *Greff after Daniel, wand125*. It is confirmed, reproduced with the producer's code: Evan Daniel's `zmx2` and `zm_mixed.py`, run here from the bytes you pin and read as one decision over the D4 region.
+> - **[T-184](https://jlevy.github.io/squares/result/t-184.html), V3/C3, confirmed:** s(76) = 9, the lower half by your mixed cover and the upper half by the 9 × 9 grid, credited *Greff after Daniel, Hosono*. It is confirmed, reproduced with the producer's code: Evan Daniel's `zmx2` and `zm_mixed.py`, run here from the bytes you pin and read as one decision over the D4 region.
 > - **What held it at C1 is done.** Stage 4 asks that each checker refuse two mutated certificates. `zmx2` already did. With your `verify.sh` flags and its depth limit of 24, `zm_mixed.py` now refuses two covers with every mass scaled just below one at a low pose (by 49979/50000 and by 49301/50000), each on a cell where it certifies your cover with the same flags; a test keeps both pairs. No ruling on the review's depth-12 refusal was needed.
-> - **The case page.** [n = 76](https://jlevy.github.io/squares/cases/76.html) now adopts the value: s(76) = 9 is proved there, and wand125's 1793/200 is superseded.
+> - **The case page.** [n = 76](https://jlevy.github.io/squares/cases/76.html) now adopts the value: s(76) = 9 is proved there, and Hiroaki Hosono's 1793/200 (T-091) is superseded.
 > - **Your second route** at `06993982` is retained in its own packet as reported; it is not run or audited here.
 > - **Next, for V4/C4:** a second adversarial review by a distinct reviewer and a human oversight record.
 >
 > **On `main`.** [`packing/frontier/RESULTS.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/RESULTS.md), [`packing/frontier/n-076.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/n-076.md), [the packet](https://github.com/jlevy/squares/blob/main/packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md).
+
+2026-11-02 bold-ritchie-l30, after review A of #886: the draft above now credits *Greff after Daniel, Hosono*, as bibliography.yaml and attribution.md give it, and names Hiroaki Hosono's 1793/200 (T-091) in place of wand125's.
