@@ -2221,8 +2221,8 @@ The next evidence-improving action or terminal rationale for each result, and un
 
   Local minimality of the packing at its side is a separate claim and is not registered. V4 and C4 need two adversarial AI reviews by distinct reviewers and a human oversight record.
 
-- **T-261** — Replay gradec.py, the source's checker, from its retained copy on all 233 configurations, 230 and 261 with GRADEC_DROPZERO=1, comparing each output with the published n-N.gradec.json (think-mtah, about 10.6 CPU-hours by the source's logs): that is the C3 replay. The author's adoption of the review's repaired step in grade-C.md would close C-1 at the source.
-  - Unfinished, C3 (think-mtah): gradec.py replayed from its retained copy on all 233 configurations, each output compared with the published certificate. About 10.6 CPU-hours, up to about 21 (priced 2026-10-12).
+- **T-261** — Held for the owner's question (think-xyek): whether a defect-found read stays open after a review that ends defects-resolved. gradec.py's replay of all 233, the C3 route, ran on 1 November and reproduced every certificate byte for byte (think-mtah); its receipt is retained in the packet and its evidence is not entered, since at C3 today's status rule would clear the incomplete status the question is about. Once the owner answers, the replay evidence is entered, the confirmation rises to C3, and the status follows the answer. The author's adoption of the review's repaired step in grade-C.md would close C-1 at the source.
+  - Unfinished, C3 (think-mtah): The owner's answer to whether a defect-found read stays open after a review that ends defects-resolved (think-xyek); then gradec.py's replay of all 233, already run, entered as the C3 evidence. About 0.01 CPU-hours, up to about 0.02 (priced 2026-11-01).
 - **T-120** — Acquire and bind the exact source geometry, check root identity and full feasibility independently, and review any minimality claim separately. Exact-value integration is tracked on jlevy/squares#811, since PR #403 closed unmerged on 25 October 2026. The confirmation would move no case bound: alpha_102 lies above the case's verified ceiling, so this entry is superseded at 102.
 
   Evan Daniel's Lean module Sqpack.Exact.Packs.N102, in the evand/square-packing commits read on 11 October under think-63vx, proves that the selected root packs 102 squares; retaining it with its closure and building it here is think-63vx's, about an hour of lane work and under ten minutes of build (the 11 October Lean-backed rungs review, LR-10). It would check the bound and the root identity, not the minimality assertion, which the module does not prove.
@@ -2264,7 +2264,7 @@ The next evidence-improving action or terminal rationale for each result, and un
   - Unfinished, C3 (think-ikku): The owner's answer to whether the 23 October restatement ruling reaches counts inside the corpus (RV-1 of the 31 October review); then, if the counts stay recorded, the replay and review evidence already run, entered as the stage 4 exit. About 0.01 CPU-hours, up to about 0.02 (priced 2026-10-31).
 - **T-129** — Optional scoped historical geometry replay requires dedicated complete deciding inputs and controls; it would not replace any current selected bound.
 
-Register reviewed 2026-10-31.
+Register reviewed 2026-11-01.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
