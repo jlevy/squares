@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import os
 import re
+import shlex
+import subprocess
 import sys
 import textwrap
 from pathlib import Path
@@ -19,7 +21,16 @@ from pathlib import Path
 import pytest
 
 from devtools import check_table_cells
-from devtools.check_table_cells import MEASURED, UNTOUCHED, cells, lossy_rows, main, scope
+from devtools.check_math_spans import pinned_formatter
+from devtools.check_table_cells import (
+    MEASURED,
+    MEASURED_WITH,
+    UNTOUCHED,
+    cells,
+    lossy_rows,
+    main,
+    scope,
+)
 from sqpack.cli import validate
 
 PACKING = Path(__file__).resolve().parents[1]
@@ -127,9 +138,39 @@ def test_the_check_reads_what_the_formatter_formats_and_names_file_and_line(
     assert "keeps `n=11` | `$` | `x` and drops `< 1$` | `confirmed`" in shown
 
 
+def _git(root: Path, *arguments: str) -> None:
+    subprocess.run(["git", "-C", str(root), *arguments], check=True, capture_output=True)
+
+
+def test_the_hooks_run_also_reads_untracked_markdown_the_formatter_rewrites(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review A1 of #882: the hook's `flowmark --auto .` rewrites every Markdown file git
+    does not ignore, tracked or not, and an untracked draft lost a cell while the check,
+    reading tracked files only, said ok. With `--untracked`, which the hook's target
+    passes, it reads those too; `.gitignore` and `.flowmarkignore` still keep a file out.
+    The gate reads tracked files only, so a step writing Markdown beside it cannot change
+    its verdict."""
+    _git(tmp_path, "init", "-q")
+    _write(tmp_path, ".gitignore", "scratch/\n")
+    _write(tmp_path, ".flowmarkignore", "raw/\n")
+    _write(tmp_path, "notes.md", "# Notes\n")
+    _git(tmp_path, "add", "notes.md")
+    _write(tmp_path, "draft.md", "| Mode | Speed |\n| --- | --- |\n| mode | fast|slow |\n")
+    _write(tmp_path, "scratch/ignored.md", TRUNCATED)
+    _write(tmp_path, "raw/source.md", TRUNCATED)
+    assert scope(tmp_path) == ["notes.md"]
+    assert scope(tmp_path, untracked=True) == ["draft.md", "notes.md"]
+    assert main(["--root", str(tmp_path)]) == 0
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "--untracked"]) == 1
+    assert "draft.md:3: " in capsys.readouterr().out
+
+
 def test_the_commit_hook_checks_before_it_formats() -> None:
     """The hook runs `make format`; the check is a prerequisite of that target, so a row
-    the formatter would cut short fails the commit before anything is rewritten."""
+    the formatter would cut short fails the commit before anything is rewritten. It reads
+    untracked Markdown too, as the formatter does, and the hook's comment says so."""
     makefile = (REPO / "Makefile").read_text(encoding="utf-8")
     target = re.search(r"^format:(?P<prerequisites>[^\n]*)\n", makefile, re.MULTILINE)
     assert target is not None
@@ -137,7 +178,21 @@ def test_the_commit_hook_checks_before_it_formats() -> None:
     rule = re.search(r"^table-cells-check:[^\n]*\n\t(?P<recipe>[^\n]+)", makefile, re.MULTILINE)
     assert rule is not None
     assert "devtools.check_table_cells" in rule["recipe"]
-    assert "make format" in (REPO / "lefthook.yml").read_text(encoding="utf-8")
+    assert "--untracked" in rule["recipe"].split()
+    lefthook = (REPO / "lefthook.yml").read_text(encoding="utf-8")
+    assert "make format" in lefthook
+    assert "table-cells-check" in lefthook
+
+
+def test_the_measurement_names_the_formatter_the_makefile_pins() -> None:
+    """Review A2 of #882: the splitter is right for the formatter it was measured on, and
+    no gate runs `--measure`. A pin bump fails here until the measurement is re-run."""
+    pinned = pinned_formatter(REPO / "Makefile")
+    assert MEASURED_WITH in shlex.split(pinned), (
+        f"the Makefile pins `{pinned}`, but MEASURED was taken with {MEASURED_WITH}: re-run "
+        "`python -m devtools.check_table_cells --measure` and update MEASURED and "
+        "MEASURED_WITH"
+    )
 
 
 def test_the_check_runs_on_every_pull_request_and_in_the_edit_tier() -> None:

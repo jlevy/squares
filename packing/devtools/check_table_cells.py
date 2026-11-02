@@ -34,16 +34,20 @@ bar between backslash-escaped backticks, which this splitter splits. A row the f
 spares is refused like any other, since an edit that removes the protecting cell, here
 or anywhere in the file, cuts it at the next commit.
 
-The check reads what the formatter formats: every tracked Markdown file except those
-`.flowmarkignore` names and the vendored trees, which the formatter never rewrites. It
-runs before the formatter in the commit hook, as a prerequisite of `make format`, so a
-commit that would lose a cell fails with the file and line instead; and on every pull
-request, since a row committed without the hook is cut at the next commit anyone makes.
-It prints its own wall time.
+The check reads what the formatter formats, less what `.flowmarkignore` names and the
+vendored trees, which the formatter never rewrites. It runs before the formatter in the
+commit hook, as a prerequisite of `make format`, so a commit that would lose a cell fails
+with the file and line instead; there it passes `--untracked`, since `flowmark --auto .`
+also rewrites every Markdown file git does not ignore, and an untracked draft lost a cell
+while a tracked-only check said ok (review A1 of #882). It also runs on every pull
+request, on tracked files only, since a row committed without the hook is cut at the next
+commit anyone makes; a step writing Markdown beside it cannot change that verdict. It
+prints its own wall time.
 
 Usage, from `packing/`:
 
     uv run --frozen --group dev python -m devtools.check_table_cells
+    uv run --frozen --group dev python -m devtools.check_table_cells --untracked
     uv run --frozen --group dev python -m devtools.check_table_cells --measure
 
 Exits 1 on a row the formatter would cut, or with `--measure` on a row the pinned
@@ -97,6 +101,10 @@ _CONTAINER = " \t>"
 #: start of a line is inline code rather than a fence.
 _FENCE = re.compile(r"(?P<fence>`{3,}(?=[^`]*$)|~{3,})")
 
+#: The formatter `MEASURED` and `UNTOUCHED` were taken with, and the only one `cells` is
+#: known to match. A fast test fails when the Makefile pins another (review A2 of #882):
+#: re-run `--measure` against the new pin and update both records and this.
+MEASURED_WITH = "flowmark-rs==0.4.0"
 #: Rows of a table headed `| Case | A | B |` as written, and as the pinned formatter
 #: wrote each back on 2 November 2026. `--measure` formats them again.
 MEASURED: tuple[tuple[str, str], ...] = (
@@ -233,13 +241,14 @@ def lossy_rows(text: str) -> list[tuple[int, int, list[str]]]:
     return found
 
 
-def scope(root: Path = REPO) -> list[str]:
-    """The tracked Markdown the formatter rewrites, repository-relative."""
+def scope(root: Path = REPO, *, untracked: bool = False) -> list[str]:
+    """The tracked Markdown the formatter rewrites, repository-relative; with `untracked`,
+    the Markdown git does not ignore as well, which is all the hook's formatter walks."""
     ignored = flowmark_exclusions(root)
     vendored = vendored_directories(root)
     return [
         path
-        for path in tracked_markdown(root)
+        for path in tracked_markdown(root, untracked=untracked)
         if not excluded_by(path, ignored)
         and not any(path.startswith(f"{directory}/") for directory in vendored)
     ]
@@ -249,11 +258,11 @@ def _quoted(found: Sequence[str]) -> str:
     return " | ".join(f"`{cell}`" for cell in found)
 
 
-def check(root: Path = REPO) -> tuple[list[str], int]:
+def check(root: Path = REPO, *, untracked: bool = False) -> tuple[list[str], int]:
     """Each row the formatter would cut, as a line naming its file and line, and the
     number of files read."""
     problems: list[str] = []
-    paths = scope(root)
+    paths = scope(root, untracked=untracked)
     for path in paths:
         text = (root / path).read_text(encoding="utf-8")
         if "|" not in text:
@@ -307,6 +316,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="format the measured rows with the Makefile's pinned formatter and compare",
     )
+    parser.add_argument(
+        "--untracked",
+        action="store_true",
+        help="also read Markdown git does not ignore, as the hook's formatter does",
+    )
     arguments = parser.parse_args(argv)
     root: Path = arguments.root
     started = time.perf_counter()
@@ -317,10 +331,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(f"  DIFFERS {line}")
         print(
             f"  {len(MEASURED) + 1 - len(differ)} of {len(MEASURED) + 1} measurements (the "
-            f"rows and the untouched file) agree with {' '.join(command)}"
+            f"rows and the untouched file, recorded with {MEASURED_WITH}) agree with "
+            f"{' '.join(command)}"
         )
         return 1 if differ else 0
-    problems, files = check(root)
+    problems, files = check(root, untracked=arguments.untracked)
     for problem in problems:
         print(f"  FAIL {problem}")
     elapsed = time.perf_counter() - started

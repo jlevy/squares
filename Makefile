@@ -22,9 +22,10 @@ PACKING_PYTHON ?= uv run --frozen --group dev python
 format: table-cells-check
 	$(FLOWMARK) --auto .
 
-## Refuse a Markdown table row the pinned formatter would cut short. Reads only.
+## Refuse a Markdown table row the pinned formatter would cut short. Reads only, and reads
+## untracked Markdown too, since `flowmark --auto .` rewrites it (review A1 of #882).
 table-cells-check:
-	cd packing && $(PACKING_PYTHON) -m devtools.check_table_cells
+	cd packing && $(PACKING_PYTHON) -m devtools.check_table_cells --untracked
 
 ## Verify canonical paper titles without rendering or writing generated files.
 paper-style-check:

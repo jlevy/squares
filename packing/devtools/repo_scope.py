@@ -68,7 +68,11 @@ def is_vendored(path: Path) -> bool:
 
 
 def tracked_files(
-    root: Path, pathspec: str, *, environment: Mapping[str, str] | None = None
+    root: Path,
+    pathspec: str,
+    *,
+    environment: Mapping[str, str] | None = None,
+    untracked: bool = False,
 ) -> list[Path] | None:
     """Every file `root` tracks that matches the git `pathspec`, or `None` with no index here.
 
@@ -92,6 +96,11 @@ def tracked_files(
 
     A caller constructing an isolated worker can supply its sanitized environment;
     both Git queries then use it without changing the process environment.
+
+    `untracked` adds every file git does not ignore and does not yet track, which is what
+    a tool that walks the working tree respecting `.gitignore` reads -- the Markdown
+    formatter in the commit hook (review A1 of #882). A sweep that must be a function of
+    the tracked tree leaves it off.
     """
     try:
         top = subprocess.run(
@@ -104,8 +113,9 @@ def tracked_files(
         return None
     if Path(os.fsdecode(top).strip()).resolve() != root.resolve():
         return None
+    others = ("--others", "--exclude-standard") if untracked else ()
     listed = subprocess.run(
-        ("git", "-C", str(root), "ls-files", "-z", "--cached", "--", pathspec),
+        ("git", "-C", str(root), "ls-files", "-z", "--cached", *others, "--", pathspec),
         check=True,
         capture_output=True,
         env=environment,
@@ -118,9 +128,10 @@ def tracked_files(
 UNTRACKED_PARTS = frozenset({".git", ".venv", "node_modules", "__pycache__", "site"})
 
 
-def tracked_markdown(repo: Path) -> list[str]:
-    """Every tracked Markdown file, repository-relative; a walk where there is no index."""
-    tracked = tracked_files(repo, "*.md")
+def tracked_markdown(repo: Path, *, untracked: bool = False) -> list[str]:
+    """Every tracked Markdown file, repository-relative; a walk where there is no index.
+    With `untracked`, every file git does not ignore as well (`tracked_files`)."""
+    tracked = tracked_files(repo, "*.md", untracked=untracked)
     if tracked is None:
         tracked = [
             path
