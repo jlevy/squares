@@ -1756,3 +1756,15 @@ repositories:
       Nothing under theorem-a/ or composites/ changes, so it does not bear on Theorem A's
       row, T-163, T-236 or think-mbuh's retain. Rectangles of height below 2 are another
       container; nothing to import.
+  # The intake pass of 2 November 2026, lane L28 (think-3guf), from the 09:52Z sweep.
+  - url: https://github.com/JoostdeWinter/joostdewinter.github.io
+    read_through: bd80c12c4b057ef9e61a901f5cfd657c6e31a6a6
+    read_on: '2026-11-02'
+    note: >-
+      One commit of 2 November (10:45 +0100) past the 206c7fc read: bd80c12 adds
+      unilluminable-rooms.pdf and one index.html line listing the preprint "Unilluminable
+      rooms: Minimal examples, classifications and exceptions" (De Winter & Tokarsky, 2026),
+      with a link to its code in the separate JoostdeWinter/unilluminable-rooms repository.
+      It is about polygon illumination, not square packing, and changes nothing under
+      square-packing-above-324/. Nothing to import; the 8 rows above 1024 still wait on the
+      owner (think-f2io).
