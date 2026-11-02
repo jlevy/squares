@@ -52774,7 +52774,7 @@ evidence:
           over each configuration's field on the one route, with its two controls each
         checked: 2
         of: 2
-      read: [specification, certificate-format]
+      read: [specification, certificate-format, producer-code]
       clean_room: false
       shares: []
       written_by:
@@ -52787,16 +52787,31 @@ evidence:
         - kind: ai
           system: Claude (Anthropic)
           setting: >-
+            the import lane of PR 574 (14 October 2026), which wrote
+            devtools.algebraic_witness_reports, and the algebraic-houses lane of think-ot5c
+            (c-houses-1023, PR 756, 23 October 2026), which added its decoder of the minpoly
+            format, evand_minpoly_geometry, after verify_exact.py's reading of a square's
+            pose; tiers not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
             the records lane of think-4rzl (bold-ritchie-l8, tbd-strong) on 31 October 2026,
             which wrote the reader of the facts and read the author's comments as text
       overlaps_producer:
-        extent: unknown
+        extent: system-family
         separate_prompt: true
         separate_code: true
         note: >-
           The author says Claude (Anthropic, Claude Opus 5.5) produced the construction, his
-          second checker and the controls at his direction. No route here imports or copies
-          the author's code; his checker, controls and distance script were never opened.
+          second checker and the controls at his direction; the project's code is Claude's
+          too, written from prompts of its own. The reader's and the decoder's authors read
+          verify_exact.py, the source's checker: the decoder follows its pose formula,
+          R^m((1 - u^2)/(1 + u^2), 2u/(1 + u^2)), and the reader takes an empty u as zero, as
+          it does. No route here imports or copies the author's code; his checker, controls
+          and distance script were never opened. Corrected on 2 November 2026 by review A of
+          #876 (findings 4 and 5): this entry recorded the overlap as unknown and left
+          producer-code out of what was read; neither changes the level or the mark, since
+          clean_room was already false.
     independence_record: packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
     limitations: >-
       One route over a number field: sqpack's exact witness verifier builds every square
@@ -52886,7 +52901,8 @@ evidence:
       the author's. The attachment could not be downloaded from the importing session; on 1
       November 2026 the same bytes, with the comment's digest, were read from the author's
       public copy HyukdongKim/square-packing-exact-sides at f480441e and kept in the packet's
-      source/ (think-ozx8), and E-hyukdongkim-804-s297-verify-exact decides the file. Decided
+      source/ (think-ozx8), and two entries decide the file: E-hyukdongkim-804-s297-verify-exact
+      and E-hyukdongkim-804-s297-exact-feasibility. Decided
       here from the printed polynomial: primitive and irreducible over Q (SymPy and
       sqpack.field), one real root, the root the comment's 100-place print names, 3.359e-90
       below T-174's rational certificate and 6.624e-63 below issue 639's degree-12 side
@@ -52924,7 +52940,7 @@ evidence:
           decided over its field on the one route, with its two controls
         checked: 1
         of: 1
-      read: [specification, certificate-format]
+      read: [specification, certificate-format, producer-code]
       clean_room: false
       shares: []
       written_by:
@@ -52937,19 +52953,31 @@ evidence:
         - kind: ai
           system: Claude (Anthropic)
           setting: >-
+            the import lane of PR 574 (14 October 2026), which wrote
+            devtools.algebraic_witness_reports, and the algebraic-houses lane of think-ot5c
+            (c-houses-1023, PR 756, 23 October 2026), which added its decoder of the minpoly
+            format, evand_minpoly_geometry, after verify_exact.py's reading of a square's
+            pose; tiers not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
             the records lane of think-4rzl (bold-ritchie-l8, tbd-strong) on 31 October 2026,
             which wrote the reader, and lane L14 of the 1 November intake (bold-ritchie-l14,
             think-ozx8), which added the 297 packet to it and read the author's README as
             text
       overlaps_producer:
-        extent: unknown
+        extent: system-family
         separate_prompt: true
         separate_code: true
         note: >-
           The author says Claude (Anthropic) did the computation, the construction and the
-          checks at his direction. No route here imports or copies the author's code; his
-          check_field_packing.py, controls.py and distance_to_record.py are kept as text and
-          were never run.
+          checks at his direction, and issue 804 names the model, Claude Opus 5.5; the
+          project's code is Claude's too, written from prompts of its own. The reader's and
+          the decoder's authors read verify_exact.py, the source's checker: the decoder
+          follows its pose formula, R^m((1 - u^2)/(1 + u^2), 2u/(1 + u^2)), and the reader
+          takes an empty u as zero, as it does. No route here imports or copies the author's
+          code. His check_field_packing.py, controls.py and distance_to_record.py are kept
+          as text and were never run here; lane L14 read only his README.
     independence_record: packing/resources/web/hyukdongkim-s297-2026-10-25/README.md
     limitations: >-
       One route over a number field: sqpack's exact witness verifier builds every square in
@@ -52958,7 +52986,8 @@ evidence:
       nice, on a shared four-core host: the positive accepted with every pair decided, a
       duplicated square refused on overlap and a square moved outside the box refused on
       containment; 131,868 pair decisions, 43,956 a job, in 5,630 route CPU seconds, the
-      longest job 1,909 s. The configuration states the angle parameter of 190 axis-aligned
+      longest job 1,909 CPU seconds (the positive, 1,964 s of wall time, was the longest by
+      the clock). The configuration states the angle parameter of 190 axis-aligned
       squares as the empty list, which the reader takes as zero, as verify_exact.py does;
       the receipt lists them. The file has the certificate's SHA-256 the comment states
       (e5c340b8...2826; the reader's custody, which the tests hold), and the reader's side

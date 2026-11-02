@@ -1667,7 +1667,7 @@ The programs behind each result, by its cited evidence: who ran each check, how 
   - `E-evand-n182-review-exact-feasibility`, replayed here, independently re-implemented, clean-room; full, 1 of 1: the certificate at n = 182: every wall and every pair, decided by two exact methods that share only the reader and the corner construction, with fourteen sharp controls decided by both: `V-evand-n182-review-check` (first-party)
 - **T-244** — confirmed, independently re-implemented
   - `E-hyukdongkim-804-exact-forms-report`, the source’s own run: no program held
-  - `E-hyukdongkim-804-configurations-exact-feasibility`, replayed here, independently re-implemented; full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each: `V-sqpack-verify` (first-party); `V-configuration-fact-replay`, `V-algebraic-witness-reports` (first-party, premises)
+  - `E-hyukdongkim-804-configurations-exact-feasibility`, replayed here, independently re-implemented after reading the producer’s code; full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each: `V-sqpack-verify` (first-party); `V-configuration-fact-replay`, `V-algebraic-witness-reports` (first-party, premises)
   - `E-hyukdongkim-804-configurations-verify-exact`, replayed here, reproduced with the producer’s code; full: the two exact configurations, each decided whole by the source's checker: `V-evand-verify-exact` (external); `V-configuration-fact-replay` (first-party, premises)
 - **T-245** — recorded
   - `E-n012-jatloe-lean-report`, the source’s own run: `V-audit-n12-lean` (first-party, premises)
@@ -1675,7 +1675,7 @@ The programs behind each result, by its cited evidence: who ran each check, how 
   - `E-n029-evand-minpoly-7213-report`, the source’s own run: no program held
 - **T-247** — confirmed, independently re-implemented
   - `E-hyukdongkim-804-s297-report`, the source’s own run: no program held
-  - `E-hyukdongkim-804-s297-exact-feasibility`, replayed here, independently re-implemented; full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls: `V-sqpack-verify` (first-party); `V-configuration-fact-replay`, `V-algebraic-witness-reports` (first-party, premises)
+  - `E-hyukdongkim-804-s297-exact-feasibility`, replayed here, independently re-implemented after reading the producer’s code; full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls: `V-sqpack-verify` (first-party); `V-configuration-fact-replay`, `V-algebraic-witness-reports` (first-party, premises)
   - `E-hyukdongkim-804-s297-verify-exact`, replayed here, reproduced with the producer’s code; full: the author's exact configuration at 297, decided whole by the source's checker: `V-evand-verify-exact` (external); `V-configuration-fact-replay` (first-party, premises)
 - **T-248** — confirmed, independently re-implemented
   - `E-evand-n299-certificate-report`, the source’s own run: no program held

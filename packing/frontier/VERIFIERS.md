@@ -1351,8 +1351,8 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-couzo-n304-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 304 that T-241 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-241 |
 | `E-evand-kaggle-descents-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 304 that T-242 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-242 |
 | `E-evand-n182-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 182 that T-243 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-243 |
-| `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
-| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
+| `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
+| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
 | `E-evand-n299-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 299 that T-248 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-248 |
 | `E-couzo-843-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 130 that T-254 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-254 |
 | `E-couzo-a5a5d76-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 260 and 307 that T-255 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-255 |
@@ -3382,8 +3382,8 @@ Imports a packet's algebraic-number-field witnesses from its declaration: derive
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-pingyou-574-algebraic-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | T-174 |
-| `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
-| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
+| `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
+| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
 
 ### `V-build-field-configuration`
 
@@ -4470,9 +4470,9 @@ Reads Hyukdong Kim's exact configurations for T-244, kept as derived JSON facts,
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
+| `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
 | `E-hyukdongkim-804-configurations-verify-exact` | replayed here | reproduced with the producer’s code | full: the two exact configurations, each decided whole by the source's checker | T-244 |
-| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
+| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
 | `E-hyukdongkim-804-s297-verify-exact` | replayed here | reproduced with the producer’s code | full: the author's exact configuration at 297, decided whole by the source's checker | T-247 |
 
 <!-- This document follows common-doc-guidelines.md.
