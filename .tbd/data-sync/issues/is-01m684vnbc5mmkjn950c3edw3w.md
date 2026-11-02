@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 90
+version: 91
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T09:54:31.736Z
+updated_at: 2026-11-02T10:16:08.947Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -156,3 +156,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 08:52: renewal. Sweep intake28 run; no new issues since 07:50Z. L26 (think-k3tk) running.
 
 2026-11-02 09:52: renewal. Sweep intake29 run; no new issues since 08:50Z. #884 (think-k3tk: independent Lemma 4.10 labeller, 78,673/78,673 certified, 0.52 CPU-h) under strong-max correctness review.
+
+2026-11-02 ~10:45: merged #885 (d667efcdf; JoostdeWinter site bd80c12 read, unilluminable rooms, nothing to import). 41 PRs merged this pass. #884 review A (strong-max): sound, no blockers; 3 should-fix (controls miss four thresholds; witness-in-box; read list + caveat) sent back to L26 with result-requests stale text and any owed #368/#414 follow-up draft.
