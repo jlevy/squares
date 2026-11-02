@@ -1,0 +1,19 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L26 of 2 November (think-k3tk), answering review A of #884: #414's summary
+  and #368's entries for k2-minus-c and k2-minus-c-v1.2 now say that Lemma 4.10's box
+  labels have an independent second implementation, run on 2 November 2026 (think-k3tk,
+  #884), which certified every box as labelled, where they said the labelling remained
+  think-k3tk. No title, state, result, rung, side, bound, mark or credit changes. Against
+  main d667efcdf (#885): rendered at link revision
+  0000000000000000000000000000000000000000 into empty site directories, twice from this
+  tree and once with main's result-requests.yaml in its place, by render_packing_methods,
+  its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM): 43 files each, all
+  byte-identical across the three. No PDF was printed; it prints from that HTML. The
+  paper keeps its version, v0.2.7.
