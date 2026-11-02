@@ -874,6 +874,306 @@ def test_the_store_carries_each_bead_update_and_delegate(
     assert beads.stalled("think-bbbb") == ""
 
 
+# -- A held bead waits while what it waits on is acted on -------------------------------
+# On 2 November 2026 the sweep listed 46 items under 17 beads as stalled, most of them
+# waiting on the owner's D4 and D5 (think-f2io) or on think-llit's walk, each with a dated
+# wait note. Held (`hold: blocked`) on an open bead named by its `blocked_on:` line, a bead
+# is waiting, not stalled, for as long as that bead is acted on; once the blocker goes
+# quiet or closes, the held bead shows again, saying why (lane L21, think-n20n).
+
+
+def _held(
+    *rows: tuple[str, str, str, str, str, tuple[str, ...]],
+) -> sweep.Beads:
+    """Beads from (alias, status, updated, delegate, hold, waits) rows, on 26 October."""
+    return sweep.Beads(
+        {alias: status for alias, status, *_ in rows},
+        (),
+        {alias: f"{updated}T09:00:00.000Z" for alias, _, updated, *_ in rows},
+        {alias: delegate for alias, _, _, delegate, *_ in rows},
+        date(2026, 10, 26),
+        holds={alias: hold for alias, _, _, _, hold, _ in rows},
+        waits={alias: waits for alias, *_, waits in rows},
+    )
+
+
+QUIET_A = ("think-aaaa", "open", "2026-10-16", "", "blocked", ("think-bbbb",))
+
+
+@pytest.mark.parametrize(
+    ("rows", "state", "bead_state"),
+    [
+        # The blocker is open and updated: the held bead waits on it.
+        (
+            [QUIET_A, ("think-bbbb", "open", "2026-10-24", "", "", ())],
+            sweep.OWNED,
+            "open; held on think-bbbb",
+        ),
+        # A blocker that is itself held on an active bead keeps the whole chain waiting.
+        (
+            [
+                QUIET_A,
+                ("think-bbbb", "open", "2026-10-10", "", "blocked", ("think-cccc",)),
+                ("think-cccc", "in_progress", "2026-10-25", "c-lane-1025", "", ()),
+            ],
+            sweep.OWNED,
+            "open; held on think-bbbb",
+        ),
+        # The blocker has gone quiet: the held bead shows, naming it.
+        (
+            [QUIET_A, ("think-bbbb", "open", "2026-10-18", "", "", ())],
+            sweep.STALLED,
+            (
+                "open; held on think-bbbb, which has gone quiet (no update since 2026-10-18 "
+                "(8 days)); no update since 2026-10-16 (10 days)"
+            ),
+        ),
+        # A blocker whose claim has lapsed has gone quiet too.
+        (
+            [QUIET_A, ("think-bbbb", "in_progress", "2026-10-23", "c-lane-1023", "", ())],
+            sweep.STALLED,
+            (
+                "open; held on think-bbbb, which has gone quiet (claimed by c-lane-1023, whose "
+                "session is gone: no update since 2026-10-23 (3 days)); no update since "
+                "2026-10-16 (10 days)"
+            ),
+        ),
+        # The blocker has closed: the wait is over and nobody has resumed it.
+        (
+            [QUIET_A, ("think-bbbb", "closed", "2026-10-25", "", "", ())],
+            sweep.STALLED,
+            "open; held on think-bbbb (closed); no update since 2026-10-16 (10 days)",
+        ),
+        (
+            [QUIET_A],
+            sweep.STALLED,
+            "open; held on think-bbbb (no such bead); no update since 2026-10-16 (10 days)",
+        ),
+        # A wait that comes back to the bead waits on nothing anyone acts on.
+        (
+            [QUIET_A, ("think-bbbb", "open", "2026-10-10", "", "blocked", ("think-aaaa",))],
+            sweep.STALLED,
+            (
+                "open; held on think-bbbb, which has gone quiet (held on think-aaaa, a wait "
+                "that loops; no update since 2026-10-10 (16 days)); no update since "
+                "2026-10-16 (10 days)"
+            ),
+        ),
+        # A blocker the owner has paused, or one deferred, is not acted on (review A6 of
+        # #877: think-7hq0 read as waiting on the paused think-x4v4).
+        (
+            [QUIET_A, ("think-bbbb", "open", "2026-10-25", "", "paused", ())],
+            sweep.STALLED,
+            "open; held on think-bbbb (paused); no update since 2026-10-16 (10 days)",
+        ),
+        (
+            [QUIET_A, ("think-bbbb", "deferred", "2026-10-25", "", "", ())],
+            sweep.STALLED,
+            "open; held on think-bbbb (deferred); no update since 2026-10-16 (10 days)",
+        ),
+        # A held bead's wait has an outer limit: 28 days without an update of its own, it
+        # shows whatever its blocker does, since a note on the blocker is not its owner
+        # acting on it (review A1 of #877).
+        (
+            [
+                ("think-aaaa", "open", "2026-09-29", "", "blocked", ("think-bbbb",)),
+                ("think-bbbb", "open", "2026-10-25", "", "", ()),
+            ],
+            sweep.OWNED,
+            "open; held on think-bbbb",
+        ),
+        (
+            [
+                ("think-aaaa", "open", "2026-09-28", "", "blocked", ("think-bbbb",)),
+                ("think-bbbb", "open", "2026-10-25", "", "", ()),
+            ],
+            sweep.STALLED,
+            "open; no update since 2026-09-28 (28 days); a held bead waits 28 days at most",
+        ),
+        # Two paths to one blocker are not a loop.
+        (
+            [
+                (
+                    "think-aaaa",
+                    "open",
+                    "2026-10-16",
+                    "",
+                    "blocked",
+                    ("think-bbbb", "think-cccc"),
+                ),
+                ("think-bbbb", "open", "2026-10-10", "", "blocked", ("think-dddd",)),
+                ("think-cccc", "open", "2026-10-10", "", "blocked", ("think-dddd",)),
+                ("think-dddd", "open", "2026-10-25", "", "", ()),
+            ],
+            sweep.OWNED,
+            "open; held on think-bbbb, think-cccc",
+        ),
+        # A held bead updated within `STALE_DAYS` owns its items whatever its blocker does.
+        (
+            [
+                ("think-aaaa", "open", "2026-10-24", "", "blocked", ("think-bbbb",)),
+                ("think-bbbb", "open", "2026-10-01", "", "", ()),
+            ],
+            sweep.OWNED,
+            "open",
+        ),
+        # Not held, or held on no bead, the bead's own silence decides, as before.
+        (
+            [
+                ("think-aaaa", "open", "2026-10-16", "", "paused", ("think-bbbb",)),
+                ("think-bbbb", "open", "2026-10-24", "", "", ()),
+            ],
+            sweep.STALLED,
+            "open; no update since 2026-10-16 (10 days)",
+        ),
+        (
+            [("think-aaaa", "open", "2026-10-16", "", "blocked", ())],
+            sweep.STALLED,
+            "open; no update since 2026-10-16 (10 days)",
+        ),
+        # A held claim whose session is gone is still a lapsed claim.
+        (
+            [
+                (
+                    "think-aaaa",
+                    "in_progress",
+                    "2026-10-23",
+                    "c-lane-1023",
+                    "blocked",
+                    ("think-bbbb",),
+                ),
+                ("think-bbbb", "open", "2026-10-25", "", "", ()),
+            ],
+            sweep.STALLED,
+            (
+                "in_progress; claimed by c-lane-1023, whose session is gone: no update since "
+                "2026-10-23 (3 days)"
+            ),
+        ),
+    ],
+)
+def test_a_held_bead_waits_while_its_blocker_is_acted_on(
+    rows: list[tuple[str, str, str, str, str, tuple[str, ...]]], state: str, bead_state: str
+) -> None:
+    item = sweep.owned("an item", "think-aaaa", _held(*rows))
+    assert (item.state, item.bead_state) == (state, bead_state)
+
+
+def test_an_item_owned_by_a_held_bead_says_how_long_it_has_waited() -> None:
+    """The summary counts these items, so a wait that hides one is never invisible."""
+    beads = _held(QUIET_A, ("think-bbbb", "open", "2026-10-24", "", "", ()))
+    assert sweep.owned("an item", "think-aaaa", beads).held_days == 10
+    assert sweep.owned("an item", "think-bbbb", beads).held_days is None
+
+
+def test_a_wait_on_many_paths_is_read_once_per_bead(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Layers of two held beads, each waiting on both of the next layer: reading the first
+    bead reads each bead once, not once per path (2^16 here; review A7 of #877)."""
+    depth = 16
+    rows = [
+        (
+            f"think-{layer:02d}{side}0",
+            "open",
+            "2026-10-25" if layer == depth - 1 else "2026-10-10",
+            "",
+            "" if layer == depth - 1 else "blocked",
+            ()
+            if layer == depth - 1
+            else (f"think-{layer + 1:02d}a0", f"think-{layer + 1:02d}b0"),
+        )
+        for layer in range(depth)
+        for side in "ab"
+    ]
+    beads = _held(*rows)
+    calls: list[str] = []
+    read = sweep.Beads.quiet_blocker
+
+    def counted(
+        self: sweep.Beads, alias: str, waited: frozenset[str] = frozenset()
+    ) -> str | None:
+        calls.append(alias)
+        return read(self, alias, waited)
+
+    monkeypatch.setattr(sweep.Beads, "quiet_blocker", counted)
+    assert beads.stalled("think-00a0") == ""
+    assert len(calls) <= len(rows)
+
+
+@pytest.mark.parametrize(
+    ("line", "waits"),
+    [
+        ("blocked_on: think-bbbb, think-cccc", ("think-bbbb", "think-cccc")),
+        ("blocked_on: think-bbbb and think-cccc", ("think-bbbb", "think-cccc")),
+        ("blocked_on: think-bbbb; think-cccc", ("think-bbbb", "think-cccc")),
+        # Any other word names something the store cannot say anyone is acting on: a
+        # person, an issue or a pull request (review A3 of #877).
+        ("blocked_on: think-bbbb, the author's answer", ()),
+        ("blocked_on: think-bbbb, jlevy/squares#719 (the author's answers)", ()),
+        ("blocked_on: think-bbbb, #719", ()),
+        ("blocked_on: think-bbbb (D4), think-cccc", ()),
+        ("blocked_on: the owner", ()),
+        ("blocked_on: none", ()),
+    ],
+)
+def test_a_bead_waits_only_on_beads_when_its_line_names_nothing_else(
+    line: str, waits: tuple[str, ...]
+) -> None:
+    bead = {"status": "open", "title": "a held bead", "hold": "blocked", BODY: f"{line}\n"}
+    assert sweep.waited_beads(bead, "think-aaaa") == waits
+
+
+def test_the_store_carries_each_hold_and_the_beads_it_waits_on(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The last `blocked_on:` line stands, notes included; one that names an issue or pull
+    request, which the store cannot say anyone is acting on, is no bead wait."""
+    from devtools import check_bead_tree  # noqa: PLC0415
+
+    found = [
+        {
+            "id": "is-01aaaa",
+            "status": "open",
+            "title": "a held import",
+            "hold": "blocked",
+            BODY: (
+                "blocked_on: think-cccc\n\n## Notes\n\nlater\n"
+                "blocked_on: think-bbbb, think-cccc\n"
+            ),
+        },
+        {
+            "id": "is-01bbbb",
+            "status": "open",
+            "title": "a wait on a pull request",
+            "hold": "blocked",
+            BODY: "blocked_on: jlevy/squares#305, think-cccc\n",
+        },
+        {"id": "is-01cccc", "status": "open", "title": "a decision", "hold": None, BODY: ""},
+        {
+            "id": "is-01dddd",
+            "status": "open",
+            "title": "a wait that ended",
+            "hold": "blocked",
+            BODY: "blocked_on: think-cccc\n\n## Notes\n\nlater\nblocked_on: none\n",
+        },
+    ]
+    aliases = {"aaaa": "01aaaa", "bbbb": "01bbbb", "cccc": "01cccc", "dddd": "01dddd"}
+    monkeypatch.setattr(check_bead_tree, "load", lambda: (found, "", aliases))
+    beads = sweep.Beads.load(date(2026, 10, 26))
+    assert beads is not None
+    assert beads.holds == {
+        "think-aaaa": "blocked",
+        "think-bbbb": "blocked",
+        "think-cccc": "",
+        "think-dddd": "blocked",
+    }
+    assert beads.waits == {
+        "think-aaaa": ("think-bbbb", "think-cccc"),
+        "think-bbbb": (),
+        "think-cccc": (),
+        "think-dddd": (),
+    }
+
+
 def test_offline_reads_no_network_and_reports_what_it_skipped() -> None:
     def network(*_: object) -> Any:
         pytest.fail("--offline made a network call")
@@ -915,17 +1215,36 @@ def test_the_report_leads_with_what_needs_action() -> None:
     assert (
         "1 item without an open bead to own it, 1 item whose bead has gone quiet, "
         "1 regularization owed on main, 1 item whose blocker has resolved, "
-        "1 closeable issue still open, 1 item owned by an open bead, and 1 source not "
-        "checked." in report
+        "1 closeable issue still open, 1 item owned by an open bead, 0 of them by a held "
+        "bead waiting on others, and 1 source not checked." in report
     )
     assert report.index("## Needs Action") < report.index("## Not Checked")
     assert report.index("## Not Checked") < report.index("## Source")
-    assert "| Source | orphan | needs an owner |  | open a bead |" in report
-    assert "| Source | settled | closeable, still open |  | close it |" in report
+    assert "| source | item | state | bead | since | next |" in report
+    assert "| Source | orphan | needs an owner |  |  | open a bead |" in report
+    assert "| Source | settled | closeable, still open |  |  | close it |" in report
     assert "| held | owned | think-aaaa (open) |  |" in report
-    assert "| Source | quiet | owned by a stalled bead |  |  |" in report
+    # Which bead stalled, and why, as `--json` says it (review A2 of #877).
+    assert "| Source | quiet | owned by a stalled bead | think-bbbb (open) |  |  |" in report
     items = sections[0].items
     assert sweep.needing_action(sections) == [*items[:3], *items[4:]]
+
+
+def test_the_summary_counts_items_whose_bead_is_held_on_others() -> None:
+    """A held bead's items read as owned, so the summary says how many and how long the
+    longest has waited: one note on a blocker cannot make them invisible (A1 of #877)."""
+    held = "open; held on think-cccc"
+    items = [
+        sweep.Item("a", sweep.OWNED, bead="think-aaaa", bead_state="open"),
+        sweep.Item("b", sweep.OWNED, bead="think-bbbb", bead_state=held, held_days=12),
+        sweep.Item("c", sweep.OWNED, bead="think-bbbb", bead_state=held, held_days=12),
+        sweep.Item("d", sweep.OWNED, bead="think-dddd", bead_state=held, held_days=3),
+    ]
+    report = sweep.markdown([sweep.Section("Source", items=items)], TODAY)
+    assert (
+        "4 items owned by an open bead, 3 of them by a held bead waiting on others (the "
+        "longest silent 12 days), and 0 sources not checked." in report
+    )
 
 
 def _settled(**extra: Any) -> dict[str, Any]:

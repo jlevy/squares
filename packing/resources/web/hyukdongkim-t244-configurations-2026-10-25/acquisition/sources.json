@@ -8,50 +8,66 @@
   "sha256": "16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d",
   "sha256_stated_by_comment": true,
   "raw_asset_retained": false,
-  "licence": "none stated"
+  "members_retained": "every member, byte-identical, under source/",
+  "licence": "CC0 1.0: the author's public-domain dedication of his issue-804 attachments, data and code, in issuecomment-6397363927 (2026-10-25T12:00:41Z) and again in issuecomment-6415293035 (2026-10-26T11:50:22Z), which asks that the files be kept; the public copy's LICENSE is CC0 1.0 Universal",
+  "public_copy": {
+   "repository": "https://github.com/HyukdongKim/square-packing-exact-sides",
+   "commit": "f480441e73824668fb18779151369e4d3ba6179a",
+   "path": "attachments/t244-exact-configurations.zip",
+   "git_blob": "e2a7318458a0472e3385a7c898285faa57378b85",
+   "retrieved_at_utc": "2026-11-02T01:50Z",
+   "same_bytes_as_attachment": true
+  }
  },
  "members": [
   {
    "path": "t244-exact-configurations/README.md",
    "bytes": 5044,
    "sha256": "57cdf6479a46219b5d97056ff1750272ac5cc5db72a61d72180c6fe58076b922",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/t244-exact-configurations/README.md"
   },
   {
    "path": "t244-exact-configurations/n172.minpoly.json",
    "bytes": 197519,
    "sha256": "9230aa7aa4c6d4f4e31de4543b87e19db1e57bf4f8e105974c8bd45b203f02db",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/t244-exact-configurations/n172.minpoly.json"
   },
   {
    "path": "t244-exact-configurations/distance_to_record.py",
    "bytes": 823,
    "sha256": "460b3074d75b5793b2bd8d8d196e890b66eb94f25dbbf5a4f12468739385fe75",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/t244-exact-configurations/distance_to_record.py"
   },
   {
    "path": "t244-exact-configurations/check_field_packing.py",
    "bytes": 7478,
    "sha256": "8335f9a624458ee770208d06a773aea14ac0d5554731ed2375370c747d31aacf",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/t244-exact-configurations/check_field_packing.py"
   },
   {
    "path": "t244-exact-configurations/SHA256SUMS",
    "bytes": 423,
    "sha256": "36ca3c0278f56830ff089c1a245f48abe93f3cd9f6a833863a63359429e20644",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/t244-exact-configurations/SHA256SUMS"
   },
   {
    "path": "t244-exact-configurations/controls.py",
    "bytes": 2144,
    "sha256": "503117b0121655eaad3b96d7c1b2b65b4c1c0ca05cacdd3915656699069d3800",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/t244-exact-configurations/controls.py"
   },
   {
    "path": "t244-exact-configurations/n263.minpoly.json",
    "bytes": 269624,
    "sha256": "de646870e0ecd0d6c042e4742de023ebbcdddb28aac4aa51469dbf53dc264686",
-   "retained": false
+   "retained": true,
+   "retained_at": "source/t244-exact-configurations/n263.minpoly.json"
   }
  ]
 }

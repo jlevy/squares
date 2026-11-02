@@ -25931,13 +25931,19 @@ issues:
         Keep the files of t244-exact-configurations.zip themselves (CC0 1.0), not only
         derived facts, in the hyukdongkim-t244-configurations-2026-10-25 packet, from the
         same public copy.
-      state: queued
+      state: done
       source: https://github.com/jlevy/squares/issues/804#issuecomment-6415293035
       bead: think-4rzl
       note: >-
         The configurations are decided from the derived facts (T-244 at V3/C3); keeping the
         files changes no result. The follow-up of 31 October (issuecomment-6547236771) names
-        think-4rzl for it.
+        think-4rzl for it. Done on 2 November 2026: the packet keeps all seven files under
+        source/t244-exact-configurations/, byte-identical, read from the public copy's
+        attachments/t244-exact-configurations.zip at f480441e, the zip held to the comment's
+        SHA-256 16e6ad9d...9a2d and n172.minpoly.json and n263.minpoly.json to 9230aa7a...02db
+        and de646870...4686 (exact_forms.py configurations). Each retained certificate is the
+        file its derived fact rebuilds, byte for byte, so the decision read the bytes now
+        kept; the facts' configurations, the sides and the receipts are unchanged.
     - what: >-
         Keep the files of s297-exact-configuration.zip themselves (CC0 1.0) for 297, from
         the same public copy.

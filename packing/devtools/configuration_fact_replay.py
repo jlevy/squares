@@ -13,7 +13,10 @@ reads it (review B2 of #813). This is the small reader the bead names, and the d
   derived them from the attachment, held to the comment's digests; the repository holds
   them since (OR-16). ``json.dumps(configuration)`` rebuilds the author's file byte for
   byte, and ``custody`` reports its SHA-256 beside the member digest the comment states,
-  which the tests hold equal;
+  which the tests hold equal. Since 2 November 2026 the packet also keeps the author's
+  files themselves under ``source/`` (CC0 1.0, from his public copy; think-4rzl), and
+  ``custody`` reports whether each retained file is the rebuilt one, byte for byte; the
+  decision still reads the facts;
 - **the side.** ``S.poly`` must be T-244's polynomial, as the issue-804 intake's
   ``exact-sides.json`` holds it, and ``S``'s interval must meet that row's isolating
   interval; ``S.in_K`` must be a root of ``S.poly`` exactly in ``K`` and lie in ``S``'s
@@ -283,16 +286,25 @@ def load(n: int, packet: Packet = T244) -> dict[str, Any]:
 
 
 def custody(packet: Packet = T244) -> list[dict[str, Any]]:
+    """Each configuration's stated digest beside its rebuilt file's, and, where the packet
+    keeps the author's file under ``source/``, whether that file is the rebuilt one."""
+    sources = json.loads(packet.sources.read_text(encoding="utf-8"))
+    kept = {row["path"]: row.get("retained_at") for row in sources["members"]}
     rows = []
     for n in packet.counts:
         fact = load(n, packet)
+        rebuilt = certificate_bytes(fact)
+        at = kept.get(fact["source"]["member"])
         rows.append(
             {
                 "n": n,
                 "member": fact["source"]["member"],
                 "member_sha256": fact["source"]["member_sha256"],
-                "rebuilt_sha256": sha256(certificate_bytes(fact)),
-                "rebuilt_bytes": len(certificate_bytes(fact)),
+                "rebuilt_sha256": sha256(rebuilt),
+                "rebuilt_bytes": len(rebuilt),
+                "retained_identical": (
+                    None if at is None else (packet.directory / at).read_bytes() == rebuilt
+                ),
                 "field_degree": len(fact["configuration"]["field"]["f"]) - 1,
             }
         )
