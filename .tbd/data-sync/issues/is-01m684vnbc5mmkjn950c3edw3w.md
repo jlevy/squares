@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 81
+version: 82
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T04:54:35.197Z
+updated_at: 2026-11-02T04:59:03.174Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -138,3 +138,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 ~04:30: coordinator slip: closing think-4rzl left its child think-3trq open under a closed parent, failing check_bead_tree on main; re-parented to think-3guf at once (check ok). --before-close does not check children: think-ysi4 filed. #879 review A: blocking, nine table rows truncated by flowmark-rs splitting | inside cells (think-7y5x filed for a guard); L23 cannot be resumed (coordinator removed its worktree before review, a second slip: keep a lane worktree until its PR merges), so a fresh strong lane rebuilds the rows from receipts and sources.
 
 2026-11-02 04:52: renewal. Sweep intake24 run; no new issues since 03:50Z. L24 started (think-ysi4 before-close children, think-7y5x table-bar guard). #879 addressing (row rebuild) running.
+
+2026-11-02 ~05:15: merged #879 (f54c74f6b): Ryu #414 strongest-tier review accepted, no defect; nine truncated table rows restored verbatim from the original lane transcript (not rebuilt), bars escaped. L25 posts the #414 final comment after deploy and records it. 37 PRs merged this pass.
