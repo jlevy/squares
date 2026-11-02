@@ -69,9 +69,7 @@ import resource
 import shutil
 import subprocess
 import sys
-import tarfile
 import time
-import urllib.request
 from collections import Counter
 from collections.abc import Iterable, Mapping
 from concurrent.futures import Future, ProcessPoolExecutor
@@ -387,12 +385,12 @@ def linear_retained(certificate: LinearCertificate) -> dict[str, bytes]:
 def linear_tree(certificate: LinearCertificate) -> dict[Path, str]:
     """Every pinned file's SHA-256 by its upstream path: the pinned Git tree's, and the
     members only the certificate's release asset holds (`mixed.release_members`), the
-    candidate, certificate and proof bundle of a release-held certificate. A path pinned
-    by both must have one digest."""
+    candidate, certificate and proof bundle of a release-held certificate. No path may
+    be pinned by both."""
     tree = dict(mixed.read_subtree_manifest(certificate.subtree))
     for path, member in mixed.release_members(certificate).items():
-        digest = str(member["sha256"])
-        _require(tree.setdefault(path, digest) == digest, f"{path} is pinned twice, apart")
+        _require(path not in tree, f"{path} is pinned by both the Git tree and a release")
+        tree[path] = str(member["sha256"])
     return tree
 
 
@@ -882,81 +880,12 @@ class Prepared:
     bundle: Path
 
 
-#: The address of a release asset, as GitHub serves it.
-RELEASE_URL = "https://github.com/{repository}/releases/download/{release}/{asset}"
-
-
-def _file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
-def release_bundle(
-    certificate: LinearCertificate, work: Path, supplied: Path | None
-) -> tuple[Path | None, str | None]:
-    """A proof bundle only the certificate's release asset holds, put in ``work``.
-
-    For a bundle the pinned Git tree holds, nothing is done. Otherwise the bundle comes
-    from the release asset the packet's release record names: ``supplied`` when that is
-    the asset (a supplied file of any other name is taken as the bundle itself), else one
-    an earlier run left in ``work``, else the release's own address. The asset is refused
-    unless its size and SHA-256 are the record's, and its one bundle member is copied out
-    to ``work``. Returns what `mixed.fetch_tarball` is then given, which pins the bundle
-    to the record as it pins any tarball, and where the bundle came from.
-    """
-    if certificate.upstream_tarball in mixed.read_subtree_manifest(certificate.subtree):
-        return supplied, None
-    record = json.loads((certificate.packet / mixed.RELEASE_RECORD).read_text("utf-8"))
-    (asset,) = (
-        row for row in record["assets"] if row["certificate"] == certificate.directory.name
-    )
-    name = str(asset["asset"])
-    target = work / certificate.tarball
-    if supplied is not None and supplied.name != name:
-        return supplied, None
-    if supplied is None and target.is_file():
-        return None, None
-    work.mkdir(parents=True, exist_ok=True)
-    held = supplied if supplied is not None else work / name
-    how = "supplied"
-    if not held.is_file():
-        url = RELEASE_URL.format(
-            repository=record["repository"], release=record["release"], asset=name
-        )
-        partial = held.with_name(held.name + ".part")
-        with urllib.request.urlopen(url, timeout=600) as response, partial.open("wb") as out:
-            shutil.copyfileobj(response, out, 1 << 20)
-        partial.replace(held)
-        how = url
-    found, size = _file_sha256(held), held.stat().st_size
-    _require(
-        (found, size) == (asset["sha256"], asset["bytes"]),
-        f"{name} has SHA-256 {found} and {size} bytes; the release record pins "
-        f"{asset['sha256']} and {asset['bytes']}",
-    )
-    member = f"certificates/{certificate.directory.name}/{certificate.tarball}"
-    partial = target.with_name(target.name + ".part")
-    with tarfile.open(held, "r:gz") as archive:
-        info = archive.getmember(member)
-        _require(info.isfile(), f"{member} is not a regular file of {name}")
-        source = archive.extractfile(info)
-        if source is None:
-            raise ValueError(f"{member} cannot be read from {name}")
-        with partial.open("wb") as out:
-            shutil.copyfileobj(source, out, 1 << 20)
-    partial.replace(target)
-    return None, f"{member} of the release asset {name} ({how}), held to its pin {found}"
-
-
 def prepare(
     certificate: LinearCertificate, work: Path, supplied: Path | None, via: str
 ) -> Prepared:
     """The tarball at its pin, unpacked afresh, bound, with code and preconditions."""
     tree = linear_tree(certificate)
-    supplied, extracted = release_bundle(certificate, work, supplied)
+    supplied, extracted = mixed.release_bundle(certificate, work, supplied)
     tarball = mixed.fetch_tarball(certificate, work, supplied, via)
     if extracted is not None:
         tarball["origin"] = extracted

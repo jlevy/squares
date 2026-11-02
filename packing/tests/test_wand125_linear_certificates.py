@@ -287,14 +287,14 @@ def test_a_release_asset_off_its_pin_is_refused(tmp_path: Path) -> None:
     asset = tmp_path / "certificates__mixed_n145_L1224.tar.gz"
     asset.write_bytes(b"not the asset")
     with pytest.raises(ValueError, match="the release record pins"):
-        linear.release_bundle(N145, tmp_path / "work", asset)
+        mixed.release_bundle(N145, tmp_path / "work", asset)
     assert not (tmp_path / "work" / N145.tarball).exists()
 
 
 def test_a_bundle_the_pinned_tree_holds_is_never_taken_from_a_release(tmp_path: Path) -> None:
     supplied = tmp_path / linear.LINEAR["n101"].tarball
-    assert linear.release_bundle(linear.LINEAR["n101"], tmp_path, supplied) == (supplied, None)
-    assert linear.release_bundle(linear.LINEAR["n101"], tmp_path, None) == (None, None)
+    assert mixed.release_bundle(linear.LINEAR["n101"], tmp_path, supplied) == (supplied, None)
+    assert mixed.release_bundle(linear.LINEAR["n101"], tmp_path, None) == (None, None)
 
 
 def test_a_tarball_is_checked_only_against_its_own_packet(tmp_path: Path) -> None:
