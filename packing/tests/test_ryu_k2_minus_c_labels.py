@@ -17,6 +17,8 @@ import json
 import math
 import random
 import re
+import sys
+import types
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -159,6 +161,108 @@ def test_the_witness_checker_counts_the_slit_configuration() -> None:
     assert not labels.witness_lower_bound(shifted, None, outer, bounds.cos_gamma0_lo**2)[
         "admissible"
     ]
+
+
+#: Review A's mutants of the four thresholds G to J sit on: each moves one threshold the
+#: permissive way, and its control must then be certified, where the module refuses it.
+_THRESHOLD_MUTANTS = {
+    "G": ("if self.dist_sq_lo[i, j] < lam_sq_hi", "if self.dist_sq_lo[i, j] < lam_sq_hi - 0.3"),
+    "H": (
+        "close = dn(self.cy[0] + self.box.h[0]) <= wall_hi",
+        "close = dn(self.cy[0] + self.box.h[0]) <= wall_hi - 0.1",
+    ),
+    "I": (
+        "            reach = up(self.cy[1][i] + box.h[1])\n",
+        "            reach = up(self.cy[1][i] + box.h[1]) - 0.2\n",
+    ),
+    "J": (
+        "coeff_c = up(up(box.r_hi[i] * box.r_hi[i]) - const.rho1_sq_lo)",
+        "coeff_c = up(up(box.r_hi[i] * box.r_hi[i]) - const.rho1_sq_lo - 0.05)",
+    ),
+}
+
+
+def _mutant(old: str, new: str) -> Any:
+    """The module with one source edit, loaded under a name of its own."""
+    path = Path(labels.__file__)
+    source = path.read_text(encoding="utf-8")
+    assert source.count(old) == 1
+    name = "ryu_k2_minus_c_labels_mutant"
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    sys.modules[name] = module
+    try:
+        exec(compile(source.replace(old, new), str(path), "exec"), module.__dict__)
+    finally:
+        del sys.modules[name]
+    return module
+
+
+@pytest.mark.parametrize("letter", "GHIJ")
+def test_each_threshold_control_catches_a_labeller_that_moves_it(letter: str) -> None:
+    for module, refused in ((labels, True), (_mutant(*_THRESHOLD_MUTANTS[letter]), False)):
+        control = next(c for c in module.control_specs() if c.name.startswith(letter))
+        case = module.run_control(control)
+        assert case["perturbed refused"] is refused
+        assert case["unperturbed certified"]
+        assert case["witness_refutes"]
+
+
+def test_a_focused_refusal_ends_at_the_witness_not_the_budget() -> None:
+    control = next(c for c in labels.control_specs() if c.name.startswith("A"))
+    case = labels.run_control(control)
+    assert case["perturbed"]["reason"] == "a piece too small to cut stays undecided"
+    assert case["perturbed"]["pieces"] < 400
+
+
+def test_the_guards_refuse_what_the_arithmetic_does_not_cover() -> None:
+    record = {"kind": "inf", "box": [[0.5, 1.0, 0.0, 0.0]]}
+    with pytest.raises(ValueError, match="radius reaches 1"):
+        labels.Box.from_record(record)
+    special = (0, 0, -456, -2)
+    with pytest.raises(ArithmeticError, match="special value"):
+        labels._fraction(special)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert labels._fraction((0, 0, 0, 0)) == 0  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert 0 < labels.constants().separation <= labels.TURN // 2
+    labels._check_float_environment()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    q = labels.Quantities.of(labels.Box.from_record(labels.read_list("bnb_n1_T9_0of1")[0]))
+    with pytest.raises(ValueError, match="level 2 or finer"):
+        q.kept_cells(0, 1, np.arange(2, dtype=np.int64))
+
+
+def _beyond_rho1() -> Fraction:
+    """A rational y with rho1^2 < 1/4 + y^2, inside the 200-bit upper bound of rho1^2."""
+    mpmath.mp.prec = 600
+    d = mpmath.mpf(1) / 10000
+    rho1_sq = (d + mpmath.sqrt(2) / 2) ** 2 + mpmath.mpf(1) / 4
+    upper = labels.exact_bounds().rho1_sq_hi
+    target = (mpmath.mpf(upper.numerator) / upper.denominator + rho1_sq) / 2 - mpmath.mpf(1) / 4
+    y = Fraction(int(mpmath.floor(mpmath.sqrt(target) * 2**500)), 2**500)
+    value = Fraction(1, 4) + y * y
+    assert mpmath.mpf(value.numerator) / value.denominator > rho1_sq
+    assert value < upper
+    return y
+
+
+def test_a_centre_beyond_rho1_is_outside_the_domain() -> None:
+    """|c|^2 must be at most rho1^2: compared with the bound's lower end, not its upper."""
+    bounds = labels.exact_bounds()
+    beyond = [(Fraction(1, 2), _beyond_rho1())]
+    assert not labels.witness_lower_bound(beyond, None, [[]], bounds.cos_gamma0_lo**2)[
+        "in_domain"
+    ]
+    inside = [(Fraction(1, 2), Fraction(1, 2))]
+    assert labels.witness_lower_bound(inside, None, [[]], bounds.cos_gamma0_lo**2)["in_domain"]
+
+
+def test_a_witness_refutes_only_from_inside_its_box() -> None:
+    witness = {"admissible": True, "in_domain": True, "U_at_least": 9, "W_I_at_least": 1}
+    assert labels.witness_refutes(witness, inside=True, threshold=8)
+    assert not labels.witness_refutes(witness, inside=False, threshold=8)
+    assert not labels.witness_refutes(witness, inside=True, threshold=9)
+    assert labels.witness_refutes(witness, inside=True, side_edge=True)
+    assert not labels.witness_refutes(witness | {"in_domain": False}, inside=True, threshold=8)
+    assert not labels.witness_refutes(witness | {"admissible": False}, inside=True)
 
 
 _D = 1e-4
@@ -318,12 +422,23 @@ def test_the_label_rows_match_the_retained_lists() -> None:
     assert seen == BOXES
 
 
-def test_the_four_controls_are_refused_and_refuted() -> None:
+def test_the_ten_controls_are_refused_by_decision_and_refuted() -> None:
     report = _receipt("controls.json")
     assert report["passed"]
-    assert len(report["controls"]) == 4
+    assert [control["control"][0] for control in report["controls"]] == list("ABCDEFGHIJ")
     for control in report["controls"]:
         assert control["perturbed refused"]
+        assert control["perturbed"]["reason"] == "a piece too small to cut stays undecided"
         assert control["unperturbed certified"]
         assert control["witness_refutes"]
+        assert control["witness"]["in_box"]
+        assert control["witness"]["in_domain"]
     assert _exit_and_cpu(RECEIPTS / "controls.log")[0] == 0
+
+
+def test_a_sample_re_decides_identically_after_review_a() -> None:
+    report = _receipt("recheck-1000.json")
+    assert report["sample"] == 1000
+    assert report["identical"] == 1000
+    assert report["differences"] == []
+    assert _exit_and_cpu(RECEIPTS / "recheck-1000.log")[0] == 0

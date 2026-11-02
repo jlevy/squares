@@ -44,11 +44,12 @@ How it decides, and why each step is sound.
 - **Directions.** For each inner centre, the circle is cut into dyadic cells of
   ``2^-L`` turn, from ``L = 5`` to at most ``L = 13``. A cell is discarded only if, for
   every configuration of the box, every direction of the cell and every ``t`` in
-  ``[1, Lambda]``, some condition fails. The test is exact in ``t``: each condition is a
-  quadratic or linear inequality in ``t`` whose coefficients are bounded over the box and
-  the cell, so the set of ``t`` where it may hold is the complement of an open interval
-  between two roots, computed with outward rounding, and the cell is discarded when those
-  open intervals cover ``[1, Lambda]``.
+  ``[1, Lambda]``, some condition fails. The test needs no grid in ``t``: each condition
+  is a quadratic or linear inequality in ``t`` whose coefficients are bounded over the box
+  and the cell, so the set of ``t`` where it may hold is the complement of an open interval
+  between two roots, computed with inward rounding, and the cell is discarded when those
+  open intervals cover ``[1, Lambda]``. It is rigorous, not exact: the roots are directed
+  binary64, and the coefficients are bounded separately.
 - **The count.** ``D_i*`` is bounded by the largest number of points, pairwise at least
   ``g`` apart, in the union of the kept closed cells, where ``g`` is a rational lower
   bound of ``gamma0 / (2 pi)`` with denominator ``2^64``. This is computed exactly, in
@@ -70,7 +71,11 @@ Run from ``packing/`` with the project interpreter::
     .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels run --out DIR \\
         --worker 0 --workers 2
     .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels summarize --out DIR
-    .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels controls --out FILE
+    .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels controls --receipts DIR
+
+The controls are ten claims that should fail, each refused under the run's rules and
+shown false by a rational witness checked exactly (`controls`); four of them sit on the
+thresholds of ``E_II``, ``W_I``, the side condition of the outer centres and ``|x| > rho1``.
 """
 
 from __future__ import annotations
@@ -93,13 +98,15 @@ import mpmath
 import numpy as np
 import numpy.typing as npt
 
-from devtools.retained_data import write_retained
+from devtools.retained_data import read_retained_text, write_retained
 
 #: mpmath's interval context; its functions are attached at run time.
 iv: Any = mpmath.iv
 
 FloatArray = npt.NDArray[np.float64]
 IntArray = npt.NDArray[np.int64]
+#: A point of the parameter space in binary64: radii, angles and, with a side, h.
+Focus = tuple[tuple[float, ...], tuple[float, ...], float | None]
 
 PACKING = Path(__file__).resolve().parents[2]
 PACKET = PACKING / "resources/web/squarepacker-k2-minus-c-2026-10-05"
@@ -153,9 +160,38 @@ def up(x: Any) -> Any:
     return np.nextafter(x, np.inf)
 
 
+def _check_float_environment() -> None:
+    """Refuse a process whose binary64 arithmetic is not IEEE 754 round-to-nearest with
+    gradual underflow. The one-ulp enclosures of `dn` and `up` assume both: under another
+    rounding mode a result may lie more than one ulp from the exact value, and under
+    flush-to-zero a positive subnormal result becomes 0, which `up(0.0)` does not bound.
+    A tie must round to even, 0.75 ulp above or below 1 must round away from 1, and a
+    subnormal must survive as a result and as an operand."""
+    one = np.float64(1.0)
+    ulp = np.float64(2.0**-52)
+    checks = (
+        one + ulp / 2 == one,
+        one + 0.75 * ulp == one + ulp,
+        -one - 0.75 * ulp == -(one + ulp),
+        np.float64(2.0**-1022) / np.float64(2.0) > 0,
+        np.float64(5e-324) * np.float64(2.0) == np.float64(1e-323),
+    )
+    if not all(bool(check) for check in checks):
+        msg = "binary64 here is not round-to-nearest with gradual underflow"
+        raise ArithmeticError(msg)
+
+
+_check_float_environment()
+
+
 def _fraction(value: Any) -> Fraction:
-    """An mpmath real (an interval end point) as an exact fraction."""
-    sign, man, exp, _ = value._mpf_ if hasattr(value, "_mpf_") else value
+    """An mpmath real (an interval end point) as an exact fraction. mpmath writes its
+    special values (infinities, nan) as a zero mantissa with a nonzero exponent or bit
+    count; they are refused, rather than read as 0."""
+    sign, man, exp, bc = value._mpf_ if hasattr(value, "_mpf_") else value
+    if man == 0 and (exp, bc) != (0, 0):
+        msg = "an interval end point is an mpmath special value, not a real"
+        raise ArithmeticError(msg)
     magnitude = Fraction(int(man)) * (Fraction(2) ** int(exp))
     return -magnitude if sign else magnitude
 
@@ -212,8 +248,9 @@ def _certified_separation(cos_gamma0: Any) -> int:
 
     A candidate comes from mpmath's real arccos and is lowered by 2^-60 turn; it is
     accepted only if cos(2 pi g / 2^64) > cos gamma0 holds on intervals, which, as cos
-    decreases on [0, pi], gives 2 pi g / 2^64 < gamma0. The interval context has no
-    arccos, so this check is what makes the separation rigorous."""
+    decreases on [0, pi], gives 2 pi g / 2^64 < gamma0; that step needs 2 pi g / 2^64
+    <= pi, so g <= 2^63 is checked too. The interval context has no arccos, so this check
+    is what makes the separation rigorous."""
     mpmath.mp.prec = PREC_BITS
     _, x_hi = _ends(cos_gamma0)
     estimate = mpmath.acos(mpmath.mpf(x_hi.numerator) / x_hi.denominator) / (2 * mpmath.pi)
@@ -221,7 +258,7 @@ def _certified_separation(cos_gamma0: Any) -> int:
     angle = 2 * iv.pi * iv.mpf(candidate) / TURN
     cos_lo, _ = _ends(iv.cos(angle))
     low_x, high_x = _ends(cos_gamma0)
-    if not (cos_lo > high_x and low_x > 0 and candidate > 0):
+    if not (cos_lo > high_x and low_x > 0 and 0 < candidate <= TURN // 2):
         msg = "the separation could not be certified below gamma0"
         raise ArithmeticError(msg)
     return candidate
@@ -389,9 +426,25 @@ class Box:
         if np.any(self.r_lo <= 0) or np.any(self.t_hi - self.t_lo > 6.3):
             msg = "a radius is not positive or an angle interval is wider than the circle"
             raise ValueError(msg)
+        if np.any(self.r_hi >= 1):
+            # kept_cells drops the far end of R(c_i, x), -c_i . u <= t, because |c_i| < 1
+            # <= t; a radius of 1 or more would need it.
+            msg = "a radius reaches 1"
+            raise ValueError(msg)
         if self.h is not None and not 0 <= self.h[0] <= self.h[1]:
             msg = "the side's interval is reversed or negative"
             raise ValueError(msg)
+
+    def holds(self, focus: Focus) -> bool:
+        """Whether the box holds a point of the parameter space."""
+        radii, angles, h = focus
+        inside = all(
+            lo <= r <= hi for lo, r, hi in zip(self.r_lo, radii, self.r_hi, strict=True)
+        )
+        inside = inside and all(
+            lo <= t <= hi for lo, t, hi in zip(self.t_lo, angles, self.t_hi, strict=True)
+        )
+        return inside and (self.h is None or h is None or self.h[0] <= h <= self.h[1])
 
     def widest(self) -> tuple[str, int, float]:
         """The side to bisect: the widest, with an angle weighted by its largest radius."""
@@ -550,6 +603,11 @@ class Quantities:
 
     def kept_cells(self, i: int, level: int, cells: IntArray) -> npt.NDArray[np.bool_]:
         """Which of the given cells of 2^-level turn may hold an outer centre for c_i."""
+        if level < 2:
+            # At level 2 or finer, the quarter turns are cell ends, so sin is monotone on
+            # every cell and its largest value is at an end; s_top below relies on that.
+            msg = "direction cells must be at level 2 or finer"
+            raise ValueError(msg)
         cos_lo, cos_hi, sin_lo, sin_hi = direction_table()
         shift = TABLE_LEVEL - level
         a = cells << shift
@@ -591,6 +649,8 @@ class Quantities:
         stop = np.full(len(cells), const.lam_hi)
         if box.h is not None:
             reach = up(self.cy[1][i] + box.h[1])
+            # The largest sin on a cell is at an end, since no cell holds a quarter turn
+            # inside it (level >= 2, checked above).
             s_top = np.maximum(phi_a[3], phi_b[3])
             rising = s_top > 0
             safe = np.where(rising, s_top, 1.0)
@@ -753,9 +813,16 @@ def certify(
     allowed: frozenset[str],
     threshold: int = THRESHOLD,
     budget: int = MAX_PIECES,
+    *,
     separation: int | None = None,
+    focus: Focus | None = None,
 ) -> Verdict:
-    """Decide the box by bisection, each piece by one of the allowed labels."""
+    """Decide the box by bisection, each piece by one of the allowed labels.
+
+    With ``focus``, a point of the parameter space, the half that holds it is decided
+    first, so a claim that fails at that point is refused when the piece holding it has
+    been cut to the smallest width and is still undecided, not when the budget runs out.
+    Without it, the run's order is unchanged."""
     verdict = Verdict(certified=True)
     stack = [box]
     while stack:
@@ -784,7 +851,10 @@ def certify(
             verdict.certified = False
             verdict.reason = "a piece too small to cut stays undecided"
             return verdict
-        stack.extend(halves)
+        if focus is not None and halves[0].holds(focus):
+            stack.extend((halves[1], halves[0]))
+        else:
+            stack.extend(halves)
     return verdict
 
 
@@ -1012,6 +1082,7 @@ class ExactBounds:
     """Rational bounds of the constants, for checking witnesses in exact arithmetic."""
 
     lam_sq_lo: Fraction
+    rho1_sq_lo: Fraction
     rho1_sq_hi: Fraction
     wall_lo: Fraction
     cos_gamma0_lo: Fraction
@@ -1023,10 +1094,10 @@ def exact_bounds() -> ExactBounds:
     d = iv.mpf(1) / 10000
     lam_sq = (d + iv.sqrt(2)) ** 2
     lam_sq_lo, _ = _ends(lam_sq)
-    _, rho1_sq_hi = _ends((d + iv.sqrt(2) / 2) ** 2 + iv.mpf(1) / 4)
+    rho1_sq_lo, rho1_sq_hi = _ends((d + iv.sqrt(2) / 2) ** 2 + iv.mpf(1) / 4)
     wall_lo, _ = _ends(d + iv.sqrt(2) / 2)
     cos_lo, _ = _ends(1 - 1 / (2 * lam_sq))
-    return ExactBounds(lam_sq_lo, rho1_sq_hi, wall_lo, cos_lo)
+    return ExactBounds(lam_sq_lo, rho1_sq_lo, rho1_sq_hi, wall_lo, cos_lo)
 
 
 def _dot(a: Point, b: Point) -> Fraction:
@@ -1098,7 +1169,8 @@ def witness_lower_bound(
     admissible = all(
         _sq(_minus(centres[i], centres[j])) >= 1 for i in range(n) for j in range(i + 1, n)
     ) and (h is None or all(c[1] + h >= Fraction(1, 2) for c in centres))
-    domain = all(Fraction(1, 4) < _sq(c) < bounds.rho1_sq_hi for c in centres)
+    # 1/2 < |c| <= rho1: the lower end of rho1^2 is the side that certifies it.
+    domain = all(Fraction(1, 4) < _sq(c) <= bounds.rho1_sq_lo for c in centres)
     e_ii = sum(
         1
         for i in range(n)
@@ -1150,99 +1222,337 @@ def slit_configuration(*, half_separation: bool) -> tuple[list[Point], list[list
     return [(a, Fraction(0)), (-a, Fraction(0))], [first, second]
 
 
-def controls(budget: int = MAX_PIECES) -> dict[str, Any]:
-    """Four negative controls, each a claim that should fail, with its unperturbed form.
+def witness_refutes(
+    witness: dict[str, Any],
+    *,
+    inside: bool,
+    threshold: int | None = None,
+    side_edge: bool = False,
+) -> bool:
+    """Whether a checked witness refutes a control's claim. It must lie in the claim's
+    box, be admissible and lie in the lemma's domain; for a bound it must exceed it, and
+    for a claim that no side edge is possible, a centre must certainly have one."""
+    ok = inside and witness["admissible"] and witness["in_domain"]
+    if threshold is not None:
+        ok = ok and witness["U_at_least"] > threshold
+    if side_edge:
+        ok = ok and witness["W_I_at_least"] >= 1
+    return bool(ok)
 
-    Each perturbed claim must be refused by `certify` under the same rules as the run,
-    and is shown false by a rational witness checked exactly; each unperturbed box must
-    be certified."""
+
+def focus_of(centres: list[Point], h: Fraction | None) -> Focus:
+    """A rational configuration as a point of the parameter space, in binary64. It only
+    orders the bisection; nothing is decided by it."""
+    radii = tuple(math.hypot(float(x), float(y)) for x, y in centres)
+    angles = tuple(math.atan2(float(y), float(x)) % (2 * math.pi) for x, y in centres)
+    return radii, angles, None if h is None else float(h)
+
+
+def tiny_record(
+    centres: list[Point], h: Fraction | None, delta: float = 1e-10
+) -> dict[str, Any]:
+    """A box of half-width ``delta`` about a rational configuration; a centre on the
+    positive x-axis keeps the point angle 0, as in the lists without a side."""
+    radii, angles, h_float = focus_of(centres, h)
+    rows: list[list[float]] = []
+    for (x, y), r, t in zip(centres, radii, angles, strict=True):
+        if y == 0 and x > 0:
+            rows.append([r - delta, r + delta, 0.0, 0.0])
+        else:
+            rows.append([r - delta, r + delta, t - delta, t + delta])
+    record: dict[str, Any] = {"kind": "closed", "box": rows}
+    if h_float is not None:
+        record["h"] = [h_float - delta, h_float + delta]
+    return record
+
+
+@dataclass(frozen=True)
+class Control:
+    """A claim that should fail: the box it is made on, its label and threshold, the
+    unperturbed claim beside it, and the rational witness that refutes it, which refutes
+    a bound (``bound``), admissibility (``admissible``) or no side edge (``side edge``)."""
+
+    name: str
+    claim: str
+    record: dict[str, Any]
+    allowed: frozenset[str]
+    threshold: int
+    original: dict[str, Any]
+    original_threshold: int
+    centres: list[Point]
+    h: Fraction | None
+    outer: list[list[Point]]
+    refutes: str
+    halved: bool = False
+
+
+def _q(numerator: int, denominator: int = 1) -> Fraction:
+    return Fraction(numerator, denominator)
+
+
+def control_specs() -> list[Control]:
+    """The ten controls. A to D perturb the run's boxes or the count's separation. E and F
+    are review A's of #884. G to J each sit on one threshold of the model, in a box of
+    half-width 1e-10 about a configuration at which the labeller's bound is exact; a
+    labeller that moved that threshold certifies their perturbed claim."""
     sharp = read_list("bnb_n2_T9_0of1")[23]
+    neighbour = read_list("bnb_n2_T9_0of1")[31]
     inf_box = read_list("bnb_n2_T9_0of1")[0]
+    side_inf = read_list("bnbw_n2_T9_0of1")[3]
     nowall_box = read_list("bnbw_n2_T9_0of1")[289]
     widened_inf = json.loads(json.dumps(inf_box))
     widened_inf["box"][1][2] = 4.71238898038469
+    widened_side = json.loads(json.dumps(side_inf))
+    widened_side["box"][1][2] = 3.5
     widened_nowall = json.loads(json.dumps(nowall_box))
     widened_nowall["h"][0] = 0.0
-    bounds = exact_bounds()
-    cos_sq = bounds.cos_gamma0_lo**2
-    cos_sq_half = (1 + bounds.cos_gamma0_lo) / 2
-    halved = constants().separation // 2
     slit, outer = slit_configuration(half_separation=False)
     _, outer_half = slit_configuration(half_separation=True)
-    inf_witness = [(Fraction(4, 5), Fraction(0)), (Fraction(16, 101), Fraction(-396, 505))]
-    nowall_witness = [
-        (Fraction(-53, 100), Fraction(13, 20)),
-        (Fraction(47, 100), Fraction(13, 25)),
+    rotated = [slit[0], (slit[1][0], _q(1, 10**12))]
+    closed, inf, nowall = ALLOWED["closed"], ALLOWED["inf"], ALLOWED["nowall"]
+    pair = [(_q(-1413, 2000), _q(9, 20)), (_q(1413, 2000), _q(9, 20))]
+    lone = [(_q(-1, 20), _q(3, 5))]
+    above = [(_q(297, 500), _q(137, 250))]
+    axis = [(_q(72, 125), _q(0))]
+    axis_outer = [
+        [
+            (_q(-3511, 5000), _q(3069, 2500)),
+            (_q(-6693, 5000), _q(2281, 5000)),
+            (_q(-13057, 10000), _q(-679, 1250)),
+        ]
     ]
-    cases: list[dict[str, Any]] = []
+    return [
+        Control(
+            "A: threshold 8 on the sharp box, bnb_n2_T9_0of1 line 24",
+            "E_II + W_I + sum D_i* <= 8 on the box",
+            sharp,
+            closed,
+            8,
+            sharp,
+            THRESHOLD,
+            slit,
+            None,
+            outer,
+            "bound",
+        ),
+        Control(
+            "B: inf box bnb_n2_T9_0of1 line 1, angle 2 widened down from 7pi/4 to 3pi/2",
+            "no admissible configuration in the widened box",
+            widened_inf,
+            inf,
+            THRESHOLD,
+            inf_box,
+            THRESHOLD,
+            [(_q(4, 5), _q(0)), (_q(16, 101), _q(-396, 505))],
+            None,
+            [[], []],
+            "admissible",
+        ),
+        Control(
+            "C: nowall box bnbw_n2_T9_0of1 line 290, h widened down to 0",
+            "no admissible configuration of the widened box has a side edge",
+            widened_nowall,
+            nowall,
+            THRESHOLD,
+            nowall_box,
+            THRESHOLD,
+            [(_q(-53, 100), _q(13, 20)), (_q(47, 100), _q(13, 25))],
+            _q(1, 25),
+            [[], []],
+            "side edge",
+        ),
+        Control(
+            "D: the sharp box with the count's separation halved, gamma0/2",
+            "E_II + W_I + sum D_i* <= 9 with directions only gamma0/2 apart",
+            sharp,
+            closed,
+            THRESHOLD,
+            sharp,
+            THRESHOLD,
+            slit,
+            None,
+            outer_half,
+            "bound",
+            halved=True,
+        ),
+        Control(
+            "E: threshold 8 on the sharp box's neighbour, bnb_n2_T9_0of1 line 32 (review A)",
+            "E_II + W_I + sum D_i* <= 8 on the box",
+            neighbour,
+            closed,
+            8,
+            neighbour,
+            THRESHOLD,
+            rotated,
+            None,
+            outer,
+            "bound",
+        ),
+        Control(
+            "F: inf box bnbw_n2_T9_0of1 line 4, inadmissible by the side, angle 2 widened "
+            "down from 3pi/2 to 3.5 (review A)",
+            "no admissible configuration in the widened box",
+            widened_side,
+            inf,
+            THRESHOLD,
+            side_inf,
+            THRESHOLD,
+            [(_q(4, 5), _q(-1, 100)), (_q(-1, 2), _q(-1, 5))],
+            _q(141, 200),
+            [[], []],
+            "admissible",
+        ),
+        Control(
+            "G: E_II's Lambda, a pair 1.413 apart with a side 1/10 below p",
+            "E_II + W_I + sum D_i* <= 0 about the configuration",
+            tiny_record(pair, _q(1, 10)),
+            closed,
+            0,
+            tiny_record(pair, _q(1, 10)),
+            1,
+            pair,
+            _q(1, 10),
+            [[], []],
+            "bound",
+        ),
+        Control(
+            "H: W_I's d + sqrt2/2, a centre with c_y + h = 0.705",
+            "E_II + W_I + sum D_i* <= 0 about the configuration",
+            tiny_record(lone, _q(21, 200)),
+            closed,
+            0,
+            tiny_record(lone, _q(21, 200)),
+            1,
+            lone,
+            _q(21, 200),
+            [[]],
+            "bound",
+        ),
+        Control(
+            "I: the outer centres' side condition, an outer centre with x_y + h = 0.594",
+            "E_II + W_I + sum D_i* <= 0 about the configuration",
+            tiny_record(above, _q(39, 250)),
+            closed,
+            0,
+            tiny_record(above, _q(39, 250)),
+            1,
+            above,
+            _q(39, 250),
+            [[(_q(-7, 5), _q(-11, 100))]],
+            "bound",
+        ),
+        Control(
+            "J: |x| > rho1, an outer centre with |x|^2 = 0.790",
+            "E_II + W_I + sum D_i* <= 2 about the configuration",
+            tiny_record(axis, None),
+            closed,
+            2,
+            tiny_record(axis, None),
+            3,
+            axis,
+            None,
+            axis_outer,
+            "bound",
+        ),
+    ]
 
-    def record(
-        name: str, claim: str, perturbed: Verdict, original: Verdict, **extra: Any
-    ) -> None:
-        cases.append(
-            {
-                "control": name,
-                "claim that should fail": claim,
-                "perturbed refused": not perturbed.certified,
-                "perturbed": perturbed.describe(),
-                "unperturbed certified": original.certified,
-                "unperturbed": original.describe(),
-                **extra,
-            }
-        )
 
-    sharp_box = Box.from_record(sharp)
-    original_sharp = certify(sharp_box, ALLOWED["closed"], THRESHOLD, budget)
-    witness = witness_lower_bound(slit, None, outer, cos_sq)
-    record(
-        "A: threshold 8 on the sharp box, bnb_n2_T9_0of1 line 24",
-        "E_II + W_I + sum D_i* <= 8 on the box",
-        certify(sharp_box, ALLOWED["closed"], 8, budget),
-        original_sharp,
-        witness={"in_box": in_box(sharp, slit, None), **witness},
-        witness_refutes=witness["admissible"] and witness["U_at_least"] > 8,
+def run_control(control: Control, budget: int = MAX_PIECES) -> dict[str, Any]:
+    """Run one control: the perturbed claim, focused on the witness, and the unperturbed
+    one, under the run's rules; the witness is checked exactly."""
+    bounds = exact_bounds()
+    if control.halved:
+        separation: int | None = constants().separation // 2
+        cos_sq = (1 + bounds.cos_gamma0_lo) / 2
+    else:
+        separation, cos_sq = None, bounds.cos_gamma0_lo**2
+    focus = focus_of(control.centres, control.h)
+    perturbed = certify(
+        Box.from_record(control.record),
+        control.allowed,
+        control.threshold,
+        budget,
+        separation=separation,
+        focus=focus,
     )
-    witness = witness_lower_bound(inf_witness, None, [[], []], cos_sq)
-    record(
-        "B: inf box bnb_n2_T9_0of1 line 1, angle 2 widened down from 7pi/4 to 3pi/2",
-        "no admissible configuration in the widened box",
-        certify(Box.from_record(widened_inf), ALLOWED["inf"], THRESHOLD, budget),
-        certify(Box.from_record(inf_box), ALLOWED["inf"], THRESHOLD, budget),
-        witness={
-            "in_widened_box": in_box(widened_inf, inf_witness, None),
-            "in_original_box": in_box(inf_box, inf_witness, None),
+    original = certify(
+        Box.from_record(control.original), control.allowed, control.original_threshold, budget
+    )
+    witness = witness_lower_bound(control.centres, control.h, control.outer, cos_sq)
+    inside = in_box(control.record, control.centres, control.h)
+    refutes = witness_refutes(
+        witness,
+        inside=inside,
+        threshold=control.threshold if control.refutes == "bound" else None,
+        side_edge=control.refutes == "side edge",
+    )
+    return {
+        "control": control.name,
+        "claim that should fail": control.claim,
+        "perturbed refused": not perturbed.certified,
+        "perturbed": perturbed.describe(),
+        "unperturbed certified": original.certified,
+        "unperturbed": original.describe(),
+        "witness": {
+            "in_box": inside,
+            "in_original_box": in_box(control.original, control.centres, control.h),
             **witness,
         },
-        witness_refutes=witness["admissible"] and in_box(widened_inf, inf_witness, None),
-    )
-    h = Fraction(1, 25)
-    witness = witness_lower_bound(nowall_witness, h, [[], []], cos_sq)
-    record(
-        "C: nowall box bnbw_n2_T9_0of1 line 290, h widened down to 0",
-        "no admissible configuration of the widened box has a side edge",
-        certify(Box.from_record(widened_nowall), ALLOWED["nowall"], THRESHOLD, budget),
-        certify(Box.from_record(nowall_box), ALLOWED["nowall"], THRESHOLD, budget),
-        witness={
-            "in_widened_box": in_box(widened_nowall, nowall_witness, h),
-            "in_original_box": in_box(nowall_box, nowall_witness, h),
-            **witness,
-        },
-        witness_refutes=witness["admissible"] and witness["W_I_at_least"] >= 1,
-    )
-    witness = witness_lower_bound(slit, None, outer_half, cos_sq_half)
-    record(
-        "D: the sharp box with the count's separation halved, gamma0/2",
-        "E_II + W_I + sum D_i* <= 9 with directions only gamma0/2 apart",
-        certify(sharp_box, ALLOWED["closed"], THRESHOLD, budget, separation=halved),
-        original_sharp,
-        witness={"in_box": in_box(sharp, slit, None), **witness},
-        witness_refutes=witness["admissible"] and witness["U_at_least"] > THRESHOLD,
-    )
+        "witness_refutes": refutes,
+    }
+
+
+def controls(budget: int = MAX_PIECES) -> dict[str, Any]:
+    """The ten negative controls of `control_specs`, each a claim that should fail.
+
+    Each perturbed claim must be refused by `certify` under the run's rules, and be shown
+    false by a rational witness, checked exactly, that lies in the claim's box; each
+    unperturbed claim must be certified."""
+    cases = [run_control(control, budget) for control in control_specs()]
     passed = all(
         case["perturbed refused"] and case["unperturbed certified"] and case["witness_refutes"]
         for case in cases
     )
     return {"budget": budget, "passed": passed, "controls": cases}
+
+
+#: The fields of a row that a decision fixes; ``cpu_s`` is a timing and varies by run.
+DECISION_FIELDS = ("label", "U", "outcome", "pieces", "leaves", "bound", "level")
+
+
+def recheck(sample: int, seed: int, receipts: Path) -> dict[str, Any]:
+    """Re-decide a seeded sample of boxes and compare each decision with the retained row.
+
+    A change that leaves the decision path alone must reproduce every field of
+    `DECISION_FIELDS`; any difference is listed."""
+    boxes = all_boxes()
+    chosen = sorted(random.Random(seed).sample(range(len(boxes)), sample))
+    retained: dict[str, dict[int, dict[str, Any]]] = {}
+    differences: list[dict[str, Any]] = []
+    started = time.process_time()
+    for index in chosen:
+        name, line, record = boxes[index]
+        if name not in retained:
+            text = read_retained_text(receipts / "labels" / f"{name}.jsonl")
+            rows = (json.loads(row) for row in text.splitlines() if row)
+            retained[name] = {row["line"]: row for row in rows}
+        old = retained[name][line]
+        new = decide(record)
+        changed = {
+            key: [old.get(key), new.get(key)]
+            for key in DECISION_FIELDS
+            if old.get(key) != new.get(key)
+        }
+        if changed:
+            differences.append({"list": name, "line": line, "changed": changed})
+    return {
+        "sample": sample,
+        "seed": seed,
+        "fields": list(DECISION_FIELDS),
+        "identical": sample - len(differences),
+        "differences": differences,
+        "cpu_s": round(time.process_time() - started, 1),
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -1259,9 +1569,22 @@ def main(argv: list[str] | None = None) -> int:
     summary = commands.add_parser("summarize", help="count the outcomes of a finished run")
     summary.add_argument("--out", type=Path, required=True)
     summary.add_argument("--receipts", type=Path, help="directory for the summary and rows")
-    checking = commands.add_parser("controls", help="run the four negative controls")
+    checking = commands.add_parser("controls", help="run the ten negative controls")
     checking.add_argument("--receipts", type=Path, help="directory for controls.json")
+    rechecking = commands.add_parser("recheck", help="re-decide a sample against the rows")
+    rechecking.add_argument("--sample", type=int, default=1000)
+    rechecking.add_argument("--seed", type=int, default=884)
+    rechecking.add_argument("--receipts", type=Path, required=True, help="the run's receipts")
     args = parser.parse_args(argv)
+    if args.command == "recheck":
+        report = recheck(args.sample, args.seed, args.receipts)
+        print(json.dumps({k: v for k, v in report.items() if k != "differences"}, indent=2))
+        for difference in report["differences"]:
+            print(json.dumps(difference))
+        _write(
+            args.receipts / f"recheck-{args.sample}.json", json.dumps(report, indent=2) + "\n"
+        )
+        return 0 if not report["differences"] else 1
     if args.command == "controls":
         report = controls()
         print(json.dumps(report, indent=2, default=str))
