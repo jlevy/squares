@@ -50846,8 +50846,10 @@ evidence:
       review-theorem-c-233.jsonl and review-compare-233.json in the evand-exact-data-2026-10-12
       packet), and gradec.py recomputed n = 10 byte-identical on 12 October
       (receipts/gradec-n10-recompute.json there). The review's checker is that lane's own,
-      so its run is a second route beside the rung; C3 waits on gradec.py's replay of all
-      233 (think-mtah). The evidence entries for both runs are drafted in think-7scz for the
+      so its run is a second route beside the rung; C3 waits on entering gradec.py's replay
+      of all 233, run on 1 November with its receipt retained
+      (receipts/gradec-replay-233.json there) and held for think-xyek (think-mtah). The
+      evidence entries for both runs are drafted in think-7scz for the
       registration: check_certificate_citations needs a case record to cite each, or a
       deferral naming the register entry that cites it, which lapses after 30 days, and no
       case record has a block for local minimality (think-8xy2).

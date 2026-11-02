@@ -25,7 +25,7 @@ second implementation agrees.
 
 ## The Short Version
 
-- **218** programs: **52** external and **166** first-party; **146** decide claims and **72** check premises.
+- **219** programs: **52** external and **167** first-party; **146** decide claims and **73** check premises.
 - **677** of **858** evidence entries name the programs that verified them: 322 independently re-implemented, 289 reproduced with the producer’s code, 45 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
@@ -34,6 +34,7 @@ second implementation agrees.
 | --- | --- | --- | --- | --- | ---: | ---: |
 | [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 4 | 4 |
 | [`V-evand-gradec-py`](#v-evand-gradec-py) | gradec.py | Evan Daniel | external | decides | 2 | 1 |
+| [`V-evand-gradec-replay`](#v-evand-gradec-replay) | devtools.evand_gradec_replay | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-evand-639-replay-driver`](#v-evand-639-replay-driver) | replay_verify_exact.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | Hosono | external | decides | 89 | 14 |
@@ -278,12 +279,24 @@ The source's grade-C certificate builder and checker in one program: rows from a
 
 - Source: [`packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py`](../../packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py)
 - Versions run: SHA-256 `61dcf21c2c05…`, revision `ad86d42d0f74` (Git blob 93374b5a4296bfb6d99dd29aa574febcd356e273, byte-identical at 31523f8, the release's tag commit; it imports localmin.py, verify_exact.py and geom.py from its directory, retained beside it.)
-- Note: Run here once, at n = 10, from a copy outside the repository on 12 October 2026 (receipts/gradec-n10-recompute.json in the evand-exact-data-2026-10-12 packet), with output byte-identical to the published certificate. The source ran it on all 250 configurations of field degree at most 4 (gradec_runs/run.sh).
+- Note: Run here once, at n = 10, from a copy outside the repository on 12 October 2026 (receipts/gradec-n10-recompute.json in the evand-exact-data-2026-10-12 packet), with output byte-identical to the published certificate. The source ran it on all 250 configurations of field degree at most 4 (gradec_runs/run.sh). Run here on all 233 configurations the release certifies, and on its three GRADEC_MUTATE rejection tests at n = 10, by devtools.evand_gradec_replay (V-evand-gradec-replay) for think-mtah.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-gradec-local-minima-233-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-261 |
 | `E-evand-gradec-n10-recompute` | replayed here | reproduced with the producer’s code | full: the n = 10 certificate, recomputed with the source's checker from the committed exact form and the published contacts | T-261 |
+
+### `V-evand-gradec-replay`
+
+**devtools.evand_gradec_replay** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Runs the source's gradec.py, unchanged, from a fresh copy of the four retained modules outside the repository, on each count the release's gradec-233 archive certifies (230 and 261 with GRADEC_DROPZERO=1, as the release ran them), each in its own process under -E -s with an empty working directory and the author's pinned packages; compares every certificate it writes with the published n-N.gradec.json byte for byte and every log, paths and times aside, line for line with the release's; and runs the source's three rejection tests (GRADEC_MUTATE tight, droprow and neghess) at n = 10, each of which must be refused. Resumable from its ledger, held to one environment, longest runs first, and it starts a run only while the recorded CPU time, the worst case of every run still going and its own fit its cap. It decides nothing itself: gradec.py decides.
+
+- Source: [`packing/devtools/evand_gradec_replay.py`](../../packing/devtools/evand_gradec_replay.py), [`packing/tests/test_evand_gradec_replay.py`](../../packing/tests/test_evand_gradec_replay.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Written by lane L14 of the 1 November 2026 intake (think-mtah), after reading gradec.py, its three modules, run.sh, env.sh and the archive's README as data. Its run of 1 November is receipts/gradec-replay-233.json in the evand-exact-data-2026-10-12 packet. That run was made by its first version, launched before 76d72c594, with the wall timer only, a cap on recorded CPU and no environment on its records; this version adopted the records and wrote the receipt. No evidence entry cites it until T-261's replay evidence is entered, which waits on the owner's question think-xyek.
+
+No evidence entry names it yet.
 
 ### `V-evand-639-replay-driver`
 

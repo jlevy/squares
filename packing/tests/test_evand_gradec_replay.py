@@ -466,6 +466,8 @@ def test_the_retained_receipt_reproduces_every_certificate() -> None:
     for name, version in ENV_SH_PINS.items():
         assert environment[name] == version
     assert environment["python"].startswith("3.13.")
+    # An adopted environment is asserted, not stamped, and the receipt says on what basis.
+    assert bool(environment["adopted_basis"]) == bool(environment["adopted_unstamped"])
     interpreter = {key: environment[key] for key in (*ENV_SH_PINS, "python", "platform")}
     for record in receipt["controls"] + receipt["replays"]:
         stamped = record.get("interpreter")

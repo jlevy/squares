@@ -9102,10 +9102,11 @@ issues:
       under its hypotheses, repaired a gap in its proof at side-end rows, and decided all 233
       configurations again with a checker written here, retaining the 233 exact forms they read.
       That checker is the review lane's own, so its run is a second route beside the rung, as at
-      T-225 and T-229; C3 waits on a separate replay lane, gradec.py over all 233 (about 10.6
-      CPU-hours by the source's logs, think-mtah). The grade-C claim is registered as T-261 (31
-      October 2026, think-7scz) at V3/C1, with the review's run and the n = 10 recomputation as its
-      evidence beside the report.
+      T-225 and T-229; C3 waits on entering gradec.py's replay of all 233, run on 1 November
+      (11.0 CPU-hours, think-mtah) with its receipt retained in the evand-exact-data-2026-10-12
+      packet, and held for the owner's question think-xyek. The grade-C claim is registered as
+      T-261 (31 October 2026, think-7scz) at V3/C1, with the review's run and the n = 10
+      recomputation as its evidence beside the report.
     read_through: '2026-10-12T14:15:44Z'
     results:
     - key: s29-minimal-polynomial
