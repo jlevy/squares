@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 94
+version: 95
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T11:57:14.980Z
+updated_at: 2026-11-02T12:58:01.578Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -164,3 +164,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 ~11:30: merged #884 (2f701c270): Lemma 4.10 independent labeller, 78,673/78,673 certified, ten controls; think-k3tk closed. Owner call recorded: clean_room true kept (authors read the 5 Oct review code-level account); false is the owner choice. 42 PRs merged this pass. No lane running; sweep clean; remaining items are owner decisions.
 
 2026-11-02 11:55: renewal. Sweep intake31 run; no new issues since 10:50Z. Lanes: L29 (think-tq3g, think-tpbd Lean builds), L30 (think-w76a s(37) census; think-l3oo/eucc T-184/T-191 controls).
+
+2026-11-02 12:55: renewal. Sweep intake32 run; no new issues since 11:50Z. L29, L30 running.
