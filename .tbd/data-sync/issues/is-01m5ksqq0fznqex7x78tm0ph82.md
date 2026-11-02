@@ -5,7 +5,7 @@ title: "Validate: Hosono's zero-margin Lean proof of s(21) = 5 (T-234), build an
 kind: task
 status: open
 priority: 3
-version: 6
+version: 7
 delegate: null
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T07:13:50.094Z
-updated_at: 2026-11-02T14:09:32.540Z
+updated_at: 2026-11-02T15:36:30.392Z
 started_at: 2026-11-02T11:10:50.716Z
 ---
 Validation part of think-f2bm (Hiroaki Hosono's hypothesis-free Lean proof that s(21) = 5, a formalization of T-055's point-only route; no issue). Created by c-lean-1023 under the 23 October intake epic, as the lane rules allow; it serves think-f2bm.
@@ -41,5 +41,7 @@ Kernel check: not run. This environment's proxy refuses lakecache.blob.core.wind
 To finish, on a host that reaches the cache, from packing/: `.venv/bin/python3 -m devtools.replay_lean_packet generate wand125-n21 --out W --nproc 2 --cpus 2,3` (about 2.4 CPU-hours again, since the 92 MB of parts are not retained), then `run wand125-n21 --out W --cpus 2,3 --jobs 1` (Pts, the 64 parts one lake process at a time, N21PtsLower, the axiom probe for n21pts_ge_5 and n21pts_eq_5, and three negative controls: minSide 21 = 4 given n21pts_eq_5's term, N21PtsLower.lean with n21pts_ge_5 claiming 21/4, and the statement proved by sorry), about 7 CPU-hours by the source's estimate and near 6 GB per part; receipts go to the packet's receipts/lean-build. Then the replayed-here proof-assistant-checked evidence entry on T-234 and a control path, and check_results derives the rung. A mutated-data control on one generated part (the kernel's decide must refuse it) is worth adding then; it needs the generated format, which this run produced but did not retain.
 
 No reply is owed on #782: no rung moved. Draft, if the coordinator wants a status line there: "We regenerated the 64 parts of the zero-margin tree here from the retained generator and certificate on 2 November: all 66 files match data-sha256.txt. The kernel check has not run yet, because the host lacked network access to Mathlib's cache; T-234 stays V0/C0 until it does. The tool and receipt are in #887."
+
+2026-11-02 ~16:00Z bold-ritchie-l29, review A of #887 (https://github.com/jlevy/squares/pull/887#pullrequestreview-5737571534) addressed on the same branch: 968f10e8e (A1), e040b6824 (A2-A7, A9), b18d4c3c1 (A4 receipt, A8), 03719833f (re-pin). What changes for the lane that runs the build: `run` now stops before any lake call on a bad stage; it checks `lean --version` against the route's toolchain commit and the resolved Mathlib against the pin; it compares what `#check @thm` prints with the statement the route registers (whitespace aside, Real.sqrt read as √), so a cosmetic pretty-printer difference fails the run with both strings in the receipt and is fixed in the route, after which `check` re-reads the retained logs without a rebuild; the probe and controls run with the lakefile's leanOptions as -D flags; each control counts only when refused for its own reason, and the mutated module runs beside its unmutated twin, which must pass. For this bead the generation ran a second time under the fixed staging (generator from the 28 September packet at blob 06f22b4d, oracle at cd881bdd, N21PtsLower.lean at 356ce914): the same census, all 66 files matching data-sha256.txt, no escape token in any part; 9,230.9 CPU seconds, 5,601.8 s wall, 13:56:16Z to 15:29:38Z on two cores. That receipt (schema 2, with the census, the listing's blob and the escape scan) replaces the first run's in the packet's receipts/lean-build; the first run's 8,658 CPU seconds stand above. CPU on this bead in all: about 4.97 CPU-hours (two generations), within the 6 to 12 priced. `run wand125-n21` now re-hashes the parts against the listing and scans them before building.
 
 blocked_on: network policy — lakecache.blob.core.windows.net:443 (Mathlib's prebuilt cache; the toolchain installs from its GitHub release asset)
