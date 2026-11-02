@@ -3755,6 +3755,15 @@ def _math_markup(context: Context) -> str:
     return _module(context, "devtools.check_math_markup")
 
 
+def _table_cells(context: Context) -> str:
+    """No Markdown table row has more cells than its header (think-7y5x)."""
+    # The pinned formatter drops every cell past the header's count, so a row committed
+    # without the hook is cut at the next commit anyone makes; the hook runs the same
+    # check before it formats. 0.60 s of process wall measured on 2 November 2026 over
+    # 2,253 files, 0.53 s of it the scan.
+    return _module(context, "devtools.check_table_cells")
+
+
 def _archive_annotations(context: Context) -> str:
     """Every archive transcription's annotation count says the same thing three times.
 
@@ -5590,6 +5599,22 @@ STEPS: tuple[Step, ...] = (
             # takes that branch (PR 496 review G5, settled statically and by import
             # trace); the closure claims it anyway, as it claims every lazy import.
             *_RENDERER_HUB,
+        ),
+    ),
+    Step(
+        "no Markdown table row has more cells than its header",
+        _table_cells,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            # It reads every Markdown file the formatter rewrites.
+            "*.md",
+            "packing/devtools/check_table_cells.py",
+            "packing/devtools/check_math_spans.py",
+            "packing/devtools/repo_scope.py",
+            ".flowmarkignore",
+            ".gitmodules",
         ),
     ),
     Step(

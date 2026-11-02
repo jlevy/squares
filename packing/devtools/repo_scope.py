@@ -27,9 +27,9 @@ from __future__ import annotations
 import os
 import re
 import subprocess
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from functools import cache
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -112,3 +112,51 @@ def tracked_files(
     ).stdout
     found = (root / os.fsdecode(name) for name in listed.split(b"\0") if name)
     return sorted(path for path in found if path.is_file())
+
+
+#: What a walk skips when there is no git index to ask: never this repository's prose.
+UNTRACKED_PARTS = frozenset({".git", ".venv", "node_modules", "__pycache__", "site"})
+
+
+def tracked_markdown(repo: Path) -> list[str]:
+    """Every tracked Markdown file, repository-relative; a walk where there is no index."""
+    tracked = tracked_files(repo, "*.md")
+    if tracked is None:
+        tracked = [
+            path
+            for path in repo.rglob("*.md")
+            if path.is_file() and not UNTRACKED_PARTS & set(path.relative_to(repo).parts)
+        ]
+    return sorted(path.relative_to(repo).as_posix() for path in tracked)
+
+
+def flowmark_exclusions(repo: Path) -> list[str]:
+    """The patterns `.flowmarkignore` lists: the Markdown the formatter never rewrites."""
+    source = repo / ".flowmarkignore"
+    if not source.is_file():
+        return []
+    lines = (line.strip() for line in source.read_text(encoding="utf-8").splitlines())
+    return [line for line in lines if line and not line.startswith("#")]
+
+
+@cache
+def _exclusion(
+    patterns: tuple[str, ...],
+) -> tuple[tuple[str, ...], frozenset[str], tuple[str, ...]]:
+    """`patterns` sorted once into directory prefixes, plain paths and globs: a plain path
+    full-matches only itself, and `full_match` over every pattern for every file was most
+    of a sweep's time."""
+    prefixes = tuple(pattern for pattern in patterns if pattern.endswith("/"))
+    files = [pattern for pattern in patterns if not pattern.endswith("/")]
+    globs = tuple(pattern for pattern in files if set(pattern) & set("*?["))
+    return prefixes, frozenset(files).difference(globs), globs
+
+
+def excluded_by(path: str, patterns: Sequence[str]) -> bool:
+    """Whether a pattern names `path`: a directory prefix, a file, or a glob."""
+    prefixes, files, globs = _exclusion(tuple(patterns))
+    return (
+        path.startswith(prefixes)
+        or path in files
+        or any(PurePosixPath(path).full_match(pattern) for pattern in globs)
+    )

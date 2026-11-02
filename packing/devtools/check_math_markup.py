@@ -55,16 +55,18 @@ from devtools.migrate_math import (
     open_math_spans,
     plan,
 )
-from devtools.repo_scope import tracked_files, vendored_directories
+from devtools.repo_scope import (
+    excluded_by,
+    flowmark_exclusions,
+    tracked_markdown,
+    vendored_directories,
+)
 from sqpack.yamlio import load_yaml, safe_load
 
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
 REGISTER = Path(__file__).resolve().parent / "math-markup.yaml"
 DOCUMENT_MAP = PurePosixPath("docs/project/document-map.yaml")
-FLOWMARKIGNORE = PurePosixPath(".flowmarkignore")
-#: What a walk skips when there is no git index to ask: never this repository's prose.
-UNTRACKED_PARTS = frozenset({".git", ".venv", "node_modules", "__pycache__", "site"})
 
 
 class RegisterError(ValueError):
@@ -143,18 +145,6 @@ class Scope:
     excluded: dict[str, str] = field(default_factory=dict)
 
 
-def _markdown(repo: Path) -> list[str]:
-    """Every tracked Markdown file, repository-relative; a walk where there is no index."""
-    tracked = tracked_files(repo, "*.md")
-    if tracked is None:
-        tracked = [
-            path
-            for path in repo.rglob("*.md")
-            if path.is_file() and not UNTRACKED_PARTS & set(path.relative_to(repo).parts)
-        ]
-    return sorted(path.relative_to(repo).as_posix() for path in tracked)
-
-
 def _document_map(repo: Path) -> tuple[frozenset[str], list[str]]:
     """The document map's generated views and its exclusion patterns, if it has one."""
     source = repo / DOCUMENT_MAP
@@ -169,23 +159,6 @@ def _document_map(repo: Path) -> tuple[frozenset[str], list[str]]:
     return generated, [entry["pattern"] for entry in document.get("exclusions", [])]
 
 
-def _flowmark_exclusions(repo: Path) -> list[str]:
-    source = repo / FLOWMARKIGNORE
-    if not source.is_file():
-        return []
-    lines = (line.strip() for line in source.read_text(encoding="utf-8").splitlines())
-    return [line for line in lines if line and not line.startswith("#")]
-
-
-def _excluded_by(path: str, patterns: Sequence[str]) -> bool:
-    """Whether a pattern names `path`: a directory prefix, a file, or a glob."""
-    posix = PurePosixPath(path)
-    return any(
-        path.startswith(pattern) if pattern.endswith("/") else posix.full_match(pattern)
-        for pattern in patterns
-    )
-
-
 def _why_excluded(
     path: str, repo: Path, map_patterns: Sequence[str], ignored: Sequence[str]
 ) -> str | None:
@@ -196,9 +169,9 @@ def _why_excluded(
         return "vendored"
     if any(part.startswith(".") for part in parts[:-1]):
         return "tool-owned"
-    if _excluded_by(path, map_patterns):
+    if excluded_by(path, map_patterns):
         return "document-map exclusion"
-    if _excluded_by(path, ignored):
+    if excluded_by(path, ignored):
         return "flowmark exclusion"
     return None
 
@@ -206,11 +179,11 @@ def _why_excluded(
 def scope(repo: Path = REPO) -> Scope:
     """Sort the tracked Markdown into eligible, generated and excluded files."""
     generated_views, map_patterns = _document_map(repo)
-    ignored = _flowmark_exclusions(repo)
+    ignored = flowmark_exclusions(repo)
     eligible: set[str] = set()
     generated: set[str] = set()
     excluded: dict[str, str] = {}
-    for path in _markdown(repo):
+    for path in tracked_markdown(repo):
         if path in generated_views:
             generated.add(path)
         elif (reason := _why_excluded(path, repo, map_patterns, ignored)) is not None:

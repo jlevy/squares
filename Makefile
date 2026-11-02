@@ -14,11 +14,17 @@
 FLOWMARK := uvx --from flowmark-rs==0.4.0 flowmark
 PACKING_PYTHON ?= uv run --frozen --group dev python
 
-.PHONY: format format-check paper-style-check hooks-install lint-fix
+.PHONY: format format-check paper-style-check table-cells-check hooks-install lint-fix
 
-## Format all Markdown in the repository.
-format:
+## Format all Markdown in the repository. The table check runs first because the pinned
+## formatter silently drops every table cell past the header's count, so a `|` inside a
+## cell must be refused before anything is rewritten (think-7y5x).
+format: table-cells-check
 	$(FLOWMARK) --auto .
+
+## Refuse a Markdown table row the pinned formatter would cut short. Reads only.
+table-cells-check:
+	cd packing && $(PACKING_PYTHON) -m devtools.check_table_cells
 
 ## Verify canonical paper titles without rendering or writing generated files.
 paper-style-check:
