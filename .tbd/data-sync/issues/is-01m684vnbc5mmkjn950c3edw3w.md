@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 83
+version: 84
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T05:36:37.037Z
+updated_at: 2026-11-02T05:54:26.730Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -142,3 +142,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 ~05:15: merged #879 (f54c74f6b): Ryu #414 strongest-tier review accepted, no defect; nine truncated table rows restored verbatim from the original lane transcript (not rebuilt), bars escaped. L25 posts the #414 final comment after deploy and records it. 37 PRs merged this pass.
 
 2026-11-02 ~05:40: #414 closed (final comment 05:11Z after f54c74f6b deploy verified) and recorded: merged #881 (7a4521582). Closed think-yf8j and think-u1kq (#414 answer bead; claim was codex@spud10.local, stale since 18 Oct; its done-when met) after --before-close exit 0 and a manual open-children check; check_bead_tree ok on main. 38 PRs merged this pass. L24 (tooling guards) running.
+
+2026-11-02 05:52: renewal. Sweep intake25 run; no new issues since 04:50Z (only our #414 final). L24 running.
