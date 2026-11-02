@@ -16,5 +16,6 @@ reason: >-
   empty site directories, twice from this tree and once with that main's
   result-requests.yaml and source-coverage.yaml swapped in, by render_packing_methods, its
   math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM): 43 files each, all byte-identical
-  across the three. No PDF was printed; it prints from that HTML. The paper keeps its
-  version, v0.2.7.
+  across the three. Measured again the same way after merging main 43ad863b5 (#876), with
+  that main's two files swapped in: 43 files each, byte-identical. No PDF was printed; it
+  prints from that HTML. The paper keeps its version, v0.2.7.
