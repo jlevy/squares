@@ -35448,14 +35448,15 @@ results:
       be downloaded here; the author's public copy of 31 October serves the same bytes, which
       the packet keeps since 1 November 2026.
 
-      The author's configuration was decided here on 1 November 2026 (route B): Evan Daniel's
-      verify_exact.py, the checker the author reports running, run unchanged, printed VALID
-      in a field of degree 21, with the 1,750 corner incidences it counts as touching (a
-      square's corner on a wall or on a separating side) proved as identities, and refused
-      four mutated controls. Before deciding, the file was held to the digests the
-      comment states and its side to this entry's: the same polynomial, a root of it in the
-      field, and the same real root. So the bound is shown, reproduced with the source's
-      check.
+      The author's configuration was decided here on 1 November 2026 on two exact routes
+      (route B), so the bound is shown. sqpack's exact witness verifier, over the
+      configuration's field of degree 21, decided every unit-square identity, wall and pair
+      and refused a duplicated square and a square moved outside the box. Evan Daniel's
+      verify_exact.py, the checker the author reports running, run unchanged, printed VALID,
+      with the 1,750 corner incidences it counts as touching (a square's corner on a wall or
+      on a separating side) proved as identities, and refused four mutated controls. Before
+      deciding, the file was held to the digests the comment states and its side to this
+      entry's: the same polynomial, a root of it in the field, and the same real root.
 
       This repository also built its own
       exact configuration at the same side from T-174's retained certificate (route A,
@@ -35489,7 +35490,10 @@ results:
     attribution:
       source_keys: ['[Kim s297 2026-10-25]']
       published: '2026-10-25'
-    evidence: [E-hyukdongkim-804-s297-report, E-hyukdongkim-804-s297-verify-exact]
+    evidence:
+      - E-hyukdongkim-804-s297-report
+      - E-hyukdongkim-804-s297-exact-feasibility
+      - E-hyukdongkim-804-s297-verify-exact
     artifacts:
       - packing/resources/web/hyukdongkim-s297-2026-10-25/README.md
       - packing/resources/web/hyukdongkim-s297-2026-10-25/acquisition/comments-804.json
@@ -35499,6 +35503,7 @@ results:
       - packing/resources/web/hyukdongkim-s297-2026-10-25/receipts/build.json
       - packing/resources/web/hyukdongkim-s297-2026-10-25/source/s297-exact-configuration/n297.minpoly.json
       - packing/resources/web/hyukdongkim-s297-2026-10-25/receipts/side-check.json
+      - packing/resources/web/hyukdongkim-s297-2026-10-25/receipts/algebraic-route1-n297.json.xz
       - packing/resources/web/hyukdongkim-s297-2026-10-25/receipts/route2-verify-exact.json
       - packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/README.md
       - packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/exact-sides.json
@@ -35510,13 +35515,12 @@ results:
       - packing/tests/test_configuration_fact_replay.py
       - packing/resources/web/hyukdongkim-s297-2026-10-25/receipts/route2-verify-exact.json
     next_rung: >-
-      Route 1 of route B: the author's file decided on sqpack.witness.exact_verify over its
-      degree-21 field, with the duplicate-square and outside-container controls, through
-      configuration_fact_replay --packet s297 route1 (think-ozx8, queued behind the lane's
-      gradec replay), as T-244's configurations were. Route A, this repository's own
-      configuration on exact_verify, is a further route (think-vv1q).
+      Route B is decided on both exact routes since 1 November 2026 (think-ozx8): route 1,
+      the author's file on sqpack.witness.exact_verify over its degree-21 field, and route 2,
+      verify_exact.py. Route A, this repository's own configuration on exact_verify, is a
+      further route that raises no rung, held over the item's CPU cap (think-vv1q).
 
-      Then, as T-244 at 263: the side at 297 is the exact value of the house's own
+      As T-244 at 263: the side at 297 is the exact value of the house's own
       arrangement, 3.359e-90 below T-174's certificate there, not a new packing. Its
       adoption waits on the algebraic-house writer (upper_bound_houses.FIELD_COUNTS,
       think-ot5c) and on the owner's restatement question (think-ikku). If those make it
@@ -35530,11 +35534,12 @@ results:
       record.
     notes: >-
       The bound rests on the author's file, kept since 1 November 2026 from his public copy
-      and decided by the source's checker (route B); route A's configuration, this
-      repository's construction, is not yet decided feasible. Route A read the comment's
-      text and none of the author's code, and route B ran none of the author's programs. The polynomial was used only to
-      compare, after the side was found in K; it is decided here primitive and irreducible
-      over Q, with one real root, the root the print names (exact-sides.json).
+      and decided on sqpack's exact verifier and by the source's checker (route B); route
+      A's configuration, this repository's construction, is not yet decided feasible. Route
+      A read the comment's text and none of the author's code, and route B ran none of the
+      author's programs. The polynomial was used only to compare, after the side was found
+      in K; it is decided here primitive and irreducible over Q, with one real root, the
+      root the print names (exact-sides.json).
 
       The construction's free directions, along which the side is constant, are pinned to
       rationals within 1e-14 of T-174's certificate, tangents first, so the five free
