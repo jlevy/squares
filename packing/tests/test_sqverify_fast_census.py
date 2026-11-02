@@ -1314,3 +1314,19 @@ def test_the_446_release_packet_is_read_from_its_retained_release_members() -> N
         assert census.net_directions(case) == 2073
     assert packet in census.SHARED_CRATE_PACKETS
     assert packet not in census.INDEPENDENT_MIXED_PACKETS
+
+
+def test_the_13_october_packet_is_read_from_its_retained_n37_members() -> None:
+    """T-178's mixed_n37_L64975 is read from the 13 October packet's release members, as
+    the n31 packet's is. That packet's n39 and n44 members are not retained, so it holds
+    one case, and it shares the producer's crate."""
+    packet = "wand125-fine-net-n37-n39-n44-2026-10-13"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert list(found) == ["mixed_n37_L64975"]
+    case = found["mixed_n37_L64975"]
+    root = census.WEB / packet / "release/certificates"
+    assert case.candidate == root / "mixed_n37_L64975" / "candidate.json.gz"
+    assert (case.n, case.side) == (37, "2599/400")
+    assert census.net_directions(case) == 2073
+    assert packet in census.SHARED_CRATE_PACKETS
+    assert packet not in census.INDEPENDENT_MIXED_PACKETS

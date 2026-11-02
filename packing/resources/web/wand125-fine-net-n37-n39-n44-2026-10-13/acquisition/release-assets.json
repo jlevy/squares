@@ -1,0 +1,24 @@
+{
+  "format": "release-asset-retention-v1",
+  "repository": "wand125/square-packing",
+  "release": "square-lower-bounds-v1",
+  "retained_dir": "release",
+  "assets": [
+    {
+      "asset": "certificates__mixed_n37_L64975.tar.gz",
+      "certificate": "mixed_n37_L64975",
+      "bytes": 630375,
+      "sha256": "8aa78cc44e8ad50a340ffc9636b93af40cb942e7dcdd853a0e46c5739a651965",
+      "members": [
+        {"path":"certificates/mixed_n37_L64975/candidate.json","bytes":173053,"sha256":"f6e32978329c7eb838c969e59d289c1447493fdc573ad83c344fbebba1a00cb8","stored":"release/certificates/mixed_n37_L64975/candidate.json.gz","form":"gzip"},
+        {"path":"certificates/mixed_n37_L64975/check2/control-197_200.jsonl.gz","bytes":16071,"sha256":"2e20566cedeb81d3197f22affc206b2023090036e9d8e9f3b8f3b114be9ab5f8","stored":"release/certificates/mixed_n37_L64975/check2/control-197_200.jsonl.gz","form":"original-gzip"},
+        {"path":"certificates/mixed_n37_L64975/check2/control.json","bytes":353,"sha256":"afb7cac323038143de84283774594f826c2a19a69f66a42741dac00c6e30532f","stored":"release/certificates/mixed_n37_L64975/check2/control.json","form":"plain"},
+        {"path":"certificates/mixed_n37_L64975/check2/receipt.json","bytes":3005,"sha256":"a9c599b50db76949f273d8bfa1b39c99c43f4d8e114a0a76e8596471d559c49b","stored":"release/certificates/mixed_n37_L64975/check2/receipt.json","form":"plain"},
+        {"path":"certificates/mixed_n37_L64975/check2/run.jsonl.gz","bytes":176903,"sha256":"691229b23da2d68d00503892e2cf19dd74d368eeacff1d68538c92f7a41e73ac","stored":"release/certificates/mixed_n37_L64975/check2/run.jsonl.gz","form":"original-gzip"},
+        {"path":"certificates/mixed_n37_L64975/check2/src/sqverify-proof-net-fe12e036c.tar.gz","bytes":69540,"sha256":"e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81","pinned_only":"the source's adaptation of this repository's sqverify_fast, which carries no notice of its own and is kept out of this tree beside the crate whose declared-net change was written apart from it (sqverify_fast/INDEPENDENCE.md); the archive the 2026-10-06 check2 packet pins by the same digest"},
+        {"path":"certificates/mixed_n37_L64975/n37-L6.4975-check2-bundle.tar.gz","bytes":329784,"sha256":"753980816ee564a5d868c754d648e740dfc5129e6996ee2ece384333f33632c3","pinned_only":"the sealed inner bundle, whose payloads repeat this directory's files and whose members the premises receipt inventories"},
+        {"path":"certificates/mixed_n37_L64975/verification/prepublication-receipt.json","bytes":893,"sha256":"2c7e46589a4c474cabf2179418dae4ce58583dd5a6a0683b77e3824604476888","stored":"release/certificates/mixed_n37_L64975/verification/prepublication-receipt.json","form":"plain"}
+      ]
+    }
+  ]
+}
