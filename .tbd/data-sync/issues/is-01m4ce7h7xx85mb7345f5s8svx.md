@@ -3,9 +3,9 @@ type: is
 id: is-01m4ce7h7xx85mb7345f5s8svx
 title: "Answer Sungjoon Ryu: two asymptotic deficiency preprints (#414)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 delegate: codex@spud10.local
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:22:22.715Z
-updated_at: 2026-11-02T05:18:20.596Z
+updated_at: 2026-11-02T05:36:17.043Z
 started_at: 2026-10-18T08:47:56.034Z
+closed_at: 2026-11-02T05:36:17.043Z
+close_reason: "#414 answered and closed: strongest-tier review accepted (#879, f54c74f6b); final comment issuecomment-6569593647 posted after deploy verified; recorded in https://github.com/jlevy/squares/pull/881 (7a4521582). Remaining: think-k3tk (Lemma 4.10 box labels)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
