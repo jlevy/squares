@@ -999,8 +999,10 @@ reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net, superseding t
 1163/200 above. The
 [authored factual packet](web/wand125-fine-net-n29-2026-10-10/README.md) pins revision
 `22a23c8` and its release asset by digest, with the maintained premise check and a
-diagnostic eight-direction sample.
-A complete replay and whole-net controls remain pending.
+diagnostic eight-direction sample; since 2 November 2026 it also retains the asset’s
+data members, where the census reads the candidate.
+The review that reads the certificate, a complete replay and whole-net controls remain
+pending.
 
 **[wand125 fine-net n28 n30 2026-10-10]**: Hosono’s n28 and n30 certificates,
 `mixed_n28_L57425` and `mixed_n30_L58925`, report $s(28) \ge 2297/400 = 5.7425$ and

@@ -1272,7 +1272,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-129.html | result/t-129.html | result | overview | 2026-10-08 | 2026-10-08 | live |
 | result/t-130.html | result/t-130.html | result | overview | 2026-10-09 | 2026-10-10 | live |
 | result/t-131.html | result/t-131.html | result | overview | 2026-10-09 | 2026-10-10 | live |
-| result/t-132.html | result/t-132.html | result | overview | 2026-10-10 | 2026-10-10 | live |
+| result/t-132.html | result/t-132.html | result | overview | 2026-10-10 | 2026-11-02 | live |
 | result/t-133.html | result/t-133.html | result | overview | 2026-10-10 | 2026-10-10 | live |
 | result/t-134.html | result/t-134.html | result | overview | 2026-10-10 | 2026-10-10 | live |
 | result/t-135.html | result/t-135.html | result | overview | 2026-10-10 | 2026-10-10 | live |

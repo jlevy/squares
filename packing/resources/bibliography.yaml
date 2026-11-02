@@ -1797,8 +1797,9 @@ sources:
     credit: Hosono after Tokoharu and Levy
     lineage: builds-on-project
     note: The later n29 finer-net measure lower-bound report, s(29) >= 291/50, at source 22a23c8a99aa4e9616d596bc2f28555bacbee3dd,
-      with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest and
-      kept outside Git. Maintained measure and declared-net premises accepted; native capture, controls
+      with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest,
+      and its data members are retained in the packet's release/ (2 November 2026). Maintained measure
+      and declared-net premises accepted; the review that reads the certificate, native capture, controls
       and adoption pending. The enclosing MIT notice does not settle redistribution of the nested verifier,
       which adapts this project's sqverify_fast, so a maintained replay is not another independent implementation.
   - key: '[Guzhou0806 n40 clipped corner 2026-10-10]'

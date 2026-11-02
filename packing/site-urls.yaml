@@ -15389,7 +15389,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
+  lastmod: '2026-11-02'
   status: live
   identity:
     kind: lower-bound
@@ -15410,8 +15410,36 @@ urls:
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/source-manifest.json
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/premises.json
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
+    - packing/resources/web/wand125-fine-net-n29-2026-10-10/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-n29-2026-10-10/release/certificates/mixed_n29_L582/candidate.json.gz
     - packing/devtools/fine_net_followup.py
     - packing/devtools/audit_wand125_declared_net.py
+  amendments:
+  - date: '2026-11-02'
+    reason: The release asset's data members are retained in the packet's release/ on 2 November (think-r333),
+      so the release record and the retained candidate join the artifacts; the evidence, rungs, value,
+      scope and attribution are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 29
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net n29 2026-10-10]'
+        published: '2026-10-10'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n29-582-followup-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/README.md
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/reported-n29-followup.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/source-manifest.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/premises.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
+      - packing/devtools/fine_net_followup.py
+      - packing/devtools/audit_wand125_declared_net.py
 - path: result/t-133.html
   canonical: result/t-133.html
   kind: result
