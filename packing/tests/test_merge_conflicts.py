@@ -6,7 +6,10 @@ import os
 import subprocess
 from pathlib import Path
 
+import pytest
+
 from devtools import merge_conflicts
+from sqpack import release
 
 BASE = 'DATA = "pin"\n\n\nRECORDS = (\n    Record(\n        name="first",\n    ),\n)\n'
 
@@ -145,6 +148,99 @@ def test_a_binary_conflict_is_counted_whole_and_does_not_stop_the_census(
         repo.root, ref="lane-a", since="2000-01-01", paths=("release.py",)
     )
     assert filtered.conflicts == ()
+
+
+def _two_data_lanes(tmp_path: Path) -> Checkout:
+    """Two lanes that each change the data and re-pin, as records lanes do (think-l6lt).
+
+    Lane A merges lane B, keeping its own pin, so the merge brings both lanes' data
+    together; lane A then merges lane C, which changed only prose, and lands as #9.
+    """
+    repo = Checkout(tmp_path)
+    (repo.root / "data").mkdir()
+    for path, text in (("data/x", "x0\n"), ("data/y", "y0\n"), ("notes.md", "n0\n")):
+        (repo.root / path).write_text(text, encoding="utf-8")
+    repo.git("add", "data", "notes.md")
+    repo.commit("release.py", 'PIN = "base"\n', "base")
+    repo.git("checkout", "-qb", "lane-b")
+    repo.commit("data/x", "x1\n", "lane B data")
+    repo.commit("release.py", 'PIN = "b"\n', "lane B re-pins")
+    repo.git("checkout", "-qb", "lane-c", "main")
+    repo.commit("notes.md", "n-c\n", "lane C prose")
+    repo.git("checkout", "-qb", "lane-a", "main")
+    repo.commit("data/y", "y1\n", "lane A data")
+    repo.commit("release.py", 'PIN = "a"\n', "lane A re-pins")
+    repo.git("merge", "-q", "-X", "ours", "--no-edit", "lane-b")
+    repo.commit("notes.md", "n-a\n", "lane A prose")
+    repo.git("merge", "-q", "-X", "ours", "--no-edit", "lane-c")
+    repo.git("checkout", "-q", "main")
+    repo.git(
+        "merge", "-q", "--no-ff", "-m", "Merge pull request #9 from fixture/lane-a", "lane-a"
+    )
+    return repo
+
+
+def test_a_pin_conflict_between_two_data_lanes_is_a_merge_the_pin_must_follow(
+    tmp_path: Path,
+) -> None:
+    """A merge that brings two lanes' data together differs from both parents in the data,
+    so it is itself the last data commit: the pin has to move after it whatever a merge
+    driver made of the pin line, and only the hand resolution was the conflict's own."""
+    repo = _two_data_lanes(tmp_path)
+    report = merge_conflicts.census(
+        repo.root, ref="main", since="2000-01-01", changed=("data",)
+    )
+    assert report.merges == 3
+    assert report.changed == ("data",)
+    assert report.changed_merges == 1
+    by_block = {conflict.blocks[0][1]: conflict for conflict in report.conflicts}
+    assert set(by_block) == {"PIN", "n-a"}
+    assert by_block["PIN"].changed is True
+    assert by_block["n-a"].changed is False
+    # What `release.data_revision` asks: the newest commit to change the paths is the
+    # pin-conflicted merge itself, and not the other.
+    for block, conflict in by_block.items():
+        newest = repo.git("log", "-1", "--format=%H", conflict.merge, "--", "data").strip()
+        assert (newest == conflict.merge) is (block == "PIN")
+    lines = merge_conflicts.summary(report)
+    assert lines[1] == (
+        "1 of 3 merges changed data against both parents: each was then the newest commit "
+        "to change it, so a pin to that commit had to move after the merge, whatever Git "
+        "made of the text"
+    )
+    assert "release.py :: PIN: 1 merges (1 conflicting nowhere else, 1 changing data " in (
+        "\n".join(lines)
+    )
+    assert "notes.md :: n-a: 1 merges (1 conflicting nowhere else, 0 changing data " in (
+        "\n".join(lines)
+    )
+
+
+def test_without_changed_paths_the_census_does_not_ask_and_says_nothing(
+    tmp_path: Path,
+) -> None:
+    repo = _two_data_lanes(tmp_path)
+    report = merge_conflicts.census(repo.root, ref="main", since="2000-01-01")
+    assert report.changed_merges is None
+    assert {conflict.changed for conflict in report.conflicts} == {None}
+    assert not any("against both parents" in line for line in merge_conflicts.summary(report))
+
+
+def test_the_data_option_asks_about_the_paths_the_pin_follows(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    asked: dict[str, object] = {}
+
+    def census(**options: object) -> merge_conflicts.Census:
+        asked.update(options)
+        return merge_conflicts.Census("main", "2026-10-24", 0, 0, ())
+
+    monkeypatch.setattr(merge_conflicts, "census", census)
+    assert merge_conflicts.main(["--since", "2026-10-24", "--data"]) == 0
+    assert asked["changed"] == release.data_pathspec()
+    assert merge_conflicts.main(["--since", "2026-10-24"]) == 0
+    assert asked["changed"] == ()
+    capsys.readouterr()
 
 
 def test_a_conflict_is_named_by_the_statement_the_hunk_starts() -> None:
