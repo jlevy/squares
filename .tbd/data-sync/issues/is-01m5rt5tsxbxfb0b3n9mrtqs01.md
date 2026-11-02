@@ -5,7 +5,7 @@ title: Decide Kim's exact configurations for T-244 at 172 and 263 on both exact 
 kind: task
 status: in_progress
 priority: 3
-version: 16
+version: 17
 delegate: bold-ritchie-l22
 labels:
   - result-import
@@ -17,7 +17,7 @@ deferred_until: null
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:57:44.893Z
-updated_at: 2026-11-02T01:49:02.251Z
+updated_at: 2026-11-02T02:08:00.672Z
 started_at: 2026-10-25T11:43:46.219Z
 ---
 Decide Hyukdong Kim's exact configurations for T-244 (issue #804) at 172 and 263 on both exact routes. T-244 registers s(172) <= S*_172 and s(263) <= S*_263 as reported (V0/C0); each S* is the root of #804's irreducible polynomial of degree 24 and 17.
@@ -63,3 +63,5 @@ Done when: both configurations are decided on both routes and recorded on T-244,
 
 2026-10-31 bold-ritchie-l8: **this bead now owns a queued ask on #804** (PR #864, review A's A3): keep the files of t244-exact-configurations.zip themselves (CC0 1.0) in the hyukdongkim-t244-configurations-2026-10-25 packet, from Kim's public copy HyukdongKim/square-packing-exact-sides at f480441e (source: issuecomment-6415293035). The configurations are already decided from the derived facts (T-244 V3/C3, #861); this is custody only and changes no result. check_bead_tree fails a queued ask whose bead has closed, so do not close think-4rzl until the files are in the packet, their digests checked against the record, and the ask marked done in result-requests.yaml #804. The sibling asks are think-9vai (squares-exact-forms.zip) and think-ozx8 (s297-exact-configuration.zip).
 2026-11-01 07:15Z coord-n12-1025 (session_01S2rbZ7, which stopped at a spend limit on 26 October): for the current owner, bold-ritchie-l8. Its worker w-exact-804-1026 finished both exact routes on 26 October before stopping; the work is on branch claude/friendly-einstein-gf9z0h-exact-804 (head b8cc9e5be, base main at acc1cfc3d, ~300 commits behind; no PR). Commits: 2a857c04d (devtools/minpoly_configuration_facts.py, the packet-fact reader feeding evand_minpoly_geometry, with tests; side and identity receipts) and b8cc9e5be (receipts). Outcome: exact_verify over K accepts n = 172 (degree 24, 950 CPU-s) and n = 263 (degree 17, 1321 CPU-s), each refusing the duplicate-square and outside-container controls; the retained verify_exact.py run unchanged on forms rebuilt byte for byte from the facts prints VALID for both (1026 and 1593 touching incidences proved as identities in K) and refuses its four mutated controls. About 1.6 CPU-h in all. Not done: register/evidence/requests edits (uncommitted, unvalidated, not pushed), the stage 4 review for V3, and adoption with regularization. This session takes no further action on the bead.
+
+2026-11-02 bold-ritchie-l22 (lane L22 of the intake pass, think-3guf), taking over from bold-ritchie-l8, whose lane ended. Draft PR https://github.com/jlevy/squares/pull/878 (branch claude/bold-ritchie-xo28us-l22, head 60d2773f3): #804's queued ask is done on the branch. The public copy's attachments/t244-exact-configurations.zip at f480441e (raw.githubusercontent.com, 2026-11-02T01:50Z; blob e2a73184) is 96,347 bytes with the comment's SHA-256 16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d; its seven members have the digests sources.json held (n172.minpoly.json 9230aa7a...02db, n263.minpoly.json de646870...4686) and equal the public copy's files/t244-exact-configurations/ byte for byte. exact_forms.py configurations now guards every member to the archive's one directory and checks both certificates before it parses or keeps anything, then keeps the seven files under the packet's source/ and records the public copy and CC0 licence; configurations --check passes. Each retained certificate is the file its fact rebuilds, byte for byte (custody: retained_identical true at 172 and 263), so the 31 October decision read these bytes; only the facts' notes changed. The ask is marked done in result-requests.yaml #804; check_requests --report gives #804 closeable with a final comment, drafted in think-8r92 as one reply with L20's route-1 news (#876), to post after both merge, #876 first. Do not close this bead until #878 merges.
