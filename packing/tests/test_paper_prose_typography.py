@@ -78,4 +78,6 @@ def test_standard_markdown_hook_runs_pinned_auto_formatting_and_stages_fixes() -
     assert markdown["stage_fixed"] is True
     makefile = (REPO / "Makefile").read_text(encoding="utf-8")
     assert "FLOWMARK := uvx --from flowmark-rs==0.4.0 flowmark\n" in makefile
-    assert re.search(r"(?m)^format:\n\t\$\(FLOWMARK\) --auto \.\n", makefile)
+    # The table-cell check runs first, so a row the formatter would cut fails the commit
+    # before anything is rewritten (think-7y5x).
+    assert re.search(r"(?m)^format: table-cells-check\n\t\$\(FLOWMARK\) --auto \.\n", makefile)
