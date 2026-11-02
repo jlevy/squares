@@ -271,6 +271,18 @@ def test_compare_finds_a_generated_file_that_differs_from_the_listing(tmp_path: 
     assert not report["ok"]
     assert report["differing"] == ["Part1.lean"]
     assert report["extra"] == ["Part2.lean"]
+    # The fixture's listing is not the retained one, which lists 66 files.
+    assert "the receipt did not compare all 66 listed files" in rlp.check_generation(
+        spec, receipts
+    )
     assert "the generated files are not exactly the listed ones" in rlp.check_generation(
         spec, receipts
     )
+
+
+def test_the_retained_generation_receipt_shows_every_listed_part_regenerated() -> None:
+    spec = rlp.route("wand125-n21")
+    receipts = rlp.WEB / spec.packet / rlp.RECEIPT_DIR
+    assert rlp.check_generation(spec, receipts) == []
+    gen = json.loads((receipts / rlp.GENERATION_NAME).read_text(encoding="utf-8"))
+    assert (gen["listed"], gen["matched"], gen["generated"], gen["exit"]) == (66, 66, 66, 0)

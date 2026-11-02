@@ -14,7 +14,9 @@ Its proposed Frontier key is **[wand125 n21 zero-margin Lean 2026-09-29]**. No i
 asked for it: the triage of wand125/square-packing-bounds at `1a25a5ed` found it, and
 bead `think-f2bm` owns its import. The record registers it as `T-234`, a formalization of
 `T-055`’s route, at `V0`/`C0`. The claim below is stated as the source states it; nothing
-here has built the proof, and no review has read it yet.
+here has built the proof, and no review has read it yet. Its 64 generated parts were
+regenerated here on 2 November 2026 and match the source’s list of digests, as
+[Checks Made Here](#checks-made-here) says.
 
 ## Source and Pin
 
@@ -141,23 +143,48 @@ script that fetches), then `lake env lean N21PtsAxiomsZ.lean`, accepted only wit
 | Item | Estimate |
 | --- | --- |
 | Toolchain | `leanprover/lean4:v4.33.1` and Mathlib `0df444a3`’s cache, about 2.5 GB and 7 GB on disk; Python 3 with NumPy for the generator |
-| Generation | about 2.4 CPU-hours (1,459 s × 6 workers on the M4) |
+| Generation | 2.41 CPU-hours measured here (8,658 CPU seconds, 5,060 s wall on two x86-64 cores); the source’s run was 1,459 s × 6 workers on the M4 |
 | Kernel check | about 7 CPU-hours (3.5 h × 2 parts on the M4, under load) |
-| Total | 6 to 12 CPU-hours, central 9, from the source’s report; not a receipt |
+| Total | 6 to 12 CPU-hours, central 9: the generation measured, the kernel check from the source’s report |
 | Memory | near 6 GB per part: one part at a time fits a 15 GB host; two, about 12 GB, leave little headroom on it |
 
 It is under the owner’s 40 CPU-hour item cap and above the 2 CPU-hour single run this
 lane may start, and this host had 5.2 GB of free disk on 23 October, short of the
 toolchain and cache. It is held for a lane with the disk, as the import bead records.
+`devtools.replay_lean_packet` now runs the recipe from the retained bytes: `stage`,
+`generate`, then `run`, which builds the parts one at a time, prints the axioms and runs
+three negative controls, each under a receipt.
 What it would add: a `proof-assistant-checked`, `replayed-here` route for `T-234` with its
 own axiom receipt, the road to `T-055`’s rung 5 that the
 [review of 11 October](../../../../docs/project/reviews/review-2026-10-11-lean-backed-rungs.md)
 (LR-9) names.
 
+## Checks Made Here
+
+On 2 November 2026 the lane bold-ritchie-l29 (bead `think-tpbd`) ran the recipe’s
+generation step from the retained bytes, with
+`devtools.replay_lean_packet generate wand125-n21 --nproc 2 --cpus 2,3`. The stage put
+retained copies in place of the clone of `6aa82ba4` that `build_zero_margin.sh` makes:
+the nine library modules at the Git blobs of the closure receipt, and `gen_zmtree.py`,
+`zeromargin.py`, `ZMTree.lean` and the certificate at the four SHA-256 the script pins.
+Daniel’s generator then wrote 2,076 chunks in 64 parts: 59,433 Z leaves, 5,876 E leaves
+and 5,591 clips, the census the source reports. All 66 files it wrote match
+`data-sha256.txt`, with none missing and none extra, so the parts a build here would
+check are the ones the source’s run produced. It took 8,658 CPU seconds and 5,060 s of
+wall on two cores of a shared four-core x86-64 host, under CPython 3.14.7 and NumPy
+2.5.2. [`receipts/lean-build/generation.json`](receipts/lean-build/generation.json) and
+its [`gen.log`](receipts/lean-build/gen.log) are the receipt; the 92 MB of generated
+files are not retained.
+
+The kernel check did not run. That host’s network policy refuses
+`lakecache.blob.core.windows.net`, from which `lake exe cache get` takes Mathlib’s
+prebuilt files, and a source build of Mathlib is far above the item’s price. The
+generation decides nothing on its own: the kernel checks whatever the generator writes.
+
 ## Limitations
 
-- **Nothing was built or run here.** The axiom set and the end-to-end run are the
-  source’s report.
+- **Nothing was built here.** The axiom set and the kernel check are the source’s
+  report; only the generation step was run here.
 - **The generated tree is not published.** The proof is the 64 generated parts; a
   rebuild regenerates them with Daniel’s generator, and the kernel checks whatever it
   writes, so the generator is untrusted by design.
