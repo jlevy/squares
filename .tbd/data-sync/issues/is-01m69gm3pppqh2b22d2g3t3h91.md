@@ -5,11 +5,11 @@ title: "Result status: does a defect-found read stay open after a review that en
 kind: task
 status: open
 priority: 3
-version: 3
+version: 4
 labels: []
 dependencies: []
 created_at: 2026-10-31T17:37:52.341Z
-updated_at: 2026-11-01T23:25:47.301Z
+updated_at: 2026-11-02T00:11:58.929Z
 ---
 Owner question on the result-status vocabulary (plan-2026-10-01-result-status, provisional), raised by review A of #861 (A4, https://github.com/jlevy/squares/pull/861#pullrequestreview-5724017016).
 
@@ -33,16 +33,36 @@ Owner question on the result-status vocabulary (plan-2026-10-01-result-status, p
 
 2026-10-31 bold-ritchie-l8, from review A of #864 (A2, no change made): the #545 reply of 31 October (https://github.com/jlevy/squares/issues/545#issuecomment-6547240858) says "The replay would clear the label by moving T-261 to C3, not by settling the gap", true under today's rule 1, and the next bullet says the label will follow this bead's answer. **If the owner picks option 2** (the replay must not clear T-261's *incomplete*), T-261's status stops moving with C3, and the #545 follow-up that change owes must say that the replay no longer clears the label.
 
-2026-11-01 bold-ritchie-l19 (think-mtah, PR #875, branch claude/bold-ritchie-xo28us-l19): **gradec.py's replay of all 233 has run, and its evidence waits on this bead's answer.** Run 1 November 15:48Z to 22:39Z (lane L14's driver). All 233 certificates are VALID and byte-identical to the published n-N.gradec.json, the 2 GRADEC_DROPZERO runs (230 and 261) among them. Every log matches the release's, paths and times aside, and the 3 GRADEC_MUTATE controls at n = 10 were refused. 39,646 CPU-seconds (11.0 CPU-hours). The receipt is packing/resources/web/evand-exact-data-2026-10-12/receipts/gradec-replay-233.json, stored plain (548 lines). The ledger was adopted once with --adopt-unstamped, on a copy of the work directory. It does not touch C-1. T-261 is unchanged: V3/C1, *incomplete*, same evidence and artifacts. Its next_rung opens "Held for the owner's question (think-xyek)" and its unfinished confirmation says records work remains, as T-253 and T-260 say for think-ikku.
+2026-11-01 bold-ritchie-l19 (think-mtah, PR #875, branch claude/bold-ritchie-xo28us-l19; **revised 2026-11-02 after review A of #875**: the entry's provenance sentence (A1), and apply steps 1 and 6 (A3)): **gradec.py's replay of all 233 has run, and its evidence waits on this bead's answer.** Lane L14's first driver ran it on 1 November, 15:48Z to 22:39Z. All 233 certificates are VALID and byte-identical to the published n-N.gradec.json, the 2 GRADEC_DROPZERO runs (230 and 261) among them. Every log matches the release's, paths and times aside, and the 3 GRADEC_MUTATE controls at n = 10 were refused. 39,646 CPU-seconds (11.0 CPU-hours). The receipt is packing/resources/web/evand-exact-data-2026-10-12/receipts/gradec-replay-233.json, stored plain. The tool on main adopted the ledger once with --adopt-unstamped, on a copy, and the receipt carries adopted_basis. It does not touch C-1. T-261 is unchanged: V3/C1, *incomplete*, same evidence and artifacts. Its next_rung opens "Held for the owner's question (think-xyek)", and its composition says C3 waits on entering the replay. Both follow T-253 and T-260 on think-ikku.
 
-**To apply once answered** (think-mtah's done-when; under an hour, from packing/):
-1. frontier/evidence.yaml: insert the entry below before `  - id: E-evand-gradec-n10-recompute`. In E-evand-gradec-local-minima-233-review-check, replace "C3 waits on gradec.py's replay of all 233 (think-mtah)" with "gradec.py's own replay of all 233 reproduced every certificate byte for byte (E-evand-gradec-local-minima-233-replay, think-mtah)". V-evand-gradec-replay is already registered (this PR); drop "No evidence entry cites it until..." from its note.
-2. frontier/results.yaml T-261: add the evidence id; set confirmation C1 to C3; add the receipt and packing/devtools/evand_gradec_replay.py to artifacts, and the receipt and packing/tests/test_evand_gradec_replay.py to controls. Rewrite composition: C3 rests on the same-implementation replay, and the review's checker stays a second route beside it (T-225/T-229, review A1 of #751). Rewrite the claim's sentence "the C3 replay is gradec.py's own over all 233 (think-mtah)". In next_rung, drop the hold and keep C-1's adoption. Drop the unfinished confirmation.
-3. devtools/certificate-citation-deferrals.yaml: add a deferral for the new id (results [T-261], bead and blocked_on think-8xy2), as for the review check.
-4. campaign/result-requests.yaml: rewrite #545's grade-C summary ("C3 waits on a separate replay lane...") and drop think-mtah from its validation list.
-5. The evidence ids and artifacts are part of T-261's identity binding, so add an `amendments` entry to result/t-261.html's row (site-urls, development.md, Adding or Moving a URL).
-6. Status. **Option 1:** T-261 reads confirmed at V3/C3, and tests/test_site_result_filters.py's incomplete list becomes [t-007]. **Option 2:** first change devtools/result_status.py rule 1, its tests and epistemics.md, so that a defect a review repaired stays open whatever the rung. T-261 then stays incomplete, and the #545 follow-up must say that the replay no longer clears the label.
-7. Regenerate the views (render_results, render_evidence_inventory, render_verifiers, the synopsis headline). Re-measure the four papers that read results.yaml and add a no-public-change record if they are unchanged. Re-pin DATA_REVISION.
+**To apply once answered** (think-mtah's done-when; about an hour, from packing/):
+1. **frontier/evidence.yaml.**
+   - Insert the entry below before `  - id: E-evand-gradec-n10-recompute`.
+   - In **E-evand-gradec-local-minima-233-report**'s limitations, replace "C3 waits on entering gradec.py's replay of all 233, run on 1 November with its receipt retained (receipts/gradec-replay-233.json there) and held for think-xyek (think-mtah)" with "gradec.py's own replay of all 233 reproduced every certificate byte for byte (E-evand-gradec-local-minima-233-replay, think-mtah)".
+   - In frontier/verifiers.yaml, drop "No evidence entry cites it until..." from V-evand-gradec-replay's note.
+2. **frontier/results.yaml, T-261.**
+   - Add the evidence id, and set confirmation C1 to C3.
+   - Add the receipt and packing/devtools/evand_gradec_replay.py to artifacts, and the receipt and packing/tests/test_evand_gradec_replay.py to controls.
+   - In composition, replace "C3 waits on entering gradec.py's replay of all 233, run on 1 November and held for think-xyek (think-mtah)" with: C3 rests on that same-implementation replay, and the review's checker stays a second route beside it (T-225/T-229, review A1 of #751).
+   - Rewrite the claim's sentence "the C3 replay is gradec.py's own over all 233 (think-mtah)".
+   - In next_rung, drop the hold and keep C-1's adoption. Drop the unfinished confirmation.
+3. **devtools/certificate-citation-deferrals.yaml.** Add a deferral for the new id (results [T-261], bead and blocked_on think-8xy2), as for the review check.
+4. **campaign/result-requests.yaml.** In #545's grade-C summary, replace "C3 waits on entering gradec.py's replay of all 233, run on 1 November (11.0 CPU-hours, think-mtah) with its receipt retained ... and held for the owner's question think-xyek" with the replay's result, and drop think-mtah from its validation list.
+5. **site-urls.** The evidence ids and artifacts are part of T-261's identity binding, so add an `amendments` entry to result/t-261.html's row (development.md, Adding or Moving a URL). `devtools.site_urls --check` must report 0 failures.
+6. **The rule.** The done-when is that rule 1 and epistemics.md say which option holds, and T-261's status follows it. Today seven other results cite a defect-found read at C3 and read *confirmed*, their defects passed over by replays: T-004, T-005, T-006 and T-008 (E-bentz-2010-proof, no reviews), T-058 (E-wand125-tools-ceiling-report), T-059 (E-wand125-tools-n11-row-report), and T-060 (E-n011-global-optimality-report, latest review `accepted`). T-007 (E-nagamochi-lower, C1, no reviews) and T-261 read *incomplete*.
+   - **Option 1, the record's repair counts.** This is a rule change too.
+     - Change devtools/result_status.py's open_issues rule 1: a defect-found read is dispositioned by a later review of the same result whose verdict is `defects-resolved` or `accepted`, dated on or after the read, as a passing replay already does.
+     - Add a case to tests/test_result_status.py, beside test_a_defect_a_read_found_makes_a_result_incomplete_until_a_replay_passes.
+     - Change tests/test_site_result_filters.py's incomplete list, and its comment near line 273, to [t-007].
+     - Rewrite epistemics.md's Status section (line 398).
+     - T-261 then reads *reviewed* at C1 even before step 1, and *confirmed* after it. Check that T-007 stays incomplete and the seven stay confirmed; T-060's `accepted` review changes nothing there.
+   - **Option 2, only the source's adoption counts.** Rule 1 must not simply drop its C2 gate, which would turn all seven incomplete. Key it on the recorded close instead.
+     - Add a close state to external_review.state in frontier/frontier-evidence.schema.yaml (the enum at line 325, for example `defect-resolved-at-source`), with the close's date and source, and say what it means in the schema's description.
+     - Make rule 1 hold a defect-found read open, whatever the rung, while the result's latest review ends `defects-resolved` (a review repaired the defect, rather than a replay passing over it) and the read has not moved to the close state. Otherwise keep the C2 gate.
+     - Add cases to tests/test_result_status.py: a defects-resolved review at C3 stays incomplete; the close state clears it; a defect-found read at C3 with no such review stays confirmed.
+     - The incomplete list in test_site_result_filters.py stays [t-007, t-261]. epistemics.md's Status section says so.
+     - Check that T-007 and T-261 read incomplete and the seven confirmed. The #545 follow-up in think-6gti must then say that the replay no longer clears the label.
+7. **Views and release.** Regenerate the views (render_results, render_evidence_inventory, render_verifiers, the synopsis headline). Re-measure the four papers that read results.yaml, evidence.yaml and result-requests.yaml, and add a no-public-change record if they are unchanged. Re-pin DATA_REVISION.
 
 The entry was checked against frontier-evidence.schema.yaml, and its scope against the receipt's and T-261's 233 counts:
 
@@ -90,8 +110,16 @@ The entry was checked against frontier-evidence.schema.yaml, and its scope again
       square moved by 1e-30, the right-wall rows dropped, the Hessian negated) were each
       refused. 39,646 CPU-seconds for the 233 runs (11.0 CPU-hours, 1.04 times the build
       times the release's logs print), the longest n = 313 at 1,839; under the 40 CPU-hour
-      cap. The ledger predates records naming their environment and was adopted once with
-      --adopt-unstamped (lane L19), which the receipt lists.
+      cap. The 236 runs were made by L14's first driver, launched at 15:48:30Z from its
+      working tree before 76d72c594 committed devtools.evand_gradec_replay (16:07:48Z), so
+      Git does not hold the exact bytes that ran: it held each run to the wall timer only
+      (no RLIMIT_CPU), counted only recorded CPU against the cap, and stamped no environment
+      on its records. The tool on main adopted the 236 records once with --adopt-unstamped
+      (lane L19) and wrote the receipt, whose cap_rule, platform, machine and ran_from
+      describe that invocation, not the runs; the adopted environment is asserted
+      (environment.adopted_basis), with the evidence in review A of #875: no file of the
+      virtual environment is newer than the runs' start, and the interpreter probes at the
+      runs' end and at the adoption agree.
 
       It shows that each published certificate is what gradec.py computes from the published
       inputs: a reproduction with the producer's code in full, not a check that Theorem C or
