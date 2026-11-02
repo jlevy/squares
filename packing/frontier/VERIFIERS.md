@@ -253,7 +253,7 @@ second implementation agrees.
 | [`V-configuration-fact-replay`](#v-configuration-fact-replay) | devtools.configuration_fact_replay | Squares Project (Levy) | first-party | premises | 4 | 2 |
 | [`V-ryu-quarter-cube-review-constants`](#v-ryu-quarter-cube-review-constants) | q_constants.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-ryu-v12-lemma49-review-check`](#v-ryu-v12-lemma49-review-check) | r_lemmas_check.py (with iv.py and checks.py) | Squares Project (Levy) | first-party | decides | 0 | 0 |
-| [`V-ryu-quarter-cube-review-qcc`](#v-ryu-quarter-cube-review-qcc) | qcc_predicates.py (with iv.py, qmodel.py and c_constants.py) | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-ryu-quarter-cube-review-qcc`](#v-ryu-quarter-cube-review-qcc) | qcc_predicates.py (with iv.py, qmodel.py, c_constants.py and checks.py) | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-ryu-quarter-cube-review-text-checks`](#v-ryu-quarter-cube-review-text-checks) | q_quotes.py and c_citations.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 
 ## By Program
@@ -4509,11 +4509,11 @@ No evidence entry names it yet.
 
 ### `V-ryu-quarter-cube-review-qcc`
 
-**qcc_predicates.py (with iv.py, qmodel.py and c_constants.py)** · Squares Project (Levy) · first-party · decides · Python · interval-certified
+**qcc_predicates.py (with iv.py, qmodel.py, c_constants.py and checks.py)** · Squares Project (Levy) · first-party · decides · Python · interval-certified
 
 Decides again, on the review's own exact-rational intervals and formulas, each of the 108 predicates of cases/asymptotic/quarter_cube_constants.py under the names that file gives them, after parsing its input rows with ast (without importing or running it) and holding them to the review's own transcription of the two preprints. All 108 hold.
 
-- Source: [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qcc_predicates.py`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qcc_predicates.py)
+- Source: [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qcc_predicates.py`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qcc_predicates.py), [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/c_constants.py`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/c_constants.py), [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/iv.py`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/iv.py), [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qmodel.py`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qmodel.py), [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/checks.py`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/checks.py)
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md)
 - Independence: its authors read mathematics, proof-text, specification, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of #414 (lane L23, bold-ritchie-l23, think-yf8j), strong sub-agent tier (tbd-strong-max) at maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Written after the review's findings were committed (41dffb13b), with the maintained checker of the 8 October review read as the specification of the 108 predicates; it shares no code with that checker (mpmath intervals there, exact rationals here) and none with the source's programs, which were never read.
@@ -4530,7 +4530,7 @@ Two text checks of the 2 November 2026 review: q_quotes.py finds each of the qua
 - Source: [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/q_quotes.py`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/q_quotes.py), [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/c_citations.py`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/c_citations.py)
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md`](../../packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md)
-- Note: Written and run on 2 November 2026 for docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md (its F2 and the citation table). No evidence entry cites them.
+- Note: Written and run on 2 November 2026 for docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md (its F2, and its check that the cube-root preprint cites the quarter-power preprint's numbering correctly). No evidence entry cites them.
 
 No evidence entry names it yet.
 

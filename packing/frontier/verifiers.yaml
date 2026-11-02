@@ -6699,7 +6699,7 @@ verifiers:
       docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md (its F3 and
       F8). No evidence entry cites it; v1.2's results have no register entry.
   - id: V-ryu-quarter-cube-review-qcc
-    program: qcc_predicates.py (with iv.py, qmodel.py and c_constants.py)
+    program: qcc_predicates.py (with iv.py, qmodel.py, c_constants.py and checks.py)
     author: Squares Project (Levy)
     provenance: first-party
     language: [Python]
@@ -6713,6 +6713,10 @@ verifiers:
       hold.
     source:
       - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qcc_predicates.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/c_constants.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/iv.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qmodel.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/checks.py
     independence_record: packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md
     independence:
       read: [mathematics, proof-text, specification, earlier-review]
@@ -6758,5 +6762,6 @@ verifiers:
     independence_record: packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md
     note: >-
       Written and run on 2 November 2026 for
-      docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md (its F2 and
-      the citation table). No evidence entry cites them.
+      docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md (its F2,
+      and its check that the cube-root preprint cites the quarter-power preprint's numbering
+      correctly). No evidence entry cites them.
