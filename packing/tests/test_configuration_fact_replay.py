@@ -223,9 +223,11 @@ def test_the_297_witness_names_the_public_copy() -> None:
     assert built["source"]["path"].endswith("source/s297-exact-configuration/n297.minpoly.json")
 
 
-@pytest.mark.skipif(
-    not replay.receipt_path(297, S297).exists(), reason="route 1 at 297 has not landed"
-)
 def test_route_one_receipt_holds_the_297_witness() -> None:
     record = replay.check_route1(297, packet=S297)
-    assert record["cases"][0]["exact_verify"]["verification_passed"] is True
+    verdicts = [case["exact_verify"] for case in record["cases"]]
+    assert [verdict["verification_passed"] for verdict in verdicts] == [True, False, False]
+    assert [kind for verdict in verdicts[1:] for kind, _ in verdict["failures"][:1]] == [
+        "overlap",
+        "container",
+    ]

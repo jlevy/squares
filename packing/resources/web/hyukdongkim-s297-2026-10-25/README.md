@@ -14,7 +14,7 @@ $S^*$ from T-174’s own retained certificate, with this repository’s tools. D
 configuration exactly is the next step, which exceeded this import’s CPU cap. **Route B**
 decides the author’s file. On 31 October the author served the same bytes from a public
 copy, and since 1 November 2026 the packet keeps the archive’s six files under `source/`
-(think-ozx8).
+(think-ozx8), decided the same day on two exact routes.
 
 ## Source and Credit
 
@@ -121,8 +121,14 @@ certificate to the certificate’s, and wrote the six members byte-identical und
   replaced by square 0. Run on 1 November 2026.
 - **route 1** (`receipts/algebraic-route1-n297.json.xz`): `sqpack.witness.exact_verify`
   over $K$ on the configuration as a centre-basis Witness/v2, with the duplicate-square
-  and outside-container controls, each job in its own child process. Queued behind the
-  lane’s gradec replay on 1 November 2026; not yet decided.
+  and outside-container controls, each job in its own child process. The reader takes
+  the angle parameter of the 190 squares the file states as the empty list as zero, as
+  `verify_exact.py` does, and the receipt lists them. The positive was accepted with all
+  43,956 pairs decided; a duplicated square was refused on overlap, and a square moved
+  outside the box on containment. The three jobs took 1,908, 1,813 and 1,909 CPU-seconds,
+  5,630 in all, at two processes under `nice` on a shared four-core host, on 1 November
+  2026 (`--packet s297 route1 --jobs-dir DIR --workers 2`). `check` admits the receipt
+  against the rebuilt witness, and `check --replay` decides the three jobs again.
 
 None of the author’s own programs (`check_field_packing.py`, `controls.py`,
 `distance_to_record.py`) was run here; they are kept as text.
@@ -137,7 +143,7 @@ None of the author’s own programs (`check_field_packing.py`, `controls.py`,
 | `facts/s297-polynomial.json` | $P_{297}$, highest degree first, and the printed side |
 | `facts/route-a-n297.json.gz` | Route A’s exact configuration, a centre-basis Witness/v2 over $K$ |
 | `receipts/contacts.json`, `solve.json`, `field.json`, `build.json` | Route A’s receipts, one a step |
-| `receipts/side-check.json`, `route2-verify-exact.json` | Route B’s side check and its `verify_exact.py` run with controls |
+| `receipts/side-check.json`, `algebraic-route1-n297.json.xz`, `route2-verify-exact.json` | Route B’s side check, its `exact_verify` jobs, and its `verify_exact.py` run, each route with its controls |
 | `route-a.sh` | The commands that wrote them, from `packing/` |
 
 <!-- This document follows common-doc-guidelines.md.
