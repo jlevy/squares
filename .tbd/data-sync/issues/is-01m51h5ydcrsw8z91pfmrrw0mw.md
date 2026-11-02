@@ -3,14 +3,18 @@ type: is
 id: is-01m51h5ydcrsw8z91pfmrrw0mw
 title: Owner decisions pending from the 2026-10-15/16 intake passes (each blocks a reply or a record change)
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 15
+version: 17
+delegate: bold-ritchie-l30
 labels: []
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
+hold: null
+hold_until: null
 created_at: 2026-10-16T04:57:59.468Z
-updated_at: 2026-10-17T17:39:02.576Z
+updated_at: 2026-11-02T14:38:19.536Z
+started_at: 2026-11-02T14:37:15.698Z
 ---
 Collected by the coordinator 2026-10-16 so another agent can pick them up. Each item names the bead that owns it; act only on the owner's word.
 1. #574 (BuddenPing, 148 certificate refinements, a PR): merge it and adopt T-174? (think-9v2k). WARNING: adopting T-174 re-houses 35 counts (68, 84, 86, 88, 108, 126, 127, 130, 131, 132, 172, 181, 182, 199, 206, 208, 209, 210, 228, 238, 239, 240, 259, 266, 267, 268, 270, 273, 292, 297, 301, 305, 306, 307, 308); since #636 the gate will fail unless each is re-regularized or added to PENDING_ALLOWED with a bead (think-g3q7 documents the step). The #574 reply is held until the decision.
@@ -54,3 +58,5 @@ Owner, 16 Oct ~20:45Z: 211 row-7 view: admit (see think-r3cl). Owner, ~20:40Z: '
 Owner, 17 Oct about 04:00Z (AskUserQuestion): merge #660 with both OR-18 clarifications: (1) sizes count as Git stores them; (2) comparing with the base branch through git is standard practice. Answer: 'Merge with both (Recommended)'. #660 merged at 804eff369 (site v0.7.25).
 
 Owner answers, 17 Oct about 08:00Z (AskUserQuestion): (1) #446's 18 fine-net lower bounds: 'All 18, autonomously (Recommended)': run all, in batches behind the other lanes, retaining the candidates by the OR-18 size rule. (2) #664 credit: 'Daniel's, crediting #561 (Recommended)': a new packing found by Evan Daniel, recorded as refining Couzo's #561 (and SQUISH), both credited as its origin. (3) #432 final reply: 'Post it (Recommended)', posted 17:45Z. (4) think-drze, the 9 decided drawings (146, 154, 156, 176, 211, 237, 264, 303, 304): 'Accept as drawn (Recommended)'.
+
+2026-11-02 bold-ritchie-l30 (intake lane L30, epic think-3guf; PR #886, branch claude/bold-ritchie-xo28us-l30): items 16 and 25 no longer block T-184 or T-191. zm_mixed.py's refusals at the source's own depth limit of 24 now exist, so no ruling on the review's depth-12 pair is needed for them. A deep hole never finishes at depth 24 because zm_mixed.py splits a refused box to the limit; a shallow one does. `devtools.replay_evand_zmx2` gained `scale` and a `zm-control` command, and four controls ran with verify.sh's flags (commit 3e990b69a), each the published cover VERIFIED-D4 and every mass scaled by the largest P/50000 that puts a low pose below one NOT VERIFIED on the same cell: s(76) 49979/50000 on [7/2,71/20]x[1/2,11/20]x[0,1/32] (219 boxes vs 999 with 130 uncertified) and 49301/50000 on job 056's cell (11 vs 433/60); s(95) 49831/50000 on [7/2,71/20]x[5/2,51/20]x[0,1/32] (147 vs 811/9) and 49207/50000 on job 153's cell (37 vs 2,789/540). tests/test_replay_controls.py holds all four pairs (receipts in each packet's receipts/controls/n76_zm_* and n95_zm_*). About 0.5 CPU-hours with the probes. check_results derives C3 for both and they declare it (commit 101002a16); the two certificate-citation deferrals named exactly this condition, so n-076 and n-095 adopt the values and both cases are proved. Item 16 stays open as a general question (a refusal at a reduced limit as a stage 4 control) only if another entry needs it; item 25's rule question is moot for these two. Not done: s(96) >= 10 follows from s(95) = 10 by monotonicity (and the cover's mass is below 96 as well), which would also close n = 96 (T-081 reports it); widening T-191's scope or registering that is a records decision for the coordinator.

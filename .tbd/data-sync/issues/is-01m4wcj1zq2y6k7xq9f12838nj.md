@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
 status: open
 priority: 1
-version: 10
+version: 13
 delegate: null
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-10-31T05:55:10.976Z
+updated_at: 2026-11-02T14:39:18.179Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.
@@ -108,3 +108,15 @@ Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-me
 
 **Intake-watch read for the records PR:** bengreff/s76-certificate read_through 06993982e83dba37ca12121bd876396a15571fcb, read_on 2026-10-15, bead think-osvq (the second route, owned until a packet pins it).
 2026-10-31 bold-ritchie-l5 (intake pass of 31 October, epic think-3guf, lane L5): stage 2 of the second route done. The packet bengreff-s76-second-route-2026-10-14 pins bengreff/s76-certificate at 06993982e83dba37ca12121bd876396a15571fcb (still the head, full clone 2026-10-31T05:07Z) and retains the twelve files that commit changes (README.md, SHA256SUMS, verify.sh, records/toolchain.txt, tools/check_full.py and records/zm_full/, the two .gz files as published; acquire_source --check passes). The evidence update: E-bengreff-594-cover-report's limitations name the route as reported and not run or audited here; a source-coverage entry names the packet. No rung moves. Nothing was run but sha256sum and a line count (roots.jsonl.gz: 129,601 lines; both .gz digests equal the tree's SHA256SUMS). What the commit reports: the full pass's own verdict is NOT VERIFIED (6 boxes in one root R = [27/20, 7/5] x [13/10, 27/20] x [1/4, 9/32]), and R certifies alone at depth 34 (13,767 boxes); 651,314 CPU-s at the source, the rerun 2,661 CPU-s. Still open here: the records audit (check_full.py and an exact reader of roots.jsonl.gz, minutes), the rerun of R (about 45 CPU-minutes, under the cap), and the full pass (about 155 to 181 CPU-hours, held over the 40 CPU-hour cap). Branch claude/bold-ritchie-xo28us-evidence, draft PR #850.
+
+2026-11-02 bold-ritchie-l30 (intake lane L30, epic think-3guf; PR #886, branch claude/bold-ritchie-xo28us-l30): T-184 rises to V3/C3 and n = 76 is proved (commits 3e990b69a controls, 101002a16 records). A follow-up on #594 is owed once #886 merges and main plus the deployed site agree (stage 7); not posted. Draft, to be checked against `check_requests --draft 594` rendered from main after the merge:
+
+> @bengreff, a follow-up to [our comment of 26 October](https://github.com/jlevy/squares/issues/594#issuecomment-6412988864), which gave your result as V3/C1, reviewed and pending adoption. With #886 merged, it has moved on `main`:
+>
+> - **[T-184](https://jlevy.github.io/squares/result/t-184.html), V3/C3, confirmed:** s(76) = 9, the lower half by your mixed cover and the upper half by the 9 × 9 grid, credited *Greff after Daniel, wand125*. It is confirmed, reproduced with the producer's code: Evan Daniel's `zmx2` and `zm_mixed.py`, run here from the bytes you pin and read as one decision over the D4 region.
+> - **What held it at C1 is done.** Stage 4 asks that each checker refuse two mutated certificates. `zmx2` already did. With your `verify.sh` flags and its depth limit of 24, `zm_mixed.py` now refuses two covers with every mass scaled just below one at a low pose (by 49979/50000 and by 49301/50000), each on a cell where it certifies your cover with the same flags; a test keeps both pairs. No ruling on the review's depth-12 refusal was needed.
+> - **The case page.** [n = 76](https://jlevy.github.io/squares/cases/76.html) now adopts the value: s(76) = 9 is proved there, and wand125's 1793/200 is superseded.
+> - **Your second route** at `06993982` is retained in its own packet as reported; it is not run or audited here.
+> - **Next, for V4/C4:** a second adversarial review by a distinct reviewer and a human oversight record.
+>
+> **On `main`.** [`packing/frontier/RESULTS.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/RESULTS.md), [`packing/frontier/n-076.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/n-076.md), [the packet](https://github.com/jlevy/squares/blob/main/packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md).

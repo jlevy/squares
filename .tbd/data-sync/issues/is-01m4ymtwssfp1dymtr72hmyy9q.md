@@ -5,14 +5,18 @@ title: "Validation (#610, think-ribz): zmx2 --full and zm_mixed.py on its failin
 kind: task
 status: open
 priority: 3
-version: 1
+version: 4
+delegate: null
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
 created_at: 2026-10-15T02:04:08.377Z
-updated_at: 2026-10-15T02:04:08.377Z
+updated_at: 2026-11-02T14:38:33.442Z
+started_at: 2026-11-02T14:37:16.757Z
 ---
 Priced validation item for the #610 import (think-ribz): the unreduced route, zmx2 cert --full over the whole pose space of the s(95) cover, with zm_mixed.py on the sub-roots its failing roots leave. Not run, by the coordinator's rule of 15 October: run it only if reaching T-184's rung for s(95) needs it.
 
@@ -31,3 +35,7 @@ The other precedent differs: T-066's C3 replay for s(59) (E-n059-wand125-mixed-c
 - Done when: every root of the unreduced pose space is certified by zmx2 --full or by zm_mixed.py on sub-roots that tile it exactly, read by a repository tool, receipts committed; recorded as a second route beside the rung.
 - What it would raise: no rung by #594's precedent. It removes the dependence on the D4 reduction lemma, as T-066's replay did for s(59).
 - Machine note: CPU only; zmx2 is multithreaded, run it at one or two threads beside other lanes.
+
+## Notes
+
+2026-11-02 bold-ritchie-l30 (intake lane L30, epic think-3guf; PR #886): not run. T-191 reached C3 without it: the remaining stage 4 work was zm_mixed.py's mutated-certificate controls, which ran at the source's depth limit of 24 (commit 3e990b69a; see think-l3oo), and C3 needs one complete replay, which T-191 already has. This item stays what it was: an optional second sweep (zmx2 --full, about 0.65 CPU-h, then zm_mixed.py on the sub-roots it leaves, about 5.3) that would take the D4 reduction off the zmx2 part and raise no rung. It also needs an unreduced composite reader (W7). Released back to open for whoever takes it.
