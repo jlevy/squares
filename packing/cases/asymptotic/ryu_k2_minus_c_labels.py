@@ -634,10 +634,11 @@ def _covered(start: Any, stop: Any, holes_lo: list[Any], holes_hi: list[Any]) ->
     return (current > stop) | (start > stop)
 
 
-def circular_count(kept: IntArray, level: int) -> int:
+def circular_count(kept: IntArray, level: int, separation: int | None = None) -> int:
     """The largest number of points pairwise at least g apart in the union of the kept
-    closed cells of 2^-level turn, exactly, in units of 2^-64 turn."""
-    g = constants().separation
+    closed cells of 2^-level turn, exactly, in units of 2^-64 turn. ``separation``
+    replaces g only for the negative control that halves it."""
+    g = constants().separation if separation is None else separation
     cells = 1 << level
     if len(kept) == 0:
         return 0
@@ -689,7 +690,9 @@ def _greedy(runs: list[tuple[int, int]], g: int) -> int:
         count += 1
 
 
-def bounds_by_level(q: Quantities, stop_at: int | None = None) -> list[tuple[int, int]]:
+def bounds_by_level(
+    q: Quantities, stop_at: int | None = None, separation: int | None = None
+) -> list[tuple[int, int]]:
     """Upper bounds of U(I) over the box, one per level of the direction grid, as
     (level, bound), from the coarsest; with ``stop_at`` it stops at the first bound at
     most that. Each level refines the cells the previous one kept, so the bounds never
@@ -703,7 +706,7 @@ def bounds_by_level(q: Quantities, stop_at: int | None = None) -> list[tuple[int
         for i in range(n):
             mask = q.kept_cells(i, level, cells[i])
             cells[i] = cells[i][mask]
-            total += circular_count(cells[i], level)
+            total += circular_count(cells[i], level, separation)
         found.append((level, total))
         if stop_at is not None and total <= stop_at:
             break
@@ -712,12 +715,14 @@ def bounds_by_level(q: Quantities, stop_at: int | None = None) -> list[tuple[int
     return found
 
 
-def closed_bound(q: Quantities, threshold: int) -> tuple[int, int] | None:
+def closed_bound(
+    q: Quantities, threshold: int, separation: int | None = None
+) -> tuple[int, int] | None:
     """An upper bound of U(I) over the box that is at most ``threshold``, with the level
     of the direction grid that reached it, or None if no level does."""
     if q.e_ii() + q.w_i() > threshold:
         return None
-    level, total = bounds_by_level(q, stop_at=threshold)[-1]
+    level, total = bounds_by_level(q, threshold, separation)[-1]
     return (total, level) if total <= threshold else None
 
 
@@ -744,7 +749,11 @@ class Verdict:
 
 
 def certify(
-    box: Box, allowed: frozenset[str], threshold: int = THRESHOLD, budget: int = MAX_PIECES
+    box: Box,
+    allowed: frozenset[str],
+    threshold: int = THRESHOLD,
+    budget: int = MAX_PIECES,
+    separation: int | None = None,
 ) -> Verdict:
     """Decide the box by bisection, each piece by one of the allowed labels."""
     verdict = Verdict(certified=True)
@@ -760,7 +769,7 @@ def certify(
             verdict.leaves["nowall"] += 1
             continue
         if "closed" in allowed:
-            found = closed_bound(q, threshold)
+            found = closed_bound(q, threshold, separation)
             if found is not None:
                 verdict.leaves["closed"] += 1
                 verdict.max_bound = max(verdict.max_bound, found[0])
@@ -995,6 +1004,247 @@ def summarize(out: Path) -> dict[str, Any]:
     }
 
 
+Point = tuple[Fraction, Fraction]
+
+
+@dataclass(frozen=True)
+class ExactBounds:
+    """Rational bounds of the constants, for checking witnesses in exact arithmetic."""
+
+    lam_sq_lo: Fraction
+    rho1_sq_hi: Fraction
+    wall_lo: Fraction
+    cos_gamma0_lo: Fraction
+
+
+@cache
+def exact_bounds() -> ExactBounds:
+    iv.prec = PREC_BITS
+    d = iv.mpf(1) / 10000
+    lam_sq = (d + iv.sqrt(2)) ** 2
+    lam_sq_lo, _ = _ends(lam_sq)
+    _, rho1_sq_hi = _ends((d + iv.sqrt(2) / 2) ** 2 + iv.mpf(1) / 4)
+    wall_lo, _ = _ends(d + iv.sqrt(2) / 2)
+    cos_lo, _ = _ends(1 - 1 / (2 * lam_sq))
+    return ExactBounds(lam_sq_lo, rho1_sq_hi, wall_lo, cos_lo)
+
+
+def _dot(a: Point, b: Point) -> Fraction:
+    return a[0] * b[0] + a[1] * b[1]
+
+
+def _cross(a: Point, b: Point) -> Fraction:
+    return a[0] * b[1] - a[1] * b[0]
+
+
+def _sq(a: Point) -> Fraction:
+    return _dot(a, a)
+
+
+def _minus(a: Point, b: Point) -> Point:
+    return (a[0] - b[0], a[1] - b[1])
+
+
+def angle_within(c: Point, low: float, high: float) -> bool:
+    """Whether the angle of ``c`` lies in [low, high], exactly, for an interval shorter
+    than pi: c is counter-clockwise of low's direction and clockwise of high's, by the
+    sign of the cross products over the outward enclosures of cos and sin."""
+    if low == high:
+        if low != 0.0:
+            msg = "only the point interval at angle 0 is supported"
+            raise ValueError(msg)
+        return c[1] == 0 and c[0] > 0
+    if not high - low < 3.0:
+        msg = "the sector test needs an interval shorter than pi"
+        raise ValueError(msg)
+    c_lo, c_hi, s_lo, s_hi = (Fraction(v) for v in angle_trig(low))
+    after_low = min(cos * c[1] - sin * c[0] for cos in (c_lo, c_hi) for sin in (s_lo, s_hi))
+    c_lo, c_hi, s_lo, s_hi = (Fraction(v) for v in angle_trig(high))
+    before_high = min(c[0] * sin - c[1] * cos for cos in (c_lo, c_hi) for sin in (s_lo, s_hi))
+    return after_low >= 0 and before_high >= 0
+
+
+def in_box(record: dict[str, Any], centres: list[Point], h: Fraction | None) -> bool:
+    """Whether a rational configuration lies in a box record (2 pi extended), exactly."""
+    box = Box.from_record(record)
+    if len(centres) != box.n or (h is None) != (box.h is None):
+        return False
+    for i, c in enumerate(centres):
+        r_sq = _sq(c)
+        if not Fraction(box.r_lo[i]) ** 2 <= r_sq <= Fraction(box.r_hi[i]) ** 2:
+            return False
+        if not angle_within(c, float(box.t_lo[i]), float(box.t_hi[i])):
+            return False
+    return h is None or (box.h is not None and box.h[0] <= h <= box.h[1])
+
+
+def witness_lower_bound(
+    centres: list[Point],
+    h: Fraction | None,
+    outer: list[list[Point]],
+    cos_sq_separation_lo: Fraction,
+) -> dict[str, Any]:
+    """Exactly check a configuration and lower-bound its U(I).
+
+    ``outer[i]`` lists vectors w from c_i; each must give an outer centre x = c_i + w
+    with 1 <= |w| < Lambda, |x| > rho1, p in R(c_i, x), |x - c_j| >= 1 for the other
+    inner centres and, with a side, x_y >= -h + 1/2, and the directions of the vectors
+    must be pairwise separated: w_a . w_b <= 0, or (w_a . w_b)^2 <= s |w_a|^2 |w_b|^2
+    for the given lower bound s of the squared cosine of the separation. Then D_i* is
+    at least their number. E_II and W_I are lower-bounded by the pairs and centres that
+    certainly qualify."""
+    bounds = exact_bounds()
+    n = len(centres)
+    admissible = all(
+        _sq(_minus(centres[i], centres[j])) >= 1 for i in range(n) for j in range(i + 1, n)
+    ) and (h is None or all(c[1] + h >= Fraction(1, 2) for c in centres))
+    domain = all(Fraction(1, 4) < _sq(c) < bounds.rho1_sq_hi for c in centres)
+    e_ii = sum(
+        1
+        for i in range(n)
+        for j in range(i + 1, n)
+        if _sq(_minus(centres[i], centres[j])) < bounds.lam_sq_lo
+    )
+    w_i = 0
+    if h is not None:
+        w_i = sum(
+            1
+            for c in centres
+            if abs(c[0]) <= Fraction(1, 2) and c[1] >= 0 and c[1] + h < bounds.wall_lo
+        )
+    counts = []
+    for i, c in enumerate(centres):
+        good = []
+        for w in outer[i]:
+            x = (c[0] + w[0], c[1] + w[1])
+            ok = 1 <= _sq(w) < bounds.lam_sq_lo and _sq(x) > bounds.rho1_sq_hi
+            ok = ok and _dot(c, w) <= 0 and 4 * _cross(c, w) ** 2 <= _sq(w)
+            ok = ok and all(_sq(_minus(x, centres[j])) >= 1 for j in range(n) if j != i)
+            ok = ok and (h is None or x[1] >= Fraction(1, 2) - h)
+            good.append(ok)
+        separated = all(
+            _dot(a, b) <= 0 or _dot(a, b) ** 2 <= cos_sq_separation_lo * _sq(a) * _sq(b)
+            for k, a in enumerate(outer[i])
+            for b in outer[i][k + 1 :]
+        )
+        counts.append(len(outer[i]) if all(good) and separated else 0)
+    return {
+        "admissible": admissible,
+        "in_domain": domain,
+        "E_II_at_least": e_ii,
+        "W_I_at_least": w_i,
+        "D_at_least": counts,
+        "U_at_least": e_ii + w_i + sum(counts),
+    }
+
+
+def slit_configuration(*, half_separation: bool) -> tuple[list[Point], list[list[Point]]]:
+    """The slit configuration c = +-(1/2 + 10^-9, 0) and outer vectors from c_1 = (a, 0)
+    in the two arcs (90, 135] and [225, 270) degrees; c_2's are their mirror images."""
+    a = Fraction(1, 2) + Fraction(1, 10**9)
+    upper = [(Fraction(-1, 50), Fraction(6, 5)), (Fraction(-97, 100), Fraction(101, 100))]
+    if half_separation:
+        upper.insert(1, (Fraction(-1, 2), Fraction(6, 5)))
+    first = upper + [(x, -y) for x, y in reversed(upper)]
+    second = [(-x, y) for x, y in first]
+    return [(a, Fraction(0)), (-a, Fraction(0))], [first, second]
+
+
+def controls(budget: int = MAX_PIECES) -> dict[str, Any]:
+    """Four negative controls, each a claim that should fail, with its unperturbed form.
+
+    Each perturbed claim must be refused by `certify` under the same rules as the run,
+    and is shown false by a rational witness checked exactly; each unperturbed box must
+    be certified."""
+    sharp = read_list("bnb_n2_T9_0of1")[23]
+    inf_box = read_list("bnb_n2_T9_0of1")[0]
+    nowall_box = read_list("bnbw_n2_T9_0of1")[289]
+    widened_inf = json.loads(json.dumps(inf_box))
+    widened_inf["box"][1][2] = 4.71238898038469
+    widened_nowall = json.loads(json.dumps(nowall_box))
+    widened_nowall["h"][0] = 0.0
+    bounds = exact_bounds()
+    cos_sq = bounds.cos_gamma0_lo**2
+    cos_sq_half = (1 + bounds.cos_gamma0_lo) / 2
+    halved = constants().separation // 2
+    slit, outer = slit_configuration(half_separation=False)
+    _, outer_half = slit_configuration(half_separation=True)
+    inf_witness = [(Fraction(4, 5), Fraction(0)), (Fraction(16, 101), Fraction(-396, 505))]
+    nowall_witness = [
+        (Fraction(-53, 100), Fraction(13, 20)),
+        (Fraction(47, 100), Fraction(13, 25)),
+    ]
+    cases: list[dict[str, Any]] = []
+
+    def record(
+        name: str, claim: str, perturbed: Verdict, original: Verdict, **extra: Any
+    ) -> None:
+        cases.append(
+            {
+                "control": name,
+                "claim that should fail": claim,
+                "perturbed refused": not perturbed.certified,
+                "perturbed": perturbed.describe(),
+                "unperturbed certified": original.certified,
+                "unperturbed": original.describe(),
+                **extra,
+            }
+        )
+
+    sharp_box = Box.from_record(sharp)
+    original_sharp = certify(sharp_box, ALLOWED["closed"], THRESHOLD, budget)
+    witness = witness_lower_bound(slit, None, outer, cos_sq)
+    record(
+        "A: threshold 8 on the sharp box, bnb_n2_T9_0of1 line 24",
+        "E_II + W_I + sum D_i* <= 8 on the box",
+        certify(sharp_box, ALLOWED["closed"], 8, budget),
+        original_sharp,
+        witness={"in_box": in_box(sharp, slit, None), **witness},
+        witness_refutes=witness["admissible"] and witness["U_at_least"] > 8,
+    )
+    witness = witness_lower_bound(inf_witness, None, [[], []], cos_sq)
+    record(
+        "B: inf box bnb_n2_T9_0of1 line 1, angle 2 widened down from 7pi/4 to 3pi/2",
+        "no admissible configuration in the widened box",
+        certify(Box.from_record(widened_inf), ALLOWED["inf"], THRESHOLD, budget),
+        certify(Box.from_record(inf_box), ALLOWED["inf"], THRESHOLD, budget),
+        witness={
+            "in_widened_box": in_box(widened_inf, inf_witness, None),
+            "in_original_box": in_box(inf_box, inf_witness, None),
+            **witness,
+        },
+        witness_refutes=witness["admissible"] and in_box(widened_inf, inf_witness, None),
+    )
+    h = Fraction(1, 25)
+    witness = witness_lower_bound(nowall_witness, h, [[], []], cos_sq)
+    record(
+        "C: nowall box bnbw_n2_T9_0of1 line 290, h widened down to 0",
+        "no admissible configuration of the widened box has a side edge",
+        certify(Box.from_record(widened_nowall), ALLOWED["nowall"], THRESHOLD, budget),
+        certify(Box.from_record(nowall_box), ALLOWED["nowall"], THRESHOLD, budget),
+        witness={
+            "in_widened_box": in_box(widened_nowall, nowall_witness, h),
+            "in_original_box": in_box(nowall_box, nowall_witness, h),
+            **witness,
+        },
+        witness_refutes=witness["admissible"] and witness["W_I_at_least"] >= 1,
+    )
+    witness = witness_lower_bound(slit, None, outer_half, cos_sq_half)
+    record(
+        "D: the sharp box with the count's separation halved, gamma0/2",
+        "E_II + W_I + sum D_i* <= 9 with directions only gamma0/2 apart",
+        certify(sharp_box, ALLOWED["closed"], THRESHOLD, budget, separation=halved),
+        original_sharp,
+        witness={"in_box": in_box(sharp, slit, None), **witness},
+        witness_refutes=witness["admissible"] and witness["U_at_least"] > THRESHOLD,
+    )
+    passed = all(
+        case["perturbed refused"] and case["unperturbed certified"] and case["witness_refutes"]
+        for case in cases
+    )
+    return {"budget": budget, "passed": passed, "controls": cases}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n", 1)[0])
     commands = parser.add_subparsers(dest="command", required=True)
@@ -1009,7 +1259,16 @@ def main(argv: list[str] | None = None) -> int:
     summary = commands.add_parser("summarize", help="count the outcomes of a finished run")
     summary.add_argument("--out", type=Path, required=True)
     summary.add_argument("--receipts", type=Path, help="directory for the summary and rows")
+    checking = commands.add_parser("controls", help="run the four negative controls")
+    checking.add_argument("--receipts", type=Path, help="directory for controls.json")
     args = parser.parse_args(argv)
+    if args.command == "controls":
+        report = controls()
+        print(json.dumps(report, indent=2, default=str))
+        if args.receipts:
+            text = json.dumps(report, indent=2, default=str) + "\n"
+            _write(args.receipts / "controls.json", text)
+        return 0 if report["passed"] else 1
     if args.command == "price":
         report = price(args.sample, args.seed)
         head = {key: value for key, value in report.items() if key != "rows"}
