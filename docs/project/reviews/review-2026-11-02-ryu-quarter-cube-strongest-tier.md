@@ -27,7 +27,7 @@ the asymptotic register records them, under the stated conventions.
 The proofs are conditional on the imported lemmas of [R]. For Theorem A of Q and Theorem
 1.1 of C they also need [R]’s computer-assisted Lemma 4.10, whose per-box labelling is a
 separate obligation owned by think-k3tk (F3). No finding is a defect or a gap; there are
-seven notes.
+eight notes, the last found while comparing with the 8 October review.
 
 - Every step of both chains was re-derived (The Quarter-Power Chain, The Cube-Root
   Chain). So was every lemma of [R] they use, except two parts.
@@ -93,8 +93,8 @@ Questions are at the end.
 - For format only, `review-2026-11-01-filled-end-lemma.md` and
   `review-2026-10-31-couzo-843-130.md`.
 
-**Run.** Seven programs of my own (What I Ran).
-They read only the three TeX files.
+**Run.** Eight programs of my own (What I Ran).
+Seven read only the three TeX files; the eighth reads the maintained checker as data.
 None of the source’s programs was read or run: `k14_constants_check.py`, the cube-root
 packet’s three `check_table_*.py` and the v1.2 programs.
 
@@ -369,6 +369,7 @@ The remaining claims also hold:
 | F5 | note | note | register, the Q and C rows | The side conditions do not say that k² − M(k) is the limit of W(x) from below; the C row’s corollary says “the quarter-power coefficient 0.1” for the bound 0.1 k^{1/4} |
 | F6 | note | note | C L498–511 | The two liminf constants are reached by a limit; explicit parameters give finite thresholds 10^24 and 10^22 |
 | F7 | note | minor | Q source README L64, paper L5430 | Q names its repository github.com/squarepacker/k2-minus-c-power; it was released as squarepacker/k2-minus-c-quarter |
+| F8 | note | note | `review-2026-10-05-squarepacker-k2-minus-c.md` L165; `review-2026-10-08-quarter-cube-proof-chains.md` L78–79 | The earlier reviews state Lemma 4.9’s least margin as “at least 25.942°”; it is 25.9419054…° (added after the comparison; see there) |
 
 **F1. Proposition 2.1 and Theorem A13 rest on facts about [R]’s proofs.** Q applies the
 multiplicity bounds of [R, Lemmas 4.9 and 4.10] to three families of pairs, in Sections
@@ -467,6 +468,15 @@ squarepacker/k2-minus-c-quarter.
 C cites Q at the latter (C L579). I could not reach the former from this session, so
 whether it redirects is a question for the author.
 
+**F8. The earlier reviews’ margin for Lemma 4.9.** Found while comparing, after F1–F7
+were committed. The 5 October review of [R] v1.1 states that every class sequence with
+sum ≥ 15 fails Lemma 4.9’s angle conditions “by at least 25.942°”, and the 8 October
+review repeats the figure.
+The least excess is 25.9419054…°, attained at (3,5,2,5), so the figure is rounded the
+unsafe way in its last digit.
+[R] states “more than 25°” and needs only a positive margin, so no conclusion changes.
+The earlier reviews are left as written; this note records the correction.
+
 ## Questions for the Author
 
 1. **The all-pairs bound.** Would you state the form of [R, Lemmas 4.9 and 4.10] that
@@ -482,10 +492,75 @@ whether it redirects is a question for the author.
 
 ## Comparison with the 8 October Review
 
-*Written after the findings above, which were committed before the 8 October review, its
-addendum and `cases/asymptotic/quarter_cube_constants.py` were opened.*
+*Written after the findings above, which were committed (`41dffb13b`) before the 8
+October review, its addendum and `cases/asymptotic/quarter_cube_constants.py` were
+opened.* After that commit I read the maintained checker and its test, the 8 October
+review with its addendum, and the 5 October review’s paragraph on [R, Lemma 4.9].
 
-(Pending.)
+**Where the two reviews agree.** On every point both cover, they reach the same verdict.
+
+- Both chains are complete, conditional on [R]’s lemmas.
+  The K = 9 route keeps Lemma 4.10’s per-box limitation, and the K = 13 route keeps
+  Lemma 4.9’s finite check.
+- Proposition 2.1 is needed beyond the visibility graphs, and [R]’s proofs support it.
+  The 8 October review says Q “supplies” the extension.
+  F1 adds that Q supplies it from remarks about [R]’s proofs, which a statement-level
+  reading of [R] does not cover.
+- In Q, both reviews agree on:
+  - the hull slit, and the vertical transfer with its constants (χ > 0.99999849, the end
+    loss 1.0000016 δβ̄, the error terms 8.5·10^-10 and 1.22·10^-9);
+  - the separation of the floor and ceiling families by heights two apart;
+  - the valley width δ tan θ/cos θ, and at most four squares per pair for merges.
+- In C, both reviews agree on:
+  - choosing θ from W;
+  - τ0 − 1.0001β > τ1;
+  - the exact band measure for odd k;
+  - R⁺ with k/2 in place of k/2 − 1;
+  - condition (iv), essential for p = ½, with case 6 the tightest.
+    Its margin is 0.440 in W (the earlier “about 0.43” is the printed 34934.66 −
+    34934.23).
+  - the decimal B1 and L1, which move the last digits of two rows: cases 3 and 4.
+- The addendum’s figures are mine:
+  - threshold margins 0.0153398 and 0.0037524;
+  - D1 = 0.00864298 and 0.00557907;
+  - derivative-loss margins above 10.65 and 10.12.
+
+**The 108 predicates.** `qcc_predicates.py` reads the maintained file with `ast`,
+without importing or running it.
+Its inputs agree with my transcription of the primaries: two quarter rows, eight cube
+rows and the two overlaps’ six ceilings.
+All 108 predicates hold on my intervals: 2 rosters, 2 × 12 quarter conditions, 8 × 8
+cube conditions, and per overlap the seven ceilings and two asymptotic floors.
+The two implementations share no code.
+The maintained one works in mpmath’s interval context at 60 digits; mine works in exact
+rationals, with series written for this review.
+The maintained test asserts that all 108 hold; I did not run it.
+
+**What this review adds.**
+
+- Q’s Tables 4 and 5 and its Section 12.6, which the earlier review “read as source
+  claims”, now reproduce in full (118 checks).
+- Two premises the maintained checker takes as given are now decided:
+  - c_E = 41.933, which the addendum leaves as “a proof premise”, in both ranges of |Δ|
+    (41.93109… and 41.93124…);
+  - the sum 1185.5002 ≤ 1185.6 that makes C_Λ (and 1712.52 ≤ 1712.6).
+- Lemma 4.9’s finite check, which the earlier review inherited from the 5 October
+  enumeration and did not rerun, is enumerated afresh (F3).
+- Q’s quotations of [R] and C’s citations of Q are checked mechanically (F2).
+- Every displayed digit of Q’s Tables 2 and 3 is held in its stated rounding direction,
+  which the maintained checker does not do.
+- Explicit starting scales are given for both of C’s liminf constants.
+  The earlier review noted that the text gives none (F6).
+- F4, F5 and F7 are new.
+
+**Where they differ: one number.** The 5 October review of [R] v1.1 says every class
+sequence with sum at least 15 “fails by at least 25.942°”
+(`review-2026-10-05-squarepacker-k2-minus-c.md`, line 165). The 8 October review repeats
+the figure (line 78–79). The least excess is 25.9419054…°, at (3,5,2,5) and its
+rotations. My interval enumeration found it, and a float cross-check in mpmath at 60
+digits agrees.
+The safe statement is “at least 25.941°”. [R] claims only “more than 25°”,
+and its proof needs only a positive margin, so nothing depends on the digit (F8).
 
 ## Verdict
 
@@ -506,8 +581,10 @@ not a human oversight record.
 ## Independence and Disclosure
 
 - **Programs:** written for this review from the three TeX sources.
-  They import only Python’s standard library: `fractions`, `math`, `itertools`, `json`,
-  `hashlib`, `re`. The interval arithmetic and every elementary function are their own.
+  The deciding ones import only Python’s standard library: `fractions`, `math`,
+  `itertools`, `json`, `hashlib`, `re`, `ast`. The interval arithmetic and every
+  elementary function are their own.
+  Only the float cross-check of F8 uses mpmath.
   They share no code with the source’s `k14_constants_check.py` or `check_table_*.py`,
   which were never read or run, or with the maintained `cases/asymptotic/` checkers.
 - **Read before these findings:**
@@ -523,6 +600,10 @@ not a human oversight record.
   (`review-2026-10-08-quarter-cube-proof-chains.md`), its addendum,
   `cases/asymptotic/quarter_cube_constants.py`, `ryu_k2_minus_c_constants.py`, and the 8
   October review of [R] v1.2.
+- **Read after these findings were committed:** `quarter_cube_constants.py` and
+  `tests/test_quarter_cube_constants.py`, the 8 October review with its addendum, and
+  lines 150–172 of the 5 October review of [R] v1.1. `ryu_k2_minus_c_constants.py` and
+  the 8 October review of [R] v1.2 stayed unread.
 - **Shared system family:** the reviewer is a Claude agent.
   Both sources say they were developed with extensive assistance from Claude, and their
   earlier reviews were by Claude sessions.
@@ -553,9 +634,12 @@ The programs and receipts are in
 | `r_lemmas_check.py outputs/r-lemmas.json` | `r-lemmas.json` | 48 of 48 proved | 2.5 s |
 | `q_quotes.py Q_TEX R_TEX outputs/q-quotes.json` | `q-quotes.json` | 19 of 19 statements, 12 of 12 sentences | under 1 s |
 | `c_citations.py Q_TEX C_TEX outputs/c-citations.json` | `c-citations.json` | 44 of 44 citations resolve to their kind | under 1 s |
+| `qcc_predicates.py MAINTAINED_PY outputs/qcc-predicates.json` (after the findings) | `qcc-predicates.json` | 108 of 108 predicates hold; inputs match the primaries | 0.3 s |
 
 In all, well under a CPU-minute.
-Each receipt records the SHA-256 of the programs that wrote it.
+F8’s cross-check in mpmath, `l49_mpmath_crosscheck.py`, is a float computation that
+decides nothing. It is kept with its output, `l49-mpmath-crosscheck.txt`, and registered
+nowhere. Each receipt records the SHA-256 of the programs that wrote it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

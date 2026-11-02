@@ -18,8 +18,8 @@ Numerical analogue campaigns are outside this packet.
 There is no cleaned Markdown transcription; the original TeX remains searchable.
 
 The theorem statements were read from the primary text and are recorded as reported in
-`packing/frontier/asymptotic-waste-bounds.yaml`. No checking program was executed here,
-and no proof or constant has gained project confirmation.
+`packing/frontier/asymptotic-waste-bounds.yaml`. None of the source’s checking programs
+was executed here. The theorems have no register entry and so no rung.
 The bounds concern closed-set disjoint packings and integer sides in the stated
 astronomical ranges.
 They change no bound at n ≤ 324 and have no T-number.
@@ -28,8 +28,14 @@ The constants using Lemma 4.10 depend on Ryu’s k2-minus-c v1.2. The earlier pr
 replay reproduced its predecessor’s producer computation; it does not independently
 confirm the v1.2 proof chain or these new flow arguments.
 The variants using analytic Lemma 4.9 are separate reported statements.
-Review `think-6ptr` must check the complete dependency chain and theorem-to-checker
-bindings before any promotion.
+Two reviews have read the chain:
+[the 8 October review](../../../../docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md),
+at source-review scope, and
+[the strongest-tier review of 2 November](../../../../docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md),
+which accepted it and keeps its programs and receipts in this packet’s
+[`review/quarter-cube-strongest-tier-2026-11-02/`](review/quarter-cube-strongest-tier-2026-11-02/README.md).
+They ran none of the source’s programs.
+The independent per-box labelling of v1.2’s Lemma 4.10 remains think-k3tk’s.
 
 ## Credit and Licence
 

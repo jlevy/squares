@@ -238,7 +238,10 @@ lower_bounds:
   - bound: >-
       REPORTED: k^2 - M(k) >= 0.1 k^{1/4} for integer k >= 4.62*10^12,
       and liminf (k^2 - M(k))/k^{1/4} >= 0.1696.
-    side_condition: Integer sides and unit squares pairwise disjoint as closed sets in [0,k]^2.
+    side_condition: >-
+      Integer sides and unit squares pairwise disjoint as closed sets in [0,k]^2. As
+      s(n) < k exactly when n <= M(k), k^2 - M(k) is the limit of W(x) as x -> k from
+      below.
     authors: [Sungjoon Ryu]
     year: 2026
     source_key: '[squarepacker quarter-power 2026]'
@@ -263,16 +266,32 @@ lower_bounds:
       cases/asymptotic/quarter_cube_constants.py checks the two threshold margins,
       derivative conditions and asymptotic floors in interval arithmetic. These
       numerical consequences remain conditional on the reviewed geometric premises;
-      independent per-box labelling remains think-k3tk. No source checker ran here
-      and no new project confirmation is claimed. The author reports AI reviews,
-      analogue tests, extensive Claude assistance and no human peer review. The theorem settles no count n <= 324, so no
-      result-register entry or small-n lane changes.
+      independent per-box labelling remains think-k3tk. No source checker ran here.
+      REVIEWED 2026-11-02 at the strongest tier (think-yf8j):
+      docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md
+      re-derived the chain and the v1.2 lemmas it imports and accepted it, with eight
+      notes and no defect or gap. On exact-rational intervals of its own it reproduced
+      every constant and threshold. It also reproduced Tables 4 and 5 and the Section
+      12.6 sensitivity record, which had not been run before, and all 108 predicates of
+      quarter_cube_constants.py. The explicit threshold has little margin. Condition (i)
+      of Proposition 11.2 holds from k* = 4616673963026.36, a relative margin of
+      1.05*10^-4 in the bracket B (1.74*10^-5 for Theorem A13), so any upward correction
+      of A, A' or C_Lambda beyond the tolerances of Section 12.6 raises it. Proposition
+      2.1 and Theorem A13 rest on facts about v1.2's proofs, not its statements (the
+      review's F1).
+      This is one AI review; no human has checked the argument. The author reports AI
+      reviews, analogue tests, extensive Claude assistance and no human peer review. The
+      theorem settles no count n <= 324, so no result-register entry or small-n lane
+      changes.
   - bound: >-
       REPORTED: k^2 - M(k) > 10^-4 sqrt(k) for integer k in [10^8, 2.5*10^15],
       > 7*10^-5 sqrt(k) on [2.5*10^15, 3.5*10^17], and > 0.06 k^{1/3}
       for integer k >= 3.5*10^17; from 10^21 the coefficient is 0.0625.
       The liminf cube-root coefficient is at least 0.06285.
-    side_condition: Integer sides in the stated ranges and unit squares pairwise disjoint as closed sets in [0,k]^2.
+    side_condition: >-
+      Integer sides in the stated ranges and unit squares pairwise disjoint as closed
+      sets in [0,k]^2. As s(n) < k exactly when n <= M(k), k^2 - M(k) is the limit of
+      W(x) as x -> k from below.
     authors: [Sungjoon Ryu]
     year: 2026
     source_key: '[squarepacker cube-root 2026]'
@@ -289,7 +308,7 @@ lower_bounds:
     corollary: >-
       REPORTED: s(k^2-c) = k for integer c between zero and each strict deficiency
       bound in its stated range. The reported Theorem 1.1 bounds exceed the
-      quarter-power coefficient 0.1 for every k >= 4.62*10^12. With the k^{3/8} upper
+      quarter-power bound 0.1 k^{1/4} for every k >= 4.62*10^12. With the k^{3/8} upper
       bounds reported on #471 and #486 (deficiency_upper_bounds), k^{1/3} << c*(k) <<
       k^{3/8}; both ends are reported and unrefereed.
     note: >-
@@ -301,9 +320,18 @@ lower_bounds:
       The maintained quarter_cube_constants.py checks all eight published ranges,
       outward table bounds and both asymptotic floors. Its numerical consequences
       remain conditional on the reviewed geometric premises; independent per-box
-      labelling remains think-k3tk. No source checker ran here and no new project
-      confirmation is claimed. The source reports extensive Claude assistance and AI
-      reviews, not human peer review. No small-n bound changes.
+      labelling remains think-k3tk. No source checker ran here.
+      REVIEWED 2026-11-02 at the strongest tier (think-yf8j):
+      docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md
+      re-derived the argument, its inheritance from the quarter-power Sections 3-8 and
+      v1.2's Lemmas 3.1-3.5, 4.13 and 4.15, and accepted it with no defect or gap. On
+      exact-rational intervals of its own it reproduced B1, L1 and all eight cases of
+      Table 1, with conditions (i)-(iv) of Proposition 5.1. The tightest is case 6's (iv),
+      34934.224 against W1 = 34934.664. It also gave explicit starting scales for the two
+      liminf constants: W > 0.06285 k^{1/3} from k = 10^24, and W > 0.05229 k^{1/3} from
+      10^22 without Lemma 4.10. This is one AI review; no human has checked the argument.
+      The source reports extensive Claude assistance and AI reviews, not human peer
+      review. No small-n bound changes.
 
   - bound: >-
       REPORTED: k^2 - M(k) >= 0.0353 log k for every integer k >= 2;

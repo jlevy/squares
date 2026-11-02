@@ -918,9 +918,13 @@ issues:
       closed-set disjoint packings at astronomical integer sides. Both v1.0 texts,
       licences, attribution and checking sources are retained at immutable release
       revisions. The constants using computer-assisted Lemma 4.10 depend on
-      k2-minus-c v1.2; each also states an analytic-Lemma-4.9 variant. A scoped independent proof-chain review and maintained conditional interval
-      arithmetic now cover both releases; no source program execution or new project
-      confirmation is claimed. Independent per-box labelling remains open.
+      k2-minus-c v1.2; each also states an analytic-Lemma-4.9 variant. A scoped
+      independent proof-chain review of 8 October and maintained conditional interval
+      arithmetic cover both releases. A strongest-tier stage 4 review of 2 November
+      accepted both chains, with eight notes and no defect or gap. On its own intervals it
+      reproduced every constant, the eight cube-root cases, and Q's supplementary tables.
+      No source program ran here. Independent per-box labelling of v1.2 Lemma 4.10
+      remains open (think-k3tk).
     read_through: '2026-10-07T12:35:34Z'
     results:
       - key: quarter-power-deficiency
@@ -946,26 +950,31 @@ issues:
         queued: false
     asks:
       - what: Review the full preprint chain, statement conventions and numerical constants.
-        state: queued
+        state: done
         source: body
         bead: think-yf8j
         note: >-
-          The full geometric chains and v1.2 dependency have a retained scoped review.
-          The maintained checker independently decides 108 numerical predicates across
-          both quarter-power routes, eight cube-root ranges, geometric ceilings and
-          four asymptotic floors. The consequences remain conditional on the reviewed
-          geometric premises and the independently tracked per-box obligation.
-          The intake itself merged in PRs #439 and #441 on 9 October; the review's
-          own verdict was left queued under think-6ptr.
-          On 26 October 2026 (w-imports-1026) the ask moved to think-yf8j, from think-6ptr, an
-          in_progress lane bead whose delegate is gone. What is retained: both v1.0 TeX sources,
-          their programs and licences in the two 7 October packets, the 8 October review of the
-          chains (accepted at source-review scope, conditional) and of the v1.2 dependency, and
-          the interval-arithmetic constants check. What remains is a strongest-tier reading
-          under today's stage 4 rule, written before it reads the 8 October review, with Q's
-          supplementary optimization and sensitivity tables executed: about 6 to 10 agent-hours
-          and under 0.1 CPU-hours, more than this pass's reading allowed; the per-box labelling
-          stays think-k3tk's.
+          Done 2 November 2026 by think-yf8j (lane L23 of think-3guf). The strongest-tier
+          stage 4 review is
+          docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md. Its
+          findings were committed before it read the 8 October review, and it re-derived
+          both chains and the v1.2 lemmas they import.
+          Verdict: accepted, for both preprints. The acceptance is conditional on the v1.2
+          lemmas, and for Theorem A and the cube-root Theorem 1.1 on v1.2 Lemma 4.10's box
+          computation, whose independent per-box labelling stays think-k3tk's. Eight notes,
+          no defect or gap. The statement conventions hold: closed-set disjointness, and
+          s(k^2-c) = k exactly when c < k^2 - M(k).
+          On exact-rational intervals of its own it reproduced:
+          every constant and threshold; the eight cube-root cases; Q's supplementary
+          Tables 4 and 5 and its Section 12.6 sensitivity record, never run before; v1.2
+          Lemma 4.9's finite check; and all 108 predicates of quarter_cube_constants.py.
+          The explicit quarter-power threshold holds from k* = 4616673963026.36, a
+          relative margin of 1.05*10^-4.
+          The reply is drafted in think-u1kq for stage 7.
+          Before: the intake merged in PRs #439 and #441 on 9 October. The 8 October review
+          accepted the chains at source-review scope, conditional, and its addendum's
+          checker decided the 108 predicates. On 26 October (w-imports-1026) the ask moved
+          to think-yf8j from think-6ptr, whose delegate was gone.
     beads: [think-6ptr, think-yf8j]
     answer_bead: think-u1kq
     replies:

@@ -11,7 +11,8 @@ the cube-root preprint rests on it.
 They were written on 2 November 2026 by lane L23 of the intake pass think-3guf (bead
 think-yf8j). The lane is an AI reviewer of the Claude family (Anthropic) at the strong
 sub-agent tier (`tbd-strong-max`) and maximum reasoning, working in a worktree of its
-own at `main` `bdf52188a`. The programs import only the Python standard library.
+own at `main` `bdf52188a`. The deciding programs import only the Python standard library;
+the one float cross-check imports mpmath.
 Their authors read the three TeX sources as data and never read or ran the source’s
 programs:
 
@@ -21,7 +22,11 @@ programs:
 - the v1.2 programs.
 
 They did not read this repository’s `cases/asymptotic/quarter_cube_constants.py` or
-`cases/asymptotic/ryu_k2_minus_c_constants.py` before the programs below had run.
+`cases/asymptotic/ryu_k2_minus_c_constants.py` before the programs below had run and the
+review’s findings had been committed (`41dffb13b`).
+The one exception, written after that commit, is `qcc_predicates.py`, whose purpose is
+to check `quarter_cube_constants.py`: it reads that file as data and neither imports nor
+runs it.
 
 All programs ran with CPython 3.14.7 (`packing/.venv/bin/python3 -I`), under `nice`, one
 at a time, on a shared four-core host.
@@ -39,9 +44,12 @@ at a time, on a shared four-core host.
 | `r_lemmas_check.py` | **decides** the finite angle check that ends the proof of [R, Lemma 4.9] (the base of Theorem A13 and of C’s Theorem 1.2) and the numbers in the proofs of [R, Lemmas 4.8–4.10, Proposition 4.5] | [R]’s text | `outputs/r-lemmas.json`: 48 of 48 proved |
 | `q_quotes.py` | **decides** that Q’s quotations of [R] are [R]’s text: 19 quoted statements and 12 quoted sentences, after normalizing cross-references | both TeX files | `outputs/q-quotes.json`: 19 of 19 and 12 of 12, one emphasis dropped |
 | `c_citations.py` | numbers Q’s results as amsart does and resolves each of C’s 44 citations of Q to its environment, label and title; decides only that each cited kind is the kind at that number | both TeX files | `outputs/c-citations.json`: 44 of 44 |
+| `qcc_predicates.py` | **decides** again, on this directory’s intervals and formulas, each of the 108 predicates of `cases/asymptotic/quarter_cube_constants.py`, under the names that file gives them; parses that file’s input rows with `ast`, without importing or running it, and holds them to this review’s transcription of the primaries | `quarter_cube_constants.py`, as data | `outputs/qcc-predicates.json`: 108 of 108 hold; inputs match |
+| `l49_mpmath_crosscheck.py` | a float cross-check, in mpmath at 60 digits, of the least margin in [R, Lemma 4.9]’s finite check (the review’s F8); **decides nothing** and is cited by nothing | [R]’s text | `outputs/l49-mpmath-crosscheck.txt`: 25.9419053627…° at (3, 5, 2, 5) |
 
-Every receipt but `q-quotes.json` and `c-citations.json` records the SHA-256 of every
-program in `programs/` when it ran; those two record their own and their inputs’.
+Every receipt but `q-quotes.json`, `c-citations.json` and the cross-check’s text
+records the SHA-256 of every program in `programs/` when it ran. Those two record their
+own digest and their inputs’.
 
 No evidence entry cites these programs: the two preprints’ results are recorded in
 `frontier/asymptotic-waste-bounds.yaml`, which has no evidence entries, and settle no
@@ -51,11 +59,11 @@ independence records.
 
 ## How to Run Them
 
-From the packet’s `review/quarter-cube-strongest-tier-2026-11-02/` directory, with `PY`
-the project interpreter run as `python -I`:
+From the packet’s `review/quarter-cube-strongest-tier-2026-11-02/` directory, with
+`PACKING` the absolute path of the repository’s `packing/`:
 
 ```bash
-PY="../../../../../.venv/bin/python3 -I"
+PY="$PACKING/.venv/bin/python3 -I"
 $PY programs/iv.py
 $PY programs/q_constants.py outputs/q-constants.json
 $PY programs/q_supplementary.py outputs/q-supplementary.json
@@ -65,6 +73,9 @@ $PY programs/q_quotes.py ../../source/paper/paper.tex \
   ../../../squarepacker-k2-minus-c-v12-2026-10-06/source/paper/paper.tex outputs/q-quotes.json
 $PY programs/c_citations.py ../../source/paper/paper.tex \
   ../../../squarepacker-k2-minus-c-cube-root-2026-10-07/source/paper/paper.tex outputs/c-citations.json
+$PY programs/qcc_predicates.py "$PACKING/cases/asymptotic/quarter_cube_constants.py" \
+  outputs/qcc-predicates.json
+$PY programs/l49_mpmath_crosscheck.py > outputs/l49-mpmath-crosscheck.txt
 ```
 
 The constants programs take under a second each, and `q_supplementary.py` takes 18

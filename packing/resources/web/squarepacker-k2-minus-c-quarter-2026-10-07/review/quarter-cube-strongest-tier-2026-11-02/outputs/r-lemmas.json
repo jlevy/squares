@@ -3,11 +3,15 @@
  "python": "3.14.7",
  "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
  "program_sha256": {
+  "c_citations.py": "e9c70a29300d6fbc085a944945e25fb3a120468faa079a4f8dd125ae92cfb466",
   "c_constants.py": "a7a2305121fb7a88340bcba64ec100b23648cce3fcae2aad7ed639a8d5e08f02",
   "checks.py": "318b4b1a68191dc846a32b164b9d8ad19afc9247c9b00ecfca9fd4acb0b0a9ae",
   "iv.py": "c2341d825430c8ed6bc1929b71bdec3ce3df810cd19b32f5165263e7035e1c4a",
+  "l49_mpmath_crosscheck.py": "1d649e4f2530d34575d523c2930f96e9ac575b7546b23fdd07090d2abb645d39",
   "q_constants.py": "ef69c5d3b55e4089d8d17667db792bf3a09cdc721ee7563e83f08dd62a9b4df3",
+  "q_quotes.py": "f0290e9f34a02b15894611da65e64077f0528277cbd64c8fa0fb58e9df66f6e8",
   "q_supplementary.py": "760c0727707236c1d7d24a07c57bdb95a39c66396ecc63823793f0d9f370654b",
+  "qcc_predicates.py": "622954a3354a885280a61aaa1c52f8183ff4bb32fed34692dd7fac9696b58e21",
   "qmodel.py": "d33e250adff64c8d2d657e0cb9640ada8e230f0fd6ba73335c49768febf2b887",
   "r_lemmas_check.py": "bfe5bf854908fe0be9244fd1817a0016ced94486f2147b429987c693a41b8f39"
  },

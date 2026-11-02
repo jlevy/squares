@@ -6601,3 +6601,162 @@ verifiers:
       and verify_exact.py, the source's checker (V-evand-verify-exact), on route 2. The
       second packet, T-247's at 297, was added by lane L14 of the 1 November intake
       (think-ozx8), which read the author's README as text and ran none of his programs.
+  - id: V-ryu-quarter-cube-review-constants
+    program: q_constants.py, q_supplementary.py and c_constants.py (with iv.py, qmodel.py and checks.py)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      The 2 November 2026 strongest-tier review's recomputation, on exact-rational intervals
+      of its own (outward dyadic rounding, explicit series remainders for cos, sin, tan,
+      atan, log, pi and k-th roots), of every constant and threshold that Sungjoon Ryu's
+      quarter-power preprint (Q, #414) and cube-root preprint (C) use: Q's Sections 1-11,
+      Tables 2 and 3 and conditions (i)-(iii) of its Proposition 11.2 at both parameter
+      vectors (193 checks); Q's supplementary Tables 4 and 5 and every claim of its Section
+      12.6 sensitivity record, including the brackets of k* and k*13 and of each tolerance
+      (118 checks); and C's B1, L1, Lemma 2.1, the eight cases of its Table 1 with
+      conditions (i)-(iv) of Proposition 5.1, its liminf constants with explicit finite
+      starting scales, and its comparisons (95 checks). Each displayed value is held in the
+      direction the proof needs and, separately, in its stated rounding direction.
+    source:
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/q_constants.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/q_supplementary.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/c_constants.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qmodel.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/iv.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/checks.py
+    independence_record: packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md
+    independence:
+      read: [mathematics, proof-text]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #414 (lane L23, bold-ritchie-l23,
+            think-yf8j), strong sub-agent tier (tbd-strong-max) at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Both preprints say they were developed with extensive assistance from Claude,
+          including their programs. These programs were written from the three TeX
+          sources alone, before the 8 October review, its addendum or
+          cases/asymptotic/quarter_cube_constants.py was read; the source's
+          k14_constants_check.py and check_table_*.py were never read or run, and the
+          programs import only the Python standard library.
+    note: >-
+      Written and run on 2 November 2026 for
+      docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md, and kept
+      with their receipts in the quarter packet's review/quarter-cube-strongest-tier-2026-11-02/.
+      No evidence entry cites them: the two preprints' results are recorded in
+      frontier/asymptotic-waste-bounds.yaml, which takes no evidence entries, and settle no
+      count the result register holds.
+  - id: V-ryu-v12-lemma49-review-check
+    program: r_lemmas_check.py (with iv.py and checks.py)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      Redoes, on exact-rational intervals, the finite angle check that ends the proof of
+      Lemma 4.9 of Ryu's k2-minus-c v1.2 (K_w = 13), on which Theorem A13 of the
+      quarter-power preprint and Theorem 1.2 of the cube-root preprint rest: every class
+      sequence in {2,3,4,5}^n, n = 3, 4, 5, with sum at least 14 decided, each one with sum
+      at least 15 violating the angle conditions by more than 25.94 degrees and only the
+      rotations of (5,2,5,2) feasible at sum 14; and the numbers in the proofs of Lemmas
+      4.8-4.10 and Proposition 4.5 that the two preprints inherit (48 checks).
+    source:
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/r_lemmas_check.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/iv.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/checks.py
+    independence_record: packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md
+    independence:
+      read: [mathematics, proof-text]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #414 (lane L23, bold-ritchie-l23,
+            think-yf8j), strong sub-agent tier (tbd-strong-max) at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Written from the text of v1.2's Section 4 alone; v1.2's own script, which the
+          paper says carries the check, was not read or run, nor the 5 October review's
+          enumeration or cases/asymptotic/ryu_k2_minus_c_constants.py.
+    note: >-
+      Written and run on 2 November 2026 for
+      docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md (its F3 and
+      F8). No evidence entry cites it; v1.2's results have no register entry.
+  - id: V-ryu-quarter-cube-review-qcc
+    program: qcc_predicates.py (with iv.py, qmodel.py and c_constants.py)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      Decides again, on the review's own exact-rational intervals and formulas, each of the
+      108 predicates of cases/asymptotic/quarter_cube_constants.py under the names that
+      file gives them, after parsing its input rows with ast (without importing or running
+      it) and holding them to the review's own transcription of the two preprints. All 108
+      hold.
+    source:
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/qcc_predicates.py
+    independence_record: packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md
+    independence:
+      read: [mathematics, proof-text, specification, earlier-review]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #414 (lane L23, bold-ritchie-l23,
+            think-yf8j), strong sub-agent tier (tbd-strong-max) at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Written after the review's findings were committed (41dffb13b), with the
+          maintained checker of the 8 October review read as the specification of the 108
+          predicates; it shares no code with that checker (mpmath intervals there, exact
+          rationals here) and none with the source's programs, which were never read.
+    note: >-
+      Written and run on 2 November 2026 for
+      docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md. No
+      evidence entry cites it.
+  - id: V-ryu-quarter-cube-review-text-checks
+    program: q_quotes.py and c_citations.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Two text checks of the 2 November 2026 review: q_quotes.py finds each of the
+      quarter-power preprint's quotations of Ryu's k2-minus-c v1.2 in v1.2's TeX after
+      normalizing cross-references (19 of 19 statements, 12 of 12 sentences, one emphasis
+      dropped); c_citations.py numbers the quarter-power preprint's results as amsart does
+      and resolves each of the cube-root preprint's 44 citations of it to its environment,
+      label and title (44 of 44 of the cited kind). They decide fidelity of quotation and
+      citation, not mathematics.
+    source:
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/q_quotes.py
+      - packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/programs/c_citations.py
+    independence_record: packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/review/quarter-cube-strongest-tier-2026-11-02/README.md
+    note: >-
+      Written and run on 2 November 2026 for
+      docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md (its F2 and
+      the citation table). No evidence entry cites them.
