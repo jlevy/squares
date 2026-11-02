@@ -96,7 +96,8 @@ def test_the_retained_survey_is_current() -> None:
     # integer floor at the cases its Theorem 9 reproduces (s(8) = 3 up to s(48) = 7) and
     # at the perfect squares, which other results already hold. Since the merge of the
     # same day it holds neither n = 37 nor n = 61: replayed bounds recorded in parallel
-    # stand above it there, 161/25 (T-069) and s(61) = 8 (T-063).
+    # stand above it there, 161/25 (T-069; 2599/400, T-178, since 2026-11-02) and
+    # s(61) = 8 (T-063).
     assert retained["holds"] == [
         4,
         8,
