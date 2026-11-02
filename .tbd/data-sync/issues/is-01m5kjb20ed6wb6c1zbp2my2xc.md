@@ -3,11 +3,11 @@ type: is
 id: is-01m5kjb20ed6wb6c1zbp2my2xc
 title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666, #715, #719, #732), with a hosted-data manifest for the bulk certificates (think-f2io, 2026-10-23)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 28
+version: 30
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
-delegate: bold-ritchie-l4
+delegate: null
 labels:
   - result-import
 dependencies:
@@ -17,10 +17,10 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 child_order_hints:
   - is-01m5qby09kkaa1rny3x82s2784
   - is-01m5qby16169h30h6s4cg3r70a
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-11-01T19:31:41.201Z
+updated_at: 2026-11-02T01:48:10.854Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -78,3 +78,6 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 - Requests entries for #836 and #847 (triage pending) and their intake labels: branch claude/bold-ritchie-xo28us-beyond.
 
 2026-11-01 bold-ritchie-l13 (addressing pass of PR #870, W9, think-fuwd), from the stage 4 review's F2 (docs/project/reviews/review-2026-11-01-filled-end-lemma.md): **the walk must record a filled-end row at side_exact, or at a decimal rounded up from it (as couzo_678_replay.rounds_up_to requires of a printed side), never at the author's decimal `side` column.** Karimi rounded the exact side to nearest, so his decimal is below side_exact at 2,514 of V2.0's 5,134 rows and 2,204 of V1.0's 4,571, by up to 0.502 units of its twelfth place (0.504 in V1.0; the review's 0.503 and 0.506 are the largest gaps either way, which are above). The V fit binds at every row, so where the decimal is below, a square of that side does not hold the construction (1190: decimal 34.958620689655, exact 5069/145 = 34.95862068965517...). devtools.filled_end_checker decides and reports side_exact alone, and each decisions receipt counts the decimal against it under author_columns.side, which `check` derives again. The review accepted the lemma with no defect, so under D2 each decided row is a row once this walk records it.
+
+2026-11-02 coordinator (intake pass think-3guf): claim of bold-ritchie-l4 released (that lane has ended). The walk waits on the owner's D4 (how the certificates above 1024 are hosted) and D1/D5 as recorded in think-f2io; nothing runnable until then. Six held beads name this bead.
+blocked_on: think-f2io
