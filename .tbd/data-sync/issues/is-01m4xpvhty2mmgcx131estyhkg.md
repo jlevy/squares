@@ -3,9 +3,9 @@ type: is
 id: is-01m4xpvhty2mmgcx131estyhkg
 title: "Validate: wand125 s(37) >= 2599/400 (mixed_n37_L64975), census of all 2,073 directions with whole-net controls (~6.5 CPU-h)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l30
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m4wv27yed1e2wfnq55h1avr0
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:12.637Z
-updated_at: 2026-11-02T17:25:08.411Z
+updated_at: 2026-11-02T17:41:04.695Z
 started_at: 2026-11-02T11:13:37.982Z
+closed_at: 2026-11-02T17:41:04.693Z
+close_reason: "T-178 s(37) >= 2599/400 replayed: sqverify-fast census of all 2,073 directions equal to the source's check2 log, whole-net 99/100 mutant refused at every direction; V3/C3; merged in https://github.com/jlevy/squares/pull/886 (86ed750b8) after strong-max review A addressed."
+resolution: null
+duplicate_of: null
 ---
 Validation part of think-u0av for n = 37 (T-177 in the 14 October records PR #602, V0/C1). Record-changing: a complete replay with controls is what takes the bound to C3 and the verified lane.
 
