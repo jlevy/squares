@@ -1,0 +1,455 @@
+{
+ "program": "c_citations.py",
+ "program_sha256": "e9c70a29300d6fbc085a944945e25fb3a120468faa079a4f8dd125ae92cfb466",
+ "inputs_sha256": {
+  "paper.tex": "1213ee37c40d665af9549bb479175544b778a98fb8a6df772c52ffbaf76defd7",
+  "paper.tex(C)": "5412a03fc7c0947d12bb08a9eac100c2523a335f783771aa4378ad595f0438e3"
+ },
+ "q_numbering_size": 415,
+ "citations": [
+  {
+   "cited": "(6.1)",
+   "context": "d, besides the definitions of the flows and [Q, Lemma~6.1], its proofs use only [Q, (6.1)]\n([Q, Remark~6.13]);",
+   "resolves_to": {
+    "kind": "Equation",
+    "title": "",
+    "label": "eq:P4-param"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Corollary 4.4",
+   "context": " ([Q, Theorem~4.2]). In [Q] the deficit is bounded by about $m\\cdot\\theta^2/2$ ([Q,\nCorollary~4.4]); to keep it small ",
+   "resolves_to": {
+    "kind": "Corollary",
+    "title": "P1, corollary",
+    "label": "cor:P1"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.1",
+   "context": "The flow}\nLet $0<\\theta\\le\\bbar$ and $k\\ge14$. Consider the parameter vector of [Q, Definition~3.1]\n\\[\n\\pi_\\theta:=(c_0",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "parameters",
+    "label": "def:flows-params"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.10",
+   "context": "rajectory ([Q, Lemma~3.17(a)]), so the $I_j$ are pairwise\ndisjoint. By rule R2 ([Q, Definition~3.10]) $a(Z_j)<\\theta$. L",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "rule R2 and passing; free paths",
+    "label": "def:R2"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.14",
+   "context": "}\nA path that is T-terminated in $F_\\theta$ is the R1 winner at its last entry ([Q, Definition~3.14]; rule R1 is applied",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "rule R1 and the paths of a flow",
+    "label": "def:R1"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.2",
+   "context": "tisfies the constraints \\textup{(C0)--(C7)}, \\textup{(Q1)} and \\textup{(Q2)} of [Q, Definition~3.2].\nIts master flow \\t",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "constraints",
+    "label": "def:flows-constraints"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.20",
+   "context": "textup{(Q1)} and \\textup{(Q2)} of [Q, Definition~3.2].\nIts master flow \\textup{([Q, Definition~3.20])} is $F_\\theta:=F(\\",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "master flow",
+    "label": "def:F0"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.24",
+   "context": " F_\\theta$ of $F_\\theta$ is the master flow of $\\rho\\cP$ transported by $\\rho$\n([Q, Definition~3.24]); $\\rho\\cP$ is a cl",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "ceiling flows",
+    "label": "def:flows-ceiling"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.26",
+   "context": "$ counts only terminations below $y$ and $\\Ovgap(y)\\le\\sup_{0<y'<h}\\Ovgap(y')$\n([Q, Definitions~3.26 and~3.30]). By [Q, ",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "losses",
+    "label": "def:flows-losses"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.28",
+   "context": " and $\\Ovgap(y)\\le\\sup_{0<y'<h}\\Ovgap(y')$\n([Q, Definitions~3.26 and~3.30]). By [Q, Definition~3.28],\n$\\Sh(y)=\\sum_Z(c_Z",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "line quantities",
+    "label": "def:flows-line"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.30",
+   "context": "$ counts only terminations below $y$ and $\\Ovgap(y)\\le\\sup_{0<y'<h}\\Ovgap(y')$\n([Q, Definitions~3.26 and~3.30]). By [Q, ",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "gap overlap and loss terms",
+    "label": "def:flows-ovgap"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.32",
+   "context": "end{lemma}\n\n\\begin{proof}\nLet $\\Exc$ be the exceptional set of the master flow ([Q, Definitions~3.32 and~6.6]); it is fi",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "exceptional heights",
+    "label": "def:flows-exc"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.5",
+   "context": " different meaning: $H_{\\tau_0}$ (Theorem~\\ref{thm:ineq}) is\nnot the set $H$ of [Q, Definition~3.5]; $\\beta$ is a numbe",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "lines and windows",
+    "label": "def:flows-lines"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.7",
+   "context": "ion; $\\Bot(S)$, $\\Top(S)$ are its bottom and top sides and $u_S,n_S$ its frame\n([Q, Definition~3.7]); $\\Phi(S)=\\{y:0<c_",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "frames and sides",
+    "label": "def:flows-frames"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 3.9",
+   "context": "egments have total length at\nmost $\\delta$ at every point of the trajectory: by [Q, Definition~3.9] the cumulative gap ",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "flows: ray steps and events",
+    "label": "def:flow"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Definition 6.6",
+   "context": "end{lemma}\n\n\\begin{proof}\nLet $\\Exc$ be the exceptional set of the master flow ([Q, Definitions~3.32 and~6.6]); it is fi",
+   "resolves_to": {
+    "kind": "Definition",
+    "title": "exceptional set",
+    "label": "def:P4-exc"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.17(a)",
+   "context": "ll_y$\nmeets $Z_j$ for $y\\in I_j$. Heights increase strictly along a trajectory ([Q, Lemma~3.17(a)]), so the $I_j$ are ",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "trajectories",
+    "label": "lem:flows-traj"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.17(a),(e),(f)",
+   "context": "Results used",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "trajectories",
+    "label": "lem:flows-traj"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.17(e)",
+   "context": "{j,y},\\,q_{j,y}+\\cos\\varphi_j)$. Its open part lies in $\\operatorname{int}Z_j$ ([Q, Lemma~3.17(e)]), so $\\ell_y$\nmeets",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "trajectories",
+    "label": "lem:flows-traj"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.17(f)",
+   "context": "[0,\\delta)$ at an\nentry candidate, since the cumulative gap there is $<\\delta$ ([Q, Lemma~3.17(f)]). Since $|\\varphi_j",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "trajectories",
+    "label": "lem:flows-traj"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.29(a)",
+   "context": "9]); a path\ncrosses $\\ell_{y'}$ in $\\operatorname{int}S$ only if it passes $S$ ([Q, Lemma~3.29(a)]), and passing requi",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "crossings and the gap density",
+    "label": "lem:flows-density"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.3(a)",
+   "context": "^{-5}<\\frac12$. (C6):\n$\\delta\\le\\frac12\\cos2\\theta$, which follows from (C1) by [Q, Lemma~3.3(a)]. (C7): $y_0+1=2\\le\\",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "elementary consequences",
+    "label": "lem:flows-constraints"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.31",
+   "context": "Results used",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "measurability",
+    "label": "lem:flows-meas"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.31(a)",
+   "context": "e T-terminated floor and ceiling points (finite unions of intervals and points, [Q, Lemma~3.31(a)]) and $\\zeta\\equiv\\z",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "measurability",
+    "label": "lem:flows-meas"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.31(d)",
+   "context": ",\n$\\Sh(y)=\\sum_Z(c_Z(y)-\\mu_Z(y))_+\\ge\\sum_{S\\in\\cZ}c_S(y)$. As $\\Sh$ is Borel ([Q, Lemma~3.31(d)]), integrating over\n",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "measurability",
+    "label": "lem:flows-meas"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.33(a)",
+   "context": "ceptional set of the master flow ([Q, Definitions~3.32 and~6.6]); it is finite\n([Q, Lemma~3.33(a)]). For $y\\in(0,h)\\se",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "exceptional heights",
+    "label": "lem:flows-exc"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 3.8",
+   "context": "$\\rho$\n([Q, Definition~3.24]); $\\rho\\cP$ is a closed packing with the same $W$ ([Q, Lemma~3.8]). Only the master f",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "reflection",
+    "label": "lem:flows-refl"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 4.5(a)",
+   "context": "in a]$, and the heights of the points of $\\Bot(S)$ fill\nexactly $[v,v+\\sin a]$ ([Q, Lemma~4.5(a)]). If $y<v+\\sin a$, ",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "bottom side",
+    "label": "lem:P12-bot"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 4.6(c)",
+   "context": " $z\\in\\Bot(S)$ has $|z_y-(y-1)|\\le(1-\\cos a)+\\sin a\\le1.0001\\,a<1.0001\\,\\beta$ ([Q, Lemma~4.6(c)],\nas $a<\\bbar\\le2\\cd",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "the auxiliary inequality",
+    "label": "lem:P12-aux"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 4.7(a)--(c)",
+   "context": ", $\\Phi(\\rho S)=k-\\Phi(S)$ and $\\dist(k-y,\\Z)=\\dist(y,\\Z)$ ($k$ is an\ninteger) ([Q, Lemma~4.7(a)--(c)]).\n\\end{proof}\n\n\\b",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "reflection",
+    "label": "lem:P12-refl"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Lemma 6.1",
+   "context": "the parameters\nof [Q, Section~3], and, besides the definitions of the flows and [Q, Lemma~6.1], its proofs use onl",
+   "resolves_to": {
+    "kind": "Lemma",
+    "title": "structure",
+    "label": "lem:P4-recall"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Proposition 5.10",
+   "context": " computer-assisted [R, Lemma~4.10] through the constants\n$A$, $A'$ and those of [Q, Theorem~7.1 and Proposition~5.10]; t",
+   "resolves_to": {
+    "kind": "Proposition",
+    "title": "P3",
+    "label": "prop:P3"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Remark 2.2",
+   "context": "^{-8}<12.7476$. Then [R, Lemmas~4.13--4.15] hold with $A_{13}$ in place of $A$\n([Q, Remark~2.2]), and [Q, Theorem~8",
+   "resolves_to": {
+    "kind": "Remark",
+    "title": "dependence on {[R, Lemma~\\ref{imp:L4.10}",
+    "label": "rem:imp-dep"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Remark 3.34",
+   "context": "ner at its last entry ([Q, Definition~3.14]; rule R1 is applied\nbefore rule R2, [Q, Remark~3.34]), at a square of in",
+   "resolves_to": {
+    "kind": "Remark",
+    "title": "the order ``M before T''",
+    "label": "rem:flows-order"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Remark 6.13",
+   "context": "he definitions of the flows and [Q, Lemma~6.1], its proofs use only [Q, (6.1)]\n([Q, Remark~6.13]); the results of [Q",
+   "resolves_to": {
+    "kind": "Remark",
+    "title": "hypotheses used",
+    "label": "rem:P4-hyp"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Section 5.1",
+   "context": " Precisely, Proposition~5.10 and\nTheorem~7.1 assume the standing assumptions of [Q, Section~5.1] ($0<\\delta\\le10^{-5",
+   "resolves_to": {
+    "kind": "Section",
+    "title": "Setting",
+    "label": "ssec:P3-setting"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Theorem 4.2",
+   "context": "t $m-D+(\\text{gaps})$, where $D=\\sum_j(1-\\cos\\varphi_j)$\nis its \\emph{deficit} ([Q, Theorem~4.2]). In [Q] the defici",
+   "resolves_to": {
+    "kind": "Theorem",
+    "title": "P1, height identity",
+    "label": "thm:P1"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Theorem 6.9",
+   "context": "hs, so they lie in the shadow of the terminated paths, whose size is bounded by [Q, Theorem~6.9]. Balancing\nthe thre",
+   "resolves_to": {
+    "kind": "Theorem",
+    "title": "P4$^*$",
+    "label": "thm:P4"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Theorem 6.9(f)",
+   "context": ".32 and~6.6]); it is finite\n([Q, Lemma~3.33(a)]). For $y\\in(0,h)\\setminus\\Exc$, [Q, Theorem~6.9(f)] gives $\\Sh(y)\\le L_",
+   "resolves_to": {
+    "kind": "Theorem",
+    "title": "P4$^*$",
+    "label": "thm:P4"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Theorem 7.1",
+   "context": " computer-assisted [R, Lemma~4.10] through the constants\n$A$, $A'$ and those of [Q, Theorem~7.1 and Proposition~5.10]; t",
+   "resolves_to": {
+    "kind": "Theorem",
+    "title": "P5",
+    "label": "thm:P5"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Theorem 8.3",
+   "context": "t the cost of tilt terminations of total\nmeasure $\\lesssim W/\\theta\\asymp W^2$ ([Q, Theorem~8.3]). The rest of the a",
+   "resolves_to": {
+    "kind": "Theorem",
+    "title": "path version of {[R, Lemma~\\ref{imp:L4.14}",
+    "label": "thm:P6"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Theorem 8.3(a)",
+   "context": " the constant of [R, Lemmas~4.13 and~4.15] and\n$A'=A/\\cos\\bbar+10^{-8}$ that of [Q, Theorem~8.3(a)]; $A<10.6067=:\\Abar$",
+   "resolves_to": {
+    "kind": "Theorem",
+    "title": "path version of {[R, Lemma~\\ref{imp:L4.14}",
+    "label": "thm:P6"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Theorem 8.3(a),(c)",
+   "context": "Results used",
+   "resolves_to": {
+    "kind": "Theorem",
+    "title": "path version of {[R, Lemma~\\ref{imp:L4.14}",
+    "label": "thm:P6"
+   },
+   "kind_ok": true
+  },
+  {
+   "cited": "Theorem 8.3(c)",
+   "context": "\n([Q, Remark~2.2]), and [Q, Theorem~8.3] holds with $A'_{13}$ in place of $A'$ ([Q, Theorem~8.3(c)]). In the analytic\nv",
+   "resolves_to": {
+    "kind": "Theorem",
+    "title": "path version of {[R, Lemma~\\ref{imp:L4.14}",
+    "label": "thm:P6"
+   },
+   "kind_ok": true
+  }
+ ],
+ "summary": {
+  "distinct_citations": 44,
+  "kind_ok": 44
+ }
+}

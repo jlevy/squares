@@ -1,0 +1,843 @@
+{
+ "program": "qcc_predicates.py",
+ "program_sha256": {
+  "c_citations.py": "e9c70a29300d6fbc085a944945e25fb3a120468faa079a4f8dd125ae92cfb466",
+  "c_constants.py": "a7a2305121fb7a88340bcba64ec100b23648cce3fcae2aad7ed639a8d5e08f02",
+  "checks.py": "318b4b1a68191dc846a32b164b9d8ad19afc9247c9b00ecfca9fd4acb0b0a9ae",
+  "iv.py": "c2341d825430c8ed6bc1929b71bdec3ce3df810cd19b32f5165263e7035e1c4a",
+  "l49_mpmath_crosscheck.py": "1d649e4f2530d34575d523c2930f96e9ac575b7546b23fdd07090d2abb645d39",
+  "q_constants.py": "ef69c5d3b55e4089d8d17667db792bf3a09cdc721ee7563e83f08dd62a9b4df3",
+  "q_quotes.py": "f0290e9f34a02b15894611da65e64077f0528277cbd64c8fa0fb58e9df66f6e8",
+  "q_supplementary.py": "760c0727707236c1d7d24a07c57bdb95a39c66396ecc63823793f0d9f370654b",
+  "qcc_predicates.py": "622954a3354a885280a61aaa1c52f8183ff4bb32fed34692dd7fac9696b58e21",
+  "qmodel.py": "d33e250adff64c8d2d657e0cb9640ada8e230f0fd6ba73335c49768febf2b887",
+  "r_lemmas_check.py": "bfe5bf854908fe0be9244fd1817a0016ced94486f2147b429987c693a41b8f39"
+ },
+ "maintained_file": "quarter_cube_constants.py",
+ "maintained_sha256": "352954462bef36e23e2fd3dc39a898d85869b45f93f51574b451909e61a6eb8e",
+ "inputs_match_primaries": {
+  "quarter": true,
+  "cube": true,
+  "geometric": true
+ },
+ "summary": {
+  "predicates": 108,
+  "true": 108,
+  "false": 0,
+  "undecided": 0
+ },
+ "predicates": [
+  {
+   "predicate": "quarter roster",
+   "verdict": true
+  },
+  {
+   "predicate": "cube roster",
+   "verdict": true
+  },
+  {
+   "predicate": "quarter K9 alpha cap",
+   "verdict": true,
+   "enclosure": [
+    1.4999829010139692e-06,
+    1.4999829010139692e-06
+   ]
+  },
+  {
+   "predicate": "quarter K9 beta cap",
+   "verdict": true,
+   "enclosure": [
+    2.962719085852419e-09,
+    2.962719085852419e-09
+   ]
+  },
+  {
+   "predicate": "quarter K9 alpha small-angle domain",
+   "verdict": true,
+   "enclosure": [
+    1.4999829010139692e-06,
+    1.4999829010139692e-06
+   ]
+  },
+  {
+   "predicate": "quarter K9 beta star small-angle domain",
+   "verdict": true,
+   "enclosure": [
+    2.9627319737458486e-09,
+    2.9627319737458486e-09
+   ]
+  },
+  {
+   "predicate": "quarter K9 C3",
+   "verdict": true,
+   "enclosure": [
+    0.2754011979960798,
+    0.2754011979960798
+   ]
+  },
+  {
+   "predicate": "quarter K9 positive height",
+   "verdict": true,
+   "enclosure": [
+    0.9052372592528933,
+    0.9052372592528933
+   ]
+  },
+  {
+   "predicate": "quarter K9 inclination geometry",
+   "verdict": true,
+   "enclosure": [
+    0.4999999999977501,
+    0.4999999999977501
+   ]
+  },
+  {
+   "predicate": "quarter K9 scale window",
+   "verdict": true,
+   "enclosure": [
+    2309986601997.0,
+    2309986601997.0
+   ]
+  },
+  {
+   "predicate": "quarter K9 inverse factor",
+   "verdict": true,
+   "enclosure": [
+    0.9999881851504158,
+    0.9999881851504158
+   ]
+  },
+  {
+   "predicate": "quarter K9 threshold margin",
+   "verdict": true,
+   "enclosure": [
+    0.015339795810190253,
+    0.015339795810190253
+   ]
+  },
+  {
+   "predicate": "quarter K9 positive derivative",
+   "verdict": true,
+   "enclosure": [
+    0.008642984139429795,
+    0.008642984139429795
+   ]
+  },
+  {
+   "predicate": "quarter K9 derivative loss",
+   "verdict": true,
+   "enclosure": [
+    10.650922433731965,
+    10.650922433731965
+   ]
+  },
+  {
+   "predicate": "quarter K13 alpha cap",
+   "verdict": true,
+   "enclosure": [
+    1.4999042191642327e-06,
+    1.4999042191642327e-06
+   ]
+  },
+  {
+   "predicate": "quarter K13 beta cap",
+   "verdict": true,
+   "enclosure": [
+    2.4845144659275624e-09,
+    2.4845144659275624e-09
+   ]
+  },
+  {
+   "predicate": "quarter K13 alpha small-angle domain",
+   "verdict": true,
+   "enclosure": [
+    1.4999042191642327e-06,
+    1.4999042191642327e-06
+   ]
+  },
+  {
+   "predicate": "quarter K13 beta star small-angle domain",
+   "verdict": true,
+   "enclosure": [
+    2.4845237828975714e-09,
+    2.4845237828975714e-09
+   ]
+  },
+  {
+   "predicate": "quarter K13 C3",
+   "verdict": true,
+   "enclosure": [
+    0.3012011295049416,
+    0.3012011295049416
+   ]
+  },
+  {
+   "predicate": "quarter K13 positive height",
+   "verdict": true,
+   "enclosure": [
+    0.8649945353710056,
+    0.8649945353710056
+   ]
+  },
+  {
+   "predicate": "quarter K13 inclination geometry",
+   "verdict": true,
+   "enclosure": [
+    0.4999999999977503,
+    0.4999999999977503
+   ]
+  },
+  {
+   "predicate": "quarter K13 scale window",
+   "verdict": true,
+   "enclosure": [
+    10849945749997.0,
+    10849945749997.0
+   ]
+  },
+  {
+   "predicate": "quarter K13 inverse factor",
+   "verdict": true,
+   "enclosure": [
+    0.9999902077285696,
+    0.9999902077285696
+   ]
+  },
+  {
+   "predicate": "quarter K13 threshold margin",
+   "verdict": true,
+   "enclosure": [
+    0.0037523940717980385,
+    0.0037523940717980385
+   ]
+  },
+  {
+   "predicate": "quarter K13 positive derivative",
+   "verdict": true,
+   "enclosure": [
+    0.0055790722637386065,
+    0.0055790722637386065
+   ]
+  },
+  {
+   "predicate": "quarter K13 derivative loss",
+   "verdict": true,
+   "enclosure": [
+    10.120337541790784,
+    10.120337541790784
+   ]
+  },
+  {
+   "predicate": "cube case1 tau ordering",
+   "verdict": true
+  },
+  {
+   "predicate": "cube case1 beta cap",
+   "verdict": true,
+   "enclosure": [
+    1.2e-07,
+    1.2e-07
+   ]
+  },
+  {
+   "predicate": "cube case1 height room",
+   "verdict": true,
+   "enclosure": [
+    0.020499879988,
+    0.020499879988
+   ]
+  },
+  {
+   "predicate": "cube case1 positive denominator",
+   "verdict": true,
+   "enclosure": [
+    0.9989993628652576,
+    0.9989993628652576
+   ]
+  },
+  {
+   "predicate": "cube case1 main margin",
+   "verdict": true,
+   "enclosure": [
+    0.08633985693941651,
+    0.08633985693941651
+   ]
+  },
+  {
+   "predicate": "cube case1 printed lower bound",
+   "verdict": true,
+   "enclosure": [
+    0.95899994246,
+    0.95899994246
+   ]
+  },
+  {
+   "predicate": "cube case1 printed upper bound",
+   "verdict": true,
+   "enclosure": [
+    0.8726600855205835,
+    0.8726600855205835
+   ]
+  },
+  {
+   "predicate": "cube case1 finite linear branch",
+   "verdict": true,
+   "enclosure": [
+    5000.0,
+    5000.0
+   ]
+  },
+  {
+   "predicate": "cube case2 tau ordering",
+   "verdict": true
+  },
+  {
+   "predicate": "cube case2 beta cap",
+   "verdict": true,
+   "enclosure": [
+    2.4e-11,
+    2.4e-11
+   ]
+  },
+  {
+   "predicate": "cube case2 height room",
+   "verdict": true,
+   "enclosure": [
+    0.1674999999759976,
+    0.1674999999759976
+   ]
+  },
+  {
+   "predicate": "cube case2 positive denominator",
+   "verdict": true,
+   "enclosure": [
+    0.9989995545095895,
+    0.9989995545095895
+   ]
+  },
+  {
+   "predicate": "cube case2 main margin",
+   "verdict": true,
+   "enclosure": [
+    0.05414499657455431,
+    0.05414499657455431
+   ]
+  },
+  {
+   "predicate": "cube case2 printed lower bound",
+   "verdict": true,
+   "enclosure": [
+    0.6649999999999984,
+    0.6649999999999984
+   ]
+  },
+  {
+   "predicate": "cube case2 printed upper bound",
+   "verdict": true,
+   "enclosure": [
+    0.6108550034254441,
+    0.6108550034254441
+   ]
+  },
+  {
+   "predicate": "cube case2 finite linear branch",
+   "verdict": true,
+   "enclosure": [
+    41412.55848169731,
+    41412.55848169731
+   ]
+  },
+  {
+   "predicate": "cube case3 tau ordering",
+   "verdict": true
+  },
+  {
+   "predicate": "cube case3 beta cap",
+   "verdict": true,
+   "enclosure": [
+    2.013513923447112e-12,
+    2.013513923447112e-12
+   ]
+  },
+  {
+   "predicate": "cube case3 height room",
+   "verdict": true,
+   "enclosure": [
+    0.1674999999979863,
+    0.1674999999979863
+   ]
+  },
+  {
+   "predicate": "cube case3 positive denominator",
+   "verdict": true,
+   "enclosure": [
+    0.9899995484690203,
+    0.9899995484690203
+   ]
+  },
+  {
+   "predicate": "cube case3 main margin",
+   "verdict": true,
+   "enclosure": [
+    0.036283490781258095,
+    0.036283490781258095
+   ]
+  },
+  {
+   "predicate": "cube case3 printed lower bound",
+   "verdict": true,
+   "enclosure": [
+    0.665,
+    0.665
+   ]
+  },
+  {
+   "predicate": "cube case3 printed upper bound",
+   "verdict": true,
+   "enclosure": [
+    0.6287165092187419,
+    0.6287165092187419
+   ]
+  },
+  {
+   "predicate": "cube case3 nonincreasing normalized exponents",
+   "verdict": true,
+   "note": "a property of p = 1/3, used by Proposition 5.1's monotonicity"
+  },
+  {
+   "predicate": "cube case4 tau ordering",
+   "verdict": true
+  },
+  {
+   "predicate": "cube case4 beta cap",
+   "verdict": true,
+   "enclosure": [
+    1e-14,
+    1e-14
+   ]
+  },
+  {
+   "predicate": "cube case4 height room",
+   "verdict": true,
+   "enclosure": [
+    0.16679999999999,
+    0.16679999999999
+   ]
+  },
+  {
+   "predicate": "cube case4 positive denominator",
+   "verdict": true,
+   "enclosure": [
+    0.9949999668533995,
+    0.9949999668533995
+   ]
+  },
+  {
+   "predicate": "cube case4 main margin",
+   "verdict": true,
+   "enclosure": [
+    0.00343719147705774,
+    0.00343719147705774
+   ]
+  },
+  {
+   "predicate": "cube case4 printed lower bound",
+   "verdict": true,
+   "enclosure": [
+    0.6664,
+    0.6664
+   ]
+  },
+  {
+   "predicate": "cube case4 printed upper bound",
+   "verdict": true,
+   "enclosure": [
+    0.6629628085229423,
+    0.6629628085229423
+   ]
+  },
+  {
+   "predicate": "cube case4 nonincreasing normalized exponents",
+   "verdict": true,
+   "note": "a property of p = 1/3, used by Proposition 5.1's monotonicity"
+  },
+  {
+   "predicate": "cube case5 tau ordering",
+   "verdict": true
+  },
+  {
+   "predicate": "cube case5 beta cap",
+   "verdict": true,
+   "enclosure": [
+    1.2e-07,
+    1.2e-07
+   ]
+  },
+  {
+   "predicate": "cube case5 height room",
+   "verdict": true,
+   "enclosure": [
+    0.020499879988,
+    0.020499879988
+   ]
+  },
+  {
+   "predicate": "cube case5 positive denominator",
+   "verdict": true,
+   "enclosure": [
+    0.9989993492473852,
+    0.9989993492473852
+   ]
+  },
+  {
+   "predicate": "cube case5 main margin",
+   "verdict": true,
+   "enclosure": [
+    0.06855499672899507,
+    0.06855499672899507
+   ]
+  },
+  {
+   "predicate": "cube case5 printed lower bound",
+   "verdict": true,
+   "enclosure": [
+    0.95899994246,
+    0.95899994246
+   ]
+  },
+  {
+   "predicate": "cube case5 printed upper bound",
+   "verdict": true,
+   "enclosure": [
+    0.890444945731005,
+    0.890444945731005
+   ]
+  },
+  {
+   "predicate": "cube case5 finite linear branch",
+   "verdict": true,
+   "enclosure": [
+    4164.132562731403,
+    4164.132562731403
+   ]
+  },
+  {
+   "predicate": "cube case6 tau ordering",
+   "verdict": true
+  },
+  {
+   "predicate": "cube case6 beta cap",
+   "verdict": true,
+   "enclosure": [
+    2.4494897427831782e-11,
+    2.4494897427831782e-11
+   ]
+  },
+  {
+   "predicate": "cube case6 height room",
+   "verdict": true,
+   "enclosure": [
+    0.16749999997550266,
+    0.16749999997550266
+   ]
+  },
+  {
+   "predicate": "cube case6 positive denominator",
+   "verdict": true,
+   "enclosure": [
+    0.9989995410771335,
+    0.9989995410771335
+   ]
+  },
+  {
+   "predicate": "cube case6 main margin",
+   "verdict": true,
+   "enclosure": [
+    0.036456684818389415,
+    0.036456684818389415
+   ]
+  },
+  {
+   "predicate": "cube case6 printed lower bound",
+   "verdict": true,
+   "enclosure": [
+    0.6649999999999984,
+    0.6649999999999984
+   ]
+  },
+  {
+   "predicate": "cube case6 printed upper bound",
+   "verdict": true,
+   "enclosure": [
+    0.6285433151816089,
+    0.6285433151816089
+   ]
+  },
+  {
+   "predicate": "cube case6 finite linear branch",
+   "verdict": true,
+   "enclosure": [
+    34934.22390722313,
+    34934.22390722313
+   ]
+  },
+  {
+   "predicate": "cube case7 tau ordering",
+   "verdict": true
+  },
+  {
+   "predicate": "cube case7 beta cap",
+   "verdict": true,
+   "enclosure": [
+    2.056838539510342e-12,
+    2.056838539510342e-12
+   ]
+  },
+  {
+   "predicate": "cube case7 height room",
+   "verdict": true,
+   "enclosure": [
+    0.16749999999794296,
+    0.16749999999794296
+   ]
+  },
+  {
+   "predicate": "cube case7 positive denominator",
+   "verdict": true,
+   "enclosure": [
+    0.9899995429357752,
+    0.9899995429357752
+   ]
+  },
+  {
+   "predicate": "cube case7 main margin",
+   "verdict": true,
+   "enclosure": [
+    0.03490609913814018,
+    0.03490609913814018
+   ]
+  },
+  {
+   "predicate": "cube case7 printed lower bound",
+   "verdict": true,
+   "enclosure": [
+    0.665,
+    0.665
+   ]
+  },
+  {
+   "predicate": "cube case7 printed upper bound",
+   "verdict": true,
+   "enclosure": [
+    0.6300939008618598,
+    0.6300939008618598
+   ]
+  },
+  {
+   "predicate": "cube case7 nonincreasing normalized exponents",
+   "verdict": true,
+   "note": "a property of p = 1/3, used by Proposition 5.1's monotonicity"
+  },
+  {
+   "predicate": "cube case8 tau ordering",
+   "verdict": true
+  },
+  {
+   "predicate": "cube case8 beta cap",
+   "verdict": true,
+   "enclosure": [
+    1e-14,
+    1e-14
+   ]
+  },
+  {
+   "predicate": "cube case8 height room",
+   "verdict": true,
+   "enclosure": [
+    0.16679999999999,
+    0.16679999999999
+   ]
+  },
+  {
+   "predicate": "cube case8 positive denominator",
+   "verdict": true,
+   "enclosure": [
+    0.9949999668555771,
+    0.9949999668555771
+   ]
+  },
+  {
+   "predicate": "cube case8 main margin",
+   "verdict": true,
+   "enclosure": [
+    0.00355839685461381,
+    0.00355839685461381
+   ]
+  },
+  {
+   "predicate": "cube case8 printed lower bound",
+   "verdict": true,
+   "enclosure": [
+    0.6664,
+    0.6664
+   ]
+  },
+  {
+   "predicate": "cube case8 printed upper bound",
+   "verdict": true,
+   "enclosure": [
+    0.6628416031453862,
+    0.6628416031453862
+   ]
+  },
+  {
+   "predicate": "cube case8 nonincreasing normalized exponents",
+   "verdict": true,
+   "note": "a property of p = 1/3, used by Proposition 5.1's monotonicity"
+  },
+  {
+   "predicate": "K9 geometric A ceiling",
+   "verdict": true,
+   "enclosure": [
+    10.606617627724654,
+    10.606617627724654
+   ]
+  },
+  {
+   "predicate": "K9 geometric A prime ceiling",
+   "verdict": true,
+   "enclosure": [
+    10.606617637736587,
+    10.606617637736587
+   ]
+  },
+  {
+   "predicate": "K9 geometric C Lambda ceiling",
+   "verdict": true,
+   "enclosure": [
+    1.00000011856,
+    1.00000011856
+   ]
+  },
+  {
+   "predicate": "K9 geometric S ceiling",
+   "verdict": true,
+   "enclosure": [
+    56.25008437568906,
+    56.25008437568906
+   ]
+  },
+  {
+   "predicate": "K9 geometric CM ceiling",
+   "verdict": true,
+   "enclosure": [
+    318.19900613378877,
+    318.19900613378877
+   ]
+  },
+  {
+   "predicate": "K9 geometric CG ceiling",
+   "verdict": true,
+   "enclosure": [
+    56.250084375752344,
+    56.250084375752344
+   ]
+  },
+  {
+   "predicate": "K9 geometric CE ceiling",
+   "verdict": true,
+   "enclosure": [
+    754.794,
+    754.794
+   ]
+  },
+  {
+   "predicate": "quarter K9 asymptotic floor",
+   "verdict": true,
+   "enclosure": [
+    0.16965241122056102,
+    0.16965241122056102
+   ]
+  },
+  {
+   "predicate": "cube K9 asymptotic floor",
+   "verdict": true,
+   "enclosure": [
+    0.06285314432024383,
+    0.06285314432024383
+   ]
+  },
+  {
+   "predicate": "K13 geometric A ceiling",
+   "verdict": true,
+   "enclosure": [
+    12.74756790533382,
+    12.74756790533382
+   ]
+  },
+  {
+   "predicate": "K13 geometric A prime ceiling",
+   "verdict": true,
+   "enclosure": [
+    12.747567915348162,
+    12.747567915348162
+   ]
+  },
+  {
+   "predicate": "K13 geometric C Lambda ceiling",
+   "verdict": true,
+   "enclosure": [
+    1.00000017126,
+    1.00000017126
+   ]
+  },
+  {
+   "predicate": "K13 geometric S ceiling",
+   "verdict": true,
+   "enclosure": [
+    81.25012187599532,
+    81.25012187599532
+   ]
+  },
+  {
+   "predicate": "K13 geometric CM ceiling",
+   "verdict": true,
+   "enclosure": [
+    459.62078663769495,
+    459.62078663769495
+   ]
+  },
+  {
+   "predicate": "K13 geometric CG ceiling",
+   "verdict": true,
+   "enclosure": [
+    81.25012187608672,
+    81.25012187608672
+   ]
+  },
+  {
+   "predicate": "K13 geometric CE ceiling",
+   "verdict": true,
+   "enclosure": [
+    1090.258,
+    1090.258
+   ]
+  },
+  {
+   "predicate": "quarter K13 asymptotic floor",
+   "verdict": true,
+   "enclosure": [
+    0.14115933870236858,
+    0.14115933870236858
+   ]
+  },
+  {
+   "predicate": "cube K13 asymptotic floor",
+   "verdict": true,
+   "enclosure": [
+    0.05229741771561687,
+    0.05229741771561687
+   ]
+  }
+ ]
+}

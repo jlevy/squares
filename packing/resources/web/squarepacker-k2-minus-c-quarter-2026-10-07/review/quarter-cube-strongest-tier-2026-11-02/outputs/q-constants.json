@@ -1,0 +1,2478 @@
+{
+ "program": "q_constants.py",
+ "python": "3.14.7",
+ "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+ "program_sha256": {
+  "c_citations.py": "e9c70a29300d6fbc085a944945e25fb3a120468faa079a4f8dd125ae92cfb466",
+  "c_constants.py": "a7a2305121fb7a88340bcba64ec100b23648cce3fcae2aad7ed639a8d5e08f02",
+  "checks.py": "318b4b1a68191dc846a32b164b9d8ad19afc9247c9b00ecfca9fd4acb0b0a9ae",
+  "iv.py": "c2341d825430c8ed6bc1929b71bdec3ce3df810cd19b32f5165263e7035e1c4a",
+  "l49_mpmath_crosscheck.py": "1d649e4f2530d34575d523c2930f96e9ac575b7546b23fdd07090d2abb645d39",
+  "q_constants.py": "ef69c5d3b55e4089d8d17667db792bf3a09cdc721ee7563e83f08dd62a9b4df3",
+  "q_quotes.py": "f0290e9f34a02b15894611da65e64077f0528277cbd64c8fa0fb58e9df66f6e8",
+  "q_supplementary.py": "760c0727707236c1d7d24a07c57bdb95a39c66396ecc63823793f0d9f370654b",
+  "qcc_predicates.py": "622954a3354a885280a61aaa1c52f8183ff4bb32fed34692dd7fac9696b58e21",
+  "qmodel.py": "d33e250adff64c8d2d657e0cb9640ada8e230f0fd6ba73335c49768febf2b887",
+  "r_lemmas_check.py": "bfe5bf854908fe0be9244fd1817a0016ced94486f2147b429987c693a41b8f39"
+ },
+ "summary": {
+  "checks": 193,
+  "needed_true": 193,
+  "needed_false": 0,
+  "needed_undecided": 0,
+  "display_checked": 57,
+  "display_true": 57,
+  "display_false": 0
+ },
+ "checks": [
+  {
+   "id": "intro-cinf",
+   "where": "Q L131-137",
+   "what": "c_inf with exact A, A'",
+   "relation": "trunc",
+   "shown": "0.1696524...",
+   "needed": true,
+   "enclosure": [
+    "1.69652411220561014805479456414e-1",
+    "1.69652411220561014805479456414e-1"
+   ]
+  },
+  {
+   "id": "intro-cinf13",
+   "where": "Q L151-158",
+   "what": "c_inf^(13) with exact A13, A'13",
+   "relation": "trunc",
+   "shown": "0.1411593...",
+   "needed": true,
+   "enclosure": [
+    "1.41159338702368572407357485186e-1",
+    "1.41159338702368572407357485186e-1"
+   ]
+  },
+  {
+   "id": "intro-147",
+   "where": "Q L129, L4926",
+   "what": "ceil(0.1 k0^(1/4)) = 147 at k0 = 4.62e12",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "1.46608953547198736695901351719e+2",
+    "1.46608953547198736695901351719e+2"
+   ]
+  },
+  {
+   "id": "intro-216",
+   "where": "Q L149, L5062",
+   "what": "ceil(0.1 k0^(1/4)) = 216 at k0 = 2.17e13",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "2.15831551899643402856726062577e+2",
+    "2.15831551899643402856726062577e+2"
+   ]
+  },
+  {
+   "id": "intro-log",
+   "where": "Q L191",
+   "what": "log(4.62e12)",
+   "relation": "<",
+   "shown": "29.17",
+   "needed": true,
+   "enclosure": [
+    "2.91614158210221956901596882266e+1",
+    "2.91614158210221956901596882266e+1"
+   ]
+  },
+  {
+   "id": "intro-R-slope",
+   "where": "Q L191, [R] Remark 7.4",
+   "what": "30.418/1.99954",
+   "relation": "<=",
+   "shown": "15.22",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.52124988747411904738089760644e+1",
+    "1.52124988747411904738089760644e+1"
+   ]
+  },
+  {
+   "id": "intro-R-const",
+   "where": "Q L191, [R] Remark 7.4",
+   "what": "13.06675",
+   "relation": "<=",
+   "shown": "13.07",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.30667500000000000000000000000e+1",
+    "1.30667500000000000000000000000e+1"
+   ]
+  },
+  {
+   "id": "imp-A",
+   "where": "Q L479, L594",
+   "what": "A = 4 sqrt(9/0.32)/(2-3e-6)",
+   "relation": "<",
+   "shown": "10.6067",
+   "needed": true,
+   "enclosure": [
+    "1.06066176277246544529943449230e+1",
+    "1.06066176277246544529943449230e+1"
+   ]
+  },
+  {
+   "id": "imp-A-trunc",
+   "where": "Q L594",
+   "what": "A",
+   "relation": "trunc",
+   "shown": "10.60661762...",
+   "needed": true,
+   "enclosure": [
+    "1.06066176277246544529943449230e+1",
+    "1.06066176277246544529943449230e+1"
+   ]
+  },
+  {
+   "id": "imp-A13",
+   "where": "Q L591",
+   "what": "A13",
+   "relation": "<",
+   "shown": "12.7476",
+   "needed": true,
+   "enclosure": [
+    "1.27475679053338200758006739735e+1",
+    "1.27475679053338200758006739735e+1"
+   ]
+  },
+  {
+   "id": "imp-A13-trunc",
+   "where": "Q L594",
+   "what": "A13",
+   "relation": "trunc",
+   "shown": "12.74756790...",
+   "needed": true,
+   "enclosure": [
+    "1.27475679053338200758006739735e+1",
+    "1.27475679053338200758006739735e+1"
+   ]
+  },
+  {
+   "id": "imp-sec",
+   "where": "Q L512",
+   "what": "1/(2 - 1e-6), the coefficient of sec x - 1 <= x^2/(2-x^2)",
+   "relation": "<",
+   "shown": "0.5000003",
+   "needed": true,
+   "enclosure": [
+    "5.00000250000125000062500031250e-1",
+    "5.00000250000125000062500031250e-1"
+   ]
+  },
+  {
+   "id": "L3.3a",
+   "where": "Q L709",
+   "what": "(1 - (3e-6)^2/2)/2",
+   "relation": ">",
+   "shown": "0.49",
+   "needed": true,
+   "enclosure": [
+    "4.99999999997750000000000000000e-1",
+    "4.99999999997750000000000000000e-1"
+   ]
+  },
+  {
+   "id": "L3.3b",
+   "where": "Q L713",
+   "what": "0.0037^3 = 5.0653e-8 > 5.0625e-8 = 0.015^4",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.3b-2",
+   "where": "Q L713",
+   "what": "1.5e-6/0.015 = 1e-4",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-C0",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (C0) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-C1",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (C1) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-C2",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (C2) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-C3",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (C3) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-C4",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (C4) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-C5",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (C5) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-C6",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (C6) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-C7",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (C7) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-Q1",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (Q1) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*-Q2",
+   "where": "Q L726-751, Table 3",
+   "what": "pi* satisfies (Q2) at k0 = 4620000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-C0",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (C0) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-C1",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (C1) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-C2",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (C2) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-C3",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (C3) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-C4",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (C4) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-C5",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (C5) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-C6",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (C6) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-C7",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (C7) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-Q1",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (Q1) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-pi*13-Q2",
+   "where": "Q L726-751, Table 3",
+   "what": "pi*13 satisfies (Q2) at k0 = 21700000000000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-c0/bbar",
+   "where": "Q L727, L736",
+   "what": "c0/bbar at pi*",
+   "relation": "==",
+   "shown": "205200",
+   "needed": true,
+   "enclosure": [
+    "2.05200000000000000000000000000e+5",
+    "2.05200000000000000000000000000e+5"
+   ]
+  },
+  {
+   "id": "L3.4-(c0/bbar)^2",
+   "where": "Q L727",
+   "what": "(c0/bbar)^2 at pi*",
+   "relation": "==",
+   "shown": "42107040000",
+   "needed": true,
+   "enclosure": [
+    "4.21070400000000000000000000000e+10",
+    "4.21070400000000000000000000000e+10"
+   ]
+  },
+  {
+   "id": "L3.4-c0^2",
+   "where": "Q L735",
+   "what": "c0^2 at pi*",
+   "relation": "==",
+   "shown": "0.09474084",
+   "needed": true,
+   "enclosure": [
+    "9.47408400000000000000000000000e-2",
+    "9.47408400000000000000000000000e-2"
+   ]
+  },
+  {
+   "id": "L3.4-bbar^2y0",
+   "where": "Q L735",
+   "what": "bbar^2 y0 at pi*",
+   "relation": "==",
+   "shown": "0.094743",
+   "needed": true,
+   "enclosure": [
+    "9.47430000000000000000000000000e-2",
+    "9.47430000000000000000000000000e-2"
+   ]
+  },
+  {
+   "id": "L3.4-bstar",
+   "where": "Q L727",
+   "what": "b* at pi*",
+   "relation": "<",
+   "shown": "1e-8",
+   "needed": true,
+   "enclosure": [
+    "2.96273197374584849964518678450e-9",
+    "2.96273197374584849964518678450e-9"
+   ]
+  },
+  {
+   "id": "L3.4-betahat",
+   "where": "Q L737",
+   "what": "betahat(y0) at pi*",
+   "relation": "<",
+   "shown": "1e-8",
+   "needed": true,
+   "enclosure": [
+    "2.96271908585241896666129177994e-9",
+    "2.96271908585241896666129177994e-9"
+   ]
+  },
+  {
+   "id": "L3.4-w0-lo",
+   "where": "Q L727, L741",
+   "what": "w0 at pi*",
+   "relation": ">",
+   "shown": "0.0473813",
+   "needed": true,
+   "enclosure": [
+    "4.73813703735533562940623748912e-2",
+    "4.73813703735533562940623748912e-2"
+   ]
+  },
+  {
+   "id": "L3.4-w0-hi",
+   "where": "Q L727, L742",
+   "what": "w0 at pi*",
+   "relation": "<",
+   "shown": "0.0473814",
+   "needed": true,
+   "enclosure": [
+    "4.73813703735533562940623748912e-2",
+    "4.73813703735533562940623748912e-2"
+   ]
+  },
+  {
+   "id": "L3.4-h0-lo",
+   "where": "Q L728",
+   "what": "h0 at pi*",
+   "relation": ">",
+   "shown": "0.9052372",
+   "needed": true,
+   "enclosure": [
+    "9.05237259252893287411875250217e-1",
+    "9.05237259252893287411875250217e-1"
+   ]
+  },
+  {
+   "id": "L3.4-h0-hi",
+   "where": "Q L728",
+   "what": "h0 at pi*",
+   "relation": "<",
+   "shown": "0.9052374",
+   "needed": true,
+   "enclosure": [
+    "9.05237259252893287411875250217e-1",
+    "9.05237259252893287411875250217e-1"
+   ]
+  },
+  {
+   "id": "L3.4-0.50001c0^2",
+   "where": "Q L739",
+   "what": "0.50001 c0^2 at pi*",
+   "relation": "==",
+   "shown": "0.0473713674084",
+   "needed": true,
+   "enclosure": [
+    "4.73713674084000000000000000000e-2",
+    "4.73713674084000000000000000000e-2"
+   ]
+  },
+  {
+   "id": "L3.4-C3a",
+   "where": "Q L738",
+   "what": "c1 (1-eps)^(-3/4) at pi*",
+   "relation": "<",
+   "shown": "0.2755",
+   "needed": true,
+   "enclosure": [
+    "2.75401197996079831574441776664e-1",
+    "2.75401197996079831574441776664e-1"
+   ]
+  },
+  {
+   "id": "L3.4-C3b",
+   "where": "Q L738",
+   "what": "c0 y0^(1/4) at pi*",
+   "relation": ">",
+   "shown": "97",
+   "needed": true,
+   "enclosure": [
+    "1.39431137063199970536194106536e+2",
+    "1.39431137063199970536194106536e+2"
+   ]
+  },
+  {
+   "id": "L3.4-C7",
+   "where": "Q L746",
+   "what": "(1-eps)(k0/2-3) at pi*, k0 = 4.62e12",
+   "relation": ">",
+   "shown": "2e12",
+   "needed": true,
+   "enclosure": [
+    "2.30998660199700001740000000000e+12",
+    "2.30998660199700001740000000000e+12"
+   ]
+  },
+  {
+   "id": "L3.4-13-c0^2",
+   "where": "Q L748",
+   "what": "c0^2 = 0.13498276 <= 0.135 = 2.25e-12 * 6e10 at pi*13",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L3.4-13-bstar",
+   "where": "Q L749",
+   "what": "b* at pi*13",
+   "relation": "<",
+   "shown": "1.1e-8",
+   "needed": true,
+   "enclosure": [
+    "2.48452378289757128177568015960e-9",
+    "2.48452378289757128177568015960e-9"
+   ]
+  },
+  {
+   "id": "L3.4-13-betahat",
+   "where": "Q L749",
+   "what": "betahat(y0) at pi*13",
+   "relation": "<",
+   "shown": "1.1e-8",
+   "needed": true,
+   "enclosure": [
+    "2.48451446592756230113570941458e-9",
+    "2.48451446592756230113570941458e-9"
+   ]
+  },
+  {
+   "id": "L3.4-13-C3a",
+   "where": "Q L749",
+   "what": "c1 (1-eps)^(-3/4) at pi*13",
+   "relation": "<",
+   "shown": "0.302",
+   "needed": true,
+   "enclosure": [
+    "3.01201129504941585148934291886e-1",
+    "3.01201129504941585148934291886e-1"
+   ]
+  },
+  {
+   "id": "L3.4-13-C3b",
+   "where": "Q L749",
+   "what": "c0 y0^(1/4) at pi*13",
+   "relation": ">",
+   "shown": "97",
+   "needed": true,
+   "enclosure": [
+    "1.81834783821072985943677218907e+2",
+    "1.81834783821072985943677218907e+2"
+   ]
+  },
+  {
+   "id": "L3.4-13-w0",
+   "where": "Q L750",
+   "what": "w0 at pi*13",
+   "relation": "<",
+   "shown": "0.0676",
+   "needed": true,
+   "enclosure": [
+    "6.75027323144972265942040849038e-2",
+    "6.75027323144972265942040849038e-2"
+   ]
+  },
+  {
+   "id": "L3.4-13-C7",
+   "where": "Q L751",
+   "what": "(1-eps)(k0/2-3) at pi*13, k0 = 2.17e13",
+   "relation": ">",
+   "shown": "1e13",
+   "needed": true,
+   "enclosure": [
+    "1.08499457499970000150000000000e+13",
+    "1.08499457499970000150000000000e+13"
+   ]
+  },
+  {
+   "id": "D3.6-A",
+   "where": "Q L806",
+   "what": "A",
+   "relation": "<",
+   "shown": "10.6067",
+   "needed": true,
+   "enclosure": [
+    "1.06066176277246544529943449230e+1",
+    "1.06066176277246544529943449230e+1"
+   ]
+  },
+  {
+   "id": "D3.6-A'",
+   "where": "Q L806",
+   "what": "A'",
+   "relation": "<",
+   "shown": "10.6068",
+   "needed": true,
+   "enclosure": [
+    "1.06066176377365868978255463460e+1",
+    "1.06066176377365868978255463460e+1"
+   ]
+  },
+  {
+   "id": "D3.6-CL",
+   "where": "Q L806",
+   "what": "C_Lambda",
+   "relation": "<",
+   "shown": "1.0000002",
+   "needed": true,
+   "enclosure": [
+    "1.00000011856000000000000000000e+0",
+    "1.00000011856000000000000000000e+0"
+   ]
+  },
+  {
+   "id": "D3.6-A13",
+   "where": "Q L806",
+   "what": "A13",
+   "relation": "<",
+   "shown": "12.7476",
+   "needed": true,
+   "enclosure": [
+    "1.27475679053338200758006739735e+1",
+    "1.27475679053338200758006739735e+1"
+   ]
+  },
+  {
+   "id": "D3.6-A'13",
+   "where": "Q L806",
+   "what": "A'13",
+   "relation": "<",
+   "shown": "12.7476",
+   "needed": true,
+   "enclosure": [
+    "1.27475679153481610896941879658e+1",
+    "1.27475679153481610896941879658e+1"
+   ]
+  },
+  {
+   "id": "D3.6-CL13",
+   "where": "Q L806",
+   "what": "C_Lambda^(13)",
+   "relation": "<",
+   "shown": "1.0000002",
+   "needed": true,
+   "enclosure": [
+    "1.00000017126000000000000000000e+0",
+    "1.00000017126000000000000000000e+0"
+   ]
+  },
+  {
+   "id": "L4.6-h(t1)",
+   "where": "Q L1898",
+   "what": "h(t1) = f(t1) - 1.0001 t1 < 0",
+   "relation": "<",
+   "shown": "0",
+   "needed": true,
+   "enclosure": [
+    "-3.57758775685204483417081274847e-15",
+    "-3.57758775685204483417081274847e-15"
+   ]
+  },
+  {
+   "id": "L4.6-h(t2)",
+   "where": "Q L1898",
+   "what": "h(t2) > 0",
+   "relation": ">",
+   "shown": "0",
+   "needed": true,
+   "enclosure": [
+    "6.42174684278567759714788263228e-15",
+    "6.42174684278567759714788263228e-15"
+   ]
+  },
+  {
+   "id": "L4.6-rhs(t1)",
+   "where": "Q L1898",
+   "what": "t1/2 - t1^2/6 + t1^4/120 - 1e-4",
+   "relation": "<",
+   "shown": "-1.7e-11",
+   "needed": true,
+   "enclosure": [
+    "-1.75533494781196462043154925827e-11",
+    "-1.75533494781196462043154925827e-11"
+   ]
+  },
+  {
+   "id": "L4.6-lhs(t2)",
+   "where": "Q L1898",
+   "what": "t2/2 - t2^2/6 - t2^3/24 - 1e-4",
+   "relation": ">",
+   "shown": "3.2e-11",
+   "needed": true,
+   "enclosure": [
+    "3.21065697355108997456666666666e-11",
+    "3.21065697355108997456666666666e-11"
+   ]
+  },
+  {
+   "id": "P5.10-ratio1",
+   "where": "Q L2333",
+   "what": "40/((pi/4)(2-pi/4))",
+   "relation": "trunc",
+   "shown": "41.93109...",
+   "needed": true,
+   "enclosure": [
+    "4.19310923585174432963365554764e+1",
+    "4.19310923585174432963365554764e+1"
+   ]
+  },
+  {
+   "id": "P5.10-ratio2",
+   "where": "Q L2338",
+   "what": "40 tan(pi/4+amax)/((pi/4-amax)(2-pi/4+amax))",
+   "relation": "<=",
+   "shown": "41.9313",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.19312464509229601312030252338e+1",
+    "4.19312464509229601312030252338e+1"
+   ]
+  },
+  {
+   "id": "P5.10-ratio2t",
+   "where": "Q L2339",
+   "what": "the same",
+   "relation": "trunc",
+   "shown": "41.93124...",
+   "needed": true,
+   "enclosure": [
+    "4.19312464509229601312030252338e+1",
+    "4.19312464509229601312030252338e+1"
+   ]
+  },
+  {
+   "id": "P5.10-cE",
+   "where": "Q L2341",
+   "what": "both ratios <= c_E = 41.933",
+   "relation": "<",
+   "shown": "41.933",
+   "needed": true,
+   "enclosure": [
+    "4.19310923585174432963365554764e+1",
+    "4.19312464509229601312030252338e+1"
+   ]
+  },
+  {
+   "id": "P5.10-754",
+   "where": "Q L2360",
+   "what": "18 * 41.933",
+   "relation": "==",
+   "shown": "754.794",
+   "needed": true,
+   "enclosure": [
+    "7.54794000000000000000000000000e+2",
+    "7.54794000000000000000000000000e+2"
+   ]
+  },
+  {
+   "id": "P5.10-1090",
+   "where": "Q L2360",
+   "what": "26 * 41.933",
+   "relation": "==",
+   "shown": "1090.258",
+   "needed": true,
+   "enclosure": [
+    "1.09025800000000000000000000000e+3",
+    "1.09025800000000000000000000000e+3"
+   ]
+  },
+  {
+   "id": "P5.10-round",
+   "where": "Q L2321",
+   "what": "754.794 <= 754.8 and 1090.258 <= 1090.3",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T7.1-S9",
+   "where": "Q L2952, L3142",
+   "what": "S_9",
+   "relation": "<=",
+   "shown": "56.2501",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "5.62500843756890635335953003929e+1",
+    "5.62500843756890635335953003929e+1"
+   ]
+  },
+  {
+   "id": "T7.1-S13",
+   "where": "Q L2952, L3142",
+   "what": "S_13",
+   "relation": "<=",
+   "shown": "81.2502",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "8.12501218759953139929709894564e+1",
+    "8.12501218759953139929709894564e+1"
+   ]
+  },
+  {
+   "id": "L7.8-56",
+   "where": "Q L3142",
+   "what": "4*9/(0.32(2-3e-6))",
+   "relation": "trunc",
+   "shown": "56.2500843...",
+   "needed": true,
+   "enclosure": [
+    "5.62500843751265626898440347660e+1",
+    "5.62500843751265626898440347660e+1"
+   ]
+  },
+  {
+   "id": "L7.8-81",
+   "where": "Q L3142",
+   "what": "4*13/(0.32(2-3e-6))",
+   "relation": "trunc",
+   "shown": "81.2501218...",
+   "needed": true,
+   "enclosure": [
+    "8.12501218751828127742191613287e+1",
+    "8.12501218751828127742191613287e+1"
+   ]
+  },
+  {
+   "id": "L7.8-cos2",
+   "where": "Q L3141",
+   "what": "1/cos^2(3e-6)",
+   "relation": "<=",
+   "shown": "1.00000000001",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.00000000000900000000005400000e+0",
+    "1.00000000000900000000005400000e+0"
+   ],
+   "note": "the text writes <= 1 + 1e-11"
+  },
+  {
+   "id": "L7.6-disc-r",
+   "where": "Q L3104",
+   "what": "1e-4 + sqrt(2)/2",
+   "relation": "<=",
+   "shown": "0.70721",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "7.07206781186547524400844362104e-1",
+    "7.07206781186547524400844362104e-1"
+   ]
+  },
+  {
+   "id": "L7.6-disc",
+   "where": "Q L3104",
+   "what": "4 pi 0.70721^2",
+   "relation": "<",
+   "shown": "6.29",
+   "needed": true,
+   "enclosure": [
+    "6.28501979748399014786569898407e+0",
+    "6.28501979748399014786569898407e+0"
+   ]
+  },
+  {
+   "id": "T7.1M-we",
+   "where": "Q L3206",
+   "what": "w_e = delta tan(theta)/cos(theta) at theta = 3e-6, in units of delta",
+   "relation": "<",
+   "shown": "3.1e-6",
+   "needed": true,
+   "enclosure": [
+    "3.00000000002250000000012352500e-6",
+    "3.00000000002250000000012352500e-6"
+   ]
+  },
+  {
+   "id": "T7.1M-dist",
+   "where": "Q L3206",
+   "what": "(w_e^2 + delta^2)^(1/2)/delta",
+   "relation": "<",
+   "shown": "1.01",
+   "needed": true,
+   "enclosure": [
+    "1.00000000000450000000005737500e+0",
+    "1.00000000000450000000005737500e+0"
+   ]
+  },
+  {
+   "id": "T7.1M-dist2",
+   "where": "Q L3206",
+   "what": "(tan^2(3e-6) + 1)^(1/2)",
+   "relation": "<",
+   "shown": "1.01",
+   "needed": true,
+   "enclosure": [
+    "1.00000000000450000000001687500e+0",
+    "1.00000000000450000000001687500e+0"
+   ]
+  },
+  {
+   "id": "T7.1M-5.65",
+   "where": "Q L3217",
+   "what": "4/cos(pi/4 + 1.5e-6)",
+   "relation": "trunc",
+   "shown": "5.65686273...",
+   "needed": true,
+   "enclosure": [
+    "5.65686273479284635187093817382e+0",
+    "5.65686273479284635187093817382e+0"
+   ]
+  },
+  {
+   "id": "T7.1M-5.65u",
+   "where": "Q L3217",
+   "what": "4/cos(pi/4 + 1.5e-6)",
+   "relation": "<=",
+   "shown": "5.656863",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "5.65686273479284635187093817382e+0",
+    "5.65686273479284635187093817382e+0"
+   ]
+  },
+  {
+   "id": "T7.1M-318",
+   "where": "Q L3217",
+   "what": "5.656863 * 56.2501",
+   "relation": "trunc",
+   "shown": "318.1991...",
+   "needed": true,
+   "enclosure": [
+    "3.18199109436300000000000000000e+2",
+    "3.18199109436300000000000000000e+2"
+   ]
+  },
+  {
+   "id": "T7.1M-459",
+   "where": "Q L3217",
+   "what": "5.656863 * 81.2502",
+   "relation": "trunc",
+   "shown": "459.6212...",
+   "needed": true,
+   "enclosure": [
+    "4.59621250122600000000000000000e+2",
+    "4.59621250122600000000000000000e+2"
+   ]
+  },
+  {
+   "id": "T7.1M-CM9",
+   "where": "Q L2964",
+   "what": "4 S_9/cos(pi/4+amax) <= C_M = 318.20",
+   "relation": "<",
+   "shown": "318.20",
+   "needed": true,
+   "enclosure": [
+    "3.18199006133788793264251144727e+2",
+    "3.18199006133788793264251144727e+2"
+   ]
+  },
+  {
+   "id": "T7.1M-CM13",
+   "where": "Q L2964",
+   "what": "4 S_13/cos(pi/4+amax) <= 459.7",
+   "relation": "<",
+   "shown": "459.7",
+   "needed": true,
+   "enclosure": [
+    "4.59620786637694923603918320161e+2",
+    "4.59620786637694923603918320161e+2"
+   ]
+  },
+  {
+   "id": "T7.1G-9",
+   "where": "Q L3250",
+   "what": "S_9/cos(1.5e-6)",
+   "relation": "<",
+   "shown": "56.2501",
+   "needed": true,
+   "enclosure": [
+    "5.62500843757523448785180099156e+1",
+    "5.62500843757523448785180099156e+1"
+   ]
+  },
+  {
+   "id": "T7.1G-13",
+   "where": "Q L3250",
+   "what": "S_13/cos(1.5e-6)",
+   "relation": "<",
+   "shown": "81.2502",
+   "needed": true,
+   "enclosure": [
+    "8.12501218760867203800815698782e+1",
+    "8.12501218760867203800815698782e+1"
+   ]
+  },
+  {
+   "id": "C7.2-sum9",
+   "where": "Q L3264",
+   "what": "56.2501 + 318.20 + 754.8 + 56.2501",
+   "relation": "==",
+   "shown": "1185.5002",
+   "needed": true,
+   "enclosure": [
+    "1.18550020000000000000000000000e+3",
+    "1.18550020000000000000000000000e+3"
+   ]
+  },
+  {
+   "id": "C7.2-sum13",
+   "where": "Q L3266",
+   "what": "81.26 + 459.7 + 1090.3 + 81.26",
+   "relation": "==",
+   "shown": "1712.52",
+   "needed": true,
+   "enclosure": [
+    "1.71252000000000000000000000000e+3",
+    "1.71252000000000000000000000000e+3"
+   ]
+  },
+  {
+   "id": "C7.2-cap",
+   "where": "Q L3264-3266",
+   "what": "1185.5002 <= 1185.6, 1712.52 <= 1712.6, 1712.6e-10 < 2e-7",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C7.2-S13-in-CD",
+   "where": "Q L2964",
+   "what": "S_13 <= 81.26 (C_D and C_G for K = 13)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R7.3-C6",
+   "where": "Q L2976",
+   "what": "cos(3e-6)/2",
+   "relation": ">",
+   "shown": "0.4999999",
+   "needed": true,
+   "enclosure": [
+    "4.99999999997750000000001687499e-1",
+    "4.99999999997750000000001687499e-1"
+   ]
+  },
+  {
+   "id": "P6-kappa",
+   "where": "Q L3490",
+   "what": "tan(pi/4 + bbar)",
+   "relation": "<",
+   "shown": "1.00001",
+   "needed": true,
+   "enclosure": [
+    "1.00000300000450000900001687503e+0",
+    "1.00000300000450000900001687503e+0"
+   ]
+  },
+  {
+   "id": "L8.9-chi",
+   "where": "Q L3589, L3612",
+   "what": "cos(1.5e-6) - 1.00001 * 1.5e-6",
+   "relation": ">",
+   "shown": "0.99999849",
+   "needed": true,
+   "enclosure": [
+    "9.99998499983875000000000210937e-1",
+    "9.99998499983875000000000210937e-1"
+   ]
+  },
+  {
+   "id": "L8.9-1/chi",
+   "where": "Q L3613",
+   "what": "1/0.99999849",
+   "relation": "<",
+   "shown": "1.0000016",
+   "needed": true,
+   "enclosure": [
+    "1.00000151000228010344295619886e+0",
+    "1.00000151000228010344295619886e+0"
+   ]
+  },
+  {
+   "id": "T8.3-56.26",
+   "where": "Q L3884",
+   "what": "36/(0.32(2 - 1.5e-6))",
+   "relation": "<",
+   "shown": "56.26",
+   "needed": true,
+   "enclosure": [
+    "5.62500421875316406487304865478e+1",
+    "5.62500421875316406487304865478e+1"
+   ]
+  },
+  {
+   "id": "T8.3-err9",
+   "where": "Q L3887",
+   "what": "1.0000016e-5 * 1.5e-6 * 56.26",
+   "relation": "<",
+   "shown": "8.5e-10",
+   "needed": true,
+   "enclosure": [
+    "8.43901350240000000000000000000e-10",
+    "8.43901350240000000000000000000e-10"
+   ]
+  },
+  {
+   "id": "T8.3-1/cos",
+   "where": "Q L3891",
+   "what": "1/cos(bbar) - 1",
+   "relation": "<",
+   "shown": "1.2e-12",
+   "needed": true,
+   "enclosure": [
+    "1.12500000000105468750000096503e-12",
+    "1.12500000000105468750000096503e-12"
+   ]
+  },
+  {
+   "id": "T8.3-A'",
+   "where": "Q L3892",
+   "what": "10.6067 (1 + 1.2e-12) + 1e-8",
+   "relation": "<",
+   "shown": "10.60671",
+   "needed": true,
+   "enclosure": [
+    "1.06067000100127280400000000000e+1",
+    "1.06067000100127280400000000000e+1"
+   ]
+  },
+  {
+   "id": "T8.3-A'2",
+   "where": "Q L3421",
+   "what": "A/cos(bbar) + 8.5e-10 <= A'",
+   "relation": "<",
+   "shown": "0",
+   "needed": true,
+   "enclosure": [
+    "-9.15000000000000000000000000000e-9",
+    "-9.14999999999999999999999999999e-9"
+   ]
+  },
+  {
+   "id": "T8.3-81.26",
+   "where": "Q L3896",
+   "what": "52/(0.32(2 - 1.5e-6))",
+   "relation": "<",
+   "shown": "81.26",
+   "needed": true,
+   "enclosure": [
+    "8.12500609375457031592773694580e+1",
+    "8.12500609375457031592773694580e+1"
+   ]
+  },
+  {
+   "id": "T8.3-err13",
+   "where": "Q L3897",
+   "what": "1.0000016e-5 * 1.5e-6 * 81.26",
+   "relation": "<",
+   "shown": "1.22e-9",
+   "needed": true,
+   "enclosure": [
+    "1.21890195024000000000000000000e-9",
+    "1.21890195024000000000000000000e-9"
+   ]
+  },
+  {
+   "id": "T8.3-A13",
+   "where": "Q L3899",
+   "what": "A13",
+   "relation": "<",
+   "shown": "12.74757",
+   "needed": true,
+   "enclosure": [
+    "1.27475679053338200758006739735e+1",
+    "1.27475679053338200758006739735e+1"
+   ]
+  },
+  {
+   "id": "T8.3-A'13",
+   "where": "Q L3900",
+   "what": "12.74757 (1 + 1.2e-12) + 1e-8",
+   "relation": "<",
+   "shown": "12.7476",
+   "needed": true,
+   "enclosure": [
+    "1.27475700100152970840000000000e+1",
+    "1.27475700100152970840000000000e+1"
+   ]
+  },
+  {
+   "id": "T8.3-A'13b",
+   "where": "Q L3426",
+   "what": "A13/cos(bbar) + 1.22e-9 <= A'13",
+   "relation": "<",
+   "shown": "0",
+   "needed": true,
+   "enclosure": [
+    "-8.78000000000000000000000000000e-9",
+    "-8.77999999999999999999999999999e-9"
+   ]
+  },
+  {
+   "id": "L8.12-a",
+   "where": "Q L3799",
+   "what": "1e-5 (2 - 1e-5)/40",
+   "relation": ">",
+   "shown": "4.99e-7",
+   "needed": true,
+   "enclosure": [
+    "4.99997500000000000000000000000e-7",
+    "4.99997500000000000000000000000e-7"
+   ]
+  },
+  {
+   "id": "L8.12-b",
+   "where": "Q L3800",
+   "what": "0.32 * 1.5e-6 * 2/4",
+   "relation": "==",
+   "shown": "2.4e-7",
+   "needed": true,
+   "enclosure": [
+    "2.40000000000000000000000000000e-7",
+    "2.40000000000000000000000000000e-7"
+   ]
+  },
+  {
+   "id": "R9.3",
+   "where": "Q L4128",
+   "what": "1.0001 * pi/4",
+   "relation": "trunc",
+   "shown": "0.7854767...",
+   "needed": true,
+   "enclosure": [
+    "7.85476703213788054446622411904e-1",
+    "7.85476703213788054446622411904e-1"
+   ]
+  },
+  {
+   "id": "T10.3-tan",
+   "where": "Q L4777",
+   "what": "tan(1.5e-6)/1.5e-6",
+   "relation": "<=",
+   "shown": "1.000001",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.00000000000075000000000067500e+0",
+    "1.00000000000075000000000067500e+0"
+   ],
+   "note": "rounded-up display not claimed; the proof needs tan(bbar) <= 1.000001 bbar"
+  },
+  {
+   "id": "P11.5-c0opt2",
+   "where": "Q L4976",
+   "what": "(c0_opt)^2",
+   "relation": "<",
+   "shown": "0.2",
+   "needed": true,
+   "enclosure": [
+    "1.99992000159596808063838723225e-1",
+    "1.99992000159596808063838723225e-1"
+   ]
+  },
+  {
+   "id": "P11.5-w0lim",
+   "where": "Q L4975",
+   "what": "0.50001 c0_opt^2 + delta + 1e-12",
+   "relation": "<",
+   "shown": "0.10002",
+   "needed": true,
+   "enclosure": [
+    "1.00008000000799999999999999999e-1",
+    "1.00008000000800000000000000000e-1"
+   ]
+  },
+  {
+   "id": "C-cor-146",
+   "where": "Q L5090",
+   "what": "10^4 * 146^4 + 1 = 4543718560001 < 4.62e12",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C-cor-215",
+   "where": "Q L5095",
+   "what": "10^4 * 215^4 + 1 = 21367506250001 < 2.17e13",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C-cor-147",
+   "where": "Q L5100",
+   "what": "10^4 * 147^4 + 1 = 4669488810001 > 4.62e12",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C-cor-216",
+   "where": "Q L5102",
+   "what": "10^4 * 216^4 + 1 = 21767823360001 > 2.17e13",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T2-lambda",
+   "where": "Q L5136",
+   "what": "lambda = 2 delta + 2e-12",
+   "relation": "==",
+   "shown": "2.0000002e-5",
+   "needed": true,
+   "enclosure": [
+    "2.00000020000000000000000000000e-5",
+    "2.00000020000000000000000000000e-5"
+   ]
+  },
+  {
+   "id": "T2-c0opt",
+   "where": "Q L5138",
+   "what": "c0_opt",
+   "relation": "trunc",
+   "shown": "0.4472046513...",
+   "needed": true,
+   "enclosure": [
+    "4.47204651317041656799901339889e-1",
+    "4.47204651317041656799901339889e-1"
+   ]
+  },
+  {
+   "id": "T2-A",
+   "where": "Q Table 2",
+   "what": "A",
+   "relation": "trunc",
+   "shown": "10.6066176277...",
+   "needed": true,
+   "enclosure": [
+    "1.06066176277246544529943449230e+1",
+    "1.06066176277246544529943449230e+1"
+   ]
+  },
+  {
+   "id": "T2-A'",
+   "where": "Q Table 2",
+   "what": "A'",
+   "relation": "trunc",
+   "shown": "10.6066176377...",
+   "needed": true,
+   "enclosure": [
+    "1.06066176377365868978255463460e+1",
+    "1.06066176377365868978255463460e+1"
+   ]
+  },
+  {
+   "id": "T2-A13",
+   "where": "Q Table 2",
+   "what": "A13",
+   "relation": "trunc",
+   "shown": "12.7475679053...",
+   "needed": true,
+   "enclosure": [
+    "1.27475679053338200758006739735e+1",
+    "1.27475679053338200758006739735e+1"
+   ]
+  },
+  {
+   "id": "T2-A'13",
+   "where": "Q Table 2",
+   "what": "A'13",
+   "relation": "trunc",
+   "shown": "12.7475679153...",
+   "needed": true,
+   "enclosure": [
+    "1.27475679153481610896941879658e+1",
+    "1.27475679153481610896941879658e+1"
+   ]
+  },
+  {
+   "id": "T2-CL",
+   "where": "Q Table 2",
+   "what": "C_Lambda",
+   "relation": "==",
+   "shown": "1.00000011856",
+   "needed": true,
+   "enclosure": [
+    "1.00000011856000000000000000000e+0",
+    "1.00000011856000000000000000000e+0"
+   ]
+  },
+  {
+   "id": "T2-CL13",
+   "where": "Q Table 2",
+   "what": "C_Lambda^(13)",
+   "relation": "==",
+   "shown": "1.00000017126",
+   "needed": true,
+   "enclosure": [
+    "1.00000017126000000000000000000e+0",
+    "1.00000017126000000000000000000e+0"
+   ]
+  },
+  {
+   "id": "T2-cinf",
+   "where": "Q Table 2",
+   "what": "c_inf, exact A, A'",
+   "relation": "trunc",
+   "shown": "0.1696524112...",
+   "needed": true,
+   "enclosure": [
+    "1.69652411220561014805479456414e-1",
+    "1.69652411220561014805479456414e-1"
+   ]
+  },
+  {
+   "id": "T2-cinf13",
+   "where": "Q Table 2",
+   "what": "c_inf^(13), exact",
+   "relation": "trunc",
+   "shown": "0.1411593387...",
+   "needed": true,
+   "enclosure": [
+    "1.41159338702368572407357485186e-1",
+    "1.41159338702368572407357485186e-1"
+   ]
+  },
+  {
+   "id": "T2-cinf+",
+   "where": "Q Table 2",
+   "what": "c_inf^+ with 10.6067, 10.6068",
+   "relation": "trunc",
+   "shown": "0.1696502940...",
+   "needed": true,
+   "enclosure": [
+    "1.69650294039857813092667611560e-1",
+    "1.69650294039857813092667611560e-1"
+   ]
+  },
+  {
+   "id": "T2-cinf13+",
+   "where": "Q Table 2",
+   "what": "c_inf^+(13) with 12.7476, 12.7476",
+   "relation": "trunc",
+   "shown": "0.1411589833...",
+   "needed": true,
+   "enclosure": [
+    "1.41158983360575218836336970440e-1",
+    "1.41158983360575218836336970440e-1"
+   ]
+  },
+  {
+   "id": "T2-bars",
+   "where": "Q Table 2, L4850",
+   "what": "A < 10.6067, A' < 10.6068, C_L < 1.0000002 (and the K=13 analogues)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T2-A'13cs",
+   "where": "Q L5170",
+   "what": "4 sqrt(13/Q*)/((2-bbar)cos bbar) + 1e-8 <= A'13 bound",
+   "relation": "<",
+   "shown": "12.7476",
+   "needed": true,
+   "enclosure": [
+    "1.27475583546650615662487281111e+1",
+    "1.27475583546650615662487281111e+1"
+   ]
+  },
+  {
+   "id": "T3-A-alpha_y0",
+   "where": "Q Table 3, column Theorem A",
+   "what": "alpha_y0",
+   "relation": "<=",
+   "shown": "1.4999830e-6",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.49998290101396931610327459348e-6",
+    "1.49998290101396931610327459348e-6"
+   ]
+  },
+  {
+   "id": "T3-A-betahat_y0",
+   "where": "Q Table 3, column Theorem A",
+   "what": "betahat_y0",
+   "relation": "<=",
+   "shown": "2.9628e-9",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.96271908585241896666129177994e-9",
+    "2.96271908585241896666129177994e-9"
+   ]
+  },
+  {
+   "id": "T3-A-C3_lhs",
+   "where": "Q Table 3, column Theorem A",
+   "what": "C3_lhs",
+   "relation": "<=",
+   "shown": "0.27541",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.75401197996079831574441776664e-1",
+    "2.75401197996079831574441776664e-1"
+   ]
+  },
+  {
+   "id": "T3-A-C3_rhs",
+   "where": "Q Table 3, column Theorem A",
+   "what": "C3_rhs",
+   "relation": ">=",
+   "shown": "139.43",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.39431137063199970536194106536e+2",
+    "1.39431137063199970536194106536e+2"
+   ]
+  },
+  {
+   "id": "T3-A-w0",
+   "where": "Q Table 3, column Theorem A",
+   "what": "w0",
+   "relation": "<=",
+   "shown": "0.04738138",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.73813703735533562940623748912e-2",
+    "4.73813703735533562940623748912e-2"
+   ]
+  },
+  {
+   "id": "T3-A-C7_lhs",
+   "where": "Q Table 3, column Theorem A",
+   "what": "C7_lhs",
+   "relation": ">=",
+   "shown": "2.3099866e12",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.30998660199700001740000000000e+12",
+    "2.30998660199700001740000000000e+12"
+   ]
+  },
+  {
+   "id": "T3-A-bstar",
+   "where": "Q Table 3, column Theorem A",
+   "what": "bstar",
+   "relation": "<=",
+   "shown": "2.9628e-9",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.96273197374584849964518678450e-9",
+    "2.96273197374584849964518678450e-9"
+   ]
+  },
+  {
+   "id": "T3-A-h0",
+   "where": "Q Table 3, column Theorem A",
+   "what": "h0",
+   "relation": ">=",
+   "shown": "0.9052372592",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "9.05237259252893287411875250217e-1",
+    "9.05237259252893287411875250217e-1"
+   ]
+  },
+  {
+   "id": "T3-A-eps_y0",
+   "where": "Q Table 3, column Theorem A",
+   "what": "eps_y0",
+   "relation": "==",
+   "shown": "244226.4",
+   "needed": true,
+   "enclosure": [
+    "2.44226400000000000000000000000e+5",
+    "2.44226400000000000000000000000e+5"
+   ]
+  },
+  {
+   "id": "T3-A-invF",
+   "where": "Q Table 3, column Theorem A",
+   "what": "invF",
+   "relation": ">=",
+   "shown": "0.99998818",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "9.99988185150415787319401694475e-1",
+    "9.99988185150415787319401694475e-1"
+   ]
+  },
+  {
+   "id": "T3-A-t1",
+   "where": "Q Table 3, column Theorem A",
+   "what": "t1",
+   "relation": "<=",
+   "shown": "0.00063282",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.32816242866508387086439356645e-4",
+    "6.32816242866508387086439356645e-4"
+   ]
+  },
+  {
+   "id": "T3-A-t2",
+   "where": "Q Table 3, column Theorem A",
+   "what": "t2",
+   "relation": "<=",
+   "shown": "19.256900",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.92568990559186637618010167029e+1",
+    "1.92568990559186637618010167029e+1"
+   ]
+  },
+  {
+   "id": "T3-A-t3",
+   "where": "Q Table 3, column Theorem A",
+   "what": "t3",
+   "relation": "<=",
+   "shown": "19.249235",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.92492349469963451090346700583e+1",
+    "1.92492349469963451090346700583e+1"
+   ]
+  },
+  {
+   "id": "T3-A-Gamma",
+   "where": "Q Table 3, column Theorem A",
+   "what": "Gamma",
+   "relation": "<=",
+   "shown": "2.8472e-5",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.84711787547302062982891612175e-5",
+    "2.84711787547302062982891612175e-5"
+   ]
+  },
+  {
+   "id": "T3-A-B",
+   "where": "Q Table 3, column Theorem A",
+   "what": "B",
+   "relation": "<=",
+   "shown": "38.506796",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.85067952903366301094290714898e+1",
+    "3.85067952903366301094290714898e+1"
+   ]
+  },
+  {
+   "id": "T3-A-Cwall",
+   "where": "Q Table 3, column Theorem A",
+   "what": "Cwall",
+   "relation": "<=",
+   "shown": "3.5789897",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.57898965364547390629207347278e+0",
+    "3.57898965364547390629207347278e+0"
+   ]
+  },
+  {
+   "id": "T3-A-KW",
+   "where": "Q Table 3, column Theorem A",
+   "what": "KW",
+   "relation": "<=",
+   "shown": "0.3390769",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.39076825214167397761452406345e-1",
+    "3.39076825214167397761452406345e-1"
+   ]
+  },
+  {
+   "id": "T3-A-Omega_bound",
+   "where": "Q Table 3, column Theorem A",
+   "what": "Omega_bound",
+   "relation": "<=",
+   "shown": "0.37941519",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.79415184934019686080992514825e-1",
+    "3.79415184934019686080992514825e-1"
+   ]
+  },
+  {
+   "id": "T3-A-wall",
+   "where": "Q Table 3, column Theorem A",
+   "what": "wall",
+   "relation": "<=",
+   "shown": "1.3579231",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.35792302131484054570807148027e+0",
+    "1.35792302131484054570807148027e+0"
+   ]
+  },
+  {
+   "id": "T3-A-lH_bound",
+   "where": "Q Table 3, column Theorem A",
+   "what": "lH_bound",
+   "relation": ">=",
+   "shown": "5647.4855",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "5.64748557862566413140652124420e+3",
+    "5.64748557862566413140652124420e+3"
+   ]
+  },
+  {
+   "id": "T3-A-Psi",
+   "where": "Q Table 3, column Theorem A",
+   "what": "Psi",
+   "relation": ">=",
+   "shown": "146.62429",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.46624293343008926948736530092e+2",
+    "1.46624293343008926948736530092e+2"
+   ]
+  },
+  {
+   "id": "T3-A-rhs_i",
+   "where": "Q Table 3, column Theorem A",
+   "what": "rhs_i",
+   "relation": "<=",
+   "shown": "146.60896",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.46608953547198736695901351719e+2",
+    "1.46608953547198736695901351719e+2"
+   ]
+  },
+  {
+   "id": "T3-A-D1",
+   "where": "Q Table 3, column Theorem A",
+   "what": "D1",
+   "relation": ">=",
+   "shown": "0.0086429",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "8.64298413942979524338250989907e-3",
+    "8.64298413942979524338250989907e-3"
+   ]
+  },
+  {
+   "id": "T3-A-iii_lhs",
+   "where": "Q Table 3, column Theorem A",
+   "what": "iii_lhs",
+   "relation": ">=",
+   "shown": "10.655",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.06553252517626208972342771057e+1",
+    "1.06553252517626208972342771057e+1"
+   ]
+  },
+  {
+   "id": "T3-A-iii_rhs",
+   "where": "Q Table 3, column Theorem A",
+   "what": "iii_rhs",
+   "relation": "<=",
+   "shown": "0.0044029",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.40281803065626076839047431092e-3",
+    "4.40281803065626076839047431092e-3"
+   ]
+  },
+  {
+   "id": "T3-A-Psi_inf",
+   "where": "Q Table 3, column Theorem A",
+   "what": "Psi_inf(pi) with B-bar",
+   "relation": "trunc",
+   "shown": "0.1581428...",
+   "needed": true,
+   "enclosure": [
+    "1.58142835039529805885640806608e-1",
+    "1.58142835039529805885640806608e-1"
+   ]
+  },
+  {
+   "id": "T3-A-cond-i",
+   "where": "Q Prop 11.2, L4923-4924 / L5058-5059",
+   "what": "condition (i) at k0, Theorem A",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T3-A-cond-ii",
+   "where": "Q Prop 11.2, L4923-4924 / L5058-5059",
+   "what": "condition (ii) at k0, Theorem A",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T3-A-cond-iii",
+   "where": "Q Prop 11.2, L4923-4924 / L5058-5059",
+   "what": "condition (iii) at k0, Theorem A",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T3-A-dispsum",
+   "where": "Q L5237-5238",
+   "what": "the four displayed terms, each rounded up, add up to more than the displayed bound for B-bar",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "3.85067962920000000000000000000e+1",
+    "3.85067962920000000000000000000e+1"
+   ]
+  },
+  {
+   "id": "T3-A13-alpha_y0",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "alpha_y0",
+   "relation": "<=",
+   "shown": "1.4999043e-6",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.49990421916423272212947028174e-6",
+    "1.49990421916423272212947028174e-6"
+   ]
+  },
+  {
+   "id": "T3-A13-betahat_y0",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "betahat_y0",
+   "relation": "<=",
+   "shown": "2.4846e-9",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.48451446592756230113570941458e-9",
+    "2.48451446592756230113570941458e-9"
+   ]
+  },
+  {
+   "id": "T3-A13-C3_lhs",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "C3_lhs",
+   "relation": "<=",
+   "shown": "0.30121",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.01201129504941585148934291886e-1",
+    "3.01201129504941585148934291886e-1"
+   ]
+  },
+  {
+   "id": "T3-A13-C3_rhs",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "C3_rhs",
+   "relation": ">=",
+   "shown": "181.83",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.81834783821072985943677218907e+2",
+    "1.81834783821072985943677218907e+2"
+   ]
+  },
+  {
+   "id": "T3-A13-w0",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "w0",
+   "relation": "<=",
+   "shown": "0.06750274",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.75027323144972265942040849038e-2",
+    "6.75027323144972265942040849038e-2"
+   ]
+  },
+  {
+   "id": "T3-A13-C7_lhs",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "C7_lhs",
+   "relation": ">=",
+   "shown": "1.0849945e13",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.08499457499970000150000000000e+13",
+    "1.08499457499970000150000000000e+13"
+   ]
+  },
+  {
+   "id": "T3-A13-bstar",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "bstar",
+   "relation": "<=",
+   "shown": "2.4846e-9",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.48452378289757128177568015960e-9",
+    "2.48452378289757128177568015960e-9"
+   ]
+  },
+  {
+   "id": "T3-A13-h0",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "h0",
+   "relation": ">=",
+   "shown": "0.8649945353",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "8.64994535371005546811591830192e-1",
+    "8.64994535371005546811591830192e-1"
+   ]
+  },
+  {
+   "id": "T3-A13-eps_y0",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "eps_y0",
+   "relation": "==",
+   "shown": "300000",
+   "needed": true,
+   "enclosure": [
+    "3.00000000000000000000000000000e+5",
+    "3.00000000000000000000000000000e+5"
+   ]
+  },
+  {
+   "id": "T3-A13-invF",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "invF",
+   "relation": ">=",
+   "shown": "0.99999020",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "9.99990207728569580148704912650e-1",
+    "9.99990207728569580148704912650e-1"
+   ]
+  },
+  {
+   "id": "T3-A13-t1",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "t1",
+   "relation": "<=",
+   "shown": "0.00058920",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "5.89194286171400659537020824934e-4",
+    "5.89194286171400659537020824934e-4"
+   ]
+  },
+  {
+   "id": "T3-A13-t2",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "t2",
+   "relation": "<=",
+   "shown": "21.161355",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.11613545816733067729083665338e+1",
+    "2.11613545816733067729083665338e+1"
+   ]
+  },
+  {
+   "id": "T3-A13-t3",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "t3",
+   "relation": "<=",
+   "shown": "21.147482",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.11474811380356874603890829230e+1",
+    "2.11474811380356874603890829230e+1"
+   ]
+  },
+  {
+   "id": "T3-A13-Gamma",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "Gamma",
+   "relation": "<=",
+   "shown": "3.1351e-5",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.13508873175243343041826581764e-5",
+    "3.13508873175243343041826581764e-5"
+   ]
+  },
+  {
+   "id": "T3-A13-B",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "B",
+   "relation": "<=",
+   "shown": "42.309457",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.23094562648824831582912906604e+1",
+    "4.23094562648824831582912906604e+1"
+   ]
+  },
+  {
+   "id": "T3-A13-Cwall",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "Cwall",
+   "relation": "<=",
+   "shown": "3.2792918",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.27929177420834801855923185945e+0",
+    "3.27929177420834801855923185945e+0"
+   ]
+  },
+  {
+   "id": "T3-A13-KW",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "KW",
+   "relation": "<=",
+   "shown": "0.4426483",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.42648297175794158525286925525e-1",
+    "4.42648297175794158525286925525e-1"
+   ]
+  },
+  {
+   "id": "T3-A13-Omega_bound",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "Omega_bound",
+   "relation": "<=",
+   "shown": "0.70158383",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "7.01583827941630716521745455619e-1",
+    "7.01583827941630716521745455619e-1"
+   ]
+  },
+  {
+   "id": "T3-A13-wall",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "wall",
+   "relation": "<=",
+   "shown": "2.3006981",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.30069807588659456124032557287e+0",
+    "2.30069807588659456124032557287e+0"
+   ]
+  },
+  {
+   "id": "T3-A13-lH_bound",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "lH_bound",
+   "relation": ">=",
+   "shown": "9134.3029",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "9.13430294574967281333162362058e+3",
+    "9.13430294574967281333162362058e+3"
+   ]
+  },
+  {
+   "id": "T3-A13-Psi",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "Psi",
+   "relation": ">=",
+   "shown": "215.83530",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.15835304293715200895192414139e+2",
+    "2.15835304293715200895192414139e+2"
+   ]
+  },
+  {
+   "id": "T3-A13-rhs_i",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "rhs_i",
+   "relation": "<=",
+   "shown": "215.83156",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.15831551899643402856726062577e+2",
+    "2.15831551899643402856726062577e+2"
+   ]
+  },
+  {
+   "id": "T3-A13-D1",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "D1",
+   "relation": ">=",
+   "shown": "0.0055790",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "5.57907226373860642724680175579e-3",
+    "5.57907226373860642724680175579e-3"
+   ]
+  },
+  {
+   "id": "T3-A13-iii_lhs",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "iii_lhs",
+   "relation": ">=",
+   "shown": "10.125",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.01255686217461082853983827347e+1",
+    "1.01255686217461082853983827347e+1"
+   ]
+  },
+  {
+   "id": "T3-A13-iii_rhs",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "iii_rhs",
+   "relation": "<=",
+   "shown": "0.0052311",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "5.23107995532430459745873813795e-3",
+    "5.23107995532430459745873813795e-3"
+   ]
+  },
+  {
+   "id": "T3-A13-Psi_inf",
+   "where": "Q Table 3, column Theorem A13",
+   "what": "Psi_inf(pi) with B-bar",
+   "relation": "trunc",
+   "shown": "0.1375313...",
+   "needed": true,
+   "enclosure": [
+    "1.37531374936153763293598889591e-1",
+    "1.37531374936153763293598889591e-1"
+   ]
+  },
+  {
+   "id": "T3-A13-cond-i",
+   "where": "Q Prop 11.2, L4923-4924 / L5058-5059",
+   "what": "condition (i) at k0, Theorem A13",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T3-A13-cond-ii",
+   "where": "Q Prop 11.2, L4923-4924 / L5058-5059",
+   "what": "condition (ii) at k0, Theorem A13",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T3-A13-cond-iii",
+   "where": "Q Prop 11.2, L4923-4924 / L5058-5059",
+   "what": "condition (iii) at k0, Theorem A13",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T3-A13-dispsum",
+   "where": "Q L5237-5238",
+   "what": "the four displayed terms, each rounded up, add up to more than the displayed bound for B-bar",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "4.23094575510000000000000000000e+1",
+    "4.23094575510000000000000000000e+1"
+   ]
+  }
+ ],
+ "table3_enclosures": {
+  "A": {
+   "alpha_y0": [
+    1.4999829010139692e-06,
+    1.4999829010139692e-06
+   ],
+   "betahat_y0": [
+    2.962719085852419e-09,
+    2.962719085852419e-09
+   ],
+   "bstar": [
+    2.9627319737458486e-09,
+    2.9627319737458486e-09
+   ],
+   "w0": [
+    0.047381370373553354,
+    0.047381370373553354
+   ],
+   "h0": [
+    0.9052372592528933,
+    0.9052372592528933
+   ],
+   "invF": [
+    0.9999881851504158,
+    0.9999881851504158
+   ],
+   "Gamma": [
+    2.8471178754730208e-05,
+    2.8471178754730208e-05
+   ],
+   "Cwall": [
+    3.5789896536454737,
+    3.5789896536454737
+   ],
+   "KW": [
+    0.3390768252141674,
+    0.3390768252141674
+   ],
+   "t1": [
+    0.0006328162428665084,
+    0.0006328162428665084
+   ],
+   "t2": [
+    19.256899055918662,
+    19.256899055918662
+   ],
+   "t3": [
+    19.249234946996346,
+    19.249234946996346
+   ],
+   "B": [
+    38.50679529033663,
+    38.50679529033663
+   ],
+   "lH_bound": [
+    5647.485578625664,
+    5647.485578625664
+   ],
+   "Omega_bound": [
+    0.3794151849340197,
+    0.3794151849340197
+   ],
+   "wall": [
+    1.3579230213148406,
+    1.3579230213148406
+   ],
+   "numerator": [
+    5646.031648349513,
+    5646.031648349513
+   ],
+   "Psi": [
+    146.62429334300893,
+    146.62429334300893
+   ],
+   "rhs_i": [
+    146.60895354719872,
+    146.60895354719872
+   ],
+   "D1": [
+    0.008642984139429795,
+    0.008642984139429795
+   ],
+   "iii_lhs": [
+    10.655325251762621,
+    10.655325251762621
+   ],
+   "iii_rhs": [
+    0.004402818030656261,
+    0.004402818030656261
+   ],
+   "Psi_inf": [
+    0.1581428350395298,
+    0.1581428350395298
+   ],
+   "eps_y0": [
+    244226.4,
+    244226.4
+   ],
+   "C7_lhs": [
+    2309986601997.0,
+    2309986601997.0
+   ],
+   "C3_lhs": [
+    0.2754011979960798,
+    0.2754011979960798
+   ],
+   "C3_rhs": [
+    139.43113706319997,
+    139.43113706319997
+   ]
+  },
+  "A13": {
+   "alpha_y0": [
+    1.4999042191642327e-06,
+    1.4999042191642327e-06
+   ],
+   "betahat_y0": [
+    2.4845144659275624e-09,
+    2.4845144659275624e-09
+   ],
+   "bstar": [
+    2.4845237828975714e-09,
+    2.4845237828975714e-09
+   ],
+   "w0": [
+    0.06750273231449723,
+    0.06750273231449723
+   ],
+   "h0": [
+    0.8649945353710056,
+    0.8649945353710056
+   ],
+   "invF": [
+    0.9999902077285696,
+    0.9999902077285696
+   ],
+   "Gamma": [
+    3.135088731752434e-05,
+    3.135088731752434e-05
+   ],
+   "Cwall": [
+    3.279291774208348,
+    3.279291774208348
+   ],
+   "KW": [
+    0.4426482971757942,
+    0.4426482971757942
+   ],
+   "t1": [
+    0.0005891942861714006,
+    0.0005891942861714006
+   ],
+   "t2": [
+    21.161354581673308,
+    21.161354581673308
+   ],
+   "t3": [
+    21.147481138035687,
+    21.147481138035687
+   ],
+   "B": [
+    42.309456264882485,
+    42.309456264882485
+   ],
+   "lH_bound": [
+    9134.302945749672,
+    9134.302945749672
+   ],
+   "Omega_bound": [
+    0.7015838279416308,
+    0.7015838279416308
+   ],
+   "wall": [
+    2.3006980758865945,
+    2.3006980758865945
+   ],
+   "numerator": [
+    9131.874367432545,
+    9131.874367432545
+   ],
+   "Psi": [
+    215.8353042937152,
+    215.8353042937152
+   ],
+   "rhs_i": [
+    215.83155189964342,
+    215.83155189964342
+   ],
+   "D1": [
+    0.0055790722637386065,
+    0.0055790722637386065
+   ],
+   "iii_lhs": [
+    10.125568621746108,
+    10.125568621746108
+   ],
+   "iii_rhs": [
+    0.0052310799553243045,
+    0.0052310799553243045
+   ],
+   "Psi_inf": [
+    0.13753137493615375,
+    0.13753137493615375
+   ],
+   "eps_y0": [
+    300000.0,
+    300000.0
+   ],
+   "C7_lhs": [
+    10849945749997.0,
+    10849945749997.0
+   ],
+   "C3_lhs": [
+    0.3012011295049416,
+    0.3012011295049416
+   ],
+   "C3_rhs": [
+    181.834783821073,
+    181.834783821073
+   ]
+  }
+ }
+}

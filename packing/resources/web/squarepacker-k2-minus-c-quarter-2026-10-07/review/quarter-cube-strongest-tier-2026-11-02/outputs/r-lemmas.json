@@ -1,0 +1,640 @@
+{
+ "program": "r_lemmas_check.py",
+ "python": "3.14.7",
+ "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+ "program_sha256": {
+  "c_citations.py": "e9c70a29300d6fbc085a944945e25fb3a120468faa079a4f8dd125ae92cfb466",
+  "c_constants.py": "a7a2305121fb7a88340bcba64ec100b23648cce3fcae2aad7ed639a8d5e08f02",
+  "checks.py": "318b4b1a68191dc846a32b164b9d8ad19afc9247c9b00ecfca9fd4acb0b0a9ae",
+  "iv.py": "c2341d825430c8ed6bc1929b71bdec3ce3df810cd19b32f5165263e7035e1c4a",
+  "l49_mpmath_crosscheck.py": "1d649e4f2530d34575d523c2930f96e9ac575b7546b23fdd07090d2abb645d39",
+  "q_constants.py": "ef69c5d3b55e4089d8d17667db792bf3a09cdc721ee7563e83f08dd62a9b4df3",
+  "q_quotes.py": "f0290e9f34a02b15894611da65e64077f0528277cbd64c8fa0fb58e9df66f6e8",
+  "q_supplementary.py": "760c0727707236c1d7d24a07c57bdb95a39c66396ecc63823793f0d9f370654b",
+  "qcc_predicates.py": "622954a3354a885280a61aaa1c52f8183ff4bb32fed34692dd7fac9696b58e21",
+  "qmodel.py": "d33e250adff64c8d2d657e0cb9640ada8e230f0fd6ba73335c49768febf2b887",
+  "r_lemmas_check.py": "bfe5bf854908fe0be9244fd1817a0016ced94486f2147b429987c693a41b8f39"
+ },
+ "summary": {
+  "checks": 48,
+  "needed_true": 48,
+  "needed_false": 0,
+  "needed_undecided": 0,
+  "display_checked": 0,
+  "display_true": 0,
+  "display_false": 0
+ },
+ "checks": [
+  {
+   "id": "R4.8-R0",
+   "where": "[R] L605",
+   "what": "R0 = sqrt(Lambda^2 + 1/4) at d = 1e-4",
+   "relation": "<",
+   "shown": "1.5001",
+   "needed": true,
+   "enclosure": [
+    "1.50009428127450529888874603963e+0",
+    "1.50009428127450529888874603963e+0"
+   ]
+  },
+  {
+   "id": "R4.8a-sq",
+   "where": "[R] L642",
+   "what": "(12/pi) Lambda + 4",
+   "relation": "<",
+   "shown": "10",
+   "needed": true,
+   "enclosure": [
+    "9.40227986880605696613704046707e+0",
+    "9.40227986880605696613704046707e+0"
+   ]
+  },
+  {
+   "id": "R4.8a-wall",
+   "where": "[R] L646",
+   "what": "(12/pi)(d + sqrt2/2) + 2",
+   "relation": "<",
+   "shown": "5",
+   "needed": true,
+   "enclosure": [
+    "4.70133092033473875747144289405e+0",
+    "4.70133092033473875747144289405e+0"
+   ]
+  },
+  {
+   "id": "R4.8b-c0",
+   "where": "[R] L659",
+   "what": "c0 = d + sqrt2/2 - 1/2",
+   "relation": "<",
+   "shown": "0.20721",
+   "needed": true,
+   "enclosure": [
+    "2.07206781186547524400844362104e-1",
+    "2.07206781186547524400844362104e-1"
+   ]
+  },
+  {
+   "id": "R4.8b-area",
+   "where": "[R] L661",
+   "what": "area of D0",
+   "relation": "<",
+   "shown": "4.155",
+   "needed": true,
+   "enclosure": [
+    "4.15441291518904668867875953467e+0",
+    "4.15441291518904668867875953467e+0"
+   ]
+  },
+  {
+   "id": "R4.8b-per",
+   "where": "[R] L661",
+   "what": "perimeter of D0",
+   "relation": "<",
+   "shown": "8.1",
+   "needed": true,
+   "enclosure": [
+    "8.09985741509875332547883476888e+0",
+    "8.09985741509875332547883476888e+0"
+   ]
+  },
+  {
+   "id": "R4.8b-oler",
+   "where": "[R] L662",
+   "what": "(2/sqrt3) 4.155 + 8.1/2 + 1",
+   "relation": "<",
+   "shown": "9.85",
+   "needed": true,
+   "enclosure": [
+    "9.84778073696579010307102636597e+0",
+    "9.84778073696579010307102636597e+0"
+   ]
+  },
+  {
+   "id": "R4.8b-1.58",
+   "where": "[R] L665",
+   "what": "sqrt((d+sqrt2/2)^2 + 1/4) + d + sqrt2/2",
+   "relation": "<",
+   "shown": "1.58",
+   "needed": true,
+   "enclosure": [
+    "1.57331383655339841234927505286e+0",
+    "1.57331383655339841234927505286e+0"
+   ]
+  },
+  {
+   "id": "R4.9-rho1",
+   "where": "[R] L684",
+   "what": "rho1 at d = 1e-4",
+   "relation": "<",
+   "shown": "0.86611",
+   "needed": true,
+   "enclosure": [
+    "8.66107055366850887948430690755e-1",
+    "8.66107055366850887948430690755e-1"
+   ]
+  },
+  {
+   "id": "R4.9-rho1b",
+   "where": "[R] L684",
+   "what": "rho1",
+   "relation": "<",
+   "shown": "0.8662",
+   "needed": true,
+   "enclosure": [
+    "8.66107055366850887948430690755e-1",
+    "8.66107055366850887948430690755e-1"
+   ]
+  },
+  {
+   "id": "R4.9a-corners",
+   "where": "[R] L696",
+   "what": "on [1, Lambda]^2 the corner values of f are 1/2, Lambda/2, 1 - 1/(2 Lambda^2), the last the largest",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.9-g0",
+   "where": "[R] L715",
+   "what": "gamma0 in degrees",
+   "relation": ">",
+   "shown": "41.406",
+   "needed": true,
+   "enclosure": [
+    "4.14065597530411356565382723141e+1",
+    "4.14065597530411356565382723141e+1"
+   ]
+  },
+  {
+   "id": "R4.9a-78",
+   "where": "[R] L701",
+   "what": "arccos(d + sqrt2/2 - 1/2) in degrees",
+   "relation": ">",
+   "shown": "78",
+   "needed": true,
+   "enclosure": [
+    "7.80412874880954218478933876214e+1",
+    "7.80412874880954218478933876214e+1"
+   ]
+  },
+  {
+   "id": "R4.9a-D5",
+   "where": "[R] L705",
+   "what": "pi < 5 gamma0, so D(r) <= 5",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.9b-R3",
+   "where": "[R] L715",
+   "what": "R3",
+   "relation": "<",
+   "shown": "0.75598",
+   "needed": true,
+   "enclosure": [
+    "7.55974762616994363619660089699e-1",
+    "7.55974762616994363619660089699e-1"
+   ]
+  },
+  {
+   "id": "R4.9b-R4",
+   "where": "[R] L715",
+   "what": "R4",
+   "relation": "<",
+   "shown": "0.56571",
+   "needed": true,
+   "enclosure": [
+    "5.65709425967354998139892579276e-1",
+    "5.65709425967354998139892579276e-1"
+   ]
+  },
+  {
+   "id": "R4.9b-R5",
+   "where": "[R] L715",
+   "what": "R5",
+   "relation": "<",
+   "shown": "0.50396",
+   "needed": true,
+   "enclosure": [
+    "5.03959420722633410381111348882e-1",
+    "5.03959420722633410381111348882e-1"
+   ]
+  },
+  {
+   "id": "R4.9b-g22",
+   "where": "[R] L715",
+   "what": "gamma(2,2) in degrees",
+   "relation": ">",
+   "shown": "70.52",
+   "needed": true,
+   "enclosure": [
+    "7.05211406484373653572059736774e+1",
+    "7.05211406484373653572059736774e+1"
+   ]
+  },
+  {
+   "id": "R4.9b-g22-min",
+   "where": "[R] L715",
+   "what": "gamma(a,b) >= gamma(2,2) for all classes",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.9b-n5",
+   "where": "[R] L716",
+   "what": "6 gamma(2,2) > 2 pi, so n <= 5",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.9b-undecided",
+   "where": "[R] L716-719",
+   "what": "every sequence with sum >= 14 is decided on intervals",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.9b-15",
+   "where": "[R] L716-718",
+   "what": "every sequence with sum >= 15 violates the angle conditions by more than 25 degrees",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "2.59419053627259483371494015352e+1",
+    "2.59419053627259483371494015352e+1"
+   ]
+  },
+  {
+   "id": "R4.9b-14",
+   "where": "[R] L718-719",
+   "what": "the only sequences with sum 14 that satisfy them are the rotations of (5,2,5,2)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.9b-359",
+   "where": "[R] L718",
+   "what": "(5,2,5,2) uses about 359 degrees (to nearest), below 360",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "3.58919267325306511514891510472e+2",
+    "3.58919267325306511514891510472e+2"
+   ]
+  },
+  {
+   "id": "R4.9b-n<=2",
+   "where": "[R] L713",
+   "what": "for n <= 2, sum of classes <= 10",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.9c-g55",
+   "where": "[R] L725",
+   "what": "gamma(5,5) in degrees",
+   "relation": ">",
+   "shown": "165.6",
+   "needed": true,
+   "enclosure": [
+    "1.65626239012164542626153089256e+2",
+    "1.65626239012164542626153089256e+2"
+   ]
+  },
+  {
+   "id": "R4.9c-2R5",
+   "where": "[R] L725",
+   "what": "2 R5",
+   "relation": "<",
+   "shown": "1.008",
+   "needed": true,
+   "enclosure": [
+    "1.00791884144526682076222269776e+0",
+    "1.00791884144526682076222269776e+0"
+   ]
+  },
+  {
+   "id": "R4.9c-2R5<L",
+   "where": "[R] L730",
+   "what": "2 R5 < Lambda",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.9c-psi",
+   "where": "[R] L727",
+   "what": "psi = arcsin(R5 sin(pi - gamma(5,5))) in degrees",
+   "relation": "<",
+   "shown": "7.19",
+   "needed": true,
+   "enclosure": [
+    "7.18688049391772868692345537178e+0",
+    "7.18688049391772868692345537178e+0"
+   ]
+  },
+  {
+   "id": "R4.9c-arcs",
+   "where": "[R] L734",
+   "what": "90 + 7.19 - 41.406 < 2 gamma0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "5.57803207408765930303851830576e+1",
+    "5.57803207408765930303851830576e+1"
+   ]
+  },
+  {
+   "id": "R4.10-n",
+   "where": "[R] L752-753",
+   "what": "at most 5 centres within rho1 of p at mutual distance >= 1 (gamma(2,2) bounds the angle at p, as in Lemma 4.9(b))",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.5-rho",
+   "where": "[R] L496",
+   "what": "rho_h at h = 1 + eps1",
+   "relation": "<",
+   "shown": "1.415",
+   "needed": true,
+   "enclosure": [
+    "1.41422770457942875076935359017e+0",
+    "1.41422770457942875076935359017e+0"
+   ]
+  },
+  {
+   "id": "R4.5d-rhoh/h",
+   "where": "[R] L496",
+   "what": "rho_h/h at h = 1 (the largest for h > 1)",
+   "relation": "<",
+   "shown": "1.4143",
+   "needed": true,
+   "enclosure": [
+    "1.41421356237309504880168872420e+0",
+    "1.41421356237309504880168872420e+0"
+   ]
+  },
+  {
+   "id": "R4.5f-D",
+   "where": "[R] L510",
+   "what": "D(0.344)",
+   "relation": "<",
+   "shown": "0.19",
+   "needed": true,
+   "enclosure": [
+    "1.89838640908546268029371117167e-1",
+    "1.89838640908546268029371117167e-1"
+   ]
+  },
+  {
+   "id": "R4.5g-chi*",
+   "where": "[R] L555",
+   "what": "max(chi(0.344), chi(1.00002)) + 2.2 eps1",
+   "relation": "<",
+   "shown": "0.29295",
+   "needed": true,
+   "enclosure": [
+    "2.92944289987328590503990282085e-1",
+    "2.92944289987328590503990282085e-1"
+   ]
+  },
+  {
+   "id": "R4.5g-hc",
+   "where": "[R] L554",
+   "what": "h^3 + 3h - 2 changes sign once on [0.344, 1] (chi has one minimum there)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "R4.5g-b1",
+   "where": "[R] L557",
+   "what": "1/3",
+   "relation": ">",
+   "shown": "0.3237",
+   "needed": true,
+   "enclosure": [
+    "3.33333333333333333333333333333e-1",
+    "3.33333333333333333333333333333e-1"
+   ]
+  },
+  {
+   "id": "R4.5g-b2",
+   "where": "[R] L558",
+   "what": "(2 - chi*)^2/9 at chi* = 0.29295",
+   "relation": ">",
+   "shown": "0.3237",
+   "needed": true,
+   "enclosure": [
+    "3.23779966944444444444444444444e-1",
+    "3.23779966944444444444444444444e-1"
+   ]
+  },
+  {
+   "id": "R4.5g-b3",
+   "where": "[R] L559",
+   "what": "(2/3)(1 - chi*)^2 at chi* = 0.29295",
+   "relation": ">",
+   "shown": "0.3237",
+   "needed": true,
+   "enclosure": [
+    "3.33279801666666666666666666666e-1",
+    "3.33279801666666666666666666666e-1"
+   ]
+  },
+  {
+   "id": "R4.5g-beta1",
+   "where": "[R] L560",
+   "what": "beta1 = 3 gamma* = 3 (1.415 eps1)",
+   "relation": "<",
+   "shown": "8.5e-5",
+   "needed": true,
+   "enclosure": [
+    "8.49000000000000000000000000000e-5",
+    "8.49000000000000000000000000000e-5"
+   ]
+  },
+  {
+   "id": "R4.5g-0.3235",
+   "where": "[R] L560",
+   "what": "0.3237 - 2.04 beta1",
+   "relation": ">",
+   "shown": "0.3235",
+   "needed": true,
+   "enclosure": [
+    "3.23526804000000000000000000000e-1",
+    "3.23526804000000000000000000000e-1"
+   ]
+  },
+  {
+   "id": "R4.5g-Q*",
+   "where": "[R] L561",
+   "what": "0.3235 - 4 eps0",
+   "relation": ">",
+   "shown": "0.32",
+   "needed": true,
+   "enclosure": [
+    "3.23100000000000000000000000000e-1",
+    "3.23100000000000000000000000000e-1"
+   ]
+  },
+  {
+   "id": "R4.5g-0.38",
+   "where": "[R] L550",
+   "what": "(1 - 0.3812)^2",
+   "relation": ">",
+   "shown": "0.38",
+   "needed": true,
+   "enclosure": [
+    "3.82913440000000000000000000000e-1",
+    "3.82913440000000000000000000000e-1"
+   ]
+  },
+  {
+   "id": "R4.5g-0.38b",
+   "where": "[R] L551",
+   "what": "0.38 - 4 eps0",
+   "relation": ">",
+   "shown": "0.32",
+   "needed": true,
+   "enclosure": [
+    "3.79600000000000000000000000000e-1",
+    "3.79600000000000000000000000000e-1"
+   ]
+  },
+  {
+   "id": "R4.5b-wall",
+   "where": "[R] L465",
+   "what": "(1 - 2 eps0)^2",
+   "relation": ">",
+   "shown": "0.32",
+   "needed": true,
+   "enclosure": [
+    "9.99600040000000000000000000000e-1",
+    "9.99600040000000000000000000000e-1"
+   ]
+  },
+  {
+   "id": "R4.5d-gamma*",
+   "where": "[R] L560",
+   "what": "1.5 gamma* in units of eps1 (< 2.13)",
+   "relation": "<",
+   "shown": "2.13",
+   "needed": true,
+   "enclosure": [
+    "2.12250000000000000000000000000e+0",
+    "2.12250000000000000000000000000e+0"
+   ]
+  },
+  {
+   "id": "R4.5f-1.1",
+   "where": "[R] L530",
+   "what": "1.1 eps1 < eps0",
+   "relation": "<",
+   "shown": "1/10000",
+   "needed": true,
+   "enclosure": [
+    "2.20000000000000000000000000000e-5",
+    "2.20000000000000000000000000000e-5"
+   ]
+  },
+  {
+   "id": "R4.5f-1.8",
+   "where": "[R] L539",
+   "what": "1.8 eps1 < eps0",
+   "relation": "<",
+   "shown": "1/10000",
+   "needed": true,
+   "enclosure": [
+    "3.60000000000000000000000000000e-5",
+    "3.60000000000000000000000000000e-5"
+   ]
+  }
+ ],
+ "sequences_enumerated": 1344,
+ "sum14_satisfying_rotation_classes": [
+  [
+   2,
+   5,
+   2,
+   5
+  ]
+ ],
+ "gamma_degrees": {
+  "22": [
+   70.52114064843737,
+   70.52114064843737
+  ],
+  "23": [
+   75.78164106580718,
+   75.78164106580718
+  ],
+  "24": [
+   85.89378011388533,
+   85.89378011388533
+  ],
+  "25": [
+   89.72981683132663,
+   89.72981683132663
+  ],
+  "32": [
+   75.78164106580718,
+   75.78164106580718
+  ],
+  "33": [
+   82.81311950608227,
+   82.81311950608227
+  ],
+  "34": [
+   97.28605985006816,
+   97.28605985006816
+  ],
+  "35": [
+   103.24113585003634,
+   103.24113585003634
+  ],
+  "42": [
+   85.89378011388533,
+   85.89378011388533
+  ],
+  "43": [
+   97.28605985006816,
+   97.28605985006816
+  ],
+  "44": [
+   124.21967925912341,
+   124.21967925912341
+  ],
+  "45": [
+   138.34121321114299,
+   138.34121321114299
+  ],
+  "52": [
+   89.72981683132663,
+   89.72981683132663
+  ],
+  "53": [
+   103.24113585003634,
+   103.24113585003634
+  ],
+  "54": [
+   138.34121321114299,
+   138.34121321114299
+  ],
+  "55": [
+   165.62623901216455,
+   165.62623901216455
+  ]
+ }
+}

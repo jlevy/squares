@@ -976,6 +976,7 @@ case or experiment separately.
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
 | [Delta Proof Review: Ryu’s k² − M(k) Bound, Version 1.2](docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md) | dated review record | record | retained | — |
 | [Review of Ryu’s Quarter-Power and Cube-Root Proof Chains](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md) | dated review record | record | retained | — |
+| [Ryu’s Quarter-Power and Cube-Root Deficiency Preprints: Strongest-Tier Stage 4 Review](docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md) | dated review record | record | retained | — |
 | [Mathematical Review: Ryu’s Upper Bounds of Order k^{3/8} for the Deficiency c*(k)](docs/project/reviews/review-2026-10-10-squarepacker-k2-minus-c-upper.md) | dated review record | record | retained | — |
 | [Eleven-Square Threshold-Bound Paper: Exposition Reviews and Their Disposition](docs/project/reviews/review-2026-10-05-n11-threshold-bound-review.md) | dated review record | record | retained | — |
 | [Nagamochi’s Lemma 1 Is False: What T-007 Rests On Now](docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md) | dated review record | record | retained | — |
