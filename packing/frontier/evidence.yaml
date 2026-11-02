@@ -50647,8 +50647,10 @@ evidence:
       6 to 12 CPU-hours (the packet README) and needs about 10 GB of disk this host lacked on 23 October.
       On 2 November 2026 the recipe''s generation step ran here from those retained bytes (devtools.replay_lean_packet,
       bead think-tpbd): 2,076 chunks in 64 parts, the census the source reports, and all 66 files match data-sha256.txt,
-      in 8,658 CPU seconds on two cores. The kernel check did not run, since that host''s network policy refuses
-      Mathlib''s prebuilt cache, and the generation decides nothing alone, so this entry stays reported.'
+      with no kernel-escape token in any of them, in 2.56 CPU-hours on two cores, near the 2.4 the source''s run implies.
+      The generator, its oracle and the theorem module were staged at their upstream Git blobs. The kernel check did
+      not run, since that host''s network policy refuses Mathlib''s prebuilt cache, and the generation decides nothing
+      alone, so this entry stays reported.'
     source_reviewed: '2026-10-23'
   - id: E-n059-wand125-lean-kernel-report
     claim: exact-value

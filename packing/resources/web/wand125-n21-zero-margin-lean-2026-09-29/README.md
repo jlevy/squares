@@ -122,8 +122,8 @@ used).
   `Sqpack/N21PtsZ/`: 59,433 `Z` leaves (22,016 ADM, 13,526 one-chain, 23,891 two-chain),
   5,876 `E` leaves and 5,591 clips, in 2,076 chunks over 64 files. Each chunk is one
   `decide +kernel` of `ZMTree.check`, proved sound once (`ZMTree.sound`). The 66
-  generated files, about 88 MB, are not in the tree; `data-sha256.txt` lists their
-  SHA-256.
+  generated files, about 88 MB by the source (92,197,153 bytes, or 87.9 MiB, as
+  regenerated here), are not in the tree; `data-sha256.txt` lists their SHA-256.
 - **The upper bound** is the $5 \times 5$ grid (`packs_grid`), and `n21pts_eq_5` closes
   with `csInf_le` and `le_antisymm`.
 
@@ -143,7 +143,7 @@ script that fetches), then `lake env lean N21PtsAxiomsZ.lean`, accepted only wit
 | Item | Estimate |
 | --- | --- |
 | Toolchain | `leanprover/lean4:v4.33.1` and Mathlib `0df444a3`’s cache, about 2.5 GB and 7 GB on disk; Python 3 with NumPy for the generator |
-| Generation | 2.41 CPU-hours measured here (8,658 CPU seconds, 5,060 s wall on two x86-64 cores); the source’s run was 1,459 s × 6 workers on the M4 |
+| Generation | 2.56 CPU-hours measured here (9,231 CPU seconds, 5,602 s wall on two x86-64 cores); the source’s run was 1,459 s × 6 workers on the M4, about 2.4 CPU-hours |
 | Kernel check | about 7 CPU-hours (3.5 h × 2 parts on the M4, under load) |
 | Total | 6 to 12 CPU-hours, central 9: the generation measured, the kernel check from the source’s report |
 | Memory | near 6 GB per part: one part at a time fits a 15 GB host; two, about 12 GB, leave little headroom on it |
@@ -152,8 +152,11 @@ It is under the owner’s 40 CPU-hour item cap and above the 2 CPU-hour single r
 lane may start, and this host had 5.2 GB of free disk on 23 October, short of the
 toolchain and cache. It is held for a lane with the disk, as the import bead records.
 `devtools.replay_lean_packet` now runs the recipe from the retained bytes: `stage`,
-`generate`, then `run`, which builds the parts one at a time, prints the axioms and runs
-three negative controls, each under a receipt.
+`generate`, then `run`. `run` re-hashes the parts against `data-sha256.txt` and scans
+them for kernel escapes before it builds them, `--jobs` per `lake build`; it then
+checks the printed statements and axioms of `n21pts_ge_5` and `n21pts_eq_5` and runs
+three negative controls, the mutated module beside its unmutated twin, each under a
+receipt.
 What it would add: a `proof-assistant-checked`, `replayed-here` route for `T-234` with its
 own axiom receipt, the road to `T-055`’s rung 5 that the
 [review of 11 October](../../../../docs/project/reviews/review-2026-10-11-lean-backed-rungs.md)
@@ -165,16 +168,23 @@ On 2 November 2026 the lane bold-ritchie-l29 (bead `think-tpbd`) ran the recipe�
 generation step from the retained bytes, with
 `devtools.replay_lean_packet generate wand125-n21 --nproc 2 --cpus 2,3`. The stage put
 retained copies in place of the clone of `6aa82ba4` that `build_zero_margin.sh` makes:
-the nine library modules at the Git blobs of the closure receipt, and `gen_zmtree.py`,
-`zeromargin.py`, `ZMTree.lean` and the certificate at the four SHA-256 the script pins.
+the nine library modules, `ZMTree.lean` among them, at the Git blobs of the closure
+receipt; `gen_zmtree.py` from the 28 September evand packet, pinned at `6aa82ba4`
+itself, and `zeromargin.py`, each at its upstream blob there; `N21PtsLower.lean` at its
+blob at `77636c63`; and the certificate as this packet pins it, identical to the 28
+September copy.
 Daniel’s generator then wrote 2,076 chunks in 64 parts: 59,433 Z leaves, 5,876 E leaves
 and 5,591 clips, the census the source reports. All 66 files it wrote match
-`data-sha256.txt`, with none missing and none extra, so the parts a build here would
-check are the ones the source’s run produced. It took 8,658 CPU seconds and 5,060 s of
-wall on two cores of a shared four-core x86-64 host, under CPython 3.14.7 and NumPy
-2.5.2. [`receipts/lean-build/generation.json`](receipts/lean-build/generation.json) and
-its [`gen.log`](receipts/lean-build/gen.log) are the receipt; the 92 MB of generated
-files are not retained.
+`data-sha256.txt`, with none missing and none extra and no kernel-escape token in any of
+them, so the parts a build here would check are the ones the source’s run produced. It
+took 9,231 CPU seconds and 5,602 s of wall on two cores of a shared four-core x86-64
+host, under CPython 3.14.7 and NumPy 2.5.2.
+[`receipts/lean-build/generation.json`](receipts/lean-build/generation.json) and its
+[`gen.log`](receipts/lean-build/gen.log) are the receipt, which
+`devtools.replay_lean_packet check-generation wand125-n21` re-derives from the log and
+the listing; the 92,197,153 bytes of generated files are not retained. An earlier run
+the same day, before review A of #887 changed how the generator is bound, gave the same
+66 matches in 8,658 CPU seconds; this receipt replaces it.
 
 The kernel check did not run. That host’s network policy refuses
 `lakecache.blob.core.windows.net`, from which `lake exe cache get` takes Mathlib’s

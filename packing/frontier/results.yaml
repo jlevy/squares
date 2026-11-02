@@ -33431,10 +33431,10 @@ results:
       On 2 November 2026 the intake lane bold-ritchie-l29 (think-tpbd) ran the recipe's
       generation step here from the retained bytes: Daniel's generator wrote the 66 files,
       2,076 chunks in 64 parts, every one the file the source lists, so a build here would
-      check the parts the source's run checked. It took 2.41 CPU-hours on two cores, as the
-      source's run did. The kernel check did not run, because that host's network policy
-      refuses Mathlib's prebuilt cache; the generation decides nothing on its own, so the
-      rungs are unchanged.
+      check the parts the source's run checked. It took 2.56 CPU-hours here on two cores,
+      near the 2.4 that the source's run of 1,459 s on 6 workers implies. The kernel check
+      did not run, because that host's network policy refuses Mathlib's prebuilt cache; the
+      generation decides nothing on its own, so the rungs are unchanged.
   - id: T-235
     kind: formalization
     proves_kind: optimality
