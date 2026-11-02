@@ -5719,7 +5719,7 @@ sources:
   scope:
     n_values:
     - 37
-  reviewed: '2026-10-14'
+  reviewed: '2026-11-02'
   source_date: '2026-10-13'
   disposition: current-report
   replay_disposition: case-specific
@@ -5727,10 +5727,10 @@ sources:
   - resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
   evidence:
   - E-wand125-fine-net-n37-64975-report
-  notes: The reported 2599/400 at n37 is above T-069's 161/25, which is unchanged. Complete release-asset
-    and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
-    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
-    supply a maintained capture or whole-net controls. Replay and adoption remain under think-u0av.
+  notes: The 2599/400 at n37 is above T-069's 161/25, which it supersedes in both lower lanes. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are accepted.
+    The asset's data members are retained in the packet's release/, and the complete maintained capture
+    and whole-net controls ran on 2 November 2026 (think-w76a), so T-178 stands at V3/C3.
 - id: fang-excess-theorem-2026-10-13
   title: Kevin Fang's n^2 - n + F(n) theorem and its inventory at 078789a (no issue)
   role: source-repository
@@ -6240,7 +6240,7 @@ sources:
   scope:
     n_values:
     - 76
-  reviewed: '2026-10-14'
+  reviewed: '2026-11-02'
   source_date: '2026-10-14'
   disposition: current-report
   replay_disposition: case-specific
@@ -6252,9 +6252,10 @@ sources:
   - E-bengreff-594-cover-replay
   notes: The whole tree is retained at the pin. The cover is reported to settle s(76) = 9 with the grid.
     The intake's replay of the source's two checkers, zmx2 over the D4 region's roots and zm_mixed.py
-    over the sub-roots of the four it leaves, is recorded as E-bengreff-594-cover-replay, and since
-    the 16 October review T-184 holds it at V3/C1, its confirmation waiting on zm_mixed.py's
-    mutated-certificate controls (finding F8); the case's lower lanes wait on them too (think-osvq).
+    over the sub-roots of the four it leaves, is recorded as E-bengreff-594-cover-replay. The 16
+    October review found no mathematical defect, and since zm_mixed.py's two refusals of scaled
+    covers at the source's depth limit were held on 2 November 2026, T-184 stands at V3/C3 and
+    the case's lower lanes hold 9, so n = 76 is proved.
 - id: bengreff-s76-second-route-2026-10-14
   title: Benjamin Greff's second route for s(76) = 9, zm_mixed alone, at 0699398
   role: source-repository
@@ -7317,7 +7318,7 @@ sources:
   local: resources/web/bengreff-s95-certificate-2026-10-15/
   source_key: '[bengreff s95 certificate 2026-10-15]'
   scope: {n_values: [95]}
-  reviewed: '2026-10-15'
+  reviewed: '2026-11-02'
   source_date: '2026-10-15'
   disposition: current-report
   replay_disposition: case-specific
@@ -7329,9 +7330,10 @@ sources:
     The whole tree is retained at the pin. The cover is reported to settle s(95) = 10
     with the grid. The intake's replay of the source's two checkers, zmx2 over the D4
     region's roots and zm_mixed.py over the sub-roots of the 19 it leaves, is recorded
-    as E-bengreff-610-cover-replay, and since the 16 October review T-191 holds it at
-    V3/C1, its confirmation and the case's lower lanes waiting on two zm_mixed.py
-    mutated-certificate controls (finding F8; think-ribz).
+    as E-bengreff-610-cover-replay. The 16 October review found no mathematical defect,
+    and since zm_mixed.py's two refusals of scaled covers at the source's depth limit were
+    held on 2 November 2026, T-191 stands at V3/C3 and the case's lower lanes hold 10, so
+    n = 95 is proved.
 - id: wand125-continuous-n28-5745-2026-10-15
   title: Hiroaki Hosono's (wand125's) reported n28 continuous-pose lower bound, no issue
   role: source-repository

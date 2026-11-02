@@ -164,10 +164,18 @@ A maintained replay must retain the complete direction outcomes of a census run 
 reviewed source, from a candidate retained where the census reads it, with the whole-net
 controls and restored positives, and must be followed by a review that reads each
 certificate, by the checklist of the 6 October declared-net soundness review. The census
-reads candidates from packets, so each needs its candidate retained here first; n = 37’s
-is (above), and its replay is think-w76a. The n = 39 control needs the `AXIS_ROUNDING`
-decision first. That work, with a budget for it, belongs to the import’s bead,
-think-u0av.
+reads candidates from packets, so each needs its candidate retained here first.
+
+n = 37’s replay ran on 2 November 2026 (think-w76a), from the retained candidate: every
+one of the 2,073 directions verified, 864,953,550 nodes and least certified bound
+1.0000000000165958 at direction 1919, each direction’s node count and least bound equal
+to the source’s check2 log, in 12,667.7 CPU-seconds at two threads, against the 11,739
+priced above; the whole-net controls ended `CONTROLS_REFUSED`. Its receipts are in the
+[census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md),
+and with the review of 14 October they put T-178 at V3/C3.
+The n = 39 control needs the `AXIS_ROUNDING` decision first. That work, with a budget
+for it, belongs to the import’s bead, think-u0av; n = 44’s is of little value now that
+$s(44) = 7$ is proved (T-252).
 
 ## Sources and Notices
 

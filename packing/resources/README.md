@@ -1030,7 +1030,10 @@ directories’ MIT documents at revision `7a42c16` and pins their release assets
 digest, with the maintained premise checks, diagnostic eight-direction samples and the
 whole-net control’s mutant at two directions each; at n39 the axis refusal falls outside
 the census’s rounding allowance.
-A complete replay and whole-net controls remain pending.
+The n37 asset’s data members are retained in the packet’s `release/`, and its complete
+replay and whole-net controls ran on 2 November 2026: T-178 records the bound at V3/C3,
+and n37’s lower lanes hold it.
+At n39 and n44 a complete replay and whole-net controls remain pending.
 
 **[wand125 fine-net lower bounds 2026-10-16]**: wand125’s 18 certificates of 16 October,
 `mixed_n38_L65775` to `mixed_n110_L1073`, report lower bounds at n = 38, 40, 41, 43 and

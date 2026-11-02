@@ -42542,7 +42542,7 @@ evidence:
     novelty: previously-published
     source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
     certificate: >-
-      packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n37_L64975/bundle.json
+      packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n37_L64975/candidate.json.gz
     replay_status: not-attempted
     verifiers: [V-wand125-sqverify-proof-net]
     limitations: >-
@@ -42553,11 +42553,13 @@ evidence:
       maintained mass, net and check2 premises are accepted (receipts/premises-n37.json).
       Eight sampled directions run here by sqverify-fast verified and matched the source's
       log; that is a diagnostic, not a replay. The 32-direction 197/200 control remains
-      sampled. A complete capture, whole-net controls, restored positives and a review that
-      reads this certificate remain pending under think-u0av, priced at about 6.5 CPU-hours.
-      The shared crate establishes no independent implementation. No standing bound or
-      rating changes; T-069 stands.
-    source_reviewed: '2026-10-14'
+      sampled. The complete capture and whole-net controls ran here on 2 November 2026
+      (E-wand125-fine-net-n37-64975-sqverify-fast-replay), from the release asset's
+      candidate retained in the packet's release/, with every direction's node count and
+      least certified bound equal to the source's check2 log. The mathematical review of 14
+      October read the certificate. The shared crate establishes no independent
+      implementation.
+    source_reviewed: '2026-11-02'
     external_review:
       state: informally-verified
       date: '2026-10-14'
@@ -43232,7 +43234,10 @@ evidence:
       audit_evand_mixed_covers check judges both packets' records and receipts. The
       controls are python3 -m devtools.replay_evand_zmx2 control --case 76 --mutation M
       --work W --out OUT for M drop-heaviest-point and drop-heaviest-segment, each of which
-      must read NOT VERIFIED. tests/test_replay_controls.py holds the retained controls and
+      must read NOT VERIFIED, and python3 -m devtools.replay_evand_zmx2 zm-control --case
+      76 --scale F --work W --out OUT for F 49979/50000 and 49301/50000, whose published
+      run must read VERIFIED-D4 (PARTIAL) and scaled run NOT VERIFIED (PARTIAL).
+      tests/test_replay_controls.py holds the retained controls and
       the zm_mixed.py pose receipts, tests/test_replay_tools.py binds each retained checker
       receipt to the command the driver builds, and tests/test_audit_evand_mixed_covers.py
       holds the composite to its refusals.
@@ -43298,16 +43303,21 @@ evidence:
       refused by zmx2 --d4 at one root (NOT VERIFIED, 235 and 234 uncertified boxes), and
       zm_mixed.py pose finds each mutated cover capturing less than one, exactly (0.99736
       and 0.89682), at a pose where the published cover captures 1.00993 and 1.00726;
-      tests/test_replay_controls.py holds both. zm_mixed.py's certificate mode was not
-      run to a verdict on these mutations here: on the sub-root holding the point
-      mutation's pose, a run at depth 24 had not finished in 5 CPU-minutes, nor one at
-      depth 12 in 10. The 16 October review has one refusal by it, of the cover with
-      every mass scaled by 199/200, on the cell of job 054 at a depth limit of 12, where
-      the published cover certifies that cell at the same limit (review section 7.4, its
-      receipts in the packet's review/outputs/zm_control/); at the source's depth limit
-      of 24 neither that mutant nor a local one finished. A second zm_mixed.py refusal is
-      owed (review finding F8), and whether one at depth 12 meets the stage 4 rule is the
-      owner's question. Trust boundary: both deciding
+      tests/test_replay_controls.py holds both. Those holes are too deep for zm_mixed.py's
+      certificate mode to refuse at the source's depth limit of 24 in affordable time (it
+      splits a refused box to the limit; the 16 October review's 199/200 mutant ran 15
+      minutes on one cell without a verdict, its finding F8), so on 2 November 2026
+      devtools.replay_evand_zmx2 zm-control ran two shallow ones: every mass scaled by
+      49979/50000 and by 49301/50000, each the largest P/50000 that puts a low pose of the
+      published cover below one (mu 1.0004175 to 0.9999974, and 1.0141613 to 0.9999833).
+      With verify.sh's flags and depth limit 24, on the one cell that holds each pose
+      ([7/2, 71/20] x [1/2, 11/20] x [0, 1/32], a zmx2 cell, and job 056's), zm_mixed.py
+      certifies the published cover (219 and 11 boxes, the second the census of the
+      source's record) and leaves each scaled cover uncertified (NOT VERIFIED, 130 of 999
+      and 60 of 433 boxes, 104 and 97 CPU-s); receipts/controls/n76_zm_*, held by
+      tests/test_replay_controls.py. So zm_mixed.py too refuses two mutated covers at the
+      source's own settings. The review's depth-12 pair on job 054 stays in
+      review/outputs/zm_control/. Trust boundary: both deciding
       programs are Daniel's, sharing an author and an architecture, and both are the
       checkers the producer verified the cover with, so this is a reproduction with the
       producer's code, not a second implementation, and each D4 cell rests on one of
@@ -44546,7 +44556,10 @@ evidence:
       packet's retained receipts, and audit_evand_mixed_covers check judges both packets'
       records and receipts. The controls are python3 -m devtools.replay_evand_zmx2 control
       --case 95 --mutation M --work W --out OUT for M drop-heaviest-point and
-      drop-heaviest-segment, each of which must read NOT VERIFIED.
+      drop-heaviest-segment, each of which must read NOT VERIFIED, and python3 -m
+      devtools.replay_evand_zmx2 zm-control --case 95 --scale F --work W --out OUT for F
+      49831/50000 and 49207/50000, whose published run must read VERIFIED-D4 (PARTIAL) and
+      scaled run NOT VERIFIED (PARTIAL).
       tests/test_replay_controls.py holds the retained controls and the zm_mixed.py pose
       receipts, tests/test_replay_tools.py binds each retained checker receipt to the
       command the driver builds, and tests/test_audit_evand_mixed_covers.py holds the
@@ -44616,10 +44629,19 @@ evidence:
       --d4 at one root (NOT VERIFIED, 235 and 234 uncertified boxes), and zm_mixed.py pose
       finds each mutated cover capturing less than one, exactly (0.99736 and 0.84619), at a
       pose where the published cover captures 1.00993 and 1.01200;
-      tests/test_replay_controls.py holds both. zm_mixed.py's certificate mode was not run
-      to a verdict on a mutated s(95) cover here or in the 16 October review, so two
-      refusals by it are owed (review finding F8; E-bengreff-594-cover-replay says what
-      pricing found for s(76)). Trust boundary: both
+      tests/test_replay_controls.py holds both. Those holes are too deep for zm_mixed.py's
+      certificate mode to refuse at the source's depth limit of 24 in affordable time (the
+      16 October review's finding F8), so on 2 November 2026 devtools.replay_evand_zmx2
+      zm-control ran two shallow ones: every mass scaled by 49831/50000 and by
+      49207/50000, each the largest P/50000 that puts a low pose of the published cover
+      below one (mu 1.0033895 to 0.9999980, and 1.0161014 to 0.9999861). With verify.sh's
+      flags and depth limit 24, on the one cell that holds each pose ([7/2, 71/20] x [5/2,
+      51/20] x [0, 1/32], a zmx2 cell, and job 153's), zm_mixed.py certifies the published
+      cover (147 and 37 boxes, the second the census of the source's record) and leaves
+      each scaled cover uncertified (NOT VERIFIED, 9 of 811 and 540 of 2,789 boxes, 155
+      and 576 CPU-s); receipts/controls/n95_zm_*, held by tests/test_replay_controls.py.
+      So zm_mixed.py too refuses two mutated covers at the source's own settings. Trust
+      boundary: both
       deciding programs are Daniel's, sharing an author and an architecture, and both are
       the checkers the producer verified the cover with, so this is a reproduction with
       the producer's code, not a second implementation, and each D4 cell rests on one of
@@ -54864,3 +54886,109 @@ evidence:
       names the same two methods, before writing it. Finite feasibility only: no lower
       bound, optimum, local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-31'
+  - id: E-wand125-fine-net-n37-64975-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [37]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        The sqverify_fast crate, apart from the producer's declared-net reader;
+        sqverify-proof-net adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 2073
+        of: 2073
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+    certificate: packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n37_L64975/candidate.json.gz
+    replay: >-
+      From packing/, in a tree whose crate is reviewed source (.venv/bin/python3 -m
+      devtools.sqverify_fast_census --source-digest prints its source_sha256 and exits 0;
+      these receipts' build is d97758bb..., the source at 910b6b12c), after building
+      sqverify_fast/ to match the retained build (rustc 1.98.0 (88d9e12ae 2026-08-18),
+      release, x86_64-unknown-linux-gnu): .venv/bin/python3 -m devtools.sqverify_fast_census
+      --family mixed --binary sqverify_fast/target/release/sqverify-fast --out
+      benchmarks/measure-verifier/census-mixed --threads 2 --only mixed_n37_L64975 runs
+      sqverify-fast on the retained candidate at all 2073 directions of the net it declares
+      at the threshold it declares, 1, and records the case in census.json there; --check
+      --only mixed_n37_L64975 must then print 1 of 1 retained certificates VERIFIED (every
+      direction verified, summary VERIFIED, exit 0, and the exact capture at the least-bound
+      leaf's centre at least 1). The same command with --control in place of --threads 2
+      must write status CONTROLS_REFUSED. The receipts are
+      benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n37_L64975.jsonl.gz
+      and
+      benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n37_L64975.control.json,
+      held by tests/test_sqverify_fast_census.py, which admits the row only for a build of
+      reviewed source.
+    replay_status: passed
+    verifiers: [V-sqverify-fast]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
+        mixed_n37_L64975: no 37 unit squares pack in a square of side 2599/400, so s(37) >=
+        2599/400.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        SOUNDNESS.md's theorem and lemmas, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, and lemma N0 and
+        the declared-net change by
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
+        certificate's mathematics read in
+        docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md;
+        the census route accepted as a complete replay here in
+        docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md;
+        the census row, receipts and control receipt named in replay.
+      assumptions:
+        - The density is nonnegative and exact, of total mass 3699999/100000 < 37, which admission recomputes from the retained candidate.
+        - Every angle and legal centre is covered by the net its candidate declares (proof_net), lemma N0 of SOUNDNESS.md, of 2073 half-angles of step 1/5002 at core side 4999/5000 and format M's per-bin centre domains, which admission checks in exact rationals.
+        - Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation, as SOUNDNESS.md's Floating Point section uses it.
+        - The candidate is the retained file whose decompressed SHA-256 the packet's acquisition record pins, which mixed-fetch found identical to the proof bundle's.
+      audit_record: docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    limitations: >-
+      sqverify-fast, this repository's maintained measure verifier, decided the retained
+      candidate mixed_n37_L64975 at all 2073 net directions on 2026-11-02. The receipts name
+      the stored gzip file's SHA-256 3749c4f7..., which decompresses to the SHA-256
+      f6e32978... the packet's acquisition record pins (devtools.retained_data check ties
+      the two). Admission recomputed in exact rationals n = 37, L = 2599/400, the total mass
+      3699999/100000 < 37, the core side 4999/5000 with B(1 + D/(1 - D^2/4)) < 1 and the net
+      its candidate declares (proof_net), of 2073 half-angles of step 1/5002, with B(1 + D)
+      = 25009997/25010000 < 1 and the last tangent 1036/2501 past tan(pi/8) and at most 1/2
+      (SOUNDNESS.md, lemma N0), from 612 rectangle rows (4,896 distinct images) and no point
+      or segment, and took format M's per-bin centre domain, at threshold 1. The axis
+      direction was decided by an exact-event vertex sweep over 15,760,900 vertices, least
+      certified capture 1.0023692790476681; the other 2072 by interval branch and bound over
+      864,953,550 boxes, least certified lower bound 1.0000000000165958 at index 1919; the
+      exact capture at the least-bound leaf's centre (index 1919) is 1.0026748080. Every
+      direction verified, summary VERIFIED, native exit 0, 12,668 aggregate process CPU
+      seconds (wait4) at two threads and 7,101 seconds of wall time. 12,667.1 summed
+      per-direction CPU seconds. The recorded load average 0.9 was measured at start. The
+      build is rustc 1.98.0 (88d9e12ae 2026-08-18), release, x86_64-unknown-linux-gnu,
+      source_sha256 d97758bb...: the crate source at 910b6b12c: the source of e020eb1e2
+      (7c49cf79...) with the declared net of format M (proof_net, SOUNDNESS.md lemma N0) and
+      its review fixes, a diff the soundness review
+      docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md read in
+      full and accepted. The producer adapted this repository's crate as sqverify-proof-net;
+      the two share the sqverify_fast crate apart from their declared-net readers. This
+      replay is not an independent full implementation or a second method. The maintained
+      crate's declared-net reader was written without opening the producer's adapted source
+      (packing/sqverify_fast/INDEPENDENCE.md, Declared Nets). The theorem, net, core side,
+      per-bin domain and threshold are shared. Its node counts and bounds are its own, not
+      the certificate's records. Controls: the original verified again at index 1919; every
+      mass scaled by 99/100 refused at 2073 of the 2073 net directions, each a coverage
+      refusal at a centre in the per-bin domain where the mutant's exact capture is below 1
+      (the crate's confirmed witness, or at the axis the vertex sweep's least vertex); and
+      every mass scaled by 0.9973 so that the exact capture at the least-bound leaf's centre
+      is at most 1 - 10^-6 refused (counterexample-candidate, exact capture below 1 at the
+      least-bound leaf's centre); each capture below 1 was evaluated again by an exact
+      evaluator written apart from the crate, and tests/test_sqverify_fast_census.py holds
+      the receipts. The source's own checker was not run here on this certificate, and its
+      tarball is pinned by digest and not retained.
+    source_reviewed: '2026-11-02'

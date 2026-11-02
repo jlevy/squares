@@ -17717,19 +17717,14 @@ occurrences:
     path: packing/frontier/n-076.md
     record_key: '76'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Greff
   start: 0
-  end: 6
-  label: Hosono
+  end: 5
+  label: Greff
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-076.md [76] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-077.md
     record_key: '77'
@@ -18309,19 +18304,14 @@ occurrences:
     path: packing/frontier/n-095.md
     record_key: '95'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Greff
   start: 0
-  end: 6
-  label: Hosono
+  end: 5
+  label: Greff
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-095.md [95] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-096.md
     record_key: '96'

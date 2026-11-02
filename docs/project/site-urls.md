@@ -966,7 +966,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/73.html | cases/73.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/74.html | cases/74.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/75.html | cases/75.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/76.html | cases/76.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/76.html | cases/76.html | record | overview | 2026-10-03 | 2026-11-02 | live |
 | cases/77.html | cases/77.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/78.html | cases/78.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/79.html | cases/79.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -987,7 +987,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/92.html | cases/92.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/93.html | cases/93.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/94.html | cases/94.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/95.html | cases/95.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/95.html | cases/95.html | record | overview | 2026-10-03 | 2026-11-02 | live |
 | cases/96.html | cases/96.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/97.html | cases/97.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/98.html | cases/98.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -1318,7 +1318,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-175.html | result/t-175.html | result | overview | 2026-10-14 | 2026-10-15 | live |
 | result/t-176.html | result/t-176.html | result | overview | 2026-10-14 | 2026-10-14 | live |
 | result/t-177.html | result/t-177.html | result | overview | 2026-10-14 | 2026-10-14 | live |
-| result/t-178.html | result/t-178.html | result | overview | 2026-10-14 | 2026-10-14 | live |
+| result/t-178.html | result/t-178.html | result | overview | 2026-10-14 | 2026-11-02 | live |
 | result/t-179.html | result/t-179.html | result | overview | 2026-10-14 | 2026-10-14 | live |
 | result/t-180.html | result/t-180.html | result | overview | 2026-10-14 | 2026-10-14 | live |
 | result/t-181.html | result/t-181.html | result | overview | 2026-10-14 | 2026-10-16 | live |
