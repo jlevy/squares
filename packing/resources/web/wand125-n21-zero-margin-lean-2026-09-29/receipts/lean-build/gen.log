@@ -1,0 +1,19 @@
+# command: taskset -c 2,3 /home/user/squares/.claude/worktrees/agent-a7808cd78d9444bed/packing/.venv/bin/python3 lean/scripts/gen_zmtree.py certificates/n21pts/n21-capture-one.txt --n 21 --name N21PtsZ --outdir lean/Sqpack/N21PtsZ --nproc 2 --parts 64
+# cwd: s12/ of the stage of wand125-n21
+# python3: /home/user/squares/.claude/worktrees/agent-a7808cd78d9444bed/packing/.venv/bin/python3 (Python 3.14.7)
+# host: 4 cores; load 1.06 2.50 3.41; started 2026-11-02T13:56:16Z
+  50/625 cells 0s
+  100/625 cells 0s
+  150/625 cells 21s
+  200/625 cells 243s
+  250/625 cells 249s
+  300/625 cells 274s
+  350/625 cells 576s
+  400/625 cells 1828s
+  450/625 cells 3073s
+  500/625 cells 3350s
+  550/625 cells 3588s
+  600/625 cells 4632s
+search done: 5441s wall, 9057s cpu; {'E': 5876, 'ADM': 22016, 'CHAIN1': 13526, 'CHAIN2': 23891, 'C': 5599, 'split': 60309, 'zm_only': 0, 'boxes': 131217, 'maxdepth': 36, 'claimed': 15438500, 'chainpts': 1022304, 'piv': 165423}
+wrote lean/Sqpack/N21PtsZ: 2076 chunks in 64 parts, {'F': 3404, 'C': 5591, 'E': 5876, 'Z': 59433, 'digits': 18261337, 'ADM': 22016, 'CHAIN1': 13526, 'CHAIN2': 23891}, total est. cost 6372133
+# finished 2026-11-02T15:29:38Z; exit 0; wall 5601.848 s; CPU 9230.9 s (user 9218.824 + sys 12.100); load 2.33 2.69 4.22
