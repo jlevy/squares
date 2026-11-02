@@ -1,0 +1,62 @@
+# command: /home/user/squares/.claude/worktrees/agent-aa30270b9f083e3c7/packing/.venv/bin/python3 -I -u /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l30/zc95/zm_mixed/zm_mixed.py cert /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l30/zc95/zm_mixed/s95_cover_v2_scaled-49207-50000.txt --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 24 --nproc 1 --cx-lo 91/20 --cx-hi 23/5 --cy-lo 11/5 --cy-hi 9/4 --u-lo 13/32 --u-hi 7/16 --resume /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l30/zc95/out/n95_zm_control_scaled-49207-50000_c91-44-13.jsonl
+# cwd: zm_mixed/ staged by devtools.replay_evand_zmx2 zm-control: zm_mixed.py ee3e2915349b8795128417bca6414b205d526db9f01f88cd4cd32c32e8d760ac, mixed_cover.py bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5, zeromargin.py 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab (retained evand packets); cover a2e967bedfdd29035c837ab0594776a8912f960700d2a40f65670ce135bc8f27, the scaled-49207-50000 mutation (scale) of 8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c: scales every mass by 49207/50000: 48352 point and 11438 segment weights
+# python3: /home/user/squares/.claude/worktrees/agent-aa30270b9f083e3c7/packing/.venv/bin/python3 (Python 3.14.7), run with -I
+# host: 4 cores; load 5.18 5.84 4.41; started 2026-11-02T13:48:40Z
+zeromargin.py sha256 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab (= pinned)
+sha256 ee3e2915349b8795128417bca6414b205d526db9f01f88cd4cd32c32e8d760ac  zm_mixed.py
+sha256 bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5  mixed_cover.py
+sha256 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab  zeromargin.py
+sha256 a2e967bedfdd29035c837ab0594776a8912f960700d2a40f65670ce135bc8f27  input (/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l30/zc95/zm_mixed/s95_cover_v2_scaled-49207-50000.txt)
+argv: /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l30/zc95/zm_mixed/zm_mixed.py cert /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l30/zc95/zm_mixed/s95_cover_v2_scaled-49207-50000.txt --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 24 --nproc 1 --cx-lo 91/20 --cx-hi 23/5 --cy-lo 11/5 --cy-hi 9/4 --u-lo 13/32 --u-hi 7/16 --resume /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l30/zc95/out/n95_zm_control_scaled-49207-50000_c91-44-13.jsonl
+settings: {"cert_mode": true, "chain": true, "chain_from": 0, "clip": true, "depth": 24, "lemma_L": true, "lemma_T": true, "mode": "D4", "pitch": "1/20", "reach": "442/625", "region": {"cx_hi": "23/5", "cx_lo": "91/20", "cy_hi": "9/4", "cy_lo": "11/5", "u_hi": "7/16", "u_lo": "13/32"}, "split": true, "split_maxchain": 400, "theta_bias": 4, "tprime": false, "ubins": 16}
+CERT MODE: Corollary T' and polygon code disabled (0 points on segment lines are treated as ordinary points)
+container [0,10]^2, 48352 points, 11438 segments on 22 lines, 0 polygons; total 186580811866529/2000000000000 = 93.290405933
+D4: measure invariant under x -> m-x and x <-> y; roots [0,m/2]^2 x u in [0,1/2]
+PARTIAL SWEEP: cx [91/20, 23/5], cy [11/5, 9/4], u [13/32, 7/16] -- not a verification of the whole container
+1 root boxes x 1 cover(s), depth limit 24, pitch 1/20, u-bins 16, CHAIN on, Lemma T on, Lemma L on
+done in 585s: boxes 2789, max depth 24, CPU 576 s
+  leaves: PIECE 0  ADM 498  P1 0  MIX 0  CHAIN 102  SPLIT 255  EMPTY 0  UNCERTIFIED 540   (leaves where Lemma T / Lemma L raised the piece bound: 0 / 855; closed by Lemma T with line points: 0)
+uncertified boxes (cover cx0 cx1 cy0 cy1 theta0 theta1 deg):
+   - 4.559961 4.560156 2.239844 2.240039 46.4579 46.4698
+   - 4.559961 4.560156 2.240039 2.240234 46.4107 46.4225
+   - 4.559961 4.560156 2.240039 2.240234 46.4225 46.4343
+   - 4.559961 4.560156 2.240039 2.240234 46.4343 46.4461
+   - 4.559961 4.560156 2.240039 2.240234 46.4461 46.4579
+   - 4.559961 4.560156 2.240039 2.240234 46.4579 46.4698
+   - 4.559961 4.560156 2.240234 2.240430 46.3871 46.3989
+   - 4.559961 4.560156 2.240234 2.240430 46.3989 46.4107
+   - 4.559961 4.560156 2.240234 2.240430 46.4107 46.4225
+   - 4.559961 4.560156 2.240234 2.240430 46.4225 46.4343
+   - 4.559961 4.560156 2.240234 2.240430 46.4343 46.4461
+   - 4.559961 4.560156 2.240430 2.240625 46.3871 46.3989
+   - 4.559961 4.560156 2.240430 2.240625 46.3989 46.4107
+   - 4.559961 4.560156 2.240430 2.240625 46.4107 46.4225
+   - 4.559961 4.560156 2.240430 2.240625 46.4225 46.4343
+   - 4.560156 4.560352 2.239453 2.239648 46.5052 46.5170
+   - 4.560156 4.560352 2.239453 2.239648 46.5170 46.5288
+   - 4.560156 4.560352 2.239453 2.239648 46.5288 46.5406
+   - 4.560156 4.560352 2.239453 2.239648 46.5406 46.5524
+   - 4.560156 4.560352 2.239648 2.239844 46.4698 46.4816
+   - 4.560156 4.560352 2.239648 2.239844 46.4816 46.4934
+   - 4.560156 4.560352 2.239648 2.239844 46.4934 46.5052
+   - 4.560156 4.560352 2.239648 2.239844 46.5052 46.5170
+   - 4.560156 4.560352 2.239648 2.239844 46.5170 46.5288
+   - 4.560156 4.560352 2.239648 2.239844 46.5288 46.5406
+   - 4.560156 4.560352 2.239844 2.240039 46.4343 46.4461
+   - 4.560156 4.560352 2.239844 2.240039 46.4461 46.4579
+   - 4.560156 4.560352 2.239844 2.240039 46.4579 46.4698
+   - 4.560156 4.560352 2.239844 2.240039 46.4698 46.4816
+   - 4.560156 4.560352 2.239844 2.240039 46.4816 46.4934
+   - 4.560156 4.560352 2.239844 2.240039 46.4934 46.5052
+   - 4.560156 4.560352 2.239844 2.240039 46.5052 46.5170
+   - 4.560156 4.560352 2.240039 2.240234 46.4107 46.4225
+   - 4.560156 4.560352 2.240039 2.240234 46.4225 46.4343
+   - 4.560156 4.560352 2.240039 2.240234 46.4343 46.4461
+   - 4.560156 4.560352 2.240039 2.240234 46.4461 46.4579
+   - 4.560156 4.560352 2.240039 2.240234 46.4579 46.4698
+   - 4.560156 4.560352 2.240039 2.240234 46.4698 46.4816
+   - 4.560156 4.560352 2.240039 2.240234 46.4816 46.4934
+   - 4.560156 4.560352 2.240234 2.240430 46.3871 46.3989
+  ... 540 in total
+NOT VERIFIED (PARTIAL)
+# finished 2026-11-02T13:58:29Z; exit 0; wall 588.804 s; CPU 579.4 s (user 578.702 + sys 0.665); load 3.00 2.77 3.38
