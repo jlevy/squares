@@ -49,7 +49,11 @@ at a time, on a shared four-core host.
 
 Every receipt but `q-quotes.json`, `c-citations.json` and the cross-check’s text
 records the SHA-256 of every program in `programs/` when it ran. Those two record their
-own digest and their inputs’.
+own digest and their inputs’, keyed by repository path in `q-quotes.json`. Its program
+was changed after the first run to key them so, since both its inputs are named
+`paper.tex` and a key by name kept only one digest; the other receipts still carry the
+earlier digest of `q_quotes.py`, `f0290e9f…`, and re-running them changes only that
+entry.
 
 No evidence entry cites these programs: the two preprints’ results are recorded in
 `frontier/asymptotic-waste-bounds.yaml`, which has no evidence entries, and settle no

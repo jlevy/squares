@@ -1,8 +1,9 @@
 {
  "program": "q_quotes.py",
- "program_sha256": "f0290e9f34a02b15894611da65e64077f0528277cbd64c8fa0fb58e9df66f6e8",
+ "program_sha256": "33faac67c6f398d0978b9e16ff453e2c90b7a5e9f74d341d9e89c382ff6de49b",
  "inputs_sha256": {
-  "paper.tex": "25db094cd7af9d707eb6eddda987e3fbb99d22813ff1672646fb0a724d1e3bb3"
+  "packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/source/paper/paper.tex": "1213ee37c40d665af9549bb479175544b778a98fb8a6df772c52ffbaf76defd7",
+  "packing/resources/web/squarepacker-k2-minus-c-v12-2026-10-06/source/paper/paper.tex": "25db094cd7af9d707eb6eddda987e3fbb99d22813ff1672646fb0a724d1e3bb3"
  },
  "statements": [
   {

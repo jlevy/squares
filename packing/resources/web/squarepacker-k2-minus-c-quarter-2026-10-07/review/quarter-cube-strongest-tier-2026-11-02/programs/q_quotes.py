@@ -42,6 +42,18 @@ def r_env(rtex: str, label: str) -> str | None:
     return None if m is None else m.group(3)
 
 
+def repo_path(p: Path) -> str:
+    """The input's path from the repository root, or as given outside a checkout.
+
+    Both inputs are named paper.tex, so a key by file name would keep one digest.
+    """
+    resolved = p.resolve()
+    for parent in resolved.parents:
+        if (parent / ".git").exists():
+            return resolved.relative_to(parent).as_posix()
+    return p.as_posix()
+
+
 def main(qpath: Path, rpath: Path, out: Path) -> int:
     qtex, rtex = qpath.read_text(), rpath.read_text()
     rn = norm(rtex)
@@ -91,7 +103,7 @@ def main(qpath: Path, rpath: Path, out: Path) -> int:
         if emph_only:
             row["note"] = "found after removing \\emph from [R]'s text: Q drops one emphasis"
         sentences.append(row)
-    digests = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in (qpath, rpath)}
+    digests = {repo_path(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in (qpath, rpath)}
     here = Path(__file__).resolve()
     receipt = {
         "program": "q_quotes.py",
