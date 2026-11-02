@@ -1,0 +1,17 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L23 of 2 November (think-yf8j): the strongest-tier stage 4 review of Sungjoon
+  Ryu's quarter-power and cube-root preprints of #414 is recorded. #414's summary names it,
+  and its review ask moves from queued to done with the verdict, accepted, in its note. No
+  side, bound, rung, status, credit, result or case record changes; the two theorems have no
+  register entry. Against main 43ad863b5 (#876): rendered at link revision
+  0000000000000000000000000000000000000000 into empty site directories, twice from this tree
+  and once with that main's result-requests.yaml swapped in, by render_packing_methods, its
+  math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM): 43 files each, all byte-identical
+  across the three. No PDF was printed; it prints from that HTML. The survey keeps v0.2.7.
