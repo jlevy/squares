@@ -35,4 +35,7 @@ reason: >-
   render_n11_lower_bounds_explainer --prepare-math (55 files each), the math passes in
   /usr/bin/google-chrome (SQPACK_CHROMIUM): all byte-identical across the three. No PDF
   was printed; each prints from that HTML. Every paper keeps its version: v0.4.35,
-  v0.1.11, v0.1.4 and v0.2.7.
+  v0.1.11, v0.1.4 and v0.2.7. After review A of #886 merged main 9aba63255 (#887) and
+  closed n = 96 by T-191's cover (81 proved, 243 open), the same three renders were made
+  again against that main, with its copies of the same paths swapped in for the third:
+  byte-identical again, 51 files each and 55 for the explainer.
