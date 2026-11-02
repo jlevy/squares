@@ -17,8 +17,10 @@ box again without the source’s programs.
 **Result.** All 78,673 boxes are certified as labelled: 72,174 `inf`, 1,094 `nowall`
 and 5,405 `closed`, and the largest bound of a `closed` piece is 9. None needed another
 label, and none failed. The run took 1,880.8 CPU seconds on two cores, 16 minutes of
-wall time. Four negative controls are refused, each with an exactly checked witness that
-its claim is false.
+wall time. Ten negative controls are refused, each with an exactly checked witness, in
+the claim’s box, that its claim is false. After
+[review A of #884](https://github.com/jlevy/squares/pull/884#pullrequestreview-5734935204),
+a seeded sample of 1,000 boxes was decided again, and every row came out identical.
 
 Version 1.2’s Lemma 4.10 states the same model and decides the same 13 lists. Its
 `data/kw9_data.zip` has the same SHA-256, `32634874…`, in both packets’ acquisition
@@ -37,19 +39,25 @@ This list is the independence record of
 | `paper/paper.tex` of version 1.1: Sections 3 and 4, from the elementary geometry through Lemma 4.10, Remark 4.11 and the slit lemma | The model and the proof the program implements |
 | Version 1.2’s Lemma 4.10, compared with version 1.1’s | That the model is unchanged |
 | The format of the 13 box lists in `data/kw9_data.zip`, and the names of the zip’s other files | The input: `kind`, `U`, `box` as `[r_lo, r_hi, θ_lo, θ_hi]` per centre, and `h` with a side |
-| [The 5 October review](../../../../../../docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md), in full | The reduction to `U(I)`, re-derived there, and a prose account of the source’s checker: 1,440 cells closed against their neighbours, the greedy count, the `2π` extension, Arb at 96 bits |
+| [The 5 October review](../../../../../../docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md), in full | The reduction to `U(I)`, re-derived there, and an account of the source’s checker at the level of its code: the routines `certified_violation`, `check_inf` and `check_nowall`; `max_points` (`bnb.py` lines 99–123), its greedy count and closing test; 1,440 cells closed against their neighbours; six radial pieces of up to 16 sub-pieces; the tolerances, the `2π` extension, and Arb at 96 bits |
 | This packet’s [README](../../README.md), and one line of a control receipt, to see the receipt format | The replay’s totals, which no decision here uses |
 | The docstring of `cases/asymptotic/ryu_k2_minus_c_float_gap.py` | A description of the source’s float count; nothing of it is used |
 | The rows of `frontier/asymptotic-waste-bounds.yaml` for Ryu’s preprints, the bead, `epistemics.md` and the stage 4 rules of `campaign/result-import.md` | The task, and how to record it |
 | The lines that name `think-k3tk` in the 2 November review of the quarter-power and cube-root preprints (its F3), in `campaign/result-requests.yaml` and in three later packets’ READMEs | What this run bears on |
+| [Review A of #884](https://github.com/jlevy/squares/pull/884#pullrequestreview-5734935204) and its scripts `mutants.py` and `mycontrols.py`, after the run | Six mutants of this program, controls E and F, and the findings this README answers. The reviewer’s own checker, `indep.py`, was not read |
 
 **Never read or run:** `code/verify_leaves.py`, `code/verify_leaves2.py`, `code/bnb.py`,
 `code/bnb_wall.py`, `code/coverage_check.py`, `code/coverage_independent/`,
 `code/SUPERSEDED.md`, `code/experiments/` and every other program of the source, the
 author’s verification and coverage outputs, and the body of
 `ryu_k2_minus_c_float_gap.py`. The program imports NumPy, mpmath’s interval context, the
-standard library, and `devtools.retained_data` to write its receipts. It does not use
-python-flint.
+standard library, and `devtools.retained_data` to write and read its receipts. It does
+not use python-flint.
+
+The record keeps `clean_room: true`, since no program of the source was read. Its `read`
+list includes `specification`, because the 5 October review describes the source’s
+checker at the level of its code, so this second reading was not made wholly without the
+first. Whether to record `clean_room: false` instead is the owner’s call.
 
 The authors are a Claude agent, of the system family the source says helped write its
 programs. The prompt and the code are separate from the source’s, so the two readings of
@@ -161,24 +169,71 @@ These are diagnostics. They test the program; they decide no label.
 
 ## Controls
 
-The `controls` command runs four, under the run’s rules and its budget of 4,096 pieces,
-at commit `4fd07e1b3` ([`controls.json`](controls.json), [receipt](controls.log), 45.9 CPU
-seconds). Each perturbs one bound of a box or one weight of the count so that its claim is
-false. A rational witness, checked in exact arithmetic, shows the claim is false: a
-configuration in the perturbed box that is admissible and, where the claim is a bound,
-whose `U(I)` exceeds it. A witness bounds `Dᵢ*` from below by outer centres whose
-conditions and pairwise separations are checked exactly. Each unperturbed box is certified.
+The `controls` command runs ten, under the run’s rules and its budget of 4,096 pieces, at
+commit `231af6b4e` ([`controls.json`](controls.json), [receipt](controls.log), 9.0 CPU
+seconds). Each claim is false. A rational witness, checked in exact arithmetic, shows
+it: a configuration in the claim’s box that is admissible, lies in the lemma’s domain
+`1/2 < |cᵢ| ≤ ρ₁` and, where the claim is a bound, has `U(I)` above it. A witness bounds
+`Dᵢ*` from below by outer centres `x = cᵢ + w` whose conditions and pairwise separations
+are checked exactly. The unperturbed claim beside each is certified, in one piece.
 
-| Control | Perturbed claim | Refused | Witness | Unperturbed |
-| --- | --- | --- | --- | --- |
-| A | The sharp box, `bnb_n2_T9_0of1` line 24, at threshold 8 | Budget spent, 4,071 pieces | The slit configuration `±(1/2 + 10⁻⁹, 0)`: `E_II ≥ 1` and `D₁*, D₂* ≥ 4`, so `U(I) ≥ 9` | Certified at 9 in one piece |
-| B | `bnb_n2_T9_0of1` line 1, `inf`, with the lower end of `ϑ₂` lowered from `7π/4` to `3π/2` | A piece too small to cut stays undecided | `c₁ = (4/5, 0)` and `c₂ = (16/101, −396/505)`: admissible, in the widened box and not in the original | `inf` in one piece |
-| C | `bnbw_n2_T9_0of1` line 290, `nowall`, with the lower end of `h` lowered from 0.3536 to 0 | Budget spent, 4,011 pieces | `c₁ = (−53/100, 13/20)`, `c₂ = (47/100, 13/25)` and `h = 1/25`: admissible, and `c₂` may have a side edge | `nowall` in one piece |
-| D | The sharp box with the separation of the count halved to `γ₀/2` | A piece too small to cut stays undecided | The slit configuration with six directions per centre, pairwise `γ₀/2` apart, so `U(I) ≥ 13` | Certified at 9 in one piece |
+Each claim is refused by decision, not by the budget. `certify` takes the witness, in
+binary64, as a focus, and of each piece it cuts it decides first the half that holds the
+witness. The claim is refused when the piece holding the witness cannot be cut further,
+with its widest side at most `10⁻¹³`, and is still undecided. A labeller that is sound
+cannot decide that piece, however long it runs. The focus only orders the bisection, and
+the run used none.
 
-Control A is the one the replay ran with the source’s checker; B, C and D are new. Control
-D tests the point count, the step finding RF-2 is about: with the separation halved, the
-count rises and the box is refused.
+| Control | Claim that should fail | Refused after | Witness | Unperturbed |
+| --- | --- | ---: | --- | --- |
+| A | The sharp box, `bnb_n2_T9_0of1` line 24, at threshold 8 | 122 pieces | The slit configuration `±(1/2 + 10⁻⁹, 0)`: `E_II ≥ 1` and `D₁*, D₂* ≥ 4`, so `U(I) ≥ 9` | Certified at 9 |
+| B | `bnb_n2_T9_0of1` line 1, `inf`, with the lower end of `ϑ₂` lowered from `7π/4` to `3π/2` | 129 | `c₁ = (4/5, 0)` and `c₂ = (16/101, −396/505)`: admissible, in the widened box and not in the original | `inf` |
+| C | `bnbw_n2_T9_0of1` line 290, `nowall`, with the lower end of `h` lowered from 0.3536 to 0 | 212 | `c₁ = (−53/100, 13/20)`, `c₂ = (47/100, 13/25)` and `h = 1/25`: admissible, and `c₂` may have a side edge | `nowall` |
+| D | The sharp box with the separation of the count halved to `γ₀/2` | 122 | The slit configuration with six directions per centre, pairwise `γ₀/2` apart, so `U(I) ≥ 13` | Certified at 9 |
+| E | The sharp box’s neighbour, `bnb_n2_T9_0of1` line 32, at threshold 8 (review A) | 122 | `c₁ = (1/2 + 10⁻⁹, 0)` and `c₂ = (−1/2 − 10⁻⁹, 10⁻¹²)`: `U(I) ≥ 9` | Certified at 9 |
+| F | `bnbw_n2_T9_0of1` line 4, `inf` through the side, with the lower end of `ϑ₂` lowered from `3π/2` to 3.5 (review A) | 212 | `c₁ = (4/5, −1/100)`, `c₂ = (−1/2, −1/5)` and `h = 141/200`: admissible, in the widened box and not in the original | `inf` |
+| G | `E_II`’s `Λ`: about `c₁,₂ = (∓1413/2000, 9/20)` and `h = 1/10`, at threshold 0 | 56 | The pair is `1.413 < Λ` apart, so `E_II ≥ 1` | Certified at 1 |
+| H | `W_I`’s `d + √2/2`: about `c₁ = (−1/20, 3/5)` and `h = 21/200`, at threshold 0 | 34 | `c₁,y + h = 0.705 < d + √2/2`, so `W_I ≥ 1` | Certified at 1 |
+| I | The outer centres’ side condition: about `c₁ = (297/500, 137/250)` and `h = 39/250`, at threshold 0 | 34 | `w = (−7/5, −11/100)` gives an outer centre with `x_y + h = 0.594 ≥ 1/2`, so `D₁* ≥ 1` | Certified at 1 |
+| J | `ρ₁`, the distance from `p` an outer centre must exceed: about `c₁ = (72/125, 0)`, with no side, at threshold 2 | 12 | Three outer centres, pairwise at least `γ₀` apart, one of them at squared distance 0.790 from `p`, beyond `ρ₁² = 0.750`, so `D₁* ≥ 3` | Certified at 3 |
+
+Control A is the one the replay ran with the source’s checker; the others are new. D tests
+the point count, the step finding RF-2 is about: with the separation halved, the count
+rises and the box is refused. E and F are review A’s. G to J are each a box of half-width
+`10⁻¹⁰` about a configuration at which the program’s bound is exact, at a claim one
+below it. Each sits on one threshold of the model, and a labeller that moved that
+threshold the permissive way would certify the claim.
+
+Review A made six permissive mutants of this program. Under M1 to M4, controls A to D
+were still refused, and only a sampled test caught them; G to J were added for those
+four. The review’s script, run at commit `61f959a0c`, gives this. A control catches a
+mutant when the mutant certifies its claim; with no mutant, all ten are refused.
+
+| Mutant | Change | Caught by |
+| --- | --- | --- |
+| M1 | The outer centres’ side condition `x_y ≥ −h + 1/2` made 0.2 too strict | I |
+| M2 | `W_I`’s distance `d + √2/2` shortened by 0.1 | H |
+| M3 | `E_II`’s threshold lowered to `Λ² − 0.3` | G |
+| M4 | The distance `ρ₁` from `p` an outer centre must exceed: its squared value raised by 0.05 in the hole in `t` | J |
+| M5 | A piece inadmissible when a pair may be closer than 1 | A to F |
+| M6 | The rectangle’s half-width narrowed to 0.45 | A, D, E, I and J |
+
+A test of `tests/test_ryu_k2_minus_c_labels.py` keeps the check for M1 to M4.
+
+## After Review A
+
+Review A’s fixes add guards and the focus, and change no decision of the run. The
+program now refuses to start unless binary64 rounds to nearest with gradual underflow,
+which the one-ulp enclosure needs. It refuses a radius that reaches 1, an mpmath special
+value, a direction cell coarser than level 2 and a separation above half a turn. With
+no focus, `certify` cuts in the run’s order.
+
+The `recheck` command decided a seeded sample of 1,000 boxes again (seed 884), at commit
+`231af6b4e`, and compared each decision with its row in `labels/`
+([`recheck-1000.json`](recheck-1000.json), [receipt](recheck-1000.log), 46.5 CPU
+seconds). All 1,000 are identical in label, `U`, outcome, pieces, leaves, bound and
+level. The sample holds 915 `inf` boxes, 4 of them bisected; 18 `nowall`; and 67
+`closed`, 48 of them bisected.
 
 ## Files
 
@@ -188,7 +243,8 @@ count rises and the box is refused.
 | [`run-worker0.log`](run-worker0.log), [`run-worker1.log`](run-worker1.log) | The two workers’ receipts, from `devtools.replay_receipt` |
 | [`summary.json`](summary.json), [`summarize.log`](summarize.log) | The counts per class and outcome, every box not certified as labelled (none), the bounds, levels and pieces, and the CPU; and the receipt |
 | `labels/<list>.jsonl` | One row per box, in line order: the source’s label and bound, the outcome, the pieces, the label of each leaf, the largest `closed` bound, the finest level and the CPU. The nine lists of more than 1,000 boxes are stored as `.jsonl.gz` |
-| [`controls.json`](controls.json), [`controls.log`](controls.log) | The four controls and their receipt |
+| [`controls.json`](controls.json), [`controls.log`](controls.log) | The ten controls and their receipt |
+| [`recheck-1000.json`](recheck-1000.json), [`recheck-1000.log`](recheck-1000.log) | The sample decided again after review A, and its receipt |
 
 ## Reproduce
 
@@ -203,6 +259,7 @@ for w in 0 1; do
 done; wait
 .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels summarize --out OUT --receipts $P
 .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels controls --receipts $P
+.venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels recheck --sample 1000 --seed 884 --receipts $P
 ```
 
 <!-- This document follows common-doc-guidelines.md.

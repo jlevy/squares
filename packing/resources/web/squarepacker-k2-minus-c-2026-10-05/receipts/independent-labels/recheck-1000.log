@@ -1,0 +1,28 @@
+# command: nice -n 10 .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels recheck --sample 1000 --seed 884 --receipts resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels
+# cwd: packing/ of jlevy/squares at 231af6b4e (branch claude/bold-ritchie-xo28us-l26); re-decides against the retained rows in labels/
+# python3: CPython 3.14.7, the project interpreter (packing/.venv): numpy 2.x and mpmath 1.3.0; no python-flint
+# host: 4 cores; load 1.07 0.70 0.66; started 2026-11-02T10:29:34Z
+{
+  "sample": 1000,
+  "seed": 884,
+  "by_label": {
+    "closed, bisected": 48,
+    "closed, one piece": 19,
+    "inf, bisected": 4,
+    "inf, one piece": 911,
+    "nowall, one piece": 18
+  },
+  "fields": [
+    "label",
+    "U",
+    "outcome",
+    "pieces",
+    "leaves",
+    "bound",
+    "level"
+  ],
+  "identical": 1000,
+  "cpu_s": 44.8
+}
+wrote resources/web/squarepacker-k2-minus-c-2026-10-05/receipts/independent-labels/recheck-1000.json
+# finished 2026-11-02T10:30:21Z; exit 0; wall 46.722 s; CPU 46.5 s (user 46.251 + sys 0.247); load 1.12 0.77 0.69

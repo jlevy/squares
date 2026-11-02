@@ -1,0 +1,23 @@
+{
+  "sample": 1000,
+  "seed": 884,
+  "by_label": {
+    "closed, bisected": 48,
+    "closed, one piece": 19,
+    "inf, bisected": 4,
+    "inf, one piece": 911,
+    "nowall, one piece": 18
+  },
+  "fields": [
+    "label",
+    "U",
+    "outcome",
+    "pieces",
+    "leaves",
+    "bound",
+    "level"
+  ],
+  "identical": 1000,
+  "differences": [],
+  "cpu_s": 44.8
+}
