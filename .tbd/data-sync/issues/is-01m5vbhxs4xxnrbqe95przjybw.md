@@ -3,14 +3,18 @@ type: is
 id: is-01m5vbhxs4xxnrbqe95przjybw
 title: Review Ryu's quarter-power and cube-root preprint chains, statement conventions and constants at the strongest tier (#414)
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: bold-ritchie-l23
 labels:
   - validation
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-26T05:39:55.812Z
-updated_at: 2026-10-26T05:39:55.812Z
+updated_at: 2026-11-02T01:53:36.425Z
+started_at: 2026-11-02T01:53:36.425Z
 ---
 The review #414's ask still needs: "Review the full preprint chain, statement conventions and numerical constants" of Sungjoon Ryu's quarter-power and cube-root deficiency preprints (squarepacker/k2-minus-c-quarter abbedcf, 5,471 TeX lines; squarepacker/k2-minus-c-cube-root 15045f9, 584 lines; both v1.0, retained in packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/ and squarepacker-k2-minus-c-cube-root-2026-10-07/). Opened on 26 October 2026 by w-imports-1026 to own the ask in place of think-6ptr, an in_progress lane bead under a delegate that is gone (codex@spud10.local, last update 18 October).
 
