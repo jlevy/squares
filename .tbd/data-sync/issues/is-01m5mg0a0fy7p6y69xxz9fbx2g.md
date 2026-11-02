@@ -5,14 +5,14 @@ title: "census --control: the axis tolerance is a constant (AXIS_ROUNDING 1e-9);
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T13:43:00.366Z
-updated_at: 2026-10-23T16:09:34.169Z
+updated_at: 2026-11-02T20:52:28.280Z
 ---
 The census control's axis check (`packing/devtools/sqverify_fast_census.py`, `AXIS_ROUNDING = 1/10^9` and the axis branch of `refusal_record`) requires the 99/100 mutant's exact capture at the vertex sweep's least vertex to lie within a constant 1e-9 of the sweep's certified lower bound. The gap is half the sweep's enclosure width, which varies by certificate, so a sound refusal can fail closed.
 
@@ -26,3 +26,5 @@ blocked_on: none
 ## Notes
 
 2026-10-23 (c-lower-1023): the n26 receipt named above was renamed to keep it outside the receipts the census tests hold to CONTROLS_REFUSED, following mixed_n96_L997.control-failed-v1.json. Its path is now packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control-failed-v2.json (content unchanged; branch claude/intake-2026-10-23-lower-bounds, PR #745). When the fixed control re-judges or reruns n26 and ends CONTROLS_REFUSED, write the new receipt as mixed_n26_L5555.control.json beside it.
+
+2026-11-02 bold-ritchie-l32 (intake lane L32, think-567s; PR #889): a second receipt now waits on this fix. T-176's mixed_n39_L66625 whole-net control (receipt kind v2) failed closed on the axis allowance alone: the 99/100 mutant refused at all 2,073 directions, 2,072 refusals passing every predicate, and at r = 0 the exact capture 0.99207... < 1 (in the domain) sits 1.26e-9 above the sweep's certified bound 0.9920712485323058, beyond AXIS_ROUNDING 1e-9 (the 14 October review's F-1 measurement). Kept as packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.control-failed-v2.json; when the fixed control re-judges or reruns it and ends CONTROLS_REFUSED, write mixed_n39_L66625.control.json beside it. Its capture (VERIFIED, 881,271,470 nodes, equal to the source's log at every direction) is spent and need not rerun. Done-when should now name n26 (T-233), n39 (T-176) and n28 (T-142, not yet captured).
