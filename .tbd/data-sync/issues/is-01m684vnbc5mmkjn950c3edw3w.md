@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 79
+version: 80
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T04:14:13.792Z
+updated_at: 2026-11-02T04:14:58.601Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -134,3 +134,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 ~03:40: merged #877 (45eabe2c8; sweep held-bead rule with 28-day ceiling; think-n20n closed) and #878 (eead891eb; Kim t244 files kept, #804 last ask done). L22 resumed to post the #804 final comment after deploy verifies, close #804, record it; think-8r92/think-4rzl close after that PR. 35 PRs merged this pass. L23 (#414 strongest-tier review) running.
 
 2026-11-02 ~04:10: #804 closed (final comment 03:43Z after eead891eb deploy verified) and recorded: merged #880 (270ec3a5e); think-8r92 and think-4rzl closed after --before-close exit 0. L23 (#414 strongest-tier review, accepted, no defect; Q supplementary tables 118/118 reproduce) is PR #879, under records review; then #414 final comment (draft in think-u1kq) after deploy. Owner wording call noted: register rows now say the review is "one AI read with the constants recomputed; nothing here confirms more than that". 36 PRs merged this pass.
+
+2026-11-02 ~04:30: coordinator slip: closing think-4rzl left its child think-3trq open under a closed parent, failing check_bead_tree on main; re-parented to think-3guf at once (check ok). --before-close does not check children: think-ysi4 filed. #879 review A: blocking, nine table rows truncated by flowmark-rs splitting | inside cells (think-7y5x filed for a guard); L23 cannot be resumed (coordinator removed its worktree before review, a second slip: keep a lane worktree until its PR merges), so a fresh strong lane rebuilds the rows from receipts and sources.
