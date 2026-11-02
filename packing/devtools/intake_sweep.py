@@ -65,13 +65,13 @@ The sources, one section of the report each:
 
 An item **needs action** when the record is behind a source and no open bead owns the
 difference, when the bead a deferral names is no longer open, when that bead has gone
-quiet (no update in `STALE_DAYS`, unless it is held on beads still acted on, or a claim
-whose delegate's session is gone: no update in `CLAIM_LEASE_DAYS`), when a regularization
-is owed on main, when a wait's blocker has resolved, or when an open issue is closeable:
-answered, with nothing queued for import, every result settled or its remaining
-validation owned by named beads, nothing its author asked for queued and no question
-awaiting the author's answer, so its final comment and close are owed
-(`campaign/result-import.md`, stage 7). The owner's instruction
+quiet (no update in `STALE_DAYS`, or a claim whose delegate's session is gone: no update
+in `CLAIM_LEASE_DAYS`; a bead held on beads still acted on waits instead, for at most
+`HELD_DAYS`), when a regularization is owed on main, when a wait's blocker has resolved,
+or when an open issue is closeable: answered, with nothing queued for import, every
+result settled or its remaining validation owned by named beads, nothing its author
+asked for queued and no question awaiting the author's answer, so its final comment and
+close are owed (`campaign/result-import.md`, stage 7). The owner's instruction
 of 23 October 2026 put that last one here, after twelve closeable issues were found open
 with nothing listing them; where GitHub already shows such an issue closed, the step is
 to record the close, not to post it again. The command then exits 1. Items an open bead
@@ -106,7 +106,7 @@ import tempfile
 from collections.abc import Callable, Iterable, Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass, field, replace
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 from decimal import Decimal
 from functools import partial
 from pathlib import Path
@@ -150,6 +150,11 @@ OWED_ON_MAIN = "regularization owed on main"
 #: from 16 to 24 October 2026 without one, under a delegate whose session had ended,
 #: while seven counts rested owed on it, and the sweep read it as owned throughout.
 STALE_DAYS = 7
+#: How long a bead held on beads still acted on may go without an update of its own before
+#: it shows whatever they do. A note on the bead it waits on is not its owner acting on it:
+#: without a limit, a weekly note on think-f2io alone kept 8 of the 12 beads held on beads
+#: waiting after 37 days of their own silence (review A1 of #877).
+HELD_DAYS = 4 * STALE_DAYS
 #: How long a claim (`in_progress`, with a delegate) may go without an update before its
 #: delegate's session counts as gone. OR-19 has the tracker owner update a claimed bead at
 #: each commit and each worker report, and no session here runs two days (the longest
@@ -205,7 +210,9 @@ Mapped = Mapping[str, Any]
 
 @dataclass(frozen=True)
 class Item:
-    """One thing the record has not taken in, or a queue entry, and who owns it."""
+    """One thing the record has not taken in, or a queue entry, and who owns it.
+    `held_days` is how long its bead, held on beads still acted on, has gone without an
+    update of its own, or None when its bead is not waiting so."""
 
     what: str
     state: str
@@ -213,6 +220,7 @@ class Item:
     bead_state: str = ""
     since: str = ""
     step: str = ""
+    held_days: int | None = None
 
 
 @dataclass
@@ -273,22 +281,45 @@ class Beads:
     today: date | None = None
     holds: dict[str, str] = field(default_factory=dict)
     waits: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    #: Each bead's `stalled` reason once read, so a wait reached by many paths is read
+    #: once (review A7 of #877: a diamond of depth 18 cost 262,143 reads).
+    _stalled: dict[str, str] = field(
+        default_factory=dict, init=False, repr=False, compare=False
+    )
+
+    def silent_days(self, alias: str) -> int | None:
+        """Days since the bead's last update, or None without the sweep's day or it."""
+        if self.today is None:
+            return None
+        try:
+            return (self.today - date.fromisoformat(self.updated.get(alias, "")[:10])).days
+        except ValueError:
+            return None
+
+    def held_on(self, alias: str) -> tuple[str, ...]:
+        """The beads a bead is held on: those its `blocked_on:` line names while it is held
+        (`hold: blocked`) and the line names nothing else (`waited_beads`), or ()."""
+        return self.waits.get(alias, ()) if self.holds.get(alias) == "blocked" else ()
 
     def stalled(self, alias: str, waited: frozenset[str] = frozenset()) -> str:
         """Why a live bead owns nothing, or "" while it does: no update in `STALE_DAYS`,
-        unless it is held on beads that are all still acted on (`quiet_blocker`), or a
-        claim (`in_progress` with a delegate) with no update in `CLAIM_LEASE_DAYS`, whose
-        delegate's session is gone, held or not. Without the sweep's day or the bead's
-        last update, nothing is stalled. `waited` is the held beads that led here."""
-        if self.today is None:
+        or a claim (`in_progress` with a delegate) with no update in `CLAIM_LEASE_DAYS`,
+        whose delegate's session is gone, held or not. A bead held on beads that are all
+        still acted on (`quiet_blocker`) waits instead, for at most `HELD_DAYS` without an
+        update of its own. Without the sweep's day or the bead's last update, nothing is
+        stalled. `waited` is the held beads that led here."""
+        if (why := self._stalled.get(alias)) is None:
+            why = self._stalled[alias] = self._why_stalled(alias, waited)
+        return why
+
+    def _why_stalled(self, alias: str, waited: frozenset[str]) -> str:
+        days = self.silent_days(alias)
+        if days is None or self.today is None:
             return ""
-        try:
-            updated = date.fromisoformat(self.updated.get(alias, "")[:10])
-        except ValueError:
-            return ""
-        days = (self.today - updated).days
-        last = f"no update since {updated} ({days} days)"
+        last = f"no update since {self.today - timedelta(days=days)} ({days} days)"
         if days >= STALE_DAYS:
+            if days >= HELD_DAYS and self.held_on(alias):
+                return f"{last}; a held bead waits {HELD_DAYS} days at most"
             quiet = self.quiet_blocker(alias, waited | {alias})
             if quiet is None:
                 return last
@@ -304,14 +335,16 @@ class Beads:
         live and acted on, or None when the bead is not held on beads at all.
 
         A bead held (`hold: blocked`) whose `blocked_on:` line names only beads waits as
-        long as each of them is live and not stalled itself, a blocker held in turn
-        waiting on its own blockers, so a chain of waits holds while its last bead is
-        acted on. Once one goes quiet or closes, or the chain loops, the held bead's own
-        silence counts again. An owner's decision that no other bead stands for is not
-        held on a bead, so it shows after `STALE_DAYS` without an update, and every bead
-        held on it with it (lane L21 of 2 November 2026, think-n20n)."""
-        refs = self.waits.get(alias, ())
-        if self.holds.get(alias) != "blocked" or not refs:
+        long as each of them is live, not paused and not stalled itself, a blocker held in
+        turn waiting on its own blockers, so a chain of waits holds while its last bead is
+        acted on. Once one goes quiet, closes, is deferred or paused, or the chain loops,
+        the held bead's own silence counts again. An owner's decision that no other bead
+        stands for is not held on a bead, so it shows after `STALE_DAYS` without an update,
+        and every bead held on it with it (lane L21 of 2 November 2026, think-n20n). A
+        paused bead is one the owner has set aside, so nothing waiting on it is acted on
+        (review A6 of #877: think-7hq0 read as waiting on the paused think-x4v4)."""
+        refs = self.held_on(alias)
+        if not refs:
             return None
         for ref in refs:
             if ref in waited:
@@ -319,6 +352,8 @@ class Beads:
             state = self.state(ref)
             if state not in LIVE:
                 return f"{ref} ({state})"
+            if self.holds.get(ref) == "paused":
+                return f"{ref} (paused)"
             if why := self.stalled(ref, waited):
                 return f"{ref}, which has gone quiet ({why})"
         return ""
@@ -375,7 +410,8 @@ def owned(
     whose delegate's session is gone, owns nothing (`Beads.stalled`, section E of the
     intake review of 26 October 2026): think-mbdw sat claimed by a session gone since 16
     October while seven counts rested owed on it, and an open bead read as owned. A bead
-    held on beads still acted on is owned, and says what it is held on."""
+    held on beads still acted on is owned, and says what it is held on and how long it
+    has gone without an update of its own (`held_days`), which the summary counts."""
     if not alias:
         return Item(what, NEEDS_OWNER, since=since, step=step)
     if beads is None:
@@ -386,7 +422,8 @@ def owned(
     if why := beads.stalled(alias):
         return Item(what, STALLED, alias, f"{state}; {why}", since, step)
     if beads.quiet_blocker(alias, frozenset({alias})) == "":
-        state = f"{state}; held on {', '.join(beads.waits[alias])}"
+        held = f"{state}; held on {', '.join(beads.held_on(alias))}"
+        return Item(what, OWNED, alias, held, since, step, beads.silent_days(alias))
     return Item(what, OWNED, alias, state, since, step)
 
 
@@ -434,18 +471,33 @@ def declared_blockers(queued: QueuedBead, repository: str) -> list[str] | None:
     the bead waited, or that cited another bead's wait as an example, says nothing about
     what it waits on now.
     """
-    declared = _BLOCKED_ON.findall(f"{queued.text}\n{queued.notes}")
-    if not declared:
+    declared = _declared(queued)
+    if declared is None:
         return None
-    return list(dict.fromkeys(_refs(declared[-1], repository, queued.alias)))
+    return list(dict.fromkeys(_refs(declared, repository, queued.alias)))
+
+
+def _declared(queued: QueuedBead) -> str | None:
+    """A bead's last `blocked_on:` line, after the colon, or None when it has none."""
+    declared = _BLOCKED_ON.findall(f"{queued.text}\n{queued.notes}")
+    return declared[-1] if declared else None
+
+
+#: What may stand between the beads a `blocked_on:` line names when it names only beads.
+_BETWEEN_BEADS = re.compile(r"[\s,;]+|\band\b")
 
 
 def waited_beads(bead: Mapped, alias: str) -> tuple[str, ...]:
     """The beads any bead's last `blocked_on:` line names (`declared_blockers`), or ()
-    when it names none, or names an issue or pull request too: the store can say whether
-    a bead is still acted on, and nothing offline can say that of an issue."""
-    refs = declared_blockers(queued_bead(bead, alias), "") or []
-    return tuple(refs) if all(_BEAD_REF.fullmatch(ref) for ref in refs) else ()
+    when it names none, or anything other than beads: an issue, a pull request, a
+    person's answer or a gloss. The store can say whether a bead is still acted on, and
+    nothing offline can say that of the rest, so `blocked_on: think-ab12, the author's
+    answer` is no bead wait (review A3 of #877)."""
+    queued = queued_bead(bead, alias)
+    declared = _declared(queued)
+    if declared is None or _BETWEEN_BEADS.sub("", _BEAD_REF.sub("", declared)):
+        return ()
+    return tuple(declared_blockers(queued, "") or ())
 
 
 IssueFetch = Callable[[str], Mapped]
@@ -1712,8 +1764,18 @@ def _cell(text: str) -> str:
     return text.replace("|", "\\|").replace("\n", " ")
 
 
+def _bead_cell(item: Item) -> str:
+    """The item's bead and what the store says of it, the reason a stalled one is."""
+    return _cell(f"{item.bead} ({item.bead_state})" if item.bead_state else item.bead)
+
+
 def markdown(sections: Sequence[Section], today: date) -> str:
-    """The report: what needs action and what was not checked first, then each source."""
+    """The report: what needs action and what was not checked first, then each source.
+
+    Each row needing action names its bead and why it is listed, as `--json` does, so a
+    stalled bead's reason chain is read where the action is (review A2 of #877). The
+    summary counts the owned items whose bead is held on others, and the longest such
+    silence, since they are owned only while their blockers are acted on."""
     action = [(s.title, i) for s in sections for i in s.items if i.state in ACTION]
     orphans = sum(item.state == NEEDS_OWNER for _, item in action)
     resolved = sum(item.state == RESOLVED for _, item in action)
@@ -1721,6 +1783,13 @@ def markdown(sections: Sequence[Section], today: date) -> str:
     stalled = sum(item.state == STALLED for _, item in action)
     owed = sum(item.state == OWED_ON_MAIN for _, item in action)
     owned_count = sum(item.state == OWNED for s in sections for item in s.items)
+    held = [
+        item.held_days
+        for section in sections
+        for item in section.items
+        if item.state == OWNED and item.held_days is not None
+    ]
+    longest = f" (the longest silent {_count(max(held), 'day')})" if held else ""
     unchecked = [line for section in sections for line in section.unchecked]
     summary = (
         f"{_count(orphans, 'item')} without an open bead to own it, "
@@ -1728,7 +1797,8 @@ def markdown(sections: Sequence[Section], today: date) -> str:
         f"{_count(owed, 'regularization')} owed on main, "
         f"{_count(resolved, 'item')} whose blocker has resolved, "
         f"{_count(closeable, 'closeable issue')} still open, "
-        f"{_count(owned_count, 'item')} owned by an open bead, and "
+        f"{_count(owned_count, 'item')} owned by an open bead, "
+        f"{len(held)} of them by a held bead waiting on others{longest}, and "
         f"{_count(len(unchecked), 'source')} not checked."
     )
     lines = [f"# Intake Sweep, {today.isoformat()}", "", summary, ""]
@@ -1736,11 +1806,12 @@ def markdown(sections: Sequence[Section], today: date) -> str:
         lines += [
             "## Needs Action",
             "",
-            "| source | item | state | since | next |",
-            "| --- | --- | --- | --- | --- |",
+            "| source | item | state | bead | since | next |",
+            "| --- | --- | --- | --- | --- | --- |",
         ]
         lines += [
-            f"| {title} | {_cell(i.what)} | {i.state} | {i.since} | {_cell(i.step)} |"
+            f"| {title} | {_cell(i.what)} | {i.state} | {_bead_cell(i)} | {i.since} "
+            f"| {_cell(i.step)} |"
             for title, i in action
         ]
         lines.append("")
@@ -1755,11 +1826,10 @@ def markdown(sections: Sequence[Section], today: date) -> str:
             lines += [f"{_count(hidden, 'item')} above need action.", ""]
         if shown:
             lines += ["| item | state | bead | since |", "| --- | --- | --- | --- |"]
-            for item in shown:
-                bead = f"{item.bead} ({item.bead_state})" if item.bead_state else item.bead
-                lines.append(
-                    f"| {_cell(item.what)} | {item.state} | {_cell(bead)} | {item.since} |"
-                )
+            lines += [
+                f"| {_cell(item.what)} | {item.state} | {_bead_cell(item)} | {item.since} |"
+                for item in shown
+            ]
             lines.append("")
         if section.unchecked:
             lines += ["Not checked: see above.", ""]
