@@ -5,7 +5,7 @@ title: "Validate: wand125 s(37) >= 2599/400 (mixed_n37_L64975), census of all 2,
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l30
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m4wv27yed1e2wfnq55h1avr0
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:12.637Z
-updated_at: 2026-11-02T15:50:21.467Z
+updated_at: 2026-11-02T17:25:08.411Z
 started_at: 2026-11-02T11:13:37.982Z
 ---
 Validation part of think-u0av for n = 37 (T-177 in the 14 October records PR #602, V0/C1). Record-changing: a complete replay with controls is what takes the bound to C3 and the verified lane.
@@ -41,3 +41,5 @@ Validation part of think-u0av for n = 37 (T-177 in the 14 October records PR #60
 - CPU: about 3.7 CPU-hours for capture and controls (priced 6.53).
 
 2026-11-02 15:50Z bold-ritchie-l30, hand-off: PR #886 (draft, labels intake and S2, mergeable) at head 4fbde01c16a2748b179a0a670f21a220fe8aee62, hosted Packing validation (run 41472591273), Certificate page and Branch mergeability all green. After 89c3489d3 the branch added 711b13fee (atlas curated credits for 37, 76 and 95; regenerated piercing survey; n-037 paragraph order; pinned test counts), 44e140f10 (DATA_REVISION re-pinned to 711b13fe) and 4fbde01c1 (a test comment ruff read as code). Greff's print-credit contributor entries wait for think-10l0. Not closed: for the coordinator after merge.
+
+2026-11-02 bold-ritchie-l30, after review A of #886 (https://github.com/jlevy/squares/pull/886#pullrequestreview-5739809042): every finding addressed on the branch. main merged at 9aba63255 (e95c6f861, re-pinned 157023625); n = 96 closed by T-191's cover, its total below 96 (21cd0301e: T-191 and E-bengreff-610-cover-replay scope [95, 96], n-096 proved, 81 proved and 243 open); T-252, T-184 and T-178 notes corrected and dates refreshed (21cd0301e); the zm-control test holds every source setting and the two cellmin probes are retained and tested (6906266ea, adc05bb75); the frontier table's example moved to n = 104 (7c6980339); the #594 and #610 drafts in think-osvq and think-ribz credit Greff after Daniel, Hosono, and the #610 draft reports n = 96. DATA_REVISION 21cd0301 (2c66c568f). Not closed: for the coordinator after merge.
