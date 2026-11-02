@@ -3,9 +3,9 @@ type: is
 id: is-01m6cmvq7zytr8d7rp51r10b3n
 title: "Efficiency: DATA_REVISION pin in release.py conflicts on parallel records PRs (32 merges in 20 PRs since 24 Oct)"
 kind: task
-status: in_progress
+status: closed
 priority: 3
-version: 3
+version: 4
 delegate: bold-ritchie-l27
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-01T22:49:39.327Z
-updated_at: 2026-11-02T08:04:28.274Z
+updated_at: 2026-11-02T08:23:28.143Z
 started_at: 2026-11-02T07:50:22.330Z
+closed_at: 2026-11-02T08:23:28.143Z
+close_reason: "Measured (https://github.com/jlevy/squares/pull/883, merged b1b0c3a09): all 45 DATA_REVISION-conflicted merges since 24 Oct were data commits needing a re-pin anyway; no merge driver or layout removes that. Superseded by think-070d (owner-decided 22 Oct: footer names the deployed commit, DATA_REVISION and release_pin removed), which awaits scheduling."
+resolution: null
+duplicate_of: null
 ---
 Measured by devtools.merge_conflicts in #873 (think-nrp6): after the no-public-change tuple, the DATA_REVISION pin in packing/src/sqpack/release.py is the next most frequent conflict, 32 merges in 20 PRs from 24 Oct to 1 Nov; the union driver 'parses' 9 of its sole-conflict merges but yields two pin assignments, silently wrong. Candidate fixes: derive the pin at check time from git (last data commit) instead of storing it, or store it outside release.py in a file whose merge is mechanical. Measure, pick the smallest sound fix (OR-12 efficiency block), red-first test that two data PRs merge cleanly.
 
