@@ -33368,7 +33368,9 @@ results:
       C1 needs the stage 4 mathematical review of the proof, which starts from the packet.
       V3 and C3 need a build here of the source's recipe from the retained bytes, with
       Daniel's library staged from the evand packets in place of the clone the script makes,
-      and its axiom receipt (think-tpbd): about 6 to 12 CPU-hours and 10 GB of disk.
+      and its axiom receipt (think-tpbd): about 6 to 12 CPU-hours and 10 GB of disk, on a
+      host whose network reaches Mathlib's prebuilt cache. devtools.replay_lean_packet runs
+      it; its generation step has run and matched.
       That would be reproduction with the producer's code. Rung 5 needs, beside it, a human
       expert's review of the formalization.
     unfinished_confirmations:
@@ -33404,6 +33406,14 @@ results:
       archived repository's zero-margin/ is unchanged from the pin to its head; the moved
       copy at wand125/square-packing lacks the list of the generated files' digests, so the
       packet pins the archived repository. The case record is unchanged.
+
+      On 2 November 2026 the intake lane bold-ritchie-l29 (think-tpbd) ran the recipe's
+      generation step here from the retained bytes: Daniel's generator wrote the 66 files,
+      2,076 chunks in 64 parts, every one the file the source lists, so a build here would
+      check the parts the source's run checked. It took 2.56 CPU-hours here on two cores,
+      near the 2.4 that the source's run of 1,459 s on 6 workers implies. The kernel check
+      did not run, because that host's network policy refuses Mathlib's prebuilt cache; the
+      generation decides nothing on its own, so the rungs are unchanged.
   - id: T-235
     kind: formalization
     proves_kind: optimality

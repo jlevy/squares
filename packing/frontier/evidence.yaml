@@ -50652,7 +50652,8 @@ evidence:
       - Lean v4.33.1's kernel and Mathlib at 0df444a3 are sound
       - The 66 generated modules, which the source does not publish, are those its generator writes from the
         certificate; the kernel checks whatever the generator writes, and data-sha256.txt names what the
-        source's run produced
+        source's run produced. The generator, run here on 2 November 2026 from the retained bytes, wrote 66
+        files that all match that list (the packet's receipts/lean-build/generation.json)
       - The build and its axiom set are as the source reports; nothing here built any module
     limitations: 'wand125/square-packing-bounds at 77636c63 (2026-09-29T07:16:17Z) reports a hypothesis-free
       Lean proof of s(21) = 5 for the point-only route of T-055: the certificate n21-capture-one.txt, the
@@ -50665,7 +50666,13 @@ evidence:
       whose generated data matched data-sha256.txt; no build log or axiom output is published. Every library
       file the proof needs at 6aa82ba4 is retained here byte for byte in earlier evand packets, and the four
       digests the recipe pins agree with them. Nothing here has built it: the complete build is priced at
-      6 to 12 CPU-hours (the packet README) and needs about 10 GB of disk this host lacked on 23 October.'
+      6 to 12 CPU-hours (the packet README) and needs about 10 GB of disk this host lacked on 23 October.
+      On 2 November 2026 the recipe''s generation step ran here from those retained bytes (devtools.replay_lean_packet,
+      bead think-tpbd): 2,076 chunks in 64 parts, the census the source reports, and all 66 files match data-sha256.txt,
+      with no kernel-escape token in any of them, in 2.56 CPU-hours on two cores, near the 2.4 the source''s run implies.
+      The generator, its oracle and the theorem module were staged at their upstream Git blobs. The kernel check did
+      not run, since that host''s network policy refuses Mathlib''s prebuilt cache, and the generation decides nothing
+      alone, so this entry stays reported.'
     source_reviewed: '2026-10-23'
   - id: E-n059-wand125-lean-kernel-report
     claim: exact-value
