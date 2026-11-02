@@ -4720,6 +4720,18 @@ issues:
         status: reviewed
         position: superseded
       beads: [think-u0av]
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6584375294
+      date: '2026-11-02'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n37-n39-n44-1016
+        id: T-178
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      beads: [think-u0av]
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -4766,6 +4778,16 @@ issues:
       `render_recent_results.standing` on that commit gives T-177 superseded by T-252. It
       restates that T-177's census stays with think-u0av, and that the rest keeps the state
       of 26 October.
+
+      The follow-up posted at 2026-11-02T17:58:26Z (issuecomment-6584375294) reports T-178's
+      move from V0/C1, reviewed, pending adoption to V3/C3, confirmed, current, after #886
+      merged (86ed750b8): the complete sqverify-fast census at all 2,073 directions, its
+      whole-net 99/100 and near-threshold controls refused, and n = 37's lower lanes at
+      2599/400. It was rendered with `check_requests --draft 446` from main at 86ed750b8,
+      whose Pages run 41493415710 deployed and passed its verify-deployment job
+      (125447599931, 6039 of 6039 checks; result/t-178.html and cases/37.html served), and
+      edited to the one moved entry. It restates that the censuses of T-176 and T-177 stay
+      with think-u0av.
   - number: 451
     title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
     author: franciscouzo
@@ -10884,7 +10906,8 @@ issues:
       by Evan Daniel's zmx2 and zm_mixed.py in composite, at bengreff/s76-certificate 1cb924f. Imported
       on 14 October 2026; triage replayed the cover's census with both checkers from this repository's retained
       copies. Registered as T-184 at V0/C0, S3. The author's update of 14 October adds a second route, zm_mixed.py
-      alone over the whole region, at 06993982; it is not yet retained. AI assistance disclosed.
+      alone over the whole region, at 06993982; retained as reported on 31 October 2026 (packet
+      bengreff-s76-second-route-2026-10-14), not run or audited here. AI assistance disclosed.
     read_through: '2026-10-15T00:50:37Z'
     results:
     - key: s76-equals-9
@@ -10900,7 +10923,9 @@ issues:
       claim: zm_mixed.py alone certifies the cover over the whole D4 region, with one root rerun at depth
         34.
       source: https://github.com/jlevy/squares/issues/594#issuecomment-6164158000
-      not_registered: Posted after the import; the next revision of the bengreff packet retains it (think-osvq).
+      not_registered: Posted after the import; retained as reported on 31 October 2026 in the packet
+        bengreff-s76-second-route-2026-10-14, which E-bengreff-594-cover-report's limitations cite, and
+        not run or audited here (think-osvq).
       queued: false
     beads:
     - think-osvq
@@ -10965,6 +10990,20 @@ issues:
       - result: s76-equals-9
         id: E-bengreff-594-cover-report
         status: reviewed
+      - result: second-route
+      beads:
+      - think-osvq
+    - url: https://github.com/jlevy/squares/issues/594#issuecomment-6584365975
+      date: '2026-11-02'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s76-equals-9
+        id: T-184
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
       - result: second-route
       beads:
       - think-osvq
@@ -11658,6 +11697,20 @@ issues:
       - result: s95-equals-10
         id: E-bengreff-610-cover-report
         status: reviewed
+      beads:
+      - think-ribz
+      - think-eucc
+    - url: https://github.com/jlevy/squares/issues/610#issuecomment-6584370994
+      date: '2026-11-02'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s95-equals-10
+        id: T-191
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
       beads:
       - think-ribz
       - think-eucc
