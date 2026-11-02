@@ -46,6 +46,7 @@ marks a certificate whose only receipt failed closed, kept as
 | `mixed_n37_L644` | 37 | M | VERIFIED | 201 | 49,002,652 | 1.000000001365918 | clears | 621.1 | 1.8 | all 201 | 18,462 | 620.9 | 30x | - |
 | `mixed_n37_L64975` | 37 | M | VERIFIED | 2073 | 864,953,550 | 1.0000000000165958 | clears | 12667.7 | 0.9 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n39_L665` | 39 | M | VERIFIED | 416 | 182,222,199 | 1.0000000001966394 | clears | 3869.8 | 6.4 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
+| `mixed_n39_L66625` | 39 | M | VERIFIED | 2073 | 881,271,470 | 1.0000000000654117 | clears | 11404.3 | 0.3 | none: first complete check here | - | - | - | CONTROL_FAILED (kept) |
 | `mixed_n41_L6775` | 41 | M | VERIFIED | 416 | 114,365,213 | 1.0000000000604714 | clears | 2135.3 | 5.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n42_L68475` | 42 | M | VERIFIED | 201 | 77,174,084 | 1.0000000002195921 | clears | 1671.9 | 4.8 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n43_L69075` | 43 | M | VERIFIED | 201 | 85,750,510 | 1.0000000000794018 | clears | 1597.6 | 4.8 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
@@ -124,7 +125,7 @@ marks a certificate whose only receipt failed closed, kept as
 | `mixed_n101_L1028` | 101 | L | VERIFIED | 201 | 53,145,987 | 1.000000000300333 | clears | 128.4 | 4.0 | all 201 | 27,669 | 128.0 | 216x | - |
 | `mixed_n108_L1062` | 108 | M | VERIFIED | 201 | 136,113,602 | 1.0000000001765084 | clears | 2086.8 | 9.5 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 
-96 of 96 certificates verified; 188172 recorded aggregate process CPU seconds in all.
+97 of 97 certificates verified; 199576 recorded aggregate process CPU seconds in all.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

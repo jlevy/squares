@@ -5676,7 +5676,7 @@ sources:
   scope:
     n_values:
     - 39
-  reviewed: '2026-10-14'
+  reviewed: '2026-11-02'
   source_date: '2026-10-13'
   disposition: current-report
   replay_disposition: case-specific
@@ -5685,10 +5685,11 @@ sources:
   evidence:
   - E-wand125-fine-net-n39-66625-report
   notes: The reported 533/80 at n39 is above T-110's 133/20, which is unchanged. Complete release-asset
-    and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
-    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
-    supply a maintained capture or whole-net controls; the 99/100 mutant's axis refusal falls outside
-    the census's AXIS_ROUNDING. Replay and adoption remain under think-u0av.
+    and document custody and the exact mass, declared-net and check2 premises are accepted. The asset's
+    data members are retained in the packet's release/, and the complete maintained capture ran on 2
+    November 2026 (think-567s), verified at all 2,073 directions and equal to the source's log at every
+    one; its whole-net control failed closed only on the axis allowance (AXIS_ROUNDING, think-tcsl), so
+    the replay's evidence is held and T-176 stays V0/C1, pending adoption.
 - id: wand125-fine-net-n44-69975-2026-10-13
   title: Hosono reported n44 fine-net lower bound, no issue
   role: source-repository

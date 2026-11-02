@@ -1320,7 +1320,7 @@ case or experiment separately.
 | [Accepted Mac Checkpoints: n68, n84 and n85](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md) | source retention and archive policy | record | retained | — |
 | [T-233’s Fine-Net Censuses: Four #446 Certificates](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md) | source retention and archive policy | record | retained | — |
 | [The n31 Fine-Net Census: mixed_n31_L59775](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/README.md) | source retention and archive policy | record | retained | — |
-| [The n37 Fine-Net Census: mixed_n37_L64975](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md) | source retention and archive policy | record | retained | — |
+| [The n37 and n39 Fine-Net Censuses](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md) | source retention and archive policy | record | retained | — |
 | [Census Summary](packing/benchmarks/measure-verifier/census-summary.md) | generated status view | generated | generated | — |
 | [Whole `rect_n32_L595`: c2 Against verify.cpp](packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md) | research synthesis | record | retained | — |
 | [H-005: One Error Budget per Edge](packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md) | research synthesis | record | retained | — |

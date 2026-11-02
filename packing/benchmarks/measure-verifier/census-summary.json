@@ -1123,6 +1123,28 @@
       "verdict": "VERIFIED"
     },
     {
+      "L": "533/80",
+      "authors_replay_here": "none",
+      "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+      "candidate": "packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n39_L66625/candidate.json.gz",
+      "candidate_sha256": "1392d69122ca95cabc336f053ead5411cf036ac7f4710886ea27820fef5c6d4e",
+      "certificate": "mixed_n39_L66625",
+      "cpu_seconds": 11404.3,
+      "direction_cpu_seconds": 11403.960409023002,
+      "directions_verified": 2073,
+      "first_complete_check_here": true,
+      "format": "M",
+      "least_certified_bound": 1.0000000000654117,
+      "least_leaf_exact_clears": true,
+      "n": 39,
+      "nodes": 881271470,
+      "packet": "wand125-fine-net-n37-n39-n44-2026-10-13",
+      "receipts": "packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.jsonl.gz",
+      "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+      "threshold": "1",
+      "verdict": "VERIFIED"
+    },
+    {
       "L": "331/50",
       "authors_replay_here": "none",
       "binary_sha256": "b7581bb2ba935dd576d7f8f4125b33f48ddf6014286dfe846c7ee3a44f29b6a8",

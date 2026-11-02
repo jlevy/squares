@@ -2118,12 +2118,14 @@ sources:
       added on 2026-10-13, s(39) >= 533/80 at dfb2cf85fdf9ee5f95c5ec2c67fd49210854f146,
       s(44) >= 2799/400 at 9f24185c602c8c0b83cf6a88b11a69ea8d668673 and s(37) >= 2599/400 at
       7a42c16eacaab112b537ab09e89d3485f6f4c75f, the packet's pin, with their data in release
-      square-lower-bounds-v1; the n39 and n44 release assets are pinned by size and digest and
-      kept outside Git, the n37 asset's data members are retained in the packet's release/
+      square-lower-bounds-v1; the n44 release asset is pinned by size and digest and kept
+      outside Git, the n37 and n39 assets' data members are retained in the packet's release/
       (2 November 2026), and the directories' MIT documents are retained. Maintained
       measure, declared-net and full check2 premises accepted at all three. n37's complete
       native capture and whole-net controls ran on 2 November 2026 and T-178 is adopted at
-      V3/C3; n39's and n44's remain pending. The nested verifier adapts this project's
+      V3/C3. n39's complete capture ran the same day and verified, but its whole-net control
+      failed closed on the census's axis allowance (think-tcsl), so T-176 stays reported;
+      n44's remains pending. The nested verifier adapts this project's
       sqverify_fast, so a maintained replay is not another independent implementation.
   - key: '[wand125 fine-net lower bounds 2026-10-16]'
     authors: [Hosono]

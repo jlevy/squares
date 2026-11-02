@@ -177,9 +177,24 @@ to the source’s check2 log, in 12,667.7 CPU-seconds at two threads, against th
 priced above; the whole-net controls ended `CONTROLS_REFUSED`. Its receipts are in the
 [census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md),
 and with the review of 14 October they put T-178 at V3/C3.
-The n = 39 control needs the `AXIS_ROUNDING` decision first. That work, with a budget
-for it, belongs to the import’s bead, think-u0av; n = 44’s is of little value now that
-$s(44) = 7$ is proved (T-252).
+`devtools.fine_net_followup capture-agreement` has since compared that capture with the
+source’s log from the two retained files and found them equal at every direction
+([receipt](receipts/capture-agreement-n37.json)).
+
+n = 39’s replay ran the same day (think-567s), from the candidate retained in
+[`release/`](release/certificates/mixed_n39_L66625/): every one of the 2,073 directions
+verified, 881,271,470 nodes and least certified bound 1.0000000000654117 at direction
+1804, in 11,404.3 CPU-seconds at two threads, against the 12,758 priced above, and
+`capture-agreement` finds every direction equal to the source’s check2 log
+([receipt](receipts/capture-agreement-n39.json)).
+Its whole-net control failed closed, as the review’s F-1 predicted: the original verified
+again at 1804, the 99/100 mutant was refused at all 2,073 directions and the
+near-threshold mutant was refused, but at the axis direction the mutant’s exact capture,
+below 1 at a pose inside the domain, sits 1.26e-9 above the sweep’s certified bound,
+beyond `AXIS_ROUNDING`, so that refusal is not counted. The receipt is kept as
+`mixed_n39_L66625.control-failed-v2.json` in the census folder, and T-176 stays reported
+until think-tcsl fixes the allowance and re-judges it; the capture is not rerun.
+n = 44’s replay is of little value now that $s(44) = 7$ is proved (T-252).
 
 ## Sources and Notices
 

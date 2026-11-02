@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-01'
+last_reviewed: '2026-11-02'
 results:
   - id: T-001
     kind: lower-bound
@@ -24445,10 +24445,20 @@ results:
       39, by 1/80.
 
       Here the maintained readers accepted its exact mass, declared-net and check2 premises,
-      and sqverify-fast, this repository's clean-room measure verifier, verified it at eight
-      sampled directions with the source's node counts and least certified bounds: a
-      diagnostic, not a replay. No complete replay has run here, so the value stands as
-      reported.
+      and the mathematical review of 14 October read the certificate and accepted it.
+
+      A complete sqverify-fast replay ran here on 2 November 2026, from the candidate
+      retained in the packet's release/: the capture verified all 2,073 directions, with
+      the source's node count and least certified bound at every direction (881,271,470
+      nodes; least bound 1.0000000000654117 at direction 1804).
+
+      Its whole-net control failed closed: the 99/100 mutant was refused at every direction, but at the axis
+      direction its exact capture sits 1.26e-09 above the sweep's certified bound, beyond
+      the census's constant allowance of 1e-9, as the 14 October review measured (F-1). The
+      receipts are in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/,
+      the control kept as mixed_n39_L66625.control-failed-v2.json. The replay's evidence is
+      held until that allowance is fixed (think-tcsl), so the value stands as reported.
 
       Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/dfb2cf85fdf9ee5f95c5ec2c67fd49210854f146/problems/square-lower-bounds/certificates/mixed_n39_L66625).
@@ -24490,45 +24500,53 @@ results:
         packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/sample-diagnostic-n39.json
       - >-
         packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/control-sample-n39.json
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/release-assets.json
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n39_L66625/candidate.json.gz
+      - >-
+        packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/capture-agreement-n39.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.control-failed-v2.json
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_declared_net.py
     next_rung: >-
-      C3 needs a complete sqverify-fast census run at all 2,073 directions from a retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every direction,
-      FC-1) and a review that reads this certificate, by the checklist of the 6 October
-      declared-net soundness review. The eight-direction sample prices the run and its
-      controls at about 7.1 CPU-hours. The control cannot pass as the census stands: at the
-      axis direction the 99/100 mutant's exact capture sits 1.26e-9 above the vertex sweep's
-      certified bound, beyond AXIS_ROUNDING (1e-9), the defect T-142's control is held for.
-      The run waits for an owner budget, a decision on that tolerance and the candidate's
-      retention where the census reads it (jlevy/squares#543), in think-u0av.
+      C3 needs think-tcsl: a reviewed fix that derives the census control's axis allowance
+      from the sweep's enclosure rather than the constant 1e-9 (F-1 of the 14 October
+      review, also think-4uun), this certificate's whole-net control re-judged from its
+      retained receipt or rerun under it and ending CONTROLS_REFUSED, and then the replay
+      evidence of the complete capture of 2 November mapped, by the checklist of the 6
+      October declared-net soundness review, of which the 14 October review is this
+      certificate's review. The capture is spent, 3.17 CPU-hours on 2 November, and
+      is not rerun.
     unfinished_confirmations:
       - what: >-
-          a complete sqverify-fast census at all 2,073 directions from a retained candidate,
-          with its whole-net control receipt (the 99/100 mutant at every direction, FC-1)
-          and a review that reads this certificate, by the checklist of the 6 October
-          declared-net soundness review
+          mixed_n39_L66625's whole-net control re-judged from its retained receipt, or
+          rerun, under think-tcsl's reviewed fix to the axis allowance, ending
+          CONTROLS_REFUSED; then the replay evidence of the complete capture of 2 November
+          mapped, by the checklist of the 6 October declared-net soundness review
         rung: C3
-        link: think-u0av
+        link: think-tcsl
         estimated_cost:
-          cpu_hours: 7.09
-          cpu_hours_high: 7.5
+          cpu_hours: 0.01
+          cpu_hours_high: 0.26
           basis: >-
-            The eight-direction sqverify-fast sample of 14 October (directions 0, 296, ...,
-            2072; 48.06 CPU-s here against the source's 50.86, ratio 0.945) applied to the
-            source's 13,502 CPU-s over the net: a complete capture 12,758 CPU-s and the
-            whole-net controls 12,781
-            (packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md and
-            receipts/sample-diagnostic-n39.json). The upper end is the source's own CPU,
-            twice over the net. The control's axis refusal does not count under
-            AXIS_ROUNDING (receipts/control-sample-n39.json), so the whole-net control would
-            end CONTROL_FAILED until that tolerance is decided.
-          priced: '2026-10-14'
+            Re-judging the retained receipt reads it and recomputes one exact capture, a
+            matter of seconds; rerunning the whole-net control is its 99/100 sweep, which
+            took 450 s of wall at two threads on 2 November, at most
+            0.26 CPU-hours. The capture (11,404.3 CPU-seconds) ran on 2
+            November and is not rerun. The fix and its review are not CPU work.
+          priced: '2026-11-02'
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported, replay
-      not attempted. C1 because the 14 October review read the certificate and the reported
-      entry records that reading as its external_review. The case records' lanes are
-      unchanged, so the entry is pending adoption at n = 39 while T-110 holds both lanes.
+      V0 because the cited entry is the source's public claim: assurance reported. The
+      complete replay of 2 November ran here, but its evidence is not mapped while the
+      whole-net control has failed closed on the axis allowance (think-tcsl), as T-233's
+      n = 26 is held. C1 because the 14 October review read the certificate and the
+      reported entry records that reading as its external_review. The case records' lanes
+      are unchanged, so the entry is pending adoption at n = 39 while T-110 holds both
+      lanes.
       The pre-publication receipt is a second complete run of the same source on a fresh
       machine (697 s), not the run the check2 receipt embeds, so two complete author runs
       are reported. The release asset is pinned by size and digest and kept outside Git; the

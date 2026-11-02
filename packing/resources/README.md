@@ -1033,7 +1033,10 @@ the census’s rounding allowance.
 The n37 asset’s data members are retained in the packet’s `release/`, and its complete
 replay and whole-net controls ran on 2 November 2026: T-178 records the bound at V3/C3,
 and n37’s lower lanes hold it.
-At n39 and n44 a complete replay and whole-net controls remain pending.
+The n39 asset’s members are retained the same way, and its complete capture ran the same
+day and verified at every direction; its whole-net control failed closed on the axis
+allowance, so T-176 stays reported until that allowance is fixed (think-tcsl).
+At n44 a complete replay and whole-net controls remain pending.
 
 **[wand125 fine-net lower bounds 2026-10-16]**: wand125’s 18 certificates of 16 October,
 `mixed_n38_L65775` to `mixed_n110_L1073`, report lower bounds at n = 38, 40, 41, 43 and
