@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **218** programs: **52** external and **166** first-party; **146** decide claims and **72** check premises.
-- **676** of **857** evidence entries name the programs that verified them: 321 independently re-implemented, 289 reproduced with the producer’s code, 45 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **677** of **858** evidence entries name the programs that verified them: 322 independently re-implemented, 289 reproduced with the producer’s code, 45 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -80,7 +80,7 @@ second implementation agrees.
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 103 | 93 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 104 | 94 |
 | [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 96 | 94 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
@@ -182,7 +182,7 @@ second implementation agrees.
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 77 | 77 |
-| [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 2 | 2 |
+| [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-build-field-configuration`](#v-build-field-configuration) | devtools.build_field_configuration | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 72 | 72 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
@@ -249,7 +249,7 @@ second implementation agrees.
 | [`V-evand-1031-review-check`](#v-evand-1031-review-check) | exact_check.py and controls.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
 | [`V-mishapolk-1031-review-check`](#v-mishapolk-1031-review-check) | rv_check.py and rv_controls.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-register-candidates`](#v-register-candidates) | devtools.register_candidates | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-configuration-fact-replay`](#v-configuration-fact-replay) | devtools.configuration_fact_replay | Squares Project (Levy) | first-party | premises | 3 | 2 |
+| [`V-configuration-fact-replay`](#v-configuration-fact-replay) | devtools.configuration_fact_replay | Squares Project (Levy) | first-party | premises | 4 | 2 |
 
 ## By Program
 
@@ -1339,6 +1339,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-evand-kaggle-descents-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 304 that T-242 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-242 |
 | `E-evand-n182-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 182 that T-243 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-243 |
 | `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
+| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
 | `E-evand-n299-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 299 that T-248 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-248 |
 | `E-couzo-843-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 130 that T-254 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-254 |
 | `E-couzo-a5a5d76-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 260 and 307 that T-255 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-255 |
@@ -3369,6 +3370,7 @@ Imports a packet's algebraic-number-field witnesses from its declaration: derive
 | --- | --- | --- | --- | --- |
 | `E-pingyou-574-algebraic-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | T-174 |
 | `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
+| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
 
 ### `V-build-field-configuration`
 
@@ -4457,6 +4459,7 @@ Reads Hyukdong Kim's exact configurations for T-244, kept as derived JSON facts,
 | --- | --- | --- | --- | --- |
 | `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
 | `E-hyukdongkim-804-configurations-verify-exact` | replayed here | reproduced with the producer’s code | full: the two exact configurations, each decided whole by the source's checker | T-244 |
+| `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
 | `E-hyukdongkim-804-s297-verify-exact` | replayed here | reproduced with the producer’s code | full: the author's exact configuration at 297, decided whole by the source's checker | T-247 |
 
 <!-- This document follows common-doc-guidelines.md.
