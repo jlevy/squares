@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 74
+version: 75
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -43,7 +43,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T02:55:09.527Z
+updated_at: 2026-11-02T03:31:17.496Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -127,3 +127,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 01:52: renewal. L21 done: 46 stalled items to 1 (#877: held-bead rule in the sweep + squarepack-certs 3cea0f4 read; under senior review). Coordinator: think-llit and think-r94q held (blocked_on think-f2io / think-llit), lapsed bold-ritchie-l4 claims released. Foreign claims left untouched: claude-code@vm (think-tmz6, -j6qy, -tnfo), claude-code@spud10.local (think-bmwd); they lapse again 4 Nov, owner to release or renew. L22: think-4rzl t244 zip files (#804 last ask). L23: think-yf8j strongest-tier review of Ryu #414 (6-10 h). #876 under review. No new issues since 00:50Z.
 
 2026-11-02 02:52: renewal. Merged #876 (43ad863b5; T-247 route 1, independently re-implemented; system-family overlap corrected on both Kim exact-feasibility entries); think-ozx8 closed after --before-close (exit 0). Sweep intake22: 0 stalled (L21 bead edits), 1 item (squarepack-certs 3cea0f4, in #877). Hand-read sources 9-12 days old are unreachable here: arxiv.org and hmbelvedere.com return proxy 403, and the #401/#686 attachments are user-attachments (blocked); add arxiv.org and hmbelvedere.com to the owner network allow-list item (with zenodo.org, lakecache.blob.core.windows.net). In flight: #878 addressing (then #804 final comment), #877 addressing, L23 #414 review.
+
+2026-11-02 ~03:40: merged #877 (45eabe2c8; sweep held-bead rule with 28-day ceiling; think-n20n closed) and #878 (eead891eb; Kim t244 files kept, #804 last ask done). L22 resumed to post the #804 final comment after deploy verifies, close #804, record it; think-8r92/think-4rzl close after that PR. 35 PRs merged this pass. L23 (#414 strongest-tier review) running.
