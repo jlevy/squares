@@ -1529,6 +1529,7 @@ def recheck(sample: int, seed: int, receipts: Path) -> dict[str, Any]:
     chosen = sorted(random.Random(seed).sample(range(len(boxes)), sample))
     retained: dict[str, dict[int, dict[str, Any]]] = {}
     differences: list[dict[str, Any]] = []
+    by_label: Counter[str] = Counter()
     started = time.process_time()
     for index in chosen:
         name, line, record = boxes[index]
@@ -1537,6 +1538,7 @@ def recheck(sample: int, seed: int, receipts: Path) -> dict[str, Any]:
             rows = (json.loads(row) for row in text.splitlines() if row)
             retained[name] = {row["line"]: row for row in rows}
         old = retained[name][line]
+        by_label[f"{record['kind']}, {'bisected' if old['pieces'] > 1 else 'one piece'}"] += 1
         new = decide(record)
         changed = {
             key: [old.get(key), new.get(key)]
@@ -1548,6 +1550,7 @@ def recheck(sample: int, seed: int, receipts: Path) -> dict[str, Any]:
     return {
         "sample": sample,
         "seed": seed,
+        "by_label": dict(sorted(by_label.items())),
         "fields": list(DECISION_FIELDS),
         "identical": sample - len(differences),
         "differences": differences,

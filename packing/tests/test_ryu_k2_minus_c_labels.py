@@ -439,6 +439,8 @@ def test_the_ten_controls_are_refused_by_decision_and_refuted() -> None:
 def test_a_sample_re_decides_identically_after_review_a() -> None:
     report = _receipt("recheck-1000.json")
     assert report["sample"] == 1000
+    assert sum(report["by_label"].values()) == 1000
+    assert {key.split(",")[0] for key in report["by_label"]} == {"inf", "nowall", "closed"}
     assert report["identical"] == 1000
     assert report["differences"] == []
     assert _exit_and_cpu(RECEIPTS / "recheck-1000.log")[0] == 0
