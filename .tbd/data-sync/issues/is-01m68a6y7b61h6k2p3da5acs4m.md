@@ -3,9 +3,9 @@ type: is
 id: is-01m68a6y7b61h6k2p3da5acs4m
 title: "Answer Hyukdong Kim's comment of 26 October on #804: a public copy of his attachments, and the CC0 correction to our 26 October follow-up"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 14
+version: 15
 delegate: bold-ritchie-l15
 labels:
   - intake
@@ -13,10 +13,10 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-31T06:26:34.858Z
-updated_at: 2026-11-02T03:50:10.382Z
+updated_at: 2026-11-02T04:04:14.122Z
 started_at: 2026-11-01T18:59:31.153Z
-closed_at: null
-close_reason: null
+closed_at: 2026-11-02T04:04:14.122Z
+close_reason: "#804 answered and closed: final comment issuecomment-6568517923 posted after the eead891eb deploy verified; recorded in https://github.com/jlevy/squares/pull/880 (merged 270ec3a5e). Remaining items owned by think-3trq, think-ot5c, think-ikku, think-vv1q."
 resolution: null
 duplicate_of: null
 ---

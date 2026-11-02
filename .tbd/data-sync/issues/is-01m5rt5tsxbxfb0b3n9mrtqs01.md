@@ -3,9 +3,9 @@ type: is
 id: is-01m5rt5tsxbxfb0b3n9mrtqs01
 title: Decide Kim's exact configurations for T-244 at 172 and 263 on both exact routes (builder as fallback)
 kind: task
-status: in_progress
+status: closed
 priority: 3
-version: 17
+version: 18
 delegate: bold-ritchie-l22
 labels:
   - result-import
@@ -17,8 +17,12 @@ deferred_until: null
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:57:44.893Z
-updated_at: 2026-11-02T02:08:00.672Z
+updated_at: 2026-11-02T04:04:15.919Z
 started_at: 2026-10-25T11:43:46.219Z
+closed_at: 2026-11-02T04:04:15.919Z
+close_reason: "#804 answered and closed: final comment issuecomment-6568517923 posted after the eead891eb deploy verified; recorded in https://github.com/jlevy/squares/pull/880 (merged 270ec3a5e). Remaining items owned by think-3trq, think-ot5c, think-ikku, think-vv1q."
+resolution: null
+duplicate_of: null
 ---
 Decide Hyukdong Kim's exact configurations for T-244 (issue #804) at 172 and 263 on both exact routes. T-244 registers s(172) <= S*_172 and s(263) <= S*_263 as reported (V0/C0); each S* is the root of #804's irreducible polynomial of degree 24 and 17.
 
