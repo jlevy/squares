@@ -5,7 +5,7 @@ title: "BC-418: coordinate the n17 phase after Session 167 (close H-261/H-266, b
 kind: task
 status: in_progress
 priority: 0
-version: 76
+version: 77
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels: []
@@ -79,7 +79,7 @@ child_order_hints:
 hold: paused
 hold_until: null
 created_at: 2026-10-02T06:04:15.220Z
-updated_at: 2026-10-31T11:18:42.756Z
+updated_at: 2026-11-02T01:09:58.034Z
 started_at: 2026-10-03T22:35:58.665Z
 ---
 Selected next entry after Session 167. Lanes: (1) close H-266's single-state item and H-268's slide bound, then re-record H-261 and H-266 for acceptance with independent review; (2) build the H-267 sub-pattern selector as a retained tool and adapt the n11 v9 kernel as prover, with n11 mask 0 as method control; (3) a capture contraction-rate pilot on the endpoint's H-266 occupancy state; (4) optionally the widened-projection dual-sheet certificate on a coarse patching (patch count only). Read the Session 167 record first.
@@ -111,3 +111,5 @@ Selected next entry after Session 167. Lanes: (1) close H-266's single-state ite
 2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. BC-418 coordinates the n17 proof phase; its own scope is new s(17) research. Its non-research children (think-1111, think-b0ef, think-b6pe, think-h8oz, think-vre9, think-wcqs, think-7hy3 via think-ipel, think-ypk2, think-9ntw) stay live and are not suspended by this hold.
 
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner's standing n = 17 hold of 13 October (pending T-153); #405's global-proof ask stays queued under it, while this bead's non-research children stay live.
+
+2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Still waits on the owner's n = 17 intake hold of 13 October (pending T-153), whose bead is think-x4v4 (#405 is blocked: standing-hold on main, naming it); #405's global-proof ask stays queued under it. The claim is claude-code@vm's, an identity outside this project's pass sessions, so this note is the only change: claim, status and hold stay as they are, and the sweep lists the bead's items again once the claim lease lapses, until the claim's holder or the owner releases or renews it.

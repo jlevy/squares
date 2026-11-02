@@ -5,13 +5,15 @@ title: "Valid7 in the Lean kernel: the owner's choice of a sample rebuild, the f
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - validation
 dependencies: []
 parent_id: is-01m4pcbr88e5we5fgkmf7qhfgv
+hold: blocked
+hold_until: null
 created_at: 2026-10-26T05:39:47.313Z
-updated_at: 2026-10-26T05:39:47.313Z
+updated_at: 2026-11-02T01:09:56.657Z
 ---
 The rebuild decision for wand125's (Hiroaki Hosono's) Lean kernel proof of Evan Daniel's Valid7, registered on 26 October 2026 as a reported formalization of T-064 (#537, think-0ayk, w-imports-1026). Version 1 is retained in packing/resources/web/evand-valid7-lean-2026-10-11/ (the closure at evand/square-packing 060c1a1, the generators, VALID7.md, and the root-name audit receipts/root-names.json, which pins the release asset v7cert.tar.zst by SHA-256); version 2 is pinned by digest in packing/resources/web/wand125-valid7-lean-v2-2026-10-17/ (wand125/square-packing 649a920, release valid7-lean-v2).
 
@@ -26,3 +28,7 @@ The rebuild decision for wand125's (Hiroaki Hosono's) Lean kernel proof of Evan 
 - Depends on: the owner's decision between a sample, the full build, or neither (#537; #543's budget lines).
 - Done when: the owner's choice is recorded on #537 and in result-requests.yaml; for a full build, its receipts and axiom output are retained and an evidence entry with origin replayed-here is cited by the formalization entry (T-249); for a sample, its receipt is retained as a component check.
 - Machine note: the full build needs a 48-vCPU, 376 GB class machine as the source used (29.4 hours there); a sample can run beside nothing else on a 15 GB host.
+
+## Notes
+
+2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Waits on the owner's choice of a sample rebuild (about 8 CPU-hours), the full one (about 798, above the cap) or neither (#537 is blocked: owner-decision on main, naming this bead). This bead is that decision's, so no other bead stands for the wait and it carries no blocked_on line; the sweep lists it again after seven days without an update. Held (`hold: blocked`); it had no claim.

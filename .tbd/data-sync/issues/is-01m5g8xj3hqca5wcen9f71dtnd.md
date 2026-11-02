@@ -3,10 +3,10 @@ type: is
 id: is-01m5g8xj3hqca5wcen9f71dtnd
 title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 18
-delegate: coord-intake-1021b
+version: 19
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -14,10 +14,10 @@ child_order_hints:
   - is-01m5ghbpszw0r22b4wm95vgkfr
   - is-01m5ghp413dqrnqz5w3ww2thdd
   - is-01m5gpfs7wfn8pd4ec89t8c8tr
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-10-31T11:18:13.027Z
+updated_at: 2026-11-02T01:09:35.793Z
 started_at: 2026-10-21T22:22:13.353Z
 closed_at: null
 close_reason: null
@@ -210,3 +210,6 @@ blocked_on: think-f2io
 2026-10-23 (c-lane-couzo-residue-1022): #730 merged at 02:10Z on 23 October 2026 as fcf2f96a5. The promised reply on the 32 restatements is posted: https://github.com/jlevy/squares/issues/715#issuecomment-6355894334 (30 now rows: 12 current, 18 superseded by #719; 743 and 985 wait on think-f2io). The reply is recorded under #715's replies by the next records PR. This bead stays open: it is #715's answer_bead and owns the queued above-1024 result in result-requests.yaml on main, and the 30 held re-certifications (think-fwa9), 743/985 (think-f2io), 335 (think-rx26) and the rows above 1024 still wait on owner decisions.
 
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner: #715's rows above 1024 are recorded by think-llit's walk (bold-ritchie-l4, live on 31 October), which needs D4 (data/couzo-715-certificates-v1 published, or the certificates committed instead) and zenodo.org access; D3 (whether 335 is recorded, think-rx26) and D5 (per-row credit beyond the horizon) are open on think-f2io.
+
+2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Waits on think-llit's walk above 1024, which records #715's rows above 1024 (queued blocked_on think-llit on main) once D4 is answered (data/couzo-715-certificates-v1 published, or the certificates committed), and on D3 and D5 on think-f2io. Not done: the above-1024 result stays queued; 335 (think-rx26) and the 30 re-certifications (think-fwa9) are other beads'. Held (`hold: blocked`), and the claim of coord-intake-1021b, an ended session of an earlier lane or coordinator, released (status open, no delegate), so the bead names no one acting on it while it waits; the sweep had read the lapsed claim as stalled every two days since 2 November.
+blocked_on: think-llit, think-f2io

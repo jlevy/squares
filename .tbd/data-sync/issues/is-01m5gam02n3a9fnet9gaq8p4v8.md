@@ -3,18 +3,18 @@ type: is
 id: is-01m5gam02n3a9fnet9gaq8p4v8
 title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows, 335, hosting the bulk certificates"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 16
-delegate: coord-intake-1024
+version: 17
+delegate: null
 labels:
   - result-import
   - decision
 dependencies: []
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-31T11:18:14.536Z
+updated_at: 2026-11-02T01:09:48.339Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -140,3 +140,5 @@ declares yet. Packet README, Held Back and Not Recorded.
 2026-10-24 coord-intake-1023: D5 now includes Polkovskyi's request, in his #732 comment of 20:35:12Z on 23 October, for sole credit at 11 counts of the f1ceee4 release. His manifest calls all 138 refinements of Couzo's topology (127 under one wording, 11 under another). #769 records the request as queued and measures it pose by pose in `receipts/pose-identity.json`; it decides nothing. The owner's D5 answer, on how per-row credit beyond the corpus names a packing it refines, decides it.
 
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner: D3 (whether 335 is recorded), D4 (host the certificates above 1024 or commit them; think-llit's note of 31 October), D5 (per-row credit beyond the horizon, which takes in #686's provenance ask and Polkovskyi's ask for sole credit at 11 counts), and whether the D1 answer, no ceiling, declines #732's ask to cap tracking at N = 10,000. D1, D2 and D6 are answered.
+
+2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): The owner's decision bead for D3 (whether 335 is recorded), D4 (host the certificates above 1024, or commit them; think-llit's note of 31 October), D5 (per-row credit beyond the horizon, with #686's ask and Polkovskyi's 11 counts on #732) and #732's ask to cap tracking at N = 10,000; D1, D2 and D6 are answered. It waits on the owner, whom no bead stands for, so its `blocked_on: none` stands, while think-3m10, -9vr8, -cyal, -5dc3, -7yrs, -9vjn and -xyhn name it in theirs. The sweep lists its two #732 asks again after seven days without an update, which is the reminder. Held (`hold: blocked`), and the claim of coord-intake-1024, an ended session of an earlier lane or coordinator, released (status open, no delegate), so the bead names no one acting on it while it waits; the sweep had read the lapsed claim as stalled every two days since 2 November.
