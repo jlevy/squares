@@ -32,6 +32,9 @@ def test_each_fact_rebuilds_the_certificate_the_comment_pins() -> None:
     assert [row["n"] for row in rows] == [172, 263]
     assert [row["field_degree"] for row in rows] == [24, 17]
     assert [row["rebuilt_bytes"] for row in rows] == [197519, 269624]
+    # The author's own files, kept under source/ since 2 November 2026 (think-4rzl), are
+    # the files each fact rebuilds, so the decision read the bytes now kept.
+    assert [row["retained_identical"] for row in rows] == [True, True]
 
 
 def test_each_rebuilt_file_is_the_file_the_comment_pins() -> None:
@@ -118,6 +121,7 @@ def test_the_retained_297_file_is_the_one_the_comment_pins() -> None:
     )
     assert rows[0]["field_degree"] == 21
     assert rows[0]["rebuilt_bytes"] == 347690
+    assert rows[0]["retained_identical"] is True
     sources = json.loads(S297.sources.read_text(encoding="utf-8"))
     assert sources["attachment"]["sha256"] == (
         "e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7"

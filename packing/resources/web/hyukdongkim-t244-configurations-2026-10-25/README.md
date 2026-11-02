@@ -13,8 +13,12 @@ T-193.
 **Both are decided, on 31 October 2026, on two exact routes** (think-4rzl), by
 `devtools.configuration_fact_replay`, the small reader these facts needed:
 `devtools.algebraic_witness_reports derive-forms` reads a packet’s declaration and
-retained upstream bytes, which this packet keeps neither of. See
-[What Was Decided](#what-was-decided). The comment’s statements, below, are the author’s.
+retained upstream bytes, which this packet then kept neither of. See
+[What Was Decided](#what-was-decided). Since 2 November 2026 the packet also keeps the
+archive’s seven files themselves, under the author’s CC0 1.0 dedication; the two
+certificates are the files the facts rebuild, byte for byte, so the decision read exactly
+the bytes now kept ([Custody](#custody)). The comment’s statements, below, are the
+author’s.
 
 | n | Field | Certificate | SHA-256, as the comment states it |
 | ---: | --- | --- | --- |
@@ -31,8 +35,9 @@ retained upstream bytes, which this packet keeps neither of. See
 | Bibliography key | **[Kim exact forms 2026-10-25]**, the key of T-244’s sides, which these configurations are reported to realize ([first packet](../hyukdongkim-exact-forms-2026-10-25/README.md)) |
 | Human credit | Hyukdong Kim, for the configurations of the records’ own arrangements, T-174’s packings |
 | AI assistance | The comment says the construction, the second checker and the controls were produced by Claude (Anthropic) at the author’s direction, and that he reviewed and reran them |
-| Licence | None stated, in the comment or the archive |
-| Retrieved | 25 October 2026 at 10:08Z, through `gh` |
+| Licence | None stated in the comment or the archive. The author dedicated the archive, data and code, to the public domain under CC0 1.0 on 25 October (issuecomment-6397363927) and again on 26 October (issuecomment-6415293035), asking that the files be kept |
+| Public copy | [HyukdongKim/square-packing-exact-sides](https://github.com/HyukdongKim/square-packing-exact-sides/tree/f480441e73824668fb18779151369e4d3ba6179a) at `f480441e73824668fb18779151369e4d3ba6179a` (2026-10-31T13:24:45Z), announced in issuecomment-6543970419, whose `attachments/t244-exact-configurations.zip` (blob `e2a73184`) is the attachment byte for byte; its `LICENSE` is CC0 1.0 Universal |
+| Retrieved | 25 October 2026 at 10:08Z, through `gh`; the public copy on 2 November 2026 at 01:50Z, through raw.githubusercontent.com |
 
 ## What the Comments Report
 
@@ -66,24 +71,40 @@ author’s comments on the issue as read.
 
 ## Custody
 
-Neither the comment nor the archive states a licence, so this packet follows the
-derived-only rule of the [first packet](../hyukdongkim-exact-forms-2026-10-25/README.md),
-the rule #755’s packet followed before its CC0: no byte of the archive is kept.
+Neither the comment nor the archive stated a licence when they were read, so this packet
+first followed the derived-only rule of the
+[first packet](../hyukdongkim-exact-forms-2026-10-25/README.md), the rule #755’s packet
+followed before its CC0: derived facts and the archive’s digests, and no byte of it. The
+author then dedicated the archive to the public domain under CC0 1.0 and asked that its
+files be kept, and on 31 October served the same bytes from a public copy. Since
+2 November 2026 the packet keeps all seven files themselves (think-4rzl, the ask of
+issuecomment-6415293035).
 
+- [source/t244-exact-configurations/](source/t244-exact-configurations/): the archive’s
+  seven members, byte-identical at their member paths, written by
+  `exact_forms.py configurations` from the public copy’s
+  `attachments/t244-exact-configurations.zip`. It first held the zip to the comment’s
+  SHA-256 (`16e6ad9d…9a2d`) and the measured size, every member to the archive’s one
+  directory, and each certificate to its stated digest. They are also the public copy’s
+  `files/t244-exact-configurations/`, byte for byte, and the bundle’s own `SHA256SUMS`
+  checks.
 - [facts/n172.json.gz](facts/n172.json.gz) and [facts/n263.json.gz](facts/n263.json.gz):
   each certificate’s content read as JSON data, the field polynomial, the root’s
   interval, the side in $K$ and every square’s centre and half-angle tangent as elements
   of $K$, with the archive’s and the certificate’s digests. They are what the decision
-  will read; a certificate in Daniel’s format is rebuilt from the content, not from the
-  author’s bytes.
+  read. Each rebuilds its certificate, and the retained `n172.minpoly.json` and
+  `n263.minpoly.json` are those rebuilt bytes exactly (`custody` reports
+  `retained_identical`, and the tests hold it). Only each fact’s note changed when the
+  files were kept; no configuration, side or receipt did.
 - [acquisition/sources.json](acquisition/sources.json): the attachment’s address, size
-  and SHA-256 with `raw_asset_retained: false`, and the path, size and SHA-256 of each of
-  its seven files.
+  and SHA-256, its public copy at `f480441e`, and the licence; and the path, size,
+  SHA-256 and retained path of each of its seven files. The zip itself is not kept
+  (`raw_asset_retained: false`); its members are.
 - [acquisition/comments-804.json](acquisition/comments-804.json): the author’s two
   comments as read.
 
 The archive’s `check_field_packing.py`, `controls.py` and `distance_to_record.py` are
-pinned by digest and were never run or opened as code.
+kept as text; none was run here.
 
 ## What Was Decided
 
@@ -133,8 +154,12 @@ python -m devtools.configuration_fact_replay route2 --scratch SCRATCH/route2 --w
 python -m devtools.configuration_fact_replay check [--replay]
 ```
 
-The first refuses an archive without the comment’s SHA-256 and the measured size, and a
-certificate without its stated digest. `check` admits all three receipts again, and
+`ZIP` is the comment’s attachment or the public copy’s
+`attachments/t244-exact-configurations.zip`, the same bytes. The first refuses an archive
+without the comment’s SHA-256 and the measured size, a member outside the archive’s one
+directory, and a certificate without its stated digest, and with `--check` compares every
+retained member with the archive’s. `custody` reports each rebuilt file’s digest and
+whether the retained file is the same bytes. `check` admits all three receipts again, and
 `--replay` decides route 1’s jobs again.
 
 <!-- This document follows common-doc-guidelines.md.

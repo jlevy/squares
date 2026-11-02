@@ -23,10 +23,16 @@ files in it are retained as text and never run.
   which are the same bytes.
 - ``configurations --archive ZIP [--check]`` holds the author's later attachment,
   ``t244-exact-configurations.zip`` (2026-10-25T09:06:23Z), to the SHA-256 his comment
-  states and the size measured when it was read, and each of its two certificates to its
-  stated digest, and writes the ``hyukdongkim-t244-configurations-2026-10-25`` packet's
-  ``acquisition/sources.json`` and one derived fact per count, ``facts/nN.json.gz``: the
-  certificate's content, read as JSON data. Nothing here decides it, and no file of the
+  states and the size measured when it was read, each of its two certificates to its
+  stated digest and every member to the archive's one directory, before any member is
+  parsed or kept. It writes every member byte-identical under the
+  ``hyukdongkim-t244-configurations-2026-10-25`` packet's ``source/`` (with ``--check``,
+  compares it with the retained file), and writes the packet's ``acquisition/sources.json``
+  (the attachment, its public copy, and every member's path, size, SHA-256 and retained
+  path) and one derived fact per count, ``facts/nN.json.gz``: the certificate's content,
+  read as JSON data. ``ZIP`` is the comment's attachment or the public copy's
+  ``attachments/t244-exact-configurations.zip``, the same bytes; the packet keeps the
+  files since 2 November 2026 (think-4rzl). Nothing here decides them, and no file of the
   archive is run.
 - ``sides [--check]`` is offline. For each count it decides the polynomial primitive and
   irreducible over Q twice, by SymPy's ``factor_list`` and by ``sqpack.field`` through
@@ -139,6 +145,15 @@ CONFIGURATION_MEMBERS = {
     ),
 }
 CONFIGURATIONS_PACKET = PACKING / "resources/web/hyukdongkim-t244-configurations-2026-10-25"
+#: The configurations archive's one directory, and where its packet keeps the members, at
+#: their paths, since 2 November 2026 (think-4rzl).
+CONFIGURATIONS_DIR = "t244-exact-configurations"
+CONFIGURATIONS_RETAINED = CONFIGURATIONS_PACKET / "source"
+#: The same archive in the author's public copy (`PUBLIC_COPY` at `PUBLIC_COMMIT`): its Git
+#: blob there, and when it was read through raw.githubusercontent.com.
+CONFIGURATIONS_PUBLIC_PATH = "attachments/t244-exact-configurations.zip"
+CONFIGURATIONS_PUBLIC_BLOB = "e2a7318458a0472e3385a7c898285faa57378b85"
+CONFIGURATIONS_RETRIEVED = "2026-11-02T01:50Z"
 ATLAS_REPOSITORY = "evand/square-packing"
 ATLAS_COMMIT = "659ee62e4a9d39542a1146e8b011cc3ab6407ede"
 ATLAS_PATH = "site/www/data/p"
@@ -313,16 +328,30 @@ def derive(archive: Path, *, check: bool) -> int:
     return status | written(FACT, fact, check=check) | written(SOURCES, sources, check=check)
 
 
-def retained(member: str, body: bytes, *, check: bool) -> int:
-    """Keep one archive member byte-identical under ``source/``, or compare it there.
-
-    A member must be a file directly in the archive's one directory, so no name the
-    archive gives can place a file elsewhere (review A of #868, finding 10).
-    """
+def guarded(member: str, archive_dir: str = ARCHIVE_DIR) -> None:
+    """Refuse a member that is not a file directly in the archive's one directory, so no
+    name the archive gives can place a file elsewhere (review A of #868, finding 10)."""
     directory, _, name = member.partition("/")
-    if directory != ARCHIVE_DIR or name in {"", ".", ".."} or "/" in name or "\\" in name:
+    if directory != archive_dir or name in {"", ".", ".."} or "/" in name or "\\" in name:
         sys.exit(f"{member}: outside the archive's one directory")
-    path = RETAINED / member
+
+
+def retained(
+    member: str,
+    body: bytes,
+    *,
+    check: bool,
+    archive_dir: str = ARCHIVE_DIR,
+    root: Path = RETAINED,
+) -> int:
+    """Keep one archive member byte-identical under a packet's ``source/``, or compare it.
+
+    ``archive_dir`` and ``root`` name the archive's one directory and the packet's
+    ``source/``: the exact-forms packet's by default, the configurations packet's for
+    `configurations`. A member outside that directory is refused (`guarded`).
+    """
+    guarded(member, archive_dir)
+    path = root / member
     if check:
         if not path.is_file() or path.read_bytes() != body:
             print(f"{path.relative_to(REPO)} differs from the archive's member")
@@ -350,13 +379,15 @@ def written_gzip(path: Path, document: Any, *, check: bool) -> int:
 
 
 def configurations(archive: Path, *, check: bool) -> int:
-    """Keep the author's two configurations as derived exact facts, read as JSON data.
+    """Keep the author's two configurations: his files, and each as a derived exact fact.
 
     The archive is held to the digest the comment states and the size measured when it
-    was read, and each certificate to its stated digest, before anything in it is parsed.
-    Each fact keeps the certificate's content, the field polynomial, the root's interval,
-    the side and every square's centre and half-angle tangent as elements of the field,
-    with its source's digests; nothing here decides it.
+    was read, every member to the archive's one directory (`guarded`), and each
+    certificate to its stated digest, before anything in it is parsed or kept. Every
+    member is then kept byte-identical under the packet's ``source/`` (CC0 1.0). Each fact
+    keeps the certificate's content, the field polynomial, the root's interval, the side
+    and every square's centre and half-angle tangent as elements of the field, with its
+    source's digests; nothing here decides it.
     """
     data = archive.read_bytes()
     digest = hashlib.sha256(data).hexdigest()
@@ -365,49 +396,61 @@ def configurations(archive: Path, *, check: bool) -> int:
             f"{archive}: SHA-256 {digest}, {len(data)} bytes; not the comment's attachment"
         )
     members: list[dict[str, Any]] = []
+    bodies: dict[str, bytes] = {}
     status = 0
     with zipfile.ZipFile(archive) as bundle:
         for info in bundle.infolist():
             if info.is_dir():
                 continue
+            guarded(info.filename, CONFIGURATIONS_DIR)
             body = bundle.read(info)
+            bodies[info.filename] = body
             members.append(
                 {
                     "path": info.filename,
                     "bytes": len(body),
                     "sha256": hashlib.sha256(body).hexdigest(),
-                    "retained": False,
+                    "retained": True,
+                    "retained_at": f"source/{info.filename}",
                 }
             )
-        measured = {member["path"]: member["sha256"] for member in members}
-        for n, (member, sha) in CONFIGURATION_MEMBERS.items():
-            if measured.get(member) != sha:
-                sys.exit(f"{member}: SHA-256 {measured.get(member)}, not the stated {sha}")
-            content = json.loads(bundle.read(member).decode("utf-8"))
-            if int(content["n"]) != n or len(content["squares"]) != n:
-                sys.exit(f"{member}: n = {content['n']} with {len(content['squares'])} squares")
-            fact = {
-                "format": "issue-804-configuration-fact-v1",
-                "derived_by": TOOL,
-                "source": {
-                    "comment": CONFIGURATIONS_COMMENT,
-                    "attachment": CONFIGURATIONS,
-                    "archive_sha256": CONFIGURATIONS_SHA256,
-                    "member": member,
-                    "member_sha256": sha,
-                },
-                "note": (
-                    "The certificate's content in evand/square-packing's minpoly.json "
-                    "format (verify_exact.py), read as JSON data; the archive states no "
-                    "licence, so its bytes are not retained. Not decided here."
-                ),
-                "field_degree": len(content["field"]["f"]) - 1,
-                "squares": len(content["squares"]),
-                "configuration": content,
-            }
-            status |= written_gzip(
-                CONFIGURATIONS_PACKET / f"facts/n{n}.json.gz", fact, check=check
-            )
+    measured = {member["path"]: member["sha256"] for member in members}
+    for member, sha in CONFIGURATION_MEMBERS.values():
+        if measured.get(member) != sha:
+            sys.exit(f"{member}: SHA-256 {measured.get(member)}, not the stated {sha}")
+    for member, body in bodies.items():
+        status |= retained(
+            member,
+            body,
+            check=check,
+            archive_dir=CONFIGURATIONS_DIR,
+            root=CONFIGURATIONS_RETAINED,
+        )
+    for n, (member, sha) in CONFIGURATION_MEMBERS.items():
+        content = json.loads(bodies[member].decode("utf-8"))
+        if int(content["n"]) != n or len(content["squares"]) != n:
+            sys.exit(f"{member}: n = {content['n']} with {len(content['squares'])} squares")
+        fact = {
+            "format": "issue-804-configuration-fact-v1",
+            "derived_by": TOOL,
+            "source": {
+                "comment": CONFIGURATIONS_COMMENT,
+                "attachment": CONFIGURATIONS,
+                "archive_sha256": CONFIGURATIONS_SHA256,
+                "member": member,
+                "member_sha256": sha,
+            },
+            "note": (
+                "The certificate's content in evand/square-packing's minpoly.json format "
+                "(verify_exact.py), read as JSON data. The archive stated no licence when "
+                "this fact was first derived; under the author's CC0 1.0 dedication the "
+                "packet keeps its files under source/. Not decided here."
+            ),
+            "field_degree": len(content["field"]["f"]) - 1,
+            "squares": len(content["squares"]),
+            "configuration": content,
+        }
+        status |= written_gzip(CONFIGURATIONS_PACKET / f"facts/n{n}.json.gz", fact, check=check)
     sources = {
         "format": "issue-attachment-sources-v1",
         "issue": ISSUE,
@@ -418,7 +461,16 @@ def configurations(archive: Path, *, check: bool) -> int:
             "sha256": CONFIGURATIONS_SHA256,
             "sha256_stated_by_comment": True,
             "raw_asset_retained": False,
-            "licence": "none stated",
+            "members_retained": "every member, byte-identical, under source/",
+            "licence": LICENCE,
+            "public_copy": {
+                "repository": PUBLIC_COPY,
+                "commit": PUBLIC_COMMIT,
+                "path": CONFIGURATIONS_PUBLIC_PATH,
+                "git_blob": CONFIGURATIONS_PUBLIC_BLOB,
+                "retrieved_at_utc": CONFIGURATIONS_RETRIEVED,
+                "same_bytes_as_attachment": True,
+            },
         },
         "members": members,
     }
