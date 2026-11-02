@@ -208,8 +208,8 @@ read or ran the source’s programs; [its receipts and read log](receipts/indepe
 say what they did read. It shares with `verify_leaves2.py` the box lists and the proof’s
 model, and nothing of its code: no cell grid, prefilter, split rule or float count, and no
 Arb. It works in binary64 with one-ulp outward rounding after every operation and with
-constants from mpmath intervals. It tests dyadic direction cells exactly in the radius `t`,
-and it counts directions exactly, in integers.
+constants from mpmath intervals. It tests dyadic direction cells without a grid in the
+radius `t`, by roots rounded inward, and it counts directions exactly, in integers.
 
 | Label | Boxes | Certified as labelled |
 | --- | ---: | ---: |
@@ -220,14 +220,18 @@ and it counts directions exactly, in integers.
 Every box was certified under its own label: none needed another label, and none failed.
 The largest bound of a `closed` piece is 9. The run took 1,880.8 CPU seconds on two
 cores, 16 minutes of wall time. A price came first: 500 boxes extrapolated to 0.54
-CPU-hours, against a cap of 40. Four negative controls are refused,
-each with an exactly checked witness that its claim is false: the sharp box at threshold 8,
-an `inf` box widened to hold an admissible pair, a `nowall` box widened to hold a side
-edge, and the count’s separation halved.
+CPU-hours, against a cap of 40. Ten negative controls are refused by decision, each with
+an exactly checked witness in its box that its claim is false. Among them are the sharp
+box at threshold 8, an `inf` box widened to hold an admissible pair, a `nowall` box
+widened to hold a side edge, and the count’s separation halved. Four more each sit on
+one threshold of the model, and each catches a labeller that moves its threshold. After
+review A of #884, a seeded sample of 1,000 boxes was decided again with identical rows.
 
 So the labels of Lemma 4.10 have two implementations: the replay above, with the
 producer’s code, and this one, independently re-implemented, clean-room, by a Claude agent,
-a system family the producer also used. That the boxes cover the domain still rests on the
+a system family the producer also used. Its authors read no program of the source, but
+they did read the 5 October review, which describes the source’s checker at the level of
+its code. That the boxes cover the domain still rests on the
 source’s three coverage programs. That the bound `U(I)` is the right one still rests on the
 proof, which the review re-derived. Version 1.2’s Lemma 4.10 decides the same lists under
 the same model, so this run covers it too.

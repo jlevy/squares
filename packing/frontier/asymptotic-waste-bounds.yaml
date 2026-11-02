@@ -212,11 +212,15 @@ lower_bounds:
       the source's programs, decided all 78,673 boxes again, in binary64 with one-ulp
       outward rounding and mpmath interval constants, with an exact integer count of the
       directions: every box certified as labelled (72,174 inf, 1,094 nowall, 5,405 closed,
-      largest bound 9), 1,880.8 CPU seconds, and four negative controls refused with
-      exactly checked refuting witnesses (receipts/independent-labels/,
-      V-ryu-k2-minus-c-independent-labels). Lemma 4.10's labels are thus independently
-      re-implemented, clean-room, in full, by a Claude agent, a system family the
-      producer also used. That the boxes cover the domain still rests on the source's
+      largest bound 9), 1,880.8 CPU seconds, and ten negative controls refused by
+      decision with exactly checked refuting witnesses in their boxes, four of which each
+      catch a labeller that moves one threshold of the model; after review A of #884 a
+      seeded sample of 1,000 boxes was decided again with identical rows
+      (receipts/independent-labels/, V-ryu-k2-minus-c-independent-labels). Lemma 4.10's
+      labels are thus independently re-implemented, clean-room, in full, by a Claude
+      agent, a system family the producer also used. Its authors read no program of the
+      source, but they read the 5 October review, which describes the source's checker at
+      the level of its code. That the boxes cover the domain still rests on the source's
       three coverage programs, and the reduction to U(I) on the proof.
       (2) Two controls were refused: the box holding the nine-pair configuration, at
       threshold 8, and the n = 2 box list without that box (receipts/controls/).
