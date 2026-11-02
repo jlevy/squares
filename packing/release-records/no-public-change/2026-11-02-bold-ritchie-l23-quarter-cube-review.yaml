@@ -14,4 +14,6 @@ reason: >-
   0000000000000000000000000000000000000000 into empty site directories, twice from this tree
   and once with that main's result-requests.yaml swapped in, by render_packing_methods, its
   math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM): 43 files each, all byte-identical
-  across the three. No PDF was printed; it prints from that HTML. The survey keeps v0.2.7.
+  across the three. After the merge of main eead891eb (#878) the same three renders, with
+  that main's result-requests.yaml swapped in, gave the same bytes again. No PDF was printed;
+  it prints from that HTML. The survey keeps v0.2.7.
