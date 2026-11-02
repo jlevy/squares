@@ -5,7 +5,7 @@ title: "Validate: wand125 s(37) >= 2599/400 (mixed_n37_L64975), census of all 2,
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l30
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m4wv27yed1e2wfnq55h1avr0
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:12.637Z
-updated_at: 2026-11-02T14:37:42.944Z
+updated_at: 2026-11-02T15:50:21.467Z
 started_at: 2026-11-02T11:13:37.982Z
 ---
 Validation part of think-u0av for n = 37 (T-177 in the 14 October records PR #602, V0/C1). Record-changing: a complete replay with controls is what takes the bound to C3 and the verified lane.
@@ -39,3 +39,5 @@ Validation part of think-u0av for n = 37 (T-177 in the 14 October records PR #60
 - Whole-net controls (34f8b6451): CONTROLS_REFUSED at r=1919: original verified again, 99/100 mutant refused at 2,073 of 2,073 directions, near-threshold mutant refused (13:23:59Z to 13:33:14Z).
 - Records (101002a16): E-wand125-fine-net-n37-64975-sqverify-fast-replay from `--evidence` (audit record the 14 October review); T-178 V0/C1 -> V3/C3 as check_results derives; n-037's lower lanes 161/25 -> 2599/400; T-069 superseded there. Release record and re-pin: 00b7144de, 112bf04d9.
 - CPU: about 3.7 CPU-hours for capture and controls (priced 6.53).
+
+2026-11-02 15:50Z bold-ritchie-l30, hand-off: PR #886 (draft, labels intake and S2, mergeable) at head 4fbde01c16a2748b179a0a670f21a220fe8aee62, hosted Packing validation (run 41472591273), Certificate page and Branch mergeability all green. After 89c3489d3 the branch added 711b13fee (atlas curated credits for 37, 76 and 95; regenerated piercing survey; n-037 paragraph order; pinned test counts), 44e140f10 (DATA_REVISION re-pinned to 711b13fe) and 4fbde01c1 (a test comment ruff read as code). Greff's print-credit contributor entries wait for think-10l0. Not closed: for the coordinator after merge.
