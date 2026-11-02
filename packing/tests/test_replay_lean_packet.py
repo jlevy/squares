@@ -28,7 +28,11 @@ def test_each_route_stages_bound_to_its_upstream_digests(name: str, tmp_path: Pa
     assert set(report["kernel_escapes"].values()) == {0}
     assert report["toolchain"] == spec.toolchain
     assert report["mathlib"] == spec.mathlib
-    assert all(staged.sha256 or staged.blob for staged in spec.files)
+    # Every upstream library module is held to its Git blob; Hosono's two files are his
+    # packet's own, whose custody is acquire_source's.
+    modules = [s for s in spec.files if s.path.endswith(".lean") and "N21Pts" not in s.path]
+    assert modules
+    assert all(staged.blob for staged in modules)
     probe = (tmp_path / spec.project / "Probe.lean").read_text(encoding="utf-8")
     for theorem in spec.theorems:
         assert f"#print axioms {theorem}\n" in probe
@@ -49,9 +53,23 @@ def test_a_changed_byte_is_refused_with_the_control_built_from_it(tmp_path: Path
         encoding="utf-8",
     )
     problems = rlp.verify(spec, tmp_path)["problems"]
-    assert any("Square5.lean: SHA-256" in p for p in problems)
     assert any("Square5.lean: Git blob" in p for p in problems)
     assert any("Square5Mutant.lean is not the route's control" in p for p in problems)
+
+
+def test_a_substituted_file_not_the_scripts_pin_is_refused(tmp_path: Path) -> None:
+    spec = rlp.route("wand125-n21")
+    assert rlp.stage(spec, tmp_path)["ok"]
+    oracle = tmp_path / "s12/search/zeromargin.py"
+    oracle.write_text(oracle.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+    manifest = tmp_path / "s12/lean/lake-manifest.json"
+    manifest.write_text(
+        manifest.read_text(encoding="utf-8").replace("0df444a3", "0df444a4", 1),
+        encoding="utf-8",
+    )
+    problems = rlp.verify(spec, tmp_path)["problems"]
+    assert "s12/search/zeromargin.py: not the bytes build_zero_margin.sh pins" in problems
+    assert "the manifest's package revisions are not the closure receipt's" in problems
 
 
 def test_a_mutation_that_does_not_occur_exactly_once_is_refused(tmp_path: Path) -> None:
@@ -113,8 +131,28 @@ def test_a_control_counts_only_when_refused_for_its_own_reason(
     assert rlp.control_refused(kind, exit_code, text) is refused
 
 
-def _sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def _log(path: Path, body: str, code: int) -> None:
+    """A log in ``devtools.replay_receipt``'s shape."""
+    path.write_text(
+        "# command: lake env lean X.lean\n# cwd: test\n# python3: not used by this command\n"
+        "# host: 4 cores; load 0.00 0.00 0.00; started 2026-11-02T00:00:00Z\n"
+        f"{body}"
+        f"# finished 2026-11-02T00:00:01Z; exit {code}; wall 1.000 s; CPU 0.9 s "
+        "(user 0.800 + sys 0.100); load 0.00 0.00 0.00\n",
+        encoding="utf-8",
+    )
+
+
+def test_the_footer_of_a_receipt_log_is_read_back(tmp_path: Path) -> None:
+    _log(tmp_path / "x.log", "error: type mismatch\n", 1)
+    assert rlp.footer(tmp_path / "x.log") == {
+        "command": "lake env lean X.lean",
+        "started_utc": "2026-11-02T00:00:00Z",
+        "ended_utc": "2026-11-02T00:00:01Z",
+        "exit": 1,
+        "wall_seconds": 1.0,
+        "cpu_seconds": 0.9,
+    }
 
 
 def _receipt(tmp_path: Path, spec: rlp.Route) -> Path:
@@ -122,34 +160,30 @@ def _receipt(tmp_path: Path, spec: rlp.Route) -> Path:
     receipts = tmp_path / "receipts"
     receipts.mkdir()
     probe = "".join(f"'{name}' depends on axioms: {STANDARD}\n" for name in spec.theorems)
-    (receipts / "probe.log").write_text(probe, encoding="utf-8")
-    (receipts / "build-0.log").write_text("Build completed successfully.\n", encoding="utf-8")
+    _log(receipts / "probe.log", probe, 0)
+    _log(receipts / "build-0.log", "Build completed successfully.\n", 0)
     steps = [
         {"name": name, "log": f"{name}.log", "exit": 0, "cpu_seconds": 1.0, "wall_seconds": 1.0}
         for name in ("build-0", "probe")
     ]
-    for step in steps:
-        step["log_sha256"] = _sha256(receipts / str(step["log"]))
     controls = []
     for control in spec.controls:
         log = receipts / f"control-{control.name}.log"
         if control.kind == "sorry":
-            log.write_text(
+            body = (
                 "warning: declaration uses 'sorry'\n'control_sorry' depends on axioms: "
-                "[propext, sorryAx, Classical.choice, Quot.sound]\n",
-                encoding="utf-8",
+                "[propext, sorryAx, Classical.choice, Quot.sound]\n"
             )
             code = 0
         else:
-            log.write_text("error: type mismatch\n", encoding="utf-8")
-            code = 1
+            body, code = "error: type mismatch\n", 1
+        _log(log, body, code)
         controls.append(
             {
                 "name": f"control-{control.name}",
                 "control": control.name,
                 "kind": control.kind,
                 "log": log.name,
-                "log_sha256": _sha256(log),
                 "exit": code,
                 "refused": True,
             }
@@ -182,8 +216,11 @@ def test_a_passing_receipt_checks_and_each_tampering_is_caught(tmp_path: Path) -
         encoding="utf-8",
     )
     problems = rlp.check(spec, receipts)
-    assert "probe: log probe.log does not match its digest" in problems
+    assert "the receipt's axioms are not what probe.log prints" in problems
     assert any("sorryAx" in p for p in problems)
+
+    _log(receipts / "build-0.log", "error: build failed\n", 1)
+    assert "build-0: its log's exit is not the receipt's" in rlp.check(spec, receipts)
 
 
 def test_a_control_that_was_not_refused_fails_the_check(tmp_path: Path) -> None:
@@ -203,8 +240,37 @@ def test_a_route_with_a_generator_needs_its_generation_receipt(tmp_path: Path) -
     spec = rlp.route("wand125-n21")
     receipts = _receipt(tmp_path, spec)
     assert rlp.check(spec, receipts) == [
-        "the generation receipt does not show the listed digests matched"
+        "the generation receipt does not show every listed file generated"
     ]
     assert rlp.check_generation(spec, receipts) == [
         f"{receipts / rlp.GENERATION_NAME}: no generation receipt"
     ]
+
+
+def test_compare_finds_a_generated_file_that_differs_from_the_listing(tmp_path: Path) -> None:
+    spec = rlp.route("wand125-n21")
+    assert spec.generation is not None
+    out, receipts = tmp_path / "stage", tmp_path / "receipts"
+    out.mkdir()
+    receipts.mkdir()
+    outdir = out / spec.generation.outdir
+    outdir.mkdir(parents=True)
+    rows = []
+    for name, text in (("Part0.lean", "a\n"), ("Part1.lean", "b\n")):
+        (outdir / name).write_text(text, encoding="utf-8")
+        rows.append(f"{hashlib.sha256(text.encode()).hexdigest()}  {name}")
+    (out / spec.generation.listing).write_text("\n".join(rows) + "\n", encoding="utf-8")
+    _log(receipts / "gen.log", "  625/625 cells 1s\n", 0)
+    report = rlp.compare(spec, out, receipts)
+    assert report["ok"]
+    assert (report["listed"], report["matched"]) == (2, 2)
+
+    (outdir / "Part1.lean").write_text("c\n", encoding="utf-8")
+    (outdir / "Part2.lean").write_text("d\n", encoding="utf-8")
+    report = rlp.compare(spec, out, receipts)
+    assert not report["ok"]
+    assert report["differing"] == ["Part1.lean"]
+    assert report["extra"] == ["Part2.lean"]
+    assert "the generated files are not exactly the listed ones" in rlp.check_generation(
+        spec, receipts
+    )

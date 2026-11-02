@@ -21,26 +21,32 @@ Subcommands, in order (``DIR`` outside the repository)::
 
     stage ROUTE --out DIR            write the Lean project from retained bytes
     generate ROUTE --out DIR --receipts R --nproc N
-                                     wand125-n21 only: the source's generator, then the
-                                     comparison with data-sha256.txt
+                                     wand125-n21 only: the source's generator, then
+                                     ``compare``
+    compare ROUTE --out DIR --receipts R
+                                     the generated files against data-sha256.txt, written
+                                     with gen.log's footer as R/generation.json
     run ROUTE --out DIR --receipts R [--cpus 2,3] [--jobs 1]
                                      lake exe cache get, lake build, the axiom probe and
                                      the negative controls; writes R/receipt.json
     check ROUTE [--receipts R]       validate a retained receipt offline
 
-``stage`` refuses a file whose bytes are not the upstream bytes: by the SHA-256 the
-packet's ``acquisition/upstream-subtree.sha256`` lists, by the Git blob of the packet's
-closure receipt, or by the SHA-256 the source's build script pins. It counts the
-kernel-escape tokens of ``devtools.lean_closure`` in the staged sources, writes the probe
-that prints each theorem's statement and axioms, and writes the controls.
+``stage`` reads every file from Git, where ``devtools.acquire_source --check`` holds the
+packets' custody of their bytes, including the files a packet pins as identical to
+another packet's. It refuses a Lean module whose Git blob is not the one the route's
+``devtools.lean_closure`` receipt recorded at the upstream commit, build pins whose
+toolchain and package revisions are not the receipt's, and, for ``wand125-n21``, any of
+the four files whose SHA-256 the source's ``build_zero_margin.sh`` checks on its own
+clone of evand/square-packing, which the stage replaces with retained copies. It counts
+the kernel-escape tokens of ``devtools.lean_closure`` in the staged sources, writes the
+probe that prints each theorem's statement and axioms, and writes the controls.
 
 ``run`` accepts a theorem only with exactly ``propext``, ``Classical.choice`` and
 ``Quot.sound``. Each route carries three negative controls that the run must refuse: a
 mutated statement proved by the theorem's own term, which Lean must reject; a copy of a
 theorem module with one statement made false, which Lean must reject; and the theorem
 restated with ``sorry``, which Lean accepts with a warning and whose ``sorryAx`` the
-acceptance must refuse. The route ``wand125-n21`` adds a generated part with one datum
-changed, which the kernel's ``decide`` must refuse.
+acceptance must refuse.
 
 Every command runs under ``devtools.replay_receipt``, whose header and footer record its
 argv, exit, wall and CPU (user plus system of the command and its children); with
@@ -105,17 +111,17 @@ _SETUP_FAULTS = (
 
 @dataclass(frozen=True)
 class Staged:
-    """One staged file: its path in the stage, its retained bytes, and what binds them.
+    """One staged file: its path in the stage and its retained bytes.
 
-    ``origin`` is repository-relative; a ``.gz`` holds the gzipped upstream bytes. A file
-    is bound by the upstream SHA-256 (``sha256``), by its upstream Git blob (``blob``),
-    or by both.
+    ``origin`` is repository-relative; a ``.gz`` holds the gzipped upstream bytes.
+    ``blob`` is the upstream Git blob a closure receipt records, and ``pinned`` the
+    SHA-256 the source's own build script checks.
     """
 
     path: str
     origin: str
-    sha256: str | None = None
     blob: str | None = None
+    pinned: str | None = None
 
 
 @dataclass(frozen=True)
@@ -140,12 +146,12 @@ class Control:
 
 @dataclass(frozen=True)
 class Generation:
-    """The source's generator step and the digests its output must have."""
+    """The source's generator step and the staged listing its output must match."""
 
     cwd: str
     argv: tuple[str, ...]
     outdir: str
-    digests: str
+    listing: str
 
 
 @dataclass(frozen=True)
@@ -158,6 +164,8 @@ class Route:
     project: str
     toolchain: str
     mathlib: str
+    #: The ``devtools.lean_closure`` receipt of the upstream commit, repository-relative.
+    closure: str
     files: tuple[Staged, ...]
     #: ``lake build`` invocations, in order; ``PARTS`` expands to one per generated part.
     builds: tuple[tuple[str, ...], ...]
@@ -172,21 +180,13 @@ class Route:
 PARTS = "PARTS"
 
 
-def _packet_sha256(packet: str) -> dict[str, str]:
-    """The packet's list of upstream SHA-256, keyed by upstream path without ``./``."""
-    listing = WEB / packet / "acquisition/upstream-subtree.sha256"
-    out: dict[str, str] = {}
-    for line in listing.read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            digest, name = line.split(maxsplit=1)
-            out[name.removeprefix("./")] = digest
-    return out
+def _closure(receipt: str) -> dict[str, Any]:
+    return json.loads((REPO / receipt).read_text(encoding="utf-8"))
 
 
 def _closure_blobs(receipt: str) -> dict[str, str]:
     """Module path to Git blob, from a ``devtools.lean_closure`` receipt."""
-    data = json.loads((REPO / receipt).read_text(encoding="utf-8"))
-    return {module["path"]: module["blob"] for module in data["modules"]}
+    return {module["path"]: module["blob"] for module in _closure(receipt)["modules"]}
 
 
 def _script_pins(script: str) -> dict[str, str]:
@@ -198,18 +198,15 @@ def _script_pins(script: str) -> dict[str, str]:
 def _chelokot() -> Route:
     packet = "chelokot-small-n-lean-2026-09-05"
     base = f"packing/resources/web/{packet}/square-packing-archive"
-    digests = _packet_sha256(packet)
-    blobs = _closure_blobs(f"packing/resources/web/{packet}/receipts/lean-closure.json")
+    closure = f"packing/resources/web/{packet}/receipts/lean-closure.json"
+    blobs = _closure_blobs(closure)
     names = [
         "formal/lean-toolchain",
         "formal/lakefile.toml",
         "formal/lake-manifest.json",
         *sorted(path for path in blobs if path.endswith(".lean")),
     ]
-    files = tuple(
-        Staged(name, f"{base}/{name}", sha256=digests[name], blob=blobs.get(name))
-        for name in names
-    )
+    files = tuple(Staged(name, f"{base}/{name}", blob=blobs.get(name)) for name in names)
     ns = "SquarePackingArchive.Records"
     return Route(
         name="chelokot-small-n",
@@ -220,6 +217,7 @@ def _chelokot() -> Route:
         project="formal",
         toolchain="leanprover/lean4:v4.33.0",
         mathlib="db584cd6d46c92f209a44c0f1c829460d327499d",
+        closure=closure,
         files=files,
         builds=((f"{ns}.Square5", f"{ns}.NearSquare", f"{ns}.SquareNumbers"),),
         probe_imports=(f"{ns}.Square5", f"{ns}.NearSquare", f"{ns}.SquareNumbers"),
@@ -277,9 +275,11 @@ def _chelokot() -> Route:
 def _evand_rect() -> Route:
     packet = "evand-rect-small-n-lean-2026-10-22"
     base = f"packing/resources/web/{packet}/square-packing"
+    # The packet pins these four as identical to the 7 October packet's copies, which
+    # acquire_source --check holds them to.
     pins = "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12"
-    digests = _packet_sha256(packet)
-    blobs = _closure_blobs(f"packing/resources/web/{packet}/receipts/lean-closure.json")
+    closure = f"packing/resources/web/{packet}/receipts/lean-closure.json"
+    blobs = _closure_blobs(closure)
     elsewhere = {
         "lean/lean-toolchain",
         "lean/lakefile.toml",
@@ -291,7 +291,6 @@ def _evand_rect() -> Route:
         Staged(
             name,
             f"{pins}/{name}" if name in elsewhere else f"{base}/{name}",
-            sha256=digests[name],
             blob=blobs.get(name),
         )
         for name in names
@@ -305,6 +304,7 @@ def _evand_rect() -> Route:
         project="lean",
         toolchain="leanprover/lean4:v4.33.1",
         mathlib="0df444a360eaa60ab8c11dca51a86af692955474",
+        closure=closure,
         files=files,
         builds=(
             (
@@ -370,7 +370,7 @@ def _evand_rect() -> Route:
         notes=(
             (
                 "Basic.lean and the three build pins are the 7 October evand packet's "
-                "copies, bound by this packet's upstream SHA-256."
+                "copies, which this packet's acquisition record names as identical."
             ),
         ),
     )
@@ -382,11 +382,8 @@ def _wand125_n21() -> Route:
     oct07 = "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12"
     oct01 = "packing/resources/web/evand-square-packing-2026-10-01/source/s12"
     sep28 = "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds"
-    digests = _packet_sha256(packet)
-    rect_digests = _packet_sha256("evand-rect-small-n-lean-2026-10-22")
-    blobs = _closure_blobs(
-        f"packing/resources/web/{packet}/receipts/evand-library-closure-6aa82ba4.json"
-    )
+    closure = f"packing/resources/web/{packet}/receipts/evand-library-closure-6aa82ba4.json"
+    blobs = _closure_blobs(closure)
     script = _script_pins(f"{zero}/build_zero_margin.sh")
     library = tuple(
         Staged(path, f"{oct07}/{path.removeprefix('s12/')}", blob=blob)
@@ -394,49 +391,38 @@ def _wand125_n21() -> Route:
         if path != "s12/lean/Sqpack/ZMTree.lean"
     )
     files = (
-        # The build pins at 6aa82ba4 are the bytes the 7051f4e pin also has; the closure
-        # receipt binds their toolchain and package revisions, which `stage` compares.
+        # The build pins: `verify` holds their toolchain and package revisions to the
+        # closure receipt of 6aa82ba4.
         *(
-            Staged(f"s12/{name}", f"{oct07}/{name}", sha256=rect_digests[name])
+            Staged(f"s12/{name}", f"{oct07}/{name}")
             for name in ("lean/lean-toolchain", "lean/lakefile.toml", "lean/lake-manifest.json")
         ),
         *library,
+        # The four files build_zero_margin.sh checks on its clone, held to its pins.
         Staged(
             "s12/lean/Sqpack/ZMTree.lean",
             f"{oct07}/lean/Sqpack/ZMTree.lean",
-            sha256=script["ZMTREE_SHA256"],
             blob=blobs["s12/lean/Sqpack/ZMTree.lean"],
+            pinned=script["ZMTREE_SHA256"],
         ),
         Staged(
             "s12/lean/scripts/gen_zmtree.py",
             f"{oct07}/lean/scripts/gen_zmtree.py",
-            sha256=script["GEN_SHA256"],
+            pinned=script["GEN_SHA256"],
         ),
         Staged(
             "s12/search/zeromargin.py",
             f"{oct01}/search/zeromargin.py",
-            sha256=script["ORACLE_SHA256"],
+            pinned=script["ORACLE_SHA256"],
         ),
         Staged(
             "s12/certificates/n21pts/n21-capture-one.txt",
             f"{sep28}/point_n21_L5/certificates/n21-capture-one.txt.gz",
-            sha256=script["CERT_SHA256"],
+            pinned=script["CERT_SHA256"],
         ),
-        Staged(
-            "s12/lean/Sqpack/N21PtsLower.lean",
-            f"{zero}/N21PtsLower.lean",
-            sha256=digests["point_n21_L5/lean/zero-margin/N21PtsLower.lean"],
-        ),
-        Staged(
-            "s12/lean/N21PtsAxiomsZ.lean",
-            f"{zero}/N21PtsAxiomsZ.lean",
-            sha256=digests["point_n21_L5/lean/zero-margin/N21PtsAxiomsZ.lean"],
-        ),
-        Staged(
-            "data-sha256.txt",
-            f"{zero}/data-sha256.txt",
-            sha256=digests["point_n21_L5/lean/zero-margin/data-sha256.txt"],
-        ),
+        Staged("s12/lean/Sqpack/N21PtsLower.lean", f"{zero}/N21PtsLower.lean"),
+        Staged("s12/lean/N21PtsAxiomsZ.lean", f"{zero}/N21PtsAxiomsZ.lean"),
+        Staged("data-sha256.txt", f"{zero}/data-sha256.txt"),
     )
     return Route(
         name="wand125-n21",
@@ -451,6 +437,7 @@ def _wand125_n21() -> Route:
         project="s12/lean",
         toolchain="leanprover/lean4:v4.33.1",
         mathlib="0df444a360eaa60ab8c11dca51a86af692955474",
+        closure=closure,
         files=files,
         builds=(("Sqpack.N21PtsZ.Pts",), (PARTS,), ("Sqpack.N21PtsLower",)),
         parts_glob="Sqpack/N21PtsZ/Part*.lean",
@@ -507,7 +494,7 @@ def _wand125_n21() -> Route:
                 "64",
             ),
             outdir="s12/lean/Sqpack/N21PtsZ",
-            digests="data-sha256.txt",
+            listing="data-sha256.txt",
         ),
         notes=(
             (
@@ -533,10 +520,6 @@ def route(name: str) -> Route:
 def _read(path: Path) -> bytes:
     data = path.read_bytes()
     return gzip.decompress(data) if path.suffix == ".gz" else data
-
-
-def _sha256(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
 
 
 def escape_counts(paths: Sequence[Path]) -> dict[str, int]:
@@ -593,7 +576,8 @@ def stage(spec: Route, out: Path) -> dict[str, Any]:
 
 
 def verify(spec: Route, out: Path) -> dict[str, Any]:
-    """Bind the staged tree under ``out``: each file's upstream digest, the pins, the
+    """Bind the staged tree under ``out``: each module's upstream Git blob, the build
+    pins against the closure receipt, the files the source's script pins, the
     kernel-escape scan, and the probe and controls the route writes."""
     problems: list[str] = []
     files: list[dict[str, Any]] = []
@@ -603,23 +587,22 @@ def verify(spec: Route, out: Path) -> dict[str, Any]:
             problems.append(f"{staged.path}: not staged")
             continue
         data = target.read_bytes()
-        digest, blob = _sha256(data), git_blob(data)
-        if staged.sha256 and digest != staged.sha256:
-            problems.append(
-                f"{staged.path}: SHA-256 {digest[:12]}, upstream {staged.sha256[:12]}"
-            )
+        blob = git_blob(data)
         if staged.blob and blob != staged.blob:
             problems.append(f"{staged.path}: Git blob {blob[:12]}, upstream {staged.blob[:12]}")
-        if not (staged.sha256 or staged.blob):
-            problems.append(f"{staged.path}: bound by no upstream digest")
-        files.append(
-            {"path": staged.path, "origin": staged.origin, "sha256": digest, "blob": blob}
-        )
+        # The one boundary: the source's build script checks these files on its clone of
+        # evand/square-packing, for which the stage substitutes retained copies.
+        if staged.pinned and hashlib.sha256(data).hexdigest() != staged.pinned:
+            problems.append(f"{staged.path}: not the bytes build_zero_margin.sh pins")
+        files.append({"path": staged.path, "origin": staged.origin, "blob": blob})
     project = out / spec.project
+    closure = _closure(spec.closure)
     toolchain = (project / "lean-toolchain").read_text(encoding="utf-8").strip()
-    if toolchain != spec.toolchain:
+    if toolchain != spec.toolchain or toolchain != closure["toolchain"]:
         problems.append(f"lean-toolchain is {toolchain}, the route pins {spec.toolchain}")
     revs = _manifest_revs(project / "lake-manifest.json")
+    if revs != {package["name"]: package["rev"] for package in closure["packages"]}:
+        problems.append("the manifest's package revisions are not the closure receipt's")
     if revs.get("mathlib") != spec.mathlib:
         problems.append(f"the manifest's Mathlib is {revs.get('mathlib')}, not {spec.mathlib}")
     lean_files = sorted(
@@ -646,17 +629,17 @@ def verify(spec: Route, out: Path) -> dict[str, Any]:
         "files": files,
         "kernel_escapes": found,
         "probe": f"{spec.project}/Probe.lean",
-        "probe_sha256": _sha256(probe.read_bytes()) if probe.is_file() else None,
         "notes": list(spec.notes),
     }
 
 
-def _digest_list(text: str) -> dict[str, str]:
+def _listing(text: str) -> dict[str, str]:
+    """A ``sha256sum``-style listing: file name to the value listed for it."""
     out: dict[str, str] = {}
     for line in text.splitlines():
         if line.strip():
-            digest, name = line.split(maxsplit=1)
-            out[name] = digest
+            value, name = line.split(maxsplit=1)
+            out[name] = value
     return out
 
 
@@ -677,20 +660,68 @@ def generate(
         shutil.rmtree(outdir)
     argv = [*_taskset(cpus), sys.executable, *(arg.format(nproc=nproc) for arg in gen.argv)]
     receipts.mkdir(parents=True, exist_ok=True)
-    footer = replay_receipt.run(
+    replay_receipt.run(
         argv,
         receipt=receipts / "gen.log",
         cwd_label=f"{gen.cwd}/ of the stage of {spec.name}",
         python_note=f"{sys.executable} (Python {platform.python_version()})",
         chdir=out / gen.cwd,
     )
-    want = _digest_list((out / gen.digests).read_text(encoding="utf-8"))
+    return compare(spec, out, receipts)
+
+
+#: The header and footer lines `devtools.replay_receipt` writes around a command.
+_COMMAND = re.compile(r"^# command: (.*)$", re.MULTILINE)
+_STARTED = re.compile(r"^# host: .*; started (\S+)$", re.MULTILINE)
+_FINISHED = re.compile(
+    r"^# finished (\S+); exit (-?\d+); wall ([\d.]+) s; CPU ([\d.]+) s", re.MULTILINE
+)
+
+
+def footer(log: Path) -> dict[str, Any]:
+    """The command, start, end, exit, wall and CPU a ``replay_receipt`` log records."""
+    text = log.read_text(encoding="utf-8")
+    command, started, finished = (
+        _COMMAND.search(text),
+        _STARTED.search(text),
+        _FINISHED.search(text),
+    )
+    if not (command and started and finished):
+        msg = f"{log}: not a finished replay_receipt log"
+        raise SystemExit(msg)
+    return {
+        "command": command.group(1),
+        "started_utc": started.group(1),
+        "ended_utc": finished.group(1),
+        "exit": int(finished.group(2)),
+        "wall_seconds": float(finished.group(3)),
+        "cpu_seconds": float(finished.group(4)),
+    }
+
+
+def compare(spec: Route, out: Path, receipts: Path) -> dict[str, Any]:
+    """Compare the generated files under ``out`` with the source's listing, and write
+    the generation receipt from them and the run's ``gen.log``.
+
+    The generated modules are build products no Git revision names (88 MB, not
+    retained), so the source's ``data-sha256.txt`` is what names them.
+    """
+    gen = spec.generation
+    if gen is None:
+        msg = f"{spec.name} has no generation step"
+        raise SystemExit(msg)
+    outdir = out / gen.outdir
+    run_footer = footer(receipts / "gen.log")
+    want = _listing((out / gen.listing).read_text(encoding="utf-8"))
     got = (
-        {path.name: _sha256(path.read_bytes()) for path in sorted(outdir.glob("*.lean"))}
+        {
+            path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in sorted(outdir.glob("*.lean"))
+        }
         if outdir.is_dir()
         else {}
     )
-    mismatched = sorted(name for name in want.keys() & got.keys() if want[name] != got[name])
+    same = sorted(name for name in want.keys() & got.keys() if want[name] == got[name])
     import numpy as np  # noqa: PLC0415 -- the generator's own dependency, reported here
 
     report: dict[str, Any] = {
@@ -698,30 +729,22 @@ def generate(
         "route": spec.name,
         "result": spec.result,
         "bead": spec.bead,
-        "command": footer["command"],
-        "exit": footer["exit"],
-        "wall_seconds": footer["wall_seconds"],
-        "cpu_seconds": footer["cpu_seconds"],
-        "started_utc": footer["started_utc"],
-        "ended_utc": footer["ended_utc"],
+        **run_footer,
         "log": "gen.log",
-        "log_sha256": _sha256((receipts / "gen.log").read_bytes()),
         "python": platform.python_version(),
         "numpy": np.__version__,
-        "nproc": nproc,
-        "cpus": cpus,
         "host": _host(),
+        "listing": gen.listing,
         "listed": len(want),
         "generated": len(got),
-        "matched": sum(1 for name in want if got.get(name) == want[name]),
-        "mismatched": mismatched,
+        "matched": len(same),
+        "differing": sorted((want.keys() & got.keys()) - set(same)),
         "missing": sorted(want.keys() - got.keys()),
         "extra": sorted(got.keys() - want.keys()),
         "generated_bytes": sum((outdir / name).stat().st_size for name in got),
-        "data_sha256_list": _sha256((out / gen.digests).read_bytes()),
     }
     report["ok"] = (
-        footer["exit"] == 0 and report["matched"] == report["listed"] == report["generated"]
+        run_footer["exit"] == 0 and report["matched"] == report["listed"] == report["generated"]
     )
     atomic_write_text(receipts / GENERATION_NAME, retained_json.dumps(report))
     return report
@@ -789,7 +812,7 @@ def _step(
     time_limit: float | None,
 ) -> dict[str, Any]:
     log = receipts / f"{name}.log"
-    footer = replay_receipt.run(
+    fields = replay_receipt.run(
         argv,
         receipt=log,
         cwd_label=label,
@@ -799,14 +822,13 @@ def _step(
     )
     return {
         "name": name,
-        "command": footer["command"],
+        "command": fields["command"],
         "log": log.name,
-        "log_sha256": _sha256(log.read_bytes()),
-        "exit": footer["exit"],
-        "wall_seconds": footer["wall_seconds"],
-        "cpu_seconds": footer["cpu_seconds"],
-        "started_utc": footer["started_utc"],
-        "ended_utc": footer["ended_utc"],
+        "exit": fields["exit"],
+        "wall_seconds": fields["wall_seconds"],
+        "cpu_seconds": fields["cpu_seconds"],
+        "started_utc": fields["started_utc"],
+        "ended_utc": fields["ended_utc"],
     }
 
 
@@ -973,8 +995,8 @@ def check(spec: Route, receipts: Path) -> list[str]:
         log = receipts / str(step.get("log"))
         if not log.is_file():
             problems.append(f"{step.get('name')}: log {log.name} is not retained")
-        elif _sha256(log.read_bytes()) != step.get("log_sha256"):
-            problems.append(f"{step.get('name')}: log {log.name} does not match its digest")
+        elif footer(log)["exit"] != step.get("exit"):
+            problems.append(f"{step.get('name')}: its log's exit is not the receipt's")
     problems.extend(
         f"{step.get('name')} exited {step.get('exit')}"
         for step in receipt.get("steps", [])
@@ -998,16 +1020,14 @@ def check(spec: Route, receipts: Path) -> list[str]:
         if not control_refused(names[name].kind, int(entry.get("exit", 0)), text):
             problems.append(f"control {name}: its log does not show it refused")
     problems += [f"control {name} did not run" for name in names if name not in seen]
-    if spec.generation is not None:
-        gen_path = receipts / GENERATION_NAME
-        gen = json.loads(gen_path.read_text(encoding="utf-8")) if gen_path.is_file() else {}
-        if not gen.get("ok"):
-            problems.append("the generation receipt does not show the listed digests matched")
+    if spec.generation is not None and check_generation(spec, receipts):
+        problems.append("the generation receipt does not show every listed file generated")
     return problems
 
 
 def check_generation(spec: Route, receipts: Path) -> list[str]:
-    """Validate a retained generation receipt offline."""
+    """Validate a retained generation receipt offline: its route, its log's footer, and
+    every listed file generated with the listed value and nothing else."""
     path = receipts / GENERATION_NAME
     if not path.is_file():
         return [f"{path}: no generation receipt"]
@@ -1016,21 +1036,22 @@ def check_generation(spec: Route, receipts: Path) -> list[str]:
     if gen.get("kind") != GENERATION_KIND or gen.get("route") != spec.name:
         problems.append("the generation receipt is not this route's")
     log = receipts / str(gen.get("log"))
-    if not log.is_file() or _sha256(log.read_bytes()) != gen.get("log_sha256"):
-        problems.append("gen.log is missing or does not match its digest")
+    if not log.is_file():
+        problems.append("gen.log is not retained")
+    elif footer(log)["exit"] != gen.get("exit"):
+        problems.append("gen.log's exit is not the receipt's")
     if spec.generation is not None:
-        listing = REPO / next(s.origin for s in spec.files if s.path == spec.generation.digests)
-        if _sha256(listing.read_bytes()) != gen.get("data_sha256_list"):
-            problems.append("the receipt compared another data-sha256.txt")
-        if gen.get("listed") != len(_digest_list(listing.read_text(encoding="utf-8"))):
-            problems.append("the receipt's listed count is not data-sha256.txt's")
+        source = next(s.origin for s in spec.files if s.path == spec.generation.listing)
+        listed = len(_listing((REPO / source).read_text(encoding="utf-8")))
+        if gen.get("listing") != spec.generation.listing or gen.get("listed") != listed:
+            problems.append(f"the receipt did not compare all {listed} listed files")
     if not (
         gen.get("ok")
         and gen.get("exit") == 0
         and gen.get("matched") == gen.get("listed") == gen.get("generated")
-        and not gen.get("mismatched")
+        and not (gen.get("differing") or gen.get("missing") or gen.get("extra"))
     ):
-        problems.append("the generated files do not all match data-sha256.txt")
+        problems.append("the generated files are not exactly the listed ones")
     return problems
 
 
@@ -1041,10 +1062,10 @@ def _default_receipts(spec: Route) -> Path:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     sub = parser.add_subparsers(dest="command", required=True)
-    for name in ("stage", "generate", "run", "check", "check-generation"):
+    for name in ("stage", "generate", "compare", "run", "check", "check-generation"):
         cmd = sub.add_parser(name)
         cmd.add_argument("route", choices=sorted(ROUTES))
-        if name in {"stage", "generate", "run"}:
+        if name in {"stage", "generate", "compare", "run"}:
             cmd.add_argument("--out", type=Path, required=True, help="stage directory")
         if name != "stage":
             cmd.add_argument("--receipts", type=Path, help="receipt directory")
@@ -1070,6 +1091,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(json.dumps(staged, indent=2))
             return 1
         report = generate(spec, args.out, receipts, nproc=args.nproc, cpus=args.cpus)
+        print(json.dumps(report, indent=2))
+        return 0 if report["ok"] else 1
+    if args.command == "compare":
+        report = compare(spec, args.out, receipts)
         print(json.dumps(report, indent=2))
         return 0 if report["ok"] else 1
     if args.command == "run":
