@@ -269,16 +269,18 @@ lower_bounds:
       independent per-box labelling remains think-k3tk. No source checker ran here.
       REVIEWED 2026-11-02 at the strongest tier (think-yf8j):
       docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md
-      re-derived the chain and the v1.2 lemmas it imports and accepted it, with eight
-      notes and no defect or gap. On exact-rational intervals of its own it reproduced
-      every constant and threshold. It also reproduced Tables 4 and 5 and the Section
-      12.6 sensitivity record, which had not been run before, and all 108 predicates of
-      quarter_cube_constants.py. The explicit threshold has little margin. Condition (i)
-      of Proposition 11.2 holds from k* = 4616673963026.36, a relative margin of
-      1.05*10^-4 in the bracket B (1.74*10^-5 for Theorem A13), so any upward correction
-      of A, A' or C_Lambda beyond the tolerances of Section 12.6 raises it. Proposition
-      2.1 and Theorem A13 rest on facts about v1.2's proofs, not its statements (the
-      review's F1).
+      re-derived the chain and the v1.2 lemmas it imports, except two parts: v1.2's
+      Proposition 4.5 was read in full with its numbers recomputed, and the box labels
+      of v1.2's Lemma 4.10 were not decided (think-k3tk). It accepted the chain, with
+      eight notes and no defect or gap. On exact-rational intervals of its own it
+      reproduced every constant and threshold. It also reproduced Tables 4 and 5 and the
+      Section 12.6 sensitivity record, which had not been run before, and all 108
+      predicates of quarter_cube_constants.py. The explicit threshold has little margin.
+      Condition (i) of Proposition 11.2 holds from k* = 4616673963026.36, a relative
+      margin of 1.0463*10^-4 in the bracket B (1.73857*10^-5 for Theorem A13), so any
+      upward correction of A, A' or C_Lambda beyond the tolerances of Section 12.6
+      raises it. Proposition 2.1 and Theorem A13 rest on facts about v1.2's proofs, not
+      its statements (the review's F1).
       This is one AI review, a read with the constants recomputed; nothing here confirms
       more than that, and no human has checked the argument. The author reports AI
       reviews, analogue tests, extensive Claude assistance and no human peer review. The

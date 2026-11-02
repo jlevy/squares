@@ -958,7 +958,9 @@ issues:
           stage 4 review is
           docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md. Its
           findings were committed before it read the 8 October review, and it re-derived
-          both chains and the v1.2 lemmas they import.
+          both chains and the v1.2 lemmas they import, except two parts: v1.2's
+          Proposition 4.5 was read in full with its numbers recomputed, and the box labels
+          of v1.2's Lemma 4.10 were not decided.
           Verdict: accepted, for both preprints. The acceptance is conditional on the v1.2
           lemmas, and for Theorem A and the cube-root Theorem 1.1 on v1.2 Lemma 4.10's box
           computation, whose independent per-box labelling stays think-k3tk's. Eight notes,
@@ -969,7 +971,7 @@ issues:
           Tables 4 and 5 and its Section 12.6 sensitivity record, never run before; v1.2
           Lemma 4.9's finite check; and all 108 predicates of quarter_cube_constants.py.
           The explicit quarter-power threshold 4.62*10^12 rounds up k* =
-          4616673963026.36, with a relative margin of 1.05*10^-4 in the bracket B.
+          4616673963026.36, with a relative margin of 1.0463*10^-4 in the bracket B.
           The reply is drafted in think-u1kq for stage 7.
           Before: the intake merged in PRs #439 and #441 on 9 October. The 8 October review
           accepted the chains at source-review scope, conditional, and its addendum's

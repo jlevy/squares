@@ -365,7 +365,7 @@ The remaining claims also hold:
 | F1 | note | note | Q L528–563, L567–596, L616–636 | Proposition 2.1 and Theorem A13 rest on facts about [R]’s proofs, which [R] states in remarks, one of them marked unused; each fact is in [R]’s text |
 | F2 | note | note | Q L544–546 | One quotation of [R, Remark 4.11] drops an emphasis; the 19 statements and 12 sentences quoted are otherwise [R]’s text |
 | F3 | note | note | Q L177–186, L5258–5262; C L143–147 | What each theorem needs from [R]: Theorem A and C’s Theorem 1.1 need Lemma 4.10’s box computation (think-k3tk), which the all-pairs reading inherits; Theorem A13 and C’s Theorem 1.2 need only Lemma 4.9, whose finite check reproduces |
-| F4 | note | note | Q L140–145, L5329–5391 | The explicit threshold 4.62·10^12 has a relative margin of 1.05·10^-4 in B̄, and A13’s 1.74·10^-5; the record should carry it |
+| F4 | note | note | Q L140–145, L5329–5391 | The explicit threshold 4.62·10^12 has a relative margin of 1.0463·10^-4 in B̄, and A13’s 1.73857·10^-5; the record should carry it |
 | F5 | note | note | register, the Q and C rows | The side conditions do not say that k² − M(k) is the limit of W(x) from below; the C row’s corollary says “the quarter-power coefficient 0.1” for the bound 0.1 k^{1/4} |
 | F6 | note | note | C L498–511 | The two liminf constants are reached by a limit; explicit parameters give finite thresholds 10^24 and 10^22 |
 | F7 | note | minor | Q source README L64, paper L5430 | Q names its repository github.com/squarepacker/k2-minus-c-power; it was released as squarepacker/k2-minus-c-quarter |
@@ -427,7 +427,7 @@ emphasis. `q_quotes.py` decides both counts; it does not read the PDF.
 **F4. The threshold’s margin.** Theorem A’s threshold 4.62·10^12 is k* rounded up to
 three digits. The bracket B̄ = 38.5067952… may rise only to B_crit = 38.5108242… before
 condition (i) fails at k0, a relative 1.0463·10^-4. For Theorem A13 the relative margin
-is 1.7386·10^-5.
+is 1.73857·10^-5.
 
 Q says so in Section 1 and Section 12.6, and every number reproduces.
 The asymptotic constants c_∞ and c_∞^(13) do not depend on the margin.
