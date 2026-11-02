@@ -93,6 +93,8 @@ import mpmath
 import numpy as np
 import numpy.typing as npt
 
+from devtools.retained_data import write_retained
+
 #: mpmath's interval context; its functions are attached at run time.
 iv: Any = mpmath.iv
 
@@ -990,39 +992,51 @@ def main(argv: list[str] | None = None) -> int:
     pricing = commands.add_parser("price", help="time a random sample and extrapolate")
     pricing.add_argument("--sample", type=int, default=500)
     pricing.add_argument("--seed", type=int, default=20261102)
-    pricing.add_argument("--json", type=Path)
+    pricing.add_argument("--receipts", type=Path, help="directory for the two receipts")
     running = commands.add_parser("run", help="decide one worker's share, resumably")
     running.add_argument("--out", type=Path, required=True)
     running.add_argument("--worker", type=int, required=True)
     running.add_argument("--workers", type=int, required=True)
     summary = commands.add_parser("summarize", help="count the outcomes of a finished run")
     summary.add_argument("--out", type=Path, required=True)
-    summary.add_argument("--json", type=Path)
+    summary.add_argument("--receipts", type=Path, help="directory for the summary and rows")
     args = parser.parse_args(argv)
     if args.command == "price":
         report = price(args.sample, args.seed)
-        print(
-            json.dumps({key: value for key, value in report.items() if key != "rows"}, indent=2)
-        )
-        if args.json:
-            args.json.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+        head = {key: value for key, value in report.items() if key != "rows"}
+        print(json.dumps(head, indent=2))
+        if args.receipts:
+            stem = f"price-{args.sample}"
+            _write(args.receipts / f"{stem}.json", json.dumps(head, indent=2) + "\n")
+            _write(args.receipts / f"{stem}-rows.jsonl", _jsonl(report["rows"]))
         return 0
     if args.command == "run":
         if not 0 <= args.worker < args.workers:
             parser.error("the worker must lie in [0, workers)")
         return run(args.out, args.worker, args.workers)
     report = summarize(args.out)
-    print(
-        json.dumps(
-            {key: value for key, value in report.items() if key != "exceptions"}, indent=2
-        )
-    )
+    head = {key: value for key, value in report.items() if key != "exceptions"}
+    print(json.dumps(head, indent=2))
     print(f"{len(report['exceptions'])} boxes not certified as labelled")
     for row in report["exceptions"]:
         print(json.dumps(row))
-    if args.json:
-        args.json.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+    if args.receipts:
+        _write(args.receipts / "summary.json", json.dumps(report, indent=2) + "\n")
+        for name, rows in collect(args.out).items():
+            trimmed = [{k: v for k, v in row.items() if k != "list"} for row in rows]
+            _write(args.receipts / "labels" / f"{name}.jsonl", _jsonl(trimmed))
     return 0 if report["all_certified"] else 1
+
+
+def _jsonl(rows: list[dict[str, Any]]) -> str:
+    compact = (",", ":")
+    return "".join(json.dumps(row, sort_keys=True, separators=compact) + "\n" for row in rows)
+
+
+def _write(path: Path, text: str) -> None:
+    """Store a receipt plain, or as ``.gz`` above the packet's line threshold."""
+    stored = write_retained(path, text.encode("utf-8"))
+    print(f"wrote {stored}", file=sys.stderr)
 
 
 if __name__ == "__main__":
