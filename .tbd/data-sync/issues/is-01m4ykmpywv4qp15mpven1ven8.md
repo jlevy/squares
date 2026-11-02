@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610)"
 kind: task
 status: open
 priority: 1
-version: 17
+version: 18
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T01:43:17.212Z
-updated_at: 2026-11-02T16:46:45.580Z
+updated_at: 2026-11-02T18:02:59.986Z
 started_at: 2026-10-15T01:43:21.841Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#610 (bengreff, Benjamin Greff, opened 2026-10-15T01:16:36Z, labelled intake, no comments when read at 01:27Z): "Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)". The author's own certificate in his own repository, the case k = 10 after wand125's s(59) = 8 (#280, T-066) and his s(76) = 9 (#594, T-184). Followed the #594 import (think-osvq) step for step. Intake lane: Claude Opus 5.5 (tbd-moderate sub-agent), worktree agent-a33e48ec, branch claude/wizardly-meitner-wqn4x3-intake-610.
@@ -150,3 +150,5 @@ Correction (user-eb-intake-residue, 2026-10-16T05:47Z by date -u): the '~06:xxZ'
 Open for the coordinator when this note was first written: s(96) >= 10 follows from s(95) = 10 (and the cover's mass is below 96 too), which would also close n = 96. Done on 2 November 2026 in the same PR, after review A of #886 (its finding 1): T-191 and E-bengreff-610-cover-replay cover n = 95 and 96, as T-067 took in n = 78, and n-096.md is proved.
 
 2026-11-02 bold-ritchie-l30, after review A of #886: the draft above now credits *Greff after Daniel, Hosono*, names Hiroaki Hosono's 1993/200 (T-090), and reports n = 96, which this PR closes by the same cover.
+
+2026-11-02 bold-ritchie-l31 (intake lane L31, epic think-3guf; branch claude/bold-ritchie-xo28us-l31): the #610 follow-up owed after #886 is posted, https://github.com/jlevy/squares/issues/610#issuecomment-6584370994 (2026-11-02T17:58:13Z). Posted after Pages run 41493415710 deployed 86ed750b8 and its verify-deployment job 125447599931 passed 6039 of 6039 checks (result/t-191.html, cases/95.html and cases/96.html served HTTP 200). Rendered with check_requests --draft 610 from main 86ed750b8 and reconciled with L30's draft above: T-191 V3/C3, confirmed, reproduced with the producer's code (Daniel's zmx2 and zm_mixed.py), current, covering n = 95 and 96; credit Greff after Daniel, Hosono; zmx2's controls (drop-heaviest-point, drop-heaviest-segment) and zm_mixed.py's two uniform scalings (49831/50000, 49207/50000; exact pose captures 0.9999980 and 0.9999861), named as one mutation family; n = 95 proved, Hosono's 1993/200 (T-090) superseded; n = 96 proved by the same cover (total 94.79 < 96) with the 10 x 10 grid, Hosono's 997/100 (T-082) replaced, T-081 still reported; what remains (V4/C4: a second adversarial AI review, a human oversight record) with this bead, and the optional zmx2 --full sweep with think-eucc, not a V4/C4 step. Links squaremath.org and main; no closing keywords; read back byte-equal to the draft. The issue was closed on 26 October and stays closed. Recorded under #610's replies in the L31 records PR. Not closed: the coordinator closes this bead after that PR merges and check_bead_tree --before-close passes.

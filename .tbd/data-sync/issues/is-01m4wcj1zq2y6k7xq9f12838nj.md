@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
 status: open
 priority: 1
-version: 14
+version: 15
 delegate: null
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-11-02T16:46:44.995Z
+updated_at: 2026-11-02T18:02:58.000Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.
@@ -122,3 +122,5 @@ Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-me
 > **On `main`.** [`packing/frontier/RESULTS.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/RESULTS.md), [`packing/frontier/n-076.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/n-076.md), [the packet](https://github.com/jlevy/squares/blob/main/packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md).
 
 2026-11-02 bold-ritchie-l30, after review A of #886: the draft above now credits *Greff after Daniel, Hosono*, as bibliography.yaml and attribution.md give it, and names Hiroaki Hosono's 1793/200 (T-091) in place of wand125's.
+
+2026-11-02 bold-ritchie-l31 (intake lane L31, epic think-3guf; branch claude/bold-ritchie-xo28us-l31): the #594 follow-up owed after #886 is posted, https://github.com/jlevy/squares/issues/594#issuecomment-6584365975 (2026-11-02T17:57:59Z). Posted after Pages run 41493415710 deployed 86ed750b8 and its verify-deployment job 125447599931 passed 6039 of 6039 checks (result/t-184.html and cases/76.html served HTTP 200). Rendered with check_requests --draft 594 from main 86ed750b8 and reconciled with L30's draft above: T-184 V3/C3, confirmed, reproduced with the producer's code (Daniel's zmx2 and zm_mixed.py), current; credit Greff after Daniel, Hosono; zmx2's controls (drop-heaviest-point, drop-heaviest-segment) and zm_mixed.py's two uniform scalings (49979/50000, 49301/50000; exact pose captures 0.9999974 and 0.9999833), named as one mutation family; n = 76 proved, Hosono's 1793/200 (T-091) superseded; the second route retained as reported since 31 October, not run or audited; what remains (V4/C4: a second adversarial AI review, a human oversight record; the second route's audit) with this bead. Links squaremath.org and main; no closing keywords; read back byte-equal to the draft. The issue was closed on 26 October and stays closed. Recorded under #594's replies (and the stale "not yet retained" summary and second-route reason corrected) in the L31 records PR. Not closed: the coordinator closes this bead after that PR merges and check_bead_tree --before-close passes.
