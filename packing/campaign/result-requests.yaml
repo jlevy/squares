@@ -924,8 +924,9 @@ issues:
       arithmetic cover both releases. A strongest-tier stage 4 review of 2 November
       accepted both chains, with eight notes and no defect or gap. On its own intervals it
       reproduced every constant, the eight cube-root cases, and Q's supplementary tables.
-      No source program ran here. Independent per-box labelling of v1.2 Lemma 4.10
-      remains open (think-k3tk).
+      No source program ran here. The box labels of v1.2 Lemma 4.10 have an independent
+      second implementation, run on 2 November 2026 (think-k3tk, #884): every box
+      certified as labelled.
     read_through: '2026-10-07T12:35:34Z'
     results:
       - key: quarter-power-deficiency
@@ -1382,8 +1383,9 @@ issues:
           is retained whole at 25f645e8 (v1.1 plus its DOI line); Lemma 4.10's labelling was
           replayed in full with the producer's code, the constants re-decided in interval
           arithmetic, two controls refused, and one separately prompted AI review accepted
-          the argument with nine non-blocking findings. An independent labelling is
-          think-k3tk.
+          the argument with nine non-blocking findings. Lemma 4.10's labels have an
+          independent second implementation, run on 2 November 2026 (think-k3tk, #884):
+          every box certified as labelled.
         queued: false
       - key: k2-minus-c-v1.2
         claim: >-
@@ -1398,7 +1400,9 @@ issues:
           34 nine-overlap and 30 thirteen-overlap consequences, with falsifiable source-bound
           and invalid-domain controls. The scoped geometric review and maintained 25,929-comparison floating-gap
           checker complete the review slice under think-gcft, subject to final integration gates;
-          RF1 independent per-box labelling remains think-k3tk. The earlier v1.1 whole-source
+          RF1's independent per-box labelling has a second implementation, run on 2 November
+          2026 (think-k3tk, #884), which certified every box as labelled; this version's
+          Lemma 4.10 decides the same lists under the same model. The earlier v1.1 whole-source
           manifest does not certify this revision; only thirteen unchanged deciding leaf lists
           and their unchanged checking programs can reuse the earlier Lemma 4.10 replay.
         queued: true

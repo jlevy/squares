@@ -648,10 +648,10 @@ sources:
       68 byte-identical files explicitly linked to retained version 1.1 copies.
       The source reports extensive Claude assistance and no peer review; paper
       CC BY 4.0, code and data MIT. Its new numerical consequences are checked
-      independently, separately for nine- and thirteen-overlap routes. The
-      independent per-box labelling obligation was met on 2 November 2026 by
-      think-k3tk, every box certified as labelled; source custody and arithmetic do not
-      discharge it. No small-count bound is imported.
+      independently, separately for nine- and thirteen-overlap routes. Source custody
+      and arithmetic do not discharge the independent per-box labelling obligation; an
+      independent implementation met it on 2 November 2026 (think-k3tk, #884), with
+      every box certified as labelled. No small-count bound is imported.
   - key: '[squarepacker k2-minus-c-upper 2026]'
     authors: [Ryu]
     year: 2026
