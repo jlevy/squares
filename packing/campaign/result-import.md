@@ -35,10 +35,11 @@ W1 phase on one branch:
    and under **Regularization owed** each count whose drawing still waits for the strong
    generators, with the bead that owns its runs, and each exemption for the owner.
    It exits nonzero while any item lacks an open bead to own it, its bead has gone quiet
-   (no update in 7 days, unless it is held on beads still acted on, or a claim whose
-   session is gone), a regularization is owed on main, or it waits on something that has
-   already happened. Read **Needs Action** first, then **Not Checked**: a source the
-   sweep could not read is not a clean source.
+   (no update in 7 days, or a claim whose session is gone; a bead held on beads still
+   acted on waits instead, for at most 28 days), a regularization is owed on main, or it
+   waits on something that has already happened.
+   Read **Needs Action** first, then **Not Checked**: a source the sweep could not read
+   is not a clean source.
 2. **Own each item** as [stage 0](#stage-0-sweep) says: a bead for each new result, a
    recorded read where there is nothing to import, a new owner for any deferral whose
    bead has closed, a restart for any wait whose blocker has resolved, and an open bead
@@ -357,6 +358,8 @@ happened:
   has resolved. A bead declares it on a line of its own in its description or its notes,
   `blocked_on: jlevy/squares#305, think-wpuu`, read the same way; the last such line
   stands, so a note that adds `blocked_on: none` ends the wait.
+  Name everything the bead waits on, an author’s answer included, even though a line
+  that names anything but beads earns a held bead no exemption (next bullet).
   Without one, a sentence of the description in the present tense says it, such as
   “waits for jlevy/squares#305”, and a `blocks` dependency always does.
   Prose in the notes is never read: notes accumulate, and the sweep once took “was held
@@ -366,13 +369,27 @@ happened:
 - **A bead that waits is held, not claimed.** A bead that waits on another open bead
   carries `hold: blocked` and a `blocked_on:` line naming that bead, and claims no one:
   a claim left by a session that has ended reads as stalled two days on.
-  Held so, it waits while each bead it names is live and acted on, a blocker held in
-  turn waiting on its own; once one goes quiet or closes, the held bead shows again,
-  saying why. An owner’s decision that no other bead stands for is not held on a bead, so
-  it shows after seven days without an update, with every bead held on it.
-  On 2 November 2026 the sweep read 46 items under 17 such beads as stalled, each with a
-  dated wait note, most of them waiting on the owner’s D4 and D5 (`think-f2io`) or on
-  `think-llit`’s walk.
+  Held so, it waits while each bead it names is live, not paused and acted on, a blocker
+  held in turn waiting on its own.
+  Once one goes quiet, closes, is deferred or paused, or the chain loops, the held bead
+  shows again under **Needs Action**, naming that blocker; a paused bead is one the
+  owner has set aside, so nothing waiting on it is acted on.
+  Only a line that names nothing but beads earns the wait.
+  One that also names an issue, a pull request or an author’s answer gets no exemption,
+  since nothing in the store says whether anyone is acting on those: the bead’s own
+  silence counts after seven days, as it would unheld, and a question awaiting its
+  author is listed for a decision after 14 days.
+  A held bead waits 28 days at most without an update of its own, whatever its blockers
+  do, because a note on the bead it waits on is not its owner acting on it: without the
+  limit, a weekly note on `think-f2io` alone kept 8 of the 12 beads held on beads, and
+  their 25 items, waiting on 9 December 2026 after 37 days of their own silence.
+  The summary line counts the owned items whose bead is held on others, with the longest
+  such silence. An owner’s decision that no other bead stands for is not held on a bead,
+  so it shows after seven days without an update, with every bead held on it.
+  On 2 November 2026 the sweep read 46 items under 17 beads as stalled: 12 of those
+  beads were waits, now each held with a dated note, most of them on the owner’s D4 and
+  D5 (`think-f2io`) or on `think-llit`’s walk; `think-yf8j` is runnable, and four are
+  claims held by other identities.
 - **A drawing owed regularization names its bead.** Every new house is a new witness,
   and its count reads `pending` in `default-drawings.json` until both strong generators
   decide it, whichever import made the house: an adoption, a Kingbird catalogue intake
