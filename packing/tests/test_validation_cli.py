@@ -42,11 +42,11 @@ from tests import site_browser
 #: 2026-10-31: the zmx2 replays of Khalili and Gharabaghi's cover (T-252) proved n = 44 in
 #: both lanes, one more in every corpus. 2026-11-02: zm_mixed.py's scaled-cover controls
 #: brought Greff's covers (T-184, T-191) to C3, which proved n = 76 and 95, two more in
-#: every corpus.
+#: every corpus, and the s(95) cover's total below 96 proved n = 96 too (T-191), one more.
 FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
-    "n=1..100": (48, 52),
-    "n=1..200": (64, 136),
-    "n=1..324": (80, 244),
+    "n=1..100": (49, 51),
+    "n=1..200": (65, 135),
+    "n=1..324": (81, 243),
 }
 
 # Source-reported closures from T-062 to T-064, and T-066 and T-067 at n = 59 and 77,
@@ -56,7 +56,8 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 # Overbeck's candidate equality s(17) = L (T-153) closes n = 17 in this lane only.
 # 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-245) closes n = 12 in this
 # lane only. 2026-10-31: T-252 closes n = 44 in both lanes, so this one too. 2026-11-02:
-# T-184 and T-191 at C3 close n = 76 and 95 in both lanes.
+# T-184 and T-191 at C3 close n = 76 and 95 in both lanes; n = 96, which T-191 also
+# closes, was reported-proved already (T-081), so this lane does not move for it.
 REPORTED_LANE_SPLIT: dict[str, tuple[int, int]] = {
     "n=1..100": (51, 49),
     "n=1..200": (71, 129),

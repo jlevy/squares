@@ -7339,7 +7339,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-11-02'
   status: live
 - path: cases/38.html
   canonical: cases/38.html
@@ -7859,7 +7859,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-02'
   status: live
 - path: cases/97.html
   canonical: cases/97.html
@@ -19284,13 +19284,14 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-16'
+  lastmod: '2026-11-02'
   status: live
   identity:
     kind: optimality
     scope:
       n_values:
       - 95
+      - 96
     established: null
     attribution:
       source_keys:
@@ -19335,6 +19336,36 @@ urls:
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
       - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+  - date: '2026-11-02'
+    reason: The s(95) cover's total is below 96, so the result takes in n = 96 at C3, as T-067 took
+      in n = 78, and the verified bound there cites its replay (E-bengreff-610-cover-replay, whose
+      scope widens to 95 and 96); s(96) = 10 with the grid. The attribution, the cover and the value
+      at 95 are unchanged.
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 95
+      established: null
+      attribution:
+        source_keys:
+        - '[bengreff s95 certificate 2026-10-15]'
+        published: '2026-10-15'
+      builds_on: null
+      evidence:
+      - E-bengreff-610-cover-report
+      - E-bengreff-610-cover-replay
+      - E-basic-grid-upper
+      artifacts:
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_cover_audit.json
+      - packing/resources/web/bengreff-s95-certificate-2026-10-15/receipts/n95_zmx2_d4.log
+      - packing/devtools/replay_evand_zmx2.py
+      - packing/devtools/audit_evand_mixed_covers.py
+      - packing/devtools/check_basic_bounds.py
+      - docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
 - path: result/t-192.html
   canonical: result/t-192.html
   kind: result

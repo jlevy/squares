@@ -243,16 +243,17 @@ def test_a_superseded_report_is_held_to_the_reported_lane_alone(records: view.Re
     (T-045, T-070) held verified bounds equal to some of its values, the last at n = 52
     until T-082's certificate was decided there on 6 October, and every one is beaten in
     the reported lane, so it is superseded without a problem. The rule is held on the same
-    entry stating n = 96's verified 997/100, below the reported 10 there: superseded as a
-    report, and refused at a replayed rung."""
+    entry stating n = 12's verified 7943/2000, below the reported 4 there: superseded as a
+    report, and refused at a replayed rung. (Until 2 November 2026 it was held at n = 96's
+    997/100, below the reported 10, until T-191's cover proved s(96) = 10.)"""
     record = {**records.results["T-046"], "verification": "V0", "confirmation": "C0"}
     assert record["confirmation"] in check_standing.UNREPLAYED
     assert view.standing(record, records) == view.SUPERSEDED
     assert check_standing.problems(record, view.SUPERSEDED, records) == []
     assert "beaten at n = 18" in check_standing.summary(record, view.SUPERSEDED, records)
-    tied = {**record, "headline": "`s(96) ≥ 997/100`", "scope": {"n_values": [96]}}
+    tied = {**record, "headline": "`s(12) ≥ 7943/2000`", "scope": {"n_values": [12]}}
     assert check_standing.problems(tied, view.SUPERSEDED, records) == []
-    assert "equals the verified bound at n = 96" in check_standing.summary(
+    assert "equals the verified bound at n = 12" in check_standing.summary(
         tied, view.SUPERSEDED, records
     )
     replayed = {**tied, "confirmation": "C3"}

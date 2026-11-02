@@ -46,7 +46,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`34`](n-034.md) | `6` | `6` | `6` | `6` | proved | upper: replayed here; lower: replayed here | — | 2026-08-24 |
 | [`35`](n-035.md) | `6` | `6` | `6.0` | `6` | proved | upper: replayed here; lower: external proof (read here), audited here | — | 2026-08-24 |
 | [`36`](n-036.md) | `6` | `6` | `6.0` | `6` | proved | upper: replayed here; lower: replayed here | — | 2026-08-24 |
-| [`37`](n-037.md) | `6.59861960924436` | `164965490231109002904459261567/25000000000000000000000000000` | `2599/400` | `2599/400` | open | upper: replayed here; lower: replayed here | — | 2026-10-06 |
+| [`37`](n-037.md) | `6.59861960924436` | `164965490231109002904459261567/25000000000000000000000000000` | `2599/400` | `2599/400` | open | upper: replayed here; lower: replayed here | — | 2026-11-02 |
 | [`38`](n-038.md) | `6 + (1/2)√2` | `6 + (1/2)√2` | `1309/200` | `1309/200` | open | upper: replayed here; lower: replayed here | — | 2026-10-01 |
 | [`39`](n-039.md) | `6.81072208306864` | `6810722083068648851765886665183/1000000000000000000000000000000` | `133/20` | `133/20` | open | upper: replayed here; lower: replayed here | — | 2026-10-06 |
 | [`40`](n-040.md) | `4 + 2 √2` | `4 + 2 √2` | `3359/500` | `3359/500` | open | upper: replayed here; lower: replayed here | — | 2026-10-12 |
@@ -105,7 +105,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`93`](n-093.md) | `10` | `10` | `247/25` | `247/25` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |
 | [`94`](n-094.md) | `10` | `10` | `199/20` | `199/20` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |
 | [`95`](n-095.md) | `10` | `10` | `10` | `10` | proved | upper: replayed here; lower: replayed here | — | 2026-11-02 |
-| [`96`](n-096.md) | `10` | `10` | `10` | `997/100` | open | upper: replayed here; lower: replayed here | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`96`](n-096.md) | `10` | `10` | `10` | `10` | proved | upper: replayed here; lower: replayed here | — | 2026-11-02 |
 | [`97`](n-097.md) | `10` | `10` | `10` | `10` | proved | upper: replayed here; lower: replayed here | — | 2026-10-03 |
 | [`98`](n-098.md) | `10` | `10` | `10` | `10` | proved | upper: replayed here; lower: replayed here | — | 2026-08-24 |
 | [`99`](n-099.md) | `10` | `10` | `10` | `10` | proved | upper: replayed here; lower: external proof (read here), audited here | — | 2026-08-24 |

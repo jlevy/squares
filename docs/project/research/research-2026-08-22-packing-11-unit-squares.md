@@ -1203,7 +1203,7 @@ Use the structured form to query or plot; use these tables to read.
 | 80 | `9` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 81 | `9` | perfect square | classical | proved |
 | 95 | `10` | counting | Greff (2026) | proved |
-| 96 | `10` | counting | Evan Daniel (2026) | proof audit pending |
+| 96 | `10` | counting | Evan Daniel (2026) | proved |
 | 97 | `10` | counting | Evan Daniel (2026) | proved |
 | 98 | `10` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 99 | `10` | Nagamochi | Hiroshi Nagamochi (2005) | proved |

@@ -43327,7 +43327,7 @@ evidence:
       the pinned revision (181 CPU-hours at the source). zm_mixed.py has decided no other
       result here. The Lean wrapper takes the covering statement as a hypothesis and is
       unbuilt here.
-    source_reviewed: '2026-10-16'
+    source_reviewed: '2026-11-02'
   - id: E-evand-584-compositions-report
     claim: upper-bound
     scope: {n_values: [339, 364, 375]}
@@ -44523,7 +44523,7 @@ evidence:
     source_reviewed: '2026-10-15'
   - id: E-bengreff-610-cover-replay
     claim: lower-bound
-    scope: {n_values: [95]}
+    scope: {n_values: [95, 96]}
     assurance: verified
     method: interval-certified
     performed_by: repository
@@ -44577,7 +44577,7 @@ evidence:
         of: 10000
     proof:
       source: packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
-      theorem: No 95 unit squares fit in a square of side below 10; with the 10 x 10 grid, s(95) = 10.
+      theorem: No 95 unit squares fit in a square of side below 10, and so no 96; with the 10 x 10 grid, s(95) = s(96) = 10.
       scope: Unrestricted square packing with independent rotations, disjoint interiors and boundary contact allowed.
       pinpoints: >-
         s95-certificate/README.md and verify.sh; Daniel's certificates/s21/FORMAT.md (the
@@ -44590,7 +44590,7 @@ evidence:
         - Every closed unit square in [0,10]^2 captures mass at least 1, a point on its boundary and a segment along one of its edges counting in full, at every centre in [0, 5]^2 and u = tan(theta/2) in [0, 1/2]; zmx2 --d4 certifies 9,981 of the 10,000 root cells of 1/10 x 1/10 x 1/8, and zm_mixed.py, in exact rationals, the 304 cells of 1/20 x 1/20 x 1/32 that tile the other 19, so each cell rests on one checker.
         - The two checkers decide the same statement over the same region, closed squares with the boundary counted in full, which their composite needs and neither checks of the other.
         - The D4 reduction for measures carries the D4 region to every centre and angle (proved in Lean upstream for every side, not built here); no unreduced sweep was run, so both parts rest on it.
-        - Scaling a packing at side s < 10 by 10/s makes 95 pairwise disjoint closed unit squares, so a total below 95 excludes it.
+        - Scaling a packing at side s < 10 by 10/s makes 95 pairwise disjoint closed unit squares, so a total below 95 excludes it; a total below 96 excludes a packing of 96 the same way.
         - zmx2's acceptances are exact integer tests on binary64 enclosures widened outward (its Lemma R), which assumes correctly rounded IEEE-754 arithmetic without contraction or wider evaluation, as Rust guarantees for f64 on x86-64; zm_mixed.py's are exact rational. Neither program is formally verified.
       audit_record: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
     limitations: >-
@@ -44650,7 +44650,7 @@ evidence:
       6 CPU-hours with its follow-up, think-eucc) and no complete zm_mixed.py pass is at
       the pinned revision (about 190 CPU-hours here, think-zn7s). The Lean wrapper takes
       the covering statement as a hypothesis and is unbuilt here (think-ojr9).
-    source_reviewed: '2026-10-16'
+    source_reviewed: '2026-11-02'
   - id: E-wand125-continuous-n28-5745-report
     claim: lower-bound
     scope: {n_values: [28]}

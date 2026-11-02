@@ -124,10 +124,12 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # completed the confirmation of Greff's mixed covers (T-184, T-191), and n = 76 and
     # n = 95 adopted s(76) = 9 and s(95) = 10 in both lanes; both were open in both and
     # not Nagamochi-bounded, so the formal-open and reported-open counts fall by two in
-    # every corpus.
-    "n=1..100": (52, 49, 0),
-    "n=1..200": (136, 129, 0),
-    "n=1..324": (244, 233, 0),
+    # every corpus. The same day the s(95) cover, its total below 96, adopted s(96) = 10
+    # in the verified lane (T-191); n = 96 was reported-proved already (T-081), so only
+    # the formal-open count falls, by one in every corpus.
+    "n=1..100": (51, 49, 0),
+    "n=1..200": (135, 129, 0),
+    "n=1..324": (243, 233, 0),
 }
 #: n = 68, 103, 105, 110 and 131 left the exclusions on 2026-09-29, when their records
 #: moved from UnitSquare renderings to Francisco Couzo's packings (T-056), and n = 69, the

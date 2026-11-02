@@ -143,8 +143,8 @@ their own site sets only. 90 heterogeneous reports across a side band
 this register has ever been claimed from one. Rank on `prize` to choose where to
 look; measure and retain the run before believing any extrapolation.
 
-Of 324 registered cases, 80 are foreclosed and 244 are
-not. 77 of the foreclosed sit at the grid bound `ceil(sqrt(n))`,
+Of 324 registered cases, 81 are foreclosed and 243 are
+not. 78 of the foreclosed sit at the grid bound `ceil(sqrt(n))`,
 which is where the refuting grid fits — so that foreclosure costs nothing except
 where the case is open and its conjectured value is that bound.
 The other 3 — n = 5, 10, 11 — are foreclosed by their own packing:
@@ -398,7 +398,6 @@ lower bound, so nothing was on offer.
 | 12 | 4 | 3.9715 | 4.0000 | 3.9908 | 3.9908 | 3.9908 | ceiling | +0.0193 |
 | 17 | 5 | 4.6604 | 4.6755 | 4.9885 | 4.6710 | 4.6710 | cap | +0.0106 |
 | 31 | 6 | 5.9775 | 6.0000 | 5.9862 | 5.9862 | 5.9862 | ceiling | +0.0087 |
-| 96 | 10 | 9.9700 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0070 |
 
 ## Measured attainment
 
@@ -641,7 +640,6 @@ reaches, not this extrapolation.
 | 75 | 9 | 8.9400 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.0393 | 8.8037 | +0.0000 |
 | 93 | 10 | 9.8800 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0970 | 9.7819 | +0.0000 |
 | 94 | 10 | 9.9500 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0270 | 9.7819 | +0.0000 |
-| 96 | 10 | 9.9700 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0070 | 9.7819 | +0.0000 |
 | 116 | 11 | 10.8078 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.1670 | 10.7601 | +0.0000 |
 | 117 | 11 | 10.8562 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.1186 | 10.7601 | +0.0000 |
 | 138 | 12 | 11.7805 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.1919 | 11.7383 | +0.0000 |
@@ -743,6 +741,7 @@ reaches, not this extrapolation.
 | 80 | 9 | 9.0000 | 8.9793 | 8.9793 | ceiling |
 | 81 | 9 | 9.0000 | 8.9793 | 8.9793 | ceiling |
 | 95 | 10 | 10.0000 | 9.9770 | 9.9770 | ceiling |
+| 96 | 10 | 10.0000 | 9.9770 | 9.9770 | ceiling |
 | 97 | 10 | 10.0000 | 9.9770 | 9.9770 | ceiling |
 | 98 | 10 | 10.0000 | 9.9770 | 9.9770 | ceiling |
 | 99 | 10 | 10.0000 | 9.9770 | 9.9770 | ceiling |
