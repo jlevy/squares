@@ -1966,7 +1966,15 @@ uv run --frozen --all-extras --group dev python -m devtools.release_pin --update
 Nothing is rebuilt for it and no binary changes.
 Only a branch’s head has to agree; a merge keeps the branch’s data commit unless main’s
 data moved too, and then the merge is the data commit and the branch re-pins after
-merging `main`.
+merging `main`. When that merge conflicts at the pin, take either side, commit the
+merge, and re-pin: neither side’s value is right, since the merge is the new data
+commit.
+That re-pin is the pin’s own cost, not the conflict’s, so no merge driver or file
+layout removes it: `python -m devtools.merge_conflicts --since 2026-10-24 --data` found
+that all 45 merges conflicting at `DATA_REVISION` from 24 October to 2 November were
+data commits themselves, as were 62 of the 230 merges in all (think-l6lt). Only dropping
+the pin removes the re-pins, by having the site footer name the deployed commit instead,
+as the owner decided on 22 October (`think-070d`).
 
 <a id="release-assets-are-drawn-at-a-version-bump-or-on-demand"></a>
 

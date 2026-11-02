@@ -20,6 +20,12 @@ From `packing/`:
 Written for think-nrp6, the efficiency block that moved the no-public-change records out
 of one tuple in `release.py`; rerun it over a later window to see whether the block still
 conflicts.
+
+`--data` also asks, of every merge, whether it changed `sqpack.release`'s data against
+both its parents. Such a merge is itself the newest commit to change the data, so
+`DATA_REVISION`, pinned to that commit, had to be re-pinned after it whatever Git or a
+merge driver made of the pin's line: a conflict there costs only its hand resolution,
+and the re-pin and its CI cycle are the pin's own (think-l6lt).
 """
 
 from __future__ import annotations
@@ -34,6 +40,8 @@ from collections import Counter, defaultdict
 from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
+
+from sqpack import release
 
 REPO = Path(__file__).resolve().parents[2]
 _PULL_REQUEST = re.compile(r"^Merge pull request #(\d+)\b")
@@ -57,6 +65,8 @@ class Conflict:
     each conflicted path: `resolution` when it equals what the merge committed, `parses`
     when it differs but is still valid Python, `broken` when it is not, and `differs` for
     a path that is not Python."""
+    changed: bool | None = None
+    """With a `changed` pathspec, whether the merge changed it against both its parents."""
 
 
 @dataclass(frozen=True)
@@ -68,6 +78,10 @@ class Census:
     merges: int
     pull_requests: int
     conflicts: tuple[Conflict, ...]
+    changed: tuple[str, ...] = ()
+    """The pathspec each merge was asked about, if any."""
+    changed_merges: int | None = None
+    """How many of the `merges` changed `changed` against both their parents."""
 
 
 def _git(repo: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[bytes]:
@@ -175,6 +189,24 @@ def union_verdict(repo: Path, merge: str, first: str, second: str, path: str) ->
     return "parses"
 
 
+def changes_against_both(
+    repo: Path, merge: str, parents: Sequence[str], pathspec: Sequence[str]
+) -> bool:
+    """Whether `merge` changed `pathspec` against every one of its `parents`.
+
+    Such a merge is TREESAME to none of them there, so `git log -1 -- pathspec` names the
+    merge itself, and anything pinned to the newest commit to change those paths has to
+    move after it.
+    """
+    for parent in parents:
+        found = _git(repo, "diff", "--quiet", parent, merge, "--", *pathspec, check=False)
+        if found.returncode == 0:
+            return False
+        if found.returncode != 1:
+            raise ValueError(f"git diff failed: {_text(found.stderr).strip()}")
+    return True
+
+
 def census(
     repo: Path = REPO,
     *,
@@ -182,8 +214,11 @@ def census(
     since: str,
     paths: Sequence[str] = (),
     union: bool = False,
+    changed: Sequence[str] = (),
 ) -> Census:
-    """Recompute every two-parent merge reachable from `ref` since `since`."""
+    """Recompute every two-parent merge reachable from `ref` since `since`; with
+    `changed`, a pathspec, also ask of each whether it changed those paths against both
+    its parents."""
     owner: dict[str, int] = {}
     first_parent = _git(
         repo, "log", "--first-parent", "--merges", f"--since={since}", "--format=%H %s", ref
@@ -203,12 +238,15 @@ def census(
     ).stdout
     rows = _text(listed).splitlines()
     conflicts = []
+    moved = 0
     for row in rows:
         commit, parents, date, subject = row.split("\t", 3)
         sides = parents.split()
         if len(sides) != 2:
             continue
         first, second = sides
+        both = changes_against_both(repo, commit, sides, changed) if changed else None
+        moved += bool(both)
         blocks = conflicted_blocks(repo, first, second, paths=paths)
         if not blocks:
             continue
@@ -220,8 +258,25 @@ def census(
             if union
             else ()
         )
-        conflicts.append(Conflict(commit, date, subject, owner.get(commit), blocks, verdicts))
-    return Census(ref, since, len(rows), len(set(owner.values())), tuple(conflicts))
+        conflicts.append(
+            Conflict(commit, date, subject, owner.get(commit), blocks, verdicts, both)
+        )
+    return Census(
+        ref,
+        since,
+        len(rows),
+        len(set(owner.values())),
+        tuple(conflicts),
+        tuple(changed),
+        moved if changed else None,
+    )
+
+
+def _described(pathspec: Sequence[str]) -> str:
+    """A pathspec as a reader would say it: its paths, and how many it excludes."""
+    excluded = sum(part.startswith(":(exclude)") for part in pathspec)
+    named = ", ".join(part for part in pathspec if not part.startswith(":(exclude)"))
+    return named + (f" (less {excluded} exclusions)" if excluded else "")
 
 
 def summary(report: Census) -> list[str]:
@@ -237,11 +292,23 @@ def summary(report: Census) -> list[str]:
             f"{report.pull_requests} pull requests; {len(report.conflicts)} conflicted"
         )
     ]
+    described = _described(report.changed)
+    if report.changed_merges is not None:
+        lines.append(
+            f"{report.changed_merges} of {report.merges} merges changed {described} against "
+            "both parents: each was then the newest commit to change it, so a pin to that "
+            "commit had to move after the merge, whatever Git made of the text"
+        )
     for (path, block), found in sorted(merges.items(), key=lambda item: -len(item[1])):
         numbers = sorted({c.pull_request for c in found if c.pull_request is not None})
         sole = sum(len(conflict.blocks) == 1 for conflict in found)
+        moved = (
+            f", {sum(bool(c.changed) for c in found)} changing {described} against both parents"
+            if report.changed_merges is not None
+            else ""
+        )
         lines.append(
-            f"{path} :: {block}: {len(found)} merges ({sole} conflicting nowhere else) "
+            f"{path} :: {block}: {len(found)} merges ({sole} conflicting nowhere else{moved}) "
             f"in {len(numbers)} PRs ({', '.join(f'#{number}' for number in numbers)})"
         )
     verdicts: dict[str, Counter[str]] = defaultdict(Counter)
@@ -281,11 +348,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="Also say what a merge=union driver would have made of each conflicted path",
     )
+    parser.add_argument(
+        "--data",
+        action="store_true",
+        help="Also count the merges that changed the data against both parents, after "
+        "which DATA_REVISION had to be re-pinned whatever the merge made of its line",
+    )
     parser.add_argument("--json", action="store_true")
     options = parser.parse_args(argv)
     try:
         report = census(
-            ref=options.ref, since=options.since, paths=options.path, union=options.union
+            ref=options.ref,
+            since=options.since,
+            paths=options.path,
+            union=options.union,
+            changed=release.data_pathspec() if options.data else (),
         )
     except ValueError as error:
         print(f"merge conflicts: {error}", file=sys.stderr)
