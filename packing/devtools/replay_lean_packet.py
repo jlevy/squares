@@ -2,7 +2,7 @@
 """Build a retained packet's Lean proof here, from the retained bytes, under a receipt.
 
 Three routes, each a formalization the register holds at ``V0``/``C0`` until a build here
-binds its theorems' axioms to a receipt:
+binds its theorems' statements and axioms to a receipt:
 
 ``chelokot-small-n``
     ``T-238``, chelokot/square-packing-archive at ``753079eb``: ``Records.Square5``,
@@ -24,12 +24,15 @@ Subcommands, in order (``DIR`` outside the repository)::
                                      wand125-n21 only: the source's generator, then
                                      ``compare``
     compare ROUTE --out DIR --receipts R
-                                     the generated files against data-sha256.txt, written
-                                     with gen.log's footer as R/generation.json
+                                     the generated files against data-sha256.txt and
+                                     scanned for escapes, written with gen.log's footer
+                                     and census as R/generation.json
     run ROUTE --out DIR --receipts R [--cpus 2,3] [--jobs 1]
-                                     lake exe cache get, lake build, the axiom probe and
-                                     the negative controls; writes R/receipt.json
+                                     lake exe cache get, lake build, the probe and the
+                                     negative controls; writes R/receipt.json
     check ROUTE [--receipts R]       validate a retained receipt offline
+    check-generation ROUTE [--receipts R]
+                                     validate a retained generation receipt offline
 
 ``stage`` copies every file from the retained packets in the working tree, whose
 committed bytes ``devtools.acquire_source --check`` holds, including the files a packet
@@ -39,15 +42,22 @@ and build pins whose toolchain and package revisions are not the receipt's; for
 ``wand125-n21`` the generator and its oracle stand in for the clone of
 evand/square-packing that ``build_zero_margin.sh`` makes, bound by their blobs at
 ``6aa82ba4``. It counts kernel-escape tokens in the staged sources and the lakefile,
-writes the probe that prints each theorem's statement and axioms, and writes the
-controls.
+and writes the probe and the controls.
 
-``run`` accepts a theorem only with exactly ``propext``, ``Classical.choice`` and
-``Quot.sound``. Each route carries three negative controls that the run must refuse: a
-mutated statement proved by the theorem's own term, which Lean must reject; a copy of a
-theorem module with one statement made false, which Lean must reject; and the theorem
-restated with ``sorry``, which Lean accepts with a warning and whose ``sorryAx`` the
-acceptance must refuse.
+``run`` stops before any ``lake`` call when the stage does not verify, and, for a route
+with a generator, when a generated file is not the one the listing names or carries an
+escape token. It runs the probe and the controls with the lakefile's ``leanOptions`` as
+``-D`` flags, as ``lake build`` would. It accepts a theorem only when ``#check`` prints
+the registered statement (compared without whitespace, ``Real.sqrt`` read as ``√``) and
+``#print axioms`` exactly ``propext``, ``Classical.choice`` and ``Quot.sound``; and only
+when the measured ``lean --version`` names the route's toolchain and commit and Mathlib
+resolves at its pinned commit. Each route carries three negative controls, each refused
+only for its own reason: a mutated statement given the theorem's own term, which Lean
+must reject as a type mismatch; a copy of a theorem module with one statement made
+false, whose first error must fall at or after the mutated line while its unmutated
+twin, run the same way, passes; and the statement proved by ``sorry``, which Lean must
+accept with its warning and whose ``sorryAx`` the acceptance must refuse. An error
+naming an unknown module, identifier, constant or file refuses nothing.
 
 Every command runs under ``devtools.replay_receipt``, whose header and footer record its
 argv, exit, wall and CPU (user plus system of the command and its children); with
@@ -65,16 +75,19 @@ Usage, from ``packing/``::
 from __future__ import annotations
 
 import argparse
+import ast
 import gzip
 import hashlib
 import json
 import os
 import platform
 import re
+import shlex
 import shutil
 import subprocess
 import sys
-from collections.abc import Sequence
+import tomllib
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
@@ -90,16 +103,39 @@ from sqpack import retained_json
 
 REPO = Path(__file__).resolve().parents[2]
 WEB = REPO / "packing/resources/web"
-KIND = "lean-packet-replay/1"
-GENERATION_KIND = "lean-packet-generation/1"
+KIND = "lean-packet-replay/2"
+GENERATION_KIND = "lean-packet-generation/2"
 STANDARD_AXIOMS = ("propext", "Classical.choice", "Quot.sound")
 RECEIPT_NAME = "receipt.json"
 GENERATION_NAME = "generation.json"
 #: Where ``check`` looks when ``--receipts`` is not given, under the route's packet.
 RECEIPT_DIR = "receipts/lean-build"
 
+#: ``devtools.lean_closure``'s tokens, then two it misses: an ``axiom`` behind an
+#: attribute or a modifier (``private axiom``, ``@[simp] axiom``), and ``extern`` after
+#: another attribute (``@[inline, extern …]``). The closure tuple stays as it is, since
+#: its committed receipts are its output.
+PACKET_ESCAPES = (
+    *ESCAPES,
+    (
+        r"^\s*(?:@\[[^\]]*\]\s*|(?:private|protected|noncomputable|unsafe|partial|nonrec)\s+)+"
+        r"axiom\b"
+    ),
+    r"@\[[^\]]*?[,\s]extern\b",
+)
+#: Lakefile text that would switch the kernel's check off or trust compiled code.
+LAKEFILE_ESCAPES = (
+    r"\bdebug\.",
+    r"skipKernelTC",
+    r"trustCompiler",
+    r"\breduce(?:Bool|Nat)\b",
+    r"\bofReduceBool\b",
+    r"\bimplemented_by\b",
+)
+
 _DEPENDS = re.compile(r"'([^']+)' depends on axioms: \[([^\]]*)\]", re.DOTALL)
 _NO_AXIOMS = re.compile(r"'([^']+)' does not depend on any axioms")
+_CHECKED = re.compile(r"^(\S+) : (.*)$")
 #: Output by which a control failed for a reason other than its mutation.
 _SETUP_FAULTS = (
     "unknown module prefix",
@@ -107,7 +143,12 @@ _SETUP_FAULTS = (
     "does not exist",
     "unknown package",
     "file not found",
+    "unknown identifier",
+    "unknown constant",
+    "unknown namespace",
 )
+_SORRY_WARNING = "declaration uses 'sorry'"
+_CENSUS = re.compile(r"^wrote \S+: (\d+) chunks in (\d+) parts, (\{[^}]*\})", re.MULTILINE)
 
 
 @dataclass(frozen=True)
@@ -126,12 +167,15 @@ class Staged:
 
 @dataclass(frozen=True)
 class Control:
-    """A negative control the run must refuse.
+    """A negative control the run must refuse, for the reason it was built to show.
 
-    ``refused`` controls must make Lean exit non-zero with an error of their own, not a
-    setup fault; ``sorry`` controls must print ``sorryAx`` among a theorem's axioms.
-    A control with ``source`` is that staged file with ``old`` replaced by ``new``, where
-    ``old`` occurs exactly once; otherwise ``text`` is the whole file.
+    ``refused`` controls must make Lean exit non-zero with an error in the control's own
+    file. With ``text``, the control is that whole file and its output must match
+    ``expect``. With ``source``, it is that staged file with ``old`` replaced by ``new``
+    (``old`` occurs exactly once): its first error must fall at or after the mutated
+    line, and its twin, the unmutated copy, must pass when run the same way. ``sorry``
+    controls must pass with Lean's ``sorry`` warning and print ``sorryAx`` among the
+    axioms, which acceptance refuses.
     """
 
     name: str
@@ -139,6 +183,7 @@ class Control:
     path: str
     what: str
     text: str = ""
+    expect: str = ""
     source: str = ""
     old: str = ""
     new: str = ""
@@ -146,12 +191,14 @@ class Control:
 
 @dataclass(frozen=True)
 class Generation:
-    """The source's generator step and the staged listing its output must match."""
+    """The source's generator step, the staged listing its output must match, and the
+    census the source reports for it."""
 
     cwd: str
     argv: tuple[str, ...]
     outdir: str
     listing: str
+    census: Mapping[str, int] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -163,14 +210,18 @@ class Route:
     upstream: str
     project: str
     toolchain: str
+    #: The commit ``lean --version`` names for the toolchain's release.
+    lean_commit: str
     mathlib: str
     #: The ``devtools.lean_closure`` receipt of the upstream commit, repository-relative.
     closure: str
     files: tuple[Staged, ...]
-    #: ``lake build`` invocations, in order; ``PARTS`` expands to one per generated part.
+    #: ``lake build`` invocations, in order; ``PARTS`` expands to the generated parts.
     builds: tuple[tuple[str, ...], ...]
     probe_imports: tuple[str, ...]
     theorems: tuple[str, ...]
+    #: What ``#check @name`` must print after ``name :`` for each main theorem.
+    statements: Mapping[str, str]
     controls: tuple[Control, ...]
     generation: Generation | None = None
     parts_glob: str = ""
@@ -178,6 +229,9 @@ class Route:
 
 
 PARTS = "PARTS"
+#: The commits of the two Lean releases, from the tags at leanprover/lean4.
+LEAN_V4_33_0 = "d8b18978322de05a8f3dba51ef03cf5461676c17"
+LEAN_V4_33_1 = "819816b2e0a3bf405af45ae5c7af2491d8f5bee6"
 
 
 def _closure(receipt: str) -> dict[str, Any]:
@@ -214,6 +268,7 @@ def _chelokot() -> Route:
     ]
     files = tuple(Staged(name, f"{base}/{name}", blob=blobs.get(name)) for name in names)
     ns = "SquarePackingArchive.Records"
+    goebel = "(2 + √2 / 2)"
     return Route(
         name="chelokot-small-n",
         result="T-238",
@@ -222,6 +277,7 @@ def _chelokot() -> Route:
         upstream="chelokot/square-packing-archive 753079eb37d8d16225a5dc1f56e493a3c3b243f4",
         project="formal",
         toolchain="leanprover/lean4:v4.33.0",
+        lean_commit=LEAN_V4_33_0,
         mathlib="db584cd6d46c92f209a44c0f1c829460d327499d",
         closure=closure,
         files=files,
@@ -236,6 +292,14 @@ def _chelokot() -> Route:
             f"{ns}.Square5.s5_ge_goebel",
             f"{ns}.Square5.s5_eq_goebel",
         ),
+        statements={
+            f"{ns}.SquareNumbers.s4_eq_two": "SquarePackingArchive.IsMinimumSide 4 2",
+            f"{ns}.NearSquare.s2_eq_two": "SquarePackingArchive.IsMinimumSide 2 2",
+            f"{ns}.NearSquare.s3_eq_two": "SquarePackingArchive.IsMinimumSide 3 2",
+            f"{ns}.Square5.s5_le_goebel": f"SquarePackingArchive.HasPacking 5 {goebel}",
+            f"{ns}.Square5.s5_ge_goebel": f"SquarePackingArchive.IsLowerBound 5 {goebel}",
+            f"{ns}.Square5.s5_eq_goebel": f"SquarePackingArchive.IsMinimumSide 5 {goebel}",
+        },
         controls=(
             Control(
                 name="mutated-statement",
@@ -248,6 +312,7 @@ def _chelokot() -> Route:
                     "    SquarePackingArchive.IsMinimumSide 5 (2 + Real.sqrt 2 / 3) :=\n"
                     f"  {ns}.Square5.s5_eq_goebel\n"
                 ),
+                expect="type mismatch",
             ),
             Control(
                 name="mutated-module",
@@ -301,6 +366,16 @@ def _evand_rect() -> Route:
         )
         for name in names
     )
+    modules = (
+        "Sqpack.Rect",
+        "Sqpack.Rect3",
+        "Sqpack.Rect4",
+        "Sqpack.Rect5Pts",
+        "Sqpack.Rect5Pack",
+    )
+    # As the pretty-printer writes them: redundant parentheses dropped, the named
+    # hypotheses as arrows, and the implicit sides as one binder group.
+    rp = "SquarePacking.RectPacks"
     return Route(
         name="evand-rect-small-n",
         result="T-238",
@@ -309,25 +384,12 @@ def _evand_rect() -> Route:
         upstream="evand/square-packing 7051f4eabf7f9b2509ad1e7cc296f57d19482027",
         project="lean",
         toolchain="leanprover/lean4:v4.33.1",
+        lean_commit=LEAN_V4_33_1,
         mathlib="0df444a360eaa60ab8c11dca51a86af692955474",
         closure=closure,
         files=files,
-        builds=(
-            (
-                "Sqpack.Rect",
-                "Sqpack.Rect3",
-                "Sqpack.Rect4",
-                "Sqpack.Rect5Pts",
-                "Sqpack.Rect5Pack",
-            ),
-        ),
-        probe_imports=(
-            "Sqpack.Rect",
-            "Sqpack.Rect3",
-            "Sqpack.Rect4",
-            "Sqpack.Rect5Pts",
-            "Sqpack.Rect5Pack",
-        ),
+        builds=(modules,),
+        probe_imports=modules,
         theorems=(
             "SquarePacking.rect2_iff",
             "SquarePacking.rect3_iff",
@@ -335,6 +397,29 @@ def _evand_rect() -> Route:
             "SquarePacking.rect5_pts_lower",
             "SquarePacking.rect5_upper",
         ),
+        statements={
+            "SquarePacking.rect2_iff": (
+                f"∀ {{w h : ℝ}}, {rp} 2 w h ↔ 1 ≤ w ∧ 1 ≤ h ∧ (2 ≤ w ∨ 2 ≤ h)"
+            ),
+            "SquarePacking.rect3_iff": (
+                f"∀ {{w h : ℝ}}, {rp} 3 w h ↔ 1 ≤ w ∧ 1 ≤ h ∧ (2 ≤ w ∧ 2 ≤ h ∨ 3 ≤ w ∨ "
+                "3 ≤ h ∨ h < 2 ∧ 4 + 2 * √2 ≤ w + 2 * h ∨ w < 2 ∧ 4 + 2 * √2 ≤ h + 2 * w)"
+            ),
+            "SquarePacking.rect4_iff": (
+                f"∀ {{w h : ℝ}}, {rp} 4 w h ↔ 1 ≤ w ∧ 1 ≤ h ∧ (2 ≤ w ∧ 2 ≤ h ∨ 4 ≤ w ∨ "
+                "4 ≤ h ∨ h < 2 ∧ SquarePacking.Fried4 w h ∨ w < 2 ∧ SquarePacking.Fried4 h w)"
+            ),
+            "SquarePacking.rect5_pts_lower": (
+                "∀ {a b : ℝ}, 2 ≤ a → 2 ≤ b → a < 2 * √2 → b < 2 * √2 → a + b < 4 + √2 → "
+                f"¬{rp} 5 a b"
+            ),
+            "SquarePacking.rect5_upper": (
+                "∀ {w h : ℝ}, 1 ≤ w → 1 ≤ h → 5 ≤ w ∨ 5 ≤ h ∨ 2 ≤ w ∧ 3 ≤ h ∨ "
+                "3 ≤ w ∧ 2 ≤ h ∨ 2 ≤ w ∧ 2 ≤ h ∧ 4 + √2 ≤ w + h ∨ "
+                "√2 ≤ h ∧ h ≤ 2 ∧ 4 + 6 * √2 ≤ w + 4 * h ∨ "
+                f"√2 ≤ w ∧ w ≤ 2 ∧ 4 + 6 * √2 ≤ h + 4 * w → {rp} 5 w h"
+            ),
+        },
         controls=(
             Control(
                 name="mutated-statement",
@@ -348,6 +433,7 @@ def _evand_rect() -> Route:
                     "      1 ≤ w ∧ 1 ≤ h ∧ (2 ≤ w ∨ 3 / 2 ≤ h) :=\n"
                     "  SquarePacking.rect2_iff\n"
                 ),
+                expect="type mismatch",
             ),
             Control(
                 name="mutated-module",
@@ -441,6 +527,7 @@ def _wand125_n21() -> Route:
         ),
         project="s12/lean",
         toolchain="leanprover/lean4:v4.33.1",
+        lean_commit=LEAN_V4_33_1,
         mathlib="0df444a360eaa60ab8c11dca51a86af692955474",
         closure=closure,
         files=files,
@@ -448,6 +535,10 @@ def _wand125_n21() -> Route:
         parts_glob="Sqpack/N21PtsZ/Part*.lean",
         probe_imports=("Sqpack.N21PtsLower",),
         theorems=("SquarePacking.n21pts_ge_5", "SquarePacking.n21pts_eq_5"),
+        statements={
+            "SquarePacking.n21pts_ge_5": "5 ≤ SquarePacking.minSide 21",
+            "SquarePacking.n21pts_eq_5": "SquarePacking.minSide 21 = 5",
+        },
         controls=(
             Control(
                 name="mutated-statement",
@@ -459,6 +550,7 @@ def _wand125_n21() -> Route:
                     "theorem control_statement : SquarePacking.minSide 21 = 4 :=\n"
                     "  SquarePacking.n21pts_eq_5\n"
                 ),
+                expect="type mismatch",
             ),
             Control(
                 name="mutated-module",
@@ -500,6 +592,8 @@ def _wand125_n21() -> Route:
             ),
             outdir="s12/lean/Sqpack/N21PtsZ",
             listing="data-sha256.txt",
+            # The census the source's declaration reports for its run.
+            census={"chunks": 2076, "parts": 64, "Z": 59433, "E": 5876, "C": 5591},
         ),
         notes=(
             (
@@ -527,14 +621,48 @@ def _read(path: Path) -> bytes:
     return gzip.decompress(data) if path.suffix == ".gz" else data
 
 
+def _origin(spec: Route, staged_path: str) -> Path:
+    return REPO / next(s.origin for s in spec.files if s.path == staged_path)
+
+
 def escape_counts(paths: Sequence[Path]) -> dict[str, int]:
     """Occurrences of each kernel-escape token in these Lean sources, comments aside."""
-    counts: dict[str, int] = dict.fromkeys(ESCAPES, 0)
+    counts: dict[str, int] = dict.fromkeys(PACKET_ESCAPES, 0)
     for path in paths:
         text = strip_comments(path.read_text(encoding="utf-8"))
-        for token in ESCAPES:
+        for token in PACKET_ESCAPES:
             counts[token] += len(re.findall(token, text, flags=re.MULTILINE))
     return counts
+
+
+def lakefile_escapes(path: Path) -> dict[str, int]:
+    """Occurrences of each lakefile escape token, ``#`` comments aside."""
+    text = re.sub(r"#.*$", "", path.read_text(encoding="utf-8"), flags=re.MULTILINE)
+    return {token: len(re.findall(token, text)) for token in LAKEFILE_ESCAPES}
+
+
+def _flatten(table: Mapping[str, Any], prefix: str = "") -> dict[str, Any]:
+    out: dict[str, Any] = {}
+    for key, value in table.items():
+        name = f"{prefix}{key}"
+        if isinstance(value, Mapping):
+            out.update(_flatten(value, f"{name}."))
+        else:
+            out[name] = value
+    return out
+
+
+def lean_option_flags(lakefile: Path) -> list[str]:
+    """The package's and its libraries' ``leanOptions`` as ``lean -D`` flags, as
+    ``lake build`` passes them; TOML's dotted keys arrive as nested tables."""
+    data = tomllib.loads(lakefile.read_text(encoding="utf-8"))
+    options = _flatten(data.get("leanOptions", {}))
+    for library in data.get("lean_lib", []):
+        options.update(_flatten(library.get("leanOptions", {})))
+    return [
+        f"-D{key}={str(value).lower() if isinstance(value, bool) else value}"
+        for key, value in options.items()
+    ]
 
 
 def probe_text(spec: Route) -> str:
@@ -543,6 +671,17 @@ def probe_text(spec: Route) -> str:
     lines += [f"#check @{name}" for name in spec.theorems]
     lines += [f"#print axioms {name}" for name in spec.theorems]
     return "\n".join(lines) + "\n"
+
+
+def twin_path(control: Control) -> str:
+    """Where a ``source`` control's unmutated twin is written."""
+    return control.path.removesuffix(".lean") + "Twin.lean"
+
+
+def mutated_line(control: Control, source: Path) -> int:
+    """The 1-based line of ``source`` on which the mutation starts."""
+    text = source.read_text(encoding="utf-8")
+    return text[: text.index(control.old)].count("\n") + 1
 
 
 def control_text(control: Control, stage_dir: Path) -> str:
@@ -577,13 +716,16 @@ def stage(spec: Route, out: Path) -> dict[str, Any]:
     (project / "Probe.lean").write_text(probe_text(spec), encoding="utf-8")
     for control in spec.controls:
         (project / control.path).write_text(control_text(control, out), encoding="utf-8")
+        if control.source:
+            twin = (out / control.source).read_text(encoding="utf-8")
+            (project / twin_path(control)).write_text(twin, encoding="utf-8")
     return verify(spec, out)
 
 
 def verify(spec: Route, out: Path) -> dict[str, Any]:
-    """Bind the staged tree under ``out``: each module's upstream Git blob, the build
-    pins against the closure receipt, the files the source's script pins, the
-    kernel-escape scan, and the probe and controls the route writes."""
+    """Bind the staged tree under ``out``: each file's upstream Git blob, the build
+    pins against the closure receipt, the kernel-escape scans of the sources and the
+    lakefile, and the probe, controls and twins the route writes."""
     problems: list[str] = []
     files: list[dict[str, Any]] = []
     for staged in spec.files:
@@ -612,6 +754,10 @@ def verify(spec: Route, out: Path) -> dict[str, Any]:
     problems += [
         f"{count} x {token} in the staged sources" for token, count in found.items() if count
     ]
+    lakefile = lakefile_escapes(project / "lakefile.toml")
+    problems += [
+        f"{count} x {token} in the lakefile" for token, count in lakefile.items() if count
+    ]
     probe = project / "Probe.lean"
     if not probe.is_file() or probe.read_text(encoding="utf-8") != probe_text(spec):
         problems.append("Probe.lean is not the route's probe")
@@ -619,6 +765,11 @@ def verify(spec: Route, out: Path) -> dict[str, Any]:
         path = project / control.path
         if not path.is_file() or path.read_text(encoding="utf-8") != control_text(control, out):
             problems.append(f"{control.path} is not the route's control")
+        if control.source:
+            twin = project / twin_path(control)
+            source = (out / control.source).read_text(encoding="utf-8")
+            if not twin.is_file() or twin.read_text(encoding="utf-8") != source:
+                problems.append(f"{twin_path(control)} is not the unmutated {control.source}")
     return {
         "route": spec.name,
         "upstream": spec.upstream,
@@ -628,6 +779,8 @@ def verify(spec: Route, out: Path) -> dict[str, Any]:
         "mathlib": revs.get("mathlib"),
         "files": files,
         "kernel_escapes": found,
+        "lakefile_escapes": lakefile,
+        "lean_options": lean_option_flags(project / "lakefile.toml"),
         "probe": f"{spec.project}/Probe.lean",
         "notes": list(spec.notes),
     }
@@ -647,10 +800,42 @@ def _taskset(cpus: str | None) -> list[str]:
     return ["taskset", "-c", cpus] if cpus else []
 
 
+def generated(spec: Route, out: Path) -> dict[str, Any]:
+    """The generated files under ``out`` against the staged listing that names them
+    (they are build products no Git revision names), and their kernel-escape scan."""
+    gen = spec.generation
+    if gen is None:
+        msg = f"{spec.name} has no generation step"
+        raise SystemExit(msg)
+    outdir = out / gen.outdir
+    listing = out / gen.listing
+    want = _listing(listing.read_text(encoding="utf-8"))
+    paths = sorted(outdir.glob("*.lean")) if outdir.is_dir() else []
+    got = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in paths}
+    same = sorted(name for name in want.keys() & got.keys() if want[name] == got[name])
+    escapes = escape_counts(paths)
+    report: dict[str, Any] = {
+        "listing": gen.listing,
+        "listing_blob": git_blob(listing.read_bytes()),
+        "listed": len(want),
+        "generated": len(got),
+        "matched": len(same),
+        "differing": sorted((want.keys() & got.keys()) - set(same)),
+        "missing": sorted(want.keys() - got.keys()),
+        "extra": sorted(got.keys() - want.keys()),
+        "generated_bytes": sum(path.stat().st_size for path in paths),
+        "escapes": escapes,
+    }
+    report["ok"] = report["matched"] == report["listed"] == report["generated"] > 0 and not any(
+        escapes.values()
+    )
+    return report
+
+
 def generate(
     spec: Route, out: Path, receipts: Path, *, nproc: int, cpus: str | None
 ) -> dict[str, Any]:
-    """Run the route's generator under a receipt and compare its files with the list."""
+    """Run the route's generator under a receipt, then ``compare``."""
     gen = spec.generation
     if gen is None:
         msg = f"{spec.name} has no generation step"
@@ -676,6 +861,7 @@ _STARTED = re.compile(r"^# host: .*; started (\S+)$", re.MULTILINE)
 _FINISHED = re.compile(
     r"^# finished (\S+); exit (-?\d+); wall ([\d.]+) s; CPU ([\d.]+) s", re.MULTILINE
 )
+_RUN_FIELDS = ("command", "started_utc", "ended_utc", "exit", "wall_seconds", "cpu_seconds")
 
 
 def footer(log: Path) -> dict[str, Any]:
@@ -699,53 +885,57 @@ def footer(log: Path) -> dict[str, Any]:
     }
 
 
-def compare(spec: Route, out: Path, receipts: Path) -> dict[str, Any]:
-    """Compare the generated files under ``out`` with the source's listing, and write
-    the generation receipt from them and the run's ``gen.log``.
+def census(log_text: str) -> dict[str, int] | None:
+    """The generator's own count of what it wrote: chunks, parts and the Z, E and C
+    leaves, from its ``wrote`` line."""
+    match = _CENSUS.search(log_text)
+    if match is None:
+        return None
+    counts = ast.literal_eval(match.group(3))
+    return {
+        "chunks": int(match.group(1)),
+        "parts": int(match.group(2)),
+        **{key: int(counts[key]) for key in ("Z", "E", "C") if key in counts},
+    }
 
-    The generated modules are build products no Git revision names (88 MB, not
-    retained), so the source's ``data-sha256.txt`` is what names them.
-    """
+
+def generator_command(spec: Route, command: str) -> bool:
+    """Whether ``command`` is a Python interpreter running the route's generator."""
     gen = spec.generation
     if gen is None:
-        msg = f"{spec.name} has no generation step"
-        raise SystemExit(msg)
-    outdir = out / gen.outdir
-    run_footer = footer(receipts / "gen.log")
-    want = _listing((out / gen.listing).read_text(encoding="utf-8"))
-    got = (
-        {
-            path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-            for path in sorted(outdir.glob("*.lean"))
-        }
-        if outdir.is_dir()
-        else {}
+        return False
+    tokens = shlex.split(command)
+    if len(tokens) <= len(gen.argv) or "python" not in Path(tokens[-len(gen.argv) - 1]).name:
+        return False
+    tail = tokens[-len(gen.argv) :]
+    return all(
+        token.isdigit() if want == "{nproc}" else token == want
+        for want, token in zip(gen.argv, tail, strict=True)
     )
-    same = sorted(name for name in want.keys() & got.keys() if want[name] == got[name])
+
+
+def compare(spec: Route, out: Path, receipts: Path) -> dict[str, Any]:
+    """Write the generation receipt: ``gen.log``'s run and census, and the generated
+    files under ``out`` against the listing."""
+    log = receipts / "gen.log"
+    run_footer = footer(log)
     import numpy as np  # noqa: PLC0415 -- the generator's own dependency, reported here
 
+    files = generated(spec, out)
     report: dict[str, Any] = {
         "kind": GENERATION_KIND,
         "route": spec.name,
         "result": spec.result,
         "bead": spec.bead,
         **run_footer,
-        "log": "gen.log",
+        "log": log.name,
         "python": platform.python_version(),
         "numpy": np.__version__,
         "host": _host(),
-        "listing": gen.listing,
-        "listed": len(want),
-        "generated": len(got),
-        "matched": len(same),
-        "differing": sorted((want.keys() & got.keys()) - set(same)),
-        "missing": sorted(want.keys() - got.keys()),
-        "extra": sorted(got.keys() - want.keys()),
-        "generated_bytes": sum((outdir / name).stat().st_size for name in got),
+        "census": census(log.read_text(encoding="utf-8")),
+        **files,
     }
-    report["ok"] = (
-        run_footer["exit"] == 0 and report["matched"] == report["listed"] == report["generated"]
-    )
+    report["ok"] = run_footer["exit"] == 0 and files["ok"]
     atomic_write_text(receipts / GENERATION_NAME, retained_json.dumps(report))
     return report
 
@@ -771,7 +961,7 @@ def parse_axioms(text: str) -> dict[str, list[str]]:
     return found
 
 
-def axiom_problems(theorems: Sequence[str], axioms: dict[str, list[str]]) -> list[str]:
+def axiom_problems(theorems: Sequence[str], axioms: Mapping[str, list[str]]) -> list[str]:
     """Why these axioms are not exactly the standard three for every theorem."""
     problems: list[str] = []
     for name in theorems:
@@ -782,24 +972,94 @@ def axiom_problems(theorems: Sequence[str], axioms: dict[str, list[str]]) -> lis
     return problems
 
 
-def control_refused(kind: str, exit_code: int, text: str) -> bool:
-    """Whether a negative control was refused for its own reason.
+def parse_statements(text: str, names: Sequence[str]) -> dict[str, str]:
+    """What ``#check @name`` printed for each of ``names``: the type after ``name :``,
+    its wrapped continuation lines joined."""
+    wanted = set(names)
+    found: dict[str, list[str]] = {}
+    current: str | None = None
+    for line in text.splitlines():
+        match = _CHECKED.match(line)
+        if match and match.group(1) in wanted:
+            current = str(match.group(1))
+            found[current] = [match.group(2)]
+        elif current is not None and line[:1].isspace() and line.strip():
+            found[current].append(line.strip())
+        else:
+            current = None
+    return {name: " ".join(parts) for name, parts in found.items()}
 
-    ``refused``: Lean exits non-zero with an error, and not one of the setup faults that
-    would make the refusal say nothing about the mutation. ``sorry``: the printed axioms
-    carry ``sorryAx``, which acceptance refuses.
+
+def _canonical(statement: str) -> str:
+    return re.sub(r"\s+", "", statement.replace("Real.sqrt", "√"))
+
+
+def same_statement(printed: str, registered: str) -> bool:
+    """Equal but for whitespace and ``Real.sqrt`` printed as ``√``."""
+    return _canonical(printed) == _canonical(registered)
+
+
+def statement_problems(spec: Route, printed: Mapping[str, str]) -> list[str]:
+    problems: list[str] = []
+    for name, registered in spec.statements.items():
+        got = printed.get(name)
+        if got is None:
+            problems.append(f"{name}: no statement printed")
+        elif not same_statement(got, registered):
+            problems.append(f"{name}: printed {got!r}, registered {registered!r}")
+    return problems
+
+
+def _errors(text: str, path: str) -> list[int]:
+    """The lines of ``path`` on which Lean reported an error."""
+    pattern = re.compile(rf"^{re.escape(path)}:(\d+):\d+: error\b", re.MULTILINE)
+    return [int(match.group(1)) for match in pattern.finditer(text)]
+
+
+def control_refused(
+    control: Control, exit_code: int, text: str, *, mutated: int | None = None
+) -> bool:
+    """Whether a negative control was refused for the reason it was built to show.
+
+    ``mutated`` is the mutated line of a ``source`` control. An output naming an unknown
+    module, identifier, constant or file shows nothing about the mutation.
     """
-    if kind == "refused":
-        lowered = text.lower()
+    lowered = text.lower()
+    if any(fault in lowered for fault in _SETUP_FAULTS):
+        return False
+    if control.kind == "sorry":
+        axioms = parse_axioms(text)
         return (
-            exit_code != 0
-            and "error" in lowered
-            and not any(fault in lowered for fault in _SETUP_FAULTS)
+            exit_code == 0
+            and _SORRY_WARNING in text
+            and any("sorryAx" in found for found in axioms.values())
         )
-    axioms = parse_axioms(text)
-    return any("sorryAx" in found for found in axioms.values()) and bool(
-        axiom_problems(list(axioms), axioms)
-    )
+    errors = _errors(text, control.path)
+    if exit_code == 0 or not errors:
+        return False
+    if control.source:
+        return mutated is not None and min(errors) >= mutated
+    return bool(control.expect) and re.search(control.expect, text) is not None
+
+
+def twin_passed(exit_code: int, text: str) -> bool:
+    return exit_code == 0 and re.search(r": error\b", text) is None
+
+
+def toolchain_problems(spec: Route, lean_version: str, mathlib_resolved: str) -> list[str]:
+    """The measured toolchain and Mathlib against the route's pins."""
+    problems: list[str] = []
+    version = spec.toolchain.split(":v", 1)[1]
+    if f"version {version}," not in lean_version or f"commit {spec.lean_commit}" not in (
+        lean_version
+    ):
+        problems.append(
+            f"lean_version {lean_version!r} is not {spec.toolchain} at commit "
+            f"{spec.lean_commit[:12]}"
+        )
+    if mathlib_resolved != spec.mathlib:
+        problems.append(f"Mathlib resolved at {mathlib_resolved!r}, not {spec.mathlib}")
+    return problems
 
 
 def _step(
@@ -837,7 +1097,21 @@ def _output(cmd: list[str], cwd: Path) -> str:
     return (done.stdout + done.stderr).strip()
 
 
-def run(
+def resolved_mathlib(project: Path) -> str:
+    """The commit Lake checked Mathlib out at for this project."""
+    return _output(["git", "-C", ".lake/packages/mathlib", "rev-parse", "HEAD"], project)
+
+
+def _module(project: Path, path: Path) -> str:
+    return path.relative_to(project).with_suffix("").as_posix().replace("/", ".")
+
+
+def _natural(name: str) -> tuple[str, int]:
+    match = re.search(r"(\d+)$", name)
+    return (name[: match.start()], int(match.group(1))) if match else (name, -1)
+
+
+def run(  # noqa: PLR0911 -- one return per stop, each written to the receipt as a failure
     spec: Route,
     out: Path,
     receipts: Path,
@@ -846,9 +1120,11 @@ def run(
     jobs: int,
     cpu_hours_cap: float,
 ) -> dict[str, Any]:
-    """Build the staged route under receipts, print its axioms and run its controls.
+    """Build the staged route under receipts, then its probe and controls.
 
-    The first failing build step stops the run, and the receipt keeps it as a failure.
+    It stops before any ``lake`` call when the stage does not verify or a generated
+    file is not the listed one, and at the first failing build step; the receipt keeps
+    every stop as a failure.
     """
     staged = verify(spec, out)
     project = out / spec.project
@@ -856,83 +1132,10 @@ def run(
     label = f"{spec.project}/ of the stage of {spec.name}"
     prefix = _taskset(cpus)
     cap = cpu_hours_cap * 3600
+    flags = staged["lean_options"]
     steps: list[dict[str, Any]] = []
-    problems: list[str] = list(staged["problems"])
-
-    def spent() -> float:
-        return sum(float(step["cpu_seconds"]) for step in steps)
-
-    def go(name: str, argv: list[str]) -> bool:
-        # A wall limit at the CPU cap's equivalent on the granted cores stops a step that
-        # would carry the run past the cap.
-        width = len(cpus.split(",")) if cpus else os.cpu_count() or 1
-        steps.append(
-            _step(
-                name,
-                [*prefix, *argv],
-                receipts=receipts,
-                project=project,
-                label=label,
-                time_limit=max(60.0, (cap - spent()) / width),
-            )
-        )
-        if steps[-1]["exit"] != 0:
-            problems.append(f"{name} exited {steps[-1]['exit']}")
-            return False
-        return True
-
-    ok = go("cache", ["lake", "exe", "cache", "get"])
-    for index, group in enumerate(spec.builds):
-        if not ok:
-            break
-        if group == (PARTS,):
-            parts = sorted(
-                (project / path)
-                .relative_to(project)
-                .with_suffix("")
-                .as_posix()
-                .replace("/", ".")
-                for path in project.glob(spec.parts_glob)
-            )
-            if not parts:
-                problems.append("no generated parts to build; run generate first")
-                ok = False
-            # One part per lake process, ``jobs`` at a time, as the source's script does.
-            for start in range(0, len(parts), max(1, jobs)):
-                batch = parts[start : start + max(1, jobs)]
-                if ok and not go(f"build-{index}-{start:03d}", ["lake", "build", *batch]):
-                    ok = False
-        elif not go(f"build-{index}", ["lake", "build", *group]):
-            ok = False
-    axioms: dict[str, list[str]] = {}
     controls: list[dict[str, Any]] = []
-    if ok and go("probe", ["lake", "env", "lean", "Probe.lean"]):
-        axioms = parse_axioms((receipts / "probe.log").read_text(encoding="utf-8"))
-        problems += axiom_problems(spec.theorems, axioms)
-        for control in spec.controls:
-            step = _step(
-                f"control-{control.name}",
-                [*prefix, "lake", "env", "lean", control.path],
-                receipts=receipts,
-                project=project,
-                label=label,
-                time_limit=None,
-            )
-            text = (receipts / step["log"]).read_text(encoding="utf-8")
-            refused = control_refused(control.kind, int(step["exit"]), text)
-            controls.append(
-                {
-                    **step,
-                    "control": control.name,
-                    "kind": control.kind,
-                    "what": control.what,
-                    "refused": refused,
-                }
-            )
-            if not refused:
-                problems.append(f"control {control.name} was not refused")
-    elif ok:
-        ok = False
+    problems: list[str] = list(staged["problems"])
     receipt: dict[str, Any] = {
         "kind": KIND,
         "route": spec.name,
@@ -940,39 +1143,135 @@ def run(
         "bead": spec.bead,
         "packet": spec.packet,
         "upstream": spec.upstream,
-        "toolchain": spec.toolchain,
-        "mathlib": spec.mathlib,
-        "lean_version": _output([*prefix, "lake", "env", "lean", "--version"], project),
-        "lake_version": _output(["lake", "--version"], project),
-        "mathlib_checked_out": _output(
-            ["git", "-C", ".lake/packages/mathlib", "rev-parse", "HEAD"], project
-        ),
+        "declared": {
+            "toolchain": spec.toolchain,
+            "lean_commit": spec.lean_commit,
+            "mathlib": spec.mathlib,
+        },
         "host": _host(),
         "cpus": cpus,
         "jobs": jobs,
+        "lean_options": flags,
         "stage": staged,
         "steps": steps,
-        "theorems": list(spec.theorems),
-        "axioms": axioms,
         "controls": controls,
-        "cpu_seconds": round(spent() + sum(float(c["cpu_seconds"]) for c in controls), 1),
-        "wall_seconds": round(
-            sum(float(s["wall_seconds"]) for s in steps)
-            + sum(float(c["wall_seconds"]) for c in controls),
-            1,
-        ),
-        "recorded_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "theorems": list(spec.theorems),
     }
-    if receipt["mathlib_checked_out"] != spec.mathlib:
-        problems.append(f"Mathlib checked out at {receipt['mathlib_checked_out']}")
-    receipt["problems"] = problems
-    receipt["verdict"] = "passed" if ok and not problems else "failed"
-    atomic_write_text(receipts / RECEIPT_NAME, retained_json.dumps(receipt))
-    return receipt
+
+    def spent() -> float:
+        return sum(float(s["cpu_seconds"]) for s in [*steps, *controls])
+
+    def go(
+        name: str, argv: list[str], into: list[dict[str, Any]] | None = None
+    ) -> dict[str, Any]:
+        # A wall limit at the CPU cap's equivalent on the granted cores stops a step that
+        # would carry the run past the cap.
+        width = len(cpus.split(",")) if cpus else os.cpu_count() or 1
+        step = _step(
+            name,
+            [*prefix, *argv],
+            receipts=receipts,
+            project=project,
+            label=label,
+            time_limit=max(60.0, (cap - spent()) / width),
+        )
+        if into is not None:
+            into.append(step)
+        return step
+
+    def finish() -> dict[str, Any]:
+        receipt["cpu_seconds"] = round(spent(), 1)
+        receipt["wall_seconds"] = round(
+            sum(float(s["wall_seconds"]) for s in [*steps, *controls]), 1
+        )
+        receipt["recorded_utc"] = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+        receipt["problems"] = problems
+        complete = bool(steps) and all(s["exit"] == 0 for s in steps)
+        receipt["verdict"] = "passed" if complete and not problems else "failed"
+        atomic_write_text(receipts / RECEIPT_NAME, retained_json.dumps(receipt))
+        return receipt
+
+    if problems:
+        return finish()
+    if spec.generation is not None:
+        receipt["generated"] = generated(spec, out)
+        if not receipt["generated"]["ok"]:
+            problems.append("the generated files are not the listed ones or carry escapes")
+            return finish()
+
+    receipt["lean_version"] = _output([*prefix, "lake", "env", "lean", "--version"], project)
+    receipt["lake_version"] = _output(["lake", "--version"], project)
+    if go("cache", ["lake", "exe", "cache", "get"], steps)["exit"] != 0:
+        problems.append("cache exited non-zero")
+        return finish()
+    receipt["mathlib_resolved"] = resolved_mathlib(project)
+    problems += toolchain_problems(spec, receipt["lean_version"], receipt["mathlib_resolved"])
+    if problems:
+        # A build on another toolchain or Mathlib could not pass; it is not paid for.
+        return finish()
+    for index, group in enumerate(spec.builds):
+        if group == (PARTS,):
+            parts = sorted(
+                (_module(project, path) for path in project.glob(spec.parts_glob)),
+                key=_natural,
+            )
+            if not parts:
+                problems.append("no generated parts to build; run generate first")
+                return finish()
+            # ``jobs`` parts per ``lake build``, which builds them side by side; the
+            # source's script runs one lake process per part, ``jobs`` at a time.
+            size = max(1, jobs)
+            for start in range(0, len(parts), size):
+                step = go(
+                    f"build-{index}-{start:03d}",
+                    ["lake", "build", *parts[start : start + size]],
+                    steps,
+                )
+                if step["exit"] != 0:
+                    problems.append(f"{step['name']} exited {step['exit']}")
+                    return finish()
+        else:
+            step = go(f"build-{index}", ["lake", "build", *group], steps)
+            if step["exit"] != 0:
+                problems.append(f"{step['name']} exited {step['exit']}")
+                return finish()
+
+    probe = go("probe", ["lake", "env", "lean", *flags, "Probe.lean"], steps)
+    text = (receipts / probe["log"]).read_text(encoding="utf-8")
+    receipt["axioms"] = parse_axioms(text)
+    receipt["statements"] = parse_statements(text, spec.theorems)
+    if probe["exit"] != 0:
+        problems.append(f"probe exited {probe['exit']}")
+    problems += statement_problems(spec, receipt["statements"])
+    problems += axiom_problems(spec.theorems, receipt["axioms"])
+
+    for control in spec.controls:
+        entry: dict[str, Any] = {"control": control.name, "kind": control.kind}
+        mutated = None
+        if control.source:
+            mutated = mutated_line(control, out / control.source)
+            twin = go(
+                f"control-{control.name}-twin",
+                ["lake", "env", "lean", *flags, twin_path(control)],
+            )
+            twin_text = (receipts / twin["log"]).read_text(encoding="utf-8")
+            entry["twin"] = {**twin, "passed": twin_passed(twin["exit"], twin_text)}
+            entry["mutated_line"] = mutated
+        step = go(f"control-{control.name}", ["lake", "env", "lean", *flags, control.path])
+        log_text = (receipts / step["log"]).read_text(encoding="utf-8")
+        refused = control_refused(control, step["exit"], log_text, mutated=mutated)
+        if control.source and not entry["twin"]["passed"]:
+            refused = False
+        controls.append({**step, **entry, "what": control.what, "refused": refused})
+        if not refused:
+            problems.append(f"control {control.name} was not refused for its own reason")
+    return finish()
 
 
 def check(spec: Route, receipts: Path) -> list[str]:
-    """Validate a retained receipt offline: what it names, its logs, axioms and controls."""
+    """Validate a retained receipt offline, from its logs: the measured toolchain, the
+    steps, the printed statements and axioms, each control and twin, and the generated
+    parts it built."""
     path = receipts / RECEIPT_NAME
     if not path.is_file():
         return [f"{path}: no receipt"]
@@ -982,16 +1281,18 @@ def check(spec: Route, receipts: Path) -> list[str]:
         ("kind", KIND),
         ("route", spec.name),
         ("result", spec.result),
-        ("toolchain", spec.toolchain),
-        ("mathlib", spec.mathlib),
-        ("mathlib_checked_out", spec.mathlib),
         ("verdict", "passed"),
     ):
         if receipt.get(key) != want:
             problems.append(f"{key} is {receipt.get(key)!r}, expected {want!r}")
     if receipt.get("theorems") != list(spec.theorems):
         problems.append("the receipt's theorems are not the route's")
-    for step in [*receipt.get("steps", []), *receipt.get("controls", [])]:
+    problems += toolchain_problems(
+        spec, str(receipt.get("lean_version", "")), str(receipt.get("mathlib_resolved", ""))
+    )
+    entries = [*receipt.get("steps", []), *receipt.get("controls", [])]
+    entries += [c["twin"] for c in receipt.get("controls", []) if c.get("twin")]
+    for step in entries:
         log = receipts / str(step.get("log"))
         if not log.is_file():
             problems.append(f"{step.get('name')}: log {log.name} is not retained")
@@ -1002,32 +1303,51 @@ def check(spec: Route, receipts: Path) -> list[str]:
         for step in receipt.get("steps", [])
         if step.get("exit") != 0
     )
+    if not any(step.get("name") == "probe" for step in receipt.get("steps", [])):
+        problems.append("no probe ran")
     probe = receipts / "probe.log"
-    printed = parse_axioms(probe.read_text(encoding="utf-8")) if probe.is_file() else {}
-    if printed != receipt.get("axioms"):
+    text = probe.read_text(encoding="utf-8") if probe.is_file() else ""
+    printed_axioms = parse_axioms(text)
+    printed = parse_statements(text, spec.theorems)
+    if printed_axioms != receipt.get("axioms"):
         problems.append("the receipt's axioms are not what probe.log prints")
-    problems += axiom_problems(spec.theorems, printed)
-    names = {control.name: control for control in spec.controls}
-    seen: set[str] = set()
-    for entry in receipt.get("controls", []):
-        name = str(entry.get("control"))
-        seen.add(name)
-        if name not in names:
-            problems.append(f"control {name} is not the route's")
+    if printed != receipt.get("statements"):
+        problems.append("the receipt's statements are not what probe.log prints")
+    problems += statement_problems(spec, printed)
+    problems += axiom_problems(spec.theorems, printed_axioms)
+    entries_by_name = {str(c.get("control")): c for c in receipt.get("controls", [])}
+    for control in spec.controls:
+        entry = entries_by_name.get(control.name)
+        if entry is None:
+            problems.append(f"control {control.name} did not run")
             continue
         log = receipts / str(entry.get("log"))
-        text = log.read_text(encoding="utf-8") if log.is_file() else ""
-        if not control_refused(names[name].kind, int(entry.get("exit", 0)), text):
-            problems.append(f"control {name}: its log does not show it refused")
-    problems += [f"control {name} did not run" for name in names if name not in seen]
-    if spec.generation is not None and check_generation(spec, receipts):
-        problems.append("the generation receipt does not show every listed file generated")
+        log_text = log.read_text(encoding="utf-8") if log.is_file() else ""
+        mutated = (
+            mutated_line(control, _origin(spec, control.source)) if control.source else None
+        )
+        if not control_refused(control, int(entry.get("exit", 0)), log_text, mutated=mutated):
+            problems.append(f"control {control.name}: its log does not show it refused")
+        if control.source:
+            twin = entry.get("twin") or {}
+            twin_log = receipts / str(twin.get("log"))
+            twin_text = twin_log.read_text(encoding="utf-8") if twin_log.is_file() else ""
+            if not twin or not twin_passed(int(twin.get("exit", 1)), twin_text):
+                problems.append(f"control {control.name}: its unmutated twin did not pass")
+    if spec.generation is not None:
+        built = receipt.get("generated") or {}
+        source = _origin(spec, spec.generation.listing)
+        if not built.get("ok") or built.get("listing_blob") != git_blob(source.read_bytes()):
+            problems.append("the parts built are not shown to be the retained listing's")
+        if check_generation(spec, receipts):
+            problems.append("the generation receipt does not show every listed file generated")
     return problems
 
 
 def check_generation(spec: Route, receipts: Path) -> list[str]:
-    """Validate a retained generation receipt offline: its route, its log's footer, and
-    every listed file generated with the listed value and nothing else."""
+    """Validate a retained generation receipt offline, re-deriving its facts: the run
+    and the census from ``gen.log``, which must be the route's generator, and the
+    listing's count and Git blob from the retained listing."""
     path = receipts / GENERATION_NAME
     if not path.is_file():
         return [f"{path}: no generation receipt"]
@@ -1038,13 +1358,32 @@ def check_generation(spec: Route, receipts: Path) -> list[str]:
     log = receipts / str(gen.get("log"))
     if not log.is_file():
         problems.append("gen.log is not retained")
-    elif footer(log)["exit"] != gen.get("exit"):
-        problems.append("gen.log's exit is not the receipt's")
+    else:
+        run_footer = footer(log)
+        if run_footer["command"] != gen.get("command"):
+            problems.append("gen.log's command is not the receipt's")
+        if not generator_command(spec, run_footer["command"]):
+            problems.append("gen.log's command is not the route's generator")
+        if any(run_footer[key] != gen.get(key) for key in _RUN_FIELDS[1:]):
+            problems.append(
+                "gen.log's start, end, exit, wall or CPU times are not the receipt's"
+            )
+        logged = census(log.read_text(encoding="utf-8"))
+        if logged != gen.get("census"):
+            problems.append("gen.log's census is not the receipt's")
+        if spec.generation is not None and logged != dict(spec.generation.census):
+            problems.append("gen.log's census is not the one the source reports")
     if spec.generation is not None:
-        source = next(s.origin for s in spec.files if s.path == spec.generation.listing)
-        listed = len(_listing((REPO / source).read_text(encoding="utf-8")))
-        if gen.get("listing") != spec.generation.listing or gen.get("listed") != listed:
-            problems.append(f"the receipt did not compare all {listed} listed files")
+        source = _origin(spec, spec.generation.listing)
+        listed = len(_listing(source.read_text(encoding="utf-8")))
+        if (
+            gen.get("listing") != spec.generation.listing
+            or gen.get("listing_blob") != git_blob(source.read_bytes())
+            or gen.get("listed") != listed
+        ):
+            problems.append(
+                f"the receipt did not compare the retained listing's {listed} files"
+            )
     if not (
         gen.get("ok")
         and gen.get("exit") == 0
@@ -1052,6 +1391,8 @@ def check_generation(spec: Route, receipts: Path) -> list[str]:
         and not (gen.get("differing") or gen.get("missing") or gen.get("extra"))
     ):
         problems.append("the generated files are not exactly the listed ones")
+    if any((gen.get("escapes") or {"missing": 1}).values()):
+        problems.append("the generated files carry kernel-escape tokens, or were not scanned")
     return problems
 
 
@@ -1074,7 +1415,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         if name == "generate":
             cmd.add_argument("--nproc", type=int, default=2, help="generator workers")
         if name == "run":
-            cmd.add_argument("--jobs", type=int, default=1, help="parts built at once")
+            cmd.add_argument("--jobs", type=int, default=1, help="parts per lake build")
             cmd.add_argument(
                 "--cpu-hours-cap", type=float, default=40.0, help="stop the run at this CPU"
             )
@@ -1106,7 +1447,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             jobs=args.jobs,
             cpu_hours_cap=args.cpu_hours_cap,
         )
-        print(json.dumps({k: report[k] for k in ("verdict", "problems", "axioms")}, indent=2))
+        print(
+            json.dumps({k: report.get(k) for k in ("verdict", "problems", "axioms")}, indent=2)
+        )
         return 0 if report["verdict"] == "passed" else 1
     problems = (
         check(spec, receipts) if args.command == "check" else check_generation(spec, receipts)
