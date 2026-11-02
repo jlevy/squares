@@ -171,8 +171,8 @@ def test_the_register_counts_match_the_frontier_readme() -> None:
     # 261 open cases at the correction; 247 since the merge of 2026-10-03, whose replayed
     # covers and families proved n = 59 to 61, 77, 78 and nine k^2 - 3 cases; 246 since
     # 2026-10-31, when the replayed s(44) cover (T-252) proved n = 44; 244 since 2026-11-02,
-    # when zm_mixed.py's controls brought Greff's covers (T-184, T-191) to C3 and proved
-    # n = 76 and 95.
+    # when zm_mixed.py's controls brought Greff's covers for 76 and 95 (T-184, T-191) to
+    # C3, which proved both.
     assert (operative["all"], operative["open"], summary["open_cases"]) == (0, 0, 244)
     assert operative["outside_t007_registered_scope_n"] == ""
     assert summary["classes"] == {
