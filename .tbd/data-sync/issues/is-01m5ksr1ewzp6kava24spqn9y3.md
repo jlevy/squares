@@ -5,7 +5,7 @@ title: "Validate: chelokot's and Daniel's Lean proofs of s(2) to s(5) (think-7l2
 kind: task
 status: open
 priority: 3
-version: 11
+version: 12
 delegate: null
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T07:14:00.796Z
-updated_at: 2026-11-02T15:36:28.588Z
+updated_at: 2026-11-02T15:47:47.415Z
 started_at: 2026-10-26T11:21:28.603Z
 ---
 Validation part of think-7l2j (chelokot's and Evan Daniel's Lean proofs that s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/sqrt 2; no issue). Created by c-lean-1023 under the 23 October intake epic, as the lane rules allow; it serves think-7l2j.
@@ -43,5 +43,7 @@ To finish, on a host that reaches the cache: from packing/, `.venv/bin/python3 -
 No reply is owed on #786: no rung moved. Draft, if the coordinator wants a status line there: "The receipt-bound builds of both routes are not yet run: Mathlib's prebuilt cache is outside the network policy of the host that tried on 2 November. The build tool is in #887; T-238 stays V0/C0."
 
 2026-11-02 ~16:00Z bold-ritchie-l29, review A of #887 (https://github.com/jlevy/squares/pull/887#pullrequestreview-5737571534) addressed on the same branch: 968f10e8e (A1), e040b6824 (A2-A7, A9), b18d4c3c1 (A4 receipt, A8), 03719833f (re-pin). What changes for the lane that runs the build: `run` now stops before any lake call on a bad stage; it checks `lean --version` against the route's toolchain commit and the resolved Mathlib against the pin; it compares what `#check @thm` prints with the statement the route registers (whitespace aside, Real.sqrt read as √), so a cosmetic pretty-printer difference fails the run with both strings in the receipt and is fixed in the route, after which `check` re-reads the retained logs without a rebuild; the probe and controls run with the lakefile's leanOptions as -D flags; each control counts only when refused for its own reason, and the mutated module runs beside its unmutated twin, which must pass.
+
+Deferred from review A6: after a passing `run`, a lean4checker replay of the built oleans would recheck the kernel terms independently of the elaborator; it needs the build, so it belongs to the lane that runs it, before a proof-assistant-checked entry rests on the receipt.
 
 blocked_on: network policy — lakecache.blob.core.windows.net:443 (Mathlib's prebuilt cache; the toolchain installs from its GitHub release asset)
