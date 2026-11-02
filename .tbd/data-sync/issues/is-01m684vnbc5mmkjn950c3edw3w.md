@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 75
+version: 76
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -43,7 +43,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T03:31:17.496Z
+updated_at: 2026-11-02T04:04:47.993Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -129,3 +129,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 02:52: renewal. Merged #876 (43ad863b5; T-247 route 1, independently re-implemented; system-family overlap corrected on both Kim exact-feasibility entries); think-ozx8 closed after --before-close (exit 0). Sweep intake22: 0 stalled (L21 bead edits), 1 item (squarepack-certs 3cea0f4, in #877). Hand-read sources 9-12 days old are unreachable here: arxiv.org and hmbelvedere.com return proxy 403, and the #401/#686 attachments are user-attachments (blocked); add arxiv.org and hmbelvedere.com to the owner network allow-list item (with zenodo.org, lakecache.blob.core.windows.net). In flight: #878 addressing (then #804 final comment), #877 addressing, L23 #414 review.
 
 2026-11-02 ~03:40: merged #877 (45eabe2c8; sweep held-bead rule with 28-day ceiling; think-n20n closed) and #878 (eead891eb; Kim t244 files kept, #804 last ask done). L22 resumed to post the #804 final comment after deploy verifies, close #804, record it; think-8r92/think-4rzl close after that PR. 35 PRs merged this pass. L23 (#414 strongest-tier review) running.
+
+2026-11-02 ~04:10: #804 closed (final comment 03:43Z after eead891eb deploy verified) and recorded: merged #880 (270ec3a5e); think-8r92 and think-4rzl closed after --before-close exit 0. L23 (#414 strongest-tier review, accepted, no defect; Q supplementary tables 118/118 reproduce) is PR #879, under records review; then #414 final comment (draft in think-u1kq) after deploy. Owner wording call noted: register rows now say the review is "one AI read with the constants recomputed; nothing here confirms more than that". 36 PRs merged this pass.
