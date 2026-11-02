@@ -49,9 +49,10 @@ A third invariant joins the tree to the records:
    closing a bead: from a checkout whose deferral records are `origin/main`'s, it exits
    1 naming every record that still names one, and 2 when the records here are not
    `main`'s, since a branch that drops the bead has not merged. It also exits 1 naming
-   each live child of a bead, read from the bead store, since closing a parent over an
-   open child breaks the first invariant for everyone (think-ysi4), and 2 when the store
-   or the bead cannot be found.
+   each live child of a bead, read from the bead store, so that every live child stays
+   under a live parent: closing a parent over an open child breaks the first invariant
+   for everyone (think-ysi4), and over an in-progress or blocked one orphans work that
+   invariant does not see. It exits 2 when the store or the bead cannot be found.
 
 None needs the `tbd` binary. The beads are Markdown-with-frontmatter files, and this
 reads them straight out of git, preferring the local sync worktree so it works offline.
@@ -465,7 +466,9 @@ def before_close(closing: Sequence[str]) -> int:
     It reads the bead store for the second hold (think-ysi4): on 2 November 2026 the
     coordinator closed think-4rzl once no record named it, and its open child think-3trq
     then sat under a closed parent, failing the tree's first invariant on `main` and every
-    branch until it was re-parented. A child named in the same call still holds its
+    branch until it was re-parented. An in-progress or blocked child holds too, though
+    that invariant does not flag it (review A3 of #882), since closing over it orphans the
+    same work. A child named in the same call still holds its
     parent: close or re-parent it first, then run the guard again. Exits 0 when every bead
     may close, 1 when a record on `main` names one or one has a live child, and 2 when it
     cannot tell."""
@@ -520,10 +523,18 @@ def before_close(closing: Sequence[str]) -> int:
             "has merged"
         )
     for alias, child, bead in parented:
+        # The tree's first invariant fails only an open child (review A3 of #882); an
+        # in-progress or blocked one under a closed parent is the same orphaned work,
+        # which that invariant does not see.
+        why = (
+            "an open bead under a closed parent fails check_bead_tree on every branch"
+            if bead.get("status") == "open"
+            else "the tree check flags only an open one, so this would be orphaned unseen"
+        )
         print(
             f"  HOLD {alias} has a live child, {child} ({bead.get('status')}) "
-            f"{str(bead.get('title', ''))!r}; re-parent it or close it first, since an open "
-            "bead under a closed parent fails this check on every branch"
+            f"{str(bead.get('title', ''))!r}; re-parent it or close it first, which keeps "
+            f"every live child under a live parent: {why}"
         )
     blocked = {alias for _, alias in held} | {alias for alias, _, _ in parented}
     for alias in closing:

@@ -486,7 +486,13 @@ def test_a_bead_with_an_open_child_may_not_close(
         "  HOLD think-pppp has a live child, think-dddd (in_progress) 'a started child'",
         "  HOLD think-pppp has a live child, think-eeee (blocked) 'a blocked child'",
     ]
-    assert all("re-parent it or close it first" in line for line in shown if "HOLD" in line)
+    holds = [line for line in shown if "HOLD" in line]
+    assert all("re-parent it or close it first" in line for line in holds)
+    # Review A3 of #882: the tree check fails only an open bead under a closed parent, so
+    # only the open child's hold says so; the others say what holding the parent keeps.
+    assert "fails check_bead_tree" in holds[0]
+    assert all("fails check_bead_tree" not in line for line in holds[1:])
+    assert all("every live child under a live parent" in line for line in holds)
     assert not any("think-pppp" in line and "may close" in line for line in shown)
     assert "  ok  no record on main names think-bbbb and no live child; it may close" in shown
     assert check_bead_tree.main([guard, "think-bbbb"]) == 0
