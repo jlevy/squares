@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 85
+version: 86
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T06:59:38.595Z
+updated_at: 2026-11-02T07:48:51.481Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -146,3 +146,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 05:52: renewal. Sweep intake25 run; no new issues since 04:50Z (only our #414 final). L24 running.
 
 2026-11-02 06:57: renewal. Sweep intake26 run; no new issues since 05:50Z. #882 (L24 guards: --before-close children, check_table_cells; two files first-formatted) under senior review.
+
+2026-11-02 ~08:00: merged #882 (6062867b1): --before-close refuses open/in-progress/blocked children; check_table_cells (fast tier + hook prerequisite incl. untracked drafts; MEASURED_WITH pinned to flowmark-rs 0.4.0); two files first-formatted (typography only, verified). think-ysi4, think-7y5x closed. 39 PRs merged this pass. No lane running; sweep clean; remaining items are owner decisions.
