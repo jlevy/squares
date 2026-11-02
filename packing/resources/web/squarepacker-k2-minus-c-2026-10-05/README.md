@@ -219,8 +219,8 @@ and it counts directions exactly, in integers.
 
 Every box was certified under its own label: none needed another label, and none failed.
 The largest bound of a `closed` piece is 9. The run took 1,880.8 CPU seconds on two
-cores, 16 minutes of wall time. A price came first: 500 boxes
-extrapolated to 0.54 CPU-hours, against a cap of 40. Four negative controls are refused,
+cores, 16 minutes of wall time. A price came first: 500 boxes extrapolated to 0.54
+CPU-hours, against a cap of 40. Four negative controls are refused,
 each with an exactly checked witness that its claim is false: the sharp box at threshold 8,
 an `inf` box widened to hold an admissible pair, a `nowall` box widened to hold a side
 edge, and the count’s separation halved.

@@ -22,9 +22,10 @@ its claim is false.
 
 Version 1.2’s Lemma 4.10 states the same model and decides the same 13 lists. Its
 `data/kw9_data.zip` has the same SHA-256, `32634874…`, in both packets’ acquisition
-manifests. The text of the lemma differs only in the side condition `k ≥ 4`, an argument
-for the arc `(2π̃, 2π)`, and a longer description of the source’s float count. So this
-run decides version 1.2’s labels too.
+manifests. The text of the lemma differs in the side condition `k ≥ 4`, an argument for
+the arc `(2π̃, 2π)`, longer descriptions of the source’s float count and of the coverage
+checks, and a mention of this project’s replay; the model is the same. So this run
+decides version 1.2’s labels too.
 
 ## What Its Authors Read
 
@@ -39,7 +40,8 @@ This list is the independence record of
 | [The 5 October review](../../../../../../docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md), in full | The reduction to `U(I)`, re-derived there, and a prose account of the source’s checker: 1,440 cells closed against their neighbours, the greedy count, the `2π` extension, Arb at 96 bits |
 | This packet’s [README](../../README.md), and one line of a control receipt, to see the receipt format | The replay’s totals, which no decision here uses |
 | The docstring of `cases/asymptotic/ryu_k2_minus_c_float_gap.py` | A description of the source’s float count; nothing of it is used |
-| The rows of `frontier/asymptotic-waste-bounds.yaml` for Ryu’s preprints, and the bead | The task |
+| The rows of `frontier/asymptotic-waste-bounds.yaml` for Ryu’s preprints, the bead, `epistemics.md` and the stage 4 rules of `campaign/result-import.md` | The task, and how to record it |
+| The lines that name `think-k3tk` in the 2 November review of the quarter-power and cube-root preprints (its F3), in `campaign/result-requests.yaml` and in three later packets’ READMEs | What this run bears on |
 
 **Never read or run:** `code/verify_leaves.py`, `code/verify_leaves2.py`, `code/bnb.py`,
 `code/bnb_wall.py`, `code/coverage_check.py`, `code/coverage_independent/`,
@@ -92,16 +94,15 @@ circle gives `⌊1/g⌋ = 8`.
 
 A box is **certified as labelled** when every piece of its bisection is decided by its
 own label. An `inf` piece also counts inside a `closed` or `nowall` box, since an
-inadmissible piece needs no bound. A box is cut into at most 4,096 pieces. A box not
-certified as labelled is tried with every label. It is **certified otherwise** if that
+inadmissible piece needs no bound. A box may have at most 4,096 pieces examined or
+waiting. A box not certified as labelled is tried with every label. It is **certified otherwise** if that
 succeeds, and **not certified** if it does not.
 
 ## The Price
 
 The brief capped the run at 40 CPU-hours and asked for a price first. A seeded random
 sample of 500 boxes (seed 20261102) took 14.4 CPU seconds on one core, 12.7 of them in
-the boxes, and
-extrapolates, class by class, to 0.54 CPU-hours for all 78,673
+the boxes themselves. Class by class, that extrapolates to 0.54 CPU-hours for all 78,673
 ([`price-500.json`](price-500.json), [rows](price-500-rows.jsonl),
 [receipt](price-500.log)). Every sampled box was certified as labelled.
 
