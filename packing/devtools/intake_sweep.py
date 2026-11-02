@@ -65,12 +65,13 @@ The sources, one section of the report each:
 
 An item **needs action** when the record is behind a source and no open bead owns the
 difference, when the bead a deferral names is no longer open, when that bead has gone
-quiet (no update in `STALE_DAYS`, or a claim whose delegate's session is gone: no update
-in `CLAIM_LEASE_DAYS`), when a regularization is owed on main, when a wait's blocker
-has resolved, or when an open issue is closeable: answered, with nothing queued for
-import, every result settled or its remaining validation owned by named beads, nothing
-its author asked for queued and no question awaiting the author's answer, so its final
-comment and close are owed (`campaign/result-import.md`, stage 7). The owner's instruction
+quiet (no update in `STALE_DAYS`, unless it is held on beads still acted on, or a claim
+whose delegate's session is gone: no update in `CLAIM_LEASE_DAYS`), when a regularization
+is owed on main, when a wait's blocker has resolved, or when an open issue is closeable:
+answered, with nothing queued for import, every result settled or its remaining
+validation owned by named beads, nothing its author asked for queued and no question
+awaiting the author's answer, so its final comment and close are owed
+(`campaign/result-import.md`, stage 7). The owner's instruction
 of 23 October 2026 put that last one here, after twelve closeable issues were found open
 with nothing listing them; where GitHub already shows such an issue closed, the step is
 to record the close, not to post it again. The command then exits 1. Items an open bead
@@ -261,19 +262,24 @@ def queued_bead(bead: Mapped, alias: str, blocked_by: Iterable[str] = ()) -> Que
 class Beads:
     """Bead states by `think-` alias, and the open beads labelled `result-import`; and,
     where the sweep's day is given (`today`), when each bead was last updated and who
-    holds its claim, so a bead gone quiet owns nothing (`stalled`)."""
+    holds its claim, so a bead gone quiet owns nothing (`stalled`). `holds` is each
+    bead's `tbd` hold, and `waits` the beads its last `blocked_on:` line names, so a
+    bead held on beads still acted on is waiting rather than quiet (`quiet_blocker`)."""
 
     states: dict[str, str]
     queue: tuple[QueuedBead, ...]
     updated: dict[str, str] = field(default_factory=dict)
     delegates: dict[str, str] = field(default_factory=dict)
     today: date | None = None
+    holds: dict[str, str] = field(default_factory=dict)
+    waits: dict[str, tuple[str, ...]] = field(default_factory=dict)
 
-    def stalled(self, alias: str) -> str:
+    def stalled(self, alias: str, waited: frozenset[str] = frozenset()) -> str:
         """Why a live bead owns nothing, or "" while it does: no update in `STALE_DAYS`,
-        or a claim (`in_progress` with a delegate) with no update in `CLAIM_LEASE_DAYS`,
-        whose delegate's session is gone. Without the sweep's day or the bead's last
-        update, nothing is stalled."""
+        unless it is held on beads that are all still acted on (`quiet_blocker`), or a
+        claim (`in_progress` with a delegate) with no update in `CLAIM_LEASE_DAYS`, whose
+        delegate's session is gone, held or not. Without the sweep's day or the bead's
+        last update, nothing is stalled. `waited` is the held beads that led here."""
         if self.today is None:
             return ""
         try:
@@ -283,10 +289,38 @@ class Beads:
         days = (self.today - updated).days
         last = f"no update since {updated} ({days} days)"
         if days >= STALE_DAYS:
-            return last
+            quiet = self.quiet_blocker(alias, waited | {alias})
+            if quiet is None:
+                return last
+            if quiet:
+                return f"held on {quiet}; {last}"
         delegate = self.delegates.get(alias, "")
         if self.states.get(alias) == "in_progress" and delegate and days >= CLAIM_LEASE_DAYS:
             return f"claimed by {delegate}, whose session is gone: {last}"
+        return ""
+
+    def quiet_blocker(self, alias: str, waited: frozenset[str] = frozenset()) -> str | None:
+        """The first bead a held bead waits on that nobody is acting on, "" while each is
+        live and acted on, or None when the bead is not held on beads at all.
+
+        A bead held (`hold: blocked`) whose `blocked_on:` line names only beads waits as
+        long as each of them is live and not stalled itself, a blocker held in turn
+        waiting on its own blockers, so a chain of waits holds while its last bead is
+        acted on. Once one goes quiet or closes, or the chain loops, the held bead's own
+        silence counts again. An owner's decision that no other bead stands for is not
+        held on a bead, so it shows after `STALE_DAYS` without an update, and every bead
+        held on it with it (lane L21 of 2 November 2026, think-n20n)."""
+        refs = self.waits.get(alias, ())
+        if self.holds.get(alias) != "blocked" or not refs:
+            return None
+        for ref in refs:
+            if ref in waited:
+                return f"{ref}, a wait that loops"
+            state = self.state(ref)
+            if state not in LIVE:
+                return f"{ref} ({state})"
+            if why := self.stalled(ref, waited):
+                return f"{ref}, which has gone quiet ({why})"
         return ""
 
     @classmethod
@@ -323,7 +357,11 @@ class Beads:
         )
         updated = {alias_by_id[str(b["id"])]: str(b.get("updated_at") or "") for b in beads}
         delegates = {alias_by_id[str(b["id"])]: str(b.get("delegate") or "") for b in beads}
-        return cls(states, queue, updated, delegates, today)
+        holds = {alias_by_id[str(b["id"])]: str(b.get("hold") or "") for b in beads}
+        waits = {
+            alias_by_id[str(b["id"])]: waited_beads(b, alias_by_id[str(b["id"])]) for b in beads
+        }
+        return cls(states, queue, updated, delegates, today, holds, waits)
 
     def state(self, alias: str) -> str:
         return self.states.get(alias, "no such bead")
@@ -336,7 +374,8 @@ def owned(
     acting on it, else orphaned. A live bead with no update in `STALE_DAYS`, or a claim
     whose delegate's session is gone, owns nothing (`Beads.stalled`, section E of the
     intake review of 26 October 2026): think-mbdw sat claimed by a session gone since 16
-    October while seven counts rested owed on it, and an open bead read as owned."""
+    October while seven counts rested owed on it, and an open bead read as owned. A bead
+    held on beads still acted on is owned, and says what it is held on."""
     if not alias:
         return Item(what, NEEDS_OWNER, since=since, step=step)
     if beads is None:
@@ -346,6 +385,8 @@ def owned(
         return Item(what, NEEDS_OWNER, alias, state, since, step)
     if why := beads.stalled(alias):
         return Item(what, STALLED, alias, f"{state}; {why}", since, step)
+    if beads.quiet_blocker(alias, frozenset({alias})) == "":
+        state = f"{state}; held on {', '.join(beads.waits[alias])}"
     return Item(what, OWNED, alias, state, since, step)
 
 
@@ -397,6 +438,14 @@ def declared_blockers(queued: QueuedBead, repository: str) -> list[str] | None:
     if not declared:
         return None
     return list(dict.fromkeys(_refs(declared[-1], repository, queued.alias)))
+
+
+def waited_beads(bead: Mapped, alias: str) -> tuple[str, ...]:
+    """The beads any bead's last `blocked_on:` line names (`declared_blockers`), or ()
+    when it names none, or names an issue or pull request too: the store can say whether
+    a bead is still acted on, and nothing offline can say that of an issue."""
+    refs = declared_blockers(queued_bead(bead, alias), "") or []
+    return tuple(refs) if all(_BEAD_REF.fullmatch(ref) for ref in refs) else ()
 
 
 IssueFetch = Callable[[str], Mapped]
