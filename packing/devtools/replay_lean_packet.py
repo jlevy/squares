@@ -31,15 +31,16 @@ Subcommands, in order (``DIR`` outside the repository)::
                                      the negative controls; writes R/receipt.json
     check ROUTE [--receipts R]       validate a retained receipt offline
 
-``stage`` reads every file from Git, where ``devtools.acquire_source --check`` holds the
-packets' custody of their bytes, including the files a packet pins as identical to
-another packet's. It refuses a Lean module whose Git blob is not the one the route's
-``devtools.lean_closure`` receipt recorded at the upstream commit, build pins whose
-toolchain and package revisions are not the receipt's, and, for ``wand125-n21``, any of
-the four files whose SHA-256 the source's ``build_zero_margin.sh`` checks on its own
-clone of evand/square-packing, which the stage replaces with retained copies. It counts
-the kernel-escape tokens of ``devtools.lean_closure`` in the staged sources, writes the
-probe that prints each theorem's statement and axioms, and writes the controls.
+``stage`` copies every file from the retained packets in the working tree, whose
+committed bytes ``devtools.acquire_source --check`` holds, including the files a packet
+pins as identical to another packet's. It refuses a file whose Git blob is not its
+upstream blob, from the route's ``devtools.lean_closure`` receipt or ``UPSTREAM_BLOBS``,
+and build pins whose toolchain and package revisions are not the receipt's; for
+``wand125-n21`` the generator and its oracle stand in for the clone of
+evand/square-packing that ``build_zero_margin.sh`` makes, bound by their blobs at
+``6aa82ba4``. It counts kernel-escape tokens in the staged sources and the lakefile,
+writes the probe that prints each theorem's statement and axioms, and writes the
+controls.
 
 ``run`` accepts a theorem only with exactly ``propext``, ``Classical.choice`` and
 ``Quot.sound``. Each route carries three negative controls that the run must refuse: a
@@ -114,14 +115,13 @@ class Staged:
     """One staged file: its path in the stage and its retained bytes.
 
     ``origin`` is repository-relative; a ``.gz`` holds the gzipped upstream bytes.
-    ``blob`` is the upstream Git blob a closure receipt records, and ``pinned`` the
-    SHA-256 the source's own build script checks.
+    ``blob`` is the file's Git blob at the upstream commit, from a closure receipt or
+    from ``UPSTREAM_BLOBS``. A file without one is held by its packet's custody alone.
     """
 
     path: str
     origin: str
     blob: str | None = None
-    pinned: str | None = None
 
 
 @dataclass(frozen=True)
@@ -189,10 +189,16 @@ def _closure_blobs(receipt: str) -> dict[str, str]:
     return {module["path"]: module["blob"] for module in _closure(receipt)["modules"]}
 
 
-def _script_pins(script: str) -> dict[str, str]:
-    """The ``NAME_SHA256=...`` pins of a build script."""
-    text = (REPO / script).read_text(encoding="utf-8")
-    return dict(re.findall(r"^([A-Z]+_SHA256)=([0-9a-f]{64})$", text, flags=re.MULTILINE))
+#: Upstream Git blobs no closure receipt records, each read from the file at its
+#: upstream commit on 2 November 2026: ``gen_zmtree.py`` and ``zeromargin.py`` at
+#: evand/square-packing ``6aa82ba4`` (the oracle's blob is also the 1 October packet's
+#: manifest entry), and ``N21PtsLower.lean`` at wand125/square-packing-bounds
+#: ``77636c63``.
+UPSTREAM_BLOBS = {
+    "s12/lean/scripts/gen_zmtree.py": "06f22b4de2497b723e73f760dbb58125cd400336",
+    "s12/search/zeromargin.py": "cd881bdd391cbeeb1eba80d8954d16bf1d82e3bc",
+    "s12/lean/Sqpack/N21PtsLower.lean": "356ce914107db7c522d979e09c5df1f5ac4c1e63",
+}
 
 
 def _chelokot() -> Route:
@@ -380,16 +386,11 @@ def _wand125_n21() -> Route:
     packet = "wand125-n21-zero-margin-lean-2026-09-29"
     zero = f"packing/resources/web/{packet}/square-packing-bounds/point_n21_L5/lean/zero-margin"
     oct07 = "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12"
+    sep28 = "packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12"
     oct01 = "packing/resources/web/evand-square-packing-2026-10-01/source/s12"
-    sep28 = "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds"
+    points = "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds"
     closure = f"packing/resources/web/{packet}/receipts/evand-library-closure-6aa82ba4.json"
     blobs = _closure_blobs(closure)
-    script = _script_pins(f"{zero}/build_zero_margin.sh")
-    library = tuple(
-        Staged(path, f"{oct07}/{path.removeprefix('s12/')}", blob=blob)
-        for path, blob in sorted(blobs.items())
-        if path != "s12/lean/Sqpack/ZMTree.lean"
-    )
     files = (
         # The build pins: `verify` holds their toolchain and package revisions to the
         # closure receipt of 6aa82ba4.
@@ -397,30 +398,34 @@ def _wand125_n21() -> Route:
             Staged(f"s12/{name}", f"{oct07}/{name}")
             for name in ("lean/lean-toolchain", "lean/lakefile.toml", "lean/lake-manifest.json")
         ),
-        *library,
-        # The four files build_zero_margin.sh checks on its clone, held to its pins.
-        Staged(
-            "s12/lean/Sqpack/ZMTree.lean",
-            f"{oct07}/lean/Sqpack/ZMTree.lean",
-            blob=blobs["s12/lean/Sqpack/ZMTree.lean"],
-            pinned=script["ZMTREE_SHA256"],
+        # The nine library modules, each at the closure receipt's blob at 6aa82ba4.
+        *(
+            Staged(path, f"{oct07}/{path.removeprefix('s12/')}", blob=blob)
+            for path, blob in sorted(blobs.items())
         ),
+        # The generator from the 28 September packet, pinned at 6aa82ba4 itself, and its
+        # oracle from the 1 October packet, each at its upstream blob at 6aa82ba4.
         Staged(
             "s12/lean/scripts/gen_zmtree.py",
-            f"{oct07}/lean/scripts/gen_zmtree.py",
-            pinned=script["GEN_SHA256"],
+            f"{sep28}/lean/scripts/gen_zmtree.py",
+            blob=UPSTREAM_BLOBS["s12/lean/scripts/gen_zmtree.py"],
         ),
         Staged(
             "s12/search/zeromargin.py",
             f"{oct01}/search/zeromargin.py",
-            pinned=script["ORACLE_SHA256"],
+            blob=UPSTREAM_BLOBS["s12/search/zeromargin.py"],
         ),
+        # The certificate: the packet pins it as identical to the 28 September copy,
+        # which acquire_source --check holds.
         Staged(
             "s12/certificates/n21pts/n21-capture-one.txt",
-            f"{sep28}/point_n21_L5/certificates/n21-capture-one.txt.gz",
-            pinned=script["CERT_SHA256"],
+            f"{points}/point_n21_L5/certificates/n21-capture-one.txt.gz",
         ),
-        Staged("s12/lean/Sqpack/N21PtsLower.lean", f"{zero}/N21PtsLower.lean"),
+        Staged(
+            "s12/lean/Sqpack/N21PtsLower.lean",
+            f"{zero}/N21PtsLower.lean",
+            blob=UPSTREAM_BLOBS["s12/lean/Sqpack/N21PtsLower.lean"],
+        ),
         Staged("s12/lean/N21PtsAxiomsZ.lean", f"{zero}/N21PtsAxiomsZ.lean"),
         Staged("data-sha256.txt", f"{zero}/data-sha256.txt"),
     )
@@ -500,7 +505,7 @@ def _wand125_n21() -> Route:
             (
                 "The source's build_zero_margin.sh clones evand/square-packing at 6aa82ba4; "
                 "the stage takes those files from the retained packets instead, each bound "
-                "by the closure receipt's Git blob or the script's pinned SHA-256."
+                "by its Git blob at 6aa82ba4, from the closure receipt or UPSTREAM_BLOBS."
             ),
         ),
     )
@@ -586,14 +591,9 @@ def verify(spec: Route, out: Path) -> dict[str, Any]:
         if not target.is_file():
             problems.append(f"{staged.path}: not staged")
             continue
-        data = target.read_bytes()
-        blob = git_blob(data)
+        blob = git_blob(target.read_bytes())
         if staged.blob and blob != staged.blob:
             problems.append(f"{staged.path}: Git blob {blob[:12]}, upstream {staged.blob[:12]}")
-        # The one boundary: the source's build script checks these files on its clone of
-        # evand/square-packing, for which the stage substitutes retained copies.
-        if staged.pinned and hashlib.sha256(data).hexdigest() != staged.pinned:
-            problems.append(f"{staged.path}: not the bytes build_zero_margin.sh pins")
         files.append({"path": staged.path, "origin": staged.origin, "blob": blob})
     project = out / spec.project
     closure = _closure(spec.closure)

@@ -631,15 +631,6 @@ allowlist:
   - path: packing/devtools/check_general_pose_tree_census.py
     kind: external-checkout
     boundary: The general_pose_tree checker, another repository passed by --checker (C3).
-  - path: packing/devtools/replay_lean_packet.py
-    kind: external-checkout
-    boundary: >-
-      Hosono's build_zero_margin.sh clones evand/square-packing at 6aa82ba4 and checks
-      the SHA-256 of gen_zmtree.py, zeromargin.py, ZMTree.lean and the certificate in that
-      clone. The stage puts retained copies from earlier packets in the clone's place, so
-      `verify` holds those four files to the script's own pins, as the recipe would its
-      checkout. Every other staged file is read from Git and compared with nothing but
-      the closure receipt's Git blob; their custody is acquire_source --check's.
   - path: packing/devtools/checkpoint_manifest.py
     kind: legacy-manifest
     boundary: The two retained checkpoint manifests; `pack` writes no new sidecar (F6).

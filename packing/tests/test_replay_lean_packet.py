@@ -57,7 +57,7 @@ def test_a_changed_byte_is_refused_with_the_control_built_from_it(tmp_path: Path
     assert any("Square5Mutant.lean is not the route's control" in p for p in problems)
 
 
-def test_a_substituted_file_not_the_scripts_pin_is_refused(tmp_path: Path) -> None:
+def test_a_substituted_file_not_at_its_upstream_blob_is_refused(tmp_path: Path) -> None:
     spec = rlp.route("wand125-n21")
     assert rlp.stage(spec, tmp_path)["ok"]
     oracle = tmp_path / "s12/search/zeromargin.py"
@@ -68,8 +68,31 @@ def test_a_substituted_file_not_the_scripts_pin_is_refused(tmp_path: Path) -> No
         encoding="utf-8",
     )
     problems = rlp.verify(spec, tmp_path)["problems"]
-    assert "s12/search/zeromargin.py: not the bytes build_zero_margin.sh pins" in problems
+    assert any(p.startswith("s12/search/zeromargin.py: Git blob") for p in problems)
     assert "the manifest's package revisions are not the closure receipt's" in problems
+
+
+def test_the_generator_oracle_and_theorem_module_are_bound_by_upstream_git_blob() -> None:
+    """Review A1: Git identities only, no SHA-256 pin, and no integrity-ceremony entry."""
+    spec = rlp.route("wand125-n21")
+    staged = {s.path: s for s in spec.files}
+    generator = staged["s12/lean/scripts/gen_zmtree.py"]
+    assert generator.blob == "06f22b4de2497b723e73f760dbb58125cd400336"
+    # Staged from the 28 September packet, whose pin is 6aa82ba4 itself.
+    assert "/evand-square-packing-2026-09-28/" in generator.origin
+    oracle = staged["s12/search/zeromargin.py"]
+    manifest = rlp.WEB / "evand-square-packing-2026-10-01/source-manifest.tsv"
+    rows = [line.split("\t") for line in manifest.read_text(encoding="utf-8").splitlines()]
+    assert oracle.blob == next(r[1] for r in rows if r[0] == "s12/search/zeromargin.py")
+    assert staged["s12/lean/Sqpack/N21PtsLower.lean"].blob == (
+        "356ce914107db7c522d979e09c5df1f5ac4c1e63"
+    )
+    assert staged["s12/lean/Sqpack/ZMTree.lean"].blob
+    assert set(rlp.Staged.__dataclass_fields__) == {"path", "origin", "blob"}
+    register = (rlp.REPO / "packing/devtools/integrity-ceremony.yaml").read_text(
+        encoding="utf-8"
+    )
+    assert "packing/devtools/replay_lean_packet.py" not in register
 
 
 def test_a_mutation_that_does_not_occur_exactly_once_is_refused(tmp_path: Path) -> None:
