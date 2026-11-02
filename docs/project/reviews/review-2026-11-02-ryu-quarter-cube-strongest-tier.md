@@ -94,7 +94,10 @@ Questions are at the end.
   `review-2026-10-31-couzo-843-130.md`.
 
 **Run.** Eight programs of my own (What I Ran).
-Seven read only the three TeX files; the eighth reads the maintained checker as data.
+At run time two of them read TeX, `q_quotes.py` and `c_citations.py`, and
+`qcc_predicates.py` reads the maintained checker as data.
+The other five read no file: `iv.py` is the arithmetic, and the four that check numbers
+carry my transcription of the three TeX sources.
 None of the source’s programs was read or run: `k14_constants_check.py`, the cube-root
 packet’s three `check_table_*.py` and the v1.2 programs.
 
@@ -575,8 +578,8 @@ No finding is a defect or a gap.
 
 This is one adversarial AI review, confirming at the level of a read of the chains with
 the constants independently recomputed.
-It changes no rung of any result, since neither preprint has a register entry, and it is
-not a human oversight record.
+It changes no rung of any result, since neither preprint has a result-register entry,
+and it is not a human oversight record.
 
 ## Independence and Disclosure
 
@@ -612,8 +615,8 @@ not a human oversight record.
 
 - It does not decide [R, Lemma 4.10]’s box labels or its coverage.
 - It does not decide [R]’s Proposition 4.5 beyond a careful read and its numbers.
-- It establishes no human oversight, and no rung for a result that has no register
-  entry.
+- It establishes no human oversight, and no rung for a result that has no
+  result-register entry.
 - It does not check the k^{3/8} upper bounds that the C row’s corollary pairs with C.
 - It does not test either construction numerically, and runs none of the source’s
   programs.

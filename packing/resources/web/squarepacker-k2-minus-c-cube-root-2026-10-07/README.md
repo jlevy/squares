@@ -19,7 +19,7 @@ There is no cleaned Markdown transcription; the original TeX remains searchable.
 
 The theorem statements were read from the primary text and are recorded as reported in
 `packing/frontier/asymptotic-waste-bounds.yaml`. None of the source’s checking programs
-was executed here. The theorems have no register entry and so no rung.
+was executed here. The theorems have no result-register entry and so no rung.
 The bounds concern closed-set disjoint packings and integer sides in the stated
 astronomical ranges.
 They change no bound at n ≤ 324 and have no T-number.
