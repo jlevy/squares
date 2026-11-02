@@ -1741,3 +1741,18 @@ repositories:
       under the concept DOI 10.5281/zenodo.23852983, and says the leaf tar files are
       deposited there. Nothing else changes. Rectangles of height below 2 are another
       container; nothing to import.
+  # The intake pass of 2 November 2026, lane L21 (think-3guf, think-n20n), from the
+  # coordinator's read.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: 3cea0f4560238670eea374d06bd0c4f9f2d0ae8f
+    read_on: '2026-11-02'
+    note: >-
+      One commit of 1 November (23:51:43Z) past the 4522fc6 read: 3cea0f4 adds 149 files
+      under strip-even/source/, a mirror of the proof source in TheSnakeFang/squarepack at
+      c54a94c, which is private: the o1n, o2n, o1dp and o2cert trees with their
+      certificates, logs and drivers, the strip notes (strip-even v0.3, strip-n6 v0.2), the
+      n = 6 reduction, the Codex referee reports, and pyproject.toml with uv.lock. The only
+      other change is strip-even/README.md, whose replay now runs from that bundle alone.
+      Nothing under theorem-a/ or composites/ changes, so it does not bear on Theorem A's
+      row, T-163, T-236 or think-mbuh's retain. Rectangles of height below 2 are another
+      container; nothing to import.
