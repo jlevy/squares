@@ -492,6 +492,11 @@ def test_a_bead_with_an_open_child_may_not_close(
     assert check_bead_tree.main([guard, "think-bbbb"]) == 0
     assert check_bead_tree.main([guard, "think-ffff"]) == 0
     capsys.readouterr()
+    # A bead named twice is read once: each hold and each verdict is printed once.
+    assert check_bead_tree.main([guard, "think-pppp", "think-bbbb", "think-pppp"]) == 1
+    shown = capsys.readouterr().out.splitlines()
+    assert len([line for line in shown if "HOLD" in line]) == 3
+    assert len([line for line in shown if "think-bbbb" in line and "may close" in line]) == 1
 
 
 @pytest.mark.parametrize(

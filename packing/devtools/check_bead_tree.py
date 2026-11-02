@@ -472,6 +472,7 @@ def before_close(closing: Sequence[str]) -> int:
     if not closing:
         print(f"usage: {BEFORE_CLOSE} think-xxxx [think-yyyy ...]", file=sys.stderr)
         return 2
+    closing = tuple(dict.fromkeys(closing))  # a bead named twice is read once
     off_main = records_off_main()
     if off_main is None:
         print(
