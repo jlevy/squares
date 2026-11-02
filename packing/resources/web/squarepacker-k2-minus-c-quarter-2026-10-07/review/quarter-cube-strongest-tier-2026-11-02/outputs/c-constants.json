@@ -1,0 +1,1126 @@
+{
+ "program": "c_constants.py",
+ "python": "3.14.7",
+ "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+ "program_sha256": {
+  "c_constants.py": "a7a2305121fb7a88340bcba64ec100b23648cce3fcae2aad7ed639a8d5e08f02",
+  "checks.py": "318b4b1a68191dc846a32b164b9d8ad19afc9247c9b00ecfca9fd4acb0b0a9ae",
+  "iv.py": "c2341d825430c8ed6bc1929b71bdec3ce3df810cd19b32f5165263e7035e1c4a",
+  "q_constants.py": "ef69c5d3b55e4089d8d17667db792bf3a09cdc721ee7563e83f08dd62a9b4df3",
+  "q_supplementary.py": "760c0727707236c1d7d24a07c57bdb95a39c66396ecc63823793f0d9f370654b",
+  "qmodel.py": "d33e250adff64c8d2d657e0cb9640ada8e230f0fd6ba73335c49768febf2b887"
+ },
+ "summary": {
+  "checks": 95,
+  "needed_true": 95,
+  "needed_false": 0,
+  "needed_undecided": 0,
+  "display_checked": 24,
+  "display_true": 24,
+  "display_false": 0
+ },
+ "checks": [
+  {
+   "id": "S2-B1-K9",
+   "where": "C L177",
+   "what": "B1 = (A-bar/2 + 2 bbar)/cos(bbar), K = 9",
+   "relation": "<=",
+   "shown": "5.3033531",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "5.30335300000596627212500559338e+0",
+    "5.30335300000596627212500559338e+0"
+   ]
+  },
+  {
+   "id": "S2-L1-K9",
+   "where": "C L177",
+   "what": "L1, K = 9",
+   "relation": "<=",
+   "shown": "100021.23",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.00021225267002023865088500022e+5",
+    "1.00021225267002023865088500022e+5"
+   ]
+  },
+  {
+   "id": "S2-B1-K13",
+   "where": "C L177",
+   "what": "B1 = (A-bar/2 + 2 bbar)/cos(bbar), K = 13",
+   "relation": "<=",
+   "shown": "6.3738031",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.37380300000717052837500672237e+0",
+    "6.37380300000717052837500672237e+0"
+   ]
+  },
+  {
+   "id": "S2-L1-K13",
+   "where": "C L177",
+   "what": "L1, K = 13",
+   "relation": "<=",
+   "shown": "100025.52",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.00025512337102028682113500026e+5",
+    "1.00025512337102028682113500026e+5"
+   ]
+  },
+  {
+   "id": "L2.1-w0",
+   "where": "C L200",
+   "what": "w0 at theta = bbar (the largest)",
+   "relation": "<",
+   "shown": "1.13e-5",
+   "needed": true,
+   "enclosure": [
+    "1.12614740075003621217281428831e-5",
+    "1.12614740075003621217281428831e-5"
+   ]
+  },
+  {
+   "id": "L2.1-C2",
+   "where": "C L197",
+   "what": "(C2): theta/2 <= 1.5e-6",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L2.1-C3",
+   "where": "C L198",
+   "what": "(C3): c1 (1-eps)^(-3/4) = 2^(-1/4) theta < theta",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L2.1-C7",
+   "where": "C L201",
+   "what": "(C7): y0 + 1 = 2 <= (k/2 - 3)/2 exactly when k >= 14",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "L2.1-Q2",
+   "where": "C L202",
+   "what": "(Q2): b* = 2^(-1/4) theta <= 1e-4",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C1-i",
+   "where": "C Table 1, case 1",
+   "what": "(i): beta(k_a) <= bbar and tau0 - 1.0001 beta(k_a) > tau1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C1-ii",
+   "where": "C Table 1, case 1",
+   "what": "(ii): E(beta(k_a), W(k_a)) < 1 - nu0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C1-iii",
+   "where": "C Table 1, case 1",
+   "what": "(iii): (1 - 2 tau0)(k_a - 6) > R+(k_a)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C1-left",
+   "where": "C Table 1, case 1",
+   "what": "(1 - 2 tau0)(k_a - 6)/k_a",
+   "relation": ">=",
+   "shown": "0.95899994",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "9.58999942459999999999999999999e-1",
+    "9.58999942460000000000000000000e-1"
+   ]
+  },
+  {
+   "id": "C1-Rplus",
+   "where": "C Table 1, case 1",
+   "what": "R+(k_a)/k_a",
+   "relation": "<=",
+   "shown": "0.87266009",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "8.72660085520583490058398965841e-1",
+    "8.72660085520583490058398965841e-1"
+   ]
+  },
+  {
+   "id": "C1-beta",
+   "where": "C L494",
+   "what": "beta(k_a)",
+   "relation": "<",
+   "shown": "2.5e-7",
+   "needed": true,
+   "enclosure": [
+    "1.19999999999999999999999999999e-7",
+    "1.20000000000000000000000000000e-7"
+   ]
+  },
+  {
+   "id": "C1-E",
+   "where": "C L494",
+   "what": "E(beta(k_a), W(k_a))",
+   "relation": "<",
+   "shown": "6.6e-7",
+   "needed": true,
+   "enclosure": [
+    "6.37134742439999999999999999999e-7",
+    "6.37134742440000000000000000000e-7"
+   ]
+  },
+  {
+   "id": "C1-iv",
+   "where": "C Table 1, case 1",
+   "what": "(iv): gamma k_b^(1/2) <= W1 = 2 tau1/(B1 bbar)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C1-decimal",
+   "where": "C Table 1 caption",
+   "what": "(iii) (and (iv)) still hold with the decimal B1, L1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C2-i",
+   "where": "C Table 1, case 2",
+   "what": "(i): beta(k_a) <= bbar and tau0 - 1.0001 beta(k_a) > tau1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C2-ii",
+   "where": "C Table 1, case 2",
+   "what": "(ii): E(beta(k_a), W(k_a)) < 1 - nu0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C2-iii",
+   "where": "C Table 1, case 2",
+   "what": "(iii): (1 - 2 tau0)(k_a - 6) > R+(k_a)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C2-left",
+   "where": "C Table 1, case 2",
+   "what": "(1 - 2 tau0)(k_a - 6)/k_a",
+   "relation": ">=",
+   "shown": "0.66499999",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.64999999999998403999999999999e-1",
+    "6.64999999999998404000000000000e-1"
+   ]
+  },
+  {
+   "id": "C2-Rplus",
+   "where": "C Table 1, case 2",
+   "what": "R+(k_a)/k_a",
+   "relation": "<=",
+   "shown": "0.61085501",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.10855003425444098993194595128e-1",
+    "6.10855003425444098993194595128e-1"
+   ]
+  },
+  {
+   "id": "C2-beta",
+   "where": "C L494",
+   "what": "beta(k_a)",
+   "relation": "<",
+   "shown": "2.5e-7",
+   "needed": true,
+   "enclosure": [
+    "2.39999999999999999999999999999e-11",
+    "2.40000000000000000000000000000e-11"
+   ]
+  },
+  {
+   "id": "C2-E",
+   "where": "C L494",
+   "what": "E(beta(k_a), W(k_a))",
+   "relation": "<",
+   "shown": "6.6e-7",
+   "needed": true,
+   "enclosure": [
+    "4.45490410430015999999999999999e-7",
+    "4.45490410430016000000000000000e-7"
+   ]
+  },
+  {
+   "id": "C2-iv",
+   "where": "C Table 1, case 2",
+   "what": "(iv): gamma k_b^(1/2) <= W1 = 2 tau1/(B1 bbar)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C2-decimal",
+   "where": "C Table 1 caption",
+   "what": "(iii) (and (iv)) still hold with the decimal B1, L1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C3-i",
+   "where": "C Table 1, case 3",
+   "what": "(i): beta(k_a) <= bbar and tau0 - 1.0001 beta(k_a) > tau1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C3-ii",
+   "where": "C Table 1, case 3",
+   "what": "(ii): E(beta(k_a), W(k_a)) < 1 - nu0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C3-iii",
+   "where": "C Table 1, case 3",
+   "what": "(iii): (1 - 2 tau0)(k_a - 6) > R+(k_a)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C3-left",
+   "where": "C Table 1, case 3",
+   "what": "(1 - 2 tau0)(k_a - 6)/k_a",
+   "relation": ">=",
+   "shown": "0.66499999",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.64999999999999988599999999999e-1",
+    "6.64999999999999988600000000000e-1"
+   ]
+  },
+  {
+   "id": "C3-Rplus",
+   "where": "C Table 1, case 3",
+   "what": "R+(k_a)/k_a",
+   "relation": "<=",
+   "shown": "0.62871651",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.28716509218741891603557533881e-1",
+    "6.28716509218741891603557533881e-1"
+   ]
+  },
+  {
+   "id": "C3-beta",
+   "where": "C L494",
+   "what": "beta(k_a)",
+   "relation": "<",
+   "shown": "2.5e-7",
+   "needed": true,
+   "enclosure": [
+    "2.01351392344711197735869947609e-12",
+    "2.01351392344711197735869947609e-12"
+   ]
+  },
+  {
+   "id": "C3-E",
+   "where": "C L494",
+   "what": "E(beta(k_a), W(k_a))",
+   "relation": "<",
+   "shown": "6.6e-7",
+   "needed": true,
+   "enclosure": [
+    "4.51530979682801546267021699171e-7",
+    "4.51530979682801546267021699171e-7"
+   ]
+  },
+  {
+   "id": "C3-decimal",
+   "where": "C Table 1 caption",
+   "what": "(iii) (and (iv)) still hold with the decimal B1, L1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C3-decimal-excess",
+   "where": "C Table 1 caption",
+   "what": "with the decimal B1, L1, R+(k_a)/k_a exceeds the entry by about 5e-9 (between 1e-9 and 1e-8)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "5.19589597436510318938859120159e-9",
+    "5.19589597436510318938859120159e-9"
+   ]
+  },
+  {
+   "id": "C4-i",
+   "where": "C Table 1, case 4",
+   "what": "(i): beta(k_a) <= bbar and tau0 - 1.0001 beta(k_a) > tau1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C4-ii",
+   "where": "C Table 1, case 4",
+   "what": "(ii): E(beta(k_a), W(k_a)) < 1 - nu0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C4-iii",
+   "where": "C Table 1, case 4",
+   "what": "(iii): (1 - 2 tau0)(k_a - 6) > R+(k_a)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C4-left",
+   "where": "C Table 1, case 4",
+   "what": "(1 - 2 tau0)(k_a - 6)/k_a",
+   "relation": ">=",
+   "shown": "0.66639999",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.66399999999999999996001599999e-1",
+    "6.66399999999999999996001600000e-1"
+   ]
+  },
+  {
+   "id": "C4-Rplus",
+   "where": "C Table 1, case 4",
+   "what": "R+(k_a)/k_a",
+   "relation": "<=",
+   "shown": "0.66296281",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.62962808522942260048131815637e-1",
+    "6.62962808522942260048131815637e-1"
+   ]
+  },
+  {
+   "id": "C4-beta",
+   "where": "C L494",
+   "what": "beta(k_a)",
+   "relation": "<",
+   "shown": "2.5e-7",
+   "needed": true,
+   "enclosure": [
+    "9.99999999999999999999999999999e-15",
+    "1.00000000000000000000000000000e-14"
+   ]
+  },
+  {
+   "id": "C4-E",
+   "where": "C L494",
+   "what": "E(beta(k_a), W(k_a))",
+   "relation": "<",
+   "shown": "6.6e-7",
+   "needed": true,
+   "enclosure": [
+    "3.31466004218750624999999999999e-8",
+    "3.31466004218750625000000000000e-8"
+   ]
+  },
+  {
+   "id": "C4-decimal",
+   "where": "C Table 1 caption",
+   "what": "(iii) (and (iv)) still hold with the decimal B1, L1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C4-decimal-excess",
+   "where": "C Table 1 caption",
+   "what": "with the decimal B1, L1, R+(k_a)/k_a exceeds the entry by about 5e-9 (between 1e-9 and 1e-8)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "4.78233848147413672287586961759e-9",
+    "4.78233848147413672287586961759e-9"
+   ]
+  },
+  {
+   "id": "C5-i",
+   "where": "C Table 1, case 5",
+   "what": "(i): beta(k_a) <= bbar and tau0 - 1.0001 beta(k_a) > tau1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C5-ii",
+   "where": "C Table 1, case 5",
+   "what": "(ii): E(beta(k_a), W(k_a)) < 1 - nu0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C5-iii",
+   "where": "C Table 1, case 5",
+   "what": "(iii): (1 - 2 tau0)(k_a - 6) > R+(k_a)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C5-left",
+   "where": "C Table 1, case 5",
+   "what": "(1 - 2 tau0)(k_a - 6)/k_a",
+   "relation": ">=",
+   "shown": "0.95899994",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "9.58999942459999999999999999999e-1",
+    "9.58999942460000000000000000000e-1"
+   ]
+  },
+  {
+   "id": "C5-Rplus",
+   "where": "C Table 1, case 5",
+   "what": "R+(k_a)/k_a",
+   "relation": "<=",
+   "shown": "0.89044495",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "8.90444945731004929183054374589e-1",
+    "8.90444945731004929183054374589e-1"
+   ]
+  },
+  {
+   "id": "C5-beta",
+   "where": "C L494",
+   "what": "beta(k_a)",
+   "relation": "<",
+   "shown": "2.5e-7",
+   "needed": true,
+   "enclosure": [
+    "1.19999999999999999999999999999e-7",
+    "1.20000000000000000000000000000e-7"
+   ]
+  },
+  {
+   "id": "C5-E",
+   "where": "C L494",
+   "what": "E(beta(k_a), W(k_a))",
+   "relation": "<",
+   "shown": "6.6e-7",
+   "needed": true,
+   "enclosure": [
+    "6.50752614791999999999999999999e-7",
+    "6.50752614792000000000000000000e-7"
+   ]
+  },
+  {
+   "id": "C5-iv",
+   "where": "C Table 1, case 5",
+   "what": "(iv): gamma k_b^(1/2) <= W1 = 2 tau1/(B1 bbar)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C5-decimal",
+   "where": "C Table 1 caption",
+   "what": "(iii) (and (iv)) still hold with the decimal B1, L1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C6-i",
+   "where": "C Table 1, case 6",
+   "what": "(i): beta(k_a) <= bbar and tau0 - 1.0001 beta(k_a) > tau1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C6-ii",
+   "where": "C Table 1, case 6",
+   "what": "(ii): E(beta(k_a), W(k_a)) < 1 - nu0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C6-iii",
+   "where": "C Table 1, case 6",
+   "what": "(iii): (1 - 2 tau0)(k_a - 6) > R+(k_a)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C6-left",
+   "where": "C Table 1, case 6",
+   "what": "(1 - 2 tau0)(k_a - 6)/k_a",
+   "relation": ">=",
+   "shown": "0.66499999",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.64999999999998337499999999999e-1",
+    "6.64999999999998337500000000000e-1"
+   ]
+  },
+  {
+   "id": "C6-Rplus",
+   "where": "C Table 1, case 6",
+   "what": "R+(k_a)/k_a",
+   "relation": "<=",
+   "shown": "0.62854332",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.28543315181608920158165472722e-1",
+    "6.28543315181608920158165472722e-1"
+   ]
+  },
+  {
+   "id": "C6-beta",
+   "where": "C L494",
+   "what": "beta(k_a)",
+   "relation": "<",
+   "shown": "2.5e-7",
+   "needed": true,
+   "enclosure": [
+    "2.44948974278317809819728407470e-11",
+    "2.44948974278317809819728407470e-11"
+   ]
+  },
+  {
+   "id": "C6-E",
+   "where": "C L494",
+   "what": "E(beta(k_a), W(k_a))",
+   "relation": "<",
+   "shown": "6.6e-7",
+   "needed": true,
+   "enclosure": [
+    "4.58922866455394372809215423332e-7",
+    "4.58922866455394372809215423332e-7"
+   ]
+  },
+  {
+   "id": "C6-iv",
+   "where": "C Table 1, case 6",
+   "what": "(iv): gamma k_b^(1/2) <= W1 = 2 tau1/(B1 bbar)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C6-iv-l",
+   "where": "C L495",
+   "what": "gamma k_b^(1/2), case 6",
+   "relation": "<=",
+   "shown": "34934.23",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.49342239072231286916871568442e+4",
+    "3.49342239072231286916871568442e+4"
+   ]
+  },
+  {
+   "id": "C6-iv-r",
+   "where": "C L495",
+   "what": "W1, case 6",
+   "relation": ">=",
+   "shown": "34934.66",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.49346640720486916000803152584e+4",
+    "3.49346640720486916000803152584e+4"
+   ]
+  },
+  {
+   "id": "C6-decimal",
+   "where": "C Table 1 caption",
+   "what": "(iii) (and (iv)) still hold with the decimal B1, L1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C7-i",
+   "where": "C Table 1, case 7",
+   "what": "(i): beta(k_a) <= bbar and tau0 - 1.0001 beta(k_a) > tau1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C7-ii",
+   "where": "C Table 1, case 7",
+   "what": "(ii): E(beta(k_a), W(k_a)) < 1 - nu0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C7-iii",
+   "where": "C Table 1, case 7",
+   "what": "(iii): (1 - 2 tau0)(k_a - 6) > R+(k_a)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C7-left",
+   "where": "C Table 1, case 7",
+   "what": "(1 - 2 tau0)(k_a - 6)/k_a",
+   "relation": ">=",
+   "shown": "0.66499999",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.64999999999999988230088495575e-1",
+    "6.64999999999999988230088495575e-1"
+   ]
+  },
+  {
+   "id": "C7-Rplus",
+   "where": "C Table 1, case 7",
+   "what": "R+(k_a)/k_a",
+   "relation": "<=",
+   "shown": "0.63009391",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.30093900861859805009728883598e-1",
+    "6.30093900861859805009728883598e-1"
+   ]
+  },
+  {
+   "id": "C7-beta",
+   "where": "C L494",
+   "what": "beta(k_a)",
+   "relation": "<",
+   "shown": "2.5e-7",
+   "needed": true,
+   "enclosure": [
+    "2.05683853951034215105939169879e-12",
+    "2.05683853951034215105939169879e-12"
+   ]
+  },
+  {
+   "id": "C7-E",
+   "where": "C L494",
+   "what": "E(beta(k_a), W(k_a))",
+   "relation": "<",
+   "shown": "6.6e-7",
+   "needed": true,
+   "enclosure": [
+    "4.57064224758092584457373892920e-7",
+    "4.57064224758092584457373892920e-7"
+   ]
+  },
+  {
+   "id": "C7-decimal",
+   "where": "C Table 1 caption",
+   "what": "(iii) (and (iv)) still hold with the decimal B1, L1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C8-i",
+   "where": "C Table 1, case 8",
+   "what": "(i): beta(k_a) <= bbar and tau0 - 1.0001 beta(k_a) > tau1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C8-ii",
+   "where": "C Table 1, case 8",
+   "what": "(ii): E(beta(k_a), W(k_a)) < 1 - nu0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C8-iii",
+   "where": "C Table 1, case 8",
+   "what": "(iii): (1 - 2 tau0)(k_a - 6) > R+(k_a)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "C8-left",
+   "where": "C Table 1, case 8",
+   "what": "(1 - 2 tau0)(k_a - 6)/k_a",
+   "relation": ">=",
+   "shown": "0.66639999",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.66399999999999999996001599999e-1",
+    "6.66399999999999999996001600000e-1"
+   ]
+  },
+  {
+   "id": "C8-Rplus",
+   "where": "C Table 1, case 8",
+   "what": "R+(k_a)/k_a",
+   "relation": "<=",
+   "shown": "0.66284161",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.62841603145386189993159261826e-1",
+    "6.62841603145386189993159261826e-1"
+   ]
+  },
+  {
+   "id": "C8-beta",
+   "where": "C L494",
+   "what": "beta(k_a)",
+   "relation": "<",
+   "shown": "2.5e-7",
+   "needed": true,
+   "enclosure": [
+    "9.99999999999999999999999999999e-15",
+    "1.00000000000000000000000000000e-14"
+   ]
+  },
+  {
+   "id": "C8-E",
+   "where": "C L494",
+   "what": "E(beta(k_a), W(k_a))",
+   "relation": "<",
+   "shown": "6.6e-7",
+   "needed": true,
+   "enclosure": [
+    "3.31444228778000519999999999999e-8",
+    "3.31444228778000520000000000000e-8"
+   ]
+  },
+  {
+   "id": "C8-decimal",
+   "where": "C Table 1 caption",
+   "what": "(iii) (and (iv)) still hold with the decimal B1, L1",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S5-cbar-K9",
+   "where": "C L499",
+   "what": "c-bar_infinity, K = 9",
+   "relation": ">",
+   "shown": "0.062853",
+   "needed": true,
+   "enclosure": [
+    "6.28531443202438257409230759682e-2",
+    "6.28531443202438257409230759682e-2"
+   ]
+  },
+  {
+   "id": "S5-cbar-K13",
+   "where": "C L499",
+   "what": "c-bar_infinity, K = 13",
+   "relation": ">",
+   "shown": "0.052297",
+   "needed": true,
+   "enclosure": [
+    "5.22974177156168726309739308234e-2",
+    "5.22974177156168726309739308234e-2"
+   ]
+  },
+  {
+   "id": "R6.1-W1-K9-0.02",
+   "where": "C L522-523",
+   "what": "W1 ~ 5.03e3 (tau1 = 0.02, K = 9), to nearest",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "5.02826545142981556510884195181e+3",
+    "5.02826545142981556510884195181e+3"
+   ]
+  },
+  {
+   "id": "R6.1-W1-K9-0.167",
+   "where": "C L522-523",
+   "what": "W1 ~ 4.20e4 (tau1 = 0.167, K = 9), to nearest",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "4.19860165194389599686588302976e+4",
+    "4.19860165194389599686588302976e+4"
+   ]
+  },
+  {
+   "id": "R6.1-W1-K13-0.02",
+   "where": "C L522-523",
+   "what": "W1 ~ 4183.79 (tau1 = 0.02, K = 13), to nearest",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "4.18379210443696905390183416269e+3",
+    "4.18379210443696905390183416269e+3"
+   ]
+  },
+  {
+   "id": "R6.1-W1-K13-0.167",
+   "where": "C L522-523",
+   "what": "W1 ~ 34934.66 (tau1 = 0.167, K = 13), to nearest",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "3.49346640720486916000803152584e+4",
+    "3.49346640720486916000803152584e+4"
+   ]
+  },
+  {
+   "id": "S1-1e12",
+   "where": "C L109",
+   "what": "1e-4 sqrt(k) >= 0.1 k^(1/4) exactly when k >= 1e12",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S1-4.17e12",
+   "where": "C L110",
+   "what": "(0.1/7e-5)^4, beyond which 7e-5 sqrt(k) >= 0.1 k^(1/4)",
+   "relation": "<=",
+   "shown": "4.17e12",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.16493127863390254060807996668e+12",
+    "4.16493127863390254060807996668e+12"
+   ],
+   "note": "the text names 4.17e12, an upper bound"
+  },
+  {
+   "id": "S1-460",
+   "where": "C L111",
+   "what": "(5/3)^12, beyond which 0.06 k^(1/3) >= 0.1 k^(1/4)",
+   "relation": "<=",
+   "shown": "460",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.59393657997783385173518791361e+2",
+    "4.59393657997783385173518791361e+2"
+   ],
+   "note": "the text names 460, an upper bound"
+  },
+  {
+   "id": "S1-214.9",
+   "where": "C L111",
+   "what": "1e-4 sqrt(4.62e12)",
+   "relation": ">",
+   "shown": "214.9",
+   "needed": true,
+   "enclosure": [
+    "2.14941852602046770392440105754e+2",
+    "2.14941852602046770392440105754e+2"
+   ]
+  },
+  {
+   "id": "S1-W>=4",
+   "where": "C L113",
+   "what": "1e-4 sqrt(9e8) = 3, so W > 3 from k >= 9e8",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S1-W>=6",
+   "where": "C L113",
+   "what": "1e-4 sqrt(2.5e9) = 5, so W > 5 from k >= 2.5e9",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S5-witness-K9",
+   "where": "C L498-511",
+   "what": "gamma = 0.06285: with tau0 = 1/6, tau1 = 1/6 - 1e-6, nu0 = 1e-5, b = 500007/500000, (i)-(iii) hold at a finite k_a",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "6.66653407346714656474918861829e-1",
+    "6.66653407346714656474918861829e-1"
+   ],
+   "note": "k_a = 1e24"
+  },
+  {
+   "id": "S5-witness-K13",
+   "where": "C L498-511",
+   "what": "gamma = 0.05229: with tau0 = 1/6, tau1 = 1/6 - 1e-6, nu0 = 1e-5, b = 1000063/1000000, (i)-(iii) hold at a finite k_a",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "6.66651566140019998065807401915e-1",
+    "6.66651566140019998065807401915e-1"
+   ],
+   "note": "k_a = 1e22"
+  }
+ ],
+ "results": {
+  "table1": [
+   {
+    "case": 1,
+    "K": 9,
+    "left/k": 0.95899994246,
+    "R+/k": 0.8726600855205835,
+    "beta": 1.2e-07,
+    "E": 6.3713474244e-07,
+    "iv": [
+     5000.0,
+     5028.265451429816
+    ],
+    "decimal_excess_over_entry": -4.195152185934823e-09
+   },
+   {
+    "case": 2,
+    "K": 9,
+    "left/k": 0.6649999999999984,
+    "R+/k": 0.6108550034254441,
+    "beta": 2.4e-11,
+    "E": 4.45490410430016e-07,
+    "iv": [
+     41412.55848169731,
+     41986.01651943896
+    ],
+    "decimal_excess_over_entry": -6.375570912374603e-09
+   },
+   {
+    "case": 3,
+    "K": 9,
+    "left/k": 0.665,
+    "R+/k": 0.6287165092187419,
+    "beta": 2.013513923447112e-12,
+    "E": 4.5153097968280154e-07,
+    "decimal_excess_over_entry": 5.1958959743651035e-09
+   },
+   {
+    "case": 4,
+    "K": 9,
+    "left/k": 0.6664,
+    "R+/k": 0.6629628085229423,
+    "beta": 1e-14,
+    "E": 3.314660042187506e-08,
+    "decimal_excess_over_entry": 4.782338481474137e-09
+   },
+   {
+    "case": 5,
+    "K": 13,
+    "left/k": 0.95899994246,
+    "R+/k": 0.890444945731005,
+    "beta": 1.2e-07,
+    "E": 6.50752614792e-07,
+    "iv": [
+     4164.132562731403,
+     4183.792104436969
+    ],
+    "decimal_excess_over_entry": -3.8777958204554365e-09
+   },
+   {
+    "case": 6,
+    "K": 13,
+    "left/k": 0.6649999999999984,
+    "R+/k": 0.6285433151816089,
+    "beta": 2.4494897427831782e-11,
+    "E": 4.5892286645539435e-07,
+    "iv": [
+     34934.22390722313,
+     34934.66407204869
+    ],
+    "decimal_excess_over_entry": -4.542250485552869e-09
+   },
+   {
+    "case": 7,
+    "K": 13,
+    "left/k": 0.665,
+    "R+/k": 0.6300939008618598,
+    "beta": 2.056838539510342e-12,
+    "E": 4.570642247580926e-07,
+    "decimal_excess_over_entry": -8.86061772105918e-09
+   },
+   {
+    "case": 8,
+    "K": 13,
+    "left/k": 0.6664,
+    "R+/k": 0.6628416031453862,
+    "beta": 1e-14,
+    "E": 3.3144422877800054e-08,
+    "decimal_excess_over_entry": -1.6395929896360374e-09
+   }
+  ],
+  "liminf_witnesses": [
+   {
+    "K": 9,
+    "gamma": "0.06285",
+    "b": "500007/500000",
+    "k_a_exp10": 24
+   },
+   {
+    "K": 13,
+    "gamma": "0.05229",
+    "b": "1000063/1000000",
+    "k_a_exp10": 22
+   }
+  ]
+ }
+}

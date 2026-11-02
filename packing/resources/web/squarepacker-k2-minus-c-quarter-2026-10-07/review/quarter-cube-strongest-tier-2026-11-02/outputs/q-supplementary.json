@@ -1,0 +1,1462 @@
+{
+ "program": "q_supplementary.py",
+ "python": "3.14.7",
+ "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+ "program_sha256": {
+  "checks.py": "318b4b1a68191dc846a32b164b9d8ad19afc9247c9b00ecfca9fd4acb0b0a9ae",
+  "iv.py": "c2341d825430c8ed6bc1929b71bdec3ce3df810cd19b32f5165263e7035e1c4a",
+  "q_constants.py": "ef69c5d3b55e4089d8d17667db792bf3a09cdc721ee7563e83f08dd62a9b4df3",
+  "q_supplementary.py": "760c0727707236c1d7d24a07c57bdb95a39c66396ecc63823793f0d9f370654b",
+  "qmodel.py": "d33e250adff64c8d2d657e0cb9640ada8e230f0fd6ba73335c49768febf2b887"
+ },
+ "summary": {
+  "checks": 118,
+  "needed_true": 118,
+  "needed_false": 0,
+  "needed_undecided": 0,
+  "display_checked": 41,
+  "display_true": 41,
+  "display_false": 0
+ },
+ "checks": [
+  {
+   "id": "T4-K9-c0.12-constraints",
+   "where": "Q Table 4, column K=9, c*=0.12",
+   "what": "(C0)-(C7) at k0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.12-ratio",
+   "where": "Q Table 4, column K=9, c*=0.12",
+   "what": "Psi-bar(k0)/k0^(1/4)",
+   "relation": ">=",
+   "shown": "0.1200448",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.20044847481962315006110423722e-1",
+    "1.20044847481962315006110423722e-1"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.12-i",
+   "where": "Q Table 4, column K=9, c*=0.12",
+   "what": "(i): Psi-bar(k0) >= c* k0^(1/4)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.12-D1",
+   "where": "Q Table 4, column K=9, c*=0.12",
+   "what": "D1",
+   "relation": ">=",
+   "shown": "0.0067036",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.70362257917100946070233636998e-3",
+    "6.70362257917100946070233636998e-3"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.12-iii-l",
+   "where": "Q Table 4, column K=9, c*=0.12",
+   "what": "y1(k0)^(1/4) D1",
+   "relation": ">=",
+   "shown": "12.166",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.21665372361025479222694905569e+1",
+    "1.21665372361025479222694905569e+1"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.12-iii-r",
+   "where": "Q Table 4, column K=9, c*=0.12",
+   "what": "K_W/(2 B-bar)",
+   "relation": "<=",
+   "shown": "0.0062733",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.27328296561329246284712748165e-3",
+    "6.27328296561329246284712748165e-3"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.12-ii",
+   "where": "Q Table 4, column K=9, c*=0.12",
+   "what": "(ii): D1 > 0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.12-iii",
+   "where": "Q Table 4, column K=9, c*=0.12",
+   "what": "(iii)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.14-constraints",
+   "where": "Q Table 4, column K=9, c*=0.14",
+   "what": "(C0)-(C7) at k0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.14-ratio",
+   "where": "Q Table 4, column K=9, c*=0.14",
+   "what": "Psi-bar(k0)/k0^(1/4)",
+   "relation": ">=",
+   "shown": "0.1400019",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.40001959594685943704551434311e-1",
+    "1.40001959594685943704551434311e-1"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.14-i",
+   "where": "Q Table 4, column K=9, c*=0.14",
+   "what": "(i): Psi-bar(k0) >= c* k0^(1/4)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.14-D1",
+   "where": "Q Table 4, column K=9, c*=0.14",
+   "what": "D1",
+   "relation": ">=",
+   "shown": "0.0041135",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.11354277799775172628125181749e-3",
+    "4.11354277799775172628125181749e-3"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.14-iii-l",
+   "where": "Q Table 4, column K=9, c*=0.14",
+   "what": "y1(k0)^(1/4) D1",
+   "relation": ">=",
+   "shown": "13.024",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.30243942372810125913282364712e+1",
+    "1.30243942372810125913282364712e+1"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.14-iii-r",
+   "where": "Q Table 4, column K=9, c*=0.14",
+   "what": "K_W/(2 B-bar)",
+   "relation": "<=",
+   "shown": "0.0077586",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "7.75857907093256330528252328912e-3",
+    "7.75857907093256330528252328912e-3"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.14-ii",
+   "where": "Q Table 4, column K=9, c*=0.14",
+   "what": "(ii): D1 > 0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.14-iii",
+   "where": "Q Table 4, column K=9, c*=0.14",
+   "what": "(iii)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.15-constraints",
+   "where": "Q Table 4, column K=9, c*=0.15",
+   "what": "(C0)-(C7) at k0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.15-ratio",
+   "where": "Q Table 4, column K=9, c*=0.15",
+   "what": "Psi-bar(k0)/k0^(1/4)",
+   "relation": ">=",
+   "shown": "0.1500058",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.50005843014345745719585877350e-1",
+    "1.50005843014345745719585877350e-1"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.15-i",
+   "where": "Q Table 4, column K=9, c*=0.15",
+   "what": "(i): Psi-bar(k0) >= c* k0^(1/4)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.15-D1",
+   "where": "Q Table 4, column K=9, c*=0.15",
+   "what": "D1",
+   "relation": ">=",
+   "shown": "0.0027026",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.70267413480735427250006590435e-3",
+    "2.70267413480735427250006590435e-3"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.15-iii-l",
+   "where": "Q Table 4, column K=9, c*=0.15",
+   "what": "y1(k0)^(1/4) D1",
+   "relation": ">=",
+   "shown": "13.320",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.33200755549761695004292851303e+1",
+    "1.33200755549761695004292851303e+1"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.15-iii-r",
+   "where": "Q Table 4, column K=9, c*=0.15",
+   "what": "K_W/(2 B-bar)",
+   "relation": "<=",
+   "shown": "0.0083679",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "8.36784862214399079908311101240e-3",
+    "8.36784862214399079908311101240e-3"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.15-ii",
+   "where": "Q Table 4, column K=9, c*=0.15",
+   "what": "(ii): D1 > 0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.15-iii",
+   "where": "Q Table 4, column K=9, c*=0.15",
+   "what": "(iii)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.16-constraints",
+   "where": "Q Table 4, column K=9, c*=0.16",
+   "what": "(C0)-(C7) at k0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.16-ratio",
+   "where": "Q Table 4, column K=9, c*=0.16",
+   "what": "Psi-bar(k0)/k0^(1/4)",
+   "relation": ">=",
+   "shown": "0.1600075",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.60007561236561616675046203739e-1",
+    "1.60007561236561616675046203739e-1"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.16-i",
+   "where": "Q Table 4, column K=9, c*=0.16",
+   "what": "(i): Psi-bar(k0) >= c* k0^(1/4)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.16-D1",
+   "where": "Q Table 4, column K=9, c*=0.16",
+   "what": "D1",
+   "relation": ">=",
+   "shown": "0.0012500",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.25000607595481188433393409514e-3",
+    "1.25000607595481188433393409514e-3"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.16-iii-l",
+   "where": "Q Table 4, column K=9, c*=0.16",
+   "what": "y1(k0)^(1/4) D1",
+   "relation": ">=",
+   "shown": "13.560",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.35604645390856000959931602309e+1",
+    "1.35604645390856000959931602309e+1"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.16-iii-r",
+   "where": "Q Table 4, column K=9, c*=0.16",
+   "what": "K_W/(2 B-bar)",
+   "relation": "<=",
+   "shown": "0.0088999",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "8.89986048590481617387602011089e-3",
+    "8.89986048590481617387602011089e-3"
+   ]
+  },
+  {
+   "id": "T4-K9-c0.16-ii",
+   "where": "Q Table 4, column K=9, c*=0.16",
+   "what": "(ii): D1 > 0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K9-c0.16-iii",
+   "where": "Q Table 4, column K=9, c*=0.16",
+   "what": "(iii)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K13-c0.12-constraints",
+   "where": "Q Table 4, column K=13, c*=0.12",
+   "what": "(C0)-(C7) at k0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K13-c0.12-ratio",
+   "where": "Q Table 4, column K=13, c*=0.12",
+   "what": "Psi-bar(k0)/k0^(1/4)",
+   "relation": ">=",
+   "shown": "0.1200086",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.20008687186418065097324236191e-1",
+    "1.20008687186418065097324236191e-1"
+   ]
+  },
+  {
+   "id": "T4-K13-c0.12-i",
+   "where": "Q Table 4, column K=13, c*=0.12",
+   "what": "(i): Psi-bar(k0) >= c* k0^(1/4)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K13-c0.12-D1",
+   "where": "Q Table 4, column K=13, c*=0.12",
+   "what": "D1",
+   "relation": ">=",
+   "shown": "0.0029558",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "2.95587950064184111660174238590e-3",
+    "2.95587950064184111660174238590e-3"
+   ]
+  },
+  {
+   "id": "T4-K13-c0.12-iii-l",
+   "where": "Q Table 4, column K=13, c*=0.12",
+   "what": "y1(k0)^(1/4) D1",
+   "relation": ">=",
+   "shown": "10.959",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.09597885855083263611365943454e+1",
+    "1.09597885855083263611365943454e+1"
+   ]
+  },
+  {
+   "id": "T4-K13-c0.12-iii-r",
+   "where": "Q Table 4, column K=13, c*=0.12",
+   "what": "K_W/(2 B-bar)",
+   "relation": "<=",
+   "shown": "0.0066855",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "6.68540338858050355890289209524e-3",
+    "6.68540338858050355890289209524e-3"
+   ]
+  },
+  {
+   "id": "T4-K13-c0.12-ii",
+   "where": "Q Table 4, column K=13, c*=0.12",
+   "what": "(ii): D1 > 0",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-K13-c0.12-iii",
+   "where": "Q Table 4, column K=13, c*=0.12",
+   "what": "(iii)",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T4-2065",
+   "where": "Q L5299-5300",
+   "what": "(2065/0.16)^4 > 2.77e16 > (2064/0.16)^4",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K9-k1e13-constraints",
+   "where": "Q Table 5, K=9, k=1e13",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K9-k1e13-B",
+   "where": "Q Table 5, K=9, k=1e13",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "36.52537",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.65253675522871765414440150387e+1",
+    "3.65253675522871765414440150387e+1"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e13-Psi",
+   "where": "Q Table 5, K=9, k=1e13",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "196.77",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.96773891068919539029776643966e+2",
+    "1.96773891068919539029776643966e+2"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e13-W",
+   "where": "Q Table 5, K=9, k=1e13",
+   "what": "W >= ceil(Psi-bar(k)) = 197",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K9-k1e14-constraints",
+   "where": "Q Table 5, K=9, k=1e14",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K9-k1e14-B",
+   "where": "Q Table 5, K=9, k=1e14",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "33.80809",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.38080829541602712589804034492e+1",
+    "3.38080829541602712589804034492e+1"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e14-Psi",
+   "where": "Q Table 5, K=9, k=1e14",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "426.16",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.26169817665725860524971591235e+2",
+    "4.26169817665725860524971591235e+2"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e14-W",
+   "where": "Q Table 5, K=9, k=1e14",
+   "what": "W >= ceil(Psi-bar(k)) = 427",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K9-k1e16-constraints",
+   "where": "Q Table 5, K=9, k=1e16",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K9-k1e16-B",
+   "where": "Q Table 5, K=9, k=1e16",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "32.40967",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.24096691864566707779888993837e+1",
+    "3.24096691864566707779888993837e+1"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e16-Psi",
+   "where": "Q Table 5, K=9, k=1e16",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "1575.76",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.57576154028112508074342526453e+3",
+    "1.57576154028112508074342526453e+3"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e16-W",
+   "where": "Q Table 5, K=9, k=1e16",
+   "what": "W >= ceil(Psi-bar(k)) = 1576",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K9-k1e20-constraints",
+   "where": "Q Table 5, K=9, k=1e20",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K9-k1e20-B",
+   "where": "Q Table 5, K=9, k=1e20",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "31.91017",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.19101623947355572809717652386e+1",
+    "3.19101623947355572809717652386e+1"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e20-Psi",
+   "where": "Q Table 5, K=9, k=1e20",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "16751.28",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.67512826249647911089049228997e+4",
+    "1.67512826249647911089049228997e+4"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e20-W",
+   "where": "Q Table 5, K=9, k=1e20",
+   "what": "W >= ceil(Psi-bar(k)) = 16752",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K9-k1e30-constraints",
+   "where": "Q Table 5, K=9, k=1e30",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K9-k1e30-B",
+   "where": "Q Table 5, K=9, k=1e30",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "31.72495",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.17249406323536809490389478674e+1",
+    "3.17249406323536809490389478674e+1"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e30-Psi",
+   "where": "Q Table 5, K=9, k=1e30",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "5363347.52",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "5.36334752640291540357328492362e+6",
+    "5.36334752640291540357328492362e+6"
+   ]
+  },
+  {
+   "id": "T5-K9-k1e30-W",
+   "where": "Q Table 5, K=9, k=1e30",
+   "what": "W >= ceil(Psi-bar(k)) = 5363348",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K13-k1e13-constraints",
+   "where": "Q Table 5, K=13, k=1e13",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K13-k1e13-B",
+   "where": "Q Table 5, K=13, k=1e13",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "43.84613",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.38461259229373255561841585119e+1",
+    "4.38461259229373255561841585119e+1"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e13-Psi",
+   "where": "Q Table 5, K=13, k=1e13",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "163.91",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.63919854351648467468937892292e+2",
+    "1.63919854351648467468937892292e+2"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e13-W",
+   "where": "Q Table 5, K=13, k=1e13",
+   "what": "W >= ceil(Psi-bar(k)) = 164",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K13-k1e14-constraints",
+   "where": "Q Table 5, K=13, k=1e14",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K13-k1e14-B",
+   "where": "Q Table 5, K=13, k=1e14",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "40.58423",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.05842257898805287119883238845e+1",
+    "4.05842257898805287119883238845e+1"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e14-Psi",
+   "where": "Q Table 5, K=13, k=1e14",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "355.01",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.55015006450920531365047221716e+2",
+    "3.55015006450920531365047221716e+2"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e14-W",
+   "where": "Q Table 5, K=13, k=1e14",
+   "what": "W >= ceil(Psi-bar(k)) = 356",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K13-k1e16-constraints",
+   "where": "Q Table 5, K=13, k=1e16",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K13-k1e16-B",
+   "where": "Q Table 5, K=13, k=1e16",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "38.90551",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.89055015683238276080323191778e+1",
+    "3.89055015683238276080323191778e+1"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e16-Psi",
+   "where": "Q Table 5, K=13, k=1e16",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "1312.66",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.31266668009347326590227548600e+3",
+    "1.31266668009347326590227548600e+3"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e16-W",
+   "where": "Q Table 5, K=13, k=1e16",
+   "what": "W >= ceil(Psi-bar(k)) = 1313",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K13-k1e20-constraints",
+   "where": "Q Table 5, K=13, k=1e20",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K13-k1e20-B",
+   "where": "Q Table 5, K=13, k=1e20",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "38.33686",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.83368551709147919162571154221e+1",
+    "3.83368551709147919162571154221e+1"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e20-Psi",
+   "where": "Q Table 5, K=13, k=1e20",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "13948.51",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "1.39485192843776935484010588656e+4",
+    "1.39485192843776935484010588656e+4"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e20-W",
+   "where": "Q Table 5, K=13, k=1e20",
+   "what": "W >= ceil(Psi-bar(k)) = 13949",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "T5-K13-k1e30-constraints",
+   "where": "Q Table 5, K=13, k=1e30",
+   "what": "(C0)-(C7) at k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "T5-K13-k1e30-B",
+   "where": "Q Table 5, K=13, k=1e30",
+   "what": "B-bar",
+   "relation": "<=",
+   "shown": "38.12805",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.81280482307735452235220146903e+1",
+    "3.81280482307735452235220146903e+1"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e30-Psi",
+   "where": "Q Table 5, K=13, k=1e30",
+   "what": "Psi-bar(k)",
+   "relation": ">=",
+   "shown": "4462691.45",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "4.46269145351973030983272152095e+6",
+    "4.46269145351973030983272152095e+6"
+   ]
+  },
+  {
+   "id": "T5-K13-k1e30-W",
+   "where": "Q Table 5, K=13, k=1e30",
+   "what": "W >= ceil(Psi-bar(k)) = 4462692",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "note": "W is an integer and W >= Psi-bar(k) (Lemma 11.1)"
+  },
+  {
+   "id": "S-Bcrit",
+   "where": "Q L5334-5337",
+   "what": "B_crit at pi*, k0 = 4.62e12",
+   "relation": ">=",
+   "shown": "38.510824",
+   "needed": true,
+   "display": true,
+   "enclosure": [
+    "3.85108242828556197238114305625e+1",
+    "3.85108242828556197238114305625e+1"
+   ]
+  },
+  {
+   "id": "S-margin",
+   "where": "Q L5338",
+   "what": "(B_crit - B-bar)/B-bar",
+   "relation": "trunc",
+   "shown": "1.0463e-4...",
+   "needed": true,
+   "enclosure": [
+    "1.04630688911177696244512999370e-4",
+    "1.04630688911177696244512999370e-4"
+   ]
+  },
+  {
+   "id": "S-margin<",
+   "where": "Q L5338",
+   "what": "(B_crit - B-bar)/B-bar",
+   "relation": "<",
+   "shown": "1.05e-4",
+   "needed": true,
+   "enclosure": [
+    "1.04630688911177696244512999370e-4",
+    "1.04630688911177696244512999370e-4"
+   ]
+  },
+  {
+   "id": "S-a-holds",
+   "where": "Q L5343-5362, (a)",
+   "what": "(i)-(iii) hold at the extreme value 10.60905",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-a-largest",
+   "where": "Q L5343-5362, (a)",
+   "what": "the largest value for which (i) holds is 10.6090514...",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "1.06090514692183205625042319297e+1",
+    "1.06090514692183933220803737640e+1"
+   ]
+  },
+  {
+   "id": "S-a-rounded-down",
+   "where": "Q L5343-5362, (a)",
+   "what": "10.60905 is that value rounded down: (i) fails at 530453/50000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-b-holds",
+   "where": "Q L5343-5362, (b)",
+   "what": "(i)-(iii) hold at the extreme value 10.60891",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-b-largest",
+   "where": "Q L5343-5362, (b)",
+   "what": "the largest value for which (i) holds is 10.6089191...",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "1.06089191657984338235110044479e+1",
+    "1.06089191657985065830871462821e+1"
+   ]
+  },
+  {
+   "id": "S-b-rounded-down",
+   "where": "Q L5343-5362, (b)",
+   "what": "10.60891 is that value rounded down: (i) fails at 265223/25000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-c-holds",
+   "where": "Q L5343-5362, (c)",
+   "what": "(i)-(iii) hold at the extreme value 10.60781",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-c-largest",
+   "where": "Q L5343-5362, (c)",
+   "what": "the largest value for which (i) holds is 10.6078176...",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "1.06078176004005217691883444786e+1",
+    "1.06078176004005945287644863128e+1"
+   ]
+  },
+  {
+   "id": "S-c-rounded-down",
+   "where": "Q L5343-5362, (c)",
+   "what": "10.60781 is that value rounded down: (i) fails at 530391/50000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-d-holds",
+   "where": "Q L5343-5362, (d)",
+   "what": "(i)-(iii) hold at the extreme value 1.0150",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-d-largest",
+   "where": "Q L5343-5362, (d)",
+   "what": "the largest value for which (i) holds is 1.0150101...",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "1.01501016589245409704744815826e+0",
+    "1.01501016589254504651762545108e+0"
+   ]
+  },
+  {
+   "id": "S-d-rounded-down",
+   "where": "Q L5343-5362, (d)",
+   "what": "1.0150 is that value rounded down: (i) fails at 10151/10000",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-e-holds",
+   "where": "Q L5343-5362, (e)",
+   "what": "(i)-(iii) hold at the extreme value 53.09",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-e-largest",
+   "where": "Q L5343-5362, (e)",
+   "what": "the largest value for which (i) holds is 53.0942...",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "5.30942386091496878464113251538e+1",
+    "5.30942386091497748878964557661e+1"
+   ]
+  },
+  {
+   "id": "S-e-rounded-down",
+   "where": "Q L5343-5362, (e)",
+   "what": "53.09 is that value rounded down: (i) fails at 531/10",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-f-holds",
+   "where": "Q L5343-5362, (f)",
+   "what": "(i)-(iii) hold at the extreme value 1.434",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-f-largest",
+   "where": "Q L5343-5362, (f)",
+   "what": "the largest value for which (i) holds is 1.43499...",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "1.43499253476574040178093127906e+0",
+    "1.43499253476579724519979208707e+0"
+   ]
+  },
+  {
+   "id": "S-f-rounded-down",
+   "where": "Q L5343-5362, (f)",
+   "what": "1.434 is that value rounded down: (i) fails at 287/200",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-CL2-ii-iii",
+   "where": "Q L5364-5366",
+   "what": "with C_Lambda = 2, (ii) and (iii) hold at 4.62e12",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-CL2-i-fails",
+   "where": "Q L5367",
+   "what": "with C_Lambda = 2, (i) fails at 4.62e12",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-CL2-zero",
+   "where": "Q L5367",
+   "what": "the crossing point is 4.8449...e12",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "4.84496623670715052867308259010e+12",
+    "4.84496623670784174464643001556e+12"
+   ]
+  },
+  {
+   "id": "S-CL2-4.845",
+   "where": "Q L5368",
+   "what": "at 4.845e12, (i)-(iii) and (C7) hold with C_Lambda = 2",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-kmin",
+   "where": "Q L5374",
+   "what": "the least integer k with (C7) at pi* is 84216488464",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-kmin-ii-iii",
+   "where": "Q L5374-5375",
+   "what": "(ii) and (iii) hold at that k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-kstar",
+   "where": "Q L5376-5379",
+   "what": "(i) fails at 4616673963026 and holds at 4616673963027",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S-kstar-trunc",
+   "where": "Q L5377",
+   "what": "k* = 4.616673...e12",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "4.61667396302636280441284179687e+12",
+    "4.61667396302636280536651611328e+12"
+   ]
+  },
+  {
+   "id": "S-k0/k*",
+   "where": "Q L5381",
+   "what": "k0/k* - 1",
+   "relation": "trunc",
+   "shown": "7.20e-4...",
+   "needed": true,
+   "enclosure": [
+    "7.20440083114918854362792138390e-4",
+    "7.20440083114919061083342312224e-4"
+   ]
+  },
+  {
+   "id": "S-k0/k*-intro",
+   "where": "Q L143",
+   "what": "4.62e12/k* - 1",
+   "relation": "<",
+   "shown": "7.3e-4",
+   "needed": true,
+   "enclosure": [
+    "7.20440083114918854362792138390e-4",
+    "7.20440083114919061083342312224e-4"
+   ]
+  },
+  {
+   "id": "S13-margin",
+   "where": "Q L5383",
+   "what": "relative margin for Theorem A13",
+   "relation": "trunc",
+   "shown": "1.7385e-5...",
+   "needed": true,
+   "enclosure": [
+    "1.73857530966687089657140158825e-5",
+    "1.73857530966687089657140158825e-5"
+   ]
+  },
+  {
+   "id": "S13-kmin",
+   "where": "Q L5385",
+   "what": "the least integer k with (C7) at pi*13 is 120000600012",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S13-kmin-ii-iii",
+   "where": "Q L5385",
+   "what": "(ii) and (iii) hold at that k",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S13-kstar",
+   "where": "Q L5387-5389",
+   "what": "(i) fails at 21695977343082 and holds at 21695977343083",
+   "relation": "fact",
+   "shown": "",
+   "needed": true
+  },
+  {
+   "id": "S13-kstar-trunc",
+   "where": "Q L5388",
+   "what": "k*13 = 2.169597...e13",
+   "relation": "fact",
+   "shown": "",
+   "needed": true,
+   "enclosure": [
+    "2.16959773430823986768722534179e+13",
+    "2.16959773430823986778259277343e+13"
+   ]
+  },
+  {
+   "id": "S13-k0/k*",
+   "where": "Q L5391",
+   "what": "2.17e13/k*13 - 1",
+   "relation": "trunc",
+   "shown": "1.85e-4...",
+   "needed": true,
+   "enclosure": [
+    "1.85410265414197460491272297545e-4",
+    "1.85410265414197504455695855468e-4"
+   ]
+  }
+ ],
+ "results": {
+  "table4": [
+   {
+    "K": 9,
+    "c*": "0.12",
+    "k0": "2.17e13",
+    "ratio": [
+     0.12004484748196231,
+     0.12004484748196231
+    ],
+    "D1": 0.006703622579171009,
+    "iii": [
+     12.166537236102547,
+     0.006273282965613292
+    ]
+   },
+   {
+    "K": 9,
+    "c*": "0.14",
+    "k0": "2.01e14",
+    "ratio": [
+     0.14000195959468595,
+     0.14000195959468595
+    ],
+    "D1": 0.004113542777997752,
+    "iii": [
+     13.024394237281012,
+     0.0077585790709325635
+    ]
+   },
+   {
+    "K": 9,
+    "c*": "0.15",
+    "k0": "1.18e15",
+    "ratio": [
+     0.15000584301434575,
+     0.15000584301434575
+    ],
+    "D1": 0.0027026741348073545,
+    "iii": [
+     13.32007555497617,
+     0.008367848622143991
+    ]
+   },
+   {
+    "K": 9,
+    "c*": "0.16",
+    "k0": "2.77e16",
+    "ratio": [
+     0.16000756123656162,
+     0.16000756123656162
+    ],
+    "D1": 0.0012500060759548118,
+    "iii": [
+     13.5604645390856,
+     0.008899860485904815
+    ]
+   },
+   {
+    "K": 13,
+    "c*": "0.12",
+    "k0": "3.78e14",
+    "ratio": [
+     0.12000868718641806,
+     0.12000868718641806
+    ],
+    "D1": 0.002955879500641841,
+    "iii": [
+     10.959788585508326,
+     0.006685403388580503
+    ]
+   }
+  ],
+  "table5": [
+   {
+    "K": 9,
+    "k": "1e13",
+    "B": 36.52536755228718,
+    "Psi": 196.77389106891954,
+    "W>=": 197
+   },
+   {
+    "K": 9,
+    "k": "1e14",
+    "B": 33.80808295416027,
+    "Psi": 426.1698176657259,
+    "W>=": 427
+   },
+   {
+    "K": 9,
+    "k": "1e16",
+    "B": 32.40966918645667,
+    "Psi": 1575.761540281125,
+    "W>=": 1576
+   },
+   {
+    "K": 9,
+    "k": "1e20",
+    "B": 31.910162394735558,
+    "Psi": 16751.28262496479,
+    "W>=": 16752
+   },
+   {
+    "K": 9,
+    "k": "1e30",
+    "B": 31.724940632353682,
+    "Psi": 5363347.526402916,
+    "W>=": 5363348
+   },
+   {
+    "K": 13,
+    "k": "1e13",
+    "B": 43.846125922937325,
+    "Psi": 163.91985435164847,
+    "W>=": 164
+   },
+   {
+    "K": 13,
+    "k": "1e14",
+    "B": 40.58422578988053,
+    "Psi": 355.0150064509205,
+    "W>=": 356
+   },
+   {
+    "K": 13,
+    "k": "1e16",
+    "B": 38.90550156832383,
+    "Psi": 1312.6666800934734,
+    "W>=": 1313
+   },
+   {
+    "K": 13,
+    "k": "1e20",
+    "B": 38.336855170914795,
+    "Psi": 13948.519284377693,
+    "W>=": 13949
+   },
+   {
+    "K": 13,
+    "k": "1e30",
+    "B": 38.128048230773544,
+    "Psi": 4462691.45351973,
+    "W>=": 4462692
+   }
+  ],
+  "sensitivity": {
+   "a": {
+    "what": "A' up to 10.60905 (A <= 10.6067)",
+    "bracket": [
+     "29161938625199/2748779069440",
+     "36452423281499/3435973836800"
+    ],
+    "float": 10.60905146921832
+   },
+   "b": {
+    "what": "A up to 10.60891 (A' <= 10.6068)",
+    "bracket": [
+     "72903937380819/6871947673600",
+     "145807874761639/13743895347200"
+    ],
+    "float": 10.608919165798433
+   },
+   "c": {
+    "what": "A <= 10.60781 with A' = A + 1e-4",
+    "bracket": [
+     "145792734962091/13743895347200",
+     "36448183740523/3435973836800"
+    ],
+    "float": 10.607817600400521
+   },
+   "d": {
+    "what": "C_Lambda up to 1.0150",
+    "bracket": [
+     "1395019349637/1374389534720",
+     "11160154797097/10995116277760"
+    ],
+    "float": 1.0150101658924542
+   },
+   "e": {
+    "what": "b_W in Theorem 9.1 up to 53.09",
+    "bracket": [
+     "14944699575980421/281474976710656",
+     "29889399151960891/562949953421312"
+    ],
+    "float": 53.094238609149684
+   },
+   "f": {
+    "what": "wall term up to 1.434 times its bound",
+    "bracket": [
+     "25244655643947/17592186044416",
+     "6311163910987/4398046511104"
+    ],
+    "float": 1.4349925347657404
+   }
+  },
+  "CL2_crossing": [
+   "1300560721055087890625/268435456",
+   "325140180263818359375/67108864"
+  ],
+  "kstar": {
+   "bracket": [
+    "1210233379363582851/262144",
+    "4840933517454331405/1048576"
+   ],
+   "phi": {
+    "4616673963026": [
+     -1.6737225411494085e-12,
+     -1.6737225411494085e-12
+    ],
+    "4616673963027": [
+     2.939557171416776e-12,
+     2.939557171416776e-12
+    ]
+   }
+  },
+  "kstar13": [
+   "22749881138499969275/1048576",
+   "5687470284624992319/262144"
+  ]
+ }
+}

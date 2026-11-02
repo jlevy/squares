@@ -1,0 +1,199 @@
+{
+ "program": "q_quotes.py",
+ "program_sha256": "f0290e9f34a02b15894611da65e64077f0528277cbd64c8fa0fb58e9df66f6e8",
+ "inputs_sha256": {
+  "paper.tex": "25db094cd7af9d707eb6eddda987e3fbb99d22813ff1672646fb0a724d1e3bb3"
+ },
+ "statements": [
+  {
+   "quote": "Lemma 2.1",
+   "q_label": "imp:L2.1",
+   "r_source": "lem:red",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 3.1",
+   "q_label": "imp:L3.1",
+   "r_source": "lem:geom",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 3.2",
+   "q_label": "imp:L3.2",
+   "r_source": "lem:G",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Corollary 3.3",
+   "q_label": "imp:C3.3",
+   "r_source": "cor:W1",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 3.4",
+   "q_label": "imp:L3.4",
+   "r_source": "lem:A",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 3.5",
+   "q_label": "imp:L3.5",
+   "r_source": "lem:E",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.1",
+   "q_label": "imp:L4.1",
+   "r_source": "lem:cg",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.2",
+   "q_label": "imp:L4.2",
+   "r_source": "lem:bd",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Proposition 4.3",
+   "q_label": "imp:P4.3",
+   "r_source": "prop:FL",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.4",
+   "q_label": "imp:L4.4",
+   "r_source": "lem:cone",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Proposition 4.5",
+   "q_label": "imp:P4.5",
+   "r_source": "prop:FLpar",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.8",
+   "q_label": "imp:L4.8",
+   "r_source": "lem:count",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.9",
+   "q_label": "imp:L4.9",
+   "r_source": "lem:Kw",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.10",
+   "q_label": "imp:L4.10",
+   "r_source": "lem:Kw9",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Remark 4.11",
+   "q_label": "imp:R4.11",
+   "r_source": "the remark after Lemma 4.10 (lem:Kw9)",
+   "match": true,
+   "kind": "prefix of the remark"
+  },
+  {
+   "quote": "Lemma 4.12",
+   "q_label": "imp:L4.12",
+   "r_source": "lem:slit",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.13",
+   "q_label": "imp:L4.13",
+   "r_source": "lem:Bh",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.14",
+   "q_label": "imp:L4.14",
+   "r_source": "lem:Bv",
+   "match": true,
+   "kind": "whole statement"
+  },
+  {
+   "quote": "Lemma 4.15",
+   "q_label": "imp:L4.15",
+   "r_source": "lem:Eline",
+   "match": true,
+   "kind": "whole statement"
+  }
+ ],
+ "sentences": [
+  {
+   "quote": "Finally, $s(n)\\le k$ always holds for $n\\le k^2$, so for integers $0\\le c<k^2$ we have $s(k^2-c)=k$ iff $k^2-c>M(k)$.",
+   "found_in_R": true
+  },
+  {
+   "quote": "The proof of Lemma 4.9 uses no property of $G$ except that the only sides involved are two opposite ones; the bound holds for any family of such pairs at distan",
+   "found_in_R": true
+  },
+  {
+   "quote": "holds for any family of such pairs at distance $<d$",
+   "found_in_R": true
+  },
+  {
+   "quote": "the number of all pairs of squares (or of a square and one of two opposite sides) at distance less than $d$ whose rectangles contain $p$",
+   "found_in_R": true,
+   "note": "found after removing \\emph from [R]'s text: Q drops one emphasis"
+  },
+  {
+   "quote": "By Lemma 4.10 (with $d=d'$), every point of the waste lies in $R_e$ for at most $K_w^*$ of the pairs with $|Y_e^c|>0$, so $\\sum f_e\\le K_w^*W$, the sum over the",
+   "found_in_R": true
+  },
+  {
+   "quote": "$\\sum_ef_e\\le K_w^*W$ (Lemma 4.10 with $d=\\delta$)",
+   "found_in_R": true
+  },
+  {
+   "quote": "edges of $G_v$ whose members are at distance $<\\delta$",
+   "found_in_R": true
+  },
+  {
+   "quote": "with the analytic bound $K_w=13$ of Lemma 4.9 in place of $K_w^*$, the proof of Section 6 gives $A<12.7476$",
+   "found_in_R": true
+  },
+  {
+   "quote": "holds for any family of such pairs at distance $<d$",
+   "found_in_R": true
+  },
+  {
+   "quote": "the number of \\emph{all} pairs of squares (or of a square and one of two opposite sides) at distance less than $d$ whose rectangles contain $p$",
+   "found_in_R": true
+  },
+  {
+   "quote": "The proof bounds the number of \\emph{all} pairs of squares (or of a square and one of two opposite sides) at distance less than $d$ whose rectangles contain $p$",
+   "found_in_R": true
+  },
+  {
+   "quote": "Efficient packings of unit squares in a large square",
+   "found_in_R": true
+  }
+ ],
+ "summary": {
+  "statements": 19,
+  "statements_matching": 19,
+  "sentences": 12,
+  "sentences_found": 12
+ }
+}
