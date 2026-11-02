@@ -5,7 +5,7 @@ title: "Validate: wand125 s(145) >= 306/25 (mixed_n145_L1224), linear replay of 
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: bold-ritchie-l32
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m4wv27yed1e2wfnq55h1avr0
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:16.293Z
-updated_at: 2026-11-02T19:05:32.040Z
+updated_at: 2026-11-02T19:35:41.329Z
 started_at: 2026-11-02T19:05:32.040Z
 ---
 Validation part of think-u0av for n = 145 (T-179 in the 14 October records PR #602, s(145) to s(149), V0/C1). Record-changing at 145-149.
@@ -29,3 +29,7 @@ Validation part of think-u0av for n = 145 (T-179 in the 14 October records PR #6
 - Depends on: the preparation slice above. No owner decision.
 - Done when: linear-merge reports all 201 angles replayed and matching the certificate's records, linear-control refuses both mutations, and the replay evidence is registered on T-179 with the 14 October review as the mapped review; noted on think-u0av.
 - Machine note: 4 CPUs shared with gates; a run > 2 wall-h should be scheduled outside a validation gate. About 18.5 wall-h at two workers; run it in --stop-after-hours chunks outside gates.
+
+## Notes
+
+2026-11-02 bold-ritchie-l32 (intake lane L32, epic think-3guf; branch claude/bold-ritchie-xo28us-l32, draft PR #889): the preparation slice is done (commit 1e13a0571). fine_net_followup retain held certificates__mixed_n145_L1224.tar.gz (38,598,220 B, 6a937dc7...2a49, equal to the pin) and copied candidate.json (516,199 B, 3cd54c43...) and certificate.json (39,867 B, e3c58aa2...92ca) to the packet's release/ as deterministic gzip; the proof bundle n145-L12.24-proof-bundle.tar.gz (47,407,937 B, 4dc4f673...0a0b) is pinned by digest in acquisition/release-assets.json (PINNED_MEMBERS now names linear proof bundles); check-retained 0 problems. audit_wand125_linear registers it as n145 (root square-packing, directory problems/square-lower-bounds/certificates/mixed_n145_L1224): linear_tree adds the release members to the pinned tree, retained_path reads release-held files, tarball_pin falls back to the release record, and release_bundle takes the asset (supplied or fetched from the release), holds it to its pin and copies out the bundle. linear-audit for the packet: exact premises hold from the retained bytes (124,435,707 nodes; receipts/linear-audit.json). linear-fetch n145: BUNDLE_READY, 810 bundle files bound, 202 checker copies, all 201 inputs enclose the candidate (receipts/n145/fetch.json, 19:24-19:25Z, about 1 CPU-minute). Tests: test_wand125_linear_certificates.py and test_fine_net_followup.py 112 passed. The replay (linear-replay n145 --range 0-200 --workers 2 --stop-after-hours 17.8, nice -n 19) is queued after T-176's census in a detached queue, with linear-merge and linear-control after it only if the range completes; the stop keeps the lane under its 40 CPU-hour cap.
