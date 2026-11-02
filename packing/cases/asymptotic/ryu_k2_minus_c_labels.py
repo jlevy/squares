@@ -137,6 +137,10 @@ TURN = 1 << 64
 MAX_PIECES = 4096
 #: The binary64 value of 2 pi, which every upper angle end at 2 pi in the lists carries.
 TWO_PI_FLOAT = 6.283185307179586
+#: The widest angle interval whose cos and sin are bounded by `arc_range`; wider ones
+#: (28 intervals of inf boxes span the whole circle) get the trivial range [-1, 1]. A
+#: cell adds at most 2 pi / 2^5 < 0.2, so every arc `arc_range` sees is below 3 < pi.
+ARC_LIMIT = 2.8
 
 
 def dn(x: Any) -> Any:
@@ -382,8 +386,8 @@ class Box:
         if np.any(self.r_lo > self.r_hi) or np.any(self.t_lo > self.t_hi):
             msg = "an interval of the box is reversed"
             raise ValueError(msg)
-        if np.any(self.r_lo <= 0) or np.any(self.t_hi - self.t_lo > 2.5):
-            msg = "a radius is not positive or an angle interval is wider than 2.5"
+        if np.any(self.r_lo <= 0) or np.any(self.t_hi - self.t_lo > 6.3):
+            msg = "a radius is not positive or an angle interval is wider than the circle"
             raise ValueError(msg)
         if self.h is not None and not 0 <= self.h[0] <= self.h[1]:
             msg = "the side's interval is reversed or negative"
@@ -461,6 +465,8 @@ class Quantities:
             if box.t_lo[i] == box.t_hi[i]:
                 # A point interval: the arc test would also admit the antipode.
                 c_lo, c_hi, s_lo, s_hi = lo
+            elif box.t_hi[i] - box.t_lo[i] >= ARC_LIMIT:
+                c_lo, c_hi, s_lo, s_hi = -1.0, 1.0, -1.0, 1.0
             else:
                 c_lo, c_hi, s_lo, s_hi = arc_range(lo[0:2], lo[2:4], hi[0:2], hi[2:4])
             cx_lo[i], cx_hi[i] = imul(box.r_lo[i], box.r_hi[i], c_lo, c_hi)
@@ -559,6 +565,9 @@ class Quantities:
             ca, sa = difference_ends(phi_a, self.trig_hi[j])
             cb, sb = difference_ends(phi_b, self.trig_lo[j])
             c_lo, c_hi, s_lo, s_hi = arc_range(ca, sa, cb, sb)
+            if box.t_hi[j] - box.t_lo[j] >= ARC_LIMIT:
+                low, high = np.full(len(cells), -1.0), np.full(len(cells), 1.0)
+                c_lo, c_hi, s_lo, s_hi = low, high, low, high
             proj.append(imul(box.r_lo[j], box.r_hi[j], c_lo, c_hi))
             sines.append((s_lo, s_hi))
         cross = imul(box.r_lo[i], box.r_hi[i], sines[i][0], sines[i][1])
