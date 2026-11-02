@@ -5,7 +5,7 @@ title: "Answer Hyukdong Kim's comment of 26 October on #804: a public copy of hi
 kind: task
 status: open
 priority: 2
-version: 9
+version: 10
 delegate: bold-ritchie-l15
 labels:
   - intake
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-31T06:26:34.858Z
-updated_at: 2026-11-01T19:44:33.865Z
+updated_at: 2026-11-02T00:04:34.644Z
 started_at: 2026-11-01T18:59:31.153Z
 closed_at: null
 close_reason: null
@@ -59,3 +59,20 @@ Record it with `corrects: [https://github.com/jlevy/squares/issues/804#issuecomm
 
 
 2026-11-01 bold-ritchie-l15 (lane L15 of the 31 October intake): **posted** the #804 confirmation after #868 merged (main b02ca7f7a) and its Pages deploy verified (run 41338863020, verify-deployment 6,035 of 6,035): https://github.com/jlevy/squares/issues/804#issuecomment-6562502956 (19:05:20Z, read back identical to the draft). It states T-247 at V3/C3, confirmed, pending adoption, on route B (verify_exact.py VALID, 1,750 identities, four controls refused; E-hyukdongkim-804-s297-verify-exact); both bundles' files kept from f480441e; route 1 queued (think-ozx8), route A held (think-vv1q); adoption on think-ot5c and think-ikku, then stage 4; the t244 files ask queued (think-4rzl). Recorded on draft PR #871 (branch claude/bold-ritchie-xo28us-l15). check_requests: no reply due on #804, not closeable (the t244 files ask), so this bead stays open as #804's answer bead; the coordinator closes it after #871 merges.
+
+2026-11-02 bold-ritchie-l20 (lane L20 of the intake pass, think-ozx8), branch claude/bold-ritchie-xo28us-l20: route 1 of T-247's route B is recorded (receipts/algebraic-route1-n297.json.xz, evidence E-hyukdongkim-804-s297-exact-feasibility, mapped under #804's side-297). check_requests on the branch: #804 reply due, "side-297: E-hyukdongkim-804-s297-exact-feasibility (verified, replayed-here): confirmed, and no reply has named it". Draft below, NOT posted. Post it after the PR merges and its Pages deploy is verified, edited against `check_requests --draft 804` rendered from main (it must still give T-247 at the rungs, status and position main gives it, and the asks' states main holds). Record it under #804's replies with `reported` for side-297: T-247 V3/C3, confirmed, pending adoption, and E-hyukdongkim-804-s297-exact-feasibility, confirmed; `beads` as named.
+
+> @HyukdongKim, your configuration at 297 is now decided here on a second exact route.
+>
+> **Since our reply of 1 November, 19:05Z.** That reply gave route 1 at 297 as queued. It has now run. T-247, s(297), is unchanged at **V3/C3, confirmed**, still pending adoption.
+>
+> **Route 1, decided on your file.** This repository's exact verifier, `sqpack.witness.exact_verify`, ran over K, the field of degree 21, on your `n297.minpoly.json` (SHA-256 `e5c340b8…2826`), rebuilt as a witness with every centre in K. It decided every unit-square identity, wall and pair, 43,956 pairs, and accepted the configuration. It refused a duplicated square, on overlap, and a square moved outside the box, on containment. Your file gives the angle parameter of 190 squares as the empty list. We read those as zero, as `verify_exact.py` does. This is `E-hyukdongkim-804-s297-exact-feasibility`, confirmed. So 297 is now decided on two exact routes, as 172 and 263 were: this verifier and Evan Daniel's `verify_exact.py`.
+>
+> **What remains.**
+> - **Route A**, this project's own configuration at the side, is still held over the CPU cap (`think-vv1q`). It would add a route and raise no rung.
+> - **Adoption at 297.** Nothing is adopted yet. Your side is the exact value of the house's own arrangement, 3.359×10⁻⁹⁰ below T-174's rational certificate. As at 263, its adoption waits on a writer that lets a house carry an algebraic side (`think-ot5c`). It also waits on the owner's ruling on whether such a side moves a case (`think-ikku`). If both allow it, a stage 4 review of the configuration comes first.
+> - **Your asks.** Keeping the files of `t244-exact-configurations.zip` in the configurations packet is still queued (`think-4rzl`). It changes no result.
+>
+> **On `main`.** [`packing/frontier/RESULTS.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/RESULTS.md), [`packing/frontier/n-297.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/n-297.md), [the 297 packet](https://github.com/jlevy/squares/blob/main/packing/resources/web/hyukdongkim-s297-2026-10-25/README.md).
+>
+> This issue stays open while that ask is queued, and a reply follows each change in the record.
