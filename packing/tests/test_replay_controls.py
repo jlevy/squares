@@ -269,8 +269,51 @@ def test_the_controls_directories_hold_only_the_controls() -> None:
     for n, controls in driver.ZM_CONTROLS.items():
         for control in controls:
             expected[PACKETS[n]] |= zm_control_files(n, control)
+    for (n, _), probe in ZM_POSE_PROBES.items():
+        expected[PACKETS[n]].add(probe)
     for packet, names in expected.items():
         assert {p.name for p in (packet / "receipts/controls").iterdir()} == names
+
+
+#: The ``k2m5_review.py cellmin`` outputs, run with the 16 October review's retained
+#: program, that chose the pose of each control whose cell is a ``zm_mixed.py`` job's.
+#: The other two controls' poses are the review's own, in ``review/outputs/poses-n*.json``.
+ZM_POSE_PROBES = {
+    (76, "scaled-49301-50000"): "n76_cellmin_j056.json",
+    (95, "scaled-49207-50000"): "n95_cellmin_j153.json",
+}
+#: The review program that wrote them, retained in the s(76) packet.
+REVIEW_PROGRAM = PACKETS[76] / "review/programs/k2m5_review.py"
+
+
+@pytest.mark.parametrize(("key", "probe"), sorted(ZM_POSE_PROBES.items()), ids=str)
+def test_each_zm_control_pose_is_corroborated_outside_zm_mixed(
+    key: tuple[int, str], probe: str
+) -> None:
+    """The review program's own exact evaluator, which shares no code with
+    ``zm_mixed.py``, found the pose and its capture: the published cover's there equals
+    ``zm_mixed.py pose``'s exactly, so the scaled cover's, that times the factor, is
+    below one whatever ``zm_mixed.py`` computes. The probe chose the pose; it decides
+    nothing."""
+    n, tag = key
+    (control,) = [c for c in driver.ZM_CONTROLS[n] if c.tag == tag]
+    data = json.loads((PACKETS[n] / "receipts/controls" / probe).read_text(encoding="utf-8"))
+    assert data["program"]["name"] == REVIEW_PROGRAM.name
+    assert data["program"]["sha256"] == hashlib.sha256(REVIEW_PROGRAM.read_bytes()).hexdigest()
+    assert tuple(Fraction(v) for v in data["box"].split(",")) == tuple(
+        Fraction(v) for v in control.cell
+    )
+    assert tuple(Fraction(v) for v in data["argmin"]) == tuple(
+        Fraction(v) for v in control.pose
+    )
+    name = driver.CASES[n].name
+    log = (
+        PACKETS[n] / "receipts/controls" / f"{name}_zm_pose_published_at_{tag}.log"
+    ).read_text(encoding="utf-8")
+    pose = POSE.search(log)
+    assert pose is not None
+    assert Fraction(data["min_mu"]) == Fraction(pose["mu"])
+    assert Fraction(data["min_mu"]) * control.factor < 1
 
 
 def zm_control_files(n: int, control: driver.ZmControl) -> set[str]:
