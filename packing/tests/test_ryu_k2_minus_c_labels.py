@@ -8,7 +8,8 @@ hand counts, the arc bounds against dense sampling, the box decisions on the n =
 and on the box that holds the nine-pair configuration, and the exact witness checker.
 The last tests read the receipts the full run left in the
 ``squarepacker-k2-minus-c-2026-10-05`` packet: every box decided once, every one
-certified as labelled, and the four negative controls refused with refuting witnesses.
+certified as labelled, the ten negative controls refused by decision with refuting
+witnesses, and a sample decided again with identical rows after review A of #884.
 """
 
 from __future__ import annotations
@@ -19,6 +20,7 @@ import random
 import re
 import sys
 import types
+from collections.abc import Iterator
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -33,6 +35,17 @@ from devtools.retained_data import read_retained_text
 RECEIPTS = labels.PACKET / "receipts/independent-labels"
 BOXES = 78_673
 CLASS_SIZES = {"inf": 72_174, "nowall": 1_094, "closed": 5_405}
+
+
+@pytest.fixture(autouse=True)
+def _restore_mpmath_precision() -> Iterator[None]:
+    """The module and these tests set mpmath's precision, and the test files that run
+    after them in the same process expect it as they left it."""
+    mp_prec, iv_prec = mpmath.mp.prec, mpmath.iv.prec
+    yield
+    mpmath.mp.prec, mpmath.iv.prec = mp_prec, iv_prec
+
+
 _FOOTER = re.compile(
     r"^# finished \S+; exit (?P<exit>-?\d+); wall [\d.]+ s; CPU (?P<cpu>[\d.]+) s"
 )
@@ -232,14 +245,14 @@ def test_the_guards_refuse_what_the_arithmetic_does_not_cover() -> None:
 
 def _beyond_rho1() -> Fraction:
     """A rational y with rho1^2 < 1/4 + y^2, inside the 200-bit upper bound of rho1^2."""
-    mpmath.mp.prec = 600
-    d = mpmath.mpf(1) / 10000
-    rho1_sq = (d + mpmath.sqrt(2) / 2) ** 2 + mpmath.mpf(1) / 4
     upper = labels.exact_bounds().rho1_sq_hi
-    target = (mpmath.mpf(upper.numerator) / upper.denominator + rho1_sq) / 2 - mpmath.mpf(1) / 4
-    y = Fraction(int(mpmath.floor(mpmath.sqrt(target) * 2**500)), 2**500)
-    value = Fraction(1, 4) + y * y
-    assert mpmath.mpf(value.numerator) / value.denominator > rho1_sq
+    with mpmath.workprec(600):  # restores the precision the other tests run at
+        d = mpmath.mpf(1) / 10000
+        rho1_sq = (d + mpmath.sqrt(2) / 2) ** 2 + mpmath.mpf(1) / 4
+        half = (mpmath.mpf(upper.numerator) / upper.denominator + rho1_sq) / 2
+        y = Fraction(int(mpmath.floor(mpmath.sqrt(half - mpmath.mpf(1) / 4) * 2**500)), 2**500)
+        value = Fraction(1, 4) + y * y
+        assert mpmath.mpf(value.numerator) / value.denominator > rho1_sq
     assert value < upper
     return y
 

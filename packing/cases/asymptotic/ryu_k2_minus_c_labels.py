@@ -72,10 +72,12 @@ Run from ``packing/`` with the project interpreter::
         --worker 0 --workers 2
     .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels summarize --out DIR
     .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels controls --receipts DIR
+    .venv/bin/python3 -m cases.asymptotic.ryu_k2_minus_c_labels recheck --receipts DIR
 
 The controls are ten claims that should fail, each refused under the run's rules and
 shown false by a rational witness checked exactly (`controls`); four of them sit on the
 thresholds of ``E_II``, ``W_I``, the side condition of the outer centres and ``|x| > rho1``.
+`recheck` decides a seeded sample again and compares it with the run's retained rows.
 """
 
 from __future__ import annotations
