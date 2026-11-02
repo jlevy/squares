@@ -5,7 +5,7 @@ title: "Answer Sungjoon Ryu: two asymptotic deficiency preprints (#414)"
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: codex@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:22:22.715Z
-updated_at: 2026-11-02T02:49:38.243Z
+updated_at: 2026-11-02T03:12:43.858Z
 started_at: 2026-10-18T08:47:56.034Z
 ---
 
@@ -22,7 +22,7 @@ started_at: 2026-10-18T08:47:56.034Z
 
 ## Stage 7 draft for the strongest-tier review, 2026-11-02 (think-yf8j, lane L23) — not posted
 
-Ledger: post only once the review is merged. On that branch (claude/bold-ritchie-xo28us-l23) #414's review ask is `done` with the verdict below. The issue stays open until this reply is posted (`close_when`). This draft supersedes the 11 October draft further down, whose last paragraph ("The review request stays open under `think-6ptr`") is out of date. Links point at `main` and resolve once the branch merges.
+Ledger: post only once the review is merged (PR #879). On that branch (claude/bold-ritchie-xo28us-l23) #414's review ask is `done` with the verdict below, and `check_requests --report` reads #414 as closeable. So this is the final comment: from main, check it against `check_requests --draft 414`, which may add the closing sentence it expects, then post it and close the issue. This draft supersedes the 11 October draft further down, whose last paragraph ("The review request stays open under `think-6ptr`") is out of date. Links point at `main` and resolve once the branch merges.
 
 @squarepacker, thank you again for both preprints. A second, fuller review of them is now in the record: [review-2026-11-02-ryu-quarter-cube-strongest-tier.md](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-11-02-ryu-quarter-cube-strongest-tier.md). It ran at our strongest review tier, and it wrote its findings before it read the review of 8 October.
 
