@@ -271,13 +271,52 @@ def test_configurations_writes_nothing_from_an_archive_with_a_stray_member(
             stand_in.writestr(name, (bundle / f"n{n}.minpoly.json").read_bytes())
         stand_in.writestr("t244-exact-configurations/../escape.txt", b"x")
     packet = tmp_path / "packet"
-    monkeypatch.setattr(module, "CONFIGURATIONS_SHA256", _sha256(archive.read_bytes()))
-    monkeypatch.setattr(module, "CONFIGURATIONS_BYTES", archive.stat().st_size)
+    data = archive.read_bytes()
+    monkeypatch.setattr(module, "CONFIGURATIONS_SHA256", _sha256(data))
+    monkeypatch.setattr(module, "CONFIGURATIONS_BYTES", len(data))
+    monkeypatch.setattr(module, "CONFIGURATIONS_PUBLIC_BLOB", module.git_blob(data))
     monkeypatch.setattr(module, "CONFIGURATIONS_PACKET", packet)
     monkeypatch.setattr(module, "CONFIGURATIONS_RETAINED", packet / "source")
     with pytest.raises(SystemExit, match="outside the archive's one directory"):
         module.configurations(archive, check=False)
     assert not packet.exists()
+
+
+def test_configurations_refuses_an_archive_that_is_not_the_recorded_blob(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review A of #878, finding 6: ``sources.json`` records the public copy's Git blob, so
+    ``configurations`` measures it and refuses another, before any member is read."""
+    module = program()
+    assert module.git_blob(b"") == "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    archive = tmp_path / "bundle.zip"
+    with zipfile.ZipFile(archive, "w") as stand_in:
+        stand_in.writestr("t244-exact-configurations/README.md", b"x")
+    data = archive.read_bytes()
+    packet = tmp_path / "packet"
+    monkeypatch.setattr(module, "CONFIGURATIONS_SHA256", _sha256(data))
+    monkeypatch.setattr(module, "CONFIGURATIONS_BYTES", len(data))
+    monkeypatch.setattr(module, "CONFIGURATIONS_PACKET", packet)
+    monkeypatch.setattr(module, "CONFIGURATIONS_RETAINED", packet / "source")
+    with pytest.raises(SystemExit, match="not the public copy's e2a73184"):
+        module.configurations(archive, check=False)
+    assert not packet.exists()
+
+
+def test_check_says_each_retained_member_matches(capsys: pytest.CaptureFixture[str]) -> None:
+    """Review A of #878, finding 5: ``--check`` prints each member it compared."""
+    module = program()
+    member = "t244-exact-configurations/controls.py"
+    body = (CONFIGURATIONS / "source" / member).read_bytes()
+    status = module.retained(
+        member,
+        body,
+        check=True,
+        archive_dir=module.CONFIGURATIONS_DIR,
+        root=module.CONFIGURATIONS_RETAINED,
+    )
+    assert status == 0
+    assert "controls.py matches the archive's member" in capsys.readouterr().out
 
 
 def _sha256(data: bytes) -> str:

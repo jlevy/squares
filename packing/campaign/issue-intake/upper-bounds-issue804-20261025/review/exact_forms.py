@@ -233,11 +233,26 @@ def written(path: Path, document: Any, *, check: bool) -> int:
     return 0
 
 
+def git_blob(data: bytes) -> str:
+    """The Git blob id of ``data``, as the public copy's tree names the file holding it."""
+    return hashlib.sha1(b"blob %d\0" % len(data) + data, usedforsecurity=False).hexdigest()
+
+
+def held_to_blob(archive: Path, data: bytes, blob: str) -> None:
+    """Refuse an archive whose Git blob is not the one recorded for the public copy, so
+    ``sources.json`` records a measured blob (review A of #878, finding 6). The SHA-256 is
+    the custody check; this keeps the recorded address honest."""
+    measured = git_blob(data)
+    if measured != blob:
+        sys.exit(f"{archive}: Git blob {measured}, not the public copy's {blob}")
+
+
 def derive(archive: Path, *, check: bool) -> int:
     data = archive.read_bytes()
     digest = hashlib.sha256(data).hexdigest()
     if digest != ARCHIVE_SHA256 or len(data) != ARCHIVE_BYTES:
         sys.exit(f"{archive}: SHA-256 {digest}, {len(data)} bytes; not the issue's attachment")
+    held_to_blob(archive, data, PUBLIC_BLOB)
     members: list[dict[str, Any]] = []
     status = 0
     with zipfile.ZipFile(archive) as bundle:
@@ -356,6 +371,7 @@ def retained(
         if not path.is_file() or path.read_bytes() != body:
             print(f"{path.relative_to(REPO)} differs from the archive's member")
             return 1
+        print(f"{path.relative_to(REPO)} matches the archive's member")
         return 0
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(body)
@@ -395,6 +411,7 @@ def configurations(archive: Path, *, check: bool) -> int:
         sys.exit(
             f"{archive}: SHA-256 {digest}, {len(data)} bytes; not the comment's attachment"
         )
+    held_to_blob(archive, data, CONFIGURATIONS_PUBLIC_BLOB)
     members: list[dict[str, Any]] = []
     bodies: dict[str, bytes] = {}
     status = 0
