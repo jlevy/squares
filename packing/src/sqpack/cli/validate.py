@@ -120,10 +120,14 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # falls by one again in every corpus. 2026-10-31: the zmx2 replays of Khalili and
     # Gharabaghi's closed mixed cover (T-252) proved s(44) = 7 in both lanes; n = 44 was
     # open in both and not Nagamochi-bounded, so the formal-open and reported-open counts
-    # fall by one in every corpus.
-    "n=1..100": (54, 51, 0),
-    "n=1..200": (138, 131, 0),
-    "n=1..324": (246, 235, 0),
+    # fall by one in every corpus. 2026-11-02: zm_mixed.py's mutated-cover controls
+    # completed the confirmation of Greff's mixed covers (T-184, T-191), and n = 76 and
+    # n = 95 adopted s(76) = 9 and s(95) = 10 in both lanes; both were open in both and
+    # not Nagamochi-bounded, so the formal-open and reported-open counts fall by two in
+    # every corpus.
+    "n=1..100": (52, 49, 0),
+    "n=1..200": (136, 129, 0),
+    "n=1..324": (244, 233, 0),
 }
 #: n = 68, 103, 105, 110 and 131 left the exclusions on 2026-09-29, when their records
 #: moved from UnitSquare renderings to Francisco Couzo's packings (T-056), and n = 69, the
