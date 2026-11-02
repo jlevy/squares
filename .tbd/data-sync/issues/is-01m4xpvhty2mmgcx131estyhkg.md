@@ -3,16 +3,20 @@ type: is
 id: is-01m4xpvhty2mmgcx131estyhkg
 title: "Validate: wand125 s(37) >= 2599/400 (mixed_n37_L64975), census of all 2,073 directions with whole-net controls (~6.5 CPU-h)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
+delegate: bold-ritchie-l30
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4wv27yed1e2wfnq55h1avr0
+hold: null
+hold_until: null
 created_at: 2026-10-14T17:20:12.637Z
-updated_at: 2026-10-14T17:20:12.637Z
+updated_at: 2026-11-02T11:13:37.983Z
+started_at: 2026-11-02T11:13:37.982Z
 ---
 Validation part of think-u0av for n = 37 (T-177 in the 14 October records PR #602, V0/C1). Record-changing: a complete replay with controls is what takes the bound to C3 and the verified lane.
 
