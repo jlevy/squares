@@ -3,16 +3,20 @@ type: is
 id: is-01m4xpvk3p35kqfqcrszjw9zp6
 title: "Validate: wand125 s(39) >= 533/80 (mixed_n39_L66625), census of all 2,073 directions with whole-net controls (~7.1 CPU-h; control needs think-4uun)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: bold-ritchie-l32
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m4wv27yed1e2wfnq55h1avr0
+hold: null
+hold_until: null
 created_at: 2026-10-14T17:20:13.941Z
-updated_at: 2026-10-14T17:20:13.941Z
+updated_at: 2026-11-02T19:05:31.040Z
+started_at: 2026-11-02T19:05:31.040Z
 ---
 Validation part of think-u0av for n = 39 (T-175 in the 14 October records PR #602, V0/C1). Record-changing, but the whole-net control cannot pass until think-4uun lands.
 
