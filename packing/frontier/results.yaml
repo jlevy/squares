@@ -35534,12 +35534,12 @@ results:
       record.
     notes: >-
       The bound rests on the author's file, kept since 1 November 2026 from his public copy
-      and decided on sqpack's exact verifier and by the source's checker (route B); route A's
-      configuration, this
-      repository's construction, is not yet decided feasible. Route A read the comment's
-      text and none of the author's code, and route B ran none of the author's programs. The polynomial was used only to
-      compare, after the side was found in K; it is decided here primitive and irreducible
-      over Q, with one real root, the root the print names (exact-sides.json).
+      and decided on sqpack's exact verifier and by the source's checker (route B); route
+      A's configuration, this repository's construction, is not yet decided feasible. Route
+      A read the comment's text and none of the author's code, and route B ran none of the
+      author's programs. The polynomial was used only to compare, after the side was found
+      in K; it is decided here primitive and irreducible over Q, with one real root, the
+      root the print names (exact-sides.json).
 
       The construction's free directions, along which the side is constant, are pinned to
       rationals within 1e-14 of T-174's certificate, tangents first, so the five free

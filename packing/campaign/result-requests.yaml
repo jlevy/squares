@@ -25944,8 +25944,9 @@ issues:
         source/s297-exact-configuration/, read from the public copy at f480441e, the zip held
         to the comment's SHA-256 e08b5d0a...47a7 and n297.minpoly.json to e5c340b8...2826
         (side_297.py retain). Route B's verify_exact.py run then printed VALID with four
-        mutated controls refused, which puts T-247 at V3/C3; its exact_verify route is
-        think-ozx8's.
+        mutated controls refused, which puts T-247 at V3/C3. Its exact_verify route decided
+        the same file on 1 November 2026 (E-hyukdongkim-804-s297-exact-feasibility, recorded
+        on 2 November), so route B is decided on both routes.
     beads:
     - think-9vai
     - think-4rzl
