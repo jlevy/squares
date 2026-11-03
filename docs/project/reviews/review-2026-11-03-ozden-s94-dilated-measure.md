@@ -34,7 +34,7 @@ coverage the replay decides at all 600 directions.
 - **Checks here.**
   - Direction 0 is decided here in full by a separate implementation.
     Its least capture is $1.003117\ldots$, at the wall, in the strip the dilation adds.
-  - At every other direction, the exact capture at the five corners and centre of the
+  - At every other direction, the exact capture at the centre and four corners of the
     crate’s least-bound box is at or above the box’s certified bound.
   - A search at 19 directions found no capture below $1.0017633$. The author’s referee
     found a lower one, $1.0011230$ at $r = 144$, which this review reproduces exactly
@@ -272,7 +272,8 @@ It is not the certificate’s slack.
 - **Lowest capture found.** A binary64 search at 19 directions, refined by Nelder–Mead
   and confirmed exactly, found its lowest capture, $1.0017633082$, at $r = 277$, pose
   $(8.34506, 5.33187)$. The directions searched were 1, 2, 3, 144, 277, 298, 299, 301,
-  597, 598 and 599, and eight new directions drawn with a fixed seed.
+  597, 598 and 599, and eight new directions drawn with a fixed seed (44, 71, 106, 113,
+  128, 152, 482 and 485).
 - **Near the walls.** In the strips along the walls the least found was $1.0031003$
   ($r = 2$, at $x = U_2$). These are samples; they decide nothing.
 - **A lower point the search missed** (added after reading `GRADE.md`). The author’s
