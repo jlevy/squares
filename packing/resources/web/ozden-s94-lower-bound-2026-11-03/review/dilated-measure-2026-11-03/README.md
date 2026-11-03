@@ -22,10 +22,11 @@ packet’s `source/`. They use the standard library and, from the project enviro
   [wand125-continuous-n28 packet](../../../wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/SPEC.md);
 - the packet’s READMEs and the receipts, as data.
 
-The author’s second checker was read only after every program here was written.
+The author’s second checker was read only after the first seven programs were written.
 `devtools/audit_dilated_measure.py` was not read at all.
 `second-checker/GRADE.md` and `GRADE.json`, the earlier referee report, were read only
-after the review’s findings were committed.
+after the review’s findings were committed (`5ad487b72`). `dm_compare.py` was written
+after that, and reads `GRADE.json` as data.
 
 Every program ran with CPython 3.14.7 (`packing/.venv/bin/python3 -I`) under `nice`, at
 most two processes at a time, on a shared four-core host.
@@ -42,6 +43,7 @@ Each receipt records the SHA-256 of the program that wrote it and of `dmlib.py`.
 | `dm_sample.py` | **samples** and decides no direction: exact captures at the centre and four corners of every oblique direction’s least-bound leaf; a binary64 search for low captures at 19 directions, with the lowest poses evaluated exactly; the dilation identity at shared directions | the certificate; Hosono’s candidate; the census capture | `outputs/sample.json`, `outputs/leaf-poses.jsonl` |
 | `dm_receipts.py` | checks the records against the candidate: the author’s two receipts and the census capture, the census row, the control receipt; recomputes all 600 refusals of the control’s 99/100 mutant, and its near-threshold witness, exactly | the receipts; `census.json`; the control receipt; `outputs/premises.json` | `outputs/receipts.json` |
 | `dm_mutants.py` | builds five mutants in memory and refuses each for the reason it names: Hosono’s net, one direction short, the core left undilated, masses times 99/100, masses times the largest $k/10^9$ below $1/F^*$ | the certificate; Hosono’s candidate; `outputs/sample.json` | `outputs/mutants.json` |
+| `dm_compare.py` | written after the findings were committed: holds the referee report’s values to `dmlib`’s evaluator (its least capture at $r = 144$, its ×0.998 mutant) and searches its two other coverage mutants for exact witnesses | the certificate; Hosono’s candidate; `source/second-checker/GRADE.json`, as data | `outputs/compare-grade.json` |
 
 ## How to Run Them
 
@@ -65,6 +67,7 @@ $PY $P/dm_receipts.py "$CERT" "$PKT/source/receipts/sqverify-fast-rustc1.98-full
   "$PKT/source/receipts/sqverify-fast-rustc1.93-full.jsonl" "$CAPTURE" "$CENSUS/census.json" \
   "$CONTROL" "$OUT/premises.json" "$OUT/receipts.json"
 $PY $P/dm_mutants.py "$CERT" "$BASE" "$OUT/sample.json" "$OUT/mutants.json"
+$PY $P/dm_compare.py "$CERT" "$BASE" "$PKT/source/second-checker/GRADE.json" "$OUT/compare-grade.json"
 ```
 
 ## What They Printed
@@ -77,6 +80,7 @@ $PY $P/dm_mutants.py "$CERT" "$BASE" "$OUT/sample.json" "$OUT/mutants.json"
 | `dm_sample.py` | `CONSISTENT` | 2,995 leaf poses at or above their certified bounds (least margin $0.00231$, $r = 537$); least capture found $1.0017633082$ ($r = 277$); at the walls at least $1.0031$; the dilation identity exact at 8 poses | 100.2 s |
 | `dm_receipts.py` | `RECORDS_HOLD` | the three runs identical at all 600 directions; census row items 2–5 hold; control `CONTROL_FAILED` on the axis rule only (gap $1.123 \times 10^{-9}$); all 600 witnesses hold exactly | 11.0 s |
 | `dm_mutants.py` | `EVERY_MUTANT_REFUSED` | Hosono’s net by N0 (b); `last` 598 by (c); the undilated core by a capture of $0.67849$ at $r = 0$; masses × 99/100 and × $199647959/200000000$ by exact captures below 1 at $r = 277$ | 13.2 s |
+| `dm_compare.py` | `REFEREE_VALUES_HOLD` | the referee’s least capture, $1.001123004123937$ at $r = 144$, inside its stated interval; its ×0.998 mutant equal to its floor; its heaviest-orbit mutant refused here by $0.24998$ ($r = 0$) and its $L = 9.975$ mutant by $0.99766$ ($r = 144$) | 4.5 s |
 
 ## Registration
 
@@ -88,7 +92,9 @@ record each needs is:
 - **Decides:** `dm_premises.py` decides the premises, and `dm_axis.py` decides direction
   0, full coverage of that one direction. `dm_sample.py` and `dm_receipts.py` sample:
   599 directions at five poses each, 19 searched directions, and 600 control witnesses.
-  `dm_mutants.py` and `dm_selftest.py` are controls.
+  `dm_mutants.py` and `dm_selftest.py` are controls. `dm_compare.py` compares with the
+  referee report and decides nothing; its record’s `read` also includes
+  `earlier-review`.
 - **Independence:**
   - `read`: mathematics, specification, certificate-format, producer-code (the crate’s
     admission, declared net, per-bin domain and search box, which the producer ran) and

@@ -36,7 +36,9 @@ coverage the replay decides at all 600 directions.
     Its least capture is $1.003117\ldots$, at the wall, in the strip the dilation adds.
   - At every other direction, the exact capture at the five corners and centre of the
     crate’s least-bound box is at or above the box’s certified bound.
-  - A search at 19 directions found no capture below $1.0017633$.
+  - A search at 19 directions found no capture below $1.0017633$. The author’s referee
+    found a lower one, $1.0011230$ at $r = 144$, which this review reproduces exactly
+    (added after reading it).
 - **The dilation** is exact and is only how the candidate was found:
   - the centre domain grows toward the walls by $3/3986$ at $r = 0$ in Hosono’s
     coordinates, and by $6.5 \times 10^{-5}$ to $1.06 \times 10^{-3}$ at the other 199
@@ -80,22 +82,28 @@ Five notes follow (F2 to F6). The draft significance S3 is confirmed.
 - After every program here was written: the second checker’s `README.md`,
   `INTEGER-SOUNDNESS.md`, `independent.py`, `intcheck_final.cpp` and `run.sh`.
 
-**Run.** Seven programs of my own, all importing nothing from this repository or from
-the packet ([What I Ran](#what-i-ran)). They do four things:
+**Run.** Seven programs of my own before the findings were committed, and an eighth
+after, all importing nothing from this repository or from the packet
+([What I Ran](#what-i-ran)). They do five things:
 
 - recompute every premise of the theorem except coverage, exactly;
 - decide direction 0 in full;
 - evaluate captures exactly at 3,000 sampled poses, and every control witness;
-- refuse five mutants.
+- refuse five mutants;
+- after the findings, hold the referee report’s values to the same evaluator.
 
 None of the author’s code ran, and neither did the crate, the census tools or the import
 lane’s audit tool.
 
 **Not read before my findings were committed.** The second checker’s `GRADE.md` and
-`GRADE.json` (the author’s referee report), and the referee’s `exact_audit.py`,
-`finalize.py` and `final_summary.json`. The bead’s brief named direction 144 as the one
-where that report finds its lowest sampled capture; that is all I knew of it.
-`devtools/audit_dilated_measure.py` was never read; only its two receipts.
+`GRADE.json`, the author’s referee report.
+I read them afterwards for
+[the comparison](#comparison-with-the-authors-referee-report).
+The bead’s brief named direction 144 as the one where that report finds its lowest
+sampled capture; that is all I knew of it beforehand.
+
+**Never read.** The referee’s own `exact_audit.py`, `finalize.py` and
+`final_summary.json`, and `devtools/audit_dilated_measure.py` (only its two receipts).
 
 **Not reviewed.** The crate’s soundness, which the 3 and 6 October reviews hold, beyond
 the paths this certificate takes; whether any coverage leaf the crate accepted is right,
@@ -267,6 +275,12 @@ It is not the certificate’s slack.
   597, 598 and 599, and eight new directions drawn with a fixed seed.
 - **Near the walls.** In the strips along the walls the least found was $1.0031003$
   ($r = 2$, at $x = U_2$). These are samples; they decide nothing.
+- **A lower point the search missed** (added after reading `GRADE.md`). The author’s
+  referee reports $1.001123004124$ at $r = 144$, centre $(5.56017, 7.43963)$.
+  `dm_compare.py` evaluates it exactly and gets a value inside the referee’s stated
+  interval, at a centre in the domain.
+  My search at $r = 144$ stopped at $1.0036158$, so its grid and starts were too coarse
+  there.
 
 ## The Records Against the Declared-Net Checklist
 
@@ -311,10 +325,16 @@ rounding, against binary64 intervals.
 It also adds an erosion-area bound, and treats $r = 0$ by branch and bound where the
 crate uses the vertex sweep.
 Its domain is $U_r = L - \max(\rho(a_r), B(\cos\theta_r + \sin\theta_r)/2)$
-(`independent.py:49`). This equals the per-bin domain here only because $\rho(a_r)$
-exceeds the core’s half-extent at every node, as item 5 above shows.
+(`independent.py:49`). That is the intersection of lemma D’s domain with the set of
+centres whose core lies in $K$. Every admissible centre lies in both, since N3 puts the
+core inside the unit square, so checking the intersection is sound on any certificate.
+Here it is exactly the per-bin domain, because $\rho(a_r)$ exceeds the core’s
+half-extent at every node (item 5 above).
 It checks the quadrant $[L/2, U_r]^2$, which its README and the source README call each
-direction’s “full” or “whole” centre domain (F4).
+direction’s “full” or “whole” centre domain (F4). (Corrected after reading `GRADE.md`:
+the committed text said this domain equalled the per-bin domain “only because” of item
+5, as though the larger margin could be unsound.
+It cannot; see the comparison below.)
 
 So an error in `SOUNDNESS.md`’s mathematics, or in the format’s reading, would be common
 to both checkers; an error in the crate’s code would not.
@@ -363,7 +383,8 @@ The rigorous bound at $r = 0$ rests on three things:
 | Every mass × $199647959/200000000$ | premises hold; exact capture $0.9999999994$ at the same pose |
 
 The third shows why the core must be dilated with the measure.
-The fifth shows that the uniform mass slack at that pose is at most $0.18\%$.
+The fifth shows that the uniform mass slack at that pose is at most $0.18\%$; at the
+referee’s pose at $r = 144$ it is at most $0.11\%$ (added after reading `GRADE.md`).
 
 ## Findings
 
@@ -372,7 +393,7 @@ The fifth shows that the uniform mass slack at that pose is at most $0.18\%$.
 | F1 | gap (records lane; holds the verified lane, not the claim) | `devtools/sqverify_fast_census.py:653`, `:706`; the control receipt | The control fails closed on a fixed $10^{-9}$ axis tolerance, so checklist item 6 is not met |
 | F2 | note | `packing/sqverify_fast/SOUNDNESS.md:43`–47 | N2 reads “reflect the whole configuration”; the fold must be per square |
 | F3 | note | `source/notes/n31-negative/d529.jsonl`; `source/README.md:61`–65 | The $n = 31$ receipt is a run on an input not retained, and the README’s capture is in no retained receipt |
-| F4 | note | `source/README.md:86`; `source/second-checker/README.md:5`–6; `independent.py:49` | The second checker checks the quadrant, not the full domain, and its domain leans on $\rho(a_r)$ dominating the core’s extent |
+| F4 | note | `source/README.md:86`; `source/second-checker/README.md:5`–6 | The second checker checks the quadrant, which the READMEs call each direction’s full centre domain (narrowed after reading `GRADE.md`) |
 | F5 | note | `source/tools/rescale.py:4` | The docstring’s domain growth $\rho(1 - 1/\lambda)$ holds on the same net, not on the finer one |
 | F6 | note (records lane) | checklist item 8; the evidence text | The replay is reproduced with the producer’s code; item 8’s words do not apply as written |
 
@@ -428,10 +449,17 @@ checker’s README (lines 5–6) say the second checker verified each direction 
 full centre domains”.
 Its front end checks $[L/2, U_r]^2$, the quadrant, which covers the whole domain only
 through C1 and the measure’s symmetry, as `INTEGER-SOUNDNESS.md` says.
-Its $U_r$ takes the larger of $\rho(a_r)$ and the core’s half-extent.
-A larger margin would shrink the checked set below what lemma D requires; it never does
-here, because $\rho(a_r)$ is larger at every node (least margin $5.30 \times 10^{-5}$,
-node 1). Both are worth a sentence.
+The README’s wording is worth a sentence.
+
+*Corrected after reading `GRADE.md`.* The committed F4 also said that the second
+checker’s $U_r$, which takes the larger of $\rho(a_r)$ and the core’s half-extent,
+“would shrink the checked set below what lemma D requires” if the larger were the
+core’s. That was wrong.
+Every admissible centre also has its core inside $K$, since N3 puts the core inside the
+unit square, so the intersection of the two domains contains every centre the theorem
+needs. The larger margin is sound on any certificate.
+Here the two coincide anyway, since $\rho(a_r)$ is larger at every node (least margin
+$5.30 \times 10^{-5}$, node 1).
 
 **F5. The growth formula in `rescale.py` assumes the same net.** Its docstring says the
 centre domain grows by $\rho(1 - 1/\lambda)$. That holds at $r = 0$ ($3/3986$) and on an
@@ -460,13 +488,14 @@ They are not a second complete implementation.
    mass times $10000003/10000000$? Where does $0.99999999719$ come from?
    Would you keep that run’s input, or the retained file’s own refusal, in the
    repository?
-2. In the second checker, is the $\max$ with $B(\cos\theta + \sin\theta)/2$ in
-   `independent.py:49` deliberate?
-   On another certificate it could check less than the per-bin domain.
+2. (Withdrawn after reading `GRADE.md`: the committed question asked whether the $\max$
+   in `independent.py:49` was deliberate.
+   It is sound on any certificate; see F4.)
 3. The dilation preserves every capture at the shared directions.
-   The least capture this review found is interior ($1.0018$ at $r = 277$), and those
-   near the walls are higher ($\ge 1.0031$). Did the lab try a side between $9.965$ and
-   the route’s ceiling $9.9729$ on a finer net?
+   The least captures known are interior: $1.0011230$ at $r = 144$, which your referee
+   found and this review reproduces exactly, and $1.0018$ at $r = 277$. Those this
+   review found near the walls are higher ($\ge 1.0031$). Did the lab try a side between
+   $9.965$ and the route’s ceiling $9.9729$ on a finer net?
 
 ## What I Ran
 
@@ -484,8 +513,9 @@ of `dmlib.py` that wrote it, equal to the committed bytes.
 | `dm_sample.py CERT HOSONO CAPTURE OUTDIR` | `sample.json` (`CONSISTENT`) and `leaf-poses.jsonl` | 100.2 s |
 | `dm_receipts.py CERT R198 R193 CAPTURE CENSUS CONTROL PREMISES OUT` | `receipts.json`: `RECORDS_HOLD`, control `CONTROL_FAILED` | 11.0 s |
 | `dm_mutants.py CERT HOSONO SAMPLE OUT` | `mutants.json`: `EVERY_MUTANT_REFUSED` | 13.2 s |
+| `dm_compare.py CERT HOSONO GRADE_JSON OUT`, written and run after the findings were committed | `compare-grade.json`: `REFEREE_VALUES_HOLD` | 4.5 s |
 
-The final runs took 133 CPU-seconds.
+The final runs took 138 CPU-seconds.
 With the development runs that their receipts replace, the review used about seven
 CPU-minutes in all.
 
@@ -527,6 +557,66 @@ Every mutant is refused for the reason it names.
 No defect is open. F1 is a gap in the records: until a control receipt passes, checklist
 item 6 is not met, and the verified lane should wait for it.
 F2 to F6 are notes.
+
+## Comparison With the Author’s Referee Report
+
+Everything above this section, except the passages marked as added or corrected after
+reading it, was committed and pushed as `5ad487b72` before I opened
+`second-checker/GRADE.md` and `GRADE.json`. Beforehand I knew only what the bead’s brief
+said: that the report’s lowest sampled capture is at direction 144. After reading them I
+wrote one program, `dm_compare.py`, which holds the report’s values to this review’s
+evaluator.
+
+**What the report is.** It is the referee report the author commissioned, finalized
+2026-11-02 and written by an OpenAI Codex agent, with verdict SOUND. Its “supplied
+checker” is the author’s lab’s own floating-point checker.
+The source README already declines to offer that checker as evidence, and the report
+shows it accepting a false certificate.
+That is not `sqverify-fast`. The report’s `prep.premises()`, `runall.sh` and long-double
+fallback, and its “SOUNDNESS §4”, belong to the lab checker, not to
+`packing/sqverify_fast/SOUNDNESS.md`. So the report does not review this repository’s
+checker. Its verdict rests on the second checker’s full run, which this repository has
+not replayed. It is evidence of the source’s own (a review with `relation: source`, in
+the terms of [epistemics.md](../../../epistemics.md#review-records)), and this review
+reads it as data.
+
+**Where we agree, reached apart.**
+
+| Point | The report | This review |
+| --- | --- | --- |
+| Exact premises | the same values for $B(1 + D)$, the tangent form, the reach polynomial and the mass | the same, by `dm_premises.py` |
+| Expanded terms | 6,824, counting coincident images separately | 6,720 distinct images after merging, the crate’s count; the same measure |
+| The fold | “One global reflection cannot fold differently oriented squares simultaneously”; a minor prose repair, said of the lab’s text | F2, of `SOUNDNESS.md`’s identical wording |
+| The dilation | $3/3986$ at $r = 0$; every shared angle’s domain strictly larger; 400 new angles; nothing carries | the same, with the growth at every shared node and the exact capture identity |
+| The ceiling | $99500/9977$, correcting an earlier draft’s $9.9725$ | $99500/9977$ |
+| Mass mutant | ×0.998 refused at $r = 144$, capture $0.99912075811569$ | reproduced exactly at its pose |
+| Heaviest orbit removed | refused at $r = 0$, capture $0.73804$ | refused at $r = 0$ by $0.24998$, at $(9.45001, 9.4635)$ |
+| $L = 9.975$, $B$ held | refused at $r = 144$, capture $0.99811$ | refused at $r = 144$ by $0.99766$, at the wall |
+
+**Where it corrects this review.** Two points, both marked in place above:
+
+- F4’s second half and Question 2. Taking the larger of the two margins cannot drop a
+  needed centre.
+- The lowest known capture.
+  Its $1.001123004124$ at $r = 144$ is below this review’s $1.0017633$, and
+  `dm_compare.py` reproduces it exactly.
+  The certificate’s uniform mass slack is therefore at most $0.11\%$, not $0.18\%$.
+
+**What only the report has.** A second complete implementation’s run: 600 of 600
+directions verified, 166,440,592 nodes, least certified bound $4398046511113/2^{42}$. It
+also documents the lab checker’s false acceptance.
+Its own weakest point, as it says, is the manual audit of the integer code’s derivative
+enclosures, inheritance and overflow bounds.
+
+**What only this review has.**
+
+- Direction 0 decided independently in full, with its least capture in the strip the
+  dilation adds.
+- The records against the declared-net checklist: F1’s control tolerance and F6’s words.
+- All 600 control witnesses held exactly.
+- The $n = 31$ receipt’s input (F3) and `rescale.py`’s growth formula (F5).
+
+Nothing in the report changes the verdict.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
