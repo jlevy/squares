@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 109
+version: 110
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-02T23:54:48.514Z
+updated_at: 2026-11-03T00:54:09.230Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -194,3 +194,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 22:52: renewal. Sweep intake41 run; no new issues since 21:50Z. L32 running the T-179 s(145) linear replay (2 cores).
 
 2026-11-02 23:53: renewal. Sweep intake42 run; no new issues since 22:50Z. L32 running.
+
+2026-11-03 00:52: renewal. Sweep intake43 clean after the date rollover (0 stalled; held beads longest silent 1 day). No new issues since 23:50Z. L32 running.
