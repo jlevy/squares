@@ -4534,7 +4534,8 @@ sources:
       measure, its format and the method to Hosono after Tokoharu, the declared nets to
       jlevy/squares#366 and the dilation to this repository's T-022 and T-024; it says
       Claude (Anthropic) agents in the author's lab found the dilation, built the
-      certificate and ran the checks, and an OpenAI Codex agent wrote the second checker,
+      certificate, ran the checks and drafted the write-up, and an OpenAI Codex agent wrote
+      the second checker and reviewed the argument (second-checker/GRADE.md, an AI review),
       under his direction. No licence stated; retained on the presumption of permission
       the author's submission carries (think-cnn7; think-0so3). Ozden is Özden in the
       credit's ASCII. Retained in web/ozden-s94-lower-bound-2026-11-03/.

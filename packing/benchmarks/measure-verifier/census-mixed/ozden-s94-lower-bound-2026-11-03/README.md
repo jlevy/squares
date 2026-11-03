@@ -29,13 +29,13 @@ The folder keeps:
 Both runs used `sqverify-fast` built from the reviewed crate source `d97758bb…` (binary
 `567a0fd5…`, rustc 1.98.0, release, x86_64-unknown-linux-gnu), under `nice -n 19` on a
 shared four-core host.
-The author ran the same checker, unmodified, so the capture reproduces the author’s run
-with the producer’s code; `devtools.audit_dilated_measure compare` holds it to the
-author’s two receipts direction by direction (the packet’s
-`receipts/replay-comparison.json`). No evidence entry cites the row yet: on a declared
-net the census route carries only beside a passing control receipt and a review that has
-read the certificate’s mathematics (think-222u). This README is a hand-maintained index
-of the folder, not a generated view.
+The author ran the same checker, unmodified, so the capture is reproduced with the
+producer’s code; `devtools.audit_dilated_measure compare` holds it to the author’s two
+receipts direction by direction (the packet’s `receipts/replay-comparison.json`). No
+evidence entry cites the row yet: on a declared net the census route carries only beside
+a passing control receipt (think-4uun) and a review that has read the certificate’s
+mathematics, which the stage 4 review of 3 November did, accepting it.
+This README is a hand-maintained index of the folder, not a generated view.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1793,11 +1793,11 @@ commit) and retained whole but for `.gitignore`;
 It states no licence, and is retained on the presumption of permission the author’s
 submission carries. The source decides it with this repository’s `sqverify-fast`,
 unmodified, at all 600 directions, and reports an exact-integer second checker written
-for it by an OpenAI Codex agent.
+for it by an OpenAI Codex agent, with that agent’s review of the argument.
 Its README credits the measure, the format and the method to Hosono after Tokoharu,
 declared nets to issue #366 and the dilation to this repository’s T-022 and T-024, and
 says Claude (Anthropic) agents in the author’s research lab found the dilation, built
-the certificate and ran the checks under his direction.
+the certificate, ran the checks and drafted the write-up under his direction.
 The issue asking for its registration, #890 of 3 November 2026, was posted on his behalf
 by his AI agent’s account, `kenaznia-doga`; T-262 records it.
 

@@ -19,18 +19,19 @@ outputs:
   - papers/square-packing-methods-survey.md
 reason: >-
   Intake lane L33 of 3 November (think-2agl): #890's s(94) >= 1993/200 is registered as
-  T-262 at V0/C0, with its coverage entry and #890's requests entry; n-094's reported
-  lower lane takes it, and the site's Other Square Packing Projects list gains the
-  source repository. No paper prints n = 94, T-262 or that list. Against main e6e8d5772
-  (#888): rendered at link revision 0000000000000000000000000000000000000000 into empty
-  site directories, three times from this tree (twice before the site_resources.py
-  change, once after) and twice with that main's results.yaml, source-coverage.yaml,
-  result-requests.yaml and site_resources.py swapped in, by render_packing_methods,
-  render_n11_optimality_review, render_n11_threshold_bound_review and
-  render_n11_lower_bounds_explainer --prepare-math, the math passes in
-  /usr/bin/google-chrome (SQPACK_CHROMIUM), 69 files each. The three renders of this
-  tree are byte-identical, and so are the two against main; against main the only
-  difference, in the explainer's Markdown and HTML, is the live register count beside
-  T-018, 261 results registered so far and now 262, which follows the site's data and is
-  not a revision of the paper (as the 0141 record says). No PDF was printed; each prints
-  from that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
+  T-262, at V0/C1 once its stage 4 review is recorded, with its coverage entry and
+  #890's requests entry; n-094's reported lower lane takes it, and the site's Other
+  Square Packing Projects list gains the source repository. No paper prints n = 94,
+  T-262 or that list. Against main e6e8d5772 (#888): rendered at link revision
+  0000000000000000000000000000000000000000 into empty site directories by
+  render_packing_methods, render_n11_optimality_review,
+  render_n11_threshold_bound_review and render_n11_lower_bounds_explainer
+  --prepare-math, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), 69 files
+  each: from this tree with the stage 4 review recorded and the project card's final
+  text, and with that main's results.yaml, source-coverage.yaml, result-requests.yaml
+  and site_resources.py swapped in; the renders of this tree at the earlier heads
+  0d72ab90c and 32533b93b are byte-identical to it. Against main the only difference, in
+  the explainer's Markdown and HTML, is the live register count beside T-018, 261
+  results registered so far and now 262, which follows the site's data and is not a
+  revision of the paper (as the 0141 record says). No PDF was printed; each prints from
+  that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

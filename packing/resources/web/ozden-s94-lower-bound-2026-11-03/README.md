@@ -28,9 +28,11 @@ agent, which uses the GitHub account `kenaznia-doga`.
 - `second-checker/` is an exact-integer branch and bound that the source says an OpenAI
   Codex agent wrote for the review of this claim from `sqverify-fast`’s `SOUNDNESS.md`
   prose and not its source, with its full run (600 of 600 VERIFIED on Apple arm64,
-  4,801 CPU-seconds) and the referee report `GRADE.md` (verdict SOUND), whose mutants
-  (masses times 0.998, the heaviest orbit removed, $L = 9.975$) are refused with exact
-  counterexamples.
+  4,801 CPU-seconds) and the same Codex agent’s review of the argument, `GRADE.md`
+  (verdict SOUND), an AI review and no human one, whose mutants (masses times 0.998, the
+  heaviest orbit removed, $L = 9.975$) are refused with exact counterexamples.
+  Its “supplied checker” is the author’s lab’s own floating-point checker, which the
+  source does not offer as evidence, not `sqverify-fast`.
 - `notes/n31-negative/` records the same move refused at $n = 31$: Hosono’s $2391/400$
   measure dilated to $2989/500$ on a step-$1/8600$ net, refused by `sqverify-fast` at
   direction 529. It claims no bound.
@@ -78,7 +80,8 @@ rationals apart from the crate,
 - **The regeneration**: Hosono’s retained candidate, rewritten by the rule
   `tools/rescale.py` states and serialized as Python’s `json.dump` writes it, has the
   JSON text’s SHA-256 `b8b03ee8…749c`, byte for byte the certificate.
-- **What the dilation does not carry**: on Hosono’s net the dilated core has
+- **What the dilation does not carry**, reported apart and required of nothing: on
+  Hosono’s net the dilated core has
   $B(1 + 83/40000) = 797016825363/796000000000 > 1$, so the finer net is needed; at the
   axis the centre domain grows by $3/3986$ in Hosono’s coordinates; and the route’s
   ceiling as the step goes to zero is $L_0/B_0 = 99500/9977 \approx 9.9729$, above
@@ -120,21 +123,44 @@ capture as it must; the constant is F-1 of the
 [14 October review](../../../../docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md),
 which n = 39’s control meets too, and think-4uun owns its fix.
 
-The author ran the same checker, so this replay reproduces the author’s result with the
-producer’s code; it is not a second implementation. On a declared net the census route
-stands as evidence only beside a passing control receipt and once a review has read the
-certificate’s mathematics (the 6 October declared-net soundness review, item 7), so no
-evidence entry cites the row yet.
+The author ran the same checker, so this replay is reproduced with the producer’s code;
+it is not a second implementation. On a declared net the census route stands as
+evidence only beside a passing control receipt (the 6 October declared-net soundness
+review, item 6) and once a review has read the certificate’s mathematics (item 7), so
+no evidence entry cites the row yet.
+
+## The Stage 4 Review
+
+The stage 4 mathematical review of 3 November
+([review](../../../../docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md)),
+by a separately prompted lane at the strongest tier (think-222u), accepts the
+certificate with no defect. Its programs and receipts are under
+[review/dilated-measure-2026-11-03/](review/dilated-measure-2026-11-03/README.md): every
+premise but coverage recomputed exactly, direction 0 decided in full apart from the
+crate (least capture 1.003117185664 at the wall), every other direction’s least-bound
+box held exactly, every refusal of the control receipt held exactly, and five mutants
+refused. That run is `E-ozden-890-n94-9965-review-sample`, a sample that sets no rung.
+Its F1 is the control’s axis tolerance above. Its notes for the source:
+
+- **F3.** `notes/n31-negative/d529.jsonl` is a run on an input the packet does not
+  keep: the retained `n31_L5978.json.gz` with every mass times $10000003/10000000$. At
+  the receipt’s witness the retained file itself captures $0.99999969508 < 1$, and the
+  README’s $0.99999999719$ is in no retained receipt.
+- **F4.** The second checker checks the quadrant $[L/2, U_r]^2$, which covers each
+  direction’s whole centre domain only through the quarter turn and the measure’s
+  symmetry; the READMEs call it the full centre domain.
+- **F5.** `tools/rescale.py`’s growth formula $\rho(1 - 1/\lambda)$ holds at $r = 0$ and
+  on an unchanged net; on the finer net the growth at the shared nodes runs from
+  $6.55 \times 10^{-5}$ to $1.062 \times 10^{-3}$, and the new nodes have no old domain.
 
 ## What Is Not Established
 
-- **No review yet.** The stage 4 mathematical review of the certificate, by a separately
-  prompted lane at the strongest tier, is think-222u’s. Until it accepts the certificate
-  and a control receipt passes (think-4uun), n-094’s verified lower bound stays T-091’s
-  $199/20$.
-- **No second implementation here.** The replay is this repository’s `sqverify-fast`, the
-  checker the author ran, so it reproduces the result with the producer’s code; the
-  author’s second checker is retained and was not run.
+- **No passing control yet.** Until a control receipt passes (think-4uun), n-094’s
+  verified lower bound stays T-091’s $199/20$.
+- **No second complete implementation here.** The replay is this repository’s
+  `sqverify-fast`, the checker the author ran, so it is reproduced with the producer’s
+  code; the review decided one direction in full and sampled the rest, and the author’s
+  second checker is retained and was not run.
 - **Optimality** of any kind: a lower-bound certificate says nothing about the 10 × 10
   grid’s side.
 
@@ -146,7 +172,7 @@ declared nets to issue #366 and the dilation move to this repository’s T-022 a
 and the checker it decides with is this repository’s. The source says the search, the
 certificate, the verification runs and its write-up were produced by AI agents in the
 author’s research lab under his direction: Claude (Anthropic) agents, and an OpenAI
-Codex agent for the second check. The bibliography key is
+Codex agent, which wrote the second checker and reviewed the argument. The bibliography key is
 **[Özden s94 dilation 2026-11-03]**.
 
 The repository states no licence. It is retained on the presumption of permission that
