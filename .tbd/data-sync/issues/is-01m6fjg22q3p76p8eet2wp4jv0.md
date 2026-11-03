@@ -3,16 +3,20 @@ type: is
 id: is-01m6fjg22q3p76p8eet2wp4jv0
 title: "Stage 4 review: Özden's s(94) >= 1993/200 certificate (#890)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 3
+version: 4
+delegate: bold-ritchie-r222
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m6fj2mwfwwncghn4hv6qdhhg
+hold: null
+hold_until: null
 created_at: 2026-11-03T02:06:03.350Z
-updated_at: 2026-11-03T02:20:31.329Z
+updated_at: 2026-11-03T05:05:13.008Z
+started_at: 2026-11-03T05:05:13.008Z
 ---
 Stage 4 mathematical review of #890's certificate (Doğa Özden, s(94) >= 1993/200), by a separately prompted tbd-strong-max lane at maximum reasoning in its own worktree, as packing/campaign/result-import.md "Who reviews, and when" asks. It is what moves n-094's verified lower lane (frontier README: a complete replay here and a review of its mathematics; the 6 October declared-net soundness review's records-lane item 7: "A review under docs/project/reviews/ read this certificate and accepted it"; check_results verified_lane_review_problems).
 
