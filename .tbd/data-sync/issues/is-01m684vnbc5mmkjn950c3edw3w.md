@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 115
+version: 116
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -48,7 +48,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-03T03:54:52.541Z
+updated_at: 2026-11-03T04:55:47.920Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -204,3 +204,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-03 02:53: renewal. Sweep intake45: only #890 (L33 owns it). L32, L33 running.
 
 2026-11-03 03:52: renewal. Sweep intake46; no new issues since 02:50Z. L32, L33 running.
+
+2026-11-03 04:53: renewal. Sweep intake47; no new issues since 03:50Z. L32 s(145) replay ~8 h wall at 2 cores (~16 CPU-h of the 40 cap); L33 (#890) running.
