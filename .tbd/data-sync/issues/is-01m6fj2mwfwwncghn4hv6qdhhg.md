@@ -5,17 +5,18 @@ title: "Import Özden: s(94) >= 1993/200 by dilating Hosono's mixed_n94_L995 on 
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 4
 delegate: bold-ritchie-l33
 labels:
   - result-import
-  - n-94
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
+child_order_hints:
+  - is-01m6fjg22q3p76p8eet2wp4jv0
 hold: null
 hold_until: null
 created_at: 2026-11-03T01:58:43.855Z
-updated_at: 2026-11-03T01:58:48.827Z
+updated_at: 2026-11-03T02:06:03.350Z
 started_at: 2026-11-03T01:58:48.827Z
 ---
 Import of jlevy/squares#890 (opened 2026-11-03T01:20:31Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(94) >= 1993/200 = 9.965, above the verified 199/20 of T-091 (Hosono, mixed_n94_L995).
