@@ -1003,6 +1003,7 @@ case or experiment separately.
 | [Review: wand125’s Ten Declared-Net Certificates of 6 October (T-108 to T-117)](docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md) | dated review record | record | retained | — |
 | [wand125’s `s(18) ≥ 47/10` on a Declared Net and `s(66) ≥ 843/100`: Review of T-096, T-097 and the sqverify-fast Declared-Net Change](docs/project/reviews/review-2026-10-05-wand125-declared-net-n18-n66.md) | dated review record | record | retained | — |
 | [sqverify-fast on `main` (`d97758bb…`): Soundness Re-Review of the Declared-Net Change](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md) | dated review record | record | retained | — |
+| [Özden’s s(94) ≥ 1993/200 by a Dilated Measure: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md) | dated review record | record | retained | — |
 | [sqverify-fast Declared Nets: Re-Check of the Fixes for DR-1 to DR-3 (`36b52538a`) and the Proposed Flip](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md) | dated review record | record | retained | — |
 | [Review: wand125’s Checker on ValidTilt9 (`T-081`), Lane R3](docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md) | dated review record | record | retained | — |
 | [Review of the sqverify-fast format T route: census rows and controls for T-068’s 34 rectangle certificates](docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md) | dated review record | record | retained | — |
