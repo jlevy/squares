@@ -11,6 +11,7 @@ import copy
 import gzip
 import json
 from fractions import Fraction
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -46,8 +47,11 @@ def test_the_audit_holds_every_premise_the_register_states() -> None:
     assert net["net_last_tangent"] == "49717/120000"
     assert receipt["file"]["total_mass"] == "9399999/100000"
     assert receipt["dilation"]["lambda"] == "1993/1990"
-    assert receipt["dilation"]["axis_domain_growth_in_base_coordinates"] == "3/3986"
-    assert receipt["dilation"]["route_ceiling"] == "99500/9977"
+    observed = receipt["observations"]
+    assert observed["axis_domain_growth_in_base_coordinates"] == "3/3986"
+    assert observed["route_ceiling"] == "99500/9977"
+    assert observed["base_step"] == "83/40000"
+    assert observed["base_net_admits_dilated_core"] is False
     assert receipt["dilation"]["regenerated_text_is_the_certificate"] is True
     digests = receipt["digests"]
     # The source's stated digests, which stage 2 checked once and the receipt records.
@@ -95,7 +99,60 @@ def test_the_base_net_does_not_admit_the_dilated_core() -> None:
     data["proof_net"] = {"step": "83/40000", "last": 200}
     net = audit.lemma_n0(data)
     assert net["b_shrink_below_one"] is False
-    assert audit.dilation_checks(candidate(), base())["base_net_refuses_dilated_core"] is True
+    observed = audit.dilation_observations(candidate(), base())
+    assert observed["base_net_admits_dilated_core"] is False
+
+
+def test_an_observation_is_required_of_nothing() -> None:
+    """The status reads the premises, the dilation and the regeneration, never what the
+    dilation does not carry: a base on a declared net fine enough for the dilated core
+    changes the observation and not the checks, and the observation is read on the
+    base's own step."""
+    fine = base()
+    fine["proof_net"] = {"step": "1/1000000", "last": 414214}
+    observed = audit.dilation_observations(candidate(), fine)
+    assert observed["base_step"] == "1/1000000"
+    assert observed["base_net_admits_dilated_core"] is True
+    checks = audit.dilation_checks(candidate(), fine)
+    assert all(value is True for value in checks.values() if isinstance(value, bool))
+
+
+def test_a_row_of_the_wrong_shape_is_refused() -> None:
+    for change in ("coordinates", "key"):
+        data = candidate()
+        if change == "coordinates":
+            data["rectangles"][5]["rectangle"] = data["rectangles"][5]["rectangle"][:3]
+        else:
+            data["rectangles"][5]["weight"] = "1"
+        checks = audit.file_checks(data, DILATION)
+        assert checks["every_row_a_rectangle_of_four_and_a_mass"] is False
+        assert checks["every_rectangle_inside"] is False
+
+
+def test_a_capture_with_a_stray_line_or_a_second_summary_is_refused(tmp_path: Path) -> None:
+    capture = audit.CENSUS / PACKET / f"{DILATION.name}.jsonl.gz"
+    lines = gzip.decompress(capture.read_bytes()).decode().splitlines()
+    stray = tmp_path / "stray.jsonl"
+    stray.write_text("\n".join([*lines[:3], '{"note": 1}', *lines[3:]]), encoding="utf-8")
+    with pytest.raises(SystemExit, match="neither a direction row nor the summary"):
+        audit.read_rows(stray)
+    twice = tmp_path / "twice.jsonl"
+    twice.write_text("\n".join([*lines, lines[-1]]), encoding="utf-8")
+    with pytest.raises(SystemExit, match="a second summary"):
+        audit.read_rows(twice)
+
+
+def test_check_fails_on_a_receipt_that_does_not_pass(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """`--check` also requires the passing status, so an unchanged failing receipt fails."""
+    stored = json.loads(audit.receipt_path(PACKET, "audit").read_text(encoding="utf-8"))
+    failing = {**stored, "status": "PREMISES_FAIL"}
+    kept = tmp_path / "dilation-audit.json"
+    kept.write_text(json.dumps(failing), encoding="utf-8")
+    monkeypatch.setattr(audit, "audit", lambda _packet: failing)
+    monkeypatch.setattr(audit, "receipt_path", lambda _packet, _command: kept)
+    assert audit.main(["audit", PACKET, "--check"]) == 1
 
 
 @pytest.mark.parametrize("extra", ["net", "certificate"])

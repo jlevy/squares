@@ -11,7 +11,8 @@ It decides no coverage. `DILATIONS` names each certificate it reads, by its pack
 - ``audit`` recomputes, from the packet's retained files and the base packet's, in exact
   rationals and apart from the crate:
 
-  - the file: format M, rectangles only, `scaling_factor` absent or 1, a `proof_net`
+  - the file: format M, rectangles only (each row exactly four coordinates and a mass),
+    `scaling_factor` absent or 1, a `proof_net`
     with exactly `step` and `last` (and `count = last + 1` if given), no top-level
     `net`, and eight times the densest row's density at most `2^32` (item 1 of the
     records-lane checklist of the 6 October declared-net soundness review);
@@ -26,9 +27,10 @@ It decides no coverage. `DILATIONS` names each certificate it reads, by its pack
     decompressed text. The receipt records each text's SHA-256 beside the one the
     source states, as data: Git holds the retained bytes (OR-16), and the stage 2
     custody check compared them once;
-  - what the dilation does not carry: `λ B₀ (1 + D₀) >= 1` on the base's net, the
-    direction-0 centre domain's growth `ρ₀ (1 - 1/λ)` in the base's coordinates, and
-    the route's ceiling `L₀ / B₀`.
+  - and, as observations its status requires nothing of, what the dilation does not
+    carry: `λ B₀ (1 + D₀)` on the base's own net (its declared step, else the standard
+    one), the direction-0 centre domain's growth `ρ₀ (1 - 1/λ)` in the base's
+    coordinates on an unchanged net, and the route's ceiling `L₀ / B₀`.
 
 - ``compare`` reads the census capture (`census-mixed/PACKET/NAME.jsonl.gz`) and each
   receipt of the producer's own `sqverify-fast` runs, and compares them direction by
@@ -37,7 +39,10 @@ It decides no coverage. `DILATIONS` names each certificate it reads, by its pack
   producer's second checker's replay (`second-checker/full.jsonl`) for its verdicts and
   least bound, as a reading of the producer's output that decides nothing.
 
-``--check`` recomputes either receipt and fails unless it equals the retained one.
+``--check`` recomputes either receipt and fails unless it equals the retained one and
+passes (`PREMISES_HOLD`, `EVERY_DIRECTION_AGREES`). A capture or receipt with a line
+that is neither a direction row nor the summary, a direction twice, or no summary or a
+second one, is refused.
 
 From ``packing/``::
 
@@ -150,13 +155,22 @@ def file_checks(data: dict[str, Any], dilation: Dilation) -> dict[str, Any]:
     side = Fraction(data["L"])
     net = data.get("proof_net")
     net_keys = sorted(net) if isinstance(net, dict) else None
-    rows = rectangles(data)
+    # Each row is exactly a rectangle of four coordinates and a mass; the geometry is
+    # read only when every row has that shape.
+    shaped = all(
+        isinstance(row, dict)
+        and set(row) == {"rectangle", "mass"}
+        and isinstance(row["rectangle"], list)
+        and len(row["rectangle"]) == 4
+        for row in data["rectangles"]
+    )
+    rows = rectangles(data) if shaped else []
     masses = [mass for _, mass in rows]
     densities = [
         mass / ((box[2] - box[0]) * (box[3] - box[1]))
         for box, mass in rows
         if box[2] > box[0] and box[3] > box[1]
-    ]
+    ] or [Fraction(0)]
     total = sum(masses, Fraction(0))
     stated = Fraction(data["total_mass"])
     return {
@@ -164,6 +178,7 @@ def file_checks(data: dict[str, Any], dilation: Dilation) -> dict[str, Any]:
         "side_matches": side == dilation.side,
         "format_m": data.get("points") == [] and "segments" not in data,
         "keys_known": sorted(set(data) - FORMAT_M_KEYS) == [],
+        "every_row_a_rectangle_of_four_and_a_mass": shaped,
         "scaling_factor": data.get("scaling_factor"),
         "scaling_factor_absent_or_one": Fraction(str(data.get("scaling_factor", 1))) == 1,
         "proof_net_keys": net_keys,
@@ -174,12 +189,12 @@ def file_checks(data: dict[str, Any], dilation: Dilation) -> dict[str, Any]:
         ),
         "no_top_level_net": "net" not in data,
         "no_certificate_metadata": "certificate" not in data,
-        "rows": len(rows),
-        "every_mass_nonnegative": all(mass >= 0 for mass in masses),
-        "every_rectangle_nondegenerate": all(
-            box[2] > box[0] and box[3] > box[1] for box, _ in rows
-        ),
-        "every_rectangle_inside": all(
+        "rows": len(data["rectangles"]),
+        "every_mass_nonnegative": shaped and all(mass >= 0 for mass in masses),
+        "every_rectangle_nondegenerate": shaped
+        and all(box[2] > box[0] and box[3] > box[1] for box, _ in rows),
+        "every_rectangle_inside": shaped
+        and all(
             box[0] >= 0 and box[2] <= side and box[1] >= 0 and box[3] <= side for box, _ in rows
         ),
         "total_mass": as_text(total),
@@ -244,14 +259,20 @@ def rescaled_text(base_text: bytes, side: Fraction, step: Fraction, last: int) -
     return json.dumps(out).encode()
 
 
+def base_step(base: dict[str, Any]) -> Fraction:
+    """The step of the base's own net: the one it declares, else the standard one."""
+    net = base.get("proof_net")
+    return Fraction(net["step"]) if isinstance(net, dict) else STANDARD_STEP
+
+
 def dilation_checks(data: dict[str, Any], base: dict[str, Any]) -> dict[str, Any]:
-    """The certificate against the base, row by row, in exact rationals."""
+    """That the certificate is the base dilated, row by row, in exact rationals. Every
+    boolean here is a condition the audit's status requires."""
     side, base_side = Fraction(data["L"]), Fraction(base["L"])
     scale = side / base_side
     rows, base_rows = rectangles(data), rectangles(base)
     paired = list(zip(rows, base_rows, strict=False))
     base_core = Fraction(base["B"])
-    base_shrink = scale * base_core * (1 + STANDARD_STEP)
     return {
         "lambda": as_text(scale),
         "core_is_lambda_times_base": Fraction(data["B"]) == scale * base_core,
@@ -261,9 +282,23 @@ def dilation_checks(data: dict[str, Any], base: dict[str, Any]) -> dict[str, Any
         "every_mass_equal": len(rows) == len(base_rows)
         and all(mass == base_mass for (_, mass), (_, base_mass) in paired),
         "total_mass_equal": Fraction(data["total_mass"]) == Fraction(base["total_mass"]),
+    }
+
+
+def dilation_observations(data: dict[str, Any], base: dict[str, Any]) -> dict[str, Any]:
+    """What the dilation does not carry, reported and required of nothing: the dilated
+    core on the base's own net, the axis domain's growth in the base's coordinates on an
+    unchanged net, and the route's ceiling as the step goes to zero."""
+    side, base_side = Fraction(data["L"]), Fraction(base["L"])
+    scale = side / base_side
+    base_core = Fraction(base["B"])
+    step = base_step(base)
+    base_shrink = scale * base_core * (1 + step)
+    return {
         "base_net": base.get("proof_net", "standard"),
+        "base_step": as_text(step),
         "dilated_core_on_base_net": as_text(base_shrink),
-        "base_net_refuses_dilated_core": base_shrink >= 1,
+        "base_net_admits_dilated_core": base_shrink < 1,
         "axis_domain_growth_in_base_coordinates": as_text(Fraction(1, 2) * (1 - 1 / scale)),
         "route_ceiling": as_text(base_side / base_core),
         "side_below_ceiling": side < base_side / base_core,
@@ -284,6 +319,9 @@ def audit(packet: str) -> dict[str, Any]:
     regenerated = rescaled_text(base_text, dilation.side, step, last)
     file = file_checks(data, dilation)
     net = lemma_n0(data)
+    if not file["every_row_a_rectangle_of_four_and_a_mass"]:
+        message = f"{path}: a row is not a rectangle of four coordinates and a mass"
+        raise SystemExit(message)
     scaled = dilation_checks(data, base)
     # The digests are recorded beside the source's stated ones, for a reader and the
     # test; Git holds the retained bytes (OR-16), so the gate is the byte comparison.
@@ -313,27 +351,40 @@ def audit(packet: str) -> dict[str, Any]:
         "file": file,
         "lemma_n0": net,
         "dilation": scaled,
+        "observations": dilation_observations(data, base),
         "status": "PREMISES_HOLD" if passes else "PREMISES_FAIL",
-        "decides": "no coverage: the premises, the dilation and the regeneration only",
+        "decides": (
+            "no coverage: the premises, the dilation and the regeneration only; the"
+            " observations are reported and required of nothing"
+        ),
     }
 
 
 def read_rows(path: Path) -> tuple[dict[int, dict[str, Any]], dict[str, Any]]:
     """A `sqverify-fast` capture's direction rows by index, and its summary."""
     rows: dict[int, dict[str, Any]] = {}
-    summary: dict[str, Any] = {}
-    for line in text_of(path).decode().splitlines():
+    summary: dict[str, Any] | None = None
+    for number, line in enumerate(text_of(path).decode().splitlines(), start=1):
         if not line.strip():
             continue
         record = json.loads(line)
         if record.get("kind") == "sqverify-fast-summary/v1":
+            if summary is not None:
+                message = f"{path}:{number}: a second summary"
+                raise SystemExit(message)
             summary = record
         elif "r" in record:
             index = int(record["r"])
             if index in rows:
-                message = f"{path}: direction {index} twice"
+                message = f"{path}:{number}: direction {index} twice"
                 raise SystemExit(message)
             rows[index] = record
+        else:
+            message = f"{path}:{number}: neither a direction row nor the summary"
+            raise SystemExit(message)
+    if summary is None:
+        message = f"{path}: no summary"
+        raise SystemExit(message)
     return rows, summary
 
 
@@ -473,22 +524,25 @@ def main(argv: list[str] | None = None) -> int:
     receipt = audit(args.packet) if args.command == "audit" else compare(args.packet)
     path = receipt_path(args.packet, args.command)
     text = retained_json.dumps(receipt)
-    if args.check:
-        stored = json.loads(path.read_text(encoding="utf-8"))
-        if stored != json.loads(text):
-            sys.stderr.write(f"{path}: differs from the recomputed receipt\n")
-            return 1
-        sys.stdout.write(f"{path.relative_to(PROJECT)}: unchanged\n")
-        return 0
-    if args.write:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text, encoding="utf-8")
-    sys.stdout.write(text)
     passed = (
         receipt["status"] == "PREMISES_HOLD"
         if args.command == "audit"
         else (receipt["verdict"] == "EVERY_DIRECTION_AGREES")
     )
+    if args.check:
+        stored = json.loads(path.read_text(encoding="utf-8"))
+        if stored != json.loads(text):
+            sys.stderr.write(f"{path}: differs from the recomputed receipt\n")
+            return 1
+        if not passed:
+            sys.stderr.write(f"{path}: unchanged, and it does not pass\n")
+            return 1
+        sys.stdout.write(f"{path.relative_to(PROJECT)}: unchanged, and it passes\n")
+        return 0
+    if args.write:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+    sys.stdout.write(text)
     return 0 if passed else 1
 
 
