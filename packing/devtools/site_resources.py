@@ -215,6 +215,15 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s94-lower-bound",
+        "Doğa Özden",
+        (
+            "Hiroaki Hosono's s(94) measure dilated onto a finer declared net for"
+            " s(94) >= 1993/200, with sqverify-fast receipts and a second, integer"
+            " checker; reported here (T-262)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (
