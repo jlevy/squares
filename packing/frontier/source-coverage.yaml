@@ -12047,6 +12047,27 @@ sources:
     T-259 records the in-horizon report. All 42 native jobs have full outcomes. No selected override
     or superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
+- id: ozden-s94-lower-bound-2026-11-03
+  title: Doğa Özden's dilation of Hosono's mixed_n94_L995 for s(94) >= 1993/200, issue 890
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s94-lower-bound/tree/9d76ad5549e99e952c899462b36d2bd765517969
+  local: resources/web/ozden-s94-lower-bound-2026-11-03/
+  source_key: '[Özden s94 dilation 2026-11-03]'
+  scope: {n_values: [94]}
+  reviewed: '2026-11-03'
+  source_date: '2026-11-03'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-094.md
+  - frontier/results.yaml
+  - resources/web/ozden-s94-lower-bound-2026-11-03/README.md
+  evidence: [E-ozden-890-n94-9965-report]
+  notes: >-
+    The whole tree but .gitignore is retained at the repository's one commit, 9d76ad5. The
+    certificate is Hosono's T-091 measure dilated onto a 600-direction declared net; the
+    reported 1993/200 is above T-091's 199/20, which n-094's verified lower lane keeps until
+    the stage 4 review (think-222u). T-262 records the claim.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

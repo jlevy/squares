@@ -4515,7 +4515,31 @@ sources:
       846: refinements of others' packings below the print at 105, 146, 156, 229 and 308, a 2e-14
       dilation of Francisco Couzo's issue-843 packing at 130, and eight counts the ledger does not
       record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-issue846-2026-10-30/.
+  - key: '[Özden s94 dilation 2026-11-03]'
+    authors: [Özden]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-03'
+    lineage: builds-on-project
+    credit: Ozden after Hosono, Tokoharu, Levy
+    short_credit: Ozden after Hosono, Tokoharu et al.
+    note: >-
+      kenaznia-doga/s94-lower-bound at 9d76ad5549e99e952c899462b36d2bd765517969
+      (2026-11-03T01:19:36Z), Doğa Özden's certificate for s(94) >= 1993/200: Hiroaki
+      Hosono's mixed_n94_L995 rectangle measure (T-091) dilated by 1993/1990 onto a declared
+      net of 600 half-angle directions of step 83/120000, decided by this repository's
+      sqverify-fast at every direction, with an exact-integer second checker and the
+      author's receipts. Registration was requested in jlevy/squares#890, posted on the
+      author's behalf by his AI agent's account kenaznia-doga. The README credits the
+      measure, its format and the method to Hosono after Tokoharu, the declared nets to
+      jlevy/squares#366 and the dilation to this repository's T-022 and T-024; it says
+      Claude (Anthropic) agents in the author's lab found the dilation, built the
+      certificate and ran the checks, and an OpenAI Codex agent wrote the second checker,
+      under his direction. No licence stated; retained on the presumption of permission
+      the author's submission carries (think-cnn7; think-0so3). Ozden is Özden in the
+      credit's ASCII. Retained in web/ozden-s94-lower-bound-2026-11-03/.
 credited_names:
+  Doğa Özden: Özden
   Benjamin Greff: Greff
   Mohsen Khalili: Khalili
   Sara Gharabaghi: Gharabaghi

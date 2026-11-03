@@ -1,0 +1,37 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "ozden-s94-lower-bound",
+  "source_url": "https://github.com/kenaznia-doga/s94-lower-bound",
+  "source_ref": "main",
+  "source_commit": "9d76ad5549e99e952c899462b36d2bd765517969",
+  "retrieved_at_utc": "2026-11-03T01:57Z",
+  "git_scope": "A full clone of kenaznia-doga/s94-lower-bound, fetched for the intake of jlevy/squares#890; the repository holds one commit, 9d76ad5 (committed 2026-11-03T01:19:36Z, 's(94) >= 1993/200: certificate, regeneration from Hosono's mixed_n94_L995, sqverify-fast receipts and an independent integer replay'), of 25 files, and the scope is the whole tree. #890 names this commit. Every digest the issue and the README state matches: certificate/n94_L9965.json.gz 116c8342...16f8 as stored and b8b03ee8...749c decompressed, and Hosono's candidate.json at wand125/square-packing-bounds@797bdf6e 64d81953...0667a, fetched from raw.githubusercontent.com and equal to the copy the wand125-mixed-bounds-evening-2026-10-04 packet retains. No source program ran in writing this packet.",
+  "archived_dir": "source",
+  "license": "None stated: the repository has no licence file, and no file names a licence. Retained under the presumption of permission the owner set on 24 October 2026 for a source its author submits (think-cnn7), the issue being the author's submission; the exact licence is followed up on think-0so3. The measure is Hiroaki Hosono's mixed_n94_L995, published under the MIT licence (Copyright (c) 2026 wand125) and retained by the wand125-mixed-bounds-evening-2026-10-04 packet; the certificate is that measure with every coordinate scaled, so Hosono's notice applies to it as well.",
+  "claims": [
+    "certificate/n94_L9965.json.gz is a format M rectangle-measure certificate that s(94) >= 1993/200 = 9.965: Hiroaki Hosono's mixed_n94_L995 (wand125/square-packing-bounds@797bdf6e) with every rectangle coordinate multiplied by 1993/1990, the masses unchanged (853 orbits, total 9399999/100000 < 94), core side B = 19884161/19900000 and a declared proof_net of step 83/120000 and last 599 (600 half-angle directions, last tangent 49717/120000), B(1 + D) = 2387749705363/2388000000000 < 1. tools/rescale.py regenerates it from Hosono's candidate.json, and verify.sh regenerates, hash-checks and runs it.",
+    "receipts/sqverify-fast-rustc1.98-full.jsonl and receipts/sqverify-fast-rustc1.93-full.jsonl are the author's runs of jlevy/squares' sqverify-fast at e6e8d577 (crate source d97758bb with rustc 1.98.0; and 85f02254 with rustc 1.93.1 and the rust-version line removed): VERIFIED at all 600 directions, least certified bound 1.0000000000314, 296,805,699 nodes, 7,887 and 7,985 CPU-seconds.",
+    "second-checker/ is an exact-integer branch and bound written by an OpenAI Codex agent from sqverify-fast's SOUNDNESS.md prose and not its source, with its full replay (600 of 600 VERIFIED, least certified bound 4398046511113/2^42, 4,801 CPU-seconds on Apple arm64) and its reviewer's report (GRADE.md, verdict SOUND, mutants refused).",
+    "notes/n31-negative/ records the same dilation refused at n = 31: Hosono's 2391/400 measure dilated to 2989/500 on a step-1/8600 net, refused by sqverify-fast at direction 529 (capture 0.99999999719). It claims no bound."
+  ],
+  "scope": [
+    ".gitignore",
+    "README.md",
+    "certificate",
+    "notes",
+    "receipts",
+    "second-checker",
+    "tools",
+    "verify.sh"
+  ],
+  "original_gzip": [
+    "certificate/n94_L9965.json.gz",
+    "notes/n31-negative/n31_L5978.json.gz"
+  ],
+  "pinned_only": [
+    {
+      "match": ".gitignore",
+      "reason": "A retained .gitignore would act on this repository's tree; it names only the verify script's work directory, _verify/."
+    }
+  ]
+}

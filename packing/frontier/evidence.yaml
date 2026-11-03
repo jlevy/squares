@@ -54999,3 +54999,34 @@ evidence:
       the receipts. The source's own checker was not run here on this certificate, and its
       tarball is pinned by digest and not retained.
     source_reviewed: '2026-11-02'
+  - id: E-ozden-890-n94-9965-report
+    claim: lower-bound
+    scope: {n_values: [94]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s94 dilation 2026-11-03]'
+    certificate: packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/certificate/n94_L9965.json.gz
+    replay_status: not-attempted
+    verifiers: [V-sqverify-fast, V-ozden-integer-checker]
+    limitations: >-
+      The author reports s(94) >= 1993/200 = 9.965 from Hiroaki Hosono's mixed_n94_L995
+      measure (T-091) dilated by 1993/1990: 853 rectangle orbits, masses unchanged, total
+      9399999/100000, core side 19884161/19900000, on a net the candidate declares of 600
+      half-angles of step 83/120000. It reports this repository's sqverify-fast,
+      unmodified at e6e8d577 (crate source d97758bb..., rustc 1.98.0), VERIFIED at all
+      600 directions, least certified bound 1.0000000000314 over 296,805,699 nodes in
+      7,887 CPU seconds, and a second build with rustc 1.93.1 equal direction by
+      direction; and an exact-integer checker written for its review by an OpenAI Codex
+      agent, VERIFIED at all 600 on Apple arm64, with a referee report (verdict SOUND)
+      whose mutants are refused. Both receipts and the second checker are retained in the
+      packet; the second checker was not run here. devtools.audit_dilated_measure
+      (receipts/dilation-audit.json in the packet) recomputes from the retained bytes the
+      premises, lemma N0 on the declared net, the dilation row by row against the T-091
+      packet's retained mixed_n94_L995, and the certificate's JSON text regenerated from
+      it with the SHA-256 the issue states; none of it decides coverage. The complete
+      replay here is E-ozden-890-n94-9965-sqverify-fast-replay.
+    source_reviewed: '2026-11-03'

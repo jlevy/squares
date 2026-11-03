@@ -1058,6 +1058,34 @@ verifiers:
       the commit, by manifest.json's SHA-256 of each, and by the archives' SHA-256. The
       README says the project "was developed with substantial assistance from Claude and
       Codex".
+  - id: V-ozden-integer-checker
+    program: independent.py with intcheck_final.cpp, run by run.sh
+    author: Doğa Özden's research lab (an OpenAI Codex agent)
+    provenance: external
+    language: [Python, C++]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      Decides a format M rectangle-measure certificate on its declared net: exact Fraction
+      admission and D4 expansion (independent.py), then integer-only branch and bound over
+      each direction's whole centre domain in fixed point of unit 2^-42 with directed
+      rounding and exact rational directions (intcheck_final.cpp), every core capturing at
+      least one.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/independent.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/intcheck_final.cpp
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/run.sh
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/INTEGER-SOUNDNESS.md
+    versions:
+      - sha256: 5ca6546967d45881adcfa6b39d13c735ac5b50e93ed3aaa56090f2a6b4d82508
+        revision: 9d76ad5549e99e952c899462b36d2bd765517969
+        note: >-
+          independent.py; intcheck_final.cpp is a90e8f06...24f4 at the same revision. The
+          source reports its full run (second-checker/full.jsonl) on Apple arm64; not run here.
+    note: >-
+      Written for the review of jlevy/squares#890's certificate by an OpenAI Codex agent in
+      the author's lab, which the source says had sqverify-fast's SOUNDNESS.md prose but
+      not its source. Retained and read; no evidence entry here rests on a run of it.
 
   # --- First-party programs: deciders ----------------------------------------------------
   - id: V-check-basic-bounds
@@ -2718,6 +2746,29 @@ verifiers:
       (think-8xy2).
 
   # --- First-party programs: premise checks and replay drivers ------------------------
+  - id: V-audit-dilated-measure
+    program: devtools.audit_dilated_measure
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes in exact rationals, from a packet's retained certificate and apart from
+      the crate, the premises of a format M certificate that dilates a retained one onto a
+      declared net: the file's shape, the masses and containment, the total n - 1/100000,
+      lemma N0's (a) to (e), the dilation row by row against the base, and the
+      regeneration of the certificate's JSON text from the base by the source's stated
+      rule; then compares the census capture with the producer's sqverify-fast receipts
+      direction by direction. It decides no coverage; sqverify-fast does.
+    source:
+      - packing/devtools/audit_dilated_measure.py
+      - packing/tests/test_audit_dilated_measure.py
+    note: >-
+      Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after
+      reading the certificate, the source's README and tools/rescale.py as data. Its
+      receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in
+      the ozden-s94-lower-bound-2026-11-03 packet.
   - id: V-evand-regularized-1020-review-controls
     program: sharp_controls_t225.py
     author: Squares Project (Levy)

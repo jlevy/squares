@@ -1,0 +1,157 @@
+# Doğa Özden’s s(94) ≥ 1993/200 at 9d76ad5
+
+This packet retains
+[kenaznia-doga/s94-lower-bound](https://github.com/kenaznia-doga/s94-lower-bound/tree/9d76ad5549e99e952c899462b36d2bd765517969)
+at `9d76ad5549e99e952c899462b36d2bd765517969` (committed 2026-11-03T01:19:36Z, the
+repository’s one commit), which issue
+[#890](https://github.com/jlevy/squares/issues/890) asks to register.
+The issue and the repository were prepared and posted on Doğa Özden’s behalf by his AI
+agent, which uses the GitHub account `kenaznia-doga`.
+
+## What the Source Claims
+
+- `certificate/n94_L9965.json.gz` proves $s(94) \ge 1993/200 = 9.965$. It is Hiroaki
+  Hosono’s `mixed_n94_L995` rectangle measure (T-091, retained by the
+  [wand125-mixed-bounds-evening-2026-10-04](../wand125-mixed-bounds-evening-2026-10-04/README.md)
+  packet) with every coordinate multiplied by $\lambda = 1993/1990$ and the masses
+  unchanged: 853 rectangle orbits of total mass $9399999/100000 < 94$, core side
+  $B = 19884161/19900000$ (Hosono’s $9977/10000$ times $\lambda$), on a net the file
+  declares (`proof_net`) of 600 half-angles of step $83/120000$, last tangent
+  $49717/120000$, with $B(1 + D) = 2387749705363/2388000000000 < 1$.
+- `tools/rescale.py` regenerates the certificate from Hosono’s `candidate.json`, and
+  `verify.sh` regenerates it, checks both stated digests, builds this repository’s
+  `sqverify-fast` at `e6e8d577` and runs it.
+- `receipts/` holds the author’s two complete runs of that `sqverify-fast`, unmodified:
+  rustc 1.98.0 (crate source `d97758bb…`) and rustc 1.93.1 with only the
+  `rust-version` line removed, each VERIFIED at all 600 directions, least certified bound
+  1.0000000000314, 296,805,699 nodes, 7,887 and 7,985 CPU-seconds.
+- `second-checker/` is an exact-integer branch and bound that the source says an OpenAI
+  Codex agent wrote for the review of this claim from `sqverify-fast`’s `SOUNDNESS.md`
+  prose and not its source, with its full run (600 of 600 VERIFIED on Apple arm64,
+  4,801 CPU-seconds) and the referee report `GRADE.md` (verdict SOUND), whose mutants
+  (masses times 0.998, the heaviest orbit removed, $L = 9.975$) are refused with exact
+  counterexamples.
+- `notes/n31-negative/` records the same move refused at $n = 31$: Hosono’s $2391/400$
+  measure dilated to $2989/500$ on a step-$1/8600$ net, refused by `sqverify-fast` at
+  direction 529. It claims no bound.
+
+The README says the dilation is only how the candidate was found: the walls do not
+scale, so the centre domain grows toward them, and Hosono’s net no longer admits the
+larger core, so 400 of the 600 directions are new. The bound rests on the full check.
+
+## Retained Here
+
+`devtools.acquire_source` wrote the packet from
+[acquisition/declaration.json](acquisition/declaration.json); every file is bound to its
+Git blob at the pin. The scope is the whole tree, 25 files: 24 retained under
+[source/](source/) (885,104 bytes) and `.gitignore` pinned by digest, since a retained
+copy would act on this repository’s tree.
+[acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) is the full
+manifest, and [acquisition/sources.json](acquisition/sources.json) the record. The
+packet is under a megabyte, so it is kept in Git.
+
+Every digest the issue and the source’s README state holds: the certificate’s stored
+file `116c8342…16f8` (the receipts’ `input_sha256`), its JSON text `b8b03ee8…749c`, and
+Hosono’s `candidate.json` at
+[wand125/square-packing-bounds@797bdf6e](https://github.com/wand125/square-packing-bounds/tree/797bdf6e10eba5f9dccca9da06f8352e81ba9dde/certificates/mixed_n94_L995)
+`64d81953…0667a`, read on 3 November 2026 from raw.githubusercontent.com and equal to
+the T-091 packet’s retained copy.
+No program of the source ran in writing the packet.
+
+## Premises and the Dilation
+
+`devtools.audit_dilated_measure audit` recomputes, from the retained bytes and in exact
+rationals apart from the crate,
+[receipts/dilation-audit.json](receipts/dilation-audit.json), status `PREMISES_HOLD`:
+
+- **The file** is format M: 853 rectangle rows and no points, no `scaling_factor`, a
+  `proof_net` of exactly `step` and `last`, no top-level `net` and no certificate
+  metadata; every rectangle nondegenerate and inside $[0, L]^2$, every mass
+  nonnegative, the total exactly $94 - 1/100000$.
+- **Lemma N0** of `sqverify_fast/SOUNDNESS.md` holds on the declared net:
+  $N_\theta = 600$; $B(1 + D) = 2387749705363/2388000000000 < 1$;
+  $t_{\max}^2 + 2t_{\max} - 1 = 3860089/14400000000 > 0$ at
+  $t_{\max} = 49717/120000 \le 1/2$; and the tangent form
+  $B(1 + D/(1 - D^2/4)) = 1146119721592254871/1146239862908900000 < 1$.
+- **The dilation** is exact: $L$ and $B$ are $\lambda$ times Hosono’s, each of the 853
+  rows is $\lambda$ times his row in order, and each mass equals his.
+- **The regeneration**: Hosono’s retained candidate, rewritten by the rule
+  `tools/rescale.py` states and serialized as Python’s `json.dump` writes it, has the
+  JSON text’s SHA-256 `b8b03ee8…749c`, byte for byte the certificate.
+- **What the dilation does not carry**: on Hosono’s net the dilated core has
+  $B(1 + 83/40000) = 797016825363/796000000000 > 1$, so the finer net is needed; at the
+  axis the centre domain grows by $3/3986$ in Hosono’s coordinates; and the route’s
+  ceiling as the step goes to zero is $L_0/B_0 = 99500/9977 \approx 9.9729$, above
+  $1993/200$.
+
+None of it decides coverage.
+
+## Complete Replay Here
+
+Pending: written when the census run ends.
+
+## What Is Not Established
+
+- **No review yet.** The stage 4 mathematical review of the certificate, by a separately
+  prompted lane at the strongest tier, is think-222u’s. Until it accepts the certificate,
+  n-094’s verified lower bound stays T-091’s $199/20$.
+- **No second implementation here.** The replay is this repository’s `sqverify-fast`, the
+  checker the author ran, so it reproduces the result with the producer’s code; the
+  author’s second checker is retained and was not run.
+- **Optimality** of any kind: a lower-bound certificate says nothing about the 10 × 10
+  grid’s side.
+
+## Credit and Licence
+
+The certificate is Doğa Özden’s, after Hiroaki Hosono, whose measure, format and method
+it dilates, after Tokoharu’s rectangle-density certificates; the source credits the
+declared nets to issue #366 and the dilation move to this repository’s T-022 and T-024,
+and the checker it decides with is this repository’s. The source says the search, the
+certificate, the verification runs and its write-up were produced by AI agents in the
+author’s research lab under his direction: Claude (Anthropic) agents, and an OpenAI
+Codex agent for the second check. The bibliography key is
+**[Özden s94 dilation 2026-11-03]**.
+
+The repository states no licence. It is retained on the presumption of permission that
+an author’s own submission to this repository carries (the owner, 24 October 2026,
+think-cnn7); the exact licence is asked on think-0so3. Hosono’s measure is published
+under the MIT licence (Copyright (c) 2026 wand125), and his notice applies to the
+dilated certificate as well.
+
+## Original Gzip Files
+
+The two upstream files whose own names end in `.gz` are retained as published, never
+recompressed. The table binds their compressed bytes: the Git blob and SHA-256 of each
+stored file, which are its blob at the pinned commit and, for the certificate, the
+digest the issue states.
+
+| Stored path | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `source/certificate/n94_L9965.json.gz` | upstream | `2ff3a4429747f4a76184c74f80935323bcc1259b` | `116c83425959a943196287a910ad799b2fe1bb9dec433085ea222bd62d5a16f8` |
+| `source/notes/n31-negative/n31_L5978.json.gz` | upstream | `307feb35401cf13ae6f137e17f1eaaee197e0ee1` | `d46ce612f17dbf0a5fb6980275fb6f7faa7bf242cdfa90a5284cdbfbb2c11c86` |
+
+## Compressed Files
+
+The second checker’s premises file, of more than 1,000 lines, is stored as deterministic
+gzip made by `gzip -9n`, with no file name or timestamp in the header. The table gives
+the Git blob and SHA-256 of the decompressed bytes, and
+`python -m devtools.retained_data check PACKET` re-derives the row.
+
+| Stored file | Origin | Git blob | SHA-256, decompressed |
+| --- | --- | --- | --- |
+| `source/second-checker/full.premises.json.gz` | upstream | `c654f52c741ce645725a918943a892d7bec980ea` | `b11524d4a6b36f3fd108375e5a0588a23b970513e827824b5ae52466cde0e522` |
+
+## Commands
+
+From `packing/`, with the project interpreter:
+
+```bash
+python -m devtools.acquire_source ozden-s94-lower-bound-2026-11-03 --checkout CHECKOUT
+python -m devtools.acquire_source ozden-s94-lower-bound-2026-11-03 --check
+python -m devtools.audit_dilated_measure audit ozden-s94-lower-bound-2026-11-03 --check
+python -m devtools.audit_dilated_measure compare ozden-s94-lower-bound-2026-11-03 --check
+```
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

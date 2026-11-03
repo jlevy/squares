@@ -18287,19 +18287,14 @@ occurrences:
     path: packing/frontier/n-094.md
     record_key: '94'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Özden
   start: 0
-  end: 6
-  label: Hosono
+  end: 5
+  label: Özden
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-094.md [94] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-095.md
     record_key: '95'
@@ -19366,10 +19361,10 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
-  note: 'Reviewed packing/frontier/n-130.md /reported_upper_bound/found_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Francisco Couzo as construction finder,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-130.md /reported_upper_bound/found_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Francisco Couzo
+    as construction finder, as the adopted result''s register entry and its stage
+    4 review credit them; the label is the source''s.'
   contributor_id: francisco-couzo
 - origin:
     path: packing/frontier/n-130.md
@@ -19384,10 +19379,10 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
-  note: 'Reviewed packing/frontier/n-130.md /reported_upper_bound/improved_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Mishapolk as construction improver,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-130.md /reported_upper_bound/improved_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Mishapolk as
+    construction improver, as the adopted result''s register entry and its stage 4
+    review credit them; the label is the source''s.'
   contributor_id: mykhailo-polkovskyi
 - origin:
     path: packing/frontier/n-130.md
@@ -20351,10 +20346,10 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: 'Reviewed packing/frontier/n-172.md /reported_upper_bound/found_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-172.md /reported_upper_bound/found_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Evan Daniel as
+    construction finder, as the adopted result''s register entry and its stage 4 review
+    credit them; the label is the source''s.'
   contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-172.md
@@ -21233,10 +21228,10 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: 'Reviewed packing/frontier/n-204.md /reported_upper_bound/found_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-204.md /reported_upper_bound/found_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Evan Daniel as
+    construction finder, as the adopted result''s register entry and its stage 4 review
+    credit them; the label is the source''s.'
   contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-205.md
@@ -22061,10 +22056,10 @@ occurrences:
   evidence:
   - primary-byline
   - bibliography
-  note: 'Reviewed packing/frontier/n-232.md /reported_upper_bound/improved_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Francisco Couzo as construction improver,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-232.md /reported_upper_bound/improved_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Francisco Couzo
+    as construction improver, as the adopted result''s register entry and its stage
+    4 review credit them; the label is the source''s.'
   contributor_id: francisco-couzo
 - origin:
     path: packing/frontier/n-233.md
@@ -22890,10 +22885,10 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: 'Reviewed packing/frontier/n-260.md /reported_upper_bound/found_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-260.md /reported_upper_bound/found_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Evan Daniel as
+    construction finder, as the adopted result''s register entry and its stage 4 review
+    credit them; the label is the source''s.'
   contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-260.md
@@ -23838,10 +23833,10 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: 'Reviewed packing/frontier/n-293.md /reported_upper_bound/found_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-293.md /reported_upper_bound/found_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Evan Daniel as
+    construction finder, as the adopted result''s register entry and its stage 4 review
+    credit them; the label is the source''s.'
   contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-293.md
@@ -24062,10 +24057,10 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: 'Reviewed packing/frontier/n-299.md /reported_upper_bound/found_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Evan Daniel as construction finder,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-299.md /reported_upper_bound/found_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Evan Daniel as
+    construction finder, as the adopted result''s register entry and its stage 4 review
+    credit them; the label is the source''s.'
   contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-300.md
@@ -24492,10 +24487,10 @@ occurrences:
   evidence:
   - primary-byline
   - bibliography
-  note: 'Reviewed packing/frontier/n-307.md /reported_upper_bound/improved_by/0: the case''s credit
-      after the house adoption of 31 October 2026 names Francisco Couzo as construction improver,
-      as the adopted result''s register entry and its stage 4 review credit them; the label
-      is the source''s.'
+  note: 'Reviewed packing/frontier/n-307.md /reported_upper_bound/improved_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Francisco Couzo
+    as construction improver, as the adopted result''s register entry and its stage
+    4 review credit them; the label is the source''s.'
   contributor_id: francisco-couzo
 - origin:
     path: packing/frontier/n-308.md
@@ -30502,6 +30497,66 @@ occurrences:
     certificates of issue 846, as the source or its report names it; the original
     credit role is retained. Keep finder, improver and solver roles distinct.'
   contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 dilation 2026-11-03]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 dilation 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Hosono, Tokoharu, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 dilation 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Hosono, Tokoharu, Levy
+  start: 12
+  end: 18
+  label: Hosono
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 dilation 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Hosono, Tokoharu, Levy
+  start: 20
+  end: 28
+  label: Tokoharu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 dilation 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Hosono, Tokoharu, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
