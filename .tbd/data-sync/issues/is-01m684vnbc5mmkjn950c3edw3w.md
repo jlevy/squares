@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 120
+version: 121
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -49,7 +49,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-03T06:26:41.330Z
+updated_at: 2026-11-03T06:47:48.657Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -213,3 +213,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-03 05:53: renewal. Sweep intake48; no new issues since 04:50Z. #891 review A (engineering) no blockers, 4 should-fix held to batch with the stage-4 review. Running: stage-4 review (think-222u), L34 (think-4uun), L32 (s(145)).
 
 2026-11-03 ~06:10: stage-4 review of T-262 (Özden s(94)) accepted, no defect (F1 = AXIS_ROUNDING gap, think-4uun); review on #891 branch. Sent both #891 reviews to L33: record the stage-4 review, keep replay evidence pending think-4uun, fix engineering findings. Follow-up after L34 merges: re-run --control, enter evidence, adopt 1993/200 at n=94.
+
+2026-11-03 ~06:45: #892 (think-4uun axis enclosure) review A strong-max: sound, no blockers; mirror bit-for-bit vs instrumented crate at n37/39/94; 2 should-fix (audit_fine_net_receipt still uses 1e-9; docs overclaim the l-prime tie) sent to L34. Owner request (06:30): homepage News + Changelog sections, both always shown, each with own button; owner authorized full flow (beads, PR, review, merge, deploy); L35 building it.
