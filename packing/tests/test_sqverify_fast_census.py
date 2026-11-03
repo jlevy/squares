@@ -24,6 +24,7 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import math
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
@@ -682,6 +683,12 @@ def sweep(
     }
 
 
+#: A made-up enclosure for a made-up axis row whose certified bound is its lower end and
+#: whose mutant captures 99/100, standing in for the one `column_enclosure` recomputes from
+#: a candidate where the row's vertex is not on that candidate's grid.
+AROUND_99_100 = (0.99 - 1e-12, 0.99 + 1e-12)
+
+
 def test_a_sweep_holds_only_with_a_witnessed_refusal_at_every_direction_it_refuses() -> None:
     """The acceptance rule of FC-1's fix, on made-up sweeps, one clause at a time."""
     good = [refusal(1), refusal(2)]
@@ -736,6 +743,7 @@ def test_only_a_coverage_refusal_counts(
     raw = read_raw(cases()[RECOMPUTED].candidate)
     capture = Fraction(99, 100)
     monkeypatch.setattr(census, "mixed_exact", lambda *_: Fraction(1))
+    monkeypatch.setattr(census, "column_enclosure", lambda *_: AROUND_99_100)
     pose = [5.0, 5.0]
     full = {**row}
     if row["r"]:
@@ -806,6 +814,7 @@ def test_a_sweep_reads_the_binarys_rows_and_summary(
     raw = read_raw(cases()[RECOMPUTED].candidate)
     premises = entries()[RECOMPUTED]["premises"]
     monkeypatch.setattr(census, "mixed_exact", lambda *_: Fraction(1))
+    monkeypatch.setattr(census, "column_enclosure", lambda *_: AROUND_99_100)
     witness = {
         "exact_pose": [5.0, 5.0],
         "exact_below_threshold": True,
@@ -894,7 +903,8 @@ def test_a_sweep_reads_the_binarys_rows_and_summary(
     )
     assert not moved["premises_agree"]
     assert not census.sweep_held(moved)
-    # The axis capture far above the sweep's certified bound: they do not agree (CR-5).
+    # The axis capture far above the sweep's certified bound, which is not the lower end
+    # of the enclosure recomputed at its vertex: they do not agree (CR-5, F-1).
     loose = [{**rows[0], "min_certified_lower_bound": 0.9}, *rows[1:], summary]
     apart = census.scaled_sweep(
         stub(loose),
@@ -932,6 +942,131 @@ def test_a_refusal_record_on_the_real_evaluator() -> None:
     assert record["in_domain"] is True
     assert record["original_at_least_1"] is (exact >= 1)
     assert record["capture_below_1"] is (capture < 1)
+
+
+#: The retained fine-net certificate with a census row, a control receipt and its
+#: candidate, whose axis refusal held under the constant allowance this rule replaced.
+AXIS_RETAINED = "mixed_n37_L64975"
+#: The constant allowance above the axis sweep's certified bound that the rule used
+#: before F-1 of the 14 October review was fixed.
+OLD_AXIS_ALLOWANCE = Fraction(1, 10**9)
+#: The 14 October review's retained run of its sweep emulation at s(39)'s least axis
+#: vertex for the 99/100 mutant (T-176): the crate's bound, the enclosure the sweep held
+#: there and the exact capture. The control of 2 November found the same bound and capture.
+REVIEW_N39 = (
+    census.WEB
+    / "wand125-fine-net-n37-n39-n44-2026-10-13/review/outputs"
+    / "sweep_emulation-n39-scaled-99-100.json"
+)
+#: T-262's mixed_n94_L9965 (#890), whose whole-net control of 3 November failed closed at
+#: the axis alone: the crate's bound, the enclosure `column_enclosure` recomputed from the
+#: candidate at its least vertex (lower end the bound to the bit), and the 99/100 mutant's
+#: exact capture there, to 40 digits.
+N94_AXIS = (
+    0.9930860126842824,
+    (0.9930860126842824, 0.9930860149308234),
+    Fraction("0.9930860138075014719938610497981535618057"),
+)
+
+
+def axis_row(pose: list[str], bound: float) -> dict[str, Any]:
+    """The axis vertex sweep's row for a refused mutant."""
+    return {
+        "r": 0,
+        "method": "axis-vertex-sweep",
+        "verdict": census.AXIS_REFUSED,
+        "argmin": pose,
+        "min_certified_lower_bound": bound,
+    }
+
+
+def axis_item(name: str) -> dict[str, Any]:
+    """The axis refusal a v2 control receipt keeps for its 99/100 mutant."""
+    return next(item for item in sweeps()[name]["refused"] if item["r"] == 0)
+
+
+@pytest.mark.parametrize("case", ["n39", "n94"])
+def test_an_axis_refusal_is_judged_by_the_sweeps_enclosure_not_a_constant(
+    monkeypatch: pytest.MonkeyPatch, case: str
+) -> None:
+    """F-1 of the 14 October review: at s(39) (T-176) and s(94) (T-262) the 99/100
+    mutant's exact capture at the axis sweep's least vertex sits more than 1e-9 above the
+    sweep's certified bound, at the middle of the enclosure the sweep held there. The
+    refusal is sound and the capture is the one the sweep enclosed, so the axis refusal
+    counts; the constant allowance of 1e-9 failed both whole-net controls closed."""
+    if case == "n39":
+        review = json.loads(REVIEW_N39.read_text(encoding="utf-8"))
+        bound = review["crate_bound"]
+        low, high = review["enclosure_at_vertex"]
+        capture = Fraction(review["exact_capture_rational"])
+        assert review["lower_end_equals_crate_bound"] is True
+    else:
+        bound, (low, high), capture = N94_AXIS
+    assert capture - Fraction(bound) > OLD_AXIS_ALLOWANCE
+    raw = read_raw(cases()[RECOMPUTED].candidate)
+    monkeypatch.setattr(census, "mixed_exact", lambda *_: capture / census.CONTROL_SCALE)
+    monkeypatch.setattr(census, "column_enclosure", lambda *_: (low, high), raising=False)
+    row = axis_row(["5", "5"], bound)
+    record = census.refusal_record(raw, row, census.CONTROL_SCALE, format_m=True)
+    assert record["capture"] == str(capture)
+    assert record["captures_agree"] is True
+    assert census.refusal_held(record)
+
+
+def test_an_axis_capture_outside_the_sweeps_enclosure_does_not_count(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The rule is no looser than the sweep's arithmetic. On mixed_n37_L64975's candidate,
+    whose enclosure at the 99/100 mutant's least axis vertex is 1.4e-10 wide, a capture
+    5e-10 above the certified bound, which the constant 1e-9 admitted, lies outside the
+    enclosure and does not count; nor does one past either end, nor a bound that is not
+    the recomputed lower end, nor a vertex off the event grid. The receipt's own capture,
+    at the middle, counts, and the enclosure is closed."""
+    raw = read_raw(cases()[AXIS_RETAINED].candidate)
+    item = axis_item(AXIS_RETAINED)
+    bound = item["crate_lower_bound"]
+    row = axis_row(item["pose"], bound)
+
+    def judged(capture: Fraction, axis: dict[str, Any]) -> dict[str, Any]:
+        monkeypatch.setattr(census, "mixed_exact", lambda *_: capture / census.CONTROL_SCALE)
+        return census.refusal_record(raw, axis, census.CONTROL_SCALE, format_m=True)
+
+    held = judged(Fraction(item["capture"]), row)
+    assert held["captures_agree"] is True
+    assert census.refusal_held(held)
+    inside_old = Fraction(bound) + Fraction(5, 10**10)
+    assert inside_old - Fraction(bound) <= OLD_AXIS_ALLOWANCE
+    assert judged(inside_old, row)["captures_agree"] is False
+    low, high = held["sweep_enclosure"]
+    assert low == bound
+    assert Fraction(high) - Fraction(low) < Fraction(15, 10**11)
+    tiny = Fraction(1, 10**30)
+    assert judged(Fraction(high), row)["captures_agree"] is True
+    for capture in (inside_old, Fraction(high) + tiny, Fraction(bound) - tiny):
+        record = judged(capture, row)
+        assert record["captures_agree"] is False, float(capture)
+        assert not census.refusal_held(record), float(capture)
+    below = axis_row(item["pose"], math.nextafter(bound, -math.inf))
+    assert judged(Fraction(item["capture"]), below)["captures_agree"] is False
+    x, y = item["pose"]
+    off = axis_row([x, str(Fraction(y) + tiny)], bound)
+    record = judged(Fraction(item["capture"]), off)
+    assert record["sweep_enclosure"] is None
+    assert record["captures_agree"] is False
+
+
+def test_an_axis_refusal_is_judged_on_the_recomputed_enclosure() -> None:
+    """refusal_record unpatched at mixed_n37_L64975's 99/100 axis refusal: the enclosure
+    recomputed from the candidate has the crate's bound as its lower end and holds the
+    exact capture the receipt keeps, so the refusal counts, as `--control` judged it."""
+    raw = read_raw(cases()[AXIS_RETAINED].candidate)
+    item = axis_item(AXIS_RETAINED)
+    row = axis_row(item["pose"], item["crate_lower_bound"])
+    record = census.refusal_record(raw, row, census.CONTROL_SCALE, format_m=True)
+    assert record["capture"] == item["capture"]
+    assert record["sweep_enclosure"][0] == item["crate_lower_bound"]
+    assert record["captures_agree"] is True
+    assert census.refusal_held(record)
 
 
 def near_run(**overrides: Any) -> dict[str, Any]:
