@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 110
+version: 111
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -46,7 +46,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-03T00:54:09.230Z
+updated_at: 2026-11-03T01:53:48.571Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -196,3 +196,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-02 23:53: renewal. Sweep intake42 run; no new issues since 22:50Z. L32 running.
 
 2026-11-03 00:52: renewal. Sweep intake43 clean after the date rollover (0 stalled; held beads longest silent 1 day). No new issues since 23:50Z. L32 running.
+
+2026-11-03 01:52: renewal. New issue #890 (Özden, via AI agent account kenaznia-doga): s(94) >= 1993/200 by dilating Hosono T-091 measure on a finer 600-direction net; labelled intake; L33 runs the full intake (ack, packet, register entry, sqverify-fast replay of 600 directions + controls, stage-4 review if V3 needs it). L32 still on T-179 s(145) replay.
