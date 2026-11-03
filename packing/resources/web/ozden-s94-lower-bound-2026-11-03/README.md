@@ -88,13 +88,50 @@ None of it decides coverage.
 
 ## Complete Replay Here
 
-Pending: written when the census run ends.
+`devtools.sqverify_fast_census` ran this repository’s `sqverify-fast`, built from the
+reviewed crate source `d97758bb…` (binary `567a0fd5…`, rustc 1.98.0, release), on the
+retained certificate at all 600 directions of its declared net on 3 November 2026, at
+two threads under `nice -n 19` on a shared four-core host
+([census row and receipts](../../../benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/README.md)):
+VERIFIED, every direction verified, 296,805,699 nodes, least certified bound
+1.0000000000314393 at direction 277, whose least-bound leaf’s centre captures at least
+1 in exact rationals; 8,138.6 CPU-seconds (`wait4`) in 4,180 seconds of wall.
+
+`devtools.audit_dilated_measure compare`
+([receipts/replay-comparison.json](receipts/replay-comparison.json),
+`EVERY_DIRECTION_AGREES`) finds every field of every direction’s row, timings aside,
+equal to both of the author’s receipts, and their summaries equal in status, nodes,
+refused directions and premises. The capture took 1.03 and 1.02 times the CPU the two
+receipts record. It also reads the second checker’s output, without running it: 600
+directions VERIFIED, 166,440,592 nodes, least bound $4398046511113/2^{42}$ at direction
+587.
+
+The whole-net control (`--control`, about two minutes of wall at two threads) verified
+the original again at direction 277; refused every mass scaled by 99/100 at all 600
+directions, each a coverage refusal at a centre in the per-bin domain where the mutant’s
+exact capture, evaluated apart from the crate, is below 1; and refused the mutant scaled
+to one part in a million below 1 at the least-bound leaf’s centre, with an exact witness.
+The receipt is kept as it failed closed,
+`mixed_n94_L9965.control-failed-v2.json`, on one bookkeeping rule: at the axis the exact
+capture of the 99/100 mutant at the sweep’s least vertex, $0.99308601381$, sits
+$1.12 \times 10^{-9}$ above the vertex sweep’s certified bound, beyond the census’s
+constant tolerance of $10^{-9}$. The refusal there is sound, the bound lying below the
+capture as it must; the constant is F-1 of the
+[14 October review](../../../../docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md),
+which n = 39’s control meets too, and think-4uun owns its fix.
+
+The author ran the same checker, so this replay reproduces the author’s result with the
+producer’s code; it is not a second implementation. On a declared net the census route
+stands as evidence only beside a passing control receipt and once a review has read the
+certificate’s mathematics (the 6 October declared-net soundness review, item 7), so no
+evidence entry cites the row yet.
 
 ## What Is Not Established
 
 - **No review yet.** The stage 4 mathematical review of the certificate, by a separately
-  prompted lane at the strongest tier, is think-222u’s. Until it accepts the certificate,
-  n-094’s verified lower bound stays T-091’s $199/20$.
+  prompted lane at the strongest tier, is think-222u’s. Until it accepts the certificate
+  and a control receipt passes (think-4uun), n-094’s verified lower bound stays T-091’s
+  $199/20$.
 - **No second implementation here.** The replay is this repository’s `sqverify-fast`, the
   checker the author ran, so it reproduces the result with the producer’s code; the
   author’s second checker is retained and was not run.
@@ -150,6 +187,12 @@ python -m devtools.acquire_source ozden-s94-lower-bound-2026-11-03 --checkout CH
 python -m devtools.acquire_source ozden-s94-lower-bound-2026-11-03 --check
 python -m devtools.audit_dilated_measure audit ozden-s94-lower-bound-2026-11-03 --check
 python -m devtools.audit_dilated_measure compare ozden-s94-lower-bound-2026-11-03 --check
+python -m devtools.sqverify_fast_census --family mixed \
+  --binary sqverify_fast/target/release/sqverify-fast \
+  --out benchmarks/measure-verifier/census-mixed --threads 2 --only mixed_n94_L9965
+python -m devtools.sqverify_fast_census --family mixed --control \
+  --binary sqverify_fast/target/release/sqverify-fast \
+  --out benchmarks/measure-verifier/census-mixed --threads 2 --only mixed_n94_L9965
 ```
 
 <!-- This document follows common-doc-guidelines.md.

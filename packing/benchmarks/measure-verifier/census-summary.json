@@ -4731,6 +4731,28 @@
       "verdict": "VERIFIED"
     },
     {
+      "L": "1993/200",
+      "authors_replay_here": "none",
+      "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+      "candidate": "packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/certificate/n94_L9965.json.gz",
+      "candidate_sha256": "116c83425959a943196287a910ad799b2fe1bb9dec433085ea222bd62d5a16f8",
+      "certificate": "mixed_n94_L9965",
+      "cpu_seconds": 8138.6,
+      "direction_cpu_seconds": 8138.102803163,
+      "directions_verified": 600,
+      "first_complete_check_here": true,
+      "format": "M",
+      "least_certified_bound": 1.0000000000314393,
+      "least_leaf_exact_clears": true,
+      "n": 94,
+      "nodes": 296805699,
+      "packet": "ozden-s94-lower-bound-2026-11-03",
+      "receipts": "packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.jsonl.gz",
+      "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+      "threshold": "1",
+      "verdict": "VERIFIED"
+    },
+    {
       "L": "1959/200",
       "authors_replay_here": "none",
       "binary_sha256": "b7581bb2ba935dd576d7f8f4125b33f48ddf6014286dfe846c7ee3a44f29b6a8",

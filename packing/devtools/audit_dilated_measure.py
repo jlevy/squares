@@ -385,16 +385,24 @@ def second_checker(path: Path, directions: int) -> dict[str, Any]:
     ]
     indices = sorted(int(row["r"]) for row in rows)
     verdicts = sorted({str(row.get("verdict")) for row in rows})
+    # Its rows state each direction's least certified bound in fixed-point units of
+    # `scale` (2^42), as `min_bound_units`.
     bounds = [
-        row["min_certified_lower_bound"] for row in rows if "min_certified_lower_bound" in row
+        (Fraction(int(row["min_bound_units"]), int(row["scale"])), int(row["r"]))
+        for row in rows
+        if "min_bound_units" in row and "scale" in row
     ]
+    least = min(bounds) if bounds else None
     return {
         "replay": str(path.relative_to(PROJECT.parent)),
         "replay_sha256": sha256(path.read_bytes()),
         "rows": len(rows),
         "every_direction_once": indices == list(range(directions)),
         "verdicts": verdicts,
-        "least_bound": min(bounds, key=lambda value: Fraction(str(value))) if bounds else None,
+        "nodes": sum(int(row.get("nodes") or 0) for row in rows),
+        "least_bound": as_text(least[0]) if least else None,
+        "least_bound_approx": float(least[0]) if least else None,
+        "least_bound_direction": least[1] if least else None,
         "decides": "nothing here: the producer's output, read; the checker was not run",
     }
 

@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **224** programs: **52** external and **172** first-party; **150** decide claims and **74** check premises.
-- **678** of **859** evidence entries name the programs that verified them: 322 independently re-implemented, 289 reproduced with the producer’s code, 46 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **226** programs: **53** external and **173** first-party; **151** decide claims and **75** check premises.
+- **679** of **860** evidence entries name the programs that verified them: 322 independently re-implemented, 290 reproduced with the producer’s code, 46 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -79,6 +79,7 @@ second implementation agrees.
 | [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
+| [`V-ozden-integer-checker`](#v-ozden-integer-checker) | independent.py with intcheck_final.cpp | Doğa Özden's research lab (an OpenAI Codex agent) | external | decides | 1 | 1 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 104 | 94 |
@@ -143,6 +144,7 @@ second implementation agrees.
 | [`V-couzo-670-672-675-review-check`](#v-couzo-670-672-675-review-check) | review_0nse_check.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
 | [`V-mishapolk-719-review-check`](#v-mishapolk-719-review-check) | review_t229_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-evand-gradec-review-check`](#v-evand-gradec-review-check) | check_theorem_c.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-audit-dilated-measure`](#v-audit-dilated-measure) | devtools.audit_dilated_measure | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-evand-regularized-1020-review-controls`](#v-evand-regularized-1020-review-controls) | sharp_controls_t225.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-couzo-670-672-675-review-controls`](#v-couzo-670-672-675-review-controls) | sharp_controls_0nse.py | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-mishapolk-719-review-controls`](#v-mishapolk-719-review-controls) | sharp_controls_t229.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -1220,6 +1222,20 @@ Proves Sq17.square17_optimality, s(17) = L, in Lean 4.34.1 with Mathlib v4.34.1 
 | --- | --- | --- | --- | --- |
 | `E-n017-fitzharding-lean-source-build` | the source’s own run | reproduced with the producer’s code | full: the source's 4,951-module import closure of Sq17.square17_optimality | T-154 |
 | `E-n017-fitzharding-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-154 |
+
+### `V-ozden-integer-checker`
+
+**independent.py with intcheck_final.cpp, run by run.sh** · Doğa Özden's research lab (an OpenAI Codex agent) · external · decides · Python, C++ · interval-certified
+
+Decides a format M rectangle-measure certificate on its declared net: exact Fraction admission and D4 expansion (independent.py), then integer-only branch and bound over each direction's whole centre domain in fixed point of unit 2^-42 with directed rounding and exact rational directions (intcheck_final.cpp), every core capturing at least one.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/independent.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/independent.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/intcheck_final.cpp`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/intcheck_final.cpp), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/run.sh`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/run.sh), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/INTEGER-SOUNDNESS.md`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/INTEGER-SOUNDNESS.md)
+- Versions run: SHA-256 `5ca6546967d4…`, revision `9d76ad5549e9` (independent.py; intcheck_final.cpp is a90e8f06...24f4 at the same revision. The source reports its full run (second-checker/full.jsonl) on Apple arm64; not run here.)
+- Note: Written for the review of jlevy/squares#890's certificate by an OpenAI Codex agent in the author's lab, which the source says had sqverify-fast's SOUNDNESS.md prose but not its source. Retained and read; no evidence entry here rests on a run of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-890-n94-9965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-262 |
 
 ### `V-check-basic-bounds`
 
@@ -2452,6 +2468,18 @@ For Evan Daniel's grade-C configurations, decides exactly in Q[t]/f, with signs 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-gradec-local-minima-233-review-check` | replayed here | independently re-implemented after reading the producer’s code | full: the 233 configurations the release's grade-C archive certifies, each decided in full: the record's packing property, every kept row, the multipliers, null L0 and the flat family, the affine null vectors and the reduced Hessian | T-261 |
+
+### `V-audit-dilated-measure`
+
+**devtools.audit_dilated_measure** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes in exact rationals, from a packet's retained certificate and apart from the crate, the premises of a format M certificate that dilates a retained one onto a declared net: the file's shape, the masses and containment, the total n - 1/100000, lemma N0's (a) to (e), the dilation row by row against the base, and the regeneration of the certificate's JSON text from the base by the source's stated rule; then compares the census capture with the producer's sqverify-fast receipts direction by direction. It decides no coverage; sqverify-fast does.
+
+- Source: [`packing/devtools/audit_dilated_measure.py`](../../packing/devtools/audit_dilated_measure.py), [`packing/tests/test_audit_dilated_measure.py`](../../packing/tests/test_audit_dilated_measure.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after reading the certificate, the source's README and tools/rescale.py as data. Its receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in the ozden-s94-lower-bound-2026-11-03 packet.
+
+No evidence entry names it yet.
 
 ### `V-evand-regularized-1020-review-controls`
 

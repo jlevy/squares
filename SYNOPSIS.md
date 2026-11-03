@@ -364,6 +364,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-246](packing/frontier/RESULTS.md) | 29 | `V0` | `C0` | `S3` | `previously-published` | Evan Daniel reports that the side sigma of the best known packing of 29 unit squares, Thomas Schadt’s packing as David Ellsworth improved it, whose exact certificates are T-155 and T-195, is a root of an irreducible integer polynomial p of degree 7213, so that p is its minimal polynomial: sigma = 5.93383346267692918968946061635201913843383418107…, the root of p that the source’s Krawczyk enclosure isolates, and p has a leading coefficient of 325 digits and coefficients of up to 5,074 digits. |
 | [T-250](packing/frontier/RESULTS.md) | 33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321 | `V0` | `C0` | `S3` | `previously-published` | Hiroaki Hosono (wand125) reports a Lean 4 kernel proof of Evan Daniel’s finite premise Valid7, and with Daniel’s reduction a proof that s(k^2 - 3) = k for every integer k >= 6: a formalization of T-064, which this record holds at V3/C3 on two exact checkers of Valid7 and a build here of the reduction. |
 | [T-251](packing/frontier/RESULTS.md) | 60, 77, 96, 117, 140, 165, 192, 221, 252, 285, 320 | `V0` | `C0` | `S3` | `previously-published` | Hiroaki Hosono (wand125) reports a Lean 4 kernel proof of Evan Daniel’s finite premise ValidTilt9, and with Daniel’s reduction a proof that s(k^2 - 4) = k for every integer k >= 8: a formalization of T-081 at k >= 8, which this record holds as reported, on two reported runs of ValidTilt9 and a build here of the reduction. |
+| [T-262](packing/frontier/RESULTS.md) | 94 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of kenaznia-doga/s94-lower-bound, published on 3 November 2026 and reported in jlevy/squares#890, is reported to prove s(94) >= 1993/200 = 9.965. |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V3` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
 | [T-005](packing/frontier/RESULTS.md) | 13 | `V3` | `C3` | `S2` | `apparently-novel` | Bentz 2010, Lemma 10 is false as printed -- the middle replacement point (1, 1.74) is refuted by an exact escape certificate, and the published page image carries the same transposed text -- and true under the corrected reading (1.74, 1), with all three corrected replacement covers certified exactly. |
 | [T-011](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | Trump’s 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814 …, with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
@@ -464,7 +465,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 261 | 261 registered, 229 by others |
+| Frontier results | 262 | 262 registered, 230 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -1321,6 +1322,7 @@ case or experiment separately.
 | [T-233’s Fine-Net Censuses: Four #446 Certificates](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md) | source retention and archive policy | record | retained | — |
 | [The n31 Fine-Net Census: mixed_n31_L59775](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/README.md) | source retention and archive policy | record | retained | — |
 | [The n37 Fine-Net Census: mixed_n37_L64975](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md) | source retention and archive policy | record | retained | — |
+| [The n94 Dilation Census: mixed_n94_L9965](packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/README.md) | source retention and archive policy | record | retained | — |
 | [Census Summary](packing/benchmarks/measure-verifier/census-summary.md) | generated status view | generated | generated | — |
 | [Whole `rect_n32_L595`: c2 Against verify.cpp](packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md) | research synthesis | record | retained | — |
 | [H-005: One Error Budget per Edge](packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md) | research synthesis | record | retained | — |

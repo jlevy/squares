@@ -55011,7 +55011,7 @@ evidence:
     source_key: '[Özden s94 dilation 2026-11-03]'
     certificate: packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/certificate/n94_L9965.json.gz
     replay_status: not-attempted
-    verifiers: [V-sqverify-fast, V-ozden-integer-checker]
+    verifiers: [V-ozden-integer-checker]
     limitations: >-
       The author reports s(94) >= 1993/200 = 9.965 from Hiroaki Hosono's mixed_n94_L995
       measure (T-091) dilated by 1993/1990: 853 rectangle orbits, masses unchanged, total
@@ -55027,6 +55027,12 @@ evidence:
       (receipts/dilation-audit.json in the packet) recomputes from the retained bytes the
       premises, lemma N0 on the declared net, the dilation row by row against the T-091
       packet's retained mixed_n94_L995, and the certificate's JSON text regenerated from
-      it with the SHA-256 the issue states; none of it decides coverage. The complete
-      replay here is E-ozden-890-n94-9965-sqverify-fast-replay.
+      it with the SHA-256 the issue states; none of it decides coverage. The author's
+      sqverify-fast is this repository's V-sqverify-fast, named here in prose only, since
+      an entry that lists it is a replay here. That replay ran on 3 November 2026: the
+      census decided the retained certificate at all 600 directions, every direction's row
+      equal to both receipts apart from timings (receipts/replay-comparison.json), and its
+      whole-net control refused both mutants on coverage and failed closed only on the
+      census's axis tolerance (F-1 of the 14 October review, think-4uun). It enters as
+      evidence with the stage 4 review of the certificate (think-222u).
     source_reviewed: '2026-11-03'
