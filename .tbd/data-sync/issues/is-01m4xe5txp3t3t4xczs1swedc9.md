@@ -5,7 +5,7 @@ title: Judge the census control's axis refusal against the sweep's enclosure, no
 kind: task
 status: open
 priority: 2
-version: 4
+version: 5
 labels:
   - result-import
   - validation
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m4xpvk3p35kqfqcrszjw9zp6
 parent_id: is-01m4wsqt2sjrksybyz375sarb3
 created_at: 2026-10-14T14:48:32.438Z
-updated_at: 2026-10-14T17:21:05.541Z
+updated_at: 2026-11-03T03:17:17.258Z
 ---
 Finding F-1 of the 14 October review (docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md), major for the records lane and not a defect of any certificate.
 
@@ -36,3 +36,4 @@ Fix: one of the review's section 5 options 1 to 3, as a change to control logic 
 - Depends on: the owner's choice of option on jlevy/squares#543 (for T-142, which decides n = 39 as well); a reviewer for the control-logic change.
 - Done when: the axis refusal is judged against the sweep's enclosure, a reviewer has read the change, and the n = 39 (and T-142) whole-net control can end CONTROLS_REFUSED; n = 37 and n = 44 still count.
 - Machine note: 4 CPUs shared with gates; a run > 2 wall-h should be scheduled outside a validation gate. Seconds.
+2026-11-03 (bold-ritchie-l33, think-2agl): a fourth certificate waits on this rule. The whole-net control of #890's mixed_n94_L9965 (T-262, s(94) >= 1993/200, 600-direction declared net) refused the 99/100 mutant on coverage at all 600 directions, each in the per-bin domain with exact capture below 1, and the near-threshold mutant; it failed closed only at the axis, where the exact capture 0.99308601380750 sits 1.123e-9 above the sweep's certified bound 0.9930860126842824 (AXIS_ROUNDING 1e-9). Receipt kept as packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.control-failed-v2.json on branch claude/bold-ritchie-xo28us-l33. Once the rule is fixed and reviewed, rerun `sqverify_fast_census --family mixed --control --only mixed_n94_L9965` (about two minutes of wall at two threads).
