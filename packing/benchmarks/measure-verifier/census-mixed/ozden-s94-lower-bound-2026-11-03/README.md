@@ -22,9 +22,9 @@ The folder keeps:
   a coverage refusal at an in-domain pose whose capture, evaluated apart from the crate,
   is below 1; and the near-threshold mutant refused.
   It fails only on the axis rule: the 99/100 mutant’s exact capture at the vertex
-  sweep’s least vertex sits $1.12 \times
-  10^{-9}$ above the sweep’s certified bound, beyond the constant `AXIS_ROUNDING` of
-  $10^{-9}$ (F-1 of the 14 October review; think-4uun owns the fix).
+  sweep’s least vertex sits 1.12e-9 above the sweep’s certified bound, beyond the
+  constant `AXIS_ROUNDING` of 1e-9 (F-1 of the 14 October review; think-4uun owns the
+  fix).
 
 Both runs used `sqverify-fast` built from the reviewed crate source `d97758bb…` (binary
 `567a0fd5…`, rustc 1.98.0, release, x86_64-unknown-linux-gnu), under `nice -n 19` on a
