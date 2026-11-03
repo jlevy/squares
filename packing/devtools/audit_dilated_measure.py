@@ -19,12 +19,13 @@ It decides no coverage. `DILATIONS` names each certificate it reads, by its pack
     container, the masses totalling exactly the stated `total_mass`, `n - 1/100000`,
     below `n`;
   - lemma N0's (a) to (e) on the declared net (`sqverify_fast/SOUNDNESS.md`);
-  - the dilation: the base candidate's decompressed SHA-256 the one the source states,
-    `L = λ L₀` and `B = λ B₀`, the same row count, each rectangle `λ` times the base's
-    row by row, and each mass equal;
+  - the dilation: `L = λ L₀` and `B = λ B₀`, the same row count, each rectangle `λ`
+    times the base's row by row, and each mass equal;
   - the regeneration: the base rewritten as the source's `tools/rescale.py` says,
-    serialized as Python's `json.dump` writes it, has the JSON text's stated SHA-256,
-    which the retained file's decompressed text has too;
+    serialized as Python's `json.dump` writes it, is byte for byte the retained file's
+    decompressed text. The receipt records each text's SHA-256 beside the one the
+    source states, as data: Git holds the retained bytes (OR-16), and the stage 2
+    custody check compared them once;
   - what the dilation does not carry: `λ B₀ (1 + D₀) >= 1` on the base's net, the
     direction-0 centre domain's growth `ρ₀ (1 - 1/λ)` in the base's coordinates, and
     the route's ceiling `L₀ / B₀`.
@@ -284,6 +285,8 @@ def audit(packet: str) -> dict[str, Any]:
     file = file_checks(data, dilation)
     net = lemma_n0(data)
     scaled = dilation_checks(data, base)
+    # The digests are recorded beside the source's stated ones, for a reader and the
+    # test; Git holds the retained bytes (OR-16), so the gate is the byte comparison.
     digests = {
         "candidate": str(path.relative_to(PROJECT.parent)),
         "candidate_sha256": sha256(path.read_bytes()),
@@ -294,13 +297,11 @@ def audit(packet: str) -> dict[str, Any]:
         "base_text_sha256_stated": dilation.base_sha256,
         "regenerated_text_sha256": sha256(regenerated),
     }
+    scaled["regenerated_text_is_the_certificate"] = regenerated == text
     passes = (
         all(value is True for value in file.values() if isinstance(value, bool))
         and all(value is True for value in net.values() if isinstance(value, bool))
         and all(value is True for value in scaled.values() if isinstance(value, bool))
-        and digests["text_sha256"] == dilation.text_sha256
-        and digests["base_text_sha256"] == dilation.base_sha256
-        and digests["regenerated_text_sha256"] == dilation.text_sha256
     )
     return {
         "kind": "dilated-measure-audit/v1",

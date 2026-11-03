@@ -48,7 +48,11 @@ def test_the_audit_holds_every_premise_the_register_states() -> None:
     assert receipt["dilation"]["lambda"] == "1993/1990"
     assert receipt["dilation"]["axis_domain_growth_in_base_coordinates"] == "3/3986"
     assert receipt["dilation"]["route_ceiling"] == "99500/9977"
+    assert receipt["dilation"]["regenerated_text_is_the_certificate"] is True
     digests = receipt["digests"]
+    # The source's stated digests, which stage 2 checked once and the receipt records.
+    assert digests["text_sha256"] == digests["text_sha256_stated"]
+    assert digests["base_text_sha256"] == digests["base_text_sha256_stated"]
     assert digests["regenerated_text_sha256"] == DILATION.text_sha256
     assert digests["candidate_sha256"] == (
         "116c83425959a943196287a910ad799b2fe1bb9dec433085ea222bd62d5a16f8"
