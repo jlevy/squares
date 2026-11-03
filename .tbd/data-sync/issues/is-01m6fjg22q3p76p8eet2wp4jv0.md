@@ -5,7 +5,7 @@ title: "Stage 4 review: Özden's s(94) >= 1993/200 certificate (#890)"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-r222
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m6fj2mwfwwncghn4hv6qdhhg
 hold: null
 hold_until: null
 created_at: 2026-11-03T02:06:03.350Z
-updated_at: 2026-11-03T05:05:13.008Z
+updated_at: 2026-11-03T05:54:38.220Z
 started_at: 2026-11-03T05:05:13.008Z
 ---
 Stage 4 mathematical review of #890's certificate (Doğa Özden, s(94) >= 1993/200), by a separately prompted tbd-strong-max lane at maximum reasoning in its own worktree, as packing/campaign/result-import.md "Who reviews, and when" asks. It is what moves n-094's verified lower lane (frontier README: a complete replay here and a review of its mathematics; the 6 October declared-net soundness review's records-lane item 7: "A review under docs/project/reviews/ read this certificate and accepted it"; check_results verified_lane_review_problems).
@@ -44,3 +44,10 @@ Stage 4 mathematical review of #890's certificate (Doğa Özden, s(94) >= 1993/2
 - Output: docs/project/reviews/review-2026-11-03-ozden-s94-dilation.md (or the day it lands), written to be shared with the author: summary first, findings graded blocking/major/minor/note with file and line, questions; no T-NNN not yet on main (T-262 is provisional until the PR merges); reviewer line names system family, tier and reasoning setting, not a model id. Confirm or change the draft significance S3.
 - Code: kept in the packet's review/ directory with a README (what each program does, what it read, how to run it, what it printed); each deciding program registered in packing/frontier/verifiers.yaml with its independence record; an evidence entry with coverage for each thing a run decides or samples.
 - After it returns (records lane): map the review in docs/project/document-map.yaml; enter E-ozden-890-n94-9965-sqverify-fast-replay (printed by `sqverify_fast_census --family mixed --evidence --only mixed_n94_L9965 --audit-record <review> --date 2026-11-03`), the external_review on E-ozden-890-n94-9965-report, the review under T-262's reviews; check_results then derives V3/C3; move n-094's verified lower lane to 1993/200 (adoption), T-091 then superseded at n = 94; follow up on #890.
+
+2026-11-03 (bold-ritchie-r222, the stage 4 reviewer): done; verdict accepted, no defect of the certificate.
+
+- Review: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md, mapped (document-map row; SYNOPSIS.md's generated map regenerated with it). Programs and receipts: packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/. Commits on claude/bold-ritchie-xo28us-l33: 5ad487b72 (findings, pushed before GRADE.md was read), 985d4bee1 (comparison with GRADE.md), e9417a952 (wording).
+- F1 (gap, records lane): the control receipt fails closed only on the census tool's AXIS_ROUNDING = 1e-9 (r = 0 gap 1.123e-9; the original's own sweep shows 1.134e-9), so declared-net checklist item 6 is not met; all 600 refusals hold exactly here. The verified lane should wait for think-4uun.
+- F2 to F6 notes: SOUNDNESS.md N2's "whole configuration" fold must be per square; the n = 31 receipt d529.jsonl is for an unretained input (masses x 10000003/10000000); "full centre domain" means the quadrant; rescale.py's growth formula assumes the same net; checklist item 8's words must read "reproduced with the producer's code" for this row.
+- Significance S3 confirmed. Not done here (records lane): verifiers.yaml registration of dm_premises.py and dm_axis.py (deciders) and the sampling programs, evidence entries, external_review / reviews entries. The README in the review directory states each program's independence record.
