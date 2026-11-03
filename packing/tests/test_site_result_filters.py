@@ -363,20 +363,34 @@ def test_the_added_filter_shows_what_reached_the_site(
     on is named there too and shows no row, rather than every row (A5)."""
     name = "results.html"
     reference = overview_sections.added_reference(overview)
-    cutoff = overview_sections.age_cutoff(reference, 1)
     last_day = _arrived_since(overview, 1)
     assert 0 < len(last_day) < len(overview.results)
-    arrived = [result for result in overview.results if result.id.lower() in last_day]
-    # The filter reads arrival: some row of the last day shows a date before it, and, in
-    # the narrowest Added-within window that has one, some row was registered before the
-    # window, waiting for its pull request to merge. A day whose arrivals were all
-    # registered within it has none (T-247 arrived so on 26 October 2026), so the window
-    # is searched rather than fixed at one day.
-    assert any(overview_sections.first_day(result.dated[1]) < cutoff for result in arrived)
+    # The filter reads arrival: in the narrowest Added-within window that has one, some
+    # row shows a date before the window, and some row was registered before it, waiting
+    # for its pull request to merge. A day whose arrivals were all published or
+    # registered within it has neither (T-247 arrived so on 26 October 2026; T-262,
+    # published and registered the day it arrived, alone on 3 November), and a week can
+    # hold no row that waited, so each window is searched back to the first arrival
+    # rather than fixed at one day or at the Recent Results week; the input takes any age.
+    span = (reference - min(overview_sections.landed_day(r) for r in overview.results)).days
+    shown_earlier = next(
+        (
+            days
+            for days in range(1, span + 1)
+            if any(
+                overview_sections.first_day(result.dated[1])
+                < overview_sections.age_cutoff(reference, days)
+                for result in overview.results
+                if result.id.lower() in _arrived_since(overview, days)
+            )
+        ),
+        None,
+    )
+    assert shown_earlier is not None
     waited = next(
         (
             days
-            for days in range(1, overview_sections.ADDED_DAYS + 1)
+            for days in range(1, span + 1)
             if any(
                 overview_sections.registered_day(result).isoformat()
                 < overview_sections.age_cutoff(reference, days)
