@@ -12,10 +12,17 @@ each source's dated beyond-horizon rows, by the day `main` first held them
 (`frontier/landings.yaml`, which `devtools.stamp_landed` writes from the merge; #736's
 review A, findings A2 and A3). Every check reads the rendered page against those records,
 never against a list kept beside them.
+
+Since 3 November 2026 the home page carries the log's newest days again, as a Changelog
+section of its own under News, drawn by the same code (`changelog_preview`): the owner
+asked for "a new section which the last few days of entries of the changelog and a
+button to the whole changelog", and for the home page to show it "consistently". The
+last tests here hold that section to the log.
 """
 
 from __future__ import annotations
 
+import copy
 import re
 from collections import Counter
 from datetime import date, timedelta
@@ -86,11 +93,36 @@ RECENT_BYTES = 200_000
 #: that day's stories was 59,874. Two more S3 stories of that size reach the limit; the
 #: remedy is a shorter card, not a higher number.
 NEWS_BOX_BYTES = 64_000
+#: One day of the home page's Changelog section: its date, its own address, whether it
+#: starts open, the rest. The address is not the Changelog page's `changelog-date-<day>`,
+#: which the News box above it gives the first card of each of its days.
+HOME_DAY = re.compile(
+    r'<details data-day="(\d{4}-\d{2}-\d{2})" id="home-changelog-\1"( open)?>(.*?)</details>',
+    re.DOTALL,
+)
+#: The most bytes the home page's Changelog section may weigh: the 40,000 argued for
+#: a section of the home page when it carried Recently Added (see `RECENT_BYTES`), to
+#: stop it becoming a second results table. It measured 12,073 bytes on 3 November 2026
+#: over 37 lines, and the heaviest three days the record holds weigh 31,352 before the
+#: line cap (`overview_sections.HOME_CHANGELOG_LINES`) trims them.
+HOME_CHANGELOG_BYTES = 40_000
 
 
 @pytest.fixture(scope="module")
 def home() -> str:
     return site_renders.html(render_changelog.CHANGELOG_PAGE)
+
+
+@pytest.fixture(scope="module")
+def front() -> str:
+    """The home page itself, which `home` (the log's page since 26 October 2026) is not."""
+    return site_renders.html("index.html")
+
+
+def _front_section(front: str, identifier: str, following: str) -> str:
+    """A section of the home page, from its heading to the next one's."""
+    begin = front.index(f'<h2 id="{identifier}"')
+    return front[begin : front.index(f'<h2 id="{following}"', begin)]
 
 
 @pytest.fixture(scope="module")
@@ -392,3 +424,115 @@ def test_the_home_page_additions_stay_brief(section: str) -> None:
     )
     assert weight < RECENT_BYTES
     assert box < NEWS_BOX_BYTES
+
+
+def test_the_home_changelog_stays_brief(front: str) -> None:
+    weight = len(_front_section(front, "changelog", "recent-results").encode("utf-8"))
+    print(f"home changelog: {weight:,} / {HOME_CHANGELOG_BYTES:,}")
+    assert weight < HOME_CHANGELOG_BYTES
+
+
+def test_the_home_page_shows_the_logs_newest_days_as_the_changelog_draws_them(
+    front: str, days: dict[str, tuple[bool, str]]
+) -> None:
+    """The home page's Changelog is the head of the log: its newest days, as many as
+    `changelog_window` keeps, the newest open, each day's lines the Changelog page's own
+    for that day. Only the addresses differ, since the News box above it holds the
+    Changelog's day and story anchors on the same page."""
+    section = _front_section(front, "changelog", "recent-results")
+    shown = {day: (bool(opened), body) for day, opened, body in HOME_DAY.findall(section)}
+    logged = [(date.fromisoformat(day), body.count("<li")) for day, (_, body) in days.items()]
+    window = overview_sections.changelog_window(logged)
+    assert window
+    assert window == [day for day, _ in logged[: len(window)]], "the newest days, in order"
+    assert len(window) <= overview_sections.HOME_CHANGELOG_DAYS
+    assert list(shown) == [day.isoformat() for day in window]
+    assert [opened for opened, _ in shown.values()] == [
+        index < RECENT_OPEN for index in range(len(window))
+    ]
+    for day, (_, body) in shown.items():
+        assert body == re.sub(r'<li id="changelog-entry-[^"]+">', "<li>", days[day][1]), day
+    shown_lines = sum(lines for day, lines in logged if day in window)
+    assert shown_lines <= overview_sections.HOME_CHANGELOG_LINES or len(window) == 1
+    assert section.count("<li") == shown_lines
+
+
+def test_news_and_the_changelog_each_close_on_their_own_button(front: str) -> None:
+    """The owner, 3 November 2026: "each with its own section and button to go to the
+    dedicated page". News keeps All News, which carries a changed significance choice to
+    the archive (`data-news-carry`); the Changelog closes on Changelog."""
+    action = re.compile(r'<a class="site-action" href="([^"]+)"([^>]*)>([^<]+)<')
+    news = _front_section(front, "news", "changelog")
+    log = _front_section(front, "changelog", "recent-results")
+    assert '<h2 id="changelog" class="site-title">Changelog</h2>' in log
+    assert action.findall(news.rsplit('<p class="site-action-row', 1)[1]) == [
+        ("news.html", " data-news-carry", "All News")
+    ]
+    assert action.findall(log.rsplit('<p class="site-action-row', 1)[1]) == [
+        (render_changelog.CHANGELOG_PAGE, "", "Changelog")
+    ]
+    assert len(action.findall(news)) == len(action.findall(log)) == 1
+
+
+def test_every_address_on_the_home_page_names_one_element(front: str) -> None:
+    """With News and the Changelog on one page, an address stays one element's: the
+    section's day blocks are `home-changelog-<day>`, its lines carry no anchor, and the
+    News box keeps the Changelog's day anchors on its cards as it did."""
+    ids = Counter(re.findall(r'\sid="([^"]+)"', front))
+    assert [identifier for identifier, count in ids.items() if count > 1] == []
+    assert ids["changelog"] == ids["news"] == 1
+    log = _front_section(front, "changelog", "recent-results")
+    news = _front_section(front, "news", "changelog")
+    assert re.findall(r'\sid="([^"]+)"', log) == [
+        "changelog",
+        *(f"{overview_sections.HOME_CHANGELOG_DAY}{day}" for day, *_ in HOME_DAY.findall(log)),
+    ]
+    assert 'id="changelog-date-' in news
+    assert 'id="changelog-date-' not in log
+
+
+def test_the_window_is_the_newest_days_that_hold_entries_however_old() -> None:
+    """The section is never empty after a quiet stretch: its window is the newest days
+    that hold anything, never a span of the calendar (the owner's "consistently shows
+    both", 3 November 2026). The newest day is shown whole however long it is; an older
+    one joins only while the lines stay within `HOME_CHANGELOG_LINES`."""
+    cap = overview_sections.HOME_CHANGELOG_LINES
+    assert overview_sections.HOME_CHANGELOG_DAYS == 3
+    quiet = [(date(2025, 1, 2), 4), (date(2024, 6, 1), 2), (date(2023, 3, 3), 1)]
+    assert overview_sections.changelog_window([*quiet, (date(2022, 1, 1), 1)]) == [
+        day for day, _ in quiet
+    ]
+    heavy = [(date(2026, 10, 14), cap + 40), (date(2026, 10, 13), 1)]
+    assert overview_sections.changelog_window(heavy) == [date(2026, 10, 14)]
+    split = [(date(2026, 10, 3), cap - 10), (date(2026, 10, 2), 10), (date(2026, 10, 1), 1)]
+    assert overview_sections.changelog_window(split) == [date(2026, 10, 3), date(2026, 10, 2)]
+    assert overview_sections.changelog_window([]) == []
+
+
+def test_the_home_changelog_is_never_empty_when_its_newest_entry_is_long_past(
+    overview: overview_data.Overview, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """With nothing reaching `main` for two years before the build's newest arrival, the
+    section still shows the newest days that hold entries, where a span of the calendar
+    ending on that arrival would hold none of them; and with no entry at all it says so
+    rather than vanish."""
+    document = copy.deepcopy(render_changelog.load())
+    kept = render_changelog.ordered_entries(document)[:4]
+    reference = arrival_reference(overview)
+    old = [reference - timedelta(days=730 + 40 * index) for index in range(len(kept))]
+    for entry, day in zip(kept, old, strict=True):
+        entry["date"] = day.isoformat()
+    document["entries"] = kept
+    monkeypatch.setattr(overview_sections, "recent_days", lambda *_, **__: [])
+    rendered = overview_sections.changelog_preview(overview, document)
+    shown = [day for day, _, _ in HOME_DAY.findall(rendered)]
+    assert shown == [day.isoformat() for day in old[: overview_sections.HOME_CHANGELOG_DAYS]]
+    assert all(
+        date.fromisoformat(day) < reference - timedelta(days=overview_sections.ADDED_DAYS)
+        for day in shown
+    )
+    assert rendered.count(" open>") == RECENT_OPEN
+    empty = {**document, "entries": []}
+    assert overview_sections.changelog_preview(overview, empty) == (
+        overview_sections.CHANGELOG_NONE
+    )

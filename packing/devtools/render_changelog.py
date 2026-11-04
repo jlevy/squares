@@ -1432,7 +1432,11 @@ def _changelog_link(label: str, target: str) -> str:
 
 
 def changelog_entry_line(
-    document: Mapping[str, Any], entry: Mapping[str, Any], *, in_news: bool
+    document: Mapping[str, Any],
+    entry: Mapping[str, Any],
+    *,
+    in_news: bool,
+    anchored: bool = True,
 ) -> str:
     """One site or project change in its day's block on the Changelog page: its title,
     then on the quieter line its score and every GitHub thread behind it.
@@ -1442,6 +1446,9 @@ def changelog_entry_line(
     only reader surface, so it carries the supporting records as well
     (`entry_targets`). The line holds the entry's anchor, which keeps the retired
     article and day bookmarks that `archived_news_targets` forwards here resolving.
+    The home page's Changelog section asks for the line without it (`anchored=False`):
+    that page's News box holds the same anchor on the story's card, and an address
+    names one element.
 
     The Changelog is "concise, mostly complete, linked to github issues and PRs clearly",
     and a story belongs to News rather than to both surfaces (the owner, 26 October 2026).
@@ -1462,10 +1469,8 @@ def changelog_entry_line(
         )
         parts.append(editions)
     score = entry_significance(entry)["score"]
-    return (
-        f'<li id="{html.escape(anchor, quote=True)}">{head}'
-        f"<small>S{score} · {' · '.join(parts)}</small></li>"
-    )
+    identity = f' id="{html.escape(anchor, quote=True)}"' if anchored else ""
+    return f"<li{identity}>{head}<small>S{score} · {' · '.join(parts)}</small></li>"
 
 
 def _news_forward_anchors(targets: dict[str, str]) -> str:

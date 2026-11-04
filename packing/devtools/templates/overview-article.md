@@ -28,7 +28,13 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 {{NEWS_PREVIEW}}
 
-<p class="site-action-row site-more"><a class="site-action" href="news.html" data-news-carry>All News{{ARROW_RIGHT}}</a><a class="site-action" href="changelog.html">Changelog{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="news.html" data-news-carry>All News{{ARROW_RIGHT}}</a></p>
+
+<h2 id="changelog" class="site-title">Changelog</h2>
+
+{{CHANGELOG_PREVIEW}}
+
+<p class="site-action-row site-more"><a class="site-action" href="changelog.html">Changelog{{ARROW_RIGHT}}</a></p>
 
 <h2 id="recent-results" class="site-title">Results</h2>
 

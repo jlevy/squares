@@ -893,6 +893,7 @@ failure. Browser tests exercise these sequences on generated pages.
 | Result article and row entry | `result_overview.py`, `render_overview.iter_result_fragments`, `overview_sections.py`, `row-popover.js`, `site-result.css` | `test_result_overview.py`, `test_site_result_popover.py`, `test_site_case_records.py`, `tests/node/overview_rows/` |
 | Contributor article and directory | `render_contributors.py`, `site-contributor.css` | `test_render_contributors.py`, `test_site_contributor_popovers.py` |
 | Canonical News articles, homepage selection and direct profile links | `render_changelog.py`, `news_highlights.py`, `site_topics.py`, `site.css` | `test_changelog.py`, `test_news_highlights.py`, `test_site_homepage.py` |
+| The Changelog’s log and the homepage’s Changelog section | `overview_sections.changelog_rollup`, `overview_sections.changelog_preview`, `render_changelog.changelog_entry_line`, `results.css` | `test_home_recent.py`, `test_site_homepage.py`, `test_overview.py` |
 | Inert fetch, cache, scoped IDs, replacement and focus | `article-loader.js`, `popover.js` and the article controllers | `test_site_contributor_popovers.py`, `test_site_case_records.py` |
 | Identity and reviewed credit spans | `sqpack.contributors`, `sqpack.contributor_occurrences`, `contributor_credit.py` | `test_contributors.py`, `test_contributor_occurrences.py`, schema gate |
 | Routes, metadata, build inputs and sparse evidence | `site_urls.py`, `site_documents.py`, `preview_site.py`, `pages_scope.py`, `run_negative_controls.py` | `test_site_urls.py`, `test_site_documents.py`, `test_pages_scope.py`, `test_snapshot_copy_roster.py` |
@@ -1106,10 +1107,16 @@ contributor articles use their component sheets and the same text tokens.
   the project’s name, **The Squares Project** (the owner, 2026-10-23); its opening H1
   remains **The Square Packing Problem**. Two readable introductory paragraphs define
   the problem and explain upper and lower bounds.
-  The sections continue with Visual Atlas, News, Results, Profiles, Report a Result,
-  Learn, Visuals, About the Squares Project, and More Resources.
+  The sections continue with Visual Atlas, News, Changelog, Results, Profiles, Report a
+  Result, Learn, Visuals, About the Squares Project, and More Resources.
+  News and Changelog are two sections, each with its own heading and its own button: the
+  newest News articles closing on **All News**, then the Changelog’s newest days closing
+  on **Changelog** (the owner, 3 November 2026: “two sections, one the first few most
+  recent news items and then the button to all news, and then a new section which the
+  last few days of entries of the changelog and a button to the whole changelog”). Both
+  always render; neither reads the calendar (The Changelog’s log, below).
   The day log the home page carried as Recently Added moved to the Changelog on 26
-  October 2026, and the News action row offers it beside All News.
+  October 2026, with a Changelog button beside All News, until the section came back.
   Learning cards preview the Papers and Tutorials catalogues.
   Visuals previews the poster and inline video, with actions to Posters, Videos and
   Workbench. About the Squares Project links directly to `about.html` without repeating
@@ -1248,7 +1255,9 @@ contributor articles use their component sheets and the same text tokens.
   The chip renderer preserves each consumer’s filter attribute.
   Full result records retain the result’s real kind, status, claim and credit.
   The homepage’s News box shows the three newest News articles at the levels it opens
-  on, ordered by the announcement’s frozen date and stable ID, followed by **All News**.
+  on, ordered by the announcement’s frozen date and stable ID, followed by **All News**
+  alone; the Changelog section under it has its own button.
+  However old the newest articles are, the box shows them: it reads no date but theirs.
   It opens on S5 alone where News holds at least three S5 articles, and otherwise on S4
   and S5, decided at render time from the archive and from no date
   (`news_highlights.default_levels`; the owner, 22 October 2026: “preselected to S5 when
@@ -3049,12 +3058,32 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   ceiling re-argued from measurement for a page whose job is the complete log: the home
   page’s 40,000 was argued to stop a section of that page becoming a second results
   table, and the log measured 147,729 bytes over 35 day blocks and 2,332 line items the
-  day it moved.
+  day it moved. The home page’s **Changelog** section, under News, is the head of this
+  log, drawn by the same code (`overview_sections.changelog_preview`): the same day
+  blocks and lines, the newest open, then the **Changelog** button (the owner, 3
+  November 2026). Its window is the newest three days that hold anything, however long
+  ago (`HOME_CHANGELOG_DAYS`, `changelog_window`), never a span of the calendar, so a
+  quiet week cannot empty it: that day the newest three were 31, 26 and 25 October, and
+  the last three days of the calendar held none.
+  The newest day is shown whole; an older one joins only while the section stays within
+  60 lines (`HOME_CHANGELOG_LINES`); of the record’s 34 three-day stretches, that cap
+  trims only the three that hold the 46-line 14 October.
+  Three days show the log’s pace, one open and two closed under it, without the section
+  becoming the log; the section measured 37 lines and 12,073 bytes, against the home
+  page’s 40,000 for a section.
+  Its addresses are its own: a day block is `home-changelog-<day>` and a change’s line
+  carries no anchor, since the News box above holds the Changelog’s
+  `changelog-date-<day>` and entry anchors on the same page.
+  A change’s title wraps like prose; only a result’s id holds together on its line
+  (`results.css`). `tests/test_home_recent.py` holds the section to the log, its window,
+  its buttons and the page’s addresses; `tests/test_site_homepage.py` reads it in
+  Chromium at 390 and 1280 pixels, in both schemes, with scripts and without, and holds
+  its layout to be the same either way.
 
-- **Recent results.** The homepage’s **Recent Major Results** section sits below News.
-  It contains up to twelve current results of significance S4 or higher from the last
-  180 days, newest first, excluding superseded results (`think-5c8r`). The preview has
-  no count/scope sentence or introductory text explaining the links.
+- **Recent results.** The homepage’s **Recent Major Results** section sits below the
+  Changelog. It contains up to twelve current results of significance S4 or higher from
+  the last 180 days, newest first, excluding superseded results (`think-5c8r`). The
+  preview has no count/scope sentence or introductory text explaining the links.
   The table shares the full Results page’s columns, sorting, result popovers and mobile
   row cards. Filtering and older results remain on `results.html`, whose defaults are
   unchanged. A result’s ordinary link opens its canonical article without scripts.

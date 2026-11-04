@@ -93,6 +93,23 @@ def test_on_the_record_the_box_opens_on_s5_while_news_holds_enough_of_them(
     assert all(entry["significance"]["score"] in (4, 5) for entry in shown)
 
 
+def test_the_box_always_shows_its_newest_few_however_long_ago_they_were() -> None:
+    """The owner, 3 November 2026: the home page "consistently shows both", the last few
+    News items and the Changelog's last few days under them. News reads no date but its
+    articles' own, as the Changelog section's window does, so a quiet year leaves the
+    box full: the newest `LIMIT` at its opening levels, two years old or not."""
+    limit = news_highlights.LIMIT
+    stale = [_entry(f"stale-{index}", f"2024-0{index + 1}-15", 4) for index in range(limit + 2)]
+    document = {"entries": stale}
+    assert news_highlights.default_levels(document) == render_changelog.NEWS_LEVELS
+    assert [entry["id"] for entry in news_highlights.highlights(document)] == [
+        f"stale-{index}" for index in reversed(range(2, limit + 2))
+    ]
+    source = inspect.getsource(news_highlights)
+    assert "today" not in source
+    assert "datetime" not in source
+
+
 def test_the_box_carries_the_newest_of_each_level_in_frozen_date_and_id_order() -> None:
     """Any choice of levels finds its newest `LIMIT` among the carried articles: the
     newest `LIMIT` at each level, in News order, ties on a day broken by id."""
