@@ -5,14 +5,14 @@ title: "census --control: the axis tolerance is a constant (AXIS_ROUNDING 1e-9);
 kind: task
 status: open
 priority: 2
-version: 5
+version: 6
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T13:43:00.366Z
-updated_at: 2026-11-04T05:12:15.399Z
+updated_at: 2026-11-04T09:01:35.294Z
 ---
 The census control's axis check (`packing/devtools/sqverify_fast_census.py`, `AXIS_ROUNDING = 1/10^9` and the axis branch of `refusal_record`) requires the 99/100 mutant's exact capture at the vertex sweep's least vertex to lie within a constant 1e-9 of the sweep's certified lower bound. The gap is half the sweep's enclosure width, which varies by certificate, so a sound refusal can fail closed.
 
@@ -30,3 +30,7 @@ blocked_on: none
 2026-11-02 bold-ritchie-l32 (intake lane L32, think-567s; PR #889): a second receipt now waits on this fix. T-176's mixed_n39_L66625 whole-net control (receipt kind v2) failed closed on the axis allowance alone: the 99/100 mutant refused at all 2,073 directions, 2,072 refusals passing every predicate, and at r = 0 the exact capture 0.99207... < 1 (in the domain) sits 1.26e-9 above the sweep's certified bound 0.9920712485323058, beyond AXIS_ROUNDING 1e-9 (the 14 October review's F-1 measurement). Kept as packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.control-failed-v2.json; when the fixed control re-judges or reruns it and ends CONTROLS_REFUSED, write mixed_n39_L66625.control.json beside it. Its capture (VERIFIED, 881,271,470 nodes, equal to the source's log at every direction) is spent and need not rerun. Done-when should now name n26 (T-233), n39 (T-176) and n28 (T-142, not yet captured).
 2026-11-03 (bold-ritchie-l34): duplicate of think-4uun for the code fix (same defect, F-1 of the 14 October review, same file and fix). The fix is PR #892 (draft, awaiting review): the axis refusal is judged against the sweep's own enclosure, recomputed and tied to the crate's bound to the bit, not AXIS_ROUNDING. n39 (T-176) reran there and ended CONTROLS_REFUSED. What this bead adds beyond think-4uun is its done-when's reruns: n26 (T-233, re-judge or rerun mixed_n26_L5555 and write mixed_n26_L5555.control.json) and n28 (T-142, think-i85v). Not closed here.
 2026-11-04 (bold-ritchie-l34, review A of #892): n26's kept receipt would now pass. Under the enclosure rule the axis refusal of packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control-failed-v2.json holds: the walk reproduces the crate's bound 0.9909807799642721 to the bit, and the exact capture, 3.28e-9 above it, lies in the enclosure [0.9909807799642721, 0.9909807865315093] (width 6.57e-9; the upper end equals a build of d97758bb instrumented to report it). Its 2,072 oblique refusals already held, so `captures_agree` at r = 0 was the only failing clause. #892 holds this in CI (test_each_retained_axis_refusal_is_the_crates_enclosure[mixed_n26_L5555.control-failed-v2.json]); the fine-net auditor (V-audit-fine-net-receipt) accepts it re-judged too. After #892 merges, T-233's lane can rerun or re-judge it and write mixed_n26_L5555.control.json.
+
+2026-11-04 bold-ritchie-l32 (PR #889, b3caa7d61): the n39 (T-176) part of the done-when is met on the branch. Its control, rerun under #892's rule on 3 November, ends CONTROLS_REFUSED and is retained as mixed_n39_L66625.control.json beside the failed v2 receipt, and T-176 is V3/C3 there. Two parts stay open under this bead: n26 (T-233, write mixed_n26_L5555.control.json; that is T-233's lane, not L32's) and n28 (T-142, think-i85v). Not closed.
+
+2026-11-04 coordinator: when the n26 lane writes its passing control, also refresh packing/benchmarks/.../wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md lines 26-36, which still say the axis fix is to come (noted by the #892 confirming review).
