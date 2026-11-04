@@ -106,7 +106,9 @@ def _slugs(text: str) -> set[str]:
     for heading in re.findall(r"^#{1,6}\s+(.+)$", text, re.MULTILINE):
         plain = re.sub(r"<[^>]+>", "", heading)
         plain = re.sub(r"\[([^]]+)\]\([^)]+\)", r"\1", plain)
-        base = re.sub(r"[^a-z0-9 _-]", "", plain.lower()).strip().replace(" ", "-")
+        # GitHub keeps letters outside ASCII (`doğa-özdens-…`), as kpress's slugger does;
+        # `\w` is Unicode here, and is `[a-z0-9_]` on ASCII text (review F1 of #897).
+        base = re.sub(r"[^\w -]", "", plain.lower()).strip().replace(" ", "-")
         suffix = counts[base]
         counts[base] += 1
         slugs.add(base if suffix == 0 else f"{base}-{suffix}")
