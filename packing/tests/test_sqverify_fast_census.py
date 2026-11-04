@@ -959,9 +959,10 @@ REVIEW_N39 = (
     / "sweep_emulation-n39-scaled-99-100.json"
 )
 #: T-262's mixed_n94_L9965 (#890), whose whole-net control of 3 November failed closed at
-#: the axis alone: the crate's bound, the enclosure `column_enclosure` recomputed from the
-#: candidate at its least vertex (lower end the bound to the bit), and the 99/100 mutant's
-#: exact capture there, to 40 digits.
+#: the axis alone: the crate's bound, the enclosure the crate held at its least vertex (the
+#: lower end its reported bound, the upper end from a build instrumented to report it,
+#: review A of #892), which `column_enclosure` reproduces from the candidate, and the 99/100
+#: mutant's exact capture there, to 40 digits.
 N94_AXIS = (
     0.9930860126842824,
     (0.9930860126842824, 0.9930860149308234),
@@ -1005,7 +1006,7 @@ def test_an_axis_refusal_is_judged_by_the_sweeps_enclosure_not_a_constant(
     assert capture - Fraction(bound) > OLD_AXIS_ALLOWANCE
     raw = read_raw(cases()[RECOMPUTED].candidate)
     monkeypatch.setattr(census, "mixed_exact", lambda *_: capture / census.CONTROL_SCALE)
-    monkeypatch.setattr(census, "column_enclosure", lambda *_: (low, high), raising=False)
+    monkeypatch.setattr(census, "column_enclosure", lambda *_: (low, high))
     row = axis_row(["5", "5"], bound)
     record = census.refusal_record(raw, row, census.CONTROL_SCALE, format_m=True)
     assert record["capture"] == str(capture)
@@ -1049,10 +1050,66 @@ def test_an_axis_capture_outside_the_sweeps_enclosure_does_not_count(
     below = axis_row(item["pose"], math.nextafter(bound, -math.inf))
     assert judged(Fraction(item["capture"]), below)["captures_agree"] is False
     x, y = item["pose"]
-    off = axis_row([x, str(Fraction(y) + tiny)], bound)
-    record = judged(Fraction(item["capture"]), off)
-    assert record["sweep_enclosure"] is None
-    assert record["captures_agree"] is False
+    for pose in ([x, str(Fraction(y) + tiny)], [str(Fraction(x) + tiny), y]):
+        record = judged(Fraction(item["capture"]), axis_row(pose, bound))
+        assert record["sweep_enclosure"] is None, pose
+        assert record["captures_agree"] is False, pose
+
+
+def test_the_axis_rule_at_its_edges() -> None:
+    """`axis_captures_agree` on its own: the enclosure is closed at both ends; the bound
+    must be its lower end to the bit, so one ulp above or below fails; and a bound that is
+    None or NaN, a capture that is None, or no enclosure fails closed."""
+    low, high = 0.25, 0.75
+    for capture in (Fraction(1, 4), Fraction(1, 2), Fraction(3, 4)):
+        assert census.axis_captures_agree(low, capture, (low, high)), capture
+    assert census.axis_captures_agree(repr(low), Fraction(1, 2), (low, high))
+    for bound in (math.nextafter(low, math.inf), math.nextafter(low, -math.inf)):
+        assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
+    for bound in (None, math.nan, "nan"):
+        assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
+    assert not census.axis_captures_agree(low, None, (low, high))
+    assert not census.axis_captures_agree(low, Fraction(1, 2), None)
+
+
+def axis_receipts() -> list[Any]:
+    """Each retained v2 control receipt, kept or failed, with a refusal at the axis."""
+    params: list[Any] = []
+    for path in sorted(FOLDER.glob("*/*.control*.json")):
+        receipt = json.loads(path.read_text(encoding="utf-8"))
+        if receipt.get("kind") != KINDS[1]:
+            continue
+        sweep = next(run["sweep"] for run in receipt["runs"] if "sweep" in run)
+        item = next((item for item in sweep["refused"] if item["r"] == 0), None)
+        if item is not None:
+            params.append(pytest.param(path, item, id=path.name))
+    return params
+
+
+@pytest.mark.parametrize(("path", "item"), axis_receipts())
+def test_each_retained_axis_refusal_is_the_crates_enclosure(
+    path: Path, item: dict[str, Any]
+) -> None:
+    """At every retained v2 receipt's axis refusal, the walk on the candidate reproduces
+    the crate's reported bound to the bit and holds the receipt's exact capture, so the
+    rule counts it, including the receipts kept after the constant failed them closed
+    (n26's of 23 October and n94's of 3 November; n39's joins when its packet does):
+    twelve measures from six packets on 4 November, beside the instrumented crate's
+    upper ends in `test_sqverify_fast_axis`."""
+    case = cases()[path.name.split(".control", 1)[0]]
+    raw = read_raw(case.candidate)
+    x, y = (Fraction(value) for value in item["pose"])
+    upper = census.domain_bounds(raw, 0)[1]
+    enclosure = census.column_enclosure(raw, census.CONTROL_SCALE, x, y, upper)
+    assert enclosure is not None
+    assert enclosure[0] == item["crate_lower_bound"]
+    capture = Fraction(item["capture"])
+    assert Fraction(enclosure[0]) <= capture <= Fraction(enclosure[1])
+    assert census.axis_captures_agree(item["crate_lower_bound"], capture, enclosure)
+    if item.get("sweep_enclosure") is not None:
+        assert list(enclosure) == item["sweep_enclosure"]
+    if case.certificate == "mixed_n94_L9965":
+        assert enclosure == N94_AXIS[1]
 
 
 def test_an_axis_refusal_is_judged_on_the_recomputed_enclosure() -> None:

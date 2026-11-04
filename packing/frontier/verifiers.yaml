@@ -5412,7 +5412,11 @@ verifiers:
     summary: >-
       Checks a rectangle-only declared-net candidate's exact mass, geometry and net
       premises, binds its saved native census and complete direction log, and recomputes
-      every saved control-witness capture using exact polygon clipping. It decides
+      every saved control-witness capture using exact polygon clipping. An axis refusal is
+      judged against the enclosure the native vertex sweep held at its least vertex,
+      which the audit recomputes by transcribing the crate's column walk: the reported
+      bound must be its lower end to the bit and the exact capture must lie in it (F-1 of
+      the 14 October review, #892), where it once allowed a constant 1e-9. It decides
       premises and particular points, never universal coverage between them.
     source:
       - packing/devtools/audit_fine_net_receipt.py
