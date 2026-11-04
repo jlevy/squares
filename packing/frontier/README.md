@@ -715,8 +715,10 @@ confirmation of Benjamin Greff’s mixed covers (T-184, T-191), the $s(95)$ cove
 $n = 96$ as well, and $n = 94$, 75 and 19 took their places.
 $n = 94$ narrowed from $0.0500$ to $0.0350$ on 2026-11-04, when the whole-net control of
 Doğa Özden’s dilation of Hosono’s certificate passed and its verified floor rose to
-$1993/200$ (T-262). With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved
-exactly for every $m \ge 3$**.
+$1993/200$ (T-262).
+
+With Bentz’s $s(6)$, $s(13)$ and $s(22)$, Evan Daniel’s family $s(m^2 - 3) = m$ is now
+**proved exactly for every $m \ge 3$**.
 
 **Corrected 2 October 2026.** The gaps this section quoted against Nagamochi’s closed
 form for the last unproved members of $s(m^2 - 3) = m$, $0.0557$ at $n = 97$ (above),
