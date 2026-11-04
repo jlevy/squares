@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 138
+version: 139
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T10:54:56.572Z
+updated_at: 2026-11-04T11:56:20.914Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -241,3 +241,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 09:52 renewal (intake54): no new reports. #898 (L37, T-262 V3/C3 and n-094 verified 1993/200) review accept-with-fixes (F1 medium: the --evidence generator hard-codes Hosono wording); the addressing pass is under way. think-2agl moved from finished L33 to the coordinator, with the V3/C3 reply draft applied. #889 green at 6687e12b6 with T-176 V3/C3; T-179 at 100/201 angles, about 6.4 CPU-h left. #897 (L36) is on the print-credit hold (b-prime).
 
 2026-11-04 10:52 renewal (intake55): #898 merged (a565aef2e), think-4uun and think-qpq0 closed. #890 closing reply posted (issuecomment-6628729226) and issue closed after deploy; L38 records it. #897 review accept-with-fixes (F1: non-ASCII anchor in adopt_houses, plus the hold guard at the cut), with L36 addressing it. think-567s (T-176) is on #889 with L32.
+
+2026-11-04 11:52 renewal (intake56): #899 merged (a5a76fd99), think-2agl closed. Sweep: #899 recorded two evidence ids the reply text does not name, and L39 is correcting the record (no new post). think-0so3 now waits on the author (blocked_on: none; question asked in the closing comment). L36 is addressing the #897 review; L32 is on T-179.
