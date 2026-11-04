@@ -27662,7 +27662,8 @@ issues:
     title: "s(94) ≥ 1993/200 = 9.965 (dilation of Hosono's mixed_n94_L995 on a finer net): registration request"
     author: kenaznia-doga
     opened: '2026-11-03'
-    state: open
+    state: closed
+    closed: '2026-11-04'
     kind: result-report
     triage: done
     summary: >-
@@ -27692,7 +27693,7 @@ issues:
       (think-qpq0): the replay is E-ozden-890-n94-9965-sqverify-fast-replay, T-262 is
       V3/C3, and n-094's verified lane takes 1993/200. No licence is stated; the packet
       rests on the submission's presumption of permission, followed up on think-0so3.
-    read_through: '2026-11-03T01:20:31Z'
+    read_through: '2026-11-04T10:46:20Z'
     results:
     - key: s94-dilation
       claim: >-
@@ -27712,9 +27713,41 @@ issues:
     - think-qpq0
     - think-0so3
     answer_bead: think-2agl
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/890#issuecomment-6628729226
+      date: '2026-11-04'
+      by: jlevy
+      kind: final
+      reported:
+      - result: s94-dilation
+        id: T-262
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: s94-dilation
+        id: E-ozden-890-n94-9965-sqverify-fast-replay
+        status: confirmed
+      - result: s94-dilation
+        id: E-ozden-890-n94-9965-review-sample
+      - result: s94-dilation
+        id: E-ozden-890-n94-9965-report
     close_when: >-
       T-262 is on main at V3/C3 and the reply on main says what was replayed, that its
       whole-net control passed under the enclosure rule, that the stage 4 review accepted
       the certificate, and that n-094's verified lower bound is 1993/200; the licence
       question (think-0so3) is carried in the closing comment.
+    notes: >-
+      Closed on 4 November 2026 with the final reply (issuecomment-6628729226, posted at
+      10:46:20Z), after #898 merged as a565aef2e and its Pages deployment passed (run
+      41814358318, deploy job 126525247634, verify-deployment job 126525385895, 6,049 of
+      6,049 checks). The reply was rendered with check_requests --draft 890 from that main
+      and reconciled with think-2agl's draft of 4 November, whose acknowledgements, review
+      notes and two questions it keeps; it adds the register link the rendered text gives.
+      It reports T-262 at V3/C3, confirmed and current, reproduced with the producer's code;
+      the complete replay, the whole-net control passed under #892's enclosure rule, the
+      stage 4 review's acceptance, and n-094's verified and reported lower bounds at
+      1993/200. It read back identical to what was posted, and the issue was closed as
+      completed at 10:46:35Z. The licence question (think-0so3) and the finer-net question
+      are informational and hold nothing open. The deployed pages were not fetched from the
+      session host; verify-deployment checked them.
