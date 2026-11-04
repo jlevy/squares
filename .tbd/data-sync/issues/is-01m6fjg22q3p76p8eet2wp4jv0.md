@@ -3,9 +3,9 @@ type: is
 id: is-01m6fjg22q3p76p8eet2wp4jv0
 title: "Stage 4 review: Özden's s(94) >= 1993/200 certificate (#890)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-r222
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m6fj2mwfwwncghn4hv6qdhhg
 hold: null
 hold_until: null
 created_at: 2026-11-03T02:06:03.350Z
-updated_at: 2026-11-03T05:54:38.220Z
+updated_at: 2026-11-04T04:59:55.356Z
 started_at: 2026-11-03T05:05:13.008Z
+closed_at: 2026-11-04T04:59:55.356Z
+close_reason: Stage-4 review of T-262 accepted, no defect (docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md); recorded in https://github.com/jlevy/squares/pull/891 (merged ca3a171bb).
+resolution: null
+duplicate_of: null
 ---
 Stage 4 mathematical review of #890's certificate (Doğa Özden, s(94) >= 1993/200), by a separately prompted tbd-strong-max lane at maximum reasoning in its own worktree, as packing/campaign/result-import.md "Who reviews, and when" asks. It is what moves n-094's verified lower lane (frontier README: a complete replay here and a review of its mathematics; the 6 October declared-net soundness review's records-lane item 7: "A review under docs/project/reviews/ read this certificate and accepted it"; check_results verified_lane_review_problems).
 
