@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 143
+version: 144
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T15:55:12.670Z
+updated_at: 2026-11-04T17:55:47.287Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -251,3 +251,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 14:52 renewal (intake59): needs-action is down to #890 follow-up (deferred) and think-567s (with L32 on #889). #902 merged (4d8d768bd, #824 follow-up). think-mdxq waits on the author (blocked_on: none). T-179 replay complete (34.2 CPU-h, all 201 match, control refused), T-179 V3/C3 on #889; L32 is fixing stale pins. L42 launched: T-233 n26 control under the enclosure rule; T-142/T-143 n28 if at most 15 CPU-h.
 
 2026-11-04 15:53 renewal (intake60): no new reports; needs-action unchanged (#890 deferred follow-up; think-567s on #889). #889 senior review accept-with-fixes (F1: stale E-wand125-linear-n145-1224-report), with L32 addressing it. The T-179 follow-up goes on #779, not #446. L42 is on T-233/T-142/T-143.
+
+2026-11-04 17:52 renewal (intake62): #889 merged (69abc507e; T-176, T-179 V3/C3); think-567s and think-v511 closed. Retention authorized by the owner on 17 Oct (#543 checkbox stale). L43 posted #446/#779 replies and is recording them. Özden answered the licences on #890 (CC BY 4.0 data, MIT code; LICENSE.md in all three repos); L44 records them, then posts the #890 follow-up (naming the two deferred ids) and the #366 follow-up (T-110 superseded by T-176). think-4ul6 strong-max review of T-142/T-143 running; L42 #903 (T-233, n28/n30 retention).
