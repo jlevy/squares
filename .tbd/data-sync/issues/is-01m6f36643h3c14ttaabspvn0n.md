@@ -3,16 +3,20 @@ type: is
 id: is-01m6f36643h3c14ttaabspvn0n
 title: "Stage 4 review of T-132's mixed_n29_L582 (wand125 s(29) >= 291/50, #446): the review that reads the certificate, owed before its census evidence can be mapped"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: bold-ritchie-l47
 labels:
   - result-import
   - validation
 dependencies: []
 parent_id: is-01m4jk4cae8514p87y79gsh17n
+hold: null
+hold_until: null
 created_at: 2026-11-02T21:38:31.171Z
-updated_at: 2026-11-04T15:59:10.112Z
+updated_at: 2026-11-04T21:23:18.512Z
+started_at: 2026-11-04T21:23:18.512Z
 ---
 T-132 (wand125's s(29) >= 291/50, mixed_n29_L582, reported on jlevy/squares#446) has no review that reads its certificate: the 11 October final review read only the record and premises (its F1-2 says the stage 4 review that reads the certificates is still owed), and the 23 October #446 review read n = 19, 20 and 26. The declared-net route's checklist (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md, For the Records Lane, item 7) needs "a review under docs/project/reviews/ [that] read this certificate and accepted it" before a census replay's evidence can be mapped, and check_results' verified_lane_review_problems holds an adoption at n = 29 to a mapped review. So T-132 cannot leave V0/C0 by a census alone.
 
