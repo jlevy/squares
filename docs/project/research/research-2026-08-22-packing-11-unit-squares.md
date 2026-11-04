@@ -926,7 +926,7 @@ Use the structured form to query or plot; use these tables to read.
 | 31 | 6 | grid | — | 5.9775 | counting | 0.0225 |
 | 37 | 6.59861961 | hand | 8 | 6.4975 | counting | 0.1011 |
 | 38 | `6 + (1/2)√2` = 6.70710678 | strip | — | 6.545 | counting | 0.1621 |
-| 39 | 6.81072208 | annealing | 5 | 6.65 | counting | 0.1607 |
+| 39 | 6.81072208 | annealing | 5 | 6.6625 | counting | 0.1482 |
 | 40 | `4 + 2 √2` = 6.82842712 | hand | — | 6.718 | counting | 0.1104 |
 | 41 | 6.92669309 | annealing | 42 | 6.775 | counting | 0.1517 |
 | 42 | 7 | grid | — | 6.8475 | counting | 0.1525 |

@@ -7355,7 +7355,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/4.html
   canonical: cases/4.html
@@ -17940,7 +17940,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-11-02'
+  lastmod: '2026-11-04'
   status: live
   identity:
     kind: lower-bound
@@ -17955,27 +17955,31 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n39-66625-report
+    - E-wand125-fine-net-n39-66625-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n39_L66625/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n39_L66625/check2/receipt.json
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n39_L66625/bundle.json
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/premises-n39.json
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/sample-diagnostic-n39.json
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/control-sample-n39.json
-    - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/release-assets.json
-    - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n39_L66625/candidate.json.gz
     - packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/receipts/capture-agreement-n39.json
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.jsonl.gz
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.control-failed-v2.json
     - packing/devtools/fine_net_followup.py
     - packing/devtools/audit_wand125_declared_net.py
   amendments:
-  - date: '2026-11-02'
-    reason: The complete sqverify-fast census capture of mixed_n39_L66625 at all 2,073 directions
-      (think-567s), its kept failed whole-net control and its agreement with the source's log join
-      the artifacts, with the retained candidate and the packet's release record; the replay evidence
-      is held until think-tcsl fixes the control's axis allowance, so the evidence, rungs, value,
-      scope and attribution are unchanged.
+  - date: '2026-11-04'
+    reason: The complete sqverify-fast census replay of mixed_n39_L66625 at all 2,073 directions (think-567s),
+      with its whole-net control rerun under think-4uun's enclosure rule (CONTROLS_REFUSED; the failed
+      control of 2 November kept as history), is cited as replay evidence, and the retained candidate,
+      its check2 receipt, the census, its capture agreement with the source's log and the kept failed
+      control join the artifacts; the result rises to V3/C3. The value, scope and attribution are
+      unchanged.
     previous:
       kind: lower-bound
       scope:

@@ -141,6 +141,8 @@ domain), but the gap is above the census’s `AXIS_ROUNDING` of $10^{-9}$, so th
 control would end `CONTROL_FAILED`. It is the defect T-142’s control is held for
 (2.15e-9 there), so the owner’s answer to that question on jlevy/squares#543 decides
 n = 39’s control too.
+#892 has since judged the axis refusal by the sweep’s own enclosure instead of the
+constant, and under it n = 39’s whole-net control passes (below).
 These are diagnostics of the directions they ran and are no control receipts.
 
 ## The Price of a Complete Replay
@@ -192,8 +194,15 @@ again at 1804, the 99/100 mutant was refused at all 2,073 directions and the
 near-threshold mutant was refused, but at the axis direction the mutant’s exact capture,
 below 1 at a pose inside the domain, sits 1.26e-9 above the sweep’s certified bound,
 beyond `AXIS_ROUNDING`, so that refusal is not counted. The receipt is kept as
-`mixed_n39_L66625.control-failed-v2.json` in the census folder, and T-176 stays reported
-until think-tcsl fixes the allowance and re-judges it; the capture is not rerun.
+`mixed_n39_L66625.control-failed-v2.json` in the census folder.
+#892 (think-4uun) has since replaced that constant with the sweep’s own enclosure: an axis
+refusal counts where the enclosure the sweep held at its least vertex, recomputed apart
+from the crate, has the certified bound as its lower end to the bit and contains the
+exact capture. The control rerun under it
+on 3 November, with the same binary, ends `CONTROLS_REFUSED`, and is retained as
+`mixed_n39_L66625.control.json`; the capture was not rerun.
+With the review of 14 October they put T-176 at V3/C3, and n39’s lower lanes hold
+$533/80$.
 n = 44’s replay is of little value now that $s(44) = 7$ is proved (T-252).
 
 ## Sources and Notices

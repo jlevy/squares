@@ -1031,14 +1031,15 @@ $s(44) \ge 2799/400 = 6.9975$ on the same 2,073-direction net; no issue reports 
 The [packet](web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md) retains the
 directories’ MIT documents at revision `7a42c16` and pins their release assets by
 digest, with the maintained premise checks, diagnostic eight-direction samples and the
-whole-net control’s mutant at two directions each; at n39 the axis refusal falls outside
-the census’s rounding allowance.
-The n37 asset’s data members are retained in the packet’s `release/`, and its complete
-replay and whole-net controls ran on 2 November 2026: T-178 records the bound at V3/C3,
-and n37’s lower lanes hold it.
+whole-net control’s mutant at two directions each; at n39 the axis refusal fell outside
+the census’s constant rounding allowance, which #892 has since replaced with the sweep’s
+own enclosure. The n37 asset’s data members are retained in the packet’s `release/`, and
+its complete replay and whole-net controls ran on 2 November 2026: T-178 records the
+bound at V3/C3, and n37’s lower lanes hold it.
 The n39 asset’s members are retained the same way, and its complete capture ran the same
-day and verified at every direction; its whole-net control failed closed on the axis
-allowance, so T-176 stays reported until that allowance is fixed (think-tcsl).
+day and verified at every direction; its whole-net control failed closed on the constant
+axis allowance and, rerun on 3 November under #892’s enclosure rule, ends
+`CONTROLS_REFUSED`: T-176 records the bound at V3/C3, and n39’s lower lanes hold it.
 At n44 a complete replay and whole-net controls remain pending.
 
 **[wand125 fine-net lower bounds 2026-10-16]**: wand125’s 18 certificates of 16 October,
