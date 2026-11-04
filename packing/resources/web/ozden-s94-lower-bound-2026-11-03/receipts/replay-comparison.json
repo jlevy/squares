@@ -1,0 +1,22 @@
+{
+  "kind": "dilated-measure-replay-comparison/v1",
+  "packet": "ozden-s94-lower-bound-2026-11-03",
+  "certificate": "mixed_n94_L9965",
+  "capture": "packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.jsonl.gz",
+  "capture_sha256": "bc0c4294fea6f58aa9f9b97ae2dfa6919d24656b49f705fe9c5ec2991a41d353",
+  "directions": 600,
+  "status": "VERIFIED",
+  "nodes": 296805699,
+  "least_certified_bound": 1.0000000000314393,
+  "build": {"profile":"release","rustc":"rustc 1.98.0 (88d9e12ae 2026-08-18)","source_sha256":"d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88","target":"x86_64-unknown-linux-gnu"},
+  "threads": 2,
+  "direction_cpu_seconds": 8138.102803163001,
+  "cpu_ratio_to_receipts": [1.032,1.019],
+  "receipts": [
+    {"receipt":"packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/receipts/sqverify-fast-rustc1.98-full.jsonl","receipt_sha256":"528a8c6fa1bb4772f15e5294fe0e73d3890ad73749c9cac1a8006b3092091cb9","directions":600,"same_directions":true,"identical_directions":600,"differing":{},"summary_equal":{"status":true,"nodes":true,"refused_directions":true,"directions":true,"premises":true,"threshold":true},"their_build":{"profile":"release","rustc":"rustc 1.98.0 (88d9e12ae 2026-08-18)","source_sha256":"d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88","target":"x86_64-unknown-linux-gnu"},"their_threads":4,"their_direction_cpu_seconds":7886.845602806008,"their_status":"VERIFIED"},
+    {"receipt":"packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/receipts/sqverify-fast-rustc1.93-full.jsonl","receipt_sha256":"1cc4c423f6bfd4bd5ae680988149a0144460da568a93a863ab04b993d811aa03","directions":600,"same_directions":true,"identical_directions":600,"differing":{},"summary_equal":{"status":true,"nodes":true,"refused_directions":true,"directions":true,"premises":true,"threshold":true},"their_build":{"profile":"release","rustc":"rustc 1.93.1 (01f6ddf75 2026-02-11) (built from a source tarball)","source_sha256":"85f02254fb5183513e086c3f5f3b5b6c9e7cba3486e7d31838bdcbd44ff42c08","target":"x86_64-unknown-linux-gnu"},"their_threads":4,"their_direction_cpu_seconds":7984.657968468991,"their_status":"VERIFIED"}
+  ],
+  "second_checker": {"replay":"packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/full.jsonl","replay_sha256":"abad4bcc8afa490bb872d436452be2115f7f8e19ce4ab76c87358fa8d6592e49","rows":600,"every_direction_once":true,"verdicts":["VERIFIED"],"nodes":166440592,"least_bound":"4398046511113/4398046511104","least_bound_approx":1.0000000000020464,"least_bound_direction":587,"decides":"nothing here: the producer's output, read; the checker was not run"},
+  "verdict": "EVERY_DIRECTION_AGREES",
+  "compared": "every field of every direction row but cpu_seconds and seconds"
+}

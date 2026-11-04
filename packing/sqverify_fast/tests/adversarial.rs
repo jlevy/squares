@@ -584,3 +584,60 @@ fn fmin_and_fmax_are_exact_on_finite_operands_and_poison_on_failure() {
     assert_eq!(fmin(1.0, f64::INFINITY), 1.0);
     assert_eq!(fmax(1.0, f64::NEG_INFINITY), 1.0);
 }
+
+// ------------------------- summation allowance (#890's referee report, 2026-11-03)
+
+/// The false certificates of the referee report that #890's author commissioned
+/// (`second-checker/GRADE.md` in the ozden-s94-lower-bound-2026-11-03 packet, a
+/// review by an `OpenAI` Codex agent), which the author's lab checker accepted at every
+/// direction: n = 1 in a square of side 3/2, core 9/10, a declared net of step 1/100
+/// and 43 nodes, and 1,000 rows inside [0.74, 0.76]^2 of total mass 1 - 10^-20, so
+/// every core captures exactly 1 - 10^-20 < 1 and one unit square fits. With
+/// `distinct` each row has its own rectangle, so a capture sums 1,000 terms rather
+/// than one merged image: too small an allowance for summation error would verify it.
+fn false_capture_cert(distinct: bool) -> Value {
+    let mass = format!("99999999999999999999/1{}", "0".repeat(23));
+    let rows: Vec<Value> = (0..1000)
+        .map(|i| {
+            let shift = if distinct { i } else { 0 };
+            let low = format!("{}/10000000", 7_400_000 + shift);
+            let high = format!("{}/10000000", 7_600_000 - shift);
+            json!({"rectangle": [low, low, high, high], "mass": mass})
+        })
+        .collect();
+    json!({"n": 1, "L": "3/2", "B": "9/10",
+        "total_mass": format!("99999999999999999999/1{}", "0".repeat(20)),
+        "points": [], "rectangles": rows,
+        "proof_net": {"step": "1/100", "last": 42}})
+}
+
+#[test]
+fn a_capture_just_below_one_summed_over_many_rows_is_refused() {
+    let threshold = parse_rational("1").unwrap();
+    for distinct in [false, true] {
+        let cert = admit_value(&false_capture_cert(distinct), 1).unwrap();
+        let indices: Vec<u32> = if distinct {
+            vec![0, 1, 21, 42]
+        } else {
+            (0..43).collect()
+        };
+        for index in indices {
+            let report =
+                sqverify_fast::run_direction(&cert, index, &threshold, SMALL, index > 0).unwrap();
+            assert!(
+                !report.verified,
+                "distinct={distinct} r={index} verified: {}",
+                report.receipt
+            );
+            if index > 0 {
+                // The refusal is on coverage: an exact capture below one.
+                assert_eq!(
+                    report.receipt["witness"]["exact_below_threshold"],
+                    json!(true),
+                    "distinct={distinct} r={index}: {}",
+                    report.receipt
+                );
+            }
+        }
+    }
+}

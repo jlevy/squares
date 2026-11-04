@@ -180,7 +180,17 @@ MIXED_PACKETS = (
     "wand125-fine-net-n31-2026-10-11",
     "wand125-fine-net-lower-bounds-446-release-2026-10-08",
     "wand125-fine-net-n37-n39-n44-2026-10-13",
+    "ozden-s94-lower-bound-2026-11-03",
 )
+#: A packet that is not Hosono's and keeps a format M certificate at its own upstream
+#: path, by the census name it is given (`mixed_nN_LDIGITS`, the format's convention) and
+#: its path in the packet. Doğa Özden's dilation of Hosono's mixed_n94_L995
+#: (jlevy/squares#890) is `certificate/n94_L9965.json.gz` upstream.
+MIXED_FILES: dict[str, dict[str, str]] = {
+    "ozden-s94-lower-bound-2026-11-03": {
+        "mixed_n94_L9965": "source/certificate/n94_L9965.json.gz",
+    },
+}
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
 #: the 16 October fine-net packet, the n31 packet of 11 October, the release members of
 #: four #446 certificates and the n37 member of the 13 October packet keep their release
@@ -277,12 +287,22 @@ def certificates_root(packet: str) -> Path:
 
 
 def mixed_cases() -> list[Case]:
-    """Every format M or L certificate of Hosono's mixed and linear packets."""
+    """Every format M or L certificate of Hosono's mixed and linear packets, and each one
+    `MIXED_FILES` names in another packet."""
     cases: list[Case] = []
     for packet in MIXED_PACKETS:
-        root = certificates_root(packet)
-        for path in sorted(root.glob("mixed_n*_L*/candidate.json.gz")):
-            name = path.parent.name
+        named = MIXED_FILES.get(packet)
+        found = (
+            [(name, WEB / packet / relative) for name, relative in sorted(named.items())]
+            if named is not None
+            else [
+                (path.parent.name, path)
+                for path in sorted(
+                    certificates_root(packet).glob("mixed_n*_L*/candidate.json.gz")
+                )
+            ]
+        )
+        for name, path in found:
             data = json.loads(gzip.decompress(path.read_bytes()), parse_float=str)
             side = Fraction(str(data["L"]))
             n = int(data["n"])
@@ -1377,10 +1397,23 @@ INDEPENDENT_MIXED_PACKETS = frozenset(
         "wand125-mixed-bounds-finer-net-2026-10-06",
     }
 )
+#: Packets whose producer decided the certificate with this repository's own
+#: `sqverify-fast`, unmodified, so a census row of it reproduces the producer's run: the
+#: #890 dilation, whose receipts name the crate source `d97758bb...` at e6e8d577.
+SAME_CRATE_PACKETS = frozenset({"ozden-s94-lower-bound-2026-11-03"})
 
 
 def mixed_relationship(case: Case) -> tuple[list[str], str]:
     """Reviewed producer relationship fields and prose for a mixed packet."""
+    if case.packet in SAME_CRATE_PACKETS:
+        return ["    relationship_to_generator: same-implementation"], (
+            "The producer decided the certificate with this repository's sqverify-fast, "
+            "built unmodified from the same reviewed crate source, and its receipts are "
+            "retained in its packet; this replay reproduces that run with the producer's "
+            "code. The crate is this repository's clean-room implementation, written "
+            "without opening Hosono's checker, which never decided this certificate. No "
+            "second implementation or second method is run here. "
+        )
     if (case.packet, case.certificate) == (
         "wand125-mixed-bounds-check2-2026-10-06",
         "mixed_n29_L581",
