@@ -233,6 +233,7 @@ the platform supplies no direction CPU.
 | `mixed_n94_L992` | M | 94 | 248/25 | VERIFIED | 1056.2 | 1056.0 | 1.0000000001531857 | none | yes |
 | `mixed_n94_L994` | M | 94 | 497/50 | VERIFIED | 1912.1 | 1911.8 | 1.0000000001238274 | none | yes |
 | `mixed_n94_L995` | M | 94 | 199/20 | VERIFIED | 2800.7 | 2800.3 | 1.000000000302789 | none | yes |
+| `mixed_n94_L9965` | M | 94 | 1993/200 | VERIFIED | 8138.6 | 8138.1 | 1.0000000000314393 | none | yes |
 | `rect_n94_L9795` | T | 94 | 1959/200 | VERIFIED | 274.6 | 274.2 | 1.0001000000378433 | none | yes |
 | `rect_n94_L9805` | T | 94 | 1961/200 | VERIFIED | 283.9 | 283.5 | 1.0001000020831263 | complete | no |
 | `mixed_n95_L996` | M | 95 | 249/25 | VERIFIED | 906.8 | 906.6 | 1.0000000007947085 | none | yes |
@@ -244,7 +245,7 @@ the platform supplies no direction CPU.
 | `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 128.0 | 1.000000000300333 | complete | no |
 | `mixed_n108_L1062` | M | 108 | 531/50 | VERIFIED | 2086.8 | 2086.5 | 1.0000000001765084 | none | yes |
 
-225 of 225 certificates verified; 139 of them are the first complete check of their
+226 of 226 certificates verified; 140 of them are the first complete check of their
 certificate in this repository.
 
 <!-- This document follows common-doc-guidelines.md.

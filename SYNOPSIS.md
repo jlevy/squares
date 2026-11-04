@@ -342,6 +342,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-179](packing/frontier/RESULTS.md) | 145, 146, 147, 148, 149 | `V0` | `C1` | `S3` | `previously-published` | A measure of points, segments and rectangles that wand125/square-packing published on 13 October 2026, reported on no issue, is reported to prove s(145) >= 306/25 = 12.24. |
 | [T-192](packing/frontier/RESULTS.md) | 28 | `V0` | `C1` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 15 October 2026 and reported on no issue, is reported to prove s(28) > 1149/200 = 5.745. |
 | [T-233](packing/frontier/RESULTS.md) | 19, 20, 26, 27 | `V0` | `C1` | `S3` | `previously-published` | Four rectangle measures of wand125/square-packing, published on 7 and 8 October 2026 and reported in jlevy/squares#446, are reported to prove s(19) >= 1931/400 = 4.8275, s(20) >= 393/80 = 4.9125, s(26) >= 1111/200 = 5.555 and s(27) >= 1131/200 = 5.655. |
+| [T-262](packing/frontier/RESULTS.md) | 94 | `V0` | `C1` | `S3` | `previously-published` | A rectangle measure of kenaznia-doga/s94-lower-bound, published on 3 November 2026 and reported in jlevy/squares#890, is reported to prove s(94) >= 1993/200 = 9.965. |
 | [T-132](packing/frontier/RESULTS.md) | 29 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on jlevy/squares#446, is reported to prove s(29) >= 291/50 = 5.82. |
 | [T-142](packing/frontier/RESULTS.md) | 28 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on no issue, is reported to prove s(28) >= 2297/400 = 5.7425. |
 | [T-143](packing/frontier/RESULTS.md) | 30 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on no issue, is reported to prove s(30) >= 2357/400 = 5.8925. |
@@ -464,7 +465,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 261 | 261 registered, 229 by others |
+| Frontier results | 262 | 262 registered, 230 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -1002,6 +1003,7 @@ case or experiment separately.
 | [Review: wand125’s Ten Declared-Net Certificates of 6 October (T-108 to T-117)](docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md) | dated review record | record | retained | — |
 | [wand125’s `s(18) ≥ 47/10` on a Declared Net and `s(66) ≥ 843/100`: Review of T-096, T-097 and the sqverify-fast Declared-Net Change](docs/project/reviews/review-2026-10-05-wand125-declared-net-n18-n66.md) | dated review record | record | retained | — |
 | [sqverify-fast on `main` (`d97758bb…`): Soundness Re-Review of the Declared-Net Change](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md) | dated review record | record | retained | — |
+| [Özden’s s(94) ≥ 1993/200 by a Dilated Measure: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md) | dated review record | record | retained | — |
 | [sqverify-fast Declared Nets: Re-Check of the Fixes for DR-1 to DR-3 (`36b52538a`) and the Proposed Flip](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md) | dated review record | record | retained | — |
 | [Review: wand125’s Checker on ValidTilt9 (`T-081`), Lane R3](docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md) | dated review record | record | retained | — |
 | [Review of the sqverify-fast format T route: census rows and controls for T-068’s 34 rectangle certificates](docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md) | dated review record | record | retained | — |
@@ -1321,6 +1323,7 @@ case or experiment separately.
 | [T-233’s Fine-Net Censuses: Four #446 Certificates](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md) | source retention and archive policy | record | retained | — |
 | [The n31 Fine-Net Census: mixed_n31_L59775](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/README.md) | source retention and archive policy | record | retained | — |
 | [The n37 Fine-Net Census: mixed_n37_L64975](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md) | source retention and archive policy | record | retained | — |
+| [The n94 Dilation Census: mixed_n94_L9965](packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/README.md) | source retention and archive policy | record | retained | — |
 | [Census Summary](packing/benchmarks/measure-verifier/census-summary.md) | generated status view | generated | generated | — |
 | [Whole `rect_n32_L595`: c2 Against verify.cpp](packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md) | research synthesis | record | retained | — |
 | [H-005: One Error Budget per Edge](packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md) | research synthesis | record | retained | — |

@@ -41,11 +41,16 @@ $t_{\max}^2 + 2 t_{\max} - 1 > 0$, and for every net index $r$ and every centre 
    $\tan(\theta_{\max}/2) > \sqrt 2 - 1 = \tan(\pi/8)$, so $\theta_{\max} > \pi/4$.
 
 2. *Orientation (N2).* A unit square’s angle is defined modulo $\pi/2$; take $\varphi
-   \in [0, \pi/2)$. If $\varphi > \pi/4$, reflect the whole configuration in the
-   diagonal $y = x$, which maps $K$ to itself, preserves $g$, preserves disjointness,
-   and sends $\varphi$ to $\pi/2 - \varphi < \pi/4$. So assume $\varphi \in [0,
-   \pi/4]$, which N1 places below $\theta_{\max}$, and let $\theta_r$ be a net angle
-   with $|\tan(\varphi/2) - t_r| \le D/2$ (N1). With $\delta = |\varphi - \theta_r|$,
+   \in [0, \pi/2)$. The fold is made square by square, since one reflection of the whole
+   configuration cannot fold squares on both sides of $\pi/4$ at once.
+   If a square’s $\varphi > \pi/4$, reflect that square in the diagonal $y = x$: the
+   reflection maps $K$ to itself and preserves $g$, and sends $\varphi$ to
+   $\pi/2 - \varphi < \pi/4$, so a core found for the reflected square, reflected back,
+   lies in the square and captures the same mass.
+   N4 needs only one core inside each square, and those cores are disjoint because the
+   squares are. So assume $\varphi \in [0, \pi/4]$, which N1 places below
+   $\theta_{\max}$, and let $\theta_r$ be a net angle with
+   $|\tan(\varphi/2) - t_r| \le D/2$ (N1). With $\delta = |\varphi - \theta_r|$,
    $z = \tan(\delta/2) = |\tan(\varphi/2) - t_r|/(1 + t_r \tan(\varphi/2)) \le D/2$;
    $\delta$ itself may reach $2\arctan(D/2)$, which exceeds $\arctan D$, so the argument
    uses only the bound on $z$. The fold is at $\pi/4$, not at $\theta_{\max}$: lemma D’s
@@ -520,6 +525,11 @@ of the 3 October soundness review, whose reproducers are in `tests/adversarial.r
   with a second member or trailing bytes is refused; format L and M nets cannot be
   changed by metadata; format M’s tangent-form premise refuses a $B$ between the two
   limits, which format T admits.
+- `tests/adversarial.rs`, from the referee report #890’s author commissioned (an OpenAI
+  Codex agent’s review, 3 November 2026): a measure of total mass $1 - 10^{-20}$ that
+  every core captures whole, as one merged rectangle and as 1,000 distinct ones, is
+  refused on coverage with an exact witness, so the allowance for summation error over
+  many terms cannot verify a capture just below one.
 - `tests/declared_net.rs`, for lemma N0: a declared net replaces the standard one (the
   direction at the last index and the per-bin domain at four indices read the declared
   step exactly); without its declaration $B = 999/1000$ is refused on the standard net;
