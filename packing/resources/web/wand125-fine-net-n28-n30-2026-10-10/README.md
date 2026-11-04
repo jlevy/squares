@@ -132,6 +132,22 @@ The source credits wand125; both commits are authored by Hiroaki Hosono.
 Its README says parts of the work were produced with AI assistance under human
 direction, and each commit names Claude Opus 5.5 as co-author.
 
+## Compressed Files
+
+| Stored file | Origin | Git blob (decompressed) | SHA-256 (decompressed) |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n28_L57425/candidate.json.gz` | upstream | `83973a7165fd67ef82fbf73083fbc27c7e5c690b` | `5ef20511e18a9997dfcc4cef773b65eac83dfe59e6a56fa810f3c789076c0107` |
+| `release/certificates/mixed_n30_L58925/candidate.json.gz` | upstream | `6fc73a25e66e7c2e2390c43f767a9fd14c3ef09e` | `981a17db67b24f99d64e176c892655c27fde67f8e99f2875a8f1d55ff3d0677e` |
+
+## Original Gzip Files
+
+| Stored file | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n28_L57425/check2/control-197_200.jsonl.gz` | upstream | `29be8f524db5174654597ead6ac8d09e8cbf1ffe` | `8fa5261290892b6c7d8e41905bee493320a6954186b2a8ee94342c623de51169` |
+| `release/certificates/mixed_n28_L57425/check2/run.jsonl.gz` | upstream | `369a6500730b85aa2810a3fd492945a82f1548e3` | `896c535bb0f26e312ac4349d561a9a006a54c69c9657fbc02e4d068fe7e8bddd` |
+| `release/certificates/mixed_n30_L58925/check2/control-197_200.jsonl.gz` | upstream | `c9cc9a7bffba4da5bda5e27c3af079ec6033f918` | `ae1d9957fe143595401cd1c192d56e4851f6a1a3b2a5a4a0673907e19a4d080e` |
+| `release/certificates/mixed_n30_L58925/check2/run.jsonl.gz` | upstream | `b3b4e0e43e9fddb869942156ed9306bdc8b4c456` | `a0252ad908786885700a366450fe7ff8654009a3331b93f8065ae74d8e2fea2f` |
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

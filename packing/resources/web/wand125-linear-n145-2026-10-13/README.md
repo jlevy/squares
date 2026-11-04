@@ -170,6 +170,13 @@ Daniel, tokoharu and jlevy/squares; the commit is authored by Hiroaki Hosono. Th
 `problems/square-lower-bounds/README.md` says parts of the work were produced with AI
 assistance under human direction, and the commit names Claude Opus 5.5 as co-author.
 
+## Compressed Files
+
+| Stored file | Origin | Git blob (decompressed) | SHA-256 (decompressed) |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n145_L1224/candidate.json.gz` | upstream | `5f2f39532ca2bca21e1e24e39828756d10171e9e` | `3cd54c438616d280307d6571cb1aeb35225347751ae651141a96ff7da3b2b360` |
+| `release/certificates/mixed_n145_L1224/certificate.json.gz` | upstream | `d7e8f76c52fce888573dd2dc6ed0a7a88678dc8e` | `e3c58aa2318a0c9a65aac770cdaac65366d31ea99a7023a465efadc87a9592ca` |
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

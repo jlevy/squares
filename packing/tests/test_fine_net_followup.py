@@ -18,6 +18,7 @@ import pytest
 
 from devtools import fine_net_followup as followup
 from devtools.audit_wand125_declared_net import net_facts, semantic_digest
+from devtools.retained_data import check_packet
 
 NAME = "mixed_n2_L3"
 BUNDLE = "n2-L3-check2-bundle"
@@ -569,6 +570,33 @@ def test_retain_keeps_the_data_members_and_pins_the_verifier_and_the_bundle(
     before = (packet / followup.RETAINED_RECORD).read_bytes()
     assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
     assert (packet / followup.RETAINED_RECORD).read_bytes() == before
+
+
+def test_retained_tables_list_the_gzip_members_retained_data_check_reads(
+    tmp_path: Path,
+) -> None:
+    """`retained-tables` writes the README rows `devtools.retained_data check` asks of a
+    retained packet's gzip members (review F3 of #903): the candidate's decompressed bytes
+    and the run log's stored bytes, before the guideline footer, keeping the prose, and
+    writing nothing the second time."""
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    readme = packet / "README.md"
+    readme.write_text(
+        "# Packet\n\nProse.\n\n<!-- This document follows common-doc-guidelines.md.\n-->\n"
+    )
+    missing = check_packet(packet)
+    assert any("candidate.json.gz is not in the table" in problem for problem in missing)
+    assert any("run.jsonl.gz is not in the table" in problem for problem in missing)
+    assert followup.main(["retained-tables", str(packet)]) == 0
+    assert check_packet(packet) == []
+    text = readme.read_text()
+    assert "Prose." in text
+    assert text.index("## Compressed Files") < text.index("## Original Gzip Files")
+    assert text.index("## Original Gzip Files") < text.index(followup.README_FOOTER)
+    assert followup.write_retained_tables(packet) == 0
+    assert readme.read_text() == text
 
 
 def test_check_retained_reports_changed_stray_and_misnamed_members(tmp_path: Path) -> None:

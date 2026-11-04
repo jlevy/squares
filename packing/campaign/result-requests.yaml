@@ -1508,7 +1508,7 @@ issues:
       side 1999/2000, 832 half-angles of step 1/2006) and s(19) >= 48229/10000 = 4.8229 by
       mixed_n19_L48229 on the 416-angle net, each checked by the bundled checker's records
       and the author's adapted sqverify_fast.
-    read_through: '2026-10-07T01:47:44Z'
+    read_through: '2026-11-04T19:16:43Z'
     results:
       - key: n18-470
         claim: >-
@@ -1806,6 +1806,17 @@ issues:
             status: confirmed
             position: current
         beads: [think-zcnr]
+      - url: https://github.com/jlevy/squares/issues/366#issuecomment-6639780882
+        date: '2026-11-04'
+        by: jlevy
+        kind: follow-up
+        reported:
+          - result: check2-t-110
+            id: T-110
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: superseded
     close_when: >-
       The s(18) certificate is confirmed or refuted and the reply saying so is posted from
       main, and the offered sqverify_fast change is taken in or declined; and the two
@@ -1816,6 +1827,16 @@ issues:
       source check2 routes share producer components, while n29 is independent. Its four newer certificates
       are handled by the separate reported-import follow-up. The 7 October FN1 source update remains
       a custody obligation, not a fresh mathematical result.
+
+      The follow-up of 4 November (issuecomment-6639780882, 19:16:43Z) brings the 31
+      October follow-up's position for T-110 up to date: still V3/C3, confirmed, and
+      superseded at n = 39 by T-176, Hosono's own fine-net certificate mixed_n39_L66625
+      (s(39) >= 533/80) from #446, confirmed at V3/C3 by #889 (merged as 69abc507e), with
+      both of n = 39's lower lanes at 533/80. It was posted after #905 merged as bb5bf6d54
+      and its Pages deployment passed (run 41892700109, 6,064 of 6,064 checks), modelled
+      on #824's follow-up (#902), checked against main bb5bf6d54 (check_requests --draft
+      366), and read back identical to what was posted; the issue stays closed. T-176 is
+      #446's result, so the reply names it in its text and #446's entry records it.
 
   - number: 363
     title: "New lower bound for s(12): 7943/2000 = 3.9715 (Daniel's points re-weighted, building on Route B)"
@@ -3866,9 +3887,9 @@ issues:
       sqverify-fast captures passed here the same day, with whole-net controls refused at n19,
       n20 and n27 and failed closed at n26 on the census's then constant axis allowance, so
       their replay evidence was held. On 4 November n26's control, written again under the
-      enclosure rule of pull request 892 (think-tcsl), was refused, so the four replays are evidence, T-233
-      is V3/C3, and the lower lanes at n19, n20, n26 and n27 take 1931/400, 393/80, 1111/200
-      and 1131/200. The issue's n27 2261/400 is superseded in the same
+      enclosure rule of pull request 892 (think-tcsl), was refused, so the four replays are
+      evidence, T-233 is V3/C3, and the lower lanes at n19, n20, n26 and n27 take 1931/400,
+      393/80, 1111/200 and 1131/200. The issue's n27 2261/400 is superseded in the same
       release and stays unregistered, and its n31 597/100 is passed by the source's later
       2391/400 (T-232, not reported here).
     read_through: '2026-10-16T09:00:31Z'
@@ -4728,6 +4749,18 @@ issues:
         status: confirmed
         position: current
       beads: [think-u0av]
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6637247642
+      date: '2026-11-04'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      beads: [think-u0av]
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -4784,6 +4817,18 @@ issues:
       (125447599931, 6039 of 6039 checks; result/t-178.html and cases/37.html served), and
       edited to the one moved entry. It restates that the censuses of T-176 and T-177 stay
       with think-u0av.
+
+      The follow-up posted at 2026-11-04T17:21:29Z (issuecomment-6637247642) reports T-176's
+      move from V0/C1, reviewed, pending adoption to V3/C3, confirmed, current, after #889
+      merged (69abc507e): the complete sqverify-fast census of 2 November at all 2,073
+      directions, its whole-net 99/100 control first failed closed at the axis on the
+      constant 1e-9 allowance and refused on the rerun of 3 November under #892's enclosure
+      rule, the near-threshold control refused, and n = 39's lower lanes at 533/80, with
+      T-110 superseded. It was rendered with `check_requests --draft 446` from main at
+      69abc507e, whose Pages run 41873241652 deployed (job 126730930224) and passed its
+      verify-deployment job (126731091216, 6,064 of 6,064 checks), and edited to the one
+      moved entry; it read back identical to what was posted. It restates that T-177's
+      census stays with think-u0av. The issue stays closed.
   - number: 451
     title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
     author: franciscouzo
@@ -24991,7 +25036,8 @@ issues:
       tracking'
     author: jlevy
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-11-04'
     kind: result-report
     triage: done
     summary: >-
@@ -24999,9 +25045,10 @@ issues:
       wand125's mixed_n145_L1224, which reached the project through his watched repository
       rather than an issue, by the owner's answer of that day, "Open all nine
       (Recommended)": one issue for each pending review that had none. The result maps to
-      T-179 at V0/C1, reviewed; the complete replay, its control and a review wait for an
-      owner budget in think-u0av.
-    read_through: '2026-10-24T05:13:20Z'
+      T-179, at V0/C1, reviewed, until #889 merged on 4 November 2026 with the complete
+      replay, its control and the review its C3 needs (think-u0av): T-179 is V3/C3,
+      confirmed, current, and the issue closed with the reply that reports it.
+    read_through: '2026-11-04T17:21:39Z'
     results:
     - key: linear-n145-1224
       claim: s(n) >= 306/25 = 12.24 for n = 145 to 149, by the linear measure mixed_n145_L1224.
@@ -25027,15 +25074,36 @@ issues:
       - result: linear-n145-1224
         id: E-wand125-linear-n145-1224-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/779#issuecomment-6637251528
+      date: '2026-11-04'
+      by: jlevy
+      kind: final
+      reported:
+      - result: linear-n145-1224
+        id: T-179
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: linear-n145-1224
+        id: E-wand125-linear-n145-1224-report
     review_track: true
-    blocked:
-      type: compute
-      reason: >-
-        T-179's s(145) replay, about 37 CPU-hours, up to about 64 (think-u0av), at the
-        owner's 40 CPU-hour item cap; a compute lane runs it with a stop at the cap.
     close_when: >-
       The replay, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
+    notes: >-
+      Closed on 4 November 2026 with the final reply (issuecomment-6637251528, posted at
+      17:21:39Z), after #889 merged as 69abc507e and its Pages deployment passed (run
+      41873241652, deploy job 126730930224, verify-deployment job 126731091216, 6,064 of
+      6,064 checks). The reply was rendered with check_requests --draft 779 from that main
+      and reconciled with think-u0av's draft of 4 November, whose account of the replay
+      (the source's replay function and unchanged checker at all 201 angles, 34.2
+      CPU-hours, FULL_REPLAY_MATCHES_SHIPPED), the control at net index 35, the review of
+      14 October and the lanes at 145 to 149 it keeps; it states the report entry through
+      T-179's word. It read back identical to what was posted, and the issue was closed as
+      completed at 17:21:46Z. The blocked: compute record of 24 October is cleared with the
+      replay done, and the blocked:compute label was removed in the same edit, leaving
+      intake.
   - number: 780
     title: "T-192: Continuous-pose lower bound `s(28) > 1149/200` reported, by two of the source's programs
       — review tracking"
@@ -27706,9 +27774,18 @@ issues:
       with n-094's reported lower lane at 1993/200. On 4 November, after #892 judged the
       axis refusal by the sweep's own enclosure, the control was written again and passed
       (think-qpq0): the replay is E-ozden-890-n94-9965-sqverify-fast-replay, T-262 is
-      V3/C3, and n-094's verified lane takes 1993/200. No licence is stated; the packet
-      rests on the submission's presumption of permission, followed up on think-0so3.
-    read_through: '2026-11-04T10:46:20Z'
+      V3/C3, and n-094's verified lane takes 1993/200. The lab's comment of 17:49:05Z on 4
+      November (issuecomment-6637821113, signed "Kenaznia, for Doğa Özden") answers both
+      questions of the final reply. The licence: Doğa Özden chose CC BY 4.0 for the
+      certificates, witnesses, receipts, data and write-ups and MIT for all source code,
+      the second checker included, and the lab added LICENSE.md to each of its three
+      repositories, at kenaznia-doga/s94-lower-bound 484ad20f, s299-upper-bound 0c61a555
+      (#893) and s204-upper-bound 06b0bf99 (#894). The finer net: no side between 9.965
+      and the route's ceiling, about 9.9729, has been tried; 9.965 is the only side the lab
+      certified on the finer net. The lab also says it will correct its READMEs after the
+      review notes the final reply passed on (d529.jsonl, the quadrant wording and
+      rescale.py's growth formula).
+    read_through: '2026-11-04T19:16:34Z'
     results:
     - key: s94-dilation
       claim: >-
@@ -27742,6 +27819,17 @@ issues:
         position: current
       - result: s94-dilation
         id: E-ozden-890-n94-9965-report
+    - url: https://github.com/jlevy/squares/issues/890#issuecomment-6639777660
+      date: '2026-11-04'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s94-dilation
+        id: E-ozden-890-n94-9965-sqverify-fast-replay
+        status: confirmed
+      - result: s94-dilation
+        id: E-ozden-890-n94-9965-review-sample
+        status: recorded
     close_when: >-
       T-262 is on main at V3/C3 and the reply on main says what was replayed, that its
       whole-net control passed under the enclosure rule, that the stage 4 review accepted
@@ -27768,6 +27856,29 @@ issues:
       the sweep found that its text does not. A reply naming the two ids is therefore due,
       as on #238 after the final reply of 3 October, and no comment has been posted only
       to name them.
+      The lab's comment of 17:49:05Z on 4 November (issuecomment-6637821113) answers the
+      licence question think-0so3 followed up, for this issue and for #893 and #894
+      (think-mdxq): CC BY 4.0 for everything that is not source code and MIT for the code,
+      copyright 2026 Doğa Özden, by a LICENSE.md the lab added to each repository at
+      17:48:55Z to 17:48:57Z, one commit past each pin, byte-identical across the three,
+      the commit changing nothing else. The three packets stay at their pins and retain
+      the file as licence/LICENSE.md, and their declarations, records and READMEs state
+      the licence; intake-watch.yaml records the three reads. The comment's answer to the
+      finer-net question reports no new side, and its promise to correct the READMEs
+      changes nothing retained here. The reply that names the two evidence ids carries
+      the thanks for both answers and the licence as recorded.
+      The follow-up of 19:16:34Z on 4 November (issuecomment-6639777660), posted after
+      #905 merged as bb5bf6d54 and its Pages deployment passed (run 41892700109, deploy
+      job 126798809329, verify-deployment job 126798969579, 6,064 of 6,064 checks), is
+      that reply. It thanks the lab for both answers, records the licence for the three
+      packets with each licence commit, notes the finer-net answer, and names
+      E-ozden-890-n94-9965-sqverify-fast-replay (the complete replay, confirmed,
+      reproduced with the producer's code) and E-ozden-890-n94-9965-review-sample (the
+      review's sample, 1 of 600 directions, which sets no rung). It restates T-262 as
+      unchanged, V3/C3, confirmed and current, so `reported` lists the two evidence ids
+      the final reply did not name. It was drafted on think-0so3, checked against main
+      bb5bf6d54 (check_requests --draft 890), and read back identical to what was posted;
+      the issue stays closed.
   - number: 893
     title: 's(299) ≤ 17.801238533979: improved packing (registration request)'
     author: kenaznia-doga
@@ -27803,8 +27914,12 @@ issues:
       the packing's finder and Özden its improver, both strong generators' regularization
       of the new house and its rigidity block derived again. The posters hold Özden's name
       off their credit block until the next infographics cut (think-tj4o). The Kaggle
-      sources the issue names are no report. No licence is stated; the packet rests on
-      the submission's presumption of permission, followed up on think-mdxq.
+      sources the issue names are no report. The pin states no licence, and the packet
+      rested on the submission's presumption of permission, followed up on think-mdxq,
+      until the lab answered on #890 (issuecomment-6637821113, 17:49:05Z on 4 November):
+      CC BY 4.0 for the witness, export, outputs and write-ups and MIT for
+      verifier/sqcheck.py, by the LICENSE.md it added at 0c61a555, one commit past the
+      pin, which the packet retains.
     read_through: '2026-11-04T13:25:02Z'
     results:
     - key: n299-from-t258
@@ -27902,8 +28017,11 @@ issues:
       the new house and its rigidity block derived again. The posters hold Özden's name
       off their credit block until the next infographics cut (think-tj4o). The Kaggle
       side-only claim the issue quotes, 14.803489183116, states no packing and is no
-      report. No licence is stated; the packet rests on the submission's presumption of
-      permission, followed up on think-mdxq.
+      report. The pin states no licence, and the packet rested on the submission's
+      presumption of permission, followed up on think-mdxq, until the lab answered on
+      #890 (issuecomment-6637821113, 17:49:05Z on 4 November): CC BY 4.0 for the witness,
+      JSON, outputs and write-ups and MIT for verifier/sqcheck.py, by the LICENSE.md it
+      added at 06b0bf99, one commit past the pin, which the packet retains.
     read_through: '2026-11-04T13:25:24Z'
     results:
     - key: n204-from-t257

@@ -120,6 +120,19 @@ The source credits wand125; the commit is authored by Hiroaki Hosono.
 Its README says parts of the work were produced with AI assistance under human
 direction, and the commit names Claude Opus 5.5 as co-author.
 
+## Compressed Files
+
+| Stored file | Origin | Git blob (decompressed) | SHA-256 (decompressed) |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n29_L582/candidate.json.gz` | upstream | `ac6f7f2d2219ca1fbddd7bc5f1de7c803cccca72` | `c9171c9278271b6b4ca5fb9f925ea42a15a88e9aca7701d6542e29e38979722b` |
+
+## Original Gzip Files
+
+| Stored file | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n29_L582/check2/control-197_200.jsonl.gz` | upstream | `6b370a13e8dae232c2938efb39f2be83db99079b` | `6ceca1e90beafc30dac48a3b3a29109798412980995c741e5d9e845b968e1eaf` |
+| `release/certificates/mixed_n29_L582/check2/run.jsonl.gz` | upstream | `4d0c335c9d510e0b50201a72a6f4803f455f190e` | `6bce9a2ae9aa2616bfdc5f91704a19091765d70c23513651bcc8e345e550f171` |
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
