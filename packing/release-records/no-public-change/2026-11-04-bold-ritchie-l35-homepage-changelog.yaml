@@ -1,0 +1,33 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/devtools/overview_sections.py
+  - packing/devtools/render_changelog.py
+  - packing/devtools/render_overview.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Lane L35 (think-tdgl): the homepage's News block becomes two sections, News and a
+  Changelog section of the log's newest days, at the owner's request of 3 November 2026.
+  overview_sections.py adds changelog_preview and changelog_window over the
+  Changelog's own renderer, render_changelog.py lets changelog_entry_line leave out its
+  anchor, and render_overview.py fills the homepage's new placeholder. No paper prints
+  the homepage or the Changelog. Against main e6e8d5772 (#888): rendered into empty site
+  directories from this tree and again with that main's copies of the three paths
+  swapped in, by render_packing_methods, render_n11_optimality_review and
+  render_n11_threshold_bound_review at link revision
+  0000000000000000000000000000000000000000 and by render_n11_lower_bounds_explainer
+  --prepare-math, the math pass in the environment's chrome-headless-shell build 1243
+  (SQPACK_CHROMIUM): 69 files, all byte-identical across the two. No PDF was printed;
+  each prints from that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4
+  and v0.2.7.
