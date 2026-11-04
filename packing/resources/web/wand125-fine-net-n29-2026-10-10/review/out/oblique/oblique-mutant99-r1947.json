@@ -1,0 +1,77 @@
+{
+ "candidate": "/home/user/squares/.claude/worktrees/review-1lri/packing/resources/web/wand125-fine-net-n29-2026-10-10/release/certificates/mixed_n29_L582/candidate.json.gz",
+ "candidate_sha256": "c9171c9278271b6b4ca5fb9f925ea42a15a88e9aca7701d6542e29e38979722b",
+ "direction": 1947,
+ "scale": "99/100",
+ "bound": "intersection",
+ "domain": "full",
+ "domain_exact": [
+  "162815711/230470930",
+  "2946312754/576177325"
+ ],
+ "domain_searched_binary64": [
+  0.7064479281616991,
+  5.113552071838301
+ ],
+ "status": "REFUTED",
+ "boxes": 9636,
+ "accepted": 2219,
+ "max_depth_accepted": 20,
+ "depth_histogram": {
+  "9": 25,
+  "10": 67,
+  "11": 78,
+  "12": 144,
+  "13": 136,
+  "14": 206,
+  "15": 195,
+  "16": 297,
+  "17": 248,
+  "18": 288,
+  "19": 219,
+  "20": 316
+ },
+ "least_accepted_lower_bound": 1.000013086100147,
+ "least_accepted_box": [
+  1.6769576785514198,
+  3.206963072181334,
+  0.002151906320154718,
+  0.004303812640309436,
+  19
+ ],
+ "least_centre_estimate_at_depth_ge_20": 0.9910052304576851,
+ "least_centre_exact": {
+  "centre": [
+   "6382499901054543/9007199254740992",
+   "6382499901054543/9007199254740992"
+  ],
+  "estimate": 0.9910052304576851,
+  "exact": "11495656709301510772363711143/11599995999999998069614000000",
+  "exact_approx": 0.9910052304588306,
+  "estimate_le_exact": true,
+  "in_domain": true
+ },
+ "exact_checks": [
+  {
+   "centre": [
+    0.7085998344818537,
+    0.7085998344818537
+   ],
+   "exact": 0.9910052304588306,
+   "in_domain": true
+  }
+ ],
+ "exact_checks_count": 1,
+ "witness": {
+  "centre": [
+   "6382499901054543/9007199254740992",
+   "6382499901054543/9007199254740992"
+  ],
+  "exact_capture": "11495656709301510772363711143/11599995999999998069614000000",
+  "exact_capture_approx": 0.9910052304588306,
+  "depth": 20
+ },
+ "sum_factor": 0.9999999999988444,
+ "cpu_seconds": 7.3513790000000006,
+ "wall_seconds": 7.349663257598877
+}
