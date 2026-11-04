@@ -681,8 +681,8 @@ Ranked by gap—the best-known packing minus the verified lower bound, which is 
 | 31 | 0.0225 | grid | $6^2 - 5$, carried to $\frac{2391}{400}$ by Hosono after Tokoharu and Levy (T-232) |
 | 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
 | 94 | 0.0350 | grid | $10^2 - 6$, carried to $\frac{1993}{200}$ by Özden after Hosono, Tokoharu and Levy (T-262) |
-| 75 | 0.0600 | grid | $9^2 - 6$, carried to $\frac{447}{50}$ by Hosono after Tokoharu |
-| 19 | 0.0606 | Wainwright | $5^2 - 6$, carried to $\frac{193}{40}$ by Hosono after Tokoharu |
+| 27 | 0.0521 | Göbel | carried to $\frac{1131}{200}$ by Hosono after Tokoharu and Levy (T-233) |
+| 19 | 0.0581 | Wainwright | $5^2 - 6$, carried to $\frac{1931}{400}$ by Hosono after Tokoharu and Levy (T-233) |
 
 The $n = 17$ bound is Guzhou0806 / N17 project’s R071, continuing Overbeck’s charge
 (Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806): an exact
@@ -715,7 +715,10 @@ confirmation of Benjamin Greff’s mixed covers (T-184, T-191), the $s(95)$ cove
 $n = 96$ as well, and $n = 94$, 75 and 19 took their places.
 $n = 94$ narrowed from $0.0500$ to $0.0350$ on 2026-11-04, when the whole-net control of
 Doğa Özden’s dilation of Hosono’s certificate passed and its verified floor rose to
-$1993/200$ (T-262).
+$1993/200$ (T-262). Later that day T-233’s four fine-net replays were mapped, once its
+$n = 26$ control passed under the census’s enclosure rule: $n = 27$ entered fifth, at
+$0.0521$ from $0.0636$, $n = 19$ narrowed from $0.0606$ to $0.0581$, and $n = 75$, at
+$0.0600$, left it.
 
 With Bentz’s $s(6)$, $s(13)$ and $s(22)$, Evan Daniel’s family $s(m^2 - 3) = m$ is now
 **proved exactly for every $m \ge 3$**.

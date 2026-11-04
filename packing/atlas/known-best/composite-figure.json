@@ -482,7 +482,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3 + (4/3)sqrt(2)","minimal_polynomial":"9*s**2 - 54*s + 49 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(19) ≥ 4.825000","evidence":["E-n019-wand125-mixed-4825-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"4.825"},
+        "lower": {"correction":false,"display":"s(19) ≥ 4.827500","evidence":["E-wand125-fine-net-446-n19-48275-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"4.8275"},
         "n": 19,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
@@ -508,7 +508,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5","minimal_polynomial":"s - 5 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(20) ≥ 4.905000","evidence":["E-n020-wand125-mixed-4905-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"4.905"},
+        "lower": {"correction":false,"display":"s(20) ≥ 4.912500","evidence":["E-wand125-fine-net-446-n20-49125-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"4.9125"},
         "n": 20,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
@@ -664,7 +664,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(7/2) + (3/2)sqrt(2)","minimal_polynomial":"4*s**2 - 28*s + 31 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(26) ≥ 5.545000","evidence":["E-n026-wand125-mixed-5545-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"5.545"},
+        "lower": {"correction":false,"display":"s(26) ≥ 5.555000","evidence":["E-wand125-fine-net-446-n26-5555-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"5.555"},
         "n": 26,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
@@ -690,7 +690,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 20*s + 49 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(27) ≥ 5.643500","evidence":["E-n027-wand125-mixed-56435-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"5.6435"},
+        "lower": {"correction":false,"display":"s(27) ≥ 5.655000","evidence":["E-wand125-fine-net-n27-5655-followup-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"5.655"},
         "n": 27,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {

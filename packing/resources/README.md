@@ -991,11 +991,15 @@ geometric kernel, reports seven finer-net measure certificates for n19, n20, n26
 n28, n29 and n31. The
 [authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
 records the reported bounds and complete source references.
-Independent whole-net replay and controls remain pending.
 The [release packet](web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md)
 retains, at revision `bf85d6b` and under OR-18, the candidates, receipts and logs of the
 four certificates T-233 registers (n19, n20, n26 and the n27 follow-up), with their
 maintained premise checks.
+This repository’s census replayed those four at all 2,073 directions on 23 October, and
+their whole-net controls passed, n26’s on 4 November under the enclosure rule of #892,
+so T-233 is `V3/C3`, re-implemented sharing the producer’s components, and the four
+cases’ lower bounds are $1931/400$, $393/80$, $1111/200$ and $1131/200$. The n28, n29
+and n31 originals have no replay here.
 
 **[wand125 fine-net n29 2026-10-10]**: Hosono’s later n29 certificate, `mixed_n29_L582`,
 reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net, superseding the
