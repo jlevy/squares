@@ -5,7 +5,7 @@ title: "Validate: wand125 s(39) >= 533/80 (mixed_n39_L66625), census of all 2,07
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: bold-ritchie-l32
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m4wv27yed1e2wfnq55h1avr0
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:13.941Z
-updated_at: 2026-11-02T20:52:26.617Z
+updated_at: 2026-11-04T09:00:30.832Z
 started_at: 2026-11-02T19:05:31.040Z
 ---
 Validation part of think-u0av for n = 39 (T-175 in the 14 October records PR #602, V0/C1). Record-changing, but the whole-net control cannot pass until think-4uun lands.
@@ -38,3 +38,5 @@ Validation part of think-u0av for n = 39 (T-175 in the 14 October records PR #60
 - Control, 20:42:07Z-20:49:48Z (450 s of wall for the sweep): CONTROL_FAILED at r = 1804. The original verified again; the 99/100 mutant was refused at all 2,073 directions (summary REFUSED), 2,072 of them passing every predicate; at r = 0 the axis refusal is a coverage refusal in the domain with exact capture 0.99207... < 1 and the original at least 1, but captures_agree is false: the exact capture sits 1.26e-9 above the sweep's certified bound 0.9920712485323058, beyond AXIS_ROUNDING 1e-9. The near-threshold mutant was refused (counterexample-candidate). Kept as benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.control-failed-v2.json, as n26's (T-233) is.
 - Records: T-176's claim, artifacts, next_rung (think-tcsl), unfinished_confirmations (re-judge or rerun the control under think-tcsl's fix, 0.01-0.26 CPU-h) and notes; the packet and census-folder READMEs, coverage note, bibliography note and resources index; census views regenerated. No evidence entry: --evidence refuses a row without CONTROLS_REFUSED, and the evidence is held as T-233's n = 26 is.
 - What remains: think-tcsl (reviewed axis-allowance fix), then re-judge this receipt and map the replay evidence (the 14 October review is this certificate's review); no capture rerun. Claim kept (in progress) for the PR; not closed.
+
+2026-11-04 bold-ritchie-l32 (PR #889, b3caa7d61; re-pin 9cc8bdd1f): T-176 is V3/C3 and n39's lower lanes are 533/80, up from T-110's 133/20. bold-ritchie-l34 reran the whole-net control on 3 November (it ended at 05:28Z) under #892's enclosure rule, with the same binary 567a0fd5 and source d97758bb, and it ends CONTROLS_REFUSED. The receipt is retained as packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.control.json (sha256 d8a21aa2f11a...), beside mixed_n39_L66625.control-failed-v2.json, which is kept as history. It was judged again here under main's rule (0bc5a08c5) without rerunning, so no CPU was spent on it here. Evidence E-wand125-fine-net-n39-66625-sqverify-fast-replay is added, and check_results passes. Not closed here: the coordinator closes it when #889 merges.
