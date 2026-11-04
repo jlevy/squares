@@ -15981,7 +15981,7 @@ results:
 
       The census's axis tolerance, once a question for the owner (jlevy/squares#543), no
       longer holds T-142's whole-net control: #892 judges the axis refusal by the vertex
-      sweep's own enclosure (think-4uun). Whether the three check2 candidates of T-132,
+      sweep's own enclosure. Whether the three check2 candidates of T-132,
       T-142 and T-143 are retained in Git, as the 6 October check2 packet is, is still
       asked there.
     unfinished_confirmations:

@@ -28,12 +28,13 @@ reason: >-
   and #446's requests entry following; T-142's and T-143's next steps name their review
   (think-4ul6) and drop the axis-tolerance hold. No paper prints those counts or those
   results, and the register still holds 264 results. Against main 4d8d768bd (#902):
-  rendered into empty site directories, twice from this tree (before and after the
-  T-142 and T-143 edits) and once with that main's bound-citations.json,
+  rendered into empty site directories, three times from this tree (before the T-142
+  and T-143 edits and after each of their two passes) and once with that main's
+  bound-citations.json,
   composite-figure.json, result-requests.yaml, frontier README.md, results.yaml and
   source-coverage.yaml swapped in, by render_packing_methods,
   render_n11_optimality_review and render_n11_threshold_bound_review at link revision
   0000000000000000000000000000000000000000 and by render_n11_lower_bounds_explainer
   --prepare-math, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM): 69 files
-  each, all byte-identical across the three. No PDF was printed; each prints from that
+  each, all byte-identical across the four. No PDF was printed; each prints from that
   HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
