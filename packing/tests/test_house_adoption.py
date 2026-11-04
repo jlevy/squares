@@ -2299,14 +2299,14 @@ def _later_pending_projection(
     return f"---\n{front}---\n{body[:start]}{body[end:]}"
 
 
-#: T-179's linear lower adoption of 4 November 2026 at n = 146, whose house is that of 16
-#: October: the two paragraphs it adds, and the history it moved into the past tense, as
-#: the committed record has it and as the house pass left it.
 #: The 14 October review as the case records link it.
 REVIEW_14_OCTOBER_LINK = (
     "[mathematical review of 14 October](../../docs/project/reviews/"
     "review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md)"
 )
+#: T-179's linear lower adoption of 4 November 2026 at n = 146, whose house is that of 16
+#: October: the two paragraphs it adds, and the history it moved into the past tense, as
+#: the committed record has it and as the house pass left it.
 T179_LOWER_146_ADDED = (
     """**Linear-measure validation, 4 November 2026 (T-179).** Hosono’s
 [linear source](../resources/web/wand125-linear-n145-2026-10-13/README.md) of 13 October

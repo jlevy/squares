@@ -38,4 +38,6 @@ reason: >-
   resources at 145 to 148, n-149's paragraph order) and the merge of main 4d8d768bd
   (#902), the same renders were made again against that main with its copies of the same
   five paths swapped in: byte-identical again, 55 files for the explainer and 43 for each
-  of the others.
+  of the others. After the senior review's fixes (T-176 to T-178's claims naming #446,
+  T-110's dated rationale, T-132's next step, the n145 and n39 report entries), the same
+  renders against that main were byte-identical a third time.

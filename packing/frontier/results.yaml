@@ -11954,8 +11954,9 @@ results:
     significance:
       score: 3
       rationale: >-
-        The strongest verified lower bound on record at n = 39, by 0.015 above T-074,
-        and the strongest reported. The certificate kind of T-099 on a declared net,
+        The strongest verified lower bound on record at n = 39 when scored, by 0.015
+        above T-074, and the strongest reported (T-176 passed it on 4 November 2026). The
+        certificate kind of T-099 on a declared net,
         checked at the source by a copy of this repository's verifier rather than its
         C++ checker; no new technique, at S3 as T-096, T-099 and T-100 are.
       scored: '2026-10-06'
@@ -14273,9 +14274,10 @@ results:
       (its F1-2). The declared-net checklist admits a census row as evidence only after that
       review (its item 7), so the review, think-1lri, comes first. Since 2 November the
       candidate is retained in the packet's release/, by the owner's answer of 17 October on
-      retaining fine-net candidates where the census reads them, and the census reads it;
-      n = 29's axis gap, 5.2e-10, is inside the census's axis allowance, so its whole-net
-      control can end CONTROLS_REFUSED.
+      retaining fine-net candidates where the census reads them, and the census reads it.
+      Its whole-net control's axis refusal will be judged by the sweep's own enclosure,
+      recomputed from the candidate, the rule #892 put in place of the constant allowance,
+      as T-176's was (n = 29's axis gap was measured at 5.2e-10).
     unfinished_confirmations:
       - what: >-
           a review that reads this certificate, by the checklist of the 6 October
@@ -24433,7 +24435,7 @@ results:
       declared net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 13 October 2026 and
-      reported on no issue, proves s(39) >= 533/80 = 6.6625.
+      reported on jlevy/squares#446 on 16 October 2026, proves s(39) >= 533/80 = 6.6625.
 
       The certificate, mixed_n39_L66625, is a density of 687 uniform rectangles in D4
       orbits, 5,496 distinct rectangles after expansion, and no point mass, of total mass
@@ -24532,7 +24534,12 @@ results:
       mixed_n39_L66625.control-failed-v2.json. Its rerun of 3 November, with the same
       binary under think-4uun's rule (#892), which judges the axis refusal by the vertex
       sweep's own enclosure, ends CONTROLS_REFUSED, and was judged again here under that
-      rule without rerunning.
+      rule without rerunning. Lane L34 (bold-ritchie-l34) ran it from #892's working tree
+      before #892 merged (the evidence entry names the revision); apart from timings,
+      status, the axis run's
+      captures_agree and the sweep_enclosure field the rule adds to each refusal, it equals
+      the failed receipt, and the census tests applied the merged rule's further clauses
+      from the retained candidate.
 
       The score of 14 October was given to the claim; the complete replay of 2 November
       passed after it and leaves the score as it was. The case records' lower lanes move to
@@ -24578,7 +24585,8 @@ results:
       declared net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 13 October 2026 and
-      reported on no issue, is reported to prove s(44) >= 2799/400 = 6.9975.
+      reported on jlevy/squares#446 on 16 October 2026, is reported to prove s(44) >=
+      2799/400 = 6.9975.
 
       The certificate, mixed_n44_L69975, is a density of 606 uniform rectangles in D4
       orbits, and no point mass, of total mass 4399999/100000, on a net its candidate
@@ -24714,7 +24722,7 @@ results:
       declared net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 13 October 2026 and
-      reported on no issue, proves s(37) >= 2599/400 = 6.4975.
+      reported on jlevy/squares#446 on 16 October 2026, proves s(37) >= 2599/400 = 6.4975.
 
       The certificate, mixed_n37_L64975, is a density of 612 uniform rectangles in D4
       orbits, 4,896 distinct rectangles after expansion, and no point mass, of total mass

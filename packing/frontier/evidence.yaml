@@ -42477,7 +42477,7 @@ evidence:
       think-4uun's fix (#892) judges it, the rerun of 3 November is CONTROLS_REFUSED. The
       mathematical review of 14 October read the certificate. The shared crate establishes
       no independent implementation.
-    source_reviewed: '2026-10-14'
+    source_reviewed: '2026-11-04'
     external_review:
       state: informally-verified
       date: '2026-10-14'
@@ -42923,11 +42923,16 @@ evidence:
       enclosures are accepted (receipts/linear-premises.json). Two angles replayed here (35
       and 111) by the shipped replay function and checker from this repository's retained
       copies returned the certificate's records; that is a diagnostic, not a replay. The
-      author's complete replay (2 h 8 min at 30 workers) has no published receipt. A
-      complete replay, the route's control and a review that reads this certificate remain
-      pending under think-u0av, priced at about 37 CPU-hours. No standing bound or rating
-      changes.
-    source_reviewed: '2026-10-14'
+      author's complete replay (2 h 8 min at 30 workers) has no published receipt. The
+      complete replay here ran from 2 to 4 November 2026
+      (E-wand125-linear-n145-1224-source-replay), from the candidate and certificate
+      retained from the release asset in the packet's release/: the source's replay function
+      and unchanged checker returned the certificate's own record at all 201 angles, and the
+      route's control accepted the original and refused both mutations at net index 35
+      (receipts/n145/). The mathematical review of 14 October read the certificate. T-179
+      stands at V3/C3, and the case records at n = 145 to 149 take 306/25, in the reported
+      lane at 145 to 148 (T-180's closed form keeps it at 149).
+    source_reviewed: '2026-11-04'
     external_review:
       state: informally-verified
       date: '2026-10-14'
@@ -55189,9 +55194,15 @@ evidence:
       sweep's certified bound, beyond the census's then constant allowance of 1e-9; that
       receipt is kept as mixed_n39_L66625.control-failed-v2.json. The control named here
       is its rerun of 3 November with the same binary, which ends CONTROLS_REFUSED under
-      the enclosure rule of think-4uun (#892), judged again here without rerunning. The
-      source's own checker was not run here on this certificate, and its tarball is pinned
-      by digest and not retained.
+      the enclosure rule of think-4uun (#892), judged again here without rerunning.
+      Lane L34 (bold-ritchie-l34) ran that rerun from #892's working tree at adc153fcc,
+      before #892 merged, and it was committed here in b3caa7d61; apart from timings,
+      status, the axis run's captures_agree and the sweep_enclosure field the rule adds to
+      each refusal (null at the 2,072 oblique directions), it equals the failed receipt.
+      The merged rule's further clauses, the vertex on the sweep's event grid and a bound
+      that is None or NaN failing closed, were applied by the census tests, which recompute
+      the axis enclosure from the retained candidate. The source's own checker was not run
+      here on this certificate, and its tarball is pinned by digest and not retained.
     source_reviewed: '2026-11-04'
   - id: E-ozden-890-n94-9965-report
     claim: lower-bound

@@ -42,6 +42,10 @@ The folder keeps:
   `CONTROLS_REFUSED`, with the same three runs as the failed receipt.
   The census tests judged it again under the merged rule on 4 November without rerunning
   it, and T-176 rests on it.
+  Lane L34 ran it from #892’s working tree at `adc153fcc`, before #892 merged, and it
+  was committed here in `b3caa7d61`; apart from timings, `status`, the axis run’s
+  `captures_agree` and the `sweep_enclosure` field the rule adds to each refusal (null
+  at the 2,072 oblique directions), it equals the failed receipt beside it.
 
 All five runs used `sqverify-fast` built from the reviewed crate source `d97758bb…`
 (binary `567a0fd5…`, rustc 1.98.0, release, x86_64-unknown-linux-gnu), under
