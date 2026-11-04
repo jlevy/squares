@@ -4,8 +4,9 @@ Two commits of 10 October to wand125/square-packing add check2 measure certifica
 the 2,073-direction net of the n = 29 follow-up: `mixed_n28_L57425`, reporting
 $s(28) \ge 2297/400 = 5.7425$, and `mixed_n30_L58925`, reporting
 $s(30) \ge 2357/400 = 5.8925$. No issue reports either; the evening watch read of 10
-October found them. Both bounds remain unconfirmed here; no standing bound or rating
-changes.
+October found them. Since 4 November each bound is confirmed here by its complete
+replay and controls, re-implemented sharing the producer’s components, and holds both
+lower lanes of its case ([The Complete Replays](#the-complete-replays)).
 
 | Item | n = 28 | n = 30 |
 | --- | --- | --- |
@@ -13,7 +14,7 @@ changes.
 | Pinned revision | `36b85b9f37efa7cc5d4464805cfb0f2d21576267`, committed 2026-10-10T11:47:30Z | `ff9f2692afe7d1e65a51bb079b61b3710b97fc82`, committed 2026-10-10T14:12:31Z |
 | Release asset | `certificates__mixed_n28_L57425.tar.gz`, 627,191 bytes, SHA-256 `7d0f9107…3bf3` | `certificates__mixed_n30_L58925.tar.gz`, 638,622 bytes, SHA-256 `0d11fe05…61ba` |
 | Candidate | 631 positive rectangles, mass $2799999/100000$ | 463 positive rectangles, mass $2999999/100000$ |
-| Standing bound | T-107’s $1147/200$, both lanes; $+3/400$ | T-109’s $11767/2000$, both lanes; $+9/1000$ |
+| Standing bound on 10 October | T-107’s $1147/200$, both lanes; $+3/400$ | T-109’s $11767/2000$, both lanes; $+9/1000$ |
 | Other report | #446’s unadopted $287/50$ (`mixed_n28_L574`); $+1/400$ | none |
 
 Both declare core $4999/5000$ and the net `{"step": "1/5002", "last": 2072}`, and both
@@ -90,19 +91,48 @@ direction, and the original and the near-threshold mutant at the least-bound dir
 Both certificates together come to about 7.8 CPU-hours, above the 20 CPU-minute limit
 for a run inside an intake, so neither full net was run.
 
-## Review and Remaining Work
+## The Stage 4 Review
+
+The [mathematical review of 4 November](../../../../docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md)
+(think-4ul6) accepts both certificates, with findings F-1 to F-7, none blocking or
+major. Its programs, README and receipts are in [`review/`](review/README.md): the
+argument re-derived, every exact premise recomputed apart from the crate, direction 0
+of each net decided over its whole per-bin domain by code that shares nothing with the
+crate’s, the source’s run logs, receipts and 197/200 controls read exactly, and six
+directions of each run with the reviewed `sqverify-fast`, each row equal to the
+source’s. It decides no other direction; coverage there rests on the complete replays
+below.
 
 The source reports all 2,073 directions verified by its adaptation of this repository’s
 crate (build `ab6e33e1…`, 12 threads): in 771.6 seconds of wall for n = 28 and 1,790.1
 for n = 30. Its control scales every mass by 197/200 at 32 sampled directions and
 reports all 32 refused, 31 with an exact capture below the threshold, for each.
 These are attributed author outcomes; a sampled control does not replace the whole-net
-controls the records lane requires.
+controls below.
 
-A maintained replay must retain the complete direction outcomes of a census run, from a
-candidate retained where the census reads it, with the whole-net controls and restored
-positives, and must be followed by an independent review that reads each certificate.
-That work, with a budget for it, belongs to the import’s bead, think-i85v.
+## The Complete Replays
+
+The census route of the 6 October soundness review is a capture at every direction and
+the whole-net controls. The census read each candidate from `release/` and ran on 4
+November, after the review, one count at a time at two threads: each capture passed at
+all 2,073 directions, and `devtools.fine_net_followup capture-agreement` finds each
+direction’s node count and least certified bound equal to the source’s check2 log
+([n = 28](receipts/capture-agreement-n28.json),
+[n = 30](receipts/capture-agreement-n30.json)). Both whole-net controls were refused,
+the axis legs judged by #892’s enclosure rule: n = 28’s 99/100 axis gap,
+$2.15 \times 10^{-9}$ (the review’s F-7), would have failed the census’s former constant allowance
+of $10^{-9}$. The receipts are in
+[the census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md).
+The two replays are evidence, with the stage 4 review as their audit record: T-142 and
+T-143 are V3/C3, and the case records at n = 28 and 30 take their values in both lower
+lanes.
+
+The two cost 5.5 CPU-hours at two threads: 17,764 CPU-seconds of capture (7,096.9
+and 10,667.1) and 2,096 of control (1,111 and 985), in 2.97 hours of wall. think-i85v
+had priced them at 3.28 to 4.5 and 4.49 to 6.1 CPU-hours, 7.8 to 10.6 in all. The
+captures ran 20 and 32 percent above the central price, near its upper end, as the
+preparation lane’s smoke run of 11 October had said; the controls, priced as large
+as the captures, took 16 and 9 percent of them.
 
 ## Sources and Notices
 

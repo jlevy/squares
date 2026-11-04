@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **235** programs: **53** external and **182** first-party; **156** decide claims and **79** check premises.
-- **691** of **874** evidence entries name the programs that verified them: 325 independently re-implemented, 294 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **695** of **878** evidence entries name the programs that verified them: 327 independently re-implemented, 294 reproduced with the producer’s code, 53 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -173,7 +173,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 4 | 4 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 169 | 33 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 171 | 35 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 8 | 8 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 12 | 11 |
@@ -244,9 +244,9 @@ second implementation agrees.
 | [`V-wand125-446-review-premises`](#v-wand125-446-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-wand125-446-review-axis-decision`](#v-wand125-446-review-axis-decision) | axis_decide.py (with t233lib.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-wand125-446-review-exact-capture`](#v-wand125-446-review-exact-capture) | t233lib.exact_capture | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-wand125-n28-n30-review-premises`](#v-wand125-n28-n30-review-premises) | check_candidate.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-wand125-n28-n30-review-exact-capture`](#v-wand125-n28-n30-review-exact-capture) | fine_net_exact.capture | Squares Project (Levy) | first-party | decides | 0 | 0 |
-| [`V-wand125-n28-n30-review-axis-decision`](#v-wand125-n28-n30-review-axis-decision) | axis_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-wand125-n28-n30-review-premises`](#v-wand125-n28-n30-review-premises) | check_candidate.py | Squares Project (Levy) | first-party | premises | 2 | 0 |
+| [`V-wand125-n28-n30-review-exact-capture`](#v-wand125-n28-n30-review-exact-capture) | fine_net_exact.capture | Squares Project (Levy) | first-party | decides | 2 | 0 |
+| [`V-wand125-n28-n30-review-axis-decision`](#v-wand125-n28-n30-review-axis-decision) | axis_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 2 | 0 |
 | [`V-review-1023-n31-premises`](#v-review-1023-n31-premises) | premises.py and net.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-review-1023-n31-capture`](#v-review-1023-n31-capture) | capture.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-kaggle-268-304-review-check`](#v-kaggle-268-304-review-check) | t241_t242_exact.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
@@ -3167,6 +3167,8 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-n039-wand125-mixed-665-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-110 |
 | `E-n041-wand125-mixed-6775-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-111 |
 | `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | not recorded | T-133 |
+| `E-wand125-fine-net-n28-57425-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-142 |
+| `E-wand125-fine-net-n30-58925-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-143 |
 | `E-n040-guzhou-continuous-pose-crate-axis` | audited here | independently re-implemented | not recorded | T-145 |
 | `E-n040-guzhou-new-supports-crate-axis` | audited here | independently re-implemented after reading the producer’s code | full: the near-axis statement at side 249329659/250000000, decided by sqverify-fast's exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with the 401-direction necessary condition at side 3350/3359 over all 401 directions | T-157 |
 | `E-wand125-fine-net-n108-1062-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-216 |
@@ -4397,7 +4399,10 @@ Recomputes, apart from the crate and the tools, every exact premise of a check2 
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-4ul6 of the wand125 n28 and n30 import (think-i85v), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits name Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of their own that import nothing from the crate, the tools or the source.
 - Note: Written and run on 4 November 2026 by the stage 4 review of T-142 and T-143 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md, its section 10); kept in the n28 and n30 packet's review/ with its README and receipts.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n28-57425-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 2,073: net directions, direction 0 decided over its whole per-bin domain | - |
+| `E-wand125-fine-net-n30-58925-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 2,073: net directions, direction 0 decided over its whole per-bin domain | - |
 
 ### `V-wand125-n28-n30-review-exact-capture`
 
@@ -4411,7 +4416,10 @@ The exact mass a closed core at a given centre and net angle captures from a for
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-4ul6 of the wand125 n28 and n30 import (think-i85v), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits name Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of their own that import nothing from the crate, the tools or the source.
 - Note: Written and run on 4 November 2026 by the stage 4 review of T-142 and T-143; kept in the n28 and n30 packet's review/ with its README and receipts.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n28-57425-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 2,073: net directions, direction 0 decided over its whole per-bin domain | - |
+| `E-wand125-fine-net-n30-58925-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 2,073: net directions, direction 0 decided over its whole per-bin domain | - |
 
 ### `V-wand125-n28-n30-review-axis-decision`
 
@@ -4425,7 +4433,10 @@ Decides direction 0 of a format M certificate over its whole per-bin domain [1/2
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-4ul6 of the wand125 n28 and n30 import (think-i85v), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits name Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of their own that import nothing from the crate, the tools or the source.
 - Note: Written and run on 4 November 2026 by the stage 4 review of T-142 and T-143; kept in the n28 and n30 packet's review/ with its README and receipts.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n28-57425-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 2,073: net directions, direction 0 decided over its whole per-bin domain | - |
+| `E-wand125-fine-net-n30-58925-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 2,073: net directions, direction 0 decided over its whole per-bin domain | - |
 
 ### `V-review-1023-n31-premises`
 

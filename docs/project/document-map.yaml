@@ -609,6 +609,7 @@ documents:
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/README.md, role: source-index, authority: record, lifecycle: retained}

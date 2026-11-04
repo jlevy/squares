@@ -8427,10 +8427,14 @@ issues:
     results: []
     asks:
     - what: Complete first-party replays of T-142 and T-143, with the whole-net control and a review.
-      state: queued
+      state: done
       source: body
       bead: think-i85v
-      blocked_on: [think-ux1v]
+      note: >-
+        Done 4 November 2026: the complete sqverify-fast censuses of mixed_n28_L57425 and
+        mixed_n30_L58925 at all 2,073 directions, their whole-net controls refused, and the
+        stage 4 review (think-4ul6) accepted both; T-142 and T-143 are V3/C3. Their tracking
+        issues, #776 and #777, carry the replies.
     - what: The complete linear replay and control of T-144, carried to n = 122 to 126, with a
         review.
       state: queued
@@ -8456,8 +8460,9 @@ issues:
     blocked:
       type: compute
       reason: >-
-        First-party replays of T-142, T-143, T-144 and T-132 on the owner's budget of 11
-        October (think-i85v, think-nd7g, think-r333); a compute lane runs them.
+        First-party replays of T-144 and T-132 on the owner's budget of 11 October
+        (think-nd7g, think-r333); a compute lane runs them. T-142's and T-143's ran on 4
+        November (think-i85v).
     close_when: >-
       Each replay's receipts and controls are retained in its packet, a review accepts them,
       the four register entries on main record the replays and their rungs, and #446 has a
@@ -24990,7 +24995,10 @@ issues:
       rather than an issue, by the owner's answer of that day, "Open all nine
       (Recommended)": one issue for each pending review that had none. The result maps to
       T-142 at V0/C0, recorded; the complete census, its whole-net control and a review are
-      queued in think-i85v after think-ux1v, and are an ask on #532.
+      queued in think-i85v after think-ux1v, and are an ask on #532. On 4 November 2026 the
+      stage 4 review (think-4ul6) accepted the certificate, and the complete census and its
+      whole-net control passed (think-i85v), so T-142 is V3/C3 and the case record at
+      n = 28 takes 2297/400 in both lower lanes; the reply that reports the rungs is owed.
     read_through: '2026-10-24T05:13:16Z'
     results:
     - key: mixed-n28-57425
@@ -25000,6 +25008,7 @@ issues:
       - T-142
       evidence:
       - E-wand125-fine-net-n28-57425-report
+      - E-wand125-fine-net-n28-57425-sqverify-fast-replay
     beads:
     - think-i85v
     - think-ux1v
@@ -25019,11 +25028,6 @@ issues:
         id: E-wand125-fine-net-n28-57425-report
         status: recorded
     review_track: true
-    blocked:
-      type: compute
-      reason: >-
-        T-142's census and whole-net control, about 3.3 CPU-hours, up to about 4.5
-        (think-i85v), then its review; a compute lane runs it.
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -25041,7 +25045,10 @@ issues:
       rather than an issue, by the owner's answer of that day, "Open all nine
       (Recommended)": one issue for each pending review that had none. The result maps to
       T-143 at V0/C0, recorded; the complete census, its whole-net control and a review are
-      queued in think-i85v after think-ux1v, and are an ask on #532.
+      queued in think-i85v after think-ux1v, and are an ask on #532. On 4 November 2026 the
+      stage 4 review (think-4ul6) accepted the certificate, and the complete census and its
+      whole-net control passed (think-i85v), so T-143 is V3/C3 and the case record at
+      n = 30 takes 2357/400 in both lower lanes; the reply that reports the rungs is owed.
     read_through: '2026-10-24T05:13:18Z'
     results:
     - key: mixed-n30-58925
@@ -25051,6 +25058,7 @@ issues:
       - T-143
       evidence:
       - E-wand125-fine-net-n30-58925-report
+      - E-wand125-fine-net-n30-58925-sqverify-fast-replay
     beads:
     - think-i85v
     - think-ux1v
@@ -25070,11 +25078,6 @@ issues:
         id: E-wand125-fine-net-n30-58925-report
         status: recorded
     review_track: true
-    blocked:
-      type: compute
-      reason: >-
-        T-143's census and control, about 4.5 CPU-hours, up to about 6.1 (think-i85v), then
-        its review; a compute lane runs it.
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.

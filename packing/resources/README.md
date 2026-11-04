@@ -1018,8 +1018,11 @@ The [authored factual packet](web/wand125-fine-net-n28-n30-2026-10-10/README.md)
 revisions `36b85b9` and `ff9f269` and their release assets by digest, with the
 maintained premise checks and diagnostic eight-direction samples; since 4 November it
 retains, under OR-18, each asset’s candidate, receipts and logs.
-T-142 and T-143 record them at V0/C0; a review that reads them, a complete replay and
-whole-net controls remain pending.
+The
+[stage 4 review of 4 November](../../docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md)
+accepts both, and the complete census replays of that day, with their whole-net
+controls, confirm them: T-142 and T-143 are V3/C3 and hold both lower lanes at n = 28
+and 30.
 
 **[wand125 fine-net n31 2026-10-11]**: Hosono’s n31 certificate, `mixed_n31_L59775`,
 reports $s(31) \ge 2391/400 = 5.9775$ on the same 2,073-direction net, above both lower
@@ -1830,7 +1833,8 @@ and by `contpose_check3` around Guzhou0806’s T-145 kernels;
 [packet](web/wand125-continuous-n28-2026-10-15/README.md).
 The directory’s MIT documents and `check2`’s source are retained, and the release asset
 is pinned by size and SHA-256 and kept outside Git.
-T-192 records the claim at V0/C0, after T-142, pending a complete replay and review.
+T-192 records the claim, after T-142, pending a complete replay; T-142 holds both lower
+lanes at n = 28 since 4 November.
 The source says parts of the work were produced with AI assistance under human
 direction.
 

@@ -4408,7 +4408,7 @@ sources:
   scope:
     n_values:
     - 28
-  reviewed: '2026-10-10'
+  reviewed: '2026-11-04'
   source_date: '2026-10-10'
   disposition: current-report
   replay_disposition: case-specific
@@ -4416,13 +4416,17 @@ sources:
   - resources/web/wand125-fine-net-n28-n30-2026-10-10/README.md
   evidence:
   - E-wand125-fine-net-n28-57425-report
-  notes: The reported 2297/400 at n28 is above T-107's 1147/200 and the issue-446 report of 287/50;
-    both standing claims and the seven-case packet are unchanged. Complete release-asset and document
+  - E-wand125-fine-net-n28-57425-sqverify-fast-replay
+  notes: >-
+    The reported 2297/400 at n28 is above T-107's 1147/200 and the issue-446 report of 287/50,
+    which keep their claims; the seven-case packet is unchanged. Complete release-asset and document
     custody and the exact mass, declared-net and check2 premises are accepted; an eight-direction
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
     supply a maintained capture or whole-net controls. The release members are retained in the packet's
-    release/ since 4 November 2026. The review that reads the certificate (think-4ul6), replay and
-    adoption remain under think-i85v.
+    release/ since 4 November 2026. The stage 4 review of 4 November (think-4ul6) read the
+    certificate and accepted it, and the complete sqverify-fast capture here that day passed at
+    all 2,073 directions with its whole-net controls refused (think-i85v), so the replay is
+    evidence, T-142 is V3/C3 and both lower lanes at n28 take the value.
 - id: wand125-fine-net-n30-58925-2026-10-10
   title: Hosono reported n30 fine-net lower bound, no issue
   role: source-repository
@@ -4432,7 +4436,7 @@ sources:
   scope:
     n_values:
     - 30
-  reviewed: '2026-10-10'
+  reviewed: '2026-11-04'
   source_date: '2026-10-10'
   disposition: current-report
   replay_disposition: case-specific
@@ -4440,12 +4444,17 @@ sources:
   - resources/web/wand125-fine-net-n28-n30-2026-10-10/README.md
   evidence:
   - E-wand125-fine-net-n30-58925-report
-  notes: The reported 2357/400 at n30 is above T-109's 11767/2000, which is unchanged. Complete
-    release-asset and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
-    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
+  - E-wand125-fine-net-n30-58925-sqverify-fast-replay
+  notes: >-
+    The reported 2357/400 at n30 is above T-109's 11767/2000, which keeps its claim. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted. An eight-direction maintained sample is diagnostic, and the author's full positives
+    and 32-direction controls do not
     supply a maintained capture or whole-net controls. The release members are retained in the packet's
-    release/ since 4 November 2026. The review that reads the certificate (think-4ul6), replay and
-    adoption remain under think-i85v.
+    release/ since 4 November 2026. The stage 4 review of 4 November (think-4ul6) read the
+    certificate and accepted it, and the complete sqverify-fast capture here that day passed at
+    all 2,073 directions with its whole-net controls refused (think-i85v), so the replay is
+    evidence, T-143 is V3/C3 and both lower lanes at n30 take the value.
 - id: wand125-fine-net-n31-59775-2026-10-11
   title: Hosono reported n31 fine-net lower bound, no issue
   role: source-repository
@@ -7368,8 +7377,8 @@ sources:
   represented_by: [resources/web/wand125-continuous-n28-2026-10-15/README.md]
   evidence: [E-wand125-continuous-n28-5745-report]
   notes: >-
-    The reported 1149/200 at n28 is above T-142's reported 2297/400, #446's 287/50 and
-    T-107's 1147/200, which stands in both lanes. Complete release-asset and document
+    The reported 1149/200 at n28 is above T-142's 2297/400, which stands in both lanes
+    since 4 November, #446's 287/50 and T-107's 1147/200. Complete release-asset and document
     custody, the exact premises and the binding of check2's kernel inputs to the
     candidate are accepted; a diagnostic sample of both programs is not a replay. Replay
     and adoption remain under think-zb5w. T-192 records it.
