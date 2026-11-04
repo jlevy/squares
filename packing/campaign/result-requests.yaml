@@ -1817,6 +1817,35 @@ issues:
             confirmation: C3
             status: confirmed
             position: superseded
+      - url: https://github.com/jlevy/squares/issues/366#issuecomment-6641890934
+        date: '2026-11-04'
+        by: jlevy
+        kind: follow-up
+        reported:
+          - result: check2-t-103
+            id: T-103
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: superseded
+          - result: check2-t-104
+            id: T-104
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: superseded
+          - result: check2-t-105
+            id: T-105
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: superseded
+          - result: check2-t-106
+            id: T-106
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: superseded
     close_when: >-
       The s(18) certificate is confirmed or refuted and the reply saying so is posted from
       main, and the offered sqverify_fast change is taken in or declined; and the two
@@ -1836,6 +1865,18 @@ issues:
       and its Pages deployment passed (run 41892700109, 6,064 of 6,064 checks), modelled
       on #824's follow-up (#902), checked against main bb5bf6d54 (check_requests --draft
       366), and read back identical to what was posted; the issue stays closed. T-176 is
+      #446's result, so the reply names it in its text and #446's entry records it.
+
+      The follow-up of 4 November (issuecomment-6641890934, 20:55:46Z) brings the 31
+      October follow-up's positions for T-103 to T-106 up to date: each still V3/C3,
+      confirmed, and superseded at n = 19, 20, 26 and 27 by T-233, Hosono's fine-net
+      certificates mixed_n19_L48275, mixed_n20_L49125, mixed_n26_L5555 and
+      mixed_n27_L5655 from #446 (1931/400, 393/80, 1111/200 and 1131/200), confirmed at
+      V3/C3 by #903 (merged as c03183f66), with both lower lanes at each count at T-233's
+      values. It was posted after the Pages deployment of c03183f66 passed (run
+      41905703947, deploy job 126843142200, verify-deployment job 126843527100), modelled
+      on the T-110 follow-up above, checked against main c03183f66 (check_requests --draft
+      366), and read back identical to what was posted; the issue stays closed. T-233 is
       #446's result, so the reply names it in its text and #446's entry records it.
 
   - number: 363
@@ -4761,6 +4802,47 @@ issues:
         status: confirmed
         position: current
       beads: [think-u0av]
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6641775572
+      date: '2026-11-04'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n19
+        id: T-233
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-n20
+        id: T-233
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-n26
+        id: T-233
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-n27-5655-followup
+        id: T-233
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-n19
+        id: E-wand125-fine-net-446-n19-48275-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-n20
+        id: E-wand125-fine-net-446-n20-49125-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-n26
+        id: E-wand125-fine-net-446-n26-5555-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-n27-5655-followup
+        id: E-wand125-fine-net-n27-5655-followup-sqverify-fast-replay
+        status: confirmed
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -4829,6 +4911,22 @@ issues:
       verify-deployment job (126731091216, 6,064 of 6,064 checks), and edited to the one
       moved entry; it read back identical to what was posted. It restates that T-177's
       census stays with think-u0av. The issue stays closed.
+
+      The follow-up posted at 2026-11-04T20:50:14Z (issuecomment-6641775572) reports
+      T-233's move from V0/C1, reviewed, pending adoption to V3/C3, confirmed, current, at
+      n19, n20, n26 and the n27 follow-up, after #903 merged (c03183f66): the complete
+      sqverify-fast censuses of 23 October at all 2,073 directions, each with the source's
+      node total, their whole-net 99/100 and near-threshold controls refused, n26's first
+      failed closed at the axis on the constant 1e-9 allowance and refused on the rerun of
+      4 November under #892's enclosure rule, and the lower lanes at 1931/400, 393/80,
+      1111/200 and 1131/200, with T-103 to T-106 superseded. It names the four replay
+      evidence entries, each now confirmed; they were added to the comment by an edit at
+      20:51:34Z, before this record, since a reply may record only ids its text names
+      (#900). It was rendered with
+      `check_requests --draft 446` from main at c03183f66, whose Pages run 41905703947
+      deployed (job 126843142200) and passed its verify-deployment job (126843527100), and
+      edited to the one moved entry; it read back identical to what was posted. The issue
+      stays closed.
   - number: 451
     title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
     author: franciscouzo
@@ -27633,7 +27731,7 @@ issues:
       record, data and code, and the code may also be used under MIT, as with v5. It also
       names his preprint doi:10.20944/preprints202610.2669.v1 as the citation for the
       two-strip records.
-    read_through: '2026-11-01T16:26:36Z'
+    read_through: '2026-11-04T20:34:45Z'
     results:
     - key: filled-end-v2
       claim: >-
@@ -27692,6 +27790,13 @@ issues:
       reported:
       - result: filled-end-v2
       beads: [think-llit]
+    - url: https://github.com/jlevy/squares/issues/847#issuecomment-6641911906
+      date: '2026-11-04'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: filled-end-v2
+      beads: [think-llit]
     close_when: >-
       The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
       checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
@@ -27741,6 +27846,18 @@ issues:
       twelfth place, so the record uses side_exact or a decimal rounded up from it; and
       says no row is recorded yet, the rows waiting on the walk above 1024 (think-llit) and
       the owner's D4, and V1.0's also on Q-847a.
+
+      The author's comment of 20:34:45Z on 4 November (issuecomment-6641453705) announces
+      a second preprint, "Structure-Guided Search for Packing Unit Squares in a Square:
+      Empirical Regularities of Best-Known Packings and Their Use as Search Priors",
+      doi:10.20944/preprints202611.0242.v1, on recurring strip, band and island structure
+      in best-known packings used as search priors. It reports no result, so nothing is
+      imported and no bead is created; like the first preprint, it is pinned by its DOI
+      alone and enters bibliography.yaml with the first row that cites it. Reading it into
+      read_through on a later day than the last reply made a reply due, and the follow-up
+      of 20:56:49Z (issuecomment-6641911906) acknowledges it, says so, and restates that no
+      V2.0 or V1.0 row is recorded yet, the rows waiting on the walk above 1024
+      (think-llit) and the owner's decision on V1.0.
   - number: 890
     title: "s(94) ≥ 1993/200 = 9.965 (dilation of Hosono's mixed_n94_L995 on a finer net): registration request"
     author: kenaznia-doga
