@@ -2299,6 +2299,105 @@ def _later_pending_projection(
     return f"---\n{front}---\n{body[:start]}{body[end:]}"
 
 
+#: T-179's linear lower adoption of 4 November 2026 at n = 146, whose house is that of 16
+#: October: the two paragraphs it adds, and the history it moved into the past tense, as
+#: the committed record has it and as the house pass left it.
+#: The 14 October review as the case records link it.
+REVIEW_14_OCTOBER_LINK = (
+    "[mathematical review of 14 October](../../docs/project/reviews/"
+    "review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md)"
+)
+T179_LOWER_146_ADDED = (
+    """**Linear-measure validation, 4 November 2026 (T-179).** Hosono’s
+[linear source](../resources/web/wand125-linear-n145-2026-10-13/README.md) of 13 October
+gives $s(145) \\ge 306/25 = 12.24$ by the certificate `mixed_n145_L1224`: a measure of
+594 point, 1,541 segment and 9 rectangle orbits under D4, of total mass
+$14499999/100000 < 145$, on T-080’s net of 201 half-angles at core side $9977/10000$,
+checked by T-080’s checker. Its mass is below 146, so the bound holds here as well. Its
+complete replay here, from 2 November 2026 to 4 November 2026, returned the
+certificate’s own record at all 201 angles, the route’s control refused two mutated
+measures, and the
+"""
+    + REVIEW_14_OCTOBER_LINK
+    + """
+accepted the argument: it raises both lower lanes here, the verified from Karakuş’s
+$12.086630$ and the reported from Green’s $12.21386694779$, which DS7 reports and which
+has no recovered proof. It is confirmed by reproduction with the producer’s code; no
+second implementation stands beside it. Hosono’s README says parts of the work were
+produced with AI assistance under human direction.""",
+    """The verified field rests on the complete replay here of Hosono’s linear certificate for
+[145 squares](n-145.md) ([`E-wand125-linear-n145-1224-source-replay`](evidence.yaml),
+`V3/C3`): all 201 directions, from 2 November 2026 to 4 November 2026, each returning
+the certificate’s own record. Its mass, $14499999/100000$, is below 146, so a packing of
+146 at a side below $306/25$ would capture at least 146 from it.""",
+)
+T179_LOWER_146_HISTORY = (
+    (
+        "and the strongest lower bound then independently verified here was $12.086630$",
+        "and the strongest lower bound independently verified here is $12.086630$",
+    ),
+    (
+        (
+            "Until 4 November 2026 the verified lower bound was Karakuş’s general bound, which "
+            "applies"
+        ),
+        (
+            "The strongest lower bound independently verified in this record is Karakuş’s "
+            "general bound, which applies"
+        ),
+    ),
+    (
+        (
+            "it was the reported lower bound here until 4 November 2026, when T-179’s replayed "
+            "$306/25$, above it, took both lower lanes."
+        ),
+        "it does not replace the verified bound above.",
+    ),
+)
+T179_RESOURCE = {
+    "key": "[wand125 linear n145 2026-10-13]",
+    "role": "lower-bound-proof",
+    "local": "web/wand125-linear-n145-2026-10-13",
+    "url": (
+        "https://github.com/wand125/square-packing/tree/"
+        "22f06b31a9295c8185be5d30a1a7b19982b16847/problems/"
+        "square-lower-bounds/certificates/mixed_n145_L1224"
+    ),
+    "retrieved": True,
+}
+
+
+def _t179_lower_projection(held: dict[str, Any], wrote: dict[str, Any], body: str) -> str:
+    """Check T-179's lower adoption at 146, then compare the house layer below it.
+
+    T-179's replayed linear certificate raised both lower lanes at 146 on 4 November
+    2026, after the house pass of 16 October wrote the record; the writer owns neither
+    lane, so the adoption is checked exactly and projected out.
+    """
+    replay = "E-wand125-linear-n145-1224-source-replay"
+    assert held["source_reviewed"] == "2026-11-04"
+    assert held["reported_lower_bound"]["exact_form"] == "306/25"
+    assert held["verified_lower_bound"] == {
+        "value": "12.24",
+        "exact_form": "306/25",
+        "evidence": [replay],
+    }
+    added = ["E-wand125-linear-n145-1224-report", replay]
+    assert [e for e in held["evidence"] if e not in added] == wrote["evidence"]
+    assert all(held["evidence"].count(e) == 1 for e in added)
+    assert held["resources"] == [T179_RESOURCE, *wrote["resources"]]
+    for key in ("source_reviewed", "evidence", "resources"):
+        held[key] = wrote[key]
+    for addition in T179_LOWER_146_ADDED:
+        words = _flat(addition)
+        assert body.count(words) == 1, f"n=146: {words[:60]}"
+        body = body.replace(words, "", 1)
+    for current, prior in T179_LOWER_146_HISTORY:
+        assert body.count(current) == 1, f"n=146: {current}"
+        body = body.replace(current, prior, 1)
+    return _flat(body)
+
+
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     replayed: list[adopt.Move],
 ) -> None:
@@ -2342,6 +2441,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
             historical_body = _n108_later_lower_projection(held, wrote, historical_body)
         elif move.n in FINE_NET_LOWER_19_OCTOBER:
             historical_body = _fine_net_lower_projection(move.n, held, wrote, historical_body)
+        elif move.n == 146:
+            historical_body = _t179_lower_projection(held, wrote, historical_body)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"
         body = _flat(committed.split("---\n", 2)[2])

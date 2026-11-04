@@ -234,8 +234,9 @@ def test_a_correcting_bound_keeps_its_recency_and_names_what_it_corrects(
     # in parallel took 40 of the corrected floors, none of them correcting anything; 220
     # since the second merge that day, when T-080's replayed certificate took n = 101 to 105;
     # 219 since the third, when T-076's replayed linear certificate took n = 82.
-    # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108.
-    assert len(corrected) == 218
+    # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108; 213
+    # since 4 November, when T-179's replayed linear certificate took n = 145 to 149.
+    assert len(corrected) == 213
     seen = 0
     for attributes, cells in rows:
         n = int(attributes["data-n"] or 0)
@@ -310,11 +311,11 @@ UNREAD_PROOF_CASES = (6, 10, 22)
 #: The cases whose reported lower bound is a value of Green's DS7 Theorem 9, whose
 #: illustrated argument leaves a unit square empty (`devtools.check_green_ds7`), above
 #: the verified floor. Thirty on 2026-10-06; on 2026-10-14 wand125's closed form (T-180)
-#: took the reported lane at 173, 261 and 294.
+#: took the reported lane at 173, 261 and 294; on 2026-11-04 T-179's replayed linear
+#: certificate took it at 145 to 148.
 GREEN_THEOREM_9 = frozenset(
     {
         *range(122, 126),
-        *range(145, 149),
         *range(170, 173),
         *range(197, 201),
         *range(226, 230),
