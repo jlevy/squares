@@ -5,7 +5,7 @@ title: "Validate: wand125 s(145) >= 306/25 (mixed_n145_L1224), linear replay of 
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l32
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m4wv27yed1e2wfnq55h1avr0
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:16.293Z
-updated_at: 2026-11-04T06:00:34.655Z
+updated_at: 2026-11-04T14:17:57.132Z
 started_at: 2026-11-02T19:05:32.040Z
 ---
 Validation part of think-u0av for n = 145 (T-179 in the 14 October records PR #602, s(145) to s(149), V0/C1). Record-changing at 145-149.
@@ -37,3 +37,5 @@ Validation part of think-u0av for n = 145 (T-179 in the 14 October records PR #6
 2026-11-04 bold-ritchie-l32: the first replay run (from 2026-11-02T20:51Z, two workers) replayed 50 of 201 angles, each LINEAR_ANGLE_REPLAYED with the certificate's own record (73,124 CPU-s in rows), before the container restarted at about 2026-11-03T07:51Z with two angles 30 s in flight (at most 59 CPU-s lost). Receipts committed at b61832a10 (16 angles) and 3308870e0 (50 angles and the second run's header). Lane ledger under the 40 CPU-hour cap, upper bounds: T-176 capture 11,404.3 + control <= 922; preparation (two linear-fetch, linear-audit, capture-agreement, retain) <= 160; T-179 run 1 preparation 72 + rows 73,124 + lost 59: 85,741 CPU-s spent, 58,259 left. Resumed 2026-11-04T04:58:17Z (run 2026-11-04T04:59:38Z-4304, 151 angles to do, bundle re-pinned and re-bound, all inputs enclosing the candidate) with --stop-after-hours 7.78 at two workers, which keeps the replay, a worst-case in-flight overrun and the linear-control under the cap. Measured ratio to the source's CPU: 1.189 over the first 50 angles (1.10 over the last 20); the 151 left are 47,820 source-seconds, about 52,600 to 56,900 CPU-s here.
 
 2026-11-04T06:00Z bold-ritchie-l32, progress (live; claim held): lane CPU against the 40 CPU-hour cap, upper bounds: 24.9 CPU-h recorded (T-176 census 3.17 + control <= 0.26; preparation <= 0.04; T-179 replay 21.38 in receipt rows, run preparations 0.04, 59 s lost at the 3 November container restart) plus about 0.5 in flight. T-179 (think-v511): 56 of 201 angles replayed, every one the certificate's own record; resumed 2026-11-04T04:59Z at two workers; 145 angles left, about 14.2 CPU-h at the measured 1.17 of the source's CPU, then the route's control (minutes), about 39.2 of 40 in all. Expected replay finish about 14:00 to 16:00Z today on this shared host (load near 10), then merge, control and records in PR #889; if the cap arrives first the replay stops there and is recorded as partial. T-132 (think-r333): not run in this lane, as recorded on 2 November: the cap goes to T-179, and its census evidence waits on the stage 4 review think-1lri; its inputs are retained (219bc1268) and its record corrected (df08c632b).
+
+2026-11-04 bold-ritchie-l32 (PR #889; receipts 5cb802aa2, records 1f89a7f49, head c6ac84914): T-179 is V3/C3. linear-replay n145 replayed all 201 angles, each returning the certificate's own record, in three runs of two workers: the first from 2 November 20:51Z to the container restart of 3 November, the second from 04:59Z on 4 November to its wall stop at 12:47Z, the third from 12:48Z to 13:21Z. That came to 34.191 CPU-hours in rows, 3,073.9 CPU-seconds of them at the axis. linear-merge n145 gives FULL_REPLAY_MATCHES_SHIPPED and --check gives RECEIPT_MATCHES. linear-control n145 gives CONTROLS_REFUSED at index 35: the original was accepted and both mutations refused. Evidence E-wand125-linear-n145-1224-source-replay is added. The verified lanes at n = 145 to 149 and the reported lanes at 145 to 148 take 306/25; at 149, T-180's larger closed form keeps the reported lane. The lane spent about 37.8 CPU-hours of measured compute against the 40 cap (T-176 census 3.4, T-179 replay 34.2, its control and preparations under 0.2), with local validation besides. Not closed here.
