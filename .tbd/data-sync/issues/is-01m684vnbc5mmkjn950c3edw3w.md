@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 123
+version: 124
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -49,7 +49,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T04:57:44.685Z
+updated_at: 2026-11-04T05:01:36.047Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -219,3 +219,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-03 06:52: renewal. Sweep intake49 (only #890, owned); no new issues since 05:50Z. Running: L35 homepage, L33 #891 addressing, L34 #892 addressing, L32 s(145).
 
 2026-11-04 04:53: the account weekly usage limit stopped all lanes ~07:00Z 3 Nov until the 04:00Z 4 Nov reset (21 hourly renewals missed; container restarts killed the s(145) replay). Resumed L32 (#889, T-179 from its ledger), L33 (#891 addressing), L34 (#892 addressing), L35 (homepage). New issues #893 (s(299) Özden), #894 (s(204) Özden), #895 (s(260) Kaelan Yim, attachment-only) labelled intake; L36 runs their intake.
+
+2026-11-04: #891 merged (ca3a171bb), which imports T-262 Özden s(94) >= 1993/200 at V0/C1 with the stage-4 review accepted; think-222u closed. Open lanes: L32 #889 (s(145), s(29)), L34 #892 (axis enclosure), L35 (homepage News+Changelog), L36 (#893-#895 intake).
