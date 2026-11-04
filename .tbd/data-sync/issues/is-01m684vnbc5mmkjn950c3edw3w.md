@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 148
+version: 149
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T21:54:55.193Z
+updated_at: 2026-11-04T22:54:45.909Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -261,3 +261,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 20:52 renewal (intake65): #903 merged (c03183f66; T-233 V3/C3 at 19, 20, 26, 27; retained-tables tool; retained_data check passes on all 7 packets). L46 posted the #446 T-233 follow-up; also given #366 follow-up (T-103-T-106 superseded), #847 read (Karimi second preprint, no result) and 2 Özden README-only repo reads. L42: n28 capture VERIFIED, n30 running, follow-up PR on l45. Strong-max T-132 review running.
 
 2026-11-04 21:52 renewal (intake66): needs-action is only think-4ul6 (L42 maps it). #907 merged (a7db9aad3; #446 T-233, #366 T-103-T-106, #847 preprint acknowledgement, 2 repo reads). T-132 strong-max review accepted; L47 is running its census and adoption. L42 has the n30 census and controls running.
+
+2026-11-04 22:52 renewal (intake67): no change; needs-action is only think-4ul6. L42 (n28/n30) and L47 (n29) are computing.
