@@ -19673,17 +19673,20 @@ occurrences:
     path: packing/frontier/n-145.md
     record_key: '145'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Trevor Green
+  expected_text: Hosono
   start: 0
-  end: 12
-  label: Trevor Green
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence:
-  - survey-credit
-  note: Reviewed 2026-10-21 against the named profile sources; the printed source
-    text and credit role are retained.
-  contributor_id: trevor-green
+  - commit-author
+  - owner-confirmation
+  contributor_id: hiroaki-hosono
+  note: Reviewed packing/frontier/n-145.md [145] /reported_lower_bound/proved_by/0
+    span 0:6 on 2026-11-04, when T-179 took the reported lane from Green's survey
+    credit. Source-keyed wand125 certificate/tool lineage; retained commit-author
+    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
     path: packing/frontier/n-146.md
     record_key: '146'
@@ -19706,47 +19709,56 @@ occurrences:
     path: packing/frontier/n-146.md
     record_key: '146'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Trevor Green
+  expected_text: Hosono
   start: 0
-  end: 12
-  label: Trevor Green
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence:
-  - survey-credit
-  note: Reviewed 2026-10-21 against the named profile sources; the printed source
-    text and credit role are retained.
-  contributor_id: trevor-green
+  - commit-author
+  - owner-confirmation
+  contributor_id: hiroaki-hosono
+  note: Reviewed packing/frontier/n-146.md [146] /reported_lower_bound/proved_by/0
+    span 0:6 on 2026-11-04, when T-179 took the reported lane from Green's survey
+    credit. Source-keyed wand125 certificate/tool lineage; retained commit-author
+    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
     path: packing/frontier/n-147.md
     record_key: '147'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Trevor Green
+  expected_text: Hosono
   start: 0
-  end: 12
-  label: Trevor Green
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence:
-  - survey-credit
-  note: Reviewed 2026-10-21 against the named profile sources; the printed source
-    text and credit role are retained.
-  contributor_id: trevor-green
+  - commit-author
+  - owner-confirmation
+  contributor_id: hiroaki-hosono
+  note: Reviewed packing/frontier/n-147.md [147] /reported_lower_bound/proved_by/0
+    span 0:6 on 2026-11-04, when T-179 took the reported lane from Green's survey
+    credit. Source-keyed wand125 certificate/tool lineage; retained commit-author
+    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
     path: packing/frontier/n-148.md
     record_key: '148'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Trevor Green
+  expected_text: Hosono
   start: 0
-  end: 12
-  label: Trevor Green
+  end: 6
+  label: Hosono
   role: lower-bound-prover
   disposition: resolved
   evidence:
-  - survey-credit
-  note: Reviewed 2026-10-21 against the named profile sources; the printed source
-    text and credit role are retained.
-  contributor_id: trevor-green
+  - commit-author
+  - owner-confirmation
+  contributor_id: hiroaki-hosono
+  note: Reviewed packing/frontier/n-148.md [148] /reported_lower_bound/proved_by/0
+    span 0:6 on 2026-11-04, when T-179 took the reported lane from Green's survey
+    credit. Source-keyed wand125 certificate/tool lineage; retained commit-author
+    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
     path: packing/frontier/n-149.md
     record_key: '149'

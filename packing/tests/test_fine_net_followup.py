@@ -589,6 +589,15 @@ def test_check_retained_reports_changed_stray_and_misnamed_members(tmp_path: Pat
     assert followup.main(["check-retained", str(packet)]) == 1
 
 
+def test_a_linear_proof_bundle_is_pinned_by_digest_and_never_copied() -> None:
+    """A linear asset's proof bundle, tens of megabytes, is pinned by its digest (OR-18);
+    its candidate and certificate are retained."""
+    folder = "certificates/mixed_n145_L1224"
+    assert followup.pinned_reason(f"{folder}/n145-L12.24-proof-bundle.tar.gz") is not None
+    assert followup.pinned_reason(f"{folder}/candidate.json") is None
+    assert followup.pinned_reason(f"{folder}/certificate.json") is None
+
+
 def test_retain_refuses_an_asset_that_is_not_the_pinned_one(tmp_path: Path) -> None:
     asset, data = retained_asset(tmp_path)
     packet = tmp_path / "packet"
@@ -829,3 +838,45 @@ def test_retain_refuses_a_nonregular_manifest_before_publishing_members(
     output = capsys.readouterr()
     assert "not a regular file; move it aside" in output.err
     assert "members retained" not in output.out
+
+
+# --------------------------------------------------------------------------- capture agreement
+
+PACKING = Path(__file__).resolve().parents[1]
+N37_PACKET = "wand125-fine-net-n37-n39-n44-2026-10-13"
+N37_CAPTURE = (
+    PACKING
+    / "benchmarks/measure-verifier/census-mixed"
+    / N37_PACKET
+    / "mixed_n37_L64975.jsonl.gz"
+)
+N37_RUN = (
+    PACKING
+    / "resources/web"
+    / N37_PACKET
+    / "release/certificates/mixed_n37_L64975/check2/run.jsonl.gz"
+)
+
+
+def test_the_n37_capture_agrees_with_the_sources_run_at_every_direction() -> None:
+    """T-178's census capture and the source's check2 log, both of the crate on one
+    candidate, agree at all 2,073 directions, as #886's review A found by hand."""
+    receipt = followup.capture_agreement(N37_CAPTURE, N37_RUN)
+    assert receipt["status"] == "CAPTURE_AGREES_WITH_SOURCE_LOG"
+    assert receipt["directions"] == receipt["source_directions"] == 2073
+    assert receipt["differing"] == {}
+    assert receipt["nodes"] == receipt["source_nodes"] == 864953550
+    assert receipt["least_certified_bound_at"] == 1919
+
+
+def test_a_capture_that_differs_at_one_direction_is_reported(tmp_path: Path) -> None:
+    """One node count changed at one direction is named, by field and direction."""
+    rows = followup.jsonl_gz(N37_CAPTURE)
+    changed = next(row for row in rows if row.get("r") == 517)
+    changed["nodes"] += 1
+    capture = tmp_path / "capture.jsonl.gz"
+    with gzip.open(capture, "wt", encoding="utf-8") as stream:
+        stream.writelines(json.dumps(row) + "\n" for row in rows)
+    receipt = followup.capture_agreement(capture, N37_RUN)
+    assert receipt["status"] == "CAPTURE_DIFFERS"
+    assert receipt["differing"] == {"nodes": [517]}

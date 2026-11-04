@@ -100,9 +100,20 @@ That work, with a budget for it, belongs to the import’s bead, think-r333.
 The nearest enclosing source notice, `problems/square-lower-bounds/LICENSE`, is MIT,
 Copyright 2026 wand125, byte-identical to the notice the seven-case packet records.
 The nested verifier archive carries no notice of its own, so its redistribution is
-unresolved. This packet publishes authored facts, hash references and this repository’s
-own receipts. No upstream byte is retained in Git: the asset stays with its author,
-pinned here by size and digest, and no copy is hosted here.
+unresolved. Until 2 November this packet published only authored facts, hash references
+and this repository’s own receipts.
+
+On 2 November 2026 (T-132’s census, think-r333) the asset’s six data members were
+retained under [`release/`](release/certificates/mixed_n29_L582/), at their paths in the
+asset, so that the census can read the candidate, by the owner’s answer of 17 October to
+retain fine-net candidates where the census reads them, as the n31, #446 release and 13
+October packets do. `devtools.fine_net_followup retain` held the asset to its pinned
+651,878 bytes and SHA-256 and copied the candidate (as deterministic gzip of the 182,193
+bytes, SHA-256 `c9171c92…`, the source manifest pins), the check2 receipt, run log,
+control and control log, and the pre-publication receipt, each equal to the manifest’s
+size and digest. The nested verifier archive and the sealed inner bundle are pinned by
+digest only, with their reasons, in the [retention record](acquisition/release-assets.json),
+which `devtools.fine_net_followup check-retained` re-derives from the packet.
 No program of the source was run.
 
 The source credits wand125; the commit is authored by Hiroaki Hosono.

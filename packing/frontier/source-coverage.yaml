@@ -4130,7 +4130,9 @@ sources:
     seven-case packet and every standing claim are unchanged. Complete release-asset and document
     custody and the exact mass and declared-net premises are accepted; an eight-direction maintained
     sample is diagnostic, and the author's full positives and 32-direction controls do not supply a
-    maintained capture or whole-net controls. Replay and adoption remain under think-r333.
+    maintained capture or whole-net controls. The asset's data members are retained in the packet's
+    release/ (2 November 2026), where the census reads the candidate. The stage 4 review that reads
+    the certificate (think-1lri) comes first, then the replay and adoption under think-r333.
 - id: guzhou-n40-clipped-corner-2026-10-10
   title: Strict lower bound for forty unit squares by a clipped-corner transfer, issue485
   role: source-repository
@@ -5676,7 +5678,7 @@ sources:
   scope:
     n_values:
     - 39
-  reviewed: '2026-10-14'
+  reviewed: '2026-11-04'
   source_date: '2026-10-13'
   disposition: current-report
   replay_disposition: case-specific
@@ -5684,11 +5686,13 @@ sources:
   - resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/README.md
   evidence:
   - E-wand125-fine-net-n39-66625-report
-  notes: The reported 533/80 at n39 is above T-110's 133/20, which is unchanged. Complete release-asset
-    and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
-    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
-    supply a maintained capture or whole-net controls; the 99/100 mutant's axis refusal falls outside
-    the census's AXIS_ROUNDING. Replay and adoption remain under think-u0av.
+  notes: The 533/80 at n39 is above T-110's 133/20, which it supersedes in both lower lanes. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are accepted.
+    The asset's data members are retained in the packet's release/, and the complete maintained capture
+    ran on 2 November 2026 (think-567s), verified at all 2,073 directions and equal to the source's log
+    at every one. Its whole-net control of that day failed closed only on the census's constant axis
+    allowance and is kept; rerun on 3 November under think-4uun's enclosure rule (PR 892) it ends
+    CONTROLS_REFUSED, so T-176 stands at V3/C3.
 - id: wand125-fine-net-n44-69975-2026-10-13
   title: Hosono reported n44 fine-net lower bound, no issue
   role: source-repository
@@ -5845,8 +5849,11 @@ sources:
     of points, uniform segments and uniform rectangles on T-080's net, checked by code/unified_linear_verify.cpp,
     byte for byte T-080's checker; by its mass it raises n = 145 to 149 above Green's and Nagamochi's
     reported values and the Karakus strip bounds. The T-080 route's exact premises, bundle bindings and
-    input enclosures pass, and a two-angle replay sample returned the certificate's records; the complete
-    replay waits under think-u0av. The release asset is pinned by digest and not retained.
+    input enclosures pass. The complete replay of all 201 angles ran here from 2 November 2026 to 4 November 2026
+    (think-v511), every angle returning the certificate's own record, and the route's
+    control refused both mutations, so T-179 stands at V3/C3 and the lower lanes at 145 to 149 take
+    306/25 (the reported lane at 149 stays T-180's). The asset's candidate and certificate are retained
+    in the packet's release/, and its proof bundle is pinned by digest.
 - id: wand125-closed-form-2026-10-14
   title: Closed-form lower bound for every non-square N >= 49, no issue
   role: source-repository

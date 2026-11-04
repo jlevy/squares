@@ -1797,8 +1797,9 @@ sources:
     credit: Hosono after Tokoharu and Levy
     lineage: builds-on-project
     note: The later n29 finer-net measure lower-bound report, s(29) >= 291/50, at source 22a23c8a99aa4e9616d596bc2f28555bacbee3dd,
-      with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest and
-      kept outside Git. Maintained measure and declared-net premises accepted; native capture, controls
+      with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest,
+      and its data members are retained in the packet's release/ (2 November 2026). Maintained measure
+      and declared-net premises accepted; the review that reads the certificate, native capture, controls
       and adoption pending. The enclosing MIT notice does not settle redistribution of the nested verifier,
       which adapts this project's sqverify_fast, so a maintained replay is not another independent implementation.
   - key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
@@ -2118,12 +2119,15 @@ sources:
       added on 2026-10-13, s(39) >= 533/80 at dfb2cf85fdf9ee5f95c5ec2c67fd49210854f146,
       s(44) >= 2799/400 at 9f24185c602c8c0b83cf6a88b11a69ea8d668673 and s(37) >= 2599/400 at
       7a42c16eacaab112b537ab09e89d3485f6f4c75f, the packet's pin, with their data in release
-      square-lower-bounds-v1; the n39 and n44 release assets are pinned by size and digest and
-      kept outside Git, the n37 asset's data members are retained in the packet's release/
+      square-lower-bounds-v1; the n44 release asset is pinned by size and digest and kept
+      outside Git, the n37 and n39 assets' data members are retained in the packet's release/
       (2 November 2026), and the directories' MIT documents are retained. Maintained
       measure, declared-net and full check2 premises accepted at all three. n37's complete
       native capture and whole-net controls ran on 2 November 2026 and T-178 is adopted at
-      V3/C3; n39's and n44's remain pending. The nested verifier adapts this project's
+      V3/C3. n39's complete capture ran the same day and verified; its whole-net control,
+      which failed closed that day on the census's constant axis allowance, ends
+      CONTROLS_REFUSED rerun under #892's enclosure rule on 3 November, and T-176 is adopted
+      at V3/C3 on 4 November. n44's remains pending. The nested verifier adapts this project's
       sqverify_fast, so a maintained replay is not another independent implementation.
   - key: '[wand125 fine-net lower bounds 2026-10-16]'
     authors: [Hosono]
@@ -2158,9 +2162,11 @@ sources:
       a measure of point masses, uniform segments and uniform rectangles in D4 orbits, of mass
       145 - 1/100000, on the 201-angle net of mixed_n101_L1028, checked by code/unified_linear_verify.cpp,
       giving s(N) >= 306/25 for N >= 145 and raising n = 145 to 149. Its data are in release
-      square-lower-bounds-v1; the 38.6 MB asset is pinned by size and digest and kept outside Git, and
-      the directory's four MIT documents are retained. The T-080 route's exact premises pass and a
-      two-angle replay sample matched; the complete replay and adoption are pending.
+      square-lower-bounds-v1; the 38.6 MB asset is pinned by size and digest, its candidate and
+      certificate are retained in the packet's release/ and its proof bundle pinned by digest, and the
+      directory's four MIT documents are retained. The T-080 route's exact premises pass; the complete
+      replay of all 201 angles ran here from 2 November 2026 to 4 November 2026 and its control refused both
+      mutations, so T-179 stands at V3/C3 and the lower lanes at n = 145 to 149 take it.
   - key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
     authors: [Guzhou0806]
     year: 2026

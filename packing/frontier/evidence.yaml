@@ -42456,7 +42456,7 @@ evidence:
     novelty: previously-published
     source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
     certificate: >-
-      packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n39_L66625/bundle.json
+      packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n39_L66625/candidate.json.gz
     replay_status: not-attempted
     verifiers: [V-wand125-sqverify-proof-net]
     limitations: >-
@@ -42467,13 +42467,17 @@ evidence:
       maintained mass, net and check2 premises are accepted (receipts/premises-n39.json).
       Eight sampled directions run here by sqverify-fast verified and matched the source's
       log; that is a diagnostic, not a replay. The 32-direction 197/200 control remains
-      sampled. The 99/100 mutant's axis refusal does not count under the census's
-      AXIS_ROUNDING (gap 1.26e-9; receipts/control-sample-n39.json), so a whole-net control
-      cannot pass as the census stands. A complete capture, whole-net controls, restored
-      positives and a review that reads this certificate remain pending under think-u0av,
-      priced at about 7.1 CPU-hours. The shared crate establishes no independent
-      implementation. No standing bound or rating changes; T-110 stands.
-    source_reviewed: '2026-10-14'
+      sampled. The complete capture ran here on 2 November 2026
+      (E-wand125-fine-net-n39-66625-sqverify-fast-replay), from the release asset's
+      candidate retained in the packet's release/, with every direction's node count and
+      least certified bound equal to the source's check2 log. Its whole-net control of that
+      day failed closed only because the census then judged the axis refusal by a constant
+      allowance of 1e-9, which the gap of 1.26e-9 exceeds (receipts/control-sample-n39.json
+      measured it first; that receipt is kept); judged by the sweep's own enclosure, as
+      think-4uun's fix (#892) judges it, the rerun of 3 November is CONTROLS_REFUSED. The
+      mathematical review of 14 October read the certificate. The shared crate establishes
+      no independent implementation.
+    source_reviewed: '2026-11-04'
     external_review:
       state: informally-verified
       date: '2026-10-14'
@@ -42919,11 +42923,16 @@ evidence:
       enclosures are accepted (receipts/linear-premises.json). Two angles replayed here (35
       and 111) by the shipped replay function and checker from this repository's retained
       copies returned the certificate's records; that is a diagnostic, not a replay. The
-      author's complete replay (2 h 8 min at 30 workers) has no published receipt. A
-      complete replay, the route's control and a review that reads this certificate remain
-      pending under think-u0av, priced at about 37 CPU-hours. No standing bound or rating
-      changes.
-    source_reviewed: '2026-10-14'
+      author's complete replay (2 h 8 min at 30 workers) has no published receipt. The
+      complete replay here ran from 2 to 4 November 2026
+      (E-wand125-linear-n145-1224-source-replay), from the candidate and certificate
+      retained from the release asset in the packet's release/: the source's replay function
+      and unchanged checker returned the certificate's own record at all 201 angles, and the
+      route's control accepted the original and refused both mutations at net index 35
+      (receipts/n145/). The mathematical review of 14 October read the certificate. T-179
+      stands at V3/C3, and the case records at n = 145 to 149 take 306/25, in the reported
+      lane at 145 to 148 (T-180's closed form keeps it at 149).
+    source_reviewed: '2026-11-04'
     external_review:
       state: informally-verified
       date: '2026-10-14'
@@ -42939,6 +42948,84 @@ evidence:
         record and not a defect of any certificate, says the census control's axis tolerance
         is a constant where the test needs the sweep's enclosure; F-2 to F-8 are minor or
         notes.
+  - id: E-wand125-linear-n145-1224-source-replay
+    claim: lower-bound
+    scope: {n_values: [145, 146, 147, 148, 149]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    independence:
+      coverage:
+        extent: full
+        unit: net angles, each decided by the source's checker over its quadrant of centres
+        checked: 201
+        of: 201
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 linear n145 2026-10-13]'
+    certificate: packing/resources/web/wand125-linear-n145-2026-10-13/release/certificates/mixed_n145_L1224/candidate.json.gz
+    replay: >-
+      From packing/, with the project CPython 3.14 environment and a C++17-capable c++ on
+      PATH: .venv/bin/python3 -m devtools.audit_wand125_linear linear-replay n145 --range
+      0-200 --work W --workers 2, which may be stopped (--stop-after-hours) and resumed,
+      takes the release asset certificates__mixed_n145_L1224.tar.gz of
+      square-lower-bounds-v1 (--tarball, or fetched from the release), refuses it unless its
+      SHA-256 (6a937dc7...) and size are the ones the packet's release record pins, copies
+      out its proof bundle and refuses that unless its SHA-256 (4dc4f673...) and size are
+      the record's, unpacks it afresh, binds the bundle to the packet, rebuilds code/ from
+      the retained copies, repeats the replay driver's preconditions, binds each input of
+      the range to the candidate, builds the checker with the shipped compile_verifier, and
+      calls the shipped replay_angle unchanged, each direction passing only if it returns
+      exactly the record the retained certificate.json holds. Then .venv/bin/python3 -m
+      devtools.audit_wand125_linear linear-merge n145 must print
+      FULL_REPLAY_MATCHES_SHIPPED with no missing or refused direction, and linear-merge
+      n145 --check RECEIPT_MATCHES on the retained receipts (receipts/n145/ in the
+      packet). The checker's controls are .venv/bin/python3 -m
+      devtools.audit_wand125_linear linear-control n145 --work W --tarball ASSET, which
+      must report CONTROLS_REFUSED (receipts/n145/control.json).
+    replay_status: passed
+    verifiers: [V-wand125-unified-linear-verify-cpp, V-audit-wand125-linear]
+    proof:
+      source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
+      theorem: Linear-measure covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n145_L1224 of points, segments and rectangles; no 145 unit squares fit in a square of side below 306/25, and, its mass being below 146, none of 146 to 149 either.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        The measure argument of the 2026-09-22 Tokoharu review, with the point and segment
+        capture bounds, the quadrant reduction by the measure's symmetry and the angle-zero
+        branch read against unified_linear_verify.cpp in the 2 October review of the linear
+        certificates; the linear argument re-derived for this certificate in the review of
+        14 October (docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md, section 3); the replay receipts in receipts/n145/ of the
+        wand125-linear-n145-2026-10-13 packet, its exact audit receipts/linear-audit.json and
+        its pre-replay checks receipts/n145/fetch.json.
+      assumptions:
+        - The measure is nonnegative and exact, of total mass 14499999/100000 < 145, quarter-turn and reflection invariant, which this repository's exact audit recomputes from the retained candidate.
+        - All angles and legal centres are covered by the certified core net of 201 half-angles of step 83/40000 at core side 9977/10000, and the checker's quadrant of the centre domain stands for the whole by that symmetry.
+        - Binary64 arithmetic has the reviewed IEEE-754 semantics, compiled by the shipped line with -ffp-contract=off and -fno-fast-math.
+        - The replayed interval inputs enclose the exact candidate, whose digest every replayed record carries.
+      audit_record: docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    limitations: >-
+      Replays the source's code/unified_linear_verify.cpp (SHA-256 0249726a..., byte for
+      byte T-080's checker) with the source's replay_angle, unchanged, from 2026-11-02T20:51:01Z to
+      2026-11-04T13:21:31Z, in 3 runs of two workers under nice -n 19 on a shared four-core
+      x86-64 Linux host (Intel Xeon at 2.1 GHz, c++ 13.3.0, Python 3.14.7, one BLAS and
+      OpenMP thread, PYTHONOPTIMIZE unset), resumed after a container restart and after
+      the second run's wall stop: 201 of 201
+      directions, 34.191 CPU-hours, the axis direction 3,073.9 CPU-seconds of it.
+      Every direction returned the certificate's own record, its status, input digest and
+      node count (FULL_REPLAY_MATCHES_SHIPPED). The records hold no per-direction least
+      lower bound, so the receipts cannot keep one (F-5 of the 14 October review, LC-4 of
+      the 2 October review); acceptance at each direction is the checker's own verdict. This
+      is a machine replay of the source's checker, not an independent decision of the
+      certificate: coverage is decided by the source's C++ alone. Controls: the same checker
+      accepts the original and refuses two mutated n = 145 measures at net index
+      35, every mass scaled by 99/100 and the orbit contributing most at a
+      witness centre dropped, each provably uncovered there in exact arithmetic
+      (receipts/n145/control.json). The candidate and certificate are retained from the
+      release asset, and the 47.4 MB proof bundle is pinned by digest in the packet's
+      release record and not retained. Its mass, 14499999/100000, is below 146, so it
+      carries to 146 to 149 with no further step; at 150 the record holds more.
+    source_reviewed: '2026-11-04'
   - id: E-wand125-closed-form-report
     claim: lower-bound
     scope: {n_values: [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66,
@@ -54999,6 +55086,124 @@ evidence:
       the receipts. The source's own checker was not run here on this certificate, and its
       tarball is pinned by digest and not retained.
     source_reviewed: '2026-11-02'
+  - id: E-wand125-fine-net-n39-66625-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [39]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        The sqverify_fast crate, apart from the producer's declared-net reader;
+        sqverify-proof-net adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 2073
+        of: 2073
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
+    certificate: packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/release/certificates/mixed_n39_L66625/candidate.json.gz
+    replay: >-
+      From packing/, in a tree whose crate is reviewed source (.venv/bin/python3 -m
+      devtools.sqverify_fast_census --source-digest prints its source_sha256 and exits 0;
+      these receipts' build is d97758bb..., the source at 910b6b12c), after building
+      sqverify_fast/ to match the retained build (rustc 1.98.0 (88d9e12ae 2026-08-18),
+      release, x86_64-unknown-linux-gnu): .venv/bin/python3 -m devtools.sqverify_fast_census
+      --family mixed --binary sqverify_fast/target/release/sqverify-fast --out
+      benchmarks/measure-verifier/census-mixed --threads 2 --only mixed_n39_L66625 runs
+      sqverify-fast on the retained candidate at all 2073 directions of the net it declares
+      at the threshold it declares, 1, and records the case in census.json there; --check
+      --only mixed_n39_L66625 must then print 1 of 1 retained certificates VERIFIED (every
+      direction verified, summary VERIFIED, exit 0, and the exact capture at the least-bound
+      leaf's centre at least 1). The same command with --control in place of --threads 2
+      must write status CONTROLS_REFUSED. The receipts are
+      benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.jsonl.gz
+      and
+      benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/mixed_n39_L66625.control.json,
+      held by tests/test_sqverify_fast_census.py, which admits the row only for a build of
+      reviewed source.
+    replay_status: passed
+    verifiers: [V-sqverify-fast]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
+        mixed_n39_L66625: no 39 unit squares pack in a square of side 533/80, so s(39) >=
+        533/80.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        SOUNDNESS.md's theorem and lemmas, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, and lemma N0 and
+        the declared-net change by
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
+        certificate's mathematics read in
+        docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md;
+        the census route accepted as a complete replay here in
+        docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md;
+        the census row, receipts and control receipt named in replay.
+      assumptions:
+        - The density is nonnegative and exact, of total mass 3899999/100000 < 39, which admission recomputes from the retained candidate.
+        - Every angle and legal centre is covered by the net its candidate declares (proof_net), lemma N0 of SOUNDNESS.md, of 2073 half-angles of step 1/5002 at core side 4999/5000 and format M's per-bin centre domains, which admission checks in exact rationals.
+        - Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation, as SOUNDNESS.md's Floating Point section uses it.
+        - The candidate is the retained file whose decompressed SHA-256 the packet's acquisition record pins, which mixed-fetch found identical to the proof bundle's.
+      audit_record: docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    limitations: >-
+      sqverify-fast, this repository's maintained measure verifier, decided the retained
+      candidate mixed_n39_L66625 at all 2073 net directions on 2026-11-02. The receipts name
+      the stored gzip file's SHA-256 1392d691..., which decompresses to the SHA-256
+      03eef5c3... the packet's acquisition record pins (devtools.retained_data check ties
+      the two). Admission recomputed in exact rationals n = 39, L = 533/80, the total mass
+      3899999/100000 < 39, the core side 4999/5000 with B(1 + D/(1 - D^2/4)) < 1 and the net
+      its candidate declares (proof_net), of 2073 half-angles of step 1/5002, with B(1 + D)
+      = 25009997/25010000 < 1 and the last tangent 1036/2501 past tan(pi/8) and at most 1/2
+      (SOUNDNESS.md, lemma N0), from 687 rectangle rows (5,496 distinct images) and no point
+      or segment, and took format M's per-bin centre domain, at threshold 1. The axis
+      direction was decided by an exact-event vertex sweep over 20,232,004 vertices, least
+      certified capture 1.0020921702344088; the other 2072 by interval branch and bound over
+      881,271,470 boxes, least certified lower bound 1.0000000000654117 at index 1804; the
+      exact capture at the least-bound leaf's centre (index 1804) is 1.0313402371. Every
+      direction verified, summary VERIFIED, native exit 0, 11,404 aggregate process CPU
+      seconds (wait4) at two threads and 5,796 seconds of wall time. 11,404.0 summed
+      per-direction CPU seconds. The recorded load average 0.3 was measured at start. The
+      build is rustc 1.98.0 (88d9e12ae 2026-08-18), release, x86_64-unknown-linux-gnu,
+      source_sha256 d97758bb...: the crate source at 910b6b12c: the source of e020eb1e2
+      (7c49cf79...) with the declared net of format M (proof_net, SOUNDNESS.md lemma N0) and
+      its review fixes, a diff the soundness review
+      docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md read in
+      full and accepted. The producer adapted this repository's crate as sqverify-proof-net;
+      the two share the sqverify_fast crate apart from their declared-net readers. This
+      replay is not an independent full implementation or a second method. The maintained
+      crate's declared-net reader was written without opening the producer's adapted source
+      (packing/sqverify_fast/INDEPENDENCE.md, Declared Nets). The theorem, net, core side,
+      per-bin domain and threshold are shared. Its node counts and bounds are its own, not
+      the certificate's records. Controls: the original verified again at index 1804; every
+      mass scaled by 99/100 refused at 2073 of the 2073 net directions, each a coverage
+      refusal at a centre in the per-bin domain where the mutant's exact capture is below 1
+      (the crate's confirmed witness, or at the axis the vertex sweep's least vertex); and
+      every mass scaled by 0.9696 so that the exact capture at the least-bound leaf's centre
+      is at most 1 - 10^-6 refused (counterexample-candidate, exact capture below 1 at the
+      least-bound leaf's centre); each capture below 1 was evaluated again by an exact
+      evaluator written apart from the crate, and tests/test_sqverify_fast_census.py holds
+      the receipts. The whole-net control first run on 2 November failed closed at the
+      axis direction only, where the mutant's exact capture sits 1.26e-09 above the vertex
+      sweep's certified bound, beyond the census's then constant allowance of 1e-9; that
+      receipt is kept as mixed_n39_L66625.control-failed-v2.json. The control named here
+      is its rerun of 3 November with the same binary, which ends CONTROLS_REFUSED under
+      the enclosure rule of think-4uun (#892), judged again here without rerunning.
+      Lane L34 (bold-ritchie-l34) ran that rerun from #892's working tree at adc153fcc,
+      before #892 merged, and it was committed here in b3caa7d61; apart from timings,
+      status, the axis run's captures_agree and the sweep_enclosure field the rule adds to
+      each refusal (null at the 2,072 oblique directions), it equals the failed receipt.
+      The merged rule's further clauses, the vertex on the sweep's event grid and a bound
+      that is None or NaN failing closed, were applied by the census tests, which recompute
+      the axis enclosure from the retained candidate. The source's own checker was not run
+      here on this certificate, and its tarball is pinned by digest and not retained.
+    source_reviewed: '2026-11-04'
   - id: E-ozden-890-n94-9965-report
     claim: lower-bound
     scope: {n_values: [94]}

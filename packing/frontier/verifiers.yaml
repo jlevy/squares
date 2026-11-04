@@ -3553,7 +3553,11 @@ verifiers:
     language: [Python]
     methods: [exact-algebraic]
     role: premises
-    summary: The audit, replay driver and controls for Hiroaki Hosono's linear certificates.
+    summary: >-
+      The audit, replay driver and controls for Hiroaki Hosono's linear certificates,
+      including one held only by a release asset (n = 145), whose candidate and
+      certificate the packet retains and whose proof bundle it fetches from the release
+      and holds to the packet's release record before anything runs.
     source: [packing/devtools/audit_wand125_linear.py]
 
   - id: V-sqverify-fast

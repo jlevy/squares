@@ -2495,10 +2495,105 @@ def _files_in(directory: Path) -> list[Path]:
     return sorted(path for path in directory.iterdir() if path.is_file())
 
 
+#: The record `devtools.fine_net_followup retain` writes of a release asset's members.
+RELEASE_RECORD = "acquisition/release-assets.json"
+
+
+def release_members(certificate: MixedCertificate) -> dict[Path, dict[str, Any]]:
+    """The members of a certificate's release asset that its packet records, by upstream
+    path under the certificate's directory: the files a release holds and the pinned Git
+    tree does not, each stored in the packet or pinned by digest only. Empty where the
+    packet records no asset for this certificate."""
+    path = certificate.packet / RELEASE_RECORD
+    if not path.is_file():
+        return {}
+    name = certificate.directory.name
+    found: dict[Path, dict[str, Any]] = {}
+    for asset in json.loads(path.read_text(encoding="utf-8"))["assets"]:
+        if asset["certificate"] != name:
+            continue
+        for member in asset["members"]:
+            relative = PurePosixPath(member["path"]).relative_to(f"certificates/{name}")
+            _require(".." not in relative.parts, f"{member['path']} leaves its directory")
+            found[certificate.directory / relative] = member
+    return found
+
+
+def retained_path(certificate: MixedCertificate, name: str) -> Path:
+    """Where the packet keeps one small file of a certificate's directory: where the
+    release record stores it, for a file only the release asset holds, and otherwise
+    beside the pinned tree's documents."""
+    member = release_members(certificate).get(certificate.directory / name)
+    if member is not None and "stored" in member:
+        return certificate.packet / member["stored"]
+    return certificate.source / certificate.directory / name
+
+
+#: The address of a release asset, as GitHub serves it.
+RELEASE_URL = "https://github.com/{repository}/releases/download/{release}/{asset}"
+
+
+def release_bundle(
+    certificate: MixedCertificate, work: Path, supplied: Path | None
+) -> tuple[Path | None, str | None]:
+    """A proof bundle only the certificate's release asset holds, put in ``work``.
+
+    For a bundle the pinned Git tree holds, nothing is done. Otherwise the bundle comes
+    from the release asset the packet's release record names: ``supplied`` when that is
+    the asset (a supplied file of any other name is taken as the bundle itself), else one
+    an earlier run left in ``work``, else the release's own address. The asset is refused
+    unless its size and SHA-256 are the record's, and its one bundle member is copied out
+    to ``work``. Returns what `mixed.fetch_tarball` is then given, which pins the bundle
+    to the record as it pins any tarball, and where the bundle came from.
+    """
+    if certificate.upstream_tarball in read_subtree_manifest(certificate.subtree):
+        return supplied, None
+    record = json.loads((certificate.packet / RELEASE_RECORD).read_text("utf-8"))
+    (asset,) = (
+        row for row in record["assets"] if row["certificate"] == certificate.directory.name
+    )
+    name = str(asset["asset"])
+    target = work / certificate.tarball
+    if supplied is not None and supplied.name != name:
+        return supplied, None
+    if supplied is None and target.is_file():
+        return None, None
+    work.mkdir(parents=True, exist_ok=True)
+    held = supplied if supplied is not None else work / name
+    how = "supplied"
+    if not held.is_file():
+        url = RELEASE_URL.format(
+            repository=record["repository"], release=record["release"], asset=name
+        )
+        partial = held.with_name(held.name + ".part")
+        with urllib.request.urlopen(url, timeout=600) as response, partial.open("wb") as out:
+            shutil.copyfileobj(response, out, 1 << 20)
+        partial.replace(held)
+        how = url
+    found, size = _file_sha256(held), held.stat().st_size
+    _require(
+        (found, size) == (asset["sha256"], asset["bytes"]),
+        f"{name} has SHA-256 {found} and {size} bytes; the release record pins "
+        f"{asset['sha256']} and {asset['bytes']}",
+    )
+    member = f"certificates/{certificate.directory.name}/{certificate.tarball}"
+    partial = target.with_name(target.name + ".part")
+    with tarfile.open(held, "r:gz") as archive:
+        info = archive.getmember(member)
+        _require(info.isfile(), f"{member} is not a regular file of {name}")
+        source = archive.extractfile(info)
+        if source is None:
+            raise ValueError(f"{member} cannot be read from {name}")
+        with partial.open("wb") as out:
+            shutil.copyfileobj(source, out, 1 << 20)
+    partial.replace(target)
+    return None, f"{member} of the release asset {name} ({how}), held to its pin {found}"
+
+
 def mixed_retained(certificate: MixedCertificate) -> dict[str, bytes]:
     """The retained small files of one certificate directory, decompressed."""
     return {
-        name: read_retained_bytes(certificate.source / certificate.directory / name)
+        name: read_retained_bytes(retained_path(certificate, name))
         for name in certificate.files
     }
 
@@ -2851,8 +2946,16 @@ def _file_sha256(path: Path) -> str:
 
 
 def tarball_pin(certificate: MixedCertificate) -> tuple[str, int]:
-    """The tarball's SHA-256 and size as the packet's acquisition files pin them."""
-    digest = read_subtree_manifest(certificate.subtree)[certificate.upstream_tarball]
+    """The tarball's SHA-256 and size as the packet's acquisition files pin them: the
+    pinned Git tree's, or, for a bundle only its release asset holds, the release
+    record's (`release_members`)."""
+    tree = read_subtree_manifest(certificate.subtree)
+    if certificate.upstream_tarball not in tree:
+        member = release_members(certificate).get(certificate.upstream_tarball)
+        if member is None:
+            raise ValueError("the acquisition record does not pin the tarball")
+        return str(member["sha256"]), int(member["bytes"])
+    digest = tree[certificate.upstream_tarball]
     entries = json.loads(certificate.record.read_text())["sources"][0]["pinned_only"]
     sizes = [
         entry["bytes"]
