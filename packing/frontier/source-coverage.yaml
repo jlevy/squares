@@ -5849,8 +5849,11 @@ sources:
     of points, uniform segments and uniform rectangles on T-080's net, checked by code/unified_linear_verify.cpp,
     byte for byte T-080's checker; by its mass it raises n = 145 to 149 above Green's and Nagamochi's
     reported values and the Karakus strip bounds. The T-080 route's exact premises, bundle bindings and
-    input enclosures pass, and a two-angle replay sample returned the certificate's records; the complete
-    replay waits under think-u0av. The release asset is pinned by digest and not retained.
+    input enclosures pass. The complete replay of all 201 angles ran here from 2 November 2026 to 4 November 2026
+    (think-v511), every angle returning the certificate's own record, and the route's
+    control refused both mutations, so T-179 stands at V3/C3 and the lower lanes at 145 to 149 take
+    306/25 (the reported lane at 149 stays T-180's). The asset's candidate and certificate are retained
+    in the packet's release/, and its proof bundle is pinned by digest.
 - id: wand125-closed-form-2026-10-14
   title: Closed-form lower bound for every non-square N >= 49, no issue
   role: source-repository

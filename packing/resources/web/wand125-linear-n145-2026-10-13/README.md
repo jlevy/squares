@@ -144,6 +144,18 @@ receipts over all 201 angles; then `linear-control` and a review that reads this
 certificate, as the 2 October review read T-080’s. That work, with a budget for it,
 belongs to the import’s bead, think-u0av.
 
+That replay ran here from 2 November 2026 to 4 November 2026 (think-v511), in 3 runs of two workers, the second
+resumed after a container restart and the third after the second’s wall stop:
+`linear-replay n145` replayed all 201 angles, each
+returning the certificate’s own record, in 34.191 CPU-hours, the axis
+3,074 CPU-seconds of it, and `linear-merge n145` reports
+`FULL_REPLAY_MATCHES_SHIPPED` ([merge](receipts/n145/merged.json), with the range’s
+rows and runs beside it). `linear-control n145` accepts the original and refuses two
+mutations at net index 35, each provably uncovered there in exact
+arithmetic ([control](receipts/n145/control.json)). With the review of 14 October they
+put T-179 at V3/C3, and the case records at n = 145 to 149 take $306/25$ in the verified
+lane, and at 145 to 148 in the reported lane.
+
 ## Sources and Notices
 
 The nearest enclosing source notice, `problems/square-lower-bounds/LICENSE`, is MIT,

@@ -42943,6 +42943,84 @@ evidence:
         record and not a defect of any certificate, says the census control's axis tolerance
         is a constant where the test needs the sweep's enclosure; F-2 to F-8 are minor or
         notes.
+  - id: E-wand125-linear-n145-1224-source-replay
+    claim: lower-bound
+    scope: {n_values: [145, 146, 147, 148, 149]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    independence:
+      coverage:
+        extent: full
+        unit: net angles, each decided by the source's checker over its quadrant of centres
+        checked: 201
+        of: 201
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 linear n145 2026-10-13]'
+    certificate: packing/resources/web/wand125-linear-n145-2026-10-13/release/certificates/mixed_n145_L1224/candidate.json.gz
+    replay: >-
+      From packing/, with the project CPython 3.14 environment and a C++17-capable c++ on
+      PATH: .venv/bin/python3 -m devtools.audit_wand125_linear linear-replay n145 --range
+      0-200 --work W --workers 2, which may be stopped (--stop-after-hours) and resumed,
+      takes the release asset certificates__mixed_n145_L1224.tar.gz of
+      square-lower-bounds-v1 (--tarball, or fetched from the release), refuses it unless its
+      SHA-256 (6a937dc7...) and size are the ones the packet's release record pins, copies
+      out its proof bundle and refuses that unless its SHA-256 (4dc4f673...) and size are
+      the record's, unpacks it afresh, binds the bundle to the packet, rebuilds code/ from
+      the retained copies, repeats the replay driver's preconditions, binds each input of
+      the range to the candidate, builds the checker with the shipped compile_verifier, and
+      calls the shipped replay_angle unchanged, each direction passing only if it returns
+      exactly the record the retained certificate.json holds. Then .venv/bin/python3 -m
+      devtools.audit_wand125_linear linear-merge n145 must print
+      FULL_REPLAY_MATCHES_SHIPPED with no missing or refused direction, and linear-merge
+      n145 --check RECEIPT_MATCHES on the retained receipts (receipts/n145/ in the
+      packet). The checker's controls are .venv/bin/python3 -m
+      devtools.audit_wand125_linear linear-control n145 --work W --tarball ASSET, which
+      must report CONTROLS_REFUSED (receipts/n145/control.json).
+    replay_status: passed
+    verifiers: [V-wand125-unified-linear-verify-cpp, V-audit-wand125-linear]
+    proof:
+      source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
+      theorem: Linear-measure covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n145_L1224 of points, segments and rectangles; no 145 unit squares fit in a square of side below 306/25, and, its mass being below 146, none of 146 to 149 either.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        The measure argument of the 2026-09-22 Tokoharu review, with the point and segment
+        capture bounds, the quadrant reduction by the measure's symmetry and the angle-zero
+        branch read against unified_linear_verify.cpp in the 2 October review of the linear
+        certificates; the linear argument re-derived for this certificate in the review of
+        14 October (docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md, section 3); the replay receipts in receipts/n145/ of the
+        wand125-linear-n145-2026-10-13 packet, its exact audit receipts/linear-audit.json and
+        its pre-replay checks receipts/n145/fetch.json.
+      assumptions:
+        - The measure is nonnegative and exact, of total mass 14499999/100000 < 145, quarter-turn and reflection invariant, which this repository's exact audit recomputes from the retained candidate.
+        - All angles and legal centres are covered by the certified core net of 201 half-angles of step 83/40000 at core side 9977/10000, and the checker's quadrant of the centre domain stands for the whole by that symmetry.
+        - Binary64 arithmetic has the reviewed IEEE-754 semantics, compiled by the shipped line with -ffp-contract=off and -fno-fast-math.
+        - The replayed interval inputs enclose the exact candidate, whose digest every replayed record carries.
+      audit_record: docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md
+    limitations: >-
+      Replays the source's code/unified_linear_verify.cpp (SHA-256 0249726a..., byte for
+      byte T-080's checker) with the source's replay_angle, unchanged, from 2026-11-02T20:51:01Z to
+      2026-11-04T13:21:31Z, in 3 runs of two workers under nice -n 19 on a shared four-core
+      x86-64 Linux host (Intel Xeon at 2.1 GHz, c++ 13.3.0, Python 3.14.7, one BLAS and
+      OpenMP thread, PYTHONOPTIMIZE unset), resumed after a container restart and after
+      the second run's wall stop: 201 of 201
+      directions, 34.191 CPU-hours, the axis direction 3,073.9 CPU-seconds of it.
+      Every direction returned the certificate's own record, its status, input digest and
+      node count (FULL_REPLAY_MATCHES_SHIPPED). The records hold no per-direction least
+      lower bound, so the receipts cannot keep one (F-5 of the 14 October review, LC-4 of
+      the 2 October review); acceptance at each direction is the checker's own verdict. This
+      is a machine replay of the source's checker, not an independent decision of the
+      certificate: coverage is decided by the source's C++ alone. Controls: the same checker
+      accepts the original and refuses two mutated n = 145 measures at net index
+      35, every mass scaled by 99/100 and the orbit contributing most at a
+      witness centre dropped, each provably uncovered there in exact arithmetic
+      (receipts/n145/control.json). The candidate and certificate are retained from the
+      release asset, and the 47.4 MB proof bundle is pinned by digest in the packet's
+      release record and not retained. Its mass, 14499999/100000, is below 146, so it
+      carries to 146 to 149 with no further step; at 150 the record holds more.
+    source_reviewed: '2026-11-04'
   - id: E-wand125-closed-form-report
     claim: lower-bound
     scope: {n_values: [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66,

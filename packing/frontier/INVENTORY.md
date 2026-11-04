@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **869** evidence records. **501** are formal; **492** of those were established here. **13** are samples, counted separately.
+- **870** evidence records. **502** are formal; **493** of those were established here. **13** are samples, counted separately.
 - **349** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
@@ -195,7 +195,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-tokoharu-density-monotone-report` | 0 | lower-bound | reported | - | here | - | previously-published | no code | not recorded | `V-tokoharu-verify-cpp` |
 | `E-wand125-point-monotone-report` | 0 | lower-bound | reported | - | here | - | previously-published | no code | not recorded | `V-wand125-check-with-sqpack`, `V-sqpack-fractional-exact` |
 | `E-tokoharu-density-source-replay` | 0 | lower-bound | verified | strict inequalities only | here | informally-verified | previously-published | producer’s code | not recorded | `V-tokoharu-verify-cpp`, `V-audit-tokoharu-density` |
-| `E-green-ds7-theorem9-reported-lower` | 27 | lower-bound | reported | - | elsewhere | defect-found | previously-published | unknown | not recorded | - |
+| `E-green-ds7-theorem9-reported-lower` | 23 | lower-bound | reported | - | elsewhere | defect-found | previously-published | unknown | not recorded | - |
 | `E-green-ds7-theorem10-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published | unknown | not recorded | - |
 | `E-friedman-ds7-table2-opaque-lower` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | unknown | not recorded | - |
 | `E-n017-maciver-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published | unknown | not recorded | *none held* |
@@ -206,8 +206,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-basic-grid-upper` | 174 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-basic-area-lower` | 18 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-nagamochi-lower` | 26 | lower-bound | reported | - | elsewhere | defect-found | previously-published | no code | not recorded | - |
-| `E-karakus-strip-lower` | 202 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | not recorded | - |
-| `E-karakus-strip-measure-interval` | 202 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-check-karakus-strip-measure` |
+| `E-karakus-strip-lower` | 197 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | not recorded | - |
+| `E-karakus-strip-measure-interval` | 197 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-check-karakus-strip-measure` |
 | `E-nagamochi-lemma1-counterexample` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-check-nagamochi-lemma1-counterexample` |
 | `E-chelokot-square-minus-two-lean` | 16 | exact-value | verified | its theorem, within the recorded execution trust boundary | here | - | previously-published | producer’s code | not recorded | `V-chelokot-lean`, `V-replay-chelokot-lean` |
 | `E-basic-slivkova-piercing-lower` | 0 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | not recorded | - |
@@ -663,7 +663,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-fang-excess-pieces-exact-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 18 of 18: the 18 pieces of the note's Propositions 4 and 5, theorem/PIECES.md's role theorem: the rectangles R and R', the twelve bases of n^2 - n + 1 squares for n = 15 to 26 and the four of m^2 - m squares for m = 11 to 14, every corner and every pair decided exactly in its open box | `V-fang-review-exact-checker` |
 | `E-fang-excess-note-proof` | 0 | upper-bound, conditional on Propositions 4 and 5 (the 18 pieces, each 1/10000-squeezable), discharged by `E-fang-excess-pieces-exact-replay` | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published | no code | not recorded | - |
 | `E-fang-excess-lean-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-wand125-linear-n145-1224-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
+| `E-wand125-linear-n145-1224-report` | 4 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
+| `E-wand125-linear-n145-1224-source-replay` | 5 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | full, 201 of 201: net angles, each decided by the source's checker over its quadrant of centres | `V-wand125-unified-linear-verify-cpp`, `V-audit-wand125-linear` |
 | `E-wand125-closed-form-report` | 153 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-replay4d` |
 | `E-mishapolk-593-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-mishapolk-593-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
@@ -895,10 +896,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 351, verified 513
-- **method**: exact-algebraic 267, interval-certified 228, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 351
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 808
-- **relationship to the producer's code**: generator 5, independent-implementation 325, not-applicable 34, same-implementation 452, shared-components 47, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 351, verified 514
+- **method**: exact-algebraic 267, interval-certified 229, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 351
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 809
+- **relationship to the producer's code**: generator 5, independent-implementation 325, not-applicable 34, same-implementation 453, shared-components 47, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -956,13 +957,13 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 
 | evidence | cases | whose work | read here |
 | --- | ---: | --- | --- |
-| `E-karakus-strip-lower` | 202 | elsewhere | informally-verified |
-| `E-karakus-strip-measure-interval` | 202 | here | - |
+| `E-karakus-strip-lower` | 197 | elsewhere | informally-verified |
+| `E-karakus-strip-measure-interval` | 197 | here | - |
 | `E-basic-grid-upper` | 174 | here | - |
 | `E-regularized-bounds-2026-10-12-exact-decision` | 51 | here | - |
 | `E-evand-exact-ceilings-2026-10-05-exact-replay` | 30 | here | - |
 
-The most-cited argument this repository did not produce is `E-karakus-strip-lower`, carrying 202 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
+The most-cited argument this repository did not produce is `E-karakus-strip-lower`, carrying 197 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
 
 `[Stromquist 2003]` is why that matters rather than being a formality: its `n = 11` argument needed a source-distinct repair, which `E-n011-repaired-lower` supplies.
 

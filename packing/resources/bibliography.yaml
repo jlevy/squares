@@ -2162,9 +2162,11 @@ sources:
       a measure of point masses, uniform segments and uniform rectangles in D4 orbits, of mass
       145 - 1/100000, on the 201-angle net of mixed_n101_L1028, checked by code/unified_linear_verify.cpp,
       giving s(N) >= 306/25 for N >= 145 and raising n = 145 to 149. Its data are in release
-      square-lower-bounds-v1; the 38.6 MB asset is pinned by size and digest and kept outside Git, and
-      the directory's four MIT documents are retained. The T-080 route's exact premises pass and a
-      two-angle replay sample matched; the complete replay and adoption are pending.
+      square-lower-bounds-v1; the 38.6 MB asset is pinned by size and digest, its candidate and
+      certificate are retained in the packet's release/ and its proof bundle pinned by digest, and the
+      directory's four MIT documents are retained. The T-080 route's exact premises pass; the complete
+      replay of all 201 angles ran here from 2 November 2026 to 4 November 2026 and its control refused both
+      mutations, so T-179 stands at V3/C3 and the lower lanes at n = 145 to 149 take it.
   - key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
     authors: [Guzhou0806]
     year: 2026

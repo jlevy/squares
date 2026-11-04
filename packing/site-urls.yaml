@@ -5707,7 +5707,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/146.html
   canonical: cases/146.html
@@ -5715,7 +5715,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/147.html
   canonical: cases/147.html
@@ -5723,7 +5723,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/148.html
   canonical: cases/148.html
@@ -5731,7 +5731,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/149.html
   canonical: cases/149.html
@@ -5739,7 +5739,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/15.html
   canonical: cases/15.html
@@ -18102,7 +18102,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-11-04'
   status: live
   identity:
     kind: lower-bound
@@ -18121,6 +18121,7 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-linear-n145-1224-report
+    - E-wand125-linear-n145-1224-source-replay
     artifacts:
     - packing/resources/web/wand125-linear-n145-2026-10-13/README.md
     - packing/resources/web/wand125-linear-n145-2026-10-13/acquisition/sources.json
@@ -18129,6 +18130,43 @@ urls:
     - packing/resources/web/wand125-linear-n145-2026-10-13/receipts/linear-sample-diagnostic.json
     - packing/devtools/fine_net_followup.py
     - packing/devtools/audit_wand125_linear.py
+    - packing/resources/web/wand125-linear-n145-2026-10-13/acquisition/release-assets.json
+    - packing/resources/web/wand125-linear-n145-2026-10-13/release/certificates/mixed_n145_L1224/candidate.json.gz
+    - packing/resources/web/wand125-linear-n145-2026-10-13/release/certificates/mixed_n145_L1224/certificate.json.gz
+    - packing/resources/web/wand125-linear-n145-2026-10-13/receipts/linear-audit.json
+    - packing/resources/web/wand125-linear-n145-2026-10-13/receipts/n145/fetch.json
+    - packing/resources/web/wand125-linear-n145-2026-10-13/receipts/n145/merged.json
+  amendments:
+  - date: '2026-11-04'
+    reason: The complete replay of mixed_n145_L1224 at all 201 angles by the source's unchanged checker
+      (think-v511), its merge and its linear-control receipt are cited as replay evidence, and the
+      retained candidate, certificate, release record, exact audit, pre-replay checks and merge receipt
+      join the artifacts; the result rises to V3/C3. The value, scope and attribution are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 145
+        - 146
+        - 147
+        - 148
+        - 149
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 linear n145 2026-10-13]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-wand125-linear-n145-1224-report
+      artifacts:
+      - packing/resources/web/wand125-linear-n145-2026-10-13/README.md
+      - packing/resources/web/wand125-linear-n145-2026-10-13/acquisition/sources.json
+      - packing/resources/web/wand125-linear-n145-2026-10-13/square-packing/problems/square-lower-bounds/certificates/mixed_n145_L1224/completion-audit.json
+      - packing/resources/web/wand125-linear-n145-2026-10-13/receipts/linear-premises.json
+      - packing/resources/web/wand125-linear-n145-2026-10-13/receipts/linear-sample-diagnostic.json
+      - packing/devtools/fine_net_followup.py
+      - packing/devtools/audit_wand125_linear.py
 - path: result/t-180.html
   canonical: result/t-180.html
   kind: result

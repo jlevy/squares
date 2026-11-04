@@ -1,0 +1,36 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/frontier/n-146.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L32 of 4 November (think-v511): T-179 (s(n) >= 306/25 for n = 145 to 149)
+  rises to V3/C3 on the complete replay of its linear certificate by the source's
+  unchanged checker and the route's control, and the case records at 145 to 149 take
+  306/25 in the verified lane and at 145 to 148 in the reported lane. The atlas's
+  composite figure record and bound citations follow, n-146.md among the case records,
+  and the coverage note too. No paper prints any of these. Against main 0dc4eaa7b
+  (#897), merged into the branch, with devtools.compare_paper_renders --baseline
+  origin/main and these five paths: each paper rendered into an empty site directory
+  twice from this tree and once with main's copies of the five swapped in, by
+  render_n11_lower_bounds_explainer --prepare-math (55 files each) and by
+  render_n11_optimality_review, render_n11_threshold_bound_review and
+  render_packing_methods at link revision 0000000000000000000000000000000000000000 (43
+  files each), the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM): all
+  byte-identical across the three. No PDF was printed; each prints from that HTML. Every
+  paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

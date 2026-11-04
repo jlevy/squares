@@ -833,12 +833,18 @@ def test_each_price_rests_on_its_own_samples() -> None:
 # --------------------------------------------------------------------------- the control
 
 
-def _control() -> dict[str, Any]:
-    return json.loads((linear.LINEAR["n101"].receipts / "control.json").read_text())
+#: The certificates whose linear-control receipt is retained: n101's of 2 October, which
+#: T-080 to T-082 cite, and n145's of T-179's replay.
+CONTROLLED = ("n101", "n145")
 
 
-def test_the_control_accepts_the_original_and_refuses_both_mutations() -> None:
-    control = _control()
+def _control(name: str = "n101") -> dict[str, Any]:
+    return json.loads((linear.LINEAR[name].receipts / "control.json").read_text())
+
+
+@pytest.mark.parametrize("name", CONTROLLED)
+def test_the_control_accepts_the_original_and_refuses_both_mutations(name: str) -> None:
+    control = _control(name)
     assert control["status"] == "CONTROLS_REFUSED"
     verdicts = {run["name"]: run["run"]["verdict"] for run in control["runs"]}
     assert verdicts == {
@@ -847,14 +853,15 @@ def test_the_control_accepts_the_original_and_refuses_both_mutations() -> None:
         "drop-top-contributor": "REFUSED",
     }
     original = control["runs"][0]
-    assert original["candidate_digest"] == linear.LINEAR["n101"].candidate_digest
+    assert original["candidate_digest"] == linear.LINEAR[name].candidate_digest
     assert original["run"]["output"]["nodes"] == control["shipped_record"]["nodes"]
     assert control["checker"]["source_sha256"] == linear.LINEAR_CHECKER_SHA256
 
 
-def test_the_mutations_are_regenerated_and_provably_uncovered() -> None:
-    control = _control()
-    data = json.loads(linear.linear_retained(linear.LINEAR["n101"])["candidate.json"])
+@pytest.mark.parametrize("name", CONTROLLED)
+def test_the_mutations_are_regenerated_and_provably_uncovered(name: str) -> None:
+    control = _control(name)
+    data = json.loads(linear.linear_retained(linear.LINEAR[name])["candidate.json"])
     centre = tuple(Fraction(v) for v in control["witness"]["centre"])
     assert len(centre) == 2
     c, s = net_rotation(Fraction(control["witness"]["t"]))

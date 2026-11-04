@@ -1311,11 +1311,13 @@ def test_the_corrections_on_record_are_recent_and_name_nagamochi_2005() -> None:
     # corrected floors, none of them correcting anything; 220 since the second merge that
     # day, when Hosono's replayed linear certificate (T-080) took n = 101 to 105; 219
     # since the third, when its replayed n = 82 linear certificate (T-076) took n = 82.
-    # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108.
-    assert len(corrected) == 218
+    # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108; 213
+    # since 4 November, when T-179's replayed linear certificate took n = 145 to 149.
+    assert len(corrected) == 213
     assert 37 not in corrected
     assert 61 not in corrected
     assert 108 not in corrected
+    assert not set(range(145, 150)) & set(corrected)
     assert all(line["recent"] for line in corrected.values())
     assert {line["source_key"] for line in corrected.values()} == {
         "[Karakuş 2026]",
