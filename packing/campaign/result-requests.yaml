@@ -27757,7 +27757,8 @@ issues:
     title: 's(299) ≤ 17.801238533979: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-03'
-    state: open
+    state: closed
+    closed: '2026-11-04'
     kind: result-report
     triage: done
     summary: >-
@@ -27789,7 +27790,7 @@ issues:
       off their credit block until the next infographics cut (think-tj4o). The Kaggle
       sources the issue names are no report. No licence is stated; the packet rests on
       the submission's presumption of permission, followed up on think-mdxq.
-    read_through: '2026-11-03T18:57:42Z'
+    read_through: '2026-11-04T13:25:02Z'
     results:
     - key: n299-from-t258
       claim: >-
@@ -27808,17 +27809,54 @@ issues:
     - think-ybep
     - think-mdxq
     answer_bead: think-otv6
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/893#issuecomment-6631808901
+      date: '2026-11-04'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n299-from-t258
+        id: T-263
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n299-from-t258
+        id: E-ozden-893-exact-feasibility
+        status: confirmed
+      - result: n299-from-t258
+        id: E-ozden-893-review-exact-feasibility
+        status: confirmed
+      - result: n299-from-t258
+        id: E-ozden-893-certificate-report
     close_when: >-
       T-263 is on main at V3/C3 as the house at 299, and the reply on main says what was
       replayed, that the print is below the exact side, that the stage 4 review accepted
       the certificate, and that the case adopted it; the licence question (think-mdxq) is
       carried in the closing comment.
+    notes: >-
+      Closed on 4 November 2026 with the final reply (issuecomment-6631808901, posted at
+      13:25:02Z), after #897 merged as 0dc4eaa7b and its Pages deployment passed (run
+      41835363591, deploy job 126596746555, verify-deployment job 126596940550, 6,061 of
+      6,061 checks). The reply was rendered with check_requests --draft 893 from that main
+      and reconciled with think-otv6's draft of 4 November, whose acknowledgements,
+      findings and four questions it keeps: the issue's "rounded up" 17.801238533979 is
+      the 12-place floor, so the bound is the exact side, which rounds up to
+      17.801238533980; and the README's account of what moved, measured against T-258. It
+      adds the rendered register block, which names T-263 at V3/C3 (confirmed and
+      current), E-ozden-893-exact-feasibility and E-ozden-893-review-exact-feasibility,
+      and states the report entry through T-263's word; the licence question
+      (think-mdxq); and that the atlas posters carry the improvement credit when the next
+      infographics cut redraws them (think-tj4o). It read back identical to what was
+      posted, and the issue was closed as completed at 13:25:35Z. The questions are
+      informational and hold nothing open. The deployed pages were not fetched from the
+      session host; verify-deployment checked them.
   - number: 894
     title: 's(204) ≤ 14.807620995586: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-03'
-    state: open
+    state: closed
+    closed: '2026-11-04'
     kind: result-report
     triage: done
     summary: >-
@@ -27851,7 +27889,7 @@ issues:
       side-only claim the issue quotes, 14.803489183116, states no packing and is no
       report. No licence is stated; the packet rests on the submission's presumption of
       permission, followed up on think-mdxq.
-    read_through: '2026-11-03T22:36:13Z'
+    read_through: '2026-11-04T13:25:24Z'
     results:
     - key: n204-from-t257
       claim: >-
@@ -27870,11 +27908,46 @@ issues:
     - think-ybep
     - think-mdxq
     answer_bead: think-8b8m
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/894#issuecomment-6631816984
+      date: '2026-11-04'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n204-from-t257
+        id: T-264
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n204-from-t257
+        id: E-ozden-894-exact-feasibility
+        status: confirmed
+      - result: n204-from-t257
+        id: E-ozden-894-review-exact-feasibility
+        status: confirmed
+      - result: n204-from-t257
+        id: E-ozden-894-certificate-report
     close_when: >-
       T-264 is on main at V3/C3 as the house at 204, and the reply on main says what was
       replayed, that the stage 4 review accepted the certificate, and that the case adopted
       it; the licence question (think-mdxq) is carried in the closing comment.
+    notes: >-
+      Closed on 4 November 2026 with the final reply (issuecomment-6631816984, posted at
+      13:25:24Z), after #897 merged as 0dc4eaa7b and its Pages deployment passed (run
+      41835363591, deploy job 126596746555, verify-deployment job 126596940550, 6,061 of
+      6,061 checks). The reply was rendered with check_requests --draft 894 from that main
+      and reconciled with think-8b8m's draft of 4 November, whose acknowledgements,
+      findings and three questions it keeps, among them that sqcheck's
+      s<=14.807620995585207 is the binary64 side, 1.02e-15 below the exact side. It adds
+      the rendered register block, which names T-264 at V3/C3 (confirmed and current),
+      E-ozden-894-exact-feasibility and E-ozden-894-review-exact-feasibility, and states
+      the report entry through T-264's word; the licence question (think-mdxq); and that
+      the atlas posters carry the improvement credit when the next infographics cut
+      redraws them (think-tj4o). It read back identical to what was posted, and the issue
+      was closed as completed at 13:25:38Z. The questions are informational and hold
+      nothing open. The deployed pages were not fetched from the session host;
+      verify-deployment checked them.
   - number: 895
     title: Improved upper bound for s(260)
     author: vitamoon
