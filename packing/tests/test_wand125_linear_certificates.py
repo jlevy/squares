@@ -222,6 +222,81 @@ def test_the_n82_pre_replay_receipt_is_bound_to_the_pin() -> None:
     assert record["inputs"]["inputs"] == linear.LAST + 1
 
 
+# --------------------------------------------------------------------------- n = 145
+
+N145 = linear.LINEAR["n145"]
+N145_BUNDLE = "4dc4f6731151ec5a0a109c24a3223626824702dd5c8f4f9e9965130be2969a0b"
+
+
+@pytest.fixture(scope="module")
+def n145() -> dict[str, Any]:
+    return linear.linear_certificate(N145)
+
+
+def test_n145_is_read_from_its_release_members_and_its_pinned_tree() -> None:
+    """T-179's certificate, of wand125/square-packing: the four documents its pinned Git
+    tree holds are retained under ``square-packing/problems/square-lower-bounds/``, the
+    candidate and certificate only its release asset holds under ``release/``, and the
+    proof bundle, which only that asset holds, is pinned by the release record."""
+    assert N145.packet == linear.N145_PACKET
+    assert N145.revision == linear.N145_REVISION
+    assert N145.source == linear.N145_PACKET / "square-packing"
+    folder = Path("problems/square-lower-bounds/certificates/mixed_n145_L1224")
+    assert N145.directory == folder
+    release = linear.N145_PACKET / "release/certificates/mixed_n145_L1224"
+    assert mixed.retained_path(N145, "candidate.json") == release / "candidate.json.gz"
+    assert mixed.retained_path(N145, "certificate.json") == release / "certificate.json.gz"
+    for name in ("manifest.json", "completion-audit.json", "README.md"):
+        assert mixed.retained_path(N145, name) == N145.source / folder / name
+    assert mixed.tarball_pin(N145) == (N145_BUNDLE, 47407937)
+    tree = linear.linear_tree(N145)
+    assert tree[N145.upstream_tarball] == N145_BUNDLE
+    assert tree[folder / "code/unified_linear_verify.cpp"] == linear.LINEAR_CHECKER_SHA256
+    receipt = linear.N145_PACKET / "receipts/linear-audit.json"
+    expected = json.dumps(linear.linear_audit(linear.N145_PACKET), indent=2, default=str) + "\n"
+    assert receipt.read_text(encoding="utf-8") == expected
+
+
+def test_n145_has_its_stated_exact_premises(n145: dict[str, Any]) -> None:
+    assert n145["orbits"] == {"rectangle": 9, "point": 594, "segment": 1541}
+    assert n145["images"] == {"rectangle": 72, "point": 4752, "segment": 12328}
+    assert Fraction(n145["total_mass"]) == 145 - Fraction(1, 100000)
+    assert n145["candidate_digest"] == N145.candidate_digest
+    assert n145["code_files"] == 13
+    assert n145["checker_sha256"] == linear.LINEAR_CHECKER_SHA256
+    assert n145["nodes"] == 124435707
+    assert (n145["most_nodes"], n145["most_nodes_at"]) == (3330973, 0)
+    assert n145["tarball_sha256"] == N145_BUNDLE
+    assert n145["comparison"]["side_exceeds_green"]
+    assert n145["comparison"]["side_exceeds_nagamochi"]
+
+
+def test_the_n145_pre_replay_receipt_is_bound_to_the_pin() -> None:
+    record = json.loads((N145.receipts / "fetch.json").read_text())
+    assert record["status"] == "BUNDLE_READY"
+    assert (record["tarball"]["sha256"], record["tarball"]["bytes"]) == mixed.tarball_pin(N145)
+    assert "certificates__mixed_n145_L1224.tar.gz" in record["tarball"]["origin"]
+    assert record["bindings"]["files"] == 810
+    assert record["bindings"]["checker_copies"] == 202
+    assert record["preconditions"]["candidate_digest"] == N145.candidate_digest
+    assert record["inputs"]["status"] == "ALL_INPUTS_ENCLOSE_THE_CANDIDATE"
+    assert record["inputs"]["inputs"] == linear.LAST + 1
+
+
+def test_a_release_asset_off_its_pin_is_refused(tmp_path: Path) -> None:
+    asset = tmp_path / "certificates__mixed_n145_L1224.tar.gz"
+    asset.write_bytes(b"not the asset")
+    with pytest.raises(ValueError, match="the release record pins"):
+        mixed.release_bundle(N145, tmp_path / "work", asset)
+    assert not (tmp_path / "work" / N145.tarball).exists()
+
+
+def test_a_bundle_the_pinned_tree_holds_is_never_taken_from_a_release(tmp_path: Path) -> None:
+    supplied = tmp_path / linear.LINEAR["n101"].tarball
+    assert mixed.release_bundle(linear.LINEAR["n101"], tmp_path, supplied) == (supplied, None)
+    assert mixed.release_bundle(linear.LINEAR["n101"], tmp_path, None) == (None, None)
+
+
 def test_a_tarball_is_checked_only_against_its_own_packet(tmp_path: Path) -> None:
     stray = tmp_path / N82.tarball
     stray.write_bytes(b"not the bundle")
@@ -758,12 +833,18 @@ def test_each_price_rests_on_its_own_samples() -> None:
 # --------------------------------------------------------------------------- the control
 
 
-def _control() -> dict[str, Any]:
-    return json.loads((linear.LINEAR["n101"].receipts / "control.json").read_text())
+#: The certificates whose linear-control receipt is retained: n101's of 2 October, which
+#: T-080 to T-082 cite, and n145's of T-179's replay.
+CONTROLLED = ("n101", "n145")
 
 
-def test_the_control_accepts_the_original_and_refuses_both_mutations() -> None:
-    control = _control()
+def _control(name: str = "n101") -> dict[str, Any]:
+    return json.loads((linear.LINEAR[name].receipts / "control.json").read_text())
+
+
+@pytest.mark.parametrize("name", CONTROLLED)
+def test_the_control_accepts_the_original_and_refuses_both_mutations(name: str) -> None:
+    control = _control(name)
     assert control["status"] == "CONTROLS_REFUSED"
     verdicts = {run["name"]: run["run"]["verdict"] for run in control["runs"]}
     assert verdicts == {
@@ -772,14 +853,15 @@ def test_the_control_accepts_the_original_and_refuses_both_mutations() -> None:
         "drop-top-contributor": "REFUSED",
     }
     original = control["runs"][0]
-    assert original["candidate_digest"] == linear.LINEAR["n101"].candidate_digest
+    assert original["candidate_digest"] == linear.LINEAR[name].candidate_digest
     assert original["run"]["output"]["nodes"] == control["shipped_record"]["nodes"]
     assert control["checker"]["source_sha256"] == linear.LINEAR_CHECKER_SHA256
 
 
-def test_the_mutations_are_regenerated_and_provably_uncovered() -> None:
-    control = _control()
-    data = json.loads(linear.linear_retained(linear.LINEAR["n101"])["candidate.json"])
+@pytest.mark.parametrize("name", CONTROLLED)
+def test_the_mutations_are_regenerated_and_provably_uncovered(name: str) -> None:
+    control = _control(name)
+    data = json.loads(linear.linear_retained(linear.LINEAR[name])["candidate.json"])
     centre = tuple(Fraction(v) for v in control["witness"]["centre"])
     assert len(centre) == 2
     c, s = net_rotation(Fraction(control["witness"]["t"]))

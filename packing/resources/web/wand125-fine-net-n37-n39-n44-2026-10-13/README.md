@@ -51,8 +51,8 @@ The other 22 are pinned by digest only, each with its reason in the record:
 Each release asset holds the candidate, the check2 receipt, run log and control, the
 sealed inner bundle, the pre-publication receipt and the nested verifier archive
 `sqverify-proof-net-fe12e036c.tar.gz`, and the receipts below inventory every member.
-The n = 39 and n = 44 assets are not retained: they stay with their author, pinned here
-by size and digest.
+The n = 44 asset is not retained: it stays with its author, pinned here by size and
+digest.
 
 The n = 37 asset’s data members are retained under
 [`release/`](release/certificates/mixed_n37_L64975/), at their paths in the asset, so
@@ -60,12 +60,16 @@ that the census can read the candidate (T-178’s replay, think-w76a, 2 November
 `devtools.fine_net_followup retain` held the asset to its pinned size and SHA-256 and
 copied six members: the candidate (as deterministic gzip, 32,844 bytes for 173,053),
 the check2 receipt, run log, control and control log, and the pre-publication receipt.
-The nested verifier archive and the sealed inner bundle are pinned by digest only, with
-their reasons, in the [retention record](acquisition/release-assets.json), which
-`devtools.fine_net_followup check-retained` re-derives from the packet.
-The six members come to about 230 kB, within `OR-18`’s size rule, by the owner’s answer
-of 17 October to retain fine-net candidates where the census reads them, as the n31 and
-#446 release packets do.
+The n = 39 asset’s six data members are retained the same way under
+[`release/`](release/certificates/mixed_n39_L66625/) (T-176’s census, think-567s, 2
+November 2026), the candidate as deterministic gzip of the 192,393 bytes whose SHA-256,
+`03eef5c3…`, the n = 39 premises receipt pins.
+In both, the nested verifier archive and the sealed inner bundle are pinned by digest
+only, with their reasons, in the [retention record](acquisition/release-assets.json),
+which `devtools.fine_net_followup check-retained` re-derives from the packet.
+Each asset’s six members come to about 230 kB, within `OR-18`’s size rule, by the
+owner’s answer of 17 October to retain fine-net candidates where the census reads them,
+as the n31 and #446 release packets do.
 
 ## What Was Checked
 
@@ -137,6 +141,8 @@ domain), but the gap is above the census’s `AXIS_ROUNDING` of $10^{-9}$, so th
 control would end `CONTROL_FAILED`. It is the defect T-142’s control is held for
 (2.15e-9 there), so the owner’s answer to that question on jlevy/squares#543 decides
 n = 39’s control too.
+#892 has since judged the axis refusal by the sweep’s own enclosure instead of the
+constant, and under it n = 39’s whole-net control passes (below).
 These are diagnostics of the directions they ran and are no control receipts.
 
 ## The Price of a Complete Replay
@@ -173,9 +179,31 @@ to the source’s check2 log, in 12,667.7 CPU-seconds at two threads, against th
 priced above; the whole-net controls ended `CONTROLS_REFUSED`. Its receipts are in the
 [census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md),
 and with the review of 14 October they put T-178 at V3/C3.
-The n = 39 control needs the `AXIS_ROUNDING` decision first. That work, with a budget
-for it, belongs to the import’s bead, think-u0av; n = 44’s is of little value now that
-$s(44) = 7$ is proved (T-252).
+`devtools.fine_net_followup capture-agreement` has since compared that capture with the
+source’s log from the two retained files and found them equal at every direction
+([receipt](receipts/capture-agreement-n37.json)).
+
+n = 39’s replay ran the same day (think-567s), from the candidate retained in
+[`release/`](release/certificates/mixed_n39_L66625/): every one of the 2,073 directions
+verified, 881,271,470 nodes and least certified bound 1.0000000000654117 at direction
+1804, in 11,404.3 CPU-seconds at two threads, against the 12,758 priced above, and
+`capture-agreement` finds every direction equal to the source’s check2 log
+([receipt](receipts/capture-agreement-n39.json)).
+Its whole-net control failed closed, as the review’s F-1 predicted: the original verified
+again at 1804, the 99/100 mutant was refused at all 2,073 directions and the
+near-threshold mutant was refused, but at the axis direction the mutant’s exact capture,
+below 1 at a pose inside the domain, sits 1.26e-9 above the sweep’s certified bound,
+beyond `AXIS_ROUNDING`, so that refusal is not counted. The receipt is kept as
+`mixed_n39_L66625.control-failed-v2.json` in the census folder.
+#892 (think-4uun) has since replaced that constant with the sweep’s own enclosure: an axis
+refusal counts where the enclosure the sweep held at its least vertex, recomputed apart
+from the crate, has the certified bound as its lower end to the bit and contains the
+exact capture. The control rerun under it
+on 3 November, with the same binary, ends `CONTROLS_REFUSED`, and is retained as
+`mixed_n39_L66625.control.json`; the capture was not rerun.
+With the review of 14 October they put T-176 at V3/C3, and n39’s lower lanes hold
+$533/80$.
+n = 44’s replay is of little value now that $s(44) = 7$ is proved (T-252).
 
 ## Sources and Notices
 

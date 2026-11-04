@@ -417,6 +417,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-254",
         "T-255",
         "T-258",
+        # T-176's s(39) >= 533/80 supersedes Hosono's check2 133/20 (T-110) at n = 39,
+        # its one count, in both lanes.
+        "T-110",
         # T-233's fine-net bounds supersede Hosono's check2 bounds of 6 October at n = 19,
         # 20, 26 and 27 (T-103 to T-106), one count each, in both lanes.
         "T-103",

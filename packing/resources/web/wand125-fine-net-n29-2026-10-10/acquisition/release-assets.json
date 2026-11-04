@@ -1,0 +1,24 @@
+{
+  "format": "release-asset-retention-v1",
+  "repository": "wand125/square-packing",
+  "release": "square-lower-bounds-v1",
+  "retained_dir": "release",
+  "assets": [
+    {
+      "asset": "certificates__mixed_n29_L582.tar.gz",
+      "certificate": "mixed_n29_L582",
+      "bytes": 651878,
+      "sha256": "6203a9b4cc1a388100531a145c54db232ba8ad1f4674e6da4b41f8b1a59c3274",
+      "members": [
+        {"path":"certificates/mixed_n29_L582/candidate.json","bytes":182193,"sha256":"c9171c9278271b6b4ca5fb9f925ea42a15a88e9aca7701d6542e29e38979722b","stored":"release/certificates/mixed_n29_L582/candidate.json.gz","form":"gzip"},
+        {"path":"certificates/mixed_n29_L582/check2/control-197_200.jsonl.gz","bytes":27729,"sha256":"6ceca1e90beafc30dac48a3b3a29109798412980995c741e5d9e845b968e1eaf","stored":"release/certificates/mixed_n29_L582/check2/control-197_200.jsonl.gz","form":"original-gzip"},
+        {"path":"certificates/mixed_n29_L582/check2/control.json","bytes":353,"sha256":"3d2f11a656ffe5f0529c205e220887230265b6a3965447c24051faec7680b4c7","stored":"release/certificates/mixed_n29_L582/check2/control.json","form":"plain"},
+        {"path":"certificates/mixed_n29_L582/check2/receipt.json","bytes":3002,"sha256":"3746ac085fc73e4fd2094a589c6c937bd31acfcefc7cc94a6c986e450e3644e6","stored":"release/certificates/mixed_n29_L582/check2/receipt.json","form":"plain"},
+        {"path":"certificates/mixed_n29_L582/check2/run.jsonl.gz","bytes":173464,"sha256":"6bce9a2ae9aa2616bfdc5f91704a19091765d70c23513651bcc8e345e550f171","stored":"release/certificates/mixed_n29_L582/check2/run.jsonl.gz","form":"original-gzip"},
+        {"path":"certificates/mixed_n29_L582/check2/src/sqverify-proof-net-fe12e036c.tar.gz","bytes":69540,"sha256":"e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81","pinned_only":"the source's adaptation of this repository's sqverify_fast, which carries no notice of its own and is kept out of this tree beside the crate whose declared-net change was written apart from it (sqverify_fast/INDEPENDENCE.md); the archive the 2026-10-06 check2 packet pins by the same digest"},
+        {"path":"certificates/mixed_n29_L582/n29-L5.82-check2-bundle.tar.gz","bytes":341041,"sha256":"ac46ad93d192bbef29af5d9f90d660a6e1468aef4268e5ded071dbbf79d8a356","pinned_only":"the sealed inner bundle, whose payloads repeat this directory's files and whose members the premises receipt inventories"},
+        {"path":"certificates/mixed_n29_L582/verification/prepublication-receipt.json","bytes":892,"sha256":"52d716c205d39c3831b8bcd303462c222b38fd41da2f360a4a56470a1f5694b5","stored":"release/certificates/mixed_n29_L582/verification/prepublication-receipt.json","form":"plain"}
+      ]
+    }
+  ]
+}
