@@ -18,6 +18,7 @@ import math
 import random
 import struct
 from fractions import Fraction
+from pathlib import Path
 
 import pytest
 
@@ -38,7 +39,8 @@ REVIEW = census.WEB / PACKET / "review/outputs/sweep_emulation-n37-scaled-99-100
 #: crate source `d97758bb` instrumented to report them gave, with lower ends and argmins
 #: equal to the reviewed build's: mixed_n37_L64975's and mixed_n94_L9965's originals and
 #: 99/100 mutants (review A of #892, and again in its lane on 3 November; both again in
-#: intake lane L37 on 4 November), and `COINCIDENT_AXIS`'s.
+#: intake lane L37 on 4 November), and `COINCIDENT_AXIS`'s. The instrumentation is kept
+#: as `INSTRUMENT`, whose README says how to apply it and build.
 CRATE_UPPER = {
     (NAME, Fraction(1)): 1.002369279185975,
     (NAME, Fraction(99, 100)): 0.9923455863941246,
@@ -47,6 +49,12 @@ CRATE_UPPER = {
     ("coincident", Fraction(1)): 0.2625000000000111,
     ("coincident", Fraction(99, 100)): 0.25987500000001146,
 }
+#: The patch to the reviewed crate's `axis.rs` that reports `value.hi` at the argmin, kept
+#: so that `CRATE_UPPER` can be reproduced (F2 of #898's review); it is never applied in
+#: the tree.
+INSTRUMENT = (
+    Path(__file__).parent / "fixtures/sqverify-fast-axis-instrument/axis-value-hi.patch"
+)
 #: The axis sweep's bound and least vertex on `COINCIDENT_AXIS`, from the reviewed build.
 COINCIDENT_ROWS = {
     Fraction(1): (0.26249999999998913, ("27/20", "2")),
@@ -182,3 +190,37 @@ def test_no_enclosure_where_the_sweep_would_not_run() -> None:
         "primitives": [{"kind": "point", "geometry": ["1", "1"], "mass": "1"}],
     }
     assert axis.column_enclosure(linear, Fraction(1), side / 2, side / 2, upper) is None
+
+
+def test_the_kept_instrumentation_still_fits_the_reviewed_axis_sweep() -> None:
+    """`INSTRUMENT` only adds lines, and its context is the crate's `axis.rs` hunk by hunk
+    in order, so the build its README describes is still the reviewed source plus the
+    report of `value.hi` that `CRATE_UPPER` came from."""
+    source = (census.PROJECT / "sqverify_fast/src/axis.rs").read_text(encoding="utf-8")
+    lines = source.splitlines()
+    text = INSTRUMENT.read_text(encoding="utf-8").splitlines()
+    assert text[:2] == [
+        "--- a/packing/sqverify_fast/src/axis.rs",
+        "+++ b/packing/sqverify_fast/src/axis.rs",
+    ]
+    hunks: list[list[str]] = []
+    for line in text[2:]:
+        if line.startswith("@@"):
+            hunks.append([])
+        else:
+            hunks[-1].append(line)
+    assert hunks
+    added: list[str] = []
+    position = 0
+    for hunk in hunks:
+        assert not any(line.startswith("-") for line in hunk)
+        added += [line[1:] for line in hunk if line.startswith("+")]
+        context = [line[1:] for line in hunk if not line.startswith("+")]
+        start = next(
+            index
+            for index in range(position, len(lines) - len(context) + 1)
+            if lines[index : index + len(context)] == context
+        )
+        position = start + len(context)
+    assert "                hi_at_argmin = value.hi;" in added
+    assert any("INSTRUMENT axis argmin" in line for line in added)
