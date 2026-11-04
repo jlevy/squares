@@ -671,7 +671,7 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
     problems.extend(
         f"missing or repeated day {day}"
         for day in sorted({entry["date"] for entry in entries})
-        if markup.ids.get(f"changelog-date-{day}") != 1
+        if markup.ids.get(f"{render_changelog.DAY_ANCHOR}{day}") != 1
     )
     line = (
         f"{page}: changelog: {'; '.join(problems[:5])}"

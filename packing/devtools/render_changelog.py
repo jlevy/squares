@@ -1186,6 +1186,13 @@ def entry_anchor(identifier: str) -> str:
     return f"changelog-entry-{identifier}"
 
 
+#: A day's bookmark, before its ISO date: a day of the generated `CHANGELOG.md`, the
+#: first News card of a day, the Changelog page's day block, and each retired day that
+#: About and News forward. The home page's Changelog section names its day blocks
+#: otherwise (`overview_sections.HOME_CHANGELOG_DAY`), since its News box holds these.
+DAY_ANCHOR = "changelog-date-"
+
+
 def _component_label(component: str) -> str:
     if component in {"site", "infographics"}:
         return component.capitalize()
@@ -1307,7 +1314,7 @@ def render_markdown(
     for entry in ordered_entries(document):
         if entry["date"] != last_date:
             last_date = entry["date"]
-            date_anchor = f"changelog-date-{last_date}"
+            date_anchor = f"{DAY_ANCHOR}{last_date}"
             date_level = heading_level + 1
             if destination == "site":
                 out.extend(
@@ -1375,7 +1382,7 @@ def archived_news_targets(document: Document) -> dict[str, str]:
     anchors = [entry_anchor(entry["id"]) for entry in excluded]
     public_days = {entry["date"] for entry in news_entries(document)}
     anchors.extend(
-        f"changelog-date-{day}"
+        f"{DAY_ANCHOR}{day}"
         for day in sorted({entry["date"] for entry in excluded} - public_days)
     )
     return {anchor: f"{CHANGELOG_PAGE}#{anchor}" for anchor in anchors}
@@ -1432,7 +1439,11 @@ def _changelog_link(label: str, target: str) -> str:
 
 
 def changelog_entry_line(
-    document: Mapping[str, Any], entry: Mapping[str, Any], *, in_news: bool
+    document: Mapping[str, Any],
+    entry: Mapping[str, Any],
+    *,
+    in_news: bool,
+    anchored: bool = True,
 ) -> str:
     """One site or project change in its day's block on the Changelog page: its title,
     then on the quieter line its score and every GitHub thread behind it.
@@ -1442,6 +1453,9 @@ def changelog_entry_line(
     only reader surface, so it carries the supporting records as well
     (`entry_targets`). The line holds the entry's anchor, which keeps the retired
     article and day bookmarks that `archived_news_targets` forwards here resolving.
+    The home page's Changelog section asks for the line without it (`anchored=False`):
+    that page's News box holds the same anchor on the story's card, and an address
+    names one element.
 
     The Changelog is "concise, mostly complete, linked to github issues and PRs clearly",
     and a story belongs to News rather than to both surfaces (the owner, 26 October 2026).
@@ -1462,10 +1476,8 @@ def changelog_entry_line(
         )
         parts.append(editions)
     score = entry_significance(entry)["score"]
-    return (
-        f'<li id="{html.escape(anchor, quote=True)}">{head}'
-        f"<small>S{score} · {' · '.join(parts)}</small></li>"
-    )
+    identity = f' id="{html.escape(anchor, quote=True)}"' if anchored else ""
+    return f"<li{identity}>{head}<small>S{score} · {' · '.join(parts)}</small></li>"
 
 
 def _news_forward_anchors(targets: dict[str, str]) -> str:
@@ -1678,7 +1690,7 @@ def render_news(
         article = []
         if entry["date"] not in seen_dates:
             # Retain the old daily bookmark at the first individual card for that day.
-            article.append(f'<div id="changelog-date-{entry["date"]}"></div>')
+            article.append(f'<div id="{DAY_ANCHOR}{entry["date"]}"></div>')
             seen_dates.add(entry["date"])
         header = news_article_header(
             title, entry["date"], entry.get("topics", []), entry_significance(entry)
@@ -1748,7 +1760,7 @@ def legacy_news_anchors(document: Document) -> str:
     """Keep old About bookmarks navigable without duplicating the history there."""
     anchors = [entry_anchor(entry["id"]) for entry in document["entries"]]
     anchors.extend(
-        f"changelog-date-{day}" for day in sorted({e["date"] for e in document["entries"]})
+        f"{DAY_ANCHOR}{day}" for day in sorted({e["date"] for e in document["entries"]})
     )
     targets = {anchor: f"news.html#{anchor}" for anchor in anchors}
     targets.update(news_forward_targets(document))
