@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **224** programs: **52** external and **172** first-party; **150** decide claims and **74** check premises.
-- **678** of **859** evidence entries name the programs that verified them: 322 independently re-implemented, 289 reproduced with the producer’s code, 46 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **231** programs: **53** external and **178** first-party; **153** decide claims and **78** check premises.
+- **680** of **861** evidence entries name the programs that verified them: 323 independently re-implemented, 290 reproduced with the producer’s code, 46 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -79,6 +79,9 @@ second implementation agrees.
 | [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
+| [`V-ozden-integer-checker`](#v-ozden-integer-checker) | independent.py with intcheck_final.cpp | Doğa Özden's research lab (an OpenAI Codex agent) | external | decides | 1 | 1 |
+| [`V-ozden-890-review-axis`](#v-ozden-890-review-axis) | dm_axis.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-890-review-sample`](#v-ozden-890-review-sample) | dm_sample.py and dm_receipts.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 104 | 94 |
@@ -143,6 +146,10 @@ second implementation agrees.
 | [`V-couzo-670-672-675-review-check`](#v-couzo-670-672-675-review-check) | review_0nse_check.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
 | [`V-mishapolk-719-review-check`](#v-mishapolk-719-review-check) | review_t229_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-evand-gradec-review-check`](#v-evand-gradec-review-check) | check_theorem_c.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-ozden-890-review-premises`](#v-ozden-890-review-premises) | dm_premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-ozden-890-review-controls`](#v-ozden-890-review-controls) | dm_mutants.py and dm_selftest.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-ozden-890-review-compare`](#v-ozden-890-review-compare) | dm_compare.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-audit-dilated-measure`](#v-audit-dilated-measure) | devtools.audit_dilated_measure | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-evand-regularized-1020-review-controls`](#v-evand-regularized-1020-review-controls) | sharp_controls_t225.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-couzo-670-672-675-review-controls`](#v-couzo-670-672-675-review-controls) | sharp_controls_0nse.py | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-mishapolk-719-review-controls`](#v-mishapolk-719-review-controls) | sharp_controls_t229.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -1220,6 +1227,50 @@ Proves Sq17.square17_optimality, s(17) = L, in Lean 4.34.1 with Mathlib v4.34.1 
 | --- | --- | --- | --- | --- |
 | `E-n017-fitzharding-lean-source-build` | the source’s own run | reproduced with the producer’s code | full: the source's 4,951-module import closure of Sq17.square17_optimality | T-154 |
 | `E-n017-fitzharding-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-154 |
+
+### `V-ozden-integer-checker`
+
+**independent.py with intcheck_final.cpp, run by run.sh** · Doğa Özden's research lab (an OpenAI Codex agent) · external · decides · Python, C++ · interval-certified
+
+Decides a format M rectangle-measure certificate on its declared net: exact Fraction admission and D4 expansion (independent.py), then integer-only branch and bound over each direction's whole centre domain in fixed point of unit 2^-42 with directed rounding and exact rational directions (intcheck_final.cpp), every core capturing at least one.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/independent.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/independent.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/intcheck_final.cpp`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/intcheck_final.cpp), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/run.sh`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/run.sh), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/INTEGER-SOUNDNESS.md`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/INTEGER-SOUNDNESS.md)
+- Versions run: SHA-256 `5ca6546967d4…`, revision `9d76ad5549e9` (independent.py; intcheck_final.cpp is a90e8f06...24f4 at the same revision. The source reports its full run (second-checker/full.jsonl) on Apple arm64; not run here.)
+- Note: Written for the review of jlevy/squares#890's certificate by an OpenAI Codex agent in the author's lab, which the source says had sqverify-fast's SOUNDNESS.md prose but not its source. Retained and read; no evidence entry here rests on a run of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-890-n94-9965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-262 |
+
+### `V-ozden-890-review-axis`
+
+**dm_axis.py, with dmlib.py** · Squares Project (Levy) · first-party · decides · Python · interval-certified, exact-algebraic
+
+Decides direction 0 of a format M measure in full: the capture at every vertex of the event grid over the whole quadrant of centres, as one matrix product with a rigorous a-priori bound on its rounding, and the lowest vertices again in exact rationals. Ran on #890's certificate, where it decided direction 0 at least 1 (least capture 1.003117185664143, at the wall).
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_axis.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_axis.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md`](../../docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #890 import (think-222u), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents, and so did the crate's authors. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that import nothing from this repository, the census tools or the packet's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-890-n94-9965-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 600: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-890-review-sample`
+
+**dm_sample.py and dm_receipts.py, with dmlib.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the exact capture at single poses of a format M measure on its declared net, by clipping each rectangle's images by the core's four half-planes and, apart, by integrating the vertical section: the centre and four corners of every oblique direction's least-bound box, the lowest poses of a binary64 search at 19 directions, and every refusal witness of the census control's 99/100 mutant. Decides those poses only, and no coverage.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_sample.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_sample.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_receipts.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_receipts.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md`](../../docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #890 import (think-222u), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents, and so did the crate's authors. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that import nothing from this repository, the census tools or the packet's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-890-n94-9965-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 600: net directions, each decided over its whole quadrant of centres | - |
 
 ### `V-check-basic-bounds`
 
@@ -2452,6 +2503,59 @@ For Evan Daniel's grade-C configurations, decides exactly in Q[t]/f, with signs 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-gradec-local-minima-233-review-check` | replayed here | independently re-implemented after reading the producer’s code | full: the 233 configurations the release's grade-C archive certifies, each decided in full: the record's packing property, every kept row, the multipliers, null L0 and the flat family, the affine null vectors and the reduced Hessian | T-261 |
+
+### `V-ozden-890-review-premises`
+
+**dm_premises.py, with dmlib.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes in exact rationals, apart from the crate, every premise of the measure-capture theorem but coverage for a format M certificate on its declared net: the file, the mass, lemma N0's (a) to (e), the net's coverage of [0, tan(pi/8)] and the per-bin domain at every node; and records the facts of a dilation against its base.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_premises.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_premises.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md`](../../docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #890 import (think-222u), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents, and so did the crate's authors. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that import nothing from this repository, the census tools or the packet's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-890-n94-9965-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 600: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-890-review-controls`
+
+**dm_mutants.py and dm_selftest.py, with dmlib.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Controls of the review's evaluators and mutants of #890's certificate: known areas at oblique angles, the two exact methods against each other and binary64, the crate's exact capture at one leaf, the author's n = 31 refusal; and five mutants (Hosono's net, one direction short, the core left undilated, two mass scalings), each refused for the reason it names. Decides nothing about the claim.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_mutants.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_mutants.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_selftest.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_selftest.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md`](../../docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #890 import (think-222u), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents, and so did the crate's authors. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that import nothing from this repository, the census tools or the packet's source.
+
+No evidence entry names it yet.
+
+### `V-ozden-890-review-compare`
+
+**dm_compare.py, with dmlib.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Holds the values of the review the author commissioned (second-checker/GRADE.json, an OpenAI Codex agent's, read as data) to the review's own evaluator: its least capture at direction 144, its mass mutant, and its two other coverage mutants searched for exact witnesses. Written after the review's findings were committed; decides nothing about the claim.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_compare.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_compare.py), [`packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py`](../../packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md`](../../docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #890 import (think-222u), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents, and so did the crate's authors. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that import nothing from this repository, the census tools or the packet's source.
+
+No evidence entry names it yet.
+
+### `V-audit-dilated-measure`
+
+**devtools.audit_dilated_measure** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes in exact rationals, from a packet's retained certificate and apart from the crate, the premises of a format M certificate that dilates a retained one onto a declared net: the file's shape, the masses and containment, the total n - 1/100000, lemma N0's (a) to (e), the dilation row by row against the base, and the regeneration of the certificate's JSON text from the base by the source's stated rule; then compares the census capture with the producer's sqverify-fast receipts direction by direction. It decides no coverage; sqverify-fast does.
+
+- Source: [`packing/devtools/audit_dilated_measure.py`](../../packing/devtools/audit_dilated_measure.py), [`packing/tests/test_audit_dilated_measure.py`](../../packing/tests/test_audit_dilated_measure.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after reading the certificate, the source's README and tools/rescale.py as data. Its receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in the ozden-s94-lower-bound-2026-11-03 packet.
+
+No evidence entry names it yet.
 
 ### `V-evand-regularized-1020-review-controls`
 
@@ -3986,7 +4090,7 @@ Builds six mutants of a de Winter certificate of issue 668 at the scale of its m
 
 **devtools.audit_fine_net_receipt** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Checks a rectangle-only declared-net candidate's exact mass, geometry and net premises, binds its saved native census and complete direction log, and recomputes every saved control-witness capture using exact polygon clipping. It decides premises and particular points, never universal coverage between them.
+Checks a rectangle-only declared-net candidate's exact mass, geometry and net premises, binds its saved native census and complete direction log, and recomputes every saved control-witness capture using exact polygon clipping. An axis refusal is judged against the enclosure the native vertex sweep held at its least vertex, which the audit recomputes by transcribing the crate's column walk: the reported bound must be its lower end to the bit and the exact capture must lie in it (F-1 of the 14 October review, #892), where it once allowed a constant 1e-9. It decides premises and particular points, never universal coverage between them.
 
 - Source: [`packing/devtools/audit_fine_net_receipt.py`](../../packing/devtools/audit_fine_net_receipt.py), [`packing/tests/test_audit_fine_net_receipt.py`](../../packing/tests/test_audit_fine_net_receipt.py)
 - Versions run: this repository's commits, which Git holds

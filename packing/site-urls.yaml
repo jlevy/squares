@@ -7843,7 +7843,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-03'
   status: live
 - path: cases/95.html
   canonical: cases/95.html
@@ -22903,6 +22903,39 @@ urls:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/tasks/exact-minpoly/grade-C.md
     - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec_runs/_status.txt
     - docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
+- path: result/t-262.html
+  canonical: result/t-262.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-03'
+  lastmod: '2026-11-03'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 94
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s94 dilation 2026-11-03]'
+      published: '2026-11-03'
+    builds_on: null
+    evidence:
+    - E-ozden-890-n94-9965-report
+    artifacts:
+    - packing/resources/web/ozden-s94-lower-bound-2026-11-03/README.md
+    - packing/resources/web/ozden-s94-lower-bound-2026-11-03/acquisition/sources.json
+    - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/certificate/n94_L9965.json.gz
+    - packing/resources/web/ozden-s94-lower-bound-2026-11-03/receipts/dilation-audit.json
+    - packing/resources/web/ozden-s94-lower-bound-2026-11-03/receipts/replay-comparison.json
+    - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/README.md
+    - packing/devtools/audit_dilated_measure.py
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.control-failed-v2.json
+    - docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
 - path: results.html
   canonical: results.html
   kind: page

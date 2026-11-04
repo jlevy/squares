@@ -47,12 +47,19 @@ per-bin centre domain (lemma D, with lemma C1's quarter turn: the whole square
 by `check_sqverify_fast.mixed_exact`, an exact evaluator written apart from the crate,
 equals the crate's, is below 1, and is at least 1 divided by 99/100 for the original. The
 pose is the refusal's witness, or at the axis the sweep's least vertex; rows and summary
-must agree, and the mutant's premises restate the census row's. The mutant may verify
-elsewhere, where the original captures at least 100/99: the least-bound direction is
-chosen by the branch and bound's termination margin, so a run there alone can verify a
-true mutant and fail closed (FC-1 of the 6 October re-check; v1 receipts ran it at the
-least-bound direction only, where it was refused; the review of this fix is
-docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md).
+must agree, and the mutant's premises restate the census row's. The axis sweep reports
+no exact capture, only the lower end of the enclosure it held at that vertex, so there
+"equals the crate's" means that the capture lies in that enclosure, which
+`devtools.sqverify_fast_axis` recomputes by walking the vertex's column as the crate
+does and ties to the crate by its lower end, equal to the reported bound to the bit
+(`axis_captures_agree`; option 2 of F-1 in the review of 14 October,
+docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md, in
+place of a constant allowance of 1e-9 that failed sound refusals at s(39) and s(94)).
+The mutant may verify elsewhere, where the original captures at least 100/99: the
+least-bound direction is chosen by the branch and bound's termination margin, so a run
+there alone can verify a true mutant and fail closed (FC-1 of the 6 October re-check;
+v1 receipts ran it at the least-bound direction only, where it was refused; the review
+of this fix is docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md).
 Every mass scaled so that the exact capture at the least-bound leaf's centre is at most
 one part in a million below the threshold runs at that direction; that capture is
 evaluated again by the same evaluator and must equal the crate's, and the refused mutant
@@ -145,6 +152,7 @@ from devtools.check_sqverify_fast import (
     read_raw,
     scaled,
 )
+from devtools.sqverify_fast_axis import column_enclosure
 from sqpack import retained_json
 from sqpack.rectangle_density import (
     RectangleDensityCandidate,
@@ -181,7 +189,17 @@ MIXED_PACKETS = (
     "wand125-fine-net-lower-bounds-446-release-2026-10-08",
     "wand125-fine-net-n37-n39-n44-2026-10-13",
     "wand125-fine-net-n29-2026-10-10",
+    "ozden-s94-lower-bound-2026-11-03",
 )
+#: A packet that is not Hosono's and keeps a format M certificate at its own upstream
+#: path, by the census name it is given (`mixed_nN_LDIGITS`, the format's convention) and
+#: its path in the packet. Doğa Özden's dilation of Hosono's mixed_n94_L995
+#: (jlevy/squares#890) is `certificate/n94_L9965.json.gz` upstream.
+MIXED_FILES: dict[str, dict[str, str]] = {
+    "ozden-s94-lower-bound-2026-11-03": {
+        "mixed_n94_L9965": "source/certificate/n94_L9965.json.gz",
+    },
+}
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
 #: the 16 October fine-net packet, the n31 packet of 11 October, the release members of
 #: four #446 certificates, the n37 and n39 members of the 13 October packet and the n29
@@ -280,12 +298,22 @@ def certificates_root(packet: str) -> Path:
 
 
 def mixed_cases() -> list[Case]:
-    """Every format M or L certificate of Hosono's mixed and linear packets."""
+    """Every format M or L certificate of Hosono's mixed and linear packets, and each one
+    `MIXED_FILES` names in another packet."""
     cases: list[Case] = []
     for packet in MIXED_PACKETS:
-        root = certificates_root(packet)
-        for path in sorted(root.glob("mixed_n*_L*/candidate.json.gz")):
-            name = path.parent.name
+        named = MIXED_FILES.get(packet)
+        found = (
+            [(name, WEB / packet / relative) for name, relative in sorted(named.items())]
+            if named is not None
+            else [
+                (path.parent.name, path)
+                for path in sorted(
+                    certificates_root(packet).glob("mixed_n*_L*/candidate.json.gz")
+                )
+            ]
+        )
+        for name, path in found:
             data = json.loads(gzip.decompress(path.read_bytes()), parse_float=str)
             side = Fraction(str(data["L"]))
             n = int(data["n"])
@@ -631,9 +659,6 @@ def tightest_centre(
 #: `non-finite`, `unresolved` and `fault-injected` are not refusals a control may count.
 CANDIDATE = "counterexample-candidate"
 AXIS_REFUSED = "refused"
-#: How far the axis sweep's certified lower bound on the capture at its least vertex may
-#: sit below the exact capture there: its binary64 rounding over a few thousand terms.
-AXIS_ROUNDING = Fraction(1, 10**9)
 
 
 def domain_bounds(raw: dict[str, Any], index: int) -> tuple[Fraction, Fraction]:
@@ -659,6 +684,47 @@ def in_domain(raw: dict[str, Any], index: int, pose: Any) -> bool:
     return all(low <= Fraction(value) <= high for value in pose)
 
 
+def axis_captures_agree(
+    bound: float | str | None, capture: Fraction | None, enclosure: tuple[float, float] | None
+) -> bool:
+    """Whether the exact capture at the axis sweep's least vertex is the one the sweep
+    enclosed there (CR-5 of the re-check, judged as F-1 of the 14 October review asks).
+
+    The sweep reports no capture, only `bound`, the least lower end `l` of the intervals
+    `[l, u]` it held at its vertices (lemmas A2 and I1). `enclosure` is `[l', u']` at the
+    reported vertex, recomputed by `devtools.sqverify_fast_axis.column_enclosure`, and the
+    rule is `l' = bound`, to the bit, and `l' <= capture <= u'`:
+
+    - The first clause ties the walk's inputs and lower chain to the crate: the measure,
+      factor and vertex (and so the crate's argmin), the events, the rectangles' order and
+      every lower endpoint summed, since the walk reproduced the lower end the crate
+      certified. It does not witness the upper end: `u'` comes through the upper halves of
+      the interval steps, which no lower end depends on, and is tied to the crate by
+      transcription, checked against a build instrumented to report it
+      (`devtools.sqverify_fast_axis` says how).
+    - The second is the interval contract. `bound <= capture` is the direction soundness
+      needs, checked exactly. `capture <= u'` holds for the true capture on any path the
+      walk takes, by lemma I1 and lemma A2's schedule, so it can only reject a capture
+      that is not the one the walk enclosed. The allowance above `bound` is `u' - l'`,
+      the width the sweep's arithmetic reached at that vertex, and no constant: a
+      narrower one asks for precision the sweep did not have (at s(39) and s(94), where
+      the capture sits at the middle of a width of 2.5e-9 and 2.2e-9, the constant 1e-9
+      this replaces failed sound refusals closed), and a wider one admits a capture the
+      sweep's own enclosure excludes (at s(37) the width is 1.4e-10, a seventh of that
+      constant).
+
+    This is an identity check, not the refusal's soundness, which rests on the exact
+    clauses beside it (the capture below 1 at a vertex in the domain). Either clause
+    failing means the capture evaluated apart from the crate is not the value the sweep
+    enclosed (another pose, measure, net or factor) or the walk was not the crate's, and
+    the refusal does not count. No enclosure, where the vertex is not on the event grid,
+    and a bound that is None or NaN, fail closed."""
+    if bound is None or capture is None or enclosure is None:
+        return False
+    low, high = enclosure
+    return low == float(bound) and Fraction(low) <= capture <= Fraction(high)
+
+
 def refusal_record(
     raw: dict[str, Any], row: dict[str, Any], factor: Fraction, *, format_m: bool
 ) -> dict[str, Any]:
@@ -678,16 +744,19 @@ def refusal_record(
         factor * mixed_exact(raw, Fraction(pose[0]), Fraction(pose[1]), index) if pose else None
     )
     crate = witness.get("exact_coverage")
+    enclosure = None
     if axis:
         # The vertex sweep evaluates no capture exactly; it certifies a lower bound on the
-        # capture at its least vertex, which the exact capture must meet, within the
-        # sweep's rounding (CR-5 of the re-check).
+        # capture at its least vertex, the lower end of the enclosure it held there, which
+        # is recomputed here and must hold the exact capture (CR-5 of the re-check, F-1 of
+        # the 14 October review).
         bound = row.get("min_certified_lower_bound")
-        agree = (
-            capture is not None
-            and bound is not None
-            and Fraction(bound) <= capture <= Fraction(bound) + AXIS_ROUNDING
-        )
+        if pose and format_m:
+            upper = domain_bounds(raw, 0)[1]
+            enclosure = column_enclosure(
+                raw, factor, Fraction(pose[0]), Fraction(pose[1]), upper
+            )
+        agree = axis_captures_agree(bound, capture, enclosure)
     else:
         agree = capture is not None and crate is not None and Fraction(crate) == capture
     return {
@@ -701,6 +770,7 @@ def refusal_record(
         "capture": None if capture is None else str(capture),
         "capture_below_1": capture is not None and capture < 1,
         "crate_lower_bound": row.get("min_certified_lower_bound") if axis else None,
+        "sweep_enclosure": None if enclosure is None else list(enclosure),
         "captures_agree": agree,
         "original_at_least_1": capture is not None and capture / factor >= 1,
     }
@@ -1381,10 +1451,23 @@ INDEPENDENT_MIXED_PACKETS = frozenset(
         "wand125-mixed-bounds-finer-net-2026-10-06",
     }
 )
+#: Packets whose producer decided the certificate with this repository's own
+#: `sqverify-fast`, unmodified, so a census row of it reproduces the producer's run: the
+#: #890 dilation, whose receipts name the crate source `d97758bb...` at e6e8d577.
+SAME_CRATE_PACKETS = frozenset({"ozden-s94-lower-bound-2026-11-03"})
 
 
 def mixed_relationship(case: Case) -> tuple[list[str], str]:
     """Reviewed producer relationship fields and prose for a mixed packet."""
+    if case.packet in SAME_CRATE_PACKETS:
+        return ["    relationship_to_generator: same-implementation"], (
+            "The producer decided the certificate with this repository's sqverify-fast, "
+            "built unmodified from the same reviewed crate source, and its receipts are "
+            "retained in its packet; this replay reproduces that run with the producer's "
+            "code. The crate is this repository's clean-room implementation, written "
+            "without opening Hosono's checker, which never decided this certificate. No "
+            "second implementation or second method is run here. "
+        )
     if (case.packet, case.certificate) == (
         "wand125-mixed-bounds-check2-2026-10-06",
         "mixed_n29_L581",

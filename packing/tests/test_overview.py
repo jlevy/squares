@@ -456,9 +456,12 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     landings = [
         "the-problem",
         "the-atlas-of-square-packings",
-        # Recently Added moved to the Changelog page on 26 October 2026; the home page
-        # offers it beside All News instead of carrying the block.
+        # Recently Added moved to the Changelog page on 26 October 2026. Since 3 November
+        # 2026 the log's newest days have a section of their own under News, each with
+        # its own button (the owner: "each with its own section and button to go to the
+        # dedicated page").
         "news",
+        "changelog",
         "recent-results",
         "papers",
         "profiles",
@@ -473,6 +476,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert 'href="atlas.html">Visual Atlas' in page
     assert 'href="news.html" data-news-carry>All News' in page
     assert 'href="changelog.html">Changelog' in page
+    assert page.count('id="changelog"') == 1
     assert 'id="recently-added"' not in page
     assert 'href="papers.html">All Papers' in page
     assert ">View " not in page
@@ -486,7 +490,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
         assert "data-atlas-rest" not in markup
     # The News box carries the newest three of each level for its filter
     # (`news_highlights.carried`) and shows three.
-    news = page.split('id="news"', 1)[1].split('<h2 id="recent-results"', 1)[0]
+    news = page.split('id="news"', 1)[1].split('<h2 id="changelog"', 1)[0]
     carried = len(news_highlights.carried(render_changelog.load()))
     assert len(re.findall(r"<h3\b.*?</h3>", news, re.DOTALL)) == carried
     shown = news.split("<section ")[1:]

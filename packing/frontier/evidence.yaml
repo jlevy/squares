@@ -54999,3 +54999,109 @@ evidence:
       the receipts. The source's own checker was not run here on this certificate, and its
       tarball is pinned by digest and not retained.
     source_reviewed: '2026-11-02'
+  - id: E-ozden-890-n94-9965-report
+    claim: lower-bound
+    scope: {n_values: [94]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s94 dilation 2026-11-03]'
+    certificate: packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/certificate/n94_L9965.json.gz
+    replay_status: not-attempted
+    verifiers: [V-ozden-integer-checker]
+    limitations: >-
+      The author reports s(94) >= 1993/200 = 9.965 from Hiroaki Hosono's mixed_n94_L995
+      measure (T-091) dilated by 1993/1990: 853 rectangle orbits, masses unchanged, total
+      9399999/100000, core side 19884161/19900000, on a net the candidate declares of 600
+      half-angles of step 83/120000. It reports this repository's sqverify-fast,
+      unmodified at e6e8d577 (crate source d97758bb..., rustc 1.98.0), VERIFIED at all
+      600 directions, least certified bound 1.0000000000314 over 296,805,699 nodes in
+      7,887 CPU seconds, and a second build with rustc 1.93.1 equal direction by
+      direction; and an exact-integer checker written for its review by an OpenAI Codex
+      agent, VERIFIED at all 600 on Apple arm64, with that agent's review of the argument
+      (GRADE.md, verdict SOUND, an AI review and no human one) whose mutants are refused.
+      The source says Claude agents in the author's lab found the dilation, built the
+      certificate, ran the checks and drafted the write-up. Both receipts and the second
+      checker are retained in the packet; the second checker was not run here.
+      devtools.audit_dilated_measure (receipts/dilation-audit.json in the packet)
+      recomputes from the retained bytes the premises, lemma N0 on the declared net, the
+      dilation row by row against the T-091 packet's retained mixed_n94_L995, and the
+      certificate's JSON text regenerated from it byte for byte; none of it decides
+      coverage. The author's sqverify-fast is this repository's V-sqverify-fast, named here
+      in prose only, since an entry that lists it is a replay here. That replay ran on 3
+      November 2026, reproduced with the producer's code: the census decided the retained
+      certificate at all 600 directions, every direction's row equal to both receipts
+      apart from timings (receipts/replay-comparison.json), and its whole-net control
+      refused both mutants on coverage and failed closed only on the census's axis
+      tolerance (F-1 of the 14 October review, think-4uun). It enters as evidence once a
+      control receipt passes.
+    source_reviewed: '2026-11-03'
+    external_review:
+      state: informally-verified
+      date: '2026-11-03'
+      reviewed_by: >-
+        Claude (AI review), strong tier (tbd-strong-max) at maximum reasoning, the stage 4
+        mathematical lane of the #890 import (think-222u), separately prompted and sharing
+        no context with the import lane
+      note: >-
+        Accepted in the stage 4 review of 3 November
+        (docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md): the argument
+        re-derived on the declared net, every premise but coverage recomputed exactly
+        apart from the crate, direction 0 decided in full by its own implementation and
+        every other direction's least-bound box held exactly, and the records read
+        against the 6 October declared-net checklist; no defect. Its F1, a gap in the
+        records lane and not a defect of the certificate, is the census control's axis
+        tolerance (think-4uun); F2 to F6 are notes.
+  - id: E-ozden-890-n94-9965-review-sample
+    claim: lower-bound
+    scope: {n_values: [94]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s94 dilation 2026-11-03]'
+    certificate: packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/certificate/n94_L9965.json.gz
+    replay: >-
+      From the repository root, with PY packing/.venv/bin/python3 -I, P
+      packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs
+      and the inputs that directory's README names: PY P/dm_premises.py CERT BASE OUT
+      must write PREMISES_HOLD; OPENBLAS_NUM_THREADS=2 PY P/dm_axis.py CERT OUT CAPTURE
+      must write decided_at_least_1 true; PY P/dm_sample.py CERT BASE CAPTURE OUTDIR must
+      write CONSISTENT; PY P/dm_receipts.py with the two author receipts, the census
+      capture, census.json, the control receipt and premises.json must write
+      RECORDS_HOLD; and PY P/dm_mutants.py CERT BASE sample.json OUT must write
+      EVERY_MUTANT_REFUSED. The receipts are in the directory's outputs/.
+    replay_status: passed
+    verifiers: [V-ozden-890-review-premises, V-ozden-890-review-axis, V-ozden-890-review-sample]
+    independence_record: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+    independence:
+      coverage:
+        extent: sample
+        unit: net directions, each decided over its whole quadrant of centres
+        checked: 1
+        of: 600
+    limitations: >-
+      Run here on 3 November 2026 by the stage 4 review (think-222u) under CPython 3.14.7
+      on a shared four-core host, 138 CPU-seconds in its final runs. It decided direction
+      0 in full: every vertex of the event grid (5,430 by 5,430, the crate's counts) by a
+      matrix product with a rigorous rounding bound of 3.19e-9, the lowest vertices again
+      exactly, least capture 1.003117185664143 at the wall, in the strip the dilation adds.
+      At the other 599 directions it evaluated exactly the centre and four corners of the
+      crate's least-bound box, all at or above their certified bounds (least margin
+      0.00231, direction 537), and found no capture below 1.0017633 in a binary64 search
+      at 19 directions; the commissioned review's lower capture, 1.0011230 at direction
+      144, it reproduced exactly. It held every refusal of the census control's 99/100
+      mutant exactly and refused five mutants for the reasons they name. Every premise
+      but coverage was recomputed exactly (dm_premises.py). A sample decides the
+      direction it ran in full and the poses it evaluated, nothing about the other 599
+      directions' coverage, and supports no rung. Its programs were written after
+      reading the crate's admission, declared net, per-bin domain and search box, which
+      the producer ran, so they are independently re-implemented after reading the
+      producer's code, not clean-room, by a Claude agent, a system family the author's
+      lab also used.
+    source_reviewed: '2026-11-03'

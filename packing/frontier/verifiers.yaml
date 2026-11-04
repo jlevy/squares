@@ -1058,8 +1058,124 @@ verifiers:
       the commit, by manifest.json's SHA-256 of each, and by the archives' SHA-256. The
       README says the project "was developed with substantial assistance from Claude and
       Codex".
+  - id: V-ozden-integer-checker
+    program: independent.py with intcheck_final.cpp, run by run.sh
+    author: Doğa Özden's research lab (an OpenAI Codex agent)
+    provenance: external
+    language: [Python, C++]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      Decides a format M rectangle-measure certificate on its declared net: exact Fraction
+      admission and D4 expansion (independent.py), then integer-only branch and bound over
+      each direction's whole centre domain in fixed point of unit 2^-42 with directed
+      rounding and exact rational directions (intcheck_final.cpp), every core capturing at
+      least one.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/independent.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/intcheck_final.cpp
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/run.sh
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/second-checker/INTEGER-SOUNDNESS.md
+    versions:
+      - sha256: 5ca6546967d45881adcfa6b39d13c735ac5b50e93ed3aaa56090f2a6b4d82508
+        revision: 9d76ad5549e99e952c899462b36d2bd765517969
+        note: >-
+          independent.py; intcheck_final.cpp is a90e8f06...24f4 at the same revision. The
+          source reports its full run (second-checker/full.jsonl) on Apple arm64; not run here.
+    note: >-
+      Written for the review of jlevy/squares#890's certificate by an OpenAI Codex agent in
+      the author's lab, which the source says had sqverify-fast's SOUNDNESS.md prose but
+      not its source. Retained and read; no evidence entry here rests on a run of it.
 
   # --- First-party programs: deciders ----------------------------------------------------
+  - id: V-ozden-890-review-axis
+    program: dm_axis.py, with dmlib.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [interval-certified, exact-algebraic]
+    role: decides
+    summary: >-
+      Decides direction 0 of a format M measure in full: the capture at every vertex of
+      the event grid over the whole quadrant of centres, as one matrix product with a
+      rigorous a-priori bound on its rounding, and the lowest vertices again in exact
+      rationals. Ran on #890's certificate, where it decided direction 0 at least 1 (least
+      capture 1.003117185664143, at the wall).
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_axis.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py
+    independence_record: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #890 import (think-222u),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents, and so did the crate's authors. Written by
+          a Claude agent prompted separately from the source and from the import lane, in
+          files of its own that import nothing from this repository, the census tools or
+          the packet's source.
+      note: >-
+        Written after reading SOUNDNESS.md, the crate's format reader, admission, declared net, per-bin domain and search box, which the producer ran, and Hosono's description of format M; the receipts were read to compare. No clean room with respect to the producer's checker is claimed.
+  - id: V-ozden-890-review-sample
+    program: dm_sample.py and dm_receipts.py, with dmlib.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the exact capture at single poses of a format M measure on its declared net,
+      by clipping each rectangle's images by the core's four half-planes and, apart, by
+      integrating the vertical section: the centre and four corners of every oblique
+      direction's least-bound box, the lowest poses of a binary64 search at 19 directions,
+      and every refusal witness of the census control's 99/100 mutant. Decides those poses
+      only, and no coverage.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_sample.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_receipts.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py
+    independence_record: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #890 import (think-222u),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents, and so did the crate's authors. Written by
+          a Claude agent prompted separately from the source and from the import lane, in
+          files of its own that import nothing from this repository, the census tools or
+          the packet's source.
+      note: >-
+        Written after reading SOUNDNESS.md, the crate's format reader, admission, declared net, per-bin domain and search box, which the producer ran, and Hosono's description of format M; the receipts were read to compare. No clean room with respect to the producer's checker is claimed.
   - id: V-check-basic-bounds
     program: devtools.check_basic_bounds
     author: Squares Project (Levy)
@@ -2718,6 +2834,160 @@ verifiers:
       (think-8xy2).
 
   # --- First-party programs: premise checks and replay drivers ------------------------
+  - id: V-ozden-890-review-premises
+    program: dm_premises.py, with dmlib.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes in exact rationals, apart from the crate, every premise of the
+      measure-capture theorem but coverage for a format M certificate on its declared net:
+      the file, the mass, lemma N0's (a) to (e), the net's coverage of [0, tan(pi/8)] and
+      the per-bin domain at every node; and records the facts of a dilation against its
+      base.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_premises.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py
+    independence_record: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #890 import (think-222u),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents, and so did the crate's authors. Written by
+          a Claude agent prompted separately from the source and from the import lane, in
+          files of its own that import nothing from this repository, the census tools or
+          the packet's source.
+      note: >-
+        Written after reading SOUNDNESS.md, the crate's format reader, admission, declared net, per-bin domain and search box, which the producer ran, and Hosono's description of format M; the receipts were read to compare. No clean room with respect to the producer's checker is claimed.
+  - id: V-ozden-890-review-controls
+    program: dm_mutants.py and dm_selftest.py, with dmlib.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Controls of the review's evaluators and mutants of #890's certificate: known areas at
+      oblique angles, the two exact methods against each other and binary64, the crate's
+      exact capture at one leaf, the author's n = 31 refusal; and five mutants (Hosono's
+      net, one direction short, the core left undilated, two mass scalings), each refused
+      for the reason it names. Decides nothing about the claim.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_mutants.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_selftest.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py
+    independence_record: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #890 import (think-222u),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents, and so did the crate's authors. Written by
+          a Claude agent prompted separately from the source and from the import lane, in
+          files of its own that import nothing from this repository, the census tools or
+          the packet's source.
+      note: >-
+        Written after reading SOUNDNESS.md, the crate's format reader, admission, declared net, per-bin domain and search box, which the producer ran, and Hosono's description of format M; the receipts were read to compare. No clean room with respect to the producer's checker is claimed.
+  - id: V-ozden-890-review-compare
+    program: dm_compare.py, with dmlib.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Holds the values of the review the author commissioned (second-checker/GRADE.json,
+      an OpenAI Codex agent's, read as data) to the review's own evaluator: its least
+      capture at direction 144, its mass mutant, and its two other coverage mutants
+      searched for exact witnesses. Written after the review's findings were committed;
+      decides nothing about the claim.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dm_compare.py
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/programs/dmlib.py
+    independence_record: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #890 import (think-222u),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents, and so did the crate's authors. Written by
+          a Claude agent prompted separately from the source and from the import lane, in
+          files of its own that import nothing from this repository, the census tools or
+          the packet's source.
+      note: >-
+        Written after reading SOUNDNESS.md, the crate's format reader, admission, declared net, per-bin domain and search box, which the producer ran, and Hosono's description of format M; the receipts were read to compare. No clean room with respect to the producer's checker is claimed. It read the author's commissioned review only after the findings were committed.
+  - id: V-audit-dilated-measure
+    program: devtools.audit_dilated_measure
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes in exact rationals, from a packet's retained certificate and apart from
+      the crate, the premises of a format M certificate that dilates a retained one onto a
+      declared net: the file's shape, the masses and containment, the total n - 1/100000,
+      lemma N0's (a) to (e), the dilation row by row against the base, and the
+      regeneration of the certificate's JSON text from the base by the source's stated
+      rule; then compares the census capture with the producer's sqverify-fast receipts
+      direction by direction. It decides no coverage; sqverify-fast does.
+    source:
+      - packing/devtools/audit_dilated_measure.py
+      - packing/tests/test_audit_dilated_measure.py
+    note: >-
+      Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after
+      reading the certificate, the source's README and tools/rescale.py as data. Its
+      receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in
+      the ozden-s94-lower-bound-2026-11-03 packet.
   - id: V-evand-regularized-1020-review-controls
     program: sharp_controls_t225.py
     author: Squares Project (Levy)
@@ -5142,7 +5412,11 @@ verifiers:
     summary: >-
       Checks a rectangle-only declared-net candidate's exact mass, geometry and net
       premises, binds its saved native census and complete direction log, and recomputes
-      every saved control-witness capture using exact polygon clipping. It decides
+      every saved control-witness capture using exact polygon clipping. An axis refusal is
+      judged against the enclosure the native vertex sweep held at its least vertex,
+      which the audit recomputes by transcribing the crate's column walk: the reported
+      bound must be its lower end to the bit and the exact capture must lie in it (F-1 of
+      the 14 October review, #892), where it once allowed a constant 1e-9. It decides
       premises and particular points, never universal coverage between them.
     source:
       - packing/devtools/audit_fine_net_receipt.py
