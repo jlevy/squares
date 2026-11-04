@@ -4732,6 +4732,18 @@ issues:
         status: confirmed
         position: current
       beads: [think-u0av]
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6637247642
+      date: '2026-11-04'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      beads: [think-u0av]
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -4788,6 +4800,18 @@ issues:
       (125447599931, 6039 of 6039 checks; result/t-178.html and cases/37.html served), and
       edited to the one moved entry. It restates that the censuses of T-176 and T-177 stay
       with think-u0av.
+
+      The follow-up posted at 2026-11-04T17:21:29Z (issuecomment-6637247642) reports T-176's
+      move from V0/C1, reviewed, pending adoption to V3/C3, confirmed, current, after #889
+      merged (69abc507e): the complete sqverify-fast census of 2 November at all 2,073
+      directions, its whole-net 99/100 control first failed closed at the axis on the
+      constant 1e-9 allowance and refused on the rerun of 3 November under #892's enclosure
+      rule, the near-threshold control refused, and n = 39's lower lanes at 533/80, with
+      T-110 superseded. It was rendered with `check_requests --draft 446` from main at
+      69abc507e, whose Pages run 41873241652 deployed (job 126730930224) and passed its
+      verify-deployment job (126731091216, 6,064 of 6,064 checks), and edited to the one
+      moved entry; it read back identical to what was posted. It restates that T-177's
+      census stays with think-u0av. The issue stays closed.
   - number: 451
     title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
     author: franciscouzo
@@ -24995,7 +25019,8 @@ issues:
       tracking'
     author: jlevy
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-11-04'
     kind: result-report
     triage: done
     summary: >-
@@ -25003,9 +25028,10 @@ issues:
       wand125's mixed_n145_L1224, which reached the project through his watched repository
       rather than an issue, by the owner's answer of that day, "Open all nine
       (Recommended)": one issue for each pending review that had none. The result maps to
-      T-179 at V0/C1, reviewed; the complete replay, its control and a review wait for an
-      owner budget in think-u0av.
-    read_through: '2026-10-24T05:13:20Z'
+      T-179, at V0/C1, reviewed, until #889 merged on 4 November 2026 with the complete
+      replay, its control and the review its C3 needs (think-u0av): T-179 is V3/C3,
+      confirmed, current, and the issue closed with the reply that reports it.
+    read_through: '2026-11-04T17:21:39Z'
     results:
     - key: linear-n145-1224
       claim: s(n) >= 306/25 = 12.24 for n = 145 to 149, by the linear measure mixed_n145_L1224.
@@ -25031,15 +25057,36 @@ issues:
       - result: linear-n145-1224
         id: E-wand125-linear-n145-1224-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/779#issuecomment-6637251528
+      date: '2026-11-04'
+      by: jlevy
+      kind: final
+      reported:
+      - result: linear-n145-1224
+        id: T-179
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: linear-n145-1224
+        id: E-wand125-linear-n145-1224-report
     review_track: true
-    blocked:
-      type: compute
-      reason: >-
-        T-179's s(145) replay, about 37 CPU-hours, up to about 64 (think-u0av), at the
-        owner's 40 CPU-hour item cap; a compute lane runs it with a stop at the cap.
     close_when: >-
       The replay, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
+    notes: >-
+      Closed on 4 November 2026 with the final reply (issuecomment-6637251528, posted at
+      17:21:39Z), after #889 merged as 69abc507e and its Pages deployment passed (run
+      41873241652, deploy job 126730930224, verify-deployment job 126731091216, 6,064 of
+      6,064 checks). The reply was rendered with check_requests --draft 779 from that main
+      and reconciled with think-u0av's draft of 4 November, whose account of the replay
+      (the source's replay function and unchanged checker at all 201 angles, 34.2
+      CPU-hours, FULL_REPLAY_MATCHES_SHIPPED), the control at net index 35, the review of
+      14 October and the lanes at 145 to 149 it keeps; it states the report entry through
+      T-179's word. It read back identical to what was posted, and the issue was closed as
+      completed at 17:21:46Z. The blocked: compute record of 24 October is cleared with the
+      replay done, and the blocked:compute label was removed in the same edit, leaving
+      intake.
   - number: 780
     title: "T-192: Continuous-pose lower bound `s(28) > 1149/200` reported, by two of the source's programs
       — review tracking"
