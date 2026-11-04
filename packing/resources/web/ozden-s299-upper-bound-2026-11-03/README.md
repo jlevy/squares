@@ -86,7 +86,7 @@ A measurement for credit; it decides nothing.
 
 - **299:** one to one with T-258’s packing under the identity by nearest centres; the
   optimal assignment moves 12 squares beyond 0.1 and 119 beyond 0.01 (largest 0.501947)
-  and turns 71 squares, by up to 14.9 degrees.
+  and turns 71 squares by more than 10⁻⁶ radians, by up to 14.9 degrees.
   Tilted beyond 1 degree: this packing 85, T-258 87, all turned one way.
   So it is a further arrangement of T-258’s packing, one to one with it, and not a new
   arrangement.
@@ -113,14 +113,19 @@ Both refused a duplicated square.
 The two routes, the `sqpack` rational witness verifier and the independent rational
 corner checker, share certificate parsing, half-angle conversion, `Fraction` arithmetic
 and the separating-axis method, and read the witness through the `witness-center-basis`
-reader. They are the code the author’s `packing-witness verify` run used, so they share
-it with the source’s first check.
+reader. The first route is the `packing-witness verify` the author ran, so on that
+route the replay is reproduced with the producer’s code; the second shares with it only
+this repository’s centre-basis reader and is independently re-implemented (F6 and F9 of
+the stage 4 review).
 The source’s own `sqcheck.py` was not run.
 
 ## What Is Not Established
 
-- **The review.** The stage 4 mathematical review, by a strong-tier lane sharing no
-  context with this one, is think-ybep’s, and so is the adoption at 299.
+- **Human oversight.** The stage 4 mathematical review of 4 November 2026
+  ([review-2026-11-04-ozden-893-894-299-204.md](../../../../docs/project/reviews/review-2026-11-04-ozden-893-894-299-204.md)),
+  by a strong-tier lane sharing no context with this one, accepted the certificate and
+  the case adopted it at 299 that day; its programs and receipts are in
+  [review/review-2026-11-04/](review/review-2026-11-04/README.md). No human oversight record is retained.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.

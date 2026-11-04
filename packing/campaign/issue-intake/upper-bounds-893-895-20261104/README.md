@@ -38,9 +38,9 @@ Each report at the count in report order, with its side and verdict; a verdict n
 
 | n | Record on main | Reports in order | Best now |
 | ---: | --- | --- | --- |
-| 204 | 14.807627471882 (record T-257; Evan Daniel) | #894 14.807620995586: recorded (below by 6.48e-06; measured: one to one under the identity by nearest centres; the optimal assignment moves 6 squares beyond 0.1 and 81 beyond 1e-2 (largest 0.190) and turns 87 squares, 14 of them by more than 1 degree and by up to 25.58 degrees; 76 tilted squares against T-257's 79; a further arrangement of T-257's packing, one to one with it) | #894 14.807620995586 |
+| 204 | 14.807627471882 (record T-257; Evan Daniel) | #894 14.807620995586: recorded (below by 6.48e-06; measured: one to one under the identity by nearest centres; the optimal assignment moves 6 squares beyond 0.1 and 81 beyond 1e-2 (largest 0.190) and turns 87 squares by more than 1e-6 radians, 14 of them by more than 1 degree and by up to 25.58 degrees; 76 tilted squares against T-257's 79; a further arrangement of T-257's packing, one to one with it) | #894 14.807620995586 |
 | 260 | 16.633982502122 (record T-257; Evan Daniel) | #895 16.633982501923: recorded (below by 1.99e-10) | #895 16.633982501923 |
-| 299 | 17.801238549389 (record T-258; Evan Daniel) | #893 17.801238533980: recorded (below by 1.54e-08; measured: one to one under the identity by nearest centres; the optimal assignment moves 12 squares beyond 0.1 and 119 beyond 1e-2 (largest 0.502) and turns 71 squares, by up to 14.9 degrees; 85 tilted squares against T-258's 87; a further arrangement of T-258's packing, one to one with it) | #893 17.801238533980 |
+| 299 | 17.801238549389 (record T-258; Evan Daniel) | #893 17.801238533980: recorded (below by 1.54e-08; measured: one to one under the identity by nearest centres; the optimal assignment moves 12 squares beyond 0.1 and 119 beyond 1e-2 (largest 0.502) and turns 71 squares by more than 1e-6 radians, by up to 14.9 degrees; 85 tilted squares against T-258's 87; a further arrangement of T-258's packing, one to one with it) | #893 17.801238533980 |
 
 ## Owner Decisions Needed
 
@@ -64,8 +64,8 @@ Claims whose certificate a measurement compares with another packing. The measur
 
 | n | Report | Verdict | The source says | Measured against | Finding | Measured by |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 204 | #894 | recorded | nothing stated | T-257 | one to one under the identity by nearest centres; the optimal assignment moves 6 squares beyond 0.1 and 81 beyond 1e-2 (largest 0.190) and turns 87 squares, 14 of them by more than 1 degree and by up to 25.58 degrees; 76 tilted squares against T-257's 79; a further arrangement of T-257's packing, one to one with it | packing/resources/web/ozden-s204-upper-bound-2026-11-03/measure/identity.json |
-| 299 | #893 | recorded | nothing stated | T-258 | one to one under the identity by nearest centres; the optimal assignment moves 12 squares beyond 0.1 and 119 beyond 1e-2 (largest 0.502) and turns 71 squares, by up to 14.9 degrees; 85 tilted squares against T-258's 87; a further arrangement of T-258's packing, one to one with it | packing/resources/web/ozden-s299-upper-bound-2026-11-03/measure/identity.json |
+| 204 | #894 | recorded | nothing stated | T-257 | one to one under the identity by nearest centres; the optimal assignment moves 6 squares beyond 0.1 and 81 beyond 1e-2 (largest 0.190) and turns 87 squares by more than 1e-6 radians, 14 of them by more than 1 degree and by up to 25.58 degrees; 76 tilted squares against T-257's 79; a further arrangement of T-257's packing, one to one with it | packing/resources/web/ozden-s204-upper-bound-2026-11-03/measure/identity.json |
+| 299 | #893 | recorded | nothing stated | T-258 | one to one under the identity by nearest centres; the optimal assignment moves 12 squares beyond 0.1 and 119 beyond 1e-2 (largest 0.502) and turns 71 squares by more than 1e-6 radians, by up to 14.9 degrees; 85 tilted squares against T-258's 87; a further arrangement of T-258's packing, one to one with it | packing/resources/web/ozden-s299-upper-bound-2026-11-03/measure/identity.json |
 
 ### Refinement Chains
 

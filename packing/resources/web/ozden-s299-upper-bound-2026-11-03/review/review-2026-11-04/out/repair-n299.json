@@ -1,0 +1,68 @@
+{
+ "program": "oz_repair.py",
+ "program_sha256": "30a006c053143f2630db8d41105300f9d8707564593ff71de041b351627c7d0a",
+ "ozlib_sha256": "b5866f2731de66b914cda3a1bfb52e81424f9c5c9e4f747a35890f750c200d55",
+ "python": "3.14.7",
+ "argv": [
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/n-299-candidate.yaml",
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/n299-refill2-t000173.json.gz",
+  "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-max/out/repair-n299.json"
+ ],
+ "repair_factor": "10000000000000900000001/10000000000000000000000",
+ "repair_factor_minus_1": "9.00000001000e-14",
+ "S0": "356024770679551/20000000000000",
+ "S0_places": 14,
+ "S0_decimal": "17.80123853397755",
+ "centre_preimage_decimal_places": {
+  "1": 61,
+  "11": 3,
+  "12": 3,
+  "13": 28,
+  "14": 503
+ },
+ "half_angle_t_max_digits": [
+  12,
+  12
+ ],
+ "pre_repair_overlapping_pairs": 79,
+ "pre_repair_worst": [
+  "-9.0000000000000e-14",
+  224,
+  235
+ ],
+ "pre_repair_five_worst": [
+  [
+   "-9.00000e-14",
+   224,
+   235
+  ],
+  [
+   "-7.00000e-14",
+   251,
+   252
+  ],
+  [
+   "-6.28654e-14",
+   45,
+   252
+  ],
+  [
+   "-1.00000e-14",
+   288,
+   296
+  ],
+  [
+   "-1.00000e-14",
+   296,
+   297
+  ]
+ ],
+ "pre_repair_squares_outside_box": [
+  [
+   13,
+   "-2.6282866356580e-15"
+  ]
+ ],
+ "decides": "nothing about the bound; how the certificate was made",
+ "cpu_seconds": 3.97
+}

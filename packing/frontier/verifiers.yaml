@@ -7099,3 +7099,66 @@ verifiers:
       recorded in frontier/asymptotic-waste-bounds.yaml, which takes no evidence entries,
       and the evidence schema scopes every entry by the counts it settles, of which this
       theorem settles none, as with V-ryu-quarter-cube-review-constants.
+  - id: V-ozden-1104-review-check
+    program: oz_check.py with ozlib.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 4 November stage 4 review's exact checker of Doğa Özden's rational centre-basis
+      Witness/v2 certificates of issues 893 (299) and 894 (204), with a fail-closed reader
+      of its own for the Witness/v2 block layout and the lab's JSON exports: every format
+      hypothesis (envelope, n, count, distinct ids, side, unit size, centre-basis,
+      rational, lower-left origin, axes), every basis exactly unit, the export's squares
+      equal to the certificate's, every wall by the half-widths and again by the corners,
+      and every pair twice with no distance filter, by separating axes over the four edge
+      normals in fractions.Fraction and by exact Sutherland-Hodgman clipped areas in
+      gmpy2.mpq. oz_controls.py decides sixteen sharp controls and mutants a count by both
+      methods against outcomes stated before each runs (the box, a translation and the
+      least-margin pair at exact contact and 1e-30 past it, every near pair and every
+      square taken to contact and past it, an enlarged square, a duplicate, a square out
+      of the box, a non-unit basis, the count and ids, the reversed rotation sense), and
+      oz_selftest.py holds both methods to cases with known answers and 3,000 random
+      rational pairs at contact, past it and short of it.
+    source:
+      - packing/resources/web/ozden-s299-upper-bound-2026-11-03/review/review-2026-11-04/programs/oz_check.py
+      - packing/resources/web/ozden-s299-upper-bound-2026-11-03/review/review-2026-11-04/programs/ozlib.py
+      - packing/resources/web/ozden-s299-upper-bound-2026-11-03/review/review-2026-11-04/programs/oz_controls.py
+      - packing/resources/web/ozden-s299-upper-bound-2026-11-03/review/review-2026-11-04/programs/oz_selftest.py
+    independence_record: packing/resources/web/ozden-s299-upper-bound-2026-11-03/review/review-2026-11-04/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 893 and 894 (think-ybep),
+            strong tier (tbd-strong-max) at maximum reasoning, prompted separately from
+            the import lane (bold-ritchie-l36)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's own check ran this repository's packing-witness verify, which
+          Claude agents co-authored, and the same lab's issue 890 says Claude agents ran
+          its checks; the 299 search used GPT-based agents. The programs were written
+          from the mathematics, the Witness/v2 schema text and the certificates. Their
+          bytes were final before their author read the producer's code (the source's
+          verifier/sqcheck.py) or the earlier xhigh review of these packets; none of this
+          repository's witness verifiers was opened.
+    note: >-
+      Written and run on 4 November 2026 for
+      docs/project/reviews/review-2026-11-04-ozden-893-894-299-204.md (SHA-256
+      7f7c2802ddf0c8b223456dbad20b387a7507bd36eac826318265efdff7ba2dbc for oz_check.py
+      and b5866f2731de66b914cda3a1bfb52e81424f9c5c9e4f747a35890f750c200d55 for ozlib.py
+      as retained, in the directory's programs.sha256, and as each receipt records), and
+      kept once, with everything they printed at 299, in the
+      ozden-s299-upper-bound-2026-11-03 packet's review/review-2026-11-04/; the 204
+      receipts are in the ozden-s204-upper-bound-2026-11-03 packet's. oz_sides.py,
+      oz_identity.py, oz_compare_lane.py, oz_custody.py and oz_repair.py, kept beside
+      them, decide nothing and are not registered.
