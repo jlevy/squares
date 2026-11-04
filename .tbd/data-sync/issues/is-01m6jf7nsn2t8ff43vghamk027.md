@@ -3,9 +3,9 @@ type: is
 id: is-01m6jf7nsn2t8ff43vghamk027
 title: "Import Özden: s(204) <= 14.807620995586, 6.48e-6 below T-257 (#894)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l36
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-04T05:06:46.196Z
-updated_at: 2026-11-04T08:38:37.693Z
+updated_at: 2026-11-04T13:55:47.823Z
 started_at: 2026-11-04T05:07:17.331Z
+closed_at: 2026-11-04T13:55:47.823Z
+close_reason: Imported, reviewed (strong-max stage 4), adopted at V3/C3 in https://github.com/jlevy/squares/pull/897 (merged 0dc4eaa7b); closing replies posted after deploy and recorded in https://github.com/jlevy/squares/pull/901 (merged c5e1f3da9).
+resolution: null
+duplicate_of: null
 ---
 Import of jlevy/squares#894 (opened 2026-11-03T22:36:13Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(204) <= 7403810497792604009019579959/(5*10^26) = 14.807620995585208..., printed 14.807620995586 rounded up at 12 places, 6.48e-6 below the case's house, Evan Daniel's #845 certificate (T-257).
 
