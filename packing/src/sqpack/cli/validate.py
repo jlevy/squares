@@ -203,11 +203,15 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: 37. The pass of 31 October 2026 (think-3guf) moved 130, 172, 204, 232, 260, 293, 299
 #: and 307 to the certificates of that day's reviews (T-256 to T-259): n=1..200 to 429
 #: separating and 2,151 translating squares, n=1..324 to 125 records with a separating
-#: square, 1,407 such squares and 5,721 translating squares.
+#: square, 1,407 such squares and 5,721 translating squares. The pass of 4 November 2026
+#: (think-ybep) moved 204 and 299 to Doğa Özden's certificates (T-264, T-263): 33
+#: separating and 92 translating squares at 204 against T-257's 40 and 63, and 62 and 148
+#: at 299 against T-258's 46 and 153, so n=1..324 has 1,416 separating squares and 5,745
+#: translating ones, in the same 125 and 302 records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
     "n=1..200": (67, 429, 182, 2151),
-    "n=1..324": (125, 1407, 302, 5721),
+    "n=1..324": (125, 1416, 302, 5745),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

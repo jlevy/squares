@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/894",
+  "source": "https://github.com/kenaznia-doga/s204-upper-bound",
+  "revision": "d4b8b05c45e3be464476c94712a4dbc063009875",
+  "read_on": "2026-11-04",
+  "read_at_main": "ca3a171bb279639692cd464727a50ba384f724b0",
+  "horizon": 324,
+  "results": [
+    {"n": 204, "certificate": "n-204-candidate.yaml", "format": "witness-center-basis", "requested": true, "replayed": true, "offered_side": "14.807620995586", "printed_in": "https://github.com/jlevy/squares/issues/894", "exact_side": "7403810497792604009019579959/500000000000000000000000000", "ceiling": "14.8076209955852081", "first_committed": "2026-11-03T22:35:57Z", "grid_side": "15", "case": {"source_key": "[Daniel issue 845 2026-10-29]", "holders": "Evan Daniel, from a search seeded with Daniil Ostashev's n = 176 packing", "result": "T-257", "reported_value": "14.8076274718815797", "verified_value": "14.8076274718815797", "evidence": ["E-evand-845-exact-feasibility", "E-evand-845-review-exact-feasibility"], "exact_side": "14807627471881579627471866771703/1000000000000000000000000000000", "relation": "below", "difference": "6476296371609432706853703/1000000000000000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

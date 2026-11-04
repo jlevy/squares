@@ -1434,6 +1434,81 @@ RESULTS: dict[str, Prose] = {
             "past its wall and the tightest pair moved past contact"
         ),
     ),
+    "T-263": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#893](https://github.com/jlevy/squares/issues/893)",
+        producer_route=True,
+        ai=(
+            "Issue 893 says the search was AI-assisted, by GPT-based agents plus local "
+            "optimisation, and that Doğa Özden’s AI agent, which uses the account "
+            "kenaznia-doga, prepared and posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, so on that route the replay is "
+            "reproduced with the producer’s code; the independent rational corner checker "
+            "shares no verification code with it and is independently re-implemented, and the "
+            "review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from Evan Daniel’s certificate of his update "
+            "to issue 824 (T-258), this case’s house best packing before this adoption, as "
+            "malyshevdanil’s Living Atlas on Kaggle carries it. Measured by the 4 November "
+            "review, it pairs one to one with T-258’s packing under the identity and under no "
+            "other symmetry: 12 squares lie beyond a tenth, at most 0.502, six of them in the "
+            "bottom row sliding right and three in the column at $x = 1.5$ rising by about "
+            "0.32; one square is re-tilted by 14.9 degrees, and 85 squares are tilted against "
+            "T-258’s 87. So it is a further arrangement of T-258’s packing, and the packing’s "
+            "finder stays Evan Daniel. The certificate is a 14-decimal packing dilated about "
+            "$(1/2, 1/2)$ by $1 + 9.00000001 \\times 10^{-14}$, which clears 79 overlaps of up "
+            "to $9.0 \\times 10^{-14}$; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 4 November review’s clean-room checker decided it again on two routes "
+            "of its own, by separating axes in rationals and by exact clipped areas in GMP "
+            "rationals over every pair; its sixteen controls and mutants, at exact contact "
+            "and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code the producer’s check ran",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-264": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#894](https://github.com/jlevy/squares/issues/894)",
+        producer_route=True,
+        ai=(
+            "Issue 894 says the search was AI-assisted, and that Doğa Özden’s AI agent, which "
+            "uses the account kenaznia-doga, prepared and posted the issue and the repository "
+            "at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, so on that route the replay is "
+            "reproduced with the producer’s code; the independent rational corner checker "
+            "shares no verification code with it and is independently re-implemented, and the "
+            "review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from the registry’s 204, Evan Daniel’s "
+            "certificate of issue 845 (T-257), this case’s house best packing before this "
+            "adoption, whose lineage Daniel states starts at Daniil Ostashev’s n = 176 "
+            "packing. Measured by the 4 November review, it pairs one to one with T-257’s "
+            "packing under "
+            "the identity and under no other symmetry, every square keeping its T-257 id: 6 "
+            "squares lie beyond a tenth, at most 0.190, 14 turn by more than 1 degree, the "
+            "largest by 25.58 degrees, and 76 squares are tilted against T-257’s 79. So it is "
+            "a further arrangement of T-257’s packing, and the packing’s finder stays Evan "
+            "Daniel; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 4 November review’s clean-room checker decided it again on two routes "
+            "of its own, by separating axes in rationals and by exact clipped areas in GMP "
+            "rationals over every pair; its sixteen controls and mutants, at exact contact "
+            "and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code the producer’s check ran",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1451,6 +1526,7 @@ TYMCHISHIN = "Kirill Tymchishin"
 LAVRENTEV = "Vladislav Lavrentev"
 CHILTON = "Alex Chilton"
 NTUMLNOOB = "ntumlnoob"
+OZDEN = "Doğa Özden"
 
 
 @dataclass(frozen=True)
@@ -1754,13 +1830,16 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # T-257 (adopted on 31 October 2026), Evan Daniel's packing of issue 845 from a search
-    # seeded with Daniil Ostashev's n = 176 packing (#575), a loose fit by the 31 October
-    # review; another arrangement than T-231's, which held 204 before.
+    # T-264 (adopted on 4 November 2026), Doğa Özden's further arrangement of issue 894 of
+    # T-257's packing, one to one with it under the identity, every square keeping its id (the
+    # 4 November review): the packing's finder stays Evan Daniel, whose packing of issue 845
+    # came from a search seeded with Daniil Ostashev's n = 176 packing (#575), and Özden is
+    # its improver, as issue 894 asks (the review's F8).
     204: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s packing from a search seeded with Daniil Ostashev’s n = 176 packing",
+        (OZDEN,),
+        "Doğa Özden’s further arrangement of Evan Daniel’s packing from a search seeded with "
+        "Daniil Ostashev’s n = 176 packing",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -2017,15 +2096,18 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    # T-258 (adopted on 31 October 2026), Evan Daniel's packing of his update to issue 824,
-    # found from his T-248 packing, which his implementation of Chris Deotte's fault-line DP
-    # built from Deotte's public Kaggle s(334) packing; the Kingbird catalogue's
-    # construction held 299 before.
+    # T-263 (adopted on 4 November 2026), Doğa Özden's further arrangement of issue 893 of
+    # T-258's packing, one to one with it under the identity (the 4 November review): the
+    # packing's finder stays Evan Daniel, whose packing of his update to issue 824 came from
+    # his T-248 packing, which his implementation of Chris Deotte's fault-line DP built from
+    # Deotte's public Kaggle s(334) packing, and Özden is its improver, as issue 893 asks
+    # (the review's F8).
     299: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s packing from his n = 299 packing of 26 October, built by his "
-        "implementation of Chris Deotte’s fault-line DP from Deotte’s public Kaggle packing",
+        (OZDEN,),
+        "Doğa Özden’s further arrangement of Evan Daniel’s packing from his n = 299 packing of "
+        "26 October, built by his implementation of Chris Deotte’s fault-line DP from "
+        "Deotte’s public Kaggle packing",
     ),
     # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
     # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
@@ -2793,8 +2875,13 @@ def _title(move: Move) -> str:
 
 
 def _anchor(move: Move) -> str:
-    text = _title(move).lower().replace("’", "")
-    return re.sub(r"[^a-z0-9 -]", "", text).replace(" ", "-")
+    """The certificate section's in-page id, made by kpress's GitHub slugger as the case
+    page makes its headings' ids (`render_case_pages._own_ids`), so a name with
+    diacritics keeps them: `doğa-özdens-certificate-t-264`, not `doa-zdens-…` (review F1
+    of #897)."""
+    from kpress.format._github_slugger import GithubSlugger  # noqa: PLC0415
+
+    return GithubSlugger().slug(_title(move))
 
 
 def section(move: Move) -> str:

@@ -1,0 +1,133 @@
+{
+ "program": "oz_selftest.py",
+ "program_sha256": "51073bc8dc0f313f23d35aca529ace0e9e7163ffb64f6b2b4d2c67a8f5d68f23",
+ "ozlib_sha256": "b5866f2731de66b914cda3a1bfb52e81424f9c5c9e4f747a35890f750c200d55",
+ "python": "3.14.7",
+ "gmpy2": "2.3.1",
+ "seed": 20261104,
+ "pair_cases": [
+  {
+   "case": "edge contact",
+   "margin": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "edge 1e-30 overlap",
+   "margin": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "edge 1e-30 gap",
+   "margin": "1/1000000000000000000000000000000",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "corner contact",
+   "margin": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "corner 1e-30 overlap",
+   "margin": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "duplicate",
+   "margin": "-1",
+   "area": "1",
+   "ok": true
+  },
+  {
+   "case": "offset (1/4, 1/2)",
+   "margin": "-1/2",
+   "area": "3/8",
+   "ok": true
+  },
+  {
+   "case": "same square rotated by (3/5, 4/5) about its centre",
+   "margin": "-6/5",
+   "area": "5/6",
+   "ok": true
+  },
+  {
+   "case": "same square rotated by (4/5, 3/5) about its centre",
+   "margin": "-6/5",
+   "area": "5/6",
+   "ok": true
+  },
+  {
+   "case": "vertex-edge contact",
+   "margin": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "vertex-edge 1e-30 overlap",
+   "margin": "-1/1000000000000000000000000000000",
+   "area": "1/960000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "rotated edge contact",
+   "margin": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "rotated edge 1e-30 overlap",
+   "margin": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000",
+   "ok": true
+  }
+ ],
+ "wall_cases": [
+  {
+   "case": "unit square in the unit box",
+   "m1_inside": true,
+   "m2_inside": true,
+   "ok": true
+  },
+  {
+   "case": "unit square in a box 1e-30 short",
+   "m1_inside": false,
+   "m2_inside": false,
+   "ok": true
+  },
+  {
+   "case": "(3/5, 4/5) square touching all four walls of a 7/5 box",
+   "m1_inside": true,
+   "m2_inside": true,
+   "ok": true
+  },
+  {
+   "case": "the same 1e-30 short",
+   "m1_inside": false,
+   "m2_inside": false,
+   "ok": true
+  },
+  {
+   "case": "the same moved 1e-30 left",
+   "m1_inside": false,
+   "m2_inside": false,
+   "ok": true
+  }
+ ],
+ "shape_cases": {
+  "non-unit basis (3/5, 4/5 + 1e-30) refused": true
+ },
+ "random": {
+  "pairs": 3000,
+  "agree": 3000,
+  "contact_margin_0": 3000,
+  "contact_area_0": 3000,
+  "past_both_overlap": 3000,
+  "short_both_disjoint": 3000
+ },
+ "verdict": "PASSED",
+ "cpu_seconds": 3.62
+}

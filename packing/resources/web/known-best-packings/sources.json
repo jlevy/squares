@@ -1304,19 +1304,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-203a.svg"
     },
     {
-      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d/search/packer/candidates/s204_1028.cert at 0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s204-upper-bound/blob/d4b8b05c45e3be464476c94712a4dbc063009875/n-204-candidate.yaml at d4b8b05c45e3be464476c94712a4dbc063009875",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         204
       ],
       "n": 204,
-      "path": "resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s204_1028.cert",
+      "path": "resources/web/ozden-s204-upper-bound-2026-11-03/source/n-204-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-31",
+      "retrieved": "2026-11-04",
       "source_n": 204,
-      "url": "https://github.com/evand/square-packing/blob/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d/search/packer/candidates/s204_1028.cert"
+      "url": "https://github.com/kenaznia-doga/s204-upper-bound/blob/d4b8b05c45e3be464476c94712a4dbc063009875/n-204-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -2044,19 +2044,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-298.svg"
     },
     {
-      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d/search/packer/candidates/s299_1028.cert at 0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s299-upper-bound/blob/6486ead9be5e3348f64ad39aecc1950f22910de4/n-299-candidate.yaml at 6486ead9be5e3348f64ad39aecc1950f22910de4",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         299
       ],
       "n": 299,
-      "path": "resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/s299_1028.cert",
+      "path": "resources/web/ozden-s299-upper-bound-2026-11-03/source/n-299-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-31",
+      "retrieved": "2026-11-04",
       "source_n": 299,
-      "url": "https://github.com/evand/square-packing/blob/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d/search/packer/candidates/s299_1028.cert"
+      "url": "https://github.com/kenaznia-doga/s299-upper-bound/blob/6486ead9be5e3348f64ad39aecc1950f22910de4/n-299-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

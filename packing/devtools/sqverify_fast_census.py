@@ -90,7 +90,10 @@ only when all of that holds.
 `--evidence` prints each selected certificate's replay evidence entry, for a records
 lane to paste into the register; it refuses a row whose build is not of a crate source
 in `REVIEWED_SOURCES`, or is on a declared net that the source's review did not read,
-and names the reviewed source it was. A format T entry takes its source key from its
+and names the reviewed source it was. A format M entry's producer, candidate custody and
+closing sentence come from `PACKET_PROVENANCE`, Hosono's unless its packet is named
+there, as #890's dilation is, and `--control-date` names the day the controls ran where
+it is not `--date`. A format T entry takes its source key from its
 packet's reported entry, since the rectangle packets are registered by packet, and also
 refuses controls run on a build no review accepted. `--source-digest` prints the tree's
 crate `source_sha256` by `build.rs`'s rule and the review that accepted it, exiting 1
@@ -718,11 +721,16 @@ def axis_captures_agree(
     failing means the capture evaluated apart from the crate is not the value the sweep
     enclosed (another pose, measure, net or factor) or the walk was not the crate's, and
     the refusal does not count. No enclosure, where the vertex is not on the event grid,
-    and a bound that is None or NaN, fail closed."""
-    if bound is None or capture is None or enclosure is None:
+    and a bound that is None, NaN, a bool or not a number at all (a word, a list or a
+    mapping read from JSON) fail closed, returning False rather than raising."""
+    if bound is None or capture is None or enclosure is None or isinstance(bound, bool):
+        return False
+    try:
+        reported = float(bound)
+    except TypeError, ValueError:
         return False
     low, high = enclosure
-    return low == float(bound) and Fraction(low) <= capture <= Fraction(high)
+    return low == reported and Fraction(low) <= capture <= Fraction(high)
 
 
 def refusal_record(
@@ -1261,17 +1269,80 @@ def net_assumption(premises: dict[str, Any]) -> str:
     )
 
 
-#: The assumptions every format M replay entry states beside its mass and its net.
+#: The assumption every replay entry states beside its mass, its net and its candidate.
 ASSUMPTIONS = (
     (
         "Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation,"
         " as SOUNDNESS.md's Floating Point section uses it."
     ),
-    (
+)
+
+
+@dataclass(frozen=True)
+class PacketProvenance:
+    """What a format M replay entry says of its packet's producer and candidate custody.
+
+    `subject` names the certificate in the theorem, with `{certificate}` for its census
+    name; `custody` is the assumption that ties the candidate to its source; `closing`
+    says what of the source's own checking was not run here. `comparison` and `history`
+    are optional sentences after the run's facts and after the controls: the replay's
+    agreement with the source's own receipts, and a control receipt kept as it failed.
+    """
+
+    subject: str
+    custody: str
+    closing: str
+    comparison: str = ""
+    history: str = ""
+
+
+#: Hiroaki Hosono's packets (wand125), fetched by `fine_net_followup mixed-fetch`.
+HOSONO_PROVENANCE = PacketProvenance(
+    subject="Hiroaki Hosono's {certificate}",
+    custody=(
         "The candidate is the retained file whose decompressed SHA-256 the packet's"
         " acquisition record pins, which mixed-fetch found identical to the proof bundle's."
     ),
+    closing=(
+        "The source's own checker was not run here on this certificate, and its tarball "
+        "is pinned by digest and not retained."
+    ),
 )
+#: Packets by another producer, each classified explicitly, as `mixed_relationship`
+#: classifies their relationship: #890's dilation is Doğa Özden's, regenerated from
+#: Hosono's measure, and its source decided it with this repository's own crate.
+PACKET_PROVENANCE = {
+    "ozden-s94-lower-bound-2026-11-03": PacketProvenance(
+        subject=(
+            "Doğa Özden's {certificate}, Hiroaki Hosono's mixed_n94_L995 dilated by 1993/1990"
+        ),
+        custody=(
+            "The candidate is the retained file whose stored and decompressed SHA-256 the"
+            " issue states and the packet's acquisition record pins, which"
+            " devtools.audit_dilated_measure regenerates byte for byte from the T-091"
+            " packet's retained mixed_n94_L995."
+        ),
+        closing=(
+            "The source's second checker, an exact-integer branch and bound, is retained in "
+            "the packet and was not run here."
+        ),
+        comparison=(
+            "Every direction's row equals both of the source's receipts apart from timings "
+            "(receipts/replay-comparison.json in the packet). "
+        ),
+        history=(
+            "The control of 2026-11-03, kept as mixed_n94_L9965.control-failed-v2.json, "
+            "refused the same mutants and failed closed only on the constant axis allowance "
+            "of 1e-9 that the enclosure rule of #892 replaced (F-1 of docs/project/reviews/"
+            "review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md). "
+        ),
+    ),
+}
+
+
+def packet_provenance(case: Case) -> PacketProvenance:
+    """The provenance a format M packet's replay entry states: Hosono's unless named."""
+    return PACKET_PROVENANCE.get(case.packet, HOSONO_PROVENANCE)
 
 
 def folded(key: str, text: str, indent: int = 4) -> list[str]:
@@ -1464,9 +1535,7 @@ def mixed_relationship(case: Case) -> tuple[list[str], str]:
             "The producer decided the certificate with this repository's sqverify-fast, "
             "built unmodified from the same reviewed crate source, and its receipts are "
             "retained in its packet; this replay reproduces that run with the producer's "
-            "code. The crate is this repository's clean-room implementation, written "
-            "without opening Hosono's checker, which never decided this certificate. No "
-            "second implementation or second method is run here. "
+            "code. No second implementation or second method is run here. "
         )
     if (case.packet, case.certificate) == (
         "wand125-mixed-bounds-check2-2026-10-06",
@@ -1514,13 +1583,17 @@ def mixed_relationship(case: Case) -> tuple[list[str], str]:
     )
 
 
-def scaled_control_text(index: int, run: dict[str, Any]) -> str:
+def scaled_control_text(index: int, run: dict[str, Any], when: str = "") -> str:
     """The 99/100 control in an evidence entry: at the least-bound direction in a
-    `sqverify-fast-control/v1` receipt, at every direction of the net in v2 (FC-1)."""
+    `sqverify-fast-control/v1` receipt, at every direction of the net in v2 (FC-1).
+
+    `when` follows "Controls" where they ran on another day than the capture. An axis
+    refusal whose receipt keeps the enclosure the sweep held (the rule of #892) states
+    it, since that is what the capture was judged against."""
     if "sweep" not in run:
         return (
-            f"Controls at index {index}: the original verified again, every mass scaled by "
-            f"99/100 refused ({run['verdict']}, {uncovered(run)}), "
+            f"Controls{when} at index {index}: the original verified again, every mass "
+            f"scaled by 99/100 refused ({run['verdict']}, {uncovered(run)}), "
         )
     sweep = run["sweep"]
     refused, verified = len(sweep["refused"]), len(sweep["verified_directions"])
@@ -1530,12 +1603,26 @@ def scaled_control_text(index: int, run: dict[str, Any]) -> str:
         if verified
         else ""
     )
+    held = next(
+        (
+            item["sweep_enclosure"]
+            for item in sweep["refused"]
+            if isinstance(item, dict) and item.get("r") == 0 and item.get("sweep_enclosure")
+        ),
+        None,
+    )
+    enclosure = (
+        f", where the capture lies in the enclosure the sweep held there, [{held[0]!r}, "
+        f"{held[1]!r}], whose lower end is the crate's bound to the bit"
+        if held
+        else ""
+    )
     return (
-        f"Controls: the original verified again at index {index}; every mass scaled by "
-        f"99/100 refused at {refused} of the {sweep['directions']} net directions, each a "
+        f"Controls{when}: the original verified again at index {index}; every mass scaled "
+        f"by 99/100 refused at {refused} of the {sweep['directions']} net directions, each a "
         "coverage refusal at a centre in the per-bin domain where the mutant's exact capture "
         "is below 1 (the crate's confirmed witness, or at the axis the vertex sweep's least "
-        f"vertex){slack}; "
+        f"vertex{enclosure}){slack}; "
     )
 
 
@@ -1554,24 +1641,36 @@ def uncovered(run: dict[str, Any]) -> str:
 
 
 def evidence_entry(
-    case: Case, out: Path, entry: dict[str, Any], *, audit_record: str, date: str
+    case: Case,
+    out: Path,
+    entry: dict[str, Any],
+    *,
+    audit_record: str,
+    date: str,
+    control_date: str | None = None,
 ) -> str:
     """The replay evidence entry for one verified, controlled certificate, as YAML text.
 
-    It names the certificate's reported entry, takes its source key and scope, and states
-    the census row and the control receipt in its limitations. A records lane pastes it
-    into `frontier/evidence.yaml` and widens the scope where the bound carries by mass.
+    It names the certificate's reported entry, takes its source key, scope and the form
+    of its certificate path, and states the census row and the control receipt in its
+    limitations, with the producer and custody its packet's provenance records
+    (`packet_provenance`). `control_date` is the day the controls ran where it is not
+    `date`, the day of the capture. A records lane pastes it into `frontier/evidence.yaml`
+    and widens the scope where the bound carries by mass.
     """
     if rectangle_family(case):
         return rectangle_evidence_entry(case, out, entry, audit_record=audit_record, date=date)
     register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
-    certificate = str(case.candidate.relative_to(PROJECT))
+    relative = str(case.candidate.relative_to(PROJECT))
     (report,) = (
         item
         for item in register["evidence"]
         if item.get("assurance") == "reported"
-        and item.get("certificate") in (certificate, f"packing/{certificate}")
+        and item.get("certificate") in (relative, f"packing/{relative}")
     )
+    # The replay names its candidate as its report does, so the two read as one record.
+    certificate = str(report["certificate"])
+    provenance = packet_provenance(case)
     premises = entry["premises"]
     built = str((entry.get("build") or {}).get("source_sha256", ""))
     reviewed = reviewed_source(entry)
@@ -1632,6 +1731,22 @@ def evidence_entry(
     least = entry["least_bound_leaf_exact"]
     stored = str(entry["candidate_sha256"])
     pinned = hashlib.sha256(gzip.decompress(case.candidate.read_bytes())).hexdigest()
+    when = ""
+    if control_date is not None and control_date != date:
+        # The receipt's build facts (compiler, profile, target and crate source) against
+        # the row's: a description of what ran, which decides nothing (OR-16).
+        controlled = receipt.get("build") or {}
+        when = f", on {control_date} " + (
+            "by the same build"
+            if controlled == entry.get("build")
+            else f"by a build of crate source {str(controlled.get('source_sha256', ''))[:8]}..."
+        )
+    coverage_unit = (
+        "complete legal core-centre domains at every declared-net direction"
+        if declared
+        else f"complete legal core-centre domains at every direction of the standard net "
+        f"of {directions}"
+    )
     net = (
         f"the net its candidate declares (proof_net), of {directions} half-angles of step "
         f"{premises['D']}, with B(1 + D) = {premises.get('shrink_bound')} < 1 and the last "
@@ -1660,20 +1775,21 @@ def evidence_entry(
         f"{float(Fraction(least['exact_coverage'])):.10f}. "
         + runtime_facts(entry)
         + execution_facts(case, out, entry)
+        + provenance.comparison
         + f"The build is {build_facts(entry)}, source_sha256 {built[:8]}...: "
         f"{reviewed.statement}. "
         + relationship_text
         + "Its node counts and bounds are its own, not "
         "the certificate's records. "
-        + scaled_control_text(receipt["index"], runs["scaled-99-100"])
+        + scaled_control_text(receipt["index"], runs["scaled-99-100"], when)
         + f"and every mass scaled by {near_factor(runs['near-threshold'])} so that the exact "
         "capture at the least-bound leaf's centre is "
         f"at most 1 - 10^-6 refused ({runs['near-threshold']['verdict']}, "
         f"{uncovered(runs['near-threshold'])}); each capture below 1 was evaluated "
         "again by an exact evaluator written apart from the crate, and "
-        "tests/test_sqverify_fast_census.py holds the receipts. The source's own checker "
-        "was not run here on this certificate, and its tarball is pinned by digest and not "
-        "retained."
+        "tests/test_sqverify_fast_census.py holds the receipts. "
+        + provenance.history
+        + provenance.closing
     )
     scope = ", ".join(str(n) for n in report["scope"]["n_values"])
     # A standard-net row from a later reviewed source: the review that accepted that source.
@@ -1690,6 +1806,12 @@ def evidence_entry(
         "    method: interval-certified",
         "    performed_by: repository",
         *relationship_fields,
+        "    independence:",
+        "      coverage:",
+        "        extent: full",
+        f"        unit: {coverage_unit}",
+        f"        checked: {directions}",
+        f"        of: {directions}",
         "    origin: replayed-here",
         "    novelty: previously-published",
         f"    source_key: '{report['source_key']}'",
@@ -1702,9 +1824,9 @@ def evidence_entry(
         *folded(
             "theorem",
             "The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; "
-            "Formats M and L, lemma D for format M's per-bin domain), applied to Hiroaki "
-            f"Hosono's {case.certificate}: no {case.n} unit squares pack in a square of side "
-            f"{side}, so s({case.n}) >= {side}.",
+            "Formats M and L, lemma D for format M's per-bin domain), applied to "
+            f"{provenance.subject.format(certificate=case.certificate)}: no {case.n} unit "
+            f"squares pack in a square of side {side}, so s({case.n}) >= {side}.",
             indent=6,
         ),
         (
@@ -1734,10 +1856,10 @@ def evidence_entry(
             " which admission recomputes from the retained candidate."
         ),
         f"        - {net_assumption(premises)}",
-        *(f"        - {assumption}" for assumption in ASSUMPTIONS),
+        *(f"        - {assumption}" for assumption in (*ASSUMPTIONS, provenance.custody)),
         f"      audit_record: {audit_record}",
         *folded("limitations", limitations),
-        f"    source_reviewed: '{date}'",
+        f"    source_reviewed: '{max(date, control_date or date)}'",
     ]
     return "\n".join(lines) + "\n"
 
@@ -2350,7 +2472,12 @@ def records_mode(args: argparse.Namespace, census: dict[str, Any], selected: lis
         for case in selected:
             entry = census["cases"].get(case.certificate, {})
             text = evidence_entry(
-                case, args.out, entry, audit_record=args.audit_record, date=args.date
+                case,
+                args.out,
+                entry,
+                audit_record=args.audit_record,
+                date=args.date,
+                control_date=args.control_date,
             )
             sys.stdout.write(text)
         return 0
@@ -2440,6 +2567,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--audit-record", help="with --evidence: the mapped review's path")
     parser.add_argument("--date", help="with --evidence: the day the replay ran")
+    parser.add_argument(
+        "--control-date",
+        help="with --evidence: the day the controls ran, where it is not --date",
+    )
     parser.add_argument(
         "--report", action="store_true", help="render --out/README.md from the census"
     )

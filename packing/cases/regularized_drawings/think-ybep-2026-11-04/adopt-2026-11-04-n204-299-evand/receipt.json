@@ -1,0 +1,257 @@
+{
+ "format": "evand-regularization-receipt-v1",
+ "generated_by": "python -m devtools.regularize_evand run",
+ "policy": "docs/project/policies/regularization-policy.md",
+ "finished": "2026-11-04T07:50:20Z",
+ "run_directory": "adopt-2026-11-04-n204-299-evand",
+ "generator": {
+  "name": "evand-regularize",
+  "source_url": "https://github.com/evand/square-packing",
+  "pin": "675a5ea",
+  "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+  "patches": [
+   {
+    "name": "probe-flat-stall-stop",
+    "path": "search/exact/exactsolve.py",
+    "kind": "replica",
+    "patch": "packing/devtools/regularize_evand_patches/probe-flat-stall-stop.patch",
+    "date": "2026-10-12",
+    "bead": "think-ux1v",
+    "reason": "probe_flat also stops at its stall floor (residual below 1e-34, falling less than tenfold a step), applied by devtools.regularize_evand to a copy of search/exact in its scratch replica on the retry after a solve timeout only; the acceptance test, the KKT point and the certificate are unchanged (n = 290 certifies in 222 s).",
+    "counts": [
+     299
+    ]
+   }
+  ],
+  "interpreter": "CPython 3.14.7"
+ },
+ "parameters": {
+  "timeout": 600.0,
+  "regularize_timeout": 600.0,
+  "variant": "conservative",
+  "orient": "0",
+  "from_stage": "input",
+  "same_mode": "relax",
+  "frame": "kkt",
+  "style": "coincide",
+  "dps": 80,
+  "eps": "1e-20",
+  "workers": 2,
+  "counts": [
+   204,
+   299
+  ]
+ },
+ "counts": [
+  {
+   "n": 204,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "14.807620995585207535520657283539792887167923596909403121899298669",
+   "s_W": "14.807620995585208018039159918",
+   "U": "14.8076209955852081",
+   "level": 2,
+   "moved": 92,
+   "groups": [
+    28,
+    12
+   ],
+   "symmetry": [],
+   "view": "solved",
+   "s_V": "14.807620995585207535668733493496",
+   "relation": "solved",
+   "same_refusal": "same-side-refused: unmatched-rotation",
+   "one_to_one": true,
+   "max_move": "3.770602e-1",
+   "house": [
+    [
+     95,
+     40,
+     29,
+     32,
+     8
+    ],
+    [
+     25,
+     38,
+     36,
+     16,
+     89
+    ]
+   ],
+   "stage": [
+    [
+     33,
+     49,
+     61,
+     36,
+     25
+    ],
+    [
+     16,
+     38,
+     45,
+     16,
+     89
+    ]
+   ],
+   "row": 3,
+   "decision": "held",
+   "index_record": null,
+   "refusal": null,
+   "after_registration": "review",
+   "solved_row": 3,
+   "seconds": {
+    "input": 0.035,
+    "solve": 326.4,
+    "regularize": 35.72,
+    "import": 10.423,
+    "same": 0.041,
+    "measure": 0.319
+   },
+   "cost": {
+    "cpu_seconds": 258.39,
+    "wall_seconds": 373.06
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "from_stage": "input"
+   }
+  },
+  {
+   "n": 299,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [
+    "stall-stop"
+   ],
+   "replica_patches": [
+    "probe-flat-stall-stop"
+   ],
+   "S_exact": "17.801238533977507103901683957124893125201996346755878844248886239",
+   "s_W": "17.801238533979062111469738103353397755",
+   "U": "17.8012385339790622",
+   "level": 2,
+   "moved": 154,
+   "groups": [
+    54,
+    13
+   ],
+   "symmetry": [],
+   "view": "solved",
+   "s_V": "17.801238533977507104079696342465",
+   "relation": "solved",
+   "same_refusal": "same-side-refused: unmatched-rotation",
+   "one_to_one": false,
+   "max_move": null,
+   "house": [
+    [
+     151,
+     48,
+     36,
+     34,
+     30
+    ],
+    [
+     34,
+     60,
+     87,
+     45,
+     73
+    ]
+   ],
+   "stage": [
+    [
+     30,
+     58,
+     48,
+     33,
+     130
+    ],
+    [
+     27,
+     62,
+     79,
+     49,
+     82
+    ]
+   ],
+   "row": 3,
+   "decision": "held",
+   "index_record": null,
+   "refusal": null,
+   "after_registration": "refuse",
+   "solved_row": 3,
+   "seconds": {
+    "input": 0.028,
+    "solve": 1135.44,
+    "regularize": 35.7,
+    "import": 13.417,
+    "same": 0.045,
+    "measure": 0.492
+   },
+   "cost": {
+    "cpu_seconds": 1065.41,
+    "wall_seconds": 1185.65
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "from_stage": "input"
+   }
+  }
+ ],
+ "candidates": [
+  204,
+  299
+ ],
+ "review_queue": [],
+ "index_records": {
+  "regularized": [],
+  "refused": [],
+  "unchanged": []
+ },
+ "solve_outputs": {
+  "204": {
+   "input.txt": "683f66acd029440d16a79b7a4eb5596fc11df501eb3de62cf0d5f03e9beceb8e",
+   "solve/witness.exact.txt": "8384d1f7401c36c461c44694663f2cdc23adc0cd28b045bcfea38d17182bbb5d",
+   "solve/witness.contacts.json": "8d4509f91afd346dacaf6c0a9e46f12d09f7bb93f4921b66e75a8204572ea04a",
+   "regularize.cert": "f4444d99802a6b536f56dacf37ff74ddc9db806254f51aae0903b327339cf324"
+  },
+  "299": {
+   "input.txt": "43bdc1b26fb39da927d665530baa19dfca46ac39d63fed9992b0ee56397b2d30",
+   "solve/witness.exact.txt": "e5cbaf9c30dcab5c81ac861bf73527ac4e4f49d312195c59e8e647f6c682ec79",
+   "solve/witness.contacts.json": "dffe18266969ee345e95b44a14ef7d083cec1090ba6f57d368580a38e734f422",
+   "regularize.cert": "26ad5dad95439ed9a4c5a3440a73b1a299d452f60f190145b1ce6e4e0d2d50d4"
+  }
+ },
+ "cost": {
+  "wall_seconds": 1186.47,
+  "cpu_seconds": 1323.9,
+  "driver_cpu_seconds": 0.1,
+  "count_cpu_seconds": 1323.8,
+  "workers": 2,
+  "counts": 2,
+  "measured_by": "resource.getrusage: each count's worker RUSAGE_SELF plus RUSAGE_CHILDREN (its solve and shim), summed, plus the driver's RUSAGE_SELF"
+ },
+ "previous_runs": []
+}

@@ -1,0 +1,242 @@
+{
+ "program": "oz_custody.py",
+ "program_sha256": "b4186d09a30620fdc24a9a163e56d67aabc0170f3a5649e7ed840654c7be1d5b",
+ "python": "3.14.7",
+ "git": "git version 2.43.0",
+ "argv": [
+  "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-max-upstream/s299.git",
+  "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-max-upstream/s204.git",
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s299-upper-bound-2026-11-03",
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s204-upper-bound-2026-11-03",
+  "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-max/out/custody.json"
+ ],
+ "results": [
+  {
+   "name": "s299",
+   "issue": 893,
+   "refs": [
+    "refs/heads/main 6486ead9be5e3348f64ad39aecc1950f22910de4"
+   ],
+   "commit_count": 1,
+   "pinned_commit": "6486ead9be5e3348f64ad39aecc1950f22910de4",
+   "pinned_commit_is_only_commit": true,
+   "tree": "129dbb7e06df259eeae66a9639192a659e090d0e",
+   "sources_json_tree_matches": true,
+   "author": "Kenaznia (Do\u011fa \u00d6zden) <doga@doga.kenan.works>",
+   "authored": "2026-11-03T10:57:22-08:00",
+   "committer": "Kenaznia (Do\u011fa \u00d6zden) <doga@doga.kenan.works>",
+   "committed": "2026-11-03T10:57:22-08:00",
+   "subject": "s(299) upper bound 17.801238533979: witness, checks, diff",
+   "sources_json_committed_utc": "2026-11-03T18:57:22Z",
+   "files": [
+    {
+     "path": "README.md",
+     "blob": "f1ca7500a091cfd05e06c61e57af12841daecef0",
+     "bytes": 2851,
+     "sha256": "c37f2c46c108206219bc89543b2c57e8a43db1bf8c6ac9a97ba4df93ae8078ff",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    },
+    {
+     "path": "n-299-candidate.yaml",
+     "blob": "64bac7c3cabe5662c60f6894f19f68fbe6df3139",
+     "bytes": 73526,
+     "sha256": "2976d67f0b6da33434831a53d41c9af2a555e9d67daadb0e80ffc1a5cc6176e0",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true,
+     "issue_stated_sha256_matches": true
+    },
+    {
+     "path": "n299-refill2-t000173.json",
+     "blob": "31bfb75709e499f3e44509bce80769ff0386569a",
+     "bytes": 85033,
+     "sha256": "4fac4ed1b75eb0890935691045a0b395af2a762f8130bcd83cd4b3b83f0bb797",
+     "manifest_matches": true,
+     "retained": "gzip",
+     "retained_matches": true,
+     "gzip_header": {
+      "magic_ok": true,
+      "flags": 0,
+      "mtime": 0,
+      "no_name_no_time": true
+     },
+     "issue_stated_sha256_matches": true
+    },
+    {
+     "path": "packing-witness-verify.txt",
+     "blob": "87bd922dc8cb3cc3601e266722b7f16ba64d9755",
+     "bytes": 255,
+     "sha256": "c4845d509254a8db50d12752a010aad77b8b846fa04c42c678ba28510c308e5f",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    },
+    {
+     "path": "records/n-299-candidate-diff.png",
+     "blob": "ba14d175b2d11ae73ca5f29db47f77b3bab980df",
+     "bytes": 256123,
+     "sha256": "9550c56e035a94895f0132808140812a2c71e9bd282278596feeccd25ee9f7e7",
+     "manifest_matches": true,
+     "retained": "pinned-only",
+     "pinned_digest_matches": true
+    },
+    {
+     "path": "sqcheck-output.json",
+     "blob": "690f8967095f2f42a108f15d40de2b3ce2e39a55",
+     "bytes": 326,
+     "sha256": "b3ccfe524b0db5f08b057a486fb620e2b9ac881b1c8113890bdd700e0f5f35bd",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    },
+    {
+     "path": "sqcheck-output.txt",
+     "blob": "1088893f56a267e2b411a9c5353a68f493af427e",
+     "bytes": 82,
+     "sha256": "6ec16c606691776501144bc036e6bad02220a6cd52231c03de5fe2f944d254d1",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    },
+    {
+     "path": "verifier/README.md",
+     "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+     "bytes": 3441,
+     "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    },
+    {
+     "path": "verifier/sqcheck.py",
+     "blob": "29634efafa38da217093703f69cc77c470460948",
+     "bytes": 17047,
+     "sha256": "ee0ae778452f30db30385e1856217339f333986f07471db4f69b94e52ec365ef",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    }
+   ],
+   "file_count": 9,
+   "sources_json_file_count_matches": true,
+   "total_bytes": 438684,
+   "sources_json_total_bytes_matches": true,
+   "manifest_paths_equal_tree": true,
+   "files_in_packet_source_not_upstream": [],
+   "licence_files": [],
+   "licence_mentions": {},
+   "sources_json_license": "None stated: the repository has no licence file, and no file names a licence. Retained under the presumption of permission the owner set on 24 October 2026 for a source its author submits (think-cnn7), the issue being the author's submission; the exact licence is followed up on think-mdxq. The packing starts from Evan Daniel's 0e76d9f certificate at 299 (MIT, copyright (c) 2026 Evan Daniel, retained by the evand-n299-update-2026-10-29 packet), as the issue states."
+  },
+  {
+   "name": "s204",
+   "issue": 894,
+   "refs": [
+    "refs/heads/main d4b8b05c45e3be464476c94712a4dbc063009875"
+   ],
+   "commit_count": 1,
+   "pinned_commit": "d4b8b05c45e3be464476c94712a4dbc063009875",
+   "pinned_commit_is_only_commit": true,
+   "tree": "dbd63512346ffff36cd1f419dcfd8e56c0e2c3fc",
+   "sources_json_tree_matches": true,
+   "author": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+   "authored": "2026-11-03T14:35:57-08:00",
+   "committer": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+   "committed": "2026-11-03T14:35:57-08:00",
+   "subject": "s(204) upper bound 14.807620995586: exact witness, checker outputs, README",
+   "sources_json_committed_utc": "2026-11-03T22:35:57Z",
+   "files": [
+    {
+     "path": "README.md",
+     "blob": "97774f9d2f4b68e13ae8aa4371951e47890cbe31",
+     "bytes": 2350,
+     "sha256": "18afa411944b5b54da4f1a71d45bec8e823d80992dab376f23bcda7b94f50d14",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    },
+    {
+     "path": "n-204-candidate.yaml",
+     "blob": "704e41ea8b8d9916ac4d6071cd3e1a8f24ba80b3",
+     "bytes": 43179,
+     "sha256": "e3c8c7ebf80819290efa023b0fa7f6cd046b9ee01979aac9cb8d76c1ec14eeb8",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true,
+     "issue_stated_sha256_matches": true
+    },
+    {
+     "path": "n204-witness.json",
+     "blob": "d8c5465b2ae24bc5dde4ec86a35959cbca824bc3",
+     "bytes": 40159,
+     "sha256": "613c0a668026a393f7eaebf796acdc2c8aafe6e7c9c66bc9ee68397ce13caf45",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true,
+     "issue_stated_sha256_matches": true
+    },
+    {
+     "path": "packing-witness-verify.txt",
+     "blob": "a924a6296d0095fb6757eb966a3d055e20eda5a3",
+     "bytes": 237,
+     "sha256": "3d340f8c561760535eaa0b6b9a65144eb27b49b602aea892f1d8cd10ecda19fa",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    },
+    {
+     "path": "records/n-204-candidate-diff.png",
+     "blob": "ec5f9da3d4bb23f93e4d2f501b3ed8dfad5924ea",
+     "bytes": 352144,
+     "sha256": "3f1d7b11115c0cbcf2bb04a3c72ec61afaf4bf2d3b14f16a71067cac53617e93",
+     "manifest_matches": true,
+     "retained": "pinned-only",
+     "pinned_digest_matches": true
+    },
+    {
+     "path": "sqcheck-output.txt",
+     "blob": "c38038d0938193579e15d03f3b7a6bb38fc97b3d",
+     "bytes": 74,
+     "sha256": "7e000461c027bc7a3a4316f5b01dc23a19f84abc89a50b8b22638dee736617ba",
+     "manifest_matches": true,
+     "retained": "plain",
+     "retained_matches": true
+    },
+    {
+     "path": "verifier/README.md",
+     "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+     "bytes": 3441,
+     "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+     "manifest_matches": true,
+     "retained": "pinned-only",
+     "pinned_digest_matches": true,
+     "identical_to": "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md",
+     "identical_to_matches": true
+    },
+    {
+     "path": "verifier/sqcheck.py",
+     "blob": "29634efafa38da217093703f69cc77c470460948",
+     "bytes": 17047,
+     "sha256": "ee0ae778452f30db30385e1856217339f333986f07471db4f69b94e52ec365ef",
+     "manifest_matches": true,
+     "retained": "pinned-only",
+     "pinned_digest_matches": true,
+     "identical_to": "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/sqcheck.py",
+     "identical_to_matches": true
+    }
+   ],
+   "file_count": 8,
+   "sources_json_file_count_matches": true,
+   "total_bytes": 458631,
+   "sources_json_total_bytes_matches": true,
+   "manifest_paths_equal_tree": true,
+   "files_in_packet_source_not_upstream": [],
+   "licence_files": [],
+   "licence_mentions": {},
+   "sources_json_license": "None stated: the repository has no licence file, and no file names a licence. Retained under the presumption of permission the owner set on 24 October 2026 for a source its author submits (think-cnn7), the issue being the author's submission; the exact licence is followed up on think-mdxq. The packing starts from Evan Daniel's #845 certificate at 204 (MIT, copyright (c) 2026 Evan Daniel, retained by the evand-issue845-2026-10-29 packet), as the issue states."
+  }
+ ],
+ "verdict": "CUSTODY_HOLDS",
+ "cpu_seconds": 0.032
+}

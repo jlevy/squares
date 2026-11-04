@@ -118,7 +118,7 @@ marks a certificate whose only receipt failed closed, kept as
 | `mixed_n94_L992` | 94 | M | VERIFIED | 201 | 47,197,040 | 1.0000000001531857 | clears | 1056.2 | 1.8 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n94_L994` | 94 | M | VERIFIED | 201 | 66,819,374 | 1.0000000001238274 | clears | 1912.1 | 4.7 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n94_L995` | 94 | M | VERIFIED | 201 | 99,167,366 | 1.000000000302789 | clears | 2800.7 | 12.1 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
-| `mixed_n94_L9965` | 94 | M | VERIFIED | 600 | 296,805,699 | 1.0000000000314393 | clears | 8138.6 | 2.3 | none: first complete check here | - | - | - | CONTROL_FAILED (kept) |
+| `mixed_n94_L9965` | 94 | M | VERIFIED | 600 | 296,805,699 | 1.0000000000314393 | clears | 8138.6 | 2.3 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n95_L996` | 95 | M | VERIFIED | 201 | 45,979,446 | 1.0000000007947085 | clears | 906.8 | 1.8 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n95_L9965` | 95 | M | VERIFIED | 201 | 47,780,470 | 1.0000000013097659 | clears | 1053.5 | 4.6 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n96_L996` | 96 | M | VERIFIED | 201 | 26,793,520 | 1.000000000121414 | clears | 456.4 | 2.1 | all 201 | 8,758 | 456.2 | 19x | CONTROLS_REFUSED |

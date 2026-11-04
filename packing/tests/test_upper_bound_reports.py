@@ -165,6 +165,10 @@ L2_1031 = (
     "evand-n299-update-2026-10-29",
     "mishapolk-issue846-2026-10-30",
 )
+#: The intake pass's lane L36 of 4 November 2026 (`test_upper_bound_reports_l36_1104`):
+#: Doğa Özden's #893 at 299 and #894 at 204, each retained from its pin on the submission
+#: presumption, no licence being stated.
+L36_1104 = ("ozden-s299-upper-bound-2026-11-03", "ozden-s204-upper-bound-2026-11-03")
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -218,6 +222,7 @@ EVERY = (
     KRISTIANSEN_819,
     DANIEL_824,
     *L2_1031,
+    *L36_1104,
 )
 
 
@@ -1266,14 +1271,22 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # Every positive of SQUISH's, #567's, #622's and Couzo's #670 and #675 touches the box.
-    # Couzo's #672 touches at 229 and clears every wall at 227, so its walls mix; every
-    # other source's clear it.
+    # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675 and Özden's #893
+    # touches the box. Couzo's #672 touches at 229 and clears every wall at 227, so its
+    # walls mix; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
     }
-    touching = {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622, COUZO_670, COUZO_675}
+    touching = {
+        SQUISH_481,
+        SQUISH_500,
+        PINGYOU_261,
+        PINGYOU_622,
+        COUZO_670,
+        COUZO_675,
+        "ozden-s299-upper-bound-2026-11-03",
+    }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
     # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
@@ -1548,6 +1561,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         "evand-issue845-2026-10-29": "2026-10-29",
         "evand-n299-update-2026-10-29": "2026-10-29",
         "mishapolk-issue846-2026-10-30": "2026-10-30",
+        **dict.fromkeys(L36_1104, "2026-11-03"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

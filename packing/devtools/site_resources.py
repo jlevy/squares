@@ -223,6 +223,22 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s299-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it,"
+            " 1.54e-8 below it (T-263)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s204-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it,"
+            " 6.48e-6 below it (T-264)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (

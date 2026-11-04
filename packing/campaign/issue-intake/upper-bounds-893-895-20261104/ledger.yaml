@@ -1,0 +1,86 @@
+format: intake-ledger-v1
+read_at_main: ca3a171bb279639692cd464727a50ba384f724b0
+read_on: '2026-11-04'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l36
+  branch: claude/bold-ritchie-xo28us-l36
+  commit: ca3a171bb279639692cd464727a50ba384f724b0
+  note: The packets' claim records, written on the lane's branch from main ca3a171bb and read
+    here by path.
+reports:
+- report: '#893'
+  url: https://github.com/jlevy/squares/issues/893
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-03T18:57:42Z'
+  bead: think-otv6
+  claims:
+  - n: 299
+    printed: 3560247706795812422293947620670679551/200000000000000000000000000000000000
+    rounding: exact
+    exact: 3560247706795812422293947620670679551/200000000000000000000000000000000000
+    exact_from: packing/resources/web/ozden-s299-upper-bound-2026-11-03/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l36@ca3a171bb279639692cd464727a50ba384f724b0
+    first_committed: '2026-11-03T18:57:22Z'
+    measured:
+      against: T-258
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        12 squares beyond 0.1 and 119 beyond 1e-2 (largest 0.502) and turns 71 squares by
+        more than 1e-6 radians, by up to 14.9 degrees; 85 tilted squares against T-258's 87;
+        a further arrangement of T-258's packing, one to one with it
+      source: packing/resources/web/ozden-s299-upper-bound-2026-11-03/measure/identity.json
+  note: The issue names 6486ead, committed at 2026-11-03T18:57:22Z, 20 seconds before the
+    issue. It says the packing starts from the registry's 299 (T-258) and calls it neither
+    new nor a refinement, so the claim is not classified; the measurement names the relation.
+    The issue's title and claim print 17.801238533979 as the side rounded up at 12 places;
+    that print is the author's 12-place truncation, 6.21e-14 below the exact side, which rounds
+    up to 17.801238533980, and the claim is the exact side.
+- report: '#894'
+  url: https://github.com/jlevy/squares/issues/894
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-03T22:36:13Z'
+  bead: think-8b8m
+  claims:
+  - n: 204
+    printed: '14.807620995586'
+    rounding: up
+    exact: 7403810497792604009019579959/500000000000000000000000000
+    exact_from: packing/resources/web/ozden-s204-upper-bound-2026-11-03/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l36@ca3a171bb279639692cd464727a50ba384f724b0
+    first_committed: '2026-11-03T22:35:57Z'
+    measured:
+      against: T-257
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        6 squares beyond 0.1 and 81 beyond 1e-2 (largest 0.190) and turns 87 squares by more
+        than 1e-6 radians, 14 of them by more than 1 degree and by up to 25.58 degrees; 76
+        tilted squares against T-257's 79; a further arrangement of T-257's packing, one to
+        one with it
+      source: packing/resources/web/ozden-s204-upper-bound-2026-11-03/measure/identity.json
+  note: The issue names d4b8b05, committed at 2026-11-03T22:35:57Z, 16 seconds before the
+    issue. It says the packing starts from the registry's 204 (T-257) and calls it neither
+    new nor a refinement, so the claim is not classified; the measurement names the relation.
+- report: '#895'
+  url: https://github.com/jlevy/squares/issues/895
+  kind: issue
+  holders: Kaelan Yim
+  reported_at: '2026-11-04T02:15:02Z'
+  bead: think-qclj
+  claims:
+  - n: 260
+    printed: 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626
+    rounding: exact
+    note: The side as the issue states it, about 16.6339825019226141. The certificate is a
+      GitHub issue attachment (user-attachments) that this session cannot fetch, so it is
+      not retained and nothing here decides it; the issue says the search started from a public
+      packing attributed to Evan Daniel and Kirill Tymchishin.
+  note: No certificate is retained. The acknowledgement asks the author to put it at a public
+    GitHub commit; until then the claim is walked by its stated side and registers nothing.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

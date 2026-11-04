@@ -785,7 +785,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/201.html | cases/201.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/202.html | cases/202.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/203.html | cases/203.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/204.html | cases/204.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/204.html | cases/204.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/205.html | cases/205.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/206.html | cases/206.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/207.html | cases/207.html | record | overview | 2026-10-03 | 2026-10-23 | live |
@@ -889,7 +889,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/296.html | cases/296.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/297.html | cases/297.html | record | overview | 2026-10-03 | 2026-10-26 | live |
 | cases/298.html | cases/298.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/299.html | cases/299.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/299.html | cases/299.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/3.html | cases/3.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/30.html | cases/30.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/300.html | cases/300.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -986,7 +986,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/91.html | cases/91.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/92.html | cases/92.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/93.html | cases/93.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/94.html | cases/94.html | record | overview | 2026-10-03 | 2026-11-03 | live |
+| cases/94.html | cases/94.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/95.html | cases/95.html | record | overview | 2026-10-03 | 2026-11-02 | live |
 | cases/96.html | cases/96.html | record | overview | 2026-10-03 | 2026-11-02 | live |
 | cases/97.html | cases/97.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -1402,7 +1402,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-259.html | result/t-259.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-260.html | result/t-260.html | result | overview | 2026-10-31 | 2026-10-31 | live |
 | result/t-261.html | result/t-261.html | result | overview | 2026-10-31 | 2026-10-31 | live |
-| result/t-262.html | result/t-262.html | result | overview | 2026-11-03 | 2026-11-03 | live |
+| result/t-262.html | result/t-262.html | result | overview | 2026-11-03 | 2026-11-04 | live |
+| result/t-263.html | result/t-263.html | result | overview | 2026-11-04 | 2026-11-04 | live |
+| result/t-264.html | result/t-264.html | result | overview | 2026-11-04 | 2026-11-04 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |
@@ -1458,7 +1460,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
 | cases/17.html | 550,000 | Complete n=17 proof/certificate record and prepared bounds measure 501,977 bytes on 16 October 2026 with T-154's source-build evidence, 499,855 on main at 26d8bb335. The ceiling leaves room for the open n=17 intakes. |
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
-| cases/204.html | 375,000 | Eleven verified certificates and a section for each of the seven that have been the house, each listing every other side; prepared HTML measures 320,903 bytes on 23 October 2026 after T-231's adoption and 353,884 on 31 October 2026 after T-257's, whose section is 15,409 bytes. The ceiling leaves room for one more house section, and the record keeps every earlier house's section as history. |
+| cases/204.html | 430,000 | Twelve verified certificates and a section for each of the eight that have been the house, each listing every other side; prepared HTML measures 320,903 bytes on 23 October 2026 after T-231's adoption, 353,884 on 31 October 2026 after T-257's, whose section is 15,409 bytes, and 380,607 on 4 November 2026 after T-264's, 26,723 bytes more, since the new section lists every other side and every earlier section gains the new one. The record keeps every earlier house's section as history, so each adoption grows the page by 27 to 33 KB (32,981 bytes at T-257's). The ceiling moves to 430,000 as a measured choice: one more adoption at that growth, which think-w64i's queued 204 candidate would be, with 16 to 22 KB to spare. Its timing was not re-measured. How a page that grows with every adoption scales is the question think-rp0d asks of result/t-046.html. |
 | frontier.html | 900,000 | On 22 October 2026 the standalone Frontier Survey measures 731,612 bytes for all 324 rows, exact native MathML, credit links, the concise reading key and the shared shell. The 900,000-byte ceiling leaves 168,388 bytes above that measurement; row details remain fetched on demand. Timing has not been re-measured for the split. |
 | index.html | 1,300,000 | The shared 100-case Atlas preview includes all 324 canonical case links and per-case SVG references, with common controls, reading and documentation cards. Retained desktop/mobile expansion checks cover the prepared shared row layout. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |

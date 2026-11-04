@@ -1,0 +1,8 @@
+18afa411944b5b54da4f1a71d45bec8e823d80992dab376f23bcda7b94f50d14  ./README.md
+e3c8c7ebf80819290efa023b0fa7f6cd046b9ee01979aac9cb8d76c1ec14eeb8  ./n-204-candidate.yaml
+613c0a668026a393f7eaebf796acdc2c8aafe6e7c9c66bc9ee68397ce13caf45  ./n204-witness.json
+3d340f8c561760535eaa0b6b9a65144eb27b49b602aea892f1d8cd10ecda19fa  ./packing-witness-verify.txt
+3f1d7b11115c0cbcf2bb04a3c72ec61afaf4bf2d3b14f16a71067cac53617e93  ./records/n-204-candidate-diff.png
+7e000461c027bc7a3a4316f5b01dc23a19f84abc89a50b8b22638dee736617ba  ./sqcheck-output.txt
+596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce  ./verifier/README.md
+ee0ae778452f30db30385e1856217339f333986f07471db4f69b94e52ec365ef  ./verifier/sqcheck.py

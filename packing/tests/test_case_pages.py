@@ -153,15 +153,41 @@ def test_every_record_file_is_small(records: dict[str, str]) -> None:
     # its house; each house's section lists every other certificate's side, so the page
     # grows with each adoption. T-231's (think-h01y, 23 October 2026) took it to 320,783
     # bytes: its section is 20,311 and its register entry 7,206. The adoption of T-257
-    # (think-3guf, 31 October 2026) took it to 353,894.
+    # (think-3guf, 31 October 2026) took it to 353,894, and that of T-264 (think-ybep, 4
+    # November 2026) to 380,427, about 26.5 KB an adoption; the ceiling allows one more
+    # (think-w64i), as the published budget in `site_urls` does.
     exceptions = {
         "cases/11.html": 500_000,
         "cases/17.html": 550_000,
         "cases/18.html": 350_000,
-        "cases/204.html": 375_000,
+        "cases/204.html": 430_000,
     }
     for name, size in sizes.items():
         assert size < exceptions.get(name, RECORD_CEILING_BYTES), (name, size)
+
+
+def test_every_in_page_link_of_every_record_reaches_an_id_on_its_page(
+    records: dict[str, str],
+) -> None:
+    """Review F1 of #897: the adoption writer made its "the certificate" link by stripping
+    every character outside `[a-z0-9 -]`, so at 204 and 299, the first adoption whose name
+    has diacritics, the link read `#doa-zdens-…` beside the heading id
+    `doğa-özdens-…`. Every `href="#…"` a record's page carries must name an id on it."""
+    from urllib.parse import unquote  # noqa: PLC0415
+
+    def targets(text: str) -> set[str]:
+        # kpress percent-encodes a fragment's non-ASCII characters; a browser decodes it.
+        return {unquote(html.unescape(value)) for value in re.findall(r'href="#([^"]+)"', text)}
+
+    broken: dict[str, list[str]] = {}
+    for name, text in records.items():
+        ids = {html.unescape(value) for value in re.findall(r'\sid="([^"]+)"', text)}
+        missing = sorted(target for target in targets(text) if target not in ids)
+        if missing:
+            broken[name] = missing
+    assert not broken
+    assert "doğa-özdens-certificate-t-264" in targets(records["cases/204.html"])
+    assert "doğa-özdens-certificate-t-263" in targets(records["cases/299.html"])
 
 
 @pytest.mark.parametrize("tex", ["n = 17", r"s(17) \geq 4.6", "x < y", r"\sqrt{2}"])

@@ -1,0 +1,36 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "ozden-s204-upper-bound",
+  "source_url": "https://github.com/kenaznia-doga/s204-upper-bound",
+  "source_ref": "main",
+  "source_commit": "d4b8b05c45e3be464476c94712a4dbc063009875",
+  "retrieved_at_utc": "2026-11-04T05:01Z",
+  "git_scope": "A full clone of kenaznia-doga/s204-upper-bound, fetched for the intake of jlevy/squares#894; the repository holds one commit, d4b8b05 (committed 2026-11-03T22:35:57Z, 's(204) upper bound 14.807620995586: exact witness, checker outputs, README'), 16 seconds before the issue, of 8 files, and the scope is the whole tree. #894 names this commit. The SHA-256 the issue and the README state for n-204-candidate.yaml, e3c8c7eb...eeb8, and the one the README states for n204-witness.json, 613c0a66...af45, match the files. verifier/README.md and verifier/sqcheck.py are byte-identical to the copies the ozden-s299-upper-bound-2026-11-03 packet retains, and are pinned against them. No source program ran in writing this packet.",
+  "archived_dir": "source",
+  "license": "None stated: the repository has no licence file, and no file names a licence. Retained under the presumption of permission the owner set on 24 October 2026 for a source its author submits (think-cnn7), the issue being the author's submission; the exact licence is followed up on think-mdxq. The packing starts from Evan Daniel's #845 certificate at 204 (MIT, copyright (c) 2026 Evan Daniel, retained by the evand-issue845-2026-10-29 packet), as the issue states.",
+  "claims": [
+    "n-204-candidate.yaml is a packing.squares:Witness/v2 file (center-basis, rational scalars, 204 squares) that s(204) <= 7403810497792604009019579959/500000000000000000000000000 = 14.807620995585208..., which #894 prints as 14.807620995586, rounded up at 12 places, and states is 6.48e-6 below the record's 14807627471881579627471866771703/10^30 (Evan Daniel, #845). An upper bound only: no KKT, local-optimality, rigidity or global-optimality claim.",
+    "n204-witness.json holds the same squares as plain JSON. packing-witness-verify.txt is the author's run of this repository's packing-witness verify at e6e8d577 on the witness placed under packing/witnesses/known-best/ (VERIFIED, exact-algebraic, 20706 pairs); sqcheck-output.txt is the author's run of verifier/sqcheck.py, an exact checker the source says was written separately from this repository's code (VALID, exact rational). Those statements are the author's; no source program ran here.",
+    "The issue and README say the packing starts from the registry's 204 (Evan Daniel, #845, who states its lineage starts at Daniil Ostashev's s(176) packing, #575): 24 squares move by more than 0.05, 14 are re-tilted by more than 1 degree (largest 25.6), and the tilted set has 76 squares against 79. The search was AI-assisted, the checks were run by code that did not produce the packing, and the issue and repository were prepared and posted by Doğa Özden's AI agent, which uses the account kenaznia-doga; Özden directed the work."
+  ],
+  "scope": [
+    "README.md",
+    "n-204-candidate.yaml",
+    "n204-witness.json",
+    "packing-witness-verify.txt",
+    "records",
+    "sqcheck-output.txt",
+    "verifier"
+  ],
+  "pinned_only": [
+    {
+      "match": "records/n-204-candidate-diff.png",
+      "reason": "A raster comparison of the candidate with the registry packing, which decides nothing; pinned by digest only, as the SQUISH packets pin theirs."
+    },
+    {
+      "match": "verifier/*",
+      "reason": "The author's exact checker and its README, which the source says were written separately from this repository's code; byte-identical to the copies the ozden-s299-upper-bound-2026-11-03 packet retains, and never executed here.",
+      "identical_to": "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier"
+    }
+  ]
+}
