@@ -148,8 +148,9 @@ def test_coincident_images_are_merged_as_admission_merges_them(factor: Fraction)
     bound, pose = COINCIDENT_ROWS[factor]
     x, y = (Fraction(value) for value in pose)
     enclosure = axis.column_enclosure(raw, factor, x, y, side - Fraction(1, 2))
-    assert enclosure == (bound, CRATE_UPPER["coincident", factor])
-    assert Fraction(bound) <= factor * mixed_exact(raw, x, y, 0) <= Fraction(enclosure[1])
+    high = CRATE_UPPER["coincident", factor]
+    assert enclosure == (bound, high)
+    assert Fraction(bound) <= factor * mixed_exact(raw, x, y, 0) <= Fraction(high)
 
 
 def test_no_enclosure_where_the_sweep_would_not_run() -> None:

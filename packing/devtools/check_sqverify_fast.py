@@ -821,8 +821,8 @@ def axis_enclosure_tie(binary: Path, scratch: Path) -> list[tuple[bool, str]]:
         rows = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
         row = next((x for x in rows if x.get("r") == 0), {})
         bound, pose = row.get("min_certified_lower_bound"), row.get("argmin")
-        ok = row.get("method") == "axis-vertex-sweep" and bound is not None and bool(pose)
-        if ok:
+        ok = False
+        if row.get("method") == "axis-vertex-sweep" and bound is not None and pose:
             x, y = (Fraction(value) for value in pose)
             enclosure = column_enclosure(COINCIDENT_AXIS, factor, x, y, side - Fraction(1, 2))
             capture = factor * mixed_exact(COINCIDENT_AXIS, x, y, 0)
