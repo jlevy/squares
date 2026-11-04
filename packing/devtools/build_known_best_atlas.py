@@ -2795,10 +2795,12 @@ PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     204: ("Doğa Özden",),
     299: ("Doğa Özden",),
 }
-#: The infographic edition the hold was set under. A poster drawn for any other edition
-#: while the hold is not empty fails `composite_findings` (`print_credit_hold_problems`),
-#: and so does a version bump before the redraw, so the cut that redraws the posters must
-#: also empty the hold (review F2 of #897). A version, not a commit (OR-18).
+#: The infographic edition the hold was set under. While the hold is not empty, a version
+#: bump or a poster drawn for any other edition fails the pull-request suite
+#: (`print_credit_hold_problems`, held by test_known_best_atlas), so the cut that redraws
+#: the posters must also empty the hold (review F2 of #897). The cut machinery's own
+#: validation does not read it, so its synthetic cuts stay hold-free. A version, not a
+#: commit (OR-18).
 PRINT_CREDIT_HELD_FOR = "v0.7.0"
 
 
@@ -5035,7 +5037,6 @@ def composite_findings(
         problems.append(
             f"infographic family has mixed versions: {', '.join(sorted(family_versions))}"
         )
-    problems.extend(print_credit_hold_problems([*family_versions, INFOGRAPHIC_VERSION]))
     return CompositeFindings(tuple(problems), tuple(notes))
 
 

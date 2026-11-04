@@ -2618,17 +2618,17 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
 def test_the_print_credit_hold_cannot_outlive_its_edition(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Review F2 of #897: the hold is set under one infographic edition, and a poster of
-    any other edition, or a version bump before the redraw, fails the composite check
-    while the hold stands, so the cut that redraws the posters empties it (think-tj4o)."""
-    assert known_best_builder.PRINT_CREDIT_HELD_FOR == INFOGRAPHIC_VERSION
-    assert {
+    """Review F2 of #897: the hold is set under one infographic edition, and while it
+    stands a version bump, or a poster drawn for any other edition, fails here, so the
+    cut that redraws the posters empties it (think-tj4o)."""
+    problems = known_best_builder.print_credit_hold_problems
+    drawn = [
         known_best_builder.retained_identity(
             (ATLAS / f"{canvas.spec.stem}.svg").read_text(encoding="utf-8")
         ).version
         for canvas in known_best_builder.COMPOSITES
-    } == {known_best_builder.PRINT_CREDIT_HELD_FOR}
-    problems = known_best_builder.print_credit_hold_problems
+    ]
+    assert problems([*drawn, INFOGRAPHIC_VERSION]) == []
     assert problems([INFOGRAPHIC_VERSION]) == []
     [refused] = problems([INFOGRAPHIC_VERSION, "v9.9.9"])
     assert "v9.9.9" in refused
