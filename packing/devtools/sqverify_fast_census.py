@@ -1729,12 +1729,13 @@ def evidence_entry(
     pinned = hashlib.sha256(gzip.decompress(case.candidate.read_bytes())).hexdigest()
     when = ""
     if control_date is not None and control_date != date:
-        same = receipt.get("build") == entry.get("build") and receipt.get(
-            "binary_sha256"
-        ) == entry.get("binary_sha256")
-        controlled = str((receipt.get("build") or {}).get("source_sha256", ""))
+        # The receipt's build facts (compiler, profile, target and crate source) against
+        # the row's: a description of what ran, which decides nothing (OR-16).
+        controlled = receipt.get("build") or {}
         when = f", on {control_date} " + (
-            "by the same build" if same else f"by a build of crate source {controlled[:8]}..."
+            "by the same build"
+            if controlled == entry.get("build")
+            else f"by a build of crate source {str(controlled.get('source_sha256', ''))[:8]}..."
         )
     coverage_unit = (
         "complete legal core-centre domains at every declared-net direction"
