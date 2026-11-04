@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 145
+version: 146
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T18:54:14.389Z
+updated_at: 2026-11-04T19:55:06.632Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -255,3 +255,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 17:52 renewal (intake62): #889 merged (69abc507e; T-176, T-179 V3/C3); think-567s and think-v511 closed. Retention authorized by the owner on 17 Oct (#543 checkbox stale). L43 posted #446/#779 replies and is recording them. Özden answered the licences on #890 (CC BY 4.0 data, MIT code; LICENSE.md in all three repos); L44 records them, then posts the #890 follow-up (naming the two deferred ids) and the #366 follow-up (T-110 superseded by T-176). think-4ul6 strong-max review of T-142/T-143 running; L42 #903 (T-233, n28/n30 retention).
 
 2026-11-04 18:52 renewal (intake63): #904 merged (23362113f; #446 and #779 replies recorded, #779 closed). think-4ul6 review accepted T-142/T-143 (C1 once mapped); L42 is running the n28/n30 census (about 8-11 CPU-h) while #903 (T-233 V3/C3 at 19, 20, 26, 27) is in senior review. L42 pushed an empty commit (bdb744251) to re-trigger CI, against the rules; corrected, left in place. L44 has the Özden licences plus #890 and #366 follow-ups. The remaining needs-action items are all owned by L44 or L42.
+
+2026-11-04 19:52 renewal (intake64): needs-action down to think-4ul6, whose review is done and is mapped in the L42 follow-up. #905 and #906 merged (Özden licences; #890 and #366 follow-ups); think-0so3 and think-mdxq closed. #903 review accept-with-fixes (F3: retained_data check fails on the n28/n30, n29 and n39 packets for want of a Compressed Files table); L42 is addressing it while the n28/n30 census runs. Strong-max stage-4 review of T-132 (think-1lri) launched.
