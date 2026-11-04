@@ -420,6 +420,12 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # T-176's s(39) >= 533/80 supersedes Hosono's check2 133/20 (T-110) at n = 39,
         # its one count, in both lanes.
         "T-110",
+        # T-233's fine-net bounds supersede Hosono's check2 bounds of 6 October at n = 19,
+        # 20, 26 and 27 (T-103 to T-106), one count each, in both lanes.
+        "T-103",
+        "T-104",
+        "T-105",
+        "T-106",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -520,12 +526,13 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         assert entry not in by, entry
     assert view.superseding(records.results["T-037"], records) == ("T-060",)
     # T-019's counts are held now by R071's replay at n = 17 (T-093) and by Hosono's
-    # check2 certificates of 6 October at n = 18 and 19 (T-102, T-103), which took both
-    # lanes there from T-099 and T-100 the same day. Since 12 October Overbeck's candidate
-    # equality (T-153), a report at C1, holds n = 17's reported lower bound, and the mark
-    # names it as one.
+    # check2 certificate of 6 October at n = 18 (T-102), which took both lanes there from
+    # T-099 the same day, and at n = 19 by his fine-net certificate (T-233), which took
+    # both from T-103 on 4 November. Since 12 October Overbeck's candidate equality
+    # (T-153), a report at C1, holds n = 17's reported lower bound, and the mark names it
+    # as one.
     assert view.position_marks(records.results["T-019"], view.SUPERSEDED, records) == [
-        "superseded by T-093, T-102, T-103 and T-153 (reported)"
+        "superseded by T-093, T-102, T-153 (reported) and T-233"
     ]
     # Only a bound supersedes: at n = 13 and 46 a correction and an audit carry the
     # lower bound's evidence beside the optimality results that hold it, at n = 46 since

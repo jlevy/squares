@@ -289,15 +289,23 @@ def test_each_failed_control_receipt_is_kept_as_it_failed_and_decides_nothing() 
             assert name not in cited().values(), path.name
 
 
-def test_the_census_view_marks_a_failed_control_as_kept() -> None:
-    """The generated view tells n26's failed control from a certificate with none."""
+def test_the_census_view_reads_a_passing_control_beside_a_kept_failed_one() -> None:
+    """The generated view reads n26's passing control of 4 November, not the failed one of
+    23 October kept beside it, and marks a certificate with none `-`. Since that rerun no
+    retained certificate has only a failed receipt; the view's `(kept)` mark for one is
+    held by `test_the_mixed_report_tells_a_failed_control_from_none`."""
     view = (FOLDER / "README.md").read_text(encoding="utf-8")
     rows = {
         line.split("|")[1].strip().strip("`"): line
         for line in view.splitlines()
         if line.startswith("| `")
     }
-    assert rows["mixed_n26_L5555"].rstrip(" |").endswith("CONTROL_FAILED (kept)")
+    assert (
+        (FOLDER / "wand125-fine-net-lower-bounds-446-release-2026-10-08")
+        .joinpath("mixed_n26_L5555.control-failed-v2.json")
+        .is_file()
+    )
+    assert rows["mixed_n26_L5555"].rstrip(" |").endswith("CONTROLS_REFUSED")
     assert rows["mixed_n37_L644"].rstrip(" |").endswith("-")
 
 
@@ -1556,6 +1564,28 @@ def test_the_10_october_n29_packet_is_read_from_its_retained_members() -> None:
     assert packet not in census.INDEPENDENT_MIXED_PACKETS
 
 
+def test_the_10_october_n28_n30_packet_is_read_from_its_retained_members() -> None:
+    """T-142's mixed_n28_L57425 and T-143's mixed_n30_L58925 are read from the 10 October
+    n28 and n30 packet's release members, which `fine_net_followup retain` copied from
+    the pinned assets on 4 November, and the packet shares the producer's crate, as the
+    other fine-net release packets do. Neither has a census row yet: no review reads
+    them (think-4ul6)."""
+    packet = "wand125-fine-net-n28-n30-2026-10-10"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert sorted(found) == ["mixed_n28_L57425", "mixed_n30_L58925"]
+    root = census.WEB / packet / "release/certificates"
+    for name, n, side in (
+        ("mixed_n28_L57425", 28, "2297/400"),
+        ("mixed_n30_L58925", 30, "2357/400"),
+    ):
+        case = found[name]
+        assert case.candidate == root / name / "candidate.json.gz"
+        assert (case.n, case.side) == (n, side)
+        assert census.net_directions(case) == 2073
+    assert packet in census.SHARED_CRATE_PACKETS
+    assert packet not in census.INDEPENDENT_MIXED_PACKETS
+
+
 def test_the_890_dilation_is_read_at_its_upstream_path_and_reproduces_the_producer() -> None:
     """#890's certificate is not Hosono's and sits at its own upstream path, which
     `MIXED_FILES` names under the format M convention's census name. Its producer decided
@@ -1602,3 +1632,82 @@ def test_the_890_replay_entry_is_what_the_census_prints() -> None:
     assert "applied to Doğa Özden's mixed_n94_L9965" in flat
     assert census.packet_provenance(cases()["mixed_n37_L64975"]) is census.HOSONO_PROVENANCE
     assert "{certificate}" in census.HOSONO_PROVENANCE.subject
+
+
+#: T-233's four certificates, each with its replay entry's id and the day its controls ran
+#: (n26's were written again under the enclosure rule; the other three on the capture's).
+T233_REPLAYS = {
+    "mixed_n19_L48275": ("E-wand125-fine-net-446-n19-48275-sqverify-fast-replay", "2026-10-23"),
+    "mixed_n20_L49125": ("E-wand125-fine-net-446-n20-49125-sqverify-fast-replay", "2026-10-23"),
+    "mixed_n26_L5555": ("E-wand125-fine-net-446-n26-5555-sqverify-fast-replay", "2026-11-04"),
+    "mixed_n27_L5655": (
+        "E-wand125-fine-net-n27-5655-followup-sqverify-fast-replay",
+        "2026-10-23",
+    ),
+}
+
+
+@pytest.mark.parametrize("name", sorted(T233_REPLAYS))
+def test_each_t233_replay_entry_is_what_the_census_prints(name: str) -> None:
+    """T-233's four replay entries are `--evidence`'s, field for field, with the stage 4
+    review of 23 October as their audit record. #446's report of n = 19, 20 and 26 names
+    their directory, so each certificate gets its own entry, scoped to its count and naming
+    its candidate (`replay_identity`); n = 27's follow-up report names its candidate. Only
+    n26's states a failed control kept beside its passing one."""
+    ident, controlled = T233_REPLAYS[name]
+    case = cases()[name]
+    text = census.evidence_entry(
+        case,
+        FOLDER,
+        entries()[name],
+        audit_record="docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md",
+        date="2026-10-23",
+        control_date=controlled,
+    )
+    (generated,) = safe_load(text)
+    assert generated["id"] == ident
+    assert generated["scope"] == {"n_values": [case.n]}
+    assert generated["certificate"] == str(case.candidate.relative_to(census.PROJECT.parent))
+    register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    (committed,) = (item for item in register["evidence"] if item["id"] == ident)
+    assert generated == committed
+    kept = f"{name}.control-failed-v2.json" in " ".join(text.split())
+    assert kept is (name in census.CONTROL_HISTORY)
+    assert (FOLDER / case.packet / f"{name}.control-failed-v2.json").is_file() is kept
+
+
+def test_a_report_over_several_certificates_names_each_by_its_directory() -> None:
+    """`reports_candidate` takes a reported entry that names the candidate, in either
+    spelling, or a directory holding it with the count in its scope, and nothing else."""
+    relative = "resources/web/p/release/certificates/mixed_n26_L5555/candidate.json.gz"
+    directory = "packing/resources/web/p/release/certificates/"
+    shared = {"certificate": directory, "scope": {"n_values": [19, 20, 26]}}
+    assert census.reports_candidate(shared, relative, 26)
+    assert not census.reports_candidate(shared, relative, 27)
+    assert not census.reports_candidate(
+        {**shared, "certificate": directory.removesuffix("/")}, relative, 26
+    )
+    assert not census.reports_candidate(
+        {**shared, "certificate": "packing/resources/web/q/"}, relative, 26
+    )
+    for named in (relative, f"packing/{relative}"):
+        assert census.reports_candidate({"certificate": named}, relative, 26)
+    assert not census.reports_candidate({"certificate": None}, relative, 26)
+
+
+def test_a_directory_report_without_a_run_of_counts_in_its_id_is_refused() -> None:
+    """`replay_identity` names each certificate of a directory report by replacing its
+    id's run of counts; an id with no such run (one count, or none) is refused rather
+    than given an entry that would collide with another certificate's (#903 review F7)."""
+    case = cases()["mixed_n26_L5555"]
+    relative = str(case.candidate.relative_to(census.PROJECT))
+    directory = "packing/" + relative.rsplit("mixed_n26_L5555/", 1)[0]
+    shared = {"certificate": directory, "scope": {"n_values": [19, 20, 26]}}
+    ident, scope, certificate = census.replay_identity(
+        {**shared, "id": "E-x-446-n19-n20-n26-report"}, case, relative
+    )
+    assert (ident, scope) == ("E-x-446-n26-5555-sqverify-fast-replay", "26")
+    assert certificate == f"packing/{relative}"
+    for ident in ("E-x-446-n26-report", "E-x-446-report"):
+        with pytest.raises(SystemExit, match="names no run of counts"):
+            census.replay_identity({**shared, "id": ident}, case, relative)

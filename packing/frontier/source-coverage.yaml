@@ -3824,7 +3824,7 @@ sources:
     - 28
     - 29
     - 31
-  reviewed: '2026-10-08'
+  reviewed: '2026-11-04'
   source_date: '2026-10-08'
   disposition: current-report
   replay_disposition: case-specific
@@ -3834,14 +3834,20 @@ sources:
   evidence:
   - E-wand125-fine-net-lower-bounds-446-report
   - E-wand125-fine-net-446-n19-n20-n26-report
-  notes: All seven original archives and sealed source/log/member identities retained outside live Git.
+  - E-wand125-fine-net-446-n19-48275-sqverify-fast-replay
+  - E-wand125-fine-net-446-n20-49125-sqverify-fast-replay
+  - E-wand125-fine-net-446-n26-5555-sqverify-fast-replay
+  notes: >-
+    All seven original archives and sealed source/log/member identities retained outside live Git.
     Conditional maintained input/kernel review accepted; no numeric claims_record or standing-bound
-    selection. T-233 registers the n19, n20 and n26 values with the n27 follow-up's, as reported.
-    Complete sqverify-fast captures of those four passed here on 23 October from the release packet,
-    with whole-net controls refused at n19, n20 and n27 and failed closed at n26 on the census's axis
-    allowance, so their replay evidence is held until think-tcsl. The n28, n29 and n31 originals have
-    no native replay here; their whole-net controls/custody adapter and reviewed hosted budget remain
-    pending under think-ndvg.
+    selection. T-233 registers the
+    n19, n20 and n26 values with the n27 follow-up's. Complete sqverify-fast captures of those four
+    passed here on 23 October from the release packet, with whole-net controls refused at n19, n20
+    and n27 that day; n26's, which failed closed on the census's then constant axis allowance, was
+    refused when written again on 4 November under the enclosure rule of #892 (think-tcsl). T-233 is
+    V3/C3, and both lower lanes at n19, n20, n26 and n27 take its values. The n28, n29 and n31
+    originals have no native replay here; their whole-net controls/custody adapter and reviewed
+    hosted budget remain pending under think-ndvg.
 - id: couzo-451-exact-refinements
   title: Francisco Couzo's eight rational refinements, issue451
   role: source-repository
@@ -3881,7 +3887,7 @@ sources:
   scope:
     n_values:
     - 27
-  reviewed: '2026-10-08'
+  reviewed: '2026-11-04'
   source_date: '2026-10-08'
   disposition: current-report
   replay_disposition: case-specific
@@ -3890,12 +3896,15 @@ sources:
   - resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
   evidence:
   - E-wand125-fine-net-n27-5655-followup-report
-  notes: The later reported 1131/200 supersedes the original reported n27 value only. Original seven-case
-    catalogue and all standing claims remain unchanged. Complete archive/candidate/source custody and
-    exact conditional mass/net premises accepted; author full positives and sampled controls over 32 directions
-    do not supply maintained capture or whole-net controls. A complete sqverify-fast capture here
-    passed on 23 October with its whole-net controls refused; its replay evidence is held with T-233's
-    other counts until think-tcsl. T-233 registers it with the n19, n20 and n26 values, as reported.
+  - E-wand125-fine-net-n27-5655-followup-sqverify-fast-replay
+  notes: >-
+    The later reported 1131/200 supersedes the original reported n27 value only. Original seven-case
+    catalogue unchanged. Complete archive/candidate/source custody and exact conditional mass/net
+    premises accepted; author full positives and sampled controls over 32 directions do not supply
+    maintained capture or whole-net controls. A complete sqverify-fast capture here passed on 23
+    October with its whole-net controls refused; its replay evidence, held with T-233's other counts
+    until n26's control passed on 4 November (think-tcsl), is mapped, and n27's lower lanes take
+    1131/200. T-233 registers it with the n19, n20 and n26 values.
 - id: evand-batch-105-130-2026-10-07
   title: "Evan Daniel's dated certificate reports at 105 and 130, issue #375"
   role: source-repository
@@ -4411,7 +4420,9 @@ sources:
     both standing claims and the seven-case packet are unchanged. Complete release-asset and document
     custody and the exact mass, declared-net and check2 premises are accepted; an eight-direction
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
-    supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
+    supply a maintained capture or whole-net controls. The release members are retained in the packet's
+    release/ since 4 November 2026. The review that reads the certificate (think-4ul6), replay and
+    adoption remain under think-i85v.
 - id: wand125-fine-net-n30-58925-2026-10-10
   title: Hosono reported n30 fine-net lower bound, no issue
   role: source-repository
@@ -4432,7 +4443,9 @@ sources:
   notes: The reported 2357/400 at n30 is above T-109's 11767/2000, which is unchanged. Complete
     release-asset and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
-    supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
+    supply a maintained capture or whole-net controls. The release members are retained in the packet's
+    release/ since 4 November 2026. The review that reads the certificate (think-4ul6), replay and
+    adoption remain under think-i85v.
 - id: wand125-fine-net-n31-59775-2026-10-11
   title: Hosono reported n31 fine-net lower bound, no issue
   role: source-repository

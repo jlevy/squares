@@ -991,11 +991,15 @@ geometric kernel, reports seven finer-net measure certificates for n19, n20, n26
 n28, n29 and n31. The
 [authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
 records the reported bounds and complete source references.
-Independent whole-net replay and controls remain pending.
 The [release packet](web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md)
 retains, at revision `bf85d6b` and under OR-18, the candidates, receipts and logs of the
 four certificates T-233 registers (n19, n20, n26 and the n27 follow-up), with their
 maintained premise checks.
+This repository’s census replayed those four at all 2,073 directions on 23 October, and
+their whole-net controls passed, n26’s on 4 November under the enclosure rule of #892,
+so T-233 is `V3/C3`, re-implemented sharing the producer’s components, and the four
+cases’ lower bounds are $1931/400$, $393/80$, $1111/200$ and $1131/200$. The n28, n29
+and n31 originals have no replay here.
 
 **[wand125 fine-net n29 2026-10-10]**: Hosono’s later n29 certificate, `mixed_n29_L582`,
 reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net, superseding the
@@ -1012,9 +1016,10 @@ pending.
 $s(30) \ge 2357/400 = 5.8925$ on the same 2,073-direction net; no issue reports them.
 The [authored factual packet](web/wand125-fine-net-n28-n30-2026-10-10/README.md) pins
 revisions `36b85b9` and `ff9f269` and their release assets by digest, with the
-maintained premise checks and diagnostic eight-direction samples.
-T-142 and T-143 record them at V0/C0; a complete replay and whole-net controls remain
-pending.
+maintained premise checks and diagnostic eight-direction samples; since 4 November it
+retains, under OR-18, each asset’s candidate, receipts and logs.
+T-142 and T-143 record them at V0/C0; a review that reads them, a complete replay and
+whole-net controls remain pending.
 
 **[wand125 fine-net n31 2026-10-11]**: Hosono’s n31 certificate, `mixed_n31_L59775`,
 reports $s(31) \ge 2391/400 = 5.9775$ on the same 2,073-direction net, above both lower

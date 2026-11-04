@@ -57,6 +57,29 @@ def test_every_compressed_file_matches_its_table_row(packet: str) -> None:
     assert check_packet(WEB / packet) == []
 
 
+#: Every packet `devtools.fine_net_followup retain` keeps release members in, found by its
+#: retention record, so that a new one cannot miss its README rows (review F3 of #903:
+#: the n28/n30, n29 and 13 October packets did, while replay entries said that
+#: `retained_data check` tied their candidates to their pins).
+RETAINED_RELEASE_PACKETS = sorted(
+    path.parent.parent.name for path in WEB.glob("*/acquisition/release-assets.json")
+)
+
+
+def test_the_retained_release_packets_are_found() -> None:
+    assert {
+        "wand125-fine-net-lower-bounds-446-release-2026-10-08",
+        "wand125-fine-net-n28-n30-2026-10-10",
+        "wand125-fine-net-n29-2026-10-10",
+        "wand125-fine-net-n37-n39-n44-2026-10-13",
+    } <= set(RETAINED_RELEASE_PACKETS)
+
+
+@pytest.mark.parametrize("packet", RETAINED_RELEASE_PACKETS)
+def test_every_retained_release_packet_lists_its_gzip_members(packet: str) -> None:
+    assert check_packet(WEB / packet) == []
+
+
 @pytest.mark.parametrize("packet", PACKETS)
 def test_no_large_data_file_is_left_plain(packet: str) -> None:
     assert candidates(WEB / packet) == []

@@ -110,14 +110,43 @@ The nearest enclosing source notice, `problems/square-lower-bounds/LICENSE`, is 
 Copyright 2026 wand125, the same blob at both pins and at the head, and byte-identical
 to the notice the #446 packet records.
 The nested verifier archive carries no notice of its own, so its redistribution is
-unresolved. This packet publishes authored facts, hash references and this repository’s
-own receipts. No upstream byte is retained in Git: the assets stay with their author,
-pinned here by size and digest, and no copy is hosted here.
+unresolved. Until 4 November this packet published only authored facts, hash references
+and this repository’s own receipts.
+
+On 4 November 2026 (think-i85v, for the review think-4ul6 and the censuses after it) each
+asset’s six data members were retained under [`release/`](release/certificates/), at
+their paths in the asset, so that the review and the census can read the candidates, by
+the owner’s answer of 17 October to retain fine-net candidates where the census reads
+them, as the n29, n31, #446 release and 13 October packets do.
+`devtools.fine_net_followup retain` held each asset to its pinned size and SHA-256
+(627,191 bytes, `7d0f9107…3bf3`; 638,622 bytes, `0d11fe05…61ba`) and copied the
+candidate (as deterministic gzip of its 178,089 or 130,050 bytes, SHA-256 `5ef20511…`
+and `981a17db…`, the source manifest pins), the check2 receipt, run log, control and
+control log, and the pre-publication receipt, each equal to the manifest’s digest.
+The nested verifier archive and the sealed inner bundle are pinned by digest only, with
+their reasons, in the [retention record](acquisition/release-assets.json), which
+`devtools.fine_net_followup check-retained` re-derives from the packet.
 No program of the source was run.
 
 The source credits wand125; both commits are authored by Hiroaki Hosono.
 Its README says parts of the work were produced with AI assistance under human
 direction, and each commit names Claude Opus 5.5 as co-author.
+
+## Compressed Files
+
+| Stored file | Origin | Git blob (decompressed) | SHA-256 (decompressed) |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n28_L57425/candidate.json.gz` | upstream | `83973a7165fd67ef82fbf73083fbc27c7e5c690b` | `5ef20511e18a9997dfcc4cef773b65eac83dfe59e6a56fa810f3c789076c0107` |
+| `release/certificates/mixed_n30_L58925/candidate.json.gz` | upstream | `6fc73a25e66e7c2e2390c43f767a9fd14c3ef09e` | `981a17db67b24f99d64e176c892655c27fde67f8e99f2875a8f1d55ff3d0677e` |
+
+## Original Gzip Files
+
+| Stored file | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n28_L57425/check2/control-197_200.jsonl.gz` | upstream | `29be8f524db5174654597ead6ac8d09e8cbf1ffe` | `8fa5261290892b6c7d8e41905bee493320a6954186b2a8ee94342c623de51169` |
+| `release/certificates/mixed_n28_L57425/check2/run.jsonl.gz` | upstream | `369a6500730b85aa2810a3fd492945a82f1548e3` | `896c535bb0f26e312ac4349d561a9a006a54c69c9657fbc02e4d068fe7e8bddd` |
+| `release/certificates/mixed_n30_L58925/check2/control-197_200.jsonl.gz` | upstream | `c9cc9a7bffba4da5bda5e27c3af079ec6033f918` | `ae1d9957fe143595401cd1c192d56e4851f6a1a3b2a5a4a0673907e19a4d080e` |
+| `release/certificates/mixed_n30_L58925/check2/run.jsonl.gz` | upstream | `b3b4e0e43e9fddb869942156ed9306bdc8b4c456` | `a0252ad908786885700a366450fe7ff8654009a3331b93f8065ae74d8e2fea2f` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

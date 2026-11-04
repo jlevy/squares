@@ -7,7 +7,9 @@ documents, so that a review can read each certificate and the census can replay 
 The [authored-facts packet of 8 October](../wand125-fine-net-lower-bounds-2026-10-08/README.md)
 holds the issue’s seven claims at `61e37d5`, with its reported catalogue, the n = 27
 follow-up facts and its source manifest, and is unchanged; this packet adds the bytes it
-pinned and did not keep. Each bound remains unconfirmed here.
+pinned and did not keep. Since 4 November each bound is confirmed here by its complete
+replay and controls, re-implemented sharing the producer’s components
+([The Complete Replays](#the-complete-replays)).
 
 | n | Certificate | Claim | First in the source | Release asset (bytes, SHA-256) | Positive rows | Candidate SHA-256, digest |
 | ---: | --- | --- | --- | --- | ---: | --- |
@@ -124,16 +126,21 @@ The census route of the 6 October soundness review is a capture at every directi
 the whole-net controls. The census read each candidate from `release/` and ran on 23
 October, one count at a time at two threads: each capture passed at all 2,073
 directions with the source’s node total, and the whole-net controls were refused at n =
-19, 20 and 27. At n = 26 the control failed closed on the census’s constant axis
+19, 20 and 27. At n = 26 the control failed closed on the census’s then constant axis
 allowance, not on a refusal: the 99/100 mutant was refused at every direction, but its
 exact capture at the axis sits 3.28e-9 above the sweep’s certified bound, beyond the
-allowance of 1e-9. The receipts, and the account of n = 26, are in
+allowance of 1e-9. That receipt is kept. Written again on 4 November under the
+enclosure rule of #892, which judges the axis refusal by the sweep’s own enclosure
+(think-tcsl), the n = 26 control was refused. The receipts, and the account of n = 26,
+are in
 [the census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md).
-The replays’ evidence is held until think-tcsl fixes that allowance and n = 26 is
-re-judged, so T-233 stays at V0/C1 and the case records keep their lower bounds.
+The four replays are now evidence, one entry per count, with the stage 4 review as
+their audit record: T-233 is V3/C3, and the case records at n = 19, 20, 26 and 27 take
+its values in both lower lanes.
 
 The four cost about 7.8 CPU-hours: 23,900 CPU-seconds of capture and about 2,055 seconds
-of control wall at two threads. The review had priced them at 10.5 to 19.2 CPU-hours:
+of control wall at two threads. The n = 26 control of 4 November added 1,022
+CPU-seconds. The review had priced them at 10.5 to 19.2 CPU-hours:
 1.4 to 2.7 at n = 19, 2.3 to 4.6 at n = 20, 3.1 to 4.8 at n = 26 and 3.7 to 7.0 at n =
 27. Each capture was priced by the ratio of 0.689 to the source that the n31 sample
 measured on this host on 23 October

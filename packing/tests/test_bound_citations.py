@@ -993,8 +993,9 @@ def test_the_recorded_register_gives_these_lines(n: int) -> None:
         # rectangle replays raised both, n = 26 under T-045 and n = 29 under T-070, and
         # the replays of its 1 October certificates raised both again later that day
         # (T-074); its mixed certificates of 6 October on declared nets, decided by
-        # sqverify-fast, raised both again (T-105, T-108).
-        (26, "Hosono after Tokoharu, Levy et al.", "GitHub", "T-105"),
+        # sqverify-fast, raised both again (T-105, T-108), and n = 26 rose once more on 4
+        # November, when its fine-net certificate's census replay was mapped (T-233).
+        (26, "Hosono after Tokoharu and Levy", "GitHub", "T-233"),
         (29, "Hosono after Tokoharu, Levy et al.", "GitHub", "T-108"),
     ],
 )
@@ -1007,8 +1008,9 @@ def test_promoted_external_bounds_keep_the_sources_credit(
     Others), so a promoted external bound has an entry of its own that carries the
     replay: the credit stays the source's, the result id stays empty because the bound
     is not this project's, and the entry is named as what confirms it. Ahmed's whole
-    credit fits beside its confirmation. The other credits need the source's
-    `short_credit` on the stage; every other renderer prints the whole credit.
+    credit fits beside its confirmation, as Hosono's fine-net credit at n = 26 does. The
+    other credits need the source's `short_credit` on the stage; every other renderer
+    prints the whole credit.
     """
     lower = _entry(n)["lower"]
     assert _line(lower) == (
@@ -1019,7 +1021,7 @@ def test_promoted_external_bounds_keep_the_sources_credit(
     assert lower["result"] is None
     assert lower["confirmed_by"] == [entry]
     source = _register().sources[lower["source_key"]]
-    if n == 11:
+    if n in (11, 26):
         assert author == source.credited
     else:
         assert author == source.short_credit

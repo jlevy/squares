@@ -15977,30 +15977,28 @@ results:
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_declared_net.py
     next_rung: >-
-      C3 needs a complete sqverify-fast census run at all 2,073 directions from a retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every direction,
-      FC-1) and a review that reads this certificate, by the checklist of the 6 October
-      declared-net soundness review. The eight-direction sample prices the run and its
-      controls at about 3.3 CPU-hours. The owner set its budget on 11 October 2026, and
-      the run is queued in think-i85v after the regularization of every packing
-      (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
-      the unmerged branch claude/wand125-confirmations-2026-10-11:
-      on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
+      C3 needs a review that reads this certificate (think-4ul6), by the checklist of the 6
+      October declared-net soundness review, and a complete sqverify-fast census run at all
+      2,073 directions from a retained candidate, with its whole-net control receipt (the
+      99/100 mutant at every direction, FC-1). The eight-direction sample prices the run
+      and its controls at about 3.3 CPU-hours. The owner set its budget on 11 October 2026,
+      and the run is queued in think-i85v after the regularization of every packing
+      (think-ux1v, planned in jlevy/squares#497). The release asset's data members are
+      retained in the packet's release/ since 4 November 2026, where the census reads
+      the candidate.
 
-      Two questions of 11 October are with the owner (jlevy/squares#543, lower-bound
-      replays): whether the three check2 candidates of T-132, T-142 and T-143 are
-      retained in Git, as the 6 October check2 packet is, and the census's axis
-      tolerance for T-142's whole-net control.
+      The two questions of 11 October on jlevy/squares#543 no longer hold T-142: the
+      owner's answer of 17 October retains fine-net candidates where the census reads
+      them, and #892 judges the whole-net control's axis refusal by the vertex sweep's
+      own enclosure.
     unfinished_confirmations:
       - what: >-
-          a complete sqverify-fast census at all 2,073 directions from a retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at every
-          direction, FC-1) and a review that reads this certificate, by the checklist of the 6 October
-          declared-net soundness review. The whole-net control is held on the owner's
-          axis-tolerance decision (jlevy/squares#543): the 99/100 mutant's exact capture at
-          the axis direction sits 2.15e-9 above the vertex sweep's certified bound, beyond
-          AXIS_ROUNDING (1e-9), so the control would write CONTROL_FAILED after 1.6 to 2.2
-          CPU-hours although the refusal is sound
+          a review that reads this certificate (think-4ul6), by the checklist of the 6
+          October declared-net soundness review, and a complete sqverify-fast census at all
+          2,073 directions from a retained candidate, with its whole-net control receipt
+          (the 99/100 mutant at every direction, FC-1). The axis gap of 2.15e-9 that would
+          have failed the control closed under the constant AXIS_ROUNDING is judged by the
+          enclosure rule of #892
         rung: C3
         link: think-i85v
         estimated_cost:
@@ -16022,7 +16020,9 @@ results:
       case records' lanes are unchanged, so the entry is pending adoption at n = 28 while
       T-107 holds both lanes; the issue-446 report of 287/50 stays where it is. The
       pre-publication receipt repeats the source's check2 run, so one complete author run
-      is reported. The release asset is pinned by size and digest and kept outside Git.
+      is reported. The release asset is pinned by size and digest; its six data members
+      are retained in the packet's release/ since 4 November 2026, and its nested
+      verifier archive and sealed inner bundle are pinned by digest only.
 
   - id: T-143
     kind: lower-bound
@@ -16094,25 +16094,25 @@ results:
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_declared_net.py
     next_rung: >-
-      C3 needs a complete sqverify-fast census run at all 2,073
-      directions from a retained candidate, with its whole-net control receipt (the 99/100
-      mutant at every direction, FC-1) and a review that reads this certificate, by the checklist of the 6 October declared-net
-      soundness review. The eight-direction sample prices the run and its controls at about
-      4.5 CPU-hours. The owner set its budget on 11 October 2026, and the run is queued
-      in think-i85v after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
-      the unmerged branch claude/wand125-confirmations-2026-10-11:
-      on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
+      C3 needs a review that reads this certificate (think-4ul6), by the checklist of the 6
+      October declared-net soundness review, and a complete sqverify-fast census run at all
+      2,073 directions from a retained candidate, with its whole-net control receipt (the
+      99/100 mutant at every direction, FC-1). The eight-direction sample prices the run
+      and its controls at about 4.5 CPU-hours. The owner set its budget on 11 October 2026,
+      and the run is queued in think-i85v after the regularization of every packing
+      (think-ux1v, planned in jlevy/squares#497). The release asset's data members are
+      retained in the packet's release/ since 4 November 2026, where the census reads
+      the candidate.
 
-      Two questions of 11 October are with the owner (jlevy/squares#543, lower-bound
-      replays): whether the three check2 candidates of T-132, T-142 and T-143 are
-      retained in Git, as the 6 October check2 packet is, and the census's axis
-      tolerance for T-142's whole-net control.
+      The question of 11 October on jlevy/squares#543, whether the three check2
+      candidates of T-132, T-142 and T-143 are retained in Git, was answered on 17
+      October: fine-net candidates are retained where the census reads them.
     unfinished_confirmations:
       - what: >-
-          a complete sqverify-fast census at all 2,073 directions from a retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at every
-          direction, FC-1) and a review that reads this certificate, by the checklist of
-          the 6 October declared-net soundness review
+          a review that reads this certificate (think-4ul6), by the checklist of the 6
+          October declared-net soundness review, and a complete sqverify-fast census at all
+          2,073 directions from a retained candidate, with its whole-net control receipt
+          (the 99/100 mutant at every direction, FC-1)
         rung: C3
         link: think-i85v
         estimated_cost:
@@ -16134,7 +16134,9 @@ results:
       case records' lanes are unchanged, so the entry is pending adoption at n = 30 while
       T-109 holds both lanes. The pre-publication receipt is the very run record the
       source's check2 receipt embeds, so one complete author run is reported. The release
-      asset is pinned by size and digest and kept outside Git.
+      asset is pinned by size and digest; its six data members are retained in the
+      packet's release/ since 4 November 2026, and its nested verifier archive and sealed
+      inner bundle are pinned by digest only.
 
   - id: T-144
     kind: lower-bound
@@ -33148,13 +33150,12 @@ results:
     registered: '2026-10-23'
     landed: '2026-10-24'
     headline: >-
-      Mixed rectangle-measure lower bounds reported at `n = 19, 20, 26, 27`, on a
+      Mixed rectangle-measure lower bounds verified at `n = 19, 20, 26, 27`, on a
       2,073-direction net
     claim: >-
       Four rectangle measures of wand125/square-packing, published on 7 and 8 October
-      2026 and reported in jlevy/squares#446, are reported to prove s(19) >= 1931/400 =
-      4.8275, s(20) >= 393/80 = 4.9125, s(26) >= 1111/200 = 5.555 and s(27) >= 1131/200
-      = 5.655.
+      2026 and reported in jlevy/squares#446, prove s(19) >= 1931/400 = 4.8275, s(20) >=
+      393/80 = 4.9125, s(26) >= 1111/200 = 5.555 and s(27) >= 1131/200 = 5.655.
 
       The certificates, mixed_n19_L48275, mixed_n20_L49125, mixed_n26_L5555 and
       mixed_n27_L5655, are densities of 347, 471, 615 and 714 uniform rectangles in D4
@@ -33171,10 +33172,6 @@ results:
       this repository's sqverify_fast changed to read the declared net, and a control
       with every mass scaled by 197/200 refused at 32 sampled directions of each.
 
-      Each value is above its case's reported and verified lower bound: 193/40 at
-      n = 19 (T-103) by 1/400, 981/200 at n = 20 (T-104) by 3/400, 1109/200 at n = 26
-      (T-105) by 1/100 and 11287/2000 at n = 27 (T-106) by 23/2000.
-
       Here the maintained readers accepted each candidate's exact mass, declared-net and
       check2 premises from its release members, retained since 23 October. The stage 4
       review of 23 October read all four certificates and accepted them: it re-derived the
@@ -33183,15 +33180,23 @@ results:
       logs and 32 sampled directions per count exactly, finding no blocking or major
       defect.
 
-      Complete sqverify-fast replays ran here on 23 October, from the retained
-      candidates: each capture passed at all 2,073 directions, with the source's node
-      total, and the whole-net controls were refused at n = 19, 20 and 27. At n = 26 the
-      control failed closed: the 99/100 mutant was refused at every direction, but at the
-      axis direction its exact capture sits 3.28e-9 above the sweep's certified bound,
-      beyond the census's constant allowance of 1e-9. The receipts are in
-      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/,
-      n = 26's kept as mixed_n26_L5555.control-failed-v2.json. The replays' evidence is
-      held until that allowance is fixed (think-tcsl), so the values stand as reported.
+      The retained maintained sqverify-fast captures of 23 October verify all 2,073
+      directions of each net at threshold one, with the source's node total at each count.
+      Their whole-net controls refuse the 99/100 mutant on coverage at every direction of
+      each net, with no verified mutant direction, and refuse the near-threshold mutant:
+      at n = 19, 20 and 27 on 23 October, and at n = 26 on 4 November, when the control
+      was written again under the enclosure rule of #892 (think-tcsl). The receipts are in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/.
+
+      This raises the verified and reported lower lanes at each count: by 1/400 over
+      193/40 at n = 19 (T-103), by 3/400 over 981/200 at n = 20 (T-104), by 1/100 over
+      1109/200 at n = 26 (T-105) and by 23/2000 over 11287/2000 at n = 27 (T-106). The
+      bounds are confirmed by a re-implementation sharing components with the producer's
+      checker, sqverify-proof-net, which is Hosono's adaptation of this repository's
+      sqverify_fast crate: the two share the crate apart from their declared-net readers.
+      No independent full implementation, second method, proof-assistant check or
+      optimality theorem is claimed. At n = 19 the record also holds T-194, a reported Lean
+      proof of the case's exact value, not built here.
 
       Hiroaki Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds)
@@ -33200,17 +33205,18 @@ results:
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [19, 20, 26, 27]}
-    verification: V0
-    confirmation: C1
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: once replayed, each raises its case's verified and reported
+        Scored as a claim on 23 October: each raises its case's verified and reported
         lower lanes, by 1/400 at n = 19, 3/400 at 20, 1/100 at 26 and 23/2000 at 27, over
         T-103 to T-106, by the certificate kind and declared net of T-142 with no new
         technique, at S3 as T-103 to T-106 and T-142 are. At n = 19 the record also holds
         a reported Lean proof of s(19) = 3 + 4√2/3 (T-194), which would supersede any
-        lower bound if adopted.
+        lower bound if adopted. The complete replays passed after it and leave the score
+        as it was.
       scored: '2026-10-23'
       by: >-
         the stage 4 review of 23 October
@@ -33221,16 +33227,20 @@ results:
       source_keys: ['[wand125 fine-net lower bounds 2026-10-08]']
       published: '2026-10-08'
     composition: >-
-      Four reported certificates on two reported entries, one for n = 19, 20 and 26 and
-      one for n = 27, each read by the stage 4 review. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is, and
-      no second implementation stands beside it. The review's own runs are samples and
-      premise checks, cited by the case records. The entry takes the least rung of its
-      four counts.
+      Four source certificates on two reported entries, one for n = 19, 20 and 26 and one
+      for n = 27, each read by the stage 4 review, and one complete maintained native
+      replay of each, C3 at every count. The replays share components with the producer's
+      checker, Hosono's adaptation of this repository's sqverify_fast crate, apart from
+      the declared-net readers, as T-104's does; no second implementation stands beside
+      them. The review's own runs are samples and premise checks, cited by the case
+      records. The entry takes the least rung of its four counts.
     evidence:
       - E-wand125-fine-net-446-n19-n20-n26-report
       - E-wand125-fine-net-n27-5655-followup-report
+      - E-wand125-fine-net-446-n19-48275-sqverify-fast-replay
+      - E-wand125-fine-net-446-n20-49125-sqverify-fast-replay
+      - E-wand125-fine-net-446-n26-5555-sqverify-fast-replay
+      - E-wand125-fine-net-n27-5655-followup-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json
@@ -33267,59 +33277,53 @@ results:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.jsonl.gz
       - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control.json
+      - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control-failed-v2.json
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.jsonl.gz
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
     next_rung: >-
-      C3 needs think-tcsl: a reviewed fix that derives the census control's axis
-      allowance from the sweep's enclosure rather than the constant 1e-9 (F-1 of the 14
-      October review), n = 26's whole-net control re-judged from its retained receipt or
-      rerun under it and ending CONTROLS_REFUSED, and then the replay evidence of the four
-      complete captures and controls of 23 October mapped, by the checklist of the 6
-      October declared-net soundness review, of which the stage 4 review of 23 October is
-      each certificate's review. The captures and controls themselves are spent, about
-      7.8 CPU-hours on 23 October, and are not rerun.
-    unfinished_confirmations:
-      - what: >-
-          mixed_n26_L5555's whole-net control re-judged from its retained receipt, or
-          rerun, under think-tcsl's reviewed fix to the axis allowance, ending
-          CONTROLS_REFUSED; then the replay evidence of the four complete captures and
-          controls of 23 October mapped, by the checklist of the 6 October declared-net
-          soundness review
-        rung: C3
-        link: think-tcsl
-        estimated_cost:
-          cpu_hours: 0.01
-          cpu_hours_high: 0.4
-          basis: >-
-            Re-judging n = 26's retained receipt reads it and recomputes one exact
-            capture, a matter of seconds; rerunning its whole-net control is the 99/100
-            sweep's 569.68 s of wall at two threads on 23 October, at most 0.32
-            CPU-hours. The four captures (23,900 CPU-seconds) and the four controls (about
-            2,055 s of wall at two threads) ran on 23 October and are not rerun. The fix
-            and its review are not CPU work.
-          priced: '2026-10-23'
+      None for the bounds. V4 and C4 need a second qualifying adversarial AI review by a
+      distinct reviewer and an explicit human oversight record; one AI review, of 23
+      October, is retained. An independent full implementation would add implementation
+      diversity.
     notes: >-
-      V0 because the cited entries are the source's public claims: assurance reported. The
-      complete replays of 23 October ran here, but their evidence is not mapped while n =
-      26's control has failed closed on the axis allowance (think-tcsl). C1 because both
-      carry the qualifying read of the stage 4 review of 23 October, which accepted all
-      four certificates.
+      From the complete maintained captures of 23 October 2026 (two threads, 23,900 CPU
+      seconds in all, each count's node total equal to the source's), their whole-net
+      control receipts and the mapped stage 4 review of 23 October, which read all four
+      certificates. Each count's replay is its own evidence entry, since #446's report of n
+      = 19, 20 and 26 names their directory.
 
-      n = 19, 20 and 27, whose controls were refused, wait for n = 26 because one entry
-      states the four counts and takes the least rung of them: mapping their replays alone
-      would move no rung of it. The coordinator of the 23 October intake pass held all
-      four together (think-eth9) rather than split n = 26 into an entry of its own; a
-      split remains open if think-tcsl is slow to land.
+      The n = 26 control of 23 October failed closed on the census's then constant axis
+      allowance of 1e-9 alone, the mutant's exact capture there 3.28e-9 above the sweep's
+      certified bound, and is kept as mixed_n26_L5555.control-failed-v2.json. Its rerun of
+      4 November (644 s of wall and 1,022 CPU-seconds at two threads, the same binary),
+      under the rule of #892 (think-4uun), which judges the axis refusal by the vertex
+      sweep's own enclosure, ends CONTROLS_REFUSED: the capture lies in [0.9909807799642721,
+      0.9909807865315093], whose lower end is the crate's bound to the bit. Apart from
+      timings, its status, that item's captures_agree and the new sweep_enclosure field, it
+      equals the kept receipt. The n = 19, 20 and 27 controls of 23 October stand, and the
+      enclosure rule holds their axis refusals too.
 
-      The case records' lanes are unchanged, so the entry is pending adoption at n = 19,
-      20, 26 and 27 while T-103 to T-106 hold both lanes. The issue's n = 27 value of
-      2261/400, which the same release supersedes, stays in the packet and the case
-      record. The four release assets' data members are retained in Git under OR-18
-      (packet wand125-fine-net-lower-bounds-446-release-2026-10-08); the adapted verifier
-      archive inside each is pinned by digest and not opened.
+      The case records' lower lanes move to T-233's values at all four counts; T-103 to
+      T-106 keep their claims, now superseded there. The issue's n = 27 value of 2261/400,
+      which the same release supersedes, stays in the packet and the case record. The four
+      release assets' data members are retained in Git under OR-18 (packet
+      wand125-fine-net-lower-bounds-446-release-2026-10-08); the adapted verifier archive
+      inside each is pinned by digest and not opened.
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n19_L48275.control.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n20_L49125.control.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.control.json
+      - packing/tests/test_sqverify_fast_census.py
     reviews:
       - path: docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md
         kind: adversarial

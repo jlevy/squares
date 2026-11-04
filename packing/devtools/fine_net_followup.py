@@ -19,6 +19,9 @@ packet keeps. Its check2 commands run no program of the source.
   alone, and compares each asset with the retained ``ASSET.json`` that names it. A linear
   asset is retained the same way, its proof bundle pinned by digest
   (`devtools.audit_wand125_linear` reads the record to fetch and bind it).
+  ``retained-tables PACKET`` then writes the packet README's ``## Compressed Files`` and
+  ``## Original Gzip Files`` rows for those gzip members, from the record and the stored
+  bytes, so that ``devtools.retained_data check`` passes on the packet.
 
 - ``premises`` refuses the asset unless its size and SHA-256 are the pinned ones, unpacks
   it safely (plain files and directories under ``certificates/<name>/`` only), lays the
@@ -142,12 +145,18 @@ from devtools.audit_wand125_point_and_mixed import (
 from devtools.retained_data import (
     DATA_SUFFIXES,
     GZIP_SUFFIX,
+    HEADING,
     LINE_THRESHOLD,
+    ORIGINAL_GZIP_HEADING,
+    Row,
     compress,
+    describe,
+    describe_original_gzip,
     git_blob,
     gunzip_bytes,
     is_deterministic_gzip,
     read_retained_bytes,
+    read_table,
 )
 from sqpack import retained_json
 
@@ -733,6 +742,99 @@ def check_retained(packet: Path) -> list[str]:
     return problems
 
 
+#: The two README tables `devtools.retained_data check` reads, by heading: a `gzip`
+#: member's row binds its decompressed bytes, an `original-gzip` member's its stored bytes.
+TABLE_HEADERS = {
+    HEADING: (
+        "| Stored file | Origin | Git blob (decompressed) | SHA-256 (decompressed) |\n"
+        "| --- | --- | --- | --- |"
+    ),
+    ORIGINAL_GZIP_HEADING: (
+        "| Stored file | Origin | Git blob | SHA-256 |\n| --- | --- | --- | --- |"
+    ),
+}
+#: Where a README's tables go when it has none: before its guideline footer.
+README_FOOTER = "<!-- This document follows common-doc-guidelines.md."
+
+
+def retained_rows(packet: Path) -> dict[str, list[Row]]:
+    """The README rows `retained_data check` asks of a packet's retained gzip members, by
+    heading, derived from its retention record and the stored bytes."""
+    record = load_json((packet / RETAINED_RECORD).read_bytes())
+    found: dict[str, list[Row]] = {HEADING: [], ORIGINAL_GZIP_HEADING: []}
+    for item in record["assets"]:
+        for row in item["members"]:
+            if row.get("form") == "gzip":
+                found[HEADING].append(describe(packet, packet / row["stored"], "upstream"))
+            elif row.get("form") == "original-gzip":
+                found[ORIGINAL_GZIP_HEADING].append(
+                    describe_original_gzip(packet, packet / row["stored"])
+                )
+    return found
+
+
+def write_retained_tables(packet: Path) -> int:
+    """Write the README tables of a packet's retained gzip members, keeping any other row
+    a table already holds, and return the rows that changed. A table the README lacks is
+    added before its guideline footer, or at its end."""
+    readme = packet / "README.md"
+    text = readme.read_text(encoding="utf-8")
+    changed = 0
+    for heading, derived in retained_rows(packet).items():
+        if not derived:
+            continue
+        held = {row.stored: row for row in read_table(readme, heading=heading)}
+        rows = {**held, **{row.stored: row for row in derived}}
+        changed += sum(held.get(row.stored) != row for row in derived)
+        table = (
+            TABLE_HEADERS[heading]
+            + "\n"
+            + "\n".join(rows[name].markdown() for name in sorted(rows))
+        )
+        section = f"{heading}\n\n{table}\n"
+        lines = text.split("\n")
+        if heading in lines:
+            # Replace the section's table and keep any prose around it.
+            start = lines.index(heading)
+            first = next(
+                (
+                    i
+                    for i in range(start + 1, len(lines))
+                    if lines[i].startswith("|") or lines[i].startswith("## ")
+                ),
+                len(lines),
+            )
+            require(
+                first < len(lines) and lines[first].startswith("|"),
+                f"{readme}: {heading} holds no table",
+            )
+            last = first
+            while last < len(lines) and lines[last].startswith("|"):
+                last += 1
+            text = "\n".join([*lines[:first], *table.split("\n"), *lines[last:]])
+        elif README_FOOTER in text:
+            text = text.replace(README_FOOTER, f"{section}\n{README_FOOTER}", 1)
+        else:
+            text = text.rstrip("\n") + f"\n\n{section}"
+    atomic_write_text(readme, text)
+    return changed
+
+
+def retention_command(command: str, packets: list[Path]) -> int:
+    """`check-retained` or `retained-tables` over ``packets``, as an exit status."""
+    if command == "retained-tables":
+        for packet in packets:
+            print(f"{packet}: {write_retained_tables(packet)} rows written")
+        return 0
+    problems = [
+        f"{packet}: {problem}" for packet in packets for problem in check_retained(packet)
+    ]
+    for problem in problems:
+        print(problem, file=sys.stderr)
+    print(f"{len(packets)} packets, {len(problems)} problems")
+    return 1 if problems else 0
+
+
 # --------------------------------------------------------------------------- the sample
 
 
@@ -1289,7 +1391,14 @@ def main(argv: list[str] | None = None) -> int:
     agreeing.add_argument("--out", type=Path, required=True)
     kept = commands.add_parser("check-retained", help="a packet's retained members")
     kept.add_argument("packets", type=Path, nargs="+")
+    tables = commands.add_parser(
+        "retained-tables",
+        help="write the README tables retained_data check reads for retained gzip members",
+    )
+    tables.add_argument("packets", type=Path, nargs="+")
     args = parser.parse_args(argv)
+    if args.command in ("check-retained", "retained-tables"):
+        return retention_command(args.command, args.packets)
     if args.command == "capture-agreement":
         receipt = capture_agreement(args.capture, args.source_run)
         args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -1300,16 +1409,6 @@ def main(argv: list[str] | None = None) -> int:
             f"{receipt['least_certified_bound_at']}"
         )
         return 0 if receipt["status"] == "CAPTURE_AGREES_WITH_SOURCE_LOG" else 1
-    if args.command == "check-retained":
-        problems = [
-            f"{packet}: {problem}"
-            for packet in args.packets
-            for problem in check_retained(packet)
-        ]
-        for problem in problems:
-            print(problem, file=sys.stderr)
-        print(f"{len(args.packets)} packets, {len(problems)} problems")
-        return 1 if problems else 0
     if args.command == "retain":
         try:
             entry = retain(

@@ -768,7 +768,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/187.html | cases/187.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/188.html | cases/188.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/189.html | cases/189.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/19.html | cases/19.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/19.html | cases/19.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/190.html | cases/190.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/191.html | cases/191.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/192.html | cases/192.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -780,7 +780,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/198.html | cases/198.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/199.html | cases/199.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/2.html | cases/2.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/20.html | cases/20.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/20.html | cases/20.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/200.html | cases/200.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/201.html | cases/201.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/202.html | cases/202.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -846,7 +846,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/257.html | cases/257.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/258.html | cases/258.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/259.html | cases/259.html | record | overview | 2026-10-03 | 2026-10-23 | live |
-| cases/26.html | cases/26.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/26.html | cases/26.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/260.html | cases/260.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/261.html | cases/261.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/262.html | cases/262.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -857,7 +857,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/267.html | cases/267.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/268.html | cases/268.html | record | overview | 2026-10-03 | 2026-10-26 | live |
 | cases/269.html | cases/269.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/27.html | cases/27.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/27.html | cases/27.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-10-21 | live |
 | cases/271.html | cases/271.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/272.html | cases/272.html | record | overview | 2026-10-03 | 2026-10-17 | live |
@@ -1373,7 +1373,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-230.html | result/t-230.html | result | overview | 2026-10-22 | 2026-10-22 | live |
 | result/t-231.html | result/t-231.html | result | overview | 2026-10-23 | 2026-10-23 | live |
 | result/t-232.html | result/t-232.html | result | overview | 2026-10-23 | 2026-10-23 | live |
-| result/t-233.html | result/t-233.html | result | overview | 2026-10-23 | 2026-10-23 | live |
+| result/t-233.html | result/t-233.html | result | overview | 2026-10-23 | 2026-11-04 | live |
 | result/t-234.html | result/t-234.html | result | overview | 2026-10-23 | 2026-10-23 | live |
 | result/t-235.html | result/t-235.html | result | overview | 2026-10-23 | 2026-10-23 | live |
 | result/t-236.html | result/t-236.html | result | overview | 2026-10-23 | 2026-10-23 | live |
@@ -1466,6 +1466,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
 | papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
 | result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. |
+| result/t-019.html | 350,000 | Complete broad scope history and prepared exact bounds measure 299,697 bytes on main on 4 November 2026, 303 under the 300,000 result budget, and 300,264 once T-233 joined the results its counts rest on (n = 19): 567 bytes for one listed result. The ceiling moves to 350,000 as a measured choice, room for about 88 more results of that size (49,736 bytes). Its timing was not re-measured; result/t-046.html's growth of the same kind is think-rp0d. |
 | result/t-046.html | 450,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. On 31 October 2026 the page measures 401,561 bytes, past the 400,000 ceiling with T-252 listed at n = 44 among its 48 counts' register results; the ceiling moves to 450,000 as a measured choice, about 30 more listed results at 1.5 KB each. Its timing was not re-measured. How the page scales is think-rp0d. |
 | result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 509,332 bytes. |
 | result/t-068.html | 350,000 | The rectangle-density result's 34 counts, each with every register result on it, and prepared math measure 300,689 bytes on 2 November 2026, after T-184 and T-191 settled 76 and 95 among them, past the 300,000 a result page is given; the ceiling is a measured choice. A byte measurement only; the page's timing is owed under think-v4me. |

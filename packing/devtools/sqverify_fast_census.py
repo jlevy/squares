@@ -93,7 +93,10 @@ in `REVIEWED_SOURCES`, or is on a declared net that the source's review did not 
 and names the reviewed source it was. A format M entry's producer, candidate custody and
 closing sentence come from `PACKET_PROVENANCE`, Hosono's unless its packet is named
 there, as #890's dilation is, and `--control-date` names the day the controls ran where
-it is not `--date`. A format T entry takes its source key from its
+it is not `--date`. A report over several certificates, which names their directory, as
+#446's of n = 19, 20 and 26 does, gives each its own entry (`replay_identity`), and a
+failed control kept beside a passing one in such a packet is stated from
+`CONTROL_HISTORY`. A format T entry takes its source key from its
 packet's reported entry, since the rectangle packets are registered by packet, and also
 refuses controls run on a build no review accepted. `--source-digest` prints the tree's
 crate `source_sha256` by `build.rs`'s rule and the review that accepted it, exiting 1
@@ -134,6 +137,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -192,6 +196,7 @@ MIXED_PACKETS = (
     "wand125-fine-net-lower-bounds-446-release-2026-10-08",
     "wand125-fine-net-n37-n39-n44-2026-10-13",
     "wand125-fine-net-n29-2026-10-10",
+    "wand125-fine-net-n28-n30-2026-10-10",
     "ozden-s94-lower-bound-2026-11-03",
 )
 #: A packet that is not Hosono's and keeps a format M certificate at its own upstream
@@ -205,15 +210,17 @@ MIXED_FILES: dict[str, dict[str, str]] = {
 }
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
 #: the 16 October fine-net packet, the n31 packet of 11 October, the release members of
-#: four #446 certificates, the n37 and n39 members of the 13 October packet and the n29
-#: member of the 10 October packet keep their release assets' members at the assets' own
-#: paths (`devtools.fine_net_followup retain`).
+#: four #446 certificates, the n37 and n39 members of the 13 October packet, the n29
+#: member of the 10 October packet and the n28 and n30 members of the other 10 October
+#: packet keep their release assets' members at the assets' own paths
+#: (`devtools.fine_net_followup retain`).
 MIXED_ROOTS = {
     "wand125-fine-net-lower-bounds-2026-10-16": "release/certificates",
     "wand125-fine-net-n31-2026-10-11": "release/certificates",
     "wand125-fine-net-lower-bounds-446-release-2026-10-08": "release/certificates",
     "wand125-fine-net-n37-n39-n44-2026-10-13": "release/certificates",
     "wand125-fine-net-n29-2026-10-10": "release/certificates",
+    "wand125-fine-net-n28-n30-2026-10-10": "release/certificates",
 }
 #: The standard net's direction count; a format M file may declare another.
 STANDARD_DIRECTIONS = 201
@@ -1345,6 +1352,64 @@ def packet_provenance(case: Case) -> PacketProvenance:
     return PACKET_PROVENANCE.get(case.packet, HOSONO_PROVENANCE)
 
 
+#: A control receipt kept as it failed beside a passing one, by certificate, in a packet
+#: of several: the sentence its replay entry states after the controls. A packet of one
+#: certificate says it in its `PacketProvenance.history`, as #890's does.
+CONTROL_HISTORY = {
+    "mixed_n26_L5555": (
+        "The whole-net control first run on 2026-10-23, kept as "
+        "mixed_n26_L5555.control-failed-v2.json, refused the same mutants and failed "
+        "closed only at the axis direction, where the mutant's exact capture sits 3.28e-9 "
+        "above the vertex sweep's certified bound, beyond the census's then constant "
+        "allowance of 1e-9 that the enclosure rule of #892 replaced (F-1 of "
+        "docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md). "
+    ),
+}
+
+
+def reports_candidate(item: dict[str, Any], relative: str, n: int) -> bool:
+    """Whether a reported evidence entry names this candidate: by its path, or by a
+    directory that holds it (`.../release/certificates/`) with the count in its scope, as
+    #446's report of n = 19, 20 and 26 does for three certificates."""
+    named = str(item.get("certificate") or "")
+    if named in (relative, f"packing/{relative}"):
+        return True
+    counts = (item.get("scope") or {}).get("n_values") or []
+    return (
+        named.endswith("/")
+        and n in counts
+        and any(f"{root}{relative}".startswith(named) for root in ("", "packing/"))
+    )
+
+
+def replay_identity(report: dict[str, Any], case: Case, relative: str) -> tuple[str, str, str]:
+    """The replay entry's id, scope and certificate path from its report entry.
+
+    A report of one certificate gives its id (`-report` becomes `-sqverify-fast-replay`)
+    and scope, and the candidate path as it spells it. A report over several, which
+    names their directory, gives each certificate an entry of its own: the id's run of
+    counts becomes the certificate's count and side digits
+    (`E-wand125-fine-net-446-n19-n20-n26-report` gives
+    `E-wand125-fine-net-446-n26-5555-sqverify-fast-replay` for `mixed_n26_L5555`), the
+    scope its count, and the path the directory's spelling of the candidate."""
+    ident = str(report["id"])
+    named = str(report["certificate"])
+    if not named.endswith("/"):
+        scope = ", ".join(str(n) for n in report["scope"]["n_values"])
+        return ident.removesuffix("-report") + "-sqverify-fast-replay", scope, named
+    counts = re.fullmatch(r"(?P<stem>.+?)(?:-n\d+){2,}-report", ident)
+    if counts is None:
+        raise SystemExit(f"{case.certificate}: {ident} names no run of counts to replace")
+    stem = counts["stem"]
+    digits = case.certificate.rsplit("_L", 1)[-1]
+    prefix = "packing/" if named.startswith("packing/") else ""
+    return (
+        f"{stem}-n{case.n}-{digits}-sqverify-fast-replay",
+        str(case.n),
+        f"{prefix}{relative}",
+    )
+
+
 def folded(key: str, text: str, indent: int = 4) -> list[str]:
     """A YAML folded block, wrapped as the register's hand-written entries are."""
     body = textwrap.wrap(
@@ -1503,6 +1568,7 @@ SHARED_CRATE_PACKETS = frozenset(
         "wand125-fine-net-lower-bounds-446-release-2026-10-08",
         "wand125-fine-net-n37-n39-n44-2026-10-13",
         "wand125-fine-net-n29-2026-10-10",
+        "wand125-fine-net-n28-n30-2026-10-10",
     }
 )
 INDEPENDENT_MIXED_PACKETS = frozenset(
@@ -1665,11 +1731,10 @@ def evidence_entry(
     (report,) = (
         item
         for item in register["evidence"]
-        if item.get("assurance") == "reported"
-        and item.get("certificate") in (relative, f"packing/{relative}")
+        if item.get("assurance") == "reported" and reports_candidate(item, relative, case.n)
     )
     # The replay names its candidate as its report does, so the two read as one record.
-    certificate = str(report["certificate"])
+    identifier, scope, certificate = replay_identity(report, case, relative)
     provenance = packet_provenance(case)
     premises = entry["premises"]
     built = str((entry.get("build") or {}).get("source_sha256", ""))
@@ -1706,7 +1771,6 @@ def evidence_entry(
     runs = {run["name"]: run for run in receipt["runs"]}
     side = Fraction(case.side)
     mass = Fraction(premises["mass_exact"])
-    identifier = str(report["id"]).removesuffix("-report") + "-sqverify-fast-replay"
     packet_path = f"benchmarks/measure-verifier/census-mixed/{case.packet}/{case.certificate}"
     relationship_fields, relationship_text = mixed_relationship(case)
     replay = (
@@ -1789,9 +1853,9 @@ def evidence_entry(
         "again by an exact evaluator written apart from the crate, and "
         "tests/test_sqverify_fast_census.py holds the receipts. "
         + provenance.history
+        + CONTROL_HISTORY.get(case.certificate, "")
         + provenance.closing
     )
-    scope = ", ".join(str(n) for n in report["scope"]["n_values"])
     # A standard-net row from a later reviewed source: the review that accepted that source.
     later_source = (
         f", and the crate source that ran, at {reviewed.commit}, by {reviewed.review}"

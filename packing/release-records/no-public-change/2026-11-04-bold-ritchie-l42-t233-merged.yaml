@@ -1,0 +1,35 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/site_urls.py
+  - packing/frontier/README.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L42 of 4 November, after main moved to 69abc507e (#889): the T-233 change
+  of 2026-11-04-bold-ritchie-l42-t233-verified.yaml merged with #889's records, two
+  later edits, and the inputs that record did not name. site_urls.py gives
+  result/t-019.html a measured page ceiling of 350,000 bytes (300,264 with T-233 among
+  the results its counts rest on), and T-142's and T-143's next steps and notes say their
+  release members are retained since 4 November (think-i85v). No paper prints those
+  counts or those results, and the register still holds 264 results. Against main
+  69abc507e: devtools.compare_paper_renders --baseline origin/main with all seven paths
+  named here swapped in, SQPACK_CHROMIUM /usr/bin/google-chrome: 55, 43, 43 and 43
+  files, byte-identical across its three renders of each paper. No PDF was printed; each
+  prints from that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and
+  v0.2.7.
