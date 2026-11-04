@@ -12054,7 +12054,7 @@ sources:
   local: resources/web/ozden-s94-lower-bound-2026-11-03/
   source_key: '[Özden s94 dilation 2026-11-03]'
   scope: {n_values: [94]}
-  reviewed: '2026-11-03'
+  reviewed: '2026-11-04'
   source_date: '2026-11-03'
   disposition: current-report
   replay_disposition: case-specific
@@ -12062,13 +12062,17 @@ sources:
   - frontier/n-094.md
   - frontier/results.yaml
   - resources/web/ozden-s94-lower-bound-2026-11-03/README.md
-  evidence: [E-ozden-890-n94-9965-report, E-ozden-890-n94-9965-review-sample]
+  evidence:
+  - E-ozden-890-n94-9965-report
+  - E-ozden-890-n94-9965-sqverify-fast-replay
+  - E-ozden-890-n94-9965-review-sample
   notes: >-
     The whole tree but .gitignore is retained at the repository's one commit, 9d76ad5. The
-    certificate is Hosono's T-091 measure dilated onto a 600-direction declared net; the
-    reported 1993/200 is above T-091's 199/20, which n-094's verified lower lane keeps until
-    a control receipt passes (think-4uun); the stage 4 review of 3 November accepts the
-    certificate. T-262 records the claim.
+    certificate is Hosono's T-091 measure dilated onto a 600-direction declared net; its
+    1993/200 is above T-091's 199/20. The complete census replay of 3 November, its
+    whole-net control of 4 November under the enclosure rule of #892 and the stage 4 review
+    of 3 November confirm it, reproduced with the producer's code, so both of n-094's lower
+    lanes take it. T-262 records the claim, at V3/C3.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

@@ -55034,11 +55034,12 @@ evidence:
       in prose only, since an entry that lists it is a replay here. That replay ran on 3
       November 2026, reproduced with the producer's code: the census decided the retained
       certificate at all 600 directions, every direction's row equal to both receipts
-      apart from timings (receipts/replay-comparison.json), and its whole-net control
-      refused both mutants on coverage and failed closed only on the census's axis
-      tolerance (F-1 of the 14 October review, think-4uun). It enters as evidence once a
-      control receipt passes.
-    source_reviewed: '2026-11-03'
+      apart from timings (receipts/replay-comparison.json). Its whole-net control of that
+      day refused both mutants on coverage and failed closed only on the census's constant
+      axis tolerance (F-1 of the 14 October review); written again on 4 November under the
+      enclosure rule that replaced it (#892), it passed, and the replay is
+      E-ozden-890-n94-9965-sqverify-fast-replay.
+    source_reviewed: '2026-11-04'
     external_review:
       state: informally-verified
       date: '2026-11-03'
@@ -55105,3 +55106,112 @@ evidence:
       producer's code, not clean-room, by a Claude agent, a system family the author's
       lab also used.
     source_reviewed: '2026-11-03'
+  - id: E-ozden-890-n94-9965-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [94]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 600
+        of: 600
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s94 dilation 2026-11-03]'
+    certificate: packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/certificate/n94_L9965.json.gz
+    replay: >-
+      From packing/, in a tree whose crate is reviewed source (.venv/bin/python3 -m
+      devtools.sqverify_fast_census --source-digest prints its source_sha256 and exits 0;
+      these receipts' build is d97758bb..., the source at 910b6b12c), after building
+      sqverify_fast/ to match the retained build (rustc 1.98.0 (88d9e12ae 2026-08-18),
+      release, x86_64-unknown-linux-gnu): .venv/bin/python3 -m devtools.sqverify_fast_census
+      --family mixed --binary sqverify_fast/target/release/sqverify-fast --out
+      benchmarks/measure-verifier/census-mixed --threads 2 --only mixed_n94_L9965 runs
+      sqverify-fast on the retained candidate at all 600 directions of the net it declares
+      at the threshold it declares, 1, and records the case in census.json there; --check
+      --only mixed_n94_L9965 must then print 1 of 1 retained certificates VERIFIED (every
+      direction verified, summary VERIFIED, exit 0, and the exact capture at the least-bound
+      leaf's centre at least 1). The same command with --control in place of --threads 2
+      must write status CONTROLS_REFUSED. The receipts are
+      benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.jsonl.gz
+      and
+      benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.control.json,
+      held by tests/test_sqverify_fast_census.py, which admits the row only for a build of
+      reviewed source.
+    replay_status: passed
+    verifiers: [V-sqverify-fast]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
+        and L, lemma D for format M's per-bin domain), applied to Doğa Özden's
+        mixed_n94_L9965, Hiroaki Hosono's mixed_n94_L995 dilated by 1993/1990: no 94 unit
+        squares pack in a square of side 1993/200, so s(94) >= 1993/200.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        SOUNDNESS.md's theorem and lemmas, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, and lemma N0 and
+        the declared-net change by
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
+        certificate's mathematics read in
+        docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md; the census
+        route accepted as a complete replay here in
+        docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md;
+        the census row, receipts and control receipt named in replay.
+      assumptions:
+        - The density is nonnegative and exact, of total mass 9399999/100000 < 94, which admission recomputes from the retained candidate.
+        - Every angle and legal centre is covered by the net its candidate declares (proof_net), lemma N0 of SOUNDNESS.md, of 600 half-angles of step 83/120000 at core side 19884161/19900000 and format M's per-bin centre domains, which admission checks in exact rationals.
+        - Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation, as SOUNDNESS.md's Floating Point section uses it.
+        - The candidate is the retained file whose stored and decompressed SHA-256 the issue states and the packet's acquisition record pins, which devtools.audit_dilated_measure regenerates byte for byte from the T-091 packet's retained mixed_n94_L995.
+      audit_record: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+    limitations: >-
+      sqverify-fast, this repository's maintained measure verifier, decided the retained
+      candidate mixed_n94_L9965 at all 600 net directions on 2026-11-03. The receipts name
+      the stored gzip file's SHA-256 116c8342..., which decompresses to the SHA-256
+      b8b03ee8... the packet's acquisition record pins (devtools.retained_data check ties
+      the two). Admission recomputed in exact rationals n = 94, L = 1993/200, the total mass
+      9399999/100000 < 94, the core side 19884161/19900000 with B(1 + D/(1 - D^2/4)) < 1 and
+      the net its candidate declares (proof_net), of 600 half-angles of step 83/120000, with
+      B(1 + D) = 2387749705363/2388000000000 < 1 and the last tangent 49717/120000 past
+      tan(pi/8) and at most 1/2 (SOUNDNESS.md, lemma N0), from 853 rectangle rows (6,720
+      distinct images) and no point or segment, and took format M's per-bin centre domain,
+      at threshold 1. The axis direction was decided by an exact-event vertex sweep over
+      29,484,900 vertices, least certified capture 1.0031171845296734; the other 599 by
+      interval branch and bound over 296,805,699 boxes, least certified lower bound
+      1.0000000000314393 at index 277; the exact capture at the least-bound leaf's centre
+      (index 277) is 1.0178874374. Every direction verified, summary VERIFIED, native exit
+      0, 8,139 aggregate process CPU seconds (wait4) at two threads and 4,180 seconds of
+      wall time. 8,138.1 summed per-direction CPU seconds. The recorded load average 2.3 was
+      measured at start. Every direction's row equals both of the source's receipts apart
+      from timings (receipts/replay-comparison.json in the packet). The build is rustc
+      1.98.0 (88d9e12ae 2026-08-18), release, x86_64-unknown-linux-gnu, source_sha256
+      d97758bb...: the crate source at 910b6b12c: the source of e020eb1e2 (7c49cf79...) with
+      the declared net of format M (proof_net, SOUNDNESS.md lemma N0) and its review fixes,
+      a diff the soundness review
+      docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md read in
+      full and accepted. The producer decided the certificate with this repository's
+      sqverify-fast, built unmodified from the same reviewed crate source, and its receipts
+      are retained in its packet; this replay reproduces that run with the producer's code.
+      No second implementation or second method is run here. Its node counts and bounds are
+      its own, not the certificate's records. Controls, on 2026-11-04 by the same build: the
+      original verified again at index 277; every mass scaled by 99/100 refused at 600 of
+      the 600 net directions, each a coverage refusal at a centre in the per-bin domain
+      where the mutant's exact capture is below 1 (the crate's confirmed witness, or at the
+      axis the vertex sweep's least vertex, where the capture lies in the enclosure the
+      sweep held there, [0.9930860126842824, 0.9930860149308234], whose lower end is the
+      crate's bound to the bit); and every mass scaled by 0.9824 so that the exact capture
+      at the least-bound leaf's centre is at most 1 - 10^-6 refused
+      (counterexample-candidate, exact capture below 1 at the least-bound leaf's centre);
+      each capture below 1 was evaluated again by an exact evaluator written apart from the
+      crate, and tests/test_sqverify_fast_census.py holds the receipts. The control of
+      2026-11-03, kept as mixed_n94_L9965.control-failed-v2.json, refused the same mutants
+      and failed closed only on the constant axis allowance of 1e-9 that the enclosure rule
+      of #892 replaced (F-1 of
+      docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md).
+      The source's second checker, an exact-integer branch and bound, is retained in the
+      packet and was not run here.
+    source_reviewed: '2026-11-04'

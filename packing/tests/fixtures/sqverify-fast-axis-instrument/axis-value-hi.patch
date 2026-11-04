@@ -1,0 +1,29 @@
+--- a/packing/sqverify_fast/src/axis.rs
++++ b/packing/sqverify_fast/src/axis.rs
+@@ -136,6 +136,7 @@
+ 
+     let mut min_lower = f64::INFINITY;
+     let mut argmin = (0usize, 0usize);
++    let mut hi_at_argmin = f64::NAN;
+     let mut non_finite = false;
+     let mut delta = vec![Iv::point(0.0); m];
+     let y0 = y_iv[0];
+@@ -180,6 +181,7 @@
+             if value.lo < min_lower {
+                 min_lower = value.lo;
+                 argmin = (k, j);
++                hi_at_argmin = value.hi;
+             }
+             if j + 1 < m {
+                 let width = y_iv[j + 1].minus(y_iv[j]);
+@@ -191,6 +193,10 @@
+             break;
+         }
+     }
++    eprintln!(
++        "INSTRUMENT axis argmin lo={:?} hi={:?} at ({}, {})",
++        min_lower, hi_at_argmin, xs[argmin.0], ys[argmin.1]
++    );
+     Ok(AxisResult {
+         x_events: xs.len(),
+         y_events: ys.len(),

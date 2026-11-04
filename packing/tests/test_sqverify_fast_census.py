@@ -1059,15 +1059,26 @@ def test_an_axis_capture_outside_the_sweeps_enclosure_does_not_count(
 def test_the_axis_rule_at_its_edges() -> None:
     """`axis_captures_agree` on its own: the enclosure is closed at both ends; the bound
     must be its lower end to the bit, so one ulp above or below fails; and a bound that is
-    None or NaN, a capture that is None, or no enclosure fails closed."""
+    None, NaN or no number at all, a capture that is None, or no enclosure fails closed,
+    returning False rather than raising."""
     low, high = 0.25, 0.75
     for capture in (Fraction(1, 4), Fraction(1, 2), Fraction(3, 4)):
         assert census.axis_captures_agree(low, capture, (low, high)), capture
     assert census.axis_captures_agree(repr(low), Fraction(1, 2), (low, high))
     for bound in (math.nextafter(low, math.inf), math.nextafter(low, -math.inf)):
         assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
-    for bound in (None, math.nan, "nan"):
+    for bound in (None, math.nan, "nan", "", "not a bound"):
         assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
+    # Shapes a JSON receipt could hold that no bound has: a list or a mapping, and a bool,
+    # which float() would read as 0.0 or 1.0, the very ends of these enclosures.
+    odd: list[Any] = [[low], {"bound": low}]
+    for bound in odd:
+        assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
+    assert census.axis_captures_agree(0.0, Fraction(1, 2), (0.0, 1.0))
+    assert census.axis_captures_agree(1.0, Fraction(3, 2), (1.0, 2.0))
+    flags: list[Any] = [False, True]
+    assert not census.axis_captures_agree(flags[0], Fraction(1, 2), (0.0, 1.0))
+    assert not census.axis_captures_agree(flags[1], Fraction(3, 2), (1.0, 2.0))
     assert not census.axis_captures_agree(low, None, (low, high))
     assert not census.axis_captures_agree(low, Fraction(1, 2), None)
 
@@ -1094,8 +1105,9 @@ def test_each_retained_axis_refusal_is_the_crates_enclosure(
     the crate's reported bound to the bit and holds the receipt's exact capture, so the
     rule counts it, including the receipts kept after the constant failed them closed
     (n26's of 23 October and n94's of 3 November; n39's joins when its packet does):
-    twelve measures from six packets on 4 November, beside the instrumented crate's
-    upper ends in `test_sqverify_fast_axis`."""
+    twelve measures from six packets on 4 November, n94's in two receipts, the kept one
+    and the one this rule passed, beside the instrumented crate's upper ends in
+    `test_sqverify_fast_axis`."""
     case = cases()[path.name.split(".control", 1)[0]]
     raw = read_raw(case.candidate)
     x, y = (Fraction(value) for value in item["pose"])
@@ -1540,3 +1552,33 @@ def test_the_890_dilation_is_read_at_its_upstream_path_and_reproduces_the_produc
     assert packet not in census.SHARED_CRATE_PACKETS | census.INDEPENDENT_MIXED_PACKETS
     fields, _ = census.mixed_relationship(case)
     assert fields == ["    relationship_to_generator: same-implementation"]
+
+
+def test_the_890_replay_entry_is_what_the_census_prints() -> None:
+    """E-ozden-890-n94-9965-sqverify-fast-replay is `--evidence`'s entry for
+    mixed_n94_L9965, field for field (F1 of #898's review): Özden's dilation as the
+    theorem's subject, the issue's digests as the candidate's custody, the second checker
+    retained and not run, the replay's agreement with the source's receipts, the controls
+    of 4 November with the axis enclosure they were judged by, the failed receipt kept,
+    the replay's coverage, and the candidate named as its report names it. None of the
+    Hosono packets' wording survives, nor a clean-room claim beside a same-implementation
+    replay; Hosono's own packets keep theirs."""
+    name = "mixed_n94_L9965"
+    text = census.evidence_entry(
+        cases()[name],
+        FOLDER,
+        entries()[name],
+        audit_record="docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md",
+        date="2026-11-03",
+        control_date="2026-11-04",
+    )
+    (generated,) = safe_load(text)
+    register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    (committed,) = (item for item in register["evidence"] if item["id"] == generated["id"])
+    assert generated == committed
+    flat = " ".join(text.split())
+    for wording in ("Hiroaki Hosono's mixed_n94_L9965", "mixed-fetch", "tarball", "clean-room"):
+        assert wording not in flat, wording
+    assert "applied to Doğa Özden's mixed_n94_L9965" in flat
+    assert census.packet_provenance(cases()["mixed_n37_L64975"]) is census.HOSONO_PROVENANCE
+    assert "{certificate}" in census.HOSONO_PROVENANCE.subject
