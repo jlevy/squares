@@ -2090,7 +2090,8 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
     """Section B of the intake review of 26 October 2026 lists 37 open issues as blocked,
     and #535 and #537 joined them on the owner's decision after #829's imports the same
     day; #666, #715 and #719 joined them on 31 October, held by the owner's open D3 to D5
-    above 1024 (think-f2io), and #846 the same day as an owner decision (think-ikku). Each
+    above 1024 (think-f2io), and #846 the same day as an owner decision (think-ikku). #779
+    left them on 4 November, closed when #889 landed T-179's replay (think-u0av). Each
     carries its type, and the label taxonomy names every type the record uses."""
     by_type: dict[str, set[int]] = {}
     for entry in check_requests.load_record()["issues"]:
@@ -2102,7 +2103,7 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
         "owner-reply": 2,
         "standing-hold": 9,
         "author": 1,
-        "compute": 7,
+        "compute": 6,
     }
     assert set(by_type) <= set(check_requests.BLOCK_TYPES)
 
