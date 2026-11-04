@@ -1,0 +1,7 @@
+VERIFIED
+  id: W-candidate-n204
+  n: 204
+  side: 7403810497792604009019579959/500000000000000000000000000
+  method: exact-algebraic
+  pairs tested: 20706
+  limits: Verifies witness feasibility and its upper bound, not global optimality.

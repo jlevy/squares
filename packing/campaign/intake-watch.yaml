@@ -1768,3 +1768,15 @@ repositories:
       It is about polygon illumination, not square packing, and changes nothing under
       square-packing-above-324/. Nothing to import; the 8 rows above 1024 still wait on the
       owner (think-f2io).
+  # The intake pass of 4 November 2026, lane L36 (think-3guf), from the 05:52Z sweep.
+  - url: https://github.com/JoostdeWinter/joostdewinter.github.io
+    read_through: 35c2d9c4d54dcf3d4d0af8e55b87ee34159fac90
+    read_on: '2026-11-04'
+    note: >-
+      One commit of 3 November (12:48 +0100) past the bd80c12 read: 35c2d9c changes only
+      unilluminable-rooms.pdf (1,903,371 to 2,000,249 bytes), "the same paper saved with a
+      plain cross-reference table". Read here, both versions have 36 pages and the same
+      title, and pdftotext gives identical text (17,903 words, no line differing). It is the
+      polygon-illumination preprint of the bd80c12 read, not square packing, and nothing
+      under square-packing-above-324/ changes. Nothing to import; the 8 rows above 1024 still
+      wait on the owner (think-f2io).

@@ -1,0 +1,487 @@
+{
+ "program": "oz_controls.py",
+ "program_sha256": "62f0a5c83d35adcc2faa509562b4dfb2de58a6ee49bbbcc51417fc416e914227",
+ "ozlib_sha256": "b5866f2731de66b914cda3a1bfb52e81424f9c5c9e4f747a35890f750c200d55",
+ "python": "3.14.7",
+ "argv": [
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/n-299-candidate.yaml",
+  "299",
+  "3560247706795812422293947620670679551/200000000000000000000000000000000000",
+  "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-max/out/controls-n299.json"
+ ],
+ "cert_sha256": "2976d67f0b6da33434831a53d41c9af2a555e9d67daadb0e80ffc1a5cc6176e0",
+ "format_all_hold": true,
+ "least_far_wall_clearance": "0",
+ "least_near_wall_clearance": "0",
+ "least_margin_pair": [
+  224,
+  235,
+  "99991899999991/1000000000000000000000000000000000000"
+ ],
+ "controls": [
+  {
+   "m1_accepts": true,
+   "m2_accepts": true,
+   "walls_checked": 299,
+   "pairs_checked": 0,
+   "shape_fail": [],
+   "wall_fail": [],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 0,
+   "pair_fail_count": 0,
+   "control": "A0 box at far extent (contact)",
+   "expected": "accept",
+   "note": "side lowered by the least far-wall clearance 0",
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 299,
+   "pairs_checked": 0,
+   "shape_fail": [],
+   "wall_fail": [
+    [
+     107,
+     false,
+     false
+    ],
+    [
+     108,
+     false,
+     false
+    ],
+    [
+     109,
+     false,
+     false
+    ],
+    [
+     114,
+     false,
+     false
+    ],
+    [
+     115,
+     false,
+     false
+    ],
+    [
+     116,
+     false,
+     false
+    ],
+    [
+     122,
+     false,
+     false
+    ],
+    [
+     123,
+     false,
+     false
+    ],
+    [
+     128,
+     false,
+     false
+    ],
+    [
+     130,
+     false,
+     false
+    ]
+   ],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 26,
+   "pair_fail_count": 0,
+   "control": "A1 box 1e-30 below far extent (past)",
+   "expected": "refuse",
+   "note": "",
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "m1_accepts": true,
+   "m2_accepts": true,
+   "walls_checked": 299,
+   "pairs_checked": 0,
+   "shape_fail": [],
+   "wall_fail": [],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 0,
+   "pair_fail_count": 0,
+   "control": "B0 all squares toward the left wall by its least clearance",
+   "expected": "accept",
+   "note": "least near-wall clearance 0",
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 299,
+   "pairs_checked": 0,
+   "shape_fail": [],
+   "wall_fail": [
+    [
+     105,
+     false,
+     false
+    ],
+    [
+     106,
+     false,
+     false
+    ],
+    [
+     107,
+     false,
+     false
+    ],
+    [
+     119,
+     false,
+     false
+    ],
+    [
+     120,
+     false,
+     false
+    ],
+    [
+     121,
+     false,
+     false
+    ],
+    [
+     134,
+     false,
+     false
+    ],
+    [
+     150,
+     false,
+     false
+    ],
+    [
+     167,
+     false,
+     false
+    ]
+   ],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 9,
+   "pair_fail_count": 0,
+   "control": "B1 all squares toward the left wall by that plus 1e-30",
+   "expected": "refuse",
+   "note": "least near-wall clearance 0",
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "m1_accepts": true,
+   "m2_accepts": true,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [],
+   "wall_fail": [],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 0,
+   "pair_fail_count": 0,
+   "control": "C0 least-margin pair 224,235 closed along its centre line (contact)",
+   "expected": "accept",
+   "note": "pair margin before 9.9991899999991e-23; square 235 moved; lambda 1.0000000000000000000e+0",
+   "m1_as_expected": true,
+   "m2_as_expected": true,
+   "pair_margin_after": "0",
+   "pair_area_after": "0",
+   "pair_expected": "touch",
+   "pair_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [],
+   "wall_fail": [],
+   "pair_fail": [
+    [
+     235,
+     224,
+     false,
+     false,
+     "-1.0000000000000e-30",
+     "5.8460208900005e-36"
+    ]
+   ],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 0,
+   "pair_fail_count": 1,
+   "control": "C1 least-margin pair 224,235 closed along its centre line (past)",
+   "expected": "refuse",
+   "note": "pair margin before 9.9991899999991e-23; square 235 moved; lambda 1.0000000000000000000e+0",
+   "m1_as_expected": true,
+   "m2_as_expected": true,
+   "pair_margin_after": "-1000000000000000000000099991899999991/1000000000000000000000000000000000000000000000000000000000000000000",
+   "pair_area_after": "5.8460208900005e-36",
+   "pair_expected": "overlap",
+   "pair_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [
+    [
+     224,
+     false,
+     false
+    ]
+   ],
+   "wall_fail": [],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 1,
+   "wall_fail_count": 0,
+   "pair_fail_count": 0,
+   "control": "F0 square 224 enlarged to touch square 235",
+   "expected": "refuse",
+   "note": "side 1 + 1.9998379999998e-22",
+   "m1_as_expected": true,
+   "m2_as_expected": true,
+   "pair_m1_disjoint": true,
+   "pair_m2_area0": true,
+   "pair_margin": "0",
+   "pair_expected": "touch",
+   "pair_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [
+    [
+     224,
+     false,
+     false
+    ]
+   ],
+   "wall_fail": [],
+   "pair_fail": [
+    [
+     224,
+     235,
+     false,
+     false,
+     "-5.0000000000000e-31",
+     "2.9230104450003e-36"
+    ]
+   ],
+   "duplicate_ids": false,
+   "shape_fail_count": 1,
+   "wall_fail_count": 0,
+   "pair_fail_count": 1,
+   "control": "F1 square 224 enlarged to 1e-30 past square 235",
+   "expected": "refuse",
+   "note": "side 1 + 1.9998380099998e-22",
+   "m1_as_expected": true,
+   "m2_as_expected": true,
+   "pair_m1_disjoint": false,
+   "pair_m2_area0": false,
+   "pair_margin": "-1/2000000000000000000000000000000",
+   "pair_expected": "overlap",
+   "pair_as_expected": true
+  },
+  {
+   "m1_accepts": true,
+   "m2_accepts": true,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [],
+   "wall_fail": [],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 0,
+   "pair_fail_count": 0,
+   "control": "G0 square 1 enlarged to touch its bottom wall",
+   "expected": "accept",
+   "note": "side 1 + 0 (the original when its clearance is 0)",
+   "m1_as_expected": true,
+   "m2_as_expected": true,
+   "wall_m1_inside": true,
+   "wall_m2_inside": true,
+   "wall_expected": "inside",
+   "wall_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [
+    [
+     1,
+     false,
+     false
+    ]
+   ],
+   "wall_fail": [
+    [
+     1,
+     false,
+     false
+    ]
+   ],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 1,
+   "wall_fail_count": 1,
+   "pair_fail_count": 0,
+   "control": "G1 square 1 enlarged to 1e-30 past its bottom wall",
+   "expected": "refuse",
+   "note": "side 1 + 1.0000000000000e-30 (the original when its clearance is 0)",
+   "m1_as_expected": true,
+   "m2_as_expected": true,
+   "wall_m1_inside": false,
+   "wall_m2_inside": false,
+   "wall_expected": "outside",
+   "wall_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [],
+   "wall_fail": [],
+   "pair_fail": [
+    [
+     235,
+     224,
+     false,
+     false,
+     "-1.0000000000000e+0",
+     "1.0000000000000e+0"
+    ]
+   ],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 0,
+   "pair_fail_count": 1,
+   "control": "H square 235 replaced by a copy of square 224",
+   "expected": "refuse",
+   "note": "",
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [],
+   "wall_fail": [
+    [
+     1,
+     false,
+     false
+    ]
+   ],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 0,
+   "wall_fail_count": 1,
+   "pair_fail_count": 0,
+   "control": "I square 1 translated by (S, 0)",
+   "expected": "refuse",
+   "note": "",
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "m1_accepts": false,
+   "m2_accepts": false,
+   "walls_checked": 1,
+   "pairs_checked": 298,
+   "shape_fail": [
+    [
+     2,
+     false,
+     false
+    ]
+   ],
+   "wall_fail": [],
+   "pair_fail": [],
+   "duplicate_ids": false,
+   "shape_fail_count": 1,
+   "wall_fail_count": 0,
+   "pair_fail_count": 0,
+   "control": "J square 2 basis scaled by 1 + 1e-30",
+   "expected": "refuse",
+   "note": "",
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "control": "K0 one square dropped (n - 1 squares)",
+   "expected": "refuse",
+   "count_is_n": false,
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "control": "K1 one id repeated",
+   "expected": "refuse",
+   "ids_unique": false,
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  },
+  {
+   "control": "L every basis reflected to (a, -b)",
+   "expected": "refuse",
+   "m1_overlapping_pairs": 100,
+   "m2_overlapping_pairs": 100,
+   "method_disagreements": 0,
+   "m1_outside_squares": 0,
+   "m2_outside_squares": 0,
+   "m1_as_expected": true,
+   "m2_as_expected": true
+  }
+ ],
+ "D_every_near_pair_closed": {
+  "pairs": 562,
+  "contact_m1_disjoint": 562,
+  "contact_m2_area0": 562,
+  "contact_margin_exactly_0": 562,
+  "past_m1_overlap": 562,
+  "past_m2_area_positive": 562,
+  "least_past_area": "1.0000000000002e-60",
+  "all_as_expected": true
+ },
+ "E_every_square_to_its_wall": {
+  "squares": 299,
+  "contact_both_inside": 299,
+  "past_both_outside": 299,
+  "contact_least_exactly_0": 299,
+  "all_as_expected": true
+ },
+ "verdict": "EVERY_CONTROL_AS_EXPECTED",
+ "cpu_seconds": 11.71
+}

@@ -21234,6 +21234,18 @@ occurrences:
       is the source''s.'
   contributor_id: evan-daniel
 - origin:
+    path: packing/frontier/n-204.md
+    record_key: '204'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-205.md
     record_key: '205'
     field: /reported_upper_bound/found_by/0
@@ -24062,6 +24074,18 @@ occurrences:
       as the adopted result''s register entry and its stage 4 review credit them; the label
       is the source''s.'
   contributor_id: evan-daniel
+- origin:
+    path: packing/frontier/n-299.md
+    record_key: '299'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-300.md
     record_key: '300'
@@ -30553,6 +30577,102 @@ occurrences:
   start: 30
   end: 34
   label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-03]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte
+  start: 20
+  end: 26
+  label: Deotte
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s204 upper bound 2026-11-03]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s204 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Ostashev
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s204 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Ostashev
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s204 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Ostashev
+  start: 20
+  end: 28
+  label: Ostashev
   role: prerequisite
   disposition: unresolved
   evidence: []

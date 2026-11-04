@@ -168,14 +168,15 @@ MOVED_AGAIN = {
 #: which that of 22 October 2026 moved to Evan Daniel's view of its packing (T-225), that
 #: of 23 October 2026 to Mykhailo Polkovskyi's re-solve of #678's packing (T-229), and that
 #: of 24 October 2026 to the release's lower 204 file, the same packing at its solved side
-#: (T-231), and that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257); the
+#: (T-231), that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257), and
+#: that of 4 November 2026 to Doğa Özden's further arrangement of it (T-264); the
 #: pass of 23 October took 303 from T-186 to Evan Daniel's issue-728
 #: certificate (T-230), which that of 24 October 2026 moved to Amund Kristiansen's
 #: issue-755 certificate (T-239) and that of 25 October 2026 to Francisco Couzo's issue-763
 #: certificate (T-240).
 MOVED_LATER = {
     271: ("T-219", "2026-10-19"),
-    204: ("T-257", "2026-10-31"),
+    204: ("T-264", "2026-11-04"),
     303: ("T-240", "2026-10-25"),
 }
 
@@ -196,9 +197,11 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: Daniel's view of that packing (T-225), 1.39e-9 lower still, that of 23 October 2026 to
 #: Mykhailo Polkovskyi's re-solve of #678's packing (T-229), 1.01e-8 lower again, and that
 #: of 24 October 2026 to the release's lower 204 file (T-231), 1.48e-11 below T-229, and
-#: that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257). The same pass
-#: took 232 to Francisco Couzo's issue-844 certificate (T-256), below T-193's side there.
-OVERTAKEN = {204: "T-257", 232: "T-256"}
+#: that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257), and that of 4
+#: November 2026 to Doğa Özden's further arrangement of it (T-264). The pass of 31
+#: October took 232 to Francisco Couzo's issue-844 certificate (T-256), below T-193's
+#: side there.
+OVERTAKEN = {204: "T-264", 232: "T-256"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -1697,7 +1700,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # Francisco Couzo's issue-763 certificates (T-240), 304 to Evan Daniel's exact descent
     # of the packing T-241 certifies (T-242) and 182 to his issue-806 certificate (T-243),
     # and the adoption of 26 October 2026 moved 268 again, to his exact descent of Vladislav
-    # Lavrentev's packing (T-242), after this receipt was retained.
+    # Lavrentev's packing (T-242), after this receipt was retained. The adoption of 4
+    # November 2026 moved 204 to Doğa Özden's further arrangement of T-257's packing
+    # (T-264).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1711,7 +1716,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         236: "T-218",
         271: "T-219",
         154: "T-222",
-        204: "T-257",
+        204: "T-264",
         260: "T-257",
         308: "T-221",
         227: "T-225",
@@ -2851,7 +2856,9 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     T-196 and T-199 first replaced the catalogue's packings there on 20 and 19 October; the
     pass of 22 October 2026 replays them from T-196's and T-199's records, whose two lanes
     agree, so 29 and 132 remain. The pass of 31 October 2026 replaced the catalogue's
-    packings at 293 and 299, whose reported prints and T-101's verified ceilings differ."""
+    packings at 293 and 299, whose reported prints and T-101's verified ceilings differ;
+    the pass of 4 November 2026 replays 299 from T-258's record, whose two lanes agree,
+    so 293 remains."""
     differing = {
         29: (
             Fraction(
@@ -2881,14 +2888,6 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "T-101, T-155",
             "[Kingbird]",
             "lies `1.64e-04` above the new side",
-        ),
-        299: (
-            Fraction("142583005244258362363432293067/8000000000000000000000000000"),
-            "17.82287565553229",
-            "17.82287565553230",
-            "T-101, T-155",
-            "[Kingbird]",
-            "lies `2.16e-02` above the new side",
         ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():
@@ -3573,12 +3572,14 @@ def test_issue_678s_reader_still_builds_t223s_source_at_both_counts() -> None:
     (review A6 of #718): each count's certificate, rebuilt from its pinned bytes, sits above
     the house's side, which was T-231's at 204 from 24 October 2026 and T-225's at 260 until
     the adoption of 31 October 2026 moved both to Evan Daniel's #845 (T-257), 1.02e-3 and
-    1.18e-2 below it, and its three jobs, origin, receipt and inputs all read."""
+    1.18e-2 below it, and that of 4 November 2026 moved 204 on to Doğa Özden's further
+    arrangement of it (T-264), 1.02e-3 below it still, and its three jobs, origin,
+    receipt and inputs all read."""
     source = houses.couzo_678_source()
     assert source.result == "T-223"
     assert "T-223" not in set(houses.ADOPTED.values())
     margins = {
-        204: Fraction(1015370099667596, 10**18),
+        204: Fraction(1021846396039205, 10**18),
         260: Fraction(11770748423071978, 10**18),
     }
     for n, margin in margins.items():
@@ -3627,6 +3628,7 @@ def test_an_overtaken_staged_adoption_reads_as_history() -> None:
     # On 22 October 2026 Evan Daniel's view of T-223's packing (T-225) moved both again,
     # on 23 October 2026 Mykhailo Polkovskyi's re-solve of #678's packing (T-229) took 204,
     # and on 24 October 2026 the release's lower 204 file (T-231) took it from T-229.
-    # On 31 October 2026 Evan Daniel's #845 (T-257) took both.
+    # On 31 October 2026 Evan Daniel's #845 (T-257) took both, and on 4 November 2026
+    # Doğa Özden's further arrangement of it (T-264) took 204.
     assert houses.ADOPTED[260] == "T-257"
-    assert houses.ADOPTED[204] == "T-257"
+    assert houses.ADOPTED[204] == "T-264"

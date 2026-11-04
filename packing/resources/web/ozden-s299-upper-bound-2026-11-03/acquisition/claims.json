@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/893",
+  "source": "https://github.com/kenaznia-doga/s299-upper-bound",
+  "revision": "6486ead9be5e3348f64ad39aecc1950f22910de4",
+  "read_on": "2026-11-04",
+  "read_at_main": "ca3a171bb279639692cd464727a50ba384f724b0",
+  "horizon": 324,
+  "results": [
+    {"n": 299, "certificate": "n-299-candidate.yaml", "format": "witness-center-basis", "requested": true, "replayed": true, "offered_side": "3560247706795812422293947620670679551/200000000000000000000000000000000000", "printed_in": "https://github.com/jlevy/squares/issues/893", "exact_side": "3560247706795812422293947620670679551/200000000000000000000000000000000000", "ceiling": "17.8012385339790622", "first_committed": "2026-11-03T18:57:22Z", "grid_side": "18", "case": {"source_key": "[Daniel n299 update 2026-10-29]", "holders": "Evan Daniel, after Chris Deotte", "result": "T-258", "reported_value": "17.8012385493885841", "verified_value": "17.8012385493885841", "evidence": ["E-evand-n299-update-exact-feasibility", "E-evand-n299-update-review-exact-feasibility"], "exact_side": "17801238549388584084680137655023/1000000000000000000000000000000", "relation": "below", "difference": "3081904394642079910333920449/200000000000000000000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

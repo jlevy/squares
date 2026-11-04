@@ -494,6 +494,25 @@ _README_3GUF = (
     "beside the runs' receipts and reports"
 )
 
+#: Both generators on the two witnesses the adoption of 4 November 2026 wrote (think-ybep):
+#: Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees on 204 and 299. The
+#: selection drew grid-slack's 0.5-degree view at 299 and decided 204 (`SETTLED`); 299's
+#: entry, decided on the earlier witness, left. The regularizer's solved views at 204 and
+#: 299 lie below the new houses and are register candidates (think-w64i). Their receipt,
+#: run blocks, reports and the selection's report are in
+#: packing/cases/regularized_drawings/think-ybep-2026-11-04/.
+_RUNYBEP = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-04-n204-299-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg5"),
+)
+_README_YBEP = (
+    "packing/cases/regularized_drawings/think-ybep-2026-11-04/README.md and "
+    "selection-adopt-2026-11-04-n204-299.md, the selection of 4 November 2026 (think-ybep), "
+    "beside the runs' receipt, blocks and reports"
+)
+
 
 #: Both generators on the four decimal Kingbird witnesses at 39, 55, 290 and 291 that an
 #: agent set aside on 15 October 2026 with no strong run (think-yk2h), run on 31 October
@@ -765,6 +784,19 @@ SETTLED: dict[int, Settled] = {
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
+    ),
+    204: Settled(
+        DECIDED,
+        "[Özden s204 upper bound 2026-11-03]",
+        "resources/web/ozden-s204-upper-bound-2026-11-03/source/n-204-candidate.yaml",
+        "d4b8b05c45e3be464476c94712a4dbc063009875",
+        "7403810497792604009019579959/500000000000000000000000000",
+        _RUNYBEP,
+        "grid-slack finds no view at 0.5, 1 or 5 degrees, its relaxed rows overlapping at "
+        "this side, so the axis tool's view of this witness stays drawn; Evan Daniel's "
+        "regularizer solved the witness 4.82e-16 below its side, held at row 3 as a "
+        "register candidate (think-w64i), never admitted here",
+        _README_YBEP,
     ),
     208: Settled(
         DECIDED,
@@ -1051,21 +1083,6 @@ SETTLED: dict[int, Settled] = {
         "certificate), and grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed "
         "rows overlap at this side)",
         _README_3MRY,
-    ),
-    299: Settled(
-        DECIDED,
-        "[Daniel n299 update 2026-10-29]",
-        "resources/web/evand-n299-update-2026-10-29/source/search/packer/candidates/"
-        "s299_1028.cert",
-        "0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
-        "17801238549388584084680137655023/1000000000000000000000000000000",
-        _RUN3GUF,
-        "every view is refused at row 7 against the axis tool's view of this witness, a "
-        "house or stage total of shared sides falling: Evan Daniel's certified KKT solve "
-        "at the witness's side and grid-slack's at all three thresholds each draw more "
-        "light and uneven squares, though fewer near-axis squares and angle classes; none "
-        "is below the side",
-        _README_3GUF,
     ),
     304: Settled(
         DECIDED,

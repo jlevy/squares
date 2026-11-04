@@ -1,0 +1,167 @@
+{
+ "program": "oz_compare_lane.py",
+ "program_sha256": "780ad1bef4fc6091ffe647d95d9dfa649ecf0b5dd1dd468526344619eaaee56a",
+ "ozlib_sha256": "b5866f2731de66b914cda3a1bfb52e81424f9c5c9e4f747a35890f750c200d55",
+ "python": "3.14.7",
+ "argv": [
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/n-299-candidate.yaml",
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s299-upper-bound-2026-11-03/receipts/exact-certification.json.xz",
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s299-upper-bound-2026-11-03/receipts/sharp-controls.json",
+  "/home/user/squares/.claude/worktrees/review-ybep-max/packing/resources/web/ozden-s299-upper-bound-2026-11-03/measure/identity.json",
+  "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-max/out/check-n299.json",
+  "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-max/out/identity-n299.json",
+  "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-max/out/compare-lane-n299.json"
+ ],
+ "replay_cases": [
+  {
+   "control": "positive",
+   "poses": 299,
+   "pose_count_is_n": true,
+   "side_is_certificate": true,
+   "indices_differing_from_certificate": [],
+   "routes_passed": {
+    "exact_verify": true,
+    "independent": true
+   },
+   "routes_least_gap": {
+    "exact_verify": "99991899999991/1000000000000000000000000000000000000",
+    "independent": "99991899999991/1000000000000000000000000000000000000"
+   },
+   "routes_least_clearance": {
+    "exact_verify": "0",
+    "independent": "0"
+   },
+   "routes_pairs_tested": {
+    "exact_verify": 44551,
+    "independent": 44551
+   }
+  },
+  {
+   "control": "duplicate-square-overlap",
+   "poses": 299,
+   "pose_count_is_n": true,
+   "side_is_certificate": true,
+   "indices_differing_from_certificate": [
+    1
+   ],
+   "routes_passed": {
+    "exact_verify": false,
+    "independent": false
+   },
+   "routes_least_gap": {
+    "exact_verify": "-1",
+    "independent": "-1"
+   },
+   "routes_least_clearance": {
+    "exact_verify": "0",
+    "independent": "0"
+   },
+   "routes_pairs_tested": {
+    "exact_verify": 44551,
+    "independent": 44551
+   },
+   "duplicate_equals_square": [
+    0
+   ]
+  },
+  {
+   "control": "square-translated-outside-container",
+   "poses": 299,
+   "pose_count_is_n": true,
+   "side_is_certificate": true,
+   "indices_differing_from_certificate": [
+    0
+   ],
+   "routes_passed": {
+    "exact_verify": false,
+    "independent": false
+   },
+   "routes_least_gap": {
+    "exact_verify": "99991899999991/1000000000000000000000000000000000000",
+    "independent": "99991899999991/1000000000000000000000000000000000000"
+   },
+   "routes_least_clearance": {
+    "exact_verify": "-7582540639255157428658141168963925461/500000000000000000000000000000000000",
+    "independent": "-7582540639255157428658141168963925461/500000000000000000000000000000000000"
+   },
+   "routes_pairs_tested": {
+    "exact_verify": 44551,
+    "independent": 44551
+   }
+  }
+ ],
+ "agreement": {
+  "positive_poses_are_certificate": true,
+  "least_gap_equal": true,
+  "least_clearance_equal": true,
+  "pairs_tested_equal": true,
+  "sharp_tightest_pair_equal": true,
+  "sharp_all_as_expected": true,
+  "identity_one_to_one_both": true,
+  "identity_moves_equal": {
+   "1e-9": [
+    290,
+    290
+   ],
+   "1e-6": [
+    198,
+    198
+   ],
+   "1e-3": [
+    156,
+    156
+   ],
+   "1e-2": [
+    119,
+    119
+   ],
+   "1e-1": [
+    12,
+    12
+   ]
+  },
+  "identity_moves_all_equal": true,
+  "identity_max_move": [
+   "0.501947",
+   0.501947
+  ],
+  "tilts_lane": {
+   "OZDEN": [
+    117,
+    85
+   ],
+   "T-258": [
+    118,
+    87
+   ]
+  },
+  "tilts_mine": {
+   "OZDEN": [
+    117,
+    85
+   ],
+   "T-258": [
+    118,
+    87
+   ]
+  },
+  "tilts_equal": true,
+  "lane_turned_beyond_1e-6": 71,
+  "mine_turned_beyond_deg": {
+   "1e-12": 121,
+   "1e-09": 120,
+   "1e-07": 120,
+   "1e-06": 119,
+   "1e-05": 75,
+   "0.0001": 71,
+   "0.001": 48,
+   "0.01": 42,
+   "0.1": 22,
+   "1": 5,
+   "5": 1,
+   "10": 1
+  }
+ },
+ "decides": "nothing about the bound; a comparison of receipts",
+ "cpu_seconds": 0.02
+}

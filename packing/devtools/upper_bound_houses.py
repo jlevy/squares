@@ -599,8 +599,13 @@ def _sources() -> dict[str, Source]:
         # Polkovskyi's re-solve of Couzo's packing of issue 843.
         packet_source("T-256", "couzo-issue844-2026-10-28"),
         packet_source("T-257", "evand-issue845-2026-10-29"),
-        packet_source("T-258", "evand-n299-update-2026-10-29"),
         packet_source("T-259", "mishapolk-issue846-2026-10-30"),
+        # The adoption of 4 November 2026 moved 299 to T-263 and 204 to T-264, Doğa Özden's
+        # further arrangements of issues 893 and 894 of Evan Daniel's T-258 and T-257
+        # packings. 299 was T-258's only count, so T-258 is no source here now, as T-231
+        # left on 31 October; T-257 still houses 172, 260 and 293.
+        packet_source("T-263", "ozden-s299-upper-bound-2026-11-03"),
+        packet_source("T-264", "ozden-s204-upper-bound-2026-11-03"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -652,7 +657,10 @@ def _sources() -> dict[str, Source]:
 #: T-174, 204 from T-231, 260 from T-225 and 293 from the Kingbird catalogue; his update to
 #: issue 824 (T-258) at 299 from the Kingbird catalogue; and Mykhailo Polkovskyi's re-solve
 #: of Couzo's packing of issue 843 (T-259) at 130 from T-174, with the packing's credit
-#: Couzo's (T-254). T-231 keeps no house here.
+#: Couzo's (T-254). T-231 keeps no house here. The pass of 4 November 2026 adopted Doğa
+#: Özden's further arrangements of issue 893 (T-263) at 299 from T-258 and of issue 894
+#: (T-264) at 204 from T-257, with each packing's finder Evan Daniel; T-258 keeps no house
+#: here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -684,7 +692,7 @@ ADOPTED: dict[int, str] = {
     181: "T-174",
     182: "T-243",
     183: "T-220",
-    204: "T-257",
+    204: "T-264",
     206: "T-174",
     207: "T-174",
     208: "T-174",
@@ -718,7 +726,7 @@ ADOPTED: dict[int, str] = {
     293: "T-257",
     295: "T-193",
     297: "T-174",
-    299: "T-258",
+    299: "T-263",
     302: "T-193",
     303: "T-240",
     304: "T-242",
@@ -826,6 +834,8 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: The pass of 31 October 2026 (think-3guf) adopted the stage 4 reviews of that day: T-256
 #: at 232 and 307, T-257 at 172, 204, 260 and 293, T-258 at 299 and T-259 at 130. At 232
 #: T-256 is below T-193's algebraic side, which the writer's bead had staged there.
+#: The pass of 4 November 2026 (think-3guf, think-ybep) adopted that day's stage 4 review:
+#: T-263 at 299 and T-264 at 204.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -906,6 +916,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-25": frozenset({182, 268, 303, 304}),
     "2026-10-26": frozenset({268}),
     "2026-10-31": frozenset({130, 172, 204, 232, 260, 293, 299, 307}),
+    "2026-11-04": frozenset({204, 299}),
 }
 
 

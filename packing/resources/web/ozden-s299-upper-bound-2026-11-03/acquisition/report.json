@@ -1,0 +1,61 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/893",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s299 upper bound 2026-11-03]",
+  "report_evidence": "E-ozden-893-certificate-report",
+  "receipt_format": "ozden-893-exact-replay-v1",
+  "witness_prefix": "W-ozden-893-n",
+  "claim_limitations": "Complete 6486ead rational centre-basis Witness/v2, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-04",
+  "read_at_main": "ca3a171bb279639692cd464727a50ba384f724b0",
+  "certificates": [
+    {
+      "n": 299,
+      "path": "n-299-candidate.yaml",
+      "format": "witness-center-basis",
+      "offered": "3560247706795812422293947620670679551/200000000000000000000000000000000000",
+      "first_committed": "2026-11-03T18:57:22Z"
+    }
+  ],
+  "requested": [
+    299
+  ],
+  "replayed": [
+    299
+  ],
+  "houses": [
+    {
+      "n": 299,
+      "reader": "[Daniel n299 update 2026-10-29]",
+      "source_key": "[Daniel n299 update 2026-10-29]",
+      "holders": "Evan Daniel, after Chris Deotte",
+      "result": "T-258",
+      "reported_value": "17.8012385493885841",
+      "verified_value": "17.8012385493885841",
+      "evidence": [
+        "E-evand-n299-update-exact-feasibility",
+        "E-evand-n299-update-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Doğa Özden's packing of 299 squares at kenaznia-doga/s299-upper-bound 6486ead, issue 893",
+    "headline": "Özden's further arrangement at 299 of Daniel's T-258 packing, one to one, 1.54e-8 below it",
+    "significance": 2,
+    "source_checks": "The issue says this repository's packing-witness verify, run unmodified on the witness, reports VERIFIED (exact-algebraic, 44551 pairs), and that verifier/sqcheck.py, an exact checker the author's lab wrote separately from this repository's code, reports VALID (exact rational, least pair margin about 1.0e-22, walls touching); it says the two share only the unit-square, wall and non-overlap definitions. The witness's claim block says coordinate_provenance: reported. No local-optimality, rigidity or formal check is claimed. Those statements are the author's; no source program ran here. The issue's title and claim print the side as 17.801238533979, 'rounded up at 12 places', but that print is 6.21e-14 below the exact side, which rounds up at 12 places to 17.801238533980; the claim is the exact fraction the issue also states.",
+    "credit": "Credit Doğa Özden (https://dogaozden.com/math/live/square-packing/), who reports a packing found from the registry's 299, Evan Daniel's 0e76d9f certificate (T-258, after Chris Deotte), as malyshevdanil's Living Atlas on Kaggle carries it: about 250 of the 299 squares within 0.05 of it, the lower-right tilted corner rebuilt, one square re-tilted by 14.9 degrees, 85 tilted squares against 87, and the right-edge column slid by about 0.5. The issue asks that the improvement be credited to Özden and the base packing to its holders as the record lists them. The search was AI-assisted (GPT-based agents plus local optimisation), the checks were run by code that did not produce the packing, and the issue and repository were prepared and posted by Özden's AI agent, which uses the account kenaznia-doga; Özden directed the work. The Kaggle dataset kmmmvs/squares-in-squares-best-packings the issue cites holds 299 at 17.801238553, above this, and the Kaggle per-puzzle leaderboard's side-only entries near 17.798 and 17.794 state no packing and are no report.",
+    "next_rung": "Independently review the retained replay and the certificate (stage 4): a clean-room exact checker, the identity against T-258's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt it at 299 in place of T-258 under the house rule, with both strong generators' regularization and the flip of the new house in the same change.",
+    "bead": "think-otv6",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "independent",
+      "credit": "Ozden after Daniel, Deotte",
+      "short_credit": "Ozden after Daniel et al.",
+      "note": "kenaznia-doga/s299-upper-bound at 6486ead9be5e3348f64ad39aecc1950f22910de4 (2026-11-03T18:57:22Z), Doğa Özden's certificate for s(299) <= 3560247706795812422293947620670679551/(2*10^35) = 17.801238533979062...: a rational centre-basis Witness/v2 of a packing found from the registry's 299, Evan Daniel's 0e76d9f certificate after Chris Deotte (T-258), with the lower-right tilted corner rebuilt. Registration was requested in jlevy/squares#893, posted on the author's behalf by his AI agent's account kenaznia-doga; the search was AI-assisted (GPT-based agents plus local optimisation), under his direction. No global optimality claim. No licence stated; retained on the presumption of permission the author's submission carries (think-cnn7; think-mdxq). Ozden is Özden in the credit's ASCII. Retained in web/ozden-s299-upper-bound-2026-11-03/."
+    }
+  }
+}

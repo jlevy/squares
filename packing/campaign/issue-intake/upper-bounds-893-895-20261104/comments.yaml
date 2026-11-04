@@ -1,0 +1,46 @@
+# The report-order verdict comments of the 4 November ledger (lane L36 of the intake pass,
+# think-3guf) for #893, #894 and #895, as devtools.intake_comments drafts them from the
+# ledger.json beside this file. Each is to be folded into its issue's import reply once the
+# records pull request merges, under the answer beads think-otv6, think-8b8m and think-qclj,
+# and recorded under the issue's `replies` in campaign/result-requests.yaml.
+#
+# From packing/:
+#   python -m devtools.intake_comments \
+#     campaign/issue-intake/upper-bounds-893-895-20261104/comments.yaml --out DIR
+
+ledger: packing/campaign/issue-intake/upper-bounds-893-895-20261104/ledger.json
+records_pr: jlevy/squares#897
+
+names:
+  "record T-258": Evan Daniel's certificate of his #824 update, the record at 299
+  "record T-257": Evan Daniel's #845 certificate, the record at 204 and 260
+
+skip: []
+
+comments:
+  - issue: 893
+    author: kenaznia-doga
+    notes:
+      - >-
+        Your 299 is below everything reported before it, so it is recorded. Measured here,
+        it is a further arrangement of Evan Daniel's packing, one to one with it under the
+        identity. One correction to the issue's print: the exact side rounds up at 12 places
+        to 17.801238533980. The issue's 17.801238533979 is its truncation, 6.21e-14 below
+        it, so it is not a bound. The record holds the exact fraction the issue states, so
+        nothing else changes.
+  - issue: 894
+    author: kenaznia-doga
+    notes:
+      - >-
+        Your 204 is below everything reported before it, so it is recorded. Measured here,
+        it is a further arrangement of Evan Daniel's #845 packing, one to one with it under
+        the identity. The Kaggle leaderboard side the issue quotes states no packing and is
+        no report.
+  - issue: 895
+    author: vitamoon
+    notes:
+      - >-
+        Your 260 is the first report below the record there, so the rule records it once
+        the certificate can be read: it is walked here by the side the issue states, and
+        nothing is registered until the file is at a public commit, as the acknowledgement
+        asks.
