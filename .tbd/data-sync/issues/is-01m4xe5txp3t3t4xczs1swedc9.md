@@ -3,9 +3,9 @@ type: is
 id: is-01m4xe5txp3t3t4xczs1swedc9
 title: Judge the census control's axis refusal against the sweep's enclosure, not AXIS_ROUNDING (F-1 of the 14 October wand125 review; T-142, T-175 to T-177)
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: bold-ritchie-l34
 labels:
   - result-import
@@ -17,8 +17,12 @@ parent_id: is-01m4wsqt2sjrksybyz375sarb3
 hold: null
 hold_until: null
 created_at: 2026-10-14T14:48:32.438Z
-updated_at: 2026-11-03T05:51:04.487Z
+updated_at: 2026-11-04T10:28:12.350Z
 started_at: 2026-11-03T05:05:02.326Z
+closed_at: 2026-11-04T10:28:12.350Z
+close_reason: "Shipped in https://github.com/jlevy/squares/pull/898 (merged a565aef2e): T-262 V3/C3, n-094 verified lower bound 1993/200; axis rule confirmed on n94; #892 review nits addressed."
+resolution: null
+duplicate_of: null
 ---
 Finding F-1 of the 14 October review (docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md), major for the records lane and not a defect of any certificate.
 
