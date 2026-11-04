@@ -1795,9 +1795,17 @@ repositories:
       licence/LICENSE.md, its declaration, record and README stating the licence. No result
       content changed; nothing to import.
   - url: https://github.com/kenaznia-doga/s299-upper-bound
-    read_through: 0c61a5555d8dd9ec05019d4fd72672f5f502cf97
+    read_through: 9a0607b760996d678f02325f3b4dcbdf7739feaf
     read_on: '2026-11-04'
     note: >-
+      One further commit of 4 November (20:48:54Z) past 0c61a555: 9a0607b7, "README: link
+      Doğa Özden's live tracker", adds three lines to README.md, a line under the title
+      reading "Claimed by Doğa Özden (@dogaozden, live tracker:
+      https://dogaozden.com/math/live/square-packing/)." and two blank lines, and changes
+      no other file. The claim names the author the record already credits; the packet
+      stays at 6486ead. No result content changed; nothing to import.
+
+      Earlier read:
       One commit of 4 November (17:48:56Z) past the 6486ead pin: 0c61a555, "Add licence: CC
       BY 4.0 (certificates, data) + MIT (code)", adds LICENSE.md, byte-identical to
       s94-lower-bound's at 484ad20f, and changes nothing else, so its tree is the pin's with
@@ -1806,9 +1814,17 @@ repositories:
       licence: CC BY 4.0 for the witness, export, outputs, READMEs and diff image, MIT for
       verifier/sqcheck.py. No result content changed; nothing to import.
   - url: https://github.com/kenaznia-doga/s204-upper-bound
-    read_through: 06b0bf99fda02c9521e21fdd7b970fb6d0cb44ef
+    read_through: 90233153838ccda82f894720e232d7a5e87f68df
     read_on: '2026-11-04'
     note: >-
+      One further commit of 4 November (20:48:55Z) past 06b0bf99: 90233153, "README: link
+      Doğa Özden's live tracker", adds three lines to README.md, a line under the title
+      reading "Claimed by Doğa Özden (@dogaozden, live tracker:
+      https://dogaozden.com/math/live/square-packing/)." and two blank lines, and changes
+      no other file. The claim names the author the record already credits; the packet
+      stays at d4b8b05. No result content changed; nothing to import.
+
+      Earlier read:
       One commit of 4 November (17:48:57Z) past the d4b8b05 pin: 06b0bf99, "Add licence: CC
       BY 4.0 (certificates, data) + MIT (code)", adds LICENSE.md, byte-identical to
       s94-lower-bound's at 484ad20f, and changes nothing else, so its tree is the pin's with
