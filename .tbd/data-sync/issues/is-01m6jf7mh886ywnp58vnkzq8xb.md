@@ -3,9 +3,9 @@ type: is
 id: is-01m6jf7mh886ywnp58vnkzq8xb
 title: "Import Özden: s(299) <= 3560247706795812422293947620670679551/(2*10^35) = 17.801238533980 rounded up, 1.54e-8 below T-258 (#893)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l36
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-04T05:06:44.904Z
-updated_at: 2026-11-04T08:38:36.447Z
+updated_at: 2026-11-04T13:56:07.026Z
 started_at: 2026-11-04T05:07:17.313Z
+closed_at: 2026-11-04T13:56:07.025Z
+close_reason: Imported, reviewed (strong-max stage 4), adopted at V3/C3 in https://github.com/jlevy/squares/pull/897 (merged 0dc4eaa7b); closing reply posted after deploy and recorded in https://github.com/jlevy/squares/pull/901 (merged c5e1f3da9).
+resolution: null
+duplicate_of: null
 ---
 Import of jlevy/squares#893 (opened 2026-11-03T18:57:42Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(299) <= 3560247706795812422293947620670679551/(2*10^35), which is 17.8012385339790622 rounded up at 16 places and 17.801238533980 at 12, 1.54e-8 below the case's house, Evan Daniel's 0e76d9f certificate (T-258). The issue's own 12-place print, 17.801238533979, is the truncation, 6.21e-14 below the side, and bounds nothing; the record states the exact side.
 
