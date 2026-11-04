@@ -75,14 +75,14 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         "Complete n=18 certificate record; prepared HTML measures 326,548 bytes.",
     ),
     "cases/204.html": (
-        375_000,
+        400_000,
         (
-            "Eleven verified certificates and a section for each of the seven that have "
+            "Twelve verified certificates and a section for each of the eight that have "
             "been the house, each listing every other side; prepared HTML measures "
-            "320,903 bytes on 23 October 2026 after T-231's adoption and 353,884 on 31 "
-            "October 2026 after T-257's, whose section is 15,409 bytes. The ceiling "
-            "leaves room for one more house section, and the record keeps every earlier "
-            "house's section as history."
+            "320,903 bytes on 23 October 2026 after T-231's adoption, 353,884 on 31 "
+            "October 2026 after T-257's, whose section is 15,409 bytes, and 380,607 on 4 "
+            "November 2026 after T-264's. The ceiling leaves room for one more house "
+            "section, and the record keeps every earlier house's section as history."
         ),
     ),
     "result/t-007.html": (
