@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 136
+version: 137
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T08:54:47.716Z
+updated_at: 2026-11-04T09:55:08.976Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -237,3 +237,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 07:52 renewal (intake52): no new reports. #892 merged (0bc5a08c5) after its strong-max confirming review (confirm-with-nits); think-4uun is held by #890 entry, and L37 updates it. L37 launched: T-262 control rerun, verified lane, #892 nits. L32 given the T-176 n39 control write-in on #889. L36 mapping the strong-max review of record for #893/#894 and adopting both. Load 5.8 on 4 cores.
 
 2026-11-04 08:52 renewal (intake53): no new reports. #897 poster decision: Özden print credit held off the posters only via a narrow PRINT_CREDIT_HELD (think-tj4o, modeled on think-10l0); records keep improved_by. A release cut is owner-only (development.md, the 2026-10-01 rule), and the owner is told the posters trail several credits. Three lanes active (L32, L36, L37), each at <=2 workers and niced; load ~9 on 4 cores.
+
+2026-11-04 09:52 renewal (intake54): no new reports. #898 (L37, T-262 V3/C3 and n-094 verified 1993/200) review accept-with-fixes (F1 medium: the --evidence generator hard-codes Hosono wording); the addressing pass is under way. think-2agl moved from finished L33 to the coordinator, with the V3/C3 reply draft applied. #889 green at 6687e12b6 with T-176 V3/C3; T-179 at 100/201 angles, about 6.4 CPU-h left. #897 (L36) is on the print-credit hold (b-prime).
