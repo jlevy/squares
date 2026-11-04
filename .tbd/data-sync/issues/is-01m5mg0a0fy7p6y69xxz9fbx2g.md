@@ -3,16 +3,20 @@ type: is
 id: is-01m5mg0a0fy7p6y69xxz9fbx2g
 title: "census --control: the axis tolerance is a constant (AXIS_ROUNDING 1e-9); derive it from the sweep's enclosure (F-1 of the 14 October review)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 6
+version: 7
+delegate: bold-ritchie-l42
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-23T13:43:00.366Z
-updated_at: 2026-11-04T09:01:35.294Z
+updated_at: 2026-11-04T15:02:55.163Z
+started_at: 2026-11-04T15:02:55.163Z
 ---
 The census control's axis check (`packing/devtools/sqverify_fast_census.py`, `AXIS_ROUNDING = 1/10^9` and the axis branch of `refusal_record`) requires the 99/100 mutant's exact capture at the vertex sweep's least vertex to lie within a constant 1e-9 of the sweep's certified lower bound. The gap is half the sweep's enclosure width, which varies by certificate, so a sound refusal can fail closed.
 
