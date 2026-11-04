@@ -55196,23 +55196,21 @@ evidence:
       full and accepted. The producer decided the certificate with this repository's
       sqverify-fast, built unmodified from the same reviewed crate source, and its receipts
       are retained in its packet; this replay reproduces that run with the producer's code.
-      The crate is this repository's clean-room implementation, written without opening
-      Hosono's checker, which never decided this certificate. No second implementation or
-      second method is run here. Its node counts and bounds are its own, not the
-      certificate's records. Controls, on 2026-11-04 by the same build: the original
-      verified again at index 277; every mass scaled by 99/100 refused at 600 of the 600 net
-      directions, each a coverage refusal at a centre in the per-bin domain where the
-      mutant's exact capture is below 1 (the crate's confirmed witness, or at the axis the
-      vertex sweep's least vertex, where the capture lies in the enclosure the sweep held
-      there, [0.9930860126842824, 0.9930860149308234], whose lower end is the crate's bound
-      to the bit); and every mass scaled by 0.9824 so that the exact capture at the
-      least-bound leaf's centre is at most 1 - 10^-6 refused (counterexample-candidate,
-      exact capture below 1 at the least-bound leaf's centre); each capture below 1 was
-      evaluated again by an exact evaluator written apart from the crate, and
-      tests/test_sqverify_fast_census.py holds the receipts. The control of 2026-11-03,
-      kept as mixed_n94_L9965.control-failed-v2.json, refused the same mutants and failed
-      closed only on the constant axis allowance of 1e-9 that the enclosure rule of #892
-      replaced (F-1 of
+      No second implementation or second method is run here. Its node counts and bounds are
+      its own, not the certificate's records. Controls, on 2026-11-04 by the same build: the
+      original verified again at index 277; every mass scaled by 99/100 refused at 600 of
+      the 600 net directions, each a coverage refusal at a centre in the per-bin domain
+      where the mutant's exact capture is below 1 (the crate's confirmed witness, or at the
+      axis the vertex sweep's least vertex, where the capture lies in the enclosure the
+      sweep held there, [0.9930860126842824, 0.9930860149308234], whose lower end is the
+      crate's bound to the bit); and every mass scaled by 0.9824 so that the exact capture
+      at the least-bound leaf's centre is at most 1 - 10^-6 refused
+      (counterexample-candidate, exact capture below 1 at the least-bound leaf's centre);
+      each capture below 1 was evaluated again by an exact evaluator written apart from the
+      crate, and tests/test_sqverify_fast_census.py holds the receipts. The control of
+      2026-11-03, kept as mixed_n94_L9965.control-failed-v2.json, refused the same mutants
+      and failed closed only on the constant axis allowance of 1e-9 that the enclosure rule
+      of #892 replaced (F-1 of
       docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md).
       The source's second checker, an exact-integer branch and bound, is retained in the
       packet and was not run here.

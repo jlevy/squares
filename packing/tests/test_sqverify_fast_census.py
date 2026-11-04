@@ -1069,6 +1069,16 @@ def test_the_axis_rule_at_its_edges() -> None:
         assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
     for bound in (None, math.nan, "nan", "", "not a bound"):
         assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
+    # Shapes a JSON receipt could hold that no bound has: a list or a mapping, and a bool,
+    # which float() would read as 0.0 or 1.0, the very ends of these enclosures.
+    odd: list[Any] = [[low], {"bound": low}]
+    for bound in odd:
+        assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
+    assert census.axis_captures_agree(0.0, Fraction(1, 2), (0.0, 1.0))
+    assert census.axis_captures_agree(1.0, Fraction(3, 2), (1.0, 2.0))
+    flags: list[Any] = [False, True]
+    assert not census.axis_captures_agree(flags[0], Fraction(1, 2), (0.0, 1.0))
+    assert not census.axis_captures_agree(flags[1], Fraction(3, 2), (1.0, 2.0))
     assert not census.axis_captures_agree(low, None, (low, high))
     assert not census.axis_captures_agree(low, Fraction(1, 2), None)
 
@@ -1542,3 +1552,33 @@ def test_the_890_dilation_is_read_at_its_upstream_path_and_reproduces_the_produc
     assert packet not in census.SHARED_CRATE_PACKETS | census.INDEPENDENT_MIXED_PACKETS
     fields, _ = census.mixed_relationship(case)
     assert fields == ["    relationship_to_generator: same-implementation"]
+
+
+def test_the_890_replay_entry_is_what_the_census_prints() -> None:
+    """E-ozden-890-n94-9965-sqverify-fast-replay is `--evidence`'s entry for
+    mixed_n94_L9965, field for field (F1 of #898's review): Özden's dilation as the
+    theorem's subject, the issue's digests as the candidate's custody, the second checker
+    retained and not run, the replay's agreement with the source's receipts, the controls
+    of 4 November with the axis enclosure they were judged by, the failed receipt kept,
+    the replay's coverage, and the candidate named as its report names it. None of the
+    Hosono packets' wording survives, nor a clean-room claim beside a same-implementation
+    replay; Hosono's own packets keep theirs."""
+    name = "mixed_n94_L9965"
+    text = census.evidence_entry(
+        cases()[name],
+        FOLDER,
+        entries()[name],
+        audit_record="docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md",
+        date="2026-11-03",
+        control_date="2026-11-04",
+    )
+    (generated,) = safe_load(text)
+    register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    (committed,) = (item for item in register["evidence"] if item["id"] == generated["id"])
+    assert generated == committed
+    flat = " ".join(text.split())
+    for wording in ("Hiroaki Hosono's mixed_n94_L9965", "mixed-fetch", "tarball", "clean-room"):
+        assert wording not in flat, wording
+    assert "applied to Doğa Özden's mixed_n94_L9965" in flat
+    assert census.packet_provenance(cases()["mixed_n37_L64975"]) is census.HOSONO_PROVENANCE
+    assert "{certificate}" in census.HOSONO_PROVENANCE.subject
