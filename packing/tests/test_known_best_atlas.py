@@ -2615,6 +2615,28 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     assert unheld_height != height
 
 
+def test_the_print_credit_hold_cannot_outlive_its_edition(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review F2 of #897: the hold is set under one infographic edition, and a poster of
+    any other edition, or a version bump before the redraw, fails the composite check
+    while the hold stands, so the cut that redraws the posters empties it (think-tj4o)."""
+    assert known_best_builder.PRINT_CREDIT_HELD_FOR == INFOGRAPHIC_VERSION
+    assert {
+        known_best_builder.retained_identity(
+            (ATLAS / f"{canvas.spec.stem}.svg").read_text(encoding="utf-8")
+        ).version
+        for canvas in known_best_builder.COMPOSITES
+    } == {known_best_builder.PRINT_CREDIT_HELD_FOR}
+    problems = known_best_builder.print_credit_hold_problems
+    assert problems([INFOGRAPHIC_VERSION]) == []
+    [refused] = problems([INFOGRAPHIC_VERSION, "v9.9.9"])
+    assert "v9.9.9" in refused
+    assert "think-tj4o" in refused
+    monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
+    assert problems(["v9.9.9"]) == []
+
+
 def test_poster_packing_credit_wrap_refuses_an_overwide_name() -> None:
     wrap = known_best_builder._poster_credit_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     credit = known_best_builder.PackingCredit(("W" * 100,), ("[source]",), "[source 2026]")

@@ -12,5 +12,5 @@ Register candidates (policy row 3; registered first, never admitted here):
 | 299 | evand:adopt-2026-11-04-n204-299-evand:solved | -1.56e-12 |
 
 ```bash
-python -m devtools.regularize_evand layer --run-dir "$(mktemp -d)" --repo-root .. --grid-run /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/regularize/adopt-2026-11-04-n204-299-grid-deg05 --grid-counts 299
+python -m devtools.regularize_evand layer --run-dir "$(mktemp -d)" --repo-root .. --grid-run $RUNS/adopt-2026-11-04-n204-299-grid-deg05 --grid-counts 299
 ```

@@ -75,14 +75,20 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         "Complete n=18 certificate record; prepared HTML measures 326,548 bytes.",
     ),
     "cases/204.html": (
-        400_000,
+        430_000,
         (
             "Twelve verified certificates and a section for each of the eight that have "
             "been the house, each listing every other side; prepared HTML measures "
             "320,903 bytes on 23 October 2026 after T-231's adoption, 353,884 on 31 "
             "October 2026 after T-257's, whose section is 15,409 bytes, and 380,607 on 4 "
-            "November 2026 after T-264's. The ceiling leaves room for one more house "
-            "section, and the record keeps every earlier house's section as history."
+            "November 2026 after T-264's, 26,723 bytes more, since the new section lists "
+            "every other side and every earlier section gains the new one. The record "
+            "keeps every earlier house's section as history, so each adoption grows the "
+            "page by about that much. The ceiling moves to 430,000 as a measured choice: "
+            "one more adoption at that growth, which think-w64i's queued 204 candidate "
+            "would be, with about 22 KB to spare. Its timing was not re-measured. How a "
+            "page that grows with every adoption scales is the question think-rp0d asks "
+            "of result/t-046.html."
         ),
     ),
     "result/t-007.html": (

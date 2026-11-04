@@ -2875,8 +2875,13 @@ def _title(move: Move) -> str:
 
 
 def _anchor(move: Move) -> str:
-    text = _title(move).lower().replace("’", "")
-    return re.sub(r"[^a-z0-9 -]", "", text).replace(" ", "-")
+    """The certificate section's in-page id, made by kpress's GitHub slugger as the case
+    page makes its headings' ids (`render_case_pages._own_ids`), so a name with
+    diacritics keeps them: `doğa-özdens-certificate-t-264`, not `doa-zdens-…` (review F1
+    of #897)."""
+    from kpress.format._github_slugger import GithubSlugger  # noqa: PLC0415
+
+    return GithubSlugger().slug(_title(move))
 
 
 def section(move: Move) -> str:

@@ -2783,14 +2783,37 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: next infographics cut, by count, as the case records name them. A new name rebalances
 #: the block's lines and can change the 1-100 canvas, which redraws both posters, and the
 #: posters are drawn only at a deliberate component revision (development.md, "Release
-#: assets are drawn at their component's version bump"). Only this block, its metadata and
-#: the canvas it sizes read the hold; the case records, the case pages, the bound citations
-#: and the site credit every name. Emptied at the cut. Doğa Özden improved Evan Daniel's
-#: packings at 204 and 299 (T-264, T-263), adopted on 4 November 2026 (think-tj4o).
+#: assets are drawn at their component's version bump"). `_poster_packing_credits` alone
+#: reads the hold, and what it feeds is what is held: the block's three lines, the line
+#: measure the attribution paragraphs share (`_print_attribution_lines`), the block's
+#: `data-credited-names` and `data-source-keys`, the metadata's `source_groups` and the
+#: canvas height. The metadata's `cases` list reads the case records directly and stays
+#: the truthful record, `improved_by` included. The case records, the case pages, the bound
+#: citations and the site credit every name. Doğa Özden improved Evan Daniel's packings at
+#: 204 and 299 (T-264, T-263), adopted on 4 November 2026 (think-tj4o).
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     204: ("Doğa Özden",),
     299: ("Doğa Özden",),
 }
+#: The infographic edition the hold was set under. A poster drawn for any other edition
+#: while the hold is not empty fails `composite_findings` (`print_credit_hold_problems`),
+#: and so does a version bump before the redraw, so the cut that redraws the posters must
+#: also empty the hold (review F2 of #897). A version, not a commit (OR-18).
+PRINT_CREDIT_HELD_FOR = "v0.7.0"
+
+
+def print_credit_hold_problems(versions: Sequence[str]) -> list[str]:
+    """Why the print-credit hold may not stand beside posters of `versions`: none while
+    the hold is empty, and one for each version other than the one it was set under."""
+    if not PRINT_CREDIT_HELD:
+        return []
+    return [
+        f"the print-credit hold (PRINT_CREDIT_HELD, think-tj4o) was set for the "
+        f"{PRINT_CREDIT_HELD_FOR} posters; posters of {version} credit every name, so the "
+        "cut that draws them empties the hold"
+        for version in sorted(set(versions))
+        if version != PRINT_CREDIT_HELD_FOR
+    ]
 
 
 @cache
@@ -5012,6 +5035,7 @@ def composite_findings(
         problems.append(
             f"infographic family has mixed versions: {', '.join(sorted(family_versions))}"
         )
+    problems.extend(print_credit_hold_problems([*family_versions, INFOGRAPHIC_VERSION]))
     return CompositeFindings(tuple(problems), tuple(notes))
 
 

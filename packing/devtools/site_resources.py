@@ -225,12 +225,18 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/kenaznia-doga/s299-upper-bound",
         "Doğa Özden",
-        "An exact packing of 299 squares, 1.54e-8 below Evan Daniel's; replayed here (T-263).",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it,"
+            " 1.54e-8 below it (T-263)."
+        ),
     ),
     (
         "https://github.com/kenaznia-doga/s204-upper-bound",
         "Doğa Özden",
-        "An exact packing of 204 squares, 6.48e-6 below Evan Daniel's; replayed here (T-264).",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it,"
+            " 6.48e-6 below it (T-264)."
+        ),
     ),
     (
         "https://github.com/RobertBarnettProjects/square-packing-research",

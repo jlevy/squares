@@ -27744,9 +27744,15 @@ issues:
       The issue's title and claim print the side as 17.801238533979, "rounded up at 12 places",
       but that print is 6.21e-14 below the exact side, which rounds up to 17.801238533980; the
       record holds the exact fraction the issue also states. The ledger of 4 November
-      (upper-bounds-893-895-20261104) records it. Registered as T-263 at V0/C0; the stage 4
-      review and the adoption at 299 are think-ybep's. The Kaggle sources the issue names are
-      no report. No licence is stated; the packet rests on the submission's presumption of
+      (upper-bounds-893-895-20261104) records it. Registered as T-263. The 4 November stage
+      4 review (docs/project/reviews/review-2026-11-04-ozden-893-894-299-204.md, think-ybep)
+      accepted it with findings, none blocking or major, and its clean-room checker
+      decided it again; the entry is confirmed, independently re-implemented, at V3/C3,
+      and the case adopts it at 299 under the house rule in the same pass, with Evan Daniel
+      the packing's finder and Özden its improver, both strong generators' regularization
+      of the new house and its rigidity block derived again. The posters hold Özden's name
+      off their credit block until the next infographics cut (think-tj4o). The Kaggle
+      sources the issue names are no report. No licence is stated; the packet rests on the submission's presumption of
       permission, followed up on think-mdxq.
     read_through: '2026-11-03T18:57:42Z'
     results:
@@ -27760,8 +27766,8 @@ issues:
       - T-263
       evidence:
       - E-ozden-893-certificate-report
-      validation:
-      - think-ybep
+      - E-ozden-893-exact-feasibility
+      - E-ozden-893-review-exact-feasibility
     beads:
     - think-otv6
     - think-ybep
@@ -27769,9 +27775,10 @@ issues:
     answer_bead: think-otv6
     replies: []
     close_when: >-
-      T-263 is on main and the reply on main says what was replayed, that the print is below
-      the exact side, and that the stage 4 review and the adoption at 299 are think-ybep's;
-      the licence question (think-mdxq) is carried in the closing comment.
+      T-263 is on main at V3/C3 as the house at 299, and the reply on main says what was
+      replayed, that the print is below the exact side, that the stage 4 review accepted
+      the certificate, and that the case adopted it; the licence question (think-mdxq) is
+      carried in the closing comment.
   - number: 894
     title: 's(204) ≤ 14.807620995586: improved packing (registration request)'
     author: kenaznia-doga
@@ -27798,8 +27805,15 @@ issues:
       witness and refuse its gross and sharp controls; measured, it pairs one to one with
       T-257's packing, 6 squares beyond a tenth. The ledger of 4 November
       (upper-bounds-893-895-20261104) records it; the tie think-pg1y records at 204 lies above
-      T-257 and does not reach it. Registered as T-264 at V0/C0; the stage 4 review and the
-      adoption at 204 are think-ybep's. The Kaggle side-only claim the issue quotes,
+      T-257 and does not reach it. Registered as T-264. The 4 November stage 4 review
+      (docs/project/reviews/review-2026-11-04-ozden-893-894-299-204.md, think-ybep)
+      accepted it, with no finding against the bound, and its clean-room checker decided
+      it again; the entry is confirmed, independently re-implemented, at V3/C3, and the
+      case adopts it at 204 under the house rule in the same pass, with Evan Daniel the
+      packing's finder and Özden its improver, both strong generators' regularization of
+      the new house and its rigidity block derived again. The posters hold Özden's name
+      off their credit block until the next infographics cut (think-tj4o). The Kaggle
+      side-only claim the issue quotes,
       14.803489183116, states no packing and is no report. No licence is stated; the packet
       rests on the submission's presumption of permission, followed up on think-mdxq.
     read_through: '2026-11-03T22:36:13Z'
@@ -27814,8 +27828,8 @@ issues:
       - T-264
       evidence:
       - E-ozden-894-certificate-report
-      validation:
-      - think-ybep
+      - E-ozden-894-exact-feasibility
+      - E-ozden-894-review-exact-feasibility
     beads:
     - think-8b8m
     - think-ybep
@@ -27823,9 +27837,9 @@ issues:
     answer_bead: think-8b8m
     replies: []
     close_when: >-
-      T-264 is on main and the reply on main says what was replayed and that the stage 4
-      review and the adoption at 204 are think-ybep's; the licence question (think-mdxq) is
-      carried in the closing comment.
+      T-264 is on main at V3/C3 as the house at 204, and the reply on main says what was
+      replayed, that the stage 4 review accepted the certificate, and that the case adopted
+      it; the licence question (think-mdxq) is carried in the closing comment.
   - number: 895
     title: Improved upper bound for s(260)
     author: vitamoon
