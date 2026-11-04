@@ -39,7 +39,7 @@
     {"n":36,"bound":"6","decimal":"6","verified_lower":"6","holds":true,"improves":false},
     {"n":37,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.4975","holds":false,"improves":false},
     {"n":38,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.545","holds":false,"improves":false},
-    {"n":39,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.65","holds":false,"improves":false},
+    {"n":39,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.6625","holds":false,"improves":false},
     {"n":40,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.718","holds":false,"improves":false},
     {"n":41,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.775","holds":false,"improves":false},
     {"n":42,"bound":"-1 + 2*sqrt(2) + 5*sqrt(3)/2","decimal":"6.15855414366","verified_lower":"6.8475","holds":false,"improves":false},
