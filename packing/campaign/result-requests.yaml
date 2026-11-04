@@ -27757,9 +27757,18 @@ issues:
       with n-094's reported lower lane at 1993/200. On 4 November, after #892 judged the
       axis refusal by the sweep's own enclosure, the control was written again and passed
       (think-qpq0): the replay is E-ozden-890-n94-9965-sqverify-fast-replay, T-262 is
-      V3/C3, and n-094's verified lane takes 1993/200. No licence is stated; the packet
-      rests on the submission's presumption of permission, followed up on think-0so3.
-    read_through: '2026-11-04T10:46:20Z'
+      V3/C3, and n-094's verified lane takes 1993/200. The lab's comment of 17:49:05Z on 4
+      November (issuecomment-6637821113, signed "Kenaznia, for Doğa Özden") answers both
+      questions of the final reply. The licence: Doğa Özden chose CC BY 4.0 for the
+      certificates, witnesses, receipts, data and write-ups and MIT for all source code,
+      the second checker included, and the lab added LICENSE.md to each of its three
+      repositories, at kenaznia-doga/s94-lower-bound 484ad20f, s299-upper-bound 0c61a555
+      (#893) and s204-upper-bound 06b0bf99 (#894). The finer net: no side between 9.965
+      and the route's ceiling, about 9.9729, has been tried; 9.965 is the only side the lab
+      certified on the finer net. The lab also says it will correct its READMEs after the
+      review notes the final reply passed on (d529.jsonl, the quadrant wording and
+      rescale.py's growth formula).
+    read_through: '2026-11-04T17:49:05Z'
     results:
     - key: s94-dilation
       claim: >-
@@ -27819,6 +27828,17 @@ issues:
       the sweep found that its text does not. A reply naming the two ids is therefore due,
       as on #238 after the final reply of 3 October, and no comment has been posted only
       to name them.
+      The lab's comment of 17:49:05Z on 4 November (issuecomment-6637821113) answers the
+      licence question think-0so3 followed up, for this issue and for #893 and #894
+      (think-mdxq): CC BY 4.0 for everything that is not source code and MIT for the code,
+      copyright 2026 Doğa Özden, by a LICENSE.md the lab added to each repository at
+      17:48:55Z to 17:48:57Z, one commit past each pin, byte-identical across the three,
+      the commit changing nothing else. The three packets stay at their pins and retain
+      the file as licence/LICENSE.md, and their declarations, records and READMEs state
+      the licence; intake-watch.yaml records the three reads. The comment's answer to the
+      finer-net question reports no new side, and its promise to correct the READMEs
+      changes nothing retained here. The reply that names the two evidence ids carries
+      the thanks for both answers and the licence as recorded.
   - number: 893
     title: 's(299) ≤ 17.801238533979: improved packing (registration request)'
     author: kenaznia-doga
@@ -27854,8 +27874,12 @@ issues:
       the packing's finder and Özden its improver, both strong generators' regularization
       of the new house and its rigidity block derived again. The posters hold Özden's name
       off their credit block until the next infographics cut (think-tj4o). The Kaggle
-      sources the issue names are no report. No licence is stated; the packet rests on
-      the submission's presumption of permission, followed up on think-mdxq.
+      sources the issue names are no report. The pin states no licence, and the packet
+      rested on the submission's presumption of permission, followed up on think-mdxq,
+      until the lab answered on #890 (issuecomment-6637821113, 17:49:05Z on 4 November):
+      CC BY 4.0 for the witness, export, outputs and write-ups and MIT for
+      verifier/sqcheck.py, by the LICENSE.md it added at 0c61a555, one commit past the
+      pin, which the packet retains.
     read_through: '2026-11-04T13:25:02Z'
     results:
     - key: n299-from-t258
@@ -27953,8 +27977,11 @@ issues:
       the new house and its rigidity block derived again. The posters hold Özden's name
       off their credit block until the next infographics cut (think-tj4o). The Kaggle
       side-only claim the issue quotes, 14.803489183116, states no packing and is no
-      report. No licence is stated; the packet rests on the submission's presumption of
-      permission, followed up on think-mdxq.
+      report. The pin states no licence, and the packet rested on the submission's
+      presumption of permission, followed up on think-mdxq, until the lab answered on
+      #890 (issuecomment-6637821113, 17:49:05Z on 4 November): CC BY 4.0 for the witness,
+      JSON, outputs and write-ups and MIT for verifier/sqcheck.py, by the LICENSE.md it
+      added at 06b0bf99, one commit past the pin, which the packet retains.
     read_through: '2026-11-04T13:25:24Z'
     results:
     - key: n204-from-t257
