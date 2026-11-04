@@ -1,0 +1,184 @@
+{
+  "kind": "wand125-linear-control/v1",
+  "status": "CONTROLS_REFUSED",
+  "certificate": "n145",
+  "directory": "problems/square-lower-bounds/certificates/mixed_n145_L1224",
+  "revision": "22f06b31a9295c8185be5d30a1a7b19982b16847",
+  "n": 145,
+  "side": "306/25",
+  "index": 35,
+  "index_choice": "the fewest recorded nodes among the oblique angles",
+  "shipped_record": {
+    "status": "ANGLE_VERIFIED",
+    "nodes": 168149,
+    "leaves": 84075,
+    "lower": 1.0000000446422734
+  },
+  "checker": {
+    "source_sha256": "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d",
+    "compile": "the shipped compile_verifier: c++ -O2 -std=c++17 -ffp-contract=off -fno-fast-math",
+    "binary_sha256": "05d919005c5449f43a32e99503c84b27a4020fd904953e746d7b5e33198b4abc",
+    "argv": [
+      "verify",
+      "input.txt",
+      "168149"
+    ]
+  },
+  "witness": {
+    "centre": [
+      "7511990/977629",
+      "1405533/131645"
+    ],
+    "t": "581/8000",
+    "cos": "63662439/64337561",
+    "sin": "9296000/64337561",
+    "side": "9977/10000",
+    "domain": [
+      "153/25",
+      "15021928586897/1286751220000"
+    ],
+    "coverage_exact": "10724970179421324680442212070122901783158542194303857986871/10703078954474483331944931466221809757869167341993472000000"
+  },
+  "runs": [
+    {
+      "name": "original",
+      "candidate_digest": "31788dc7f098d82f5a60bae49a5a3afcd329cf3f792f44883dc11518d95eca69",
+      "input_sha256": "b126ac48c46909ca60af462fd2b7f5c22d0c0ade335b6b3a52417d8eea2f4593",
+      "total_mass": "14499999/100000",
+      "primitives": 2144,
+      "witness_coverage_exact": "10724970179421324680442212070122901783158542194303857986871/10703078954474483331944931466221809757869167341993472000000",
+      "witness_coverage": 1.0020453203269784,
+      "run": {
+        "returncode": 0,
+        "stderr": "",
+        "cpu_seconds": 160.719,
+        "wall_seconds": 162.238,
+        "output": {
+          "status": "ANGLE_VERIFIED",
+          "nodes": 168149,
+          "leaves": 84075,
+          "lower": 1.0000000446422734,
+          "seconds": 162.211688802
+        },
+        "frontier_boxes": 0,
+        "verdict": "ACCEPTED"
+      }
+    },
+    {
+      "name": "scale-masses",
+      "candidate_digest": "5aa4fc720299eb4d3f54e8592f762b73bb55d08673177c526343d822198abe42",
+      "input_sha256": "29697208811150e38a7cde0a0b4997fb21fd4db4b1b15c293e0e9d0313ebb666",
+      "total_mass": "1435499901/10000000",
+      "primitives": 2144,
+      "witness_coverage_exact": "96524731614791922123979908631106116048426879748734721881839/97300717767949848472226649692925543253356066745395200000000",
+      "witness_coverage": 0.9920248671237086,
+      "mutation": {
+        "factor": "99/100"
+      },
+      "run": {
+        "returncode": 0,
+        "stderr": "",
+        "cpu_seconds": 0.096,
+        "wall_seconds": 0.107,
+        "output": {
+          "status": "ANGLE_UNRESOLVED",
+          "nodes": 78,
+          "leaves": 0,
+          "lower": null,
+          "seconds": 0.075782948
+        },
+        "frontier_boxes": 78,
+        "last_frontier_box": [
+          0.9999999999990905,
+          0.999999999998181,
+          9.094947017729282e-13,
+          1.8189894035458565e-12
+        ],
+        "stopped_at": "depth floor",
+        "verdict": "REFUSED"
+      }
+    },
+    {
+      "name": "drop-top-contributor",
+      "candidate_digest": "53cde45373026c31bc609b0ee8f9fe143b1c3307cfa8043b0457af22d1da235b",
+      "input_sha256": "bb2353af9f6932c310ae1ca0dc3f2d851564bf241c978d146e36c270019db005",
+      "total_mass": "5236946068135646787278562110439/36249997500000057413956100000",
+      "primitives": 2143,
+      "witness_coverage_exact": "610765148375908769648069552084043526122342390205226057199131/652887816222943483248640819439530395230019207861601792000000",
+      "witness_coverage": 0.9354825334454534,
+      "mutation": {
+        "row": 913,
+        "primitive": {
+          "kind": "segment",
+          "geometry": [
+            "897840207/500000000",
+            "99760023/20000000",
+            "1895440437/1000000000",
+            "99760023/20000000"
+          ],
+          "mass": "386064137287730754889965/724999950000001148279122"
+        },
+        "contribution_at_witness_exact": "386064137287730754889965/5799999600000009186232976"
+      },
+      "run": {
+        "returncode": 0,
+        "stderr": "",
+        "cpu_seconds": 22.692,
+        "wall_seconds": 22.844,
+        "output": {
+          "status": "ANGLE_UNRESOLVED",
+          "nodes": 23605,
+          "leaves": 11783,
+          "lower": 1.0000000000037574,
+          "seconds": 22.816664229
+        },
+        "frontier_boxes": 39,
+        "last_frontier_box": [
+          0.8406234597596267,
+          0.2990893470505398,
+          9.094947017729282e-13,
+          1.8189894035458565e-12
+        ],
+        "stopped_at": "depth floor",
+        "verdict": "REFUSED"
+      }
+    }
+  ],
+  "tarball": {
+    "status": "TARBALL_MATCHES_PIN",
+    "path": "problems/square-lower-bounds/certificates/mixed_n145_L1224/n145-L12.24-proof-bundle.tar.gz",
+    "revision": "22f06b31a9295c8185be5d30a1a7b19982b16847",
+    "sha256": "4dc4f6731151ec5a0a109c24a3223626824702dd5c8f4f9e9965130be2969a0b",
+    "bytes": 47407937,
+    "origin": "certificates/mixed_n145_L1224/n145-L12.24-proof-bundle.tar.gz of the release asset certificates__mixed_n145_L1224.tar.gz (supplied), held to its pin 6a937dc726a392ead0c9f94a892025da2ac891816d8d9560f8e9364b01922a49",
+    "refused_routes": []
+  },
+  "bindings": {
+    "status": "BUNDLE_BOUND_TO_PACKET",
+    "files": 810,
+    "checker_copies": 202,
+    "upstream_seconds": 109342.3
+  },
+  "preconditions": {
+    "status": "DRIVER_PRECONDITIONS_HOLD",
+    "candidate_digest": "31788dc7f098d82f5a60bae49a5a3afcd329cf3f792f44883dc11518d95eca69",
+    "angles": 201,
+    "total_mass": "14499999/100000",
+    "checker_sha256": "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d"
+  },
+  "environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "PYTHONOPTIMIZE": null
+  },
+  "host": {
+    "platform": "Linux-6.18.44-fc-v233-x86_64-with-glibc2.39",
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "logical_cpus": 4,
+    "python": "3.14.7 (main, Sep 29 2026, 15:01:40) [Clang 22.1.3 ]",
+    "c++": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+    "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)"
+  },
+  "scope": "Stage-4 negative controls: the shipped export and the C++ checker its compile_verifier builds, on one net direction with the shipped replay's node limit. Each mutation leaves an exact witness centre covered below 1 at that angle, so the checker must not verify it."
+}
