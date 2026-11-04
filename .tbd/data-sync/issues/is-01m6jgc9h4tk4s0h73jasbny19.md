@@ -5,14 +5,16 @@ title: "Review Özden's 299 and 204 certificates (stage 4) and adopt both with b
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m6jf7mh886ywnp58vnkzq8xb
+child_order_hints:
+  - is-01m6jrqgkrdfpxas3rpssbx5fx
 created_at: 2026-11-04T05:26:46.052Z
-updated_at: 2026-11-04T05:26:46.052Z
+updated_at: 2026-11-04T07:52:42.360Z
 ---
 Stage 4 mathematical review of Doğa Özden's certificates at 299 (#893) and 204 (#894), registered on PR #897 (lane L36) at V0/C0, and their adoption at both counts under the house rule, each being the smallest side reported there.
 

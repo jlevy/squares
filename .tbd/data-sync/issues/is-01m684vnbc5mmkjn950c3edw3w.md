@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 131
+version: 133
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -51,10 +51,11 @@ child_order_hints:
   - is-01m6jf7ps8jcdka5zx64tpgxxz
   - is-01m6jf8xzcmwm89b3rnk5xmn50
   - is-01m6jqkyrwaxf85nz7bytdv6t9
+  - is-01m6jrqgkrdfpxas3rpssbx5fx
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T07:33:17.211Z
+updated_at: 2026-11-04T07:54:55.236Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -230,3 +231,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 05:52 renewal (intake50): no new reports beyond #893-#895 (L36, #897). The JoostdeWinter watched-repo read is passed to L36. L32 is asked to refresh think-r333 and think-v511. #896 review A accept-with-fixes, addressing pass under way. Stage-4 review of #893/#894 (think-ybep) running separately. #890 reply held for the T-262 verified-lane follow-up after #892. Foreign stalled claims (claude-code@vm, @spud10.local) still await the owner.
 
 2026-11-04 06:52 renewal (intake51): no new reports. #896 merged (0726427), Pages 41785759956 green, think-tdgl closed. #892 addressing pass done (99e0f43d1, CI green); a strong-max confirming review is running. The #893/#894 xhigh review accepted both; the strong-max review of record is running. L32 s(145) 56/201 angles at 24.9 CPU-h.
+
+2026-11-04 07:52 renewal (intake52): no new reports. #892 merged (0bc5a08c5) after its strong-max confirming review (confirm-with-nits); think-4uun is held by #890 entry, and L37 updates it. L37 launched: T-262 control rerun, verified lane, #892 nits. L32 given the T-176 n39 control write-in on #889. L36 mapping the strong-max review of record for #893/#894 and adopting both. Load 5.8 on 4 cores.
