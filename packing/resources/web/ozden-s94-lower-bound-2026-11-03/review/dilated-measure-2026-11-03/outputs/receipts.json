@@ -1,0 +1,113 @@
+{
+ "program": "dm_receipts.py",
+ "program_sha256": "e78c6f0f16fe0927573c61f1a035806e6b205a8d84d52318a0fc69b2bac3c135",
+ "dmlib_sha256": "2f73b8badf3380d472e41016637c8d91123400e5b2feffda488ced1c97e26cb9",
+ "certificate_file_sha256": "116c83425959a943196287a910ad799b2fe1bb9dec433085ea222bd62d5a16f8",
+ "runs": {
+  "author-rustc1.98": {
+   "summaries": 1,
+   "status": "VERIFIED",
+   "refused_directions": [],
+   "fault_injected_at_box": null,
+   "threshold": "1",
+   "build": {"profile": "release", "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)", "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88", "target": "x86_64-unknown-linux-gnu"},
+   "nodes": 296805699,
+   "indices_exactly_0_to_last": true,
+   "every_direction_verified": true,
+   "every_threshold_1": true,
+   "premises_mismatched": [],
+   "premises_not_compared": [],
+   "least_bound": [1.0000000000314393, 277],
+   "file_sha256": "528a8c6fa1bb4772f15e5294fe0e73d3890ad73749c9cac1a8006b3092091cb9"
+  },
+  "author-rustc1.93": {
+   "summaries": 1,
+   "status": "VERIFIED",
+   "refused_directions": [],
+   "fault_injected_at_box": null,
+   "threshold": "1",
+   "build": {"profile": "release", "rustc": "rustc 1.93.1 (01f6ddf75 2026-02-11) (built from a source tarball)", "source_sha256": "85f02254fb5183513e086c3f5f3b5b6c9e7cba3486e7d31838bdcbd44ff42c08", "target": "x86_64-unknown-linux-gnu"},
+   "nodes": 296805699,
+   "indices_exactly_0_to_last": true,
+   "every_direction_verified": true,
+   "every_threshold_1": true,
+   "premises_mismatched": [],
+   "premises_not_compared": [],
+   "least_bound": [1.0000000000314393, 277],
+   "file_sha256": "1cc4c423f6bfd4bd5ae680988149a0144460da568a93a863ab04b993d811aa03"
+  },
+  "census-capture": {
+   "summaries": 1,
+   "status": "VERIFIED",
+   "refused_directions": [],
+   "fault_injected_at_box": null,
+   "threshold": "1",
+   "build": {"profile": "release", "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)", "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88", "target": "x86_64-unknown-linux-gnu"},
+   "nodes": 296805699,
+   "indices_exactly_0_to_last": true,
+   "every_direction_verified": true,
+   "every_threshold_1": true,
+   "premises_mismatched": [],
+   "premises_not_compared": [],
+   "least_bound": [1.0000000000314393, 277],
+   "file_sha256": "bc0c4294fea6f58aa9f9b97ae2dfa6919d24656b49f705fe9c5ec2991a41d353"
+  }
+ },
+ "per_direction_agreement": {
+  "directions_where_the_three_runs_differ": [],
+  "fields_compared": [
+   "verdict",
+   "min_certified_lower_bound",
+   "nodes",
+   "leaves",
+   "least_bound_box",
+   "argmin",
+   "vertices"
+  ]
+ },
+ "census_row": {
+  "n": true,
+  "L": true,
+  "status VERIFIED": true,
+  "returncode 0": true,
+  "refused_directions empty": true,
+  "directions_verified = last + 1": true,
+  "threshold 1": true,
+  "least_bound_leaf_exact.clears_threshold": true,
+  "candidate_sha256 is the retained file's": true,
+  "build source d97758bb, release, rustc 1.98.0": true,
+  "premises equal the summary's": true
+ },
+ "control": {
+  "status": "CONTROL_FAILED",
+  "captures_agree": true,
+  "original": {
+   "verdict": "verified",
+   "returncode": 0,
+   "min_certified_lower_bound": 1.0000000000314393
+  },
+  "scaled_99_100": {
+   "refused_directions": 600,
+   "summary_status": "REFUSED",
+   "returncode": 1,
+   "recomputed_here_exactly": 600,
+   "every_refusal_holds_here": true,
+   "largest_mutant_capture_at_a_witness": [0.9999999999998945, 21],
+   "least_original_capture_at_a_witness": ["11739297340221047295455193572022786906564171355606041876830368683950868679443949039384089477722630095331041376822986200618680927961114535419326266555881512613217245830530127413693951095122483063202524688104230431764878737987401184128086008548390518676985617737507274602891470722311314517374453944924029387811046657960760791346670141442755465470821027505794290641719145618864170730879348925189530399609261625642862848481175857843357930829284228738858722034212906553386038292656676801428694151154202262775349442429984087760205085693007543542640109829802155348097494541497356352628002283/11702817485325709120247810937623525857517622402687342939128643857508387433197699981136009715974254407191367634712975824538267491219963516892379839775898889661617363586440750945127408182719190632846030050982448628700082453421193079070051267247392259055448873793024391988198080220463960874387708709357746593911851116215018939846813258170229238848405475134678637391065618963005685905833358974817655590975815930084541339736704254179646739100573400734405568683790584936042791355478312682955717724577892159212519575495470285390786833492619385481250266342551705355267621035043455791222912000", 1.003117185664143, 0, ["1893/200", "32310351317604646637/4975000000000000000"]],
+   "sampled_rows": [{"r": 0, "original": 1.003117185664143, "mutant": 0.9930860138075015, "equals_recorded": true, "in_domain": true, "axis_bound_gap": 1.1232190455168495e-09}, {"r": 100, "original": 1.0088471258113496, "mutant": 0.9987586545532361, "equals_recorded": true, "in_domain": true, "axis_bound_gap": null}, {"r": 200, "original": 1.00842323487932, "mutant": 0.9983390025305269, "equals_recorded": true, "in_domain": true, "axis_bound_gap": null}, {"r": 300, "original": 1.010101008505068, "mutant": 0.9999999984200172, "equals_recorded": true, "in_domain": true, "axis_bound_gap": null}, {"r": 400, "original": 1.0099675576389666, "mutant": 0.9998678820625769, "equals_recorded": true, "in_domain": true, "axis_bound_gap": null}, {"r": 500, "original": 1.0083584757856139, "mutant": 0.9982748910277578, "equals_recorded": true, "in_domain": true, "axis_bound_gap": null}, {"r": 599, "original": 1.0101010096181602, "mutant": 0.9999999995219785, "equals_recorded": true, "in_domain": true, "axis_bound_gap": null}]
+  },
+  "near_threshold": {
+   "factor": "982425917865727/1000000000000000",
+   "r": 277,
+   "pose": [6.065821652623713, 5.5241608263118565],
+   "mutant_capture_here": 0.99356271451802,
+   "equals_recorded": true,
+   "below_1": true,
+   "in_domain": true,
+   "returncode": 1
+  }
+ },
+ "failures": [],
+ "status": "RECORDS_HOLD",
+ "cpu_seconds": 11.0
+}

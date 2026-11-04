@@ -1,0 +1,1 @@
+double_mantissa_bits=53 long_double_mantissa_bits=53 double_size=8 long_double_size=8

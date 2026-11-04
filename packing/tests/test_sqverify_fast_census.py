@@ -1465,3 +1465,21 @@ def test_the_13_october_packet_is_read_from_its_retained_n37_members() -> None:
     assert census.net_directions(case) == 2073
     assert packet in census.SHARED_CRATE_PACKETS
     assert packet not in census.INDEPENDENT_MIXED_PACKETS
+
+
+def test_the_890_dilation_is_read_at_its_upstream_path_and_reproduces_the_producer() -> None:
+    """#890's certificate is not Hosono's and sits at its own upstream path, which
+    `MIXED_FILES` names under the format M convention's census name. Its producer decided
+    it with this repository's own sqverify-fast, so a row of it is a reproduction with the
+    producer's code, classified apart from the shared-crate and independent packets."""
+    packet = "ozden-s94-lower-bound-2026-11-03"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert list(found) == ["mixed_n94_L9965"]
+    case = found["mixed_n94_L9965"]
+    assert case.candidate == census.WEB / packet / "source/certificate/n94_L9965.json.gz"
+    assert (case.n, case.side) == (94, "1993/200")
+    assert census.net_directions(case) == 600
+    assert packet in census.SAME_CRATE_PACKETS
+    assert packet not in census.SHARED_CRATE_PACKETS | census.INDEPENDENT_MIXED_PACKETS
+    fields, _ = census.mixed_relationship(case)
+    assert fields == ["    relationship_to_generator: same-implementation"]

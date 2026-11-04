@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **859** evidence records. **495** are formal; **486** of those were established here. **12** are samples, counted separately.
-- **346** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **861** evidence records. **495** are formal; **486** of those were established here. **13** are samples, counted separately.
+- **347** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -410,7 +410,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n088-wand125-mixed-962-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n090-wand125-mixed-973-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n091-wand125-mixed-97625-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
-| `E-n094-wand125-mixed-995-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
+| `E-n094-wand125-mixed-995-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n067-wand125-mixed-848-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n084-wand125-mixed-9411-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n067-wand125-mixed-848-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqverify-fast` |
@@ -882,13 +882,15 @@ results, it is a statement about what this repository has itself examined.
 | `E-mishapolk-846-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 1 of 1: the certificate at n = 130 that T-259 cites, every wall and every pair decided by both maintained routes; the same receipt decides the issue's five other counts, which T-260 holds while the owner's question stands (think-ikku), and the packet's earlier comparisons; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-mishapolk-846-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 130: every wall and every pair, by two exact routes that share only the reader, with seven mutants decided by both at contact and 1e-60 past it; the same run decides the issue's five other counts, which T-260 holds | `V-mishapolk-1031-review-check` |
 | `E-wand125-fine-net-n37-64975-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | `V-sqverify-fast` |
+| `E-ozden-890-n94-9965-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-ozden-integer-checker` |
+| `E-ozden-890-n94-9965-review-sample` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | sample, 1 of 600: net directions, each decided over its whole quadrant of centres | `V-ozden-890-review-premises`, `V-ozden-890-review-axis`, `V-ozden-890-review-sample` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 348, verified 506
-- **method**: exact-algebraic 263, interval-certified 225, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 348
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 798
-- **relationship to the producer's code**: generator 5, independent-implementation 322, not-applicable 34, same-implementation 446, shared-components 46, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 349, verified 507
+- **method**: exact-algebraic 263, interval-certified 226, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 349
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 800
+- **relationship to the producer's code**: generator 5, independent-implementation 323, not-applicable 34, same-implementation 447, shared-components 46, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

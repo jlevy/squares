@@ -354,29 +354,45 @@ def test_the_added_filter_shows_what_reached_the_site(
 ) -> None:
     """In Chromium, on the day the newest results reached the site: `?added-age=1` sets
     Added within and shows exactly the results that arrived that day or the day before,
-    whatever the date their rows show or the day a lane registered them, and leaves Max
-    age empty (#514's review A, finding A1); the clock is noon, where the reader's day and
-    the UTC day an age of arrival counts in agree. The archive URL `?added-since=`
+    and leaves Max age empty (#514's review A, finding A1); the narrowest Added-within
+    windows that hold a row dated before them, and a row registered before them, show
+    exactly the rows that arrived within them, whatever the date their rows show or the
+    day a lane registered them; the clock is noon, where the reader's day and the UTC
+    day an age of arrival counts in agree. The archive URL `?added-since=`
     opens the table from the Recent Results section's first day, with Added since in
     the bar, on the table rows arriving since that date (A3). An explicit `?added=` URL opens
     the newest day alone, with Added on in the bar naming the day; and a day nothing arrived
     on is named there too and shows no row, rather than every row (A5)."""
     name = "results.html"
     reference = overview_sections.added_reference(overview)
-    cutoff = overview_sections.age_cutoff(reference, 1)
     last_day = _arrived_since(overview, 1)
     assert 0 < len(last_day) < len(overview.results)
-    arrived = [result for result in overview.results if result.id.lower() in last_day]
-    # The filter reads arrival: some row of the last day shows a date before it, and, in
-    # the narrowest Added-within window that has one, some row was registered before the
-    # window, waiting for its pull request to merge. A day whose arrivals were all
-    # registered within it has none (T-247 arrived so on 26 October 2026), so the window
-    # is searched rather than fixed at one day.
-    assert any(overview_sections.first_day(result.dated[1]) < cutoff for result in arrived)
+    # The filter reads arrival: in the narrowest Added-within window that has one, some
+    # row shows a date before the window, and some row was registered before it, waiting
+    # for its pull request to merge. A day whose arrivals were all published or
+    # registered within it has neither (T-247 arrived so on 26 October 2026; T-262,
+    # published and registered the day it arrived, alone on 3 November), and a week can
+    # hold no row that waited, so each window is searched back to the first arrival
+    # rather than fixed at one day or at the Recent Results week; the input takes any age.
+    span = (reference - min(overview_sections.landed_day(r) for r in overview.results)).days
+    shown_earlier = next(
+        (
+            days
+            for days in range(1, span + 1)
+            if any(
+                overview_sections.first_day(result.dated[1])
+                < overview_sections.age_cutoff(reference, days)
+                for result in overview.results
+                if result.id.lower() in _arrived_since(overview, days)
+            )
+        ),
+        None,
+    )
+    assert shown_earlier is not None
     waited = next(
         (
             days
-            for days in range(1, overview_sections.ADDED_DAYS + 1)
+            for days in range(1, span + 1)
             if any(
                 overview_sections.registered_day(result).isoformat()
                 < overview_sections.age_cutoff(reference, days)
@@ -400,11 +416,14 @@ def test_the_added_filter_shows_what_reached_the_site(
         assert sorted(found["shown"]) == last_day
         assert found["count"] == count(len(last_day), overview)
 
-        page.goto(pages[name].as_uri() + f"?added-age={waited}", wait_until="load")
-        assert page.locator(added_age).input_value() == str(waited)
-        found = state(page)
-        assert sorted(found["shown"]) == _arrived_since(overview, waited)
-        assert found["count"] == count(len(_arrived_since(overview, waited)), overview)
+        # A filter that read the date a row shows, or the day it was registered, would
+        # leave out the row that window was chosen for.
+        for days in (shown_earlier, waited):
+            page.goto(pages[name].as_uri() + f"?added-age={days}", wait_until="load")
+            assert page.locator(added_age).input_value() == str(days)
+            found = state(page)
+            assert sorted(found["shown"]) == _arrived_since(overview, days)
+            assert found["count"] == count(len(_arrived_since(overview, days)), overview)
 
         page.goto(pages[name].as_uri(), wait_until="load")
         assert not page.locator(added_since).is_visible()
