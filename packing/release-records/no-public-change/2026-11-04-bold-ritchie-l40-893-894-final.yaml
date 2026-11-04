@@ -1,0 +1,18 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L40 of 4 November: #893's and #894's final replies (issuecomment-6631808901,
+  issuecomment-6631816984) and the two closes are recorded, each reply as stating its
+  register entry (T-263, T-264) at V3/C3 and the two evidence ids its text names, with the
+  report entry stated through the register entry's word. No result, rung, side, bound, mark
+  or credit changes. Against main 0dc4eaa7b (#897): rendered at link revision
+  0000000000000000000000000000000000000000 into empty site directories, twice from this
+  tree and once with that main's result-requests.yaml swapped in, by
+  render_packing_methods, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM): 43
+  files each, all byte-identical across the three. No PDF was printed; it prints from that
+  HTML. The paper keeps its version, v0.2.7.
