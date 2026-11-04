@@ -2338,12 +2338,16 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
             continue
         reported = build_bound_citations.load_case(entry["n"])["reported_upper_bound"]
         expected_sources.add(reported["source_key"])
+        # The print holds back the names `PRINT_CREDIT_HELD` names for the count until the
+        # next infographics cut (think-tj4o); every other reader credits them.
+        held = known_best_builder.PRINT_CREDIT_HELD.get(entry["n"], ())
         expected_names.update(
             register.names[name]
             for name in [
                 *(reported.get("found_by") or []),
                 *(reported.get("improved_by") or []),
             ]
+            if name not in held
         )
     root = ET.Element("svg")
     append = known_best_builder._append_composite_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
@@ -2383,7 +2387,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # packings as Francisco Couzo refined them, so both names join it, and Kristiansen's,
     # which held only 303, leaves. On 31 October 2026 the adoption at 232 and 307 (T-256)
     # credits Alex Chilton's and ntumlnoob's Kaggle notebook packings as Francisco Couzo
-    # refined them, so both names join it.
+    # refined them, so both names join it. On 4 November 2026 the adoption at 204 and 299
+    # (T-264, T-263) credits Doğa Özden as the improver of Evan Daniel's packings, and the
+    # print holds his name back until the next infographics cut (think-tj4o), so no name
+    # joins it yet.
     assert len(expected_names) == 30
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
@@ -2424,8 +2431,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # other counts. The adoption of 31 October draws from four more, Couzo's issue 844
     # packet (232, 307), Evan Daniel's issue 845 and issue 824 update packets (172, 204, 260,
     # 293; 299) and Polkovskyi's issue 846 packet (130), and no longer from his n204 packet
-    # (T-231), which held nothing else.
-    assert len(expected_sources) == 32
+    # (T-231), which held nothing else. The adoption of 4 November draws 204 and 299 from
+    # Doğa Özden's two packets (T-264, T-263), and no longer from Evan Daniel's issue 824
+    # update packet, which held only 299; his issue 845 packet still holds 172, 260 and 293.
+    assert len(expected_sources) == 33
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2555,6 +2564,55 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     canvas = known_best_builder.resolved_composites()[1]
     assert Decimal(ending[2].attrib["y"]) + Decimal("17.1") < canvas.card_position(82).top
     _assert_poster_text_clears_cards(information, canvas)
+
+
+def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """think-tj4o: the case records and the bound citations credit Doğa Özden as the
+    improver of Evan Daniel's packings at 204 and 299 (T-264, T-263). The posters' credit
+    block holds exactly his name back until the next infographics cut, so the drawn 1-100
+    canvas keeps its height; without the hold it would not."""
+    held = known_best_builder.PRINT_CREDIT_HELD
+    assert held == {204: ("Doğa Özden",), 299: ("Doğa Özden",)}
+    for n in held:
+        reported = build_bound_citations.load_case(n)["reported_upper_bound"]
+        assert reported["found_by"] == ["Evan Daniel"]
+        assert reported["improved_by"] == ["Doğa Özden"]
+    record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
+    citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
+    for n in held:
+        assert citations[n]["upper"]["text"] == "Daniel & Özden, GitHub"
+    corpus = known_best_builder.CORPUS
+    read_credits = known_best_builder._poster_packing_credits  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    credit_lines = known_best_builder._print_credit_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    attribution_lines = known_best_builder._print_attribution_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+    def printed() -> tuple[set[str], str, int]:
+        read_credits.cache_clear()
+        credit_lines.cache_clear()
+        attribution_lines.cache_clear()
+        packing_credits = read_credits(corpus.first_n, corpus.last_n)
+        return (
+            {name for credit in packing_credits for name in credit.names},
+            " ".join(credit_lines()),
+            known_best_builder.PRIMARY_COMPOSITE.height,
+        )
+
+    names, lines, height = printed()
+    try:
+        monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
+        unheld_names, unheld_lines, unheld_height = printed()
+    finally:
+        monkeypatch.undo()
+        printed()
+    assert unheld_names - names == {"Özden"}
+    assert names < unheld_names
+    assert "Özden" not in lines
+    assert "Özden" in unheld_lines
+    drawn = ET.fromstring((ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8"))
+    assert drawn.get("height") == str(height)
+    assert unheld_height != height
 
 
 def test_poster_packing_credit_wrap_refuses_an_overwide_name() -> None:

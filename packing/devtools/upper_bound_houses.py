@@ -599,11 +599,11 @@ def _sources() -> dict[str, Source]:
         # Polkovskyi's re-solve of Couzo's packing of issue 843.
         packet_source("T-256", "couzo-issue844-2026-10-28"),
         packet_source("T-257", "evand-issue845-2026-10-29"),
-        packet_source("T-258", "evand-n299-update-2026-10-29"),
         packet_source("T-259", "mishapolk-issue846-2026-10-30"),
         # The adoption of 4 November 2026 moved 299 to T-263 and 204 to T-264, Doğa Özden's
         # further arrangements of issues 893 and 894 of Evan Daniel's T-258 and T-257
-        # packings.
+        # packings. 299 was T-258's only count, so T-258 is no source here now, as T-231
+        # left on 31 October; T-257 still houses 172, 260 and 293.
         packet_source("T-263", "ozden-s299-upper-bound-2026-11-03"),
         packet_source("T-264", "ozden-s204-upper-bound-2026-11-03"),
     ]

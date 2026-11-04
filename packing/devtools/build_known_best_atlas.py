@@ -2779,13 +2779,27 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
     return (value, 0, 0, 0) if value is not None else (0, 0, 0, 0)
 
 
+#: Construction credits the posters' "Best packings due to" block holds back until the
+#: next infographics cut, by count, as the case records name them. A new name rebalances
+#: the block's lines and can change the 1-100 canvas, which redraws both posters, and the
+#: posters are drawn only at a deliberate component revision (development.md, "Release
+#: assets are drawn at their component's version bump"). Only this block, its metadata and
+#: the canvas it sizes read the hold; the case records, the case pages, the bound citations
+#: and the site credit every name. Emptied at the cut. Doğa Özden improved Evan Daniel's
+#: packings at 204 and 299 (T-264, T-263), adopted on 4 November 2026 (think-tj4o).
+PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
+    204: ("Doğa Özden",),
+    299: ("Doğa Özden",),
+}
+
+
 @cache
 def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, ...]:
     """Read construction credits from typed case fields and the canonical bibliography.
 
     The ordinary citation can shorten three authors to ``et al.``; this list retains
-    every finder and improver. Source families group the metadata, with every complete
-    source key retained in the SVG.
+    every finder and improver but those `PRINT_CREDIT_HELD` holds back for the count.
+    Source families group the metadata, with every complete source key retained in the SVG.
     """
     register = build_bound_citations.load_register()
     groups: dict[str, tuple[list[str], list[str], dict[str, date | int]]] = {}
@@ -2795,8 +2809,13 @@ def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, .
         if citation is None:
             continue
         reported = case["reported_upper_bound"]
+        held = {register.names[name] for name in PRINT_CREDIT_HELD.get(n, ())}
         credited = [*(reported.get("found_by") or []), *(reported.get("improved_by") or [])]
-        names = [register.names[name] for name in dict.fromkeys(credited)]
+        names = [
+            register.names[name]
+            for name in dict.fromkeys(credited)
+            if register.names[name] not in held
+        ]
         source_key = citation["source_key"]
         source: build_bound_citations.Source | None = None
         if source_key is None:
@@ -2813,14 +2832,18 @@ def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, .
                 else source.key.removeprefix("[").removesuffix("]").split()[0]
             )
             reference = f"[{family}{f' {source.year}' if source.year is not None else ''}]"
-            names = names or list(source.authors)
+            names = names or [name for name in source.authors if name not in held]
             source_keys = [source.key]
         group_names, group_sources, group_dates = groups.setdefault(reference, ([], [], {}))
         group_names.extend(name for name in names if name not in group_names)
         group_sources.extend(key for key in source_keys if key not in group_sources)
         found_year = reported.get("found_year")
         dated_names: list[tuple[str, date | int]] = (
-            [(register.names[name], found_year) for name in (reported.get("found_by") or [])]
+            [
+                (register.names[name], found_year)
+                for name in (reported.get("found_by") or [])
+                if register.names[name] not in held
+            ]
             if isinstance(found_year, int)
             else []
         )

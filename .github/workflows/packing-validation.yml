@@ -1557,6 +1557,8 @@ jobs:
             /packing/resources/web/evand-issue845-2026-10-29/
             /packing/resources/web/evand-n299-update-2026-10-29/
             /packing/resources/web/mishapolk-issue846-2026-10-30/
+            /packing/resources/web/ozden-s299-upper-bound-2026-11-03/
+            /packing/resources/web/ozden-s204-upper-bound-2026-11-03/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg
