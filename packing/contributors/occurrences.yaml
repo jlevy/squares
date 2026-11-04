@@ -30557,6 +30557,102 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-03]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte
+  start: 20
+  end: 26
+  label: Deotte
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s204 upper bound 2026-11-03]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s204 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Ostashev
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s204 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Ostashev
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s204 upper bound 2026-11-03]'
+    field: /credit
+  expected_text: Ozden after Daniel, Ostashev
+  start: 20
+  end: 28
+  label: Ostashev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

@@ -12,9 +12,10 @@ his behalf.
 
 - `n-299-candidate.yaml`, a `packing.squares:Witness/v2` file (centre-basis, rational
   scalars, 299 squares), states s(299) ≤ 3560247706795812422293947620670679551/(2 ·
-  10³⁵) = 17.801238533979062…, which the issue says is 1.54 × 10⁻⁸ below the record,
-  Evan Daniel’s certificate of his update to issue #824 (T-258). It claims an upper
-  bound only: no KKT, local-optimality, rigidity or global-optimality claim.
+  10³⁵), which is 17.8012385339790622 rounded up at 16 places and 17.801238533980 at 12,
+  and which the issue says is 1.54 × 10⁻⁸ below the record, Evan Daniel’s certificate of
+  his update to issue #824 (T-258). It claims an upper bound only: no KKT,
+  local-optimality, rigidity or global-optimality claim.
 - The issue’s title and claim print the side as 17.801238533979, “rounded up at 12
   places”. That print is 6.21 × 10⁻¹⁴ **below** the exact side, which rounds up at 12
   places to 17.801238533980, so the print alone does not bound s(299). The issue also
