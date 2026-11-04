@@ -1508,7 +1508,7 @@ issues:
       side 1999/2000, 832 half-angles of step 1/2006) and s(19) >= 48229/10000 = 4.8229 by
       mixed_n19_L48229 on the 416-angle net, each checked by the bundled checker's records
       and the author's adapted sqverify_fast.
-    read_through: '2026-10-07T01:47:44Z'
+    read_through: '2026-11-04T19:16:43Z'
     results:
       - key: n18-470
         claim: >-
@@ -1806,6 +1806,17 @@ issues:
             status: confirmed
             position: current
         beads: [think-zcnr]
+      - url: https://github.com/jlevy/squares/issues/366#issuecomment-6639780882
+        date: '2026-11-04'
+        by: jlevy
+        kind: follow-up
+        reported:
+          - result: check2-t-110
+            id: T-110
+            verification: V3
+            confirmation: C3
+            status: confirmed
+            position: superseded
     close_when: >-
       The s(18) certificate is confirmed or refuted and the reply saying so is posted from
       main, and the offered sqverify_fast change is taken in or declined; and the two
@@ -1816,6 +1827,16 @@ issues:
       source check2 routes share producer components, while n29 is independent. Its four newer certificates
       are handled by the separate reported-import follow-up. The 7 October FN1 source update remains
       a custody obligation, not a fresh mathematical result.
+
+      The follow-up of 4 November (issuecomment-6639780882, 19:16:43Z) brings the 31
+      October follow-up's position for T-110 up to date: still V3/C3, confirmed, and
+      superseded at n = 39 by T-176, Hosono's own fine-net certificate mixed_n39_L66625
+      (s(39) >= 533/80) from #446, confirmed at V3/C3 by #889 (merged as 69abc507e), with
+      both of n = 39's lower lanes at 533/80. It was posted after #905 merged as bb5bf6d54
+      and its Pages deployment passed (run 41892700109, 6,064 of 6,064 checks), modelled
+      on #824's follow-up (#902), checked against main bb5bf6d54 (check_requests --draft
+      366), and read back identical to what was posted; the issue stays closed. T-176 is
+      #446's result, so the reply names it in its text and #446's entry records it.
 
   - number: 363
     title: "New lower bound for s(12): 7943/2000 = 3.9715 (Daniel's points re-weighted, building on Route B)"
@@ -27764,7 +27785,7 @@ issues:
       certified on the finer net. The lab also says it will correct its READMEs after the
       review notes the final reply passed on (d529.jsonl, the quadrant wording and
       rescale.py's growth formula).
-    read_through: '2026-11-04T17:49:05Z'
+    read_through: '2026-11-04T19:16:34Z'
     results:
     - key: s94-dilation
       claim: >-
@@ -27798,6 +27819,17 @@ issues:
         position: current
       - result: s94-dilation
         id: E-ozden-890-n94-9965-report
+    - url: https://github.com/jlevy/squares/issues/890#issuecomment-6639777660
+      date: '2026-11-04'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s94-dilation
+        id: E-ozden-890-n94-9965-sqverify-fast-replay
+        status: confirmed
+      - result: s94-dilation
+        id: E-ozden-890-n94-9965-review-sample
+        status: recorded
     close_when: >-
       T-262 is on main at V3/C3 and the reply on main says what was replayed, that its
       whole-net control passed under the enclosure rule, that the stage 4 review accepted
@@ -27835,6 +27867,18 @@ issues:
       finer-net question reports no new side, and its promise to correct the READMEs
       changes nothing retained here. The reply that names the two evidence ids carries
       the thanks for both answers and the licence as recorded.
+      The follow-up of 19:16:34Z on 4 November (issuecomment-6639777660), posted after
+      #905 merged as bb5bf6d54 and its Pages deployment passed (run 41892700109, deploy
+      job 126798809329, verify-deployment job 126798969579, 6,064 of 6,064 checks), is
+      that reply. It thanks the lab for both answers, records the licence for the three
+      packets with each licence commit, notes the finer-net answer, and names
+      E-ozden-890-n94-9965-sqverify-fast-replay (the complete replay, confirmed,
+      reproduced with the producer's code) and E-ozden-890-n94-9965-review-sample (the
+      review's sample, 1 of 600 directions, which sets no rung). It restates T-262 as
+      unchanged, V3/C3, confirmed and current, so `reported` lists the two evidence ids
+      the final reply did not name. It was drafted on think-0so3, checked against main
+      bb5bf6d54 (check_requests --draft 890), and read back identical to what was posted;
+      the issue stays closed.
   - number: 893
     title: 's(299) ≤ 17.801238533979: improved packing (registration request)'
     author: kenaznia-doga
