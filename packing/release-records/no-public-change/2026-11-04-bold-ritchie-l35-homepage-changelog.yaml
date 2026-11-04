@@ -30,4 +30,8 @@ reason: >-
   --prepare-math, the math pass in the environment's chrome-headless-shell build 1243
   (SQPACK_CHROMIUM): 69 files, all byte-identical across the two. No PDF was printed;
   each prints from that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4
-  and v0.2.7.
+  and v0.2.7. After #896's review the branch merged main ca3a171bb (#891), gave a result's
+  id in the log a class (overview_sections.ROLLUP_ID) and named the day bookmark's prefix
+  once (render_changelog.DAY_ANCHOR); the same renders were made again against that
+  main, with its copies of the three paths swapped in for the second: 69 files,
+  byte-identical again.
