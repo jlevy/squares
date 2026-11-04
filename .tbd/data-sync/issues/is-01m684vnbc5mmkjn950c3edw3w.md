@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 140
+version: 141
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T12:55:04.852Z
+updated_at: 2026-11-04T13:56:49.706Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -245,3 +245,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 11:52 renewal (intake56): #899 merged (a5a76fd99), think-2agl closed. Sweep: #899 recorded two evidence ids the reply text does not name, and L39 is correcting the record (no new post). think-0so3 now waits on the author (blocked_on: none; question asked in the closing comment). L36 is addressing the #897 review; L32 is on T-179.
 
 2026-11-04 12:53 renewal (intake57): no new reports. #900 merged (7deb5209f); #890 now owes a follow-up naming two evidence ids, deferred to the licence-answer follow-up (#238 precedent, noted on think-0so3). #897 confirming review was not-confirmed (_slugs vs GithubSlugger on superscript digits); L36 is fixing it. L32 T-179 is due around now.
+
+2026-11-04 13:53 renewal (intake58): #897 merged (0dc4eaa7b; T-263 299 and T-264 204 at V3/C3, adopted). #893 and #894 replies posted after deploy (6631808901, 6631816984) and both issues closed; recorded by #901 (merged c5e1f3da9). think-otv6, think-8b8m and think-ybep closed. L41 is posting #824 follow-up (T-258 superseded). Open: think-tj4o (poster credit at the next cut), think-mdxq (licence), #895 awaiting author, #890 follow-up deferred. L32 T-179 replay nearly done.
