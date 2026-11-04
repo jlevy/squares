@@ -27726,11 +27726,6 @@ issues:
         status: confirmed
         position: current
       - result: s94-dilation
-        id: E-ozden-890-n94-9965-sqverify-fast-replay
-        status: confirmed
-      - result: s94-dilation
-        id: E-ozden-890-n94-9965-review-sample
-      - result: s94-dilation
         id: E-ozden-890-n94-9965-report
     close_when: >-
       T-262 is on main at V3/C3 and the reply on main says what was replayed, that its
@@ -27751,6 +27746,13 @@ issues:
       completed at 10:46:35Z. The licence question (think-0so3) and the finer-net question
       are informational and hold nothing open. The deployed pages were not fetched from the
       session host; verify-deployment checked them.
+      The final reply describes the complete replay and the stage 4 review without naming
+      E-ozden-890-n94-9965-sqverify-fast-replay or E-ozden-890-n94-9965-review-sample, so
+      its `reported` items are T-262 and the report entry, which it states through
+      T-262's word; the record said until 4 November 2026 that it named both (#899), and
+      the sweep found that its text does not. A reply naming the two ids is therefore due,
+      as on #238 after the final reply of 3 October, and no comment has been posted only
+      to name them.
   - number: 893
     title: 's(299) ≤ 17.801238533979: improved packing (registration request)'
     author: kenaznia-doga
