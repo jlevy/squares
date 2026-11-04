@@ -190,22 +190,6 @@ def test_every_in_page_link_of_every_record_reaches_an_id_on_its_page(
     assert "doğa-özdens-certificate-t-263" in targets(records["cases/299.html"])
 
 
-def test_the_documentation_check_reads_heading_ids_as_github_writes_them() -> None:
-    """The same stripping in `check_documentation._slugs` let F1's link pass the gate: it
-    too dropped letters outside ASCII, so `#doa-zdens-…` matched. GitHub and kpress keep
-    them, and count a repeated heading."""
-    from devtools import check_documentation  # noqa: PLC0415
-
-    slugs = check_documentation._slugs  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
-    heading = "## Doğa Özden\u2019s certificate (T-264)\n"
-    assert slugs(heading * 2) == {
-        "doğa-özdens-certificate-t-264",
-        "doğa-özdens-certificate-t-264-1",
-    }
-    ascii_heading = "## Evan Daniel\u2019s certificate (T-257)\n"
-    assert slugs(ascii_heading) == {"evan-daniels-certificate-t-257"}
-
-
 @pytest.mark.parametrize("tex", ["n = 17", r"s(17) \geq 4.6", "x < y", r"\sqrt{2}"])
 @pytest.mark.parametrize("display", ["inline", "display"])
 def test_case_math_compaction_keeps_xml_semantics_and_surrounding_markup(

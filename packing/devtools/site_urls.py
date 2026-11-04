@@ -84,9 +84,10 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "November 2026 after T-264's, 26,723 bytes more, since the new section lists "
             "every other side and every earlier section gains the new one. The record "
             "keeps every earlier house's section as history, so each adoption grows the "
-            "page by about that much. The ceiling moves to 430,000 as a measured choice: "
-            "one more adoption at that growth, which think-w64i's queued 204 candidate "
-            "would be, with about 22 KB to spare. Its timing was not re-measured. How a "
+            "page by 27 to 33 KB (32,981 bytes at T-257's). The ceiling moves to 430,000 "
+            "as a measured choice: one more adoption at that growth, which think-w64i's "
+            "queued 204 candidate would be, with 16 to 22 KB to spare. Its timing was not "
+            "re-measured. How a "
             "page that grows with every adoption scales is the question think-rp0d asks "
             "of result/t-046.html."
         ),

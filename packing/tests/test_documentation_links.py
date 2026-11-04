@@ -96,3 +96,27 @@ def test_a_link_to_main_is_held_to_the_tree(
         f"```\n{base}/blob/main/docs/quoted.md\n```\n"
     )
     assert _main_link_problems(report) == ["report.md: dead link to main -> docs/moved.md"]
+
+
+def test_heading_ids_are_github_slugger_ids() -> None:
+    """`_slugs` is kpress's github-slugger port, as GitHub's own ids are. An ASCII-only rule
+    let review F1's `#doa-zdens-…` pass the gate; a `\\w` rule then kept `k²`'s superscript,
+    which GitHub drops, and dropped decomposed accents, which GitHub keeps (#897)."""
+    import unicodedata  # noqa: PLC0415
+
+    slugs = check_documentation._slugs  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    heading = "## Do\u011fa \u00d6zden\u2019s certificate (T-264)\n"
+    assert slugs(heading * 2) == {
+        "do\u011fa-\u00f6zdens-certificate-t-264",
+        "do\u011fa-\u00f6zdens-certificate-t-264-1",
+    }
+    assert slugs("## Evan Daniel\u2019s certificate (T-257)\n") == {
+        "evan-daniels-certificate-t-257"
+    }
+    # H-252's heading, whose id GitHub renders as `h-252-the-next-member-of-the-k--4-family`.
+    assert slugs("# H-252: The Next Member of the k\u00b2 \u2212 4 Family\n") == {
+        "h-252-the-next-member-of-the-k--4-family"
+    }
+    assert slugs("## x\u2082 and \u00bd\n") == {"x-and-"}
+    decomposed = unicodedata.normalize("NFD", "\u00d6zden")
+    assert slugs(f"## {decomposed}\n") == {unicodedata.normalize("NFD", "\u00f6zden")}

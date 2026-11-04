@@ -2630,6 +2630,11 @@ def test_the_print_credit_hold_cannot_outlive_its_edition(
     ]
     assert problems([*drawn, INFOGRAPHIC_VERSION]) == []
     assert problems([INFOGRAPHIC_VERSION]) == []
+    # The rule itself, on a hold set for this edition, so the test survives the cut that
+    # empties the live hold and re-arms with the next one.
+    monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {204: ("Doğa Özden",)})
+    monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD_FOR", INFOGRAPHIC_VERSION)
+    assert problems([INFOGRAPHIC_VERSION]) == []
     [refused] = problems([INFOGRAPHIC_VERSION, "v9.9.9"])
     assert "v9.9.9" in refused
     assert "think-tj4o" in refused

@@ -17,7 +17,8 @@ outputs:
 reason: >-
   Intake lane L36 of 4 November (think-ybep): the published-page budget for cases/204.html
   rises from 375,000 to 430,000 bytes, since T-264's house section brings the prepared page
-  to 380,607, 26,723 bytes more, and the ceiling allows one more adoption at that growth. No paper prints a page budget. Against main 0bc5a08c5 (#892): rendered at
+  to 380,607, 26,723 bytes more, and the ceiling allows one more adoption at that growth.
+  No paper prints a page budget. Against main 0bc5a08c5 (#892): rendered at
   link revision 0000000000000000000000000000000000000000 into empty site directories by
   render_packing_methods, render_n11_optimality_review, render_n11_threshold_bound_review
   and render_n11_lower_bounds_explainer --prepare-math, the math passes in

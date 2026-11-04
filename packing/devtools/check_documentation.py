@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import re
 import sys
-from collections import Counter
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -100,18 +99,19 @@ def _frontmatter(path: Path) -> dict:
 
 
 def _slugs(text: str) -> set[str]:
-    """Approximate GitHub heading ids, including duplicate-heading suffixes."""
-    counts: Counter[str] = Counter()
+    """GitHub's heading ids, duplicate-heading suffixes included, made by kpress's port of
+    github-slugger, the slugger `render_case_pages._own_ids` and `adopt_houses._anchor`
+    use. GitHub keeps letters outside ASCII and combining marks (`doğa-özdens-…`) and drops
+    superscript and subscript digits (`k²` reads `k`), which no ASCII-only or `\\w` rule
+    gets right in both directions (review F1 of #897 and its confirming review)."""
+    from kpress.format._github_slugger import GithubSlugger  # noqa: PLC0415
+
+    slugger = GithubSlugger()
     slugs: set[str] = set(re.findall(r'id="([^"]+)"', text))
     for heading in re.findall(r"^#{1,6}\s+(.+)$", text, re.MULTILINE):
         plain = re.sub(r"<[^>]+>", "", heading)
         plain = re.sub(r"\[([^]]+)\]\([^)]+\)", r"\1", plain)
-        # GitHub keeps letters outside ASCII (`doğa-özdens-…`), as kpress's slugger does;
-        # `\w` is Unicode here, and is `[a-z0-9_]` on ASCII text (review F1 of #897).
-        base = re.sub(r"[^\w -]", "", plain.lower()).strip().replace(" ", "-")
-        suffix = counts[base]
-        counts[base] += 1
-        slugs.add(base if suffix == 0 else f"{base}-{suffix}")
+        slugs.add(slugger.slug(plain.strip()))
     return slugs
 
 
