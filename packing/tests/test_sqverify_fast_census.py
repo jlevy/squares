@@ -1693,3 +1693,21 @@ def test_a_report_over_several_certificates_names_each_by_its_directory() -> Non
     for named in (relative, f"packing/{relative}"):
         assert census.reports_candidate({"certificate": named}, relative, 26)
     assert not census.reports_candidate({"certificate": None}, relative, 26)
+
+
+def test_a_directory_report_without_a_run_of_counts_in_its_id_is_refused() -> None:
+    """`replay_identity` names each certificate of a directory report by replacing its
+    id's run of counts; an id with no such run (one count, or none) is refused rather
+    than given an entry that would collide with another certificate's (#903 review F7)."""
+    case = cases()["mixed_n26_L5555"]
+    relative = str(case.candidate.relative_to(census.PROJECT))
+    directory = "packing/" + relative.rsplit("mixed_n26_L5555/", 1)[0]
+    shared = {"certificate": directory, "scope": {"n_values": [19, 20, 26]}}
+    ident, scope, certificate = census.replay_identity(
+        {**shared, "id": "E-x-446-n19-n20-n26-report"}, case, relative
+    )
+    assert (ident, scope) == ("E-x-446-n26-5555-sqverify-fast-replay", "26")
+    assert certificate == f"packing/{relative}"
+    for ident in ("E-x-446-n26-report", "E-x-446-report"):
+        with pytest.raises(SystemExit, match="names no run of counts"):
+            census.replay_identity({**shared, "id": ident}, case, relative)

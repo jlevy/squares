@@ -219,6 +219,22 @@ Daniel, tokoharu and jlevy/squares; all three commits are authored by Hiroaki Ho
 `problems/square-lower-bounds/README.md` says parts of the work were produced with AI
 assistance under human direction, and each commit names Claude Opus 5.5 as co-author.
 
+## Compressed Files
+
+| Stored file | Origin | Git blob (decompressed) | SHA-256 (decompressed) |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n37_L64975/candidate.json.gz` | upstream | `e3380bdad15eeb330f35630f85daaedfd1cac4b0` | `f6e32978329c7eb838c969e59d289c1447493fdc573ad83c344fbebba1a00cb8` |
+| `release/certificates/mixed_n39_L66625/candidate.json.gz` | upstream | `44f8e8a0763bda6e05e3f06eacf0670072e94651` | `03eef5c3eee9255e54aaaf5247487b356d7667b6c40eec116862b60ed7819a85` |
+
+## Original Gzip Files
+
+| Stored file | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n37_L64975/check2/control-197_200.jsonl.gz` | upstream | `6226f29a1dcb38c89313ed559eb29b5c80bc2e93` | `2e20566cedeb81d3197f22affc206b2023090036e9d8e9f3b8f3b114be9ab5f8` |
+| `release/certificates/mixed_n37_L64975/check2/run.jsonl.gz` | upstream | `285c50b381e16002b11fbfdcaf5d2d897be26e96` | `691229b23da2d68d00503892e2cf19dd74d368eeacff1d68538c92f7a41e73ac` |
+| `release/certificates/mixed_n39_L66625/check2/control-197_200.jsonl.gz` | upstream | `e6ba658a88602a2bc18103beec9042030b40e520` | `749d8e7d5f4396a9e8a0d1ec95413751efe7ad46ba6852df6a53b3657be102d2` |
+| `release/certificates/mixed_n39_L66625/check2/run.jsonl.gz` | upstream | `aede52f9dae1c2cc92a63f7591fedf968ed69209` | `cbe71e97825ba0ef137ca8f14f262b012668255cb0e831950b1844a2de108edf` |
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
