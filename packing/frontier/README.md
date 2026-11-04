@@ -680,7 +680,7 @@ Ranked by gap—the best-known packing minus the verified lower bound, which is 
 | 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Overbeck |
 | 31 | 0.0225 | grid | $6^2 - 5$, carried to $\frac{2391}{400}$ by Hosono after Tokoharu and Levy (T-232) |
 | 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
-| 94 | 0.0500 | grid | $10^2 - 6$, carried to $\frac{199}{20}$ by Hosono after Tokoharu |
+| 94 | 0.0350 | grid | $10^2 - 6$, carried to $\frac{1993}{200}$ by Özden after Hosono, Tokoharu and Levy (T-262) |
 | 75 | 0.0600 | grid | $9^2 - 6$, carried to $\frac{447}{50}$ by Hosono after Tokoharu |
 | 19 | 0.0606 | Wainwright | $5^2 - 6$, carried to $\frac{193}{40}$ by Hosono after Tokoharu |
 
@@ -713,8 +713,10 @@ $n = 96$, fourth at $0.0300$, and $n = 76$ and $n = 95$, fifth and sixth at $0.0
 left it on 2026-11-02, when the mutated-cover controls of `zm_mixed.py` completed the
 confirmation of Benjamin Greff’s mixed covers (T-184, T-191), the $s(95)$ cover deciding
 $n = 96$ as well, and $n = 94$, 75 and 19 took their places.
-With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved exactly for every
-$m \ge 3$**.
+$n = 94$ narrowed from $0.0500$ to $0.0350$ on 2026-11-04, when the whole-net control of
+Doğa Özden’s dilation of Hosono’s certificate passed and its verified floor rose to
+$1993/200$ (T-262). With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved
+exactly for every $m \ge 3$**.
 
 **Corrected 2 October 2026.** The gaps this section quoted against Nagamochi’s closed
 form for the last unproved members of $s(m^2 - 3) = m$, $0.0557$ at $n = 97$ (above),

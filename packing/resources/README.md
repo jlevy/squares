@@ -1800,6 +1800,9 @@ says Claude (Anthropic) agents in the author’s research lab found the dilation
 the certificate, ran the checks and drafted the write-up under his direction.
 The issue asking for its registration, #890 of 3 November 2026, was posted on his behalf
 by his AI agent’s account, `kenaznia-doga`; T-262 records it.
+This repository’s census replayed it at all 600 directions on 3 November and its
+whole-net control passed on 4 November, so T-262 is `V3/C3`, reproduced with the
+producer’s code, and n = 94’s verified lower bound is $1993/200$.
 
 **[wand125 continuous n28 2026-10-15]**: Hiroaki Hosono’s (wand125’s) continuous-pose
 certificate for $s(28) > 1149/200 = 5.745$, pinned at
