@@ -60,7 +60,8 @@ PRINTED_DIGESTS = {
         "n204-witness.json": "613c0a668026a393f7eaebf796acdc2c8aafe6e7c9c66bc9ee68397ce13caf45",
     },
 }
-#: The 12-place sides the issues print as rounded up.
+#: The 12-place prints the issues give, each called the side rounded up; #893's is the
+#: author's truncation, which bounds nothing, and the record states its exact side.
 PRINTS = {299: "17.801238533979", 204: "14.807620995586"}
 #: Kaelan Yim's #895 states this side; no certificate is retained (think-qclj).
 YIM_260 = Fraction(
@@ -104,9 +105,9 @@ def test_each_side_is_its_witness_and_its_reader_rebuilds_it(name: str) -> None:
 
 
 def test_893s_print_is_below_its_side_and_204s_rounds_up() -> None:
-    """#893 prints 17.801238533979 as its side rounded up at 12 places; the side is 6.21e-14
-    above that print, so the declaration offers the issue's exact fraction instead. #894's
-    print is its side rounded up."""
+    """#893 calls its print the side rounded up at 12 places, but the side is 6.21e-14 above
+    it: the print is the truncation, the bound rounds up to 17.801238533980, and the
+    declaration offers the issue's exact fraction. #894's print is its side rounded up."""
     for name, (_key, n, _house, side) in PACKETS.items():
         rounded = Fraction(math.ceil(side * 10**12), 10**12)
         printed = Fraction(Decimal(PRINTS[n]))

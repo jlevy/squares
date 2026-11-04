@@ -38148,13 +38148,14 @@ results:
     registered: '2026-11-04'
     landed: '2026-11-04'
     headline: >-
-      Özden's lower packing of 299 squares from Daniel's T-258 packing, 1.54e-8 below it
+      Özden's further arrangement at 299 of Daniel's T-258 packing, one to one, 1.54e-8 below it
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at the exact
       side it states: s(299) <= 17.801238533979062111469738103353397755. Complete native feasibility
       outcomes are retained separately; the selected standing case is unchanged pending independent
       review and record review. It is 1.54e-8 below T-258, Evan Daniel's certificate and the case's
-      house best packing.
+      house best packing, and measured here it is a further arrangement of T-258's packing, one to
+      one with it under the identity, with 12 squares beyond a tenth.
 
       The issue says this repository's packing-witness verify, run unmodified on the witness, reports
       VERIFIED (exact-algebraic, 44551 pairs), and that verifier/sqcheck.py, an exact checker the
@@ -38180,8 +38181,9 @@ results:
       code that did not produce the packing, and the issue and repository were prepared and posted
       by Özden's AI agent, which uses the account kenaznia-doga; Özden directed the work. The Kaggle
       dataset kmmmvs/squares-in-squares-best-packings the issue cites holds 299 at 17.801238553,
-      above this, and the Kaggle per-puzzle leaderboard's side-only entries near 17.798 and 17.794
-      state no packing and are no report.
+      above this, and the Kaggle per-puzzle leaderboard's side-only entries near 17.798 and 17.794,
+      though lower, state no packing and are no report, so this is the smallest side of any packing
+      reported at 299.
     scope:
       n_values:
       - 299
@@ -38273,13 +38275,14 @@ results:
     registered: '2026-11-04'
     landed: '2026-11-04'
     headline: >-
-      Özden's lower packing of 204 squares from Daniel's T-257 packing, 6.48e-6 below it
+      Özden's further arrangement at 204 of Daniel's T-257 packing, one to one, 6.48e-6 below it
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at the exact
       side it states: s(204) <= 14.807620995585208018039159918. Complete native feasibility outcomes
       are retained separately; the selected standing case is unchanged pending independent review
       and record review. It is 6.48e-6 below T-257, Evan Daniel's certificate and the case's house
-      best packing.
+      best packing, and measured here it is a further arrangement of T-257's packing, one to one
+      with it under the identity, with 6 squares beyond a tenth.
 
       The issue says this repository's packing-witness verify, run unmodified on the witness, reports VERIFIED (exact-algebraic, 20706 pairs), and that verifier/sqcheck.py, an exact
       checker the author's lab wrote separately from this repository's code, reports VALID (exact
@@ -38298,7 +38301,8 @@ results:
       which uses the account kenaznia-doga; Özden directed the work. The Kaggle dataset
       kmmmvs/squares-in-squares-best-packings the issue cites holds 204 at 14.807627474, above this,
       and the Kaggle per-puzzle leaderboard's side-only 14.803489183116 (Cats and boxes, 27 October
-      2026), which #845 quoted, states no packing and is no report.
+      2026), which #845 quoted, though lower, states no packing and is no report, so this is the
+      smallest side of any packing reported at 204.
     scope:
       n_values:
       - 204

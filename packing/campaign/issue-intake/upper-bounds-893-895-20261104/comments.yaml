@@ -22,18 +22,20 @@ comments:
     author: kenaznia-doga
     notes:
       - >-
-        Your 299 is below everything reported before it, so it is recorded, a new packing
-        found from Evan Daniel's. One correction to the issue's print: the exact side,
-        17.801238533979062…, rounds up at 12 places to 17.801238533980, not
-        17.801238533979, which is 6.21e-14 below it; the record holds the exact fraction
-        the issue states, so nothing else changes.
+        Your 299 is below everything reported before it, so it is recorded. Measured here,
+        it is a further arrangement of Evan Daniel's packing, one to one with it under the
+        identity. One correction to the issue's print: the exact side rounds up at 12 places
+        to 17.801238533980. The issue's 17.801238533979 is its truncation, 6.21e-14 below
+        it, so it is not a bound. The record holds the exact fraction the issue states, so
+        nothing else changes.
   - issue: 894
     author: kenaznia-doga
     notes:
       - >-
-        Your 204 is below everything reported before it, so it is recorded, a new packing
-        started from Evan Daniel's #845 packing. The Kaggle leaderboard side the issue
-        quotes states no packing and is no report.
+        Your 204 is below everything reported before it, so it is recorded. Measured here,
+        it is a further arrangement of Evan Daniel's #845 packing, one to one with it under
+        the identity. The Kaggle leaderboard side the issue quotes states no packing and is
+        no report.
   - issue: 895
     author: vitamoon
     notes:
