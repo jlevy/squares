@@ -6,6 +6,15 @@ and a v2 control receipt whose 99/100 mutant refuses at every direction. Exact p
 clipping recomputes every saved control capture. It neither runs the native verifier nor
 proves coverage between points; PASS is not a universal coverage or registry verdict.
 
+An axis refusal reports no capture, only the sweep's least certified lower bound. It is
+judged against the enclosure the native vertex sweep held at its least vertex, which
+`axis_enclosure` recomputes by walking that column as the crate's `axis.rs` does, in
+`interval.rs`'s outward-rounded binary64 steps: the bound must be the recomputed lower
+end to the bit, and the exact capture must lie in the enclosure (F-1 of the 14 October
+review, as the census control judges it since #892). That walk is a transcription of the
+crate's arithmetic, not an independent method; the capture it is compared with is this
+instrument's own.
+
 Run with --help for the required case parameters. Rational
 strings have their literal values; numeric receipt coordinates denote binary64 values,
 as in the maintained control writer. No commit or result number enters the verdict.
@@ -17,6 +26,7 @@ import argparse
 import gzip
 import hashlib
 import json
+import math
 import sys
 import time
 from collections.abc import Sequence
@@ -70,6 +80,9 @@ class Measure:
     mass: Fraction
     source_count: int
     rectangles: dict[Rectangle, Fraction]
+    #: The expanded rectangles in the order the crate's admission first sees them
+    #: (`certificate.rs`, `d4_images`), which is the order its axis sweep sums in.
+    axis_order: tuple[Rectangle, ...] = ()
 
     @property
     def last_tangent(self) -> Fraction:
@@ -99,6 +112,7 @@ def candidate_measure(data: dict[str, Any], n: int, side: Fraction) -> Measure:
     require(core * (1 + step / (1 - step * step / 4)) < 1, "tangent shrink fails")
     require(side * side >= 2 * core * core and side >= 2 * rho(lower), "empty centre domain")
     rectangles: dict[Rectangle, Fraction] = {}
+    order: dict[Rectangle, None] = {}
     mass = Fraction(0)
     for row in data["rectangles"]:
         require(set(row) == {"rectangle", "mass"}, "unexpected rectangle fields")
@@ -119,13 +133,36 @@ def candidate_measure(data: dict[str, Any], n: int, side: Fraction) -> Measure:
                     bottom, top = (side - by, side - ay) if flip_y else (ay, by)
                     image = (left, right, bottom, top)
                     rectangles[image] = rectangles.get(image, Fraction(0)) + density
+        order.update(dict.fromkeys(crate_images(side, x0, y0, x1, y1)))
     require(0 < mass < n and mass == rational(data["total_mass"]), "total mass is invalid")
     require(all(d <= 2**96 for d in rectangles.values()), "expanded density guard exceeded")
     integrated = sum(
         ((b - a) * (d - c) * q for (a, b, c, d), q in rectangles.items()), Fraction(0)
     )
     require(integrated == mass, "D4 expansion changed the mass")
-    return Measure(n, side, core, step, count, mass, len(data["rectangles"]), rectangles)
+    require(set(order) == set(rectangles), "D4 expansion orders differ")
+    return Measure(
+        n, side, core, step, count, mass, len(data["rectangles"]), rectangles, tuple(order)
+    )
+
+
+def crate_images(
+    side: Fraction, x0: Fraction, y0: Fraction, x1: Fraction, y1: Fraction
+) -> list[Rectangle]:
+    """The eight images of a row in the crate's `d4_images` order, written as this
+    instrument writes a rectangle: the identity, the reflections in x = L/2 and y = L/2,
+    the half turn, then the same four after the diagonal swap."""
+    rx0, rx1, ry0, ry1 = side - x1, side - x0, side - y1, side - y0
+    return [
+        (x0, x1, y0, y1),
+        (rx0, rx1, y0, y1),
+        (x0, x1, ry0, ry1),
+        (rx0, rx1, ry0, ry1),
+        (y0, y1, x0, x1),
+        (ry0, ry1, x0, x1),
+        (y0, y1, rx0, rx1),
+        (ry0, ry1, rx0, rx1),
+    ]
 
 
 def rho(tangent: Fraction) -> Fraction:
@@ -206,6 +243,117 @@ def capture_at(
             polygon = clip_polygon(polygon, a, b, limit)
         total += density * polygon_area(polygon)
     return total
+
+
+type Interval = tuple[float, float]
+
+#: `interval.rs`'s step constants: no gap between adjacent binary64 values exceeds
+#: `2^-52 |x|`, and the least positive subnormal is the gap at and below the normal range.
+GAP, TINY = 2.0**-52, 5e-324
+
+
+def step_down(x: float) -> float:
+    return x - (abs(x) * GAP + TINY)
+
+
+def step_up(x: float) -> float:
+    return x + (abs(x) * GAP + TINY)
+
+
+def select_min(a: float, b: float) -> float:
+    """`interval.rs`'s `fmin`: `a` when `a < b`, else `b`, carrying a NaN in `a`."""
+    return min(b, a) + a * 0.0
+
+
+def select_max(a: float, b: float) -> float:
+    """`interval.rs`'s `fmax`: `a` when `a > b`, else `b`, carrying a NaN in `a`."""
+    return max(b, a) + a * 0.0
+
+
+def iv_plus(a: Interval, b: Interval) -> Interval:
+    return step_down(a[0] + b[0]), step_up(a[1] + b[1])
+
+
+def iv_minus(a: Interval, b: Interval) -> Interval:
+    return step_down(a[0] - b[1]), step_up(a[1] - b[0])
+
+
+def iv_times(a: Interval, b: Interval) -> Interval:
+    p, q, r, s = a[0] * b[0], a[0] * b[1], a[1] * b[0], a[1] * b[1]
+    low = select_min(select_min(p, q), select_min(r, s))
+    return step_down(low), step_up(select_max(select_max(p, q), select_max(r, s)))
+
+
+def iv_scale(a: Interval, k: Interval) -> Interval:
+    """`Iv::mul_nonneg`: the product with a nonnegative `k`, sign-selected on `a`."""
+    low = a[0] * k[0] if a[0] >= 0.0 else a[0] * k[1]
+    high = a[1] * k[1] if a[1] >= 0.0 else a[1] * k[0]
+    return step_down(low), step_up(high)
+
+
+def tight(q: Fraction) -> Interval:
+    """The nearest binary64 values at most and at least `q` (`exact.rs`'s `enclose`)."""
+    x = float(q)
+    if Fraction(x) == q:
+        return x, x
+    if Fraction(x) < q:
+        return x, math.nextafter(x, math.inf)
+    return math.nextafter(x, -math.inf), x
+
+
+def axis_enclosure(measure: Measure, factor: Fraction, pose: Sequence[Any]) -> Interval | None:
+    """The enclosure the crate's axis sweep holds at the vertex `pose` of the measure
+    with every density scaled by `factor`, on `[L/2, L - 1/2]^2`: its column walked as
+    `axis.rs`'s `verify_axis` walks it, in `interval.rs`'s steps. Each step rounds to
+    nearest and then moves outward by at least one gap, so the result encloses the exact
+    capture whatever path it takes; summing in the crate's order with the crate's
+    operations reproduces the crate's interval. None off the event grid, without the
+    crate's order, or where the enclosure is not finite."""
+    x, y = map(rational, pose)
+    h, lower = measure.core / 2, measure.side / 2
+    upper = measure.side - rho(Fraction(0))
+    rects = [(key, factor * measure.rectangles[key]) for key in measure.axis_order]
+    if not rects:
+        return None
+    xs, ys = {lower, upper}, {lower, upper}
+    for (x0, x1, y0, y1), _density in rects:
+        xs.update(p for e in (x0, x1) for p in (e - h, e + h) if lower <= p <= upper)
+        ys.update(p for e in (y0, y1) for p in (e - h, e + h) if lower <= p <= upper)
+    events = sorted(ys)
+    where = {value: position for position, value in enumerate(events)}
+    if x not in xs or y not in where:
+        return None
+    grid = [tight(value) for value in events]
+    half, centre = tight(h), tight(x)
+
+    def overlap(c: Interval, a: Interval, b: Interval) -> Interval:
+        right = iv_plus(c, half)
+        right = (select_min(right[0], b[0]), select_min(right[1], b[1]))
+        left = iv_minus(c, half)
+        left = (select_max(left[0], a[0]), select_max(left[1], a[1]))
+        width = iv_minus(right, left)
+        return select_max(width[0], 0.0), select_max(width[1], 0.0)
+
+    zero: Interval = (0.0, 0.0)
+    delta = [zero] * len(events)
+    value, slope = zero, zero
+    for (x0, x1, y0, y1), density in rects:
+        across = overlap(centre, tight(x0), tight(x1))
+        if across[1] <= 0.0:
+            continue
+        weight = iv_scale(across, tight(density))
+        value = iv_plus(value, iv_scale(weight, overlap(grid[0], tight(y0), tight(y1))))
+        for point, sign in ((y0 - h, 1), (y1 - h, -1), (y0 + h, -1), (y1 + h, 1)):
+            signed = weight if sign > 0 else (-weight[1], -weight[0])
+            if point < lower:
+                slope = iv_plus(slope, signed)
+            elif point <= upper:
+                delta[where[point]] = iv_plus(delta[where[point]], signed)
+    slope = iv_plus(slope, delta[0])
+    for j in range(where[y]):
+        value = iv_plus(value, iv_times(slope, iv_minus(grid[j + 1], grid[j])))
+        slope = iv_plus(slope, delta[j + 1])
+    return value if math.isfinite(value[0]) and math.isfinite(value[1]) else None
 
 
 def require_complete_indices(rows: list[dict[str, Any]], count: int) -> None:
@@ -325,11 +473,21 @@ def check_refusal(
             f"invalid axis refusal: {index}",
         )
         bound = rational(row["crate_lower_bound"])
-        # The retained axis route certifies a lower bound at its argmin. Its receipt
-        # contract permits at most 1e-9 outward-rounding slack against exact capture.
+        # The axis sweep certifies the lower end of the enclosure it held at its least
+        # vertex. The bound must be the recomputed lower end, to the bit, and the exact
+        # capture must lie in that enclosure: no allowance beyond the sweep's own width.
+        enclosure = axis_enclosure(measure, factor, row["pose"])
+        require(enclosure is not None, f"axis refusal vertex has no sweep enclosure: {index}")
+        low, high = map(Fraction, enclosure or (0.0, 0.0))
+        require(low == bound, "axis refusal bound is not the sweep's recomputed lower end")
         require(
-            bound <= factor * value <= bound + Fraction(1, 10**9),
-            "axis refusal bound disagrees with exact capture",
+            low <= factor * value <= high,
+            "axis refusal capture lies outside the sweep's enclosure",
+        )
+        stored = row.get("sweep_enclosure")
+        require(
+            stored is None or [rational(end) for end in stored] == [low, high],
+            "receipt's sweep enclosure differs from the recomputed one",
         )
     elif row["verdict"] == "counterexample-candidate":
         require(row["crate_exact_below_threshold"] is True, f"missing exact refusal: {index}")

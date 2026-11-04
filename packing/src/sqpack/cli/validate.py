@@ -4436,6 +4436,8 @@ _MEASURE_VERIFIER_SRC = (
     *_CORE,
     "packing/sqverify_fast/*",
     "packing/devtools/check_sqverify_fast.py",
+    # The axis enclosure tie imports the census control's column walk (#892).
+    "packing/devtools/sqverify_fast_axis.py",
     "packing/src/sqpack/rectangle_density.py",
     "packing/resources/web/wand125-rectangle-certificates-2026-09-27/wand125-rectangles/certificates/rect_n32_L595/*",
     "packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n41_L676/*",

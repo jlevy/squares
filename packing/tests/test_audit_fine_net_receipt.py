@@ -5,6 +5,7 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import math
 import subprocess
 import sys
 from fractions import Fraction
@@ -14,9 +15,17 @@ from typing import Any
 import pytest
 
 from devtools import audit_fine_net_receipt as audit
+from devtools import sqverify_fast_census as census
+from devtools.check_sqverify_fast import COINCIDENT_AXIS
+from devtools.sqverify_fast_axis import column_enclosure, images
+
+#: The axis sweep's enclosure at (2, 2) of `uniform_measure(201/200)` scaled by 99/100,
+#: by this instrument's walk and by the census's (`devtools.sqverify_fast_axis`) alike.
+UNIFORM_AXIS = (0.994949999999997, 0.9949500000000029)
 
 
 def uniform_measure(density: Fraction, *, core: Fraction = Fraction(1)) -> audit.Measure:
+    whole = (Fraction(0), Fraction(4), Fraction(0), Fraction(4))
     return audit.Measure(
         32,
         Fraction(4),
@@ -25,7 +34,8 @@ def uniform_measure(density: Fraction, *, core: Fraction = Fraction(1)) -> audit
         201,
         16 * density,
         1,
-        {(Fraction(0), Fraction(4), Fraction(0), Fraction(4)): density},
+        {whole: density},
+        (whole,),
     )
 
 
@@ -159,7 +169,7 @@ def refusal() -> dict[str, Any]:
         "capture": "19899/20000",
         "verdict": "refused",
         "method": "axis-vertex-sweep",
-        "crate_lower_bound": "19899/20000",
+        "crate_lower_bound": UNIFORM_AXIS[0],
         "coverage_refusal": True,
         "in_domain": True,
         "capture_below_1": True,
@@ -187,6 +197,116 @@ def test_refusal_flags_do_not_replace_mathematical_checks(defect: str) -> None:
         audit.check_refusal(
             uniform_measure(Fraction(201, 200)), row, Fraction(99, 100), float("inf")
         )
+
+
+def test_an_axis_refusal_is_judged_by_the_sweeps_enclosure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """F-1 of the 14 October review, as the census control judges it since #892: the
+    bound must be the lower end of the enclosure recomputed at the vertex, to the bit, and
+    the exact capture must lie in it, with no constant allowance. A bound one ulp off, a
+    capture outside an enclosure, a stored enclosure that differs, a vertex off the event
+    grid, and a measure without the crate's order are refused."""
+    measure, factor = uniform_measure(Fraction(201, 200)), Fraction(99, 100)
+    assert audit.axis_enclosure(measure, factor, [2, 2]) == UNIFORM_AXIS
+    row = refusal()
+    assert audit.check_refusal(measure, row, factor, math.inf) == Fraction(201, 200)
+    stored = {**row, "sweep_enclosure": list(UNIFORM_AXIS)}
+    assert audit.check_refusal(measure, stored, factor, math.inf) == Fraction(201, 200)
+    low = UNIFORM_AXIS[0]
+    off_grid = "200000000000000000000000000001/100000000000000000000000000000"
+    refused = [
+        ({**row, "crate_lower_bound": math.nextafter(low, math.inf)}, "lower end"),
+        ({**row, "crate_lower_bound": math.nextafter(low, -math.inf)}, "lower end"),
+        (
+            {**row, "sweep_enclosure": [low, math.nextafter(UNIFORM_AXIS[1], math.inf)]},
+            "differs from the recomputed",
+        ),
+        ({**row, "pose": [2, off_grid]}, "no sweep enclosure"),
+        ({**row, "pose": [off_grid, 2]}, "no sweep enclosure"),
+    ]
+    for defect, reason in refused:
+        with pytest.raises(audit.AuditError, match=reason):
+            audit.check_refusal(measure, defect, factor, math.inf)
+    unordered = audit.Measure(
+        *(getattr(measure, f) for f in audit.Measure.__dataclass_fields__ if f != "axis_order")
+    )
+    with pytest.raises(audit.AuditError, match="no sweep enclosure"):
+        audit.check_refusal(unordered, row, factor, math.inf)
+    monkeypatch.setattr(
+        audit, "axis_enclosure", lambda *_: (low, math.nextafter(low, math.inf))
+    )
+    with pytest.raises(audit.AuditError, match="outside the sweep's enclosure"):
+        audit.check_refusal(measure, row, factor, math.inf)
+
+
+def crate_key(rectangle: tuple[Fraction, ...]) -> tuple[Fraction, ...]:
+    """This instrument's `(x0, x1, y0, y1)` written as the crate's `(x1, y1, x2, y2)`."""
+    x0, x1, y0, y1 = rectangle
+    return x0, y0, x1, y1
+
+
+def test_the_axis_walk_is_the_census_walk() -> None:
+    """This instrument's walk, written apart from `devtools.sqverify_fast_axis` but from
+    the same Rust, sums in the crate's order and gives the same enclosure, on a uniform
+    measure, on `COINCIDENT_AXIS` (whose images coincide) and at the 99/100 mutant's axis
+    refusal of mixed_n37_L64975, where the census's walk is the crate's to the bit."""
+    uniform = {
+        "L": "4",
+        "B": "1",
+        "rectangles": [{"rectangle": ["0", "0", "4", "4"], "mass": "402/25"}],
+    }
+    factor = Fraction(99, 100)
+    assert column_enclosure(uniform, factor, Fraction(2), Fraction(2), Fraction(7, 2)) == (
+        UNIFORM_AXIS
+    )
+    coincident = {**COINCIDENT_AXIS, "proof_net": {"step": "83/40000", "last": 200}}
+    name = "mixed_n37_L64975"
+    case = {c.certificate: c for c in census.mixed_cases()}[name]
+    control = json.loads(
+        (census.CENSUS_ROOT / "census-mixed" / case.packet / f"{name}.control.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    sweep = next(run["sweep"] for run in control["runs"] if "sweep" in run)
+    item = next(row for row in sweep["refused"] if row["r"] == 0)
+    real = audit.read_json(gzip.decompress(case.candidate.read_bytes()))
+    for raw, pose in ((coincident, ["27/20", "2"]), (real, item["pose"])):
+        measure = audit.candidate_measure(raw, int(raw["n"]), Fraction(raw["L"]))
+        order = [(crate_key(key), measure.rectangles[key]) for key in measure.axis_order]
+        assert order == images(raw, Fraction(1))
+        x, y = (Fraction(value) for value in pose)
+        upper = Fraction(raw["L"]) - Fraction(1, 2)
+        assert audit.axis_enclosure(measure, factor, pose) == column_enclosure(
+            raw, factor, x, y, upper
+        )
+    measure = audit.candidate_measure(real, case.n, Fraction(case.side))
+    assert audit.check_refusal(measure, item, factor, math.inf) >= 1
+
+
+def test_the_kept_n94_axis_refusal_holds_under_the_enclosure_rule() -> None:
+    """mixed_n94_L9965's control failed closed on the constant allowance alone (#890). Its
+    axis refusal, with `captures_agree` as the enclosure rule judges it, passes here: the
+    bound is the recomputed lower end, and the exact capture, 1.12e-9 above it, lies in
+    the enclosure. Its candidate carries a `derived_from` note this instrument's narrow
+    format does not admit; the measure is read without it."""
+    name = "mixed_n94_L9965"
+    case = {c.certificate: c for c in census.mixed_cases()}[name]
+    folder = census.CENSUS_ROOT / "census-mixed" / case.packet
+    control = json.loads((folder / f"{name}.control-failed-v2.json").read_text("utf-8"))
+    sweep = next(run["sweep"] for run in control["runs"] if "sweep" in run)
+    item = {**next(row for row in sweep["refused"] if row["r"] == 0), "captures_agree": True}
+    raw = audit.read_json(gzip.decompress(case.candidate.read_bytes()))
+    raw.pop("derived_from")
+    measure = audit.candidate_measure(raw, case.n, Fraction(case.side))
+    factor = Fraction(99, 100)
+    assert factor * audit.check_refusal(measure, item, factor, math.inf) == Fraction(
+        item["capture"]
+    )
+    low, high = audit.axis_enclosure(measure, factor, item["pose"]) or (0.0, 0.0)
+    assert low == item["crate_lower_bound"]
+    assert Fraction(item["capture"]) - Fraction(low) > Fraction(1, 10**9)
+    assert (low, high) == (0.9930860126842824, 0.9930860149308234)
 
 
 def test_numeric_pose_preserves_binary64_not_decimal_semantics() -> None:

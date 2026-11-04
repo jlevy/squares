@@ -4099,7 +4099,7 @@ Builds six mutants of a de Winter certificate of issue 668 at the scale of its m
 
 **devtools.audit_fine_net_receipt** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Checks a rectangle-only declared-net candidate's exact mass, geometry and net premises, binds its saved native census and complete direction log, and recomputes every saved control-witness capture using exact polygon clipping. It decides premises and particular points, never universal coverage between them.
+Checks a rectangle-only declared-net candidate's exact mass, geometry and net premises, binds its saved native census and complete direction log, and recomputes every saved control-witness capture using exact polygon clipping. An axis refusal is judged against the enclosure the native vertex sweep held at its least vertex, which the audit recomputes by transcribing the crate's column walk: the reported bound must be its lower end to the bit and the exact capture must lie in it (F-1 of the 14 October review, #892), where it once allowed a constant 1e-9. It decides premises and particular points, never universal coverage between them.
 
 - Source: [`packing/devtools/audit_fine_net_receipt.py`](../../packing/devtools/audit_fine_net_receipt.py), [`packing/tests/test_audit_fine_net_receipt.py`](../../packing/tests/test_audit_fine_net_receipt.py)
 - Versions run: this repository's commits, which Git holds
