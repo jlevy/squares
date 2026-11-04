@@ -1059,14 +1059,15 @@ def test_an_axis_capture_outside_the_sweeps_enclosure_does_not_count(
 def test_the_axis_rule_at_its_edges() -> None:
     """`axis_captures_agree` on its own: the enclosure is closed at both ends; the bound
     must be its lower end to the bit, so one ulp above or below fails; and a bound that is
-    None or NaN, a capture that is None, or no enclosure fails closed."""
+    None, NaN or no number at all, a capture that is None, or no enclosure fails closed,
+    returning False rather than raising."""
     low, high = 0.25, 0.75
     for capture in (Fraction(1, 4), Fraction(1, 2), Fraction(3, 4)):
         assert census.axis_captures_agree(low, capture, (low, high)), capture
     assert census.axis_captures_agree(repr(low), Fraction(1, 2), (low, high))
     for bound in (math.nextafter(low, math.inf), math.nextafter(low, -math.inf)):
         assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
-    for bound in (None, math.nan, "nan"):
+    for bound in (None, math.nan, "nan", "", "not a bound"):
         assert not census.axis_captures_agree(bound, Fraction(1, 2), (low, high)), bound
     assert not census.axis_captures_agree(low, None, (low, high))
     assert not census.axis_captures_agree(low, Fraction(1, 2), None)
@@ -1094,8 +1095,9 @@ def test_each_retained_axis_refusal_is_the_crates_enclosure(
     the crate's reported bound to the bit and holds the receipt's exact capture, so the
     rule counts it, including the receipts kept after the constant failed them closed
     (n26's of 23 October and n94's of 3 November; n39's joins when its packet does):
-    twelve measures from six packets on 4 November, beside the instrumented crate's
-    upper ends in `test_sqverify_fast_axis`."""
+    twelve measures from six packets on 4 November, n94's in two receipts, the kept one
+    and the one this rule passed, beside the instrumented crate's upper ends in
+    `test_sqverify_fast_axis`."""
     case = cases()[path.name.split(".control", 1)[0]]
     raw = read_raw(case.candidate)
     x, y = (Fraction(value) for value in item["pose"])

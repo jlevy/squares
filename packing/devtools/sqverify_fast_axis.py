@@ -28,16 +28,23 @@ it is compared with is (`check_sqverify_fast.mixed_exact`). What the pair establ
   the walk sums, and the crate's argmin, since `l` is the lower end at that vertex. A
   walk that strays from the crate's inputs or lower chain fails that equality.
 - It does not witness the upper chain. `u'` is reached through the upper halves of
-  `times` and of the `plus` that accumulates the value, and through
-  `up(weight.hi * oy.hi)` in the initial terms, which no lower end depends on; a walk
-  that differed only there would give the same `l'` and another `u'`. That half is tied
-  to the crate by transcription instead: read line by line against `interval.rs` and
-  `axis.rs`, and checked against a build of the reviewed source `d97758bb` instrumented
-  to report `value.hi` at the argmin, which gave `u' = u` to the bit at s(37), s(39)
-  and s(94), originals and 99/100 mutants (review A of #892, and again in its lane;
-  `tests/test_sqverify_fast_axis.py` pins those values). A crate that reported `u`
-  itself would make that tie live, but any change to `src/` is a new `source_sha256`
-  and needs a re-review (option 1 of the 14 October review), so it is pinned as data.
+  `times`, of the `plus` that accumulates the value and of the `plus` that accumulates
+  the slope and the per-event steps `delta` (across a positive width the slope's upper
+  end enters only the upper end of `times`), and through `up(weight.hi * oy.hi)` in the
+  initial terms, none
+  of which any lower end depends on; a walk that differed only there would give the
+  same `l'` and another `u'`. That half is tied to the crate by transcription instead:
+  read line by line against `interval.rs` and `axis.rs`, and checked against a build of
+  the reviewed source `d97758bb` instrumented to report `value.hi` at the argmin, which
+  gave `u' = u` to the bit at s(37), s(39) and s(94), originals and 99/100 mutants
+  (review A of #892, and again in its lane; s(37) and s(94) again on 4 November in
+  lane L37). `tests/test_sqverify_fast_axis.py` pins the instrumented upper ends at
+  s(37) and s(94), originals and mutants, and on `COINCIDENT_AXIS`, and checks the walk
+  against each; s(39)'s candidate is not yet retained in the tree, so no test walks it
+  (the census test of its refusal substitutes the enclosure). A crate that reported
+  `u` itself would make that tie live, but any change to `src/` is a new
+  `source_sha256` and needs a re-review (option 1 of the 14 October review), so it is
+  pinned as data.
 
 The census's rule is sound whether or not the upper chain is the crate's: whether a
 refusal counts rests on exact clauses (the capture below 1 at a vertex in the domain),

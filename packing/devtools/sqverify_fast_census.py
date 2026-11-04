@@ -715,11 +715,15 @@ def axis_captures_agree(
     failing means the capture evaluated apart from the crate is not the value the sweep
     enclosed (another pose, measure, net or factor) or the walk was not the crate's, and
     the refusal does not count. No enclosure, where the vertex is not on the event grid,
-    and a bound that is None or NaN, fail closed."""
+    and a bound that is None, NaN or not a number at all, fail closed."""
     if bound is None or capture is None or enclosure is None:
         return False
+    try:
+        reported = float(bound)
+    except ValueError:
+        return False
     low, high = enclosure
-    return low == float(bound) and Fraction(low) <= capture <= Fraction(high)
+    return low == reported and Fraction(low) <= capture <= Fraction(high)
 
 
 def refusal_record(
