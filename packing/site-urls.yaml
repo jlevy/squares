@@ -6235,7 +6235,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -7067,7 +7067,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/3.html
   canonical: cases/3.html
@@ -22874,6 +22874,66 @@ urls:
     - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.jsonl.gz
     - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.control-failed-v2.json
     - docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+- path: result/t-263.html
+  canonical: result/t-263.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-04'
+  lastmod: '2026-11-04'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 299
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s299 upper bound 2026-11-03]'
+      published: '2026-11-03'
+    builds_on: null
+    evidence:
+    - E-ozden-893-certificate-report
+    artifacts:
+    - packing/resources/web/ozden-s299-upper-bound-2026-11-03/README.md
+    - packing/resources/web/ozden-s299-upper-bound-2026-11-03/acquisition/claims.json
+    - packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/n-299-candidate.yaml
+    - packing/resources/web/ozden-s299-upper-bound-2026-11-03/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s299-upper-bound-2026-11-03/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s299-upper-bound-2026-11-03/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-264.html
+  canonical: result/t-264.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-04'
+  lastmod: '2026-11-04'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s204 upper bound 2026-11-03]'
+      published: '2026-11-03'
+    builds_on: null
+    evidence:
+    - E-ozden-894-certificate-report
+    artifacts:
+    - packing/resources/web/ozden-s204-upper-bound-2026-11-03/README.md
+    - packing/resources/web/ozden-s204-upper-bound-2026-11-03/acquisition/claims.json
+    - packing/resources/web/ozden-s204-upper-bound-2026-11-03/source/n-204-candidate.yaml
+    - packing/resources/web/ozden-s204-upper-bound-2026-11-03/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s204-upper-bound-2026-11-03/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s204-upper-bound-2026-11-03/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

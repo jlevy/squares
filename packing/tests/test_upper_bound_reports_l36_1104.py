@@ -46,13 +46,17 @@ PACKETS: dict[str, tuple[str, int, str, Fraction]] = {
 #: The SHA-256 digests the issues and the sources' READMEs print, by packet and upstream path.
 PRINTED_DIGESTS = {
     "ozden-s299-upper-bound-2026-11-03": {
-        "n-299-candidate.yaml": "2976d67f0b6da33434831a53d41c9af2a555e9d67daadb0e80ffc1a5cc6176e0",
+        "n-299-candidate.yaml": (
+            "2976d67f0b6da33434831a53d41c9af2a555e9d67daadb0e80ffc1a5cc6176e0"
+        ),
         "n299-refill2-t000173.json": (
             "4fac4ed1b75eb0890935691045a0b395af2a762f8130bcd83cd4b3b83f0bb797"
         ),
     },
     "ozden-s204-upper-bound-2026-11-03": {
-        "n-204-candidate.yaml": "e3c8c7ebf80819290efa023b0fa7f6cd046b9ee01979aac9cb8d76c1ec14eeb8",
+        "n-204-candidate.yaml": (
+            "e3c8c7ebf80819290efa023b0fa7f6cd046b9ee01979aac9cb8d76c1ec14eeb8"
+        ),
         "n204-witness.json": "613c0a668026a393f7eaebf796acdc2c8aafe6e7c9c66bc9ee68397ce13caf45",
     },
 }
@@ -137,7 +141,7 @@ def test_the_ledger_records_each_claim_and_895_by_its_stated_side() -> None:
             if claim["verdict"] == "recorded":
                 recorded.setdefault(count["n"], []).append(claim["report"])
     assert recorded == {204: ["#894"], 260: ["#895"], 299: ["#893"]}
-    assert YIM_260 < reports.house_side("[Daniel issue 845 2026-10-29]", 260)
+    assert reports.house_side("[Daniel issue 845 2026-10-29]", 260) > YIM_260
 
 
 @pytest.mark.parametrize("name", sorted(PACKETS))
