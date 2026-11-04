@@ -134,6 +134,49 @@ def test_a_provenance_note_is_admitted_and_not_read() -> None:
             audit.candidate_measure({**candidate(), **extra}, 4, Fraction(2))
 
 
+@pytest.mark.parametrize("field", sorted(audit.CANDIDATE_FIELDS))
+def test_a_candidate_missing_a_format_field_is_refused_on_admission(field: str) -> None:
+    """Admission names the format's fields as a lower bound as well as an upper one, so a
+    candidate without one is refused there with the format's reason, with or without a
+    provenance note, and never reaches a later read of the missing key."""
+    for base in (candidate(), {**candidate(), "derived_from": "a note"}):
+        data = {key: value for key, value in base.items() if key != field}
+        with pytest.raises(audit.AuditError, match="format-M audit fields"):
+            audit.candidate_measure(data, 4, Fraction(2))
+
+
+@pytest.mark.parametrize(
+    ("flags", "expected"),
+    [
+        ([], None),
+        (
+            ["--candidate", "source/certificate/n94_L9965.json.gz"],
+            "source/certificate/n94_L9965.json.gz",
+        ),
+    ],
+)
+def test_the_cli_hands_its_candidate_path_to_the_audit(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    flags: list[str],
+    expected: str | None,
+) -> None:
+    """`--candidate` reaches `audit` as `candidate_path`, and without it the default
+    release layout is asked for (None)."""
+    seen: dict[str, Any] = {}
+
+    def recorded(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        seen.update(args=args, **kwargs)
+        return {"status": "PASS"}
+
+    monkeypatch.setattr(audit, "audit", recorded)
+    argv = ["--root", ".", "--packet", "p", "--certificate", "c", "--n", "94"]
+    assert audit.main([*argv, "--side", "1993/200", *flags]) == 0
+    assert seen["candidate_path"] == expected
+    assert seen["args"][1:4] == ("p", "c", 94)
+    assert json.loads(capsys.readouterr().out)["status"] == "PASS"
+
+
 def direction_log() -> list[dict[str, Any]]:
     return [
         *[
