@@ -1293,6 +1293,10 @@ ALL_RESULTS = "all-results"
 #: The lowest S rung an entry's score is set in the significance ink for: S4 and S5
 #: (`added_entry`); S3 and below stay plain.
 INKED_SIGNIFICANCE = 4
+#: The class on a result's id where it opens a line of the log (`added_entry`,
+#: `house_entry`): the id holds together on its line (`results.css`), where a change's
+#: title and a source's rows wrap like prose (#896's review, finding 5).
+ROLLUP_ID = "site-rollup-id"
 
 
 class AddedDay(NamedTuple):
@@ -1437,7 +1441,8 @@ def added_entry(result: Result) -> str:
     )
     note = " · superseded" if superseded else ""
     return (
-        f'<li{mark}><a href="{_esc(result_url(result.id))}"{title}>{_esc(result.id)}</a> '
+        f'<li{mark}><a class="{ROLLUP_ID}" href="{_esc(result_url(result.id))}"{title}>'
+        f"{_esc(result.id)}</a> "
         f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}{note}</small></li>"
     )
 
@@ -1637,8 +1642,8 @@ def house_entry(move: HouseMove) -> str:
 
     counts = listed([case_link(n, str(n)) for n in move.counts])
     return (
-        f'<li><a href="{_esc(result_url(move.result))}">{_esc(move.result)}</a> '
-        f"is now the record packing at {counts}</li>"
+        f'<li><a class="{ROLLUP_ID}" href="{_esc(result_url(move.result))}">'
+        f"{_esc(move.result)}</a> is now the record packing at {counts}</li>"
     )
 
 
@@ -1707,6 +1712,76 @@ def changelog_rollup(overview: Overview, document: ChangelogDocument) -> str:
     Every day block keeps `changelog-date-<day>`, so the day bookmarks that
     `render_changelog.archived_news_targets` forwards to this page resolve.
     """
+    return _changelog_log(overview, document, preview=False)
+
+
+def changelog_since(overview: Overview, document: ChangelogDocument) -> str:
+    """The day the Changelog opens on: the oldest day it shows, over results and changes
+    alike, as its introduction names it."""
+    days = [recent.day for recent in recent_days(overview, days=None)]
+    days.extend(date.fromisoformat(entry["date"]) for entry in document["entries"])
+    return day_label(min(days) if days else arrival_reference(overview))
+
+
+# ---------- The home page's Changelog: the log's newest days ----------
+#
+# The owner, 3 November 2026: the home page should have "two sections, one the first few
+# most recent news items and then the button to all news, and then a new section which
+# the last few days of entries of the changelog and a button to the whole changelog",
+# so that it "consistently shows both and shows last few days of changelog below the last
+# few news items, each with its own section and button to go to the dedicated page".
+# The section is the head of the Changelog page's own log (`changelog_rollup`), drawn by
+# the same code: the same day blocks, the same lines, the newest day open.
+
+#: How many days the home page's Changelog shows: the newest three on which the record
+#: holds anything, however long ago they were. Days that hold entries, not a span of the
+#: calendar, so the section is never empty after a quiet week: on 3 November 2026 the
+#: newest three were 31, 26 and 25 October, and the last three days of the calendar held
+#: none of them. Three shows the newest day open with two more closed under it, enough to
+#: read the log's pace without the section becoming the log.
+HOME_CHANGELOG_DAYS = 3
+#: The most lines the home page's Changelog holds before it stops adding older days.
+#: The newest day is always shown whole, so the section is never empty and never cuts a
+#: day short; an older day joins only while the total stays within this. Measured on
+#: 3 November 2026 over the 34 three-day stretches of the record's 36 days: the newest
+#: three held 37 lines, a stretch held 6 to 68, and 60 trims only the three stretches
+#: that hold the 46-line 14 October, to two days each.
+HOME_CHANGELOG_LINES = 60
+#: A day block's address in the home page's Changelog. It is not the Changelog page's
+#: `changelog-date-<day>`, which the home page's News box already gives the first card
+#: of each of its days (`render_changelog.render_news`).
+HOME_CHANGELOG_DAY = "home-changelog-"
+#: What the home page's Changelog says with nothing logged, as the News box says "No
+#: news yet." (`render_changelog.NEWS_NONE`); while the record holds an entry, never.
+CHANGELOG_NONE = "<p>No changes yet.</p>"
+
+
+def changelog_window(days: Sequence[tuple[date, int]]) -> list[date]:
+    """The days the home page's Changelog shows, from every day the log holds with its
+    number of lines, newest first: the newest `HOME_CHANGELOG_DAYS`, the newest always
+    and each older one while the lines stay within `HOME_CHANGELOG_LINES`. No date is
+    read but the days' own, so a quiet stretch never empties it."""
+    kept: list[date] = []
+    total = 0
+    for day, lines in days[:HOME_CHANGELOG_DAYS]:
+        if kept and total + lines > HOME_CHANGELOG_LINES:
+            break
+        kept.append(day)
+        total += lines
+    return kept
+
+
+def changelog_preview(overview: Overview, document: ChangelogDocument) -> str:
+    """The home page's Changelog: the log's newest days (`changelog_window`), drawn as
+    the Changelog page draws them, the newest open. A day block is addressed
+    `home-changelog-<day>` and a change's line carries no anchor, since the News box
+    above it holds the Changelog's day and story anchors on the same page."""
+    return _changelog_log(overview, document, preview=True)
+
+
+def _changelog_log(overview: Overview, document: ChangelogDocument, *, preview: bool) -> str:
+    """The log's day blocks: every day for the Changelog page, or the home page's window
+    of them (`preview`)."""
     from devtools import render_changelog  # noqa: PLC0415
     from devtools.render_results import load_sources  # noqa: PLC0415
 
@@ -1716,8 +1791,16 @@ def changelog_rollup(overview: Overview, document: ChangelogDocument) -> str:
     for entry in render_changelog.ordered_entries(document):
         changes.setdefault(date.fromisoformat(entry["date"]), []).append(entry)
     recents = {recent.day: recent for recent in recent_days(overview, days=None)}
+    ordered = sorted({*recents, *changes}, reverse=True)
+    if preview:
+        ordered = changelog_window(
+            [(day, day_lines(recents.get(day), len(changes.get(day, [])))) for day in ordered]
+        )
+        if not ordered:
+            return CHANGELOG_NONE
+    prefix = HOME_CHANGELOG_DAY if preview else render_changelog.DAY_ANCHOR
     blocks = []
-    for index, day in enumerate(sorted({*recents, *changes}, reverse=True)):
+    for index, day in enumerate(ordered):
         recent = recents.get(day)
         today = changes.get(day, [])
         entries: list[str] = []
@@ -1727,7 +1810,7 @@ def changelog_rollup(overview: Overview, document: ChangelogDocument) -> str:
             entries.extend(beyond_entry(found, sources) for found in recent.rows)
         entries.extend(
             render_changelog.changelog_entry_line(
-                document, entry, in_news=entry["id"] in public
+                document, entry, in_news=entry["id"] in public, anchored=not preview
             )
             for entry in today
         )
@@ -1738,19 +1821,19 @@ def changelog_rollup(overview: Overview, document: ChangelogDocument) -> str:
         state = " open" if index < RECENT_OPEN else ""
         blocks.append(
             f'<details data-day="{day.isoformat()}" '
-            f'id="changelog-date-{day.isoformat()}"{state}>'
+            f'id="{prefix}{day.isoformat()}"{state}>'
             f"{tallied_summary(day_label(day), tally)}"
             f"<ul>{''.join(entries)}</ul>{shown}</details>"
         )
     return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
 
 
-def changelog_since(overview: Overview, document: ChangelogDocument) -> str:
-    """The day the Changelog opens on: the oldest day it shows, over results and changes
-    alike, as its introduction names it."""
-    days = [recent.day for recent in recent_days(overview, days=None)]
-    days.extend(date.fromisoformat(entry["date"]) for entry in document["entries"])
-    return day_label(min(days) if days else arrival_reference(overview))
+def day_lines(recent: RecentDay | None, changes: int) -> int:
+    """How many lines a day's block holds: a line a result, a record packing's move, a
+    source's rows and a change, as `_changelog_log` writes them."""
+    if recent is None:
+        return changes
+    return len(recent.results) + len(recent.houses) + len(recent.rows) + changes
 
 
 #: The rubric's three scored dimensions, in the site's order, significance first: the

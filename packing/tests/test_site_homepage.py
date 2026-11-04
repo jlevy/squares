@@ -5,13 +5,16 @@ the fixture writes no site output. One desktop and one mobile session exercise t
 keyboard, canonical Atlas tiles, shared triangle animation and a case link.
 
 Set `SQPACK_NEWS_SCREENSHOT_DIR` to a directory to keep review screenshots of the News
-surfaces these tests drive: the first visible card at each width (`news-card-WIDTH.png`)
-and the filter controls in each theme (`news-chooser-SCHEME-WIDTH.png`). Nothing reads
-them; a pull request that changes the News presentation attaches them for review.
+surfaces these tests drive: the first visible card at each width (`news-card-WIDTH.png`),
+the filter controls in each theme (`news-chooser-SCHEME-WIDTH.png`), and the stretch from
+News's button to the Changelog section's in each theme, with scripts and without
+(`home-changelog-SCHEME-WIDTH[-noscript].png`). Nothing reads them; a pull request that
+changes the News presentation attaches them for review.
 """
 
 from __future__ import annotations
 
+import itertools
 import mimetypes
 import os
 import re
@@ -46,6 +49,8 @@ INITIAL_LAYOUT = probe(PROBES, "site_atlas_views/initial")
 HERO = probe(PROBES, "site_homepage/hero")
 DOWNLOAD_ACTION = probe(PROBES, "site_homepage/download_action")
 NEWS = probe(PROBES, "site_homepage/news")
+CHANGELOG = probe(PROBES, "site_homepage/changelog")
+LOG_LINES = probe(PROBES, "site_homepage/log-lines")
 NEWS_SETTLED = probe(PROBES, "site_homepage/news-settled")
 NEWS_FILTERS = probe(PROBES, "site_homepage/news-filters")
 TOOLTIP_WATCH = probe(PROBES, "site_homepage/tooltip-watch")
@@ -723,6 +728,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert home["headings"] == [
         "the-atlas-of-square-packings",
         "news",
+        "changelog",
         "recent-results",
         "papers",
         "report-your-results",
@@ -734,9 +740,10 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "more-resources",
         "about-the-squares-project",
     ]
-    # Nine since 26 October 2026: Recently Added's title left with the block, which the
-    # Changelog page now carries.
-    assert len(home["section_title_styles"]) == 9
+    # Nine from 26 October 2026, when Recently Added's title left with the block, which
+    # the Changelog page now carries; ten from 3 November 2026, when the log's newest days
+    # came back under a Changelog title of their own.
+    assert len(home["section_title_styles"]) == 10
     carried = news_highlights.carried(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
         entry["id"] for entry in carried
@@ -1385,6 +1392,125 @@ def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts
                     )
         finally:
             page.close()
+
+
+def _section_geometry(reading: dict[str, Any]) -> tuple[Any, ...]:
+    """What the Changelog section's layout is, without the inks a scheme sets."""
+    return (
+        reading["box"],
+        [(day["day"], day["open"], day["visible"], day["box"]) for day in reading["days"]],
+    )
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+def test_news_and_the_changelog_each_have_a_section_and_a_button_with_and_without_scripts(
+    browser: Any, payloads: dict[str, bytes], width: int
+) -> None:
+    """The owner, 3 November 2026: the home page "consistently shows both and shows last
+    few days of changelog below the last few news items, each with its own section and
+    button to go to the dedicated page". News closes on All News alone; the Changelog
+    section under it holds the log's newest days, the newest open and the rest closed,
+    and closes on Changelog. No script draws the section, so it is laid out the same with
+    scripts and without, in both schemes, every line inside its own box at both widths.
+    The dark scheme is drawn by scripts: kpress's head bootstrap stamps the reader's
+    theme on the root, and without scripts every page of the site is drawn light.
+
+    Set `SQPACK_NEWS_SCREENSHOT_DIR` to keep the stretch from News's button to the
+    Changelog's at each width and scheme, with scripts and without
+    (`home-changelog-SCHEME-WIDTH[-noscript].png`).
+    """
+    home = payloads["index.html"].decode("utf-8")
+    days = re.findall(r'<details data-day="(\d{4}-\d{2}-\d{2})" id="home-changelog-\1"', home)
+    assert 1 <= len(days) <= overview_sections.HOME_CHANGELOG_DAYS
+    readings: dict[tuple[bool, str], dict[str, Any]] = {}
+    # Each scheme is the reader's from the first paint, as kpress's head bootstrap reads it.
+    for scripts, scheme in itertools.product((True, False), ("light", "dark")):
+        page = browser.new_page(
+            viewport={"width": width, "height": 900},
+            reduced_motion="reduce",
+            color_scheme=scheme,
+            java_script_enabled=scripts,
+        )
+        _serve(page, payloads)
+        try:
+            page.goto(f"{ORIGIN}index.html", wait_until="load")
+            reading = page.evaluate(CHANGELOG)
+            readings[scripts, scheme] = reading
+            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+                name = f"home-changelog-{scheme}-{width}{'' if scripts else '-noscript'}.png"
+                page.screenshot(
+                    path=str(Path(screenshot_dir) / name),
+                    full_page=True,
+                    clip={
+                        "x": 0,
+                        "y": max(0, reading["clip"]["y"] - 16),
+                        "width": width,
+                        "height": reading["clip"]["height"] + 32,
+                    },
+                )
+        finally:
+            page.close()
+    for (scripts, scheme), reading in readings.items():
+        where = (scripts, scheme)
+        order = reading["order"]
+        assert order[order.index("news") + 1] == "changelog", where
+        assert (reading["heading"], reading["title"]) == ("H2", "Changelog"), where
+        assert reading["log_class"] == "site-rollup site-added", where
+        assert reading["news_actions"] == [{"label": "All News", "href": "news.html"}], where
+        assert reading["actions"] == [{"label": "Changelog", "href": "changelog.html"}], where
+        assert [day["day"] for day in reading["days"]] == days, where
+        assert [day["id"] for day in reading["days"]] == [
+            f"{overview_sections.HOME_CHANGELOG_DAY}{day}" for day in days
+        ], where
+        newest, *older = reading["days"]
+        assert newest["open"], where
+        assert newest["lines"] > 0, where
+        assert newest["visible"] == newest["lines"], where
+        for day in older:
+            assert not day["open"], (where, day["day"])
+            assert day["lines"] > 0, (where, day["day"])
+            assert day["visible"] == 0, (where, day["day"])
+        assert all(day["summary"] for day in reading["days"]), where
+        assert reading["overflow"] == 0, where
+        assert reading["outside"] == [], where
+        assert reading["text"] != reading["background"], where
+    for scheme in ("light", "dark"):
+        assert _section_geometry(readings[True, scheme]) == _section_geometry(
+            readings[False, scheme]
+        ), scheme
+    light, dark = readings[True, "light"], readings[True, "dark"]
+    assert light["background"] != dark["background"]
+    assert light["text"] != dark["text"]
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+@pytest.mark.parametrize("name", ["index.html", render_changelog.CHANGELOG_PAGE])
+def test_every_line_of_the_log_stays_in_its_day_with_every_day_open(
+    browser: Any, payloads: dict[str, bytes], name: str, width: int
+) -> None:
+    """With every day of the log opened, on the Changelog page and in the home page's
+    section, nothing runs out of its day's box, so the guard holds for every change the
+    record logs, not only for the day that happens to open first. A result's id holds
+    together in tabular figures (`overview_sections.ROLLUP_ID`) and no other link that
+    opens a line does: a change's title once kept one line and was clipped at its day's
+    edge (#896's review, findings 1 and 5)."""
+    page = browser.new_page(viewport={"width": width, "height": 900}, reduced_motion="reduce")
+    _serve(page, payloads)
+    try:
+        page.goto(f"{ORIGIN}{name}", wait_until="load")
+        reading = page.evaluate(LOG_LINES)
+    finally:
+        page.close()
+    assert reading["days"] > 0
+    assert reading["open"] == reading["days"]
+    assert reading["lines"] > 0
+    assert reading["outside"] == [], reading["outside"][:5]
+    assert reading["ids"]
+    assert all(
+        link == {"white_space": "nowrap", "numerals": "tabular-nums"} for link in reading["ids"]
+    )
+    assert reading["others"]
+    assert all(link["white_space"] != "nowrap" for link in reading["others"])
 
 
 def test_excluded_news_bookmarks_reach_the_retained_changelog(

@@ -1473,9 +1473,13 @@ def overview_page() -> Page:
     )
 
     overview = overview_data.load()
+    document = render_changelog.load()
     values = {
         "HERO": overview_sections.hero(),
-        "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
+        "NEWS_PREVIEW": news_highlights.render(document),
+        # The log's newest days under the News box, each section with its own button
+        # (the owner, 3 November 2026).
+        "CHANGELOG_PREVIEW": overview_sections.changelog_preview(overview, document),
         "ATLAS_GRID": overview_sections.atlas_preview(),
         "PAPER_CARDS": overview_sections.homepage_paper_cards(),
         "PDF_CARDS": overview_sections.homepage_pdf_card(),
@@ -1495,8 +1499,8 @@ def overview_page() -> Page:
         description=OVERVIEW_DESCRIPTION,
         toc=False,
         rewrite_body=_case_links,
-        # `results.css` draws the Recent Major Results table; the rollup it also styles
-        # moved to the Changelog on 26 October 2026.
+        # `results.css` draws the Recent Major Results table, and the rollup the
+        # Changelog section shares with the Changelog page.
         page_styles=(HOMEPAGE_CSS, RESULTS_CSS),
         page_scripts=(
             NEWS_CARDS_SCRIPT,
@@ -1604,8 +1608,8 @@ def changelog_page() -> Page:
         ),
         toc=False,
         rewrite_body=_case_links,
-        # The log draws with the rollup classes `results.css` defines, which the home
-        # page loaded while it carried the block.
+        # The log draws with the rollup classes `results.css` defines, as the home page's
+        # Changelog section does.
         page_styles=(RESULTS_CSS,),
         page_scripts=(POPOVER_SCRIPT,),
     )
