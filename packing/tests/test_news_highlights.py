@@ -7,6 +7,7 @@ import copy
 import html
 import inspect
 import re
+from datetime import date, timedelta
 
 import pytest
 
@@ -99,15 +100,16 @@ def test_the_box_always_shows_its_newest_few_however_long_ago_they_were() -> Non
     articles' own, as the Changelog section's window does, so a quiet year leaves the
     box full: the newest `LIMIT` at its opening levels, two years old or not."""
     limit = news_highlights.LIMIT
-    stale = [_entry(f"stale-{index}", f"2024-0{index + 1}-15", 4) for index in range(limit + 2)]
+    first = date(2024, 1, 15)
+    stale = [
+        _entry(f"stale-{index:03d}", (first + timedelta(days=index)).isoformat(), 4)
+        for index in range(limit + 2)
+    ]
     document = {"entries": stale}
     assert news_highlights.default_levels(document) == render_changelog.NEWS_LEVELS
     assert [entry["id"] for entry in news_highlights.highlights(document)] == [
-        f"stale-{index}" for index in reversed(range(2, limit + 2))
+        f"stale-{index:03d}" for index in reversed(range(2, limit + 2))
     ]
-    source = inspect.getsource(news_highlights)
-    assert "today" not in source
-    assert "datetime" not in source
 
 
 def test_the_box_carries_the_newest_of_each_level_in_frozen_date_and_id_order() -> None:

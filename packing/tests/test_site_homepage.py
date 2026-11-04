@@ -50,6 +50,7 @@ HERO = probe(PROBES, "site_homepage/hero")
 DOWNLOAD_ACTION = probe(PROBES, "site_homepage/download_action")
 NEWS = probe(PROBES, "site_homepage/news")
 CHANGELOG = probe(PROBES, "site_homepage/changelog")
+LOG_LINES = probe(PROBES, "site_homepage/log-lines")
 NEWS_SETTLED = probe(PROBES, "site_homepage/news-settled")
 NEWS_FILTERS = probe(PROBES, "site_homepage/news-filters")
 TOOLTIP_WATCH = probe(PROBES, "site_homepage/tooltip-watch")
@@ -1480,6 +1481,36 @@ def test_news_and_the_changelog_each_have_a_section_and_a_button_with_and_withou
     light, dark = readings[True, "light"], readings[True, "dark"]
     assert light["background"] != dark["background"]
     assert light["text"] != dark["text"]
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+@pytest.mark.parametrize("name", ["index.html", render_changelog.CHANGELOG_PAGE])
+def test_every_line_of_the_log_stays_in_its_day_with_every_day_open(
+    browser: Any, payloads: dict[str, bytes], name: str, width: int
+) -> None:
+    """With every day of the log opened, on the Changelog page and in the home page's
+    section, nothing runs out of its day's box, so the guard holds for every change the
+    record logs, not only for the day that happens to open first. A result's id holds
+    together in tabular figures (`overview_sections.ROLLUP_ID`) and no other link that
+    opens a line does: a change's title once kept one line and was clipped at its day's
+    edge (#896's review, findings 1 and 5)."""
+    page = browser.new_page(viewport={"width": width, "height": 900}, reduced_motion="reduce")
+    _serve(page, payloads)
+    try:
+        page.goto(f"{ORIGIN}{name}", wait_until="load")
+        reading = page.evaluate(LOG_LINES)
+    finally:
+        page.close()
+    assert reading["days"] > 0
+    assert reading["open"] == reading["days"]
+    assert reading["lines"] > 0
+    assert reading["outside"] == [], reading["outside"][:5]
+    assert reading["ids"]
+    assert all(
+        link == {"white_space": "nowrap", "numerals": "tabular-nums"} for link in reading["ids"]
+    )
+    assert reading["others"]
+    assert all(link["white_space"] != "nowrap" for link in reading["others"])
 
 
 def test_excluded_news_bookmarks_reach_the_retained_changelog(

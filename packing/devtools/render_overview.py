@@ -1608,8 +1608,8 @@ def changelog_page() -> Page:
         ),
         toc=False,
         rewrite_body=_case_links,
-        # The log draws with the rollup classes `results.css` defines, which the home
-        # page loaded while it carried the block.
+        # The log draws with the rollup classes `results.css` defines, as the home page's
+        # Changelog section does.
         page_styles=(RESULTS_CSS,),
         page_scripts=(POPOVER_SCRIPT,),
     )

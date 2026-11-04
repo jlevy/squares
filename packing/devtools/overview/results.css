@@ -100,9 +100,13 @@
 
 /* A day's result: its id and headline, then a quiet line of its cases, rungs and credit
    set under the headline's words, past the id's hanging indent. Only a result's id holds
-   together: a change's title, which opens its line as a link to its News story, wraps
-   like any prose, where on one line it ran out of its day's box (3 November 2026). */
-.kpress .site-added li > a[href^="results.html#"]:first-child {
+   together, by its class (overview_sections.ROLLUP_ID, on a result's line and a record
+   packing's): the other links that open a line wrap like prose. Until 3 November 2026
+   the rule took every first link, so a change's title, which opens its line as a link
+   to its News story, ran out of its day's box on one line; a source's rows ("122 upper
+   bounds", beyond_entry) also kept one line and tabular figures then, and now wrap in
+   the text's own figures. */
+.kpress .site-added li > a.site-rollup-id {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }

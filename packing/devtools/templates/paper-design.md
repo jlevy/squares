@@ -3071,14 +3071,22 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   Three days show the log’s pace, one open and two closed under it, without the section
   becoming the log; the section measured 37 lines and 12,073 bytes, against the home
   page’s 40,000 for a section.
+  That ceiling binds what the window adds to the newest day: a bulk import’s day shown
+  alone weighs what it weighs, and past the ceiling the remedy is to cut that day short
+  with a line to the rest, not a higher number.
   Its addresses are its own: a day block is `home-changelog-<day>` and a change’s line
   carries no anchor, since the News box above holds the Changelog’s
-  `changelog-date-<day>` and entry anchors on the same page.
-  A change’s title wraps like prose; only a result’s id holds together on its line
-  (`results.css`). `tests/test_home_recent.py` holds the section to the log, its window,
-  its buttons and the page’s addresses; `tests/test_site_homepage.py` reads it in
-  Chromium at 390 and 1280 pixels, in both schemes, with scripts and without, and holds
-  its layout to be the same either way.
+  `changelog-date-<day>` (`render_changelog.DAY_ANCHOR`) and entry anchors on the same
+  page. Only a result’s id holds together on its line, in tabular figures, by its class
+  (`overview_sections.ROLLUP_ID`, in `results.css`); a change’s title and a source’s
+  rows wrap like prose.
+  Until 3 November 2026 the rule took every first link, and a long change title ran out
+  of its day’s box on both pages.
+  `tests/test_home_recent.py` holds the section to the log, its window, its line count
+  (`day_lines`), its buttons and the page’s addresses; `tests/test_site_homepage.py`
+  reads it in Chromium at 390 and 1280 pixels, in both schemes, with scripts and
+  without, holds its layout to be the same either way, and opens every day of both logs
+  to hold each line inside its day.
 
 - **Recent results.** The homepage’s **Recent Major Results** section sits below the
   Changelog. It contains up to twelve current results of significance S4 or higher from

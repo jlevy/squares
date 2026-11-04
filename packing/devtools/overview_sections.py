@@ -1293,6 +1293,10 @@ ALL_RESULTS = "all-results"
 #: The lowest S rung an entry's score is set in the significance ink for: S4 and S5
 #: (`added_entry`); S3 and below stay plain.
 INKED_SIGNIFICANCE = 4
+#: The class on a result's id where it opens a line of the log (`added_entry`,
+#: `house_entry`): the id holds together on its line (`results.css`), where a change's
+#: title and a source's rows wrap like prose (#896's review, finding 5).
+ROLLUP_ID = "site-rollup-id"
 
 
 class AddedDay(NamedTuple):
@@ -1437,7 +1441,8 @@ def added_entry(result: Result) -> str:
     )
     note = " · superseded" if superseded else ""
     return (
-        f'<li{mark}><a href="{_esc(result_url(result.id))}"{title}>{_esc(result.id)}</a> '
+        f'<li{mark}><a class="{ROLLUP_ID}" href="{_esc(result_url(result.id))}"{title}>'
+        f"{_esc(result.id)}</a> "
         f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}{note}</small></li>"
     )
 
@@ -1637,8 +1642,8 @@ def house_entry(move: HouseMove) -> str:
 
     counts = listed([case_link(n, str(n)) for n in move.counts])
     return (
-        f'<li><a href="{_esc(result_url(move.result))}">{_esc(move.result)}</a> '
-        f"is now the record packing at {counts}</li>"
+        f'<li><a class="{ROLLUP_ID}" href="{_esc(result_url(move.result))}">'
+        f"{_esc(move.result)}</a> is now the record packing at {counts}</li>"
     )
 
 
@@ -1742,8 +1747,6 @@ HOME_CHANGELOG_DAYS = 3
 #: three held 37 lines, a stretch held 6 to 68, and 60 trims only the three stretches
 #: that hold the 46-line 14 October, to two days each.
 HOME_CHANGELOG_LINES = 60
-#: A day block's address on the Changelog page, which the forwarded day bookmarks name.
-CHANGELOG_DAY = "changelog-date-"
 #: A day block's address in the home page's Changelog. It is not the Changelog page's
 #: `changelog-date-<day>`, which the home page's News box already gives the first card
 #: of each of its days (`render_changelog.render_news`).
@@ -1795,7 +1798,7 @@ def _changelog_log(overview: Overview, document: ChangelogDocument, *, preview: 
         )
         if not ordered:
             return CHANGELOG_NONE
-    prefix = HOME_CHANGELOG_DAY if preview else CHANGELOG_DAY
+    prefix = HOME_CHANGELOG_DAY if preview else render_changelog.DAY_ANCHOR
     blocks = []
     for index, day in enumerate(ordered):
         recent = recents.get(day)

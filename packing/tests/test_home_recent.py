@@ -63,14 +63,15 @@ DAY = re.compile(
 #: One result in a day (`added_entry`), linked to its row in All Results: its id, its V,
 #: C and S rungs.
 ENTRY = re.compile(
-    r'<li(?: class="site-rollup-superseded")?><a href="results\.html#(t-\d{3})"'
-    r'(?: title="Superseded")?>(T-\d{3})</a> .*?<small>[^<]* · (V\d) (C\d) (?:<b>)?(S\d)'
+    r'<li(?: class="site-rollup-superseded")?><a class="site-rollup-id" '
+    r'href="results\.html#(t-\d{3})"(?: title="Superseded")?>(T-\d{3})</a> '
+    r".*?<small>[^<]* · (V\d) (C\d) (?:<b>)?(S\d)"
 )
 #: One house move: the result and the rest of the line, its counts' case links. The line
 #: calls it the record packing (`house_entry`, the owner, 26 October 2026).
 HOUSE = re.compile(
-    r'<li><a href="results\.html#(t-\d{3})">(T-\d{3})</a> is now the record packing at '
-    r"(.*?)</li>"
+    r'<li><a class="site-rollup-id" href="results\.html#(t-\d{3})">(T-\d{3})</a> '
+    r"is now the record packing at (.*?)</li>"
 )
 #: One source's rows: the packet's address, the claims, the counts' span and the credit.
 ROWS = re.compile(
@@ -100,11 +101,12 @@ HOME_DAY = re.compile(
     r'<details data-day="(\d{4}-\d{2}-\d{2})" id="home-changelog-\1"( open)?>(.*?)</details>',
     re.DOTALL,
 )
-#: The most bytes the home page's Changelog section may weigh: the 40,000 argued for
-#: a section of the home page when it carried Recently Added (see `RECENT_BYTES`), to
-#: stop it becoming a second results table. It measured 12,073 bytes on 3 November 2026
-#: over 37 lines, and the heaviest three days the record holds weigh 31,352 before the
-#: line cap (`overview_sections.HOME_CHANGELOG_LINES`) trims them.
+#: The most bytes the home page's Changelog section may weigh when it shows more than
+#: its newest day: the 40,000 argued for a section of the home page when it carried
+#: Recently Added (see `RECENT_BYTES`), to stop it becoming a second results table. It
+#: measured 12,073 bytes on 3 November 2026 over 37 lines, and the heaviest three days
+#: the record holds weigh 31,352 before the line cap
+#: (`overview_sections.HOME_CHANGELOG_LINES`) trims them.
 HOME_CHANGELOG_BYTES = 40_000
 
 
@@ -427,9 +429,38 @@ def test_the_home_page_additions_stay_brief(section: str) -> None:
 
 
 def test_the_home_changelog_stays_brief(front: str) -> None:
-    weight = len(_front_section(front, "changelog", "recent-results").encode("utf-8"))
-    print(f"home changelog: {weight:,} / {HOME_CHANGELOG_BYTES:,}")
-    assert weight < HOME_CHANGELOG_BYTES
+    """The ceiling binds what the window adds to the newest day. The newest day is always
+    shown whole (`changelog_window`), so a bulk import's day shown alone weighs what it
+    weighs, and a records pull request never turns red for a day it merely adds; past
+    the ceiling there, the remedy is to cut that day short with a line to the rest on the
+    Changelog, not a higher number (#896's review, finding 8)."""
+    section = _front_section(front, "changelog", "recent-results")
+    weight = len(section.encode("utf-8"))
+    shown = len(HOME_DAY.findall(section))
+    print(f"home changelog: {weight:,} / {HOME_CHANGELOG_BYTES:,} over {shown} days")
+    assert shown >= 1
+    if shown > 1:
+        assert weight < HOME_CHANGELOG_BYTES
+
+
+def test_a_days_line_count_is_the_lines_its_block_holds(
+    overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
+) -> None:
+    """`day_lines` is the count the home page's line cap adds up, so it is held to every
+    day block the Changelog page draws: a line a result, a record packing's move, a
+    source's rows and a change (#896's review, finding 2)."""
+    landed = overview_sections.recent_days(overview, days=None)
+    recents = {recent.day: recent for recent in landed}
+    changes = Counter(entry["date"] for entry in render_changelog.load()["entries"])
+    assert days
+    for day, (_, body) in days.items():
+        recent = recents.get(date.fromisoformat(day))
+        assert overview_sections.day_lines(recent, changes[day]) == body.count("<li"), day
+    # Each kind a line counts appears somewhere in the record, so none goes unchecked.
+    assert any(recent.results for recent in recents.values())
+    assert any(recent.houses for recent in recents.values())
+    assert any(recent.rows for recent in recents.values())
+    assert sum(changes.values())
 
 
 def test_the_home_page_shows_the_logs_newest_days_as_the_changelog_draws_them(
