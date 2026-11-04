@@ -1,0 +1,16 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  Intake lane L34 (think-4uun, review A of #892): validate.py's measure verifier steps now
+  list packing/devtools/sqverify_fast_axis.py among the paths they touch, because
+  check_sqverify_fast imports that module for the gate's axis enclosure tie. No paper
+  prints it. Against main ca3a171bb (#891): render_n11_lower_bounds_explainer
+  --prepare-math rendered into empty site directories, twice from this tree and once with
+  that main's validate.py swapped in, the math pass in /usr/bin/google-chrome
+  (SQPACK_CHROMIUM): 55 files each, byte-identical across the three. No PDF was printed;
+  it prints from that HTML. The paper keeps its version, v0.4.35.
