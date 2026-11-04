@@ -5,7 +5,7 @@ title: "Import wand125: s(28) >= 2297/400 and s(30) >= 2357/400 by fine-net chec
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: bold-ritchie-l42
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T16:56:42.570Z
-updated_at: 2026-11-04T16:01:36.806Z
+updated_at: 2026-11-04T17:45:59.902Z
 started_at: 2026-11-04T15:03:02.888Z
 ---
 Found by the 2026-10-10 evening reads (think-0nkn): wand125/square-packing 36b85b9 and ff9f269 add problems/square-lower-bounds/certificates/mixed_n28_L57425/ and mixed_n30_L58925/, check2 bundles on the 2,073-direction net (core 4999/5000, step 1/5002), reporting s(28) >= 2297/400 = 5.7425 (mass 2799999/100000; +3/400 over T-107's 1147/200; +1/400 over #446's unadopted 287/50) and s(30) >= 2357/400 = 5.8925 (mass 2999999/100000; +9/1000 over T-109's 11767/2000). Data: square-lower-bounds-v1 assets certificates__mixed_n28_L57425.tar.gz (627,191 B, SHA-256 7d0f910768d47fcdba6233334798487471db7ef2fe556400269c34c3116d3bf3) and certificates__mixed_n30_L58925.tar.gz (638,622 B, 0d11fe0554909e1457d70efa425c82344e622006590ac6ee58a481b69d1b61ba). Author: 772 s and 1790.3 s, 0.985 control at 32 directions. No issue reports them. Stages 1-3 as T-132 (#446 s(29)) did with devtools.fine_net_followup; full capture likely CPU-hours (owner budget).
@@ -58,3 +58,5 @@ Register: two entries at V0/C0 (T-NN placeholders), pending adoption at n = 28 a
 - This bead is still blocked by think-ux1v, the owner's order of 11 October (regularization before this replay).
 - T-142's control tolerance question on #543 is moot: #892's enclosure rule judges its axis gap of 2.15e-9 (think-4uun). T-142's and T-143's next_rung and unfinished_confirmations now say so and name think-4ul6 (branch claude/bold-ritchie-xo28us-l42).
 Order once unblocked: retain the two release assets' members, add the packet to the census, run think-4ul6's review, then the two censuses and controls (7.8 to 10.6 CPU-hours), --evidence with that review as the audit record, and the adoptions at n = 28 and 30. No reply is owed: no issue reported either.
+
+2026-11-04 bold-ritchie-l42, later: on the coordinator's word (the owner's answer of 17 October to retain fine-net candidates where the census reads them; #543's checkbox is stale), both release assets' data members are retained (commit 7ccb06b3c on PR #903; check-retained 0 problems) and the census reads the packet. The coordinator has launched think-4ul6's review against 78729cfc2. Once it lands, the two censuses and controls (7.8 to 10.6 CPU-hours), the evidence with the review as audit_record and the adoptions at n = 28 and 30 go in a follow-up PR after #903, by the coordinator's decision. The think-ux1v ordering of 11 October is the coordinator's to clear with the owner.
