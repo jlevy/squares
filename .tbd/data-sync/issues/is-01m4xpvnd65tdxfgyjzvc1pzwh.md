@@ -3,9 +3,9 @@ type: is
 id: is-01m4xpvnd65tdxfgyjzvc1pzwh
 title: "Validate: wand125 s(145) >= 306/25 (mixed_n145_L1224), linear replay of all 201 angles and linear-control (~37 CPU-h, range 24-64; stop at 40)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l32
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m4wv27yed1e2wfnq55h1avr0
 hold: null
 hold_until: null
 created_at: 2026-10-14T17:20:16.293Z
-updated_at: 2026-11-04T14:17:57.132Z
+updated_at: 2026-11-04T17:01:01.597Z
 started_at: 2026-11-02T19:05:32.040Z
+closed_at: 2026-11-04T17:01:01.596Z
+close_reason: Replay complete and recorded in https://github.com/jlevy/squares/pull/889 (merged 69abc507e); T-176/T-179 at V3/C3.
+resolution: null
+duplicate_of: null
 ---
 Validation part of think-u0av for n = 145 (T-179 in the 14 October records PR #602, s(145) to s(149), V0/C1). Record-changing at 145-149.
 
