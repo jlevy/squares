@@ -1,0 +1,118 @@
+{
+ "format": "measure-identity-v1",
+ "n": 204,
+ "inputs": {
+  "OZDEN": {
+   "input": "packet",
+   "packet": "ozden-s204-upper-bound-2026-11-03",
+   "side": "7403810497792604009019579959/500000000000000000000000000"
+  },
+  "T-257": {
+   "input": "packet",
+   "packet": "evand-issue845-2026-10-29",
+   "side": "14807627471881579627471866771703/1000000000000000000000000000000"
+  }
+ },
+ "tilts": {
+  "OZDEN": {
+   "exactly_turned": 83,
+   "tilted_beyond_1_degree": 76,
+   "tilted_positive": 0,
+   "tilted_negative": 76,
+   "tilt_range_degrees": [
+    26.249419308915108,
+    28.53052931638473
+   ],
+   "near_upright": 7,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.4818371047308716,
+    -0.3779940540832456,
+    -0.17602634095463543,
+    -0.1653285975290686,
+    -0.12029795096404428,
+    -0.11482067578899091,
+    -0.0987835875845775
+   ]
+  },
+  "T-257": {
+   "exactly_turned": 138,
+   "tilted_beyond_1_degree": 79,
+   "tilted_positive": 0,
+   "tilted_negative": 79,
+   "tilt_range_degrees": [
+    1.0254899256296284,
+    29.422523793932662
+   ],
+   "near_upright": 59,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.2526007624289832,
+    -0.008067611965913102,
+    -0.007760651161930809
+   ]
+  }
+ },
+ "pairs": [
+  {
+   "view": "OZDEN",
+   "against": "T-257",
+   "side_difference": "-6.476296e-06",
+   "side_difference_exact": "-6476296371609432706853703/1000000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "1.896802e-1",
+    "largest_turn_degrees": "25.58",
+    "moved_beyond": {
+     "1e-9": 191,
+     "1e-6": 191,
+     "1e-3": 118,
+     "1e-2": 81,
+     "1e-1": 6
+    },
+    "turned_beyond_1e-6": 87
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.18968",
+    "moved_beyond": {
+     "1e-9": 191,
+     "1e-6": 191,
+     "1e-3": 118,
+     "1e-2": 81,
+     "1e-1": 6
+    },
+    "largest_turn_degrees": "25.58",
+    "turned_beyond_1e-6": 87
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 76,
+    "tilted_paired_same_sign_within_1e-1": 72,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 0,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 0,
+    "total_squared": "0.24594",
+    "runner_up_symmetry": 7,
+    "runner_up_total_squared": "21.7477",
+    "largest_move": "0.189681",
+    "rms_move": "0.0347216",
+    "bottleneck": "0.189681",
+    "moved_beyond": {
+     "1e-9": 204,
+     "1e-6": 204,
+     "1e-3": 118,
+     "1e-2": 81,
+     "1e-1": 6
+    },
+    "nearest_one_to_one": true,
+    "turned_beyond_1_degree": 14,
+    "tilts_reversed_beyond_1_degree": 0
+   }
+  }
+ ]
+}

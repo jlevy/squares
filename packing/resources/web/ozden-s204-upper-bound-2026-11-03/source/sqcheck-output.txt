@@ -1,0 +1,1 @@
+VALID     n=204  exact-rational  s<=14.807620995585207  n204-witness.json

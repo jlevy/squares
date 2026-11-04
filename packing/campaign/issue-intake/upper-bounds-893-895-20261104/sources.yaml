@@ -1,0 +1,96 @@
+# What `python -m devtools.intake_ledger gather` reads: the three upper bounds at n <= 324 that lane
+# L36 of the intake pass (think-3guf) takes in on 4 November 2026. Doğa Özden's #893 at 299 and #894
+# at 204, each posted by his AI agent's account kenaznia-doga 20 and 16 seconds after the one commit
+# of the repository that holds its certificate, and Kaelan Yim's #895 at 260, whose certificate is
+# only a GitHub issue attachment this session cannot fetch. GitHub's activity log was not read, so
+# no push time is recorded; each issue dates its report. The starts are frozen at main ca3a171bb
+# (#891's merge): Evan Daniel's certificates in both lanes at all three counts, T-258 at 299 and
+# T-257 at 204 and 260, with no register bound pending adoption below them. #893's and #894's exact
+# sides are their certificates' headers, read by the packets' claim records
+# (acquisition/claims.json), which the lane wrote from main ca3a171bb. #893 prints its side as
+# 17.801238533979 "rounded up at 12 places", but that print is 6.21e-14 below the exact side; the
+# claim record holds the exact fraction the issue also states. #895's side is the fraction its
+# issue states; no certificate is retained, so stage 3 does not register it until the author puts
+# the certificate at a public commit. The Kaggle sources the issues name are no report: the dataset
+# kmmmvs/squares-in-squares-best-packings holds 299 at 17.801238553 and 204 at 14.807627474, above
+# both houses, and the per-puzzle leaderboard's side-only entries near 17.798 and 17.794 at 299 and
+# 14.803489183116 at 204 (Cats and boxes, 27 October 2026, which #845 quoted) state no packing.
+format: intake-ledger-sources-v1
+read_at_main: ca3a171bb279639692cd464727a50ba384f724b0
+read_on: '2026-11-04'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l36
+  branch: claude/bold-ritchie-xo28us-l36
+  commit: ca3a171bb279639692cd464727a50ba384f724b0
+  note: The packets' claim records, written on the lane's branch from main ca3a171bb and read here by path.
+reports:
+- report: '#893'
+  issue: 893
+  holders: Doğa Özden
+  bead: think-otv6
+  lanes:
+  - lane: l36
+    packet: ozden-s299-upper-bound-2026-11-03
+    record: claims.json
+    counts: [299]
+  claims:
+  - n: 299
+    measured:
+      against: T-258
+      finding: one to one under the identity by nearest centres; the optimal assignment moves 12 squares beyond 0.1
+        and 119 beyond 1e-2 (largest 0.502) and turns 71 squares, by up to 14.9 degrees; 85 tilted squares against
+        T-258's 87
+      source: packing/resources/web/ozden-s299-upper-bound-2026-11-03/measure/identity.json
+    new_packing:
+      source: "#893: 'It starts from the current registry packing for n = 299 (Evan Daniel, 0e76d9f) ... What changed:
+        the lower-right tilted corner is rebuilt, one square is re-tilted by 14.9°, the tilted set has 85 squares
+        against 87'"
+      continues: Evan Daniel's 0e76d9f packing (T-258), as malyshevdanil's Living Atlas on Kaggle carries it
+  note: >-
+    The issue names 6486ead, committed at 2026-11-03T18:57:22Z, 20 seconds before the issue. Its title and claim
+    print 17.801238533979 as the side rounded up at 12 places; that print is 6.21e-14 below the exact side, which
+    rounds up to 17.801238533980.
+- report: '#894'
+  issue: 894
+  holders: Doğa Özden
+  bead: think-8b8m
+  lanes:
+  - lane: l36
+    packet: ozden-s204-upper-bound-2026-11-03
+    record: claims.json
+    counts: [204]
+  claims:
+  - n: 204
+    measured:
+      against: T-257
+      finding: one to one under the identity by nearest centres; the optimal assignment moves 6 squares beyond 0.1
+        and 81 beyond 1e-2 (largest 0.190) and turns 87 squares, 14 of them by more than 1 degree and by up to 25.58
+        degrees; 76 tilted squares against T-257's 79
+      source: packing/resources/web/ozden-s204-upper-bound-2026-11-03/measure/identity.json
+    new_packing:
+      source: "#894: 'It starts from the current registry packing for n = 204 (Evan Daniel, #845 ...). Squares matched
+        to the registry packing up to symmetry: 24 squares move by more than 0.05; 14 are re-tilted by more than 1°'"
+      continues: "Evan Daniel's #845 packing (T-257), whose lineage Daniel states starts at Daniil Ostashev's s(176)
+        packing (#575)"
+  note: >-
+    The issue names d4b8b05, committed at 2026-11-03T22:35:57Z, 16 seconds before the issue.
+- report: '#895'
+  issue: 895
+  holders: Kaelan Yim
+  bead: think-qclj
+  claims:
+  - n: 260
+    printed: 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626
+    rounding: exact
+    note: >-
+      The side as the issue states it, about 16.6339825019226141. The certificate is a GitHub issue attachment
+      (user-attachments) that this session cannot fetch, so it is not retained and nothing here decides it; the
+      issue says the search started from a public packing attributed to Evan Daniel and Kirill Tymchishin.
+  note: >-
+    No certificate is retained. The acknowledgement asks the author to put it at a public GitHub commit; until then
+    the claim is walked by its stated side and registers nothing.
+exceptions: []
+other_items: []

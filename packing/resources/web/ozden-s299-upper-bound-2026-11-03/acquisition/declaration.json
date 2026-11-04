@@ -1,0 +1,32 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "ozden-s299-upper-bound",
+  "source_url": "https://github.com/kenaznia-doga/s299-upper-bound",
+  "source_ref": "main",
+  "source_commit": "6486ead9be5e3348f64ad39aecc1950f22910de4",
+  "retrieved_at_utc": "2026-11-04T05:01Z",
+  "git_scope": "A full clone of kenaznia-doga/s299-upper-bound, fetched for the intake of jlevy/squares#893; the repository holds one commit, 6486ead (committed 2026-11-03T18:57:22Z, 's(299) upper bound 17.801238533979: witness, checks, diff'), 20 seconds before the issue, of 9 files, and the scope is the whole tree. #893 names this commit. The SHA-256 the issue and the README state for n-299-candidate.yaml, 2976d67f...76e0, and the one the README states for n299-refill2-t000173.json, 4fac4ed1...b797, match the files. No source program ran in writing this packet.",
+  "archived_dir": "source",
+  "license": "None stated: the repository has no licence file, and no file names a licence. Retained under the presumption of permission the owner set on 24 October 2026 for a source its author submits (think-cnn7), the issue being the author's submission; the exact licence is followed up on think-mdxq. The packing starts from Evan Daniel's 0e76d9f certificate at 299 (MIT, copyright (c) 2026 Evan Daniel, retained by the evand-n299-update-2026-10-29 packet), as the issue states.",
+  "claims": [
+    "n-299-candidate.yaml is a packing.squares:Witness/v2 file (center-basis, rational scalars, 299 squares) that s(299) <= 3560247706795812422293947620670679551/200000000000000000000000000000000000 = 17.801238533979062..., which #893 prints as 17.801238533979, rounded up at 12 places, and states is 1.54e-8 below the record's 17801238549388584084680137655023/10^30 (Evan Daniel, 0e76d9f). An upper bound only: no KKT, local-optimality, rigidity or global-optimality claim.",
+    "n299-refill2-t000173.json is the author's lab's export of the same squares. packing-witness-verify.txt is the author's run of this repository's packing-witness verify on the witness placed under packing/witnesses/known-best/ (VERIFIED, exact-algebraic, 44551 pairs); sqcheck-output.txt and sqcheck-output.json are the author's run of verifier/sqcheck.py, an exact checker the source says was written separately from this repository's code (VALID, exact rational, least pair margin about 1.0e-22, walls touching). Those statements are the author's; no source program ran here.",
+    "The issue and README say the packing starts from the registry's 299 (Evan Daniel, 0e76d9f) as malyshevdanil's Living Atlas on Kaggle carries it: about 250 of the 299 squares lie within 0.05 of it, the lower-right tilted corner is rebuilt, one square is re-tilted by 14.9 degrees, the tilted set has 85 squares against 87, and the right-edge column is slid by about 0.5. The search was AI-assisted (GPT-based agents plus local optimisation), the checks were run by code that did not produce the packing, and the issue and repository were prepared and posted by Doğa Özden's AI agent, which uses the account kenaznia-doga; Özden directed the work."
+  ],
+  "scope": [
+    "README.md",
+    "n-299-candidate.yaml",
+    "n299-refill2-t000173.json",
+    "packing-witness-verify.txt",
+    "records",
+    "sqcheck-output.json",
+    "sqcheck-output.txt",
+    "verifier"
+  ],
+  "pinned_only": [
+    {
+      "match": "records/n-299-candidate-diff.png",
+      "reason": "A raster comparison of the candidate with the registry packing, which decides nothing; pinned by digest only, as the SQUISH packets pin theirs."
+    }
+  ]
+}

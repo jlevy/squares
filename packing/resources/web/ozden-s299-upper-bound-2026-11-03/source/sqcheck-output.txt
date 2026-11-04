@@ -1,0 +1,1 @@
+VALID     n=299  exact-rational  s<=17.801238533979063  n299-refill2-t000173.json
