@@ -5,7 +5,7 @@ title: "Import wand125: s(37) >= 2599/400, s(39) >= 533/80, s(44) >= 2799/400 (c
 kind: task
 status: open
 priority: 1
-version: 23
+version: 24
 delegate: null
 labels:
   - result-import
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:14:31.758Z
-updated_at: 2026-11-04T14:18:17.994Z
+updated_at: 2026-11-04T15:59:25.354Z
 started_at: 2026-10-14T09:14:41.660Z
 ---
 Found by the 2026-10-14 watch survey (think-fxs7): problems/square-lower-bounds/certificates/mixed_n37_L64975 (7a42c16, 2026-10-13T03:18Z), mixed_n39_L66625 (dfb2cf8, 03:01Z), mixed_n44_L69975 (9f24185, 03:01Z), mixed_n145_L1224 (22f06b3, 06:18Z). Against main: 37 above 161/25 = 6.44; 39 above 133/20 = 6.65; 44 above 2789/400 = 6.9725; 145 above the reported 12.2138669 (Green DS7, disputed in #308) and the verified 12.0434, and by monotonicity lifting 146-149. The 37/39/44 bundles take the T-142/T-143 route (think-i85v): stages 1-2 with the release assets, a priced stage 4 replay with sqverify-fast from reviewed source over all directions with whole-net controls, held for an owner budget.
@@ -58,3 +58,9 @@ Renumbered on 14 October at review A3 of #602 (records PR, branch claude/wizardl
 2026-11-04 bold-ritchie-l32 (PR #889): T-176 (n39) is V3/C3 on the branch at b3caa7d61, now that #892's axis rule passes its control (think-567s). T-178 (n37) landed in #886. T-177 (n44) is not run, since T-252 proves s(44) = 7. T-179 (n145, think-v511) is still replaying: at 08:52Z, 88 of 201 angles were done, every one the certificate's own record, with 26.2 CPU-hours in rows. The lane has spent about 29.7 of its 40 CPU-hour cap, and the rest of the replay is projected at about 8.4. The #446 follow-up for T-176's move is owed after #889 merges, rendered from main with check_requests --draft 446 (think-ndvg). Nothing has been posted.
 
 2026-11-04 14:30Z bold-ritchie-l32 (PR #889, head c6ac84914; main c5e1f3da9 merged): both of the lane's replays are in. T-176 (n39, 533/80) and T-179 (n145 to 149, 306/25) are V3/C3, with the case records adopted as the house rule derives. T-177 (n44) was not run, since T-252 proves s(44) = 7. T-132 (n29, think-r333) was not run: the cap went to T-179, and its census evidence waits on the stage 4 review think-1lri. The lane spent about 37.8 measured CPU-hours of its 40. Two #446 follow-ups are owed after #889 merges, for T-176's and T-179's moves, rendered from main with check_requests --draft 446. Nothing has been posted.
+
+2026-11-04 bold-ritchie-l32 (PR #889, review F2): T-179's follow-up belongs on #779, not #446. #889 meets #779's close_when: the replay, its control and the review its C3 needs. After merge, render the reply from main with check_requests --draft 779 and post it. Then update #779's record: clear blocked: compute, drop the blocked:compute label, and close the issue. Draft, for comparison with the rendered text; not posted:
+
+> T-179 is now confirmed (V3/C3, current). The complete replay here of wand125's mixed_n145_L1224, from 2 to 4 November 2026, ran the source's replay function and unchanged checker (code/unified_linear_verify.cpp, byte for byte T-080's) at all 201 angles. It used the candidate and certificate retained from the release asset, and every angle returned the certificate's own record (34.2 CPU-hours; linear-merge FULL_REPLAY_MATCHES_SHIPPED). The route's control accepts the original and refuses two mutated measures at net index 35, each provably uncovered there in exact arithmetic. With the mathematical review of 14 October, s(n) >= 306/25 = 12.24 is now the verified lower bound at n = 145 to 149, and the reported one at 145 to 148. At 149, Hosono's closed form (T-180) stays the reported bound. The confirmation is a reproduction with the producer's own checker; no second implementation stands beside it. Merged in #889 (<merge sha>). This closes the tracking issue.
+
+T-176's move (#446) is a separate follow-up, also rendered from main after merge: check_requests --draft 446.
