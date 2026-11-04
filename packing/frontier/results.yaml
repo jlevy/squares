@@ -15983,15 +15983,14 @@ results:
       99/100 mutant at every direction, FC-1). The eight-direction sample prices the run
       and its controls at about 3.3 CPU-hours. The owner set its budget on 11 October 2026,
       and the run is queued in think-i85v after the regularization of every packing
-      (think-ux1v, planned in jlevy/squares#497). On main,
-      sqverify_fast_census.MIXED_PACKETS does not yet list this certificate's packet, and
-      the release asset's members are not retained.
+      (think-ux1v, planned in jlevy/squares#497). The release asset's data members are
+      retained in the packet's release/ since 4 November 2026, where the census reads
+      the candidate.
 
-      The census's axis tolerance, once a question for the owner (jlevy/squares#543), no
-      longer holds T-142's whole-net control: #892 judges the axis refusal by the vertex
-      sweep's own enclosure. Whether the three check2 candidates of T-132,
-      T-142 and T-143 are retained in Git, as the 6 October check2 packet is, is still
-      asked there.
+      The two questions of 11 October on jlevy/squares#543 no longer hold T-142: the
+      owner's answer of 17 October retains fine-net candidates where the census reads
+      them, and #892 judges the whole-net control's axis refusal by the vertex sweep's
+      own enclosure.
     unfinished_confirmations:
       - what: >-
           a review that reads this certificate (think-4ul6), by the checklist of the 6
@@ -16021,7 +16020,9 @@ results:
       case records' lanes are unchanged, so the entry is pending adoption at n = 28 while
       T-107 holds both lanes; the issue-446 report of 287/50 stays where it is. The
       pre-publication receipt repeats the source's check2 run, so one complete author run
-      is reported. The release asset is pinned by size and digest and kept outside Git.
+      is reported. The release asset is pinned by size and digest; its six data members
+      are retained in the packet's release/ since 4 November 2026, and its nested
+      verifier archive and sealed inner bundle are pinned by digest only.
 
   - id: T-143
     kind: lower-bound
@@ -16099,13 +16100,13 @@ results:
       99/100 mutant at every direction, FC-1). The eight-direction sample prices the run
       and its controls at about 4.5 CPU-hours. The owner set its budget on 11 October 2026,
       and the run is queued in think-i85v after the regularization of every packing
-      (think-ux1v, planned in jlevy/squares#497). On main,
-      sqverify_fast_census.MIXED_PACKETS does not yet list this certificate's packet, and
-      the release asset's members are not retained.
+      (think-ux1v, planned in jlevy/squares#497). The release asset's data members are
+      retained in the packet's release/ since 4 November 2026, where the census reads
+      the candidate.
 
-      Whether the three check2 candidates of T-132, T-142 and T-143 are retained in Git,
-      as the 6 October check2 packet is, is a question of 11 October still with the owner
-      (jlevy/squares#543, lower-bound replays).
+      The question of 11 October on jlevy/squares#543, whether the three check2
+      candidates of T-132, T-142 and T-143 are retained in Git, was answered on 17
+      October: fine-net candidates are retained where the census reads them.
     unfinished_confirmations:
       - what: >-
           a review that reads this certificate (think-4ul6), by the checklist of the 6
@@ -16133,7 +16134,9 @@ results:
       case records' lanes are unchanged, so the entry is pending adoption at n = 30 while
       T-109 holds both lanes. The pre-publication receipt is the very run record the
       source's check2 receipt embeds, so one complete author run is reported. The release
-      asset is pinned by size and digest and kept outside Git.
+      asset is pinned by size and digest; its six data members are retained in the
+      packet's release/ since 4 November 2026, and its nested verifier archive and sealed
+      inner bundle are pinned by digest only.
 
   - id: T-144
     kind: lower-bound

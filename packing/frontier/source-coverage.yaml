@@ -4420,7 +4420,9 @@ sources:
     both standing claims and the seven-case packet are unchanged. Complete release-asset and document
     custody and the exact mass, declared-net and check2 premises are accepted; an eight-direction
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
-    supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
+    supply a maintained capture or whole-net controls. The release members are retained in the packet's
+    release/ since 4 November 2026. The review that reads the certificate (think-4ul6), replay and
+    adoption remain under think-i85v.
 - id: wand125-fine-net-n30-58925-2026-10-10
   title: Hosono reported n30 fine-net lower bound, no issue
   role: source-repository
@@ -4441,7 +4443,9 @@ sources:
   notes: The reported 2357/400 at n30 is above T-109's 11767/2000, which is unchanged. Complete
     release-asset and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
-    supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
+    supply a maintained capture or whole-net controls. The release members are retained in the packet's
+    release/ since 4 November 2026. The review that reads the certificate (think-4ul6), replay and
+    adoption remain under think-i85v.
 - id: wand125-fine-net-n31-59775-2026-10-11
   title: Hosono reported n31 fine-net lower bound, no issue
   role: source-repository

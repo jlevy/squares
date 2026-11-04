@@ -1016,9 +1016,10 @@ pending.
 $s(30) \ge 2357/400 = 5.8925$ on the same 2,073-direction net; no issue reports them.
 The [authored factual packet](web/wand125-fine-net-n28-n30-2026-10-10/README.md) pins
 revisions `36b85b9` and `ff9f269` and their release assets by digest, with the
-maintained premise checks and diagnostic eight-direction samples.
-T-142 and T-143 record them at V0/C0; a complete replay and whole-net controls remain
-pending.
+maintained premise checks and diagnostic eight-direction samples; since 4 November it
+retains, under OR-18, each asset’s candidate, receipts and logs.
+T-142 and T-143 record them at V0/C0; a review that reads them, a complete replay and
+whole-net controls remain pending.
 
 **[wand125 fine-net n31 2026-10-11]**: Hosono’s n31 certificate, `mixed_n31_L59775`,
 reports $s(31) \ge 2391/400 = 5.9775$ on the same 2,073-direction net, above both lower

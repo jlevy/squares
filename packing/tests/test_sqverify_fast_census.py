@@ -1564,6 +1564,28 @@ def test_the_10_october_n29_packet_is_read_from_its_retained_members() -> None:
     assert packet not in census.INDEPENDENT_MIXED_PACKETS
 
 
+def test_the_10_october_n28_n30_packet_is_read_from_its_retained_members() -> None:
+    """T-142's mixed_n28_L57425 and T-143's mixed_n30_L58925 are read from the 10 October
+    n28 and n30 packet's release members, which `fine_net_followup retain` copied from
+    the pinned assets on 4 November, and the packet shares the producer's crate, as the
+    other fine-net release packets do. Neither has a census row yet: no review reads
+    them (think-4ul6)."""
+    packet = "wand125-fine-net-n28-n30-2026-10-10"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert sorted(found) == ["mixed_n28_L57425", "mixed_n30_L58925"]
+    root = census.WEB / packet / "release/certificates"
+    for name, n, side in (
+        ("mixed_n28_L57425", 28, "2297/400"),
+        ("mixed_n30_L58925", 30, "2357/400"),
+    ):
+        case = found[name]
+        assert case.candidate == root / name / "candidate.json.gz"
+        assert (case.n, case.side) == (n, side)
+        assert census.net_directions(case) == 2073
+    assert packet in census.SHARED_CRATE_PACKETS
+    assert packet not in census.INDEPENDENT_MIXED_PACKETS
+
+
 def test_the_890_dilation_is_read_at_its_upstream_path_and_reproduces_the_producer() -> None:
     """#890's certificate is not Hosono's and sits at its own upstream path, which
     `MIXED_FILES` names under the format M convention's census name. Its producer decided

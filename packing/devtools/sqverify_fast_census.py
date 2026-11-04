@@ -196,6 +196,7 @@ MIXED_PACKETS = (
     "wand125-fine-net-lower-bounds-446-release-2026-10-08",
     "wand125-fine-net-n37-n39-n44-2026-10-13",
     "wand125-fine-net-n29-2026-10-10",
+    "wand125-fine-net-n28-n30-2026-10-10",
     "ozden-s94-lower-bound-2026-11-03",
 )
 #: A packet that is not Hosono's and keeps a format M certificate at its own upstream
@@ -209,15 +210,17 @@ MIXED_FILES: dict[str, dict[str, str]] = {
 }
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
 #: the 16 October fine-net packet, the n31 packet of 11 October, the release members of
-#: four #446 certificates, the n37 and n39 members of the 13 October packet and the n29
-#: member of the 10 October packet keep their release assets' members at the assets' own
-#: paths (`devtools.fine_net_followup retain`).
+#: four #446 certificates, the n37 and n39 members of the 13 October packet, the n29
+#: member of the 10 October packet and the n28 and n30 members of the other 10 October
+#: packet keep their release assets' members at the assets' own paths
+#: (`devtools.fine_net_followup retain`).
 MIXED_ROOTS = {
     "wand125-fine-net-lower-bounds-2026-10-16": "release/certificates",
     "wand125-fine-net-n31-2026-10-11": "release/certificates",
     "wand125-fine-net-lower-bounds-446-release-2026-10-08": "release/certificates",
     "wand125-fine-net-n37-n39-n44-2026-10-13": "release/certificates",
     "wand125-fine-net-n29-2026-10-10": "release/certificates",
+    "wand125-fine-net-n28-n30-2026-10-10": "release/certificates",
 }
 #: The standard net's direction count; a format M file may declare another.
 STANDARD_DIRECTIONS = 201
@@ -1565,6 +1568,7 @@ SHARED_CRATE_PACKETS = frozenset(
         "wand125-fine-net-lower-bounds-446-release-2026-10-08",
         "wand125-fine-net-n37-n39-n44-2026-10-13",
         "wand125-fine-net-n29-2026-10-10",
+        "wand125-fine-net-n28-n30-2026-10-10",
     }
 )
 INDEPENDENT_MIXED_PACKETS = frozenset(
