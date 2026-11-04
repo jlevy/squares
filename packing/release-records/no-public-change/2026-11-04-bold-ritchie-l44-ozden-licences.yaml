@@ -1,0 +1,19 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L44 of 4 November: the lab's licence answer on #890 (issuecomment-6637821113,
+  think-0so3, think-mdxq) is read in. #890's entry is read through that comment, with the
+  licence (CC BY 4.0 for data and write-ups, MIT for code) and its answer to the finer-net
+  question in its summary and notes, and #893's and #894's summaries state the licence in
+  place of the presumption of permission. No result, rung, side, bound, mark or credit
+  changes. Against main 23362113f (#904): rendered at link revision
+  0000000000000000000000000000000000000000 into empty site directories, twice from this
+  tree and once with that main's result-requests.yaml swapped in, by
+  render_packing_methods, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM): 43
+  files each, all byte-identical across the three. No PDF was printed; it prints from that
+  HTML. The paper keeps its version, v0.2.7.

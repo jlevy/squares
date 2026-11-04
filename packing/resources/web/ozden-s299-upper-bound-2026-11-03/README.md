@@ -58,6 +58,16 @@ The SHA-256s the issue and the source’s README state for `n-299-candidate.yaml
 manifest, and [acquisition/sources.json](acquisition/sources.json) the record.
 The packet is well under a megabyte, so it is kept in Git.
 
+[licence/LICENSE.md](licence/LICENSE.md) is the one file kept from a later commit. The
+lab added it at `0c61a5555d8dd9ec05019d4fd72672f5f502cf97` (committed
+2026-11-04T17:48:56Z), the pin’s one successor, which adds that file and changes nothing
+else: its tree is the pin’s with `LICENSE.md` added, so every file retained or pinned
+here is unchanged under the licence. It is kept byte for byte, 1,484 bytes, Git blob
+`9803370f8c382515d3769896adb8d04b201aebd6`, SHA-256
+`5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c`, and outside
+`source/`, since the packet stays pinned at `6486ead`. The copies the lab added to its
+s94 and s204 repositories the same minute are byte-identical.
+
 ## Against the Record
 
 [acquisition/claims.json](acquisition/claims.json) is the frozen comparison
@@ -140,17 +150,21 @@ run by code that did not produce the packing, and the issue and repository were 
 and posted by his AI agent; Özden directed the work.
 The bibliography key is **[Özden s299 upper bound 2026-11-03]**.
 
-The repository states no licence.
-It is retained on the presumption of permission that an author’s own submission to this
-repository carries (the owner, 24 October 2026, think-cnn7), and the exact licence is
-asked on **think-mdxq**, which holds nothing of the import.
-Every file retained under [source/](source/) rests on that presumption: the witness, the
-export, the two checker outputs, the source’s README and `verifier/`. The diff image is
-pinned by digest only.
+The witness, the export, the checker outputs, the READMEs and the diff image are
+published under CC BY 4.0, and `verifier/sqcheck.py` under the MIT licence, copyright
+(c) 2026 Doğa Özden, as [licence/LICENSE.md](licence/LICENSE.md) states; it asks that
+credit go to Doğa Özden, with the prior work the README cites. The lab announced the
+choice on #890
+([comment](https://github.com/jlevy/squares/issues/890#issuecomment-6637821113),
+2026-11-04T17:49:05Z), answering the question of #893’s closing comment that
+**think-mdxq** followed up. Until then every file retained under [source/](source/)
+rested on the presumption of permission that an author’s own submission to this
+repository carries (the owner, 24 October 2026, think-cnn7). The diff image is pinned by
+digest only.
 The [ozden-s204-upper-bound-2026-11-03](../ozden-s204-upper-bound-2026-11-03/README.md)
 packet retains no `verifier/` of its own: it pins its byte-identical
-`verifier/README.md` and `verifier/sqcheck.py` `identical_to` this packet’s copies,
-which carry this basis for both.
+`verifier/README.md` and `verifier/sqcheck.py` `identical_to` this packet’s copies, and
+its own repository’s byte-identical `LICENSE.md` licenses them the same way.
 The packing modifies Evan Daniel’s MIT-licensed certificate, whose notice the
 [evand-n299-update-2026-10-29](../evand-n299-update-2026-10-29/README.md) packet
 retains; the source carries no copy of that notice.

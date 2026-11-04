@@ -52,6 +52,16 @@ copy would act on this repository’s tree.
 manifest, and [acquisition/sources.json](acquisition/sources.json) the record. The
 packet is under a megabyte, so it is kept in Git.
 
+[licence/LICENSE.md](licence/LICENSE.md) is the one file kept from a later commit. The
+lab added it at `484ad20f3be10f83c889bcc24bc622eae702b1a3` (committed
+2026-11-04T17:48:55Z), the pin’s one successor, which adds that file and changes nothing
+else: its tree is the pin’s with `LICENSE.md` added, so every file retained here is
+unchanged under the licence. It is kept byte for byte, 1,484 bytes, Git blob
+`9803370f8c382515d3769896adb8d04b201aebd6`, SHA-256
+`5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c`, and outside
+`source/`, since the packet stays pinned at `9d76ad5`. The copies the lab added to its
+s299 and s204 repositories the same minute are byte-identical.
+
 Every digest the issue and the source’s README state holds: the certificate’s stored
 file `116c8342…16f8` (the receipts’ `input_sha256`), its JSON text `b8b03ee8…749c`, and
 Hosono’s `candidate.json` at
@@ -180,11 +190,17 @@ author’s research lab under his direction: Claude (Anthropic) agents, and an O
 Codex agent, which wrote the second checker and reviewed the argument. The bibliography key is
 **[Özden s94 dilation 2026-11-03]**.
 
-The repository states no licence. It is retained on the presumption of permission that
-an author’s own submission to this repository carries (the owner, 24 October 2026,
-think-cnn7); the exact licence is asked on think-0so3. Hosono’s measure is published
-under the MIT licence (Copyright (c) 2026 wand125), and his notice applies to the
-dilated certificate as well.
+The certificate, the receipts, the notes and the write-ups are published under CC BY
+4.0, and the source code (`tools/rescale.py`, `verify.sh` and the second checker’s
+programs and scripts) under the MIT licence, copyright (c) 2026 Doğa Özden, as
+[licence/LICENSE.md](licence/LICENSE.md) states; it asks that credit go to Doğa Özden,
+with the prior work the README cites. The lab announced the choice on #890
+([comment](https://github.com/jlevy/squares/issues/890#issuecomment-6637821113),
+2026-11-04T17:49:05Z), answering the question of the issue’s closing comment that
+think-0so3 followed up. Until then the packet rested on the presumption of permission
+that an author’s own submission to this repository carries (the owner, 24 October 2026,
+think-cnn7). Hosono’s measure is published under the MIT licence (Copyright (c) 2026
+wand125), and his notice applies to the dilated certificate as well.
 
 ## Original Gzip Files
 

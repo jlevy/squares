@@ -4545,9 +4545,11 @@ sources:
       Claude (Anthropic) agents in the author's lab found the dilation, built the
       certificate, ran the checks and drafted the write-up, and an OpenAI Codex agent wrote
       the second checker and reviewed the argument (second-checker/GRADE.md, an AI review),
-      under his direction. No licence stated; retained on the presumption of permission
-      the author's submission carries (think-cnn7; think-0so3). This repository's census
-      replayed it at all 600 directions on 3 November 2026 and its whole-net control passed
+      under his direction. Licensed CC BY 4.0 (certificate, receipts, data, write-ups) and
+      MIT (code) by LICENSE.md, added at 484ad20f on 4 November 2026, the pin's one
+      successor, and announced on jlevy/squares#890 (think-0so3); retained before that on
+      the presumption of permission the author's submission carries (think-cnn7). This
+      repository's census replayed it at all 600 directions on 3 November 2026 and its whole-net control passed
       on 4 November, so T-262 is V3/C3, reproduced with the producer's code. Ozden is Özden
       in the credit's ASCII. Retained in web/ozden-s94-lower-bound-2026-11-03/.
   - key: '[Özden s299 upper bound 2026-11-03]'
@@ -4569,9 +4571,11 @@ sources:
       optimisation), under his direction. No global optimality claim. The lineage is
       independent: the source credits Daniel's packing and none of this project's work, and
       this repository's verifier, which the author ran, is no part of the packing's lineage.
-      No licence stated; retained on the presumption of permission the author's submission
-      carries (think-cnn7; think-mdxq). Ozden is Özden in the credit's ASCII. Retained in
-      web/ozden-s299-upper-bound-2026-11-03/.
+      Licensed CC BY 4.0 (witness, export, outputs, write-ups) and MIT (verifier/sqcheck.py)
+      by LICENSE.md, added at 0c61a555 on 4 November 2026, the pin's one successor, and
+      announced on jlevy/squares#890 (think-mdxq); retained before that on the presumption
+      of permission the author's submission carries (think-cnn7). Ozden is Özden in the
+      credit's ASCII. Retained in web/ozden-s299-upper-bound-2026-11-03/.
   - key: '[Özden s204 upper bound 2026-11-03]'
     authors: [Özden]
     year: 2026
@@ -4591,9 +4595,11 @@ sources:
       AI-assisted, under his direction. No global optimality claim. The lineage is
       independent: the source credits Daniel's packing and none of this project's work, and
       this repository's verifier, which the author ran, is no part of the packing's lineage.
-      No licence stated; retained on the presumption of permission the author's submission
-      carries (think-cnn7; think-mdxq). Ozden is Özden in the credit's ASCII. Retained in
-      web/ozden-s204-upper-bound-2026-11-03/.
+      Licensed CC BY 4.0 (witness, JSON, outputs, write-ups) and MIT (verifier/sqcheck.py)
+      by LICENSE.md, added at 06b0bf99 on 4 November 2026, the pin's one successor, and
+      announced on jlevy/squares#890 (think-mdxq); retained before that on the presumption
+      of permission the author's submission carries (think-cnn7). Ozden is Özden in the
+      credit's ASCII. Retained in web/ozden-s204-upper-bound-2026-11-03/.
 credited_names:
   Doğa Özden: Özden
   Benjamin Greff: Greff

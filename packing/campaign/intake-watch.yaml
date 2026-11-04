@@ -1780,3 +1780,40 @@ repositories:
       polygon-illumination preprint of the bd80c12 read, not square packing, and nothing
       under square-packing-above-324/ changes. Nothing to import; the 8 rows above 1024 still
       wait on the owner (think-f2io).
+  # The intake pass of 4 November 2026, lane L44 (think-3guf, think-0so3, think-mdxq), from
+  # the sweep after the lab's licence answer on #890 (issuecomment-6637821113, 17:49:05Z).
+  - url: https://github.com/kenaznia-doga/s94-lower-bound
+    read_through: 484ad20f3be10f83c889bcc24bc622eae702b1a3
+    read_on: '2026-11-04'
+    note: >-
+      One commit of 4 November (17:48:55Z) past the 9d76ad5 pin: 484ad20f, "Add licence: CC
+      BY 4.0 (certificates, data) + MIT (code)", adds LICENSE.md (14 lines, 1,484 bytes, Git
+      blob 9803370f, SHA-256 5b8e1449...da4c) and changes nothing else, so its tree is the
+      pin's with that file added. The licence is copyright 2026 Doğa Özden: CC BY 4.0 for
+      everything that is not source code, MIT for the checkers, tools and scripts. The
+      ozden-s94-lower-bound-2026-11-03 packet stays at 9d76ad5 and retains the file as
+      licence/LICENSE.md, its declaration, record and README stating the licence. No result
+      content changed; nothing to import.
+  - url: https://github.com/kenaznia-doga/s299-upper-bound
+    read_through: 0c61a5555d8dd9ec05019d4fd72672f5f502cf97
+    read_on: '2026-11-04'
+    note: >-
+      One commit of 4 November (17:48:56Z) past the 6486ead pin: 0c61a555, "Add licence: CC
+      BY 4.0 (certificates, data) + MIT (code)", adds LICENSE.md, byte-identical to
+      s94-lower-bound's at 484ad20f, and changes nothing else, so its tree is the pin's with
+      that file added. The ozden-s299-upper-bound-2026-11-03 packet stays at 6486ead and
+      retains the file as licence/LICENSE.md, its declaration, record and README stating the
+      licence: CC BY 4.0 for the witness, export, outputs, READMEs and diff image, MIT for
+      verifier/sqcheck.py. No result content changed; nothing to import.
+  - url: https://github.com/kenaznia-doga/s204-upper-bound
+    read_through: 06b0bf99fda02c9521e21fdd7b970fb6d0cb44ef
+    read_on: '2026-11-04'
+    note: >-
+      One commit of 4 November (17:48:57Z) past the d4b8b05 pin: 06b0bf99, "Add licence: CC
+      BY 4.0 (certificates, data) + MIT (code)", adds LICENSE.md, byte-identical to
+      s94-lower-bound's at 484ad20f, and changes nothing else, so its tree is the pin's with
+      that file added. The ozden-s204-upper-bound-2026-11-03 packet stays at d4b8b05 and
+      retains the file as licence/LICENSE.md, its declaration, record and README stating the
+      licence: CC BY 4.0 for the witness, JSON, outputs, READMEs and diff image, MIT for
+      verifier/sqcheck.py, which the packet pins against the s299 packet's copy. No result
+      content changed; nothing to import.
