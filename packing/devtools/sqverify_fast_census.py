@@ -672,21 +672,30 @@ def axis_captures_agree(
     reported vertex, recomputed by `devtools.sqverify_fast_axis.column_enclosure`, and the
     rule is `l' = bound`, to the bit, and `l' <= capture <= u'`:
 
-    - The first clause ties the recomputed interval to the crate: the walk reproduced the
-      lower end the crate certified, so `[l', u']` is the enclosure the crate held at that
-      vertex, and a transcription that strayed from the crate's path fails here.
-    - The second is the interval contract itself. The allowance above `bound` is
-      `u' - l'`, the width the sweep's own arithmetic reached at that vertex, and no
-      constant: an allowance narrower than that width asks for precision the sweep did
-      not have (at s(39) and s(94), where the capture sits at the middle of a width of
-      2.5e-9 and 2.2e-9, the constant 1e-9 this replaces failed sound refusals closed),
-      and one wider admits a capture the crate's own enclosure excludes (at s(37) the
-      width is 1.4e-10, a seventh of that constant).
+    - The first clause ties the walk's inputs and lower chain to the crate: the measure,
+      factor and vertex (and so the crate's argmin), the events, the rectangles' order and
+      every lower endpoint summed, since the walk reproduced the lower end the crate
+      certified. It does not witness the upper end: `u'` comes through the upper halves of
+      the interval steps, which no lower end depends on, and is tied to the crate by
+      transcription, checked against a build instrumented to report it
+      (`devtools.sqverify_fast_axis` says how).
+    - The second is the interval contract. `bound <= capture` is the direction soundness
+      needs, checked exactly. `capture <= u'` holds for the true capture on any path the
+      walk takes, by lemma I1 and lemma A2's schedule, so it can only reject a capture
+      that is not the one the walk enclosed. The allowance above `bound` is `u' - l'`,
+      the width the sweep's arithmetic reached at that vertex, and no constant: a
+      narrower one asks for precision the sweep did not have (at s(39) and s(94), where
+      the capture sits at the middle of a width of 2.5e-9 and 2.2e-9, the constant 1e-9
+      this replaces failed sound refusals closed), and a wider one admits a capture the
+      sweep's own enclosure excludes (at s(37) the width is 1.4e-10, a seventh of that
+      constant).
 
-    Either clause failing means the capture evaluated apart from the crate is not the
-    value the sweep enclosed (another pose, measure, net or factor) or the walk was not
-    the crate's, and the refusal does not count. No enclosure, as where the vertex is not
-    on the event grid, fails closed."""
+    This is an identity check, not the refusal's soundness, which rests on the exact
+    clauses beside it (the capture below 1 at a vertex in the domain). Either clause
+    failing means the capture evaluated apart from the crate is not the value the sweep
+    enclosed (another pose, measure, net or factor) or the walk was not the crate's, and
+    the refusal does not count. No enclosure, where the vertex is not on the event grid,
+    and a bound that is None or NaN, fail closed."""
     if bound is None or capture is None or enclosure is None:
         return False
     low, high = enclosure

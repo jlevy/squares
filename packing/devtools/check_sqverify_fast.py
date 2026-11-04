@@ -20,7 +20,13 @@ Two checks of `sqverify-fast` (`packing/sqverify_fast`), both refusable:
   the crate's oracle; the controls are the retained stage-4 controls of the mixed n37
   and linear n101 certificates, a scaling to one part in a million below the threshold
   at each witness, and a fault injected at an early box of the linear certificate at
-  an oblique direction and at direction zero, where it runs by branch and bound.
+  an oblique direction and at direction zero, where it runs by branch and bound. At
+  direction zero, the axis sweep's certified bound on `COINCIDENT_AXIS`, a small format M
+  measure whose images coincide, must be the lower end of the enclosure
+  `devtools.sqverify_fast_axis` recomputes at its least vertex, to the bit, for the
+  original and the 99/100 mutant, with the exact capture inside: the walk the census
+  control judges axis refusals by, held to the crate itself (F-1 of the 14 October
+  review, #892).
 - `declared-net`: the format M certificate of jlevy/squares#366 on its own net
   (`proof_net`: step 1/1001, 416 directions; SOUNDNESS.md, lemma N0). The original must
   verify on the declared net; every corrupted declaration (a step that breaks
@@ -76,6 +82,28 @@ MIXED_CONTROLS = (
     ("wand125-point-and-mixed-2026-10-01", "n37"),
     ("wand125-linear-certificates-2026-10-02", "n101"),
 )
+#: A format M measure whose D4 images coincide, the path admission merges and no
+#: retained certificate takes: a row symmetric in the diagonal (images coincide in pairs),
+#: a centred square (all eight coincide), two rows of one orbit listed in another order, and
+#: a row of zero mass. Its axis sweep refuses it at vertex (27/20, 2) with bounds
+#: 0.26249999999998913 (and 0.25987499999998875 for the 99/100 mutant), the lower ends of
+#: enclosures whose upper ends a build of `d97758bb` instrumented to report them gave as
+#: 0.2625000000000111 and 0.25987500000001146 (#892).
+COINCIDENT_AXIS: dict[str, Any] = {
+    "n": 4,
+    "L": "5/2",
+    "B": "9/10",
+    "points": [],
+    "rectangles": [
+        {"rectangle": ["1/5", "1/5", "11/10", "11/10"], "mass": "3/5"},
+        {"rectangle": ["1", "1", "3/2", "3/2"], "mass": "1/2"},
+        {"rectangle": ["19/10", "3/10", "12/5", "9/10"], "mass": "7/10"},
+        {"rectangle": ["1/10", "3/10", "3/5", "9/10"], "mass": "3/10"},
+        {"rectangle": ["1/10", "1/10", "1/5", "1/5"], "mass": "0"},
+        {"rectangle": ["3/10", "13/10", "7/10", "21/10"], "mass": "11/10"},
+    ],
+    "total_mass": "16/5",
+}
 # The format M certificate on a declared net (jlevy/squares#366): its candidate and n.
 DECLARED_NET = (
     WEB
@@ -777,6 +805,44 @@ def mixed(
     return outcomes
 
 
+def axis_enclosure_tie(binary: Path, scratch: Path) -> list[tuple[bool, str]]:
+    """The axis sweep's certified bound on `COINCIDENT_AXIS` against the enclosure the
+    census control recomputes at the sweep's least vertex: its lower end to the bit, and
+    the exact capture inside it, for the original and the 99/100 mutant."""
+    # Imported here: devtools.sqverify_fast_axis reads rows through this module.
+    from devtools.sqverify_fast_axis import column_enclosure  # noqa: PLC0415
+
+    outcomes: list[tuple[bool, str]] = []
+    side = Fraction(COINCIDENT_AXIS["L"])
+    for factor in (Fraction(1), Fraction(99, 100)):
+        body = COINCIDENT_AXIS if factor == 1 else mixed_mutant(COINCIDENT_AXIS, factor=factor)
+        path = write(body, scratch, f"coincident-axis-{factor.numerator}")
+        result = run_binary(binary, path, int(COINCIDENT_AXIS["n"]), "--directions", "0")
+        rows = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
+        row = next((x for x in rows if x.get("r") == 0), {})
+        bound, pose = row.get("min_certified_lower_bound"), row.get("argmin")
+        ok = row.get("method") == "axis-vertex-sweep" and bound is not None and bool(pose)
+        if ok:
+            x, y = (Fraction(value) for value in pose)
+            enclosure = column_enclosure(COINCIDENT_AXIS, factor, x, y, side - Fraction(1, 2))
+            capture = factor * mixed_exact(COINCIDENT_AXIS, x, y, 0)
+            ok = (
+                enclosure is not None
+                and enclosure[0] == bound
+                and Fraction(enclosure[0]) <= capture <= Fraction(enclosure[1])
+            )
+        outcomes.append(
+            (
+                ok,
+                (
+                    f"axis enclosure, coincident images, factor {factor}: the crate's bound"
+                    f" {bound!r} at {pose} is the recomputed lower end, exact capture inside"
+                ),
+            )
+        )
+    return outcomes
+
+
 def summary_of(result: subprocess.CompletedProcess[str]) -> dict[str, Any]:
     """The summary line of a run, or an empty dict."""
     for line in reversed(result.stdout.splitlines()):
@@ -917,6 +983,7 @@ def main(argv: list[str] | None = None) -> int:
             outcomes += mixed(
                 binary, Path(scratch), random.Random(args.seed + 1), quick=args.quick
             )
+            outcomes += axis_enclosure_tie(binary, Path(scratch))
     if args.only in (None, "declared-net"):
         with tempfile.TemporaryDirectory(prefix="sqverify-fast-declared-net-") as scratch:
             outcomes += declared_net(binary, Path(scratch), quick=args.quick)

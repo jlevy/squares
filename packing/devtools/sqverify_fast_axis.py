@@ -15,18 +15,36 @@ docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.
 does, with the outward-rounded binary64 arithmetic of `interval.rs` written here in
 Python floats, and returns `[l', u']` at the vertex. It transcribes the crate's
 arithmetic, so it is not an evaluator written apart from the crate; the exact capture
-it is compared with is (`check_sqverify_fast.mixed_exact`). Two facts make the pair
-the test the control needs:
+it is compared with is (`check_sqverify_fast.mixed_exact`). What the pair establishes:
 
-- `[l', u']` encloses the exact capture whether or not the walk is the crate's. Each
-  step is one IEEE 754 binary64 operation rounded to nearest (CPython's float
-  arithmetic, which contracts nothing into a fused multiply-add), moved outward by
-  `|x| 2^-52 + 2^-1074`, at least the gap to the next binary64 value (lemma I1), on
-  tight enclosures of exact rationals (lemma I2), along lemma A2's exact slope schedule.
-- `l' = l` to the bit shows the walk is the crate's: the same events, the same
-  rectangles in the same order, the same operations. Then `[l', u']` is the interval
-  whose lower end the crate certified, and its width is the precision the sweep had at
-  that vertex. A transcription that strayed from the crate's path fails that equality.
+- `[l', u']` encloses the exact capture on any path the walk takes, the crate's or not.
+  It follows lemma A2's exact slope schedule for this measure, on tight enclosures of
+  exact rationals (lemma I2), and each step is one IEEE 754 binary64 operation rounded
+  to nearest (CPython's float arithmetic, which contracts nothing into a fused
+  multiply-add), moved outward by `|x| 2^-52 + 2^-1074`, at least the gap to the next
+  binary64 value (lemma I1).
+- `l' = l` to the bit ties the walk's inputs and its lower chain to the crate: the
+  measure, factor and vertex, the events, the rectangles' order, every lower endpoint
+  the walk sums, and the crate's argmin, since `l` is the lower end at that vertex. A
+  walk that strays from the crate's inputs or lower chain fails that equality.
+- It does not witness the upper chain. `u'` is reached through the upper halves of
+  `times` and of the `plus` that accumulates the value, and through
+  `up(weight.hi * oy.hi)` in the initial terms, which no lower end depends on; a walk
+  that differed only there would give the same `l'` and another `u'`. That half is tied
+  to the crate by transcription instead: read line by line against `interval.rs` and
+  `axis.rs`, and checked against a build of the reviewed source `d97758bb` instrumented
+  to report `value.hi` at the argmin, which gave `u' = u` to the bit at s(37), s(39)
+  and s(94), originals and 99/100 mutants (review A of #892, and again in its lane;
+  `tests/test_sqverify_fast_axis.py` pins those values). A crate that reported `u`
+  itself would make that tie live, but any change to `src/` is a new `source_sha256`
+  and needs a re-review (option 1 of the 14 October review), so it is pinned as data.
+
+The census's rule is sound whether or not the upper chain is the crate's: whether a
+refusal counts rests on exact clauses (the capture below 1 at a vertex in the domain),
+`l = l' <= F` is checked exactly, and `F <= u'` holds for the true capture on any path,
+by the first point. So the upper clause can only reject a capture that is not the one
+the walk enclosed; an upper chain wider than the crate's would make that identity
+check looser, never unsound.
 
 It decides nothing on its own: the census reads it to judge a refusal the crate made.
 """
@@ -158,18 +176,23 @@ def column_enclosure(
     (`upper` is the domain's end at node 0, `L - 1/2` for format M's per-bin domain).
 
     It walks `x`'s column from `L/2` to `y` exactly as `verify_axis` does. None where the
-    sweep would not run (a point or segment mass, lemma B5), where `y` is not an ordinate
-    event, or where the enclosure is not finite; the census reads None as a refusal it
-    cannot tie to the crate's report, so it fails closed."""
+    sweep would not run (a point or segment mass, lemma B5), where `(x, y)` is not a
+    vertex of the event grid (`x` an abscissa event and `y` an ordinate event), or where
+    the enclosure is not finite; the census reads None as a refusal it cannot tie to the
+    crate's report, so it fails closed."""
     if any(kind != "rectangle" and mass != 0 for kind, _, mass in mixed_rows(raw)):
         return None
     h = Fraction(raw["B"]) / 2
     lower = Fraction(raw["L"]) / 2
     rects = images(raw, factor)
-    events = {lower, upper}
-    for (_, y1, _, y2), _density in rects:
+    xs, events = {lower, upper}, {lower, upper}
+    for (x1, y1, x2, y2), _density in rects:
+        for edge in (x1, x2):
+            xs.update(p for p in (edge - h, edge + h) if lower <= p <= upper)
         for edge in (y1, y2):
             events.update(p for p in (edge - h, edge + h) if lower <= p <= upper)
+    if x not in xs:
+        return None
     ys = sorted(events)
     index = {value: position for position, value in enumerate(ys)}
     if y not in index:
