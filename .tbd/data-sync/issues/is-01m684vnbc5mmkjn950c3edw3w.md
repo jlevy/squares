@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 122
+version: 123
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -49,7 +49,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-03T06:55:16.898Z
+updated_at: 2026-11-04T04:57:44.685Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -217,3 +217,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-03 ~06:45: #892 (think-4uun axis enclosure) review A strong-max: sound, no blockers; mirror bit-for-bit vs instrumented crate at n37/39/94; 2 should-fix (audit_fine_net_receipt still uses 1e-9; docs overclaim the l-prime tie) sent to L34. Owner request (06:30): homepage News + Changelog sections, both always shown, each with own button; owner authorized full flow (beads, PR, review, merge, deploy); L35 building it.
 
 2026-11-03 06:52: renewal. Sweep intake49 (only #890, owned); no new issues since 05:50Z. Running: L35 homepage, L33 #891 addressing, L34 #892 addressing, L32 s(145).
+
+2026-11-04 04:53: the account weekly usage limit stopped all lanes ~07:00Z 3 Nov until the 04:00Z 4 Nov reset (21 hourly renewals missed; container restarts killed the s(145) replay). Resumed L32 (#889, T-179 from its ledger), L33 (#891 addressing), L34 (#892 addressing), L35 (homepage). New issues #893 (s(299) Özden), #894 (s(204) Özden), #895 (s(260) Kaelan Yim, attachment-only) labelled intake; L36 runs their intake.
