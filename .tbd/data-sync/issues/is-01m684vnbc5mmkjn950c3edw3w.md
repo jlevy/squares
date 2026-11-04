@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 147
+version: 148
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T20:55:01.421Z
+updated_at: 2026-11-04T21:54:55.193Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -259,3 +259,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 19:52 renewal (intake64): needs-action down to think-4ul6, whose review is done and is mapped in the L42 follow-up. #905 and #906 merged (Özden licences; #890 and #366 follow-ups); think-0so3 and think-mdxq closed. #903 review accept-with-fixes (F3: retained_data check fails on the n28/n30, n29 and n39 packets for want of a Compressed Files table); L42 is addressing it while the n28/n30 census runs. Strong-max stage-4 review of T-132 (think-1lri) launched.
 
 2026-11-04 20:52 renewal (intake65): #903 merged (c03183f66; T-233 V3/C3 at 19, 20, 26, 27; retained-tables tool; retained_data check passes on all 7 packets). L46 posted the #446 T-233 follow-up; also given #366 follow-up (T-103-T-106 superseded), #847 read (Karimi second preprint, no result) and 2 Özden README-only repo reads. L42: n28 capture VERIFIED, n30 running, follow-up PR on l45. Strong-max T-132 review running.
+
+2026-11-04 21:52 renewal (intake66): needs-action is only think-4ul6 (L42 maps it). #907 merged (a7db9aad3; #446 T-233, #366 T-103-T-106, #847 preprint acknowledgement, 2 repo reads). T-132 strong-max review accepted; L47 is running its census and adoption. L42 has the n30 census and controls running.
