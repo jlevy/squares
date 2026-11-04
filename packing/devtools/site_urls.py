@@ -123,6 +123,16 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         400_000,
         "Complete broad scope history and prepared exact bounds measure 304,237 bytes.",
     ),
+    "result/t-019.html": (
+        350_000,
+        (
+            "Complete broad scope history and prepared exact bounds measure 300,264 bytes "
+            "on 4 November 2026, past the 300,000 result budget once T-233 joined the "
+            "results its counts rest on (n = 19); the ceiling leaves room for later "
+            "results at its counts. Its timing was not re-measured; result/t-046.html's "
+            "growth of the same kind is think-rp0d."
+        ),
+    ),
     "result/t-155.html": (
         400_000,
         (
