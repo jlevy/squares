@@ -3,9 +3,9 @@ type: is
 id: is-01m6fj2mwfwwncghn4hv6qdhhg
 title: "Import Özden: s(94) >= 1993/200 by dilating Hosono's mixed_n94_L995 on a 600-direction net (#890)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-03T01:58:43.855Z
-updated_at: 2026-11-04T09:13:24.081Z
+updated_at: 2026-11-04T11:14:30.763Z
 started_at: 2026-11-03T01:58:48.827Z
+closed_at: 2026-11-04T11:14:30.763Z
+close_reason: "#890 answered and closed (issuecomment-6628729226) after #898's deploy; recorded in https://github.com/jlevy/squares/pull/899 (merged a5a76fd99)."
+resolution: null
+duplicate_of: null
 ---
 Import of jlevy/squares#890 (opened 2026-11-03T01:20:31Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(94) >= 1993/200 = 9.965, above the verified 199/20 of T-091 (Hosono, mixed_n94_L995).
 

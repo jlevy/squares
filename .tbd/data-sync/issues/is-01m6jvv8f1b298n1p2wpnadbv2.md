@@ -5,12 +5,12 @@ title: Credit Özden as improved_by at 204 and 299 on the posters at the next in
 kind: task
 status: open
 priority: 3
-version: 5
+version: 6
 labels: []
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-04T08:47:10.817Z
-updated_at: 2026-11-04T10:49:56.456Z
+updated_at: 2026-11-04T11:08:50.174Z
 ---
 T-263 (#893) and T-264 (#894) are Doğa Özden's further arrangements of Evan Daniel's packings at 299 and 204. #897 adopted both as their counts' houses (think-ybep). As the stage 4 review of record's F8 asks, the case records credit `found_by: [Evan Daniel]` and `improved_by: [Doğa Özden]` in `reported_upper_bound`, and so do `devtools/adopt_houses.py`'s CREDITS, the case pages' Improved by row, the bound citations ('Daniel & Özden, GitHub') and the register.
 
@@ -18,7 +18,7 @@ The posters' "Best packings due to" block reads every finder and improver in 1..
 
 So #897 holds the name on the print only. `PRINT_CREDIT_HELD` in `devtools/build_known_best_atlas.py` maps 204 and 299 to ("Doğa Özden",), and `_poster_packing_credits` alone reads it. That function feeds the credit block, the attribution paragraphs' shared line measure, the block's data attributes, the metadata's `source_groups` and the canvas height. The metadata's `cases` list stays truthful. This is the same kind of hold as think-10l0's.
 
-The hold cannot outlive its edition. `PRINT_CREDIT_HELD_FOR = "v0.7.0"`, and `print_credit_hold_problems` fails `composite_findings` (so `--check-composites` and the atlas sample) as soon as `INFOGRAPHIC_VERSION` or a drawn poster's version differs while the hold is not empty. `test_the_print_credit_hold_cannot_outlive_its_edition` holds that rule (review F2 of #897).
+The hold cannot outlive its edition. `PRINT_CREDIT_HELD_FOR = "v0.7.0"`, and `test_the_print_credit_hold_cannot_outlive_its_edition` (through `print_credit_hold_problems`) fails the pull-request suite as soon as `INFOGRAPHIC_VERSION` or a drawn poster's version differs while the hold is not empty (review F2 of #897). The cut machinery's own validation does not read the hold.
 
 Done when, at the next infographics cut, all of these move in the same change:
 - `PRINT_CREDIT_HELD` is emptied (`{}`), and `PRINT_CREDIT_HELD_FOR` is updated or removed.
