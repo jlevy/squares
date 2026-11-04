@@ -5,7 +5,7 @@ title: "census --control: the axis tolerance is a constant (AXIS_ROUNDING 1e-9);
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: bold-ritchie-l42
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T13:43:00.366Z
-updated_at: 2026-11-04T15:02:55.163Z
+updated_at: 2026-11-04T16:22:47.464Z
 started_at: 2026-11-04T15:02:55.163Z
 ---
 The census control's axis check (`packing/devtools/sqverify_fast_census.py`, `AXIS_ROUNDING = 1/10^9` and the axis branch of `refusal_record`) requires the 99/100 mutant's exact capture at the vertex sweep's least vertex to lie within a constant 1e-9 of the sweep's certified lower bound. The gap is half the sweep's enclosure width, which varies by certificate, so a sound refusal can fail closed.
@@ -38,3 +38,5 @@ blocked_on: none
 2026-11-04 bold-ritchie-l32 (PR #889, b3caa7d61): the n39 (T-176) part of the done-when is met on the branch. Its control, rerun under #892's rule on 3 November, ends CONTROLS_REFUSED and is retained as mixed_n39_L66625.control.json beside the failed v2 receipt, and T-176 is V3/C3 there. Two parts stay open under this bead: n26 (T-233, write mixed_n26_L5555.control.json; that is T-233's lane, not L32's) and n28 (T-142, think-i85v). Not closed.
 
 2026-11-04 coordinator: when the n26 lane writes its passing control, also refresh packing/benchmarks/.../wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md lines 26-36, which still say the axis fix is to come (noted by the #892 confirming review).
+
+2026-11-04 bold-ritchie-l42 (intake lane L42, think-3guf; branch claude/bold-ritchie-xo28us-l42): the n26 (T-233) part of the done-when is met on the branch. The kept receipt's axis refusal passes main's rule (test_each_retained_axis_refusal_is_the_crates_enclosure), but nothing on main re-judges a receipt into a new one and --evidence reads only a passing CERT.control.json, so the control was rerun rather than a receipt assembled by hand: `sqverify_fast_census --family mixed --control --only mixed_n26_L5555 --threads 2` under nice -n 19, 15:05:31Z to 15:16:15Z, 644 s of wall and 1,022 CPU-seconds, binary 567a0fd5 from reviewed source d97758bb, ends CONTROLS_REFUSED (r = 905; 99/100 mutant refused at 2,073 of 2,073; axis capture in [0.9909807799642721, 0.9909807865315093], lower end the crate's bound to the bit). Written as mixed_n26_L5555.control.json beside the kept control-failed-v2 receipt (commit 05939963b); apart from timings, status, the axis item's captures_agree and the new sweep_enclosure field it equals the kept one. The folder README's lines 26-41 now say so. T-233's four replays are evidence entries (one per count; census --evidence learned to split #446's three-count report, commit fc10bc2a5), T-233 is V3/C3, and both lower lanes at n = 19, 20, 26 and 27 take its values. One part stays open: n28 (T-142, think-i85v), which needs a review that reads its certificate first (think-4ul6), retained release members and a census packet before its census and control (3.3 to 4.5 CPU-hours); its axis gap of 2.15e-9 no longer holds it. Not closed. Owed after merge: #446's follow-up on T-233's move, rendered from main with `check_requests --draft 446` (think-ndvg is #446's answer bead and is not this lane's).
