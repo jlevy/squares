@@ -33,4 +33,9 @@ reason: >-
   render_packing_methods at link revision 0000000000000000000000000000000000000000 (43
   files each), the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM): all
   byte-identical across the three. No PDF was printed; each prints from that HTML. Every
-  paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
+  paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7. After hosted CI's
+  follow-ups (n-146's history sentence in the past tense, the packet listed among the
+  resources at 145 to 148, n-149's paragraph order) and the merge of main 4d8d768bd
+  (#902), the same renders were made again against that main with its copies of the same
+  five paths swapped in: byte-identical again, 55 files for the explainer and 43 for each
+  of the others.
