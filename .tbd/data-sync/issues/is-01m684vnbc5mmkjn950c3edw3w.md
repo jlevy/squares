@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 149
+version: 150
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T22:54:45.909Z
+updated_at: 2026-11-04T23:10:32.953Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -263,3 +263,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 21:52 renewal (intake66): needs-action is only think-4ul6 (L42 maps it). #907 merged (a7db9aad3; #446 T-233, #366 T-103-T-106, #847 preprint acknowledgement, 2 repo reads). T-132 strong-max review accepted; L47 is running its census and adoption. L42 has the n30 census and controls running.
 
 2026-11-04 22:52 renewal (intake67): no change; needs-action is only think-4ul6. L42 (n28/n30) and L47 (n29) are computing.
+
+2026-11-04 23:xx: #908 (L42/l45: T-142, T-143 V3/C3 at n28/n30; 5.5 CPU-h) is green, but think-i85v and think-r333 are "Blocked by think-ux1v": the owner order of 11 Oct puts the full regularization pass first, and ux1v is still in_progress. On main, #532 asks are blocked_on ux1v. Treated as an owner decision: #908 labelled blocked:owner-decision and kept draft; its senior review runs anyway. L47 (T-132) finishes its compute but keeps the block and its PR draft and labelled. Also flagged: #543 lists T-142 control tolerance as an owner question, which #892 settled by the enclosure rule without a recorded owner answer.
