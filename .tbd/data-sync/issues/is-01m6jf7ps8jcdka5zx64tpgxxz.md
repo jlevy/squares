@@ -5,7 +5,7 @@ title: "Import Yim: s(260) <= 16.6339825019226, 1.99e-10 below T-257, attachment
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: bold-ritchie-l36
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-04T05:06:47.208Z
-updated_at: 2026-11-04T05:07:17.344Z
+updated_at: 2026-11-04T05:37:08.636Z
 started_at: 2026-11-04T05:07:17.344Z
 ---
 Import of jlevy/squares#895 (opened 2026-11-04T02:15:02Z by vitamoon, Kaelan Yim): s(260) <= 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626 (about 16.6339825019226141), about 1.99e-10 below the case's house, Evan Daniel's #845 certificate (T-257) at 16.6339825021218840.
@@ -31,3 +31,7 @@ Import of jlevy/squares#895 (opened 2026-11-04T02:15:02Z by vitamoon, Kaelan Yim
 blocked_on: the author's answer on jlevy/squares#895 (a public commit holding the certificate)
 
 Answer bead: this bead.
+
+## Notes
+
+2026-11-04 (bold-ritchie-l36): acknowledgement posted at https://github.com/jlevy/squares/issues/895#issuecomment-6623457978 (before #897 merged, as #847's was: it states no id or rung and links nothing on a branch). It asks the author to commit n260.cert.txt unchanged to a public GitHub repository and name the commit and its SHA-256, and a licence. Recorded in result-requests.yaml on #897 as queued (bead think-qclj) with an awaiting_author question (changes: file). The ledger upper-bounds-893-895-20261104 walks the claim by its stated exact side, the first report below T-257 at 260. The report-order verdict comment for #895 is drafted from comments.yaml; post it after #897 merges or fold it into the next reply. Next: when the author answers, read the comment into the record (read_through), retain the packet at the named commit, check the digest, certify on both routes with sharp controls, measure against T-257, register, and give it a stage 4 review and adoption like think-ybep's.
