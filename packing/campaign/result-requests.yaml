@@ -28,7 +28,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-31'
+last_reviewed: '2026-11-04'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -27716,3 +27716,175 @@ issues:
       review accepted the certificate, and that the verified lane waits on the control's
       axis rule (think-4uun), which then follows on the closed issue; the licence question
       (think-0so3) is carried in the closing comment.
+  - number: 893
+    title: 's(299) ≤ 17.801238533979: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-03'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden (https://dogaozden.com/math/live/square-packing/), through his AI agent's
+      account kenaznia-doga, asks for the registration of s(299) <=
+      3560247706795812422293947620670679551/(2*10^35) = 17.801238533979062..., 1.54e-8 below
+      the house, Evan Daniel's 0e76d9f certificate (T-258): n-299-candidate.yaml, a rational
+      centre-basis Witness/v2 at kenaznia-doga/s299-upper-bound 6486ead, the repository's one
+      commit, 20 seconds before the issue. It reports this repository's packing-witness verify
+      VERIFIED (44551 pairs) and the lab's own exact checker sqcheck.py VALID, says the packing
+      starts from T-258's as malyshevdanil's Living Atlas on Kaggle carries it, with the
+      lower-right tilted corner rebuilt, and asks that the improvement be credited to Özden and
+      the base packing to its holders. The search was AI-assisted (GPT-based agents plus local
+      optimisation), under his direction. Triaged and retained on 4 November 2026 in the intake
+      pass's lane L36 (think-otv6, think-3guf): the ozden-s299-upper-bound-2026-11-03 packet
+      retains the tree but for a raster comparison pinned by digest, every stated digest holds,
+      and both maintained exact routes accept the witness and refuse its gross and sharp
+      controls; measured, it pairs one to one with T-258's packing, 12 squares beyond a tenth.
+      The issue's title and claim print the side as 17.801238533979, "rounded up at 12 places",
+      but that print is 6.21e-14 below the exact side, which rounds up to 17.801238533980; the
+      record holds the exact fraction the issue also states. The ledger of 4 November
+      (upper-bounds-893-895-20261104) records it. Registered as T-263 at V0/C0; the stage 4
+      review and the adoption at 299 are think-ybep's. The Kaggle sources the issue names are
+      no report. No licence is stated; the packet rests on the submission's presumption of
+      permission, followed up on think-mdxq.
+    read_through: '2026-11-03T18:57:42Z'
+    results:
+    - key: n299-from-t258
+      claim: >-
+        s(299) <= 3560247706795812422293947620670679551/(2*10^35) by n-299-candidate.yaml at
+        kenaznia-doga/s299-upper-bound 6486ead, a packing found from Evan Daniel's 0e76d9f
+        certificate (T-258).
+      source: body
+      register:
+      - T-263
+      evidence:
+      - E-ozden-893-certificate-report
+      validation:
+      - think-ybep
+    beads:
+    - think-otv6
+    - think-ybep
+    - think-mdxq
+    answer_bead: think-otv6
+    replies: []
+    close_when: >-
+      T-263 is on main and the reply on main says what was replayed, that the print is below
+      the exact side, and that the stage 4 review and the adoption at 299 are think-ybep's;
+      the licence question (think-mdxq) is carried in the closing comment.
+  - number: 894
+    title: 's(204) ≤ 14.807620995586: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-03'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden (https://dogaozden.com/math/live/square-packing/), through his AI agent's
+      account kenaznia-doga, asks for the registration of s(204) <=
+      7403810497792604009019579959/(5*10^26) = 14.807620995585208..., printed 14.807620995586
+      rounded up at 12 places, 6.48e-6 below the house, Evan Daniel's #845 certificate (T-257):
+      n-204-candidate.yaml, a rational centre-basis Witness/v2 at kenaznia-doga/s204-upper-bound
+      d4b8b05, the repository's one commit, 16 seconds before the issue. It reports this
+      repository's packing-witness verify at e6e8d577 VERIFIED (20706 pairs) and the lab's own
+      exact checker sqcheck.py VALID, says the packing starts from T-257's (whose lineage Daniel
+      states starts at Daniil Ostashev's s(176), #575), with 24 squares moved by more than 0.05
+      and 14 re-tilted by more than 1 degree, and asks that the improvement be credited to Özden
+      and the base packing to its holders. The search was AI-assisted, under his direction.
+      Triaged and retained on 4 November 2026 in the intake pass's lane L36 (think-8b8m,
+      think-3guf): the ozden-s204-upper-bound-2026-11-03 packet retains the tree but for a
+      raster comparison pinned by digest and the checker, pinned against the s299 packet's
+      identical copy; every stated digest holds, and both maintained exact routes accept the
+      witness and refuse its gross and sharp controls; measured, it pairs one to one with
+      T-257's packing, 6 squares beyond a tenth. The ledger of 4 November
+      (upper-bounds-893-895-20261104) records it; the tie think-pg1y records at 204 lies above
+      T-257 and does not reach it. Registered as T-264 at V0/C0; the stage 4 review and the
+      adoption at 204 are think-ybep's. The Kaggle side-only claim the issue quotes,
+      14.803489183116, states no packing and is no report. No licence is stated; the packet
+      rests on the submission's presumption of permission, followed up on think-mdxq.
+    read_through: '2026-11-03T22:36:13Z'
+    results:
+    - key: n204-from-t257
+      claim: >-
+        s(204) <= 7403810497792604009019579959/(5*10^26) by n-204-candidate.yaml at
+        kenaznia-doga/s204-upper-bound d4b8b05, a packing started from Evan Daniel's #845
+        certificate (T-257).
+      source: body
+      register:
+      - T-264
+      evidence:
+      - E-ozden-894-certificate-report
+      validation:
+      - think-ybep
+    beads:
+    - think-8b8m
+    - think-ybep
+    - think-mdxq
+    answer_bead: think-8b8m
+    replies: []
+    close_when: >-
+      T-264 is on main and the reply on main says what was replayed and that the stage 4
+      review and the adoption at 204 are think-ybep's; the licence question (think-mdxq) is
+      carried in the closing comment.
+  - number: 895
+    title: Improved upper bound for s(260)
+    author: vitamoon
+    opened: '2026-11-04'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Kaelan Yim reports s(260) <=
+      1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626
+      = 16.6339825019226141..., 1.99e-10 below the house, Evan Daniel's #845 certificate
+      (T-257), from a search started from a public packing attributed to Evan Daniel and Kirill
+      Tymchishin, the refinement the author's own; AI was used to study and set up the
+      environment. The issue says its Witness/v2 corner conversion passes this repository's
+      devtools.check_rational_witness_independent at e6e8d577 (33,670 pairs). The certificate is
+      only a GitHub issue attachment (user-attachments), which the session cannot fetch, so
+      nothing is retained or checked (think-qclj). The ledger of 4 November
+      (upper-bounds-893-895-20261104) walks the claim by the side the issue states, the first
+      report below T-257 at 260; stage 3 registers nothing until a certificate is retained. The
+      acknowledgement of 4 November asks the author to commit the file to a public GitHub
+      repository and name the commit and its SHA-256.
+    read_through: '2026-11-04T02:15:02Z'
+    results:
+    - key: n260-yim
+      claim: >-
+        s(260) <=
+        1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626
+        by the certificate n260.cert.txt attached to the issue.
+      source: body
+      not_registered: >-
+        The certificate is a GitHub issue attachment this session cannot fetch, so no file is
+        retained or decided. Once the author names a public commit holding it, the packet is
+        retained at that commit and its digest checked, both exact routes decide it with its
+        controls, and the register takes it as the ledger of 4 November records it.
+      queued: true
+      bead: think-qclj
+    beads:
+    - think-qclj
+    answer_bead: think-qclj
+    replies:
+    - url: https://github.com/jlevy/squares/issues/895#issuecomment-6623457978
+      date: '2026-11-04'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n260-yim
+    awaiting_author:
+    - question: >-
+        Would the author commit n260.cert.txt, unchanged, to a public GitHub repository and
+        name the commit and the file's SHA-256? The attachment cannot be fetched here, so the
+        claim names no file the record can pin.
+      changes: file
+      asked: https://github.com/jlevy/squares/issues/895#issuecomment-6623457978
+      state: awaiting
+    close_when: >-
+      The certificate is retained at a public commit the author names, registered and replied
+      to on main, with its review and adoption owned by their bead; nothing the author asked
+      for is queued.
+    notes: >-
+      Not checked on 4 November 2026: the attachment
+      https://github.com/user-attachments/files/34348312/n260.cert.txt, which the session
+      cannot fetch. The acknowledgement (issuecomment-6623457978) was posted before the
+      records pull request merged, as #847's was, since it states no id or rung and links
+      nothing on a branch, and it asks for the custody the import waits on.

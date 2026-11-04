@@ -55105,3 +55105,63 @@ evidence:
       producer's code, not clean-room, by a Claude agent, a system family the author's
       lab also used.
     source_reviewed: '2026-11-03'
+  - id: E-ozden-893-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 299
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s299 upper bound 2026-11-03]'
+    certificate: packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-04'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 6486ead. A
+      separate complete repository replay is retained for n = 299: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 267306 pair
+      decisions; summed over the 3 jobs, the receipt records 30.99 route CPU seconds and 99.45 job
+      wall seconds, the longest job 42.64 seconds. In every positive squares touch the box, a least
+      wall clearance of exactly 0, and every pair clears by at least 9.99e-23. The packet's sharp
+      controls meet those margins on both routes. Independent review and confirmation remain pending
+      (think-ybep). The source's own checkers were not run here. The issue's 12-place print,
+      17.801238533979, is 6.21e-14 below the exact side; the claim is the exact fraction it also
+      states.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.
+  - id: E-ozden-894-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 204
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s204 upper bound 2026-11-03]'
+    certificate: packing/resources/web/ozden-s204-upper-bound-2026-11-03/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-04'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at d4b8b05. A
+      separate complete repository replay is retained for n = 204: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 124236 pair
+      decisions; summed over the 3 jobs, the receipt records 14.4 route CPU seconds and 42.51 job
+      wall seconds, the longest job 17.15 seconds. Every positive clears every wall by at least
+      9.99e-18 and every pair by at least 9.99e-18. The packet's sharp controls meet those margins
+      on both routes. Independent review and confirmation remain pending (think-ybep). The source's
+      own checkers were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.

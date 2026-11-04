@@ -12069,6 +12069,58 @@ sources:
     reported 1993/200 is above T-091's 199/20, which n-094's verified lower lane keeps until
     a control receipt passes (think-4uun); the stage 4 review of 3 November accepts the
     certificate. T-262 records the claim.
+- id: ozden-s299-upper-bound-2026-11-03
+  title: >-
+    Doğa Özden's packing of 299 squares at kenaznia-doga/s299-upper-bound 6486ead, issue 893
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s299-upper-bound/tree/6486ead9be5e3348f64ad39aecc1950f22910de4
+  local: resources/web/ozden-s299-upper-bound-2026-11-03/
+  source_key: '[Özden s299 upper bound 2026-11-03]'
+  scope:
+    n_values:
+    - 299
+  reviewed: '2026-11-04'
+  source_date: '2026-11-03'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s299-upper-bound-2026-11-03/acquisition/claims.json
+  evidence:
+  - E-ozden-893-certificate-report
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted where its exact side
+    equals the side its source prints: the issue's exact fraction, since its 12-place print is
+    6.21e-14 below that side. T-263 records the in-horizon report. The ledger of 4 November for this
+    pass (campaign/issue-intake/upper-bounds-893-895-20261104) decides which are recorded. All 3
+    native jobs have full outcomes. No selected override or superseded claim is created at this
+    source-only stage; current cases and earlier source ownership remain unchanged.
+- id: ozden-s204-upper-bound-2026-11-03
+  title: >-
+    Doğa Özden's packing of 204 squares at kenaznia-doga/s204-upper-bound d4b8b05, issue 894
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s204-upper-bound/tree/d4b8b05c45e3be464476c94712a4dbc063009875
+  local: resources/web/ozden-s204-upper-bound-2026-11-03/
+  source_key: '[Özden s204 upper bound 2026-11-03]'
+  scope:
+    n_values:
+    - 204
+  reviewed: '2026-11-04'
+  source_date: '2026-11-03'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s204-upper-bound-2026-11-03/acquisition/claims.json
+  evidence:
+  - E-ozden-894-certificate-report
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-264 records the in-horizon report.
+    The ledger of 4 November for this pass (campaign/issue-intake/upper-bounds-893-895-20261104)
+    decides which are recorded. All 3 native jobs have full outcomes. No selected override or
+    superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

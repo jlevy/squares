@@ -223,6 +223,22 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s299-upper-bound",
+        "Doğa Özden",
+        (
+            "An exact rational packing of 299 squares found from Evan Daniel's, 1.54e-8"
+            " below it; replayed here, review pending (T-263)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s204-upper-bound",
+        "Doğa Özden",
+        (
+            "An exact rational packing of 204 squares started from Evan Daniel's, 6.48e-6"
+            " below it; replayed here, review pending (T-264)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (

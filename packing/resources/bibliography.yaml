@@ -4539,6 +4539,45 @@ sources:
       under his direction. No licence stated; retained on the presumption of permission
       the author's submission carries (think-cnn7; think-0so3). Ozden is Özden in the
       credit's ASCII. Retained in web/ozden-s94-lower-bound-2026-11-03/.
+  - key: '[Özden s299 upper bound 2026-11-03]'
+    authors: [Özden]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-03'
+    lineage: builds-on-project
+    credit: Ozden after Daniel, Deotte
+    short_credit: Ozden after Daniel et al.
+    note: >-
+      kenaznia-doga/s299-upper-bound at 6486ead9be5e3348f64ad39aecc1950f22910de4
+      (2026-11-03T18:57:22Z), Doğa Özden's certificate for s(299) <=
+      3560247706795812422293947620670679551/(2*10^35) = 17.801238533979062...: a rational
+      centre-basis Witness/v2 of a packing found from the registry's 299, Evan Daniel's
+      0e76d9f certificate after Chris Deotte (T-258), with the lower-right tilted corner
+      rebuilt. Registration was requested in jlevy/squares#893, posted on the author's behalf
+      by his AI agent's account kenaznia-doga; the search was AI-assisted (GPT-based agents
+      plus local optimisation), under his direction. No global optimality claim. No licence
+      stated; retained on the presumption of permission the author's submission carries
+      (think-cnn7; think-mdxq). Ozden is Özden in the credit's ASCII. Retained in
+      web/ozden-s299-upper-bound-2026-11-03/.
+  - key: '[Özden s204 upper bound 2026-11-03]'
+    authors: [Özden]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-03'
+    lineage: builds-on-project
+    credit: Ozden after Daniel, Ostashev
+    short_credit: Ozden after Daniel et al.
+    note: >-
+      kenaznia-doga/s204-upper-bound at d4b8b05c45e3be464476c94712a4dbc063009875
+      (2026-11-03T22:35:57Z), Doğa Özden's certificate for s(204) <=
+      7403810497792604009019579959/(5*10^26) = 14.807620995585208...: a rational centre-basis
+      Witness/v2 of a packing started from the registry's 204, Evan Daniel's #845 certificate
+      (T-257), whose lineage Daniel states starts at Daniil Ostashev's s(176) packing.
+      Registration was requested in jlevy/squares#894, posted on the author's behalf by his AI
+      agent's account kenaznia-doga; the search was AI-assisted, under his direction. No global
+      optimality claim. No licence stated; retained on the presumption of permission the
+      author's submission carries (think-cnn7; think-mdxq). Ozden is Özden in the credit's
+      ASCII. Retained in web/ozden-s204-upper-bound-2026-11-03/.
 credited_names:
   Doğa Özden: Özden
   Benjamin Greff: Greff
