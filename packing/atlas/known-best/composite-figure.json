@@ -2469,7 +2469,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10","minimal_polynomial":"s - 10 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(94) ≥ 9.950000","evidence":["E-n094-wand125-mixed-995-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.95"},
+        "lower": {"correction":false,"display":"s(94) ≥ 9.965000","evidence":["E-ozden-890-n94-9965-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.965"},
         "n": 94,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {

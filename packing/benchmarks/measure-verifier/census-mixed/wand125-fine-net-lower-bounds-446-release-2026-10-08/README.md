@@ -31,9 +31,14 @@ It sits $3.28 \times 10^{-9}$ above the sweep’s certified bound, beyond the ce
 constant allowance `AXIS_ROUNDING` of $10^{-9}$, so `captures_agree` is false there and
 the receipt’s status is `CONTROL_FAILED`. The 14 October review’s finding F-1 says the
 allowance should come from the sweep’s enclosure, which varies by certificate (n28 at
-$2.15 \times 10^{-9}$, n39 at $1.26 \times 10^{-9}$). The fix is a change of control
-logic that needs a review, owned by think-tcsl; until it lands, n26 has no accepted
-control receipt and T-233 stays below `C3`.
+$2.15 \times 10^{-9}$, n39 at $1.26 \times 10^{-9}$). That fix landed on 4 November in
+#892 (think-4uun): the census now recomputes the enclosure the sweep held at its least
+vertex, requires its lower end to be the crate’s bound to the bit and the capture to lie
+inside it, and under that rule this kept receipt’s axis refusal holds, the capture
+inside an enclosure $6.57 \times 10^{-9}$ wide
+(`test_each_retained_axis_refusal_is_the_crates_enclosure`). Until the control is
+written again under it (think-tcsl), n26 has no accepted control receipt and T-233 stays
+below `C3`.
 
 All runs used `sqverify-fast` built from the reviewed crate source `d97758bb…` (binary
 `567a0fd5…`, rustc 1.98.0, release, x86_64-unknown-linux-gnu), at two threads under

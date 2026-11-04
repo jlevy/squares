@@ -4,10 +4,10 @@ The census control judges an axis refusal against the enclosure `[l', u']` this 
 recomputes, tied to the crate by `l'` equal to the crate's certified bound to the bit
 (F-1 of the 14 October review). These tests hold what that rule rests on: the directed
 steps reach the adjacent binary64 values across the whole range, as lemma I1 needs; the
-walk's lower end is the crate's on a retained certificate, for the original and for the
-99/100 mutant; and its upper end, which no lower end witnesses, is the one a build of the
-crate instrumented to report it gave (review A of #892), here and on a measure whose
-images coincide.
+walk's lower end is the crate's on two retained certificates, s(37)'s and s(94)'s, for
+the original and for the 99/100 mutant; and its upper end, which no lower end witnesses,
+is the one a build of the crate instrumented to report it gave (review A of #892), there
+and on a measure whose images coincide.
 """
 
 from __future__ import annotations
@@ -18,6 +18,7 @@ import math
 import random
 import struct
 from fractions import Fraction
+from pathlib import Path
 
 import pytest
 
@@ -30,18 +31,30 @@ NAME = "mixed_n37_L64975"
 PACKET = "wand125-fine-net-n37-n39-n44-2026-10-13"
 CANDIDATE = census.WEB / PACKET / "release/certificates" / NAME / "candidate.json.gz"
 RECEIPTS = census.CENSUS_ROOT / "census-mixed" / PACKET
+#: T-262's dilated certificate (#890), whose 600-direction control passed under this rule.
+N94 = "mixed_n94_L9965"
 #: The 14 October review's own emulation of the sweep at the mutant's least vertex.
 REVIEW = census.WEB / PACKET / "review/outputs/sweep_emulation-n37-scaled-99-100.json"
 #: The upper ends `value.hi` at the axis sweep's least vertex that a build of the reviewed
-#: crate source `d97758bb` instrumented to report them gave (review A of #892, and again in
-#: its lane on 3 November, with lower ends and argmins equal to the reviewed build's):
-#: mixed_n37_L64975's original and 99/100 mutant, and `COINCIDENT_AXIS`'s.
+#: crate source `d97758bb` instrumented to report them gave, with lower ends and argmins
+#: equal to the reviewed build's: mixed_n37_L64975's and mixed_n94_L9965's originals and
+#: 99/100 mutants (review A of #892, and again in its lane on 3 November; both again in
+#: intake lane L37 on 4 November), and `COINCIDENT_AXIS`'s. The instrumentation is kept
+#: as `INSTRUMENT`, whose README says how to apply it and build.
 CRATE_UPPER = {
     (NAME, Fraction(1)): 1.002369279185975,
     (NAME, Fraction(99, 100)): 0.9923455863941246,
+    (N94, Fraction(1)): 1.0031171867987096,
+    (N94, Fraction(99, 100)): 0.9930860149308234,
     ("coincident", Fraction(1)): 0.2625000000000111,
     ("coincident", Fraction(99, 100)): 0.25987500000001146,
 }
+#: The patch to the reviewed crate's `axis.rs` that reports `value.hi` at the argmin, kept
+#: so that `CRATE_UPPER` can be reproduced (F2 of #898's review); it is never applied in
+#: the tree.
+INSTRUMENT = (
+    Path(__file__).parent / "fixtures/sqverify-fast-axis-instrument/axis-value-hi.patch"
+)
 #: The axis sweep's bound and least vertex on `COINCIDENT_AXIS`, from the reviewed build.
 COINCIDENT_ROWS = {
     Fraction(1): (0.26249999999998913, ("27/20", "2")),
@@ -93,20 +106,24 @@ def test_a_rational_is_enclosed_by_its_two_neighbours() -> None:
         assert high == math.nextafter(low, math.inf)
 
 
-def test_the_walk_is_the_crates_at_the_least_axis_vertex() -> None:
+@pytest.mark.parametrize("name", [NAME, N94])
+def test_the_walk_is_the_crates_at_the_least_axis_vertex(name: str) -> None:
     """At the census row's axis vertex for the original and the control's for the 99/100
     mutant, the recomputed enclosure's lower end is the crate's certified bound to the bit
     and its upper end the instrumented crate's, and it holds the exact capture evaluated
-    apart from the crate. The mutant's is the 14 October review's emulation to the bit."""
-    raw = read_raw(CANDIDATE)
+    apart from the crate: at s(37) and at s(94), whose control receipt is the one the
+    enclosure rule passed. s(37)'s mutant is the 14 October review's emulation to the bit."""
+    case = {case.certificate: case for case in census.mixed_cases()}[name]
+    receipts = census.CENSUS_ROOT / "census-mixed" / case.packet
+    raw = read_raw(case.candidate)
     upper = census.domain_bounds(raw, 0)[1]
     rows = [
         json.loads(line)
-        for line in gzip.decompress((RECEIPTS / f"{NAME}.jsonl.gz").read_bytes()).splitlines()
+        for line in gzip.decompress((receipts / f"{name}.jsonl.gz").read_bytes()).splitlines()
         if line
     ]
     original = next(row for row in rows if row.get("r") == 0)
-    control = json.loads((RECEIPTS / f"{NAME}.control.json").read_text(encoding="utf-8"))
+    control = json.loads((receipts / f"{name}.control.json").read_text(encoding="utf-8"))
     sweep = next(run["sweep"] for run in control["runs"] if "sweep" in run)
     mutant = next(item for item in sweep["refused"] if item["r"] == 0)
     for factor, pose, bound in (
@@ -118,8 +135,11 @@ def test_the_walk_is_the_crates_at_the_least_axis_vertex() -> None:
         assert enclosure is not None
         low, high = enclosure
         assert low == bound
-        assert high == CRATE_UPPER[NAME, factor]
+        assert high == CRATE_UPPER[name, factor]
         assert Fraction(low) <= factor * mixed_exact(raw, x, y, 0) <= Fraction(high)
+    if name != NAME:
+        return
+    assert case.candidate == CANDIDATE
     review = json.loads(REVIEW.read_text(encoding="utf-8"))
     x, y = (Fraction(value) for value in mutant["pose"])
     enclosure = axis.column_enclosure(raw, census.CONTROL_SCALE, x, y, upper)
@@ -170,3 +190,37 @@ def test_no_enclosure_where_the_sweep_would_not_run() -> None:
         "primitives": [{"kind": "point", "geometry": ["1", "1"], "mass": "1"}],
     }
     assert axis.column_enclosure(linear, Fraction(1), side / 2, side / 2, upper) is None
+
+
+def test_the_kept_instrumentation_still_fits_the_reviewed_axis_sweep() -> None:
+    """`INSTRUMENT` only adds lines, and its context is the crate's `axis.rs` hunk by hunk
+    in order, so the build its README describes is still the reviewed source plus the
+    report of `value.hi` that `CRATE_UPPER` came from."""
+    source = (census.PROJECT / "sqverify_fast/src/axis.rs").read_text(encoding="utf-8")
+    lines = source.splitlines()
+    text = INSTRUMENT.read_text(encoding="utf-8").splitlines()
+    assert text[:2] == [
+        "--- a/packing/sqverify_fast/src/axis.rs",
+        "+++ b/packing/sqverify_fast/src/axis.rs",
+    ]
+    hunks: list[list[str]] = []
+    for line in text[2:]:
+        if line.startswith("@@"):
+            hunks.append([])
+        else:
+            hunks[-1].append(line)
+    assert hunks
+    added: list[str] = []
+    position = 0
+    for hunk in hunks:
+        assert not any(line.startswith("-") for line in hunk)
+        added += [line[1:] for line in hunk if line.startswith("+")]
+        context = [line[1:] for line in hunk if not line.startswith("+")]
+        start = next(
+            index
+            for index in range(position, len(lines) - len(context) + 1)
+            if lines[index : index + len(context)] == context
+        )
+        position = start + len(context)
+    assert "                hi_at_argmin = value.hi;" in added
+    assert any("INSTRUMENT axis argmin" in line for line in added)

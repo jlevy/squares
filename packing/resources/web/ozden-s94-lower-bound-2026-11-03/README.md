@@ -114,20 +114,27 @@ the original again at direction 277; refused every mass scaled by 99/100 at all 
 directions, each a coverage refusal at a centre in the per-bin domain where the mutant’s
 exact capture, evaluated apart from the crate, is below 1; and refused the mutant scaled
 to one part in a million below 1 at the least-bound leaf’s centre, with an exact witness.
-The receipt is kept as it failed closed,
+Its first receipt, of 3 November, is kept as it failed closed,
 `mixed_n94_L9965.control-failed-v2.json`, on one bookkeeping rule: at the axis the exact
 capture of the 99/100 mutant at the sweep’s least vertex, $0.99308601381$, sits
 $1.12 \times 10^{-9}$ above the vertex sweep’s certified bound, beyond the census’s
-constant tolerance of $10^{-9}$. The refusal there is sound, the bound lying below the
-capture as it must; the constant is F-1 of the
+constant tolerance of $10^{-9}$ at the time. The refusal there is sound, the bound lying
+below the capture as it must; the constant is F-1 of the
 [14 October review](../../../../docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md),
-which n = 39’s control meets too, and think-4uun owns its fix.
+which n = 39’s control met too.
+Pull request #892 (think-4uun) replaced the constant: the census now recomputes the
+enclosure the sweep held at that vertex, requires its lower end to be the crate’s bound
+to the bit, and requires the exact capture to lie inside it.
+Written again under that rule on 4 November, the control passed,
+`mixed_n94_L9965.control.json`, status `CONTROLS_REFUSED`: the same runs and refusals,
+with the axis capture inside $[0.9930860126842824, 0.9930860149308234]$.
 
 The author ran the same checker, so this replay is reproduced with the producer’s code;
 it is not a second implementation. On a declared net the census route stands as
 evidence only beside a passing control receipt (the 6 October declared-net soundness
-review, item 6) and once a review has read the certificate’s mathematics (item 7), so
-no evidence entry cites the row yet.
+review, item 6) and once a review has read the certificate’s mathematics (item 7).
+With both, the row is `E-ozden-890-n94-9965-sqverify-fast-replay`, T-262 is V3/C3, and
+n-094’s verified lower bound is $1993/200$.
 
 ## The Stage 4 Review
 
@@ -155,8 +162,6 @@ Its F1 is the control’s axis tolerance above. Its notes for the source:
 
 ## What Is Not Established
 
-- **No passing control yet.** Until a control receipt passes (think-4uun), n-094’s
-  verified lower bound stays T-091’s $199/20$.
 - **No second complete implementation here.** The replay is this repository’s
   `sqverify-fast`, the checker the author ran, so it is reproduced with the producer’s
   code; the review decided one direction in full and sampled the rest, and the author’s

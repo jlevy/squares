@@ -15,7 +15,8 @@ review, as the census control judges it since #892). That walk is a transcriptio
 crate's arithmetic, not an independent method; the capture it is compared with is this
 instrument's own.
 
-Run with --help for the required case parameters. Rational
+A candidate may carry a `derived_from` provenance string beside the format's fields; it
+is admitted and not read. Run with --help for the required case parameters. Rational
 strings have their literal values; numeric receipt coordinates denote binary64 values,
 as in the maintained control writer. No commit or result number enters the verdict.
 """
@@ -89,11 +90,23 @@ class Measure:
         return (self.count - 1) * self.step
 
 
+#: The fields of the narrow rectangle-only format M this audit admits.
+CANDIDATE_FIELDS = frozenset({"n", "L", "B", "proof_net", "total_mass", "points", "rectangles"})
+#: Provenance a candidate may carry beside them, as a string, which nothing here reads:
+#: `derived_from`, the note a regenerated certificate states its origin in (#890's
+#: s(94) dilation), and which the crate's admission ignores too.
+PROVENANCE_FIELDS = frozenset({"derived_from"})
+
+
 def candidate_measure(data: dict[str, Any], n: int, side: Fraction) -> Measure:
     """Admit the narrow rectangle-only form needed by this audit, then expand D4."""
     require(
-        set(data) == {"n", "L", "B", "proof_net", "total_mass", "points", "rectangles"},
+        CANDIDATE_FIELDS <= set(data) <= CANDIDATE_FIELDS | PROVENANCE_FIELDS,
         "candidate must have the rectangle-only format-M audit fields",
+    )
+    require(
+        all(type(data[key]) is str for key in PROVENANCE_FIELDS & set(data)),
+        "a provenance field must be a string",
     )
     require(type(data["n"]) is int and data["n"] == n and n > 0, "candidate count differs")
     require(rational(data["L"]) == side and side > 0, "candidate side differs")
@@ -595,7 +608,12 @@ def audit(
     side: Fraction,
     *,
     seconds: float,
+    candidate_path: str | None = None,
 ) -> dict[str, Any]:
+    """Audit one case. The candidate is `release/certificates/CERTIFICATE/candidate.json.gz`
+    in the packet, as the wand125 release packets keep it, or `candidate_path`, a relative
+    path inside the packet for one kept as its source published it (#890's
+    `source/certificate/n94_L9965.json.gz`); the receipts bind it by digest either way."""
     started = time.monotonic()
     require(0 < seconds <= 300, "time budget must be between 0 and 300 seconds")
     for name in (packet, certificate):
@@ -603,14 +621,18 @@ def audit(
             name not in ("", ".", "..") and Path(name).name == name,
             "case names must be single path components",
         )
-    candidate = (
-        root
-        / "packing/resources/web"
-        / packet
-        / "release/certificates"
-        / certificate
-        / "candidate.json.gz"
+    inside = (
+        Path(candidate_path)
+        if candidate_path is not None
+        else Path("release/certificates") / certificate / "candidate.json.gz"
     )
+    require(
+        not inside.is_absolute()
+        and inside.parts
+        and all(part not in ("", ".", "..") for part in inside.parts),
+        "the candidate path must be a relative path inside the packet",
+    )
+    candidate = root / "packing/resources/web" / packet / inside
     raw = candidate.read_bytes()
     measure = candidate_measure(read_json(gzip.decompress(raw)), n, side)
     base = root / "packing/benchmarks/measure-verifier/census-mixed"
@@ -674,6 +696,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--n", type=int, required=True)
     parser.add_argument("--side", type=Fraction, required=True)
     parser.add_argument(
+        "--candidate",
+        default=None,
+        help="the candidate's path inside the packet "
+        "(default: release/certificates/CERTIFICATE/candidate.json.gz)",
+    )
+    parser.add_argument(
         "--seconds",
         type=float,
         default=300,
@@ -688,6 +716,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.n,
             args.side,
             seconds=args.seconds,
+            candidate_path=args.candidate,
         )
     except (
         ValueError,

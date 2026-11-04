@@ -7843,7 +7843,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-03'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/95.html
   canonical: cases/95.html
@@ -22847,7 +22847,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-11-03'
-  lastmod: '2026-11-03'
+  lastmod: '2026-11-04'
   status: live
   identity:
     kind: lower-bound
@@ -22862,6 +22862,7 @@ urls:
     builds_on: null
     evidence:
     - E-ozden-890-n94-9965-report
+    - E-ozden-890-n94-9965-sqverify-fast-replay
     artifacts:
     - packing/resources/web/ozden-s94-lower-bound-2026-11-03/README.md
     - packing/resources/web/ozden-s94-lower-bound-2026-11-03/acquisition/sources.json
@@ -22872,8 +22873,40 @@ urls:
     - packing/devtools/audit_dilated_measure.py
     - packing/benchmarks/measure-verifier/census-mixed/census.json
     - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.control.json
     - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.control-failed-v2.json
     - docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
+  amendments:
+  - date: '2026-11-04'
+    reason: The complete sqverify-fast census replay of mixed_n94_L9965 at all 600 directions, with
+      its whole-net control written again under the census's enclosure rule for the axis (think-qpq0),
+      is cited as replay evidence, and the passing control receipt joins the artifacts; the result
+      rises to V3/C3. The value, scope and attribution are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 94
+      established: null
+      attribution:
+        source_keys:
+        - '[Özden s94 dilation 2026-11-03]'
+        published: '2026-11-03'
+      builds_on: null
+      evidence:
+      - E-ozden-890-n94-9965-report
+      artifacts:
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/README.md
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/acquisition/sources.json
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/source/certificate/n94_L9965.json.gz
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/receipts/dilation-audit.json
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/receipts/replay-comparison.json
+      - packing/resources/web/ozden-s94-lower-bound-2026-11-03/review/dilated-measure-2026-11-03/README.md
+      - packing/devtools/audit_dilated_measure.py
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/mixed_n94_L9965.control-failed-v2.json
+      - docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md
 - path: result/t-263.html
   canonical: result/t-263.html
   kind: result

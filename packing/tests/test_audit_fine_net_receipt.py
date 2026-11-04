@@ -122,6 +122,61 @@ def test_candidate_rejects_broken_mathematical_premises(defect: str) -> None:
         audit.candidate_measure(data, 4, Fraction(2))
 
 
+def test_a_provenance_note_is_admitted_and_not_read() -> None:
+    """A regenerated certificate may say where it came from in `derived_from` (#890's
+    dilation does), which the crate's admission ignores: the measure is the same with it
+    or without it. Only a string is admitted, and no other extra field."""
+    plain = audit.candidate_measure(candidate(), 4, Fraction(2))
+    noted = {**candidate(), "derived_from": "published certificate at L=2 scaled by 1"}
+    assert audit.candidate_measure(noted, 4, Fraction(2)) == plain
+    for extra in ({"derived_from": 1}, {"derived_from": None}, {"scaling_factor": "1"}):
+        with pytest.raises(audit.AuditError):
+            audit.candidate_measure({**candidate(), **extra}, 4, Fraction(2))
+
+
+@pytest.mark.parametrize("field", sorted(audit.CANDIDATE_FIELDS))
+def test_a_candidate_missing_a_format_field_is_refused_on_admission(field: str) -> None:
+    """Admission names the format's fields as a lower bound as well as an upper one, so a
+    candidate without one is refused there with the format's reason, with or without a
+    provenance note, and never reaches a later read of the missing key."""
+    for base in (candidate(), {**candidate(), "derived_from": "a note"}):
+        data = {key: value for key, value in base.items() if key != field}
+        with pytest.raises(audit.AuditError, match="format-M audit fields"):
+            audit.candidate_measure(data, 4, Fraction(2))
+
+
+@pytest.mark.parametrize(
+    ("flags", "expected"),
+    [
+        ([], None),
+        (
+            ["--candidate", "source/certificate/n94_L9965.json.gz"],
+            "source/certificate/n94_L9965.json.gz",
+        ),
+    ],
+)
+def test_the_cli_hands_its_candidate_path_to_the_audit(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    flags: list[str],
+    expected: str | None,
+) -> None:
+    """`--candidate` reaches `audit` as `candidate_path`, and without it the default
+    release layout is asked for (None)."""
+    seen: dict[str, Any] = {}
+
+    def recorded(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        seen.update(args=args, **kwargs)
+        return {"status": "PASS"}
+
+    monkeypatch.setattr(audit, "audit", recorded)
+    argv = ["--root", ".", "--packet", "p", "--certificate", "c", "--n", "94"]
+    assert audit.main([*argv, "--side", "1993/200", *flags]) == 0
+    assert seen["candidate_path"] == expected
+    assert seen["args"][1:4] == ("p", "c", 94)
+    assert json.loads(capsys.readouterr().out)["status"] == "PASS"
+
+
 def direction_log() -> list[dict[str, Any]]:
     return [
         *[
@@ -288,8 +343,7 @@ def test_the_kept_n94_axis_refusal_holds_under_the_enclosure_rule() -> None:
     """mixed_n94_L9965's control failed closed on the constant allowance alone (#890). Its
     axis refusal, with `captures_agree` as the enclosure rule judges it, passes here: the
     bound is the recomputed lower end, and the exact capture, 1.12e-9 above it, lies in
-    the enclosure. Its candidate carries a `derived_from` note this instrument's narrow
-    format does not admit; the measure is read without it."""
+    the enclosure. Its candidate's `derived_from` note is admitted and not read."""
     name = "mixed_n94_L9965"
     case = {c.certificate: c for c in census.mixed_cases()}[name]
     folder = census.CENSUS_ROOT / "census-mixed" / case.packet
@@ -297,7 +351,7 @@ def test_the_kept_n94_axis_refusal_holds_under_the_enclosure_rule() -> None:
     sweep = next(run["sweep"] for run in control["runs"] if "sweep" in run)
     item = {**next(row for row in sweep["refused"] if row["r"] == 0), "captures_agree": True}
     raw = audit.read_json(gzip.decompress(case.candidate.read_bytes()))
-    raw.pop("derived_from")
+    assert "derived_from" in raw
     measure = audit.candidate_measure(raw, case.n, Fraction(case.side))
     factor = Fraction(99, 100)
     assert factor * audit.check_refusal(measure, item, factor, math.inf) == Fraction(
@@ -307,6 +361,58 @@ def test_the_kept_n94_axis_refusal_holds_under_the_enclosure_rule() -> None:
     assert low == item["crate_lower_bound"]
     assert Fraction(item["capture"]) - Fraction(low) > Fraction(1, 10**9)
     assert (low, high) == (0.9930860126842824, 0.9930860149308234)
+
+
+def test_the_whole_audit_reads_n94_from_its_source_packet(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The auditor reads mixed_n94_L9965 where #890's packet keeps it, as its source
+    published it (`--candidate source/certificate/n94_L9965.json.gz`), with its
+    `derived_from` note, and binds it to the census row, the 600-direction capture and the
+    control receipt the enclosure rule passed. The axis refusal and the least-bound
+    direction's are recomputed exactly here, with the selected centre and the
+    near-threshold witness; the other 598 refusals take their receipt's captures, to keep
+    the test fast. The full run, every refusal recomputed, passed on 4 November 2026 in
+    37.5 s (`independent_refusal_points` 600)."""
+    real = audit.check_refusal
+
+    def sampled(
+        measure: audit.Measure, row: dict[str, Any], factor: Fraction, deadline: float
+    ) -> Fraction:
+        if row["r"] in (0, 277):
+            return real(measure, row, factor, deadline)
+        return Fraction(row["capture"]) / factor
+
+    monkeypatch.setattr(audit, "check_refusal", sampled)
+    root = census.PROJECT.parent
+    packet = "ozden-s94-lower-bound-2026-11-03"
+    with pytest.raises(FileNotFoundError):
+        audit.audit(root, packet, "mixed_n94_L9965", 94, Fraction(1993, 200), seconds=60)
+    result = audit.audit(
+        root,
+        packet,
+        "mixed_n94_L9965",
+        94,
+        Fraction(1993, 200),
+        seconds=120,
+        candidate_path="source/certificate/n94_L9965.json.gz",
+    )
+    assert result["status"] == "PASS"
+    assert result["candidate_gzip_sha256"].startswith("116c8342")
+    assert (result["rectangles"], result["expanded_rectangles"]) == (853, 6720)
+    assert result["independent_refusal_points"] == 600
+    assert result["least_leaf_index"] == 277
+    for outside in ("../ozden-s94-lower-bound-2026-11-03/README.md", "/etc/hostname", "."):
+        with pytest.raises(audit.AuditError, match="inside the packet"):
+            audit.audit(
+                root,
+                packet,
+                "mixed_n94_L9965",
+                94,
+                Fraction(1993, 200),
+                seconds=10,
+                candidate_path=outside,
+            )
 
 
 def test_numeric_pose_preserves_binary64_not_decimal_semantics() -> None:
