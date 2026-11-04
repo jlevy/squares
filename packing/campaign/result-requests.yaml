@@ -26693,7 +26693,7 @@ issues:
       17.803695435316, reported after it and above it, is not recorded. Registered as T-258. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-daniel-824-299-update.md) accepted it for finite feasibility and for adoption, with no blocking or major finding; it is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 299 under the house rule in this pass, withdrawing the conjectured optimum. The review's M-1 notes that the certificate does not settle the local-optimality question, which stays the author's numerical report.
       maximusrufus's comments of 26 and 29 October are verification receipts of both
       certificates by his own exact recheck, reporting no result.
-    read_through: '2026-10-29T14:46:20Z'
+    read_through: '2026-11-04T13:58:24Z'
     results:
     - key: n299
       claim: >-
@@ -26798,6 +26798,17 @@ issues:
       - result: n299-update-2026-10-29
         id: E-evand-n299-update-review-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/824#issuecomment-6632538825
+      date: '2026-11-04'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n299-update-2026-10-29
+        id: T-258
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       The result is registered, reviewed and adopted at 299 with its drawing regularized and
       flipped, and the reply on main says so; nothing the author asked for is queued.
@@ -26832,6 +26843,14 @@ issues:
       The final reply of 31 October (issuecomment-6543935364) was edited the same
       afternoon, after #860's review (A4), to name the confirmed replay and review
       entries this entry now lists; the reply as recorded is the edited one.
+
+      The follow-up of 4 November (issuecomment-6632538825, 13:58:24Z) brings the final
+      reply's position for T-258 up to date: still V3/C3, confirmed, and superseded at 299
+      by T-263, Doğa Özden's further arrangement of T-258's packing from #893, 1.54e-8
+      below it, which #897 adopted as the house (merged as 0dc4eaa7b, Pages run
+      41835363591). It was rendered with check_requests --draft 824 from main c5e1f3da9 and
+      read back identical to what was posted; the issue stays closed. T-263 is #893's
+      result, so the reply names it in its text and #893's entry records it.
   - number: 843
     title: 's(130) ≤ 11.902430646: registration request'
     author: franciscouzo
