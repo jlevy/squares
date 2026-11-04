@@ -5,8 +5,8 @@ title: "Import Özden: s(94) >= 1993/200 by dilating Hosono's mixed_n94_L995 on 
 kind: task
 status: in_progress
 priority: 1
-version: 6
-delegate: bold-ritchie-l33
+version: 7
+delegate: bold-ritchie
 labels:
   - result-import
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-03T01:58:43.855Z
-updated_at: 2026-11-03T06:18:47.455Z
+updated_at: 2026-11-04T09:13:24.081Z
 started_at: 2026-11-03T01:58:48.827Z
 ---
 Import of jlevy/squares#890 (opened 2026-11-03T01:20:31Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(94) >= 1993/200 = 9.965, above the verified 199/20 of T-091 (Hosono, mixed_n94_L995).
@@ -38,9 +38,11 @@ Answer bead: this bead.
 
 2026-11-03 (bold-ritchie-l33): DRAFT of #890's reply, revised after the stage 4 review and review A of #891; not posted. Post it only after #891 merges and the deploy is verified: render from main with `check_requests --draft 890`, check main and the site say what it says, adjust T-NNN if renumbered, post, then record it under #890's replies (kind: final, closing the issue) in the next change. #890 is closeable once T-262 is on main: its validation names think-4uun; the licence and n = 31 questions go in this closing comment and hold nothing open.
 
+2026-11-04 (bold-ritchie-l37, think-qpq0): DRAFT revised for T-262 at V3/C3 (PR #898, intake lane L37); not posted; it replaces the draft of 3 November. Post it only after #898 merges and the deploy is verified: render from main with `check_requests --draft 890`, check that main and the site say T-262 is V3/C3 and that n-094's verified lower bound is 1993/200, post it, then record it under #890's replies (kind: final, closing the issue) in the next change. #890's `s94-dilation` result names no validation bead after #898, so nothing holds the issue open; the licence and n = 31 questions go in this closing comment.
+
 ---
 
-Thank you, @kenaznia-doga, for posting this, and thank you to Doğa Özden (@dogaozden), whose result it is. This reply records what was done with #890 and closes the issue. Each later step will be posted here.
+Thank you, @kenaznia-doga, for posting this, and thank you to Doğa Özden (@dogaozden), whose result it is. This reply records what was done with #890 and closes the issue.
 
 **Received and retained.** `kenaznia-doga/s94-lower-bound` at `9d76ad5`, kept whole but for `.gitignore` as the source packet [`ozden-s94-lower-bound-2026-11-03`](https://github.com/jlevy/squares/blob/main/packing/resources/web/ozden-s94-lower-bound-2026-11-03/README.md). Every digest the issue states holds: the certificate file (`116c8342…16f8`), its JSON text (`b8b03ee8…749c`), and Hosono's `candidate.json` at `797bdf6e` (`64d81953…0667a`), which equals the copy this repository already keeps for T-091.
 
@@ -54,15 +56,13 @@ Thank you, @kenaznia-doga, for posting this, and thank you to Doğa Özden (@dog
 
   It decides no coverage.
 - **A complete replay.** This repository's `sqverify-fast`, built from its reviewed source (`d97758bb…`), decided the retained certificate at all 600 directions on 3 November: VERIFIED, 296,805,699 nodes, least certified bound 1.0000000000314393 at direction 277, 8,139 CPU-seconds at two threads. Every direction's row equals both of the lab's receipts, timings aside. The lab ran the same checker, so this is reproduced with the producer's code; it is not a second implementation. The exact-integer second checker is retained and was not run here.
-- **Controls.** Every mass scaled by 99/100 was refused at all 600 directions, each a coverage refusal at a centre in the domain where the mutant's exact capture is below 1. A mutant scaled to one part in a million below 1 at the least-bound leaf's centre was refused too. The control receipt still fails closed, on one bookkeeping rule of ours. At the axis, the vertex sweep's certified bound sits 1.12e-9 below the exact capture. That is below it, as a certified lower bound must be, but the gap is more than the constant 1e-9 our census allows. The same rule holds up an s(39) certificate; fixing it is `think-4uun`.
+- **Controls.** Every mass scaled by 99/100 was refused at all 600 directions, each a coverage refusal at a centre in the domain where the mutant's exact capture is below 1. A mutant scaled to one part in a million below 1 at the least-bound leaf's centre was refused too. The first control receipt, of 3 November, failed closed on one bookkeeping rule of ours: at the axis, the vertex sweep's certified bound sits 1.12e-9 below the exact capture, more than the constant 1e-9 our census then allowed. We replaced that constant with the sweep's own enclosure (#892): the census now recomputes the interval the sweep held at that vertex, [0.9930860126842824, 0.9930860149308234], ties its lower end to the sweep's bound to the bit, and requires the capture to lie inside it. Written again under that rule on 4 November, the control passed.
 - **A mathematical review.** A separately prompted review lane of this project, a Claude agent at the strong tier, [accepted the certificate](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md) with no defect. It recomputed every premise exactly, decided direction 0 in full with code of its own, and held every other direction's least-bound box exactly. It also reproduced the lowest capture the Codex agent's review found, 1.0011230 at direction 144. It is an AI review, not a human one.
 
 **What is recorded.**
 
-- [T-262](https://squaremath.org/result/t-262.html), `s(94) ≥ 1993/200`, at **V0/C1, reviewed**.
-- n = 94's [reported lower bound](https://github.com/jlevy/squares/blob/main/packing/frontier/n-094.md) is now 1993/200. Its verified lower bound stays Hosono's 199/20 (T-091).
-
-On a declared net, our census replay counts as evidence only beside a passing control receipt. Once the axis rule is fixed and the control passes (`think-4uun`), the replay enters the register, T-262 rises to V3/C3, and the verified lower bound becomes 1993/200. Closing the issue does not mean those steps are done; each will be posted here.
+- [T-262](https://squaremath.org/result/t-262.html), `s(94) ≥ 1993/200`, at **V3/C3**: confirmed, reproduced with the producer's code.
+- n = 94's [verified and reported lower bounds](https://github.com/jlevy/squares/blob/main/packing/frontier/n-094.md) are now 1993/200, above Hosono's 199/20 (T-091), which keeps its claim and is superseded at n = 94. The gap to the 10 × 10 grid narrows from 0.05 to 0.035.
 
 n = 95 and 96 are already proved equal to 10 (T-191), so the bound adds nothing there.
 
@@ -78,8 +78,3 @@ n = 95 and 96 are already proved equal to 10 (T-191), so the bound adds nothing 
 
 1. The repository states no licence. Under which licence are the certificate, the receipts and the second checker's code published? They are kept on the presumption of permission that an author's own submission carries.
 2. Did the lab try a side between 9.965 and the route's ceiling 99500/9977 ≈ 9.9729 on a finer net?
-
-**On `main`.** The [register](https://github.com/jlevy/squares/blob/main/packing/frontier/results.yaml), the [case record](https://github.com/jlevy/squares/blob/main/packing/frontier/n-094.md), the [packet](https://github.com/jlevy/squares/blob/main/packing/resources/web/ozden-s94-lower-bound-2026-11-03/README.md), the [census row](https://github.com/jlevy/squares/blob/main/packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-2026-11-03/README.md) and the [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md).
-
----
-_Generated by [Claude Code](https://claude.ai/code)_
