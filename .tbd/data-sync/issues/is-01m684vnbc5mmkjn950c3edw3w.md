@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 128
+version: 129
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -53,7 +53,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T05:07:27.340Z
+updated_at: 2026-11-04T05:54:53.253Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -225,3 +225,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 04:53: the account weekly usage limit stopped all lanes ~07:00Z 3 Nov until the 04:00Z 4 Nov reset (21 hourly renewals missed; container restarts killed the s(145) replay). Resumed L32 (#889, T-179 from its ledger), L33 (#891 addressing), L34 (#892 addressing), L35 (homepage). New issues #893 (s(299) Özden), #894 (s(204) Özden), #895 (s(260) Kaelan Yim, attachment-only) labelled intake; L36 runs their intake.
 
 2026-11-04: #891 merged (ca3a171bb), which imports T-262 Özden s(94) >= 1993/200 at V0/C1 with the stage-4 review accepted; think-222u closed. Open lanes: L32 #889 (s(145), s(29)), L34 #892 (axis enclosure), L35 (homepage News+Changelog), L36 (#893-#895 intake).
+
+2026-11-04 05:52 renewal (intake50): no new reports beyond #893-#895 (L36, #897). The JoostdeWinter watched-repo read is passed to L36. L32 is asked to refresh think-r333 and think-v511. #896 review A accept-with-fixes, addressing pass under way. Stage-4 review of #893/#894 (think-ybep) running separately. #890 reply held for the T-262 verified-lane follow-up after #892. Foreign stalled claims (claude-code@vm, @spud10.local) still await the owner.
