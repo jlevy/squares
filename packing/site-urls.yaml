@@ -22895,6 +22895,8 @@ urls:
     builds_on: null
     evidence:
     - E-ozden-893-certificate-report
+    - E-ozden-893-exact-feasibility
+    - E-ozden-893-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s299-upper-bound-2026-11-03/README.md
     - packing/resources/web/ozden-s299-upper-bound-2026-11-03/acquisition/claims.json
@@ -22904,6 +22906,8 @@ urls:
     - packing/resources/web/ozden-s299-upper-bound-2026-11-03/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-04-ozden-893-894-299-204.md
+    - packing/resources/web/ozden-s299-upper-bound-2026-11-03/review/review-2026-11-04/README.md
 - path: result/t-264.html
   canonical: result/t-264.html
   kind: result
@@ -22925,6 +22929,8 @@ urls:
     builds_on: null
     evidence:
     - E-ozden-894-certificate-report
+    - E-ozden-894-exact-feasibility
+    - E-ozden-894-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s204-upper-bound-2026-11-03/README.md
     - packing/resources/web/ozden-s204-upper-bound-2026-11-03/acquisition/claims.json
@@ -22934,6 +22940,8 @@ urls:
     - packing/resources/web/ozden-s204-upper-bound-2026-11-03/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-04-ozden-893-894-299-204.md
+    - packing/resources/web/ozden-s204-upper-bound-2026-11-03/review/review-2026-11-04/README.md
 - path: results.html
   canonical: results.html
   kind: page
