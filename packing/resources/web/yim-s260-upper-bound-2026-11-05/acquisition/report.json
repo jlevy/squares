@@ -1,0 +1,61 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/895",
+  "author": "Kaelan Yim",
+  "source_key": "[Yim s260 upper bound 2026-11-05]",
+  "report_evidence": "E-yim-895-certificate-report",
+  "receipt_format": "yim-895-exact-replay-v1",
+  "witness_prefix": "W-yim-895-n",
+  "claim_limitations": "Complete d11a8a1 rational centre/half-angle certificate, first committed at e7cab3a, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-05",
+  "read_at_main": "a7db9aad3e7cf1b9b942859a73a10127c1b9e7e1",
+  "certificates": [
+    {
+      "n": 260,
+      "path": "n260.cert",
+      "format": "evand-cert",
+      "offered": "1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626",
+      "first_committed": "2026-11-05T05:27:47Z"
+    }
+  ],
+  "requested": [
+    260
+  ],
+  "replayed": [
+    260
+  ],
+  "houses": [
+    {
+      "n": 260,
+      "reader": "[Daniel issue 845 2026-10-29]",
+      "source_key": "[Daniel issue 845 2026-10-29]",
+      "holders": "Evan Daniel, from a search started from Kirill Tymchishin's Kaggle notebook packing",
+      "result": "T-257",
+      "reported_value": "16.6339825021218840",
+      "verified_value": "16.6339825021218840",
+      "evidence": [
+        "E-evand-845-exact-feasibility",
+        "E-evand-845-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Kaelan Yim's packing of 260 squares at vitamoon/vitamoon d11a8a1, issue 895",
+    "headline": "Yim's further arrangement at 260 of Daniel's T-257 packing, one to one, 1.99e-10 below it",
+    "significance": 2,
+    "source_checks": "The issue says the author converted the rational certificate to this repository's Witness/v2 corner form and ran devtools.check_rational_witness_independent from a local checkout of this repository, which reported VERIFIED: 260 unit squares and all 33,670 pairs, in exact rational arithmetic at the stated side; it says that was the only checker run. No local-optimality, rigidity or formal check is claimed. Those statements are the author's; no source program ran here. The issue attached the certificate on 4 November as a GitHub user attachment, which this environment cannot fetch; the author's reply of 5 November names this file in his repository by its branch, with no commit or digest, so the packet pins the branch's head when it was read.",
+    "credit": "Credit Kaelan Yim, who reports a refinement of a public packing attributed to Evan Daniel and Kirill Tymchishin, the house at 260 (T-257: Evan Daniel's packing from a search started from Kirill Tymchishin's Kaggle notebook packing), by CUDA and SLP numeric tightening, the computational refinement his own. AI was used to study and set up an environment like Daniel's and Tymchishin's. The author releases the certificate under CC BY 4.0 with attribution to Kaelan Yim.",
+    "next_rung": "Independently review the retained replay and the certificate (stage 4): a clean-room exact checker, the identity against T-257's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt it at 260 in place of T-257 under the house rule, with both strong generators' regularization and the flip of the new house in the same change.",
+    "bead": "think-qclj",
+    "bibliography": {
+      "authors": [
+        "Yim"
+      ],
+      "lineage": "independent",
+      "credit": "Yim after Daniel, Tymchishin",
+      "short_credit": "Yim after Daniel et al.",
+      "note": "vitamoon/vitamoon at d11a8a1ce798f7c0b4f801e922e242d22cedcd73 (2026-11-05T05:44:44Z), Kaelan Yim's certificate n260.cert, first committed at e7cab3a (2026-11-05T05:27:47Z) and unchanged at the pin, for s(260) <= 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626 = 16.63398250192261413...: a rational centre/half-angle certificate in Evan Daniel's format of a further arrangement of the registry's 260, Evan Daniel's #845 certificate (T-257), one to one with it, whose lineage Daniel states starts at Kirill Tymchishin's Kaggle notebook packing; the issue attributes the start to both. Registration was requested in jlevy/squares#895, whose attachment this environment cannot fetch; the author's reply names this file by branch, with no digest. AI-assisted environment set-up disclosed. No global optimality claim. The lineage is independent: the source credits Daniel's and Tymchishin's packing and none of this project's work, and this repository's checker, which the author ran, is no part of the packing's lineage. Licensed CC BY 4.0 with attribution to Kaelan Yim by the author's reply on jlevy/squares#895 (issuecomment-6650567350). Retained in web/yim-s260-upper-bound-2026-11-05/."
+    }
+  }
+}

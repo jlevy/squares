@@ -6731,7 +6731,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-05'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -23137,6 +23137,36 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-11-04-ozden-893-894-299-204.md
     - packing/resources/web/ozden-s204-upper-bound-2026-11-03/review/review-2026-11-04/README.md
+- path: result/t-265.html
+  canonical: result/t-265.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 260
+    established: null
+    attribution:
+      source_keys:
+      - '[Yim s260 upper bound 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-yim-895-certificate-report
+    artifacts:
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/README.md
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/acquisition/claims.json
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/receipts/sharp-controls.json
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

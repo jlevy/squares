@@ -239,6 +239,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/vitamoon/vitamoon",
+        "Kaelan Yim",
+        (
+            "An exact rational packing of 260 squares, a further arrangement of Evan"
+            " Daniel's, 1.99e-10 below it; replayed here, review pending (T-265)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (

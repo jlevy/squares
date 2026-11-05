@@ -12145,6 +12145,32 @@ sources:
     decides which are recorded. All 3 native jobs have full outcomes. No selected override or
     superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
+- id: yim-s260-upper-bound-2026-11-05
+  title: >-
+    Kaelan Yim's packing of 260 squares at vitamoon/vitamoon d11a8a1, issue 895
+  role: source-repository
+  url: https://github.com/vitamoon/vitamoon/tree/d11a8a1ce798f7c0b4f801e922e242d22cedcd73
+  local: resources/web/yim-s260-upper-bound-2026-11-05/
+  source_key: '[Yim s260 upper bound 2026-11-05]'
+  scope:
+    n_values:
+    - 260
+  reviewed: '2026-11-05'
+  source_date: '2026-11-05'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/yim-s260-upper-bound-2026-11-05/acquisition/claims.json
+  evidence:
+  - E-yim-895-certificate-report
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-265 records the in-horizon report.
+    The ledger of 4 November for this pass (campaign/issue-intake/upper-bounds-893-895-20261104)
+    decides which are recorded. All 3 native jobs have full outcomes. No selected override or
+    superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

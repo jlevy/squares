@@ -56212,3 +56212,36 @@ evidence:
       program, which share its reader; under the reversed rotation sense, 100 pairs
       overlap. Finite feasibility only.
     source_reviewed: '2026-11-04'
+  - id: E-yim-895-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 260
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Yim s260 upper bound 2026-11-05]'
+    certificate: packing/resources/web/yim-s260-upper-bound-2026-11-05/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-05'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at d11a8a1,
+      first committed at e7cab3a. A separate complete repository replay is retained for n = 260: 1
+      positive and 2 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 202020 pair decisions; summed over the 3 jobs, the receipt records 41.04 route
+      CPU seconds and 41.35 job wall seconds, the longest job 14.08 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least
+      1.33e-15. The packet's sharp controls meet those margins on both routes. Independent review
+      and confirmation remain pending (think-o7ly). The author reports one check, this repository's
+      devtools.check_rational_witness_independent on his own Witness/v2 conversion; it was not
+      repeated on his conversion here. The issue's attachment of 4 November was never fetched; the
+      retained file is the one the author's reply names, pinned by commit, since no digest was
+      stated.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No two independent methods, human oversight or optimality is claimed.

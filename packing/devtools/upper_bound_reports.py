@@ -1524,6 +1524,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # (think-otv6) and issue 894 at 204 (think-8b8m).
     "[Özden s299 upper bound 2026-11-03]": _import("ozden-s299-upper-bound-2026-11-03"),
     "[Özden s204 upper bound 2026-11-03]": _import("ozden-s204-upper-bound-2026-11-03"),
+    # The intake pass's lane L48 of 5 November (think-3guf): Kaelan Yim's issue 895 at 260
+    # (think-qclj), retained at vitamoon/vitamoon d11a8a1 once the author named the file.
+    "[Yim s260 upper bound 2026-11-05]": _import("yim-s260-upper-bound-2026-11-05"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-04'
+last_reviewed: '2026-11-05'
 results:
   - id: T-001
     kind: lower-bound
@@ -38544,6 +38544,133 @@ results:
         findings were frozen.
       verdict: accepted
       covers: [T-264]
+  - id: T-265
+    kind: upper-bound
+    registered: '2026-11-05'
+    landed: '2026-11-05'
+    headline: >-
+      Yim's further arrangement at 260 of Daniel's T-257 packing, one to one, 1.99e-10 below it
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(260) <=
+      1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626,
+      about 16.6339825019226141. Complete native feasibility outcomes are retained separately; the
+      selected standing case is unchanged pending independent review and record review. It is
+      1.99e-10 below T-257, Evan Daniel's certificate and the case's house best packing, and measured
+      here it is a further arrangement of T-257's packing, one to one with it under the identity,
+      with 26 squares beyond a tenth.
+
+      The issue says the author converted the rational certificate to this repository's Witness/v2
+      corner form and ran devtools.check_rational_witness_independent from a local checkout of
+      this repository, which reported VERIFIED: 260 unit squares and all 33,670 pairs, in exact
+      rational arithmetic at the stated side; it says that was the only checker run. No
+      local-optimality, rigidity or formal check is claimed. Those statements are the author's; no
+      source program ran here.
+
+      The issue attached the certificate on 4 November as a GitHub user attachment, which this
+      environment cannot fetch; the author's reply of 5 November names n260.cert in his repository
+      by its branch, with no commit or digest, so the packet pins the branch's head when it was
+      read, where the file is unchanged since its first commit.
+
+      Credit Kaelan Yim, who reports a refinement of a public packing attributed to Evan Daniel and
+      Kirill Tymchishin, the house at 260 (T-257: Evan Daniel's packing from a search started from
+      Kirill Tymchishin's Kaggle notebook packing), by CUDA and SLP numeric tightening, the
+      computational refinement his own. AI was used to study and set up an environment like
+      Daniel's and Tymchishin's. The author releases the certificate under CC BY 4.0 with
+      attribution to Kaelan Yim.
+    scope:
+      n_values:
+      - 260
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        A further arrangement of T-257's packing at 260, 1.99e-10 below it: one to one with it
+        under the identity, 26 squares beyond a tenth (at most 0.382) and 14 turned by up to 1.50
+        degrees, as T-263's 1.54e-08 at 299 (S2) is, and within T-225's 1.76e-11 to 1.39e-09 (S2);
+        larger than T-259's 2.08e-12 re-solve (S1). No lower bound or optimum.
+      scored: '2026-11-05'
+      by: think-qclj Kaelan Yim import, a draft for the stage 4 review (think-o7ly) to confirm
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Yim s260 upper bound 2026-11-05]'
+      published: '2026-11-05'
+    evidence:
+    - E-yim-895-certificate-report
+    artifacts:
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/README.md
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/acquisition/claims.json
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/receipts/sharp-controls.json
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md
+    - packing/devtools/upper_bound_reports.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l48_1105.py
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 260: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 202020 pair
+      decisions; summed over the 3 jobs, the receipt records 41.04 route CPU seconds and 41.35 job
+      wall seconds, the longest job 14.08 seconds. In every positive squares touch the box, a least
+      wall clearance of exactly 0, and every pair clears by at least 1.33e-15.
+
+      The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
+      far-wall clearance, which is 0, closed the least-gap pair by its gap, about 1.34e-15, and
+      moved every square toward the nearer near wall by its least clearance, about 7.22e-16: both
+      routes accepted each at exact contact, margin 0, and refused each 1e-30 past it. They refused
+      one square enlarged to its pair at contact for its shape alone and 1e-30 past it for the
+      overlap as well; the square enlarged to its wall already touches it, so both accepted it at
+      contact and refused it 1e-30 past it for the wall and its shape. Both refused a duplicated
+      square.
+
+      At n = 260 the certificate is below the case's ceiling (Evan Daniel, from a search started from
+      Kirill Tymchishin's Kaggle notebook packing, T-257) by 1.99e-10; smallest: this certificate.
+
+      The ledger of 4 November for this pass (campaign/issue-intake/upper-bounds-893-895-20261104)
+      walks every report at 260 in report order from starts frozen on main on 4 November and
+      records this entry's claim, first walked by the side the issue states and, from 5 November,
+      by the retained certificate's claim record.
+
+      Measured pose by pose (measure/ in the packet; a measurement, which decides nothing): at 260
+      it pairs one to one with T-257's packing under the identity by nearest centres; the optimal
+      assignment moves 26 squares beyond a tenth and 64 beyond a hundredth (largest 0.382307) and
+      turns 14 squares by more than 1e-6 radians, by up to 1.498 degrees; it has 105 squares tilted
+      beyond 1 degree where T-257 has 104. Every square carries a nonzero half-angle tangent: 146 of
+      its 155 near-upright squares are turned by about -1.4e-10 degrees, where T-257 has 112 exactly
+      upright. The issue calls the work a computational refinement; the record keeps that word for
+      a pairing with no square beyond a tenth, so this entry lists no regularization.
+
+      The source's own checker run was not repeated here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method; the
+      second is devtools.check_rational_witness_independent, the program the author ran on his own
+      conversion. No two independent methods, human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the retained replay and the certificate (stage 4): a clean-room exact
+      checker, the identity against T-257's packing and the lineage the source states, a mapped
+      review whose acceptance would raise both rungs. Then adopt it at 260 in place of T-257 under
+      the house rule, with both strong generators' regularization and the flip of the new house in
+      the same change.
+    unfinished_confirmations:
+    - what: >-
+        The stage 4 review: a clean-room exact checker of the certificate with sharp controls, the
+        identity against T-257's packing and the lineage the source states, mapped as an adversarial
+        review
+      rung: C3
+      link: think-o7ly
+      estimated_cost:
+        cpu_hours: 0.01
+        cpu_hours_high: 0.05
+        basis: >-
+          T-257's 31 October review decided all 33,670 pairs at 260 by two methods with ten sharp
+          controls each in minutes, and the sharp controls here took 157 CPU-seconds; an estimate,
+          not a receipt
+        priced: '2026-11-05'
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
