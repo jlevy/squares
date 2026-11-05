@@ -39,9 +39,10 @@ At n28 the 99/100 mutant’s capture, $0.99140000844$, lies in
 $[0.9914000062838418, 0.991400010590911]$, $2.15 \times 10^{-9}$ above the certified
 bound, the gap the review measured (its F-7); under the census’s former constant
 `AXIS_ROUNDING` of $10^{-9}$ this control would have failed closed, as n26’s and n39’s
-did. At n30 the capture, $0.99173535469$, lies in
-$[0.9917353545019875, 0.9917353548785199]$, $1.88 \times 10^{-10}$ above the bound,
-inside either rule.
+did. #892 adopted the enclosure rule for the census; #543’s question to the owner on
+T-142’s control tolerance is still open.
+At n30 the capture, $0.99173535469$, lies in $[0.9917353545019875, 0.9917353548785199]$,
+$1.88 \times 10^{-10}$ above the bound, inside either rule.
 
 All runs used `sqverify-fast` built from the reviewed crate source `d97758bb…` (binary
 `567a0fd5…`, rustc 1.98.0, release, x86_64-unknown-linux-gnu), at two threads under

@@ -37034,7 +37034,9 @@ evidence:
       (receipts/capture-agreement-n28.json), and its whole-net control of that day,
       which judges the axis refusal by the sweep's own enclosure as #892 does, is
       CONTROLS_REFUSED. The 99/100 mutant's axis gap there, 2.15e-9 by the review, would
-      have failed the census's former constant allowance of 1e-9. The stage 4 review of
+      have failed the census's former constant allowance of 1e-9; #892 adopted the
+      enclosure rule for the census, and #543's question to the owner on this tolerance
+      is still open. The stage 4 review of
       4 November read the certificate. The shared crate establishes no independent
       implementation.
     external_review:

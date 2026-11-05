@@ -16014,9 +16014,16 @@ results:
 
       The review measured the 99/100 mutant's axis gap at 2.15e-9 (its F-7), beyond the
       census's former constant allowance of 1e-9; the control judges that leg by the
-      enclosure rule of #892, and ends CONTROLS_REFUSED: the capture lies in
-      [0.9914000062838418, 0.991400010590911], whose lower end is the crate's bound to
-      the bit.
+      enclosure rule that #892 adopted for the census, and ends CONTROLS_REFUSED: the
+      capture lies in [0.9914000062838418, 0.991400010590911], whose lower end is the
+      crate's bound to the bit. #543's question to the owner on this control's tolerance
+      (widen the allowance, derive it from the sweep's enclosure, or confirm by another
+      control) is still open; #892's rule is not the owner's answer to it.
+
+      On 4 November 2026 this census, its controls and the stage 4 review ran ahead of
+      the owner's order of 11 October, which queued the replay after the regularization
+      of every packing (think-ux1v); the owner has not lifted that order, and the
+      adoption is pending the owner's decision on it (#908, think-i85v).
 
       The score of 11 October was given to the claim; the complete replay of 4 November
       passed after it and leaves the score as it was. The case records' lower lanes move
@@ -16155,15 +16162,21 @@ results:
       the mapped stage 4 review of 4 November (think-4ul6), which read the certificate.
 
       The review measured the 99/100 mutant's axis gap at 1.9e-10; the control judges
-      that leg by the enclosure rule of #892, and ends CONTROLS_REFUSED: the capture
-      lies in [0.9917353545019875, 0.9917353548785199], whose lower end is the crate's
-      bound to the bit.
+      that leg by the enclosure rule that #892 adopted for the census, and ends
+      CONTROLS_REFUSED: the capture lies in [0.9917353545019875, 0.9917353548785199],
+      whose lower end is the crate's bound to the bit. The gap is inside the former
+      constant allowance too.
+
+      On 4 November 2026 this census, its controls and the stage 4 review ran ahead of
+      the owner's order of 11 October, which queued the replay after the regularization
+      of every packing (think-ux1v); the owner has not lifted that order, and the
+      adoption is pending the owner's decision on it (#908, think-i85v).
 
       The score of 11 October was given to the claim; the complete replay of 4 November
       passed after it and leaves the score as it was. The case records' lower lanes move
       to 2357/400; T-109 keeps its claim at n = 30, now superseded there. The
-      pre-publication receipt repeats the source's check2 run, so one complete author
-      run is reported (the review's F-4). The release asset's six data members are
+      pre-publication receipt is the very run record the check2 receipt embeds, so one
+      complete author run is reported (the review's F-4). The release asset's six data members are
       retained in Git under OR-18; its nested verifier archive and sealed inner bundle
       are pinned by digest and not opened.
     controls:

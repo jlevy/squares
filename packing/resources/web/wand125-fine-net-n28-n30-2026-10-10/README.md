@@ -121,11 +121,14 @@ direction’s node count and least certified bound equal to the source’s check
 [n = 30](receipts/capture-agreement-n30.json)). Both whole-net controls were refused,
 the axis legs judged by #892’s enclosure rule: n = 28’s 99/100 axis gap,
 $2.15 \times 10^{-9}$ (the review’s F-7), would have failed the census’s former constant allowance
-of $10^{-9}$. The receipts are in
+of $10^{-9}$. #892 adopted that rule for the census; #543’s question to the owner on
+T-142’s control tolerance is still open. The receipts are in
 [the census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md).
 The two replays are evidence, with the stage 4 review as their audit record: T-142 and
 T-143 are V3/C3, and the case records at n = 28 and 30 take their values in both lower
-lanes.
+lanes. They ran on 4 November ahead of the owner’s order of 11 October, which queued
+them after the regularization of every packing (think-ux1v); the adoption is pending
+the owner’s decision on that order (#908).
 
 The two cost 5.5 CPU-hours at two threads: 17,764 CPU-seconds of capture (7,096.9
 and 10,667.1) and 2,096 of control (1,111 and 985), in 2.97 hours of wall. think-i85v
