@@ -27947,6 +27947,17 @@ issues:
       - result: s94-dilation
         id: E-ozden-890-n94-9965-review-sample
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/890#issuecomment-6669193620
+      date: '2026-11-05'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s94-dilation
+        id: T-262
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-262 is on main at V3/C3 and the reply on main says what was replayed, that its
       whole-net control passed under the enclosure rule, that the stage 4 review accepted
@@ -27996,6 +28007,14 @@ issues:
       the final reply did not name. It was drafted on think-0so3, checked against main
       bb5bf6d54 (check_requests --draft 890), and read back identical to what was posted;
       the issue stays closed.
+      The follow-up of 20:54:59Z on 5 November (issuecomment-6669193620), posted after
+      #912 merged as b099992a9 and its Pages deployment passed (run 42104832836, deploy
+      job 127521157259, verify-deployment job 127521539194, 6,080 of 6,080 checks), owed
+      because the final reply stated T-262 current: T-262 still stands as a verified
+      bound, V3/C3, confirmed, and is superseded at n = 94 by the author's own T-266,
+      s(94) >= 2493/250, reported on #910, which has its own reply. It names only T-262
+      and T-266, follows #366's supersession follow-up of 4 November, and read back
+      identical to what was posted; the issue stays closed.
   - number: 893
     title: 's(299) ≤ 17.801238533979: improved packing (registration request)'
     author: kenaznia-doga
@@ -28343,7 +28362,8 @@ issues:
     title: "s(94) ≥ 2493/250 = 9.972 — rescaled Hosono density certificate and exhaustive receipts"
     author: kenaznia-doga
     opened: '2026-11-05'
-    state: open
+    state: closed
+    closed: '2026-11-05'
     kind: result-report
     triage: done
     summary: >-
@@ -28394,7 +28414,46 @@ issues:
     - think-qcms
     - think-xzxd
     answer_bead: think-pi8b
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/910#issuecomment-6669104984
+      date: '2026-11-05'
+      by: jlevy
+      kind: final
+      reported:
+      - result: s94-9972
+        id: T-266
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: s94-9972
+        id: E-ozden-910-n94-9972-sqverify-fast-replay
+        status: confirmed
+      - result: s94-9972
+        id: E-ozden-910-n94-9972-review-sample
+        status: recorded
+      - result: s94-9972
+        id: E-ozden-910-n94-9972-report
     close_when: >-
       T-266 is on main and the reply on main says what was retained, audited, reviewed and
       replayed, with T-266 at V3/C3 and n-094's verified lane at 2493/250.
+    notes: >-
+      Closed on 5 November 2026 with the final reply (issuecomment-6669104984, posted at
+      20:51:47Z), after #912 merged as b099992a9 and its Pages deployment passed (run
+      42104832836, deploy job 127521157259, verify-deployment job 127521539194, 6,080 of
+      6,080 checks). The reply was rendered with check_requests --draft 910 from that main
+      and reconciled with think-pi8b's draft of 5 November, whose acknowledgements, the
+      review's notes F1 to F3 and three questions it keeps. It adds the rendered register
+      block, which names T-266 at V3/C3 (confirmed and current, reproduced with the
+      author's own checker), E-ozden-910-n94-9972-sqverify-fast-replay (confirmed),
+      E-ozden-910-n94-9972-review-sample (a sample, recorded) and
+      E-ozden-910-n94-9972-report, and states n-094's reported and verified lower bound at
+      2493/250, superseding T-262 there. It says plainly that the control's axis leg is
+      judged by the enclosure rule #892 adopted, that #543's question to the owner on this
+      control's tolerance is still open and #892's rule is not the owner's answer, and
+      that the question is the owner's and asks nothing of the author. It states the
+      review's 67 repeated directions as the review counts them: in bound 67 of 67, in
+      node count 66 of 66, where the draft said both of all 67. It read back identical to
+      what was posted, and the issue was closed as completed at 20:52:01Z. The questions
+      are informational and hold nothing open. The deployed pages were not fetched from
+      the session host; verify-deployment checked them.
