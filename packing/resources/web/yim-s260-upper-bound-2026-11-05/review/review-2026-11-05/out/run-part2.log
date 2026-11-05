@@ -1,0 +1,70 @@
++ /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-o7ly/programs/controls.py packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert --out /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-o7ly/out/controls.json
+ok   side lowered by the least far-wall clearance A True B True pairs A/B 0 0 walls A/B 0 0 cpu 15.523
+ok   side lowered 1e-30 past it A False B False pairs A/B 0 0 walls A/B 1 1 cpu 15.04
+ok   every square moved to the left wall by its least clearance A True B True pairs A/B 0 0 walls A/B 0 0 cpu 17.319
+ok   every square moved to the left wall, 1e-30 past A False B False pairs A/B 0 0 walls A/B 1 1 cpu 18.59
+ok   every square moved to the bottom wall by its least clearance A True B True pairs A/B 0 0 walls A/B 0 0 cpu 17.182
+ok   every square moved to the bottom wall, 1e-30 past A False B False pairs A/B 0 0 walls A/B 1 1 cpu 18.495
+ok   the square nearest the top wall raised by its clearance A True B True pairs A/B 0 0 walls A/B 0 0 cpu 15.506
+ok   the square nearest the top wall raised 1e-30 past A False B False pairs A/B 0 0 walls A/B 1 1 cpu 15.729
+ok   tightest pair closed to contact A True B True pairs A/B 0 0 walls A/B 0 0 cpu 15.441
+ok   tightest pair 1e-30 past contact A False B False pairs A/B 1 1 walls A/B 0 0 cpu 17.546
+ok   tightest pair of two tilted squares closed to contact A True B True pairs A/B 0 0 walls A/B 0 0 cpu 15.929
+ok   tightest pair of two tilted squares 1e-30 past contact A False B False pairs A/B 1 1 walls A/B 0 0 cpu 15.705
+ok   tightest pair of a tilted and a near-upright square closed to contact A True B True pairs A/B 0 0 walls A/B 0 0 cpu 15.424
+ok   tightest pair of a tilted and a near-upright square 1e-30 past contact A False B False pairs A/B 1 1 walls A/B 0 0 cpu 16.043
+ok   duplicated square (row 2 := row 1) A False B False pairs A/B 1 1 walls A/B 0 0 cpu 18.332
+ok   square outside the box (row 1 at x = -1) A False B False pairs A/B 0 0 walls A/B 1 1 cpu 15.468
+ok   side lowered by 1e-10 A False B False pairs A/B 0 0 walls A/B 26 26 cpu 15.585
+all as expected: True cpu 302.224
++ /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-o7ly/programs/slides.py --yim packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert --t257 packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s260_1028.cert --out /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-o7ly/out/slides.json --tau 0.1
+row  12: back x-only A False B False gap -7.767e-02 wall +7.216e-16 | back full A False gap -7.767e-02 wall -9.903e-11 | fwd x-only A False gap -1.224e-01
+row  13: back x-only A False B False gap -1.224e-01 wall +7.772e-16 | back full A False gap -1.224e-01 wall -9.903e-11 | fwd x-only A False gap -1.350e-01
+row  14: back x-only A False B False gap -1.350e-01 wall +7.772e-16 | back full A False gap -1.350e-01 wall -9.903e-11 | fwd x-only A False gap -1.488e-01
+row  15: back x-only A False B False gap -1.488e-01 wall +7.772e-16 | back full A False gap -1.488e-01 wall -9.903e-11 | fwd x-only A False gap -1.602e-01
+row  16: back x-only A False B False gap -1.602e-01 wall +7.772e-16 | back full A False gap -1.602e-01 wall -9.903e-11 | fwd x-only A True gap +1.206e-12
+row  26: back x-only A False B False gap -5.578e-02 wall +1.140e+00 | back full A False gap -5.103e-10 wall +1.140e+00 | fwd x-only A False gap -5.578e-02
+row  97: back x-only A False B False gap -1.515e-01 wall +3.001e+00 | back full A False gap -1.387e-01 wall +3.004e+00 | fwd x-only A False gap -2.495e-01
+row  98: back x-only A False B False gap -1.536e-01 wall +2.065e+00 | back full A False gap -1.536e-01 wall +2.065e+00 | fwd x-only A False gap -1.387e-01
+row 109: back x-only A False B False gap -5.647e-02 wall +1.062e+00 | back full A False gap -5.647e-02 wall +1.062e+00 | fwd x-only A False gap -1.536e-01
+row 113: back x-only A False B False gap -1.543e-02 wall +1.394e+00 | back full A False gap -1.543e-02 wall +1.394e+00 | fwd x-only A True gap +1.206e-12
+row 116: back x-only A False B False gap -7.446e-02 wall +1.440e+00 | back full A False gap -7.446e-02 wall +1.440e+00 | fwd x-only A True gap +1.206e-12
+row 205: back x-only A False B False gap -2.622e-01 wall +3.005e+00 | back full A False gap -2.624e-01 wall +3.000e+00 | fwd x-only A True gap +2.875e-08
+row 232: back x-only A True B True gap +2.976e-15 wall +3.578e-03 | back full A False gap -1.063e-10 wall +3.578e-03 | fwd x-only A True gap +1.206e-12
+row 239: back x-only A False B False gap -8.326e-02 wall +4.353e-13 | back full A False gap -8.326e-02 wall -9.903e-11 | fwd x-only A False gap -1.016e-01
+row 240: back x-only A False B False gap -1.016e-01 wall +4.344e-13 | back full A False gap -1.016e-01 wall -9.903e-11 | fwd x-only A False gap -1.115e-01
+row 241: back x-only A False B False gap -1.115e-01 wall +4.339e-13 | back full A False gap -1.115e-01 wall -9.903e-11 | fwd x-only A False gap -1.361e-01
+row 242: back x-only A False B False gap -1.361e-01 wall +4.333e-13 | back full A False gap -1.361e-01 wall -9.903e-11 | fwd x-only A False gap -2.625e-01
+row 243: back x-only A False B False gap -2.625e-01 wall +4.330e-13 | back full A False gap -2.625e-01 wall -9.903e-11 | fwd x-only A False gap -2.640e-01
+row 244: back x-only A False B False gap -2.640e-01 wall +4.355e-13 | back full A False gap -2.640e-01 wall -9.903e-11 | fwd x-only A False gap -2.641e-01
+row 245: back x-only A False B False gap -2.641e-01 wall +4.333e-13 | back full A False gap -2.641e-01 wall -9.903e-11 | fwd x-only A False gap -2.642e-01
+row 246: back x-only A False B False gap -2.642e-01 wall +4.339e-13 | back full A False gap -2.642e-01 wall -9.903e-11 | fwd x-only A False gap -2.650e-01
+row 247: back x-only A False B False gap -2.650e-01 wall +4.340e-13 | back full A False gap -2.650e-01 wall -9.903e-11 | fwd x-only A False gap -2.652e-01
+row 248: back x-only A False B False gap -2.654e-01 wall +1.212e-03 | back full A False gap -2.652e-01 wall -9.903e-11 | fwd x-only A False gap -2.746e-01
+row 249: back x-only A False B False gap -2.747e-01 wall +4.324e-13 | back full A False gap -2.747e-01 wall -9.903e-11 | fwd x-only A False gap -2.795e-01
+row 250: back x-only A False B False gap -2.795e-01 wall +4.344e-13 | back full A False gap -2.795e-01 wall -9.903e-11 | fwd x-only A False gap -3.528e-01
+row 251: back x-only A False B False gap -3.528e-01 wall +4.326e-13 | back full A False gap -3.528e-01 wall -9.903e-11 | fwd x-only A True gap +1.206e-12
+back together: True True 1 [{'rows': [203, 210], 'gap': '37347959082111876277007861566196898433889635591448584858043065694990564673509510967697076950803350707825605834993189272442972/27946718690305266394382114473219030475281790568592702750130196793105839741650806436128190602568849821333133818245998032461763018247785531075', 'gap_float': 1.336398719863592e-15}, {'rows': [75, 103], 'gap': '37159123928970191049050389205599617242845544187386922407420436205502404282281145878387041029677898416976487968624424317417/17831868918928148269225053615371264848817829341972555201982037298077499006850681761506510843962600303261241608330157247215452042429060588', 'gap_float': 2.083860312001653e-15}] []
+forward together: True True 6 []
+y=0.500000: 1@0.500->0.500 2@1.500->1.500 3@2.500->2.505 4@3.500->3.505 5@4.500->4.506 6@5.500->5.506 7@6.500->6.506 8@7.500->7.506 9@8.500->8.508 10@9.500->9.514 11@10.500->10.578 12*@11.500->11.622 13*@12.500->12.635 14*@13.500->13.649 15*@14.500->14.660 16*@15.500->15.679
+y=3.504438: 97*@3.623->3.889
+y=3.500000: 135@0.559->0.618 109*@1.562->1.719 98*@2.565->2.760 108@6.102->6.102 196@7.102->7.102 107@8.102->8.102 104@11.134->11.134 102@13.134->13.134 101@14.134->14.134 259@16.134->16.134
+y=12.133983: 201@0.500->0.500 118@1.500->1.500 181@2.500->2.500 113*@14.740->14.859 231@16.130->16.039
+y=5.500000: 132@0.602->0.576 116*@1.940->1.666 69@14.134->14.134 258@16.134->16.134
+y=3.500001: 205*@4.640->5.006
+y=10.133983: 138@0.500->0.500 232*@16.130->15.941
+y=16.133983: 236@0.500->0.509 237@1.500->1.515 238@2.500->2.583 239*@3.500->3.602 240*@4.500->4.612 241*@5.500->5.636 242*@6.500->6.763 243*@7.500->7.764 244*@8.500->8.764 245*@9.500->9.764 246*@10.500->10.765 247*@11.500->11.765 248*@12.500->12.775 249*@13.500->13.780 250*@14.500->14.853 251*@15.500->15.882
+cpu 40.219
++ /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-o7ly/programs/rowsback.py --yim packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert --t257 packing/resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s260_1028.cert --out /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-o7ly/out/rowsback.json
+row y=0.5 (16 squares): A True B True overlaps [] walls [] least [153, 156] 9.249e-13
+row y=3.504438 (1 squares): A False B False overlaps [(94, 97), (97, 98)] walls [] least [97, 98] -1.386e-01
+row y=3.5 (10 squares): A False B False overlaps [(100, 101), (101, 121), (103, 104), (108, 208)] walls [] least [108, 208] -8.908e-09
+row y=12.133983 (5 squares): A False B False overlaps [(24, 113)] walls [] least [24, 113] -1.543e-02
+row y=5.5 (4 squares): A False B False overlaps [(69, 73), (69, 77), (90, 116)] walls [] least [90, 116] -7.446e-02
+row y=3.500001 (1 squares): A False B False overlaps [(67, 205), (97, 205)] walls [] least [97, 205] -2.624e-01
+row y=10.133983 (2 squares): A True B True overlaps [] walls [] least [153, 156] 9.249e-13
+row y=16.133983 (16 squares): A True B True overlaps [] walls [] least [153, 156] 9.249e-13
+every such row together: 55 squares: A False B False overlaps [(24, 113), (67, 205), (69, 73), (69, 77), (90, 116), (94, 97)] walls [] least [90, 116] -7.446e-02
+every such row together, and the island square at its T-257 pose: 56 squares: A False B False overlaps [(24, 113), (25, 26), (26, 27), (67, 205), (69, 73), (69, 77)] walls [] least [90, 116] -7.446e-02
+cpu 108.83
+part2 exit 0

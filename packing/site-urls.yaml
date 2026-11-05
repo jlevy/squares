@@ -23154,10 +23154,12 @@ urls:
     attribution:
       source_keys:
       - '[Yim s260 upper bound 2026-11-05]'
-      published: '2026-11-05'
+      published: '2026-11-04'
     builds_on: null
     evidence:
     - E-yim-895-certificate-report
+    - E-yim-895-exact-feasibility
+    - E-yim-895-review-exact-feasibility
     artifacts:
     - packing/resources/web/yim-s260-upper-bound-2026-11-05/README.md
     - packing/resources/web/yim-s260-upper-bound-2026-11-05/acquisition/claims.json
@@ -23167,6 +23169,8 @@ urls:
     - packing/resources/web/yim-s260-upper-bound-2026-11-05/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-yim-895-260.md
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md
 - path: results.html
   canonical: results.html
   kind: page

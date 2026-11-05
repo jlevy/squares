@@ -2790,9 +2790,11 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: canvas height. The metadata's `cases` list reads the case records directly and stays
 #: the truthful record, `improved_by` included. The case records, the case pages, the bound
 #: citations and the site credit every name. Doğa Özden improved Evan Daniel's packings at
-#: 204 and 299 (T-264, T-263), adopted on 4 November 2026 (think-tj4o).
+#: 204 and 299 (T-264, T-263), adopted on 4 November 2026, and Kaelan Yim his packing at
+#: 260 (T-265), adopted on 5 November 2026 (think-tj4o).
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     204: ("Doğa Özden",),
+    260: ("Kaelan Yim",),
     299: ("Doğa Özden",),
 }
 #: The infographic edition the hold was set under. While the hold is not empty, a version

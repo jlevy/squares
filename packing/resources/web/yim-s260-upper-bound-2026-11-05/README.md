@@ -86,7 +86,7 @@ walks every report at 204, 260 and 299 in the order it reached this repository, 
 starts frozen at `main` `ca3a171bb`, and records #895 at 260, the first report below
 T-257 there. It first walked the claim by the side the issue states; from 5 November it
 reads this packet’s claim record, with the same side and verdict.
-T-257 still holds 260 on `main` `a7db9aad3`.
+T-257 held 260 on `main` `a7db9aad3`, when this packet was read; the case adopted this certificate there on 5 November 2026 (below).
 
 ## Pose by Pose
 
@@ -98,19 +98,26 @@ A measurement for credit; it decides nothing.
   optimal assignment moves 26 squares beyond 0.1, 64 beyond 0.01 and 96 beyond 0.001
   (largest 0.382307), and turns 14 squares by more than $10^{-6}$ radians, by up to
   1.498 degrees. Tilted beyond 1 degree: this packing 105, T-257 104, all but five turned
-  one way in each; one of this packing’s tilted squares pairs with one T-257 has
-  upright.
+  one way in each. One square without contacts in either packing crosses the 1 degree
+  line: row 97, from 0.105 to 1.603 degrees (the review’s F4).
 - **The upright squares.** Every one of the 260 squares carries a nonzero half-angle
   tangent: 146 of the 155 near-upright squares are turned by $-1.34 \times 10^{-10}$ to
   $-1.40 \times 10^{-10}$ degrees, with 64 distinct tangents, the commonest
-  $-1/850217033674$. T-257 has 112 squares exactly upright.
+  $-1/850217033674$. T-257 has 139 squares exactly upright, 112 at $t = 0$ and 27 at
+  $t = 1$, 138 of them among the 146 (the review’s F1). Set upright, this packing still
+  fits at its side and reaches contact $1.46 \times 10^{-11}$ lower (F5).
+- **What moved.** The 5 November review measured 19 of the 26 moves beyond a tenth as
+  free play the bound does not need: the bottom row’s rows 12 to 16, the top row’s rows
+  239 to 251 and row 232 at $y \approx 10.13$, which T-257 packs to the left and this
+  packing spreads out. Put back where T-257 has them, the packing still fits at this
+  side. The other seven, rows 97, 98, 109, 205, 116, 113 and 26, move with the tilted
+  island’s rearrangement, where about 40 of some 530 pair contacts differ. Rows 78, 94,
+  97 and 99 have no contact in either packing (F6).
 - **The word.** The issue calls the work a computational refinement.
   The record keeps “refinement” for a pairing in which no square moves beyond a tenth,
-  and 26 do here, so the register drafts it as a further arrangement of T-257’s packing,
-  one to one with it, and lists no regularization, as T-239 at 303 does.
-  T-257’s packing is not rigid (103 of its 260 squares admit a translation, by the case
-  record), which leaves room for large moves at almost no change of side; the stage 4
-  review is asked to say what moved.
+  and 26 do here, so the record reads it as a further arrangement of T-257’s packing,
+  one to one with it and row for row, and lists no regularization, as T-239 at 303 does.
+  The review confirmed that reading.
 
 ## Exact Replay
 
@@ -121,8 +128,10 @@ seconds, the longest job 14.08 seconds
 ([receipts/exact-certification.json.xz](receipts/exact-certification.json.xz)). The
 positive passed and both controls were refused on both routes, and `check --replay`
 decided the receipt again.
-Squares touch the box, a least wall clearance of exactly 0 (the far walls), and the
-least pair gap is about $1.336 \times 10^{-15}$.
+Squares touch the box, a least wall clearance of exactly 0: one square, row 253, touches
+the right wall, the top wall clears by $4.32 \times 10^{-13}$ and the left and bottom
+walls by $7.22 \times 10^{-16}$ (the review’s F3). The least pair gap is about
+$1.336 \times 10^{-15}$.
 
 `devtools.upper_bound_reports sharp-controls` took the certificate to exact contact and
 $10^{-30}$ past it ([receipts/sharp-controls.json](receipts/sharp-controls.json), 11
@@ -139,18 +148,60 @@ controls, 157 CPU seconds):
 - Both refused a duplicated square.
 
 The two routes, the `sqpack` exact witness verifier and the independent rational corner
-checker, share certificate parsing, half-angle conversion, `Fraction` arithmetic and the
-separating-axis method, and read the certificate through the `evand-cert` reader, whose
-line filter and corner construction are transcribed from Evan Daniel’s checkers.
-The second route is `devtools.check_rational_witness_independent`, the program the
-author reports running on his own Witness/v2 conversion, so on that route the replay
-runs the producer’s check on this repository’s conversion; the first route is not the
-code he ran. No source program ran here.
+checker, share this repository’s `evand-cert` reader (certificate parsing and half-angle
+conversion, whose line filter and corner construction are transcribed from Evan Daniel’s
+checkers), `Fraction` arithmetic and the separating-axis method, and no verification
+code. The second route is `devtools.check_rational_witness_independent` at `e8571770`,
+the version the author reports running at `e6e8d577` on his own Witness/v2 conversion, so
+on that route the replay is reproduced with the producer’s code, on this repository’s
+conversion; the first route, `sqpack/witness.py` at `60bb51cc`, is not code he ran and is
+independently re-implemented (the review’s F2 and F7). No source program ran here.
+
+## Stage 4 Review
+
+The [review of 5 November 2026](../../../../docs/project/reviews/review-2026-11-05-yim-895-260.md),
+by a strong-tier lane prompted separately from this one, accepted the certificate with
+findings, none blocking or major, and confirmed the significance S2. Its programs,
+receipts and frozen findings are in [review/review-2026-11-05/](review/review-2026-11-05/README.md),
+equal to the digests its `programs.sha256` records.
+
+- **Its own checker.** `certcheck.py` decides every wall and all 33,670 pairs with no
+  distance filter by two methods that share only its reader, separating axes in
+  `Fraction` and exact clipped areas, and both accept. Its least wall clearance, exactly
+  0 at row 253, and least pair gap, $1.336398719863592 \times 10^{-15}$ at rows 203 and
+  210, equal the replay’s as exact fractions. Under the reversed rotation sense 159 pairs
+  overlap. Seventeen controls at exact contact and $10^{-30}$ past it are decided as
+  stated beforehand, and a self-test passes (`E-yim-895-review-exact-feasibility`,
+  `V-yim-1105-review-check`). It shares no code with either maintained route or the
+  source, so the bound is confirmed, independently re-implemented, clean room.
+- **The gain.** T-257’s own poses reach contact $2.0 \times 10^{-11}$ below its side, so
+  this side is about nine times T-257’s slack below it, reached by moving squares.
+- **F1 to F4 and F6** are this packet’s corrections, made above. **F2** registers the
+  versions of both maintained routes that ran. **F5** and **F11** are notes for the
+  author: the tiny turns, and the attachment’s identity with this file.
+  **F8** dates the claim by the issue, 4 November, the day it was stated with its exact
+  side. **F9** is the case record’s at adoption.
+- **Four questions for the author**: the attachment’s digest, which copy of the starting
+  packing the search read, the tiny turns, and the AI system used. None holds a rung.
+
+## Adoption at 260
+
+The case at 260 adopted this certificate as its house best packing on 5 November 2026,
+under the house rule, from T-257, whose certificate stays retained as history
+([n-260.md](../../../frontier/n-260.md)). Evan Daniel stays the packing’s finder and
+Kaelan Yim is its improver (the review’s F9). Both strong generators ran on the new
+witness ([think-o7ly-2026-11-05](../../../cases/regularized_drawings/think-o7ly-2026-11-05/README.md)):
+grid-slack draws no view at 0.5, 1 or 5 degrees, and Evan Daniel’s regularizer finds the
+witness not jammed, so the count is decided no better and the axis tool’s view of the new
+witness is drawn. The rigidity block was derived again and stays not rigid, 105 of the
+260 squares translating. The atlas posters hold Yim’s name off their credit block until
+the next infographics cut (think-tj4o); the case record, its page and its bound citation
+credit him now.
 
 ## What Is Not Established
 
-- **The stage 4 review.** No independent review has read the certificate yet; the brief
-  for it is on think-o7ly.
+- **A second review.** One AI review is retained; V4 and C4 would need a second accepted
+  adversarial review by a distinct reviewer.
 - **Human oversight.** No human oversight record is retained.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.

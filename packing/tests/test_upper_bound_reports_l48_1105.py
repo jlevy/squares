@@ -13,12 +13,14 @@ network.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
 from devtools import evand_arrangement_reports as kernel
+from devtools import upper_bound_houses as houses
 from devtools import upper_bound_reports as reports
 from devtools import upper_bound_sharp_controls as sharp
 
@@ -125,3 +127,35 @@ def test_the_identity_measurement_the_notes_cite() -> None:
     yim, daniel = record["tilts"]["YIM"], record["tilts"]["T-257"]
     assert (yim["tilted_beyond_1_degree"], daniel["tilted_beyond_1_degree"]) == (105, 104)
     assert (yim["exactly_turned"], daniel["exactly_turned"]) == (260, 121)
+
+
+REVIEW = reports.packet_path(NAME) / "review/review-2026-11-05"
+
+
+def test_the_review_programs_are_the_ones_its_receipts_name() -> None:
+    """The 5 November review's programs are retained byte for byte: each receipt names the
+    digest of the program that wrote it, and programs.sha256 lists each program's."""
+    listed = {
+        path.removeprefix("programs/"): digest
+        for digest, path in (
+            line.split(maxsplit=1)
+            for line in (REVIEW / "programs.sha256").read_text("utf-8").splitlines()
+        )
+    }
+    for name, digest in listed.items():
+        assert hashlib.sha256((REVIEW / "programs" / name).read_bytes()).hexdigest() == digest
+    for receipt in sorted((REVIEW / "out").glob("*.json")):
+        record = _json(receipt)
+        assert listed[record["program"]] == record["program_sha256"], receipt.name
+    accepted = _json(REVIEW / "out/check-yim-n260-ccw.json")
+    assert (accepted["verdict"], accepted["program_sha256"]) == (
+        "accepted",
+        listed["certcheck.py"],
+    )
+    assert _json(REVIEW / "out/check-yim-n260-cw.json")["verdict"] == "refused"
+    assert _json(REVIEW / "out/controls.json")["all_as_expected"] is True
+
+
+def test_the_case_adopts_t265_at_260() -> None:
+    assert houses.ADOPTED[260] == "T-265"
+    assert 260 in houses.LATER_PASSES["2026-11-05"]

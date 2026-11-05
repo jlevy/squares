@@ -1509,6 +1509,46 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code the producer’s check ran",
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-265": Prose(
+        author="Kaelan Yim",
+        reported="on [jlevy/squares#895](https://github.com/jlevy/squares/issues/895)",
+        producer_route=True,
+        ai=(
+            "Issue 895 says Kaelan Yim used AI to study and set up a search environment like "
+            "Evan Daniel’s and Kirill Tymchishin’s, and does not name the system."
+        ),
+        routes=(
+            "The second route, the independent rational corner checker, is the "
+            "`devtools.check_rational_witness_independent` the source ran on its own "
+            "conversion, so on that route the replay is reproduced with the producer’s code; "
+            "`sqpack`’s verifier shares with it only this repository’s reader and is "
+            "independently re-implemented, and the review’s checker shares no code with "
+            "either route or the source."
+        ),
+        lineage=(
+            "The issue says the search started from a public packing attributed to Evan Daniel "
+            "and Kirill Tymchishin, T-257’s, this case’s house best packing before this "
+            "adoption, which Daniel found from a search started from Tymchishin’s Kaggle "
+            "notebook packing. Measured by the 5 November review, it is T-257’s packing row "
+            "for row and pairs one to one with it under the identity and under no other "
+            "symmetry: 26 squares lie beyond a tenth, at most 0.382, 19 of them free play "
+            "along the bottom and top rows and one short row that the bound does not need, and "
+            "the other seven move with the tilted island’s rearrangement; 14 squares turn by "
+            "more than $10^{-6}$ radians, by at most 1.50 degrees, and 105 squares are tilted "
+            "against T-257’s 104. So it is a further arrangement of T-257’s packing, about "
+            "nine times T-257’s own slack below it, and the packing’s finder stays Evan "
+            "Daniel; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 5 November review’s clean-room checker decided it again on two routes "
+            "of its own, by separating axes and by exact clipped areas in rationals over every "
+            "pair; its seventeen controls, at exact contact and $10^{-30}$ past it, were each "
+            "decided as stated beforehand"
+        ),
+        diversity=(
+            "by a Claude agent, a system family that also wrote the check the producer ran"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1527,6 +1567,7 @@ LAVRENTEV = "Vladislav Lavrentev"
 CHILTON = "Alex Chilton"
 NTUMLNOOB = "ntumlnoob"
 OZDEN = "Doğa Özden"
+YIM = "Kaelan Yim"
 
 
 @dataclass(frozen=True)
@@ -1987,14 +2028,16 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-193 of T-174 of T-136, SQUISH's own packing (T-174's item measured, none moved).
     259: _exact_form(SQUISH, (PINGYOU, DANIEL), "Nate Chaoweeraprasit’s SQUISH"),
-    # T-257 (adopted on 31 October 2026), Evan Daniel's packing of issue 845 from a search
-    # started from Kirill Tymchishin's Kaggle s(260) packing, by the author's word (N-3 of
-    # the 31 October review); another arrangement than T-225's and T-256's.
+    # T-265 (adopted on 5 November 2026), Kaelan Yim's further arrangement of issue 895 of
+    # T-257's packing, row for row and one to one with it under the identity (the 5 November
+    # review): the packing's finder stays Evan Daniel, whose packing of issue 845 came from a
+    # search started from Kirill Tymchishin's Kaggle s(260) packing, by the author's word (N-3
+    # of the 31 October review), and Yim is its improver (the 5 November review's F9).
     260: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s packing from a search started from Kirill Tymchishin’s Kaggle "
-        "notebook packing",
+        (YIM,),
+        "Kaelan Yim’s further arrangement of Evan Daniel’s packing from a search started "
+        "from Kirill Tymchishin’s Kaggle notebook packing",
     ),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).

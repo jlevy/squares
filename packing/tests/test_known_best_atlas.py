@@ -2390,7 +2390,8 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # refined them, so both names join it. On 4 November 2026 the adoption at 204 and 299
     # (T-264, T-263) credits Doğa Özden as the improver of Evan Daniel's packings, and the
     # print holds his name back until the next infographics cut (think-tj4o), so no name
-    # joins it yet.
+    # joins it yet. On 5 November 2026 the adoption at 260 (T-265) credits Kaelan Yim as
+    # the improver of Evan Daniel's packing there, and the print holds his name back too.
     assert len(expected_names) == 30
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
@@ -2434,7 +2435,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # (T-231), which held nothing else. The adoption of 4 November draws 204 and 299 from
     # Doğa Özden's two packets (T-264, T-263), and no longer from Evan Daniel's issue 824
     # update packet, which held only 299; his issue 845 packet still holds 172, 260 and 293.
-    assert len(expected_sources) == 33
+    # The adoption of 5 November draws 260 from Kaelan Yim's packet (T-265); the issue 845
+    # packet still holds 172 and 293.
+    assert len(expected_sources) == 34
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2566,23 +2569,24 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     _assert_poster_text_clears_cards(information, canvas)
 
 
-def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
+def test_print_credit_hold_keeps_ozden_and_yim_off_the_poster_credits_alone(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """think-tj4o: the case records and the bound citations credit Doğa Özden as the
-    improver of Evan Daniel's packings at 204 and 299 (T-264, T-263). The posters' credit
-    block holds exactly his name back until the next infographics cut, so the drawn 1-100
-    canvas keeps its height; without the hold it would not."""
+    improver of Evan Daniel's packings at 204 and 299 (T-264, T-263), and Kaelan Yim as
+    the improver of his packing at 260 (T-265). The posters' credit block holds exactly
+    their names back until the next infographics cut, so the drawn 1-100 canvas keeps its
+    height; without the hold it would not."""
     held = known_best_builder.PRINT_CREDIT_HELD
-    assert held == {204: ("Doğa Özden",), 299: ("Doğa Özden",)}
-    for n in held:
-        reported = build_bound_citations.load_case(n)["reported_upper_bound"]
-        assert reported["found_by"] == ["Evan Daniel"]
-        assert reported["improved_by"] == ["Doğa Özden"]
+    assert held == {204: ("Doğa Özden",), 260: ("Kaelan Yim",), 299: ("Doğa Özden",)}
+    surnames = {"Doğa Özden": "Özden", "Kaelan Yim": "Yim"}
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
-    for n in held:
-        assert citations[n]["upper"]["text"] == "Daniel & Özden, GitHub"
+    for n, (name,) in held.items():
+        reported = build_bound_citations.load_case(n)["reported_upper_bound"]
+        assert reported["found_by"] == ["Evan Daniel"]
+        assert reported["improved_by"] == [name]
+        assert citations[n]["upper"]["text"] == f"Daniel & {surnames[name]}, GitHub"
     corpus = known_best_builder.CORPUS
     read_credits = known_best_builder._poster_packing_credits  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     credit_lines = known_best_builder._print_credit_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
@@ -2600,19 +2604,29 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         )
 
     names, lines, height = printed()
+    # Released one name at a time, each joins the block alone: Özden's rebalances it and
+    # changes the 1-100 canvas, and Yim's lengthens its lines (T-265, 5 November 2026).
+    # Released together they overflow its three lines, which the next cut must lay out.
+    unheld: dict[str, tuple[set[str], str, int]] = {}
     try:
+        for name, surname in surnames.items():
+            others = {n: kept for n, kept in held.items() if kept != (name,)}
+            monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", others)
+            unheld[surname] = printed()
         monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
-        unheld_names, unheld_lines, unheld_height = printed()
+        with pytest.raises(ValueError, match="three-line information block"):
+            printed()
     finally:
         monkeypatch.undo()
         printed()
-    assert unheld_names - names == {"Özden"}
-    assert names < unheld_names
-    assert "Özden" not in lines
-    assert "Özden" in unheld_lines
+    for surname, (released, released_lines, _height) in unheld.items():
+        assert released - names == {surname}
+        assert surname not in lines
+        assert surname in released_lines
     drawn = ET.fromstring((ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8"))
     assert drawn.get("height") == str(height)
-    assert unheld_height != height
+    assert unheld["Özden"][2] != height
+    assert unheld["Yim"][1] != lines
 
 
 def test_the_print_credit_hold_cannot_outlive_its_edition(

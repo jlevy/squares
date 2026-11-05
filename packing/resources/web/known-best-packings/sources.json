@@ -1702,19 +1702,19 @@
       "url": "https://github.com/evand/square-packing/blob/7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1/search/exact/cur/data/n-259.minpoly.json.gz"
     },
     {
-      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d/search/packer/candidates/s260_1028.cert at 0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+      "attribution": "Kaelan Yim, https://github.com/vitamoon/vitamoon/blob/d11a8a1ce798f7c0b4f801e922e242d22cedcd73/n260.cert at d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         260
       ],
       "n": 260,
-      "path": "resources/web/evand-issue845-2026-10-29/source/search/packer/candidates/s260_1028.cert",
+      "path": "resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-31",
+      "retrieved": "2026-11-05",
       "source_n": 260,
-      "url": "https://github.com/evand/square-packing/blob/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d/search/packer/candidates/s260_1028.cert"
+      "url": "https://github.com/vitamoon/vitamoon/blob/d11a8a1ce798f7c0b4f801e922e242d22cedcd73/n260.cert"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/pingyou-algebraic-refinements-2026-10-13/n261/native.yaml at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

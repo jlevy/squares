@@ -606,6 +606,10 @@ def _sources() -> dict[str, Source]:
         # left on 31 October; T-257 still houses 172, 260 and 293.
         packet_source("T-263", "ozden-s299-upper-bound-2026-11-03"),
         packet_source("T-264", "ozden-s204-upper-bound-2026-11-03"),
+        # The adoption of 5 November 2026 moved 260 to T-265, Kaelan Yim's further
+        # arrangement of issue 895 of Evan Daniel's T-257 packing; T-257 still houses 172
+        # and 293.
+        packet_source("T-265", "yim-s260-upper-bound-2026-11-05"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -660,7 +664,8 @@ def _sources() -> dict[str, Source]:
 #: Couzo's (T-254). T-231 keeps no house here. The pass of 4 November 2026 adopted Doğa
 #: Özden's further arrangements of issue 893 (T-263) at 299 from T-258 and of issue 894
 #: (T-264) at 204 from T-257, with each packing's finder Evan Daniel; T-258 keeps no house
-#: here.
+#: here. The pass of 5 November 2026 adopted Kaelan Yim's further arrangement of issue 895
+#: (T-265) at 260 from T-257, with the packing's finder Evan Daniel.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -711,7 +716,7 @@ ADOPTED: dict[int, str] = {
     241: "T-182",
     258: "T-193",
     259: "T-193",
-    260: "T-257",
+    260: "T-265",
     261: "T-174",
     263: "T-174",
     264: "T-186",
@@ -836,6 +841,8 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: T-256 is below T-193's algebraic side, which the writer's bead had staged there.
 #: The pass of 4 November 2026 (think-3guf, think-ybep) adopted that day's stage 4 review:
 #: T-263 at 299 and T-264 at 204.
+#: The pass of 5 November 2026 (think-3guf, think-o7ly) adopted that day's stage 4 review:
+#: T-265 at 260.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -917,6 +924,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-26": frozenset({268}),
     "2026-10-31": frozenset({130, 172, 204, 232, 260, 293, 299, 307}),
     "2026-11-04": frozenset({204, 299}),
+    "2026-11-05": frozenset({260}),
 }
 
 

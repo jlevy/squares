@@ -28224,7 +28224,15 @@ issues:
       accept the certificate and refuse its gross and sharp controls; measured, it pairs one to
       one with T-257's packing, 26 squares beyond a tenth. The ledger of 4 November
       (upper-bounds-893-895-20261104) records it, now from the packet's claim record. Registered
-      as T-265 at V0/C0; the stage 4 review and the adoption at 260 are think-o7ly's.
+      as T-265. The 5 November stage 4 review
+      (docs/project/reviews/review-2026-11-05-yim-895-260.md, think-o7ly) accepted it with
+      findings, none blocking or major, confirmed S2 and read it as a further arrangement of
+      T-257's packing, row for row; its clean-room checker decided it again, so the entry is
+      confirmed, independently re-implemented, at V3/C3, and the case adopts it at 260 under
+      the house rule in the same pass, with Evan Daniel the packing's finder and Yim its
+      improver, both strong generators' runs deciding the new witness no better than the axis
+      tool's view, and its rigidity block derived again. The posters hold Yim's name off their
+      credit block until the next infographics cut (think-tj4o).
     read_through: '2026-11-05T05:31:32Z'
     results:
     - key: n260-yim
@@ -28238,8 +28246,8 @@ issues:
       - T-265
       evidence:
       - E-yim-895-certificate-report
-      validation:
-      - think-o7ly
+      - E-yim-895-exact-feasibility
+      - E-yim-895-review-exact-feasibility
     beads:
     - think-qclj
     - think-o7ly
@@ -28270,9 +28278,9 @@ issues:
         attachment cannot be fetched; the bound is decided from the retained file, so the
         answer changes nothing the record asserts, and the digest goes in the reply.
     close_when: >-
-      T-265 is on main and the reply on main says what was retained and replayed, that the
-      file is pinned by commit since no digest was stated, and that the stage 4 review and the
-      adoption at 260 are think-o7ly's.
+      T-265 is on main at V3/C3 as the house at 260, and the reply on main says what was
+      retained and replayed, that the file is pinned by commit since no digest was stated,
+      that the stage 4 review accepted the certificate, and that the case adopted it.
     notes: >-
       Not checked on 4 November 2026: the attachment
       https://github.com/user-attachments/files/34348312/n260.cert.txt, which the session
