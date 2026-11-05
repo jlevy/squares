@@ -5,14 +5,14 @@ title: Review Yim's 260 certificate (stage 4) and adopt it with both regularizat
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m6jf7ps8jcdka5zx64tpgxxz
 created_at: 2026-11-05T06:11:24.761Z
-updated_at: 2026-11-05T06:11:24.761Z
+updated_at: 2026-11-05T07:04:59.390Z
 ---
 Stage 4 mathematical review of Kaelan Yim's certificate at 260 (jlevy/squares#895), registered at V0/C0 on lane L48's draft pull request (branch claude/bold-ritchie-xo28us-l48), and, after the review lands on that branch, its adoption at 260 under the house rule with both strong generators' regularization, it being the smallest side reported there.
 
@@ -28,3 +28,7 @@ Stage 4 mathematical review of Kaelan Yim's certificate at 260 (jlevy/squares#89
 - Depends on: a tbd-strong-max review lane the coordinator launches (the import lane may not review its own import).
 - Done when: the review is mapped on the entry (reviews, external_review on the report evidence, the review's exact-feasibility evidence), check_results derives V3/C3, and 260 is adopted and regularized with select_houses --check, default_drawings --check-state --base-ref origin/main and flip_regularization --check passing.
 - Machine note: minutes of CPU for the review; run the regularization apart from a gate, at most two cores, nice -n 19.
+
+## Notes
+
+2026-11-05 (bold-ritchie-l48): the import is draft PR https://github.com/jlevy/squares/pull/911 on branch claude/bold-ritchie-xo28us-l48 (head 7dc32aecc at writing); T-265 at V0/C0 names this bead in its unfinished_confirmations and #895's validation. Not claimed by L48: the coordinator launches the tbd-strong-max reviewer, whose review lands on that branch before the adoption.
