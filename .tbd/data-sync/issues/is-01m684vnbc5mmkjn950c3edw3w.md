@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 152
+version: 153
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-05T00:54:26.542Z
+updated_at: 2026-11-05T01:54:25.212Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -269,3 +269,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 23:53 renewal (intake68): no new reports. A container restart (~23:45Z) stopped L47 and the #908 reviewer's test runs; both resumed (L47 census and control output survived on disk). #908 and the T-132 PR are held as an owner decision (think-ux1v order of 11 Oct).
 
 2026-11-05 00:52 renewal (intake69): no new reports. #908 review accept-with-fixes (F1 #532 summary, F2 n-028 T-192 blocker), with L42 fixing it and the PR held for the owner. Owner asked: (1) replays vs the think-ux1v order; (2) #543 tolerance as adopted by #892.
+
+2026-11-05 01:52 renewal (intake70): no new reports. #909 (T-132 V3/C3 at n29, 291/50) review accept-with-fixes (wording; #908 merges first), with L47 fixing it. #908 and #909 both held blocked:owner-decision.
