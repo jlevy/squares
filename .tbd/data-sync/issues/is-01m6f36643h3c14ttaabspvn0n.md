@@ -5,7 +5,7 @@ title: "Stage 4 review of T-132's mixed_n29_L582 (wand125 s(29) >= 291/50, #446)
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: bold-ritchie-l47
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m4jk4cae8514p87y79gsh17n
 hold: null
 hold_until: null
 created_at: 2026-11-02T21:38:31.171Z
-updated_at: 2026-11-04T21:23:18.512Z
+updated_at: 2026-11-05T00:40:44.708Z
 started_at: 2026-11-04T21:23:18.512Z
 ---
 T-132 (wand125's s(29) >= 291/50, mixed_n29_L582, reported on jlevy/squares#446) has no review that reads its certificate: the 11 October final review read only the record and premises (its F1-2 says the stage 4 review that reads the certificates is still owed), and the 23 October #446 review read n = 19, 20 and 26. The declared-net route's checklist (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md, For the Records Lane, item 7) needs "a review under docs/project/reviews/ [that] read this certificate and accepted it" before a census replay's evidence can be mapped, and check_results' verified_lane_review_problems holds an adoption at n = 29 to a mapped review. So T-132 cannot leave V0/C0 by a census alone.
@@ -29,3 +29,5 @@ T-132 (wand125's s(29) >= 291/50, mixed_n29_L582, reported on jlevy/squares#446)
 ## Notes
 
 2026-11-04 bold-ritchie-l32 (PR #889, review F4): this bead says n = 29's axis gap, 5.2e-10, is "inside the census's axis allowance". That no longer holds as a criterion. #892 (merged at 0bc5a08c5) removed the constant AXIS_ROUNDING: a whole-net control's axis refusal is now judged by the vertex sweep's own enclosure, recomputed from the candidate, with the crate's bound as its lower end to the bit and the exact capture inside it. That is how T-176's n39 control passed. T-132's next_rung in packing/frontier/results.yaml is reworded to say so on #889. The gap figure stays as a measurement only.
+
+2026-11-05 bold-ritchie-l47: the review (accept with findings, none blocking or major) is retained on draft PR #909: docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its README, eleven programs and receipts in packing/resources/web/wand125-fine-net-n29-2026-10-10/review/ (data/ not kept), four verifiers (V-wand125-n29-review-premises, -exact-capture, -axis-decision, -oblique-decision), mapped as external_review on E-wand125-fine-net-n29-582-followup-report and as an adversarial, accepted entry in T-132's reviews, and named as the census replay's audit_record. F-8's expectation held: the census control's axis capture sits at the middle of an enclosure 1.05e-9 wide and the leg passed. This bead closes when #909 merges; #909 is held for the owner's think-ux1v decision.
