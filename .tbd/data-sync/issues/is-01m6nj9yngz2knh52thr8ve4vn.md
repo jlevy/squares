@@ -1,0 +1,19 @@
+---
+type: is
+id: is-01m6nj9yngz2knh52thr8ve4vn
+title: Credit Yim as improved_by at 260 on the posters at the next infographics cut (T-265)
+kind: task
+status: open
+priority: 3
+version: 1
+labels: []
+dependencies: []
+parent_id: is-01m684vnbc5mmkjn950c3edw3w
+created_at: 2026-11-05T09:58:09.839Z
+updated_at: 2026-11-05T09:58:09.839Z
+---
+The adoption of T-265 at 260 on 5 November 2026 (PR #911, think-o7ly) credits Kaelan Yim as improved_by of Evan Daniel's packing there. The case record, its page, the register and the bound citation ("Daniel & Yim, GitHub") credit him now. The atlas posters, drawn for the v0.7.0 edition, do not: `PRINT_CREDIT_HELD` in `packing/devtools/build_known_best_atlas.py` holds his name off the posters' "Best packings due to" block, beside Doğa Özden's at 204 and 299 (think-tj4o), until the next infographics cut redraws the posters and empties the hold.
+
+Measured on 5 November 2026: released alone, Yim's name fits the block and leaves the 1-100 canvas at 3898 px, though it changes the block's lines; released together with Özden's, the block overflows its three lines (`ValueError: poster packing credits exceed their three-line information block`). So the cut that empties the hold must also lay the block out for one more name. `test_print_credit_hold_keeps_ozden_and_yim_off_the_poster_credits_alone` in `packing/tests/test_known_best_atlas.py` holds both facts.
+
+Done when: the next infographics cut credits Yim at 260 (and Özden at 204 and 299, think-tj4o), the hold is empty, and the block fits.
