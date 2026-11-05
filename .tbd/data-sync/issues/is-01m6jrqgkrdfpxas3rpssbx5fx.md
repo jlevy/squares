@@ -5,14 +5,14 @@ title: Register the regularizer's solves below the new houses at 204 and 299 (ro
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-04T07:52:42.360Z
-updated_at: 2026-11-04T07:52:55.647Z
+updated_at: 2026-11-05T23:53:42.057Z
 ---
 Evan Daniel's regularizer (regularize_evand run, run adopt-2026-11-04-n204-299-evand, retained under packing/cases/regularized_drawings/think-ybep-2026-11-04/ on #897) solved both witnesses the 4 November adoption wrote to exact points below the house best packing's side:
 
@@ -30,3 +30,7 @@ The decision table held both at row 3 (register first), and the selection lists 
 - Depends on: #897 merging (T-263 and T-264 on main).
 - Done when: the batch result is registered at V3/C3 with an accepted review and the two counts are adopted and regularized.
 - Machine note: minutes of CPU; at most two cores.
+
+## Notes
+
+2026-11-05 (bold-ritchie-l51, #914's adoption, think-lrj4, draft PR #916): T-268, Evan Daniel's new packing of #914 at 204, is 3.26e-3 below T-264's side, and the case adopts it on 5 November 2026. The regularizer's solve of T-264's witness, 4.82e-16 below T-264, is therefore about 3.26e-3 above the new house: under the house rule it is no smaller packing, so it is no register candidate. The 204 part of this bead settles with that adoption once #916 merges; the 299 part (1.56e-12 below T-263) is unchanged. Both strong generators ran again on T-268's witness in #916 (packing/cases/regularized_drawings/think-lrj4-2026-11-05/).
