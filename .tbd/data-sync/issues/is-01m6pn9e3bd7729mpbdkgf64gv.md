@@ -5,14 +5,14 @@ title: "Review Daniel's seven #914 certificates at 175, 204, 260, 268, 293, 303 
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m6pmy1yjah0yzxy31g6sr734
 created_at: 2026-11-05T20:09:33.034Z
-updated_at: 2026-11-05T20:21:36.537Z
+updated_at: 2026-11-05T22:12:13.193Z
 ---
 Stage 4 mathematical review of Evan Daniel's seven certificates of jlevy/squares#914, registered at V0/C0 as T-267 to T-273 on lane L51's draft pull request (branch claude/bold-ritchie-xo28us-l51), and, after the review lands on that branch, their adoption at each count under the house rule with both strong generators' regularization, each being the smallest side reported there.
 
@@ -36,3 +36,7 @@ Stage 4 mathematical review of Evan Daniel's seven certificates of jlevy/squares
 - Depends on: a tbd-strong-max review lane the coordinator launches (the import lane may not review its own import).
 - Done when: the review is mapped on all seven entries (reviews, external_review on the report evidence, the review's exact-feasibility evidence), check_results derives V3/C3, and all seven counts are adopted and regularized with select_houses --check, default_drawings --check-state --base-ref origin/main and flip_regularization --check passing.
 - Machine note: minutes of CPU for the review; run the regularization apart from a gate, at most two cores, nice -n 19.
+
+## Notes
+
+2026-11-05 (bold-ritchie-l51): the import is on draft PR https://github.com/jlevy/squares/pull/916 (branch claude/bold-ritchie-xo28us-l51), head f09acabbc, hosted green. For the adopting lane: cases/260.html now has its own 355,000-byte budget (site_urls.PAGE_BUDGET_EXCEPTIONS and test_case_pages), which holds T-269's adoption at the 27-33 KB an adoption adds; cases/204.html's 430,000 was set for one more adoption there (think-w64i), which T-268's would use, so re-measure 204 after adopting. results.html's ceiling is 1,600,000, room through 291 results (test_overview.RESULTS_ROOM_THROUGH). The bibliography key now reads 'Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin'.
