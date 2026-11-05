@@ -12093,6 +12093,28 @@ sources:
     whole-net control of 4 November under the enclosure rule of #892 and the stage 4 review
     of 3 November confirm it, reproduced with the producer's code, so both of n-094's lower
     lanes take it. T-262 records the claim, at V3/C3.
+- id: ozden-s94-lower-bound-9972-2026-11-05
+  title: Doğa Özden's further dilation of Hosono's mixed_n94_L995 for s(94) >= 2493/250, issue 910
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s94-lower-bound-9972/tree/7d21f9bdf707102dd4ebf47e52f81b502a01004d
+  local: resources/web/ozden-s94-lower-bound-9972-2026-11-05/
+  source_key: '[Özden s94 lower bound 2026-11-05]'
+  scope: {n_values: [94]}
+  reviewed: '2026-11-05'
+  source_date: '2026-11-05'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-094.md
+  - frontier/results.yaml
+  - resources/web/ozden-s94-lower-bound-9972-2026-11-05/README.md
+  evidence: [E-ozden-910-n94-9972-report]
+  notes: >-
+    The whole tree but .gitignore and the copy of Hosono's candidate the T-091 packet keeps
+    is retained at the repository's one commit, 7d21f9b. The certificate is Hosono's T-091
+    measure dilated onto a 4,972-direction declared net; its 2493/250 is above T-262's
+    1993/200 by 7/1000, which n-094's verified lower lane keeps until the replay here and
+    the stage 4 review. T-266 records the claim.
 - id: ozden-s299-upper-bound-2026-11-03
   title: >-
     Doğa Özden's packing of 299 squares at kenaznia-doga/s299-upper-bound 6486ead, issue 893

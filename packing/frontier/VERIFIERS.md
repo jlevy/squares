@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **232** programs: **53** external and **179** first-party; **154** decide claims and **78** check premises.
-- **691** of **874** evidence entries name the programs that verified them: 325 independently re-implemented, 294 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **691** of **875** evidence entries name the programs that verified them: 325 independently re-implemented, 294 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -2555,11 +2555,11 @@ No evidence entry names it yet.
 
 **devtools.audit_dilated_measure** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Recomputes in exact rationals, from a packet's retained certificate and apart from the crate, the premises of a format M certificate that dilates a retained one onto a declared net: the file's shape, the masses and containment, the total n - 1/100000, lemma N0's (a) to (e), the dilation row by row against the base, and the regeneration of the certificate's JSON text from the base by the source's stated rule; then compares the census capture with the producer's sqverify-fast receipts direction by direction. It decides no coverage; sqverify-fast does.
+Recomputes in exact rationals, from a packet's retained certificate and apart from the crate, the premises of a format M certificate that dilates a retained one onto a declared net: the file's shape, the masses and containment, the total n - 1/100000, lemma N0's (a) to (e), the dilation row by row against the base, and the regeneration of the certificate's JSON text from the base by the source's stated rule; then compares the census capture with the producer's sqverify-fast receipts direction by direction. Its receipts command audits a producer's archive of several native runs: each run's rows are its declared scope, its summary states the certificate's premises and a build of reviewed source, each direction of the net is held once, verified, by a line equal to its run's, and a mass-scaled control's witnesses are recomputed by check_sqverify_fast.mixed_exact. It decides no coverage; sqverify-fast does.
 
 - Source: [`packing/devtools/audit_dilated_measure.py`](../../packing/devtools/audit_dilated_measure.py), [`packing/tests/test_audit_dilated_measure.py`](../../packing/tests/test_audit_dilated_measure.py)
 - Versions run: this repository's commits, which Git holds
-- Note: Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after reading the certificate, the source's README and tools/rescale.py as data. Its receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in the ozden-s94-lower-bound-2026-11-03 packet.
+- Note: Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after reading the certificate, the source's README and tools/rescale.py as data, and extended by lane L49 on 5 November (think-pi8b) for #910: that source's canonical rescale rule, the growth at the nodes the two nets share, and the receipts command. Its receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in the ozden-s94-lower-bound-2026-11-03 packet, and receipts/dilation-audit.json and receipts/native-receipt-audit.json in the ozden-s94-lower-bound-9972-2026-11-05 packet.
 
 No evidence entry names it yet.
 

@@ -30595,6 +30595,66 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 lower bound 2026-11-05]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 lower bound 2026-11-05]'
+    field: /credit
+  expected_text: Ozden after Hosono, Tokoharu, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 lower bound 2026-11-05]'
+    field: /credit
+  expected_text: Ozden after Hosono, Tokoharu, Levy
+  start: 12
+  end: 18
+  label: Hosono
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 lower bound 2026-11-05]'
+    field: /credit
+  expected_text: Ozden after Hosono, Tokoharu, Levy
+  start: 20
+  end: 28
+  label: Tokoharu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s94 lower bound 2026-11-05]'
+    field: /credit
+  expected_text: Ozden after Hosono, Tokoharu, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Özden s299 upper bound 2026-11-03]'
     field: /authors/0
   expected_text: Özden

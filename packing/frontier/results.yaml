@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-04'
+last_reviewed: '2026-11-05'
 results:
   - id: T-001
     kind: lower-bound
@@ -38544,6 +38544,97 @@ results:
         findings were frozen.
       verdict: accepted
       covers: [T-264]
+  - id: T-266
+    kind: lower-bound
+    registered: '2026-11-05'
+    landed: '2026-11-05'
+    headline: "`s(94) ≥ 2493/250` reported, T-091's measure dilated onto a 4,972-direction net"
+    claim: >-
+      A rectangle measure of kenaznia-doga/s94-lower-bound-9972, published on 5 November 2026
+      and reported in jlevy/squares#910, is reported to prove s(94) >= 2493/250 = 9.972.
+
+      The certificate is Hiroaki Hosono's mixed_n94_L995 (T-091) dilated by 4986/4975: 853
+      uniform rectangles in D4 orbits, every coordinate scaled and every mass unchanged, of
+      total mass 9399999/100000 < 94, at core side 24872661/24875000 on a net its file
+      declares of 4,972 half-angle tangents of step 1/12000. Hosono's 201-direction net
+      does not admit the larger core, so 4,952 of the 4,972 directions are new, and the
+      centre domain grows toward the walls; the dilation carries none of T-091's or
+      T-262's coverage. It is the source's second dilation of that measure, after T-262's
+      by 1993/1990, and not a new packing arrangement.
+
+      The source reports this repository's sqverify-fast, unmodified, verifying every core
+      centred in its per-bin domain at all 4,972 directions, in six native runs whose
+      selected lines make one archive, and the 99/100 mass mutant refused at two
+      directions. Here the premises, lemma N0 on the declared net and the dilation were
+      recomputed exactly from the retained bytes, and the lab's receipts audited: every
+      direction once, each selected line its run's, of reviewed crate source. The coverage
+      has not yet been decided here.
+
+      The value is above T-262's 1993/200, the verified and reported lower bound at n = 94,
+      by 7/1000.
+
+      Doğa Özden after Hosono, Tokoharu and Levy,
+      [s94-lower-bound-9972](https://github.com/kenaznia-doga/s94-lower-bound-9972/tree/7d21f9bdf707102dd4ebf47e52f81b502a01004d).
+      The source says AI agents in the author's research lab, Claude (Anthropic) and
+      OpenAI Codex agents, constructed and rescaled the certificate, ran the checks,
+      audited the receipts and prepared the submission, under his direction; the issue
+      was posted on his behalf by his AI agent.
+    scope: {n_values: [94]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Scored as a claim: if correct, the strongest lower bound on record at n = 94, 7/1000
+        above T-262, by T-091's own measure dilated onto a still finer declared net, the
+        certificate kind and route of T-091, T-178 and T-262, with no new technique, at S3
+        as they are.
+      scored: '2026-11-05'
+      by: the registering lane's draft (think-pi8b), for the stage 4 review to confirm
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Özden s94 lower bound 2026-11-05]']
+      published: '2026-11-05'
+    composition: >-
+      One reported certificate on its reported entry. The source decided it with this
+      repository's sqverify-fast, so a census replay here would reproduce it with the
+      producer's code; the source's exploratory C checker, which is not interval
+      arithmetic, is retained and not run.
+    evidence: [E-ozden-910-n94-9972-report]
+    artifacts:
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/README.md
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/acquisition/sources.json
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/source/certificate/n94-L9972.json.gz
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/dilation-audit.json
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/native-receipt-audit.json
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/sample-diagnostic.json
+      - packing/devtools/audit_dilated_measure.py
+    next_rung: >-
+      C3 needs a complete sqverify-fast census run at all 4,972 directions from the retained
+      candidate, with its whole-net control receipt (think-qcms, priced at about 19 CPU-hours
+      and runnable); the verified lane at n = 94 needs a stage 4 review that reads this
+      certificate (think-xzxd), by the checklist of the 6 October declared-net soundness
+      review.
+    unfinished_confirmations:
+      - what: >-
+          the complete sqverify-fast census of the retained certificate at all 4,972
+          directions of its declared net, with the whole-net control of the 99/100 mutant
+        rung: C3
+        link: think-qcms
+        estimated_cost:
+          cpu_hours: 19.4
+          cpu_hours_high: 32.8
+          basis: >-
+            The census 16.4 to 18.8 CPU-hours: a 13-direction sample with the census binary
+            (receipts/sample-diagnostic.json in the packet), by its mean and by its rate per
+            node over the lab's 2,462,923,881 selected nodes, and #890's census of 600
+            directions in 8,138.6 CPU-seconds; the whole-net control about 0.6 CPU-hours,
+            #890's scaled to 4,972 directions. The upper end is the sample tool's model,
+            which prices the control as a second full sweep.
+          priced: '2026-11-05'
+    notes: >-
+      Registered on the day of the report from the packet's retained bytes. The case
+      record's reported lower lane takes 2493/250; its verified lane keeps T-262's 1993/200.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

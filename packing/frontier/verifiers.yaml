@@ -2979,15 +2979,24 @@ verifiers:
       lemma N0's (a) to (e), the dilation row by row against the base, and the
       regeneration of the certificate's JSON text from the base by the source's stated
       rule; then compares the census capture with the producer's sqverify-fast receipts
-      direction by direction. It decides no coverage; sqverify-fast does.
+      direction by direction. Its receipts command audits a producer's archive of several
+      native runs: each run's rows are its declared scope, its summary states the
+      certificate's premises and a build of reviewed source, each direction of the net is
+      held once, verified, by a line equal to its run's, and a mass-scaled control's
+      witnesses are recomputed by check_sqverify_fast.mixed_exact. It decides no coverage;
+      sqverify-fast does.
     source:
       - packing/devtools/audit_dilated_measure.py
       - packing/tests/test_audit_dilated_measure.py
     note: >-
       Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after
-      reading the certificate, the source's README and tools/rescale.py as data. Its
-      receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in
-      the ozden-s94-lower-bound-2026-11-03 packet.
+      reading the certificate, the source's README and tools/rescale.py as data, and
+      extended by lane L49 on 5 November (think-pi8b) for #910: that source's canonical
+      rescale rule, the growth at the nodes the two nets share, and the receipts command.
+      Its receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in
+      the ozden-s94-lower-bound-2026-11-03 packet, and receipts/dilation-audit.json and
+      receipts/native-receipt-audit.json in the ozden-s94-lower-bound-9972-2026-11-05
+      packet.
   - id: V-evand-regularized-1020-review-controls
     program: sharp_controls_t225.py
     author: Squares Project (Levy)

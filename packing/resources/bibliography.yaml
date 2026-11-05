@@ -4552,6 +4552,30 @@ sources:
       repository's census replayed it at all 600 directions on 3 November 2026 and its whole-net control passed
       on 4 November, so T-262 is V3/C3, reproduced with the producer's code. Ozden is Özden
       in the credit's ASCII. Retained in web/ozden-s94-lower-bound-2026-11-03/.
+  - key: '[Özden s94 lower bound 2026-11-05]'
+    authors: [Özden]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: builds-on-project
+    credit: Ozden after Hosono, Tokoharu, Levy
+    short_credit: Ozden after Hosono, Tokoharu et al.
+    note: >-
+      kenaznia-doga/s94-lower-bound-9972 at 7d21f9bdf707102dd4ebf47e52f81b502a01004d
+      (2026-11-05T06:51:31Z), Doğa Özden's certificate for s(94) >= 2493/250: Hiroaki
+      Hosono's mixed_n94_L995 rectangle measure (T-091) dilated by 4986/4975 onto a declared
+      net of 4,972 half-angle directions of step 1/12000, with the lab's receipts of this
+      repository's sqverify-fast at every direction, assembled from six native runs, and a
+      99/100 mass control at two directions. Registration was requested in
+      jlevy/squares#910, posted on the author's behalf by his AI agent's account
+      kenaznia-doga. The README credits the measure to Hosono after Tokoharu and the
+      declared nets, the verifier, its review and T-262 to Joshua Levy and this project;
+      it says AI agents in the author's lab (Claude and OpenAI Codex agents) constructed
+      and rescaled the certificate, ran the checks, audited the receipts and prepared the
+      submission under his direction. Licensed CC BY 4.0 (certificates, witnesses,
+      receipts, data, write-ups) and MIT (code) by LICENSE.md, byte for byte the
+      declaration of [Özden s94 dilation 2026-11-03]. Ozden is Özden in the credit's
+      ASCII. Retained in web/ozden-s94-lower-bound-9972-2026-11-05/.
   - key: '[Özden s299 upper bound 2026-11-03]'
     authors: [Özden]
     year: 2026
