@@ -56319,3 +56319,191 @@ evidence:
       program, which share its reader; under the reversed rotation sense, 100 pairs
       overlap. Finite feasibility only.
     source_reviewed: '2026-11-04'
+  - id: E-yim-895-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 260
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Yim s260 upper bound 2026-11-05]'
+    certificate: packing/resources/web/yim-s260-upper-bound-2026-11-05/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-05'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at d11a8a1,
+      first committed at e7cab3a. A separate complete repository replay is retained for n = 260: 1
+      positive and 2 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 202020 pair decisions; summed over the 3 jobs, the receipt records 41.04 route
+      CPU seconds and 41.35 job wall seconds, the longest job 14.08 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least
+      1.33e-15. The packet's sharp controls meet those margins on both routes. The replay is
+      E-yim-895-exact-feasibility and the 5 November review's own checker
+      E-yim-895-review-exact-feasibility. The author reports one check, this repository's
+      devtools.check_rational_witness_independent on his own Witness/v2 conversion; it was not
+      repeated on his conversion here. The issue's attachment of 4 November was never fetched; the
+      retained file is the one the author's reply names, pinned by commit, since no digest was
+      stated.
+
+      The two maintained routes, sqpack's exact witness verifier and the independent rational
+      corner checker, share this repository's evand-cert reader (certificate parsing and
+      half-angle conversion), Fraction arithmetic and the separating-axis method, and no
+      verification code; the second is the program the author ran. No human oversight or
+      optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 895 (think-o7ly),
+        strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+        import lane (bold-ritchie-l48)
+      note: >-
+        docs/project/reviews/review-2026-11-05-yim-895-260.md accepted the certificate with
+        findings, none blocking or major, and confirmed S2. Its clean-room run is
+        E-yim-895-review-exact-feasibility, and the replay E-yim-895-exact-feasibility.
+  - id: E-yim-895-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [260]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Yim s260 upper bound 2026-11-05]'
+    certificate: packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports yim-s260-upper-bound-2026-11-05 certify
+      --workers 2 wrote the receipt on 5 November 2026 from the packet's retained
+      certificate, read by the evand-cert reader, and check --replay decides all 3 retained
+      jobs, the certificate with its duplicate-square and outside-container controls, again
+      through both maintained routes and holds each to its retained row; check-claims
+      rebuilds the frozen comparison. python -m devtools.upper_bound_reports
+      yim-s260-upper-bound-2026-11-05 sharp-controls wrote the packet's sharp controls, all
+      11 as expected on both routes: contact accepted at margin 0 and refused 1e-30 past it.
+      The routes that ran are sqpack/witness.py at 60bb51cc and sqpack/verify.py at
+      56bc5b9f, and check_rational_witness_independent.py at e8571770, the version the
+      author ran at e6e8d577 (verifiers.yaml). The 5 November stage 4 review found the
+      routes' least gap and least containment clearance equal to its own as exact fractions.
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 260 that T-265 cites, every wall and every pair decided by
+          both maintained routes; the kernel's controls are retained in the packet's
+          receipt
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-05-yim-895-260.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 895 (think-o7ly),
+        strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+        import lane (bold-ritchie-l48)
+      note: >-
+        docs/project/reviews/review-2026-11-05-yim-895-260.md accepted the certificate with
+        findings, none blocking or major. By its F7 the second route,
+        devtools.check_rational_witness_independent, is the program the author ran on his
+        own conversion, so on that route the replay is reproduced with the producer's code;
+        the first, sqpack's exact witness verifier, shares with it only this repository's
+        reader and is independently re-implemented. T-265's clean-room re-implementation
+        rests on E-yim-895-review-exact-feasibility.
+    limitations: >-
+      A replay of the one retained certificate by two maintained exact routes that share this
+      repository's evand-cert reader (certificate parsing and half-angle conversion, whose line
+      filter and corner construction are transcribed from Evan Daniel's checkers), Fraction
+      arithmetic and the separating-axis method, and no verification code. The second route is
+      the program the author ran, on his own conversion; the first is not code he ran. The
+      receipt's 3 jobs hold 202020 pair decisions and 41.04 route CPU seconds. One square
+      touches the right wall (least wall clearance exactly 0) and every pair clears by at least
+      1.33e-15; the receipt's controls are gross, and the packet's sharp controls meet those
+      margins. Finite feasibility only.
+    source_reviewed: '2026-11-05'
+  - id: E-yim-895-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [260]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Yim s260 upper bound 2026-11-05]'
+    certificate: packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python3 -I on a shared four-core host
+      under nice -n 19, 5 November 2026, from the packet's review/review-2026-11-05/:
+      programs/certcheck.py on n260.cert (out/check-yim-n260-ccw.json, accepted), reading
+      the format fail-closed and deciding every wall and all 33,670 pairs with no distance
+      filter by separating axes in Fraction (method A) and again by exact clipped areas in
+      Fraction (method B), which agree everywhere, in 16.5 CPU seconds: row 253 touches the
+      right wall exactly, the only zero clearance; the top wall clears by 4.3232e-13, the
+      left and bottom by 7.2164e-16; the least pair gap is 1.336398719863592e-15 (rows 203
+      and 210). Under the reversed rotation sense 159 pairs overlap by both methods
+      (out/check-yim-n260-cw.json). programs/controls.py decided seventeen sharp and gross
+      controls by both methods, all as stated beforehand (out/controls.json, 302.2 CPU
+      seconds); programs/selftest.py passed (out/selftest.json). programs/run_all.sh reruns
+      everything.
+    replay_status: passed
+    verifiers:
+      - V-yim-1105-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 260: every wall and all 33,670 pairs, by two exact methods
+          in one program that share only its reader, with seventeen controls decided by both
+        checked: 1
+        of: 1
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 895 (think-o7ly), strong tier
+            (tbd-strong-max) at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's own check ran this repository's
+          devtools.check_rational_witness_independent, which Claude agents authored; the
+          issue says AI set up the search environment without naming the system. The
+          checker imports nothing from this repository and shares no code with its
+          maintained routes or with Evan Daniel's checkers, none of which its author read.
+    independence_record: packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 895 (think-o7ly),
+        strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+        import lane (bold-ritchie-l48)
+      note: >-
+        docs/project/reviews/review-2026-11-05-yim-895-260.md accepted the certificate with
+        findings, none blocking or major: F1 and F2 minor for this repository's records,
+        F5 and F11 notes for the author, and the other notes the records'.
+    limitations: >-
+      A clean-room decision of the one retained certificate by two exact methods in one
+      program, which share its reader; under the reversed rotation sense, 159 pairs overlap.
+      Finite feasibility only.
+    source_reviewed: '2026-11-05'

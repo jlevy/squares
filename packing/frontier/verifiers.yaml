@@ -1389,12 +1389,19 @@ verifiers:
     versions:
     - sha256: 6642aca5a6dacfb09f8bb4fb650182d744128e835ca41d50f43d8f4b849712eb
       path: packing/src/sqpack/witness.py
-      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+      note: The source the n183 primary batch ran; the retained seven-file provenance
+        identifies the historical run. It changed on 19 October 2026 (99c7fff6c, each
+        pair's margin measured once a square), so it is not the source later replays ran
+    - sha256: 60bb51cc699ce30940f988013f1d052a49f54b80f5dea84c2cc253e008226db8
+      path: packing/src/sqpack/witness.py
+      note: The source since 99c7fff6c (19 October 2026), which the replay of issue 895's
+        certificate ran on 5 November 2026 (E-yim-895-exact-feasibility; F2 of the
+        review of that day)
     - sha256: 56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337
       path: packing/src/sqpack/verify.py
       note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+        provenance identifies the historical run, and the replay of issue 895's
+        certificate on 5 November 2026 ran it too
 
   - id: V-check-rational-witness-independent
     program: devtools.check_rational_witness_independent
@@ -1411,8 +1418,15 @@ verifiers:
     versions:
     - sha256: 89f8d8e2e071a3f7035083c9a8beb23e3bec175eb0762b2825a5b9f684c16975
       path: packing/devtools/check_rational_witness_independent.py
-      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+      note: The source the n183 primary batch ran; the retained seven-file provenance
+        identifies the historical run. It changed on 20 October 2026 (c81d93355 and
+        e3c308c4b, each square's own-axis projections computed once), so it is not the
+        source later replays ran
+    - sha256: e8571770eca46d4fc227bd4811ba58c7847464d248170a09cc4382bca9de90f9
+      path: packing/devtools/check_rational_witness_independent.py
+      note: The source since e3c308c4b (20 October 2026), which the author of issue 895 ran
+        at e6e8d577 on his own Witness/v2 conversion and the replay of his certificate ran
+        on 5 November 2026 (E-yim-895-exact-feasibility; F2 of the review of that day)
 
   - id: V-check-nagamochi-lemma1-counterexample
     program: devtools.check_nagamochi_lemma1_counterexample
@@ -7349,3 +7363,65 @@ verifiers:
       receipts are in the ozden-s204-upper-bound-2026-11-03 packet's. oz_sides.py,
       oz_identity.py, oz_compare_lane.py, oz_custody.py and oz_repair.py, kept beside
       them, decide nothing and are not registered.
+  - id: V-yim-1105-review-check
+    program: certcheck.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 5 November stage 4 review's exact checker of Kaelan Yim's rational centre and
+      half-angle certificate of issue 895 (260), in Evan Daniel's text format, with a
+      fail-closed reader of its own: every token, line and count the format states, the
+      header side against the issue's fraction, and every wall and all 33,670 pairs with no
+      distance filter, decided twice, by separating axes over the four edge normals with
+      corner projections in fractions.Fraction (method A) and by exact Sutherland-Hodgman
+      clipped areas with the shoelace formula in Fraction (method B), the two sharing only
+      the reader; the rotation sense is fixed counterclockwise against the house witness,
+      and the reversed sense is decided as a control. controls.py decides seventeen sharp
+      and gross controls a certificate by both methods against outcomes stated before each
+      runs (the side lowered to its far-wall contact, every square moved to the left and the
+      bottom walls, a square raised to the top wall, the tightest pair, the tightest pair of
+      tilted squares and the tightest mixed pair closed along their gap normals, each at
+      exact contact and 1e-30 past it; a duplicate, a square out of the box and the side
+      lowered by 1e-10), and selftest.py holds both methods to 23 hand cases with known
+      answers and 400 random rational pairs taken exactly to contact, then 1e-30 either side.
+    source:
+      - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/certcheck.py
+      - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/controls.py
+      - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/selftest.py
+    independence_record: packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 895 (think-o7ly), strong tier
+            (tbd-strong-max) at maximum reasoning, prompted separately from the import lane
+            (bold-ritchie-l48)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's own check ran this repository's
+          devtools.check_rational_witness_independent, whose commits Claude agents
+          authored, all but one; the issue says AI set up the search environment and does
+          not name the system. The programs were written from the mathematics, the format
+          as the issue and the packet state it, and the certificates, with the rotation
+          sense measured against the house witness. They import nothing from this
+          repository, and their author read none of its witness verifiers, its importer or
+          Evan Daniel's checkers.
+    note: >-
+      Written and run on 5 November 2026 for
+      docs/project/reviews/review-2026-11-05-yim-895-260.md (SHA-256
+      0890eea39e3c622f8a3d5d4d4d8a7e79eb2ceb162a6551ecfc0c00bd2464ce5c for certcheck.py as
+      retained, in the directory's programs.sha256, and as each receipt records), and kept,
+      with everything they printed, in the yim-s260-upper-bound-2026-11-05 packet's
+      review/review-2026-11-05/. side.py, identity.py, upright.py, rowsback.py, movers.py,
+      slides.py and custody.py, kept beside them, decide nothing about the bound and are
+      not registered.

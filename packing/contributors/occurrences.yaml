@@ -22930,6 +22930,18 @@ occurrences:
     text and credit role are retained.
   contributor_id: trevor-green
 - origin:
+    path: packing/frontier/n-260.md
+    record_key: '260'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Kaelan Yim
+  start: 0
+  end: 10
+  label: Kaelan Yim
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-261.md
     record_key: '261'
     field: /reported_upper_bound/found_by/0
@@ -30745,6 +30757,54 @@ occurrences:
   start: 20
   end: 28
   label: Ostashev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim s260 upper bound 2026-11-05]'
+    field: /authors/0
+  expected_text: Yim
+  start: 0
+  end: 3
+  label: Yim
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim s260 upper bound 2026-11-05]'
+    field: /credit
+  expected_text: Yim after Daniel, Tymchishin
+  start: 0
+  end: 3
+  label: Yim
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim s260 upper bound 2026-11-05]'
+    field: /credit
+  expected_text: Yim after Daniel, Tymchishin
+  start: 10
+  end: 16
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim s260 upper bound 2026-11-05]'
+    field: /credit
+  expected_text: Yim after Daniel, Tymchishin
+  start: 18
+  end: 28
+  label: Tymchishin
   role: prerequisite
   disposition: unresolved
   evidence: []

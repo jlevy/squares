@@ -1,0 +1,44 @@
+FROZEN FINDINGS, stage 4 review of #895 (Yim, s(260)), 2026-11-05.
+Frozen before reading the lane's receipts/exact-certification.json.xz,
+receipts/sharp-controls.json, measure/identity.json, the 31 October review
+of T-257 and the 4 November review of #893/#894.
+Checker: certcheck.py sha256 0890eea39e3c622f8a3d5d4d4d8a7e79eb2ceb162a6551ecfc0c00bd2464ce5c
+Seen first: the bead brief (quotes the lane's numbers); the packet README;
+T-257's register entry (152 reversed-sense overlaps; the 1 + 1e-12 dilation);
+the n-299 adoption paragraph (the 4 November review's further-arrangement
+reading); T-265's register entry on the branch.
+VERDICT: accept with findings; no blocking or major defect.
+R1 note: both methods accept every wall and all 33,670 pairs, no distance
+filter, agreeing on each; least pair gap 1.336398719863592e-15 (rows 203,210);
+right wall 0 at row 253 only; top 4.3232e-13 (row 236); left 7.2164e-16
+(row 133); bottom 7.2164e-16 (row 7); self-test and 17 controls as expected.
+R2 note: packs only counterclockwise (u = (c, s)); reversed, 159 pairs
+overlap; the house witness reads T-257 counterclockwise for all 260.
+R3 note: header = #895 fraction verbatim; prints confirmed; coordinates give
+a box 7.2164e-16 smaller; "the far walls" is one wall (top clears 4.32e-13).
+R4 note: real: 1.99270e-10 below T-257, 199.27 units of the 12th place;
+T-257's poses reach contact 1.9988e-11 below its side; #895 is 1.7928e-10
+below that.
+R5 minor (record): T-257 has 139 exactly upright squares (112 t=0, 27 t=1),
+not 112.
+R6 note: one to one under the identity only, row for row; 26/64/96/114 moved
+beyond 0.1/0.01/0.001/1e-6 (max 0.382307, row 251); 14 turned beyond 1e-6
+rad (max 1.4984 deg, row 97); 105 vs 104 tilted; at 1e-9 about 40 of 528
+pair contacts and 3 of 51 wall contacts differ.
+R7 note: 19 of the 26 large moves are free play (bottom row, top row, pair
+at y=10.13 put back still pack at #895's side, upright variant); the other 7
+(97, 98, 109, 205, 116, 113, 26) move with the tilted island; row 97 is
+contact-free in both.
+R8 note: the uniform tiny turn (146 squares, -2.34e-12 to -2.44e-12 rad) is
+per square, not needed, and costs about 1.457e-11 of side: upright variant
+packs at #895's side and reaches contact at 16.6339825019080413.
+R9 note: a further arrangement of T-257's packing (record rule, T-239);
+no regularization; in substance a local tightening.
+R10 note: custody confirmed (blob 82ecdecc at e7cab3a and d11a8a1, head still
+d11a8a1, author id 91440012 on both); attachment 403, identity author's word.
+R11 note (record): published 2026-11-05 vs the issue's 2026-11-04 claim.
+R12 note: CC BY 4.0 grant clear; stray ": ." in the reply.
+R13 note: "Yim after Daniel, Tymchishin" agrees with the sources.
+R14 note: route 2 is the author's checker, blob unchanged since e6e8d577;
+this review's checker is clean room.
+R15 note: S2 confirmed.

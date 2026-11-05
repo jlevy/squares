@@ -4624,7 +4624,33 @@ sources:
       announced on jlevy/squares#890 (think-mdxq); retained before that on the presumption
       of permission the author's submission carries (think-cnn7). Ozden is Özden in the
       credit's ASCII. Retained in web/ozden-s204-upper-bound-2026-11-03/.
+  - key: '[Yim s260 upper bound 2026-11-05]'
+    authors: [Yim]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: independent
+    credit: Yim after Daniel, Tymchishin
+    short_credit: Yim after Daniel et al.
+    note: >-
+      vitamoon/vitamoon at d11a8a1ce798f7c0b4f801e922e242d22cedcd73 (2026-11-05T05:44:44Z),
+      Kaelan Yim's certificate n260.cert, first committed at e7cab3a (2026-11-05T05:27:47Z) and
+      unchanged at the pin, for s(260) <=
+      1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626
+      = 16.63398250192261413...: a rational centre/half-angle certificate in Evan Daniel's
+      format of a further arrangement of the registry's 260, Evan Daniel's #845 certificate
+      (T-257), one to one with it, whose lineage Daniel states starts at Kirill Tymchishin's
+      Kaggle notebook packing; the issue attributes the start to both. Registration was
+      requested in jlevy/squares#895, whose attachment this environment cannot fetch; the
+      author's reply names this file by branch, with no digest. AI-assisted environment set-up
+      disclosed. No global optimality claim. The lineage is independent: the source credits
+      Daniel's and Tymchishin's packing and none of this project's work, and this
+      repository's checker, which the author ran, is no part of the packing's lineage.
+      Licensed CC BY 4.0 with attribution to Kaelan Yim by the author's reply on
+      jlevy/squares#895 (issuecomment-6650567350). Retained in
+      web/yim-s260-upper-bound-2026-11-05/.
 credited_names:
+  Kaelan Yim: Yim
   Doğa Özden: Özden
   Benjamin Greff: Greff
   Mohsen Khalili: Khalili

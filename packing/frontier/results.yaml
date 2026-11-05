@@ -37285,11 +37285,18 @@ results:
       November review of it, the case at 204 adopted it on 4 November 2026, with the
       packing's finder Evan Daniel and Özden its improver, and this entry's certificate
       there stays retained as history.
+
+      Kaelan Yim's issue 895 reports at 260 a further arrangement of this entry's packing
+      there, row for row and one to one with it under the identity, 1.99e-10 below it
+      (T-265). After the 5 November review of it, the case at 260 adopted it on 5 November
+      2026, with the packing's finder Evan Daniel and Yim its improver, and this entry's
+      certificate there stays retained as history.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 31 October, is
-      retained. It is the smallest validated side at 172, 260 and 293, and was at 204
-      until T-264 replaced it there on 4 November 2026; the cases adopted it on 31 October
+      retained. It is the smallest validated side at 172 and 293, and was at 204 until T-264
+      replaced it there on 4 November 2026 and at 260 until T-265 replaced it there on 5
+      November 2026; the cases adopted it on 31 October
       2026 under the house rule, with both strong generators'
       regularization of each new house; the conjectured optimum 723/41 at 293 is withdrawn
       (N-9). The review's questions for the author (Kirill Tymchishin's identity, the 172's
@@ -38544,6 +38551,203 @@ results:
         findings were frozen.
       verdict: accepted
       covers: [T-264]
+  - id: T-265
+    kind: upper-bound
+    registered: '2026-11-05'
+    landed: '2026-11-05'
+    headline: >-
+      Yim's further arrangement at 260 of Daniel's T-257 packing, one to one, 1.99e-10 below it
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(260) <=
+      1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626,
+      about 16.6339825019226141. It is 1.99e-10 below T-257, Evan Daniel's certificate and the
+      case's house best packing until this pass, and measured here it is a further arrangement of
+      T-257's packing, one to one with it under the identity and row for row, with 26 squares beyond
+      a tenth.
+
+      The certificate and its duplicate-square and outside-container controls were decided here on
+      5 November 2026 by both maintained exact routes. The second,
+      devtools.check_rational_witness_independent, is the program the author ran on his own
+      conversion, so on that route the replay is reproduced with the producer's code; the first,
+      sqpack's exact witness verifier, shares with it only this repository's reader and is
+      independently re-implemented.
+
+      The 5 November review decided the certificate again on a clean-room checker of its own,
+      every wall and every pair by separating axes and by exact clipped areas with seventeen
+      controls, by a Claude agent, a system family that also wrote the check the producer ran, and
+      found no blocking or major defect, so the bound is confirmed, independently re-implemented.
+
+      The issue says the author converted the rational certificate to this repository's Witness/v2
+      corner form and ran devtools.check_rational_witness_independent from a local checkout of
+      this repository, which reported VERIFIED: 260 unit squares and all 33,670 pairs, in exact
+      rational arithmetic at the stated side; it says that was the only checker run. No
+      local-optimality, rigidity or formal check is claimed. Those statements are the author's.
+
+      The issue stated the claim on 4 November with the certificate as a GitHub user attachment,
+      which this environment cannot fetch; the author's reply of 5 November names n260.cert in his
+      repository by its branch, with no commit or digest, so the packet pins the branch's head when
+      it was read, where the file is unchanged since its first commit.
+
+      Credit Kaelan Yim, who reports a refinement of a public packing attributed to Evan Daniel and
+      Kirill Tymchishin, the house at 260 (T-257: Evan Daniel's packing from a search started from
+      Kirill Tymchishin's Kaggle notebook packing), by CUDA and SLP numeric tightening, the
+      computational refinement his own. AI was used to study and set up an environment like
+      Daniel's and Tymchishin's. The author releases the certificate under CC BY 4.0 with
+      attribution to Kaelan Yim.
+    scope:
+      n_values:
+      - 260
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: >-
+        A further arrangement of T-257's packing at 260, 1.99e-10 below it, about nine times
+        T-257's own slack: one to one with it under the identity, 26 squares beyond a tenth (at most
+        0.382), 19 of them free play the bound does not need, and 14 turned by up to 1.50 degrees,
+        as T-263's 1.54e-08 at 299 (S2) is, and within T-225's 1.76e-11 to 1.39e-09 (S2); about 96
+        times T-259's 2.08e-12 re-solve (S1), with its contacts changed. No lower bound or optimum.
+      scored: '2026-11-05'
+      by: >-
+        the 5 November review (docs/project/reviews/review-2026-11-05-yim-895-260.md),
+        think-o7ly, confirming the draft S2 of the stage 1 triage (think-qclj)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Yim s260 upper bound 2026-11-05]'
+      published: '2026-11-04'
+    evidence:
+    - E-yim-895-certificate-report
+    - E-yim-895-exact-feasibility
+    - E-yim-895-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/README.md
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/acquisition/claims.json
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/receipts/sharp-controls.json
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-yim-895-260.md
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l48_1105.py
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/receipts/sharp-controls.json
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/out/controls.json
+    - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/out/selftest.json
+    notes: >-
+      A separate complete repository replay is retained for n = 260: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 202020 pair
+      decisions; summed over the 3 jobs, the receipt records 41.04 route CPU seconds and 41.35 job
+      wall seconds, the longest job 14.08 seconds. In every positive squares touch the box, a least
+      wall clearance of exactly 0, and every pair clears by at least 1.33e-15. One square, row 253,
+      touches the right wall; the top wall clears by 4.32e-13 and the left and bottom walls by
+      7.22e-16.
+
+      The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
+      far-wall clearance, which is 0, closed the least-gap pair by its gap, about 1.34e-15, and
+      moved every square toward the nearer near wall by its least clearance, about 7.22e-16: both
+      routes accepted each at exact contact, margin 0, and refused each 1e-30 past it. They refused
+      one square enlarged to its pair at contact for its shape alone and 1e-30 past it for the
+      overlap as well; the square enlarged to its wall already touches it, so both accepted it at
+      contact and refused it 1e-30 past it for the wall and its shape. Both refused a duplicated
+      square.
+
+      At n = 260 the certificate is below the case's ceiling (Evan Daniel, from a search started from
+      Kirill Tymchishin's Kaggle notebook packing, T-257) by 1.99e-10; smallest: this certificate.
+      The 5 November review found the gain real: T-257's own poses reach contact only 2.0e-11 below
+      its side, so this side is about nine times all of T-257's slack below it, reached by moving
+      squares.
+
+      The ledger of 4 November for this pass (campaign/issue-intake/upper-bounds-893-895-20261104)
+      walks every report at 260 in report order from starts frozen on main on 4 November and
+      records this entry's claim, first walked by the side the issue states and, from 5 November,
+      by the retained certificate's claim record. The claim is dated by the issue, which stated it
+      with its exact side and the attached certificate on 4 November 2026; the retained file's
+      first commit is of 5 November, and its identity with the attachment is the author's word (the
+      review's F8 and F11).
+
+      Measured pose by pose (measure/ in the packet and the review's out/identity.json;
+      measurements, which decide nothing): at 260 it pairs one to one with T-257's packing under
+      the identity, and under no other symmetry, row for row; the optimal assignment moves 26
+      squares beyond a tenth and 64 beyond a hundredth (largest 0.382307, row 251) and turns 14
+      squares by more than 1e-6 radians, by up to 1.498 degrees; it has 105 squares tilted beyond 1
+      degree where T-257 has 104. One square crosses the 1 degree line: row 97, which has no
+      contact in either packing, from 0.105 to 1.603 degrees.
+
+      Every square carries a nonzero half-angle tangent: 146 of its 155 near-upright squares are
+      turned by about -2.4e-12 radians, where T-257 has 139 exactly upright (112 at t = 0 and 27 at
+      t = 1), 138 of them among the 146; set upright, the packing still fits at this side and
+      reaches contact 1.46e-11 lower (the review's F5).
+
+      Of the 26 squares beyond a tenth, the 5 November review measured 19 as free play the bound
+      does not need: the bottom row's rows 12 to 16, the top row's rows 239 to 251 and row 232 at
+      y of about 10.13, which T-257 packs to the left and this packing spreads out; put back where
+      T-257 has them, the packing still fits at this side. The other seven, rows 97, 98, 109, 205,
+      116, 113 and 26, move with the tilted island's rearrangement, where about 40 of some 530 pair
+      contacts differ. Rows 78, 94, 97 and 99 have no contact in either packing. The issue calls
+      the work a computational refinement; the record keeps that word for a pairing with no square
+      beyond a tenth, so, as T-239 at 303 is, this is a further arrangement of T-257's packing, and
+      lists no regularization.
+
+      The 5 November review's clean-room checker (E-yim-895-review-exact-feasibility) decided
+      every wall and all 33,670 pairs by separating axes in Fraction and again by exact clipped
+      areas, with no distance filter; its least wall clearance, exactly 0 at row 253, and least
+      pair gap, 1.336398719863592e-15 (rows 203 and 210), equal the replay's as exact fractions,
+      and its seventeen controls were decided as stated beforehand by both methods. Under the
+      reversed rotation sense, 159 pairs overlap.
+
+      The confirmations are of three kinds: the replay's second route,
+      devtools.check_rational_witness_independent, is reproduced with the producer's code; its
+      first route, sqpack's exact witness verifier, which shares with the second only this
+      repository's reader, is independently re-implemented; and the review's checker is
+      independently re-implemented, clean room. The two maintained routes share this repository's
+      evand-cert reader, Fraction arithmetic and the separating-axis method, and no verification
+      code. No human oversight or optimality is claimed.
+
+      The case at 260 adopted this certificate as its house best packing in the pass of 5
+      November 2026, from T-257, whose certificate stays retained as history, with the packing's
+      finder Evan Daniel and Yim its improver (the review's F9). Both strong generators decided
+      the new witness in the same pull request (cases/regularized_drawings/think-o7ly-2026-11-05):
+      grid-slack finds no view at 0.5, 1 or 5 degrees, its relaxed rows overlapping at the
+      witness's side, and Evan Daniel's regularizer finds the witness not jammed and draws no
+      view, so the count is decided no better and the axis tool's view of the new witness is
+      drawn. The rigidity block was derived again on the new witness and stays not rigid: 105 of
+      its 260 squares translate, against 103 of T-257's.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Yim's name off their credit block
+      until the next infographics cut redraws them (think-hgpg, beside think-tj4o); the case
+      record, its page and
+      its bound citation credit him now.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 5 November, is retained. It
+      is the smallest validated side at 260, and the case adopted it there on 5 November 2026
+      under the house rule, with both strong generators' regularization of the new house and its
+      rigidity block derived again; T-257, which it continues, keeps its certificate as history
+      and its houses at 172 and 293. The review's questions for the author (the attachment, the
+      start's copy, the tiny turns, the AI system) hold no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-05-yim-895-260.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong-max at maximum reasoning), the stage 4
+        mathematical review lane of issue 895 (think-o7ly), prompted separately from the
+        import lane (bold-ritchie-l48), with no shared context beyond its brief
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-05'
+      scope: >-
+        Finite feasibility at n = 260 of the certificate of issue 895: decided again by a
+        clean-room exact checker by two methods with seventeen controls, a self-test on known
+        cases, custody on a bare clone, the side and the issue's print, the gain against T-257's
+        slack, the identity against T-257's packing and what moved, the tiny turns, credit and
+        the significance; compared with the lane's receipts after its findings were frozen.
+      verdict: accepted
+      covers: [T-265]
   - id: T-266
     kind: lower-bound
     registered: '2026-11-05'
@@ -39629,18 +39833,17 @@ regularized_drawings:
         max_turn_deg: 0.267445
       view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
     - n: 260
-      of: T-257
+      of: T-265
       by: project
-      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 49
-        max_move: 0.4395523
-        max_turn_deg: 0.104723
+        moved: 63
+        max_move: 0.2811202
+        max_turn_deg: 0.00101771
       view: packing/atlas/known-best/regularized/n-260-regularized.yaml.gz
     - n: 261
       of: T-174

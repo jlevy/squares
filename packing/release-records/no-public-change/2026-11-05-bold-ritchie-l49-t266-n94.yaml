@@ -19,18 +19,18 @@ outputs:
   - papers/square-packing-methods-survey.md
 reason: >-
   Intake lane L49 of 5 November (think-pi8b): #910's s(94) >= 2493/250 is registered as
-  T-266 at V0/C0, with its coverage entry and #910's requests entry; n-094's reported
-  lower lane takes it, and the site's Other Square Packing Projects list gains the source
-  repository. No paper prints n = 94, T-266 or that list. Against main a7db9aad3 (#907):
-  rendered at link revision 0000000000000000000000000000000000000000 into empty site
-  directories by render_packing_methods, render_n11_optimality_review,
-  render_n11_threshold_bound_review and render_n11_lower_bounds_explainer
-  --prepare-math, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), 69 files
-  each: from this tree, and with that main's results.yaml, source-coverage.yaml,
-  result-requests.yaml and site_resources.py swapped in; rendered again from this tree
-  with the stage 4 review of 5 November recorded (T-266 at V0/C1), byte-identical to the
-  first render of this tree. The only difference, in the
-  explainer's Markdown and HTML, is the live register count beside T-018, 264 results
-  registered so far and now 265, which follows the site's data and is not a revision of
-  the paper (as the 0141 record says). No PDF was printed; each prints from that HTML.
+  T-266, at V0/C1 with its stage 4 review of 5 November recorded, with its coverage
+  entry and #910's requests entry; n-094's reported lower lane takes it, and the site's
+  Other Square Packing Projects list gains the source repository. No paper prints n = 94,
+  T-266 or that list. Against main 004fd4309 (#911, which registered T-265): rendered at
+  link revision 0000000000000000000000000000000000000000 into empty site directories by
+  render_packing_methods, render_n11_optimality_review, render_n11_threshold_bound_review
+  and render_n11_lower_bounds_explainer --prepare-math, the math passes in
+  /usr/bin/google-chrome (SQPACK_CHROMIUM), 69 files each: from this tree after merging
+  that main, and with that main's results.yaml, source-coverage.yaml,
+  result-requests.yaml and site_resources.py swapped in. The only difference, in the
+  explainer's Markdown and HTML, is the live register count beside T-018, 265 results
+  registered so far and now 266, which follows the site's data and is not a revision of
+  the paper (as the 0141 record says). Before the merge, against main a7db9aad3, the same
+  comparison moved only 264 to 265. No PDF was printed; each prints from that HTML.
   Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

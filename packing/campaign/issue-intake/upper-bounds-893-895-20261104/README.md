@@ -23,6 +23,7 @@ Exact sides marked as a lane's come from its `acquisition/claims.json` (and `alg
 | Lane | Branch | Commit | Note |
 | --- | --- | --- | --- |
 | l36 | `claude/bold-ritchie-xo28us-l36` | `ca3a171bb279639692cd464727a50ba384f724b0` | The packets' claim records, written on the lane's branch from main ca3a171bb and read here by path. |
+| l48 | `claude/bold-ritchie-xo28us-l48` | `a7db9aad3e7cf1b9b942859a73a10127c1b9e7e1` | #895's packet's claim record, written on 5 November on the lane's branch from main a7db9aad3, once the author named the file, and read here by path. The starts stay frozen at ca3a171bb; T-257 still holds 260 on main a7db9aad3. |
 
 ## Per Report
 
@@ -39,7 +40,7 @@ Each report at the count in report order, with its side and verdict; a verdict n
 | n | Record on main | Reports in order | Best now |
 | ---: | --- | --- | --- |
 | 204 | 14.807627471882 (record T-257; Evan Daniel) | #894 14.807620995586: recorded (below by 6.48e-06; measured: one to one under the identity by nearest centres; the optimal assignment moves 6 squares beyond 0.1 and 81 beyond 1e-2 (largest 0.190) and turns 87 squares by more than 1e-6 radians, 14 of them by more than 1 degree and by up to 25.58 degrees; 76 tilted squares against T-257's 79; a further arrangement of T-257's packing, one to one with it) | #894 14.807620995586 |
-| 260 | 16.633982502122 (record T-257; Evan Daniel) | #895 16.633982501923: recorded (below by 1.99e-10) | #895 16.633982501923 |
+| 260 | 16.633982502122 (record T-257; Evan Daniel) | #895 16.633982501923: recorded (below by 1.99e-10; measured: one to one under the identity by nearest centres; the optimal assignment moves 26 squares beyond 0.1 and 64 beyond 1e-2 (largest 0.382) and turns 14 squares by more than 1e-6 radians, by up to 1.50 degrees; 105 tilted squares against T-257's 104; a further arrangement of T-257's packing, one to one with it) | #895 16.633982501923 |
 | 299 | 17.801238549389 (record T-258; Evan Daniel) | #893 17.801238533980: recorded (below by 1.54e-08; measured: one to one under the identity by nearest centres; the optimal assignment moves 12 squares beyond 0.1 and 119 beyond 1e-2 (largest 0.502) and turns 71 squares by more than 1e-6 radians, by up to 14.9 degrees; 85 tilted squares against T-258's 87; a further arrangement of T-258's packing, one to one with it) | #893 17.801238533980 |
 
 ## Owner Decisions Needed
@@ -65,6 +66,7 @@ Claims whose certificate a measurement compares with another packing. The measur
 | n | Report | Verdict | The source says | Measured against | Finding | Measured by |
 | ---: | --- | --- | --- | --- | --- | --- |
 | 204 | #894 | recorded | nothing stated | T-257 | one to one under the identity by nearest centres; the optimal assignment moves 6 squares beyond 0.1 and 81 beyond 1e-2 (largest 0.190) and turns 87 squares by more than 1e-6 radians, 14 of them by more than 1 degree and by up to 25.58 degrees; 76 tilted squares against T-257's 79; a further arrangement of T-257's packing, one to one with it | packing/resources/web/ozden-s204-upper-bound-2026-11-03/measure/identity.json |
+| 260 | #895 | recorded | nothing stated | T-257 | one to one under the identity by nearest centres; the optimal assignment moves 26 squares beyond 0.1 and 64 beyond 1e-2 (largest 0.382) and turns 14 squares by more than 1e-6 radians, by up to 1.50 degrees; 105 tilted squares against T-257's 104; a further arrangement of T-257's packing, one to one with it | packing/resources/web/yim-s260-upper-bound-2026-11-05/measure/identity.json |
 | 299 | #893 | recorded | nothing stated | T-258 | one to one under the identity by nearest centres; the optimal assignment moves 12 squares beyond 0.1 and 119 beyond 1e-2 (largest 0.502) and turns 71 squares by more than 1e-6 radians, by up to 14.9 degrees; 85 tilted squares against T-258's 87; a further arrangement of T-258's packing, one to one with it | packing/resources/web/ozden-s299-upper-bound-2026-11-03/measure/identity.json |
 
 ### Refinement Chains
@@ -103,8 +105,8 @@ From `ledger.yaml`; a note that several claims share is one row.
 | --- | --- | --- |
 | #893 | all | The issue names 6486ead, committed at 2026-11-03T18:57:22Z, 20 seconds before the issue. It says the packing starts from the registry's 299 (T-258) and calls it neither new nor a refinement, so the claim is not classified; the measurement names the relation. The issue's title and claim print 17.801238533979 as the side rounded up at 12 places; that print is the author's 12-place truncation, 6.21e-14 below the exact side, which rounds up to 17.801238533980, and the claim is the exact side. |
 | #894 | all | The issue names d4b8b05, committed at 2026-11-03T22:35:57Z, 16 seconds before the issue. It says the packing starts from the registry's 204 (T-257) and calls it neither new nor a refinement, so the claim is not classified; the measurement names the relation. |
-| #895 | all | No certificate is retained. The acknowledgement asks the author to put it at a public GitHub commit; until then the claim is walked by its stated side and registers nothing. |
-| #895 | 260 | The side as the issue states it, about 16.6339825019226141. The certificate is a GitHub issue attachment (user-attachments) that this session cannot fetch, so it is not retained and nothing here decides it; the issue says the search started from a public packing attributed to Evan Daniel and Kirill Tymchishin. |
+| #895 | all | Walked by the issue's time, 2026-11-04T02:15:02Z. The issue attached the certificate as a GitHub user attachment this session cannot fetch; the author's reply of 2026-11-05T05:31:32Z names n260.cert in vitamoon/vitamoon by its branch, with no commit or digest. Lane L48 retained it at d11a8a1, the branch's head when read at 05:57Z, where it is unchanged since its first commit, e7cab3a (2026-11-05T05:27:47Z). |
+| #895 | 260 | The side the issue states, about 16.6339825019226141, is the header side of the certificate retained at vitamoon/vitamoon d11a8a1, read by the packet's claim record. The issue says the search started from a public packing attributed to Evan Daniel and Kirill Tymchishin and calls the author's work the computational refinement that produced the candidate; it does not say the configuration is unchanged, and 26 squares move beyond a tenth, so the claim is not classified as a refinement and the measurement names the relation. |
 
 ## Lane Cross-Check
 

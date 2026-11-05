@@ -513,6 +513,25 @@ _README_YBEP = (
     "beside the runs' receipt, blocks and reports"
 )
 
+#: Both generators on the witness the adoption of 5 November 2026 wrote at 260 (think-o7ly):
+#: Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees. None draws a view:
+#: grid-slack's relaxed rows overlap at the witness's side at every threshold, and the
+#: regularizer's solve finds the witness not jammed, as a packing with contact-free squares
+#: is, so the selection decided 260 (`SETTLED`) and the axis tool's view stays drawn. Their
+#: receipt, run blocks, reports and the selection's report are in
+#: packing/cases/regularized_drawings/think-o7ly-2026-11-05/.
+_RUNO7LY = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-05-n260-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n260-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n260-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n260-grid-deg5"),
+)
+_README_O7LY = (
+    "packing/cases/regularized_drawings/think-o7ly-2026-11-05/README.md and "
+    "selection-adopt-2026-11-05-n260.md, the selection of 5 November 2026 (think-o7ly), "
+    "beside the runs' receipt, blocks and reports"
+)
+
 
 #: Both generators on the four decimal Kingbird witnesses at 39, 55, 290 and 291 that an
 #: agent set aside on 15 October 2026 with no strong run (think-yk2h), run on 31 October
@@ -933,6 +952,20 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed rows "
         "overlap at this side)",
         _README_3MRY,
+    ),
+    260: Settled(
+        DECIDED,
+        "[Yim s260 upper bound 2026-11-05]",
+        "resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert",
+        "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
+        "1045817814143413714427921537528704162855767253933/"
+        "62872364692131569638734867237718772414897487626",
+        _RUNO7LY,
+        "grid-slack finds no view at 0.5, 1 or 5 degrees, its relaxed rows overlapping at "
+        "this side, and Evan Daniel's regularizer finds the witness not jammed, as a packing "
+        "with contact-free squares is, and draws no view, so the axis tool's view of this "
+        "witness stays drawn",
+        _README_O7LY,
     ),
     263: Settled(
         DECIDED,

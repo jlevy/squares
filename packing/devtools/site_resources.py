@@ -247,6 +247,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/vitamoon/vitamoon",
+        "Kaelan Yim",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it,"
+            " 1.99e-10 below it (T-265)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (

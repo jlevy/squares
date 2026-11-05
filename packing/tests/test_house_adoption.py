@@ -1702,7 +1702,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # and the adoption of 26 October 2026 moved 268 again, to his exact descent of Vladislav
     # Lavrentev's packing (T-242), after this receipt was retained. The adoption of 4
     # November 2026 moved 204 to Doğa Özden's further arrangement of T-257's packing
-    # (T-264).
+    # (T-264), and that of 5 November 2026 moved 260 to Kaelan Yim's (T-265).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1717,7 +1717,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         271: "T-219",
         154: "T-222",
         204: "T-264",
-        260: "T-257",
+        260: "T-265",
         308: "T-221",
         227: "T-225",
         270: "T-224",
@@ -3729,7 +3729,8 @@ def test_an_overtaken_staged_adoption_reads_as_history() -> None:
     # On 22 October 2026 Evan Daniel's view of T-223's packing (T-225) moved both again,
     # on 23 October 2026 Mykhailo Polkovskyi's re-solve of #678's packing (T-229) took 204,
     # and on 24 October 2026 the release's lower 204 file (T-231) took it from T-229.
-    # On 31 October 2026 Evan Daniel's #845 (T-257) took both, and on 4 November 2026
-    # Doğa Özden's further arrangement of it (T-264) took 204.
-    assert houses.ADOPTED[260] == "T-257"
+    # On 31 October 2026 Evan Daniel's #845 (T-257) took both, on 4 November 2026 Doğa
+    # Özden's further arrangement of it (T-264) took 204, and on 5 November 2026 Kaelan
+    # Yim's further arrangement of it (T-265) took 260.
+    assert houses.ADOPTED[260] == "T-265"
     assert houses.ADOPTED[204] == "T-264"
