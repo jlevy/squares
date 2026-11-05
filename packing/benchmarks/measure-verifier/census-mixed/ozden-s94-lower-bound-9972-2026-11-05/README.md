@@ -27,12 +27,18 @@ The folder keeps:
     apart from the crate, is below 1, and where the original captures at least 1.
   - The near-threshold mutant was refused.
 
+  The receipt is 10.3 MB (74,674 lines), since it keeps a refusal for each of the 4,972
+  directions: the largest control receipt in the census, about three times the next on
+  main, n31’s 3.6 MB.
+
   At the axis the census judges the refusal by the enclosure the vertex sweep held at
   its least vertex, which it recomputes and ties to the crate’s bound to the bit
   (`axis_captures_agree`, #892). The 99/100 mutant’s exact capture there,
   0.993055981881054, lies in [0.9930559807565953, 0.9930559830055209]. The crate’s bound
-  sits $1.1245 \times 10^{-9}$ below that capture, beyond the old constant of $10^{-9}$,
-  which is F7 of the stage 4 review.
+  sits $1.1245 \times 10^{-9}$ below that capture, so under the census’s former constant
+  allowance of $10^{-9}$ this control would have failed closed (F7 of the stage 4
+  review). #892 adopted the enclosure rule for the census; #543’s question to the owner
+  on this control’s tolerance is still open, and this control depends on it.
 
 Both runs used `sqverify-fast` built from the reviewed crate source `d97758bb…` (binary
 `567a0fd5…`, rustc 1.98.0, release, x86_64-unknown-linux-gnu), under `nice -n 19` on a

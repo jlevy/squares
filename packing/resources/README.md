@@ -1820,7 +1820,8 @@ The issue asking for its registration, #890 of 3 November 2026, was posted on hi
 by his AI agent’s account, `kenaznia-doga`; T-262 records it.
 This repository’s census replayed it at all 600 directions on 3 November and its
 whole-net control passed on 4 November, so T-262 is `V3/C3`, reproduced with the
-producer’s code, and n = 94’s verified lower bound is $1993/200$.
+producer’s code, and n = 94’s verified lower bound was $1993/200$ until T-266 (5
+November 2026).
 
 **[Özden s94 lower bound 2026-11-05]**: Doğa Özden’s certificate for
 $s(94) \ge 2493/250 = 9.972$: the same measure of Hosono’s with every coordinate

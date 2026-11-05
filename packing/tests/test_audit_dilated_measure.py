@@ -401,6 +401,45 @@ def test_every_910_direction_of_the_census_equals_the_labs_selected_line() -> No
     assert receipt["differing"] == {}
     assert receipt["nodes"] == receipt["archive_selected_nodes"] == 2462923881
     assert receipt["least_certified_bound"] == 1.0000000000003892
+    assert receipt["capture_states_the_declared_net"] is True
+    assert receipt["archive_receipts_status"] == "RECEIPTS_HOLD"
+
+
+def test_the_910_comparison_takes_its_net_from_the_certificate(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The directions compared are the net the certificate declares (lemma N0's count),
+    not the count the capture's summary states: a declared net one direction larger
+    refuses a capture and an archive that agree with each other."""
+    held = stored(PACKET_910, "receipts")
+    monkeypatch.setattr(audit, "receipts", lambda _packet: held)
+    declared = audit.lemma_n0
+
+    def larger(data: dict[str, Any]) -> dict[str, Any]:
+        net = declared(data)
+        return {**net, "angle_count": net["angle_count"] + 1}
+
+    monkeypatch.setattr(audit, "lemma_n0", larger)
+    receipt = audit.compare(PACKET_910)
+    assert receipt["directions"] == 4973
+    assert receipt["capture_states_the_declared_net"] is False
+    assert receipt["identical_on_archive_fields"] == 4972
+    assert receipt["differing"] == {}
+    assert receipt["verdict"] == "DIRECTIONS_DIFFER"
+
+
+def test_the_910_comparison_needs_an_archive_whose_audit_holds(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The archive's node total counts only from an archive `receipts` holds: with the
+    audit failing, equal lines and equal totals do not agree."""
+    held = {**stored(PACKET_910, "receipts"), "status": "RECEIPTS_FAIL"}
+    monkeypatch.setattr(audit, "receipts", lambda _packet: held)
+    receipt = audit.compare(PACKET_910)
+    assert receipt["archive_receipts_status"] == "RECEIPTS_FAIL"
+    assert receipt["differing"] == {}
+    assert receipt["nodes"] == receipt["archive_selected_nodes"]
+    assert receipt["verdict"] == "DIRECTIONS_DIFFER"
 
 
 def test_a_capture_that_differs_from_an_archive_line_is_reported(

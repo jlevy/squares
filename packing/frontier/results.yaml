@@ -38086,7 +38086,8 @@ results:
     significance:
       score: 3
       rationale: >-
-        The strongest lower bound on record at n = 94, 3/200 above T-091, by T-091's own
+        The strongest lower bound on record at n = 94 when scored (T-266 passed it on 5
+        November 2026), 3/200 above T-091, by T-091's own
         measure dilated onto a finer declared net, the certificate kind and route of T-091
         and T-178, with no new technique, at S3 as they are; scored as a claim on 3
         November.
@@ -38882,9 +38883,18 @@ results:
 
       Its F6: the archive's least certified bound, 1.0000000000003892 at direction 3663,
       is the least leaf bound of the search and not a margin; the least capture the review
-      found is above 1.0010. Its F7: the whole-net control is judged at the axis by the
-      census's enclosure rule (#892), since the crate's axis bound sits 1.1357e-9 below the
-      exact least vertex (1.1245e-9 for the mutant).
+      found is above 1.0010. Its F7: the crate's axis bound sits 1.1357e-9 below the exact
+      least vertex (1.1245e-9 for the mutant), so under the census's former constant
+      allowance of 1e-9 the control's axis refusal would have failed closed; the control
+      judges that leg by the enclosure rule that #892 adopted for the census. #543's
+      question to the owner on this control's tolerance (widen the allowance, derive it
+      from the sweep's enclosure, or confirm by another control) is still open; #892's
+      rule is not the owner's answer to it, and this control depends on it.
+
+      A records note on the stage 4 review (5 November 2026, the import lane): its F7, in
+      the findings table and in its note on the axis, names the enclosure rule as that of
+      think-4uun and PR #898. #892 adopted the rule for the census; #898 applied it to
+      T-262's control, after which think-4uun closed. The retained review is not edited.
     controls:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/mixed_n94_L9972.control.json

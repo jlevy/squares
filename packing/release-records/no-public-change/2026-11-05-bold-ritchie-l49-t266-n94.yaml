@@ -35,6 +35,8 @@ reason: >-
   seven paths above swapped in. The only difference, in the explainer's Markdown and HTML,
   is the live register count beside T-018, 265 results registered so far and now 266,
   which follows the site's data and is not a revision of the paper (as the 0141 record
-  says). Earlier measurements on this branch, against mains a7db9aad3 and 004fd4309, moved
+  says). The same comparison, run again after the senior review's fixes to T-262's and
+  T-266's register text and #910's requests entry, gave the same result. Earlier
+  measurements on this branch, against mains a7db9aad3 and 004fd4309, moved
   only that count. No PDF was printed; each prints from that HTML. Every paper keeps its
   version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

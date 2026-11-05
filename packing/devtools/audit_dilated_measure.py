@@ -696,10 +696,14 @@ def compare_archive(packet: str, dilation: Dilation, archive: ReceiptArchive) ->
     compared with the capture's: the verdict, method, threshold and certified bound
     everywhere, and the nodes, leaves, depth and least-bound box wherever the line keeps
     them. The capture's node total is compared with the archive's selected nodes, which
-    `receipts` counts from the lines and the compacted runs' summaries.
+    `receipts` counts from the lines and the compacted runs' summaries, and only an archive
+    whose audit holds (`RECEIPTS_HOLD`) can agree. The directions are the net the
+    certificate itself declares, not the count the capture's summary states.
     """
     capture = CENSUS / packet / f"{dilation.name}.jsonl.gz"
     ours, summary = read_rows(capture)
+    data = json.loads(text_of(WEB / packet / dilation.candidate), parse_float=str)
+    count = int(lemma_n0(data)["angle_count"])
     merged_path = WEB / packet / archive.merged
     lines, _summary = direction_lines(
         gzip.decompress(read_original_gzip_bytes(merged_path)), str(merged_path)
@@ -716,12 +720,15 @@ def compare_archive(packet: str, dilation: Dilation, archive: ReceiptArchive) ->
             fields = ["direction missing"]
         if fields:
             differing[str(index)] = fields
-    count = int((summary.get("premises") or {}).get("angle_count") or 0)
-    selected = receipts(packet)["nodes"]["selected_nodes"]
+    audited = receipts(packet)
+    selected = audited["nodes"]["selected_nodes"]
+    stated = (summary.get("premises") or {}).get("angle_count")
     agree = (
         sorted(ours) == sorted(theirs) == list(range(count))
+        and stated == count
         and not differing
         and summary.get("nodes") == selected
+        and audited["status"] == "RECEIPTS_HOLD"
     )
     least = min(
         (row["min_certified_lower_bound"] for row in ours.values()),
@@ -734,8 +741,10 @@ def compare_archive(packet: str, dilation: Dilation, archive: ReceiptArchive) ->
         "capture": str(capture.relative_to(PROJECT.parent)),
         "capture_sha256": sha256(capture.read_bytes()),
         "directions": count,
+        "capture_states_the_declared_net": stated == count,
         "status": summary.get("status"),
         "nodes": summary.get("nodes"),
+        "archive_receipts_status": audited["status"],
         "archive_selected_nodes": selected,
         "nodes_equal_archive_selected_nodes": summary.get("nodes") == selected,
         "least_certified_bound": least,

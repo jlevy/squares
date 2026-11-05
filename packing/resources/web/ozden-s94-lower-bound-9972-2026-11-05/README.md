@@ -193,7 +193,10 @@ four-core host. The census reads the packet’s certificate (`MIXED_FILES`,
   - The near-threshold mutant was refused, with an exact witness.
   - At the axis the census judged the refusal by the enclosure the vertex sweep held
     (#892): the exact capture lies in [0.9930559807565953, 0.9930559830055209]. This is
-    F7 of the stage 4 review.
+    F7 of the stage 4 review. The mutant’s axis gap, $1.1245 \times 10^{-9}$, would
+    have failed the census’s former constant allowance of $10^{-9}$. #892 adopted the
+    enclosure rule for the census; #543’s question to the owner on this control’s
+    tolerance is still open, and this control depends on it.
 
 The author ran the same checker, so this replay is reproduced with the producer’s code;
 it is not a second implementation. With the stage 4 review below, the row is
@@ -265,8 +268,15 @@ independently re-implemented, clean room. A sample sets no rung. Its findings:
 - **F6.** The least leaf bound 1.0000000000003892 is not a margin; this README says so
   where it quotes it.
 - **F7.** At the axis the crate’s bound sits $1.1357 \times 10^{-9}$ below the exact
-  least vertex, and $1.1245 \times 10^{-9}$ for the mutant. So the whole-net control is
-  judged by the census’s enclosure rule (#892), not the old constant of $10^{-9}$.
+  least vertex, and $1.1245 \times 10^{-9}$ for the mutant. Under the census’s former
+  constant of $10^{-9}$ the control would have failed closed, so it is judged by the
+  enclosure rule that #892 adopted for the census. #543’s question to the owner on
+  this control’s tolerance is still open; #892’s rule is not the owner’s answer to it.
+
+  *Records note (5 November 2026, the import lane):* the review’s F7, in its findings
+  table and its note on the axis, names the enclosure rule as that of `think-4uun` and
+  PR #898. #892 adopted the rule for the census; #898 applied it to T-262’s control,
+  after which `think-4uun` closed. The retained review is not edited.
 
 The review also lists, items 1 to 8, what the census row and its control must show.
 
