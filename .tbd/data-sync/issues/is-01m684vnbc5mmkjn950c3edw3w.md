@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 162
+version: 163
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -60,7 +60,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-05T13:54:52.912Z
+updated_at: 2026-11-05T19:54:32.157Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -286,3 +286,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-05 12:53 renewal (intake81): #911 merged (004fd4309; T-265 V3/C3 house at 260; CC BY 4.0 licence status fixed; homepage test synthetic window). L50 is posting the #895 reply after deploy. #912 merged main; T-266 census 2104/4972, about 16 CPU-h projected, finishing ~19Z.
 
 2026-11-05 13:53 renewal (intake82): #913 merged (249bb82e7; #895 closing reply recorded); think-o7ly and think-qclj closed. #912 green; T-266 census running (~19Z). #908 and #909 held for the owner.
+
+2026-11-05 19:52 renewal (intake88): T-266 census VERIFIED 4,972/4,972 (16.65 CPU-h), control refused (axis by the #892 enclosure rule), lab archive agrees; #912 green at V3/C3 with n-094 verified at 2493/250; senior review running. #908 and #909 still held for the owner.
