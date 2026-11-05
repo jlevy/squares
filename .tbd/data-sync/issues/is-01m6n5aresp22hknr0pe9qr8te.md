@@ -5,7 +5,7 @@ title: Review Yim's 260 certificate (stage 4) and adopt it with both regularizat
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l48
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m6jf7ps8jcdka5zx64tpgxxz
 hold: null
 hold_until: null
 created_at: 2026-11-05T06:11:24.761Z
-updated_at: 2026-11-05T08:45:44.716Z
+updated_at: 2026-11-05T10:41:38.988Z
 started_at: 2026-11-05T08:45:44.715Z
 ---
 Stage 4 mathematical review of Kaelan Yim's certificate at 260 (jlevy/squares#895), registered at V0/C0 on lane L48's draft pull request (branch claude/bold-ritchie-xo28us-l48), and, after the review lands on that branch, its adoption at 260 under the house rule with both strong generators' regularization, it being the smallest side reported there.
@@ -35,4 +35,14 @@ Stage 4 mathematical review of Kaelan Yim's certificate at 260 (jlevy/squares#89
 
 ## Notes
 
-2026-11-05 (bold-ritchie-l48): the import is draft PR https://github.com/jlevy/squares/pull/911 on branch claude/bold-ritchie-xo28us-l48 (head 7dc32aecc at writing); T-265 at V0/C0 names this bead in its unfinished_confirmations and #895's validation. Not claimed by L48: the coordinator launches the tbd-strong-max reviewer, whose review lands on that branch before the adoption.
+2026-11-05 (bold-ritchie-l48): the import is draft PR https://github.com/jlevy/squares/pull/911 on branch claude/bold-ritchie-xo28us-l48. T-265 at V0/C0 named this bead in its unfinished_confirmations and in #895's validation.
+
+2026-11-05 (bold-ritchie-l48), claimed after the review: the coordinator ran the tbd-strong-max review lane separately. Its verdict is accepted with findings, none blocking or major, and S2 is confirmed. L48 mapped it and adopted the count on PR #911:
+- 9004e7b2f: the review at docs/project/reviews/review-2026-11-05-yim-895-260.md, its programs and receipts in the packet's review/review-2026-11-05/, V-yim-1105-review-check, E-yim-895-exact-feasibility and E-yim-895-review-exact-feasibility. T-265 is at V3/C3.
+- The same commit adopts T-265 at 260 under the house rule: found_by Evan Daniel, improved_by Kaelan Yim. Grid-slack (0.5, 1 and 5 degrees) and Evan Daniel's regularizer (not jammed) draw no view, so 260 is SETTLED decided no better and the axis view is drawn; the runs are in cases/regularized_drawings/think-o7ly-2026-11-05/. Rigidity was re-derived: not rigid, 105 of 260.
+- Fixes: F1, F3, F4, F6 and F8 in the packet README and the register; F2 in verifiers.yaml.
+- Deferred: F10 to think-tupc. Yim's poster credit is held, think-hgpg.
+- b6d6ea448 and 4e8e333be: the release record and the bead references. ab386085c: the CI fixes (stamp_landed, PR 574's frozen claims).
+- Re-pins: 569e82de5, dfdb6b1bd and ce52218ed.
+
+Done-when status: the review is mapped and check_results derives V3/C3. select_houses --check, default_drawings --check-state --base-ref origin/main and flip_regularization --check pass. Close this bead when #911 merges.
