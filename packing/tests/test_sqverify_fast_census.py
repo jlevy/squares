@@ -1112,10 +1112,10 @@ def test_each_retained_axis_refusal_is_the_crates_enclosure(
     """At every retained v2 receipt's axis refusal, the walk on the candidate reproduces
     the crate's reported bound to the bit and holds the receipt's exact capture, so the
     rule counts it, including the receipts kept after the constant failed them closed
-    (n26's of 23 October, n39's of 2 November and n94's of 3 November): thirteen
-    measures from six packets on 4 November, n39's and n94's each in two receipts, the
-    kept one and the one this rule passed, beside the instrumented crate's upper ends in
-    `test_sqverify_fast_axis`."""
+    (n26's of 23 October, n39's of 2 November and n94's of 3 November): fourteen
+    measures from seven packets on 5 November, in seventeen receipts, n26's, n39's and
+    n94's each in two, the kept one and the one this rule passed, beside the
+    instrumented crate's upper ends in `test_sqverify_fast_axis`."""
     case = cases()[path.name.split(".control", 1)[0]]
     raw = read_raw(case.candidate)
     x, y = (Fraction(value) for value in item["pose"])

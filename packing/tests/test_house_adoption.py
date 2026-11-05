@@ -2470,8 +2470,8 @@ def _t132_lower_projection(held: dict[str, Any], wrote: dict[str, Any], body: st
 
     T-132's fine-net census replay raised both lower lanes at 29 from T-108's 581/100 on
     4 November 2026, after T-195's house pass of 17 October wrote the record, and its two
-    blockers left; the writer owns neither lane, so the adoption is checked exactly and
-    projected out.
+    blockers left; the case also cites its stage 4 review's sample. The writer owns
+    neither lane, so the adoption is checked exactly and projected out.
     """
     replay = "E-wand125-fine-net-n29-582-followup-sqverify-fast-replay"
     assert held["source_reviewed"] == "2026-11-04"
@@ -2481,8 +2481,9 @@ def _t132_lower_projection(held: dict[str, Any], wrote: dict[str, Any], body: st
         "exact_form": "291/50",
         "evidence": [replay],
     }
-    assert [e for e in held["evidence"] if e != replay] == wrote["evidence"]
-    assert held["evidence"].count(replay) == 1
+    added = [replay, "E-wand125-fine-net-n29-582-review-sample"]
+    assert [e for e in held["evidence"] if e not in added] == wrote["evidence"]
+    assert all(held["evidence"].count(e) == 1 for e in added)
     assert held["blockers"] == []
     assert tuple(blocker["evidence"] for blocker in wrote["blockers"]) == T132_LOWER_29_BLOCKERS
     for key in ("source_reviewed", "evidence", "blockers"):

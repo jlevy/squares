@@ -35970,8 +35970,11 @@ evidence:
       candidate retained in the packet's release/ since 2 November, with every direction's
       node count and least certified bound equal to the source's check2 log
       (receipts/capture-agreement-n29.json), and its whole-net control is CONTROLS_REFUSED,
-      the axis refusal judged by the vertex sweep's own enclosure (#892). The mathematical
-      review of 4 November read the certificate. The shared crate establishes no
+      the axis refusal judged by the vertex sweep's own enclosure, the rule #892 adopted
+      for the census; #543's question to the owner on that tolerance is still open, and
+      the gap of 5.23e-10 also lies inside the former constant allowance of 1e-9, so the
+      control passes under either rule. The mathematical review of 4 November read the
+      certificate. The shared crate establishes no
       independent implementation. The 1163/200 report and its evidence stand.
     source_reviewed: '2026-11-04'
     external_review:
@@ -36098,6 +36101,68 @@ evidence:
       apart from the crate, and tests/test_sqverify_fast_census.py holds the receipts. The
       source's own checker was not run here on this certificate, and its tarball is pinned
       by digest and not retained.
+    source_reviewed: '2026-11-04'
+
+  - id: E-wand125-fine-net-n29-582-review-sample
+    claim: lower-bound
+    scope: {n_values: [29]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net n29 2026-10-10]'
+    certificate: packing/resources/web/wand125-fine-net-n29-2026-10-10/release/certificates/mixed_n29_L582/candidate.json.gz
+    replay: >-
+      From a directory of its own, with PY packing/.venv/bin/python3 -I, P
+      packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs and the inputs
+      that directory's README names (How to Run Them): PY P/check_candidate.py must write
+      ALL_PREMISES_HOLD; PY P/check_source_logs.py must write SOURCE_RECORDS_CONSISTENT;
+      OPENBLAS_NUM_THREADS=2 PY P/axis_decide.py must write decided_verified true; PY
+      P/oblique_decide.py at directions 886, 1595, 1947, 2068 and 2072, and with --split
+      adaptive at 1, 312, 603 and 1173, must write VERIFIED for each, with --scale 99/100
+      at 1947 REFUTED, and at 312 with --split adaptive REFUTED with --scale 9991/10000
+      and VERIFIED with --scale 9993/10000; and PY P/sample_directions.py with the reviewed
+      sqverify-fast must write SAMPLE_AGREES. The receipts are in the directory's out/ and
+      out/oblique/.
+    replay_status: passed
+    verifiers: [V-wand125-n29-review-premises, V-wand125-n29-review-axis-decision, V-wand125-n29-review-oblique-decision, V-wand125-n29-review-exact-capture]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md
+    independence:
+      coverage:
+        extent: sample
+        unit: net directions, each decided over its whole per-bin domain
+        checked: 10
+        of: 2073
+    limitations: >-
+      Run here on 4 November 2026 by the stage 4 review (think-1lri) under CPython 3.14.7
+      on a shared four-core host, about 69 CPU-minutes in all. It decided direction 0 of
+      mixed_n29_L582 over its whole per-bin domain [1/2, L - 1/2]^2: every vertex of the
+      event grid (8,580 by 8,580) in binary64 under a proved a priori bound, certified by
+      an exact comparison, and the least vertices, their orbit and a random sample again
+      exactly, least capture 1.0008730852291343. It decided nine oblique directions (1,
+      312, 603, 886, 1173, 1595, 1947, 2068 and 2072, among them the four with the
+      source's least certified bounds and the net's first and last) each over its whole
+      per-bin domain by a branch and bound of its own, the capture of the intersection of
+      a box's cores with areas bounded below in binary64 moved outward one ulp at every
+      step, least capture found 1.0005828 at 886. Its controls: the 99/100 mutant refuted
+      at 1947 with the exact witness 0.99100523, and at 312 the measure scaled by
+      9991/10000 refuted (exact witness 0.9999948560) and scaled by 9993/10000 verified.
+      It evaluated exactly all 31 oblique witnesses of the source's 197/200 control, below
+      one and in the domain, and the centre and corners of the leaf boxes of the source's
+      12 tightest directions, all at least one (least 1.000990). This repository's
+      reviewed sqverify-fast, run with --confirm at seven directions (1947, 603, 1595,
+      1173, 2068, 886 and 312), reproduced the source's rows exactly and refused the
+      99/100 mutant at 0, 1947 and 2068 with witnesses the review's evaluator confirms;
+      those runs share the producer's components and are a diagnostic. A sample decides
+      the directions it ran in full and the poses it evaluated, nothing about the other
+      2,063 directions' coverage, and supports no rung. Its programs were written after
+      reading SOUNDNESS.md, the crate's admission and build.rs, the source's specification
+      and check script, and the n28 and n30 review's programs, which they adapt, so they
+      are independently re-implemented after reading the producer's code, not clean-room,
+      by a Claude agent, a system family the source's commit also names.
     source_reviewed: '2026-11-04'
 
   - id: E-n040-guzhou-clipped-corner-report

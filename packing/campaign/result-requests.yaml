@@ -8421,9 +8421,11 @@ issues:
       review, of four lower bounds registered at V0/C0: T-142 and T-143 by a sqverify-fast census at
       all 2,073 directions with the whole-net control, T-144 by audit_wand125_linear's linear
       replay and control, and T-132, reported on #446, in the same lane. Priced at 23 to 31
-      CPU-hours, within the budget the owner set on 11 October; held until the regularization of
-      every packing lands (think-ux1v), with the tooling on its own branch and two owner questions
-      open (#543).
+      CPU-hours, within the budget the owner set on 11 October, which ordered the lane after the
+      regularization of every packing (think-ux1v). T-132's census, control and review ran on 4
+      November 2026 ahead of that order (think-r333, #909), and its adoption waits on the owner's
+      decision about it; T-142, T-143 and T-144 stay held on think-ux1v. Two owner questions stay
+      open on #543.
     read_through: '2026-10-12T07:49:51Z'
     results: []
     asks:
@@ -8463,8 +8465,10 @@ issues:
     blocked:
       type: compute
       reason: >-
-        First-party replays of T-142, T-143, T-144 and T-132 on the owner's budget of 11
-        October (think-i85v, think-nd7g, think-r333); a compute lane runs them.
+        First-party replays of T-142, T-143 and T-144 on the owner's budget of 11 October
+        (think-i85v, think-nd7g); a compute lane runs them. T-132's ran on 4 November
+        (think-r333), ahead of the owner's order of 11 October; its adoption waits on the
+        owner's decision about it (#909).
     close_when: >-
       Each replay's receipts and controls are retained in its packet, a review accepts them,
       the four register entries on main record the replays and their rungs, and #446 has a

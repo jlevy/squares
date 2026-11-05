@@ -29,6 +29,9 @@ The folder keeps:
   [0.9908643538541804, 0.9908643548997059], an enclosure 1.05e-9 wide whose lower end is
   the crate’s bound to the bit, 5.23e-10 above that bound and so near the enclosure’s
   midpoint, as F-8 of the review expected.
+  #892 adopted that rule for the census, and #543’s question to the owner on the axis
+  tolerance is still open; the gap is also inside the former constant allowance of 1e-9,
+  so the control passes under either rule.
   The receipt records wall time only, so the control’s CPU is at most 1,708 seconds.
 
 Both runs used `sqverify-fast` built from the reviewed crate source `d97758bb…` (binary
@@ -37,7 +40,11 @@ for byte, at two threads under `nice -n 19` on a shared four-core host.
 The
 [mathematical review of 4 November](../../../../../docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md)
 read the certificate before either run was mapped.
-This README is a hand-maintained index of the folder, not a generated view.
+On 4 November 2026 this census, its controls and the stage 4 review ran ahead of the
+owner’s order of 11 October, which queued the replay after the regularization of every
+packing (think-ux1v); the owner has not lifted that order, and the adoption is pending
+the owner’s decision on it (#909, think-r333). This README is a hand-maintained index of
+the folder, not a generated view.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

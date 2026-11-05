@@ -11696,8 +11696,9 @@ results:
       score: 3
       rationale: >-
         The strongest verified lower bound on record at n = 29 when scored, by 0.0125
-        above T-074, and the strongest reported (T-132 passed it on 4 November 2026). The
-        certificate kind of T-099 on a declared net with
+        above T-074, and the strongest reported then (the reports of 1163/200 and 291/50
+        passed it on 8 and 10 October 2026, and T-132 took both lanes from it on 4
+        November 2026). The certificate kind of T-099 on a declared net with
         the C++ checker of T-069 and later; no new technique, at S3 as T-096, T-099 and
         T-100 are.
       scored: '2026-10-06'
@@ -14287,20 +14288,30 @@ results:
       1947, each direction's node count and least bound equal to the source's check2 log,
       receipts/capture-agreement-n29.json in the packet), its whole-net control receipt
       and the mapped mathematical review of 4 November. The control (22:53 to 23:07Z, 854
-      s of wall at two threads) ends CONTROLS_REFUSED under #892's enclosure rule: at the
-      axis the mutant's exact capture lies in the enclosure the sweep held at its least
-      vertex, [0.9908643538541804, 0.9908643548997059], 1.05e-9 wide, 5.23e-10 above the
-      crate's bound, as F-8 of the review expected.
+      s of wall at two threads) ends CONTROLS_REFUSED under the enclosure rule that #892
+      adopted for the census: at the axis the mutant's exact capture lies in the
+      enclosure the sweep held at its least vertex, [0.9908643538541804,
+      0.9908643548997059], 1.05e-9 wide, 5.23e-10 above the crate's bound, as F-8 of the
+      review expected. #543's question to the owner on the census's axis tolerance is
+      still open; #892's rule is not the owner's answer to it. The gap of 5.23e-10 also
+      lies inside the former constant allowance of 1e-9, so this control passes under
+      either rule and #543 is not load-bearing here.
+
+      On 4 November 2026 this census, its controls and the stage 4 review ran ahead of
+      the owner's order of 11 October, which queued the replay after the regularization
+      of every packing (think-ux1v); the owner has not lifted that order, and the
+      adoption is pending the owner's decision on it (#909, think-r333).
 
       The capture and control took at most 3.1 CPU-hours together (9,296 CPU-seconds
       measured for the capture by wait4; the control's receipt records wall only),
       against the price of 4.3 to 5.5. The score of 11 October was given to the claim;
       the complete replay of 4 November passed after it and leaves the score as it was.
-      The case records' lower lanes move to 291/50; T-108 keeps its claim at n = 29, now superseded there. The
-      pre-publication receipt is a second complete run of the same source on a fresh
-      machine (4,306 s), not the run the check2 receipt embeds. The release asset's six data
-      members are retained in the packet's release/ since 2 November 2026 under OR-18; its
-      nested verifier archive and sealed inner bundle are pinned by digest only.
+      The case records' lower lanes move to 291/50; T-108 keeps its claim at n = 29, now
+      superseded there. The pre-publication receipt is a second complete run of the same
+      source on a fresh machine (4,306 s), not the run the check2 receipt embeds. The
+      release asset's six data members are retained in the packet's release/ since 2
+      November 2026 under OR-18; its nested verifier archive and sealed inner bundle are
+      pinned by digest only.
     controls:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n29-2026-10-10/mixed_n29_L582.control.json

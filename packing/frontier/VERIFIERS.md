@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **236** programs: **53** external and **183** first-party; **157** decide claims and **79** check premises.
-- **692** of **875** evidence entries name the programs that verified them: 325 independently re-implemented, 294 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **693** of **876** evidence entries name the programs that verified them: 326 independently re-implemented, 294 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -264,10 +264,10 @@ second implementation agrees.
 | [`V-ryu-quarter-cube-review-text-checks`](#v-ryu-quarter-cube-review-text-checks) | q_quotes.py and c_citations.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-ryu-k2-minus-c-independent-labels`](#v-ryu-k2-minus-c-independent-labels) | ryu_k2_minus_c_labels.py (run, summarize, price, controls and recheck) | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-ozden-1104-review-check`](#v-ozden-1104-review-check) | oz_check.py with ozlib.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
-| [`V-wand125-n29-review-premises`](#v-wand125-n29-review-premises) | check_candidate.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-wand125-n29-review-exact-capture`](#v-wand125-n29-review-exact-capture) | fine_net_exact.capture | Squares Project (Levy) | first-party | decides | 0 | 0 |
-| [`V-wand125-n29-review-axis-decision`](#v-wand125-n29-review-axis-decision) | axis_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 0 | 0 |
-| [`V-wand125-n29-review-oblique-decision`](#v-wand125-n29-review-oblique-decision) | oblique_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-wand125-n29-review-premises`](#v-wand125-n29-review-premises) | check_candidate.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-wand125-n29-review-exact-capture`](#v-wand125-n29-review-exact-capture) | fine_net_exact.capture | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-wand125-n29-review-axis-decision`](#v-wand125-n29-review-axis-decision) | axis_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-wand125-n29-review-oblique-decision`](#v-wand125-n29-review-oblique-decision) | oblique_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 
 ## By Program
 
@@ -4705,7 +4705,9 @@ Recomputes, apart from the crate and the tools, every exact premise of the check
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-1lri of the wand125 n29 import (think-r333), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of its own that import nothing from the crate, the tools or the source. Adapted from the programs of the n28 and n30 review (think-4ul6), another Claude lane, after reading them line by line.
 - Note: Written and run on 4 November 2026 by the stage 4 review of T-132 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11); kept in the n29 packet's review/ with its README and receipts.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
 
 ### `V-wand125-n29-review-exact-capture`
 
@@ -4719,7 +4721,9 @@ The exact mass a closed core at a given centre and net angle captures from a for
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-1lri of the wand125 n29 import (think-r333), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of its own that import nothing from the crate, the tools or the source.
 - Note: Written and run on 4 November 2026 by the stage 4 review of T-132 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11); kept in the n29 packet's review/ with its README and receipts.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
 
 ### `V-wand125-n29-review-axis-decision`
 
@@ -4733,7 +4737,9 @@ Decides direction 0 of a format M certificate over its whole per-bin domain [1/2
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-1lri of the wand125 n29 import (think-r333), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of its own that import nothing from the crate, the tools or the source.
 - Note: Written and run on 4 November 2026 by the stage 4 review of T-132 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11); kept in the n29 packet's review/ with its README and receipts.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
 
 ### `V-wand125-n29-review-oblique-decision`
 
@@ -4747,7 +4753,9 @@ Decides one oblique direction of a format M certificate over its whole per-bin d
 - Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-1lri of the wand125 n29 import (think-r333), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of its own that import nothing from the crate, the tools or the source.
 - Note: Written and run on 4 November 2026 by the stage 4 review of T-132 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11); kept in the n29 packet's review/ with its README and receipts. oblique_sample.py, a driver kept beside it, decides nothing and is not registered.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
