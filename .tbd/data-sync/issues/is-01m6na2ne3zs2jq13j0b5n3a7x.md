@@ -3,16 +3,20 @@ type: is
 id: is-01m6na2ne3zs2jq13j0b5n3a7x
 title: "Stage 4 review: Özden's s(94) >= 2493/250 certificate (#910)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m6n86trbv1javs88wtdd2j24
 created_at: 2026-11-05T07:34:22.402Z
-updated_at: 2026-11-05T07:34:22.402Z
+updated_at: 2026-11-05T21:21:19.858Z
+closed_at: 2026-11-05T21:21:19.858Z
+close_reason: "T-266 reviewed (strong-max), census verified, V3/C3 in https://github.com/jlevy/squares/pull/912 (merged b099992a9); #910 answered and closed, recorded in https://github.com/jlevy/squares/pull/915 (merged 81f06acb3)."
+resolution: null
+duplicate_of: null
 ---
 Stage 4 mathematical review of #910's certificate (Doğa Özden, s(94) >= 2493/250 = 9.972), by a separately prompted tbd-strong-max lane at maximum reasoning in its own worktree, as packing/campaign/result-import.md "Who reviews, and when" asks. With the complete replay (think-qcms) it is what moves n-094's verified lower lane (frontier README: a complete replay here and a review of its mathematics; the 6 October declared-net soundness review's records-lane item 7; check_results verified_lane_review_problems).
 

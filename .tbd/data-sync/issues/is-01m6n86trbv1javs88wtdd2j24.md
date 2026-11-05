@@ -3,9 +3,9 @@ type: is
 id: is-01m6n86trbv1javs88wtdd2j24
 title: "Import Özden: s(94) >= 2493/250 by rescaling Hosono's mixed_n94_L995 onto a 4,972-direction net (#910)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 10
+version: 11
 delegate: bold-ritchie-l49
 labels:
   - result-import
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-05T07:01:41.771Z
-updated_at: 2026-11-05T20:34:56.375Z
+updated_at: 2026-11-05T21:21:22.402Z
 started_at: 2026-11-05T07:01:46.219Z
+closed_at: 2026-11-05T21:21:22.401Z
+close_reason: "T-266 reviewed (strong-max), census verified, V3/C3 in https://github.com/jlevy/squares/pull/912 (merged b099992a9); #910 answered and closed, recorded in https://github.com/jlevy/squares/pull/915 (merged 81f06acb3)."
+resolution: null
+duplicate_of: null
 ---
 Import of jlevy/squares#910 (opened 2026-11-05T06:51:55Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(94) >= 2493/250 = 9.972, above T-262's 1993/200 by 7/1000. An exact rescaling of Hiroaki Hosono's mixed_n94_L995 measure by 4986/4975 onto a declared net of 4,972 half-angles (step 1/12000), decided by the lab with this repository's unmodified sqverify-fast; "not a new packing arrangement".
 
