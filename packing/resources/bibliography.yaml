@@ -4625,6 +4625,27 @@ sources:
       Licensed CC BY 4.0 with attribution to Kaelan Yim by the author's reply on
       jlevy/squares#895 (issuecomment-6650567350). Retained in
       web/yim-s260-upper-bound-2026-11-05/.
+  - key: '[Daniel issue 914 2026-11-05]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: independent
+    credit: Daniel after Deotte, Ostashev, PingYou, Mishapolk, kirilltym
+    short_credit: Daniel after Deotte et al.
+    note: >-
+      Seven complete exact certificates first committed at
+      evand/square-packing@bb4cc78e5b35103c1f177db55e9cf08974e66563 on 5 November 2026, the
+      head the packet pins, reported on issue 914: exact KKT points at 175, 204, 268, 293, 303
+      and 304, each with a regularized view at the same side, and a dilation certificate at
+      260, each a new packing by the source's word, built by the author's fault-line composer,
+      his implementation of Chris Deotte's multi-gadget fault DP, with the starts the issue
+      credits: the register's s(175) packing at 175 (Ostashev's, as PingYou Ltd and Mishapolk
+      refined it) and Kirill Tymchishin's (kirilltym) Kaggle s(260) at 260; at 204, 268, 293,
+      303 and 304 no public start is known. MIT-licensed; Claude assistance disclosed. No
+      global optimality claim. Retained in web/evand-issue914-2026-11-05/, the six views
+      pinned in web/evand-issue914-views-2026-11-05/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden

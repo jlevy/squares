@@ -1527,6 +1527,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # The intake pass's lane L48 of 5 November (think-3guf): Kaelan Yim's issue 895 at 260
     # (think-qclj), retained at vitamoon/vitamoon d11a8a1 once the author named the file.
     "[Yim s260 upper bound 2026-11-05]": _import("yim-s260-upper-bound-2026-11-05"),
+    # The intake pass's lane L51 of 5 November (think-3guf): Evan Daniel's issue 914 at 175,
+    # 204, 260, 268, 293, 303 and 304 (think-ahvh). The views packet of the same pin carries
+    # the same key and no reader: its sides are these certificates'.
+    "[Daniel issue 914 2026-11-05]": _import("evand-issue914-2026-11-05"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

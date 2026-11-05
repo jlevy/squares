@@ -1,0 +1,213 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/914",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel issue 914 2026-11-05]",
+  "report_evidence": "E-evand-914-certificate-report",
+  "receipt_format": "evand-914-views-exact-replay-v1",
+  "witness_prefix": "W-evand-914-view-n",
+  "claim_limitations": "Complete bb4cc78 rational centre/half-angle regularized display views, read exactly from the files the evand-issue914-2026-11-05 packet retains. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-05",
+  "read_at_main": "249bb82e771d4ddc2b1549eaf6e4d49adfc09dee",
+  "certificates": [
+    {
+      "n": 175,
+      "path": "search/packer/candidates/s175_1105_regularized.cert",
+      "format": "evand-cert",
+      "offered": "13.764050051544",
+      "first_committed": "2026-11-05T18:29:13Z"
+    },
+    {
+      "n": 204,
+      "path": "search/packer/candidates/s204_trig1_regularized.cert",
+      "format": "evand-cert",
+      "offered": "14.804361383652",
+      "first_committed": "2026-11-05T18:29:13Z"
+    },
+    {
+      "n": 268,
+      "path": "search/packer/candidates/s268_1105_regularized.cert",
+      "format": "evand-cert",
+      "offered": "16.872499518136",
+      "first_committed": "2026-11-05T18:29:13Z"
+    },
+    {
+      "n": 293,
+      "path": "search/packer/candidates/s293_1105_regularized.cert",
+      "format": "evand-cert",
+      "offered": "17.623065212061",
+      "first_committed": "2026-11-05T18:29:13Z"
+    },
+    {
+      "n": 303,
+      "path": "search/packer/candidates/s303_1105_regularized.cert",
+      "format": "evand-cert",
+      "offered": "17.901832750855",
+      "first_committed": "2026-11-05T18:29:13Z"
+    },
+    {
+      "n": 304,
+      "path": "search/packer/candidates/s304_1105_regularized.cert",
+      "format": "evand-cert",
+      "offered": "17.920944093341",
+      "first_committed": "2026-11-05T18:29:13Z"
+    }
+  ],
+  "requested": [
+    175,
+    204,
+    268,
+    293,
+    303,
+    304
+  ],
+  "replayed": [
+    175,
+    204,
+    268,
+    293,
+    303,
+    304
+  ],
+  "houses": [
+    {
+      "n": 175,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Daniil Ostashev, improved by PingYou Ltd and Mishapolk",
+      "result": "T-186",
+      "reported_value": "13.76417431748659663",
+      "verified_value": "13.76417431748659663",
+      "evidence": [
+        "E-mishapolk-70a033f-exact-feasibility"
+      ]
+    },
+    {
+      "n": 204,
+      "reader": "[Özden s204 upper bound 2026-11-03]",
+      "source_key": "[Özden s204 upper bound 2026-11-03]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-264",
+      "reported_value": "14.8076209955852081",
+      "verified_value": "14.8076209955852081",
+      "evidence": [
+        "E-ozden-894-exact-feasibility",
+        "E-ozden-894-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 268,
+      "reader": "[Daniel Kaggle descents 2026-10-24]",
+      "source_key": "[Daniel Kaggle descents 2026-10-24]",
+      "holders": "Vladislav Lavrentev, improved by Evan Daniel",
+      "result": "T-242",
+      "reported_value": "16.8743617158693459",
+      "verified_value": "16.8743617158693459",
+      "evidence": [
+        "E-evand-kaggle-descents-exact-feasibility",
+        "E-evand-kaggle-descents-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 293,
+      "reader": "[Daniel issue 845 2026-10-29]",
+      "source_key": "[Daniel issue 845 2026-10-29]",
+      "holders": "Evan Daniel, from a search started from Kirill Tymchishin's Kaggle notebook packing, plus one L-shaped strip",
+      "result": "T-257",
+      "reported_value": "17.6339825021227820",
+      "verified_value": "17.6339825021227820",
+      "evidence": [
+        "E-evand-845-exact-feasibility",
+        "E-evand-845-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 303,
+      "reader": "[Couzo issue 763 2026-10-23]",
+      "source_key": "[Couzo issue 763 2026-10-23]",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev's packing",
+      "result": "T-240",
+      "reported_value": "17.9069782337989002",
+      "verified_value": "17.9069782337989002",
+      "evidence": [
+        "E-couzo-763-exact-feasibility",
+        "E-couzo-763-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 304,
+      "reader": "[Daniel Kaggle descents 2026-10-24]",
+      "source_key": "[Daniel Kaggle descents 2026-10-24]",
+      "holders": "Kirill Tymchishin, improved by Evan Daniel",
+      "result": "T-242",
+      "reported_value": "17.9268989003567416",
+      "verified_value": "17.9268989003567416",
+      "evidence": [
+        "E-evand-kaggle-descents-exact-feasibility",
+        "E-evand-kaggle-descents-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 175,
+      "report": "s175_1105.cert (#914)",
+      "url": "https://github.com/jlevy/squares/issues/914",
+      "holders": "Evan Daniel",
+      "reader": "[Daniel issue 914 2026-11-05]"
+    },
+    {
+      "n": 204,
+      "report": "s204_trig1.cert (#914)",
+      "url": "https://github.com/jlevy/squares/issues/914",
+      "holders": "Evan Daniel",
+      "reader": "[Daniel issue 914 2026-11-05]"
+    },
+    {
+      "n": 268,
+      "report": "s268_1105.cert (#914)",
+      "url": "https://github.com/jlevy/squares/issues/914",
+      "holders": "Evan Daniel",
+      "reader": "[Daniel issue 914 2026-11-05]"
+    },
+    {
+      "n": 293,
+      "report": "s293_1105.cert (#914)",
+      "url": "https://github.com/jlevy/squares/issues/914",
+      "holders": "Evan Daniel",
+      "reader": "[Daniel issue 914 2026-11-05]"
+    },
+    {
+      "n": 303,
+      "report": "s303_1105.cert (#914)",
+      "url": "https://github.com/jlevy/squares/issues/914",
+      "holders": "Evan Daniel",
+      "reader": "[Daniel issue 914 2026-11-05]"
+    },
+    {
+      "n": 304,
+      "report": "s304_1105.cert (#914)",
+      "url": "https://github.com/jlevy/squares/issues/914",
+      "holders": "Evan Daniel",
+      "reader": "[Daniel issue 914 2026-11-05]"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's regularized views at 175, 204, 268, 293, 303 and 304 at bb4cc78, issue 914",
+    "headline": "Daniel's regularized views of his new packings of 175, 204, 268, 293, 303 and 304 squares, each at its certificate's side",
+    "significance": 3,
+    "source_checks": "The issue says the source's two exact checkers, search/exact/verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), byte-identical to the copies the n183 packet retains, both report VALID on all thirteen certificate files, the seven certificates and six regularized views, and that they share an author and the certificate format. It calls the certificates at 175, 204, 268, 293, 303 and 304 exact KKT points, with numerical evidence at 80 digits, not interval proofs: strict local minima of S modulo 57, 17 and 103 exact flat motions at 204, 293 and 304; positive semidefinite with 83 zero modes at 175; inconclusive at 268; and at 303 a KKT point that a first-order corner-corner MILP descent, not realised, shows is not established as a local minimum. At 260 the exact solver did not converge, and the certificate dilates the binary64 packing by 8.8e-12; local optimality is not established there. The commit ends with a Co-Authored-By trailer naming Claude. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose fault-line composer, his independent implementation of Chris Deotte's multi-gadget fault DP from Deotte's Kaggle notebooks, built all seven, with Chris Deotte credited for the method as the issue asks: at 175 from gadgets of the register's s(175) packing (Daniil Ostashev's, as PingYou Ltd and Mishapolk refined it) and an earlier composer build at 175, the register's packing credited as the start; at 204 from gadgets of Daniel's own s(233) and s(370), with no public start known; at 260 the tilted island of Daniel's #845 260, recomposed in a 260 frame, with that packing's credit, Kirill Tymchishin's (kirilltym) Kaggle s(260) as the start; and at 268, 293, 303 and 304 composer builds whose gadget donors were not recorded, with no public start known. The issue calls all seven new packings, none a refinement of the register's. Kaggle per-puzzle sides it quotes at all seven counts state no packing and are no report. The source's credits say its work was produced by Claude (Anthropic) under human direction.",
+    "next_rung": "Independently review the retained replay and the certificates (stage 4): a clean-room exact checker, the identity against each house's packing and the lineage the source states, a mapped review whose acceptance would raise both rungs. Then adopt each certificate at its count under the house rule, replacing T-186 at 175, T-264 at 204, T-265 at 260, T-242 at 268 and 304, T-257 at 293 and T-240 at 303, with both strong generators' regularization and the flip of each new house in the same change.",
+    "bead": "think-ahvh",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "independent",
+      "credit": "Daniel after Deotte, Ostashev, PingYou, Mishapolk, kirilltym",
+      "short_credit": "Daniel after Deotte et al.",
+      "note": "Seven complete exact certificates first committed at evand/square-packing@bb4cc78e5b35103c1f177db55e9cf08974e66563 on 5 November 2026, the head the packet pins, reported on issue 914: exact KKT points at 175, 204, 268, 293, 303 and 304, each with a regularized view at the same side, and a dilation certificate at 260, each a new packing by the source's word, built by the author's fault-line composer after Chris Deotte's multi-gadget fault DP, with the starts the issue credits. MIT-licensed; Claude assistance disclosed. No global optimality claim. The six regularized views are pinned in web/evand-issue914-views-2026-11-05/ against the copies web/evand-issue914-2026-11-05/ retains."
+    }
+  }
+}

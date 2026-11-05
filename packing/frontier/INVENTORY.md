@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **877** evidence records. **508** are formal; **499** of those were established here. **13** are samples, counted separately.
-- **350** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **878** evidence records. **508** are formal; **499** of those were established here. **13** are samples, counted separately.
+- **351** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -900,13 +900,14 @@ results, it is a statement about what this repository has itself examined.
 | `E-yim-895-certificate-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-yim-895-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
 | `E-yim-895-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 260: every wall and all 33,670 pairs, by two exact methods in one program that share only its reader, with seventeen controls decided by both | `V-yim-1105-review-check` |
+| `E-evand-914-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 352, verified 520
-- **method**: exact-algebraic 269, interval-certified 233, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 352
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 816
-- **relationship to the producer's code**: generator 5, independent-implementation 326, not-applicable 34, same-implementation 455, shared-components 51, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 353, verified 520
+- **method**: exact-algebraic 269, interval-certified 233, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 353
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 817
+- **relationship to the producer's code**: generator 5, independent-implementation 326, not-applicable 34, same-implementation 456, shared-components 51, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

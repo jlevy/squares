@@ -5971,7 +5971,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-05'
   status: live
 - path: cases/176.html
   canonical: cases/176.html
@@ -6235,7 +6235,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-04'
+  lastmod: '2026-11-05'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -6795,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-26'
+  lastmod: '2026-11-05'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -7019,7 +7019,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-05'
   status: live
 - path: cases/294.html
   canonical: cases/294.html
@@ -7115,7 +7115,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-25'
+  lastmod: '2026-11-05'
   status: live
 - path: cases/304.html
   canonical: cases/304.html
@@ -7123,7 +7123,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-25'
+  lastmod: '2026-11-05'
   status: live
 - path: cases/305.html
   canonical: cases/305.html
@@ -23171,6 +23171,240 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-11-05-yim-895-260.md
     - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md
+- path: result/t-267.html
+  canonical: result/t-267.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 175
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel issue 914 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-evand-914-certificate-report
+    artifacts:
+    - packing/resources/web/evand-issue914-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s175_1105.cert
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/sharp-controls-n175.json
+    - packing/resources/web/evand-issue914-2026-11-05/measure/identity-n175.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s175_1105_regularized.cert
+    - packing/resources/web/evand-issue914-views-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n175.json
+    - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-268.html
+  canonical: result/t-268.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel issue 914 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-evand-914-certificate-report
+    artifacts:
+    - packing/resources/web/evand-issue914-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s204_trig1.cert
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/sharp-controls-n204.json
+    - packing/resources/web/evand-issue914-2026-11-05/measure/identity-n204.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s204_trig1_regularized.cert
+    - packing/resources/web/evand-issue914-views-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n204.json
+    - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-269.html
+  canonical: result/t-269.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 260
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel issue 914 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-evand-914-certificate-report
+    artifacts:
+    - packing/resources/web/evand-issue914-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s260_ks_1105.cert
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/sharp-controls-n260.json
+    - packing/resources/web/evand-issue914-2026-11-05/measure/identity-n260.json
+    - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-270.html
+  canonical: result/t-270.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 268
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel issue 914 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-evand-914-certificate-report
+    artifacts:
+    - packing/resources/web/evand-issue914-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s268_1105.cert
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/sharp-controls-n268.json
+    - packing/resources/web/evand-issue914-2026-11-05/measure/identity-n268.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s268_1105_regularized.cert
+    - packing/resources/web/evand-issue914-views-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n268.json
+    - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-271.html
+  canonical: result/t-271.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 293
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel issue 914 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-evand-914-certificate-report
+    artifacts:
+    - packing/resources/web/evand-issue914-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s293_1105.cert
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/sharp-controls-n293.json
+    - packing/resources/web/evand-issue914-2026-11-05/measure/identity-n293.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s293_1105_regularized.cert
+    - packing/resources/web/evand-issue914-views-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n293.json
+    - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-272.html
+  canonical: result/t-272.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 303
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel issue 914 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-evand-914-certificate-report
+    artifacts:
+    - packing/resources/web/evand-issue914-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s303_1105.cert
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/sharp-controls-n303.json
+    - packing/resources/web/evand-issue914-2026-11-05/measure/identity-n303.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s303_1105_regularized.cert
+    - packing/resources/web/evand-issue914-views-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n303.json
+    - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-273.html
+  canonical: result/t-273.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 304
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel issue 914 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-evand-914-certificate-report
+    artifacts:
+    - packing/resources/web/evand-issue914-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105.cert
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-2026-11-05/receipts/sharp-controls-n304.json
+    - packing/resources/web/evand-issue914-2026-11-05/measure/identity-n304.json
+    - packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105_regularized.cert
+    - packing/resources/web/evand-issue914-views-2026-11-05/README.md
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n304.json
+    - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

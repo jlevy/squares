@@ -1,0 +1,91 @@
+{
+ "store_id": 291607,
+ "s": 13.764174317486596,
+ "sources": [
+  "pending:#501 (Daniil Ostashev (dostashev))",
+  "pending:#575 (dostashev)",
+  "watch:dostashev/square-packing@b909e1b (Daniil Ostashev (dostashev))",
+  "later copies of the same minimum: store ids [291599, 291693, 1044229, 1044636]"
+ ],
+ "ok": true,
+ "S_exact": "13.764174317486596629290181476867476859469193705842084385694796937",
+ "S_cert": "13.764174317486596629427823220043",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 175 closed unit squares pairwise disjoint inside the open box of side 13.764174317486595811 (366 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 0.005101684355855928,
+  "status": "local minimum of S, strict modulo 73 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 73,
+  "flat_realised": 73.0,
+  "flat_residual": 1.8546258953089954e-61,
+  "negative_eigs": 0,
+  "corner_corner": 156,
+  "vv_milp_dS": 0.0,
+  "rattlers": 18,
+  "min_pair": 9.999999999999992e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "13.7641743174865966292901814768674768594691937058420843856948",
+  "S_cert": "13764174317486596629427823220043/1000000000000000000000000000000",
+  "groups": [
+   19,
+   3
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 175 closed unit squares pairwise disjoint inside the open box of side 13.764174317486595811 (364 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.00012426594342151986,
+  "matching_distance_regularized": 0.33332432938453666,
+  "symmetry": 5,
+  "moved_gt_1e4": 30,
+  "moved_gt_1e2": 29,
+  "moved_gt_1e1": 26,
+  "moved_gt_1e1_all": 59,
+  "max_move": 0.7641448478280335,
+  "max_move_all": 0.7832132236835972,
+  "max_angle_change": 31.208153972929082,
+  "rattler_status_swaps": 57,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "29.3773",
+   "32.0511"
+  ],
+  "prior_only_angles": [
+   "29.4146"
+  ],
+  "contacts": {
+   "symmetry": 5,
+   "edges_ours": 218,
+   "edges_prior": 322,
+   "shared": 139,
+   "ours_only": 79,
+   "prior_only": 183,
+   "rattlers_ours": 49,
+   "rattlers_prior": 18,
+   "rattlers_shared": 5
+  }
+ }
+}

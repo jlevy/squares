@@ -56400,3 +56400,43 @@ evidence:
       program, which share its reader; under the reversed rotation sense, 159 pairs overlap.
       Finite feasibility only.
     source_reviewed: '2026-11-05'
+  - id: E-evand-914-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 175
+      - 204
+      - 260
+      - 268
+      - 293
+      - 303
+      - 304
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel issue 914 2026-11-05]'
+    certificate: packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-05'
+    limitations: >-
+      This atom records the source author's report of 7 exact rational certificates at bb4cc78
+      and of 6 regularized views at their sides. A separate complete repository replay is
+      retained for n = 175, 204, 260, 268, 293, 303 and 304: 7 positives and 14 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 1439796 pair
+      decisions; summed over the 21 jobs, the receipt records 200.09 route CPU seconds and 203.18
+      job wall seconds, the longest job 13.97 seconds. Every positive clears every wall by at
+      least 5.00e-21 and every pair by at least 9.99e-21. The views packet
+      (evand-issue914-views-2026-11-05) replays the 6 views the same way: 18 jobs, 1237776 pair
+      decisions, 160.32 route CPU seconds, every positive accepted and every control refused on
+      both routes. Each packet's sharp controls meet those margins on both routes. Independent
+      review and confirmation remain pending (think-lrj4). The source's own checkers were not
+      run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.

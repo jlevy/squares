@@ -12171,6 +12171,68 @@ sources:
     decides which are recorded. All 3 native jobs have full outcomes. No selected override or
     superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
+- id: evand-issue914-2026-11-05
+  title: >-
+    Evan Daniel's certificates at 175, 204, 260, 268, 293, 303 and 304 at bb4cc78, issue 914
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/bb4cc78e5b35103c1f177db55e9cf08974e66563
+  local: resources/web/evand-issue914-2026-11-05/
+  source_key: '[Daniel issue 914 2026-11-05]'
+  scope:
+    n_values:
+    - 175
+    - 204
+    - 260
+    - 268
+    - 293
+    - 303
+    - 304
+  reviewed: '2026-11-05'
+  source_date: '2026-11-05'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-issue914-2026-11-05/acquisition/claims.json
+  evidence:
+  - E-evand-914-certificate-report
+  notes: >-
+    All 7 complete certificates are retained as the source wrote them, each admitted only where
+    its exact side equals, or rounds up to, the side its source prints. T-267 to T-273 record the
+    in-horizon reports, one entry per count. The ledger of 5 November for this pass
+    (campaign/issue-intake/upper-bounds-914-20261105) records all seven. All 21 native jobs have
+    full outcomes. No selected override or superseded claim is created at this source-only stage;
+    current cases and earlier source ownership remain unchanged.
+- id: evand-issue914-views-2026-11-05
+  title: >-
+    Evan Daniel's regularized views at 175, 204, 268, 293, 303 and 304 at bb4cc78, issue 914
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/bb4cc78e5b35103c1f177db55e9cf08974e66563
+  local: resources/web/evand-issue914-views-2026-11-05/
+  source_key: '[Daniel issue 914 2026-11-05]'
+  scope:
+    n_values:
+    - 175
+    - 204
+    - 268
+    - 293
+    - 303
+    - 304
+  reviewed: '2026-11-05'
+  source_date: '2026-11-05'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-issue914-views-2026-11-05/acquisition/claims.json
+  evidence:
+  - E-evand-914-certificate-report
+  notes: >-
+    The six regularized views issue 914 names beside its certificates, pinned against the copies
+    the evand-issue914-2026-11-05 packet retains at the same commit and admitted at the sides the
+    issue prints. Each states its certificate's exact side, so its claim record ties it with that
+    certificate and it is no further report; T-267, T-268 and T-270 to T-273 cite its replay. All
+    18 native jobs have full outcomes. No selected override or superseded claim is created.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
