@@ -5,7 +5,7 @@ title: "Import Özden: s(94) >= 2493/250 by rescaling Hosono's mixed_n94_L995 on
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l49
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-05T07:01:41.771Z
-updated_at: 2026-11-05T19:03:42.911Z
+updated_at: 2026-11-05T19:04:55.779Z
 started_at: 2026-11-05T07:01:46.219Z
 ---
 Import of jlevy/squares#910 (opened 2026-11-05T06:51:55Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(94) >= 2493/250 = 9.972, above T-262's 1993/200 by 7/1000. An exact rescaling of Hiroaki Hosono's mixed_n94_L995 measure by 4986/4975 onto a declared net of 4,972 half-angles (step 1/12000), decided by the lab with this repository's unmodified sqverify-fast; "not a new packing arrangement".
@@ -42,7 +42,7 @@ Answer bead: this bead.
 
 2026-11-05 ~10:00Z (bold-ritchie-l49): the stage 4 review of record (think-xzxd, tbd-strong-max, separately prompted) accepts the certificate with no defect, F1 to F7 all notes, S3 confirmed; retained on #912 as docs/project/reviews/review-2026-11-05-ozden-s94-9972.md with its programs and receipts under the packet's review/review-2026-11-05/, E-ozden-910-n94-9972-review-sample (sampled, 26 of 4,972 directions, independently re-implemented, clean room), the external_review on the report entry and T-266's reviews: T-266 V0/C1. F4 to F6 fixed in the records; F7 followed by the census control. The census of think-qcms started at 09:50:55Z (detached, nice 19, 2 threads, this branch's census code with #892's enclosure rule; scratchpad/scripts/run_census.sh). Owed after #911 merges: merge origin/main into the branch (rehearsed on local l49-trial-merge at 530a9985d: register T-265 then T-266, #895's note then #910's entry, regenerate views, synopsis row 266/234, record reason 265 -> 266, re-pin). Owed after the census and control pass: E-ozden-910-n94-9972-sqverify-fast-replay with the review as audit_record, T-266's rungs as check_results derives them, n-094's verified lane 1993/200 -> 2493/250 under the house rule, and this reply revised to say so.
 
-2026-11-05 ~19:30Z (bold-ritchie-l49): census and control done (think-qcms). Census 09:50-18:25Z, 4,972/4,972 VERIFIED, 59,955.8 CPU-s (16.65 CPU-h), 30,876 s wall, 2,462,923,881 nodes, least leaf bound 1.0000000000003892 at 3663, exact leaf capture 1.0336; control 18:25-18:36Z CONTROLS_REFUSED (original verified at 3663, 99/100 mutant refused at 4,972/4,972, near-threshold mutant refused; axis enclosure [0.9930559807565953, 0.9930559830055209]). audit_dilated_measure compare against the lab's merged archive: EVERY_DIRECTION_AGREES (4,972 identical on every field the lines keep, timings aside; node totals equal), receipts/replay-comparison.json. On #912 at 79d9946b9: E-ozden-910-n94-9972-sqverify-fast-replay (audit record the stage 4 review), T-266 V3/C3 as check_results derives, n-094's verified lane 1993/200 -> 2493/250 (T-262 superseded there), credit attributions moved to T-266; main 249bb82e7 (#913) merged at ac8b8e0be; DATA_REVISION re-pinned at 3560857ee. The reply below is revised to say so. PR stays a draft until the coordinator's senior review.
+2026-11-05 ~19:05Z (bold-ritchie-l49): census and control done (think-qcms). Census 09:50-18:25Z, 4,972/4,972 VERIFIED, 59,955.8 CPU-s (16.65 CPU-h), 30,876 s wall, 2,462,923,881 nodes, least leaf bound 1.0000000000003892 at 3663, exact leaf capture 1.0336; control 18:25-18:36Z CONTROLS_REFUSED (original verified at 3663, 99/100 mutant refused at 4,972/4,972, near-threshold mutant refused; axis enclosure [0.9930559807565953, 0.9930559830055209]). audit_dilated_measure compare against the lab's merged archive: EVERY_DIRECTION_AGREES (4,972 identical on every field the lines keep, timings aside; node totals equal), receipts/replay-comparison.json. On #912 at 79d9946b9: E-ozden-910-n94-9972-sqverify-fast-replay (audit record the stage 4 review), T-266 V3/C3 as check_results derives, n-094's verified lane 1993/200 -> 2493/250 (T-262 superseded there), credit attributions moved to T-266; main 249bb82e7 (#913) merged at ac8b8e0be; DATA_REVISION re-pinned at 3560857ee. The reply below is revised to say so. PR stays a draft until the coordinator's senior review.
 
 Stage 7: no acknowledgement is owed before the merge. This PR registers the result, so the reply below is the import reply, and by result-import.md stage 7 it follows the merge. Post it only after the PR merges and the deploy is verified: render from main with `check_requests --draft 910` (it refuses off main), check that main and the site say what the reply says (T-266's rungs, n-094's lanes), adjust T-266 if renumbered, post, then record it under #910's replies (kind: final, closing the issue) in the next change. If the census has landed by then, the reply states T-266 confirmed and the verified lane moved; otherwise it names think-qcms as what remains.
 
