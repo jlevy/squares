@@ -30809,6 +30809,123 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 2026-11-05]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
+    /authors/0 span 0:6: the evand/square-packing certificates of issue 914, which the
+    MIT licence of that repository, copyright Evan Daniel, covers.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
+    /credit span 0:6: the evand/square-packing certificates of issue 914, which the MIT
+    licence of that repository, copyright Evan Daniel, covers.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  start: 13
+  end: 19
+  label: Deotte
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
+    /credit span 13:19: issue 914 asks that Chris Deotte be credited for the method, his
+    multi-gadget fault DP, which the author''s fault-line composer implements; the original
+    credit role is retained.'
+  contributor_id: chris-deotte
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  start: 21
+  end: 29
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
+    /credit span 21:29: at 175 issue 914 names the register''s packing, Daniil Ostashev''s
+    as PingYou Ltd and Mishapolk refined it (T-186), as the start; the original credit
+    role is retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: daniil-ostashev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  start: 31
+  end: 42
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  start: 44
+  end: 53
+  label: Mishapolk
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
+    /credit span 44:53: at 175 issue 914 names the register''s packing, which Mykhailo
+    Polkovskyi (Mishapolk) refined (T-186), as the start; the original credit role is
+    retained. Keep finder, improver and solver roles distinct.'
+  contributor_id: mykhailo-polkovskyi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  start: 55
+  end: 65
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
+    /credit span 55:65: at 260 issue 914 credits Kirill Tymchishin''s (kirilltym) s(260)
+    from his public Kaggle notebook as the start, as for issue 845''s 260. No person record
+    exists yet; identity review pending (a profile by name, think-ptkk).'
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

@@ -74,6 +74,20 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         350_000,
         "Complete n=18 certificate record; prepared HTML measures 326,548 bytes.",
     ),
+    "cases/260.html": (
+        355_000,
+        (
+            "A section for each packing that has been the house, each listing every other "
+            "side; prepared HTML measures 305,912 bytes in hosted "
+            "run 42112356624 on 5 November 2026, past the 300,000 record ceiling, once T-269 "
+            "(#914) is registered beside T-265's house section, before any adoption. An "
+            "adoption grows a case page by 27 to 33 KB (cases/204.html's measurements), so "
+            "the ceiling moves to 355,000 as a measured choice: T-269's adoption, which "
+            "think-lrj4 queues, at the larger growth with about 16 KB to spare. Its timing "
+            "was not re-measured; how a page that grows with every adoption scales is "
+            "think-rp0d's question."
+        ),
+    ),
     "cases/204.html": (
         430_000,
         (
@@ -161,8 +175,16 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        1_500_000,
+        1_600_000,
         (
+            "On 5 November 2026 the 273-result page measures 1,510,022 bytes in hosted run "
+            "42112356624, past the 1,500,000 ceiling, when one intake (#914) registers seven "
+            "results, T-267 to T-273, at once; the room the 26 October note expected through "
+            "267 results was used as it said. Measured locally the page is 1,511,394 source "
+            "bytes at a 90th-percentile row of 4,661 bytes. The ceiling moves to 1,600,000 as "
+            "the same measured choice, which leaves 88,606 source bytes, 18 rows at that row "
+            "cost with a margin, so the room runs through 291 results; its timing was not "
+            "re-measured, and the lightening stays think-v1qe's. "
             "On 26 October 2026 the 250-result page measures 1,418,298 bytes, past the "
             "1,400,000 ceiling with T-248 to T-251, at a 90th-percentile row of 4,674 "
             "bytes; recent arrivals live on their own page and cost the archive nothing. "
