@@ -1112,10 +1112,10 @@ def test_each_retained_axis_refusal_is_the_crates_enclosure(
     """At every retained v2 receipt's axis refusal, the walk on the candidate reproduces
     the crate's reported bound to the bit and holds the receipt's exact capture, so the
     rule counts it, including the receipts kept after the constant failed them closed
-    (n26's of 23 October, n39's of 2 November and n94's of 3 November): thirteen
-    measures from six packets on 4 November, n39's and n94's each in two receipts, the
-    kept one and the one this rule passed, beside the instrumented crate's upper ends in
-    `test_sqverify_fast_axis`."""
+    (n26's of 23 October, n39's of 2 November and n94's of 3 November): fourteen
+    measures from seven packets on 5 November, in seventeen receipts, n26's, n39's and
+    n94's each in two, the kept one and the one this rule passed, beside the
+    instrumented crate's upper ends in `test_sqverify_fast_axis`."""
     case = cases()[path.name.split(".control", 1)[0]]
     raw = read_raw(case.candidate)
     x, y = (Fraction(value) for value in item["pose"])
@@ -1711,3 +1711,32 @@ def test_a_directory_report_without_a_run_of_counts_in_its_id_is_refused() -> No
     for ident in ("E-x-446-n26-report", "E-x-446-report"):
         with pytest.raises(SystemExit, match="names no run of counts"):
             census.replay_identity({**shared, "id": ident}, case, relative)
+
+
+def test_the_t132_replay_entry_is_what_the_census_prints() -> None:
+    """T-132's replay entry is `--evidence`'s, field for field, with the stage 4 review of
+    4 November as its audit record. Its follow-up report names the candidate retained in
+    the n29 packet, so the entry takes the report's id, scope and path, and it states no
+    failed control: the control of 4 November passed under #892's enclosure rule on its
+    first run, and the entry names the enclosure its axis refusal lies in."""
+    name = "mixed_n29_L582"
+    case = cases()[name]
+    text = census.evidence_entry(
+        case,
+        FOLDER,
+        entries()[name],
+        audit_record="docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md",
+        date="2026-11-04",
+    )
+    (generated,) = safe_load(text)
+    ident = "E-wand125-fine-net-n29-582-followup-sqverify-fast-replay"
+    assert generated["id"] == ident
+    assert generated["scope"] == {"n_values": [29]}
+    assert generated["certificate"] == str(case.candidate.relative_to(census.PROJECT.parent))
+    register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    (committed,) = (item for item in register["evidence"] if item["id"] == ident)
+    assert generated == committed
+    assert name not in census.CONTROL_HISTORY
+    assert not (FOLDER / case.packet / f"{name}.control-failed-v2.json").exists()
+    assert controls()[name]["status"] == "CONTROLS_REFUSED"
+    assert "[0.9908643538541804, 0.9908643548997059]" in " ".join(text.split())

@@ -750,7 +750,7 @@
           "minimal_polynomial": null,
           "state": "minimal-polynomial"
         },
-        "lower": {"correction":false,"display":"s(29) ≥ 5.810000","evidence":["E-n029-wand125-mixed-581-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"5.81"},
+        "lower": {"correction":false,"display":"s(29) ≥ 5.820000","evidence":["E-wand125-fine-net-n29-582-followup-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"5.82"},
         "n": 29,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {

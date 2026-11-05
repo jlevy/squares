@@ -50,6 +50,7 @@ the platform supplies no direction CPU.
 | `rect_n28_L57225` | T | 28 | 2289/400 | VERIFIED | 203.6 | 203.4 | 1.0001000010341632 | complete | no |
 | `cert_n29_L571` | T | 29 | 571/100 | VERIFIED | 31.7 | unavailable | 1.0001000124838866 | complete | no |
 | `mixed_n29_L581` | M | 29 | 581/100 | VERIFIED | 1632.3 | 1632.1 | 1.0000000000094453 | none | yes |
+| `mixed_n29_L582` | M | 29 | 291/50 | VERIFIED | 9296.0 | 9295.7 | 1.0000000000046825 | none | yes |
 | `rect_n29_L5785` | T | 29 | 1157/200 | VERIFIED | 91.6 | 91.5 | 1.000100003150306 | none | yes |
 | `rect_n29_L579` | T | 29 | 579/100 | VERIFIED | 113.1 | 113.0 | 1.0001000015468267 | complete | no |
 | `rect_n29_L57975` | T | 29 | 2319/400 | VERIFIED | 170.9 | 170.8 | 1.0001000002454083 | complete | no |
@@ -246,7 +247,7 @@ the platform supplies no direction CPU.
 | `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 128.0 | 1.000000000300333 | complete | no |
 | `mixed_n108_L1062` | M | 108 | 531/50 | VERIFIED | 2086.8 | 2086.5 | 1.0000000001765084 | none | yes |
 
-227 of 227 certificates verified; 141 of them are the first complete check of their
+228 of 228 certificates verified; 142 of them are the first complete check of their
 certificate in this repository.
 
 <!-- This document follows common-doc-guidelines.md.

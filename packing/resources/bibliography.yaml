@@ -1801,8 +1801,10 @@ sources:
     note: The later n29 finer-net measure lower-bound report, s(29) >= 291/50, at source 22a23c8a99aa4e9616d596bc2f28555bacbee3dd,
       with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest,
       and its data members are retained in the packet's release/ (2 November 2026). Maintained measure
-      and declared-net premises accepted; the review that reads the certificate, native capture, controls
-      and adoption pending. The enclosing MIT notice does not settle redistribution of the nested verifier,
+      and declared-net premises accepted. The stage 4 review of 4 November read the certificate and
+      accepted it, and the complete native capture and whole-net controls of that day passed, so T-132
+      is V3/C3, re-implemented sharing the producer's components, and n29's lower lanes take 291/50.
+      The enclosing MIT notice does not settle redistribution of the nested verifier,
       which adapts this project's sqverify_fast, so a maintained replay is not another independent implementation.
   - key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
     authors: [Guzhou0806]
