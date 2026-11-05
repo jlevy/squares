@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 154
+version: 155
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -58,7 +58,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-05T07:01:41.771Z
+updated_at: 2026-11-05T07:54:46.940Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -272,3 +272,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-05 00:52 renewal (intake69): no new reports. #908 review accept-with-fixes (F1 #532 summary, F2 n-028 T-192 blocker), with L42 fixing it and the PR held for the owner. Owner asked: (1) replays vs the think-ux1v order; (2) #543 tolerance as adopted by #892.
 
 2026-11-05 01:52 renewal (intake70): no new reports. #909 (T-132 V3/C3 at n29, 291/50) review accept-with-fixes (wording; #908 merges first), with L47 fixing it. #908 and #909 both held blocked:owner-decision.
+
+2026-11-05 07:52 renewal (intake76): #895 answered (vitamoon/vitamoon, CC BY 4.0), so L48 registered T-265 (s(260), 1.99e-10 below T-257) at V0/C0 on #911; strong-max review think-o7ly is running. New #910 (Özden s(94) >= 2493/250, finer net, 4,972 dirs): L49 is importing it as T-266. #908 and #909 held for the owner.
