@@ -3,16 +3,20 @@ type: is
 id: is-01m6n5aresp22hknr0pe9qr8te
 title: Review Yim's 260 certificate (stage 4) and adopt it with both regularizations (#895)
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 2
+version: 3
+delegate: bold-ritchie-l48
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m6jf7ps8jcdka5zx64tpgxxz
+hold: null
+hold_until: null
 created_at: 2026-11-05T06:11:24.761Z
-updated_at: 2026-11-05T07:04:59.390Z
+updated_at: 2026-11-05T08:45:44.716Z
+started_at: 2026-11-05T08:45:44.715Z
 ---
 Stage 4 mathematical review of Kaelan Yim's certificate at 260 (jlevy/squares#895), registered at V0/C0 on lane L48's draft pull request (branch claude/bold-ritchie-xo28us-l48), and, after the review lands on that branch, its adoption at 260 under the house rule with both strong generators' regularization, it being the smallest side reported there.
 
