@@ -55871,8 +55871,9 @@ evidence:
       9399999/100000, core side 24872661/24875000, on a net the candidate declares of 4,972
       half-angles of step 1/12000. It reports this repository's sqverify-fast, unmodified
       at e6e8d577 (crate source d97758bb..., rustc 1.98.0), VERIFIED at all 4,972
-      directions in six native runs whose selected lines make one archive, least certified
-      bound 1.0000000000003892 at direction 3663, and the 99/100 mass mutant refused at
+      directions in six native runs whose selected lines make one archive, the least leaf
+      bound of the search 1.0000000000003892 at direction 3663 (not a margin), and the
+      99/100 mass mutant refused at
       directions 0 and 1198 with an exact witness, a control at two directions and not
       over the whole net. Its exploratory C checker, which is not interval arithmetic, is
       retained and not offered as evidence; it was not run here. The source says AI agents
@@ -55889,6 +55890,74 @@ evidence:
       is a replay here. A diagnostic sample of 13 directions with the census binary
       (receipts/sample-diagnostic.json) agrees with the lab's lines and decides only those
       directions.
+    source_reviewed: '2026-11-05'
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        Claude (AI review), strong tier (tbd-strong-max) at maximum reasoning, the stage 4
+        mathematical lane of the #910 import (think-xzxd), separately prompted and sharing
+        no context with the import lane
+      note: >-
+        Accepted in the stage 4 review of 5 November
+        (docs/project/reviews/review-2026-11-05-ozden-s94-9972.md): the argument from the
+        certificate to the claim is complete given whole-net coverage; every other premise
+        recomputed exactly apart from the crate; 26 of the 4,972 directions decided by
+        clean-room code of its own over their whole quadrants, direction 0 exactly, all
+        verified, the least capture found above 1.0010; the control's witnesses held
+        exactly and the lab's receipts read as data. No defect; F1 to F3 are notes for the
+        author and F4 to F7 for the records lane.
+  - id: E-ozden-910-n94-9972-review-sample
+    claim: lower-bound
+    scope: {n_values: [94]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s94 lower bound 2026-11-05]'
+    certificate: packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/source/certificate/n94-L9972.json.gz
+    replay: >-
+      Through P/run.sh, with PACKING the checkout's packing/ and P
+      packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs,
+      CERT the packet's source/certificate/n94-L9972.json.gz and the inputs that
+      directory's README names: premises.py PACKET HOSONO_GZ OUT must write
+      ALL_CHECKS_HOLD; axis_exact.py CERT OUT must decide direction 0 at least 1;
+      sample.sh CERT sample/ with the 25 directions of out/RUNS.md must write every
+      sample/bnb-rR.json verified; controls.sh CERT controls/ must refuse the 99/100
+      mutant at 1198 and 3663; and poses_exact.py PACKET sample/ receipts-read.json OUT
+      must write ALL_HOLD. The receipts are in the directory's out/.
+    replay_status: passed
+    verifiers:
+      - V-ozden-910-review-premises
+      - V-ozden-910-review-axis
+      - V-ozden-910-review-bnb
+      - V-ozden-910-review-exact
+    independence_record: docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
+    independence:
+      coverage:
+        extent: sample
+        unit: net directions, each decided over its whole quadrant of centres
+        checked: 26
+        of: 4972
+    limitations: >-
+      Sampled, 26 of 4,972 directions, independently re-implemented, clean room. Run here
+      on 5 November 2026 by the stage 4 review (think-xzxd) under CPython 3.14.7 on a
+      shared four-core host, about 42 CPU-minutes. It decided direction 0 in full and
+      exactly: all 29,495,761 vertices of the event grid, least capture 1.003086850384903
+      on the wall edge, in the strip the dilation adds. It decided 25 oblique directions,
+      each over its whole per-bin quadrant, by branch and bound with proved binary64
+      bounds, every one verified: among them 3663, 4971 and 1198, four directions of each
+      of the lab's compacted streams B, C and D, three shared nodes and the two nearest
+      the axis. The least capture it found lies above 1.0010, at 1198; at 3663 the capture
+      is at least 1.0035 everywhere, and at least 1.03004 throughout the crate's least-bound
+      box, decided exactly. It held the lab's control witnesses exactly and refused the
+      99/100 mutant at 1198 and 3663. A sample decides the directions it ran and nothing
+      about the other 4,946 directions' coverage, and supports no rung. Its programs were
+      written from SOUNDNESS.md's mathematics and the certificate's format, with none of
+      the producer's verification code read, by a Claude agent, a system family the
+      author's lab also used.
     source_reviewed: '2026-11-05'
   - id: E-ozden-893-certificate-report
     claim: upper-bound

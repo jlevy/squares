@@ -28,8 +28,9 @@ Hiroaki Hosono’s `mixed_n94_L995`, after #890’s `s(94) ≥ 1993/200` (T-262,
   unmodified (crate source `d97758bb…`, rustc 1.98.0, release, x86_64): six native
   streams A to F, each a successful strict subset of the net (status `PARTIAL`, return
   code 0), and `directions.jsonl.gz`, which takes one line per direction from them by
-  `selection.csv`, VERIFIED at all 4,972 indices, least certified bound
-  1.0000000000003892 at direction 3663. Streams B, C and D were compacted at production
+  `selection.csv`, VERIFIED at all 4,972 indices. The least leaf bound of the search is
+  1.0000000000003892, at direction 3663: where one search leaf stopped, not a margin, as
+  the source’s README says. Streams B, C and D were compacted at production
   to the native proof fields; their pre-compaction digests are the lab’s statements and
   cannot be rehashed from the packet.
 - `controls/` multiplies every mass by $99/100$, refused natively at directions 0 and
@@ -138,7 +139,9 @@ $6.55 \times 10^{-5}$ to $1.062 \times 10^{-3}$, which is F5 of that certificate
   every one verified, threshold 1, finite bound at least 1. Each line is byte for byte
   the line of the stream `selection.csv` names. The selection takes 2,486 lines from A,
   801 from B, 800 each from C and D, 84 from E and 1 from F, as the index states.
-- **The least certified bound** is 1.0000000000003892, at direction 3663.
+- **The least leaf bound of the search** is 1.0000000000003892, at direction 3663. It is
+  not a margin: the stage 4 review finds the capture at least 1.0035 everywhere at 3663,
+  and at least 1.03004 throughout that least-bound box.
 - **Nodes**: the selected rows hold 2,462,923,881 nodes. Of these, 1,416,273,774 are
   recorded row by row; the rest are the totals of the compacted streams B, C and D,
   every row of which is selected. All six streams hold 2,499,604,169 nodes over 5,039
@@ -164,7 +167,9 @@ This is an audit of the lab’s receipts: it decides no coverage, and it is not 
 ## The Replay Here, Priced
 
 The replay this repository runs is `devtools.sqverify_fast_census` over all 4,972
-directions, then `--control` over the whole net. It has not run. The census reads the
+directions, then `--control` over the whole net. It started on 5 November 2026 at
+09:51Z, at two threads under `nice -n 19` with the reviewed binary, and has not finished
+(`think-qcms`). The census reads the
 packet’s certificate (`MIXED_FILES`, `mixed_n94_L9972`), and the producer relation is
 `same-implementation` (`SAME_CRATE_PACKETS`), as for #890.
 
@@ -177,7 +182,8 @@ of wall.
 
 - Every direction verified, with its certified bound equal to the lab’s selected line.
 - At the 8 directions where the lab’s line records nodes, the nodes are equal too.
-- Direction 3663’s bound is 1.0000000000003892, the archive’s least.
+- Direction 3663’s least leaf bound is 1.0000000000003892, the archive’s least, which is
+  where a search leaf stopped and not a margin.
 
 The price:
 
@@ -196,17 +202,52 @@ the directions it ran.
 
 ## The Stage 4 Review
 
-Not yet run. A separately prompted stage 4 mathematical review at the strongest tier is
-briefed on its own bead; the import lane does not review its own import.
+The stage 4 mathematical review of 5 November
+([review](../../../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)), by a
+separately prompted lane at the strongest tier (`think-xzxd`), accepts the certificate
+with no defect and confirms the draft score S3. It shared no context with the import
+lane. Its programs, their README with the independence record, and its receipts are
+under [review/review-2026-11-05/](review/review-2026-11-05/programs/README.md):
+
+- Every premise but whole-net coverage is recomputed exactly, apart from the crate and
+  from this packet’s audit tool.
+- Clean-room code of its own, written from `SOUNDNESS.md`’s mathematics without reading
+  any checker’s source, decided 26 of the 4,972 directions over their whole quadrants.
+  Direction 0 was decided exactly (least capture 1.003086850384903, on the wall edge, in
+  the strip the dilation adds), and 25 oblique directions with proved bounds. All are
+  verified, and the least capture found lies above 1.0010, at 1198.
+- It held the lab’s control witnesses exactly and read the lab’s archive as data: the
+  67 directions run twice agree in bound and node count, and compaction removed nothing
+  the proof needs.
+
+That run is `E-ozden-910-n94-9972-review-sample`: sampled, 26 of 4,972 directions,
+independently re-implemented, clean room. A sample sets no rung. Its findings:
+
+- **F1 to F3** are notes for the author: the C front end’s maximum with the core’s
+  half-width never binds; “independent implementation” means independent of the lab’s
+  exploratory checker; and stream E’s rule (indices 0 to 19, round(4971k/128), and 1195
+  and 2590) is stated only in the lab’s audit code.
+- **F4.** Item 1 of the 6 October checklist asks for `scaling_factor` 1. This file has no
+  such key, and the item is read as “absent or 1”, which is what the dilation audit
+  checks (`scaling_factor_absent_or_one`).
+- **F5.** The replay here, when it lands, is *reproduced with the producer’s code*, and
+  the review’s sample is stated beside the rung as the independent part.
+- **F6.** The least leaf bound 1.0000000000003892 is not a margin; this README says so
+  where it quotes it.
+- **F7.** At the axis the crate’s bound sits $1.1357 \times 10^{-9}$ below the exact
+  least vertex, and $1.1245 \times 10^{-9}$ for the mutant. So the whole-net control is
+  judged by the census’s enclosure rule (#892), not the old constant of $10^{-9}$.
+
+The review also lists, items 1 to 8, what the census row and its control must show.
 
 ## What Is Not Established
 
-- **The coverage, here.** The lab’s receipts are audited and 13 directions were
-  sampled; this repository has not decided the certificate at every direction, and no
-  review here has read it.
-- **A second implementation.** The lab ran this repository’s checker, so the replay here
-  will reproduce it with the producer’s code; the exploratory C checker is retained and
-  was not run.
+- **The coverage at every direction, here.** The lab’s receipts are audited, 13
+  directions were sampled with the census binary and 26 decided by the review’s own
+  code; the complete census (`think-qcms`) has not finished.
+- **A second complete implementation.** The lab ran this repository’s checker, so the
+  replay here will be reproduced with the producer’s code; the review’s independent code
+  decided a sample, and the exploratory C checker is retained and was not run.
 - **Optimality** of any kind: a lower-bound certificate says nothing about the 10 × 10
   grid’s side.
 

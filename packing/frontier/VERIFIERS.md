@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **232** programs: **53** external and **179** first-party; **154** decide claims and **78** check premises.
-- **691** of **875** evidence entries name the programs that verified them: 325 independently re-implemented, 294 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **236** programs: **53** external and **183** first-party; **157** decide claims and **79** check premises.
+- **692** of **876** evidence entries name the programs that verified them: 326 independently re-implemented, 294 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -82,6 +82,10 @@ second implementation agrees.
 | [`V-ozden-integer-checker`](#v-ozden-integer-checker) | independent.py with intcheck_final.cpp | Doğa Özden's research lab (an OpenAI Codex agent) | external | decides | 1 | 1 |
 | [`V-ozden-890-review-axis`](#v-ozden-890-review-axis) | dm_axis.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-ozden-890-review-sample`](#v-ozden-890-review-sample) | dm_sample.py and dm_receipts.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-910-review-axis`](#v-ozden-910-review-axis) | axis_exact.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-910-review-bnb`](#v-ozden-910-review-bnb) | bnb.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-910-review-exact`](#v-ozden-910-review-exact) | bnb_exact.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 106 | 96 |
@@ -1273,6 +1277,66 @@ Decides the exact capture at single poses of a format M measure on its declared 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-ozden-890-n94-9965-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 600: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-910-review-axis`
+
+**axis_exact.py, with xzcommon.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides direction 0 of a format M measure in full and in exact integers: the capture, bilinear on each cell of the event grid, at every grid vertex of the per-bin quadrant over one common denominator, swept column by column with exact slope updates. Ran on #910's certificate, where it decided direction 0 at least 1 (29,495,761 vertices, least capture 1.003086850384903 on the wall edge, in the strip the dilation adds).
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/axis_exact.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/axis_exact.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-05-ozden-s94-9972.md`](../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #910 import (think-xzxd), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents among others. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that read no checker's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-910-n94-9972-review-sample` | replayed here | independently re-implemented, clean-room | sample, 26 of 4,972: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-910-review-bnb`
+
+**bnb.py, run by sample.sh, with xzcommon.py** · Squares Project (Levy) · first-party · decides · Python · interval-certified
+
+Decides one oblique direction of a format M measure over its whole per-bin quadrant, or a named region, by branch and bound with proved binary64 bounds: rectangles classified inside or outside by triangle inequalities with slack, boundary captures bounded below through the concave vertical section, the capture's gradient enclosed edge by edge, and a stated error budget. Ran on #910's certificate at 25 directions, all verified, and refused the 99/100 mutant at 1198 and 3663.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/sample.sh`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/sample.sh), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-05-ozden-s94-9972.md`](../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #910 import (think-xzxd), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents among others. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that read no checker's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-910-n94-9972-review-sample` | replayed here | independently re-implemented, clean-room | sample, 26 of 4,972: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-910-review-exact`
+
+**bnb_exact.py, capture_exact.py and poses_exact.py, with xzcommon.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides in exact rationals the capture of a format M measure at named poses, by clipping each rectangle by the core, and over one small region of one direction by the branch and bound's steps without an error budget: the controls' witnesses, the sampled directions' least centres with their mutant's, and the region of the crate's least-bound box at 3663 (at least 1.03004 throughout). Decides those poses and that region only.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb_exact.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb_exact.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/capture_exact.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/capture_exact.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/poses_exact.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/poses_exact.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-05-ozden-s94-9972.md`](../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #910 import (think-xzxd), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents among others. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that read no checker's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-910-n94-9972-review-sample` | replayed here | independently re-implemented, clean-room | sample, 26 of 4,972: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-910-review-premises`
+
+**premises.py, with xzcommon.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes in exact rationals, apart from the crate and the import lane's tool, every premise of the measure-capture theorem but coverage for a format M certificate on its declared net: the file, the 6,720 expanded rectangles and the box's eight symmetries, the mass, lemma N0's (a) to (e), the net's covering of tan(pi/8), the dilation against its base and the regeneration of the text and gzip by a rule of its own, and the 99/100 mutant's construction.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/premises.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/premises.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-05-ozden-s94-9972.md`](../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #910 import (think-xzxd), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents among others. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that read no checker's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-910-n94-9972-review-sample` | replayed here | independently re-implemented, clean-room | sample, 26 of 4,972: net directions, each decided over its whole quadrant of centres | - |
 
 ### `V-check-basic-bounds`
 

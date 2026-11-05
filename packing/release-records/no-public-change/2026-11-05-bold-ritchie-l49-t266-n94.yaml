@@ -27,7 +27,9 @@ reason: >-
   render_n11_threshold_bound_review and render_n11_lower_bounds_explainer
   --prepare-math, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), 69 files
   each: from this tree, and with that main's results.yaml, source-coverage.yaml,
-  result-requests.yaml and site_resources.py swapped in. The only difference, in the
+  result-requests.yaml and site_resources.py swapped in; rendered again from this tree
+  with the stage 4 review of 5 November recorded (T-266 at V0/C1), byte-identical to the
+  first render of this tree. The only difference, in the
   explainer's Markdown and HTML, is the live register count beside T-018, 264 results
   registered so far and now 265, which follows the site's data and is not a revision of
   the paper (as the 0141 record says). No PDF was printed; each prints from that HTML.

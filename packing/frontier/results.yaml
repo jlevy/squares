@@ -38568,7 +38568,12 @@ results:
       directions. Here the premises, lemma N0 on the declared net and the dilation were
       recomputed exactly from the retained bytes, and the lab's receipts audited: every
       direction once, each selected line its run's, of reviewed crate source. The coverage
-      has not yet been decided here.
+      has not yet been decided here at every direction.
+
+      The stage 4 mathematical review of 5 November accepts the argument with no defect:
+      every premise but whole-net coverage recomputed exactly, and 26 of the 4,972
+      directions decided by clean-room code of its own over their whole quadrants, all
+      verified, the least capture found above 1.0010.
 
       The value is above T-262's 1993/200, the verified and reported lower bound at n = 94,
       by 7/1000.
@@ -38581,7 +38586,7 @@ results:
       was posted on his behalf by his AI agent.
     scope: {n_values: [94]}
     verification: V0
-    confirmation: C0
+    confirmation: C1
     significance:
       score: 3
       rationale: >-
@@ -38590,16 +38595,22 @@ results:
         certificate kind and route of T-091, T-178 and T-262, with no new technique, at S3
         as they are.
       scored: '2026-11-05'
-      by: the registering lane's draft (think-pi8b), for the stage 4 review to confirm
+      by: >-
+        the stage 4 review of 5 November
+        (docs/project/reviews/review-2026-11-05-ozden-s94-9972.md), confirming the
+        registering lane's draft (think-pi8b)
     novelty: previously-published
     attribution:
       source_keys: ['[Özden s94 lower bound 2026-11-05]']
       published: '2026-11-05'
     composition: >-
-      One reported certificate on its reported entry. The source decided it with this
-      repository's sqverify-fast, so a census replay here would reproduce it with the
-      producer's code; the source's exploratory C checker, which is not interval
-      arithmetic, is retained and not run.
+      One reported certificate on its reported entry, with the stage 4 review of 5
+      November. The source decided it with this repository's sqverify-fast, so a census
+      replay here would be reproduced with the producer's code; the source's exploratory
+      C checker, which is not interval arithmetic, is retained and not run. The review's
+      own clean-room programs sampled 26 of the 4,972 directions, each decided over its
+      whole quadrant, independently re-implemented; a sample cited by the case record
+      that sets no rung.
     evidence: [E-ozden-910-n94-9972-report]
     artifacts:
       - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/README.md
@@ -38608,13 +38619,15 @@ results:
       - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/dilation-audit.json
       - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/native-receipt-audit.json
       - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/sample-diagnostic.json
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/README.md
       - packing/devtools/audit_dilated_measure.py
+      - docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
     next_rung: >-
       C3 needs a complete sqverify-fast census run at all 4,972 directions from the retained
-      candidate, with its whole-net control receipt (think-qcms, priced at about 19 CPU-hours
-      and runnable); the verified lane at n = 94 needs a stage 4 review that reads this
-      certificate (think-xzxd), by the checklist of the 6 October declared-net soundness
-      review.
+      candidate, with its whole-net control receipt judged by the census's enclosure rule
+      at the axis (think-qcms, priced at about 19 CPU-hours and running), by the checklist
+      of the 6 October declared-net soundness review as the stage 4 review of 5 November
+      applies it; the verified lane at n = 94 then takes it, the review being recorded.
     unfinished_confirmations:
       - what: >-
           the complete sqverify-fast census of the retained certificate at all 4,972
@@ -38635,6 +38648,42 @@ results:
     notes: >-
       Registered on the day of the report from the packet's retained bytes. The case
       record's reported lower lane takes 2493/250; its verified lane keeps T-262's 1993/200.
+
+      The stage 4 review of 5 November (think-xzxd) accepts the certificate with no defect
+      and confirms the draft score. F1 to F3 are notes for the author.
+
+      Its F4 reads item 1 of the 6 October checklist, "scaling_factor 1", as absent or 1
+      for this file, which has no such key (the packet's dilation audit checks
+      scaling_factor_absent_or_one). Its F5 sets the words for the replay: reproduced with
+      the producer's code, with its own sample stated beside the rung as independently
+      re-implemented.
+
+      Its F6: the archive's least certified bound, 1.0000000000003892 at direction 3663,
+      is the least leaf bound of the search and not a margin; the least capture the review
+      found is above 1.0010. Its F7: the whole-net control is judged at the axis by the
+      census's enclosure rule (#892), since the crate's axis bound sits 1.1357e-9 below the
+      exact least vertex (1.1245e-9 for the mutant).
+    reviews:
+      - path: docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
+        kind: adversarial
+        reviewer: >-
+          Claude (AI review), strong tier (tbd-strong-max) at maximum reasoning, the stage
+          4 mathematical lane of the #910 import (think-xzxd), separately prompted and
+          sharing no context with the import lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-05'
+        scope: >-
+          The measure-capture argument re-derived on the declared net (lemma N0, the
+          per-bin domain, the quarter turn, the counting step); every premise but coverage
+          recomputed exactly apart from the crate and the import lane's tool; what the
+          dilation carries and does not; 26 directions decided in full by clean-room code,
+          direction 0 exactly and 25 with proved bounds; the lab's archive and control read
+          as data and its witnesses held exactly; what the census row and its control must
+          show by the 6 October declared-net checklist; compared with the review of #890's
+          certificate after the findings were frozen.
+        verdict: accepted
+        covers: [T-266]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
