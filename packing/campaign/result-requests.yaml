@@ -28202,7 +28202,8 @@ issues:
     title: Improved upper bound for s(260)
     author: vitamoon
     opened: '2026-11-04'
-    state: open
+    state: closed
+    closed: '2026-11-05'
     kind: result-report
     triage: done
     summary: >-
@@ -28233,7 +28234,7 @@ issues:
       improver, both strong generators' runs deciding the new witness no better than the axis
       tool's view, and its rigidity block derived again. The posters hold Yim's name off their
       credit block until the next infographics cut (think-hgpg).
-    read_through: '2026-11-05T05:31:32Z'
+    read_through: '2026-11-05T05:31:52Z'
     results:
     - key: n260-yim
       claim: >-
@@ -28260,6 +28261,25 @@ issues:
       kind: acknowledgement
       reported:
       - result: n260-yim
+    - url: https://github.com/jlevy/squares/issues/895#issuecomment-6658518613
+      date: '2026-11-05'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n260-yim
+        id: T-265
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n260-yim
+        id: E-yim-895-exact-feasibility
+        status: confirmed
+      - result: n260-yim
+        id: E-yim-895-review-exact-feasibility
+        status: confirmed
+      - result: n260-yim
+        id: E-yim-895-certificate-report
     awaiting_author:
     - question: >-
         Would the author commit n260.cert.txt, unchanged, to a public GitHub repository and
@@ -28291,6 +28311,34 @@ issues:
       reply of 5 November was read into the record by lane L48, which retained the file the
       reply names and registered it; the reply that follows retention is drafted on
       think-qclj and waits for the records pull request to merge.
+
+      Closed on 5 November 2026 with the final reply (issuecomment-6658518613, posted at
+      12:55:20Z), after #911 merged as 004fd4309 and its Pages deployment passed (run
+      42028983208, deploy job 127254200191, verify-deployment job 127254395902, 6,073 of
+      6,073 checks). The reply was rendered with check_requests --draft 895 from that main
+      and reconciled with think-qclj's draft of 5 November, whose acknowledgements,
+      findings and four questions it keeps: the review's F5, that the near-upright
+      squares' turns of about -2.4e-12 radians are not needed and cost about 1.46e-11 of
+      side, stated for 146 of the 155 near-upright squares as the review measures it
+      rather than the draft's "every"; and F11, that the file's identity with the 4
+      November attachment rests on the author's word. It adds the rendered register
+      block, which names T-265 at V3/C3 (confirmed and current),
+      E-yim-895-exact-feasibility and E-yim-895-review-exact-feasibility, and states the
+      report entry through T-265's word, as #893's reply did; and that the
+      atlas posters carry the improvement credit when the next infographics cut redraws
+      them (think-hgpg). It read back identical to what was posted, and the issue was
+      closed as completed at 12:55:29Z. The questions are informational and hold nothing
+      open. The deployed pages were not fetched from the session host;
+      verify-deployment checked them.
+
+      The author's reply (issuecomment-6650567350) was re-read at 12:56Z on 5 November,
+      after the intake sweep listed it as edited after read_through. Its one edit, at
+      05:31:52Z, twenty seconds after posting, is the one the packet and the
+      awaiting_author note already name, and its current text is what the packet quotes:
+      the CC BY 4.0 grant with attribution to Kaelan Yim, the link to
+      vitamoon/vitamoon/blob/main/n260.cert, and the stray ": ." the review notes. The
+      licence, the file and the claim are unchanged, so read_through moves to the edit,
+      05:31:52Z.
   - number: 910
     title: "s(94) ≥ 2493/250 = 9.972 — rescaled Hosono density certificate and exhaustive receipts"
     author: kenaznia-doga
