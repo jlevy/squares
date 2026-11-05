@@ -30689,6 +30689,54 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim s260 upper bound 2026-11-05]'
+    field: /authors/0
+  expected_text: Yim
+  start: 0
+  end: 3
+  label: Yim
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim s260 upper bound 2026-11-05]'
+    field: /credit
+  expected_text: Yim after Daniel, Tymchishin
+  start: 0
+  end: 3
+  label: Yim
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim s260 upper bound 2026-11-05]'
+    field: /credit
+  expected_text: Yim after Daniel, Tymchishin
+  start: 10
+  end: 16
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim s260 upper bound 2026-11-05]'
+    field: /credit
+  expected_text: Yim after Daniel, Tymchishin
+  start: 18
+  end: 28
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

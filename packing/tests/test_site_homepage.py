@@ -1509,7 +1509,11 @@ def test_every_line_of_the_log_stays_in_its_day_with_every_day_open(
     assert all(
         link == {"white_space": "nowrap", "numerals": "tabular-nums"} for link in reading["ids"]
     )
-    assert reading["others"]
+    # The home page's window holds only the newest days, which may log results and house
+    # moves alone (on 5 November 2026 its three days held T-262 to T-265 and two moves),
+    # so only the Changelog page, which holds every day, must show a change's own link.
+    if name == render_changelog.CHANGELOG_PAGE:
+        assert reading["others"]
     assert all(link["white_space"] != "nowrap" for link in reading["others"])
 
 
