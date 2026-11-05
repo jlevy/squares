@@ -3,9 +3,9 @@ type: is
 id: is-01m6jf7ps8jcdka5zx64tpgxxz
 title: "Import Yim: s(260) <= 16.6339825019226, 1.99e-10 below T-257, attachment-only certificate (#895)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l48
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-04T05:06:47.208Z
-updated_at: 2026-11-05T09:57:42.644Z
+updated_at: 2026-11-05T13:19:29.320Z
 started_at: 2026-11-04T05:07:17.344Z
+closed_at: 2026-11-05T13:19:29.319Z
+close_reason: "T-265 reviewed (strong-max), adopted at V3/C3 as the house at 260 in https://github.com/jlevy/squares/pull/911 (merged 004fd4309); #895 answered and closed, recorded in https://github.com/jlevy/squares/pull/913 (merged 249bb82e7)."
+resolution: null
+duplicate_of: null
 ---
 Import of jlevy/squares#895 (opened 2026-11-04T02:15:02Z by vitamoon, Kaelan Yim): s(260) <= 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626 (about 16.6339825019226141), about 1.99e-10 below the case's house, Evan Daniel's #845 certificate (T-257) at 16.6339825021218840.
 
