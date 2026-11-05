@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 156
+version: 157
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -58,7 +58,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-05T08:54:26.683Z
+updated_at: 2026-11-05T09:54:10.724Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -276,3 +276,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-05 07:52 renewal (intake76): #895 answered (vitamoon/vitamoon, CC BY 4.0), so L48 registered T-265 (s(260), 1.99e-10 below T-257) at V0/C0 on #911; strong-max review think-o7ly is running. New #910 (Özden s(94) >= 2493/250, finer net, 4,972 dirs): L49 is importing it as T-266. #908 and #909 held for the owner.
 
 2026-11-05 08:52 renewal (intake77): T-265 (#911) stage-4 review accepted (S2; further arrangement; 2 minor record fixes); L48 is mapping it and adopting at 260. T-266 (#912, Özden s(94) 9.972) registered V0/C0; replay priced 19-33 CPU-h (runnable); strong-max review think-xzxd is running; CI needs #911 first.
+
+2026-11-05 09:52 renewal (intake78): T-266 stage-4 review accept (S3; F7: axis needs the #892 enclosure rule, ties #543 to n94). L49 started the T-266 census (19-33 CPU-h). L48 adopting T-265 on #911.
