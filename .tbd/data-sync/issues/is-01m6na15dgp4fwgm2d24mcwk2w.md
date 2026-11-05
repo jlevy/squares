@@ -3,9 +3,9 @@ type: is
 id: is-01m6na15dgp4fwgm2d24mcwk2w
 title: "Validate: Özden s(94) >= 2493/250 (mixed_n94_L9972), census of all 4,972 directions with whole-net controls (~19 CPU-h, runnable after review) (#910)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l49
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m6n86trbv1javs88wtdd2j24
 hold: null
 hold_until: null
 created_at: 2026-11-05T07:33:33.232Z
-updated_at: 2026-11-05T19:03:42.182Z
+updated_at: 2026-11-05T20:36:12.519Z
 started_at: 2026-11-05T19:02:49.768Z
+closed_at: 2026-11-05T20:36:12.519Z
+close_reason: T-266 census VERIFIED 4,972/4,972 and control refused; recorded at V3/C3 in https://github.com/jlevy/squares/pull/912 (merged b099992a9).
+resolution: null
+duplicate_of: null
 ---
 Validation part of think-pi8b for #910 (T-266, registered at V0/C0 on the intake PR of lane L49). Record-changing: with the stage 4 review (its own bead under think-pi8b), this is what moves n-094's verified lower lane from T-262's 1993/200 to 2493/250.
 
