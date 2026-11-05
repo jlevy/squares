@@ -1,0 +1,38 @@
+{
+ "rows": [
+  {
+   "r": 1,
+   "poses": 12,
+   "max_abs_estimate_minus_exact": 6.069686191398404e-13,
+   "least_exact_minus_lower_bound": 2.7437644505970154e-08,
+   "gradient_enclosures_containing_difference_quotient": "48/48",
+   "classification_disagreements": 0
+  },
+  {
+   "r": 3663,
+   "poses": 12,
+   "max_abs_estimate_minus_exact": 7.478196392798032e-13,
+   "least_exact_minus_lower_bound": 1.793312170542417e-11,
+   "gradient_enclosures_containing_difference_quotient": "48/48",
+   "classification_disagreements": 0
+  },
+  {
+   "r": 1198,
+   "poses": 12,
+   "max_abs_estimate_minus_exact": 6.454706202719663e-13,
+   "least_exact_minus_lower_bound": 3.324450181160669e-11,
+   "gradient_enclosures_containing_difference_quotient": "48/48",
+   "classification_disagreements": 0
+  },
+  {
+   "r": 4971,
+   "poses": 12,
+   "max_abs_estimate_minus_exact": 7.469827848776284e-13,
+   "least_exact_minus_lower_bound": 4.9488215070136914e-12,
+   "gradient_enclosures_containing_difference_quotient": "48/48",
+   "classification_disagreements": 0
+  }
+ ],
+ "all_hold": true,
+ "cpu_seconds": 2.9700749760000003
+}

@@ -223,6 +223,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s94-lower-bound-9972",
+        "Doğa Özden",
+        (
+            "The same measure dilated onto a 4,972-direction net: s(94) >= 2493/250,"
+            " reported here (T-266)."
+        ),
+    ),
+    (
         "https://github.com/kenaznia-doga/s299-upper-bound",
         "Doğa Özden",
         (

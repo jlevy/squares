@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **233** programs: **53** external and **180** first-party; **155** decide claims and **78** check premises.
-- **693** of **877** evidence entries name the programs that verified them: 326 independently re-implemented, 295 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **237** programs: **53** external and **184** first-party; **158** decide claims and **79** check premises.
+- **695** of **880** evidence entries name the programs that verified them: 327 independently re-implemented, 296 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -82,6 +82,10 @@ second implementation agrees.
 | [`V-ozden-integer-checker`](#v-ozden-integer-checker) | independent.py with intcheck_final.cpp | Doğa Özden's research lab (an OpenAI Codex agent) | external | decides | 1 | 1 |
 | [`V-ozden-890-review-axis`](#v-ozden-890-review-axis) | dm_axis.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-ozden-890-review-sample`](#v-ozden-890-review-sample) | dm_sample.py and dm_receipts.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-910-review-axis`](#v-ozden-910-review-axis) | axis_exact.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-910-review-bnb`](#v-ozden-910-review-bnb) | bnb.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-910-review-exact`](#v-ozden-910-review-exact) | bnb_exact.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 107 | 97 |
@@ -173,7 +177,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 4 | 4 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 169 | 33 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 170 | 34 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 8 | 8 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 12 | 11 |
@@ -1274,6 +1278,66 @@ Decides the exact capture at single poses of a format M measure on its declared 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-ozden-890-n94-9965-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 600: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-910-review-axis`
+
+**axis_exact.py, with xzcommon.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides direction 0 of a format M measure in full and in exact integers: the capture, bilinear on each cell of the event grid, at every grid vertex of the per-bin quadrant over one common denominator, swept column by column with exact slope updates. Ran on #910's certificate, where it decided direction 0 at least 1 (29,495,761 vertices, least capture 1.003086850384903 on the wall edge, in the strip the dilation adds).
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/axis_exact.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/axis_exact.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-05-ozden-s94-9972.md`](../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #910 import (think-xzxd), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents among others. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that read no checker's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-910-n94-9972-review-sample` | replayed here | independently re-implemented, clean-room | sample, 26 of 4,972: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-910-review-bnb`
+
+**bnb.py, run by sample.sh, with xzcommon.py** · Squares Project (Levy) · first-party · decides · Python · interval-certified
+
+Decides one oblique direction of a format M measure over its whole per-bin quadrant, or a named region, by branch and bound with proved binary64 bounds: rectangles classified inside or outside by triangle inequalities with slack, boundary captures bounded below through the concave vertical section, the capture's gradient enclosed edge by edge, and a stated error budget. Ran on #910's certificate at 25 directions, all verified, and refused the 99/100 mutant at 1198 and 3663.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/sample.sh`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/sample.sh), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-05-ozden-s94-9972.md`](../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #910 import (think-xzxd), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents among others. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that read no checker's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-910-n94-9972-review-sample` | replayed here | independently re-implemented, clean-room | sample, 26 of 4,972: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-910-review-exact`
+
+**bnb_exact.py, capture_exact.py and poses_exact.py, with xzcommon.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides in exact rationals the capture of a format M measure at named poses, by clipping each rectangle by the core, and over one small region of one direction by the branch and bound's steps without an error budget: the controls' witnesses, the sampled directions' least centres with their mutant's, and the region of the crate's least-bound box at 3663 (at least 1.03004 throughout). Decides those poses and that region only.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb_exact.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb_exact.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/capture_exact.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/capture_exact.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/poses_exact.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/poses_exact.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-05-ozden-s94-9972.md`](../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #910 import (think-xzxd), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents among others. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that read no checker's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-910-n94-9972-review-sample` | replayed here | independently re-implemented, clean-room | sample, 26 of 4,972: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-ozden-910-review-premises`
+
+**premises.py, with xzcommon.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes in exact rationals, apart from the crate and the import lane's tool, every premise of the measure-capture theorem but coverage for a format M certificate on its declared net: the file, the 6,720 expanded rectangles and the box's eight symmetries, the mass, lemma N0's (a) to (e), the net's covering of tan(pi/8), the dilation against its base and the regeneration of the text and gzip by a rule of its own, and the 99/100 mutant's construction.
+
+- Source: [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/premises.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/premises.py), [`packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py`](../../packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-05-ozden-s94-9972.md`](../../docs/project/reviews/review-2026-11-05-ozden-s94-9972.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #910 import (think-xzxd), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The author's lab used Claude agents among others. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that read no checker's source.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-910-n94-9972-review-sample` | replayed here | independently re-implemented, clean-room | sample, 26 of 4,972: net directions, each decided over its whole quadrant of centres | - |
 
 ### `V-check-basic-bounds`
 
@@ -2558,11 +2622,11 @@ No evidence entry names it yet.
 
 **devtools.audit_dilated_measure** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Recomputes in exact rationals, from a packet's retained certificate and apart from the crate, the premises of a format M certificate that dilates a retained one onto a declared net: the file's shape, the masses and containment, the total n - 1/100000, lemma N0's (a) to (e), the dilation row by row against the base, and the regeneration of the certificate's JSON text from the base by the source's stated rule; then compares the census capture with the producer's sqverify-fast receipts direction by direction. It decides no coverage; sqverify-fast does.
+Recomputes in exact rationals, from a packet's retained certificate and apart from the crate, the premises of a format M certificate that dilates a retained one onto a declared net: the file's shape, the masses and containment, the total n - 1/100000, lemma N0's (a) to (e), the dilation row by row against the base, and the regeneration of the certificate's JSON text from the base by the source's stated rule; then compares the census capture with the producer's sqverify-fast receipts direction by direction, or, where the producer's receipts are an archive of several runs, with the archive's selected line at every direction of the declared net on every field the line keeps and with the node total of an archive whose audit holds. Its receipts command audits a producer's archive of several native runs: each run's rows are its declared scope, its summary states the certificate's premises and a build of reviewed source, each direction of the net is held once, verified, by a line equal to its run's, and a mass-scaled control's witnesses are recomputed by check_sqverify_fast.mixed_exact. It decides no coverage; sqverify-fast does.
 
 - Source: [`packing/devtools/audit_dilated_measure.py`](../../packing/devtools/audit_dilated_measure.py), [`packing/tests/test_audit_dilated_measure.py`](../../packing/tests/test_audit_dilated_measure.py)
 - Versions run: this repository's commits, which Git holds
-- Note: Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after reading the certificate, the source's README and tools/rescale.py as data. Its receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in the ozden-s94-lower-bound-2026-11-03 packet.
+- Note: Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after reading the certificate, the source's README and tools/rescale.py as data, and extended by lane L49 on 5 November (think-pi8b) for #910: that source's canonical rescale rule, the growth at the nodes the two nets share, the receipts command, and compare's archive mode. Its receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in the ozden-s94-lower-bound-2026-11-03 packet, and receipts/dilation-audit.json, receipts/native-receipt-audit.json and receipts/replay-comparison.json in the ozden-s94-lower-bound-9972-2026-11-05 packet.
 
 No evidence entry names it yet.
 
@@ -3181,6 +3245,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-wand125-fine-net-n37-64975-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-178 |
 | `E-wand125-fine-net-n39-66625-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-176 |
 | `E-ozden-890-n94-9965-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 600 of 600: complete legal core-centre domains at every declared-net direction | T-262 |
+| `E-ozden-910-n94-9972-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 4,972 of 4,972: complete legal core-centre domains at every declared-net direction | T-266 |
 
 ### `V-replay-chelokot-lean`
 

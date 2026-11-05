@@ -426,6 +426,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-104",
         "T-105",
         "T-106",
+        # T-266's s(94) >= 2493/250 supersedes Özden's 1993/200 (T-262) at n = 94, its
+        # one count, in both lanes.
+        "T-262",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets

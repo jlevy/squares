@@ -1,0 +1,15 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+r: 3663
+region: ['9295432194846887935/1152921504606846976', '9305096951176253441/1152921504606846976', '15382165288344420351/2305843009213693952', '15391830044673785857/2305843009213693952']
+region_float: [8.062502223875757, 8.07088506372283, 6.6709508092616545, 6.675142229185191]
+region_in_quadrant: True
+threshold: 1
+status: verified
+boxes: 1
+accepted: 1
+least_exact_bound: 1.0300449806526146
+least_exact_bound_rational_digits: 2269
+least_centre_capture: 1.0336467437483632
+least_centre_at: ['2270572405520403/281474976710656', '1878295613587537/281474976710656']
+cpu_seconds: 0.08480178799999999
+cpu: user 0.338 s, sys 0.021 s, wall 0.363 s

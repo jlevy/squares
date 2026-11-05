@@ -679,8 +679,8 @@ Ranked by gap—the best-known packing minus the verified lower bound, which is 
 | --- | --- | --- | --- |
 | 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Overbeck |
 | 31 | 0.0225 | grid | $6^2 - 5$, carried to $\frac{2391}{400}$ by Hosono after Tokoharu and Levy (T-232) |
+| 94 | 0.0280 | grid | $10^2 - 6$, carried to $\frac{2493}{250}$ by Özden after Hosono, Tokoharu and Levy (T-266) |
 | 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
-| 94 | 0.0350 | grid | $10^2 - 6$, carried to $\frac{1993}{200}$ by Özden after Hosono, Tokoharu and Levy (T-262) |
 | 27 | 0.0521 | Göbel | carried to $\frac{1131}{200}$ by Hosono after Tokoharu and Levy (T-233) |
 | 19 | 0.0581 | Wainwright | $5^2 - 6$, carried to $\frac{1931}{400}$ by Hosono after Tokoharu and Levy (T-233) |
 
@@ -718,7 +718,9 @@ Doğa Özden’s dilation of Hosono’s certificate passed and its verified floo
 $1993/200$ (T-262). Later that day T-233’s four fine-net replays were mapped, once its
 $n = 26$ control passed under the census’s enclosure rule: $n = 27$ entered fifth, at
 $0.0521$ from $0.0636$, $n = 19$ narrowed from $0.0606$ to $0.0581$, and $n = 75$, at
-$0.0600$, left it.
+$0.0600$, left it. On 2026-11-05 $n = 94$ narrowed again, from $0.0350$ to $0.0280$, and
+passed $n = 12$ for third, when the census replay and whole-net control of Özden’s
+second dilation passed and its verified floor rose to $2493/250$ (T-266).
 
 With Bentz’s $s(6)$, $s(13)$ and $s(22)$, Evan Daniel’s family $s(m^2 - 3) = m$ is now
 **proved exactly for every $m \ge 3$**.

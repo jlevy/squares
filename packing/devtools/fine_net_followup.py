@@ -977,13 +977,16 @@ def price(
 
     The capture is priced twice: the sample's process CPU over the source's CPU on the
     same directions, times the source's total over the net, and the sample's mean times
-    the net's count. The larger stands. The controls are one more full sweep (the 99/100
-    mutant at every direction, FC-1) and two runs of the costliest sampled direction
-    (the original and the near-threshold mutant at the least-bound direction).
+    the net's count. The larger stands. A source log that records CPU at only some
+    directions (#910's compacted streams) has no total over the net, so it prices by the
+    mean alone. The controls are one more full sweep (the 99/100 mutant at every
+    direction, FC-1) and two runs of the costliest sampled direction (the original and
+    the near-threshold mutant at the least-bound direction).
     """
     ours = sum(row["process_cpu_seconds"] for row in rows)
-    theirs = sum(source[row["r"]] for row in rows) if source else None
-    total_source = sum(source.values()) if source else None
+    whole = len(source) == count
+    theirs = sum(source[row["r"]] for row in rows) if source and whole else None
+    total_source = sum(source.values()) if source and whole else None
     ratio = ours / theirs if theirs else None
     by_ratio = ratio * total_source if ratio is not None and total_source else None
     by_mean = ours / len(rows) * count
@@ -1020,13 +1023,15 @@ def sample(
     workers: int,
     run_log: Path | None,
 ) -> dict[str, Any]:
-    """The sampled directions, their walls and the price of the rest."""
-    data = load_json(candidate.read_bytes())
+    """The sampled directions, their walls and the price of the rest. The candidate may be
+    plain JSON or a gzip of it, as #910's is."""
+    raw = candidate.read_bytes()
+    data = load_json(gzip.decompress(raw) if raw[:2] == b"\x1f\x8b" else raw)
     _step, count, _facts, _checks = declared_net(data)
     require(all(0 <= index < count for index in indices), "a direction is off the net")
     require(1 <= workers <= 2, "at most two workers on a shared host")
     logged = source_rows(run_log) if run_log is not None else {}
-    source = {r: float(row["cpu_seconds"]) for r, row in logged.items()}
+    source = {r: float(row["cpu_seconds"]) for r, row in logged.items() if "cpu_seconds" in row}
     before = os.getloadavg()[0]
     start = time.monotonic()
     with ThreadPoolExecutor(max_workers=workers) as pool:

@@ -198,14 +198,19 @@ MIXED_PACKETS = (
     "wand125-fine-net-n29-2026-10-10",
     "wand125-fine-net-n28-n30-2026-10-10",
     "ozden-s94-lower-bound-2026-11-03",
+    "ozden-s94-lower-bound-9972-2026-11-05",
 )
 #: A packet that is not Hosono's and keeps a format M certificate at its own upstream
 #: path, by the census name it is given (`mixed_nN_LDIGITS`, the format's convention) and
 #: its path in the packet. Doğa Özden's dilation of Hosono's mixed_n94_L995
-#: (jlevy/squares#890) is `certificate/n94_L9965.json.gz` upstream.
+#: (jlevy/squares#890) is `certificate/n94_L9965.json.gz` upstream, and his further
+#: dilation of it (#910) `certificate/n94-L9972.json.gz`.
 MIXED_FILES: dict[str, dict[str, str]] = {
     "ozden-s94-lower-bound-2026-11-03": {
         "mixed_n94_L9965": "source/certificate/n94_L9965.json.gz",
+    },
+    "ozden-s94-lower-bound-9972-2026-11-05": {
+        "mixed_n94_L9972": "source/certificate/n94-L9972.json.gz",
     },
 }
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
@@ -1344,6 +1349,29 @@ PACKET_PROVENANCE = {
             "review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md). "
         ),
     ),
+    # #910: the same measure dilated further, onto a net of 4,972 directions. The
+    # source's receipts are an archive of several native runs of this repository's crate
+    # (devtools.audit_dilated_measure receipts), and its control ran at two directions.
+    "ozden-s94-lower-bound-9972-2026-11-05": PacketProvenance(
+        subject=(
+            "Doğa Özden's {certificate}, Hiroaki Hosono's mixed_n94_L995 dilated by 4986/4975"
+        ),
+        custody=(
+            "The candidate is the retained file whose stored and decompressed SHA-256 the"
+            " issue states and the packet's acquisition record pins, which"
+            " devtools.audit_dilated_measure regenerates byte for byte from the T-091"
+            " packet's retained mixed_n94_L995."
+        ),
+        closing=(
+            "The source's exploratory C checker, which is not interval arithmetic, is "
+            "retained in the packet and was not run here."
+        ),
+        comparison=(
+            "Every direction's row equals the source's selected archive line on every field "
+            "the line keeps, apart from timings, and the node totals are equal "
+            "(receipts/replay-comparison.json in the packet). "
+        ),
+    ),
 }
 
 
@@ -1590,8 +1618,11 @@ INDEPENDENT_MIXED_PACKETS = frozenset(
 )
 #: Packets whose producer decided the certificate with this repository's own
 #: `sqverify-fast`, unmodified, so a census row of it reproduces the producer's run: the
-#: #890 dilation, whose receipts name the crate source `d97758bb...` at e6e8d577.
-SAME_CRATE_PACKETS = frozenset({"ozden-s94-lower-bound-2026-11-03"})
+#: #890 dilation and #910's, whose receipts name the crate source `d97758bb...` at
+#: e6e8d577.
+SAME_CRATE_PACKETS = frozenset(
+    {"ozden-s94-lower-bound-2026-11-03", "ozden-s94-lower-bound-9972-2026-11-05"}
+)
 
 
 def mixed_relationship(case: Case) -> tuple[list[str], str]:
@@ -2588,12 +2619,9 @@ def write_summary() -> int:
     """`--summary`: census-summary.json and census-summary.md from both census folders."""
     rows = summary_rows()
     (CENSUS_ROOT / "census-summary.json").write_text(
-        json.dumps(
-            {"kind": "sqverify-fast-census-summary/v1", "certificates": rows},
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n",
+        retained_json.dumps(
+            {"kind": "sqverify-fast-census-summary/v1", "certificates": rows}, sort_keys=True
+        ),
         encoding="utf-8",
     )
     (CENSUS_ROOT / "census-summary.md").write_text(render_summary(rows), encoding="utf-8")

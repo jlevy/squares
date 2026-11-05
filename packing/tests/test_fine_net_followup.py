@@ -316,6 +316,19 @@ def test_the_price_takes_the_larger_of_its_two_estimates() -> None:
     assert followup.price(rows, {}, 2073, 2)["full_capture_within_limit"] is False
 
 
+def test_a_source_log_with_cpu_at_some_directions_prices_by_the_mean_alone() -> None:
+    """A source that records CPU at only some directions (#910's compacted streams) has
+    no total over the net, so neither the ratio nor its estimate is formed."""
+    rows = [{"r": 0, "process_cpu_seconds": 2.0}, {"r": 1, "process_cpu_seconds": 4.0}]
+    price = followup.price(rows, {0: 1.0, 1: 2.0}, 3, 2)
+    assert price["source_cpu_seconds_on_sample"] is None
+    assert price["source_cpu_seconds_whole_net"] is None
+    assert price["ratio_to_source"] is None
+    assert price["full_capture_cpu_seconds_by_ratio"] is None
+    assert price["full_capture_cpu_seconds"] == price["full_capture_cpu_seconds_by_mean"] == 9.0
+    assert price["controls_cpu_seconds"] == 17.0
+
+
 FAKE = """\
 import json, sys
 r = int(sys.argv[sys.argv.index("--directions") + 1])
@@ -354,6 +367,24 @@ def test_a_sample_is_a_diagnostic_of_the_directions_it_ran(
     assert receipt["price"]["net_directions"] == 2073
     assert "not a replay" in receipt["scope"]
     assert os.access(out, os.R_OK)
+
+
+def test_a_sample_reads_a_gzip_candidate(tmp_path: Path) -> None:
+    """#910's candidate is retained as a gzip, and the sample reads it as it reads the
+    plain JSON."""
+    asset, documents, data = release(tmp_path)
+    assert followup.main(premises_argv(tmp_path, asset, documents, data)) == 0
+    plain = tmp_path / "work/certificates" / NAME / "candidate.json"
+    candidate = tmp_path / "candidate.json.gz"
+    candidate.write_bytes(gzip.compress(plain.read_bytes(), mtime=0))
+    out = tmp_path / "sample.json"
+    argv = ["sample", "--binary", str(fake_binary(tmp_path, "verified"))]
+    argv += ["--candidate", str(candidate), "--n", "2", "--side", "3"]
+    argv += ["--directions", "0", "--workers", "1", "--out", str(out)]
+    assert followup.main(argv) == 0
+    receipt = json.loads(out.read_text())
+    assert receipt["status"] == "DIAGNOSTIC_SAMPLE"
+    assert receipt["price"]["net_directions"] == 2073
 
 
 def test_a_sample_off_the_net_or_with_three_workers_is_refused(tmp_path: Path) -> None:
