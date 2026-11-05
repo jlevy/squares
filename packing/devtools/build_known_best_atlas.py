@@ -2812,9 +2812,10 @@ def print_credit_hold_problems(versions: Sequence[str]) -> list[str]:
     if not PRINT_CREDIT_HELD:
         return []
     return [
-        f"the print-credit hold (PRINT_CREDIT_HELD, think-tj4o) was set for the "
-        f"{PRINT_CREDIT_HELD_FOR} posters; posters of {version} credit every name, so the "
-        "cut that draws them empties the hold"
+        f"the print-credit hold (PRINT_CREDIT_HELD, think-tj4o and think-hgpg) was set for "
+        f"the {PRINT_CREDIT_HELD_FOR} posters; posters of {version} credit every name, so "
+        "the cut that draws them empties the hold and lays the credit block out for every "
+        "name it held, which overflows its three lines as drawn"
         for version in sorted(set(versions))
         if version != PRINT_CREDIT_HELD_FOR
     ]

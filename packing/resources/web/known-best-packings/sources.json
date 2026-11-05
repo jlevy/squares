@@ -1306,7 +1306,7 @@
     {
       "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s204-upper-bound/blob/d4b8b05c45e3be464476c94712a4dbc063009875/n-204-candidate.yaml at d4b8b05c45e3be464476c94712a4dbc063009875",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         204
       ],
@@ -1704,7 +1704,7 @@
     {
       "attribution": "Kaelan Yim, https://github.com/vitamoon/vitamoon/blob/d11a8a1ce798f7c0b4f801e922e242d22cedcd73/n260.cert at d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         260
       ],
@@ -2046,7 +2046,7 @@
     {
       "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s299-upper-bound/blob/6486ead9be5e3348f64ad39aecc1950f22910de4/n-299-candidate.yaml at 6486ead9be5e3348f64ad39aecc1950f22910de4",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         299
       ],

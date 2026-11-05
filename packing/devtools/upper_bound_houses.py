@@ -88,6 +88,19 @@ REPO = reports.REPO
 WITNESSES = ROOT / "witnesses/known-best"
 ADOPTED_ON = "2026-10-11"
 NO_LICENCE = "no-licence-published"
+#: The status a packet's licence statement gives its retained certificate: MIT, CC BY 4.0
+#: (the reuse terms Doğa Özden's lab and Kaelan Yim gave for the houses at 204, 260 and
+#: 299, which every packet states first), or none published. Until 5 November 2026 every
+#: statement but MIT read as none (F8 of the senior review of #911).
+LICENCE_STATUSES = (("MIT", "MIT"), ("CC BY 4.0", "CC-BY-4.0"))
+
+
+def licence_status(statement: str) -> str:
+    """The status of a packet's licence statement, read from how the statement begins."""
+    return next(
+        (status for prefix, status in LICENCE_STATUSES if statement.startswith(prefix)),
+        NO_LICENCE,
+    )
 
 
 class HouseError(kernel.ReportError):
@@ -290,7 +303,7 @@ def _packet_origin(packet: Path, n: int) -> Origin:
         revision=source["source_commit"],
         retrieved=str(record["retrieved_at_utc"])[:10],
         author=_declaration(packet)["author"],
-        licence_status="MIT" if str(source["license"]).startswith("MIT") else NO_LICENCE,
+        licence_status=licence_status(str(source["license"])),
         raw_asset_retained=raw,
         retention_policy=RAW_RETENTION if raw else DERIVED_RETENTION,
     )
@@ -438,7 +451,7 @@ def _field_origin(packet: Path, n: int) -> Origin:
         revision=source["source_commit"],
         retrieved=str(record["retrieved_at_utc"])[:10],
         author=declaration["author"],
-        licence_status="MIT" if str(source["license"]).startswith("MIT") else NO_LICENCE,
+        licence_status=licence_status(str(source["license"])),
         raw_asset_retained=False,
         retention_policy=DERIVED_RETENTION,
     )

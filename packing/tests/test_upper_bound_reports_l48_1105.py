@@ -103,7 +103,8 @@ def test_the_retained_sharp_controls_meet_contact_and_refuse_1e30_past_it() -> N
     for row in record["controls"]:
         assert row["as_expected"] is True
         assert set(row["routes"]) == set(kernel.ROUTES)
-    # The far walls touch, so lowering the side to contact lowers it by nothing.
+    # Row 253 touches the right wall (the top clears by 4.32e-13), so lowering the side to
+    # its least far-wall contact lowers it by nothing.
     (lowered,) = [
         row
         for row in record["controls"]

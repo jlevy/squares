@@ -2627,6 +2627,7 @@ def test_print_credit_hold_keeps_ozden_and_yim_off_the_poster_credits_alone(
     assert drawn.get("height") == str(height)
     assert unheld["Özden"][2] != height
     assert unheld["Yim"][1] != lines
+    assert unheld["Yim"][2] == height
 
 
 def test_the_print_credit_hold_cannot_outlive_its_edition(
@@ -2652,6 +2653,7 @@ def test_the_print_credit_hold_cannot_outlive_its_edition(
     [refused] = problems([INFOGRAPHIC_VERSION, "v9.9.9"])
     assert "v9.9.9" in refused
     assert "think-tj4o" in refused
+    assert "think-hgpg" in refused
     monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
     assert problems(["v9.9.9"]) == []
 
