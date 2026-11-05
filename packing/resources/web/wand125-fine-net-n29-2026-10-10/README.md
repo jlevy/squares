@@ -8,7 +8,9 @@ It supersedes the issue’s earlier n = 29 report, $1163/200 = 5.815$, which the
 [seven-case packet](../wand125-fine-net-lower-bounds-2026-10-08/README.md) keeps, by
 $1/200$. The certificate’s own README compares it instead with `mixed_n29_L58175`
 ($2327/400$, at `dd6a7cc`), which no issue reported, and which it exceeds by $1/400$.
-The bound remains unconfirmed here; no standing bound or rating changes.
+Since 4 November 2026 a complete replay here, its whole-net controls and a stage 4
+review confirm it (T-132, V3/C3; [Review and Replay](#review-and-replay)), and both
+lower lanes at n = 29 hold it.
 
 | Item | Value |
 | --- | --- |
@@ -80,7 +82,7 @@ The total is about 4.3 CPU-hours, or about 2.2 hours of wall at two workers on a
 host. That is above the 20 CPU-minute limit for a run inside an intake, so the full net
 was not run.
 
-## Review and Remaining Work
+## Review and Replay
 
 The source reports all 2,073 directions verified by its adaptation of this repository’s
 crate (build `ab6e33e1…`, 12 threads, 1,058 seconds of wall), and a second run on a
@@ -90,10 +92,32 @@ refused, 31 with an exact capture below the threshold.
 These are attributed author outcomes; a sampled control does not replace the whole-net
 controls the records lane requires.
 
-A maintained replay must retain the complete direction outcomes of a census run, from a
-candidate retained where the census reads it, with the whole-net controls and restored
-positives, and must be followed by an independent review that reads this certificate.
-That work, with a budget for it, belongs to the import’s bead, think-r333.
+**The review.** The
+[stage 4 mathematical review of 4 November](../../../../docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md)
+(think-1lri) read this certificate and accepted it with findings, none blocking or
+major. It re-derived the argument, recomputed every exact premise apart from the crate
+and the tools, read the source’s run log, receipts and control against the candidate,
+and decided direction 0 and nine oblique directions over their whole per-bin domains by
+code that shares nothing with the crate. Its programs and receipts are in
+[`review/`](review/README.md).
+
+**The replay.** On 4 November 2026 (think-r333) the census ran `sqverify-fast`, built
+from the reviewed crate source `d97758bb…`, on the candidate retained in
+[`release/`](release/certificates/mixed_n29_L582/): every one of the 2,073 directions
+verified, 649,871,818 nodes and least certified bound 1.0000000000046825 at direction
+1947, in 9,296.0 CPU-seconds at two threads, against the 7,740 priced above.
+`devtools.fine_net_followup capture-agreement` finds every direction equal to the
+source’s check2 log ([receipt](receipts/capture-agreement-n29.json)).
+Its whole-net control the same day ended `CONTROLS_REFUSED`: the original verified again
+at 1947, the 99/100 mutant was refused at all 2,073 directions and the near-threshold
+mutant was refused. At the axis direction the mutant’s exact capture lies in the
+enclosure the vertex sweep held at its least vertex, recomputed apart from the crate,
+whose lower end is the crate’s bound to the bit, as #892’s rule requires; the gap of
+5.2e-10 that the review’s F-8 measured sits near the middle of an enclosure 1.05e-9
+wide.
+The receipts are in the
+[census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n29-2026-10-10/README.md),
+and with the review they put T-132 at V3/C3: n29’s lower lanes hold $291/50$.
 
 ## Sources and Notices
 

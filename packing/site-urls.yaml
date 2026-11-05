@@ -6987,7 +6987,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-25'
+  lastmod: '2026-11-04'
   status: live
 - path: cases/290.html
   canonical: cases/290.html
@@ -15389,7 +15389,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-11-02'
+  lastmod: '2026-11-04'
   status: live
   identity:
     kind: lower-bound
@@ -15404,14 +15404,20 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n29-582-followup-report
+    - E-wand125-fine-net-n29-582-followup-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/README.md
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/reported-n29-followup.json
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/source-manifest.json
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/premises.json
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
+    - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/capture-agreement-n29.json
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/acquisition/release-assets.json
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/release/certificates/mixed_n29_L582/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-n29-2026-10-10/release/certificates/mixed_n29_L582/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n29-2026-10-10/mixed_n29_L582.jsonl.gz
     - packing/devtools/fine_net_followup.py
     - packing/devtools/audit_wand125_declared_net.py
   amendments:
@@ -15438,6 +15444,35 @@ urls:
       - packing/resources/web/wand125-fine-net-n29-2026-10-10/source-manifest.json
       - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/premises.json
       - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
+      - packing/devtools/fine_net_followup.py
+      - packing/devtools/audit_wand125_declared_net.py
+  - date: '2026-11-04'
+    reason: The stage 4 review of 4 November (think-1lri) and the complete sqverify-fast census replay
+      of mixed_n29_L582 at all 2,073 directions with its whole-net control (think-r333) are cited,
+      the replay as evidence, and the capture agreement, check2 receipt, review README, census record
+      and capture join the artifacts; the result rises to V3/C3. The value, scope and attribution
+      are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 29
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net n29 2026-10-10]'
+        published: '2026-10-10'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n29-582-followup-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/README.md
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/reported-n29-followup.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/source-manifest.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/premises.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/acquisition/release-assets.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/release/certificates/mixed_n29_L582/candidate.json.gz
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_declared_net.py
 - path: result/t-133.html

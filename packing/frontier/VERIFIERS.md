@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **236** programs: **53** external and **183** first-party; **157** decide claims and **79** check premises.
-- **691** of **874** evidence entries name the programs that verified them: 325 independently re-implemented, 294 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **692** of **875** evidence entries name the programs that verified them: 325 independently re-implemented, 294 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -173,7 +173,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 4 | 4 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 169 | 33 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 170 | 34 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 8 | 8 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 12 | 11 |
@@ -3167,6 +3167,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-n030-wand125-mixed-58835-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-109 |
 | `E-n039-wand125-mixed-665-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-110 |
 | `E-n041-wand125-mixed-6775-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-111 |
+| `E-wand125-fine-net-n29-582-followup-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-132 |
 | `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | not recorded | T-133 |
 | `E-n040-guzhou-continuous-pose-crate-axis` | audited here | independently re-implemented | not recorded | T-145 |
 | `E-n040-guzhou-new-supports-crate-axis` | audited here | independently re-implemented after reading the producer’s code | full: the near-axis statement at side 249329659/250000000, decided by sqverify-fast's exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with the 401-direction necessary condition at side 3350/3359 over all 401 directions | T-157 |

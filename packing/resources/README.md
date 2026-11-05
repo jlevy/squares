@@ -1008,8 +1008,11 @@ reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net, superseding t
 `22a23c8` and its release asset by digest, with the maintained premise check and a
 diagnostic eight-direction sample; since 2 November 2026 it also retains the asset’s
 data members, where the census reads the candidate.
-The review that reads the certificate, a complete replay and whole-net controls remain
-pending.
+The
+[stage 4 review of 4 November](../../docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md)
+read the certificate and accepted it, and the complete replay and whole-net controls of
+that day passed, so T-132 is `V3/C3`, re-implemented sharing the producer’s components,
+and the case’s lower bound is $291/50$.
 
 **[wand125 fine-net n28 n30 2026-10-10]**: Hosono’s n28 and n30 certificates,
 `mixed_n28_L57425` and `mixed_n30_L58925`, report $s(28) \ge 2297/400 = 5.7425$ and
