@@ -2398,6 +2398,105 @@ def _t179_lower_projection(held: dict[str, Any], wrote: dict[str, Any], body: st
     return _flat(body)
 
 
+REVIEW_4_NOVEMBER_N29_LINK = (
+    "[mathematical review of 4 November](../../docs/project/reviews/"
+    "review-2026-11-04-wand125-fine-net-n29.md)"
+)
+T132_LOWER_29_ADDED = (
+    """**Fine-net validation, 4 November 2026 (T-132).** Hosono’s
+[fine-net source](../resources/web/wand125-fine-net-n29-2026-10-10/README.md) of 10
+October gives a direct $291/50 = 5.82$ certificate for this case, `mixed_n29_L582`, his
+follow-up on #446, which supersedes the issue’s $1163/200$: a density of 650 rectangles
+of total mass $2899999/100000 < 29$, on a net the certificate declares, core side
+$4999/5000$ and 2,073 half-angle tangents of step $1/5002$. It raises both lower lanes
+from $581/100$ (T-108) by $1/100$. The complete 2,073-direction maintained native replay
+of 4 November, its whole-net controls and the
+"""
+    + REVIEW_4_NOVEMBER_N29_LINK
+    + """
+confirm it by a re-implementation sharing components with the producer’s checker,
+Hosono’s adaptation of this repository’s `sqverify_fast` crate, apart from the
+declared-net readers.
+The review also decided direction 0 and nine oblique directions over their whole per-bin
+domains by code that shares nothing with the crate.
+Hosono’s README says parts of the work were produced with AI assistance under human
+direction.""",
+    """The verified field rests on a complete replay here
+([`E-wand125-fine-net-n29-582-followup-sqverify-fast-replay`](evidence.yaml), `V3/C3`)
+of Hosono’s fine-net certificate: `sqverify-fast`, this repository’s maintained measure
+verifier, built from reviewed source, decided all 2,073 directions of the net the
+candidate declares on 4 November 2026, with the source’s node count and least certified
+bound at every direction, and its whole-net controls refused the 99/100 mutant at every
+direction. The source’s checker is an adaptation of the same crate, so the replay shares
+its components apart from the declared-net readers; it is not a second method.""",
+    """Until then the verified field rested on the complete replay
+([`E-n029-wand125-mixed-581-sqverify-fast-replay`](evidence.yaml), `V3/C3`) of Hosono’s
+check2 certificate of $581/100$ by the same verifier, at all 416 directions of its net
+on 6 October 2026.""",
+)
+T132_LOWER_29_HISTORY = (
+    ("(T-108), since superseded (T-132), from a density of", "(T-108), from a density of"),
+    (
+        "so it was also the verified lower bound until the fine-net validation above.",
+        "so it is also the verified lower bound.",
+    ),
+    (
+        (
+            "while Hosono’s fine-net certificate on a declared net proves "
+            "$s(29) \\ge 291/50 = 5.82$ (`T-132`, 2026-11-04, `V3/C3`), which superseded his "
+            "check2 certificate of 6 October at $581/100 = 5.81$ (`T-108`), that one his "
+            "rectangle-density certificate"
+        ),
+        (
+            "while Hosono’s mixed certificate on a declared net proves "
+            "$s(29) \\ge 581/100 = 5.81$ (`T-108`, 2026-10-06, `V3/C3`), which superseded its "
+            "rectangle-density certificate"
+        ),
+    ),
+    (
+        "The verified interval has width about $0.1138$.",
+        "The verified interval has width about $0.1238$.",
+    ),
+)
+#: The two blockers T-132's adoption removed at 29: the issue's 1163/200 report and its own.
+T132_LOWER_29_BLOCKERS = (
+    ["E-wand125-fine-net-lower-bounds-446-report"],
+    ["E-wand125-fine-net-n29-582-followup-report"],
+)
+
+
+def _t132_lower_projection(held: dict[str, Any], wrote: dict[str, Any], body: str) -> str:
+    """Check T-132's lower adoption at 29, then compare the house layer below it.
+
+    T-132's fine-net census replay raised both lower lanes at 29 from T-108's 581/100 on
+    4 November 2026, after T-195's house pass of 17 October wrote the record, and its two
+    blockers left; the writer owns neither lane, so the adoption is checked exactly and
+    projected out.
+    """
+    replay = "E-wand125-fine-net-n29-582-followup-sqverify-fast-replay"
+    assert held["source_reviewed"] == "2026-11-04"
+    assert held["reported_lower_bound"]["exact_form"] == "291/50"
+    assert held["verified_lower_bound"] == {
+        "value": "5.82",
+        "exact_form": "291/50",
+        "evidence": [replay],
+    }
+    assert [e for e in held["evidence"] if e != replay] == wrote["evidence"]
+    assert held["evidence"].count(replay) == 1
+    assert held["blockers"] == []
+    assert tuple(blocker["evidence"] for blocker in wrote["blockers"]) == T132_LOWER_29_BLOCKERS
+    for key in ("source_reviewed", "evidence", "blockers"):
+        held[key] = wrote[key]
+    for addition in T132_LOWER_29_ADDED:
+        words = _flat(addition)
+        assert body.count(words) == 1, f"n=29: {words[:60]}"
+        body = body.replace(words, "", 1)
+    for current, prior in T132_LOWER_29_HISTORY:
+        assert body.count(current) == 1, f"n=29: {current}"
+        body = body.replace(current, prior, 1)
+    return _flat(body)
+
+
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     replayed: list[adopt.Move],
 ) -> None:
@@ -2410,8 +2509,9 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     record the earlier pass left (`adopt_houses.before_last_pass`). A writer that ran
     after the adoption is replayed after it: `apply_closed_form`, of 14 October 2026,
     raises the reported lower lane, adds its evidence, resource and paragraph, and moves
-    `source_reviewed` no earlier. The later fine-net lower adoptions, n108's of 18 October
-    and n68's and n84's of 19 October, are checked explicitly and projected out before
+    `source_reviewed` no earlier. The later lower adoptions, n108's fine-net bound of 18
+    October, n68's and n84's of 19 October, n146's linear bound (T-179) and n29's fine-net
+    bound (T-132), both of 4 November, are checked explicitly and projected out before
     this historical upper-layer comparison, as is a registration pending adoption entered
     after the count's last pass (`LATER_PENDING_REPORTS`) and a citation added after it
     (`LATER_CITATIONS`).
@@ -2443,6 +2543,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
             historical_body = _fine_net_lower_projection(move.n, held, wrote, historical_body)
         elif move.n == 146:
             historical_body = _t179_lower_projection(held, wrote, historical_body)
+        elif move.n == 29:
+            historical_body = _t132_lower_projection(held, wrote, historical_body)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"
         body = _flat(committed.split("---\n", 2)[2])
@@ -2712,13 +2814,15 @@ def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
     replayed: list[adopt.Move], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """`--refresh --n` writes the named records and does not replay n108's later layer,
-    which the full refresh refuses (review A1 of #692)."""
-    moves = [move for move in replayed if move.n in (29, 108)]
-    marker = f"**House adoption, {adopt.day_words(29)}.**"
+    which the full refresh refuses (review A1 of #692). The named record is n = 70's: n
+    = 29's was until T-132 raised its lower lanes on 4 November 2026, and its full
+    refresh now refuses that later layer as n108's does."""
+    moves = [move for move in replayed if move.n in (70, 108)]
+    marker = f"**House adoption, {adopt.day_words(70)}.**"
     paths = {}
     for move in moves:
         text = select.case_path(move.n).read_text(encoding="utf-8")
-        if move.n == 29:
+        if move.n == 70:
             before, after = text.split(marker, 1)
             text = before + marker + " Stale opening.\n\n" + after.split("\n\n", 1)[1]
         paths[move.n] = tmp_path / f"n-{move.n:03d}.md"
@@ -2728,12 +2832,12 @@ def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
     monkeypatch.setattr(adopt, "held_counts", lambda: [108])
     monkeypatch.setattr(select, "case_path", lambda n: tmp_path / f"n-{n:03d}.md")
     monkeypatch.setattr(adopt, "COVERAGE", _coverage_copy(tmp_path))
-    assert adopt.main(["--refresh", "--n", "29"]) == 0
-    assert "Stale opening." not in paths[29].read_text()
-    assert _flat(adopt.opening(moves[0])) in _flat(paths[29].read_text())
+    assert adopt.main(["--refresh", "--n", "70"]) == 0
+    assert "Stale opening." not in paths[70].read_text()
+    assert _flat(adopt.opening(moves[0])) in _flat(paths[70].read_text())
     assert paths[108].read_bytes() == untouched
     with pytest.raises(SystemExit):
-        adopt.main(["--check", "--n", "29"])
+        adopt.main(["--check", "--n", "70"])
 
 
 def _coverage_copy(directory: Path) -> Path:
