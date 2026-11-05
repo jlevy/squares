@@ -5,7 +5,7 @@ title: "Import Özden: s(94) >= 2493/250 by rescaling Hosono's mixed_n94_L995 on
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l49
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-05T07:01:41.771Z
-updated_at: 2026-11-05T07:40:40.368Z
+updated_at: 2026-11-05T08:37:06.111Z
 started_at: 2026-11-05T07:01:46.219Z
 ---
 Import of jlevy/squares#910 (opened 2026-11-05T06:51:55Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(94) >= 2493/250 = 9.972, above T-262's 1993/200 by 7/1000. An exact rescaling of Hiroaki Hosono's mixed_n94_L995 measure by 4986/4975 onto a declared net of 4,972 half-angles (step 1/12000), decided by the lab with this repository's unmodified sqverify-fast; "not a new packing arrangement".
@@ -39,6 +39,8 @@ Answer bead: this bead.
 ## Notes
 
 2026-11-05 (bold-ritchie-l49): stages 1 to 3 done on branch claude/bold-ritchie-xo28us-l49 (draft PR "intake: #910 s(94) ≥ 2493/250 (T-266)"). Packet ozden-s94-lower-bound-9972-2026-11-05 at 7d21f9b; every stated digest holds; audit PREMISES_HOLD and RECEIPTS_HOLD; 13-direction sample with the census binary agrees; T-266 registered at V0/C0; n-094's reported lower lane 2493/250, verified lane unchanged at 1993/200. Replay: think-qcms (about 19.4 CPU-h, runnable after review, not held). Stage 4 review brief: think-xzxd.
+
+2026-11-05 08:40Z (bold-ritchie-l49): PR https://github.com/jlevy/squares/pull/912 (draft, labels intake and S3), head 31698c39b (5b6e4ea8e intake, 31698c39b re-pin). Hosted run 41989935396 is red only on two causes #911 carries: check_results contiguity (T-266 needs T-265) and test_site_homepage's home-log window (fixed by #911's 0c5e1a58c). Remaining step once #911 is on main: merge origin/main into claude/bold-ritchie-xo28us-l49. Resolve results.yaml as T-265 then T-266, and result-requests.yaml as #895's longer note then the #910 entry; take either DATA_REVISION. Regenerate RESULTS.md, INVENTORY.md, VERIFIERS.md, STATUS.md, the research tables, site-urls.yaml and site-urls.md (site_urls --write after taking main's copy), the t007 audit and the synopsis headline. Set SYNOPSIS's Frontier results row to 266, 234 by others. Update the no-public-change record's reason to the count 265 to 266 against the new main, re-rendering to confirm. Commit, re-pin DATA_REVISION, push, wait for green. A rehearsal of exactly this against L48's 0c5e1a58c is the local branch l49-trial-merge at 530a9985d, never pushed: check_results passes at 266, and packing-validate --records passes 55 of 55.
 
 Stage 7: no acknowledgement is owed before the merge. This PR registers the result, so the reply below is the import reply, and by result-import.md stage 7 it follows the merge. Post it only after the PR merges and the deploy is verified: render from main with `check_requests --draft 910` (it refuses off main), check that main and the site say T-266 at V0/C0 and n-094's reported lower bound 2493/250, adjust T-266 if renumbered, post, then record it under #910's replies (kind: final, closing the issue) in the next change. #910 is closeable once T-266 is on main: its validation names think-qcms and think-xzxd, which follow on the closed issue.
 
