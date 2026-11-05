@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 166
+version: 167
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -61,7 +61,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-05T21:54:05.385Z
+updated_at: 2026-11-05T22:53:50.584Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -293,3 +293,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-05 20:52 renewal (intake89): #912 merged (b099992a9; T-266 V3/C3, n94 verified 2493/250; #543 dependency disclosed). think-qcms closed. L52 is posting the #910 reply after deploy. New #914 (Evan Daniel, 7 upper bounds at 175, 204, 260, 268, 293, 303, 304; beats T-264 and T-265): L51 is importing it as T-267 onward.
 
 2026-11-05 21:52 renewal (intake90): #915 merged (81f06acb3; #910 closing reply, #890 supersession follow-up); think-xzxd and think-pi8b closed; intake labels added to #910 and #914. L51 is importing #914 (7 Daniel upper bounds).
+
+2026-11-05 22:52 renewal (intake91): #914 registered T-267 to T-273 on #916 (green; all 7 certificates and 6 views pass both routes; budgets raised: results.html 1.6 MB, cases/260 355 KB). Strong-max review think-lrj4 is running.
