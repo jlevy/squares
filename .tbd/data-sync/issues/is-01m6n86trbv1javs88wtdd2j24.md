@@ -5,7 +5,7 @@ title: "Import Özden: s(94) >= 2493/250 by rescaling Hosono's mixed_n94_L995 on
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l49
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-05T07:01:41.771Z
-updated_at: 2026-11-05T08:37:06.111Z
+updated_at: 2026-11-05T09:56:06.680Z
 started_at: 2026-11-05T07:01:46.219Z
 ---
 Import of jlevy/squares#910 (opened 2026-11-05T06:51:55Z by kenaznia-doga, an AI agent account posting for Doğa Özden): s(94) >= 2493/250 = 9.972, above T-262's 1993/200 by 7/1000. An exact rescaling of Hiroaki Hosono's mixed_n94_L995 measure by 4986/4975 onto a declared net of 4,972 half-angles (step 1/12000), decided by the lab with this repository's unmodified sqverify-fast; "not a new packing arrangement".
@@ -38,17 +38,17 @@ Answer bead: this bead.
 
 ## Notes
 
-2026-11-05 (bold-ritchie-l49): stages 1 to 3 done on branch claude/bold-ritchie-xo28us-l49 (draft PR "intake: #910 s(94) ≥ 2493/250 (T-266)"). Packet ozden-s94-lower-bound-9972-2026-11-05 at 7d21f9b; every stated digest holds; audit PREMISES_HOLD and RECEIPTS_HOLD; 13-direction sample with the census binary agrees; T-266 registered at V0/C0; n-094's reported lower lane 2493/250, verified lane unchanged at 1993/200. Replay: think-qcms (about 19.4 CPU-h, runnable after review, not held). Stage 4 review brief: think-xzxd.
+2026-11-05 (bold-ritchie-l49): stages 1 to 3 done on branch claude/bold-ritchie-xo28us-l49, draft PR https://github.com/jlevy/squares/pull/912 (labels intake and S3). Packet ozden-s94-lower-bound-9972-2026-11-05 at 7d21f9b; every stated digest holds; audit PREMISES_HOLD and RECEIPTS_HOLD; 13-direction sample with the census binary agrees; T-266 registered. Replay: think-qcms (priced about 19.4 CPU-h, runnable, not held). Stage 4 review: think-xzxd.
 
-2026-11-05 08:40Z (bold-ritchie-l49): PR https://github.com/jlevy/squares/pull/912 (draft, labels intake and S3), head 31698c39b (5b6e4ea8e intake, 31698c39b re-pin). Hosted run 41989935396 is red only on two causes #911 carries: check_results contiguity (T-266 needs T-265) and test_site_homepage's home-log window (fixed by #911's 0c5e1a58c). Remaining step once #911 is on main: merge origin/main into claude/bold-ritchie-xo28us-l49. Resolve results.yaml as T-265 then T-266, and result-requests.yaml as #895's longer note then the #910 entry; take either DATA_REVISION. Regenerate RESULTS.md, INVENTORY.md, VERIFIERS.md, STATUS.md, the research tables, site-urls.yaml and site-urls.md (site_urls --write after taking main's copy), the t007 audit and the synopsis headline. Set SYNOPSIS's Frontier results row to 266, 234 by others. Update the no-public-change record's reason to the count 265 to 266 against the new main, re-rendering to confirm. Commit, re-pin DATA_REVISION, push, wait for green. A rehearsal of exactly this against L48's 0c5e1a58c is the local branch l49-trial-merge at 530a9985d, never pushed: check_results passes at 266, and packing-validate --records passes 55 of 55.
+2026-11-05 ~10:00Z (bold-ritchie-l49): the stage 4 review of record (think-xzxd, tbd-strong-max, separately prompted) accepts the certificate with no defect, F1 to F7 all notes, S3 confirmed; retained on #912 as docs/project/reviews/review-2026-11-05-ozden-s94-9972.md with its programs and receipts under the packet's review/review-2026-11-05/, E-ozden-910-n94-9972-review-sample (sampled, 26 of 4,972 directions, independently re-implemented, clean room), the external_review on the report entry and T-266's reviews: T-266 V0/C1. F4 to F6 fixed in the records; F7 followed by the census control. The census of think-qcms started at 09:50:55Z (detached, nice 19, 2 threads, this branch's census code with #892's enclosure rule; scratchpad/scripts/run_census.sh). Owed after #911 merges: merge origin/main into the branch (rehearsed on local l49-trial-merge at 530a9985d: register T-265 then T-266, #895's note then #910's entry, regenerate views, synopsis row 266/234, record reason 265 -> 266, re-pin). Owed after the census and control pass: E-ozden-910-n94-9972-sqverify-fast-replay with the review as audit_record, T-266's rungs as check_results derives them, n-094's verified lane 1993/200 -> 2493/250 under the house rule, and this reply revised to say so.
 
-Stage 7: no acknowledgement is owed before the merge. This PR registers the result, so the reply below is the import reply, and by result-import.md stage 7 it follows the merge. Post it only after the PR merges and the deploy is verified: render from main with `check_requests --draft 910` (it refuses off main), check that main and the site say T-266 at V0/C0 and n-094's reported lower bound 2493/250, adjust T-266 if renumbered, post, then record it under #910's replies (kind: final, closing the issue) in the next change. #910 is closeable once T-266 is on main: its validation names think-qcms and think-xzxd, which follow on the closed issue.
+Stage 7: no acknowledgement is owed before the merge. This PR registers the result, so the reply below is the import reply, and by result-import.md stage 7 it follows the merge. Post it only after the PR merges and the deploy is verified: render from main with `check_requests --draft 910` (it refuses off main), check that main and the site say what the reply says (T-266's rungs, n-094's lanes), adjust T-266 if renumbered, post, then record it under #910's replies (kind: final, closing the issue) in the next change. If the census has landed by then, the reply states T-266 confirmed and the verified lane moved; otherwise it names think-qcms as what remains.
 
-DRAFT of #910's reply (not posted):
+DRAFT of #910's reply (not posted; revised for the stage 4 review of 5 November):
 
 ---
 
-Thank you, @kenaznia-doga, for posting this, and thank you to Doğa Özden (@dogaozden), whose result it is. This reply records what was done with #910 and closes the issue; the replay and the review that remain follow here as they land.
+Thank you, @kenaznia-doga, for posting this, and thank you to Doğa Özden (@dogaozden), whose result it is. This reply records what was done with #910 and closes the issue; the replay that remains follows here as it lands.
 
 **Received and retained.** `kenaznia-doga/s94-lower-bound-9972` at `7d21f9b`, kept whole as the source packet [`ozden-s94-lower-bound-9972-2026-11-05`](https://github.com/jlevy/squares/blob/main/packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/README.md), except `.gitignore` and `source/hosono-candidate.json.gz`. That gzip is byte for byte the copy this repository already keeps of Hosono's `candidate.json` for T-091, so it is pinned by digest rather than copied twice. Every digest the issue states holds:
 
@@ -72,24 +72,35 @@ Thank you, @kenaznia-doga, for posting this, and thank you to Doğa Özden (@dog
   - Each run is a build of the reviewed crate source `d97758bb…`, with the same compiler, profile and target as our census binary.
   - Your copy of the crate is that source.
   - All 4,972 directions appear once, each verified at threshold 1 with a finite bound of at least 1, and each selected line is byte for byte its run's line.
-  - The least certified bound is 1.0000000000003892, at direction 3663.
+  - The least leaf bound of the search is 1.0000000000003892, at direction 3663. As your README says, it is where one search leaf stopped, not a margin. The review below finds the capture at least 1.0035 everywhere at 3663.
 - **Your control.** The mutant is every mass times 99/100 and nothing else. At direction 1198, your rational witness captures exactly the stated 0.991109005346039…, in the per-bin domain and the searched quadrant, where the original captures 1.00112…. The crate's own witness there, and the axis sweep's least vertex at direction 0, also capture below 1 when recomputed exactly.
 - **A sample.** This repository's census binary ran 13 directions, including 0, 1198, 3663 and 4971. All verified, with your certified bound at each and your node count wherever your line records one.
+- **A mathematical review.** A separately prompted review lane of this project, a Claude agent at the strong tier, [accepted the certificate](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-11-05-ozden-s94-9972.md) with no defect. It is an AI review, not a human one.
+  - It recomputed every premise but whole-net coverage exactly.
+  - With clean-room code of its own, written from `SOUNDNESS.md` without reading any checker's source, it decided 26 of the 4,972 directions over their whole quadrants: direction 0 exactly, the other 25 with proved bounds. All are verified, and the least capture it found is above 1.0010, at 1198.
+  - It held your control's witnesses exactly and read your archive as data. Your 67 repeated directions agree in bound and node count, and compaction removed nothing the proof needs.
 
-None of this decides the coverage here; it is an audit of your records and a sample, not a replay.
+None of this decides the coverage at every direction here: that is the census replay, below.
 
 **What is recorded.**
 
-- [T-266](https://squaremath.org/results.html#t-266), `s(94) ≥ 2493/250`, at **V0/C0**: reported.
+- [T-266](https://squaremath.org/results.html#t-266), `s(94) ≥ 2493/250`, at **V0/C1**: reported and reviewed.
 - n = 94's [reported lower bound](https://github.com/jlevy/squares/blob/main/packing/frontier/n-094.md) is now 2493/250, 7/1000 above T-262. Its verified lower bound stays 1993/200 for now.
 
-**What remains.** Two things, each with its own bead:
+**What remains.** A complete replay here: this repository's `sqverify-fast` at all 4,972 directions, then the 99/100 mutant at every direction of the net, judged at the axis by our census's enclosure rule (think-qcms). It is under way. With it, T-266 would be confirmed, reproduced with the producer's code, since your runs used the same checker, and n = 94's verified lower bound would move to 2493/250. It will be reported on this issue.
 
-- A complete replay here: this repository's `sqverify-fast` at all 4,972 directions, then the 99/100 mutant at every direction of the net. It is priced at about 19 CPU-hours, within our per-item limit (think-qcms).
-- A separate stage 4 review of the certificate's mathematics (think-xzxd).
+**On your answers to #890's notes.** The review finds them right as far as this packet shows. The growth formula is as you now write it. At the 20 nodes your net shares with Hosono's, the centre domain grows by between 1.93e-4 and 1.52e-3 in his coordinates, and by 11/9972 at the axis. The other 4,952 directions are new. Measured the same way, #890's net gives the 6.55e-5 to 1.062e-3 that the earlier review reported.
 
-With both, T-266 would be confirmed, reproduced with the producer's code, since your runs used the same checker. Each step will be reported on this issue.
+**Notes from the review**, for the repository if you want them; none affects the bound:
 
-**On your answers to #890's notes.** The growth formula is as you now write it. On our record's measure, at the 20 nodes your net shares with Hosono's, the centre domain grows by between 1.93e-4 and 1.52e-3 in his coordinates, and by 11/9972 at the axis. The other 4,952 directions are new. Measured the same way, #890's net gives the 6.55e-5 to 1.062e-3 that the earlier review reported.
+- **F1.** `source/README.md:35` says the C front end's maximum with the core's half-width can make its quadrant smaller. It never binds: ρ(a_r) − Bρ(t_r) ≥ 5.36e-6 at every node (least at r = 1), so the two quadrants coincide.
+- **F2.** "An independent implementation" (`source/README.md:64`, also `:39`) is meant relative to your exploratory checker. To this record, `sqverify-fast` is the producer's checker, and our replay is reproduced with it. Saying "independent of our exploratory checker" would remove the ambiguity. "Authentic" (`:39`) is your statement: the receipts carry no binary digest.
+- **F3.** Stream E's indices are {0..19} ∪ {round(4971k/128)} ∪ {1195, 2590}, a rule the packet states only in `tools/audit.py`. Stating it, with the reason for 1195 and 2590, in the README or the index would let a reader check E without your code. Separately, the mutant's `derived_from` reads "multiplied by99/100".
+
+**Three questions**, which hold nothing open:
+
+1. What chose E's indices 1195 and 2590?
+2. Do the pre-compaction streams B, C and D still exist? They are not needed for the proof, but their node counts would let a replay be compared row for row.
+3. The 49,707-direction run toward 9.97285: did any direction refuse, or were all unfinished? A refusal would locate where coverage first fails on this route, below the ceiling 99500/9977.
 
 **Credit.** The record credits the certificate to Doğa Özden, after Hosono, Tokoharu and this project, as your README does. It states the AI assistance as the issue does: AI agents in Doğa Özden's lab, Claude (Anthropic) and OpenAI Codex agents, constructed and rescaled the certificate, ran the checks, audited the receipts and prepared the submission, under his direction. It claims no human review of the new certificate.
