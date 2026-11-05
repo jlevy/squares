@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 164
+version: 165
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -61,7 +61,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-05T20:03:20.145Z
+updated_at: 2026-11-05T20:53:53.955Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -289,3 +289,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-05 13:53 renewal (intake82): #913 merged (249bb82e7; #895 closing reply recorded); think-o7ly and think-qclj closed. #912 green; T-266 census running (~19Z). #908 and #909 held for the owner.
 
 2026-11-05 19:52 renewal (intake88): T-266 census VERIFIED 4,972/4,972 (16.65 CPU-h), control refused (axis by the #892 enclosure rule), lab archive agrees; #912 green at V3/C3 with n-094 verified at 2493/250; senior review running. #908 and #909 still held for the owner.
+
+2026-11-05 20:52 renewal (intake89): #912 merged (b099992a9; T-266 V3/C3, n94 verified 2493/250; #543 dependency disclosed). think-qcms closed. L52 is posting the #910 reply after deploy. New #914 (Evan Daniel, 7 upper bounds at 175, 204, 260, 268, 293, 303, 304; beats T-264 and T-265): L51 is importing it as T-267 onward.
