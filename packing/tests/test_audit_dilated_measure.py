@@ -9,6 +9,7 @@ register relies on, and that its checks refuse the mutations they exist to catch
 from __future__ import annotations
 
 import copy
+import dataclasses
 import functools
 import gzip
 import json
@@ -374,8 +375,50 @@ def test_a_mutant_that_is_not_every_mass_times_its_factor_is_refused() -> None:
     assert audit.mutant_checks(data, moved, Fraction(99, 100))["geometry_unchanged"] is False
 
 
-def test_compare_refuses_a_dilation_with_no_complete_producer_receipt() -> None:
-    """#910's receipts are an archive of partial runs, which `receipts` audits; compare
-    would otherwise hold vacuously over no receipt."""
+def test_compare_refuses_a_dilation_with_neither_an_archive_nor_a_complete_receipt(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Without the lab's archive or a complete producer receipt, compare would hold
+    vacuously over nothing; it refuses instead."""
+    bare = dataclasses.replace(DILATION_910, archive=None)
+    monkeypatch.setitem(audit.DILATIONS, PACKET_910, bare)
     with pytest.raises(SystemExit, match="no complete producer receipt"):
         audit.compare(PACKET_910)
+
+
+def test_the_910_replay_comparison_is_what_the_tool_recomputes() -> None:
+    assert audit.main(["compare", PACKET_910, "--check"]) == 0
+
+
+def test_every_910_direction_of_the_census_equals_the_labs_selected_line() -> None:
+    """The census capture against the lab's merged archive: every field each selected
+    line keeps, timings aside, at all 4,972 directions, and the node totals equal."""
+    receipt = stored(PACKET_910, "compare")
+    assert receipt["verdict"] == "EVERY_DIRECTION_AGREES"
+    assert receipt["status"] == "VERIFIED"
+    assert receipt["directions"] == receipt["archive_directions"] == 4972
+    assert receipt["identical_on_archive_fields"] == 4972
+    assert receipt["differing"] == {}
+    assert receipt["nodes"] == receipt["archive_selected_nodes"] == 2462923881
+    assert receipt["least_certified_bound"] == 1.0000000000003892
+
+
+def test_a_capture_that_differs_from_an_archive_line_is_reported(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    folder = copied_packet(tmp_path, monkeypatch)
+    census = tmp_path / "packing/benchmarks/measure-verifier/census-mixed"
+    (census / PACKET_910).mkdir(parents=True)
+    capture = f"{PACKET_910}/{DILATION_910.name}.jsonl.gz"
+    shutil.copy(audit.CENSUS / capture, census / capture)
+    shutil.copy(audit.CENSUS / "census.json", census / "census.json")
+    monkeypatch.setattr(audit, "CENSUS", census)
+    merged = folder / "source/receipts/directions.jsonl.gz"
+    lines = gzip.decompress(merged.read_bytes()).decode().splitlines()
+    row = json.loads(lines[17])
+    row["min_certified_lower_bound"] = 1.5
+    lines[17] = json.dumps(row, separators=(",", ":"), sort_keys=True)
+    merged.write_bytes(gzip.compress(("\n".join(lines) + "\n").encode(), mtime=0))
+    receipt = audit.compare(PACKET_910)
+    assert receipt["verdict"] == "DIRECTIONS_DIFFER"
+    assert receipt["differing"] == {str(row["r"]): ["min_certified_lower_bound"]}

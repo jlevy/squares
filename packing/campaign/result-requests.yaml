@@ -28320,9 +28320,12 @@ issues:
       lab's lines. Registered as T-266, with n-094's reported lower lane at 2493/250. The
       stage 4 review of 5 November (docs/project/reviews/review-2026-11-05-ozden-s94-9972.md,
       think-xzxd) accepts the certificate with no defect, its own clean-room code having
-      decided 26 of the 4,972 directions; T-266 is V0/C1. The verified lane waits on the
-      complete replay (think-qcms, about 19 CPU-hours, running). Licensed CC BY 4.0 (data)
-      and MIT (code) by the LICENSE.md #890's packet retains.
+      decided 26 of the 4,972 directions. This repository's census decided it again at all
+      4,972 directions on 5 November (think-qcms, 16.65 CPU-hours), every direction's row
+      equal to the lab's selected archive line, with the whole-net control refused at every
+      direction: the replay is E-ozden-910-n94-9972-sqverify-fast-replay, T-266 is V3/C3,
+      reproduced with the producer's code, and n-094's verified lane takes 2493/250.
+      Licensed CC BY 4.0 (data) and MIT (code) by the LICENSE.md #890's packet retains.
     read_through: '2026-11-05T06:51:55Z'
     results:
     - key: s94-9972
@@ -28334,9 +28337,8 @@ issues:
       - T-266
       evidence:
       - E-ozden-910-n94-9972-report
+      - E-ozden-910-n94-9972-sqverify-fast-replay
       - E-ozden-910-n94-9972-review-sample
-      validation:
-      - think-qcms
     beads:
     - think-pi8b
     - think-qcms
@@ -28344,6 +28346,5 @@ issues:
     answer_bead: think-pi8b
     replies: []
     close_when: >-
-      T-266 is on main and the reply on main says what was retained, audited and reviewed,
-      and that the verified lane waits on the replay (think-qcms), which then follows on the
-      closed issue.
+      T-266 is on main and the reply on main says what was retained, audited, reviewed and
+      replayed, with T-266 at V3/C3 and n-094's verified lane at 2493/250.

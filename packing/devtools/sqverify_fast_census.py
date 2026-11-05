@@ -1366,6 +1366,11 @@ PACKET_PROVENANCE = {
             "The source's exploratory C checker, which is not interval arithmetic, is "
             "retained in the packet and was not run here."
         ),
+        comparison=(
+            "Every direction's row equals the source's selected archive line on every field "
+            "the line keeps, apart from timings, and the node totals are equal "
+            "(receipts/replay-comparison.json in the packet). "
+        ),
     ),
 }
 
@@ -2614,12 +2619,9 @@ def write_summary() -> int:
     """`--summary`: census-summary.json and census-summary.md from both census folders."""
     rows = summary_rows()
     (CENSUS_ROOT / "census-summary.json").write_text(
-        json.dumps(
-            {"kind": "sqverify-fast-census-summary/v1", "certificates": rows},
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n",
+        retained_json.dumps(
+            {"kind": "sqverify-fast-census-summary/v1", "certificates": rows}, sort_keys=True
+        ),
         encoding="utf-8",
     )
     (CENSUS_ROOT / "census-summary.md").write_text(render_summary(rows), encoding="utf-8")

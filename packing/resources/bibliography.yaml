@@ -4574,8 +4574,10 @@ sources:
       and rescaled the certificate, ran the checks, audited the receipts and prepared the
       submission under his direction. Licensed CC BY 4.0 (certificates, witnesses,
       receipts, data, write-ups) and MIT (code) by LICENSE.md, byte for byte the
-      declaration of [Özden s94 dilation 2026-11-03]. Ozden is Özden in the credit's
-      ASCII. Retained in web/ozden-s94-lower-bound-9972-2026-11-05/.
+      declaration of [Özden s94 dilation 2026-11-03]. This repository's census replayed it
+      at all 4,972 directions on 5 November 2026 and its whole-net control passed the same
+      day, so T-266 is V3/C3, reproduced with the producer's code. Ozden is Özden in the
+      credit's ASCII. Retained in web/ozden-s94-lower-bound-9972-2026-11-05/.
   - key: '[Özden s299 upper bound 2026-11-03]'
     authors: [Özden]
     year: 2026

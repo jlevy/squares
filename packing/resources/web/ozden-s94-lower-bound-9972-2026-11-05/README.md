@@ -164,14 +164,43 @@ $6.55 \times 10^{-5}$ to $1.062 \times 10^{-3}$, which is F5 of that certificate
 
 This is an audit of the lab’s receipts: it decides no coverage, and it is not a replay.
 
-## The Replay Here, Priced
+## Complete Replay Here
 
-The replay this repository runs is `devtools.sqverify_fast_census` over all 4,972
-directions, then `--control` over the whole net. It started on 5 November 2026 at
-09:51Z, at two threads under `nice -n 19` with the reviewed binary, and has not finished
-(`think-qcms`). The census reads the
-packet’s certificate (`MIXED_FILES`, `mixed_n94_L9972`), and the producer relation is
-`same-implementation` (`SAME_CRATE_PACKETS`), as for #890.
+`devtools.sqverify_fast_census` ran this repository’s `sqverify-fast` on the retained
+certificate at all 4,972 directions of its declared net on 5 November 2026
+([census row and receipts](../../../benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/README.md),
+`think-qcms`). The binary was built from the reviewed crate source `d97758bb…` (binary
+`567a0fd5…`, rustc 1.98.0, release) and ran at two threads under `nice -n 19` on a shared
+four-core host. The census reads the packet’s certificate (`MIXED_FILES`,
+`mixed_n94_L9972`), and the producer relation is `same-implementation`
+(`SAME_CRATE_PACKETS`), as for #890.
+
+- **The census:** VERIFIED, every direction verified, 2,462,923,881 nodes. The least leaf
+  bound is 1.0000000000003892 at direction 3663, whose least-bound leaf’s centre captures
+  1.0336 in exact rationals. It took 59,956 CPU-seconds (`wait4`) in 30,876 seconds of
+  wall, 09:50 to 18:25Z.
+- **The comparison:** `devtools.audit_dilated_measure compare`
+  ([receipts/replay-comparison.json](receipts/replay-comparison.json),
+  `EVERY_DIRECTION_AGREES`) finds every direction’s row equal to the lab’s selected
+  archive line on every field the line keeps, timings aside. Those are the proof fields
+  everywhere, and the nodes, leaves and least-bound box at the 2,570 lines that keep
+  them. The capture’s node total equals the lab’s selected nodes.
+- **The whole-net control** (`--control`, 18:25 to 18:36Z), status `CONTROLS_REFUSED`:
+  - The original verified again at direction 3663.
+  - The 99/100 mutant was refused at all 4,972 directions. Each refusal is a coverage
+    refusal at a centre in the per-bin domain, where the mutant’s exact capture,
+    evaluated apart from the crate, is below 1 and the original’s is at least 1.
+  - The near-threshold mutant was refused, with an exact witness.
+  - At the axis the census judged the refusal by the enclosure the vertex sweep held
+    (#892): the exact capture lies in [0.9930559807565953, 0.9930559830055209]. This is
+    F7 of the stage 4 review.
+
+The author ran the same checker, so this replay is reproduced with the producer’s code;
+it is not a second implementation. With the stage 4 review below, the row is
+`E-ozden-910-n94-9972-sqverify-fast-replay`, T-266 is V3/C3, and n-094’s verified lower
+bound is $2493/250$.
+
+### The Price, Before the Run
 
 `devtools.fine_net_followup sample`
 ([receipts/sample-diagnostic.json](receipts/sample-diagnostic.json),
@@ -198,7 +227,8 @@ The price:
 
 Every basis is under the owner’s 40 CPU-hour item cap, so the replay is runnable after
 review, about ten hours of wall at two threads; it is not held. A sample decides only
-the directions it ran.
+the directions it ran. The run itself took 16.65 CPU-hours for the census, inside the
+price and nearest its per-node basis, and 11 minutes of wall for the control.
 
 ## The Stage 4 Review
 
@@ -230,8 +260,8 @@ independently re-implemented, clean room. A sample sets no rung. Its findings:
 - **F4.** Item 1 of the 6 October checklist asks for `scaling_factor` 1. This file has no
   such key, and the item is read as “absent or 1”, which is what the dilation audit
   checks (`scaling_factor_absent_or_one`).
-- **F5.** The replay here, when it lands, is *reproduced with the producer’s code*, and
-  the review’s sample is stated beside the rung as the independent part.
+- **F5.** The replay here is *reproduced with the producer’s code*, and the review’s
+  sample is stated beside the rung as the independent part.
 - **F6.** The least leaf bound 1.0000000000003892 is not a margin; this README says so
   where it quotes it.
 - **F7.** At the axis the crate’s bound sits $1.1357 \times 10^{-9}$ below the exact
@@ -242,12 +272,10 @@ The review also lists, items 1 to 8, what the census row and its control must sh
 
 ## What Is Not Established
 
-- **The coverage at every direction, here.** The lab’s receipts are audited, 13
-  directions were sampled with the census binary and 26 decided by the review’s own
-  code; the complete census (`think-qcms`) has not finished.
 - **A second complete implementation.** The lab ran this repository’s checker, so the
-  replay here will be reproduced with the producer’s code; the review’s independent code
-  decided a sample, and the exploratory C checker is retained and was not run.
+  replay here is reproduced with the producer’s code; the review’s independent code
+  decided a sample of 26 directions, and the exploratory C checker is retained and was
+  not run.
 - **Optimality** of any kind: a lower-bound certificate says nothing about the 10 × 10
   grid’s side.
 

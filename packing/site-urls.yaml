@@ -23192,6 +23192,7 @@ urls:
     builds_on: null
     evidence:
     - E-ozden-910-n94-9972-report
+    - E-ozden-910-n94-9972-sqverify-fast-replay
     artifacts:
     - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/README.md
     - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/acquisition/sources.json
@@ -23200,7 +23201,11 @@ urls:
     - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/native-receipt-audit.json
     - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/sample-diagnostic.json
     - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/README.md
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/replay-comparison.json
     - packing/devtools/audit_dilated_measure.py
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/mixed_n94_L9972.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/mixed_n94_L9972.control.json
     - docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
 - path: results.html
   canonical: results.html

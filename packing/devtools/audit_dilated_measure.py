@@ -60,7 +60,10 @@ source's rescale tool states (`Dilation.canonical`, `Dilation.derived_from`).
   direction on every field but the two timings (`cpu_seconds`, `seconds`), and their
   summaries on status, nodes, refused directions and premises. It also reads the
   producer's second checker's replay (`second-checker/full.jsonl`) for its verdicts and
-  least bound, as a reading of the producer's output that decides nothing.
+  least bound, as a reading of the producer's output that decides nothing. Where the
+  producer's receipts are an archive of several runs (#910), it compares the capture
+  with the archive's selected line at every direction instead, on every field the line
+  keeps but the timings, and the capture's node total with the archive's selected nodes.
 
 ``--check`` recomputes a receipt and fails unless it equals the retained one and passes
 (`PREMISES_HOLD`, `EVERY_DIRECTION_AGREES`, `RECEIPTS_HOLD`). A capture or receipt with
@@ -685,9 +688,80 @@ def second_checker(path: Path, directions: int) -> dict[str, Any]:
     }
 
 
+def compare_archive(packet: str, dilation: Dilation, archive: ReceiptArchive) -> dict[str, Any]:
+    """The census capture against a producer's merged archive, direction by direction.
+
+    Each archive line is one native line of the run its selection names, whole or
+    compacted to the proof fields, so every field it keeps but the two timings is
+    compared with the capture's: the verdict, method, threshold and certified bound
+    everywhere, and the nodes, leaves, depth and least-bound box wherever the line keeps
+    them. The capture's node total is compared with the archive's selected nodes, which
+    `receipts` counts from the lines and the compacted runs' summaries.
+    """
+    capture = CENSUS / packet / f"{dilation.name}.jsonl.gz"
+    ours, summary = read_rows(capture)
+    merged_path = WEB / packet / archive.merged
+    lines, _summary = direction_lines(
+        gzip.decompress(read_original_gzip_bytes(merged_path)), str(merged_path)
+    )
+    theirs = {index: json.loads(line) for index, line in lines.items()}
+    differing: dict[str, list[str]] = {}
+    with_nodes = 0
+    for index in sorted(set(ours) | set(theirs)):
+        line = untimed(theirs.get(index, {}))
+        row = ours.get(index, {})
+        with_nodes += "nodes" in line
+        fields = sorted(key for key in line if row.get(key) != line[key])
+        if index not in ours or index not in theirs:
+            fields = ["direction missing"]
+        if fields:
+            differing[str(index)] = fields
+    count = int((summary.get("premises") or {}).get("angle_count") or 0)
+    selected = receipts(packet)["nodes"]["selected_nodes"]
+    agree = (
+        sorted(ours) == sorted(theirs) == list(range(count))
+        and not differing
+        and summary.get("nodes") == selected
+    )
+    least = min(
+        (row["min_certified_lower_bound"] for row in ours.values()),
+        default=None,
+    )
+    return {
+        "kind": "dilated-measure-replay-comparison/v1",
+        "packet": packet,
+        "certificate": dilation.name,
+        "capture": str(capture.relative_to(PROJECT.parent)),
+        "capture_sha256": sha256(capture.read_bytes()),
+        "directions": count,
+        "status": summary.get("status"),
+        "nodes": summary.get("nodes"),
+        "archive_selected_nodes": selected,
+        "nodes_equal_archive_selected_nodes": summary.get("nodes") == selected,
+        "least_certified_bound": least,
+        "build": summary.get("build"),
+        "threads": summary.get("threads"),
+        "direction_cpu_seconds": summary.get("direction_cpu_seconds"),
+        "archive": str(merged_path.relative_to(PROJECT.parent)),
+        "archive_directions": len(theirs),
+        "archive_lines_with_nodes": with_nodes,
+        "identical_on_archive_fields": sum(
+            1 for index in set(ours) & set(theirs) if str(index) not in differing
+        ),
+        "differing": differing,
+        "verdict": "EVERY_DIRECTION_AGREES" if agree else "DIRECTIONS_DIFFER",
+        "compared": (
+            "every field each archive line keeps but cpu_seconds and seconds, and the"
+            " capture's node total against the archive's selected nodes"
+        ),
+    }
+
+
 def compare(packet: str) -> dict[str, Any]:
     """The `compare` receipt: the census capture against the producer's receipts."""
     dilation = DILATIONS[packet]
+    if dilation.archive is not None:
+        return compare_archive(packet, dilation, dilation.archive)
     if not dilation.receipts or not dilation.second_checker:
         # With no complete producer receipt every comparison would hold vacuously.
         message = f"{packet}: no complete producer receipt to compare; see `receipts`"

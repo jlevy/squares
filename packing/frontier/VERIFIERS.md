@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **237** programs: **53** external and **184** first-party; **158** decide claims and **79** check premises.
-- **694** of **879** evidence entries name the programs that verified them: 327 independently re-implemented, 295 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **695** of **880** evidence entries name the programs that verified them: 327 independently re-implemented, 296 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -177,7 +177,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 4 | 4 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 169 | 33 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 170 | 34 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 8 | 8 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 12 | 11 |
@@ -3245,6 +3245,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-wand125-fine-net-n37-64975-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-178 |
 | `E-wand125-fine-net-n39-66625-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-176 |
 | `E-ozden-890-n94-9965-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 600 of 600: complete legal core-centre domains at every declared-net direction | T-262 |
+| `E-ozden-910-n94-9972-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 4,972 of 4,972: complete legal core-centre domains at every declared-net direction | T-266 |
 
 ### `V-replay-chelokot-lean`
 

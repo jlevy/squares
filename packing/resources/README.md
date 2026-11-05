@@ -1841,6 +1841,9 @@ agents in the author’s lab, Claude and OpenAI Codex agents, constructed and re
 certificate, ran the checks, audited the receipts and prepared the submission under his
 direction. The issue asking for its registration, #910 of 5 November 2026, was posted on
 his behalf by his AI agent’s account, `kenaznia-doga`; T-266 records it.
+This repository’s census replayed it at all 4,972 directions on 5 November and its
+whole-net control passed the same day, so T-266 is `V3/C3`, reproduced with the
+producer’s code, and n = 94’s verified lower bound is $2493/250$.
 
 **[wand125 continuous n28 2026-10-15]**: Hiroaki Hosono’s (wand125’s) continuous-pose
 certificate for $s(28) > 1149/200 = 5.745$, pinned at
