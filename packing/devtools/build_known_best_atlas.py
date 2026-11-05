@@ -2791,7 +2791,7 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: the truthful record, `improved_by` included. The case records, the case pages, the bound
 #: citations and the site credit every name. Doğa Özden improved Evan Daniel's packings at
 #: 204 and 299 (T-264, T-263), adopted on 4 November 2026, and Kaelan Yim his packing at
-#: 260 (T-265), adopted on 5 November 2026 (think-tj4o).
+#: 260 (T-265), adopted on 5 November 2026 (think-tj4o; Yim's name, think-hgpg).
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     204: ("Doğa Özden",),
     260: ("Kaelan Yim",),

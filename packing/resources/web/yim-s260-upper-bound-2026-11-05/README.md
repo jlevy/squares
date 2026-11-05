@@ -195,7 +195,8 @@ grid-slack draws no view at 0.5, 1 or 5 degrees, and Evan Daniel’s regularizer
 witness not jammed, so the count is decided no better and the axis tool’s view of the new
 witness is drawn. The rigidity block was derived again and stays not rigid, 105 of the
 260 squares translating. The atlas posters hold Yim’s name off their credit block until
-the next infographics cut (think-tj4o); the case record, its page and its bound citation
+the next infographics cut (think-hgpg, beside Özden’s think-tj4o); the case record, its
+page and its bound citation
 credit him now.
 
 ## What Is Not Established
