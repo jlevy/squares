@@ -5,16 +5,18 @@ title: "Import Yim: s(260) <= 16.6339825019226, 1.99e-10 below T-257, attachment
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l48
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
+child_order_hints:
+  - is-01m6n5aresp22hknr0pe9qr8te
 hold: null
 hold_until: null
 created_at: 2026-11-04T05:06:47.208Z
-updated_at: 2026-11-05T05:57:34.583Z
+updated_at: 2026-11-05T06:11:24.761Z
 started_at: 2026-11-04T05:07:17.344Z
 ---
 Import of jlevy/squares#895 (opened 2026-11-04T02:15:02Z by vitamoon, Kaelan Yim): s(260) <= 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626 (about 16.6339825019226141), about 1.99e-10 below the case's house, Evan Daniel's #845 certificate (T-257) at 16.6339825021218840.
