@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 151
+version: 152
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -57,7 +57,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-04T23:55:02.287Z
+updated_at: 2026-11-05T00:54:26.542Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -267,3 +267,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-04 23:xx: #908 (L42/l45: T-142, T-143 V3/C3 at n28/n30; 5.5 CPU-h) is green, but think-i85v and think-r333 are "Blocked by think-ux1v": the owner order of 11 Oct puts the full regularization pass first, and ux1v is still in_progress. On main, #532 asks are blocked_on ux1v. Treated as an owner decision: #908 labelled blocked:owner-decision and kept draft; its senior review runs anyway. L47 (T-132) finishes its compute but keeps the block and its PR draft and labelled. Also flagged: #543 lists T-142 control tolerance as an owner question, which #892 settled by the enclosure rule without a recorded owner answer.
 
 2026-11-04 23:53 renewal (intake68): no new reports. A container restart (~23:45Z) stopped L47 and the #908 reviewer's test runs; both resumed (L47 census and control output survived on disk). #908 and the T-132 PR are held as an owner decision (think-ux1v order of 11 Oct).
+
+2026-11-05 00:52 renewal (intake69): no new reports. #908 review accept-with-fixes (F1 #532 summary, F2 n-028 T-192 blocker), with L42 fixing it and the PR held for the owner. Owner asked: (1) replays vs the think-ux1v order; (2) #543 tolerance as adopted by #892.
