@@ -28339,6 +28339,65 @@ issues:
       vitamoon/vitamoon/blob/main/n260.cert, and the stray ": ." the review notes. The
       licence, the file and the claim are unchanged, so read_through moves to the edit,
       05:31:52Z.
+  - number: 910
+    title: "s(94) ≥ 2493/250 = 9.972 — rescaled Hosono density certificate and exhaustive receipts"
+    author: kenaznia-doga
+    opened: '2026-11-05'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden (https://dogaozden.com/math/live/square-packing/), through his AI agent's
+      account kenaznia-doga, asks for the registration of s(94) >= 2493/250 = 9.972, above
+      T-262's 1993/200 by 7/1000: Hosono's mixed_n94_L995 measure dilated by 4986/4975,
+      masses unchanged, on a declared net of 4,972 half-angles of step 1/12000, in
+      certificate/n94-L9972.json.gz at kenaznia-doga/s94-lower-bound-9972 7d21f9b, "not a
+      new packing arrangement". It reports this repository's sqverify-fast, unmodified at
+      e6e8d577, VERIFIED at all 4,972 directions in an archive selected from six native
+      runs, the 99/100 mass mutant refused at two directions with an exact witness, and its
+      exploratory C checker, which it does not offer as evidence. It answers the notes of
+      #890's review on the quadrant and the growth formula, and says no side between 9.965
+      and the route's ceiling had been tried when #890 was answered. AI agents in the
+      author's lab, Claude and OpenAI Codex agents, built the certificate, ran the checks
+      and audited the receipts. Triaged and retained on 5 November 2026 (think-pi8b): the
+      packet ozden-s94-lower-bound-9972-2026-11-05 retains the tree but for .gitignore and
+      the copy of Hosono's candidate the T-091 packet keeps; every stated digest holds;
+      devtools.audit_dilated_measure recomputes the premises and regenerates the
+      certificate byte for byte, and audits the lab's receipts, every direction once in a
+      run of reviewed source. A 13-direction sample with the census binary agrees with the
+      lab's lines. Registered as T-266, with n-094's reported lower lane at 2493/250. The
+      stage 4 review of 5 November (docs/project/reviews/review-2026-11-05-ozden-s94-9972.md,
+      think-xzxd) accepts the certificate with no defect, its own clean-room code having
+      decided 26 of the 4,972 directions. This repository's census decided it again at all
+      4,972 directions on 5 November (think-qcms, 16.65 CPU-hours), every direction's row
+      equal to the lab's selected archive line; its whole-net control verified the original
+      again and refused the 99/100 mutant at every direction, the axis leg judged by the
+      enclosure rule #892 adopted while #543's question to the owner is still open: the
+      replay is E-ozden-910-n94-9972-sqverify-fast-replay, T-266 is V3/C3,
+      reproduced with the producer's code, and n-094's verified lane takes 2493/250.
+      Licensed CC BY 4.0 (data) and MIT (code) by the LICENSE.md #890's packet retains.
+    read_through: '2026-11-05T06:51:55Z'
+    results:
+    - key: s94-9972
+      claim: >-
+        s(94) >= 2493/250 by certificate/n94-L9972.json.gz, Hosono's mixed_n94_L995 dilated
+        by 4986/4975 onto a declared 4,972-direction net.
+      source: body
+      register:
+      - T-266
+      evidence:
+      - E-ozden-910-n94-9972-report
+      - E-ozden-910-n94-9972-sqverify-fast-replay
+      - E-ozden-910-n94-9972-review-sample
+    beads:
+    - think-pi8b
+    - think-qcms
+    - think-xzxd
+    answer_bead: think-pi8b
+    replies: []
+    close_when: >-
+      T-266 is on main and the reply on main says what was retained, audited, reviewed and
+      replayed, with T-266 at V3/C3 and n-094's verified lane at 2493/250.
   - number: 914
     title: '175, 204, 260, 268, 293, 303, 304: registration request'
     author: evand

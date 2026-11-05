@@ -1,0 +1,5 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+# r=249 strip width 1.938432e-04 (dilated coordinates)
+# r=2490 strip width 9.555116e-04 (dilated coordinates)
+# r=4731 strip width 1.519457e-03 (dilated coordinates)
+cpu: user 0.361 s, sys 0.023 s, wall 0.446 s

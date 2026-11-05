@@ -655,6 +655,7 @@ key remain bound to the bytes they originally named.
 | [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate) | Benjamin Greff’s mixed cover for `s(95) = 10`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #610 | **[bengreff s95 certificate 2026-10-15]**; [15 October packet](web/bengreff-s95-certificate-2026-10-15/README.md), pinned `dd7297d06adc664268c65005369b895e4ded7547` |
 | [moh63-dev/s44-equals-7](https://github.com/moh63-dev/s44-equals-7) | Mohsen Khalili and Sara Gharabaghi’s closed mixed cover for `s(44) = 7`, decided by Evan Daniel’s `zmx2`; issue #842 | **[Khalili Gharabaghi s44 cover 2026-10-29]**; [29 October packet](web/moh63-dev-s44-equals-7-2026-10-29/README.md), pinned `b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf` |
 | [kenaznia-doga/s94-lower-bound](https://github.com/kenaznia-doga/s94-lower-bound) | Doğa Özden’s `s(94) ≥ 1993/200`, Hosono’s `mixed_n94_L995` measure dilated onto a 600-direction declared net and decided by this repository’s `sqverify-fast`; issue #890 | **[Özden s94 dilation 2026-11-03]**; [3 November packet](web/ozden-s94-lower-bound-2026-11-03/README.md), pinned `9d76ad5549e99e952c899462b36d2bd765517969`; CC BY 4.0 data and MIT code by the `LICENSE.md` of `484ad20f`, retained |
+| [kenaznia-doga/s94-lower-bound-9972](https://github.com/kenaznia-doga/s94-lower-bound-9972) | Doğa Özden’s `s(94) ≥ 2493/250`, Hosono’s `mixed_n94_L995` measure dilated onto a 4,972-direction declared net, with the lab’s receipts of this repository’s `sqverify-fast` at every direction; issue #910 | **[Özden s94 lower bound 2026-11-05]**; [5 November packet](web/ozden-s94-lower-bound-9972-2026-11-05/README.md), pinned `7d21f9bdf707102dd4ebf47e52f81b502a01004d`; CC BY 4.0 data and MIT code by its `LICENSE.md` |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
 | [Guzhou0806/n40-square-packing](https://github.com/Guzhou0806/n40-square-packing) | The clipped-corner transfer `s(40) > 335427/50000` on Hosono’s `rect_n40_L67` density, with its 401-direction nodal run and exact finite checks, and then the continuous-pose kernel `s(40) > 1340000/199529` on the same density, with its 43-slab interval cover, exact axis certificate and finite checks, and the same kernels’ `s(40) > 3359/500` on a new density of 685 rectangle orbits | **[Guzhou0806 n40 clipped corner 2026-10-10]**; [10 October packet](web/guzhou-n40-clipped-corner-2026-10-10/README.md), pinned `e5abeb4d078a5c5b35df6204dd9b93378e5a7880`; **[Guzhou0806 n40 continuous pose 2026-10-10]**; [10 October continuous-pose packet](web/guzhou-n40-continuous-pose-2026-10-10/README.md), pinned `71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3`; **[Guzhou0806 n40 new supports 2026-10-11]**; [11 October new-supports packet](web/guzhou-n40-new-supports-2026-10-11/README.md), pinned `6a65957e6c5c51cdf267917d882dab7f5b4928dd` |
 | [Mira-acc/17squares](https://github.com/Mira-acc/17squares) | Exact point and weighted certificates used in the `n = 17` lineage | **[n17 weighted certificates 2026-09-20]**; [20 September packet](web/n17-weighted-certificates-2026-09-20/README.md) |
@@ -1820,7 +1821,31 @@ The issue asking for its registration, #890 of 3 November 2026, was posted on hi
 by his AI agent’s account, `kenaznia-doga`; T-262 records it.
 This repository’s census replayed it at all 600 directions on 3 November and its
 whole-net control passed on 4 November, so T-262 is `V3/C3`, reproduced with the
-producer’s code, and n = 94’s verified lower bound is $1993/200$.
+producer’s code, and n = 94’s verified lower bound was $1993/200$ until T-266 (5
+November 2026).
+
+**[Özden s94 lower bound 2026-11-05]**: Doğa Özden’s certificate for
+$s(94) \ge 2493/250 = 9.972$: the same measure of Hosono’s with every coordinate
+multiplied by $\lambda = 4986/4975$ and the masses unchanged, core side
+$24872661/24875000$, on a net it declares of 4,972 half-angle directions of step
+$1/12000$. It is pinned in
+[kenaznia-doga/s94-lower-bound-9972](https://github.com/kenaznia-doga/s94-lower-bound-9972)
+at `7d21f9bdf707102dd4ebf47e52f81b502a01004d` (5 November 2026, the repository’s one
+commit) and retained whole but for `.gitignore` and the copy of Hosono’s candidate this
+repository already keeps; [packet](web/ozden-s94-lower-bound-9972-2026-11-05/README.md).
+Its certificates, witnesses, receipts, data and write-ups are published under CC BY 4.0
+and its code under the MIT licence, by the same `LICENSE.md` as the 3 November
+repository’s. The lab’s receipts of this repository’s `sqverify-fast`, unmodified, cover
+all 4,972 directions, assembled from six native runs, with a 99/100 mass control at two
+directions. Its README credits the measure to Hosono after Tokoharu and the declared
+nets, the verifier, its review and T-262 to Joshua Levy and this project, and says AI
+agents in the author’s lab, Claude and OpenAI Codex agents, constructed and rescaled the
+certificate, ran the checks, audited the receipts and prepared the submission under his
+direction. The issue asking for its registration, #910 of 5 November 2026, was posted on
+his behalf by his AI agent’s account, `kenaznia-doga`; T-266 records it.
+This repository’s census replayed it at all 4,972 directions on 5 November and its
+whole-net control passed the same day, so T-266 is `V3/C3`, reproduced with the
+producer’s code, and n = 94’s verified lower bound is $2493/250$.
 
 **[wand125 continuous n28 2026-10-15]**: Hiroaki Hosono’s (wand125’s) continuous-pose
 certificate for $s(28) > 1149/200 = 5.745$, pinned at

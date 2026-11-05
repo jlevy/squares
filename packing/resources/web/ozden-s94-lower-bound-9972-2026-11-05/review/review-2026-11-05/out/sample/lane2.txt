@@ -1,0 +1,15 @@
+r=1198 exit=0 status: verified nodes: 87005 least_certified_bound: 1.0000012061887331 lowest_centre_estimate: 1.00113962852132 cpu_seconds: 69.92005514799999 
+r=2103 exit=0 status: verified nodes: 86141 least_certified_bound: 1.0000001377766852 lowest_centre_estimate: 1.0030177215288107 cpu_seconds: 70.628511486 
+r=1979 exit=0 status: verified nodes: 86131 least_certified_bound: 1.0000000624336849 lowest_centre_estimate: 1.0029102875066462 cpu_seconds: 72.08558385500001 
+r=733 exit=0 status: verified nodes: 83847 least_certified_bound: 1.000001741076046 lowest_centre_estimate: 1.0016255045549698 cpu_seconds: 69.874634506 
+r=1307 exit=0 status: verified nodes: 87139 least_certified_bound: 1.0000006621470723 lowest_centre_estimate: 1.001577259220261 cpu_seconds: 72.508121135 
+r=1289 exit=0 status: verified nodes: 87279 least_certified_bound: 1.0000003410840825 lowest_centre_estimate: 1.0017842290076853 cpu_seconds: 77.707704193 
+r=132 exit=0 status: verified nodes: 91237 least_certified_bound: 1.0000004988121665 lowest_centre_estimate: 1.0042175041242412 cpu_seconds: 74.24789236599999 
+r=981 exit=0 status: verified nodes: 85575 least_certified_bound: 1.0000006488440083 lowest_centre_estimate: 1.0025343653191916 cpu_seconds: 74.77156254500001 
+r=2479 exit=0 status: verified nodes: 87139 least_certified_bound: 1.0000005299739754 lowest_centre_estimate: 1.0018595203552416 cpu_seconds: 75.550860309 
+r=1214 exit=0 status: verified nodes: 86795 least_certified_bound: 1.0000019252281656 lowest_centre_estimate: 1.0012125885292373 cpu_seconds: 70.47324288099999 
+r=249 exit=0 status: verified nodes: 85107 least_certified_bound: 1.0000015003093286 lowest_centre_estimate: 1.0046783655305767 cpu_seconds: 64.260807187 
+r=20 exit=0 status: verified nodes: 103631 least_certified_bound: 1.0000010161170756 lowest_centre_estimate: 1.003025155076207 cpu_seconds: 68.82158765 
+r=1118 exit=0 status: verified nodes: 86615 least_certified_bound: 1.000000191746651 lowest_centre_estimate: 1.001411148619924 cpu_seconds: 68.513555846 
+r=4034 exit=0 status: verified nodes: 89735 least_certified_bound: 1.0000000602099972 lowest_centre_estimate: 1.0028532557721868 cpu_seconds: 76.11764400599999 
+r=4960 exit=0 status: verified nodes: 101163 least_certified_bound: 1.0000000871675796 lowest_centre_estimate: 1.0032856910242849 cpu_seconds: 83.710761145 

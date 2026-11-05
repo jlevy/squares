@@ -1,0 +1,10 @@
+{
+  "author": "Hiroaki Hosono (wand125)",
+  "repository": "https://github.com/wand125/square-packing-bounds",
+  "commit": "797bdf6e10eba5f9dccca9da06f8352e81ba9dde",
+  "path": "certificates/mixed_n94_L995/candidate.json",
+  "json_sha256": "64d819536a9994172b1f7a7b2095e7b40e420a09efa7441d459e73191a20667a",
+  "archive_sha256": "df3ae678029f3da1f0fd4c9b1ba9d331c582478e46c453f238c36e476d9fd27c",
+  "archive_note": "Retained compressed copy; identity of published source is the decompressed JSON digest.",
+  "git_blob_sha1": "c9ed3393bc3da71755c6125c1a3abad0b2a08dc7"
+}

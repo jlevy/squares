@@ -38086,7 +38086,8 @@ results:
     significance:
       score: 3
       rationale: >-
-        The strongest lower bound on record at n = 94, 3/200 above T-091, by T-091's own
+        The strongest lower bound on record at n = 94 when scored (T-266 passed it on 5
+        November 2026), 3/200 above T-091, by T-091's own
         measure dilated onto a finer declared net, the certificate kind and route of T-091
         and T-178, with no new technique, at S3 as they are; scored as a claim on 3
         November.
@@ -38748,6 +38749,177 @@ results:
         the significance; compared with the lane's receipts after its findings were frozen.
       verdict: accepted
       covers: [T-265]
+  - id: T-266
+    kind: lower-bound
+    registered: '2026-11-05'
+    landed: '2026-11-05'
+    headline: "`s(94) ≥ 2493/250` verified, T-091's measure dilated onto a 4,972-direction net"
+    claim: >-
+      A rectangle measure of kenaznia-doga/s94-lower-bound-9972, published on 5 November 2026
+      and reported in jlevy/squares#910, proves s(94) >= 2493/250 = 9.972.
+
+      The certificate is Hiroaki Hosono's mixed_n94_L995 (T-091) dilated by 4986/4975: 853
+      uniform rectangles in D4 orbits, every coordinate scaled and every mass unchanged, of
+      total mass 9399999/100000 < 94, at core side 24872661/24875000 on a net its file
+      declares of 4,972 half-angle tangents of step 1/12000. Hosono's 201-direction net
+      does not admit the larger core, so 4,952 of the 4,972 directions are new, and the
+      centre domain grows toward the walls; the dilation carries none of T-091's or
+      T-262's coverage. It is the source's second dilation of that measure, after T-262's
+      by 1993/1990, and not a new packing arrangement.
+
+      The source reports this repository's sqverify-fast, unmodified, verifying every core
+      centred in its per-bin domain at all 4,972 directions, in six native runs whose
+      selected lines make one archive, and the 99/100 mass mutant refused at two
+      directions. Here the premises, lemma N0 on the declared net and the dilation were
+      recomputed exactly from the retained bytes, and the lab's receipts audited: every
+      direction once, each selected line its run's, of reviewed crate source.
+
+      The same sqverify-fast, built from reviewed source, decided all 4,972 directions of
+      the retained certificate on 5 November 2026, every direction's row equal to the
+      source's selected archive line on every field the line keeps and the node totals
+      equal. Its whole-net controls of the same day, the axis judged by the census's
+      enclosure rule, refused the 99/100 mutant on coverage at every direction and the
+      near-threshold mutant.
+
+      The stage 4 mathematical review of 5 November accepts the argument with no defect:
+      every premise but whole-net coverage recomputed exactly, and 26 of the 4,972
+      directions decided by clean-room code of its own over their whole quadrants, all
+      verified, the least capture found above 1.0010.
+
+      This raises the verified and reported lower lanes at n = 94 from T-262's 1993/200 by
+      7/1000. The bound is confirmed, reproduced with the producer's code: the source
+      decided it with the same sqverify-fast, so the replay here is not a second
+      implementation; the review's clean-room code, independently re-implemented, decided a
+      sample of 26 directions. No independent full implementation, second method,
+      proof-assistant check or optimality theorem is claimed. It bounds s(95) and s(96)
+      too, which are proved equal to 10 (T-191).
+
+      Doğa Özden after Hosono, Tokoharu and Levy,
+      [s94-lower-bound-9972](https://github.com/kenaznia-doga/s94-lower-bound-9972/tree/7d21f9bdf707102dd4ebf47e52f81b502a01004d).
+      The source says AI agents in the author's research lab, Claude (Anthropic) and
+      OpenAI Codex agents, constructed and rescaled the certificate, ran the checks,
+      audited the receipts and prepared the submission, under his direction; the issue
+      was posted on his behalf by his AI agent.
+    scope: {n_values: [94]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        The strongest lower bound on record at n = 94, 7/1000 above T-262, by T-091's own
+        measure dilated onto a still finer declared net, the certificate kind and route of
+        T-091, T-178 and T-262, with no new technique, at S3 as they are; scored as a claim
+        on 5 November.
+      scored: '2026-11-05'
+      by: >-
+        the stage 4 review of 5 November
+        (docs/project/reviews/review-2026-11-05-ozden-s94-9972.md), confirming the
+        registering lane's draft (think-pi8b)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Özden s94 lower bound 2026-11-05]']
+      published: '2026-11-05'
+    composition: >-
+      One source certificate and one complete maintained native replay, C3. The source
+      decided it with this repository's sqverify-fast, so the census replay here is
+      reproduced with the producer's code; no second complete implementation stands beside
+      it. The source's exploratory C checker, which is not interval arithmetic, is retained
+      and not run. The stage 4 review's own clean-room programs sampled 26 of the 4,972
+      directions, each decided over its whole quadrant, independently re-implemented; a
+      sample cited by the case record that sets no rung.
+    evidence:
+      - E-ozden-910-n94-9972-report
+      - E-ozden-910-n94-9972-sqverify-fast-replay
+    artifacts:
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/README.md
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/acquisition/sources.json
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/source/certificate/n94-L9972.json.gz
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/dilation-audit.json
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/native-receipt-audit.json
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/sample-diagnostic.json
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/README.md
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/replay-comparison.json
+      - packing/devtools/audit_dilated_measure.py
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/mixed_n94_L9972.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/mixed_n94_L9972.control.json
+      - docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
+    next_rung: >-
+      None for the bound. V4 and C4 need a second qualifying adversarial AI review by a
+      distinct reviewer and an explicit human oversight record; one AI review, of 5
+      November, is retained. The source's exploratory checker, or another complete
+      implementation, run here would add implementation diversity beside the review's
+      clean-room sample.
+    notes: >-
+      Registered on the day of the report from the packet's retained bytes, at V0/C0, and
+      V0/C1 once the stage 4 review of 5 November was recorded. From the complete census
+      replay of 5 November, its whole-net control receipt of the same day and that review,
+      recorded as E-ozden-910-n94-9972-sqverify-fast-replay with the review as its audit
+      record, the entry is V3/C3, and the case record's verified lane takes 2493/250 beside
+      the reported one; T-262 keeps its claim at n = 94, now superseded there. The score of
+      5 November stands.
+
+      The complete census replay (two threads under nice 19, 59,956 CPU-seconds and 30,876
+      seconds of wall, 2,462,923,881 nodes, least leaf bound 1.0000000000003892 at direction
+      3663, the exact capture at that leaf's centre 1.0336 clearing 1) equals the source's
+      selected archive line at every direction on every field the line keeps, timings
+      aside, and the node totals are equal (receipts/replay-comparison.json in the packet).
+
+      Its whole-net control receipt (mixed_n94_L9972.control.json, CONTROLS_REFUSED)
+      verified the original again at direction 3663, refused the 99/100 mutant at all
+      4,972 directions, each a coverage refusal at a centre in the per-bin domain whose
+      exact capture is below 1, and refused the near-threshold mutant with an exact
+      witness; at the axis the exact capture lies inside the enclosure the sweep held,
+      [0.9930559807565953, 0.9930559830055209].
+
+      The stage 4 review of 5 November (think-xzxd) accepts the certificate with no defect
+      and confirms the draft score. F1 to F3 are notes for the author.
+
+      Its F4 reads item 1 of the 6 October checklist, "scaling_factor 1", as absent or 1
+      for this file, which has no such key (the packet's dilation audit checks
+      scaling_factor_absent_or_one). Its F5 sets the words for the replay: reproduced with
+      the producer's code, with its own sample stated beside the rung as independently
+      re-implemented.
+
+      Its F6: the archive's least certified bound, 1.0000000000003892 at direction 3663,
+      is the least leaf bound of the search and not a margin; the least capture the review
+      found is above 1.0010. Its F7: the crate's axis bound sits 1.1357e-9 below the exact
+      least vertex (1.1245e-9 for the mutant), so under the census's former constant
+      allowance of 1e-9 the control's axis refusal would have failed closed; the control
+      judges that leg by the enclosure rule that #892 adopted for the census. #543's
+      question to the owner on this control's tolerance (widen the allowance, derive it
+      from the sweep's enclosure, or confirm by another control) is still open; #892's
+      rule is not the owner's answer to it, and this control depends on it.
+
+      A records note on the stage 4 review (5 November 2026, the import lane): its F7, in
+      the findings table and in its note on the axis, names the enclosure rule as that of
+      think-4uun and PR #898. #892 adopted the rule for the census; #898 applied it to
+      T-262's control, after which think-4uun closed. The retained review is not edited.
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/mixed_n94_L9972.control.json
+      - packing/tests/test_sqverify_fast_census.py
+    reviews:
+      - path: docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
+        kind: adversarial
+        reviewer: >-
+          Claude (AI review), strong tier (tbd-strong-max) at maximum reasoning, the stage
+          4 mathematical lane of the #910 import (think-xzxd), separately prompted and
+          sharing no context with the import lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-05'
+        scope: >-
+          The measure-capture argument re-derived on the declared net (lemma N0, the
+          per-bin domain, the quarter turn, the counting step); every premise but coverage
+          recomputed exactly apart from the crate and the import lane's tool; what the
+          dilation carries and does not; 26 directions decided in full by clean-room code,
+          direction 0 exactly and 25 with proved bounds; the lab's archive and control read
+          as data and its witnesses held exactly; what the census row and its control must
+          show by the 6 October declared-net checklist; compared with the review of #890's
+          certificate after the findings were frozen.
+        verdict: accepted
+        covers: [T-266]
   - id: T-267
     kind: upper-bound
     registered: '2026-11-05'

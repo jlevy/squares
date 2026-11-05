@@ -7843,7 +7843,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-04'
+  lastmod: '2026-11-05'
   status: live
 - path: cases/95.html
   canonical: cases/95.html
@@ -23171,6 +23171,42 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-11-05-yim-895-260.md
     - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md
+- path: result/t-266.html
+  canonical: result/t-266.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-05'
+  lastmod: '2026-11-05'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 94
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s94 lower bound 2026-11-05]'
+      published: '2026-11-05'
+    builds_on: null
+    evidence:
+    - E-ozden-910-n94-9972-report
+    - E-ozden-910-n94-9972-sqverify-fast-replay
+    artifacts:
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/README.md
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/acquisition/sources.json
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/source/certificate/n94-L9972.json.gz
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/dilation-audit.json
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/native-receipt-audit.json
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/sample-diagnostic.json
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/README.md
+    - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/receipts/replay-comparison.json
+    - packing/devtools/audit_dilated_measure.py
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/mixed_n94_L9972.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/ozden-s94-lower-bound-9972-2026-11-05/mixed_n94_L9972.control.json
+    - docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
 - path: result/t-267.html
   canonical: result/t-267.html
   kind: result
