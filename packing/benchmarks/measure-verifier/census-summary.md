@@ -45,6 +45,7 @@ the platform supplies no direction CPU.
 | `rect_n27_L56` | T | 27 | 28/5 | VERIFIED | 94.7 | 94.6 | 1.0001000001258618 | complete | no |
 | `rect_n27_L5635` | T | 27 | 1127/200 | VERIFIED | 171.3 | 171.2 | 1.0001000006538547 | complete | no |
 | `mixed_n28_L5735` | M | 28 | 1147/200 | VERIFIED | 1540.9 | 1540.6 | 1.0000000000381999 | none | yes |
+| `mixed_n28_L57425` | M | 28 | 2297/400 | VERIFIED | 7096.9 | 7096.6 | 1.0000000000106595 | none | yes |
 | `rect_n28_L5695` | T | 28 | 1139/200 | VERIFIED | 79.7 | 79.5 | 1.000100001727597 | none | yes |
 | `rect_n28_L572` | T | 28 | 143/25 | VERIFIED | 162.2 | 162.1 | 1.0001000011440067 | none | yes |
 | `rect_n28_L57225` | T | 28 | 2289/400 | VERIFIED | 203.6 | 203.4 | 1.0001000010341632 | complete | no |
@@ -54,6 +55,7 @@ the platform supplies no direction CPU.
 | `rect_n29_L579` | T | 29 | 579/100 | VERIFIED | 113.1 | 113.0 | 1.0001000015468267 | complete | no |
 | `rect_n29_L57975` | T | 29 | 2319/400 | VERIFIED | 170.9 | 170.8 | 1.0001000002454083 | complete | no |
 | `mixed_n30_L58835` | M | 30 | 11767/2000 | VERIFIED | 3890.8 | 3890.6 | 1.0000000000570795 | none | yes |
+| `mixed_n30_L58925` | M | 30 | 2357/400 | VERIFIED | 10667.1 | 10666.7 | 1.000000000029295 | none | yes |
 | `rect_n30_L5865` | T | 30 | 1173/200 | VERIFIED | 118.6 | 118.4 | 1.0001000021122557 | complete | no |
 | `rect_n30_L5875` | T | 30 | 47/8 | VERIFIED | 252.4 | 252.2 | 1.0001000004862441 | complete | no |
 | `mixed_n31_L59775` | M | 31 | 2391/400 | VERIFIED | 14607.6 | 14607.3 | 1.000000000022577 | none | yes |
@@ -246,7 +248,7 @@ the platform supplies no direction CPU.
 | `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 128.0 | 1.000000000300333 | complete | no |
 | `mixed_n108_L1062` | M | 108 | 531/50 | VERIFIED | 2086.8 | 2086.5 | 1.0000000001765084 | none | yes |
 
-227 of 227 certificates verified; 141 of them are the first complete check of their
+229 of 229 certificates verified; 143 of them are the first complete check of their
 certificate in this repository.
 
 <!-- This document follows common-doc-guidelines.md.

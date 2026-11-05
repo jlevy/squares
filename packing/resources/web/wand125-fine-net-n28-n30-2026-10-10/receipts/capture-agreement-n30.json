@@ -1,0 +1,45 @@
+{
+  "kind": "fine-net-capture-agreement/v1",
+  "capture": "mixed_n30_L58925.jsonl.gz",
+  "capture_sha256": "771261222fb7bf9fce8acea558b60535dc0908f5cb974c7f012ded4f2207451b",
+  "source_run_sha256": "a0252ad908786885700a366450fe7ff8654009a3331b93f8065ae74d8e2fea2f",
+  "directions": 2073,
+  "source_directions": 2073,
+  "only_in_capture": [],
+  "only_in_source": [],
+  "fields": [
+    "verdict",
+    "method",
+    "nodes",
+    "leaves",
+    "max_depth",
+    "min_certified_lower_bound",
+    "vertices",
+    "argmin"
+  ],
+  "differing": {},
+  "nodes": 702952674,
+  "source_nodes": 702952674,
+  "least_certified_bound": 1.000000000029295,
+  "least_certified_bound_at": 1585,
+  "builds": {
+    "capture": {
+      "profile": "release",
+      "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+      "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+      "target": "x86_64-unknown-linux-gnu"
+    },
+    "source": {
+      "profile": "release",
+      "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+      "source_sha256": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+      "target": "x86_64-unknown-linux-gnu"
+    }
+  },
+  "threads": {
+    "capture": 2,
+    "source": 12
+  },
+  "status": "CAPTURE_AGREES_WITH_SOURCE_LOG",
+  "scope": "A comparison of two recorded runs: it runs nothing and decides nothing the capture does not; the capture's own census row decides the certificate."
+}

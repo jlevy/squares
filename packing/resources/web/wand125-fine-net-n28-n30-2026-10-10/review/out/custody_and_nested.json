@@ -1,0 +1,267 @@
+{
+ "assets": [
+  {
+   "certificate": "mixed_n28_L57425",
+   "asset": "certificates__mixed_n28_L57425.tar.gz",
+   "bytes": 627191,
+   "sha256": "7d0f910768d47fcdba6233334798487471db7ef2fe556400269c34c3116d3bf3",
+   "equal_to_pin": true,
+   "member_paths": [
+    "certificates/mixed_n28_L57425/candidate.json",
+    "certificates/mixed_n28_L57425/check2/control-197_200.jsonl.gz",
+    "certificates/mixed_n28_L57425/check2/control.json",
+    "certificates/mixed_n28_L57425/check2/receipt.json",
+    "certificates/mixed_n28_L57425/check2/run.jsonl.gz",
+    "certificates/mixed_n28_L57425/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+    "certificates/mixed_n28_L57425/n28-L5.7425-check2-bundle.tar.gz",
+    "certificates/mixed_n28_L57425/verification/prepublication-receipt.json"
+   ],
+   "members_equal_manifest": true,
+   "members_outside_prefix": [],
+   "retained_copies_equal_members": {
+    "release/certificates/mixed_n28_L57425/candidate.json.gz": true,
+    "release/certificates/mixed_n28_L57425/check2/control-197_200.jsonl.gz": true,
+    "release/certificates/mixed_n28_L57425/check2/control.json": true,
+    "release/certificates/mixed_n28_L57425/check2/receipt.json": true,
+    "release/certificates/mixed_n28_L57425/check2/run.jsonl.gz": true,
+    "release/certificates/mixed_n28_L57425/verification/prepublication-receipt.json": true
+   },
+   "sealed_root": "n28-L5.7425-check2-bundle/",
+   "sealed_members": 16,
+   "sealed_matches_its_files_sha256": true,
+   "sealed_unlisted": [
+    "files-sha256.json"
+   ],
+   "sealed_payloads_repeat_outer": [
+    "candidate.json",
+    "check2/control-197_200.jsonl.gz",
+    "check2/control.json",
+    "check2/receipt.json",
+    "check2/run.jsonl.gz",
+    "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+   ],
+   "sealed_readme_differs_from_pinned": true,
+   "sealed_readme_sha256": "6c2e71ff81dc85607555de7ad80795237e42072f415e6e962478a77905cb8dd6",
+   "sealed_readme_lines": 50,
+   "archive_sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+  },
+  {
+   "certificate": "mixed_n30_L58925",
+   "asset": "certificates__mixed_n30_L58925.tar.gz",
+   "bytes": 638622,
+   "sha256": "0d11fe0554909e1457d70efa425c82344e622006590ac6ee58a481b69d1b61ba",
+   "equal_to_pin": true,
+   "member_paths": [
+    "certificates/mixed_n30_L58925/candidate.json",
+    "certificates/mixed_n30_L58925/check2/control-197_200.jsonl.gz",
+    "certificates/mixed_n30_L58925/check2/control.json",
+    "certificates/mixed_n30_L58925/check2/receipt.json",
+    "certificates/mixed_n30_L58925/check2/run.jsonl.gz",
+    "certificates/mixed_n30_L58925/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+    "certificates/mixed_n30_L58925/n30-L5.8925-check2-bundle.tar.gz",
+    "certificates/mixed_n30_L58925/verification/prepublication-receipt.json"
+   ],
+   "members_equal_manifest": true,
+   "members_outside_prefix": [],
+   "retained_copies_equal_members": {
+    "release/certificates/mixed_n30_L58925/candidate.json.gz": true,
+    "release/certificates/mixed_n30_L58925/check2/control-197_200.jsonl.gz": true,
+    "release/certificates/mixed_n30_L58925/check2/control.json": true,
+    "release/certificates/mixed_n30_L58925/check2/receipt.json": true,
+    "release/certificates/mixed_n30_L58925/check2/run.jsonl.gz": true,
+    "release/certificates/mixed_n30_L58925/verification/prepublication-receipt.json": true
+   },
+   "sealed_root": "n30-L5.8925-check2-bundle/",
+   "sealed_members": 16,
+   "sealed_matches_its_files_sha256": true,
+   "sealed_unlisted": [
+    "files-sha256.json"
+   ],
+   "sealed_payloads_repeat_outer": [
+    "candidate.json",
+    "check2/control-197_200.jsonl.gz",
+    "check2/control.json",
+    "check2/receipt.json",
+    "check2/run.jsonl.gz",
+    "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+   ],
+   "sealed_readme_differs_from_pinned": true,
+   "sealed_readme_sha256": "314be4560915c0e6e08eebd2441d4c591173451cac5ad6da62dcc8f3fb5dec1c",
+   "sealed_readme_lines": 50,
+   "archive_sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+  }
+ ],
+ "nested": {
+  "archive_sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81",
+  "files": 20,
+  "root": "sqverify_fast/",
+  "build_digest_by_build_rs_rule": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+  "build_rs_sha256": "1e238378117bc7716e50cdd4e3d0d3862e756e1ff863794b9b559ffe4b2743e6",
+  "comparisons": {
+   "e020eb1e2": {
+    "repo_build_digest": "7c49cf79f2408e745d5a0759caf85768d92c502bb574b95dbc12b81a36e50300",
+    "identical": [
+     ".gitignore",
+     "Cargo.lock",
+     "Cargo.toml",
+     "INDEPENDENCE.md",
+     "build.rs",
+     "clippy.toml",
+     "independence-record.yaml",
+     "rust-toolchain.toml",
+     "src/axis.rs",
+     "src/exact.rs",
+     "src/interval.rs",
+     "src/lib.rs",
+     "src/main.rs",
+     "src/oracle.rs",
+     "src/rotated.rs",
+     "src/rotated_tests.rs"
+    ],
+    "differ": {
+     "README.md": {
+      "added_in_archive": 5,
+      "removed_from_repo": 2
+     },
+     "SOUNDNESS.md": {
+      "added_in_archive": 11,
+      "removed_from_repo": 0
+     },
+     "src/certificate.rs": {
+      "added_in_archive": 32,
+      "removed_from_repo": 2
+     },
+     "tests/adversarial.rs": {
+      "added_in_archive": 55,
+      "removed_from_repo": 0
+     }
+    },
+    "only_in_archive": [],
+    "only_in_repo": [],
+    "duplicate_key_reader_identical": true
+   },
+   "34e87a86b": {
+    "repo_build_digest": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+    "identical": [
+     ".gitignore",
+     "Cargo.lock",
+     "Cargo.toml",
+     "build.rs",
+     "clippy.toml",
+     "rust-toolchain.toml",
+     "src/axis.rs",
+     "src/exact.rs",
+     "src/interval.rs",
+     "src/main.rs",
+     "src/oracle.rs",
+     "src/rotated.rs"
+    ],
+    "differ": {
+     "INDEPENDENCE.md": {
+      "added_in_archive": 0,
+      "removed_from_repo": 65
+     },
+     "README.md": {
+      "added_in_archive": 10,
+      "removed_from_repo": 27
+     },
+     "SOUNDNESS.md": {
+      "added_in_archive": 18,
+      "removed_from_repo": 102
+     },
+     "independence-record.yaml": {
+      "added_in_archive": 0,
+      "removed_from_repo": 40
+     },
+     "src/certificate.rs": {
+      "added_in_archive": 38,
+      "removed_from_repo": 98
+     },
+     "src/lib.rs": {
+      "added_in_archive": 0,
+      "removed_from_repo": 3
+     },
+     "src/rotated_tests.rs": {
+      "added_in_archive": 0,
+      "removed_from_repo": 1
+     },
+     "tests/adversarial.rs": {
+      "added_in_archive": 55,
+      "removed_from_repo": 0
+     }
+    },
+    "only_in_archive": [],
+    "only_in_repo": [
+     "tests/declared_net.rs"
+    ],
+    "duplicate_key_reader_identical": true
+   },
+   "78729cfc2": {
+    "repo_build_digest": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+    "identical": [
+     ".gitignore",
+     "Cargo.lock",
+     "Cargo.toml",
+     "build.rs",
+     "clippy.toml",
+     "rust-toolchain.toml",
+     "src/axis.rs",
+     "src/exact.rs",
+     "src/interval.rs",
+     "src/main.rs",
+     "src/oracle.rs",
+     "src/rotated.rs"
+    ],
+    "differ": {
+     "INDEPENDENCE.md": {
+      "added_in_archive": 0,
+      "removed_from_repo": 79
+     },
+     "README.md": {
+      "added_in_archive": 10,
+      "removed_from_repo": 27
+     },
+     "SOUNDNESS.md": {
+      "added_in_archive": 23,
+      "removed_from_repo": 117
+     },
+     "independence-record.yaml": {
+      "added_in_archive": 1,
+      "removed_from_repo": 74
+     },
+     "src/certificate.rs": {
+      "added_in_archive": 38,
+      "removed_from_repo": 98
+     },
+     "src/lib.rs": {
+      "added_in_archive": 0,
+      "removed_from_repo": 3
+     },
+     "src/rotated_tests.rs": {
+      "added_in_archive": 0,
+      "removed_from_repo": 1
+     },
+     "tests/adversarial.rs": {
+      "added_in_archive": 55,
+      "removed_from_repo": 57
+     }
+    },
+    "only_in_archive": [],
+    "only_in_repo": [
+     "tests/declared_net.rs"
+    ],
+    "duplicate_key_reader_identical": true
+   }
+  },
+  "certificate_rs": {
+   "reads_proof_net": true,
+   "requires_exactly_step_and_last": true,
+   "refuses_proof_net_beside_certificate_metadata": true,
+   "refuses_proof_net_outside_format_M": true,
+   "reads_a_count_field": false,
+   "refuses_top_level_net_outside_format_L": false,
+   "checks_tangent_form_for_per_bin": true
+  }
+ },
+ "problems": []
+}

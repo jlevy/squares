@@ -1568,8 +1568,8 @@ def test_the_10_october_n28_n30_packet_is_read_from_its_retained_members() -> No
     """T-142's mixed_n28_L57425 and T-143's mixed_n30_L58925 are read from the 10 October
     n28 and n30 packet's release members, which `fine_net_followup retain` copied from
     the pinned assets on 4 November, and the packet shares the producer's crate, as the
-    other fine-net release packets do. Neither has a census row yet: no review reads
-    them (think-4ul6)."""
+    other fine-net release packets do. Both census rows were captured on 4 November,
+    after the stage 4 review that reads them (think-4ul6)."""
     packet = "wand125-fine-net-n28-n30-2026-10-10"
     found = {name: case for name, case in cases().items() if case.packet == packet}
     assert sorted(found) == ["mixed_n28_L57425", "mixed_n30_L58925"]
@@ -1674,6 +1674,40 @@ def test_each_t233_replay_entry_is_what_the_census_prints(name: str) -> None:
     kept = f"{name}.control-failed-v2.json" in " ".join(text.split())
     assert kept is (name in census.CONTROL_HISTORY)
     assert (FOLDER / case.packet / f"{name}.control-failed-v2.json").is_file() is kept
+
+
+#: T-142's and T-143's certificates, each with its replay entry's id. Both were captured
+#: and controlled on 4 November, under the enclosure rule, after the review of that day.
+T142_T143_REPLAYS = {
+    "mixed_n28_L57425": "E-wand125-fine-net-n28-57425-sqverify-fast-replay",
+    "mixed_n30_L58925": "E-wand125-fine-net-n30-58925-sqverify-fast-replay",
+}
+
+
+@pytest.mark.parametrize("name", sorted(T142_T143_REPLAYS))
+def test_each_t142_t143_replay_entry_is_what_the_census_prints(name: str) -> None:
+    """T-142's and T-143's replay entries are `--evidence`'s, field for field, with the
+    stage 4 review of 4 November (think-4ul6) as their audit record. Each report names
+    its retained candidate, so each entry is scoped to its count and names that
+    candidate; neither has a failed control to state."""
+    case = cases()[name]
+    text = census.evidence_entry(
+        case,
+        FOLDER,
+        entries()[name],
+        audit_record="docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md",
+        date="2026-11-04",
+        control_date="2026-11-04",
+    )
+    (generated,) = safe_load(text)
+    assert generated["id"] == T142_T143_REPLAYS[name]
+    assert generated["scope"] == {"n_values": [case.n]}
+    assert generated["certificate"] == str(case.candidate.relative_to(census.PROJECT.parent))
+    register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    (committed,) = (item for item in register["evidence"] if item["id"] == generated["id"])
+    assert generated == committed
+    assert name not in census.CONTROL_HISTORY
+    assert "control-failed-v2" not in text
 
 
 def test_a_report_over_several_certificates_names_each_by_its_directory() -> None:

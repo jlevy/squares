@@ -2587,13 +2587,13 @@ def source_digest() -> int:
 def write_summary() -> int:
     """`--summary`: census-summary.json and census-summary.md from both census folders."""
     rows = summary_rows()
+    # Retained layout, as census.json is: written with indent=2, the summary crossed
+    # check_retained_json's line threshold when T-142's and T-143's rows joined it.
     (CENSUS_ROOT / "census-summary.json").write_text(
-        json.dumps(
+        retained_json.dumps(
             {"kind": "sqverify-fast-census-summary/v1", "certificates": rows},
-            indent=2,
             sort_keys=True,
-        )
-        + "\n",
+        ),
         encoding="utf-8",
     )
     (CENSUS_ROOT / "census-summary.md").write_text(render_summary(rows), encoding="utf-8")

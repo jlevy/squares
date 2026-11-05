@@ -1635,15 +1635,14 @@ def test_a_landed_unfinished_confirmation_fails_the_register_gate(
     )
 
 
-#: The prices the 10 October packets and beads give the four imports of that day: the
-#: rung, the central estimate and the upper end in CPU-hours, and the bead that owns it.
-#: The upper ends of the three fine-net imports are the preparation lane's revised prices
-#: of 11 October, which the final review's F1-3 asked the record to carry. Since 2 November
-#: T-132's is owned by think-1lri, the review that reads its certificate, which comes first.
+#: The prices the 10 October packets and beads give the imports of that day still
+#: unconfirmed: the rung, the central estimate and the upper end in CPU-hours, and the bead
+#: that owns it. T-132's upper end is the preparation lane's revised price of 11 October,
+#: which the final review's F1-3 asked the record to carry. Since 2 November T-132's is
+#: owned by think-1lri, the review that reads its certificate, which comes first. T-142
+#: and T-143 left on 4 November, when their censuses, controls and review landed.
 PACKET_PRICES = {
     "T-132": ("C3", 4.3, 5.5, "think-1lri"),
-    "T-142": ("C3", 3.28, 4.5, "think-i85v"),
-    "T-143": ("C3", 4.49, 6.1, "think-i85v"),
     "T-144": ("C3", 11.24, 23, "think-nd7g"),
     "T-081": ("C3", 118, 435, "think-hwpr"),
 }

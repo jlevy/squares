@@ -426,6 +426,11 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-104",
         "T-105",
         "T-106",
+        # T-142's s(28) >= 2297/400 and T-143's s(30) >= 2357/400 supersede Hosono's check2
+        # bounds of 6 October at n = 28 and 30 (T-107, T-109), one count each, in both
+        # lanes, since their censuses of 4 November.
+        "T-107",
+        "T-109",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets

@@ -868,7 +868,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/277.html | cases/277.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/278.html | cases/278.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/279.html | cases/279.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/28.html | cases/28.html | record | overview | 2026-10-03 | 2026-10-15 | live |
+| cases/28.html | cases/28.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/280.html | cases/280.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/281.html | cases/281.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/282.html | cases/282.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -891,7 +891,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/298.html | cases/298.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/299.html | cases/299.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/3.html | cases/3.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/30.html | cases/30.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/30.html | cases/30.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/300.html | cases/300.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/301.html | cases/301.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/302.html | cases/302.html | record | overview | 2026-10-03 | 2026-10-23 | live |
@@ -1282,8 +1282,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-139.html | result/t-139.html | result | overview | 2026-10-10 | 2026-10-10 | live |
 | result/t-140.html | result/t-140.html | result | overview | 2026-10-10 | 2026-10-10 | live |
 | result/t-141.html | result/t-141.html | result | overview | 2026-10-10 | 2026-10-10 | live |
-| result/t-142.html | result/t-142.html | result | overview | 2026-10-10 | 2026-10-10 | live |
-| result/t-143.html | result/t-143.html | result | overview | 2026-10-10 | 2026-10-10 | live |
+| result/t-142.html | result/t-142.html | result | overview | 2026-10-10 | 2026-11-04 | live |
+| result/t-143.html | result/t-143.html | result | overview | 2026-10-10 | 2026-11-04 | live |
 | result/t-144.html | result/t-144.html | result | overview | 2026-10-10 | 2026-10-10 | live |
 | result/t-145.html | result/t-145.html | result | overview | 2026-10-10 | 2026-10-31 | live |
 | result/t-146.html | result/t-146.html | result | overview | 2026-10-10 | 2026-10-11 | live |

@@ -1,0 +1,233 @@
+{
+ "binary_command": "--candidate ../data/packet/release/certificates/mixed_n28_L57425/candidate.json.gz --n 28 --side 2297/400 --directions 1088,1989,1883,1397,2070,463 --threads 2 --confirm",
+ "exit": 0,
+ "wall_seconds": 15.312139987945557,
+ "summary": {
+  "build": {
+   "profile": "release",
+   "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+   "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+   "target": "x86_64-unknown-linux-gnu"
+  },
+  "direction_cpu_seconds": 26.877385709000002,
+  "direction_seconds": 27.229690218,
+  "directions": 6,
+  "fault_injected_at_box": null,
+  "kind": "sqverify-fast-summary/v1",
+  "nodes": 2115480,
+  "premises": {
+   "B": "4999/5000",
+   "D": "1/5002",
+   "L": "2297/400",
+   "angle_count": 2073,
+   "centre_domain": "per-bin",
+   "expanded_points": 0,
+   "expanded_rectangles": 5036,
+   "expanded_segments": 0,
+   "format": "M",
+   "input_sha256": "4f7afe456e6ecf0a8c905004c58413b7a09bf20392cee50669a86c86aba090d4",
+   "mass_below_n": "1/100000",
+   "mass_exact": "2799999/100000",
+   "n": 28,
+   "net_last_tangent": "1036/2501",
+   "net_origin": "proof_net",
+   "shrink_bound": "25009997/25010000",
+   "source_rectangles": 631
+  },
+  "refused_directions": [],
+  "status": "PARTIAL",
+  "threads": 2,
+  "threshold": "1",
+  "wall_seconds": 15.030404013
+ },
+ "directions": [
+  {
+   "r": 1088,
+   "verdict": "verified",
+   "nodes": 295243,
+   "bound": 1.0000000000106595,
+   "cpu_seconds": 3.771629351,
+   "source_cpu_seconds": 5.025481818999992,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true
+   },
+   "exact_centre": 1.1139868404767128,
+   "exact_least_of_five": 1.113137494114486,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 1989,
+   "verdict": "verified",
+   "nodes": 426357,
+   "bound": 1.0000000000974116,
+   "cpu_seconds": 5.437031524000001,
+   "source_cpu_seconds": 7.340049888999943,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true
+   },
+   "exact_centre": 1.0107205146616378,
+   "exact_least_of_five": 1.0093923664731421,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 1883,
+   "verdict": "verified",
+   "nodes": 408375,
+   "bound": 1.0000000001075315,
+   "cpu_seconds": 5.403038943,
+   "source_cpu_seconds": 7.036589678999917,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true
+   },
+   "exact_centre": 1.0100511319134582,
+   "exact_least_of_five": 1.0066040908758407,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 1397,
+   "verdict": "verified",
+   "nodes": 353701,
+   "bound": 1.0000000001367615,
+   "cpu_seconds": 4.648509607,
+   "source_cpu_seconds": 6.128801700000054,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true
+   },
+   "exact_centre": 1.007654471345244,
+   "exact_least_of_five": 1.007020327042625,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 2070,
+   "verdict": "verified",
+   "nodes": 438813,
+   "bound": 1.000000025591654,
+   "cpu_seconds": 5.665046375000001,
+   "source_cpu_seconds": 6.197969722000039,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true
+   },
+   "exact_centre": 1.0101993398715514,
+   "exact_least_of_five": 1.0092029383202474,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 463,
+   "verdict": "verified",
+   "nodes": 192991,
+   "bound": 1.0000000442319097,
+   "cpu_seconds": 1.9521299090000002,
+   "source_cpu_seconds": 2.613685626000006,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true
+   },
+   "exact_centre": 1.1344218050858719,
+   "exact_least_of_five": 1.1214862796752507,
+   "five_ge_bound_and_1": true
+  }
+ ],
+ "checklist_item_3": {
+  "format_M": true,
+  "centre_domain_per_bin": true,
+  "net_origin_proof_net": true,
+  "D_equals_step": true,
+  "angle_count_equals_last_plus_1": true,
+  "net_last_tangent_equals_(N-1)D": true,
+  "shrink_bound_equals_B(1+D)": true,
+  "mass_exact_n_minus_1e-5": true,
+  "expanded_points_segments_0": true,
+  "fault_injected_null": true,
+  "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+  "input_sha256_is_retained_gz": true
+ },
+ "mutant": {
+  "factor": "99/100",
+  "exit": 1,
+  "command": "--candidate ../data/mutants/mutant-28-99_100.json --n 28 --side 2297/400 --directions 0,1088,2070 --threads 2 --confirm",
+  "wall_seconds": 1.8679563999176025,
+  "rows": [
+   {
+    "r": 1088,
+    "verdict": "counterexample-candidate",
+    "cpu_seconds": 0.437775701,
+    "pose": [
+     3.3199094255858776,
+     3.233628766819362
+    ],
+    "exact": 0.9957693169839532,
+    "below_1": true,
+    "in_domain": true,
+    "equals_crate": true
+   },
+   {
+    "r": 0,
+    "verdict": "refused",
+    "cpu_seconds": 0.9078207140000001,
+    "argmin": [
+     "42428000208779879/10000000000000000",
+     "2097/400"
+    ],
+    "exact": 0.9914000084372557,
+    "below_1": true,
+    "bound": 0.9914000062838418,
+    "bound_le_exact": true,
+    "gap": 2.153413914878902e-09
+   },
+   {
+    "r": 2070,
+    "verdict": "counterexample-candidate",
+    "cpu_seconds": 1.059434068,
+    "pose": [
+     3.1741925994708793,
+     3.1417679309108606
+    ],
+    "exact": 0.9999999991278472,
+    "below_1": true,
+    "in_domain": true,
+    "equals_crate": true
+   }
+  ],
+  "summary_status": "REFUSED"
+ },
+ "cpu_seconds_python": 2.0176269999999996,
+ "cpu_seconds_binary": 29.904373000000003,
+ "wall_seconds_total": 19.16086721420288,
+ "problems": [],
+ "status": "SAMPLE_AGREES"
+}
