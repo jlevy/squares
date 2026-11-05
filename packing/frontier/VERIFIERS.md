@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **232** programs: **53** external and **179** first-party; **154** decide claims and **78** check premises.
-- **691** of **874** evidence entries name the programs that verified them: 325 independently re-implemented, 294 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **233** programs: **53** external and **180** first-party; **155** decide claims and **78** check premises.
+- **693** of **877** evidence entries name the programs that verified them: 326 independently re-implemented, 295 reproduced with the producer’s code, 51 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -84,8 +84,8 @@ second implementation agrees.
 | [`V-ozden-890-review-sample`](#v-ozden-890-review-sample) | dm_sample.py and dm_receipts.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 106 | 96 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 98 | 96 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 107 | 97 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 99 | 97 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -189,10 +189,10 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 79 | 79 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 80 | 80 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-build-field-configuration`](#v-build-field-configuration) | devtools.build_field_configuration | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 74 | 74 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 75 | 75 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -264,6 +264,7 @@ second implementation agrees.
 | [`V-ryu-quarter-cube-review-text-checks`](#v-ryu-quarter-cube-review-text-checks) | q_quotes.py and c_citations.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-ryu-k2-minus-c-independent-labels`](#v-ryu-k2-minus-c-independent-labels) | ryu_k2_minus_c_labels.py (run, summarize, price, controls and recheck) | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-ozden-1104-review-check`](#v-ozden-1104-review-check) | oz_check.py with ozlib.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
+| [`V-yim-1105-review-check`](#v-yim-1105-review-check) | certcheck.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -1309,7 +1310,7 @@ Replays the exact optimal moduli for n = 2 to 4 and the side-2 lower bound.
 Decides a packing pair by pair and wall by wall: by exact sign in a number field, by outward-rounded enclosures, or at a declared precision and tolerance.
 
 - Source: [`packing/src/sqpack/verify.py`](../../packing/src/sqpack/verify.py), [`packing/src/sqpack/witness.py`](../../packing/src/sqpack/witness.py), [`packing/src/sqpack/cli/witness.py`](../../packing/src/sqpack/cli/witness.py)
-- Versions run: SHA-256 `6642aca5a6da…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `witness.py`); SHA-256 `56bc5b9f690b…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `verify.py`)
+- Versions run: SHA-256 `6642aca5a6da…` (The source the n183 primary batch ran; the retained seven-file provenance identifies the historical run. It changed on 19 October 2026 (99c7fff6c, each pair's margin measured once a square), so it is not the source later replays ran; of `witness.py`); SHA-256 `60bb51cc699c…` (The source since 99c7fff6c (19 October 2026), which the replay of issue 895's certificate ran on 5 November 2026 (E-yim-895-exact-feasibility; F2 of the review of that day); of `witness.py`); SHA-256 `56bc5b9f690b…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run, and the replay of issue 895's certificate on 5 November 2026 ran it too; of `verify.py`)
 - Note: The constructions it decides for others were published as figures and coordinates without verification code, so it was written from the geometry.
 
 | evidence | run | code | coverage | results |
@@ -1420,6 +1421,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-mishapolk-846-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 130 that T-259 cites, every wall and every pair decided by both maintained routes; the same receipt decides the issue's five other counts, which T-260 holds while the owner's question stands (think-ikku), and the packet's earlier comparisons; the kernel's controls are retained in the packet's receipt | T-259 |
 | `E-ozden-893-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 299 that T-263 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-263 |
 | `E-ozden-894-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 204 that T-264 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-264 |
+| `E-yim-895-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-265 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1428,7 +1430,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 Decides a rational-corner witness pair by pair and wall by wall in Fraction arithmetic.
 
 - Source: [`packing/devtools/check_rational_witness_independent.py`](../../packing/devtools/check_rational_witness_independent.py)
-- Versions run: SHA-256 `89f8d8e2e071…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `check_rational_witness_independent.py`)
+- Versions run: SHA-256 `89f8d8e2e071…` (The source the n183 primary batch ran; the retained seven-file provenance identifies the historical run. It changed on 20 October 2026 (c81d93355 and e3c308c4b, each square's own-axis projections computed once), so it is not the source later replays ran; of `check_rational_witness_independent.py`); SHA-256 `e8571770eca4…` (The source since e3c308c4b (20 October 2026), which the author of issue 895 ran at e6e8d577 on his own Witness/v2 conversion and the replay of his certificate ran on 5 November 2026 (E-yim-895-exact-feasibility; F2 of the review of that day); of `check_rational_witness_independent.py`)
 - What its authors read and used: [`packing/devtools/check_rational_witness_independent.py`](../../packing/devtools/check_rational_witness_independent.py)
 - Note: Its module statement says it shares no geometry or verification code with sqpack.witness or sqpack.verify.
 
@@ -1532,6 +1534,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-mishapolk-846-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 130 that T-259 cites, every wall and every pair decided by both maintained routes; the same receipt decides the issue's five other counts, which T-260 holds while the owner's question stands (think-ikku), and the packet's earlier comparisons; the kernel's controls are retained in the packet's receipt | T-259 |
 | `E-ozden-893-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 299 that T-263 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-263 |
 | `E-ozden-894-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 204 that T-264 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-264 |
+| `E-yim-895-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-265 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -3493,6 +3496,7 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-mishapolk-846-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 130 that T-259 cites, every wall and every pair decided by both maintained routes; the same receipt decides the issue's five other counts, which T-260 holds while the owner's question stands (think-ikku), and the packet's earlier comparisons; the kernel's controls are retained in the packet's receipt | T-259 |
 | `E-ozden-893-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 299 that T-263 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-263 |
 | `E-ozden-894-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 204 that T-264 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-264 |
+| `E-yim-895-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-265 |
 
 ### `V-algebraic-witness-reports`
 
@@ -3608,6 +3612,7 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-mishapolk-846-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 130 that T-259 cites, every wall and every pair decided by both maintained routes; the same receipt decides the issue's five other counts, which T-260 holds while the owner's question stands (think-ikku), and the packet's earlier comparisons; the kernel's controls are retained in the packet's receipt | T-259 |
 | `E-ozden-893-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 299 that T-263 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-263 |
 | `E-ozden-894-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 204 that T-264 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-264 |
+| `E-yim-895-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-265 |
 
 ### `V-rehwaldt-n68-verify`
 
@@ -4687,6 +4692,22 @@ The 4 November stage 4 review's exact checker of Doğa Özden's rational centre-
 | --- | --- | --- | --- | --- |
 | `E-ozden-893-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 299: every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with sixteen controls decided by both | T-263 |
 | `E-ozden-894-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 204: every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with sixteen controls decided by both | T-264 |
+
+### `V-yim-1105-review-check`
+
+**certcheck.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 5 November stage 4 review's exact checker of Kaelan Yim's rational centre and half-angle certificate of issue 895 (260), in Evan Daniel's text format, with a fail-closed reader of its own: every token, line and count the format states, the header side against the issue's fraction, and every wall and all 33,670 pairs with no distance filter, decided twice, by separating axes over the four edge normals with corner projections in fractions.Fraction (method A) and by exact Sutherland-Hodgman clipped areas with the shoelace formula in Fraction (method B), the two sharing only the reader; the rotation sense is fixed counterclockwise against the house witness, and the reversed sense is decided as a control. controls.py decides seventeen sharp and gross controls a certificate by both methods against outcomes stated before each runs (the side lowered to its far-wall contact, every square moved to the left and the bottom walls, a square raised to the top wall, the tightest pair, the tightest pair of tilted squares and the tightest mixed pair closed along their gap normals, each at exact contact and 1e-30 past it; a duplicate, a square out of the box and the side lowered by 1e-10), and selftest.py holds both methods to 23 hand cases with known answers and 400 random rational pairs taken exactly to contact, then 1e-30 either side.
+
+- Source: [`packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/certcheck.py`](../../packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/certcheck.py), [`packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/controls.py`](../../packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/controls.py), [`packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/selftest.py`](../../packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md`](../../packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 895 (think-o7ly), strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the import lane (bold-ritchie-l48)), with its own prompt and code; authorship in common with the producer’s: system-family, The author's own check ran this repository's devtools.check_rational_witness_independent, whose commits Claude agents authored, all but one; the issue says AI set up the search environment and does not name the system. The programs were written from the mathematics, the format as the issue and the packet state it, and the certificates, with the rotation sense measured against the house witness. They import nothing from this repository, and their author read none of its witness verifiers, its importer or Evan Daniel's checkers.
+- Note: Written and run on 5 November 2026 for docs/project/reviews/review-2026-11-05-yim-895-260.md (SHA-256 0890eea39e3c622f8a3d5d4d4d8a7e79eb2ceb162a6551ecfc0c00bd2464ce5c for certcheck.py as retained, in the directory's programs.sha256, and as each receipt records), and kept, with everything they printed, in the yim-s260-upper-bound-2026-11-05 packet's review/review-2026-11-05/. side.py, identity.py, upright.py, rowsback.py, movers.py, slides.py and custody.py, kept beside them, decide nothing about the bound and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-yim-895-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 260: every wall and all 33,670 pairs, by two exact methods in one program that share only its reader, with seventeen controls decided by both | T-265 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

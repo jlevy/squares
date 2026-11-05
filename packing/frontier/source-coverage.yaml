@@ -12145,6 +12145,32 @@ sources:
     decides which are recorded. All 3 native jobs have full outcomes. No selected override or
     superseded claim is created at this source-only stage; current cases and earlier source
     ownership remain unchanged.
+- id: yim-s260-upper-bound-2026-11-05
+  title: >-
+    Kaelan Yim's packing of 260 squares at vitamoon/vitamoon d11a8a1, issue 895
+  role: source-repository
+  url: https://github.com/vitamoon/vitamoon/tree/d11a8a1ce798f7c0b4f801e922e242d22cedcd73
+  local: resources/web/yim-s260-upper-bound-2026-11-05/
+  source_key: '[Yim s260 upper bound 2026-11-05]'
+  scope:
+    n_values:
+    - 260
+  reviewed: '2026-11-05'
+  source_date: '2026-11-05'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/yim-s260-upper-bound-2026-11-05/acquisition/claims.json
+  evidence:
+  - E-yim-895-certificate-report
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-265 records the in-horizon report.
+    The ledger of 4 November for this pass (campaign/issue-intake/upper-bounds-893-895-20261104)
+    decides which are recorded. All 3 native jobs have full outcomes. No selected override or
+    superseded claim is created at this source-only stage; current cases and earlier source
+    ownership remain unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -12476,11 +12502,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 260
-  source_id: evand-issue845-2026-10-29
-  value: '16.6339825021218840'
-  evidence: E-evand-845-certificate-report
+  source_id: yim-s260-upper-bound-2026-11-05
+  value: '16.6339825019226142'
+  evidence: E-yim-895-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-31 (T-257).
+    a replay here and an accepted review, adopted on 2026-11-05 (T-265).
 - n: 261
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.67877987534290982'
@@ -13513,7 +13539,7 @@ superseded_reports:
 - n: 260
   source_id: evand-square-packing-2026-10-05
   value: '16.656854249492380195373323439334'
-  superseded_by: evand-issue845-2026-10-29
+  superseded_by: yim-s260-upper-bound-2026-11-05
   reason: Certifies the catalogue's packing at a side 2.0e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -14900,8 +14926,8 @@ superseded_reports:
   source_id: de-winter-upper-bounds-2026-10-17
   value: '16.6457788041813798'
   reason: The house from 2026-10-20 until 2026-10-21; its certificate stays retained and verified,
-    and T-257's exact side is smaller.
-  superseded_by: evand-issue845-2026-10-29
+    and T-265's exact side is smaller.
+  superseded_by: yim-s260-upper-bound-2026-11-05
 - n: 204
   source_id: couzo-issue678-2026-10-18-in-corpus
   value: '14.8086428419812473'
@@ -14918,8 +14944,8 @@ superseded_reports:
   source_id: couzo-issue678-2026-10-18-in-corpus
   value: '16.6457532505449560'
   reason: The house from 2026-10-21 until 2026-10-22; its certificate stays retained and verified,
-    and T-257's exact side is smaller.
-  superseded_by: evand-issue845-2026-10-29
+    and T-265's exact side is smaller.
+  superseded_by: yim-s260-upper-bound-2026-11-05
 - n: 227
   source_id: de-winter-upper-bounds-2026-10-17
   value: '15.5637967036692680'
@@ -15068,8 +15094,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-20
   value: '16.6457532505198122'
   reason: The house from 2026-10-22 until 2026-10-31; its certificate stays retained and verified,
-    and T-257's exact side is smaller.
-  superseded_by: evand-issue845-2026-10-29
+    and T-265's exact side is smaller.
+  superseded_by: yim-s260-upper-bound-2026-11-05
 - n: 307
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.98086278405469107'
@@ -15088,6 +15114,12 @@ superseded_reports:
   reason: The house from 2026-10-31 until 2026-11-04; its certificate stays retained and verified,
     and T-263's exact side is smaller.
   superseded_by: ozden-s299-upper-bound-2026-11-03
+- n: 260
+  source_id: evand-issue845-2026-10-29
+  value: '16.6339825021218840'
+  reason: The house from 2026-10-31 until 2026-11-05; its certificate stays retained and verified,
+    and T-265's exact side is smaller.
+  superseded_by: yim-s260-upper-bound-2026-11-05
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

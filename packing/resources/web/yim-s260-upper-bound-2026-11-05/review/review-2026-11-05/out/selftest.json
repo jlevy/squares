@@ -1,0 +1,229 @@
+{
+ "program": "selftest.py",
+ "program_sha256": "5405609b8ddce1896742efce65c57541b69bc3b5d0550753ceb1436a8ff9b3e6",
+ "certcheck_sha256": "0890eea39e3c622f8a3d5d4d4d8a7e79eb2ceb162a6551ecfc0c00bd2464ce5c",
+ "python": "3.14.7",
+ "hand_cases": [
+  {
+   "case": "upright side by side at exact contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "gap": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "upright side by side 1e-30 past contact",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "upright side by side 1e-30 short of contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "gap": "1/1000000000000000000000000000000",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "upright corner to corner at contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "gap": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "upright corner to corner 1e-30 past",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "t=1 is upright: side by side at contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "gap": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "t=1 is upright: 1e-30 past",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "duplicate square",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1",
+   "area": "1",
+   "ok": true
+  },
+  {
+   "case": "duplicate square, t=1 against t=0",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1",
+   "area": "1",
+   "ok": true
+  },
+  {
+   "case": "corner of tilted square on upright edge",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "gap": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "corner of tilted square 1e-30 into upright edge",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1/1000000000000000000000000000000",
+   "area": "1/960000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "upright corner on tilted edge (axis of the second square)",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "gap": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "upright corner 1e-30 into tilted edge",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1/1000000000000000000000000000000",
+   "area": "1/960000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "equal tilt face to face at contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "gap": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "equal tilt face to face 1e-30 past",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "tiny equal turn face to face at contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "gap": "0",
+   "area": "0",
+   "ok": true
+  },
+  {
+   "case": "tiny equal turn face to face 1e-30 past",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "gap": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "upright square touching all walls of side 1",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "least_clearance": "0",
+   "inside_area": "1",
+   "ok": true
+  },
+  {
+   "case": "upright square in side 1 - 1e-30",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "least_clearance": "-1/1000000000000000000000000000000",
+   "inside_area": "999999999999999999999999999998000000000000000000000000000001/1000000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "tilted square touching all walls of side 7/5",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "least_clearance": "0",
+   "inside_area": "1",
+   "ok": true
+  },
+  {
+   "case": "tilted square in side 7/5 - 1e-30",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "least_clearance": "-1/1000000000000000000000000000000",
+   "inside_area": "479999999999999999999999999999999999999999999999999999999999/480000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "tilted square 1e-30 past the left wall",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "least_clearance": "-1/1000000000000000000000000000000",
+   "inside_area": "959999999999999999999999999999999999999999999999999999999999/960000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "square far outside",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "least_clearance": "-11/2",
+   "inside_area": "0",
+   "ok": true
+  }
+ ],
+ "hand_cases_all_as_expected": true,
+ "reversed_sense_is_reflection": true,
+ "random": {
+  "seed": 895,
+  "draws": 400,
+  "contacts_built": 400,
+  "probes": 1200,
+  "disagreements": 0,
+  "unexpected_verdicts": 0,
+  "square_area_not_one": 0
+ },
+ "passed": true,
+ "cpu_seconds_total": 1.15,
+ "wall_seconds": 1.105
+}

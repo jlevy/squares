@@ -1483,19 +1483,47 @@ def test_news_and_the_changelog_each_have_a_section_and_a_button_with_and_withou
     assert light["text"] != dark["text"]
 
 
+@pytest.fixture(scope="module")
+def home_with_change(payloads: dict[str, bytes]) -> dict[str, bytes]:
+    """The real home page with the record's longest News title written into its newest
+    day by the real writer, as the window draws it (`anchored=False`). The home window
+    holds only the newest days, which may log results and house moves alone, as the three
+    of 3 to 5 November 2026 did; this keeps a change line in it whatever the data hold
+    (the senior review of #911, F1)."""
+    document = render_changelog.load()
+    entry = max(render_changelog.news_entries(document), key=lambda item: len(item["title"]))
+    line = render_changelog.changelog_entry_line(document, entry, in_news=True, anchored=False)
+    home = payloads["index.html"].decode("utf-8")
+    spliced, count = re.subn(
+        r'(<details data-day="[^"]+" id="home-changelog-[^"]+" open>.*?<ul>)',
+        lambda match: match.group(1) + line,
+        home,
+        count=1,
+        flags=re.DOTALL,
+    )
+    assert count == 1
+    return {**payloads, "index.html": spliced.encode("utf-8")}
+
+
 @pytest.mark.parametrize("width", WIDTHS)
 @pytest.mark.parametrize("name", ["index.html", render_changelog.CHANGELOG_PAGE])
 def test_every_line_of_the_log_stays_in_its_day_with_every_day_open(
-    browser: Any, payloads: dict[str, bytes], name: str, width: int
+    browser: Any,
+    payloads: dict[str, bytes],
+    home_with_change: dict[str, bytes],
+    name: str,
+    width: int,
 ) -> None:
     """With every day of the log opened, on the Changelog page and in the home page's
     section, nothing runs out of its day's box, so the guard holds for every change the
     record logs, not only for the day that happens to open first. A result's id holds
     together in tabular figures (`overview_sections.ROLLUP_ID`) and no other link that
     opens a line does: a change's title once kept one line and was clipped at its day's
-    edge (#896's review, findings 1 and 5)."""
+    edge (#896's review, findings 1 and 5). The home page is served with a change line
+    spliced into its newest day (`home_with_change`), so its leg tests a change's title
+    on every day's data."""
     page = browser.new_page(viewport={"width": width, "height": 900}, reduced_motion="reduce")
-    _serve(page, payloads)
+    _serve(page, home_with_change if name == "index.html" else payloads)
     try:
         page.goto(f"{ORIGIN}{name}", wait_until="load")
         reading = page.evaluate(LOG_LINES)

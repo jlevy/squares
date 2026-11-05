@@ -1559,6 +1559,7 @@ jobs:
             /packing/resources/web/mishapolk-issue846-2026-10-30/
             /packing/resources/web/ozden-s299-upper-bound-2026-11-03/
             /packing/resources/web/ozden-s204-upper-bound-2026-11-03/
+            /packing/resources/web/yim-s260-upper-bound-2026-11-05/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg

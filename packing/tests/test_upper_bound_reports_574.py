@@ -513,7 +513,9 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # Evan Daniel's issue-845 certificate (T-257), and 299 from the Kingbird catalogue's
     # 33/2 + sqrt(7)/2, which PR #574 states, to his issue 824 update (T-258), below it,
     # and that of 4 November 2026 (think-ybep) moved 299 on to Doğa Özden's further
-    # arrangement of it (T-263); every other side is at or below its case.
+    # arrangement of it (T-263), and that of 5 November 2026 (think-o7ly) moved 260 on to
+    # Kaelan Yim's further arrangement of T-257 (T-265); every other side is at or below its
+    # case.
     assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
         227,
         229,
@@ -524,7 +526,7 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     for n in (227, 229):
         assert rows[n]["case"]["reported_source_key"] == "[Daniel regularized lists 2026-10-20]"
         assert rows[n]["case"]["reported_relation"] == "above"
-    assert rows[260]["case"]["reported_source_key"] == "[Daniel issue 845 2026-10-29]"
+    assert rows[260]["case"]["reported_source_key"] == "[Yim s260 upper bound 2026-11-05]"
     assert rows[299]["case"]["reported_source_key"] == "[Özden s299 upper bound 2026-11-03]"
     for n in (260, 299):
         assert rows[n]["case"]["reported_relation"] == "above"
