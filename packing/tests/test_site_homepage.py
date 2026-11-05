@@ -1499,7 +1499,7 @@ def home_with_change(payloads: dict[str, bytes]) -> dict[str, bytes]:
         lambda match: match.group(1) + line,
         home,
         count=1,
-        flags=re.S,
+        flags=re.DOTALL,
     )
     assert count == 1
     return {**payloads, "index.html": spliced.encode("utf-8")}
