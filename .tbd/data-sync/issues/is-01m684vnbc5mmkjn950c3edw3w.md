@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 159
+version: 160
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -60,7 +60,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-05T09:58:24.755Z
+updated_at: 2026-11-05T11:54:06.764Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -280,3 +280,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-05 08:52 renewal (intake77): T-265 (#911) stage-4 review accepted (S2; further arrangement; 2 minor record fixes); L48 is mapping it and adopting at 260. T-266 (#912, Özden s(94) 9.972) registered V0/C0; replay priced 19-33 CPU-h (runnable); strong-max review think-xzxd is running; CI needs #911 first.
 
 2026-11-05 09:52 renewal (intake78): T-266 stage-4 review accept (S3; F7: axis needs the #892 enclosure rule, ties #543 to n94). L49 started the T-266 census (19-33 CPU-h). L48 adopting T-265 on #911.
+
+2026-11-05 11:52 renewal (intake80): #911 (T-265 V3/C3, house at 260) senior review accept-with-fixes (F1 homepage test needs a synthetic window; F2 card wording; F8 licence mislabel in upper_bound_houses); L48 is addressing it. L49 T-266 census running.

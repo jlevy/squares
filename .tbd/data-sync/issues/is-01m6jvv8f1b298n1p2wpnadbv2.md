@@ -5,12 +5,12 @@ title: Credit Özden as improved_by at 204 and 299 on the posters at the next in
 kind: task
 status: open
 priority: 3
-version: 6
+version: 7
 labels: []
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-04T08:47:10.817Z
-updated_at: 2026-11-04T11:08:50.174Z
+updated_at: 2026-11-05T11:46:42.905Z
 ---
 T-263 (#893) and T-264 (#894) are Doğa Özden's further arrangements of Evan Daniel's packings at 299 and 204. #897 adopted both as their counts' houses (think-ybep). As the stage 4 review of record's F8 asks, the case records credit `found_by: [Evan Daniel]` and `improved_by: [Doğa Özden]` in `reported_upper_bound`, and so do `devtools/adopt_houses.py`'s CREDITS, the case pages' Improved by row, the bound citations ('Daniel & Özden, GitHub') and the register.
 
@@ -23,16 +23,20 @@ The hold cannot outlive its edition. `PRINT_CREDIT_HELD_FOR = "v0.7.0"`, and `te
 Done when, at the next infographics cut, all of these move in the same change:
 - `PRINT_CREDIT_HELD` is emptied (`{}`), and `PRINT_CREDIT_HELD_FOR` is updated or removed.
 - In tests/test_known_best_atlas.py:
-  - `test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone` and `test_the_print_credit_hold_cannot_outlive_its_edition` are updated or removed with the hold.
-  - The pinned poster names move: `expected_names` goes from 30 to 31, and Özden is printed after Xu in `printed_names`, where the 4 November tree puts him.
+  - `test_print_credit_hold_keeps_ozden_and_yim_off_the_poster_credits_alone` (renamed on 5 November 2026 for think-hgpg) and `test_the_print_credit_hold_cannot_outlive_its_edition` are updated or removed with the hold.
+  - The pinned poster names move: `expected_names` goes from 30 to 32 (Özden and, for think-hgpg, Yim), and each is printed in `printed_names` where the tree then puts him (Özden after Xu on 4 November).
   - `test_print_attribution_paragraphs_share_the_balanced_packing_measure`'s `[2, 3]` becomes `[2, 2]`.
-- The canvas pins move with the redraw. Emptying the hold measured 3869 px on 4 November; the cut takes whatever the redraw then measures. They are:
+- The credit block is laid out again. Since think-hgpg (5 November 2026) the hold holds Kaelan Yim at 260 too, and emptying it overflows the block's three lines (`ValueError: poster packing credits exceed their three-line information block`), so the cut must redesign or resize the block before it can draw. Released alone, Özden's name measured 3869 px and Yim's kept 3898 px.
+- The canvas pins move with the redraw; the cut takes whatever the redraw then measures. They are:
   - the literal 1-100 canvas and export heights in tests/test_known_best_atlas.py (3898 and its @2x 7796 in the manifest rows, the canvas, row-pitch and PDF-page assertions, and the SVG header and viewBox);
   - the `const` heights in atlas/known-best/known-best-atlas.schema.yaml;
   - the page-size sentence in devtools/render_composite_pdf.py.
-- The curation note's sentence naming this bead in packing/atlas/known-best/credit-attributions.json is removed.
+- The curation note's sentences naming this bead and think-hgpg in packing/atlas/known-best/credit-attributions.json are removed.
+- think-hgpg is done in the same change: both beads end with the hold empty, and the edition tie empties the whole hold at once, so neither can close alone.
 - Both posters are redrawn with the credit, and the hosted pdf job passes at the new height.
 
 ## Notes
 
 Related: think-10l0, the same kind of hold for Khalili and Gharabaghi (and Greff), which waits on the same infographics cut. tbd has no non-blocking link type, so the relation is recorded here; neither bead blocks the other. Created by bold-ritchie-l36 on 2026-11-04 on the coordinator's poster decision for #897: the data stays true (improved_by Özden in both case records) and only the poster credit block holds the name (PRINT_CREDIT_HELD), a small tooling change made because of the owner's poster-trailing rule.
+
+2026-11-05 (bold-ritchie-l48, on the coordinator's direction after the senior review of #911, F3): think-hgpg holds Kaelan Yim's name at 260 on the same hold, and the two beads are done together at the next infographics cut. The done-when above now names the renamed test, 30 to 32 names and the block's overflow; the hold's refusal message names both beads.
