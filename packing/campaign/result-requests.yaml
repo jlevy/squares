@@ -28759,3 +28759,68 @@ issues:
       are informational and hold nothing open. The deployed pages were not fetched from the
       session host; verify-deployment checked them. The supersessions of T-264 and T-265
       owed follow-ups on #894 and #895, which were posted and are recorded there.
+  - number: 918
+    title: ': registration request'
+    author: adnuubhai-ux
+    opened: '2026-11-06'
+    state: open
+    kind: other
+    triage: pending
+    summary: >-
+      The registration template with nothing filled in: the title is the template's ":
+      registration request" with no counts, and every section (credit name, claim,
+      certificate, checking, lineage, AI assistance) is the template's placeholder text. It
+      reports no result yet, so there is nothing to triage or to label for intake.
+    read_through: '2026-11-06T22:36:00Z'
+    results: []
+    beads:
+    - think-e54k
+    answer_bead: think-e54k
+    replies:
+    - url: https://github.com/jlevy/squares/issues/918#issuecomment-6697905579
+      date: '2026-11-06'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+    close_when: >-
+      The author has filled in a claim, its certificate at a pinned public commit or DOI and a
+      credit name, and the result is triaged, imported and answered as the runbook says; or the
+      issue is closed for want of a submission.
+    notes: >-
+      Opened at 22:36:00Z on 6 November 2026 by a new account, six seconds before #919, which
+      is the same empty template and is recorded as its duplicate. The record has no precedent
+      for an empty or duplicate submission, so this is the primary entry and stays open for
+      the author. The acknowledgement of 6 November (intake lane L54) says the issue arrived as
+      the empty template and asks for the claim, the certificate at a pinned public commit or
+      DOI, and the credit name, and says #919 looks like a duplicate whose follow-up is here.
+      Triage stays pending until the author answers; no `intake` label is added, since no item
+      for intake has been reported.
+  - number: 919
+    title: ': registration request'
+    author: adnuubhai-ux
+    opened: '2026-11-06'
+    state: open
+    kind: other
+    triage: pending
+    summary: >-
+      A duplicate of #918: the same empty registration template, opened by the same author six
+      seconds later, with every section the template's placeholder text and no result.
+    read_through: '2026-11-06T22:36:06Z'
+    results: []
+    beads:
+    - think-e54k
+    answer_bead: think-e54k
+    replies:
+    - url: https://github.com/jlevy/squares/issues/919#issuecomment-6697906500
+      date: '2026-11-06'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+    close_when: >-
+      Closed as a duplicate of #918 once the owner or a pass decides to, or folded into #918's
+      answer if the author fills this one in instead.
+    notes: >-
+      Duplicate of #918 (the schema has no field for it, so it is recorded here). The reply of
+      6 November (intake lane L54) points the author to #918. It is left open: neither the
+      runbook (campaign/result-import.md, stage 7, which closes an issue once answered) nor
+      any entry here closes a duplicate submission, so closing it waits on that being decided.
