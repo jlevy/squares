@@ -1,0 +1,13 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+
+repository: BuddenPing/square-packing-certificates
+tag: data/pingyou-exact-153-302-2026-10-13-v1
+description: Exact algebraic N153 and N302 certificates submitted by PingYou Ltd, superseding two rational witnesses in PR 574; pending maintainer review.
+objects:
+- path: attic/pingyou-exact-153-302-2026-10-13/pingyou-exact-153-302-2026-10-13.zip
+  asset: pingyou-exact-153-302-2026-10-13.zip
+  size: 235073
+  sha256: cea5e95dc3c7a719582a2f58f24fd89171c9b29424c913513373092465783814
