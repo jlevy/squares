@@ -5,7 +5,7 @@ title: "Import Evan Daniel: s(175), s(204), s(260), s(268), s(293), s(303), s(30
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l51
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-05T20:03:20.145Z
-updated_at: 2026-11-05T22:12:12.283Z
+updated_at: 2026-11-06T00:46:29.789Z
 started_at: 2026-11-05T20:03:23.959Z
 ---
 Import of jlevy/squares#914 (opened 2026-11-05T19:07:50Z by evand, Evan Daniel): seven upper bounds, each the certificate's exact rational side rounded up at 12 places: s(175) <= 13.764050051544, s(204) <= 14.804361383652, s(260) <= 16.633520950889, s(268) <= 16.872499518136, s(293) <= 17.623065212061, s(303) <= 17.901832750855 and s(304) <= 17.920944093341. Global optimality is not claimed.
@@ -39,13 +39,23 @@ Answer bead: this bead.
 
 Stage 7: no reply is owed before the records PR merges (result-import.md, stage 7: a reply follows the merge and links only to main; nothing here waits on the author). The import reply below is the acknowledgement. Post it after the PR merges and the deploy is verified: render from main with `check_requests --draft 914` (it refuses off main), reconcile with this draft, check that main and the site say what this says, post, and record it under #914's replies in the next change. It names T-267 to T-273, which are true only once on main.
 
-DRAFT of #914's import reply (not posted):
+2026-11-06 (bold-ritchie-l51): the stage 4 review of record (think-lrj4, tbd-strong-max) is mapped on the same draft PR #916: all seven at V3/C3, the record's findings F3, F7, F8, F13, F14 and F15 fixed, and all seven adopted with both regularizations. The reply below replaces the import draft: it carries the review's F4, F10 and F11 and its five questions for the author, the adoptions and V3/C3. Post it only after #916 merges and its deploy is verified, rendered from main with check_requests --draft 914.
+
+DRAFT of #914's reply (not posted; it names T-267 to T-273 and the adoptions, true only once on main):
 
 @evand, thank you, Evan, for the seven certificates and for committing every input beside them.
 
-- **Retained.** We read evand/square-packing at `bb4cc78`, the commit the issue names and the repository's head when read. All 56 files it adds under `search/packer/candidates/` are retained under your MIT licence, with `LICENSE` and `CREDITS.md`. The thirteen SHA-256 digests in the issue are the files'.
-- **Checked here.** Each certificate holds its n squares, and its header side is the exact side the issue states; each rounds up at 12 places to the issue's print. Two maintained exact routes, the `sqpack` exact witness verifier and the independent rational corner checker, accept all seven over every wall and every pair in rational arithmetic, and the six regularized views as well, each at its certificate's side. Duplicate-square and outside-container controls, and sharp controls at exact contact and 1e-30 past it, came out as stated in advance. Your two checkers were not run here, and the routes share this repository's reader of your format.
-- **Registered.** One entry per count, each at V0/C0 until the review: T-267 at 175, T-268 at 204, T-269 at 260, T-270 at 268, T-271 at 293, T-272 at 303 and T-273 at 304 ([results](https://squaremath.org/results.html#t-267)). Each is the first report below the record at its count, so the report-order rule records all seven.
-- **Against the houses.** Measured here, none pairs one to one with the house's packing under any of the box's eight symmetries. The optimal assignment moves 60 squares beyond 0.1 at 175, 66 at 204, 42 at 260, 80 at 268, 193 at 293, 124 at 303 and 66 at 304. At 260, against your #845 packing, whose tilted island you say it recomposes, it moves 33. So the record reads all seven as new arrangements, as you say.
-- **Credit.** Each entry credits you, with Chris Deotte credited for the method, as you asked. At 175 the register's packing (Daniil Ostashev's, as PingYou Ltd and Mishapolk refined it) is named as the start, and at 260 Kirill Tymchishin's Kaggle packing through your #845 island. At 204 the gadgets are your own s(233) and s(370), and at 268, 293, 303 and 304 the record says the donors were not recorded. The Kaggle side-only values state no packing, so they are not reports.
-- **Next.** A separately run stage 4 review will decide all seven again with clean-room code and read the lineages. After that, each count adopts its certificate under the house rule, replacing T-186, T-264, T-265, T-242, T-257 and T-240, with both regularizers run on each new house; your six regularized views are offered as candidate drawings. We will reply again when that lands.
+- **Retained.** We read evand/square-packing at `bb4cc78`, the commit the issue names and the repository's head when read. All 56 files it adds under `search/packer/candidates/` are retained under your MIT licence, with `LICENSE` and `CREDITS.md`. The thirteen SHA-256 digests in the issue are the files', and a separate fetch for the review found the same bytes. Custody holds: the commit adds exactly those 56 files, and the licence covers the certificates.
+- **Checked and reviewed.** Each certificate holds its n squares, and its header side is the exact side the issue states; each rounds up at 12 places to the issue's print. Two maintained exact routes, the `sqpack` exact witness verifier and the independent rational corner checker, accept all seven over every wall and every pair in rational arithmetic, and the six regularized views as well, each at its certificate's side, with gross and sharp controls as stated in advance. A separately run stage 4 review ([review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-11-05-evand-914-seven.md)) decided all thirteen files again with clean-room code, by separating axes in fractions and by exact clipped areas, 182 controls as stated, and every file infeasible with the rotation read the other way. It accepted all seven, at 260 with findings, none blocking or major. Your two checkers were not run here.
+- **Registered.** One entry per count, each at V3/C3, confirmed, independently re-implemented: T-267 at 175, T-268 at 204, T-269 at 260, T-270 at 268, T-271 at 293, T-272 at 303 and T-273 at 304 ([results](https://squaremath.org/results.html#t-267)).
+- **New arrangements.** None pairs one to one with the house's packing under any of the box's eight symmetries, so all seven are new arrangements, as you say. At 260 the 97 squares tilted beyond 10 degrees are your #845 island within 0.042, after a half turn about the box centre and a shift of one unit upward, in a rebuilt frame: a new arrangement built on that island, not a further arrangement of #845's packing. Each gain is at least 6 x 10^8 times all of its house's slack.
+- **Adopted.** 175, 204, 268, 293, 303 and 304 adopt your certificates as their house best packings, replacing T-186, T-264, T-242, T-257 and T-240, and 260 adopts T-269 the next day, replacing T-265 (a day's history holds one record a count, and 260 had moved once that day). Each replaced certificate stays as history. Both regularizers ran on each new house. Your regularizer's views are drawn at 175, 204 and 268: at 175 it is your own published view, every square within 10^-9, at 268 the same but for one square, and at 204 your view after a half turn with 33 squares moved beyond a hundredth. Grid-slack's views are drawn at 260 and 303. At 293 and 304 no view improves on the axis tool's, so that one is drawn.
+- **Credit.** Each entry credits you, with Chris Deotte credited for the method. At 175 the register's packing, Daniil Ostashev's as PingYou Ltd and Mykhailo Polkovskyi refined it, is credited as the start. Your packing is no refinement of it, so it needs no regularization or improvement credit. At 260 the start is Kirill Tymchishin's Kaggle packing, through your #845 island. Each lineage now has its own bibliography key, so the other five counts credit you after Deotte alone.
+- **Two points on 260.** The certificate is `s260_ks_1105.input.txt` dilated by the factor 1 + 10^-12, as its first line says, so its side is 1.66 x 10^-11 above the input's; 8.8 x 10^-12 is its side's excess over the pre-descent input's. The issue's S' = 16.633520950888535 is the side's binary64 value, 1.48 x 10^-15 above the exact side; the exact side is the header's, and its 12-place print is your claim, so nothing changes. Read exactly, the input itself overlaps in 19 pairs by up to 3.9 x 10^-16; the dilation is what makes the certificate a packing.
+- **Questions, if you have time.** None holds a rung.
+  1. At 260, did the issue's 8.8 x 10^-12 mean the dilation from the binary64 input (measured: the factor 1 + 10^-12, side +1.66 x 10^-11) or the excess over the pre-descent input?
+  2. At 260, is the exact side the header's 8316760475444266760475435949833/(5 x 10^29), with 16.633520950888535 its binary64 print?
+  3. At 260 your island matches #845's after a half turn about the box centre and a shift of one unit upward. Is that how the composer placed it?
+  4. Would you name the composer and Chris Deotte's method in `CREDITS.md` or a README, so the credit is in your repository's own files as well as the issue?
+  5. The issue was edited at 21:18:34Z after it was opened. Did the edit change a claim, a digest or a credit?
+- **Next.** Nothing you asked for is queued here.
