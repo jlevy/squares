@@ -3,9 +3,9 @@ type: is
 id: is-01m6pn9e3bd7729mpbdkgf64gv
 title: "Review Daniel's seven #914 certificates at 175, 204, 260, 268, 293, 303 and 304 (stage 4) and adopt them with both regularizations (#914)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l51
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m6pmy1yjah0yzxy31g6sr734
 hold: null
 hold_until: null
 created_at: 2026-11-05T20:09:33.034Z
-updated_at: 2026-11-06T00:46:38.461Z
+updated_at: 2026-11-06T03:14:19.918Z
 started_at: 2026-11-06T00:46:38.461Z
+closed_at: 2026-11-06T03:14:19.918Z
+close_reason: "Stage 4 review of #914's seven (strong-max) accepted; mapped and all seven adopted at V3/C3 in https://github.com/jlevy/squares/pull/916 (merged e7875ff85)."
+resolution: null
+duplicate_of: null
 ---
 Stage 4 mathematical review of Evan Daniel's seven certificates of jlevy/squares#914, registered at V0/C0 as T-267 to T-273 on lane L51's draft pull request (branch claude/bold-ritchie-xo28us-l51), and, after the review lands on that branch, their adoption at each count under the house rule with both strong generators' regularization, each being the smallest side reported there.
 

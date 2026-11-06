@@ -3,14 +3,18 @@ type: is
 id: is-01m6nj9yngz2knh52thr8ve4vn
 title: Credit Yim as improved_by at 260 on the posters at the next infographics cut (T-265)
 kind: task
-status: open
+status: closed
 priority: 3
-version: 4
+version: 5
 labels: []
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-05T09:58:09.839Z
-updated_at: 2026-11-06T02:44:27.526Z
+updated_at: 2026-11-06T03:14:19.506Z
+closed_at: 2026-11-06T03:14:19.506Z
+close_reason: "Moot: T-269 replaced T-265 at 260 on 6 November 2026 (https://github.com/jlevy/squares/pull/916, merged e7875ff85); Yim is credited at no current count; the print hold now covers only Özden at 299 (think-tj4o)."
+resolution: null
+duplicate_of: null
 ---
 The adoption of T-265 at 260 on 5 November 2026 (PR #911, think-o7ly) credits Kaelan Yim as improved_by of Evan Daniel's packing there. The case record, its page, the register and the bound citation ("Daniel & Yim, GitHub") credit him now. The atlas posters, drawn for the v0.7.0 edition, do not: `PRINT_CREDIT_HELD` in `packing/devtools/build_known_best_atlas.py` holds his name off the posters' "Best packings due to" block, beside Doğa Özden's at 204 and 299 (think-tj4o), until the next infographics cut redraws the posters and empties the hold.
 
