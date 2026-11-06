@@ -3,9 +3,9 @@ type: is
 id: is-01m6pmy1yjah0yzxy31g6sr734
 title: "Import Evan Daniel: s(175), s(204), s(260), s(268), s(293), s(303), s(304) upper bounds, seven new packings (#914)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l51
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-05T20:03:20.145Z
-updated_at: 2026-11-06T00:46:29.789Z
+updated_at: 2026-11-06T03:59:45.020Z
 started_at: 2026-11-05T20:03:23.959Z
+closed_at: 2026-11-06T03:59:45.018Z
+close_reason: "#914's seven imported, reviewed and adopted at V3/C3 (https://github.com/jlevy/squares/pull/916); closing reply and #894/#895 supersession follow-ups posted and recorded (https://github.com/jlevy/squares/pull/917, merged f30d6405d)."
+resolution: null
+duplicate_of: null
 ---
 Import of jlevy/squares#914 (opened 2026-11-05T19:07:50Z by evand, Evan Daniel): seven upper bounds, each the certificate's exact rational side rounded up at 12 places: s(175) <= 13.764050051544, s(204) <= 14.804361383652, s(260) <= 16.633520950889, s(268) <= 16.872499518136, s(293) <= 17.623065212061, s(303) <= 17.901832750855 and s(304) <= 17.920944093341. Global optimality is not claimed.
 
