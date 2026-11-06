@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 169
+version: 170
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -61,7 +61,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-06T00:54:11.706Z
+updated_at: 2026-11-06T02:53:49.967Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -299,3 +299,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-05 23:52 renewal (intake92): think-lrj4 strong-max review accepted all seven of #914 (new arrangements, S3; F13 union credit to split per lineage). L51 is mapping it and adopting at 175, 204, 260, 268, 293, 303, 304.
 
 2026-11-06 00:52 renewal (intake93): a container restart (~00:00Z) interrupted L51 mid-adoption of #914; 65 uncommitted files survived, and L51 resumed (WIP commit first). #908 and #909 held for the owner.
+
+2026-11-06 02:52 renewal (intake95): #916 (T-267 to T-273 adopted at 175, 204, 260, 268, 293, 303, 304) senior review accept-with-fixes (text only); L51 is fixing. Poster hold reduced to 299 Özden; think-hgpg to close.

@@ -1,39 +1,36 @@
 ---
 type: is
 id: is-01m6jvv8f1b298n1p2wpnadbv2
-title: Credit Özden as improved_by at 204 and 299 on the posters at the next infographics cut (T-263, T-264)
+title: Credit Özden as improved_by at 299 on the posters at the next infographics cut (T-263)
 kind: task
 status: open
 priority: 3
-version: 8
+version: 10
 labels: []
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-04T08:47:10.817Z
-updated_at: 2026-11-05T23:38:33.940Z
+updated_at: 2026-11-06T02:44:26.702Z
 ---
 T-263 (#893) and T-264 (#894) are Doğa Özden's further arrangements of Evan Daniel's packings at 299 and 204. #897 adopted both as their counts' houses (think-ybep). As the stage 4 review of record's F8 asks, the case records credit `found_by: [Evan Daniel]` and `improved_by: [Doğa Özden]` in `reported_upper_bound`, and so do `devtools/adopt_houses.py`'s CREDITS, the case pages' Improved by row, the bound citations ('Daniel & Özden, GitHub') and the register.
 
 The posters' "Best packings due to" block reads every finder and improver in 1..324 from those fields. Adding Özden widens its three lines, and the attribution paragraphs rebalance one line shorter, so the 1-100 canvas computes 3869 px against the drawn 3898. That fails `build_known_best_atlas --check-composites` and Certificate page's `test_pdf_math_browser::test_the_complete_atlas_and_caption_fit_one_letter_page` (run 41798728350). Fixing it means redrawing both posters at an infographics cut (`devtools.cut_release --component infographics`), and the owner decides those (development.md, "Release assets are drawn at their component's version bump").
 
-So #897 holds the name on the print only. `PRINT_CREDIT_HELD` in `devtools/build_known_best_atlas.py` maps 204 and 299 to ("Doğa Özden",), and `_poster_packing_credits` alone reads it. That function feeds the credit block, the attribution paragraphs' shared line measure, the block's data attributes, the metadata's `source_groups` and the canvas height. The metadata's `cases` list stays truthful. This is the same kind of hold as think-10l0's.
+So #897 holds the name on the print only. `PRINT_CREDIT_HELD` in `devtools/build_known_best_atlas.py` mapped 204 and 299 to ("Doğa Özden",); since #916 (think-lrj4) it maps 299 alone, because T-268, Evan Daniel's own packing, took 204 on 5 November 2026 and the record there credits him alone, and `_poster_packing_credits` alone reads it. That function feeds the credit block, the attribution paragraphs' shared line measure, the block's data attributes, the metadata's `source_groups` and the canvas height. The metadata's `cases` list stays truthful. This is the same kind of hold as think-10l0's.
 
 The hold cannot outlive its edition. `PRINT_CREDIT_HELD_FOR = "v0.7.0"`, and `test_the_print_credit_hold_cannot_outlive_its_edition` (through `print_credit_hold_problems`) fails the pull-request suite as soon as `INFOGRAPHIC_VERSION` or a drawn poster's version differs while the hold is not empty (review F2 of #897). The cut machinery's own validation does not read the hold.
 
+Measured on 6 November 2026 (#916): with the hold as it stands the 1-100 canvas is 3898 px and the 101-324 canvas 5361 px, as drawn, with 28 names; with the hold emptied both keep their heights, the block keeps its three lines and the attribution paragraphs their [2, 3], and Özden joins after Xu (29 names). Lavrentev and Tymchishin left the block with #914's adoption. The 3869 px and the overflow measured on 4 and 5 November no longer hold.
+
 Done when, at the next infographics cut, all of these move in the same change:
 - `PRINT_CREDIT_HELD` is emptied (`{}`), and `PRINT_CREDIT_HELD_FOR` is updated or removed.
-- In tests/test_known_best_atlas.py:
-  - `test_print_credit_hold_keeps_ozden_and_yim_off_the_poster_credits_alone` (renamed on 5 November 2026 for think-hgpg) and `test_the_print_credit_hold_cannot_outlive_its_edition` are updated or removed with the hold.
-  - The pinned poster names move: `expected_names` goes from 30 to 32 (Özden and, for think-hgpg, Yim), and each is printed in `printed_names` where the tree then puts him (Özden after Xu on 4 November).
-  - `test_print_attribution_paragraphs_share_the_balanced_packing_measure`'s `[2, 3]` becomes `[2, 2]`.
-- The credit block is laid out again. Since think-hgpg (5 November 2026) the hold holds Kaelan Yim at 260 too, and emptying it overflows the block's three lines (`ValueError: poster packing credits exceed their three-line information block`), so the cut must redesign or resize the block before it can draw. Released alone, Özden's name measured 3869 px and Yim's kept 3898 px.
-- The canvas pins move with the redraw; the cut takes whatever the redraw then measures. They are:
-  - the literal 1-100 canvas and export heights in tests/test_known_best_atlas.py (3898 and its @2x 7796 in the manifest rows, the canvas, row-pitch and PDF-page assertions, and the SVG header and viewBox);
-  - the `const` heights in atlas/known-best/known-best-atlas.schema.yaml;
-  - the page-size sentence in devtools/render_composite_pdf.py.
-- The curation note's sentences naming this bead and think-hgpg in packing/atlas/known-best/credit-attributions.json are removed.
-- think-hgpg is done in the same change: both beads end with the hold empty, and the edition tie empties the whole hold at once, so neither can close alone.
-- Both posters are redrawn with the credit, and the hosted pdf job passes at the new height.
+- In packing/tests/test_known_best_atlas.py:
+  - `test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone` and `test_the_print_credit_hold_cannot_outlive_its_edition` are updated or removed with the hold.
+  - The pinned poster names move from 28 to 29: `expected_names`, `printed_names` (Özden after Xu, as the tree puts him on 6 November 2026) and the print-information test's count.
+  - `test_print_attribution_paragraphs_share_the_balanced_packing_measure`'s `[2, 3]` stays, re-measured at the cut.
+- The canvas pins stay as long as the redraw measures the same heights (3898 px and 5361 px, measured with the hold emptied on 6 November 2026); if the cut changes anything else on the posters, they move with what it measures: the literal canvas and export heights in packing/tests/test_known_best_atlas.py, the `const` heights in atlas/known-best/known-best-atlas.schema.yaml, and the page-size sentence in devtools/render_composite_pdf.py.
+- The curation note's sentences naming this bead (and think-hgpg) in packing/atlas/known-best/credit-attributions.json are removed.
+- Both posters are redrawn with the credit, and the hosted pdf job passes.
 
 ## Notes
 
