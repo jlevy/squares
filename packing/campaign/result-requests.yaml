@@ -28197,6 +28197,17 @@ issues:
         status: confirmed
       - result: n204-from-t257
         id: E-ozden-894-certificate-report
+    - url: https://github.com/jlevy/squares/issues/894#issuecomment-6676073981
+      date: '2026-11-06'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204-from-t257
+        id: T-264
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-264 is on main at V3/C3 as the house at 204, and the reply on main says what was
       replayed, that the stage 4 review accepted the certificate, and that the case adopted
@@ -28217,6 +28228,16 @@ issues:
       was closed as completed at 13:25:38Z. The questions are informational and hold
       nothing open. The deployed pages were not fetched from the session host;
       verify-deployment checked them.
+      The follow-up of 03:28:52Z on 6 November (issuecomment-6676073981), posted after
+      #916 merged as e7875ff85 and its Pages deployment passed (run 42155178622, deploy
+      job 127690206068, verify-deployment job 127690292048, 6,130 of 6,130 checks), owed
+      because the final reply stated T-264 current: T-264 still stands as a verified
+      bound, V3/C3, confirmed, and is superseded at n = 204 by Evan Daniel's T-268,
+      reported on #914, which has its own reply; the case adopted T-268 as the house on 5
+      November and keeps T-264 as history. It says that the atlas poster credit the final
+      reply promised no longer applies at 204. It names only T-264 and T-268, follows
+      #890's supersession follow-up of 5 November, and read back identical to what was
+      posted; the issue stays closed.
   - number: 895
     title: Improved upper bound for s(260)
     author: vitamoon
@@ -28299,6 +28320,17 @@ issues:
         status: confirmed
       - result: n260-yim
         id: E-yim-895-certificate-report
+    - url: https://github.com/jlevy/squares/issues/895#issuecomment-6676075046
+      date: '2026-11-06'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n260-yim
+        id: T-265
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     awaiting_author:
     - question: >-
         Would the author commit n260.cert.txt, unchanged, to a public GitHub repository and
@@ -28358,6 +28390,17 @@ issues:
       vitamoon/vitamoon/blob/main/n260.cert, and the stray ": ." the review notes. The
       licence, the file and the claim are unchanged, so read_through moves to the edit,
       05:31:52Z.
+
+      The follow-up of 03:28:56Z on 6 November (issuecomment-6676075046), posted after
+      #916 merged as e7875ff85 and its Pages deployment passed (run 42155178622, deploy
+      job 127690206068, verify-deployment job 127690292048, 6,130 of 6,130 checks), owed
+      because the final reply stated T-265 current: T-265 still stands as a verified
+      bound, V3/C3, confirmed, and is superseded at n = 260 by Evan Daniel's T-269,
+      reported on #914, which has its own reply; the case adopted T-269 as the house on 6
+      November and keeps T-265 as history. It says that the atlas poster credit the final
+      reply promised no longer applies at 260. It names only T-265 and T-269, follows
+      #890's supersession follow-up of 5 November, and read back identical to what was
+      posted; the issue stays closed.
   - number: 910
     title: "s(94) ≥ 2493/250 = 9.972 — rescaled Hosono density certificate and exhaustive receipts"
     author: kenaznia-doga
@@ -28461,7 +28504,8 @@ issues:
     title: '175, 204, 260, 268, 293, 303, 304: registration request'
     author: evand
     opened: '2026-11-05'
-    state: open
+    state: closed
+    closed: '2026-11-06'
     kind: result-report
     triage: done
     summary: >-
@@ -28582,13 +28626,136 @@ issues:
     - think-tj4o
     - think-hgpg
     answer_bead: think-ahvh
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/914#issuecomment-6676070711
+      date: '2026-11-06'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n175-daniel
+        id: T-267
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n175-daniel
+        id: E-evand-914-exact-feasibility
+        status: confirmed
+      - result: n175-daniel
+        id: E-evand-914-review-exact-feasibility
+        status: confirmed
+      - result: n175-daniel
+        id: E-evand-914-n175-certificate-report
+      - result: n204-daniel
+        id: T-268
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n204-daniel
+        id: E-evand-914-exact-feasibility
+        status: confirmed
+      - result: n204-daniel
+        id: E-evand-914-review-exact-feasibility
+        status: confirmed
+      - result: n204-daniel
+        id: E-evand-914-certificate-report
+      - result: n260-daniel
+        id: T-269
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n260-daniel
+        id: E-evand-914-exact-feasibility
+        status: confirmed
+      - result: n260-daniel
+        id: E-evand-914-review-exact-feasibility
+        status: confirmed
+      - result: n260-daniel
+        id: E-evand-914-n260-certificate-report
+      - result: n268-daniel
+        id: T-270
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n268-daniel
+        id: E-evand-914-exact-feasibility
+        status: confirmed
+      - result: n268-daniel
+        id: E-evand-914-review-exact-feasibility
+        status: confirmed
+      - result: n268-daniel
+        id: E-evand-914-certificate-report
+      - result: n293-daniel
+        id: T-271
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n293-daniel
+        id: E-evand-914-exact-feasibility
+        status: confirmed
+      - result: n293-daniel
+        id: E-evand-914-review-exact-feasibility
+        status: confirmed
+      - result: n293-daniel
+        id: E-evand-914-certificate-report
+      - result: n303-daniel
+        id: T-272
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n303-daniel
+        id: E-evand-914-exact-feasibility
+        status: confirmed
+      - result: n303-daniel
+        id: E-evand-914-review-exact-feasibility
+        status: confirmed
+      - result: n303-daniel
+        id: E-evand-914-certificate-report
+      - result: n304-daniel
+        id: T-273
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n304-daniel
+        id: E-evand-914-exact-feasibility
+        status: confirmed
+      - result: n304-daniel
+        id: E-evand-914-review-exact-feasibility
+        status: confirmed
+      - result: n304-daniel
+        id: E-evand-914-certificate-report
     close_when: >-
       T-267 to T-273 are on main and the reply on main says what was retained, replayed and
       reviewed, that the seven are adopted, and that nothing the author asked for is queued.
     notes: >-
       Read on 5 November 2026 from main 249bb82e7. The commit bb4cc78 precedes the issue by 38
       minutes 37 seconds; GitHub's activity log was not readable, so its push is not dated. The
-      issue was edited at 21:18:34Z after it was opened (the review's F10, question 5). No reply
-      has been posted: the reply is drafted on think-ahvh and waits for the records pull request
-      to merge, since it names T-267 to T-273.
+      issue was edited at 21:18:34Z after it was opened (the review's F10, question 5).
+
+      Closed on 6 November 2026 with the final reply (issuecomment-6676070711, posted at
+      03:28:40Z), after #916 merged as e7875ff85 and its Pages deployment passed (run
+      42155178622, deploy job 127690206068, verify-deployment job 127690292048, 6,130 of
+      6,130 checks). The reply was rendered with check_requests --draft 914 from that main
+      and reconciled with think-ahvh's draft of 5 November, whose acknowledgements, the
+      review's F3, F4, F10 and F11 and five questions it keeps, and whose placeholder for
+      the adoptions it fills from the case records. It states T-267 to T-273 at V3/C3, each
+      confirmed and current; E-evand-914-exact-feasibility and
+      E-evand-914-review-exact-feasibility, confirmed; and the report entries
+      E-evand-914-n175-certificate-report, E-evand-914-n260-certificate-report and
+      E-evand-914-certificate-report. It says, as the rendered draft does, that the
+      maintained routes share components with the generator and the review's checker is an
+      independent re-implementation, and that the author's two checkers were not run here.
+      It states each adoption and the house it replaced: T-186 at 175, T-264 at 204, T-265
+      at 260 (adopted on 6 November), T-242 at 268, T-257 at 293, T-240 at 303 and T-242 at
+      304, each kept as history, with the regularized views the cases draw; those ids are
+      not this issue's results and are not recorded under reported. It read back identical
+      to what was posted, and the issue was closed as completed at 03:28:49Z. The questions
+      are informational and hold nothing open. The deployed pages were not fetched from the
+      session host; verify-deployment checked them. The supersessions of T-264 and T-265
+      owed follow-ups on #894 and #895, which were posted and are recorded there.
