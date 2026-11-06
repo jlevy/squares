@@ -1833,3 +1833,27 @@ repositories:
       licence: CC BY 4.0 for the witness, JSON, outputs, READMEs and diff image, MIT for
       verifier/sqcheck.py, which the packet pins against the s299 packet's copy. No result
       content changed; nothing to import.
+  # The intake pass of 5 November 2026, lane L51 (think-3guf, think-ahvh), from the
+  # coordinator's read of #914.
+  - url: https://github.com/evand/square-packing
+    read_through: bb4cc78e5b35103c1f177db55e9cf08974e66563
+    read_on: '2026-11-05'
+    note: >-
+      The 52 commits past the 0e76d9f read, c9417f7 to bb4cc78 (2026-10-29T04:47:49Z to
+      2026-11-05T18:29:13Z); GitHub's activity log was not readable from the importing
+      session, so no push is dated. bb4cc78 adds search/packer/candidates/s175_1105,
+      s204_trig1, s260_ks_1105, s268_1105, s293_1105, s303_1105 and s304_1105, 56 files
+      (certificates, binary64 and pre-descent inputs, 80-digit points, run summaries, prior
+      facts and comparisons, and six regularized views), which #914 reports 38 minutes later;
+      the evand-issue914-2026-11-05 packet retains all 56, and the
+      evand-issue914-views-2026-11-05 packet pins the six views against those copies
+      (think-ahvh). Both packets pin bb4cc78. The other 51 hold no certificate and no
+      published side at a count: they change the packer (the event loop's claim queue,
+      campaigns and scorer, the compute pool pk/tasks.py that replaces jobs.py, pk try's arms
+      and reports, lineage, ingest, fill, relax, the store, and their tests),
+      search/packer/analysis/, triangle1000.py, the regularizer (39fb4f0: violated rows kept in
+      refine and an inequality feasibility phase, the fix the issue says 303's view needed),
+      and CLAUDE.md, CLAIMS.md (C54, untested), DESIGN.md, README.md, SUBMITTING.md,
+      Completed.md and TODO.md, whose lines name only results the record already holds (#845,
+      #824, #702, #703, #680, #674 and earlier). 0875935 lets the packer parse this register's
+      algebraic-number-field witnesses. Nothing else to import.

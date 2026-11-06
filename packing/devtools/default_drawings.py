@@ -449,19 +449,10 @@ _README_3MRY = (
 #: Both generators on the witness the adoption of 25 October 2026 wrote at 304, Evan
 #: Daniel's exact descent of the packing T-241 certifies (T-242, think-hx0e): his
 #: regularizer and grid-slack at 0.5, 1 and 5 degrees. Every view goes to review at row 7
-#: and draws more light squares than the axis tool's view of the witness, so the count is
-#: decided on that view (`SETTLED`).
-_RUNHX0E = (
-    ("evand-regularize", "evand-regularize-adopt-2026-10-25-n304-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg05"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg5"),
-)
-_README_HX0E = (
-    "packing/cases/regularized_drawings/think-hx0e-2026-10-25/README.md and "
-    "selection-adopt-2026-10-25-n304.md, the selection of 25 October 2026 (think-hx0e), "
-    "beside the runs' receipts and reports"
-)
+#: and draws more light squares than the axis tool's view of the witness, so the count was
+#: decided on that view (`SETTLED`) until the pass of 5 November 2026 moved 304 to T-273
+#: (think-lrj4) and its entry left (evidence in
+#: packing/cases/regularized_drawings/think-hx0e-2026-10-25/).
 
 #: Both generators ran on the three witnesses the adoption of 22 October 2026 moved to Evan
 #: Daniel's regularized views of 20 October (T-225, think-ql4v), 204, 229 and 260, and drew
@@ -500,18 +491,8 @@ _README_3GUF = (
 #: entry, decided on the earlier witness, left. The regularizer's solved views at 204 and
 #: 299 lie below the new houses and are register candidates (think-w64i). Their receipt,
 #: run blocks, reports and the selection's report are in
-#: packing/cases/regularized_drawings/think-ybep-2026-11-04/.
-_RUNYBEP = (
-    ("evand-regularize", "evand-regularize-adopt-2026-11-04-n204-299-evand"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg05"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg1"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg5"),
-)
-_README_YBEP = (
-    "packing/cases/regularized_drawings/think-ybep-2026-11-04/README.md and "
-    "selection-adopt-2026-11-04-n204-299.md, the selection of 4 November 2026 (think-ybep), "
-    "beside the runs' receipt, blocks and reports"
-)
+#: packing/cases/regularized_drawings/think-ybep-2026-11-04/. 204's entry left when the pass
+#: of 5 November 2026 moved 204 to T-268 (think-lrj4).
 
 #: Both generators on the witness the adoption of 5 November 2026 wrote at 260 (think-o7ly):
 #: Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees. None draws a view:
@@ -519,16 +500,26 @@ _README_YBEP = (
 #: regularizer's solve finds the witness not jammed, as a packing with contact-free squares
 #: is, so the selection decided 260 (`SETTLED`) and the axis tool's view stays drawn. Their
 #: receipt, run blocks, reports and the selection's report are in
-#: packing/cases/regularized_drawings/think-o7ly-2026-11-05/.
-_RUNO7LY = (
-    ("evand-regularize", "evand-regularize-adopt-2026-11-05-n260-evand"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n260-grid-deg05"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n260-grid-deg1"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n260-grid-deg5"),
+#: packing/cases/regularized_drawings/think-o7ly-2026-11-05/. Its entry left when the pass of
+#: 6 November 2026 moved 260 to T-269 (think-lrj4).
+
+#: Both generators on the seven witnesses the adoption of issue 914 wrote, at 175, 204,
+#: 268, 293, 303 and 304 on 5 November 2026 and at 260 on 6 November 2026 (think-lrj4):
+#: Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees. The selection drew the
+#: regularizer's views at 175, 204 and 268 and grid-slack's at 260 (0.5 degrees) and 303 (5
+#: degrees), and decided 293 and 304 (`SETTLED`); 204's, 260's and 304's entries, decided on
+#: the earlier witnesses, left. No view lies below a house. Their receipt, run blocks,
+#: reports and the selection's report are in
+#: packing/cases/regularized_drawings/think-lrj4-2026-11-05/.
+_RUNLRJ4 = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-05-n175-304-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n175-304-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n175-304-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n175-304-grid-deg5"),
 )
-_README_O7LY = (
-    "packing/cases/regularized_drawings/think-o7ly-2026-11-05/README.md and "
-    "selection-adopt-2026-11-05-n260.md, the selection of 5 November 2026 (think-o7ly), "
+_README_LRJ4 = (
+    "packing/cases/regularized_drawings/think-lrj4-2026-11-05/README.md and "
+    "selection-adopt-2026-11-05-n175-304.md, the selection of 6 November 2026 (think-lrj4), "
     "beside the runs' receipt, blocks and reports"
 )
 
@@ -804,19 +795,6 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
-    204: Settled(
-        DECIDED,
-        "[Özden s204 upper bound 2026-11-03]",
-        "resources/web/ozden-s204-upper-bound-2026-11-03/source/n-204-candidate.yaml",
-        "d4b8b05c45e3be464476c94712a4dbc063009875",
-        "7403810497792604009019579959/500000000000000000000000000",
-        _RUNYBEP,
-        "grid-slack finds no view at 0.5, 1 or 5 degrees, its relaxed rows overlapping at "
-        "this side, so the axis tool's view of this witness stays drawn; Evan Daniel's "
-        "regularizer solved the witness 4.82e-16 below its side, held at row 3 as a "
-        "register candidate (think-w64i), never admitted here",
-        _README_YBEP,
-    ),
     208: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",
@@ -953,20 +931,6 @@ SETTLED: dict[int, Settled] = {
         "overlap at this side)",
         _README_3MRY,
     ),
-    260: Settled(
-        DECIDED,
-        "[Yim s260 upper bound 2026-11-05]",
-        "resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert",
-        "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
-        "1045817814143413714427921537528704162855767253933/"
-        "62872364692131569638734867237718772414897487626",
-        _RUNO7LY,
-        "grid-slack finds no view at 0.5, 1 or 5 degrees, its relaxed rows overlapping at "
-        "this side, and Evan Daniel's regularizer finds the witness not jammed, as a packing "
-        "with contact-free squares is, and draws no view, so the axis tool's view of this "
-        "witness stays drawn",
-        _README_O7LY,
-    ),
     263: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",
@@ -1084,6 +1048,20 @@ SETTLED: dict[int, Settled] = {
         "earn the picture is the owner's question (think-j68m)",
         _README_YK2H,
     ),
+    293: Settled(
+        DECIDED,
+        "[Daniel issue 914 2026-11-05]",
+        "resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/"
+        "s293_1105.cert",
+        "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+        "17623065212060701770633564247069/1000000000000000000000000000000",
+        _RUNLRJ4,
+        "every view, Evan Daniel's regularizer's certified KKT view at the witness's side "
+        "and grid-slack's at 0.5, 1 and 5 degrees, is admitted at row 10 but draws more "
+        "light and uneven squares than the axis tool's view of this witness (11 and 26 "
+        "against 9 and 24), so that view stays drawn",
+        _README_LRJ4,
+    ),
     297: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",
@@ -1119,18 +1097,18 @@ SETTLED: dict[int, Settled] = {
     ),
     304: Settled(
         DECIDED,
-        "[Daniel Kaggle descents 2026-10-24]",
-        "resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/"
-        "s304_pub.cert",
-        "8a8879a2972c32cbd2d906049228cc9f0762b02a",
-        "1792689890035674158972360842897/100000000000000000000000000000",
-        _RUNHX0E,
-        "every view draws more light squares than the axis tool's view of this witness "
-        "(4 or 5 to 2) and goes to review at row 7, its per-square contact counts falling "
-        "while no total does: grid-slack's at all three thresholds (14 squares) and Evan "
-        "Daniel's certified KKT re-solve at the witness's side (36); each has fewer uneven "
-        "and near-axis squares, and none is a register candidate",
-        _README_HX0E,
+        "[Daniel issue 914 2026-11-05]",
+        "resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/"
+        "s304_1105.cert",
+        "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+        "17920944093340242061198022152503/1000000000000000000000000000000",
+        _RUNLRJ4,
+        "Evan Daniel's regularizer's certified KKT view at the witness's side is refused at "
+        "row 7, its house and stage totals of shared sides falling (703 and 720 against 759 "
+        "and 796), and grid-slack's views at 0.5, 1 and 5 degrees go to review at row 7, 50 "
+        "per-square contact counts falling while no total does, with more uneven squares "
+        "than the axis tool's view of this witness (49 against 40), so that view stays drawn",
+        _README_LRJ4,
     ),
     306: Settled(
         DECIDED,

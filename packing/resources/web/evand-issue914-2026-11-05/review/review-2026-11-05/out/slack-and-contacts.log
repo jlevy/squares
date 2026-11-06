@@ -1,0 +1,8 @@
+175 house W-known-best-n175 unit True wall 3.632618916812e-78 gap 7.265237833623415e-78 contacts 433 walls 44 {'1e-7': 18, '1e-78': 433} | new contacts 210 walls 30
+204 house W-known-best-n204 unit True wall 9.999999999500243e-18 gap 9.99999978848047e-18 contacts 391 walls 42 {'1e-14': 1, '1e-15': 3, '1e-16': 14, '1e-17': 319, '1e-18': 54} | new contacts 464 walls 43
+260 house W-known-best-n260 unit True wall 0.0 gap 1.336398719863592e-15 contacts 520 walls 50 {'1e-12': 478, '1e-13': 29, '1e-14': 10, '1e-15': 3, '1e-7': 1} | new contacts 506 walls 44
+268 house W-known-best-n268 unit True wall 5e-21 gap 9.999999999999989e-21 contacts 612 walls 44 {'1e-15': 1, '1e-20': 611, '1e-7': 6, '1e-9': 19} | new contacts 597 walls 49
+293 house W-known-best-n293 unit True wall 4.994999999999999e-13 gap 9.989999999999999e-13 contacts 611 walls 59 {'1e-10': 1, '1e-12': 604, '1e-13': 6, '1e-7': 5, '1e-8': 2, '1e-9': 2} | new contacts 886 walls 62
+303 house W-known-best-n303 unit True wall 1e-15 gap 2.0717560917341208e-13 contacts 768 walls 48 {'1e-11': 6, '1e-12': 58, '1e-13': 704, '1e-7': 6, '1e-9': 2} | new contacts 759 walls 56
+304 house W-known-best-n304 unit True wall 5e-21 gap 9.999999999999995e-21 contacts 678 walls 45 {'1e-10': 2, '1e-20': 676, '1e-7': 56} | new contacts 731 walls 53
+T-257 260 wall 6.010000000001019e-13 gap 1.2016342921610552e-12 contacts 528 {'1e-10': 1, '1e-12': 527, '1e-7': 5, '1e-8': 2, '1e-9': 2}

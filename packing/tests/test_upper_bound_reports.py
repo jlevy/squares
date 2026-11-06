@@ -172,6 +172,10 @@ L36_1104 = ("ozden-s299-upper-bound-2026-11-03", "ozden-s204-upper-bound-2026-11
 #: The intake pass's lane L48 of 5 November 2026 (`test_upper_bound_reports_l48_1105`):
 #: Kaelan Yim's #895 at 260, retained at vitamoon/vitamoon d11a8a1 under CC BY 4.0.
 YIM_895 = "yim-s260-upper-bound-2026-11-05"
+#: The intake pass's lane L51 of 5 November 2026 (`test_upper_bound_reports_l51_1105`):
+#: Evan Daniel's #914 at seven counts, retained at evand/square-packing bb4cc78 under MIT,
+#: and its six regularized views, pinned against the first packet's copies.
+L51_1105 = ("evand-issue914-2026-11-05", "evand-issue914-views-2026-11-05")
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -227,6 +231,7 @@ EVERY = (
     *L2_1031,
     *L36_1104,
     YIM_895,
+    *L51_1105,
 )
 
 
@@ -1479,7 +1484,13 @@ def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:
     assert len(readers) >= 35
     #: T-185's 175 is the 11 October release's certificate under a key of its own, read
     #: from that release's packet.
-    shared = {"[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]"}
+    shared = {
+        "[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]",
+        #: T-267's 175 and T-269's 260 are issue 914's certificates under keys of their own,
+        #: read from that release's packet (F13 of the 5 November review).
+        "[Daniel issue 914 n175 2026-11-05]": "[Daniel issue 914 2026-11-05]",
+        "[Daniel issue 914 n260 2026-11-05]": "[Daniel issue 914 2026-11-05]",
+    }
     for key, reader in readers.items():
         packet = reports.packet_path(reader.args[0])
         assert reports.load_declaration(packet)["source_key"] == shared.get(key, key)
@@ -1568,6 +1579,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         "mishapolk-issue846-2026-10-30": "2026-10-30",
         **dict.fromkeys(L36_1104, "2026-11-03"),
         YIM_895: "2026-11-05",
+        **dict.fromkeys(L51_1105, "2026-11-05"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

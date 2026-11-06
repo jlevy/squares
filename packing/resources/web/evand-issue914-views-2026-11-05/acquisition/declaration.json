@@ -1,0 +1,35 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-issue914-views-2026-11-05",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+  "source_commit": "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+  "retrieved_at_utc": "2026-11-05T19:58Z",
+  "git_scope": "The sparse checkout of bb4cc78 (committed 2026-11-05T18:29:13Z) that the evand-issue914-2026-11-05 packet was written from, fetched on 5 November 2026 for the import of issue #914. This packet takes the six regularized display views the commit adds beside six of the issue's seven certificates, s175_1105_regularized.cert, s204_trig1_regularized.cert, s268_1105_regularized.cert, s293_1105_regularized.cert, s303_1105_regularized.cert and s304_1105_regularized.cert, each of which the issue names with its SHA-256 as a regularized view at its certificate's side, so that both maintained exact routes decide each view as they decide the certificates. The evand-issue914-2026-11-05 packet retains the six files and the licence at the same pin, so they are pinned here against those copies and nothing is retained here; no source program was executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel: the licence the evand-issue914-2026-11-05 packet retains at the same pin (blob 52cf89d), pinned here against that copy. CREDITS.md says the repository's work was 'Produced by Claude (Anthropic) in a single session under human direction'; the views' commit carries a Co-Authored-By trailer naming Claude.",
+  "claims": [
+    "Issue #914 (opened 2026-11-05T19:07:50Z by evand) names six regularized views, each with its SHA-256 and each 'same side' as its certificate: s175_1105_regularized.cert, s204_trig1_regularized.cert, s268_1105_regularized.cert, s293_1105_regularized.cert and s304_1105_regularized.cert at their certificates' sides, and s303_1105_regularized.cert, whose box the issue says is 1.9e-32 larger than the KKT point's side S*, inside the certificate's side S', made after the regularizer fix of 39fb4f0. Each view's header states the same exact side as its certificate. The issue says the source's two exact checkers report VALID on all thirteen files; that statement is the author's, and no source program ran here. The views claim no bound of their own: each states its certificate's side."
+  ],
+  "scope": [
+    "LICENSE",
+    "search/packer/candidates/s175_1105_regularized.cert",
+    "search/packer/candidates/s204_trig1_regularized.cert",
+    "search/packer/candidates/s268_1105_regularized.cert",
+    "search/packer/candidates/s293_1105_regularized.cert",
+    "search/packer/candidates/s303_1105_regularized.cert",
+    "search/packer/candidates/s304_1105_regularized.cert"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/packer/candidates/*_regularized.cert",
+      "reason": "The six regularized views this packet replays, retained by the evand-issue914-2026-11-05 packet at the same pin; pinned by digest here and compared with those copies.",
+      "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates"
+    },
+    {
+      "match": "LICENSE",
+      "reason": "The source's MIT licence, retained by the evand-issue914-2026-11-05 packet at the same pin.",
+      "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/LICENSE"
+    }
+  ]
+}

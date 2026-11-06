@@ -1,0 +1,150 @@
+format: intake-ledger-v1
+read_at_main: 249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+read_on: '2026-11-05'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l51
+  branch: claude/bold-ritchie-xo28us-l51
+  commit: 249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+  note: The packet's claim record, written on the lane's branch from main 249bb82e7 and read
+    here by path.
+reports:
+- report: '#914'
+  url: https://github.com/jlevy/squares/issues/914
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-11-05T19:07:50Z'
+  bead: think-ahvh
+  claims:
+  - n: 175
+    printed: '13.764050051544'
+    rounding: up
+    exact: 13764050051543175143919941166751/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json at
+      claude/bold-ritchie-xo28us-l51@249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+    first_committed: '2026-11-05T18:29:13Z'
+    measured:
+      against: T-186
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment
+        (symmetry 2) moves 60 squares beyond 0.1 and 83 beyond 1e-2 (largest 0.774) and turns
+        squares by up to 32.7 degrees; 48 tilted squares against T-186's 50; a new arrangement
+      source: packing/resources/web/evand-issue914-2026-11-05/measure/identity-n175.json
+    new_packing:
+      source: '#914: ''All seven are new packings, not refinements''; at 175 ''different local
+        minimum; no shared tilt angle'''
+      continues: gadgets of the register's s(175) packing (Mishapolk's, after Daniil Ostashev
+        et al.) and an earlier composer build at 175
+  - n: 204
+    printed: '14.804361383652'
+    rounding: up
+    exact: 7402180691825929362760144937013/500000000000000000000000000000
+    exact_from: packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json at
+      claude/bold-ritchie-xo28us-l51@249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+    first_committed: '2026-11-05T18:29:13Z'
+    measured:
+      against: T-264
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment
+        (symmetry 5) moves 66 squares beyond 0.1 and 126 beyond 1e-2 (largest 1.032) and turns
+        squares by up to 31.2 degrees; 63 tilted squares against T-264's 76; a new arrangement
+      source: packing/resources/web/evand-issue914-2026-11-05/measure/identity-n204.json
+    new_packing:
+      source: '#914: ''All seven are new packings, not refinements''; at 204 ''different local
+        minimum; no shared tilt angle'''
+      continues: gadgets of the author's own s(233) and s(370)
+  - n: 260
+    printed: '16.633520950889'
+    rounding: up
+    exact: 8316760475444266760475435949833/500000000000000000000000000000
+    exact_from: packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json at
+      claude/bold-ritchie-xo28us-l51@249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+    first_committed: '2026-11-05T18:29:13Z'
+    measured:
+      against: T-265
+      finding: no symmetry pairs it one to one by nearest centres, with T-265's packing or
+        T-257's; the optimal assignment (the identity) moves 42 squares beyond 0.1 and 165
+        beyond 1e-2 (largest 0.602), and against T-257's 33 and 160 (largest 0.633); 103 tilted
+        squares against T-265's 105 and T-257's 104; a new arrangement
+      source: packing/resources/web/evand-issue914-2026-11-05/measure/identity-n260.json
+    new_packing:
+      source: '#914: ''All seven are new packings, not refinements''; at 260 ''new packing
+        (our upper bound is below their exact side)'''
+      continues: the tilted island of the author's 260 of issue 845 (T-257), from Kirill Tymchishin's
+        (kirilltym) Kaggle s(260), recomposed in a 260 frame
+  - n: 268
+    printed: '16.872499518136'
+    rounding: up
+    exact: 2109062439766878830759866953431/125000000000000000000000000000
+    exact_from: packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json at
+      claude/bold-ritchie-xo28us-l51@249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+    first_committed: '2026-11-05T18:29:13Z'
+    measured:
+      against: T-242
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment
+        (symmetry 2) moves 80 squares beyond 0.1 and 139 beyond 1e-2 (largest 1.072) and turns
+        squares by up to 42.5 degrees; 98 tilted squares against T-242's 81; a new arrangement
+      source: packing/resources/web/evand-issue914-2026-11-05/measure/identity-n268.json
+    new_packing:
+      source: '#914: ''All seven are new packings, not refinements''; at 268 ''different local
+        minimum; no shared tilt angle'''
+  - n: 293
+    printed: '17.623065212061'
+    rounding: up
+    exact: 17623065212060701770633564247069/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json at
+      claude/bold-ritchie-xo28us-l51@249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+    first_committed: '2026-11-05T18:29:13Z'
+    measured:
+      against: T-257
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment
+        (symmetry 5) moves 193 squares beyond 0.1 and 249 beyond 1e-2 (largest 0.995) and
+        turns squares by up to 40.8 degrees; 54 tilted squares against T-257's 104; a new
+        arrangement
+      source: packing/resources/web/evand-issue914-2026-11-05/measure/identity-n293.json
+    new_packing:
+      source: '#914: ''All seven are new packings, not refinements''; at 293 ''new packing
+        (our upper bound is below their exact side)'''
+  - n: 303
+    printed: '17.901832750855'
+    rounding: up
+    exact: 17901832750854048761575294038467/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json at
+      claude/bold-ritchie-xo28us-l51@249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+    first_committed: '2026-11-05T18:29:13Z'
+    measured:
+      against: T-240
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment
+        (symmetry 5) moves 124 squares beyond 0.1 and 144 beyond 1e-2 (largest 1.104) and
+        turns squares by up to 44.4 degrees; 112 tilted squares against T-240's 102; a new
+        arrangement
+      source: packing/resources/web/evand-issue914-2026-11-05/measure/identity-n303.json
+    new_packing:
+      source: '#914: ''All seven are new packings, not refinements''; at 303 ''different local
+        minimum; no shared tilt angle'''
+  - n: 304
+    printed: '17.920944093341'
+    rounding: up
+    exact: 17920944093340242061198022152503/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json at
+      claude/bold-ritchie-xo28us-l51@249bb82e771d4ddc2b1549eaf6e4d49adfc09dee
+    first_committed: '2026-11-05T18:29:13Z'
+    measured:
+      against: T-242
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment
+        (the identity) moves 66 squares beyond 0.1 and 157 beyond 1e-2 (largest 0.867) and
+        turns squares by up to 45.0 degrees; 110 tilted squares against T-242's 99; a new
+        arrangement
+      source: packing/resources/web/evand-issue914-2026-11-05/measure/identity-n304.json
+    new_packing:
+      source: '#914: ''All seven are new packings, not refinements''; at 304 ''new packing
+        (our upper bound is below their exact side)'''
+  note: The issue names bb4cc78, committed at 2026-11-05T18:29:13Z, 38 minutes 37 seconds
+    before the issue. All seven were built by the author's fault-line composer, his implementation
+    of Chris Deotte's multi-gadget fault DP; at 268, 293, 303 and 304 the gadget donors were
+    not recorded, so no start is named.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

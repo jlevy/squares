@@ -1,0 +1,112 @@
+{
+ "path": "/home/user/squares/.claude/worktrees/review-lrj4/packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105.cert",
+ "sha256": "440402323670057e763ab6edac7cb4ba971222929d235a587b130f96d6d595cf",
+ "bytes": 52017,
+ "n": 304,
+ "side": "17920944093340242061198022152503/1000000000000000000000000000000",
+ "side_float": 17.920944093340243,
+ "sense": -1,
+ "pairs_expected": 46056,
+ "method_a": {
+  "name": "separating axes, fractions.Fraction",
+  "walls_decided": 1216,
+  "squares_outside": [],
+  "least_wall_clearance": "1/200000000000000000000",
+  "least_wall_clearance_float": 5e-21,
+  "least_wall_square": 239,
+  "least_wall_square_line": 241,
+  "least_wall_walls": [
+   "bottom"
+  ],
+  "squares_at_least_wall_clearance": 17,
+  "pairs_decided": 46056,
+  "classes": {
+   "separated": 45950,
+   "touching": 0,
+   "overlapping": 106
+  },
+  "least_pair_gap": "-75367100046450632805467526852266366204466332276104645682100878095122532856860126570628251320560675726667/259918338740770432645882164808189800706778788501602595848620782816000100000000000000000000000000000000000",
+  "least_pair_gap_float": -0.28996453429020264,
+  "least_pair": [
+   38,
+   41
+  ],
+  "least_pair_lines": [
+   40,
+   43
+  ],
+  "least_pair_axis": "u_i",
+  "pairs_below_1e-6_by_decade": {
+   "1e-12": 1,
+   "1e-20": 528,
+   "1e-7": 9,
+   "1e-8": 1,
+   "1e-9": 1,
+   "negative": 106
+  },
+  "verdict": "refuse",
+  "cpu_seconds": 10.103
+ },
+ "method_b": {
+  "name": "exact clipped areas, gmpy2.mpq 2.3.1",
+  "every_square_area_exactly_1": true,
+  "walls_decided": 304,
+  "squares_outside": [],
+  "pairs_decided": 46056,
+  "classes": {
+   "empty": 45950,
+   "touching": 0,
+   "overlapping": 106
+  },
+  "largest_overlap_area": "2897522810046229817550567125014377763282225662082231582715478368736210136391801333342063792453115962007959835736953642693203837627155497620631418099253436221165104635595980413640007399416019968008433710317659/33778771406880941967229051761970504242897009257201311266036391450842739738465607765889566029467568050321177377394474193879905307006281600005000000000000000000000000000000000000000000000000000000000000000000000",
+  "verdict": "refuse",
+  "cpu_seconds": 1.759
+ },
+ "methods_agree_pair_by_pair": true,
+ "verdict": "refuse",
+ "overlapping_pairs_first_10": [
+  [
+   1,
+   91
+  ],
+  [
+   1,
+   238
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   4,
+   270
+  ],
+  [
+   5,
+   7
+  ],
+  [
+   5,
+   11
+  ],
+  [
+   6,
+   9
+  ],
+  [
+   6,
+   208
+  ],
+  [
+   7,
+   213
+  ],
+  [
+   8,
+   40
+  ]
+ ],
+ "overlapping_pairs_count": 106,
+ "label": "s304_1105-reversed",
+ "cpu_seconds_total": 11.865
+}

@@ -1,0 +1,100 @@
+{
+ "store_id": 2798296,
+ "s": 16.874361715873825,
+ "sources": [
+  "pending:#763 (Francisco Couzo)",
+  "register (Kirill Tymchishin)",
+  "watch:franciscouzo/square-packing@1c17153 (lollipoll)",
+  "later copies of the same minimum: store ids [3130694, 3225656]"
+ ],
+ "ok": true,
+ "S_exact": "16.87436171586934582431607867930684575780915718560764809784288758",
+ "S_cert": "16.874361715869345824484822296466",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 268 closed unit squares pairwise disjoint inside the open box of side 16.874361715869344636 (668 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": -0.0,
+  "status": "local minimum of S, strict modulo 154 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 154,
+  "flat_realised": 154.0,
+  "flat_residual": 1.0331331395256547e-62,
+  "negative_eigs": 0,
+  "corner_corner": 84,
+  "vv_milp_dS": 0.0,
+  "rattlers": 19,
+  "min_pair": 9.999999999999986e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "16.8743617158693458243160786793068457578091571856076480978429",
+  "S_cert": "8437180857934672912242411148233/500000000000000000000000000000",
+  "groups": [
+   22,
+   3
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 268 closed unit squares pairwise disjoint inside the open box of side 16.874361715869344636 (587 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.001862197734315174,
+  "matching_distance_regularized": 0.33095918125513635,
+  "symmetry": 7,
+  "moved_gt_1e4": 221,
+  "moved_gt_1e2": 70,
+  "moved_gt_1e1": 54,
+  "moved_gt_1e1_all": 78,
+  "max_move": 1.0724288113870655,
+  "max_move_all": 1.0724288113870655,
+  "max_angle_change": 42.198388280905846,
+  "rattler_status_swaps": 40,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "22.2918",
+   "23.6395",
+   "23.6416",
+   "24.0210",
+   "24.2618",
+   "24.3871",
+   "24.4922",
+   "24.4975",
+   "24.5018",
+   "24.5133",
+   "24.5392"
+  ],
+  "prior_only_angles": [
+   "24.1621"
+  ],
+  "contacts": {
+   "symmetry": 6,
+   "edges_ours": 646,
+   "edges_prior": 547,
+   "shared": 405,
+   "ours_only": 241,
+   "prior_only": 142,
+   "rattlers_ours": 29,
+   "rattlers_prior": 19,
+   "rattlers_shared": 4
+  }
+ }
+}

@@ -79,8 +79,8 @@ houses:
     result: T-257
     landed: '2026-10-31'
   - n: 175
-    result: T-186
-    landed: '2026-10-17'
+    result: T-267
+    landed: '2026-11-06'
   - n: 176
     result: T-186
     landed: '2026-10-17'
@@ -100,8 +100,8 @@ houses:
     result: T-220
     landed: '2026-10-20'
   - n: 204
-    result: T-264
-    landed: '2026-11-04'
+    result: T-268
+    landed: '2026-11-06'
   - n: 206
     result: T-174
     landed: '2026-10-19'
@@ -157,8 +157,8 @@ houses:
     result: T-193
     landed: '2026-10-24'
   - n: 260
-    result: T-265
-    landed: '2026-11-05'
+    result: T-269
+    landed: '2026-11-06'
   - n: 261
     result: T-174
     landed: '2026-10-19'
@@ -172,8 +172,8 @@ houses:
     result: T-134
     landed: '2026-10-12'
   - n: 268
-    result: T-242
-    landed: '2026-10-26'
+    result: T-270
+    landed: '2026-11-06'
   - n: 269
     result: T-174
     landed: '2026-10-19'
@@ -193,8 +193,8 @@ houses:
     result: T-146
     landed: '2026-10-12'
   - n: 293
-    result: T-257
-    landed: '2026-10-31'
+    result: T-271
+    landed: '2026-11-06'
   - n: 295
     result: T-193
     landed: '2026-10-24'
@@ -208,11 +208,11 @@ houses:
     result: T-193
     landed: '2026-10-24'
   - n: 303
-    result: T-240
-    landed: '2026-10-25'
+    result: T-272
+    landed: '2026-11-06'
   - n: 304
-    result: T-242
-    landed: '2026-10-25'
+    result: T-273
+    landed: '2026-11-06'
   - n: 305
     result: T-174
     landed: '2026-10-19'

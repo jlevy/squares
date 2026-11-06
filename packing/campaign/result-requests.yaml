@@ -28457,3 +28457,138 @@ issues:
       what was posted, and the issue was closed as completed at 20:52:01Z. The questions
       are informational and hold nothing open. The deployed pages were not fetched from
       the session host; verify-deployment checked them.
+  - number: 914
+    title: '175, 204, 260, 268, 293, 303, 304: registration request'
+    author: evand
+    opened: '2026-11-05'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports seven upper bounds at evand/square-packing bb4cc78, each the
+      certificate's exact rational side rounded up at 12 places: s(175) <= 13.764050051544,
+      s(204) <= 14.804361383652, s(260) <= 16.633520950889, s(268) <= 16.872499518136, s(293) <=
+      17.623065212061, s(303) <= 17.901832750855 and s(304) <= 17.920944093341, 1.24e-4 to
+      1.09e-2 below the houses (T-186, T-264, T-265, T-242, T-257, T-240 and T-242), each a new
+      packing by the issue's word, built by his fault-line composer, his implementation of Chris
+      Deotte's multi-gadget fault DP, with Deotte credited for the method; exact KKT
+      certificates with regularized views at the same side at six counts and a dilation
+      certificate at 260. Triaged and imported on 5 November 2026 in the intake pass's lane L51
+      (think-ahvh, think-3guf): the evand-issue914-2026-11-05 packet retains the 56 files of the
+      seven sets at bb4cc78 under the source's MIT licence, and the
+      evand-issue914-views-2026-11-05 packet pins the six views against those copies. The
+      thirteen digests the issue prints are the files', the sides are the headers and round up
+      to the prints, and both maintained exact routes accept each certificate and each view and
+      refuse their gross and sharp controls. The ledger of 5 November
+      (upper-bounds-914-20261105) records all seven. Registered as T-267 to T-273, one entry per
+      count. The 5 November stage 4 review
+      (docs/project/reviews/review-2026-11-05-evand-914-seven.md, think-lrj4) accepted all
+      seven, at 260 with findings, none blocking or major, confirmed S3 and read all seven as
+      new arrangements, 260 a new frame around #845's island, which matches only after a half
+      turn; its clean-room checker decided all thirteen files again by two methods, so each
+      entry is confirmed, independently re-implemented, at V3/C3. The record's findings are
+      fixed: the 260 dilation is 1 + 1e-12 (F3), and each lineage has its own key, Daniel after
+      Deotte at five counts, with Ostashev, PingYou Ltd and Polkovskyi at 175 and Tymchishin at
+      260 (F13, F14). The cases adopt them under the house rule, at 175, 204, 268, 293, 303 and
+      304 on 5 November 2026 and at 260 on 6 November 2026, since that day's earlier pass had
+      moved 260 to T-265; both strong generators' runs draw Evan Daniel's regularizer's views at
+      175, 204 and 268 (at 175 his own published view, measured, and at 268 the same but for one square) and grid-slack's at
+      260 and 303, and decide 293 and 304 no better than the axis tool's views. The rigidity
+      blocks were derived again. The posters' hold no longer holds Özden at 204 or Yim at 260,
+      whom the records there no longer credit (think-tj4o, think-hgpg). The Kaggle side-only
+      sides the issue quotes are no report. Claude assistance disclosed.
+    read_through: '2026-11-05T19:07:50Z'
+    results:
+    - key: n175-daniel
+      claim: >-
+        s(175) <= 13764050051543175143919941166751/10^30 by s175_1105.cert at bb4cc78, a
+        packing the source calls new.
+      source: body
+      register:
+      - T-267
+      evidence:
+      - E-evand-914-n175-certificate-report
+      - E-evand-914-exact-feasibility
+      - E-evand-914-review-exact-feasibility
+    - key: n204-daniel
+      claim: >-
+        s(204) <= 7402180691825929362760144937013/(5*10^29) by s204_trig1.cert at bb4cc78, a
+        packing the source calls new.
+      source: body
+      register:
+      - T-268
+      evidence:
+      - E-evand-914-certificate-report
+      - E-evand-914-exact-feasibility
+      - E-evand-914-review-exact-feasibility
+    - key: n260-daniel
+      claim: >-
+        s(260) <= 8316760475444266760475435949833/(5*10^29) by s260_ks_1105.cert at bb4cc78, a
+        packing the source calls new.
+      source: body
+      register:
+      - T-269
+      evidence:
+      - E-evand-914-n260-certificate-report
+      - E-evand-914-exact-feasibility
+      - E-evand-914-review-exact-feasibility
+    - key: n268-daniel
+      claim: >-
+        s(268) <= 2109062439766878830759866953431/(1.25*10^29) by s268_1105.cert at bb4cc78, a
+        packing the source calls new.
+      source: body
+      register:
+      - T-270
+      evidence:
+      - E-evand-914-certificate-report
+      - E-evand-914-exact-feasibility
+      - E-evand-914-review-exact-feasibility
+    - key: n293-daniel
+      claim: >-
+        s(293) <= 17623065212060701770633564247069/10^30 by s293_1105.cert at bb4cc78, a
+        packing the source calls new.
+      source: body
+      register:
+      - T-271
+      evidence:
+      - E-evand-914-certificate-report
+      - E-evand-914-exact-feasibility
+      - E-evand-914-review-exact-feasibility
+    - key: n303-daniel
+      claim: >-
+        s(303) <= 17901832750854048761575294038467/10^30 by s303_1105.cert at bb4cc78, a
+        packing the source calls new.
+      source: body
+      register:
+      - T-272
+      evidence:
+      - E-evand-914-certificate-report
+      - E-evand-914-exact-feasibility
+      - E-evand-914-review-exact-feasibility
+    - key: n304-daniel
+      claim: >-
+        s(304) <= 17920944093340242061198022152503/10^30 by s304_1105.cert at bb4cc78, a
+        packing the source calls new.
+      source: body
+      register:
+      - T-273
+      evidence:
+      - E-evand-914-certificate-report
+      - E-evand-914-exact-feasibility
+      - E-evand-914-review-exact-feasibility
+    beads:
+    - think-ahvh
+    - think-lrj4
+    - think-tj4o
+    - think-hgpg
+    answer_bead: think-ahvh
+    replies: []
+    close_when: >-
+      T-267 to T-273 are on main and the reply on main says what was retained, replayed and
+      reviewed, that the seven are adopted, and that nothing the author asked for is queued.
+    notes: >-
+      Read on 5 November 2026 from main 249bb82e7. The commit bb4cc78 precedes the issue by 38
+      minutes 37 seconds; GitHub's activity log was not readable, so its push is not dated. The
+      issue was edited at 21:18:34Z after it was opened (the review's F10, question 5). No reply
+      has been posted: the reply is drafted on think-ahvh and waits for the records pull request
+      to merge, since it names T-267 to T-273.

@@ -1,0 +1,8 @@
+{
+ "S_prime_minus_S_input": 1.66335209508719e-11,
+ "S_prime_minus_S_predescent": 8.827520950871899e-12,
+ "S_predescent_minus_S_input": 7.806e-12,
+ "input_least_pair_gap": "-3.88781e-16",
+ "input_pairs_overlapping": 19,
+ "input_least_wall_clearance_vs_its_side": "-8.28475e-16"
+}

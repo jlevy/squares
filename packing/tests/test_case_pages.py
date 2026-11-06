@@ -154,13 +154,19 @@ def test_every_record_file_is_small(records: dict[str, str]) -> None:
     # grows with each adoption. T-231's (think-h01y, 23 October 2026) took it to 320,783
     # bytes: its section is 20,311 and its register entry 7,206. The adoption of T-257
     # (think-3guf, 31 October 2026) took it to 353,894, and that of T-264 (think-ybep, 4
-    # November 2026) to 380,427, about 26.5 KB an adoption; the ceiling allows one more
-    # (think-w64i), as the published budget in `site_urls` does.
+    # November 2026) to 380,427, about 26.5 KB an adoption; the ceiling allowed one more,
+    # which T-268's adoption (#914, think-lrj4) used on 5 November 2026: 410,384 bytes,
+    # 19,616 below it, less than one more adoption, so the next adoption at 204 moves it as
+    # a measured choice (think-rp0d). 260 measured 305,912 bytes on 5 November 2026 once
+    # T-269 (#914) was registered beside T-265's house section; its ceiling allowed T-269's
+    # adoption, and after it, on 6 November 2026, 260 measures 326,413 bytes, 28,587 below,
+    # as the published budgets in `site_urls` say.
     exceptions = {
         "cases/11.html": 500_000,
         "cases/17.html": 550_000,
         "cases/18.html": 350_000,
         "cases/204.html": 430_000,
+        "cases/260.html": 355_000,
     }
     for name, size in sizes.items():
         assert size < exceptions.get(name, RECORD_CEILING_BYTES), (name, size)

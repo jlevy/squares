@@ -1,0 +1,263 @@
+{
+ "label": "s204_trig1",
+ "path": "/home/user/squares/.claude/worktrees/review-lrj4/packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s204_trig1.cert",
+ "sha256": "17ed0e5b7c4e69ca8558195886be7d7a149e9c09a8f60caf57bef160f75cf687",
+ "n": 204,
+ "controls": [
+  {
+   "control": "C1 box at its extent",
+   "expected": "accept",
+   "method_a": "accept",
+   "method_b": "accept",
+   "pass": true,
+   "side": "1480436138365185872551528987402545647/100000000000000000000000000000000000",
+   "side_minus_header": "-5.00000000054353e-21"
+  },
+  {
+   "control": "C1 box 1e-30 below its extent",
+   "expected": "refuse",
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true,
+   "outside_a": [
+    87,
+    93,
+    99,
+    105,
+    106,
+    107,
+    108,
+    109,
+    111,
+    150,
+    154,
+    155,
+    156,
+    157,
+    159,
+    199,
+    201,
+    203
+   ],
+   "outside_b": [
+    87,
+    93,
+    99,
+    105,
+    106,
+    107,
+    108,
+    109,
+    111,
+    150,
+    154,
+    155,
+    156,
+    157,
+    159,
+    199,
+    201,
+    203
+   ]
+  },
+  {
+   "control": "C2 packing at the near walls (translated by the least corner coordinates)",
+   "expected": "accept",
+   "method_a": "accept",
+   "method_b": "accept",
+   "pass": true,
+   "translation": [
+    "-5e-21",
+    "-5e-21"
+   ]
+  },
+  {
+   "control": "C2 then 1e-30 past the left wall",
+   "expected": "refuse",
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true,
+   "outside_a": [
+    1,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    137,
+    138,
+    140,
+    154
+   ],
+   "outside_b": [
+    1,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    137,
+    138,
+    140,
+    154
+   ]
+  },
+  {
+   "control": "C2 then 1e-30 past the bottom wall",
+   "expected": "refuse",
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true,
+   "outside_a": [
+    1,
+    10,
+    19,
+    28,
+    37,
+    46,
+    55,
+    64,
+    73,
+    187,
+    188,
+    189,
+    203
+   ],
+   "outside_b": [
+    1,
+    10,
+    19,
+    28,
+    37,
+    46,
+    55,
+    64,
+    73,
+    187,
+    188,
+    189,
+    203
+   ]
+  },
+  {
+   "control": "C3 least-gap pair (131, 132) closed along its axis, exact contact",
+   "expected": "accept",
+   "method_a": "accept",
+   "method_b": "accept",
+   "pass": true,
+   "gap_before": "9.999999999999992e-21",
+   "gap_after": "0.0",
+   "area_after": "0.0",
+   "second_axis_gap_before": "9.999999999999992e-21",
+   "moved_square_full_decision": {
+    "walls_a": "inside",
+    "walls_b": "inside",
+    "overlapping_partners_a": [],
+    "overlapping_partners_b": [],
+    "verdict_a": "accept",
+    "verdict_b": "accept"
+   }
+  },
+  {
+   "control": "C3 least-gap pair (131, 132) closed along its axis, 1e-30 past",
+   "expected": null,
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true,
+   "gap_before": "9.999999999999992e-21",
+   "gap_after": "-1e-30",
+   "area_after": "7.6246492081475125e-31",
+   "second_axis_gap_before": "9.999999999999992e-21",
+   "moved_square_full_decision": {
+    "walls_a": "inside",
+    "walls_b": "inside",
+    "overlapping_partners_a": [
+     131
+    ],
+    "overlapping_partners_b": [
+     131
+    ],
+    "verdict_a": "refuse",
+    "verdict_b": "refuse"
+   }
+  },
+  {
+   "control": "C4 least-clearance square 1 moved to the left wall, exact contact",
+   "expected": "accept",
+   "method_a": "accept",
+   "method_b": "accept",
+   "pass": true,
+   "clearance_before": "5e-21",
+   "moved_square_full_decision": {
+    "walls_a": "inside",
+    "walls_b": "inside",
+    "overlapping_partners_a": [],
+    "overlapping_partners_b": [],
+    "verdict_a": "accept",
+    "verdict_b": "accept"
+   }
+  },
+  {
+   "control": "C4 least-clearance square 1 moved to the left wall, 1e-30 past",
+   "expected": "refuse",
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true,
+   "clearance_before": "5e-21",
+   "moved_square_full_decision": {
+    "walls_a": "outside",
+    "walls_b": "outside",
+    "overlapping_partners_a": [],
+    "overlapping_partners_b": [],
+    "verdict_a": "refuse",
+    "verdict_b": "refuse"
+   }
+  },
+  {
+   "control": "C5 square 131 enlarged by delta* against 132, exact contact",
+   "expected": "accept",
+   "method_a": "accept",
+   "method_b": "accept",
+   "pass": true,
+   "delta": "9.999999999999992e-21",
+   "gap_after": "0.0"
+  },
+  {
+   "control": "C5 square 131 enlarged by delta* against 132, 1e-30 past",
+   "expected": "refuse",
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true,
+   "delta": "9.999999999999992e-21",
+   "gap_after": "-1e-30"
+  },
+  {
+   "control": "G1 duplicate: square 204 replaced by square 1",
+   "expected": "refuse",
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true,
+   "area": "1"
+  },
+  {
+   "control": "G2 square 1 centred at x = -1 (outside the box)",
+   "expected": "refuse",
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true
+  },
+  {
+   "control": "G3 every square turned to t = 0 in place",
+   "expected": null,
+   "method_a": "refuse",
+   "method_b": "refuse",
+   "pass": true,
+   "overlapping_pairs_a": 106,
+   "overlapping_pairs_b": 106
+  }
+ ],
+ "all_pass": true,
+ "cpu_seconds": 6.85
+}

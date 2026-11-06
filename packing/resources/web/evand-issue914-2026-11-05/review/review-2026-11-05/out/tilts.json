@@ -1,0 +1,541 @@
+{
+ "175": {
+  "house": "T-186",
+  "tilted_new": 48,
+  "tilted_house": 50,
+  "new_signs": {
+   "positive": 48,
+   "negative": 0
+  },
+  "house_signs": {
+   "positive": 25,
+   "negative": 25
+  },
+  "new_groups_largest": [
+   [
+    29.365,
+    29.381,
+    32
+   ],
+   [
+    28.687,
+    28.695,
+    2
+   ],
+   [
+    32.051,
+    32.051,
+    2
+   ],
+   [
+    27.836,
+    27.836,
+    1
+   ],
+   [
+    28.243,
+    28.243,
+    1
+   ]
+  ],
+  "house_groups_largest": [
+   [
+    29.415,
+    29.415,
+    36
+   ],
+   [
+    28.808,
+    28.823,
+    4
+   ],
+   [
+    3.549,
+    3.549,
+    2
+   ],
+   [
+    27.933,
+    27.933,
+    2
+   ],
+   [
+    29.843,
+    29.847,
+    2
+   ]
+  ],
+  "new_range": [
+   27.836,
+   32.051
+  ],
+  "house_range": [
+   3.549,
+   30.017
+  ],
+  "new_tilted_sharing_a_house_angle": 0,
+  "house_tilted_sharing_a_new_angle": 0
+ },
+ "204": {
+  "house": "T-264",
+  "tilted_new": 63,
+  "tilted_house": 76,
+  "new_signs": {
+   "positive": 63,
+   "negative": 0
+  },
+  "house_signs": {
+   "positive": 0,
+   "negative": 76
+  },
+  "new_groups_largest": [
+   [
+    26.373,
+    26.373,
+    9
+   ],
+   [
+    26.999,
+    26.999,
+    8
+   ],
+   [
+    25.714,
+    25.714,
+    7
+   ],
+   [
+    26.693,
+    26.693,
+    7
+   ],
+   [
+    25.861,
+    25.861,
+    3
+   ]
+  ],
+  "house_groups_largest": [
+   [
+    26.639,
+    26.639,
+    30
+   ],
+   [
+    26.434,
+    26.436,
+    18
+   ],
+   [
+    26.849,
+    26.849,
+    7
+   ],
+   [
+    27.405,
+    27.411,
+    4
+   ],
+   [
+    27.502,
+    27.502,
+    2
+   ]
+  ],
+  "new_range": [
+   25.387,
+   31.237
+  ],
+  "house_range": [
+   26.249,
+   28.531
+  ],
+  "new_tilted_sharing_a_house_angle": 5,
+  "house_tilted_sharing_a_new_angle": 3
+ },
+ "260": {
+  "house": "T-265",
+  "tilted_new": 103,
+  "tilted_house": 105,
+  "new_signs": {
+   "positive": 98,
+   "negative": 5
+  },
+  "house_signs": {
+   "positive": 100,
+   "negative": 5
+  },
+  "new_groups_largest": [
+   [
+    24.503,
+    24.503,
+    61
+   ],
+   [
+    24.711,
+    24.72,
+    17
+   ],
+   [
+    24.543,
+    24.553,
+    4
+   ],
+   [
+    24.58,
+    24.586,
+    3
+   ],
+   [
+    26.826,
+    26.826,
+    3
+   ]
+  ],
+  "house_groups_largest": [
+   [
+    24.51,
+    24.51,
+    60
+   ],
+   [
+    24.598,
+    24.599,
+    12
+   ],
+   [
+    24.531,
+    24.531,
+    3
+   ],
+   [
+    25.263,
+    25.263,
+    3
+   ],
+   [
+    26.938,
+    26.938,
+    3
+   ]
+  ],
+  "new_range": [
+   2.068,
+   27.27
+  ],
+  "house_range": [
+   1.603,
+   27.31
+  ],
+  "new_tilted_sharing_a_house_angle": 68,
+  "house_tilted_sharing_a_new_angle": 76
+ },
+ "268": {
+  "house": "T-242",
+  "tilted_new": 98,
+  "tilted_house": 81,
+  "new_signs": {
+   "positive": 0,
+   "negative": 98
+  },
+  "house_signs": {
+   "positive": 40,
+   "negative": 41
+  },
+  "new_groups_largest": [
+   [
+    22.292,
+    22.294,
+    24
+   ],
+   [
+    23.64,
+    23.642,
+    18
+   ],
+   [
+    24.492,
+    24.502,
+    18
+   ],
+   [
+    24.262,
+    24.262,
+    13
+   ],
+   [
+    24.387,
+    24.387,
+    6
+   ]
+  ],
+  "house_groups_largest": [
+   [
+    24.159,
+    24.162,
+    74
+   ],
+   [
+    1.058,
+    1.058,
+    1
+   ],
+   [
+    23.271,
+    23.271,
+    1
+   ],
+   [
+    24.102,
+    24.102,
+    1
+   ],
+   [
+    24.259,
+    24.259,
+    1
+   ]
+  ],
+  "new_range": [
+   22.292,
+   24.542
+  ],
+  "house_range": [
+   1.058,
+   24.628
+  ],
+  "new_tilted_sharing_a_house_angle": 14,
+  "house_tilted_sharing_a_new_angle": 2
+ },
+ "293": {
+  "house": "T-257",
+  "tilted_new": 54,
+  "tilted_house": 104,
+  "new_signs": {
+   "positive": 27,
+   "negative": 27
+  },
+  "house_signs": {
+   "positive": 5,
+   "negative": 99
+  },
+  "new_groups_largest": [
+   [
+    35.511,
+    35.511,
+    36
+   ],
+   [
+    38.723,
+    38.723,
+    8
+   ],
+   [
+    38.986,
+    38.986,
+    4
+   ],
+   [
+    39.361,
+    39.361,
+    4
+   ],
+   [
+    33.253,
+    33.256,
+    2
+   ]
+  ],
+  "house_groups_largest": [
+   [
+    24.51,
+    24.51,
+    60
+   ],
+   [
+    24.598,
+    24.599,
+    11
+   ],
+   [
+    24.531,
+    24.531,
+    3
+   ],
+   [
+    25.263,
+    25.263,
+    3
+   ],
+   [
+    26.938,
+    26.938,
+    3
+   ]
+  ],
+  "new_range": [
+   33.253,
+   39.361
+  ],
+  "house_range": [
+   1.826,
+   27.31
+  ],
+  "new_tilted_sharing_a_house_angle": 0,
+  "house_tilted_sharing_a_new_angle": 0
+ },
+ "303": {
+  "house": "T-240",
+  "tilted_new": 112,
+  "tilted_house": 102,
+  "new_signs": {
+   "positive": 0,
+   "negative": 112
+  },
+  "house_signs": {
+   "positive": 51,
+   "negative": 51
+  },
+  "new_groups_largest": [
+   [
+    24.318,
+    24.331,
+    35
+   ],
+   [
+    26.677,
+    26.677,
+    13
+   ],
+   [
+    22.126,
+    22.126,
+    8
+   ],
+   [
+    23.49,
+    23.492,
+    5
+   ],
+   [
+    22.514,
+    22.514,
+    4
+   ]
+  ],
+  "house_groups_largest": [
+   [
+    27.085,
+    27.085,
+    66
+   ],
+   [
+    26.753,
+    26.76,
+    19
+   ],
+   [
+    26.898,
+    26.898,
+    6
+   ],
+   [
+    26.985,
+    26.985,
+    6
+   ],
+   [
+    26.833,
+    26.833,
+    4
+   ]
+  ],
+  "new_range": [
+   1.259,
+   32.025
+  ],
+  "house_range": [
+   26.753,
+   27.085
+  ],
+  "new_tilted_sharing_a_house_angle": 0,
+  "house_tilted_sharing_a_new_angle": 0
+ },
+ "304": {
+  "house": "T-242",
+  "tilted_new": 110,
+  "tilted_house": 99,
+  "new_signs": {
+   "positive": 0,
+   "negative": 110
+  },
+  "house_signs": {
+   "positive": 49,
+   "negative": 50
+  },
+  "new_groups_largest": [
+   [
+    22.707,
+    22.713,
+    84
+   ],
+   [
+    22.53,
+    22.53,
+    9
+   ],
+   [
+    19.006,
+    19.006,
+    8
+   ],
+   [
+    25.572,
+    25.572,
+    6
+   ],
+   [
+    22.919,
+    22.919,
+    2
+   ]
+  ],
+  "house_groups_largest": [
+   [
+    21.939,
+    21.941,
+    36
+   ],
+   [
+    22.461,
+    22.461,
+    36
+   ],
+   [
+    19.287,
+    19.287,
+    8
+   ],
+   [
+    19.799,
+    19.799,
+    4
+   ],
+   [
+    20.184,
+    20.184,
+    4
+   ]
+  ],
+  "new_range": [
+   16.539,
+   25.572
+  ],
+  "house_range": [
+   19.287,
+   25.072
+  ],
+  "new_tilted_sharing_a_house_angle": 0,
+  "house_tilted_sharing_a_new_angle": 0
+ }
+}

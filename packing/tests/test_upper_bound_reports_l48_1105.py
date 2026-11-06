@@ -157,6 +157,9 @@ def test_the_review_programs_are_the_ones_its_receipts_name() -> None:
     assert _json(REVIEW / "out/controls.json")["all_as_expected"] is True
 
 
-def test_the_case_adopts_t265_at_260() -> None:
-    assert houses.ADOPTED[260] == "T-265"
+def test_the_case_adopted_t265_at_260() -> None:
+    """The pass of 5 November 2026 adopted T-265 at 260; that of 6 November 2026 moved the
+    count on to Evan Daniel's issue-914 packing (T-269), and T-265 stays as history."""
     assert 260 in houses.LATER_PASSES["2026-11-05"]
+    assert (houses.ADOPTED[260], houses.adopted_on(260)) == ("T-269", "2026-11-06")
+    assert "T-265" not in set(houses.ADOPTED.values())

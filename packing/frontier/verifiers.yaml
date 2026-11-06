@@ -7428,3 +7428,73 @@ verifiers:
       review/review-2026-11-05/. side.py, identity.py, upright.py, rowsback.py, movers.py,
       slides.py and custody.py, kept beside them, decide nothing about the bound and are
       not registered.
+  - id: V-evand-1105-review-check
+    program: decide_feasibility.py and sharp_controls.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 5 November stage 4 review's exact checker of Evan Daniel's seven certificates of
+      issue 914 (175, 204, 260, 268, 293, 303 and 304) and his six regularized views, in his
+      text format, with a strict reader of its own (cert_reader.py: one header n S, n rows
+      of three rationals, comments, LF only, anything else refused): every wall and every
+      pair with no distance filter, decided twice, by separating axes in
+      fractions.Fraction (method A) and by exact Sutherland-Hodgman clipped areas with the
+      shoelace formula in gmpy2.mpq with a corner construction of its own (method B), the
+      two sharing only the reader (exact_geometry.py), each pair classed separated,
+      touching or overlapping and the two classes required to agree; the rotation sense is
+      read counterclockwise and the reversed sense decided as a control.
+      sharp_controls.py decides fourteen control instances a file by both methods against
+      outcomes stated before each runs: the box at its extent and 1e-30 below, the packing
+      at the near walls and 1e-30 past, the least-gap pair closed and 1e-30 past, the
+      least-clearance square to its wall and 1e-30 past, the least closing enlargement and
+      1e-30 more, a duplicate, a square outside and every square turned to t = 0.
+      self_test.py holds both methods to 19 known answers, 3,000 random rational pairs and
+      6,000 constructed contacts and 1e-30 overlaps, and its reader to 14 malformed files.
+    source:
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/decide_feasibility.py
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/exact_geometry.py
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/cert_reader.py
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/sharp_controls.py
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/self_test.py
+    independence_record: packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
+    independence:
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 914 (think-lrj4), strong tier
+            (tbd-strong-max) at maximum reasoning, prompted separately from the import lane
+            (bold-ritchie-l51)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 914 says the composer, the search, the checks and the request were done with
+          Claude; the certificates' commit carries a Co-Authored-By trailer naming Claude,
+          and the source's CREDITS.md says its work was produced by Claude under the
+          author's direction. The programs were written from the mathematics and the
+          format as the certificates' first line and the issue state it; the source's
+          binary64 inputs, 80-digit points and JSON reports were read to compare. Its
+          authors never read verify_cert.py, verify_cert2.py or any producer code, which
+          were hashed only, nor this repository's maintained routes. The method's
+          mathematics, separating axes and polygon intersection, is what the issue says the
+          producer's two checkers use.
+    note: >-
+      Written and run on 5 November 2026 for
+      docs/project/reviews/review-2026-11-05-evand-914-seven.md (SHA-256
+      f152ff262d61b2cbc5913fe700e72e786521d18757eb8c6ac7d3d9068a4b5d7f for
+      decide_feasibility.py, 60477ad6a4e58599a0130549212c27050ddd79729f70c5282441f1a1fece3d96
+      for exact_geometry.py and f75ae7df3913ef6fe6d97c8bb328387c3f6a5a271666aca121ece838e9aa0390
+      for sharp_controls.py as retained, in the directory's out/program-digests.txt), and
+      kept, with everything they printed, in the evand-issue914-2026-11-05 packet's
+      review/review-2026-11-05/. custody.py is a premise check of the digests;
+      sides_and_kkt.py, house_slack.py, scale_slack.py, identity.py, island_260.py, tilts.py
+      and input_260.py, kept beside them, measure and decide nothing about the bounds, and
+      are not registered.
