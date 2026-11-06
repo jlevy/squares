@@ -1549,6 +1549,265 @@ RESULTS: dict[str, Prose] = {
             "by a Claude agent, a system family that also wrote the check the producer ran"
         ),
     ),
+    "T-267": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#914](https://github.com/jlevy/squares/issues/914)",
+        producer_route=False,
+        ai=(
+            "Issue 914 says the composer, the search, the checks and the request were done "
+            "with Claude; the source’s commit names Claude as co-author, and its credits say "
+            "the repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says Evan Daniel’s fault-line composer, his independent "
+            "implementation of Chris Deotte’s multi-gadget fault DP from Deotte’s Kaggle "
+            "notebooks, built it from gadgets of the register’s n = 175 packing, Daniil "
+            "Ostashev’s as PingYou Ltd and Mykhailo Polkovskyi refined it, the house best "
+            "packing here before this adoption, which it asks to be credited as the start, "
+            "and from an earlier composer build of his. Measured by the 5 November review, "
+            "no symmetry pairs it one to one with that packing: under the best, a half "
+            "turn, 60 squares lie beyond a tenth, 24 tilts beyond a degree are reversed and "
+            "no tilted square shares an angle with the house’s, a build from cropped "
+            "gadgets rather than a deformation of that packing. The certificate is the "
+            "source’s 80-digit KKT point dilated by $1 + 10^{-20}$; the source’s "
+            "local-optimality statement is its numerical report."
+        ),
+        third_route=(
+            ", and the 5 November review’s clean-room checker decided it again on two methods "
+            "of its own, by separating axes in rationals over every pair and by the exact "
+            "clipped area of every pair in GMP rationals; its fourteen controls, at exact "
+            "contact and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-268": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#914](https://github.com/jlevy/squares/issues/914)",
+        producer_route=False,
+        ai=(
+            "Issue 914 says the composer, the search, the checks and the request were done "
+            "with Claude; the source’s commit names Claude as co-author, and its credits say "
+            "the repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says Evan Daniel’s fault-line composer, his independent "
+            "implementation of Chris Deotte’s multi-gadget fault DP from Deotte’s Kaggle "
+            "notebooks, built it from gadgets of his own n = 233 packing of 4 November and "
+            "an earlier n = 370 packing, which are not public. Measured by the 5 November "
+            "review, no symmetry pairs it one to one with Doğa Özden’s further arrangement "
+            "of Daniel’s issue 845 packing, the house best packing here before this "
+            "adoption: under the best, the anti-transpose, 66 squares lie beyond a tenth, "
+            "and 63 squares are tilted against its 76, so it is another arrangement. The "
+            "certificate is the source’s 80-digit KKT point dilated by $1 + 10^{-20}$; the "
+            "source’s local minimality, strict modulo 57 flat motions, is its numerical "
+            "report."
+        ),
+        third_route=(
+            ", and the 5 November review’s clean-room checker decided it again on two methods "
+            "of its own, by separating axes in rationals over every pair and by the exact "
+            "clipped area of every pair in GMP rationals; its fourteen controls, at exact "
+            "contact and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-269": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#914](https://github.com/jlevy/squares/issues/914)",
+        producer_route=False,
+        ai=(
+            "Issue 914 says the composer, the search, the checks and the request were done "
+            "with Claude; the source’s commit names Claude as co-author, and its credits say "
+            "the repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says Evan Daniel’s fault-line composer, his independent "
+            "implementation of Chris Deotte’s multi-gadget fault DP from Deotte’s Kaggle "
+            "notebooks, built it around the tilted island of his issue 845 packing at 260, "
+            "recomposed in a 260 frame, with that packing’s credit, Kirill Tymchishin’s "
+            "Kaggle notebook packing as the start. Measured by the 5 November review, no "
+            "symmetry pairs it one to one with Kaelan Yim’s further arrangement of that "
+            "packing, the house best packing here before this adoption, nor with the issue "
+            "845 packing (T-257): 42 and 33 squares lie beyond a tenth under the identity. "
+            "Its 97 squares tilted beyond ten degrees are T-257’s island within 0.042 only "
+            "after a half turn about the box centre and a shift of one unit upward, the "
+            "frame around it rebuilt, so it is a new arrangement built on that island and "
+            "not a further arrangement of T-257’s packing. The certificate dilates its "
+            "binary64 input by $1 + 10^{-12}$, the source’s exact solver not having "
+            "converged; its local optimality is not established."
+        ),
+        third_route=(
+            ", and the 5 November review’s clean-room checker decided it again on two methods "
+            "of its own, by separating axes in rationals over every pair and by the exact "
+            "clipped area of every pair in GMP rationals; its fourteen controls, at exact "
+            "contact and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-270": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#914](https://github.com/jlevy/squares/issues/914)",
+        producer_route=False,
+        ai=(
+            "Issue 914 says the composer, the search, the checks and the request were done "
+            "with Claude; the source’s commit names Claude as co-author, and its credits say "
+            "the repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says Evan Daniel’s fault-line composer, his independent "
+            "implementation of Chris Deotte’s multi-gadget fault DP from Deotte’s Kaggle "
+            "notebooks, built it, first on 1 November, with gadget donors not recorded and "
+            "no public start known. Measured by the 5 November review, no symmetry pairs it "
+            "one to one with Evan Daniel’s exact descent of Vladislav Lavrentev’s Kaggle "
+            "packing, the house best packing here before this adoption: under the best, a "
+            "half turn, 80 squares lie beyond a tenth and 29 tilts beyond a degree are "
+            "reversed, so it is another arrangement. The certificate is the source’s "
+            "80-digit KKT point dilated by $1 + 10^{-20}$; the source calls its local "
+            "minimality inconclusive."
+        ),
+        third_route=(
+            ", and the 5 November review’s clean-room checker decided it again on two methods "
+            "of its own, by separating axes in rationals over every pair and by the exact "
+            "clipped area of every pair in GMP rationals; its fourteen controls, at exact "
+            "contact and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-271": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#914](https://github.com/jlevy/squares/issues/914)",
+        producer_route=False,
+        ai=(
+            "Issue 914 says the composer, the search, the checks and the request were done "
+            "with Claude; the source’s commit names Claude as co-author, and its credits say "
+            "the repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says Evan Daniel’s fault-line composer, his independent "
+            "implementation of Chris Deotte’s multi-gadget fault DP from Deotte’s Kaggle "
+            "notebooks, built it, first on 2 November, with gadget donors not recorded and "
+            "no public start known. Measured by the 5 November review, no symmetry pairs it "
+            "one to one with the author’s own issue 845 packing, the house best packing "
+            "here before this adoption: under the best, the anti-transpose, 193 squares lie "
+            "beyond a tenth, and 54 squares are tilted against its 104, so it is another "
+            "arrangement. The certificate is the source’s 80-digit KKT point dilated by $1 "
+            "+ 10^{-20}$; the source’s local minimality, strict modulo 17 flat motions, is "
+            "its numerical report."
+        ),
+        third_route=(
+            ", and the 5 November review’s clean-room checker decided it again on two methods "
+            "of its own, by separating axes in rationals over every pair and by the exact "
+            "clipped area of every pair in GMP rationals; its fourteen controls, at exact "
+            "contact and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-272": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#914](https://github.com/jlevy/squares/issues/914)",
+        producer_route=False,
+        ai=(
+            "Issue 914 says the composer, the search, the checks and the request were done "
+            "with Claude; the source’s commit names Claude as co-author, and its credits say "
+            "the repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says Evan Daniel’s fault-line composer, his independent "
+            "implementation of Chris Deotte’s multi-gadget fault DP from Deotte’s Kaggle "
+            "notebooks, built it, first on 2 November, with gadget donors not recorded and "
+            "no public start known. Measured by the 5 November review, no symmetry pairs it "
+            "one to one with Francisco Couzo’s packing of issue 763, the house best packing "
+            "here before this adoption: under the best, the anti-transpose, 124 squares lie "
+            "beyond a tenth and 42 tilts beyond a degree are reversed, so it is another "
+            "arrangement. The certificate is the source’s 80-digit KKT point dilated by $1 "
+            "+ 10^{-20}$; the source says a first-order descent it did not realise shows "
+            "the point is not established as a local minimum."
+        ),
+        third_route=(
+            ", and the 5 November review’s clean-room checker decided it again on two methods "
+            "of its own, by separating axes in rationals over every pair and by the exact "
+            "clipped area of every pair in GMP rationals; its fourteen controls, at exact "
+            "contact and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-273": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#914](https://github.com/jlevy/squares/issues/914)",
+        producer_route=False,
+        ai=(
+            "Issue 914 says the composer, the search, the checks and the request were done "
+            "with Claude; the source’s commit names Claude as co-author, and its credits say "
+            "the repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says Evan Daniel’s fault-line composer, his independent "
+            "implementation of Chris Deotte’s multi-gadget fault DP from Deotte’s Kaggle "
+            "notebooks, built it, first on 30 October, with gadget donors not recorded and "
+            "no public start known. Measured by the 5 November review, no symmetry pairs it "
+            "one to one with Evan Daniel’s exact descent of Kirill Tymchishin’s Kaggle "
+            "packing, the house best packing here before this adoption: under the best, the "
+            "identity, 66 squares lie beyond a tenth and 43 tilts beyond a degree are "
+            "reversed, so it is another arrangement. The certificate is the source’s "
+            "80-digit KKT point dilated by $1 + 10^{-20}$; the source’s local minimality, "
+            "strict modulo 103 flat motions, is its numerical report."
+        ),
+        third_route=(
+            ", and the 5 November review’s clean-room checker decided it again on two methods "
+            "of its own, by separating axes in rationals over every pair and by the exact "
+            "clipped area of every pair in GMP rationals; its fourteen controls, at exact "
+            "contact and $10^{-30}$ past it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1811,14 +2070,17 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s packing from an L-cut of the n = 199 record, Nate Chaoweeraprasit’s "
         "SQUISH packing as Siddharth Gupta refined it",
     ),
-    # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
-    # T-174).
+    # T-267 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
+    # fault-line composer, his implementation of Chris Deotte's multi-gadget fault DP, from
+    # gadgets of T-186's packing, which the issue credits as the start: one to one with it
+    # under no symmetry, 60 squares beyond a tenth (the 5 November review), so another
+    # arrangement, credited to Daniel after that start, with no improver.
     175: Credit(
-        (OSTASHEV,),
-        (PINGYOU, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
-        "Ostashev’s composition of two of his 38-square rectangles with David Ellsworth’s "
-        "n = 171 template, in place of its pieces of Thomas Schadt’s n = 50 packing",
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
+        "multi-gadget fault DP, from gadgets of Daniil Ostashev’s packing as PingYou Ltd and "
+        "Mykhailo Polkovskyi refined it",
     ),
     # Ostashev's issue-575 packing re-solved, through PR 574's (T-186's regularization of
     # T-174; RP-4 of the PR 574 review).
@@ -1871,16 +2133,14 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # T-264 (adopted on 4 November 2026), Doğa Özden's further arrangement of issue 894 of
-    # T-257's packing, one to one with it under the identity, every square keeping its id (the
-    # 4 November review): the packing's finder stays Evan Daniel, whose packing of issue 845
-    # came from a search seeded with Daniil Ostashev's n = 176 packing (#575), and Özden is
-    # its improver, as issue 894 asks (the review's F8).
+    # T-268 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
+    # fault-line composer from gadgets of his own n = 233 and n = 370 packings: one to one with
+    # T-264's under no symmetry, 66 squares beyond a tenth (the 5 November review).
     204: Credit(
         (DANIEL,),
-        (OZDEN,),
-        "Doğa Özden’s further arrangement of Evan Daniel’s packing from a search seeded with "
-        "Daniil Ostashev’s n = 176 packing",
+        (),
+        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
+        "multi-gadget fault DP, from gadgets of his own n = 233 and n = 370 packings",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -2028,16 +2288,17 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-193 of T-174 of T-136, SQUISH's own packing (T-174's item measured, none moved).
     259: _exact_form(SQUISH, (PINGYOU, DANIEL), "Nate Chaoweeraprasit’s SQUISH"),
-    # T-265 (adopted on 5 November 2026), Kaelan Yim's further arrangement of issue 895 of
-    # T-257's packing, row for row and one to one with it under the identity (the 5 November
-    # review): the packing's finder stays Evan Daniel, whose packing of issue 845 came from a
-    # search started from Kirill Tymchishin's Kaggle s(260) packing, by the author's word (N-3
-    # of the 31 October review), and Yim is its improver (the 5 November review's F9).
+    # T-269 (adopted on 5 November 2026, after T-265 that day), Evan Daniel's new packing of
+    # issue 914, which his fault-line composer built around the tilted island of his issue 845
+    # packing, half-turned and raised one unit, the frame rebuilt: one to one with neither
+    # T-265's nor T-257's packing under any symmetry (the 5 November review's F8), so a new
+    # arrangement with that packing's credit, Kirill Tymchishin's Kaggle s(260) the start.
     260: Credit(
         (DANIEL,),
-        (YIM,),
-        "Kaelan Yim’s further arrangement of Evan Daniel’s packing from a search started "
-        "from Kirill Tymchishin’s Kaggle notebook packing",
+        (),
+        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
+        "multi-gadget fault DP around the tilted island of his n = 260 packing from a search "
+        "started from Kirill Tymchishin’s Kaggle notebook packing",
     ),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -2064,15 +2325,14 @@ CREDITS: dict[int, Credit] = {
         "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
-    # T-242 (adopted on 26 October 2026), Evan Daniel's exact descent of Vladislav
-    # Lavrentev's public Kaggle packing, the source's input, which the certificate is to
-    # 1.41e-4: one arrangement with T-240's packing under a reflection and another placement,
-    # none beyond a tenth (the 24 October review). The credit follows the placement adopted,
-    # Daniel after Lavrentev, the chain both sources support (N-2 of that review).
+    # T-270 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
+    # build whose gadget donors were not recorded: one to one with T-242's under no symmetry,
+    # 80 squares beyond a tenth (the 5 November review).
     268: Credit(
-        (LAVRENTEV,),
         (DANIEL,),
-        "Evan Daniel’s exact descent of Vladislav Lavrentev’s public Kaggle packing",
+        (),
+        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
+        "multi-gadget fault DP",
     ),
     # T-174's regularization of T-146's view, measured one to one, no square moved beyond
     # 1e-12 (the 14 October review of PR 574).
@@ -2121,14 +2381,14 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    # T-257 (adopted on 31 October 2026), Evan Daniel's n = 260 packing of issue 845 plus
-    # one L-shaped strip, measured exactly by the 31 October review; the Kingbird
-    # catalogue's construction held 293 before.
+    # T-271 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
+    # build whose gadget donors were not recorded: one to one with T-257's under no symmetry,
+    # 193 squares beyond a tenth (the 5 November review).
     293: Credit(
         (DANIEL,),
         (),
-        "Evan Daniel’s n = 260 packing, from a search started from Kirill Tymchishin’s "
-        "Kaggle notebook packing, with one L-shaped strip added",
+        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
+        "multi-gadget fault DP",
     ),
     295: _exact_form(XU, (DANIEL, PINGYOU), "his display regularization of Ryan Xu’s"),
     # T-174's regularization of T-098's packing, 119 squares moved beyond 1e-3, one to
@@ -2160,27 +2420,23 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s exact form of Mykhailo Polkovskyi’s tighter certificate of Francisco "
         "Couzo’s continuation of PingYou Ltd’s n = 302 arrangement",
     ),
-    # Issue 763's packing at 303 (T-240, adopted on 25 October 2026), a refinement of
-    # Couzo's own Kaggle push packing, the parent the source's manifest names: one to one
-    # with it, three squares beyond a tenth (the 24 October review), and another arrangement
-    # than T-239's. The manifest credits the push packing as a refinement of Vladislav
-    # Lavrentev's notebook packing, which is not retained; which public packing it started
-    # from is the author's question 4 of that review.
+    # T-272 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
+    # build whose gadget donors were not recorded: one to one with T-240's under no symmetry,
+    # 124 squares beyond a tenth (the 5 November review).
     303: Credit(
-        (LAVRENTEV,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of his own refinement of Vladislav Lavrentev’s Kaggle "
-        "notebook packing",
-    ),
-    # T-242 (adopted on 25 October 2026), Evan Daniel's exact descent of the packing T-241
-    # certifies, which Francisco Couzo's index credits to Kirill Tymchishin's Kaggle
-    # notebook: one to one with it, no square beyond 4.60e-4 (the 24 October review), and
-    # another arrangement than T-186's. No source states where the notebook started; the
-    # manifest's previous_source names the catalogue's previous record (M-1 of that review).
-    304: Credit(
-        (TYMCHISHIN,),
         (DANIEL,),
-        "Evan Daniel’s exact descent of Kirill Tymchishin’s Kaggle notebook packing",
+        (),
+        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
+        "multi-gadget fault DP",
+    ),
+    # T-273 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
+    # build whose gadget donors were not recorded: one to one with T-242's under no symmetry,
+    # 66 squares beyond a tenth (the 5 November review).
+    304: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
+        "multi-gadget fault DP",
     ),
     # T-174's regularization of T-152's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).

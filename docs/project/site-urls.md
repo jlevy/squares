@@ -847,7 +847,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/258.html | cases/258.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/259.html | cases/259.html | record | overview | 2026-10-03 | 2026-10-23 | live |
 | cases/26.html | cases/26.html | record | overview | 2026-10-03 | 2026-11-04 | live |
-| cases/260.html | cases/260.html | record | overview | 2026-10-03 | 2026-11-05 | live |
+| cases/260.html | cases/260.html | record | overview | 2026-10-03 | 2026-11-06 | live |
 | cases/261.html | cases/261.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/262.html | cases/262.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/263.html | cases/263.html | record | overview | 2026-10-03 | 2026-10-25 | live |

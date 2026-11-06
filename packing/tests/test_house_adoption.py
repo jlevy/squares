@@ -168,23 +168,29 @@ MOVED_AGAIN = {
 #: which that of 22 October 2026 moved to Evan Daniel's view of its packing (T-225), that
 #: of 23 October 2026 to Mykhailo Polkovskyi's re-solve of #678's packing (T-229), and that
 #: of 24 October 2026 to the release's lower 204 file, the same packing at its solved side
-#: (T-231), that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257), and
-#: that of 4 November 2026 to Doğa Özden's further arrangement of it (T-264); the
-#: pass of 23 October took 303 from T-186 to Evan Daniel's issue-728
-#: certificate (T-230), which that of 24 October 2026 moved to Amund Kristiansen's
-#: issue-755 certificate (T-239) and that of 25 October 2026 to Francisco Couzo's issue-763
-#: certificate (T-240).
+#: (T-231), that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257),
+#: that of 4 November 2026 to Doğa Özden's further arrangement of it (T-264), and that of
+#: 5 November 2026 to Evan Daniel's issue-914 certificate (T-268); the pass of 23 October
+#: took 303 from T-186 to Evan Daniel's issue-728 certificate (T-230), which that of 24
+#: October 2026 moved to Amund Kristiansen's issue-755 certificate (T-239), that of 25
+#: October 2026 to Francisco Couzo's issue-763 certificate (T-240) and that of 5 November
+#: 2026 to Evan Daniel's issue-914 certificate (T-272).
 MOVED_LATER = {
     271: ("T-219", "2026-10-19"),
-    204: ("T-264", "2026-11-04"),
-    303: ("T-240", "2026-10-25"),
+    204: ("T-268", "2026-11-05"),
+    303: ("T-272", "2026-11-05"),
 }
 
 #: The counts a pass staged for its next pull request, with the result each moved to and
 #: the day it moved: the pass of 25 October 2026 validated Evan Daniel's 268 (T-242) below
 #: T-240's, which the same pass adopted there, and one day's archive holds one prior state a
-#: count, so 268 was staged under think-3anz and moved on 26 October 2026.
-ADOPTED_NEXT_DAY = {268: ("T-242", "2026-10-26")}
+#: count, so 268 was staged under think-3anz and moved on 26 October 2026. For the same
+#: reason the adoption of issue 914 moved 260, which T-265 took on 5 November 2026, on to
+#: T-269 the next day, 6 November 2026, in the same pull request (think-lrj4).
+ADOPTED_NEXT_DAY = {268: ("T-242", "2026-10-26"), 260: ("T-269", "2026-11-06")}
+#: The counts of `ADOPTED_NEXT_DAY` a later pass moved again, with the result and the day:
+#: the adoption of 5 November 2026 took 268 to Evan Daniel's issue-914 certificate (T-270).
+MOVED_AFTER_NEXT_DAY = {268: ("T-270", "2026-11-05")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -197,11 +203,13 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: Daniel's view of that packing (T-225), 1.39e-9 lower still, that of 23 October 2026 to
 #: Mykhailo Polkovskyi's re-solve of #678's packing (T-229), 1.01e-8 lower again, and that
 #: of 24 October 2026 to the release's lower 204 file (T-231), 1.48e-11 below T-229, and
-#: that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257), and that of 4
-#: November 2026 to Doğa Özden's further arrangement of it (T-264). The pass of 31
-#: October took 232 to Francisco Couzo's issue-844 certificate (T-256), below T-193's
+#: that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257), that of 4
+#: November 2026 to Doğa Özden's further arrangement of it (T-264), and that of 5 November
+#: 2026 to Evan Daniel's issue-914 certificate (T-268). The pass of 31 October took 232 to
+#: Francisco Couzo's issue-844 certificate (T-256), below T-193's side there, and that of
+#: 5 November 2026 took 175 to Evan Daniel's issue-914 certificate (T-267), below T-193's
 #: side there.
-OVERTAKEN = {204: "T-264", 232: "T-256"}
+OVERTAKEN = {175: "T-267", 204: "T-268", 232: "T-256"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -273,7 +281,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         155: "T-197",
         172: "T-257",
         182: "T-243",
-        268: "T-242",
+        268: "T-270",
         270: "T-224",
         307: "T-256",
         308: "T-221",
@@ -1444,9 +1452,10 @@ def test_t193s_adoption_waits_for_re1s_correction_at_nine_counts(
     `bead tree` holds open while it stands, and it holds the register as it is: the item
     still names the refuted `of` and the house is still T-193. At 204 the entry went on 20
     October 2026, when issue 678's smaller certificate (T-223) took the count, so eight
-    stand; the item there stays think-8ido's to correct."""
+    stood, and at 175 on 5 November 2026, when Evan Daniel's issue-914 certificate (T-267)
+    took it; the items there stay think-8ido's to correct."""
     measured = {
-        88: "T-127", 126: "T-139", 175: "T-158", 199: "T-127",
+        88: "T-127", 126: "T-139", 199: "T-127",
         266: "T-119", 292: "T-146", 301: "T-098",
     }  # fmt: skip
     assert {n: owed.measured for n, owed in select.CORRECTIONS_OWED.items()} == measured
@@ -1609,7 +1618,10 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     pull request, and the adoption of 26 October 2026 (think-3anz) took it off
     (`ADOPTED_NEXT_DAY`)."""
     for n, (result, day) in ADOPTED_NEXT_DAY.items():
-        assert (houses.ADOPTED[n], houses.adopted_on(n)) == (result, day)
+        assert n in houses.LATER_PASSES[day]
+        assert (houses.ADOPTED[n], houses.adopted_on(n)) == MOVED_AFTER_NEXT_DAY.get(
+            n, (result, day)
+        )
         assert n not in select.PENDING_ADOPTION
         assert n not in defaults.PENDING_ALLOWED
     for n, pending in select.PENDING_ADOPTION.items():
@@ -1635,8 +1647,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert all(houses.algebraic(n) for n in ALGEBRAIC_ADOPTED)
     assert set(ALGEBRAIC_ADOPTED) <= houses.LATER_PASSES["2026-10-23"]
     assert not set(ALGEBRAIC_ADOPTED) & set(select.PENDING_ADOPTION)
-    # The adoption of 31 October 2026 took 232 off: T-256 is below T-193's side there.
-    assert sorted(select.PENDING_ADOPTION) == [88, 126, 175, 199, 266, 267, 292, 301]
+    # The adoption of 31 October 2026 took 232 off: T-256 is below T-193's side there,
+    # and that of 5 November 2026 took 175 off: T-267 is below it there.
+    assert sorted(select.PENDING_ADOPTION) == [88, 126, 199, 266, 267, 292, 301]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
@@ -1702,22 +1715,26 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # and the adoption of 26 October 2026 moved 268 again, to his exact descent of Vladislav
     # Lavrentev's packing (T-242), after this receipt was retained. The adoption of 4
     # November 2026 moved 204 to Doğa Özden's further arrangement of T-257's packing
-    # (T-264), and that of 5 November 2026 moved 260 to Kaelan Yim's (T-265).
+    # (T-264), and that of 5 November 2026 moved 260 to Kaelan Yim's (T-265). The
+    # adoption of issue 914 moved 175, 204, 268, 293, 303 and 304 to Evan Daniel's
+    # certificates the same day and 260 the next (T-267 to T-273).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
+        175: "T-267",
         182: "T-243",
-        268: "T-242",
-        303: "T-240",
-        304: "T-242",
+        268: "T-270",
+        293: "T-271",
+        303: "T-272",
+        304: "T-273",
         155: "T-197",
         183: "T-220",
         229: "T-225",
         236: "T-218",
         271: "T-219",
         154: "T-222",
-        204: "T-264",
-        260: "T-265",
+        204: "T-268",
+        260: "T-269",
         308: "T-221",
         227: "T-225",
         270: "T-224",
@@ -1731,6 +1748,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         105: "T-174",
         154: "T-186",
         155: "T-174",
+        175: "T-186",
         182: "T-174",
         204: "T-186",
         236: "T-146",
@@ -2958,8 +2976,8 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     pass of 22 October 2026 replays them from T-196's and T-199's records, whose two lanes
     agree, so 29 and 132 remain. The pass of 31 October 2026 replaced the catalogue's
     packings at 293 and 299, whose reported prints and T-101's verified ceilings differ;
-    the pass of 4 November 2026 replays 299 from T-258's record, whose two lanes agree,
-    so 293 remains."""
+    the pass of 4 November 2026 replays 299 from T-258's record, and that of 5 November
+    2026 293 from T-257's, whose two lanes agree, so 29 and 132 remain."""
     differing = {
         29: (
             Fraction(
@@ -2981,14 +2999,6 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "T-141",
             "[Daniel record hunt 3 2026-10-10]",
             "lies `1.20e-19` above the new side",
-        ),
-        293: (
-            Fraction("1763414634146341463432268292683/100000000000000000000000000000"),
-            "17.63414634146341",
-            "17.63414634146342",
-            "T-101, T-155",
-            "[Kingbird]",
-            "lies `1.64e-04` above the new side",
         ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():
@@ -3674,14 +3684,15 @@ def test_issue_678s_reader_still_builds_t223s_source_at_both_counts() -> None:
     the house's side, which was T-231's at 204 from 24 October 2026 and T-225's at 260 until
     the adoption of 31 October 2026 moved both to Evan Daniel's #845 (T-257), 1.02e-3 and
     1.18e-2 below it, and that of 4 November 2026 moved 204 on to Doğa Özden's further
-    arrangement of it (T-264), 1.02e-3 below it still, and its three jobs, origin,
-    receipt and inputs all read."""
+    arrangement of it (T-264), 1.02e-3 below it still, and the adoption of issue 914 moved
+    204 and 260 to Evan Daniel's new packings (T-268, T-269), 4.28e-3 and 1.22e-2 below
+    them, and its three jobs, origin, receipt and inputs all read."""
     source = houses.couzo_678_source()
     assert source.result == "T-223"
     assert "T-223" not in set(houses.ADOPTED.values())
     margins = {
-        204: Fraction(1021846396039205, 10**18),
-        260: Fraction(11770748423071978, 10**18),
+        204: Fraction(4281458329388498, 10**18),
+        260: Fraction(12232299656422440, 10**18),
     }
     for n, margin in margins.items():
         certificate = source.certificate(n)
@@ -3731,6 +3742,7 @@ def test_an_overtaken_staged_adoption_reads_as_history() -> None:
     # and on 24 October 2026 the release's lower 204 file (T-231) took it from T-229.
     # On 31 October 2026 Evan Daniel's #845 (T-257) took both, on 4 November 2026 Doğa
     # Özden's further arrangement of it (T-264) took 204, and on 5 November 2026 Kaelan
-    # Yim's further arrangement of it (T-265) took 260.
-    assert houses.ADOPTED[260] == "T-265"
-    assert houses.ADOPTED[204] == "T-264"
+    # Yim's further arrangement of it (T-265) took 260. On 5 November 2026 Evan Daniel's
+    # issue-914 certificates took 204 (T-268) and, the next day, 260 (T-269).
+    assert houses.ADOPTED[260] == "T-269"
+    assert houses.ADOPTED[204] == "T-268"

@@ -2392,7 +2392,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # print holds his name back until the next infographics cut (think-tj4o), so no name
     # joins it yet. On 5 November 2026 the adoption at 260 (T-265) credits Kaelan Yim as
     # the improver of Evan Daniel's packing there, and the print holds his name back too.
-    assert len(expected_names) == 30
+    # On 5 November 2026 the adoption of issue 914 (T-267 to T-273) draws 175, 204, 260,
+    # 268, 293, 303 and 304 from Evan Daniel's own packings and credits him alone there,
+    # so Özden at 204 and Yim at 260 are credited no more, and Lavrentev's and Tymchishin's
+    # names, which only 268, 303 and 304 credited, leave it.
+    assert len(expected_names) == 28
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
     # re-housed still holds another count. The adoption of 20 October draws from three
@@ -2436,8 +2440,12 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # Doğa Özden's two packets (T-264, T-263), and no longer from Evan Daniel's issue 824
     # update packet, which held only 299; his issue 845 packet still holds 172, 260 and 293.
     # The adoption of 5 November draws 260 from Kaelan Yim's packet (T-265); the issue 845
-    # packet still holds 172 and 293.
-    assert len(expected_sources) == 34
+    # packet still holds 172 and 293. The adoption of issue 914 the same day draws 204, 268,
+    # 293, 303 and 304 from his issue 914 packet and 175 and 260 from its two keys of their
+    # own (T-267 to T-273), and no longer from Özden's n204 packet, Yim's packet, Couzo's
+    # issue 763 packet or Daniel's Kaggle descents packet, which held nothing else: three
+    # sources more and four fewer. The issue 845 packet still holds 172.
+    assert len(expected_sources) == 33
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2468,11 +2476,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Daniel",
         "de Winter",
         "Gupta",
-        "Lavrentev",
         "ntumlnoob",
         "Ostashev",
         "PingYou Ltd",
-        "Tymchishin",
         "Xu",
         "Barnett",
         "Chang",
@@ -2569,24 +2575,30 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     _assert_poster_text_clears_cards(information, canvas)
 
 
-def test_print_credit_hold_keeps_ozden_and_yim_off_the_poster_credits_alone(
+def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """think-tj4o: the case records and the bound citations credit Doğa Özden as the
-    improver of Evan Daniel's packings at 204 and 299 (T-264, T-263), and Kaelan Yim as
-    the improver of his packing at 260 (T-265). The posters' credit block holds exactly
-    their names back until the next infographics cut, so the drawn 1-100 canvas keeps its
-    height; without the hold it would not."""
+    """think-tj4o: the case record and the bound citation credit Doğa Özden as the
+    improver of Evan Daniel's packing at 299 (T-263). The posters' credit block holds
+    exactly his name back until the next infographics cut. The hold held him at 204
+    (T-264) and Kaelan Yim at 260 (T-265, think-hgpg) until Daniel's own packings took both
+    counts on 5 November 2026 (T-268, T-269), and the records there credit Daniel alone,
+    so neither name is held or printed for them. The same adoption takes Vladislav
+    Lavrentev's and Kirill Tymchishin's names off the block, so released now Özden's name
+    changes the block's lines and keeps the drawn 1-100 canvas's height."""
     held = known_best_builder.PRINT_CREDIT_HELD
-    assert held == {204: ("Doğa Özden",), 260: ("Kaelan Yim",), 299: ("Doğa Özden",)}
-    surnames = {"Doğa Özden": "Özden", "Kaelan Yim": "Yim"}
+    assert held == {299: ("Doğa Özden",)}
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
-    for n, (name,) in held.items():
+    reported = build_bound_citations.load_case(299)["reported_upper_bound"]
+    assert reported["found_by"] == ["Evan Daniel"]
+    assert reported["improved_by"] == ["Doğa Özden"]
+    assert citations[299]["upper"]["text"] == "Daniel & Özden, GitHub"
+    for n in (204, 260):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert reported["found_by"] == ["Evan Daniel"]
-        assert reported["improved_by"] == [name]
-        assert citations[n]["upper"]["text"] == f"Daniel & {surnames[name]}, GitHub"
+        assert reported["improved_by"] == []
+        assert citations[n]["upper"]["text"] == "Daniel 2026, GitHub"
     corpus = known_best_builder.CORPUS
     read_credits = known_best_builder._poster_packing_credits  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     credit_lines = known_best_builder._print_credit_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
@@ -2604,30 +2616,20 @@ def test_print_credit_hold_keeps_ozden_and_yim_off_the_poster_credits_alone(
         )
 
     names, lines, height = printed()
-    # Released one name at a time, each joins the block alone: Özden's rebalances it and
-    # changes the 1-100 canvas, and Yim's lengthens its lines (T-265, 5 November 2026).
-    # Released together they overflow its three lines, which the next cut must lay out.
-    unheld: dict[str, tuple[set[str], str, int]] = {}
     try:
-        for name, surname in surnames.items():
-            others = {n: kept for n, kept in held.items() if kept != (name,)}
-            monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", others)
-            unheld[surname] = printed()
         monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
-        with pytest.raises(ValueError, match="three-line information block"):
-            printed()
+        released, released_lines, released_height = printed()
     finally:
         monkeypatch.undo()
         printed()
-    for surname, (released, released_lines, _height) in unheld.items():
-        assert released - names == {surname}
-        assert surname not in lines
-        assert surname in released_lines
+    assert released - names == {"Özden"}
+    assert "Özden" not in lines
+    assert "Özden" in released_lines
+    assert "Yim" not in released_lines
+    assert released_lines != lines
     drawn = ET.fromstring((ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8"))
     assert drawn.get("height") == str(height)
-    assert unheld["Özden"][2] != height
-    assert unheld["Yim"][1] != lines
-    assert unheld["Yim"][2] == height
+    assert released_height == height
 
 
 def test_the_print_credit_hold_cannot_outlive_its_edition(
@@ -4726,10 +4728,12 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 30 since the adoption at 232 and 307 of 31 October 2026 (see the credits test above).
+    # 30 since the adoption at 232 and 307 of 31 October 2026, and 28 since the adoption of
+    # issue 914 of 5 November 2026 took Lavrentev's and Tymchishin's names off (see the
+    # credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 30
+        == 28
     )
 
 

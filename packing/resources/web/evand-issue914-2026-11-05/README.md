@@ -20,7 +20,7 @@ format. #914 claims each side rounded up at 12 places, and global optimality at 
 | ---: | --- | --- | --- | --- |
 | 175 | `s175_1105.cert` | `13764050051543175143919941166751/10^30` | 13.764050051544 | exact KKT point; positive semidefinite with 83 zero modes; regularized view at the same side |
 | 204 | `s204_trig1.cert` | `7402180691825929362760144937013/(5*10^29)` | 14.804361383652 | exact KKT point; a local minimum strict modulo 57 flat motions; regularized view |
-| 260 | `s260_ks_1105.cert` | `8316760475444266760475435949833/(5*10^29)` | 16.633520950889 | dilation of the binary64 packing by 8.8e-12; the exact solver did not converge |
+| 260 | `s260_ks_1105.cert` | `8316760475444266760475435949833/(5*10^29)` | 16.633520950889 | dilation of its binary64 input by the factor 1 + 1e-12, side 1.66e-11 above the input's (the issue's 8.8e-12 is the excess over the pre-descent input's, F3 of the review); the exact solver did not converge |
 | 268 | `s268_1105.cert` | `2109062439766878830759866953431/(1.25*10^29)` | 16.872499518136 | exact KKT point; local minimality inconclusive; regularized view |
 | 293 | `s293_1105.cert` | `17623065212060701770633564247069/10^30` | 17.623065212061 | exact KKT point; a local minimum strict modulo 17 flat motions; regularized view |
 | 303 | `s303_1105.cert` | `17901832750854048761575294038467/10^30` | 17.901832750855 | exact KKT point, not shown to be a local minimum (a first-order MILP descent, dS −2.2e-4, not realised); regularized view after the regularizer fix of `39fb4f0` |
@@ -79,7 +79,7 @@ it at 12 places, and each is the smallest report at its count:
 
 | n | The house it is below | By |
 | ---: | --- | --- |
-| 175 | T-186, Daniil Ostashev’s packing as PingYou Ltd and Mishapolk refined it | 1.24e-4 |
+| 175 | T-186, Daniil Ostashev’s packing as PingYou Ltd and Mykhailo Polkovskyi refined it | 1.24e-4 |
 | 204 | T-264, Evan Daniel’s #845 packing as Doğa Özden improved it | 3.26e-3 |
 | 260 | T-265, Evan Daniel’s #845 packing as Kaelan Yim improved it | 4.62e-4 |
 | 268 | T-242, Vladislav Lavrentev’s packing as Evan Daniel improved it | 1.86e-3 |
@@ -151,10 +151,70 @@ corner checker, share certificate parsing, half-angle conversion, `Fraction` ari
 and the separating-axis method, and read each certificate through the `evand-cert`
 reader. The source’s checkers were not run.
 
+## Stage 4 Review
+
+The [review of 5 November 2026](../../../../docs/project/reviews/review-2026-11-05-evand-914-seven.md),
+by a strong-tier lane prompted separately from this one, accepted all seven certificates,
+at 260 with findings, none blocking or major, and confirmed the significance S3 at each.
+Its programs, receipts and frozen findings are in
+[review/review-2026-11-05/](review/review-2026-11-05/README.md); `out/program-digests.txt`
+lists each program’s digest, and `frozen-findings.sha256` the digest its findings were
+frozen under before it read the earlier reviews.
+
+- **Its own checker.** `decide_feasibility.py` decides all thirteen files, every wall and
+  every pair with no distance filter, by two methods that share only its reader:
+  separating axes in `Fraction` and exact clipped areas in GMP rationals. They agree pair
+  by pair, 239,966 certificate pairs and 206,296 view pairs, every pair strictly apart and
+  every square strictly inside. Its 182 sharp and gross controls, fourteen a file, are
+  decided as stated beforehand, and under the reversed rotation sense every file overlaps
+  (`E-evand-914-review-exact-feasibility`, `V-evand-1105-review-check`). It shares no
+  code with either maintained route or the source, so each bound is confirmed,
+  independently re-implemented, clean room; the replay above shares the `evand-cert`
+  reader with the producer (`E-evand-914-exact-feasibility`, shared components).
+- **The gains.** Each is at least $6.2 \times 10^{8}$ times all of its house’s side
+  slack (F9), so no rescaling of a house reaches the new side.
+- **New arrangements.** No symmetry pairs any certificate one to one with its house’s
+  packing (F7). At 260 the 97 squares tilted beyond 10 degrees are T-257’s island within
+  0.042 only after a half turn about the box centre and a shift of one unit upward, and
+  the frame around it is rebuilt: a new arrangement built on that island, not a further
+  arrangement (F8).
+- **The record’s findings.** F3 corrected the 260 dilation above: $1 + 10^{-12}$, the
+  side $1.66 \times 10^{-11}$ above the binary64 input’s. F13 gave each lineage its own
+  key (below), and F14 names Mykhailo Polkovskyi by his surname. F15 records the replay
+  as shared components and the review as an independent re-implementation. F11 finds that
+  the 175 start needs no regularization or improvement credit.
+- **For the author.** F4 (the 260 $S'$ print is the side’s binary64 value, and the input
+  read exactly overlaps by up to $3.9 \times 10^{-16}$), F10 (custody holds; the issue
+  was edited after it was opened) and five questions, none holding a rung.
+
+## Adoption
+
+The cases adopted the seven certificates as their house best packings under the house
+rule: 175, 204, 268, 293, 303 and 304 in the pass of 5 November 2026, and 260 in the pass
+of 6 November 2026, since the pass of 5 November had already moved 260 to T-265 and a
+day’s prior-state archive holds one record a count. Each replaced house keeps its
+certificate as history: T-186 at 175, T-264 at 204, T-265 at 260, T-242 at 268 and 304,
+T-257 at 293 and T-240 at 303. Evan Daniel is each packing’s finder, and no improver is
+credited ([n-175.md](../../../frontier/n-175.md) to
+[n-304.md](../../../frontier/n-304.md)).
+
+Both strong generators ran on the seven new witnesses
+([think-lrj4-2026-11-05](../../../cases/regularized_drawings/think-lrj4-2026-11-05/README.md)).
+Evan Daniel’s regularizer’s views are drawn at 175, 204 and 268, and grid-slack’s at 260
+(0.5 degrees) and 303 (5 degrees). At 293 and 304 no view improves on the axis tool’s, so
+the counts are decided no better. At 175 the drawn view is this release’s own
+`s175_1105_regularized.cert`, every square within $10^{-9}$, and at 268 it is the same but
+for one square moved $7.3 \times 10^{-4}$; at 204 it is the release’s view after a half
+turn, with 33 squares moved beyond a hundredth. The rigidity blocks were derived again on
+the new witnesses, and each stays not rigid. The posters’ print-credit hold no longer holds
+Doğa Özden’s name at 204 or Kaelan Yim’s at 260, whom the case records there no longer
+credit; it holds Özden’s at 299 (think-tj4o, think-hgpg).
+
 ## What Is Not Established
 
-- **No review yet.** The stage 4 mathematical review, by a strong-tier lane sharing no
-  context with this one, has not run; it and the adoptions are think-lrj4’s.
+- **A second review.** One AI review is retained; V4 and C4 would need a second accepted
+  adversarial review by a distinct reviewer.
+- **Human oversight.** No human oversight record is retained.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing more.
   The KKT and local-minimum statements are the author’s numerical evidence.
 - **The lineage** the source states, beyond what the measurements above show; at 268,
@@ -166,10 +226,14 @@ MIT, copyright (c) 2026 Evan Daniel. `CREDITS.md` says the repository’s work w
 “Produced by Claude (Anthropic) in a single session under human direction”, and the
 commit carries a Co-Authored-By trailer naming Claude. The packings are Daniel’s, built by
 his composer after Chris Deotte’s method, with the starts the issue credits: the register’s
-s(175) packing (Ostashev’s, as PingYou Ltd and Mishapolk refined it) at 175, and Kirill
-Tymchishin’s Kaggle s(260), through Daniel’s #845 island, at 260. The bibliography key is
-**[Daniel issue 914 2026-11-05]**; the register records one entry per count, T-267 to
-T-273.
+s(175) packing (Ostashev’s, as PingYou Ltd and Mykhailo Polkovskyi refined it) at 175, and Kirill
+Tymchishin’s Kaggle s(260), through Daniel’s #845 island, at 260. Each lineage has its
+own bibliography key (the review’s F13): **[Daniel issue 914 2026-11-05]**, “Daniel after
+Deotte”, at 204, 268, 293, 303 and 304; **[Daniel issue 914 n175 2026-11-05]**, “Daniel
+after Deotte, Ostashev, PingYou Ltd, Polkovskyi”, at 175; and **[Daniel issue 914 n260
+2026-11-05]**, “Daniel after Deotte, Tymchishin”, at 260. The views packet has its own,
+**[Daniel issue 914 views 2026-11-05]**. The register records one entry per count, T-267
+to T-273.
 
 ## Commands
 

@@ -20416,18 +20416,20 @@ occurrences:
     path: packing/frontier/n-175.md
     record_key: '175'
     field: /reported_upper_bound/found_by/0
-  expected_text: Daniil Ostashev
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Daniil Ostashev
+  end: 11
+  label: Evan Daniel
   role: construction-finder
   disposition: resolved
   evidence:
-  - source-intake
+  - repository-license
   - bibliography
-  contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
+  note: 'Reviewed packing/frontier/n-175.md /reported_upper_bound/found_by/0: the case''s
+    credit after the house adoption of 5 November 2026 names Evan Daniel as construction finder,
+    as the adopted result''s register entry (issue 914) and its stage 4 review credit him;
+    the label is the source''s.'
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-175.md
     record_key: '175'
@@ -20445,36 +20447,6 @@ occurrences:
   note: Reviewed packing/frontier/n-175.md [175] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-175.md
-    record_key: '175'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
-- origin:
-    path: packing/frontier/n-175.md
-    record_key: '175'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
 - origin:
     path: packing/frontier/n-176.md
     record_key: '176'
@@ -21245,18 +21217,6 @@ occurrences:
       as the adopted result''s register entry and its stage 4 review credit them; the label
       is the source''s.'
   contributor_id: evan-daniel
-- origin:
-    path: packing/frontier/n-204.md
-    record_key: '204'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Doğa Özden
-  start: 0
-  end: 10
-  label: Doğa Özden
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
 - origin:
     path: packing/frontier/n-205.md
     record_key: '205'
@@ -22930,18 +22890,6 @@ occurrences:
     text and credit role are retained.
   contributor_id: trevor-green
 - origin:
-    path: packing/frontier/n-260.md
-    record_key: '260'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Kaelan Yim
-  start: 0
-  end: 10
-  label: Kaelan Yim
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
     path: packing/frontier/n-261.md
     record_key: '261'
     field: /reported_upper_bound/found_by/0
@@ -23254,36 +23202,20 @@ occurrences:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_upper_bound/found_by/0
-  expected_text: Vladislav Lavrentev
-  start: 0
-  end: 19
-  label: Vladislav Lavrentev
-  role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: 'Reviewed packing/frontier/n-268.md [268] /reported_upper_bound/found_by/0
-    span 0:19: the case''s house since the adoption of 26 October 2026 (T-242) is
-    Evan Daniel''s exact descent of the public Kaggle packing of Vladislav Lavrentev
-    (lightningv08), as the source credits it, which the certificate is to 1.41e-4
-    (the 24 October review; credit Daniel after Lavrentev). No person record exists
-    yet; identity review pending (a profile by name, think-ptkk).'
-- origin:
-    path: packing/frontier/n-268.md
-    record_key: '268'
-    field: /reported_upper_bound/improved_by/0
   expected_text: Evan Daniel
   start: 0
   end: 11
   label: Evan Daniel
-  role: construction-improver
+  role: construction-finder
   disposition: resolved
   evidence:
   - repository-license
   - bibliography
+  note: 'Reviewed packing/frontier/n-268.md /reported_upper_bound/found_by/0: the case''s
+    credit after the house adoption of 5 November 2026 names Evan Daniel as construction finder,
+    as the adopted result''s register entry (issue 914) and its stage 4 review credit him;
+    the label is the source''s.'
   contributor_id: evan-daniel
-  note: 'Reviewed packing/frontier/n-268.md [268] /reported_upper_bound/improved_by/0
-    span 0:11: the house is Evan Daniel''s exact descent at evand/square-packing@8a8879a
-    (T-242), in the repository whose retained licence names him.'
 - origin:
     path: packing/frontier/n-268.md
     record_key: '268'
@@ -24285,20 +24217,20 @@ occurrences:
     path: packing/frontier/n-303.md
     record_key: '303'
     field: /reported_upper_bound/found_by/0
-  expected_text: Vladislav Lavrentev
+  expected_text: Evan Daniel
   start: 0
-  end: 19
-  label: Vladislav Lavrentev
+  end: 11
+  label: Evan Daniel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: 'Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/found_by/0
-    span 0:19: the case''s house since the adoption of 25 October 2026 (T-240) refines
-    Francisco Couzo''s Kaggle push packing, which the source''s manifest credits as
-    a refinement of the packing of Vladislav Lavrentev (lightningv08), Kaggle notebook
-    "CUDA Packing Search" v11; which public packing it started from is the author''s
-    question 4 of the 24 October review. No person record exists yet; identity review
-    pending (a profile by name, think-ptkk).'
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/frontier/n-303.md /reported_upper_bound/found_by/0: the case''s
+    credit after the house adoption of 5 November 2026 names Evan Daniel as construction finder,
+    as the adopted result''s register entry (issue 914) and its stage 4 review credit him;
+    the label is the source''s.'
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -24317,38 +24249,23 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
-    path: packing/frontier/n-303.md
-    record_key: '303'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-  note: 'Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/improved_by/0
-    span 0:15: issue 763, filed by franciscouzo, and the source''s manifest credit
-    Francisco Couzo''s Kaggle push search and browser search with the refinement (T-240).'
-- origin:
     path: packing/frontier/n-304.md
     record_key: '304'
     field: /reported_upper_bound/found_by/0
-  expected_text: Kirill Tymchishin
+  expected_text: Evan Daniel
   start: 0
-  end: 17
-  label: Kirill Tymchishin
+  end: 11
+  label: Evan Daniel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: 'Reviewed packing/frontier/n-304.md [304] /reported_upper_bound/found_by/0
-    span 0:17: the case''s house since the adoption of 25 October 2026 (T-242) is
-    Evan Daniel''s exact descent of the packing Francisco Couzo''s fa6237e certificate
-    (T-241) credits to Kirill Tymchishin (kirilltym), Kaggle notebook "CPU Alternating
-    Reclosure" v3, one to one with it, none beyond 4.60e-4 (the 24 October review).
-    No person record exists yet; identity review pending (a profile by name, think-ptkk).'
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/frontier/n-304.md /reported_upper_bound/found_by/0: the case''s
+    credit after the house adoption of 5 November 2026 names Evan Daniel as construction finder,
+    as the adopted result''s register entry (issue 914) and its stage 4 review credit him;
+    the label is the source''s.'
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'
@@ -24366,23 +24283,6 @@ occurrences:
   note: Reviewed packing/frontier/n-304.md [304] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-304.md
-    record_key: '304'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: 'Reviewed packing/frontier/n-304.md [304] /reported_upper_bound/improved_by/0
-    span 0:11: the house is Evan Daniel''s exact descent at evand/square-packing@8a8879a
-    (T-242), in the repository whose retained licence names him.'
 - origin:
     path: packing/frontier/n-305.md
     record_key: '305'
@@ -30830,7 +30730,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel issue 914 2026-11-05]'
     field: /credit
-  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  expected_text: Daniel after Deotte
   start: 0
   end: 6
   label: Daniel
@@ -30839,15 +30739,15 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
-    /credit span 0:6: the evand/square-packing certificates of issue 914, which the MIT
-    licence of that repository, copyright Evan Daniel, covers.'
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]] /credit
+    span 0:6: the evand/square-packing certificates of issue 914 at 204, 268, 293, 303 and
+    304, which the MIT licence of that repository, copyright Evan Daniel, covers.'
   contributor_id: evan-daniel
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel issue 914 2026-11-05]'
     field: /credit
-  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  expected_text: Daniel after Deotte
   start: 13
   end: 19
   label: Deotte
@@ -30856,16 +30756,120 @@ occurrences:
   evidence:
   - source-credit
   - bibliography
-  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
-    /credit span 13:19: issue 914 asks that Chris Deotte be credited for the method, his
-    multi-gadget fault DP, which the author''s fault-line composer implements; the original
-    credit role is retained.'
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]] /credit
+    span 13:19: issue 914 asks that Chris Deotte be credited for the method, his multi-gadget
+    fault DP, which the author''s fault-line composer implements; the original credit role
+    is retained.'
   contributor_id: chris-deotte
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[Daniel issue 914 2026-11-05]'
+    record_key: '[Daniel issue 914 views 2026-11-05]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 views 2026-11-05]]
+    /authors/0 span 0:6: the six regularized views of issue 914, at their certificates'' sides,
+    which the MIT licence of that repository, copyright Evan Daniel, covers.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 views 2026-11-05]'
     field: /credit
-  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  expected_text: Daniel after Deotte
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 views 2026-11-05]]
+    /credit span 0:6: the six regularized views of issue 914, at their certificates'' sides,
+    which the MIT licence of that repository, copyright Evan Daniel, covers.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 views 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte
+  start: 13
+  end: 19
+  label: Deotte
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 views 2026-11-05]]
+    /credit span 13:19: issue 914 asks that Chris Deotte be credited for the method, his multi-gadget
+    fault DP, which the author''s fault-line composer implements; the original credit role
+    is retained.'
+  contributor_id: chris-deotte
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 n175 2026-11-05]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n175 2026-11-05]]
+    /authors/0 span 0:6: the evand/square-packing certificate of issue 914 at 175, which the
+    MIT licence of that repository, copyright Evan Daniel, covers.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 n175 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Polkovskyi
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n175 2026-11-05]]
+    /credit span 0:6: the evand/square-packing certificate of issue 914 at 175, which the
+    MIT licence of that repository, copyright Evan Daniel, covers.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 n175 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Polkovskyi
+  start: 13
+  end: 19
+  label: Deotte
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n175 2026-11-05]]
+    /credit span 13:19: issue 914 asks that Chris Deotte be credited for the method, his multi-gadget
+    fault DP, which the author''s fault-line composer implements; the original credit role
+    is retained.'
+  contributor_id: chris-deotte
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 n175 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Polkovskyi
   start: 21
   end: 29
   label: Ostashev
@@ -30874,16 +30878,16 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
-  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n175 2026-11-05]]
     /credit span 21:29: at 175 issue 914 names the register''s packing, Daniil Ostashev''s
-    as PingYou Ltd and Mishapolk refined it (T-186), as the start; the original credit
-    role is retained. Keep finder, improver and solver roles distinct.'
+    as PingYou Ltd and Mykhailo Polkovskyi refined it (T-186), as the start; the original
+    credit role is retained. Keep finder, improver and solver roles distinct.'
   contributor_id: daniil-ostashev
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[Daniel issue 914 2026-11-05]'
+    record_key: '[Daniel issue 914 n175 2026-11-05]'
     field: /credit
-  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Polkovskyi
   start: 31
   end: 42
   label: PingYou Ltd
@@ -30895,37 +30899,90 @@ occurrences:
     agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[Daniel issue 914 2026-11-05]'
+    record_key: '[Daniel issue 914 n175 2026-11-05]'
     field: /credit
-  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
+  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Polkovskyi
   start: 44
-  end: 53
-  label: Mishapolk
+  end: 54
+  label: Polkovskyi
   role: prerequisite
   disposition: resolved
   evidence:
   - source-intake
   - bibliography
-  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
-    /credit span 44:53: at 175 issue 914 names the register''s packing, which Mykhailo
-    Polkovskyi (Mishapolk) refined (T-186), as the start; the original credit role is
-    retained. Keep finder, improver and solver roles distinct.'
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n175 2026-11-05]]
+    /credit span 44:54: at 175 issue 914 names the register''s packing, which Mykhailo Polkovskyi
+    (Mishapolk) refined (T-186), as the start; the credit uses his surname, as the 5 November
+    review''s F14 asks. The original credit role is retained. Keep finder, improver and solver
+    roles distinct.'
   contributor_id: mykhailo-polkovskyi
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[Daniel issue 914 2026-11-05]'
+    record_key: '[Daniel issue 914 n260 2026-11-05]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n260 2026-11-05]]
+    /authors/0 span 0:6: the evand/square-packing certificate of issue 914 at 260, which the
+    MIT licence of that repository, copyright Evan Daniel, covers.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 n260 2026-11-05]'
     field: /credit
-  expected_text: Daniel after Deotte, Ostashev, PingYou Ltd, Mishapolk, Tymchishin
-  start: 55
-  end: 65
+  expected_text: Daniel after Deotte, Tymchishin
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n260 2026-11-05]]
+    /credit span 0:6: the evand/square-packing certificate of issue 914 at 260, which the
+    MIT licence of that repository, copyright Evan Daniel, covers.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 n260 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Tymchishin
+  start: 13
+  end: 19
+  label: Deotte
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n260 2026-11-05]]
+    /credit span 13:19: issue 914 asks that Chris Deotte be credited for the method, his multi-gadget
+    fault DP, which the author''s fault-line composer implements; the original credit role
+    is retained.'
+  contributor_id: chris-deotte
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel issue 914 n260 2026-11-05]'
+    field: /credit
+  expected_text: Daniel after Deotte, Tymchishin
+  start: 21
+  end: 31
   label: Tymchishin
   role: prerequisite
   disposition: unresolved
   evidence: []
-  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 2026-11-05]]
-    /credit span 55:65: at 260 issue 914 credits Kirill Tymchishin''s (kirilltym) s(260)
-    from his public Kaggle notebook as the start, as for issue 845''s 260. No person record
-    exists yet; identity review pending (a profile by name, think-ptkk).'
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel issue 914 n260 2026-11-05]]
+    /credit span 21:31: at 260 issue 914 credits Kirill Tymchishin''s (kirilltym) s(260) from
+    his public Kaggle notebook as the start, as for issue 845''s 260. No person record exists
+    yet; identity review pending (a profile by name, think-ptkk).'
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

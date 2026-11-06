@@ -56642,6 +56642,20 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-05'
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 914 (think-lrj4),
+        strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+        import lane (bold-ritchie-l51)
+      note: >-
+        docs/project/reviews/review-2026-11-05-evand-914-seven.md accepted all seven
+        certificates, at 260 with findings, none blocking or major: F3 (the 260 dilation,
+        for the author and repeated by the record) and F13 (one key's union credit on seven
+        entries) are minor, the rest notes. Its clean-room run is
+        E-evand-914-review-exact-feasibility, and the maintained replay
+        E-evand-914-exact-feasibility.
     limitations: >-
       This atom records the source author's report of 7 exact rational certificates at bb4cc78
       and of 6 regularized views at their sides. A separate complete repository replay is
@@ -56652,11 +56666,246 @@ evidence:
       least 5.00e-21 and every pair by at least 9.99e-21. The views packet
       (evand-issue914-views-2026-11-05) replays the 6 views the same way: 18 jobs, 1237776 pair
       decisions, 160.32 route CPU seconds, every positive accepted and every control refused on
-      both routes. Each packet's sharp controls meet those margins on both routes. Independent
-      review and confirmation remain pending (think-lrj4). The source's own checkers were not
-      run here.
+      both routes. Each packet's sharp controls meet those margins on both routes. The replay is
+      E-evand-914-exact-feasibility and the 5 November review's own checker
+      E-evand-914-review-exact-feasibility. The source's own checkers were not run here.
 
       The two maintained routes, the sqpack rational witness verifier and the independent
       rational corner checker, share certificate parsing, half-angle conversion, Fraction
-      arithmetic and the separating-axis method. No two independent methods, human oversight or
+      arithmetic and the separating-axis method, and with the producer the evand-cert reader's
+      line filter and corner construction. No two independent methods, human oversight or
       optimality is claimed.
+  - id: E-evand-914-n175-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 175
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel issue 914 n175 2026-11-05]'
+    certificate: packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s175_1105.cert
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-05'
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 914 (think-lrj4),
+        strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+        import lane (bold-ritchie-l51)
+      note: >-
+        docs/project/reviews/review-2026-11-05-evand-914-seven.md accepted the certificate at
+        175, with no blocking or major finding. Its clean-room run is
+        E-evand-914-review-exact-feasibility, and the maintained replay
+        E-evand-914-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of the release's exact rational certificate
+      at 175, s175_1105.cert at bb4cc78, under the key of its own whose credit is the 175's (F13 of
+      the 5 November review); E-evand-914-certificate-report records the release's report of
+      all seven under the release's key. The replay, E-evand-914-exact-feasibility, and the
+      review's clean-room checker, E-evand-914-review-exact-feasibility, decide it with the
+      release. The source's own checkers were not run here.
+  - id: E-evand-914-n260-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 260
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel issue 914 n260 2026-11-05]'
+    certificate: packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s260_ks_1105.cert
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-05'
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 914 (think-lrj4),
+        strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+        import lane (bold-ritchie-l51)
+      note: >-
+        docs/project/reviews/review-2026-11-05-evand-914-seven.md accepted the certificate at
+        260, with findings (F3, F8), with no blocking or major finding. Its clean-room run is
+        E-evand-914-review-exact-feasibility, and the maintained replay
+        E-evand-914-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of the release's exact rational certificate
+      at 260, s260_ks_1105.cert at bb4cc78, under the key of its own whose credit is the 260's (F13 of
+      the 5 November review); E-evand-914-certificate-report records the release's report of
+      all seven under the release's key. The replay, E-evand-914-exact-feasibility, and the
+      review's clean-room checker, E-evand-914-review-exact-feasibility, decide it with the
+      release. The source's own checkers were not run here.
+  - id: E-evand-914-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 175
+      - 204
+      - 260
+      - 268
+      - 293
+      - 303
+      - 304
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+    - 'the certificate parser and half-angle map of devtools.evand_exact_certificates (the
+      evand-cert adapter both packets'' acquisition/report.json name), through which both
+      maintained routes read the certificates and views: its reader''s line filter and the
+      corners from which the independent route decides (Pose.corners) are transcribed from
+      Evan Daniel''s verify_cert.py and verify_cert2.py, the checkers the certificates name'
+    - CPython's fractions.Fraction arithmetic, which both of Daniel's checkers use
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel issue 914 2026-11-05]'
+    certificate: packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host,
+      at nice 19: python -m devtools.upper_bound_reports evand-issue914-2026-11-05 certify
+      --workers 2 wrote the receipt on 5 November 2026 from the packet's retained
+      certificates, and check --replay decides all 21 retained jobs, each certificate with its
+      duplicate-square and outside-container controls, again through both maintained routes
+      and holds each to its retained row; the same commands on
+      evand-issue914-views-2026-11-05 decide the six regularized views and their controls, 18
+      jobs. check-claims rebuilds each packet's frozen comparison. sharp-controls wrote each
+      packet's sharp controls, one receipt a count, all as expected on both routes: contact
+      accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the seven certificates at n = 175, 204, 260, 268, 293, 303 and 304 that T-267 to
+          T-273 cite and the six regularized views beside them, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in each
+          packet's receipt
+        checked: 7
+        of: 7
+    independence_record: docs/project/reviews/review-2026-11-05-evand-914-seven.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 914 (think-lrj4),
+        strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+        import lane (bold-ritchie-l51)
+      note: >-
+        docs/project/reviews/review-2026-11-05-evand-914-seven.md accepted the seven
+        certificates, with no blocking or major finding; its least gaps and clearances
+        equal the replay's as exact fractions. The replay reads the certificates through the
+        evand-cert reader, which transcribes two expressions of the producer's own checkers
+        (F15), so T-267 to T-273's independent re-implementation rests on
+        E-evand-914-review-exact-feasibility.
+    limitations: >-
+      A replay of the seven retained certificates and six views by two maintained exact
+      routes that share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the producer the evand-cert reader's line filter and
+      corner construction. The certificates' 21 jobs hold 1439796 pair decisions and 200.09
+      route CPU seconds, the views' 18 jobs 1237776 and 160.32. Every wall is cleared by at
+      least 5e-21 and every pair by at least 9.99e-21, below the binary64 spacing of the
+      coordinates; the receipts' controls are gross, and each packet's sharp controls meet
+      those margins. The source's own checkers were not run here, and no KKT, flat-motion or
+      second-order statement of the source is checked. Finite feasibility only.
+    source_reviewed: '2026-11-05'
+  - id: E-evand-914-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 175
+      - 204
+      - 260
+      - 268
+      - 293
+      - 303
+      - 304
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel issue 914 2026-11-05]'
+    certificate: packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/
+    replay: >-
+      With the project interpreter (Python 3.14.7) in isolated mode on a shared four-core host,
+      5 November 2026, at nice 19, from the packet evand-issue914-2026-11-05's
+      review/review-2026-11-05/: programs/run_all.sh ran programs/decide_feasibility.py on the
+      seven certificates and six views (out/feasibility/), deciding every wall and all
+      239,966 certificate pairs and 206,296 view pairs over Q with no distance filter by
+      separating axes and again by exact clipped areas, every pair strictly apart and every
+      square strictly inside by both methods, in 107.9 CPU seconds, and again with the rotation
+      read reversed, all thirteen refused (out/reversed-sense/, 106.8 seconds);
+      programs/sharp_controls.py decided fourteen controls a file, 182 in all, as stated in
+      advance (out/controls/, 142.5 seconds); programs/self_test.py passed (out/self-test.json).
+      The least wall clearances are 5e-21 exactly and 4.98999e-13 at 260, the least pair gaps
+      9.99999999999999e-21 and 9.98999e-13 at 260.
+    replay_status: passed
+    verifiers:
+    - V-evand-1105-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 175, 204, 260, 268, 293, 303 and 304 and the six regularized
+          views: every wall and every pair, by two exact methods that share only the reader,
+          with fourteen controls each decided by both
+        checked: 7
+        of: 7
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: >-
+          the stage 4 mathematical review lane of issue 914 (think-lrj4), strong tier
+          (tbd-strong-max) at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 914 says the composer, the search, the checks and the request were done with
+          Claude, the certificates' commit names Claude as co-author, and the source's
+          CREDITS.md says its work was produced by Claude under the author's direction. The
+          checker shares no code with the source's checkers or with this repository's
+          maintained routes, none of which its authors read; the source's binary64 inputs,
+          80-digit points and reports were read to compare.
+    independence_record: packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-05'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issue 914 (think-lrj4),
+        strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+        import lane (bold-ritchie-l51)
+      note: >-
+        docs/project/reviews/review-2026-11-05-evand-914-seven.md accepted the seven
+        certificates for finite feasibility, at 260 with findings, with no blocking or major
+        finding, two minor findings (F3, F13) and thirteen notes.
+    limitations: >-
+      A clean-room decision of the seven retained certificates and six views by two exact
+      methods in one program, which share its token reader, the counterclockwise reading of t =
+      tan(theta/2) that the format line implies through (c, s); under the reversed sense every
+      file is infeasible (69, 67, 173, 96, 76, 117 and 106 overlapping pairs in the
+      certificates). The source's local-optimality statements were not replayed. Finite
+      feasibility only.
+    source_reviewed: '2026-11-05'

@@ -66,7 +66,7 @@ import hashlib
 import json
 import sys
 from collections.abc import Callable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from functools import cache
 from pathlib import Path, PurePosixPath
 from typing import Any, NamedTuple, cast
@@ -316,6 +316,13 @@ def _packet_inputs(packet: Path, numbers: Sequence[int]) -> tuple[Path, ...]:
     paths.extend(_stored(packet, n) for n in numbers)
     paths.extend(dict.fromkeys(_receipt(packet, n) for n in numbers))
     return tuple(paths)
+
+
+def _keyed(source: Source, key: str) -> Source:
+    """A packet's source under a key of its own, its witnesses' origins keyed alike: a
+    release whose certificate at one count is credited under a key of that count's, as
+    issue 914's 175 and 260 are (F13 of the 5 November review)."""
+    return replace(source, key=key, origin=lambda n: replace(source.origin(n), key=key))
 
 
 def packet_source(result: str, name: str, field_counts: Sequence[int] = ()) -> Source:
@@ -598,10 +605,10 @@ def _sources() -> dict[str, Source]:
         # The adoption of 24 October 2026 moved 303, T-230's only count, to T-239, and the
         # adoption of 25 October moved it on to T-240, so neither T-230 nor T-239 is a
         # source here now, as T-196 and T-199 left on 22 October.
-        packet_source("T-240", "couzo-issue763-2026-10-23"),
         # The adoption of 25 October 2026 moved 304 from T-186 to T-242, Evan Daniel's exact
-        # descent of the packing T-241 certifies; T-186 keeps its other houses.
-        packet_source("T-242", "evand-kaggle-descents-2026-10-24"),
+        # descent of the packing T-241 certifies; T-186 keeps its other houses. The adoption
+        # of 5 November 2026 moved 303 from T-240 and 268 and 304 from T-242 to Evan Daniel's
+        # certificates of issue 914 (T-272, T-270, T-273), so neither is a source here now.
         # The adoption of 25 October 2026 moved 182 from T-174 to T-243, Evan Daniel's
         # packing of issue 806 from an L-cut of Francisco Couzo's 211; T-174 keeps its
         # other houses.
@@ -618,11 +625,26 @@ def _sources() -> dict[str, Source]:
         # packings. 299 was T-258's only count, so T-258 is no source here now, as T-231
         # left on 31 October; T-257 still houses 172, 260 and 293.
         packet_source("T-263", "ozden-s299-upper-bound-2026-11-03"),
-        packet_source("T-264", "ozden-s204-upper-bound-2026-11-03"),
-        # The adoption of 5 November 2026 moved 260 to T-265, Kaelan Yim's further
-        # arrangement of issue 895 of Evan Daniel's T-257 packing; T-257 still houses 172
-        # and 293.
-        packet_source("T-265", "yim-s260-upper-bound-2026-11-05"),
+        # The adoption of 5 November 2026 (think-o7ly) moved 260 to T-265, Kaelan Yim's
+        # further arrangement of issue 895 of Evan Daniel's T-257 packing. The adoption of 5
+        # November 2026 (think-lrj4) then moved 175, 204, 260, 268, 293, 303 and 304 to Evan
+        # Daniel's new packings of issue 914, T-267 to T-273, so T-264 and T-265 are no
+        # source here now; T-257 still houses 172, and T-186 its other counts. Its 175 and
+        # 260 are under keys of their own, whose credits are those counts' (F13 of the 5
+        # November review), read from the same packet.
+        _keyed(
+            packet_source("T-267", "evand-issue914-2026-11-05"),
+            "[Daniel issue 914 n175 2026-11-05]",
+        ),
+        packet_source("T-268", "evand-issue914-2026-11-05"),
+        _keyed(
+            packet_source("T-269", "evand-issue914-2026-11-05"),
+            "[Daniel issue 914 n260 2026-11-05]",
+        ),
+        packet_source("T-270", "evand-issue914-2026-11-05"),
+        packet_source("T-271", "evand-issue914-2026-11-05"),
+        packet_source("T-272", "evand-issue914-2026-11-05"),
+        packet_source("T-273", "evand-issue914-2026-11-05"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -679,6 +701,10 @@ def _sources() -> dict[str, Source]:
 #: (T-264) at 204 from T-257, with each packing's finder Evan Daniel; T-258 keeps no house
 #: here. The pass of 5 November 2026 adopted Kaelan Yim's further arrangement of issue 895
 #: (T-265) at 260 from T-257, with the packing's finder Evan Daniel.
+#: The same day's later pass (think-lrj4) adopted Evan Daniel's new packings of issue 914,
+#: T-267, T-268 and T-270 to T-273, at 175 from T-186, 204 from T-264, 268 and 304 from
+#: T-242, 293 from T-257 and 303 from T-240, and the pass of 6 November 2026 T-269 at 260
+#: from T-265; T-240, T-242, T-264 and T-265 keep no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -703,14 +729,14 @@ ADOPTED: dict[int, str] = {
     155: "T-197",
     156: "T-186",
     172: "T-257",
-    175: "T-186",
+    175: "T-267",
     176: "T-186",
     179: "T-174",
     180: "T-174",
     181: "T-174",
     182: "T-243",
     183: "T-220",
-    204: "T-264",
+    204: "T-268",
     206: "T-174",
     207: "T-174",
     208: "T-174",
@@ -729,25 +755,25 @@ ADOPTED: dict[int, str] = {
     241: "T-182",
     258: "T-193",
     259: "T-193",
-    260: "T-265",
+    260: "T-269",
     261: "T-174",
     263: "T-174",
     264: "T-186",
     267: "T-134",
-    268: "T-242",
+    268: "T-270",
     269: "T-174",
     270: "T-224",
     271: "T-219",
     272: "T-174",
     273: "T-174",
     292: "T-146",
-    293: "T-257",
+    293: "T-271",
     295: "T-193",
     297: "T-174",
     299: "T-263",
     302: "T-193",
-    303: "T-240",
-    304: "T-242",
+    303: "T-272",
+    304: "T-273",
     305: "T-174",
     306: "T-174",
     307: "T-256",
@@ -856,6 +882,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: T-263 at 299 and T-264 at 204.
 #: The pass of 5 November 2026 (think-3guf, think-o7ly) adopted that day's stage 4 review:
 #: T-265 at 260.
+#: Its later pass (think-3guf, think-lrj4) adopted that day's second stage 4 review at six
+#: counts: T-267, T-268 and T-270 to T-273 at 175, 204, 268, 293, 303 and 304.
+#: The pass of 6 November 2026 (think-3guf, think-lrj4) adopted the same review's T-269 at
+#: 260, in the same pull request: the pass of 5 November had already moved 260 (T-265), and
+#: a day's archive holds one prior state a count, as at 268 on 25 and 26 October.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -937,7 +968,8 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-26": frozenset({268}),
     "2026-10-31": frozenset({130, 172, 204, 232, 260, 293, 299, 307}),
     "2026-11-04": frozenset({204, 299}),
-    "2026-11-05": frozenset({260}),
+    "2026-11-05": frozenset({175, 204, 260, 268, 293, 303, 304}),
+    "2026-11-06": frozenset({260}),
 }
 
 

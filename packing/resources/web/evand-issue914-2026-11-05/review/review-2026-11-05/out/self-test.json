@@ -1,0 +1,190 @@
+{
+ "ok": true,
+ "known_answers": [
+  {
+   "case": "aligned edge contact",
+   "want": "touching",
+   "method_a": "touching",
+   "method_b": "touching",
+   "ok": true,
+   "gap": "0",
+   "area": "0"
+  },
+  {
+   "case": "aligned overlap 1e-30",
+   "want": "overlapping",
+   "method_a": "overlapping",
+   "method_b": "overlapping",
+   "ok": true,
+   "gap": "-1/1000000000000000000000000000000",
+   "area": "1/1000000000000000000000000000000"
+  },
+  {
+   "case": "aligned clearance 1e-30",
+   "want": "separated",
+   "method_a": "separated",
+   "method_b": "separated",
+   "ok": true,
+   "gap": "1/1000000000000000000000000000000"
+  },
+  {
+   "case": "aligned corner-to-corner contact",
+   "want": "touching",
+   "method_a": "touching",
+   "method_b": "touching",
+   "ok": true
+  },
+  {
+   "case": "aligned corner overlap 1e-30 x 1e-30",
+   "want": "overlapping",
+   "method_a": "overlapping",
+   "method_b": "overlapping",
+   "ok": true,
+   "area": "1/1000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "case": "3-4-5 vertex on edge",
+   "want": "touching",
+   "method_a": "touching",
+   "method_b": "touching",
+   "ok": true,
+   "gap": "0"
+  },
+  {
+   "case": "3-4-5 vertex 1e-30 into edge",
+   "want": "overlapping",
+   "method_a": "overlapping",
+   "method_b": "overlapping",
+   "ok": true,
+   "area": "1/960000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "case": "3-4-5 vertex 1e-30 off edge",
+   "want": "separated",
+   "method_a": "separated",
+   "method_b": "separated",
+   "ok": true
+  },
+  {
+   "case": "3-4-5 vertex on edge, reversed sense",
+   "want": "touching",
+   "method_a": "touching",
+   "method_b": "touching",
+   "ok": true
+  },
+  {
+   "case": "3-4-5 vertex on a corner",
+   "want": "touching",
+   "method_a": "touching",
+   "method_b": "touching",
+   "ok": true
+  },
+  {
+   "case": "3-4-5 vertex beside a corner, reversed sense",
+   "want": "separated",
+   "method_a": "separated",
+   "method_b": "separated",
+   "ok": true
+  },
+  {
+   "case": "duplicated square",
+   "want": "overlapping",
+   "method_a": "overlapping",
+   "method_b": "overlapping",
+   "ok": true,
+   "gap": "-1",
+   "area": "1"
+  },
+  {
+   "case": "small square inside",
+   "want": "overlapping",
+   "method_a": "overlapping",
+   "method_b": "overlapping",
+   "ok": true
+  },
+  {
+   "case": "wall: unit square at the corner, box 1",
+   "want": "inside",
+   "method_a": "inside",
+   "method_b": "inside",
+   "ok": true,
+   "clearance": "0",
+   "deficit": "0"
+  },
+  {
+   "case": "wall: unit square, box 1 - 1e-30",
+   "want": "outside",
+   "method_a": "outside",
+   "method_b": "outside",
+   "ok": true,
+   "clearance": "-1/1000000000000000000000000000000",
+   "deficit": "1999999999999999999999999999999/1000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "case": "wall: 3-4-5 square touching all four walls, box 7/5",
+   "want": "inside",
+   "method_a": "inside",
+   "method_b": "inside",
+   "ok": true,
+   "clearance": "0",
+   "deficit": "0"
+  },
+  {
+   "case": "wall: 3-4-5 square, box 7/5 - 1e-30",
+   "want": "outside",
+   "method_a": "outside",
+   "method_b": "outside",
+   "ok": true,
+   "clearance": "-1/1000000000000000000000000000000",
+   "deficit": "1/480000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "case": "wall: 3-4-5 square moved 1e-30 left",
+   "want": "outside",
+   "method_a": "outside",
+   "method_b": "outside",
+   "ok": true,
+   "clearance": "-1/1000000000000000000000000000000",
+   "deficit": "1/960000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "case": "wall: square below the floor",
+   "want": "outside",
+   "method_a": "outside",
+   "method_b": "outside",
+   "ok": true,
+   "clearance": "-1",
+   "deficit": "1"
+  }
+ ],
+ "random_pairs": 3000,
+ "random_classes": {
+  "separated": 1684,
+  "touching": 0,
+  "overlapping": 1316
+ },
+ "random_agree": 3000,
+ "constructed_contact_and_past": {
+  "touching": 2721,
+  "overlapping": 2721,
+  "separated": 558
+ },
+ "disagreements": [],
+ "reader_refusals": {
+  "blank line": "refused",
+  "CRLF": "refused",
+  "no final LF": "refused",
+  "count mismatch": "refused",
+  "four tokens": "refused",
+  "decimal token": "refused",
+  "zero denominator": "refused",
+  "plus sign": "refused",
+  "underscore": "refused",
+  "double space": "refused",
+  "zero count": "refused",
+  "negative denominator": "refused",
+  "exponent": "refused",
+  "non-ascii digit": "refused"
+ },
+ "cpu_seconds": 10.423
+}

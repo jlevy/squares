@@ -6731,7 +6731,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-05'
+  lastmod: '2026-11-06'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -23223,11 +23223,13 @@ urls:
     established: null
     attribution:
       source_keys:
-      - '[Daniel issue 914 2026-11-05]'
+      - '[Daniel issue 914 n175 2026-11-05]'
       published: '2026-11-05'
     builds_on: null
     evidence:
-    - E-evand-914-certificate-report
+    - E-evand-914-n175-certificate-report
+    - E-evand-914-exact-feasibility
+    - E-evand-914-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-issue914-2026-11-05/README.md
     - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
@@ -23241,6 +23243,8 @@ urls:
     - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n175.json
     - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-evand-914-seven.md
+    - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
 - path: result/t-268.html
   canonical: result/t-268.html
   kind: result
@@ -23262,6 +23266,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-914-certificate-report
+    - E-evand-914-exact-feasibility
+    - E-evand-914-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-issue914-2026-11-05/README.md
     - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
@@ -23275,6 +23281,8 @@ urls:
     - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n204.json
     - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-evand-914-seven.md
+    - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
 - path: result/t-269.html
   canonical: result/t-269.html
   kind: result
@@ -23291,11 +23299,13 @@ urls:
     established: null
     attribution:
       source_keys:
-      - '[Daniel issue 914 2026-11-05]'
+      - '[Daniel issue 914 n260 2026-11-05]'
       published: '2026-11-05'
     builds_on: null
     evidence:
-    - E-evand-914-certificate-report
+    - E-evand-914-n260-certificate-report
+    - E-evand-914-exact-feasibility
+    - E-evand-914-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-issue914-2026-11-05/README.md
     - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
@@ -23305,6 +23315,8 @@ urls:
     - packing/resources/web/evand-issue914-2026-11-05/measure/identity-n260.json
     - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-evand-914-seven.md
+    - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
 - path: result/t-270.html
   canonical: result/t-270.html
   kind: result
@@ -23326,6 +23338,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-914-certificate-report
+    - E-evand-914-exact-feasibility
+    - E-evand-914-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-issue914-2026-11-05/README.md
     - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
@@ -23339,6 +23353,8 @@ urls:
     - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n268.json
     - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-evand-914-seven.md
+    - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
 - path: result/t-271.html
   canonical: result/t-271.html
   kind: result
@@ -23360,6 +23376,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-914-certificate-report
+    - E-evand-914-exact-feasibility
+    - E-evand-914-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-issue914-2026-11-05/README.md
     - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
@@ -23373,6 +23391,8 @@ urls:
     - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n293.json
     - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-evand-914-seven.md
+    - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
 - path: result/t-272.html
   canonical: result/t-272.html
   kind: result
@@ -23394,6 +23414,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-914-certificate-report
+    - E-evand-914-exact-feasibility
+    - E-evand-914-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-issue914-2026-11-05/README.md
     - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
@@ -23407,6 +23429,8 @@ urls:
     - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n303.json
     - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-evand-914-seven.md
+    - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
 - path: result/t-273.html
   canonical: result/t-273.html
   kind: result
@@ -23428,6 +23452,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-914-certificate-report
+    - E-evand-914-exact-feasibility
+    - E-evand-914-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-issue914-2026-11-05/README.md
     - packing/resources/web/evand-issue914-2026-11-05/acquisition/claims.json
@@ -23441,6 +23467,8 @@ urls:
     - packing/resources/web/evand-issue914-views-2026-11-05/receipts/sharp-controls-n304.json
     - packing/campaign/issue-intake/upper-bounds-914-20261105/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-05-evand-914-seven.md
+    - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
 - path: results.html
   canonical: results.html
   kind: page

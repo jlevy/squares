@@ -210,11 +210,19 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: translating ones, in the same 125 and 302 records. The pass of 5 November 2026
 #: (think-o7ly) moved 260 to Kaelan Yim's certificate (T-265): 97 separating and 105
 #: translating squares against T-257's 31 and 103, so n=1..324 has 1,482 separating squares
-#: and 5,747 translating ones, in the same 125 and 302 records.
+#: and 5,747 translating ones, in the same 125 and 302 records. The same day's adoption of
+#: issue 914 (think-lrj4) moved 175, 204, 260, 268, 293, 303 and 304 to Evan Daniel's
+#: certificates (T-267 to T-273): separating and translating squares 49 and 129 at 175
+#: against T-186's 18 and 52, 8 and 55 at 204 against T-264's 33 and 92, 56 and 105 at 260
+#: against T-265's 97 and 105, 29 and 90 at 268 against T-242's 32 and 96, 4 and 10 at 293
+#: against T-257's 30 and 111, 11 and 69 at 303 against T-240's 57 and 92, and 12 and 80 at
+#: 304 against T-242's 75 and 119, so n=1..200 has 460 separating squares and 2,228
+#: translating ones, and n=1..324 1,309 and 5,618, in the same 67 and 182 and 125 and 302
+#: records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 429, 182, 2151),
-    "n=1..324": (125, 1482, 302, 5747),
+    "n=1..200": (67, 460, 182, 2228),
+    "n=1..324": (125, 1309, 302, 5618),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

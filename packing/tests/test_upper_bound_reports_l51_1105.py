@@ -15,6 +15,7 @@ test reads the packets and the ledger only; none needs the network.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -23,12 +24,15 @@ from typing import Any
 import pytest
 
 from devtools import evand_arrangement_reports as kernel
+from devtools import upper_bound_houses as houses
 from devtools import upper_bound_reports as reports
 from devtools import upper_bound_sharp_controls as sharp
 
 NAME = "evand-issue914-2026-11-05"
 VIEWS = "evand-issue914-views-2026-11-05"
 KEY = "[Daniel issue 914 2026-11-05]"
+#: The views packet's own key, since each count's house names one coverage entry.
+VIEWS_KEY = "[Daniel issue 914 views 2026-11-05]"
 LEDGER = reports.ROOT / "campaign/issue-intake/upper-bounds-914-20261105"
 PIN = "bb4cc78e5b35103c1f177db55e9cf08974e66563"
 CANDIDATES = "search/packer/candidates"
@@ -160,7 +164,7 @@ def test_each_certificate_is_below_its_house_and_smallest() -> None:
 def test_each_view_states_its_certificates_side_and_ties_it() -> None:
     packet = reports.packet_path(VIEWS)
     declaration = reports.load_declaration(packet)
-    assert declaration["source_key"] == KEY
+    assert declaration["source_key"] == VIEWS_KEY
     assert declaration["requested"] == declaration["replayed"] == VIEWED
     views = reports.read_facts(packet)
     certificates = reports.read_facts(reports.packet_path(NAME))
@@ -197,3 +201,67 @@ def test_the_retained_sharp_controls_meet_contact_and_refuse_1e30_past_it(
     for row in record["controls"]:
         assert row["as_expected"] is True
         assert set(row["routes"]) == set(kernel.ROUTES)
+
+
+REVIEW = reports.packet_path(NAME) / "review/review-2026-11-05"
+#: The 5 November review's frozen findings, as its README and the evidence cite them.
+FROZEN = "b699af79aaf21ead643f17187e8c4a7673a3594001e0ffdc012221a39f169f32"
+
+
+def test_the_review_programs_and_frozen_findings_are_the_ones_it_names() -> None:
+    """The review's programs are retained byte for byte under the digests its run listed,
+    and its findings under the digest it froze them with before reading earlier reviews."""
+    listed = {
+        path.removeprefix("./"): digest
+        for digest, path in (
+            line.split(maxsplit=1)
+            for line in (REVIEW / "out/program-digests.txt").read_text("utf-8").splitlines()
+        )
+    }
+    assert set(listed) == {path.name for path in (REVIEW / "programs").iterdir()}
+    for name, digest in listed.items():
+        assert hashlib.sha256((REVIEW / "programs" / name).read_bytes()).hexdigest() == digest
+    frozen = (REVIEW / "frozen-findings.sha256").read_text("utf-8").split()[0]
+    assert frozen == FROZEN
+    assert hashlib.sha256((REVIEW / "frozen-findings.md").read_bytes()).hexdigest() == FROZEN
+
+
+@pytest.mark.parametrize("name", sorted(DIGESTS))
+def test_the_review_decides_each_file_on_both_methods(name: str) -> None:
+    """Each of the thirteen files is accepted by both of the review's methods, pair by pair
+    in agreement, refused under the reversed rotation sense, and its controls pass."""
+    stem = name.removesuffix(".cert")
+    accepted = _json(REVIEW / f"out/feasibility/{stem}.json")
+    assert (accepted["sha256"], accepted["sense"], accepted["verdict"]) == (
+        DIGESTS[name],
+        1,
+        "accept",
+    )
+    assert accepted["methods_agree_pair_by_pair"] is True
+    n = accepted["n"]
+    assert accepted["pairs_expected"] == n * (n - 1) // 2
+    assert Fraction(accepted["side"]) == SIDES[n][0]
+    reversed_sense = _json(REVIEW / f"out/reversed-sense/{stem}.json")
+    assert (reversed_sense["sense"], reversed_sense["verdict"]) == (-1, "refuse")
+    assert reversed_sense["overlapping_pairs_count"] > 0
+    assert _json(REVIEW / f"out/controls/{stem}.json")["all_pass"] is True
+
+
+def test_the_cases_adopt_t267_to_t273() -> None:
+    """The pass of 5 November 2026 adopted six of the seven; 260, which the same day's
+    earlier pass had moved to T-265, moved to T-269 the next day, since a day's archive
+    holds one prior state a count."""
+    assert {n: houses.ADOPTED[n] for n in SIDES} == {
+        175: "T-267",
+        204: "T-268",
+        260: "T-269",
+        268: "T-270",
+        293: "T-271",
+        303: "T-272",
+        304: "T-273",
+    }
+    assert {n: houses.adopted_on(n) for n in SIDES} == {
+        n: "2026-11-06" if n == 260 else "2026-11-05" for n in SIDES
+    }
+    for n, (side, _print) in SIDES.items():
+        assert houses.side(n) == side

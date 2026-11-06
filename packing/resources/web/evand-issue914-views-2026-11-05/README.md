@@ -59,15 +59,16 @@ source’s checkers were not run.
 certificates’ packet’s `measure/identity-nNNN.json`. A measurement for credit; it decides
 nothing. Each pairs with its certificate by the optimal assignment with 3 to 8 squares
 beyond 0.1 (largest 0.332 to 0.623), one to one by nearest centres at 175, 204, 268, 303 and
-304 and not at 293. Each view is a candidate drawing for the regularization the adoption
-at its count runs.
+304 and not at 293. Each view’s certificate became its count’s house on 5 November 2026; whether a view is drawn was the strong generators’ to decide, and the regularizer’s drawn view reproduces this view at 175, every square within $10^{-9}$, and at 268 but for one square, and at 204 it is this view after a half turn (packing/cases/regularized_drawings/think-lrj4-2026-11-05/README.md).
 
 ## Credit and Licence
 
 MIT, copyright (c) 2026 Evan Daniel, by the licence the certificates’ packet retains.
 `CREDITS.md` says the repository’s work was “Produced by Claude (Anthropic) in a single
-session under human direction”. The views are Daniel’s regularizer’s, of his packings; the
-bibliography key is the certificates’, **[Daniel issue 914 2026-11-05]**.
+session under human direction”. The views are Daniel’s regularizer’s, of his packings,
+credited “Daniel after Deotte” under the views’ own key, **[Daniel issue 914 views
+2026-11-05]**, since each count’s house names one coverage entry; the certificates’ keys
+are in their packet.
 
 ## Commands
 

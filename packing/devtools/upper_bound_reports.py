@@ -1531,6 +1531,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # 204, 260, 268, 293, 303 and 304 (think-ahvh). The views packet of the same pin carries
     # the same key and no reader: its sides are these certificates'.
     "[Daniel issue 914 2026-11-05]": _import("evand-issue914-2026-11-05"),
+    # The release's 175 and 260 under keys of their own, whose credits are those counts'
+    # (F13 of the 5 November review), read from the same packet.
+    "[Daniel issue 914 n175 2026-11-05]": _import("evand-issue914-2026-11-05"),
+    "[Daniel issue 914 n260 2026-11-05]": _import("evand-issue914-2026-11-05"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

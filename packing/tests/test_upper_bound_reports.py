@@ -1484,7 +1484,13 @@ def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:
     assert len(readers) >= 35
     #: T-185's 175 is the 11 October release's certificate under a key of its own, read
     #: from that release's packet.
-    shared = {"[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]"}
+    shared = {
+        "[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]",
+        #: T-267's 175 and T-269's 260 are issue 914's certificates under keys of their own,
+        #: read from that release's packet (F13 of the 5 November review).
+        "[Daniel issue 914 n175 2026-11-05]": "[Daniel issue 914 2026-11-05]",
+        "[Daniel issue 914 n260 2026-11-05]": "[Daniel issue 914 2026-11-05]",
+    }
     for key, reader in readers.items():
         packet = reports.packet_path(reader.args[0])
         assert reports.load_declaration(packet)["source_key"] == shared.get(key, key)

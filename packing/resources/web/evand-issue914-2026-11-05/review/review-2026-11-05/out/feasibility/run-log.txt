@@ -1,0 +1,13 @@
+s175_1105 accept A accept {'separated': 15225, 'touching': 0, 'overlapping': 0} B accept {'empty': 15225, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.999999999999992e-21 cpu 4.61
+s204_trig1 accept A accept {'separated': 20706, 'touching': 0, 'overlapping': 0} B accept {'empty': 20706, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.999999999999992e-21 cpu 5.045
+s260_ks_1105 accept A accept {'separated': 33670, 'touching': 0, 'overlapping': 0} B accept {'empty': 33670, 'touching': 0, 'overlapping': 0} minwall 4.99e-13 mingap 9.989999999999999e-13 cpu 7.61
+s268_1105 accept A accept {'separated': 35778, 'touching': 0, 'overlapping': 0} B accept {'empty': 35778, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.99999999999999e-21 cpu 10.087
+s293_1105 accept A accept {'separated': 42778, 'touching': 0, 'overlapping': 0} B accept {'empty': 42778, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.999999999999992e-21 cpu 7.585
+s303_1105 accept A accept {'separated': 45753, 'touching': 0, 'overlapping': 0} B accept {'empty': 45753, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.99999999999999e-21 cpu 11.677
+s175_1105_regularized accept A accept {'separated': 15225, 'touching': 0, 'overlapping': 0} B accept {'empty': 15225, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.99999999999999e-21 cpu 3.335
+s304_1105 accept A accept {'separated': 46056, 'touching': 0, 'overlapping': 0} B accept {'empty': 46056, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.999999999999989e-21 cpu 11.848
+s204_trig1_regularized accept A accept {'separated': 20706, 'touching': 0, 'overlapping': 0} B accept {'empty': 20706, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.99999999999999e-21 cpu 5.251
+s268_1105_regularized accept A accept {'separated': 35778, 'touching': 0, 'overlapping': 0} B accept {'empty': 35778, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.999999999999989e-21 cpu 9.196
+s293_1105_regularized accept A accept {'separated': 42778, 'touching': 0, 'overlapping': 0} B accept {'empty': 42778, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.999999999999992e-21 cpu 8.41
+s303_1105_regularized accept A accept {'separated': 45753, 'touching': 0, 'overlapping': 0} B accept {'empty': 45753, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.999999999999987e-21 cpu 11.966
+s304_1105_regularized accept A accept {'separated': 46056, 'touching': 0, 'overlapping': 0} B accept {'empty': 46056, 'touching': 0, 'overlapping': 0} minwall 5e-21 mingap 9.999999999999989e-21 cpu 11.302

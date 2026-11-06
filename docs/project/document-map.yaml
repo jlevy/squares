@@ -240,6 +240,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-3guf-2026-10-31/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-ybep-2026-11-04/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-o7ly-2026-11-05/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-lrj4-2026-11-05/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-ruu2-2026-10-31/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
@@ -295,6 +296,7 @@ documents:
   - {path: docs/project/reviews/review-2026-11-04-ozden-893-894-299-204.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-05-yim-895-260.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-05-ozden-s94-9972.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-05-evand-914-seven.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md, role: review, authority: record, lifecycle: retained}
