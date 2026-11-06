@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 168
+version: 169
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -61,7 +61,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-05T23:54:18.834Z
+updated_at: 2026-11-06T00:54:11.706Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -297,3 +297,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-05 22:52 renewal (intake91): #914 registered T-267 to T-273 on #916 (green; all 7 certificates and 6 views pass both routes; budgets raised: results.html 1.6 MB, cases/260 355 KB). Strong-max review think-lrj4 is running.
 
 2026-11-05 23:52 renewal (intake92): think-lrj4 strong-max review accepted all seven of #914 (new arrangements, S3; F13 union credit to split per lineage). L51 is mapping it and adopting at 175, 204, 260, 268, 293, 303, 304.
+
+2026-11-06 00:52 renewal (intake93): a container restart (~00:00Z) interrupted L51 mid-adoption of #914; 65 uncommitted files survived, and L51 resumed (WIP commit first). #908 and #909 held for the owner.
