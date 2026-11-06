@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 172
+version: 173
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -61,7 +61,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-06T04:55:48.592Z
+updated_at: 2026-11-06T23:55:10.308Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -305,3 +305,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-06 03:52 renewal (intake96): #916 merged (e7875ff85; T-267 to T-273 V3/C3 and houses at 175, 204, 260, 268, 293, 303, 304); think-hgpg and think-lrj4 closed. L53 is posting the #914 reply plus supersession follow-ups (#894, #895 and others as listed) after deploy.
 
 2026-11-06 04:52 renewal (intake97): #917 merged (f30d6405d; #914 closing reply, #894 and #895 supersession follow-ups); think-ahvh closed. No lanes running. Remaining: #908 and #909 held for the owner (think-ux1v order, #543); think-93nb holds the deferred id-naming follow-ups (#422, #678, #806).
+
+2026-11-06 23:53 renewal (intake116): #920 merged (993d1cb7a; #918 and #919 empty template submissions recorded under think-e54k, author asked for the claim on #918; #919 left open as a duplicate, owner call). Otherwise quiet since #917.
