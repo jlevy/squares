@@ -2392,10 +2392,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # print holds his name back until the next infographics cut (think-tj4o), so no name
     # joins it yet. On 5 November 2026 the adoption at 260 (T-265) credits Kaelan Yim as
     # the improver of Evan Daniel's packing there, and the print holds his name back too.
-    # On 5 November 2026 the adoption of issue 914 (T-267 to T-273) draws 175, 204, 260,
-    # 268, 293, 303 and 304 from Evan Daniel's own packings and credits him alone there,
-    # so Özden at 204 and Yim at 260 are credited no more, and Lavrentev's and Tymchishin's
-    # names, which only 268, 303 and 304 credited, leave it.
+    # The adoption of issue 914 (T-267 to T-273) draws 175, 204, 268, 293, 303 and 304 on
+    # 5 November 2026 and 260 on 6 November 2026 from Evan Daniel's own packings and
+    # credits him alone there, so Özden at 204 and Yim at 260 are credited no more, and
+    # Lavrentev's and Tymchishin's names, which only 268, 303 and 304 credited, leave it.
     assert len(expected_names) == 28
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
@@ -2581,11 +2581,12 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     """think-tj4o: the case record and the bound citation credit Doğa Özden as the
     improver of Evan Daniel's packing at 299 (T-263). The posters' credit block holds
     exactly his name back until the next infographics cut. The hold held him at 204
-    (T-264) and Kaelan Yim at 260 (T-265, think-hgpg) until Daniel's own packings took both
-    counts on 5 November 2026 (T-268, T-269), and the records there credit Daniel alone,
-    so neither name is held or printed for them. The same adoption takes Vladislav
-    Lavrentev's and Kirill Tymchishin's names off the block, so released now Özden's name
-    changes the block's lines and keeps the drawn 1-100 canvas's height."""
+    (T-264) and Kaelan Yim at 260 (T-265, think-hgpg, now moot) until Daniel's own packings
+    took 204 on 5 November 2026 and 260 on 6 November 2026 (T-268, T-269), and the records
+    there credit Daniel alone, so neither name is held or printed for them. The same
+    adoption takes Vladislav Lavrentev's and Kirill Tymchishin's names off the block, so
+    released now Özden's name changes the block's lines and keeps the drawn 1-100 canvas's
+    height."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {299: ("Doğa Özden",)}
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
@@ -2655,7 +2656,9 @@ def test_the_print_credit_hold_cannot_outlive_its_edition(
     [refused] = problems([INFOGRAPHIC_VERSION, "v9.9.9"])
     assert "v9.9.9" in refused
     assert "think-tj4o" in refused
-    assert "think-hgpg" in refused
+    # think-hgpg is moot since 6 November 2026, when no current count credits Yim (#916).
+    assert "think-hgpg" not in refused
+    assert "overflows" not in refused
     monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
     assert problems(["v9.9.9"]) == []
 

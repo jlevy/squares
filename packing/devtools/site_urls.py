@@ -82,10 +82,11 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "run 42112356624 on 5 November 2026, past the 300,000 record ceiling, once T-269 "
             "(#914) is registered beside T-265's house section, before any adoption. An "
             "adoption grows a case page by 27 to 33 KB (cases/204.html's measurements), so "
-            "the ceiling moves to 355,000 as a measured choice: T-269's adoption, which "
-            "think-lrj4 queues, at the larger growth with about 16 KB to spare. Its timing "
-            "was not re-measured; how a page that grows with every adoption scales is "
-            "think-rp0d's question."
+            "the ceiling moves to 355,000 as a measured choice, for T-269's adoption. After "
+            "that adoption, on 6 November 2026 (think-lrj4), the page measures 326,413 "
+            "bytes, 28,587 below the ceiling, less than one more adoption at the larger "
+            "growth. Its timing was not re-measured; how a page that grows with every "
+            "adoption scales is think-rp0d's question."
         ),
     ),
     "cases/204.html": (
@@ -98,12 +99,14 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "November 2026 after T-264's, 26,723 bytes more, since the new section lists "
             "every other side and every earlier section gains the new one. The record "
             "keeps every earlier house's section as history, so each adoption grows the "
-            "page by 27 to 33 KB (32,981 bytes at T-257's). The ceiling moves to 430,000 "
-            "as a measured choice: one more adoption at that growth, which think-w64i's "
-            "queued 204 candidate would be, with 16 to 22 KB to spare. Its timing was not "
-            "re-measured. How a "
-            "page that grows with every adoption scales is the question think-rp0d asks "
-            "of result/t-046.html."
+            "page by 27 to 33 KB (32,981 bytes at T-257's). The ceiling moved to 430,000 "
+            "as a measured choice for one more adoption at that growth. T-268's adoption "
+            "(#914, think-lrj4) used it on 5 November 2026: the page measures 410,384 "
+            "bytes, 19,616 below the ceiling, less than one more adoption, so the next "
+            "adoption at 204 moves the ceiling as its own measured choice (think-w64i's "
+            "candidate, above T-268's side, is no longer one). Its timing was not "
+            "re-measured. How a page that grows with every adoption scales is the question "
+            "think-rp0d asks of result/t-046.html and of these case pages."
         ),
     ),
     "result/t-007.html": (
@@ -184,7 +187,10 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "bytes at a 90th-percentile row of 4,661 bytes. The ceiling moves to 1,600,000 as "
             "the same measured choice, which leaves 88,606 source bytes, 18 rows at that row "
             "cost with a margin, so the room runs through 291 results; its timing was not "
-            "re-measured, and the lightening stays think-v1qe's. "
+            "re-measured, and the lightening stays think-v1qe's. After the review and the "
+            "adoptions of the same seven results the page measures 1,512,211 bytes on 6 "
+            "November 2026, so 18 rows at 4,661 bytes reach 1,596,109, 3,891 bytes below "
+            "the ceiling at 291 results, less than one row. "
             "On 26 October 2026 the 250-result page measures 1,418,298 bytes, past the "
             "1,400,000 ceiling with T-248 to T-251, at a 90th-percentile row of 4,674 "
             "bytes; recent arrivals live on their own page and cost the archive nothing. "

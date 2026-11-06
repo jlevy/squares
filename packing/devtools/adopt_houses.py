@@ -2288,7 +2288,7 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-193 of T-174 of T-136, SQUISH's own packing (T-174's item measured, none moved).
     259: _exact_form(SQUISH, (PINGYOU, DANIEL), "Nate Chaoweeraprasit’s SQUISH"),
-    # T-269 (adopted on 5 November 2026, after T-265 that day), Evan Daniel's new packing of
+    # T-269 (adopted on 6 November 2026, the day after T-265), Evan Daniel's new packing of
     # issue 914, which his fault-line composer built around the tilted island of his issue 845
     # packing, half-turned and raised one unit, the frame rebuilt: one to one with neither
     # T-265's nor T-257's packing under any symmetry (the 5 November review's F8), so a new

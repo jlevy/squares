@@ -2791,8 +2791,11 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: the truthful record, `improved_by` included. The case records, the case pages, the bound
 #: citations and the site credit every name. Doğa Özden improved Evan Daniel's packing at
 #: 299 (T-263), adopted on 4 November 2026 (think-tj4o). The hold held him at 204 too
-#: (T-264), and Kaelan Yim at 260 (T-265, think-hgpg), until Evan Daniel's own packings
-#: took both counts on 5 November 2026 (T-268, T-269), crediting neither name there.
+#: (T-264), and Kaelan Yim at 260 (T-265, think-hgpg, now moot), until Evan Daniel's own
+#: packings took 204 on 5 November 2026 and 260 on 6 November 2026 (T-268, T-269),
+#: crediting neither name there. Measured on 6 November 2026, the block fits Özden's name
+#: in its three lines and the 1-100 canvas keeps its height whether the hold stands or is
+#: emptied.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     299: ("Doğa Özden",),
 }
@@ -2811,10 +2814,10 @@ def print_credit_hold_problems(versions: Sequence[str]) -> list[str]:
     if not PRINT_CREDIT_HELD:
         return []
     return [
-        f"the print-credit hold (PRINT_CREDIT_HELD, think-tj4o and think-hgpg) was set for "
-        f"the {PRINT_CREDIT_HELD_FOR} posters; posters of {version} credit every name, so "
-        "the cut that draws them empties the hold and lays the credit block out for every "
-        "name it held, which overflows its three lines as drawn"
+        f"the print-credit hold (PRINT_CREDIT_HELD, think-tj4o) was set for the "
+        f"{PRINT_CREDIT_HELD_FOR} posters; posters of {version} credit every name, so the "
+        "cut that draws them empties the hold and lays the credit block out again with "
+        "every name it held"
         for version in sorted(set(versions))
         if version != PRINT_CREDIT_HELD_FOR
     ]

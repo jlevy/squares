@@ -626,12 +626,12 @@ def _sources() -> dict[str, Source]:
         # left on 31 October; T-257 still houses 172, 260 and 293.
         packet_source("T-263", "ozden-s299-upper-bound-2026-11-03"),
         # The adoption of 5 November 2026 (think-o7ly) moved 260 to T-265, Kaelan Yim's
-        # further arrangement of issue 895 of Evan Daniel's T-257 packing. The adoption of 5
-        # November 2026 (think-lrj4) then moved 175, 204, 260, 268, 293, 303 and 304 to Evan
-        # Daniel's new packings of issue 914, T-267 to T-273, so T-264 and T-265 are no
-        # source here now; T-257 still houses 172, and T-186 its other counts. Its 175 and
-        # 260 are under keys of their own, whose credits are those counts' (F13 of the 5
-        # November review), read from the same packet.
+        # further arrangement of issue 895 of Evan Daniel's T-257 packing. The adoption of
+        # issue 914 (think-lrj4) then moved 175, 204, 268, 293, 303 and 304 on 5 November
+        # 2026 and 260 on 6 November 2026 to Evan Daniel's new packings, T-267 to T-273, so
+        # T-264 and T-265 are no source here now; T-257 still houses 172, and T-186 its
+        # other counts. Its 175 and 260 are under keys of their own, whose credits are those
+        # counts' (F13 of the 5 November review), read from the same packet.
         _keyed(
             packet_source("T-267", "evand-issue914-2026-11-05"),
             "[Daniel issue 914 n175 2026-11-05]",
