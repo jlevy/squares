@@ -429,6 +429,13 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # T-266's s(94) >= 2493/250 supersedes Özden's 1993/200 (T-262) at n = 94, its
         # one count, in both lanes.
         "T-262",
+        # The adoption of issue 914 on 5 and 6 November 2026 took the last houses of
+        # Francisco Couzo's #763 certificate (T-240), Evan Daniel's Kaggle descents (T-242),
+        # Doğa Özden's 204 (T-264) and Kaelan Yim's 260 (T-265).
+        "T-240",
+        "T-242",
+        "T-264",
+        "T-265",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -488,6 +495,10 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # The adoption of 4 November 2026 took 299, the only house of Evan Daniel's update
     # (T-258), to Doğa Özden's further arrangement of it (T-263), which supersedes it, and
     # 204 to Özden's of #845's (T-264); T-257 keeps 172, 260 and 293.
+    # The adoption of issue 914 took 175, 204, 268, 293, 303 and 304 on 5 November 2026
+    # and 260 on 6 November 2026 to Evan Daniel's certificates (T-267 to T-273): the last
+    # houses of T-240 (303), T-242 (268 and 304), T-264 (204) and T-265 (260), which they
+    # supersede; T-186 and T-257 keep their other houses.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records
