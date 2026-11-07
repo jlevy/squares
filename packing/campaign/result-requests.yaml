@@ -28839,7 +28839,7 @@ issues:
       research and a competition with the construction credits kept; and whether the project
       has already collected permissions or notices that should go with a redistributed
       coordinate file. It reports no result.
-    read_through: '2026-11-07T05:10:58Z'
+    read_through: '2026-11-07T07:24:06Z'
     results: []
     asks:
     - what: >-
@@ -28852,14 +28852,19 @@ issues:
       bead: think-8h80
       note: >-
         A licensing question only the owner can answer. No reply was posted in intake lane
-        L55; the stage 7 acknowledgement after this record merges says the question was
-        received and that the answer on reuse terms is the owner's, and states no terms. L55
-        prepared a factual brief of what the record documents (no legal advice) for the
-        owner, summarised on think-8h80.
+        L55; the stage 7 acknowledgement, posted on 7 November 2026 after this record merged
+        (intake lane L56), says the question was received and that the answer on reuse terms
+        is the owner's, and states no terms. L55 prepared a factual brief of what the record
+        documents (no legal advice) for the owner, summarised on think-8h80.
     beads:
     - think-8h80
     answer_bead: think-8h80
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/921#issuecomment-6703882607
+      date: '2026-11-07'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
     blocked:
       type: owner-decision
       reason: >-
@@ -28871,9 +28876,10 @@ issues:
     notes: >-
       Read on 7 November 2026 (intake lane L55); no comment had been posted, and the intake
       coordinator had added `blocked:owner-decision` that day, before L55 started. No reply
-      was posted in L55; the stage 7 acknowledgement after this record merges says the
-      question was received and that the answer on reuse terms is the owner's, and states no
-      terms. The record's facts the owner may want follow.
+      was posted in L55; the stage 7 acknowledgement, posted on 7 November 2026 after this
+      record merged (intake lane L56), says the question was received and that the answer on
+      reuse terms is the owner's, and states no terms. The record's facts the owner may want
+      follow.
 
       LICENSE grants CC BY 4.0 for the repository's records and data and excludes
       packing/resources/. It also excludes vendor/evand-regularize/, and says the rows there
