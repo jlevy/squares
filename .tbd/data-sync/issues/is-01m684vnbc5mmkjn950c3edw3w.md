@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 177
+version: 178
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -63,7 +63,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-07T07:55:05.004Z
+updated_at: 2026-11-07T16:54:30.657Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -312,3 +312,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-07 06:54Z hourly renewal (intake123): no new issues or PRs beyond #921. #921 is recorded in draft PR #922 (L55; bead think-8h80, owner decision on reuse terms). The senior review asked for fact corrections (raw Kingbird SVG retention, the LICENSE Ellsworth carve-out, the scope of the Couzo presumption, ask wording) and for the PR's blocked label to be removed. The label is off, and a moderate lane is addressing the rest. A stage-7 acknowledgement (no terms stated) follows the merge. New bead think-8nim (owner decision): raw Ellsworth SVGs kept in papers/ (x2) and the E. Summins packet (x21). Unchanged and still held on the owner: #908/#909 (think-4ul6 blocker resolved, but held by think-ux1v), #543, #919, #574, #599, #744, #809.
 
 2026-11-07 07:53Z hourly renewal (intake124): #922 (record of #921) and #923 (acknowledgement posted on #921, states no terms) merged; main 172d737be. The sweep shows 0 items without an owner. No new issues or PRs. Every open PR (#908, #909, #744, #599, #809, #574) is held for the owner. The owner decisions pending are #921 terms (think-8h80), #908/#909, #543, #919 and think-8nim.
+
+2026-11-07 08:53Z to 16:53Z hourly renewals (intake125 to intake133): nine identical sweeps. Main is unchanged at 172d737be. No new issues, PRs or comments, and 0 items without an owner. Everything open waits on the owner: #921 terms (think-8h80), #908/#909, #543, #919 and think-8nim.
