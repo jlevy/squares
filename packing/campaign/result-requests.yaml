@@ -28824,3 +28824,55 @@ issues:
       6 November (intake lane L54) points the author to #918. It is left open: neither the
       runbook (campaign/result-import.md, stage 7, which closes an issue once answered) nor
       any entry here closes a duplicate submission, so closing it waits on that being decided.
+  - number: 921
+    title: Clarification of reuse terms for third-party numerical packing witnesses
+    author: nicolasalonsof84-a11y
+    opened: '2026-11-07'
+    state: open
+    kind: other
+    triage: done
+    summary: >-
+      Nicolas Alonso (NOVA ERA, an independent research project) asks which reuse terms
+      apply to numerical witnesses derived from the Kingbird catalogue and Francisco Couzo's
+      n152 source, at the seeds n = 11, 17, 37, 39, 41, 50, 54, 55, 71, 107, 152, 171, 235
+      and 291, some extended by a band of unit squares, which he would use and adapt for
+      research and a competition with the construction credits kept; and which permissions or
+      notices the project has collected that should go with a redistributed coordinate file.
+      It reports no result.
+    read_through: '2026-11-07T05:10:58Z'
+    results: []
+    asks:
+    - what: >-
+        Say which reuse terms the project holds or has documented for numerical witnesses
+        derived from the Kingbird catalogue and Couzo's n152 source, and which permissions or
+        notices should accompany a redistributed coordinate file.
+      state: queued
+      source: body
+      bead: think-8h80
+      note: >-
+        A licensing question only the owner can answer; no reply is posted until the owner
+        decides. Intake lane L55 prepared a factual brief of what the record documents
+        (no legal advice) for the owner, held on think-8h80.
+    beads:
+    - think-8h80
+    answer_bead: think-8h80
+    replies: []
+    blocked:
+      type: owner-decision
+      reason: >-
+        Which reuse terms the project states for Kingbird- and Couzo-derived witnesses, and
+        what notices accompany them: the owner's answer (think-8h80)
+    close_when: >-
+      The owner has decided what the project says about reuse of these witnesses, and the
+      reply on the issue says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 7 November 2026 (intake lane L55); no comment had been posted and the issue
+      already carried `blocked:owner-decision`. No acknowledgement is posted: the only answer
+      is the owner's. The record's facts the owner may want: the repository LICENSE grants
+      CC BY 4.0 for its records and data and excludes packing/resources/; conventions.md
+      section 6 (owner decision 2026-09-10) holds that a source's licence governs its bytes,
+      not the coordinates extracted from it; the Kingbird catalogue states no reuse terms and
+      only derived facts are retained (known-best-packings README); Couzo's repository
+      publishes no licence for its data, and the owner's presumption of permission from
+      submission (think-cnn7, licence follow-up think-m8f4, still open) covers retention here,
+      not redistribution by others.

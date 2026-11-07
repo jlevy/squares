@@ -1,0 +1,17 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L55 of 7 November: #921, Nicolas Alonso's question about the reuse terms of
+  witnesses derived from the Kingbird catalogue and Francisco Couzo's n152 source, is
+  entered as kind other with no results, a queued ask and blocked: owner-decision
+  (think-8h80). Nothing is posted. No result, rung, side, bound, mark or credit changes.
+  Against main 993d1cb7a (#920): rendered by devtools.compare_paper_renders with
+  render_packing_methods, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM),
+  twice from this tree and once with that main's result-requests.yaml swapped in: 43
+  files each, all byte-identical across the three. No PDF was printed; it prints from
+  that HTML. The paper keeps its version, v0.2.7.
