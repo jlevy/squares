@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 175
+version: 176
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -63,7 +63,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-07T06:37:19.478Z
+updated_at: 2026-11-07T06:56:00.780Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -309,3 +309,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-06 04:52 renewal (intake97): #917 merged (f30d6405d; #914 closing reply, #894 and #895 supersession follow-ups); think-ahvh closed. No lanes running. Remaining: #908 and #909 held for the owner (think-ux1v order, #543); think-93nb holds the deferred id-naming follow-ups (#422, #678, #806).
 
 2026-11-06 23:53 renewal (intake116): #920 merged (993d1cb7a; #918 and #919 empty template submissions recorded under think-e54k, author asked for the claim on #918; #919 left open as a duplicate, owner call). Otherwise quiet since #917.
+2026-11-07 06:54Z hourly renewal (intake123): no new issues or PRs beyond #921. #921 is recorded in draft PR #922 (L55; bead think-8h80, owner decision on reuse terms). The senior review asked for fact corrections (raw Kingbird SVG retention, the LICENSE Ellsworth carve-out, the scope of the Couzo presumption, ask wording) and for the PR's blocked label to be removed. The label is off, and a moderate lane is addressing the rest. A stage-7 acknowledgement (no terms stated) follows the merge. New bead think-8nim (owner decision): raw Ellsworth SVGs kept in papers/ (x2) and the E. Summins packet (x21). Unchanged and still held on the owner: #908/#909 (think-4ul6 blocker resolved, but held by think-ux1v), #543, #919, #574, #599, #744, #809.
