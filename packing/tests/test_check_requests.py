@@ -2091,7 +2091,8 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
     and #535 and #537 joined them on the owner's decision after #829's imports the same
     day; #666, #715 and #719 joined them on 31 October, held by the owner's open D3 to D5
     above 1024 (think-f2io), and #846 the same day as an owner decision (think-ikku). #779
-    left them on 4 November, closed when #889 landed T-179's replay (think-u0av). Each
+    left them on 4 November, closed when #889 landed T-179's replay (think-u0av). #921
+    joined them on 7 November as an owner decision on reuse terms (think-8h80). Each
     carries its type, and the label taxonomy names every type the record uses."""
     by_type: dict[str, set[int]] = {}
     for entry in check_requests.load_record()["issues"]:
@@ -2099,7 +2100,7 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
             assert entry["state"] == "open", entry["number"]
             by_type.setdefault(entry["blocked"]["type"], set()).add(entry["number"])
     assert {kind: len(numbers) for kind, numbers in by_type.items()} == {
-        "owner-decision": 24,
+        "owner-decision": 25,
         "owner-reply": 2,
         "standing-hold": 9,
         "author": 1,

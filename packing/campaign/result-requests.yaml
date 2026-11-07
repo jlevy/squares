@@ -28824,3 +28824,80 @@ issues:
       6 November (intake lane L54) points the author to #918. It is left open: neither the
       runbook (campaign/result-import.md, stage 7, which closes an issue once answered) nor
       any entry here closes a duplicate submission, so closing it waits on that being decided.
+  - number: 921
+    title: Clarification of reuse terms for third-party numerical packing witnesses
+    author: nicolasalonsof84-a11y
+    opened: '2026-11-07'
+    state: open
+    kind: other
+    triage: done
+    summary: >-
+      Nicolas Alonso (NOVA ERA, an independent research project) asks which reuse terms
+      apply to numerical witnesses derived from the Kingbird catalogue and Francisco Couzo's
+      n152 source, at the seeds n = 11, 17, 37, 39, 41, 50, 54, 55, 71, 107, 152, 171, 235
+      and 291, some extended by a band of unit squares, which he would use and adapt for
+      research and a competition with the construction credits kept; and whether the project
+      has already collected permissions or notices that should go with a redistributed
+      coordinate file. It reports no result.
+    read_through: '2026-11-07T05:10:58Z'
+    results: []
+    asks:
+    - what: >-
+        Say which reuse terms the project holds or has documented for numerical witnesses
+        derived from the Kingbird catalogue and Couzo's n152 source, and whether the project
+        has collected permissions or notices that should accompany a redistributed
+        coordinate file.
+      state: queued
+      source: body
+      bead: think-8h80
+      note: >-
+        A licensing question only the owner can answer. No reply was posted in intake lane
+        L55; the stage 7 acknowledgement after this record merges says the question was
+        received and that the answer on reuse terms is the owner's, and states no terms. L55
+        prepared a factual brief of what the record documents (no legal advice) for the
+        owner, summarised on think-8h80.
+    beads:
+    - think-8h80
+    answer_bead: think-8h80
+    replies: []
+    blocked:
+      type: owner-decision
+      reason: >-
+        Which reuse terms the project states for Kingbird- and Couzo-derived witnesses, and
+        whether any notices should accompany them: the owner's answer (think-8h80)
+    close_when: >-
+      The owner has decided what the project says about reuse of these witnesses, and the
+      reply on the issue says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 7 November 2026 (intake lane L55); no comment had been posted, and the intake
+      coordinator had added `blocked:owner-decision` that day, before L55 started. No reply
+      was posted in L55; the stage 7 acknowledgement after this record merges says the
+      question was received and that the answer on reuse terms is the owner's, and states no
+      terms. The record's facts the owner may want follow.
+
+      LICENSE grants CC BY 4.0 for the repository's records and data and excludes
+      packing/resources/. It also excludes vendor/evand-regularize/, and says the rows there
+      that derive from David Ellsworth's catalogue remain his and are covered by no grant in
+      the file (LICENSE, lines 22-37); vendor/evand-regularize/README.md (lines 68-69)
+      describes this project's known-best witnesses as CC BY 4.0. LICENSE does not say
+      whether its grant reaches coordinates derived from third-party sources, and the same
+      Couzo n = 152 facts sit both inside packing/resources/ and in packing/witnesses/.
+      conventions.md section 6 (owner decision 2026-09-10) holds that a source's licence
+      governs its bytes, not the coordinates extracted from it.
+
+      The known-best source inventory keeps no raw Kingbird SVG, only attributed metadata
+      and derived centre-and-angle facts, as a conservative retention policy and not a legal
+      conclusion (known-best-packings README). No reuse terms were found where checked (the
+      2026-08-26 review). packing/resources/ separately keeps Kingbird catalogue page
+      captures and the n = 11 and n = 29 provenance SVGs, and 21 Ellsworth SVGs came in
+      within the E. Summins packet; think-8nim tracks the disposition of those SVGs.
+
+      Couzo's repository publishes no licence. The packet of 27 September keeps his n = 152
+      packing as derived facts only (franciscouzo-square-packing-2026-09-27 README), and the
+      packet of 9 October keeps his n = 152 certificate byte for byte as factual data under
+      the owner decision of 2026-10-09 (couzo-exact-certificates-2026-10-09 README). The
+      reported bound at n = 152 is Evan Daniel's exact refinement of that packing
+      ([evand exact optima 2026-10-05], recorded as MIT). The owner's presumption of
+      permission from submission (24 October, #763; think-cnn7, licence follow-up
+      think-m8f4, still open) is stated as permission to retain and import; the record says
+      nothing about reuse by others.
