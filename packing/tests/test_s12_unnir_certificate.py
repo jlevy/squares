@@ -216,15 +216,19 @@ def test_every_checker_refuses_each_coverage_control(name: str) -> None:
         assert Fraction(int(least.group(1)), int(least.group(2))) < 1
         assert "exit 1" in _footer(path)
 
+    # Single-bin runs of verify can print no verdict; at least one bin refuses, and the
+    # regrid's bin 39531, which passes, is kept beside its refusing bin 0.
     daniel = sorted(CONTROLS.glob(f"daniel-verify-{name}-bin-*.log"))
     assert daniel
+    refused = 0
     for path in daniel:
         body = _body(path)
-        fails = re.findall(r"FAIL at angle k=\d+: covered (\d+)/(\d+)", body)
-        assert fails
-        assert all(Fraction(int(a), int(b)) < 1 for a, b in fails)
-        assert "NOT VERIFIED" in body
+        assert "PARTIAL RUN" in body
         assert "\nVERIFIED" not in body
+        fails = re.findall(r"FAIL at angle k=\d+: covered (\d+)/(\d+)", body)
+        assert all(Fraction(int(a), int(b)) < 1 for a, b in fails)
+        refused += bool(fails)
+    assert refused
 
     receipt = json.loads((CONTROLS / f"native-{name}.json").read_text(encoding="utf-8"))
     assert receipt["status"] == "UNRESOLVED"
