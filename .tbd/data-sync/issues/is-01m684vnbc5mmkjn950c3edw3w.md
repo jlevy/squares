@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 179
+version: 180
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -64,7 +64,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-08T14:54:57.840Z
+updated_at: 2026-11-08T23:08:17.857Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -315,3 +315,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-07 07:53Z hourly renewal (intake124): #922 (record of #921) and #923 (acknowledgement posted on #921, states no terms) merged; main 172d737be. The sweep shows 0 items without an owner. No new issues or PRs. Every open PR (#908, #909, #744, #599, #809, #574) is held for the owner. The owner decisions pending are #921 terms (think-8h80), #908/#909, #543, #919 and think-8nim.
 
 2026-11-07 08:53Z to 16:53Z hourly renewals (intake125 to intake133): nine identical sweeps. Main is unchanged at 172d737be. No new issues, PRs or comments, and 0 items without an owner. Everything open waits on the owner: #921 terms (think-8h80), #908/#909, #543, #919 and think-8nim.
+
+2026-11-08 (L57-L62): #924 (unnir, s(12) >= 9929/2500) imported as T-274 at V3/C3 via PR #925 (merged 268a0ef1b after L58 blind stage-4 review, L59 senior review "merge after fixes", L60 addressing pass, green CI). Replays: Daniel's verify (overflow checks) VERIFIED 39,765 bins; native parent-core PASS_COMPLETE all rows; indep_scan VERIFIED 96,000 bins byte-identical to cpp.log; four controls refused; ~16.5 CPU-h. n = 12 verified lower bound moves from T-095 7943/2000 to 9929/2500; reported lower bound stays T-245's 4. Reply posted after Pages deploy + verify-deployment (issuecomment-6728443003) and #924 closed completed. Records PR by L62 in flight. Follow-ups filed: think-y27o (review-check gap: verified_lane_review_problems accepts a method review via proof.audit_record), think-6vhj (credit-attributions refresh for T-274 before think-wvsa redraw), think-1bfs (suite shard 4 at the 10% unrecorded guard). Owner decisions still pending: #921 terms (think-8h80), #908/#909 order, #543 enclosure rule, #919 dup of #918, think-8nim SVG disposition.
