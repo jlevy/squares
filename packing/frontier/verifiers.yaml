@@ -406,8 +406,18 @@ verifiers:
       arrangement sweep in each bin.
     source:
       - packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/src/main.rs
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/rust/src/main.rs
     versions:
       - {sha256: 226ef3f1209933dadb986c963cc1c5b52b86a06686f546441157378311fcc94c}
+      - sha256: aca2fa6f8b42d7973f299a5332d8f7ef200409a0a04fb6eb21d703ff9c8dabc0
+        revision: 0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d
+        path: packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/rust/src/main.rs
+        note: >-
+          verify/src/main.rs at evand/square-packing 0e76d9fe (Git blob f7c700c8), as
+          unnir's s(12) packet vendors it; it differs from 226ef3f1 only by upstream commit
+          cca7bf1 of 7 October 2026, which says in the doc comment that the square is
+          closed and makes the program exit 1 on a refused complete sweep and 4 on a
+          partial run, where it exited 0 whatever its verdict. Nothing it computes changed.
 
   - id: V-evand-xcheck-py
     program: xcheck.py
@@ -910,6 +920,35 @@ verifiers:
       - packing/resources/web/squarepacker-s12-lower-bound-2026-10-02/s12-lower-bound/tools/indep_check.cpp
     versions:
       - {sha256: 21527e8d86214dd5612e523217a6266f56dfa95beb11ade34d66e20303d2ea96}
+
+  - id: V-squarepacker-indep-scan-cpp
+    program: indep_scan.cpp
+    author: squarepacker
+    provenance: external
+    language: [C++]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      indep_check.cpp with three optional arguments that restrict the sweep to a range of
+      bins and print each bin below a threshold; given only the certificate, N, Q and n it
+      sweeps every bin of [0, 90] degrees with no symmetry reduction, as indep_check does.
+    source:
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/cpp/indep_scan.cpp
+      - packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/tools/indep_scan.cpp
+    versions:
+      - sha256: 74146d48aa46287514ea44fcfdab6ed66ff687ccca46f24347dd8b1cf923ac61
+        note: >-
+          unnir's s(12) packet's copy, the 7a96bec3 file with its one include of
+          bits/stdc++.h replaced by ten standard headers and nothing else changed
+      - sha256: 35465554962a0c64e22c6275f3da81be10fa1641ef00776dadf3027de790cbbe
+        revision: 7a96bec36bc6811c3715ef581598f22ff9b7ba3a
+        path: packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/tools/indep_scan.cpp
+        note: >-
+          squarepacker/s12-lower-bound v1.1, where its range-restricted run was the weight
+          search's stopping rule (T-095)
+    note: >-
+      A range-restricted run prints VERIFIED for its range alone, so a receipt is read by
+      its arguments as well as its verdict line.
 
   - id: V-schadt-n29-check-py
     program: check.py
@@ -3887,6 +3926,25 @@ verifiers:
       controls rebuilt byte for byte.
     source: [packing/devtools/audit_s12_v11_certificate.py]
     note: It shares only the file reader and the D4 test with devtools.audit_s12_rescaled_certificate, and nothing with the source's tools.
+
+  - id: V-audit-s12-unnir
+    program: devtools.audit_s12_unnir_certificate
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Decides everything unnir's s(12) certificate rests on but coverage, in integers and
+      Fraction: its bytes, the header and side, positivity, containment, distinctness, D4
+      invariance and orbits, the total below 12, an admissible pose of bin 39531 capturing
+      exactly one over every open cell of its arrangement in a window, and the four
+      controls, the source's two rebuilt as its replay helper writes them.
+    source: [packing/devtools/audit_s12_unnir_certificate.py]
+    note: >-
+      It shares the file reader and the D4 test with devtools.audit_s12_rescaled_certificate,
+      the orbit grouping with devtools.audit_s12_v11_certificate and Daniel's sigma rounding
+      with devtools.verify_evand_angle_net_native, and nothing with the source's tools.
 
   - id: V-compare-evand-s32-sweep
     program: devtools.compare_evand_s32_sweep

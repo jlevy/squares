@@ -18295,6 +18295,74 @@ evidence:
       the bound; Daniel's verifier and the native interval run decide it.
     source_reviewed: '2026-10-05'
 
+  - id: E-n012-unnir-9929-2500-report
+    claim: lower-bound
+    scope: {n_values: [12]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[unnir s12 2026-11-08]'
+    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    replay_status: not-attempted
+    verifiers: [V-evand-angle-net-verify, V-squarepacker-indep-scan-cpp]
+    limitations: >-
+      unnir/s12-lower-bound-3.9716 at 064c2955670765321aaf1c0a2d5c778949daab6b (its only
+      commit, 2026-11-08T14:20:03Z), by unnir (Numaro), claims s(12) >= 9929/2500 = 3.9716
+      from certificate/s12_lower_3.9716.txt: 4,996 D4-symmetric points on the grid
+      1/4000000 in the container 15886400/4000000, W = 9985226, total 119787760/9985226 <
+      12. The source reports Daniel's verify, vendored from evand/square-packing 0e76d9fe
+      and built with overflow checks, accepting it at N = 96000 over all 39,765 bins on 10
+      threads, and Ryu Sungjoon's indep_scan.cpp, from squarepacker/s12-lower-bound
+      7a96bec3 with one include line changed, accepting it over all 96,000 bins of [0, 90]
+      degrees on one thread, each with least captured weight exactly 9985226/9985226 at bin
+      39531; and two controls refused: W doubled, refused at the single bin 39531 with
+      capture 1/2 (a partial run of each checker), and the last point dropped, refused by
+      both parsers. It calls the two checks separately written but not method-distinct, and
+      producer evidence. The exact premises were audited here
+      (E-n012-unnir-9929-2500-audit); this entry preserves the source claim, and the local
+      replays are recorded separately.
+    source_reviewed: '2026-11-08'
+
+  - id: E-n012-unnir-9929-2500-audit
+    claim: derived-structure
+    scope: {n_values: [12]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[unnir s12 2026-11-08]'
+    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    replay: >-
+      A premise check, not a replay of the coverage decision. From packing/:
+      uv run --frozen --all-extras --group dev python -m devtools.audit_s12_unnir_certificate
+      --output OUT.json, which must print PASS for all 16 checks and equal the packet's
+      receipts/preflight.json; with --write-controls DIR it also writes the four controls
+      whose digests the packet's control receipts name.
+    replay_status: passed
+    verifiers: [V-audit-s12-unnir]
+    limitations: >-
+      Premise evidence only, decided in integers and Fraction from the retained bytes: the
+      certificate's digest and canonical rendering, the header (side 15886400/4000000 =
+      9929/2500, D = 4000000, W = 9985226, 4,996 points), the advance 1/10000 over T-095,
+      positive weights (the least 1/9985226), distinct points in the closed container, D4
+      invariance in 636 orbits (613 of eight points, 23 of four), and the total
+      119787760/9985226, below 12 by 34952/9985226. At bin 39531 of N = 96000 it finds,
+      over all 117 open cells of the arrangement in a window of half side 1/1000 around
+      the producer's diagnostic centre, a pose where a unit square at the bin's left angle
+      fits whose test square (Daniel's sigma, 499991/500000) captures 767 points of total
+      weight exactly 9985226/9985226: the reported minimum is attained, so the certificate
+      has no slack there. It builds the four controls (the source's two as its replay
+      helper writes them, the eight-point orbit of the heaviest point captured there, two
+      of whose points it captures, lowered by 1/9985226 a point, and the same integers
+      read over D = 3999600) and decides no coverage; Daniel's verifier and the native
+      interval run decide it.
+    source_reviewed: '2026-11-08'
+
   - id: E-n012-jatloe-lean-report
     claim: exact-value
     scope: {n_values: [12]}
