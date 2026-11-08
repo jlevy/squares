@@ -31,7 +31,10 @@ container multiplied by ``7902/7901``, which its producer's checkers refuse at
 ``N = 24000``, and every row is the same construction at that net. ``s12-v11`` is
 squarepacker's v1.1 certificate of jlevy/squares#363, Daniel's points dilated to the
 container ``7943/2000`` with new weights, which its producer's checkers accept at
-``N = 96000``, the net its case carries. ``--certificate`` and
+``N = 96000``, the net its case carries. ``s12-unnir`` is unnir's certificate of
+jlevy/squares#924, 4,996 new points over the container ``9929/2500``, which its
+producer's checkers accept at ``N = 96000`` with least captured weight exactly one at
+bin ``39531``. ``--certificate`` and
 ``--certificate-sha256`` run a case's net and count on another file of the same format,
 pinned by its digest on the command line, which is how a mutated control is decided.
 
@@ -83,6 +86,7 @@ RESCALED = (
     REPO / "packing/resources/web/squarepacker-s12-lower-bound-2026-10-02/s12-lower-bound"
 )
 V11 = REPO / "packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound"
+UNNIR = REPO / "packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716"
 #: The source's net and its sigma rounding, as `verify/src/main.rs` `bin_geometry` has them.
 NET = 6000
 SIGMA_SCALE = 1_000_000
@@ -136,6 +140,16 @@ CASES = {
         96000,
         "https://github.com/squarepacker/s12-lower-bound",
         "7a96bec36bc6811c3715ef581598f22ff9b7ba3a",
+    ),
+    "s12-unnir": Case(
+        12,
+        UNNIR / "certificate/s12_lower_3.9716.txt",
+        "833b76a179a420a40775cc76305ec9ffb7f6ea27472e587958c234c4c4712cbd",
+        "9985226/9985226",
+        39531,
+        96000,
+        "https://github.com/unnir/s12-lower-bound-3.9716",
+        "064c2955670765321aaf1c0a2d5c778949daab6b",
     ),
 }
 

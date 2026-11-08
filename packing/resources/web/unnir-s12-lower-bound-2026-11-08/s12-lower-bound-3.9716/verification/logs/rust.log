@@ -1,0 +1,19 @@
+D4-symmetric atom set: true  -> angles cover [0,45] deg
+atoms=4996 total weight = 119787760/9985226 = 11.996500
+s = 15886400/4000000 = 3.971600
+angles: k=0..39765 (N=96000), covering [0,45deg]
+VERIFY_STATS thread 5 swept 3979 bins, wall 2166.7s
+VERIFY_STATS thread 0 swept 3977 bins, wall 2166.7s
+VERIFY_STATS thread 1 swept 3978 bins, wall 2166.8s
+VERIFY_STATS thread 7 swept 3977 bins, wall 2166.8s
+VERIFY_STATS thread 8 swept 3975 bins, wall 2167.0s
+VERIFY_STATS thread 2 swept 3977 bins, wall 2167.0s
+VERIFY_STATS thread 4 swept 3974 bins, wall 2167.0s
+VERIFY_STATS thread 6 swept 3975 bins, wall 2167.1s
+VERIFY_STATS thread 3 swept 3976 bins, wall 2167.1s
+VERIFY_STATS thread 9 swept 3977 bins, wall 2167.1s
+min covered weight over ALL placements = 9985226/9985226 = 1.000000  (at angle k=39531)
+VERIFIED: every CLOSED unit square inside C covers weight >= 1, and total weight < 12.
+==> 12 unit squares cannot be packed into any square of side < 15886400/4000000 = 3.971600000,
+    i.e.  s(12) >= 3.971600000
+VERIFY_STATS atoms=4996 bins=39766 threads=10 wall=2167.12s | strips=386359631 cells=1073231149523 active=658382280964 (avg 1704.1/strip) | anchor: pieces=0 calls=0 tests=0 skip=0 ok=0 core=0 | cliqueboxes: cands=0 tests=0 | witnesses=0 | ns/cell=20.2
