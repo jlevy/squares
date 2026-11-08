@@ -32,9 +32,9 @@ container multiplied by ``7902/7901``, which its producer's checkers refuse at
 squarepacker's v1.1 certificate of jlevy/squares#363, Daniel's points dilated to the
 container ``7943/2000`` with new weights, which its producer's checkers accept at
 ``N = 96000``, the net its case carries. ``s12-unnir`` is unnir's certificate of
-jlevy/squares#924, 4,996 new points over the container ``9929/2500``, which its
-producer's checkers accept at ``N = 96000`` with least captured weight exactly one at
-bin ``39531``. ``--certificate`` and
+jlevy/squares#924, 4,996 points over the container ``9929/2500``, T-095's 1,736 dilated
+by ``39716/39715`` and 3,260 more, which its producer's checkers accept at ``N = 96000``
+with least captured weight exactly one at bin ``39531``. ``--certificate`` and
 ``--certificate-sha256`` run a case's net and count on another file of the same format,
 pinned by its digest on the command line, which is how a mutated control is decided.
 

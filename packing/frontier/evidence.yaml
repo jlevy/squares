@@ -18305,7 +18305,7 @@ evidence:
     origin: external
     novelty: previously-published
     source_key: '[unnir s12 2026-11-08]'
-    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    certificate: packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
     replay_status: not-attempted
     verifiers: [V-evand-angle-net-verify, V-squarepacker-indep-scan-cpp]
     limitations: >-
@@ -18361,7 +18361,7 @@ evidence:
     origin: replayed-here
     novelty: previously-published
     source_key: '[unnir s12 2026-11-08]'
-    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    certificate: packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
     replay: >-
       With the certificate restored from the packet's .gz: copy the 26 September evand
       packet's s12/verify crate to scratch and put this packet's
@@ -18394,10 +18394,10 @@ evidence:
     limitations: >-
       Replays the producer's two checkers on the retained bytes on 2026-11-08, on a
       shared four-core Linux host at load about 4. Daniel's verify, built by cargo 1.97.0
-      from the copy the source vendors (main.rs aca2fa6f, the blob of evand/square-packing
-      0e76d9fe verify/src/main.rs) with overflow checks (binary 9f9dbeaf, the same in a
-      second build into a fresh target), at N = 96000 on two threads at nice 19 with
-      VERIFY_STATS and no VERIFY_BINS: VERIFIED over all 39,765 bins (its threads swept
+      from the copy the source vendors (main.rs SHA-256 aca2fa6f, Git blob f7c700c8, the
+      blob of evand/square-packing 0e76d9fe verify/src/main.rs) with overflow checks
+      (binary 9f9dbeaf, the same in a second build into a fresh target), at N = 96000 on
+      two threads at nice 19 with VERIFY_STATS and no VERIFY_BINS: VERIFIED over all 39,765 bins (its threads swept
       19,901 and 19,864), least 9985226/9985226 at bin 39531, exit 0, every line but the
       timing statistics equal to the source's log and the work it counted equal too
       (386,359,631 strips, 1,073,231,149,523 cells, 658,382,280,964 active), 14,479 s wall
@@ -18470,7 +18470,7 @@ evidence:
     origin: audited-here
     novelty: previously-published
     source_key: '[unnir s12 2026-11-08]'
-    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    certificate: packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
     replay: >-
       uv run --frozen --all-extras --group dev python -m devtools.verify_evand_angle_net_native
       --case s12-unnir --all --workers 2 --output OUT.json, from packing/, resumable with
@@ -18500,9 +18500,11 @@ evidence:
       threshold, 416,547,583 boxes, no stall, no exhausted budget, no refutation, 27,321
       CPU-s by wait4 and 18,576 s wall, 4,689 s of it paused while another lane's sweep
       held the host's other cores. The least row bound is the threshold itself, first at
-      row 1982, and 1,045 rows end at it, the 26 rows 39531 to 39556 among them; a row's
-      least box bound is where the branch and bound stopped, not the row's minimum, as at
-      T-095's row 21524. Where the certificate has no slack, in the bins near 44.76
+      row 1982, and 1,045 rows end at it. At the 26 rows 39531 to 39556 the threshold is
+      the rows' minimum: the exact audit's pose at bin 39531 captures exactly one, and the
+      stage 4 review's emulation of Daniel's core is at exactly one in all 26 bins
+      (review/review-2026-11-08/out/emulate-band.json). At the other 1,019 it is where the
+      branch and bound stopped, not the row's minimum, as at T-095's row 21524. Where the certificate has no slack, in the bins near 44.76
       degrees where the exact audit and the stage 4 review's sweep find a capture of
       exactly one, the interval route still decides every row. The coverage decision is this
       repository's interval branch and bound over centre boxes, which shares no code with
@@ -18528,7 +18530,7 @@ evidence:
     origin: replayed-here
     novelty: previously-published
     source_key: '[unnir s12 2026-11-08]'
-    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    certificate: packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
     replay: >-
       With CPython 3.14.7 in isolated mode and numpy 2.3.3 (uv run --no-project --python
       3.14.7 --with numpy==2.3.3 python -I) on a shared four-core host, 8 November 2026, at
@@ -18595,7 +18597,7 @@ evidence:
     origin: audited-here
     novelty: previously-published
     source_key: '[unnir s12 2026-11-08]'
-    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    certificate: packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
     replay: >-
       A premise check, not a replay of the coverage decision. From packing/:
       uv run --frozen --all-extras --group dev python -m devtools.audit_s12_unnir_certificate

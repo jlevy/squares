@@ -40271,9 +40271,11 @@ results:
       producer's code, since the weights' exact tie under Daniel's core suggests they
       were fitted to his cells.
 
-      Every checker refuses the source's controls and two sharper ones: the orbit of a
-      point captured at bin 39531 lowered by 1/9985226 a point, and the same integers read
-      over D = 3999600, which dilates the container to 39716/9999.
+      Daniel's verify, indep_scan.cpp and the native route each refuse the source's two
+      controls and two sharper ones: the orbit of a point captured at bin 39531 lowered by
+      1/9985226 a point, and the same integers read over D = 3999600, which dilates the
+      container to 39716/9999. The review's sweep refuses its own control, the
+      certificate with an orbit captured at bin 39535 removed.
 
       unnir (Numaro),
       [s12-lower-bound-3.9716](https://github.com/unnir/s12-lower-bound-3.9716/tree/064c2955670765321aaf1c0a2d5c778949daab6b),
@@ -40291,11 +40293,11 @@ results:
         step of its ladder and about a thirteenth of T-095's, with a certificate that
         keeps T-095's 1,736 points, dilated, and adds 3,260 with new weights: past the
         3.97155 at which T-095's source reported its floating-point linear program over
-        Daniel's points alone exceeding 12, and within 3.1e-5 of 560/141, the limit
-        T-095's review put on those points. The reduction and checkers are T-095's and no
-        technique is new, so not S4; S3 as T-079 and T-095, new weights on a cover, are,
-        and above T-078's S2 rescaling. Point covers are capped below 3.99, and T-245's
-        reported s(12) = 4 stands unverified.
+        Daniel's points alone exceeding 12, and 11/352500, about 3.12e-5, below 560/141,
+        the limit T-095's review put on those points. The reduction and checkers are
+        T-095's and no technique is new, so not S4; S3 as T-079 and T-095, new weights on a
+        cover, are, and above T-078's S2 rescaling. Point covers are capped below 3.99, and
+        T-245's reported s(12) = 4 stands unverified.
       scored: '2026-11-08'
       by: >-
         the stage 4 review of 8 November (docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md),

@@ -10,7 +10,10 @@ in Evan Daniel's format. These tests hold what was decided here:
   run here), each printing the source's own lines, and this repository's native
   parent-core branch and bound (first party), every row of it;
 - the four controls, regenerated here and pinned by digest, were refused by each checker
-  that ran them; and
+  that ran them;
+- the stage 4 review's own sweep decided every bin at one or above, refused its own
+  control, and ran the programs its digests name, the decider being the one frozen before
+  the producer's code was read; and
 - the native case is pinned to the certificate the issue names.
 
 They read receipts and retained files only; nothing here compiles or runs a checker.
@@ -35,7 +38,12 @@ from devtools.retained_data import read_retained_text
 RECEIPTS = preflight.PACKET / "receipts"
 CONTROLS = RECEIPTS / "controls"
 LOGS = preflight.SOURCE / "verification"
+REVIEW = preflight.PACKET / "review" / "review-2026-11-08"
 W = 9_985_226
+#: The review's decider, as its digest was recorded before the producer's checkers were read.
+DECIDER_SHA256 = "335101d848607c63cd4e12c7ec14305585b3cd1f4c88df8735b900b0b9b11540"
+#: The bins where Daniel's core, emulated by the review, captures exactly one.
+TIED_BAND = range(39531, 39557)
 #: The controls a coverage checker must refuse; ``truncated`` is refused by every parser.
 COVERAGE_CONTROLS = ("double-denominator", "lowered-tight-orbit", "regrid-3999600")
 
@@ -181,6 +189,12 @@ def native_receipt() -> dict[str, Any]:
     return json.loads(read_retained_text(RECEIPTS / "native-parent-core-N96000.json"))
 
 
+@cache
+def native_rows() -> tuple[dict[str, Any], ...]:
+    lines = read_retained_text(RECEIPTS / "native-parent-core-N96000.rows.jsonl").splitlines()
+    return tuple(json.loads(line) for line in lines[1:])
+
+
 def test_the_native_decision_is_complete_on_a_clean_tree() -> None:
     receipt = native_receipt()
     assert receipt["status"] == "PASS_COMPLETE"
@@ -194,8 +208,7 @@ def test_the_native_decision_is_complete_on_a_clean_tree() -> None:
     status = _lines(RECEIPTS / "native-parent-core-N96000.git-status.txt")
     assert status == [f"# HEAD {receipt['provenance']['git_commit']}"]
     assert receipt["catalogue_rows"] == len(native.net_rows(96000)) == 39765
-    lines = read_retained_text(RECEIPTS / "native-parent-core-N96000.rows.jsonl").splitlines()
-    rows = [json.loads(line) for line in lines[1:]]
+    rows = native_rows()
     assert sorted(r["index"] for r in rows) == list(range(receipt["catalogue_rows"]))
     for row in rows:
         assert row["status"] == "certified"
@@ -246,3 +259,61 @@ def test_every_parser_refuses_the_truncated_control() -> None:
         assert "exit 2" in _footer(CONTROLS / name)
     native_log = read_retained_text(CONTROLS / "native-truncated.log")
     assert "ValueError: point count does not match the file" in native_log
+
+
+def _review_json(name: str) -> dict[str, Any]:
+    return json.loads((REVIEW / "out" / name).read_text(encoding="utf-8"))
+
+
+def test_the_review_sweep_decides_every_bin_at_one_or_above() -> None:
+    summary = _review_json("full-sweep-summary.json")
+    assert summary["W"] == W
+    assert summary["decided"] == summary["bins_expected"] == summary["bins_present"] == 39765
+    assert summary["undecided"] == []
+    assert summary["bins_missing"] == []
+    assert summary["bins_outside_range"] == []
+    assert summary["subdivided_bins"] == []
+    assert summary["least_min_over_leaves"] >= W
+    assert summary["least_margin"] == summary["least_min_over_leaves"] - W == 0
+
+
+def test_the_review_sweep_refuses_its_own_control() -> None:
+    """The review ran none of the four controls; its own removes an orbit at bin 39535."""
+    removal = _review_json("controls-receipt.json")["a_point_removal"]
+    assert removal["bin"] == 39535
+    assert removal["captured_at_witness"] == W
+    assert removal["removed_orbit_size"] == 8
+    assert removal["mutant_decided"] is False
+    assert removal["mutant_min_over_leaves"] < W
+    assert removal["refused_as_required"] is True
+
+
+def test_daniels_core_is_at_exactly_one_across_the_tied_band() -> None:
+    """At these 26 rows the native threshold is the rows' minimum, not where it stopped."""
+    band = _review_json("emulate-band.json")
+    assert band["least_margin"] == 0
+    assert band["bins_at_margin_0"] == list(TIED_BAND)
+    lower = {row["index"]: int(row["lower"]) for row in native_rows()}
+    threshold = native_receipt()["threshold_units"]
+    assert all(lower[k] == threshold for k in TIED_BAND)
+    assert sum(value == threshold for value in lower.values()) == 1045
+
+
+def test_the_review_programs_and_receipts_match_their_digests() -> None:
+    listed: dict[str, str] = {}
+    for line in (REVIEW / "out" / "sha256sums.txt").read_text(encoding="utf-8").splitlines():
+        digest, name = line.split(maxsplit=1)
+        listed[name] = digest
+    programs = {f"programs/{path.name}" for path in (REVIEW / "programs").iterdir()}
+    assert programs
+    assert programs <= set(listed)
+    for name, digest in listed.items():
+        assert hashlib.sha256((REVIEW / name).read_bytes()).hexdigest() == digest, name
+
+
+def test_the_decider_is_the_one_frozen_before_the_producers_code_was_read() -> None:
+    data = (REVIEW / "programs" / "decide_bins.py").read_bytes()
+    assert hashlib.sha256(data).hexdigest() == DECIDER_SHA256
+    for receipt in ("digests-before-reading-producer-code.txt", "freeze.txt"):
+        text = (REVIEW / "out" / receipt).read_text(encoding="utf-8")
+        assert f"{DECIDER_SHA256}  decide_bins.py" in text, receipt
