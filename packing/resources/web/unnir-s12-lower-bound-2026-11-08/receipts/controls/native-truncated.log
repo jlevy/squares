@@ -1,0 +1,23 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/user/squares/.claude/worktrees/agent-a1514e9f9309b3918/packing/devtools/verify_evand_angle_net_native.py", line 485, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/user/squares/.claude/worktrees/agent-a1514e9f9309b3918/packing/devtools/verify_evand_angle_net_native.py", line 467, in main
+    result = run(
+        args.case,
+    ...<6 lines>...
+        source_state=source_state,
+    )
+  File "/home/user/squares/.claude/worktrees/agent-a1514e9f9309b3918/packing/devtools/verify_evand_angle_net_native.py", line 293, in run
+    certificate = load_case(case)
+  File "/home/user/squares/.claude/worktrees/agent-a1514e9f9309b3918/packing/devtools/verify_evand_angle_net_native.py", line 230, in load_case
+    return parse_certificate(case.n, values, case.net)
+  File "/home/user/squares/.claude/worktrees/agent-a1514e9f9309b3918/packing/devtools/verify_evand_angle_net_native.py", line 204, in parse_certificate
+    _require(len(values) == 5 + 3 * count, "point count does not match the file")
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/squares/.claude/worktrees/agent-a1514e9f9309b3918/packing/devtools/verify_evand_angle_net_native.py", line 159, in _require
+    raise ValueError(message)
+ValueError: point count does not match the file

@@ -1,0 +1,6 @@
+# command: nice -n 19 /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/indep_scan truncated.txt 96000 1000000000000000 12 -1 39532 39531
+# cwd: truncated control (63161c11); as the source's replay.py runs it: bins 39531 to 39532 exclusive; scratch build fb0d4e2d
+# python3: not used by this command
+# host: 4 cores; load 4.22 4.30 2.74; started 2026-11-08T15:19:06Z
+ERROR: short file
+# finished 2026-11-08T15:19:06Z; exit 2; wall 0.013 s; CPU 0.0 s (user 0.000 + sys 0.005); load 4.22 4.30 2.74

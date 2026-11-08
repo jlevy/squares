@@ -18326,6 +18326,131 @@ evidence:
       replays are recorded separately.
     source_reviewed: '2026-11-08'
 
+  - id: E-n012-unnir-9929-2500-source-replay
+    claim: lower-bound
+    scope: {n_values: [12]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          every bin of Daniel's D4-reduced net N = 96000 (39,765, k = 0 to 39764) over its
+          whole admissible centre box, and, by indep_scan.cpp, every bin of [0, 90] degrees
+          (96,000) with no symmetry assumed
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[unnir s12 2026-11-08]'
+    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    replay: >-
+      With the certificate restored from the packet's .gz: copy the 26 September evand
+      packet's s12/verify crate to scratch and put this packet's
+      verifier/rust/src/main.rs (f7c700c8, evand/square-packing 0e76d9fe) in place of its
+      src/main.rs (the manifest and lockfile are the same bytes), build it with cargo build
+      --release --locked and CARGO_PROFILE_RELEASE_OVERFLOW_CHECKS=true, and run verify
+      s12_lower_3.9716.txt 12 96000 2 0 under devtools.replay_receipt with VERIFY_STATS=1
+      and no other VERIFY_ or TIGHT_ variable, which must print VERIFIED and exit 0. Build
+      this packet's verifier/cpp/indep_scan.cpp with g++ -O2 and run indep_scan
+      s12_lower_3.9716.txt 96000 1000000000000000 12, with no range arguments, which must
+      print VERIFIED. The packet README (Replays Here, Reproduce) gives the commands; the
+      receipts are its receipts/daniel-verify-ovf-N96000.log and
+      receipts/indep-scan-N96000.log.
+    replay_status: passed
+    verifiers: [V-evand-angle-net-verify, V-squarepacker-indep-scan-cpp]
+    proof:
+      source: packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/README.md
+      theorem: Twelve unit squares do not fit in a square of side below 9929/2500.
+      scope: Unrestricted square packing with independent rotations, disjoint interiors and boundary contact allowed.
+      pinpoints: >-
+        The source README, "Certificate and mathematical scope"; Daniel's verify
+        (verifier/rust/src/main.rs of the packet, the reduction, the angle net, the shrink
+        lemma, the admissible centre box and the arrangement sweep, as in T-049 to T-095)
+        and Ryu's verifier/cpp/indep_scan.cpp; devtools.audit_s12_unnir_certificate and
+        its receipt.
+      assumptions:
+        - The weights are positive, the points lie in the closed container, the weighted multiset is D4-invariant in 636 orbits, and the total is 119787760/9985226 < 12, decided exactly by devtools.audit_s12_unnir_certificate and again by the verifier.
+        - A unit square at any angle of bin k contains the concentric square of side sigma_k at the bin's left angle, and its admissible centres lie in the box the checker sweeps.
+        - The verifier's i128 arithmetic does not overflow at N = 96000, which the overflow-checked build makes a panic rather than a false pass.
+    limitations: >-
+      ⟨SOURCE-REPLAY-LIMITATIONS⟩
+    source_reviewed: '2026-11-08'
+
+  - id: E-n012-unnir-9929-2500-native-parent-core
+    claim: lower-bound
+    scope: {n_values: [12]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    independence_record: docs/project/reviews/review-2026-09-22-native-n11-parent-core.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          every row [k/96000, (k+1)/96000] of the folded half-tangent net up to tan(pi/8)
+          (39,765), each over its whole parent-centre domain at the threshold of one unit
+        checked: 39765
+        of: 39765
+      read: [mathematics, specification, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            the native implementation lane of session 153 (22 September 2026, branch
+            codex/n11-parent-core-verifier), which wrote sqpack.fractional.parent_core and
+            parent_core_interval for Overbeck's n = 11 certificate; tier and reasoning
+            setting not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the intake lanes of 27 September and 2 October 2026 that wrote
+            devtools.verify_evand_angle_net_native, and lane L57 of 8 November, which added
+            the case s12-unnir; tiers and reasoning settings not retained here
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The engine predates every s(12) certificate and decides coverage by
+          directed-rounding branch and bound over centre boxes, which no checker of the
+          source uses. Its reader's authors read Daniel's verify/src/main.rs for the net
+          and the sigma rounding (bin_geometry), which the rows take by design, and
+          import none of its code. The source names its assistant only as Numaro
+          Autonomous Research, so any overlap of AI systems is unknown.
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[unnir s12 2026-11-08]'
+    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    replay: >-
+      uv run --frozen --all-extras --group dev python -m devtools.verify_evand_angle_net_native
+      --case s12-unnir --all --workers 2 --output OUT.json, from packing/, resumable with
+      --resume and the row journal, which must print PASS_COMPLETE over all 39,765 rows.
+    replay_status: passed
+    verifiers: [V-sqpack-parent-core-native]
+    proof:
+      source: packing/src/sqpack/fractional/parent_core.py
+      theorem: Twelve independently rotated unit squares cannot fit in a square of side 9929/2500; the native theorem gives the strict s(12) > 9929/2500, which implies the source's s(12) >= 9929/2500.
+      scope: Unrestricted square packing with disjoint interiors and boundary contact allowed.
+      pinpoints: >-
+        devtools/verify_evand_angle_net_native.py, case s12-unnir, which reads the source's
+        integer certificate into ParentCoreCertificate rows [k/N, (k+1)/N, k/N, sigma_k] at
+        N = 96000 with parent side 1 and minimum charge 1; validate_parent_core and
+        parent_core_interval.py verify_parent_core_rows; the receipt and row journal
+        receipts/native-parent-core-N96000.json and .rows.jsonl in the 2026-11-08 packet.
+      assumptions:
+        - The 4,996 point charges are exact, positive and D4 invariant, and total 59893880/4992613 < 12, a counting gap of 17476/4992613.
+        - The 39,765 contiguous half-tangent rows [k/96000, (k+1)/96000] cover the folded parent orientations up to tan(pi/8), and each row's closed core of side sigma_k at half-tangent k/96000 lies strictly inside every unit parent of the row, which validate_parent_core proves in exact rational arithmetic (least containment numerator 389446383489/4915061207552000000000).
+        - Directed-rounding boxes cover each row's entire parent-centre domain and count only sites surely inside the closed core; every row certifies at the exact threshold of one unit with no stalled or exhausted box.
+        - Disjoint parent interiors make their closed cores disjoint, so twelve parents would capture at least 12 from a total below 12.
+      audit_record: docs/project/reviews/review-2026-09-22-native-n11-parent-core.md
+    limitations: >-
+      ⟨NATIVE-LIMITATIONS⟩
+    source_reviewed: '2026-11-08'
+
   - id: E-n012-unnir-9929-2500-audit
     claim: derived-structure
     scope: {n_values: [12]}
@@ -18333,6 +18458,12 @@ evidence:
     method: exact-algebraic
     performed_by: repository
     relationship_to_generator: not-applicable
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate's premises other than coverage: its bytes, header, all 4,996
+          points and weights, their D4 orbits and the total
     origin: audited-here
     novelty: previously-published
     source_key: '[unnir s12 2026-11-08]'
@@ -18351,7 +18482,11 @@ evidence:
       9929/2500, D = 4000000, W = 9985226, 4,996 points), the advance 1/10000 over T-095,
       positive weights (the least 1/9985226), distinct points in the closed container, D4
       invariance in 636 orbits (613 of eight points, 23 of four), and the total
-      119787760/9985226, below 12 by 34952/9985226. At bin 39531 of N = 96000 it finds,
+      119787760/9985226, below 12 by 34952/9985226. It records as a fact, not a check,
+      that every one of T-095's 1,736 points (Daniel's, T-049), dilated by 39716/39715 to
+      this container, is among this file's points within one grid unit in both
+      coordinates (at most 35663/39715 of a unit), and that the other 3,260 points are new.
+      At bin 39531 of N = 96000 it finds,
       over all 117 open cells of the arrangement in a window of half side 1/1000 around
       the producer's diagnostic centre, a pose where a unit square at the bin's left angle
       fits whose test square (Daniel's sigma, 499991/500000) captures 767 points of total

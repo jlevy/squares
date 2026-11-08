@@ -55,6 +55,8 @@ from devtools.audit_s12_rescaled_certificate import (
     read,
     sha256,
 )
+from devtools.audit_s12_v11_certificate import CERTIFICATE as T095_CERTIFICATE
+from devtools.audit_s12_v11_certificate import CERTIFICATE_SHA256 as T095_SHA256
 from devtools.audit_s12_v11_certificate import orbit_key, orbits, side_units
 from devtools.verify_evand_angle_net_native import sigma
 
@@ -91,6 +93,43 @@ CONTROLS = SOURCE_CONTROLS + ADDED_CONTROLS
 def _require(condition: object, message: str) -> None:
     if not condition:
         raise ValueError(message)
+
+
+def t095_overlap(cert: PointCertificate) -> dict[str, Any]:
+    """How many of T-095's points, dilated to this container, this file keeps.
+
+    A fact, not a check: each of T-095's 1,736 points is dilated by the ratio of the two
+    containers and sought among this file's points within one grid unit in both
+    coordinates.
+    """
+    _, old = read(T095_CERTIFICATE, T095_SHA256)
+    factor = cert.side / old.side
+    ours = {(x, y) for x, y, _ in cert.points}
+    near: set[tuple[int, int]] = set()
+    kept = 0
+    worst = Fraction(0)
+    for xa, ya, _ in old.points:
+        ix = factor * Fraction(xa, old.denominator) * cert.denominator
+        iy = factor * Fraction(ya, old.denominator) * cert.denominator
+        found = {
+            (x, y)
+            for x in range(int(ix) - 1, int(ix) + 3)
+            for y in range(int(iy) - 1, int(iy) + 3)
+            if abs(x - ix) <= 1 and abs(y - iy) <= 1 and (x, y) in ours
+        }
+        if found:
+            kept += 1
+            worst = max(worst, min(max(abs(x - ix), abs(y - iy)) for x, y in found))
+        near |= found
+    return {
+        "t095_certificate_sha256": T095_SHA256,
+        "dilation": str(factor),
+        "t095_points": len(old.points),
+        "t095_points_kept_within_one_grid_unit": kept,
+        "largest_deviation_in_grid_units": str(worst),
+        "points_near_a_dilated_t095_point": len(near),
+        "points_near_none": len(cert.points) - len(near),
+    }
 
 
 def frame(k: int, net: int = NET) -> tuple[int, int, int]:
@@ -328,6 +367,7 @@ def audit() -> dict[str, Any]:
         "greatest_weight": f"{max(weights)}/{cert.weight_scale}",
         "total_weight": f"{total}/{cert.weight_scale}",
         "counting_gap": str(N - Fraction(total, cert.weight_scale)),
+        "t095_points": t095_overlap(cert),
         "tight_pose": pose,
         "controls": controls,
     }
