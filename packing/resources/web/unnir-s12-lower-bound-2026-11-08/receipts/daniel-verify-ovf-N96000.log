@@ -1,0 +1,16 @@
+# command: nice -n 19 verify-target/release/verify s12_lower_3.9716.txt 12 96000 2 0
+# cwd: scratch copy of verifier/rust/ of unnir/s12-lower-bound-3.9716 064c2955 (main.rs f7c700c8, the blob of evand/square-packing 0e76d9fe verify/src/main.rs), built with cargo 1.97.0 build --release --locked and CARGO_PROFILE_RELEASE_OVERFLOW_CHECKS=true; binary sha256 9f9dbeaf8d335512d8d0182d6e3c0eaf3ab2163f7ec1636605e8677b13653b33; certificate s12_lower_3.9716.txt sha256 833b76a1; VERIFY_STATS=1 and no other VERIFY_ or TIGHT_ variable
+# python3: not used by this command
+# host: 4 cores; load 0.63 0.72 0.46; started 2026-11-08T15:04:11Z
+D4-symmetric atom set: true  -> angles cover [0,45] deg
+atoms=4996 total weight = 119787760/9985226 = 11.996500
+s = 15886400/4000000 = 3.971600
+angles: k=0..39765 (N=96000), covering [0,45deg]
+VERIFY_STATS thread 1 swept 19901 bins, wall 14478.5s
+VERIFY_STATS thread 0 swept 19864 bins, wall 14478.9s
+min covered weight over ALL placements = 9985226/9985226 = 1.000000  (at angle k=39531)
+VERIFIED: every CLOSED unit square inside C covers weight >= 1, and total weight < 12.
+==> 12 unit squares cannot be packed into any square of side < 15886400/4000000 = 3.971600000,
+    i.e.  s(12) >= 3.971600000
+VERIFY_STATS atoms=4996 bins=39766 threads=2 wall=14478.94s | strips=386359631 cells=1073231149523 active=658382280964 (avg 1704.1/strip) | anchor: pieces=0 calls=0 tests=0 skip=0 ok=0 core=0 | cliqueboxes: cands=0 tests=0 | witnesses=0 | ns/cell=27.0
+# finished 2026-11-08T19:05:30Z; exit 0; wall 14478.950 s; CPU 28027.7 s (user 28002.778 + sys 24.944); load 4.06 4.08 4.07
