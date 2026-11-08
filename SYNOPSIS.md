@@ -1025,6 +1025,7 @@ case or experiment separately.
 | [Kaelan Yim’s Certificate for s(260): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-05-yim-895-260.md) | dated review record | record | retained | — |
 | [Özden’s s(94) ≥ 2493/250, Hosono’s Measure Dilated Again: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-05-ozden-s94-9972.md) | dated review record | record | retained | — |
 | [Evan Daniel’s Seven Certificates of #914: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-05-evand-914-seven.md) | dated review record | record | retained | — |
+| [unnir’s Certificate for s(12) ≥ 9929/2500: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md) | dated review record | record | retained | — |
 | [sqverify-fast Declared Nets: Re-Check of the Fixes for DR-1 to DR-3 (`36b52538a`) and the Proposed Flip](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md) | dated review record | record | retained | — |
 | [Review: wand125’s Checker on ValidTilt9 (`T-081`), Lane R3](docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md) | dated review record | record | retained | — |
 | [Review of the sqverify-fast format T route: census rows and controls for T-068’s 34 rectangle certificates](docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md) | dated review record | record | retained | — |

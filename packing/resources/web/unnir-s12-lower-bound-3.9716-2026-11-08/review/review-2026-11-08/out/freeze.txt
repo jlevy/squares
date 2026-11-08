@@ -1,0 +1,10 @@
+L58 blind-pass freeze, issue #924 (unnir, s(12) >= 9929/2500)
+
+findings-blind.md frozen at 2026-11-08T15:20:50Z, before any comparison material was read
+(T-095 in packing/frontier/results.yaml, docs/project/reviews/review-2026-10-05-s12-v11-certificate.md,
+packing/frontier/n-012.md, the squarepacker packets under packing/resources/web/, and the L57 lane).
+
+89e94ecae99d0048a77b538f95751115c74afcc5ca21367a0d3bbfe5011c6370  findings-blind.md
+
+The decider's digest was recorded before the producer's checker sources were read:
+335101d848607c63cd4e12c7ec14305585b3cd1f4c88df8735b900b0b9b11540  decide_bins.py  (2026-11-08T15:08:21Z)
