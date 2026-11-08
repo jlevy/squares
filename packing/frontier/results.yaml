@@ -40256,22 +40256,24 @@ results:
       weights over W = 9985226, all positive, D4-symmetric in 636 orbits, total
       119787760/9985226 < 12. Every closed unit square in [0, 9929/2500]^2, at every angle,
       captures weight at least one, decided over the rational angle net 2 arctan(k/96000)
-      with Daniel's per-bin shrink. The least capture is exactly one, at bin 39531, where
-      an exact audit here finds an admissible pose attaining it: the certificate has no
-      slack there.
+      with Daniel's per-bin shrink. The least capture is exactly one, in the bins near
+      44.76 degrees from bin 39531: the certificate has no slack there, and an exact audit
+      here finds an admissible pose at bin 39531 attaining it.
 
-      It was decided here on 8 November 2026 by Daniel's verifier, reproduced with the
-      producer's code: built from the copy the source vendors with overflow checks on,
-      VERIFIED over all 39,765 bins, least captured weight 9985226/9985226 at bin 39531,
-      every line as the source's log but its timings; and independently re-implemented by
-      this repository's parent-core interval branch and bound over all 39,765 rows, which
-      shares no code with the sweep and gives the strict s(12) > 9929/2500.
+      It was decided here on 8 November 2026, independently re-implemented, by two
+      programs no search could have consulted: this repository's parent-core interval
+      branch and bound over all 39,765 rows, which gives the strict s(12) > 9929/2500, and
+      the stage 4 review's own exact sweep over all 39,765 bins, written before its
+      authors read the producer's checkers. Daniel's verifier, built with overflow checks
+      from the copy the source vendors, and Ryu Sungjoon's indep_scan.cpp, run here over
+      all 96,000 bins of [0, 90] degrees, each print the source's log, least captured
+      weight 9985226/9985226 at bin 39531: the producer's evidence, reproduced with the
+      producer's code, since the weights' exact tie under Daniel's core suggests they
+      were fitted to his cells.
 
-      Ryu Sungjoon's indep_scan.cpp, replayed here over all 96,000 bins of [0, 90] degrees
-      with the source's minimum, is the producer's evidence. All three refuse the source's
-      controls and two sharper ones: the orbit of a point captured at bin 39531 lowered by
-      1/9985226 a point, and the same integers read over D = 3999600, which dilates the
-      container to 39716/9999.
+      Every checker refuses the source's controls and two sharper ones: the orbit of a
+      point captured at bin 39531 lowered by 1/9985226 a point, and the same integers read
+      over D = 3999600, which dilates the container to 39716/9999.
 
       unnir (Numaro),
       [s12-lower-bound-3.9716](https://github.com/unnir/s12-lower-bound-3.9716/tree/064c2955670765321aaf1c0a2d5c778949daab6b),
@@ -40285,39 +40287,43 @@ results:
     significance:
       score: 3
       rationale: >-
-        Would raise the verified lower bound at n = 12 by 1/10000 over T-095, the
-        smallest step of its ladder, with a certificate that keeps T-095's 1,736 points,
-        dilated, and adds 3,260 with new weights: past the 3.97155 at which T-095's
-        source reported its floating-point linear program over Daniel's points alone
-        exceeding 12, a solve no dual certificate backs (that review's F4). The
-        reduction and checkers are T-095's and no technique is new, so not S4; S3 as
-        T-079 and T-095, new weights on a cover, are, and above T-078's S2 rescaling.
-        Below T-245's reported s(12) = 4, which, once upheld here, supersedes it. A draft
-        by the registering lane, for the stage 4 review to confirm or change.
+        Raises the verified lower bound at n = 12 by 1/10000 over T-095, the smallest
+        step of its ladder and about a thirteenth of T-095's, with a certificate that
+        keeps T-095's 1,736 points, dilated, and adds 3,260 with new weights: past the
+        3.97155 at which T-095's source reported its floating-point linear program over
+        Daniel's points alone exceeding 12, and within 3.1e-5 of 560/141, the limit
+        T-095's review put on those points. The reduction and checkers are T-095's and no
+        technique is new, so not S4; S3 as T-079 and T-095, new weights on a cover, are,
+        and above T-078's S2 rescaling. Point covers are capped below 3.99, and T-245's
+        reported s(12) = 4 stands unverified.
       scored: '2026-11-08'
-      by: intake lane L57 (think-0vl3), the registering lane's draft before the stage 4 review
+      by: >-
+        the stage 4 review of 8 November (docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md),
+        confirming the draft S3 of intake lane L57 (think-0vl3)
     novelty: previously-published
     attribution:
       source_keys: ['[unnir s12 2026-11-08]']
       published: '2026-11-08'
     composition: >-
-      Primary at n = 12: one certificate, no monotonicity. Two methods decide it: Daniel's
-      arrangement sweep (exact-algebraic), the producer's verifier replayed here in full
-      with overflow checks, and this repository's directed-rounding interval coverage of
-      every row (interval-certified), which shares no code with it; that is C3, with two
-      methods shown beside the rung.
+      Primary at n = 12: one certificate, no monotonicity. Two methods decide it,
+      independently re-implemented and untouched by the search: this repository's
+      directed-rounding interval coverage of every row (interval-certified) and the stage
+      4 review's exact sweep of every bin with a core and shrink of its own
+      (exact-algebraic), which share no code with each other or with the producer's
+      checkers; that is C3, with two methods shown beside the rung.
 
-      Ryu's indep_scan.cpp, replayed here too, is a second implementation of the sweep's
-      method that the producer ran, so it is producer evidence, reproduced with the
-      producer's code, and confirms nothing beyond the other two. The source does not say
-      how the points and weights were found or which checker a search stopped on. The
-      exact audit of the file is a premise check and decides nothing. All rest on the
-      certificate, the counting step and the shrink lemma on the net N = 96000, and the
-      native rows are the sweep's bins and sigma_k by design.
+      Daniel's verify and Ryu's indep_scan.cpp, replayed here in full, are the producer's
+      evidence, reproduced with the producer's code: the source does not say how the
+      points and weights were found, and the exact tie under Daniel's core suggests they
+      were fitted to his cells (the review's F3). The exact audit of the file is a premise
+      check and decides nothing. All rest on the certificate, the counting step and the
+      net N = 96000; the native rows are the sweep's bins and sigma_k by design, and the
+      review's sweep shares the bins.
     evidence:
       - E-n012-unnir-9929-2500-report
       - E-n012-unnir-9929-2500-source-replay
       - E-n012-unnir-9929-2500-native-parent-core
+      - E-n012-unnir-9929-2500-review-sweep
       - E-n012-unnir-9929-2500-audit
     artifacts:
       - packing/resources/web/unnir-s12-lower-bound-2026-11-08/README.md
@@ -40331,6 +40337,9 @@ results:
       - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/native-parent-core-N96000.json
       - packing/devtools/audit_s12_unnir_certificate.py
       - packing/devtools/verify_evand_angle_net_native.py
+      - docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/out/full-sweep-summary.json
     controls:
       - packing/tests/test_s12_unnir_certificate.py
       - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/controls/native-lowered-tight-orbit.json
@@ -40339,35 +40348,41 @@ results:
       - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/controls/indep-scan-lowered-tight-orbit-N96000.log
       - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/controls/indep-scan-regrid-3999600-N96000.log
       - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/controls/daniel-verify-lowered-tight-orbit-bin-39531.log
-    activity:
-      state: in-analysis
-      what: the stage 4 mathematical review, prompted separately in a lane of its own
-      since: '2026-11-08'
-      link: https://github.com/jlevy/squares/issues/924
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/out/controls-receipt.json
     next_rung: >-
-      The stage 4 mathematical review, prompted separately and blind to the replays, is
-      under way; n = 12's verified lower lane takes 9929/2500 only once it accepts. V4 and
-      C4 need, beyond it, a second adversarial AI review by a distinct reviewer and a
-      human oversight record. Rung 5 needs a proof-assistant formalization reviewed by
-      human experts. T-245's reported s(12) = 4, once a build and a review here uphold
-      it, supersedes this bound; the exact value remains open in the verified record.
+      None for the bound. V4 and C4 need a second adversarial AI review by a distinct
+      reviewer and a human oversight record; one AI review, of 8 November, is retained,
+      and it computed every bin. Rung 5 needs a proof-assistant formalization reviewed by
+      human experts. The review's questions for the author (how the points and weights
+      were found, indep_scan's coverage, a geometric control) hold no rung. T-245's
+      reported s(12) = 4, once a build and a review here uphold it, supersedes this bound;
+      the exact value remains open in the verified record.
     notes: >-
       Registered by intake lane L57 of 8 November 2026 (think-0vl3), which retained the
       source, audited its premises and ran the replays and controls; the stage 4 review
-      lane is prompted separately, blind to them. Pending adoption: n = 12's verified
-      lower lane holds T-095's 7943/2000 until that review accepts, and its reported lower
-      lane holds T-245's 4, above this bound, so no case lane moves in this change. T-095
-      stays true as stated.
+      lane (L58) was prompted separately, blind to them, and its review was mapped once
+      the replays' verdicts were recorded. n = 12's verified lower lane takes 9929/2500
+      from T-095's 7943/2000; its reported lower lane holds T-245's 4, above this bound.
+      T-095 stays true as stated.
+
+      The review accepts with findings, none blocking and none major. F1 (minor): the
+      vendored indep_scan.cpp takes range arguments that restrict its sweep yet print
+      the full range, and its verdict does not check completeness; the replay here ran
+      it with none, so it swept every bin. F2 (minor): the source's controls do not touch
+      the geometry, which the two controls added here do. F3: the producer's checkers are
+      producer evidence. F4: no slack. F5: the strict form follows through the cores. F8:
+      the receipts here name the binaries' digests. F9: the points extend Daniel's.
 
       The replays of 8 November ran on a shared four-core host, each heavy run at two
       threads under nice 19: Daniel's verify over all 39,765 bins, 28,028 CPU-s; the
       native route over all 39,765 rows, 27,321 CPU-s; indep_scan over all 96,000 bins,
       834 CPU-s, and over each of two controls, 832 and 818. With the pricing samples,
       builds, audit and single-bin controls, about 16 CPU hours, under the item's cap of
-      40. The native route certifies 1,045 rows at exactly the threshold, the 26 rows 39531
-      to 39556 among them, and the least capture on every route is exactly one at bin
-      39531, so the certificate has no slack there; a capture of exactly one is all the
-      counting step needs.
+      40. The review's sweep took 9,494 CPU-s more. Its least core minimum is exactly W at
+      the 24 bins 39532 to 39555, and its emulation of Daniel's core is at exactly W at
+      the 26 bins 39531 to 39556; the native route certifies each of those rows, ending
+      at the threshold there as at 1,019 other rows where its branch and bound stopped. A
+      capture of exactly one is all the counting step needs.
 
       The source vendors a later revision of Daniel's verify than the one T-049 to T-095
       ran: Daniel's change of 7 October 2026 altered only its doc comment and its exit
@@ -40376,6 +40391,27 @@ results:
       include line changed; given only the certificate, N, Q and n it sweeps every bin,
       and a range-restricted run prints VERIFIED for its range alone, so its receipts are
       read by their arguments. The evidence entries and the packet give the revisions.
+    reviews:
+      - path: docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong tier tbd-strong-max at maximum reasoning), the
+          separately prompted stage 4 review lane of #924 (L58), sharing no context with
+          the registering and replay lane (L57) and blind to its replays
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-08'
+        scope: >-
+          unnir's certificate for s(12) >= 9929/2500, pinned at 064c2955: the argument from
+          certificate to bound with every hypothesis of Daniel's verify and Ryu's
+          indep_scan, and the strict form through the cores; premises recomputed exactly;
+          every one of the 39,765 bins at N = 96000 decided by an independent exact sweep
+          written before the producer's checkers were read; the true minimum at 510 exact
+          angles; the producer's minimum, bin and centre reproduced by emulating Daniel's
+          core; controls; the provenance of both checkers; the precedent of T-095
+          reconciled after a frozen blind pass; the significance.
+        verdict: accepted
+        covers: [T-274]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

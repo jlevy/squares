@@ -23492,6 +23492,7 @@ urls:
     - E-n012-unnir-9929-2500-report
     - E-n012-unnir-9929-2500-source-replay
     - E-n012-unnir-9929-2500-native-parent-core
+    - E-n012-unnir-9929-2500-review-sweep
     - E-n012-unnir-9929-2500-audit
     artifacts:
     - packing/resources/web/unnir-s12-lower-bound-2026-11-08/README.md
@@ -23505,6 +23506,9 @@ urls:
     - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/native-parent-core-N96000.json
     - packing/devtools/audit_s12_unnir_certificate.py
     - packing/devtools/verify_evand_angle_net_native.py
+    - docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/out/full-sweep-summary.json
 - path: results.html
   canonical: results.html
   kind: page

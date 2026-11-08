@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **240** programs: **54** external and **186** first-party; **160** decide claims and **80** check premises.
-- **701** of **889** evidence entries name the programs that verified them: 329 independently re-implemented, 298 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **242** programs: **54** external and **188** first-party; **161** decide claims and **81** check premises.
+- **702** of **890** evidence entries name the programs that verified them: 330 independently re-implemented, 298 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -272,6 +272,8 @@ second implementation agrees.
 | [`V-ozden-1104-review-check`](#v-ozden-1104-review-check) | oz_check.py with ozlib.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-yim-1105-review-check`](#v-yim-1105-review-check) | certcheck.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-evand-1105-review-check`](#v-evand-1105-review-check) | decide_feasibility.py and sharp_controls.py | Squares Project (Levy) | first-party | decides | 1 | 7 |
+| [`V-unnir-924-review-decider`](#v-unnir-924-review-decider) | decide_bins.py with run_bins.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-unnir-924-review-premises`](#v-unnir-924-review-premises) | premises.py with net_coverage.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 
 ## By Program
 
@@ -4829,6 +4831,37 @@ The 5 November stage 4 review's exact checker of Evan Daniel's seven certificate
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-914-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 7 of 7: the certificates at n = 175, 204, 260, 268, 293, 303 and 304 and the six regularized views: every wall and every pair, by two exact methods that share only the reader, with fourteen controls each decided by both | T-267, T-268, T-269, T-270, T-271, T-272, T-273 |
+
+### `V-unnir-924-review-decider`
+
+**decide_bins.py with run_bins.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 8 November stage 4 review's exact decider of unnir's s(12) certificate, in Daniel's text format: for each bin of the net 2 arctan(k/N), a core square at the bin's mid-tangent angle with a rational shrink of its own, its exact minimum capture over the bin's whole centre domain by a strip sweep over the open cells of the box arrangement in int and Fraction (numpy int64 only for the weight counts), subdivision of a bin that fails, and an exact-angle mode with no shrink. test_decider.py holds the sweep to a brute-force enumeration of open cells on 2,000 random instances, and mutation_check.py shows that test catches one-unit errors.
+
+- Source: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/decide_bins.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/decide_bins.py), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/run_bins.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/run_bins.py), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/test_decider.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/test_decider.py), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/mutation_check.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/mutation_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 924 (L58), strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the import and replay lane (L57)), with its own prompt and code; authorship in common with the producer’s: system-family, The decider's digest was recorded at 15:08:21Z, before its authors read either of the producer's checkers (out/digests-before-reading-producer-code.txt), and the digest that ran is that one. It imports nothing from the producer or from this repository. Both producer checkers' sources say Claude helped write them; the source names its own assistant only as Numaro Autonomous Research.
+- Note: Written and run on 8 November 2026 for docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md (SHA-256 335101d848607c63cd4e12c7ec14305585b3cd1f4c88df8735b900b0b9b11540 for decide_bins.py and a6aacfb29dea2c8e71232a7b4418d72504c963cfe9d8286871bd707637a73590 for run_bins.py, in the folder's out/sha256sums.txt). controls.py and emulate_band.py, kept beside it, were written after its authors read Daniel's Rust and decide nothing about the bound; lineage.py measures the point set's relation to T-095's. They are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-unnir-9929-2500-review-sweep` | replayed here | independently re-implemented, clean-room | full, 39,765 of 39,765: every bin of the net N = 96000 covering [0, 45] degrees (39,765, k = 0 to 39764), each over its whole centre domain, with the fold resting on the exact D4 check | T-274 |
+
+### `V-unnir-924-review-premises`
+
+**premises.py with net_coverage.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 8 November stage 4 review's exact premise check of unnir's s(12) certificate: a strict line parse and a token parse that must agree, the digest, count, distinctness, positivity, containment, the D4 invariance of the weighted multiset and its orbits, the side, the total and the margin below 12; and, exactly, the bins of the net that cover [0, 45] degrees.
+
+- Source: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/premises.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/premises.py), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/net_coverage.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/net_coverage.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 924 (L58), strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the import and replay lane (L57)), with its own prompt and code; authorship in common with the producer’s: system-family, Written before its authors read the producer's checkers; it imports nothing from the producer or from this repository. Both producer checkers' sources say Claude helped write them.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-unnir-9929-2500-review-sweep` | replayed here | independently re-implemented, clean-room | full, 39,765 of 39,765: every bin of the net N = 96000 covering [0, 45] degrees (39,765, k = 0 to 39764), each over its whole centre domain, with the fold resting on the exact D4 check | T-274 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

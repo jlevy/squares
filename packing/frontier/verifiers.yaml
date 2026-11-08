@@ -7556,3 +7556,92 @@ verifiers:
       sides_and_kkt.py, house_slack.py, scale_slack.py, identity.py, island_260.py, tilts.py
       and input_260.py, kept beside them, measure and decide nothing about the bounds, and
       are not registered.
+
+  - id: V-unnir-924-review-decider
+    program: decide_bins.py with run_bins.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 8 November stage 4 review's exact decider of unnir's s(12) certificate, in
+      Daniel's text format: for each bin of the net 2 arctan(k/N), a core square at the
+      bin's mid-tangent angle with a rational shrink of its own, its exact minimum capture
+      over the bin's whole centre domain by a strip sweep over the open cells of the box
+      arrangement in int and Fraction (numpy int64 only for the weight counts), subdivision
+      of a bin that fails, and an exact-angle mode with no shrink. test_decider.py holds the
+      sweep to a brute-force enumeration of open cells on 2,000 random instances, and
+      mutation_check.py shows that test catches one-unit errors.
+    source:
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/decide_bins.py
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/run_bins.py
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/test_decider.py
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/mutation_check.py
+    independence_record: packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 924 (L58), strong tier
+            (tbd-strong-max) at maximum reasoning, prompted separately from the import and
+            replay lane (L57)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The decider's digest was recorded at 15:08:21Z, before its authors read either
+          of the producer's checkers (out/digests-before-reading-producer-code.txt), and
+          the digest that ran is that one. It imports nothing from the producer or from
+          this repository. Both producer checkers' sources say Claude helped write them;
+          the source names its own assistant only as Numaro Autonomous Research.
+    note: >-
+      Written and run on 8 November 2026 for
+      docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md (SHA-256
+      335101d848607c63cd4e12c7ec14305585b3cd1f4c88df8735b900b0b9b11540 for decide_bins.py
+      and a6aacfb29dea2c8e71232a7b4418d72504c963cfe9d8286871bd707637a73590 for run_bins.py,
+      in the folder's out/sha256sums.txt). controls.py and emulate_band.py, kept beside it,
+      were written after its authors read Daniel's Rust and decide nothing about the bound;
+      lineage.py measures the point set's relation to T-095's. They are not registered.
+
+  - id: V-unnir-924-review-premises
+    program: premises.py with net_coverage.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 8 November stage 4 review's exact premise check of unnir's s(12) certificate: a
+      strict line parse and a token parse that must agree, the digest, count, distinctness,
+      positivity, containment, the D4 invariance of the weighted multiset and its orbits,
+      the side, the total and the margin below 12; and, exactly, the bins of the net that
+      cover [0, 45] degrees.
+    source:
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/premises.py
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/net_coverage.py
+    independence_record: packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 924 (L58), strong tier
+            (tbd-strong-max) at maximum reasoning, prompted separately from the import and
+            replay lane (L57)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Written before its authors read the producer's checkers; it imports nothing from
+          the producer or from this repository. Both producer checkers' sources say Claude
+          helped write them.

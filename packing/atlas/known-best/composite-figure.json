@@ -300,7 +300,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"4","minimal_polynomial":"s - 4 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(12) ≥ 3.971500","evidence":["E-n012-squarepacker-7943-2000-native-parent-core","E-n012-squarepacker-7943-2000-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"3.9715"},
+        "lower": {"correction":false,"display":"s(12) ≥ 3.971600","evidence":["E-n012-unnir-9929-2500-native-parent-core","E-n012-unnir-9929-2500-review-sweep"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"3.9716"},
         "n": 12,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {

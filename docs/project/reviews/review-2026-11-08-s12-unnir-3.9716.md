@@ -76,7 +76,7 @@ None blocks registration.
 
 The blind findings were written and frozen at 15:20:50Z, before any comparison material
 had been read. They are kept unchanged as
-[`findings-blind.md`](../../../packing/resources/web/unnir-s12-lower-bound-3.9716-2026-11-08/review/review-2026-11-08/out/findings-blind.md),
+[`findings-blind.md`](../../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/out/findings-blind.md),
 SHA-256 `89e94ecae99d0048a77b538f95751115c74afcc5ca21367a0d3bbfe5011c6370`. Only then
 did I read the comparison material:
 
@@ -572,7 +572,7 @@ own exact code; zero slack (F4); F1 and F2 minor, to the author; F3 to F9 notes.
 ## 12. Programs and Receipts
 
 The programs and receipts are in
-[`review-2026-11-08/`](../../../packing/resources/web/unnir-s12-lower-bound-3.9716-2026-11-08/review/review-2026-11-08/README.md),
+[`review-2026-11-08/`](../../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md),
 staged for the replay lane’s packet.
 Its README says what each program does, what it read, how to run it and what it printed.
 The frozen blind findings are its `out/findings-blind.md`. The lane used about 2.7

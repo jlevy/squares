@@ -131,7 +131,7 @@ and the checkers ran on the certificate as upstream bytes, SHA-256 `833b76a1…`
 | --- | --- | --- | ---: | ---: | --- |
 | Daniel’s `verify` (external, the producer’s verifier) | this packet’s `verifier/rust/` (`main.rs` `aca2fa6f…`, the blob `f7c700c8` of `evand/square-packing` `0e76d9fe`), copied to scratch and built by cargo 1.97.0 `build --release --locked` with `CARGO_PROFILE_RELEASE_OVERFLOW_CHECKS=true`; binary SHA-256 `9f9dbeaf…`, the same in a second build into a fresh target ([build](receipts/daniel-verify-build.log)) | `verify s12_lower_3.9716.txt 12 96000 2 0` with `VERIFY_STATS=1` and no other `VERIFY_` or `TIGHT_` variable | 14,479 s | 28,028 s | VERIFIED over `k = 0..39765`, its two threads sweeping 19,901 and 19,864 bins, least captured weight `9985226/9985226` at bin `k = 39531`, exit 0; every line but the timing statistics equals `verification/logs/rust.log`, and the work it counted equals the source’s, 386,359,631 strips, 1,073,231,149,523 cells and 658,382,280,964 active ([receipt](receipts/daniel-verify-ovf-N96000.log)) |
 | Ryu’s `indep_scan` (external, the producer’s second checker) | this packet’s `verifier/cpp/indep_scan.cpp` (`74146d48…`) by g++ 13.3.0 `-O2` ([build](receipts/indep-scan-build.log)); binary `fb0d4e2d…` | `indep_scan s12_lower_3.9716.txt 96000 1000000000000000 12`, no range arguments, so its own line reads `bins k = 0..95999 covering [0,90] deg` | 840 s | 834 s | VERIFIED, least `9985226/9985226` at `k = 39531`, exit 0; its output equals `verification/logs/cpp.log` byte for byte ([receipt](receipts/indep-scan-N96000.log)) |
-| This repository’s native parent-core route (first party) | [`devtools.verify_evand_angle_net_native`](../../../devtools/verify_evand_angle_net_native.py), case `s12-unnir`, at commit `d1b96ff4` with a clean tree ([status](receipts/native-parent-core-N96000.git-status.txt)) | `--case s12-unnir --all --workers 2` | 18,576 s, 4,689 of them paused | 27,321 s | `PASS_COMPLETE`: all 39,765 rows certified at the threshold `9985226/9985226`, 416,547,583 boxes, no stalled box, no exhausted budget, no refutation. 1,045 rows certify at exactly the threshold, in 47 runs across the net, the 26 rows `39531` to `39556` among them, so the certificate has no slack there either; the native theorem gives the strict `s(12) > 9929/2500` ([receipt](receipts/native-parent-core-N96000.json), [row journal](receipts/native-parent-core-N96000.rows.jsonl.gz), [log](receipts/native-parent-core-N96000.log)) |
+| This repository’s native parent-core route (first party) | [`devtools.verify_evand_angle_net_native`](../../../devtools/verify_evand_angle_net_native.py), case `s12-unnir`, at commit `d1b96ff4` with a clean tree ([status](receipts/native-parent-core-N96000.git-status.txt)) | `--case s12-unnir --all --workers 2` | 18,576 s, 4,689 of them paused | 27,321 s | `PASS_COMPLETE`: all 39,765 rows certified at the threshold `9985226/9985226`, 416,547,583 boxes, no stalled box, no exhausted budget, no refutation. The least row bound is the threshold itself, first at row `1982`, and 1,045 rows end at it, the 26 rows `39531` to `39556` among them: where the branch and bound stopped, not the rows’ minima, as at `T-095`’s row `21524`. The native theorem gives the strict `s(12) > 9929/2500` ([receipt](receipts/native-parent-core-N96000.json), [row journal](receipts/native-parent-core-N96000.rows.jsonl.gz), [log](receipts/native-parent-core-N96000.log)) |
 
 The native run was paused (`SIGSTOP`) from 15:15:51Z to 16:34:00Z, while the other
 lane’s sweep held the cores this lane would otherwise have taken, and then resumed; its
@@ -143,11 +143,13 @@ The native reader builds the rows `[k/N, (k+1)/N]` of half-tangents, the core si
 Daniel’s `σ_k` rounded down to `10⁻⁶`, at `N = 96000`, and decides each by
 directed-rounding branch and bound over centre boxes, sharing no code with either sweep.
 
-**Which runs carry the confirmation.** Daniel’s full sweep, replayed from the copy the
-source vendors, is the producer’s code; the native route is this repository’s and
-method-distinct. `indep_scan` is a second implementation of the sweep’s method that the
-producer also ran, so its replay is the producer’s evidence. The source does not say how
-its points and weights were found, or whether a search stopped on either checker.
+**Which runs carry the confirmation.** The source does not say how its points and
+weights were found, or whether a search stopped on either of its checkers, and the
+weights’ exact tie under Daniel’s core suggests they were fitted to his cells (the
+review’s F3). So Daniel’s full sweep and `indep_scan`, both the producer’s code, are the
+producer’s evidence. The confirmation rests on the two deciders no search could have
+consulted: the native route above and the stage 4 review’s exact sweep of all 39,765
+bins, below.
 
 **Pricing.** Each run was priced from a sample here before it ran
 ([`receipts/pricing/`](receipts/pricing/)): `verify` on three windows of 40 bins at one
@@ -187,9 +189,21 @@ holds every receipt here and regenerates every control.
 
 ## The Review
 
-The stage 4 mathematical review runs in a lane of its own, prompted separately and blind
-to these replays. Until it returns and accepts, the n = 12 record’s verified lower bound
-stays `T-095`’s `7943/2000`.
+A separately prompted review lane (L58), blind to these replays, read the source and
+both checkers and re-derived the argument
+([review](../../../../docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md)): it
+accepts with findings, none blocking and none major. Its programs and receipts are in
+[`review/review-2026-11-08/`](review/review-2026-11-08/README.md), moved here from the
+packet path the lane guessed. Its exact decider, whose digest was recorded before its
+authors read the producer’s checkers, decided all 39,765 bins in 9,494 CPU seconds: the
+least core minimum is exactly `W` at the 24 bins `39532` to `39555`, and every bin
+outside a band of 79 near 44.76° to 44.88° clears `W` by at least `2702/W`. Its
+emulation of Daniel’s core puts exactly `W` at the 26 bins `39531` to `39556`, the band
+where this packet’s native row journal ends at the threshold too. Its F1 (minor) is the
+range-argument behaviour of `indep_scan` noted above; its F2 (minor), that the source’s
+controls do not touch the geometry, is what the two controls added here answer; its F3
+is why the producer’s checkers are the producer’s evidence. The blind findings, frozen at
+15:20:50Z, are its `out/findings-blind.md`, SHA-256 `89e94eca…`.
 
 ## Reproduce
 
@@ -227,6 +241,7 @@ upstream path and decompress transparently through
 | --- | --- | --- | --- |
 | `s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz` | upstream | `90ba2625b3619938bb36ae73387aeed5f9720f15` | `833b76a179a420a40775cc76305ec9ffb7f6ea27472e587958c234c4c4712cbd` |
 | `receipts/native-parent-core-N96000.rows.jsonl.gz` | receipt | `77c4184e5c769488e757c6039de72d80fdcf0e16` | `73062feba1cd6b6bfdd3c8e459a0eab342d8e194b70c5285a852376d9ce8b380` |
+| `review/review-2026-11-08/out/full-sweep-margins.tsv.gz` | receipt | `704009a42605b36d18e7884d60687620d48c8669` | `025b78be8246d4d8dffa48dbec86a37b428e5a512c82ceabef7608ef2f072cba` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

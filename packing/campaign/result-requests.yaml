@@ -28935,13 +28935,16 @@ issues:
           An independent replay, ideally including the native parent-core interval
           decision as in #363, a mathematical review, and, if it holds, the n = 12 verified
           lower bound updated
-        state: queued
+        state: done
         source: body
         bead: think-0vl3
         note: >-
-          Intake lane L57 (8 November 2026) retained the source and replayed it here; the
-          stage 4 review runs in a lane of its own, and the n = 12 verified lane waits for
-          its acceptance.
+          Replayed here on 064c2955 by Daniel's verify and indep_scan.cpp over every bin
+          (producer evidence), and decided over all 39,765 rows by the native parent-core
+          interval route and over all 39,765 bins by the stage 4 review's own exact sweep;
+          the review (docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md) accepts it
+          with no blocking finding. T-274 registers 9929/2500, and n = 12's verified lower
+          bound moves to it from T-095's 7943/2000 (intake lane L57, 8 November 2026).
     beads: [think-0vl3]
     answer_bead: think-0vl3
     replies: []

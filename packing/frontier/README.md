@@ -626,23 +626,23 @@ formula had masked, and Bašić and Slivková’s piercing bound at $n = 37, 61$
 registered on 3 October 2026. Replayed certificates recorded in parallel and merged on 3
 October 2026 have since raised all five of those, and 46 more of the Karakuş floors,
 above them; they are counted below.
-Two others use certificates already integrated into the register: at $n = 12$
-squarepacker’s re-weighting of Evan Daniel’s points ($7943/2000$), and at $n = 17$ the
-current external certificate bound ($18641771/4000000$). Complete interval and exact
-replays of external certificates hold the other 54: Hosono’s mixed rectangle-measure
-certificates at $n = 37$, 50, 65, 66, 83 to 85, 87 and 90 to 92, and by monotonicity at
-$n = 51$ from $n = 50$, at $n = 86$ from $n = 85$, at $n = 88$ from $n = 87$ and at
-$n = 93$ from $n = 92$, and its rectangle-density certificates, directly or by
-monotonicity, at $n = 18$ to 20, 26 to 31, 38 to 43, 52 to 58, 67 to 75, 89 and 94, and
-its linear certificates at $n = 82$ and 101, and by monotonicity at 102 to 105. On
-2026-10-02 those replays superseded this repository’s first-party bounds at $n = 18$, 19
-and 20 ($4679/1000$, $24/5$ and $97/20$), Tokoharu’s at $n = 26$, 29 and 30, Hosono’s
-point certificates at $n = 39$ to 41, 52, 53, 55, 56 and 68 to 72, and Nagamochi’s
-formula, or the floor that replaced it, at 33 counts; on 2026-10-03 its afternoon mixed
-certificates did so at three more, $n = 83$, 91 and 96, its linear certificate for
-$n = 101$, replayed on 2 October and recorded on 3 October, at five, $n = 101$ to 105,
-and its linear $n = 82$ certificate, replayed on 3 October, at one more, where the floor
-it raised was Karakuş’s. $n = 32$ left the open cases on 2026-09-27, when a replayed
+Two others use certificates already integrated into the register: at $n = 12$ unnir’s
+(Numaro) extension of Evan Daniel’s points ($9929/2500$), and at $n = 17$ the current
+external certificate bound ($18641771/4000000$). Complete interval and exact replays of
+external certificates hold the other 54: Hosono’s mixed rectangle-measure certificates
+at $n = 37$, 50, 65, 66, 83 to 85, 87 and 90 to 92, and by monotonicity at $n = 51$ from
+$n = 50$, at $n = 86$ from $n = 85$, at $n = 88$ from $n = 87$ and at $n = 93$ from
+$n = 92$, and its rectangle-density certificates, directly or by monotonicity, at
+$n = 18$ to 20, 26 to 31, 38 to 43, 52 to 58, 67 to 75, 89 and 94, and its linear
+certificates at $n = 82$ and 101, and by monotonicity at 102 to 105. On 2026-10-02 those
+replays superseded this repository’s first-party bounds at $n = 18$, 19 and 20
+($4679/1000$, $24/5$ and $97/20$), Tokoharu’s at $n = 26$, 29 and 30, Hosono’s point
+certificates at $n = 39$ to 41, 52, 53, 55, 56 and 68 to 72, and Nagamochi’s formula, or
+the floor that replaced it, at 33 counts; on 2026-10-03 its afternoon mixed certificates
+did so at three more, $n = 83$, 91 and 96, its linear certificate for $n = 101$,
+replayed on 2 October and recorded on 3 October, at five, $n = 101$ to 105, and its
+linear $n = 82$ certificate, replayed on 3 October, at one more, where the floor it
+raised was Karakuş’s. $n = 32$ left the open cases on 2026-09-27, when a replayed
 external closed cover proved $s(32) = 6$, and $n = 21$ and $n = 45$ on 2026-09-29, when
 replayed external mixed covers proved $s(21) = 5$ and $s(45) = 7$; $n = 59$, 60 and 61
 left them on 2026-10-02, when replayed mixed covers proved $s(59) = s(60) = s(61) = 8$,
@@ -680,7 +680,7 @@ Ranked by gap—the best-known packing minus the verified lower bound, which is 
 | 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Overbeck |
 | 31 | 0.0225 | grid | $6^2 - 5$, carried to $\frac{2391}{400}$ by Hosono after Tokoharu and Levy (T-232) |
 | 94 | 0.0280 | grid | $10^2 - 6$, carried to $\frac{2493}{250}$ by Özden after Hosono, Tokoharu and Levy (T-266) |
-| 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
+| 12 | 0.0284 | grid | $4^2 - 4$, carried to $\frac{9929}{2500}$ by unnir after Daniel, Ryu and Levy (T-274) |
 | 27 | 0.0521 | Göbel | carried to $\frac{1131}{200}$ by Hosono after Tokoharu and Levy (T-233) |
 | 19 | 0.0581 | Wainwright | $5^2 - 6$, carried to $\frac{1931}{400}$ by Hosono after Tokoharu and Levy (T-233) |
 

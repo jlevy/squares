@@ -12,7 +12,7 @@
     {"n":9,"bound":"3","decimal":"3","verified_lower":"3","holds":true,"improves":false},
     {"n":10,"bound":"7/2","decimal":"3.5","verified_lower":"3.70710678118654752440084436210485","holds":false,"improves":false},
     {"n":11,"bound":"-1 + sqrt(3) + 2*sqrt(2)","decimal":"3.56047793231","verified_lower":"3.87708359002281417730789706010096","holds":false,"improves":false},
-    {"n":12,"bound":"-1 + sqrt(3) + 2*sqrt(2)","decimal":"3.56047793231","verified_lower":"3.9715","holds":false,"improves":false},
+    {"n":12,"bound":"-1 + sqrt(3) + 2*sqrt(2)","decimal":"3.56047793231","verified_lower":"3.9716","holds":false,"improves":false},
     {"n":13,"bound":"-1 + sqrt(3) + 2*sqrt(2)","decimal":"3.56047793231","verified_lower":"4","holds":false,"improves":false},
     {"n":14,"bound":"-1 + sqrt(3) + 2*sqrt(2)","decimal":"3.56047793231","verified_lower":"4","holds":false,"improves":false},
     {"n":15,"bound":"4","decimal":"4","verified_lower":"4","holds":true,"improves":false},

@@ -18325,6 +18325,24 @@ evidence:
       (E-n012-unnir-9929-2500-audit); this entry preserves the source claim, and the local
       replays are recorded separately.
     source_reviewed: '2026-11-08'
+    external_review:
+      state: informally-verified
+      date: '2026-11-08'
+      reviewed_by: >-
+        An AI agent of this project (Claude, strong tier tbd-strong-max at maximum
+        reasoning), the separately prompted stage 4 review lane of #924 (L58), sharing no
+        context with the registering and replay lane and blind to its replays
+        (docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md).
+      note: >-
+        Accepted with findings, none blocking and none major: the reduction, the D4 fold,
+        the net, the shrink lemma, the centre box and the cell-minimum lemma re-derive, and
+        the strict form through the cores; every premise was recomputed exactly; all
+        39,765 bins were decided by the review's own exact code; the producer's minimum,
+        bin and centre were reproduced by emulating Daniel's core. The certificate has no
+        slack (F4). F1 (indep_scan's receipt does not show its coverage) and F2 (the
+        source's controls do not touch the geometry) are minor, for the author; F3, that
+        the weights look fitted to Daniel's cells, makes both producer checkers producer
+        evidence.
 
   - id: E-n012-unnir-9929-2500-source-replay
     claim: lower-bound
@@ -18390,8 +18408,12 @@ evidence:
       reads bins k = 0..95999 of [0, 90] degrees with no symmetry assumed: VERIFIED,
       least 9985226/9985226 at bin 39531, exit 0, its output byte for byte the source's
       log, 840 s wall and 834 CPU-s. Both are arrangement sweeps of one angle-net method
-      and both are the producer's code, so this replay is producer evidence and the
-      method-distinct decision is E-n012-unnir-9929-2500-native-parent-core. Every
+      and both are the producer's code; the source does not say how its weights were
+      found, and their exact tie under Daniel's core suggests they were fitted to that
+      checker's cells (the stage 4 review's F3). So this replay is producer evidence,
+      reproduced with the producer's code, and the confirmation rests on
+      E-n012-unnir-9929-2500-native-parent-core and E-n012-unnir-9929-2500-review-sweep,
+      which no search could have consulted. Every
       control in the packet's receipts/controls/ is refused by both: the source's two
       (one bin each, as its replay helper runs them, and by the parsers), the lowered
       orbit (verify at bin 39531, indep_scan over every bin, least 9985224/9985226 at bin
@@ -18434,7 +18456,7 @@ evidence:
             devtools.verify_evand_angle_net_native, and lane L57 of 8 November, which added
             the case s12-unnir; tiers and reasoning settings not retained here
       overlaps_producer:
-        extent: unknown
+        extent: system-family
         separate_prompt: true
         separate_code: true
         note: >-
@@ -18442,8 +18464,9 @@ evidence:
           directed-rounding branch and bound over centre boxes, which no checker of the
           source uses. Its reader's authors read Daniel's verify/src/main.rs for the net
           and the sigma rounding (bin_geometry), which the rows take by design, and
-          import none of its code. The source names its assistant only as Numaro
-          Autonomous Research, so any overlap of AI systems is unknown.
+          import none of its code. The source names its own assistant only as Numaro
+          Autonomous Research; both of the producer's checkers say Claude helped write
+          them, and Claude lanes wrote the reader, so the overlap is of system family.
     origin: audited-here
     novelty: previously-published
     source_key: '[unnir s12 2026-11-08]'
@@ -18476,9 +18499,12 @@ evidence:
       workers at nice 19: PASS_COMPLETE, all 39,765 rows certified at the one-unit
       threshold, 416,547,583 boxes, no stall, no exhausted budget, no refutation, 27,321
       CPU-s by wait4 and 18,576 s wall, 4,689 s of it paused while another lane's sweep
-      held the host's other cores. 1,045 rows certify at exactly the threshold, in 47 runs
-      across the net, the 26 rows 39531 to 39556 among them: the certificate has no slack
-      there, and the interval route still decides every one. The coverage decision is this
+      held the host's other cores. The least row bound is the threshold itself, first at
+      row 1982, and 1,045 rows end at it, the 26 rows 39531 to 39556 among them; a row's
+      least box bound is where the branch and bound stopped, not the row's minimum, as at
+      T-095's row 21524. Where the certificate has no slack, in the bins near 44.76
+      degrees where the exact audit and the stage 4 review's sweep find a capture of
+      exactly one, the interval route still decides every row. The coverage decision is this
       repository's interval branch and bound over centre boxes, which shares no code with
       Daniel's verify, with Ryu's indep_scan.cpp or with whatever search made the weights,
       none of which the source describes. All rest on the certificate, the counting theorem
@@ -18490,6 +18516,67 @@ evidence:
       the lowered orbit and the W-doubled file at row 39531 and the regrid at row 0, each
       with an admissible witness of charge below one, and the truncated file by the reader
       (receipts/controls/native-*). The exact value remains open.
+    source_reviewed: '2026-11-08'
+
+  - id: E-n012-unnir-9929-2500-review-sweep
+    claim: lower-bound
+    scope: {n_values: [12]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[unnir s12 2026-11-08]'
+    certificate: resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    replay: >-
+      With CPython 3.14.7 in isolated mode and numpy 2.3.3 (uv run --no-project --python
+      3.14.7 --with numpy==2.3.3 python -I) on a shared four-core host, 8 November 2026, at
+      nice 19, from the packet's review/review-2026-11-08/: programs/premises.py and
+      programs/net_coverage.py on the certificate, then programs/run_bins.py CERT 96000 in
+      two shards over bins 0 to 39764 and programs/compact_sweep.py, which must report all
+      39,765 bins decided with no core minimum below W; programs/test_decider.py 2000 7 and
+      programs/mutation_check.py hold the sweep to brute force. The folder's README gives
+      every command and what each printed; the receipts are its out/full-sweep-summary.json
+      and out/full-sweep-margins.tsv.gz.
+    replay_status: passed
+    verifiers: [V-unnir-924-review-decider, V-unnir-924-review-premises]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          every bin of the net N = 96000 covering [0, 45] degrees (39,765, k = 0 to 39764),
+          each over its whole centre domain, with the fold resting on the exact D4 check
+        checked: 39765
+        of: 39765
+    independence_record: packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md
+    proof:
+      source: docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md
+      theorem: Twelve unit squares do not fit in a square of side below 9929/2500; through the cores, which lie in the open unit squares, the strict s(12) > 9929/2500.
+      scope: Unrestricted square packing with independent rotations, disjoint interiors and boundary contact allowed.
+      pinpoints: >-
+        The review's section 2 (the reduction, the D4 fold, the net, the mid-tangent core
+        and its rational shrink, the centre box and the cell-minimum lemma) and section 4
+        (the bins decided); decide_bins.py's docstring, which gives the proof the program
+        implements.
+      assumptions:
+        - The weights are positive, the points lie in the closed container, the weighted multiset is D4-invariant, and the total is 119787760/9985226 < 12, decided exactly by premises.py.
+        - Bins 0 to 39764 of 2 arctan(k/96000) cover [0, 45] degrees, decided exactly by net_coverage.py.
+        - A unit square at any angle of a bin contains the review's core at the bin's mid-tangent angle, by the rational shrink bound decide_bins.py proves.
+      audit_record: docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md
+    limitations: >-
+      The stage 4 review's complete sweep, run by its lane on 8 November 2026 at two
+      processes under nice 19: all 39,765 bins decided at the first level, none
+      subdivided, 9,494 CPU-s. The least core minimum is exactly W, at the 24 bins 39532
+      to 39555; 55 more are at W + 1 (39511 to 39531, 39556 to 39570 and 39629 to 39647),
+      and every other bin is at least 2702/W above W. At 510 exact angles of 170 bins
+      sampled before any result, with no shrink, none is below W and 38 are exactly W. One
+      implementation, in Python with numpy integer counts, by a Claude agent; the bins are
+      the producer's net, though its core, reference angle and shrink differ from Daniel's.
+      It shares no code with the producer's checkers, which its authors read only after
+      its digest was recorded, or with the native route. Removing the orbit of a point
+      captured at bin 39535's minimum makes it refuse that bin
+      (out/controls-receipt.json).
     source_reviewed: '2026-11-08'
 
   - id: E-n012-unnir-9929-2500-audit

@@ -12139,13 +12139,16 @@ sources:
   - E-n012-unnir-9929-2500-report
   - E-n012-unnir-9929-2500-source-replay
   - E-n012-unnir-9929-2500-native-parent-core
+  - E-n012-unnir-9929-2500-review-sweep
   - E-n012-unnir-9929-2500-audit
   notes: >-
     The whole tree but .gitignore, two licence notices and Daniel's Cargo.toml and
     Cargo.lock, which other packets keep byte for byte, is retained at the repository's one
-    commit, 064c295, for jlevy/squares#924. A new certificate of 4,996 points in Daniel's
-    format, 1/10000 above T-095's 7943/2000. T-274 records the claim; n-012's verified
-    lower lane waits for the stage 4 review, and its reported lower lane stays T-245's 4.
+    commit, 064c295, for jlevy/squares#924. A certificate of 4,996 points in Daniel's
+    format, T-095's 1,736 dilated and 3,260 more, 1/10000 above T-095's 7943/2000. The
+    native parent-core route and the stage 4 review's own sweep confirm it over every bin,
+    independently re-implemented, and the review accepts it, so n-012's verified lower
+    lane takes it (T-274); its reported lower lane stays T-245's 4.
 - id: ozden-s299-upper-bound-2026-11-03
   title: >-
     Doğa Özden's packing of 299 squares at kenaznia-doga/s299-upper-bound 6486ead, issue 893
