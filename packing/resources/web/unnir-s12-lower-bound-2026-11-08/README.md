@@ -127,7 +127,17 @@ so every wall time is contended. Each receipt of an external checker is written 
 `devtools.replay_receipt` (command, working directory, load, exit status, wall and CPU),
 and the checkers ran on the certificate as upstream bytes, SHA-256 `833b76a1…`.
 
-⟨REPLAY-TABLE⟩
+| Checker | Built from | Run | Wall | CPU | Result |
+| --- | --- | --- | ---: | ---: | --- |
+| Daniel’s `verify` (external, the producer’s verifier) | this packet’s `verifier/rust/` (`main.rs` `aca2fa6f…`, the blob `f7c700c8` of `evand/square-packing` `0e76d9fe`), copied to scratch and built by cargo 1.97.0 `build --release --locked` with `CARGO_PROFILE_RELEASE_OVERFLOW_CHECKS=true`; binary SHA-256 `9f9dbeaf…`, the same in a second build into a fresh target ([build](receipts/daniel-verify-build.log)) | `verify s12_lower_3.9716.txt 12 96000 2 0` with `VERIFY_STATS=1` and no other `VERIFY_` or `TIGHT_` variable | 14,479 s | 28,028 s | VERIFIED over `k = 0..39765`, its two threads sweeping 19,901 and 19,864 bins, least captured weight `9985226/9985226` at bin `k = 39531`, exit 0; every line but the timing statistics equals `verification/logs/rust.log`, and the work it counted equals the source’s, 386,359,631 strips, 1,073,231,149,523 cells and 658,382,280,964 active ([receipt](receipts/daniel-verify-ovf-N96000.log)) |
+| Ryu’s `indep_scan` (external, the producer’s second checker) | this packet’s `verifier/cpp/indep_scan.cpp` (`74146d48…`) by g++ 13.3.0 `-O2` ([build](receipts/indep-scan-build.log)); binary `fb0d4e2d…` | `indep_scan s12_lower_3.9716.txt 96000 1000000000000000 12`, no range arguments, so its own line reads `bins k = 0..95999 covering [0,90] deg` | 840 s | 834 s | VERIFIED, least `9985226/9985226` at `k = 39531`, exit 0; its output equals `verification/logs/cpp.log` byte for byte ([receipt](receipts/indep-scan-N96000.log)) |
+| This repository’s native parent-core route (first party) | [`devtools.verify_evand_angle_net_native`](../../../devtools/verify_evand_angle_net_native.py), case `s12-unnir`, at commit `d1b96ff4` with a clean tree ([status](receipts/native-parent-core-N96000.git-status.txt)) | `--case s12-unnir --all --workers 2` | 18,576 s, 4,689 of them paused | 27,321 s | `PASS_COMPLETE`: all 39,765 rows certified at the threshold `9985226/9985226`, 416,547,583 boxes, no stalled box, no exhausted budget, no refutation. 1,045 rows certify at exactly the threshold, in 47 runs across the net, the 26 rows `39531` to `39556` among them, so the certificate has no slack there either; the native theorem gives the strict `s(12) > 9929/2500` ([receipt](receipts/native-parent-core-N96000.json), [row journal](receipts/native-parent-core-N96000.rows.jsonl.gz), [log](receipts/native-parent-core-N96000.log)) |
+
+The native run was paused (`SIGSTOP`) from 15:15:51Z to 16:34:00Z, while the other
+lane’s sweep held the cores this lane would otherwise have taken, and then resumed; its
+wall includes the pause and its CPU, read by `wait4`, does not. The row that straddled
+the pause reports 4,688 seconds in the journal, so the journal’s summed row seconds,
+37,107, overstate the work.
 
 The native reader builds the rows `[k/N, (k+1)/N]` of half-tangents, the core side
 Daniel’s `σ_k` rounded down to `10⁻⁶`, at `N = 96000`, and decides each by
@@ -160,14 +170,18 @@ orbit’s points (`95ff8408…`); and `regrid-3999600`, the same integers read o
 `D = 3999600`, which dilates the container to `39716/9999`, as `T-095`’s source did with
 its own certificate (`4857a83c…`).
 
-⟨CONTROL-TABLE⟩
+| Checker | `double-denominator` | `truncated` | `lowered-tight-orbit` | `regrid-3999600` |
+| --- | --- | --- | --- | --- |
+| `verify` | bin `39531` as the source runs it (`VERIFY_FULLSWEEP=1`): FAIL, `1/2`, exit 4 ([receipt](receipts/controls/daniel-verify-double-denominator-bin-39531.log)) | input error, exit 2 ([receipt](receipts/controls/daniel-verify-truncated-bin-39531.log)) | bin `39531`: FAIL, `9985224/9985226`, exit 4 ([receipt](receipts/controls/daniel-verify-lowered-tight-orbit-bin-39531.log)) | bin `0`: FAIL, `9453881/9985226`; bin `39531` passes at `9985226/9985226` ([0](receipts/controls/daniel-verify-regrid-3999600-bin-0.log), [39531](receipts/controls/daniel-verify-regrid-3999600-bin-39531.log)) |
+| `indep_scan` | bin `39531` as the source runs it: NOT VERIFIED, `1/2`, exit 1 ([receipt](receipts/controls/indep-scan-double-denominator-bin-39531.log)) | input error, exit 2 ([receipt](receipts/controls/indep-scan-truncated-bin-39531.log)) | every bin: NOT VERIFIED, least `9985224/9985226` at `k = 39531`, 832 CPU s ([receipt](receipts/controls/indep-scan-lowered-tight-orbit-N96000.log)) | every bin: NOT VERIFIED, least `9453881/9985226` at `k = 0`, 818 CPU s ([receipt](receipts/controls/indep-scan-regrid-3999600-N96000.log)) |
+| Native | row `39531` refuted with an admissible witness of charge `4593338/4992613` ([receipt](receipts/controls/native-double-denominator.json)) | its reader refuses the file, “point count does not match the file” ([log](receipts/controls/native-truncated.log)) | row `39531` refuted with an admissible witness of charge `9985225/9985226` ([receipt](receipts/controls/native-lowered-tight-orbit.json)) | row `0` refuted with an admissible witness of charge `4972138/4992613`; row `39531` certified ([receipt](receipts/controls/native-regrid-3999600.json)) |
 
 The source’s two controls, run by the commands of its `replay.py` (`VERIFY_FULLSWEEP=1
 VERIFY_BINS=39531:39531` for `verify`, the range `39531` to `39532` for `indep_scan`),
 print every line of the source’s own outputs in `verification/controls/`. A bin refused
 in a window is refused in the full sweep, since each bin is computed alone and one
 refused bin makes the sweep refuse. The native control receipts ran at commit
-`a3d81046` with a clean tree.
+`a3d81046`, and the regrid’s at `83b6b31b`, each with a clean tree.
 [`tests/test_s12_unnir_certificate.py`](../../../tests/test_s12_unnir_certificate.py)
 holds every receipt here and regenerates every control.
 
@@ -212,6 +226,7 @@ upstream path and decompress transparently through
 | Stored file | Origin | Git blob | SHA-256, decompressed |
 | --- | --- | --- | --- |
 | `s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz` | upstream | `90ba2625b3619938bb36ae73387aeed5f9720f15` | `833b76a179a420a40775cc76305ec9ffb7f6ea27472e587958c234c4c4712cbd` |
+| `receipts/native-parent-core-N96000.rows.jsonl.gz` | receipt | `77c4184e5c769488e757c6039de72d80fdcf0e16` | `73062feba1cd6b6bfdd3c8e459a0eab342d8e194b70c5285a852376d9ce8b380` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

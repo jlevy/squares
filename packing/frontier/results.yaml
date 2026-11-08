@@ -40359,7 +40359,15 @@ results:
       lane holds T-245's 4, above this bound, so no case lane moves in this change. T-095
       stays true as stated.
 
-      ⟨REPLAY-NOTES⟩
+      The replays of 8 November ran on a shared four-core host, each heavy run at two
+      threads under nice 19: Daniel's verify over all 39,765 bins, 28,028 CPU-s; the
+      native route over all 39,765 rows, 27,321 CPU-s; indep_scan over all 96,000 bins,
+      834 CPU-s, and over each of two controls, 832 and 818. With the pricing samples,
+      builds, audit and single-bin controls, about 16 CPU hours, under the item's cap of
+      40. The native route certifies 1,045 rows at exactly the threshold, the 26 rows 39531
+      to 39556 among them, and the least capture on every route is exactly one at bin
+      39531, so the certificate has no slack there; a capture of exactly one is all the
+      counting step needs.
 
       The source vendors a later revision of Daniel's verify than the one T-049 to T-095
       ran: Daniel's change of 7 October 2026 altered only its doc comment and its exit

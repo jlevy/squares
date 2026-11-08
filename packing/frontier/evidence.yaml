@@ -18374,7 +18374,30 @@ evidence:
         - A unit square at any angle of bin k contains the concentric square of side sigma_k at the bin's left angle, and its admissible centres lie in the box the checker sweeps.
         - The verifier's i128 arithmetic does not overflow at N = 96000, which the overflow-checked build makes a panic rather than a false pass.
     limitations: >-
-      ⟨SOURCE-REPLAY-LIMITATIONS⟩
+      Replays the producer's two checkers on the retained bytes on 2026-11-08, on a
+      shared four-core Linux host at load about 4. Daniel's verify, built by cargo 1.97.0
+      from the copy the source vendors (main.rs aca2fa6f, the blob of evand/square-packing
+      0e76d9fe verify/src/main.rs) with overflow checks (binary 9f9dbeaf, the same in a
+      second build into a fresh target), at N = 96000 on two threads at nice 19 with
+      VERIFY_STATS and no VERIFY_BINS: VERIFIED over all 39,765 bins (its threads swept
+      19,901 and 19,864), least 9985226/9985226 at bin 39531, exit 0, every line but the
+      timing statistics equal to the source's log and the work it counted equal too
+      (386,359,631 strips, 1,073,231,149,523 cells, 658,382,280,964 active), 14,479 s wall
+      and 28,028 CPU-s. Ryu's indep_scan.cpp as the packet vendors it (74146d48, T-095's
+      source's tools/indep_scan.cpp with one include line changed; not the indep_check.cpp
+      T-095's replay ran), built by g++ 13.3.0 -O2 (binary fb0d4e2d), with the arguments
+      CERT 96000 1000000000000000 12 and no range arguments, so its receipt's own line
+      reads bins k = 0..95999 of [0, 90] degrees with no symmetry assumed: VERIFIED,
+      least 9985226/9985226 at bin 39531, exit 0, its output byte for byte the source's
+      log, 840 s wall and 834 CPU-s. Both are arrangement sweeps of one angle-net method
+      and both are the producer's code, so this replay is producer evidence and the
+      method-distinct decision is E-n012-unnir-9929-2500-native-parent-core. Every
+      control in the packet's receipts/controls/ is refused by both: the source's two
+      (one bin each, as its replay helper runs them, and by the parsers), the lowered
+      orbit (verify at bin 39531, indep_scan over every bin, least 9985224/9985226 at bin
+      39531) and the regrid D = 3999600 (verify at bin 0, indep_scan over every bin, least
+      9453881/9985226 at bin 0). Advance over T-095: 1/10000; gap to the grid's 4:
+      71/2500.
     source_reviewed: '2026-11-08'
 
   - id: E-n012-unnir-9929-2500-native-parent-core
@@ -18448,7 +18471,25 @@ evidence:
         - Disjoint parent interiors make their closed cores disjoint, so twelve parents would capture at least 12 from a total below 12.
       audit_record: docs/project/reviews/review-2026-09-22-native-n11-parent-core.md
     limitations: >-
-      ⟨NATIVE-LIMITATIONS⟩
+      The complete native run of 2026-11-08, at commit d1b96ff4 with the tool and case as
+      committed and a clean tree (receipts/native-parent-core-N96000.git-status.txt), on two
+      workers at nice 19: PASS_COMPLETE, all 39,765 rows certified at the one-unit
+      threshold, 416,547,583 boxes, no stall, no exhausted budget, no refutation, 27,321
+      CPU-s by wait4 and 18,576 s wall, 4,689 s of it paused while another lane's sweep
+      held the host's other cores. 1,045 rows certify at exactly the threshold, in 47 runs
+      across the net, the 26 rows 39531 to 39556 among them: the certificate has no slack
+      there, and the interval route still decides every one. The coverage decision is this
+      repository's interval branch and bound over centre boxes, which shares no code with
+      Daniel's verify, with Ryu's indep_scan.cpp or with whatever search made the weights,
+      none of which the source describes. All rest on the certificate, the counting theorem
+      and the shrink lemma on the same net: the native rows are Daniel's bins and sigma_k
+      by design, though the containment of each core in its parents is proved here, not
+      assumed. The transfer theorem and engine were reviewed for Marc Leonard Overbeck's
+      n = 11 certificate (the audit record above) and applied to T-049, T-078, T-079 and
+      T-095; the case s12-unnir changes only the pinned file. Every control is refused:
+      the lowered orbit and the W-doubled file at row 39531 and the regrid at row 0, each
+      with an admissible witness of charge below one, and the truncated file by the reader
+      (receipts/controls/native-*). The exact value remains open.
     source_reviewed: '2026-11-08'
 
   - id: E-n012-unnir-9929-2500-audit
