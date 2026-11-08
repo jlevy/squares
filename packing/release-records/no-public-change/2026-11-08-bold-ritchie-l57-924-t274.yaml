@@ -7,6 +7,7 @@ paths:
   - packing/atlas/known-best/bound-citations.json
   - packing/atlas/known-best/composite-figure.json
   - packing/campaign/result-requests.yaml
+  - packing/devtools/site_resources.py
   - packing/frontier/README.md
   - packing/frontier/results.yaml
   - packing/frontier/source-coverage.yaml
@@ -24,15 +25,17 @@ reason: >-
   unnir/s12-lower-bound-3.9716 064c2955, replayed and reviewed, and registered as T-274;
   n = 12's verified lower bound moves to it from T-095, which changes its bound citation,
   its composite-figure row, the frontier README's n = 12 gap row and sentence, and #924's
-  requests entry. No paper prints n = 12's bounds or these records. Against main
-  172d737be (#923): devtools.compare_paper_renders rendered each paper at link revision
+  requests entry, and site_resources gains the source's other-projects card. No paper
+  prints n = 12's bounds, these records or that card. Against main 172d737be (#923):
+  devtools.compare_paper_renders rendered each paper at link revision
   0000000000000000000000000000000000000000 into empty site directories, the math passes in
   /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that
-  main's copies of the six paths above swapped in. The optimality review, the
+  main's copies of the seven paths above swapped in. The optimality review, the
   threshold-bound review and the methods survey are byte-identical across the three, 43
   files each. The explainer's 55 files are deterministic, and only its Markdown and HTML
   differ from the baseline; a Markdown diff of a fresh pair of renders, from this tree and
-  with main's results.yaml, bound-citations.json and composite-figure.json swapped in,
+  with main's results.yaml, bound-citations.json, composite-figure.json and
+  site_resources.py swapped in,
   shows the one change, the live register count in its framework section, "one of 273
   results the framework has registered so far" and now 274, which follows the site's data
   and is not a revision of the paper (as the L36, L48, L49 and L51 records say). No PDF
