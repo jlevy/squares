@@ -86,7 +86,119 @@ replaced by ten standard headers, as the source says; nothing else differs.
 `indep_scan.cpp` is in turn `tools/indep_check.cpp` (`T-078`, `T-095`) with three
 optional arguments that restrict the sweep to a range of bins and print each bin below a
 threshold; given only the certificate, `N`, `Q` and `n`, as the producer ran it, it
-sweeps every bin of `[0°, 90°]` as `indep_check` does.
+sweeps every bin of `[0°, 90°]` as `indep_check` does. With the range arguments it prints
+`VERIFIED` for the range alone, so its receipts here are read by their arguments as well
+as by their verdict lines.
+
+## The Certificate, Derived Exactly
+
+[`devtools.audit_s12_unnir_certificate`](../../../devtools/audit_s12_unnir_certificate.py)
+reads the retained certificate and decides 16 checks in rational arithmetic, all passing
+([`receipts/preflight.json`](receipts/preflight.json)):
+
+- the digest, and the bytes are the canonical rendering of their integers;
+- the header `15886400 4000000 / 4000000 / 9985226 / 4996`, so the container is
+  `9929/2500`, `1/10000` above `T-095`’s `7943/2000`;
+- every weight is positive, the least `1/9985226`; the points are distinct and in the
+  closed container; the weighted multiset is invariant under the container’s eight
+  symmetries, in 636 orbits (613 of eight points, 23 of four); and the total is
+  `119787760/9985226`, below `12` by `34952/9985226`;
+- at bin `39531` of `N = 96000`, where both of the producer’s checkers print their least
+  captured weight, every open cell of the arrangement of the bin’s test square (side
+  `σ = 499991/500000` as Daniel’s verifier rounds it, at the bin’s left angle) in a
+  window of half side `1/1000` around `indep_scan`’s diagnostic centre is evaluated
+  exactly. Of its 117 cells whose centre also centres a unit square at that angle that
+  fits, the least captures 767 points of total weight exactly `9985226/9985226`, at the
+  centre `(1.486821572…, 1.219308338…)`. The reported minimum is attained: the
+  certificate has no slack at that bin, and a capture of exactly one is all the counting
+  step needs. This bounds the minimum from above and decides nothing about coverage; and
+- the four controls below, with the digests their receipts name.
+
+The receipt also records, as a fact and not a check, that every one of `T-095`’s 1,736
+points (Evan Daniel’s, `T-049`), dilated by `39716/39715` to this container, is among
+this file’s points within one grid unit in both coordinates, at most `35663/39715` of a
+unit, and that the other 3,260 points are new.
+
+## Replays Here
+
+On a four-core Linux container shared with another lane, which ran its own sweep at two
+threads beside these; every heavy run here used at most two threads under `nice -n 19`,
+so every wall time is contended. Each receipt of an external checker is written by
+`devtools.replay_receipt` (command, working directory, load, exit status, wall and CPU),
+and the checkers ran on the certificate as upstream bytes, SHA-256 `833b76a1…`.
+
+⟨REPLAY-TABLE⟩
+
+The native reader builds the rows `[k/N, (k+1)/N]` of half-tangents, the core side
+Daniel’s `σ_k` rounded down to `10⁻⁶`, at `N = 96000`, and decides each by
+directed-rounding branch and bound over centre boxes, sharing no code with either sweep.
+
+**Which runs carry the confirmation.** Daniel’s full sweep, replayed from the copy the
+source vendors, is the producer’s code; the native route is this repository’s and
+method-distinct. `indep_scan` is a second implementation of the sweep’s method that the
+producer also ran, so its replay is the producer’s evidence. The source does not say how
+its points and weights were found, or whether a search stopped on either checker.
+
+**Pricing.** Each run was priced from a sample here before it ran
+([`receipts/pricing/`](receipts/pricing/)): `verify` on three windows of 40 bins at one
+thread, 81.4 CPU seconds, so about 27,000 for all 39,765 bins; `indep_scan` on three
+windows of 200 bins, 5.3 CPU seconds, so about 850 for all 96,000; the native route on
+33 rows, about 0.72 seconds a row, so about 29,000 for all 39,765. The item’s cap was 40
+CPU hours.
+
+## Controls
+
+[`devtools.audit_s12_unnir_certificate --write-controls`](../../../devtools/audit_s12_unnir_certificate.py)
+writes four controls. The source’s two are rebuilt as its `verification/replay.py
+--controls` writes them, on one line: `double-denominator`, `W` doubled with every
+numerator kept (SHA-256 `7d13e224…`), and `truncated`, the last point dropped with the
+count kept (`63161c11…`). Two are added here: `lowered-tight-orbit`, the eight-point
+orbit of the heaviest point the tight pose above captures, `(6281612, 7246143)` at
+weight `136132/9985226`, lowered by `1/9985226` a point, the least change a weight can
+take, which drops the tight pose to `9985224/9985226` since it captures two of the
+orbit’s points (`95ff8408…`); and `regrid-3999600`, the same integers read over
+`D = 3999600`, which dilates the container to `39716/9999`, as `T-095`’s source did with
+its own certificate (`4857a83c…`).
+
+⟨CONTROL-TABLE⟩
+
+The source’s two controls, run by the commands of its `replay.py` (`VERIFY_FULLSWEEP=1
+VERIFY_BINS=39531:39531` for `verify`, the range `39531` to `39532` for `indep_scan`),
+print every line of the source’s own outputs in `verification/controls/`. A bin refused
+in a window is refused in the full sweep, since each bin is computed alone and one
+refused bin makes the sweep refuse. The native control receipts ran at commit
+`a3d81046` with a clean tree.
+[`tests/test_s12_unnir_certificate.py`](../../../tests/test_s12_unnir_certificate.py)
+holds every receipt here and regenerates every control.
+
+## The Review
+
+The stage 4 mathematical review runs in a lane of its own, prompted separately and blind
+to these replays. Until it returns and accepts, the n = 12 record’s verified lower bound
+stays `T-095`’s `7943/2000`.
+
+## Reproduce
+
+From `packing/`, with `SCRATCH` any directory outside the repository:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.audit_s12_unnir_certificate \
+  --output SCRATCH/preflight.json --write-controls SCRATCH/controls
+uv run --frozen --all-extras --group dev python -c "from pathlib import Path; \
+from devtools.retained_data import read_retained_bytes as r; \
+Path('SCRATCH/s12_lower_3.9716.txt').write_bytes(r(Path( \
+'resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt')))"
+cp -r resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify SCRATCH/verify
+cp resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/rust/src/main.rs \
+  SCRATCH/verify/src/main.rs
+(cd SCRATCH/verify && CARGO_PROFILE_RELEASE_OVERFLOW_CHECKS=true cargo build --release --locked)
+VERIFY_STATS=1 SCRATCH/verify/target/release/verify SCRATCH/s12_lower_3.9716.txt 12 96000 2 0
+g++ -O2 -o SCRATCH/indep_scan \
+  resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/cpp/indep_scan.cpp
+SCRATCH/indep_scan SCRATCH/s12_lower_3.9716.txt 96000 1000000000000000 12
+uv run --frozen --all-extras --group dev python -m devtools.verify_evand_angle_net_native \
+  --case s12-unnir --all --workers 2 --output SCRATCH/native.json
+```
 
 ## Compressed Files
 
