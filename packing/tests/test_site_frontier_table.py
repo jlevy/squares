@@ -226,13 +226,14 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     assert upper == ["≈ 15.68292682…"]
     exact, shown = Fraction(643, 41), Fraction(upper[0][2:-1])
     assert 0 < exact - shown < Fraction(1, 10**8)
-    # n = 12 since 25 October 2026: the reported lower cell holds T-245's whole 4 and no
-    # decimal, the verified one T-095's 7943/2000, and the gap 57/2000 is the verified
-    # lane's; both decimals terminate. From 5 October the one bound filled both lower
-    # cells, and the decimal was the reported cell's.
+    # n = 12 since 8 November 2026: the reported lower cell holds T-245's whole 4 and no
+    # decimal, the verified one T-274's 9929/2500, and the gap 71/2500 is the verified
+    # lane's; both decimals terminate. From 25 October the verified cell held T-095's
+    # 7943/2000, and from 5 October that one bound filled both lower cells, the decimal
+    # the reported cell's.
     assert rows["n-12"]["cells"][column("Reported lower")]["approx"] == []
-    assert rows["n-12"]["cells"][column("Verified lower")]["approx"] == ["= 3.9715"]
-    assert rows["n-12"]["cells"][column("Gap")]["approx"] == ["= 0.0285"]
+    assert rows["n-12"]["cells"][column("Verified lower")]["approx"] == ["= 3.9716"]
+    assert rows["n-12"]["cells"][column("Gap")]["approx"] == ["= 0.0284"]
     assert [cell["approx"] for cell in rows["n-12"]["cells"]].count([]) == len(COLUMNS) - 2
     # A terminating fraction shows its exact decimal in either column: in the reported
     # one n = 88's 481/50, Hosono's mixed rectangle-density bound, and n = 12's until
