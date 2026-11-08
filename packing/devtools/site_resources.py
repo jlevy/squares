@@ -90,6 +90,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/unnir/s12-lower-bound-3.9716",
+        "unnir",
+        (
+            "Daniel's s(12) points dilated again, with 3,260 more and new weights: the"
+            " lower bound s(12) \u2265 9929/2500 (T-274)."
+        ),
+    ),
+    (
         "https://github.com/wand125/square-packing-bounds",
         "Hiroaki Hosono",
         "Weighted point and rectangle-density lower-bound certificates across many n.",
