@@ -4727,6 +4727,35 @@ sources:
       the start. It has a key of its own because its credit is the 260's (F13 of the 5
       November review). MIT-licensed; Claude assistance disclosed. No global optimality claim.
       Retained in web/evand-issue914-2026-11-05/.
+  - key: '[unnir s12 2026-11-08]'
+    authors: [unnir]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-08'
+    lineage: builds-on-project
+    credit: unnir after Daniel, Ryu, Levy
+    short_credit: unnir after Daniel et al.
+    ai_assistance:
+      sentence: 'The source says Numaro Autonomous Research (agentic autonomous autoresearch) assisted the work, and that acceptance rests on the certificate and the executable checks, not on agent agreement.'
+      marker: 'Numaro Autonomous Research'
+      anchor: 'unnir'
+    note: >-
+      unnir/s12-lower-bound-3.9716 at 064c2955670765321aaf1c0a2d5c778949daab6b
+      (2026-11-08T14:20:03Z, the repository's only commit), by unnir of Numaro
+      (https://numaro.tech), reported on jlevy/squares#924. It claims s(12) >= 9929/2500 =
+      3.9716 from certificate/s12_lower_3.9716.txt, a plain weighted-point certificate in
+      Evan Daniel's format: 4,996 D4-symmetric points on the grid 1/4000000, W = 9985226,
+      total 119787760/9985226 < 12, accepted at the angle net N = 96000 by Daniel's verify
+      (vendored byte for byte from evand/square-packing 0e76d9fe, built with overflow
+      checks) and by Ryu Sungjoon's indep_scan.cpp (from squarepacker/s12-lower-bound
+      7a96bec3, one include line changed), each with least captured weight exactly 1 at
+      bin 39531. The README asks credit for the new certificate instance to unnir (Numaro),
+      building on Levy, Evan Daniel and Ryu Sungjoon and the Burns and Massaccesi
+      framework, claims no new technique and no optimality, and says Numaro Autonomous
+      Research (agentic autonomous autoresearch) assisted the work. The sources give no
+      name but the handle unnir and the organization Numaro, which is not a second author.
+      MIT for the certificate, documentation and replay helper; the verifiers keep Daniel's
+      and Ryu's MIT notices. Retained in web/unnir-s12-lower-bound-2026-11-08/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
@@ -4783,3 +4812,4 @@ credited_names:
   Chris Deotte: Deotte
   Alex Chilton: Chilton
   ntumlnoob: ntumlnoob
+  unnir: unnir

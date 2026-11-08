@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **238** programs: **53** external and **185** first-party; **159** decide claims and **79** check premises.
-- **697** of **885** evidence entries name the programs that verified them: 328 independently re-implemented, 296 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **242** programs: **54** external and **188** first-party; **161** decide claims and **81** check premises.
+- **702** of **890** evidence entries name the programs that verified them: 330 independently re-implemented, 298 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -47,7 +47,7 @@ second implementation agrees.
 | [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 25 | 12 |
 | [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 11 | 9 |
 | [`V-evand-zeromargin-py`](#v-evand-zeromargin-py) | zeromargin.py | Evan Daniel | external | decides | 4 | 2 |
-| [`V-evand-angle-net-verify`](#v-evand-angle-net-verify) | verify (the angle-net arrangement sweep) | Evan Daniel | external | decides | 10 | 5 |
+| [`V-evand-angle-net-verify`](#v-evand-angle-net-verify) | verify (the angle-net arrangement sweep) | Evan Daniel | external | decides | 12 | 6 |
 | [`V-evand-xcheck-py`](#v-evand-xcheck-py) | xcheck.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-zmcheck`](#v-evand-zmcheck) | zmcheck (verify2/src/main.rs) | Evan Daniel | external | decides | 3 | 2 |
 | [`V-evand-qx2-zm-py`](#v-evand-qx2-zm-py) | qx2_zm.py | Evan Daniel | external | decides | 4 | 2 |
@@ -73,6 +73,7 @@ second implementation agrees.
 | [`V-queuingtheory-n11-lean`](#v-queuingtheory-n11-lean) | The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack) | Ahmed, Hosono, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis | external | decides | 2 | 1 |
 | [`V-wand125-tools`](#v-wand125-tools) | Hiroaki Hosono's square-packing-tools repository's transfer/l_cap.py and general_pose_tree | Hosono | external | decides | 3 | 2 |
 | [`V-squarepacker-indep-check-cpp`](#v-squarepacker-indep-check-cpp) | indep_check.cpp | squarepacker | external | decides | 4 | 2 |
+| [`V-squarepacker-indep-scan-cpp`](#v-squarepacker-indep-scan-cpp) | indep_scan.cpp | squarepacker | external | decides | 2 | 1 |
 | [`V-schadt-n29-check-py`](#v-schadt-n29-check-py) | check.py | Schadt | external | decides | 1 | 0 |
 | [`V-anabologyco-n17-checker`](#v-anabologyco-n17-checker) | scripts/check_certificate.py and its event pipeline | anabologyco-maker | external | decides | 1 | 0 |
 | [`V-overbeck-n17-check-py`](#v-overbeck-n17-check-py) | check.py | Overbeck | external | decides | 2 | 1 |
@@ -114,7 +115,7 @@ second implementation agrees.
 | [`V-dilation-corollary`](#v-dilation-corollary) | devtools.dilation_corollary | Squares Project (Levy) | first-party | decides | 6 | 4 |
 | [`V-n12-independent-verifier`](#v-n12-independent-verifier) | cases/n12_fractional_certificate/independent_verify.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-n17-weighted-instrument`](#v-n17-weighted-instrument) | cases.n17_weighted_certificate | Squares Project (Levy) | first-party | decides | 1 | 2 |
-| [`V-sqpack-parent-core-native`](#v-sqpack-parent-core-native) | sqpack.fractional.parent_core_interval | Squares Project (Levy) | first-party | decides | 6 | 6 |
+| [`V-sqpack-parent-core-native`](#v-sqpack-parent-core-native) | sqpack.fractional.parent_core_interval | Squares Project (Levy) | first-party | decides | 7 | 7 |
 | [`V-replay-owner-footprint-cover`](#v-replay-owner-footprint-cover) | devtools.replay_owner_footprint_cover | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-five-dot-independent-union`](#v-five-dot-independent-union) | cases.n11_five_dot_cover.independent_union | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-wall-owner-footprints`](#v-wall-owner-footprints) | devtools.wall_owner_footprints | Squares Project (Levy) | first-party | decides | 1 | 0 |
@@ -183,6 +184,7 @@ second implementation agrees.
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 12 | 11 |
 | [`V-audit-s12-reweighted`](#v-audit-s12-reweighted) | devtools.audit_s12_reweighted | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-s12-v11`](#v-audit-s12-v11) | devtools.audit_s12_v11_certificate | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-audit-s12-unnir`](#v-audit-s12-unnir) | devtools.audit_s12_unnir_certificate | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-compare-evand-s32-sweep`](#v-compare-evand-s32-sweep) | devtools.compare_evand_s32_sweep | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-guzhou-r068`](#v-audit-guzhou-r068) | devtools.audit_guzhou_r068 | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-guzhou-r071`](#v-audit-guzhou-r071) | devtools.audit_guzhou_r071 | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -270,6 +272,8 @@ second implementation agrees.
 | [`V-ozden-1104-review-check`](#v-ozden-1104-review-check) | oz_check.py with ozlib.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-yim-1105-review-check`](#v-yim-1105-review-check) | certcheck.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-evand-1105-review-check`](#v-evand-1105-review-check) | decide_feasibility.py and sharp_controls.py | Squares Project (Levy) | first-party | decides | 1 | 7 |
+| [`V-unnir-924-review-decider`](#v-unnir-924-review-decider) | decide_bins.py with run_bins.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-unnir-924-review-premises`](#v-unnir-924-review-premises) | premises.py with net_coverage.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 
 ## By Program
 
@@ -740,8 +744,8 @@ The source's exhaustive exact point-cover checker over the D4 region's root boxe
 
 Decides a positive-margin weighted point cover over an angle net by an exact arrangement sweep in each bin.
 
-- Source: [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/src/main.rs`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/src/main.rs)
-- Versions run: SHA-256 `226ef3f12099…`
+- Source: [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/src/main.rs`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/src/main.rs), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/rust/src/main.rs`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/rust/src/main.rs)
+- Versions run: SHA-256 `226ef3f12099…`; SHA-256 `aca2fa6f8b42…`, revision `0e76d9fe5e48` (verify/src/main.rs at evand/square-packing 0e76d9fe (Git blob f7c700c8), as unnir's s(12) packet vendors it; it differs from 226ef3f1 only by upstream commit cca7bf1 of 7 October 2026, which says in the doc comment that the square is closed and makes the program exit 1 on a refused complete sweep and 4 on a partial run, where it exited 0 whatever its verdict. Nothing it computes changed.; of `main.rs`)
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -753,6 +757,8 @@ Decides a positive-margin weighted point cover over an angle net by an exact arr
 | `E-n012-levy-15680000-3949423-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-079 |
 | `E-n012-squarepacker-7943-2000-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-095 |
 | `E-n012-squarepacker-7943-2000-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-095 |
+| `E-n012-unnir-9929-2500-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-274 |
+| `E-n012-unnir-9929-2500-source-replay` | replayed here | reproduced with the producer’s code | full: every bin of Daniel's D4-reduced net N = 96000 (39,765, k = 0 to 39764) over its whole admissible centre box, and, by indep_scan.cpp, every bin of [0, 90] degrees (96,000) with no symmetry assumed | T-274 |
 | `E-n021-evand-5000-1001-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-050 |
 | `E-n021-evand-5000-1001-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-050 |
 
@@ -1149,6 +1155,21 @@ The source's own checker of its scaled n = 12 point certificate, an angle-net sw
 | `E-n012-squarepacker-31360-7901-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-078 |
 | `E-n012-squarepacker-7943-2000-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-095 |
 | `E-n012-squarepacker-7943-2000-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-095 |
+
+### `V-squarepacker-indep-scan-cpp`
+
+**indep_scan.cpp** · squarepacker · external · decides · C++ · exact-algebraic
+
+indep_check.cpp with three optional arguments that restrict the sweep to a range of bins and print each bin below a threshold; given only the certificate, N, Q and n it sweeps every bin of [0, 90] degrees with no symmetry reduction, as indep_check does.
+
+- Source: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/cpp/indep_scan.cpp`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/cpp/indep_scan.cpp), [`packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/tools/indep_scan.cpp`](../../packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/tools/indep_scan.cpp)
+- Versions run: SHA-256 `74146d48aa46…` (unnir's s(12) packet's copy, the 7a96bec3 file with its one include of bits/stdc++.h replaced by ten standard headers and nothing else changed); SHA-256 `35465554962a…`, revision `7a96bec36bc6` (squarepacker/s12-lower-bound v1.1, where its range-restricted run was the weight search's stopping rule (T-095); of `indep_scan.cpp`)
+- Note: A range-restricted run prints VERIFIED for its range alone, so a receipt is read by its arguments as well as its verdict line.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-unnir-9929-2500-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-274 |
+| `E-n012-unnir-9929-2500-source-replay` | replayed here | reproduced with the producer’s code | full: every bin of Daniel's D4-reduced net N = 96000 (39,765, k = 0 to 39764) over its whole admissible centre box, and, by indep_scan.cpp, every bin of [0, 90] degrees (96,000) with no symmetry assumed | T-274 |
 
 ### `V-schadt-n29-check-py`
 
@@ -1995,6 +2016,7 @@ Decides a threshold charge certificate's rows by direct closed-box interval cove
 | `E-n012-squarepacker-31360-7901-native-parent-core` | audited here | independently re-implemented | not recorded | T-078 |
 | `E-n012-levy-15680000-3949423-native-parent-core` | audited here | independently re-implemented | not recorded | T-079 |
 | `E-n012-squarepacker-7943-2000-native-parent-core` | audited here | independently re-implemented | not recorded | T-095 |
+| `E-n012-unnir-9929-2500-native-parent-core` | audited here | independently re-implemented after reading the producer’s code | full, 39,765 of 39,765: every row [k/96000, (k+1)/96000] of the folded half-tangent net up to tan(pi/8) (39,765), each over its whole parent-centre domain at the threshold of one unit | T-274 |
 
 ### `V-replay-owner-footprint-cover`
 
@@ -3336,6 +3358,20 @@ Decides everything Ryu's v1.1 s(12) certificate rests on but coverage, in intege
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-n012-squarepacker-7943-2000-audit` | audited here | not applicable | not recorded | T-095 |
+
+### `V-audit-s12-unnir`
+
+**devtools.audit_s12_unnir_certificate** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Decides everything unnir's s(12) certificate rests on but coverage, in integers and Fraction: its bytes, the header and side, positivity, containment, distinctness, D4 invariance and orbits, the total below 12, an admissible pose of bin 39531 capturing exactly one over every open cell of its arrangement in a window, and the four controls, the source's two rebuilt as its replay helper writes them.
+
+- Source: [`packing/devtools/audit_s12_unnir_certificate.py`](../../packing/devtools/audit_s12_unnir_certificate.py)
+- Versions run: this repository's commits, which Git holds
+- Note: It shares the file reader and the D4 test with devtools.audit_s12_rescaled_certificate, the orbit grouping with devtools.audit_s12_v11_certificate and Daniel's sigma rounding with devtools.verify_evand_angle_net_native, and nothing with the source's tools.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-unnir-9929-2500-audit` | audited here | not applicable | full: the certificate's premises other than coverage: its bytes, header, all 4,996 points and weights, their D4 orbits and the total | T-274 |
 
 ### `V-compare-evand-s32-sweep`
 
@@ -4795,6 +4831,37 @@ The 5 November stage 4 review's exact checker of Evan Daniel's seven certificate
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-914-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 7 of 7: the certificates at n = 175, 204, 260, 268, 293, 303 and 304 and the six regularized views: every wall and every pair, by two exact methods that share only the reader, with fourteen controls each decided by both | T-267, T-268, T-269, T-270, T-271, T-272, T-273 |
+
+### `V-unnir-924-review-decider`
+
+**decide_bins.py with run_bins.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 8 November stage 4 review's exact decider of unnir's s(12) certificate, in Daniel's text format: for each bin of the net 2 arctan(k/N), a core square at the bin's mid-tangent angle with a rational shrink of its own, its exact minimum capture over the bin's whole centre domain by a strip sweep over the open cells of the box arrangement in int and Fraction (numpy int64 only for the weight counts), subdivision of a bin that fails, and an exact-angle mode with no shrink. test_decider.py holds the sweep to a brute-force enumeration of open cells on 2,000 random instances, and mutation_check.py shows that test catches one-unit errors.
+
+- Source: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/decide_bins.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/decide_bins.py), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/run_bins.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/run_bins.py), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/test_decider.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/test_decider.py), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/mutation_check.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/mutation_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 924 (L58), strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the import and replay lane (L57)), with its own prompt and code; authorship in common with the producer’s: system-family, The decider's digest was recorded at 15:08:21Z, before its authors read either of the producer's checkers (out/digests-before-reading-producer-code.txt), and the digest that ran is that one. It imports nothing from the producer or from this repository. Both producer checkers' sources say Claude helped write them; the source names its own assistant only as Numaro Autonomous Research.
+- Note: Written and run on 8 November 2026 for docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md (SHA-256 335101d848607c63cd4e12c7ec14305585b3cd1f4c88df8735b900b0b9b11540 for decide_bins.py and a6aacfb29dea2c8e71232a7b4418d72504c963cfe9d8286871bd707637a73590 for run_bins.py, in the folder's out/sha256sums.txt). controls.py and emulate_band.py, kept beside it, were written after its authors read Daniel's Rust and decide nothing about the bound; lineage.py measures the point set's relation to T-095's. They are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-unnir-9929-2500-review-sweep` | replayed here | independently re-implemented, clean-room | full, 39,765 of 39,765: every bin of the net N = 96000 covering [0, 45] degrees (39,765, k = 0 to 39764), each over its whole centre domain, with the fold resting on the exact D4 check | T-274 |
+
+### `V-unnir-924-review-premises`
+
+**premises.py with net_coverage.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 8 November stage 4 review's exact premise check of unnir's s(12) certificate: a strict line parse and a token parse that must agree, the digest, count, distinctness, positivity, containment, the D4 invariance of the weighted multiset and its orbits, the side, the total and the margin below 12; and, exactly, the bins of the net that cover [0, 45] degrees.
+
+- Source: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/premises.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/premises.py), [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/net_coverage.py`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/net_coverage.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md`](../../packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 924 (L58), strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the import and replay lane (L57)), with its own prompt and code; authorship in common with the producer’s: system-family, Written before its authors read the producer's checkers; it imports nothing from the producer or from this repository. Both producer checkers' sources say Claude helped write them.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-unnir-9929-2500-review-sweep` | replayed here | independently re-implemented, clean-room | full, 39,765 of 39,765: every bin of the net N = 96000 covering [0, 45] degrees (39,765, k = 0 to 39764), each over its whole centre domain, with the fold resting on the exact D4 check | T-274 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -129,19 +129,23 @@ def test_frontier_records_the_certified_side(
 
 def test_the_n12_bounds_are_daniels_points_rescaled() -> None:
     """Every verified n = 12 lower bound since T-049 keeps Daniel's points at a larger
-    side: the frontier verifies squarepacker's v1.1, the points dilated by
-    31382793/31360000 and re-weighted (T-095, since 5 October 2026). Before it the
-    verified bound was this project's re-weighting at a side scaled by 3951000/3949423
-    (T-079, from 3 October). The reported bound was the same lineage, T-078's whole
-    certificate times 7902/7901 and then T-095's, until T-245's reported Lean proof that
-    s(12) = 4 took the reported lane on 25 October 2026; it is not Daniel's points."""
+    side: the frontier verifies unnir's certificate, T-095's points dilated again by
+    39716/39715 with 3,260 more and new weights (T-274, since 8 November 2026). Before it
+    the verified bound was squarepacker's v1.1, the points dilated by 31382793/31360000
+    and re-weighted (T-095, from 5 October), and before that this project's re-weighting
+    at a side scaled by 3951000/3949423 (T-079, from 3 October). The reported bound was
+    the same lineage, T-078's whole certificate times 7902/7901 and then T-095's, until
+    T-245's reported Lean proof that s(12) = 4 took the reported lane on 25 October 2026;
+    it is not Daniel's points."""
     (side,) = (claim[2] for claim in CLAIMS if claim[1] == 12)
     case = _case(12)
     verified = case["verified_lower_bound"]
-    assert Fraction(verified["exact_form"]) == side * Fraction(31382793, 31360000)
+    assert Fraction(verified["exact_form"]) == side * Fraction(31382793, 31360000) * Fraction(
+        39716, 39715
+    )
     assert verified["evidence"] == [
-        "E-n012-squarepacker-7943-2000-source-replay",
-        "E-n012-squarepacker-7943-2000-native-parent-core",
+        "E-n012-unnir-9929-2500-native-parent-core",
+        "E-n012-unnir-9929-2500-review-sweep",
     ]
     evidence = {
         entry["id"]: entry
@@ -150,7 +154,7 @@ def test_the_n12_bounds_are_daniels_points_rescaled() -> None:
         ]
     }
     for key in verified["evidence"]:
-        assert evidence[key]["source_key"] == "[squarepacker s12 2026-10-05]", key
+        assert evidence[key]["source_key"] == "[unnir s12 2026-11-08]", key
     reported = case["reported_lower_bound"]
     assert reported["source_key"] == "[Jatloe n12 Lean 2026-10-16]"
     assert Fraction(reported["exact_form"]) == 4

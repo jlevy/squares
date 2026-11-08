@@ -1,0 +1,11 @@
+# command: nice -n 19 /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/indep_scan double-denominator.txt 96000 1000000000000000 12 -1 39532 39531
+# cwd: double-denominator control (7d13e224); as the source's replay.py runs it: bins 39531 to 39532 exclusive; scratch build fb0d4e2d
+# python3: not used by this command
+# host: 4 cores; load 4.22 4.30 2.74; started 2026-11-08T15:19:06Z
+certificate: s = 15886400/4000000 = 3.971600000, D = 4000000, W = 19970452, m = 4996
+total weight = 119787760/19970452 = 5.998249814   (n = 12: total < n)
+angle net N = 96000, bins k = 0..95999 covering [0,90] deg (no symmetry assumed), grid Q = 1000000000000000
+min captured weight over all bins = 9985226/19970452 = 0.500000000   (bin k=39531, 44.7619 deg)
+  near centre (1.486822, 1.219308) at angle 44.761891 deg (diagnostic, floating point)
+NOT VERIFIED
+# finished 2026-11-08T15:19:06Z; exit 1; wall 0.199 s; CPU 0.0 s (user 0.013 + sys 0.000); load 4.22 4.30 2.74

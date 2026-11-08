@@ -1,0 +1,72 @@
+{
+  "claim": "s(12) >= 9929/2500 = 3.9716",
+  "credit": "unnir",
+  "affiliation": "Numaro",
+  "website": "https://numaro.tech",
+  "certificate": {
+    "path": "certificate/s12_lower_3.9716.txt",
+    "sha256": "833b76a179a420a40775cc76305ec9ffb7f6ea27472e587958c234c4c4712cbd",
+    "pointCount": 4996,
+    "coordinateDenominator": 4000000,
+    "weightDenominator": 9985226,
+    "totalWeightNumerator": 119787760,
+    "strictTotalMarginNumerator": 34952,
+    "D4Symmetric": true
+  },
+  "verificationDate": "2026-11-08",
+  "machine": {
+    "cpu": "Apple M4 Max",
+    "logicalCores": 14,
+    "memoryGiB": 36
+  },
+  "checkers": {
+    "rust": {
+      "upstream": "https://github.com/evand/square-packing",
+      "revision": "0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d",
+      "source": "verifier/rust/src/main.rs",
+      "arithmetic": "i128 integer/rational; release overflow checks enabled",
+      "N": 96000,
+      "angleBins": 39765,
+      "angleScope": "[0,45 degrees] plus checked D4 symmetry",
+      "minimumExact": "9985226/9985226",
+      "exitCode": 0,
+      "wallSecondsReported": 2167.12,
+      "threads": 10,
+      "log": "verification/logs/rust.log",
+      "logSha256": "e6a416414b1597192a6cb8cdb78479314001c03cba34b46dbb522d25a0840608",
+      "originalBinarySha256": "36b607bb3b4b69583b7a9ed8a6551fcb94945ca7a8fb61e638cd89ef157f1266",
+      "sourceSha256": "aca2fa6f8b42d7973f299a5332d8f7ef200409a0a04fb6eb21d703ff9c8dabc0"
+    },
+    "cpp": {
+      "upstream": "https://github.com/squarepacker/s12-lower-bound",
+      "source": "verifier/cpp/indep_scan.cpp",
+      "arithmetic": "__int128 with checked arithmetic and conservative integer rounding",
+      "N": 96000,
+      "Q": "1000000000000000",
+      "angleBins": 96000,
+      "angleScope": "full [0,90 degrees], no symmetry assumption",
+      "minimumExact": "9985226/9985226",
+      "exitCode": 0,
+      "observedConcurrentWallSeconds": 626.45,
+      "threads": 1,
+      "log": "verification/logs/cpp.log",
+      "logSha256": "04ac1527eec65c44272d876d44cf60dd4bbbd04534cb57803689d1bfc77e683f",
+      "originalBinarySha256": "c518ff0b919049969580d5478bc11ae17d8b73df73e76555d979013b6effab81",
+      "portabilityChange": "Replaced nonstandard bits/stdc++.h with explicit standard headers; checking logic unchanged",
+      "revision": "7a96bec36bc6811c3715ef581598f22ff9b7ba3a",
+      "sourceSha256": "74146d48aa46287514ea44fcfdab6ed66ff687ccca46f24347dd8b1cf923ac61"
+    }
+  },
+  "notDone": [
+    "External replay and mathematical review",
+    "Lean formalization of this certificate",
+    "Method-distinct parent-core interval replay"
+  ],
+  "discoveryAttribution": "Numaro Autonomous Research (agentic autonomous autoresearch)",
+  "negativeControls": {
+    "summary": "verification/controls/controls.json",
+    "count": 4,
+    "weightControlScope": "single bin 39531 only; no full coverage claim",
+    "rebuiltSourceControlsAlsoPassed": true
+  }
+}

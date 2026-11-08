@@ -350,6 +350,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-088",
         "T-089",
         "T-092",
+        # Superseded at n = 12 on 8 November 2026, when unnir's certificate (T-274) took
+        # the verified lower bound it held.
+        "T-095",
         "T-096",
         "T-099",
         "T-100",

@@ -460,6 +460,9 @@ allowlist:
   - path: packing/devtools/audit_s12_v11_certificate.py
     kind: download
     boundary: squarepacker's v1.1 certificate and Daniel's points against the digests the source and the 2 October packet pinned (#363).
+  - path: packing/devtools/audit_s12_unnir_certificate.py
+    kind: download
+    boundary: unnir's s(12) certificate against the digest #924 and the source's SHA256SUMS state, pinned in the 8 November packet.
   - path: packing/devtools/wand125_fn1_bindings.py
     kind: download
     boundary: >-

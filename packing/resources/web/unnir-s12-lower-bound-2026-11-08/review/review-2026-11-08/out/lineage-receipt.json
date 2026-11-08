@@ -1,0 +1,48 @@
+{
+ "new": {
+  "side": "9929/2500",
+  "points": 4996,
+  "W": 9985226
+ },
+ "old": {
+  "side": "7943/2000",
+  "points": 1736,
+  "W": 10000000
+ },
+ "dilation": "39716/39715",
+ "new_points_by_distance_to_nearest_dilated_old_point": {
+  "<= 1 units": 1736,
+  "> 2000 units": 3256,
+  "<= 1000 units": 4
+ },
+ "old_points_matched_within_10_units": 1736,
+ "share_of_new_total_weight_on_points_within_10_units": 0.591101828767814,
+ "alpha_new_D_units": 3999968.5714285714,
+ "new_points_within_50_units_of_x_eq_alpha_new": 112,
+ "most_common_x_values": [
+  [
+   3999969,
+   112
+  ],
+  [
+   11886431,
+   112
+  ],
+  [
+   3983599,
+   104
+  ],
+  [
+   11902801,
+   104
+  ],
+  [
+   7935201,
+   96
+  ],
+  [
+   7951199,
+   96
+  ]
+ ]
+}

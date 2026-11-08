@@ -28907,3 +28907,47 @@ issues:
       permission from submission (24 October, #763; think-cnn7, licence follow-up
       think-m8f4, still open) is stated as permission to retain and import; the record says
       nothing about reuse by others.
+  - number: 924
+    title: 's(12) ≥ 9929/2500 = 3.9716: registration request'
+    author: unnir
+    opened: '2026-11-08'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      s(12) >= 9929/2500 = 3.9716, 1/10000 above T-095, by unnir (Numaro): a plain
+      weighted-point certificate in Evan Daniel's format, 4,996 D4-symmetric points on the
+      grid 1/4000000 in the container 15886400/4000000, W = 9985226, total
+      119787760/9985226 < 12 (unnir/s12-lower-bound-3.9716 at 064c2955). Daniel's verify,
+      vendored from evand/square-packing 0e76d9fe and built with overflow checks, accepts it
+      over all 39,765 bins at N = 96000, and Ryu Sungjoon's indep_scan.cpp over all 96,000,
+      each with least captured weight exactly 1 at bin 39531; two controls (W doubled, a
+      point dropped) are refused. It claims no new technique and no optimality, and does
+      not use T-245's reported s(12) = 4.
+    read_through: '2026-11-08T14:21:31Z'
+    results:
+      - key: s12-9929-2500
+        claim: s(12) >= 9929/2500 = 3.9716, a new 4,996-point weighted cover (unnir, Numaro)
+        source: body
+        register: [T-274]
+    asks:
+      - what: >-
+          An independent replay, ideally including the native parent-core interval
+          decision as in #363, a mathematical review, and, if it holds, the n = 12 verified
+          lower bound updated
+        state: done
+        source: body
+        bead: think-0vl3
+        note: >-
+          Replayed here on 064c2955 by Daniel's verify and indep_scan.cpp over every bin
+          (producer evidence), and decided over all 39,765 rows by the native parent-core
+          interval route and over all 39,765 bins by the stage 4 review's own exact sweep;
+          the review (docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md) accepts it
+          with no blocking finding. T-274 registers 9929/2500, and n = 12's verified lower
+          bound moves to it from T-095's 7943/2000 (intake lane L57, 8 November 2026).
+    beads: [think-0vl3]
+    answer_bead: think-0vl3
+    replies: []
+    close_when: >-
+      The s(12) certificate is confirmed or refuted, the n = 12 record says so, and the
+      reply saying so is posted from main.

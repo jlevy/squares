@@ -1,0 +1,17 @@
+{
+  "N": 96000,
+  "first_k_with_theta_ge_45deg": 39765,
+  "bins_needed_for_0_to_45deg": 39765,
+  "last_bin_index_for_45deg": 39764,
+  "theta_last_bin_lo_deg": 44.999488546603516,
+  "theta_last_bin_hi_deg": 45.00050740092822,
+  "exact": {
+    "(k45-1+N)^2 - 2N^2 (must be < 0)": -136304,
+    "(k45+N)^2 - 2N^2 (must be >= 0)": 135225
+  },
+  "bins_for_0_to_90deg": 96000,
+  "max_bin_width_rad_upper_bound": 2.0833333333333333e-05,
+  "last_bin_reflection": {
+    "theta_lo + theta_hi >= 90deg": false
+  }
+}

@@ -1,0 +1,5 @@
+# command: nice -n 19 g++ -O2 -o indep_scan indep_scan.cpp
+# cwd: scratch copy of verifier/cpp/indep_scan.cpp of unnir/s12-lower-bound-3.9716 064c2955 (sha256 74146d48), squarepacker/s12-lower-bound 7a96bec3 tools/indep_scan.cpp with its one include line replaced by explicit standard headers; g++ 13.3.0
+# python3: not used by this command
+# host: 4 cores; load 0.30 0.67 0.40; started 2026-11-08T15:01:04Z
+# finished 2026-11-08T15:01:06Z; exit 0; wall 1.771 s; CPU 1.3 s (user 1.161 + sys 0.119); load 0.30 0.67 0.40

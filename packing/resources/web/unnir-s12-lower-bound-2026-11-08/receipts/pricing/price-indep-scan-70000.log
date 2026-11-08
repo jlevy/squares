@@ -1,0 +1,11 @@
+# command: nice -n 19 ./indep_scan s12_lower_3.9716.txt 96000 1000000000000000 12 -1 70200 70000
+# cwd: pricing sample, bins 70000 to 70200 exclusive (range arguments, partial); scratch build fb0d4e2d
+# python3: not used by this command
+# host: 4 cores; load 0.29 0.60 0.38; started 2026-11-08T15:01:54Z
+certificate: s = 15886400/4000000 = 3.971600000, D = 4000000, W = 9985226, m = 4996
+total weight = 119787760/9985226 = 11.996499629   (n = 12: total < n)
+angle net N = 96000, bins k = 0..95999 covering [0,90] deg (no symmetry assumed), grid Q = 1000000000000000
+min captured weight over all bins = 10000099/9985226 = 1.001489501   (bin k=70000, 72.1966 deg)
+  near centre (0.631202, 0.628586) at angle 72.196568 deg (diagnostic, floating point)
+VERIFIED: every closed unit square inside the container captures weight >= 1, and total weight < n
+# finished 2026-11-08T15:01:56Z; exit 0; wall 1.715 s; CPU 1.7 s (user 1.675 + sys 0.032); load 0.29 0.60 0.38

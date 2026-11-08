@@ -345,6 +345,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-271](packing/frontier/RESULTS.md) | 293 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(293) <= 17.623065212060701770633564247069. |
 | [T-272](packing/frontier/RESULTS.md) | 303 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(303) <= 17.901832750854048761575294038467. |
 | [T-273](packing/frontier/RESULTS.md) | 304 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(304) <= 17.920944093340242061198022152503. |
+| [T-274](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S3` | `previously-published` | s(12) >= 9929/2500 = 3.9716, by unnir (Numaro), published on 8 November 2026 as unnir/s12-lower-bound-3.9716 and reported on jlevy/squares#924. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -476,7 +477,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 273 | 273 registered, 241 by others |
+| Frontier results | 274 | 274 registered, 242 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -1024,6 +1025,7 @@ case or experiment separately.
 | [Kaelan Yim’s Certificate for s(260): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-05-yim-895-260.md) | dated review record | record | retained | — |
 | [Özden’s s(94) ≥ 2493/250, Hosono’s Measure Dilated Again: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-05-ozden-s94-9972.md) | dated review record | record | retained | — |
 | [Evan Daniel’s Seven Certificates of #914: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-05-evand-914-seven.md) | dated review record | record | retained | — |
+| [unnir’s Certificate for s(12) ≥ 9929/2500: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md) | dated review record | record | retained | — |
 | [sqverify-fast Declared Nets: Re-Check of the Fixes for DR-1 to DR-3 (`36b52538a`) and the Proposed Flip](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md) | dated review record | record | retained | — |
 | [Review: wand125’s Checker on ValidTilt9 (`T-081`), Lane R3](docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md) | dated review record | record | retained | — |
 | [Review of the sqverify-fast format T route: census rows and controls for T-068’s 34 rectangle certificates](docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md) | dated review record | record | retained | — |

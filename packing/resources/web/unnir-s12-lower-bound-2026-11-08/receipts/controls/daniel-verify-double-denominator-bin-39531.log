@@ -1,0 +1,13 @@
+# command: nice -n 19 /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/verify-target/release/verify double-denominator.txt 12 96000 1 0
+# cwd: double-denominator control (7d13e224), written by devtools.audit_s12_unnir_certificate --write-controls; as the source's replay.py runs it: VERIFY_FULLSWEEP=1 VERIFY_BINS=39531:39531, one thread; scratch build 9f9dbeaf
+# python3: not used by this command
+# host: 4 cores; load 4.22 4.30 2.74; started 2026-11-08T15:19:05Z
+D4-symmetric atom set: true (VERIFY_FULLSWEEP set: full range)  -> angles cover [0,90) deg
+atoms=4996 total weight = 119787760/19970452 = 5.998250
+s = 15886400/4000000 = 3.971600
+angles: k=0..96000 (N=96000), covering [0,90deg]
+PARTIAL RUN: VERIFY_BINS=39531:39531 -- only these bins are swept; this run cannot verify anything
+  FAIL at angle k=39531: covered 9985226/19970452
+min covered weight over ALL placements = 9985226/19970452 = 0.500000  (at angle k=39531)
+NOT VERIFIED (PARTIAL RUN: only bins 39531..39531 of 0..95999 were swept)
+# finished 2026-11-08T15:19:06Z; exit 4; wall 0.885 s; CPU 0.5 s (user 0.542 + sys 0.000); load 4.22 4.30 2.74

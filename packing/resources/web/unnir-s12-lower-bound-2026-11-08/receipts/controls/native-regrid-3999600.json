@@ -1,0 +1,105 @@
+{
+  "schema": "EvandNativeParentCoreReceipt/v1",
+  "status": "UNRESOLVED",
+  "method": "directed-rounding box branch-and-bound over parent-core rows",
+  "case": "s12-unnir",
+  "provenance": {
+    "git_commit": "83b6b31bc04a5fa17cff154a9fbb323ebaa46de2",
+    "dirty": false,
+    "python": "3.14.7 (main, Sep 29 2026, 15:01:40) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.44-fc-v310-x86_64-with-glibc2.39",
+    "command": [
+      "/home/user/squares/.claude/worktrees/agent-a1514e9f9309b3918/packing/devtools/verify_evand_angle_net_native.py",
+      "--case",
+      "s12-unnir",
+      "--rows",
+      "0",
+      "39531",
+      "--certificate",
+      "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/controls/regrid-3999600.txt",
+      "--certificate-sha256",
+      "4857a83c69e1e8d168d544781f72b4ec51601163ad60bcfd22e28c57109751e1",
+      "--output",
+      "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/receipts/controls/native-regrid-3999600.json"
+    ],
+    "source_url": "https://github.com/unnir/s12-lower-bound-3.9716",
+    "source_commit": "064c2955670765321aaf1c0a2d5c778949daab6b",
+    "certificate": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/controls/regrid-3999600.txt",
+    "certificate_sha256": "4857a83c69e1e8d168d544781f72b4ec51601163ad60bcfd22e28c57109751e1"
+  },
+  "claim": "s(12) >= 39716/9999",
+  "native_bound": "s(12) > 39716/9999",
+  "net": 96000,
+  "sigma_scale": 1000000,
+  "points": 4996,
+  "budget": "59893880/4992613",
+  "counting_gap": "17476/4992613",
+  "premises": {
+    "budget": "59893880/4992613",
+    "minimum_containment_numerator": "389446383489/4915061207552000000000",
+    "final_half_tangent": "2651/6400",
+    "rows": 39765
+  },
+  "catalogue_rows": 39765,
+  "selected_rows": 2,
+  "resumed_rows": 0,
+  "complete": false,
+  "batch_size": 2048,
+  "workers": 1,
+  "scale": 9985226,
+  "threshold_units": 9985226,
+  "boxes": 14002,
+  "row_cpu_seconds": 1.1022979129993473,
+  "least_lower": {
+    "row": 0,
+    "units": null
+  },
+  "source_minimum": {
+    "weight": "9985226/9985226",
+    "bin": 39531
+  },
+  "refutations": [
+    {
+      "row": 0,
+      "rotated_centre": [
+        2.4720046726962748,
+        3.437169107535755
+      ],
+      "charge": "4972138/4992613",
+      "admissible": true
+    }
+  ],
+  "seconds": 10.871485322997614,
+  "rows": [
+    {
+      "label": "0",
+      "status": "refuted",
+      "lower": null,
+      "upper": 9944276,
+      "witness": [
+        2.4720046726962748,
+        3.437169107535755
+      ],
+      "boxes": 6599,
+      "stalled": 0,
+      "budget_exhausted": false,
+      "index": 0,
+      "seconds": 0.5165969480003696
+    },
+    {
+      "label": "39531",
+      "status": "certified",
+      "lower": 9985226,
+      "upper": 10000569,
+      "witness": [
+        2.6163920892837704,
+        0.9059476311069616
+      ],
+      "boxes": 7403,
+      "stalled": 0,
+      "budget_exhausted": false,
+      "index": 39531,
+      "seconds": 0.5857009649989777
+    }
+  ]
+}

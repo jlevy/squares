@@ -5483,7 +5483,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-08'
   status: live
 - path: cases/120.html
   canonical: cases/120.html
@@ -23469,6 +23469,46 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-11-05-evand-914-seven.md
     - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
+- path: result/t-274.html
+  canonical: result/t-274.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-08'
+  lastmod: '2026-11-08'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 12
+    established: null
+    attribution:
+      source_keys:
+      - '[unnir s12 2026-11-08]'
+      published: '2026-11-08'
+    builds_on: null
+    evidence:
+    - E-n012-unnir-9929-2500-report
+    - E-n012-unnir-9929-2500-source-replay
+    - E-n012-unnir-9929-2500-native-parent-core
+    - E-n012-unnir-9929-2500-review-sweep
+    - E-n012-unnir-9929-2500-audit
+    artifacts:
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/README.md
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/README.md
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/rust/src/main.rs
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/cpp/indep_scan.cpp
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/preflight.json
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/daniel-verify-ovf-N96000.log
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/indep-scan-N96000.log
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/receipts/native-parent-core-N96000.json
+    - packing/devtools/audit_s12_unnir_certificate.py
+    - packing/devtools/verify_evand_angle_net_native.py
+    - docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md
+    - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/out/full-sweep-summary.json
 - path: results.html
   canonical: results.html
   kind: page
