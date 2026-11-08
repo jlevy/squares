@@ -28979,7 +28979,9 @@ issues:
       as two suggestions for the packet, neither changing the bound, and asks three
       questions: whether indep_scan will refuse VERIFIED on a partial range or the
       packet will ship indep_check.cpp, with a geometric control; how the points and
-      weights were found, and whether the exact tie at 1 was a target; and whether the
-      author claims s(12) >= 9929/2500 or would state s(12) > 9929/2500 (review F5). The
-      questions are informational and hold nothing open. The issue was closed as
-      completed at 23:07:41Z.
+      weights were found, whether the exact tie at 1 was a target and which checker
+      stopped the search; and whether the author claims s(12) >= 9929/2500 or would state
+      s(12) > 9929/2500 (review F5). The questions are informational and hold nothing
+      open. The reply also says the printed posters' credit line will follow at their
+      next redraw; think-6vhj owns that credit refresh, before think-wvsa's redraw. The
+      issue was closed as completed at 23:07:41Z.
