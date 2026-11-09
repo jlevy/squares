@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "(no issue)",
+  "source": "https://github.com/vitamoon/vitamoon",
+  "revision": "78eb9ea5da43230686941289b9de3ce0f8e34899",
+  "read_on": "2026-11-09",
+  "read_at_main": "19b354a5cec5633ee6f96ff82752a53f2b53b063",
+  "horizon": 324,
+  "results": [
+    {"n": 303, "certificate": "n303.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "17.901789273296", "printed_in": "https://github.com/vitamoon/vitamoon/blob/78eb9ea5da43230686941289b9de3ce0f8e34899/PACKINGS.md", "exact_side": "1259726429694979000000000000001259726429694979/70368744177664000000000000000000000000000000", "ceiling": "17.9017892732954778", "first_committed": "2026-11-09T07:13:34Z", "grid_side": "18", "case": {"source_key": "[Daniel issue 914 2026-11-05]", "holders": "Evan Daniel, after Chris Deotte", "result": "T-272", "reported_value": "17.9018327508540488", "verified_value": "17.9018327508540488", "evidence": ["E-evand-914-exact-feasibility", "E-evand-914-review-exact-feasibility"], "exact_side": "17901832750854048761575294038467/1000000000000000000000000000000", "relation": "below", "difference": "3059461196552514542622092863789068506109/70368744177664000000000000000000000000000000"}, "pending": [{"report": "#930", "url": "https://github.com/jlevy/squares/issues/930", "holders": "Doğa Özden, after Evan Daniel", "printed": "17.901789273157", "rounding": "up", "relation": "above", "difference": "-9744505765834752001259726429694979/70368744177664000000000000000000000000000000"}], "smallest": "#930"}
+  ]
+}
