@@ -982,6 +982,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of 5 November 2026 (think-o7ly)](packing/cases/regularized_drawings/think-o7ly-2026-11-05/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 914 (think-lrj4)](packing/cases/regularized_drawings/think-lrj4-2026-11-05/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issues 927 to 931 (think-463r)](packing/cases/regularized_drawings/think-463r-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption of Issues 935 and 936 (think-he66)](packing/cases/regularized_drawings/think-he66-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
 | [Certificates Below the Houses of 31 October 2026 (think-ruu2)](packing/cases/register_candidates/think-ruu2-2026-10-31/README.md) | source retention and archive policy | record | retained | — |
 | [Review code: project candidates at 130, 293 and 307 (think-ruu2)](packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of T-242 at 268 (think-3anz)](packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md) | source retention and archive policy | record | retained | — |

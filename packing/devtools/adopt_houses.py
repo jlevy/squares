@@ -2371,8 +2371,8 @@ CREDITS: dict[int, Credit] = {
     172: Credit(
         (DANIEL,),
         (OZDEN,),
-        "Doğa Özden’s further arrangement of Evan Daniel’s packing from an L-cut of the n = 199 "
-        "record, Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
+        "Doğa Özden’s further arrangement of Evan Daniel’s packing from an L-cut of the "
+        "n = 199 record, Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
     ),
     # T-267 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
     # fault-line composer, his implementation of Chris Deotte's multi-gadget fault DP, from
