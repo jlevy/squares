@@ -12523,15 +12523,16 @@ sources:
   evidence:
   - E-ozden-935-certificate-report
   - E-ozden-935-exact-feasibility
+  - E-ozden-935-review-exact-feasibility
   notes: >-
     The whole tree of the repository's one commit, 2ce1f7c, but a raster diff image, two checker
     files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
     jlevy/squares#935, the certificate admitted only where its exact side rounds up to the side the
-    issue prints. T-282 records the in-horizon report at V3/C3 on both maintained routes' replay,
-    pending the stage 4 review (think-qqyg). The ledger of 9 November for this lane
+    issue prints. T-282 records the in-horizon report at V3/C3 since the stage 4 review of 9 November
+    (docs/project/reviews/review-2026-11-09-ozden-935-936.md), and the case adopted it as its
+    house that day. The ledger of 9 November for this lane
     (campaign/issue-intake/upper-bounds-935-936-20261109) records it. All 3 native jobs have full
-    outcomes. No selected override or superseded claim is created before the review; the current
-    case and its source ownership remain unchanged.
+    outcomes.
 - id: ozden-s270-upper-bound-2026-11-09
   title: 'Doğa Özden''s packing of 270 squares at kenaznia-doga/s270-upper-bound 78ab8ce, issue 936'
   role: source-repository
@@ -12552,15 +12553,16 @@ sources:
   evidence:
   - E-ozden-936-certificate-report
   - E-ozden-936-exact-feasibility
+  - E-ozden-936-review-exact-feasibility
   notes: >-
     The whole tree of the repository's one commit, 78ab8ce, but a raster diff image, two checker
     files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
     jlevy/squares#936, the certificate admitted only where its exact side rounds up to the side the
-    issue prints. T-283 records the in-horizon report at V3/C3 on both maintained routes' replay,
-    pending the stage 4 review (think-qqyg). The ledger of 9 November for this lane
+    issue prints. T-283 records the in-horizon report at V3/C3 since the stage 4 review of 9 November
+    (docs/project/reviews/review-2026-11-09-ozden-935-936.md), and the case adopted it as its
+    house that day. The ledger of 9 November for this lane
     (campaign/issue-intake/upper-bounds-935-936-20261109) records it. All 3 native jobs have full
-    outcomes. No selected override or superseded claim is created before the review; the current
-    case and its source ownership remain unchanged.
+    outcomes.
 - id: yim-certificates-2026-11-09
   title: Kaelan Yim's certificates at vitamoon/vitamoon ac14112, watched publications with no issue
   role: source-repository

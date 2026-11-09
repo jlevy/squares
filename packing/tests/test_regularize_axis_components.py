@@ -196,6 +196,25 @@ def test_a_row_with_slack_compacts_into_the_wall_and_each_other() -> None:
     assert "regularized" in view["claim"]["limitations"]
 
 
+def test_a_slide_limit_past_the_digit_bound_refuses_the_frame(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A slide whose exact limit carries more than `SLIDE_DIGITS` digits refuses the frame,
+    as n = 270's certificate of 9 November 2026 did at 4,300, rather than failing while the
+    move is written or compacting without end. Every limit here has a few digits, so a
+    bound of one refuses the first slide, and the default leaves the same frame alone."""
+    witness = decimal_witness(
+        [("0.53", "0.5", "0"), ("1.56", "0.5", "0"), ("2.59", "0.5", "0"), PIN_4], "4"
+    )
+    monkeypatch.setattr(axis, "SLIDE_DIGITS", 1)
+    with pytest.raises(axis.RegularizeError) as refused:
+        regularize(witness, source_path="tests/synthetic")
+    assert refused.value.kind == "slide-digits"
+    monkeypatch.setattr(axis, "SLIDE_DIGITS", 4300)
+    report, _view = regularize(witness, source_path="tests/synthetic")
+    assert report["regularization"]["moves"]["compactions"] == 3
+
+
 def test_a_block_off_its_lattice_by_a_hair_snaps_onto_it_exactly() -> None:
     """A 2-by-2 block a few 1e-13 short of its lattice lands on it, by snaps only.
 

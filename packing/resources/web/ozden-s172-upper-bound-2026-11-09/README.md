@@ -22,7 +22,11 @@ prepared and posted both on his behalf.
   2 × 10⁻¹³ are the decimal pose’s own, left by the final binary64 repair scaling of
   Evan Daniel’s quench, that only the squares that set the left wall, the bottom wall
   and the side touch them exactly, and that other squares near a wall clear it by up to
-  about 10⁻¹².
+  about 10⁻¹². Measured by the stage 4 review, exactly three squares touch a wall (left
+  46, bottom 85, right 161); the other squares within 10⁻¹² of a wall clear it by
+  2.8 × 10⁻¹⁷ to 7.0 × 10⁻¹⁵, and square 151 clears the top by 6.0 × 10⁻⁵, beyond “up
+  to about 1e-12” (its F4). The pair margins are 2.0 to 3.3 × 10⁻¹³ of the centres’
+  separation, about twice the issue’s “about 1e-13 relative” (F5).
 - `n172-witness.json` is the same file as JSON. `packing-witness-verify.txt` is the
   author’s run of this repository’s `packing-witness verify` at `ef1af493` (VERIFIED,
   14,706 pairs); `sqcheck-output.txt` is the author’s run of `verifier/sqcheck.py`, an
@@ -91,16 +95,22 @@ and states no packing.
 witness and the regularized view, and wrote [measure/identity.json](measure/identity.json).
 A measurement for credit; it decides nothing.
 
-- **172:** no symmetry pairs it one to one with T-257’s packing by nearest centres; the
+- **172:** no symmetry pairs it one to one with T-257’s packing by nearest centres, which
+  miss by one shared centre (squares 14 and 18 both lie nearest house square 14); the
   optimal assignment, under the identity, moves 15 squares beyond 0.1 and 69 beyond 0.01
   (largest 0.668426) and turns 58 squares by more than 10⁻⁶ radians, 15 of them by more
-  than 1 degree and by up to 44.61 degrees, 9 of them to the other side of upright.
-  Tilted beyond 1 degree: this packing 49, 36 turned one way and 13 the other; T-257 49,
-  25 and 24. The house witness measures the same, and against the regularized view the
-  source says it started from, the assignment moves 15 squares beyond 0.1 and 65 beyond
-  0.01. So it is a further arrangement of T-257’s packing, though not one to one with it
-  by nearest centres. The issue’s own counts (168 centres beyond 10⁻³, 15 squares
-  re-tilted beyond 1 degree, largest move 0.668) agree with these.
+  than 1 degree. In a block turned about 45 degrees, ten squares move by up to 0.6 and
+  turn by about a degree, three upright squares take the block’s tilt (the largest turn,
+  44.61 degrees) and two of its squares straighten (the review’s F6).
+  Tilted beyond 1 degree: 49 in each packing, 44 and 45 of them within a degree of 45
+  degrees, where the sign of a tilt is a convention; the nine squares whose angles cross
+  45 degrees turn by 0.8 to 1.2 degrees, so no tilt reverses (F15, which corrects this
+  section’s first draft). The house witness measures the same, and against the
+  regularized view the source says it started from, the assignment moves 15 squares
+  beyond 0.1 and 65 beyond 0.01. So it is a further arrangement of T-257’s packing,
+  though not one to one with it by nearest centres. The issue’s own counts (168 centres
+  beyond 10⁻³, 15 squares re-tilted beyond 1 degree, largest move 0.668) are against the
+  house witness, and agree with these (F7).
 
 ## Exact Replay
 
@@ -137,15 +147,33 @@ first contact and boxed, its packing loses 1.36 × 10⁻¹⁹ of side (1 − λ\
 The gain this certificate states, 3.246 × 10⁻³, is about 2.4 × 10¹⁶ times that margin,
 so no share of it worth stating is the house’s padding. This certificate’s own margin,
 measured the same way, is 2.53 × 10⁻¹² (1 − λ\* = 2.008 × 10⁻¹³, the binding pair the
-least-gap pair of the replay). The measurement is `contraction_margin`’s, from the
-module PR #934 adds; its receipts are not yet retained here.
+least-gap pair of the replay). `devtools.contraction_margin` wrote both receipts,
+[measure/contraction-n172.json](measure/contraction-n172.json) and
+[measure/contraction-n172-own.json](measure/contraction-n172-own.json), each contracted
+packing decided on both maintained routes. The review measured the same margins with its
+own programs ([houses.json](review/review-2026-11-09/out/houses.json),
+[compare-lane.json](review/review-2026-11-09/out/compare-lane.json)), so the owner’s question about gains
+inside a padding margin does not reach this one (its F9).
+
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 9 November 2026
+([review-2026-11-09-ozden-935-936.md](../../../../docs/project/reviews/review-2026-11-09-ozden-935-936.md)),
+written in a separate lane (L72, think-qqyg) blind to this one until its findings were
+frozen, accepts the certificate with findings, none blocking or major, and scores it S3.
+Its clean-room checker decides every square, wall and pair by separating axes in
+`Fraction` and by exact clipped areas in GMP rationals, with 23 controls stated before
+they ran; its programs, its shared receipts and this count’s are kept in
+[review/review-2026-11-09/](review/review-2026-11-09/README.md). F15 (minor) corrected
+this README’s and the register’s first reading of the tilts near 45 degrees; F4, F5, F12
+and F13 are notes for the author: the wall sentence, the size of the margins, the decimal
+pose’s schema path on the author’s machine, and a `certificate.replay` with no working
+directory. The case adopted the certificate as its house on 9 November 2026 under the
+house rule, as T-282, in place of T-257.
 
 ## What Is Not Established
 
-- **The stage 4 review.** A separate lane (L72, think-qqyg), blind to this one, reviews
-  the certificate; until its review is mapped the case keeps its house, T-257, and the
-  register entry T-282 stands at V3/C3 on this replay alone.
-- **Human oversight.** No human oversight record is retained.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
@@ -177,8 +205,9 @@ pinned against it.
 ## Commands
 
 From `packing/`, with the project interpreter. The identity measurement reads the house
-witness and its regularized view as they stand at main ef1af4933, before any adoption
-replaces them, so it reproduces there:
+witness and its regularized view as they stood at main ef1af4933, before this adoption
+replaced them, so it reproduces there; the contraction margins read the packets and
+reproduce anywhere `devtools.contraction_margin` is (main 20f844dbf on):
 
 ```bash
 python -m devtools.acquire_source ozden-s172-upper-bound-2026-11-09 --checkout CHECKOUT
@@ -192,6 +221,11 @@ python -m devtools.measure_identity --n 172 'OZDEN=packet:ozden-s172-upper-bound
   'regularized=witness-center-basis:atlas/known-best/regularized/n-172-regularized.yaml.gz' \
   'house-witness=witness-center-basis:witnesses/known-best/n-172.yaml' \
   --out resources/web/ozden-s172-upper-bound-2026-11-09/measure/identity.json
+python -m devtools.contraction_margin --n 172 'T-257=packet:evand-issue845-2026-10-29' \
+  --against 'T-282=packet:ozden-s172-upper-bound-2026-11-09' \
+  --out resources/web/ozden-s172-upper-bound-2026-11-09/measure/contraction-n172.json
+python -m devtools.contraction_margin --n 172 'T-282=packet:ozden-s172-upper-bound-2026-11-09' \
+  --out resources/web/ozden-s172-upper-bound-2026-11-09/measure/contraction-n172-own.json
 ```
 
 <!-- This document follows common-doc-guidelines.md.

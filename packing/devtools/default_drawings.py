@@ -547,6 +547,19 @@ _README_463R = (
 )
 
 
+_RUNHE66 = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-09-n172-270-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n172-270-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n172-270-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n172-270-grid-deg5"),
+)
+_README_HE66 = (
+    "packing/cases/regularized_drawings/think-he66-2026-11-09/README.md and "
+    "selection-adopt-2026-11-09-n172-270.md, the selection of 9 November 2026 (think-he66), "
+    "beside the runs' receipt, blocks and reports"
+)
+
+
 _RUNYK2H = (
     ("evand-regularize", "evand-regularize-yk2h-2026-10-31-n39-291-evand"),
     ("regularize_grid_slack/2", "grid-slack-yk2h-2026-10-31-n39-291-grid-deg05"),
@@ -985,6 +998,24 @@ SETTLED: dict[int, Settled] = {
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
+    ),
+    270: Settled(
+        DECIDED,
+        "[Özden s270 upper bound 2026-11-09]",
+        "resources/web/ozden-s270-upper-bound-2026-11-09/source/n-270-candidate.yaml",
+        "78ab8cec9085e4e1d6489127113f0af2550e749b",
+        "135425188826742430876823392268227093871980696715260327151518120513740712597220"
+        "590813078171341983823047096309971065862995224792397317215234884511156640568560"
+        "455084399127260139011043351856299251/79999999999999761238958327176428021880068"
+        "632726348620770773040859070063104790328158299558357524917527875921116694206912"
+        "72441400862583642946933891970394272174759098245017349764000000000000000",
+        _RUNHE66,
+        "on T-283's witness grid-slack's views at all three thresholds are refused at row 7, "
+        "a house or stage total of shared sides falling, and Evan Daniel's certified KKT "
+        "solve is 3.25e-12 below the side and held at row 3 as a register candidate, never "
+        "admitted here; the axis tool refuses the witness, a slide limit passing 4,300 "
+        "digits, so the house drawing stays drawn",
+        _README_HE66,
     ),
     272: Settled(
         DECIDED,

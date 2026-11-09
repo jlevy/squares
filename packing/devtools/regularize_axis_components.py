@@ -242,6 +242,13 @@ SNAP_TOLERANCE = Fraction("1e-9")
 """A move of at most this is a snap, accepted without a contact-count argument."""
 PASS_CAP_MARGIN = 2
 """Passes beyond the square count before the fixpoint loop gives up."""
+SLIDE_DIGITS = 4300
+"""The most digits a slide limit's numerator or denominator may carry before the frame is
+refused. Python's default limit on integer text, at which the tool failed while writing a
+move until this guard: each slide's exact limit compounds the denominators of the squares it
+meets, and at n = 270 on Doğa Özden's certificate of 9 November 2026 (T-283) they passed
+4,300 digits within seconds and kept growing for more than half an hour of compaction. Every
+record retained before the guard stayed below it, since writing its moves would have failed."""
 BOX_MARGIN = 1e-6
 """Float bounding boxes only prefilter exact tests. Coordinates stay below twenty, where
 binary64 is good to about 4e-15, so a pair whose boxes are this far apart is apart."""
@@ -890,6 +897,13 @@ def _attempt_slide(
     others = [(p.square_id, p.corners) for i, p in enumerate(pieces) if i != index]
     boxes = [p.box for i, p in enumerate(pieces) if i != index]
     limit, blockers = slide_limit(piece.corners, direction, distance, others, side, boxes=boxes)
+    bound = 10**SLIDE_DIGITS
+    if abs(limit.numerator) >= bound or limit.denominator >= bound:
+        raise RegularizeError(
+            "slide-digits",
+            f"square {piece.square_id}'s exact slide limit passes {SLIDE_DIGITS} digits: the "
+            "compaction's denominators compound past what this tool writes",
+        )
     if limit == 0:
         return None
     moved = translate(piece.corners, direction, limit)
@@ -1731,7 +1745,13 @@ def atlas_record(
         record["exact_frame"]["derivation"] = (
             f"{frame.provenance['derivation']}; isometry-derived atlas orientation"
         )
-    report, view = regularize_frame(ancestor, frame, source_path=layout.relative(source))
+    try:
+        report, view = regularize_frame(ancestor, frame, source_path=layout.relative(source))
+    except RegularizeError as error:
+        record["status"] = "refused"
+        record["refusal"] = {"kind": error.kind, "reason": str(error)}
+        record["shades"] = shade_record(before, before)
+        return record, None, time.perf_counter() - started
     view = orient_regularized_view(
         view, witness, parent_certificate=layout.relative(certificate) if certificate else None
     )

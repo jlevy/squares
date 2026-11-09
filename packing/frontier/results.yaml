@@ -41975,7 +41975,8 @@ results:
       Adopted at 172 on 9 November 2026 under the house rule, in place of T-257, with the packing's
       credit to its base holder, Evan Daniel, and the improvement to Doğa Özden, and both strong
       generators' regularization of the new house in the same change. The rigidity block was
-      derived again on the new witness (F10) and stays not rigid: RIGID172.
+      derived again on the new witness (F10) and stays not rigid: 86 of its 172 squares translate,
+      against 93 of T-257's.
 
       The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit block at
       172 until the next infographics cut redraws them (think-tj4o); the case record, its page and
@@ -42179,7 +42180,8 @@ results:
       Adopted at 270 on 9 November 2026 under the house rule, in place of T-224, with the packing's
       credit to its base holder, Evan Daniel, and the improvement to Doğa Özden, and both strong
       generators' regularization of the new house in the same change. The rigidity block was
-      derived again on the new witness (F10) and stays not rigid: RIGID270.
+      derived again on the new witness (F10) and stays not rigid: 219 of its 270 squares translate,
+      against 24 of T-224's.
 
       The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit block at
       270 until the next infographics cut redraws them (think-tj4o); the case record, its page and
@@ -42720,18 +42722,19 @@ regularized_drawings:
         max_turn_deg: 3.43775e-34
       view: packing/atlas/known-best/regularized/n-171-regularized.yaml.gz
     - n: 172
-      of: T-257
+      of: T-282
       by: project
-      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 7, re_angled: 9}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 49
-        max_move: 0.09865514
-        max_turn_deg: 1.06934
+        moved: 77
+        max_move: 0.1684587
+        max_turn_deg: 3.76255
       view: packing/atlas/known-best/regularized/n-172-regularized.yaml.gz
     - n: 175
       of: T-267
@@ -43278,21 +43281,6 @@ regularized_drawings:
         max_move: 1.270663e-94
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-269-regularized.yaml.gz
-    - n: 270
-      of: T-224
-      by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: []
-      side: same
-      changes: {straightened: 1}
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 24
-        max_move: 0.13034
-        max_turn_deg: 0.217543
-      view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
     - n: 271
       of: T-219
       by: project

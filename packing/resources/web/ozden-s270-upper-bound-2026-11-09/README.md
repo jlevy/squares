@@ -23,7 +23,12 @@ prepared and posted both on his behalf.
   2 × 10⁻¹³ are the decimal pose’s own, left by the final binary64 repair scaling of
   Evan Daniel’s quench, that only the squares that set the left wall, the bottom wall
   and the side touch them exactly, and that other squares near a wall clear it by up to
-  about 10⁻¹².
+  about 10⁻¹². Measured by the stage 4 review, exactly three squares touch a wall
+  (bottom 84, left 104, top 227); the other squares within 10⁻¹² of a wall clear it by
+  3.5 × 10⁻¹⁷ to 3.7 × 10⁻¹⁴, and 31 more square–wall pairs sit 7.3 × 10⁻⁸ to
+  2.9 × 10⁻⁶ from a wall, beyond “up to about 1e-12” (its F4). The pair margins are 2.0
+  to 2.3 × 10⁻¹³ of the centres’ separation, about twice the issue’s “about 1e-13
+  relative” (F5).
 - `n270-witness.json` is the same file as JSON. `packing-witness-verify.txt` is the
   author’s run of this repository’s `packing-witness verify` at `ef1af493` (VERIFIED,
   36,315 pairs); `sqcheck-output.txt` is the author’s run of `verifier/sqcheck.py`, an
@@ -96,12 +101,14 @@ A measurement for credit; it decides nothing.
   optimal assignment moves 1 square beyond 0.1 and 14 beyond 0.01 (largest 0.217858) and
   turns 92 squares by more than 10⁻⁶ radians, 1 of them by more than 1 degree, by 32.30
   degrees. Tilted beyond 1 degree: this packing 66, 24 turned one way and 42 the other;
-  T-224 67, 24 and 43, and none turned the other way. The house witness measures the
-  same, and against the regularized view the source says it started from, the assignment
-  moves 1 square beyond 0.1 and 13 beyond 0.01. So it is a further arrangement of
-  T-224’s packing, one to one with it, and not a new arrangement. The issue’s own counts
-  (41 centres beyond 10⁻³, 1 square re-tilted beyond 1 degree by 32.3, largest move
-  0.218, 66 tilted against 67) agree with these.
+  T-224 67, 24 and 43, and none turned the other way; no tilted square lies within a
+  degree of 45 degrees. The one square beyond a tenth, square 59, straightens from
+  −32.3 degrees to upright (the review). The house witness measures the same, and
+  against the regularized view the source says it started from, the assignment moves 1
+  square beyond 0.1 and 13 beyond 0.01. So it is a further arrangement of T-224’s
+  packing, one to one with it, and not a new arrangement. The issue’s own counts (41
+  centres beyond 10⁻³, 1 square re-tilted beyond 1 degree by 32.3, largest move 0.218,
+  66 tilted against 67) are against the house witness, and agree with these (F7).
 
 ## Exact Replay
 
@@ -138,15 +145,35 @@ first contact and boxed, its packing loses 1.69 × 10⁻¹⁹ of side (1 − λ\
 The gain this certificate states, 1.365 × 10⁻⁵, is about 8.1 × 10¹³ times that margin,
 so no share of it worth stating is the house’s padding. This certificate’s own margin,
 measured the same way, is 3.21 × 10⁻¹² (1 − λ\* = 2.016 × 10⁻¹³, the binding pair the
-least-gap pair of the replay). The measurement is `contraction_margin`’s, from the
-module PR #934 adds; its receipts are not yet retained here.
+least-gap pair of the replay). `devtools.contraction_margin` wrote both receipts,
+[measure/contraction-n270.json](measure/contraction-n270.json) and
+[measure/contraction-n270-own.json](measure/contraction-n270-own.json), each contracted
+packing decided on both maintained routes. The review measured the same margins with its
+own programs ([houses.json](../ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/out/houses.json),
+[compare-lane.json](../ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/out/compare-lane.json)),
+so the owner’s question about gains inside a padding margin does not reach this one (its
+F9).
+
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 9 November 2026
+([review-2026-11-09-ozden-935-936.md](../../../../docs/project/reviews/review-2026-11-09-ozden-935-936.md)),
+written in a separate lane (L72, think-qqyg) blind to this one until its findings were
+frozen, accepts the certificate with findings, none blocking or major, and scores it S2,
+a borderline call inside the band where the S2/S3 line falls, with S3 stated as the
+alternative (its F8). Its clean-room checker decides every square, wall and pair by
+separating axes in `Fraction` and by exact clipped areas in GMP rationals, with 23
+controls stated before they ran; its programs are kept once in the
+[172 packet’s review directory](../ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/README.md), and this count’s receipts in
+[review/review-2026-11-09/out/](review/review-2026-11-09/out/). F4, F5, F12 and F13 are
+notes for the author: the wall sentence, the size of the margins, the decimal pose’s
+schema path on the author’s machine, and a `certificate.replay` with no working
+directory. The case adopted the certificate as its house on 9 November 2026 under the
+house rule, as T-283, in place of T-224.
 
 ## What Is Not Established
 
-- **The stage 4 review.** A separate lane (L72, think-qqyg), blind to this one, reviews
-  the certificate; until its review is mapped the case keeps its house, T-224, and the
-  register entry T-283 stands at V3/C3 on this replay alone.
-- **Human oversight.** No human oversight record is retained.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
@@ -178,8 +205,9 @@ pinned against it.
 ## Commands
 
 From `packing/`, with the project interpreter. The identity measurement reads the house
-witness and its regularized view as they stand at main ef1af4933, before any adoption
-replaces them, so it reproduces there:
+witness and its regularized view as they stood at main ef1af4933, before this adoption
+replaced them, so it reproduces there; the contraction margins read the packets and
+reproduce anywhere `devtools.contraction_margin` is (main 20f844dbf on):
 
 ```bash
 python -m devtools.acquire_source ozden-s270-upper-bound-2026-11-09 --checkout CHECKOUT
@@ -193,6 +221,11 @@ python -m devtools.measure_identity --n 270 'OZDEN=packet:ozden-s270-upper-bound
   'regularized=witness-center-basis:atlas/known-best/regularized/n-270-regularized.yaml.gz' \
   'house-witness=witness-center-basis:witnesses/known-best/n-270.yaml' \
   --out resources/web/ozden-s270-upper-bound-2026-11-09/measure/identity.json
+python -m devtools.contraction_margin --n 270 'T-224=packet:evand-n270-sweep-2026-10-20' \
+  --against 'T-283=packet:ozden-s270-upper-bound-2026-11-09' \
+  --out resources/web/ozden-s270-upper-bound-2026-11-09/measure/contraction-n270.json
+python -m devtools.contraction_margin --n 270 'T-283=packet:ozden-s270-upper-bound-2026-11-09' \
+  --out resources/web/ozden-s270-upper-bound-2026-11-09/measure/contraction-n270-own.json
 ```
 
 <!-- This document follows common-doc-guidelines.md.

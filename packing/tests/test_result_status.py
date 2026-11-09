@@ -447,6 +447,11 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-263",
         "T-270",
         "T-272",
+        # Its later pass took 172, the last house of Evan Daniel's #845 certificate (T-257),
+        # and 270, his #703 packing's only house (T-224), to Özden's further arrangements
+        # of them (T-282, T-283).
+        "T-224",
+        "T-257",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
