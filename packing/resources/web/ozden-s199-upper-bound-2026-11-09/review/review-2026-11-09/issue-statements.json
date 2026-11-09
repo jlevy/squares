@@ -1,0 +1,23 @@
+{
+ "transcribed_from": "issue #938 body and its one comment (read 2026-11-09 via GitHub), README.md, .meta.json, packing-witness-verify.txt and sqcheck-output.txt at kenaznia-doga/s199-upper-bound@d03ee0bdb223e00fe124e818ed242f6cbd714fad",
+ "claim_12_places": "14.614689853287",
+ "improvement": "2.882e-03",
+ "relative_improvement": "1.97e-04",
+ "record_exact": "7308786086796403421851018497093/500000000000000000000000000000",
+ "record_print_issue": "14.6175721735928069",
+ "s172_print_issue": "13.6146898532862152",
+ "s172_print_readme_line11": "13.6146898532862153…",
+ "side_print_readme_line7": "14.614689853286215…",
+ "side_print_sqcheck_candidate": "14.614689853286216",
+ "side_print_comment": "14.6146898532862",
+ "pose_side_print_sqcheck": "14.614689853286419",
+ "pose_side": "14.614689853286418",
+ "kaggle_published_kirilltym": "14.617572173606",
+ "kaggle_side_only_oigazhdn": "14.6132098756",
+ "comment_difference_to_side_only": "+1.5e-03",
+ "s198_statement": "14 + 4/7",
+ "pairs_tested": 19701,
+ "side_exact_verify_print": "1461468985328621153330369591208625293096183957845596937754957265273646011066209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000",
+ "candidate_sha256": "8a85b4c3536757a77fd51e2a0e361de1ecef36b38d59ed3111611672e6a78aca",
+ "json_twin_sha256": "88d20ae206367d2029b05221d4a9975c86f8a71ffd51ac065aeebf168f4a6cb8"
+}
