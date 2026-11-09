@@ -3,19 +3,19 @@ type: is
 id: is-01m6zmy2q13ktyhmhht2x01aq1
 title: "Import Kaelan Yim: 13 exact certificates at vitamoon/vitamoon e4209f6 (n299, 303, 553, 599-602, 604, 645, 647, 648, 699, 700) (no issue)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 10
-delegate: bold-ritchie-l65
+version: 11
+delegate: null
 labels:
   - intake
   - result-import
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-11-09T07:56:30.817Z
-updated_at: 2026-11-09T17:07:32.782Z
+updated_at: 2026-11-09T17:09:06.353Z
 started_at: 2026-11-09T08:20:11.734Z
 ---
 Watched repository vitamoon/vitamoon gained 78eb9ea (2026-11-09T07:13:34Z, 'Add twelve exact-verified square-packing certificates': n303, 553, 599, 600, 601, 602, 604, 645, 647, 648, 699, 700) and e4209f6 (07:30:26Z, 'Add exact n299 tightening after Ozden, Daniel and Deotte': n299, 1.18e-12 below #929's pending witness, built from it; requested credit 'Kaelan Yim after Doğa Özden, Evan Daniel and Chris Deotte'). Per result-import.md (owner 2026-10-14) a certificate published in a watched repository with no issue is a report from its first public commit (date by push time). PACKINGS.md says n303 is above #930's pending side and that none of these is a registration request; it claims no new bests, so each must be compared with the standing record (and #927-#931 once L63 lands). Checkers named: evand/square-packing bb4cc78e verify_cert.py / verify_cert2.py. Licence: n260 CC BY 4.0 earlier; this snapshot makes no blanket new licence assertion -> retention/licence question. Sequencing: land after think-463r (#927-#931, which adopts #929 at 299 and #930 at 303). Prior import of this author: #895 (T-265).
@@ -40,3 +40,6 @@ blocked_on: the owner on RV-3 (think-ruu2) and think-ikku RV-1
 
 2026-11-09 bold-ritchie-l65, 17:15Z: the senior review of #934 (L73: merge after fixes, nothing blocking) fixed in 8a75f38ab, DATA_REVISION re-pinned in c4a059f08. (1) L65_1109 joins EVERY and the published table in test_upper_bound_reports (receipt and register-plan checks now run on both packets). (2) T-281 regularization of: T-259. (3) T-281 next_rung and unfinished confirmation cover RV-1 and RV-3 (withdrawn if either makes it a restatement). (4) contraction_margin refuses non-packings (exact walls, exact pairs, both routes on the input as given, recorded as certificate_routes); --against held to walls and pairs; new tests (out-of-box probe, rotated pair lambda* 3/5, within_margin false); five receipts re-run, values unchanged but certificate_routes and cpu. (5) review atom pairs 2,169,636. (6) resources row V0/C1. (7) T-281 note: the ruu2 candidate is 2.50e-13 below T-259, 3.17e-14 below the contracted side. Optional: packet size sentence, vitamoon site blurb, compare-lane.json artifacts, T-277/T-278 notes name T-280, release record re-run against ef1af4933 with site_resources.py. Local: --records 55/55, 711 tests passed. Hosted on c4a059f0887f: 31/31 green. PR #934 draft, body updated; no comments, not merged. think-ikku/ruu2/oqjd not touched (coordinator's).
 blocked_on: the owner on RV-3 (think-ruu2) and think-ikku RV-1
+
+2026-11-09 17:10Z coordinator: PR #934 merged as 20f844dbf (eleven beyond-horizon rows 553-700 verified; T-280 (299, 303) and T-281 (130) held at V0/C1 after the L70 review and L73 senior review). Lane L65 has ended; claim released. What remains is the owner's RV-3 answer (think-ruu2) and, for 130, RV-1 (think-ikku, think-oqjd): then enter the replay and review evidence and adopt, or withdraw.
+blocked_on: think-ruu2, think-ikku
