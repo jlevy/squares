@@ -5,7 +5,7 @@ title: "Import #927-#931: Doğa Özden's five upper bounds, s(232), s(268), s(29
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l63
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T06:57:58.922Z
-updated_at: 2026-11-09T10:59:49.667Z
+updated_at: 2026-11-09T11:58:29.456Z
 started_at: 2026-11-09T06:58:03.414Z
 ---
 Five registration requests opened 2026-11-09T06:03Z by kenaznia-doga for Doğa Özden: #927 s(232) <= 15.761409644882 (repo kenaznia-doga/s232-upper-bound @ 09e324f4, sha256 22b3809e...), #928 s(268) <= 16.872469897837 (s268-upper-bound @ a40a15d9, 74c0e5d4...), #929 s(299) <= 17.801004434256 (s299-upper-bound-17801004 @ a042eab0, dfb0ccf7...), #930 s(303) <= 17.901789273157 (s303-upper-bound @ b43ca090, 9cbeb7a8...), #931 s(307) <= 17.979230960388 (s307-upper-bound @ dbe8838a, cb78adf8...). Witness/v2 files promoted with this repo's packing-witness promote --strategy robust-rational @ 19b354a5; LICENSE.md CC BY 4.0 / MIT. Precedent: #893/#894 (think-8b8m, packets ozden-s204/s299-upper-bound-2026-11-03, review-2026-11-04-ozden-893-894-299-204.md), #914 (seven at once). Stages 0-7 per packing/campaign/result-import.md.
@@ -45,3 +45,5 @@ Update 08:35Z. Draft PR #932 opened (labels intake, S3). Coordinator folded in L
 Update 10:45Z. Pushed 446162672 (review mapping + adoption, 9 November pass) and be908e519 (DATA_REVISION 44616267). Hosted CI on be908e519 failed on derived records the adoption moves (bound citations, composite figure, X049 censuses, custody receipt, 574 algebraic claim record, closed-form paragraph order, screen pins, settled-runs copies) and on tests pinning earlier passes' houses; the workbench build refused the stale bound citations. All derived again with their own tools and the tests re-pinned, following L51 (e81a800f1); the sixteen failing touched tests pass locally (16 passed in 47 s). Third no-public-change record for the explainer (bound citations, validate.py): only the live register count moves (274 -> 279).
 
 Update 11:00Z. Pushed b8d7d84a2 (derived records and test pins) and ca15c0b3e (DATA_REVISION b8d7d84a). Hosted CI on ca15c0b3e: packing-required and pages-required green. PR #932 body updated (cost block leading, review's 1.0 CPU-hour included, validation filled). Draft; not merged, not marked ready; nothing posted on #927-#931. Lane CPU about 6 CPU-hours plus the review's 1.0.
+
+Update 12:20Z. Senior review (L66, coordinator) of ca15c0b3e: merge after fixes, none blocking. Fixed in 4d0c8216f (re-pin 278f69492): neutral vitamoon wording in T-277/T-278 (think-h96r; entries decide nothing); #844 owes a follow-up (T-256 superseded at 232 and 307), in #927/#931 notes; F13 ellipsis removed from requests claims, bibliography notes, report.json (writer rerun); rigidity (103/232 v 73, 120/268 v 90, 121/299 v 148, 234/303 v 69, 44/307 v 35) and poster-hold notes on T-275..T-279; credit-attributions curation sentence; intake label noted; README identity commands reproduce at 19b354a5c, 307 gains its regularized input; AI-assistance sentence attributed to the issue (claims, declarations, sources.json via acquire_source from retained clones, READMEs). Custody receipt re-run in 7090101fb after hosted suite-c failed its input pin. Papers re-measured: three byte-identical, explainer only the register count.
