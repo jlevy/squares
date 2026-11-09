@@ -5,7 +5,7 @@ title: "Import #935, #936: Doğa Özden's s(172) and s(270) upper bounds (kenazn
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l71
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:58.640Z
-updated_at: 2026-11-09T18:45:02.607Z
+updated_at: 2026-11-09T19:18:36.137Z
 started_at: 2026-11-09T15:55:06.608Z
 ---
 #935 s(172) <= 13.614689853287 (kenaznia-doga/s172-upper-bound @ 2ce1f7c7, n-172-candidate.yaml sha256 0df5ae79...), 3.246e-3 below T-257; #936 s(270) <= 16.928148603343 (s270-upper-bound @ 78ab8cec, sha256 f2b62bf0...), 1.365e-5 below T-224. Both opened 2026-11-09T15:28Z, promoted with packing-witness promote --strategy robust-rational @ ef1af493; repos carry LICENSE.md (CC BY 4.0 / MIT) and Daniel's MIT notice. Precedent: #927-#931 (think-463r, PR #932).
@@ -38,3 +38,5 @@ Done:
 - Local: --records and --edit pass at b94cc8f61. Hosted CI on b94cc8f61 failed overview (t-180 budget) and suite-d (refused-tilts), fixed in e267c0fb8.
 
 Owed after merge: replies on #935/#936; follow-ups on #845 (T-257 named current) and #703 (T-224 reported house).
+
+Final (19:40Z): head 75c9570e0; hosted packing-required and pages-required green, every job that ran green. Local --records passes at 75c9570e0, --edit 71/71 at b94cc8f61. PR #937 body updated (cost about 3 CPU-hours plus L72 about 0.2). Follow-up bead think-wju3 (solves held at row 3; draws 270 regularized if registered). Scratch cleaned.
