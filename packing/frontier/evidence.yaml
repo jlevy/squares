@@ -58226,3 +58226,208 @@ evidence:
       share its reader; under the reversed rotation sense 112 pairs overlap. Finite feasibility
       only.
     source_reviewed: '2026-11-09'
+  - id: E-yim-1109-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 130
+      - 299
+      - 303
+      - 553
+      - 599
+      - 600
+      - 601
+      - 602
+      - 604
+      - 645
+      - 647
+      - 648
+      - 699
+      - 700
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Yim certificates 2026-11-09]'
+    certificate: packing/resources/web/yim-certificates-2026-11-09/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-09'
+    limitations: >-
+      This atom records the source author's report of 14 exact rational certificates at
+      vitamoon/vitamoon ac14112, a publication in a watched repository that no issue reports:
+      at 130 (first committed at c10e094), 299 (e4209f6), 303 (546928a, overwriting the first
+      n303 of 78eb9ea, which the yim-n303-2026-11-09 packet keeps) and 553 to 700 (78eb9ea). A
+      separate complete repository replay is retained for all 14: 14 positives and 28
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 13609950 pair decisions; summed over the 42 jobs, the receipt records 2116.06
+      route CPU seconds, the longest job 84.13 seconds. Every positive clears every wall by at
+      least 5.00e-31 and every pair by at least 1.00e-30, and the packet's sharp controls meet
+      those margins on both routes. That replay is not entered as evidence while T-280 (299,
+      303) and T-281 (130) are held for the owner's questions (think-ruu2's RV-3, think-ikku),
+      as T-260's was not. Above the corpus the replay is E-yim-1109-exact-feasibility and the
+      stage 4 review's clean-room run E-yim-1109-review-exact-feasibility.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method; the author reports running both at f30d6405, and neither has changed since. No
+      two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-09'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong-max at maximum reasoning), the stage 4
+        mathematical review lane of Kaelan Yim's vitamoon certificates (L70, think-i5a5),
+        prompted separately from the import lane (L65, think-h96r) and blind to its work until
+        its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-09-yim-vitamoon.md accepted all fifteen
+        certificates for finite feasibility, none blocking, by a clean-room checker deciding
+        every square, wall and pair by two exact methods. Its F4 (major, the owner's decision)
+        measures each gain at 299, 303 and 130 inside the predecessor certificate's padding
+        and recommends the holds stay until the owner answers think-ruu2's RV-3 (and
+        think-ikku's RV-1 at 130). Above the corpus its run is
+        E-yim-1109-review-exact-feasibility and the replay E-yim-1109-exact-feasibility.
+  - id: E-yim-1109-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [553, 599, 600, 601, 602, 604, 645, 647, 648, 699, 700]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Yim certificates 2026-11-09]'
+    certificate: packing/resources/web/yim-certificates-2026-11-09/source/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports yim-certificates-2026-11-09
+      certify --workers 2 wrote the receipts on 9 November 2026 from the packet's retained
+      certificates, read by the evand-cert reader (receipts/exact-certification-nNNN.json.xz,
+      one per count), and check --replay decides all 42 retained jobs, each certificate with its
+      duplicate-square and outside-container controls, again through both maintained routes and
+      holds each to its retained row. python -m devtools.upper_bound_reports
+      yim-certificates-2026-11-09 sharp-controls wrote the packet's sharp controls
+      (receipts/sharp-controls-nNNN.json), all 11 a count as expected on both routes: contact
+      accepted at margin 0 and refused 1e-30 past it. This atom covers the eleven counts above
+      the corpus; at 130, 299 and 303 the same replay is not entered while T-280 and T-281 are
+      held.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the eleven certificates at 553 to 700 that the source's beyond-horizon rows state, every
+          wall and every pair decided by both maintained routes; the kernel's controls are
+          retained in the packet's receipts
+        checked: 11
+        of: 11
+    limitations: >-
+      A replay by two maintained exact routes that share this repository's evand-cert reader
+      (certificate parsing and half-angle conversion), Fraction arithmetic and the
+      separating-axis method. The author reports running both routes at f30d6405, whose route
+      code is unchanged since, so the replay reproduces the producer's own checks (the review's
+      F11). At these counts every wall clears by at least 5.00e-31 and every pair by at least
+      2.15e-16. The receipt's controls are gross, and the packet's sharp controls meet those
+      margins. The source's own checkers were not run here. Finite feasibility only.
+    source_reviewed: '2026-11-09'
+    independence_record: docs/project/reviews/review-2026-11-09-yim-vitamoon.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-09'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong-max at maximum reasoning), the stage 4
+        mathematical review lane of Kaelan Yim's vitamoon certificates (L70, think-i5a5),
+        prompted separately from the import lane (L65, think-h96r) and blind to its work until
+        its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-09-yim-vitamoon.md accepted every certificate for
+        finite feasibility, and its compare-lane receipt finds the replay's margins equal to its
+        own (LANE_AGREES_EXACTLY). By its F11 the replay reproduces the producer's own checks;
+        the clean-room re-implementation is E-yim-1109-review-exact-feasibility.
+  - id: E-yim-1109-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [553, 599, 600, 601, 602, 604, 645, 647, 648, 699, 700]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Yim certificates 2026-11-09]'
+    certificate: packing/resources/web/yim-certificates-2026-11-09/source/
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python3 -I -B on a shared four-core host at
+      nice 19, 9 November 2026, from the packet's review/review-2026-11-09/:
+      programs/l70_check.py on each of the eleven certificates at 553 to 700
+      (out/check-yim-nNNN.json, ACCEPT at all eleven), deciding every square a unit square, every
+      wall and all 2,169,636 pairs by separating axes in Fraction and again by exact clipped areas
+      in gmpy2.mpq with no distance filter, the two agreeing on every class, in 461 CPU seconds.
+      programs/l70_controls.py decided the controls of the plan frozen beforehand
+      (out/controls-yim-nNNN.json) and programs/l70_controls_addendum.py the addendum frozen
+      before it ran (out/controls-addendum-yim-nNNN.json), by both methods: every control as
+      stated but the plan's S7, whose statement was the review's own error, which the addendum
+      replaced as stated. programs/l70_selftest.py passed (out/selftest.json).
+    replay_status: passed
+    verifiers:
+    - V-yim-1109-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the eleven certificates at 553 to 700: every square, every wall and every pair, by two
+          exact methods in two arithmetic libraries that share only the reader, with the stated
+          controls decided by both
+        checked: 11
+        of: 11
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of Kaelan Yim's vitamoon certificates (L70,
+          think-i5a5), strong tier (tbd-strong-max) at maximum reasoning
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer says Hermes Agent was used and names no model family (the review's
+          question 5). The checker was written from the mathematics, the certificate format and
+          the files and frozen before its author read any producer code or this repository's
+          verifier code; it shares no code with the source's checkers or this repository's
+          maintained routes.
+    independence_record: >-
+      packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-09'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong-max at maximum reasoning), the stage 4
+        mathematical review lane of Kaelan Yim's vitamoon certificates (L70, think-i5a5),
+        prompted separately from the import lane (L65, think-h96r) and blind to its work until
+        its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-09-yim-vitamoon.md accepted every certificate for
+        finite feasibility; its F7 measures each of the eleven 16.8 to 1.6e9 times Couzo's
+        certificate's padding below the row it supersedes.
+    limitations: >-
+      A clean-room decision of the eleven retained certificates by two exact methods in one
+      program, which share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-09'

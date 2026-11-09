@@ -7713,3 +7713,62 @@ verifiers:
       l64_houses.py, l64_identity.py, l64_construct.py, l64_digests.py and
       l64_compare_lane.py, kept beside them, decide no certificate of the five and are not
       registered.
+  - id: V-yim-1109-review-check
+    program: l70_check.py with l70_reader.py, l70_sat.py and l70_clip.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 9 November stage 4 review's exact checker of Kaelan Yim's rational
+      centre/half-angle certificates in vitamoon/vitamoon (130, 299 and 303 at ac14112, the
+      first 303 at 78eb9ea and 553 to 700), with strict readers of its own that turn every
+      number into integers: every square a unit square, every wall and every pair with no
+      distance filter, by separating axes over the four edge normals in fractions.Fraction
+      (l70_sat.py) and by exact clipped areas in gmpy2.mpq (l70_clip.py), the two agreeing
+      on every class. l70_controls.py decides the controls of a plan frozen before it
+      existed (the side, the walls, every near pair and every square at contact and 1e-30
+      past it, the reversed rotation sense), l70_controls_addendum.py a 45-control
+      addendum frozen before it ran, and l70_selftest.py holds both methods to 32 known
+      cases.
+    source:
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_check.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_reader.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_sat.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_clip.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_controls.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_controls_addendum.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_selftest.py
+    independence_record: packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of Kaelan Yim's vitamoon certificates
+            (L70, think-i5a5), strong tier (tbd-strong-max) at maximum reasoning, prompted
+            separately from the import lane (L65, think-h96r)
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer says Hermes Agent was used for research, search, implementation and
+          verification orchestration, and names no model family (the review's question 5).
+          The checker files were frozen at 2026-11-09T14:05:49Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's verifier code; they import nothing from this repository or the
+          source.
+    note: >-
+      Written and run on 9 November 2026 for
+      docs/project/reviews/review-2026-11-09-yim-vitamoon.md (SHA-256
+      4d4dd2e03c8d2898dcae161bd6257d6a2580369431978f0dee82e134e92b25a4 for l70_check.py and
+      3b2939a734a2959802458f54b2495673dfb32b1798c478433ff6b135361990fb for l70_reader.py as
+      retained and frozen, and as each receipt records), kept in the yim-certificates-2026-11-09
+      packet's review/review-2026-11-09/. l70_sides.py, l70_contract.py, l70_identity.py,
+      l70_relative303.py, l70_construct.py, l70_custody.py, l70_digests.py and
+      l70_compare_lane.py, kept beside them, decide no certificate and are not registered.

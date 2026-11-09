@@ -96,6 +96,7 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-914-20261105/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}
@@ -301,6 +302,7 @@ documents:
   - {path: docs/project/reviews/review-2026-11-05-evand-914-seven.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-09-yim-vitamoon.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md, role: review, authority: record, lifecycle: retained}

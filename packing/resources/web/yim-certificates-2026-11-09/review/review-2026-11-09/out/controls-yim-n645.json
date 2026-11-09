@@ -1,0 +1,1286 @@
+{
+ "program": "l70_controls.py",
+ "program_digests": {
+  "l70_reader.py": "3b2939a734a2959802458f54b2495673dfb32b1798c478433ff6b135361990fb",
+  "l70_sat.py": "3524406d5f8af4aa7bc8bdb175b146d4b02f1a96ef2b5cadd81a8cce6a9f9d87",
+  "l70_clip.py": "ffb7a2685028a7d2287f9fb91abfbb18ed9581a05a3d4d36e2b4c6da695970f1",
+  "l70_check.py": "4d4dd2e03c8d2898dcae161bd6257d6a2580369431978f0dee82e134e92b25a4",
+  "l70_controls.py": "3a672c8d19666f10f1269e85bdb59340315b1a8e0f52ddc368c420e8f78009bf",
+  "controls-plan.json": "3b990b468fbd87d88d0777903a6c542c5de38eaaa6fb2b83716c4d1f82467ffe"
+ },
+ "label": "yim-n645",
+ "input_sha256": "b7a129cf0f151c5e3cee2154ea270126d14c53355c67ba4116b7b21f3329c296",
+ "controls": [
+  {
+   "id": "G1",
+   "level": "whole-file",
+   "what": "the last square replaced by a copy of the first",
+   "expect": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      "1",
+      "645"
+     ]
+    ],
+    "outside": [],
+    "A_least_margin": "-1",
+    "B_largest_overlap_area": "1"
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": {
+     "unit": true,
+     "inside": true,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "touching_A": [],
+    "touching_B": [],
+    "overlapping_A": [
+     [
+      "1",
+      "645"
+     ]
+    ],
+    "overlapping_B": [
+     [
+      "1",
+      "645"
+     ]
+    ],
+    "overlap_counts": [
+     1,
+     1
+    ],
+    "A_least_margin": "-1",
+    "B_largest_overlap_area": "1",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 41.099
+   },
+   "as_stated": true,
+   "cpu_seconds": 41.101
+  },
+  {
+   "id": "G2",
+   "level": "whole-file",
+   "what": "square 1 translated by (S, 0)",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     "1"
+    ],
+    "overlapping_pairs": []
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": {
+     "unit": true,
+     "inside": true,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [
+     "1"
+    ],
+    "outside_B": [
+     "1"
+    ],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "touching_A": [],
+    "touching_B": [],
+    "overlapping_A": [],
+    "overlapping_B": [],
+    "overlap_counts": [
+     0,
+     0
+    ],
+    "A_least_margin": "299953283781398399022543611970904714004061297221677002628009935384366801067922328790317431046207093893180435342771249774981958731563552309255804842462467713027159/435205590135948499390865678220136585977392045379046109356052653718764137088833350922802932274184616682923580855112075091963498876588957891374048000000000000000000000000000000000",
+    "B_largest_overlap_area": "0",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 41.239
+   },
+   "as_stated": true,
+   "cpu_seconds": 41.241
+  },
+  {
+   "id": "G3",
+   "level": "reader",
+   "what": "the last row deleted, header unchanged",
+   "expect": {
+    "reader": "refuse",
+    "reason_contains": "file has 644 rows"
+   },
+   "got": {
+    "reader": "refuse",
+    "reason": "header says 645 squares, file has 644 rows"
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.011
+  },
+  {
+   "id": "G4",
+   "level": "reader",
+   "what": "the header count raised by one",
+   "expect": {
+    "reader": "refuse",
+    "reason_contains": "header says 646 squares"
+   },
+   "got": {
+    "reader": "refuse",
+    "reason": "header says 646 squares, file has 645 rows"
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.014
+  },
+  {
+   "id": "G5",
+   "level": "reader",
+   "what": "row 1's t token replaced by 1.5",
+   "expect": {
+    "reader": "refuse",
+    "reason_contains": "not a rational token"
+   },
+   "got": {
+    "reader": "refuse",
+    "reason": "not a rational token: '1.5'"
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.012
+  },
+  {
+   "id": "G6",
+   "level": "whole-file",
+   "what": "the rotation read the other way: every t negated (each square reflected in its horizontal centre line)",
+   "expect": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": "at least one, equal sets by both methods"
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": {
+     "unit": true,
+     "inside": true,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "touching_A": [],
+    "touching_B": [],
+    "overlapping_A": [
+     [
+      "3",
+      "12"
+     ],
+     [
+      "4",
+      "13"
+     ],
+     [
+      "11",
+      "18"
+     ],
+     [
+      "12",
+      "20"
+     ],
+     [
+      "14",
+      "21"
+     ],
+     [
+      "17",
+      "26"
+     ],
+     [
+      "20",
+      "28"
+     ],
+     [
+      "22",
+      "29"
+     ],
+     [
+      "28",
+      "37"
+     ],
+     [
+      "29",
+      "37"
+     ],
+     [
+      "65",
+      "82"
+     ],
+     [
+      "65",
+      "484"
+     ],
+     [
+      "65",
+      "630"
+     ],
+     [
+      "79",
+      "80"
+     ],
+     [
+      "82",
+      "99"
+     ],
+     [
+      "82",
+      "636"
+     ],
+     [
+      "99",
+      "116"
+     ],
+     [
+      "99",
+      "641"
+     ],
+     [
+      "112",
+      "113"
+     ],
+     [
+      "113",
+      "114"
+     ],
+     [
+      "129",
+      "130"
+     ],
+     [
+      "130",
+      "131"
+     ],
+     [
+      "132",
+      "148"
+     ],
+     [
+      "148",
+      "164"
+     ],
+     [
+      "163",
+      "164"
+     ],
+     [
+      "165",
+      "181"
+     ],
+     [
+      "167",
+      "642"
+     ],
+     [
+      "201",
+      "638"
+     ],
+     [
+      "218",
+      "634"
+     ],
+     [
+      "235",
+      "633"
+     ],
+     [
+      "250",
+      "266"
+     ],
+     [
+      "284",
+      "300"
+     ],
+     [
+      "300",
+      "317"
+     ],
+     [
+      "303",
+      "628"
+     ],
+     [
+      "357",
+      "461"
+     ],
+     [
+      "358",
+      "459"
+     ],
+     [
+      "359",
+      "473"
+     ],
+     [
+      "360",
+      "474"
+     ],
+     [
+      "361",
+      "470"
+     ],
+     [
+      "362",
+      "467"
+     ],
+     [
+      "363",
+      "464"
+     ],
+     [
+      "364",
+      "465"
+     ],
+     [
+      "365",
+      "466"
+     ],
+     [
+      "366",
+      "472"
+     ],
+     [
+      "370",
+      "410"
+     ],
+     [
+      "370",
+      "490"
+     ],
+     [
+      "371",
+      "484"
+     ],
+     [
+      "372",
+      "413"
+     ],
+     [
+      "372",
+      "454"
+     ],
+     [
+      "376",
+      "377"
+     ],
+     [
+      "376",
+      "465"
+     ],
+     [
+      "377",
+      "378"
+     ],
+     [
+      "377",
+      "382"
+     ],
+     [
+      "378",
+      "379"
+     ],
+     [
+      "378",
+      "383"
+     ],
+     [
+      "378",
+      "390"
+     ],
+     [
+      "379",
+      "381"
+     ],
+     [
+      "380",
+      "382"
+     ],
+     [
+      "380",
+      "385"
+     ],
+     [
+      "380",
+      "464"
+     ]
+    ],
+    "overlapping_B": [
+     [
+      "3",
+      "12"
+     ],
+     [
+      "4",
+      "13"
+     ],
+     [
+      "11",
+      "18"
+     ],
+     [
+      "12",
+      "20"
+     ],
+     [
+      "14",
+      "21"
+     ],
+     [
+      "17",
+      "26"
+     ],
+     [
+      "20",
+      "28"
+     ],
+     [
+      "22",
+      "29"
+     ],
+     [
+      "28",
+      "37"
+     ],
+     [
+      "29",
+      "37"
+     ],
+     [
+      "65",
+      "82"
+     ],
+     [
+      "65",
+      "484"
+     ],
+     [
+      "65",
+      "630"
+     ],
+     [
+      "79",
+      "80"
+     ],
+     [
+      "82",
+      "99"
+     ],
+     [
+      "82",
+      "636"
+     ],
+     [
+      "99",
+      "116"
+     ],
+     [
+      "99",
+      "641"
+     ],
+     [
+      "112",
+      "113"
+     ],
+     [
+      "113",
+      "114"
+     ],
+     [
+      "129",
+      "130"
+     ],
+     [
+      "130",
+      "131"
+     ],
+     [
+      "132",
+      "148"
+     ],
+     [
+      "148",
+      "164"
+     ],
+     [
+      "163",
+      "164"
+     ],
+     [
+      "165",
+      "181"
+     ],
+     [
+      "167",
+      "642"
+     ],
+     [
+      "201",
+      "638"
+     ],
+     [
+      "218",
+      "634"
+     ],
+     [
+      "235",
+      "633"
+     ],
+     [
+      "250",
+      "266"
+     ],
+     [
+      "284",
+      "300"
+     ],
+     [
+      "300",
+      "317"
+     ],
+     [
+      "303",
+      "628"
+     ],
+     [
+      "357",
+      "461"
+     ],
+     [
+      "358",
+      "459"
+     ],
+     [
+      "359",
+      "473"
+     ],
+     [
+      "360",
+      "474"
+     ],
+     [
+      "361",
+      "470"
+     ],
+     [
+      "362",
+      "467"
+     ],
+     [
+      "363",
+      "464"
+     ],
+     [
+      "364",
+      "465"
+     ],
+     [
+      "365",
+      "466"
+     ],
+     [
+      "366",
+      "472"
+     ],
+     [
+      "370",
+      "410"
+     ],
+     [
+      "370",
+      "490"
+     ],
+     [
+      "371",
+      "484"
+     ],
+     [
+      "372",
+      "413"
+     ],
+     [
+      "372",
+      "454"
+     ],
+     [
+      "376",
+      "377"
+     ],
+     [
+      "376",
+      "465"
+     ],
+     [
+      "377",
+      "378"
+     ],
+     [
+      "377",
+      "382"
+     ],
+     [
+      "378",
+      "379"
+     ],
+     [
+      "378",
+      "383"
+     ],
+     [
+      "378",
+      "390"
+     ],
+     [
+      "379",
+      "381"
+     ],
+     [
+      "380",
+      "382"
+     ],
+     [
+      "380",
+      "385"
+     ],
+     [
+      "380",
+      "464"
+     ]
+    ],
+    "overlap_counts": [
+     287,
+     287
+    ],
+    "A_least_margin": "-154715374687964737470505748381638915861690393384541044232010897714019940879612453346437083947081393118078025300545710053331049767448209629177779068001448000316099795508957883466199/586918622635313049206773960699240909332489893644591754883466547225656884068929064094871022409555252338057710400303432820720840229797239696309144780800000000000000000000000000000000",
+    "B_largest_overlap_area": "70657756989/845921553179",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 42.669
+   },
+   "as_stated": true,
+   "cpu_seconds": 42.682
+  },
+  {
+   "id": "S1a",
+   "level": "wall-level",
+   "what": "the side lowered by 1/q, one unit of its own last place",
+   "expect": {
+    "verdict": "ACCEPT",
+    "outside": []
+   },
+   "got": {
+    "verdict": "ACCEPT",
+    "agree": true,
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.24
+  },
+  {
+   "id": "S1b",
+   "level": "wall-level",
+   "what": "the side lowered by its least far-wall clearance c",
+   "expect": {
+    "verdict": "ACCEPT",
+    "far_wall_contacts": [
+     "top:166",
+     "top:183"
+    ]
+   },
+   "got": {
+    "verdict": "ACCEPT",
+    "agree": true,
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": [
+      "166",
+      "183"
+     ]
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": [
+      "166",
+      "183"
+     ]
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.232
+  },
+  {
+   "id": "S1c",
+   "level": "wall-level",
+   "what": "the side lowered by c + 1e-30",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     "166",
+     "183"
+    ]
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": true,
+    "outside_A": [
+     "166",
+     "183"
+    ],
+    "outside_B": [
+     "166",
+     "183"
+    ],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.239
+  },
+  {
+   "id": "S1d",
+   "level": "wall-level",
+   "what": "the side set to its 12-place ceiling (the print)",
+   "expect": {
+    "verdict": "ACCEPT",
+    "outside": []
+   },
+   "got": {
+    "verdict": "ACCEPT",
+    "agree": true,
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.219
+  },
+  {
+   "id": "S1e",
+   "level": "wall-level",
+   "what": "the side set to its 12-place floor",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     "149",
+     "166",
+     "183",
+     "200",
+     "353",
+     "479",
+     "491",
+     "498",
+     "499"
+    ]
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": true,
+    "outside_A": [
+     "149",
+     "166",
+     "183",
+     "200",
+     "353",
+     "479",
+     "491",
+     "498",
+     "499"
+    ],
+    "outside_B": [
+     "149",
+     "166",
+     "183",
+     "200",
+     "353",
+     "479",
+     "491",
+     "498",
+     "499"
+    ],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.241
+  },
+  {
+   "id": "S3a",
+   "level": "wall-level",
+   "what": "every square moved left by the least left clearance",
+   "expect": {
+    "verdict": "ACCEPT",
+    "left_contacts": [
+     "355"
+    ]
+   },
+   "got": {
+    "verdict": "ACCEPT",
+    "agree": true,
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [
+      "355"
+     ],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [
+      "355"
+     ],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.269
+  },
+  {
+   "id": "S3b",
+   "level": "wall-level",
+   "what": "every square moved left by the least left clearance + 1e-30",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     "355"
+    ]
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": true,
+    "outside_A": [
+     "355"
+    ],
+    "outside_B": [
+     "355"
+    ],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.277
+  },
+  {
+   "id": "S3c",
+   "level": "wall-level",
+   "what": "every square moved down by the least bottom clearance",
+   "expect": {
+    "verdict": "ACCEPT",
+    "bottom_contacts": [
+     "1"
+    ]
+   },
+   "got": {
+    "verdict": "ACCEPT",
+    "agree": true,
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [],
+     "bottom": [
+      "1"
+     ],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [
+      "1"
+     ],
+     "right": [],
+     "top": []
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.272
+  },
+  {
+   "id": "S3d",
+   "level": "wall-level",
+   "what": "every square moved down by the least bottom clearance + 1e-30",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     "1"
+    ]
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": true,
+    "outside_A": [
+     "1"
+    ],
+    "outside_B": [
+     "1"
+    ],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.285
+  },
+  {
+   "id": "S4c",
+   "level": "whole-file",
+   "what": "the least-margin pair (569, 578) closed along its centre line to contact (square 578 moved)",
+   "expect": {
+    "verdict": "ACCEPT",
+    "touching_pairs": [
+     [
+      "569",
+      "578"
+     ]
+    ],
+    "overlapping_pairs": []
+   },
+   "got": {
+    "verdict": "ACCEPT",
+    "agree": {
+     "unit": true,
+     "inside": true,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "touching_A": [
+     [
+      "569",
+      "578"
+     ]
+    ],
+    "touching_B": [
+     [
+      "569",
+      "578"
+     ]
+    ],
+    "overlapping_A": [],
+    "overlapping_B": [],
+    "overlap_counts": [
+     0,
+     0
+    ],
+    "A_least_margin": "0",
+    "B_largest_overlap_area": "0",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 40.752
+   },
+   "as_stated": true,
+   "cpu_seconds": 40.753
+  },
+  {
+   "id": "S4p",
+   "level": "whole-file",
+   "what": "the pair (569, 578) closed 1e-30 past contact",
+   "expect": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      "569",
+      "578"
+     ]
+    ]
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": {
+     "unit": true,
+     "inside": true,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "touching_A": [],
+    "touching_B": [],
+    "overlapping_A": [
+     [
+      "569",
+      "578"
+     ]
+    ],
+    "overlapping_B": [
+     [
+      "569",
+      "578"
+     ]
+    ],
+    "overlap_counts": [
+     1,
+     1
+    ],
+    "A_least_margin": "-198911534412201268592583327589563144484465105368188361/198911534412201225597326623926110264302177701028492502500000000000000000000000000000",
+    "B_largest_overlap_area": "0",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 39.186
+   },
+   "as_stated": true,
+   "cpu_seconds": 39.188
+  },
+  {
+   "id": "S5",
+   "level": "pair-level",
+   "what": "every pair with margin below 1e-12 closed along its centre line, at contact and 1e-30 past",
+   "expect": {
+    "pairs": 1,
+    "at_contact": "touch by both methods, every pair",
+    "past": "overlap by both methods, every pair"
+   },
+   "got": {
+    "pairs": 1,
+    "as_stated": 1,
+    "misses": []
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.004
+  },
+  {
+   "id": "S6",
+   "level": "square-level",
+   "what": "every square moved to its nearest wall by its exact clearance, and 1e-30 past",
+   "expect": {
+    "squares": 645,
+    "at_contact": "inside with that wall contact by both methods, every square",
+    "past": "outside by both methods, every square"
+   },
+   "got": {
+    "squares": 645,
+    "as_stated": 645,
+    "misses": []
+   },
+   "as_stated": true,
+   "cpu_seconds": 0.436
+  },
+  {
+   "id": "S7",
+   "level": "whole-file",
+   "what": "square 569 (as four corners) enlarged by 1 + 1e-30 about its centre; the packing decided as corners",
+   "expect": {
+    "verdict": "REFUSE",
+    "not_unit": [
+     "569"
+    ],
+    "outside": [],
+    "overlapping_pairs": []
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": {
+     "unit": true,
+     "inside": false,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [],
+    "outside_B": [
+     "569"
+    ],
+    "not_unit_A": [
+     "569"
+    ],
+    "not_unit_B": [
+     "569"
+    ],
+    "touching_A": [],
+    "touching_B": [],
+    "overlapping_A": [],
+    "overlapping_B": [],
+    "overlap_counts": [
+     0,
+     0
+    ],
+    "A_least_margin": "4917266947236035760979484327812474552893473752960724598836247946707507050519554458438963363982302110708304893942194805047877421737338065175725893194601860070819/7134517871081122940833863577379288294711345006213870645181191044569903886702186080701687414330895355457763620575607788392844243878507506415968000000000000000000000000000000000",
+    "B_largest_overlap_area": "0",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 39.918
+   },
+   "as_stated": false,
+   "cpu_seconds": 39.949
+  }
+ ],
+ "every_control_as_stated": false,
+ "missed": [
+  "S7"
+ ],
+ "cpu_seconds": 247.764
+}

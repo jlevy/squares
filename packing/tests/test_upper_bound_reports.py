@@ -187,6 +187,10 @@ L63_1109 = (
     "ozden-s303-upper-bound-2026-11-09",
     "ozden-s307-upper-bound-2026-11-09",
 )
+#: The intake pass's lane L65 of 9 November 2026 (`test_upper_bound_reports_l65_1109`):
+#: Kaelan Yim's certificates in his watched repository vitamoon/vitamoon, which no issue
+#: reports, at the head ac14112 and the first n303 of 78eb9ea, retained as factual data.
+L65_1109 = ("yim-certificates-2026-11-09", "yim-n303-2026-11-09")
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -244,6 +248,7 @@ EVERY = (
     YIM_895,
     *L51_1105,
     *L63_1109,
+    *L65_1109,
 )
 
 
@@ -1594,6 +1599,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         YIM_895: "2026-11-05",
         **dict.fromkeys(L51_1105, "2026-11-05"),
         **dict.fromkeys(L63_1109, "2026-11-09"),
+        **dict.fromkeys(L65_1109, "2026-11-09"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
