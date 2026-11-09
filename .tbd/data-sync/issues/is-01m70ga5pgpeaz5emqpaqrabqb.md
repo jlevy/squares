@@ -5,7 +5,7 @@ title: "Import #935, #936: Doğa Özden's s(172) and s(270) upper bounds (kenazn
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l71
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:58.640Z
-updated_at: 2026-11-09T16:19:00.334Z
+updated_at: 2026-11-09T16:43:23.169Z
 started_at: 2026-11-09T15:55:06.608Z
 ---
 #935 s(172) <= 13.614689853287 (kenaznia-doga/s172-upper-bound @ 2ce1f7c7, n-172-candidate.yaml sha256 0df5ae79...), 3.246e-3 below T-257; #936 s(270) <= 16.928148603343 (s270-upper-bound @ 78ab8cec, sha256 f2b62bf0...), 1.365e-5 below T-224. Both opened 2026-11-09T15:28Z, promoted with packing-witness promote --strategy robust-rational @ ef1af493; repos carry LICENSE.md (CC BY 4.0 / MIT) and Daniel's MIT notice. Precedent: #927-#931 (think-463r, PR #932).
@@ -35,3 +35,5 @@ Done so far:
 - Follow-ups owed on adoption: #845 (T-257 named current), #703 (T-224 confirmed/house).
 
 Adoption is NOT done: select_houses.eligible needs an accepted review in `reviews`, and check_results refuses the verified lane without it. Mapping L72's review then adopting (adopt_houses, both strong regularizers, derived records) is the next step.
+
+Update (16:55Z): draft PR #937 open (labels intake, S3), head 3e81f5d01. Commits: intake aa7cc6270, register ed8a71fc7, release record 5af3a8f9a, re-pin a6f21e975, records-tier fixes e6e1458ec, importer roster 3e81f5d01. Local --records: only check_results contiguity fails (T-280/T-281 not on main until #934). --edit: 70/71, same one. Hosted CI: suite-a and validate fail on the same contiguity only. A local preview merge of the L65 branch (branch l71-merge-preview, not pushed) passes --records fully and 1096 touched tests (test_house_adoption included). Waiting for #934 to land, then merge main, re-render SYNOPSIS row (283/251), site-urls, views, census; re-pin; retain contraction receipts with the module from main.
