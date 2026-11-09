@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 185
+version: 186
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -68,7 +68,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-09T13:50:19.926Z
+updated_at: 2026-11-09T14:55:06.611Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -323,3 +323,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-08 (L57-L62): #924 (unnir, s(12) >= 9929/2500) imported as T-274 at V3/C3 via PR #925 (merged 268a0ef1b after L58 blind stage-4 review, L59 senior review "merge after fixes", L60 addressing pass, green CI). Replays: Daniel's verify (overflow checks) VERIFIED 39,765 bins; native parent-core PASS_COMPLETE all rows; indep_scan VERIFIED 96,000 bins byte-identical to cpp.log; four controls refused; ~16.5 CPU-h. n = 12 verified lower bound moves from T-095 7943/2000 to 9929/2500; reported lower bound stays T-245's 4. Reply posted after Pages deploy + verify-deployment (issuecomment-6728443003) and #924 closed completed. Records PR by L62 in flight. Follow-ups filed: think-y27o (review-check gap: verified_lane_review_problems accepts a method review via proof.audit_record), think-6vhj (credit-attributions refresh for T-274 before think-wvsa redraw), think-1bfs (suite shard 4 at the 10% unrecorded guard). Owner decisions still pending: #921 terms (think-8h80), #908/#909 order, #543 enclosure rule, #919 dup of #918, think-8nim SVG disposition.
 
 2026-11-08 23:52Z to 2026-11-09 04:54Z hourly renewals (intake164 to intake169): #926 merged (19b354a5c) recording #924's final reply; think-0vl3 closed; finished worktrees removed (disk 13 GB free). At 00:00Z about 40 queue rows crossed the seven-day quiet mark (beads last touched 2026-11-02): mostly the think-f2io owner-decision chain (#666/#715/#719/#732 above 1024), #763 awaiting its author, #413 under an outside claim; no bead touched to reset the clock. Otherwise identical sweeps; main unchanged at 19b354a5c; no new issues, PRs or comments. Owner decisions still pending: #921 terms (think-8h80), #908/#909, #543, #919, think-8nim, and think-f2io D1/D4/D5.
+
+2026-11-09 06:55Z to 14:53Z (L63-L70): #927-#931 (Doğa Özden via kenaznia-doga, five upper bounds at 232, 268, 299, 303, 307) imported as T-275..T-279 at V3/C3, S3, adopted as houses (PR #932, adca8d352) after the L64 blind review (accept with findings) and the L66 senior review; final replies posted after deploy + verify-deployment, issues closed; follow-ups on #844, #893, #914; replies recorded (PR #933, ef1af4933); think-463r and think-rd0p closed. Watched repo vitamoon/vitamoon (Kaelan Yim) published 15 certificates without an issue (78eb9ea, e4209f6, c10e094, 546928a/ac14112): L65 (think-h96r) recorded them in draft PR #934 - eleven beyond-horizon rows 553-700 superseding Couzo's, 299 and the second 303 (1.18e-12 and 3.29e-12 below #929/#930, built from them) and 130 (envelope-only, 1.96e-14) held below adoption, first 303 nothing to import; new tool devtools/contraction_margin.py measures gains at 0.35, 0.97, 0.09 of the predecessor's padding margin (T-265 was 9.97). Blind stage-4 review L70 running. New bead think-5c9z (Daniel regularizer KKT points 3.30-3.53e-12 below T-275..T-279), held on RV-3. Owner decisions pending: #921 terms, #908/#909, #543, #919, think-8nim, and RV-3 (think-ruu2/think-ikku: is a gain inside the predecessor's rounding-padding margin a new result? recommended option C, restatement).
