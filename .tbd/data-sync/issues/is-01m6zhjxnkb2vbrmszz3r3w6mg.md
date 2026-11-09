@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #927-#931 (Özden's five upper bounds)"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l64-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T06:57:59.474Z
-updated_at: 2026-11-09T07:09:44.954Z
+updated_at: 2026-11-09T07:18:31.160Z
 started_at: 2026-11-09T06:58:03.800Z
 ---
 Blind stage-4 mathematical review with a clean-room exact checker, frozen findings and SHA-256 before reading the import lane's work; precedent review-2026-11-04-ozden-893-894-299-204.md and review-2026-11-05-evand-914-seven.md.
@@ -33,3 +33,9 @@ L64 (bold-ritchie-l64-review), stage 4 blind review of #927-#931.
 - Certificates are Witness/v2 `representation: corners`, rational p/q strings with
   ~10^215 denominators, promoted by this repository's `packing-witness promote
   --strategy robust-rational`. Writing the clean-room checker now.
+- 07:18:14Z: clean-room checker FROZEN before any producer code was read. Six files
+  (l64_util, l64_reader, l64_sat, l64_clip, l64_check, l64_selftest); the frozen-digests
+  file has SHA-256 59c3d0065049c552c24226a6f2e1564638fcd6dd312960ff463b2aa01ab3acd3.
+  l64_check.py 5c4927b8..., l64_sat.py b4e61fcb..., l64_clip.py d238d556...,
+  l64_reader.py 0e51d443... Self-test PASSED. Timing run: 232 ACCEPT, 26,796 pairs all
+  apart, least margin 2.0358e-13, 22 CPU-s.
