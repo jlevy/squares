@@ -1,0 +1,9 @@
+5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c  ./LICENSE.md
+dc358fe2c5f1883107fee9103e25129889adb77f1007207eea9d543634d81ab4  ./README.md
+74c0e5d4927ec57468f0cae71636ba46833230ceea4d1dd0cd5ddc1ed76421b3  ./n-268-candidate.yaml
+fcd07b9ff77e7e9be86fcf78eebee721bcfd1c4e5d6ffa2c8164847a4dd0d180  ./n268-witness.json
+116a5db1a02b38b4481cb4ad6c3e0f200497a9db41f7e3b4c7a891ef3c5272bd  ./packing-witness-verify.txt
+b334f6db7b61d7bb96d7aa6c044b67202b735fb13d4721c2c22ab34e72340048  ./records/n-268-candidate-diff.png
+cf549620c9d8358cec7d5faefc001cd6fe38abb6d91ef6f7ebda407237ade22d  ./sqcheck-output.txt
+596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce  ./verifier/README.md
+1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979  ./verifier/sqcheck.py

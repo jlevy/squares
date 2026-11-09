@@ -1,0 +1,22 @@
+# L64 clean-room checker, frozen 2026-11-09T07:18:14Z (lane L64, bead think-rd0p).
+#
+# Written from the definitions alone: the Witness/v2 schema text
+# (packing/witnesses/witness.schema.yaml), the mathematics of unit squares, containment
+# and interior-disjointness, and the layout of the five certificates read as data.
+# At this time NOT read: the producer's verifier/sqcheck.py or verifier/README.md (in any
+# of the five repositories), any of this repository's witness, verifier or promotion code
+# (sqpack, packing-witness, devtools), the precedent reviews' programs, and anything of
+# lane L63 (branch, PR, notes). Read: the two precedent review documents, issues 927-931,
+# epistemics.md and result-import.md stage 4, the certificates and JSON twins as data.
+#
+# Self-test PASSED (28 known answers, 3,000 random pairs taken to contact and 1e-30 past
+# and short of it, 1,000 random walls, 32 malformed files refused). One timing run on the
+# 232 certificate preceded the freeze (ACCEPT); the final runs follow it.
+#
+# sha256  file
+de76960f100535969691e9c386be79de5ca3e45fbe7db318ea86e5ec9bc2af81  l64_util.py
+0e51d443fda1825b6ae207689ed932b9d1c73fc0c46aed0ceec153ba08be9c9c  l64_reader.py
+b4e61fcb7eae75386a7fa5f8c065518eacfbea47460477e192ca75f02762b948  l64_sat.py
+d238d55672949ffde490f234c97db0d76a2efc96a9515485d45e67e02b789e95  l64_clip.py
+5c4927b88049a41a3fa1e822eab96d575d27f7d982058b272f677d87064c2058  l64_check.py
+2d8518c7c440415340cc8a92410f7b106f01e9872231957b65b3b6776656fc22  l64_selftest.py

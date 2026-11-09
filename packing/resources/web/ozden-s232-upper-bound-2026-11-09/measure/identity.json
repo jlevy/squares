@@ -1,0 +1,289 @@
+{
+ "format": "measure-identity-v1",
+ "n": 232,
+ "inputs": {
+  "OZDEN": {
+   "input": "packet",
+   "packet": "ozden-s232-upper-bound-2026-11-09",
+   "side": "394035241122043108412978572970258038583458469702883453268952597738311891424180377406102518184422107430133438610138247537599538746159225668902354575633797719931544993978995473927381497135113094792464136949372227007651817413/25000000000000000000000000000001865781696193590277614901165293820091132847308153449514977186151264183668713598455797727017094808719618280759851999489442176824227387612827878807868883530632588700690462072900000000000000000"
+  },
+  "T-256": {
+   "input": "packet",
+   "packet": "couzo-issue844-2026-10-28",
+   "side": "7617348902520572307222120733/483283363059000000000000000"
+  },
+  "regularized": {
+   "input": "witness-center-basis",
+   "path": "packing/atlas/known-best/regularized/n-232-regularized.yaml.gz",
+   "sha256": "17d0d8b63ccbe2c2b6dfe64f912464ce7ca26c26ae853096972bf5994f52cc94",
+   "side": "7617348902520572307222120733/483283363059000000000000000"
+  },
+  "house-witness": {
+   "input": "witness-center-basis",
+   "path": "packing/witnesses/known-best/n-232.yaml",
+   "sha256": "7d8f9c49ebc5a784cedd1dd92a9261ff78920944de9218dcece1c6125d741cc1",
+   "side": "7617348902520572307222120733/483283363059000000000000000"
+  }
+ },
+ "tilts": {
+  "OZDEN": {
+   "exactly_turned": 203,
+   "tilted_beyond_1_degree": 80,
+   "tilted_positive": 0,
+   "tilted_negative": 80,
+   "tilt_range_degrees": [
+    1.4568106412767463,
+    31.99814600612401
+   ],
+   "near_upright": 123,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.8399845561151835,
+    -0.8399845561151835,
+    -0.8399845561151693,
+    -0.02093711318323699,
+    -0.014101846287715603,
+    -0.007191720595514539,
+    0.012267428495178001,
+    0.021969103695249,
+    0.026316997704809,
+    0.026971497229826003,
+    0.034816236823133,
+    0.34975648302090206
+   ]
+  },
+  "T-256": {
+   "exactly_turned": 85,
+   "tilted_beyond_1_degree": 81,
+   "tilted_positive": 0,
+   "tilted_negative": 81,
+   "tilt_range_degrees": [
+    1.7346047089889112,
+    31.93295063230083
+   ],
+   "near_upright": 4,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.8698026963531333,
+    -0.6000115070187491,
+    -0.06283655073202965
+   ]
+  },
+  "regularized": {
+   "exactly_turned": 82,
+   "tilted_beyond_1_degree": 81,
+   "tilted_positive": 0,
+   "tilted_negative": 81,
+   "tilt_range_degrees": [
+    1.7346047089889112,
+    31.93295063230083
+   ],
+   "near_upright": 1,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.6000115070187491
+   ]
+  },
+  "house-witness": {
+   "exactly_turned": 85,
+   "tilted_beyond_1_degree": 81,
+   "tilted_positive": 0,
+   "tilted_negative": 81,
+   "tilt_range_degrees": [
+    1.7346047089889112,
+    31.93295063230083
+   ],
+   "near_upright": 4,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.8698026963531333,
+    -0.6000115070187491,
+    -0.06283655073202965
+   ]
+  }
+ },
+ "pairs": [
+  {
+   "view": "OZDEN",
+   "against": "T-256",
+   "side_difference": "-2.521146e-04",
+   "side_difference_exact": "-3046069789341589554597336641272640513053531495812236434817998692367725045984022899036659556646798047599046435298879555579793153992368276404008615254660067234937309558511845450659401047365833705284605353209158800079776173190289333/12082084076475000000000000000000901701252870363728485254880455095425511984312226734392829946912843635367790172582003634669469603541867440516356948260363166179530360194861415079580149745403695112972809665955800425001100000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "5.002616e-1",
+    "largest_turn_degrees": "28.76",
+    "moved_beyond": {
+     "1e-9": 218,
+     "1e-6": 218,
+     "1e-3": 141,
+     "1e-2": 48,
+     "1e-1": 6
+    },
+    "turned_beyond_1e-6": 95
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.500262",
+    "moved_beyond": {
+     "1e-9": 218,
+     "1e-6": 218,
+     "1e-3": 141,
+     "1e-2": 48,
+     "1e-1": 6
+    },
+    "largest_turn_degrees": "28.76",
+    "turned_beyond_1e-6": 95
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 78,
+    "tilted_paired_same_sign_within_1e-1": 77,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 2,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 0,
+    "total_squared": "0.645274",
+    "runner_up_symmetry": 7,
+    "runner_up_total_squared": "28.5868",
+    "largest_move": "0.500388",
+    "rms_move": "0.0527386",
+    "bottleneck": "0.500388",
+    "moved_beyond": {
+     "1e-9": 232,
+     "1e-6": 232,
+     "1e-3": 139,
+     "1e-2": 48,
+     "1e-1": 6
+    },
+    "nearest_one_to_one": true,
+    "turned_beyond_1_degree": 12,
+    "tilts_reversed_beyond_1_degree": 0
+   }
+  },
+  {
+   "view": "OZDEN",
+   "against": "regularized",
+   "side_difference": "-2.521146e-04",
+   "side_difference_exact": "-3046069789341589554597336641272640513053531495812236434817998692367725045984022899036659556646798047599046435298879555579793153992368276404008615254660067234937309558511845450659401047365833705284605353209158800079776173190289333/12082084076475000000000000000000901701252870363728485254880455095425511984312226734392829946912843635367790172582003634669469603541867440516356948260363166179530360194861415079580149745403695112972809665955800425001100000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "5.002616e-1",
+    "largest_turn_degrees": "28.76",
+    "moved_beyond": {
+     "1e-9": 218,
+     "1e-6": 218,
+     "1e-3": 143,
+     "1e-2": 46,
+     "1e-1": 6
+    },
+    "turned_beyond_1e-6": 94
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.500262",
+    "moved_beyond": {
+     "1e-9": 218,
+     "1e-6": 218,
+     "1e-3": 143,
+     "1e-2": 46,
+     "1e-1": 6
+    },
+    "largest_turn_degrees": "28.76",
+    "turned_beyond_1e-6": 94
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 78,
+    "tilted_paired_same_sign_within_1e-1": 77,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 2,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 0,
+    "total_squared": "0.639428",
+    "runner_up_symmetry": 7,
+    "runner_up_total_squared": "28.5913",
+    "largest_move": "0.500388",
+    "rms_move": "0.0524991",
+    "bottleneck": "0.500388",
+    "moved_beyond": {
+     "1e-9": 232,
+     "1e-6": 232,
+     "1e-3": 141,
+     "1e-2": 46,
+     "1e-1": 6
+    },
+    "nearest_one_to_one": true,
+    "turned_beyond_1_degree": 12,
+    "tilts_reversed_beyond_1_degree": 0
+   }
+  },
+  {
+   "view": "OZDEN",
+   "against": "house-witness",
+   "side_difference": "-2.521146e-04",
+   "side_difference_exact": "-3046069789341589554597336641272640513053531495812236434817998692367725045984022899036659556646798047599046435298879555579793153992368276404008615254660067234937309558511845450659401047365833705284605353209158800079776173190289333/12082084076475000000000000000000901701252870363728485254880455095425511984312226734392829946912843635367790172582003634669469603541867440516356948260363166179530360194861415079580149745403695112972809665955800425001100000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "5.002616e-1",
+    "largest_turn_degrees": "28.76",
+    "moved_beyond": {
+     "1e-9": 218,
+     "1e-6": 218,
+     "1e-3": 141,
+     "1e-2": 48,
+     "1e-1": 6
+    },
+    "turned_beyond_1e-6": 95
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.500262",
+    "moved_beyond": {
+     "1e-9": 218,
+     "1e-6": 218,
+     "1e-3": 141,
+     "1e-2": 48,
+     "1e-1": 6
+    },
+    "largest_turn_degrees": "28.76",
+    "turned_beyond_1e-6": 95
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 78,
+    "tilted_paired_same_sign_within_1e-1": 77,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 2,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 0,
+    "total_squared": "0.645274",
+    "runner_up_symmetry": 7,
+    "runner_up_total_squared": "28.5868",
+    "largest_move": "0.500388",
+    "rms_move": "0.0527386",
+    "bottleneck": "0.500388",
+    "moved_beyond": {
+     "1e-9": 232,
+     "1e-6": 232,
+     "1e-3": 139,
+     "1e-2": 48,
+     "1e-1": 6
+    },
+    "nearest_one_to_one": true,
+    "turned_beyond_1_degree": 12,
+    "tilts_reversed_beyond_1_degree": 0
+   }
+  }
+ ]
+}

@@ -534,6 +534,19 @@ _README_LRJ4 = (
 #: "no change", so none is adopted (`SETTLED`; the owner's question whether exactness
 #: alone earns the picture is think-j68m). Their receipt, blocks, reports and the selection's
 #: report are in packing/cases/regularized_drawings/think-yk2h-2026-10-31/.
+_RUN463R = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-09-n232-307-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n232-307-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n232-307-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n232-307-grid-deg5"),
+)
+_README_463R = (
+    "packing/cases/regularized_drawings/think-463r-2026-11-09/README.md and "
+    "selection-adopt-2026-11-09-n232-307.md, the selection of 9 November 2026 (think-463r), "
+    "beside the runs' receipt, blocks and reports"
+)
+
+
 _RUNYK2H = (
     ("evand-regularize", "evand-regularize-yk2h-2026-10-31-n39-291-evand"),
     ("regularize_grid_slack/2", "grid-slack-yk2h-2026-10-31-n39-291-grid-deg05"),
@@ -1140,17 +1153,21 @@ SETTLED: dict[int, Settled] = {
     ),
     307: Settled(
         DECIDED,
-        "[Couzo issue 844 2026-10-28]",
-        "resources/web/couzo-issue844-2026-10-28/source/certificates/n307.cert",
-        "712c6a6e9ef58a9521784e6b7e236af813422de7",
-        "2707897969116659515550794271467451840032974544063449693/"
-        "150612387934832692306604131393579915999000000000000000",
-        _RUN3GUF,
-        "grid-slack's views at all three thresholds are refused at row 7 against the axis "
-        "tool's view of this witness, a house total of shared sides falling and more light "
-        "and uneven squares drawn; Evan Daniel's certified KKT solve is 3.75e-12 below the "
-        "side and held at row 3 as a register candidate (think-ruu2), never admitted here",
-        _README_3GUF,
+        "[Özden s307 upper bound 2026-11-09]",
+        "resources/web/ozden-s307-upper-bound-2026-11-09/source/n-307-candidate.yaml",
+        "dbe8838a7273dc8458fef1f5a16ef4384867ca19",
+        "449480774009684068230455615438457327425493010149518207533311266279067802674440"
+        "281063163481255147688160512083866164777157380357557984529353435587198614995134"
+        "515039437077222130568527506328213541414734004764759503110113052197"
+        "/25000000000000000000000000000007228952143313328760480263137575411212650339400"
+        "499617794887156550751333176460501119255701638639310978743329054270587917634591"
+        "387507318688709425989287484853991618028740642800100000000000000000",
+        _RUN463R,
+        "on T-279's witness grid-slack's views at all three thresholds go to review at row 7, "
+        "13 per-square counts falling while no total does, and Evan Daniel's certified KKT "
+        "solve is 3.48e-12 below the side and held at row 3 as a register candidate, never "
+        "admitted here; the axis tool's view stays drawn",
+        _README_463R,
     ),
 }
 

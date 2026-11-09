@@ -1,0 +1,134 @@
+{
+ "program": "l64_controls_centre.py",
+ "programs_sha256": {
+  "l64_util.py": "de76960f100535969691e9c386be79de5ca3e45fbe7db318ea86e5ec9bc2af81",
+  "l64_reader.py": "0e51d443fda1825b6ae207689ed932b9d1c73fc0c46aed0ceec153ba08be9c9c",
+  "l64_sat.py": "b4e61fcb7eae75386a7fa5f8c065518eacfbea47460477e192ca75f02762b948",
+  "l64_clip.py": "d238d55672949ffde490f234c97db0d76a2efc96a9515485d45e67e02b789e95",
+  "l64_check.py": "5c4927b88049a41a3fa1e822eab96d575d27f7d982058b272f677d87064c2058",
+  "l64_selftest.py": "2d8518c7c440415340cc8a92410f7b106f01e9872231957b65b3b6776656fc22",
+  "l64_controls.py": "eab74ba33600c399dc37929d36990ae24196d60a59c3ef562e913eb919cca90d",
+  "l64_controls_centre.py": "14fd8ca610895fb90d3e92cad7ff2627aecfb3ba85f53245453ff5253520910a"
+ },
+ "plan_sha256": "acfd29c199a9cc7dab22b37ac02333d9c5a2c9599efe7f1f8ac4afa40185a2ad",
+ "environment": {
+  "python": "3.14.7",
+  "implementation": "CPython",
+  "isolated_mode": "True",
+  "nice": "19"
+ },
+ "certificate": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l64/src/s268-upper-bound/n-268-candidate.yaml",
+ "certificate_sha256": "74c0e5d4927ec57468f0cae71636ba46833230ceea4d1dd0cd5ddc1ed76421b3",
+ "n": 268,
+ "side": "210905873722952236034905760696325244271659803434360286045042325621817918037841781834041470885941636042984742791065941455615975519785534492521129846982694500774460821372563389964320042972495553/12499999999999975129058159080855999188136085095192831727990759607627158644296402179626990471366286935091256102905396680271369883096051094562090701673945832959564265216275944900000000000000000",
+ "least_margin_pair": [
+  177,
+  264
+ ],
+ "controls": [
+  {
+   "id": "S4'c",
+   "what": "square j of the least-margin pair moved toward i along the centre line c_j - c_i by the exact contact parameter of the Minkowski difference",
+   "expect": "ACCEPT",
+   "expect_detail": "the pair touches by both (margin exactly 0, area 0); accepted unless the moved square meets a third square or a wall first",
+   "observed": "ACCEPT",
+   "as_expected": true,
+   "pair": [
+    177,
+    264
+   ],
+   "parameter": "2.01218189216e-13",
+   "pair_A": "touching",
+   "pair_margin_A": "0",
+   "pair_B": "touching",
+   "pair_area_B": "0",
+   "decision": {
+    "verdict": "ACCEPT",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 35777,
+     "touching": 1,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S4'p",
+   "what": "the same, the parameter 1e-30 past contact",
+   "expect": "REFUSE",
+   "expect_detail": "the pair overlaps by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "pair": [
+    177,
+    264
+   ],
+   "parameter": "2.01218189216e-13",
+   "pair_A": "overlapping",
+   "pair_margin_A": "-1.00000e-30",
+   "pair_B": "overlapping",
+   "pair_area_B": "3.33114e-46",
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 1,
+    "overlapping_first": [
+     {
+      "pair": [
+       177,
+       264
+      ],
+      "margin_A": "-800000000000160388120744855721023036962860573711829045203349485116369308001895660725421/799999999999998813176108643857648380343183586546095311315951102194560810000000000000000000000000000000000000000000000",
+      "margin_A_sci": "-1.00000e-30",
+      "area_B": "2560000000001011203266100112698931293165791526335729332826153802745535960567186797808630598570583304097894454131107949472516314117614933259574652628391381888887010811406619549880920327758245764747664392777134289438846869047675949447889984469824612188376410010403355975890285149755699791621191330764443027953377473193961/7685033762381363318990484294665166952998789925061510888690462701271222214027355413870126088244114216343221039132746684146900749241601318735278244400191825982369930573216664722372740191224111898206961736352502732005426926016332246115486880000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "area_B_sci": "3.33114e-46"
+     }
+    ],
+    "classes": {
+     "separated": 35777,
+     "touching": 0,
+     "overlapping": 1
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S5'",
+   "what": "every pair with margin below 1e-12, each alone, closed along its centre line",
+   "expect": "ALL_AS_STATED",
+   "expect_detail": "each pair touching by both at contact (A margin exactly 0) and overlapping by both with the parameter 1e-30 past",
+   "observed": "ALL_AS_STATED",
+   "as_expected": true,
+   "pairs": 499,
+   "misses": []
+  },
+  {
+   "id": "S5-diagnosis",
+   "what": "for every pair with margin below 1e-12, whether the line along its separating axis meets the pair at all (the interval of overlap along it is non-empty)",
+   "expect": "MISSES_EXPLAINED",
+   "expect_detail": "the pairs S5 missed are exactly the pairs whose separating-axis line does not meet the pair",
+   "observed": "MISSES_EXPLAINED",
+   "as_expected": true,
+   "pairs": 499,
+   "axis_closing_reached_contact": 408,
+   "axis_line_meets_pair": 408,
+   "axis_line_misses_pair": 91,
+   "unexplained": []
+  }
+ ],
+ "verdict": "EVERY_CONTROL_AS_EXPECTED",
+ "misses": [],
+ "clock": {
+  "started_utc": "2026-11-09T07:52:59Z",
+  "finished_utc": "2026-11-09T07:54:46Z",
+  "cpu_seconds": "101.22",
+  "wall_seconds": "106.47"
+ }
+}

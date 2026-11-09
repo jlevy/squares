@@ -2795,10 +2795,12 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: packings took 204 on 5 November 2026 and 260 on 6 November 2026 (T-268, T-269),
 #: crediting neither name there. Measured on 6 November 2026, the block fits Özden's name
 #: in its three lines and the 1-100 canvas keeps its height whether the hold stands or is
-#: emptied.
-PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
-    299: ("Doğa Özden",),
-}
+#: emptied. The adoption of 9 November 2026 (think-463r) credits him as an improver at 232,
+#: 268, 303 and 307 too, and at 299 again (T-275 to T-279), so the hold holds him there
+#: alike: no other name enters or leaves the block.
+PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = dict.fromkeys(
+    (232, 268, 299, 303, 307), ("Doğa Özden",)
+)
 #: The infographic edition the hold was set under. While the hold is not empty, a version
 #: bump or a poster drawn for any other edition fails the pull-request suite
 #: (`print_credit_hold_problems`, held by test_known_best_atlas), so the cut that redraws

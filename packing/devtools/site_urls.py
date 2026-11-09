@@ -89,6 +89,20 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "adoption scales is think-rp0d's question."
         ),
     ),
+    "cases/303.html": (
+        360_000,
+        (
+            "A section for each packing that has been the house, each listing every other "
+            "side; prepared HTML measures 307,154 bytes in hosted run 42586831248 on 9 "
+            "November 2026, past the 300,000 record ceiling, once T-278 (#930) is "
+            "registered beside T-272's house section, before any adoption, and 326,923 "
+            "bytes locally after T-278's adoption that day (think-463r). An adoption grows "
+            "a case page by 27 to 33 KB (cases/204.html's measurements), so the ceiling "
+            "moves to 360,000 as a measured choice, 33,077 above the page, for one more "
+            "adoption at the larger growth. Its timing was not re-measured; how a page that "
+            "grows with every adoption scales is think-rp0d's question."
+        ),
+    ),
     "cases/204.html": (
         430_000,
         (
