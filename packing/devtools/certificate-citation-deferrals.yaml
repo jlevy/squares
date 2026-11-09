@@ -85,3 +85,13 @@ deferrals:
     reason: The same configuration at 297 decided on sqpack's exact verifier over its field (route 1
       of route B, think-ozx8); cited with route B's verify_exact.py run when the house adopts T-247
       (think-vv1q owns that adoption).
+  - evidence: E-ozden-938-exact-feasibility
+    results:
+    - T-284
+    bead: think-1goz
+    blocked_on: think-ntcf
+    recorded: '2026-11-09'
+    reason: 'Both maintained exact routes'' complete replay of Özden''s #938 certificate at 199, which
+      T-284 cites at V3/C3. n-199 cites it when the house adopts T-284 in place of T-127, which the house
+      rule holds until the stage 4 review (think-ntcf), written in a separate blind lane (L77), is mapped
+      with an accepted verdict; intake lane L76 (think-1goz) owns that adoption.'

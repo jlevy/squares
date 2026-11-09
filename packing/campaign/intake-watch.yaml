@@ -1857,3 +1857,96 @@ repositories:
       Completed.md and TODO.md, whose lines name only results the record already holds (#845,
       #824, #702, #703, #680, #674 and earlier). 0875935 lets the packer parse this register's
       algebraic-number-field witnesses. Nothing else to import.
+  # The intake pass of 9 November 2026, lane L76 (think-3guf, think-1goz): Doğa Özden's lab
+  # committed one README line to each of its eight 9 November repositories between 20:53:12Z and
+  # 20:53:24Z, the same correction it posted that minute on #927 to #931, #935, #936 and #938.
+  - url: https://github.com/kenaznia-doga/s172-upper-bound
+    read_through: 204026bfbe01e9d7d135ea839eefab362a2a58eb
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:12Z) past the 2ce1f7c pin: 204026b, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 50 of README.md (blob e9402bc to
+      5a9b94f) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 172, 13.6146898533 (team Nevska, 7 November), smaller
+      than the certificate, which states no packing and which the lab cannot verify. The comment
+      on #935 says the same; a side with no packing is no report, and the record notes it on #935.
+      The ozden-s172-upper-bound-2026-11-09 packet stays at 2ce1f7c. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s199-upper-bound
+    read_through: 4fbff7b279f53211a458ee4cd93aa32c1dc3a08e
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:14Z) past the d03ee0b pin: 4fbff7b, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 53 of README.md (blob dc5e724 to
+      6496ba5) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 199, 14.6132098756 (team OigaZhDn, 31 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #938 says the same; a side with no packing is no report, and the record notes it
+      on #938 and in T-284. The ozden-s199-upper-bound-2026-11-09 packet stays at d03ee0b, the
+      commit #938 names. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s232-upper-bound
+    read_through: f76f2d0d024bb660804711985e08df37ca9d8193
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:15Z) past the 09e324f pin: f76f2d0, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob cc6bab2 to
+      37bef12) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 232, 15.7588527753 (team Salut Monde, 29 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #927 says the same; a side with no packing is no report, and the record notes it
+      on #927. The ozden-s232-upper-bound-2026-11-09 packet stays at 09e324f. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s268-upper-bound
+    read_through: ae2883e32016d1cbcc041cd56679dfbaa1cfed7f
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:17Z) past the a40a15d pin: ae2883e, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob 00da100 to
+      13ad406) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 268, 16.8718681351 (team Cats and boxes, 28 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #928 says the same; a side with no packing is no report, and the record notes it
+      on #928. The ozden-s268-upper-bound-2026-11-09 packet stays at a40a15d. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s270-upper-bound
+    read_through: 107a3cfb6b4c9a5cac6daa752e5d7d0b604e9262
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:18Z) past the 78ab8ce pin: 107a3cf, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 50 of README.md (blob efa23be to
+      8ca4831) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 270, 16.9273142164 (team Cats and boxes, 27 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #936 says the same; a side with no packing is no report, and the record notes it
+      on #936. The ozden-s270-upper-bound-2026-11-09 packet stays at 78ab8ce. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s299-upper-bound-17801004
+    read_through: 15cb4e779d7b72c5f419286931e050f8470e954b
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:20Z) past the a042eab pin: 15cb4e7, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob 95c314a to
+      4f04ee0) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 299, 17.7936369918 (team Cats and boxes, 27 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #929 says the same; a side with no packing is no report, and the record notes it
+      on #929, as it did on #824. The ozden-s299-upper-bound-2026-11-09 packet stays at a042eab.
+      Nothing to import.
+  - url: https://github.com/kenaznia-doga/s303-upper-bound
+    read_through: 781a162d2b37b5dcdde256a9911eef54b0055dce
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:22Z) past the b43ca09 pin: 781a162, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob d272a4e to
+      391effc) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 303, 17.8959261583 (team Cats and boxes, 1 November),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #930 says the same; a side with no packing is no report, and the record notes it
+      on #930. The ozden-s303-upper-bound-2026-11-09 packet stays at b43ca09. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s307-upper-bound
+    read_through: f62d1ac42b112b9cfed0d8e6d96dd62bcb8e4fd8
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:24Z) past the dbe8838 pin: f62d1ac, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob 324c63e to
+      59cb8a6) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 307, 17.9792309604 (team Nevska, 7 November), smaller
+      than the certificate, which states no packing and which the lab cannot verify. The comment
+      on #931 says the same; a side with no packing is no report, and the record notes it on #931.
+      The ozden-s307-upper-bound-2026-11-09 packet stays at dbe8838. Nothing to import.

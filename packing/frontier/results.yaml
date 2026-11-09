@@ -42225,6 +42225,213 @@ results:
       covers:
       - T-282
       - T-283
+  - id: T-284
+    kind: upper-bound
+    registered: '2026-11-09'
+    landed: '2026-11-09'
+    headline: >-
+      Özden's T-282 packing plus an L of 27 squares at 199, 2.88e-3 below the house
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(199) <=
+      1461468985328621153330369591208625293096183957845596937754957265273646011066209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000.
+      That side is 14.6146898532862152 rounded up at 16 places and 14.614689853287 at 12, as #938
+      prints it, and it is T-282's side at 172 plus one, exactly.
+
+      The certificate is Özden's #935 certificate at 172 (T-282), its rational corners unchanged,
+      with the L step of DS7, section 2: an L of 27 axis-aligned unit squares, a row of 14 along the
+      top wall and a column of 13 along the right wall of the square of side S172 + 1, 172 + 2
+      floor(S172) + 1 = 199 squares. Measured here pose for pose, it is exactly what devtools.construction_checker
+      writes for one L-border layer on T-282's retained certificate. Nothing was searched at 199.
+
+      It is 2.88e-3 below T-127 (Nate Chaoweeraprasit's packing refined by Siddharth Gupta), the
+      case's house best packing, and below the two re-certifications of that packing pending
+      adoption there, T-174 and T-193. Measured here it is another arrangement than the house's, not
+      one to one with it under any symmetry, the optimal assignment moving 81 squares beyond a tenth.
+      Both maintained exact routes accept the certificate; the case is unchanged until the stage 4
+      review is mapped, since the house rule adopts a packing once a review accepts it.
+
+      The issue says this repository's packing-witness verify, run unmodified on the witness,
+      reports VERIFIED (exact-algebraic, 19701 pairs), and that verifier/sqcheck.py, an exact
+      checker the author's lab wrote separately from this repository's code, reports VALID (exact
+      rational). It says the two share only the unit-square, wall and non-overlap definitions. The
+      172 part's exact coordinates were made by this repository's packing-witness promote, so
+      packing-witness verify is not independent of how they were rounded, as the issue says.
+
+      The grid squares touch each other, the walls and the 172 part's bounding square exactly, so
+      the least pair gap is 0, as in the record's grid witnesses; sqcheck.py certified the decimal
+      pose in interval arithmetic only with a dilation of 1e-24. No local-optimality, rigidity or
+      formal check is claimed. Those statements are the author's; no source program ran here.
+
+      Credit Doğa Özden (https://dogaozden.com/math/live/square-packing/), who reports his #935
+      packing at 172, found from the registry's 172, Evan Daniel's packing (T-257, #845), by basin
+      hopping over local minima of Evan Daniel's ALM+SLP quench
+      (https://github.com/evand/square-packing, MIT), with the classical L step added. The issue asks
+      that the improvement be credited to Özden, the base packing to its holders as the record lists
+      them, and the local optimizer to Evan Daniel; it says it found no automatic propagation of the
+      step in the registry, so it files the bound as its own witness.
+
+      The issue says the search and its code were written and run by AI agents and that the checks
+      were run by code that did not produce the packing; it says the issue and repository were
+      prepared and posted by Özden's AI agent, which uses the account kenaznia-doga, and that Özden
+      directed the work. The best published Kaggle per-puzzle side the issue found at 199,
+      14.617572173606 (kirilltym), is above this and states no packing; the side-only leaderboard
+      entry the author's comment of 20:53:05Z adds, 14.6132098756 (team OigaZhDn, 31 October), is
+      below it and states no packing, so neither is a report.
+    scope:
+      n_values:
+      - 199
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new best bound at 199, 2.88e-03 below the house, as large a move as T-282's 3.25e-03 (S3) at
+        172 and T-243's 3.17e-03 (S3) at 182. It is derived: T-282's packing with the classical L
+        step, nothing searched at 199. The register scores a derived entry by its claim and carries
+        its premise's score to the count it moves, as T-002 and T-016 carry T-001's and T-015's S3
+        and T-063 T-062's (T-156, from T-155's S1, is S1); the derivation's triviality is recorded in
+        composition and next_rung, not in the score (T-063's rationale). T-282 is S3, so S3. No
+        technique is new, so not S4. A draft for the review to weigh. No lower bound or optimum.
+      scored: '2026-11-09'
+      by: >-
+        think-1goz Doğa Özden import (intake lane L76), a draft for the stage 4 review (think-ntcf,
+        lane L77) to confirm
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Özden s199 upper bound 2026-11-09]'
+      published: '2026-11-09'
+    composition: >-
+      One certificate, decided directly, proves the bound; it is also derived. Direct: the
+      retained witness at 199, decided by both maintained exact routes over every wall and pair
+      (E-ozden-938-exact-feasibility), with the packet's sharp controls.
+
+      Derived: T-282's certificate at 172 (V3/C3, adopted at 172 on 9 November 2026) and the L
+      step, one recorded line (DS7, section 2: a packing of n squares in side s gives one of n + 2
+      floor(s) + 1 in side s + 1), which the import's test applies to T-282's retained certificate
+      through devtools.construction_checker and finds equal to the witness pose for pose. The
+      record holds no rule that carries an L step inside the case corpus (think-ruu2's RV-4 is
+      open), so the derivation sets no rung of its own; the identity measurement, the contraction
+      margins and the exact L-step scan are recorded values and set no rung.
+    evidence:
+    - E-ozden-938-certificate-report
+    - E-ozden-938-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/README.md
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/acquisition/claims.json
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/source/n-199-candidate.yaml
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/source/n-199-decimal-pose.yaml
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/measure/identity.json
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/measure/contraction-n199.json
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/measure/contraction-n199-own.json
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/measure/l-step-scan.json
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/measure/l-step-scan-adopted.json
+    - packing/campaign/issue-intake/upper-bounds-938-20261109/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/construction_checker.py
+    - packing/devtools/l_step_scan.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l76_1109.py
+    - packing/resources/web/ozden-s199-upper-bound-2026-11-09/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 199: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both routes,
+      118206 pair decisions; summed over the 3 jobs, the receipt records 42.6 route CPU seconds and
+      43.1 job wall seconds, the longest job 14.55 seconds. In every positive squares touch the box,
+      a least wall clearance of exactly 0, and the grid squares touch each other, a least pair gap of
+      exactly 0. The replay is E-ozden-938-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
+      far-wall clearance, closed the least-gap pair by its gap and moved every square toward the
+      nearer near wall by its least clearance: each of those is 0, so the at-contact half of the
+      three controls is the certificate itself, which both routes accept, and both refuse the 1e-30
+      half, as at the 293 L-strip candidate of 31 October (think-ruu2) and T-156. The least-gap pair
+      is squares 173 and 174 of the top row. Both routes refused one square enlarged to its pair at
+      contact for its shape alone, accepted one already touching its wall at contact, refused each
+      1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
+
+      At n = 199 the certificate is below the case's ceiling (Nate Chaoweeraprasit, improved by
+      Siddharth Gupta, T-127) by 2.88e-03, and below T-174 and T-193, which re-certify the house's
+      packing 1.46e-19 below it and wait for the algebraic-house writer (think-ot5c) and T-193's
+      regularization item (think-8ido); smallest: this certificate.
+
+      The ledger of 9 November for this lane (campaign/issue-intake/upper-bounds-938-20261109) walks
+      every report at 199 in report order from starts frozen on main on 9 November and records this
+      entry's claim, the only report there.
+
+      Measured pose by pose (measure/identity.json in the packet; a measurement, which decides
+      nothing): no symmetry pairs it one to one with T-127's packing by nearest centres; the optimal
+      assignment, under a reflection, moves 81 squares beyond a tenth and 117 beyond a hundredth
+      (largest 1.006) and turns 69; it has 49 squares tilted beyond a degree, 36 one way and 13 the
+      other, where T-127 has 47, 13 and 34. Against the regularized view it moves 66 beyond a tenth.
+      The lineage the record holds connects the two: T-257, the 172 that T-282 rearranges, came from
+      this count's record by an explorer search and the removal of one L-shaped strip (#845).
+
+      Measured against padding: T-127's certificate, contracted uniformly about the origin to first
+      contact and boxed, loses 1.46e-19 of side (1 - lambda* = 1e-20), so the gain is about 2.0e16
+      times the house's padding. This certificate's own margin is exactly 0 (lambda* = 1, the binding
+      pair two touching squares of the top row); devtools.contraction_margin accepted the zero-gap
+      witness and wrote both receipts (measure/contraction-n199*.json).
+
+      The L step is no rule the record applies inside the case corpus. D2's construction checker
+      decides recipes a source states, beyond 324; whether S + 1 on a published certificate is that
+      publication's own report inside the corpus is the owner's open RV-4 (think-ruu2), and the
+      credit is Özden's either way, since #935 is his too. The record had measured the step all the
+      same: X049's family census, derived again when T-282 was adopted at 172, has listed 199 as its
+      one bound_violations entry since then (margin -0.002882320307 from 172).
+
+      devtools.l_step_scan decides the step and monotonicity exactly from every case's verified
+      ceiling as the record stood when this entry was registered (measure/l-step-scan.json): 199
+      from 172 is the one step that improves a ceiling across its 12-place print, and monotonicity
+      improves none; ten more steps improve a ceiling by 4.8e-33 to 1.76e-19, inside its print
+      (101, 125, 170, 174, 198, 201, 257, 262, 292 and 298), the padding class RV-3 puts to the
+      owner. With this side at 199 (measure/l-step-scan-adopted.json), 199 is an L-extension of 172
+      and the step from it, at 228, stays above that count's ceiling, so the issue's statement that
+      only 199 improves and that monotonicity holds (s(198) = 14 + 4/7) is confirmed exactly at the
+      print.
+
+      T-127 was registered on 8 October 2026 and is the case's house at 199; it stays a verified
+      bound at V3/C3, superseded here once this entry is reviewed and adopted. Adoption takes 199 off
+      select_houses.PENDING_ADOPTION (staged for T-193) and CORRECTIONS_OWED. It owes #438, T-127's
+      issue, a follow-up: that issue's follow-up of 12 October (issuecomment-6130070537) says T-127
+      remains the house at 199, and check_requests cannot see the move, since replies before 26
+      October 2026 record no position, so the follow-up is posted by hand, as #845's was when T-282
+      replaced T-257 at 172. #639 (T-193), whose final reply of 19 October is its only one, got
+      no follow-up when the adoptions of 20 October, 31 October and 5 November took 204, 232 and
+      175 from T-193's staging, which is the precedent at 199.
+
+      The case's rigidity block reads T-127's witness, not rigid, 94 of its 199 squares
+      translating; adoption derives it again on the new witness. The atlas posters, drawn for the
+      v0.7.0 edition, print T-127's credit at 199 and will hold Özden's name off their credit block
+      until the next infographics cut redraws them (think-tj4o); the case record, its page and its
+      bound citation would credit him on adoption.
+
+      Registered at V3/C3 on the replay above, by intake lane L76 of 9 November 2026 (think-1goz).
+      The stage 4 review (think-ntcf) is written by a separate lane, L77, blind to this one, and is
+      not yet mapped: the case's verified lane and the adoption at this count wait on its acceptance
+      (result-import.md, The House Rule).
+
+      The source's own sqcheck.py was not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share this repository's
+      corner-witness reader (certificate parsing and half-angle conversion), Fraction arithmetic and
+      the separating-axis method; the first is the packing-witness verify the author ran on the same
+      file, so on that route the replay is reproduced with the producer's code, and the second
+      shares no verification code with it. Because this repository's packing-witness promote made
+      the 172 part's exact coordinates, neither route is independent of how they were rounded, as
+      the issue says. No human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the certificate (stage 4, think-ntcf, lane L77, prompted separately and
+      blind to this one): its mathematics, a clean-room exact checker with sharp controls that
+      handle the grid squares' zero gaps, the construction against T-282's retained certificate,
+      and the lineage the source states, mapped as an adversarial review, whose acceptance the
+      verified lane and the house rule wait on. Then adopt it at 199 in place of T-127 under the
+      house rule, taking 199 off select_houses.PENDING_ADOPTION and CORRECTIONS_OWED, with both
+      strong generators' regularization and the flip of the new house in the same change. The
+      derivation from T-282 by the L step adds no rung of its own.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
