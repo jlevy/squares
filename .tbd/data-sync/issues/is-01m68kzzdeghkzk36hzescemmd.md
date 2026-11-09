@@ -5,7 +5,7 @@ title: Register the candidates below the new houses at 130, 293 and 307 (regular
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: bold-ritchie-l8
 labels:
   - validation
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T09:17:32.462Z
-updated_at: 2026-10-31T17:38:10.875Z
+updated_at: 2026-11-09T16:38:11.721Z
 started_at: 2026-10-31T11:48:22.244Z
 ---
 Evan Daniel's regularizer (regularize_evand run, run adopt-2026-10-31-n130-307-evand, retained under packing/cases/regularized_drawings/think-3guf-2026-10-31/ on #852) solved two of the new witnesses the 31 October adoption wrote to exact KKT local minima below the house best packing's side:
@@ -58,3 +58,5 @@ The decision table held both at row 3 (register first), and the selection lists 
 - **Owner questions**: RV-3 (all three: is such a re-certification a new result at any print, only across it, or at none? The review recommends none); RV-4 (293: is s_260 + 1 already #845's own report via its recipe?); think-ikku RV-1 (130). think-4z8z (adoption plumbing) applies only if the answers keep any of them.
 
 2026-10-31 bold-ritchie-l8, after review A of #861 (A1 blocking): **held unregistered.** The coordinator chose review A's option (a), which is the stage 4 review's own proposal: none of the three candidates is registered until the owner answers RV-3 (all), RV-4 (293) and think-ikku's RV-1 (130). Removed from #861 (commit 6454ae2e7): T-261 to T-263, the four E-register-candidates-2026-10-31-* evidence entries and their deferrals, the census rows, and the review's two route verifiers (V-ruu2-review-route-sat/-area), which wait with the evidence. Kept: the package packing/cases/register_candidates/think-ruu2-2026-10-31/ (certificates n-130/n-293/n-307.cert, the receipts on both maintained routes and the sharp controls, measure/, the review's code, out/ and inputs/), the mapped review record with a dated disposition note, V-register-candidates (text corrected: the 293 certificate was written by the review lane, whose routes share qio.py with the builder, so they are not clean-room there), and the tool and its tests. The earlier notes' T-261/T-262/T-263 numbers no longer exist; T-261 is now #545's grade-C claim. The select_houses KeyError that registration would expose, review A's A8 credit point at 293, and the registration order are on think-4z8z. This bead stays open for the owner's answers.
+
+2026-11-09 coordinator: two new entries now wait on these questions (PR #934, lane L65, bead think-h96r). T-280 covers Kaelan Yim's vitamoon certificates at 299 (e4209f6, 1.18e-12 below T-277) and 303 (546928a, 3.29e-12 below T-278); T-281 covers his envelope-only 130 (c10e094, 1.96e-14 below T-259, T-260's form). Both are held at V0/C1 after the L70 blind review. Measured as shares of the predecessor's uniform-contraction (padding) margin by devtools.contraction_margin and independently by L70: 299 0.3472, 303 0.9674, 130 0.0896 (precedents T-259 0.9193, T-265 9.9679). Under RV-3 option (a) (withdraw padding-sized re-certifications) T-280 and T-281 would be withdrawn alongside T-253 and T-260; T-281 also waits on RV-1. Also waiting: think-5c9z (Daniel regularizer KKT points 3.30-3.53e-12 below T-275..T-279, the same padding class).
