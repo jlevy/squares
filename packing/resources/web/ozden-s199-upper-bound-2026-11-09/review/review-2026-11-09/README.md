@@ -32,6 +32,7 @@ They read the source as data and run none of its code.
 | `l77_pose.py` | the decimal pose against #935’s pose and the certificate | `out/pose.json` |
 | `l77_identity.py` | the packing against the 199 house, pose by pose | `out/identity-n199.json` |
 | `l77_digests.py` | holds every receipt to the kept programs and frozen digests | `out/program-digests.json` |
+| `l77_compare_lane.py` | after the freeze: lane L76’s receipts against these, and its tilt-sign split | `out/compare-lane.json` |
 
 `run_all.sh` reruns them all; its header names its four arguments.
 
@@ -42,8 +43,12 @@ They read the source as data and run none of its code.
   or promotion code was read.
 - `frozen/controls-plan-digest.txt`: `controls-plan.json`, stated at
   2026-11-09T21:20:11Z before `l77_controls.py` existed.
-- `frozen/review-2026-11-09-ozden-938.frozen.md`: the review as frozen before the import
-  lane’s work was read.
+- `frozen/review-2026-11-09-ozden-938.frozen.md`: the review as frozen at
+  2026-11-09T21:38:04Z, before the import lane’s work was read; its digest is in
+  `frozen/findings-frozen-digest.txt` (`7c5decb8…`).
+
+`run_all.sh` does not run `l77_compare_lane.py`, whose input was the import lane’s
+uncommitted working tree; it ran once, after the freeze.
 
 `issue-statements.json` transcribes every number the issue, its comment, the README and
 the printed outputs state, for `l77_sides.py` to check.
