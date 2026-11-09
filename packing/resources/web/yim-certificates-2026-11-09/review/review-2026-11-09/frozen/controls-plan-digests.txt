@@ -1,0 +1,8 @@
+2026-11-09T14:21:32Z
+3b990b468fbd87d88d0777903a6c542c5de38eaaa6fb2b83716c4d1f82467ffe  programs/controls-plan.json
+8054813c48355f8bc3cf5d4fd98c8afee2e77781f87d8568ffa28e99ab8878c5  programs/l70_plan.py
+92817c7a105df82aa3d3ff6010c104dc61005a3710e06e2dc21631ccaf016745  programs/l70_plan_data.py
+c0feefa1e232b95236b7baf9bbc8548a9a3700d5b660f0bfa0c2e86cddc4bf3a  out/plan-data.json
+2026-11-09T14:50:42Z
+9a4630e998638294524c6d26f1d71568ad9438a23041398e50213c3c444e6502  programs/controls-plan-addendum.json
+5d85ee56c3e3debc1ff0dc2f4467e35b4a693a6fd4a9af43c256dcb2407b640f  programs/l70_plan_addendum.py
