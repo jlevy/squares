@@ -1,0 +1,71 @@
+format: intake-ledger-v1
+read_at_main: ef1af4933294cdff56e840d018d0465cf103c449
+read_on: '2026-11-09'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l71
+  branch: claude/bold-ritchie-xo28us-l71
+  commit: ef1af4933294cdff56e840d018d0465cf103c449
+  note: The packets' claim records, written on the lane's branch from main ef1af4933 and read
+    here by path.
+reports:
+- report: '#935'
+  url: https://github.com/jlevy/squares/issues/935
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-09T15:28:48Z'
+  bead: think-he66
+  claims:
+  - n: 172
+    printed: '13.614689853287'
+    rounding: up
+    exact: 1361468985328621177764979119129233399545470048102052769370427095468316966616209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000
+    exact_from: packing/resources/web/ozden-s172-upper-bound-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l71@ef1af4933294cdff56e840d018d0465cf103c449
+    first_committed: '2026-11-09T15:28:22Z'
+    measured:
+      against: T-257
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment
+        (the identity) moves 15 squares beyond 0.1 and 69 beyond 1e-2 (largest 0.668) and
+        turns 58 squares by more than 1e-6 radians, 15 of them by more than 1 degree and by
+        up to 44.61 degrees, 9 of them to the other side of upright; 49 tilted squares against
+        T-257's 49; a further arrangement of T-257's packing, not one to one with it by nearest
+        centres
+      source: packing/resources/web/ozden-s172-upper-bound-2026-11-09/measure/identity.json
+  note: 'The issue names 2ce1f7c, committed at 2026-11-09T15:28:22Z, 26 seconds before the
+    issue. It says the packing starts from the registry''s 172 (T-257, #845), taken from this
+    repository''s regularized known-best atlas, and calls it neither new nor a refinement,
+    so the claim is not classified; the measurement names the relation.'
+- report: '#936'
+  url: https://github.com/jlevy/squares/issues/936
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-09T15:28:49Z'
+  bead: think-he66
+  claims:
+  - n: 270
+    printed: '16.928148603343'
+    rounding: up
+    exact: 135425188826742430876823392268227093871980696715260327151518120513740712597220590813078171341983823047096309971065862995224792397317215234884511156640568560455084399127260139011043351856299251/7999999999999976123895832717642802188006863272634862077077304085907006310479032815829955835752491752787592111669420691272441400862583642946933891970394272174759098245017349764000000000000000
+    exact_from: packing/resources/web/ozden-s270-upper-bound-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l71@ef1af4933294cdff56e840d018d0465cf103c449
+    first_committed: '2026-11-09T15:28:32Z'
+    measured:
+      against: T-224
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        1 square beyond 0.1 and 14 beyond 1e-2 (largest 0.218) and turns 92 squares by more
+        than 1e-6 radians, 1 of them by more than 1 degree and by up to 32.30 degrees; 66
+        tilted squares against T-224's 67, none reversed; a further arrangement of T-224's
+        packing, one to one with it
+      source: packing/resources/web/ozden-s270-upper-bound-2026-11-09/measure/identity.json
+  note: 'The issue names 78ab8ce, committed at 2026-11-09T15:28:32Z, 17 seconds before the
+    issue. It says the packing starts from the registry''s 270 (T-224, #703), taken from this
+    repository''s regularized known-best atlas, and calls it neither new nor a refinement,
+    so the claim is not classified; the measurement names the relation.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

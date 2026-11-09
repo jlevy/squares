@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/935",
+  "source": "https://github.com/kenaznia-doga/s172-upper-bound",
+  "revision": "2ce1f7c7621859437e0bcc1f9ad2b00822b2c605",
+  "read_on": "2026-11-09",
+  "read_at_main": "ef1af4933294cdff56e840d018d0465cf103c449",
+  "horizon": 324,
+  "results": [
+    {"n": 172, "certificate": "n-172-candidate.yaml", "format": "witness-corners", "requested": true, "replayed": true, "offered_side": "13.614689853287", "printed_in": "https://github.com/jlevy/squares/issues/935", "exact_side": "1361468985328621177764979119129233399545470048102052769370427095468316966616209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000", "ceiling": "13.6146898532862152", "first_committed": "2026-11-09T15:28:22Z", "grid_side": "14", "case": {"source_key": "[Daniel issue 845 2026-10-29]", "holders": "Evan Daniel", "result": "T-257", "reported_value": "13.6179356983814155", "verified_value": "13.6179356983814155", "evidence": ["E-evand-845-exact-feasibility", "E-evand-845-review-exact-feasibility"], "exact_side": "2723587139676283080823463207799/200000000000000000000000000000", "relation": "below", "difference": "1298338038080119591244473958213160919813006910181299223700689213869114439467587745104538150009153311/399999999999999902261561888317567574202855638974176673538120679221316177800000000000000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}
