@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #935, #936 (Özden's s(172), s(270))"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l72-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:59.302Z
-updated_at: 2026-11-09T16:12:20.847Z
+updated_at: 2026-11-09T16:17:38.756Z
 started_at: 2026-11-09T15:55:07.051Z
 ---
 
@@ -44,3 +44,12 @@ l72_check.py a6c8edeb..., l72_selftest.py 5c7ba446.... Self-test PASSED (80 case
 172 before the freeze: ACCEPT, 9.9 s (contacts 46 left, 85 bottom, 161 right; least pair 2.008e-13 at 36,38).
 Next: final self-test and checks of both files; then the controls plan, stated and hashed before the
 controls program exists.
+
+2026-11-09T16:14Z final runs: selftest PASSED (80); check-n172 ACCEPT (9.4 s); check-n270 ACCEPT (23.5 s).
+172: contacts 46 left, 85 bottom, 161 right; 14,706 pairs apart by both; least 2.00833939294e-13 (36,38);
+342 pairs below 1e-12. 270: contacts 104 left, 84 bottom, 227 top; 36,315 pairs apart by both; least
+2.01624754215e-13 (220,234); 258 pairs below 1e-12. JSON twins equal the YAML; digests equal the READMEs'.
+2026-11-09T16:17:18Z CONTROLS PLAN STATED: prog/controls-plan.json SHA-256
+1826043aaa43b13652f8f9ab378b13a5ea61b225a137616e1af3126385d807cd (23 controls per count: G1-G6, G8, G9,
+S1a-d, S3 L/R/D/U, S4c/p centre line, S5 centre line, S6, S7c/p, S8), stated from the check receipts and
+l72_plan_facts.py (7ef3dcf7...), before l72_controls.py existed.
