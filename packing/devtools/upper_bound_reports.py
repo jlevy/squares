@@ -1548,6 +1548,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Özden s299 upper bound 2026-11-09]": _import("ozden-s299-upper-bound-2026-11-09"),
     "[Özden s303 upper bound 2026-11-09]": _import("ozden-s303-upper-bound-2026-11-09"),
     "[Özden s307 upper bound 2026-11-09]": _import("ozden-s307-upper-bound-2026-11-09"),
+    # The intake pass's lane L65 of 9 November (think-h96r): Kaelan Yim's certificates at
+    # vitamoon/vitamoon ac14112, which no issue reports; T-280 and T-281 are held below the
+    # stage 4 exit for the owner (think-ruu2's RV-3, think-ikku).
+    "[Yim certificates 2026-11-09]": _import("yim-certificates-2026-11-09"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

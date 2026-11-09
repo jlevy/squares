@@ -107,17 +107,18 @@ is kept in Git as stored.
 ## Against the Record
 
 [acquisition/claims.json](acquisition/claims.json) is the frozen comparison
-(`devtools.upper_bound_reports check-claims`, read from `main` `19b354a5c` on 9 November
-2026, before #927 to #931 are registered there). Each certificate is admitted at the side
-`PACKINGS.md` prints, its exact side rounding up to it at 12 places.
+(`devtools.upper_bound_reports check-claims`, read from `main` `adca8d352` on 9 November
+2026, #932’s merge, which adopted Özden’s #929 and #930 as the houses at 299 and 303,
+T-277 and T-278). Each certificate is admitted at the side `PACKINGS.md` prints, its exact
+side rounding up to it at 12 places.
 [acquisition/beyond-horizon-claims.json](acquisition/beyond-horizon-claims.json) holds
 the counts above 324.
 
 | n | Side, rounded up | Standing side it is compared with | Relation |
 | ---: | --- | --- | --- |
 | 130 | 11.902430645983 | T-259, the house: Couzo’s packing as Polkovskyi re-solved it, 11.902430645983 | below by 1.955e-14, the same 12-place print |
-| 299 | 17.801004434255 | T-263, the house on `main`; #929, pending, 17.801004434256 | below T-263 by 2.34e-4 and #929 by 1.18e-12 |
-| 303 | 17.901789273154 | T-272, the house on `main`; #930, pending, 17.901789273157 | below T-272 by 4.35e-5 and #930 by 3.29e-12 |
+| 299 | 17.801004434255 | T-277, the house: Özden’s #929, 17.801004434256 | below by 1.18e-12, across the print |
+| 303 | 17.901789273154 | T-278, the house: Özden’s #930, 17.901789273157 | below by 3.29e-12, across the print |
 | 553 | 23.969145238668 | the couzo-issue763-2026-10-23 row, 23.969774299704 | below by 6.29e-4 |
 | 599 | 24.936479681246 | the same source’s row, 24.937296174353 | below by 8.16e-4 |
 | 600 | 24.951090275321 | the same source’s row, 24.951414939457 | below by 3.25e-4 |
@@ -149,12 +150,27 @@ decides nothing.
   at 601, and turns reach 21.8 degrees at 601: further arrangements of his packings,
   one to one with them.
 
-The receipts at 299 and 303 wait for #929’s and #930’s packets to be on `main`.
-Measured against those retained files, the 299 certificate pairs one to one under the
-identity with no square beyond $10^{-3}$ (largest $4.25 \times 10^{-4}$, largest turn
-0.017 degrees). The 303 certificate pairs one to one with every square within
-$4.4 \times 10^{-12}$ and every turn below $10^{-12}$ degrees.
-Both are refinements of Özden’s packings.
+- **299 and 303.** Against T-277’s and T-278’s packets, the 299 certificate pairs one to
+  one under the identity with no square beyond $10^{-3}$ (largest $4.25 \times 10^{-4}$,
+  largest turn 0.017 degrees), and the 303 certificate with every square within
+  $4.4 \times 10^{-12}$ and every turn below $10^{-12}$ degrees: re-solves of Özden’s
+  packings. At 303 the first n303 of `78eb9ea` is measured too.
+
+**The houses’ padding.** `devtools.contraction_margin` contracted each house certificate
+uniformly to first contact, with no square re-solved, and decided the contracted packing
+again on both maintained routes (`measure/contraction-nNNN.json`). It takes each house
+below the certificate here:
+
+| n | House | House’s margin | This certificate’s gain | Gain ÷ margin |
+| ---: | --- | --- | --- | --- |
+| 130 | T-259 | 2.18e-13 | 1.96e-14 | 0.09 |
+| 299 | T-277 | 3.40e-12 | 1.18e-12 | 0.35 |
+| 303 | T-278 | 3.40e-12 | 3.29e-12 | 0.97 |
+
+The same tool measured two precedents for the owner’s question
+(`measure/precedent-contraction-*.json`): T-259 at 130 lies 0.92 of #843’s margin below it,
+and T-265 at 260 lies 9.97 times T-257’s margin below it, a re-solve the contraction does
+not reach.
 
 ## Exact Replay
 
@@ -187,9 +203,30 @@ since. So the replay reproduces the producer’s own checks with the producer’
 he reports running them; it is not independent of them.
 The source’s checkers were not run.
 
+## Report Order and the Register
+
+The [ledger of 9 November for this import](../../../campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md)
+walks the four publications in commit order, from starts frozen at `main` `adca8d352`.
+It records every claim but the first n303, which #930 holds:
+
+- **553 to 700.** Eleven current beyond-horizon rows of this source, each superseding the
+  row of couzo-issue763-2026-10-23 or, at 604, couzo-43f666c-2026-10-24.
+- **299 and 303.** [T-280](../../../frontier/RESULTS.md), recorded as re-solves of T-277’s
+  and T-278’s packings, credited to their finders, with Yim credited for the re-solve as a
+  regularization. Each gain lies within its house certificate’s padding. Whether such a
+  re-certification is a new result is the owner’s open question (think-ruu2’s RV-3, with
+  think-ikku), so T-280 is held below the stage 4 exit, at V0/C0, its replay not entered,
+  and neither house moves.
+- **130.** [T-281](../../../frontier/RESULTS.md), a sub-print re-certification of T-259 in
+  the restatement ruling’s words, which the record applies beyond the corpus only. It is
+  held at V0/C0 for think-ikku’s RV-1 (and think-oqjd), as T-260 is, and the house does
+  not move.
+
 ## What Is Not Established
 
-- **A stage 4 review.** No review is retained.
+- **A stage 4 review.** None is retained. A separate blind lane reviews T-280 and T-281;
+  its record maps under each entry’s `reviews` and its read under the report evidence’s
+  `external_review`, which lifts each to C1 and no further while the holds stand.
 - **Human oversight.** No human oversight record is retained.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
@@ -236,6 +273,14 @@ python -m devtools.measure_identity --n 130 'YIM=packet:yim-certificates-2026-11
 python -m devtools.measure_identity --n 553 'YIM=packet:yim-certificates-2026-11-09' \
   'couzo-issue763=evand-cert:resources/web/couzo-issue763-2026-10-23/source/certificates/best/n553.cert' \
   --out resources/web/yim-certificates-2026-11-09/measure/identity-n553.json
+```
+
+The contraction margins, with the house first and this certificate against it:
+
+```bash
+python -m devtools.contraction_margin --n 299 'T-277=packet:ozden-s299-upper-bound-2026-11-09' \
+  --against 'YIM=packet:yim-certificates-2026-11-09' \
+  --out resources/web/yim-certificates-2026-11-09/measure/contraction-n299.json
 ```
 
 The other counts above 324 are measured the same way, against

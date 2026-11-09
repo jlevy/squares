@@ -1,0 +1,338 @@
+format: intake-ledger-v1
+read_at_main: adca8d352cd32036bcf877658dfffef61ea2d621
+read_on: '2026-11-09'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l65
+  branch: claude/bold-ritchie-xo28us-l65
+  commit: adca8d352cd32036bcf877658dfffef61ea2d621
+  note: The two packets' claim records, written on the lane's branch from main adca8d352 and
+    read here by path.
+reports:
+- report: vitamoon/vitamoon@78eb9ea
+  url: https://github.com/vitamoon/vitamoon/commit/78eb9ea5da43230686941289b9de3ce0f8e34899
+  kind: publication
+  holders: Kaelan Yim (vitamoon)
+  reported_at: '2026-11-09T07:13:34Z'
+  bead: think-h96r
+  claims:
+  - n: 303
+    printed: '17.901789273296'
+    rounding: up
+    exact: 1259726429694979000000000000001259726429694979/70368744177664000000000000000000000000000000
+    exact_from: packing/resources/web/yim-n303-2026-11-09/acquisition/claims.json at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: T-278
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        9 squares beyond 0.1, 51 beyond 1e-2 and 192 beyond 1e-3 (largest 0.257), and turns
+        146 squares by more than 1e-6 radians, by up to 1.441 degrees; a further arrangement
+        of T-278's packing, one to one with it
+      source: packing/resources/web/yim-n303-2026-11-09/measure/identity-n303.json
+    note: 'The source calls it a refinement of Evan Daniel''s #914 packing (T-272) and says
+      it is not a new-best submission, since #930 reports a smaller side; measured against
+      T-272, five squares move beyond 0.1. 546928a overwrote this file; the yim-n303-2026-11-09
+      packet keeps it.'
+  - n: 553
+    printed: '23.969145238668'
+    rounding: up
+    exact: 607775069974622337055447579653461349034263804181650638828652853573964289181844595191249/25356560024265810879529729142535656002426581087952972914000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        1 square beyond 0.1, 97 beyond 1e-2 and 326 beyond 1e-3 (largest 0.108), and turns
+        422 squares by more than 1e-6 radians, by up to 2.22 degrees; a further arrangement
+        of the row of couzo-issue763-2026-10-23's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n553.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 599
+    printed: '24.936479681246'
+    rounding: up
+    exact: 247397946552985445057593390432140536753143829724259163663431893138806590844279201570273/9921125584500774055204756275992877303158938661153843140000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        3 squares beyond 0.1, 180 beyond 1e-2 and 337 beyond 1e-3 (largest 0.345), and turns
+        228 squares by more than 1e-6 radians, by up to 9.373 degrees; a further arrangement
+        of the row of couzo-issue763-2026-10-23's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n599.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 600
+    printed: '24.951090275321'
+    rounding: up
+    exact: 898558652382384886554390737459350320275949893348420081716458451761623567508461865690979/36012801142848449724253470723601280114284844972425347072000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: 'one to one under the identity by nearest centres; the optimal assignment moves
+        0 squares beyond 0.1, 102 beyond 1e-2 and 260 beyond 1e-3 (largest 0.0831), and turns
+        246 squares by more than 1e-6 radians, by up to 2.32 degrees; no square moves beyond
+        a tenth: a refinement of the row of couzo-issue763-2026-10-23''s packing'
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n600.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 601
+    printed: '24.958070476928'
+    rounding: up
+    exact: 1964964125304217000000000000001964964125304217/78730610490131000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        11 squares beyond 0.1, 151 beyond 1e-2 and 402 beyond 1e-3 (largest 0.566), and turns
+        379 squares by more than 1e-6 radians, by up to 21.77 degrees; a further arrangement
+        of the row of couzo-issue763-2026-10-23's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n601.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 602
+    printed: '24.981298949631'
+    rounding: up
+    exact: 4049108824262356425055970255900075024019042732929186677097480184331036364534919972291/162085599809144631924403340016208559980914463192440334000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        9 squares beyond 0.1, 47 beyond 1e-2 and 202 beyond 1e-3 (largest 0.237), and turns
+        190 squares by more than 1e-6 radians, by up to 0.7695 degrees; a further arrangement
+        of the row of couzo-issue763-2026-10-23's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n602.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 604
+    printed: '24.995880488226'
+    rounding: up
+    exact: 67721539209973384114510101885152920403362544089524811752885085198864152570705410301651/2709308009448803636345647913495589745913645048765947287500000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        17 squares beyond 0.1, 130 beyond 1e-2 and 523 beyond 1e-3 (largest 0.299), and turns
+        233 squares by more than 1e-6 radians, by up to 4.202 degrees; a further arrangement
+        of the row of couzo-43f666c-2026-10-24's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n604.json
+    note: The source calls it a refinement of Francisco Couzo's packing after alexchilton's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 645
+    printed: '25.881385537401'
+    rounding: up
+    exact: 24093806619138340900475561824158980847600133395084947802824134887040980995054184472241/930931869328269677215895332067857800948827381955105600000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        10 squares beyond 0.1, 168 beyond 1e-2 and 615 beyond 1e-3 (largest 0.155), and turns
+        530 squares by more than 1e-6 radians, by up to 4.107 degrees; a further arrangement
+        of the row of couzo-issue763-2026-10-23's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n645.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 647
+    printed: '25.899272968790'
+    rounding: up
+    exact: 817664229623251606050434336654106558104740326329466247133653288893875117074723415812797/31570933694108162010640329683157093369410816201064032968000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        6 squares beyond 0.1, 40 beyond 1e-2 and 161 beyond 1e-3 (largest 0.135), and turns
+        241 squares by more than 1e-6 radians, by up to 4.198 degrees; a further arrangement
+        of the row of couzo-issue763-2026-10-23's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n647.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 648
+    printed: '25.908803576981'
+    rounding: up
+    exact: 1646684897044236144519404074731194624456440515062373084991729547939559396278917853680917/63556964031610367436252889366355696403161036743625288936000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        3 squares beyond 0.1, 58 beyond 1e-2 and 140 beyond 1e-3 (largest 0.171), and turns
+        245 squares by more than 1e-6 radians, by up to 6.182 degrees; a further arrangement
+        of the row of couzo-issue763-2026-10-23's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n648.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 699
+    printed: '26.907311118315'
+    rounding: up
+    exact: 463444108903748149602545905601733440575147260077565762818601269996466243511927963216913/17223724320350528810762165125722372432035052881076216512400000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        22 squares beyond 0.1, 175 beyond 1e-2 and 574 beyond 1e-3 (largest 0.264), and turns
+        544 squares by more than 1e-6 radians, by up to 6.138 degrees; a further arrangement
+        of the row of couzo-issue763-2026-10-23's packing, one to one with it
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n699.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  - n: 700
+    printed: '26.908036102718'
+    rounding: up
+    exact: 741569470970925307033971998246097513425482077742578713987245355943954511152435544741989/27559405232700754810876973232755940523270075481087697323000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:13:34Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: 'one to one under the identity by nearest centres; the optimal assignment moves
+        0 squares beyond 0.1, 23 beyond 1e-2 and 124 beyond 1e-3 (largest 0.0653), and turns
+        503 squares by more than 1e-6 radians, by up to 0.7133 degrees; no square moves beyond
+        a tenth: a refinement of the row of couzo-issue763-2026-10-23''s packing'
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n700.json
+    note: The source calls it a refinement of Francisco Couzo's packing after Vladislav Lavrentev's;
+      the record keeps that word for a pairing with no square beyond a tenth, so the measurement
+      names the relation.
+  note: A publication in a watched repository with no issue (the owner, 2026-10-14), dated
+    by its commit (committed 2026-11-09T07:13:34Z); its push is not read (GitHub's activity
+    log was not readable from this session). It was public by 07:56:30Z, when the intake pass's
+    bead think-h96r named it. PACKINGS.md says it is not a registration request.
+- report: vitamoon/vitamoon@e4209f6
+  url: https://github.com/vitamoon/vitamoon/commit/e4209f6a514937419cd5b23543770e013a25287e
+  kind: publication
+  holders: Kaelan Yim (vitamoon)
+  reported_at: '2026-11-09T07:30:26Z'
+  bead: think-h96r
+  claims:
+  - n: 299
+    printed: '17.801004434255'
+    rounding: up
+    exact: 49520681639553253091959720304954604907070758384704238109808721459262431205131612278389503816375037/2781903786522383536263046420444731316926020496322871983755429706465280000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T07:30:26Z'
+    measured:
+      against: T-277
+      finding: 'one to one under the identity by nearest centres; the optimal assignment moves
+        0 squares beyond 0.1, 0 beyond 1e-2 and 0 beyond 1e-3 (largest 0.000425), and turns
+        36 squares by more than 1e-6 radians, by up to 0.01723 degrees; no square moves beyond
+        a tenth: a refinement of T-277''s packing'
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n299.json
+    refines:
+      packing_of: Doğa Özden
+      entry: T-277
+      source: 'PACKINGS.md: ''This is a refinement of his arrangement, not a new construction
+        or material gain'', built from #929''s file (SHA-256 dfb0ccf7...5d9d)'
+    note: The gain, 1.18e-12, is 0.35 of T-277's own uniform-contraction margin, 3.40e-12
+      (packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n299.json). Whether
+      such a re-certification is a new result is the owner's open question (think-ruu2 RV-3,
+      think-ikku); the entry is held below the stage-4 exit and does not move the house.
+  note: A publication in a watched repository with no issue, dated by its commit (committed
+    2026-11-09T07:30:26Z); its push is not read (GitHub's activity log was not readable from
+    this session). It was public by 07:56:30Z.
+- report: vitamoon/vitamoon@c10e094
+  url: https://github.com/vitamoon/vitamoon/commit/c10e0944b12b66bbc8ee1e121967ff289c2bace6
+  kind: publication
+  holders: Kaelan Yim (vitamoon)
+  reported_at: '2026-11-09T08:42:14Z'
+  bead: think-h96r
+  claims:
+  - n: 130
+    printed: '11.902430645983'
+    rounding: up
+    exact: 12971572518503349393832850076636691474305902182478289654941561/1089825507438012248624046765161000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T08:42:14Z'
+    measured:
+      against: T-259
+      finding: 'one to one under the identity by nearest centres; the optimal assignment moves
+        0 squares beyond 0.1, 0 beyond 1e-2 and 0 beyond 1e-3 (largest 1.51e-14), and turns
+        0 squares by more than 1e-6 radians, by up to 0 degrees; no square moves beyond a
+        tenth: a refinement of T-259''s packing'
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n130.json
+    restates: T-259
+    note: T-259's certificate under one common translation, every half-angle tangent unchanged,
+      1.955e-14 below it at the same 12-place print. The restatement ruling's words reach
+      it (think-fwa9), which the record applies beyond 324 only; inside the corpus it waits
+      on the owner (think-ikku RV-1; think-oqjd for another holder's re-certification; think-ruu2
+      RV-3), held at V0/C1 as T-260 is. Its gain is 0.09 of T-259's uniform-contraction margin.
+  note: A publication in a watched repository with no issue, dated by its commit (committed
+    2026-11-09T08:42:14Z, printed 00:42:14-08:00); its push is not read (GitHub's activity
+    log was not readable from this session). It was public by 08:55Z. PACKINGS.md claims no
+    Atlas credit for it.
+- report: vitamoon/vitamoon@546928a
+  url: https://github.com/vitamoon/vitamoon/commit/546928a8a3d43822334732f938fd83394e152856
+  kind: publication
+  holders: Kaelan Yim (vitamoon)
+  reported_at: '2026-11-09T09:36:10Z'
+  bead: think-h96r
+  claims:
+  - n: 303
+    printed: '17.901789273154'
+    rounding: up
+    exact: 1159243312382833490764400031561352875121611202900949162484560193631809228369410184762453/64755723279645431239980480646475572327964543123998048064000000000000000000000000000000
+    exact_from: packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l65@adca8d352cd32036bcf877658dfffef61ea2d621
+    first_committed: '2026-11-09T09:36:10Z'
+    measured:
+      against: T-278
+      finding: 'one to one under the identity by nearest centres; the optimal assignment moves
+        0 squares beyond 0.1, 0 beyond 1e-2 and 0 beyond 1e-3 (largest 4.39e-12), and turns
+        0 squares by more than 1e-6 radians, by up to 5.26e-13 degrees; no square moves beyond
+        a tenth: a refinement of T-278''s packing'
+      source: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n303.json
+    refines:
+      packing_of: Doğa Özden
+      entry: T-278
+      source: 'PACKINGS.md: ''a verified microscopic refinement ... below the pinned Doğa
+        Özden #930 witness'', built from #930''s file (SHA-256 9cbeb7a8...2f3e)'
+    note: It overwrote 78eb9ea's n303.cert. The gain, 3.29e-12, is 0.97 of T-278's own uniform-contraction
+      margin, 3.40e-12 (packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n303.json).
+      Whether such a re-certification is a new result is the owner's open question (think-ruu2
+      RV-3, think-ikku); the entry is held below the stage-4 exit and does not move the house.
+  note: A publication in a watched repository with no issue, dated by its commit (committed
+    2026-11-09T09:36:10Z); its push is not read (GitHub's activity log was not readable from
+    this session). It was public by 09:57Z. 5762239 and ac14112, the head, change metadata
+    only.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+cross_check: []

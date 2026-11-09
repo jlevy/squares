@@ -8,7 +8,7 @@
   "witness_prefix": "W-yim-1109-n",
   "claim_limitations": "Complete vitamoon/vitamoon ac14112 rational centre/half-angle certificates in Evan Daniel's format, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
   "read_on": "2026-11-09",
-  "read_at_main": "19b354a5cec5633ee6f96ff82752a53f2b53b063",
+  "read_at_main": "adca8d352cd32036bcf877658dfffef61ea2d621",
   "certificates": [
     {
       "n": 130,
@@ -170,48 +170,32 @@
     },
     {
       "n": 299,
-      "reader": "[Özden s299 upper bound 2026-11-03]",
-      "source_key": "[Özden s299 upper bound 2026-11-03]",
+      "reader": "[Özden s299 upper bound 2026-11-09]",
+      "source_key": "[Özden s299 upper bound 2026-11-09]",
       "holders": "Evan Daniel, improved by Doğa Özden",
-      "result": "T-263",
-      "reported_value": "17.8012385339790622",
-      "verified_value": "17.8012385339790622",
+      "result": "T-277",
+      "reported_value": "17.8010044342552937",
+      "verified_value": "17.8010044342552937",
       "evidence": [
-        "E-ozden-893-exact-feasibility",
-        "E-ozden-893-review-exact-feasibility"
+        "E-ozden-929-exact-feasibility",
+        "E-ozden-929-review-exact-feasibility"
       ]
     },
     {
       "n": 303,
-      "reader": "[Daniel issue 914 2026-11-05]",
-      "source_key": "[Daniel issue 914 2026-11-05]",
-      "holders": "Evan Daniel, after Chris Deotte",
-      "result": "T-272",
-      "reported_value": "17.9018327508540488",
-      "verified_value": "17.9018327508540488",
+      "reader": "[Özden s303 upper bound 2026-11-09]",
+      "source_key": "[Özden s303 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-278",
+      "reported_value": "17.9017892731564904",
+      "verified_value": "17.9017892731564904",
       "evidence": [
-        "E-evand-914-exact-feasibility",
-        "E-evand-914-review-exact-feasibility"
+        "E-ozden-930-exact-feasibility",
+        "E-ozden-930-review-exact-feasibility"
       ]
     }
   ],
   "pending": [
-    {
-      "n": 299,
-      "report": "#929",
-      "url": "https://github.com/jlevy/squares/issues/929",
-      "holders": "Doğa Özden, after Evan Daniel",
-      "printed": "17.801004434256",
-      "rounding": "up"
-    },
-    {
-      "n": 303,
-      "report": "#930",
-      "url": "https://github.com/jlevy/squares/issues/930",
-      "holders": "Doğa Özden, after Evan Daniel",
-      "printed": "17.901789273157",
-      "rounding": "up"
-    },
     {
       "n": 553,
       "report": "couzo-issue763-2026-10-23",

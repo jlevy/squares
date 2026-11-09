@@ -8,7 +8,7 @@
   "witness_prefix": "W-yim-n303-1109-n",
   "claim_limitations": "Complete vitamoon/vitamoon 78eb9ea rational centre/half-angle certificate in Evan Daniel's format, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
   "read_on": "2026-11-09",
-  "read_at_main": "19b354a5cec5633ee6f96ff82752a53f2b53b063",
+  "read_at_main": "adca8d352cd32036bcf877658dfffef61ea2d621",
   "certificates": [
     {
       "n": 303,
@@ -28,28 +28,19 @@
   "houses": [
     {
       "n": 303,
-      "reader": "[Daniel issue 914 2026-11-05]",
-      "source_key": "[Daniel issue 914 2026-11-05]",
-      "holders": "Evan Daniel, after Chris Deotte",
-      "result": "T-272",
-      "reported_value": "17.9018327508540488",
-      "verified_value": "17.9018327508540488",
+      "reader": "[Özden s303 upper bound 2026-11-09]",
+      "source_key": "[Özden s303 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-278",
+      "reported_value": "17.9017892731564904",
+      "verified_value": "17.9017892731564904",
       "evidence": [
-        "E-evand-914-exact-feasibility",
-        "E-evand-914-review-exact-feasibility"
+        "E-ozden-930-exact-feasibility",
+        "E-ozden-930-review-exact-feasibility"
       ]
     }
   ],
-  "pending": [
-    {
-      "n": 303,
-      "report": "#930",
-      "url": "https://github.com/jlevy/squares/issues/930",
-      "holders": "Doğa Özden, after Evan Daniel",
-      "printed": "17.901789273157",
-      "rounding": "up"
-    }
-  ],
+  "pending": [],
   "register": {
     "title": "Kaelan Yim's first packing of 303 squares at vitamoon/vitamoon 78eb9ea, a publication in a watched repository with no issue, above #930",
     "headline": "Yim's first 303, a further arrangement of Daniel's T-272 packing, 4.35e-5 below it and 1.39e-10 above #930",

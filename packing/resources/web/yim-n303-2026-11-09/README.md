@@ -45,18 +45,21 @@ manifest and [acquisition/sources.json](acquisition/sources.json) the record.
 
 ## Against the Record
 
-[acquisition/claims.json](acquisition/claims.json), read from `main` `19b354a5c`: the
-certificate is 4.35e-5 below the house, T-272 (Evan Daniel’s #914 packing, after Chris
-Deotte), and 1.39e-10 above #930 (Doğa Özden, 17.901789273157, reported at 06:03:47Z, an
-hour before this commit). By the report-order rule it is not recorded, and the source
-says so itself. It stays in this packet.
+[acquisition/claims.json](acquisition/claims.json), read from `main` `adca8d352`: the
+certificate is 1.39e-10 above the house, T-278 (Doğa Özden’s #930, 17.901789273157,
+reported at 06:03:47Z, an hour before this commit), and 4.35e-5 below T-272 (Evan Daniel’s
+#914 packing, after Chris Deotte), the house it replaced. The
+[ledger of 9 November](../../../campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md)
+does not record it, since #930 came first and is lower, and the source says so itself. It
+stays in this packet.
 
 ## Pose by Pose
 
 [measure/identity-n303.json](measure/identity-n303.json): the certificate pairs one to
 one with T-272’s packing under the identity by nearest centres; 5 squares move beyond
 0.1 (largest 0.145), 83 beyond 0.01, and turns reach 19.0 degrees. It is a further
-arrangement of T-272’s packing, one to one with it. The house witness measures the same.
+arrangement of T-272’s packing, one to one with it. Against T-278’s packing, and the house
+witness that is now T-278’s, it is a sibling: one to one, 9 squares beyond 0.1.
 
 ## Exact Replay
 
@@ -94,6 +97,7 @@ python -m devtools.upper_bound_reports yim-n303-2026-11-09 check --replay
 python -m devtools.upper_bound_reports yim-n303-2026-11-09 sharp-controls
 python -m devtools.measure_identity --n 303 'YIM-78eb9ea=packet:yim-n303-2026-11-09' \
   'T-272=packet:evand-issue914-2026-11-05' \
+  'T-278=packet:ozden-s303-upper-bound-2026-11-09' \
   'house-witness=witness-center-basis:witnesses/known-best/n-303.yaml' \
   --out resources/web/yim-n303-2026-11-09/measure/identity-n303.json
 ```

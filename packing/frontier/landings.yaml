@@ -328,3 +328,5 @@ sources:
     landed: '2026-10-24'
   - id: tymchishin-reclosure-v3-2026-10-23
     landed: '2026-10-24'
+  - id: yim-certificates-2026-11-09
+    landed: '2026-11-09'

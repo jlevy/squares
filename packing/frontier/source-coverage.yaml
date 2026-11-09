@@ -12503,6 +12503,51 @@ sources:
     house that day. The ledger of 9 November for this pass
     (campaign/issue-intake/upper-bounds-927-931-20261109) records it. All 3 native jobs have full
     outcomes.
+- id: yim-certificates-2026-11-09
+  title: Kaelan Yim's certificates at vitamoon/vitamoon ac14112, watched publications with no issue
+  role: source-repository
+  url: https://github.com/vitamoon/vitamoon/tree/ac14112009f5668b464170dcd979334a5537521d
+  local: resources/web/yim-certificates-2026-11-09/
+  source_key: '[Yim certificates 2026-11-09]'
+  scope:
+    n_values:
+    - 130
+    - 299
+    - 303
+    - 553
+    - 599
+    - 600
+    - 601
+    - 602
+    - 604
+    - 645
+    - 647
+    - 648
+    - 699
+    - 700
+  reviewed: '2026-11-09'
+  source_date: '2026-11-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+  - resources/web/yim-certificates-2026-11-09/acquisition/beyond-horizon-claims.json
+  evidence:
+  - E-yim-1109-certificate-report
+  notes: >-
+    Kaelan Yim's 14 certificates at the head ac14112 of his watched profile repository, which no
+    issue reports, retained as factual data and each admitted only where its exact side rounds up
+    to the side PACKINGS.md prints; the first n303 of 78eb9ea, overwritten at 546928a, is kept in
+    the yim-n303-2026-11-09 packet and is not recorded, 1.39e-10 above #930. The ledger of 9 November
+    for this import (campaign/issue-intake/upper-bounds-yim-certificates-20261109), walked from starts
+    frozen at main adca8d352, records every other certificate. Above the corpus the 11 sides at 553 to
+    700 are current beyond-horizon rows, 3.63e-06 to 1.72e-03 below the rows of couzo-issue763-2026-10-23
+    and, at 604, couzo-43f666c-2026-10-24, which they supersede; both maintained routes accept all 14
+    certificates and refuse their gross and sharp controls (the packet's receipts). Inside it T-280
+    (299, 303) and T-281 (130) record the reports, held below the stage 4 exit for the owner's
+    questions (think-ruu2's RV-3, think-ikku); no house moves.
+  claims_record: resources/web/yim-certificates-2026-11-09/acquisition/beyond-horizon-claims.json
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -27615,7 +27660,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.969774299704'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 554
   source_id: couzo-issue763-2026-10-23
@@ -27716,28 +27762,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.937296174353'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 600
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '24.951414939457'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 601
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '24.958452262518'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 602
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '24.981485660049'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 629
   source_id: couzo-issue763-2026-10-23
@@ -27802,7 +27852,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.883109225944'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 646
   source_id: couzo-issue763-2026-10-23
@@ -27816,14 +27867,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.899276594081'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 648
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '25.908836705326'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 649
   source_id: couzo-issue763-2026-10-23
@@ -27950,14 +28003,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.907571868006'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 700
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '26.908095391467'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-ptkk
 - n: 701
   source_id: couzo-issue763-2026-10-23
@@ -30457,7 +30512,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.996827861695'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: yim-certificates-2026-11-09
   bead: think-gn29
 - n: 629
   source_id: couzo-43f666c-2026-10-24
@@ -31145,4 +31201,81 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-p7cq
+- n: 553
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '23.969145238668'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 599
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '24.936479681246'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 600
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '24.951090275321'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 601
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '24.958070476928'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 602
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '24.981298949631'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 604
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '24.995880488226'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 645
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '25.881385537401'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 647
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '25.899272968790'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 648
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '25.908803576981'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 699
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '26.907311118315'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
+- n: 700
+  source_id: yim-certificates-2026-11-09
+  claim: upper-bound
+  value: '26.908036102718'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-h96r
 pending_catalogue_intake: []

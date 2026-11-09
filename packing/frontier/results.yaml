@@ -41409,6 +41409,305 @@ results:
       - T-277
       - T-278
       - T-279
+  - id: T-280
+    kind: upper-bound
+    registered: '2026-11-09'
+    landed: '2026-11-09'
+    headline: >-
+      Yim's re-solves of Özden's T-277 and T-278 at 299 and 303, within their padding; held
+    claim: >-
+      Two complete rational source certificates report finite upper-bound improvements at the
+      exact sides they state: s(299) <=
+      49520681639553253091959720304954604907070758384704238109808721459262431205131612278389503816375037/2781903786522383536263046420444731316926020496322871983755429706465280000000000000000000000000000
+      and s(303) <=
+      1159243312382833490764400031561352875121611202900949162484560193631809228369410184762453/64755723279645431239980480646475572327964543123998048064000000000000000000000000000000.
+      Rounded up at 12 places they are 17.801004434255 and 17.901789273154, 1.18e-12 below
+      T-277's side at 299 and 3.29e-12 below T-278's at 303, each across its 12-place print
+      (...256 and ...157).
+
+      Each re-solves the house's own exact certificate, the very file of Doğa Özden's #929 or
+      #930: one to one with it under the identity, no square moved beyond 1e-3 (largest
+      4.25e-4 at 299 and 4.4e-12 at 303). Each gain is smaller than what uniform contraction of
+      the house's own certificate takes off it with no square re-solved, 3.40e-12 at both
+      counts, so each lies within the house certificate's padding (0.35 and 0.97 of it;
+      devtools.contraction_margin).
+
+      Whether such a re-certification is a new result is the owner's open question
+      (think-ruu2's RV-3, with think-ikku): until the answer the entry stays below the stage 4
+      exit and neither house moves. The certificate the source first published at 303, which
+      it later overwrote, lies 1.39e-10 above #930 and is not recorded.
+
+      PACKINGS.md says two public checkers, Evan Daniel's verify_cert.py and verify_cert2.py,
+      byte-identical to the copies the evand-n183-subgrid-2026-10-19 packet retains, together
+      with a local rational repair verifier and this repository's centre/basis and
+      independent-corner routes, five local exact checks, accepted every certificate, and
+      that these are not five wholly independent implementations. It says
+      the author's own admission protocol was not followed at 303, which concerns his
+      pipeline and not these checks. No local-optimality, rigidity or formal check is
+      claimed. Those statements are the author's; no source program ran here.
+
+      Credit each packing to its finder as the register credits the house it re-solves,
+      Evan Daniel's packing as Doğa Özden improved it, and Kaelan Yim (GitHub vitamoon) for
+      the re-solve, as a regularization; the source asks for "Kaelan Yim after Doğa Özden,
+      Evan Daniel and Chris Deotte" at 299, with Griffin Casson's solver at 303. It calls
+      each a refinement of Özden's arrangement and "not a new construction or material
+      gain", says Hermes Agent was used for research, numerical search, implementation and
+      verification orchestration, and says the publication is not a registration request.
+    scope:
+      n_values:
+      - 299
+      - 303
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 1
+      rationale: >-
+        Re-solves of T-277's and T-278's packings at n = 299 and 303, 1.18e-12 and 3.29e-12
+        below them and within each house certificate's own uniform-contraction margin
+        (3.40e-12): the certificates' padding, as T-260's (S1) is, though across the print. No
+        new arrangement, lower bound or optimum.
+      scored: '2026-11-09'
+      by: think-h96r, the import lane L65's draft, for the stage 4 review to confirm or change
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Yim certificates 2026-11-09]'
+      published: '2026-11-09'
+    evidence:
+    - E-yim-1109-certificate-report
+    artifacts:
+    - packing/resources/web/yim-certificates-2026-11-09/README.md
+    - packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+    - packing/resources/web/yim-certificates-2026-11-09/source/n299.cert
+    - packing/resources/web/yim-certificates-2026-11-09/source/n303.cert
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/exact-certification-n299.json.xz
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/exact-certification-n303.json.xz
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n303.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/identity-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/identity-n303.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n303.json
+    - packing/resources/web/yim-n303-2026-11-09/README.md
+    - packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l65_1109.py
+    - packing/tests/test_contraction_margin.py
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n303.json
+    notes: >-
+      A separate complete repository replay is retained for the source's fourteen
+      certificates, these two among them: 14 positives and 28 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 13609950 pair
+      decisions; summed over the 42 jobs, the receipt records 2116.06 route CPU seconds, the
+      longest job 84.13 seconds. At 299 the least wall clearance is 2.78e-17 and the least
+      pair gap 1.00e-30; at 303 they are 5.00e-31 and 5.79e-15. The packet's sharp controls
+      (receipts/sharp-controls-nNNN.json) accepted each control at exact contact, margin 0,
+      on both routes and refused each 1e-30 past it. That replay is not entered as evidence
+      here while the entry is held, as T-260's was not.
+
+      At n = 299 the certificate is below the case's ceiling (Evan Daniel, improved by Doğa
+      Özden, T-277) by 1.18e-12, and at 303 (the same holders, T-278) by 3.29e-12. The ledger
+      of 9 November for this import
+      (campaign/issue-intake/upper-bounds-yim-certificates-20261109) walks both from starts
+      frozen on main on 9 November, after T-277 and T-278 were adopted, and records each as a
+      refinement of Özden's packing; the restatement ruling does not reach them, since each
+      crosses the print. Each publication is dated by its commit, both on 9 November; GitHub's
+      activity log was not readable, so no push time is recorded.
+
+      Measured pose by pose (measure/identity-nNNN.json in the packet; a measurement, which
+      decides nothing): at 299 nearest centres pair it one to one with T-277's packing under
+      the identity, 120 squares move beyond 1e-9 and none beyond 1e-3 (largest 4.25e-4), and
+      36 turn by more than 1e-6 radians, by up to 0.017 degrees, with the same tilt classes;
+      at 303 every square lies within 4.39e-12 of T-278's and no turn exceeds 5.3e-13
+      degrees. Uniform contraction of each house certificate to first contact, decided again
+      on both maintained routes (measure/contraction-nNNN.json), reaches 3.40e-12 below its
+      side at both counts, below each of these certificates, 2.22e-12 at 299 and 1.11e-13 at
+      303.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method; the author reports running both, at a revision of this repository whose route
+      code is unchanged since, so the replay reproduces the producer's own checks. No two
+      independent methods, human oversight or optimality is claimed.
+    next_rung: >-
+      Held for the owner's question (think-ruu2's RV-3, with think-ikku): whether a
+      re-certification within the earlier certificate's own padding is a new result. If it is
+      not, the entry is withdrawn and both houses stay; if it is, the replay is entered, the
+      separate stage 4 review is mapped, both rungs rise to V3 and C3, and each count is
+      adopted under the house rule with both strong generators' regularization. The stage 4
+      review is a separate blind lane, which maps its record under `reviews` here.
+    unfinished_confirmations:
+    - what: >-
+        The owner's answer to RV-3 (think-ruu2, think-ikku); then, if the counts stay recorded,
+        the replay already run, entered with the separate stage 4 review as the stage 4 exit
+      rung: C3
+      link: think-ruu2
+      estimated_cost:
+        cpu_hours: 0.05
+        cpu_hours_high: 0.2
+        basis: >-
+          the replay and the sharp controls ran on 9 November and their receipts are retained;
+          what remains is the review's own checker at two counts and records work
+        priced: '2026-11-09'
+    regularizations:
+    - n: 299
+      of: T-277
+      by: '[Yim certificates 2026-11-09]'
+      method: >-
+        what the source calls returned-anchor continuation, from #929's exact certificate
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n299.json
+        one_to_one: true
+        moved: 0
+        max_move: 0.000425336
+        max_turn_deg: 0.01723
+    - n: 303
+      of: T-278
+      by: '[Yim certificates 2026-11-09]'
+      method: >-
+        what the source calls a no-strain control refinement, from #930's exact certificate,
+        with Griffin Casson's c37 SLP for the recovery
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n303.json
+        one_to_one: true
+        moved: 0
+        max_move: 4.39256e-12
+        max_turn_deg: 5.26e-13
+  - id: T-281
+    kind: upper-bound
+    registered: '2026-11-09'
+    landed: '2026-11-09'
+    headline: >-
+      Yim's translation of T-259's certificate at 130, 1.96e-14 below it at the same print; held
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the
+      exact side it states: s(130) <=
+      12971572518503349393832850076636691474305902182478289654941561/1089825507438012248624046765161000000000000000000000000000000,
+      1.96e-14 below T-259, the house, and the same 12-place print, 11.902430645983.
+
+      It is T-259's certificate, Mykhailo Polkovskyi's re-solve of Francisco Couzo's #843
+      packing, moved as one: every square translated by the same
+      (-4969999999999999/5*10^29, -9889999999999997/10^30), every half-angle tangent
+      unchanged, and the box lowered to the packing's extent plus 1e-30, as the source says
+      ("only a common translation and the containing-box size change").
+
+      It is a sub-print re-certification of the house certificate, in the words of the owner's
+      ruling of 23 October (think-fwa9), which the record applies beyond the corpus only; whether it
+      reaches counts inside the corpus is the owner's question (think-ikku's RV-1; think-oqjd
+      for another holder's re-certification), and it is recorded as a question, not a
+      verdict, as T-260 is. Until the answer the entry stays below the stage 4 exit and the
+      house does not move. Uniform contraction of T-259's own certificate already reaches
+      2.18e-13 below it.
+
+      PACKINGS.md calls it "an archival envelope-only variant ... not a new packing or
+      numerical search gain", claims no Atlas credit and points to the #846 discussion of
+      padding-only re-certifications; it says five local exact checks accepted it. Those
+      statements are the author's; no source program ran here.
+
+      Credit the packing to its finder as T-259 credits it, Francisco Couzo's packing as
+      Mykhailo Polkovskyi re-solved it, and Kaelan Yim (GitHub vitamoon) for the
+      re-certification, as a regularization; the certificate carries Polkovskyi's MIT notice.
+    scope:
+      n_values:
+      - 130
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 1
+      rationale: >-
+        A sub-print re-certification of the house certificate at n = 130, 1.96e-14 below it:
+        the packing moved as one and the box lowered to its extent, the certificate's padding,
+        as T-260's (S1) is. No lower bound or optimum.
+      scored: '2026-11-09'
+      by: think-h96r, the import lane L65's draft, for the stage 4 review to confirm or change
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Yim certificates 2026-11-09]'
+      published: '2026-11-09'
+    evidence:
+    - E-yim-1109-certificate-report
+    artifacts:
+    - packing/resources/web/yim-certificates-2026-11-09/README.md
+    - packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+    - packing/resources/web/yim-certificates-2026-11-09/source/n130.cert
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/exact-certification-n130.json.xz
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n130.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/identity-n130.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n130.json
+    - packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md
+    - packing/devtools/upper_bound_reports.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l65_1109.py
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n130.json
+    notes: >-
+      The packet's replay decided this certificate with the other thirteen (T-280's notes):
+      both routes accept it and refuse its controls; the least wall clearance is exactly 1e-30
+      and the least pair gap 1.82e-14. The packet's sharp controls accepted each control at
+      exact contact, margin 0, on both routes and refused each 1e-30 past it. That replay is
+      not entered as evidence here while the entry is held, as T-260's was not.
+
+      At n = 130 the certificate is below the case's ceiling (Francisco Couzo, improved by
+      Mishapolk, T-259) by 1.96e-14, at the same 12-place print. The ledger of 9 November for
+      this import (campaign/issue-intake/upper-bounds-yim-certificates-20261109) records it,
+      since the restatement ruling is applied beyond the corpus only, and names T-259 as the
+      certificate it restates. The publication is dated by its commit, on 9 November; no push
+      time is recorded.
+
+      Measured pose by pose (measure/identity-n130.json; a measurement, which decides
+      nothing): nearest centres pair it one to one with T-259's packing under the identity,
+      no square moves beyond 1e-9 (largest 1.51e-14) and none turns. Uniform contraction of
+      T-259's certificate (measure/contraction-n130.json) reaches 2.18e-13 below its side,
+      equal to the 31 October review's retained figure, and lies 1.99e-13 below this
+      certificate. A packing at that contracted side is this project's own held candidate
+      (think-ruu2), not a report.
+    next_rung: >-
+      Held for the owner's question (think-ikku's RV-1, with think-oqjd and think-ruu2's
+      RV-3): whether the 23 October restatement ruling reaches counts inside the corpus, and
+      another holder's re-certification. If it does, the entry is withdrawn and no house
+      moves; if it does not, the replay is entered, the separate stage 4 review is mapped,
+      both rungs rise to V3 and C3, and 130 is adopted under the house rule with both strong
+      generators' regularization. The stage 4 review is a separate blind lane, which maps its
+      record under `reviews` here.
+    unfinished_confirmations:
+    - what: >-
+        The owner's answer to think-ikku's RV-1 (and think-oqjd); then, if the count stays
+        recorded, the replay already run, entered with the separate stage 4 review as the stage
+        4 exit
+      rung: C3
+      link: think-ikku
+      estimated_cost:
+        cpu_hours: 0.01
+        cpu_hours_high: 0.05
+        basis: >-
+          the replay and the sharp controls ran on 9 November and their receipts are retained;
+          what remains is the review's own checker at one count and records work
+        priced: '2026-11-09'
+    regularizations:
+    - n: 130
+      of: T-254
+      by: '[Yim certificates 2026-11-09]'
+      method: >-
+        T-259's certificate under one common translation, with the box lowered to the packing's
+        extent plus 1e-30, as the source states
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n130.json
+        one_to_one: true
+        moved: 0
+        max_move: 1.50729e-14
+        max_turn_deg: 0.0
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

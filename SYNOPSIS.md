@@ -448,6 +448,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-253](packing/frontier/RESULTS.md) | 154, 155, 183, 211, 227, 236, 237, 241, 271 | `V0` | `C1` | `S1` | `previously-published` | Nine complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(154) <= 12.9211009407616805497273710781811018832596, s(155) <= 12.9522609446505640351376570514307748530773, s(183) <= 13.9995801787362525019414750957971146726967, s(211) <= 14.993549626299421038785594964633603835513, s(227) <= 15.5636256523251490846368074671935498402163, s(236) <= 15.8619343906073586170851792275034202808198, s(237) <= 15.9026036382595968800201182179071384887302, s(241) <= 15.9871170951502387581618869582526723489714 and s(271) <= 16.9489477337136575105539116351026963841491. |
 | [T-260](packing/frontier/RESULTS.md) | 105, 146, 156, 229, 308 | `V0` | `C1` | `S1` | `previously-published` | Five complete rational source certificates of issue 846 report finite upper-bound improvements at the exact sides they state: s(105) <= 10.789303783742975392483567321744, s(146) <= 12.583782190151860342291508597077, s(156) <= 648958292691713822691804519015415761935308555406679/50000000000000000000000000000000000000000000000000, s(229) <= 15.650161513876431064008548865321 and s(308) <= 17.997149121270908735152160752315. |
 | [T-129](packing/frontier/RESULTS.md) | 105, 130, 292 | `V0` | `C0` | `S1` | `previously-published` | Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and separate immutable pins, at the exact sides they state: s(105) <= 10.806077865519704632682966129102, s(130) <= 11.911187706535762355657987890878 and s(292) <= 17.597249391156465040647414499422. |
+| [T-280](packing/frontier/RESULTS.md) | 299, 303 | `V0` | `C0` | `S1` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(299) <= 49520681639553253091959720304954604907070758384704238109808721459262431205131612278389503816375037/2781903786522383536263046420444731316926020496322871983755429706465280000000000000000000000000000 and s(303) <= 1159243312382833490764400031561352875121611202900949162484560193631809228369410184762453/64755723279645431239980480646475572327964543123998048064000000000000000000000000000000. |
+| [T-281](packing/frontier/RESULTS.md) | 130 | `V0` | `C0` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(130) <= 12971572518503349393832850076636691474305902182478289654941561/1089825507438012248624046765161000000000000000000000000000000, 1.96e-14 below T-259, the house, and the same 12-place print, 11.902430645983. |
 
 | Significance | What [`epistemics.md`](epistemics.md#significance-and-novelty) anchors it to |
 | --- | --- |
@@ -482,7 +484,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 279 | 279 registered, 247 by others |
+| Frontier results | 281 | 281 registered, 249 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -829,6 +831,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-893-895-20261104/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-914-20261105/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
