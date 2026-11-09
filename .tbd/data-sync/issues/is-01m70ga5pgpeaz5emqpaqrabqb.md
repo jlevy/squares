@@ -5,7 +5,7 @@ title: "Import #935, #936: Doğa Özden's s(172) and s(270) upper bounds (kenazn
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l71
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:58.640Z
-updated_at: 2026-11-09T19:18:36.137Z
+updated_at: 2026-11-09T20:22:16.494Z
 started_at: 2026-11-09T15:55:06.608Z
 ---
 #935 s(172) <= 13.614689853287 (kenaznia-doga/s172-upper-bound @ 2ce1f7c7, n-172-candidate.yaml sha256 0df5ae79...), 3.246e-3 below T-257; #936 s(270) <= 16.928148603343 (s270-upper-bound @ 78ab8cec, sha256 f2b62bf0...), 1.365e-5 below T-224. Both opened 2026-11-09T15:28Z, promoted with packing-witness promote --strategy robust-rational @ ef1af493; repos carry LICENSE.md (CC BY 4.0 / MIT) and Daniel's MIT notice. Precedent: #927-#931 (think-463r, PR #932).
@@ -39,4 +39,11 @@ Done:
 
 Owed after merge: replies on #935/#936; follow-ups on #845 (T-257 named current) and #703 (T-224 reported house).
 
-Final (19:40Z): head 75c9570e0; hosted packing-required and pages-required green, every job that ran green. Local --records passes at 75c9570e0, --edit 71/71 at b94cc8f61. PR #937 body updated (cost about 3 CPU-hours plus L72 about 0.2). Follow-up bead think-wju3 (solves held at row 3; draws 270 regularized if registered). Scratch cleaned.
+After L72 (19:40Z): head 75c9570e0, hosted green; follow-up bead think-wju3.
+
+Senior review L74 of 75c9570e0, fixed in df302d803 (re-pin e8c18d416):
+1. 270's first selection measured row 7 against T-224's lapsed view (the layer kept it while the axis tool could not refuse the witness). Reran grid-slack 0.5/1/5 deg and the driver at 270 (adopt-2026-11-09-n270-rerun-*, about 5 CPU-min); grid-slack's 0.5-degree view admitted at row 10 and layered: light/uneven/near-axis/classes/hues 6/13/0/30/19 vs house drawing 40/140/26/37/19; full shared sides 737/747 vs 407/727. 270 removed from SETTLED (default_drawings.py identical to main). KNOWN_TILTS at 270 kept (13 entries, owner reworded under think-wju3): the refused-tilts tally reads the axis tool's `reference` record, which still refuses the witness; removing them failed three tests.
+2. Wall-enlargement sharp control: accepted at contact (growth zero) on both routes at all five #932 packets and T-263's of 3 November; T-263, T-275..T-279 notes and the six READMEs corrected.
+3. Axis docstring and README wording (stopped after ~40 CPU-min inside pass cap); fast test of atlas_record's slide-digits refusal; held-solve shares 2.635e-12 vs 2.533e-12 (172), 3.253e-12 vs 3.212e-12 (270), registration waits on RV-3 (think-ruu2, think-ikku); bibliography and declarations name LICENSE-evand-square-packing.txt as a separate file; t-180 budget reason cites main's 474,579 bytes.
+Local at e8c18d416: --records --jobs 2 55/55 (121 s wall); 398 touched tests (adoption, axis, tally, drawings, selection, generators, flips, regularized atlas) and 611 others passed; site_urls --check 1,451 rows clean; check_release_impact clean; three papers byte-identical, explainer count 281 -> 283.
+Hosted on e8c18d416: packing-required and pages-required green; 31 passed, 28 skipped (runs 42689616041, 42689616674). PR #937 body updated (cost about 3.1 CPU-hours plus L72 about 0.2). Draft; not merged, not ready, no comments. Scratch cleaned.
