@@ -3,9 +3,9 @@ type: is
 id: is-01m711hf9r83yf4wg0mnfazjbc
 title: "Stage 4 blind review of #938 (s(199) = T-282 + L of 27)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l77-review
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T20:56:03.640Z
-updated_at: 2026-11-09T21:43:56.591Z
+updated_at: 2026-11-09T21:44:55.821Z
 started_at: 2026-11-09T20:56:10.661Z
+closed_at: 2026-11-09T21:44:55.821Z
+close_reason: "Blind stage-4 review of #938 done: accepted (F15 minor on L76 wording, rest notes); clean-room checker ACCEPT, 23/23 controls; LANE_EQUALS_REVIEW; branch claude/bold-ritchie-xo28us-l77-review head 4a7aa6305, to be folded into L76's PR (think-1goz)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
