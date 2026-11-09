@@ -1,0 +1,388 @@
+{
+ "program": "l70_custody.py",
+ "program_digests": {
+  "l70_custody.py": "6b03ce02ef91fe17dfc24ddd5c5e4109cbc4204eb5a5bdc20424abb5a6afffdc"
+ },
+ "log": [
+  {
+   "commit": "ac14112009f5668b464170dcd979334a5537521d",
+   "tree": "02112a183d10f17e027faebff7c34b36cd629251",
+   "parent": "576223961cbc072e94f8b8dd1e879b903c78124a",
+   "author": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "authored": "2026-11-09T01:49:17-08:00",
+   "committer": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "committed": "2026-11-09T01:49:17-08:00",
+   "subject": "Clarify numerical repair replay scope in audit metadata"
+  },
+  {
+   "commit": "576223961cbc072e94f8b8dd1e879b903c78124a",
+   "tree": "f03e89db0604ee35ac5f8334d45cb06c75d57468",
+   "parent": "546928a8a3d43822334732f938fd83394e152856",
+   "author": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "authored": "2026-11-09T01:48:41-08:00",
+   "committer": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "committed": "2026-11-09T01:48:41-08:00",
+   "subject": "Record completed n303 cohort audit with admission exception"
+  },
+  {
+   "commit": "546928a8a3d43822334732f938fd83394e152856",
+   "tree": "01fc2d5ba04c2f4e67c7474fd30762d70a868f3e",
+   "parent": "c10e0944b12b66bbc8ee1e121967ff289c2bace6",
+   "author": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "authored": "2026-11-09T01:36:10-08:00",
+   "committer": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "committed": "2026-11-09T01:36:10-08:00",
+   "subject": "Publish exact microscopic n303 control refinement after Ozden"
+  },
+  {
+   "commit": "c10e0944b12b66bbc8ee1e121967ff289c2bace6",
+   "tree": "bb9b8f8aec7fbf43acf65e75a6f8a6c1e9ffb0a5",
+   "parent": "e4209f6a514937419cd5b23543770e013a25287e",
+   "author": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "authored": "2026-11-09T00:42:14-08:00",
+   "committer": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "committed": "2026-11-09T00:42:14-08:00",
+   "subject": "Archive exact n130 envelope-only certificate variant"
+  },
+  {
+   "commit": "e4209f6a514937419cd5b23543770e013a25287e",
+   "tree": "5b06d9d7af424f35c7733266696fbfcfb78f04f6",
+   "parent": "78eb9ea5da43230686941289b9de3ce0f8e34899",
+   "author": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "authored": "2026-11-08T23:30:26-08:00",
+   "committer": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "committed": "2026-11-08T23:30:26-08:00",
+   "subject": "Add exact n299 tightening after Ozden, Daniel and Deotte"
+  },
+  {
+   "commit": "78eb9ea5da43230686941289b9de3ce0f8e34899",
+   "tree": "f774040bed02a3138ad2f9682c766ea01b5d1784",
+   "parent": "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
+   "author": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "authored": "2026-11-08T23:13:34-08:00",
+   "committer": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "committed": "2026-11-08T23:13:34-08:00",
+   "subject": "Add twelve exact-verified square-packing certificates"
+  },
+  {
+   "commit": "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
+   "tree": "ba2d28327d775ab627b5b74c394f70fa28c1d866",
+   "parent": "844a9f4147106972098f8dbb1705185cda23c794",
+   "author": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "authored": "2026-11-04T21:44:44-08:00",
+   "committer": "GitHub <noreply@github.com>",
+   "committed": "2026-11-04T21:44:44-08:00",
+   "subject": "edit atoms 4"
+  },
+  {
+   "commit": "844a9f4147106972098f8dbb1705185cda23c794",
+   "tree": "9ec5d4fcc65ca0a0ba1752891bab970802033bd9",
+   "parent": "06b5bbefaddc8d54912e0bd222a2a6d8224e6b8c",
+   "author": "vitamoon <91440012+vitamoon@users.noreply.github.com>",
+   "authored": "2026-11-04T21:42:55-08:00",
+   "committer": "GitHub <noreply@github.com>",
+   "committed": "2026-11-04T21:42:55-08:00",
+   "subject": "edit atoms 3"
+  }
+ ],
+ "files": {
+  "ac14112:PACKINGS.md": {
+   "blob": "c88f38ff2f44f09d414ff85827041b8bf3113e66",
+   "bytes": 6525,
+   "sha256": "20b3f6e3e605be31a55efaacfd8e49f7ae21d3278cc9130304598cd58cdacc36",
+   "equals_blob": true
+  },
+  "ac14112:README.md": {
+   "blob": "b7cb26083d83e90ce6ca8883367aec7518427f5d",
+   "bytes": 2600,
+   "sha256": "0bf8b57bc7f0b7ac1383d42bfca876f665ebf7d8642ed7573f078413534536fa",
+   "equals_blob": true
+  },
+  "ac14112:SHA256SUMS": {
+   "blob": "19c094d65ea7d505bc4db543ed508fcfd0578d07",
+   "bytes": 1559,
+   "sha256": "319f2ab7316036b0a9e3ac1ff0055a93950a29614a16c033f4f959572ebb5512",
+   "equals_blob": true
+  },
+  "ac14112:n130-source-LICENSE.txt": {
+   "blob": "d81c9578741244f8da9f3602674a8d0516d26478",
+   "bytes": 1088,
+   "sha256": "4761eb7dc9e50c13cd9a876e0a56dbe3db7b97064a354c0ac235c93293e4de0c",
+   "equals_blob": true
+  },
+  "ac14112:n130.cert": {
+   "blob": "f2c7e63290d76f911b146352268068803c43ce0c",
+   "bytes": 18044,
+   "sha256": "3056cb4dd92927f671851b9866976a061fab3635daed5d3f676fffb570e1f565",
+   "equals_blob": true
+  },
+  "ac14112:n130.cert.txt": {
+   "blob": "f2c7e63290d76f911b146352268068803c43ce0c",
+   "bytes": 18044,
+   "sha256": "3056cb4dd92927f671851b9866976a061fab3635daed5d3f676fffb570e1f565",
+   "equals_blob": true
+  },
+  "ac14112:n260.cert": {
+   "blob": "82ecdeccd504618180df3ea99d5b80f9a7c76e0f",
+   "bytes": 67514,
+   "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb",
+   "equals_blob": true
+  },
+  "ac14112:n299.cert": {
+   "blob": "20cc845439b838804bef6e83a6b3463f21e347ae",
+   "bytes": 121708,
+   "sha256": "7e4964375418fdab9a78d12b2756ffca8c1386985468be7b0be2fbd030b9fd75",
+   "equals_blob": true
+  },
+  "ac14112:n299.cert.txt": {
+   "blob": "20cc845439b838804bef6e83a6b3463f21e347ae",
+   "bytes": 121708,
+   "sha256": "7e4964375418fdab9a78d12b2756ffca8c1386985468be7b0be2fbd030b9fd75",
+   "equals_blob": true
+  },
+  "ac14112:n303-source-LICENSE.md": {
+   "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "bytes": 1484,
+   "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+   "equals_blob": true
+  },
+  "ac14112:n303.cert": {
+   "blob": "30147435256dda170c71f43d8cdebdc934cb5d75",
+   "bytes": 126225,
+   "sha256": "14dbc28d7929d2008f2e76e74b078fafee2ec57b8d7603eb9a5ac306caf39b29",
+   "equals_blob": true
+  },
+  "ac14112:n303.cert.txt": {
+   "blob": "30147435256dda170c71f43d8cdebdc934cb5d75",
+   "bytes": 126225,
+   "sha256": "14dbc28d7929d2008f2e76e74b078fafee2ec57b8d7603eb9a5ac306caf39b29",
+   "equals_blob": true
+  },
+  "ac14112:n553.cert": {
+   "blob": "fae3ae980f9f5204d1a4b3a9a9be5d4276180b13",
+   "bytes": 200413,
+   "sha256": "78a92b71ab396d0a5d835693045809527390fc415a46b7fda765c23fc4415436",
+   "equals_blob": true
+  },
+  "ac14112:n599.cert": {
+   "blob": "60b521c442a5edba25d81eced3a3d7599f57e922",
+   "bytes": 220514,
+   "sha256": "98cf7076c90a22676f62a96d19f4db412ec7ef9624105fc85a3f0adb5f588c44",
+   "equals_blob": true
+  },
+  "ac14112:n600.cert": {
+   "blob": "9c904d0b4f77083eab764cc1b47a66babf736800",
+   "bytes": 218541,
+   "sha256": "10b422dde0d0d31f55c92c2d96c5e7cfc4cbbebbcec413cc5e357a3067ee664d",
+   "equals_blob": true
+  },
+  "ac14112:n601.cert": {
+   "blob": "ccc8501e41281b9faee7fd6a0e9a6d5eb2dfdd58",
+   "bytes": 122724,
+   "sha256": "d8c55d4f7b9e920c6988c4537a0eb80b07186e22191056eadc6a6c5b40d856cf",
+   "equals_blob": true
+  },
+  "ac14112:n602.cert": {
+   "blob": "d0ed55588b2d863acb870e0333e89e191c5e0b77",
+   "bytes": 212081,
+   "sha256": "8710f13abeda199702e929684704e0226bcec15c3325f020600addf9bebdc3f2",
+   "equals_blob": true
+  },
+  "ac14112:n604.cert": {
+   "blob": "d600600e5e062da519c14ec175fdb7370ebf7db3",
+   "bytes": 216808,
+   "sha256": "ce7ea7da25d1f955f4ae26163c56c19952fb0446d4280b5a39503272d17d2175",
+   "equals_blob": true
+  },
+  "ac14112:n645.cert": {
+   "blob": "6af8c82a0487ab6b106459807ec8695650238467",
+   "bytes": 233872,
+   "sha256": "b7a129cf0f151c5e3cee2154ea270126d14c53355c67ba4116b7b21f3329c296",
+   "equals_blob": true
+  },
+  "ac14112:n647.cert": {
+   "blob": "988754d0e7110d42354149f5c23f743d12fc8dd6",
+   "bytes": 235928,
+   "sha256": "86ef4d3db4179e9bd23359bb39c0fcb9b02a32111f28fa96c3861d0ca2ce24b9",
+   "equals_blob": true
+  },
+  "ac14112:n648.cert": {
+   "blob": "f27536340f899287c544e2637fa6ba2549cabf38",
+   "bytes": 268315,
+   "sha256": "311438621acf913e48e73c05b5ae09ce9e66b5f322ae1e28eb5c6f76a5512eb5",
+   "equals_blob": true
+  },
+  "ac14112:n699.cert": {
+   "blob": "f06c0914c6ba0af4b7457c0c37da3a5b5193f38a",
+   "bytes": 250253,
+   "sha256": "36bc1c18a29a30c72ae073e88c17c7934707431327d1ee6baccac8f41b2a2dfb",
+   "equals_blob": true
+  },
+  "ac14112:n700.cert": {
+   "blob": "5f8e2386c94d36ed4473101310d883032445ca18",
+   "bytes": 256857,
+   "sha256": "6ef241dda3ecb79e39aa5abf8f0ecada1c7dd1f4547d663de846ec61ca9b1121",
+   "equals_blob": true
+  },
+  "ac14112:packing-certificates.json": {
+   "blob": "e0c8d077970af2cba1ed605348941f7bf4d31d08",
+   "bytes": 37764,
+   "sha256": "722209529e0899a51f3f272df3c5a20ea884ed39798b4825aa3b78f63899e928",
+   "equals_blob": true
+  },
+  "78eb9ea:PACKINGS.md": {
+   "blob": "dc9b371808ce7f2cea311b03633cbfc1f8389fe6",
+   "bytes": 3986,
+   "sha256": "89c971a45a0e53ef16be940c6509641faa9f69244ae115675bf04862129a9ed1",
+   "equals_blob": true
+  },
+  "78eb9ea:README.md": {
+   "blob": "b7cb26083d83e90ce6ca8883367aec7518427f5d",
+   "bytes": 2600,
+   "sha256": "0bf8b57bc7f0b7ac1383d42bfca876f665ebf7d8642ed7573f078413534536fa",
+   "equals_blob": true
+  },
+  "78eb9ea:SHA256SUMS": {
+   "blob": "0045dddf7f44737d4efbce76be34dcada4587f1b",
+   "bytes": 988,
+   "sha256": "0b6e99c4b985e0953b57671a15ce3c461941a6a2aa08e8bf672d3bc7a1e6cb99",
+   "equals_blob": true
+  },
+  "78eb9ea:n260.cert": {
+   "blob": "82ecdeccd504618180df3ea99d5b80f9a7c76e0f",
+   "bytes": 67514,
+   "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb",
+   "equals_blob": true
+  },
+  "78eb9ea:n303.cert": {
+   "blob": "0e28ca53df9443e9db62292fb7848086bee0e96e",
+   "bytes": 62142,
+   "sha256": "b8318f81e2199cc9e162f5072cd37c0528d129d496c67cd6188e86b4a430ab9b",
+   "equals_blob": true
+  },
+  "78eb9ea:n553.cert": {
+   "blob": "fae3ae980f9f5204d1a4b3a9a9be5d4276180b13",
+   "bytes": 200413,
+   "sha256": "78a92b71ab396d0a5d835693045809527390fc415a46b7fda765c23fc4415436",
+   "equals_blob": true
+  },
+  "78eb9ea:n599.cert": {
+   "blob": "60b521c442a5edba25d81eced3a3d7599f57e922",
+   "bytes": 220514,
+   "sha256": "98cf7076c90a22676f62a96d19f4db412ec7ef9624105fc85a3f0adb5f588c44",
+   "equals_blob": true
+  },
+  "78eb9ea:n600.cert": {
+   "blob": "9c904d0b4f77083eab764cc1b47a66babf736800",
+   "bytes": 218541,
+   "sha256": "10b422dde0d0d31f55c92c2d96c5e7cfc4cbbebbcec413cc5e357a3067ee664d",
+   "equals_blob": true
+  },
+  "78eb9ea:n601.cert": {
+   "blob": "ccc8501e41281b9faee7fd6a0e9a6d5eb2dfdd58",
+   "bytes": 122724,
+   "sha256": "d8c55d4f7b9e920c6988c4537a0eb80b07186e22191056eadc6a6c5b40d856cf",
+   "equals_blob": true
+  },
+  "78eb9ea:n602.cert": {
+   "blob": "d0ed55588b2d863acb870e0333e89e191c5e0b77",
+   "bytes": 212081,
+   "sha256": "8710f13abeda199702e929684704e0226bcec15c3325f020600addf9bebdc3f2",
+   "equals_blob": true
+  },
+  "78eb9ea:n604.cert": {
+   "blob": "d600600e5e062da519c14ec175fdb7370ebf7db3",
+   "bytes": 216808,
+   "sha256": "ce7ea7da25d1f955f4ae26163c56c19952fb0446d4280b5a39503272d17d2175",
+   "equals_blob": true
+  },
+  "78eb9ea:n645.cert": {
+   "blob": "6af8c82a0487ab6b106459807ec8695650238467",
+   "bytes": 233872,
+   "sha256": "b7a129cf0f151c5e3cee2154ea270126d14c53355c67ba4116b7b21f3329c296",
+   "equals_blob": true
+  },
+  "78eb9ea:n647.cert": {
+   "blob": "988754d0e7110d42354149f5c23f743d12fc8dd6",
+   "bytes": 235928,
+   "sha256": "86ef4d3db4179e9bd23359bb39c0fcb9b02a32111f28fa96c3861d0ca2ce24b9",
+   "equals_blob": true
+  },
+  "78eb9ea:n648.cert": {
+   "blob": "f27536340f899287c544e2637fa6ba2549cabf38",
+   "bytes": 268315,
+   "sha256": "311438621acf913e48e73c05b5ae09ce9e66b5f322ae1e28eb5c6f76a5512eb5",
+   "equals_blob": true
+  },
+  "78eb9ea:n699.cert": {
+   "blob": "f06c0914c6ba0af4b7457c0c37da3a5b5193f38a",
+   "bytes": 250253,
+   "sha256": "36bc1c18a29a30c72ae073e88c17c7934707431327d1ee6baccac8f41b2a2dfb",
+   "equals_blob": true
+  },
+  "78eb9ea:n700.cert": {
+   "blob": "5f8e2386c94d36ed4473101310d883032445ca18",
+   "bytes": 256857,
+   "sha256": "6ef241dda3ecb79e39aa5abf8f0ecada1c7dd1f4547d663de846ec61ca9b1121",
+   "equals_blob": true
+  },
+  "78eb9ea:packing-certificates.json": {
+   "blob": "cfe893a798fbb2d8060886c14a0325943e84cc10",
+   "bytes": 27426,
+   "sha256": "e6b9960ec96575bfd5719896ecbb6c6d855a7683900c665387b0898c59af531a",
+   "equals_blob": true
+  }
+ },
+ "certificate_blob_history": {
+  "n260.cert": [
+   "78eb9ea:82ecdeccd504618180df3ea99d5b80f9a7c76e0f"
+  ],
+  "n303.cert": [
+   "78eb9ea:0e28ca53df9443e9db62292fb7848086bee0e96e",
+   "546928a:30147435256dda170c71f43d8cdebdc934cb5d75"
+  ],
+  "n553.cert": [
+   "78eb9ea:fae3ae980f9f5204d1a4b3a9a9be5d4276180b13"
+  ],
+  "n599.cert": [
+   "78eb9ea:60b521c442a5edba25d81eced3a3d7599f57e922"
+  ],
+  "n600.cert": [
+   "78eb9ea:9c904d0b4f77083eab764cc1b47a66babf736800"
+  ],
+  "n601.cert": [
+   "78eb9ea:ccc8501e41281b9faee7fd6a0e9a6d5eb2dfdd58"
+  ],
+  "n602.cert": [
+   "78eb9ea:d0ed55588b2d863acb870e0333e89e191c5e0b77"
+  ],
+  "n604.cert": [
+   "78eb9ea:d600600e5e062da519c14ec175fdb7370ebf7db3"
+  ],
+  "n645.cert": [
+   "78eb9ea:6af8c82a0487ab6b106459807ec8695650238467"
+  ],
+  "n647.cert": [
+   "78eb9ea:988754d0e7110d42354149f5c23f743d12fc8dd6"
+  ],
+  "n648.cert": [
+   "78eb9ea:f27536340f899287c544e2637fa6ba2549cabf38"
+  ],
+  "n699.cert": [
+   "78eb9ea:f06c0914c6ba0af4b7457c0c37da3a5b5193f38a"
+  ],
+  "n700.cert": [
+   "78eb9ea:5f8e2386c94d36ed4473101310d883032445ca18"
+  ],
+  "n299.cert": [
+   "e4209f6:20cc845439b838804bef6e83a6b3463f21e347ae"
+  ],
+  "n130.cert": [
+   "c10e094:f2c7e63290d76f911b146352268068803c43ce0c"
+  ]
+ },
+ "beyond_horizon_blobs_unchanged_78eb9ea_to_ac14112": true,
+ "json_prior_certificate_commit": "c10e0944b12b66bbc8ee1e121967ff289c2bace6",
+ "problems": [],
+ "verdict": "CUSTODY_HOLDS"
+}

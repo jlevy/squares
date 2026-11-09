@@ -4930,6 +4930,30 @@ sources:
       outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin, which also
       carries Evan Daniel's MIT notice for the base packing's certificate. Ozden is Özden in
       the credit's ASCII. Retained in web/ozden-s270-upper-bound-2026-11-09/.
+  - key: '[Yim certificates 2026-11-09]'
+    authors:
+    - Yim
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton, Polkovskyi, Levy
+    short_credit: Yim after Ozden et al.
+    note: >-
+      vitamoon/vitamoon at ac14112009f5668b464170dcd979334a5537521d (2026-11-09T09:49:17Z),
+      Kaelan Yim's 14 exact rational centre/half-angle certificates in Evan Daniel's format,
+      publications in a watched repository that no issue reports and, by their own word, not a
+      registration request: at 299 (first committed at e4209f6) and 303 (546928a, overwriting the
+      first n303 of 78eb9ea) re-solves of Doğa Özden's #929 and #930 packings (T-277, T-278), after
+      Evan Daniel and Chris Deotte, with Griffin Casson's SLP solver; at 130 (c10e094) Mykhailo
+      Polkovskyi's T-259 certificate translated, after Francisco Couzo; and at 553 to 700
+      (78eb9ea) refinements and further arrangements of Couzo's packings after Vladislav
+      Lavrentev's, and at 604 after alexchilton's. AI-assisted (Hermes Agent). No global
+      optimality claim. The lineage builds on this project: the 299 certificate's source names
+      this repository's regularized atlas, and #929 and #930 were made with its promotion tool.
+      Retained as factual data; the repository states no licence for these files, and the 130 and
+      303 certificates carry Polkovskyi's MIT and Özden's CC BY 4.0 notices. Ozden is Özden in the
+      credit's ASCII. Retained in web/yim-certificates-2026-11-09/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden

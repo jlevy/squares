@@ -1,0 +1,62 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Kaelan Yim",
+  "source_key": "[Yim n303 2026-11-09]",
+  "report_evidence": "E-yim-n303-1109-certificate-report",
+  "receipt_format": "yim-n303-1109-exact-replay-v1",
+  "witness_prefix": "W-yim-n303-1109-n",
+  "claim_limitations": "Complete vitamoon/vitamoon 78eb9ea rational centre/half-angle certificate in Evan Daniel's format, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-09",
+  "read_at_main": "adca8d352cd32036bcf877658dfffef61ea2d621",
+  "certificates": [
+    {
+      "n": 303,
+      "path": "n303.cert",
+      "format": "evand-cert",
+      "offered": "17.901789273296",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/78eb9ea5da43230686941289b9de3ce0f8e34899/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    }
+  ],
+  "requested": [
+    303
+  ],
+  "replayed": [
+    303
+  ],
+  "houses": [
+    {
+      "n": 303,
+      "reader": "[Özden s303 upper bound 2026-11-09]",
+      "source_key": "[Özden s303 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-278",
+      "reported_value": "17.9017892731564904",
+      "verified_value": "17.9017892731564904",
+      "evidence": [
+        "E-ozden-930-exact-feasibility",
+        "E-ozden-930-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Kaelan Yim's first packing of 303 squares at vitamoon/vitamoon 78eb9ea, a publication in a watched repository with no issue, above #930",
+    "headline": "Yim's first 303, a further arrangement of Daniel's T-272 packing, 4.35e-5 below it and 1.39e-10 above #930",
+    "significance": 1,
+    "source_checks": "PACKINGS.md says five local exact checks accepted the certificate, two of them this repository's maintained routes at f30d6405, and that these are not five wholly independent implementations. Those statements are the author's; no source program ran here.",
+    "credit": "Kaelan Yim (GitHub vitamoon), a computational refinement of Evan Daniel's #914 packing after Chris Deotte's method, by his account. Published in a watched repository with no issue; the source says it is not a new-best submission, since #930 reports a smaller side, and the report-order walk does not record it. It stays in the packet.",
+    "next_rung": "None: not recorded, since #930 reached this repository first with a smaller side.",
+    "bead": "think-h96r",
+    "bibliography": {
+      "authors": [
+        "Yim"
+      ],
+      "lineage": "independent",
+      "credit": "Yim after Daniel, Deotte",
+      "short_credit": "Yim after Daniel et al.",
+      "note": "vitamoon/vitamoon at 78eb9ea5da43230686941289b9de3ce0f8e34899 (2026-11-09T07:13:34Z), Kaelan Yim's first n303.cert, overwritten at 546928a: s(303) <= 17.9017892732954777..., a further arrangement of Evan Daniel's #914 packing (T-272), one to one with it, after Chris Deotte's method. Not a registration request, and above #930. AI-assisted (Hermes Agent). Retained as factual data in web/yim-n303-2026-11-09/."
+    }
+  }
+}

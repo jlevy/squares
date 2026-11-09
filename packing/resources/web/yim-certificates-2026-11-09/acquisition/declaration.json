@@ -1,0 +1,78 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "yim-certificates-2026-11-09",
+  "source_url": "https://github.com/vitamoon/vitamoon",
+  "source_ref": "main",
+  "source_commit": "ac14112009f5668b464170dcd979334a5537521d",
+  "retrieved_at_utc": "2026-11-09T09:57Z",
+  "git_scope": "A full clone of vitamoon/vitamoon, Kaelan Yim's GitHub profile repository, first fetched at 08:21Z on 9 November 2026 and last at 09:57Z, when main's head was ac14112 (committed 2026-11-09T09:49:17Z, printed 01:49:17-08:00, 'Clarify numerical repair replay scope in audit metadata'); git ls-remote read the same head again at 10:31Z. No issue reports these certificates: the repository is watched since jlevy/squares#895, whose n260.cert it also holds. Six commits past d11a8a1, the yim-s260-upper-bound-2026-11-05 packet's pin, add them: 78eb9ea5da43230686941289b9de3ce0f8e34899 (07:13:34Z, 'Add twelve exact-verified square-packing certificates') adds PACKINGS.md, SHA256SUMS, packing-certificates.json and the certificates at 303, 553, 599, 600, 601, 602, 604, 645, 647, 648, 699 and 700; e4209f6a514937419cd5b23543770e013a25287e (07:30:26Z) adds n299.cert and its byte-identical copy n299.cert.txt; c10e0944b12b66bbc8ee1e121967ff289c2bace6 (08:42:14Z) adds n130.cert, its byte-identical copy n130.cert.txt and n130-source-LICENSE.txt; 546928a8a3d43822334732f938fd83394e152856 (09:36:10Z, 'Publish exact microscopic n303 control refinement after Ozden') overwrites n303.cert with a second certificate and adds its byte-identical copy n303.cert.txt and n303-source-LICENSE.md; 576223961cbc072e94f8b8dd1e879b903c78124a (09:48:41Z) and ac14112 change PACKINGS.md and packing-certificates.json only. Each of the 14 certificates at the pin is the same Git blob from the commit that adds it, so each is the file first committed; the first n303.cert, blob 0e28ca53 of 78eb9ea, is a publication of its own, which the yim-n303-2026-11-09 packet retains at 78eb9ea. sha256sum -c SHA256SUMS passes on all 20 lines at the pin. GitHub's activity log for the repository was not readable from this session (the API and the activity page both refused it), so no push time is recorded: 78eb9ea and e4209f6 were public by 07:56:30Z, when the intake pass's bead think-h96r named both, c10e094 by 08:55Z and the last three by 09:57Z. Retained: the 14 certificates, SHA256SUMS and packing-certificates.json, as factual data. Pinned by digest: PACKINGS.md, the author's prose; n130.cert.txt, n299.cert.txt and n303.cert.txt, the same blobs as their certificates; n260.cert, unchanged since e7cab3a, against the copy the yim-s260-upper-bound-2026-11-05 packet retains; n130-source-LICENSE.txt, against the identical Mishapolk LICENSE the mishapolk-issue732-2026-10-22 packet retains; and n303-source-LICENSE.md, against the identical Özden LICENSE.md the ozden-s299-upper-bound-2026-11-03 packet retains. README.md, the author's profile page, which says nothing about packing, is not in the scope. The two checkers PACKINGS.md names, evand/square-packing bb4cc78e search/exact/verify_cert.py and verify_cert2.py, are outside this repository; the SHA-256s it prints for them are those of the copies the evand-n183-subgrid-2026-10-19 packet retains. The rest of the tree is pinned by the commit; no source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence of the author's own for these files. The repository carries no licence file, and PACKINGS.md says: 'The prior n260 license statement remains specific to that file. This snapshot makes no blanket new license assertion for inherited third-party materials; their attribution and licensing constraints remain applicable.' The earlier grant, CC BY 4.0 for n260.cert with attribution to Kaelan Yim (jlevy/squares#895, issuecomment-6650567350), names that file only. packing-certificates.json's n299 row says the cohort's 'results inherit source CC BY 4.0' and 'Upstream issue929 states CC BY4.0 for witness/data/text; MIT code', the licence of Doğa Özden's kenaznia-doga/s299-upper-bound-17801004 at a042eab, from which the n299 packing was built; that is the author's reading of the upstream licence, not a grant of his own. n130.cert translates Mykhailo Polkovskyi's MIT-licensed certificate at Mishapolk/square-packing-records 52aa267 (T-259's) and carries its notice as n130-source-LICENSE.txt, byte-identical to the LICENSE the mishapolk-issue732-2026-10-22 packet retains. The second n303.cert refines Doğa Özden's CC BY 4.0 #930 witness (kenaznia-doga/s303-upper-bound b43ca09) and carries Özden's licence as n303-source-LICENSE.md, byte-identical to the LICENSE.md the ozden-s299-upper-bound-2026-11-03 packet retains; packing-certificates.json says 'Source certificates/data/text CC BY4.0; code MIT, per pinned publisher declaration. Attribution and change notice retained'. No source was submitted to jlevy/squares: PACKINGS.md says the publication is not a registration request and none was posted. So the certificates, SHA256SUMS and packing-certificates.json are retained as factual data under the owner decision of 2026-10-09 (resources/web/known-best-packings/README.md, Retained Factual Data), which retains a source's numbers, complete certificates and the records that list, compare or check them, whatever its licence; retaining them grants no licence and relicenses nothing. PACKINGS.md, the author's prose, is pinned by digest only.",
+  "claims": [
+    "PACKINGS.md, titled 'Square-packing certificates — Kaelan Yim', calls the files 'Exact rational witnesses of AI-assisted computational refinements' and 'upper-bound certificates, not optimality proofs or blanket claims of current public records', and says: 'Earlier constructors, source holders and method authors retain their credit; per-certificate lineage is in packing-certificates.json and the original certificate comments. Do not credit these as independent original constructions.' Its table gives each side rounded upward at 12 places: 130 11.902430645983, 299 17.801004434255, 303 17.901789273154, 553 23.969145238668, 599 24.936479681246, 600 24.951090275321, 601 24.958070476928, 602 24.981298949631, 604 24.995880488226, 645 25.881385537401, 647 25.899272968790, 648 25.908803576981, 699 26.907311118315, 700 26.908036102718, and says the exact rational side in each certificate and manifest is authoritative.",
+    "Each certificate is in Evan Daniel's format: a comment line, the header 'n S' with S an exact fraction, then n rows 'x y t', a rational centre and the rational tangent of each unit square's half-angle. The comment lines name the lineage: n130 'exact envelope tightening only; Mishapolk after Francisco Couzo and PR574 contributors source lineage'; n299 'Doğa Özden after Evan Daniel / Chris Deotte source lineage'; n303 'v32 no-strain control refinement; Doğa Özden after Evan Daniel / Chris Deotte / Griffin Casson source lineage'; n604 'Couzo / alexchilton fault-line-dp-basin-hopping source lineage'; the other ten 'Couzo / Lavrentev source lineage'. The comments' word 'private' describes the files' state before publication, as PACKINGS.md says.",
+    "On n130, PACKINGS.md says: 'n130 is an archival envelope-only variant: side 11.9024306459822462042030375294435824... (upward to 16 places: 11.9024306459822463), approximately 1.9554409882111e-14 below the source certificate. Every relative center and orientation is unchanged; only a common translation and the containing-box size change. This is not a new packing or numerical search gain. The maintainer discussion distinguishes padding-only re-certifications and raises their eligibility inside the Atlas range; no Atlas credit is claimed or recommended from this file.' It links jlevy/squares#846, issuecomment-6543941452. packing-certificates.json names the source as Mishapolk/square-packing-records at 52aa2672c74c91931686d60a49bdf97ec798291c, its file's SHA-256 1e00cd74...9be7 and its exact side, states the translation (-4969999999999999/5e29, -9889999999999997/1e30), the closed envelope's side and a strict wall padding of 1e-30, says a closed-envelope variant touching the walls was refused by a public checker requiring strict clearance, and credits 'Kaelan Yim — exact enclosing-box operation only. Packing credit remains Mishapolk after Francisco Couzo and PR574 contributors; not a new arrangement.'",
+    "On n299, PACKINGS.md says: 'n299 is a verified microscopic tightening: the exact side is 17.80100443425411170800278978866085574955..., smaller than the pending Doğa Özden #929 witness by approximately 1.1819655270744e-12. It comes from returned-anchor continuation, not either broader kick. This is a refinement of his arrangement, not a new construction or material gain. Requested further-refinement credit: Kaelan Yim after Doğa Özden, Evan Daniel and Chris Deotte. Acceptance and Atlas credit remain the maintainers’ decision.' packing-certificates.json names the source as kenaznia-doga/s299-upper-bound-17801004 at a042eab017caeb07ca5f79afcdc5fbb89103cda2, its file's SHA-256 dfb0ccf7...5d9d and its exact side, and classifies the certificate as a 'Microscopic continuation refinement of the source arrangement; neither broader kick beats control; not a material or new-construction claim'.",
+    "On n303, PACKINGS.md at the pin says: 'n303 now has a verified microscopic refinement: exact side 17.9017892731531992856633983391691014..., approximately 3.2910456934182e-12 below the pinned Doğa Özden #930 witness. It came from the no-strain control, not the aspect-strain proposal (which recovered worse). Relative centers change microscopically; this is not merely a common translation/reboxing, but neither a structural nor material improvement. Credit: Kaelan Yim after Doğa Özden, Evan Daniel, Chris Deotte and Griffin Casson.' It adds that the author's own admission protocol was not followed ('Admission remains noncompliant') and that five exact geometry checks passed separately. packing-certificates.json names the source as kenaznia-doga/s303-upper-bound at b43ca090fc2ff5e750fecc71d8514298fe164514, its file's SHA-256 9cbeb7a8...2f3e and its exact side, records 302 relative centres changed by at most 3.81e-12, and names the overwritten certificate (c10e094, SHA-256 b8318f81...ab9b). At 78eb9ea the same file held a first n303, which PACKINGS.md then called 'not a new-best submission', since #930 reports a smaller side.",
+    "PACKINGS.md says the two public checkers, evand/square-packing bb4cc78e search/exact/verify_cert.py (SHA-256 3299ca0c...ed52) and verify_cert2.py (55140a35...31d3), with 'the local rational repair verifier and the registry center/basis and independent-corner routes', five local exact checks, accepted every new certificate, and that these are not five wholly independent implementations; packing-certificates.json names jlevy/squares f30d6405dcf36f9b9e3e031f855cd055fb44332c as the registry revision of the last two. Those statements are the author's; no source program ran here.",
+    "PACKINGS.md requests improvement credit for Kaelan Yim (GitHub vitamoon), says Hermes Agent was used for research, numerical search, implementation and verification orchestration, that n303 builds on Evan Daniel's packing after Chris Deotte's method and n604 on Couzo/alexchilton work, that no sole-inventor or priority claim is made, and that 'Publishing certificates here is not an Atlas registration ... The repository owner submits registration requests; none were posted by this publication step.'"
+  ],
+  "scope": [
+    "PACKINGS.md",
+    "SHA256SUMS",
+    "n130-source-LICENSE.txt",
+    "n130.cert",
+    "n130.cert.txt",
+    "n260.cert",
+    "n299.cert",
+    "n299.cert.txt",
+    "n303-source-LICENSE.md",
+    "n303.cert",
+    "n303.cert.txt",
+    "n553.cert",
+    "n599.cert",
+    "n600.cert",
+    "n601.cert",
+    "n602.cert",
+    "n604.cert",
+    "n645.cert",
+    "n647.cert",
+    "n648.cert",
+    "n699.cert",
+    "n700.cert",
+    "packing-certificates.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "PACKINGS.md",
+      "reason": "The author's prose describing the certificates, quoted in the claims; original prose is pinned by digest and not copied under the retained-factual-data decision, since the repository states no licence for it."
+    },
+    {
+      "match": "n299.cert.txt",
+      "reason": "A byte-identical text copy of n299.cert (the same Git blob, 20cc8454), which PACKINGS.md offers for attachment hosts; n299.cert is retained once."
+    },
+    {
+      "match": "n130.cert.txt",
+      "reason": "A byte-identical text copy of n130.cert (the same Git blob, f2c7e632), which PACKINGS.md offers for attachment hosts; n130.cert is retained once."
+    },
+    {
+      "match": "n303.cert.txt",
+      "reason": "A byte-identical text copy of n303.cert (the same Git blob, 30147435), which PACKINGS.md offers for attachment hosts; n303.cert is retained once."
+    },
+    {
+      "match": "n130-source-LICENSE.txt",
+      "reason": "Mykhailo Polkovskyi's MIT notice for the certificate n130.cert translates, already retained by the mishapolk-issue732-2026-10-22 packet as its source's LICENSE.",
+      "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/LICENSE"
+    },
+    {
+      "match": "n303-source-LICENSE.md",
+      "reason": "Doğa Özden's licence for the #930 witness the second n303.cert refines, already retained by the ozden-s299-upper-bound-2026-11-03 packet.",
+      "identical_to": "packing/resources/web/ozden-s299-upper-bound-2026-11-03/licence/LICENSE.md"
+    },
+    {
+      "match": "n260.cert",
+      "reason": "Unchanged since e7cab3a and retained, under its CC BY 4.0 grant, by the yim-s260-upper-bound-2026-11-05 packet at d11a8a1.",
+      "identical_to": "packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert"
+    }
+  ]
+}

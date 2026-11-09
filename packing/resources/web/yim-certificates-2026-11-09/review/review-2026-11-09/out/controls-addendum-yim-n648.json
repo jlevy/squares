@@ -1,0 +1,206 @@
+{
+ "program": "l70_controls_addendum.py",
+ "program_digests": {
+  "l70_reader.py": "3b2939a734a2959802458f54b2495673dfb32b1798c478433ff6b135361990fb",
+  "l70_sat.py": "3524406d5f8af4aa7bc8bdb175b146d4b02f1a96ef2b5cadd81a8cce6a9f9d87",
+  "l70_clip.py": "ffb7a2685028a7d2287f9fb91abfbb18ed9581a05a3d4d36e2b4c6da695970f1",
+  "l70_check.py": "4d4dd2e03c8d2898dcae161bd6257d6a2580369431978f0dee82e134e92b25a4",
+  "l70_controls.py": "3a672c8d19666f10f1269e85bdb59340315b1a8e0f52ddc368c420e8f78009bf",
+  "l70_controls_addendum.py": "ff83c179dca602606864ae9f7cac70a5a399f05a7b856c73a6736972f52e85b5",
+  "controls-plan-addendum.json": "9a4630e998638294524c6d26f1d71568ad9438a23041398e50213c3c444e6502"
+ },
+ "label": "yim-n648",
+ "input_sha256": "311438621acf913e48e73c05b5ae09ce9e66b5f322ae1e28eb5c6f76a5512eb5",
+ "controls": [
+  {
+   "id": "S4'c",
+   "what": "the least-margin pair (313, 438) closed along its centre line to contact (square 438 moved), as S4c",
+   "expect": {
+    "verdict": "ACCEPT",
+    "touching_pairs": [
+     [
+      "313",
+      "438"
+     ]
+    ],
+    "overlapping_pairs": [],
+    "outside": []
+   },
+   "got": {
+    "verdict": "ACCEPT",
+    "agree": {
+     "unit": true,
+     "inside": true,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "touching_A": [
+     [
+      "313",
+      "438"
+     ]
+    ],
+    "touching_B": [
+     [
+      "313",
+      "438"
+     ]
+    ],
+    "overlapping_A": [],
+    "overlapping_B": [],
+    "overlap_counts": [
+     0,
+     0
+    ],
+    "A_least_margin": "0",
+    "B_largest_overlap_area": "0",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 41.925
+   },
+   "as_stated": true,
+   "cpu_seconds": 41.926
+  },
+  {
+   "id": "S4'p",
+   "what": "the same, 1e-30 past, as S4p",
+   "expect": {
+    "verdict": "REFUSE",
+    "touching_pairs": [],
+    "overlapping_pairs": [
+     [
+      "313",
+      "438"
+     ]
+    ],
+    "outside": []
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": {
+     "unit": true,
+     "inside": true,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [],
+    "outside_B": [],
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "touching_A": [],
+    "touching_B": [],
+    "overlapping_A": [
+     [
+      "313",
+      "438"
+     ]
+    ],
+    "overlapping_B": [
+     [
+      "313",
+      "438"
+     ]
+    ],
+    "overlap_counts": [
+     1,
+     1
+    ],
+    "A_least_margin": "-2747529822470009163278575960934863653611786585027851513/2747529822469873116737785103034419559203764458536660545000000000000000000000000000000",
+    "B_largest_overlap_area": "0",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 41.232
+   },
+   "as_stated": true,
+   "cpu_seconds": 41.235
+  },
+  {
+   "id": "S7'",
+   "what": "square 313 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+   "expect": {
+    "verdict": "REFUSE",
+    "not_unit": [
+     "313"
+    ],
+    "outside_A": [],
+    "outside_B": [
+     "313"
+    ],
+    "overlapping_pairs": []
+   },
+   "got": {
+    "verdict": "REFUSE",
+    "agree": {
+     "unit": true,
+     "inside": false,
+     "wall_contacts": true,
+     "pair_touch": true,
+     "pair_overlap": true
+    },
+    "outside_A": [],
+    "outside_B": [
+     "313"
+    ],
+    "not_unit_A": [
+     "313"
+    ],
+    "not_unit_B": [
+     "313"
+    ],
+    "touching_A": [],
+    "touching_B": [],
+    "overlapping_A": [],
+    "overlapping_B": [],
+    "overlap_counts": [
+     0,
+     0
+    ],
+    "A_least_margin": "282411382535707133612782045170144725777948285879405658633628183801307208209759123299039127160792315302287188910892232327821261363887567916608879082462806481145870830097306254539687/50728628558220624866760064034448579533258954993086695807832647648921182159349170987551392736086747608461883722928666905271881314497590551822247839147498148273848320000000000000000000000000000000",
+    "B_largest_overlap_area": "0",
+    "contacts_A": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "contacts_B": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "cpu_seconds": 40.626
+   },
+   "as_stated": true,
+   "cpu_seconds": 40.658
+  }
+ ],
+ "every_control_as_stated": true,
+ "cpu_seconds": 123.834
+}

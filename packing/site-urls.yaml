@@ -5579,7 +5579,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-09'
   status: live
 - path: cases/131.html
   canonical: cases/131.html
@@ -23684,6 +23684,87 @@ urls:
     - docs/project/reviews/review-2026-11-09-ozden-927-931-five.md
     - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md
     - packing/resources/web/ozden-s307-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n307.json
+- path: result/t-280.html
+  canonical: result/t-280.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-09'
+  lastmod: '2026-11-09'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 299
+      - 303
+    established: null
+    attribution:
+      source_keys:
+      - '[Yim certificates 2026-11-09]'
+      published: '2026-11-09'
+    builds_on: null
+    evidence:
+    - E-yim-1109-certificate-report
+    artifacts:
+    - packing/resources/web/yim-certificates-2026-11-09/README.md
+    - packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+    - packing/resources/web/yim-certificates-2026-11-09/source/n299.cert
+    - packing/resources/web/yim-certificates-2026-11-09/source/n303.cert
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/exact-certification-n299.json.xz
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/exact-certification-n303.json.xz
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n303.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/identity-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/identity-n303.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n303.json
+    - packing/resources/web/yim-n303-2026-11-09/README.md
+    - packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - docs/project/reviews/review-2026-11-09-yim-vitamoon.md
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n303.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/contract.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/compare-lane.json
+- path: result/t-281.html
+  canonical: result/t-281.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-09'
+  lastmod: '2026-11-09'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 130
+    established: null
+    attribution:
+      source_keys:
+      - '[Yim certificates 2026-11-09]'
+      published: '2026-11-09'
+    builds_on: null
+    evidence:
+    - E-yim-1109-certificate-report
+    artifacts:
+    - packing/resources/web/yim-certificates-2026-11-09/README.md
+    - packing/resources/web/yim-certificates-2026-11-09/acquisition/claims.json
+    - packing/resources/web/yim-certificates-2026-11-09/source/n130.cert
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/exact-certification-n130.json.xz
+    - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n130.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/identity-n130.json
+    - packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n130.json
+    - packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-yim-vitamoon.md
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n130.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/contract.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/compare-lane.json
 - path: result/t-282.html
   canonical: result/t-282.html
   kind: result
@@ -23706,6 +23787,7 @@ urls:
     evidence:
     - E-ozden-935-certificate-report
     - E-ozden-935-exact-feasibility
+    - E-ozden-935-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s172-upper-bound-2026-11-09/README.md
     - packing/resources/web/ozden-s172-upper-bound-2026-11-09/acquisition/claims.json
@@ -23716,6 +23798,10 @@ urls:
     - packing/resources/web/ozden-s172-upper-bound-2026-11-09/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-935-936-20261109/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-ozden-935-936.md
+    - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n172.json
+    - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/out/houses.json
 - path: result/t-283.html
   canonical: result/t-283.html
   kind: result
@@ -23738,6 +23824,7 @@ urls:
     evidence:
     - E-ozden-936-certificate-report
     - E-ozden-936-exact-feasibility
+    - E-ozden-936-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s270-upper-bound-2026-11-09/README.md
     - packing/resources/web/ozden-s270-upper-bound-2026-11-09/acquisition/claims.json
@@ -23748,6 +23835,10 @@ urls:
     - packing/resources/web/ozden-s270-upper-bound-2026-11-09/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-935-936-20261109/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-ozden-935-936.md
+    - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/ozden-s270-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n270.json
+    - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/out/houses.json
 - path: results.html
   canonical: results.html
   kind: page

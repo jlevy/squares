@@ -20379,6 +20379,18 @@ occurrences:
     text and credit role are retained.
   contributor_id: trevor-green
 - origin:
+    path: packing/frontier/n-172.md
+    record_key: '172'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-173.md
     record_key: '173'
     field: /reported_lower_bound/proved_by/0
@@ -23353,6 +23365,18 @@ occurrences:
   note: Reviewed packing/frontier/n-270.md [270] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-270.md
+    record_key: '270'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -31411,6 +31435,148 @@ occurrences:
   expected_text: Ozden after ntumlnoob, Couzo, Daniel, Levy
   start: 38
   end: 42
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /authors/0
+  expected_text: Yim
+  start: 0
+  end: 3
+  label: Yim
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 0
+  end: 3
+  label: Yim
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 10
+  end: 15
+  label: Ozden
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 17
+  end: 23
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 25
+  end: 31
+  label: Deotte
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 33
+  end: 39
+  label: Casson
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 41
+  end: 46
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 48
+  end: 57
+  label: Lavrentev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 59
+  end: 70
+  label: alexchilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 72
+  end: 82
+  label: Polkovskyi
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Yim certificates 2026-11-09]'
+    field: /credit
+  expected_text: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton,
+    Polkovskyi, Levy
+  start: 84
+  end: 88
   label: Levy
   role: prerequisite
   disposition: unresolved
