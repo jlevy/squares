@@ -5,7 +5,7 @@ title: "Import #927-#931: Doğa Özden's five upper bounds, s(232), s(268), s(29
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l63
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T06:57:58.922Z
-updated_at: 2026-11-09T07:49:02.309Z
+updated_at: 2026-11-09T08:34:37.910Z
 started_at: 2026-11-09T06:58:03.414Z
 ---
 Five registration requests opened 2026-11-09T06:03Z by kenaznia-doga for Doğa Özden: #927 s(232) <= 15.761409644882 (repo kenaznia-doga/s232-upper-bound @ 09e324f4, sha256 22b3809e...), #928 s(268) <= 16.872469897837 (s268-upper-bound @ a40a15d9, 74c0e5d4...), #929 s(299) <= 17.801004434256 (s299-upper-bound-17801004 @ a042eab0, dfb0ccf7...), #930 s(303) <= 17.901789273157 (s303-upper-bound @ b43ca090, 9cbeb7a8...), #931 s(307) <= 17.979230960388 (s307-upper-bound @ dbe8838a, cb78adf8...). Witness/v2 files promoted with this repo's packing-witness promote --strategy robust-rational @ 19b354a5; LICENSE.md CC BY 4.0 / MIT. Precedent: #893/#894 (think-8b8m, packets ozden-s204/s299-upper-bound-2026-11-03, review-2026-11-04-ozden-893-894-299-204.md), #914 (seven at once). Stages 0-7 per packing/campaign/result-import.md.
@@ -39,3 +39,5 @@ Stage 3. T-275 (232), T-276 (268), T-277 (299), T-278 (303), T-279 (307), each w
 Adoption NOT done: the house rule's candidate needs an accepted review in the entry's reviews (select_houses.eligible), and check_results refuses a verified lane on a recent result by others without a mapped review. Adoption and both strong generators wait for think-rd0p's review to be mapped.
 
 CPU so far: about 0.8 CPU-hours (certify ~8 min, sharp controls ~31 min, checks rerun ~35 min, identities ~3 min, tests ~5 min).
+
+Update 08:35Z. Draft PR #932 opened (labels intake, S3). Coordinator folded in L64's review c0438c659 (cherry-picked as 9e4da27b1): accepted with findings at all five, F4 minor, S3 (F8). Mapping done in the working tree: V-ozden-1109-review-check, E-ozden-927..931-review-exact-feasibility, reviews blocks (adversarial, accepted), external_review on report and replay evidence, S3 rationale, F4 measured wall account in claims and READMEs, F5/F6/F7/F10/F12 notes, F13 READMEs without the ellipsis, F14 corner reader accepts the atlas schema path and 307 is measured against its view (4 beyond 0.1, 18 beyond 0.01, largest 0.255). Adoption written by adopt_houses (232, 268, 299, 303, 307 to T-275..T-279; prior state 2026-11-09); PRINT_CREDIT_HELD extended to the five counts; strong generators running (grid-slack 0.5/1/5 and evand) into scratchpad/l63/runs.
