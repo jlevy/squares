@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #935, #936 (Özden's s(172), s(270))"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l72-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:59.302Z
-updated_at: 2026-11-09T16:17:38.756Z
+updated_at: 2026-11-09T16:31:08.440Z
 started_at: 2026-11-09T15:55:07.051Z
 ---
 
@@ -53,3 +53,14 @@ controls program exists.
 1826043aaa43b13652f8f9ab378b13a5ea61b225a137616e1af3126385d807cd (23 controls per count: G1-G6, G8, G9,
 S1a-d, S3 L/R/D/U, S4c/p centre line, S5 centre line, S6, S7c/p, S8), stated from the check receipts and
 l72_plan_facts.py (7ef3dcf7...), before l72_controls.py existed.
+
+2026-11-09T16:50Z controls: EVERY_CONTROL_AS_STATED at both counts (23 of 23 each, no miss; G6 reversed
+sense overlaps 66 pairs at 172, 98 at 270). Custody CUSTODY_HOLDS (LICENSE-evand-square-packing.txt is
+blob 52cf89d2, byte-identical to the retained evand LICENSE at both house packets). Sides: claims are
+12-place ceilings; gaps 3.24584509520e-03 (T-257) and 1.36488538957e-05 (T-224), rounded prints as issued.
+Houses ACCEPT on the frozen checker; uniform-contraction margins S*1e-20 (1.3618e-19, 1.6928e-19); gains
+are 2.38e16 and 8.06e13 times them (RV-3 does not reach them). Lineage: issue counts reproduce against the
+house witnesses under the identity. 172: nearest centres miss one to one by one (14,18 share house 14),
+15 beyond 0.1, tilts move between squares (further arrangement, as the 299 precedent). 270: one to one,
+all ids kept, 1 beyond 0.1 (sq 59 straightens 32.3 deg). Pose vs certificate: no dilation, margins the
+pose's own to 7e-37. Next: write the review, freeze findings, then reconcile with L71.
