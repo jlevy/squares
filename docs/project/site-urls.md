@@ -749,7 +749,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/17.html | cases/17.html | record | overview | 2026-10-03 | 2026-10-13 | live |
 | cases/170.html | cases/170.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/171.html | cases/171.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/172.html | cases/172.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/172.html | cases/172.html | record | overview | 2026-10-03 | 2026-11-09 | live |
 | cases/173.html | cases/173.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/174.html | cases/174.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/175.html | cases/175.html | record | overview | 2026-10-03 | 2026-11-05 | live |
@@ -858,7 +858,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/268.html | cases/268.html | record | overview | 2026-10-03 | 2026-11-09 | live |
 | cases/269.html | cases/269.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/27.html | cases/27.html | record | overview | 2026-10-03 | 2026-11-04 | live |
-| cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-10-21 | live |
+| cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-11-09 | live |
 | cases/271.html | cases/271.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/272.html | cases/272.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/273.html | cases/273.html | record | overview | 2026-10-03 | 2026-10-23 | live |
@@ -1420,6 +1420,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-277.html | result/t-277.html | result | overview | 2026-11-09 | 2026-11-09 | live |
 | result/t-278.html | result/t-278.html | result | overview | 2026-11-09 | 2026-11-09 | live |
 | result/t-279.html | result/t-279.html | result | overview | 2026-11-09 | 2026-11-09 | live |
+| result/t-282.html | result/t-282.html | result | overview | 2026-11-09 | 2026-11-09 | live |
+| result/t-283.html | result/t-283.html | result | overview | 2026-11-09 | 2026-11-09 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |
