@@ -3,9 +3,9 @@ type: is
 id: is-01m70ga6b62h1z8an6d5ynxges
 title: "Stage 4 blind review of #935, #936 (Özden's s(172), s(270))"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 10
 delegate: bold-ritchie-l72-review
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:59.302Z
-updated_at: 2026-11-09T16:55:16.656Z
+updated_at: 2026-11-09T16:56:12.007Z
 started_at: 2026-11-09T15:55:07.051Z
+closed_at: 2026-11-09T16:56:12.007Z
+close_reason: "Blind stage-4 review of #935/#936 done: both accepted (F15 minor on L71's wording, rest notes); clean-room checker ACCEPT; LANE_EQUALS_REVIEW; branch claude/bold-ritchie-xo28us-l72-review head 7f4301070, to be folded into L71's PR (think-he66)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
