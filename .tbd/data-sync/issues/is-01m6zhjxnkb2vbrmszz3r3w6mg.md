@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #927-#931 (Özden's five upper bounds)"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 9
 delegate: bold-ritchie-l64-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T06:57:59.474Z
-updated_at: 2026-11-09T07:33:49.270Z
+updated_at: 2026-11-09T08:07:38.132Z
 started_at: 2026-11-09T06:58:03.800Z
 ---
 Blind stage-4 mathematical review with a clean-room exact checker, frozen findings and SHA-256 before reading the import lane's work; precedent review-2026-11-04-ozden-893-894-299-204.md and review-2026-11-05-evand-914-seven.md.
@@ -45,3 +45,15 @@ L64 (bold-ritchie-l64-review), stage 4 blind review of #927-#931.
 - Sides: each claim is the 12-place ceiling; gaps match the issues' 4-digit prints.
 - 07:24:31Z: controls plan stated before any control ran: controls-plan.json, SHA-256
   d5e090ad8d436e22bdb982f2313f99e129b6235c692ce547a46b6301a2633927 (19 controls/file).
+- 07:58Z: all controls decided. First plan: every verdict as stated at all five; details
+  missed only at S1b (232) and S5 (all five, construction). Addendum: S4', S5' (2,641
+  near pairs closed along centre lines) and the S5 diagnosis as stated at all five
+  (axis lines miss 28/91/123/5/238 pairs). Houses ACCEPT by the frozen checker; gaps
+  exceed every house's scale slack by >= 5.7e8. Lineage: all five one to one with the
+  house under the identity by assignment (299: nearest one short, bottom row slides
+  0.642); issues' counts match the house; their "tilted" is beyond 0.5 deg.
+- 08:07:30Z: FINDINGS FROZEN before reading anything of L63 (branch, PR, notes, packets),
+  sqcheck.py or this repository's sqpack verifier/promote code. Frozen document
+  review-2026-11-09-ozden-927-931-five.frozen.md, 712 lines, 47,124 bytes, SHA-256
+  222929e07ce91629f049581485823ace65c719773f036d21ccb367b975551a2b.
+  Verdicts: accept at all five; F1-F12 all notes; significance S3 at all five.
