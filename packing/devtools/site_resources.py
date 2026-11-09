@@ -292,6 +292,22 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s172-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Evan Daniel's packing at 172, 3.25e-3 below it;"
+            " replayed here, review pending (T-282)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s270-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Evan Daniel's packing at 270, one to one with it,"
+            " 1.36e-5 below it; replayed here, review pending (T-283)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

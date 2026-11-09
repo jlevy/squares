@@ -85,3 +85,23 @@ deferrals:
     reason: The same configuration at 297 decided on sqpack's exact verifier over its field (route 1
       of route B, think-ozx8); cited with route B's verify_exact.py run when the house adopts T-247
       (think-vv1q owns that adoption).
+  - evidence: E-ozden-935-exact-feasibility
+    results:
+    - T-282
+    bead: think-he66
+    blocked_on: think-qqyg
+    recorded: '2026-11-09'
+    reason: 'Both maintained exact routes'' complete replay of Özden''s #935 certificate at 172, which
+      T-282 cites at V3/C3. n-172 cites it when the house adopts T-282 in place of T-257, which the house
+      rule holds until the stage 4 review (think-qqyg), written in a separate blind lane (L72), is mapped
+      with an accepted verdict; intake lane L71 (think-he66) owns that adoption.'
+  - evidence: E-ozden-936-exact-feasibility
+    results:
+    - T-283
+    bead: think-he66
+    blocked_on: think-qqyg
+    recorded: '2026-11-09'
+    reason: 'Both maintained exact routes'' complete replay of Özden''s #936 certificate at 270, which
+      T-283 cites at V3/C3. n-270 cites it when the house adopts T-283 in place of T-224, which the house
+      rule holds until the stage 4 review (think-qqyg), written in a separate blind lane (L72), is mapped
+      with an accepted verdict; intake lane L71 (think-he66) owns that adoption.'

@@ -31416,6 +31416,114 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s172 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s172 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s172 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s172 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 20
+  end: 24
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
+  start: 20
+  end: 35
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
+  start: 37
+  end: 41
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
