@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #935, #936 (Özden's s(172), s(270))"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l72-review
 labels:
   - intake
@@ -15,6 +15,24 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:59.302Z
-updated_at: 2026-11-09T15:55:07.051Z
+updated_at: 2026-11-09T16:05:21.026Z
 started_at: 2026-11-09T15:55:07.051Z
 ---
+
+## Notes
+
+L72 (bold-ritchie-l72-review), stage 4 blind review of #935 (s(172)) and #936 (s(270)).
+
+2026-11-09T15:56Z start. Branch claude/bold-ritchie-xo28us-l72-review cut from origin/main ef1af4933.
+Clones (untrusted, nothing run from them): kenaznia-doga/s172-upper-bound @ 2ce1f7c7 (tree d9ae3f41),
+kenaznia-doga/s270-upper-bound @ 78ab8cec (tree 5eaba28c); one parentless commit each.
+Certificate SHA-256s equal the issues': 0df5ae79... (172), f2b62bf0... (270).
+Houses read from main: T-257 at 172 (2723587139676283080823463207799/2e29), T-224 at 270
+(16928162252196750114897964982713/1e30).
+Read so far: precedent review-2026-11-09-ozden-927-931-five.md (document and packet README only,
+not its programs), result-import.md stage 4, witness.schema.yaml, the issues, the author READMEs,
+printed outputs and certificate/pose files as data.
+Not read (clean room until the checker freeze): author verifier/sqcheck.py and verifier/README.md,
+any sqpack witness/verifier/promotion code, devtools tools, the precedent's l64_* programs, L71.
+Next: write the clean-room checker (reader; method A separating axes in Fraction; method B clipped
+areas in gmpy2.mpq; self-test), freeze it by SHA-256.
