@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #935, #936 (Özden's s(172), s(270))"
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l72-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:59.302Z
-updated_at: 2026-11-09T16:42:59.359Z
+updated_at: 2026-11-09T16:55:16.656Z
 started_at: 2026-11-09T15:55:07.051Z
 ---
 
@@ -71,3 +71,11 @@ SHA-256 26df28bbf7a6c452284fa11bebbc5018c581e9248f0ff13eb09188c086058d58.
 Verdicts: accepted at both counts; F1-F14 all notes. S3 at 172; S2 at 270 (borderline, inside the
 1.15e-5..1.88e-5 band; S3 alternative stated). Final run: ALL_RECEIPTS_MATCH, ~578 CPU-s.
 Next: read L71's branch claude/bold-ritchie-xo28us-l71 and reconcile in a separate section.
+
+2026-11-09T17:0xZ DONE. Branch claude/bold-ritchie-xo28us-l72-review pushed: 07bc1fc20 (review as frozen),
+133a73572 (reconciliation with L71 @ 3e81f5d01, compare-lane.json LANE_EQUALS_REVIEW), 7f4301070 (F15 wording).
+Reconciliation: L71's replays, identity counts, padding (house and own margins) and draft scores (S3 172,
+S2 270) equal this review's. New F15 minor (records): L71's 172 draft "reverses 9 tilts" / "9 to the other
+side of upright" / "36 one way and 13 the other" are near-45-degree sign conventions (9 squares turn
+0.79-1.18 deg; 44 of 49 tilted squares within 1 deg of 45). Verdicts unchanged: accepted at both.
+Packet names match L71's. No PR, no merge, no GitHub comments. Bead left in_progress for the coordinator.
