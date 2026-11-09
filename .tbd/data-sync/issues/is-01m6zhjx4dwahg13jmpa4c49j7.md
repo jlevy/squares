@@ -5,7 +5,7 @@ title: "Import #927-#931: Doğa Özden's five upper bounds, s(232), s(268), s(29
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l63
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T06:57:58.922Z
-updated_at: 2026-11-09T10:43:18.108Z
+updated_at: 2026-11-09T10:59:49.667Z
 started_at: 2026-11-09T06:58:03.414Z
 ---
 Five registration requests opened 2026-11-09T06:03Z by kenaznia-doga for Doğa Özden: #927 s(232) <= 15.761409644882 (repo kenaznia-doga/s232-upper-bound @ 09e324f4, sha256 22b3809e...), #928 s(268) <= 16.872469897837 (s268-upper-bound @ a40a15d9, 74c0e5d4...), #929 s(299) <= 17.801004434256 (s299-upper-bound-17801004 @ a042eab0, dfb0ccf7...), #930 s(303) <= 17.901789273157 (s303-upper-bound @ b43ca090, 9cbeb7a8...), #931 s(307) <= 17.979230960388 (s307-upper-bound @ dbe8838a, cb78adf8...). Witness/v2 files promoted with this repo's packing-witness promote --strategy robust-rational @ 19b354a5; LICENSE.md CC BY 4.0 / MIT. Precedent: #893/#894 (think-8b8m, packets ozden-s204/s299-upper-bound-2026-11-03, review-2026-11-04-ozden-893-894-299-204.md), #914 (seven at once). Stages 0-7 per packing/campaign/result-import.md.
@@ -43,3 +43,5 @@ CPU so far: about 0.8 CPU-hours (certify ~8 min, sharp controls ~31 min, checks 
 Update 08:35Z. Draft PR #932 opened (labels intake, S3). Coordinator folded in L64's review c0438c659 (cherry-picked as 9e4da27b1): accepted with findings at all five, F4 minor, S3 (F8). Mapping done in the working tree: V-ozden-1109-review-check, E-ozden-927..931-review-exact-feasibility, reviews blocks (adversarial, accepted), external_review on report and replay evidence, S3 rationale, F4 measured wall account in claims and READMEs, F5/F6/F7/F10/F12 notes, F13 READMEs without the ellipsis, F14 corner reader accepts the atlas schema path and 307 is measured against its view (4 beyond 0.1, 18 beyond 0.01, largest 0.255). Adoption written by adopt_houses (232, 268, 299, 303, 307 to T-275..T-279; prior state 2026-11-09); PRINT_CREDIT_HELD extended to the five counts; strong generators running (grid-slack 0.5/1/5 and evand) into scratchpad/l63/runs.
 
 Update 10:45Z. Pushed 446162672 (review mapping + adoption, 9 November pass) and be908e519 (DATA_REVISION 44616267). Hosted CI on be908e519 failed on derived records the adoption moves (bound citations, composite figure, X049 censuses, custody receipt, 574 algebraic claim record, closed-form paragraph order, screen pins, settled-runs copies) and on tests pinning earlier passes' houses; the workbench build refused the stale bound citations. All derived again with their own tools and the tests re-pinned, following L51 (e81a800f1); the sixteen failing touched tests pass locally (16 passed in 47 s). Third no-public-change record for the explainer (bound citations, validate.py): only the live register count moves (274 -> 279).
+
+Update 11:00Z. Pushed b8d7d84a2 (derived records and test pins) and ca15c0b3e (DATA_REVISION b8d7d84a). Hosted CI on ca15c0b3e: packing-required and pages-required green. PR #932 body updated (cost block leading, review's 1.0 CPU-hour included, validation filled). Draft; not merged, not marked ready; nothing posted on #927-#931. Lane CPU about 6 CPU-hours plus the review's 1.0.
