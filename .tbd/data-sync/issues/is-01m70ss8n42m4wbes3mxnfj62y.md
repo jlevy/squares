@@ -5,14 +5,16 @@ title: Register or settle Evan Daniel's certified solves below T-282 (172) and T
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - validation
   - regularization
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
+hold: blocked
+hold_until: null
 created_at: 2026-11-09T18:40:30.371Z
-updated_at: 2026-11-09T18:40:30.371Z
+updated_at: 2026-11-09T19:42:22.874Z
 ---
 The adoption of 9 November 2026 (think-he66, PR #937) ran both strong generators on T-282's (172) and T-283's (270) new witnesses. Evan Daniel's regularizer solved each witness to a certified KKT point below its side, by 2.63e-12 at 172 and 3.25e-12 at 270 (about each certificate's own uniform-contraction margin, 2.53e-12 and 3.21e-12), and the selection held each at policy row 3 as a register candidate: register and review first, never admitted by the layer.
 
@@ -26,3 +28,8 @@ At 270 nothing else was drawable: grid-slack's three views were refused at row 7
 - Depends on: think-ikku.
 - Done when: the views are registered and decided, or the owner rules them restatements; 270 is drawn regularized or its settlement says why not.
 - Machine note: light.
+
+## Notes
+
+2026-11-09 coordinator: registering Daniel's certified solves below T-282 (2.635e-12; certificate margin 2.533e-12) and T-283 (3.253e-12; margin 3.212e-12) also waits on the owner's RV-3 answer, like think-5c9z for T-275..T-279.
+blocked_on: think-ruu2, think-ikku
