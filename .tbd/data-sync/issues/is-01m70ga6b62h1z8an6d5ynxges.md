@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #935, #936 (Özden's s(172), s(270))"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l72-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:59.302Z
-updated_at: 2026-11-09T16:05:21.026Z
+updated_at: 2026-11-09T16:12:20.847Z
 started_at: 2026-11-09T15:55:07.051Z
 ---
 
@@ -36,3 +36,11 @@ Not read (clean room until the checker freeze): author verifier/sqcheck.py and v
 any sqpack witness/verifier/promotion code, devtools tools, the precedent's l64_* programs, L71.
 Next: write the clean-room checker (reader; method A separating axes in Fraction; method B clipped
 areas in gmpy2.mpq; self-test), freeze it by SHA-256.
+
+2026-11-09T16:12:07Z CHECKER FROZEN. frozen/checker-frozen-digests.txt SHA-256
+a77b067df7ff1e152c965ac33fc0289d082e606f1a8c93355728a3356ce3c411; six files:
+l72_util.py 7815f7a5..., l72_reader.py 76eec736..., l72_sat.py a565ecf5..., l72_clip.py 4a450e32...,
+l72_check.py a6c8edeb..., l72_selftest.py 5c7ba446.... Self-test PASSED (80 cases). One timing run on
+172 before the freeze: ACCEPT, 9.9 s (contacts 46 left, 85 bottom, 161 right; least pair 2.008e-13 at 36,38).
+Next: final self-test and checks of both files; then the controls plan, stated and hashed before the
+controls program exists.
