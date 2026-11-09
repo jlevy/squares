@@ -60,6 +60,9 @@ one with T-272’s packing under the identity by nearest centres; 5 squares move
 0.1 (largest 0.145), 83 beyond 0.01, and turns reach 19.0 degrees. It is a further
 arrangement of T-272’s packing, one to one with it. Against T-278’s packing, and the house
 witness that is now T-278’s, it is a sibling: one to one, 9 squares beyond 0.1.
+The [stage 4 review of 9 November](../../../../docs/project/reviews/review-2026-11-09-yim-vitamoon.md)
+finds it valid and adds that it keeps all 303 of T-272’s ids, where T-278 renumbers 11:
+it is nearer T-272, as its source says (the review’s F6 and F15).
 
 ## Exact Replay
 

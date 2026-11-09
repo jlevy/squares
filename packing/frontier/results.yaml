@@ -41458,7 +41458,7 @@ results:
       - 299
       - 303
     verification: V0
-    confirmation: C0
+    confirmation: C1
     significance:
       score: 1
       rationale: >-
@@ -41467,7 +41467,9 @@ results:
         (3.40e-12): the certificates' padding, as T-260's (S1) is, though across the print. No
         new arrangement, lower bound or optimum.
       scored: '2026-11-09'
-      by: think-h96r, the import lane L65's draft, for the stage 4 review to confirm or change
+      by: >-
+        the stage 4 review of 9 November (docs/project/reviews/review-2026-11-09-yim-vitamoon.md),
+        lane L70 (think-i5a5), F12, confirming the import lane L65's draft S1 (think-h96r)
     novelty: previously-published
     attribution:
       source_keys:
@@ -41492,12 +41494,21 @@ results:
     - packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
+    - docs/project/reviews/review-2026-11-09-yim-vitamoon.md
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n303.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/contract.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l65_1109.py
     - packing/tests/test_contraction_margin.py
     - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n299.json
     - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n303.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/controls-yim-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/controls-yim-n303.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/controls-addendum-yim-n299.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/controls-addendum-yim-n303.json
     notes: >-
       A separate complete repository replay is retained for the source's fourteen
       certificates, these two among them: 14 positives and 28 duplicate-square and
@@ -41523,10 +41534,21 @@ results:
       the identity, 120 squares move beyond 1e-9 and none beyond 1e-3 (largest 4.25e-4), and
       36 turn by more than 1e-6 radians, by up to 0.017 degrees, with the same tilt classes;
       at 303 every square lies within 4.39e-12 of T-278's and no turn exceeds 5.3e-13
-      degrees. Uniform contraction of each house certificate to first contact, decided again
-      on both maintained routes (measure/contraction-nNNN.json), reaches 3.40e-12 below its
-      side at both counts, below each of these certificates, 2.22e-12 at 299 and 1.11e-13 at
-      303.
+      degrees.
+
+      The padding (measure/contraction-nNNN.json; RV-3): uniform contraction of each house
+      certificate to first contact, with no square re-solved and the contracted packing
+      decided again on both maintained routes, takes T-277 down by 3.403992e-12, to
+      17.801004434251889681..., and T-278 by 3.402014e-12, to 17.901789273153088317.... Each
+      gain is a share of that margin, 0.3472 at 299 and 0.9674 at 303, so each contracted
+      house lies below the certificate here, by 2.22e-12 at 299 and 1.11e-13 at 303. The
+      precedents measure the same way: T-259 over Couzo's #843 at 0.9193, and T-265 over T-257
+      at 9.9679 (measure/precedent-contraction-*.json).
+
+      The certificate the source first published at 303, which it later overwrote, keeps every
+      id of T-272's packing and lies nearer it than T-278's (5 squares beyond a tenth against
+      9), as its source says; it is 1.39e-10 above T-278 and makes no row (the review's F6 and
+      F15).
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
@@ -41534,17 +41556,50 @@ results:
       method; the author reports running both, at a revision of this repository whose route
       code is unchanged since, so the replay reproduces the producer's own checks. No two
       independent methods, human oversight or optimality is claimed.
+
+      The stage 4 review of 9 November 2026 (docs/project/reviews/review-2026-11-09-yim-vitamoon.md, think-i5a5),
+      written in a separate lane blind to this one until its findings were frozen, accepts
+      both certificates for finite feasibility: its clean-room checker decides every square, wall and
+      pair by separating axes in Fraction and by exact clipped areas in gmpy2.mpq, the two
+      agreeing everywhere, and its controls, stated in advance with an addendum, came out as
+      stated. Its contraction margins equal this lane's exactly (LANE_AGREES_EXACTLY). Its F4
+      (major, the owner's decision, not blocking) is the padding measure above; it recommends
+      the hold stay until the owner answers, and the review is mapped here now, at C1, with the
+      replay and its own run not entered, as T-260's are.
     next_rung: >-
       Held for the owner's question (think-ruu2's RV-3, with think-ikku): whether a
       re-certification within the earlier certificate's own padding is a new result. If it is
-      not, the entry is withdrawn and both houses stay; if it is, the replay is entered, the
-      separate stage 4 review is mapped, both rungs rise to V3 and C3, and each count is
-      adopted under the house rule with both strong generators' regularization. The stage 4
-      review is a separate blind lane, which maps its record under `reviews` here.
+      not, the entry is withdrawn and both houses stay; if it is, the replay and the review's
+      clean-room run are entered, both rungs rise to V3 and C3, and each count is adopted
+      under the house rule with both strong generators' regularization. The stage 4 review of
+      9 November is mapped now, at C1, as T-260's is; only the evidence and the adoption wait
+      on the owner.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-09-yim-vitamoon.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong-max at maximum reasoning), the stage 4
+        mathematical review lane of Kaelan Yim's vitamoon certificates (L70, think-i5a5),
+        prompted separately from the import lane (L65, think-h96r) and blind to its work until
+        its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-09'
+      scope: >-
+        Finite feasibility of the fifteen certificates, decided again by a clean-room exact
+        checker frozen before any repository verifier code was read, by two methods with
+        controls stated in advance and an addendum; and RV-3's padding shares measured, each
+        predecessor certificate's uniform-contraction margin against each gain. Whether a gain
+        within the padding is a result is the owner's question.
+      verdict: accepted
+      covers:
+      - T-280
+      - T-281
     unfinished_confirmations:
     - what: >-
         The owner's answer to RV-3 (think-ruu2, think-ikku); then, if the counts stay recorded,
-        the replay already run, entered with the separate stage 4 review as the stage 4 exit
+        the replay and the review's clean-room run, both already retained, entered as the stage
+        4 exit
       rung: C3
       link: think-ruu2
       estimated_cost:
@@ -41552,7 +41607,7 @@ results:
         cpu_hours_high: 0.2
         basis: >-
           the replay and the sharp controls ran on 9 November and their receipts are retained;
-          what remains is the review's own checker at two counts and records work
+          so is the stage 4 review's run; what remains is records work
         priced: '2026-11-09'
     regularizations:
     - n: 299
@@ -41597,7 +41652,8 @@ results:
       It is T-259's certificate, Mykhailo Polkovskyi's re-solve of Francisco Couzo's #843
       packing, moved as one: every square translated by the same
       (-4969999999999999/5*10^29, -9889999999999997/10^30), every half-angle tangent
-      unchanged, and the box lowered to the packing's extent plus 1e-30, as the source says
+      unchanged, and the box lowered to the packing's extent plus 2e-30, the packing 1e-30 off
+      the bottom and left walls and clearing the top by 1e-30, as the source says
       ("only a common translation and the containing-box size change").
 
       It is a sub-print re-certification of the house certificate, in the words of the owner's
@@ -41620,7 +41676,7 @@ results:
       n_values:
       - 130
     verification: V0
-    confirmation: C0
+    confirmation: C1
     significance:
       score: 1
       rationale: >-
@@ -41628,7 +41684,9 @@ results:
         the packing moved as one and the box lowered to its extent, the certificate's padding,
         as T-260's (S1) is. No lower bound or optimum.
       scored: '2026-11-09'
-      by: think-h96r, the import lane L65's draft, for the stage 4 review to confirm or change
+      by: >-
+        the stage 4 review of 9 November (docs/project/reviews/review-2026-11-09-yim-vitamoon.md),
+        lane L70 (think-i5a5), F12, confirming the import lane L65's draft S1 (think-h96r)
     novelty: previously-published
     attribution:
       source_keys:
@@ -41646,10 +41704,16 @@ results:
     - packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n130.json
     - packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-yim-vitamoon.md
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n130.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/contract.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l65_1109.py
     - packing/resources/web/yim-certificates-2026-11-09/receipts/sharp-controls-n130.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/controls-yim-n130.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/controls-addendum-yim-n130.json
     notes: >-
       The packet's replay decided this certificate with the other thirteen (T-280's notes):
       both routes accept it and refuse its controls; the least wall clearance is exactly 1e-30
@@ -41666,24 +41730,59 @@ results:
 
       Measured pose by pose (measure/identity-n130.json; a measurement, which decides
       nothing): nearest centres pair it one to one with T-259's packing under the identity,
-      no square moves beyond 1e-9 (largest 1.51e-14) and none turns. Uniform contraction of
-      T-259's certificate (measure/contraction-n130.json) reaches 2.18e-13 below its side,
-      equal to the 31 October review's retained figure, and lies 1.99e-13 below this
-      certificate. A packing at that contracted side is this project's own held candidate
-      (think-ruu2), not a report.
+      no square moves beyond 1e-9 and none turns; the common translation is exactly
+      1.402e-14 long (1.51e-14 as the binary64 assignment reads it; the review's F14).
+
+      The padding (measure/contraction-n130.json; RV-3): uniform contraction of T-259's
+      certificate to first contact takes it down by 2.183057e-13, to
+      11.902430645982047452..., equal to the 31 October review's retained figure. The gain
+      here is 0.0896 of that margin, so the contracted T-259 lies 1.99e-13 below this
+      certificate; a packing at that side is this project's own held candidate (think-ruu2),
+      not a report.
+
+      The stage 4 review of 9 November 2026 (docs/project/reviews/review-2026-11-09-yim-vitamoon.md, think-i5a5),
+      written in a separate lane blind to this one until its findings were frozen, accepts
+      the certificate for finite feasibility: its clean-room checker decides every square, wall and
+      pair by separating axes in Fraction and by exact clipped areas in gmpy2.mpq, the two
+      agreeing everywhere, and its controls, stated in advance with an addendum, came out as
+      stated. Its contraction margins equal this lane's exactly (LANE_AGREES_EXACTLY). Its F4
+      (major, the owner's decision, not blocking) is the padding measure above; it recommends
+      the hold stay until the owner answers, and the review is mapped here now, at C1, with the
+      replay and its own run not entered, as T-260's are.
     next_rung: >-
       Held for the owner's question (think-ikku's RV-1, with think-oqjd and think-ruu2's
       RV-3): whether the 23 October restatement ruling reaches counts inside the corpus, and
       another holder's re-certification. If it does, the entry is withdrawn and no house
-      moves; if it does not, the replay is entered, the separate stage 4 review is mapped,
-      both rungs rise to V3 and C3, and 130 is adopted under the house rule with both strong
-      generators' regularization. The stage 4 review is a separate blind lane, which maps its
-      record under `reviews` here.
+      moves; if it does not, the replay and the review's clean-room run are entered, both
+      rungs rise to V3 and C3, and 130 is adopted under the house rule with both strong
+      generators' regularization. The stage 4 review of 9 November is mapped now, at C1, as
+      T-260's is; only the evidence and the adoption wait on the owner.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-09-yim-vitamoon.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong-max at maximum reasoning), the stage 4
+        mathematical review lane of Kaelan Yim's vitamoon certificates (L70, think-i5a5),
+        prompted separately from the import lane (L65, think-h96r) and blind to its work until
+        its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-09'
+      scope: >-
+        Finite feasibility of the fifteen certificates, decided again by a clean-room exact
+        checker frozen before any repository verifier code was read, by two methods with
+        controls stated in advance and an addendum; and RV-3's padding shares measured, each
+        predecessor certificate's uniform-contraction margin against each gain. Whether a gain
+        within the padding is a result is the owner's question.
+      verdict: accepted
+      covers:
+      - T-280
+      - T-281
     unfinished_confirmations:
     - what: >-
         The owner's answer to think-ikku's RV-1 (and think-oqjd); then, if the count stays
-        recorded, the replay already run, entered with the separate stage 4 review as the stage
-        4 exit
+        recorded, the replay and the review's clean-room run, both already retained, entered as
+        the stage 4 exit
       rung: C3
       link: think-ikku
       estimated_cost:
@@ -41691,7 +41790,7 @@ results:
         cpu_hours_high: 0.05
         basis: >-
           the replay and the sharp controls ran on 9 November and their receipts are retained;
-          what remains is the review's own checker at one count and records work
+          so is the stage 4 review's run; what remains is records work
         priced: '2026-11-09'
     regularizations:
     - n: 130
@@ -41699,14 +41798,14 @@ results:
       by: '[Yim certificates 2026-11-09]'
       method: >-
         T-259's certificate under one common translation, with the box lowered to the packing's
-        extent plus 1e-30, as the source states
+        extent plus 2e-30, as the source states
       side: solved
       identity:
         basis: measured
         measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n130.json
         one_to_one: true
         moved: 0
-        max_move: 1.50729e-14
+        max_move: 1.402e-14
         max_turn_deg: 0.0
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's

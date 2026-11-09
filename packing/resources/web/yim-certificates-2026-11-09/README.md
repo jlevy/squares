@@ -210,23 +210,74 @@ walks the four publications in commit order, from starts frozen at `main` `adca8
 It records every claim but the first n303, which #930 holds:
 
 - **553 to 700.** Eleven current beyond-horizon rows of this source, each superseding the
-  row of couzo-issue763-2026-10-23 or, at 604, couzo-43f666c-2026-10-24.
+  row of couzo-issue763-2026-10-23 or, at 604, couzo-43f666c-2026-10-24. They are not
+  held: each is verified, by the replay above (E-yim-1109-exact-feasibility) and by the
+  stage 4 review’s clean-room run (E-yim-1109-review-exact-feasibility).
 - **299 and 303.** [T-280](../../../frontier/RESULTS.md), recorded as re-solves of T-277’s
   and T-278’s packings, credited to their finders, with Yim credited for the re-solve as a
   regularization. Each gain lies within its house certificate’s padding. Whether such a
   re-certification is a new result is the owner’s open question (think-ruu2’s RV-3, with
-  think-ikku), so T-280 is held below the stage 4 exit, at V0/C0, its replay not entered,
-  and neither house moves.
+  think-ikku), so T-280 is held below the stage 4 exit at V0/C1, with the stage 4 review
+  mapped and its replay not entered, and neither house moves.
 - **130.** [T-281](../../../frontier/RESULTS.md), a sub-print re-certification of T-259 in
   the restatement ruling’s words, which the record applies beyond the corpus only. It is
-  held at V0/C0 for think-ikku’s RV-1 (and think-oqjd), as T-260 is, and the house does
-  not move.
+  held at V0/C1 for think-ikku’s RV-1 (and think-oqjd) and RV-3, as T-260 is, with the
+  review mapped, and the house does not move.
+
+## Stage 4 Review
+
+The [stage 4 review of 9 November](../../../../docs/project/reviews/review-2026-11-09-yim-vitamoon.md)
+(lane L70, think-i5a5) was written in a separate lane, blind to this one until its
+findings were frozen. Its programs, frozen inputs and receipts are under
+[`review/review-2026-11-09/`](review/review-2026-11-09/README.md).
+It finds all fifteen certificates valid: a clean-room checker decided each by separating
+axes in `Fraction` and by exact clipped areas in `gmpy2.mpq`, the two agreeing at every
+square, wall and pair, with controls stated in advance and an addendum.
+Its contraction margins equal this packet’s exactly.
+
+It is mapped now under `reviews` on T-280 and T-281 and under the report evidence’s
+`external_review`, which lifts both to C1 and no further. The replay and the review’s run
+enter their evidence, and adoption to V3/C3 follows, only when the owner answers RV-3
+(and, for 130, RV-1). Above the corpus nothing waits: the eleven rows cite both runs.
+
+The padding the review measured (its F4, the owner’s question), each predecessor
+certificate contracted uniformly to first contact:
+
+| n | Predecessor | Its margin | Gain’s share | Contracted below this certificate by |
+| --- | --- | --- | --- | --- |
+| 299 | T-277 | $3.403992 \times 10^{-12}$ | 0.3472 | $2.22 \times 10^{-12}$ |
+| 303 | T-278 | $3.402014 \times 10^{-12}$ | 0.9674 | $1.11 \times 10^{-13}$ |
+| 130 | T-259 | $2.183057 \times 10^{-13}$ | 0.0896 | $1.99 \times 10^{-13}$ |
+
+The precedents measure the same way: T-259 over Couzo’s #843 at 0.9193, and T-265 over
+T-257 at 9.9679 (`measure/precedent-contraction-*.json`).
+
+The review also corrects two records here (its F14 and F15). T-281’s box is the extent
+plus $2 \times 10^{-30}$, with the packing $10^{-30}$ off the bottom and left walls and
+clearing the top by $10^{-30}$, and its common translation is exactly
+$1.402 \times 10^{-14}$ long. The first n303 keeps every one of T-272’s ids and lies
+nearer T-272 than T-278, as its source says.
+
+## Questions for the Author
+
+There is no issue to post these to. The review asks them for whoever next writes to the
+author; none bears on a verdict.
+
+1. **The padding.** Did the continuations at 299 and 303 start from the promoted
+   coordinates of #929 and #930, with their pair margins of about $2 \times 10^{-13}$?
+2. **The strict margins.** Are the $10^{-30}$ pair and wall margins at 299 and 130, and
+   the $5 \times 10^{-31}$ walls above the corpus, the rationalization’s strict padding,
+   as `strict_wall_padding` says at 130?
+3. **The 299 licence notice.** The 303 carries Özden’s CC BY 4.0 notice; would the author
+   add one for the 299?
+4. **The first n303.** Which packing did its search start from?
+5. **The AI system.** Which model family does Hermes Agent use?
 
 ## What Is Not Established
 
-- **A stage 4 review.** None is retained. A separate blind lane reviews T-280 and T-281;
-  its record maps under each entry’s `reviews` and its read under the report evidence’s
-  `external_review`, which lifts each to C1 and no further while the holds stand.
+- **The stage 4 exit.** The review is mapped, but the replay and the review’s run are
+  not entered on T-280 and T-281, which stay at V0/C1 until the owner answers RV-3 (and
+  RV-1 for 130).
 - **Human oversight.** No human oversight record is retained.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.

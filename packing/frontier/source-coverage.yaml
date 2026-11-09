@@ -12535,6 +12535,8 @@ sources:
   - resources/web/yim-certificates-2026-11-09/acquisition/beyond-horizon-claims.json
   evidence:
   - E-yim-1109-certificate-report
+  - E-yim-1109-exact-feasibility
+  - E-yim-1109-review-exact-feasibility
   notes: >-
     Kaelan Yim's 14 certificates at the head ac14112 of his watched profile repository, which no
     issue reports, retained as factual data and each admitted only where its exact side rounds up
@@ -12544,9 +12546,12 @@ sources:
     frozen at main adca8d352, records every other certificate. Above the corpus the 11 sides at 553 to
     700 are current beyond-horizon rows, 3.63e-06 to 1.72e-03 below the rows of couzo-issue763-2026-10-23
     and, at 604, couzo-43f666c-2026-10-24, which they supersede; both maintained routes accept all 14
-    certificates and refuse their gross and sharp controls (the packet's receipts). Inside it T-280
-    (299, 303) and T-281 (130) record the reports, held below the stage 4 exit for the owner's
-    questions (think-ruu2's RV-3, think-ikku); no house moves.
+    certificates and refuse their gross and sharp controls (the packet's receipts), and the stage 4
+    review of 9 November (docs/project/reviews/review-2026-11-09-yim-vitamoon.md) decides all fifteen
+    again by a clean-room checker; the eleven rows are verified from E-yim-1109-exact-feasibility and
+    E-yim-1109-review-exact-feasibility. Inside it T-280 (299, 303) and T-281 (130) record the
+    reports, the review mapped, held at V0/C1 for the owner's questions (think-ruu2's RV-3,
+    think-ikku); no house moves.
   claims_record: resources/web/yim-certificates-2026-11-09/acquisition/beyond-horizon-claims.json
 selected_overrides:
 - n: 29
@@ -31205,77 +31210,77 @@ beyond_horizon_claims:
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '23.969145238668'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 599
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '24.936479681246'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 600
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '24.951090275321'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 601
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '24.958070476928'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 602
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '24.981298949631'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 604
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '24.995880488226'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 645
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '25.881385537401'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 647
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '25.899272968790'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 648
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '25.908803576981'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 699
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '26.907311118315'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 - n: 700
   source_id: yim-certificates-2026-11-09
   claim: upper-bound
   value: '26.908036102718'
-  assurance: reported
+  assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
 pending_catalogue_intake: []

@@ -9,9 +9,9 @@ source's own digest list against the retained files, each print against its exac
 the record each certificate is compared with, the ledger's verdicts, the retained sharp
 controls, the identity and contraction measurements the register's notes cite, and the
 holds: T-280 (299, 303) and T-281 (130) stay below the stage 4 exit for the owner
-(think-ruu2's RV-3, think-ikku) and no case moves, while the eleven sides above the
-corpus are current beyond-horizon rows. Every test reads the packets, the ledger and the
-record only; none needs the network.
+(think-ruu2's RV-3, think-ikku), at C1 with the stage 4 review mapped and no case moved,
+while the eleven sides above the corpus are current, verified beyond-horizon rows. Every
+test reads the packets, the ledger and the record only; none needs the network.
 """
 
 from __future__ import annotations
@@ -35,6 +35,7 @@ MAIN = "yim-certificates-2026-11-09"
 FIRST = "yim-n303-2026-11-09"
 LEDGER = reports.ROOT / "campaign/issue-intake/upper-bounds-yim-certificates-20261109"
 SOURCE_KEY = "[Yim certificates 2026-11-09]"
+REVIEW = "docs/project/reviews/review-2026-11-09-yim-vitamoon.md"
 #: The side PACKINGS.md prints at each count of the head, rounded up at 12 places.
 PRINTED = {
     130: "11.902430645983",
@@ -190,7 +191,10 @@ def test_the_holds_and_the_rows() -> None:
     for result, scope, link in holds:
         entry = entries[result]
         assert entry["scope"]["n_values"] == scope
-        assert (entry["verification"], entry["confirmation"]) == ("V0", "C0")
+        assert (entry["verification"], entry["confirmation"]) == ("V0", "C1")
+        assert entry["evidence"] == ["E-yim-1109-certificate-report"]
+        (review,) = entry["reviews"]
+        assert (review["path"], review["verdict"]) == (REVIEW, "accepted")
         assert entry["attribution"]["source_keys"] == [SOURCE_KEY]
         assert entry["unfinished_confirmations"][0]["link"] == link
         assert [item["n"] for item in entry["regularizations"]] == scope
@@ -208,3 +212,4 @@ def test_the_holds_and_the_rows() -> None:
             if row["n"] == n and row["source_id"] == source and row.get("superseded_by") == MAIN
         ]
         assert old["disposition"] == "superseded"
+        assert current[n]["assurance"] == "verified"
