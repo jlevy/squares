@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 180
+version: 181
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -64,7 +64,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-08T23:08:17.857Z
+updated_at: 2026-11-09T04:55:50.172Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -317,3 +317,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-07 08:53Z to 16:53Z hourly renewals (intake125 to intake133): nine identical sweeps. Main is unchanged at 172d737be. No new issues, PRs or comments, and 0 items without an owner. Everything open waits on the owner: #921 terms (think-8h80), #908/#909, #543, #919 and think-8nim.
 
 2026-11-08 (L57-L62): #924 (unnir, s(12) >= 9929/2500) imported as T-274 at V3/C3 via PR #925 (merged 268a0ef1b after L58 blind stage-4 review, L59 senior review "merge after fixes", L60 addressing pass, green CI). Replays: Daniel's verify (overflow checks) VERIFIED 39,765 bins; native parent-core PASS_COMPLETE all rows; indep_scan VERIFIED 96,000 bins byte-identical to cpp.log; four controls refused; ~16.5 CPU-h. n = 12 verified lower bound moves from T-095 7943/2000 to 9929/2500; reported lower bound stays T-245's 4. Reply posted after Pages deploy + verify-deployment (issuecomment-6728443003) and #924 closed completed. Records PR by L62 in flight. Follow-ups filed: think-y27o (review-check gap: verified_lane_review_problems accepts a method review via proof.audit_record), think-6vhj (credit-attributions refresh for T-274 before think-wvsa redraw), think-1bfs (suite shard 4 at the 10% unrecorded guard). Owner decisions still pending: #921 terms (think-8h80), #908/#909 order, #543 enclosure rule, #919 dup of #918, think-8nim SVG disposition.
+
+2026-11-08 23:52Z to 2026-11-09 04:54Z hourly renewals (intake164 to intake169): #926 merged (19b354a5c) recording #924's final reply; think-0vl3 closed; finished worktrees removed (disk 13 GB free). At 00:00Z about 40 queue rows crossed the seven-day quiet mark (beads last touched 2026-11-02): mostly the think-f2io owner-decision chain (#666/#715/#719/#732 above 1024), #763 awaiting its author, #413 under an outside claim; no bead touched to reset the clock. Otherwise identical sweeps; main unchanged at 19b354a5c; no new issues, PRs or comments. Owner decisions still pending: #921 terms (think-8h80), #908/#909, #543, #919, think-8nim, and think-f2io D1/D4/D5.
