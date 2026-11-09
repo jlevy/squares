@@ -124,7 +124,10 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: (T-242): 268 stayed, its least margins 5e-21 against every wall and 1e-20 between pairs.
 #: The adoption of issue 914 on 5 and 6 November 2026 (think-lrj4) moved it at its seven, to
 #: Evan Daniel's certificates (T-267 to T-273): 268 left, its new certificate stable across
-#: the tolerances, and 175, 204, 260, 293, 303 and 304 stayed.
+#: the tolerances, and 175, 204, 260, 293, 303 and 304 stayed. The adoption of 9 November
+#: 2026 (think-463r) moved it at its five, to Doğa Özden's rationally promoted certificates
+#: (T-275 to T-279), each with three squares on a wall and 31 to 61 more within 1e-12 of
+#: one (review F4 of #927 to #931): 268 joined and 303 left, and 232, 299 and 307 stayed.
 #: Re-screening the adopted counts with the screen's own `--update --n` rebuilds the
 #: retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -183,15 +186,18 @@ GOLDEN_UNSTABLE = {
         264,
         266,
         267,
-        # 268 left on 5 November 2026: the adoption of issue 914 (T-270) wrote a witness
-        # stable across tolerances there (think-lrj4).
+        # 268 left on 5 November 2026, when the adoption of issue 914 (T-270) wrote a
+        # witness stable across tolerances there (think-lrj4), and joined again on 9
+        # November 2026 with Doğa Özden's further arrangement of it (T-276, think-463r).
+        268,
         269,
         273,
         293,
         297,
         299,
         301,
-        303,
+        # 303 left on 9 November 2026: Doğa Özden's certificate there (T-278, think-463r)
+        # is stable across tolerances.
         304,
         307,
     ],

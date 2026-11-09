@@ -2444,8 +2444,12 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # 293, 303 and 304 from his issue 914 packet and 175 and 260 from its two keys of their
     # own (T-267 to T-273), and no longer from Özden's n204 packet, Yim's packet, Couzo's
     # issue 763 packet or Daniel's Kaggle descents packet, which held nothing else: three
-    # sources more and four fewer. The issue 845 packet still holds 172.
-    assert len(expected_sources) == 33
+    # sources more and four fewer. The issue 845 packet still holds 172. The adoption of 9
+    # November draws 232, 268, 299, 303 and 307 from Doğa Özden's five packets of that day
+    # (T-275 to T-279), and no longer from Couzo's issue 844 packet or Özden's 3 November
+    # s299 packet, which held nothing else: five sources more and two fewer. The issue 914
+    # packet still holds 204, 293 and 304.
+    assert len(expected_sources) == 36
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
