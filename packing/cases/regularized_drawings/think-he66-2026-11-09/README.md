@@ -71,7 +71,7 @@ below its side, by 2.63 × 10⁻¹² at 172 and 3.25 × 10⁻¹² at 270, about 
 own uniform-contraction margin (2.53 and 3.21 × 10⁻¹²), and the selection held each at
 row 3 as a register candidate: a smaller packing is registered and reviewed as a result
 of its own first, and is never admitted here.
-Nothing here registers them.
+Nothing here registers them; think-wju3 owns that decision.
 The strong views of the earlier witnesses lapsed with the houses, T-224’s Evan Daniel
 view at 270 among them; each count is decided here on its new witness, so nothing is
 owed. At 270 the drawing the site shows is less regular than the lapsed view (140 uneven

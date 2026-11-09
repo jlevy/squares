@@ -92,6 +92,11 @@ class KnownTilt(NamedTuple):
     owner: str
 
 
+#: The bead that owns n = 270's ambiguous tilts (`KNOWN_TILTS`).
+OWNER_270 = (
+    "think-wju3: Evan Daniel's certified solve below n = 270's house, held at row 3 as a "
+    "register candidate; the witness keeps its near-axis tilts"
+)
 #: The ambiguous tilts `refused_tilts` reports as known rather than refusing, by (count,
 #: square numbered from 1, as the refusal names it). Each names the open bead that owns
 #: it; a tilt at another distance, at another square or count, is refused as before
@@ -109,6 +114,29 @@ KNOWN_TILTS: dict[tuple[int, int], KnownTilt] = {
         "think-mbdw: the regularization of n = 259's exact house, drawn since 26 October "
         "2026 with square 229 straightened; the witness keeps the tilt",
     ),
+    # n = 270's house since 9 November 2026 is Doğa Özden's certificate of issue 936
+    # (T-283, think-he66), promoted from a binary64 pose: 13 near-axis squares lie 1.05e-12
+    # to 2.38e-7 degrees off the axis. The axis tool refuses the witness (its slide limits
+    # pass 4,300 digits), so this tally reads it; the strong views drew nothing the rule
+    # takes, and Evan Daniel's solve below the side waits as a register candidate.
+    **{
+        (270, square): KnownTilt(0, distance, OWNER_270)
+        for square, distance in (
+            (97, "2.38e-7"),
+            (111, "2.37e-7"),
+            (122, "1.05e-12"),
+            (131, "1.48e-12"),
+            (150, "1.45e-12"),
+            (158, "1.42e-12"),
+            (169, "1.41e-12"),
+            (179, "1.38e-12"),
+            (189, "1.39e-12"),
+            (203, "1.42e-12"),
+            (228, "2.29e-7"),
+            (242, "2.33e-7"),
+            (255, "1.2e-7"),
+        )
+    },
 }
 
 
