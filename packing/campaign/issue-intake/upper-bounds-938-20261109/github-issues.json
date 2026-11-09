@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#938","kind":"issue","number":938,"url":"https://github.com/jlevy/squares/issues/938","author":"kenaznia-doga","created_at":"2026-11-09T20:31:32Z","state":"open","closed_at":null,"title":"s(199) ≤ 14.614689853287: improved packing, #935's packing plus an L of 27 grid squares (registration request)"}]
+}

@@ -1,0 +1,57 @@
+# What `python -m devtools.intake_ledger gather` reads: the upper bound at n <= 324 that lane L76
+# of the intake pass (think-3guf) takes in on 9 November 2026, Doğa Özden's #938 at 199, posted by
+# his AI agent's account kenaznia-doga 34 seconds after the first commit of the repository that
+# holds its certificate. GitHub's activity log was not read, so no push time is recorded; the issue
+# dates its report, and nothing else reached the count between the commit and the issue. The start
+# is frozen at main 200f2ebc1 (#937's merge): T-127 at 199 (Nate Chaoweeraprasit's SQUISH packing,
+# refined by Siddharth Gupta) in both lanes, with T-174 (PingYou Ltd, PR #574) and T-193 (Evan
+# Daniel's exact side, #639) pending adoption 1.46e-19 below it, each a re-certification of the
+# house's packing. The claim's exact side is its certificate's header, read by the packet's claim
+# record (acquisition/claims.json), which the lane wrote from main 200f2ebc1; the issue prints that
+# side rounded up at 12 places, and the claim record's admission holds the print to it. The side is
+# T-282's at 172 plus one, exactly: the L step (DS7, section 2) on Özden's #935 certificate, which
+# the record registered and adopted at 172 that afternoon; the record holds no rule that carries an
+# L step inside the corpus (think-ruu2's RV-4 is open), so the issue's report is the first of this
+# bound. The Kaggle per-puzzle side the issue quotes, 14.617572173606 (kirilltym), is above the
+# claim and states no packing; the side-only leaderboard entry the author's comment of 20:53:05Z
+# adds, 14.6132098756 (team OigaZhDn, 31 October), is below it and states no packing; neither is a
+# report.
+format: intake-ledger-sources-v1
+read_at_main: 200f2ebc1c585259d7687fc8550c975e467d97d6
+read_on: '2026-11-09'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l76
+  branch: claude/bold-ritchie-xo28us-l76
+  commit: 200f2ebc1c585259d7687fc8550c975e467d97d6
+  note: The packet's claim record, written on the lane's branch from main 200f2ebc1 and read here by path.
+reports:
+- report: '#938'
+  issue: 938
+  holders: Doğa Özden
+  bead: think-1goz
+  lanes:
+  - lane: l76
+    packet: ozden-s199-upper-bound-2026-11-09
+    record: claims.json
+    counts: [199]
+  claims:
+  - n: 199
+    measured:
+      against: T-127
+      finding: squares 1 to 172 are T-282's certificate at 172, corner for corner, and the other 27 the L step's row of
+        14 and column of 13 at side S172 + 1, exactly; no symmetry pairs it one to one with T-127's packing by
+        nearest centres, and the best (a reflection) moves 81 squares beyond 0.1 (largest 1.006) and turns 69 by
+        more than 1e-6 radians; another arrangement than the house's, by way of T-257's 172, which Evan Daniel
+        found from the 199 record by removing an L
+      source: packing/resources/web/ozden-s199-upper-bound-2026-11-09/measure/identity.json
+  note: >-
+    The issue names d03ee0b, committed at 2026-11-09T20:30:58Z, 34 seconds before the issue. It says the packing is
+    #935's at 172 (T-282) plus an L of 27 grid squares, that nothing was searched at 199, and that it found no
+    automatic propagation of the extension in the registry, so files it as its own witness. The record's exact
+    scan (devtools.l_step_scan, measure/l-step-scan.json) agrees that no case ceiling held the bound: it is the one
+    L-step consequence on main that crosses its count's 12-place print.
+exceptions: []
+other_items: []
