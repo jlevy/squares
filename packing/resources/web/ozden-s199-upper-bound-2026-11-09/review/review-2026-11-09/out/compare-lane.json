@@ -1,0 +1,181 @@
+{
+ "program": "l77_compare_lane.py",
+ "program_sha256": "b4dfa9d1d7dfaa0021d63f24fb06f295861d554e86f514ac2152e9eeb50e251e",
+ "checker_sha256": "f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf",
+ "draft_entry_present_at_read": [
+  "T-284"
+ ],
+ "l_step": {
+  "lane": [
+   [
+    82,
+    101
+   ],
+   [
+    104,
+    125
+   ],
+   [
+    145,
+    170
+   ],
+   [
+    149,
+    174
+   ],
+   [
+    171,
+    198
+   ],
+   [
+    172,
+    199
+   ],
+   [
+    174,
+    201
+   ],
+   [
+    226,
+    257
+   ],
+   [
+    231,
+    262
+   ],
+   [
+    259,
+    292
+   ],
+   [
+    265,
+    298
+   ]
+  ],
+  "review_corrected": [
+   [
+    82,
+    101
+   ],
+   [
+    104,
+    125
+   ],
+   [
+    145,
+    170
+   ],
+   [
+    149,
+    174
+   ],
+   [
+    171,
+    198
+   ],
+   [
+    172,
+    199
+   ],
+   [
+    174,
+    201
+   ],
+   [
+    226,
+    257
+   ],
+   [
+    231,
+    262
+   ],
+   [
+    259,
+    292
+   ],
+   [
+    265,
+    298
+   ]
+  ],
+  "review_at_freeze": [
+   [
+    104,
+    125
+   ],
+   [
+    145,
+    170
+   ],
+   [
+    149,
+    174
+   ],
+   [
+    171,
+    198
+   ],
+   [
+    172,
+    199
+   ],
+   [
+    174,
+    201
+   ],
+   [
+    226,
+    257
+   ],
+   [
+    231,
+    262
+   ],
+   [
+    259,
+    292
+   ],
+   [
+    265,
+    298
+   ]
+  ],
+  "lane_extensions": 168,
+  "review_equal_or_within_1e-40": 168
+ },
+ "house_margin": {
+  "margin_float": "1.461757e-19",
+  "gain_over_margin": "19718187619405028.0000"
+ },
+ "tilts": {
+  "certificate": {
+   "tilted_beyond_1deg": 49,
+   "positive": 36,
+   "negative": 13,
+   "within_1deg_of_45": 44,
+   "positive_away_from_45": 3,
+   "negative_away_from_45": 2
+  },
+  "house_T127": {
+   "tilted_beyond_1deg": 47,
+   "positive": 13,
+   "negative": 34,
+   "within_1deg_of_45": 43,
+   "positive_away_from_45": 1,
+   "negative_away_from_45": 3
+  },
+  "lane_readme": "49 tilted beyond 1 degree, 36 one way and 13 the other; T-127 47, 13 and 34"
+ },
+ "agreements": {
+  "packet_certificate_is_the_decided_file": true,
+  "draft_side_equals_certificate": true,
+  "draft_score": 3,
+  "l_step_improvements_equal": true,
+  "identity_not_one_to_one_both": true,
+  "identity_moved_beyond_0.1_equal": true,
+  "identity_largest_move_equal_to_print": true,
+  "own_margin_zero_at_a_touching_pair": true,
+  "gain_equals_gap_exactly": true
+ },
+ "verdict": "LANE_EQUALS_REVIEW"
+}

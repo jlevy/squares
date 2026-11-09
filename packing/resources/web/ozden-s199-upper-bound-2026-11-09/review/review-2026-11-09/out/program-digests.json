@@ -10,6 +10,7 @@
  "programs": {
   "l77_check.py": "7749f47cd0a481bd72ef532379dcf6d225b9d50bb9ed83aaac8eaf3784966016",
   "l77_checker.py": "f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf",
+  "l77_compare_lane.py": "b4dfa9d1d7dfaa0021d63f24fb06f295861d554e86f514ac2152e9eeb50e251e",
   "l77_construct.py": "8c6d4b1b82af77db9445999bad2d099f5c1869a3d54e3c292cc03b8a8e0761bd",
   "l77_controls.py": "a96bc7a8e99a0f40d6c34a682a6cb2f8d0defe77fbeb7f006314126d6e3c4f20",
   "l77_custody.py": "8f93fda6758a969fd0b3dbb940080d20989386727a8f93d8bcf07bb40d2d3a6e",
@@ -26,6 +27,10 @@
   "check-n199.json": {
    "sha256": "439e3c7e00fea5431f4e464049dcd4f66d17dcbb4aec2bb53ced1ef70dfc89e2",
    "program": "l77_check.py"
+  },
+  "compare-lane.json": {
+   "sha256": "fdb76a59203f9243de4715a3b216f311d9f6a84c7277abe2c9588b8fd2bed4e4",
+   "program": "l77_compare_lane.py"
   },
   "construct-n199.json": {
    "sha256": "6d18e2f83bceaf6f35051352eabb7262ee954c8ce259d9f7c722ac033d8618df",
