@@ -1,0 +1,10 @@
+{
+ "about": "Addendum to controls-plan.json, stated after the 232 run of l64_controls.py and before any of these controls ran. That run's S5 closed some near pairs along their separating axis and found them still separated by both methods at the computed contact and past it: a line along one edge normal can pass beside the other square (a diagonal near-contact), so the axis construction does not always reach contact. Both methods agreed on every such pair. The first run and its receipts are kept as they are. These controls close each pair along its centre line instead, which always meets the pair (at parameter 1 the centres coincide), the construction l64_selftest.py validated on 3,000 random pairs, and which the 4 November review used.",
+ "stated": "2026-11-09, before l64_controls_centre.py was written or run",
+ "controls": [
+  {"id": "S4'c", "kind": "sharp, pair", "what": "square j of the least-margin pair moved toward i along the centre line c_j - c_i by the exact contact parameter of the Minkowski difference", "expect": "ACCEPT", "detail": "the pair touches by both (margin exactly 0, area 0); accepted unless the moved square meets a third square or a wall first"},
+  {"id": "S4'p", "kind": "sharp, pair", "what": "the same, the parameter 1e-30 past contact", "expect": "REFUSE", "detail": "the pair overlaps by both"},
+  {"id": "S5'", "kind": "sharp, pair-level", "what": "every pair with margin below 1e-12, each alone, closed along its centre line", "expect": "ALL_AS_STATED", "detail": "each pair touching by both at contact (A margin exactly 0) and overlapping by both with the parameter 1e-30 past"},
+  {"id": "S5-diagnosis", "kind": "diagnostic", "what": "for every pair with margin below 1e-12, whether the line along its separating axis meets the pair at all (the interval of overlap along it is non-empty)", "expect": "MISSES_EXPLAINED", "detail": "the pairs S5 missed are exactly the pairs whose separating-axis line does not meet the pair"}
+ ]
+}

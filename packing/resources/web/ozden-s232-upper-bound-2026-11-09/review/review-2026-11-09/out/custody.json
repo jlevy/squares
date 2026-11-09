@@ -1,0 +1,454 @@
+{
+ "program": "l64_custody.py",
+ "programs_sha256": {
+  "l64_custody.py": "97b65c7460b3e1c47390740b96e0c27a54fca800a17057e43e92fa0824d8a80b",
+  "l64_util.py": "de76960f100535969691e9c386be79de5ca3e45fbe7db318ea86e5ec9bc2af81"
+ },
+ "environment": {
+  "python": "3.14.7",
+  "implementation": "CPython",
+  "isolated_mode": "True",
+  "nice": "19"
+ },
+ "repositories": {
+  "232": {
+   "repo": "kenaznia-doga/s232-upper-bound",
+   "head": "09e324f447d20e10b79de410ad9950a2772c955d",
+   "head_is_issue_pin": true,
+   "commits": 1,
+   "tree": "c293f408a23b2a1cc51c4fda11cdbffe5b290f33",
+   "parents": "",
+   "author": "kenaznia-doga <doga@doga.kenan.works>",
+   "authored": "2026-11-09T06:02:41+00:00",
+   "committer": "kenaznia-doga <doga@doga.kenan.works>",
+   "committed": "2026-11-09T06:02:41+00:00",
+   "subject": "s(232) upper bound: exact witness, checks, README, licence",
+   "files": {
+    "LICENSE.md": {
+     "mode": "100644",
+     "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+     "bytes": 1484,
+     "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+     "working_tree_equals_blob": true
+    },
+    "README.md": {
+     "mode": "100644",
+     "blob": "cc6bab2ce8f57aea436621242fcca1a17fcd8458",
+     "bytes": 3614,
+     "sha256": "c07c4d670f4bd151477101b1cd73aeb49cc41d0c634377dba91ee17db984d8cd",
+     "working_tree_equals_blob": true
+    },
+    "n-232-candidate.yaml": {
+     "mode": "100644",
+     "blob": "7bb00e6632e5a08bb9e0f14045a99f6ca1534f41",
+     "bytes": 673090,
+     "sha256": "22b3809ec29efbb3555d3eb2eaee89aa47901696b7c2578ccf8ff688d07f13e8",
+     "working_tree_equals_blob": true
+    },
+    "n232-witness.json": {
+     "mode": "100644",
+     "blob": "be3cc943c611fbd2660202f771c02a2c2a8eab7b",
+     "bytes": 665939,
+     "sha256": "51a17e96f1e6aa4989c295c1b235a51515165a88da57d4b904f748a0460aaf9b",
+     "working_tree_equals_blob": true
+    },
+    "packing-witness-verify.txt": {
+     "mode": "100644",
+     "blob": "64e374520f42c4aa70e463eaf0dbbe3e1475a59d",
+     "bytes": 625,
+     "sha256": "c059938dd9a36fcb30040d7117711da85c3a640993725ebf4a55662e75876954",
+     "working_tree_equals_blob": true
+    },
+    "records/n-232-candidate-diff.png": {
+     "mode": "100644",
+     "blob": "718c4718d7dd12b98115d140fb049e029b6faadf",
+     "bytes": 301570,
+     "sha256": "46d856b8bec5d0ba1be51b405509ffbe5b5cad78f624bfbf1960d53a6687a498",
+     "working_tree_equals_blob": true
+    },
+    "sqcheck-output.txt": {
+     "mode": "100644",
+     "blob": "0dfaf17ba9e4763061d1173379fca1021cb0b6fe",
+     "bytes": 101,
+     "sha256": "e9f10ae0ab1bf1f975cefbb16aa8a8b6b5e0fb81e7092dfa97037da4710f2b76",
+     "working_tree_equals_blob": true
+    },
+    "verifier/README.md": {
+     "mode": "100644",
+     "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+     "bytes": 3441,
+     "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+     "working_tree_equals_blob": true
+    },
+    "verifier/sqcheck.py": {
+     "mode": "100644",
+     "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+     "bytes": 17654,
+     "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+     "working_tree_equals_blob": true
+    }
+   },
+   "certificate_sha256_is_issue": true,
+   "certificate_sha256_in_readme": true,
+   "twin_sha256_in_readme": "51a17e96f1e6aa4989c295c1b235a51515165a88da57d4b904f748a0460aaf9b",
+   "twin_sha256_is_readme": true,
+   "has_licence_file": true
+  },
+  "268": {
+   "repo": "kenaznia-doga/s268-upper-bound",
+   "head": "a40a15d91081be002805b6eea35e099c9a2656db",
+   "head_is_issue_pin": true,
+   "commits": 1,
+   "tree": "fce13dc1c4e502b833dcb4078fc75f8210372700",
+   "parents": "",
+   "author": "kenaznia-doga <doga@doga.kenan.works>",
+   "authored": "2026-11-09T06:02:49+00:00",
+   "committer": "kenaznia-doga <doga@doga.kenan.works>",
+   "committed": "2026-11-09T06:02:49+00:00",
+   "subject": "s(268) upper bound: exact witness, checks, README, licence",
+   "files": {
+    "LICENSE.md": {
+     "mode": "100644",
+     "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+     "bytes": 1484,
+     "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+     "working_tree_equals_blob": true
+    },
+    "README.md": {
+     "mode": "100644",
+     "blob": "00da1006b97b9e3ccca03e83160176f1fa2779a8",
+     "bytes": 3629,
+     "sha256": "dc358fe2c5f1883107fee9103e25129889adb77f1007207eea9d543634d81ab4",
+     "working_tree_equals_blob": true
+    },
+    "n-268-candidate.yaml": {
+     "mode": "100644",
+     "blob": "1144538202fdd40fe0a8c71d9ada561c9b89bdc7",
+     "bytes": 815619,
+     "sha256": "74c0e5d4927ec57468f0cae71636ba46833230ceea4d1dd0cd5ddc1ed76421b3",
+     "working_tree_equals_blob": true
+    },
+    "n268-witness.json": {
+     "mode": "100644",
+     "blob": "e9de33b18cd73ac51a28df4b21ba84c395c1b1c0",
+     "bytes": 807352,
+     "sha256": "fcd07b9ff77e7e9be86fcf78eebee721bcfd1c4e5d6ffa2c8164847a4dd0d180",
+     "working_tree_equals_blob": true
+    },
+    "packing-witness-verify.txt": {
+     "mode": "100644",
+     "blob": "ace3d1a7b603c3d1c97ea83502be4481957a002b",
+     "bytes": 565,
+     "sha256": "116a5db1a02b38b4481cb4ad6c3e0f200497a9db41f7e3b4c7a891ef3c5272bd",
+     "working_tree_equals_blob": true
+    },
+    "records/n-268-candidate-diff.png": {
+     "mode": "100644",
+     "blob": "50d2762d37ed43a2c9d139dde2e9d45e0a36a3d6",
+     "bytes": 300300,
+     "sha256": "b334f6db7b61d7bb96d7aa6c044b67202b735fb13d4721c2c22ab34e72340048",
+     "working_tree_equals_blob": true
+    },
+    "sqcheck-output.txt": {
+     "mode": "100644",
+     "blob": "98772b815c84cc64bca3c201b2e7769625e81ad5",
+     "bytes": 101,
+     "sha256": "cf549620c9d8358cec7d5faefc001cd6fe38abb6d91ef6f7ebda407237ade22d",
+     "working_tree_equals_blob": true
+    },
+    "verifier/README.md": {
+     "mode": "100644",
+     "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+     "bytes": 3441,
+     "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+     "working_tree_equals_blob": true
+    },
+    "verifier/sqcheck.py": {
+     "mode": "100644",
+     "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+     "bytes": 17654,
+     "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+     "working_tree_equals_blob": true
+    }
+   },
+   "certificate_sha256_is_issue": true,
+   "certificate_sha256_in_readme": true,
+   "twin_sha256_in_readme": "fcd07b9ff77e7e9be86fcf78eebee721bcfd1c4e5d6ffa2c8164847a4dd0d180",
+   "twin_sha256_is_readme": true,
+   "has_licence_file": true
+  },
+  "299": {
+   "repo": "kenaznia-doga/s299-upper-bound-17801004",
+   "head": "a042eab017caeb07ca5f79afcdc5fbb89103cda2",
+   "head_is_issue_pin": true,
+   "commits": 1,
+   "tree": "1009d5b5f8632b0ef457a85f9be17a99837ee0cd",
+   "parents": "",
+   "author": "kenaznia-doga <doga@doga.kenan.works>",
+   "authored": "2026-11-09T06:02:57+00:00",
+   "committer": "kenaznia-doga <doga@doga.kenan.works>",
+   "committed": "2026-11-09T06:02:57+00:00",
+   "subject": "s(299) upper bound: exact witness, checks, README, licence",
+   "files": {
+    "LICENSE.md": {
+     "mode": "100644",
+     "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+     "bytes": 1484,
+     "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+     "working_tree_equals_blob": true
+    },
+    "README.md": {
+     "mode": "100644",
+     "blob": "95c314af3dd0e20232d8d6b5953d72956559d68f",
+     "bytes": 3635,
+     "sha256": "7f43c6eaed7501801e37e9307cccdc65776de33ce7fce2792349c6a26bb1878c",
+     "working_tree_equals_blob": true
+    },
+    "n-299-candidate.yaml": {
+     "mode": "100644",
+     "blob": "9e69dc947ff9ca38c57fcd52bbccbced5fd5e6a4",
+     "bytes": 790061,
+     "sha256": "dfb0ccf71474a276a52ce768cc38e799d30ff6373a22b8ae318f58f278025d9d",
+     "working_tree_equals_blob": true
+    },
+    "n299-witness.json": {
+     "mode": "100644",
+     "blob": "9ca954b0d71afac33d6cd70cbe636daf1340336a",
+     "bytes": 780833,
+     "sha256": "e2f178e7586729e3aa7ba5ad9c44eb8a406dbd1ca069a98b20ff367174036929",
+     "working_tree_equals_blob": true
+    },
+    "packing-witness-verify.txt": {
+     "mode": "100644",
+     "blob": "3267a43270682087612c91ed7d05839976aca378",
+     "bytes": 507,
+     "sha256": "4bfceab089bd3bed89c562faa7cc756a7928f4754f3b83419bd6b96021885870",
+     "working_tree_equals_blob": true
+    },
+    "records/n-299-candidate-diff.png": {
+     "mode": "100644",
+     "blob": "d18e601902b7d9d275faab64bb6fbbf2c4b24fd6",
+     "bytes": 304165,
+     "sha256": "c12336ab94307c38b54671fa26dd5d340c43ff6d70bed2e6ed5fd6f7bee8ed2f",
+     "working_tree_equals_blob": true
+    },
+    "sqcheck-output.txt": {
+     "mode": "100644",
+     "blob": "a78908f39ef824ab7f0c0249f3efb148f98f6e2e",
+     "bytes": 101,
+     "sha256": "e2f454da4a77590172839a160fc9a5945d28faa5148bbd3e118941ac1dc4ff40",
+     "working_tree_equals_blob": true
+    },
+    "verifier/README.md": {
+     "mode": "100644",
+     "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+     "bytes": 3441,
+     "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+     "working_tree_equals_blob": true
+    },
+    "verifier/sqcheck.py": {
+     "mode": "100644",
+     "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+     "bytes": 17654,
+     "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+     "working_tree_equals_blob": true
+    }
+   },
+   "certificate_sha256_is_issue": true,
+   "certificate_sha256_in_readme": true,
+   "twin_sha256_in_readme": "e2f178e7586729e3aa7ba5ad9c44eb8a406dbd1ca069a98b20ff367174036929",
+   "twin_sha256_is_readme": true,
+   "has_licence_file": true
+  },
+  "303": {
+   "repo": "kenaznia-doga/s303-upper-bound",
+   "head": "b43ca090fc2ff5e750fecc71d8514298fe164514",
+   "head_is_issue_pin": true,
+   "commits": 1,
+   "tree": "6614d2c810c765efb4d1746375b0612cb5afadd8",
+   "parents": "",
+   "author": "kenaznia-doga <doga@doga.kenan.works>",
+   "authored": "2026-11-09T06:03:05+00:00",
+   "committer": "kenaznia-doga <doga@doga.kenan.works>",
+   "committed": "2026-11-09T06:03:05+00:00",
+   "subject": "s(303) upper bound: exact witness, checks, README, licence",
+   "files": {
+    "LICENSE.md": {
+     "mode": "100644",
+     "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+     "bytes": 1484,
+     "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+     "working_tree_equals_blob": true
+    },
+    "README.md": {
+     "mode": "100644",
+     "blob": "d272a4e8b8a831c5823204be353b79f4dbfaeac2",
+     "bytes": 3633,
+     "sha256": "514af3d2c25ed8b14186eba95dfbd50c26a1c22211879ea123af5bfd6e2510c7",
+     "working_tree_equals_blob": true
+    },
+    "n-303-candidate.yaml": {
+     "mode": "100644",
+     "blob": "1968d3dfba3ad9c194df2ebeac68a8bf4094e38f",
+     "bytes": 878216,
+     "sha256": "9cbeb7a8198ef9f3316f9e4dd0a998b879133a2e31e12c82c3fbe9882e0f2f3e",
+     "working_tree_equals_blob": true
+    },
+    "n303-witness.json": {
+     "mode": "100644",
+     "blob": "fdb63fc2c11c8b1b816a7b620db0341d9076c55e",
+     "bytes": 868864,
+     "sha256": "0fd9f9dce219b250e21eb60a95e62c042df1baff4553dd7c4397fb397114c3a2",
+     "working_tree_equals_blob": true
+    },
+    "packing-witness-verify.txt": {
+     "mode": "100644",
+     "blob": "36e5f3a3e84eb481484ee4f18756eb0cfa2a649e",
+     "bytes": 505,
+     "sha256": "4c3caad9c7a4b303bc965351fdbadef114b98c887442c16cb51c4ee79c6a6750",
+     "working_tree_equals_blob": true
+    },
+    "records/n-303-candidate-diff.png": {
+     "mode": "100644",
+     "blob": "f139d803b85e2e71af3f2f2157f75a2b3e383909",
+     "bytes": 325709,
+     "sha256": "6329fec3e4b32a5002ef7dd320be1cfd1716a0c1e1ef989f363a0391a1ecdbd9",
+     "working_tree_equals_blob": true
+    },
+    "sqcheck-output.txt": {
+     "mode": "100644",
+     "blob": "83498d97ae283f7808c89c29112118d654a24d5d",
+     "bytes": 101,
+     "sha256": "2b19d2c16424db13f8184a5572e1e24631d3edf4f902703f6bda57d8433039ee",
+     "working_tree_equals_blob": true
+    },
+    "verifier/README.md": {
+     "mode": "100644",
+     "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+     "bytes": 3441,
+     "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+     "working_tree_equals_blob": true
+    },
+    "verifier/sqcheck.py": {
+     "mode": "100644",
+     "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+     "bytes": 17654,
+     "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+     "working_tree_equals_blob": true
+    }
+   },
+   "certificate_sha256_is_issue": true,
+   "certificate_sha256_in_readme": true,
+   "twin_sha256_in_readme": "0fd9f9dce219b250e21eb60a95e62c042df1baff4553dd7c4397fb397114c3a2",
+   "twin_sha256_is_readme": true,
+   "has_licence_file": true
+  },
+  "307": {
+   "repo": "kenaznia-doga/s307-upper-bound",
+   "head": "dbe8838a7273dc8458fef1f5a16ef4384867ca19",
+   "head_is_issue_pin": true,
+   "commits": 1,
+   "tree": "8c1bb02b1b1acaed113f92dbcde079b16169e89f",
+   "parents": "",
+   "author": "kenaznia-doga <doga@doga.kenan.works>",
+   "authored": "2026-11-09T06:03:13+00:00",
+   "committer": "kenaznia-doga <doga@doga.kenan.works>",
+   "committed": "2026-11-09T06:03:13+00:00",
+   "subject": "s(307) upper bound: exact witness, checks, README, licence",
+   "files": {
+    "LICENSE.md": {
+     "mode": "100644",
+     "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+     "bytes": 1484,
+     "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+     "working_tree_equals_blob": true
+    },
+    "README.md": {
+     "mode": "100644",
+     "blob": "324c63ef9a36e379cb502e88723d138e949ddf98",
+     "bytes": 3612,
+     "sha256": "790174198d5dc38754bb3e53ca6d1e95516cf8da9087c092044c1e0643093a14",
+     "working_tree_equals_blob": true
+    },
+    "n-307-candidate.yaml": {
+     "mode": "100644",
+     "blob": "2fcf45977913bffd1a47c8aaa317759f77e3ea8d",
+     "bytes": 989483,
+     "sha256": "cb78adf88737718e4efe855bf5870879eef90ad30c386728d2ba64bb7f4e81e8",
+     "working_tree_equals_blob": true
+    },
+    "n307-witness.json": {
+     "mode": "100644",
+     "blob": "4760de3e9da38ef742a23d8af2fab04e2c94a7c0",
+     "bytes": 980007,
+     "sha256": "612e97b1220ff5016e88c57d19293047da18d2e7775a8f99b0974cda1a6c706c",
+     "working_tree_equals_blob": true
+    },
+    "packing-witness-verify.txt": {
+     "mode": "100644",
+     "blob": "fd226da68f049472dba76e79dd48fc0558a47c4a",
+     "bytes": 625,
+     "sha256": "c90590101b08e2fce47d0277612defc54439de1c0fb84b9f76a5e57b0adeda19",
+     "working_tree_equals_blob": true
+    },
+    "records/n-307-candidate-diff.png": {
+     "mode": "100644",
+     "blob": "7bbcde1a82d9c08e4398e9b03901fe36341ca90b",
+     "bytes": 271699,
+     "sha256": "1389170cfe17704d686fb465808fd2bb9bb8d9bc50948d2bf7da38d637bf9b54",
+     "working_tree_equals_blob": true
+    },
+    "sqcheck-output.txt": {
+     "mode": "100644",
+     "blob": "e03649f9c9d49c2d147b2ec3c15a47f9aa42a165",
+     "bytes": 101,
+     "sha256": "f463515f7224d05692306b8ca27e7c3e098b27a83be256e7f0df08332bb5d2da",
+     "working_tree_equals_blob": true
+    },
+    "verifier/README.md": {
+     "mode": "100644",
+     "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+     "bytes": 3441,
+     "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+     "working_tree_equals_blob": true
+    },
+    "verifier/sqcheck.py": {
+     "mode": "100644",
+     "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+     "bytes": 17654,
+     "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+     "working_tree_equals_blob": true
+    }
+   },
+   "certificate_sha256_is_issue": true,
+   "certificate_sha256_in_readme": true,
+   "twin_sha256_in_readme": "612e97b1220ff5016e88c57d19293047da18d2e7775a8f99b0974cda1a6c706c",
+   "twin_sha256_is_readme": true,
+   "has_licence_file": true
+  }
+ },
+ "one_blob_across_five": {
+  "verifier/sqcheck.py": [
+   "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd"
+  ],
+  "verifier/README.md": [
+   "fd30c806c53e0b8b245c5a97f12ab11fc3d16666"
+  ],
+  "LICENSE.md": [
+   "9803370f8c382515d3769896adb8d04b201aebd6"
+  ]
+ },
+ "licence_text": "# Licence\n\nCopyright \u00a9 2026 Do\u011fa \u00d6zden.\n\n- **Certificates, witnesses, receipts, data and write-ups** (everything that is not source code) are licensed under the [Creative Commons Attribution 4.0 International licence (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). Credit: Do\u011fa \u00d6zden (with the prior work cited in the README).\n- **Source code** (checkers, tools, scripts) is licensed under the MIT licence below.\n\n## MIT licence (source code)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+ "licence_grants": {
+  "cc_by_4_0_for_non_code": true,
+  "mit_for_code": true,
+  "copyright": "Copyright \u00a9 2026 Do\u011fa \u00d6zden."
+ },
+ "clock": {
+  "started_utc": "2026-11-09T07:28:10Z",
+  "finished_utc": "2026-11-09T07:28:10Z",
+  "cpu_seconds": "0.04",
+  "wall_seconds": "0.34"
+ },
+ "verdict": "CUSTODY_HOLDS"
+}
