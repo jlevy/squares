@@ -5,11 +5,11 @@
   "command": "python -m devtools.upper_bound_houses custody",
   "runtime": "CPython 3.14.7",
   "host": "vm",
-  "setup_seconds": 14.12,
-  "call_seconds": 34.15,
+  "setup_seconds": 12.74,
+  "call_seconds": 34.92,
   "child_timeout_seconds": 120,
   "snapshot_cap_bytes": 536870912,
-  "snapshot_source_bytes": 341889120,
+  "snapshot_source_bytes": 343107552,
   "fresh_geometric_deciders": false,
   "houses": {
     "29": "T-195",
@@ -42,6 +42,7 @@
     "181": "T-174",
     "182": "T-243",
     "183": "T-220",
+    "199": "T-284",
     "204": "T-268",
     "206": "T-174",
     "207": "T-174",
@@ -308,12 +309,17 @@
     {"path":"packing/resources/web/ozden-s270-upper-bound-2026-11-09/acquisition/sources.json","bytes":7233,"sha256":"e9add2dc3cd60648fc3f3c8935c75fa5efe4c4b10f03ad358b5c7b022c140fba"},
     {"path":"packing/resources/web/ozden-s270-upper-bound-2026-11-09/acquisition/upstream-subtree.sha256","bytes":983,"sha256":"3bd2cbc9e2dcf5d19699a263935e8dfb02b7b9db51d7960527fb6b192a6a4ab2"},
     {"path":"packing/resources/web/ozden-s270-upper-bound-2026-11-09/source/n-270-candidate.yaml","bytes":864974,"sha256":"f2b62bf0f89eabe4c9872cb2c37cca9a24a3926e939cb017278c0e5d16fa9386"},
-    {"path":"packing/resources/web/ozden-s270-upper-bound-2026-11-09/receipts/exact-certification.json.xz","bytes":27644,"sha256":"8aa99c783ce16b582704648d831643bab1a9be91bab57098676be18679e470f8"}
+    {"path":"packing/resources/web/ozden-s270-upper-bound-2026-11-09/receipts/exact-certification.json.xz","bytes":27644,"sha256":"8aa99c783ce16b582704648d831643bab1a9be91bab57098676be18679e470f8"},
+    {"path":"packing/resources/web/ozden-s199-upper-bound-2026-11-09/acquisition/report.json","bytes":7155,"sha256":"91650cc6d789c0e3d0ef7c2a76f1c24057a55999e0505a80e8a9937d281b1955"},
+    {"path":"packing/resources/web/ozden-s199-upper-bound-2026-11-09/acquisition/sources.json","bytes":8814,"sha256":"f61da606f26e3b52cda24ce8b5e27dc07ccfe2120193a9de67834daa15a9ce00"},
+    {"path":"packing/resources/web/ozden-s199-upper-bound-2026-11-09/acquisition/upstream-subtree.sha256","bytes":1149,"sha256":"301602dedbf2103efb6ffd9a2c6ce03a7ab6593c8973df042186554c7f9bda2a"},
+    {"path":"packing/resources/web/ozden-s199-upper-bound-2026-11-09/source/n-199-candidate.yaml","bytes":543653,"sha256":"8a85b4c3536757a77fd51e2a0e361de1ecef36b38d59ed3111611672e6a78aca"},
+    {"path":"packing/resources/web/ozden-s199-upper-bound-2026-11-09/receipts/exact-certification.json.xz","bytes":18156,"sha256":"6d168b572128cb12bf76446053dded5f83709f5d3f87ab609bea25bde44f32a3"}
   ],
   "mutations_refused_and_restored": [
     "T-195 n=29: outside-control verdict","T-195 n=29: certificate bytes","T-174 n=68: outside-control verdict","T-174 n=68: certificate bytes","T-193 n=102: outside-control verdict","T-193 n=102: certificate bytes","T-229 n=105: outside-control verdict","T-229 n=105: certificate bytes","T-139 n=126: outside-control verdict","T-139 n=126: certificate bytes","T-186 n=129: outside-control verdict","T-186 n=129: certificate bytes","T-259 n=130: outside-control verdict","T-259 n=130: certificate bytes","T-187 n=146: outside-control verdict","T-187 n=146: certificate bytes","T-222 n=154: outside-control verdict","T-222 n=154: certificate bytes","T-197 n=155: outside-control verdict","T-197 n=155: certificate bytes","T-282 n=172: outside-control verdict","T-282 n=172: certificate bytes","T-267 n=175: outside-control verdict","T-267 n=175: certificate bytes","T-243 n=182: outside-control verdict","T-243 n=182: certificate bytes","T-220 n=183: outside-control verdict",
-    "T-220 n=183: certificate bytes","T-268 n=204: outside-control verdict","T-268 n=204: certificate bytes","T-188 n=211: outside-control verdict","T-188 n=211: certificate bytes","T-225 n=227: outside-control verdict","T-225 n=227: certificate bytes","T-275 n=232: outside-control verdict","T-275 n=232: certificate bytes","T-218 n=236: outside-control verdict","T-218 n=236: certificate bytes","T-190 n=237: outside-control verdict","T-190 n=237: certificate bytes","T-182 n=241: outside-control verdict","T-182 n=241: certificate bytes","T-269 n=260: outside-control verdict","T-269 n=260: certificate bytes","T-134 n=267: outside-control verdict","T-134 n=267: certificate bytes","T-276 n=268: outside-control verdict","T-276 n=268: certificate bytes","T-283 n=270: outside-control verdict","T-283 n=270: certificate bytes","T-219 n=271: outside-control verdict","T-219 n=271: certificate bytes","T-146 n=292: outside-control verdict","T-146 n=292: certificate bytes",
-    "T-271 n=293: outside-control verdict","T-271 n=293: certificate bytes","T-277 n=299: outside-control verdict","T-277 n=299: certificate bytes","T-278 n=303: outside-control verdict","T-278 n=303: certificate bytes","T-273 n=304: outside-control verdict","T-273 n=304: certificate bytes","T-279 n=307: outside-control verdict","T-279 n=307: certificate bytes","T-221 n=308: outside-control verdict","T-221 n=308: certificate bytes"
+    "T-220 n=183: certificate bytes","T-284 n=199: outside-control verdict","T-284 n=199: certificate bytes","T-268 n=204: outside-control verdict","T-268 n=204: certificate bytes","T-188 n=211: outside-control verdict","T-188 n=211: certificate bytes","T-225 n=227: outside-control verdict","T-225 n=227: certificate bytes","T-275 n=232: outside-control verdict","T-275 n=232: certificate bytes","T-218 n=236: outside-control verdict","T-218 n=236: certificate bytes","T-190 n=237: outside-control verdict","T-190 n=237: certificate bytes","T-182 n=241: outside-control verdict","T-182 n=241: certificate bytes","T-269 n=260: outside-control verdict","T-269 n=260: certificate bytes","T-134 n=267: outside-control verdict","T-134 n=267: certificate bytes","T-276 n=268: outside-control verdict","T-276 n=268: certificate bytes","T-283 n=270: outside-control verdict","T-283 n=270: certificate bytes","T-219 n=271: outside-control verdict","T-219 n=271: certificate bytes",
+    "T-146 n=292: outside-control verdict","T-146 n=292: certificate bytes","T-271 n=293: outside-control verdict","T-271 n=293: certificate bytes","T-277 n=299: outside-control verdict","T-277 n=299: certificate bytes","T-278 n=303: outside-control verdict","T-278 n=303: certificate bytes","T-273 n=304: outside-control verdict","T-273 n=304: certificate bytes","T-279 n=307: outside-control verdict","T-279 n=307: certificate bytes","T-221 n=308: outside-control verdict","T-221 n=308: certificate bytes"
   ],
   "original_inputs_byte_equal": true,
   "restored_worker_inputs_byte_equal": true

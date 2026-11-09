@@ -52,6 +52,11 @@ reports:
     #935's at 172 (T-282) plus an L of 27 grid squares, that nothing was searched at 199, and that it found no
     automatic propagation of the extension in the registry, so files it as its own witness. The record's exact
     scan (devtools.l_step_scan, measure/l-step-scan.json) agrees that no case ceiling held the bound: it is the one
-    L-step consequence on main that crosses its count's 12-place print.
+    L-step consequence on main that crosses its count's 12-place print. The scan's ten others improve a ceiling by
+    4.8e-33 to 1.76e-19 inside its print (82 to 101, 104 to 125, 145 to 170, 149 to 174, 171 to 198, 174 to 201,
+    226 to 257, 231 to 262, 259 to 292 and 265 to 298); none is a report, and each is material for the owner's
+    RV-3 on think-ruu2, not a result (the stage 4 review's F8). The review notes for the author that README line 11
+    prints S172 1.96e-16 above it (F5), that the gaps between the 172 part and the L go unstated, the least 1.50e-16
+    (F6), and that the certificate's source and certificate blocks describe #935's promotion (F7).
 exceptions: []
 other_items: []

@@ -2108,6 +2108,50 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-284": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#938](https://github.com/jlevy/squares/issues/938)",
+        producer_route=True,
+        ai=(
+            "Issue 938 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose promotion made "
+            "the 172 part’s exact coordinates, so on that route the replay is reproduced with "
+            "the producer’s code; the independent rational corner checker shares no "
+            "verification code with it, and the review’s checker shares no code with either "
+            "route or the source."
+        ),
+        lineage=(
+            "The certificate is Doğa Özden’s packing of 172 squares of issue 935 (T-282), its "
+            "rational corners unchanged, with the L step of Friedman’s survey: an L of 27 "
+            "axis-aligned unit squares, a row of 14 along the top wall and a column of 13 "
+            "along the right wall, at T-282’s side plus one, exactly. Nothing was searched at "
+            "199. Measured here pose for pose, it is what `devtools.construction_checker` "
+            "writes for one L-border layer on T-282’s retained certificate, and the 9 "
+            "November review finds squares 1 to 172 to be T-282’s corner for corner. Against "
+            "T-127’s packing, this case’s house best packing before this adoption, it is a "
+            "new arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 81 squares beyond a tenth, at most 1.006. The record’s lineage "
+            "connects the two, since T-257, the 172 that T-282 rearranges, came from T-127’s "
+            "packing by an explorer search and the removal of one L-shaped strip (issue 845). "
+            "So the packing’s finder is T-282’s, Evan Daniel, with Doğa Özden its improver; "
+            "the issue claims the upper bound only. The 25 pairs of neighbouring grid squares "
+            "touch exactly, and 31 squares touch a wall."
+        ),
+        third_route=(
+            ", and the 9 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair, classing "
+            "each touching pair of grid squares as a contact; its 23 controls, each stated "
+            "beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2144,6 +2188,10 @@ class Credit:
     #: pose with no square turned (the result's `regularizations`), so the lane keeps
     #: what the record knew of that packing, `PACKING_FACTS` (review C6 of #661).
     same_packing: bool = False
+    #: The case schema's `construction_method` where the house's register entry states how
+    #: the packing was built, as T-284 states one L step on T-282's packing (`extension`,
+    #: review F13 of #938). Unset, a new packing's method is `unknown`.
+    construction: str | None = None
 
 
 #: What a reported lane says of its packing rather than of its certificate, carried to a
@@ -2436,6 +2484,19 @@ CREDITS: dict[int, Credit] = {
         (DANIEL,),
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
+    ),
+    # T-284 (adopted on 9 November 2026), Doğa Özden's issue 938: T-282's packing at 172 with
+    # one L step of 27 unit squares. Its credit is T-282's, whose finder is Evan Daniel and
+    # whose improver is Özden; the 172 line started from this count's former house, T-127's
+    # packing, by an L-cut (issue 845), against which this is a new arrangement, 81 squares
+    # beyond a tenth (the 9 November review of issue 938, F10 and F13).
+    199: Credit(
+        (DANIEL,),
+        (OZDEN,),
+        "Doğa Özden’s packing of 172 squares with one L step, his further arrangement of Evan "
+        "Daniel’s packing from an L-cut of this count’s former record, Nate Chaoweeraprasit’s "
+        "SQUISH packing as Siddharth Gupta refined it",
+        construction="extension",
     ),
     # T-268 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
     # fault-line composer from gadgets of his own n = 233 and n = 370 packings: one to one with
@@ -3234,6 +3295,8 @@ def reported_bound(move: Move) -> dict[str, Any]:
     }
     if credit.same_packing:
         known = {field: replaced.get(field, known[field]) for field in PACKING_FACTS}
+    if credit.construction is not None:
+        known["construction_method"] = credit.construction
     side = move.side
     algebraic = isinstance(side, exact_sides.Algebraic)
     return {

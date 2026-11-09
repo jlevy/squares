@@ -3,7 +3,7 @@
   "contract": "packing.squares:ExactSideRegister/v1",
   "generated_by": "python -m devtools.exact_side_register --update",
   "spec": "docs/project/specs/active/plan-2026-10-25-exact-side-register.md",
-  "totals": {"entries":24,"counts":24,"subjects":{"house":10,"staged-house":7,"configuration":7},"intervals":{"decided":22,"measured":1,"reported":1},"largest_decided_degree":41},
+  "totals": {"entries":24,"counts":24,"subjects":{"house":10,"staged-house":6,"configuration":8},"intervals":{"decided":22,"measured":1,"reported":1},"largest_decided_degree":41},
   "entries": [
     {
       "n": 29,
@@ -60,8 +60,8 @@
     {"n":175,"subject":"configuration","configuration":"The packing T-193's exact certificate describes, at its side; a smaller packing is the house","stated_by":{"results":[{"id":"T-193","kind":"upper-bound","rungs":"V3/C3"}],"source_key":"[Daniel exact current records 2026-10-16]","evidence":["E-evand-639-exact-sides-report","E-evand-639-verify-exact-replay"]},"degree":7,"polynomial":"s^7-70s^6+2060s^5-32944s^4+308155s^3-1679302s^2+4915996s-5944360","reference":null,"measured":null,"form":"root(s^7-70s^6+2060s^5-32944s^4+308155s^3-1679302s^2+4915996s-5944360, 13.7641743174865966292901814768674768594691, 13.7641743174865966292901814768674768594692)","interval":{"low":"13.7641743174865966292901814768674768594691","high":"13.7641743174865966292901814768674768594692","basis":"decided"},"irreducible":"decided","house":{"results":["T-267"],"relation":"above","gap":"1.243e-4","basis":"decided"},"staged":null},
     {
       "n": 199,
-      "subject": "staged-house",
-      "configuration": null,
+      "subject": "configuration",
+      "configuration": "The packing T-193's exact certificate describes, at its side; a smaller packing is the house",
       "stated_by": {"results":[{"id":"T-193","kind":"upper-bound","rungs":"V3/C3"}],"source_key":"[Daniel exact current records 2026-10-16]","evidence":["E-evand-639-exact-sides-report","E-evand-639-verify-exact-replay"]},
       "degree": 16,
       "polynomial": "50176s^{16}-10225152s^{15}+976937792s^{14}-58096274464s^{13}+2407172202244s^{12}-73699218806072s^{11}+1725010674917512s^{10}-31492286233759660s^9+453289787075581265s^8-5162293192801582708s^7+46372030093910507184s^6-325181887010656340512s^5+1745524918447121592542s^4-6935174542056220950164s^3+19238595422446973371020s^2-33300065664630704067228s+27099820026073897132689",
@@ -70,8 +70,8 @@
       "form": "root(50176s^{16}-10225152s^{15}+976937792s^{14}-58096274464s^{13}+2407172202244s^{12}-73699218806072s^{11}+1725010674917512s^{10}-31492286233759660s^9+453289787075581265s^8-5162293192801582708s^7+46372030093910507184s^6-325181887010656340512s^5+1745524918447121592542s^4-6935174542056220950164s^3+19238595422446973371020s^2-33300065664630704067228s+27099820026073897132689, 14.6175721735928068435558612724500328081986, 14.6175721735928068435558612724500328081987)",
       "interval": {"low":"14.6175721735928068435558612724500328081986","high":"14.6175721735928068435558612724500328081987","basis":"decided"},
       "irreducible": "decided",
-      "house": {"results":["T-127"],"relation":"below","gap":"1.462e-19","basis":"decided"},
-      "staged": {"bead":"think-ot5c","why":"no writer"}
+      "house": {"results":["T-284"],"relation":"above","gap":"2.882e-3","basis":"decided"},
+      "staged": null
     },
     {
       "n": 204,

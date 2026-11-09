@@ -305,8 +305,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/kenaznia-doga/s199-upper-bound",
         "Doğa Özden",
         (
-            "His packing at 172 with an L of 27 squares, 2.88e-3 below the record at 199;"
-            " replayed here, review pending (T-284)."
+            "His packing at 172 with an L of 27 squares, 2.88e-3 below the record at 199"
+            " (T-284)."
         ),
     ),
     (

@@ -5247,12 +5247,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"7308786086796403421851018497093/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"1461468985328621153330369591208625293096183957845596937754957265273646011066209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(199) ≥ 14.110657","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.1106575888"},
         "n": 199,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"14.6175721735928069","source_url":"https://github.com/SidG2k1/square-packing-refinements/blob/9643cb5a78c1d4dcfc867c80a6920c3a6219d05a/witnesses/packing-199.cert","witness_id":"W-known-best-n199","witness_path":"packing/witnesses/known-best/n-199.yaml"},
+          "assessed_geometry": {"reported_side":"14.6146898532862152","source_url":"https://github.com/kenaznia-doga/s199-upper-bound/blob/d03ee0bdb223e00fe124e818ed242f6cbd714fad/n-199-candidate.yaml","witness_id":"W-known-best-n199","witness_path":"packing/witnesses/known-best/n-199.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -5269,7 +5269,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(199) ≤ 14.617573","provenance":"frontier","relation":"upper-bound","value":"14.6175721735928069"}
+        "side": {"display":"s(199) ≤ 14.614690","provenance":"frontier","relation":"upper-bound","value":"14.6146898532862152"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

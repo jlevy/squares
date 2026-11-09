@@ -29815,11 +29815,20 @@ issues:
       certificate is T-282's with the L step pose for pose, and both maintained exact routes accept
       it, its least wall clearance and pair gap exactly 0, and refuse its gross and sharp controls;
       measured, it is another arrangement than T-127's, no symmetry pairing them one to one. The
-      ledger of 9 November records it. Registered as T-284, V3/C3 on the replay, pending the stage 4
-      review (think-ntcf, lane L77). The exact L-step scan confirms the issue's statement at the
-      print: 199 from 172 is the one step that crosses its count's 12-place print, and
-      monotonicity improves nothing. The Kaggle side the issue quotes, 14.617572173606
-      (kirilltym), is above it and states no packing.
+      ledger of 9 November records it. Registered as T-284. The 9 November stage 4 review
+      (docs/project/reviews/review-2026-11-09-ozden-938.md, think-ntcf, lane L77), written blind in
+      a separate lane, accepted it with findings, none blocking or major, F15 minor (the packet
+      README's split of tilted squares by the sign of angles near 45 degrees, corrected), and notes
+      for the author on README line 11's print of S172, the unstated gaps between the 172 part and
+      the L (least 1.50e-16), the certificate blocks that describe #935's promotion, the moved
+      head and the licences; it scored it S3, carried from T-282. Its clean-room checker decided it
+      again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts
+      it at 199 under the house rule in the same pass, with Evan Daniel the packing's finder and
+      Özden its improver, as at 172, and the construction an extension, both strong generators'
+      regularization of the new house run in the same change. The exact L-step scan confirms the
+      issue's statement at the print: 199 from 172 is the one step that crosses its count's
+      12-place print, and monotonicity improves nothing. The Kaggle side the issue quotes,
+      14.617572173606 (kirilltym), is above it and states no packing.
     read_through: '2026-11-09T20:53:05Z'
     results:
     - key: n199-from-t282
@@ -29839,9 +29848,8 @@ issues:
     answer_bead: think-1goz
     replies: []
     close_when: >-
-      T-284 is on main at V3/C3 with its review mapped and, if the review accepts it, as the house
-      at 199, and the reply on main says what was retained and replayed, what the review found and
-      whether the case adopted it.
+      T-284 is on main at V3/C3 as the house at 199, and the reply on main says what was retained
+      and replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 9 November 2026 from main 200f2ebc1. The commit d03ee0b precedes the issue by 34
       seconds. The issue carries the intake label. The author's comment of 20:53:05Z
@@ -29854,7 +29862,10 @@ issues:
       campaign/intake-watch.yaml.
 
       T-127, the house it improves, was reported on #438; #438 is closed, and its follow-up of 12
-      October (issuecomment-6130070537) says T-127 remains the house at 199, so adoption owes #438
-      a follow-up, which check_requests cannot see, since replies before 26 October 2026 record
-      no position. Measured against padding, the gain is about 2.0e16 times T-127's contraction
-      margin (1.46e-19); this certificate's own margin is exactly 0. No reply has been posted.
+      October (issuecomment-6130070537) says T-127 remains the house at 199, so it owes a
+      follow-up now that this entry is adopted there, which check_requests cannot see, since
+      replies before 26 October 2026 record no position. Measured against padding, the gain is
+      about 2.0e16 times T-127's contraction margin (1.46e-19); this certificate's own margin is
+      exactly 0. The review's five questions for the author (README line 11's print, the gaps
+      between the parts, the certificate's blocks, sqcheck's 27 tight constraints, the commit to
+      cite) are informational and hold nothing open. No reply has been posted.

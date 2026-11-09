@@ -2798,9 +2798,10 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: emptied. The adoption of 9 November 2026 (think-463r) credits him as an improver at 232,
 #: 268, 303 and 307 too, and at 299 again (T-275 to T-279), so the hold holds him there
 #: alike: no other name enters or leaves the block. The same day's later pass (think-he66)
-#: credits him as an improver at 172 and 270 (T-282, T-283), held the same way.
+#: credits him as an improver at 172 and 270 (T-282, T-283), held the same way, and its last
+#: pass (think-1goz) at 199 (T-284, T-282's packing with one L step), held alike.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = dict.fromkeys(
-    (172, 232, 268, 270, 299, 303, 307), ("Doğa Özden",)
+    (172, 199, 232, 268, 270, 299, 303, 307), ("Doğa Özden",)
 )
 #: The infographic edition the hold was set under. While the hold is not empty, a version
 #: bump or a poster drawn for any other edition fails the pull-request suite

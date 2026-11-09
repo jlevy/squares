@@ -139,11 +139,15 @@ A measurement for credit; it decides nothing.
 - **199:** no symmetry pairs it one to one with T-127’s packing by nearest centres; the
   optimal assignment, under a reflection, moves 81 squares beyond 0.1 and 117 beyond 0.01
   (largest 1.006) and turns 69 by more than 10⁻⁶ radians. It has 49 squares tilted beyond
-  1 degree, 36 one way and 13 the other, where T-127 has 47, 13 and 34. Against the
-  regularized view the assignment moves 66 squares beyond 0.1. So it is another
-  arrangement than the house’s at 199. The lineage the record holds connects them: T-257,
-  Evan Daniel’s 172 that T-282 rearranges, came from this count’s record by an explorer
-  search and the removal of one L-shaped strip (#845).
+  1 degree, 44 of them within a degree of 45 degrees, where the sign of a tilt is a
+  convention, so the sign says nothing about either packing; T-127 has 47, 43 of them
+  near 45 degrees. (This section’s first draft split the tilted squares by sign; the
+  stage 4 review’s F15, as at 172, had it dropped.) Against the regularized view the
+  assignment moves 66 squares beyond 0.1. So it is a new arrangement against the house’s
+  at 199. The lineage the record holds connects them: T-257, Evan Daniel’s 172 that T-282
+  rearranges, came from this count’s record by an explorer search and the removal of one
+  L-shaped strip (#845), so the upstream start of the whole 172 line is this count’s
+  former house (F10).
 
 ## Exact Replay
 
@@ -187,10 +191,35 @@ the top row. `devtools.contraction_margin` wrote both receipts,
 [measure/contraction-n199-own.json](measure/contraction-n199-own.json), each contracted
 packing decided on both maintained routes; it accepts a witness whose squares touch.
 
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 9 November 2026
+([review-2026-11-09-ozden-938.md](../../../../docs/project/reviews/review-2026-11-09-ozden-938.md)),
+written in a separate lane (L77, think-ntcf) blind to this one until its findings were
+frozen, accepts the certificate with findings, none blocking or major, and scores it S3,
+carried from T-282 (its F9). Its clean-room checker decides every square, wall and pair by
+separating axes in `Fraction` and by exact clipped areas in GMP rationals, classing each of
+the 25 touching pairs of grid squares as a contact, with 23 controls stated before they
+ran, a self-test of 138 cases and seven mutated checkers; its programs and receipts are
+kept in [review/review-2026-11-09/](review/review-2026-11-09/README.md). F15 (minor)
+corrected this README’s reading of the tilts near 45 degrees. F8 counts the ten
+padding-sized L steps above as material for the owner’s RV-3 (think-ruu2), not results.
+The case adopted the certificate as its house on 9 November 2026 under the house rule, as
+T-284, in place of T-127, with its credit as T-282’s: Evan Daniel the packing’s finder,
+Doğa Özden its improver, and the construction an extension (F10, F13).
+
+The notes for the author: the source README prints S₁₇₂ as 13.6146898532862153…, 1.96 ×
+10⁻¹⁶ above it (F5); the gaps between the 172 part and the L go unstated, 43 below 10⁻¹²,
+the least 1.50 × 10⁻¹⁶ at squares 161 and 199, where no square of the 172 part touches the
+L (F6); the witness’s `source` and `certificate` blocks describe #935’s decimal pose and
+its promotion, though the certificate is T-282’s witness with 27 exact squares at its own
+S₁₇₂ (F7); the repository has moved one commit past the pin, a README-only change, and the
+record cites the pin (F12); and the licences are #935’s (F14). The review’s five questions
+on them are informational and hold nothing open.
+
 ## What Is Not Established
 
-- **Review.** The stage 4 review is a separate lane’s, not yet mapped.
-- **Human oversight.** None.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurements above show.

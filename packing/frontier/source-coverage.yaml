@@ -12588,12 +12588,12 @@ sources:
     and Evan Daniel's licence notice pinned against byte-identical copies or by digest, is retained
     for jlevy/squares#938, the certificate admitted only where its exact side rounds up to the side
     the issue prints. The certificate is T-282's at 172 with the L step, at T-282's side plus one.
-    T-284 records the in-horizon report at V3/C3 on both maintained routes' replay, pending the
-    stage 4 review (think-ntcf). The ledger of 9 November for this lane
+    T-284 records the in-horizon report at V3/C3 since the stage 4 review of 9 November
+    (docs/project/reviews/review-2026-11-09-ozden-938.md), and the case adopted it as its house
+    that day. The ledger of 9 November for this lane
     (campaign/issue-intake/upper-bounds-938-20261109) records it. All 3 native jobs have full
-    outcomes. No selected override or superseded claim is created before the review; the current
-    case and its source ownership remain unchanged. A later commit, 4fbff7b, changes one line of the
-    README and is read in campaign/intake-watch.yaml.
+    outcomes. A later commit, 4fbff7b, changes one line of the README and is read in
+    campaign/intake-watch.yaml.
 - id: yim-certificates-2026-11-09
   title: Kaelan Yim's certificates at vitamoon/vitamoon ac14112, watched publications with no issue
   role: source-repository
@@ -12855,11 +12855,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-19 (T-220).
 - n: 199
-  source_id: gupta-square-packing-refinements-2026-10-08
-  value: '14.6175721735928069'
-  evidence: E-gupta-438-rational-report
-  reason: The complete rational precision refinement is strictly smaller than both previous exact
-    upper lanes.
+  source_id: ozden-s199-upper-bound-2026-11-09
+  value: '14.6146898532862152'
+  evidence: E-ozden-938-certificate-report
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-11-09 (T-284).
 - n: 204
   source_id: evand-issue914-2026-11-05
   value: '14.8043613836518588'
@@ -13708,7 +13708,7 @@ superseded_reports:
 - n: 199
   source_id: franciscouzo-square-packing-2026
   value: '14.618988956907218'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: ozden-s199-upper-bound-2026-11-09
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 200
@@ -14396,7 +14396,7 @@ superseded_reports:
 - n: 199
   source_id: evand-square-packing-2026-10-05
   value: '14.61898895689939842900969151892'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: ozden-s199-upper-bound-2026-11-09
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 207
@@ -14533,7 +14533,7 @@ superseded_reports:
 - n: 199
   source_id: squish-second-update-2026-10-07
   value: '14.6175721735980400'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: ozden-s199-upper-bound-2026-11-09
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 207
   source_id: squish-second-update-2026-10-07
@@ -15677,6 +15677,12 @@ superseded_reports:
   reason: The house from 2026-10-21 until 2026-11-09; its certificate stays retained and verified,
     and T-283's exact side is smaller.
   superseded_by: ozden-s270-upper-bound-2026-11-09
+- n: 199
+  source_id: gupta-square-packing-refinements-2026-10-08
+  value: '14.6175721735928069'
+  reason: The house until 2026-11-09; its certificate stays retained and verified, and T-284's exact
+    side is smaller.
+  superseded_by: ozden-s199-upper-bound-2026-11-09
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
