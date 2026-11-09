@@ -2586,14 +2586,22 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     there credit Daniel alone, so neither name is held or printed for them. The same
     adoption takes Vladislav Lavrentev's and Kirill Tymchishin's names off the block, so
     released now Özden's name changes the block's lines and keeps the drawn 1-100 canvas's
-    height."""
+    height. The adoption of 9 November 2026 (think-463r) credits him as the improver at
+    232, 268, 303 and 307 too, and at 299 again (T-275 to T-279), and the hold holds him at
+    all five."""
     held = known_best_builder.PRINT_CREDIT_HELD
-    assert held == {299: ("Doğa Özden",)}
+    assert held == dict.fromkeys((232, 268, 299, 303, 307), ("Doğa Özden",))
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
-    reported = build_bound_citations.load_case(299)["reported_upper_bound"]
-    assert reported["found_by"] == ["Evan Daniel"]
-    assert reported["improved_by"] == ["Doğa Özden"]
+    for n, found, improved in (
+        (232, ["Alex Chilton"], ["Francisco Couzo", "Doğa Özden"]),
+        (268, ["Evan Daniel"], ["Doğa Özden"]),
+        (299, ["Evan Daniel"], ["Doğa Özden"]),
+        (303, ["Evan Daniel"], ["Doğa Özden"]),
+        (307, ["ntumlnoob"], ["Francisco Couzo", "Doğa Özden"]),
+    ):
+        reported = build_bound_citations.load_case(n)["reported_upper_bound"]
+        assert (reported["found_by"], reported["improved_by"]) == (found, improved), n
     assert citations[299]["upper"]["text"] == "Daniel & Özden, GitHub"
     for n in (204, 260):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]

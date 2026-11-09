@@ -1808,6 +1808,218 @@ RESULTS: dict[str, Prose] = {
         ),
         diversity="by a Claude agent, a system family the producer also used",
     ),
+    "T-275": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#927](https://github.com/jlevy/squares/issues/927)",
+        producer_route=True,
+        ai=(
+            "Issue 927 says the search was AI-assisted throughout, written and run by AI "
+            "agents, and that Doğa Özden’s AI agent, which uses the account kenaznia-doga, "
+            "prepared and posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose promotion made "
+            "the exact coordinates and ran its exact `verify_packing` on them, so on that "
+            "route the replay is reproduced with the producer’s code; the independent "
+            "rational corner checker shares no verification code with it, and the review’s "
+            "checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from the registry’s 232, Francisco Couzo’s "
+            "refinement of Alex Chilton’s Kaggle notebook packing (T-256), this case’s "
+            "house best packing before this adoption, taken from this repository’s "
+            "regularized known-best atlas, and was found by basin hopping over local minima "
+            "of Evan Daniel’s ALM+SLP quench; this repository’s `packing-witness promote` "
+            "made its exact coordinates. Measured by the 9 November review against T-256’s "
+            "witness, it is a further arrangement of T-256’s packing: 6 squares lie beyond "
+            "a tenth, at most 0.500, 12 turn by more than 1 degree, the largest by 28.76 "
+            "degrees, and 80 squares are tilted beyond 1 degree against T-256’s 81. So the "
+            "packing’s finder stays Alex Chilton, with Francisco Couzo and Doğa Özden its "
+            "improvers; the issue claims the upper bound only. Exactly three squares touch "
+            "a wall, the left, the bottom and the far wall that sets the side, where the "
+            "source says the wall squares touch."
+        ),
+        third_route=(
+            ", and the 9 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its "
+            "controls, every near pair and every square at exact contact and $10^{-30}$ past "
+            "it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-276": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#928](https://github.com/jlevy/squares/issues/928)",
+        producer_route=True,
+        ai=(
+            "Issue 928 says the search was AI-assisted throughout, written and run by AI "
+            "agents, and that Doğa Özden’s AI agent, which uses the account kenaznia-doga, "
+            "prepared and posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose promotion made "
+            "the exact coordinates and ran its exact `verify_packing` on them, so on that "
+            "route the replay is reproduced with the producer’s code; the independent "
+            "rational corner checker shares no verification code with it, and the review’s "
+            "checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from the registry’s 268, Evan Daniel’s "
+            "packing of issue 914 (T-270), built by his fault-line composer after Chris "
+            "Deotte’s multi-gadget fault DP, this case’s house best packing before this "
+            "adoption, taken from this repository’s regularized known-best atlas, and was "
+            "found by basin hopping over local minima of Evan Daniel’s ALM+SLP quench; this "
+            "repository’s `packing-witness promote` made its exact coordinates. Measured by "
+            "the 9 November review against T-270’s witness, it is a further arrangement of "
+            "T-270’s packing: 4 squares lie beyond a tenth, at most 0.274, 3 turn by more "
+            "than 1 degree, the largest by 2.14 degrees, and 99 squares are tilted beyond 1 "
+            "degree against T-270’s 98. So the packing’s finder stays Evan Daniel, with "
+            "Doğa Özden its improver; the issue claims the upper bound only. Exactly three "
+            "squares touch a wall, the left, the bottom and the far wall that sets the "
+            "side, where the source says the wall squares touch."
+        ),
+        third_route=(
+            ", and the 9 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its "
+            "controls, every near pair and every square at exact contact and $10^{-30}$ past "
+            "it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-277": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#929](https://github.com/jlevy/squares/issues/929)",
+        producer_route=True,
+        ai=(
+            "Issue 929 says the search was AI-assisted throughout, written and run by AI "
+            "agents, and that Doğa Özden’s AI agent, which uses the account kenaznia-doga, "
+            "prepared and posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose promotion made "
+            "the exact coordinates and ran its exact `verify_packing` on them, so on that "
+            "route the replay is reproduced with the producer’s code; the independent "
+            "rational corner checker shares no verification code with it, and the review’s "
+            "checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from the registry’s 299, his own further "
+            "arrangement of Evan Daniel’s packing (T-263), this case’s house best packing "
+            "before this adoption, taken from this repository’s regularized known-best "
+            "atlas, and was found by basin hopping over local minima of Evan Daniel’s "
+            "ALM+SLP quench; this repository’s `packing-witness promote` made its exact "
+            "coordinates. Measured by the 9 November review against T-263’s witness, it is "
+            "a further arrangement of T-263’s packing: no symmetry pairs nearest centres "
+            "one to one, since the bottom row from $x = 9.7$ to the right wall slides by up "
+            "to 0.642, but the optimal assignment under the identity keeps every square’s "
+            "id: 12 squares lie beyond a tenth, 5 turn by more than 1 degree, one of them "
+            "from $-26.8$ to $+14.5$ degrees, and 85 squares are tilted beyond 1 degree "
+            "against T-263’s 85. So the packing’s finder stays Evan Daniel, with Doğa Özden "
+            "its improver; the issue claims the upper bound only. Exactly three squares "
+            "touch a wall, the left, the bottom and the far wall that sets the side, where "
+            "the source says the wall squares touch."
+        ),
+        third_route=(
+            ", and the 9 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its "
+            "controls, every near pair and every square at exact contact and $10^{-30}$ past "
+            "it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-278": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#930](https://github.com/jlevy/squares/issues/930)",
+        producer_route=True,
+        ai=(
+            "Issue 930 says the search was AI-assisted throughout, written and run by AI "
+            "agents, and that Doğa Özden’s AI agent, which uses the account kenaznia-doga, "
+            "prepared and posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose promotion made "
+            "the exact coordinates and ran its exact `verify_packing` on them, so on that "
+            "route the replay is reproduced with the producer’s code; the independent "
+            "rational corner checker shares no verification code with it, and the review’s "
+            "checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from the registry’s 303, Evan Daniel’s "
+            "packing of issue 914 (T-272), built by his fault-line composer after Chris "
+            "Deotte’s multi-gadget fault DP, this case’s house best packing before this "
+            "adoption, taken from this repository’s regularized known-best atlas, and was "
+            "found by basin hopping over local minima of Evan Daniel’s ALM+SLP quench; this "
+            "repository’s `packing-witness promote` made its exact coordinates. Measured by "
+            "the 9 November review against T-272’s witness, it is a further arrangement of "
+            "T-272’s packing: 5 squares lie beyond a tenth, at most 0.227, 14 turn by more "
+            "than 1 degree, the largest by 19.02 degrees, and 111 squares are tilted beyond "
+            "1 degree against T-272’s 112. So the packing’s finder stays Evan Daniel, with "
+            "Doğa Özden its improver; the issue claims the upper bound only. Exactly three "
+            "squares touch a wall, the left, the bottom and the far wall that sets the "
+            "side, where the source says the wall squares touch."
+        ),
+        third_route=(
+            ", and the 9 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its "
+            "controls, every near pair and every square at exact contact and $10^{-30}$ past "
+            "it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-279": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#931](https://github.com/jlevy/squares/issues/931)",
+        producer_route=True,
+        ai=(
+            "Issue 931 says the search was AI-assisted throughout, written and run by AI "
+            "agents, and that Doğa Özden’s AI agent, which uses the account kenaznia-doga, "
+            "prepared and posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose promotion made "
+            "the exact coordinates and ran its exact `verify_packing` on them, so on that "
+            "route the replay is reproduced with the producer’s code; the independent "
+            "rational corner checker shares no verification code with it, and the review’s "
+            "checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from the registry’s 307, Francisco Couzo’s "
+            "refinement of ntumlnoob’s Kaggle notebook packing (T-256), this case’s house "
+            "best packing before this adoption, taken from this repository’s regularized "
+            "known-best atlas, and was found by basin hopping over local minima of Evan "
+            "Daniel’s ALM+SLP quench; this repository’s `packing-witness promote` made its "
+            "exact coordinates. Measured by the 9 November review against T-256’s witness, "
+            "it is a further arrangement of T-256’s packing: 5 squares lie beyond a tenth, "
+            "at most 0.200, 6 turn by more than 1 degree, the largest by 25.23 degrees, and "
+            "112 squares are tilted beyond 1 degree against T-256’s 107. So the packing’s "
+            "finder stays ntumlnoob, with Francisco Couzo and Doğa Özden its improvers; the "
+            "issue claims the upper bound only. Exactly three squares touch a wall, the "
+            "left, the bottom and the far wall that sets the side, where the source says "
+            "the wall squares touch."
+        ),
+        third_route=(
+            ", and the 9 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its "
+            "controls, every near pair and every square at exact contact and $10^{-30}$ past "
+            "it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2229,10 +2441,14 @@ CREDITS: dict[int, Credit] = {
     # T-256 (adopted on 31 October 2026), Francisco Couzo's refinement of Alex Chilton's
     # Kaggle notebook packing, as issue 844 states it; the notebook packing is not
     # published, so the 31 October review could not measure it (F-5).
+    # T-275 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-256's
+    # packing, one to one with it under the identity, 6 squares beyond a tenth (the 9
+    # November review).
     232: Credit(
         (CHILTON,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of Alex Chilton’s Kaggle notebook packing",
+        (COUZO, OZDEN),
+        "Doğa Özden’s further arrangement of Francisco Couzo’s refinement of Alex Chilton’s "
+        "Kaggle notebook packing",
     ),
     # Evan Daniel's basin explorer from a rebuild of issue 481's composition to a different
     # local minimum; the issue credits the composition for the construction, which the
@@ -2328,11 +2544,14 @@ CREDITS: dict[int, Credit] = {
     # T-270 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
     # build whose gadget donors were not recorded: one to one with T-242's under no symmetry,
     # 80 squares beyond a tenth (the 5 November review).
+    # T-276 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-270's
+    # packing, one to one with it under the identity, 4 squares beyond a tenth (the 9
+    # November review).
     268: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
-        "multi-gadget fault DP",
+        (OZDEN,),
+        "Doğa Özden’s further arrangement of Evan Daniel’s packing built by his fault-line "
+        "composer after Chris Deotte’s multi-gadget fault DP",
     ),
     # T-174's regularization of T-146's view, measured one to one, no square moved beyond
     # 1e-12 (the 14 October review of PR 574).
@@ -2405,12 +2624,16 @@ CREDITS: dict[int, Credit] = {
     # his T-248 packing, which his implementation of Chris Deotte's fault-line DP built from
     # Deotte's public Kaggle s(334) packing, and Özden is its improver, as issue 893 asks
     # (the review's F8).
+    # T-277 (adopted on 9 November 2026), Doğa Özden's further arrangement of his own
+    # T-263 arrangement, 12 squares beyond a tenth under the identity assignment, not one
+    # to one by nearest centres only through the bottom row's slide (the 9 November
+    # review's F6).
     299: Credit(
         (DANIEL,),
         (OZDEN,),
-        "Doğa Özden’s further arrangement of Evan Daniel’s packing from his n = 299 packing of "
-        "26 October, built by his implementation of Chris Deotte’s fault-line DP from "
-        "Deotte’s public Kaggle packing",
+        "Doğa Özden’s second further arrangement of Evan Daniel’s packing from his n = 299 "
+        "packing of 26 October, built by his implementation of Chris Deotte’s fault-line DP "
+        "from Deotte’s public Kaggle packing",
     ),
     # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
     # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
@@ -2423,11 +2646,14 @@ CREDITS: dict[int, Credit] = {
     # T-272 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
     # build whose gadget donors were not recorded: one to one with T-240's under no symmetry,
     # 124 squares beyond a tenth (the 5 November review).
+    # T-278 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-272's
+    # packing, one to one with it under the identity, 5 squares beyond a tenth (the 9
+    # November review).
     303: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
-        "multi-gadget fault DP",
+        (OZDEN,),
+        "Doğa Özden’s further arrangement of Evan Daniel’s packing built by his fault-line "
+        "composer after Chris Deotte’s multi-gadget fault DP",
     ),
     # T-273 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
     # build whose gadget donors were not recorded: one to one with T-242's under no symmetry,
@@ -2456,10 +2682,14 @@ CREDITS: dict[int, Credit] = {
     # T-256 (adopted on 31 October 2026), Francisco Couzo's refinement of ntumlnoob's Kaggle
     # notebook packing, through his a5a5d76 certificate (T-255), which the 31 October review
     # measured one to one with it, none beyond 0.0167.
+    # T-279 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-256's
+    # packing, one to one with it under the identity, 5 squares beyond a tenth (the 9
+    # November review).
     307: Credit(
         (NTUMLNOOB,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of ntumlnoob’s Kaggle notebook packing",
+        (COUZO, OZDEN),
+        "Doğa Özden’s further arrangement of Francisco Couzo’s refinement of ntumlnoob’s "
+        "Kaggle notebook packing",
     ),
     # T-174's regularization of T-141's packing, 25 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).

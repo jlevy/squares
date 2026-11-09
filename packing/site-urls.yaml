@@ -23531,6 +23531,7 @@ urls:
     evidence:
     - E-ozden-927-certificate-report
     - E-ozden-927-exact-feasibility
+    - E-ozden-927-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s232-upper-bound-2026-11-09/README.md
     - packing/resources/web/ozden-s232-upper-bound-2026-11-09/acquisition/claims.json
@@ -23540,6 +23541,9 @@ urls:
     - packing/resources/web/ozden-s232-upper-bound-2026-11-09/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-ozden-927-931-five.md
+    - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n232.json
 - path: result/t-276.html
   canonical: result/t-276.html
   kind: result
@@ -23562,6 +23566,7 @@ urls:
     evidence:
     - E-ozden-928-certificate-report
     - E-ozden-928-exact-feasibility
+    - E-ozden-928-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s268-upper-bound-2026-11-09/README.md
     - packing/resources/web/ozden-s268-upper-bound-2026-11-09/acquisition/claims.json
@@ -23571,6 +23576,9 @@ urls:
     - packing/resources/web/ozden-s268-upper-bound-2026-11-09/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-ozden-927-931-five.md
+    - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n268.json
 - path: result/t-277.html
   canonical: result/t-277.html
   kind: result
@@ -23593,6 +23601,7 @@ urls:
     evidence:
     - E-ozden-929-certificate-report
     - E-ozden-929-exact-feasibility
+    - E-ozden-929-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s299-upper-bound-2026-11-09/README.md
     - packing/resources/web/ozden-s299-upper-bound-2026-11-09/acquisition/claims.json
@@ -23602,6 +23611,9 @@ urls:
     - packing/resources/web/ozden-s299-upper-bound-2026-11-09/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-ozden-927-931-five.md
+    - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/ozden-s299-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n299.json
 - path: result/t-278.html
   canonical: result/t-278.html
   kind: result
@@ -23624,6 +23636,7 @@ urls:
     evidence:
     - E-ozden-930-certificate-report
     - E-ozden-930-exact-feasibility
+    - E-ozden-930-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s303-upper-bound-2026-11-09/README.md
     - packing/resources/web/ozden-s303-upper-bound-2026-11-09/acquisition/claims.json
@@ -23633,6 +23646,9 @@ urls:
     - packing/resources/web/ozden-s303-upper-bound-2026-11-09/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-ozden-927-931-five.md
+    - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/ozden-s303-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n303.json
 - path: result/t-279.html
   canonical: result/t-279.html
   kind: result
@@ -23655,6 +23671,7 @@ urls:
     evidence:
     - E-ozden-931-certificate-report
     - E-ozden-931-exact-feasibility
+    - E-ozden-931-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s307-upper-bound-2026-11-09/README.md
     - packing/resources/web/ozden-s307-upper-bound-2026-11-09/acquisition/claims.json
@@ -23664,6 +23681,9 @@ urls:
     - packing/resources/web/ozden-s307-upper-bound-2026-11-09/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-11-09-ozden-927-931-five.md
+    - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    - packing/resources/web/ozden-s307-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n307.json
 - path: results.html
   canonical: results.html
   kind: page

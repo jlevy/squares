@@ -22046,6 +22046,18 @@ occurrences:
     4 review credit them; the label is the source''s.'
   contributor_id: francisco-couzo
 - origin:
+    path: packing/frontier/n-232.md
+    record_key: '232'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-233.md
     record_key: '233'
     field: /reported_lower_bound/proved_by/0
@@ -23234,6 +23246,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-268.md
+    record_key: '268'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-269.md
     record_key: '269'
     field: /reported_upper_bound/found_by/0
@@ -24249,6 +24273,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-303.md
+    record_key: '303'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-304.md
     record_key: '304'
     field: /reported_upper_bound/found_by/0
@@ -24440,6 +24476,18 @@ occurrences:
     as construction improver, as the adopted result''s register entry and its stage
     4 review credit them; the label is the source''s.'
   contributor_id: francisco-couzo
+- origin:
+    path: packing/frontier/n-307.md
+    record_key: '307'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-308.md
     record_key: '308'

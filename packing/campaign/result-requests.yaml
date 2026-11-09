@@ -29013,9 +29013,7 @@ issues:
       identical copy; every stated digest holds, the print is the exact side rounded up, and
       both maintained exact routes accept the witness and refuse its gross and sharp
       controls; measured, it pairs one to one with T-256's packing, 6 squares beyond a tenth.
-      The ledger of 9 November (upper-bounds-927-931-20261109) records it. Registered as
-      T-275 at V3/C3 on the replay; the stage 4 review (think-rd0p), written blind in a
-      separate lane, and the adoption at 232 wait to be mapped. The Kaggle per-puzzle side the
+      The ledger of 9 November (upper-bounds-927-931-20261109) records it. Registered as T-275. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 232 under the house rule in the same pass, with Alex Chilton the packing's finder and Francisco Couzo and Özden its improvers, both strong generators' regularization of the new house run in the same change. The Kaggle per-puzzle side the
       issue quotes, 15.761657946434 (jazivxt), is above it and states no packing.
     read_through: '2026-11-09T06:03:45Z'
     results:
@@ -29030,17 +29028,15 @@ issues:
       evidence:
       - E-ozden-927-certificate-report
       - E-ozden-927-exact-feasibility
-      validation:
-      - think-rd0p
+      - E-ozden-927-review-exact-feasibility
     beads:
     - think-463r
     - think-rd0p
     answer_bead: think-463r
     replies: []
     close_when: >-
-      T-275 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
-      232 if the review accepts it, and the reply on main says what was retained and
-      replayed, what the review found and what the case did.
+      T-275 is on main at V3/C3 as the house at 232, and the reply on main says what was retained and
+      replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit 09e324f
       precedes the issue by 64 seconds; GitHub's activity log was not read, so its push is
@@ -29068,8 +29064,7 @@ issues:
       holds, the print is the exact side rounded up, and both maintained exact routes accept
       the witness and refuse its gross and sharp controls; measured, it pairs one to one with
       T-270's packing, 4 squares beyond a tenth. The ledger of 9 November records it.
-      Registered as T-276 at V3/C3 on the replay; the stage 4 review (think-rd0p) and the
-      adoption at 268 wait to be mapped. The Kaggle side the issue quotes, 16.874361715873
+      Registered as T-276. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 268 under the house rule in the same pass, with Evan Daniel the packing's finder and Özden its improver, both strong generators' regularization of the new house run in the same change. The Kaggle side the issue quotes, 16.874361715873
       (ntumlnoob), is above it and states no packing.
     read_through: '2026-11-09T06:03:46Z'
     results:
@@ -29084,17 +29079,15 @@ issues:
       evidence:
       - E-ozden-928-certificate-report
       - E-ozden-928-exact-feasibility
-      validation:
-      - think-rd0p
+      - E-ozden-928-review-exact-feasibility
     beads:
     - think-463r
     - think-rd0p
     answer_bead: think-463r
     replies: []
     close_when: >-
-      T-276 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
-      268 if the review accepts it, and the reply on main says what was retained and
-      replayed, what the review found and what the case did.
+      T-276 is on main at V3/C3 as the house at 268, and the reply on main says what was retained and
+      replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit a40a15d
       precedes the issue by 57 seconds. The issue lacks the intake label. T-270, the house it
@@ -29123,8 +29116,7 @@ issues:
       the witness and refuse its gross and sharp controls; measured, no symmetry pairs it one
       to one with T-263's packing by nearest centres, though the optimal assignment moves
       only 12 squares beyond a tenth and reverses one square's tilt. The ledger of 9 November
-      records it. Registered as T-277 at V3/C3 on the replay; the stage 4 review
-      (think-rd0p) and the adoption at 299 wait to be mapped. The Kaggle side the issue
+      records it. Registered as T-277. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 299 under the house rule in the same pass, with Evan Daniel the packing's finder and Özden its improver, both strong generators' regularization of the new house run in the same change. The Kaggle side the issue
       quotes, 17.801238552749 (jazivxt), is above it and states no packing.
     read_through: '2026-11-09T06:03:47Z'
     results:
@@ -29139,17 +29131,15 @@ issues:
       evidence:
       - E-ozden-929-certificate-report
       - E-ozden-929-exact-feasibility
-      validation:
-      - think-rd0p
+      - E-ozden-929-review-exact-feasibility
     beads:
     - think-463r
     - think-rd0p
     answer_bead: think-463r
     replies: []
     close_when: >-
-      T-277 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
-      299 if the review accepts it, and the reply on main says what was retained and
-      replayed, what the review found and what the case did, and that T-263 stays a verified
+      T-277 is on main at V3/C3 as the house at 299, and the reply on main says what was retained and
+      replayed, what the review found and that the case adopted it, and that T-263 stays a verified
       bound.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit a042eab
@@ -29177,8 +29167,7 @@ issues:
       holds, the print is the exact side rounded up, and both maintained exact routes accept
       the witness and refuse its gross and sharp controls; measured, it pairs one to one with
       T-272's packing, 5 squares beyond a tenth. The ledger of 9 November records it.
-      Registered as T-278 at V3/C3 on the replay; the stage 4 review (think-rd0p) and the
-      adoption at 303 wait to be mapped. The Kaggle side the issue quotes, 17.906978233799
+      Registered as T-278. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 303 under the house rule in the same pass, with Evan Daniel the packing's finder and Özden its improver, both strong generators' regularization of the new house run in the same change. The Kaggle side the issue quotes, 17.906978233799
       (ntumlnoob), is above it and states no packing.
     read_through: '2026-11-09T06:03:47Z'
     results:
@@ -29193,17 +29182,15 @@ issues:
       evidence:
       - E-ozden-930-certificate-report
       - E-ozden-930-exact-feasibility
-      validation:
-      - think-rd0p
+      - E-ozden-930-review-exact-feasibility
     beads:
     - think-463r
     - think-rd0p
     answer_bead: think-463r
     replies: []
     close_when: >-
-      T-278 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
-      303 if the review accepts it, and the reply on main says what was retained and
-      replayed, what the review found and what the case did.
+      T-278 is on main at V3/C3 as the house at 303, and the reply on main says what was retained and
+      replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit b43ca09
       precedes the issue by 42 seconds. The issue lacks the intake label. T-272, the house it
@@ -29229,8 +29216,7 @@ issues:
       every stated digest holds, the print is the exact side rounded up, and both maintained
       exact routes accept the witness and refuse its gross and sharp controls; measured, it
       pairs one to one with T-256's packing, 5 squares beyond a tenth. The ledger of 9
-      November records it. Registered as T-279 at V3/C3 on the replay; the stage 4 review
-      (think-rd0p) and the adoption at 307 wait to be mapped. The Kaggle side the issue
+      November records it. Registered as T-279. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 307 under the house rule in the same pass, with ntumlnoob the packing's finder and Francisco Couzo and Özden its improvers, both strong generators' regularization of the new house run in the same change. The Kaggle side the issue
       quotes, 17.979249693611 (mufasasimon), is above it and states no packing.
     read_through: '2026-11-09T06:03:48Z'
     results:
@@ -29245,17 +29231,15 @@ issues:
       evidence:
       - E-ozden-931-certificate-report
       - E-ozden-931-exact-feasibility
-      validation:
-      - think-rd0p
+      - E-ozden-931-review-exact-feasibility
     beads:
     - think-463r
     - think-rd0p
     answer_bead: think-463r
     replies: []
     close_when: >-
-      T-279 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
-      307 if the review accepts it, and the reply on main says what was retained and
-      replayed, what the review found and what the case did.
+      T-279 is on main at V3/C3 as the house at 307, and the reply on main says what was retained and
+      replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit dbe8838
       precedes the issue by 35 seconds. The issue lacks the intake label. No reply has been

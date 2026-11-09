@@ -10,14 +10,16 @@ on his behalf.
 ## What the Source Claims
 
 - `n-307-candidate.yaml`, a `packing.squares:Witness/v2` file (corners, rational scalars, 307
-  squares), states s(307) ≤ 17.9792309603873628… rounded up at 16 places, which #931 prints as
-  17.979230960388, the exact side rounded up at 12 places, and says is 2.032e-05 below the
-  record, Francisco Couzo’s refinement of ntumlnoob’s Kaggle notebook packing (T-256, #844). It claims an upper bound only: no KKT, local-optimality,
+  squares), bounds s(307) by its exact side, a fraction of more than 150 digits whose
+  16-place ceiling is 17.9792309603873628. #931 prints its 12-place ceiling, 17.979230960388, and says
+  it is 2.032e-05 below the record, Francisco Couzo’s refinement of ntumlnoob’s Kaggle notebook packing (T-256, #844). It claims an upper bound only: no KKT, local-optimality,
   rigidity or global-optimality claim.
 - The exact coordinates were made by this repository’s own `packing-witness promote
   --strategy robust-rational` at `19b354a5` from the lab’s decimal pose: pairs are separated
-  by at least about 2 × 10⁻¹³, and squares at the walls touch them exactly. So the side is a
-  fraction of more than 150 digits.
+  by at least about 2 × 10⁻¹³, and squares at the walls touch them exactly. Measured by the
+  stage 4 review, exactly three squares touch a wall, at the left, the bottom and the far
+  wall that sets the side, and the other 61 square–wall pairs within 10⁻¹² sit
+  2.62 × 10⁻¹⁷ to 10⁻¹² inside (its F4).
 - `n307-witness.json` is the same file as JSON. `packing-witness-verify.txt` is the author’s run
   of this repository’s `packing-witness verify` at `19b354a5` (VERIFIED, 46,971 pairs);
   `sqcheck-output.txt` is the author’s run of `verifier/sqcheck.py`, an exact checker the
@@ -63,7 +65,7 @@ kept in Git.
 (`devtools.upper_bound_reports check-claims`, read from `main` `19b354a5c` on 9 November
 2026):
 
-- **307:** exact side 17.9792309603873628…, below the case’s house (T-256, ntumlnoob, improved by Francisco Couzo) by
+- **307:** exact side 17.9792309603873628 rounded up at 16 places, below the case’s house (T-256, ntumlnoob, improved by Francisco Couzo) by
   2.032e-05, as the issue states; no register bound pending adoption below the
   house.
 
@@ -82,7 +84,7 @@ states no packing.
 house witness and the regularized view, and wrote [measure/identity.json](measure/identity.json).
 A measurement for credit; it decides nothing.
 
-- **307:** one to one with T-256’s packing under the identity by nearest centres; the optimal assignment moves 5 squares beyond 0.1 and 12 beyond 0.01 (largest 0.199974) and turns 114 squares by more than 10⁻⁶ radians, 6 of them by more than 1 degree and by up to 25.23 degrees, one of them to the other side of upright. Tilted beyond 1 degree: this packing 112, 80 turned one way and 32 the other; T-256 107, 74 and 33. The house witness measures the same. The regularized view the source says it started from is a corner witness whose schema path, `../../../witnesses/witness.schema.yaml`, the corner reader refuses, so it was not measured. So it is a further arrangement of T-256’s packing, one to one with it, and not a new arrangement.
+- **307:** one to one with T-256’s packing under the identity by nearest centres; the optimal assignment moves 5 squares beyond 0.1 and 12 beyond 0.01 (largest 0.199974) and turns 114 squares by more than 10⁻⁶ radians, 6 of them by more than 1 degree and by up to 25.23 degrees, one of them to the other side of upright. Tilted beyond 1 degree: this packing 112, 80 turned one way and 32 the other; T-256 107, 74 and 33. The house witness measures the same. Against the regularized view the source says it started from, a corner witness whose schema path, `../../../witnesses/witness.schema.yaml`, the corner reader takes since the stage 4 review’s F14, it is one to one under the identity, and the assignment moves 4 squares beyond 0.1 and 18 beyond 0.01 (largest 0.255), as the review measured. So it is a further arrangement of T-256’s packing, one to one with it, and not a new arrangement.
 
 ## Exact Replay
 
@@ -91,8 +93,8 @@ and outside-container controls on both maintained routes, each job in its own ch
 process: 3 jobs, 281,826 pair decisions, 119.86 route CPU seconds
 ([receipts/exact-certification.json.xz](receipts/exact-certification.json.xz)). The
 positive passed and both controls were refused on both routes.
-Squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
-least 2.017e-13.
+Three squares touch the box, a least wall clearance of exactly 0, and every pair clears
+by at least 2.017e-13.
 
 `devtools.upper_bound_reports sharp-controls` took the certificate to exact contact and
 1e-30 past it ([receipts/sharp-controls.json](receipts/sharp-controls.json)). It lowered
@@ -109,14 +111,26 @@ and the separating-axis method, and read the witness through the `witness-corner
 reader. The first route is the `packing-witness verify` the author ran on the same file,
 so on that route the replay is reproduced with the producer’s code; the second shares no
 verification code with it. Neither is independent of this repository’s `packing-witness
-promote`, which made the coordinates. The source’s own `sqcheck.py` was not run.
+promote`, which made the coordinates and itself ran `sqpack`’s exact `verify_packing` on
+them before writing them (the review’s F10). The source’s own `sqcheck.py` was not run.
+
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 9 November 2026
+([review-2026-11-09-ozden-927-931-five.md](../../../../docs/project/reviews/review-2026-11-09-ozden-927-931-five.md)),
+written in a separate lane blind to this one until its findings were frozen, accepts the
+certificate with findings, none blocking or major, and scores it S3. Its clean-room
+checker decides every square, wall and pair by separating axes in `Fraction` and by
+exact clipped areas in GMP rationals, with controls stated before they ran; its
+programs are kept once in the
+[s232 packet’s review directory](../ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md),
+and this count’s receipts in [review/review-2026-11-09/out/](review/review-2026-11-09/out/).
+The case adopted the certificate as its house on 9 November 2026 under the house rule,
+as T-279, in place of T-256.
 
 ## What Is Not Established
 
-- **The stage 4 review.** A separate lane (think-rd0p), blind to this one, reviews the
-  certificate; until its review is mapped the case keeps its house, T-256, and the
-  register entry T-279 stands at V3/C3 on this replay alone.
-- **Human oversight.** No human oversight record is retained.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.

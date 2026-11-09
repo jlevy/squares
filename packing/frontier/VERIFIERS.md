@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **242** programs: **54** external and **188** first-party; **161** decide claims and **81** check premises.
-- **707** of **900** evidence entries name the programs that verified them: 330 independently re-implemented, 303 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **243** programs: **54** external and **189** first-party; **162** decide claims and **81** check premises.
+- **712** of **905** evidence entries name the programs that verified them: 335 independently re-implemented, 303 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -274,6 +274,7 @@ second implementation agrees.
 | [`V-evand-1105-review-check`](#v-evand-1105-review-check) | decide_feasibility.py and sharp_controls.py | Squares Project (Levy) | first-party | decides | 1 | 7 |
 | [`V-unnir-924-review-decider`](#v-unnir-924-review-decider) | decide_bins.py with run_bins.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-unnir-924-review-premises`](#v-unnir-924-review-premises) | premises.py with net_coverage.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-ozden-1109-review-check`](#v-ozden-1109-review-check) | l64_check.py with l64_reader.py | Squares Project (Levy) | first-party | decides | 5 | 5 |
 
 ## By Program
 
@@ -4882,6 +4883,26 @@ The 8 November stage 4 review's exact premise check of unnir's s(12) certificate
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-n012-unnir-9929-2500-review-sweep` | replayed here | independently re-implemented, clean-room | full, 39,765 of 39,765: every bin of the net N = 96000 covering [0, 45] degrees (39,765, k = 0 to 39764), each over its whole centre domain, with the fold resting on the exact D4 check | T-274 |
+
+### `V-ozden-1109-review-check`
+
+**l64_check.py with l64_reader.py, l64_sat.py, l64_clip.py and l64_util.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 9 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2 certificates of issues 927 to 931 (232, 268, 299, 303 and 307), with a fail-closed reader of its own (PyYAML BaseLoader, duplicate keys refused, every scalar an integer or p/q, the JSON twin held to the same witness): every format hypothesis (envelope, n, distinct ids in order, side, unit size, corners, rational, lower-left origin, axes), every square a unit square from its listed corners, every wall and every pair twice with no distance filter, by separating axes over the four edge normals in fractions.Fraction (l64_sat.py) and by exact Sutherland-Hodgman clipped areas in gmpy2.mpq (l64_clip.py). l64_controls.py decides 19 controls a certificate and l64_controls_centre.py a 20-control addendum, each stated in a plan hashed before its program existed (the side at and one unit of its last place below its extent, every square to its nearest wall, every pair within 1e-12 to contact along its centre line and 1e-30 past it, an enlarged square, a duplicate, a translation out of the box, a broken square, the count and ids, the reversed rotation sense), and l64_selftest.py holds both methods to known answers, 3,000 random rational pairs and 1,000 random walls at contact and either side of it, and 32 malformed files.
+
+- Source: [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_check.py`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_check.py), [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_reader.py`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_reader.py), [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_sat.py`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_sat.py), [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_clip.py`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_clip.py), [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_util.py`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_util.py), [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_controls.py`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_controls.py), [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_controls_centre.py`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_controls_centre.py), [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_selftest.py`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md`](../../packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issues 927 to 931 (L64, think-rd0p), strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the import lane (L63, think-463r)), with its own prompt and code; authorship in common with the producer’s: system-family, The coordinates were made by this repository's packing-witness promote, whose witness tooling Claude agents co-authored, and the lab's issue 890 says Claude agents ran its checks. The six checker files were frozen at 2026-11-09T07:18:14Z (frozen/checker-frozen-digests.txt), before their author read any producer code or this repository's witness, verifier or promotion code; they import nothing from this repository or the sources.
+- Note: Written and run on 9 November 2026 for docs/project/reviews/review-2026-11-09-ozden-927-931-five.md (SHA-256 5c4927b88049a41a3fa1e822eab96d575d27f7d982058b272f677d87064c2058 for l64_check.py and 0e51d443fda1825b6ae207689ed932b9d1c73fc0c46aed0ceec153ba08be9c9c for l64_reader.py as retained, in the directory's programs.sha256, and as each receipt records), and kept once, with the shared receipts and those at 232, in the ozden-s232-upper-bound-2026-11-09 packet's review/review-2026-11-09/; each other count's receipts are in its own packet's. l64_sides.py, l64_custody.py, l64_house.py, l64_houses.py, l64_identity.py, l64_construct.py, l64_digests.py and l64_compare_lane.py, kept beside them, decide no certificate of the five and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-927-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 232: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-275 |
+| `E-ozden-928-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 268: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-276 |
+| `E-ozden-929-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 299: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-277 |
+| `E-ozden-930-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 303: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-278 |
+| `E-ozden-931-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 307: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-279 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

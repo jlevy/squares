@@ -10,14 +10,16 @@ on his behalf.
 ## What the Source Claims
 
 - `n-268-candidate.yaml`, a `packing.squares:Witness/v2` file (corners, rational scalars, 268
-  squares), states s(268) ≤ 16.8724698978362125… rounded up at 16 places, which #928 prints as
-  16.872469897837, the exact side rounded up at 12 places, and says is 2.962e-05 below the
-  record, Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s multi-gadget fault DP (T-270, #914). It claims an upper bound only: no KKT, local-optimality,
+  squares), bounds s(268) by its exact side, a fraction of more than 150 digits whose
+  16-place ceiling is 16.8724698978362125. #928 prints its 12-place ceiling, 16.872469897837, and says
+  it is 2.962e-05 below the record, Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s multi-gadget fault DP (T-270, #914). It claims an upper bound only: no KKT, local-optimality,
   rigidity or global-optimality claim.
 - The exact coordinates were made by this repository’s own `packing-witness promote
   --strategy robust-rational` at `19b354a5` from the lab’s decimal pose: pairs are separated
-  by at least about 2 × 10⁻¹³, and squares at the walls touch them exactly. So the side is a
-  fraction of more than 150 digits.
+  by at least about 2 × 10⁻¹³, and squares at the walls touch them exactly. Measured by the
+  stage 4 review, exactly three squares touch a wall, at the left, the bottom and the far
+  wall that sets the side, and the other 40 square–wall pairs within 10⁻¹² sit
+  2.53 × 10⁻¹⁶ to 10⁻¹² inside (its F4).
 - `n268-witness.json` is the same file as JSON. `packing-witness-verify.txt` is the author’s run
   of this repository’s `packing-witness verify` at `19b354a5` (VERIFIED, 35,778 pairs);
   `sqcheck-output.txt` is the author’s run of `verifier/sqcheck.py`, an exact checker the
@@ -63,7 +65,7 @@ kept in Git.
 (`devtools.upper_bound_reports check-claims`, read from `main` `19b354a5c` on 9 November
 2026):
 
-- **268:** exact side 16.8724698978362125…, below the case’s house (T-270, Evan Daniel, after Chris Deotte) by
+- **268:** exact side 16.8724698978362125 rounded up at 16 places, below the case’s house (T-270, Evan Daniel, after Chris Deotte) by
   2.962e-05, as the issue states; no register bound pending adoption below the
   house.
 
@@ -91,8 +93,8 @@ and outside-container controls on both maintained routes, each job in its own ch
 process: 3 jobs, 214,668 pair decisions, 93.19 route CPU seconds
 ([receipts/exact-certification.json.xz](receipts/exact-certification.json.xz)). The
 positive passed and both controls were refused on both routes.
-Squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
-least 2.012e-13.
+Three squares touch the box, a least wall clearance of exactly 0, and every pair clears
+by at least 2.012e-13.
 
 `devtools.upper_bound_reports sharp-controls` took the certificate to exact contact and
 1e-30 past it ([receipts/sharp-controls.json](receipts/sharp-controls.json)). It lowered
@@ -109,14 +111,26 @@ and the separating-axis method, and read the witness through the `witness-corner
 reader. The first route is the `packing-witness verify` the author ran on the same file,
 so on that route the replay is reproduced with the producer’s code; the second shares no
 verification code with it. Neither is independent of this repository’s `packing-witness
-promote`, which made the coordinates. The source’s own `sqcheck.py` was not run.
+promote`, which made the coordinates and itself ran `sqpack`’s exact `verify_packing` on
+them before writing them (the review’s F10). The source’s own `sqcheck.py` was not run.
+
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 9 November 2026
+([review-2026-11-09-ozden-927-931-five.md](../../../../docs/project/reviews/review-2026-11-09-ozden-927-931-five.md)),
+written in a separate lane blind to this one until its findings were frozen, accepts the
+certificate with findings, none blocking or major, and scores it S3. Its clean-room
+checker decides every square, wall and pair by separating axes in `Fraction` and by
+exact clipped areas in GMP rationals, with controls stated before they ran; its
+programs are kept once in the
+[s232 packet’s review directory](../ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md),
+and this count’s receipts in [review/review-2026-11-09/out/](review/review-2026-11-09/out/).
+The case adopted the certificate as its house on 9 November 2026 under the house rule,
+as T-276, in place of T-270.
 
 ## What Is Not Established
 
-- **The stage 4 review.** A separate lane (think-rd0p), blind to this one, reviews the
-  certificate; until its review is mapped the case keeps its house, T-270, and the
-  register entry T-276 stands at V3/C3 on this replay alone.
-- **Human oversight.** No human oversight record is retained.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
