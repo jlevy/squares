@@ -16,8 +16,9 @@ outputs:
   - papers/square-packing-methods-survey.md
 reason: >-
   Intake lane L71 of 9 November (think-he66): hosted run 42674158193 measured
-  result/t-180.html at 477,057 bytes once T-282 and T-283 are listed at 172 and 270, past
-  its 475,000 ceiling, so devtools/site_urls.py moves that page's budget exception to
+  result/t-180.html at 477,057 bytes once T-282 and T-283 are listed at 172 and 270
+  (474,579 on main 20f844dbf, run 42661656618), past its 475,000 ceiling, so
+  devtools/site_urls.py moves that page's budget exception to
   500,000 as a measured choice. No paper reads a page budget. Against main 20f844dbf
   (#934): devtools.compare_paper_renders rendered each paper into empty site directories,
   the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and

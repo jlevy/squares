@@ -9,7 +9,6 @@ paths:
   - packing/campaign/result-requests.yaml
   - packing/devtools/adopt_houses.py
   - packing/devtools/build_known_best_atlas.py
-  - packing/devtools/default_drawings.py
   - packing/devtools/regularize_axis_components.py
   - packing/devtools/site_resources.py
   - packing/devtools/upper_bound_houses.py
@@ -29,19 +28,21 @@ outputs:
 reason: >-
   Intake lane L71 of 9 November (think-he66), after the stage 4 review (L72, think-qqyg):
   T-282 and T-283 are mapped to the review at V3/C3 and adopted as the houses at 172 and
-  270, with the adoption's prose and credits, the house sources, the drawings' settlement
-  and runs, the axis tool's digit guard, the poster credit hold, the bound citations, the
-  composite figure's rigidity scopes, the gate's screen totals and the requests, coverage
-  and project-card entries. No paper prints those counts, these records or those cards.
-  Against main 20f844dbf (#934): devtools.compare_paper_renders rendered each paper into
-  empty site directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM),
-  twice from this tree and once with that main's copies of the thirteen paths above swapped
+  270, with the adoption's prose and credits, the house sources, the axis tool's digit
+  guard, the poster credit hold, the bound citations, the composite figure's rigidity
+  scopes, the gate's screen totals and the requests, coverage and project-card entries;
+  after the senior review of #937 (L74), 270 is drawn by grid-slack's view and the notes of
+  T-263 and T-275 to T-279 state the wall-enlargement sharp control as it ran. No paper
+  prints those counts, these records or those cards. Against main 20f844dbf (#934), measured
+  again after the senior review's fixes: devtools.compare_paper_renders rendered each paper
+  into empty site directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM),
+  twice from this tree and once with that main's copies of the twelve paths above swapped
   in. The optimality review, the threshold-bound review and the methods survey are
   byte-identical across the three, 43 files each. The explainer's 55 files are
   deterministic, and only its Markdown and HTML differ from the baseline; a Markdown diff of
-  a fresh pair of renders, from this tree and with main's copies of the thirteen paths
-  swapped in, shows the one change, the live register count in its framework section, "one
-  of 281 results the framework has registered so far" and now 283, which follows the site's
-  data and is not a revision of the paper (as the L36, L48, L49, L51, L57 and L63 records
-  say). No PDF was printed; each prints from that HTML. Every paper keeps its version:
-  v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
+  a fresh pair of renders, from this tree and with main's copies of the twelve paths swapped
+  in, shows the one change, the live register count in its framework section, "one of 281
+  results the framework has registered so far" and now 283, which follows the site's data
+  and is not a revision of the paper (as the L36, L48, L49, L51, L57 and L63 records say). No
+  PDF was printed; each prints from that HTML. Every paper keeps its version: v0.4.35,
+  v0.1.11, v0.1.4 and v0.2.7.

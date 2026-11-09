@@ -247,8 +247,10 @@ SLIDE_DIGITS = 4300
 refused. Python's default limit on integer text, at which the tool failed while writing a
 move until this guard: each slide's exact limit compounds the denominators of the squares it
 meets, and at n = 270 on Doğa Özden's certificate of 9 November 2026 (T-283) they passed
-4,300 digits within seconds and kept growing for more than half an hour of compaction. Every
-record retained before the guard stayed below it, since writing its moves would have failed."""
+4,300 digits within seconds; with Python's limit lifted, the compaction was stopped after
+about 40 CPU-minutes, still inside its pass cap of n + 2 passes, its arithmetic slowed by
+the digits it carried. Every record retained before the guard stayed below it, since
+writing its moves would have failed."""
 BOX_MARGIN = 1e-6
 """Float bounding boxes only prefilter exact tests. Coordinates stay below twenty, where
 binary64 is good to about 4e-15, so a pair whose boxes are this far apart is apart."""

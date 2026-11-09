@@ -195,8 +195,8 @@ def test_the_refused_records_split_by_their_witness_tilts() -> None:
     # either way. `KNOWN_TILTS` records it with the bead that owes its regularization, so
     # the record is held apart, in no class, and the rest split (review A6 of #756).
     # n = 270's house since 9 November 2026 (T-283, think-he66), which the axis tool
-    # refuses, holds 13 near-axis squares 1.05e-12 to 2.38e-7 degrees off the axis, held the
-    # same way under the bead that owns its solve (think-wju3).
+    # refuses while the layer draws grid-slack's view of it, holds 13 near-axis squares
+    # 1.05e-12 to 2.38e-7 degrees off the axis, held the same way (think-wju3).
     held_270 = {
         str(square): {
             "near_degrees": 0,

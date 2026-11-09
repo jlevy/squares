@@ -554,6 +554,32 @@ def test_the_atlas_layer_updates_checks_and_verifies(
     assert main(["--check-atlas"], layout=layout) == 1
 
 
+def test_the_atlas_records_a_frame_past_the_slide_digits_as_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A frame whose compaction passes `SLIDE_DIGITS` is a `refused` record with the kind
+    `slide-digits` and no view, as n = 270's is since 9 November 2026, and the layer still
+    checks. A bound of one refuses the row at 4, the one count here that slides."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    monkeypatch.setattr(axis, "SLIDE_DIGITS", 1)
+    layout = scratch_atlas(tmp_path)
+
+    assert main(["--update-atlas"], layout=layout) == 0
+    index = json.loads(layout.index.read_text())
+    records = {record["n"]: record for record in index["entries"]}
+    assert {n: record["status"] for n, record in records.items()} == {
+        2: "refused",
+        3: "unchanged",
+        4: "refused",
+    }
+    assert records[4]["refusal"]["kind"] == "slide-digits"
+    assert "passes 1 digits" in records[4]["refusal"]["reason"]
+    assert "view" not in records[4]
+    assert records[4]["shades"]["house"]["light_before"] == 4
+    assert sorted(path.name for path in layout.directory.iterdir()) == ["index.json"]
+    assert check_atlas(layout) == []
+
+
 def drawn_by_another_generator(layout: AtlasLayout, n: int) -> dict[str, Any]:
     """Draw count `n` from another generator's view, as an admission writes one: here the
     axis tool's own view relabelled, which is exact and verifies as any view must."""

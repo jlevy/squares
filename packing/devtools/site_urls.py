@@ -247,10 +247,11 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "counts (1,269 bytes). On 2 November 2026 it measures 450,697 bytes, after T-184 "
             "and T-191 settled 76 and 95 among its counts, so the ceiling moves to 475,000 "
             "as a measured choice. Those are byte measurements only; the timing is owed "
-            "under think-v4me, whose trigger has passed. Hosted run 42674158193 measures "
-            "477,057 bytes on 9 November 2026, once T-282 and T-283 (#935, #936) are listed "
-            "at 172 and 270, so the ceiling moves to 500,000 as a measured choice, room for "
-            "about 15 more listed results; the timing is still think-v4me's."
+            "under think-v4me, whose trigger has passed. Hosted run 42661656618 measures "
+            "474,579 bytes on main 20f844dbf on 9 November 2026, and run 42674158193 477,057 "
+            "once T-282 and T-283 (#935, #936) are listed at 172 and 270, about 1.24 KB a "
+            "result, so the ceiling moves to 500,000 as a measured choice, room for about 18 "
+            "more listed results; the timing is still think-v4me's."
         ),
     ),
     "result/t-068.html": (

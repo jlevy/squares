@@ -4900,9 +4900,9 @@ sources:
       claim. The lineage builds on this project: the source starts from the registry's
       regularized atlas and makes its exact coordinates with this repository's promotion tool.
       Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs, write-ups) and MIT
-      (verifier/sqcheck.py) by LICENSE.md at the pin, which also carries Evan Daniel's MIT
-      notice for the base packing's certificate. Ozden is Özden in the credit's ASCII.
-      Retained in web/ozden-s172-upper-bound-2026-11-09/.
+      (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
+      notice for the base packing's certificate, as LICENSE-evand-square-packing.txt. Ozden is
+      Özden in the credit's ASCII. Retained in web/ozden-s172-upper-bound-2026-11-09/.
   - key: '[Özden s270 upper bound 2026-11-09]'
     authors:
     - 'Özden'
@@ -4927,9 +4927,10 @@ sources:
       under his direction. No global optimality claim. The lineage builds on this project: the
       source starts from the registry's regularized atlas and makes its exact coordinates with
       this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose,
-      outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin, which also
-      carries Evan Daniel's MIT notice for the base packing's certificate. Ozden is Özden in
-      the credit's ASCII. Retained in web/ozden-s270-upper-bound-2026-11-09/.
+      outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also
+      carries Evan Daniel's MIT notice for the base packing's certificate, as
+      LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in
+      web/ozden-s270-upper-bound-2026-11-09/.
   - key: '[Yim certificates 2026-11-09]'
     authors:
     - Yim

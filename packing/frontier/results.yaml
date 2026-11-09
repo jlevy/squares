@@ -38316,9 +38316,7 @@ results:
       The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least far-wall
       clearance, closed the least-gap pair by its gap and moved every square toward the nearer near
       wall by its least clearance at every count it replays: both routes accepted each at exact
-      contact, margin 0, and refused each 1e-30 past it. They refused one square enlarged to its
-      pair and one to its wall at contact for its shape alone and 1e-30 past it for the overlap
-      or the wall as well, and refused a duplicated square.
+      contact, margin 0, and refused each 1e-30 past it. They refused one square enlarged to its pair at contact for its shape alone, accepted one already touching its wall at contact, its growth zero, refused each 1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
 
       At n = 299 the certificate is below the case's ceiling (Evan Daniel, after Chris Deotte, T-258)
       by 1.54e-08; smallest: this certificate.
@@ -40522,9 +40520,7 @@ results:
       The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
       far-wall clearance, closed the least-gap pair by its gap and moved every square toward the
       nearer near wall by its least clearance: both routes accepted each at exact contact, margin 0,
-      and refused each 1e-30 past it. They refused one square enlarged to its pair and one to its
-      wall at contact for its shape alone and 1e-30 past it for the overlap or the wall as well, and
-      refused a duplicated square.
+      and refused each 1e-30 past it. They refused one square enlarged to its pair at contact for its shape alone, accepted one already touching its wall at contact, its growth zero, refused each 1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
 
       At n = 232 the certificate is below the case's ceiling (Alex Chilton, improved by Francisco
       Couzo, T-256) by 2.52e-04; smallest: this certificate.
@@ -40716,9 +40712,7 @@ results:
       The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
       far-wall clearance, closed the least-gap pair by its gap and moved every square toward the
       nearer near wall by its least clearance: both routes accepted each at exact contact, margin 0,
-      and refused each 1e-30 past it. They refused one square enlarged to its pair and one to its
-      wall at contact for its shape alone and 1e-30 past it for the overlap or the wall as well, and
-      refused a duplicated square.
+      and refused each 1e-30 past it. They refused one square enlarged to its pair at contact for its shape alone, accepted one already touching its wall at contact, its growth zero, refused each 1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
 
       At n = 268 the certificate is below the case's ceiling (Evan Daniel, after Chris Deotte,
       T-270) by 2.96e-05; smallest: this certificate.
@@ -40914,9 +40908,7 @@ results:
       The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
       far-wall clearance, closed the least-gap pair by its gap and moved every square toward the
       nearer near wall by its least clearance: both routes accepted each at exact contact, margin 0,
-      and refused each 1e-30 past it. They refused one square enlarged to its pair and one to its
-      wall at contact for its shape alone and 1e-30 past it for the overlap or the wall as well, and
-      refused a duplicated square.
+      and refused each 1e-30 past it. They refused one square enlarged to its pair at contact for its shape alone, accepted one already touching its wall at contact, its growth zero, refused each 1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
 
       At n = 299 the certificate is below the case's ceiling (Evan Daniel, improved by Doğa Özden,
       T-263) by 2.34e-04; smallest: this certificate.
@@ -41118,9 +41110,7 @@ results:
       The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
       far-wall clearance, closed the least-gap pair by its gap and moved every square toward the
       nearer near wall by its least clearance: both routes accepted each at exact contact, margin 0,
-      and refused each 1e-30 past it. They refused one square enlarged to its pair and one to its
-      wall at contact for its shape alone and 1e-30 past it for the overlap or the wall as well, and
-      refused a duplicated square.
+      and refused each 1e-30 past it. They refused one square enlarged to its pair at contact for its shape alone, accepted one already touching its wall at contact, its growth zero, refused each 1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
 
       At n = 303 the certificate is below the case's ceiling (Evan Daniel, after Chris Deotte,
       T-272) by 4.35e-05; smallest: this certificate.
@@ -41318,9 +41308,7 @@ results:
       The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
       far-wall clearance, closed the least-gap pair by its gap and moved every square toward the
       nearer near wall by its least clearance: both routes accepted each at exact contact, margin 0,
-      and refused each 1e-30 past it. They refused one square enlarged to its pair and one to its
-      wall at contact for its shape alone and 1e-30 past it for the overlap or the wall as well, and
-      refused a duplicated square.
+      and refused each 1e-30 past it. They refused one square enlarged to its pair at contact for its shape alone, accepted one already touching its wall at contact, its growth zero, refused each 1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
 
       At n = 307 the certificate is below the case's ceiling (ntumlnoob, improved by Francisco
       Couzo, T-256) by 2.03e-05; smallest: this certificate.
@@ -41976,10 +41964,13 @@ results:
       credit to its base holder, Evan Daniel, and the improvement to Doğa Özden, and both strong
       generators' regularization of the new house in the same change. The rigidity block was
       derived again on the new witness (F10) and stays not rigid: 86 of its 172 squares translate,
-      against 93 of T-257's. Evan Daniel's regularizer drew the view the case now shows, at the
-      witness's side, and also solved the witness to a certified KKT point 2.63e-12 below its
-      side, about the certificate's own contraction margin, held at row 3 as a register candidate
-      (think-wju3) and not admitted.
+      against 93 of T-257's.
+
+      Evan Daniel's regularizer drew the view the case now shows, at the
+      witness's side, and also solved the witness to a certified KKT point 2.635e-12 below its
+      side, 1.04 times the certificate's own contraction margin (2.533e-12), held at row 3 as a
+      register candidate and not admitted; its registration waits on think-wju3 and on the owner's
+      question about gains near a certificate's padding (RV-3, think-ruu2, think-ikku).
 
       The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit block at
       172 until the next infographics cut redraws them (think-tj4o); the case record, its page and
@@ -42184,11 +42175,15 @@ results:
       credit to its base holder, Evan Daniel, and the improvement to Doğa Özden, and both strong
       generators' regularization of the new house in the same change. The rigidity block was
       derived again on the new witness (F10) and stays not rigid: 219 of its 270 squares translate,
-      against 24 of T-224's. The strong generators drew nothing the improvement rule takes and the
-      axis tool refuses the witness, so the case draws its house drawing, decided no better; Evan
-      Daniel's regularizer solved the witness to a certified KKT point 3.25e-12 below its side,
-      about the certificate's own contraction margin, held at row 3 as a register candidate
-      (think-wju3) and not admitted.
+      against 24 of T-224's.
+
+      The axis tool refuses the witness, its slide limits passing 4,300
+      digits, and grid-slack's 0.5-degree view is drawn at the witness's side: light, uneven and
+      near-axis squares 6, 13 and 0 against the house drawing's 40, 140 and 26, and 737 and 747
+      full shared sides against 407 and 727. Evan Daniel's regularizer solved the witness to a
+      certified KKT point 3.253e-12 below its side, 1.01 times the certificate's own contraction
+      margin (3.212e-12), held at row 3 as a register candidate and not admitted; its
+      registration waits on think-wju3 and on RV-3 (think-ruu2, think-ikku).
 
       The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit block at
       270 until the next infographics cut redraws them (think-tj4o); the case record, its page and
@@ -43288,6 +43283,20 @@ regularized_drawings:
         max_move: 1.270663e-94
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-269-regularized.yaml.gz
+    - n: 270
+      of: T-283
+      by: project
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 6
+        max_move: 0.08019168
+        max_turn_deg: 0.317719
+      view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
     - n: 271
       of: T-219
       by: project

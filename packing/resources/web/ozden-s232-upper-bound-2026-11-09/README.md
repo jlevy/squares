@@ -101,8 +101,10 @@ by at least 2.036e-13.
 the side by the least far-wall clearance, closed the least-gap pair by its gap, and
 moved every square toward the nearer near wall by its least clearance: both routes
 accepted each at contact with margin 0 and refused each past it.
-It enlarged one square to its pair and one to its wall: both routes refused each at
-contact for its shape alone and 1e-30 past it for the overlap or the wall as well.
+It enlarged one square to its pair and one to its wall: both routes refused the first
+at contact for its shape alone and accepted the second, already touching its wall and
+so grown by zero, at contact; both refused each 1e-30 past it for the overlap or the
+wall as well.
 Both refused a duplicated square.
 
 The two routes, the `sqpack` rational witness verifier and the independent rational
