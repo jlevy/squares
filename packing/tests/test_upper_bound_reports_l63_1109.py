@@ -75,28 +75,29 @@ PACKETS: dict[str, tuple[int, int, str, str, str, str]] = {
         "2.032e-05",
     ),
 }
-#: The SHA-256 digests the issues (the witness) and the READMEs (both files) print.
+#: The SHA-256 digests the issues (the witness) and the READMEs (both files) print, by count:
+#: the candidate YAML's, then its JSON copy's.
 PRINTED_DIGESTS = {
-    "ozden-s232-upper-bound-2026-11-09": {
-        "n-232-candidate.yaml": "22b3809ec29efbb3555d3eb2eaee89aa47901696b7c2578ccf8ff688d07f13e8",
-        "n232-witness.json": "51a17e96f1e6aa4989c295c1b235a51515165a88da57d4b904f748a0460aaf9b",
-    },
-    "ozden-s268-upper-bound-2026-11-09": {
-        "n-268-candidate.yaml": "74c0e5d4927ec57468f0cae71636ba46833230ceea4d1dd0cd5ddc1ed76421b3",
-        "n268-witness.json": "fcd07b9ff77e7e9be86fcf78eebee721bcfd1c4e5d6ffa2c8164847a4dd0d180",
-    },
-    "ozden-s299-upper-bound-2026-11-09": {
-        "n-299-candidate.yaml": "dfb0ccf71474a276a52ce768cc38e799d30ff6373a22b8ae318f58f278025d9d",
-        "n299-witness.json": "e2f178e7586729e3aa7ba5ad9c44eb8a406dbd1ca069a98b20ff367174036929",
-    },
-    "ozden-s303-upper-bound-2026-11-09": {
-        "n-303-candidate.yaml": "9cbeb7a8198ef9f3316f9e4dd0a998b879133a2e31e12c82c3fbe9882e0f2f3e",
-        "n303-witness.json": "0fd9f9dce219b250e21eb60a95e62c042df1baff4553dd7c4397fb397114c3a2",
-    },
-    "ozden-s307-upper-bound-2026-11-09": {
-        "n-307-candidate.yaml": "cb78adf88737718e4efe855bf5870879eef90ad30c386728d2ba64bb7f4e81e8",
-        "n307-witness.json": "612e97b1220ff5016e88c57d19293047da18d2e7775a8f99b0974cda1a6c706c",
-    },
+    232: (
+        "22b3809ec29efbb3555d3eb2eaee89aa47901696b7c2578ccf8ff688d07f13e8",
+        "51a17e96f1e6aa4989c295c1b235a51515165a88da57d4b904f748a0460aaf9b",
+    ),
+    268: (
+        "74c0e5d4927ec57468f0cae71636ba46833230ceea4d1dd0cd5ddc1ed76421b3",
+        "fcd07b9ff77e7e9be86fcf78eebee721bcfd1c4e5d6ffa2c8164847a4dd0d180",
+    ),
+    299: (
+        "dfb0ccf71474a276a52ce768cc38e799d30ff6373a22b8ae318f58f278025d9d",
+        "e2f178e7586729e3aa7ba5ad9c44eb8a406dbd1ca069a98b20ff367174036929",
+    ),
+    303: (
+        "9cbeb7a8198ef9f3316f9e4dd0a998b879133a2e31e12c82c3fbe9882e0f2f3e",
+        "0fd9f9dce219b250e21eb60a95e62c042df1baff4553dd7c4397fb397114c3a2",
+    ),
+    307: (
+        "cb78adf88737718e4efe855bf5870879eef90ad30c386728d2ba64bb7f4e81e8",
+        "612e97b1220ff5016e88c57d19293047da18d2e7775a8f99b0974cda1a6c706c",
+    ),
 }
 #: Each certificate's side rounded up at 16 places, as its claim record prints it.
 CEILINGS = {
@@ -126,11 +127,12 @@ def _up(side: Fraction, places: int) -> Fraction:
     return Fraction(math.ceil(side * 10**places), 10**places)
 
 
-@pytest.mark.parametrize("name", sorted(PRINTED_DIGESTS))
-def test_the_packets_hold_the_files_whose_digests_the_issues_print(name: str) -> None:
-    manifest = _manifest(name)
-    for path, digest in PRINTED_DIGESTS[name].items():
-        assert manifest[path] == digest, path
+@pytest.mark.parametrize("n", sorted(PRINTED_DIGESTS))
+def test_the_packets_hold_the_files_whose_digests_the_issues_print(n: int) -> None:
+    manifest = _manifest(f"ozden-s{n}-upper-bound-2026-11-09")
+    candidate, copy = PRINTED_DIGESTS[n]
+    assert manifest[f"n-{n}-candidate.yaml"] == candidate
+    assert manifest[f"n{n}-witness.json"] == copy
 
 
 @pytest.mark.parametrize("name", sorted(PACKETS))
@@ -173,7 +175,13 @@ def test_the_ledger_records_each_claim() -> None:
         for claim in count["steps"]:
             if claim["verdict"] == "recorded":
                 recorded.setdefault(count["n"], []).append(claim["report"])
-    assert recorded == {232: ["#927"], 268: ["#928"], 299: ["#929"], 303: ["#930"], 307: ["#931"]}
+    assert recorded == {
+        232: ["#927"],
+        268: ["#928"],
+        299: ["#929"],
+        303: ["#930"],
+        307: ["#931"],
+    }
 
 
 @pytest.mark.parametrize("name", sorted(PACKETS))
@@ -199,7 +207,7 @@ def test_the_retained_sharp_controls_meet_contact_and_refuse_1e30_past_it(name: 
     ],
 )
 def test_the_identity_measurement_the_notes_cite(
-    name: str, one_to_one: bool, beyond_tenth: int, tilted: tuple[int, int]
+    name: str, *, one_to_one: bool, beyond_tenth: int, tilted: tuple[int, int]
 ) -> None:
     """Measured against the house's packet first, then the house witness (and, where the
     adapter reads it, the regularized view the source says it started from)."""

@@ -1293,8 +1293,8 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893 and
-    # #927 to #931 and Yim's #895 touches the box. Couzo's #672 touches at 229 and clears every wall at 227,
-    # so its walls mix; every other source's clear it.
+    # #927 to #931 and Yim's #895 touches the box. Couzo's #672 touches at 229 and clears
+    # every wall at 227, so its walls mix; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()

@@ -85,3 +85,53 @@ deferrals:
     reason: 'The same configuration at 297 decided on sqpack''s exact verifier over its field (route 1
       of route B, think-ozx8); cited with route B''s verify_exact.py run when the house adopts T-247
       (think-vv1q owns that adoption).'
+  - evidence: E-ozden-927-exact-feasibility
+    results:
+    - T-275
+    bead: think-463r
+    blocked_on: think-rd0p
+    recorded: '2026-11-09'
+    reason: 'Both maintained exact routes'' complete replay of Özden''s #927 certificate at 232, which
+      T-275 cites at V3/C3. n-232 cites it when the house adopts T-275 in place of T-256, which the house
+      rule holds until the stage 4 review (think-rd0p), written in a separate blind lane, is mapped with
+      an accepted verdict; intake lane L63 (think-463r) owns that adoption.'
+  - evidence: E-ozden-928-exact-feasibility
+    results:
+    - T-276
+    bead: think-463r
+    blocked_on: think-rd0p
+    recorded: '2026-11-09'
+    reason: 'Both maintained exact routes'' complete replay of Özden''s #928 certificate at 268, which
+      T-276 cites at V3/C3. n-268 cites it when the house adopts T-276 in place of T-270, which the house
+      rule holds until the stage 4 review (think-rd0p), written in a separate blind lane, is mapped with
+      an accepted verdict; intake lane L63 (think-463r) owns that adoption.'
+  - evidence: E-ozden-929-exact-feasibility
+    results:
+    - T-277
+    bead: think-463r
+    blocked_on: think-rd0p
+    recorded: '2026-11-09'
+    reason: 'Both maintained exact routes'' complete replay of Özden''s #929 certificate at 299, which
+      T-277 cites at V3/C3. n-299 cites it when the house adopts T-277 in place of T-263, which the house
+      rule holds until the stage 4 review (think-rd0p), written in a separate blind lane, is mapped with
+      an accepted verdict; intake lane L63 (think-463r) owns that adoption.'
+  - evidence: E-ozden-930-exact-feasibility
+    results:
+    - T-278
+    bead: think-463r
+    blocked_on: think-rd0p
+    recorded: '2026-11-09'
+    reason: 'Both maintained exact routes'' complete replay of Özden''s #930 certificate at 303, which
+      T-278 cites at V3/C3. n-303 cites it when the house adopts T-278 in place of T-272, which the house
+      rule holds until the stage 4 review (think-rd0p), written in a separate blind lane, is mapped with
+      an accepted verdict; intake lane L63 (think-463r) owns that adoption.'
+  - evidence: E-ozden-931-exact-feasibility
+    results:
+    - T-279
+    bead: think-463r
+    blocked_on: think-rd0p
+    recorded: '2026-11-09'
+    reason: 'Both maintained exact routes'' complete replay of Özden''s #931 certificate at 307, which
+      T-279 cites at V3/C3. n-307 cites it when the house adopts T-279 in place of T-256, which the house
+      rule holds until the stage 4 review (think-rd0p), written in a separate blind lane, is mapped with
+      an accepted verdict; intake lane L63 (think-463r) owns that adoption.'

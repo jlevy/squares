@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **242** programs: **54** external and **188** first-party; **161** decide claims and **81** check premises.
-- **702** of **890** evidence entries name the programs that verified them: 330 independently re-implemented, 298 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **707** of **900** evidence entries name the programs that verified them: 330 independently re-implemented, 303 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -89,8 +89,8 @@ second implementation agrees.
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 108 | 104 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 100 | 104 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 113 | 109 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 105 | 109 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -195,10 +195,10 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 81 | 87 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 86 | 92 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-build-field-configuration`](#v-build-field-configuration) | devtools.build_field_configuration | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 76 | 82 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 81 | 87 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -1509,6 +1509,11 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-ozden-894-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 204 that T-264 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-264 |
 | `E-yim-895-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-265 |
 | `E-evand-914-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 7 of 7: the seven certificates at n = 175, 204, 260, 268, 293, 303 and 304 that T-267 to T-273 cite and the six regularized views beside them, every wall and every pair decided by both maintained routes; the kernel's controls are retained in each packet's receipt | T-267, T-268, T-269, T-270, T-271, T-272, T-273 |
+| `E-ozden-927-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 232 that T-275 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-275 |
+| `E-ozden-928-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 268 that T-276 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-276 |
+| `E-ozden-929-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 299 that T-277 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-277 |
+| `E-ozden-930-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 303 that T-278 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-278 |
+| `E-ozden-931-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 307 that T-279 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-279 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1623,6 +1628,11 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-ozden-894-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 204 that T-264 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-264 |
 | `E-yim-895-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-265 |
 | `E-evand-914-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 7 of 7: the seven certificates at n = 175, 204, 260, 268, 293, 303 and 304 that T-267 to T-273 cite and the six regularized views beside them, every wall and every pair decided by both maintained routes; the kernel's controls are retained in each packet's receipt | T-267, T-268, T-269, T-270, T-271, T-272, T-273 |
+| `E-ozden-927-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 232 that T-275 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-275 |
+| `E-ozden-928-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 268 that T-276 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-276 |
+| `E-ozden-929-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 299 that T-277 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-277 |
+| `E-ozden-930-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 303 that T-278 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-278 |
+| `E-ozden-931-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 307 that T-279 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-279 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -3603,6 +3613,11 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-ozden-894-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 204 that T-264 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-264 |
 | `E-yim-895-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-265 |
 | `E-evand-914-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 7 of 7: the seven certificates at n = 175, 204, 260, 268, 293, 303 and 304 that T-267 to T-273 cite and the six regularized views beside them, every wall and every pair decided by both maintained routes; the kernel's controls are retained in each packet's receipt | T-267, T-268, T-269, T-270, T-271, T-272, T-273 |
+| `E-ozden-927-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 232 that T-275 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-275 |
+| `E-ozden-928-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 268 that T-276 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-276 |
+| `E-ozden-929-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 299 that T-277 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-277 |
+| `E-ozden-930-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 303 that T-278 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-278 |
+| `E-ozden-931-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 307 that T-279 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-279 |
 
 ### `V-algebraic-witness-reports`
 
@@ -3720,6 +3735,11 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-ozden-894-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 204 that T-264 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-264 |
 | `E-yim-895-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 260 that T-265 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-265 |
 | `E-evand-914-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 7 of 7: the seven certificates at n = 175, 204, 260, 268, 293, 303 and 304 that T-267 to T-273 cite and the six regularized views beside them, every wall and every pair decided by both maintained routes; the kernel's controls are retained in each packet's receipt | T-267, T-268, T-269, T-270, T-271, T-272, T-273 |
+| `E-ozden-927-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 232 that T-275 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-275 |
+| `E-ozden-928-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 268 that T-276 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-276 |
+| `E-ozden-929-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 299 that T-277 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-277 |
+| `E-ozden-930-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 303 that T-278 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-278 |
+| `E-ozden-931-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 307 that T-279 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-279 |
 
 ### `V-rehwaldt-n68-verify`
 
