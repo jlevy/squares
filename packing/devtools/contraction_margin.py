@@ -23,15 +23,19 @@ is that measurement once (OR-1), and it reproduces that program's contracted sid
 exactly. The owner's question it serves, whether such a re-certification is a new result,
 is open (think-ruu2 RV-3, think-ikku); the module decides nothing about it.
 
-The contracted packing is decided on both maintained exact routes
-(`upper_bound_sharp_controls.decide`), so ``L'`` is a proved bound in its own right;
-``--no-routes`` skips that. A certificate that is no packing at its own side, with
-``lambda* > 1``, is refused.
+A certificate that is no packing at its own side is refused before anything is
+measured. Every square's exact axis extent must lie in its box, and ``lambda*`` must not
+exceed 1, which on the four edge normals is exact for a pair of squares. Both maintained
+exact routes (`upper_bound_sharp_controls.decide`) then decide the certificate as given,
+and it is refused unless both accept. They decide the contracted packing too, so ``L'``
+is a proved bound in its own right. ``--no-routes`` skips both route decisions and keeps
+the exact wall and pair checks.
 
 **Inputs** are `devtools.measure_identity`'s specs, ``[LABEL=]KIND:TARGET``: ``packet:NAME``
 (an import packet's admitted certificate, held to its custody) or ``FORMAT:PATH`` with a
 format of `devtools.upper_bound_reports.ADAPTERS`. ``--against`` names a later certificate
-of the same count, whose gain over the first is compared with the margin.
+of the same count, held to the same exact wall and pair checks, whose gain over the first
+is compared with the margin.
 
 From ``packing/``, with the project interpreter::
 
@@ -129,6 +133,23 @@ def _basis(pose: legacy.Pose) -> tuple[Fraction, Fraction]:
     return (1 - pose.t * pose.t) / denominator, 2 * pose.t / denominator
 
 
+def _half_width(pose: legacy.Pose) -> Fraction:
+    """Half the exact axis extent of a unit square at this pose, along x and along y."""
+    a, b = _basis(pose)
+    return (abs(a) + abs(b)) / 2
+
+
+def check_walls(certificate: legacy.Certificate) -> None:
+    """Refuse a certificate with a square outside its own box, read exactly."""
+    side = certificate.side
+    for index, pose in enumerate(certificate.poses, start=1):
+        half = _half_width(pose)
+        if min(pose.x, pose.y) - half < 0 or max(pose.x, pose.y) + half > side:
+            raise ContractionError(
+                f"no packing at its own side (square {index} outside the box)"
+            )
+
+
 def lambda_star(certificate: legacy.Certificate) -> tuple[Fraction, tuple[int, int]]:
     """The least factor that keeps every pair interior-disjoint, and the pair it binds."""
     rows = [(pose.x, pose.y, *_basis(pose)) for pose in certificate.poses]
@@ -154,7 +175,7 @@ def lambda_star(certificate: legacy.Certificate) -> tuple[Fraction, tuple[int, i
 
 def contract(certificate: legacy.Certificate, factor: Fraction) -> legacy.Certificate:
     """The packing scaled by ``factor`` about the origin, moved into the corner and boxed."""
-    halves = [(abs(a) + abs(b)) / 2 for a, b in map(_basis, certificate.poses)]
+    halves = [_half_width(pose) for pose in certificate.poses]
     xs = [factor * pose.x for pose in certificate.poses]
     ys = [factor * pose.y for pose in certificate.poses]
     left = min(x - h for x, h in zip(xs, halves, strict=True))
@@ -172,15 +193,33 @@ def _float(value: Fraction) -> str:
     return f"{float(value):.6e}"
 
 
-def margin(read: Read, *, routes: bool = True, against: Read | None = None) -> dict[str, Any]:
-    """The receipt: the factor, the contracted side, the margin, and the routes' verdicts."""
-    started = time.process_time()
-    certificate = read.certificate
-    factor, pair = lambda_star(certificate)
+def _packing(read: Read) -> tuple[Fraction, tuple[int, int]]:
+    """``lambda_star`` of a certificate whose every wall and pair holds exactly, or refused."""
+    try:
+        check_walls(read.certificate)
+    except ContractionError as error:
+        raise ContractionError(f"{read.label}: {error}") from error
+    factor, pair = lambda_star(read.certificate)
     if factor > 1:
         raise ContractionError(
             f"{read.label}: no packing at its own side (pair {pair} needs factor {factor})"
         )
+    return factor, pair
+
+
+def margin(read: Read, *, routes: bool = True, against: Read | None = None) -> dict[str, Any]:
+    """The receipt: the factor, the contracted side, the margin, and the routes' verdicts."""
+    started = time.process_time()
+    certificate = read.certificate
+    factor, pair = _packing(read)
+    if against is not None:
+        if against.certificate.n != certificate.n:
+            raise ContractionError("--against names a certificate of another count")
+        _packing(against)
+    given = sharp.decide(certificate, PROFILE) if routes else None
+    if given is not None and not all(item["passed"] for item in given.values()):
+        refusing = sorted(route for route, item in given.items() if not item["passed"])
+        raise ContractionError(f"{read.label}: no packing at its own side ({refusing} refuse)")
     contracted = contract(certificate, factor)
     record: dict[str, Any] = {
         "format": FORMAT,
@@ -194,14 +233,13 @@ def margin(read: Read, *, routes: bool = True, against: Read | None = None) -> d
         "margin": legacy.literal(certificate.side - contracted.side),
         "margin_float": _float(certificate.side - contracted.side),
     }
-    if routes:
+    if given is not None:
+        record["certificate_routes"] = given
         verdicts = sharp.decide(contracted, PROFILE)
         record["routes"] = verdicts
         record["routes_accept"] = all(item["passed"] for item in verdicts.values())
     if against is not None:
         later = against.certificate
-        if later.n != certificate.n:
-            raise ContractionError("--against names a certificate of another count")
         gain = certificate.side - later.side
         record["against"] = {
             "certificate": {"label": against.label, **against.source},

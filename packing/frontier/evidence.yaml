@@ -58371,7 +58371,7 @@ evidence:
       nice 19, 9 November 2026, from the packet's review/review-2026-11-09/:
       programs/l70_check.py on each of the eleven certificates at 553 to 700
       (out/check-yim-nNNN.json, ACCEPT at all eleven), deciding every square a unit square, every
-      wall and all 2,169,736 pairs by separating axes in Fraction and again by exact clipped areas
+      wall and all 2,169,636 pairs by separating axes in Fraction and again by exact clipped areas
       in gmpy2.mpq with no distance filter, the two agreeing on every class, in 461 CPU seconds.
       programs/l70_controls.py decided the controls of the plan frozen beforehand
       (out/controls-yim-nNNN.json) and programs/l70_controls_addendum.py the addendum frozen

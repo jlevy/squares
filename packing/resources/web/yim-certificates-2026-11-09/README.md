@@ -101,8 +101,9 @@ Git blob at the pin. The scope is 23 files: 16 retained under [source/](source/)
 `README.md`, the author’s profile page, says nothing about packing and is not in the
 scope. [acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) is the
 manifest and [acquisition/sources.json](acquisition/sources.json) the record.
-No file has more than 1,000 lines, and the packet is about 4 MB with its receipts, so it
-is kept in Git as stored.
+No retained certificate has more than 1,000 lines. The packet is about 7.3 MB with its
+receipts and the stage 4 review’s directory (3.4 MB, whose per-count receipts run to
+about 14,000 lines), so it is kept in Git as stored.
 
 ## Against the Record
 

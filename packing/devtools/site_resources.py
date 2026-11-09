@@ -296,7 +296,9 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Kaelan Yim",
         (
             "A further arrangement of Evan Daniel's packing, one to one with it,"
-            " 1.99e-10 below it (T-265)."
+            " 1.99e-10 below it (T-265); eleven certificates beyond the case corpus,"
+            " 553 to 700, below Francisco Couzo's rows; and re-certifications at 130,"
+            " 299 and 303, held for the owner (T-280, T-281)."
         ),
     ),
     (

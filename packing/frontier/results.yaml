@@ -40961,8 +40961,8 @@ results:
 
       The issue says this supersedes the author's own T-263 at 299, which stays a verified bound at
       V3/C3 and keeps its certificate as history. Later certificates at 299 and 303 published in
-      the watched repository vitamoon/vitamoon are later reports, tracked on think-h96r; this
-      entry decides nothing about them.
+      the watched repository vitamoon/vitamoon are later reports, registered as T-280 and held
+      for the owner (think-h96r, think-ruu2's RV-3); this entry decides nothing about them.
 
       Adopted at 299 on 9 November 2026 under the house rule, in place of T-263, with the packing's
       credit to its base holders and the improvement to Doğa Özden, and both strong generators'
@@ -41161,8 +41161,8 @@ results:
       T-272 was registered on 5 November 2026 and became the case's house in the adoption that
       reached main on 6 November; it stays a verified bound at V3/C3 and keeps its certificate as
       history. Later certificates at 299 and 303 published in the watched repository
-      vitamoon/vitamoon are later reports, tracked on think-h96r; this entry decides nothing
-      about them.
+      vitamoon/vitamoon are later reports, registered as T-280 and held for the owner
+      (think-h96r, think-ruu2's RV-3); this entry decides nothing about them.
 
       Adopted at 303 on 9 November 2026 under the house rule, in place of T-272, with the packing's
       credit to its base holders and the improvement to Doğa Özden, and both strong generators'
@@ -41499,6 +41499,7 @@ results:
     - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n299.json
     - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n303.json
     - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/contract.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/compare-lane.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l65_1109.py
@@ -41708,6 +41709,7 @@ results:
     - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/README.md
     - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/check-yim-n130.json
     - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/contract.json
+    - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/out/compare-lane.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l65_1109.py
@@ -41737,8 +41739,9 @@ results:
       certificate to first contact takes it down by 2.183057e-13, to
       11.902430645982047452..., equal to the 31 October review's retained figure. The gain
       here is 0.0896 of that margin, so the contracted T-259 lies 1.99e-13 below this
-      certificate; a packing at that side is this project's own held candidate (think-ruu2),
-      not a report.
+      certificate. This project's own held candidate (think-ruu2), the regularizer's solve
+      2.50e-13 below T-259, lies lower still, 3.17e-14 below the contracted side; it is not a
+      report.
 
       The stage 4 review of 9 November 2026 (docs/project/reviews/review-2026-11-09-yim-vitamoon.md, think-i5a5),
       written in a separate lane blind to this one until its findings were frozen, accepts
@@ -41750,12 +41753,14 @@ results:
       the hold stay until the owner answers, and the review is mapped here now, at C1, with the
       replay and its own run not entered, as T-260's are.
     next_rung: >-
-      Held for the owner's question (think-ikku's RV-1, with think-oqjd and think-ruu2's
-      RV-3): whether the 23 October restatement ruling reaches counts inside the corpus, and
-      another holder's re-certification. If it does, the entry is withdrawn and no house
-      moves; if it does not, the replay and the review's clean-room run are entered, both
-      rungs rise to V3 and C3, and 130 is adopted under the house rule with both strong
-      generators' regularization. The stage 4 review of 9 November is mapped now, at C1, as
+      Held for the owner's two questions: think-ikku's RV-1 (with think-oqjd), whether the 23
+      October restatement ruling reaches counts inside the corpus and another holder's
+      re-certification; and think-ruu2's RV-3, whether a re-certification within the earlier
+      certificate's own padding is a new result. If either answer makes it a restatement
+      (RV-1 yes, or RV-3's option (a)), the entry is withdrawn and no house moves; if both
+      leave it standing, the replay and the review's clean-room run are entered, both rungs
+      rise to V3 and C3, and 130 is adopted under the house rule with both strong generators'
+      regularization. The stage 4 review of 9 November is mapped now, at C1, as
       T-260's is; only the evidence and the adoption wait on the owner.
     reviews:
     - path: docs/project/reviews/review-2026-11-09-yim-vitamoon.md
@@ -41780,8 +41785,8 @@ results:
       - T-281
     unfinished_confirmations:
     - what: >-
-        The owner's answer to think-ikku's RV-1 (and think-oqjd); then, if the count stays
-        recorded, the replay and the review's clean-room run, both already retained, entered as
+        The owner's answers to think-ikku's RV-1 (and think-oqjd) and think-ruu2's RV-3; then,
+        if both leave the count recorded, the replay and the review's clean-room run, both already retained, entered as
         the stage 4 exit
       rung: C3
       link: think-ikku
@@ -41794,7 +41799,7 @@ results:
         priced: '2026-11-09'
     regularizations:
     - n: 130
-      of: T-254
+      of: T-259
       by: '[Yim certificates 2026-11-09]'
       method: >-
         T-259's certificate under one common translation, with the box lowered to the packing's
