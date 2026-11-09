@@ -146,7 +146,7 @@ def test_each_print_is_its_exact_side_rounded_up_and_its_reader_rebuilds_it(name
     assert (declaration["requested"], declaration["replayed"]) == ([n], [n])
     (row,) = declaration["certificates"]
     assert (row["n"], row["format"], row["offered"]) == (n, "witness-corners", printed)
-    assert [other["path"] for other in row["same_packing"]] == [f"n{n}-witness.json"]
+    assert [other["path"] for other in row.get("same_packing", [])] == [f"n{n}-witness.json"]
     side = reports.read_facts(reports.packet_path(name))[n].side
     assert _up(side, 12) == Fraction(Decimal(printed))
     assert _up(side, 16) == Fraction(Decimal(CEILINGS[n]))
