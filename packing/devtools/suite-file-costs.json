@@ -198,6 +198,7 @@
     "packing/tests/test_contact_realization.py": 0.024,
     "packing/tests/test_contact_scaffold_atlas.py": 0.004,
     "packing/tests/test_continuous_pose_followup.py": 0.036,
+    "packing/tests/test_contraction_margin.py": 1.769,
     "packing/tests/test_contributor_occurrences.py": 14.053,
     "packing/tests/test_contributors.py": 0.522,
     "packing/tests/test_control_anchors.py": 0.084,
@@ -778,6 +779,7 @@
     "packing/tests/test_upper_bound_reports_755.py": 51.0,
     "packing/tests/test_upper_bound_reports_couzo_670_672_675.py": 4.0,
     "packing/tests/test_upper_bound_reports_fang_direct.py": 3.444,
+    "packing/tests/test_upper_bound_reports_l65_1109.py": 3.397,
     "packing/tests/test_upper_bound_reports_n204.py": 0.429,
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 7.404,
     "packing/tests/test_upper_bound_reports_regularized.py": 5.364,
@@ -931,6 +933,21 @@
           "report": "packing/devtools/suite-file-cost-admissions/ryu-k2-minus-c-labels-2026-11-02.json",
           "provenance": {},
           "tests": 20
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_contraction_margin.py",
+        "packing/tests/test_upper_bound_reports_l65_1109.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/l65-new-modules-2026-11-09.json",
+          "provenance": {},
+          "tests": 30
         }
       ]
     }

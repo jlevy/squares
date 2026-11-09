@@ -112,8 +112,9 @@ NOTEBOOK_SOURCES = frozenset(
     item.source for item in horizon.RELEASES.values() if item.claim_map == horizon.PUSH
 )
 #: Reports after #763 and the push whose rows supersede theirs at some of these counts:
-#: #798's (think-2l0q).
-LATER_REPORTS = frozenset({"amundsk-issue798-2026-10-24"})
+#: #798's (think-2l0q), and Kaelan Yim's vitamoon publications of 9 November at 553 to 700
+#: (think-h96r).
+LATER_REPORTS = frozenset({"amundsk-issue798-2026-10-24", "yim-certificates-2026-11-09"})
 #: This import's rows the push's first row supersedes directly: 867, Couzo's own at
 #: fa6237e, which the Kaggle account kyleluecke's row supersedes in turn.
 SUPERSEDED_BY_NOTEBOOKS = {867: "couzo-fa6237e-2026-10-23"}

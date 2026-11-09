@@ -58,6 +58,12 @@ SUPERSEDED = {n: "couzo-issue763-2026-10-23" for n in PRINTED if n > 324} | {
 }
 #: In the corpus: the house each certificate is compared with, and the gap, rounded.
 HOUSES = {130: ("T-259", "1.955e-14"), 299: ("T-277", "1.182e-12"), 303: ("T-278", "3.291e-12")}
+#: The source key of each house's reported lane, which the holds leave in place.
+HOUSE_KEYS = {
+    130: "[Mishapolk issue 846 2026-10-30]",
+    299: "[Özden s299 upper bound 2026-11-09]",
+    303: "[Özden s303 upper bound 2026-11-09]",
+}
 #: Each in-corpus certificate's gain over its house as a share of the house certificate's
 #: own uniform-contraction margin (measure/contraction-nNNN.json).
 SHARES = {130: "0.0896", 299: "0.3472", 303: "0.9674"}
@@ -188,10 +194,9 @@ def test_the_holds_and_the_rows() -> None:
         assert entry["attribution"]["source_keys"] == [SOURCE_KEY]
         assert entry["unfinished_confirmations"][0]["link"] == link
         assert [item["n"] for item in entry["regularizations"]] == scope
-    for n, (house, _gap) in HOUSES.items():
+    for n, key in HOUSE_KEYS.items():
         case = coverage.parse_case(reports.ROOT / f"frontier/n-{n:03d}.md")
-        evidence = case["verified_upper_bound"]["evidence"]
-        assert not any(item.startswith("E-yim-1109") for item in evidence), (n, house)
+        assert case["reported_upper_bound"]["source_key"] == key
     document = yaml.safe_load(coverage.COVERAGE.read_text("utf-8"))
     current = coverage.current_beyond_horizon(document)
     for n, source in SUPERSEDED.items():
