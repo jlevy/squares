@@ -1,0 +1,273 @@
+{
+ "172": {
+  "draft_entry": {
+   "found": true,
+   "review_score": 3,
+   "score": 3,
+   "side_equals_certificate": true
+  },
+  "identity": {
+   "lane_opposite_sign": 9,
+   "largest_move_lane_review": [
+    "0.668426",
+    0.668426
+   ],
+   "largest_turn_lane_review": [
+    "44.61",
+    44.6145
+   ],
+   "moved_beyond_lane_review": {
+    "1e-1": [
+     15,
+     15
+    ],
+    "1e-2": [
+     69,
+     69
+    ],
+    "1e-3": [
+     168,
+     168
+    ],
+    "1e-6": [
+     171,
+     171
+    ],
+    "1e-9": [
+     171,
+     171
+    ]
+   },
+   "nearest_one_to_one": [
+    false,
+    false
+   ],
+   "sign_changes_recomputed": [
+    {
+     "from_deg": -44.628,
+     "square": 11,
+     "to_deg": 44.218,
+     "turn_deg": 1.154
+    },
+    {
+     "from_deg": -44.614,
+     "square": 14,
+     "to_deg": 44.218,
+     "turn_deg": 1.168
+    },
+    {
+     "from_deg": -44.615,
+     "square": 18,
+     "to_deg": 44.218,
+     "turn_deg": 1.167
+    },
+    {
+     "from_deg": -44.606,
+     "square": 20,
+     "to_deg": 44.218,
+     "turn_deg": 1.176
+    },
+    {
+     "from_deg": -44.606,
+     "square": 21,
+     "to_deg": 44.218,
+     "turn_deg": 1.176
+    },
+    {
+     "from_deg": -44.987,
+     "square": 22,
+     "to_deg": 44.218,
+     "turn_deg": 0.795
+    },
+    {
+     "from_deg": -44.606,
+     "square": 24,
+     "to_deg": 44.218,
+     "turn_deg": 1.176
+    },
+    {
+     "from_deg": -44.996,
+     "square": 25,
+     "to_deg": 44.218,
+     "turn_deg": 0.786
+    },
+    {
+     "from_deg": -44.606,
+     "square": 109,
+     "to_deg": 44.218,
+     "turn_deg": 1.176
+    }
+   ],
+   "tilted_beyond_1deg_lane": [
+    49,
+    49
+   ],
+   "tilted_beyond_1deg_review": [
+    49,
+    49
+   ],
+   "tilted_within_1deg_of_45": {
+    "candidate": 44,
+    "house": 45
+   },
+   "turned_beyond_1e-6_rad_lane_review": [
+    58,
+    58
+   ]
+  },
+  "packet": "packing/resources/web/ozden-s172-upper-bound-2026-11-09",
+  "padding": {
+   "lane_certificate_own_margin": "2.53e-12",
+   "lane_house_margin": "1.36e-19",
+   "review_certificate_binding_pair": [
+    36,
+    38
+   ],
+   "review_certificate_contracted_decided": {
+    "at_first_contact": "ACCEPT",
+    "past_first_contact": "REFUSE"
+   },
+   "review_certificate_one_minus_lambda": "2.0083393e-13",
+   "review_certificate_own_margin": "2.5334578e-12",
+   "review_house_margin": "1.3617935e-19"
+  },
+  "replay": {
+   "exact_verify": {
+    "least_clearance": "0",
+    "least_clearance_equals_review": true,
+    "least_pair_gap_equals_review": true,
+    "pairs_tested": 14706,
+    "passed": true,
+    "side_equals_review": true
+   },
+   "independent": {
+    "least_clearance": "0",
+    "least_clearance_equals_review": true,
+    "least_pair_gap_equals_review": true,
+    "pairs_tested": 14706,
+    "passed": true,
+    "side_equals_review": true
+   }
+  }
+ },
+ "270": {
+  "draft_entry": {
+   "found": true,
+   "review_score": 2,
+   "score": 2,
+   "side_equals_certificate": true
+  },
+  "identity": {
+   "lane_opposite_sign": 0,
+   "largest_move_lane_review": [
+    "0.217858",
+    0.217858
+   ],
+   "largest_turn_lane_review": [
+    "32.3",
+    32.2998
+   ],
+   "moved_beyond_lane_review": {
+    "1e-1": [
+     1,
+     1
+    ],
+    "1e-2": [
+     14,
+     14
+    ],
+    "1e-3": [
+     41,
+     41
+    ],
+    "1e-6": [
+     270,
+     270
+    ],
+    "1e-9": [
+     270,
+     270
+    ]
+   },
+   "nearest_one_to_one": [
+    true,
+    true
+   ],
+   "sign_changes_recomputed": [],
+   "tilted_beyond_1deg_lane": [
+    66,
+    67
+   ],
+   "tilted_beyond_1deg_review": [
+    66,
+    67
+   ],
+   "tilted_within_1deg_of_45": {
+    "candidate": 0,
+    "house": 0
+   },
+   "turned_beyond_1e-6_rad_lane_review": [
+    92,
+    92
+   ]
+  },
+  "packet": "packing/resources/web/ozden-s270-upper-bound-2026-11-09",
+  "padding": {
+   "lane_certificate_own_margin": "3.21e-12",
+   "lane_house_margin": "1.69e-19",
+   "review_certificate_binding_pair": [
+    220,
+    234
+   ],
+   "review_certificate_contracted_decided": {
+    "at_first_contact": "ACCEPT",
+    "past_first_contact": "REFUSE"
+   },
+   "review_certificate_one_minus_lambda": "2.0162475e-13",
+   "review_certificate_own_margin": "3.2115090e-12",
+   "review_house_margin": "1.6928162e-19"
+  },
+  "replay": {
+   "exact_verify": {
+    "least_clearance": "0",
+    "least_clearance_equals_review": true,
+    "least_pair_gap_equals_review": true,
+    "pairs_tested": 36315,
+    "passed": true,
+    "side_equals_review": true
+   },
+   "independent": {
+    "least_clearance": "0",
+    "least_clearance_equals_review": true,
+    "least_pair_gap_equals_review": true,
+    "pairs_tested": 36315,
+    "passed": true,
+    "side_equals_review": true
+   }
+  }
+ },
+ "bead": "think-qqyg",
+ "commit": "3e81f5d01171d8dc9f34d9e54f516f9e00b15ca7",
+ "cpu_seconds": 121.31,
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "lane": "L72",
+ "lane_compared": "L71",
+ "mismatches": [],
+ "program": "l72_compare_lane.py",
+ "program_digests": {
+  "l72_compare_lane.py": "d2ccd61a5136abf7c20e1432de53f7fb2d6768ba8113ec76cb957c6d2cbfcd64",
+  "l72_house.py": "77c6851d2be3be635f575e9745157daa15f0d3f68ef7eb1944123b3304d3aff5",
+  "l72_houses.py": "4829b7b8bfc2823586b14329dfcdfb0e79d52c51aef8fc6a777cf08da74065fe",
+  "l72_identity.py": "75ec4dd096718daa186abff25cd183c8545fb2dfc6bc1e1e1886bdb9156cc474",
+  "l72_reader.py": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a",
+  "l72_sat.py": "a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "verdict": "LANE_EQUALS_REVIEW",
+ "written_utc": "2026-11-09T16:51:18Z"
+}
