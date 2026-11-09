@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #935, #936 (Özden's s(172), s(270))"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l72-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T15:54:59.302Z
-updated_at: 2026-11-09T16:31:08.440Z
+updated_at: 2026-11-09T16:42:59.359Z
 started_at: 2026-11-09T15:55:07.051Z
 ---
 
@@ -64,3 +64,10 @@ house witnesses under the identity. 172: nearest centres miss one to one by one 
 15 beyond 0.1, tilts move between squares (further arrangement, as the 299 precedent). 270: one to one,
 all ids kept, 1 beyond 0.1 (sq 59 straightens 32.3 deg). Pose vs certificate: no dilation, margins the
 pose's own to 7e-37. Next: write the review, freeze findings, then reconcile with L71.
+
+2026-11-09T16:42:21Z FINDINGS FROZEN, before anything of L71's, sqcheck.py, or this repository's verifier
+and promotion code was opened. frozen/review-2026-11-09-ozden-935-936.frozen.md: 778 lines, 51,671 bytes,
+SHA-256 26df28bbf7a6c452284fa11bebbc5018c581e9248f0ff13eb09188c086058d58.
+Verdicts: accepted at both counts; F1-F14 all notes. S3 at 172; S2 at 270 (borderline, inside the
+1.15e-5..1.88e-5 band; S3 alternative stated). Final run: ALL_RECEIPTS_MATCH, ~578 CPU-s.
+Next: read L71's branch claude/bold-ritchie-xo28us-l71 and reconcile in a separate section.
