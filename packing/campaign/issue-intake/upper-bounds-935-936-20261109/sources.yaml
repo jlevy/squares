@@ -1,0 +1,72 @@
+# What `python -m devtools.intake_ledger gather` reads: the two upper bounds at n <= 324 that lane
+# L71 of the intake pass (think-3guf) takes in on 9 November 2026, Doğa Özden's #935 at 172 and
+# #936 at 270, each posted by his AI agent's account kenaznia-doga 26 and 17 seconds after the one
+# commit of the repository that holds its certificate. GitHub's activity log was not read, so no
+# push time is recorded; each issue dates its report, and nothing else reached these counts
+# between the commits and the issues. The starts are frozen at main ef1af4933 (#933's merge):
+# T-257 at 172 (Evan Daniel's #845 packing) and T-224 at 270 (Evan Daniel's #703 packing, found in
+# a sweep from Nate Chaoweeraprasit's SQUISH packing), in both lanes, with no register bound
+# pending adoption below them. Each claim's exact side is its certificate's header, read by the
+# packet's claim record (acquisition/claims.json), which the lane wrote from main ef1af4933; each
+# issue prints that side rounded up at 12 places, and the claim record's admission holds the
+# print to it. The Kaggle per-puzzle sides the issues quote at both counts, each above its claim,
+# state no packing and are no report.
+format: intake-ledger-sources-v1
+read_at_main: ef1af4933294cdff56e840d018d0465cf103c449
+read_on: '2026-11-09'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l71
+  branch: claude/bold-ritchie-xo28us-l71
+  commit: ef1af4933294cdff56e840d018d0465cf103c449
+  note: The packets' claim records, written on the lane's branch from main ef1af4933 and read here by path.
+reports:
+- report: '#935'
+  issue: 935
+  holders: Doğa Özden
+  bead: think-he66
+  lanes:
+  - lane: l71
+    packet: ozden-s172-upper-bound-2026-11-09
+    record: claims.json
+    counts: [172]
+  claims:
+  - n: 172
+    measured:
+      against: T-257
+      finding: no symmetry pairs it one to one by nearest centres, missing by one shared centre; the optimal assignment
+        (the identity) moves 15 squares beyond 0.1 and 69 beyond 1e-2 (largest 0.668) and turns 58 squares by more
+        than 1e-6 radians, 15 of them by more than 1 degree and by up to 44.61 degrees, nine of them squares near 45
+        degrees turning by 0.8 to 1.2 degrees, no tilt reversed; 49 tilted squares against T-257's 49; a further
+        arrangement of T-257's packing, not one to one with it by nearest centres
+      source: packing/resources/web/ozden-s172-upper-bound-2026-11-09/measure/identity.json
+  note: >-
+    The issue names 2ce1f7c, committed at 2026-11-09T15:28:22Z, 26 seconds before the issue. It says the packing
+    starts from the registry's 172 (T-257, #845), taken from this repository's regularized known-best atlas, and
+    calls it neither new nor a refinement, so the claim is not classified; the measurement names the relation.
+- report: '#936'
+  issue: 936
+  holders: Doğa Özden
+  bead: think-he66
+  lanes:
+  - lane: l71
+    packet: ozden-s270-upper-bound-2026-11-09
+    record: claims.json
+    counts: [270]
+  claims:
+  - n: 270
+    measured:
+      against: T-224
+      finding: one to one under the identity by nearest centres; the optimal assignment moves 1 square beyond 0.1
+        and 14 beyond 1e-2 (largest 0.218) and turns 92 squares by more than 1e-6 radians, 1 of them by more than 1
+        degree and by up to 32.30 degrees; 66 tilted squares against T-224's 67, none reversed; a further
+        arrangement of T-224's packing, one to one with it
+      source: packing/resources/web/ozden-s270-upper-bound-2026-11-09/measure/identity.json
+  note: >-
+    The issue names 78ab8ce, committed at 2026-11-09T15:28:32Z, 17 seconds before the issue. It says the packing
+    starts from the registry's 270 (T-224, #703), taken from this repository's regularized known-best atlas, and
+    calls it neither new nor a refinement, so the claim is not classified; the measurement names the relation.
+exceptions: []
+other_items: []

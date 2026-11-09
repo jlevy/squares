@@ -128,6 +128,10 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: 2026 (think-463r) moved it at its five, to Doğa Özden's rationally promoted certificates
 #: (T-275 to T-279), each with three squares on a wall and 31 to 61 more within 1e-12 of
 #: one (review F4 of #927 to #931): 268 joined and 303 left, and 232, 299 and 307 stayed.
+#: The same day's later pass (think-he66) moved it at its two, to his certificates of issues
+#: 935 and 936 (T-282, T-283): 172 left, its new certificate stable across the tolerances,
+#: and 270 joined, with three squares on a wall and 31 more 7.3e-8 to 2.9e-6 from one
+#: (review F4 of #935 and #936).
 #: Re-screening the adopted counts with the screen's own `--update --n` rebuilds the
 #: retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -147,7 +151,8 @@ GOLDEN_UNSTABLE = {
         129,
         132,
         146,
-        172,
+        # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
+        # stable across tolerances.
         175,
         176,
         177,
@@ -164,7 +169,8 @@ GOLDEN_UNSTABLE = {
         129,
         132,
         146,
-        172,
+        # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
+        # stable across tolerances.
         175,
         176,
         177,
@@ -191,6 +197,9 @@ GOLDEN_UNSTABLE = {
         # November 2026 with Doğa Özden's further arrangement of it (T-276, think-463r).
         268,
         269,
+        # 270 joined on 9 November 2026 with Doğa Özden's further arrangement of T-224's
+        # packing (T-283, think-he66).
+        270,
         273,
         293,
         297,

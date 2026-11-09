@@ -1,0 +1,147 @@
+{
+ "bead": "think-qqyg",
+ "checker_against_freeze": {
+  "l72_check.py": {
+   "equal": true,
+   "frozen": "a6c8edeb92a97603acc55805d20f61b8c7ef66d917c5fd7d006cf6db92ecfa24",
+   "kept": "a6c8edeb92a97603acc55805d20f61b8c7ef66d917c5fd7d006cf6db92ecfa24"
+  },
+  "l72_clip.py": {
+   "equal": true,
+   "frozen": "4a450e3237e470c3ca033ad11d7a012be96e75d1ffebaf6764c9ed5c57d79da1",
+   "kept": "4a450e3237e470c3ca033ad11d7a012be96e75d1ffebaf6764c9ed5c57d79da1"
+  },
+  "l72_reader.py": {
+   "equal": true,
+   "frozen": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a",
+   "kept": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a"
+  },
+  "l72_sat.py": {
+   "equal": true,
+   "frozen": "a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e",
+   "kept": "a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e"
+  },
+  "l72_selftest.py": {
+   "equal": true,
+   "frozen": "5c7ba446d2c3798fcb858629b54188e507099ecdf2685ed064e07887485ce6dd",
+   "kept": "5c7ba446d2c3798fcb858629b54188e507099ecdf2685ed064e07887485ce6dd"
+  },
+  "l72_util.py": {
+   "equal": true,
+   "frozen": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46",
+   "kept": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+  }
+ },
+ "controls_plan": {
+  "equal": true,
+  "sha256": "1826043aaa43b13652f8f9ab378b13a5ea61b225a137616e1af3126385d807cd",
+  "stated": "1826043aaa43b13652f8f9ab378b13a5ea61b225a137616e1af3126385d807cd"
+ },
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "lane": "L72",
+ "problems": [],
+ "program": "l72_digests.py",
+ "program_digests": {
+  "l72_digests.py": "1c262c5e397a71f63d23dc6c47057b152081cad267f10ad52a48e1ebd0b7715d",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "receipts": [
+  {
+   "programs_match": true,
+   "programs_recorded": 5,
+   "receipt": "review-2026-11-09/out/check-n172.json",
+   "sha256": "8ec2063df5d8902043ecfa396a97fb3de5a0628825cddbcfdbad05b20dcd5f03"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 7,
+   "receipt": "review-2026-11-09/out/compare-lane.json",
+   "sha256": "bfd185315cab074a428138c28b34995913aa8483bcf51e717f520205078637f3"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 4,
+   "receipt": "review-2026-11-09/out/construct-n172.json",
+   "sha256": "6867ecd5f9a7ef3fca7a826c3ecd4be4af687da075d3be4dc76dd148f9416a53"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 7,
+   "receipt": "review-2026-11-09/out/controls-n172.json",
+   "sha256": "0e48b5148fe3892aee7f04f0ac95429f8b4289041d46797623a7bd3cdced1653"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 3,
+   "receipt": "review-2026-11-09/out/custody.json",
+   "sha256": "1b0516ea04926b132f8bc74df9f04956348d5d00322b18ef7c3a0fd6a298bc36"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 7,
+   "receipt": "review-2026-11-09/out/houses.json",
+   "sha256": "0128beed1aad687b46ae91c92ee1e53751bc151679f4edd39a87103d4c848151"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 4,
+   "receipt": "review-2026-11-09/out/identity-n172.json",
+   "sha256": "c518a65bd0ba8f258546840f87ca04013d297c4840018be01f0aad46b1a30744"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 0,
+   "receipt": "review-2026-11-09/out/plan-facts-n172.json",
+   "sha256": "449de313e2ce988caec45a82a91ceb5195cf1b85b64a6befd85fc33601f85b4f"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 6,
+   "receipt": "review-2026-11-09/out/selftest.json",
+   "sha256": "ace9b25aabc05a5e8bd46931366e55b7536312834ba3c8f8496cc0e5facdba62"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 6,
+   "receipt": "review-2026-11-09/out/sides.json",
+   "sha256": "280a2d0bbd0f756ac2f8b55677e7a7777929b5ed77e27d8668ccf4f0afcb3ec4"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 5,
+   "receipt": "../../ozden-s270-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n270.json",
+   "sha256": "ee8e59eeec15eccc6b5caf06725d21ec4d5317a2636250f6339020f9a2a73982"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 4,
+   "receipt": "../../ozden-s270-upper-bound-2026-11-09/review/review-2026-11-09/out/construct-n270.json",
+   "sha256": "528d8be2f5e6df9544271aa609ed68a2844bb7d294877a3aedf190cc80d8de0b"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 7,
+   "receipt": "../../ozden-s270-upper-bound-2026-11-09/review/review-2026-11-09/out/controls-n270.json",
+   "sha256": "6dd4d539e034bc6e777449cf3df81f2fbd23f7a2c5d3331b8aaffeb4ea7c422a"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 4,
+   "receipt": "../../ozden-s270-upper-bound-2026-11-09/review/review-2026-11-09/out/identity-n270.json",
+   "sha256": "5958f422673eb3748dcd6628d5a6c28e4b1b977c6d4d20bb7b738dc892699c89"
+  },
+  {
+   "programs_match": true,
+   "programs_recorded": 0,
+   "receipt": "../../ozden-s270-upper-bound-2026-11-09/review/review-2026-11-09/out/plan-facts-n270.json",
+   "sha256": "79d97806a6b52de9602dafd483bdf37e90e703f788e4955b449f71b287f3ab19"
+  }
+ ],
+ "verdict": "ALL_RECEIPTS_MATCH",
+ "written_utc": "2026-11-09T16:53:57Z"
+}

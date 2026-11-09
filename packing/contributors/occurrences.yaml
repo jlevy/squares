@@ -20379,6 +20379,18 @@ occurrences:
     text and credit role are retained.
   contributor_id: trevor-green
 - origin:
+    path: packing/frontier/n-172.md
+    record_key: '172'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-173.md
     record_key: '173'
     field: /reported_lower_bound/proved_by/0
@@ -23353,6 +23365,18 @@ occurrences:
   note: Reviewed packing/frontier/n-270.md [270] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-270.md
+    record_key: '270'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -31553,6 +31577,114 @@ occurrences:
     Polkovskyi, Levy
   start: 84
   end: 88
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s172 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s172 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s172 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s172 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 20
+  end: 24
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
+  start: 20
+  end: 35
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s270 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
+  start: 37
+  end: 41
   label: Levy
   role: prerequisite
   disposition: unresolved

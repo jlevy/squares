@@ -2020,6 +2020,94 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-282": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#935](https://github.com/jlevy/squares/issues/935)",
+        producer_route=True,
+        ai=(
+            "Issue 935 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose promotion made "
+            "the exact coordinates and ran its exact `verify_packing` on them, so on that "
+            "route the replay is reproduced with the producer’s code; the independent "
+            "rational corner checker shares no verification code with it, and the review’s "
+            "checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from the registry’s 172, Evan Daniel’s packing "
+            "of issue 845 (T-257), this case’s house best packing before this adoption, taken "
+            "from this repository’s regularized known-best atlas, and was found by basin "
+            "hopping over local minima of Evan Daniel’s ALM+SLP quench; this repository’s "
+            "`packing-witness promote` made its exact coordinates from the decimal pose the "
+            "source retains. Measured by the 9 November review against T-257’s witness, it "
+            "is a further arrangement of T-257’s packing: no symmetry pairs nearest centres "
+            "one to one, since two squares of a block turned about 45 degrees lie nearest "
+            "one house square, but the optimal assignment under the identity keeps 135 "
+            "squares within 0.05 and moves 15 beyond a tenth, at most 0.668, and 15 squares "
+            "turn by more than 1 degree, nine of them squares near 45 degrees turning by 0.8 "
+            "to 1.2 degrees and the largest by 44.61 degrees; 49 squares are tilted beyond 1 "
+            "degree, as in T-257. So the packing’s finder stays Evan Daniel, with Doğa Özden "
+            "its improver; the issue claims the upper bound only. Exactly three squares "
+            "touch a wall, the left, the bottom and the far wall that sets the side, as the "
+            "source says."
+        ),
+        third_route=(
+            ", and the 9 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its "
+            "controls, every near pair and every square at exact contact and $10^{-30}$ past "
+            "it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-283": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#936](https://github.com/jlevy/squares/issues/936)",
+        producer_route=True,
+        ai=(
+            "Issue 936 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose promotion made "
+            "the exact coordinates and ran its exact `verify_packing` on them, so on that "
+            "route the replay is reproduced with the producer’s code; the independent "
+            "rational corner checker shares no verification code with it, and the review’s "
+            "checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing starts from the registry’s 270, Evan Daniel’s "
+            "arrangement of issue 703 (T-224), found in a search started from Nate "
+            "Chaoweeraprasit’s SQUISH packing, this case’s house best packing before this "
+            "adoption, taken from this repository’s regularized known-best atlas, and was "
+            "found by basin hopping over local minima of Evan Daniel’s ALM+SLP quench; this "
+            "repository’s `packing-witness promote` made its exact coordinates from the "
+            "decimal pose the source retains. Measured by the 9 November review against "
+            "T-224’s witness, it is a further arrangement of T-224’s packing, one to one "
+            "with it under the identity with every id kept: one square lies beyond a tenth, "
+            "square 59, which moves 0.218 and straightens from −32.3 degrees to upright, and "
+            "66 squares are tilted beyond 1 degree against T-224’s 67. So the packing’s "
+            "finder stays Evan Daniel, with Doğa Özden its improver; the issue claims the "
+            "upper bound only. Exactly three squares touch a wall, the left, the bottom and "
+            "the far wall that sets the side, as the source says."
+        ),
+        third_route=(
+            ", and the 9 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its "
+            "controls, every near pair and every square at exact contact and $10^{-30}$ past "
+            "it, were each decided as stated beforehand"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2276,11 +2364,15 @@ CREDITS: dict[int, Credit] = {
     # T-257 (adopted on 31 October 2026), Evan Daniel's packing of issue 845 from an L-cut of
     # the s(199) record, Chaoweeraprasit's packing as Gupta improved it, which the 31
     # October review fitted with 14 squares beyond a tenth; another arrangement than T-174's.
+    # T-282 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-257's
+    # packing: 15 squares beyond a tenth under the identity assignment, not one to one by
+    # nearest centres only through one shared centre in a block near 45 degrees (the 9
+    # November review of issues 935 and 936, F6).
     172: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s packing from an L-cut of the n = 199 record, Nate Chaoweeraprasit’s "
-        "SQUISH packing as Siddharth Gupta refined it",
+        (OZDEN,),
+        "Doğa Özden’s further arrangement of Evan Daniel’s packing from an L-cut of the "
+        "n = 199 record, Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
     ),
     # T-267 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
     # fault-line composer, his implementation of Chris Deotte's multi-gadget fault DP, from
@@ -2566,12 +2658,16 @@ CREDITS: dict[int, Credit] = {
     # review), found from issue 500's packing, which the issue credits as the ultimate
     # start. As at 308, Daniel is the finder and the start's author is named in the
     # sentence, not in the structured fields.
+    # T-283 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-224's
+    # packing, one to one with it under the identity, 1 square beyond a tenth (the 9
+    # November review of issues 935 and 936).
     270: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s arrangement, in a search started from Nate Chaoweeraprasit’s SQUISH "
-        "packing, of that packing’s design, composed from SQUISH’s issue 481 n = 209 "
-        "packing, whole, and the Kingbird catalogue’s former n = 19 packing",
+        (OZDEN,),
+        "Doğa Özden’s further arrangement of Evan Daniel’s arrangement, in a search started "
+        "from Nate Chaoweeraprasit’s SQUISH packing, of that packing’s design, composed from "
+        "SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird catalogue’s former n = 19 "
+        "packing",
     ),
     # Evan Daniel's tilt-swap from the register's witness (T-186's tightening of issue 561's
     # packing): issue 561's arrangement continued, three squares beyond a tenth (RV-2 of the

@@ -1548,6 +1548,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Özden s299 upper bound 2026-11-09]": _import("ozden-s299-upper-bound-2026-11-09"),
     "[Özden s303 upper bound 2026-11-09]": _import("ozden-s303-upper-bound-2026-11-09"),
     "[Özden s307 upper bound 2026-11-09]": _import("ozden-s307-upper-bound-2026-11-09"),
+    # The intake pass's lane L71 of 9 November (think-3guf): Doğa Özden's issues 935 and 936
+    # at 172 and 270 (think-he66), one repository and one packet each.
+    "[Özden s172 upper bound 2026-11-09]": _import("ozden-s172-upper-bound-2026-11-09"),
+    "[Özden s270 upper bound 2026-11-09]": _import("ozden-s270-upper-bound-2026-11-09"),
     # The intake pass's lane L65 of 9 November (think-h96r): Kaelan Yim's certificates at
     # vitamoon/vitamoon ac14112, which no issue reports; T-280 and T-281 are held below the
     # stage 4 exit for the owner (think-ruu2's RV-3, think-ikku).

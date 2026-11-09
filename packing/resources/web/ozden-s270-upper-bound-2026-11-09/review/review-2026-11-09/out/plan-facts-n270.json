@@ -1,0 +1,114 @@
+{
+ "bottom_below_1e-30": [
+  84
+ ],
+ "ceil12_minus_side": "1.4561811e-13",
+ "certificate": "n-270-candidate.yaml",
+ "contacts": [
+  {
+   "id": 84,
+   "wall": "bottom"
+  },
+  {
+   "id": 104,
+   "wall": "left"
+  },
+  {
+   "id": 227,
+   "wall": "top"
+  }
+ ],
+ "least_clearance_per_wall": {
+  "bottom": {
+   "id": 84,
+   "sci": "0"
+  },
+  "left": {
+   "id": 104,
+   "sci": "0"
+  },
+  "right": {
+   "id": 250,
+   "sci": "5.23598e-16"
+  },
+  "top": {
+   "id": 227,
+   "sci": "0"
+  }
+ },
+ "least_pair": {
+  "margin": "2.01624754215e-13",
+  "movers": {
+   "220": {
+    "clearances_left_right_bottom_top": [
+     "1.00000e+00",
+     "1.49281e+01",
+     "1.59281e+01",
+     "8.72664e-16"
+    ],
+    "closing_parameter": "2.016247542e-13",
+    "move_crosses_a_wall_at_contact": false,
+    "move_x": "-7.73516e-22",
+    "move_y": "-2.01624e-13",
+    "moves_toward": 234
+   },
+   "234": {
+    "clearances_left_right_bottom_top": [
+     "1.00000e+00",
+     "1.49281e+01",
+     "1.49281e+01",
+     "1.00000e+00"
+    ],
+    "closing_parameter": "2.016247542e-13",
+    "move_crosses_a_wall_at_contact": false,
+    "move_x": "7.73516e-22",
+    "move_y": "2.01624e-13",
+    "moves_toward": 220
+   }
+  },
+  "pair": [
+   220,
+   234
+  ]
+ },
+ "least_positive_clearance_per_wall": {
+  "bottom": "1.39626e-16",
+  "left": "3.49065e-17",
+  "right": "5.23598e-16",
+  "top": "4.97418e-16"
+ },
+ "left_below_1e-30": [
+  104
+ ],
+ "n": 270,
+ "one_over_q": "1/7999999999999976123895832717642802188006863272634862077077304085907006310479032815829955835752491752787592111669420691272441400862583642946933891970394272174759098245017349764000000000000000",
+ "pairs_below_1e-12": 258,
+ "right_below_1e-30": [],
+ "right_or_top_below_1e-30": [
+  227
+ ],
+ "right_or_top_below_one_over_q": [
+  227
+ ],
+ "right_or_top_below_side_minus_floor12": [
+  219,
+  220,
+  221,
+  222,
+  223,
+  224,
+  225,
+  226,
+  227,
+  228,
+  246,
+  248,
+  250,
+  252
+ ],
+ "side_minus_floor12": "8.5438188e-13",
+ "top_below_1e-30": [
+  227
+ ],
+ "written_utc": "2026-11-09T16:15:22Z"
+}

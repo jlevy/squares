@@ -1,0 +1,76 @@
+{
+ "plan": "L72 controls, stated before any controls program exists (lane L72, bead think-qqyg)",
+ "stated_from": [
+  "out/check-n172.json and out/check-n270.json (the frozen checker's receipts)",
+  "work/plan-facts-n172.json and work/plan-facts-n270.json (l72_plan_facts.py: exact wall clearances, the side less its 12-place floor, the least pair's centre-line move; no modified file decided)"
+ ],
+ "definitions": {
+  "contact": "a margin or clearance of exactly 0",
+  "past": "1e-30 beyond contact, in the construction's own parameter",
+  "decided_by": "file-level controls are decided by l72_check.decide_data (both methods, every square, wall and pair); pair-level and square-level controls by l72_sat and l72_clip directly; reader controls by l72_reader.read_texts",
+  "centre_line_closing": "for a pair (i, j), square j is translated by s d with d = c_i - c_j (centres c = (p0 + p2)/2); s* is the least s at which the exact margin reaches 0, computed from the four axes' linear gap functions; contact is s*, past is s* + 1e-30",
+  "enlargement": "square j scaled about its centre by lambda; lambda* is the least lambda > 1 at which its exact margin with i reaches 0; contact lambda*, past lambda* + 1e-30; margins on j's own unit axes",
+  "nearest_wall": "the wall of least clearance, ties broken left, right, bottom, top",
+  "reflection": "each square reflected in its own horizontal centre line: (x, y) -> (x, 2 c_y - y), which reads the rotation the other way and keeps each square's bounding box"
+ },
+ "counts": {
+  "172": {
+   "certificate": "n-172-candidate.yaml",
+   "original": {"contacts": [[46, "left"], [85, "bottom"], [161, "right"]], "least_pair": [36, 38], "pairs_below_1e-12": 342},
+   "controls": {
+    "G1": {"level": "file", "what": "the last square (172) given the corners of square 1", "expect": {"verdict": "REFUSE", "overlapping_pairs": [[1, 172]], "overlap_margin_A": "-1", "overlap_area_B": "1", "outside": []}},
+    "G2": {"level": "file", "what": "square 1 translated by (S, 0)", "expect": {"verdict": "REFUSE", "outside": [[1, "right"]], "overlapping_pairs": [], "touching_pairs": []}},
+    "G3": {"level": "reader", "what": "the last square's entry deleted from the YAML text", "expect": {"reader_refuses_with": "171 squares where n is 172"}},
+    "G4": {"level": "reader", "what": "the last square's id set to 1 in the YAML text", "expect": {"reader_refuses_with": "repeated square id"}},
+    "G5": {"level": "file", "what": "square 1's third corner moved 1e-30 in x", "expect": {"verdict": "REFUSE", "not_unit_A_and_B": [1]}},
+    "G6": {"level": "file", "what": "every square reflected in its horizontal centre line (the rotation read the other way)", "expect": {"verdict": "REFUSE", "overlapping_pairs_at_least": 1, "unit_A_and_B": 172, "inside_A_and_B": 172, "contacts": [[46, "left"], [85, "bottom"], [161, "right"]]}},
+    "G8": {"level": "file", "what": "every corner transposed, (x, y) -> (y, x): the same packing reflected in the box diagonal", "expect": {"verdict": "ACCEPT", "contacts": [[46, "bottom"], [85, "left"], [161, "top"]], "margins_sha256_equal_original": true}},
+    "G9": {"level": "file", "what": "every corner turned a quarter about the box centre, (x, y) -> (S - y, x)", "expect": {"verdict": "ACCEPT", "contacts": [[46, "bottom"], [85, "right"], [161, "top"]], "margins_sha256_equal_original": true}},
+    "S1a": {"level": "file", "what": "the side lowered by 1/q, one unit of its own last place", "expect": {"verdict": "REFUSE", "outside": [[161, "right"]], "overlapping_pairs": []}},
+    "S1b": {"level": "file", "what": "the side lowered by 1e-30", "expect": {"verdict": "REFUSE", "outside": [[161, "right"]], "overlapping_pairs": []}},
+    "S1c": {"level": "file", "what": "the side set to its 12-place floor 13.614689853286 (2.151e-13 below it)", "expect": {"verdict": "REFUSE", "outside_ids": [152, 153, 154, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172], "overlapping_pairs": []}},
+    "S1d": {"level": "file", "what": "the side set to its 12-place ceiling 13.614689853287, the claim", "expect": {"verdict": "ACCEPT", "contacts": [[46, "left"], [85, "bottom"]]}},
+    "S3L": {"level": "file", "what": "every square moved 1e-30 left", "expect": {"verdict": "REFUSE", "outside": [[46, "left"]], "overlapping_pairs": []}},
+    "S3R": {"level": "file", "what": "every square moved 1e-30 right", "expect": {"verdict": "REFUSE", "outside": [[161, "right"]], "overlapping_pairs": []}},
+    "S3D": {"level": "file", "what": "every square moved 1e-30 down", "expect": {"verdict": "REFUSE", "outside": [[85, "bottom"]], "overlapping_pairs": []}},
+    "S3U": {"level": "file", "what": "every square moved 1e-30 up (no square is within 1e-30 of the top wall)", "expect": {"verdict": "ACCEPT", "contacts": [[46, "left"], [161, "right"]]}},
+    "S4c": {"level": "file", "what": "square 38 moved toward 36 along their centre line to contact", "expect": {"verdict": "ACCEPT", "touching_pairs": [[36, 38]], "contacts": [[46, "left"], [85, "bottom"], [161, "right"]]}},
+    "S4p": {"level": "file", "what": "the same, 1e-30 past contact", "expect": {"verdict": "REFUSE", "overlapping_pairs": [[36, 38]], "outside": []}},
+    "S5": {"level": "pair", "what": "every pair with margin below 1e-12 (342) closed along its centre line, the second square moved", "expect": {"pairs": 342, "at_contact": "A margin 0 and B touching (area 0, nonempty), every pair", "past": "A margin < 0 and B area > 0, every pair"}},
+    "S6": {"level": "square", "what": "every square moved to its nearest wall by its clearance, and 1e-30 further", "expect": {"squares": 172, "at_contact": "A clearance 0 and B contact at that wall, inside by both", "past": "outside at that wall by both, B inside area < 1"}},
+    "S7c": {"level": "pair", "what": "square 38 enlarged about its centre until it touches 36", "expect": {"shape_refused_A_and_B": true, "pair": "A margin 0, B touching"}},
+    "S7p": {"level": "pair", "what": "the same, 1e-30 past", "expect": {"shape_refused_A_and_B": true, "pair": "A margin < 0, B area > 0"}},
+    "S8": {"level": "square", "what": "the far-wall square 161 enlarged about its centre by 1 + 1e-30", "expect": {"shape_refused_A_and_B": true, "wall": "outside the right wall by both", "file_verdict": "REFUSE"}}
+   }
+  },
+  "270": {
+   "certificate": "n-270-candidate.yaml",
+   "original": {"contacts": [[84, "bottom"], [104, "left"], [227, "top"]], "least_pair": [220, 234], "pairs_below_1e-12": 258},
+   "controls": {
+    "G1": {"level": "file", "what": "the last square (270) given the corners of square 1", "expect": {"verdict": "REFUSE", "overlapping_pairs": [[1, 270]], "overlap_margin_A": "-1", "overlap_area_B": "1", "outside": []}},
+    "G2": {"level": "file", "what": "square 1 translated by (S, 0)", "expect": {"verdict": "REFUSE", "outside": [[1, "right"]], "overlapping_pairs": [], "touching_pairs": []}},
+    "G3": {"level": "reader", "what": "the last square's entry deleted from the YAML text", "expect": {"reader_refuses_with": "269 squares where n is 270"}},
+    "G4": {"level": "reader", "what": "the last square's id set to 1 in the YAML text", "expect": {"reader_refuses_with": "repeated square id"}},
+    "G5": {"level": "file", "what": "square 1's third corner moved 1e-30 in x", "expect": {"verdict": "REFUSE", "not_unit_A_and_B": [1]}},
+    "G6": {"level": "file", "what": "every square reflected in its horizontal centre line (the rotation read the other way)", "expect": {"verdict": "REFUSE", "overlapping_pairs_at_least": 1, "unit_A_and_B": 270, "inside_A_and_B": 270, "contacts": [[84, "bottom"], [104, "left"], [227, "top"]]}},
+    "G8": {"level": "file", "what": "every corner transposed, (x, y) -> (y, x): the same packing reflected in the box diagonal", "expect": {"verdict": "ACCEPT", "contacts": [[84, "left"], [104, "bottom"], [227, "right"]], "margins_sha256_equal_original": true}},
+    "G9": {"level": "file", "what": "every corner turned a quarter about the box centre, (x, y) -> (S - y, x)", "expect": {"verdict": "ACCEPT", "contacts": [[84, "right"], [104, "bottom"], [227, "left"]], "margins_sha256_equal_original": true}},
+    "S1a": {"level": "file", "what": "the side lowered by 1/q, one unit of its own last place", "expect": {"verdict": "REFUSE", "outside": [[227, "top"]], "overlapping_pairs": []}},
+    "S1b": {"level": "file", "what": "the side lowered by 1e-30", "expect": {"verdict": "REFUSE", "outside": [[227, "top"]], "overlapping_pairs": []}},
+    "S1c": {"level": "file", "what": "the side set to its 12-place floor 16.928148603342 (8.544e-13 below it)", "expect": {"verdict": "REFUSE", "outside_ids": [219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 246, 248, 250, 252], "overlapping_pairs": []}},
+    "S1d": {"level": "file", "what": "the side set to its 12-place ceiling 16.928148603343, the claim", "expect": {"verdict": "ACCEPT", "contacts": [[84, "bottom"], [104, "left"]]}},
+    "S3L": {"level": "file", "what": "every square moved 1e-30 left", "expect": {"verdict": "REFUSE", "outside": [[104, "left"]], "overlapping_pairs": []}},
+    "S3R": {"level": "file", "what": "every square moved 1e-30 right (no square is within 1e-30 of the right wall)", "expect": {"verdict": "ACCEPT", "contacts": [[84, "bottom"], [227, "top"]]}},
+    "S3D": {"level": "file", "what": "every square moved 1e-30 down", "expect": {"verdict": "REFUSE", "outside": [[84, "bottom"]], "overlapping_pairs": []}},
+    "S3U": {"level": "file", "what": "every square moved 1e-30 up", "expect": {"verdict": "REFUSE", "outside": [[227, "top"]], "overlapping_pairs": []}},
+    "S4c": {"level": "file", "what": "square 234 moved toward 220 along their centre line to contact", "expect": {"verdict": "ACCEPT", "touching_pairs": [[220, 234]], "contacts": [[84, "bottom"], [104, "left"], [227, "top"]]}},
+    "S4p": {"level": "file", "what": "the same, 1e-30 past contact", "expect": {"verdict": "REFUSE", "overlapping_pairs": [[220, 234]], "outside": []}},
+    "S5": {"level": "pair", "what": "every pair with margin below 1e-12 (258) closed along its centre line, the second square moved", "expect": {"pairs": 258, "at_contact": "A margin 0 and B touching (area 0, nonempty), every pair", "past": "A margin < 0 and B area > 0, every pair"}},
+    "S6": {"level": "square", "what": "every square moved to its nearest wall by its clearance, and 1e-30 further", "expect": {"squares": 270, "at_contact": "A clearance 0 and B contact at that wall, inside by both", "past": "outside at that wall by both, B inside area < 1"}},
+    "S7c": {"level": "pair", "what": "square 234 enlarged about its centre until it touches 220", "expect": {"shape_refused_A_and_B": true, "pair": "A margin 0, B touching"}},
+    "S7p": {"level": "pair", "what": "the same, 1e-30 past", "expect": {"shape_refused_A_and_B": true, "pair": "A margin < 0, B area > 0"}},
+    "S8": {"level": "square", "what": "the far-wall square 227 enlarged about its centre by 1 + 1e-30", "expect": {"shape_refused_A_and_B": true, "wall": "outside the top wall by both", "file_verdict": "REFUSE"}}
+   }
+  }
+ }
+}

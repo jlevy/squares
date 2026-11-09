@@ -267,7 +267,8 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # 26 October 2026 moved 268 on to his descent of Vladislav Lavrentev's packing (T-242).
     # 35 since the adoption of 31 October 2026 moved 130 to T-259, 172 to T-257 and 307 to
     # T-256, below T-174's sides there. The adoption of 9 November 2026 moved 268 and 307
-    # on to Doğa Özden's further arrangements (T-276, T-279).
+    # on to Doğa Özden's further arrangements (T-276, T-279), and its later pass 172 and
+    # 270 (T-282, T-283).
     assert len(held_counts) == 35
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -283,10 +284,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         105: "T-229",
         130: "T-259",
         155: "T-197",
-        172: "T-257",
+        172: "T-282",
         182: "T-243",
         268: "T-276",
-        270: "T-224",
+        270: "T-283",
         307: "T-279",
         308: "T-221",
     }
@@ -1723,7 +1724,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # adoption of issue 914 moved 175, 204, 268, 293, 303 and 304 to Evan Daniel's
     # certificates the same day and 260 the next (T-267 to T-273), and that of 9 November
     # 2026 moved 232, 268, 299, 303 and 307 to Doğa Özden's further arrangements (T-275 to
-    # T-279).
+    # T-279), and its later pass 172 and 270 (T-282, T-283).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1743,9 +1744,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         260: "T-269",
         308: "T-221",
         227: "T-225",
-        270: "T-224",
+        270: "T-283",
         130: "T-259",
-        172: "T-257",
+        172: "T-282",
         232: "T-275",
         307: "T-279",
     }

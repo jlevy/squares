@@ -4876,6 +4876,61 @@ sources:
       repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, outputs, write-ups) and MIT
       (verifier/sqcheck.py) by LICENSE.md at the pin. Ozden is Özden in the credit's ASCII. Retained
       in web/ozden-s307-upper-bound-2026-11-09/.
+  - key: '[Özden s172 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s172-upper-bound at 2ce1f7c7621859437e0bcc1f9ad2b00822b2c605
+      (2026-11-09T15:28:22Z), Doğa Özden's certificate for s(172) <= 13.6146898532862152 (the
+      exact side rounded up at 16 places), printed 13.614689853287 rounded up at 12 places: a
+      rational corner Witness/v2 of a further arrangement of the registry's 172, Evan Daniel's
+      packing (T-257, #845), not one to one with it by nearest centres, found by basin hopping
+      over local minima of Evan Daniel's ALM+SLP quench (evand/square-packing at bb4cc78e,
+      MIT) from this repository's regularized known-best atlas, its exact coordinates made by
+      this repository's packing-witness promote --strategy robust-rational from the decimal
+      pose the source retains. Registration was requested in jlevy/squares#935, posted on the
+      author's behalf by his AI agent's account kenaznia-doga; the issue says the search and
+      its code were written and run by AI agents, under his direction. No global optimality
+      claim. The lineage builds on this project: the source starts from the registry's
+      regularized atlas and makes its exact coordinates with this repository's promotion tool.
+      Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs, write-ups) and MIT
+      (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
+      notice for the base packing's certificate, as LICENSE-evand-square-packing.txt. Ozden is
+      Özden in the credit's ASCII. Retained in web/ozden-s172-upper-bound-2026-11-09/.
+  - key: '[Özden s270 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Chaoweeraprasit, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s270-upper-bound at 78ab8cec9085e4e1d6489127113f0af2550e749b
+      (2026-11-09T15:28:32Z), Doğa Özden's certificate for s(270) <= 16.9281486033428544 (the
+      exact side rounded up at 16 places), printed 16.928148603343 rounded up at 12 places: a
+      rational corner Witness/v2 of a further arrangement of the registry's 270, Evan Daniel's
+      packing found in a sweep from Nate Chaoweeraprasit's SQUISH packing (T-224, #703), one
+      to one with it, found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) from this repository's regularized known-best
+      atlas, its exact coordinates made by this repository's packing-witness promote
+      --strategy robust-rational from the decimal pose the source retains. Registration was
+      requested in jlevy/squares#936, posted on the author's behalf by his AI agent's account
+      kenaznia-doga; the issue says the search and its code were written and run by AI agents,
+      under his direction. No global optimality claim. The lineage builds on this project: the
+      source starts from the registry's regularized atlas and makes its exact coordinates with
+      this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose,
+      outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also
+      carries Evan Daniel's MIT notice for the base packing's certificate, as
+      LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in
+      web/ozden-s270-upper-bound-2026-11-09/.
   - key: '[Yim certificates 2026-11-09]'
     authors:
     - Yim

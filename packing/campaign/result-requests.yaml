@@ -29576,3 +29576,131 @@ issues:
       3. The questions are informational and hold nothing open. The issue was closed as
       completed at 12:32:53Z. The supersession of T-256 owed a follow-up on #844, which
       was posted and is recorded there.
+  - number: 935
+    title: 's(172) ≤ 13.614689853287: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(172) <= 13.614689853287, the exact rational side of n-172-candidate.yaml rounded up at
+      12 places, 3.246e-3 below the house, Evan Daniel's #845 packing (T-257): a rational
+      corner Witness/v2 at kenaznia-doga/s172-upper-bound 2ce1f7c, the repository's one
+      commit, 26 seconds before the issue, promoted to exact rationals with this repository's
+      packing-witness promote at ef1af493 from a decimal pose the repository now retains. It
+      reports packing-witness verify VERIFIED (14706 pairs) and sqcheck.py VALID, says the
+      packing starts from T-257's, taken from this repository's regularized known-best atlas,
+      by the same search as #927 to #931, and answers the 9 November replies' points: the
+      wall contacts, the repository's own file paths, the decimal pose and Evan Daniel's MIT
+      notice. Triaged and retained on 9 November 2026 in lane L71 (think-he66): every stated
+      digest holds, the print is the exact side rounded up, and both maintained exact routes
+      accept the witness and refuse its gross and sharp controls; measured, no symmetry pairs
+      it one to one with T-257's packing by nearest centres, the optimal assignment moving 15
+      squares beyond a tenth. The ledger of 9 November records it. Registered as T-282. The 9
+      November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-935-936.md,
+      think-qqyg, lane L72), written blind in a separate lane, accepted it with findings, none
+      blocking or major, F15 minor (the record's draft read a sign change of squares near 45
+      degrees as reversed tilts, now corrected) and F4, F5, F12 and F13 notes for the author
+      (the wall sentence, the margins' size, the pose's schema path, the replay line), and
+      scored it S3; its clean-room checker decided it again, so the entry is confirmed,
+      independently re-implemented, at V3/C3, and the case adopts it at 172 under the house
+      rule in the same pass, with Evan Daniel the packing's finder and Özden its improver,
+      both strong generators' regularization of the new house run in the same change. The
+      Kaggle side the issue quotes, 13.617935700905 (jazivxt), is above it and states no
+      packing.
+    read_through: '2026-11-09T15:28:48Z'
+    results:
+    - key: n172-from-t257
+      claim: >-
+        s(172) <= 13.6146898532862152 (the exact rational side, rounded up at 16 places, of
+        n-172-candidate.yaml at kenaznia-doga/s172-upper-bound 2ce1f7c), a packing found from
+        Evan Daniel's #845 packing (T-257).
+      source: body
+      register:
+      - T-282
+      evidence:
+      - E-ozden-935-certificate-report
+      - E-ozden-935-exact-feasibility
+      - E-ozden-935-review-exact-feasibility
+    beads:
+    - think-he66
+    - think-qqyg
+    answer_bead: think-he66
+    replies: []
+    close_when: >-
+      T-282 is on main at V3/C3 as the house at 172, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 9 November 2026 from main ef1af4933; no comment yet. The commit 2ce1f7c
+      precedes the issue by 26 seconds. The issue carries the intake label. T-257, the house
+      it improves, was reported on #845; #845 is closed, and its final reply of 31 October
+      named T-257 current, so it owes a follow-up now that this entry is adopted at 172, T-257's
+      last house, as #844's did when T-279 superseded T-256 at 307. T-257's other counts, 204, 260 and 293, were
+      superseded by #914's T-268, T-269 and T-271 on 6 November; 172 is its last. Measured
+      against padding, the gain is about 2.4e16 times T-257's contraction margin (1.36e-19).
+      No reply has been posted.
+  - number: 936
+    title: 's(270) ≤ 16.928148603343: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(270) <= 16.928148603343, the exact rational side of n-270-candidate.yaml rounded up at
+      12 places, 1.365e-5 below the house, Evan Daniel's #703 arrangement found in a sweep
+      from Nate Chaoweeraprasit's SQUISH packing (T-224): a rational corner Witness/v2 at
+      kenaznia-doga/s270-upper-bound 78ab8ce, the repository's one commit, 17 seconds before
+      the issue, promoted to exact rationals with this repository's packing-witness promote at
+      ef1af493 from a decimal pose the repository now retains. It reports packing-witness
+      verify VERIFIED (36315 pairs) and sqcheck.py VALID, says the packing starts from T-224's,
+      taken from this repository's regularized known-best atlas, by the same search as #927 to
+      #931, and answers the 9 November replies' points: the wall contacts, the repository's
+      own file paths, the decimal pose and Evan Daniel's MIT notice. Triaged and retained on 9
+      November 2026 in lane L71 (think-he66): every stated digest holds, the print is the
+      exact side rounded up, and both maintained exact routes accept the witness and refuse
+      its gross and sharp controls; measured, it pairs one to one with T-224's packing, 1
+      square beyond a tenth. The ledger of 9 November records it. Registered as T-283. The 9
+      November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-935-936.md,
+      think-qqyg, lane L72), written blind in a separate lane, accepted it with findings, none
+      blocking or major, F4, F5, F12 and F13 notes for the author (the wall sentence, with 31
+      square-wall pairs 7.3e-8 to 2.9e-6 from a wall; the margins' size; the pose's schema
+      path; the replay line), and scored it S2, a borderline call with S3 the stated
+      alternative; its clean-room checker decided it again, so the entry is confirmed,
+      independently re-implemented, at V3/C3, and the case adopts it at 270 under the house
+      rule in the same pass, with Evan Daniel the packing's finder and Özden its improver,
+      both strong generators' regularization of the new house run in the same change. The
+      Kaggle side the issue quotes, 16.928162252213 (kirilltym), is above it and states no
+      packing.
+    read_through: '2026-11-09T15:28:49Z'
+    results:
+    - key: n270-from-t224
+      claim: >-
+        s(270) <= 16.9281486033428544 (the exact rational side, rounded up at 16 places, of
+        n-270-candidate.yaml at kenaznia-doga/s270-upper-bound 78ab8ce), a packing found from
+        Evan Daniel's #703 arrangement (T-224).
+      source: body
+      register:
+      - T-283
+      evidence:
+      - E-ozden-936-certificate-report
+      - E-ozden-936-exact-feasibility
+      - E-ozden-936-review-exact-feasibility
+    beads:
+    - think-he66
+    - think-qqyg
+    answer_bead: think-he66
+    replies: []
+    close_when: >-
+      T-283 is on main at V3/C3 as the house at 270, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 9 November 2026 from main ef1af4933; no comment yet. The commit 78ab8ce
+      precedes the issue by 17 seconds. The issue carries the intake label. T-224, the house
+      it improves, was reported on #703; #703 is closed, and its final reply of 21 October
+      reported T-224 confirmed and adopted as the house at 270, so it owes a follow-up now that
+      this entry is adopted there. Measured against padding, the gain is about 8.1e13 times T-224's
+      contraction margin (1.69e-19). No reply has been posted.
