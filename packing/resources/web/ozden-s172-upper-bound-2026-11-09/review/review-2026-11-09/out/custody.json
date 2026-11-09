@@ -1,0 +1,272 @@
+{
+ "172": {
+  "author": "kenaznia-doga <doga@doga.kenan.works> 1794238016 +0000",
+  "certificate_sha256_equals_issue": true,
+  "commits_reachable": 1,
+  "committer": "kenaznia-doga <doga@doga.kenan.works> 1794238102 +0000",
+  "every_working_file_equals_its_blob": true,
+  "files": [
+   {
+    "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+    "mode": "100644",
+    "path": "LICENSE-evand-square-packing.txt",
+    "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+    "size": 1068,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+    "mode": "100644",
+    "path": "LICENSE.md",
+    "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+    "size": 1484,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "e9402bc1bb0a54270e89a50529fc2c2584bdc3e5",
+    "mode": "100644",
+    "path": "README.md",
+    "sha256": "e5640a4e9a27af02df7ec2e3ee504a85e17daa1fc2e8c4353fddb8c26a083cb6",
+    "size": 4400,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "1fcb1293bfe3fe7948d1cc02989001369d300a4d",
+    "mode": "100644",
+    "path": "n-172-candidate.yaml",
+    "sha256": "0df5ae7936950b9a1fe06832cb8f8bdc21dbae9e0d009c6b87302a14c452b2af",
+    "size": 520850,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "3f5f099da7eebba25cf8941e9c293d0a7ff2fa25",
+    "mode": "100644",
+    "path": "n-172-decimal-pose.yaml",
+    "sha256": "b3c237e9e1de5d9fc0dab17a5d7ac1fe71aefdb8e268af70d2e5e24a4b1a1baf",
+    "size": 19503,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "d78e2e99f4d6c6c85afb838f8776482d0c2f2edd",
+    "mode": "100644",
+    "path": "n172-witness.json",
+    "sha256": "311a83339e86d503954c8f423b0c6e0ca3c2c5bfb6e80c37d53ec064667aa2bf",
+    "size": 515559,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "ec554c5936fcf6e0576d5a738fe003fc299c9ad9",
+    "mode": "100644",
+    "path": "packing-witness-verify.txt",
+    "sha256": "97e0b229253ff059858815f2afbf06cb9dde8fc0d22477a1ea52e21a75fce77e",
+    "size": 362,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "7e3f8344dea7ccea160b541c67c8a42d7302ee92",
+    "mode": "100644",
+    "path": "records/n-172-candidate-diff.png",
+    "sha256": "8b7c16178938570f1680bf5c2c103122fd80041268e5403f4ed7373bcd319abe",
+    "size": 251971,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "64dfdd4f9d4fb9db2c0791cf27a3d6daad808de1",
+    "mode": "100644",
+    "path": "sqcheck-output.txt",
+    "sha256": "6fc531f5027de29f583ee8b163acc2fed74c7ec0bad69ab48abeb998729c7aa4",
+    "size": 101,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+    "mode": "100644",
+    "path": "verifier/README.md",
+    "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+    "size": 3441,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+    "mode": "100644",
+    "path": "verifier/sqcheck.py",
+    "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+    "size": 17654,
+    "working_file_equals_blob": true
+   }
+  ],
+  "head": "2ce1f7c7621859437e0bcc1f9ad2b00822b2c605",
+  "message": "s(172) upper bound: exact witness, decimal pose, checks, README, licences",
+  "parents": [],
+  "pin_stated": "2ce1f7c7621859437e0bcc1f9ad2b00822b2c605",
+  "repository": "kenaznia-doga/s172-upper-bound",
+  "tree": "d9ae3f418eda2783596224f5ab7b27f2ca42bba6",
+  "twin_sha256_equals_readme": true
+ },
+ "270": {
+  "author": "kenaznia-doga <doga@doga.kenan.works> 1794238024 +0000",
+  "certificate_sha256_equals_issue": true,
+  "commits_reachable": 1,
+  "committer": "kenaznia-doga <doga@doga.kenan.works> 1794238112 +0000",
+  "every_working_file_equals_its_blob": true,
+  "files": [
+   {
+    "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+    "mode": "100644",
+    "path": "LICENSE-evand-square-packing.txt",
+    "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+    "size": 1068,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+    "mode": "100644",
+    "path": "LICENSE.md",
+    "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+    "size": 1484,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "efa23be3032a74bdc7fc9d42da6194536d738e27",
+    "mode": "100644",
+    "path": "README.md",
+    "sha256": "79ecb2dbd8a5446e6e8b66de686682b5564e1ee90f50b8962a9eb3e7a7688adc",
+    "size": 4528,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "23e3d798ac3f8816ae723c577d4999d8a6e913fb",
+    "mode": "100644",
+    "path": "n-270-candidate.yaml",
+    "sha256": "f2b62bf0f89eabe4c9872cb2c37cca9a24a3926e939cb017278c0e5d16fa9386",
+    "size": 864974,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "c78c0d73f850bb7aed04a8a4a6fed88144f19800",
+    "mode": "100644",
+    "path": "n-270-decimal-pose.yaml",
+    "sha256": "b838f7909d8900ade1699f2d2cf412a0af6534f56bf4110cfb4fcf4df91e33f2",
+    "size": 30026,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "daa7819ad944861746a4137ce41f5d9f45b91e9e",
+    "mode": "100644",
+    "path": "n270-witness.json",
+    "sha256": "1d01092fa384d09035eb7103d7494bff48c80880574a97d13240e143874c854b",
+    "size": 856645,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "7349fbb9339badf014948ab3312ead04fe6270c7",
+    "mode": "100644",
+    "path": "packing-witness-verify.txt",
+    "sha256": "b012e607bb8f5c2469f7b5d02d362e62eb8dc6d724cae9954e308d7819beb441",
+    "size": 564,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "4905101719e4c018ba2a82b05dcb0515ef31bf05",
+    "mode": "100644",
+    "path": "records/n-270-candidate-diff.png",
+    "sha256": "6016c43eba8ebb965b05514127b6a4c277d5db3d23ac9d71ffb14dad4f12fdc3",
+    "size": 258918,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "189aab197136841a52dfb93a6ff09866073c8df5",
+    "mode": "100644",
+    "path": "sqcheck-output.txt",
+    "sha256": "014f303671ee800e27437cc1adfec454a0ebd13094ea3a86f27a1038e2f5e983",
+    "size": 101,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+    "mode": "100644",
+    "path": "verifier/README.md",
+    "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+    "size": 3441,
+    "working_file_equals_blob": true
+   },
+   {
+    "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+    "mode": "100644",
+    "path": "verifier/sqcheck.py",
+    "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+    "size": 17654,
+    "working_file_equals_blob": true
+   }
+  ],
+  "head": "78ab8cec9085e4e1d6489127113f0af2550e749b",
+  "message": "s(270) upper bound: exact witness, decimal pose, checks, README, licences",
+  "parents": [],
+  "pin_stated": "78ab8cec9085e4e1d6489127113f0af2550e749b",
+  "repository": "kenaznia-doga/s270-upper-bound",
+  "tree": "5eaba28c4b4ad1229f247b16aaefd8a56a4e4552",
+  "twin_sha256_equals_readme": true
+ },
+ "bead": "think-qqyg",
+ "different_blob": [
+  "README.md",
+  "n-NNN-candidate.yaml",
+  "n-NNN-decimal-pose.yaml",
+  "nNNN-witness.json",
+  "packing-witness-verify.txt",
+  "records/n-NNN-candidate-diff.png",
+  "sqcheck-output.txt"
+ ],
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "lane": "L72",
+ "problems": [],
+ "program": "l72_custody.py",
+ "program_digests": {
+  "issue-statements.json": "e534715cdaba2fa62c6c57843cebb695231f01063996a6d51ba3f84d2853d065",
+  "l72_custody.py": "198babf13e84eb15f59773ab2875aba28e7dfea3390ad3a240bf9e5c13378c29",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "retained_copies": [
+  {
+   "equal": true,
+   "retained_blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "retained_copy": "packing/resources/web/evand-issue845-2026-10-29/source/LICENSE",
+   "source_blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "source_path": "LICENSE-evand-square-packing.txt"
+  },
+  {
+   "equal": true,
+   "retained_blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "retained_copy": "packing/resources/web/evand-n270-sweep-2026-10-20/source/LICENSE",
+   "source_blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "source_path": "LICENSE-evand-square-packing.txt"
+  },
+  {
+   "equal": true,
+   "retained_blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "retained_copy": "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/LICENSE.md",
+   "source_blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "source_path": "LICENSE.md"
+  },
+  {
+   "equal": true,
+   "retained_blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "retained_copy": "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py",
+   "source_blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "source_path": "verifier/sqcheck.py"
+  }
+ ],
+ "same_blob_in_both": [
+  "LICENSE-evand-square-packing.txt",
+  "LICENSE.md",
+  "verifier/README.md",
+  "verifier/sqcheck.py"
+ ],
+ "verdict": "CUSTODY_HOLDS",
+ "written_utc": "2026-11-09T16:35:58Z"
+}

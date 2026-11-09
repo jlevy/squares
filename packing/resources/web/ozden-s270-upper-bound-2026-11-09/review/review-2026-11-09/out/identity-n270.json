@@ -1,0 +1,831 @@
+{
+ "bead": "think-qqyg",
+ "candidate_tilts": {
+  "beyond_0.5deg": 66,
+  "beyond_1deg": 66,
+  "beyond_1e-9_rad": 120,
+  "exactly_upright_float": 14
+ },
+ "count": "270",
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "house": {
+  "centre": {
+   "best": {
+    "assignment_cost": 0.06775937738922704,
+    "largest_move": 0.217855,
+    "largest_move_square": [
+     59,
+     59
+    ],
+    "largest_turn_deg": 32.2998,
+    "largest_turn_from_to_deg": [
+     -32.2999,
+     -0.0002
+    ],
+    "largest_turn_square": [
+     59,
+     59
+    ],
+    "moved_beyond": {
+     "0.01": 14,
+     "0.05": 6,
+     "0.1": 1,
+     "1e-3": 41,
+     "1e-6": 270,
+     "1e-9": 270
+    },
+    "moved_beyond_0.05_list": [
+     {
+      "from": [
+       11.5497,
+       5.3369,
+       -32.355
+      ],
+      "matched": 54,
+      "move": 0.0625,
+      "square": 54,
+      "to": [
+       11.4967,
+       5.37,
+       -32.325
+      ]
+     },
+     {
+      "from": [
+       10.7033,
+       5.8695,
+       -32.355
+      ],
+      "matched": 55,
+      "move": 0.0652,
+      "square": 55,
+      "to": [
+       10.6483,
+       5.9045,
+       -32.224
+      ]
+     },
+     {
+      "from": [
+       10.2384,
+       3.6898,
+       -32.3
+      ],
+      "matched": 59,
+      "move": 0.2179,
+      "square": 59,
+      "to": [
+       10.3453,
+       3.5,
+       -0.0
+      ]
+     },
+     {
+      "from": [
+       13.4282,
+       4.5,
+       0.0
+      ],
+      "matched": 95,
+      "move": 0.0567,
+      "square": 95,
+      "to": [
+       13.3715,
+       4.5,
+       -0.0
+      ]
+     },
+     {
+      "from": [
+       12.4282,
+       4.5,
+       0.0
+      ],
+      "matched": 96,
+      "move": 0.066,
+      "square": 96,
+      "to": [
+       12.3631,
+       4.511,
+       -0.318
+      ]
+     },
+     {
+      "from": [
+       16.4282,
+       16.2978,
+       0.0
+      ],
+      "matched": 217,
+      "move": 0.0501,
+      "square": 217,
+      "to": [
+       16.4281,
+       16.348,
+       -0.0
+      ]
+     }
+    ],
+    "nearest_distinct": 270,
+    "nearest_one_to_one": true,
+    "same_id": 270,
+    "shared_nearest": [],
+    "turned_beyond_1deg_list": [
+     {
+      "at": [
+       10.345,
+       3.5
+      ],
+      "from_deg": -32.3,
+      "matched": 59,
+      "square": 59,
+      "to_deg": -0.0
+     }
+    ],
+    "turned_beyond_deg": {
+     "0.01": 44,
+     "0.5": 1,
+     "1": 1,
+     "1e-6": 115
+    },
+    "within_0.05": 264
+   },
+   "best_symmetry": "identity",
+   "per_symmetry": {
+    "antitranspose": {
+     "assignment_cost": 20.179994,
+     "nearest_one_to_one": false
+    },
+    "flip_x": {
+     "assignment_cost": 111.322283,
+     "nearest_one_to_one": false
+    },
+    "flip_y": {
+     "assignment_cost": 108.750715,
+     "nearest_one_to_one": false
+    },
+    "identity": {
+     "assignment_cost": 0.067759,
+     "nearest_one_to_one": true
+    },
+    "rot180": {
+     "assignment_cost": 62.668668,
+     "nearest_one_to_one": false
+    },
+    "rot270": {
+     "assignment_cost": 110.319615,
+     "nearest_one_to_one": false
+    },
+    "rot90": {
+     "assignment_cost": 110.409757,
+     "nearest_one_to_one": false
+    },
+    "transpose": {
+     "assignment_cost": 65.922864,
+     "nearest_one_to_one": false
+    }
+   }
+  },
+  "lower-left": {
+   "best": {
+    "assignment_cost": 0.06776407654435744,
+    "largest_move": 0.217858,
+    "largest_move_square": [
+     59,
+     59
+    ],
+    "largest_turn_deg": 32.2998,
+    "largest_turn_from_to_deg": [
+     -32.2999,
+     -0.0002
+    ],
+    "largest_turn_square": [
+     59,
+     59
+    ],
+    "moved_beyond": {
+     "0.01": 14,
+     "0.05": 6,
+     "0.1": 1,
+     "1e-3": 41,
+     "1e-6": 270,
+     "1e-9": 270
+    },
+    "moved_beyond_0.05_list": [
+     {
+      "from": [
+       11.5497,
+       5.3369,
+       -32.355
+      ],
+      "matched": 54,
+      "move": 0.0625,
+      "square": 54,
+      "to": [
+       11.4967,
+       5.37,
+       -32.325
+      ]
+     },
+     {
+      "from": [
+       10.7033,
+       5.8695,
+       -32.355
+      ],
+      "matched": 55,
+      "move": 0.0652,
+      "square": 55,
+      "to": [
+       10.6483,
+       5.9045,
+       -32.224
+      ]
+     },
+     {
+      "from": [
+       10.2384,
+       3.6898,
+       -32.3
+      ],
+      "matched": 59,
+      "move": 0.2179,
+      "square": 59,
+      "to": [
+       10.3453,
+       3.5,
+       -0.0
+      ]
+     },
+     {
+      "from": [
+       13.4282,
+       4.5,
+       0.0
+      ],
+      "matched": 95,
+      "move": 0.0567,
+      "square": 95,
+      "to": [
+       13.3715,
+       4.5,
+       -0.0
+      ]
+     },
+     {
+      "from": [
+       12.4282,
+       4.5,
+       0.0
+      ],
+      "matched": 96,
+      "move": 0.066,
+      "square": 96,
+      "to": [
+       12.3631,
+       4.511,
+       -0.318
+      ]
+     },
+     {
+      "from": [
+       16.4282,
+       16.2978,
+       0.0
+      ],
+      "matched": 217,
+      "move": 0.0501,
+      "square": 217,
+      "to": [
+       16.4281,
+       16.348,
+       -0.0
+      ]
+     }
+    ],
+    "nearest_distinct": 270,
+    "nearest_one_to_one": true,
+    "same_id": 270,
+    "shared_nearest": [],
+    "turned_beyond_1deg_list": [
+     {
+      "at": [
+       10.345,
+       3.5
+      ],
+      "from_deg": -32.3,
+      "matched": 59,
+      "square": 59,
+      "to_deg": -0.0
+     }
+    ],
+    "turned_beyond_deg": {
+     "0.01": 44,
+     "0.5": 1,
+     "1": 1,
+     "1e-6": 115
+    },
+    "within_0.05": 264
+   },
+   "best_symmetry": "identity",
+   "per_symmetry": {
+    "antitranspose": {
+     "assignment_cost": 20.179999,
+     "nearest_one_to_one": false
+    },
+    "flip_x": {
+     "assignment_cost": 111.322843,
+     "nearest_one_to_one": false
+    },
+    "flip_y": {
+     "assignment_cost": 108.750164,
+     "nearest_one_to_one": false
+    },
+    "identity": {
+     "assignment_cost": 0.067764,
+     "nearest_one_to_one": true
+    },
+    "rot180": {
+     "assignment_cost": 62.668672,
+     "nearest_one_to_one": false
+    },
+    "rot270": {
+     "assignment_cost": 110.320176,
+     "nearest_one_to_one": false
+    },
+    "rot90": {
+     "assignment_cost": 110.409206,
+     "nearest_one_to_one": false
+    },
+    "transpose": {
+     "assignment_cost": 65.922869,
+     "nearest_one_to_one": false
+    }
+   }
+  },
+  "path": "packing/witnesses/known-best/n-270.yaml",
+  "reference_tilts": {
+   "beyond_0.5deg": 67,
+   "beyond_1deg": 67,
+   "beyond_1e-9_rad": 68,
+   "exactly_upright_float": 202
+  },
+  "witness_id": "W-known-best-n270"
+ },
+ "issue_statements": {
+  "largest_move": "0.218",
+  "largest_retilt_deg": "32.3",
+  "moved_beyond_0.05": 6,
+  "moved_beyond_1e-3": 41,
+  "retilted_beyond_1deg": 1,
+  "tilted_beyond_0.5deg_new": 66,
+  "tilted_beyond_0.5deg_record": 67
+ },
+ "lane": "L72",
+ "program": "l72_identity.py",
+ "program_digests": {
+  "l72_house.py": "77c6851d2be3be635f575e9745157daa15f0d3f68ef7eb1944123b3304d3aff5",
+  "l72_identity.py": "75ec4dd096718daa186abff25cd183c8545fb2dfc6bc1e1e1886bdb9156cc474",
+  "l72_reader.py": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "view": {
+  "centre": {
+   "best": {
+    "assignment_cost": 0.07582017515200351,
+    "largest_move": 0.217855,
+    "largest_move_square": [
+     59,
+     59
+    ],
+    "largest_turn_deg": 32.2998,
+    "largest_turn_from_to_deg": [
+     -32.2999,
+     -0.0002
+    ],
+    "largest_turn_square": [
+     59,
+     59
+    ],
+    "moved_beyond": {
+     "0.01": 13,
+     "0.05": 6,
+     "0.1": 1,
+     "1e-3": 34,
+     "1e-6": 270,
+     "1e-9": 270
+    },
+    "moved_beyond_0.05_list": [
+     {
+      "from": [
+       11.5481,
+       5.3343,
+       -32.355
+      ],
+      "matched": 54,
+      "move": 0.0625,
+      "square": 54,
+      "to": [
+       11.4967,
+       5.37,
+       -32.325
+      ]
+     },
+     {
+      "from": [
+       10.7033,
+       5.8695,
+       -32.355
+      ],
+      "matched": 55,
+      "move": 0.0652,
+      "square": 55,
+      "to": [
+       10.6483,
+       5.9045,
+       -32.224
+      ]
+     },
+     {
+      "from": [
+       10.2384,
+       3.6898,
+       -32.3
+      ],
+      "matched": 59,
+      "move": 0.2179,
+      "square": 59,
+      "to": [
+       10.3453,
+       3.5,
+       -0.0
+      ]
+     },
+     {
+      "from": [
+       13.4282,
+       4.5,
+       0.0
+      ],
+      "matched": 95,
+      "move": 0.0567,
+      "square": 95,
+      "to": [
+       13.3715,
+       4.5,
+       -0.0
+      ]
+     },
+     {
+      "from": [
+       12.4282,
+       4.5,
+       0.0
+      ],
+      "matched": 96,
+      "move": 0.066,
+      "square": 96,
+      "to": [
+       12.3631,
+       4.511,
+       -0.318
+      ]
+     },
+     {
+      "from": [
+       16.4282,
+       16.4282,
+       0.0
+      ],
+      "matched": 217,
+      "move": 0.0802,
+      "square": 217,
+      "to": [
+       16.4281,
+       16.348,
+       -0.0
+      ]
+     }
+    ],
+    "nearest_distinct": 270,
+    "nearest_one_to_one": true,
+    "same_id": 270,
+    "shared_nearest": [],
+    "turned_beyond_1deg_list": [
+     {
+      "at": [
+       10.345,
+       3.5
+      ],
+      "from_deg": -32.3,
+      "matched": 59,
+      "square": 59,
+      "to_deg": -0.0
+     }
+    ],
+    "turned_beyond_deg": {
+     "0.01": 45,
+     "0.5": 1,
+     "1": 1,
+     "1e-6": 115
+    },
+    "within_0.05": 264
+   },
+   "best_symmetry": "identity",
+   "per_symmetry": {
+    "antitranspose": {
+     "assignment_cost": 20.218603,
+     "nearest_one_to_one": false
+    },
+    "flip_x": {
+     "assignment_cost": 111.419412,
+     "nearest_one_to_one": false
+    },
+    "flip_y": {
+     "assignment_cost": 108.743296,
+     "nearest_one_to_one": false
+    },
+    "identity": {
+     "assignment_cost": 0.07582,
+     "nearest_one_to_one": true
+    },
+    "rot180": {
+     "assignment_cost": 62.769816,
+     "nearest_one_to_one": false
+    },
+    "rot270": {
+     "assignment_cost": 110.337059,
+     "nearest_one_to_one": false
+    },
+    "rot90": {
+     "assignment_cost": 110.506369,
+     "nearest_one_to_one": false
+    },
+    "transpose": {
+     "assignment_cost": 66.100745,
+     "nearest_one_to_one": false
+    }
+   }
+  },
+  "lower-left": {
+   "best": {
+    "assignment_cost": 0.07582364660205668,
+    "largest_move": 0.217858,
+    "largest_move_square": [
+     59,
+     59
+    ],
+    "largest_turn_deg": 32.2998,
+    "largest_turn_from_to_deg": [
+     -32.2999,
+     -0.0002
+    ],
+    "largest_turn_square": [
+     59,
+     59
+    ],
+    "moved_beyond": {
+     "0.01": 13,
+     "0.05": 6,
+     "0.1": 1,
+     "1e-3": 34,
+     "1e-6": 270,
+     "1e-9": 270
+    },
+    "moved_beyond_0.05_list": [
+     {
+      "from": [
+       11.5481,
+       5.3343,
+       -32.355
+      ],
+      "matched": 54,
+      "move": 0.0625,
+      "square": 54,
+      "to": [
+       11.4967,
+       5.37,
+       -32.325
+      ]
+     },
+     {
+      "from": [
+       10.7033,
+       5.8695,
+       -32.355
+      ],
+      "matched": 55,
+      "move": 0.0652,
+      "square": 55,
+      "to": [
+       10.6483,
+       5.9045,
+       -32.224
+      ]
+     },
+     {
+      "from": [
+       10.2384,
+       3.6898,
+       -32.3
+      ],
+      "matched": 59,
+      "move": 0.2179,
+      "square": 59,
+      "to": [
+       10.3453,
+       3.5,
+       -0.0
+      ]
+     },
+     {
+      "from": [
+       13.4282,
+       4.5,
+       0.0
+      ],
+      "matched": 95,
+      "move": 0.0567,
+      "square": 95,
+      "to": [
+       13.3715,
+       4.5,
+       -0.0
+      ]
+     },
+     {
+      "from": [
+       12.4282,
+       4.5,
+       0.0
+      ],
+      "matched": 96,
+      "move": 0.066,
+      "square": 96,
+      "to": [
+       12.3631,
+       4.511,
+       -0.318
+      ]
+     },
+     {
+      "from": [
+       16.4282,
+       16.4282,
+       0.0
+      ],
+      "matched": 217,
+      "move": 0.0802,
+      "square": 217,
+      "to": [
+       16.4281,
+       16.348,
+       -0.0
+      ]
+     }
+    ],
+    "nearest_distinct": 270,
+    "nearest_one_to_one": true,
+    "same_id": 270,
+    "shared_nearest": [],
+    "turned_beyond_1deg_list": [
+     {
+      "at": [
+       10.345,
+       3.5
+      ],
+      "from_deg": -32.3,
+      "matched": 59,
+      "square": 59,
+      "to_deg": -0.0
+     }
+    ],
+    "turned_beyond_deg": {
+     "0.01": 45,
+     "0.5": 1,
+     "1": 1,
+     "1e-6": 115
+    },
+    "within_0.05": 264
+   },
+   "best_symmetry": "identity",
+   "per_symmetry": {
+    "antitranspose": {
+     "assignment_cost": 20.218608,
+     "nearest_one_to_one": false
+    },
+    "flip_x": {
+     "assignment_cost": 111.419975,
+     "nearest_one_to_one": false
+    },
+    "flip_y": {
+     "assignment_cost": 108.742742,
+     "nearest_one_to_one": false
+    },
+    "identity": {
+     "assignment_cost": 0.075824,
+     "nearest_one_to_one": true
+    },
+    "rot180": {
+     "assignment_cost": 62.769822,
+     "nearest_one_to_one": false
+    },
+    "rot270": {
+     "assignment_cost": 110.337623,
+     "nearest_one_to_one": false
+    },
+    "rot90": {
+     "assignment_cost": 110.505815,
+     "nearest_one_to_one": false
+    },
+    "transpose": {
+     "assignment_cost": 66.100748,
+     "nearest_one_to_one": false
+    }
+   }
+  },
+  "path": "packing/atlas/known-best/regularized/n-270-regularized.yaml.gz",
+  "reference_tilts": {
+   "beyond_0.5deg": 67,
+   "beyond_1deg": 67,
+   "beyond_1e-9_rad": 67,
+   "exactly_upright_float": 203
+  },
+  "witness_id": "W-known-best-n270-regularized"
+ },
+ "view_against_house": {
+  "assignment_cost": 0.02465746928828871,
+  "largest_move": 0.13034,
+  "largest_move_square": [
+   217,
+   217
+  ],
+  "largest_turn_deg": 0.2175,
+  "largest_turn_from_to_deg": [
+   0.2175,
+   0.0
+  ],
+  "largest_turn_square": [
+   83,
+   83
+  ],
+  "moved_beyond": {
+   "0.01": 15,
+   "0.05": 2,
+   "0.1": 1,
+   "1e-3": 24,
+   "1e-6": 24,
+   "1e-9": 24
+  },
+  "moved_beyond_0.05_list": [
+   {
+    "from": [
+     15.3797,
+     15.221,
+     -24.139
+    ],
+    "matched": 60,
+    "move": 0.0561,
+    "square": 60,
+    "to": [
+     15.3568,
+     15.1698,
+     -24.139
+    ]
+   },
+   {
+    "from": [
+     16.4282,
+     16.2978,
+     0.0
+    ],
+    "matched": 217,
+    "move": 0.1303,
+    "square": 217,
+    "to": [
+     16.4282,
+     16.4282,
+     0.0
+    ]
+   }
+  ],
+  "nearest_distinct": 270,
+  "nearest_one_to_one": true,
+  "same_id": 270,
+  "shared_nearest": [],
+  "turned_beyond_1deg_list": [],
+  "turned_beyond_deg": {
+   "0.01": 1,
+   "0.5": 0,
+   "1": 0,
+   "1e-6": 1
+  },
+  "within_0.05": 268
+ },
+ "written_utc": "2026-11-09T16:39:18Z"
+}
