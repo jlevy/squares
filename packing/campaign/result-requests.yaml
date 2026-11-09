@@ -29019,7 +29019,7 @@ issues:
     results:
     - key: n232-from-t256
       claim: >-
-        s(232) <= 15.7614096448817244... (the exact rational side of n-232-candidate.yaml at
+        s(232) <= 15.7614096448817244 (the exact rational side, rounded up at 16 places, of n-232-candidate.yaml at
         kenaznia-doga/s232-upper-bound 09e324f), a packing found from Francisco Couzo's
         refinement of Alex Chilton's packing (T-256).
       source: body
@@ -29040,9 +29040,10 @@ issues:
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit 09e324f
       precedes the issue by 64 seconds; GitHub's activity log was not read, so its push is
-      not dated. The issue lacks the intake label, which the pass adds. No reply has been
-      posted: the import reply is the coordinator's, owed after the records pull request
-      merges, since it names T-275.
+      not dated. The coordinator added the intake label on 9 November 2026. #844's final reply stated T-256 current at 232 and 307, so it owes a
+      follow-up once this entry is adopted, as #824's did when T-263 superseded T-258. No
+      reply has been posted: the import reply is the coordinator's, owed after the records
+      pull request merges, since it names T-275.
   - number: 928
     title: 's(268) ≤ 16.872469897837: improved packing (registration request)'
     author: kenaznia-doga
@@ -29070,7 +29071,7 @@ issues:
     results:
     - key: n268-from-t270
       claim: >-
-        s(268) <= 16.8724698978362125... (the exact rational side of n-268-candidate.yaml at
+        s(268) <= 16.8724698978362125 (the exact rational side, rounded up at 16 places, of n-268-candidate.yaml at
         kenaznia-doga/s268-upper-bound a40a15d), a packing found from Evan Daniel's #914
         packing (T-270).
       source: body
@@ -29090,7 +29091,7 @@ issues:
       replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit a40a15d
-      precedes the issue by 57 seconds. The issue lacks the intake label. T-270, the house it
+      precedes the issue by 57 seconds. The coordinator added the intake label on 9 November 2026. T-270, the house it
       improves, was reported on #914 four days earlier; #914 is closed, and its reply will
       owe a follow-up once this entry is adopted, as #894's did when T-268 superseded T-264.
       No reply has been posted.
@@ -29122,7 +29123,7 @@ issues:
     results:
     - key: n299-from-t263
       claim: >-
-        s(299) <= 17.8010044342552937... (the exact rational side of n-299-candidate.yaml at
+        s(299) <= 17.8010044342552937 (the exact rational side, rounded up at 16 places, of n-299-candidate.yaml at
         kenaznia-doga/s299-upper-bound-17801004 a042eab), a packing found from the author's
         own T-263.
       source: body
@@ -29143,7 +29144,7 @@ issues:
       bound.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit a042eab
-      precedes the issue by 50 seconds. The issue lacks the intake label. #893, which
+      precedes the issue by 50 seconds. The coordinator added the intake label on 9 November 2026. #893, which
       reported T-263, is closed; its final reply stated T-263 current, so it owes a
       follow-up once this entry is adopted, as #894's did. No reply has been posted.
   - number: 930
@@ -29173,7 +29174,7 @@ issues:
     results:
     - key: n303-from-t272
       claim: >-
-        s(303) <= 17.9017892731564904... (the exact rational side of n-303-candidate.yaml at
+        s(303) <= 17.9017892731564904 (the exact rational side, rounded up at 16 places, of n-303-candidate.yaml at
         kenaznia-doga/s303-upper-bound b43ca09), a packing found from Evan Daniel's #914
         packing (T-272).
       source: body
@@ -29193,7 +29194,7 @@ issues:
       replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit b43ca09
-      precedes the issue by 42 seconds. The issue lacks the intake label. T-272, the house it
+      precedes the issue by 42 seconds. The coordinator added the intake label on 9 November 2026. T-272, the house it
       improves, was reported on #914 four days earlier; #914 is closed, and its reply will
       owe a follow-up once this entry is adopted. No reply has been posted.
   - number: 931
@@ -29222,7 +29223,7 @@ issues:
     results:
     - key: n307-from-t256
       claim: >-
-        s(307) <= 17.9792309603873628... (the exact rational side of n-307-candidate.yaml at
+        s(307) <= 17.9792309603873628 (the exact rational side, rounded up at 16 places, of n-307-candidate.yaml at
         kenaznia-doga/s307-upper-bound dbe8838), a packing found from Francisco Couzo's
         refinement of ntumlnoob's packing (T-256).
       source: body
@@ -29242,5 +29243,6 @@ issues:
       replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit dbe8838
-      precedes the issue by 35 seconds. The issue lacks the intake label. No reply has been
+      precedes the issue by 35 seconds. The coordinator added the intake label on 9 November 2026. #844's final reply stated T-256 current at
+      232 and 307, so it owes a follow-up once this entry is adopted. No reply has been
       posted.

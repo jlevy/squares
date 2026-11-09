@@ -140,9 +140,9 @@ as T-279, in place of T-256.
 The packing is Doğa Özden’s, found from the registry’s 307 (ntumlnoob (found_by) and Francisco Couzo (improved_by); T-256, #844); the issue
 asks that the improvement be credited to Özden, the base packing to its holders as the
 record lists them, and the local optimizer to Evan Daniel.
-The search was AI-assisted throughout, the checks were run by code that did not produce
-the packing, and the issue and repository were prepared and posted by his AI agent; Özden
-directed the work. The source starts from this repository’s regularized atlas and makes
+The issue says the search was AI-assisted throughout and that the checks were run by
+code that did not produce the packing; the issue and repository were prepared and posted
+by his AI agent, and Özden directed the work. The source starts from this repository’s regularized atlas and makes
 its exact coordinates with this repository’s promotion tool, so its lineage builds on
 this project. The bibliography key is **[Özden s307 upper bound 2026-11-09]**.
 
@@ -156,7 +156,9 @@ The diff image is pinned by digest only. The packing modifies Francisco Couzo’
 
 ## Commands
 
-From `packing/`, with the project interpreter:
+From `packing/`, with the project interpreter. The identity measurement reads the house
+witness and its regularized view as they stood at main 19b354a5c, before this adoption
+replaced them, so it reproduces there:
 
 ```bash
 python -m devtools.acquire_source ozden-s307-upper-bound-2026-11-09 --checkout CHECKOUT
@@ -168,6 +170,7 @@ python -m devtools.upper_bound_reports ozden-s307-upper-bound-2026-11-09 sharp-c
 python -m devtools.measure_identity --n 307 'OZDEN=packet:ozden-s307-upper-bound-2026-11-09' \
   'T-256=packet:couzo-issue844-2026-10-28' \
   'house-witness=witness-center-basis:witnesses/known-best/n-307.yaml' \
+  'regularized=witness-corners:atlas/known-best/regularized/n-307-regularized.yaml.gz' \
   --out resources/web/ozden-s307-upper-bound-2026-11-09/measure/identity.json
 ```
 

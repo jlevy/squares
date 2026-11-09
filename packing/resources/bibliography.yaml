@@ -4767,7 +4767,7 @@ sources:
     short_credit: 'Ozden after Chilton et al.'
     note: >-
       kenaznia-doga/s232-upper-bound at 09e324f447d20e10b79de410ad9950a2772c955d
-      (2026-11-09T06:02:41Z), Doğa Özden's certificate for s(232) <= 15.7614096448817244..., printed
+      (2026-11-09T06:02:41Z), Doğa Özden's certificate for s(232) <= 15.7614096448817244 (the exact side rounded up at 16 places), printed
       15.761409644882 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
       of the registry's 232, Francisco Couzo's refinement of Alex Chilton's Kaggle notebook packing
       (T-256), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
@@ -4791,7 +4791,7 @@ sources:
     short_credit: 'Ozden after Daniel et al.'
     note: >-
       kenaznia-doga/s268-upper-bound at a40a15d91081be002805b6eea35e099c9a2656db
-      (2026-11-09T06:02:49Z), Doğa Özden's certificate for s(268) <= 16.8724698978362125..., printed
+      (2026-11-09T06:02:49Z), Doğa Özden's certificate for s(268) <= 16.8724698978362125 (the exact side rounded up at 16 places), printed
       16.872469897837 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
       of the registry's 268, Evan Daniel's packing after Chris Deotte's multi-gadget fault DP
       (T-270, #914), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
@@ -4815,7 +4815,7 @@ sources:
     short_credit: 'Ozden after Daniel et al.'
     note: >-
       kenaznia-doga/s299-upper-bound-17801004 at a042eab017caeb07ca5f79afcdc5fbb89103cda2
-      (2026-11-09T06:02:57Z), Doğa Özden's certificate for s(299) <= 17.8010044342552937..., printed
+      (2026-11-09T06:02:57Z), Doğa Özden's certificate for s(299) <= 17.8010044342552937 (the exact side rounded up at 16 places), printed
       17.801004434256 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
       of the registry's 299, his own further arrangement of Evan Daniel's packing after Chris Deotte
       (T-263, #893), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
@@ -4839,7 +4839,7 @@ sources:
     short_credit: 'Ozden after Daniel et al.'
     note: >-
       kenaznia-doga/s303-upper-bound at b43ca090fc2ff5e750fecc71d8514298fe164514
-      (2026-11-09T06:03:05Z), Doğa Özden's certificate for s(303) <= 17.9017892731564904..., printed
+      (2026-11-09T06:03:05Z), Doğa Özden's certificate for s(303) <= 17.9017892731564904 (the exact side rounded up at 16 places), printed
       17.901789273157 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
       of the registry's 303, Evan Daniel's packing after Chris Deotte's multi-gadget fault DP
       (T-272, #914), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
@@ -4863,7 +4863,7 @@ sources:
     short_credit: 'Ozden after ntumlnoob et al.'
     note: >-
       kenaznia-doga/s307-upper-bound at dbe8838a7273dc8458fef1f5a16ef4384867ca19
-      (2026-11-09T06:03:13Z), Doğa Özden's certificate for s(307) <= 17.9792309603873628..., printed
+      (2026-11-09T06:03:13Z), Doğa Özden's certificate for s(307) <= 17.9792309603873628 (the exact side rounded up at 16 places), printed
       17.979230960388 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
       of the registry's 307, Francisco Couzo's refinement of ntumlnoob's Kaggle notebook packing
       (T-256), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench

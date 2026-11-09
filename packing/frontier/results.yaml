@@ -40460,9 +40460,9 @@ results:
       improvement be credited to Özden, the base packing to its holders as the record lists them,
       and the local optimizer to Evan Daniel.
 
-      The search was AI-assisted throughout, the checks were run by code that did not produce the
-      packing, and the issue and repository were prepared and posted by Özden's AI agent, which uses
-      the account kenaznia-doga; Özden directed the work. The best public Kaggle per-puzzle side the
+      The issue says the search was AI-assisted throughout and that the checks were run by code
+      that did not produce the packing; the issue and repository were prepared and posted by
+      Özden's AI agent, which uses the account kenaznia-doga, and Özden directed the work. The best public Kaggle per-puzzle side the
       issue found at 232, 15.761657946434 (jazivxt), is above this and states no packing.
     scope:
       n_values:
@@ -40564,7 +40564,13 @@ results:
 
       Adopted at 232 on 9 November 2026 under the house rule, in place of T-256, with the packing's
       credit to its base holders and the improvement to Doğa Özden, and both strong generators'
-      regularization of the new house in the same change.
+      regularization of the new house in the same change. The rigidity block was derived
+      again on the new witness and stays not rigid: 103 of its 232 squares translate,
+      against 73 of T-256's.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit
+      block until the next infographics cut redraws them (think-tj4o); the case record, its
+      page and its bound citation credit him now.
 
       The source's own sqcheck.py was not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share this repository's
@@ -40648,9 +40654,9 @@ results:
       improvement be credited to Özden, the base packing to its holders as the record lists them,
       and the local optimizer to Evan Daniel.
 
-      The search was AI-assisted throughout, the checks were run by code that did not produce the
-      packing, and the issue and repository were prepared and posted by Özden's AI agent, which uses
-      the account kenaznia-doga; Özden directed the work. The best public Kaggle per-puzzle side the
+      The issue says the search was AI-assisted throughout and that the checks were run by code
+      that did not produce the packing; the issue and repository were prepared and posted by
+      Özden's AI agent, which uses the account kenaznia-doga, and Özden directed the work. The best public Kaggle per-puzzle side the
       issue found at 268, 16.874361715873 (ntumlnoob), is above this and states no packing.
     scope:
       n_values:
@@ -40756,7 +40762,13 @@ results:
 
       Adopted at 268 on 9 November 2026 under the house rule, in place of T-270, with the packing's
       credit to its base holders and the improvement to Doğa Özden, and both strong generators'
-      regularization of the new house in the same change.
+      regularization of the new house in the same change. The rigidity block was derived
+      again on the new witness and stays not rigid: 120 of its 268 squares translate,
+      against 90 of T-270's.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit
+      block until the next infographics cut redraws them (think-tj4o); the case record, its
+      page and its bound citation credit him now.
 
       The source's own sqcheck.py was not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share this repository's
@@ -40839,9 +40851,9 @@ results:
       packing-witness promote. The issue asks that the improvement be credited to Özden, the base
       packing to its holders as the record lists them, and the local optimizer to Evan Daniel.
 
-      The search was AI-assisted throughout, the checks were run by code that did not produce the
-      packing, and the issue and repository were prepared and posted by Özden's AI agent, which uses
-      the account kenaznia-doga; Özden directed the work. The best public Kaggle per-puzzle side the
+      The issue says the search was AI-assisted throughout and that the checks were run by code
+      that did not produce the packing; the issue and repository were prepared and posted by
+      Özden's AI agent, which uses the account kenaznia-doga, and Özden directed the work. The best public Kaggle per-puzzle side the
       issue found at 299, 17.801238552749 (jazivxt), is above this and states no packing. The issue
       says this supersedes the author's own T-263 at 299, which stays a verified bound.
     scope:
@@ -40948,13 +40960,19 @@ results:
       the import lane's draft S2 to S3 (F8).
 
       The issue says this supersedes the author's own T-263 at 299, which stays a verified bound at
-      V3/C3 and keeps its certificate as history. A later certificate at 299 published in a watched
-      repository, built from this one and about 1.18e-12 below it, is a later report, tracked on
-      think-h96r.
+      V3/C3 and keeps its certificate as history. Later certificates at 299 and 303 published in
+      the watched repository vitamoon/vitamoon are later reports, tracked on think-h96r; this
+      entry decides nothing about them.
 
       Adopted at 299 on 9 November 2026 under the house rule, in place of T-263, with the packing's
       credit to its base holders and the improvement to Doğa Özden, and both strong generators'
-      regularization of the new house in the same change.
+      regularization of the new house in the same change. The rigidity block was derived
+      again on the new witness and stays not rigid: 121 of its 299 squares translate,
+      against 148 of T-263's.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit
+      block until the next infographics cut redraws them (think-tj4o); the case record, its
+      page and its bound citation credit him now.
 
       The source's own sqcheck.py was not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share this repository's
@@ -41038,9 +41056,9 @@ results:
       improvement be credited to Özden, the base packing to its holders as the record lists them,
       and the local optimizer to Evan Daniel.
 
-      The search was AI-assisted throughout, the checks were run by code that did not produce the
-      packing, and the issue and repository were prepared and posted by Özden's AI agent, which uses
-      the account kenaznia-doga; Özden directed the work. The best public Kaggle per-puzzle side the
+      The issue says the search was AI-assisted throughout and that the checks were run by code
+      that did not produce the packing; the issue and repository were prepared and posted by
+      Özden's AI agent, which uses the account kenaznia-doga, and Özden directed the work. The best public Kaggle per-puzzle side the
       issue found at 303, 17.906978233799 (ntumlnoob), is above this and states no packing.
     scope:
       n_values:
@@ -41142,12 +41160,19 @@ results:
 
       T-272 was registered on 5 November 2026 and became the case's house in the adoption that
       reached main on 6 November; it stays a verified bound at V3/C3 and keeps its certificate as
-      history. A later certificate at 303 in a watched repository, above this one, is a later
-      report, tracked on think-h96r.
+      history. Later certificates at 299 and 303 published in the watched repository
+      vitamoon/vitamoon are later reports, tracked on think-h96r; this entry decides nothing
+      about them.
 
       Adopted at 303 on 9 November 2026 under the house rule, in place of T-272, with the packing's
       credit to its base holders and the improvement to Doğa Özden, and both strong generators'
-      regularization of the new house in the same change.
+      regularization of the new house in the same change. The rigidity block was derived
+      again on the new witness and stays not rigid: 234 of its 303 squares translate,
+      against 69 of T-272's.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit
+      block until the next infographics cut redraws them (think-tj4o); the case record, its
+      page and its bound citation credit him now.
 
       The source's own sqcheck.py was not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share this repository's
@@ -41231,9 +41256,9 @@ results:
       improvement be credited to Özden, the base packing to its holders as the record lists them,
       and the local optimizer to Evan Daniel.
 
-      The search was AI-assisted throughout, the checks were run by code that did not produce the
-      packing, and the issue and repository were prepared and posted by Özden's AI agent, which uses
-      the account kenaznia-doga; Özden directed the work. The best public Kaggle per-puzzle side the
+      The issue says the search was AI-assisted throughout and that the checks were run by code
+      that did not produce the packing; the issue and repository were prepared and posted by
+      Özden's AI agent, which uses the account kenaznia-doga, and Özden directed the work. The best public Kaggle per-puzzle side the
       issue found at 307, 17.979249693611 (mufasasimon), is above this and states no packing.
     scope:
       n_values:
@@ -41337,7 +41362,13 @@ results:
 
       Adopted at 307 on 9 November 2026 under the house rule, in place of T-256, with the packing's
       credit to its base holders and the improvement to Doğa Özden, and both strong generators'
-      regularization of the new house in the same change.
+      regularization of the new house in the same change. The rigidity block was derived
+      again on the new witness and stays not rigid: 44 of its 307 squares translate,
+      against 35 of T-256's.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit
+      block until the next infographics cut redraws them (think-tj4o); the case record, its
+      page and its bound citation credit him now.
 
       The source's own sqcheck.py was not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share this repository's

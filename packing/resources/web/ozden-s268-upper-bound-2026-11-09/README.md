@@ -140,9 +140,9 @@ as T-276, in place of T-270.
 The packing is Doğa Özden’s, found from the registry’s 268 (Evan Daniel (found_by), after Chris Deotte; T-270, #914); the issue
 asks that the improvement be credited to Özden, the base packing to its holders as the
 record lists them, and the local optimizer to Evan Daniel.
-The search was AI-assisted throughout, the checks were run by code that did not produce
-the packing, and the issue and repository were prepared and posted by his AI agent; Özden
-directed the work. The source starts from this repository’s regularized atlas and makes
+The issue says the search was AI-assisted throughout and that the checks were run by
+code that did not produce the packing; the issue and repository were prepared and posted
+by his AI agent, and Özden directed the work. The source starts from this repository’s regularized atlas and makes
 its exact coordinates with this repository’s promotion tool, so its lineage builds on
 this project. The bibliography key is **[Özden s268 upper bound 2026-11-09]**.
 
@@ -156,7 +156,9 @@ The diff image is pinned by digest only. The packing modifies Evan Daniel’s MI
 
 ## Commands
 
-From `packing/`, with the project interpreter:
+From `packing/`, with the project interpreter. The identity measurement reads the house
+witness and its regularized view as they stood at main 19b354a5c, before this adoption
+replaced them, so it reproduces there:
 
 ```bash
 python -m devtools.acquire_source ozden-s268-upper-bound-2026-11-09 --checkout CHECKOUT
