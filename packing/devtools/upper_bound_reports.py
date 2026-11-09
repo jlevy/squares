@@ -660,9 +660,14 @@ def pingyou_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
     return _certificate(n, _literal(value["s_exact"], f"n={n} side"), _triples(squares, n))
 
 
-#: The only frame and the only schema name a corner witness may state for `witness_corners`.
+#: The only frame and the schema names a corner witness may state for `witness_corners`: the
+#: file name a source's witness states, or the path the regularized atlas's own corner views
+#: state from `atlas/known-best/regularized/`, which the review of 9 November 2026 asked the
+#: reader to accept so that the 307 view could be measured (F14). Either way the document is
+#: validated against this repository's schema file.
 CORNER_FRAME = {"origin": "lower-left", "axes": "x-right-y-up", "angle_unit": "not-applicable"}
 CORNER_SCHEMA = "witness.schema.yaml"
+CORNER_SCHEMAS = frozenset({CORNER_SCHEMA, "../../../witnesses/witness.schema.yaml"})
 #: Corners as ``sqpack.witness`` materializes a centre and basis, in half-diagonal units.
 CORNER_ORDER = ((-1, -1), (1, -1), (1, 1), (-1, 1))
 
@@ -678,7 +683,8 @@ def pose_corners(pose: legacy.Pose) -> list[tuple[Fraction, Fraction]]:
 def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
     """A rational ``corners`` Witness/v2, read back exactly to centres and half-angles.
 
-    The document must name the witness schema by its file name, which is read from this
+    The document must name the witness schema by its file name, or by the path the
+    regularized atlas's views name it by (`CORNER_SCHEMAS`), which is read from this
     repository, pass it and its semantic checks, state ``n`` unit squares numbered 1 to
     ``n`` in order in the lower-left frame, and list each square's corners in the order
     `pose_corners` writes them. A pose is recovered as the corners' mean and
@@ -694,7 +700,7 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
         raise ReportError(f"n={n}: invalid witness YAML: {error}") from error
     metadata = document.get("softschema") if type(document) is dict else None
     _require(
-        type(metadata) is dict and metadata.get("schema") == CORNER_SCHEMA,
+        type(metadata) is dict and metadata.get("schema") in CORNER_SCHEMAS,
         f"n={n}: a corner witness names {CORNER_SCHEMA} as its schema",
     )
     try:
@@ -1535,6 +1541,13 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # (F13 of the 5 November review), read from the same packet.
     "[Daniel issue 914 n175 2026-11-05]": _import("evand-issue914-2026-11-05"),
     "[Daniel issue 914 n260 2026-11-05]": _import("evand-issue914-2026-11-05"),
+    # The intake pass's lane L63 of 9 November (think-3guf): Doğa Özden's issues 927 to 931
+    # at 232, 268, 299, 303 and 307 (think-463r), one repository and one packet each.
+    "[Özden s232 upper bound 2026-11-09]": _import("ozden-s232-upper-bound-2026-11-09"),
+    "[Özden s268 upper bound 2026-11-09]": _import("ozden-s268-upper-bound-2026-11-09"),
+    "[Özden s299 upper bound 2026-11-09]": _import("ozden-s299-upper-bound-2026-11-09"),
+    "[Özden s303 upper bound 2026-11-09]": _import("ozden-s303-upper-bound-2026-11-09"),
+    "[Özden s307 upper bound 2026-11-09]": _import("ozden-s307-upper-bound-2026-11-09"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

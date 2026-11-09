@@ -173,12 +173,13 @@ MOVED_AGAIN = {
 #: 5 November 2026 to Evan Daniel's issue-914 certificate (T-268); the pass of 23 October
 #: took 303 from T-186 to Evan Daniel's issue-728 certificate (T-230), which that of 24
 #: October 2026 moved to Amund Kristiansen's issue-755 certificate (T-239), that of 25
-#: October 2026 to Francisco Couzo's issue-763 certificate (T-240) and that of 5 November
-#: 2026 to Evan Daniel's issue-914 certificate (T-272).
+#: October 2026 to Francisco Couzo's issue-763 certificate (T-240), that of 5 November
+#: 2026 to Evan Daniel's issue-914 certificate (T-272) and that of 9 November 2026 to Doğa
+#: Özden's further arrangement of it (T-278).
 MOVED_LATER = {
     271: ("T-219", "2026-10-19"),
     204: ("T-268", "2026-11-05"),
-    303: ("T-272", "2026-11-05"),
+    303: ("T-278", "2026-11-09"),
 }
 
 #: The counts a pass staged for its next pull request, with the result each moved to and
@@ -189,8 +190,9 @@ MOVED_LATER = {
 #: T-269 the next day, 6 November 2026, in the same pull request (think-lrj4).
 ADOPTED_NEXT_DAY = {268: ("T-242", "2026-10-26"), 260: ("T-269", "2026-11-06")}
 #: The counts of `ADOPTED_NEXT_DAY` a later pass moved again, with the result and the day:
-#: the adoption of 5 November 2026 took 268 to Evan Daniel's issue-914 certificate (T-270).
-MOVED_AFTER_NEXT_DAY = {268: ("T-270", "2026-11-05")}
+#: the adoption of 5 November 2026 took 268 to Evan Daniel's issue-914 certificate (T-270),
+#: and that of 9 November 2026 to Doğa Özden's further arrangement of it (T-276).
+MOVED_AFTER_NEXT_DAY = {268: ("T-276", "2026-11-09")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -206,10 +208,11 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: that of 31 October 2026 to Evan Daniel's issue-845 certificate (T-257), that of 4
 #: November 2026 to Doğa Özden's further arrangement of it (T-264), and that of 5 November
 #: 2026 to Evan Daniel's issue-914 certificate (T-268). The pass of 31 October took 232 to
-#: Francisco Couzo's issue-844 certificate (T-256), below T-193's side there, and that of
+#: Francisco Couzo's issue-844 certificate (T-256), below T-193's side there, which that
+#: of 9 November 2026 moved to Doğa Özden's further arrangement of it (T-275), and that of
 #: 5 November 2026 took 175 to Evan Daniel's issue-914 certificate (T-267), below T-193's
 #: side there.
-OVERTAKEN = {175: "T-267", 204: "T-268", 232: "T-256"}
+OVERTAKEN = {175: "T-267", 204: "T-268", 232: "T-275"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -263,7 +266,8 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # Evan Daniel's issue-806 certificate (T-243), below T-174's side there. The adoption of
     # 26 October 2026 moved 268 on to his descent of Vladislav Lavrentev's packing (T-242).
     # 35 since the adoption of 31 October 2026 moved 130 to T-259, 172 to T-257 and 307 to
-    # T-256, below T-174's sides there.
+    # T-256, below T-174's sides there. The adoption of 9 November 2026 moved 268 and 307
+    # on to Doğa Özden's further arrangements (T-276, T-279).
     assert len(held_counts) == 35
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -281,9 +285,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         155: "T-197",
         172: "T-257",
         182: "T-243",
-        268: "T-270",
+        268: "T-276",
         270: "T-224",
-        307: "T-256",
+        307: "T-279",
         308: "T-221",
     }
 
@@ -1717,15 +1721,17 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # November 2026 moved 204 to Doğa Özden's further arrangement of T-257's packing
     # (T-264), and that of 5 November 2026 moved 260 to Kaelan Yim's (T-265). The
     # adoption of issue 914 moved 175, 204, 268, 293, 303 and 304 to Evan Daniel's
-    # certificates the same day and 260 the next (T-267 to T-273).
+    # certificates the same day and 260 the next (T-267 to T-273), and that of 9 November
+    # 2026 moved 232, 268, 299, 303 and 307 to Doğa Özden's further arrangements (T-275 to
+    # T-279).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
         175: "T-267",
         182: "T-243",
-        268: "T-270",
+        268: "T-276",
         293: "T-271",
-        303: "T-272",
+        303: "T-278",
         304: "T-273",
         155: "T-197",
         183: "T-220",
@@ -1740,8 +1746,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         270: "T-224",
         130: "T-259",
         172: "T-257",
-        232: "T-256",
-        307: "T-256",
+        232: "T-275",
+        307: "T-279",
     }
     before = {
         **houses.ADOPTED,

@@ -816,7 +816,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/23.html | cases/23.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/230.html | cases/230.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/231.html | cases/231.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/232.html | cases/232.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/232.html | cases/232.html | record | overview | 2026-10-03 | 2026-11-09 | live |
 | cases/233.html | cases/233.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/234.html | cases/234.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/235.html | cases/235.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -855,7 +855,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/265.html | cases/265.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/266.html | cases/266.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/267.html | cases/267.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/268.html | cases/268.html | record | overview | 2026-10-03 | 2026-11-05 | live |
+| cases/268.html | cases/268.html | record | overview | 2026-10-03 | 2026-11-09 | live |
 | cases/269.html | cases/269.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/27.html | cases/27.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-10-21 | live |
@@ -889,17 +889,17 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/296.html | cases/296.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/297.html | cases/297.html | record | overview | 2026-10-03 | 2026-10-26 | live |
 | cases/298.html | cases/298.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/299.html | cases/299.html | record | overview | 2026-10-03 | 2026-11-04 | live |
+| cases/299.html | cases/299.html | record | overview | 2026-10-03 | 2026-11-09 | live |
 | cases/3.html | cases/3.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/30.html | cases/30.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/300.html | cases/300.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/301.html | cases/301.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/302.html | cases/302.html | record | overview | 2026-10-03 | 2026-10-23 | live |
-| cases/303.html | cases/303.html | record | overview | 2026-10-03 | 2026-11-05 | live |
+| cases/303.html | cases/303.html | record | overview | 2026-10-03 | 2026-11-09 | live |
 | cases/304.html | cases/304.html | record | overview | 2026-10-03 | 2026-11-05 | live |
 | cases/305.html | cases/305.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/306.html | cases/306.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/307.html | cases/307.html | record | overview | 2026-10-03 | 2026-10-31 | live |
+| cases/307.html | cases/307.html | record | overview | 2026-10-03 | 2026-11-09 | live |
 | cases/308.html | cases/308.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/309.html | cases/309.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/31.html | cases/31.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -1415,6 +1415,11 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-272.html | result/t-272.html | result | overview | 2026-11-05 | 2026-11-05 | live |
 | result/t-273.html | result/t-273.html | result | overview | 2026-11-05 | 2026-11-05 | live |
 | result/t-274.html | result/t-274.html | result | overview | 2026-11-08 | 2026-11-08 | live |
+| result/t-275.html | result/t-275.html | result | overview | 2026-11-09 | 2026-11-09 | live |
+| result/t-276.html | result/t-276.html | result | overview | 2026-11-09 | 2026-11-09 | live |
+| result/t-277.html | result/t-277.html | result | overview | 2026-11-09 | 2026-11-09 | live |
+| result/t-278.html | result/t-278.html | result | overview | 2026-11-09 | 2026-11-09 | live |
+| result/t-279.html | result/t-279.html | result | overview | 2026-11-09 | 2026-11-09 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |
@@ -1472,6 +1477,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
 | cases/204.html | 430,000 | Twelve verified certificates and a section for each of the eight that have been the house, each listing every other side; prepared HTML measures 320,903 bytes on 23 October 2026 after T-231's adoption, 353,884 on 31 October 2026 after T-257's, whose section is 15,409 bytes, and 380,607 on 4 November 2026 after T-264's, 26,723 bytes more, since the new section lists every other side and every earlier section gains the new one. The record keeps every earlier house's section as history, so each adoption grows the page by 27 to 33 KB (32,981 bytes at T-257's). The ceiling moved to 430,000 as a measured choice for one more adoption at that growth. T-268's adoption (#914, think-lrj4) used it on 5 November 2026: the page measures 410,384 bytes, 19,616 below the ceiling, less than one more adoption, so the next adoption at 204 moves the ceiling as its own measured choice (think-w64i's candidate, above T-268's side, is no longer one). Its timing was not re-measured. How a page that grows with every adoption scales is the question think-rp0d asks of result/t-046.html and of these case pages. |
 | cases/260.html | 355,000 | A section for each packing that has been the house, each listing every other side; prepared HTML measures 305,912 bytes in hosted run 42112356624 on 5 November 2026, past the 300,000 record ceiling, once T-269 (#914) is registered beside T-265's house section, before any adoption. An adoption grows a case page by 27 to 33 KB (cases/204.html's measurements), so the ceiling moves to 355,000 as a measured choice, for T-269's adoption. After that adoption, on 6 November 2026 (think-lrj4), the page measures 326,413 bytes, 28,587 below the ceiling, less than one more adoption at the larger growth. Its timing was not re-measured; how a page that grows with every adoption scales is think-rp0d's question. |
+| cases/303.html | 360,000 | A section for each packing that has been the house, each listing every other side; prepared HTML measures 307,154 bytes in hosted run 42586831248 on 9 November 2026, past the 300,000 record ceiling, once T-278 (#930) is registered beside T-272's house section, before any adoption, and 326,923 bytes locally after T-278's adoption that day (think-463r). An adoption grows a case page by 27 to 33 KB (cases/204.html's measurements), so the ceiling moves to 360,000 as a measured choice, 33,077 above the page, for one more adoption at the larger growth. Its timing was not re-measured; how a page that grows with every adoption scales is think-rp0d's question. |
 | frontier.html | 900,000 | On 22 October 2026 the standalone Frontier Survey measures 731,612 bytes for all 324 rows, exact native MathML, credit links, the concise reading key and the shared shell. The 900,000-byte ceiling leaves 168,388 bytes above that measurement; row details remain fetched on demand. Timing has not been re-measured for the split. |
 | index.html | 1,300,000 | The shared 100-case Atlas preview includes all 324 canonical case links and per-case SVG references, with common controls, reading and documentation cards. Retained desktop/mobile expansion checks cover the prepared shared row layout. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |

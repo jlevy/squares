@@ -160,13 +160,17 @@ def test_every_record_file_is_small(records: dict[str, str]) -> None:
     # a measured choice (think-rp0d). 260 measured 305,912 bytes on 5 November 2026 once
     # T-269 (#914) was registered beside T-265's house section; its ceiling allowed T-269's
     # adoption, and after it, on 6 November 2026, 260 measures 326,413 bytes, 28,587 below,
-    # as the published budgets in `site_urls` say.
+    # as the published budgets in `site_urls` say. 303 measured 307,154 bytes in hosted CI
+    # on 9 November 2026 once T-278 (#930) was registered beside T-272's house section, and
+    # 326,923 locally after T-278's adoption (think-463r); its ceiling, 360,000, allows one
+    # more adoption at the larger growth.
     exceptions = {
         "cases/11.html": 500_000,
         "cases/17.html": 550_000,
         "cases/18.html": 350_000,
         "cases/204.html": 430_000,
         "cases/260.html": 355_000,
+        "cases/303.html": 360_000,
     }
     for name, size in sizes.items():
         assert size < exceptions.get(name, RECORD_CEILING_BYTES), (name, size)

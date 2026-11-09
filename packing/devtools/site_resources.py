@@ -255,6 +255,43 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s232-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Couzo's refinement of Chilton's packing, 2.52e-4"
+            " below it (T-275)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s268-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it, 2.96e-5"
+            " below it (T-276)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s299-upper-bound-17801004",
+        "Doğa Özden",
+        ("A further arrangement of his own packing at 299, 2.34e-4 below it (T-277)."),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s303-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it, 4.35e-5"
+            " below it (T-278)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s307-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Couzo's refinement of ntumlnoob's packing, 2.03e-5"
+            " below it (T-279)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

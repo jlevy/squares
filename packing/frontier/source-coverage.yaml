@@ -12351,6 +12351,158 @@ sources:
     18 native jobs have full outcomes. No selected override or superseded claim is created. It
     has a key of its own, as every packet does, so that each count's house names one coverage
     entry.
+- id: ozden-s232-upper-bound-2026-11-09
+  title: 'Doğa Özden''s packing of 232 squares at kenaznia-doga/s232-upper-bound 09e324f, issue 927'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s232-upper-bound/tree/09e324f447d20e10b79de410ad9950a2772c955d
+  local: resources/web/ozden-s232-upper-bound-2026-11-09/
+  source_key: '[Özden s232 upper bound 2026-11-09]'
+  scope:
+    n_values:
+    - 232
+  reviewed: '2026-11-09'
+  source_date: '2026-11-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s232-upper-bound-2026-11-09/acquisition/claims.json
+  evidence:
+  - E-ozden-927-certificate-report
+  - E-ozden-927-exact-feasibility
+  - E-ozden-927-review-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, 09e324f, but a raster diff image and two checker
+    files pinned against byte-identical copies, is retained for jlevy/squares#927, the certificate
+    admitted only where its exact side rounds up to the side the issue prints. T-275 records the
+    in-horizon report at V3/C3 since the stage 4 review of 9 November
+    (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md), and the case adopted it as its
+    house that day. The ledger of 9 November for this pass
+    (campaign/issue-intake/upper-bounds-927-931-20261109) records it. All 3 native jobs have full
+    outcomes.
+- id: ozden-s268-upper-bound-2026-11-09
+  title: 'Doğa Özden''s packing of 268 squares at kenaznia-doga/s268-upper-bound a40a15d, issue 928'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s268-upper-bound/tree/a40a15d91081be002805b6eea35e099c9a2656db
+  local: resources/web/ozden-s268-upper-bound-2026-11-09/
+  source_key: '[Özden s268 upper bound 2026-11-09]'
+  scope:
+    n_values:
+    - 268
+  reviewed: '2026-11-09'
+  source_date: '2026-11-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s268-upper-bound-2026-11-09/acquisition/claims.json
+  evidence:
+  - E-ozden-928-certificate-report
+  - E-ozden-928-exact-feasibility
+  - E-ozden-928-review-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, a40a15d, but a raster diff image and two checker
+    files pinned against byte-identical copies, is retained for jlevy/squares#928, the certificate
+    admitted only where its exact side rounds up to the side the issue prints. T-276 records the
+    in-horizon report at V3/C3 since the stage 4 review of 9 November
+    (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md), and the case adopted it as its
+    house that day. The ledger of 9 November for this pass
+    (campaign/issue-intake/upper-bounds-927-931-20261109) records it. All 3 native jobs have full
+    outcomes.
+- id: ozden-s299-upper-bound-2026-11-09
+  title: >-
+    Doğa Özden's packing of 299 squares at kenaznia-doga/s299-upper-bound-17801004 a042eab, issue
+    929
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s299-upper-bound-17801004/tree/a042eab017caeb07ca5f79afcdc5fbb89103cda2
+  local: resources/web/ozden-s299-upper-bound-2026-11-09/
+  source_key: '[Özden s299 upper bound 2026-11-09]'
+  scope:
+    n_values:
+    - 299
+  reviewed: '2026-11-09'
+  source_date: '2026-11-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s299-upper-bound-2026-11-09/acquisition/claims.json
+  evidence:
+  - E-ozden-929-certificate-report
+  - E-ozden-929-exact-feasibility
+  - E-ozden-929-review-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, a042eab, but a raster diff image and two checker
+    files pinned against byte-identical copies, is retained for jlevy/squares#929, the certificate
+    admitted only where its exact side rounds up to the side the issue prints. T-277 records the
+    in-horizon report at V3/C3 since the stage 4 review of 9 November
+    (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md), and the case adopted it as its
+    house that day. The ledger of 9 November for this pass
+    (campaign/issue-intake/upper-bounds-927-931-20261109) records it. All 3 native jobs have full
+    outcomes.
+- id: ozden-s303-upper-bound-2026-11-09
+  title: 'Doğa Özden''s packing of 303 squares at kenaznia-doga/s303-upper-bound b43ca09, issue 930'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s303-upper-bound/tree/b43ca090fc2ff5e750fecc71d8514298fe164514
+  local: resources/web/ozden-s303-upper-bound-2026-11-09/
+  source_key: '[Özden s303 upper bound 2026-11-09]'
+  scope:
+    n_values:
+    - 303
+  reviewed: '2026-11-09'
+  source_date: '2026-11-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s303-upper-bound-2026-11-09/acquisition/claims.json
+  evidence:
+  - E-ozden-930-certificate-report
+  - E-ozden-930-exact-feasibility
+  - E-ozden-930-review-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, b43ca09, but a raster diff image and two checker
+    files pinned against byte-identical copies, is retained for jlevy/squares#930, the certificate
+    admitted only where its exact side rounds up to the side the issue prints. T-278 records the
+    in-horizon report at V3/C3 since the stage 4 review of 9 November
+    (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md), and the case adopted it as its
+    house that day. The ledger of 9 November for this pass
+    (campaign/issue-intake/upper-bounds-927-931-20261109) records it. All 3 native jobs have full
+    outcomes.
+- id: ozden-s307-upper-bound-2026-11-09
+  title: 'Doğa Özden''s packing of 307 squares at kenaznia-doga/s307-upper-bound dbe8838, issue 931'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s307-upper-bound/tree/dbe8838a7273dc8458fef1f5a16ef4384867ca19
+  local: resources/web/ozden-s307-upper-bound-2026-11-09/
+  source_key: '[Özden s307 upper bound 2026-11-09]'
+  scope:
+    n_values:
+    - 307
+  reviewed: '2026-11-09'
+  source_date: '2026-11-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s307-upper-bound-2026-11-09/acquisition/claims.json
+  evidence:
+  - E-ozden-931-certificate-report
+  - E-ozden-931-exact-feasibility
+  - E-ozden-931-review-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, dbe8838, but a raster diff image and two checker
+    files pinned against byte-identical copies, is retained for jlevy/squares#931, the certificate
+    admitted only where its exact side rounds up to the side the issue prints. T-279 records the
+    in-horizon report at V3/C3 since the stage 4 review of 9 November
+    (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md), and the case adopted it as its
+    house that day. The ledger of 9 November for this pass
+    (campaign/issue-intake/upper-bounds-927-931-20261109) records it. All 3 native jobs have full
+    outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -12628,11 +12780,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 232
-  source_id: couzo-issue844-2026-10-28
-  value: '15.7616617594813300'
-  evidence: E-couzo-844-certificate-report
+  source_id: ozden-s232-upper-bound-2026-11-09
+  value: '15.7614096448817244'
+  evidence: E-ozden-927-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-31 (T-256).
+    a replay here and an accepted review, adopted on 2026-11-09 (T-275).
 - n: 236
   source_id: evand-n236-2026-10-16
   value: '15.8619343906073587'
@@ -12718,11 +12870,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-134).
 - n: 268
-  source_id: evand-issue914-2026-11-05
-  value: '16.8724995181350307'
-  evidence: E-evand-914-certificate-report
+  source_id: ozden-s268-upper-bound-2026-11-09
+  value: '16.8724698978362125'
+  evidence: E-ozden-928-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-05 (T-270).
+    a replay here and an accepted review, adopted on 2026-11-09 (T-276).
 - n: 269
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.901513582189132199'
@@ -12778,11 +12930,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 299
-  source_id: ozden-s299-upper-bound-2026-11-03
-  value: '17.8012385339790622'
-  evidence: E-ozden-893-certificate-report
+  source_id: ozden-s299-upper-bound-2026-11-09
+  value: '17.8010044342552937'
+  evidence: E-ozden-929-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-04 (T-263).
+    a replay here and an accepted review, adopted on 2026-11-09 (T-277).
 - n: 301
   source_id: evand-square-packing-2026-10-05
   value: '17.846667192843489783121781262887'
@@ -12796,11 +12948,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 303
-  source_id: evand-issue914-2026-11-05
-  value: '17.9018327508540488'
-  evidence: E-evand-914-certificate-report
+  source_id: ozden-s303-upper-bound-2026-11-09
+  value: '17.9017892731564904'
+  evidence: E-ozden-930-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-05 (T-272).
+    a replay here and an accepted review, adopted on 2026-11-09 (T-278).
 - n: 304
   source_id: evand-issue914-2026-11-05
   value: '17.9209440933402421'
@@ -12820,11 +12972,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 307
-  source_id: couzo-issue844-2026-10-28
-  value: '17.9792512836880252'
-  evidence: E-couzo-844-certificate-report
+  source_id: ozden-s307-upper-bound-2026-11-09
+  value: '17.9792309603873628'
+  evidence: E-ozden-931-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-31 (T-256).
+    a replay here and an accepted review, adopted on 2026-11-09 (T-279).
 - n: 308
   source_id: evand-n308-2026-10-19
   value: '17.9971491212709088'
@@ -13589,7 +13741,7 @@ superseded_reports:
 - n: 232
   source_id: evand-square-packing-2026-10-05
   value: '15.778174593052022768567069729084'
-  superseded_by: couzo-issue844-2026-10-28
+  superseded_by: ozden-s232-upper-bound-2026-11-09
   reason: Certifies the catalogue's packing at a side 2.8e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -13780,14 +13932,14 @@ superseded_reports:
 - n: 268
   source_id: casson-square-packing-2026
   value: '16.87895510935973675'
-  superseded_by: evand-issue914-2026-11-05
+  superseded_by: ozden-s268-upper-bound-2026-11-09
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 268
   source_id: franciscouzo-square-packing-2026
   value: '16.878814821018413'
-  superseded_by: evand-issue914-2026-11-05
+  superseded_by: ozden-s268-upper-bound-2026-11-09
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 269
@@ -13933,7 +14085,7 @@ superseded_reports:
 - n: 299
   source_id: evand-square-packing-2026-10-05
   value: '17.822875655532295295429036633375'
-  superseded_by: ozden-s299-upper-bound-2026-11-03
+  superseded_by: ozden-s299-upper-bound-2026-11-09
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -13966,17 +14118,17 @@ superseded_reports:
 - n: 303
   source_id: casson-square-packing-2026
   value: '17.93105636462953001'
-  superseded_by: evand-issue914-2026-11-05
+  superseded_by: ozden-s303-upper-bound-2026-11-09
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026
   value: '17.924349265547932'
-  superseded_by: evand-issue914-2026-11-05
+  superseded_by: ozden-s303-upper-bound-2026-11-09
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026-10-03
   value: '17.924341009860250'
-  superseded_by: evand-issue914-2026-11-05
+  superseded_by: ozden-s303-upper-bound-2026-11-09
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 304
   source_id: casson-square-packing-2026
@@ -14026,14 +14178,14 @@ superseded_reports:
 - n: 307
   source_id: casson-square-packing-2026
   value: '17.98205200143469895'
-  superseded_by: couzo-issue844-2026-10-28
+  superseded_by: ozden-s307-upper-bound-2026-11-09
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 307
   source_id: franciscouzo-square-packing-2026
   value: '17.981030548643712'
-  superseded_by: couzo-issue844-2026-10-28
+  superseded_by: ozden-s307-upper-bound-2026-11-09
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 126
@@ -14074,7 +14226,7 @@ superseded_reports:
 - n: 303
   source_id: evand-square-packing-2026-10-05
   value: '17.924341009851128373110514612828'
-  superseded_by: evand-issue914-2026-11-05
+  superseded_by: ozden-s303-upper-bound-2026-11-09
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 88
   source_id: kingbird-current
@@ -14535,9 +14687,9 @@ superseded_reports:
 - n: 303
   source_id: squish-ten-packings-2026-10-07
   value: '17.9203123729203498'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-272's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-278's exact
     side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+  superseded_by: ozden-s303-upper-bound-2026-11-09
 - n: 305
   source_id: evand-square-packing-2026-10-05
   value: '17.952959459015527962875662582531'
@@ -14553,9 +14705,9 @@ superseded_reports:
 - n: 307
   source_id: evand-square-packing-2026-10-05
   value: '17.981030548633310696277454165157'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-256's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-279's exact
     side is smaller.
-  superseded_by: couzo-issue844-2026-10-28
+  superseded_by: ozden-s307-upper-bound-2026-11-09
 - n: 305
   source_id: evand-record-hunt3-2026-10-10
   value: '17.951139772207'
@@ -14644,8 +14796,8 @@ superseded_reports:
   source_id: squish-481-third-request-2026-10-09
   value: '15.7674283499418417'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-256's exact side is smaller.
-  superseded_by: couzo-issue844-2026-10-28
+    and T-275's exact side is smaller.
+  superseded_by: ozden-s232-upper-bound-2026-11-09
 - n: 153
   source_id: pingyou-n153-certificate-2026-10-11
   value: '12.8700138504070441'
@@ -14746,8 +14898,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '17.9130654627385324'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-272's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-278's exact side is smaller.
+  superseded_by: ozden-s303-upper-bound-2026-11-09
 - n: 129
   source_id: dostashev-compositions-2026-10-12
   value: '11.8700138504044644'
@@ -14800,8 +14952,8 @@ superseded_reports:
   source_id: dostashev-records-2026-10-12
   value: '15.7641743174865967'
   reason: The house from 2026-10-12 until 2026-10-16; its certificate stays retained and verified,
-    and T-256's exact side is smaller.
-  superseded_by: couzo-issue844-2026-10-28
+    and T-275's exact side is smaller.
+  superseded_by: ozden-s232-upper-bound-2026-11-09
 - n: 237
   source_id: mishapolk-records-2026-10-14
   value: '15.9027050578663668'
@@ -14830,8 +14982,8 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '17.9099582910699080'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-272's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-278's exact side is smaller.
+  superseded_by: ozden-s303-upper-bound-2026-11-09
 - n: 304
   source_id: dostashev-merged-bands-2026-10-13
   value: '17.9294277580751750'
@@ -15003,9 +15155,9 @@ superseded_reports:
 - n: 268
   source_id: evand-square-packing-2026-10-05
   value: '16.878814821006764724747121053018'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-270's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-276's exact
     side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+  superseded_by: ozden-s268-upper-bound-2026-11-09
 - n: 269
   source_id: evand-regularized-2026-10-10
   value: '16.9015135821891322'
@@ -15052,8 +15204,8 @@ superseded_reports:
   source_id: squish-481-third-request-2026-10-09
   value: '17.9808627840546911'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-256's exact side is smaller.
-  superseded_by: couzo-issue844-2026-10-28
+    and T-279's exact side is smaller.
+  superseded_by: ozden-s307-upper-bound-2026-11-09
 - n: 308
   source_id: evand-record-hunt3-2026-10-10
   value: '17.998269879526255875387992744507'
@@ -15148,8 +15300,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.90995829106990799'
   reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
-    and T-272's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-278's exact side is smaller.
+  superseded_by: ozden-s303-upper-bound-2026-11-09
 - n: 70
   source_id: evand-regularized-2026-10-10
   value: '8.8809603715555796'
@@ -15214,20 +15366,20 @@ superseded_reports:
   source_id: evand-n303-2026-10-22
   value: '17.9097722172743278'
   reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
-    and T-272's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-278's exact side is smaller.
+  superseded_by: ozden-s303-upper-bound-2026-11-09
 - n: 268
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.8788148210067647246'
   reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
-    and T-270's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-276's exact side is smaller.
+  superseded_by: ozden-s268-upper-bound-2026-11-09
 - n: 303
   source_id: amundsk-n303-2026-10-23
   value: '17.9097623274752568'
   reason: The house from 2026-10-24 until 2026-10-25; its certificate stays retained and verified,
-    and T-272's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-278's exact side is smaller.
+  superseded_by: ozden-s303-upper-bound-2026-11-09
 - n: 304
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.92942775807517497'
@@ -15244,8 +15396,8 @@ superseded_reports:
   source_id: couzo-issue763-2026-10-23-in-corpus
   value: '16.8743617158738255'
   reason: The house from 2026-10-25 until 2026-10-26; its certificate stays retained and verified,
-    and T-270's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-276's exact side is smaller.
+  superseded_by: ozden-s268-upper-bound-2026-11-09
 - n: 130
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.90448303251578644'
@@ -15268,8 +15420,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '15.76417431748659663'
   reason: The house from 2026-10-16 until 2026-10-31; its certificate stays retained and verified,
-    and T-256's exact side is smaller.
-  superseded_by: couzo-issue844-2026-10-28
+    and T-275's exact side is smaller.
+  superseded_by: ozden-s232-upper-bound-2026-11-09
 - n: 260
   source_id: evand-regularized-2026-10-20
   value: '16.6457532505198122'
@@ -15280,8 +15432,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.98086278405469107'
   reason: The house from 2026-10-17 until 2026-10-31; its certificate stays retained and verified,
-    and T-256's exact side is smaller.
-  superseded_by: couzo-issue844-2026-10-28
+    and T-279's exact side is smaller.
+  superseded_by: ozden-s307-upper-bound-2026-11-09
 - n: 204
   source_id: evand-issue845-2026-10-29
   value: '14.8076274718815797'
@@ -15292,8 +15444,8 @@ superseded_reports:
   source_id: evand-n299-update-2026-10-29
   value: '17.8012385493885841'
   reason: The house from 2026-10-31 until 2026-11-04; its certificate stays retained and verified,
-    and T-263's exact side is smaller.
-  superseded_by: ozden-s299-upper-bound-2026-11-03
+    and T-277's exact side is smaller.
+  superseded_by: ozden-s299-upper-bound-2026-11-09
 - n: 260
   source_id: evand-issue845-2026-10-29
   value: '16.6339825021218840'
@@ -15322,8 +15474,8 @@ superseded_reports:
   source_id: evand-kaggle-descents-2026-10-24
   value: '16.8743617158693459'
   reason: The house from 2026-10-26 until 2026-11-05; its certificate stays retained and verified,
-    and T-270's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-276's exact side is smaller.
+  superseded_by: ozden-s268-upper-bound-2026-11-09
 - n: 293
   source_id: evand-issue845-2026-10-29
   value: '17.6339825021227820'
@@ -15334,14 +15486,44 @@ superseded_reports:
   source_id: couzo-issue763-2026-10-23-in-corpus
   value: '17.9069782337989002'
   reason: The house from 2026-10-25 until 2026-11-05; its certificate stays retained and verified,
-    and T-272's exact side is smaller.
-  superseded_by: evand-issue914-2026-11-05
+    and T-278's exact side is smaller.
+  superseded_by: ozden-s303-upper-bound-2026-11-09
 - n: 304
   source_id: evand-kaggle-descents-2026-10-24
   value: '17.9268989003567416'
   reason: The house from 2026-10-25 until 2026-11-05; its certificate stays retained and verified,
     and T-273's exact side is smaller.
   superseded_by: evand-issue914-2026-11-05
+- n: 232
+  source_id: couzo-issue844-2026-10-28
+  value: '15.7616617594813300'
+  reason: The house from 2026-10-31 until 2026-11-09; its certificate stays retained and verified,
+    and T-275's exact side is smaller.
+  superseded_by: ozden-s232-upper-bound-2026-11-09
+- n: 268
+  source_id: evand-issue914-2026-11-05
+  value: '16.8724995181350307'
+  reason: The house from 2026-11-05 until 2026-11-09; its certificate stays retained and verified,
+    and T-276's exact side is smaller.
+  superseded_by: ozden-s268-upper-bound-2026-11-09
+- n: 299
+  source_id: ozden-s299-upper-bound-2026-11-03
+  value: '17.8012385339790622'
+  reason: The house from 2026-11-04 until 2026-11-09; its certificate stays retained and verified,
+    and T-277's exact side is smaller.
+  superseded_by: ozden-s299-upper-bound-2026-11-09
+- n: 303
+  source_id: evand-issue914-2026-11-05
+  value: '17.9018327508540488'
+  reason: The house from 2026-11-05 until 2026-11-09; its certificate stays retained and verified,
+    and T-278's exact side is smaller.
+  superseded_by: ozden-s303-upper-bound-2026-11-09
+- n: 307
+  source_id: couzo-issue844-2026-10-28
+  value: '17.9792512836880252'
+  reason: The house from 2026-10-31 until 2026-11-09; its certificate stays retained and verified,
+    and T-279's exact side is smaller.
+  superseded_by: ozden-s307-upper-bound-2026-11-09
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

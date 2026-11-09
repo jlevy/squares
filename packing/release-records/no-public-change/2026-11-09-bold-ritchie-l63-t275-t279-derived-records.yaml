@@ -1,0 +1,29 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  Intake lane L63 of 9 November (think-463r), third phase: the records derived from the
+  adoption of T-275 to T-279 at 232, 268, 299, 303 and 307 are brought to the new houses.
+  The bound citations name the five new results and their sources, the composite figure
+  record's rigidity scopes read the new witnesses, and the pull-request gate's pinned
+  translation-screen totals for n = 1 to 324 follow the new witnesses (1,726 separating and
+  5,825 translating squares). The explainer prints none of those counts, citations, scopes
+  or totals. Against main 19b354a5c (#926): devtools.compare_paper_renders rendered the
+  explainer into empty site directories, the math passes in /usr/bin/google-chrome
+  (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of these three
+  paths and the eleven the second phase's record names swapped in. Its 55 files are
+  deterministic, and only its Markdown and HTML differ from the baseline; a diff of a fresh
+  pair of renders shows the one change the second phase's record measured, the live
+  register count, "one of 274 results the framework has registered so far" and now 279,
+  which follows the site's data and is not a revision of the paper. After the senior
+  review's fixes to T-275 to T-279's notes and claims, the requests entries, the
+  bibliography notes and the credit curation, all four papers were rendered again the same
+  way, with those files also swapped: the optimality review, the threshold-bound review and
+  the methods survey are byte-identical across the three, 43 files each, and the explainer
+  shows the same one change. No PDF was printed. The paper keeps its version, v0.4.35.

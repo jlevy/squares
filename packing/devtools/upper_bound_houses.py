@@ -617,14 +617,12 @@ def _sources() -> dict[str, Source]:
         # certificates of issue 844; 172, 204, 260 and 293 to T-257, Evan Daniel's of issue
         # 845; 299 to T-258, his update to issue 824; and 130 to T-259, Mykhailo
         # Polkovskyi's re-solve of Couzo's packing of issue 843.
-        packet_source("T-256", "couzo-issue844-2026-10-28"),
         packet_source("T-257", "evand-issue845-2026-10-29"),
         packet_source("T-259", "mishapolk-issue846-2026-10-30"),
         # The adoption of 4 November 2026 moved 299 to T-263 and 204 to T-264, Doğa Özden's
         # further arrangements of issues 893 and 894 of Evan Daniel's T-258 and T-257
         # packings. 299 was T-258's only count, so T-258 is no source here now, as T-231
         # left on 31 October; T-257 still houses 172, 260 and 293.
-        packet_source("T-263", "ozden-s299-upper-bound-2026-11-03"),
         # The adoption of 5 November 2026 (think-o7ly) moved 260 to T-265, Kaelan Yim's
         # further arrangement of issue 895 of Evan Daniel's T-257 packing. The adoption of
         # issue 914 (think-lrj4) then moved 175, 204, 268, 293, 303 and 304 on 5 November
@@ -641,10 +639,17 @@ def _sources() -> dict[str, Source]:
             packet_source("T-269", "evand-issue914-2026-11-05"),
             "[Daniel issue 914 n260 2026-11-05]",
         ),
-        packet_source("T-270", "evand-issue914-2026-11-05"),
         packet_source("T-271", "evand-issue914-2026-11-05"),
-        packet_source("T-272", "evand-issue914-2026-11-05"),
         packet_source("T-273", "evand-issue914-2026-11-05"),
+        # The adoption of 9 November 2026 (think-463r) moved 232 and 307 from T-256, 268 from
+        # T-270, 299 from T-263 and 303 from T-272 to Doğa Özden's further arrangements of
+        # issues 927 to 931, T-275 to T-279, one packet each; T-256, T-263, T-270 and T-272
+        # keep no house here now.
+        packet_source("T-275", "ozden-s232-upper-bound-2026-11-09"),
+        packet_source("T-276", "ozden-s268-upper-bound-2026-11-09"),
+        packet_source("T-277", "ozden-s299-upper-bound-2026-11-09"),
+        packet_source("T-278", "ozden-s303-upper-bound-2026-11-09"),
+        packet_source("T-279", "ozden-s307-upper-bound-2026-11-09"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -704,7 +709,10 @@ def _sources() -> dict[str, Source]:
 #: The same day's later pass (think-lrj4) adopted Evan Daniel's new packings of issue 914,
 #: T-267, T-268 and T-270 to T-273, at 175 from T-186, 204 from T-264, 268 and 304 from
 #: T-242, 293 from T-257 and 303 from T-240, and the pass of 6 November 2026 T-269 at 260
-#: from T-265; T-240, T-242, T-264 and T-265 keep no house here.
+#: from T-265; T-240, T-242, T-264 and T-265 keep no house here. The pass of 9 November
+#: 2026 (think-463r) adopted Doğa Özden's further arrangements of issues 927 to 931, T-275
+#: to T-279, at 232 and 307 from T-256, 268 from T-270, 299 from T-263 and 303 from T-272,
+#: each packing's finder its base holder; T-256, T-263, T-270 and T-272 keep no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -746,7 +754,7 @@ ADOPTED: dict[int, str] = {
     227: "T-225",
     228: "T-174",
     229: "T-225",
-    232: "T-256",
+    232: "T-275",
     236: "T-218",
     237: "T-190",
     238: "T-174",
@@ -760,7 +768,7 @@ ADOPTED: dict[int, str] = {
     263: "T-174",
     264: "T-186",
     267: "T-134",
-    268: "T-270",
+    268: "T-276",
     269: "T-174",
     270: "T-224",
     271: "T-219",
@@ -770,13 +778,13 @@ ADOPTED: dict[int, str] = {
     293: "T-271",
     295: "T-193",
     297: "T-174",
-    299: "T-263",
+    299: "T-277",
     302: "T-193",
-    303: "T-272",
+    303: "T-278",
     304: "T-273",
     305: "T-174",
     306: "T-174",
-    307: "T-256",
+    307: "T-279",
     308: "T-221",
 }
 NUMBERS = tuple(sorted(ADOPTED))
@@ -970,6 +978,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-04": frozenset({204, 299}),
     "2026-11-05": frozenset({175, 204, 260, 268, 293, 303, 304}),
     "2026-11-06": frozenset({260}),
+    "2026-11-09": frozenset({232, 268, 299, 303, 307}),
 }
 
 

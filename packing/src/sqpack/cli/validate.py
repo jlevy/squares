@@ -218,11 +218,17 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: and 10 at 293 against T-257's 30 and 111, 11 and 69 at 303 against T-240's 57 and 92,
 #: and 12 and 80 at 304 against T-242's 75 and 119, so n=1..200 has 460 separating squares
 #: and 2,228 translating ones, and n=1..324 1,309 and 5,618, in the same 67 and 182 and 125
-#: and 302 records.
+#: and 302 records. The adoption of 9 November 2026 (think-463r) moved 232, 268, 299, 303
+#: and 307 to Doğa Özden's certificates (T-275 to T-279), whose rational coordinates leave
+#: more slack: separating and translating squares 94 and 103 at 232 against T-256's 13 and
+#: 73, 117 and 120 at 268 against T-270's 29 and 90, 102 and 121 at 299 against T-263's 62
+#: and 148, 186 and 234 at 303 against T-272's 11 and 69, and 43 and 44 at 307 against
+#: T-256's 10 and 35, so n=1..324 has 1,726 separating squares and 5,825 translating ones,
+#: in the same 125 and 302 records; n=1..200 is unchanged.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
     "n=1..200": (67, 460, 182, 2228),
-    "n=1..324": (125, 1309, 302, 5618),
+    "n=1..324": (125, 1726, 302, 5825),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
