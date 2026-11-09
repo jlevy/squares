@@ -597,7 +597,8 @@ def _sources() -> dict[str, Source]:
         packet_source("T-220", "evand-n183-subgrid-2026-10-19"),
         packet_source("T-221", "evand-n308-2026-10-19"),
         packet_source("T-222", "evand-n154-sweep-2026-10-20"),
-        packet_source("T-224", "evand-n270-sweep-2026-10-20"),
+        # The adoption of 9 November 2026 (think-he66) moved 270, T-224's only count, to
+        # T-283, so T-224 is no source here now.
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
         # The adoption of 31 October 2026 moved 204, T-231's only count, to T-257, so T-231
@@ -617,7 +618,8 @@ def _sources() -> dict[str, Source]:
         # certificates of issue 844; 172, 204, 260 and 293 to T-257, Evan Daniel's of issue
         # 845; 299 to T-258, his update to issue 824; and 130 to T-259, Mykhailo
         # Polkovskyi's re-solve of Couzo's packing of issue 843.
-        packet_source("T-257", "evand-issue845-2026-10-29"),
+        # The adoption of 9 November 2026 (think-he66) moved 172, T-257's last house, to
+        # T-282, so T-257 is no source here now.
         packet_source("T-259", "mishapolk-issue846-2026-10-30"),
         # The adoption of 4 November 2026 moved 299 to T-263 and 204 to T-264, Doğa Özden's
         # further arrangements of issues 893 and 894 of Evan Daniel's T-258 and T-257
@@ -650,6 +652,11 @@ def _sources() -> dict[str, Source]:
         packet_source("T-277", "ozden-s299-upper-bound-2026-11-09"),
         packet_source("T-278", "ozden-s303-upper-bound-2026-11-09"),
         packet_source("T-279", "ozden-s307-upper-bound-2026-11-09"),
+        # The same day's later pass (think-he66) moved 172 from T-257 and 270 from T-224 to
+        # Doğa Özden's further arrangements of issues 935 and 936, T-282 and T-283, one packet
+        # each; T-257 and T-224 keep no house here now.
+        packet_source("T-282", "ozden-s172-upper-bound-2026-11-09"),
+        packet_source("T-283", "ozden-s270-upper-bound-2026-11-09"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -713,6 +720,9 @@ def _sources() -> dict[str, Source]:
 #: 2026 (think-463r) adopted Doğa Özden's further arrangements of issues 927 to 931, T-275
 #: to T-279, at 232 and 307 from T-256, 268 from T-270, 299 from T-263 and 303 from T-272,
 #: each packing's finder its base holder; T-256, T-263, T-270 and T-272 keep no house here.
+#: The same day's later pass (think-he66) adopted his further arrangements of issues 935 and
+#: 936, T-282 and T-283, at 172 from T-257 and 270 from T-224, each packing's finder Evan
+#: Daniel; T-257 and T-224 keep no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -736,7 +746,7 @@ ADOPTED: dict[int, str] = {
     154: "T-222",
     155: "T-197",
     156: "T-186",
-    172: "T-257",
+    172: "T-282",
     175: "T-267",
     176: "T-186",
     179: "T-174",
@@ -770,7 +780,7 @@ ADOPTED: dict[int, str] = {
     267: "T-134",
     268: "T-276",
     269: "T-174",
-    270: "T-224",
+    270: "T-283",
     271: "T-219",
     272: "T-174",
     273: "T-174",
@@ -978,7 +988,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-04": frozenset({204, 299}),
     "2026-11-05": frozenset({175, 204, 260, 268, 293, 303, 304}),
     "2026-11-06": frozenset({260}),
-    "2026-11-09": frozenset({232, 268, 299, 303, 307}),
+    "2026-11-09": frozenset({172, 232, 268, 270, 299, 303, 307}),
 }
 
 

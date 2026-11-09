@@ -4538,12 +4538,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"2723587139676283080823463207799/200000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"1361468985328621177764979119129233399545470048102052769370427095468316966616209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(172) ≥ 13.119429","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.1194294641"},
         "n": 172,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"13.6179356983814155","source_url":"https://github.com/evand/square-packing/blob/0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d/search/packer/candidates/s172_1028.cert","witness_id":"W-known-best-n172","witness_path":"packing/witnesses/known-best/n-172.yaml"},
+          "assessed_geometry": {"reported_side":"13.6146898532862152","source_url":"https://github.com/kenaznia-doga/s172-upper-bound/blob/2ce1f7c7621859437e0bcc1f9ad2b00822b2c605/n-172-candidate.yaml","witness_id":"W-known-best-n172","witness_path":"packing/witnesses/known-best/n-172.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -4560,7 +4560,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(172) ≤ 13.617936","provenance":"frontier","relation":"upper-bound","value":"13.6179356983814155"}
+        "side": {"display":"s(172) ≤ 13.614690","provenance":"frontier","relation":"upper-bound","value":"13.6146898532862152"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
@@ -7163,12 +7163,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"16928162252196750114897964982713/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"135425188826742430876823392268227093871980696715260327151518120513740712597220590813078171341983823047096309971065862995224792397317215234884511156640568560455084399127260139011043351856299251/7999999999999976123895832717642802188006863272634862077077304085907006310479032815829955835752491752787592111669420691272441400862583642946933891970394272174759098245017349764000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(270) ≥ 16.445218","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.4452187191"},
         "n": 270,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"16.9281622521967502","source_url":"https://github.com/evand/square-packing/blob/88385abc95ab25d520302282d1946cbb07bc9cf3/search/packer/candidates/s270_sw.cert","witness_id":"W-known-best-n270","witness_path":"packing/witnesses/known-best/n-270.yaml"},
+          "assessed_geometry": {"reported_side":"16.9281486033428544","source_url":"https://github.com/kenaznia-doga/s270-upper-bound/blob/78ab8cec9085e4e1d6489127113f0af2550e749b/n-270-candidate.yaml","witness_id":"W-known-best-n270","witness_path":"packing/witnesses/known-best/n-270.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -7185,7 +7185,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(270) ≤ 16.928163","provenance":"frontier","relation":"upper-bound","value":"16.9281622521967502"}
+        "side": {"display":"s(270) ≤ 16.928149","provenance":"frontier","relation":"upper-bound","value":"16.9281486033428544"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

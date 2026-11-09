@@ -7713,3 +7713,67 @@ verifiers:
       l64_houses.py, l64_identity.py, l64_construct.py, l64_digests.py and
       l64_compare_lane.py, kept beside them, decide no certificate of the five and are not
       registered.
+  - id: V-ozden-935-936-review-check
+    program: l72_check.py with l72_reader.py, l72_sat.py, l72_clip.py and l72_util.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 9 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificates of issues 935 and 936 (172 and 270), with a fail-closed reader of its own
+      (PyYAML composed nodes with every scalar a string, aliases, explicit tags and duplicate keys
+      refused, every scalar an integer or p/q in canonical form, the JSON twin held to the same
+      witness): every format hypothesis, every square a unit square from its listed corners, every
+      wall and every pair twice with no distance filter, by separating axes over the four edge
+      normals in fractions.Fraction (l72_sat.py) and by exact Sutherland-Hodgman clipped areas in
+      gmpy2.mpq (l72_clip.py). l72_controls.py decides 23 controls a certificate, stated in a plan
+      hashed before its program existed (the side at and one unit of its last place below its
+      extent, every square to its nearest wall, every pair within 1e-12 to contact along its centre
+      line and 1e-30 past it, an enlarged square, a duplicate, a translation out of the box, a
+      broken square, the count and ids, the reversed rotation sense), and l72_selftest.py holds both
+      methods to 80 cases: known answers in both listing senses, walls, refused shapes, 3,000
+      random rational pairs and 1,000 random walls at contact and either side of it, and 41
+      malformed files.
+    source:
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_check.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_reader.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_sat.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_clip.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_util.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_controls.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_selftest.py
+    independence_record: packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 935 and 936 (L72, think-qqyg), strong
+            tier (tbd-strong-max) at maximum reasoning, prompted separately from the import lane
+            (L71, think-he66)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issues say AI agents wrote and ran the lab's
+          search and checks. The six checker files were frozen at 2026-11-09T16:12:07Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or this
+          repository's witness, verifier or promotion code; they import nothing from this
+          repository or the sources.
+    note: >-
+      Written and run on 9 November 2026 for docs/project/reviews/review-2026-11-09-ozden-935-936.md
+      (SHA-256 a6c8edeb92a97603acc55805d20f61b8c7ef66d917c5fd7d006cf6db92ecfa24 for l72_check.py and
+      76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a for l72_reader.py as
+      retained, in the directory's programs.sha256, and as each receipt records), and kept once,
+      with the shared receipts and those at 172, in the ozden-s172-upper-bound-2026-11-09 packet's
+      review/review-2026-11-09/; the 270 receipts are in its own packet's. l72_freeze.py,
+      l72_plan_facts.py, l72_sides.py, l72_custody.py, l72_house.py, l72_houses.py,
+      l72_identity.py, l72_construct.py, l72_digests.py and l72_compare_lane.py, kept beside them,
+      decide no certificate of the two and are not registered.
