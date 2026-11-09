@@ -1,0 +1,153 @@
+{
+ "program": "l77_custody.py",
+ "program_sha256": "8f93fda6758a969fd0b3dbb940080d20989386727a8f93d8bcf07bb40d2d3a6e",
+ "commits": [
+  "4fbff7b279f53211a458ee4cd93aa32c1dc3a08e d03ee0bdb223e00fe124e818ed242f6cbd714fad|Kenan (Doğa) <doga@doga.kenan.works>|2026-11-09T20:53:14+00:00|2026-11-09T20:53:14+00:00|README: correct Kaggle comparison (leaderboard side-only entry)",
+  "d03ee0bdb223e00fe124e818ed242f6cbd714fad |Kenan (Doğa) <doga@doga.kenan.works>|2026-11-09T20:30:58+00:00|2026-11-09T20:30:58+00:00|s(199) upper bound: #935's packing plus an L of 27 grid squares; exact witness, decimal pose, checks, README, licences"
+ ],
+ "pin_has_no_parent": true,
+ "head_parent_is_pin": true,
+ "pin_to_head_changed": [
+  "README.md"
+ ],
+ "pin_tree": "4a57f45f353659e0dc28dff908849cf1fa77a4f5",
+ "files": [
+  {
+   "path": ".meta.json",
+   "mode": "100644",
+   "blob": "d8dbacf125fbb755ee626f0f35a372deba38f5e5",
+   "size": 565,
+   "sha256": "75c385206bc98ebc3cb21e7a0b2df397fcb3b9f8ccdc2494a63c53ed6b2cb9af",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "LICENSE-evand-square-packing.txt",
+   "mode": "100644",
+   "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "size": 1068,
+   "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": true
+  },
+  {
+   "path": "LICENSE.md",
+   "mode": "100644",
+   "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "size": 1484,
+   "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": true
+  },
+  {
+   "path": "README.md",
+   "mode": "100644",
+   "blob": "dc5e72439881d7dbe81b0034c1e974329d3724d9",
+   "size": 5367,
+   "sha256": "604dd9f68ad9ea080ca3e55582c78f442c4bf89a2ba3e555fd747e02f40499bd",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "n-199-candidate.yaml",
+   "mode": "100644",
+   "blob": "d35506eb1f50bdd29f2ddb1a7b230ef309029306",
+   "size": 543653,
+   "sha256": "8a85b4c3536757a77fd51e2a0e361de1ecef36b38d59ed3111611672e6a78aca",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "n-199-decimal-pose.yaml",
+   "mode": "100644",
+   "blob": "941937b8532740cda694cea1881c304d102f7a0a",
+   "size": 21717,
+   "sha256": "40d8101c706b66bd29ebaddd567a63d398e5dc416d6d97fa77e2671895f34494",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "n199-witness.json",
+   "mode": "100644",
+   "blob": "ace0b21967509889b3025b7b2f4d52d96c88b7a5",
+   "size": 537289,
+   "sha256": "88d20ae206367d2029b05221d4a9975c86f8a71ffd51ac065aeebf168f4a6cb8",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "packing-witness-verify.txt",
+   "mode": "100644",
+   "blob": "c6a7ab07c3251a74e5b99caede8b9eb325150891",
+   "size": 362,
+   "sha256": "6c6cc9176a143685047c39044ad6379587ee7f109f1fbab42a70008c5879134a",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "records/n-199-packing.png",
+   "mode": "100644",
+   "blob": "b4415804d94be06c74b6c0dc1df698f1f8a4925a",
+   "size": 100454,
+   "sha256": "3d3f6cc4b8223cf7fe6cad5960365593e951f21030edc1a09701532a45ff1da8",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "records/n-199-packing.svg",
+   "mode": "100644",
+   "blob": "7d8ca02fd635f48d1a3618f75f915f68b195837c",
+   "size": 26785,
+   "sha256": "2c10d79a53eae704b1fff51593ad5d307a3dd74095338e9ea2fcf8db9f0d9bae",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "sqcheck-output.txt",
+   "mode": "100644",
+   "blob": "d57a099a53963feb2de28e91f9ab92219391efc9",
+   "size": 272,
+   "sha256": "416ddc7551827ce5f2fec49106132b18f78cd43f371817378190924da6d5e06d",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": null
+  },
+  {
+   "path": "verifier/README.md",
+   "mode": "100644",
+   "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+   "size": 3441,
+   "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": true
+  },
+  {
+   "path": "verifier/sqcheck.py",
+   "mode": "100644",
+   "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "size": 17654,
+   "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+   "extracted_bytes_equal_blob": true,
+   "same_blob_as_172_repository": true
+  }
+ ],
+ "every_extracted_file_equals_its_blob": true,
+ "candidate_sha256_equals_issue": true,
+ "json_twin_sha256_equals_readme": true,
+ "licence": {
+  "evand_notice_equals_evand_issue845_LICENSE": true,
+  "evand_notice_equals_evand_n270_LICENSE": true,
+  "LICENSE_md_equals_172_packet_copy": true,
+  "LICENSE_md_first_line": "# Licence",
+  "LICENSE_md_mentions": [
+   "CC BY 4.0",
+   "MIT",
+   "Doğa Özden"
+  ],
+  "evand_notice_first_lines": [
+   "MIT License",
+   "",
+   "Copyright (c) 2026 Evan Daniel"
+  ]
+ },
+ "verdict": "CUSTODY_HOLDS"
+}

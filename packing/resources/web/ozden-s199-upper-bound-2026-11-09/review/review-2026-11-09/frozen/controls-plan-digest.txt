@@ -1,0 +1,2 @@
+# controls plan stated 2026-11-09T21:20:11Z, before l77_controls.py existed
+157d3bb4216b9d7349161b8be2aeb52ac571db8dfa350ca480523627e97f7f10  controls-plan.json
