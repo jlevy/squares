@@ -1,0 +1,426 @@
+{
+ "bead": "think-qqyg",
+ "cases": 80,
+ "checker_digests": {
+  "l72_check.py": "a6c8edeb92a97603acc55805d20f61b8c7ef66d917c5fd7d006cf6db92ecfa24",
+  "l72_clip.py": "4a450e3237e470c3ca033ad11d7a012be96e75d1ffebaf6764c9ed5c57d79da1",
+  "l72_reader.py": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a",
+  "l72_sat.py": "a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e",
+  "l72_selftest.py": "5c7ba446d2c3798fcb858629b54188e507099ecdf2685ed064e07887485ce6dd",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "cpu_seconds": 6.17,
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "failed": [],
+ "lane": "L72",
+ "program": "l72_selftest.py",
+ "results": [
+  {
+   "case": "edge contact (ccw)",
+   "detail": "margin 0, area 0, class A touching, B touching",
+   "ok": true
+  },
+  {
+   "case": "edge contact (cw)",
+   "detail": "margin 0, area 0, class A touching, B touching",
+   "ok": true
+  },
+  {
+   "case": "edge overlap 1e-30 (ccw)",
+   "detail": "margin -1/1000000000000000000000000000000, area 1/1000000000000000000000000000000, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "edge overlap 1e-30 (cw)",
+   "detail": "margin -1/1000000000000000000000000000000, area 1/1000000000000000000000000000000, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "edge apart 1e-30 (ccw)",
+   "detail": "margin 1/1000000000000000000000000000000, area 0, class A apart, B apart",
+   "ok": true
+  },
+  {
+   "case": "edge apart 1e-30 (cw)",
+   "detail": "margin 1/1000000000000000000000000000000, area 0, class A apart, B apart",
+   "ok": true
+  },
+  {
+   "case": "corner contact (ccw)",
+   "detail": "margin 0, area 0, class A touching, B touching",
+   "ok": true
+  },
+  {
+   "case": "corner contact (cw)",
+   "detail": "margin 0, area 0, class A touching, B touching",
+   "ok": true
+  },
+  {
+   "case": "corner overlap 1e-30 (ccw)",
+   "detail": "margin -1/1000000000000000000000000000000, area 1/1000000000000000000000000000000000000000000000000000000000000, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "corner overlap 1e-30 (cw)",
+   "detail": "margin -1/1000000000000000000000000000000, area 1/1000000000000000000000000000000000000000000000000000000000000, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "3-4-5 vertex-edge contact (ccw)",
+   "detail": "margin 0, area 0, class A touching, B touching",
+   "ok": true
+  },
+  {
+   "case": "3-4-5 vertex-edge contact (cw)",
+   "detail": "margin 0, area 0, class A touching, B touching",
+   "ok": true
+  },
+  {
+   "case": "3-4-5 vertex-edge overlap 1e-30 (ccw)",
+   "detail": "margin -1/1000000000000000000000000000000, area 1/960000000000000000000000000000000000000000000000000000000000, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "3-4-5 vertex-edge overlap 1e-30 (cw)",
+   "detail": "margin -1/1000000000000000000000000000000, area 1/960000000000000000000000000000000000000000000000000000000000, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "duplicate (ccw)",
+   "detail": "margin -1, area 1, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "duplicate (cw)",
+   "detail": "margin -1, area 1, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "own rotation by (3/5, 4/5) (ccw)",
+   "detail": "margin -6/5, area 5/6, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "own rotation by (3/5, 4/5) (cw)",
+   "detail": "margin -6/5, area 5/6, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "own rotation by (4/5, 3/5) (ccw)",
+   "detail": "margin -6/5, area 5/6, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "own rotation by (4/5, 3/5) (cw)",
+   "detail": "margin -6/5, area 5/6, class A overlapping, B overlapping",
+   "ok": true
+  },
+  {
+   "case": "wall left contact",
+   "detail": "A contact, B contact, inside area 1",
+   "ok": true
+  },
+  {
+   "case": "wall left past",
+   "detail": "A outside, B outside, inside area 959999999999999999999999999999999999999999999999999999999999/960000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "wall right contact",
+   "detail": "A contact, B contact, inside area 1",
+   "ok": true
+  },
+  {
+   "case": "wall right past",
+   "detail": "A outside, B outside, inside area 959999999999999999999999999999999999999999999999999999999999/960000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "wall bottom contact",
+   "detail": "A contact, B contact, inside area 1",
+   "ok": true
+  },
+  {
+   "case": "wall bottom past",
+   "detail": "A outside, B outside, inside area 959999999999999999999999999999999999999999999999999999999999/960000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "wall top contact",
+   "detail": "A contact, B contact, inside area 1",
+   "ok": true
+  },
+  {
+   "case": "wall top past",
+   "detail": "A outside, B outside, inside area 959999999999999999999999999999999999999999999999999999999999/960000000000000000000000000000000000000000000000000000000000",
+   "ok": true
+  },
+  {
+   "case": "refuse shape: scaled by 1 + 1e-30",
+   "detail": "A: |p1 - p0| != 1; B: an edge is not of length 1",
+   "ok": true
+  },
+  {
+   "case": "refuse shape: rhombus u=(1,0), f=(3/5,4/5)",
+   "detail": "A: p3 - p0 is not +-perp(p1 - p0); B: area is not 1",
+   "ok": true
+  },
+  {
+   "case": "refuse shape: bowtie order p0 p2 p1 p3",
+   "detail": "A: |p1 - p0| != 1; B: an edge is not of length 1",
+   "ok": true
+  },
+  {
+   "case": "refuse shape: p2 moved 1e-30 in x",
+   "detail": "A: p2 != p0 + u + f; B: an edge is not of length 1",
+   "ok": true
+  },
+  {
+   "case": "refuse shape: rectangle 1 x (1 + 1e-30)",
+   "detail": "A: p3 - p0 is not +-perp(p1 - p0); B: an edge is not of length 1",
+   "ok": true
+  },
+  {
+   "case": "refuse shape: zigzag of unit edges",
+   "detail": "A: p3 - p0 is not +-perp(p1 - p0); B: turns are not all of one sign",
+   "ok": true
+  },
+  {
+   "case": "refuse shape: one point",
+   "detail": "A: |p1 - p0| != 1; B: an edge is not of length 1",
+   "ok": true
+  },
+  {
+   "case": "reader accepts the base file and its twin",
+   "detail": "same witness",
+   "ok": true
+  },
+  {
+   "case": "reader counts a scalar not in lowest terms",
+   "detail": "1",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: extra top-level key",
+   "detail": "top-level keys ['extra', 'softschema', 'witness'] are not ['softschema', 'witness']",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: missing softschema",
+   "detail": "top-level keys ['witness'] are not ['softschema', 'witness']",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: wrong contract",
+   "detail": "contract is not Witness/v2",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: wrong envelope",
+   "detail": "envelope is not 'witness'",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: missing claim",
+   "detail": "witness lacks ['claim']",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: unknown witness key",
+   "detail": "witness has unknown keys ['colour']",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: n not an integer",
+   "detail": "n is not a decimal integer",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: n mismatch",
+   "detail": "2 squares where n is 3",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: decimal side",
+   "detail": "side: '2.5' is not an integer or p/q",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: side over zero",
+   "detail": "side: '3/0' is not an integer or p/q",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: negative side",
+   "detail": "side is not positive",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: zero side",
+   "detail": "side is not positive",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: square_size 2",
+   "detail": "square_size is not '1'",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: center-angle",
+   "detail": "representation is not 'corners'",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: decimal scalars",
+   "detail": "scalar is not exactly {kind: rational}",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: centred origin",
+   "detail": "origin is not lower-left",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: axes down",
+   "detail": "axes are not x-right-y-up",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: duplicate key",
+   "detail": "duplicate key 'side'",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: duplicate id",
+   "detail": "repeated square id",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: three corners",
+   "detail": "squares[1] does not have 4 corners",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: five corners",
+   "detail": "squares[1] does not have 4 corners",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: three coordinates",
+   "detail": "squares[1] corner 3 is not a pair",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: exponent",
+   "detail": "squares[1] corner 1 x: '2e0' is not an integer or p/q",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: space inside a quoted scalar",
+   "detail": "squares[1] corner 1 x: ' 2' is not an integer or p/q",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: leading zero",
+   "detail": "squares[1] corner 1 x: '02' is not an integer or p/q",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: negative denominator",
+   "detail": "squares[1] corner 3 x: '1/-1' is not an integer or p/q",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: minus zero",
+   "detail": "squares[1] corner 1 y: '-0' is not an integer or p/q",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: plus sign",
+   "detail": "squares[1] corner 1 x: '+2' is not an integer or p/q",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: anchor and alias",
+   "detail": "a node appears twice (anchor and alias)",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: explicit tag",
+   "detail": "scalar with explicit tag 'tag:yaml.org,2002:int'",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: extra key on a square",
+   "detail": "squares[1] keys ['center', 'corners', 'id'] are not id, corners",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: two documents",
+   "detail": "YAML does not parse: expected a single document in the stream\n  in \"<unicode string>\", line 1, column 1:\n    softschema:",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: empty file",
+   "detail": "empty document",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: squares not a list",
+   "detail": "squares is not a sequence",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: id zero",
+   "detail": "squares[1] id < 1",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: id not an integer",
+   "detail": "squares[1] id is not an integer",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: twin with a changed coordinate",
+   "detail": "JSON twin differs from the YAML: $.witness.squares[1].corners[2][1]: '1' against '3'",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: twin with a float",
+   "detail": "JSON non-integer number '2.0'",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: twin with a duplicate key",
+   "detail": "JSON duplicate key 'n'",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: twin with a boolean",
+   "detail": "JSON value True has no YAML string twin",
+   "ok": true
+  },
+  {
+   "case": "reader refuses: twin with a missing square",
+   "detail": "JSON twin differs from the YAML: $.witness.squares[1]: keys ['id', 'idx'] differ",
+   "ok": true
+  },
+  {
+   "case": "3000 random pairs to contact and 1e-30 either side",
+   "detail": "0 failed",
+   "ok": true
+  },
+  {
+   "case": "1000 random squares to a wall, past it and short of it",
+   "detail": "0 failed",
+   "ok": true
+  }
+ ],
+ "verdict": "PASSED",
+ "written_utc": "2026-11-09T16:33:16Z"
+}

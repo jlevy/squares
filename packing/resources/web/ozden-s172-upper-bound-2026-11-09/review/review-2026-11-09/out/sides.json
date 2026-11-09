@@ -1,0 +1,190 @@
+{
+ "172": {
+  "ceil_12": "13.614689853287",
+  "claim": "13.614689853287",
+  "claim_is_ceil_12": true,
+  "claim_minus_side": "7.84895e-13",
+  "denominator_digits": 89,
+  "expansion_terminates": false,
+  "extents": {
+   "least_x": "0",
+   "least_y": "0",
+   "side_equals_greatest_x": true,
+   "side_equals_greatest_y": false,
+   "side_minus_greatest_x": "0",
+   "side_minus_greatest_y": "1.81514e-16"
+  },
+  "floor_12": "13.614689853286",
+  "floor_20": "13.61468985328621510434",
+  "floor_40": "13.6146898532862151043460952792061109169999",
+  "gap": {
+   "binary64_spacing_at_side": "1.77635e-15",
+   "binary64_spacings_at_side": "1.82724e+12",
+   "exact": "1298338038080119591244473958213160919813006910181299223700689213869114439467587745104538150009153311/399999999999999902261561888317567574202855638974176673538120679221316177800000000000000000000000000000",
+   "issue_improvement": "3.246e-03",
+   "issue_improvement_is_rounded_gap": true,
+   "issue_relative": "2.38e-04",
+   "issue_relative_is_rounded": true,
+   "relative_rounded_3_sig": "2.38e-04",
+   "relative_sci_12": "2.38350743247e-04",
+   "rounded_4_sig": "3.246e-03",
+   "sci_12_truncated": "3.24584509520e-03",
+   "units_of_12th_place": "3.24584e+09"
+  },
+  "house": {
+   "ceil_16": "13.6179356983814155",
+   "entry": "T-257",
+   "equals_issue_fraction": true,
+   "floor_20": "13.61793569838141540411",
+   "issue_print": "13.6179356983814155",
+   "issue_print_is_ceil_16": true,
+   "side": "2723587139676283080823463207799/200000000000000000000000000000",
+   "witness": "packing/witnesses/known-best/n-172.yaml",
+   "witness_id": "W-known-best-n172"
+  },
+  "kaggle": {
+   "minus_claim": "3.24584e-03",
+   "minus_house": "2.52358e-09",
+   "minus_side": "3.24584e-03",
+   "value": "13.617935700905"
+  },
+  "numerator_digits": 91,
+  "pose_side": {
+   "minus_side": "2.02895e-13",
+   "pose_angle_unit": "degrees",
+   "pose_claim": {
+    "coordinate_provenance": "reported",
+    "limitations": "Decimal pose as found by the q1108 search (f64); sqcheck certified it in interval arithmetic at its own side. The exact witness is n-172-candidate.yaml.",
+    "method": "numerical-f64",
+    "precision": {
+     "binary_bits": "53",
+     "rounding": "round-to-nearest"
+    },
+    "tolerance": "1e-12"
+   },
+   "pose_representation": "center-angle",
+   "pose_schema": "/home/doga/work/sqp/squares/packing/witnesses/witness.schema.yaml",
+   "print": "13.614689853286418"
+  },
+  "prints": {
+   "packing_witness_verify_pairs": 14706,
+   "packing_witness_verify_side_equals": true,
+   "packing_witness_verify_verdict": "VERIFIED",
+   "pairs_n_choose_2": 14706,
+   "readme_print": "13.614689853286215…",
+   "readme_print_is_floor": true,
+   "readme_print_places": 15,
+   "sqcheck_line": "VALID     n=172  exact-rational  s<=13.614689853286216 (exact side rounded up)  n-172-candidate.yaml",
+   "sqcheck_print": "13.614689853286216",
+   "sqcheck_print_is_ceil": true,
+   "sqcheck_print_minus_side": "8.956e-16",
+   "sqcheck_print_places": 15
+  },
+  "side": "1361468985328621177764979119129233399545470048102052769370427095468316966616209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000",
+  "side_minus_floor_12": "2.15104e-13"
+ },
+ "270": {
+  "ceil_12": "16.928148603343",
+  "claim": "16.928148603343",
+  "claim_is_ceil_12": true,
+  "claim_minus_side": "1.45618e-13",
+  "denominator_digits": 190,
+  "expansion_terminates": false,
+  "extents": {
+   "least_x": "0",
+   "least_y": "0",
+   "side_equals_greatest_x": false,
+   "side_equals_greatest_y": true,
+   "side_minus_greatest_x": "5.23598e-16",
+   "side_minus_greatest_y": "0"
+  },
+  "floor_12": "16.928148603342",
+  "floor_20": "16.92814860334285438188",
+  "floor_40": "16.9281486033428543818828506146959168255266",
+  "gap": {
+   "binary64_spacing_at_side": "3.55271e-15",
+   "binary64_spacings_at_side": "3.84181e+09",
+   "exact": "27297707791465948758371689531579488944641940747024855999186952947926718773614843838344316947821474724155153362835844035111021177899032409143783831405688421332333120447743107172685068023803803833657433/1999999999999994030973958179410700547001715818158715519269326021476751577619758203957488958938122938196898027917355172818110350215645910736733472992598568043689774561254337441000000000000000000000000000000",
+   "issue_improvement": "1.365e-05",
+   "issue_improvement_is_rounded_gap": true,
+   "issue_relative": "8.06e-07",
+   "issue_relative_is_rounded": true,
+   "relative_rounded_3_sig": "8.06e-07",
+   "relative_sci_12": "8.06280899981e-07",
+   "rounded_4_sig": "1.365e-05",
+   "sci_12_truncated": "1.36488538957e-05",
+   "units_of_12th_place": "1.36488e+07"
+  },
+  "house": {
+   "ceil_16": "16.9281622521967502",
+   "entry": "T-224",
+   "equals_issue_fraction": true,
+   "floor_20": "16.92816225219675011489",
+   "issue_print": "16.9281622521967502",
+   "issue_print_is_ceil_16": true,
+   "side": "16928162252196750114897964982713/1000000000000000000000000000000",
+   "witness": "packing/witnesses/known-best/n-270.yaml",
+   "witness_id": "W-known-best-n270"
+  },
+  "kaggle": {
+   "minus_claim": "1.36488e-05",
+   "minus_house": "1.62498e-11",
+   "minus_side": "1.36488e-05",
+   "value": "16.928162252213"
+  },
+  "numerator_digits": 192,
+  "pose_side": {
+   "minus_side": "2.02618e-13",
+   "pose_angle_unit": "degrees",
+   "pose_claim": {
+    "coordinate_provenance": "reported",
+    "limitations": "Decimal pose as found by the q1108 search (f64); sqcheck certified it in interval arithmetic at its own side. The exact witness is n-270-candidate.yaml.",
+    "method": "numerical-f64",
+    "precision": {
+     "binary_bits": "53",
+     "rounding": "round-to-nearest"
+    },
+    "tolerance": "1e-12"
+   },
+   "pose_representation": "center-angle",
+   "pose_schema": "/home/doga/work/sqp/squares/packing/witnesses/witness.schema.yaml",
+   "print": "16.928148603343057"
+  },
+  "prints": {
+   "packing_witness_verify_pairs": 36315,
+   "packing_witness_verify_side_equals": true,
+   "packing_witness_verify_verdict": "VERIFIED",
+   "pairs_n_choose_2": 36315,
+   "readme_print": "16.928148603342854…",
+   "readme_print_is_floor": true,
+   "readme_print_places": 15,
+   "sqcheck_line": "VALID     n=270  exact-rational  s<=16.928148603342855 (exact side rounded up)  n-270-candidate.yaml",
+   "sqcheck_print": "16.928148603342855",
+   "sqcheck_print_is_ceil": true,
+   "sqcheck_print_minus_side": "6.181e-16",
+   "sqcheck_print_places": 15
+  },
+  "side": "135425188826742430876823392268227093871980696715260327151518120513740712597220590813078171341983823047096309971065862995224792397317215234884511156640568560455084399127260139011043351856299251/7999999999999976123895832717642802188006863272634862077077304085907006310479032815829955835752491752787592111669420691272441400862583642946933891970394272174759098245017349764000000000000000",
+  "side_minus_floor_12": "8.54381e-13"
+ },
+ "bead": "think-qqyg",
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "lane": "L72",
+ "problems": [],
+ "program": "l72_sides.py",
+ "program_digests": {
+  "issue-statements.json": "e534715cdaba2fa62c6c57843cebb695231f01063996a6d51ba3f84d2853d065",
+  "l72_house.py": "77c6851d2be3be635f575e9745157daa15f0d3f68ef7eb1944123b3304d3aff5",
+  "l72_reader.py": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a",
+  "l72_sat.py": "a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e",
+  "l72_sides.py": "8c4739f37473eb8d471979c9cc0c0e34d0018cee7cefa60dcb3b74c24351b9d2",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "verdict": "SIDES_AS_STATED",
+ "written_utc": "2026-11-09T16:39:34Z"
+}

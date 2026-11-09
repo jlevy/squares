@@ -1,0 +1,989 @@
+{
+ "bead": "think-qqyg",
+ "certificate": {
+  "file": "n-172-candidate.yaml",
+  "sha256": "0df5ae7936950b9a1fe06832cb8f8bdc21dbae9e0d009c6b87302a14c452b2af"
+ },
+ "controls_run": 23,
+ "controls_stated": 23,
+ "count": "172",
+ "cpu_seconds": 140.28,
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "lane": "L72",
+ "missed": [],
+ "original_margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+ "program": "l72_controls.py",
+ "program_digests": {
+  "controls-plan.json": "1826043aaa43b13652f8f9ab378b13a5ea61b225a137616e1af3126385d807cd",
+  "l72_check.py": "a6c8edeb92a97603acc55805d20f61b8c7ef66d917c5fd7d006cf6db92ecfa24",
+  "l72_clip.py": "4a450e3237e470c3ca033ad11d7a012be96e75d1ffebaf6764c9ed5c57d79da1",
+  "l72_controls.py": "117bacbc386b86abc8a2f6ae6887d200af85062b2425b6aca356e40a5c886901",
+  "l72_reader.py": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a",
+  "l72_sat.py": "a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "results": {
+  "G1": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14705,
+     "overlapping": 1,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14705,
+     "overlapping": 1,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ],
+     [
+      161,
+      "right"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 172,
+    "margins_sha256": "25ad20169a293719f56405fef399cf3862d1b0b3c902142a2bdd09248d0ebaff",
+    "not_unit": [],
+    "outside": [],
+    "overlapping": [
+     [
+      1,
+      172
+     ]
+    ],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "overlapping pairs: A 1, B 1"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "G2": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ],
+     [
+      161,
+      "right"
+     ]
+    ],
+    "inside_A": 171,
+    "inside_B": 171,
+    "margins_sha256": "4c5731d19aa400f25989064158d66a16f9f85e0fb7b51e86706a54247a0c7c02",
+    "not_unit": [],
+    "outside": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "squares outside the box: A 1, B 1"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "G3": {
+   "level": "reader",
+   "observed": "171 squares where n is 172",
+   "status": "as stated"
+  },
+  "G4": {
+   "level": "reader",
+   "observed": "repeated square id",
+   "status": "as stated"
+  },
+  "G5": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": null,
+    "classes_B": null,
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ],
+     [
+      161,
+      "right"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 171,
+    "margins_sha256": null,
+    "not_unit": [
+     {
+      "A": "p2 != p0 + u + f",
+      "B": "an edge is not of length 1",
+      "id": 1
+     }
+    ],
+    "outside": [],
+    "overlapping": [],
+    "pair_class_disagreements": null,
+    "problems": [
+     "1 squares are not unit squares by both methods",
+     "squares outside the box: A 0, B 1",
+     "pairs not decided: some square is not a unit square"
+    ],
+    "touching": [],
+    "unit_A": 171,
+    "unit_B": 171,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "G6": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14640,
+     "overlapping": 66,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14640,
+     "overlapping": 66,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ],
+     [
+      161,
+      "right"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 172,
+    "margins_sha256": "c8d6dca9993cd1685c69502968425643bbc39c473daf749361cc1ee6effaaf4b",
+    "not_unit": [],
+    "outside": [],
+    "overlapping": [
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      45
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      48
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      6,
+      9
+     ],
+     [
+      7,
+      8
+     ],
+     [
+      8,
+      61
+     ],
+     [
+      9,
+      10
+     ],
+     [
+      9,
+      62
+     ],
+     [
+      10,
+      12
+     ],
+     [
+      11,
+      84
+     ],
+     [
+      11,
+      109
+     ],
+     [
+      12,
+      16
+     ],
+     [
+      13,
+      16
+     ],
+     [
+      14,
+      20
+     ],
+     [
+      14,
+      84
+     ],
+     [
+      16,
+      112
+     ]
+    ],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "overlapping pairs: A 66, B 66"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "G8": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "bottom"
+     ],
+     [
+      85,
+      "left"
+     ],
+     [
+      161,
+      "top"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 172,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "ACCEPT",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "G9": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "bottom"
+     ],
+     [
+      85,
+      "right"
+     ],
+     [
+      161,
+      "top"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 172,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "ACCEPT",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S1a": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ]
+    ],
+    "inside_A": 171,
+    "inside_B": 171,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [
+     [
+      161,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "squares outside the box: A 1, B 1"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S1b": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ]
+    ],
+    "inside_A": 171,
+    "inside_B": 171,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [
+     [
+      161,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "squares outside the box: A 1, B 1"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S1c": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ]
+    ],
+    "inside_A": 152,
+    "inside_B": 152,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [
+     [
+      152,
+      "top"
+     ],
+     [
+      153,
+      "top"
+     ],
+     [
+      154,
+      "top"
+     ],
+     [
+      156,
+      "top"
+     ],
+     [
+      157,
+      "right"
+     ],
+     [
+      158,
+      "top"
+     ],
+     [
+      159,
+      "top"
+     ],
+     [
+      160,
+      "right"
+     ],
+     [
+      161,
+      "right"
+     ],
+     [
+      162,
+      "top"
+     ],
+     [
+      163,
+      "right"
+     ],
+     [
+      164,
+      "top"
+     ],
+     [
+      165,
+      "top"
+     ],
+     [
+      166,
+      "right"
+     ],
+     [
+      167,
+      "top"
+     ],
+     [
+      168,
+      "right"
+     ],
+     [
+      169,
+      "right"
+     ],
+     [
+      170,
+      "right"
+     ],
+     [
+      171,
+      "right"
+     ],
+     [
+      172,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "squares outside the box: A 20, B 20"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S1d": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 172,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "ACCEPT",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S3D": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      161,
+      "right"
+     ]
+    ],
+    "inside_A": 171,
+    "inside_B": 171,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [
+     [
+      85,
+      "bottom"
+     ]
+    ],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "squares outside the box: A 1, B 1"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S3L": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      85,
+      "bottom"
+     ]
+    ],
+    "inside_A": 171,
+    "inside_B": 171,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [
+     [
+      46,
+      "left"
+     ]
+    ],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "squares outside the box: A 1, B 1"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S3R": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      85,
+      "bottom"
+     ]
+    ],
+    "inside_A": 171,
+    "inside_B": 171,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [
+     [
+      161,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "squares outside the box: A 1, B 1"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S3U": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14706,
+     "overlapping": 0,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      161,
+      "right"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 172,
+    "margins_sha256": "2736a69ef8f6d8737d3dd0f94dc45c96b7ba323487f99d12ff99f3122cb33d46",
+    "not_unit": [],
+    "outside": [],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "ACCEPT",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S4c": {
+   "closing": {
+    "moved": 38,
+    "parameter": "272590046260881897627328904342276162733450867694310011622117079395521931885202988793086775680376871949277256950039488868482002055312771891311889/1357290740891952831713104666603399779271643270937528661591135455380471106405040712396341025404815966214919572432636244883094446618184827335665312771891311889",
+    "sci": "2.008339392e-13",
+    "toward": 36
+   },
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14705,
+     "overlapping": 0,
+     "touching": 1
+    },
+    "classes_B": {
+     "apart": 14705,
+     "overlapping": 0,
+     "touching": 1
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ],
+     [
+      161,
+      "right"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 172,
+    "margins_sha256": "a066702a4474b55c872d429e603d854c6be79341565ea29447924f17907129aa",
+    "not_unit": [],
+    "outside": [],
+    "overlapping": [],
+    "pair_class_disagreements": 0,
+    "problems": [],
+    "touching": [
+     [
+      36,
+      38
+     ]
+    ],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "ACCEPT",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S4p": {
+   "level": "file",
+   "mismatches": [],
+   "observed": {
+    "classes_A": {
+     "apart": 14705,
+     "overlapping": 1,
+     "touching": 0
+    },
+    "classes_B": {
+     "apart": 14705,
+     "overlapping": 1,
+     "touching": 0
+    },
+    "contacts": [
+     [
+      46,
+      "left"
+     ],
+     [
+      85,
+      "bottom"
+     ],
+     [
+      161,
+      "right"
+     ]
+    ],
+    "inside_A": 172,
+    "inside_B": 172,
+    "margins_sha256": "d64596b0ae04407d584748019d534aaea1349431b9a10c45c7b7f352199a00f9",
+    "not_unit": [],
+    "outside": [],
+    "overlapping": [
+     [
+      36,
+      38
+     ]
+    ],
+    "pair_class_disagreements": 0,
+    "problems": [
+     "overlapping pairs: A 1, B 1"
+    ],
+    "touching": [],
+    "unit_A": 172,
+    "unit_B": 172,
+    "verdict": "REFUSE",
+    "wall_class_disagreements": 0
+   },
+   "status": "as stated"
+  },
+  "S5": {
+   "failure_count": 0,
+   "failures": [],
+   "level": "pair",
+   "pairs_closed": 342,
+   "status": "as stated"
+  },
+  "S6": {
+   "failures": [],
+   "level": "square",
+   "squares": 172,
+   "status": "as stated"
+  },
+  "S7c": {
+   "area_B": "0",
+   "factor": "678645370446114606015069605684470300254192008511836139734040094056962152308375826594692099840577877536834574652292761070022243053526654668860312771891311889/678645370445842015968808723786842971349849732349102688866345784045340035228980304662806896851784790761154197780343483813072203564658172666805000000000000000",
+   "factor_minus_one_sci": "4.0166787e-13",
+   "level": "pair",
+   "margin_A": "0",
+   "nonempty_B": true,
+   "shape_refused_A_and_B": true,
+   "status": "as stated"
+  },
+  "S7p": {
+   "area_B": "2.2381163e-47",
+   "factor": "135729074089222921203013921137029789124927570105560989691565387405662400408144985856711689124924643514412710991391113593374805568857561773328131251140876818512931634533361/135729074089168403193761744757368594269969946469820537773269156809068007045796060932561379370356958152230839556068696762614440712931634533361000000000000000000000000000000",
+   "factor_minus_one_sci": "4.0166787e-13",
+   "level": "pair",
+   "margin_A": "-5.0000000e-31",
+   "nonempty_B": true,
+   "shape_refused_A_and_B": true,
+   "status": "as stated"
+  },
+  "S8": {
+   "file_verdict": "REFUSE",
+   "level": "square",
+   "shape_refused_A_and_B": true,
+   "square": [
+    161,
+    "right"
+   ],
+   "status": "as stated",
+   "wall_A": "outside",
+   "wall_B": "outside"
+  }
+ },
+ "unrun": [],
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "written_utc": "2026-11-09T16:35:50Z"
+}
