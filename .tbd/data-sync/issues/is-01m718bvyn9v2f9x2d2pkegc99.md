@@ -5,7 +5,7 @@ title: "Import #939: Joost de Winter's s(199) <= 14.6146898532835806, T-282's ar
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l78
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T22:55:20.020Z
-updated_at: 2026-11-09T23:12:59.288Z
+updated_at: 2026-11-09T23:39:49.621Z
 started_at: 2026-11-09T22:55:23.747Z
 ---
 #939 (JoostdeWinter, 2026-11-09T22:03:57Z): s(199) side 14.61468985328358057514628890087947061619 (rounded up), <1e-98 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, claimed the local optimum of the arrangement (130-digit numerical solution; quintic identified numerically). Certificate: JoostdeWinter/square-packing @ 702c7af2 folder n199 (n199_witness.yaml center-basis rational; n199_exact.json; verify_exact.py). Construction: T-282's 172 arrangement (Daniel, Özden) re-optimized (core side 13.61468985328358..., 2.63e-12 below T-282) plus the same L of 27 as #938 (kenaznia-doga, 20:31Z, earlier). Gain over #938: ~2.63e-12, the same as Daniel's held KKT point below T-282 (think-wju3, 2.635e-12) -> RV-3 class (think-ruu2); but #938's own contraction margin is 0 (exact grid contacts), so the padding-share test needs care. Implied s(172) witness from the core (not claimed). AI assistance: Claude under the author's direction. Sequencing: after #938 (think-1goz) merges.
@@ -34,3 +34,6 @@ started_at: 2026-11-09T22:55:23.747Z
 - think-wju3: Daniel's held KKT side prints 13.614689853283580575146288900879470616189727302001757698814980269, equal to r - 1 in all 63 printed places; its certified side is 1.3615e-19 above #939's core. Regenerated the held solve from main's n-172.yaml: view-solved.yaml has the recorded blob d641e969.
 - Controls plan stated 2026-11-09T23:12:51Z, before certify or sharp-controls ran on the packet: l78/notes/controls-plan.md SHA-256 ad4b5cbd8eafbbd7872e07d4d8f08e976284f3207f10d020549d131961a99765 (gross 3 jobs, sharp 11 controls, expected all_as_expected).
 - Daniel's held solve against #939's core: core gain 1.361468985335294e-19 over the held view's own margin 1.361468985335292e-19 (share 1.0000, beyond by 1.4e-34); the 88 load-bearing squares agree to 1e-20..1e-18, the 84 others lie on the solve's flat motions (vs the unregularized KKT certificate, the same 1e-4 vectors as vs T-282).
+- Packet committed and pushed: fa18dd0b30f51fafe2b3b017d3f2e18a2f22aed0 on claude/bold-ritchie-xo28us-l78 (16 files: packing/resources/web/de-winter-s199-upper-bound-2026-11-09/, the two readers witness-center-basis-bare and center-direction-json in devtools/upper_bound_reports.py, tests/test_upper_bound_reports_l78_1109.py). certify 3 jobs pass/refuse/refuse on both routes (19,701 pairs, wall 0, gap 0); sharp-controls all_as_expected (9 of 11 as my advance plan; the two enlargements picked 174/173 and free square 48, not the squares I predicted); check --replay and sharp-controls --check reproduce. records tier exit 0; edit tier all but the browser floor (no node_modules), which passes after npm ci; 439 tests pass; check_added_blobs PASS. No PR, no GitHub comments.
+- Inherited padding (scratch preview from maintained functions): T-282 contracted plus the L is a 199-packing both routes accept, 2.533458e-12 below T-284; #939 is 1.0107e-13 below it (share 1.0399); ceil12 T-284 14.614689853287, inherited 14.614689853284, #939 14.614689853284.
+- Phase-1 brief: scratchpad l78/phase1-brief.md. Proposal: T-285 held at V0/C1, S1, as T-280, pending RV-3; nothing at 172 (note on think-wju3); owner option (D) recommended (restatement unless the 12-place print falls below the padding-free predecessor's, contracted through any construction). Phase 2 waits on L76's merge.
