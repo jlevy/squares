@@ -49,8 +49,12 @@ repository’s witness, verifier or promotion code was read.
 | `l72_identity.py` | Lineage against each house and regularized view under the eight symmetries; decides no bound | `identity-nNNN.json` |
 | `l72_construct.py` | How the rational corners were made: angles, half-angle heights, wall clearances, pair margins, and each certificate against its decimal pose at 60 digits; decides no bound | `construct-nNNN.json` |
 | `l72_digests.py` | Holds every receipt to the kept bytes, the checker to its frozen digests and the plan to its stated digest | `program-digests.json` |
+| `l72_compare_lane.py` | After the findings’ freeze: the import lane’s receipts held to this review’s, each certificate’s own contraction margin recomputed, and the tilts near 45° counted | `compare-lane.json` |
 
 `issue-statements.json` holds the issues’ statements, as data the programs check.
+`frozen/review-2026-11-09-ozden-935-936.frozen.md` is the review as frozen at
+2026-11-09T16:42:21Z, SHA-256
+`26df28bbf7a6c452284fa11bebbc5018c581e9248f0ff13eb09188c086058d58`.
 `run_checks.sh` and `run_controls.sh` ran the first passes in scratch space;
 `run_all.sh` wrote every receipt kept here.
 
@@ -62,7 +66,7 @@ repository’s witness, verifier or promotion code was read.
 - `sides.json`: `SIDES_AS_STATED`. `custody.json`: `CUSTODY_HOLDS`.
 - `houses.json`: both houses `ACCEPT`, each contraction margin its side times 1e-20, and
   each gain 8.1e13 to 2.4e16 times its margin.
-- `program-digests.json`: `ALL_RECEIPTS_MATCH`.
+- `program-digests.json`: `ALL_RECEIPTS_MATCH`. `compare-lane.json`: `LANE_EQUALS_REVIEW`.
 
 ## Rerunning
 
@@ -76,3 +80,5 @@ python -I -B programs/l72_digests.py REVIEW172 REVIEW270 REVIEW172/out/program-d
 `ef1af4933`, `OUT172` and `OUT270` the two packets’ `review/review-2026-11-09/out`, and
 `REVIEW172` and `REVIEW270` the two review directories. The final run took about
 580 CPU-seconds, two processes at a time.
+`l72_compare_lane.py REPO COMMIT SRC REVIEW172 REVIEW270 OUT.json` reads the import
+lane’s packets from its branch commit (`3e81f5d01`) and is run apart.

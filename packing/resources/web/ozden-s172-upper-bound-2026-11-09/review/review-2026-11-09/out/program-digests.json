@@ -59,6 +59,12 @@
   },
   {
    "programs_match": true,
+   "programs_recorded": 7,
+   "receipt": "review-2026-11-09/out/compare-lane.json",
+   "sha256": "bfd185315cab074a428138c28b34995913aa8483bcf51e717f520205078637f3"
+  },
+  {
+   "programs_match": true,
    "programs_recorded": 4,
    "receipt": "review-2026-11-09/out/construct-n172.json",
    "sha256": "6867ecd5f9a7ef3fca7a826c3ecd4be4af687da075d3be4dc76dd148f9416a53"
@@ -137,5 +143,5 @@
   }
  ],
  "verdict": "ALL_RECEIPTS_MATCH",
- "written_utc": "2026-11-09T16:40:16Z"
+ "written_utc": "2026-11-09T16:53:57Z"
 }
