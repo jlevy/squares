@@ -1535,6 +1535,13 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # (F13 of the 5 November review), read from the same packet.
     "[Daniel issue 914 n175 2026-11-05]": _import("evand-issue914-2026-11-05"),
     "[Daniel issue 914 n260 2026-11-05]": _import("evand-issue914-2026-11-05"),
+    # The intake pass's lane L63 of 9 November (think-3guf): Doğa Özden's issues 927 to 931
+    # at 232, 268, 299, 303 and 307 (think-463r), one repository and one packet each.
+    "[Özden s232 upper bound 2026-11-09]": _import("ozden-s232-upper-bound-2026-11-09"),
+    "[Özden s268 upper bound 2026-11-09]": _import("ozden-s268-upper-bound-2026-11-09"),
+    "[Özden s299 upper bound 2026-11-09]": _import("ozden-s299-upper-bound-2026-11-09"),
+    "[Özden s303 upper bound 2026-11-09]": _import("ozden-s303-upper-bound-2026-11-09"),
+    "[Özden s307 upper bound 2026-11-09]": _import("ozden-s307-upper-bound-2026-11-09"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

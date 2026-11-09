@@ -176,6 +176,17 @@ YIM_895 = "yim-s260-upper-bound-2026-11-05"
 #: Evan Daniel's #914 at seven counts, retained at evand/square-packing bb4cc78 under MIT,
 #: and its six regularized views, pinned against the first packet's copies.
 L51_1105 = ("evand-issue914-2026-11-05", "evand-issue914-views-2026-11-05")
+#: The intake pass's lane L63 of 9 November 2026 (`test_upper_bound_reports_l63_1109`):
+#: Doğa Özden's #927 to #931 at 232, 268, 299, 303 and 307, each a corner witness his lab
+#: promoted to exact rationals with this repository's `packing-witness promote`, retained
+#: under CC BY 4.0 and MIT.
+L63_1109 = (
+    "ozden-s232-upper-bound-2026-11-09",
+    "ozden-s268-upper-bound-2026-11-09",
+    "ozden-s299-upper-bound-2026-11-09",
+    "ozden-s303-upper-bound-2026-11-09",
+    "ozden-s307-upper-bound-2026-11-09",
+)
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -232,6 +243,7 @@ EVERY = (
     *L36_1104,
     YIM_895,
     *L51_1105,
+    *L63_1109,
 )
 
 
@@ -1281,7 +1293,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893 and
-    # Yim's #895 touches the box. Couzo's #672 touches at 229 and clears every wall at 227,
+    # #927 to #931 and Yim's #895 touches the box. Couzo's #672 touches at 229 and clears every wall at 227,
     # so its walls mix; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
@@ -1296,6 +1308,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         COUZO_675,
         "ozden-s299-upper-bound-2026-11-03",
         YIM_895,
+        *L63_1109,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
@@ -1580,6 +1593,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         **dict.fromkeys(L36_1104, "2026-11-03"),
         YIM_895: "2026-11-05",
         **dict.fromkeys(L51_1105, "2026-11-05"),
+        **dict.fromkeys(L63_1109, "2026-11-09"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

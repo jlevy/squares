@@ -1,0 +1,67 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/928",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s268 upper bound 2026-11-09]",
+  "report_evidence": "E-ozden-928-certificate-report",
+  "receipt_format": "ozden-928-exact-replay-v1",
+  "witness_prefix": "W-ozden-928-n",
+  "claim_limitations": "Complete 2026-11-09 rational corner Witness/v2 at 268, promoted to exact rationals by this repository's packing-witness promote, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-09",
+  "read_at_main": "19b354a5cec5633ee6f96ff82752a53f2b53b063",
+  "certificates": [
+    {
+      "n": 268,
+      "path": "n-268-candidate.yaml",
+      "format": "witness-corners",
+      "offered": "16.872469897837",
+      "first_committed": "2026-11-09T06:02:49Z",
+      "same_packing": [
+        {
+          "path": "n268-witness.json",
+          "format": "witness-corners"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    268
+  ],
+  "replayed": [
+    268
+  ],
+  "houses": [
+    {
+      "n": 268,
+      "reader": "[Daniel issue 914 2026-11-05]",
+      "source_key": "[Daniel issue 914 2026-11-05]",
+      "holders": "Evan Daniel, after Chris Deotte",
+      "result": "T-270",
+      "reported_value": "16.8724995181350307",
+      "verified_value": "16.8724995181350307",
+      "evidence": [
+        "E-evand-914-exact-feasibility",
+        "E-evand-914-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Doğa Özden's packing of 268 squares at kenaznia-doga/s268-upper-bound a40a15d, issue 928",
+    "headline": "Özden's further arrangement at 268 of Daniel's T-270 packing, one to one, 2.96e-5 below it",
+    "significance": 2,
+    "source_checks": "The issue says this repository's packing-witness verify at 19b354a5, run unmodified on the witness, reports VERIFIED (exact-algebraic, 35778 pairs), and that verifier/sqcheck.py, an exact checker the author's lab wrote separately from this repository's code, reports VALID (exact rational) and now prints the exact side rounded up; it says the two share only the unit-square, wall and non-overlap definitions, and that packing-witness verify is not independent of how the coordinates were rounded, since this repository's packing-witness promote --strategy robust-rational made the exact coordinates from the lab's decimal pose, with pairs separated by at least about 2e-13 and squares at the walls touching them exactly. Before promotion sqcheck.py certified the decimal pose in interval arithmetic at its own side. The witness's claim block says coordinate_provenance: verified. No local-optimality, rigidity or formal check is claimed. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Doğa Özden (https://dogaozden.com/math/live/square-packing/), who reports a packing found from the registry's 268, Evan Daniel's packing built by his fault-line composer after Chris Deotte's multi-gadget fault DP (T-270, #914), taken from this repository's regularized known-best atlas, by basin hopping over local minima of Evan Daniel's ALM+SLP quench (evand/square-packing search/packer at bb4cc78e, MIT), compiled into the lab's search, its exact coordinates made by this repository's packing-witness promote. The issue asks that the improvement be credited to Özden, the base packing to its holders as the record lists them, and the local optimizer to Evan Daniel. The search was AI-assisted throughout, the checks were run by code that did not produce the packing, and the issue and repository were prepared and posted by Özden's AI agent, which uses the account kenaznia-doga; Özden directed the work. The best public Kaggle per-puzzle side the issue found at 268, 16.874361715873 (ntumlnoob), is above this and states no packing.",
+    "next_rung": "Independently review the certificate (stage 4, think-rd0p, a lane prompted separately and blind to this one): its mathematics, a clean-room exact checker with sharp controls, the identity against T-270's packing and the lineage the source states, mapped as an adversarial review, whose acceptance the verified lane and the house rule wait on. Then adopt it at 268 in place of T-270 under the house rule, with both strong generators' regularization and the flip of the new house in the same change.",
+    "bead": "think-463r",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Ozden after Daniel, Deotte, Levy",
+      "short_credit": "Ozden after Daniel et al.",
+      "note": "kenaznia-doga/s268-upper-bound at a40a15d91081be002805b6eea35e099c9a2656db (2026-11-09T06:02:49Z), Doğa Özden's certificate for s(268) <= 16.8724698978362125..., printed 16.872469897837 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement of the registry's 268, Evan Daniel's packing after Chris Deotte's multi-gadget fault DP (T-270, #914), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench (evand/square-packing at bb4cc78e, MIT) from this repository's regularized known-best atlas, its exact coordinates made by this repository's packing-witness promote --strategy robust-rational. Registration was requested in jlevy/squares#928, posted on the author's behalf by his AI agent's account kenaznia-doga; the search was AI-assisted throughout, under his direction. No global optimality claim. The lineage builds on this project: the source starts from the registry's regularized atlas and makes its exact coordinates with this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin. Ozden is Özden in the credit's ASCII. Retained in web/ozden-s268-upper-bound-2026-11-09/."
+    }
+  }
+}
