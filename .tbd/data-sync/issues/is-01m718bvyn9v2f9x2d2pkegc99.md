@@ -5,7 +5,7 @@ title: "Import #939: Joost de Winter's s(199) <= 14.6146898532835806, T-282's ar
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l78
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T22:55:20.020Z
-updated_at: 2026-11-09T23:10:55.417Z
+updated_at: 2026-11-09T23:12:59.288Z
 started_at: 2026-11-09T22:55:23.747Z
 ---
 #939 (JoostdeWinter, 2026-11-09T22:03:57Z): s(199) side 14.61468985328358057514628890087947061619 (rounded up), <1e-98 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, claimed the local optimum of the arrangement (130-digit numerical solution; quintic identified numerically). Certificate: JoostdeWinter/square-packing @ 702c7af2 folder n199 (n199_witness.yaml center-basis rational; n199_exact.json; verify_exact.py). Construction: T-282's 172 arrangement (Daniel, Özden) re-optimized (core side 13.61468985328358..., 2.63e-12 below T-282) plus the same L of 27 as #938 (kenaznia-doga, 20:31Z, earlier). Gain over #938: ~2.63e-12, the same as Daniel's held KKT point below T-282 (think-wju3, 2.635e-12) -> RV-3 class (think-ruu2); but #938's own contraction margin is 0 (exact grid contacts), so the padding-share test needs care. Implied s(172) witness from the core (not claimed). AI assistance: Claude under the author's direction. Sequencing: after #938 (think-1goz) merges.
@@ -32,3 +32,5 @@ started_at: 2026-11-09T22:55:23.747Z
 - Contraction (devtools.contraction_margin): #938 margin 0 and #939 margin 0 (pair 173/174, grid squares); core vs T-282: T-282 margin 2.533458e-12, gain 2.634529e-12, share 1.0399; core own margin 1.36e-99 (1 - lambda* ~ 1e-100), contracted core 1.12e-124 ABOVE r - 1 (consistent with the local-optimality claim). T-282 contracted is 1.0107e-13 above the core; both ceil12 13.614689853284.
 - Identity: core vs T-282 one to one under the identity, 84 squares beyond 1e-6 (max 1.414e-4), none beyond 1e-3; 88 squares moved only 1e-13..1e-12. 16 of the 84 are the KKT solve's free squares (rattlers), moved (-1e-4,-1e-4) and turned 1e-4 rad.
 - think-wju3: Daniel's held KKT side prints 13.614689853283580575146288900879470616189727302001757698814980269, equal to r - 1 in all 63 printed places; its certified side is 1.3615e-19 above #939's core. Regenerated the held solve from main's n-172.yaml: view-solved.yaml has the recorded blob d641e969.
+- Controls plan stated 2026-11-09T23:12:51Z, before certify or sharp-controls ran on the packet: l78/notes/controls-plan.md SHA-256 ad4b5cbd8eafbbd7872e07d4d8f08e976284f3207f10d020549d131961a99765 (gross 3 jobs, sharp 11 controls, expected all_as_expected).
+- Daniel's held solve against #939's core: core gain 1.361468985335294e-19 over the held view's own margin 1.361468985335292e-19 (share 1.0000, beyond by 1.4e-34); the 88 load-bearing squares agree to 1e-20..1e-18, the 84 others lie on the solve's flat motions (vs the unregularized KKT certificate, the same 1e-4 vectors as vs T-282).
