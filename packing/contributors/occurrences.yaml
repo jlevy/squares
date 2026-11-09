@@ -31044,6 +31044,330 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s232 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s232 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Chilton, Couzo, Daniel, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s232 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Chilton, Couzo, Daniel, Levy
+  start: 12
+  end: 19
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s232 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Chilton, Couzo, Daniel, Levy
+  start: 21
+  end: 26
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s232 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Chilton, Couzo, Daniel, Levy
+  start: 28
+  end: 34
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s232 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Chilton, Couzo, Daniel, Levy
+  start: 36
+  end: 40
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s268 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s268 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s268 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s268 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 20
+  end: 26
+  label: Deotte
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s268 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 28
+  end: 32
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 20
+  end: 26
+  label: Deotte
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s299 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 28
+  end: 32
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s303 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s303 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s303 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s303 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 20
+  end: 26
+  label: Deotte
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s303 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Deotte, Levy
+  start: 28
+  end: 32
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s307 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s307 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after ntumlnoob, Couzo, Daniel, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s307 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after ntumlnoob, Couzo, Daniel, Levy
+  start: 12
+  end: 21
+  label: ntumlnoob
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s307 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after ntumlnoob, Couzo, Daniel, Levy
+  start: 23
+  end: 28
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s307 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after ntumlnoob, Couzo, Daniel, Levy
+  start: 30
+  end: 36
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s307 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after ntumlnoob, Couzo, Daniel, Levy
+  start: 38
+  end: 42
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

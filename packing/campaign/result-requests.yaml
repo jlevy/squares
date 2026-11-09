@@ -28985,3 +28985,278 @@ issues:
       open. The reply also says the printed posters' credit line will follow at their
       next redraw; think-6vhj owns that credit refresh, before think-wvsa's redraw. The
       issue was closed as completed at 23:07:41Z.
+  - number: 927
+    title: 's(232) ≤ 15.761409644882: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden (https://dogaozden.com/math/live/square-packing/), through his AI agent's
+      account kenaznia-doga, asks for the registration of s(232) <= 15.761409644882, the exact
+      rational side of n-232-candidate.yaml rounded up at 12 places, 2.521e-4 below the house,
+      Francisco Couzo's refinement of Alex Chilton's Kaggle notebook packing (T-256): a
+      rational corner Witness/v2 at kenaznia-doga/s232-upper-bound 09e324f, the repository's
+      one commit, 64 seconds before the issue, whose exact coordinates his lab made with this
+      repository's packing-witness promote --strategy robust-rational at 19b354a5. It reports
+      this repository's packing-witness verify VERIFIED (26796 pairs) and the lab's own exact
+      checker sqcheck.py VALID, says the packing starts from T-256's, taken from this
+      repository's regularized known-best atlas, found by basin hopping over local minima of
+      Evan Daniel's ALM+SLP quench (evand/square-packing at bb4cc78e), and asks that the
+      improvement be credited to Özden, the base packing to its holders and the local
+      optimizer to Daniel. The search was AI-assisted throughout, under his direction.
+      Licensed CC BY 4.0 (data) and MIT (code) by LICENSE.md at the pin. Triaged and retained
+      on 9 November 2026 in the intake pass's lane L63 (think-463r, think-3guf): the
+      ozden-s232-upper-bound-2026-11-09 packet retains the tree but for a raster comparison
+      pinned by digest and the checker's README, pinned against the 3 November s299 packet's
+      identical copy; every stated digest holds, the print is the exact side rounded up, and
+      both maintained exact routes accept the witness and refuse its gross and sharp
+      controls; measured, it pairs one to one with T-256's packing, 6 squares beyond a tenth.
+      The ledger of 9 November (upper-bounds-927-931-20261109) records it. Registered as
+      T-275 at V3/C3 on the replay; the stage 4 review (think-rd0p), written blind in a
+      separate lane, and the adoption at 232 wait to be mapped. The Kaggle per-puzzle side the
+      issue quotes, 15.761657946434 (jazivxt), is above it and states no packing.
+    read_through: '2026-11-09T06:03:45Z'
+    results:
+    - key: n232-from-t256
+      claim: >-
+        s(232) <= 15.7614096448817244... (the exact rational side of n-232-candidate.yaml at
+        kenaznia-doga/s232-upper-bound 09e324f), a packing found from Francisco Couzo's
+        refinement of Alex Chilton's packing (T-256).
+      source: body
+      register:
+      - T-275
+      evidence:
+      - E-ozden-927-certificate-report
+      - E-ozden-927-exact-feasibility
+      validation:
+      - think-rd0p
+    beads:
+    - think-463r
+    - think-rd0p
+    answer_bead: think-463r
+    replies: []
+    close_when: >-
+      T-275 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
+      232 if the review accepts it, and the reply on main says what was retained and
+      replayed, what the review found and what the case did.
+    notes: >-
+      Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit 09e324f
+      precedes the issue by 64 seconds; GitHub's activity log was not read, so its push is
+      not dated. The issue lacks the intake label, which the pass adds. No reply has been
+      posted: the import reply is the coordinator's, owed after the records pull request
+      merges, since it names T-275.
+  - number: 928
+    title: 's(268) ≤ 16.872469897837: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(268) <= 16.872469897837, the exact rational side of n-268-candidate.yaml rounded up at
+      12 places, 2.962e-5 below the house, Evan Daniel's #914 packing after Chris Deotte's
+      multi-gadget fault DP (T-270, registered on 5 November and on main from 6 November): a
+      rational corner Witness/v2 at kenaznia-doga/s268-upper-bound a40a15d, the repository's
+      one commit, 57 seconds before the issue, promoted to exact rationals with this
+      repository's packing-witness promote at 19b354a5. It reports packing-witness verify
+      VERIFIED (35778 pairs) and sqcheck.py VALID, and says the packing starts from T-270's,
+      taken from this repository's regularized known-best atlas, by the same search as #927.
+      Triaged and retained on 9 November 2026 in lane L63 (think-463r): every stated digest
+      holds, the print is the exact side rounded up, and both maintained exact routes accept
+      the witness and refuse its gross and sharp controls; measured, it pairs one to one with
+      T-270's packing, 4 squares beyond a tenth. The ledger of 9 November records it.
+      Registered as T-276 at V3/C3 on the replay; the stage 4 review (think-rd0p) and the
+      adoption at 268 wait to be mapped. The Kaggle side the issue quotes, 16.874361715873
+      (ntumlnoob), is above it and states no packing.
+    read_through: '2026-11-09T06:03:46Z'
+    results:
+    - key: n268-from-t270
+      claim: >-
+        s(268) <= 16.8724698978362125... (the exact rational side of n-268-candidate.yaml at
+        kenaznia-doga/s268-upper-bound a40a15d), a packing found from Evan Daniel's #914
+        packing (T-270).
+      source: body
+      register:
+      - T-276
+      evidence:
+      - E-ozden-928-certificate-report
+      - E-ozden-928-exact-feasibility
+      validation:
+      - think-rd0p
+    beads:
+    - think-463r
+    - think-rd0p
+    answer_bead: think-463r
+    replies: []
+    close_when: >-
+      T-276 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
+      268 if the review accepts it, and the reply on main says what was retained and
+      replayed, what the review found and what the case did.
+    notes: >-
+      Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit a40a15d
+      precedes the issue by 57 seconds. The issue lacks the intake label. T-270, the house it
+      improves, was reported on #914 four days earlier; #914 is closed, and its reply will
+      owe a follow-up once this entry is adopted, as #894's did when T-268 superseded T-264.
+      No reply has been posted.
+  - number: 929
+    title: 's(299) ≤ 17.801004434256: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(299) <= 17.801004434256, the exact rational side of n-299-candidate.yaml rounded up at
+      12 places, 2.341e-4 below the house, his own further arrangement of Evan Daniel's
+      packing (T-263, #893), which it supersedes; T-263 stays a verified bound. A rational
+      corner Witness/v2 at kenaznia-doga/s299-upper-bound-17801004 a042eab, the repository's
+      one commit, 50 seconds before the issue, promoted to exact rationals with this
+      repository's packing-witness promote at 19b354a5. It reports packing-witness verify
+      VERIFIED (44551 pairs) and sqcheck.py VALID, and says the packing starts from T-263's,
+      taken from this repository's regularized known-best atlas, by the same search as #927.
+      Triaged and retained on 9 November 2026 in lane L63 (think-463r): every stated digest
+      holds, the print is the exact side rounded up, and both maintained exact routes accept
+      the witness and refuse its gross and sharp controls; measured, no symmetry pairs it one
+      to one with T-263's packing by nearest centres, though the optimal assignment moves
+      only 12 squares beyond a tenth and reverses one square's tilt. The ledger of 9 November
+      records it. Registered as T-277 at V3/C3 on the replay; the stage 4 review
+      (think-rd0p) and the adoption at 299 wait to be mapped. The Kaggle side the issue
+      quotes, 17.801238552749 (jazivxt), is above it and states no packing.
+    read_through: '2026-11-09T06:03:47Z'
+    results:
+    - key: n299-from-t263
+      claim: >-
+        s(299) <= 17.8010044342552937... (the exact rational side of n-299-candidate.yaml at
+        kenaznia-doga/s299-upper-bound-17801004 a042eab), a packing found from the author's
+        own T-263.
+      source: body
+      register:
+      - T-277
+      evidence:
+      - E-ozden-929-certificate-report
+      - E-ozden-929-exact-feasibility
+      validation:
+      - think-rd0p
+    beads:
+    - think-463r
+    - think-rd0p
+    answer_bead: think-463r
+    replies: []
+    close_when: >-
+      T-277 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
+      299 if the review accepts it, and the reply on main says what was retained and
+      replayed, what the review found and what the case did, and that T-263 stays a verified
+      bound.
+    notes: >-
+      Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit a042eab
+      precedes the issue by 50 seconds. The issue lacks the intake label. #893, which
+      reported T-263, is closed; its final reply stated T-263 current, so it owes a
+      follow-up once this entry is adopted, as #894's did. No reply has been posted.
+  - number: 930
+    title: 's(303) ≤ 17.901789273157: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(303) <= 17.901789273157, the exact rational side of n-303-candidate.yaml rounded up at
+      12 places, 4.348e-5 below the house, Evan Daniel's #914 packing after Chris Deotte's
+      multi-gadget fault DP (T-272, registered on 5 November and on main from 6 November): a
+      rational corner Witness/v2 at kenaznia-doga/s303-upper-bound b43ca09, the repository's
+      one commit, 42 seconds before the issue, promoted to exact rationals with this
+      repository's packing-witness promote at 19b354a5. It reports packing-witness verify
+      VERIFIED (45753 pairs) and sqcheck.py VALID, and says the packing starts from T-272's,
+      taken from this repository's regularized known-best atlas, by the same search as #927.
+      Triaged and retained on 9 November 2026 in lane L63 (think-463r): every stated digest
+      holds, the print is the exact side rounded up, and both maintained exact routes accept
+      the witness and refuse its gross and sharp controls; measured, it pairs one to one with
+      T-272's packing, 5 squares beyond a tenth. The ledger of 9 November records it.
+      Registered as T-278 at V3/C3 on the replay; the stage 4 review (think-rd0p) and the
+      adoption at 303 wait to be mapped. The Kaggle side the issue quotes, 17.906978233799
+      (ntumlnoob), is above it and states no packing.
+    read_through: '2026-11-09T06:03:47Z'
+    results:
+    - key: n303-from-t272
+      claim: >-
+        s(303) <= 17.9017892731564904... (the exact rational side of n-303-candidate.yaml at
+        kenaznia-doga/s303-upper-bound b43ca09), a packing found from Evan Daniel's #914
+        packing (T-272).
+      source: body
+      register:
+      - T-278
+      evidence:
+      - E-ozden-930-certificate-report
+      - E-ozden-930-exact-feasibility
+      validation:
+      - think-rd0p
+    beads:
+    - think-463r
+    - think-rd0p
+    answer_bead: think-463r
+    replies: []
+    close_when: >-
+      T-278 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
+      303 if the review accepts it, and the reply on main says what was retained and
+      replayed, what the review found and what the case did.
+    notes: >-
+      Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit b43ca09
+      precedes the issue by 42 seconds. The issue lacks the intake label. T-272, the house it
+      improves, was reported on #914 four days earlier; #914 is closed, and its reply will
+      owe a follow-up once this entry is adopted. No reply has been posted.
+  - number: 931
+    title: 's(307) ≤ 17.979230960388: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(307) <= 17.979230960388, the exact rational side of n-307-candidate.yaml rounded up at
+      12 places, 2.032e-5 below the house, Francisco Couzo's refinement of ntumlnoob's Kaggle
+      notebook packing (T-256): a rational corner Witness/v2 at kenaznia-doga/s307-upper-bound
+      dbe8838, the repository's one commit, 35 seconds before the issue, promoted to exact
+      rationals with this repository's packing-witness promote at 19b354a5. It reports
+      packing-witness verify VERIFIED (46971 pairs) and sqcheck.py VALID, and says the packing
+      starts from T-256's, taken from this repository's regularized known-best atlas, by the
+      same search as #927. Triaged and retained on 9 November 2026 in lane L63 (think-463r):
+      every stated digest holds, the print is the exact side rounded up, and both maintained
+      exact routes accept the witness and refuse its gross and sharp controls; measured, it
+      pairs one to one with T-256's packing, 5 squares beyond a tenth. The ledger of 9
+      November records it. Registered as T-279 at V3/C3 on the replay; the stage 4 review
+      (think-rd0p) and the adoption at 307 wait to be mapped. The Kaggle side the issue
+      quotes, 17.979249693611 (mufasasimon), is above it and states no packing.
+    read_through: '2026-11-09T06:03:48Z'
+    results:
+    - key: n307-from-t256
+      claim: >-
+        s(307) <= 17.9792309603873628... (the exact rational side of n-307-candidate.yaml at
+        kenaznia-doga/s307-upper-bound dbe8838), a packing found from Francisco Couzo's
+        refinement of ntumlnoob's packing (T-256).
+      source: body
+      register:
+      - T-279
+      evidence:
+      - E-ozden-931-certificate-report
+      - E-ozden-931-exact-feasibility
+      validation:
+      - think-rd0p
+    beads:
+    - think-463r
+    - think-rd0p
+    answer_bead: think-463r
+    replies: []
+    close_when: >-
+      T-279 is on main, the stage 4 review (think-rd0p) is mapped and the case adopts it at
+      307 if the review accepts it, and the reply on main says what was retained and
+      replayed, what the review found and what the case did.
+    notes: >-
+      Read on 9 November 2026 from main 19b354a5c; no comment yet. The commit dbe8838
+      precedes the issue by 35 seconds. The issue lacks the intake label. No reply has been
+      posted.

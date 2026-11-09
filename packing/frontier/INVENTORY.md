@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **890** evidence records. **515** are formal; **506** of those were established here. **14** are samples, counted separately.
-- **355** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **900** evidence records. **520** are formal; **511** of those were established here. **14** are samples, counted separately.
+- **360** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -913,13 +913,23 @@ results, it is a statement about what this repository has itself examined.
 | `E-evand-914-n260-certificate-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-914-exact-feasibility` | 7 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 7 of 7: the seven certificates at n = 175, 204, 260, 268, 293, 303 and 304 that T-267 to T-273 cite and the six regularized views beside them, every wall and every pair decided by both maintained routes; the kernel's controls are retained in each packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-evand-914-review-exact-feasibility` | 7 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 7 of 7: the certificates at n = 175, 204, 260, 268, 293, 303 and 304 and the six regularized views: every wall and every pair, by two exact methods that share only the reader, with fourteen controls each decided by both | `V-evand-1105-review-check` |
+| `E-ozden-927-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-ozden-927-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full, 1 of 1: the witness at n = 232 that T-275 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
+| `E-ozden-928-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-ozden-928-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full, 1 of 1: the witness at n = 268 that T-276 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
+| `E-ozden-929-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-ozden-929-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full, 1 of 1: the witness at n = 299 that T-277 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
+| `E-ozden-930-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-ozden-930-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full, 1 of 1: the witness at n = 303 that T-278 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
+| `E-ozden-931-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-ozden-931-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full, 1 of 1: the witness at n = 307 that T-279 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 357, verified 528
-- **method**: exact-algebraic 274, interval-certified 236, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 357
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 829
-- **relationship to the producer's code**: generator 5, independent-implementation 330, not-applicable 35, same-implementation 462, shared-components 52, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 362, verified 533
+- **method**: exact-algebraic 279, interval-certified 236, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 362
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 839
+- **relationship to the producer's code**: generator 5, independent-implementation 330, not-applicable 35, same-implementation 472, shared-components 52, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
