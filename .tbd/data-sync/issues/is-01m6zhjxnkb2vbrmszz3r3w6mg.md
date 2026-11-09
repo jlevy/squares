@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #927-#931 (Özden's five upper bounds)"
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: bold-ritchie-l64-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T06:57:59.474Z
-updated_at: 2026-11-09T08:07:38.132Z
+updated_at: 2026-11-09T08:18:32.034Z
 started_at: 2026-11-09T06:58:03.800Z
 ---
 Blind stage-4 mathematical review with a clean-room exact checker, frozen findings and SHA-256 before reading the import lane's work; precedent review-2026-11-04-ozden-893-894-299-204.md and review-2026-11-05-evand-914-seven.md.
@@ -57,3 +57,20 @@ L64 (bold-ritchie-l64-review), stage 4 blind review of #927-#931.
   review-2026-11-09-ozden-927-931-five.frozen.md, 712 lines, 47,124 bytes, SHA-256
   222929e07ce91629f049581485823ace65c719773f036d21ccb367b975551a2b.
   Verdicts: accept at all five; F1-F12 all notes; significance S3 at all five.
+- 08:2xZ reconciliation with L63 (branch read locally at a8e143c6c; not on the remote):
+  l64_compare_lane.py: both routes' least gaps and clearances equal this review's as exact
+  fractions at all five; every identity count equal (LANE_EQUALS_REVIEW). Differences:
+  draft S2 -> this review S3 (F8); all five draft claims and packet READMEs repeat "squares
+  at the walls touching them exactly" -> F4 raised to minor; new F13 (READMEs print the
+  16-place ceiling with an ellipsis); new F14 (307 view unmeasured by the lane: its corner
+  reader refuses the view's schema path; measured here, one to one, 4 beyond a tenth);
+  F12 reassigned (promote writes the /tmp paths). Read after the freeze: sqcheck.py (same
+  SAT reduction as method A), sqpack promote_rational (three contacts by construction,
+  dilation 1, margins are the decimal pose's).
+- Verdicts: accept with findings (F4) at all five. Significance S3 at all five.
+- Committed c0438c659d5ba0c46f00b46134f41572180a91e2 on claude/bold-ritchie-xo28us-l64-review
+  (from origin/main 19b354a5c), pushed. Review doc, document-map line, SYNOPSIS row,
+  programs/receipts under ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/ and
+  per-count receipts in the other four packets. Not done (records lane): reviews items on
+  the five entries, verifiers.yaml/evidence for l64_check.py, significance S3, F4/F13/F14
+  edits, adoption. CPU: about 1.0 CPU-hour.
