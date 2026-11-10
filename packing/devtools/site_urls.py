@@ -42,11 +42,13 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
     "synopsis/the-program-at-a-glance.html": (
         650_000,
         (
-            "Hosted run 42715322236 measures 600,604 bytes on 9 November 2026, past the "
-            "page budget of 600,000, once the document table lists #938's ledger, review "
-            "and regularization runs; the ceiling moves to 650,000 as a measured choice, "
-            "room for about 200 more rows at about 200 bytes each. Its timing was not "
-            "re-measured. How the page scales is think-3d9e."
+            "Main measures 599,314 bytes (hosted run 42692448089) and hosted run "
+            "42715322236 600,604 bytes on 9 November 2026, past the page budget of "
+            "600,000, once the results table lists T-284 and the document table #938's "
+            "ledger, review and regularization runs: 1,290 bytes in four rows, about 320 "
+            "bytes a row. The ceiling moves to 650,000 as a measured choice, room for "
+            "about 150 more such rows, or about 38 single-result intakes. Its timing was "
+            "not re-measured. How the page scales is think-3d9e."
         ),
     ),
     "index.html": (

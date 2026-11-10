@@ -112,10 +112,11 @@ no report.
 
 No rule of the record carries an L step inside the case corpus: the one for recipes on a
 certificate, D2, reads rows beyond 324 that a source states, and whether S + 1 on a
-published certificate is that publication’s own report inside the corpus is the owner’s
-open question RV-4 (think-ruu2). So the bound reaches the record as #938’s report, with
-its own witness, and the credit is Özden’s whichever way RV-4 is answered, since #935 is
-his too. The record had measured it all the same: X049’s family census, derived again
+published certificate is that publication’s own report through its stated recipe is the
+owner’s open question RV-4 (think-ruu2), asked of #845 at 293. #935 states no recipe at
+199, so #938 is the first report of this bound however RV-4 is answered. The bound
+reaches the record as #938’s report, with its own witness, and the credit is Özden’s
+either way, since #935 is his too. The record had measured it all the same: X049’s family census, derived again
 when T-282 was adopted, has listed 199 as its one `bound_violations` entry since then, a
 margin of −0.002882320307 from 172, and nothing reads that list.
 
@@ -203,7 +204,8 @@ the 25 touching pairs of grid squares as a contact, with 23 controls stated befo
 ran, a self-test of 138 cases and seven mutated checkers; its programs and receipts are
 kept in [review/review-2026-11-09/](review/review-2026-11-09/README.md). F15 (minor)
 corrected this README’s reading of the tilts near 45 degrees. F8 counts the ten
-padding-sized L steps above as material for the owner’s RV-3 (think-ruu2), not results.
+padding-sized L steps above as material for the owner’s RV-3 (think-ruu2); they are not
+registered, and whether any is a result is the owner’s RV-3 and RV-4 question.
 The case adopted the certificate as its house on 9 November 2026 under the house rule, as
 T-284, in place of T-127, with its credit as T-282’s: Evan Daniel the packing’s finder,
 Doğa Özden its improver, and the construction an extension (F10, F13).

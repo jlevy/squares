@@ -21,7 +21,15 @@ RV-3 puts to the owner. A ceiling no reader here holds exactly
 (`select_houses.Case.unread`) decides nothing and is listed under ``unread``.
 ``--with N=SIDE`` stands a candidate's exact rational side in for the ceiling at ``N``
 where it is lower, as an import's would stand once adopted, so a lane can see what an
-adoption leaves to carry.
+adoption leaves to carry; it refuses a count outside the corpus or one whose ceiling is
+unread.
+
+What it decides is narrower than every consequence of the two lemmas. It reads each L
+step at its landing count only, and monotonicity between adjacent held counts only. A
+composite (an L step, then monotonicity down to a lower count) shows only where it makes
+an adjacent inversion: one whose landing lies beyond the horizon, or whose way down
+crosses an unread count, is not decided. Adding that check before the scan becomes a
+gate is think-lzjw's.
 
 The scan decides nothing about the register: a bound it lists follows from two recorded
 ceilings, and whether such a consequence is recorded, and how, is the import runbook's
@@ -130,6 +138,8 @@ def ceilings(
     for n in counts:
         case = houses.load_case(n)
         if not case.exact:
+            if n in candidates:
+                raise ScanError(f"--with {n}: its ceiling is unread ({case.unread})")
             unread[n] = str(case.unread)
             continue
         held[n] = case.verified

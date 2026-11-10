@@ -2493,9 +2493,9 @@ CREDITS: dict[int, Credit] = {
     199: Credit(
         (DANIEL,),
         (OZDEN,),
-        "Doğa Özden’s packing of 172 squares with one L step, his further arrangement of Evan "
-        "Daniel’s packing from an L-cut of this count’s former record, Nate Chaoweeraprasit’s "
-        "SQUISH packing as Siddharth Gupta refined it",
+        "Doğa Özden’s 172-square packing plus an L of 27, its 172 squares his further "
+        "arrangement of Evan Daniel’s packing from an L-cut of this count’s former record, "
+        "Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
         construction="extension",
     ),
     # T-268 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his

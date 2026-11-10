@@ -2633,6 +2633,35 @@ def test_a_house_that_is_the_replaced_packing_keeps_what_the_record_knew_of_it(
     assert adopt.reported_bound(other)["construction_method"] == "unknown"
 
 
+def test_a_credits_stated_construction_is_the_schemas_and_reaches_the_case() -> None:
+    """A credit that states how its house's packing was built names a value the case
+    schema's `construction_method` enum admits, and the case record carries it: T-284 is
+    one L step on T-282's packing, an `extension` (review F13 of #938)."""
+    schema = safe_load((select.FRONTIER / "square-packing-case.schema.yaml").read_text())
+    stated = {n: c.construction for n, c in adopt.CREDITS.items() if c.construction is not None}
+    assert stated == {199: "extension"}
+    assert set(stated.values()) <= set(_enum(schema, "construction_method"))
+    lane = _front(select.case_path(199).read_text(encoding="utf-8"))["reported_upper_bound"]
+    assert lane["construction_method"] == "extension"
+
+
+def _enum(schema: object, field: str) -> list[str]:
+    """The `enum` of the first property named `field` anywhere in a schema."""
+    if isinstance(schema, dict):
+        node = cast("dict[str, Any]", schema)
+        found = node.get(field)
+        if isinstance(found, dict) and "enum" in found:
+            return list(cast("dict[str, list[str]]", found)["enum"])
+        for value in node.values():
+            if values := _enum(value, field):
+                return values
+    if isinstance(schema, list):
+        for value in cast("list[object]", schema):
+            if values := _enum(value, field):
+                return values
+    return []
+
+
 @pytest.mark.parametrize(
     ("n", "printed", "prior_exact", "expected_margin"),
     [

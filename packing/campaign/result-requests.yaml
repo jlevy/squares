@@ -29627,7 +29627,7 @@ issues:
       (issuecomment-6751179836) corrects the issue's Kaggle comparison. The side it quotes,
       17.979249693611 (mufasasimon), is the best published packing; the Kaggle per-puzzle
       leaderboard also lists a side-only entry at 307, 17.9792309604 (team Nevska, 7 November),
-      3.5e-12 below this certificate, which the comment says is unpublished and states no
+      which the comment says is 3.5e-12 below this certificate, unpublished and stating no
       packing. The comment says the entry equals this side to about 12 digits, that the lab's
       runs started from the registry's packing, so this is an independent derivation of the same
       optimum, and that it claims no priority over Nevska. It prints the entry at 10 places,
@@ -29707,7 +29707,7 @@ issues:
       (issuecomment-6751180160) corrects the issue's Kaggle comparison. The side it quotes,
       13.617935700905 (jazivxt), is the best published packing; the Kaggle per-puzzle
       leaderboard also lists a side-only entry at 172, 13.6146898533 (team Nevska, 7 November),
-      2.6e-12 below this certificate, which the comment says is unpublished and states no
+      which the comment says is 2.6e-12 below this certificate, unpublished and stating no
       packing. The comment says the entry equals this side to about 12 digits, that the lab's
       runs started from the registry's packing, so this is an independent derivation of the same
       optimum, and that it claims no priority over Nevska. It prints the entry at 10 places,
@@ -29862,9 +29862,11 @@ issues:
       campaign/intake-watch.yaml.
 
       T-127, the house it improves, was reported on #438; #438 is closed, and its follow-up of 12
-      October (issuecomment-6130070537) says T-127 remains the house at 199, so it owes a
-      follow-up now that this entry is adopted there, which check_requests cannot see, since
-      replies before 26 October 2026 record no position. Measured against padding, the gain is
+      October (issuecomment-6130070537) says T-127 remains the house at 88, 130, 179, 199 and 208,
+      so it owes a follow-up now that this entry is adopted at 199, which check_requests cannot
+      see, since replies before 26 October 2026 record no position. The follow-up is posted by
+      hand and names the current house at all five counts: T-127 at 88 (staged for T-193), T-259
+      at 130 (since 31 October), T-174 at 179 and 208 (since 19 October) and T-284 at 199. Measured against padding, the gain is
       about 2.0e16 times T-127's contraction margin (1.46e-19); this certificate's own margin is
       exactly 0. The review's five questions for the author (README line 11's print, the gaps
       between the parts, the certificate's blocks, sqcheck's 27 tight constraints, the commit to

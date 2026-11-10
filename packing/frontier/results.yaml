@@ -42318,8 +42318,12 @@ results:
       2026) and one recorded line (DS7, section 2: a packing of n squares in side s gives one of n +
       2 floor(s) + 1 in side s + 1), which the import's test applies to T-282's retained
       certificate through devtools.construction_checker and finds equal to the witness pose for
-      pose, as the review's F3 does. The record holds no rule that carries an L step inside the
-      case corpus (think-ruu2's RV-4 is open), so the derivation sets no rung of its own; the
+      pose, as the review's F3 does.
+
+      The record holds no rule that carries an L step inside the case corpus (think-ruu2's RV-4,
+      open, asks it only where the publication states the recipe, as #845 did at 293; #935 states
+      none at 199, so #938 is the first report of the bound however RV-4 is answered), so the
+      derivation sets no rung of its own; the
       identity measurement, the contraction margins and the exact L-step scan are recorded values
       and set no rung.
     evidence:
@@ -42403,8 +42407,11 @@ results:
 
       The L step is no rule the record applies inside the case corpus. D2's construction checker
       decides recipes a source states, beyond 324; whether S + 1 on a published certificate is that
-      publication's own report inside the corpus is the owner's open RV-4 (think-ruu2), and the
-      credit is Özden's either way, since #935 is his too. The record had measured the step all the
+      publication's own report through its stated recipe is the owner's open RV-4 (think-ruu2),
+      asked of #845 at 293. #935 states no recipe at 199, so #938 is the first report of this
+      bound however RV-4 is answered, and the credit is Özden's either way, since #935 is his too.
+
+      The record had measured the step all the
       same: X049's family census, derived again when T-282 was adopted at 172, listed 199 as its one
       bound_violations entry from then until this adoption (margin -0.002882320307 from 172).
 
@@ -42449,9 +42456,14 @@ results:
       T-127 was registered on 8 October 2026 and was the case's house at 199; it stays a verified
       bound at V3/C3, kept as history. The adoption took 199 off select_houses.PENDING_ADOPTION
       (staged for T-193) and CORRECTIONS_OWED. It owes #438, T-127's issue, a follow-up: that issue's
-      follow-up of 12 October (issuecomment-6130070537) says T-127 remains the house at 199, and
-      check_requests cannot see the move, since replies before 26 October 2026 record no position,
-      so the follow-up is posted by hand, as #845's was when T-282 replaced T-257 at 172. #639
+      follow-up of 12 October (issuecomment-6130070537) says T-127 remains the house at 88, 130,
+      179, 199 and 208, and check_requests cannot see the move, since replies before 26 October
+      2026 record no position, so the follow-up is posted by hand, as #845's was when T-282
+      replaced T-257 at 172. It names the current house at all five counts, not only 199: T-127 at
+      88 (staged for T-193), T-259 at 130 (since 31 October), T-174 at 179 and 208 (since 19
+      October) and T-284 at 199.
+
+      #639
       (T-193), whose final reply of 19 October is its only one, got no follow-up when the adoptions
       of 20 October, 31 October and 5 November took 204, 232 and 175 from T-193's staging, which is
       the precedent at 199.

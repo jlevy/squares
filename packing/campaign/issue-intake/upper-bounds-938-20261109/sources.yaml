@@ -11,8 +11,9 @@
 # side rounded up at 12 places, and the claim record's admission holds the print to it. The side is
 # T-282's at 172 plus one, exactly: the L step (DS7, section 2) on Özden's #935 certificate, which
 # the record registered and adopted at 172 that afternoon; the record holds no rule that carries an
-# L step inside the corpus (think-ruu2's RV-4 is open), so the issue's report is the first of this
-# bound. The Kaggle per-puzzle side the issue quotes, 14.617572173606 (kirilltym), is above the
+# L step inside the corpus (think-ruu2's RV-4, open, asks only of a publication that states the
+# recipe, as #845 did at 293; #935 states none at 199), so the issue's report is the first of this
+# bound however RV-4 is answered. The Kaggle per-puzzle side the issue quotes, 14.617572173606 (kirilltym), is above the
 # claim and states no packing; the side-only leaderboard entry the author's comment of 20:53:05Z
 # adds, 14.6132098756 (team OigaZhDn, 31 October), is below it and states no packing; neither is a
 # report.
@@ -54,8 +55,8 @@ reports:
     scan (devtools.l_step_scan, measure/l-step-scan.json) agrees that no case ceiling held the bound: it is the one
     L-step consequence on main that crosses its count's 12-place print. The scan's ten others improve a ceiling by
     4.8e-33 to 1.76e-19 inside its print (82 to 101, 104 to 125, 145 to 170, 149 to 174, 171 to 198, 174 to 201,
-    226 to 257, 231 to 262, 259 to 292 and 265 to 298); none is a report, and each is material for the owner's
-    RV-3 on think-ruu2, not a result (the stage 4 review's F8). The review notes for the author that README line 11
+    226 to 257, 231 to 262, 259 to 292 and 265 to 298); none is reported or registered, and whether any is a
+    result is the owner's RV-3 (and RV-4) question on think-ruu2 (the stage 4 review's F8). The review notes for the author that README line 11
     prints S172 1.96e-16 above it (F5), that the gaps between the 172 part and the L go unstated, the least 1.50e-16
     (F6), and that the certificate's source and certificate blocks describe #935's promotion (F7).
 exceptions: []

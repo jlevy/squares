@@ -225,6 +225,17 @@ def test_the_scan_decides_each_step_on_stand_in_ceilings(
     assert adopted["l_step"]["extensions"] == [{"n": 4, "from": 1}]
     with pytest.raises(scan.ScanError):
         scan.scan(range(1, 5), {5: Fraction(1)})
+    # A candidate at a count whose ceiling is unread is refused, not ignored.
+    monkeypatch.setattr(
+        houses,
+        "load_case",
+        lambda n: houses.Case(
+            n, ceilings[n], ceilings[n], "", (), "stand-in" if n == 3 else None
+        ),
+    )
+    assert scan.scan(range(1, 5), {})["unread"] == {"3": "stand-in"}
+    with pytest.raises(scan.ScanError, match="unread"):
+        scan.scan(range(1, 5), {3: Fraction(1)})
 
 
 def test_the_retained_scans_find_only_199_across_its_print() -> None:
