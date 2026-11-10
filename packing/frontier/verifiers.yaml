@@ -7777,6 +7777,65 @@ verifiers:
       l72_plan_facts.py, l72_sides.py, l72_custody.py, l72_house.py, l72_houses.py,
       l72_identity.py, l72_construct.py, l72_digests.py and l72_compare_lane.py, kept beside them,
       decide no certificate of the two and are not registered.
+  - id: V-ozden-938-review-check
+    program: l77_check.py with l77_checker.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 9 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 938 (199), with a strict reader of its own (every scalar an integer or
+      p/q in lowest terms, the JSON twin held to the same plain tree): every format hypothesis,
+      every square a unit square from its listed corners, every wall and every pair twice with no
+      distance filter, by separating axes over the four edge normals in fractions.Fraction (method
+      A) and by exact clipped areas in gmpy2.mpq (method B), each pair classed overlapping,
+      touching or clear, so that the 25 exact contacts of the certificate's grid squares are
+      decided as contacts by both. l77_controls.py decides 23 controls stated in a plan hashed
+      before its program existed (a grid square moved 1e-30 toward the 172 part, square 184 taken
+      to exact contact with 159 and past it, every near pair between the parts closed along its
+      centre line, the side lowered by one unit of its denominator, three removals, the corner
+      square given to the column, the reversed rotation sense); l77_selftest.py holds both methods
+      and the reader to 138 cases, and l77_mutants.py shows each of seven mutated checkers fails
+      them.
+    source:
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_check.py
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_checker.py
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_controls.py
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_selftest.py
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_mutants.py
+    independence_record: packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 938 (L77, think-ntcf), strong tier,
+            prompted separately from the import lane (L76, think-1goz)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The 172 part's coordinates were made by this repository's packing-witness promote, whose
+          witness tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The four checker files were frozen at 2026-11-09T21:05:54Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or this
+          repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source.
+    note: >-
+      Written and run on 9 November 2026 for docs/project/reviews/review-2026-11-09-ozden-938.md
+      (SHA-256 7749f47cd0a481bd72ef532379dcf6d225b9d50bb9ed83aaac8eaf3784966016 for l77_check.py and
+      f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf for l77_checker.py, as
+      frozen and as each receipt records), and kept with its receipts in the
+      ozden-s199-upper-bound-2026-11-09 packet's review/review-2026-11-09/. l77_construct.py,
+      l77_plan_facts.py, l77_sides.py, l77_propagate.py, l77_custody.py, l77_pose.py,
+      l77_identity.py, l77_digests.py and l77_compare_lane.py, kept beside them, decide no
+      certificate and are not registered.
   - id: V-yim-1109-review-check
     program: l70_check.py with l70_reader.py, l70_sat.py and l70_clip.py
     author: Squares Project (Levy)

@@ -229,11 +229,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: separating and translating squares 84 and 86 at 172 against T-257's 25 and 93, and 208
 #: and 219 at 270 against T-224's 1 and 24, so n=1..200 has 519 separating squares and
 #: 2,221 translating ones, and n=1..324 1,992 and 6,013, in the same 67 and 182 and 125
-#: and 302 records.
+#: and 302 records. Its last pass (think-1goz) moved 199 to his certificate of issue 938
+#: (T-284), T-282's packing with one L step: separating and translating squares 85 and 92
+#: against T-127's 17 and 94, so n=1..200 has 587 separating squares and 2,219 translating
+#: ones, and n=1..324 2,060 and 6,011, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 519, 182, 2221),
-    "n=1..324": (125, 1992, 302, 6013),
+    "n=1..200": (67, 587, 182, 2219),
+    "n=1..324": (125, 2060, 302, 6011),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

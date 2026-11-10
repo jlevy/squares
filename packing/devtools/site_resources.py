@@ -302,6 +302,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ("A further arrangement of Evan Daniel's packing at 270, 1.36e-5 below it (T-283)."),
     ),
     (
+        "https://github.com/kenaznia-doga/s199-upper-bound",
+        "Doğa Özden",
+        (
+            "His packing at 172 with an L of 27 squares, 2.88e-3 below the record at 199"
+            " (T-284)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

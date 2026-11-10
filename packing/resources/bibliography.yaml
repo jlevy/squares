@@ -4931,6 +4931,33 @@ sources:
       carries Evan Daniel's MIT notice for the base packing's certificate, as
       LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in
       web/ozden-s270-upper-bound-2026-11-09/.
+  - key: '[Özden s199 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s199-upper-bound at d03ee0bdb223e00fe124e818ed242f6cbd714fad
+      (2026-11-09T20:30:58Z), Doğa Özden's certificate for s(199) <= 14.6146898532862152 (the
+      exact side rounded up at 16 places), printed 14.614689853287 rounded up at 12 places: a
+      rational corner Witness/v2 whose squares 1 to 172 are his n = 172 certificate of
+      jlevy/squares#935 (T-282, a further arrangement of Evan Daniel's packing, T-257, #845)
+      with their rational corners unchanged, and whose other 27 are an L of axis-aligned unit
+      squares, a row of 14 along the top wall and a column of 13 along the right, at side
+      S172 + 1 exactly: the classical L step s(n + 2 floor(s) + 1) <= s(n) + 1. Nothing was
+      searched at 199. Registration was requested in jlevy/squares#938, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the issue says the search and its code
+      were written and run by AI agents, under his direction. No global optimality claim. The
+      lineage builds on this project: the n = 172 packing starts from the registry's
+      regularized atlas and its exact coordinates were made with this repository's promotion
+      tool. Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs, write-ups, drawings) and
+      MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
+      notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII.
+      Retained in web/ozden-s199-upper-bound-2026-11-09/.
   - key: '[Yim certificates 2026-11-09]'
     authors:
     - Yim

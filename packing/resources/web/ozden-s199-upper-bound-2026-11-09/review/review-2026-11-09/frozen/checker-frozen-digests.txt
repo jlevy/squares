@@ -1,0 +1,5 @@
+# L77 clean-room checker, frozen 2026-11-09T21:05:54Z, before any producer code or this repository's witness, verifier or promotion code was read
+f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf  l77_checker.py
+7749f47cd0a481bd72ef532379dcf6d225b9d50bb9ed83aaac8eaf3784966016  l77_check.py
+2af12cd03580971ef0b21d0be2d5264c3ce39725217074c3554f6e8651e64784  l77_selftest.py
+84eea344ecd49cd03e876f1ad231bf68a18a199e9d9e7c491a8c811b4d2f357b  l77_mutants.py

@@ -1,0 +1,78 @@
+{
+ "program": "l77_digests.py",
+ "program_sha256": "ce748c80481f4a429d1bab2235d237f30a99431db3a61cbe5c5798f7edcedcd9",
+ "frozen_checker": {
+  "l77_checker.py": "f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf",
+  "l77_check.py": "7749f47cd0a481bd72ef532379dcf6d225b9d50bb9ed83aaac8eaf3784966016",
+  "l77_selftest.py": "2af12cd03580971ef0b21d0be2d5264c3ce39725217074c3554f6e8651e64784",
+  "l77_mutants.py": "84eea344ecd49cd03e876f1ad231bf68a18a199e9d9e7c491a8c811b4d2f357b"
+ },
+ "programs": {
+  "l77_check.py": "7749f47cd0a481bd72ef532379dcf6d225b9d50bb9ed83aaac8eaf3784966016",
+  "l77_checker.py": "f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf",
+  "l77_compare_lane.py": "b4dfa9d1d7dfaa0021d63f24fb06f295861d554e86f514ac2152e9eeb50e251e",
+  "l77_construct.py": "8c6d4b1b82af77db9445999bad2d099f5c1869a3d54e3c292cc03b8a8e0761bd",
+  "l77_controls.py": "a96bc7a8e99a0f40d6c34a682a6cb2f8d0defe77fbeb7f006314126d6e3c4f20",
+  "l77_custody.py": "8f93fda6758a969fd0b3dbb940080d20989386727a8f93d8bcf07bb40d2d3a6e",
+  "l77_digests.py": "ce748c80481f4a429d1bab2235d237f30a99431db3a61cbe5c5798f7edcedcd9",
+  "l77_identity.py": "20a1e3000e9c58220780c53e794ae36078275cb0f483575ebb7a2611846bf860",
+  "l77_mutants.py": "84eea344ecd49cd03e876f1ad231bf68a18a199e9d9e7c491a8c811b4d2f357b",
+  "l77_plan_facts.py": "3b0d516995225230651f41d27e563bc2bfd5d2e20e7139e0410a82ee20b82506",
+  "l77_pose.py": "c3cd3ef38484a5ff41adab48edefd32a052ef59bd963d0453bf437da44a60961",
+  "l77_propagate.py": "975b74a8f437253256b82305999423638c55af2225f11e55cf559c7e3ed65e07",
+  "l77_selftest.py": "2af12cd03580971ef0b21d0be2d5264c3ce39725217074c3554f6e8651e64784",
+  "l77_sides.py": "41d9e507a25ac550bc685436f2772d63b2cf1fba864f8ac22e17f65dc2b60f6d"
+ },
+ "receipts": {
+  "check-n199.json": {
+   "sha256": "439e3c7e00fea5431f4e464049dcd4f66d17dcbb4aec2bb53ced1ef70dfc89e2",
+   "program": "l77_check.py"
+  },
+  "compare-lane.json": {
+   "sha256": "fdb76a59203f9243de4715a3b216f311d9f6a84c7277abe2c9588b8fd2bed4e4",
+   "program": "l77_compare_lane.py"
+  },
+  "construct-n199.json": {
+   "sha256": "6d18e2f83bceaf6f35051352eabb7262ee954c8ce259d9f7c722ac033d8618df",
+   "program": "l77_construct.py"
+  },
+  "controls-n199.json": {
+   "sha256": "ca2def891b085f19392704ed7c56f3d08ca128bf333a1c11748f76a954cd7a97",
+   "program": "l77_controls.py"
+  },
+  "custody.json": {
+   "sha256": "502b17adcb9ea007b4b561c7d5ff0ad2832cdbadc82de64b714177d1bcf880bc",
+   "program": "l77_custody.py"
+  },
+  "identity-n199.json": {
+   "sha256": "75067d02c906745902fc0d42510a7ab36d4e5bd145df61a2b67e12c1e17d23dd",
+   "program": "l77_identity.py"
+  },
+  "mutants.json": {
+   "sha256": "b5299acdfaef9be9362791fe1dbde04869a1a86190c9b666cabcb5376923a8f7",
+   "program": "l77_mutants.py"
+  },
+  "plan-facts-n199.json": {
+   "sha256": "e8b5b18fc157409bdb82dad62e7e6bd97d3fda8cb3aa0b800543c19b244449de",
+   "program": "l77_plan_facts.py"
+  },
+  "pose.json": {
+   "sha256": "ab9ce07eec22f5d0bb0313a2d0f8893e85dc1f7124bad97db51e01ea4b9f15bb",
+   "program": "l77_pose.py"
+  },
+  "propagate.json": {
+   "sha256": "27d4d3d8a650c8c5500a30a9163ffef57aad2ede148a935bd5e2411c9ac9dcf7",
+   "program": "l77_propagate.py"
+  },
+  "selftest.json": {
+   "sha256": "0cb8bd9eb6ced507336e827716c1a293d88fbfd0c52837a280454f358f3fa408",
+   "program": "l77_selftest.py"
+  },
+  "sides.json": {
+   "sha256": "b1b19a824697257380a90b9be7b5bd8a04f62e93cd0ddfc22f844914074d05bc",
+   "program": "l77_sides.py"
+  }
+ },
+ "verdict": "ALL_RECEIPTS_MATCH",
+ "problems": []
+}

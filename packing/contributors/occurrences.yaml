@@ -21070,35 +21070,32 @@ occurrences:
     path: packing/frontier/n-199.md
     record_key: '199'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Evan Daniel
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 11
+  label: Evan Daniel
   role: construction-finder
   disposition: resolved
   evidence:
-  - source-intake
+  - repository-license
   - bibliography
-  contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
-    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
-    retained.
+  note: 'Reviewed packing/frontier/n-199.md /reported_upper_bound/found_by/0: the
+    case''s credit after the house adoption of 9 November 2026 names Evan Daniel as
+    construction finder, as the adopted result''s register entry (T-284, T-282''s packing
+    with one L step) and its stage 4 review credit him; the label is the source''s.'
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-199.md
     record_key: '199'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Siddharth Gupta
+  expected_text: Doğa Özden
   start: 0
-  end: 15
-  label: Siddharth Gupta
+  end: 10
+  label: Doğa Özden
   role: construction-improver
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-199.md
     record_key: '199'
@@ -31685,6 +31682,54 @@ occurrences:
   expected_text: Ozden after Daniel, Chaoweeraprasit, Levy
   start: 37
   end: 41
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s199 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s199 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s199 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s199 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 20
+  end: 24
   label: Levy
   role: prerequisite
   disposition: unresolved

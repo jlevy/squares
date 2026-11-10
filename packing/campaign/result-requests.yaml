@@ -29098,7 +29098,7 @@ issues:
       controls; measured, it pairs one to one with T-256's packing, 6 squares beyond a tenth.
       The ledger of 9 November (upper-bounds-927-931-20261109) records it. Registered as T-275. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 232 under the house rule in the same pass, with Alex Chilton the packing's finder and Francisco Couzo and Özden its improvers, both strong generators' regularization of the new house run in the same change. The Kaggle per-puzzle side the
       issue quotes, 15.761657946434 (jazivxt), is above it and states no packing.
-    read_through: '2026-11-09T12:30:10Z'
+    read_through: '2026-11-09T20:52:58Z'
     results:
     - key: n232-from-t256
       claim: >-
@@ -29174,6 +29174,17 @@ issues:
       3. The questions are informational and hold nothing open. The issue was closed as
       completed at 12:30:16Z. The supersession of T-256 owed a follow-up on #844, which
       was posted and is recorded there.
+
+      Read on 9 November 2026 in intake lane L76 (think-1goz): the author's comment of 20:52:58Z
+      (issuecomment-6751178512) corrects the issue's Kaggle comparison. The side it quotes,
+      15.761657946434 (jazivxt), is the best published packing; the Kaggle per-puzzle
+      leaderboard also lists a side-only entry at 232, 15.7588527753 (team Salut Monde, 29
+      October), 2.6e-3 below this certificate, which the comment says is unpublished and states
+      no packing. A side with no packing is no report, as the record has read Kaggle side-only
+      entries before (T-248, and #824's and #843's comments), so it is recorded as information
+      and changes nothing. The comment ends that this result is the best published packing with
+      a certificate, not the smallest side anyone has scored. The same correction was committed
+      to the repository's README as f76f2d0 (20:53:15Z), read in campaign/intake-watch.yaml.
   - number: 928
     title: 's(268) ≤ 16.872469897837: improved packing (registration request)'
     author: kenaznia-doga
@@ -29198,7 +29209,7 @@ issues:
       T-270's packing, 4 squares beyond a tenth. The ledger of 9 November records it.
       Registered as T-276. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 268 under the house rule in the same pass, with Evan Daniel the packing's finder and Özden its improver, both strong generators' regularization of the new house run in the same change. The Kaggle side the issue quotes, 16.874361715873
       (ntumlnoob), is above it and states no packing.
-    read_through: '2026-11-09T12:31:01Z'
+    read_through: '2026-11-09T20:52:59Z'
     results:
     - key: n268-from-t270
       claim: >-
@@ -29274,6 +29285,17 @@ issues:
       questions 1 and 3. The questions are informational and hold nothing open. The issue
       was closed as completed at 12:31:04Z. The supersession of T-270 owed a follow-up on
       #914, which was posted and is recorded there.
+
+      Read on 9 November 2026 in intake lane L76 (think-1goz): the author's comment of 20:52:59Z
+      (issuecomment-6751178845) corrects the issue's Kaggle comparison. The side it quotes,
+      16.874361715873 (ntumlnoob), is the best published packing; the Kaggle per-puzzle
+      leaderboard also lists a side-only entry at 268, 16.8718681351 (team Cats and boxes, 28
+      October), 6.0e-4 below this certificate, which the comment says is unpublished and states
+      no packing. A side with no packing is no report, as the record has read Kaggle side-only
+      entries before (T-248, and #824's and #843's comments), so it is recorded as information
+      and changes nothing. The comment ends that this result is the best published packing with
+      a certificate, not the smallest side anyone has scored. The same correction was committed
+      to the repository's README as ae2883e (20:53:17Z), read in campaign/intake-watch.yaml.
   - number: 929
     title: 's(299) ≤ 17.801004434256: improved packing (registration request)'
     author: kenaznia-doga
@@ -29299,7 +29321,7 @@ issues:
       only 12 squares beyond a tenth and reverses one square's tilt. The ledger of 9 November
       records it. Registered as T-277. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 299 under the house rule in the same pass, with Evan Daniel the packing's finder and Özden its improver, both strong generators' regularization of the new house run in the same change. The Kaggle side the issue
       quotes, 17.801238552749 (jazivxt), is above it and states no packing.
-    read_through: '2026-11-09T12:31:39Z'
+    read_through: '2026-11-09T20:53:00Z'
     results:
     - key: n299-from-t263
       claim: >-
@@ -29380,6 +29402,19 @@ issues:
       are informational and hold nothing open. The issue was closed as completed at
       12:31:42Z. The supersession of T-263 owed a follow-up on #893, which was posted and
       is recorded there.
+
+      Read on 9 November 2026 in intake lane L76 (think-1goz): the author's comment of 20:53:00Z
+      (issuecomment-6751179205) corrects the issue's Kaggle comparison. The side it quotes,
+      17.801238552749 (jazivxt), is the best published packing; the Kaggle per-puzzle
+      leaderboard also lists a side-only entry at 299, 17.7936369918 (team Cats and boxes, 27
+      October), 7.4e-3 below this certificate, which the comment says is unpublished and states
+      no packing. It is the side-only entry Evan Daniel's comment on #824 of 29 October quoted
+      for information as 17.793636991, which the record already notes there. A side with no
+      packing is no report, as the record has read Kaggle side-only entries before (T-248, and
+      #824's and #843's comments), so it is recorded as information and changes nothing. The
+      comment ends that this result is the best published packing with a certificate, not the
+      smallest side anyone has scored. The same correction was committed to the repository's
+      README as 15cb4e7 (20:53:20Z), read in campaign/intake-watch.yaml.
   - number: 930
     title: 's(303) ≤ 17.901789273157: improved packing (registration request)'
     author: kenaznia-doga
@@ -29404,7 +29439,7 @@ issues:
       T-272's packing, 5 squares beyond a tenth. The ledger of 9 November records it.
       Registered as T-278. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 303 under the house rule in the same pass, with Evan Daniel the packing's finder and Özden its improver, both strong generators' regularization of the new house run in the same change. The Kaggle side the issue quotes, 17.906978233799
       (ntumlnoob), is above it and states no packing.
-    read_through: '2026-11-09T12:32:14Z'
+    read_through: '2026-11-09T20:53:01Z'
     results:
     - key: n303-from-t272
       claim: >-
@@ -29479,6 +29514,17 @@ issues:
       of questions 1 and 3. The questions are informational and hold nothing open. The
       issue was closed as completed at 12:32:17Z. The supersession of T-272 owed a
       follow-up on #914, which was posted and is recorded there.
+
+      Read on 9 November 2026 in intake lane L76 (think-1goz): the author's comment of 20:53:01Z
+      (issuecomment-6751179472) corrects the issue's Kaggle comparison. The side it quotes,
+      17.906978233799 (ntumlnoob), is the best published packing; the Kaggle per-puzzle
+      leaderboard also lists a side-only entry at 303, 17.8959261583 (team Cats and boxes, 1
+      November), 5.9e-3 below this certificate, which the comment says is unpublished and states
+      no packing. A side with no packing is no report, as the record has read Kaggle side-only
+      entries before (T-248, and #824's and #843's comments), so it is recorded as information
+      and changes nothing. The comment ends that this result is the best published packing with
+      a certificate, not the smallest side anyone has scored. The same correction was committed
+      to the repository's README as 781a162 (20:53:22Z), read in campaign/intake-watch.yaml.
   - number: 931
     title: 's(307) ≤ 17.979230960388: improved packing (registration request)'
     author: kenaznia-doga
@@ -29502,7 +29548,7 @@ issues:
       pairs one to one with T-256's packing, 5 squares beyond a tenth. The ledger of 9
       November records it. Registered as T-279. The 9 November stage 4 review (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, think-rd0p), written blind in a separate lane, accepted it with findings, none blocking or major, F4 minor (three wall contacts where the source says the wall squares touch), and scored it S3; its clean-room checker decided it again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts it at 307 under the house rule in the same pass, with ntumlnoob the packing's finder and Francisco Couzo and Özden its improvers, both strong generators' regularization of the new house run in the same change. The Kaggle side the issue
       quotes, 17.979249693611 (mufasasimon), is above it and states no packing.
-    read_through: '2026-11-09T12:32:51Z'
+    read_through: '2026-11-09T20:53:02Z'
     results:
     - key: n307-from-t256
       claim: >-
@@ -29576,6 +29622,21 @@ issues:
       3. The questions are informational and hold nothing open. The issue was closed as
       completed at 12:32:53Z. The supersession of T-256 owed a follow-up on #844, which
       was posted and is recorded there.
+
+      Read on 9 November 2026 in intake lane L76 (think-1goz): the author's comment of 20:53:02Z
+      (issuecomment-6751179836) corrects the issue's Kaggle comparison. The side it quotes,
+      17.979249693611 (mufasasimon), is the best published packing; the Kaggle per-puzzle
+      leaderboard also lists a side-only entry at 307, 17.9792309604 (team Nevska, 7 November),
+      which the comment says is 3.5e-12 below this certificate, unpublished and stating no
+      packing. The comment says the entry equals this side to about 12 digits, that the lab's
+      runs started from the registry's packing, so this is an independent derivation of the same
+      optimum, and that it claims no priority over Nevska. It prints the entry at 10 places,
+      above this certificate's side, so the 3.5e-12 it states rests on digits it does not print.
+      A side with no packing is no report, as the record has read Kaggle side-only entries
+      before (T-248, and #824's and #843's comments), so it is recorded as information and
+      changes nothing. The comment ends that this result is the best published packing with a
+      certificate, not the smallest side anyone has scored. The same correction was committed to
+      the repository's README as f62d1ac (20:53:24Z), read in campaign/intake-watch.yaml.
   - number: 935
     title: 's(172) ≤ 13.614689853287: improved packing (registration request)'
     author: kenaznia-doga
@@ -29610,7 +29671,7 @@ issues:
       both strong generators' regularization of the new house run in the same change. The
       Kaggle side the issue quotes, 13.617935700905 (jazivxt), is above it and states no
       packing.
-    read_through: '2026-11-09T15:28:48Z'
+    read_through: '2026-11-09T20:53:03Z'
     results:
     - key: n172-from-t257
       claim: >-
@@ -29641,6 +29702,21 @@ issues:
       superseded by #914's T-268, T-269 and T-271 on 6 November; 172 is its last. Measured
       against padding, the gain is about 2.4e16 times T-257's contraction margin (1.36e-19).
       No reply has been posted.
+
+      Read on 9 November 2026 in intake lane L76 (think-1goz): the author's comment of 20:53:03Z
+      (issuecomment-6751180160) corrects the issue's Kaggle comparison. The side it quotes,
+      13.617935700905 (jazivxt), is the best published packing; the Kaggle per-puzzle
+      leaderboard also lists a side-only entry at 172, 13.6146898533 (team Nevska, 7 November),
+      which the comment says is 2.6e-12 below this certificate, unpublished and stating no
+      packing. The comment says the entry equals this side to about 12 digits, that the lab's
+      runs started from the registry's packing, so this is an independent derivation of the same
+      optimum, and that it claims no priority over Nevska. It prints the entry at 10 places,
+      above this certificate's side, so the 2.6e-12 it states rests on digits it does not print.
+      A side with no packing is no report, as the record has read Kaggle side-only entries
+      before (T-248, and #824's and #843's comments), so it is recorded as information and
+      changes nothing. The comment ends that this result is the best published packing with a
+      certificate, not the smallest side anyone has scored. The same correction was committed to
+      the repository's README as 204026b (20:53:12Z), read in campaign/intake-watch.yaml.
   - number: 936
     title: 's(270) ≤ 16.928148603343: improved packing (registration request)'
     author: kenaznia-doga
@@ -29675,7 +29751,7 @@ issues:
       both strong generators' regularization of the new house run in the same change. The
       Kaggle side the issue quotes, 16.928162252213 (kirilltym), is above it and states no
       packing.
-    read_through: '2026-11-09T15:28:49Z'
+    read_through: '2026-11-09T20:53:04Z'
     results:
     - key: n270-from-t224
       claim: >-
@@ -29704,3 +29780,94 @@ issues:
       reported T-224 confirmed and adopted as the house at 270, so it owes a follow-up now that
       this entry is adopted there. Measured against padding, the gain is about 8.1e13 times T-224's
       contraction margin (1.69e-19). No reply has been posted.
+
+      Read on 9 November 2026 in intake lane L76 (think-1goz): the author's comment of 20:53:04Z
+      (issuecomment-6751180524) corrects the issue's Kaggle comparison. The side it quotes,
+      16.928162252213 (kirilltym), is the best published packing; the Kaggle per-puzzle
+      leaderboard also lists a side-only entry at 270, 16.9273142164 (team Cats and boxes, 27
+      October), 8.3e-4 below this certificate, which the comment says is unpublished and states
+      no packing. A side with no packing is no report, as the record has read Kaggle side-only
+      entries before (T-248, and #824's and #843's comments), so it is recorded as information and
+      changes nothing. The comment ends that this result is the best published packing with a
+      certificate, not the smallest side anyone has scored. The same correction was committed to
+      the repository's README as 107a3cf (20:53:18Z), read in campaign/intake-watch.yaml.
+  - number: 938
+    title: 's(199) ≤ 14.614689853287: improved packing, #935''s packing plus an L of 27 grid squares (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(199) <= 14.614689853287, the exact rational side of n-199-candidate.yaml rounded up at
+      12 places, 2.882e-3 below the house, Nate Chaoweeraprasit's packing refined by Siddharth
+      Gupta (T-127): a rational corner Witness/v2 at kenaznia-doga/s199-upper-bound d03ee0b, the
+      repository's first commit, 34 seconds before the issue, whose squares 1 to 172 are his #935
+      certificate at 172 (T-282), corners unchanged, and whose other 27 are an L of unit grid
+      squares, a row of 14 along the top and a column of 13 along the right, at side S172 + 1
+      exactly. It says nothing was searched at 199, that the gain is inherited from #935 by the L
+      step s(n + 2 floor(s) + 1) <= s(n) + 1, that it found no automatic propagation of the step in
+      the registry and so files its own witness, and that only 199 improves under the step from
+      any other record, with monotonicity kept. It reports packing-witness verify VERIFIED (19701
+      pairs) and sqcheck.py VALID. Triaged and retained on 9 November 2026 in lane L76
+      (think-1goz): every stated digest holds, the print is the exact side rounded up, the
+      certificate is T-282's with the L step pose for pose, and both maintained exact routes accept
+      it, its least wall clearance and pair gap exactly 0, and refuse its gross and sharp controls;
+      measured, it is another arrangement than T-127's, no symmetry pairing them one to one. The
+      ledger of 9 November records it. Registered as T-284. The 9 November stage 4 review
+      (docs/project/reviews/review-2026-11-09-ozden-938.md, think-ntcf, lane L77), written blind in
+      a separate lane, accepted it with findings, none blocking or major, F15 minor (the packet
+      README's split of tilted squares by the sign of angles near 45 degrees, corrected), and notes
+      for the author on README line 11's print of S172, the unstated gaps between the 172 part and
+      the L (least 1.50e-16), the certificate blocks that describe #935's promotion, the moved
+      head and the licences; it scored it S3, carried from T-282. Its clean-room checker decided it
+      again, so the entry is confirmed, independently re-implemented, at V3/C3, and the case adopts
+      it at 199 under the house rule in the same pass, with Evan Daniel the packing's finder and
+      Özden its improver, as at 172, and the construction an extension, both strong generators'
+      regularization of the new house run in the same change. The exact L-step scan confirms the
+      issue's statement at the print: 199 from 172 is the one step that crosses its count's
+      12-place print, and monotonicity improves nothing. The Kaggle side the issue quotes,
+      14.617572173606 (kirilltym), is above it and states no packing.
+    read_through: '2026-11-09T20:53:05Z'
+    results:
+    - key: n199-from-t282
+      claim: >-
+        s(199) <= 14.6146898532862152 (the exact rational side, rounded up at 16 places, of
+        n-199-candidate.yaml at kenaznia-doga/s199-upper-bound d03ee0b), Özden's #935 packing at
+        172 (T-282) with an L of 27 unit grid squares, at T-282's side plus one.
+      source: body
+      register:
+      - T-284
+      evidence:
+      - E-ozden-938-certificate-report
+      - E-ozden-938-exact-feasibility
+    beads:
+    - think-1goz
+    - think-ntcf
+    answer_bead: think-1goz
+    replies: []
+    close_when: >-
+      T-284 is on main at V3/C3 as the house at 199, and the reply on main says what was retained
+      and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 9 November 2026 from main 200f2ebc1. The commit d03ee0b precedes the issue by 34
+      seconds. The issue carries the intake label. The author's comment of 20:53:05Z
+      (issuecomment-6751180855) corrects the issue's Kaggle comparison: 14.617572173606
+      (kirilltym) is the best published packing, and the Kaggle per-puzzle leaderboard also lists
+      a side-only entry at 199, 14.6132098756 (team OigaZhDn, 31 October), 1.5e-3 below this
+      certificate, which the comment says is unpublished and states no packing. A side with no
+      packing is no report, so it is recorded as information and changes nothing. The same
+      correction was committed to the repository's README as 4fbff7b (20:53:14Z), read in
+      campaign/intake-watch.yaml.
+
+      T-127, the house it improves, was reported on #438; #438 is closed, and its follow-up of 12
+      October (issuecomment-6130070537) says T-127 remains the house at 88, 130, 179, 199 and 208,
+      so it owes a follow-up now that this entry is adopted at 199, which check_requests cannot
+      see, since replies before 26 October 2026 record no position. The follow-up is posted by
+      hand and names the current house at all five counts: T-127 at 88 (staged for T-193), T-259
+      at 130 (since 31 October), T-174 at 179 and 208 (since 19 October) and T-284 at 199. Measured against padding, the gain is
+      about 2.0e16 times T-127's contraction margin (1.46e-19); this certificate's own margin is
+      exactly 0. The review's five questions for the author (README line 11's print, the gaps
+      between the parts, the certificate's blocks, sqcheck's 27 tight constraints, the commit to
+      cite) are informational and hold nothing open. No reply has been posted.

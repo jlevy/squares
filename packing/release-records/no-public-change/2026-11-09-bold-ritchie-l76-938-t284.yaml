@@ -1,0 +1,38 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/site_resources.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L76 of 9 November (think-1goz): Doğa Özden's #938 is retained at
+  kenaznia-doga/s199-upper-bound d03ee0b, replayed on both maintained exact routes and
+  registered as T-284 at 199, with its requests entry, coverage source, house reader and an
+  other-projects card; the requests record also reads the author's Kaggle corrections on
+  #927 to #931, #935 and #936. No case record moves: the adoption waits for the stage 4
+  review (think-ntcf). No paper prints that count, these records or that card. Against main
+  200f2ebc1 (#937): devtools.compare_paper_renders rendered each paper into empty site
+  directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
+  tree and once with that main's copies of the five paths above swapped in. The optimality
+  review, the threshold-bound review and the methods survey are byte-identical across the
+  three, 43 files each. The explainer's 55 files are deterministic, and only its Markdown and
+  HTML differ from the baseline; a Markdown diff of a fresh pair of renders, from this tree
+  and with main's copies of the five paths swapped in, shows the one change, the live
+  register count in its framework section, "one of 283 results the framework has registered
+  so far" and now 284, which follows the site's data and is not a revision of the paper (as
+  the L36, L48, L49, L51, L57, L63 and L71 records say). No PDF was printed; each prints from
+  that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
