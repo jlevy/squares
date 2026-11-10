@@ -39,6 +39,18 @@ REGISTRATION_DATE = "2026-10-26"
 HARD_HTML_LIMIT = 2_000_000
 # Measured exceptions retain the global two-megabyte ceiling.
 PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
+    "synopsis/the-program-at-a-glance.html": (
+        650_000,
+        (
+            "Main measures 599,314 bytes (hosted run 42692448089) and hosted run "
+            "42715322236 600,604 bytes on 9 November 2026, past the page budget of "
+            "600,000, once the results table lists T-284 and the document table #938's "
+            "ledger, review and regularization runs: 1,290 bytes in four rows, about 320 "
+            "bytes a row. The ceiling moves to 650,000 as a measured choice, room for "
+            "about 150 more such rows, or about 38 single-result intakes. Its timing was "
+            "not re-measured. How the page scales is think-3d9e."
+        ),
+    ),
     "index.html": (
         1_300_000,
         (

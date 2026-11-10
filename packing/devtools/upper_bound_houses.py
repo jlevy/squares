@@ -657,6 +657,9 @@ def _sources() -> dict[str, Source]:
         # each; T-257 and T-224 keep no house here now.
         packet_source("T-282", "ozden-s172-upper-bound-2026-11-09"),
         packet_source("T-283", "ozden-s270-upper-bound-2026-11-09"),
+        # The same day's last pass (think-1goz) moved 199, which no pass had adopted, from
+        # T-127 to Doğa Özden's issue 938, T-282's packing with one L step (T-284).
+        packet_source("T-284", "ozden-s199-upper-bound-2026-11-09"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -722,7 +725,9 @@ def _sources() -> dict[str, Source]:
 #: each packing's finder its base holder; T-256, T-263, T-270 and T-272 keep no house here.
 #: The same day's later pass (think-he66) adopted his further arrangements of issues 935 and
 #: 936, T-282 and T-283, at 172 from T-257 and 270 from T-224, each packing's finder Evan
-#: Daniel; T-257 and T-224 keep no house here.
+#: Daniel; T-257 and T-224 keep no house here. Its last pass (think-1goz) adopted his issue
+#: 938, T-282's packing with one L step (T-284), at 199, first adopted here, from the case
+#: record's own house, T-127, with T-193 staged there for the writer.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -754,6 +759,7 @@ ADOPTED: dict[int, str] = {
     181: "T-174",
     182: "T-243",
     183: "T-220",
+    199: "T-284",
     204: "T-268",
     206: "T-174",
     207: "T-174",
@@ -988,7 +994,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-04": frozenset({204, 299}),
     "2026-11-05": frozenset({175, 204, 260, 268, 293, 303, 304}),
     "2026-11-06": frozenset({260}),
-    "2026-11-09": frozenset({172, 232, 268, 270, 299, 303, 307}),
+    "2026-11-09": frozenset({172, 199, 232, 268, 270, 299, 303, 307}),
 }
 
 

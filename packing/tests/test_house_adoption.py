@@ -211,8 +211,9 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: Francisco Couzo's issue-844 certificate (T-256), below T-193's side there, which that
 #: of 9 November 2026 moved to Doğa Özden's further arrangement of it (T-275), and that of
 #: 5 November 2026 took 175 to Evan Daniel's issue-914 certificate (T-267), below T-193's
-#: side there.
-OVERTAKEN = {175: "T-267", 204: "T-268", 232: "T-275"}
+#: side there, and the last pass of 9 November 2026 took 199 to Doğa Özden's issue-938
+#: certificate (T-284), T-282's packing with one L step, 2.88e-3 below T-193's side there.
+OVERTAKEN = {175: "T-267", 199: "T-284", 204: "T-268", 232: "T-275"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -268,14 +269,16 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # 35 since the adoption of 31 October 2026 moved 130 to T-259, 172 to T-257 and 307 to
     # T-256, below T-174's sides there. The adoption of 9 November 2026 moved 268 and 307
     # on to Doğa Özden's further arrangements (T-276, T-279), and its later pass 172 and
-    # 270 (T-282, T-283).
-    assert len(held_counts) == 35
+    # 270 (T-282, T-283). 34 since its last pass moved 199, staged for T-193, to Özden's
+    # issue-938 certificate (T-284), below T-174's and T-193's sides there.
+    assert len(held_counts) == 34
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
     t193 = {n for n, house in ALGEBRAIC_ADOPTED.items() if house == "T-193"}
     # 268, which T-240 took from the hold, was staged again and adopted for T-242
-    # (`ADOPTED_NEXT_DAY`), so it is on neither side.
-    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 == (
+    # (`ADOPTED_NEXT_DAY`), so it is on neither side. A staged count a smaller house took
+    # (`OVERTAKEN`) leaves the hold too.
+    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
         set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
@@ -1385,7 +1388,7 @@ def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history(
         "The case keeps its house until T-174’s adoption moves it to T-174’s side."
     )
     tail = sentence.split(" until ", 1)[1]
-    staged = set(T193_COUNTS) - set(T193_BELOW_T186) - set(ALGEBRAIC_ADOPTED)
+    staged = set(T193_COUNTS) - set(T193_BELOW_T186) - set(ALGEBRAIC_ADOPTED) - set(OVERTAKEN)
     for n in sorted(staged):
         assert tail in _flat(select.case_path(n).read_text(encoding="utf-8")), n
     # Where the pass of 23 October 2026 adopted T-193, the sentence is history.
@@ -1458,9 +1461,10 @@ def test_t193s_adoption_waits_for_re1s_correction_at_nine_counts(
     still names the refuted `of` and the house is still T-193. At 204 the entry went on 20
     October 2026, when issue 678's smaller certificate (T-223) took the count, so eight
     stood, and at 175 on 5 November 2026, when Evan Daniel's issue-914 certificate (T-267)
+    took it, and at 199 on 9 November 2026, when Doğa Özden's issue-938 certificate (T-284)
     took it; the items there stay think-8ido's to correct."""
     measured = {
-        88: "T-127", 126: "T-139", 199: "T-127",
+        88: "T-127", 126: "T-139",
         266: "T-119", 292: "T-146", 301: "T-098",
     }  # fmt: skip
     assert {n: owed.measured for n, owed in select.CORRECTIONS_OWED.items()} == measured
@@ -1653,8 +1657,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert set(ALGEBRAIC_ADOPTED) <= houses.LATER_PASSES["2026-10-23"]
     assert not set(ALGEBRAIC_ADOPTED) & set(select.PENDING_ADOPTION)
     # The adoption of 31 October 2026 took 232 off: T-256 is below T-193's side there,
-    # and that of 5 November 2026 took 175 off: T-267 is below it there.
-    assert sorted(select.PENDING_ADOPTION) == [88, 126, 199, 266, 267, 292, 301]
+    # that of 5 November 2026 took 175 off: T-267 is below it there, and the last pass of 9
+    # November 2026 took 199 off: T-284 is below it there.
+    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 292, 301]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
@@ -1747,6 +1752,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         270: "T-283",
         130: "T-259",
         172: "T-282",
+        199: "T-284",
         232: "T-275",
         307: "T-279",
     }
@@ -1779,7 +1785,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         232: "T-186",
         307: "T-174",
     }
-    for n in (183, 227, 229, 260, 293, 299):
+    # 199 was first adopted on 9 November 2026 (T-284), after this receipt was retained.
+    for n in (183, 199, 227, 229, 260, 293, 299):
         del before[n]
     assert "183" not in historical["houses"]
     assert "260" not in historical["houses"]
@@ -2624,6 +2631,35 @@ def test_a_house_that_is_the_replaced_packing_keeps_what_the_record_knew_of_it(
     assert float(item["identity"]["max_turn_deg"]) < 1e-9
     other = next(move for move in replayed if move.n == 84)
     assert adopt.reported_bound(other)["construction_method"] == "unknown"
+
+
+def test_a_credits_stated_construction_is_the_schemas_and_reaches_the_case() -> None:
+    """A credit that states how its house's packing was built names a value the case
+    schema's `construction_method` enum admits, and the case record carries it: T-284 is
+    one L step on T-282's packing, an `extension` (review F13 of #938)."""
+    schema = safe_load((select.FRONTIER / "square-packing-case.schema.yaml").read_text())
+    stated = {n: c.construction for n, c in adopt.CREDITS.items() if c.construction is not None}
+    assert stated == {199: "extension"}
+    assert set(stated.values()) <= set(_enum(schema, "construction_method"))
+    lane = _front(select.case_path(199).read_text(encoding="utf-8"))["reported_upper_bound"]
+    assert lane["construction_method"] == "extension"
+
+
+def _enum(schema: object, field: str) -> list[str]:
+    """The `enum` of the first property named `field` anywhere in a schema."""
+    if isinstance(schema, dict):
+        node = cast("dict[str, Any]", schema)
+        found = node.get(field)
+        if isinstance(found, dict) and "enum" in found:
+            return list(cast("dict[str, list[str]]", found)["enum"])
+        for value in node.values():
+            if values := _enum(value, field):
+                return values
+    if isinstance(schema, list):
+        for value in cast("list[object]", schema):
+            if values := _enum(value, field):
+                return values
+    return []
 
 
 @pytest.mark.parametrize(

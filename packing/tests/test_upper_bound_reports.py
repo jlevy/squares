@@ -196,6 +196,10 @@ L71_1109 = ("ozden-s172-upper-bound-2026-11-09", "ozden-s270-upper-bound-2026-11
 #: Kaelan Yim's certificates in his watched repository vitamoon/vitamoon, which no issue
 #: reports, at the head ac14112 and the first n303 of 78eb9ea, retained as factual data.
 L65_1109 = ("yim-certificates-2026-11-09", "yim-n303-2026-11-09")
+#: The intake pass's lane L76 of 9 November 2026 (`test_upper_bound_reports_l76_1109`):
+#: Doğa Özden's #938 at 199, his #935 witness at 172 (T-282) with an L of 27 unit grid
+#: squares at side S172 + 1, under CC BY 4.0 and MIT. Its grid squares touch each other.
+L76_1109 = "ozden-s199-upper-bound-2026-11-09"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -255,6 +259,7 @@ EVERY = (
     *L51_1105,
     *L63_1109,
     *L65_1109,
+    L76_1109,
 )
 
 
@@ -1304,8 +1309,8 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
-    # to #931, #935 and #936 and Yim's #895 touches the box. Couzo's #672 touches at 229 and
-    # clears every wall at 227, so its walls mix; every other source's clear it.
+    # to #931, #935, #936 and #938 and Yim's #895 touches the box. Couzo's #672 touches at
+    # 229 and clears every wall at 227, so its walls mix; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
@@ -1321,15 +1326,16 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         YIM_895,
         *L63_1109,
         *L71_1109,
+        L76_1109,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
-    # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
-    # every other source's pairs clear.
+    # Only #567's and #622's squares, and #938's grid squares, touch each other, an exact
+    # contact the kernel admits; every other source's pairs clear.
     gaps = {
         Fraction(m["exact_verify_best_pair_gap"]) for m in reports.margins(positives).values()
     }
-    assert (0 in gaps) is (name in {PINGYOU_261, PINGYOU_622})
+    assert (0 in gaps) is (name in {PINGYOU_261, PINGYOU_622, L76_1109})
 
 
 def _jobs_from_receipt(packet: Path, directory: Path) -> None:
@@ -1608,6 +1614,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         **dict.fromkeys(L63_1109, "2026-11-09"),
         **dict.fromkeys(L71_1109, "2026-11-09"),
         **dict.fromkeys(L65_1109, "2026-11-09"),
+        L76_1109: "2026-11-09",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

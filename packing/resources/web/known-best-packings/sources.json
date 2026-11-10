@@ -1233,19 +1233,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-198.svg"
     },
     {
-      "attribution": "Siddharth Gupta after Nate Chaoweeraprasit and Evan Daniel, https://github.com/SidG2k1/square-packing-refinements/blob/9643cb5a78c1d4dcfc867c80a6920c3a6219d05a/witnesses/packing-199.cert at 9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s199-upper-bound/blob/d03ee0bdb223e00fe124e818ed242f6cbd714fad/n-199-candidate.yaml at d03ee0bdb223e00fe124e818ed242f6cbd714fad",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         199
       ],
       "n": 199,
-      "path": "resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz",
+      "path": "resources/web/ozden-s199-upper-bound-2026-11-09/source/n-199-candidate.yaml",
       "raw_asset_retained": true,
-      "retention_policy": "Complete factual certificates/comparators retained losslessly; unlicensed programs/prose are hash-pinned.",
-      "retrieved": "2026-10-08",
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-09",
       "source_n": 199,
-      "url": "https://github.com/SidG2k1/square-packing-refinements/blob/9643cb5a78c1d4dcfc867c80a6920c3a6219d05a/witnesses/packing-199.cert"
+      "url": "https://github.com/kenaznia-doga/s199-upper-bound/blob/d03ee0bdb223e00fe124e818ed242f6cbd714fad/n-199-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
