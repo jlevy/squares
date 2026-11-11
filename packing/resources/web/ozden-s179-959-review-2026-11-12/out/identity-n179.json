@@ -1,0 +1,245 @@
+{
+ "program": "l108_identity.py",
+ "new_tilted_beyond_0.5": 36,
+ "new_tilted_beyond_1": 35,
+ "house-t174": {
+  "side": 13.883795490510899,
+  "tilted_beyond_0.5": 35,
+  "tilted_beyond_1": 35,
+  "best_symmetry_at_each_anchor": [
+   {
+    "symmetry": "mirror y",
+    "anchor": "lower-left",
+    "summed_move": 24.283,
+    "beyond_1e-3": 179,
+    "beyond_0.05": 48,
+    "beyond_0.1": 46,
+    "largest_move": 0.8859,
+    "turned_beyond_1_deg": 43,
+    "largest_turn_deg": 44.36,
+    "nearest_distinct": 174
+   },
+   {
+    "symmetry": "mirror y",
+    "anchor": "lower-right",
+    "summed_move": 24.103,
+    "beyond_1e-3": 127,
+    "beyond_0.05": 48,
+    "beyond_0.1": 46,
+    "largest_move": 0.8853,
+    "turned_beyond_1_deg": 43,
+    "largest_turn_deg": 44.36,
+    "nearest_distinct": 174
+   },
+   {
+    "symmetry": "mirror y",
+    "anchor": "upper-left",
+    "summed_move": 24.268,
+    "beyond_1e-3": 143,
+    "beyond_0.05": 48,
+    "beyond_0.1": 46,
+    "largest_move": 0.8886,
+    "turned_beyond_1_deg": 43,
+    "largest_turn_deg": 44.36,
+    "nearest_distinct": 174
+   },
+   {
+    "symmetry": "mirror y",
+    "anchor": "upper-right",
+    "summed_move": 24.244,
+    "beyond_1e-3": 179,
+    "beyond_0.05": 48,
+    "beyond_0.1": 46,
+    "largest_move": 0.8881,
+    "turned_beyond_1_deg": 43,
+    "largest_turn_deg": 44.36,
+    "nearest_distinct": 174
+   },
+   {
+    "symmetry": "mirror y",
+    "anchor": "centred",
+    "summed_move": 24.182,
+    "beyond_1e-3": 179,
+    "beyond_0.05": 48,
+    "beyond_0.1": 46,
+    "largest_move": 0.887,
+    "turned_beyond_1_deg": 43,
+    "largest_turn_deg": 44.36,
+    "nearest_distinct": 174
+   }
+  ],
+  "any_placement_nearest_one_to_one": false,
+  "least_summed_move_overall": {
+   "symmetry": "mirror y",
+   "anchor": "lower-right",
+   "summed_move": 24.103,
+   "beyond_1e-3": 127,
+   "beyond_0.05": 48,
+   "beyond_0.1": 46,
+   "largest_move": 0.8853,
+   "turned_beyond_1_deg": 43,
+   "largest_turn_deg": 44.36,
+   "nearest_distinct": 174
+  }
+ },
+ "n954": {
+  "side": 13.881367160109876,
+  "tilted_beyond_0.5": 37,
+  "tilted_beyond_1": 36,
+  "best_symmetry_at_each_anchor": [
+   {
+    "symmetry": "identity",
+    "anchor": "lower-left",
+    "summed_move": 1.556,
+    "beyond_1e-3": 85,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2184,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   },
+   {
+    "symmetry": "identity",
+    "anchor": "lower-right",
+    "summed_move": 1.542,
+    "beyond_1e-3": 84,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2187,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   },
+   {
+    "symmetry": "identity",
+    "anchor": "upper-left",
+    "summed_move": 1.539,
+    "beyond_1e-3": 81,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2181,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   },
+   {
+    "symmetry": "identity",
+    "anchor": "upper-right",
+    "summed_move": 1.545,
+    "beyond_1e-3": 82,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2184,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   },
+   {
+    "symmetry": "identity",
+    "anchor": "centred",
+    "summed_move": 1.539,
+    "beyond_1e-3": 80,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2184,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   }
+  ],
+  "any_placement_nearest_one_to_one": true,
+  "least_summed_move_overall": {
+   "symmetry": "identity",
+   "anchor": "upper-left",
+   "summed_move": 1.539,
+   "beyond_1e-3": 81,
+   "beyond_0.05": 9,
+   "beyond_0.1": 3,
+   "largest_move": 0.2181,
+   "turned_beyond_1_deg": 5,
+   "largest_turn_deg": 27.79,
+   "nearest_distinct": 179
+  }
+ },
+ "house-t291-main": {
+  "side": 13.881367160109876,
+  "tilted_beyond_0.5": 37,
+  "tilted_beyond_1": 36,
+  "best_symmetry_at_each_anchor": [
+   {
+    "symmetry": "identity",
+    "anchor": "lower-left",
+    "summed_move": 1.556,
+    "beyond_1e-3": 85,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2184,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   },
+   {
+    "symmetry": "identity",
+    "anchor": "lower-right",
+    "summed_move": 1.542,
+    "beyond_1e-3": 84,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2187,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   },
+   {
+    "symmetry": "identity",
+    "anchor": "upper-left",
+    "summed_move": 1.539,
+    "beyond_1e-3": 81,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2181,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   },
+   {
+    "symmetry": "identity",
+    "anchor": "upper-right",
+    "summed_move": 1.545,
+    "beyond_1e-3": 82,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2184,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   },
+   {
+    "symmetry": "identity",
+    "anchor": "centred",
+    "summed_move": 1.539,
+    "beyond_1e-3": 80,
+    "beyond_0.05": 9,
+    "beyond_0.1": 3,
+    "largest_move": 0.2184,
+    "turned_beyond_1_deg": 5,
+    "largest_turn_deg": 27.79,
+    "nearest_distinct": 179
+   }
+  ],
+  "any_placement_nearest_one_to_one": true,
+  "least_summed_move_overall": {
+   "symmetry": "identity",
+   "anchor": "upper-left",
+   "summed_move": 1.539,
+   "beyond_1e-3": 81,
+   "beyond_0.05": 9,
+   "beyond_0.1": 3,
+   "largest_move": 0.2181,
+   "turned_beyond_1_deg": 5,
+   "largest_turn_deg": 27.79,
+   "nearest_distinct": 179
+  }
+ }
+}
