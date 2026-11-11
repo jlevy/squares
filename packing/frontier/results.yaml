@@ -15944,14 +15944,15 @@ results:
       direction.
     scope: {n_values: [28]}
     verification: V0
-    confirmation: C0
+    confirmation: C1
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower bound on
-        record at n = 28, 3/400 above T-107, by the certificate kind and declared net of
-        T-102, T-103 and T-132, with no new technique, at S3 as T-102 to T-111 and T-132 are.
-        V0/C0 says how far it stands, and the score gates nothing.
+        Scored as a claim: if a complete replay passes, it raises n = 28's verified lower
+        bound by 3/400 above T-107, below T-192's reported 1149/200, by the certificate kind
+        and declared net of T-102, T-103 and T-132, with no new technique, at S3 as T-102 to
+        T-111 and T-132 are.
+        V0/C1 says how far it stands, and the score gates nothing.
       scored: '2026-10-11'
       by: >-
         the 11 October final review
@@ -15977,10 +15978,13 @@ results:
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_declared_net.py
     next_rung: >-
-      C3 needs a review that reads this certificate (think-4ul6), by the checklist of the 6
-      October declared-net soundness review, and a complete sqverify-fast census run at all
-      2,073 directions from a retained candidate, with its whole-net control receipt (the
-      99/100 mutant at every direction, FC-1). The eight-direction sample prices the run
+      C3 needs a complete sqverify-fast census run at all 2,073 directions from a retained
+      candidate, with its whole-net control receipt (the 99/100 mutant at every direction,
+      FC-1), held to the checklist of the 6 October declared-net soundness review; the
+      review that reads this certificate (think-4ul6), the checklist's item 7, accepted it
+      on 11 November 2026 (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md).
+
+      The eight-direction sample prices the run
       and its controls at about 3.3 CPU-hours. The owner set its budget on 11 October 2026,
       and the run is queued in think-i85v after the regularization of every packing
       (think-ux1v, planned in jlevy/squares#497). The release asset's data members are
@@ -15993,12 +15997,14 @@ results:
       own enclosure.
     unfinished_confirmations:
       - what: >-
-          a review that reads this certificate (think-4ul6), by the checklist of the 6
-          October declared-net soundness review, and a complete sqverify-fast census at all
-          2,073 directions from a retained candidate, with its whole-net control receipt
-          (the 99/100 mutant at every direction, FC-1). The axis gap of 2.15e-9 that would
-          have failed the control closed under the constant AXIS_ROUNDING is judged by the
-          enclosure rule of #892
+          a complete sqverify-fast census at all 2,073 directions from a retained
+          candidate, with its whole-net control receipt (the 99/100 mutant at every
+          direction, FC-1), held to the checklist of the 6 October declared-net soundness
+          review, whose item 7, a review that reads this certificate, the review of 11
+          November 2026 meets. The axis gap of 2.15e-9 that would have failed the control
+          closed under the constant AXIS_ROUNDING is judged by the enclosure rule of #892,
+          as that review found it should be: it lies within the source sweep's own enclosure
+          at that vertex, and the refusal has an exact witness
         rung: C3
         link: think-i85v
         estimated_cost:
@@ -16016,13 +16022,41 @@ results:
           priced: '2026-10-10'
     notes: >-
       V0 because the cited entry is the source's public claim: assurance reported, replay
-      not attempted. C0 because no cited entry carries a qualifying external_review. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 28 while
+      not attempted. C1 because the cited entry carries the qualifying external_review of
+      the review of 11 November 2026 (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md),
+      which read the certificate and accepted it; that review's own runs (index 0 decided,
+      and poses) are a sample, cited by n-028.md, and set no rung.
+
+      The case records' lanes are unchanged, so the entry is pending adoption at n = 28 while
       T-107 holds both lanes; the issue-446 report of 287/50 stays where it is. The
       pre-publication receipt repeats the source's check2 run, so one complete author run
       is reported. The release asset is pinned by size and digest; its six data members
       are retained in the packet's release/ since 4 November 2026, and its nested
       verifier archive and sealed inner bundle are pinned by digest only.
+    reviews:
+      - path: docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md
+        kind: adversarial
+        reviewer: >-
+          Claude (Anthropic), the tbd-strong-max sub-agent at maximum reasoning, lane L93,
+          the stage 4 mathematical review of think-i85v (think-4ul6), prompted separately
+          from the replay lane and sharing none of its context beyond the brief and the
+          committed record, running only programs of its own at most two at a time, and
+          barred from the source's adapted crate and this repository's sqverify_fast source
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-11'
+        scope: >-
+          wand125's mixed_n28_L57425 at 36b85b9 and mixed_n30_L58925 at ff9f269, as the
+          n28/n30 packet retains them: the argument from certificate to bound re-derived
+          (the D4 fold, lemma N0 on the 1/5002 net, the per-bin domains, the quarter-turn
+          quadrant, the count); every exact premise; direction 0 of each net decided
+          completely; the source's check2 receipts, run logs and 197/200 controls read and
+          held to an exact evaluator at every least-bound centre and control witness; a
+          seeded search at 33 directions of each net; T-142's axis gap under #892's
+          enclosure rule; T-142, T-143, their evidence entries and n-028.md and n-030.md on
+          main at 8afdabe8f; and the significance
+        verdict: accepted
+        covers: [T-142, T-143]
 
   - id: T-143
     kind: lower-bound
@@ -16061,14 +16095,14 @@ results:
       direction.
     scope: {n_values: [30]}
     verification: V0
-    confirmation: C0
+    confirmation: C1
     significance:
       score: 3
       rationale: >-
         Scored as a claim: if a complete replay passes, it is the strongest lower bound on
         record at n = 30, 9/1000 above T-109, by the certificate kind and declared net of
         T-102, T-103 and T-132, with no new technique, at S3 as T-102 to T-111 and T-132 are.
-        V0/C0 says how far it stands, and the score gates nothing.
+        V0/C1 says how far it stands, and the score gates nothing.
       scored: '2026-10-11'
       by: >-
         the 11 October final review
@@ -16094,10 +16128,13 @@ results:
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_declared_net.py
     next_rung: >-
-      C3 needs a review that reads this certificate (think-4ul6), by the checklist of the 6
-      October declared-net soundness review, and a complete sqverify-fast census run at all
-      2,073 directions from a retained candidate, with its whole-net control receipt (the
-      99/100 mutant at every direction, FC-1). The eight-direction sample prices the run
+      C3 needs a complete sqverify-fast census run at all 2,073 directions from a retained
+      candidate, with its whole-net control receipt (the 99/100 mutant at every direction,
+      FC-1), held to the checklist of the 6 October declared-net soundness review; the
+      review that reads this certificate (think-4ul6), the checklist's item 7, accepted it
+      on 11 November 2026 (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md).
+
+      The eight-direction sample prices the run
       and its controls at about 4.5 CPU-hours. The owner set its budget on 11 October 2026,
       and the run is queued in think-i85v after the regularization of every packing
       (think-ux1v, planned in jlevy/squares#497). The release asset's data members are
@@ -16109,10 +16146,11 @@ results:
       October: fine-net candidates are retained where the census reads them.
     unfinished_confirmations:
       - what: >-
-          a review that reads this certificate (think-4ul6), by the checklist of the 6
-          October declared-net soundness review, and a complete sqverify-fast census at all
-          2,073 directions from a retained candidate, with its whole-net control receipt
-          (the 99/100 mutant at every direction, FC-1)
+          a complete sqverify-fast census at all 2,073 directions from a retained
+          candidate, with its whole-net control receipt (the 99/100 mutant at every
+          direction, FC-1), held to the checklist of the 6 October declared-net soundness
+          review, whose item 7, a review that reads this certificate, the review of 11
+          November 2026 meets
         rung: C3
         link: think-i85v
         estimated_cost:
@@ -16130,13 +16168,41 @@ results:
           priced: '2026-10-10'
     notes: >-
       V0 because the cited entry is the source's public claim: assurance reported, replay
-      not attempted. C0 because no cited entry carries a qualifying external_review. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 30 while
+      not attempted. C1 because the cited entry carries the qualifying external_review of
+      the review of 11 November 2026 (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md),
+      which read the certificate and accepted it; that review's own runs (index 0 decided,
+      and poses) are a sample, cited by n-030.md, and set no rung.
+
+      The case records' lanes are unchanged, so the entry is pending adoption at n = 30 while
       T-109 holds both lanes. The pre-publication receipt is the very run record the
       source's check2 receipt embeds, so one complete author run is reported. The release
       asset is pinned by size and digest; its six data members are retained in the
       packet's release/ since 4 November 2026, and its nested verifier archive and sealed
       inner bundle are pinned by digest only.
+    reviews:
+      - path: docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md
+        kind: adversarial
+        reviewer: >-
+          Claude (Anthropic), the tbd-strong-max sub-agent at maximum reasoning, lane L93,
+          the stage 4 mathematical review of think-i85v (think-4ul6), prompted separately
+          from the replay lane and sharing none of its context beyond the brief and the
+          committed record, running only programs of its own at most two at a time, and
+          barred from the source's adapted crate and this repository's sqverify_fast source
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-11'
+        scope: >-
+          wand125's mixed_n28_L57425 at 36b85b9 and mixed_n30_L58925 at ff9f269, as the
+          n28/n30 packet retains them: the argument from certificate to bound re-derived
+          (the D4 fold, lemma N0 on the 1/5002 net, the per-bin domains, the quarter-turn
+          quadrant, the count); every exact premise; direction 0 of each net decided
+          completely; the source's check2 receipts, run logs and 197/200 controls read and
+          held to an exact evaluator at every least-bound centre and control witness; a
+          seeded search at 33 directions of each net; T-142's axis gap under #892's
+          enclosure rule; T-142, T-143, their evidence entries and n-028.md and n-030.md on
+          main at 8afdabe8f; and the significance
+        verdict: accepted
+        covers: [T-142, T-143]
 
   - id: T-144
     kind: lower-bound

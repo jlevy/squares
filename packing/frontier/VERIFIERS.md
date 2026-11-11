@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **248** programs: **54** external and **194** first-party; **167** decide claims and **81** check premises.
-- **728** of **931** evidence entries name the programs that verified them: 343 independently re-implemented, 311 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **251** programs: **54** external and **197** first-party; **169** decide claims and **82** check premises.
+- **731** of **934** evidence entries name the programs that verified them: 344 independently re-implemented, 311 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -254,6 +254,9 @@ second implementation agrees.
 | [`V-review-1023-n31-capture`](#v-review-1023-n31-capture) | capture.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-kaggle-268-304-review-check`](#v-kaggle-268-304-review-check) | t241_t242_exact.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-review-1023-n31-poses`](#v-review-1023-n31-poses) | source_log_points.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-review-1111-n28-n30-premises`](#v-review-1111-n28-n30-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-review-1111-n28-n30-axis-decision`](#v-review-1111-n28-n30-axis-decision) | axis_decide.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-review-1111-n28-n30-captures`](#v-review-1111-n28-n30-captures) | fnlib.capture | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-couzo-763-review-check`](#v-couzo-763-review-check) | check_certificates.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-fang-797-review-identities`](#v-fang-797-review-identities) | fang_a_identities.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-fang-797-review-construction`](#v-fang-797-review-construction) | fang_a_review.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
@@ -4616,6 +4619,54 @@ Decides the exact capture at single poses the source's logs name: the axis row's
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-wand125-fine-net-n31-59775-review-sample` | replayed here | independently re-implemented, clean-room | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-review-1111-n28-n30-premises`
+
+**premises.py, with fnlib.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the crate, the source and the tools, every exact premise of mixed_n28_L57425 and mixed_n30_L58925: identity and the source's candidate_digest, the claim, every row inside the container with positive extents and mass summing exactly to n - 1/100000, the merged D4 expansion's size, integral and invariance under all eight symmetries, the densest row against 2^32, lemma N0's (a) to (e), the sharp extent and the last bin, and the core's containment and the per-bin centre domain at both ends of all 2,073 bins with exact z.
+
+- Source: [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/premises.py`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/premises.py), [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/fnlib.py`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/fnlib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (lane L93, the stage 4 mathematical review of think-i85v (think-4ul6), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Each source commit names Claude as co-author, and the crate the source adapted was written by a Claude agent of this project. Written by a Claude agent prompted separately from the source and from the replay lane, in files of its own that import nothing of the source, the crate, sqpack or devtools.
+- Note: Written and run on 11 November 2026 by the stage 4 review of T-142 and T-143; kept in the n28/n30 packet's review/review-2026-11-11/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n28-n30-review-premises` | audited here | not applicable | full: the exact premises of each of the two candidates: identity and the source's candidate_digest, the claim, the rows and their mass, the D4 expansion and its invariance, the densest row against 2^32, lemma N0 (a) to (e), the sharp extent, the last bin, and the core's containment and the per-bin centre domain at both ends of all 2,073 bins | - |
+
+### `V-review-1111-n28-n30-axis-decision`
+
+**axis_decide.py, with fnlib.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic, interval-certified
+
+Decides net index 0 of a format M rectangle measure completely: the axis-parallel core's capture is bilinear on each cell of the breakpoint grid over the quadrant [L/2, L - 1/2]^2, so its least value is at a vertex; the vertex values come from exact int64 overlaps by one binary64 matrix product under the a priori bound (1 + gamma_K)(1 + 2^-53)^3, compared with 1 in fractions, and the 64 smallest vertices are evaluated again in fractions by two methods. With --factor it decides a scaled mutant, which must be refused with an exact witness.
+
+- Source: [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/axis_decide.py`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/axis_decide.py), [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/fnlib.py`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/fnlib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (lane L93, the stage 4 mathematical review of think-i85v (think-4ul6), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Each source commit names Claude as co-author, and the crate the source adapted was written by a Claude agent of this project. Written by a Claude agent prompted separately from the source and from the replay lane, in files of its own that import nothing of the source, the crate, sqpack or devtools.
+- Note: Written and run on 11 November 2026 by the stage 4 review of T-142 and T-143; kept in the n28/n30 packet's review/review-2026-11-11/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n28-n30-review-axis-direction` | replayed here | independently re-implemented, clean-room | sample, 2 of 4,146: net directions (index 0 of each of the two certificates, decided over its whole per-bin quadrant) | - |
+
+### `V-review-1111-n28-n30-captures`
+
+**fnlib.capture, driven by receipts_check.py and direction_sample.py, with selftest.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The exact mass a closed core at a given centre and net angle captures from a format M measure, by clipping each D4 image against the core in fractions, held by selftest.py to a second exact method (vertical chords integrated exactly). Decides the capture at the poses it evaluates: every rotated direction's least-bound centre and the axis argmins of the source's runs, every 197/200 control witness (equal to the source's exact values as fractions at 62 of 62 oblique poses), and the end points of a seeded search at 33 sampled directions per certificate.
+
+- Source: [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/fnlib.py`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/fnlib.py), [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/receipts_check.py`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/receipts_check.py), [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/direction_sample.py`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/direction_sample.py), [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/selftest.py`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/programs/selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md`](../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (lane L93, the stage 4 mathematical review of think-i85v (think-4ul6), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Each source commit names Claude as co-author, and the crate the source adapted was written by a Claude agent of this project. Written by a Claude agent prompted separately from the source and from the replay lane, in files of its own that import nothing of the source, the crate, sqpack or devtools.
+- Note: Written and run on 11 November 2026 by the stage 4 review of T-142 and T-143; kept in the n28/n30 packet's review/review-2026-11-11/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n28-n30-review-captures` | audited here | not applicable | full, 5,068 of 5,068: exact captures at the listed poses only: every rotated direction's least-bound box centre (4,144), the axis argmins of the runs (2), the 197/200 control poses (64, the 62 oblique ones equal to the source's fractions) and the end points of the searches at 66 sampled directions (858); no direction's domain | - |
 
 ### `V-couzo-763-review-check`
 

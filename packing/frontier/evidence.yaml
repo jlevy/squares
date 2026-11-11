@@ -37357,9 +37357,34 @@ evidence:
       sqverify-fast verified and matched the source's log; that is a diagnostic, not a replay. The
       pre-publication receipt repeats the source's check2 run (772 s against 771.6 s), so one complete
       author run is reported. The 32-direction 197/200 control remains sampled. A complete capture,
-      whole-net controls, restored positives and a review that reads this certificate remain pending
-      under think-i85v, priced at about 3.3 CPU-hours. The shared crate establishes no independent
-      implementation. No standing bound or rating changes; T-107 and the issue-446 287/50 report stand.
+      whole-net controls and restored positives remain pending under think-i85v, priced at about 3.3
+      CPU-hours; the review that reads this certificate accepted it on 11 November 2026
+      (external_review). The shared crate establishes no independent implementation. No standing
+      bound or rating changes; T-107 and the issue-446 287/50 report stand.
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent, Claude (Anthropic) at the tbd-strong-max tier and maximum reasoning, lane
+        L93, the stage 4 mathematical review of think-i85v (think-4ul6), prompted separately
+        from the replay lane
+        (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md)
+      note: >-
+        No defect in the certificate. The argument from the certificate to s(28) >=
+        2297/400 (in fact >) was re-derived and holds: the D4 fold square by square, lemma
+        N0 on the 1/5002 net (B (1 + 1/5002) = 25009997/25010000; t_2072^2 + 2 t_2072 - 1 =
+        367/6255001 > 0), the per-bin domains, the quarter-turn quadrant, and the positive
+        D4-invariant measure of mass 28 - 1/100000. Programs written for the review, sharing
+        no code with the source or the crate, recomputed every exact premise, decided
+        direction 0 completely (least axis capture at least 1.0014141499363, attained to
+        within 3e-13 at the source's argmin), found the exact capture at all 2,072
+        least-bound box centres at or above the source's certified bounds, reproduced the
+        31 oblique 197/200 control witnesses' exact captures digit for digit, and found no
+        capture below 1.00079 in a seeded search at 33 directions. The axis gap of 2.15e-9
+        lies within the source sweep's own enclosure at that vertex, which #892's rule
+        judges correctly. Four minor findings in the source's README, manifest, receipt
+        wording and pre-publication receipt do not touch the mathematics. Coverage at the
+        rotated directions rests on the source's run until the census.
     source_reviewed: '2026-10-10'
 
   - id: E-wand125-fine-net-n30-58925-report
@@ -37381,14 +37406,149 @@ evidence:
       (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this repository's sqverify_fast,
       at ff9f269, on no issue. Complete source-byte custody and the maintained mass, net and check2
       premises are accepted (receipts/premises-n30.json), and every listed file has the directory's
-      digest. That receipt is the very run
-      record the check2 receipt embeds, so one complete author run is reported. Eight sampled directions
-      run here by sqverify-fast verified and matched the source's log; that is a diagnostic, not a replay.
-      The 32-direction 197/200 control remains sampled. A complete capture, whole-net
-      controls, restored positives and a review that reads this certificate remain pending under
-      think-i85v, priced at about 4.5 CPU-hours. The shared crate establishes no independent
-      implementation. No standing bound or rating changes; T-109 stands.
+      digest. The pre-publication receipt is the very run record the check2 receipt embeds, so one
+      complete author run is reported. Eight sampled directions run here by sqverify-fast verified
+      and matched the source's log; that is a diagnostic, not a replay. The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and restored positives remain
+      pending under think-i85v, priced at about 4.5 CPU-hours; the review that reads this
+      certificate accepted it on 11 November 2026 (external_review). The shared crate establishes
+      no independent implementation. No standing bound or rating changes; T-109 stands.
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent, Claude (Anthropic) at the tbd-strong-max tier and maximum reasoning, lane
+        L93, the stage 4 mathematical review of think-i85v (think-4ul6), prompted separately
+        from the replay lane
+        (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md)
+      note: >-
+        No defect in the certificate. The argument from the certificate to s(30) >=
+        2357/400 (in fact >) was re-derived and holds: the D4 fold square by square, lemma
+        N0 on the 1/5002 net (B (1 + 1/5002) = 25009997/25010000; t_2072^2 + 2 t_2072 - 1 =
+        367/6255001 > 0), the per-bin domains, the quarter-turn quadrant, and the positive
+        D4-invariant measure of mass 30 - 1/100000. Programs written for the review, sharing
+        no code with the source or the crate, recomputed every exact premise, decided
+        direction 0 completely (least axis capture at least 1.0017528835253, attained to
+        within 3e-13 at the source's argmin), found the exact capture at all 2,072
+        least-bound box centres at or above the source's certified bounds, reproduced the
+        31 oblique 197/200 control witnesses' exact captures digit for digit, and found no
+        capture below 1.00071 in a seeded search at 33 directions. Four minor findings in
+        the source's README, manifest, receipt wording and pre-publication receipt do not
+        touch the mathematics. Coverage at the rotated directions rests on the source's run
+        until the census.
     source_reviewed: '2026-10-10'
+
+  - id: E-wand125-fine-net-n28-n30-review-premises
+    claim: derived-structure
+    scope: {n_values: [28, 30]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/outputs/premises.json
+    replay: >-
+      From the repository root, with R the n28/n30 packet's review/review-2026-11-11
+      directory and REL its release/certificates directory: packing/.venv/bin/python3 -I
+      $R/programs/premises.py --release $REL --out $R/outputs/premises.json exits 0 with
+      PREMISES_HOLD.
+    replay_status: passed
+    verifiers: [V-review-1111-n28-n30-premises]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the exact premises of each of the two candidates: identity and the source's
+          candidate_digest, the claim, the rows and their mass, the D4 expansion and its
+          invariance, the densest row against 2^32, lemma N0 (a) to (e), the sharp extent,
+          the last bin, and the core's containment and the per-bin centre domain at both
+          ends of all 2,073 bins
+    limitations: >-
+      Premises only: decides no coverage. Written clean-room from the mathematics and the
+      format by a Claude agent, a system family the producer's commits also name.
+    source_reviewed: '2026-11-11'
+
+  - id: E-wand125-fine-net-n28-n30-review-axis-direction
+    claim: lower-bound
+    scope: {n_values: [28, 30]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/outputs/axis-decision.json
+    replay: >-
+      OPENBLAS_NUM_THREADS=1 packing/.venv/bin/python3 -I $R/programs/axis_decide.py
+      --release $REL --out $R/outputs/axis-decision.json, with R the n28/n30 packet's
+      review/review-2026-11-11 directory and REL its release/certificates directory, exits
+      0 with AXIS_DIRECTION_DECIDED; with --factor 99/100 and --out
+      $R/outputs/axis-decision-99_100.json it exits 0 with both mutants refused.
+    replay_status: passed
+    verifiers: [V-review-1111-n28-n30-axis-decision]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md
+    independence:
+      coverage:
+        extent: sample
+        checked: 2
+        of: 4146
+        unit: >-
+          net directions (index 0 of each of the two certificates, decided over its whole
+          per-bin quadrant)
+    limitations: >-
+      Decides index 0 of 2,073 at each count: every axis-parallel core centred in
+      [L/2, L - 1/2]^2 captures at least 1 (at least 1.0014141 at n = 28, 1.0017528 at
+      n = 30), by the bilinearity of the capture on the event grid, exact int64 events and
+      overlaps, and one binary64 matrix product under an a priori bound
+      (1 + gamma_K)(1 + 2^-53)^3, compared with 1 exactly. It trusts IEEE binary64 in
+      OpenBLAS dgemm in any summation order. The other 2,072 directions are not decided
+      here.
+    source_reviewed: '2026-11-11'
+
+  - id: E-wand125-fine-net-n28-n30-review-captures
+    claim: derived-structure
+    scope: {n_values: [28, 30]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/outputs/receipts-check.json.gz
+    replay: >-
+      packing/.venv/bin/python3 -I $R/programs/receipts_check.py, direction_sample.py and
+      selftest.py, with R the n28/n30 packet's review/review-2026-11-11 directory, as its
+      README states; they exit 0 with ALL_CONSISTENT, NO_COUNTEREXAMPLE_IN_SAMPLE and PASS.
+    replay_status: passed
+    verifiers: [V-review-1111-n28-n30-captures]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          exact captures at the listed poses only: every rotated direction's least-bound
+          box centre (4,144), the axis argmins of the runs (2), the 197/200 control poses
+          (64, the 62 oblique ones equal to the source's fractions) and the end points of
+          the searches at 66 sampled directions (858); no direction's domain
+        checked: 5068
+        of: 5068
+    limitations: >-
+      Pose evidence only: decides no coverage between the poses. Every exact capture is at
+      least 1 and at least the source's certified bound for its direction; the least found
+      at a sampled direction is 1.0007095 (n = 30, direction 2038). Written clean-room by a
+      Claude agent, a system family the producer's commits also name.
+    source_reviewed: '2026-11-11'
 
   - id: E-wand125-linear-n122-1126-report
     claim: lower-bound
