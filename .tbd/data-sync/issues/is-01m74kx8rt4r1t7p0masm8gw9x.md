@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #939, #946 (de Winter's re-solved s(199) and s(1
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l82-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T06:14:47.834Z
-updated_at: 2026-11-11T06:27:40.328Z
+updated_at: 2026-11-11T06:38:09.969Z
 started_at: 2026-11-11T06:14:54.559Z
 ---
 
@@ -28,3 +28,6 @@ L82 review notes (bold-ritchie-l82-review)
 - #939 decided: ACCEPT by both methods, 19,701 pairs; 25 grid contacts; least positive margin 5.0e-101 (152,177); every control as stated. T-282 ACCEPT least 2.00833939294e-13 (36,38) = T1; T-284 ACCEPT 25 touching, least 1.4955e-16 (161,199) = T2.
 - Algebra: both quintics irreducible (sympy factor_list; irreducible mod 17), 3 real roots each, p939(x)=p946(x-1); exactly one root in each stated interval (own Sturm + sympy); side-root = 1.36146e-99 (939), 1.56146e-319 (946). Root agrees with Daniel's held KKT S_exact.
 - Disclosure: read think-ruu2 notes (coordinator's 1.0107e-13 figure) before my contraction run finished.
+- #946 decided: ACCEPT by both methods, 14,706 pairs; no contacts; tight pairs at 1e-320, walls 1.5e-320. Controls as stated except S1 (mis-stated by me: no wall contacts); S1' (-1e-319) added after, refused.
+- Measured: T-282 margin 2.53345785621e-12 (binding 36,38); gain 2.63452919980e-12 (both); share 1.0398946; certificates 1.0107e-13 below contracted T-282 (+L at 199); 12-place prints all ...284 (cert, contracted house, root). K1, K2 as stated. Daniel's held solve = same point (63 places, same 16 free squares).
+- 06:38:01Z FINDINGS FROZEN: review-2026-11-11-de-winter-939-946.md sha256 51a61287179681303fdb198efd1befe39b975b8b1b526caebe69190f15a74e5b (490 lines, 30,063 bytes). Verdicts: both accepted; F1, F2 minor; none blocking. L78 not yet read.
