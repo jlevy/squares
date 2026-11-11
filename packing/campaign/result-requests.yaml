@@ -31267,3 +31267,69 @@ issues:
       licence the Kaggle notebooks and datasets published the starting packings, and whether the
       merge file states one (F8); whether the individual authors of the 22 arrangements can be
       identified; and what the "margin of about 5e-9" measures (F6). No reply has been posted.
+  - number: 954
+    title: 's(179) ≤ 13.881367160110: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(179) <= 13.881367160110, the exact rational side of n-179-candidate.yaml rounded up at
+      12 places, 2.428e-03 below the house, Nate Chaoweeraprasit's packing, improved by
+      Siddharth Gupta and PingYou Ltd (T-174): a rational corner Witness/v2 at
+      kenaznia-doga/s179-upper-bound bd262d8, the repository's one commit, 24 seconds before the
+      issue, promoted to exact rationals with this repository's packing-witness promote at
+      591644a9 from a decimal pose the repository retains. It reports packing-witness verify
+      VERIFIED (15931 pairs) and sqcheck.py VALID, and says the packing was found by a
+      band-design search, new for this filing: the tilted squares of the registry's 70 (Ryan
+      Xu, improved by Evan Daniel and PingYou Ltd) laid as a band along the diagonal, annealed
+      in a reduced model with the axis-parallel squares on the two wall-anchored staircase
+      lattices, then quenched once with Evan Daniel's code. Triaged and retained on 11 November
+      2026 in lane L100 (think-f65n): every stated digest holds, the print is the exact side
+      rounded up, and both maintained exact routes accept the witness and refuse its gross and
+      sharp controls; measured, it is not one to one with T-174's packing under any symmetry, 47
+      squares beyond a tenth. The ledger of 11 November records it. Registered as T-291, at
+      V3/C3 on the replay; the stage 4 review, written in a separate blind lane, is pending, and
+      the adoption at 179 waits on it. The Kaggle packing the issue quotes, 13.883795490524
+      (kirilltym), is above it; the side-only leaderboard entry it quotes and states first,
+      13.880960371556 (team Nevska, 7 November), 4.07e-4 below this side, is unpublished and
+      states no packing, so it is context only.
+    read_through: '2026-11-11T18:28:14Z'
+    results:
+    - key: n179-band
+      claim: >-
+        s(179) <= 13.8813671601098758 (the exact rational side, rounded up at 16 places, of
+        n-179-candidate.yaml at kenaznia-doga/s179-upper-bound bd262d8), a packing whose seed
+        band is built from the tilted squares of the registry's 70.
+      source: body
+      register:
+      - T-291
+      evidence:
+      - E-ozden-954-certificate-report
+      - E-ozden-954-exact-feasibility
+    beads:
+    - think-f65n
+    answer_bead: think-f65n
+    replies: []
+    close_when: >-
+      T-291 is on main at V3/C3 as the house at 179, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 11 November 2026 from main c8448724e; no comment yet. The commit bd262d8 precedes
+      the issue by 24 seconds. The issue does not carry the intake label; the lane did not add
+      it. T-174 is the house it improves. #574's follow-up of 19 October acknowledged the
+      rational houses PR #665 adopted from T-174, 179 among them; #574 is held for the owner
+      (think-9v2k), so the follow-up naming the house 179 then has waits on that hold. Measured
+      against padding, T-174's certificate at 179 has no padding to measure: contracted
+      uniformly about the origin it meets first contact at once (1 - lambda* = 0), squares 119
+      and 122 already touching, so none of the gain is the house's padding; the owner's open
+      question about gains inside a predecessor's padding margin (RV-3, think-ruu2) does not
+      reach this entry. This certificate's own margin, measured the same way, is 2.62e-12. Both
+      receipts are contraction_margin's, retained in the packet's measure/ directory. The L-step
+      scan finds that this bound carries to no other count. The leaderboard entry the issue
+      quotes, Nevska's 13.880960371556, has the fractional part of the registry's 70 and 207
+      sides, as the issue says; it states no packing and reached this repository only as the
+      issue's quotation, so it is no report and nothing is recorded for it. No reply has been
+      posted.

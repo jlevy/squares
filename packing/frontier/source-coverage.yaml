@@ -12974,6 +12974,35 @@ sources:
     six again by a clean-room checker, so the rows are verified from
     E-de-winter-a0c4fc8-exact-feasibility and E-de-winter-a0c4fc8-review-exact-feasibility.
   claims_record: resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/beyond-horizon-claims.json
+- id: ozden-s179-upper-bound-2026-11-11
+  title: 'Doğa Özden''s packing of 179 squares at kenaznia-doga/s179-upper-bound bd262d8, issue 954'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s179-upper-bound/tree/bd262d8ba2966000e827547597fe6da24d0e118c
+  local: resources/web/ozden-s179-upper-bound-2026-11-11/
+  source_key: '[Özden s179 upper bound 2026-11-11]'
+  scope:
+    n_values:
+    - 179
+  reviewed: '2026-11-11'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s179-upper-bound-2026-11-11/acquisition/claims.json
+  evidence:
+  - E-ozden-954-certificate-report
+  - E-ozden-954-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, bd262d8, but a raster diff image, two checker
+    files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
+    jlevy/squares#954, the certificate admitted only where its exact side rounds up to the side
+    the issue prints. T-291 records the in-horizon report at V3/C3 on the replay; the stage 4
+    review, in a separate blind lane, is pending, and the case's house stays T-174 until it is
+    mapped. The ledger of 11 November for this lane
+    (campaign/issue-intake/upper-bounds-954-20261111) records it. All 3 native jobs have full
+    outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
