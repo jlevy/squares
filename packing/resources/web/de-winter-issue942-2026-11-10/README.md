@@ -174,11 +174,12 @@ review’s clean-room run, `E-de-winter-942-review-exact-feasibility`, as the
 [#941 packet](../de-winter-issue941-2026-11-10/README.md#stage-4-review) sets out.
 Beyond the corpus no register entry records them.
 
-These are bounds below the record, not the best known packings (the review’s F9). Each
-arrangement is another holder’s public Kaggle packing, re-optimized.
-The issue’s own table puts each new side 1.8 × 10⁻⁷ to 3.8 × 10⁻⁴ below the best public
-packing it found, against 3.3 × 10⁻⁴ (655, below the grid) to 2.7 × 10⁻² below this
-record, and Kaggle files no report brought here may hold smaller ones.
+These are bounds below the record, which the record does not call the best known
+packings (the review’s F9): each arrangement is another holder’s public Kaggle packing,
+re-optimized, and the issue’s own table puts each side 1.8e-07 to 3.8e-04 below the best
+public packing it found, a comparison not checked here; Kaggle files no report brought
+here may hold smaller ones.
+Against this record the sides are 3.3 × 10⁻⁴ (655, below the grid) to 2.7 × 10⁻² lower.
 
 ## What Is Not Established
 

@@ -57,8 +57,9 @@ reports:
         beyond a tenth: a refinement of the row''s packing'
       source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n494.json
     refines:
-      packing_of: Francisco Couzo, after Vladislav Lavrentev
-      entry: the row of couzo-issue763-2026-10-23 at 494
+      packing_of: Francisco Couzo
+      entry: the row of couzo-issue763-2026-10-23 at 494, Couzo's refinement of Vladislav
+        Lavrentev's Kaggle packing
       source: '#941: ''The packings for n = 413, 494, ... are square sub-windows of Francisco
         Couzo''s packings for n = 544, 539, ...'', 494 from his 539, re-optimized; the identity
         measurement pairs it one to one with Couzo''s own 494 under the identity, no square
@@ -265,8 +266,10 @@ reports:
       bound this report claims beside the 810 it is taken from. Whether an issue-claimed deletion
       bound gets a row is the owner''s open question (think-kzme), which the record leaves
       without a row at 743, 798, 855 and 985; so 809 is held without a row, the row of couzo-issue763-2026-10-23
-      stays current there, and think-kzme''s notes name it. The rule''s verdict stands as
-      the walk gives it. The row''s certificate''s uniform-contraction margin is 5.734e-12
+      stays current there, and think-kzme''s notes name it. Unlike the four, whose held bounds
+      are index deletions with no file of their own, 809 is the issue''s own certificate file,
+      so it is also a stated bound with a certificate (question 1). The rule''s verdict stands
+      as the walk gives it. The row''s certificate''s uniform-contraction margin is 5.734e-12
       (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n809.json);
       the gain, 1.191e-4, is 2.076e+07 times it, far outside it, so the gain is no re-certification
       of the row''s padding and not RV-3 material.'
@@ -352,14 +355,15 @@ reports:
       construction on Couzo''s n851.cert at 964ee2b, one L step, so its padding is its base''s:
       that certificate''s uniform-contraction margin is 4.830e-9 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n910-base-n851.json),
       and the gain, 1.654e-4, is 3.424e+04 times it, far outside it; not RV-3 material.'
-  note: 'The issue names 71da0d5 (committed 2026-11-10T06:15:17Z). d3a020e (2026-11-09T23:59:23Z)
+  note: The issue names 71da0d5 (committed 2026-11-10T06:15:17Z). d3a020e (2026-11-09T23:59:23Z)
     first published the certificates at 413, 494, 539, 543, 547, 590, 809, 810 and 867, 13.5
     hours before the issue, and 71da0d5 the other six; 71da0d5 touches no earlier certificate.
-    The issue dates every claim and each first commit is kept, as #763''s ledger did; no other
-    report reached any of these counts between d3a020e and the issue, so the verdicts are
-    the same if d3a020e is read as the report of its nine. Push times were not read (the activity
-    log and events API refused this session). The issue''s remark that public Kaggle files
-    hold smaller packings at 14 of the 15 counts names no packing that reached this repository.'
+    d3a020e's push was not read, so it may have made the nine public up to 13.5 hours before
+    the issue, when the rule of 14 October would date them by it; the ledger dates all fifteen
+    by the issue with each first commit kept, and no other report reached these counts in
+    that window, so the verdicts are the same either way. Push times were not read (the activity
+    log and events API refused this session). The issue's remark that public Kaggle files
+    hold smaller packings at 14 of the 15 counts names no packing that reached this repository.
 - report: '#942'
   url: https://github.com/jlevy/squares/issues/942
   kind: issue

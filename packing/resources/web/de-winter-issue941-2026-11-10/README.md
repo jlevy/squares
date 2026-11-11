@@ -24,10 +24,11 @@ No later commit through the head `c4e65d0` changes `above324/`.
 issue.
 Under the owner’s rule of 14 October 2026 a watched publication with no issue is a
 report from its first commit.
-Here an issue claims every one of them, so the ledger dates them by the issue and keeps
-each first commit, as #763’s ledger did.
-No other report reached any of the fifteen counts between `d3a020e` and #941, so the
-verdicts are the same either way.
+Here an issue claims every one of them.
+`d3a020e`’s push was not read, so it may have made the nine public up to 13.5 hours
+before the issue, when the rule of 14 October would date them by it; the ledger dates
+all fifteen by the issue with each first commit kept, and no other report reached these
+counts in that window, so the verdicts are the same either way.
 
 **Push times are not recorded.** GitHub’s activity log and events API both refused this
 session. `d3a020e` and `71da0d5` were public by 13:30:51Z, when the issue named
@@ -229,10 +230,10 @@ square beyond a tenth; the issue calls it a sub-window of his 539, and both can 
   declaration requests no row at 809, and think-kzme’s notes name it.
   Both routes and the review accept the 809 certificate.
 
-These are bounds below the record, not the best known packings: the issue itself says
-public Kaggle submissions hold smaller packings at 14 of its 15 counts, all but 543,
-though none of them reached this repository as a report (the review’s F9). Beyond the
-corpus no register entry records them.
+These are bounds below the record, not the best known packings at 14 of the 15 counts:
+the issue says public Kaggle submissions hold smaller ones at all but 543, though none
+of them reached this repository as a report (the review’s F9). Beyond the corpus no
+register entry records them.
 
 ## Stage 4 Review
 

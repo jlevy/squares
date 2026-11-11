@@ -31972,7 +31972,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter issue 941 2026-11-10]'
     field: /credit
-  expected_text: de Winter after Couzo, Levy
+  expected_text: de Winter after Couzo, Lavrentev, Tymchishin, Levy
   start: 0
   end: 9
   label: de Winter
@@ -31984,7 +31984,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter issue 941 2026-11-10]'
     field: /credit
-  expected_text: de Winter after Couzo, Levy
+  expected_text: de Winter after Couzo, Lavrentev, Tymchishin, Levy
   start: 16
   end: 21
   label: Couzo
@@ -31996,9 +31996,33 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter issue 941 2026-11-10]'
     field: /credit
-  expected_text: de Winter after Couzo, Levy
+  expected_text: de Winter after Couzo, Lavrentev, Tymchishin, Levy
   start: 23
-  end: 27
+  end: 32
+  label: Lavrentev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 941 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Couzo, Lavrentev, Tymchishin, Levy
+  start: 34
+  end: 44
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 941 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Couzo, Lavrentev, Tymchishin, Levy
+  start: 46
+  end: 50
   label: Levy
   role: prerequisite
   disposition: unresolved

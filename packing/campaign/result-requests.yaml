@@ -30474,8 +30474,9 @@ issues:
       RV-3 was raised; the owner has not answered RV-3. The four commits between #939's pin
       and this one add certificates at 37 counts above 324. The author's #941 reports 15 of them,
       at 71da0d5 (above324/), and #942 reports 16, at a9486ed (above324_refined/); both are
-      triaged on think-cen3. No issue reports the six counts a0c4fc8 adds (597, 754, 864, 865,
-      869 and 991), which are left for triage.
+      triaged on think-cen3. #942's addendum comment (issuecomment-6772308414, 16:02:47Z on 10
+      November) reports the six counts a0c4fc8 adds (597, 754, 864, 865, 869 and 991), which the
+      ledger upper-bounds-941-942-20261111 records.
 
       The first reply, of 08:47:19Z on 11 November 2026 (issuecomment-6791384381), was posted
       after #948 merged as 9fd466fe1 at 08:21:27Z and is recorded in intake lane L86. Lane
@@ -31118,8 +31119,8 @@ issues:
       (539) to 5.33e-03 (753) below the rows they supersede; 494 is a refinement of Couzo's packing
       at 494 by the identity measurement. 809, the 810 certificate less its last square, is a
       deletion bound the issue claims, held without a row for the owner's think-kzme. These are
-      bounds below the record, not the best known packings: the issue says public Kaggle
-      submissions hold smaller ones at 14 of the 15 counts. The 11 November stage 4 review
+      bounds below the record, not the best known packings at 14 of the 15 counts: the issue says
+      public Kaggle submissions hold smaller ones at all but 543. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
       blind in a separate lane, accepts all fifteen, nothing blocking. Claude assistance
       disclosed.
@@ -31128,38 +31129,49 @@ issues:
     - key: above324-15
       claim: >-
         s(n) <= the side of nNNNN.cert in above324/ at JoostdeWinter/square-packing 71da0d5, rounded
-        up at 10 places, at 413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 809, 810, 851, 867
-        and 910: sub-windows of Couzo's packings at larger counts, re-optimized, their borders and
-        one deletion.
+        up at 10 places, at 413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 810, 851, 867 and
+        910: sub-windows of Couzo's packings at larger counts, re-optimized, and their borders.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: rows of source-coverage.yaml (source
+        Beyond the n <= 324 corpus: fourteen rows of source-coverage.yaml (source
         de-winter-issue941-2026-11-10), not register entries. The ledger of 11 November for this
         pass (upper-bounds-941-942-20261111), walked from starts frozen at main 8afdabe8f with
-        Göbel's construction beside each row, records all fifteen. Fourteen are current rows at
-        assurance verified, each superseding the row it is below, from both maintained exact routes
-        with the gross and sharp controls as stated in advance (E-de-winter-941-exact-feasibility)
-        and the stage 4 review's clean-room run (E-de-winter-941-review-exact-feasibility). 809 is
-        held without a row for think-kzme, as 743, 798, 855 and 985 are.
+        Göbel's construction beside each row, records all fourteen as current rows at assurance
+        verified, each superseding the row it is below, from both maintained exact routes with the
+        gross and sharp controls as stated in advance (E-de-winter-941-exact-feasibility) and the
+        stage 4 review's clean-room run (E-de-winter-941-review-exact-feasibility).
       queued: false
       bead: think-cen3
+    - key: n809
+      claim: >-
+        s(809) <= 28.9079170470, rounded up: above324/n0809.cert at JoostdeWinter/square-packing
+        71da0d5, the 810 certificate less its last square.
+      source: body
+      not_registered: >-
+        The walk records it below the standing side and holds it from a row: whether a
+        deletion bound an issue claims gets a row is think-kzme's question 2.
+      queued: true
+      bead: think-cen3
+      blocked_on:
+      - think-kzme
     beads:
     - think-cen3
     - think-kzme
     answer_bead: think-cen3
     replies: []
     close_when: >-
-      The fourteen rows are on main, verified, and the reply on main says what was retained,
-      replayed and reviewed, that 809 waits on think-kzme, and asks the review's questions;
-      nothing the author asked for is queued.
+      The fourteen rows are on main, verified, 809 has a row or a recorded disposition under
+      think-kzme, and the reply on main says so and asks the review's questions; nothing the
+      author asked for is queued.
     notes: >-
       Read on 11 November 2026 from main 8afdabe8f; no comment yet. Report order: d3a020e
       (2026-11-09T23:59:23Z) first published nine of the certificates and 71da0d5
-      (2026-11-10T06:15:17Z) the other six; the issue (13:30:51Z) names 71da0d5. The ledger dates
-      all fifteen by the issue with each first commit kept, as #763's ledger did; no other report
-      reached any of these counts in between, so the verdicts are the same if d3a020e is read as
-      the report of its nine. Push times were not read (the activity log and events API refused
-      this session). The issue's "best recorded value" column agrees with the standing rows; its
+      (2026-11-10T06:15:17Z) the other six; the issue (13:30:51Z) names 71da0d5. d3a020e's push
+      was not read, so it may have made the nine public up to 13.5 hours before the issue, when
+      the rule of 14 October would date them by it; the ledger dates all fifteen by the issue with
+      each first commit kept, and no other report reached these counts in that window, so the
+      verdicts are the same either way. Push times were not read (the activity log and events API
+      refused this session). The issue's "best recorded value" column agrees with the standing rows; its
       remark that public Kaggle files hold smaller packings at 14 of the 15 counts names no
       packing that reached this repository, so no Kaggle file is a report here (the review's F9).
       494 is classed as a refinement of Couzo's 494, after Vladislav Lavrentev, since the identity
@@ -31193,9 +31205,11 @@ issues:
       print is the exact side rounded up, and both maintained exact routes accept all 22 and
       refuse their gross and sharp controls. The ledger of 11 November records all 22 as verified
       beyond-horizon rows, 3.29e-04 (655, below the grid) and 1.02e-03 (869) to 3.26e-02 (991)
-      below the standing rows. These are bounds below the record, not the best known packings:
-      each is another holder's public packing re-optimized, 1.8e-07 to 3.8e-04 below the best
-      public packing the author found. The 11 November stage 4 review
+      below the standing rows. These are bounds below the record, which the record does not call
+      the best known packings (the review's F9): each arrangement is another holder's public
+      Kaggle packing, re-optimized, and the issue's own table puts each side 1.8e-07 to 3.8e-04
+      below the best public packing it found, a comparison not checked here; Kaggle files no
+      report brought here may hold smaller ones. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
       blind in a separate lane, accepts all 22, nothing blocking. Claude assistance disclosed.
     read_through: '2026-11-10T16:02:47Z'

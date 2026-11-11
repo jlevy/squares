@@ -5145,7 +5145,7 @@ sources:
     venue: GitHub
     dated: '2026-11-10'
     lineage: builds-on-project
-    credit: de Winter after Couzo, Levy
+    credit: de Winter after Couzo, Lavrentev, Tymchishin, Levy
     short_credit: de Winter after Couzo et al.
     note: >-
       JoostdeWinter/square-packing at 71da0d56fd91b7061addca2a728ee72ec9728b0b
@@ -5157,8 +5157,9 @@ sources:
       sub-window of the 810 here, six are borders of axis-aligned squares on these and 809 the 810
       less one square; the issue credits the source arrangements to Couzo. Fourteen are
       beyond-horizon rows below the rows of Couzo and Kirill Tymchishin at those counts, bounds
-      below the record and not the best known packings, which the issue says Kaggle submissions
-      beat at 14 counts; 809, a deletion bound from the 810, is held for the owner (think-kzme).
+      below the record, not the best known packings at 14 of the 15 counts: the issue says
+      public Kaggle submissions hold smaller ones at all but 543; 809, a deletion bound from the
+      810, is held for the owner (think-kzme).
       The source says the work was
       produced with Claude (Anthropic) under his direction. No local or global optimality claim is
       replayed; the issue's local-optimality statements rest on a numerical solution without
@@ -5186,7 +5187,11 @@ sources:
       kirilltym (Kirill Tymchishin), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt
       and the register of Francisco Couzo, and the credit follows it; the licence of those
       starting packings is not given. Beyond-horizon rows below the record's rows at those
-      counts, bounds below the record and not the best known packings. The source says the work
+      counts. These are bounds below the record, which the record does not call the best known
+      packings (the review's F9): each arrangement is another holder's public Kaggle packing,
+      re-optimized, and the issue's own table puts each side 1.8e-07 to 3.8e-04 below the best
+      public packing it found, a comparison not checked here; Kaggle files no report brought
+      here may hold smaller ones. The source says the work
       was produced with Claude (Anthropic)
       under his direction. No local or global optimality claim. The lineage is independent: the
       arrangements are public Kaggle packings, and the source compares with this repository's
@@ -5208,7 +5213,12 @@ sources:
       jlevy/squares#942 (issuecomment-6772308414, 16:02:47Z), from the same procedure and merged
       Kaggle file as the issue's sixteen, with the arrangements unchanged; credited as
       [de Winter issue 942 2026-11-10] is; the licence of those starting packings is not given.
-      Beyond-horizon rows below the record's rows at those counts. Claude assistance disclosed.
+      Beyond-horizon rows below the record's rows at those counts. These are bounds below the
+      record, which the record does not call the best known packings (the review's F9): each
+      arrangement is another holder's public Kaggle packing, re-optimized, and the addendum's
+      own table puts each side 1.2e-06 to 2.2e-04 below the best public packing it found, a
+      comparison not checked here; Kaggle files no report brought here may hold smaller ones.
+      Claude assistance disclosed.
       No local or global optimality claim. Licensed MIT by
       LICENSE at the pin. Retained in web/de-winter-a0c4fc8-2026-11-10/.
 credited_names:

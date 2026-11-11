@@ -11,9 +11,10 @@ retained, replayed and measured them on 11 November 2026.
 [#942’s addendum](https://github.com/jlevy/squares/issues/942#issuecomment-6772308414),
 posted by the author at 16:02:47Z, 25 minutes after the commit, claims all six and names
 `a0c4fc8`. So the six have a report: the ledger dates them by the comment and keeps the
-commit as each one’s first commit, as #763’s ledger did for certificates committed
-before their issue. No other report reached these counts between the commit and the
-comment, so the verdicts are the same if the commit is the report instead.
+commit as each one’s first commit.
+Its push was not read, so it may have made them public before the comment; no other
+report reached these counts between the commit and the comment, so the verdicts are the
+same if the commit is the report instead.
 GitHub’s activity log was not readable from this session, so no push time is recorded.
 
 `a0c4fc8` also changes the folder’s `README.md` and `SHA256SUMS` and one line of the
@@ -142,8 +143,12 @@ supersedes the row it is below.
 The rows rest on this replay, `E-de-winter-a0c4fc8-exact-feasibility`, and the stage 4
 review’s clean-room run, `E-de-winter-a0c4fc8-review-exact-feasibility`, as the
 [#941 packet](../de-winter-issue941-2026-11-10/README.md#stage-4-review) sets out.
-As at #942’s counts, these are bounds below the record, not the best known packings (the
-review’s F9). Beyond the corpus no register entry records them.
+These are bounds below the record, which the record does not call the best known
+packings (the review’s F9): each arrangement is another holder’s public Kaggle packing,
+re-optimized, and the addendum’s own table puts each side 1.2e-06 to 2.2e-04 below the
+best public packing it found, a comparison not checked here; Kaggle files no report
+brought here may hold smaller ones.
+Beyond the corpus no register entry records them.
 
 ## What Is Not Established
 
