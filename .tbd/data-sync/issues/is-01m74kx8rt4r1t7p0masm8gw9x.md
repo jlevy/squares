@@ -3,9 +3,9 @@ type: is
 id: is-01m74kx8rt4r1t7p0masm8gw9x
 title: "Stage 4 blind review of #939, #946 (de Winter's re-solved s(199) and s(172); PR #948)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l82-review
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T06:14:47.834Z
-updated_at: 2026-11-11T06:45:02.028Z
+updated_at: 2026-11-11T06:45:59.723Z
 started_at: 2026-11-11T06:14:54.559Z
+closed_at: 2026-11-11T06:45:59.723Z
+close_reason: "Blind stage-4 review of #939/#946 done: both accepted (F1/F2/F10/F11 minor, rest notes); clean-room l82_check ACCEPT; contraction receipts equal L78's; branch claude/bold-ritchie-xo28us-l82-review head 4f82c716a, to be folded into PR #948 (think-2h88)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
