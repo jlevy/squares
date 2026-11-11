@@ -149,7 +149,8 @@ GOLDEN_UNSTABLE = {
         105,
         106,
         129,
-        132,
+        # 132 left on 11 November 2026: Joost de Winter's certificate there (T-292,
+        # think-bcfs) is stable across tolerances.
         146,
         # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
         # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
@@ -170,7 +171,8 @@ GOLDEN_UNSTABLE = {
         105,
         106,
         129,
-        132,
+        # 132 left on 11 November 2026: Joost de Winter's certificate there (T-292,
+        # think-bcfs) is stable across tolerances.
         146,
         # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
         # stable across tolerances. 156 and 180 joined on 11 November 2026 with his

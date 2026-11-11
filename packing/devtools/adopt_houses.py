@@ -155,9 +155,11 @@ VERIFIER_TABLE = re.compile(
 #: Counts whose body a pass marked as history by hand, in prose no tool writes in a fixed
 #: form (`historical`): the first pass, on 11 October 2026, the SQUISH update sections at
 #: 155, 258, 263 and 302 and the grid prose at 308, and the pass of 19 October 2026 the
-#: intake's staging paragraph, grid sentence and packing section at 183 (T-220). Only
-#: their owned parts are the writer's.
-HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
+#: intake's staging paragraph, grid sentence and packing section at 183 (T-220), and lane
+#: L104's pass of 11 November 2026 the grid sentence and packing section at 157 (T-293) and
+#: the packing section's opening at 132 (T-292), review F14 of #958. Only their owned parts
+#: are the writer's.
+HAND_MARKED = frozenset({132, 155, 157, 183, 258, 263, 302, 308})
 #: The first pass whose writer also marks the closing sentence of a T-155 view's section as
 #: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
 VIEW_SECTION_FROM = "2026-10-19"
