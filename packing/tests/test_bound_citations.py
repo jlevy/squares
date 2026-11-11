@@ -942,9 +942,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # Couzo's certified packing took the case; the synthetic test above keeps that shape.
     # From 2026-10-05 its exact optimum, Couzo's packing improved by Daniel (T-098), and
     # since the house adoption of 11 October 2026 Daniel's record-hunt packing (T-141), as
-    # PingYou Ltd refined it since the adoption of 17 October 2026 (T-174).
+    # PingYou Ltd refined it since the adoption of 17 October 2026 (T-174), and since 11
+    # November 2026 Joost de Winter's pinwheel (T-292), a new arrangement.
     132: (
-        ("Daniel & PingYou Ltd, GitHub (confirmed T-174)", "external", "verified"),
+        ("de Winter 2026, GitHub (confirmed T-292)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",
