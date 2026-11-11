@@ -1,0 +1,93 @@
+{
+ "n": 269,
+ "side": "422524864498783120504173140778928365461679347447944525737098975743494596211072089947926175707875276664168302257497715408172383643378226127847740006900344064613612022417462526959580596205877980788988926563428153251643/25000000000000000000000000000093860242471779587249869711099254672458047574339986490836196209699830616178807806796543184253415501611719489636237395031003202849963025343610104118983903513732675267204756250000000000000",
+ "side_denominator_digits": 215,
+ "ceil12": "1056312161247/62500000000",
+ "floor12": "16900994579951/1000000000000",
+ "drop_to_floor12": 3.248201669256311e-13,
+ "s1c_squares_below_drop": [
+  233,
+  234,
+  235,
+  236,
+  238,
+  250,
+  252,
+  253,
+  254,
+  255,
+  256,
+  257,
+  258,
+  259,
+  260,
+  261
+ ],
+ "far_wall_contacts": [
+  [
+   260,
+   "right"
+  ]
+ ],
+ "all_contacts": [
+  [
+   225,
+   "bottom"
+  ],
+  [
+   227,
+   "left"
+  ],
+  [
+   260,
+   "right"
+  ]
+ ],
+ "least_positive_clearance": 5.83176108643861e-16,
+ "any_positive_clearance_below_1e-30": false,
+ "square1_contacts": [],
+ "right_wall_contacts": [
+  260
+ ],
+ "least_pair": [
+  119,
+  202
+ ],
+ "least_pair_margin": 2.0364942643628457e-13,
+ "least_pair_closing_parameter": 2.0364942643612208e-13,
+ "least_pair_closing_move": 2.0364998303341686e-13,
+ "moved_square": 202,
+ "moved_square_least_other_margin": 0.0024001950685617157,
+ "moved_square_least_wall_clearance": 1.1900696428217981e-15,
+ "moved_square_walls": {
+  "left": {
+   "before": 1.0041475335125412,
+   "after_contact_move": 1.0041475335125416
+  },
+  "right": {
+   "before": 14.896847046437601,
+   "after_contact_move": 14.8968470464376
+  },
+  "bottom": {
+   "before": 1.1900696428217981e-15,
+   "after_contact_move": 2.0483949607910523e-13
+  },
+  "top": {
+   "before": 15.90099457995014,
+   "after_contact_move": 15.900994579949938
+  }
+ },
+ "moved_square_outside_at_contact": [],
+ "moved_square_outside_past": [],
+ "pairs_below_1e-12": 337,
+ "programs": {
+  "l83_check.py": "661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0",
+  "l83_clip.py": "c4987a55491fa98f61328d54a3d5353eccfe91514664fdcd4aec5a114319b218",
+  "l83_freeze.py": "a4f0e93178d8f6ebf031e82f2c9970596bdb938a4e191722e7e01e89d909f8a3",
+  "l83_geom.py": "6542054ff2c45459de75e0fea2c73e0bf8481124daafb4f84439c587818cecd8",
+  "l83_plan_facts.py": "11b46d036848d04be55e86a30c24fb251d25a4140de15c24761d821924bd3387",
+  "l83_reader.py": "ab7b2cf73c61f0f707d92ef640176e1402f658136341caee8847f8665ab86526",
+  "l83_sat.py": "2236bccbeb4da6b635e0f43aa1c88c8e5aab3ed41de36a4eb87736a70706ced2",
+  "l83_selftest.py": "de00c72fc8b9b6abe10f1bdd93e7fdc8afd6b4f278e1e826e6c24e5c4e07ce1c"
+ }
+}

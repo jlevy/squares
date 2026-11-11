@@ -1,0 +1,423 @@
+{
+ "general": {
+  "contact": "a margin or clearance of exactly 0; touching by method B is a nonempty clipped set of area 0",
+  "past": "10^-30 beyond contact: for a pair, the centre-line parameter 10^-30 beyond its contact value (a move of 10^-30 times the centres' distance); for a wall or a side, 10^-30 in length",
+  "centre-line method": "square b of a pair moves by t * (c_a - c_b); t at contact is exact (l83_geom.closing_parameter)",
+  "scope of incremental controls": "G1, G2, G5, S4c and S4p change one square: they are decided by both methods on every pair of the changed square and on its walls; every other square and pair is byte-identical to the accepted base check. S1a to S1d change only the side: every square's walls are decided again by both methods, and the pairs, which do not depend on the side, are the base check's.",
+  "whole-file controls": "G6 and G8 are decided by both methods over every square, wall and pair"
+ },
+ "counts": {
+  "156": {
+   "G1": "square 156 given square 1's corners: refused, exactly the pair (1, 156) overlapping, margin -1, area 1; no other pair of square 156 overlapping or touching",
+   "G2": "square 1 translated by (S, 0): refused, square 1 outside the right wall; no pair of square 1 overlapping or touching",
+   "G3": "the YAML entry of square 156 deleted: the reader refuses (155 squares for n = 156)",
+   "G4": "square 156's id set to 1: the reader refuses (repeated id)",
+   "G5": "square 1's third corner moved 10^-30 in x: refused, square 1 not a unit square by either method",
+   "G6": "every square reflected in its own horizontal centre line (rotation read the other way): refused for at least one overlapping pair; every square still a unit square by both methods, inside, with the base contacts",
+   "G8": {
+    "statement": "every corner transposed (x, y) -> (y, x): accepted, every pair margin exactly the base margin, contacts transposed",
+    "contacts": [
+     [
+      1,
+      "bottom"
+     ],
+     [
+      66,
+      "right"
+     ],
+     [
+      122,
+      "left"
+     ]
+    ]
+   },
+   "S1a": {
+    "statement": "side lowered by 1/q, q its denominator: refused, exactly the far-wall contact squares outside",
+    "outside": [
+     66
+    ]
+   },
+   "S1b": {
+    "statement": "side lowered by 10^-30: refused, exactly the far-wall contact squares outside (no positive clearance is below 10^-30)",
+    "outside": [
+     66
+    ]
+   },
+   "S1c": {
+    "statement": "side set to its 12-place floor: refused, exactly the squares whose right or top clearance is below the drop",
+    "outside": [
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     31,
+     39,
+     45,
+     52,
+     59,
+     66,
+     73,
+     75,
+     105,
+     106,
+     136,
+     154
+    ]
+   },
+   "S1d": {
+    "statement": "side set to its 12-place ceiling, the claim: accepted, contacts only at the left and bottom walls",
+    "contacts": [
+     [
+      1,
+      "left"
+     ],
+     [
+      122,
+      "bottom"
+     ]
+    ]
+   },
+   "S4c": {
+    "statement": "square 33 moved along the centre line of the least pair (32, 33) to contact: that pair touching by both methods, every other pair of square 33 clear, square 33 inside with its walls' classes unchanged",
+    "pair": [
+     32,
+     33
+    ]
+   },
+   "S4p": {
+    "statement": "the same, 10^-30 past: that pair overlapping by both methods, every other pair of square 33 clear, square 33 inside",
+    "pair": [
+     32,
+     33
+    ]
+   },
+   "S5": {
+    "statement": "every pair below 10^-12 closed along its centre line (pair-level): touching by both methods at contact, overlapping by both past",
+    "pairs": 373
+   },
+   "S6": {
+    "statement": "every square moved to its nearest wall by its clearance (square-level): contact with that wall by both methods, the square still inside; past, outside that wall by both",
+    "squares": 156
+   }
+  },
+  "180": {
+   "G1": "square 180 given square 1's corners: refused, exactly the pair (1, 180) overlapping, margin -1, area 1; no other pair of square 180 overlapping or touching",
+   "G2": "square 1 translated by (S, 0): refused, square 1 outside the right wall; no pair of square 1 overlapping or touching",
+   "G3": "the YAML entry of square 180 deleted: the reader refuses (179 squares for n = 180)",
+   "G4": "square 180's id set to 1: the reader refuses (repeated id)",
+   "G5": "square 1's third corner moved 10^-30 in x: refused, square 1 not a unit square by either method",
+   "G6": "every square reflected in its own horizontal centre line (rotation read the other way): refused for at least one overlapping pair; every square still a unit square by both methods, inside, with the base contacts",
+   "G8": {
+    "statement": "every corner transposed (x, y) -> (y, x): accepted, every pair margin exactly the base margin, contacts transposed",
+    "contacts": [
+     [
+      48,
+      "right"
+     ],
+     [
+      108,
+      "bottom"
+     ],
+     [
+      132,
+      "left"
+     ]
+    ]
+   },
+   "S1a": {
+    "statement": "side lowered by 1/q, q its denominator: refused, exactly the far-wall contact squares outside",
+    "outside": [
+     48
+    ]
+   },
+   "S1b": {
+    "statement": "side lowered by 10^-30: refused, exactly the far-wall contact squares outside (no positive clearance is below 10^-30)",
+    "outside": [
+     48
+    ]
+   },
+   "S1c": {
+    "statement": "side set to its 12-place floor: refused, exactly the squares whose right or top clearance is below the drop",
+    "outside": [
+     47,
+     48,
+     49,
+     50,
+     126,
+     142,
+     143,
+     144,
+     145,
+     146,
+     147,
+     148,
+     149,
+     150,
+     151,
+     164,
+     172,
+     175
+    ]
+   },
+   "S1d": {
+    "statement": "side set to its 12-place ceiling, the claim: accepted, contacts only at the left and bottom walls",
+    "contacts": [
+     [
+      108,
+      "left"
+     ],
+     [
+      132,
+      "bottom"
+     ]
+    ]
+   },
+   "S4c": {
+    "statement": "square 11 moved along the centre line of the least pair (10, 11) to contact: that pair touching by both methods, every other pair of square 11 clear, square 11 inside with its walls' classes unchanged",
+    "pair": [
+     10,
+     11
+    ]
+   },
+   "S4p": {
+    "statement": "the same, 10^-30 past: that pair overlapping by both methods, every other pair of square 11 clear, square 11 inside",
+    "pair": [
+     10,
+     11
+    ]
+   },
+   "S5": {
+    "statement": "every pair below 10^-12 closed along its centre line (pair-level): touching by both methods at contact, overlapping by both past",
+    "pairs": 300
+   },
+   "S6": {
+    "statement": "every square moved to its nearest wall by its clearance (square-level): contact with that wall by both methods, the square still inside; past, outside that wall by both",
+    "squares": 180
+   }
+  },
+  "268": {
+   "G1": "square 268 given square 1's corners: refused, exactly the pair (1, 268) overlapping, margin -1, area 1; no other pair of square 268 overlapping or touching",
+   "G2": "square 1 translated by (S, 0): refused, square 1 outside the right wall; no pair of square 1 overlapping or touching",
+   "G3": "the YAML entry of square 268 deleted: the reader refuses (267 squares for n = 268)",
+   "G4": "square 268's id set to 1: the reader refuses (repeated id)",
+   "G5": "square 1's third corner moved 10^-30 in x: refused, square 1 not a unit square by either method",
+   "G6": "every square reflected in its own horizontal centre line (rotation read the other way): refused for at least one overlapping pair; every square still a unit square by both methods, inside, with the base contacts",
+   "G8": {
+    "statement": "every corner transposed (x, y) -> (y, x): accepted, every pair margin exactly the base margin, contacts transposed",
+    "contacts": [
+     [
+      10,
+      "right"
+     ],
+     [
+      11,
+      "right"
+     ],
+     [
+      12,
+      "right"
+     ],
+     [
+      38,
+      "bottom"
+     ],
+     [
+      59,
+      "bottom"
+     ],
+     [
+      107,
+      "left"
+     ],
+     [
+      196,
+      "top"
+     ],
+     [
+      208,
+      "top"
+     ]
+    ]
+   },
+   "S1a": {
+    "statement": "side lowered by 1/q, q its denominator: refused, exactly the far-wall contact squares outside",
+    "outside": [
+     10,
+     11,
+     12,
+     196,
+     208
+    ]
+   },
+   "S1b": {
+    "statement": "side lowered by 10^-30: refused, exactly the far-wall contact squares outside (no positive clearance is below 10^-30)",
+    "outside": [
+     10,
+     11,
+     12,
+     196,
+     208
+    ]
+   },
+   "S1c": {
+    "statement": "side set to its 12-place floor: refused, exactly the squares whose right or top clearance is below the drop",
+    "outside": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     188,
+     196,
+     202,
+     208,
+     213,
+     218,
+     222
+    ]
+   },
+   "S1d": {
+    "statement": "side set to its 12-place ceiling, the claim: accepted, contacts only at the left and bottom walls",
+    "contacts": [
+     [
+      38,
+      "left"
+     ],
+     [
+      59,
+      "left"
+     ],
+     [
+      107,
+      "bottom"
+     ]
+    ]
+   },
+   "S4c": {
+    "statement": "square 65 moved along the centre line of the least pair (55, 65) to contact: that pair touching by both methods, every other pair of square 65 clear, square 65 inside with its walls' classes unchanged",
+    "pair": [
+     55,
+     65
+    ]
+   },
+   "S4p": {
+    "statement": "the same, 10^-30 past: that pair overlapping by both methods, every other pair of square 65 clear, square 65 inside",
+    "pair": [
+     55,
+     65
+    ]
+   },
+   "S5": {
+    "statement": "every pair below 10^-12 closed along its centre line (pair-level): touching by both methods at contact, overlapping by both past",
+    "pairs": 274
+   },
+   "S6": {
+    "statement": "every square moved to its nearest wall by its clearance (square-level): contact with that wall by both methods, the square still inside; past, outside that wall by both",
+    "squares": 268
+   }
+  },
+  "269": {
+   "G1": "square 269 given square 1's corners: refused, exactly the pair (1, 269) overlapping, margin -1, area 1; no other pair of square 269 overlapping or touching",
+   "G2": "square 1 translated by (S, 0): refused, square 1 outside the right wall; no pair of square 1 overlapping or touching",
+   "G3": "the YAML entry of square 269 deleted: the reader refuses (268 squares for n = 269)",
+   "G4": "square 269's id set to 1: the reader refuses (repeated id)",
+   "G5": "square 1's third corner moved 10^-30 in x: refused, square 1 not a unit square by either method",
+   "G6": "every square reflected in its own horizontal centre line (rotation read the other way): refused for at least one overlapping pair; every square still a unit square by both methods, inside, with the base contacts",
+   "G8": {
+    "statement": "every corner transposed (x, y) -> (y, x): accepted, every pair margin exactly the base margin, contacts transposed",
+    "contacts": [
+     [
+      225,
+      "left"
+     ],
+     [
+      227,
+      "bottom"
+     ],
+     [
+      260,
+      "top"
+     ]
+    ]
+   },
+   "S1a": {
+    "statement": "side lowered by 1/q, q its denominator: refused, exactly the far-wall contact squares outside",
+    "outside": [
+     260
+    ]
+   },
+   "S1b": {
+    "statement": "side lowered by 10^-30: refused, exactly the far-wall contact squares outside (no positive clearance is below 10^-30)",
+    "outside": [
+     260
+    ]
+   },
+   "S1c": {
+    "statement": "side set to its 12-place floor: refused, exactly the squares whose right or top clearance is below the drop",
+    "outside": [
+     233,
+     234,
+     235,
+     236,
+     238,
+     250,
+     252,
+     253,
+     254,
+     255,
+     256,
+     257,
+     258,
+     259,
+     260,
+     261
+    ]
+   },
+   "S1d": {
+    "statement": "side set to its 12-place ceiling, the claim: accepted, contacts only at the left and bottom walls",
+    "contacts": [
+     [
+      225,
+      "bottom"
+     ],
+     [
+      227,
+      "left"
+     ]
+    ]
+   },
+   "S4c": {
+    "statement": "square 202 moved along the centre line of the least pair (119, 202) to contact: that pair touching by both methods, every other pair of square 202 clear, square 202 inside with its walls' classes unchanged",
+    "pair": [
+     119,
+     202
+    ]
+   },
+   "S4p": {
+    "statement": "the same, 10^-30 past: that pair overlapping by both methods, every other pair of square 202 clear, square 202 inside",
+    "pair": [
+     119,
+     202
+    ]
+   },
+   "S5": {
+    "statement": "every pair below 10^-12 closed along its centre line (pair-level): touching by both methods at contact, overlapping by both past",
+    "pairs": 337
+   },
+   "S6": {
+    "statement": "every square moved to its nearest wall by its clearance (square-level): contact with that wall by both methods, the square still inside; past, outside that wall by both",
+    "squares": 269
+   }
+  }
+ }
+}
