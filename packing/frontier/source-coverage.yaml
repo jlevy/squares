@@ -12644,6 +12644,122 @@ sources:
     reports, the review mapped, held at V0/C1 for the owner's questions (think-ruu2's RV-3,
     think-ikku); no house moves.
   claims_record: resources/web/yim-certificates-2026-11-09/acquisition/beyond-horizon-claims.json
+- id: ozden-s156-upper-bound-2026-11-10
+  title: 'Doğa Özden''s packing of 156 squares at kenaznia-doga/s156-upper-bound 87c9292, issue 943'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s156-upper-bound/tree/87c92921a64216d38914a7af488a7d7a91cf1eb7
+  local: resources/web/ozden-s156-upper-bound-2026-11-10/
+  source_key: '[Özden s156 upper bound 2026-11-10]'
+  scope:
+    n_values:
+    - 156
+  reviewed: '2026-11-11'
+  source_date: '2026-11-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s156-upper-bound-2026-11-10/acquisition/claims.json
+  evidence:
+  - E-ozden-943-certificate-report
+  - E-ozden-943-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, 87c9292, but a raster diff image, two checker
+    files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
+    jlevy/squares#943, the certificate admitted only where its exact side rounds up to the side
+    the issue prints. T-285 records the in-horizon report at V3/C3 on both maintained routes'
+    replay, pending the stage 4 review, written in a separate blind lane. The ledger of 11
+    November for this lane (campaign/issue-intake/upper-bounds-943-947-20261111) records it. All
+    3 native jobs have full outcomes. No selected override or superseded claim is created before
+    the review; the current case and its source ownership remain unchanged.
+- id: ozden-s180-upper-bound-2026-11-10
+  title: 'Doğa Özden''s packing of 180 squares at kenaznia-doga/s180-upper-bound 4cfcb90, issue 944'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s180-upper-bound/tree/4cfcb9058a5bc5e8e6986bda31c072ccefc3731f
+  local: resources/web/ozden-s180-upper-bound-2026-11-10/
+  source_key: '[Özden s180 upper bound 2026-11-10]'
+  scope:
+    n_values:
+    - 180
+  reviewed: '2026-11-11'
+  source_date: '2026-11-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s180-upper-bound-2026-11-10/acquisition/claims.json
+  evidence:
+  - E-ozden-944-certificate-report
+  - E-ozden-944-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, 4cfcb90, but a raster diff image, two checker
+    files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
+    jlevy/squares#944, the certificate admitted only where its exact side rounds up to the side
+    the issue prints. T-286 records the in-horizon report at V3/C3 on both maintained routes'
+    replay, pending the stage 4 review, written in a separate blind lane. The ledger of 11
+    November for this lane (campaign/issue-intake/upper-bounds-943-947-20261111) records it. All
+    3 native jobs have full outcomes. No selected override or superseded claim is created before
+    the review; the current case and its source ownership remain unchanged.
+- id: ozden-s268-upper-bound-2026-11-10
+  title: 'Doğa Özden''s packing of 268 squares at kenaznia-doga/s268-upper-bound-16872029849 b027aba, issue 945'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s268-upper-bound-16872029849/tree/b027aba9280d453ea075bd9b80694a5345257f4e
+  local: resources/web/ozden-s268-upper-bound-2026-11-10/
+  source_key: '[Özden s268 upper bound 2026-11-10]'
+  scope:
+    n_values:
+    - 268
+  reviewed: '2026-11-11'
+  source_date: '2026-11-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s268-upper-bound-2026-11-10/acquisition/claims.json
+  evidence:
+  - E-ozden-945-certificate-report
+  - E-ozden-945-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, b027aba, but a raster diff image, two checker
+    files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
+    jlevy/squares#945, the certificate admitted only where its exact side rounds up to the side
+    the issue prints. T-287 records the in-horizon report at V3/C3 on both maintained routes'
+    replay, pending the stage 4 review, written in a separate blind lane. The ledger of 11
+    November for this lane (campaign/issue-intake/upper-bounds-943-947-20261111) records it. All
+    3 native jobs have full outcomes. No selected override or superseded claim is created before
+    the review; the current case and its source ownership remain unchanged.
+- id: ozden-s269-upper-bound-2026-11-11
+  title: 'Doğa Özden''s packing of 269 squares at kenaznia-doga/s269-upper-bound 6f93b07, issue 947'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s269-upper-bound/tree/6f93b07eac91e5f7b299c9a6420041d9a695a478
+  local: resources/web/ozden-s269-upper-bound-2026-11-11/
+  source_key: '[Özden s269 upper bound 2026-11-11]'
+  scope:
+    n_values:
+    - 269
+  reviewed: '2026-11-11'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s269-upper-bound-2026-11-11/acquisition/claims.json
+  evidence:
+  - E-ozden-947-certificate-report
+  - E-ozden-947-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, 6f93b07, but a raster diff image, two checker
+    files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
+    jlevy/squares#947, the certificate admitted only where its exact side rounds up to the side
+    the issue prints. T-288 records the in-horizon report at V3/C3 on both maintained routes'
+    replay, pending the stage 4 review, written in a separate blind lane. The ledger of 11
+    November for this lane (campaign/issue-intake/upper-bounds-943-947-20261111) records it. All
+    3 native jobs have full outcomes. No selected override or superseded claim is created before
+    the review; the current case and its source ownership remain unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

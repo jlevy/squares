@@ -4982,6 +4982,114 @@ sources:
       Retained as factual data; the repository states no licence for these files, and the 130 and
       303 certificates carry Polkovskyi's MIT and Özden's CC BY 4.0 notices. Ozden is Özden in the
       credit's ASCII. Retained in web/yim-certificates-2026-11-09/.
+  - key: '[Özden s156 upper bound 2026-11-10]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s156-upper-bound at 87c92921a64216d38914a7af488a7d7a91cf1eb7
+      (2026-11-10T15:27:50Z), Doğa Özden's certificate for s(156) <= 12.9770530874972048 (the
+      exact side rounded up at 16 places), printed 12.977053087498 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by transplant search, a horizontal and a
+      vertical unit-wide strip cut out of the registry's 182 (Evan Daniel) and closed up,
+      squares then deleted, then quenched with Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) and basin-hopped over its local minima, not one to
+      one with the house's packing (T-186), its exact coordinates made by this repository's
+      packing-witness promote --strategy robust-rational from the decimal pose the source
+      retains. Registration was requested in jlevy/squares#943, posted on the author's behalf by
+      his AI agent's account kenaznia-doga; the issue says the search and its code were written
+      and run by AI agents, under his direction. No global optimality claim. The lineage builds
+      on this project: the seed is a registry packing and the exact coordinates are made with
+      this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose,
+      outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also
+      carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in
+      the credit's ASCII. Retained in web/ozden-s156-upper-bound-2026-11-10/.
+  - key: '[Özden s180 upper bound 2026-11-10]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Couzo, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s180-upper-bound at 4cfcb9058a5bc5e8e6986bda31c072ccefc3731f
+      (2026-11-10T15:27:50Z), Doğa Özden's certificate for s(180) <= 13.9156185027900258 (the
+      exact side rounded up at 16 places), printed 13.915618502791 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by transplant search, an L of axis-aligned
+      grid squares added along two walls of the registry's 154 (Evan Daniel, improved by
+      Francisco Couzo), squares then deleted or inserted, then quenched with Evan Daniel's
+      ALM+SLP quench (evand/square-packing at bb4cc78e, MIT) and basin-hopped over its local
+      minima, not one to one with the house's packing (T-174), its exact coordinates made by
+      this repository's packing-witness promote --strategy robust-rational from the decimal pose
+      the source retains. Registration was requested in jlevy/squares#944, posted on the
+      author's behalf by his AI agent's account kenaznia-doga; the issue says the search and its
+      code were written and run by AI agents, under his direction. No global optimality claim.
+      The lineage builds on this project: the seed is a registry packing and the exact
+      coordinates are made with this repository's promotion tool. Licensed CC BY 4.0 (witness,
+      JSON, decimal pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the
+      pin; the pin also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt.
+      Ozden is Özden in the credit's ASCII. Retained in web/ozden-s180-upper-bound-2026-11-10/.
+  - key: '[Özden s268 upper bound 2026-11-10]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: 'Ozden after PingYou, Couzo, Mishapolk, Daniel, Levy'
+    short_credit: 'Ozden after PingYou et al.'
+    note: >-
+      kenaznia-doga/s268-upper-bound-16872029849 at b027aba9280d453ea075bd9b80694a5345257f4e
+      (2026-11-10T15:27:50Z), Doğa Özden's certificate for s(268) <= 16.8720298490844502 (the
+      exact side rounded up at 16 places), printed 16.872029849085 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by transplant search, a horizontal and a
+      vertical unit-wide strip cut out of the registry's 302 (PingYou Ltd, improved by Francisco
+      Couzo, Mishapolk and Evan Daniel) and closed up, then quenched with Evan Daniel's ALM+SLP
+      quench (evand/square-packing at bb4cc78e, MIT) and basin-hopped over its local minima, not
+      one to one with the house's packing (T-276), its exact coordinates made by this
+      repository's packing-witness promote --strategy robust-rational from the decimal pose the
+      source retains. Registration was requested in jlevy/squares#945, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the issue says the search and its code
+      were written and run by AI agents, under his direction. No global optimality claim. The
+      lineage builds on this project: the seed is a registry packing and the exact coordinates
+      are made with this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal
+      pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin
+      also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden
+      in the credit's ASCII. Retained in web/ozden-s268-upper-bound-2026-11-10/.
+  - key: '[Özden s269 upper bound 2026-11-11]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s269-upper-bound at 6f93b07eac91e5f7b299c9a6420041d9a695a478
+      (2026-11-11T03:34:54Z), Doğa Özden's certificate for s(269) <= 16.9009945799513249 (the
+      exact side rounded up at 16 places), printed 16.900994579952 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by transplant search, a horizontal and a
+      vertical unit-wide strip cut out of the registry's 304 (Evan Daniel) and closed up, one
+      square then deleted, then quenched with Evan Daniel's ALM+SLP quench (evand/square-packing
+      at bb4cc78e, MIT) and basin-hopped over its local minima, not one to one with the house's
+      packing (T-174), its exact coordinates made by this repository's packing-witness promote
+      --strategy robust-rational from the decimal pose the source retains. Registration was
+      requested in jlevy/squares#947, posted on the author's behalf by his AI agent's account
+      kenaznia-doga; the issue says the search and its code were written and run by AI agents,
+      under his direction. No global optimality claim. The lineage builds on this project: the
+      seed is a registry packing and the exact coordinates are made with this repository's
+      promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs, write-ups) and
+      MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
+      notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII.
+      Retained in web/ozden-s269-upper-bound-2026-11-11/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
