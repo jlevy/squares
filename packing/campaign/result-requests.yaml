@@ -31158,7 +31158,15 @@ issues:
     - think-cen3
     - think-kzme
     answer_bead: think-cen3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/941#issuecomment-6804521353
+      date: '2026-11-11'
+      by: jlevy
+      kind: import
+      reported:
+      - result: above324-15
+      - result: n809
+      beads: [think-kzme]
     close_when: >-
       The fourteen rows are on main, verified, 809 has a row or a recorded disposition under
       think-kzme, and the reply on main says so and asks the review's questions; nothing the
@@ -31182,11 +31190,68 @@ issues:
       what the "margin of about 5e-9 above the numerical optimum" measures, the certificates
       leaving about 1e-10 at each wall and 2e-10 between nearest pairs (F6); and whether 809 is
       meant as its own claim or as the deletion bound from 810. No reply has been posted.
+
+      GitHub closed the issue at 18:36:15Z on 11 November 2026, when #952 merged as c8448724e
+      at 18:36:12Z: a sentence in #952's description, on 809, "so the stage 7 reply does not
+      close #941", was read as a closing keyword. The pass's coordinator reopened it at
+      18:52:03Z, before the reply, and it is recorded open, with no `closed`.
+
+      The first reply, of 18:52:41Z on 11 November 2026 (issuecomment-6804521353), was posted
+      after #952 merged and is recorded in intake lane L99. It is recorded as `import`: it is
+      the reply of the pull request that imported the rows, and it is not `final`, since it says
+      that the issue stays open for 809 and that a reply will follow when the question is
+      decided. It says that fourteen of the fifteen, at 413, 494, 539, 543, 547, 590, 738, 739,
+      753, 794, 810, 851, 867 and 910, are rows of the record beyond the case corpus at
+      assurance verified, each the 10-place print, the exact side rounded up; that beyond n =
+      324 the record keeps dated rows in source-coverage.yaml, not register entries, so they
+      have no T-numbers, their source being de-winter-issue941-2026-11-10; and that each
+      supersedes the row that stood at its count, which stays listed, marked superseded, by
+      7.08e-5 (539) to 5.33e-3 (753). It says that each side is also below Göbel's construction
+      at its count, by 1.58e-2 to 0.532 (753); that these are bounds below the record, which
+      does not call them the best known packings; and that the Kaggle submission files the issue
+      mentions were not checked here, since none has reached this repository as a report. It
+      says that 809, the 810 certificate less its last square, is held, not recorded: both
+      routes and the review accept the certificate and its side is 1.19e-4 below the row at 809
+      (Couzo's #763), but whether a deletion bound an issue claims gets a row of its own is an
+      open question for the project (think-kzme), the one that leaves the deletion bounds at
+      743, 798, 855 and 985, which #715 and #732 claim, without rows, so until it is decided 809
+      has no row and Couzo's row stays current there. It says that GitHub closed the issue when
+      #952 merged, because a sentence in that pull request saying the merge would not close it
+      read as a closing keyword, that it has been reopened and stays open for 809, and that a
+      reply will follow when the question is decided. It says that the record classes 494 as a
+      refinement of Couzo's packing at 494, itself his refinement of Vladislav Lavrentev's
+      Kaggle packing, no square moving more than a tenth (largest 0.0992), where the issue calls
+      it a sub-window of his 539, and that both descriptions can hold (the review's F14). It
+      says what was checked: custody, all 16 lines of SHA256SUMS passing; both maintained exact
+      routes accepting all fifteen over every wall and pair, 45 jobs and 22,619,004 pair
+      decisions with the controls, the two routes sharing the reader, Fraction arithmetic and
+      the separating-axis method, and neither sharing code with the author's verify_cert.py,
+      retained as data and not run; the 30 gross controls refused and the 165 sharp controls
+      as stated; the prints, each the exact side's 10-place ceiling, and the issue's columns,
+      its 28.9080360986 at 809 rounding down a row that lies exactly half way; and the report
+      order, the ledger dating all fifteen by the issue with d3a020e and 71da0d5 kept as first
+      commits. It passes on the independent review, a Claude agent at the strong tier, blind to
+      the import lane, an AI review and not a human one: its clean-room checker over all
+      3,769,834 pairs by two methods, its 135 controls, and its confirmation of the
+      construction statements. It names E-de-winter-941-certificate-report,
+      E-de-winter-941-exact-feasibility and E-de-winter-941-review-exact-feasibility, and says
+      that the fourteen rows are verified from the last two, which do not cover 809; those ids
+      map to neither of this issue's results, which are rows of source-coverage.yaml, not
+      register entries, so above324-15 and n809 are each recorded as spoken of, with no id, as
+      #763's beyond-horizon rows are, and think-kzme, which 809 waits on, under the reply's
+      beads. It passes on the packet at 71da0d5, the licence, MIT, pinned against the copy
+      already held with the certificates at 227, 229 and 260, and the credit, de Winter after
+      Couzo, Lavrentev, Tymchishin, Levy, with the AI assistance as stated; and says that the
+      Changelog for 11 November lists the fourteen rows. It asks the review's questions 4 and 5:
+      what "a margin of about 5e-9 above the numerical optimum" measures, and whether 809 is
+      meant as its own claim or as the deletion bound from 810; neither changes a bound or holds
+      the issue open, and the project's question on 809 does.
   - number: 942
     title: 'Sixteen lowered upper bounds for n between 632 and 989: registration request'
     author: JoostdeWinter
     opened: '2026-11-10'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -31212,7 +31277,7 @@ issues:
       report brought here may hold smaller ones. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
       blind in a separate lane, accepts all 22, nothing blocking. Claude assistance disclosed.
-    read_through: '2026-11-10T16:02:47Z'
+    read_through: '2026-11-11T18:53:12Z'
     results:
     - key: above324-refined-16
       claim: >-
@@ -31247,7 +31312,14 @@ issues:
     beads:
     - think-cen3
     answer_bead: think-cen3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/942#issuecomment-6804532105
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: above324-refined-16
+      - result: above324-refined-addendum-6
     close_when: >-
       The 22 rows are on main, verified, and the reply on main says what was retained, replayed
       and reviewed, and asks the review's questions; nothing the author asked for is queued.
@@ -31267,3 +31339,57 @@ issues:
       licence the Kaggle notebooks and datasets published the starting packings, and whether the
       merge file states one (F8); whether the individual authors of the 22 arrangements can be
       identified; and what the "margin of about 5e-9" measures (F6). No reply has been posted.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6804532105, posted at
+      18:53:12Z), after #952 merged as c8448724e at 18:36:12Z; recorded in intake lane L99. It
+      says that all 22 are rows of the record beyond the case corpus at assurance verified, each
+      the 10-place print, the exact side rounded up: the issue's sixteen as rows of the source
+      de-winter-issue942-2026-11-10, and the addendum's six as rows of
+      de-winter-a0c4fc8-2026-11-10, dated by the addendum comment (16:02:47Z) with a0c4fc8 kept
+      as each one's first commit; that beyond n = 324 the record keeps dated rows in
+      source-coverage.yaml, not register entries, so they have no T-numbers; and that each
+      supersedes the row that stood at its count, which stays listed, marked superseded, by
+      1.02e-3 (869) to 3.26e-2 (991), while at 655 no row stood and the side is 3.29e-4 below
+      the 26 × 26 grid. It says that each side is also below Göbel's construction at its count,
+      which at 655 lies above the grid; that these are bounds below the record, which does not
+      call them the best known packings, each arrangement another holder's public Kaggle
+      packing, re-optimized; that the issue's comparison with the best public packing, 1.8e-7
+      to 3.8e-4, was not checked here, and Kaggle files no report has brought here may hold
+      smaller packings; and that the issue's "register value" column agrees with the rows that
+      stood on main, and with the grid at 655. It says what was checked: custody, all 17 lines
+      of SHA256SUMS passing at a9486ed and the sixteen certificates of #942 having the same
+      digests in a0c4fc8's; both maintained exact routes accepting all 22 over every wall and
+      pair, 66 jobs and 43,939,824 pair decisions with the controls, the least wall clearance
+      1.0e-10 to 5.3e-10 and the least pair gap 2.0e-10 to 1.4e-9, the two routes sharing the
+      reader, Fraction arithmetic and the separating-axis method, and neither sharing code with
+      the author's verify_cert.py, which was not run; the 44 gross controls refused and the 242
+      sharp controls as stated; the prints, each the exact side's 10-place ceiling; against the
+      rows, that none of the nineteen with an n-square row certificate pairs one to one with it
+      under any symmetry, the rows at 632, 744 and 970 being Couzo's L-border recipe and at 655
+      the grid; and the report order, the sixteen dated by the issue, 86 seconds after a9486ed,
+      and the six by the addendum, 25 minutes after a0c4fc8, no other report reaching these
+      counts in either window. It passes on the independent review, a Claude agent at the
+      strong tier, blind to the import lane, an AI review and not a human one: its clean-room
+      checker over all 7,323,304 pairs by two methods and its 198 controls. It names
+      E-de-winter-942-certificate-report and E-de-winter-a0c4fc8-certificate-report as the two
+      reports, E-de-winter-942-exact-feasibility and E-de-winter-a0c4fc8-exact-feasibility as
+      the replays, and E-de-winter-942-review-exact-feasibility and
+      E-de-winter-a0c4fc8-review-exact-feasibility as the review's clean-room runs, the 22 rows
+      verified from the replays and the review's runs; those ids map to neither of this issue's
+      results, which are rows of source-coverage.yaml, not register entries, so
+      above324-refined-16 and above324-refined-addendum-6 are each recorded as spoken of, with
+      no id, as #763's beyond-horizon rows are. It names no bead. It passes on the two packets,
+      at a9486ed and a0c4fc8; on the licence, MIT, and that the licence of the starting
+      packings, the public Kaggle notebooks and datasets and the merge file in
+      Samanyu-dev/squares_in_squares at 53551d7, is not given, so retaining the files grants no
+      licence and relicenses nothing; and on the credit, de Winter after Samanyu-dev, Deotte,
+      Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123,
+      jazivxt, Couzo, the merged file naming no author per packing, with the AI assistance as
+      stated. It says that the Changelog for 11 November lists the rows, 16 at 632 to 989 and 6
+      at 597 to 991. It asks the review's four questions: whether the six addendum counts were
+      below the 1e-6 threshold at first or found by a later run; under what licence the Kaggle
+      notebooks and datasets published the starting packings, and whether the merge file states
+      one; whether the individual authors of the 22 arrangements can be identified; and what "a
+      margin of about 5e-9 above the numerical optimum" measures. The questions are
+      informational and hold nothing open. It says that nothing the author asked for is queued,
+      so the issue is closed with it. The issue was closed as completed at 18:53:16Z.
