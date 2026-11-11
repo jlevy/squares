@@ -5595,7 +5595,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/133.html
   canonical: cases/133.html
@@ -5811,7 +5811,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/158.html
   canonical: cases/158.html
@@ -24123,6 +24123,80 @@ urls:
     - docs/project/reviews/review-2026-11-11-ozden-943-947.md
     - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
     - packing/devtools/upper_bound_reports.py
+- path: result/t-292.html
+  canonical: result/t-292.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 132
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s132 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-de-winter-s132-certificate-report
+    - E-de-winter-s132-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/README.md
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_witness.yaml
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_exact.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132-own.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-293.html
+  canonical: result/t-293.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 157
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s157 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-de-winter-s157-certificate-report
+    - E-de-winter-s157-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/README.md
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_witness.yaml
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_exact.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157-own.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
 - path: results.html
   canonical: results.html
   kind: page

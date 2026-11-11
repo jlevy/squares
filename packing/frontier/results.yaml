@@ -44031,6 +44031,338 @@ results:
       verdict: accepted
       covers:
       - T-290
+  - id: T-292
+    kind: upper-bound
+    registered: '2026-11-11'
+    landed: '2026-11-11'
+    headline: >-
+      De Winter's pinwheel at 132 from Samanyu-dev's 109, a new arrangement 9.63e-03 below T-174
+    claim: >-
+      One complete rational certificate proves s(132) <=
+      29940120959008518809321792381784194561366154929588804750577800289555120369865408680444352359453817994064394036272845081533643558510907037866820298055603899602933748036672382028267459576409124073981009540056142854406780197934128275523774369426111643883528289742078410057825766433892095556050609840605731079359109/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      That side is 11.9760483836034076 rounded up at 16 places and 11.976048383604 at 12, as the
+      source's root README prints it.
+
+      It is 9.63e-03 below T-174 (Evan Daniel's packing, improved by PingYou Ltd), the case's house
+      best packing. Measured here it is a new arrangement relative to T-174's packing, not one to
+      one with it under any symmetry of the box by nearest centres: the optimal assignment moves 84
+      squares beyond a tenth.
+
+      Both maintained exact routes accept the certificate. The stage 4 review, written in a separate
+      lane blind to this one, is pending; the case's lanes and the house rule wait on it, so the
+      case is not touched.
+
+      n132/README.md says all squares were optimized together with an interior-point solver (IPOPT)
+      and the contact equations of the result then solved to 250 digits: all 1407 contact equations
+      (a corner of one square on the edge line of another, or a corner on a wall) are satisfied to
+      1e-269 and all other gaps stay open, and the certificate's side is 1.3e-59 above that
+      solution.
+
+      It says non-negative contact forces in balance exist, the first-order condition for a local
+      minimum, checked in floating point; that 324 perturbation trials, each re-optimized, found no
+      smaller side; that local optimality has no formal proof; and that a search for a minimal
+      polynomial of the side up to degree 16 found none. Measured here, the certificate's own
+      uniform-contraction margin is 1.248e-59 (1 - lambda* = 1e-60), about the distance the README
+      states. It says verify_exact.py, Python's standard library only, is the folder's exact
+      checker. Those statements are the author's; no source program ran here.
+
+      The issue says verify_exact.py, the checker used for #946 without its polynomial test, checks
+      in rational arithmetic that every edge direction is a unit vector, every square lies in the
+      container and all pairs have disjoint interiors, and that a floating-point separating-axis
+      test on all pairs and a union-area test with Shapely, separate code outside the repository,
+      agree, and that the exact checker has not been run against this repository's checkers. None of
+      them ran here.
+
+      The README says the Kaggle competition 'Squares in Squares' has a per-puzzle leaderboard that
+      lists sides without packings, that the author has not seen its values at 132, and so an
+      unpublished packing with a smaller side may exist. A side with no packing is no report; the
+      record compares with what has been published.
+
+      Credit Joost de Winter, who reports a pinwheel, a central block of tilted squares with four
+      arms surrounded by four blocks of axis-aligned squares, derived from the public 109-square
+      packing of Samanyu-dev/squares_in_squares (best_fit_101_500.csv, side 10.949289581) by one
+      step: the packing cut along one horizontal and one vertical line, the parts moved about one
+      unit apart, each gap filled with one layer of squares continuing the local lattice, and every
+      square re-optimized.
+
+      The README says credit for the pinwheel arrangement at n = 109 belongs to Samanyu-dev, whose
+      README reports that packing as a result of its own stretch and quench chains; the packing at
+      132 is credited to de Winter after Samanyu-dev.
+
+      Measured here, 54 squares turn, 53 of them by 23.6 to 31.4 degrees and one by 0.22 degrees,
+      all the same way, against the README's 54 tilted and 78 axis-aligned.
+
+      The README says the derivation, optimization, high-precision solution, rational certificate,
+      checking and figure were produced with Claude Fable 5.2 (Anthropic) under the direction of
+      Joost de Winter, as the issue does; the folder's first commit said Claude (Anthropic), and the
+      head names the model.
+    scope:
+      n_values:
+      - 132
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 132 relative to T-174's packing, 9.63e-03 below it, far above the S2/S3
+        line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where
+        new and continued arrangements are S3: beside T-287's 2.11e-03 and T-282's 3.25e-03. A
+        cut-and-fill step continues a known pinwheel, so no technique is new and it is not S4. No
+        lower bound or optimum.
+      scored: '2026-11-11'
+      by: think-bcfs Joost de Winter import (intake lane L104), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s132 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    evidence:
+    - E-de-winter-s132-certificate-report
+    - E-de-winter-s132-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/README.md
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_witness.yaml
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_exact.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132-own.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l104_1111.py
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 132: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both routes,
+      51876 pair decisions; summed over the 3 jobs, the receipt records 54.61 route CPU seconds and
+      55.4 job wall seconds. In every positive squares touch the box, a least wall clearance of
+      exactly 0, and every pair clears by at least 9.99e-61. The replay is
+      E-de-winter-s132-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), as the module predicts them,
+      lowered the side by the least far-wall clearance (0), closed the least-gap pair (119 against
+      14) by its gap of 1e-60 and moved every square toward the nearer near wall by its least
+      clearance: both routes accepted each at exact contact and refused each 1e-30 past it. They
+      refused square 119 enlarged to its pair at contact for its shape alone, accepted square 17,
+      already touching its wall, grown by 0, refused it 1e-30 past for the wall and the overlap, and
+      refused a duplicated square.
+
+      At n = 132 the certificate is below the case's ceiling (Evan Daniel, improved by PingYou Ltd,
+      T-174) by 9.63e-03; smallest: this certificate. The ledger of 11 November for this lane
+      (campaign/issue-intake/upper-bounds-de-winter-132-157-20261111) walks #958 from starts frozen
+      on main on 11 November and records this claim as a new packing, the only report at 132.
+
+      #958 (20:56:18Z on 11 November) names the repository's head, which changes only the READMEs
+      and checksums of the commit that first published the folder, at 20:49:44Z, 6 minutes 34
+      seconds before the issue. Its push is not read (GitHub's activity log was not readable from
+      this session); the rule of 14 October would date the claim by it if it came first, but no
+      other report reached 132 or 157 in that window, so the ledger dates the claim by the issue
+      with the first commit kept, and the verdict is the same either way.
+
+      Measured against padding (RV-3, think-ruu2): T-174's certificate, contracted uniformly about
+      the origin, has margin 0, its pair 87 and 88 already touching (1 - lambda* = 0), so the whole
+      gain of 9.632e-03 lies outside the predecessor's padding (measure/contraction-n132.json) and
+      RV-3 does not reach it. This certificate's own margin, measured the same way, is 1.248e-59
+      (measure/contraction-n132-own.json).
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): no
+      symmetry of the box pairs it one to one with T-174's packing by nearest centres, and the house
+      witness and its regularized view measure the same; the optimal assignment of least summed
+      squared move moves 84 squares beyond a tenth and 91 beyond a hundredth (largest 0.986) and
+      turns 78, by up to 40.42 degrees. T-174 has 39 squares tilted beyond a degree, 18 turned one
+      way and 21 the other; this certificate 53, all one way.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side and T-293's
+      at 157 stood in, finds the L step and monotonicity consequences main finds: from 132 the step
+      lands at 155 at the side plus one, 12.976..., above 155's 12.952..., so the bound carries to
+      no other count.
+
+      The source's own verify_exact.py was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share this repository's
+      centre-basis reader written for #939's files (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method; neither shares code with the author's
+      checker. No human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the certificate (stage 4, a separate lane blind to this one): its
+      mathematics, a clean-room exact checker with sharp controls, the identity against T-174's
+      packing and the construction the source states, mapped as an adversarial review, whose
+      acceptance the verified lane and the house rule wait on. Then adopt it at 132 in place of
+      T-174 under the house rule, with both strong generators' regularization, measured against the
+      new witness, and the flip of the new house in the same change.
+  - id: T-293
+    kind: upper-bound
+    registered: '2026-11-11'
+    landed: '2026-11-11'
+    headline: >-
+      De Winter's pinwheel at 157 from Samanyu-dev's 109, the first below the grid's 13, by 6.70e-03
+    claim: >-
+      One complete rational certificate proves s(157) <=
+      129933026113432236413372793549657716631187442425245801744283606793974218710058937592366709087048731338017528033289023283642767554572063457698437749660264199173945900886886411321189343067195192146616036359183804176225069306100476941522988597256113139114360980862141007303341357995510774692842598946408083952550389/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      That side is 12.9933026113432237 rounded up at 16 places and 12.993302611344 at 12, as the
+      source's root README prints it.
+
+      It is 6.70e-03 below the 13 x 13 grid's 13, which the case holds in both lanes; it is the
+      first packing of 157 squares below the grid on record. Measured here it is a new arrangement,
+      not one to one with the grid's 157 squares under any symmetry of the box by nearest centres:
+      the optimal assignment moves 100 squares beyond a tenth and turns 61.
+
+      Both maintained exact routes accept the certificate. The stage 4 review, written in a separate
+      lane blind to this one, is pending; the case's lanes and the house rule wait on it, so the
+      case is not touched.
+
+      n157/README.md says all squares were optimized together with an interior-point solver (IPOPT)
+      and the contact equations of the result then solved to 250 digits: all 2024 contact equations
+      (a corner of one square on the edge line of another, or a corner on a wall) are satisfied to
+      1e-247 and all other gaps stay open, and the certificate's side is 1.4e-59 above that
+      solution.
+
+      It says non-negative contact forces in balance exist, the first-order condition for a local
+      minimum, checked in floating point; that 297 perturbation trials, each re-optimized, found no
+      smaller side; that local optimality has no formal proof; and that a search for a minimal
+      polynomial of the side up to degree 16 found none. Measured here, the certificate's own
+      uniform-contraction margin is 1.349e-59 (1 - lambda* = 1e-60), about the distance the README
+      states. It says verify_exact.py, Python's standard library only, is the folder's exact
+      checker. Those statements are the author's; no source program ran here.
+
+      The issue says verify_exact.py, the checker used for #946 without its polynomial test, checks
+      in rational arithmetic that every edge direction is a unit vector, every square lies in the
+      container and all pairs have disjoint interiors, and that a floating-point separating-axis
+      test on all pairs and a union-area test with Shapely, separate code outside the repository,
+      agree, and that the exact checker has not been run against this repository's checkers. None of
+      them ran here.
+
+      The README says the Kaggle competition 'Squares in Squares' has a per-puzzle leaderboard that
+      lists sides without packings, that the author has not seen its values at 157, and so an
+      unpublished packing with a smaller side may exist. A side with no packing is no report; the
+      record compares with what has been published.
+
+      Credit Joost de Winter, who reports a pinwheel, a central block of tilted squares with four
+      arms surrounded by four blocks of axis-aligned squares, derived from the public 109-square
+      packing of Samanyu-dev/squares_in_squares (best_fit_101_500.csv, side 10.949289581) in two
+      steps, each cutting the packing along one horizontal and one vertical line, moving the parts
+      about one unit apart, filling each gap with one layer of squares that continues the local
+      lattice and re-optimizing every square; the first step gives his packing of 132 (T-292).
+
+      The README says credit for the pinwheel arrangement at n = 109 belongs to Samanyu-dev, whose
+      README reports that packing as a result of its own stretch and quench chains; the packing at
+      157 is credited to de Winter after Samanyu-dev.
+
+      Measured here, 61 squares turn, by 24.0 to 27.5 degrees, all the same way, against the
+      README's 61 tilted at four distinct angles between 24.0 and 27.6 degrees and 96 axis-aligned.
+
+      The README says the derivation, optimization, high-precision solution, rational certificate,
+      checking and figure were produced with Claude Fable 5.2 (Anthropic) under the direction of
+      Joost de Winter, as the issue does; the folder's first commit said Claude (Anthropic), and the
+      head names the model.
+    scope:
+      n_values:
+      - 157
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A count whose best known packing was the trivial grid now has one below it, as T-057 at 211
+        and T-220 at 183 (both S3). 157 = 13^2 - 13 + 1: Kevin Fang's Theorem 1 (T-163) gives
+        s(k^2 - k + 1) < k for every k >= 15, T-220 gave it at k = 14, and this certificate gives
+        it at k = 13; 111 and 133 (k = 11 and 12) stay at their grids. S3 by the anchor 'a
+        substantive case result', as T-220's is; the margin, about 0.0067, carries to no other
+        count, and a cut-and-fill step continues a known pinwheel, so no technique is new and it is
+        not S4. No lower bound or optimum.
+      scored: '2026-11-11'
+      by: think-bcfs Joost de Winter import (intake lane L104), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s157 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    evidence:
+    - E-de-winter-s157-certificate-report
+    - E-de-winter-s157-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/README.md
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_witness.yaml
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_exact.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157-own.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l104_1111.py
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 157: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both routes,
+      73476 pair decisions; summed over the 3 jobs, the receipt records 78.42 route CPU seconds and
+      79.8 job wall seconds. In every positive squares touch the box, a least wall clearance of
+      exactly 0, and every pair clears by at least 9.99e-61. The replay is
+      E-de-winter-s157-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), as the module predicts them,
+      lowered the side by the least far-wall clearance (0), closed the least-gap pair (101 against
+      88) by its gap of 1e-60 and moved every square toward the nearer near wall by its least
+      clearance: both routes accepted each at exact contact and refused each 1e-30 past it. They
+      refused square 101 enlarged to its pair at contact for its shape alone, accepted square 109,
+      already touching its wall, grown by 0, refused it 1e-30 past for the wall and the overlap, and
+      refused a duplicated square.
+
+      At n = 157 the certificate is below the case's ceiling (the trivial grid, 13) by 6.70e-03;
+      smallest: this certificate. The ledger of 11 November for this lane
+      (campaign/issue-intake/upper-bounds-de-winter-132-157-20261111) walks #958 from starts frozen
+      on main on 11 November and records this claim as a new packing, the only report at 157.
+
+      #958 (20:56:18Z on 11 November) names the repository's head, which changes only the READMEs
+      and checksums of the commit that first published the folder, at 20:49:44Z, 6 minutes 34
+      seconds before the issue. Its push is not read (GitHub's activity log was not readable from
+      this session); the rule of 14 October would date the claim by it if it came first, but no
+      other report reached 132 or 157 in that window, so the ledger dates the claim by the issue
+      with the first commit kept, and the verdict is the same either way.
+
+      Measured against padding (RV-3, think-ruu2): the grid, contracted uniformly about the origin,
+      has margin 0, its squares touching (1 - lambda* = 0), so the whole gain of 6.697e-03 lies
+      outside any padding (measure/contraction-n157.json, which reads the house witness
+      witnesses/known-best/n-157.yaml). A packing below the grid is no re-certification of it, and
+      RV-3 does not reach it. This certificate's own margin, measured the same way, is 1.349e-59
+      (measure/contraction-n157-own.json).
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): no
+      symmetry of the box pairs it one to one with the grid's squares by nearest centres; the
+      optimal assignment of least summed squared move moves 100 squares beyond a tenth (largest
+      1.409) and turns 61.
+
+      The L-step scan (devtools.l_step_scan, retained in the de-winter-s132-upper-bound-2026-11-11
+      packet), with this side and T-292's at 132 stood in, finds the L step and monotonicity
+      consequences main finds but one: from 157 the step lands at 182 at the side plus one,
+      13.993..., above 182's 13.971..., and 184's L-extension of the grid at 157 lapses, its ceiling
+      the grid's 14 either way. So the bound carries to no other count.
+
+      The source's own verify_exact.py was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share this repository's
+      centre-basis reader written for #939's files (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method; neither shares code with the author's
+      checker. No human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the certificate (stage 4, a separate lane blind to this one): its
+      mathematics, a clean-room exact checker with sharp controls, the identity against the grid and
+      the construction the source states, mapped as an adversarial review, whose acceptance the
+      verified lane and the house rule wait on. Then adopt it at 157 in place of the grid under the
+      house rule, with both strong generators' regularization, measured against the new witness, and
+      the flip of the new house in the same change.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

@@ -5221,6 +5221,49 @@ sources:
       Claude assistance disclosed.
       No local or global optimality claim. Licensed MIT by
       LICENSE at the pin. Retained in web/de-winter-a0c4fc8-2026-11-10/.
+  - key: '[de Winter s132 upper bound 2026-11-11]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: independent
+    credit: de Winter after Samanyu-dev
+    note: >-
+      JoostdeWinter/square-packing at 6617869a3491b5872c6ecdff55db05cbee57d516
+      (2026-11-11T20:52:23Z), Joost de Winter's certificate for s(132) <= 11.976048383604 (rounded
+      up at 12 places, as the root README prints it), first committed at
+      a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c (2026-11-11T20:49:44Z), 6 minutes 34 seconds before
+      jlevy/squares#958, which requested its registration: a rational centre-basis witness without
+      this repository's schema envelope (n132/n132_witness.yaml) and the same packing as JSON
+      (n132/n132_exact.json), a pinwheel derived from Samanyu-dev/squares_in_squares's public
+      109-square packing (53551d7) by one cut-and-fill step, 1.3e-59 above a 250-digit solution of
+      its contact equations; local optimality has no formal proof. The source credits the pinwheel
+      at 109 to Samanyu-dev and says the work was produced with Claude Fable 5.2 (Anthropic) under
+      de Winter's direction. No global optimality claim. The lineage is independent of this project.
+      Licensed MIT by LICENSE at the pin. Retained in web/de-winter-s132-upper-bound-2026-11-11/.
+  - key: '[de Winter s157 upper bound 2026-11-11]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: independent
+    credit: de Winter after Samanyu-dev
+    note: >-
+      JoostdeWinter/square-packing at 6617869a3491b5872c6ecdff55db05cbee57d516
+      (2026-11-11T20:52:23Z), Joost de Winter's certificate for s(157) <= 12.993302611344 (rounded
+      up at 12 places, as the root README prints it), below the 13 x 13 grid's 13, first committed
+      at a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c (2026-11-11T20:49:44Z), 6 minutes 34 seconds
+      before jlevy/squares#958, which requested its registration: a rational centre-basis witness
+      without this repository's schema envelope (n157/n157_witness.yaml) and the same packing as
+      JSON (n157/n157_exact.json), a pinwheel derived from Samanyu-dev/squares_in_squares's public
+      109-square packing (53551d7) by two cut-and-fill steps through his 132, 1.4e-59 above a
+      250-digit solution of its contact equations; local optimality has no formal proof. The source
+      credits the pinwheel at 109 to Samanyu-dev and says the work was produced with Claude Fable
+      5.2 (Anthropic) under de Winter's direction. No global optimality claim. The lineage is
+      independent of this project. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s157-upper-bound-2026-11-11/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
