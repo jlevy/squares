@@ -5,7 +5,7 @@ title: "Import #960: Doğa Özden's s(237) <= 15.893805580573 (kenaznia-doga/s23
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l110
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T21:55:26.589Z
-updated_at: 2026-11-11T23:44:16.995Z
+updated_at: 2026-11-11T23:58:35.864Z
 started_at: 2026-11-11T22:28:48.841Z
 ---
 
@@ -36,3 +36,11 @@ Branch `claude/bold-ritchie-xo28us-l110`, cut from `origin/main` `b5b12c206`. Dr
 **Adopted and regularized.** 237 from T-190 to T-295; T-190 no house source (custody); PRINT_CREDIT_HELD gains 237; prior-state archive gains 237 only. Evan Daniel's same-side view drawn (33,68,68,75,19 -> 0,0,0,2,2; 331/721 -> 788/788), half-turn flip; KKT solve 3.44e-12 below the side held at row 3 (RV-3). SETTLED 237 removed. Rigidity 206 translate (21 before); gate totals n=1..324 2,695/6,587. Custody 73 houses, 240 inputs, 76 mutations refused. Not stamped (still 11 November).
 
 **Held / for the coordinator.** check_results contiguity red until T-292/T-293 (#961) and T-294 (issue 959, L107) merge; bead tree red on main's #954 entry naming think-f65n (closed). Atlas rebuild ran on 4 cores by default before PACK_JOBS=2 was set.
+
+2026-11-11 ~23:58Z, coordinator, after senior review L115 of #963 (head 402455e82). Owed before merge; to be applied in the rebase pass after #961 and #959 merge:
+B1: run stamp_landed --apply (landings.yaml n=237 still names T-190; test_stamp_landed and test_home_recent fail), then release_pin --update.
+B2: tests/test_render_colors.py:44 "n=1..324": (103, 237), and its docstring at :447-454 (103 at Özden's n = 237, T-295, since 11 Nov; 85 at Couzo's 267 before that).
+S1: adopt_houses.py ~2866-2868 credit phrase "Doğa Özden’s packing from two copies of a band of the tilted squares of Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it, below Nate Chaoweeraprasit’s SQUISH packing as Francisco Couzo and Mykhailo Polkovskyi refined it", then adopt_houses --refresh --n 237.
+S2: append to T-253 next_rung (results.yaml ~36439): "At 237 T-295, adopted on 11 November 2026, lies 8.80e-03 below this certificate, so if the entry stays recorded it is adopted at the other eight counts only." Fix the stale note at ~36393.
+N1: evidence.yaml ~60707, 60777, 60870 → "F6, F8, F9 and F11 for both, and F10 for the records". PR body → "F5, F7 and F12 are for the author; F6, F8, F9 and F11 for both".
+Contiguity clears once T-292..T-294 are on main.
