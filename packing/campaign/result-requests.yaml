@@ -31231,9 +31231,9 @@ issues:
       its 28.9080360986 at 809 rounding down a row that lies exactly half way; and the report
       order, the ledger dating all fifteen by the issue with d3a020e and 71da0d5 kept as first
       commits. It passes on the independent review, a Claude agent at the strong tier, blind to
-      the import lane, an AI review and not a human one: its clean-room checker over all
-      3,769,834 pairs by two methods, its 135 controls, and its confirmation of the
-      construction statements. It names E-de-winter-941-certificate-report,
+      the import lane until its findings were frozen, an AI review and not a human one: its
+      clean-room checker over all 3,769,834 pairs by two methods, its 135 controls, and its
+      confirmation of the construction statements. It names E-de-winter-941-certificate-report,
       E-de-winter-941-exact-feasibility and E-de-winter-941-review-exact-feasibility, and says
       that the fourteen rows are verified from the last two, which do not cover 809; those ids
       map to neither of this issue's results, which are rows of source-coverage.yaml, not
@@ -31342,6 +31342,13 @@ issues:
       reported:
       - result: above324-refined-16
       - result: above324-refined-addendum-6
+      outdated:
+      - >-
+        The rows credit "de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+        malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo"; since the
+        author's answer of 11 November (issuecomment-6806342752) both bibliography keys credit
+        penguin069 and kmmmvs after Couzo, two further merged sources the merge file's README
+        names
     close_when: >-
       The 22 rows are on main, verified, and the reply on main says what was retained, replayed
       and reviewed, and asks the review's questions; nothing the author asked for is queued.
@@ -31391,8 +31398,9 @@ issues:
       the grid; and the report order, the sixteen dated by the issue, 86 seconds after a9486ed,
       and the six by the addendum, 25 minutes after a0c4fc8, no other report reaching these
       counts in either window. It passes on the independent review, a Claude agent at the
-      strong tier, blind to the import lane, an AI review and not a human one: its clean-room
-      checker over all 7,323,304 pairs by two methods and its 198 controls. It names
+      strong tier, blind to the import lane until its findings were frozen, an AI review and not
+      a human one: its clean-room checker over all 7,323,304 pairs by two methods and its 198
+      controls. It names
       E-de-winter-942-certificate-report and E-de-winter-a0c4fc8-certificate-report as the two
       reports, E-de-winter-942-exact-feasibility and E-de-winter-a0c4fc8-exact-feasibility as
       the replays, and E-de-winter-942-review-exact-feasibility and
@@ -31403,18 +31411,19 @@ issues:
       no id, as #763's beyond-horizon rows are. It names no bead. It passes on the two packets,
       at a9486ed and a0c4fc8; on the licence, MIT, and that the licence of the starting
       packings, the public Kaggle notebooks and datasets and the merge file in
-      Samanyu-dev/squares_in_squares at 53551d7, is not given, so retaining the files grants no
-      licence and relicenses nothing; and on the credit, de Winter after Samanyu-dev, Deotte,
-      Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123,
-      jazivxt, Couzo, the merged file naming no author per packing, with the AI assistance as
-      stated. It says that the Changelog for 11 November lists the rows, 16 at 632 to 989 and 6
-      at 597 to 991. It asks the review's four questions: whether the six addendum counts were
-      below the 1e-6 threshold at first or found by a later run; under what licence the Kaggle
-      notebooks and datasets published the starting packings, and whether the merge file states
-      one; whether the individual authors of the 22 arrangements can be identified; and what "a
-      margin of about 5e-9 above the numerical optimum" measures. The questions are
-      informational and hold nothing open. It says that nothing the author asked for is queued,
-      so the issue is closed with it. The issue was closed as completed at 18:53:16Z.
+      Samanyu-dev/squares_in_squares at 53551d7, is not given, neither the issue nor the
+      repository stating one; retaining the files grants no licence and relicenses nothing; and
+      on the credit, de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+      malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, the merged file
+      naming no author per packing, with the AI assistance as stated. It says that the Changelog
+      for 11 November lists the rows, 16 at 632 to 989 and 6 at 597 to 991. It asks the review's
+      four questions: whether the six addendum counts were below the 1e-6 threshold at first or
+      found by a later run; under what licence the Kaggle notebooks and datasets published the
+      starting packings, and whether the merge file states one; whether the individual authors
+      of the 22 arrangements can be identified; and what "a margin of about 5e-9 above the
+      numerical optimum" measures. The questions are informational and hold nothing open. It
+      says that nothing the author asked for is queued, so the issue is closed with it. The issue
+      was closed as completed at 18:53:16Z.
 
       The author answered the four questions at 20:20:02Z on 11 November 2026
       (issuecomment-6806342752), after the issue was closed; recorded in intake lane L103
@@ -31532,6 +31541,7 @@ issues:
       - result: n179-band
         id: E-ozden-954-certificate-report
         status: reviewed
+      beads: [think-ruu2, think-ikku, think-tj4o, think-71uq, think-89i7]
     close_when: >-
       T-291 is on main at V3/C3 as the house at 179, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -31588,12 +31598,13 @@ issues:
       It says that T-291, scored S3, became the house at 179 on 11 November under the house
       rule in place of T-174, Nate Chaoweeraprasit's packing (itsnaka), improved by Siddharth
       Gupta and PingYou Ltd, which stays a verified bound at V3/C3 and keeps its certificate as
-      history; T-174 is named only as the house replaced, is not this issue's result and is not
-      recorded under reported. On the print it says that the exact side, a fraction of 159
-      digits over 158, is 13.8813671601098758 rounded up at 16 places; that the issue's
-      13.881367160110 is that side rounded up at 12 places, so it bounds s(179), and the stated
-      improvement, 2.428e-03 (relative 1.75e-04), is the exact gap to T-174 rounded; and that
-      the README's 13.881367160109875… is the side's 15-place floor, right before an ellipsis.
+      history; T-174 is named as the house replaced and as the record the packing improves, not
+      as this issue's result, and is not recorded under reported. On the print it says that the
+      exact side, a fraction of 159 digits over 158, is 13.8813671601098758 rounded up at 16
+      places; that the issue's 13.881367160110 is that side rounded up at 12 places, so it
+      bounds s(179), and the stated improvement, 2.428e-03 (relative 1.75e-04), is the exact gap
+      to T-174 rounded; and that the README's 13.881367160109875… is the side's 15-place floor,
+      right before an ellipsis.
       It says what was checked: bd262d8, the repository's one commit, retained in the packet
       ozden-s179-upper-bound-2026-11-11, the decimal pose included, with the SHA-256s stated;
       both maintained exact routes accepting the witness over every wall and all 15,931 pairs
@@ -31663,9 +31674,9 @@ issues:
 
       On #959 the final reply says that the author's comment of 21:18Z reports it at
       13.880960371559, 4.07e-4 below this side, from the same method on a later batch; that it
-      is being imported and reviewed as its own result, under its own bead (think-89i7), with a
-      register entry of its own, and is answered there; and that T-291 is not replaced in place:
-      the house at 179 moves only when #959's certificate has been replayed here, reviewed and
-      adopted under the house rule, and until then T-291 is the house. Either way this issue's
-      certificate stays a valid bound, verified at V3/C3. #959's result is not this issue's and
-      is not recorded under reported here.
+      is being imported and reviewed as its own result, under its own bead (think-89i7), and
+      will have a register entry of its own, and is answered there; and that T-291 is not
+      replaced in place: the house at 179 moves only when #959's certificate has been replayed
+      here, reviewed and adopted under the house rule, and until then T-291 is the house. Either
+      way this issue's certificate stays a valid bound, verified at V3/C3. #959's result is not
+      this issue's and is not recorded under reported here.

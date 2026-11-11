@@ -39,8 +39,8 @@ the issue dates the claims.
     (see [The Author’s Answers](#the-authors-answers)).
   - Following it to convergence gave these sides, “the arrangements of the squares are
     unchanged”. Each certificate carries a margin of about 5 × 10⁻⁹ above the numerical
-    optimum. The answer gives the margins as 5.0 × 10⁻⁹ to 6.4 × 10⁻⁹ at most counts
-    and up to 4.6 × 10⁻⁸ (805).
+    optimum. The answer gives the margins as 5.0 × 10⁻⁹ to 6.4 × 10⁻⁹ at most counts and
+    up to 4.6 × 10⁻⁸ (805).
   - The issue claims only the local re-optimization and cannot credit the sixteen
     arrangements individually.
 - **The checks.** `verify_cert.py`, byte-identical to `above324/verify_cert.py`, and a
@@ -200,7 +200,8 @@ below the best value he knew: the sixteen here.
 A later run took the next packings on that list.
 Six improved by more than 10⁻⁶ and form the addendum (the
 [a0c4fc8 packet](../de-winter-a0c4fc8-2026-11-10/README.md)); eighteen more improved by
-less and are not claimed. He says two of his sentences were inaccurate:
+less and are not claimed.
+He says two of his sentences were inaccurate:
 
 - “Sixteen still had one”, in the issue, was too narrow: at least forty of the 1000
   packings had a descent direction.
@@ -214,10 +215,11 @@ of the local optimization, written as for #941: every centre and the side multip
 f = 1 + 2 × 10⁻¹⁰ + 4v, where v is the largest constraint violation left in the
 floating-point packing, and the side rounded up at the 13th decimal (the
 [#941 packet](../de-winter-issue941-2026-11-10/README.md#the-authors-answers) has the
-whole account). For 18 of the 22 refined certificates v is below 2 × 10⁻¹² and the
-margin is 5.0 × 10⁻⁹ to 6.4 × 10⁻⁹. For the other four he estimated v from the
-clearances in the certificates, at 2.6 × 10⁻¹¹ to 3.5 × 10⁻¹⁰, since the floating-point
-packings are not in his repository:
+whole account).
+For 18 of the 22 refined certificates v is below 2 × 10⁻¹² and the margin
+is 5.0 × 10⁻⁹ to 6.4 × 10⁻⁹. For the other four he estimated v from the clearances in
+the certificates, at 2.6 × 10⁻¹¹ to 3.5 × 10⁻¹⁰, since the floating-point packings are
+not in his repository:
 
 | n | Packet | Margin, estimated |
 | ---: | --- | --- |
@@ -230,14 +232,15 @@ packings are not in his repository:
 
 **Licence.** The merge file states none, and `Samanyu-dev/squares_in_squares` has no
 licence file at `53551d7`. Its README calls its own code “MIT-style” and says that
-third-party notebooks and datasets “are used under their own licences”. Public Kaggle
-notebooks are released under Apache 2.0 by default, and each Kaggle dataset carries the
-licence its uploader chose. He has not traced the 22 packings to a notebook or dataset,
-so he cannot name a licence per packing.
+third-party notebooks and datasets “are used under their own licences”.
+Public Kaggle notebooks are released under Apache 2.0 by default, and each Kaggle
+dataset carries the licence its uploader chose.
+He has not traced the 22 packings to a notebook or dataset, so he cannot name a licence
+per packing.
 
 **Individual authors.** Neither the merge file nor that repository’s tables give a
-source per puzzle. Matching coordinates against the output of each public notebook and dataset
-could identify the authors; he has not done this.
+source per puzzle. Matching coordinates against the output of each public notebook and
+dataset could identify the authors; he has not done this.
 The README introduces its ten names with “among them”, its score history names two
 further merged sources, penguin069 and kmmmvs, and it reports the owner’s own results in
 the file (18 wins from its own AWS runs at n = 650 to 990), so some of the 22 starting
@@ -248,11 +251,11 @@ He says the answers were prepared with Claude (Anthropic), like the certificates
 this session, so what the answers say of it is the author’s.
 
 **The `501cb8d` edition.** His commit `501cb8daae75da118d00f8b274266058b222ee88`
-(2026-11-11T19:41:30Z) rewrites the folder README’s paragraph on the descent runs and its
-margin sentence to the same account: a first run gave sixteen values more than 10⁻⁷
-below the best public competition value, a second run on the next packings six more
-with a gain above 10⁻⁶, and eighteen further packings improved by less than 10⁻⁶ and are
-not listed. It changes `above324/README.md` and `above324_refined/README.md` and nothing
+(2026-11-11T19:41:30Z) rewrites the folder README’s paragraph on the descent runs and
+its margin sentence to the same account: a first run gave sixteen values more than 10⁻⁷
+below the best public competition value, a second run on the next packings six more with
+a gain above 10⁻⁶, and eighteen further packings improved by less than 10⁻⁶ and are not
+listed. It changes `above324/README.md` and `above324_refined/README.md` and nothing
 else, and `SHA256SUMS` covers neither, so the sixteen certificates here are unchanged.
 This packet keeps the folder at `a9486ed` and does not retain that edition.
 
@@ -272,8 +275,8 @@ Credit Joost de Winter (Delft University of Technology) for the local re-optimiz
 after the public Kaggle packings of the merged file, whose README credits Chris Deotte,
 Vladislav Lavrentev (lightningv08), Alex Chilton (alexchilton), Kirill Tymchishin
 (kirilltym), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt and Francisco
-Couzo’s register “among them”, and after penguin069 and kmmmvs, two further merged
-sources its score history names, as the author’s answer says.
+Couzo’s register, a list it introduces with “among them”, and after penguin069 and
+kmmmvs, two further merged sources its score history names, as the author’s answer says.
 The starting packings’ authors are not identified per puzzle, so some may be
 Samanyu-dev’s own. The work was AI-assisted (Claude).
 

@@ -5219,10 +5219,10 @@ sources:
       above324_refined/, at 597, 754, 864, 865, 869 and 991, reported by his addendum comment on
       jlevy/squares#942 (issuecomment-6772308414, 16:02:47Z), from the same procedure and merged
       Kaggle file as the issue's sixteen, with the arrangements unchanged; credited as
-      [de Winter issue 942 2026-11-10] is, after penguin069 and kmmmvs as well, the starting
-      packings' authors not identified per puzzle, so some may be Samanyu-dev's own; no licence
-      is stated for those starting packings, public Kaggle notebooks defaulting to Apache 2.0,
-      and none was traced per packing. The author's answer of 11 November
+      [de Winter issue 942 2026-11-10] is, penguin069 and kmmmvs included; the starting
+      packings' authors are not identified per puzzle, so some may be Samanyu-dev's own; no
+      licence is stated for those starting packings, public Kaggle notebooks defaulting to
+      Apache 2.0, and none was traced per packing. The author's answer of 11 November
       (jlevy/squares#942, issuecomment-6806342752) says the six came from a later run than the
       issue's sixteen.
       Beyond-horizon rows below the record's rows at those counts. These are bounds below the
