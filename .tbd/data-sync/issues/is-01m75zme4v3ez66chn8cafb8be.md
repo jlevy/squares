@@ -3,9 +3,9 @@ type: is
 id: is-01m75zme4v3ez66chn8cafb8be
 title: "Import #954: Doğa Özden's s(179) <= 13.881367160110 (kenaznia-doga/s179-upper-bound @ bd262d8b), 2.428e-3 below T-174"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l100
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T18:58:55.771Z
-updated_at: 2026-11-11T21:59:06.062Z
+updated_at: 2026-11-11T22:42:04.942Z
 started_at: 2026-11-11T18:58:59.914Z
+closed_at: 2026-11-11T22:42:04.942Z
+close_reason: "Done: #956 merged (b5b12c206), T-291 house at 179; final reply on 954 (issuecomment-6808834300, 22:41:37Z), issue closed 22:41:42Z; recorded in #955. #959 continues under think-89i7."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
