@@ -10,8 +10,9 @@ digest lists against the retained files, each print against its exact side, the 
 certificate is compared with, the ledger's verdicts, the retained sharp controls, the
 contraction measurements the ledger's notes cite, and the rows: each count's current row
 is this import's, at the side its source prints, and the row it beat is marked
-superseded. Every test reads the packets, the ledger and the record only; none needs the
-network.
+superseded, but at 809, a deletion bound #941 claims, which is held for the owner
+(think-kzme); and the stage 4 review of 11 November is mapped, so the rows are verified.
+Every test reads the packets, the ledger and the record only; none needs the network.
 """
 
 from __future__ import annotations
@@ -27,7 +28,9 @@ import pytest
 import yaml
 
 from devtools import check_source_coverage as coverage
+from devtools import evand_arrangement_reports as kernel
 from devtools import upper_bound_reports as reports
+from devtools import upper_bound_sharp_controls as sharp
 
 P941 = "de-winter-issue941-2026-11-10"
 P942 = "de-winter-issue942-2026-11-10"
@@ -131,6 +134,12 @@ SUPERSEDED = {
 #: Counts whose row is an L-border recipe on a parent certificate: the base count whose
 #: margin the row carries.
 RECIPE_BASES = {910: 851, 632: 583, 744: 691, 970: 850}
+#: 809 is the 810 certificate less its last square, a deletion bound #941 claims: held
+#: without a row for the owner's think-kzme, as 743, 798, 855 and 985 are.
+HELD = frozenset({809})
+REVIEW = "docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md"
+REVIEW_CHECK = "V-de-winter-941-942-review-check"
+EVIDENCE = {P941: "941", P942: "942", PA0C: "a0c4fc8"}
 ALL = [(packet, n) for packet in PACKETS for n in PRINTED[packet]]
 
 
@@ -180,7 +189,8 @@ def test_the_retained_certificates_are_the_ones_the_source_digest_list_names(
 @pytest.mark.parametrize("packet", PACKETS)
 def test_each_print_is_its_exact_side_rounded_up_at_ten_places(packet: str) -> None:
     declaration = reports.load_declaration(reports.packet_path(packet))
-    assert declaration["requested"] == declaration["replayed"] == list(PRINTED[packet])
+    assert declaration["replayed"] == list(PRINTED[packet])
+    assert declaration["requested"] == [n for n in PRINTED[packet] if n not in HELD]
     assert declaration["houses"] == []
     facts = reports.read_facts(reports.packet_path(packet))
     for row in declaration["certificates"]:
@@ -220,6 +230,24 @@ def test_the_ledger_records_every_claim_in_report_order() -> None:
         for step in count["steps"]
     }
     assert verdicts == {(n, REPORT[packet]): "recorded" for packet, n in ALL}
+    kinds = {
+        count["n"]: step["packing"]["kind"]
+        for count in ledger["counts"]
+        for step in count["steps"]
+        if "packing" in step
+    }
+    assert kinds[494] == "refinement"
+    assert sum(kind == "refinement" for kind in kinds.values()) == 1
+
+
+@pytest.mark.parametrize(("packet", "n"), ALL)
+def test_the_retained_sharp_controls_meet_contact_and_refuse_1e30_past_it(
+    packet: str, n: int
+) -> None:
+    record = _json(reports.packet_path(packet) / f"receipts/sharp-controls-n{n}.json")
+    assert (record["n"], record["packet"], record["all_as_expected"]) == (n, packet, True)
+    assert record["epsilon"] == str(kernel.SHARP_EPSILON)
+    assert {row["control"] for row in record["controls"]} == set(sharp.CONTROLS)
 
 
 @pytest.mark.parametrize(("packet", "n"), [(p, n) for p, n in ALL if n != 655])
@@ -248,9 +276,18 @@ def test_the_rows() -> None:
     document = yaml.safe_load(coverage.COVERAGE.read_text("utf-8"))
     current = coverage.current_beyond_horizon(document)
     for packet, n in ALL:
+        if n in HELD:
+            assert current[n]["source_id"] == SUPERSEDED[n]
+            assert not [
+                row
+                for row in document["beyond_horizon_claims"]
+                if row["n"] == n and row["source_id"] == packet
+            ]
+            assert n not in coverage.load_claims(reports.packet_path(packet) / reports.BEYOND)
+            continue
         assert current[n]["source_id"] == packet
         assert current[n]["value"] == PRINTED[packet][n]
-        assert current[n]["assurance"] == "reported"
+        assert current[n]["assurance"] == "verified"
         if n not in SUPERSEDED:
             continue
         (old,) = [
@@ -259,3 +296,47 @@ def test_the_rows() -> None:
             if row["n"] == n and row["source_id"] == SUPERSEDED[n]
         ]
         assert (old["disposition"], old["superseded_by"]) == ("superseded", packet)
+
+
+@pytest.mark.parametrize("packet", PACKETS)
+def test_the_stage_4_review_is_mapped(packet: str) -> None:
+    """The L96 review's clean-room run and this lane's replay cite the rows, and the review
+    is the report evidence's external review."""
+    key = EVIDENCE[packet]
+    evidence = {
+        entry["id"]: entry
+        for entry in yaml.safe_load(
+            (reports.ROOT / "frontier/evidence.yaml").read_text("utf-8")
+        )["evidence"]
+    }
+    report = evidence[f"E-de-winter-{key}-certificate-report"]
+    assert report["assurance"] == "reported"
+    assert REVIEW in report["external_review"]["note"]
+    rows = [n for n in PRINTED[packet] if n not in HELD]
+    replay = evidence[f"E-de-winter-{key}-exact-feasibility"]
+    review = evidence[f"E-de-winter-{key}-review-exact-feasibility"]
+    for entry in (replay, review):
+        assert entry["assurance"] == "verified"
+        assert entry["scope"]["n_values"] == rows
+        assert entry["independence"]["coverage"]["checked"] == len(rows)
+    assert review["verifiers"] == [REVIEW_CHECK]
+    assert review["independence"]["clean_room"] is True
+    assert review["independence"]["overlaps_producer"]["extent"] == "system-family"
+    verifiers = {
+        entry["id"]
+        for entry in yaml.safe_load(
+            (reports.ROOT / "frontier/verifiers.yaml").read_text("utf-8")
+        )["verifiers"]
+    }
+    assert REVIEW_CHECK in verifiers
+    source = next(
+        item
+        for item in yaml.safe_load(coverage.COVERAGE.read_text("utf-8"))["sources"]
+        if item["id"] == packet
+    )
+    assert source["evidence"] == [
+        report["id"],
+        replay["id"],
+        review["id"],
+    ]
+    assert (reports.REPO / REVIEW).is_file()

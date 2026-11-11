@@ -89,10 +89,15 @@ Every positive passed and every control was refused on both routes, and `check` 
 all 18 jobs. The two routes agree on every least clearance: every wall clears by 1.0 ×
 10⁻¹⁰ to 1.3 × 10⁻¹⁰ and every pair by 2.0 × 10⁻¹⁰ to 2.8 × 10⁻¹⁰.
 
-**Sharp controls.** `devtools.upper_bound_reports sharp-controls` takes each certificate
-to exact contact and 10⁻³⁰ past it on both routes, 11 controls a count, as stated in
-advance on think-cen3. They were still running when this record was first written; their
-receipts, `receipts/sharp-controls-nNNN.json`, follow on this branch.
+**Sharp controls.** `devtools.upper_bound_reports sharp-controls` took each certificate
+to exact contact and 10⁻³⁰ past it on both routes, 11 controls a count as stated in
+advance on think-cen3 ([receipts/](receipts/), `sharp-controls-nNNN.json`: 66 controls
+at 6 counts, 6,854 CPU seconds), and every control behaved as the module predicts.
+The side lowered to the extent, the tightest pair closed and every square moved to its
+near wall were accepted at contact with margin exactly 0 and refused 10⁻³⁰ past it.
+The square enlarged to its pair and the one enlarged to its wall were refused at contact
+for their shape alone and past it for the overlap or the wall as well, and the
+duplicated square was refused.
 
 The two routes share a reader and the separating-axis method, as the
 [#941 packet](../de-winter-issue941-2026-11-10/README.md#exact-replay) says, and the
