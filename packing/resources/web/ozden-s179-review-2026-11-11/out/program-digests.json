@@ -1,0 +1,193 @@
+{
+ "program": "l101_digests.py",
+ "checks": [
+  {
+   "what": "checker frozen",
+   "file": "programs/l101_reader.py",
+   "ok": true
+  },
+  {
+   "what": "checker frozen",
+   "file": "programs/l101_sat.py",
+   "ok": true
+  },
+  {
+   "what": "checker frozen",
+   "file": "programs/l101_clip.py",
+   "ok": true
+  },
+  {
+   "what": "checker frozen",
+   "file": "programs/l101_check.py",
+   "ok": true
+  },
+  {
+   "what": "checker frozen",
+   "file": "programs/l101_geom.py",
+   "ok": true
+  },
+  {
+   "what": "checker frozen",
+   "file": "programs/l101_selftest.py",
+   "ok": true
+  },
+  {
+   "what": "plan stated",
+   "file": "programs/controls-plan.json",
+   "ok": true
+  },
+  {
+   "what": "plan stated",
+   "file": "out/plan-facts-n179.json",
+   "ok": true
+  },
+  {
+   "what": "plan stated",
+   "file": "out/check-n179.json",
+   "ok": true
+  },
+  {
+   "what": "plan stated",
+   "file": "programs/l101_plan_facts.py",
+   "ok": true
+  },
+  {
+   "what": "plan stated",
+   "file": "programs/l101_make_plan.py",
+   "ok": true
+  },
+  {
+   "what": "findings frozen",
+   "file": "frozen/review-2026-11-11-ozden-954.frozen.md",
+   "ok": true
+  },
+  {
+   "what": "list at the freeze",
+   "file": "frozen/checker-frozen-digests.txt",
+   "ok": true
+  },
+  {
+   "what": "list at the freeze",
+   "file": "frozen/controls-plan-digest.txt",
+   "ok": true
+  },
+  {
+   "what": "findings frozen",
+   "file": "out/selftest.json",
+   "ok": true
+  },
+  {
+   "what": "findings frozen",
+   "file": "out/check-n179.json",
+   "ok": true
+  },
+  {
+   "what": "findings frozen",
+   "file": "out/plan-facts-n179.json",
+   "ok": true
+  },
+  {
+   "what": "findings frozen",
+   "file": "out/controls-n179.json",
+   "ok": true
+  },
+  {
+   "what": "findings frozen",
+   "file": "programs/controls-plan.json",
+   "ok": true
+  },
+  {
+   "what": "findings frozen",
+   "file": "programs/l101_controls.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/check-n179.json",
+   "file": "programs/l101_reader.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/check-n179.json",
+   "file": "programs/l101_sat.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/check-n179.json",
+   "file": "programs/l101_clip.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/check-n179.json",
+   "file": "programs/l101_check.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/controls-n179.json",
+   "file": "programs/l101_reader.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/controls-n179.json",
+   "file": "programs/l101_sat.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/controls-n179.json",
+   "file": "programs/l101_clip.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/controls-n179.json",
+   "file": "programs/l101_check.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/controls-n179.json",
+   "file": "programs/l101_geom.py",
+   "ok": true
+  },
+  {
+   "what": "recorded by out/controls-n179.json",
+   "file": "programs/l101_controls.py",
+   "ok": true
+  }
+ ],
+ "problems": [],
+ "files": {
+  "README.md": "0f523c90ef0611d19fe58ad853ce5a40309ca7cd1ab9a5c4c2b94ca2c7e3ee06",
+  "frozen/checker-frozen-digests.txt": "66d0fc29ac1094161630f95ba0d18ef57d11fbb6ec212b242600426e3bc8403a",
+  "frozen/controls-plan-digest.txt": "f01402f283bfa12976401369b581cc11f3c914248e9e0bb345d314c4cbba6b34",
+  "frozen/findings-frozen-digest.txt": "6b8af583716dac259d96e3a794c44c8c050bc1a98406a42b1f2f9cf818741c43",
+  "frozen/review-2026-11-11-ozden-954.frozen.md": "070eb8654bd031b72023b88862f0b740ae1498a75a9d1da58696b37a9287cec5",
+  "out/band-n179.json": "fe209600a87e4fa02f428d955a2804c46c5e65fe22c2023facae541aeedf72c3",
+  "out/check-n179.json": "69ab86f57eadec3a9c2215be7e5a657d0f27f3e90a0a86812cb5f33235928a06",
+  "out/controls-n179.json": "515a391024fb3aab68761fe7a2f5a12bc555a64f22c7f89eba856d30c16508ad",
+  "out/custody.json": "349ad9a6f4d3caed42197624d809c9f5651df861861d70a48b97b40bb23ac74f",
+  "out/house-n179.json": "569d52318f6210ae74b2ee9cf437e10fd227fca7ab3b9e6c766c7209890acf6a",
+  "out/identity-n179.json": "aec4576df9d0512600bbfdfa43c491fde87ba600087d3bd0e64b4639bf44298d",
+  "out/plan-facts-n179.json": "c442b30f04839ff8c23fc6b4eb50547692c307244a05853bcaf1c093b57eea2f",
+  "out/pose-n179.json": "bee13ff51c3524062c02106fe845693fd060ed8f8370c0fe611b87633fd2c347",
+  "out/selftest.json": "510d94684e35bcc0d129e51bee297cd9b10972431cc51487b6e45a22ca1efe81",
+  "out/sides.json": "b61bec08f8cdcd7d4e97c9708457dc5c1d85628e13455956b95c82fdd7b618b4",
+  "programs/controls-plan.json": "152681a326372a68f960c4ee0fe4b78c45e40168ddf2d6d62a4652fb3f61e6b9",
+  "programs/issue-954.json": "3e2f501454755955091482bddd9730e72277503eb86f5af9cf90adefb813cfa2",
+  "programs/l101_band.py": "8e3e7d47cd68038f63ab1e238e481221a59fb494b0b2df5b7b435b83c59d89c5",
+  "programs/l101_check.py": "96b96450424033e0553fd4977e9980277eee3a136c36eaca5a82854296ab1c05",
+  "programs/l101_clip.py": "6b26a64beb2602d576478dc8bbc30294f75be4440d85816bba8b316480601443",
+  "programs/l101_controls.py": "ac974072d159ae1f17a68b6848dee6e7cda953a761d060380ef9b48733237731",
+  "programs/l101_custody.py": "ce8ca0e9f8cdd2218b1d1dd71029e70f918cb013892eaa1bfdc1baa3f73a9f86",
+  "programs/l101_digests.py": "a92456cd75f85cecf63c40f4cab8fda24264017c44560a52c6fc47383582ace7",
+  "programs/l101_geom.py": "8e7a1aa60619f61ef888b80fd22e90276913b7dd830fc729e0c412de19483f7e",
+  "programs/l101_house.py": "f3d24150a352af8b008a1112ba08ffea7b91f91f222a16cd68bafc3bef5e5101",
+  "programs/l101_identity.py": "9ba1b68793656198925e3d362bf089bb5a79446e161e9b0b928d2f8f1d6889fe",
+  "programs/l101_make_plan.py": "5a8322425012f6cf848a6d3bcfbe8d568e010b47203c5f152f7846151eeb6f38",
+  "programs/l101_plan_facts.py": "907e6da03932da2acdc0ae8074ebd21eacbd80fba2766060226bb119c57e1963",
+  "programs/l101_pose.py": "64c11705b4307aa725c3963e56695e873f3d08ba9119c951da8e8529f36f18b4",
+  "programs/l101_reader.py": "f64189ac7887bdca971b585e5d89495a30743a21aa020294d1a2152512c11a8e",
+  "programs/l101_sat.py": "526397aa511d342cbb3770ee6c22957fa037b8959ac1346029cc1f6886464678",
+  "programs/l101_selftest.py": "0d4bdbc2eb2a3878f6961812ffa57d51af82560d69be30d6a0e2ec97bffa84c2",
+  "programs/l101_sides.py": "cf0cc9bf7f06c0ee2848793b7aa11bcc6c5d2eaa5c832e6759cf6c8e84382ae4",
+  "programs/run_frozen.sh": "9974cb1530c60c5a0dceacd8302a364bd7172d3c5947063e50bff45d067b4db4"
+ },
+ "verdict": "ALL_RECEIPTS_MATCH"
+}

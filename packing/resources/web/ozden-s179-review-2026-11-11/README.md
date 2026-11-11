@@ -39,6 +39,22 @@ and was run with CPython 3.14.7 as `python -I -B` from `packing/` of a checkout 
 
 `run_frozen.sh SOURCE_DIR OUT_DIR` reruns the self-test, the check and the controls.
 
+Written and run after the findings were frozen, none of them a decider of the
+certificate:
+
+| Program | What it measures | Reads | Writes |
+| --- | --- | --- | --- |
+| `l101_sides.py` | the claim’s arithmetic: the side’s prints, the house side, the gain, the context values | the certificate, `programs/issue-954.json` (the issue as fetched), the case records at 179, 70 and 207, the house witness, the author’s two printed outputs | `out/sides.json` |
+| `l101_house.py` | decides the house witness at 179 with the frozen `l101_check.decide` | `packing/witnesses/known-best/n-179.yaml` | `out/house-n179.json` |
+| `l101_pose.py` | the certificate against its decimal pose at 60 digits | the pose, the certificate, the check receipt | `out/pose-n179.json` |
+| `l101_identity.py` | the certificate against the house, pose by pose, under eight symmetries and five anchorings | the certificate, the house witness | `out/identity-n179.json` |
+| `l101_band.py` | the tilted bands at 179, 70 and 207, and the stated seed against the new band | the certificate, the house, the 70 and 207 witnesses | `out/band-n179.json` |
+| `l101_custody.py` | read-only Git plumbing on the clone and this repository | the clone, this repository | `out/custody.json` |
+| `l101_digests.py` | every program and receipt against the kept bytes and the frozen digests | this directory | `out/program-digests.json` |
+
+`run_after.sh SOURCE_DIR REPO_DIR OUT_DIR` reruns them.
+`l101_digests.py` printed `ALL_RECEIPTS_MATCH`.
+
 ## What They Printed
 
 - `l101_selftest.py`: `PASSED 987 cases, 0 failed`.
