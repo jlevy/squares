@@ -249,8 +249,9 @@ def test_the_review_decides_each_file_on_both_methods(name: str) -> None:
 
 #: The counts a later pass moved on from T-267 to T-273, with the result and the day: the
 #: adoption of 9 November 2026 took 268 and 303 to Doğa Özden's further arrangements of
-#: T-270's and T-272's packings (T-276, T-278), and those two stay as history.
-MOVED_LATER = {268: ("T-276", "2026-11-09"), 303: ("T-278", "2026-11-09")}
+#: T-270's and T-272's packings (T-276, T-278), and those two stay as history. The adoption
+#: of 11 November 2026 took 268 on to his issue-945 certificate (T-289), a new arrangement.
+MOVED_LATER = {268: ("T-289", "2026-11-11"), 303: ("T-278", "2026-11-09")}
 
 
 def test_the_cases_adopted_t267_to_t273() -> None:
