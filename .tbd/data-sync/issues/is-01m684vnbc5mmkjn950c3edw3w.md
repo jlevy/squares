@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 220
+version: 221
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -85,7 +85,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T21:51:45.413Z
+updated_at: 2026-11-11T21:52:12.831Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -331,3 +331,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 20:52Z renewal (intake205): de Winter answered the review's questions on #941 (-6806337206) and #942 (-6806342752), and pushed n132/n157 with no issue (a491dad 20:49:44Z; head 6617869). 132 claims a gain of 0.0096; 157 goes below the 13x13 grid. New beads: think-bcfs (import, L104; blind review L105) and think-acm0 (record the answers on #955, L103). GitHub Actions has been queuing runs since about 19:37Z (#957's scope job and L100's runs not started).
 
 2026-11-11 ~21:40Z: L100 handed back #956 (T-291 s(179), adopted at 179, L101 review mapped; head 23473980a; CI queued since 20:28Z and never started). L100's request that the coordinator cancel and re-run the runs was refused: the classifier had already refused L100, so not done. Senior review L106 running. L103 extended #955 (ae88e4262) with de Winter's answers; think-acm0 closed. #958 = de Winter's issue for 132/157, passed to L104/L105. intake label added to #954 and #958.
+
+2026-11-11 ~22:05Z: senior review L106 of #956: nothing blocking. S1: the author's 21:18Z comment on 954 points to #959 (s(179) <= 13.880960371559, 4.07e-4 below T-291). Decision: adopt T-291 now; #959 gets its own lane as T-294 (bead think-89i7; blind review L108 started; import after #956 merges). S2: credit sentence. S3: opened think-71uq (owner decision: notices for upstream starts; think-mdxq closed 4 Nov). L100 is addressing S1-S3, N1-N3 and stamp_landed. L104 handed back #961 (T-292 s(132), T-293 s(157), CI pending; waits for L105). Freed about 7.5 GB (stale scratch clone/work; worktrees l93 and l102).
