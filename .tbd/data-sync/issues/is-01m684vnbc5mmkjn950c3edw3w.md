@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 205
+version: 206
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -81,7 +81,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T13:07:49.972Z
+updated_at: 2026-11-11T13:55:16.587Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -305,3 +305,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 12:53Z renewal (intake197): no change from intake196. L90 (de Winter) and L95 (#953 fixes, awaiting CI) running.
 
 2026-11-11 ~13:30Z: L95 addressed all of L94's findings on #953 (head 091956368, CI green: 31 success, 28 skipped). #953 stays draft with blocked:owner-decision until the owner decides #908 and whether T-142/T-143 cite one review or both.
+
+2026-11-11 13:53Z renewal (intake198): no change. L90 pushed its import (069ca8c43 retain+replay, c7d7079cc 37 beyond-horizon rows, re-pin, main merged at 2fb1156eb); hand-back pending.
