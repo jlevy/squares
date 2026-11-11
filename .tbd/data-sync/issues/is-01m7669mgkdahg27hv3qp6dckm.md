@@ -5,7 +5,7 @@ title: Import de Winter's s(132) <= 11.976048383604 and s(157) <= 12.99330261134
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l104
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T20:55:21.870Z
-updated_at: 2026-11-11T21:45:48.245Z
+updated_at: 2026-11-11T21:46:29.400Z
 started_at: 2026-11-11T20:55:27.152Z
 ---
 
@@ -38,3 +38,5 @@ PR: https://github.com/jlevy/squares/pull/961 (draft), head 5315ad8e5. T-291 is 
 Next: merge L105's blind stage 4 review, map it (reviews on T-292/T-293, external_review on four atoms, verifier), then adopt 132 and 157 under the house rule with both strong generators and the flip; remove the two certificate-citation deferrals.
 
 Open for coordinator: Samanyu-dev's 109 (10.949289581 < record 10.9497474683) is a candidate import; intake label on #958 and PR significance label not applied.
+
+2026-11-11 ~21:50Z coordinator: #958 names Samanyu-dev/squares_in_squares 53551d7 best_fit_101_500.csv, a 109-square packing at side 10.949289581, below the record's 10.94974746830583. Neither #958 nor any other report claims it, and the repo is not watched. By the precedent for Kaggle files named in issues ('no report brought here'), it is context, not an import. Record it as context in #958's notes and the reply; whether to watch the repo goes on the owner list as a low-priority question.
