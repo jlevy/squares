@@ -475,6 +475,7 @@ def test_explicit_unknown_owners_keep_unknown_costs_and_recorded_weights_take_pr
         1,
         1,
         3,
+        3,
     ]
     assert suite_files.shard_totals(unknown) == [0, 0, 0, 0]
     assert sum(row[1] for row in suite_files.unrecorded_by_shard(unknown, names)) == len(names)
