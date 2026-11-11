@@ -5,7 +5,7 @@ title: "Import #954: Doğa Özden's s(179) <= 13.881367160110 (kenaznia-doga/s17
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l100
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T18:58:55.771Z
-updated_at: 2026-11-11T20:29:32.073Z
+updated_at: 2026-11-11T21:59:06.062Z
 started_at: 2026-11-11T18:58:59.914Z
 ---
 
@@ -47,3 +47,8 @@ Branch `claude/bold-ritchie-xo28us-l100`, cut from `origin/main` `c8448724e`. Dr
 **Adopted and regularized (0d7004eff).** 179 from T-174 to T-291; PRINT_CREDIT_HELD gains 179; landing stamped; same-day prior-state archive gains 179 only (L81's four byte-equal). Runs in packing/cases/regularized_drawings/think-f65n-2026-11-11/: Evan Daniel's same-side view drawn (7,20,5,19,19 -> 0,0,0,5,5; 475/505 -> 550/550), KKT solve 2.78e-12 below the side held at row 3 (RV-3). SETTLED 179 removed. Rigidity 74 translate (7 before); gate totals 736/2,328 and 2,493/6,402. Custody 73 houses, 240 inputs. URL registry re-derived from main's. Tests: house-adoption and atlas pins updated.
 
 **Head.** 23473980a (re-pin to 0d7004ef). Records tier 55/55; tests 234 + 875 passed after the adoption. Second release record (review and adoption): three papers byte-identical vs c8448724e, explainer register count only. PR #956 body updated (draft, labels intake, S3). Hosted CI on 2fb0df26c green (31 checks); on 23473980a running at the time of this note.
+
+
+## Lane L100, senior review of #956 (11 November 2026, ~22:00Z)
+
+Nothing blocking. 339b59ca9: S1 (author's 21:18:29Z comment, issuecomment-6807260149, reports #959 s(179) <= 13.880960371559 and asks it replace T-291; decision: T-291 stays and is adopted, #959 gets its own import and T-294; requests read_through 21:18:29Z, note appended, intake label added 21:31Z; no #959 entry here); S2 (179 credit phrase names "Ryan Xu's n = 70 packing as Evan Daniel and PingYou Ltd improved it"; adopt_houses --refresh --n 179); S3 (think-71uq replaces think-mdxq for 954/T-291 in the entry, requests notes and packet README); N1-N3. f80bd9b69 re-pins (no stamp_landed: still 11 November, landed 2026-11-11). Records tier 55/55; lane test, test_house_adoption, test_check_requests: 227 passed. Runs on 23473980a stayed queued with no jobs (cancel refused by the permission classifier; not retried).
