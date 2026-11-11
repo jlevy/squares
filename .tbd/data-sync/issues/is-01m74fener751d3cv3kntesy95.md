@@ -5,7 +5,7 @@ title: "Import #943, #944, #945, #947: Doğa Özden's s(156), s(180), s(268), s(
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l81
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:54.996Z
-updated_at: 2026-11-11T06:09:12.536Z
+updated_at: 2026-11-11T08:38:56.174Z
 started_at: 2026-11-11T04:57:02.266Z
 ---
 #943 s(156) <= 12.977053087498, #944 s(180) <= 13.915618502791, #945 s(268) <= 16.872029849085 (below T-276, his own #928), #947 s(269) <= 16.900994579952; opened 2026-11-10T15:28Z (three) and 2026-11-11T03:35Z. Precedent: #927-#931 (PR #932), #935/#936 (PR #937). Also: #847 comment 6776987457 (mohsensbu-jpg, 2026-11-10T19:22Z, record-count update); watched repos evand/square-packing (10 commits to c801ab47) and TheSnakeFang/squarepack-certs (2 commits to be93eb16): read, import if any new result, else intake-watch reads.
@@ -75,3 +75,30 @@ trapezoids, Bui's Conjecture 1); bead think-0fa1 opened, read recorded with that
 **PR.** Draft PR #949 (labels intake, S3), head 740fa72c5. Commits: 410daa6b6 intake; e83316e75 records; 8842f5a5f re-pin; b14674adc suite shard 3 for the new test (hosted suite-a on 8842f5a5f had shard 4 at 22/211 unrecorded); ace7d497b exact wording of the 268 family note; 740fa72c5 re-pin. Hosted CI on 8842f5a5f: everything green but suite-a (the shard share), fixed in b14674adc. Local: records tier 55/55, 480 tests passed (L81 test, importer test, test_house_adoption), test_suite_files 69 passed. CPU about 0.8 CPU-hours.
 
 **Review hook.** The blind stage 4 review should read the four packets at the PR head, decide each certificate with a clean-room checker and sharp controls, measure the identity against each house and the lineage the issues state, and confirm or change the S3 drafts; its bead should replace think-xq4o as blocked_on in certificate-citation-deferrals.yaml. Then: map it, adopt 156/180/268/269, regularize each new house with both strong generators measured against the new witness, add 156/180/269 to PRINT_CREDIT_HELD, stamp_landed and re-pin.
+
+
+## Lane L81, after the review (11 November 2026)
+
+**Review mapped.** L83's blind stage 4 review (think-x8oc) cherry-picked (de3fc4bb7, 47e52a55f
+from 0eb9ec7fb, 4dadd0bb6): accepted at all four, S3, LANE_EQUALS_REVIEW.
+V-ozden-943-947-review-check registered clean-room with an independence record;
+E-ozden-943/944/945/947-review-exact-feasibility (independent implementation, full coverage);
+each entry's adversarial accepted review; check_results derives V3/C3; deferrals removed.
+Wording fixes F16, F5, F6, F7, F8, F4, F12/F13, the six questions, F15 in entries, requests,
+packet READMEs and ledger.
+
+**Adopted and regularized (ebbef34d6).** 156 from T-186, 180 and 269 from T-174, 268 from
+T-276 (F10); T-276 out of the house sources; PRINT_CREDIT_HELD gains 156, 180, 269; rigidity
+16/72/227/195 translate. Both strong generators on each new witness
+(packing/cases/regularized_drawings/think-xq4o-2026-11-11/): Evan Daniel's same-side views at
+156 and 180, grid-slack 0.5-degree at 268 and 269, measured against the new witnesses (no
+think-xs9t stale note); KKT solves 2.59-3.40e-12 below the sides held at row 3 (RV-3).
+SETTLED at 180 and 269 removed. Follow-ups owed: #593 (T-186), #574 (T-174 at 180, 269),
+#928 (T-276).
+
+**Renumbered after #948** (merged 9fd466fe1 with T-285, T-286): fa8e480e8 renumbers in issue
+order, #943 T-287, #944 T-288, #945 T-289, #947 T-290; 4872a4ba8 merges main (views
+re-rendered, URL registry derived on main's, census reconciled, custody re-run, landed
+11 November); 851177329 re-pins DATA_REVISION; 1f7d0b98f re-derives the composite figure
+(hosted sweeps found it stale on 57334989d); 393e6b40f renders the synopsis document map.
+Records tier: 54/55 then the document map fixed. PR #949 head 393e6b40f.
