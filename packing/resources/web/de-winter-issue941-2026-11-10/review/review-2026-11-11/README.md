@@ -12,11 +12,11 @@ a scratch directory and are kept here byte for byte, as `out/program-digests.jso
 
 | Path | What |
 | --- | --- |
-| `programs/` | the twelve Python programs and modules, `run_all.sh`, and `issues-941-942.json` (the two issue bodies and the addendum comment, fetched through the REST API) |
+| `programs/` | the thirteen Python programs and modules, `run_all.sh`, and `issues-941-942.json` (the two issue bodies and the addendum comment, fetched through the REST API) |
 | `frozen/checker-frozen-digests.txt` | the five checker files’ SHA-256, frozen at 2026-11-11T15:10:54Z, before the controls plan and before anything of the import lane’s was opened |
 | `frozen/controls-plan.json`, `frozen/controls-plan-digest.txt` | the nine controls’ stated outcomes for every file, and their digest, recorded at 15:11:17Z before any modified file was decided |
-| `frozen/review-2026-11-11-dewinter-941-942-upper-bounds.frozen.md` | the review text as frozen before the import lane’s work was read |
-| `out/` | the shared receipts (`selftest.json`, `record-rows.json`, `claims.json`, `construct.json`, `custody.json`, `extent.json`, `program-digests.json`) and the fifteen #941 counts’ `check-nNNNN.json` and `controls-nNNNN.json` |
+| `frozen/review-2026-11-11-dewinter-941-942-upper-bounds.frozen.md`, `frozen/findings-frozen-digest.txt` | the review text as frozen at 15:19:48Z before the import lane’s work was read, and its digest; committed as `9b6c522bf` |
+| `out/` | the shared receipts (`selftest.json`, `record-rows.json`, `claims.json`, `construct.json`, `custody.json`, `extent.json`, `compare-lane.json`, `program-digests.json`) and the fifteen #941 counts’ `check-nNNNN.json` and `controls-nNNNN.json` |
 
 The sixteen #942 counts’ receipts are in
 `de-winter-issue942-2026-11-10/review/review-2026-11-11/out/`, and the six addendum
@@ -37,7 +37,8 @@ counts’ in `de-winter-a0c4fc8-2026-11-10/review/review-2026-11-11/out/`.
 | `l96_construct.py` | holds #941’s border and deletion statements to the files exactly; decides no packing | the fifteen #941 certificates | `AS_STATED` |
 | `l96_custody.py` | digests the retained files, holds them to the SHA256SUMS beside them, and compares the README tables with the reports | the three packets’ `source/` trees, `issues-941-942.json` | every file equal; every table equal |
 | `l96_extent.py` | each packing’s exact extent and slack under its side; decides nothing about overlap | the 37 certificates | slack $5 \times 10^{-46}$, 0, or $2.0 \times 10^{-10}$ to $1.19 \times 10^{-9}$ |
-| `l96_digests.py` | holds every receipt naming programs to the kept bytes, and the checker and plan to their frozen digests | `programs/`, `frozen/`, the three `out/` directories | `ALL_RECEIPTS_MATCH`, 80 receipts |
+| `l96_compare_lane.py` | after the freeze: holds the import lane’s ledger and upstream manifests to this review’s receipts | the lane’s `ledger.json` and three `upstream-subtree.sha256`, `main`’s 227/229/260 `LICENSE`, this review’s receipts | `LANE_AGREES` |
+| `l96_digests.py` | holds every receipt naming programs to the kept bytes, and the checker and plan to their frozen digests | `programs/`, `frozen/`, the three `out/` directories | `ALL_RECEIPTS_MATCH`, 82 receipts |
 
 The receipts of `l96_check.py`, `l96_selftest.py` and `l96_controls.py` record the
 digests of the programs that wrote them. The other programs’ receipts do not, and

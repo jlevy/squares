@@ -32,3 +32,9 @@ $PY "$HERE/l96_custody.py" "$OUT/custody.json" "$HERE/issues-941-942.json" \
   "$W/de-winter-issue941-2026-11-10/source" "$W/de-winter-issue942-2026-11-10/source" \
   "$W/de-winter-a0c4fc8-2026-11-10/source"
 $PY "$HERE/l96_extent.py" "$OUT/extent.json" "$A"/n*.cert "$B"/n*.cert "$C"/n*.cert
+# After the freeze, with the import lane's files exported to LANE (its ledger.json, the three
+# acquisition/upstream-subtree.sha256 as manifest-941/942/a0c.sha256, and main's 227/229/260
+# LICENSE as LICENSE-main-copy), the reconciliation's comparison was:
+#   $PY "$HERE/l96_compare_lane.py" OUT_SHARED/compare-lane.json LANE/ledger.json OUT_SHARED \
+#     LANE/manifest-941.sha256 LANE/manifest-942.sha256 LANE/manifest-a0c.sha256 LANE/LICENSE-main-copy
+# where OUT_SHARED is this directory's out/, beside the other two packets' out/ directories.

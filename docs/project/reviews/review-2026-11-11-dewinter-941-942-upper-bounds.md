@@ -107,6 +107,14 @@ truncated here.
   The root README at each pin releases all files under MIT, and this repository already
   holds your MIT notice from the same repository (F8).
 
+*Changed after the findings were frozen.* The
+[reconciliation](#reconciliation-with-the-import-lane) settles three points this review
+left open. At 655, Göbel’s construction (26.707106781187) lies above the grid, so 26
+stands and 655 is recorded.
+Your `LICENSE` at all three pins is byte for byte the copy this repository holds.
+The import lane already dates and pins the six addendum counts as F10 asks.
+It adds F14, a note on the import lane’s classification at 494. No verdict changes.
+
 ## Scope
 
 **Read.**
@@ -432,6 +440,7 @@ retained (F8).
 | F11 | note (records) | the 942 and addendum packets | `verify_cert.py` is kept only in the 941 packet, and the addendum packet keeps only its six new certificates; custody of the other copies rests on identical SHA256SUMS lines |
 | F12 | note (this review) | process | the runbook asks for the `tbd-strong-max` tier at maximum reasoning, and this review ran as `tbd-strong`; the GitHub API refused the upstream repository and GraphQL, so upstream blobs, commit times and the issues’ edit history were not checked |
 | F13 | note (this review) | `check-nNNNN.json`, `positive_margins_below` | it counts only the pairs method A decided by margin; near pairs decided by an axis-aligned line (down to $5 \times 10^{-46}$ apart) are not in it; the plan’s census (C7: 64,223 pairs below $10^{-9}$) counts every pair within centre distance 2 |
+| F14 | note (records; added after the freeze) | the intake ledger at 494 | the import lane measures 494 as one to one with the row’s packing (Couzo’s, `couzo-issue763-2026-10-23`), no square moving beyond a tenth, and calls it “a refinement of the row’s packing”, yet classes it a new packing and counts no refinement; the runbook credits a refinement after the finder of the packing it refines; not measured here, and the ledger puts the reading to the owner |
 
 ## Questions for the Author
 
@@ -455,7 +464,8 @@ import lane. The programs, the frozen files and the shared receipts are in
 [the 941 packet’s review directory](../../../packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/README.md).
 Each count’s receipts are in its own packet’s `review/review-2026-11-11/out/`.
 `l96_digests.py` holds every receipt that names programs to the kept bytes, and the
-checker and plan to their frozen digests: `ALL_RECEIPTS_MATCH` over 80 receipts.
+checker and plan to their frozen digests: `ALL_RECEIPTS_MATCH` over 82 receipts (80 at
+the freeze; run again after the reconciliation).
 
 | Program | Receipt | CPU |
 | --- | --- | ---: |
@@ -469,6 +479,7 @@ checker and plan to their frozen digests: `ALL_RECEIPTS_MATCH` over 80 receipts.
 | `l96_custody.py` | `custody.json` | under 1 s |
 | `l96_extent.py` | `extent.json` | a few seconds |
 | `l96_digests.py` | `program-digests.json`: `ALL_RECEIPTS_MATCH` | under 1 s |
+| `l96_compare_lane.py`, after the freeze | `compare-lane.json`: `LANE_AGREES` | under 1 s |
 
 What went wrong along the way, and was redone before any receipt was kept: method B
 first took cells through `gmpy2.floor`, which rounds through `mpfr` and is not exact for
@@ -514,10 +525,97 @@ five checker files’ digests:
 The controls plan was stated at 15:11:17Z: `frozen/controls-plan.json` SHA-256
 `c815af9ac5213905150530133f5ea90186b5f835c96c8790037e1d231b10cfb5`, with
 `l96_controls.py` at `205969366bf308792fa2eb017676d1f0f8c6aa9a99a88727680228c97b951e7a`.
-The findings above were frozen before anything of the import lane’s was opened; the
-frozen text is kept as
-`frozen/review-2026-11-11-dewinter-941-942-upper-bounds.frozen.md`, and its SHA-256 is
-recorded below with the reconciliation.
+The findings were frozen at 15:19:48Z, before anything of the import lane’s was opened.
+The frozen text is kept as
+`frozen/review-2026-11-11-dewinter-941-942-upper-bounds.frozen.md`: 524 lines and 38,334
+bytes, SHA-256 `eca8d9797f06a25aab451c2a5a14306a40195914790f0e8cf2b023d34ba6550f`
+(`frozen/findings-frozen-digest.txt`). It was committed as `9b6c522bf` and pushed to
+`claude/bold-ritchie-xo28us-l96` before the reconciliation below.
+Everything above, except the passages marked as changed or added after the freeze, is
+that text.
+
+## Reconciliation With the Import Lane
+
+At 15:22Z, after `9b6c522bf` was pushed, I opened lane L90’s branch at `2fb1156eb`,
+still its head then.
+I read the intake directory
+`packing/campaign/issue-intake/upper-bounds-941-942-20261111/` (`README.md`,
+`ledger.json`, the 655 entry of `starts.yaml`), the three packets’ root READMEs, their
+`acquisition/upstream-subtree.sha256`, the 37 rows the branch adds to
+`source-coverage.yaml`, and its three evidence entries.
+Still unread: `verify_cert.py`, this repository’s `sqpack`, `devtools` and crate code,
+the lane’s receipts, and its identity and contraction files beyond the summaries its
+ledger quotes. The sharp-control receipts were still being added and are ignored, as the
+brief asks.
+
+`l96_compare_lane.py`, written after the freeze, holds the lane’s ledger and manifests
+to this review’s receipts and prints `LANE_AGREES` (`out/compare-lane.json`). Each of
+the 37 ledger sides is the exact side’s 12-place ceiling and is recorded.
+Each start is `main`’s current row, or 26 at 655. Every retained file is in the lane’s
+manifests, and each manifest’s `LICENSE` is `main`’s copy.
+
+**What agrees, exactly.**
+
+- **The verdicts.** Both maintained routes accept all 37 certificates and refuse their
+  duplicate-square and outside-container controls, as this review accepts all 37.
+- **The least gaps.** The lane’s replay gives 0 at the six borders; $5 \times 10^{-46}$
+  at the walls and $10^{-45}$ between pairs at 413, 543 and 547; and $1.0$ to
+  $4.2 \times 10^{-10}$ at the walls and $2.0$ to $8.8 \times 10^{-10}$ between pairs at
+  494, 738, 739, 753, 809 and 810. These are this review’s values.
+  The lane reads the issues’ 5e-9 as a margin in the side, as F6 does.
+- **The rows.** Each new beyond-horizon row’s value is the report’s 10-place print, the
+  exact side’s ceiling (F3). The lane’s start at each of the 36 counts with a row is the
+  current row `l96_record_rows.py` found; the lane read `main` at `8afdabe8`, this
+  review at `591644a9e`, and the values agree.
+  Each of those 36 rows is now superseded by the new one, and no count holds two current
+  rows.
+- **655.** The lane’s start holds the grid, 26, and Göbel’s construction, the strip
+  $26 + 1/\sqrt 2$ of 686 less 31 squares, at 26.707106781187, which is above it.
+  So 25.9996711101 is recorded, below by $3.29 \times 10^{-4}$. This settles the point
+  F4 left open, by the lane’s maintained computation, not this review’s.
+- **Provenance.** The lane dates the six addendum claims by the comment at 16:02:47Z and
+  pins them at `a0c4fc80`, as F10 asks.
+  It reads the commit times this session could not: `a9486ede` at 14:39:52Z, 86 seconds
+  before #942; `a0c4fc80` at 15:37:44Z, 25 minutes before the comment; and for #941,
+  `d3a020e` at 2026-11-09T23:59:23Z, which first published nine of the fifteen
+  certificates, and `71da0d56` at 06:15:17Z the other six.
+  Every first commit precedes its report, and no other report reached these counts in
+  between. These times are the lane’s, not checked here.
+- **Custody and licence.** Every retained file’s SHA-256 in `out/custody.json` appears
+  in the lane’s upstream manifests.
+  The manifests give `LICENSE` at all three pins as `324f918c…`, which is the SHA-256 of
+  the 1,072-byte copy `main` keeps in the 227/229/260 packet, so the notice is pinned
+  rather than retained, as the Özden precedent did.
+  That settles the part of F8 this review could not check.
+- **Credit.** The packet READMEs credit de Winter for the local re-optimization, after
+  the Kaggle merge file’s credited authors.
+  They note that #941’s remark about smaller Kaggle packings names no packing that
+  reached this repository, which is F9’s reading.
+
+**What differs, and the dispositions.**
+
+| Here | Lane’s draft | Disposition |
+| --- | --- | --- |
+| F5: 809 is a deletion bound from 810, claimed in the same issue (think-kzme) | recorded as its own row, “a new packing, continuing the 810 certificate of this report, one square removed”; think-kzme is not mentioned | Put to the owner with think-kzme, or record why it does not apply (809 has a certificate file of its own); the bound is sound either way |
+| F7: the refined README changed from “sixteen” to “improved twenty-two by at least 1e-6” at `a0c4fc80` | the #942 packet quotes sixteen; the addendum packet calls the rest “as stated” | Add the change to the addendum packet’s README; a question for the author |
+| F8: the Kaggle starting packings’ licences | “Retaining a file grants no licence and relicenses nothing” | Agreed as far as it goes; the starting packings’ terms remain the author’s question |
+| F14 (new): 494 measured as a refinement of Couzo’s row, classed as a new packing | the ledger’s `measured_identity` puts it to the owner | Agreed that the owner decides; the classification and the summary count should follow the decision |
+| Assurance | all 37 rows `reported`; the report entries `replay_status: not-attempted`, as the author’s checker was not run; the replay to be entered as `E-de-winter-941-exact-feasibility` and the like when this review is mapped | Agreed: once mapped, this review supports `verified`, with `l96_check.py`’s run registered as an independently re-implemented clean-room route |
+
+**What only this review has.** The clean-room checker and its second method; the 333
+controls stated in advance, with the rotation read the other way, every near pair closed
+along its centre line and every square taken to its wall; the issues’ improvement, gain
+and record columns held to the exact sides; the construction statements held exactly;
+each packing’s extent and slack (F6); and the reading of 809 against think-kzme (F5).
+
+**What only the lane has.** The maintained routes’ full replays and their controls, the
+upstream retention and commit times, the identity measurements against each row’s
+packing, each row certificate’s uniform-contraction margin, the starts with Göbel’s
+construction, the ledger, the rows, evidence and requests entries, the contributor
+census and the release record.
+
+Nothing in the lane’s work changes a certificate’s verdict.
+F14 is the one new finding, and it is about the ledger’s classification.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
