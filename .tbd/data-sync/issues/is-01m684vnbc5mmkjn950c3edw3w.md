@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 213
+version: 214
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -82,7 +82,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T18:58:55.771Z
+updated_at: 2026-11-11T18:59:44.697Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -320,3 +320,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 ~18:45Z: #952 merged (c8448724e) after blind review L96 and senior review L97 plus fixes (f9074dac7, CI green): 36 de Winter rows verified above 324, 35 superseded, 809 queued on think-kzme (N3 note added there). L98 waiting on deploy, drafting the #941/#942 replies.
 
 2026-11-11 ~18:55Z: Pages deploy for c8448724e succeeded (run 43079349582; 6255/6255 checks). #941 had been auto-closed at 18:36:15Z by a closing keyword in #952's body; coordinator reopened it. Posted the #941 import reply (issuecomment-6804521353; stays open for n809/think-kzme) and the #942 final (-6804532105; closed 18:53:16Z). Both match their L98 drafts byte for byte. L99 is recording them (records PR).
+
+2026-11-11 18:57Z renewal (intake203): new #954 (Özden, s(179) <= 13.881367160110, 2.428e-3 below T-174). Bead think-f65n claimed by bold-ritchie-l100; L100 is importing it and L101 is running the blind review in parallel. The other new items (#941/#942 replies, #942 close) are covered by L99's records PR.
