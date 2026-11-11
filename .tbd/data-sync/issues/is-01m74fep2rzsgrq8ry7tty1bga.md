@@ -5,7 +5,7 @@ title: "Import #941, #942: Joost de Winter's 31 lowered upper bounds for n betwe
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: bold-ritchie-l90
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:55.639Z
-updated_at: 2026-11-11T15:57:34.274Z
+updated_at: 2026-11-11T17:48:52.328Z
 started_at: 2026-11-11T09:58:23.522Z
 ---
 #941 (2026-11-10T13:30Z) fifteen lowered upper bounds n 413-910; #942 (14:41Z) sixteen n 632-989; JoostdeWinter. Beyond the atlas's 324, below the 1024 horizon: beyond-horizon rows. Precedent: Yim's 553-700 rows (PR #934). Starts after the Özden lane to stay within usage limits.
@@ -52,3 +52,5 @@ Sharp controls: running in five chunks of two streams (sharp-plan), chunk 0 from
 Not this lane's: the records tier's bead-tree step fails locally because result-requests.yaml #943-#947 name think-xq4o, now closed (a deferral should name the open owner).
 
 2026-11-11 L90 fold-in of the L96 review (16:00Z), on the coordinator's instruction. Merged origin/claude/bold-ritchie-xo28us-l96 (bdf45bd6c: the review doc and review/ dirs, untouched) as 4b67b5bba; mapped in 6bbffe3e1: E-de-winter-{941,942,a0c4fc8}-exact-feasibility and -review-exact-feasibility (scoped to the rows), external_review on the report atoms, V-de-winter-941-942-review-check (system-family overlap), document map; 36 rows verified. 809 (F5): no row, as at 743/798/855/985 (think-kzme): couzo-issue763's 809 row current again, the #941 declaration requests no row there, think-kzme's notes name 809. F14: 494 classed as a refinement of Couzo's 494 in the ledger. F9 wording ("below the record, not best known"), F8 (Kaggle starting packings' licence not given; declarations re-acquired), F7 (a0c4fc8 README's twenty-two) answered in READMEs, requests, coverage and bibliography. Sharp controls: 24 of 37 counts done and committed, chunks 3 and 4 running (ETA ~18:10Z); then the sharp test, release record re-run against main, re-pin, push, CI.
+
+2026-11-11 L90 complete (17:50Z): PR #952 draft, head 22c85caf9, hosted CI green (packing-required, pages-required; 31 success, 28 skipped). All 407 sharp controls as stated (38,431 CPU s); certify 10,339 route CPU s; total about 14.6 CPU-h. Commits after 2fb1156eb: d9c4b5328, 20a47e404, fb96a8692 (sharp chunks 0-2), 4b67b5bba (merge of L96 review bdf45bd6c), 6bbffe3e1 (review mapped; 809 held; F7/F8/F9/F14), cd7310bc9 (independence records on the replay atoms), 4e9a32158 and fe04a551a (sharp chunks 3-4), 8da539170 (sharp text, lane test, release record against 591644a9e), 22c85caf9 (re-pin). Not merged, not marked ready, no GitHub comments. Open for the owner: think-kzme (809 among the claimed deletion bounds). Replies owed after merge (stage 7): #941 and #942, with the review's five questions.
