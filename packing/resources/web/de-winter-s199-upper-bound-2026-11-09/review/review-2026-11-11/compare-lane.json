@@ -1,0 +1,44 @@
+{
+ "T282_margin_equal_exactly": true,
+ "T284_base_margin_equal_exactly": true,
+ "T284_whole_margin_zero_both": true,
+ "946_own_side_equal": true,
+ "946_own_margin_lane": "1.561468985e-319",
+ "946_own_margin_mine": "1.561468985e-319",
+ "946_own_margin_lane_minus_mine": "0",
+ "946_lambda_lane_minus_mine": "0",
+ "946_one_minus_lambda_mine": "9.999999999e-321",
+ "946_one_minus_lambda_lane": "9.999999999e-321",
+ "946_pair_17_20_attains_mine": true,
+ "946_lane_lambda_attained_by_a_pair": [
+  [
+   17,
+   20
+  ],
+  [
+   23,
+   27
+  ],
+  [
+   32,
+   36
+  ],
+  [
+   41,
+   42
+  ]
+ ],
+ "946_margin_from_mine_lambda": "1.561468985e-319",
+ "946_margin_from_lane_lambda": "1.561468985e-319",
+ "946_lane_contracted_side_minus_mine": "0",
+ "moved_beyond_1e-9": 84,
+ "moved_rattlers": 16,
+ "moved_non_rattlers": 68,
+ "moved_non_rattlers_with_tight_pairs": 68,
+ "moved_non_rattlers_keeping_every_T282_near_pair": 66,
+ "moved_non_rattlers_losing_a_near_pair": [
+  73,
+  127
+ ],
+ "tight_pairs_with_a_moved_square": 173
+}
