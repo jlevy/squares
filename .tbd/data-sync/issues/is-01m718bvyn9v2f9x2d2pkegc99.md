@@ -3,19 +3,19 @@ type: is
 id: is-01m718bvyn9v2f9x2d2pkegc99
 title: "Import #939: Joost de Winter's s(199) <= 14.6146898532835806, T-282's arrangement re-solved to its exact local optimum (quintic root) plus the L of 27"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 11
-delegate: bold-ritchie-l78
+version: 12
+delegate: null
 labels:
   - intake
   - result-import
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-11-09T22:55:20.020Z
-updated_at: 2026-11-11T08:20:33.091Z
+updated_at: 2026-11-11T08:54:42.557Z
 started_at: 2026-11-09T22:55:23.747Z
 ---
 #939 (JoostdeWinter, 2026-11-09T22:03:57Z): s(199) side 14.61468985328358057514628890087947061619 (rounded up), <1e-98 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, claimed the local optimum of the arrangement (130-digit numerical solution; quintic identified numerically). Certificate: JoostdeWinter/square-packing @ 702c7af2 folder n199 (n199_witness.yaml center-basis rational; n199_exact.json; verify_exact.py). Construction: T-282's 172 arrangement (Daniel, Özden) re-optimized (core side 13.61468985328358..., 2.63e-12 below T-282) plus the same L of 27 as #938 (kenaznia-doga, 20:31Z, earlier). Gain over #938: ~2.63e-12, the same as Daniel's held KKT point below T-282 (think-wju3, 2.635e-12) -> RV-3 class (think-ruu2); but #938's own contraction margin is 0 (exact grid contacts), so the padding-share test needs care. Implied s(172) witness from the core (not claimed). AI assistance: Claude under the author's direction. Sequencing: after #938 (think-1goz) merges.
@@ -42,3 +42,6 @@ started_at: 2026-11-09T22:55:23.747Z
 - 2026-11-11 ~06:30Z: hosted CI green on ded2c8df8 (31 success, 28 skipped, 0 failed; packing-required, pages-required, suites A-D). The fix commit ded2c8df8 reconciles the contributor census (10 unresolved spans) and counts 27 owner-decision blocks in test_check_requests. PR #948 stays a draft; nothing merged or commented. Waiting on the coordinator's blind stage 4 lane and the owner's RV-3.
 - 2026-11-11 phase 3: the blind stage 4 review (L82, think-o53d; frozen 5ef8151fb, reconciliation 4f82c716a) was cherry-picked (2fb7396b1, 33dbc216c) and mapped in 620280323: `reviews:` on T-285/T-286 (adversarial, accepted, covers both); `external_review` on both report atoms, so both are V0/C1, still held for RV-3; V-de-winter-939-946-review-check (l82_check.py, l82_decide.py, l82_selftest.py, clean room, independence record in the review README). The replay evidence and the review's run stay out until RV-3. Fixed F1 (T-286's bound is the 16-place ceiling, with the root as the asserted optimum), F2/F3 (#938 credited for the L, cross-references), F10 (16 free, 68 slide, 66 keep every pair below 1e-12, only 73 and 127 lose any), F11 (neutral share; RV-3 decides), F12 (the subnormal float fields noted). The six author questions are in the s199 packet README; the option-D observation is recorded neutrally. The URL registry rows for t-285/t-286 were re-derived. Re-pin 24db15d3e. Local: custody OK on both packets, 638 tests, records tier 55 steps, Ruff/BasedPyright 0. Pushed 24db15d3e; hosted CI green on it (31 success, 28 skipped, 0 failed); PR #948 body updated, still a draft; nothing merged or commented.
 - 2026-11-11 ~08:25Z, senior review L84 (merge after fixes): abcefd638 answers findings 1-7 (#941/#942 named for 31 of the 37 above-324 counts, triaged on think-cen3, a0c4fc8's six unreported; RV-3 options stated as criteria with think-ruu2 named; both report.json register blocks aligned with the register; the frozen review text kept as review/review-2026-11-11/review-2026-11-11-de-winter-939-946.frozen.md, SHA-256 51a61287..., with a corrigendum line; close_when waits on RV-3; read_l_base refusals pinned and a 1e-30 L-square nudge test; the 734-contact sentence attributed to n199/README.md), resolves de Winter's four census spans to joost-de-winter, and fixes the s199 README heading. 9b65b1261 stamps T-285 landed 2026-11-11; bc0979144 re-pins DATA_REVISION to 9b65b126 (the last two commits; restamp if the merge slips past midnight UTC). Local: custody OK, 978 tests passed, records tier 55 steps. Hosted CI green on bc0979144 (31 success, 28 skipped, 0 failed). PR #948 body updated; still a draft; nothing merged or commented. The GitHub blocked:owner-decision label on #939/#946 is the coordinator's at merge.
+
+2026-11-11 08:55Z coordinator: PR #948 merged as 9fd466fe1 (T-285, T-286 held at V0/C1 after the L82 review and L84 senior review); replies posted on #939 (issuecomment-6791375129) and #946 (issuecomment-6791384381); both issues open, blocked:owner-decision; lane L78 has ended, claim released. What remains is the owner's RV-3 answer, then withdraw or enter evidence and adopt, and the final replies.
+blocked_on: think-ruu2
