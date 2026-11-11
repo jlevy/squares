@@ -5,7 +5,7 @@ title: "Import #943, #944, #945, #947: Doğa Özden's s(156), s(180), s(268), s(
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l81
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:54.996Z
-updated_at: 2026-11-11T08:38:56.174Z
+updated_at: 2026-11-11T09:09:20.059Z
 started_at: 2026-11-11T04:57:02.266Z
 ---
 #943 s(156) <= 12.977053087498, #944 s(180) <= 13.915618502791, #945 s(268) <= 16.872029849085 (below T-276, his own #928), #947 s(269) <= 16.900994579952; opened 2026-11-10T15:28Z (three) and 2026-11-11T03:35Z. Precedent: #927-#931 (PR #932), #935/#936 (PR #937). Also: #847 comment 6776987457 (mohsensbu-jpg, 2026-11-10T19:22Z, record-count update); watched repos evand/square-packing (10 commits to c801ab47) and TheSnakeFang/squarepack-certs (2 commits to be93eb16): read, import if any new result, else intake-watch reads.
@@ -101,4 +101,6 @@ order, #943 T-287, #944 T-288, #945 T-289, #947 T-290; 4872a4ba8 merges main (vi
 re-rendered, URL registry derived on main's, census reconciled, custody re-run, landed
 11 November); 851177329 re-pins DATA_REVISION; 1f7d0b98f re-derives the composite figure
 (hosted sweeps found it stale on 57334989d); 393e6b40f renders the synopsis document map.
-Records tier: 54/55 then the document map fixed. PR #949 head 393e6b40f.
+Records tier: 54/55 then the document map fixed.
+
+**Final (this session).** 2bb1b20de fixes hosted CI on 393e6b40f (SYNOPSIS research-status row 290/258; test_upper_bound_reports_l51_1105 MOVED_LATER 268 -> T-289; test_result_status superseded set gains T-276). Hosted CI on 2bb1b20de green: 31 passed, rest skipped (runs 42990739353, 42990739379, 42990728206). Local: 1,124 touched tests passed. PR #949 body updated; draft, labels intake and S3.
