@@ -44,6 +44,29 @@ worktree of `main`, through `uv run --frozen --all-extras --group dev`.
 `run_frozen.sh SOURCE_DIR OUT_DIR` reruns the self-test, the check, the census and the
 controls.
 
+Written and run after the findings were frozen, none of them a decider of the
+certificate:
+
+| Program | What it measures | Reads | Writes |
+| --- | --- | --- | --- |
+| `l109_sides.py` | the claim’s arithmetic: the side’s prints, the record’s sides at 237 (T-190, the house, and T-189), the gain, the context values, the author’s printed outputs | the certificate, `programs/issue-960.json`, `n-237.md`, `results.yaml`, the house witness, the author’s two printed outputs | `out/sides.json` |
+| `l109_pose.py` | the certificate against its decimal pose at 60 digits | the pose, the certificate, the check receipt | `out/pose-n237.json` |
+| `l109_identity.py` | the certificate against the house, under eight symmetries, five anchorings and two assignment costs | the certificate, the house witness | `out/identity-n237.json` |
+| `l109_band.py` | the tilted bands at 237 and 70, and the stated seed against the new band | the certificate, the house, the 70 witness | `out/band-n237.json` |
+| `l109_custody.py` | read-only Git plumbing on the clone and this repository | the clone, this repository, the issue as fetched | `out/custody.json` |
+| `l109_digests.py` | every program and receipt against the kept bytes and the frozen digests | this directory | `out/program-digests.json` |
+
+Two repository tools at `c8448724e` were run read-only, without `--out`, their printed
+output redirected to a receipt:
+
+| Tool | Receipt |
+| --- | --- |
+| `python -m devtools.contraction_margin --n 237 'T-190=witness-center-basis:witnesses/known-best/n-237.yaml' --against 'issue-960=witness-corners:SOURCE/n-237-candidate.yaml'` | `out/contraction-margin-t190.json` |
+| the same with `'T-189=evand-cert:resources/web/couzo-certificates-2026-10-14/source/submissions/2026-10-14/certificates/n237.cert'` | `out/contraction-margin-t189.json` |
+| `python -m devtools.measure_identity --n 237` of the certificate against T-190 and T-189 | `out/measure-identity-n237.json` |
+
+`run_after.sh SOURCE_DIR OUT_DIR` reruns all of them.
+
 ## What They Printed
 
 - `l109_selftest.py`: `PASSED 2838 cases, 0 failed`, with 55 and 109 failures from the
@@ -51,6 +74,9 @@ controls.
 - `l109_check.py`: `ACCEPT`, 27,966 pairs apart by both methods, wall contacts square 67
   bottom, 152 left and 236 top.
 - `l109_controls.py`: `EVERY_CONTROL_AS_STATED`.
+- `devtools.contraction_margin`: T-190’s margin $1.59 \times 10^{-19}$ and T-189’s
+  $2.39 \times 10^{-11}$, each with `within_margin: false` against the new side.
+- `l109_digests.py`: `ALL_RECEIPTS_MATCH`.
 
 ## Frozen Files
 
@@ -58,8 +84,8 @@ controls.
 | --- | --- | --- |
 | `frozen/checker-frozen-digests.txt` | the six checker files | 2026-11-11T22:05:18Z |
 | `frozen/controls-plan-digest.txt` | the controls plan, its facts, the check and self-test receipts, and the plan’s programs, before `l109_controls.py` existed | 2026-11-11T22:07:16Z |
-| `frozen/findings-frozen-digest.txt` | the frozen review text and every program and receipt at the freeze | as it records |
-| `frozen/review-2026-11-11-ozden-960.frozen.md` | the review as frozen, before anything of an import lane, the author’s checker or its outputs was read | as above |
+| `frozen/findings-frozen-digest.txt` | the frozen review text and every program and receipt at the freeze | 2026-11-11T22:12:51Z |
+| `frozen/review-2026-11-11-ozden-960.frozen.md` | the review as frozen, before anything of an import lane, the author’s checker or its outputs was read | 2026-11-11T22:12:51Z, pushed as `61e6c3aa9` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
