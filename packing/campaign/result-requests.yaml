@@ -10946,7 +10946,7 @@ issues:
       source: https://github.com/jlevy/squares/issues/593#issuecomment-6171680467
       bead: think-2ep3
       note: 'The reply of 16 October listed the request as still with the owner and kept the issue open
-        for it, and the follow-up of 20 October repeats both. T-182 records the question as RQ-1. At
+        for it, and the follow-ups of 20 October and 11 November repeat both. T-182 records the question as RQ-1. At
         211 T-188 is the house since 16 October; at 241 the tied #586 certificate (T-182) still is.'
     beads:
     - think-2ep3
@@ -11063,6 +11063,20 @@ issues:
         case records date: 271 to T-219 on 19 October, 154 to T-222 on 20 October, 302 to T-193
         on 23 October, 175, 204 and 304 to T-267, T-268 and T-273 on 5 November, 232 and 303 to
         T-275 and T-278 on 9 November, and 156 to T-287 on 11 November
+    - url: https://github.com/jlevy/squares/issues/593#issuecomment-6793174395
+      date: '2026-11-11'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: kkt-refinements-70a033f
+        id: T-186
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: ties-211-241
+      corrects:
+      - https://github.com/jlevy/squares/issues/593#issuecomment-6285175560
     blocked:
       type: owner-decision
       reason: >-
@@ -11085,6 +11099,27 @@ issues:
       marked `outdated` on the 20 October follow-up; the follow-up it owes gives T-186's houses
       now, 129, 176 and 264, and the house at each of the other nine counts, as #438's follow-up
       of 11 November did for T-127.
+
+      The follow-up of 10:17:07Z on 11 November 2026 (issuecomment-6793174395), posted after #949
+      merged as 8afdabe8f at 09:57:31Z and recorded in intake lane L91, is the one owed above, and
+      it names the 20 October follow-up in `corrects`. Lane L89 drafted it from main 8afdabe8f,
+      and the posted text is that draft as written. It states T-186 at V3/C3, confirmed and
+      current, since the houses at 129, 176 and 264 rest on it, and says that at the other nine
+      counts it is no longer the house and each case keeps the certificate as history. It gives
+      the house at each of those counts with the day it reached main, the case records dating the
+      adoptions at 175, 204, 271, 302 and 304 a day earlier: T-222 at 154 and T-219 at 271 since
+      20 October; T-193 at 302 since 24 October; T-267, T-268 and T-273 at 175, 204 and 304 since
+      6 November; T-275 and T-278 at 232 and 303 since 9 November; and T-287 at 156 since 11
+      November. It adds that, by the case records, T-186 gave way at 204 to T-223 on 20 October,
+      at 304 to T-242 on 25 October, at 232 to T-256 on 31 October and at 303 to T-230 on 23
+      October, before those counts' present houses; and that T-287 is below T-260 (#846), held for
+      the owner's question, by the same 2.11e-3, so the house at 156 is T-287 whatever the owner
+      rules on T-260, a question that stays open at 105, 146, 229 and 308. It names T-186, T-222,
+      T-219, T-193, T-267, T-268, T-273, T-223, T-242, T-275, T-278, T-256, T-230, T-287 and
+      T-260; only T-186 is this issue's result and is recorded under reported. It says that the
+      request for a joint record at 211 and 241 is still with the owner and that the issue stays
+      open until it is decided, so ties-211-241 is recorded as spoken of, with no id, as on the
+      follow-up of 20 October.
   - number: 594
     title: 'Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)'
     author: bengreff
@@ -27931,6 +27966,13 @@ issues:
       reported:
       - result: filled-end-v2
       beads: [think-llit]
+    - url: https://github.com/jlevy/squares/issues/847#issuecomment-6793179633
+      date: '2026-11-11'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: filled-end-v2
+      beads: [think-llit]
     close_when: >-
       The V2.0 rows the walk above 1024 records are on main, each decided by a maintained
       checker of the filled-end construction, V1.0's rows are dispositioned, and the reply on
@@ -28007,6 +28049,22 @@ issues:
       V1.0's rows still Q-847a's. Read on 11 November by lane L81 (think-xq4o). Reading it
       into read_through on a later day than the last reply makes a reply due, which the
       requests check lists.
+
+      The follow-up of 10:17:23Z on 11 November 2026 (issuecomment-6793179633), posted after #949
+      merged as 8afdabe8f at 09:57:31Z and recorded in intake lane L91, is the reply that comment
+      made due. Lane L85 drafted it from main 9fd466fe1, and the posted text is that draft as
+      written. It thanks the author for the update and says that his arithmetic holds in the files
+      the record retains: #836's v5 set has 5,308 rows at 1182 to 9944 and V2.0 5,134 at 1182 to
+      9946, they share 4,841 counts and together cover 5,601, and every count of #799's versions 1
+      (683 rows) and 2 (2,824 rows) is a v5 count. It says that the record notes the total as
+      information, adding no new result and registering nothing; that no V2.0 or V1.0 row is
+      recorded yet, the rows waiting on the walk above 1024 (think-llit), which waits on the
+      owner's open decision on how the certificates above 1024 are hosted (D4), and V1.0's also on
+      Q-847a; that the walk will decide each row against every earlier report at its count and
+      against Göbel's construction; and that the issue stays open while the rows wait, with a
+      reply to follow when they land. It names no register id, so filled-end-v2 is recorded as
+      spoken of, with no id, and think-llit under the reply's beads, as on the follow-ups of 31
+      October, 1 November and 4 November.
   - number: 890
     title: "s(94) ≥ 1993/200 = 9.965 (dilation of Hosono's mixed_n94_L995 on a finer net): registration request"
     author: kenaznia-doga
@@ -29373,6 +29431,17 @@ issues:
       - result: n268-from-t270
         id: E-ozden-928-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/928#issuecomment-6793177281
+      date: '2026-11-11'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n268-from-t270
+        id: T-276
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-276 is on main at V3/C3 as the house at 268, and the reply on main says what was retained and
       replayed, what the review found and that the case adopted it.
@@ -29420,6 +29489,27 @@ issues:
       and changes nothing. The comment ends that this result is the best published packing with
       a certificate, not the smallest side anyone has scored. The same correction was committed
       to the repository's README as ae2883e (20:53:17Z), read in campaign/intake-watch.yaml.
+
+      The follow-up of 10:17:16Z on 11 November 2026 (issuecomment-6793177281), posted after #949
+      merged as 8afdabe8f at 09:57:31Z and recorded in intake lane L91, was owed because the final
+      reply stated T-276 current. Lane L89 drafted it from main 8afdabe8f, and the posted text is
+      that draft as written. It states T-276 at V3/C3, confirmed and superseded, by the author's
+      own T-289 (#945), 4.40e-4 below it. T-289 is a new arrangement, not a further arrangement of
+      T-276: under no symmetry of the box do nearest centres pair it one to one with T-276's
+      packing, and the optimal assignment moves 125 squares beyond a tenth; the author's search
+      seeded it from the registry's 302. T-289 was confirmed at V3/C3 when #949 merged, the case
+      at 268 adopted it as its house on 11 November, and T-276 is kept at 268 as history. The
+      follow-up says that the case now names the author as the packing's finder, where under T-276
+      it named Evan Daniel the finder and the author the improver; that the drawing at 268 is now
+      grid-slack's 0.5-degree view of T-289; and that Daniel's KKT solve 3.30e-12 below T-276, the
+      candidate the final reply mentioned, now lies about 4.40e-4 above the house, while his
+      regularizer has solved T-289's witness to a point 3.27e-12 below its side, held as a
+      candidate on the owner's open question about gains near a certificate's padding. It says
+      that the author's comment of 9 November (issuecomment-6751178845), read above, is in the
+      record as information: the side-only entry at 268, 16.8718681351 (team Cats and boxes, 28
+      October), states no packing, so it is no report, and #945 states it first, 1.617e-4 below
+      T-289. It names only T-276 and T-289; T-289 is not this issue's result and is not recorded
+      under reported. The issue stays closed.
   - number: 929
     title: 's(299) ≤ 17.801004434256: improved packing (registration request)'
     author: kenaznia-doga
@@ -30427,7 +30517,8 @@ issues:
     title: 's(156) ≤ 12.977053087498: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-10'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -30454,7 +30545,7 @@ issues:
       the start and the record it improves, both strong generators' regularization of the new
       house run in the same change. The Kaggle packing the issue quotes, 12.979165853846
       (kirilltym), is above it; the side-only leaderboard entry it quotes states no packing.
-    read_through: '2026-11-10T15:28:40Z'
+    read_through: '2026-11-11T10:14:28Z'
     results:
     - key: n156-transplant
       claim: >-
@@ -30471,8 +30562,32 @@ issues:
     beads:
     - think-xq4o
     - think-x8oc
+    - think-ikku
+    - think-ruu2
+    - think-wju3
+    - think-tj4o
     answer_bead: think-xq4o
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/943#issuecomment-6793121567
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n156-transplant
+        id: T-287
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n156-transplant
+        id: E-ozden-943-exact-feasibility
+        status: confirmed
+      - result: n156-transplant
+        id: E-ozden-943-review-exact-feasibility
+        status: confirmed
+      - result: n156-transplant
+        id: E-ozden-943-certificate-report
+        status: reviewed
     close_when: >-
       T-287 is on main at V3/C3 as the house at 156, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -30502,11 +30617,55 @@ issues:
       lower-left anchoring reproducing them all (F7); which replay is intended,
       certificate.replay or the README's rerun, and from which directory, and whether the schema
       path could name this repository's file (F12, F13). No reply has been posted.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6793121567, posted at
+      10:14:28Z), after #949 merged as 8afdabe8f at 09:57:31Z, registering T-287 and adopting it
+      as the house at 156; recorded in intake lane L91. Lane L89 drafted it from main 8afdabe8f,
+      its record block rendered by check_requests --draft 943 with the certificate-report line
+      added by hand, as at #935, and the posted text is that draft as written. It states T-287 at
+      V3/C3, confirmed and current; E-ozden-943-exact-feasibility and
+      E-ozden-943-review-exact-feasibility, confirmed; and E-ozden-943-certificate-report,
+      reviewed. It says that the review accepted it with findings, none blocking or major, and
+      scored it S3; that T-287 became the house at 156 on 11 November in place of T-186, 2.11e-3
+      lower, which stays a verified bound at V3/C3, kept as history; and that T-260 (#846), held
+      for the owner's question (think-ikku), is above it by the same 2.11e-3, so the house at 156
+      is T-287 whatever the owner rules on T-260, a question that stays open at 105, 146, 229 and
+      308 (F15). T-186 and T-260 are not this issue's results and are not recorded under reported.
+      It says what was checked: both maintained exact routes over every wall and all 12,090 pairs,
+      with the duplicate-square, outside-container and sharp controls. It passes on the review's
+      clean-room checker and its 15 controls, and says that the gain is 1.6e36 times T-186's
+      contraction margin of 1.30e-39, so the owner's open question about gains inside a padding
+      margin does not reach it (F9). It says that the review checked the issue's statements about
+      the promotion against the files; that the packing is a new arrangement relative to T-186's,
+      the optimal assignment under the best symmetry moving 58 squares beyond a tenth, so the
+      record credits the author as its finder (F10); and that the review's seed model matches 133
+      squares to the registry's 182 and 83 to the house (F8). It passes on the review's notes for
+      the author: F4 (the leaderboard paragraph prints the side's 15-place ceiling as the exact
+      side, which is 2.48e-11 below the side-only entry), F5 (the wall sentence holds here), F6
+      (pair margins of 2.0 to 9.8e-13 of the centres' separation, median 2.35e-13 here), F7, F12
+      and F13. It says that Daniel's regularizer now draws 156 and reached a certified KKT point
+      2.59e-12 below the side, about the certificate's contraction margin of 2.42e-12, held as a
+      candidate on RV-3 (think-ruu2 and think-ikku), as Daniel's solves at 172 and 270 are
+      (think-wju3). It passes on the licence, CC BY 4.0 and MIT, with Evan Daniel's MIT notice
+      byte for byte the one retained in evand-n182-2026-10-25 (F14), and on the credit, Özden
+      after Daniel, the atlas posters holding Özden's name off their credit block at 156 until the
+      next infographics cut (think-tj4o). It reads the Kaggle sides: the per-puzzle packing the
+      issue quotes, 12.979165853846 (kirilltym), is above T-287, and the side-only entry
+      12.977053087522 (team Cats and boxes, 25 October), 2.48e-11 above the exact side, states no
+      packing and is not counted. It asks four of the review's six questions, its 1, 3, 4 and 6,
+      and points to #945 for question 2 and to #944 for question 5: whether "our 15-place ceiling,
+      12.977053087497205, is below that figure by 2.5e-11" would say what the author meant;
+      whether the final repair scaling was about 2e-13 rather than 1e-13; which assignment the
+      lineage counts use; and which replay is intended, from which directory, and whether the
+      schema path would name this repository's file. The questions are informational and hold
+      nothing open. The issue was closed as completed at 10:14:38Z. The move of the house at 156
+      from T-186 owed a follow-up on #593, which was posted and is recorded there.
   - number: 944
     title: 's(180) ≤ 13.915618502791: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-10'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -30534,7 +30693,7 @@ issues:
       the start and the record it improves, both strong generators' regularization of the new
       house run in the same change. The Kaggle packing the issue quotes, 13.916993522491
       (kirilltym), is above it; the side-only leaderboard entry it quotes states no packing.
-    read_through: '2026-11-10T15:28:41Z'
+    read_through: '2026-11-11T10:15:13Z'
     results:
     - key: n180-transplant
       claim: >-
@@ -30551,8 +30710,33 @@ issues:
     beads:
     - think-xq4o
     - think-x8oc
+    - think-ruu2
+    - think-ikku
+    - think-wju3
+    - think-mdxq
+    - think-tj4o
     answer_bead: think-xq4o
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/944#issuecomment-6793136584
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n180-transplant
+        id: T-288
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n180-transplant
+        id: E-ozden-944-exact-feasibility
+        status: confirmed
+      - result: n180-transplant
+        id: E-ozden-944-review-exact-feasibility
+        status: confirmed
+      - result: n180-transplant
+        id: E-ozden-944-certificate-report
+        status: reviewed
     close_when: >-
       T-288 is on main at V3/C3 as the house at 180, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -30578,11 +30762,55 @@ issues:
       them all (F7); which replay is intended, certificate.replay or the README's rerun, and
       from which directory, and whether the schema path could name this repository's file (F12,
       F13). No reply has been posted.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6793136584, posted at
+      10:15:13Z), after #949 merged as 8afdabe8f at 09:57:31Z, registering T-288 and adopting it
+      as the house at 180; recorded in intake lane L91. Lane L89 drafted it from main 8afdabe8f,
+      its record block rendered by check_requests --draft 944 with the certificate-report line
+      added by hand, and the posted text is that draft as written. It states T-288 at V3/C3,
+      confirmed and current; E-ozden-944-exact-feasibility and
+      E-ozden-944-review-exact-feasibility, confirmed; and E-ozden-944-certificate-report,
+      reviewed. It says that the review accepted it with findings, none blocking or major, and
+      scored it S3, and that T-288 became the house at 180 on 11 November in place of T-174,
+      1.38e-3 lower, which stays a verified bound at V3/C3, kept as history; T-174 is not this
+      issue's result and is not recorded under reported. It says what was checked: both maintained
+      exact routes over every wall and all 16,110 pairs, with the duplicate-square,
+      outside-container and sharp controls. It passes on the review's clean-room checker and its
+      15 controls, and says that T-174's certificate at 180 has no contraction margin at all, so
+      no part of the gain is padding and the owner's open question about gains inside a padding
+      margin does not reach it (F9); the review's F16 was on the record's own draft wording about
+      tilt signs near 45 degrees, now corrected. It says that the review checked the issue's
+      statements about the promotion against the files, and that the packing is a new arrangement
+      relative to T-174's, the optimal assignment under the best symmetry moving 49 squares beyond
+      a tenth, so the record credits the author as its finder (F10). On the seed (F8) it says that
+      the review's model matches 121 squares to the registry's 154 and 127 to the house, so it
+      cannot tell the seed from the house, and the record gives the seed as the author's account.
+      It passes on the review's notes for the author, F5 (9 more square–wall pairs lie 1.8e-4 to
+      9.7e-4 from a wall), F6 (pair margins of 2.0 to 9.8e-13 of the centres' separation, median
+      2.09e-13 here), F7, F12 and F13, its F4 being on #943. It says that Daniel's regularizer now
+      draws 180 and reached a certified KKT point 2.71e-12 below the side, about the certificate's
+      contraction margin of 2.58e-12, held as a candidate on RV-3 (think-ruu2 and think-ikku), as
+      Daniel's solves at 172 and 270 are (think-wju3). It passes on the licence, CC BY 4.0 and
+      MIT, with Evan Daniel's MIT notice byte for byte the one retained in
+      evand-n154-sweep-2026-10-20, and says that whether Francisco Couzo's improvement of the seed
+      needs a notice of its own stays the project's open question (think-mdxq, F14). It passes on
+      the credit, Özden after Daniel and Couzo, the atlas posters holding Özden's name off their
+      credit block at 180 until the next infographics cut (think-tj4o). It reads the Kaggle sides:
+      the per-puzzle packing the issue quotes, 13.916993522491 (kirilltym), is above T-288, and
+      the side-only entry 13.916993522478 (team webmaking, 27 October), T-174's side to 12 places,
+      states no packing and is not counted. It asks four of the review's six questions, its 3, 4,
+      5 and 6, and points to #943 for question 1 and to #945 for question 2: whether the final
+      repair scaling was about 2e-13 rather than 1e-13; which assignment the lineage counts use;
+      how much of the seed, the registry's 154, the author expected to remain after 1,281
+      basin-hopping trials; and which replay is intended, from which directory, and whether the
+      schema path would name this repository's file. The questions are informational and hold
+      nothing open. The issue was closed as completed at 10:15:20Z.
   - number: 945
     title: 's(268) ≤ 16.872029849085: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-10'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -30610,7 +30838,7 @@ issues:
       the start and the record it improves, both strong generators' regularization of the new
       house run in the same change. The Kaggle packing the issue quotes, 16.874361715873
       (ntumlnoob), is above it; the side-only leaderboard entry it quotes states no packing.
-    read_through: '2026-11-10T15:28:42Z'
+    read_through: '2026-11-11T10:15:58Z'
     results:
     - key: n268-transplant
       claim: >-
@@ -30627,8 +30855,33 @@ issues:
     beads:
     - think-xq4o
     - think-x8oc
+    - think-ruu2
+    - think-ikku
+    - think-wju3
+    - think-mdxq
+    - think-tj4o
     answer_bead: think-xq4o
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/945#issuecomment-6793151443
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n268-transplant
+        id: T-289
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n268-transplant
+        id: E-ozden-945-exact-feasibility
+        status: confirmed
+      - result: n268-transplant
+        id: E-ozden-945-review-exact-feasibility
+        status: confirmed
+      - result: n268-transplant
+        id: E-ozden-945-certificate-report
+        status: reviewed
     close_when: >-
       T-289 is on main at V3/C3 as the house at 268, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -30652,11 +30905,59 @@ issues:
       lower-left anchoring reproducing them all (F7); which replay is intended,
       certificate.replay or the README's rerun, and from which directory, and whether the schema
       path could name this repository's file (F12, F13). No reply has been posted.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6793151443, posted at
+      10:15:58Z), after #949 merged as 8afdabe8f at 09:57:31Z, registering T-289 and adopting it
+      as the house at 268; recorded in intake lane L91. Lane L89 drafted it from main 8afdabe8f,
+      its record block rendered by check_requests --draft 945 with the certificate-report line
+      added by hand, and the posted text is that draft as written. It states T-289 at V3/C3,
+      confirmed and current; E-ozden-945-exact-feasibility and
+      E-ozden-945-review-exact-feasibility, confirmed; and E-ozden-945-certificate-report,
+      reviewed. It says that the review accepted it with findings, none blocking or major, and
+      scored it S3, and that T-289 became the house at 268 on 11 November in place of the author's
+      own T-276 (#928), 4.40e-4 lower, which stays a verified bound at V3/C3, kept as history;
+      T-276 is not this issue's result and is not recorded under reported. It says what was
+      checked: both maintained exact routes over every wall and all 35,778 pairs, with the
+      duplicate-square, outside-container and sharp controls. It passes on the review's clean-room
+      checker and its 15 controls, and says that the gain is 1.4e8 times T-276's contraction
+      margin of 3.19e-12, so the owner's open question about gains inside a padding margin does
+      not reach it (F9); the review's F16 was on the record's own draft wording about tilt signs
+      near 45 degrees, now corrected. It says that the review checked the issue's statements about
+      the promotion against the files, the /tmp paths of #928 being gone, and that the packing is
+      a new arrangement relative to T-276's, the optimal assignment under the best symmetry moving
+      125 squares beyond a tenth, so the record credits the author as this packing's finder, where
+      under T-276 it named Evan Daniel the finder and the author the improver (F10). On the seed
+      (F8) it says that the review's model matches 235 squares to the registry's 302 and 137 to
+      the house. It passes on the review's notes for the author, F5 (eight squares touch a wall,
+      in groups that share one coordinate and one angle in the pose, so the wall sentence holds
+      only counting ties), F6 (pair margins of 2.0 to 9.8e-13 of the centres' separation, median
+      2.05e-13 here), F7, F12 and F13, its F4 being on #943. It says that grid-slack's 0.5-degree
+      view now draws 268, and that Daniel's regularizer reached a certified KKT point 3.27e-12
+      below the side, about the certificate's contraction margin of 3.20e-12, held as a candidate
+      on RV-3 (think-ruu2 and think-ikku), as Daniel's solves at 172 and 270 are (think-wju3). It
+      passes on the licence, CC BY 4.0 and MIT, with Evan Daniel's MIT notice byte for byte the
+      one retained in evand-exact-cur-2026-10-16, which at 268 answers the licence note of #928's
+      reply, and says that whether the seed's upstream starts need notices of their own stays the
+      project's open question (think-mdxq, F14). It passes on the credit, Özden after PingYou Ltd,
+      Couzo, Polkovskyi and Daniel, the atlas posters holding Özden's name off their credit block
+      at 268, as they have since T-276, until the next infographics cut (think-tj4o). It reads the
+      Kaggle sides: the per-puzzle packing the issue quotes, 16.874361715873 (ntumlnoob), is above
+      T-289, and the side-only entry 16.871868135138 (team Cats and boxes, 28 October), 1.617e-4
+      below T-289, states no packing and is not counted. It asks four of the review's six
+      questions, its 2, 3, 4 and 6, and points to #943 for question 1 and to #944 for question 5:
+      whether the search snapped the eight wall squares to common values, and whether "the squares
+      that set each wall, ties included" would describe it; whether the final repair scaling was
+      about 2e-13 rather than 1e-13; which assignment the lineage counts use; and which replay is
+      intended, from which directory, and whether the schema path would name this repository's
+      file. The questions are informational and hold nothing open. The issue was closed as
+      completed at 10:16:07Z. The supersession of T-276 owed a follow-up on #928, which was posted
+      and is recorded there.
   - number: 947
     title: 's(269) ≤ 16.900994579952: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-11'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -30683,7 +30984,7 @@ issues:
       the start and the record it improves, both strong generators' regularization of the new
       house run in the same change. The Kaggle packing the issue quotes, 16.901513582205
       (kirilltym), is above it; the side-only leaderboard entry it quotes states no packing.
-    read_through: '2026-11-11T03:35:07Z'
+    read_through: '2026-11-11T10:16:41Z'
     results:
     - key: n269-transplant
       claim: >-
@@ -30700,8 +31001,32 @@ issues:
     beads:
     - think-xq4o
     - think-x8oc
+    - think-ruu2
+    - think-ikku
+    - think-wju3
+    - think-tj4o
     answer_bead: think-xq4o
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/947#issuecomment-6793165538
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n269-transplant
+        id: T-290
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n269-transplant
+        id: E-ozden-947-exact-feasibility
+        status: confirmed
+      - result: n269-transplant
+        id: E-ozden-947-review-exact-feasibility
+        status: confirmed
+      - result: n269-transplant
+        id: E-ozden-947-certificate-report
+        status: reviewed
     close_when: >-
       T-290 is on main at V3/C3 as the house at 269, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -30725,3 +31050,45 @@ issues:
       (F7); which replay is intended, certificate.replay or the README's rerun, and from which
       directory, and whether the schema path could name this repository's file (F12, F13). No
       reply has been posted.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6793165538, posted at
+      10:16:41Z), after #949 merged as 8afdabe8f at 09:57:31Z, registering T-290 and adopting it
+      as the house at 269; recorded in intake lane L91. Lane L89 drafted it from main 8afdabe8f,
+      its record block rendered by check_requests --draft 947 with the certificate-report line
+      added by hand, and the posted text is that draft as written. It states T-290 at V3/C3,
+      confirmed and current; E-ozden-947-exact-feasibility and
+      E-ozden-947-review-exact-feasibility, confirmed; and E-ozden-947-certificate-report,
+      reviewed. It says that the review accepted it with findings, none blocking or major, and
+      scored it S3, and that T-290 became the house at 269 on 11 November in place of T-174,
+      5.19e-4 lower, which stays a verified bound at V3/C3, kept as history; T-174 is not this
+      issue's result and is not recorded under reported. It says what was checked: both maintained
+      exact routes over every wall and all 36,046 pairs, with the duplicate-square,
+      outside-container and sharp controls. It passes on the review's clean-room checker and its
+      15 controls, and says that T-174's certificate at 269 has no contraction margin at all, so
+      no part of the gain is padding and the owner's open question about gains inside a padding
+      margin does not reach it (F9); the review's F16 was on the record's own draft wording about
+      tilt signs near 45 degrees, at 269 in T-174's packing, now corrected. It says that the
+      review checked the issue's statements about the promotion against the files, and that the
+      packing is a new arrangement relative to T-174's, the optimal assignment under the best
+      symmetry moving 112 squares beyond a tenth, so the record credits the author as its finder
+      (F10). On the seed (F8) it says that the review's model matches 185 squares to the
+      registry's 304 and 151 to the house, and that the packing's 100 tilted squares follow the
+      seed's 110, not the house's 49. It passes on the review's notes for the author, F5 (25 more
+      square–wall pairs lie 3.3e-5 to 9.6e-4 from a wall), F6 (pair margins of 2.0 to 9.8e-13 of
+      the centres' separation, median 2.17e-13 here), F7 (under least summed squared move the
+      count beyond 0.05 is 118, not 117), F12 and F13, its F4 being on #943. It says that
+      grid-slack's 0.5-degree view now draws 269, and that Daniel's regularizer reached a
+      certified KKT point 3.40e-12 below the side, about the certificate's contraction margin of
+      3.24e-12, held as a candidate on RV-3 (think-ruu2 and think-ikku), as Daniel's solves at 172
+      and 270 are (think-wju3). It passes on the licence, CC BY 4.0 and MIT, with Evan Daniel's
+      MIT notice byte for byte the one retained in evand-issue914-2026-11-05 (F14), and on the
+      credit, Özden after Daniel, the atlas posters holding Özden's name off their credit block at
+      269 until the next infographics cut (think-tj4o). It reads the Kaggle sides: the per-puzzle
+      packing the issue quotes, 16.901513582205 (kirilltym), is above T-290, and the side-only
+      entry 16.889730079125 (team elegans, 5 November), 1.126e-2 below T-290, states no packing
+      and is not counted. It asks three of the review's six questions, its 3, 4 and 6, and points
+      to #943, #945 and #944 for questions 1, 2 and 5: whether the final repair scaling was about
+      2e-13 rather than 1e-13; which assignment the lineage counts use; and which replay is
+      intended, from which directory, and whether the schema path would name this repository's
+      file. The questions are informational and hold nothing open. The issue was closed as
+      completed at 10:16:49Z.
