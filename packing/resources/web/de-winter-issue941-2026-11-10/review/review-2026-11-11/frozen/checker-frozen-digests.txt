@@ -1,0 +1,6 @@
+# L96 checker frozen at 2026-11-11T15:10:54Z, before the controls plan and before anything of the import lane was opened
+45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29  l96_read.py
+c09e123ab57545907ffc388d3f34f831919b509a55a1202987dec5273b41b9a1  l96_sat.py
+8b0e5e21a0b01b3faa81b8059b2d973d31b9891eccde60cb301489fcc24ac728  l96_clip.py
+88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131  l96_check.py
+fe187127e14fe25bc90fe3b7c19189cc1bb191a84b13187dce170f418adae4ef  l96_selftest.py

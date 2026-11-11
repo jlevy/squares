@@ -1,0 +1,27 @@
+{
+ "ledger_counts": 37,
+ "ledger_read_at_main": "8afdabe8fef2c308d6352a48e610924d0c6edb05",
+ "main_licence_copy_sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+ "manifests": {
+  "941@71da0d5": {
+   "retained_files_missing_from_manifest": [],
+   "licence_sha256": [
+    "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a"
+   ]
+  },
+  "942@a9486ed": {
+   "retained_files_missing_from_manifest": [],
+   "licence_sha256": [
+    "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a"
+   ]
+  },
+  "addendum@a0c4fc8": {
+   "retained_files_missing_from_manifest": [],
+   "licence_sha256": [
+    "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a"
+   ]
+  }
+ },
+ "problems": [],
+ "result": "LANE_AGREES"
+}

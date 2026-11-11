@@ -1,0 +1,142 @@
+{
+ "file": "n0921.cert",
+ "programs": {
+  "l96_read.py": "45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29",
+  "l96_sat.py": "c09e123ab57545907ffc388d3f34f831919b509a55a1202987dec5273b41b9a1",
+  "l96_clip.py": "8b0e5e21a0b01b3faa81b8059b2d973d31b9891eccde60cb301489fcc24ac728",
+  "l96_check.py": "88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131"
+ },
+ "sha256": "a7c45972b9abb293814041c15313f04aaa0af7bdeb0162ab90ac2e3743fa8cf8",
+ "bytes": 124747,
+ "reader": "accepted",
+ "comments": [
+  "# exact rational certificate: unit squares, centre (x, y), rotation t = tan(theta/2)",
+  "# public competition packing, re-optimized"
+ ],
+ "n": 921,
+ "scalars": 2764,
+ "noncanonical_scalars": 0,
+ "side": {
+  "exact": "308271449852089/10000000000000",
+  "floor_20": "30.82714498520890000000",
+  "ceil_10": "30.8271449853",
+  "ceil_12": "30.827144985209"
+ },
+ "squares_tilted": 913,
+ "squares_axis_aligned": 8,
+ "walls": {
+  "contacts": [],
+  "least_positive_clearance": {
+   "exact": "187563264087/1862645149230957031250",
+   "approx": "1.006973e-10",
+   "square": 753,
+   "wall": "bottom"
+  },
+  "clearances_equal_between_methods": true
+ },
+ "least_far_wall_clearance": "1.007386e-10",
+ "pairs": {
+  "total": 423660,
+  "A_decided_by_x_line": 398105,
+  "A_decided_by_y_line": 24585,
+  "A_decided_by_margin": 970,
+  "A_least_x_line_gap": "1.996229e-12",
+  "A_least_y_line_gap": "1.103565e-11",
+  "B_not_enumerated": 413901,
+  "B_decided_by_disc": 7555,
+  "B_clipped": 2204,
+  "contacts": [],
+  "overlaps_A": [],
+  "overlaps_B": [],
+  "classes_equal": true,
+  "least_positive_margin": {
+   "exact": "5940722574749625018598526562171363356505708390432410410552609782516966006927685343401863072719/29517421670878490938936779977742271358011631933653799549137433516785991742717212029732763767242431640625",
+   "approx": "2.012616e-10",
+   "pair": [
+    783,
+    791
+   ]
+  },
+  "smallest_ten_positive_margins": [
+   [
+    "2.012616e-10",
+    [
+     783,
+     791
+    ]
+   ],
+   [
+    "2.012755e-10",
+    [
+     775,
+     783
+    ]
+   ],
+   [
+    "2.013140e-10",
+    [
+     802,
+     805
+    ]
+   ],
+   [
+    "2.013362e-10",
+    [
+     805,
+     807
+    ]
+   ],
+   [
+    "2.013449e-10",
+    [
+     788,
+     796
+    ]
+   ],
+   [
+    "2.013459e-10",
+    [
+     542,
+     543
+    ]
+   ],
+   [
+    "2.013596e-10",
+    [
+     543,
+     544
+    ]
+   ],
+   [
+    "2.013626e-10",
+    [
+     767,
+     775
+    ]
+   ],
+   [
+    "2.013646e-10",
+    [
+     541,
+     542
+    ]
+   ],
+   [
+    "2.013647e-10",
+    [
+     578,
+     656
+    ]
+   ]
+  ],
+  "positive_margins_below": {
+   "1e-12": 0,
+   "1e-10": 0,
+   "1e-9": 679,
+   "1e-8": 714,
+   "1e-6": 718
+  }
+ },
+ "problems": [],
+ "verdict": "ACCEPT"
+}

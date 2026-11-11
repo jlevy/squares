@@ -1,0 +1,1189 @@
+{
+ "rows": [
+  {
+   "where": "#941",
+   "n": 413,
+   "file": "n0413.cert",
+   "sha256": "600b2c3eb4e12362b42c4ea8b31a661a69db55081e11869811c6993ead2b69fd",
+   "check": "ACCEPT",
+   "printed_side": "20.8239520077",
+   "ceil_10": "20.8239520077",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "20.824764038662",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "20.8247640387",
+   "printed_improvement": "0.000812",
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "8.120310e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000812",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "20.824764038662",
+    "at_n": 413,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 494,
+   "file": "n0494.cert",
+   "sha256": "9f998ac911dd9d74410a678b3b345b30b111d64f0ce66ce73fa19eeee064f10b",
+   "check": "ACCEPT",
+   "printed_side": "22.7365988643",
+   "ceil_10": "22.7365988643",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "22.737532875219",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "22.7375328752",
+   "printed_improvement": "0.000934",
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "9.340110e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000934",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "22.737532875219",
+    "at_n": 494,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 539,
+   "file": "n0539.cert",
+   "sha256": "124d0f6333041ea670b7ff3c5920f7d1d7c249956815ee481f5d5cf8a8cc9901",
+   "check": "ACCEPT",
+   "printed_side": "23.7365988643",
+   "ceil_10": "23.7365988643",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "23.736669673811",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "23.7366696738",
+   "printed_improvement": "0.000071",
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "7.080956e-05",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000071",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "23.736669673811",
+    "at_n": 539,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 543,
+   "file": "n0543.cert",
+   "sha256": "806f8427c0d1ae0a8f97d0e0c95f22df9868eae92301be3fc2c171e8071a3b19",
+   "check": "ACCEPT",
+   "printed_side": "23.8024287170",
+   "ceil_10": "23.8024287170",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "tymchishin-22-3662-2026-10-23",
+     "23.803053261145",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "23.8030532611",
+   "printed_improvement": "0.000625",
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "6.245442e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000625",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "23.803053261145",
+    "at_n": 543,
+    "source_id": "tymchishin-22-3662-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 547,
+   "file": "n0547.cert",
+   "sha256": "22850e615780fd13fc6526c125a6cbadeefd11cb2f7c765b8bbafb55aa1f5979",
+   "check": "ACCEPT",
+   "printed_side": "23.8787301198",
+   "ceil_10": "23.8787301198",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "23.879127653315",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "23.8791276533",
+   "printed_improvement": "0.000398",
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "3.975336e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000398",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "23.879127653315",
+    "at_n": 547,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 590,
+   "file": "n0590.cert",
+   "sha256": "f5bc98c49dc7048fa0fb7b86eb0b08200597fc9a74c96ad1ac2eea1765da9df3",
+   "check": "ACCEPT",
+   "printed_side": "24.8024287170",
+   "ceil_10": "24.8024287170",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "24.802527132871",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "24.8025271329",
+   "printed_improvement": "0.000098",
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "9.841594e-05",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000098",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "24.802527132871",
+    "at_n": 590,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 738,
+   "file": "n0738.cert",
+   "sha256": "7e15de70463b0dd137318fbc3a7990a9911e5c94735cc810b14b6167e633e7f5",
+   "check": "ACCEPT",
+   "printed_side": "27.6912062515",
+   "ceil_10": "27.6912062515",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "27.691283629524",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "27.6912836295",
+   "printed_improvement": "0.000077",
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "7.737809e-05",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000077",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "27.691283629524",
+    "at_n": 738,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 739,
+   "file": "n0739.cert",
+   "sha256": "0b9c4c34484470d550fb3ccf39ab1aecb32b9990242e4bc6c1ab4c69c942e48c",
+   "check": "ACCEPT",
+   "printed_side": "27.6912835939",
+   "ceil_10": "27.6912835939",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "27.691450272099",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "27.6914502721",
+   "printed_improvement": "0.000167",
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.666782e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000167",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "27.691450272099",
+    "at_n": 739,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 753,
+   "file": "n0753.cert",
+   "sha256": "814b82fd32df8d43da42c235b154d1a1d7e2dc1d340a4cf512e7dad51850db8c",
+   "check": "ACCEPT",
+   "printed_side": "27.9026514302",
+   "ceil_10": "27.9026514302",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "27.907984230435",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "27.9079842304",
+   "printed_improvement": "0.005333",
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "5.332800e-03",
+   "below_current_row": true,
+   "improvement_exact_6": "0.005333",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "27.907984230435",
+    "at_n": 753,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 794,
+   "file": "n0794.cert",
+   "sha256": "2b6bf1fd6dc3de78d366c1b197355b1fe4e127a5093303f30877ba224d9297ff",
+   "check": "ACCEPT",
+   "printed_side": "28.6912835939",
+   "ceil_10": "28.6912835939",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "28.691448980966",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "28.6914489810",
+   "printed_improvement": "0.000165",
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.653871e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000165",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "28.691448980966",
+    "at_n": 794,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 809,
+   "file": "n0809.cert",
+   "sha256": "edffa61580219322bae3552c92d0bdd5fed708b0ad8a0316cd7deb7f65a0567e",
+   "check": "ACCEPT",
+   "printed_side": "28.9079170470",
+   "ceil_10": "28.9079170470",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "28.908036098650",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "28.9080360986",
+   "printed_improvement": "0.000119",
+   "record_print_rule": "cut",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.190517e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000119",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "28.908036098650",
+    "at_n": 809,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 810,
+   "file": "n0810.cert",
+   "sha256": "910238d79fae55df35cfd9155cc4d99e6706a41b743e35ed2abad704bb9fc91e",
+   "check": "ACCEPT",
+   "printed_side": "28.9079170470",
+   "ceil_10": "28.9079170470",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "28.910451045451",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "28.9104510455",
+   "printed_improvement": "0.002534",
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "2.533999e-03",
+   "below_current_row": true,
+   "improvement_exact_6": "0.002534",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "28.910451045451",
+    "at_n": 810,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 851,
+   "file": "n0851.cert",
+   "sha256": "13b931f9fcd1e3f5006c2b947743b203fa3022b7d3f0b21ec6a7d6a5423bf370",
+   "check": "ACCEPT",
+   "printed_side": "29.6912835939",
+   "ceil_10": "29.6912835939",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "29.691448975560",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "29.6914489756",
+   "printed_improvement": "0.000165",
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.653817e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000165",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "29.691448975560",
+    "at_n": 851,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 867,
+   "file": "n0867.cert",
+   "sha256": "cb9fddd4e024d786288055f765756dc247640c282a8cee9cee3ba53fff217258",
+   "check": "ACCEPT",
+   "printed_side": "29.9079170470",
+   "ceil_10": "29.9079170470",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "29.908036097699",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "29.9080360977",
+   "printed_improvement": "0.000119",
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.190508e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000119",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "29.908036097699",
+    "at_n": 867,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#941",
+   "n": 910,
+   "file": "n0910.cert",
+   "sha256": "24c3e3c3293d4654d0cf771b4b8e86a9af545f4d15555844ebd7fc2333ede951",
+   "check": "ACCEPT",
+   "printed_side": "30.6912835939",
+   "ceil_10": "30.6912835939",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23-recipes",
+     "30.691448975560",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_record": "30.6914489756",
+   "printed_improvement": "0.000165",
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.653817e-04",
+   "below_current_row": true,
+   "improvement_exact_6": "0.000165",
+   "improvement_print_matches": true,
+   "monotone_least_current_row": {
+    "value": "30.691448975560",
+    "at_n": 910,
+    "source_id": "couzo-issue763-2026-10-23-recipes"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 632,
+   "file": "n0632.cert",
+   "sha256": "a3c403f3c12b9e23e3da65af8038983441b22501456011553077c7f2f714ecbb",
+   "check": "ACCEPT",
+   "printed_side": "25.6456954277",
+   "ceil_10": "25.6456954277",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "25.656854249498",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "25.6460731755",
+   "printed_record": "25.6568542495",
+   "printed_gain_over_public": "3.8e-04",
+   "gain_over_public_exact_2sf": "3.8e-04",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.115882e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "25.656854249498",
+    "at_n": 632,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 637,
+   "file": "n0637.cert",
+   "sha256": "d7650b96a76c9be9a479fb0f96603d11ea9379f1e84257aa5f70a9a9eb2cefc4",
+   "check": "ACCEPT",
+   "printed_side": "25.7447388658",
+   "ceil_10": "25.7447388658",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "25.769289510287",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "25.7447480924",
+   "printed_record": "25.7692895103",
+   "printed_gain_over_public": "9.2e-06",
+   "gain_over_public_exact_2sf": "9.2e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "2.455064e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "25.769289510287",
+    "at_n": 637,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 655,
+   "file": "n0655.cert",
+   "sha256": "7d0f12e5a7218c681d68d81c8657b903d87115db62fbeeb1ae8fc24f21d99cf7",
+   "check": "ACCEPT",
+   "printed_side": "25.9996711101",
+   "ceil_10": "25.9996711101",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [],
+   "printed_public": "25.9997111248",
+   "printed_record": "26.0000000000",
+   "printed_gain_over_public": "4.0e-05",
+   "gain_over_public_exact_2sf": "4.0e-05",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_is_26": true,
+   "below_26": true,
+   "monotone_least_current_row": {
+    "value": "26.535533905933",
+    "at_n": 677,
+    "source_id": "couzo-index-2026-10-15"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 684,
+   "file": "n0684.cert",
+   "sha256": "7673d284172589973fc2f9e2c870ddd8d3b36aa73e544554adae2ff19590ef49",
+   "check": "ACCEPT",
+   "printed_side": "26.6456964776",
+   "ceil_10": "26.6456964776",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "26.656854249498",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "26.6460731833",
+   "printed_record": "26.6568542495",
+   "printed_gain_over_public": "3.8e-04",
+   "gain_over_public_exact_2sf": "3.8e-04",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.115777e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "26.656854249498",
+    "at_n": 684,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 685,
+   "file": "n0685.cert",
+   "sha256": "51027a9f92ea7b78e1333c8d1685d26a86a295606a71995b725139cc11cb6938",
+   "check": "ACCEPT",
+   "printed_side": "26.6870020013",
+   "ceil_10": "26.6870020013",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "tymchishin-reclosure-v3-2026-10-23",
+     "26.692388159732",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "26.6870514965",
+   "printed_record": "26.6923881597",
+   "printed_gain_over_public": "4.9e-05",
+   "gain_over_public_exact_2sf": "4.9e-05",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "5.386159e-03",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "26.692388159732",
+    "at_n": 685,
+    "source_id": "tymchishin-reclosure-v3-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 744,
+   "file": "n0744.cert",
+   "sha256": "8c6c85c24f9c8f4cc3e3bf78b76c6fcbca6c0f0ce5aaf8b54b8f55f1e4f40e48",
+   "check": "ACCEPT",
+   "printed_side": "27.7601633593",
+   "ceil_10": "27.7601633593",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "27.786715806974",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "27.7601696095",
+   "printed_record": "27.7867158070",
+   "printed_gain_over_public": "6.3e-06",
+   "gain_over_public_exact_2sf": "6.3e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "2.655245e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "27.786715806974",
+    "at_n": 744,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 750,
+   "file": "n0750.cert",
+   "sha256": "092cec57a0760fd025034bcbc2da7f9460e83ca5fa8de2c4cb2a0f925e0665dd",
+   "check": "ACCEPT",
+   "printed_side": "27.8595204745",
+   "ceil_10": "27.8595204745",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "27.874585541193",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "27.8595284738",
+   "printed_record": "27.8745855412",
+   "printed_gain_over_public": "8.0e-06",
+   "gain_over_public_exact_2sf": "8.0e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.506507e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "27.874585541193",
+    "at_n": 750,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 756,
+   "file": "n0756.cert",
+   "sha256": "6f37df2b3b619c07f11aadef78b94fd2746cec4929ee21f2cafd13ab8761b46d",
+   "check": "ACCEPT",
+   "printed_side": "27.9245802503",
+   "ceil_10": "27.9245802503",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "27.949602638227",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "27.9245818149",
+   "printed_record": "27.9496026382",
+   "printed_gain_over_public": "1.6e-06",
+   "gain_over_public_exact_2sf": "1.6e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "2.502239e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "27.949602638227",
+    "at_n": 756,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 805,
+   "file": "n0805.cert",
+   "sha256": "252205719f5f362ff88fc082156e77bd7c90e17b121ab9b4eb3a2370dfa6cc7d",
+   "check": "ACCEPT",
+   "printed_side": "28.8450303356",
+   "ceil_10": "28.8450303356",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "28.858216341607",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "28.8450375703",
+   "printed_record": "28.8582163416",
+   "printed_gain_over_public": "7.2e-06",
+   "gain_over_public_exact_2sf": "7.2e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.318601e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "28.858216341607",
+    "at_n": 805,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 814,
+   "file": "n0814.cert",
+   "sha256": "9951a39af864d610efbb075f31ce167f1ecbdcd92321636388695eb46863fbd1",
+   "check": "ACCEPT",
+   "printed_side": "28.9549571055",
+   "ceil_10": "28.9549571055",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "28.961440808824",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "28.9549585758",
+   "printed_record": "28.9614408088",
+   "printed_gain_over_public": "1.5e-06",
+   "gain_over_public_exact_2sf": "1.5e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "6.483703e-03",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "28.961440808824",
+    "at_n": 814,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 918,
+   "file": "n0918.cert",
+   "sha256": "45bb5bfebaf531433256078d3a4548b6cc2adb93c774bf5bda4bc31dae1473a0",
+   "check": "ACCEPT",
+   "printed_side": "30.7867372035",
+   "ceil_10": "30.7867372035",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "30.796057688423",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "30.7867520399",
+   "printed_record": "30.7960576884",
+   "printed_gain_over_public": "1.5e-05",
+   "gain_over_public_exact_2sf": "1.5e-05",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "9.320485e-03",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "30.796057688423",
+    "at_n": 918,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 921,
+   "file": "n0921.cert",
+   "sha256": "a7c45972b9abb293814041c15313f04aaa0af7bdeb0162ab90ac2e3743fa8cf8",
+   "check": "ACCEPT",
+   "printed_side": "30.8271449853",
+   "ceil_10": "30.8271449853",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "30.839621660274",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "30.8271453670",
+   "printed_record": "30.8396216603",
+   "printed_gain_over_public": "3.8e-07",
+   "gain_over_public_exact_2sf": "3.8e-07",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.247668e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "30.839621660274",
+    "at_n": 921,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 924,
+   "file": "n0924.cert",
+   "sha256": "9388e7d210fc5b78623d85df50d1e171b1615eb23875d2af630594598eb89b89",
+   "check": "ACCEPT",
+   "printed_side": "30.8553857463",
+   "ceil_10": "30.8553857463",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "30.870828693406",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "30.8553859309",
+   "printed_record": "30.8708286934",
+   "printed_gain_over_public": "1.8e-07",
+   "gain_over_public_exact_2sf": "1.8e-07",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.544295e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "30.870828693406",
+    "at_n": 924,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 935,
+   "file": "n0935.cert",
+   "sha256": "aacb623775c6dcf15affe0f9e2ba128f90832b8ea97ef6aeee14d22269629d8e",
+   "check": "ACCEPT",
+   "printed_side": "30.9800571865",
+   "ceil_10": "30.9800571865",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-964ee2b-2026-10-23",
+     "30.994174058119",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "30.9800574656",
+   "printed_record": "30.9941740581",
+   "printed_gain_over_public": "2.8e-07",
+   "gain_over_public_exact_2sf": "2.8e-07",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.411687e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "30.994174058119",
+    "at_n": 935,
+    "source_id": "couzo-964ee2b-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 970,
+   "file": "n0970.cert",
+   "sha256": "8f28c4b19740daa379e9987523e58b737ff4d34f1f2ee30432fe7b82f1148222",
+   "check": "ACCEPT",
+   "printed_side": "31.6389903231",
+   "ceil_10": "31.6389903231",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23-recipes",
+     "31.656854249499",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "31.6391025154",
+   "printed_record": "31.6568542495",
+   "printed_gain_over_public": "1.1e-04",
+   "gain_over_public_exact_2sf": "1.1e-04",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.786393e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "31.656854249499",
+    "at_n": 970,
+    "source_id": "couzo-issue763-2026-10-23-recipes"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942",
+   "n": 989,
+   "file": "n0989.cert",
+   "sha256": "9b35f26fa2f896a92315ebbbe62f2033cb8b791e9e1646cd620970114a7d4bbd",
+   "check": "ACCEPT",
+   "printed_side": "31.8889473785",
+   "ceil_10": "31.8889473785",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "31.909679351448",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "31.8890306338",
+   "printed_record": "31.9096793514",
+   "printed_gain_over_public": "8.3e-05",
+   "gain_over_public_exact_2sf": "8.3e-05",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "2.073197e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "31.909679351448",
+    "at_n": 989,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942 comment 6772308414",
+   "n": 597,
+   "file": "n0597.cert",
+   "sha256": "e3388f1414ca2500dde0c8a3e9a37b58b73dc73aa7b4276093c40a30616b290c",
+   "check": "ACCEPT",
+   "printed_side": "24.8969258585",
+   "ceil_10": "24.8969258585",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "24.901150566387",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "24.8971430569",
+   "printed_record": "24.9011505664",
+   "printed_gain_over_public": "2.2e-04",
+   "gain_over_public_exact_2sf": "2.2e-04",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "4.224708e-03",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "24.901150566387",
+    "at_n": 597,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942 comment 6772308414",
+   "n": 754,
+   "file": "n0754.cert",
+   "sha256": "16ebbf6c1c9c6181488382dd6587654bc75fefb5f38df3f4c8c292892ccb536a",
+   "check": "ACCEPT",
+   "printed_side": "27.9075316299",
+   "ceil_10": "27.9075316299",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "27.920422831462",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "27.9075373596",
+   "printed_record": "27.9204228315",
+   "printed_gain_over_public": "5.7e-06",
+   "gain_over_public_exact_2sf": "5.7e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.289120e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "27.920422831462",
+    "at_n": 754,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942 comment 6772308414",
+   "n": 864,
+   "file": "n0864.cert",
+   "sha256": "15b58c029a09408b4fd1f686d1c1b683da531bcf5d63a51787a6f645aafcb160",
+   "check": "ACCEPT",
+   "printed_side": "29.8530288378",
+   "ceil_10": "29.8530288378",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "29.873870986621",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "29.8530313845",
+   "printed_record": "29.8738709866",
+   "printed_gain_over_public": "2.5e-06",
+   "gain_over_public_exact_2sf": "2.5e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "2.084215e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "29.873870986621",
+    "at_n": 864,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942 comment 6772308414",
+   "n": 865,
+   "file": "n0865.cert",
+   "sha256": "7445d82718ad72eb7e67c494c30aa6872d28d23827a7a21cdedc159e2785cbc5",
+   "check": "ACCEPT",
+   "printed_side": "29.8693054513",
+   "ceil_10": "29.8693054513",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "29.883815809125",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "29.8693091728",
+   "printed_record": "29.8838158091",
+   "printed_gain_over_public": "3.7e-06",
+   "gain_over_public_exact_2sf": "3.7e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "both",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.451036e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "29.883815809125",
+    "at_n": 865,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942 comment 6772308414",
+   "n": 869,
+   "file": "n0869.cert",
+   "sha256": "b1342c51508842fcdfd1aafdce95e83b479884b5746210c3f852f9dc2d9428c2",
+   "check": "ACCEPT",
+   "printed_side": "29.9122235088",
+   "ceil_10": "29.9122235088",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-issue763-2026-10-23",
+     "29.913238532580",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "29.9122248917",
+   "printed_record": "29.9132385326",
+   "printed_gain_over_public": "1.4e-06",
+   "gain_over_public_exact_2sf": "1.4e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "1.015024e-03",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "29.913238532580",
+    "at_n": 869,
+    "source_id": "couzo-issue763-2026-10-23"
+   },
+   "below_monotone_least": true
+  },
+  {
+   "where": "#942 comment 6772308414",
+   "n": 991,
+   "file": "n0991.cert",
+   "sha256": "5c91b5a527ab51a23459d69358a8996cc2c538137c2d3c9718c8a70c7b6fd9d2",
+   "check": "ACCEPT",
+   "printed_side": "31.9019684133",
+   "ceil_10": "31.9019684133",
+   "side_print_is_ceil_10": true,
+   "main_current_rows": [
+    [
+     "couzo-43f666c-2026-10-24",
+     "31.934561612655",
+     "tracked-outside-case-corpus"
+    ]
+   ],
+   "printed_public": "31.9019695767",
+   "printed_record": "31.9345616127",
+   "printed_gain_over_public": "1.2e-06",
+   "gain_over_public_exact_2sf": "1.2e-06",
+   "gain_over_public_print_matches": true,
+   "public_print_above_side": true,
+   "record_print_rule": "nearest",
+   "record_print_matches_row": true,
+   "below_current_row_by": "3.259320e-02",
+   "below_current_row": true,
+   "monotone_least_current_row": {
+    "value": "31.934561612655",
+    "at_n": 991,
+    "source_id": "couzo-43f666c-2026-10-24"
+   },
+   "below_monotone_least": true
+  }
+ ],
+ "count": 37,
+ "not_as_printed": []
+}
