@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 217
+version: 218
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -84,7 +84,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T20:55:22.675Z
+updated_at: 2026-11-11T20:56:37.140Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -326,3 +326,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 18:57Z renewal (intake203): new #954 (Özden, s(179) <= 13.881367160110, 2.428e-3 below T-174). Bead think-f65n claimed by bold-ritchie-l100; L100 is importing it and L101 is running the blind review in parallel. The other new items (#941/#942 replies, #942 close) are covered by L99's records PR.
 
 2026-11-11 19:52Z renewal (intake204): new de Winter head 501cb8d (READMEs only: answers the 5e-9 and 16-vs-22 questions; noted on think-cen3, read owed). #957 (two_strip flaky-test fix, think-doi6) is in CI; #955 waits on it. L101 review of #954 accepted; L100 is folding it in.
+
+2026-11-11 20:52Z renewal (intake205): de Winter answered the review's questions on #941 (-6806337206) and #942 (-6806342752), and pushed n132/n157 with no issue (a491dad 20:49:44Z; head 6617869). 132 claims a gain of 0.0096; 157 goes below the 13x13 grid. New beads: think-bcfs (import, L104; blind review L105) and think-acm0 (record the answers on #955, L103). GitHub Actions has been queuing runs since about 19:37Z (#957's scope job and L100's runs not started).
