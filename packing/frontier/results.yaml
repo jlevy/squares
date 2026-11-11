@@ -42994,10 +42994,10 @@ results:
       not a further arrangement of T-276's packing; the issue names the registry's 302 as its
       seed, which this measurement does not reach.
 
-      Its side is 3.27e-12 above 16 plus the fractional part, .872029849081179973, that the
-      exact sides of Evan Daniel's T-145 certificates at 129, 153 and 302 share, and contracted
-      to first contact it is 6.6e-14 above it; whether the packing shares their structure is not
-      measured here.
+      Its side is 3.27e-12 above 16.872029849081179973, which is 16 plus the first 18 decimal
+      places that the exact sides of Evan Daniel's T-145 certificates at 129, 153 and 302 share,
+      and contracted to first contact it is 6.6e-14 above it; whether the packing shares their
+      structure is not measured here.
 
       Measured against padding: T-276's certificate, contracted uniformly about the origin to
       first contact and boxed, loses 3.19e-12 of side (1 - lambda* = 2.012182e-13), so the gain

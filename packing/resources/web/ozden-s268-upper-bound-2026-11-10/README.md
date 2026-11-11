@@ -103,7 +103,7 @@ A measurement for credit; it decides nothing.
   T-276’s packing; the issue names another count’s packing, the registry’s 302, as
   its seed, which this measurement does not reach. The issue’s own counts against the house (230 centres beyond 1e-3, 111 squares re-tilted beyond a degree, largest move 1.041) are this measurement’s.
 
-Its side is 3.27 × 10⁻¹² above 16 plus the fractional part, .872029849081179973…, that the exact sides of Evan Daniel’s certificates at 129, 153 and 302 share (T-145), and contracted to first contact (below) it is 6.6 × 10⁻¹⁴ above it. The issue names the registry’s 302 as its seed. Whether the packing shares the structure of those certificates is not measured here.
+Its side is 3.27 × 10⁻¹² above 16.872029849081179973, which is 16 plus the first 18 decimal places that the exact sides of Evan Daniel’s certificates at 129, 153 and 302 share (T-145), and contracted to first contact (below) it is 6.6 × 10⁻¹⁴ above it. The issue names the registry’s 302 as its seed. Whether the packing shares the structure of those certificates is not measured here.
 
 ## Exact Replay
 
