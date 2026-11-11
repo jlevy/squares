@@ -1,0 +1,373 @@
+{
+ "programs": {
+  "l96_read.py": "45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29",
+  "l96_sat.py": "c09e123ab57545907ffc388d3f34f831919b509a55a1202987dec5273b41b9a1",
+  "l96_clip.py": "8b0e5e21a0b01b3faa81b8059b2d973d31b9891eccde60cb301489fcc24ac728",
+  "l96_check.py": "88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131"
+ },
+ "selftest": "l96_selftest.py",
+ "cases": 72,
+ "result": "PASSED",
+ "detail": [
+  {
+   "case": "edge contact",
+   "ok": true,
+   "detail": "A margin 0, B contact area 0"
+  },
+  {
+   "case": "edge contact (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "edge contact (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "edge apart 1e-30",
+   "ok": true,
+   "detail": "A margin 1/1000000000000000000000000000000, B clear area 0"
+  },
+  {
+   "case": "edge apart 1e-30 (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "edge apart 1e-30 (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "edge overlap 1e-30",
+   "ok": true,
+   "detail": "A margin -1/1000000000000000000000000000000, B overlap area 1/1000000000000000000000000000000"
+  },
+  {
+   "case": "edge overlap 1e-30 (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "edge overlap 1e-30 (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "corner contact",
+   "ok": true,
+   "detail": "A margin 0, B contact area 0"
+  },
+  {
+   "case": "corner contact (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "corner contact (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "corner overlap",
+   "ok": true,
+   "detail": "A margin -1/1000000000000000000000000000000, B overlap area 1/1000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "case": "corner overlap (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "corner overlap (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 vertex on edge",
+   "ok": true,
+   "detail": "A margin 0, B contact area 0"
+  },
+  {
+   "case": "3-4-5 vertex on edge (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 vertex on edge (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 vertex 1e-30 in",
+   "ok": true,
+   "detail": "A margin -1/1000000000000000000000000000000, B overlap area 1/960000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+   "case": "3-4-5 vertex 1e-30 in (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 vertex 1e-30 in (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 vertex 1e-30 out",
+   "ok": true,
+   "detail": "A margin 1/1000000000000000000000000000000, B clear area 0"
+  },
+  {
+   "case": "3-4-5 vertex 1e-30 out (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 vertex 1e-30 out (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 other sense on edge",
+   "ok": true,
+   "detail": "A margin 0, B contact area 0"
+  },
+  {
+   "case": "3-4-5 other sense on edge (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 other sense on edge (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "duplicate",
+   "ok": true,
+   "detail": "A margin -1, B overlap area 1"
+  },
+  {
+   "case": "duplicate (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "duplicate (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "t = 1 is a quarter turn",
+   "ok": true,
+   "detail": "A margin -1, B overlap area 1"
+  },
+  {
+   "case": "t = 1 is a quarter turn (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "t = 1 is a quarter turn (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "own 3-4-5 rotation",
+   "ok": true,
+   "detail": "A margin -6/5, B overlap area 5/6"
+  },
+  {
+   "case": "own 3-4-5 rotation (swapped)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "own 3-4-5 rotation (transposed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "unit box, four contacts",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "unit box short by 1e-30",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 in 7/5 box, t=1/3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 1e-30 past the left wall, t=1/3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 in 7/5 box, t=-1/3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "3-4-5 1e-30 past the left wall, t=-1/3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "2x2 grid",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "duplicate refused by driver",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses no final newline",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses count short",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses count long",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses decimal",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses zero denominator",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses leading zero",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses denominator leading zero",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses negative zero",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses four fields",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses two fields",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses comment after header",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses blank line",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses double space",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses carriage return",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses tab",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses non-ASCII",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses negative side",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses zero n",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses fractional n",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses header three fields",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses trailing space",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses plus sign",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses empty",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader accepts commented",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader accepts no comments",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader counts a non-canonical scalar",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "300 random pairs closed along the centre line (300 passed)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "prunes equal brute force on 25 random sets of 30 (25 passed)",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

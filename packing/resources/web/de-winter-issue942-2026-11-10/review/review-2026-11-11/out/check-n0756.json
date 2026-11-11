@@ -1,0 +1,142 @@
+{
+ "file": "n0756.cert",
+ "programs": {
+  "l96_read.py": "45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29",
+  "l96_sat.py": "c09e123ab57545907ffc388d3f34f831919b509a55a1202987dec5273b41b9a1",
+  "l96_clip.py": "8b0e5e21a0b01b3faa81b8059b2d973d31b9891eccde60cb301489fcc24ac728",
+  "l96_check.py": "88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131"
+ },
+ "sha256": "6f37df2b3b619c07f11aadef78b94fd2746cec4929ee21f2cafd13ab8761b46d",
+ "bytes": 81421,
+ "reader": "accepted",
+ "comments": [
+  "# exact rational certificate: unit squares, centre (x, y), rotation t = tan(theta/2)",
+  "# public competition packing, re-optimized"
+ ],
+ "n": 756,
+ "scalars": 2269,
+ "noncanonical_scalars": 0,
+ "side": {
+  "exact": "279245802502239/10000000000000",
+  "floor_20": "27.92458025022390000000",
+  "ceil_10": "27.9245802503",
+  "ceil_12": "27.924580250224"
+ },
+ "squares_tilted": 266,
+ "squares_axis_aligned": 490,
+ "walls": {
+  "contacts": [],
+  "least_positive_clearance": {
+   "exact": "7451171311/74505805969238281250",
+   "approx": "1.000079e-10",
+   "square": 371,
+   "wall": "bottom"
+  },
+  "clearances_equal_between_methods": true
+ },
+ "least_far_wall_clearance": "1.003048e-10",
+ "pairs": {
+  "total": 285390,
+  "A_decided_by_x_line": 267207,
+  "A_decided_by_y_line": 17467,
+  "A_decided_by_margin": 716,
+  "A_least_x_line_gap": "2.000091e-10",
+  "A_least_y_line_gap": "2.000125e-10",
+  "B_not_enumerated": 277385,
+  "B_decided_by_disc": 6224,
+  "B_clipped": 1781,
+  "contacts": [],
+  "overlaps_A": [],
+  "overlaps_B": [],
+  "classes_equal": true,
+  "least_positive_margin": {
+   "exact": "147121308097747284637108575624831799187183538785320975037629893558428613784254384196707269404471/735586328999863381430680574582380825343959774941021922304537391739957353409430300743319094181060791015625",
+   "approx": "2.000055e-10",
+   "pair": [
+    223,
+    224
+   ]
+  },
+  "smallest_ten_positive_margins": [
+   [
+    "2.000055e-10",
+    [
+     223,
+     224
+    ]
+   ],
+   [
+    "2.000087e-10",
+    [
+     678,
+     705
+    ]
+   ],
+   [
+    "2.000087e-10",
+    [
+     190,
+     191
+    ]
+   ],
+   [
+    "2.000091e-10",
+    [
+     192,
+     251
+    ]
+   ],
+   [
+    "2.000097e-10",
+    [
+     679,
+     680
+    ]
+   ],
+   [
+    "2.000098e-10",
+    [
+     197,
+     198
+    ]
+   ],
+   [
+    "2.000099e-10",
+    [
+     169,
+     170
+    ]
+   ],
+   [
+    "2.000104e-10",
+    [
+     178,
+     250
+    ]
+   ],
+   [
+    "2.000107e-10",
+    [
+     680,
+     707
+    ]
+   ],
+   [
+    "2.000107e-10",
+    [
+     204,
+     205
+    ]
+   ]
+  ],
+  "positive_margins_below": {
+   "1e-12": 0,
+   "1e-10": 0,
+   "1e-9": 531,
+   "1e-8": 531,
+   "1e-6": 531
+  }
+ },
+ "problems": [],
+ "verdict": "ACCEPT"
+}
