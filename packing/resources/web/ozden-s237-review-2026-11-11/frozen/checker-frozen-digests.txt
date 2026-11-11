@@ -1,0 +1,7 @@
+# Lane L109 checker, frozen at 2026-11-11T22:05:18Z, before the controls plan, the findings, the author's checker or its outputs, any packing-witness code or anything of an import lane was read.
+49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79  l109_reader.py
+6ce32690e2eaba319e5775235e731b8d569065b806645fa67489ac3c4922f8d1  l109_axes.py
+cb5dddaf40b502e284c99fe1a537783102e2ffb3949d96e7d3571b4b536ab5aa  l109_clip.py
+ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932  l109_check.py
+e2c7189065f533b1ee6c1e03a405dcde91d4b72336e77ec2a9b1942f2782029e  l109_geom.py
+9a2f6008e8ef3948c5fa9193d9c9cff0b986411ff9c6f4a2736b3d827d7e4c92  l109_selftest.py

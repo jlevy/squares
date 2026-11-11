@@ -1,0 +1,578 @@
+{
+ "program": "l109_controls.py",
+ "programs_sha256": {
+  "l109_reader.py": "49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79",
+  "l109_axes.py": "6ce32690e2eaba319e5775235e731b8d569065b806645fa67489ac3c4922f8d1",
+  "l109_clip.py": "cb5dddaf40b502e284c99fe1a537783102e2ffb3949d96e7d3571b4b536ab5aa",
+  "l109_check.py": "ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932",
+  "l109_geom.py": "e2c7189065f533b1ee6c1e03a405dcde91d4b72336e77ec2a9b1942f2782029e",
+  "l109_controls.py": "515cd86f663a3f80ffc980d93275eb2a2e6dc58d5415e75fc7560bd1cd4008f2"
+ },
+ "plan_sha256": "14965c21ec36148bfaf227b0e267c719b1fea272ff2d0dd2bdfd3ad307aa7e69",
+ "facts_sha256": "803b5ff58dd6c0fa54dc7a9a4964a8e3a6f56d0927abb3dee020df33416b0d75",
+ "certificate_sha256": "80687bdceef5780f907c7f47a181802fbfb76a026d077aa18f7bb3eaa3ec3833",
+ "python": "3.14.7",
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "controls": {
+  "G1": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "squares_decided": 237,
+    "pairs_decided": 27966,
+    "unit_failures": [],
+    "ccw_squares": 237,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [],
+    "inside_b_failures": [],
+    "wall_contacts": [
+     [
+      67,
+      "bottom"
+     ],
+     [
+      152,
+      "left"
+     ],
+     [
+      236,
+      "top"
+     ]
+    ],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "b92d20cde6ce1bd04570f95a8a23682b5c9016856f4c9285b11ae49c67a7a263",
+    "overlapping_pairs_count": 1,
+    "overlapping_pairs_first": [
+     [
+      1,
+      237,
+      "-1.000000000000e+00"
+     ]
+    ],
+    "sum_of_clipped_pair_areas_head": "1",
+    "pair_margin": "-1",
+    "pair_area": "1"
+   }
+  },
+  "G2": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "squares_decided": 1,
+    "pairs_decided": 236,
+    "unit_failures": [],
+    "ccw_squares": 237,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [
+     [
+      1,
+      "right",
+      "outside",
+      "outside"
+     ]
+    ],
+    "inside_b_failures": [
+     1
+    ],
+    "wall_contacts": [],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "82b18a5aeb1421e6cfd78a3bfd56eef29d42f92cbf54df3a829ffcd72fe73141",
+    "overlapping_pairs_count": 0,
+    "overlapping_pairs_first": [],
+    "sum_of_clipped_pair_areas_head": "0"
+   }
+  },
+  "G3": {
+   "as_stated": true,
+   "came_out": {
+    "reader_refused": "236 squares listed, n = 237"
+   }
+  },
+  "G4": {
+   "as_stated": true,
+   "came_out": {
+    "reader_refused": "square 237: id 1"
+   }
+  },
+  "G5": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "squares_decided": 1,
+    "pairs_decided": 236,
+    "unit_failures": [
+     {
+      "square": 1,
+      "method": "A",
+      "why": "third corner is not p0 + u + v"
+     },
+     {
+      "square": 1,
+      "method": "B",
+      "why": "edges 0 and 1 are not perpendicular"
+     }
+    ],
+    "ccw_squares": 236,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [],
+    "inside_b_failures": [],
+    "wall_contacts": [],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "overlapping_pairs_count": 0,
+    "overlapping_pairs_first": [],
+    "sum_of_clipped_pair_areas_head": "0"
+   }
+  },
+  "G6": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "squares_decided": 237,
+    "pairs_decided": 27966,
+    "unit_failures": [],
+    "ccw_squares": 0,
+    "cw_squares": 237,
+    "wall_disagreements": [],
+    "outside": [],
+    "inside_b_failures": [],
+    "wall_contacts": [
+     [
+      67,
+      "bottom"
+     ],
+     [
+      152,
+      "left"
+     ],
+     [
+      236,
+      "top"
+     ]
+    ],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "020b48e6e837ef51b5bda778b0f850ab4d4e03fb30c5044b8c7e1dd35a697093",
+    "overlapping_pairs_count": 75,
+    "overlapping_pairs_first": [
+     [
+      1,
+      2,
+      "-4.722392351502e-03"
+     ],
+     [
+      1,
+      22,
+      "-8.119555383443e-02"
+     ],
+     [
+      2,
+      7,
+      "-8.386197087858e-02"
+     ],
+     [
+      2,
+      21,
+      "-8.120092785557e-02"
+     ],
+     [
+      2,
+      42,
+      "-4.722392351507e-03"
+     ],
+     [
+      3,
+      4,
+      "-1.251904883832e-02"
+     ],
+     [
+      3,
+      5,
+      "-1.098390134527e-02"
+     ],
+     [
+      5,
+      7,
+      "-4.678655037279e-03"
+     ],
+     [
+      5,
+      42,
+      "-8.385770517597e-02"
+     ],
+     [
+      5,
+      66,
+      "-4.092829202889e-02"
+     ],
+     [
+      6,
+      9,
+      "-1.204398000459e-02"
+     ],
+     [
+      7,
+      195,
+      "-2.307675066156e-02"
+     ]
+    ],
+    "sum_of_clipped_pair_areas_head": "2483128620565217049591821411630003511897"
+   }
+  },
+  "G7": {
+   "as_stated": true,
+   "came_out": {
+    "reader_refused": "the JSON twin differs: $.witness.side: value differs"
+   }
+  },
+  "G8": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "squares_decided": 237,
+    "pairs_decided": 27966,
+    "unit_failures": [],
+    "ccw_squares": 0,
+    "cw_squares": 237,
+    "wall_disagreements": [],
+    "outside": [],
+    "inside_b_failures": [],
+    "wall_contacts": [
+     [
+      67,
+      "left"
+     ],
+     [
+      152,
+      "bottom"
+     ],
+     [
+      236,
+      "right"
+     ]
+    ],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "b1fc664626d942800e216795baf43f4461cf79a15c03b04a0afac5898da1bc3a",
+    "overlapping_pairs_count": 0,
+    "overlapping_pairs_first": [],
+    "sum_of_clipped_pair_areas_head": "0"
+   }
+  },
+  "G9": {
+   "as_stated": true,
+   "came_out": {
+    "reader_refused": "side: not in lowest terms"
+   }
+  },
+  "S1a": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "squares_decided": 237,
+    "pairs_decided": 0,
+    "unit_failures": [],
+    "ccw_squares": 237,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [
+     [
+      236,
+      "top",
+      "outside",
+      "outside"
+     ]
+    ],
+    "inside_b_failures": [
+     236
+    ],
+    "wall_contacts": [
+     [
+      67,
+      "bottom"
+     ],
+     [
+      152,
+      "left"
+     ]
+    ],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "overlapping_pairs_count": 0,
+    "overlapping_pairs_first": [],
+    "sum_of_clipped_pair_areas_head": "0",
+    "side_approx": "15.893805580572574"
+   }
+  },
+  "S1b": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "squares_decided": 237,
+    "pairs_decided": 0,
+    "unit_failures": [],
+    "ccw_squares": 237,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [
+     [
+      236,
+      "top",
+      "outside",
+      "outside"
+     ]
+    ],
+    "inside_b_failures": [
+     236
+    ],
+    "wall_contacts": [
+     [
+      67,
+      "bottom"
+     ],
+     [
+      152,
+      "left"
+     ]
+    ],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "overlapping_pairs_count": 0,
+    "overlapping_pairs_first": [],
+    "sum_of_clipped_pair_areas_head": "0",
+    "side_approx": "15.893805580572574"
+   }
+  },
+  "S1c": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "squares_decided": 237,
+    "pairs_decided": 0,
+    "unit_failures": [],
+    "ccw_squares": 237,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [
+     [
+      129,
+      "right",
+      "outside",
+      "outside"
+     ],
+     [
+      130,
+      "right",
+      "outside",
+      "outside"
+     ],
+     [
+      131,
+      "right",
+      "outside",
+      "outside"
+     ],
+     [
+      140,
+      "right",
+      "outside",
+      "outside"
+     ],
+     [
+      202,
+      "top",
+      "outside",
+      "outside"
+     ],
+     [
+      209,
+      "top",
+      "outside",
+      "outside"
+     ],
+     [
+      216,
+      "top",
+      "outside",
+      "outside"
+     ],
+     [
+      222,
+      "top",
+      "outside",
+      "outside"
+     ],
+     [
+      227,
+      "top",
+      "outside",
+      "outside"
+     ],
+     [
+      231,
+      "top",
+      "outside",
+      "outside"
+     ],
+     [
+      236,
+      "top",
+      "outside",
+      "outside"
+     ]
+    ],
+    "inside_b_failures": [
+     129,
+     130,
+     131,
+     140,
+     202,
+     209,
+     216,
+     222,
+     227,
+     231,
+     236
+    ],
+    "wall_contacts": [
+     [
+      67,
+      "bottom"
+     ],
+     [
+      152,
+      "left"
+     ]
+    ],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "overlapping_pairs_count": 0,
+    "overlapping_pairs_first": [],
+    "sum_of_clipped_pair_areas_head": "0",
+    "side_approx": "15.893805580572000"
+   }
+  },
+  "S1d": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "squares_decided": 237,
+    "pairs_decided": 0,
+    "unit_failures": [],
+    "ccw_squares": 237,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [],
+    "inside_b_failures": [],
+    "wall_contacts": [
+     [
+      67,
+      "bottom"
+     ],
+     [
+      152,
+      "left"
+     ]
+    ],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "overlapping_pairs_count": 0,
+    "overlapping_pairs_first": [],
+    "sum_of_clipped_pair_areas_head": "0",
+    "side_approx": "15.893805580573000"
+   }
+  },
+  "S4c": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "squares_decided": 1,
+    "pairs_decided": 236,
+    "unit_failures": [],
+    "ccw_squares": 237,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [],
+    "inside_b_failures": [],
+    "wall_contacts": [],
+    "pair_disagreements": [],
+    "touching_pairs": [
+     [
+      19,
+      20
+     ]
+    ],
+    "margin_list_sha256": "85ba821763fd4f0757f5979ce5a1937fc50cd8b20273d76f8e555bb9f70abdb2",
+    "overlapping_pairs_count": 0,
+    "overlapping_pairs_first": [],
+    "sum_of_clipped_pair_areas_head": "0",
+    "pair_margin": "0",
+    "pair_classes": [
+     "contact",
+     "contact"
+    ],
+    "pair_area": "0"
+   }
+  },
+  "S4p": {
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "squares_decided": 1,
+    "pairs_decided": 236,
+    "unit_failures": [],
+    "ccw_squares": 237,
+    "cw_squares": 0,
+    "wall_disagreements": [],
+    "outside": [],
+    "inside_b_failures": [],
+    "wall_contacts": [],
+    "pair_disagreements": [],
+    "touching_pairs": [],
+    "margin_list_sha256": "54ec0aeb98be5d7532400aabcbbdafbe0076aa63cbfc449e4f3efc64341a859c",
+    "overlapping_pairs_count": 1,
+    "overlapping_pairs_first": [
+     [
+      19,
+      20,
+      "-1.000000000000e-30"
+     ]
+    ],
+    "sum_of_clipped_pair_areas_head": "2788770649375924420635964600910086904194",
+    "pair_margin": "-1/1000000000000000000000000000000",
+    "pair_classes": [
+     "overlap",
+     "overlap"
+    ],
+    "pair_area": "278877064937592442063596460091008690419494276451780510531723"
+   }
+  },
+  "S5": {
+   "as_stated": true,
+   "came_out": {
+    "pairs": 192,
+    "as_stated": 192,
+    "failures": []
+   }
+  },
+  "S6": {
+   "as_stated": true,
+   "came_out": {
+    "squares": 237,
+    "as_stated": 237,
+    "failures": []
+   }
+  }
+ },
+ "cpu_seconds": 49.2
+}
