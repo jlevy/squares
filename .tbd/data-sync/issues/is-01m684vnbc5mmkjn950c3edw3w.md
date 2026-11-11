@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 226
+version: 227
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -86,7 +86,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T22:43:18.640Z
+updated_at: 2026-11-11T22:54:52.361Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -342,3 +342,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 ~22:50Z: #957 merged (0af33d857; think-doi6 closed). #955 merged with main (7f4b759fe; result-requests conflict kept both sides, occurrences regenerated); CI pending. L108's blind review of #959 accepted (440acdb99; RV-3 not reached; s(70)+5 within 2.6e-12; contracted side not registered), sent to L107. L109's review of #960 accepted; L110 importing as T-295 (the house is T-190, not T-189 as the issue says).
 
 2026-11-11 22:42Z: Pages deploy of b5b12c206 succeeded (run 43110891256; 6262/6262). Posted the 954 final reply (issuecomment-6808834300; byte-identical to the L111 draft except one coordinator edit: the seed-band source is worded 'the issue names'); closed 954; think-f65n closed. L112 is recording the reply on #955.
+
+2026-11-11 22:53Z renewal (intake207): no new items; 954's reply and close are owned by L112 (#955), de Winter's repo read by L104 (#961). Running: L104 (#961), L107 (#959), L110 (#960), L112 (#955).
