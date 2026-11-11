@@ -15948,9 +15948,10 @@ results:
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower bound on
-        record at n = 28, 3/400 above T-107, by the certificate kind and declared net of
-        T-102, T-103 and T-132, with no new technique, at S3 as T-102 to T-111 and T-132 are.
+        Scored as a claim: if a complete replay passes, it raises n = 28's verified lower
+        bound by 3/400 above T-107, below T-192's reported 1149/200, by the certificate kind
+        and declared net of T-102, T-103 and T-132, with no new technique, at S3 as T-102 to
+        T-111 and T-132 are.
         V0/C1 says how far it stands, and the score gates nothing.
       scored: '2026-10-11'
       by: >-
@@ -16002,8 +16003,8 @@ results:
           review, whose item 7, a review that reads this certificate, the review of 11
           November 2026 meets. The axis gap of 2.15e-9 that would have failed the control
           closed under the constant AXIS_ROUNDING is judged by the enclosure rule of #892,
-          as that review found it should be: it is the source sweep's own enclosure at that
-          vertex, and the refusal has an exact witness
+          as that review found it should be: it lies within the source sweep's own enclosure
+          at that vertex, and the refusal has an exact witness
         rung: C3
         link: think-i85v
         estimated_cost:

@@ -11,7 +11,9 @@ of 6 October. Scope: `mixed_n28_L57425` (wand125/square-packing at `36b85b9`) an
 `mixed_n30_L58925` (at `ff9f269`), as retained in the packet
 [`wand125-fine-net-n28-n30-2026-10-10`](../../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/README.md),
 and the register entries T-142 and T-143 on `main` at `8afdabe8f`. A first launch of
-this review on 4 November was lost and left nothing; this one started fresh.
+this review on 4 November produced `review-2026-11-04-wand125-fine-net-n28-n30.md`,
+retained on branch `claude/bold-ritchie-xo28us-l45` (jlevy/squares#908, held for the
+owner) and not on `main`; this lane did not read it, and started fresh.
 This review moves no bound and adopts nothing.
 
 ## Summary for the Author
@@ -30,9 +32,9 @@ and did not repeat. What it could decide cheaply, it decided with programs of it
 that share no code with yours or with this repository’s verifier:
 
 - every exact premise of both files, and the net’s reach over every orientation;
-- direction 0 of each net, completely, by a vertex argument: least captures
-  $1.00141414993662$ and $1.00175288352551$, each equal to the exact capture at your
-  sweep’s logged argmin;
+- direction 0 of each net, completely, by a vertex argument: least captures at least
+  $1.0014141499363$ and $1.0017528835253$, attained to within $3 \times 10^{-13}$ at
+  your sweep’s logged argmin;
 - the exact capture at the centre of your least-bound box at all 2,072 rotated
   directions of each net, each at least your certified bound;
 - the exact capture at all 62 oblique witnesses of your 197/200 controls, equal to your
@@ -40,8 +42,9 @@ that share no code with yours or with this repository’s verifier:
 - a seeded search at 33 rotated directions of each net, every end point evaluated
   exactly: least captures found $1.00079$ (n = 28) and $1.00071$ (n = 30).
 
-So the certificates keep a few ten-thousandths of slack where your certified bounds stop
-within $10^{-10}$ of one.
+So the least captures this review found leave a few ten-thousandths of slack, where your
+certified bounds stop within $10^{-10}$ of one; a sample cannot show that the least
+capture over the net is as large.
 There is no blocking or major finding.
 Four minor findings concern the bundles’ prose, manifest and pre-publication receipt,
 not the mathematics: the README names a control log that does not exist (M-1),
@@ -61,7 +64,7 @@ public copy and the axis gap at n = 28.
 | Total mass | $2799999/100000 = 28 - 1/100000$ | $2999999/100000 = 30 - 1/100000$ |
 | Candidate SHA-256 (decompressed) | `5ef20511…0107` | `981a17db…677e` |
 | Lower lanes on `main` | T-107’s $1147/200$; gain $3/400$ | T-109’s $11767/2000$; gain $9/1000$ |
-| Upper bound on `main` | $5.82444461667405$ | $6$ |
+| Upper bound on `main` | $5.82444461667406$ | $6$ |
 
 Each is a format M rectangle measure in $D_4$ orbits, with no point or segment, on the
 net its file declares, `proof_net {"step": "1/5002", "last": 2072}`, at core side
@@ -87,10 +90,12 @@ its `VERIFIERS.md` summary.
 
 **Not read.** The source’s adapted crate (pinned by digest, unopened), its check script,
 the sealed inner bundle, this repository’s `packing/sqverify_fast/` source, the census
-driver and every program of `packing/devtools/` and `sqpack`, and any receipt of the
-replay lane. The parent bead `think-i85v`, which the brief named, carries a note of the
-replay lane (4 November) giving census figures; this review saw them there, says so
-here, and decided nothing from them.
+driver and every program of `packing/devtools/` and `sqpack` (apart from the module
+docstring of `devtools/sqverify_fast_axis.py`, read after the programs were written, for
+the axis judgment), and any receipt of the replay lane.
+The parent bead `think-i85v`, which the brief named, carries a note of the replay lane
+(4 November) giving census figures; this review saw them there, says so here, and
+decided nothing from them.
 Earlier reviews that name these entries were read only after the findings below were
 written ([Comparison With Earlier Reviews](#comparison-with-earlier-reviews)).
 
@@ -171,9 +176,9 @@ fine boxes near the strips.
 Every program is this lane’s own, kept in the packet’s
 [`review/review-2026-11-11/`](../../../packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md)
 with its outputs and the SHA-256 of each program as it ran.
-They use CPython 3.14.7 (`fractions`, `hashlib`, `json`, `zlib`) and numpy 2.5.2 on
-OpenBLAS at one thread, and import nothing from this repository, the source or the
-maintained route.
+They use CPython 3.14.7 (`fractions`, `gzip`, `hashlib`, `json`, `random`, `re`, `zlib`)
+and numpy 2.5.2 on OpenBLAS at one thread, and import nothing from this repository, the
+source or the maintained route.
 
 | Program | Decides | Result | CPU (s) |
 | --- | --- | --- | ---: |
@@ -319,18 +324,20 @@ What this review established apart from the crate and the census:
   $(4.2428000208779879, 2097/400)$, where the exact capture is $1.00141414993662\ldots$,
   a gap of $2.1753 \times 10^{-9}$. In the source’s 197/200 control the same vertex
   gives $2.1426 \times 10^{-9}$, a ratio of $0.98499$. Scaled by $99/100$ the original’s
-  gap is $2.1535 \times 10^{-9}$, the census’s figure.
-  At n = 30 the same computation gives $1.90 \times 10^{-10}$ and $1.88 \times 10^{-10}$
-  at 99/100.
+  gap is $2.1535 \times 10^{-9}$, matching the census’s $2.15 \times 10^{-9}$. At n = 30
+  the same computation gives $1.90 \times 10^{-10}$ and $1.88 \times 10^{-10}$ at
+  99/100.
 - **The vertex is the last of its column.** $2097/400 = L - 1/2$ is the quadrant’s upper
   edge, reached after about 4,100 steps of a column walk, each of which widens its
   interval. The exact capture is the same, to the last digit, at an interior vertex of
   the same column ($y = 5.0809308983748918$). A direct binary64 evaluation, such as this
   review’s matrix product, is within its a priori bound of $2.3 \times 10^{-13}$
   (relative) at every vertex, and was within $3 \times 10^{-16}$ at that tied vertex.
-  So $2.2 \times 10^{-9}$ is the width the sweep’s method builds there, the mechanism
-  the 14 October review found at n = 39, where the least vertex was also last in its
-  column. At n = 30 the source’s argmin is interior, and the gap is ten times smaller.
+  So $2.2 \times 10^{-9}$ is consistent with rounding the sweep’s method accumulates
+  there (by the 14 October review’s emulation at n = 39, such a gap is half the
+  enclosure’s width), the mechanism that review found where the least vertex was also
+  last in its column. At n = 30 the source’s argmin is interior, and the gap is ten times
+  smaller.
 - **The refusal is genuine.** The mutant’s exact capture at that vertex is
   $99/100 \cdot F = 0.99140000843726 < 1$, at a vertex of the quadrant
   $[L/2, L - 1/2]^2$; this review’s complete axis decision refuses the mutant with the
@@ -425,9 +432,8 @@ sampled directions, the axis decision refuses the mutant at index 0, and the lea
 centre is itself a witness at 1,187 (n = 28) and 979 (n = 30) of the 2,072 rotated
 directions. It still has to run.
 
-**N-3 — note.
-The margins are wider than the logs suggest.** The source’s least certified
-bounds go down to $1 + 1.07 \times 10^{-11}$ (n = 28, direction 1088) and
+**N-3 — note. The logged bounds do not measure the margins.** The source’s least
+certified bounds go down to $1 + 1.07 \times 10^{-11}$ (n = 28, direction 1088) and
 $1 + 2.93 \times 10^{-11}$ (n = 30, direction 1585). That is where its branch and bound
 stopped: the exact captures at those boxes’ centres are $1.114$ and $1.017$. The least
 captures this review found are $1.00079$ and $1.00071$ over the sample, $1.0014$ and
@@ -516,12 +522,16 @@ re-implemented (clean-room), by a Claude agent, a system family the producer als
 `V4/C4` would further need a second adversarial review by a distinct reviewer and a
 human oversight record.
 
-**Significance: S3 for both, as drafted.** If correct, each is the strongest lower bound
-on record at its count, by the certificate kind and declared net of T-132 and T-232,
-with no new technique: a substantive case result, as T-102 to T-111, T-132 and T-232
-are. Neither is a reusable technique or bound family (S4), and n = 28 and n = 30 are not
-central open cases (S5). Once adopted, the gap to the upper bound narrows from $0.0894$
-to $0.0819$ at n = 28 and from $0.1165$ to $0.1075$ at n = 30.
+**Significance: S3 for both, as drafted.** If correct, each raises its count’s verified
+lower bound (by $3/400$ over T-107 and $9/1000$ over T-109) and is the strongest lower
+bound on record at n = 30; at n = 28, T-192’s reported $s(28) > 1149/200$ stands $1/400$
+above it.
+Each uses the certificate kind and declared net of T-132 and T-232, with no new
+technique: a substantive case result, as T-102 to T-111, T-132 and T-232 are.
+Neither is a reusable technique or bound family (S4), and n = 28 and n = 30 are not
+central open cases (S5). If adopted (at n = 28, unless T-192 is verified first), the gap
+to the upper bound narrows from $0.0894$ to $0.0819$ at n = 28 and from $0.1165$ to
+$0.1075$ at n = 30.
 
 ## Reproduction
 
@@ -557,16 +567,23 @@ CPU-minutes in all.
 
 ## Comparison With Earlier Reviews
 
-No earlier review read either certificate.
+No review on `main` read either certificate.
+The 4 November review on #908’s branch did; this lane has not read it.
 After the findings above were written, this lane searched `docs/project/reviews/` for
-the two certificates, their sides, T-142 and T-143. Three reviews and three tracker
-files name them:
+the two certificates, their sides, T-142 and T-143. Four reviews and three tracker files
+name them:
 
 - **The 11 October final review of PR 487’s lower bounds** read the records and the
   intake’s premises only.
   Its exact differences ($3/400$, $1/400$, $9/1000$) and net facts are the ones
   recomputed here, and it kept `S3` on both pending the review that reads the
   certificates; this review keeps `S3`.
+- **The 11 October review of Ryu’s deficiency bounds and the grading of T-128 to T-146**
+  (`review-2026-10-11-final-asymptotic-and-grading.md`) graded both at `V0/C0` and `S3`,
+  “confirm: as T-132” (its lines 464 and 465), and holds the `S3` grade that T-142’s and
+  T-143’s significance `by` cite.
+  It graded the records, and lists their certificates’ replays among what it did not
+  check.
 - **The 11 October review of register rungs** found both at `V0/C0` and T-142’s
   whole-net control held on an owner decision.
   #892 has since replaced that decision with the enclosure rule judged above.

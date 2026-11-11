@@ -37376,15 +37376,15 @@ evidence:
         367/6255001 > 0), the per-bin domains, the quarter-turn quadrant, and the positive
         D4-invariant measure of mass 28 - 1/100000. Programs written for the review, sharing
         no code with the source or the crate, recomputed every exact premise, decided
-        direction 0 completely (least axis capture 1.00141414993662, the exact capture at
-        the source's argmin), found the exact capture at all 2,072 least-bound box centres
-        at or above the source's certified bounds, reproduced the 31 oblique 197/200
-        control witnesses' exact captures digit for digit, and found no capture below
-        1.00079 in a seeded search at 33 directions. The axis gap of 2.15e-9 is the source
-        sweep's own enclosure at that vertex, which #892's rule judges correctly. Four minor
-        findings in the source's README, manifest, receipt wording and pre-publication
-        receipt do not touch the mathematics. Coverage at the rotated directions rests on
-        the source's run until the census.
+        direction 0 completely (least axis capture at least 1.0014141499363, attained to
+        within 3e-13 at the source's argmin), found the exact capture at all 2,072
+        least-bound box centres at or above the source's certified bounds, reproduced the
+        31 oblique 197/200 control witnesses' exact captures digit for digit, and found no
+        capture below 1.00079 in a seeded search at 33 directions. The axis gap of 2.15e-9
+        lies within the source sweep's own enclosure at that vertex, which #892's rule
+        judges correctly. Four minor findings in the source's README, manifest, receipt
+        wording and pre-publication receipt do not touch the mathematics. Coverage at the
+        rotated directions rests on the source's run until the census.
     source_reviewed: '2026-10-10'
 
   - id: E-wand125-fine-net-n30-58925-report
@@ -37428,14 +37428,14 @@ evidence:
         367/6255001 > 0), the per-bin domains, the quarter-turn quadrant, and the positive
         D4-invariant measure of mass 30 - 1/100000. Programs written for the review, sharing
         no code with the source or the crate, recomputed every exact premise, decided
-        direction 0 completely (least axis capture 1.00175288352551, the exact capture at
-        the source's argmin), found the exact capture at all 2,072 least-bound box centres
-        at or above the source's certified bounds, reproduced the 31 oblique 197/200
-        control witnesses' exact captures digit for digit, and found no capture below
-        1.00071 in a seeded search at 33 directions. Four minor findings in the source's
-        README, manifest, receipt wording and pre-publication receipt do not touch the
-        mathematics. Coverage at the rotated directions rests on the source's run until
-        the census.
+        direction 0 completely (least axis capture at least 1.0017528835253, attained to
+        within 3e-13 at the source's argmin), found the exact capture at all 2,072
+        least-bound box centres at or above the source's certified bounds, reproduced the
+        31 oblique 197/200 control witnesses' exact captures digit for digit, and found no
+        capture below 1.00071 in a seeded search at 33 directions. Four minor findings in
+        the source's README, manifest, receipt wording and pre-publication receipt do not
+        touch the mathematics. Coverage at the rotated directions rests on the source's run
+        until the census.
     source_reviewed: '2026-10-10'
 
   - id: E-wand125-fine-net-n28-n30-review-premises
@@ -37505,8 +37505,8 @@ evidence:
           per-bin quadrant)
     limitations: >-
       Decides index 0 of 2,073 at each count: every axis-parallel core centred in
-      [L/2, L - 1/2]^2 captures at least 1 (least 1.0014141 at n = 28, 1.0017529 at n =
-      30), by the bilinearity of the capture on the event grid, exact int64 events and
+      [L/2, L - 1/2]^2 captures at least 1 (at least 1.0014141 at n = 28, 1.0017528 at
+      n = 30), by the bilinearity of the capture on the event grid, exact int64 events and
       overlaps, and one binary64 matrix product under an a priori bound
       (1 + gamma_K)(1 + 2^-53)^3, compared with 1 exactly. It trusts IEEE binary64 in
       OpenBLAS dgemm in any summation order. The other 2,072 directions are not decided

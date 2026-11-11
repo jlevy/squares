@@ -111,9 +111,9 @@ README and outputs are in [`review/review-2026-11-11/`](review/review-2026-11-11
 every exact premise recomputed, direction 0 of each net decided completely, the source’s
 logs and controls held to an exact evaluator at every least-bound centre and control
 witness, and a seeded search at 33 directions of each net. It also judges T-142’s axis
-gap of $2.15 \times 10^{-9}$ under #892’s enclosure rule: the gap is the source sweep’s
-own enclosure at that vertex, and the refusal has an exact witness. The census and its
-whole-net controls remain.
+gap of $2.15 \times 10^{-9}$ under #892’s enclosure rule: the gap lies within the source
+sweep’s own enclosure at that vertex, and the refusal has an exact witness.
+The census and its whole-net controls remain.
 
 ## Sources and Notices
 

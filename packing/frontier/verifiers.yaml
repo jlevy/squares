@@ -6688,7 +6688,9 @@ verifiers:
         declared-net soundness review of 6 October and the n31 and #446 fine-net reviews
         of 23 October read first; they describe the crate in words, not code. Not read:
         the source's adapted crate (pinned, unopened) or check script, this repository's
-        sqverify_fast source, the census driver, or any program of devtools or sqpack.
+        sqverify_fast source, the census driver, or any program of devtools or sqpack,
+        apart from the module docstring of devtools/sqverify_fast_axis.py, read after the
+        programs were written, for the axis judgment.
     note: >-
       Written and run on 11 November 2026 by the stage 4 review of T-142 and T-143; kept
       in the n28/n30 packet's review/review-2026-11-11/ with its README and outputs, whose
