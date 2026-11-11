@@ -1,0 +1,44 @@
+{
+ "program": "selftest.py",
+ "agreement": {
+  "mixed_n28_L57425": {
+   "poses": 87,
+   "exact_methods_equal": true,
+   "largest_float_error": 2.546851618490109e-13
+  },
+  "mixed_n30_L58925": {
+   "poses": 87,
+   "exact_methods_equal": true,
+   "largest_float_error": 3.892441924335799e-13
+  }
+ },
+ "conventions": {
+  "mixed_n28_L57425": {
+   "angle_sensitive_witnesses": 27,
+   "this review's reading": "31 of 31 (27 of 27 angle-sensitive)",
+   "standard step 83/40000": "1 of 31 (0 of 27 angle-sensitive)",
+   "half the declared step": "3 of 31 (0 of 27 angle-sensitive)",
+   "rows without D4 images": "0 of 31 (0 of 27 angle-sensitive)",
+   "other field order": "refused: 3 rows of no positive area"
+  },
+  "mixed_n30_L58925": {
+   "angle_sensitive_witnesses": 31,
+   "this review's reading": "31 of 31 (31 of 31 angle-sensitive)",
+   "standard step 83/40000": "0 of 31 (0 of 31 angle-sensitive)",
+   "half the declared step": "0 of 31 (0 of 31 angle-sensitive)",
+   "rows without D4 images": "0 of 31 (0 of 31 angle-sensitive)",
+   "other field order": "refused: 12 rows of no positive area"
+  }
+ },
+ "refusals": {
+  "duplicate key": "refused: duplicate key among ['n', 'n', 'L', 'B', 'proof_net', 'total",
+  "float token": "refused: float token '27.99999'",
+  "second gzip member": "refused: data after the first gzip member",
+  "nonpositive mass": "refused: ['nonpositive mass', 'mass']",
+  "total mass n": "refused: ['mass']",
+  "step 1/4999": "refused: ['b_holds', 'e_holds']",
+  "last 2071": "refused: ['c_holds']"
+ },
+ "status": "PASS",
+ "cpu_seconds": 18.4
+}

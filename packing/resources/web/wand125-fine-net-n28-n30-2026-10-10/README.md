@@ -101,8 +101,19 @@ controls the records lane requires.
 
 A maintained replay must retain the complete direction outcomes of a census run, from a
 candidate retained where the census reads it, with the whole-net controls and restored
-positives, and must be followed by an independent review that reads each certificate.
+positives, and an independent review must read each certificate.
 That work, with a budget for it, belongs to the import’s bead, think-i85v.
+
+The
+[mathematical review of 11 November 2026](../../../../docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md)
+(think-4ul6) accepts both certificates, with no blocking or major finding. Its programs,
+README and outputs are in [`review/review-2026-11-11/`](review/review-2026-11-11/README.md):
+every exact premise recomputed, direction 0 of each net decided completely, the source’s
+logs and controls held to an exact evaluator at every least-bound centre and control
+witness, and a seeded search at 33 directions of each net. It also judges T-142’s axis
+gap of $2.15 \times 10^{-9}$ under #892’s enclosure rule: the gap is the source sweep’s
+own enclosure at that vertex, and the refusal has an exact witness. The census and its
+whole-net controls remain.
 
 ## Sources and Notices
 
@@ -138,6 +149,8 @@ direction, and each commit names Claude Opus 5.5 as co-author.
 | --- | --- | --- | --- |
 | `release/certificates/mixed_n28_L57425/candidate.json.gz` | upstream | `83973a7165fd67ef82fbf73083fbc27c7e5c690b` | `5ef20511e18a9997dfcc4cef773b65eac83dfe59e6a56fa810f3c789076c0107` |
 | `release/certificates/mixed_n30_L58925/candidate.json.gz` | upstream | `6fc73a25e66e7c2e2390c43f767a9fd14c3ef09e` | `981a17db67b24f99d64e176c892655c27fde67f8e99f2875a8f1d55ff3d0677e` |
+| `review/review-2026-11-11/outputs/receipts-check.json.gz` | receipt | `86dfc2079d43cf9d100239e73e4f703a961717a8` | `ba49bfbf61129b246a2e8101ab4548085e39aeaaf7f3c0d6f694913c366808db` |
+| `review/review-2026-11-11/outputs/direction-sample.json.gz` | receipt | `e4f99940726339b6724ede25d0a2630c436e6761` | `382e4e50a2911d329368d5093f1dc1d821194351b3d7d6e3756143f5a3f0f23f` |
 
 ## Original Gzip Files
 
