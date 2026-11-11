@@ -22,8 +22,8 @@ The commit before them, `501cb8d` (19:41:30Z), corrects the READMEs of `above324
 [campaign/intake-watch.yaml](../../../campaign/intake-watch.yaml).
 
 Intake lane L104 (think-bcfs) retained it, replayed it and registered it on 11 November
-2026 as **T-292, at V3/C3 on the replay**. The stage 4 review runs in a separate blind
-lane, and the case record waits on it under the house rule.
+2026 as **T-292**. The blind stage 4 review of lane L105 accepted it the same day, so it
+is at V3/C3, and the case adopted it as its house in place of T-174 under the house rule.
 
 ## What the Source Claims
 
@@ -138,11 +138,63 @@ case record is not touched: the house rule adopts it once the review is mapped w
 accepted verdict, with both strong generators’ regularization of the new house and its
 flip in the same change.
 
+## Stage 4 Review
+
+The stage 4 review of 11 November 2026
+([review-2026-11-11-dewinter-132-157.md](../../../../docs/project/reviews/review-2026-11-11-dewinter-132-157.md), lane L105, under think-bcfs), written in
+a separate lane blind to this one until its findings were frozen, accepts both
+certificates; all 14 findings are notes. Its programs and receipts are in the review-only
+directory [dewinter-132-157-review-2026-11-11](../dewinter-132-157-review-2026-11-11/README.md).
+
+- **Feasibility.** Its clean-room checker decides both files, every square, wall and all
+  8,646 pairs, by separating axes in `Fraction` and by exact clipped areas in
+  `gmpy2.mpq`. It finds 20 exact wall contacts (ten at the right wall, ten at the top), the
+  least positive wall clearance exactly 1.5 × 10⁻⁶⁰ (left and bottom), no pair touching,
+  and the least pair margin 10⁻⁶⁰ less about 10⁻²⁵⁰, at squares 14 and 119. Its 16
+  controls, stated beforehand, came out as stated, among them the squares accepted in the
+  box of side 11.976048383604 itself (F5); the JSON and the YAML are one packing (F3).
+- **Against this lane.** Its comparison printed `LANE_EQUALS_REVIEW` on 51 comparisons.
+- **The construction (F11).** Measured from Samanyu-dev’s 109 at `53551d7`: under one
+  symmetry (three quarter turns), the seed cut at about x = 3.58 and y = 7.37 and its four
+  parts moved about one unit apart pairs every seed square with a square here within
+  0.129. The 23 squares left over are 15 axis-aligned squares in the rows and columns at
+  the cuts and 8 tilted ones. The seed is 4.58 × 10⁻⁴ below the record at 109,
+  6 + (7/2)√2; #958 makes no claim there, and the seed’s repository is not watched or
+  retained, so it is context and not a report here.
+- **Notes for the author.** The side lies 1.2476 × 10⁻⁵⁹ above the configuration scaled
+  back by 1 + 10⁻⁶⁰, the README’s 1.3 × 10⁻⁵⁹ rounded up (F8). Corner incidences within
+  10⁻⁵⁰ number 1,423 against the README’s 1,407 equations (F9). The YAML is not a valid
+  Witness/v2 file as this repository’s schema defines it (F10); it equals the JSON, and the
+  record writes its own witness.
+- **The seed’s licence (F12).** The seed’s repository has no licence file, only its
+  README’s “MIT-style” sentence. That question is the owner’s on think-71uq, under
+  think-gtmb, and decides nothing here.
+- **F14.** At adoption the case’s credit fields are derived again for a new arrangement.
+
+## Questions for the Author
+
+The stage 4 review’s six questions, informational, holding nothing open:
+
+1. The certificate reads as the solution scaled by 1 + 10⁻⁶⁰ and translated by 10⁻⁶⁰,
+   which puts the sides 1.2476 and 1.3493 × 10⁻⁵⁹ above it. Were the stated 1.3 and
+   1.4 × 10⁻⁵⁹ rounded up, or measured another way?
+2. How are the 1,407 and 2,024 contact equations counted? A count of corners on edge
+   segments and walls within 10⁻⁵⁰ gives 1,423 and 2,048.
+3. Would the YAML carry the `softschema` header, a `claim` block and a lowercase id, so
+   that it validates as a Witness/v2 file?
+4. The cuts measure at about x = 3.58, y = 7.37 in the 109 packing turned three quarter
+   turns, and at x = 8.33, y = 8.32 in the 132 packing turned one quarter turn. Are those
+   the author’s cuts, and which squares were added in each gap?
+5. Will the growth step’s code, the IPOPT model, the 250-digit solutions and the binary64
+   and Shapely checks be published?
+6. Samanyu-dev’s repository has no licence file. Did its author agree to the 109 packing
+   being built on, and does “MIT-style” cover the packing data as well as the code?
+
 ## What Is Not Established
 
 - **The 250-digit solution as a local optimum**, and any optimality: not replayed here.
-- **Samanyu-dev’s 109 and the construction**: that packing is not retained, and the
-  cut-and-fill step is the author’s statement.
+- **Samanyu-dev’s 109**: not retained here; the review measured the growth step from it
+  (F11), which decides nothing about the bound.
 - **Human oversight**: no record is retained.
 
 ## Credit and Licence

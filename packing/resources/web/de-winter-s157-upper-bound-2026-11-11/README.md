@@ -15,8 +15,8 @@ so the certificate’s bytes are `a491dad`’s. The push time is not read, and t
 dates the claim, since no other report reached 157 in between.
 
 Intake lane L104 (think-bcfs) retained it, replayed it and registered it on 11 November
-2026 as **T-293, at V3/C3 on the replay**. The stage 4 review runs in a separate blind
-lane, and the case record waits on it under the house rule.
+2026 as **T-293**. The blind stage 4 review of lane L105 accepted it the same day, so it
+is at V3/C3, and the case adopted it as its house in place of the grid under the house rule.
 
 ## What the Source Claims
 
@@ -118,11 +118,52 @@ same score as T-057 at 211 and T-220 at 183. The case record is not touched unti
 review is mapped; then the house rule adopts it with both strong generators’
 regularization of the new house and its flip.
 
+## Stage 4 Review
+
+The stage 4 review of 11 November 2026
+([review-2026-11-11-dewinter-132-157.md](../../../../docs/project/reviews/review-2026-11-11-dewinter-132-157.md), lane L105) accepts this certificate with
+the 132’s; all 14 findings are notes. The s132 packet’s README gives the review in full.
+
+- **Feasibility.** Its clean-room checker decides both files, every square, wall and all
+  12,246 pairs, by two exact methods. It finds one exact wall contact (square 109, right),
+  the least positive wall clearance 1.01 × 10⁻²⁴⁸ (square 136, right), no pair touching,
+  and the least pair margin 10⁻⁶⁰ less about 10⁻²⁴⁷, at squares 88 and 101. Its 16
+  controls came out as stated, among them the squares accepted in the box of side
+  12.993302611344 itself.
+- **The construction (F11).** Measured from the author’s 132: under one symmetry (one
+  quarter turn), the 132 cut at about x = 8.33 and y = 8.32 and its four parts moved about
+  one unit apart pairs every one of its squares with a square here within 0.126. The 25
+  squares left over are 17 axis-aligned squares at the cuts and 8 tilted ones.
+- **Notes for the author.** 1.3493 × 10⁻⁵⁹ above the scaled-back configuration, the
+  stated 1.4 × 10⁻⁵⁹ rounded up (F8); 2,048 corner incidences against 2,024 equations
+  (F9); the YAML’s schema deviations (F10).
+- **F14.** At adoption the case’s `conjectured_optimum: integer` and its prose that nothing
+  beats the grid are retired, as at 183 and 211.
+
+## Questions for the Author
+
+The stage 4 review’s six questions, informational, holding nothing open:
+
+1. The certificate reads as the solution scaled by 1 + 10⁻⁶⁰ and translated by 10⁻⁶⁰,
+   which puts the sides 1.2476 and 1.3493 × 10⁻⁵⁹ above it. Were the stated 1.3 and
+   1.4 × 10⁻⁵⁹ rounded up, or measured another way?
+2. How are the 1,407 and 2,024 contact equations counted? A count of corners on edge
+   segments and walls within 10⁻⁵⁰ gives 1,423 and 2,048.
+3. Would the YAML carry the `softschema` header, a `claim` block and a lowercase id, so
+   that it validates as a Witness/v2 file?
+4. The cuts measure at about x = 3.58, y = 7.37 in the 109 packing turned three quarter
+   turns, and at x = 8.33, y = 8.32 in the 132 packing turned one quarter turn. Are those
+   the author’s cuts, and which squares were added in each gap?
+5. Will the growth step’s code, the IPOPT model, the 250-digit solutions and the binary64
+   and Shapely checks be published?
+6. Samanyu-dev’s repository has no licence file. Did its author agree to the 109 packing
+   being built on, and does “MIT-style” cover the packing data as well as the code?
+
 ## What Is Not Established
 
 - **The 250-digit solution as a local optimum**, and any optimality: not replayed here.
-- **Samanyu-dev’s 109 and the construction**: not retained; the two steps are the author’s
-  statement.
+- **Samanyu-dev’s 109**: not retained here; the review measured both growth steps (F11),
+  which decide nothing about the bound.
 - **Human oversight**: no record is retained.
 
 ## Credit and Licence
