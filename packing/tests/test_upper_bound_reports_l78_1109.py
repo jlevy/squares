@@ -339,7 +339,7 @@ def test_the_side_lies_just_above_the_one_root_of_the_quintic_near_it() -> None:
             total = total * value + coefficient
         return total
 
-    def rational(value: Fraction) -> sympy.Rational:
+    def rational(value: Fraction) -> Any:
         return sympy.Rational(value.numerator, value.denominator)
 
     low = side - Fraction(1, 10**98)
