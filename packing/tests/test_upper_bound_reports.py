@@ -228,6 +228,11 @@ L90_1111 = (
     "de-winter-issue942-2026-11-10",
     "de-winter-a0c4fc8-2026-11-10",
 )
+#: The intake pass's lane L104 of 11 November 2026 (`test_upper_bound_reports_l104_1111`):
+#: Joost de Winter's #958, pinwheels at 132 and 157 in his watched repository
+#: JoostdeWinter/square-packing at 6617869, each a rational centre-basis witness without
+#: the schema's envelope, retained under MIT.
+L104_1111 = ("de-winter-s132-upper-bound-2026-11-11", "de-winter-s157-upper-bound-2026-11-11")
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -290,6 +295,7 @@ EVERY = (
     L76_1109,
     *L81_1111,
     *L90_1111,
+    *L104_1111,
 )
 
 
@@ -1339,10 +1345,10 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
-    # to #931, #935, #936 and #938 and Yim's #895 touches the box. Couzo's #672 touches at
-    # 229 and clears every wall at 227, so its walls mix, as de Winter's #941 does, whose
-    # borders touch the box and whose other certificates clear it; every other source's
-    # clear it.
+    # to #931, #935, #936 and #938, Yim's #895 and de Winter's 132 and 157 touches the box.
+    # Couzo's #672 touches at 229 and clears every wall at 227, so its walls mix, as de
+    # Winter's #941 does, whose borders touch the box and whose other certificates clear it;
+    # every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
@@ -1360,6 +1366,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         *L71_1109,
         L76_1109,
         *L81_1111,
+        *L104_1111,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1650,6 +1657,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L76_1109: "2026-11-09",
         **dict.fromkeys(L81_1111[:3], "2026-11-10"),
         L81_1111[3]: "2026-11-11",
+        **dict.fromkeys(L104_1111, "2026-11-11"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

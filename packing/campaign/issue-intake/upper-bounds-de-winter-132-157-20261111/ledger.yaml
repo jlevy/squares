@@ -1,0 +1,85 @@
+format: intake-ledger-v1
+read_at_main: c8448724edfb33053037f362d50bed961b7ada79
+read_on: '2026-11-11'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l104
+  branch: claude/bold-ritchie-xo28us-l104
+  commit: c8448724edfb33053037f362d50bed961b7ada79
+  note: The two packets' claim records, written on the lane's branch from main c8448724e and
+    read here by path.
+reports:
+- report: '#958'
+  url: https://github.com/jlevy/squares/issues/958
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-11T20:56:18Z'
+  bead: think-bcfs
+  claims:
+  - n: 132
+    printed: '11.976048383604'
+    rounding: up
+    exact: 29940120959008518809321792381784194561366154929588804750577800289555120369865408680444352359453817994064394036272845081533643558510907037866820298055603899602933748036672382028267459576409124073981009540056142854406780197934128275523774369426111643883528289742078410057825766433892095556050609840605731079359109/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-s132-upper-bound-2026-11-11/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l104@c8448724edfb33053037f362d50bed961b7ada79
+    first_committed: '2026-11-11T20:49:44Z'
+    measured:
+      against: T-174
+      finding: not one to one with T-174's packing under any symmetry of the box by nearest
+        centres; the optimal assignment moves 84 squares beyond 0.1 and 91 beyond 1e-2 (largest
+        0.986) and turns 78 squares, by up to 40.42 degrees; 53 squares are tilted beyond
+        a degree, 23.6 to 31.4 degrees, all turned the same way, against T-174's 39, 18 one
+        way and 21 the other; a new arrangement relative to T-174's packing
+      source: packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/identity.json
+    new_packing:
+      source: 'n132/README.md: ''The packing is a pinwheel ... It was derived from the public
+        packing of 109 unit squares in the repository Samanyu-dev/squares_in_squares (commit
+        53551d7, file best_fit_101_500.csv, side 10.949289581) ... Credit for the pinwheel
+        arrangement at n = 109 belongs to Samanyu-dev.'''
+      continues: Samanyu-dev's packing of 109 squares, by one cut-and-fill step
+    note: T-174's own uniform-contraction margin is 0, a pair (87, 88) touching, so the gain,
+      9.632e-3, lies wholly outside the predecessor's padding (packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132.json)
+      and RV-3 (think-ruu2) does not reach it.
+  - n: 157
+    printed: '12.993302611344'
+    rounding: up
+    exact: 129933026113432236413372793549657716631187442425245801744283606793974218710058937592366709087048731338017528033289023283642767554572063457698437749660264199173945900886886411321189343067195192146616036359183804176225069306100476941522988597256113139114360980862141007303341357995510774692842598946408083952550389/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-s157-upper-bound-2026-11-11/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l104@c8448724edfb33053037f362d50bed961b7ada79
+    first_committed: '2026-11-11T20:49:44Z'
+    measured:
+      against: the 13 x 13 grid
+      finding: not one to one with the grid's 157 squares under any symmetry of the box by
+        nearest centres; the optimal assignment moves 100 squares beyond 0.1 (largest 1.409)
+        and turns 61, every one by 24.0 to 27.5 degrees, all the same way; a new arrangement,
+        the first below the grid at 157
+      source: packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/identity.json
+    new_packing:
+      source: 'n157/README.md: ''It was derived in two steps from the public packing of 109
+        unit squares in the repository Samanyu-dev/squares_in_squares ... The first step gives
+        the packing of 132 squares in n132. The second step gives this packing. Credit for
+        the pinwheel arrangement at n = 109 belongs to Samanyu-dev.'''
+      continues: Samanyu-dev's packing of 109 squares, by two cut-and-fill steps through the
+        author's 132
+    note: The grid's uniform-contraction margin is 0, its squares touching, so the gain, 6.697e-3,
+      lies wholly outside any padding (packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157.json);
+      a packing below the grid is no re-certification of the grid, and RV-3 (think-ruu2) does
+      not reach it.
+  note: The issue names 6617869, committed at 2026-11-11T20:52:23Z, 3 minutes 55 seconds before
+    it; a491dad, committed at 20:49:44Z, 6 minutes 34 seconds before it, first published both
+    folders, and 6617869 changes only their READMEs and checksums. a491dad's push was not
+    read (GitHub's activity log was not readable from this session), so it may have made the
+    folders public up to 6 minutes 34 seconds before the issue, when the rule of 14 October
+    would date them by it; the ledger dates both by the issue with the first commit kept,
+    and no other report reached 132 or 157 in that window, so the verdicts are the same either
+    way. The issue and each folder's README say the certificate's side is 1.4e-59 (157) or
+    1.3e-59 (132) above a solution of the contact equations to 250 digits, a numerical local
+    optimum with no formal proof, and that the author has not seen the Kaggle per-puzzle leaderboard's
+    values at these counts, so an unpublished packing with a smaller side may exist.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []
