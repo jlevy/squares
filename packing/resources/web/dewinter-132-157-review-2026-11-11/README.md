@@ -49,11 +49,14 @@ packing:
 | `l105_lineage.py` | the two growth steps from the seed at 109, in binary64 with SciPy’s assignment | the seed’s `best_fit_101_500.csv`, the source | `out/lineage.json` |
 | `l105_identity.py` | the 132 packing against the house witness, eight symmetries and five anchorings | the source, `packing/witnesses/known-best/n-132.yaml` | `out/identity-n132.json` |
 | `l105_custody.py` | read-only Git plumbing on both clones; the licence against this repository’s retained copies; no e-mail addresses | both clones, this repository | `out/custody.json` |
+| `l105_compare_lane.py` | lane L104’s claim records, replay receipts, sharp controls, contraction and identity receipts, ledger and register prints against this review’s receipts | lane L104’s branch at `5315ad8e5`, through `git show`; this directory’s receipts | `out/compare-lane.json` |
 | `l105_digests.py` | every program and receipt against the kept bytes and the three frozen lists | this directory | `out/program-digests.json` |
 
 `run_after.sh SOURCE_DIR SEED_DIR REPO_DIR OUT_DIR` reruns them; SEED_DIR is a clone of
 `Samanyu-dev/squares_in_squares` at `53551d77513a`. `l105_digests.py` printed
-`ALL_RECEIPTS_MATCH`.
+`ALL_RECEIPTS_MATCH`. `l105_compare_lane.py`, run as
+`l105_compare_lane.py REPO_DIR 5315ad8e5ad1bf5765ccfa0c7453910252b8e1d8 PACKET_DIR OUT_JSON`
+with the lane’s branch fetched, printed `LANE_EQUALS_REVIEW` on 51 comparisons.
 
 ## What They Printed
 

@@ -5,6 +5,7 @@
   "issue-958.json": "1def3e3f847b763b8bc627a3e83b7a48454c53251e3431636ae4d921d396c6dc",
   "l105_check.py": "1e7b04cca2bfc3b2e0ef6c95c885e88b99a82615571af3c454ce245222e622b7",
   "l105_clip.py": "4eba021609f021d2a9d77ade651164522f6716e6b554318010cc02b9d13b7dc7",
+  "l105_compare_lane.py": "19b637aebf72fdbf81fd982db352926abf7edc54ef3879462297722c1b4ec3e0",
   "l105_construct.py": "ef1166dcba0630aa5399d7113475f6729a189c9dd63c5f9e5e5a4e06abe26709",
   "l105_controls.py": "31b894362ded4b2798f6f0b33e1cf81f841969b1b5b189ef6a790598e02d3886",
   "l105_custody.py": "199b4d7c537410a965f519f081718d6aa546a2f5480bd81a285770684fed19a0",
@@ -29,6 +30,11 @@
   "check-n157.json": {
    "sha256": "d5a92ad341ef71cee4689bb8bde5606c6e918793983e8eb1b5f90dd321e06030",
    "programs_named": 4,
+   "programs_match": true
+  },
+  "compare-lane.json": {
+   "sha256": "dc029b8bcb9c3c33f6079897b7afed995a5c4a504265399c125a267e3507fdac",
+   "programs_named": 0,
    "programs_match": true
   },
   "construct.json": {

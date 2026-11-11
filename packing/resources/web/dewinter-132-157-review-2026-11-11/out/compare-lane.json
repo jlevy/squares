@@ -1,0 +1,332 @@
+{
+ "program": "l105_compare_lane.py",
+ "lane_commit": "5315ad8e5ad1bf5765ccfa0c7453910252b8e1d8",
+ "comparisons": [
+  {
+   "comparison": "132: exact side",
+   "lane": "299401209590085188093217\u2026",
+   "review": "299401209590085188093217\u2026",
+   "equal": true
+  },
+  {
+   "comparison": "132: offered side is the 12-place ceiling",
+   "lane": "11.976048383604",
+   "review": "11.976048383604",
+   "equal": true
+  },
+  {
+   "comparison": "132: exact_verify accepts",
+   "lane": true,
+   "review": "ACCEPT",
+   "equal": true
+  },
+  {
+   "comparison": "132: exact_verify least pair gap equals the review's least margin",
+   "lane": "52811489679477530529\u2026",
+   "review": "52811489679477530529\u2026",
+   "equal": true
+  },
+  {
+   "comparison": "132: exact_verify least containment clearance",
+   "lane": "0",
+   "review": "0 (wall contacts)",
+   "equal": true
+  },
+  {
+   "comparison": "132: exact_verify pairs tested",
+   "lane": 8646,
+   "review": 8646,
+   "equal": true
+  },
+  {
+   "comparison": "132: exact_verify side",
+   "lane": "exact",
+   "review": "exact",
+   "equal": true
+  },
+  {
+   "comparison": "132: independent accepts",
+   "lane": true,
+   "review": "ACCEPT",
+   "equal": true
+  },
+  {
+   "comparison": "132: independent least pair gap equals the review's least margin",
+   "lane": "52811489679477530529\u2026",
+   "review": "52811489679477530529\u2026",
+   "equal": true
+  },
+  {
+   "comparison": "132: independent least containment clearance",
+   "lane": "0",
+   "review": "0 (wall contacts)",
+   "equal": true
+  },
+  {
+   "comparison": "132: independent pairs tested",
+   "lane": 8646,
+   "review": 8646,
+   "equal": true
+  },
+  {
+   "comparison": "132: independent side",
+   "lane": "exact",
+   "review": "exact",
+   "equal": true
+  },
+  {
+   "comparison": "132: both controls refused on both routes",
+   "lane": [
+    "duplicate-square-overlap",
+    "square-translated-outside-container"
+   ],
+   "review": "G1 and G2 refused here",
+   "equal": true
+  },
+  {
+   "comparison": "132: the sharp controls' tightest pair contains the review's least pair's square",
+   "lane": "119",
+   "review": [
+    14,
+    119
+   ],
+   "equal": true
+  },
+  {
+   "comparison": "132: own contraction margin against the review's scaled-back side",
+   "lane": "1.247605e-59",
+   "review": "1.24760e-59",
+   "equal": true
+  },
+  {
+   "comparison": "132: one minus lambda star is the review's epsilon",
+   "lane": "1.000000e-60",
+   "review": "1e-60",
+   "equal": true
+  },
+  {
+   "comparison": "132: retained n132_exact.json",
+   "lane": "d718cb81cb7dbda9",
+   "review": "d718cb81cb7dbda9",
+   "equal": true
+  },
+  {
+   "comparison": "132: retained n132_witness.yaml",
+   "lane": "837b32b5aeb98d97",
+   "review": "837b32b5aeb98d97",
+   "equal": true
+  },
+  {
+   "comparison": "132: retained verify_exact.py",
+   "lane": "584fdc11264de51d",
+   "review": "584fdc11264de51d",
+   "equal": true
+  },
+  {
+   "comparison": "132: retained SHA256SUMS",
+   "lane": "70288eb3e32a5906",
+   "review": "70288eb3e32a5906",
+   "equal": true
+  },
+  {
+   "comparison": "132: retained README.md",
+   "lane": "8b6e5930df9c635b",
+   "review": "8b6e5930df9c635b",
+   "equal": true
+  },
+  {
+   "comparison": "132: ledger first commit is a491dad's",
+   "lane": "2026-11-11T20:49:44Z",
+   "review": "2026-11-11T21:49:44+01:00",
+   "equal": true
+  },
+  {
+   "comparison": "157: exact side",
+   "lane": "129933026113432236413372\u2026",
+   "review": "129933026113432236413372\u2026",
+   "equal": true
+  },
+  {
+   "comparison": "157: offered side is the 12-place ceiling",
+   "lane": "12.993302611344",
+   "review": "12.993302611344",
+   "equal": true
+  },
+  {
+   "comparison": "157: exact_verify accepts",
+   "lane": true,
+   "review": "ACCEPT",
+   "equal": true
+  },
+  {
+   "comparison": "157: exact_verify least pair gap equals the review's least margin",
+   "lane": "17146463858947746104\u2026",
+   "review": "17146463858947746104\u2026",
+   "equal": true
+  },
+  {
+   "comparison": "157: exact_verify least containment clearance",
+   "lane": "0",
+   "review": "0 (wall contacts)",
+   "equal": true
+  },
+  {
+   "comparison": "157: exact_verify pairs tested",
+   "lane": 12246,
+   "review": 12246,
+   "equal": true
+  },
+  {
+   "comparison": "157: exact_verify side",
+   "lane": "exact",
+   "review": "exact",
+   "equal": true
+  },
+  {
+   "comparison": "157: independent accepts",
+   "lane": true,
+   "review": "ACCEPT",
+   "equal": true
+  },
+  {
+   "comparison": "157: independent least pair gap equals the review's least margin",
+   "lane": "17146463858947746104\u2026",
+   "review": "17146463858947746104\u2026",
+   "equal": true
+  },
+  {
+   "comparison": "157: independent least containment clearance",
+   "lane": "0",
+   "review": "0 (wall contacts)",
+   "equal": true
+  },
+  {
+   "comparison": "157: independent pairs tested",
+   "lane": 12246,
+   "review": 12246,
+   "equal": true
+  },
+  {
+   "comparison": "157: independent side",
+   "lane": "exact",
+   "review": "exact",
+   "equal": true
+  },
+  {
+   "comparison": "157: both controls refused on both routes",
+   "lane": [
+    "duplicate-square-overlap",
+    "square-translated-outside-container"
+   ],
+   "review": "G1 and G2 refused here",
+   "equal": true
+  },
+  {
+   "comparison": "157: the sharp controls' tightest pair contains the review's least pair's square",
+   "lane": "101",
+   "review": [
+    88,
+    101
+   ],
+   "equal": true
+  },
+  {
+   "comparison": "157: own contraction margin against the review's scaled-back side",
+   "lane": "1.349330e-59",
+   "review": "1.34933e-59",
+   "equal": true
+  },
+  {
+   "comparison": "157: one minus lambda star is the review's epsilon",
+   "lane": "1.000000e-60",
+   "review": "1e-60",
+   "equal": true
+  },
+  {
+   "comparison": "157: retained n157_exact.json",
+   "lane": "b6c28446c4cb6169",
+   "review": "b6c28446c4cb6169",
+   "equal": true
+  },
+  {
+   "comparison": "157: retained n157_witness.yaml",
+   "lane": "e73c5cff8d84b7d9",
+   "review": "e73c5cff8d84b7d9",
+   "equal": true
+  },
+  {
+   "comparison": "157: retained SHA256SUMS",
+   "lane": "285e0befdf952296",
+   "review": "285e0befdf952296",
+   "equal": true
+  },
+  {
+   "comparison": "157: retained README.md",
+   "lane": "be5821d8988d1447",
+   "review": "be5821d8988d1447",
+   "equal": true
+  },
+  {
+   "comparison": "157: ledger first commit is a491dad's",
+   "lane": "2026-11-11T20:49:44Z",
+   "review": "2026-11-11T21:49:44+01:00",
+   "equal": true
+  },
+  {
+   "comparison": "132: identity against T-174, beyond 0.1 and largest move",
+   "lane": [
+    84,
+    "0.98568"
+   ],
+   "review": [
+    84,
+    0.9857
+   ],
+   "equal": true
+  },
+  {
+   "comparison": "132: no symmetry one to one",
+   "lane": false,
+   "review": false,
+   "equal": true
+  },
+  {
+   "comparison": "132: the entry's 16-place print is the ceiling",
+   "lane": "11.9760483836034076",
+   "review": "ceil16",
+   "equal": true
+  },
+  {
+   "comparison": "132: the entry's 12-place print is the ceiling",
+   "lane": "11.976048383604",
+   "review": "11.976048383604",
+   "equal": true
+  },
+  {
+   "comparison": "132: draft significance",
+   "lane": "S3",
+   "review": "S3",
+   "equal": true
+  },
+  {
+   "comparison": "157: the entry's 16-place print is the ceiling",
+   "lane": "12.9933026113432237",
+   "review": "ceil16",
+   "equal": true
+  },
+  {
+   "comparison": "157: the entry's 12-place print is the ceiling",
+   "lane": "12.993302611344",
+   "review": "12.993302611344",
+   "equal": true
+  },
+  {
+   "comparison": "157: draft significance",
+   "lane": "S3",
+   "review": "S3",
+   "equal": true
+  }
+ ],
+ "status": "LANE_EQUALS_REVIEW",
+ "differing": []
+}
