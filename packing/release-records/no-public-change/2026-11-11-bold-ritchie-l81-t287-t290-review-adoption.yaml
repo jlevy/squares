@@ -33,15 +33,16 @@ reason: >-
   sources, the poster credit hold, the bound citations, the composite figure, the gate's rigidity
   totals, the settlements the new houses no longer need, and the requests and coverage text
   that follow. No paper prints those counts, these records or those cards. Against main
-  f54ad1048 (#940): devtools.compare_paper_renders rendered each paper into empty site
+  9fd466fe1 (#948): devtools.compare_paper_renders rendered each paper into empty site
   directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
   tree and once with that main's copies of the thirteen paths above swapped in. The
   optimality review, the threshold-bound review and the methods survey are byte-identical
   across the three, 43 files each. The explainer's 55 files are deterministic, and only its
   Markdown and HTML differ from the baseline. Of its substitutions, the register count reads
-  288 here and 284 on that main ("one of 284 results the framework has registered so far"),
+  290 here and 286 on that main ("one of 286 results the framework has registered so far"),
   the count scored new reads 32 on both, and the composite totals it reads are those of the
-  1 to 100 composite, which no adopted count is in and whose totals are equal on both; so the
+  1 to 100 composite, which no adopted count is in, and its totals and the 1 to 324
+  composite's are equal on both; so the
   change is the live register count, which follows the site's data and is not a revision of
   the paper, as this lane's record of the registration and the L71 and L76 records say. This
   record read the substitutions rather than diffing a fresh pair of renders. No PDF was

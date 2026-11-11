@@ -5947,7 +5947,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-09'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/173.html
   canonical: cases/173.html
@@ -6179,7 +6179,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-09'
+  lastmod: '2026-11-10'
   status: live
 - path: cases/2.html
   canonical: cases/2.html
@@ -23883,6 +23883,86 @@ urls:
     - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/out/check-n199.json
     - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/out/construct-n199.json
     - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/out/propagate.json
+- path: result/t-285.html
+  canonical: result/t-285.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-10'
+  lastmod: '2026-11-10'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 199
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s199 upper bound 2026-11-09]'
+      published: '2026-11-09'
+    builds_on: null
+    evidence:
+    - E-de-winter-939-certificate-report
+    artifacts:
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/README.md
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/claims.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/n199_witness.yaml
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/n199_exact.json.gz
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n199.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n172-base.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n199.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n172-base.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n172-daniel-held.json
+    - packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - packing/devtools/construction_checker.py
+    - docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/README.md
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/decide-939.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/compare-lane.json
+- path: result/t-286.html
+  canonical: result/t-286.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 172
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s172 upper bound 2026-11-10]'
+      published: '2026-11-10'
+    builds_on: null
+    evidence:
+    - E-de-winter-946-certificate-report
+    artifacts:
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/README.md
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/acquisition/claims.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/n172_witness.yaml
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/n172_exact.json.gz
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/identity-n172.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172-daniel-held.json
+    - packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/decide-946.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/moves.json
 - path: result/t-287.html
   canonical: result/t-287.html
   kind: result

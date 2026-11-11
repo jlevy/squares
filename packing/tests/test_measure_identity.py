@@ -13,10 +13,12 @@ only; none needs the network.
 
 from __future__ import annotations
 
+import dataclasses
 import gzip
 import json
 from fractions import Fraction
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -406,3 +408,62 @@ def test_its_centred_assignment_reproduces_the_t240_review_of_t230_against_t239(
         "1e-1": 12,
     }
     assert pair["nearest_centre"]["one_to_one"] is True
+
+
+# --------------------------------------------------------------------------- L bases
+
+#: T-284 (#938): T-282's certificate at 172 with one L step at 199 (lane L76).
+T284 = "ozden-s199-upper-bound-2026-11-09"
+T282 = "ozden-s172-upper-bound-2026-11-09"
+
+
+def test_an_l_base_is_the_certificate_the_l_step_was_written_on() -> None:
+    """T-284's base is T-282's retained certificate, pose for pose and side for side."""
+    base, source = identity.read_l_base(f"packet:{T284}", 172)
+    assert base == reports.read_facts(reports.packet_path(T282), {172})[172]
+    assert source == {"input": identity.L_BASE, "packet": T284, "extended_n": 199}
+    packing = identity.read_packing(f"T-284={identity.L_BASE}:packet:{T284}", 172)
+    assert (packing.label, packing.side) == ("T-284", base.side)
+
+
+@pytest.mark.parametrize(
+    ("target", "n", "message"),
+    [
+        (f"witness-center-basis:{T284}", 172, "read from packet:NAME"),
+        (f"packet:{T284}", 171, "0 certificates are one L step above 171"),
+        # T-282's certificate is 25 squares more than 147 and its side less one is 12.6, so
+        # its count is one L step above 147; but its first 147 squares do not fit that box.
+        (f"packet:{T282}", 147, "square 41 lies outside the base's box$"),
+        ("packet:no-such-packet-2026-11-10", 172, "No such file or directory"),
+    ],
+)
+def test_a_packing_that_is_no_l_step_has_no_l_base(target: str, n: int, message: str) -> None:
+    with pytest.raises(identity.MeasureError, match=message):
+        identity.read_l_base(target, n)
+
+
+@pytest.mark.parametrize("shift", [Fraction(0), Fraction(1, 10**30)])
+def test_an_l_square_moved_by_1e_30_is_not_one_l_step(
+    monkeypatch: pytest.MonkeyPatch, shift: Fraction
+) -> None:
+    """T-284 with square 173, the L's first, moved left by ``shift``: refused unless 0."""
+    read_facts = reports.read_facts
+
+    def nudged(*args: Any, **kwargs: Any) -> Any:
+        facts = read_facts(*args, **kwargs)
+        if 199 not in facts:
+            return facts
+        certificate = facts[199]
+        poses = list(certificate.poses)
+        poses[172] = dataclasses.replace(poses[172], x=poses[172].x - shift)
+        return {**facts, 199: dataclasses.replace(certificate, poses=tuple(poses))}
+
+    monkeypatch.setattr(reports, "read_facts", nudged)
+    if shift:
+        with pytest.raises(
+            identity.MeasureError, match=r"the certificate at 199 is not one L step on it$"
+        ):
+            identity.read_l_base(f"packet:{T284}", 172)
+    else:
+        base, source = identity.read_l_base(f"packet:{T284}", 172)
+        assert (base.n, source["extended_n"]) == (172, 199)

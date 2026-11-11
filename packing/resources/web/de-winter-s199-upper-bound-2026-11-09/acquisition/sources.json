@@ -1,0 +1,50 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-09T22:56Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, fetched for the intake of jlevy/squares#939; the pin is the head of main when it was cloned, 702c7af (committed 2026-11-09T21:54:59Z, 'Add square packing for n = 199 that improves the Squares Project record', the author's message), 9 minutes before the issue, which names this commit. It adds the folder n199/ (6 files) and a row to the root README.md; its parent 9bf5d9be is the revision the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains, and the folders n227, n229 and n260 are unchanged. The scope is the licence, the root README and the whole of n199/. LICENSE is byte-identical to the copy that packet retains and is pinned against it. n199/SHA256SUMS states the SHA-256 of the five other files of n199/, and they match. n199/n199_record.png is a figure and is pinned by digest only. No source program ran in writing this packet; verify_exact.py is retained as data and never executed here.",
+  "sources": [
+    {
+      "id": "de-winter-s199-upper-bound-2026-11-09",
+      "source_url": "https://github.com/JoostdeWinter/square-packing",
+      "source_ref": "main",
+      "source_commit": "702c7af2db04c9b69696455ee3d33883a2935e8a",
+      "committed_utc": "2026-11-09T21:54:59Z",
+      "git_tree": "3e8a22bd506478ed003a6caf48a554da8a04cb95",
+      "archived_path": "packing/resources/web/de-winter-s199-upper-bound-2026-11-09/source",
+      "subtree_manifest": "packing/resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "n199"
+      ],
+      "subtree_file_count": 8,
+      "subtree_total_bytes": 430591,
+      "retained_file_count": 6,
+      "retained_total_bytes": 313831,
+      "compressed": [
+        "source/n199/n199_exact.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+          "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+          "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+        },
+        {
+          "path": "n199/n199_record.png",
+          "bytes": 115688,
+          "sha256": "5070d8f373e5006c1af3ffacf56e4a737d2bf8a033b40b22e4b22f694e9eff36",
+          "reason": "A raster figure of the packing, the core grey and yellow and the L blue, which decides nothing; pinned by digest only."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, added in 9bf5d9be on 2026-10-17 and byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The core of the packing is the n = 172 arrangement of jlevy/squares#935 (T-282, Do\u011fa \u00d6zden after Evan Daniel), re-solved, and the L of 27 squares is #938's (Do\u011fa \u00d6zden), as the issue states; the issue credits the core arrangement to Daniel and \u00d6zden.",
+      "claims": [
+        "n199/n199_witness.yaml states 199 unit squares, centre and basis (cos, sin) as exact rationals, in a square of exact rational side 1461468985328358057514628890087947061618972730200175769881498026931092424681356737007190165664341823168492765447/10^110, which #939 prints rounded up as 14.61468985328358057514628890087947061619 (and the issue's title as 14.6146898532835806, the root README at 12 places as 14.614689853284). The file follows this repository's Witness/v2 witness object but has no softschema block and no claim, has a notes field, and its id W-n199-de-Winter-locally-optimal has capitals, so this repository's witness schema does not admit it. n199/n199_exact.json states the same packing as [center_x, center_y, cos, sin] rows, with the side and the quintic's coefficients.",
+        "The issue and README say the side is less than 1e-98 (the README: 1.4e-99) above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, which they call irreducible and the local optimum of the arrangement: the optimality conditions of the core were solved to 130 digits, all 734 load-bearing or forced contacts close exactly and all other gaps stay open, and the polynomial was identified numerically from 108 digits and reproduces the side to 129 digits. Local optimality has no formal proof, as the issue says. The packing is a 172-square core and an L of 27 axis-aligned squares, a row of 14 and a column of 13 (s(n + 2 floor(s) + 1) <= s(n) + 1); the core is the arrangement of #935 (Evan Daniel, improved by Do\u011fa \u00d6zden), re-optimized to its exact local optimum, a core side of 13.61468985328358..., 2.63e-12 below the value listed at 172.",
+        "verify_exact.py (Python standard library, fractions.Fraction) checks exact unit edge directions, containment, a separating-axis test on all 481 pairs with centres closer than sqrt(2), and by an exact sign test that the side lies within 1e-98 above a root of the quintic; the issue says a second script with separate code checked the witness file in the same arithmetic, that the two checkers share one author, the separating-axis test and Python's Fraction, and that the certificate was not replayed with this repository's checkers. The issue says the derivation, local optimization, high-precision solution, rational certificate, checks and figure were produced with Claude (Anthropic) under Joost de Winter's direction. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

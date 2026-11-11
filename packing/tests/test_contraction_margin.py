@@ -113,3 +113,31 @@ def test_reproduces_the_review_at_130_and_measures_a_later_certificate() -> None
     against = record["against"]
     assert against["within_margin"] is True
     assert Fraction(against["gain"]) < Fraction(record["margin"])
+
+
+def test_an_l_step_carries_its_base_margin_where_the_whole_certificate_has_none() -> None:
+    """T-284 (#938) is T-282 with one L step, so its own margin is 0: two grid squares
+    touch. Read through ``l-base``, its padding is T-282's own retained margin, and #939's
+    base (lane L78) gains 1.0399 of it, as the retained receipts state."""
+    web = reports.WEB
+    t282 = json.loads(
+        (web / "ozden-s172-upper-bound-2026-11-09/measure/contraction-n172-own.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    packet = web / "de-winter-s199-upper-bound-2026-11-09/measure"
+    retained = json.loads((packet / "contraction-n172-base.json").read_text(encoding="utf-8"))
+    whole = json.loads((packet / "contraction-n199.json").read_text(encoding="utf-8"))
+    assert (whole["margin"], whole["binding_pair"]) == ("0", [173, 174])
+    record = cm.margin(
+        cm.read_certificate("T-284=l-base:packet:ozden-s199-upper-bound-2026-11-09", 172),
+        routes=False,
+        against=cm.read_certificate(
+            "#939=l-base:packet:de-winter-s199-upper-bound-2026-11-09", 172
+        ),
+    )
+    assert record["margin"] == t282["margin"] == retained["margin"]
+    assert record["lambda_star"] == t282["lambda_star"]
+    assert record["against"] == retained["against"]
+    assert record["against"]["gain_over_margin"] == "1.0399"
+    assert record["against"]["within_margin"] is False

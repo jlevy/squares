@@ -1,0 +1,68 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/946",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter s172 upper bound 2026-11-10]",
+  "report_evidence": "E-de-winter-946-certificate-report",
+  "receipt_format": "de-winter-946-exact-replay-v1",
+  "witness_prefix": "W-de-winter-946-n",
+  "claim_limitations": "Complete 2026-11-10 rational centre-basis witness at 172, read exactly from the retained source file without its schema envelope: the n = 172 arrangement of issue 935 (T-282) re-solved, 1.6e-319 above what the source calls its exact local optimum. Finite construction feasibility only; the quintic, the local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-11",
+  "read_at_main": "f54ad1048080ce14151282dd1861a29b03b51714",
+  "certificates": [
+    {
+      "n": 172,
+      "path": "n172/n172_witness.yaml",
+      "format": "witness-center-basis-bare",
+      "offered": "13.614689853284",
+      "printed_in": "https://github.com/JoostdeWinter/square-packing/blob/c4e65d0b8c4d32e45bf32a907e8b760502f137af/README.md",
+      "first_committed": "2026-11-10T21:26:23Z",
+      "same_packing": [
+        {
+          "path": "n172/n172_exact.json",
+          "format": "center-direction-json"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    172
+  ],
+  "replayed": [
+    172
+  ],
+  "houses": [
+    {
+      "n": 172,
+      "reader": "[Özden s172 upper bound 2026-11-09]",
+      "source_key": "[Özden s172 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-282",
+      "reported_value": "13.6146898532862152",
+      "verified_value": "13.6146898532862152",
+      "evidence": [
+        "E-ozden-935-exact-feasibility",
+        "E-ozden-935-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Joost de Winter's packing of 172 squares at JoostdeWinter/square-packing c4e65d0, issue 946",
+    "headline": "De Winter's re-solve of T-282's packing at 172, T-285's core, 1.0399 of T-282's margin; held",
+    "significance": 1,
+    "source_checks": "The issue says verify_exact.py, Python's standard library with fractions.Fraction, checks exact unit edge directions, containment, a separating-axis test on every pair of squares with centres closer than sqrt(2), and by an exact sign test that the side lies within 1e-318 above the real root near 13.6147 of 62x^5 - 4116x^4 + 107933x^3 - 1397031x^2 + 8918035x - 22427977; that it is the one checker, written for this certificate, and was not run against this repository's checkers.\n\nThe issue says the side is 1.6e-319 above that root, the exact local optimum of the arrangement: a solution of the contact equations at about 390 digits closes all contacts with a residual below 1e-389, the equations have rank 285 and fix the side to first order, non-negative contact forces in balance exist (floating point), and the polynomial, identified from 108 digits of an earlier 130-digit solution, agrees with the 390-digit side to 386 digits; local optimality has no formal proof. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Joost de Winter, who reports the exact local optimum of the n = 172 arrangement of issue 935 (T-282: Evan Daniel's packing, T-257, improved by Doğa Özden), with no square added, removed or moved to another place in the contact structure, and asks to be credited as its improver; the issue credits the arrangement to Daniel and Özden. It is the 172-square core of his issue 939 at 199.\n\nThe issue says the local optimization, high-precision solution, rational certificate, checking and figure were produced with Claude Fable 5.2 (Anthropic) under his direction.",
+    "next_rung": "Held for the owner's question (think-ruu2's RV-3): whether a re-certification at its predecessor's own contraction margin is a new result. If it is not, the entry is withdrawn and T-282 stays the house; if it is, the replay and the stage 4 review's clean-room run are entered, both rungs rise to V3 and C3, and 172 is adopted under the house rule with both strong generators' regularization and the flip, with T-285 at 199 and think-wju3's solve decided the same way. The stage 4 review of 11 November is mapped, at C1; only the evidence and the adoption wait on the owner.",
+    "bead": "think-2h88",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "de Winter after Ozden, Daniel, Levy",
+      "short_credit": "de Winter after Ozden et al.",
+      "note": "JoostdeWinter/square-packing at c4e65d0b8c4d32e45bf32a907e8b760502f137af (2026-11-10T21:26:23Z), Joost de Winter's certificate for s(172) <= 13.614689853284 (rounded up at 12 places, as the source's README prints it; jlevy/squares#946 prints it cut at 56 places): a rational centre-basis witness without this repository's schema envelope (n172/n172_witness.yaml) and the same packing as JSON (n172/n172_exact.json), the n = 172 arrangement of jlevy/squares#935 (T-282) re-solved to what the source calls its exact local optimum, the real root near 13.6147 of 62x^5 - 4116x^4 + 107933x^3 - 1397031x^2 + 8918035x - 22427977, 1.6e-319 above it; local optimality has no formal proof. It is the 172-square core of jlevy/squares#939. Registration was requested in jlevy/squares#946; the source says the work was produced with Claude (Anthropic) under his direction. No global optimality claim. The lineage builds on this project: the arrangement is T-282's, which starts from the registry's regularized atlas. Licensed MIT by LICENSE at the pin. Retained in web/de-winter-s172-upper-bound-2026-11-10/."
+    }
+  }
+}

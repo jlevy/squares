@@ -1,0 +1,100 @@
+format: intake-ledger-v1
+read_at_main: f54ad1048080ce14151282dd1861a29b03b51714
+read_on: '2026-11-11'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l78
+  branch: claude/bold-ritchie-xo28us-l78
+  commit: f54ad1048080ce14151282dd1861a29b03b51714
+  note: The packets' claim records, written on the lane's branch from main f54ad1048 and read
+    here by path.
+reports:
+- report: '#939'
+  url: https://github.com/jlevy/squares/issues/939
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-09T22:03:57Z'
+  bead: think-2h88
+  claims:
+  - n: 199
+    printed: '14.61468985328358057514628890087947061619'
+    rounding: up
+    exact: 1461468985328358057514628890087947061618972730200175769881498026931092424681356737007190165664341823168492765447/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l78@f54ad1048080ce14151282dd1861a29b03b51714
+    first_committed: '2026-11-09T21:54:59Z'
+    measured:
+      against: T-284
+      finding: one to one with T-284's packing under the identity by nearest centres; no square
+        moves beyond 1e-3 (largest 1.414e-4) and the 27 squares of the L do not move; 84 squares
+        move beyond 1e-9, 16 free ones that also turn by 0.00573 degrees and 68 that slide
+        along their contacts on the flat motions; a refinement of T-284's packing
+      source: packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n199.json
+    refines:
+      packing_of: Doğa Özden
+      entry: T-284
+      source: '#939: ''The core uses the arrangement of the 172-square packing found by Evan
+        Daniel and improved by Doğa Özden ... The core was re-optimized to the exact local
+        optimum of that arrangement'', with a border of 27 axis-aligned squares (a row of
+        14 and a column of 13)'
+    note: The gain, 2.635e-12, is 1.0399 of the padding T-284 carries from T-282 through the
+      L step (2.533e-12, the margin of its base, measure/contraction-n172-base.json); its
+      own uniform-contraction margin is 0, since its grid squares touch (measure/contraction-n199.json).
+      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
+      RV-3); T-285 is held below the stage-4 exit at V0/C1 and does not move the house, and
+      its replay's entry and adoption to V3/C3 wait on the owner's answer.
+  note: The issue names 702c7af, committed at 2026-11-09T21:54:59Z, 9 minutes before the issue.
+    It says the side lies less than 1e-98 above the real root near 14.6147 of an irreducible
+    quintic, the arrangement's local optimum by a numerical solution to 130 digits, with no
+    formal proof; the record finds the side 1.36e-99 above that root exactly. The 172-square
+    core is the KKT point Evan Daniel's regularizer reached from T-282's witness on 9 November
+    and the record holds unregistered (think-wju3), its side equal to the root less one in
+    all 63 places the regularizer prints, with less padding (1.0000 of that solve's own margin).
+- report: '#946'
+  url: https://github.com/jlevy/squares/issues/946
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-10T21:27:10Z'
+  bead: think-2h88
+  claims:
+  - n: 172
+    printed: '13.614689853284'
+    rounding: up
+    exact: 68073449266417902875731444504397353080948636510008788494074901346554621234067836850359508283217091151617293345704765597620532720216748329971077389083491353418932974579641169639600471792485777408126210951129517439049081740527681703556068106591546355205618993526718753941580999034473172609240711483901276626480150415782426077068314323222352192806771235673530809486365100087884940749013465546212340678368503595082832170911516172933457047655976205327202167483299710773890834913534189329745796411696396004717924857774081262109511295174390490817405276817035560681065915463552056189935267187539415809990344731726092407114839012766264801504157824252963338216590433234354923261917/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-s172-upper-bound-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l78@f54ad1048080ce14151282dd1861a29b03b51714
+    first_committed: '2026-11-10T21:26:23Z'
+    measured:
+      against: T-282
+      finding: one to one with T-282's packing under the identity by nearest centres; no square
+        moves beyond 1e-3 (largest 1.414e-4); 84 squares move beyond 1e-9, 16 free ones that
+        also turn by 0.00573 degrees and 68 that slide along their contacts on the flat motions;
+        against the core of issue 939's packing every square lies within 2.3e-99; a refinement
+        of T-282's packing
+      source: packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/identity-n172.json
+    refines:
+      packing_of: Doğa Özden
+      entry: T-282
+      source: '#946: ''The side is the exact local optimum of the registered arrangement ...
+        No square was added, removed or moved to another place in the contact structure. Credit
+        for the arrangement belongs to them'''
+    note: The gain, 2.635e-12, is 1.0399 of T-282's own uniform-contraction margin, 2.533e-12
+      (packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172.json),
+      the share of Evan Daniel's held solve (think-wju3), whose KKT point this is. Whether
+      such a re-certification is a new result is the owner's open question (think-ruu2's RV-3);
+      T-286 is held below the stage-4 exit at V0/C1 and does not move the house.
+  note: 'The issue names c4e65d0, committed at 2026-11-10T21:26:23Z, 47 seconds before the
+    issue; 8c0de9d (21:20:44Z) first published n172/ at 1.4e-99 above the same root, and c4e65d0
+    overwrote it. The issue prints the side cut at 56 places and says it lies 1.6e-319 above
+    the real root near 13.6147 of an irreducible quintic, the arrangement''s exact local optimum,
+    with no formal proof; the record finds it 1.56e-319 above that root exactly. It is #939''s
+    core, 1.36e-99 lower, and calls itself the same type of result as T-098, awaiting RV-3.
+    #939''s certificate also bounds s(172), but #939 claims 199 only and the record carries
+    no deletion of an L inside the corpus, so #946 is the first report at 172.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

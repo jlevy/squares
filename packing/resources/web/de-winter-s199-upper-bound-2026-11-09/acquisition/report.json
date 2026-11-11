@@ -1,0 +1,85 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/939",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter s199 upper bound 2026-11-09]",
+  "report_evidence": "E-de-winter-939-certificate-report",
+  "receipt_format": "de-winter-939-exact-replay-v1",
+  "witness_prefix": "W-de-winter-939-n",
+  "claim_limitations": "Complete 2026-11-09 rational centre-basis witness at 199, read exactly from the retained source file without its schema envelope: a 172-square core, the n = 172 arrangement of issue 935 (T-282) re-solved, and an L of 27 axis-aligned unit grid squares at side S172' + 1. Finite construction feasibility only; the quintic, the local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-10",
+  "read_at_main": "f54ad1048080ce14151282dd1861a29b03b51714",
+  "certificates": [
+    {
+      "n": 199,
+      "path": "n199/n199_witness.yaml",
+      "format": "witness-center-basis-bare",
+      "offered": "14.61468985328358057514628890087947061619",
+      "first_committed": "2026-11-09T21:54:59Z",
+      "same_packing": [
+        {
+          "path": "n199/n199_exact.json",
+          "format": "center-direction-json"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    199
+  ],
+  "replayed": [
+    199
+  ],
+  "houses": [
+    {
+      "n": 199,
+      "reader": "[Özden s199 upper bound 2026-11-09]",
+      "source_key": "[Özden s199 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-284",
+      "reported_value": "14.6146898532862152",
+      "verified_value": "14.6146898532862152",
+      "evidence": [
+        "E-ozden-938-exact-feasibility",
+        "E-ozden-938-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 199,
+      "report": "T-174 (PR #574)",
+      "url": "https://github.com/jlevy/squares/pull/574",
+      "holders": "PingYou Ltd, of the house's packing",
+      "result": "T-174",
+      "reader": "[PingYou PR 574 certificates 2026-10-13]"
+    },
+    {
+      "n": 199,
+      "report": "T-193 (#639)",
+      "url": "https://github.com/jlevy/squares/issues/639",
+      "holders": "Evan Daniel, of the house's packing",
+      "result": "T-193",
+      "printed": "14.6175721735928068435558612724500328081986",
+      "rounding": "unstated"
+    }
+  ],
+  "register": {
+    "title": "Joost de Winter's packing of 199 squares at JoostdeWinter/square-packing 702c7af, issue 939",
+    "headline": "De Winter's re-solve of T-284's packing at 199, 1.0399 of its margin through the L step; held",
+    "significance": 1,
+    "source_checks": "The issue says verify_exact.py, Python's standard library with fractions.Fraction, checks exact unit edge directions, containment and a separating-axis test on all 481 pairs of squares with centres closer than sqrt(2), and confirms by an exact sign test that the side lies within 1e-98 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154; that a second script with separate code checked the witness file in the same arithmetic; and that the two share one author, the separating-axis test and Python's Fraction. It says the certificate was not replayed with this repository's checkers.\n\nThe issue and README say the root is the local optimum of the arrangement, from a numerical solution of the optimality conditions to 130 digits, in which all 734 load-bearing or forced contacts close exactly and all other gaps stay open; the quintic was identified numerically from 108 digits and reproduces the side to 129 digits; local optimality has no formal proof. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Joost de Winter (Delft University of Technology), who reports the re-solve of the n = 172 arrangement of issue 935 (T-282: Evan Daniel's packing, T-257, improved by Doğa Özden) to the exact local optimum of that arrangement, with the L of 27 unit squares along two walls that issue 938 (Doğa Özden, T-284, the house at 199) adds there: the classical L step s(n + 2 floor(s) + 1) <= s(n) + 1. The issue credits the core arrangement to Daniel and Özden.\n\nThe issue says the derivation, local optimization, high-precision solution, rational certificate, checks and figure were produced with Claude (Anthropic) under his direction.",
+    "next_rung": "Held for the owner's question (think-ruu2's RV-3): whether a re-certification at the margin its predecessor carries, here through a construction, is a new result. If it is not, the entry is withdrawn and T-284 stays the house; if it is, the replay and the stage 4 review's clean-room run are entered, both rungs rise to V3 and C3, and 199 is adopted under the house rule with both strong generators' regularization and the flip, and think-wju3's solve at 172 is decided the same way. The stage 4 review of 11 November is mapped, at C1; only the evidence and the adoption wait on the owner.",
+    "bead": "think-2h88",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "de Winter after Ozden, Daniel, Levy",
+      "short_credit": "de Winter after Ozden et al.",
+      "note": "JoostdeWinter/square-packing at 702c7af2db04c9b69696455ee3d33883a2935e8a (2026-11-09T21:54:59Z), Joost de Winter's certificate for s(199) <= 14.6146898532835806 (the exact side rounded up at 16 places), printed at 38 places in jlevy/squares#939 as 14.61468985328358057514628890087947061619: a rational centre-basis witness without this repository's schema envelope (n199/n199_witness.yaml) and the same packing as JSON (n199/n199_exact.json), whose squares 1 to 172 are the n = 172 arrangement of jlevy/squares#935 (T-282) re-solved to what the source calls its exact local optimum, the real root near 13.6147 of the quintic's shift, and whose other 27 are #938's L of axis-aligned unit squares at side S172' + 1. The source says the side is 1.4e-99 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154; local optimality has no formal proof. Registration was requested in jlevy/squares#939; the source says the work was produced with Claude (Anthropic) under his direction. No global optimality claim. The lineage builds on this project: the core is T-282's arrangement, which starts from the registry's regularized atlas. Licensed MIT by LICENSE at the pin. Retained in web/de-winter-s199-upper-bound-2026-11-09/."
+    }
+  }
+}

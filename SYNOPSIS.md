@@ -456,6 +456,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-260](packing/frontier/RESULTS.md) | 105, 146, 156, 229, 308 | `V0` | `C1` | `S1` | `previously-published` | Five complete rational source certificates of issue 846 report finite upper-bound improvements at the exact sides they state: s(105) <= 10.789303783742975392483567321744, s(146) <= 12.583782190151860342291508597077, s(156) <= 648958292691713822691804519015415761935308555406679/50000000000000000000000000000000000000000000000000, s(229) <= 15.650161513876431064008548865321 and s(308) <= 17.997149121270908735152160752315. |
 | [T-280](packing/frontier/RESULTS.md) | 299, 303 | `V0` | `C1` | `S1` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(299) <= 49520681639553253091959720304954604907070758384704238109808721459262431205131612278389503816375037/2781903786522383536263046420444731316926020496322871983755429706465280000000000000000000000000000 and s(303) <= 1159243312382833490764400031561352875121611202900949162484560193631809228369410184762453/64755723279645431239980480646475572327964543123998048064000000000000000000000000000000. |
 | [T-281](packing/frontier/RESULTS.md) | 130 | `V0` | `C1` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(130) <= 12971572518503349393832850076636691474305902182478289654941561/1089825507438012248624046765161000000000000000000000000000000, 1.96e-14 below T-259, the house, and the same 12-place print, 11.902430645983. |
+| [T-285](packing/frontier/RESULTS.md) | 199 | `V0` | `C1` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(199) <= 1461468985328358057514628890087947061618972730200175769881498026931092424681356737007190165664341823168492765447/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000. |
+| [T-286](packing/frontier/RESULTS.md) | 172 | `V0` | `C1` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states, a rational with a denominator of 670 digits: s(172) <= 13.6146898532835806, that side rounded up at 16 places. |
 | [T-129](packing/frontier/RESULTS.md) | 105, 130, 292 | `V0` | `C0` | `S1` | `previously-published` | Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and separate immutable pins, at the exact sides they state: s(105) <= 10.806077865519704632682966129102, s(130) <= 11.911187706535762355657987890878 and s(292) <= 17.597249391156465040647414499422. |
 
 | Significance | What [`epistemics.md`](epistemics.md#significance-and-novelty) anchors it to |
@@ -491,7 +493,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 288 | 288 registered, 256 by others |
+| Frontier results | 286 | 286 registered, 254 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -840,8 +842,8 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-935-936-20261109/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-938-20261109/README.md) | generated status view | generated | generated | — |
-| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
@@ -991,7 +993,6 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issues 927 to 931 (think-463r)](packing/cases/regularized_drawings/think-463r-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issues 935 and 936 (think-he66)](packing/cases/regularized_drawings/think-he66-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 938 (think-1goz)](packing/cases/regularized_drawings/think-1goz-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
-| [Regularization Runs After the Adoption of Issues 943, 944, 945 and 947 (think-xq4o)](packing/cases/regularized_drawings/think-xq4o-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Certificates Below the Houses of 31 October 2026 (think-ruu2)](packing/cases/register_candidates/think-ruu2-2026-10-31/README.md) | source retention and archive policy | record | retained | — |
 | [Review code: project candidates at 130, 293 and 307 (think-ruu2)](packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of T-242 at 268 (think-3anz)](packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md) | source retention and archive policy | record | retained | — |
@@ -1051,9 +1052,9 @@ case or experiment separately.
 | [unnir’s Certificate for s(12) ≥ 9929/2500: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md) | dated review record | record | retained | — |
 | [Özden’s Certificates of #935 and #936: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-ozden-935-936.md) | dated review record | record | retained | — |
 | [Özden’s s(199) Certificate of #938: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-ozden-938.md) | dated review record | record | retained | — |
-| [Özden’s Certificates of #943, #944, #945 and #947: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-ozden-943-947.md) | dated review record | record | retained | — |
 | [Özden’s Five Certificates of #927 to #931: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-ozden-927-931-five.md) | dated review record | record | retained | — |
 | [Kaelan Yim’s Certificates in vitamoon/vitamoon: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-yim-vitamoon.md) | dated review record | record | retained | — |
+| [De Winter’s Re-Solved s(199) and s(172), #939 and #946: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-de-winter-939-946.md) | dated review record | record | retained | — |
 | [sqverify-fast Declared Nets: Re-Check of the Fixes for DR-1 to DR-3 (`36b52538a`) and the Proposed Flip](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md) | dated review record | record | retained | — |
 | [Review: wand125’s Checker on ValidTilt9 (`T-081`), Lane R3](docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md) | dated review record | record | retained | — |
 | [Review of the sqverify-fast format T route: census rows and controls for T-068’s 34 rectangle certificates](docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md) | dated review record | record | retained | — |

@@ -31582,6 +31582,142 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s199 upper bound 2026-11-09]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s199 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: de Winter after Ozden, Daniel, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s199 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: de Winter after Ozden, Daniel, Levy
+  start: 16
+  end: 21
+  label: Ozden
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s199 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: de Winter after Ozden, Daniel, Levy
+  start: 23
+  end: 29
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s199 upper bound 2026-11-09]'
+    field: /credit
+  expected_text: de Winter after Ozden, Daniel, Levy
+  start: 31
+  end: 35
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s172 upper bound 2026-11-10]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s172 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Ozden, Daniel, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s172 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Ozden, Daniel, Levy
+  start: 16
+  end: 21
+  label: Ozden
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s172 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Ozden, Daniel, Levy
+  start: 23
+  end: 29
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s172 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Ozden, Daniel, Levy
+  start: 31
+  end: 35
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /authors/0
   expected_text: Özden

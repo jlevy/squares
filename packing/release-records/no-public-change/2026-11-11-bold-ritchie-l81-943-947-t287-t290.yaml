@@ -26,14 +26,14 @@ reason: >-
   their requests entries, coverage sources, house readers and other-projects cards; the
   requests record also reads #847's comment of 10 November. No case record moves: each
   adoption waits for the stage 4 review, written in a separate blind lane. No paper prints
-  those counts, these records or those cards. Against main f54ad1048 (#940):
+  those counts, these records or those cards. Against main 9fd466fe1 (#948):
   devtools.compare_paper_renders rendered each paper into empty site directories, the math
   passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that
   main's copies of the five paths above swapped in. The optimality review, the
   threshold-bound review and the methods survey are byte-identical across the three, 43 files
   each. The explainer's 55 files are deterministic, and only its Markdown and HTML differ from
   the baseline. Of the explainer's substitutions, only two read the register:
-  registered_results, 288 here and 284 on that main, which fills "one of 284 results the
+  registered_results, 290 here and 286 on that main, which fills "one of 286 results the
   framework has registered so far" in its framework section, and novel_results, 32 on both,
   since the four entries are scored previously-published. So the change is the live register
   count, which follows the site's data and is not a revision of the paper, as the L36, L48,

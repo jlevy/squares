@@ -1,0 +1,36 @@
+{
+ "stated_before": "any decision of either certificate, any reading of the house witnesses n-172.yaml / n-199.yaml, of Daniel's KKT file, of producer code, or of L78's PR #948",
+ "certificates": {
+  "939": "n199_exact.json and n199_witness.yaml at JoostdeWinter/square-packing@702c7af2",
+  "946": "n172_exact.json and n172_witness.yaml at JoostdeWinter/square-packing@c4e65d0b"
+ },
+ "controls": {
+  "R0": "for each certificate, the JSON twin and the YAML witness hold the same side and the same squares exactly",
+  "G1": "the last square given square 1's pose: REFUSE; overlapping pairs exactly [(1, n)], margin -1, area 1",
+  "G2": "square 1 translated by (S, 0): REFUSE; outside exactly [1] by both methods; no overlapping pair",
+  "G5": "square 1's cos raised by 1e-330: REFUSE; not a unit square exactly [1] by both methods",
+  "G8": "every square transposed ((x, y) -> (y, x), (c, s) -> (s, c)): ACCEPT; touching pairs equal; least positive margin equal exactly",
+  "G9": "every square turned a quarter about the box centre ((x, y) -> (S - y, x), (c, s) -> (-s, c)): ACCEPT; touching pairs equal; least positive margin equal exactly",
+  "S1": "side lowered by 1e-400: REFUSE; outside is exactly the set of squares with zero clearance at the right or top wall in the base decision, and that set is nonempty",
+  "S2_939": "side set to the issue's printed claim 14.61468985328358057514628890087947061619: ACCEPT",
+  "S2_946": "side set to the side's 12-place ceiling: ACCEPT",
+  "S3_939": "side lowered by 1e-98 (the issue's stated distance to the root): REFUSE",
+  "S3_946": "side set to the issue's printed root, truncated as printed (13.61468985328358057514628890087947061618972730200175769881): REFUSE",
+  "R1": "the last square removed: ACCEPT as an (n-1)-packing at the same side",
+  "C1": "each of the 12 closest positive-margin pairs, its second square moved along the centre line: touching at the exact contact point and overlapping by exactly 1e-320 past it, clear by exactly 1e-320 short of it, by both methods",
+  "T1": "the house T-282 witness (main n-172.yaml) decided by this checker: ACCEPT; least positive margin 2.00833939294e-13 at (36, 38), the value the #938 review reports",
+  "T2": "the house T-284 witness (main n-199.yaml): ACCEPT; exactly 25 touching pairs; least positive margin 1.4955e-16 at (161, 199)",
+  "K1": "T-282 contracted uniformly to first contact: ACCEPT at the contracted side with the binding pair touching; REFUSE 1e-30 below that side; REFUSE at factor lambda*(1 - 1e-30) with the binding pair overlapping",
+  "K2": "contracted T-282 plus the 27-square L of the lemma: ACCEPT at the contracted side + 1",
+  "A1": "Sturm count of the #946 quintic on [side946 - 1e-318, side946]: exactly 1; on [side946, side946 + 1e-318]: 0",
+  "A2": "Sturm count of the #939 quintic on [side939 - 1e-98, side939]: exactly 1; on [side939, side939 + 1e-98]: 0",
+  "A3": "each quintic with its constant term lowered by 1: no root in the stated interval",
+  "A4": "p939(x) == p946(x - 1) identically"
+ },
+ "measurements_not_controls": [
+  "the construction of #939 (core + L) against #938's L and T-282",
+  "the cores against T-282 square by square",
+  "the gains, margins and shares",
+  "comparison with Daniel's held KKT solve (think-wju3)"
+ ]
+}
