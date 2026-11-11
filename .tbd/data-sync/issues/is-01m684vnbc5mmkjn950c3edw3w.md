@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 209
+version: 210
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -81,7 +81,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T16:54:57.936Z
+updated_at: 2026-11-11T17:54:50.426Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -313,3 +313,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 15:53Z renewal (intake200): no new items. L96 blind review of de Winter's 37 accepted all (branch l96 bdf45bd6c, LANE_AGREES; minor F8/F9/F10, F14 494 class, 809 vs think-kzme). L90 to fold it into #952 after its sharp controls (ETA ~18:20Z).
 
 2026-11-11 16:53Z renewal (intake201): no change. Waiting on L90 (sharp controls, then folding L96 into #952).
+
+2026-11-11 17:52Z renewal (intake202): no change. L90 handed back #952 (head 22c85caf9, CI green; 36 verified rows, 809 held on think-kzme, L96 mapped). Senior review L97 running.
