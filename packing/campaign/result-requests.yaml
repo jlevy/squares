@@ -31113,10 +31113,16 @@ issues:
       direction. Triaged and retained on 11 November 2026 in lane L90 (think-cen3): the
       de-winter-issue941-2026-11-10 packet retains the folder under the source's MIT licence,
       every digest in its SHA256SUMS holds, every print is the exact side rounded up, and both
-      maintained exact routes accept all fifteen and refuse their gross and sharp controls. Each
-      is 7.08e-05 (539) to 5.33e-03 (753) below the standing beyond-horizon row, and the ledger of
-      11 November records all fifteen as current rows. Assurance reported until the stage 4
-      review is mapped. Claude assistance disclosed.
+      maintained exact routes accept all fifteen and refuse their gross and sharp controls. The
+      ledger of 11 November records all fifteen. Fourteen are verified beyond-horizon rows, 7.08e-05
+      (539) to 5.33e-03 (753) below the rows they supersede; 494 is a refinement of Couzo's packing
+      at 494 by the identity measurement. 809, the 810 certificate less its last square, is a
+      deletion bound the issue claims, held without a row for the owner's think-kzme. These are
+      bounds below the record, not the best known packings: the issue says public Kaggle
+      submissions hold smaller ones at 14 of the 15 counts. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
+      blind in a separate lane, accepts all fifteen, nothing blocking. Claude assistance
+      disclosed.
     read_through: '2026-11-10T13:30:51Z'
     results:
     - key: above324-15
@@ -31127,22 +31133,25 @@ issues:
         one deletion.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: fifteen rows of source-coverage.yaml (source
+        Beyond the n <= 324 corpus: rows of source-coverage.yaml (source
         de-winter-issue941-2026-11-10), not register entries. The ledger of 11 November for this
         pass (upper-bounds-941-942-20261111), walked from starts frozen at main 8afdabe8f with
-        Göbel's construction beside each row, records all fifteen as current rows, each
-        superseding the row it is below. Both maintained exact routes accept every certificate,
-        with the gross and sharp controls as stated in advance; the replay and the stage 4
-        review's run are entered, and the rows raised to verified, when the review is mapped.
+        Göbel's construction beside each row, records all fifteen. Fourteen are current rows at
+        assurance verified, each superseding the row it is below, from both maintained exact routes
+        with the gross and sharp controls as stated in advance (E-de-winter-941-exact-feasibility)
+        and the stage 4 review's clean-room run (E-de-winter-941-review-exact-feasibility). 809 is
+        held without a row for think-kzme, as 743, 798, 855 and 985 are.
       queued: false
       bead: think-cen3
     beads:
     - think-cen3
+    - think-kzme
     answer_bead: think-cen3
     replies: []
     close_when: >-
-      The fifteen rows are on main with the stage 4 review mapped, and the reply on main says what
-      was retained, replayed and reviewed; nothing the author asked for is queued.
+      The fourteen rows are on main, verified, and the reply on main says what was retained,
+      replayed and reviewed, that 809 waits on think-kzme, and asks the review's questions;
+      nothing the author asked for is queued.
     notes: >-
       Read on 11 November 2026 from main 8afdabe8f; no comment yet. Report order: d3a020e
       (2026-11-09T23:59:23Z) first published nine of the certificates and 71da0d5
@@ -31152,9 +31161,15 @@ issues:
       the report of its nine. Push times were not read (the activity log and events API refused
       this session). The issue's "best recorded value" column agrees with the standing rows; its
       remark that public Kaggle files hold smaller packings at 14 of the 15 counts names no
-      packing that reached this repository, so no Kaggle file is a report here. The sides also
-      bound counts the issue does not claim, by deletion and the border step; those have no rows
-      (think-kzme).
+      packing that reached this repository, so no Kaggle file is a report here (the review's F9).
+      494 is classed as a refinement of Couzo's 494, after Vladislav Lavrentev, since the identity
+      measurement pairs it one to one with that packing, no square beyond a tenth, though the issue
+      calls it a sub-window of his 539 (F14). 809 is held for think-kzme (F5), and the bead's notes
+      name it. The sides also bound counts the issue does not claim, by deletion and the border
+      step; those have no rows (think-kzme). The review's questions for the author, informational:
+      what the "margin of about 5e-9 above the numerical optimum" measures, the certificates
+      leaving about 1e-10 at each wall and 2e-10 between nearest pairs (F6); and whether 809 is
+      meant as its own claim or as the deletion bound from 810. No reply has been posted.
   - number: 942
     title: 'Sixteen lowered upper bounds for n between 632 and 989: registration request'
     author: JoostdeWinter
@@ -31171,14 +31186,18 @@ issues:
       754, 864, 865, 869 and 991, added at a0c4fc8. Each is a public Kaggle packing from the
       per-puzzle merge in Samanyu-dev/squares_in_squares 53551d7, locally re-optimized along a
       remaining descent direction with the arrangement unchanged; the merged file names no author
-      per packing, so the issue credits its README's list. Triaged and retained on 11 November
-      2026 in lane L90 (think-cen3): the de-winter-issue942-2026-11-10 and
-      de-winter-a0c4fc8-2026-11-10 packets retain the folder at both commits under the source's MIT
-      licence, every digest in its SHA256SUMS holds, every print is the exact side rounded up, and
-      both maintained exact routes accept all 22 and refuse their gross and sharp controls. Each
-      is 1.02e-03 (869) to 3.26e-02 (991) below the standing row, at 655 the grid, and the ledger
-      of 11 November records all 22 as current rows. Assurance reported until the stage 4 review
-      is mapped. Claude assistance disclosed.
+      per packing, so the issue credits its README's list, and the licence of those starting
+      packings is not given. Triaged and retained on 11 November 2026 in lane L90 (think-cen3):
+      the de-winter-issue942-2026-11-10 and de-winter-a0c4fc8-2026-11-10 packets retain the folder
+      at both commits under the source's MIT licence, every digest in its SHA256SUMS holds, every
+      print is the exact side rounded up, and both maintained exact routes accept all 22 and
+      refuse their gross and sharp controls. The ledger of 11 November records all 22 as verified
+      beyond-horizon rows, 3.29e-04 (655, below the grid) and 1.02e-03 (869) to 3.26e-02 (991)
+      below the standing rows. These are bounds below the record, not the best known packings:
+      each is another holder's public packing re-optimized, 1.8e-07 to 3.8e-04 below the best
+      public packing the author found. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
+      blind in a separate lane, accepts all 22, nothing blocking. Claude assistance disclosed.
     read_through: '2026-11-10T16:02:47Z'
     results:
     - key: above324-refined-16
@@ -31191,9 +31210,9 @@ issues:
         Beyond the n <= 324 corpus: sixteen rows of source-coverage.yaml (source
         de-winter-issue942-2026-11-10), not register entries. The ledger of 11 November for this
         pass (upper-bounds-941-942-20261111) records all sixteen as current rows, each superseding
-        the row it is below. Both maintained exact routes accept every certificate, with the gross
-        and sharp controls as stated in advance; the replay and the stage 4 review's run are
-        entered, and the rows raised to verified, when the review is mapped.
+        the row it is below, at assurance verified from both maintained exact routes with the gross
+        and sharp controls as stated in advance (E-de-winter-942-exact-feasibility) and the stage 4
+        review's clean-room run (E-de-winter-942-review-exact-feasibility).
       queued: false
       bead: think-cen3
     - key: above324-refined-addendum-6
@@ -31205,9 +31224,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: six rows of source-coverage.yaml (source
         de-winter-a0c4fc8-2026-11-10), not register entries. The ledger of 11 November records all
-        six as current rows, dated by the addendum with a0c4fc8 kept as each one's first commit.
-        Both maintained exact routes accept every certificate, with the gross and sharp controls as
-        stated in advance.
+        six as current rows, dated by the addendum with a0c4fc8 kept as each one's first commit, at
+        assurance verified from both maintained exact routes with the gross and sharp controls as
+        stated in advance (E-de-winter-a0c4fc8-exact-feasibility) and the stage 4 review's
+        clean-room run (E-de-winter-a0c4fc8-review-exact-feasibility).
       queued: false
       bead: think-cen3
     beads:
@@ -31215,8 +31235,8 @@ issues:
     answer_bead: think-cen3
     replies: []
     close_when: >-
-      The 22 rows are on main with the stage 4 review mapped, and the reply on main says what was
-      retained, replayed and reviewed; nothing the author asked for is queued.
+      The 22 rows are on main, verified, and the reply on main says what was retained, replayed
+      and reviewed, and asks the review's questions; nothing the author asked for is queued.
     notes: >-
       Read on 11 November 2026 from main 8afdabe8f; the one comment is the author's addendum.
       a9486ed (2026-11-10T14:39:52Z) precedes the issue (14:41:18Z) by 86 seconds, and a0c4fc8
@@ -31225,5 +31245,11 @@ issues:
       in either window, and push times were not read. The issue's "best public competition value"
       column quotes Kaggle packings no report brought to this repository, so none is a report
       here; its "register value" column agrees with the standing rows (at 655 the grid). The
-      sides also bound counts the issue does not claim, by deletion and the border step; those
-      have no rows (think-kzme).
+      folder's README at a0c4fc8 says the descent improved twenty-two packings by at least 1e-6,
+      where #942 says sixteen still had a descent direction (the review's F7). The sides also
+      bound counts the issue does not claim, by deletion and the border step; those have no rows
+      (think-kzme). The review's questions for the author, informational: whether the six
+      addendum counts were below the 1e-6 threshold at first or found by a later run; under what
+      licence the Kaggle notebooks and datasets published the starting packings, and whether the
+      merge file states one (F8); whether the individual authors of the 22 arrangements can be
+      identified; and what the "margin of about 5e-9" measures (F6). No reply has been posted.

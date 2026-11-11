@@ -8009,3 +8009,58 @@ verifiers:
       l83_houses.py, l83_house.py, l83_shares.py, l83_identity.py, l83_custody.py,
       l83_digests.py and l83_compare_lane.py, kept beside them, decide no certificate and are
       not registered.
+  - id: V-de-winter-941-942-review-check
+    program: l96_check.py with l96_read.py, l96_sat.py and l96_clip.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Joost de Winter's 37 rational
+      centre/half-angle certificates of #941, #942 and #942's addendum (JoostdeWinter/square-packing
+      above324/ at 71da0d5 and above324_refined/ at a9486ed and a0c4fc8), with a strict reader of
+      its own (l96_read.py) that turns every number into integer pairs and fails closed: every
+      square a unit square, every wall and every pair, by separating axes over the four edge
+      normals in fractions.Fraction (l96_sat.py, method A) and by exact clipping and shoelace
+      areas in gmpy2.mpq (l96_clip.py, method B), the two required to agree exactly on every
+      class. l96_controls.py decides the nine controls a file of a plan frozen before they ran,
+      and l96_selftest.py holds the reader and both methods to 72 cases.
+    source:
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_check.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_read.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_sat.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_clip.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_controls.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_selftest.py
+    independence_record: packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #941, #942 and the addendum (L96), strong
+            tier (tbd-strong), prompted separately from the import lane (L90, think-cen3) and
+            blind to its work until its findings were frozen
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates were produced with Claude (Anthropic) under the
+          author's direction. The checker files were frozen at 2026-11-11T15:10:54Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's verifier code; they import nothing from this repository or the
+          source.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md (SHA-256
+      88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131 for l96_check.py and
+      45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29 for l96_read.py as frozen
+      and retained), kept in the de-winter-issue941-2026-11-10 packet's review/review-2026-11-11/,
+      each count's receipts in its own packet. l96_record_rows.py, l96_claims.py,
+      l96_construct.py, l96_custody.py, l96_extent.py, l96_digests.py and l96_compare_lane.py,
+      kept beside them, decide no certificate and are not registered.

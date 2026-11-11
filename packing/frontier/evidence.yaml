@@ -59891,22 +59891,39 @@ evidence:
     source_reviewed: '2026-11-11'
     limitations: >-
       This atom records the source author's report, in issue 941, of 15 exact rational
-      certificates beyond the case corpus in above324/ of JoostdeWinter/square-packing at 71da0d5,
-      nine of them first committed at d3a020e, which the ledger of 11 November for this pass
-      records as the current rows at their counts. A separate complete repository replay is
+      certificates beyond the case corpus in above324/ of JoostdeWinter/square-packing at
+      71da0d5, nine of them first committed at d3a020e, all of which the ledger of 11 November
+      for this pass records. A separate complete repository replay is
       retained for all 15: 15 positives and 30 duplicate-square and outside-container controls
       passed their required outcomes on both routes, 22619004 pair decisions; summed over the 45
-      jobs, the receipt records 3821.59 route CPU seconds, the longest job 168.37 seconds. At 539,
-      590, 794, 851, 867 and 910, whose borders of axis-aligned squares touch the box and each
-      other, the least wall clearance and the least pair gap are exactly 0; at the other nine
-      every wall clears by at least 4.99e-46. That replay is entered as
-      E-de-winter-941-exact-feasibility, and the rows raised to verified, when the stage 4 review
-      is mapped.
+      jobs, the receipt records 3821.59 route CPU seconds, the longest job 168.37 seconds. At
+      539, 590, 794, 851, 867 and 910, whose borders of axis-aligned squares touch the box and
+      each other, the least wall clearance and the least pair gap are exactly 0; at the other
+      nine every wall clears by at least 4.99e-46. That replay is
+      E-de-winter-941-exact-feasibility and the stage 4 review's clean-room run
+      E-de-winter-941-review-exact-feasibility, which cite the rows. At 809, the 810 certificate
+      less its last square, the replay and the review accept the certificate too, and its row is
+      held for the owner's think-kzme, so the replay and review atoms do not cover it.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share certificate
       parsing, half-angle conversion, Fraction arithmetic and the separating-axis method. No two
       independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted all
+        fifteen certificates for finite feasibility, nothing blocking, by a clean-room
+        checker deciding every square, wall and pair by two exact methods, and its compare-lane
+        receipt finds this replay's margins and the ledger's sides equal to its own
+        (LANE_AGREES). Its minor findings are on the record's words (F8 licence, F9 credit,
+        F10 dating), answered in the packet README. The rows' runs are
+        E-de-winter-941-exact-feasibility and E-de-winter-941-review-exact-feasibility.
   - id: E-de-winter-942-certificate-report
     claim: upper-bound
     scope:
@@ -59924,20 +59941,36 @@ evidence:
     source_reviewed: '2026-11-11'
     limitations: >-
       This atom records the source author's report, in issue 942, of 16 exact rational
-      certificates beyond the case corpus in above324_refined/ of JoostdeWinter/square-packing at
-      a9486ed, public Kaggle packings he re-optimized locally, which the ledger of 11 November for
-      this pass records as the current rows at their counts. A separate complete repository
-      replay is retained for all 16: 16 positives and 32 duplicate-square and outside-container
-      controls passed their required outcomes on both routes, 31483980 pair decisions; summed
-      over the 48 jobs, the receipt records 4686.1 route CPU seconds, the longest job 189.18
-      seconds. Every positive clears every wall by at least 1.00e-10 and every pair by at least
-      1.99e-10. That replay is entered as E-de-winter-942-exact-feasibility, and the
-      rows raised to verified, when the stage 4 review is mapped.
+      certificates beyond the case corpus in above324_refined/ of JoostdeWinter/square-packing
+      at a9486ed, public Kaggle packings he re-optimized locally, which the ledger of 11
+      November for this pass records as the current rows at their counts. A separate complete
+      repository replay is retained for all 16: 16 positives and 32 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 31483980 pair
+      decisions; summed over the 48 jobs, the receipt records 4686.1 route CPU seconds, the
+      longest job 189.18 seconds. Every positive clears every wall by at least 1.00e-10 and
+      every pair by at least 1.99e-10. That replay is E-de-winter-942-exact-feasibility and the
+      stage 4 review's clean-room run E-de-winter-942-review-exact-feasibility, which cite the
+      rows.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share certificate
       parsing, half-angle conversion, Fraction arithmetic and the separating-axis method. No two
       independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted all
+        sixteen certificates for finite feasibility, nothing blocking, by a clean-room
+        checker deciding every square, wall and pair by two exact methods, and its compare-lane
+        receipt finds this replay's margins and the ledger's sides equal to its own
+        (LANE_AGREES). Its minor findings are on the record's words (F8 licence, F9 credit,
+        F10 dating), answered in the packet README. The rows' runs are
+        E-de-winter-942-exact-feasibility and E-de-winter-942-review-exact-feasibility.
   - id: E-de-winter-a0c4fc8-certificate-report
     claim: upper-bound
     scope:
@@ -59961,12 +59994,423 @@ evidence:
       repository replay is retained for all 6: 6 positives and 12 duplicate-square and
       outside-container controls passed their required outcomes on both routes, 12455844 pair
       decisions; summed over the 18 jobs, the receipt records 1831.04 route CPU seconds, the
-      longest job 193.92 seconds. Every positive clears every wall by at least 1.00e-10 and every
-      pair by at least 2.00e-10. That replay is entered as
-      E-de-winter-a0c4fc8-exact-feasibility, and the rows raised to verified, when the stage 4
-      review is mapped.
+      longest job 193.92 seconds. Every positive clears every wall by at least 1.00e-10 and
+      every pair by at least 2.00e-10. That replay is E-de-winter-a0c4fc8-exact-feasibility and
+      the stage 4 review's clean-room run E-de-winter-a0c4fc8-review-exact-feasibility, which
+      cite the rows.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share certificate
       parsing, half-angle conversion, Fraction arithmetic and the separating-axis method. No two
       independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted all
+        six certificates for finite feasibility, nothing blocking, by a clean-room
+        checker deciding every square, wall and pair by two exact methods, and its compare-lane
+        receipt finds this replay's margins and the ledger's sides equal to its own
+        (LANE_AGREES). Its minor findings are on the record's words (F8 licence, F9 credit,
+        F10 dating), answered in the packet README. The rows' runs are
+        E-de-winter-a0c4fc8-exact-feasibility and E-de-winter-a0c4fc8-review-exact-feasibility.
+  - id: E-de-winter-941-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 810, 851, 867, 910]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter issue 941 2026-11-10]'
+    certificate: packing/resources/web/de-winter-issue941-2026-11-10/source/above324/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports de-winter-issue941-2026-11-10
+      certify --workers 2 wrote the receipts on 11 November 2026 from the packet's retained
+      certificates, read by the evand-cert reader (45 jobs, 3821.59 route CPU seconds), and
+      check admits every retained job. python -m devtools.upper_bound_reports de-winter-issue941-2026-11-10
+      sharp-controls wrote the packet's sharp controls (receipts/sharp-controls-nNNN.json), all
+      11 a count as expected on both routes: contact accepted at margin 0 and refused 1e-30 past
+      it. check --replay was not run. This atom covers the fourteen counts the source's rows
+      state.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the fourteen certificates the source's beyond-horizon rows state, every wall and every
+          pair decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipts
+        checked: 14
+        of: 14
+    limitations: >-
+      A replay by two maintained exact routes that share this repository's evand-cert reader
+      (certificate parsing and half-angle conversion), Fraction arithmetic and the
+      separating-axis method. The author's own checkers are his and were not run here; neither
+      route shares code with them. The receipt's controls are gross, and the packet's sharp
+      controls meet each certificate's least margins. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+    independence_record: docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted every
+        certificate for finite feasibility, and its compare-lane receipt finds the replay's least
+        gaps equal to its own (LANE_AGREES); the clean-room re-implementation is
+        E-de-winter-941-review-exact-feasibility.
+  - id: E-de-winter-941-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 810, 851, 867, 910]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter issue 941 2026-11-10]'
+    certificate: packing/resources/web/de-winter-issue941-2026-11-10/source/above324/
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B on a shared four-core host at
+      nice 19, 11 November 2026, from the de-winter-issue941-2026-11-10 packet's
+      review/review-2026-11-11/: programs/l96_check.py on each of the packet's fifteen
+      certificates (out/check-nNNNN.json in this packet's review/review-2026-11-11/, ACCEPT at
+      all fifteen), deciding every square a unit square, every wall and all 3,769,834 pairs
+      by separating axes in Fraction and again by exact clipped areas in gmpy2.mpq, the two
+      agreeing on every class. programs/l96_controls.py decided the nine controls a file of the
+      plan frozen beforehand (out/controls-nNNNN.json), every one as stated, and
+      programs/l96_selftest.py passed its 72 cases (out/selftest.json).
+    replay_status: passed
+    verifiers:
+    - V-de-winter-941-942-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the fourteen certificates the source's beyond-horizon rows state: every square, every
+          wall and every pair, by two exact methods in two arithmetic libraries that share only
+          the reader, with the stated controls decided by both
+        checked: 14
+        of: 14
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of Joost de Winter's #941, #942 and addendum
+          certificates (L96), strong tier (tbd-strong)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates were produced with Claude (Anthropic) under the
+          author's direction. The checker was written from the mathematics, the certificate
+          format and the files and frozen at 2026-11-11T15:10:54Z, before its author read any
+          producer code or this repository's verifier code; it shares no code with the source's
+          checkers or this repository's maintained routes.
+    independence_record: >-
+      packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted every
+        certificate for finite feasibility; its F6 finds the re-optimized certificates' walls
+        and nearest pairs about 1e-10 and 2e-10 clear, not the 5e-9 the issues give, which is a
+        margin in the side.
+    limitations: >-
+      A clean-room decision of the retained certificates by two exact methods in one program,
+      which share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-de-winter-942-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [632, 637, 655, 684, 685, 744, 750, 756, 805, 814, 918, 921, 924, 935, 970, 989]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter issue 942 2026-11-10]'
+    certificate: packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports de-winter-issue942-2026-11-10
+      certify --workers 2 wrote the receipts on 11 November 2026 from the packet's retained
+      certificates, read by the evand-cert reader (48 jobs, 4686.1 route CPU seconds), and
+      check admits every retained job. python -m devtools.upper_bound_reports de-winter-issue942-2026-11-10
+      sharp-controls wrote the packet's sharp controls (receipts/sharp-controls-nNNN.json), all
+      11 a count as expected on both routes: contact accepted at margin 0 and refused 1e-30 past
+      it. check --replay was not run. This atom covers the sixteen counts the source's rows
+      state.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the sixteen certificates the source's beyond-horizon rows state, every wall and every
+          pair decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipts
+        checked: 16
+        of: 16
+    limitations: >-
+      A replay by two maintained exact routes that share this repository's evand-cert reader
+      (certificate parsing and half-angle conversion), Fraction arithmetic and the
+      separating-axis method. The author's own checkers are his and were not run here; neither
+      route shares code with them. The receipt's controls are gross, and the packet's sharp
+      controls meet each certificate's least margins. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+    independence_record: docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted every
+        certificate for finite feasibility, and its compare-lane receipt finds the replay's least
+        gaps equal to its own (LANE_AGREES); the clean-room re-implementation is
+        E-de-winter-942-review-exact-feasibility.
+  - id: E-de-winter-942-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [632, 637, 655, 684, 685, 744, 750, 756, 805, 814, 918, 921, 924, 935, 970, 989]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter issue 942 2026-11-10]'
+    certificate: packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B on a shared four-core host at
+      nice 19, 11 November 2026, from the de-winter-issue941-2026-11-10 packet's
+      review/review-2026-11-11/: programs/l96_check.py on each of the packet's sixteen
+      certificates (out/check-nNNNN.json in this packet's review/review-2026-11-11/, ACCEPT at
+      all sixteen), deciding every square a unit square, every wall and all 5,247,330 pairs
+      by separating axes in Fraction and again by exact clipped areas in gmpy2.mpq, the two
+      agreeing on every class. programs/l96_controls.py decided the nine controls a file of the
+      plan frozen beforehand (out/controls-nNNNN.json), every one as stated, and
+      programs/l96_selftest.py passed its 72 cases (out/selftest.json).
+    replay_status: passed
+    verifiers:
+    - V-de-winter-941-942-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the sixteen certificates the source's beyond-horizon rows state: every square, every
+          wall and every pair, by two exact methods in two arithmetic libraries that share only
+          the reader, with the stated controls decided by both
+        checked: 16
+        of: 16
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of Joost de Winter's #941, #942 and addendum
+          certificates (L96), strong tier (tbd-strong)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates were produced with Claude (Anthropic) under the
+          author's direction. The checker was written from the mathematics, the certificate
+          format and the files and frozen at 2026-11-11T15:10:54Z, before its author read any
+          producer code or this repository's verifier code; it shares no code with the source's
+          checkers or this repository's maintained routes.
+    independence_record: >-
+      packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted every
+        certificate for finite feasibility; its F6 finds the re-optimized certificates' walls
+        and nearest pairs about 1e-10 and 2e-10 clear, not the 5e-9 the issues give, which is a
+        margin in the side.
+    limitations: >-
+      A clean-room decision of the retained certificates by two exact methods in one program,
+      which share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-de-winter-a0c4fc8-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [597, 754, 864, 865, 869, 991]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter a0c4fc8 2026-11-10]'
+    certificate: packing/resources/web/de-winter-a0c4fc8-2026-11-10/source/above324_refined/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports de-winter-a0c4fc8-2026-11-10
+      certify --workers 2 wrote the receipts on 11 November 2026 from the packet's retained
+      certificates, read by the evand-cert reader (18 jobs, 1831.04 route CPU seconds), and
+      check admits every retained job. python -m devtools.upper_bound_reports de-winter-a0c4fc8-2026-11-10
+      sharp-controls wrote the packet's sharp controls (receipts/sharp-controls-nNNN.json), all
+      11 a count as expected on both routes: contact accepted at margin 0 and refused 1e-30 past
+      it. check --replay was not run. This atom covers the six counts the source's rows
+      state.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the six certificates the source's beyond-horizon rows state, every wall and every
+          pair decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipts
+        checked: 6
+        of: 6
+    limitations: >-
+      A replay by two maintained exact routes that share this repository's evand-cert reader
+      (certificate parsing and half-angle conversion), Fraction arithmetic and the
+      separating-axis method. The author's own checkers are his and were not run here; neither
+      route shares code with them. The receipt's controls are gross, and the packet's sharp
+      controls meet each certificate's least margins. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+    independence_record: docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted every
+        certificate for finite feasibility, and its compare-lane receipt finds the replay's least
+        gaps equal to its own (LANE_AGREES); the clean-room re-implementation is
+        E-de-winter-a0c4fc8-review-exact-feasibility.
+  - id: E-de-winter-a0c4fc8-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [597, 754, 864, 865, 869, 991]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter a0c4fc8 2026-11-10]'
+    certificate: packing/resources/web/de-winter-a0c4fc8-2026-11-10/source/above324_refined/
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B on a shared four-core host at
+      nice 19, 11 November 2026, from the de-winter-issue941-2026-11-10 packet's
+      review/review-2026-11-11/: programs/l96_check.py on each of the packet's six
+      certificates (out/check-nNNNN.json in this packet's review/review-2026-11-11/, ACCEPT at
+      all six), deciding every square a unit square, every wall and all 2,075,974 pairs
+      by separating axes in Fraction and again by exact clipped areas in gmpy2.mpq, the two
+      agreeing on every class. programs/l96_controls.py decided the nine controls a file of the
+      plan frozen beforehand (out/controls-nNNNN.json), every one as stated, and
+      programs/l96_selftest.py passed its 72 cases (out/selftest.json).
+    replay_status: passed
+    verifiers:
+    - V-de-winter-941-942-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the six certificates the source's beyond-horizon rows state: every square, every
+          wall and every pair, by two exact methods in two arithmetic libraries that share only
+          the reader, with the stated controls decided by both
+        checked: 6
+        of: 6
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of Joost de Winter's #941, #942 and addendum
+          certificates (L96), strong tier (tbd-strong)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates were produced with Claude (Anthropic) under the
+          author's direction. The checker was written from the mathematics, the certificate
+          format and the files and frozen at 2026-11-11T15:10:54Z, before its author read any
+          producer code or this repository's verifier code; it shares no code with the source's
+          checkers or this repository's maintained routes.
+    independence_record: >-
+      packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of Joost
+        de Winter's #941, #942 and addendum certificates (L96), prompted separately from the
+        import lane (L90, think-cen3) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md accepted every
+        certificate for finite feasibility; its F6 finds the re-optimized certificates' walls
+        and nearest pairs about 1e-10 and 2e-10 clear, not the 5e-9 the issues give, which is a
+        margin in the side.
+    limitations: >-
+      A clean-room decision of the retained certificates by two exact methods in one program,
+      which share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-11'

@@ -1059,6 +1059,7 @@ case or experiment separately.
 | [Özden’s Five Certificates of #927 to #931: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-ozden-927-931-five.md) | dated review record | record | retained | — |
 | [Kaelan Yim’s Certificates in vitamoon/vitamoon: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-yim-vitamoon.md) | dated review record | record | retained | — |
 | [De Winter’s Re-Solved s(199) and s(172), #939 and #946: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-de-winter-939-946.md) | dated review record | record | retained | — |
+| [De Winter’s Thirty-Seven Upper Bounds of #941 and #942: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md) | dated review record | record | retained | — |
 | [sqverify-fast Declared Nets: Re-Check of the Fixes for DR-1 to DR-3 (`36b52538a`) and the Proposed Flip](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md) | dated review record | record | retained | — |
 | [Review: wand125’s Checker on ValidTilt9 (`T-081`), Lane R3](docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md) | dated review record | record | retained | — |
 | [Review of the sqverify-fast format T route: census rows and controls for T-068’s 34 rectangle certificates](docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md) | dated review record | record | retained | — |

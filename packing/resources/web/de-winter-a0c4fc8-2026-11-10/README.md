@@ -31,6 +31,12 @@ since `a9486ed`. No later commit through the head `c4e65d0` changes the folder.
   [#942 packet](../de-winter-issue942-2026-11-10/README.md#what-the-source-claims) gives
   them. Each certificate’s second comment line reads “public competition packing,
   re-optimized”, and the folder’s README says the arrangements are unchanged.
+- **Sixteen or twenty-two.** #942 says sixteen of the file’s 1000 packings still had a
+  descent direction. The folder’s README at `a0c4fc8`, retained here, says instead that
+  following the descent “improved twenty-two packings by at least 1e-6”, and the
+  addendum calls its six “the same procedure” (the review’s F7). The record quotes each
+  README at the pin it cites; whether the six fell below the threshold at first or came
+  from a later run is the review’s question 1 for the author.
 
 Those statements are the author’s; no source program ran here.
 
@@ -126,12 +132,13 @@ is think-ruu2’s RV-3 material.
 The
 [ledger of 11 November for this import](../../../campaign/issue-intake/upper-bounds-941-942-20261111/README.md)
 records all six claims.
-Each is a current beyond-horizon row of this source and supersedes the row it is below.
-The rows carry assurance `reported` until the stage 4 review is mapped, as in the
-[#941 packet](../de-winter-issue941-2026-11-10/README.md#stage-4-review), with
-`E-de-winter-a0c4fc8-exact-feasibility` and
-`E-de-winter-a0c4fc8-review-exact-feasibility`. Beyond the corpus no register entry
-records them.
+Each is a current beyond-horizon row of this source, at assurance `verified`, and
+supersedes the row it is below.
+The rows rest on this replay, `E-de-winter-a0c4fc8-exact-feasibility`, and the stage 4
+review’s clean-room run, `E-de-winter-a0c4fc8-review-exact-feasibility`, as the
+[#941 packet](../de-winter-issue941-2026-11-10/README.md#stage-4-review) sets out.
+As at #942’s counts, these are bounds below the record, not the best known packings (the
+review’s F9). Beyond the corpus no register entry records them.
 
 ## What Is Not Established
 
@@ -142,8 +149,9 @@ As in the
 
 As in the [#942 packet](../de-winter-issue942-2026-11-10/README.md#credit-and-licence):
 Joost de Winter for the local re-optimization, after the public Kaggle packings of the
-merged file. The repository is MIT-licensed, copyright 2026 Joost de Winter.
-Retaining a file grants no licence and relicenses nothing.
+merged file. The repository is MIT-licensed, copyright 2026 Joost de Winter; the licence
+of the Kaggle starting packings is not given (the review’s F8). Retaining a file grants
+no licence and relicenses nothing.
 
 ## Commands
 

@@ -127,7 +127,6 @@
     739,
     753,
     794,
-    809,
     810,
     851,
     867,
@@ -279,7 +278,7 @@
     "significance": 2,
     "source_checks": "The author reports that his verify_cert.py (fractions.Fraction: containment and a separating-axis test on all pairs with centres closer than sqrt(2)) accepts all fifteen certificates, and that a second script with separate code checked the same packings in the same arithmetic before the files were written; the issue says the checkers share one author, the separating-axis test and Fraction, and that the certificates were not replayed with this repository's checkers. It says the sides at 413, 543 and 547 lie less than 1e-43 above the local optimum of their arrangements and those at 494, 738, 739, 753 and 810 about 5e-9 above the numerical optimum, by a numerical solution of the optimality conditions to 65 digits, with no formal proof. Those are the source's statements. No source program ran here.",
     "credit": "Credit Joost de Winter (Delft University of Technology), whose sub-window search found square windows of Francisco Couzo's packings at 544, 539, 590, 696, 851 and 868 (issue 763, franciscouzo/square-packing 43f666c) that hold more squares than the best recorded packing of the same side, re-optimized locally, with borders of axis-aligned squares and one deletion, as the issue says; the issue credits the source arrangements to Couzo. The search, optimization, certificates and checks were produced with Claude (Anthropic) under Joost de Winter's direction.",
-    "next_rung": "Record each count as a beyond-horizon row in report order, superseding the row it is below; beyond the case corpus, so no register entry records them.",
+    "next_rung": "Record each count but 809 as a beyond-horizon row in report order, superseding the row it is below; beyond the case corpus, so no register entry records them. 809 is the 810 certificate less its last square, a one-square deletion bound #941 claims at 810's side: whether an issue-claimed deletion bound gets a row is the owner's open question think-kzme, as at 743, 798, 855 and 985, so 809 requests no row and the row of couzo-issue763-2026-10-23 stays current there.",
     "bead": "think-cen3",
     "bibliography": {
       "authors": [

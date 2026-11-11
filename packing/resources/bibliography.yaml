@@ -5155,8 +5155,11 @@ sources:
       jlevy/squares#941. Seven are square sub-windows of Francisco Couzo's packings at 544, 539,
       590, 696, 851, 851 and 868 (#763, franciscouzo/square-packing 43f666c), re-optimized, 753 a
       sub-window of the 810 here, six are borders of axis-aligned squares on these and 809 the 810
-      less one square; the issue credits the source arrangements to Couzo. Beyond-horizon rows below
-      the rows of Couzo and Kirill Tymchishin at those counts. The source says the work was
+      less one square; the issue credits the source arrangements to Couzo. Fourteen are
+      beyond-horizon rows below the rows of Couzo and Kirill Tymchishin at those counts, bounds
+      below the record and not the best known packings, which the issue says Kaggle submissions
+      beat at 14 counts; 809, a deletion bound from the 810, is held for the owner (think-kzme).
+      The source says the work was
       produced with Claude (Anthropic) under his direction. No local or global optimality claim is
       replayed; the issue's local-optimality statements rest on a numerical solution without
       formal proof. The lineage builds on this project: the source arrangements are Couzo's
@@ -5181,8 +5184,10 @@ sources:
       direction with the arrangement unchanged. The merged file names no author per packing; its
       README credits Chris Deotte, lightningv08 (Vladislav Lavrentev), alexchilton (Alex Chilton),
       kirilltym (Kirill Tymchishin), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt
-      and the register of Francisco Couzo, and the credit follows it. Beyond-horizon rows below the
-      record's rows at those counts. The source says the work was produced with Claude (Anthropic)
+      and the register of Francisco Couzo, and the credit follows it; the licence of those
+      starting packings is not given. Beyond-horizon rows below the record's rows at those
+      counts, bounds below the record and not the best known packings. The source says the work
+      was produced with Claude (Anthropic)
       under his direction. No local or global optimality claim. The lineage is independent: the
       arrangements are public Kaggle packings, and the source compares with this repository's
       register without building on it. Licensed MIT by LICENSE at the pin. Retained in
@@ -5202,8 +5207,9 @@ sources:
       above324_refined/, at 597, 754, 864, 865, 869 and 991, reported by his addendum comment on
       jlevy/squares#942 (issuecomment-6772308414, 16:02:47Z), from the same procedure and merged
       Kaggle file as the issue's sixteen, with the arrangements unchanged; credited as
-      [de Winter issue 942 2026-11-10] is. Beyond-horizon rows below the record's rows at those
-      counts. Claude assistance disclosed. No local or global optimality claim. Licensed MIT by
+      [de Winter issue 942 2026-11-10] is; the licence of those starting packings is not given.
+      Beyond-horizon rows below the record's rows at those counts. Claude assistance disclosed.
+      No local or global optimality claim. Licensed MIT by
       LICENSE at the pin. Retained in web/de-winter-a0c4fc8-2026-11-10/.
 credited_names:
   Kaelan Yim: Yim

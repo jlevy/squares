@@ -68,11 +68,13 @@ reports:
         beyond 1e-2 and 223 beyond 1e-3 (largest 0.0991599), and turns 163 squares by more than 1e-6 radians, by up to
         9.955 degrees; no square moves beyond a tenth: a refinement of the row''s packing'
       source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n494.json
-    new_packing:
-      source: '#941: ''The packings for n = 413, 494, 543, 547, 738, 739 and 810 are square sub-windows of Francisco Couzo''s
-        packings for n = 544, 539, 590, 696, 851, 851 and 868 (issue #763 and franciscouzo/square-packing at 43f666c)'''
-      continues: Francisco Couzo's packing at 539 (#763, franciscouzo/square-packing 43f666c), a square sub-window of
-        it re-optimized
+    refines:
+      packing_of: Francisco Couzo, after Vladislav Lavrentev
+      entry: the row of couzo-issue763-2026-10-23 at 494
+      source: '#941: ''The packings for n = 413, 494, ... are square sub-windows of Francisco Couzo''s packings for n
+        = 544, 539, ...'', 494 from his 539, re-optimized; the identity measurement pairs it one to one with Couzo''s
+        own 494 under the identity, no square beyond a tenth (largest 0.0992), so the arrangement is his packing at 494
+        (the stage 4 review''s F14)'
     note: The row's certificate's uniform-contraction margin is 1.952e-11 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n494.json);
       the gain, 9.340e-4, is 4.786e+07 times it, far outside it, so the gain is no re-certification of the row's padding
       and not RV-3 material.
@@ -201,9 +203,13 @@ reports:
     new_packing:
       source: '#941: ''The packing for n = 809 removes one square from the packing for n = 810'''
       continues: the 810 certificate of this report, one square removed
-    note: The row's certificate's uniform-contraction margin is 5.734e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n809.json);
-      the gain, 1.191e-4, is 2.076e+07 times it, far outside it, so the gain is no re-certification of the row's padding
-      and not RV-3 material.
+    note: '809 is the 810 certificate less its last square, at 810''s side: a one-square deletion bound this report claims
+      beside the 810 it is taken from. Whether an issue-claimed deletion bound gets a row is the owner''s open question
+      (think-kzme), which the record leaves without a row at 743, 798, 855 and 985; so 809 is held without a row, the
+      row of couzo-issue763-2026-10-23 stays current there, and think-kzme''s notes name it. The rule''s verdict stands
+      as the walk gives it. The row''s certificate''s uniform-contraction margin is 5.734e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n809.json);
+      the gain, 1.191e-4, is 2.076e+07 times it, far outside it, so the gain is no re-certification of the row''s padding
+      and not RV-3 material.'
   - n: 810
     measured:
       against: the row of couzo-issue763-2026-10-23

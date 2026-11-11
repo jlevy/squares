@@ -58,9 +58,9 @@ session. `d3a020e` and `71da0d5` were public by 13:30:51Z, when the issue named
 | 739 | 851 | about 5 × 10⁻⁹ |
 | 810 | 868 | about 5 × 10⁻⁹ |
 
-  The 753 is a sub-window of the 810 here, re-optimized.
-  Six are borders of axis-aligned squares on these: 539 on 494, 590 on 543, 794 on 739,
-  851 on 794, 867 on 810 and 910 on 851. The 809 is the 810 with one square removed.
+The 753 is a sub-window of the 810 here, re-optimized.
+Six are borders of axis-aligned squares on these: 539 on 494, 590 on 543, 794 on 739,
+851 on 794, 867 on 810 and 910 on 851. The 809 is the 810 with one square removed.
 
 - **What it does not claim.** The local-optimality statements rest on a numerical
   solution of the optimality conditions to 65 digits and have no formal proof.
@@ -187,12 +187,12 @@ packing a bound of its own.
 | 867 | not one to one; 367 squares beyond 0.1 under the best assignment; another arrangement | 3.82 × 10⁻¹² | 3.12 × 10⁷ |
 | 910 | no n-square certificate: the row is an L-border recipe on Couzo’s 851 | 4.83 × 10⁻⁹ (its base at 851) | 3.42 × 10⁴ |
 
-Five are one to one with the row’s packing at the same count.
+Six are one to one with the row’s packing at the same count.
 The 494 pairs with Couzo’s 494 under the identity with no square beyond a tenth (largest
 0.0992), so by the record’s word it is a refinement of that packing, although the issue
-calls it a sub-window of his 539. The 539, 739, 794 and 851 are further arrangements of
-his, 5 to 28 squares beyond a tenth, and the 547 pairs with his under a reflection
-(symmetry 7), 16 beyond a tenth.
+calls it a sub-window of his 539; the ledger classes it as that refinement (the review’s
+F14). The 539, 739, 794 and 851 are further arrangements of his, 5 to 28 squares beyond
+a tenth, and the 547 pairs with his under a reflection (symmetry 7), 16 beyond a tenth.
 The other eight are other arrangements than the rows’.
 
 Every gain is at least 2.3 × 10³ times its row certificate’s padding, the least at 739,
@@ -203,36 +203,85 @@ padding, and none is think-ruu2’s RV-3 material.
 
 The
 [ledger of 11 November for this import](../../../campaign/issue-intake/upper-bounds-941-942-20261111/README.md)
-walks #941, #942 and #942’s addendum from starts frozen at `main` `8afdabe8f`. It
-records all fifteen claims here as new packings.
-Each is a current beyond-horizon row of this source and supersedes the row it is below.
-The rows carry assurance `reported` until the stage 4 review is mapped (see
-[Stage 4 Review](#stage-4-review)). Beyond the corpus no register entry records them.
+walks #941, #942 and #942’s addendum from starts frozen at `main` `8afdabe8f`, and
+records all fifteen claims here.
+Fourteen are new packings in the issue’s own words, 809 among them.
+The 494 is classed as a refinement of Couzo’s packing at 494, after Vladislav
+Lavrentev’s, since the identity measurement pairs it one to one with that packing, no
+square beyond a tenth; the issue calls it a sub-window of his 539, and both can hold
+(the stage 4 review’s F14).
+
+- **Fourteen rows.** Each is a current beyond-horizon row of this source, at assurance
+  `verified`, and supersedes the row it is below.
+- **809 is held.** The 809 is the 810 certificate less its last square, at 810’s side: a
+  one-square deletion bound the issue claims beside the 810 it is taken from (the
+  review’s F5). Whether an issue-claimed deletion bound gets a row is the owner’s open
+  question, think-kzme, and the record gives none at 743, 798, 855 and 985, where #715
+  and #732 claim such bounds.
+  So 809 has no row, the row of `couzo-issue763-2026-10-23` stays current there, the
+  declaration requests no row at 809, and think-kzme’s notes name it.
+  Both routes and the review accept the 809 certificate.
+
+These are bounds below the record, not the best known packings: the issue itself says
+public Kaggle submissions hold smaller packings at 14 of its 15 counts, all but 543,
+though none of them reached this repository as a report (the review’s F9). Beyond the
+corpus no register entry records them.
 
 ## Stage 4 Review
 
-A separate blind review lane is to decide the certificates of all three de Winter
-packets of 11 November.
-Its programs, frozen inputs and receipts belong under `review/` in this packet.
-Mapping it then:
+The
+[stage 4 review of 11 November](../../../../docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md)
+(lane L96) was written in a separate lane, blind to this one until its findings were
+frozen. Its programs, frozen inputs and shared receipts are under
+[`review/review-2026-11-11/`](review/review-2026-11-11/README.md), and each count’s
+receipts are in its own packet.
 
-- enters this replay as `E-de-winter-941-exact-feasibility` and the review’s run as
-  `E-de-winter-941-review-exact-feasibility`;
-- records the review under `external_review` on `E-de-winter-941-certificate-report`;
-- raises the fifteen rows to assurance `verified`.
+- **Verdict.** It accepts all 37 certificates, nothing blocking: `l96_check.py` decides
+  every square, wall and pair by separating axes in `Fraction` and by exact clipped
+  areas in `gmpy2.mpq`, the two agreeing everywhere, and all 333 controls of its frozen
+  plan came out as stated.
+- **Against this lane.** Its frozen comparison with this lane’s ledger, manifests and
+  margins prints `LANE_AGREES`.
+- **Mapped.** This replay is `E-de-winter-941-exact-feasibility`, the review’s run
+  `E-de-winter-941-review-exact-feasibility`, and the review is recorded under
+  `external_review` on `E-de-winter-941-certificate-report`. Its checker is
+  `V-de-winter-941-942-review-check`, clean room, of the producer’s system family
+  (Claude). The fourteen rows are verified from the two runs.
+- **Its findings on the record**, answered here and in the other two packets: F5 (809,
+  above), F7 (the refined README’s twenty-two, in the
+  [a0c4fc8 packet](../de-winter-a0c4fc8-2026-11-10/README.md#what-the-source-claims)),
+  F8 (the Kaggle starting packings’ licences, in the
+  [#942 packet](../de-winter-issue942-2026-11-10/README.md#credit-and-licence)), F9
+  (above) and F14 (494, above).
+  F10’s dating of the addendum is the ledger’s already.
+
+## Questions for the Author
+
+The review’s five questions, informational; none bears on a verdict:
+
+1. #942 says sixteen packings still had a descent direction, and the README at
+   `a0c4fc80` says twenty-two improved by at least 1e-6. Were the six addendum counts
+   below the 1e-6 threshold at first, or found by a later run?
+2. Under what licence did the Kaggle notebooks and datasets publish the starting
+   packings, and does the merge file state one?
+3. Can the individual authors of the 22 refined arrangements be identified, for example
+   by the notebook each came from?
+4. What does “a margin of about 5e-9 above the numerical optimum” measure?
+   The certificates leave about 10⁻¹⁰ at each wall and 2 × 10⁻¹⁰ between nearest pairs.
+5. Is 809 meant as its own claim, or as the deletion bound from 810?
 
 ## What Is Not Established
 
-- **Independent review.** The replay uses this repository’s two maintained routes, which
-  share a reader; the stage 4 review has not yet run.
+- **Human oversight.** The stage 4 review is an AI review, by the producer’s system
+  family; no human oversight record is retained.
 - **Push times.** The activity log was not read; see above.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The consequences.** The sides here also bound counts the issue does not claim, by
   deletion (one to three squares fewer) and by the border step s(n + 2⌊s⌋ + 1) ≤ s(n) +
   1\. Those bounds have no rows.
-  Whether a deletion bound an issue does not claim gets a row is the owner’s open
-  question (think-kzme).
+  Whether a deletion bound gets a row, claimed or not, is the owner’s open question
+  (think-kzme).
 
 ## Credit and Licence
 

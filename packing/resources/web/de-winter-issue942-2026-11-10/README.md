@@ -162,16 +162,23 @@ is think-ruu2’s RV-3 material.
 The
 [ledger of 11 November for this import](../../../campaign/issue-intake/upper-bounds-941-942-20261111/README.md)
 records all sixteen claims.
-Each is a current beyond-horizon row of this source and supersedes the row it is below,
-at 655 the grid. The rows carry assurance `reported` until the stage 4 review is mapped,
-as in the [#941 packet](../de-winter-issue941-2026-11-10/README.md#stage-4-review), with
-`E-de-winter-942-exact-feasibility` and `E-de-winter-942-review-exact-feasibility`.
+Each is a current beyond-horizon row of this source, at assurance `verified`, and
+supersedes the row it is below, at 655 the grid.
+The rows rest on this replay, `E-de-winter-942-exact-feasibility`, and the stage 4
+review’s clean-room run, `E-de-winter-942-review-exact-feasibility`, as the
+[#941 packet](../de-winter-issue941-2026-11-10/README.md#stage-4-review) sets out.
 Beyond the corpus no register entry records them.
+
+These are bounds below the record, not the best known packings (the review’s F9). Each
+arrangement is another holder’s public Kaggle packing, re-optimized.
+The issue’s own table puts each new side 1.8 × 10⁻⁷ to 3.8 × 10⁻⁴ below the best public
+packing it found, against 3.3 × 10⁻⁴ (655, below the grid) to 2.7 × 10⁻² below this
+record, and Kaggle files no report brought here may hold smaller ones.
 
 ## What Is Not Established
 
-- **Independent review**, **push times**, **optimality** and **the consequences** stand
-  as in the
+- **Human oversight**, **push times**, **optimality** and **the consequences** stand as
+  in the
   [#941 packet](../de-winter-issue941-2026-11-10/README.md#what-is-not-established).
 - **Each packing’s finder.** The merged file names no author per packing, so the record
   cannot credit the arrangements individually either.
@@ -184,8 +191,12 @@ Vladislav Lavrentev (lightningv08), Alex Chilton (alexchilton), Kirill Tymchishi
 (kirilltym), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt and Francisco
 Couzo’s register. The work was AI-assisted (Claude).
 
-The repository is MIT-licensed, copyright 2026 Joost de Winter, by its `LICENSE`.
-Retaining a file grants no licence and relicenses nothing.
+The repository is MIT-licensed, copyright 2026 Joost de Winter, by its `LICENSE`, which
+the packet pins against the byte-identical copy `main` retains.
+The licence of the starting packings, the public Kaggle notebooks and datasets and the
+merge file `Samanyu-dev/squares_in_squares` `53551d7`, is not given: neither the issue
+nor the repository states one, and none is retained (the review’s F8; its question 2
+asks). Retaining a file grants no licence and relicenses nothing.
 
 ## Commands
 
