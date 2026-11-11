@@ -1,0 +1,142 @@
+{
+ "file": "n0924.cert",
+ "programs": {
+  "l96_read.py": "45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29",
+  "l96_sat.py": "c09e123ab57545907ffc388d3f34f831919b509a55a1202987dec5273b41b9a1",
+  "l96_clip.py": "8b0e5e21a0b01b3faa81b8059b2d973d31b9891eccde60cb301489fcc24ac728",
+  "l96_check.py": "88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131"
+ },
+ "sha256": "9388e7d210fc5b78623d85df50d1e171b1615eb23875d2af630594598eb89b89",
+ "bytes": 98585,
+ "reader": "accepted",
+ "comments": [
+  "# exact rational certificate: unit squares, centre (x, y), rotation t = tan(theta/2)",
+  "# public competition packing, re-optimized"
+ ],
+ "n": 924,
+ "scalars": 2773,
+ "noncanonical_scalars": 0,
+ "side": {
+  "exact": "38569232182759/1250000000000",
+  "floor_20": "30.85538574620720000000",
+  "ceil_10": "30.8553857463",
+  "ceil_12": "30.855385746208"
+ },
+ "squares_tilted": 303,
+ "squares_axis_aligned": 621,
+ "walls": {
+  "contacts": [],
+  "least_positive_clearance": {
+   "exact": "186278234199/1862645149230957031250",
+   "approx": "1.000074e-10",
+   "square": 243,
+   "wall": "bottom"
+  },
+  "clearances_equal_between_methods": true
+ },
+ "least_far_wall_clearance": "1.003060e-10",
+ "pairs": {
+  "total": 426426,
+  "A_decided_by_x_line": 401793,
+  "A_decided_by_y_line": 23828,
+  "A_decided_by_margin": 805,
+  "A_least_x_line_gap": "2.000057e-10",
+  "A_least_y_line_gap": "1.998949e-10",
+  "B_not_enumerated": 416564,
+  "B_decided_by_disc": 7662,
+  "B_clipped": 2200,
+  "contacts": [],
+  "overlaps_A": [],
+  "overlaps_B": [],
+  "classes_equal": true,
+  "least_positive_margin": {
+   "exact": "6050047096690785747492652098998954389194820732290852495918696184248089050773606389276912929743/30249471063223496446665150342421281496227869535353263640789182712117182279717212029732763767242431640625",
+   "approx": "2.000051e-10",
+   "pair": [
+    40,
+    45
+   ]
+  },
+  "smallest_ten_positive_margins": [
+   [
+    "2.000051e-10",
+    [
+     40,
+     45
+    ]
+   ],
+   [
+    "2.000061e-10",
+    [
+     66,
+     71
+    ]
+   ],
+   [
+    "2.000081e-10",
+    [
+     65,
+     71
+    ]
+   ],
+   [
+    "2.000081e-10",
+    [
+     218,
+     268
+    ]
+   ],
+   [
+    "2.000083e-10",
+    [
+     75,
+     81
+    ]
+   ],
+   [
+    "2.000085e-10",
+    [
+     59,
+     64
+    ]
+   ],
+   [
+    "2.000087e-10",
+    [
+     49,
+     55
+    ]
+   ],
+   [
+    "2.000091e-10",
+    [
+     78,
+     83
+    ]
+   ],
+   [
+    "2.000091e-10",
+    [
+     40,
+     46
+    ]
+   ],
+   [
+    "2.000093e-10",
+    [
+     88,
+     93
+    ]
+   ]
+  ],
+  "positive_margins_below": {
+   "1e-12": 0,
+   "1e-10": 0,
+   "1e-9": 720,
+   "1e-8": 722,
+   "1e-6": 724
+  }
+ },
+ "problems": [],
+ "verdict": "ACCEPT"
+}

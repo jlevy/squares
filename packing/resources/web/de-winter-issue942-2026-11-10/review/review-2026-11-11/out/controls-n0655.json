@@ -1,0 +1,53 @@
+{
+ "file": "n0655.cert",
+ "programs": {
+  "l96_read.py": "45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29",
+  "l96_sat.py": "c09e123ab57545907ffc388d3f34f831919b509a55a1202987dec5273b41b9a1",
+  "l96_clip.py": "8b0e5e21a0b01b3faa81b8059b2d973d31b9891eccde60cb301489fcc24ac728",
+  "l96_check.py": "88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131",
+  "l96_controls.py": "205969366bf308792fa2eb017676d1f0f8c6aa9a99a88727680228c97b951e7a"
+ },
+ "plan_sha256": "c815af9ac5213905150530133f5ea90186b5f835c96c8790037e1d231b10cfb5",
+ "controls": {
+  "C1": {
+   "as_stated": true,
+   "overlapping_pairs": 231
+  },
+  "C2": {
+   "as_stated": true,
+   "outside": 0,
+   "verdict": "ACCEPT"
+  },
+  "C3": {
+   "as_stated": true,
+   "outside": 0,
+   "verdict": "ACCEPT"
+  },
+  "C4": {
+   "as_stated": true,
+   "outside": 0,
+   "verdict": "ACCEPT"
+  },
+  "C5": {
+   "as_stated": true
+  },
+  "C6": {
+   "as_stated": true
+  },
+  "C7": {
+   "as_stated": true,
+   "pairs": 1867,
+   "not_as_stated": []
+  },
+  "C8": {
+   "as_stated": true,
+   "squares": 655,
+   "not_as_stated": []
+  },
+  "C9": {
+   "as_stated": true,
+   "margins_compared": 615
+  }
+ },
+ "result": "EVERY_CONTROL_AS_STATED"
+}
