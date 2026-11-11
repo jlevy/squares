@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **246** programs: **54** external and **192** first-party; **165** decide claims and **81** check premises.
-- **720** of **917** evidence entries name the programs that verified them: 339 independently re-implemented, 307 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **247** programs: **54** external and **193** first-party; **166** decide claims and **81** check premises.
+- **720** of **919** evidence entries name the programs that verified them: 339 independently re-implemented, 307 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -278,6 +278,7 @@ second implementation agrees.
 | [`V-ozden-935-936-review-check`](#v-ozden-935-936-review-check) | l72_check.py with l72_reader.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-ozden-938-review-check`](#v-ozden-938-review-check) | l77_check.py with l77_checker.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-yim-1109-review-check`](#v-yim-1109-review-check) | l70_check.py with l70_reader.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-de-winter-939-946-review-check`](#v-de-winter-939-946-review-check) | l82_check.py with l82_decide.py and l82_selftest.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 
 ## By Program
 
@@ -4971,6 +4972,20 @@ The 9 November stage 4 review's exact checker of Kaelan Yim's rational centre/ha
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-yim-1109-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 11 of 11: the eleven certificates at 553 to 700: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | - |
+
+### `V-de-winter-939-946-review-check`
+
+**l82_check.py with l82_decide.py and l82_selftest.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 11 November stage 4 review's exact checker of Joost de Winter's rational certificates of issues 939 (199) and 946 (172), with a strict reader of its own that turns every number into Python integers: every square a unit square, every wall and every pair with no distance filter, decided twice in the one module l82_check.py, by separating axes over the four edge normals in fractions.Fraction (method A) and by exact clipping against the closed half-planes and the shoelace area in gmpy2.mpq (method B), the two sharing only the reader and agreeing on every class. l82_decide.py runs it on a certificate with the 21 controls of a plan frozen before they ran, and l82_selftest.py holds both methods to 1,700 cases, with four mutated checkers each failing them.
+
+- Source: [`packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_check.py`](../../packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_check.py), [`packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_decide.py`](../../packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_decide.py), [`packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_selftest.py`](../../packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/README.md`](../../packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issues 939 and 946 (L82, think-o53d), prompted separately from the import lane (L78, think-2h88) and blind to its work until its findings were frozen), with its own prompt and code; authorship in common with the producer’s: system-family, The issues say the certificates were produced with Claude (Anthropic) under the author's direction (#946 names Claude Fable 5.2). The checker was frozen at 2026-11-11T06:22:08Z (checker-freeze.json), before its author read any producer code or this repository's witness, verifier or promotion code; it imports nothing from this repository or the source.
+- Note: Written and run on 11 November 2026 for docs/project/reviews/review-2026-11-11-de-winter-939-946.md (SHA-256 03d58e600f67534334e40669f8401a17f308063262122ab98dfc3bdcfef37178 for l82_check.py and 18bcc73e17f6c12bdc0443daecaab04adf6846efe17b5a49e982da3f654e8ff9 for l82_selftest.py as frozen and retained), kept in the de-winter-s199-upper-bound-2026-11-09 packet's review/review-2026-11-11/, with the 172 receipts in the de-winter-s172-upper-bound-2026-11-10 packet's. Its runs (decide-939.json, decide-946.json) are not entered as evidence while T-285 and T-286 are held for the owner's RV-3 (think-ruu2), as T-280's are not. l82_algebra.py, l82_measure.py, l82_moves.py, l82_supplement.py, l82_print300.py, l82_freeze.py and l82_compare_lane.py, kept beside them, decide no certificate and are not registered.
+
+No evidence entry names it yet.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

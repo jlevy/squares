@@ -90,7 +90,7 @@ import sys
 import tempfile
 import zipfile
 import zlib
-from collections.abc import Callable, Collection, Mapping
+from collections.abc import Callable, Collection, Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
 from fractions import Fraction
@@ -826,6 +826,127 @@ def center_basis_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.
     return _certificate(n, _literal(value["side"], f"n={n} side"), rows)
 
 
+def _centre_basis_row(
+    centre: Sequence[object], basis: Sequence[object], where: str
+) -> tuple[Fraction, Fraction, Fraction]:
+    """A centre and a unit edge direction ``(c, s)`` of rational strings, as ``(x, y, t)``.
+
+    Read as `center_basis_json` reads its squares: ``t = s / (1 + c)``, refused where
+    ``c = -1`` or where the basis is not exactly the rotation ``t`` gives.
+    """
+    x, y = (_literal(value, where) for value in centre)
+    c, s = (_literal(value, where) for value in basis)
+    _require(c != -1, f"{where}: no finite half-angle")
+    pose = legacy.Pose(x, y, s / (1 + c))
+    _require(pose.basis == (c, s), f"{where}: the basis is no rotation")
+    return pose.x, pose.y, pose.t
+
+
+#: The fields of a bare centre-basis witness (`witness_center_basis_bare`); ``notes`` may
+#: also appear.
+_BARE_WITNESS = frozenset(
+    {"id", "n", "side", "square_size", "representation", "scalar", "coordinates", "squares"}
+)
+
+
+def witness_center_basis_bare(
+    raw: bytes, n: int, options: Mapping[str, str]
+) -> legacy.Certificate:
+    """A rational centre-basis witness without this repository's envelope (#939).
+
+    Joost de Winter's ``n199_witness.yaml`` follows Witness/v2's ``witness`` object, but
+    it has no ``softschema`` block and no ``claim``, it has a ``notes`` field, and its id
+    has capitals, so the schema refuses it and `witness_center_basis` refuses it with the
+    schema. This reads its geometry exactly as that adapter does, and nothing else. The
+    document must be exactly one ``witness`` object of the known fields, stating ``n``
+    unit squares with distinct integer ids in the lower-left frame, each exactly an
+    ``id``, a ``center`` and a ``basis`` of rational strings. Its ``id`` and ``notes`` are
+    read and not believed. A document that carries the envelope is refused here, since
+    `witness_center_basis` reads it.
+    """
+    _no_options(options, "witness-center-basis-bare")
+    try:
+        document = load_yaml(_text(raw))
+    except yaml.YAMLError as error:
+        raise ReportError(f"n={n}: invalid witness YAML: {error}") from error
+    _require(
+        type(document) is dict and set(cast("dict[str, Any]", document)) == {"witness"},
+        f"n={n}: not exactly one witness object",
+    )
+    witness: Any = cast("dict[str, Any]", document)["witness"]
+    _require(
+        type(witness) is dict
+        and _BARE_WITNESS <= set(witness) <= _BARE_WITNESS | {"notes"}
+        and type(witness["id"]) is str
+        and type(witness.get("notes", "")) is str,
+        f"n={n}: not a witness object of the known fields",
+    )
+    _require(
+        type(witness["n"]) is int
+        and witness["n"] == n
+        and witness["representation"] == "center-basis"
+        and witness["scalar"] == {"kind": "rational"}
+        and witness["square_size"] == "1"
+        and witness["coordinates"] == CORNER_FRAME,
+        f"n={n}: not a rational centre-basis witness of {n} unit squares in the lower-left "
+        "frame",
+    )
+    squares: Any = witness["squares"]
+    _require(type(squares) is list and len(squares) == n, f"n={n}: not {n} squares")
+    ids: list[int] = []
+    rows = []
+    for index, square in enumerate(cast("list[Any]", squares), start=1):
+        where = f"n={n} square {index}"
+        fields: dict[str, Any] = square if type(square) is dict else {}
+        _require(
+            set(fields) == {"id", "center", "basis"}
+            and type(fields["id"]) is int
+            and all(
+                type(fields[key]) is list and len(fields[key]) == 2
+                for key in ("center", "basis")
+            ),
+            f"{where}: not exactly an id, a centre and a basis of two rationals each",
+        )
+        ids.append(fields["id"])
+        rows.append(_centre_basis_row(fields["center"], fields["basis"], where))
+    _require(len(set(ids)) == n, f"n={n}: square ids are not {n} distinct ids")
+    return _certificate(n, _literal(witness["side"], f"n={n} side"), rows)
+
+
+def center_direction_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Rational centre-direction JSON (#939): ``[x, y, c, s]`` rows beside the side.
+
+    Joost de Winter's ``n199_exact.json`` states each unit square as a list of four
+    rational strings, its centre in ``[0, S]^2`` and ``(c, s)``, the unit direction of
+    one edge: the basis `center_basis_json` reads, read the same way. Besides ``n``,
+    ``side`` and ``squares``, the object must hold ``square_size``, which is ``"1"``,
+    and ``format``, a label read and not believed. It may hold
+    ``optimum_minimal_polynomial``, a list of integers that the source says its side lies
+    just above a root of. That is also read and not believed: a finite certificate proves
+    its own side and nothing about a polynomial. JSON numbers are refused as
+    coordinates, so no float is read.
+    """
+    _no_options(options, "center-direction-json")
+    value = _json(raw)
+    squares = _squares(value, n)
+    required = {"n", "side", "square_size", "format", "squares"}
+    polynomial = value.get("optimum_minimal_polynomial", [])
+    _require(
+        required <= set(value) <= required | {"optimum_minimal_polynomial"}
+        and value["square_size"] == "1"
+        and type(value["format"]) is str
+        and type(polynomial) is list
+        and all(type(coefficient) is int for coefficient in polynomial),
+        f"n={n}: not a centre-direction certificate of only the known fields",
+    )
+    rows = []
+    for index, square in enumerate(squares, start=1):
+        where = f"n={n} square {index}"
+        _require(type(square) is list and len(square) == 4, f"{where}: not x, y, c and s")
+        rows.append(_centre_basis_row(square[:2], square[2:], where))
+    return _certificate(n, _literal(value["side"], f"n={n} side"), rows)
+
+
 def centred_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
     """Centred JSON (#483): ``side`` and ``{x, y, t}`` squares in [-S/2, S/2]^2.
 
@@ -1100,7 +1221,9 @@ ADAPTERS: dict[str, Adapter] = {
     "pingyou-json": pingyou_json,
     "witness-corners": witness_corners,
     "witness-center-basis": witness_center_basis,
+    "witness-center-basis-bare": witness_center_basis_bare,
     "center-basis-json": center_basis_json,
+    "center-direction-json": center_direction_json,
     "centred-json": centred_json,
     "decimal-dilation": decimal_dilation,
     "sqcert": sqcert,
@@ -1559,6 +1682,13 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # vitamoon/vitamoon ac14112, which no issue reports; T-280 and T-281 are held below the
     # stage 4 exit for the owner (think-ruu2's RV-3, think-ikku).
     "[Yim certificates 2026-11-09]": _import("yim-certificates-2026-11-09"),
+    # Lane L78 of 10 November (think-2h88): Joost de Winter's issue 939 at 199, T-284's
+    # packing with its core re-solved; T-285 is held below the stage 4 exit for the owner
+    # (think-ruu2's RV-3).
+    "[de Winter s199 upper bound 2026-11-09]": _import("de-winter-s199-upper-bound-2026-11-09"),
+    # The same lane, 11 November: his issue 946 at 172, that packing's core, T-282's
+    # arrangement re-solved; T-286 is held with T-285.
+    "[de Winter s172 upper bound 2026-11-10]": _import("de-winter-s172-upper-bound-2026-11-10"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

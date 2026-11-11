@@ -4958,6 +4958,54 @@ sources:
       MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
       notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII.
       Retained in web/ozden-s199-upper-bound-2026-11-09/.
+  - key: '[de Winter s199 upper bound 2026-11-09]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'de Winter after Ozden, Daniel, Levy'
+    short_credit: 'de Winter after Ozden et al.'
+    note: >-
+      JoostdeWinter/square-packing at 702c7af2db04c9b69696455ee3d33883a2935e8a
+      (2026-11-09T21:54:59Z), Joost de Winter's certificate for s(199) <= 14.6146898532835806
+      (the exact side rounded up at 16 places), printed at 38 places in jlevy/squares#939 as
+      14.61468985328358057514628890087947061619: a rational centre-basis witness without this
+      repository's schema envelope (n199/n199_witness.yaml) and the same packing as JSON
+      (n199/n199_exact.json), whose squares 1 to 172 are the n = 172 arrangement of
+      jlevy/squares#935 (T-282) re-solved to what the source calls its exact local optimum, and
+      whose other 27 are the L of jlevy/squares#938 (T-284), square for square. The source says
+      the side is 1.4e-99 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 -
+      1746146x^2 + 12052670x - 32855154; local optimality has no formal proof. Registration was
+      requested in jlevy/squares#939; the source says the work was produced with Claude
+      (Anthropic) under his direction. No global optimality claim. The lineage builds on this
+      project: the core is T-282's arrangement, which starts from the registry's regularized
+      atlas. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s199-upper-bound-2026-11-09/.
+  - key: '[de Winter s172 upper bound 2026-11-10]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: 'de Winter after Ozden, Daniel, Levy'
+    short_credit: 'de Winter after Ozden et al.'
+    note: >-
+      JoostdeWinter/square-packing at c4e65d0b8c4d32e45bf32a907e8b760502f137af
+      (2026-11-10T21:26:23Z), Joost de Winter's certificate for s(172) <= 13.614689853284
+      (rounded up at 12 places, as the source's README prints it; jlevy/squares#946 prints it cut
+      at 56 places): a rational centre-basis witness without this repository's schema envelope
+      (n172/n172_witness.yaml) and the same packing as JSON (n172/n172_exact.json), the n = 172
+      arrangement of jlevy/squares#935 (T-282) re-solved to what the source calls its exact local
+      optimum, the real root near 13.6147 of 62x^5 - 4116x^4 + 107933x^3 - 1397031x^2 + 8918035x -
+      22427977, 1.6e-319 above it, with 300-digit coordinates of the optimum; local optimality has
+      no formal proof. It is the 172-square core of jlevy/squares#939. Registration was requested
+      in jlevy/squares#946; the source says the work was produced with Claude (Anthropic) under
+      his direction. No global optimality claim. The lineage builds on this project: the
+      arrangement is T-282's, which starts from the registry's regularized atlas. Licensed MIT by
+      LICENSE at the pin. Retained in web/de-winter-s172-upper-bound-2026-11-10/.
   - key: '[Yim certificates 2026-11-09]'
     authors:
     - Yim

@@ -29871,3 +29871,140 @@ issues:
       exactly 0. The review's five questions for the author (README line 11's print, the gaps
       between the parts, the certificate's blocks, sqcheck's 27 tight constraints, the commit to
       cite) are informational and hold nothing open. No reply has been posted.
+  - number: 939
+    title: 's(199) <= 14.6146898532835806: registration request'
+    author: JoostdeWinter
+    opened: '2026-11-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter (Delft University of Technology) asks for the registration of s(199) <=
+      14.61468985328358057514628890087947061619, the exact rational side of n199_witness.yaml at
+      JoostdeWinter/square-packing 702c7af rounded up at 38 places (14.6146898532835806 at 16),
+      committed 9 minutes before the issue: Doğa Özden's #938 packing (T-284, the house) with its
+      172-square core, T-282's arrangement, re-optimized to what the issue calls the exact local
+      optimum of that arrangement, and the same L of 27 squares. It says the side lies less than
+      1e-98 above the real root near 14.6147 of an irreducible quintic, from a numerical solution
+      to 130 digits with no formal proof, that its own two checkers in Python's Fraction accept
+      it, and that the work was produced with Claude under his direction. Triaged and retained on
+      9 and 10 November 2026 in lane L78 (think-2h88): the digests the source states hold, the
+      prints are the exact side rounded up, both maintained exact routes accept it through two
+      readers written for its files and refuse its gross and sharp controls, and the quintic and
+      the root check exactly (S lies 1.36e-99 above it). It is 2.63e-12 below T-284, one to one
+      with its packing, the L unchanged: a refinement, which the ledger of 11 November records.
+      The gain is 1.0399 of the padding T-284 carries from T-282 through the L step, and the core
+      is the KKT point the record holds unregistered at 172 (think-wju3). Registered as T-285,
+      held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-284. The 11 November
+      stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, think-o53d,
+      lane L82), written blind in a separate lane, accepts it with #946's, no finding blocking,
+      and is mapped at C1; its F2 asks the author to credit #938 for the L step at 199, and its
+      six questions for the author are informational.
+    read_through: '2026-11-09T22:03:57Z'
+    results:
+    - key: n199-core-resolved
+      validation:
+      - think-2h88
+      - think-ruu2
+      claim: >-
+        s(199) <= 14.6146898532835806 (the exact rational side, rounded up at 16 places, of
+        n199_witness.yaml at JoostdeWinter/square-packing 702c7af), T-284's packing with its
+        172-square core re-solved, 2.63e-12 below it.
+      source: body
+      register:
+      - T-285
+      evidence:
+      - E-de-winter-939-certificate-report
+    beads:
+    - think-2h88
+    - think-o53d
+    answer_bead: think-2h88
+    replies: []
+    blocked:
+      type: owner-decision
+      reason: >-
+        Whether a re-certification at the contraction margin its predecessor carries, here
+        T-282's margin carried through T-284's L step, is a new result is the owner's RV-3
+        (think-ruu2); T-285 is held at V0/C1 until the answer, and the same answer settles the
+        held solve at 172 (think-wju3).
+    close_when: >-
+      The owner has answered RV-3 (think-ruu2), the record follows the answer for T-285
+      (withdrawn, or entered and adopted at 199), and the reply on main says so, with what was
+      retained, replayed and reviewed and that the gain is 1.0399 of the margin T-284 carries
+      through the L step.
+    notes: >-
+      Read on 10 November 2026 from main f54ad1048. The commit 702c7af precedes the issue by 9
+      minutes; the issue carries the intake label and has no comments. The witness the issue calls
+      the witness format of this project lacks the schema's envelope (no softschema block, no
+      claim, a notes field, an id with capitals), so packing-witness verify cannot read it as
+      published; a reply may mention it. Its core's bound at 172 is not claimed here; #946
+      claims it, and T-286 records that.
+  - number: 946
+    title: 's(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request'
+    author: JoostdeWinter
+    opened: '2026-11-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(172) <= 13.6146898532835805751462889...,
+      the exact rational side of n172_witness.yaml at JoostdeWinter/square-packing c4e65d0,
+      committed 47 seconds before the issue (13.614689853284 at 12 places, as the source's README
+      prints it): T-282's packing, Evan Daniel's as Doğa Özden improved it, at what the issue calls
+      the exact local optimum of its arrangement, the real root near 13.6147 of an irreducible
+      quintic, 1.6e-319 above it, with a numerical solution at about 390 digits and no formal
+      proof. It is the core of his #939 at 199; it asks to be credited as the arrangement's
+      improver and says it understands that such results await the RV-3 ruling. Triaged and
+      retained on 11 November 2026 in lane L78 (think-2h88): the digests the source states hold,
+      the print is the exact side rounded up, both maintained exact routes accept it through the
+      readers written for #939's files and refuse its gross and sharp controls, and the quintic and
+      the root check exactly (S lies 1.56e-319 above it). It is 2.63e-12 below T-282, one to one
+      with its packing, 1.0399 of T-282's own uniform-contraction margin: a refinement, which the
+      ledger of 11 November records, and the KKT point the record holds unregistered (think-wju3).
+      Registered as T-286, held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-282.
+      The 11 November stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md,
+      think-o53d, lane L82), written blind in a separate lane, accepts it with #939's, no finding
+      blocking, and is mapped at C1; its F1 asks the author to state the bound as the
+      certificate's side, with the root as the asserted optimum, as the record has it.
+    read_through: '2026-11-10T21:27:10Z'
+    results:
+    - key: n172-exact-local-optimum
+      validation:
+      - think-2h88
+      - think-ruu2
+      claim: >-
+        s(172) <= 13.614689853284 (the exact rational side, rounded up at 12 places, of
+        n172_witness.yaml at JoostdeWinter/square-packing c4e65d0), T-282's packing re-solved,
+        2.63e-12 below it.
+      source: body
+      register:
+      - T-286
+      evidence:
+      - E-de-winter-946-certificate-report
+    beads:
+    - think-2h88
+    - think-o53d
+    answer_bead: think-2h88
+    replies: []
+    blocked:
+      type: owner-decision
+      reason: >-
+        Whether a re-certification at its predecessor's own contraction margin is a new result
+        is the owner's RV-3 (think-ruu2); T-286 is held at V0/C1 until the answer, as T-285 is,
+        and the same answer settles the held solve at 172 (think-wju3).
+    close_when: >-
+      The owner has answered RV-3 (think-ruu2), the record follows the answer for T-286
+      (withdrawn, or entered and adopted at 172), and the reply on main says so, with what was
+      retained, replayed and reviewed and that the gain is 1.0399 of T-282's own contraction
+      margin.
+    notes: >-
+      Read on 11 November 2026 from main f54ad1048. The commit c4e65d0 precedes the issue by 47
+      seconds; 8c0de9d, 6 minutes earlier, first published n172/ at 1.4e-99 above the same root,
+      and c4e65d0 overwrote it. The issue carries the intake label and has no comments. It cites
+      T-098 at 206 as the same type of result: T-098 registered Evan Daniel's exact optima of 48
+      known-best packings, 3.5e-13 to 5.0e-11 below each printed side, on 5 October 2026, before
+      RV-3 was raised; the owner has not answered RV-3. The four commits between #939's pin
+      and this one add certificates at 37 counts above 324. The author's #941 reports 15 of them,
+      at 71da0d5 (above324/), and #942 reports 16, at a9486ed (above324_refined/); both are
+      triaged on think-cen3. No issue reports the six counts a0c4fc8 adds (597, 754, 864, 865,
+      869 and 991), which are left for triage.

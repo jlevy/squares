@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-09'
+last_reviewed: '2026-11-11'
 results:
   - id: T-001
     kind: lower-bound
@@ -42518,6 +42518,470 @@ results:
       verdict: accepted
       covers:
       - T-284
+  - id: T-285
+    kind: upper-bound
+    registered: '2026-11-10'
+    landed: '2026-11-11'
+    headline: >-
+      De Winter's re-solve of T-284's packing at 199, 1.0399 of its margin through the L step; held
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the
+      exact side it states: s(199) <=
+      1461468985328358057514628890087947061618972730200175769881498026931092424681356737007190165664341823168492765447/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      Rounded up it is 14.6146898532835806 at 16 places and 14.614689853284 at 12, 2.63e-12 below
+      T-284's side, Doğa Özden's #938 and the case's house, across its 12-place print (...287).
+
+      The certificate is T-284's packing with its 172-square core re-solved. Squares 1 to 172 are
+      T-282's arrangement at side S - 1, re-optimized to what the source calls the exact local
+      optimum of that arrangement, and the other 27 are T-284's L, square for square: measured
+      here, it is exactly what devtools.construction_checker writes for one L-border layer on its
+      own first 172 squares. It is one to one with T-284's packing under the identity, and no
+      square moves beyond 1e-3.
+
+      Its gain is measured against the margin T-284 carries. T-284's own uniform-contraction margin is 0,
+      since its grid squares touch, and so is this certificate's; but T-284 is T-282 with the L
+      step, and its base, T-282's certificate, contracts by 2.533e-12. The gain is 1.0399 of that,
+      and the base so contracted, with the L written on it, rounds up at 12 places to
+      14.614689853284, as this certificate does. The core is also the KKT point Evan Daniel's
+      regularizer reached from T-282's witness on 9 November, which the record holds unregistered
+      (think-wju3): that solve's side, printed at 63 places, is S - 1 in every one, and this core
+      is its certificate with the padding trimmed (1.0000 of that certificate's own margin).
+
+      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
+      RV-3): until the answer the entry stays below the stage 4 exit and the house does not move.
+      Its core's bound at 172 is not claimed here; #946 reports that core, tightened, and T-286
+      records it, held alike.
+
+      The issue says the side is less than 1e-98 above the real root near 14.6147 of 62x^5 -
+      4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, the arrangement's local optimum by
+      a numerical solution of the optimality conditions to 130 digits; that the polynomial was
+      identified numerically from 108 digits; and that local optimality has no formal proof. The
+      source's README (n199/README.md) adds that in that solution all 734 load-bearing or forced
+      contacts close exactly and all other gaps stay open.
+
+      Checked here exactly: the quintic is irreducible over Q, exactly one of its three real roots
+      lies in [S - 1e-98, S], and S lies 1.36e-99 above it. The certificate proves s(199) <= S and
+      nothing about the root. The issue says verify_exact.py and a second script checked the
+      certificate in Python's Fraction, sharing one author and the separating-axis test, and that
+      it was not replayed with this repository's checkers. Those statements are the author's; no
+      source program ran here.
+
+      Credit the packing to Evan Daniel, as Doğa Özden improved it (T-282) and extended it (T-284),
+      and Joost de Winter (Delft University of Technology) for the re-solve, as a regularization;
+      the issue credits the core arrangement to Daniel and Özden, and says the derivation, local
+      optimization, high-precision solution, rational certificate, checks and figure were produced
+      with Claude (Anthropic) under his direction.
+    scope:
+      n_values:
+      - 199
+    verification: V0
+    confirmation: C1
+    significance:
+      score: 1
+      rationale: >-
+        A re-solve of T-284's packing at 199, 2.63e-12 below it and across its 12-place print:
+        1.0399 of the uniform-contraction margin T-284 carries from T-282 through the L step,
+        1.0107e-13 beyond it, at the 12-place print of T-284's base contracted with the L written
+        on it, and the KKT point the record already holds unregistered at 172 (think-wju3).
+        Whether such a gain is a new result is the owner's RV-3; held at S1 as T-280 is, and the
+        answer may change the score. No new arrangement, lower bound or optimum.
+      scored: '2026-11-11'
+      by: >-
+        the import lane L78 (think-2h88), its rationale stated neutrally after the stage 4 review
+        of 11 November (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, F11), which
+        scores no significance
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s199 upper bound 2026-11-09]'
+      published: '2026-11-09'
+    evidence:
+    - E-de-winter-939-certificate-report
+    artifacts:
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/README.md
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/claims.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/n199_witness.yaml
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/n199_exact.json.gz
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n199.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n172-base.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n199.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n172-base.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n172-daniel-held.json
+    - packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - packing/devtools/construction_checker.py
+    - docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/README.md
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/decide-939.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/compare-lane.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l78_1109.py
+    - packing/tests/test_contraction_margin.py
+    - packing/tests/test_measure_identity.py
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/selftest.txt
+    notes: >-
+      A separate complete repository replay is retained for n = 199: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 118206 pair decisions; summed over the 3 jobs, the receipt records 35.39 route CPU
+      seconds, the longest job 12.38 seconds. The grid squares touch the walls and each other, a
+      least wall clearance and a least pair gap of exactly 0.
+
+      The packet's sharp controls (receipts/sharp-controls.json) are all as the module predicts
+      on both routes: at the three
+      zero margins the at-contact half is the certificate itself, accepted, and the 1e-30 half
+      refused; no square can be enlarged to close one pair alone, so the tightest pair's square
+      (174, against 173) was enlarged, accepted at contact and refused past it; a free square of
+      the core (48), 1.088e-3 from its wall, was refused at contact for its shape alone; and a
+      duplicated square was refused. That replay is not entered as evidence while the entry is
+      held, as T-280's is not.
+
+      Both files the source publishes are read, by two readers written for them:
+      n199_witness.yaml follows Witness/v2's witness object without the schema's envelope (no
+      softschema block, no claim, a notes field, an id with capitals), so packing-witness verify
+      and the witness-center-basis reader refuse it, and n199_exact.json states the same packing as
+      [x, y, cos, sin] rows (upper_bound_reports.witness_center_basis_bare and
+      center_direction_json); every read holds the two equal.
+
+      At n = 199 the certificate is below the case's ceiling (Evan Daniel, improved by Doğa Özden,
+      T-284) by 2.63e-12, exactly T-282's side less S - 1, and below T-174 and T-193 by 2.88e-03;
+      smallest: this certificate. The ledger of 11 November for this lane
+      (campaign/issue-intake/upper-bounds-939-946-20261111) walks it from starts frozen on main
+      after T-284 was adopted, and records it as a refinement of Özden's packing; the
+      restatement ruling does not reach it, since it crosses the print.
+
+      Measured pose by pose (measure/identity-n199.json and identity-n172-base.json; a
+      measurement, which decides nothing): nearest centres pair it one to one with T-284's packing
+      under the identity; 84 squares move beyond 1e-9 and none beyond 1e-3 (largest 1.41e-4), the
+      L does not move, and 16 squares turn by 0.00573 degrees.
+
+      Of the 84, 16 are free, the free squares of Evan Daniel's KKT solve, which no pair or wall
+      touches, each moved by about
+      (-1e-4, -1e-4) and turned by 1e-4 radians; the other 68 slide along their contacts on the
+      solve's flat motions, each keeping a tight pair, and 66 keep every pair they had below
+      1e-12 in T-282, only squares 73 and 127 losing any (the stage 4 review's F10, its
+      moves.json). The base is T-282's certificate exactly, read through
+      devtools.measure_identity's l-base.
+
+      The margins (RV-3): devtools.contraction_margin takes T-284's own certificate down by 0
+      (measure/contraction-n199.json; pair 173 and 174 of the L binds), and its base, read with
+      l-base, by 2.533458e-12, to 13.614689853283681646...; this certificate's base gains
+      2.634529e-12, 1.0399 of that and 1.0107e-13 beyond it (measure/contraction-n172-base.json).
+      The precedents measure the same way: T-280 at 0.3472 and 0.9674, T-259 at 0.9193, T-265 at
+      9.9679, and the held solves at 172 and 270 (think-wju3) at 1.04 and 1.01.
+
+      Against the held solve's certificate (measure/contraction-n172-daniel-held.json, its view
+      regenerated byte for byte from main's T-282 witness by regularize_evand run, the very view
+      the think-he66 report records) the core gains 1.3615e-19, 1.0000 of that certificate's own
+      margin; the 88 squares that do not move agree with it within 1e-9
+      (measure/identity-n172-daniel-held.json) and the other 84 lie on its 77 flat motions. The
+      base's own margin here is 1.36e-99, and contracted it lies 1.1e-124 above the quintic's
+      root less one, consistent with the source's local-optimality claim.
+
+      The stage 4 review observes (F4) that the gain lies 1.0107e-13 below the contracted
+      predecessor, at the same 12-place print as it and as the root. Under a rule that counts a
+      re-solve only if its 12-place print falls below the predecessor contracted to first
+      contact, through any construction, no certificate of this arrangement could count at 199
+      or at 172, since its optimum prints as the contracted house does. Under a rule that counts
+      any gain, a gain across the predecessor's own print, or a gain beyond its contraction
+      margin, it counts; a case-by-case judgment of whether the 4% beyond the margin is padding
+      could go either way. The question and its options are think-ruu2's (RV-3). The record
+      states this and decides nothing.
+
+      The implied s(172) bound, this certificate's first 172 squares at S - 1, is not claimed
+      here and not registered from this entry: it is think-wju3's held solve with less padding.
+      #946 reported the same core a day later, 1.36e-99 lower, and T-286 records it, held; the
+      owner's RV-3 answer settles both counts alike.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack rational
+      witness verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No human
+      oversight or optimality is claimed.
+
+      The stage 4 review of 11 November 2026 (docs/project/reviews/review-2026-11-11-de-winter-939-946.md,
+      lane L82, think-o53d), written in a separate lane blind to this one until its findings were
+      frozen, accepts both #939's and #946's certificates, no finding blocking. Its clean-room
+      checker decides every square, wall and pair by separating axes in Fraction and by exact
+      clipped areas in gmpy2.mpq, the two agreeing everywhere, with 21 controls stated before
+      they ran, and its contraction receipts equal this entry's exactly.
+
+      F1 and F2 (minor) ask the author to state #946's bound as the certificate's side, the root
+      as the asserted optimum, and to credit #938 for the L step at 199; the record already does
+      both. The review is mapped here at C1; its run and the replay are not entered while the
+      entry is held.
+    next_rung: >-
+      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at the
+      margin its predecessor carries, here through a construction, is a new result. If it is
+      not, the entry is withdrawn and T-284 stays the house; if it is, the replay and the stage 4
+      review's clean-room run are entered, both rungs rise to V3 and C3, and 199 is adopted under
+      the house rule with both strong generators' regularization and the flip, and think-wju3's
+      solve at 172 is decided the same way. The stage 4 review of 11 November is mapped, at C1;
+      only the evidence and the adoption wait on the owner.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 939 and 946 (L82,
+        think-o53d), prompted separately from the import lane (L78, think-2h88) and blind to its
+        work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-11'
+      scope: >-
+        Finite feasibility of #939's and #946's rational certificates, decided again by a
+        clean-room exact checker frozen before any producer or repository verifier code was read,
+        by two methods with 21 controls stated in advance, a self-test of 1,700 cases and four
+        mutated checkers; the quintics and their roots, the construction, the cores against
+        T-282, T-284 and Evan Daniel's held solve, the margins, gains and shares RV-3 turns on,
+        custody and credit; reconciled with the import lane after its findings were frozen.
+      verdict: accepted
+      covers:
+      - T-285
+      - T-286
+    unfinished_confirmations:
+    - what: >-
+        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and
+        the stage 4 review's clean-room run, both retained, entered as the stage 4 exit
+      rung: C3
+      link: think-ruu2
+      estimated_cost:
+        cpu_hours: 0.05
+        cpu_hours_high: 0.5
+        basis: >-
+          the replay and the sharp controls ran on 9 November and their receipts are retained;
+          the review is one count, about 40 route seconds a method; what remains is records work
+        priced: '2026-11-10'
+    regularizations:
+    - n: 199
+      of: T-284
+      by: '[de Winter s199 upper bound 2026-11-09]'
+      method: >-
+        what the source calls the exact local optimum of T-282's arrangement, solved from its
+        optimality conditions to 130 digits and certified 1.36e-99 above it, with T-284's L of 27
+        squares unchanged
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n199.json
+        one_to_one: true
+        moved: 0
+        max_move: 0.000141427
+        max_turn_deg: 0.00573
+  - id: T-286
+    kind: upper-bound
+    registered: '2026-11-11'
+    landed: '2026-11-11'
+    headline: >-
+      De Winter's re-solve of T-282's packing at 172, T-285's core, 1.0399 of T-282's margin; held
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the
+      exact side it states, a rational with a denominator of 670 digits: s(172) <=
+      13.6146898532835806, that side rounded up at 16 places. It is the side of n172_witness.yaml
+      at JoostdeWinter/square-packing as #946 names it; rounded up at 12 places it is
+      13.614689853284, as the source's README prints it, 2.63e-12 below T-282's side, Doğa
+      Özden's #935 and the case's house, across its 12-place print (...287). #946 prints the side
+      cut at 56 places; the record carries the side, and the quintic's root only as the asserted
+      optimum (the stage 4 review's F1).
+
+      The certificate is T-282's packing re-solved to what the source calls the exact local
+      optimum of its arrangement, with no square added, removed or moved to another place in its
+      contact structure: one to one with T-282's packing under the identity, no square moving
+      beyond 1e-3. It is the core of #939's certificate at 199 (T-285), 1.36e-99 lower, the
+      margin of that certificate's base, and the KKT point Evan Daniel's regularizer reached from T-282's
+      witness on 9 November, which the record holds unregistered (think-wju3). Its gain is 1.0399
+      of T-282's own uniform-contraction margin (2.533e-12), the held solve's share, and T-282 so
+      contracted rounds up at 12 places to 13.614689853284, as this certificate does.
+
+      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
+      RV-3), which the issue says it understands: until the answer the entry stays below the
+      stage 4 exit and the house does not move. The issue calls it the same type of result as
+      T-098, which registered Evan Daniel's exact optima of 48 known-best packings on 5 October
+      2026, before RV-3 was raised.
+
+      The issue says the side lies 1.6e-319 above the real root near 13.6147 of 62x^5 - 4116x^4 +
+      107933x^3 - 1397031x^2 + 8918035x - 22427977, the arrangement's exact local optimum: a
+      solution of the contact equations at about 390 digits closes all contacts with a residual
+      below 1e-389, the equations have rank 285 and fix the side to first order, non-negative
+      contact forces in balance exist (floating point), and the polynomial, identified from 108
+      digits of a 130-digit solution, agrees with the 390-digit side to 386 digits; local
+      optimality has no formal proof and no symbolic derivation exists.
+
+      Checked here exactly: the quintic is T-285's shifted by one, irreducible over Q, and exactly
+      one of its roots lies in [S - 1e-318, S], 1.56e-319 below S. The certificate proves s(172) <= S and nothing about the
+      root. The issue says verify_exact.py, one checker written for the certificate, accepts it,
+      and that it was not run against this repository's checkers. Those statements are the
+      author's; no source program ran here.
+
+      Credit the packing to Evan Daniel, as Doğa Özden improved it (T-282), and Joost de Winter
+      for the re-solve, as a regularization; the issue asks that he be credited as the
+      arrangement's improver, its credit staying with Daniel and Özden, and says the local
+      optimization, high-precision solution, rational certificate, checking and figure were
+      produced with Claude Fable 5.2 (Anthropic) under his direction.
+    scope:
+      n_values:
+      - 172
+    verification: V0
+    confirmation: C1
+    significance:
+      score: 1
+      rationale: >-
+        A re-solve of T-282's packing at 172, 2.63e-12 below it and across its 12-place print:
+        1.0399 of T-282's own uniform-contraction margin, 1.0107e-13 beyond it, at the 12-place
+        print of T-282 contracted, and the KKT point the record already holds unregistered
+        (think-wju3). Whether such a gain is a new result is the owner's RV-3; held at S1 as T-280
+        and T-285 are, and the answer may change the score. No new arrangement, lower bound or
+        optimum.
+      scored: '2026-11-11'
+      by: >-
+        the import lane L78 (think-2h88), its rationale stated neutrally after the stage 4 review
+        of 11 November (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, F11), which
+        scores no significance
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s172 upper bound 2026-11-10]'
+      published: '2026-11-10'
+    evidence:
+    - E-de-winter-946-certificate-report
+    artifacts:
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/README.md
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/acquisition/claims.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/n172_witness.yaml
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/n172_exact.json.gz
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/identity-n172.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172-daniel-held.json
+    - packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/decide-946.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/moves.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l78_1109.py
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/selftest.txt
+    notes: >-
+      A separate complete repository replay is retained for n = 172: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 14706 pairs a job and route; summed over the 3 jobs, the receipt records 130.67
+      route CPU seconds. The least wall clearance is 1.5e-320 and the least pair gap 1e-320. The
+      packet's sharp controls (receipts/sharp-controls.json) are as the module predicts on both
+      routes. That replay is not entered as evidence while the entry is held, as T-280's is not.
+
+      At n = 172 the certificate is below the case's ceiling (Evan Daniel, improved by Doğa
+      Özden, T-282) by 2.63e-12; smallest: this certificate. The ledger of 11 November for this
+      lane (campaign/issue-intake/upper-bounds-939-946-20261111) walks it from starts frozen on
+      main and records it as a refinement of Özden's packing. #939's certificate already bounded
+      s(172), but #939 claims 199 only and the record carries no deletion of an L inside the
+      corpus, so #946 is the first report at 172. Its folder first appeared 6 minutes before the
+      issue, 1.4e-99 above the same root, and the commit #946 names overwrote it.
+
+      Measured pose by pose (measure/identity-n172.json; a measurement, which decides nothing):
+      nearest centres pair it one to one with T-282's packing under the identity; 84 squares
+      move beyond 1e-9 and none beyond 1e-3 (largest 1.41e-4), and 16 turn by 0.00573 degrees,
+      as #939's core does. Of the 84, 16 are free, which no pair or wall touches, each moved by
+      about (-1e-4, -1e-4) and turned by 1e-4 radians; the other 68 slide along their contacts on
+      the flat motions, each keeping a tight pair, and 66 keep every pair they had below 1e-12 in
+      T-282, only squares 73 and 127 losing any (the stage 4 review's F10). Against #939's core
+      (read with l-base) every square lies within 2.3e-99 and no turn exceeds 3.4e-124 degrees.
+
+      The margins (RV-3; measure/contraction-n172*.json): T-282's own margin is 2.533458e-12
+      (1 - lambda* = 2.008e-13), and the gain 2.634529e-12, 1.0399 of it and 1.0107e-13 beyond
+      it. Against the held solve's certificate (its view regenerated byte for byte) the gain is
+      1.3615e-19, 1.0000 of that certificate's own margin, and against #939's core 1.3615e-99,
+      1.0000 of its margin: the same point with less padding each time. This certificate's own
+      margin is 1.56e-319 (1 - lambda* = 1.0e-320); the receipt's float fields for these two
+      fall in binary64's subnormal range and read 1.561445e-319 and 9.999889e-321, where the
+      exact fractions beside them give 1.561469e-319 and 1.0e-320 (the review's F12).
+
+      The stage 4 review observes (F4) that the gain lies 1.0107e-13 below the contracted
+      predecessor, at the same 12-place print as it and as the root. Under a rule that counts a
+      re-solve only if its 12-place print falls below the predecessor contracted to first
+      contact, through any construction, no certificate of this arrangement could count at 172
+      or at 199, since its optimum prints as the contracted house does. Under a rule that counts
+      any gain, a gain across the predecessor's own print, or a gain beyond its contraction
+      margin, it counts; a case-by-case judgment of whether the 4% beyond the margin is padding
+      could go either way. The question and its options are think-ruu2's (RV-3). The record
+      states this and decides nothing.
+
+      The source's own checker was not run here. The two maintained routes share certificate
+      parsing (the readers written for #939's files), half-angle conversion, Fraction arithmetic
+      and the separating-axis method. No human oversight or optimality is claimed.
+
+      The stage 4 review of 11 November 2026 (docs/project/reviews/review-2026-11-11-de-winter-939-946.md,
+      lane L82, think-o53d) accepts this certificate with T-285's, no finding blocking; its
+      clean-room checker decides every square, wall and pair by two exact methods, its controls
+      came out as stated but one it mis-stated for this certificate and reports (its F9), and
+      its margins equal this entry's exactly. F1 asks that the record carry the side, not the
+      root, which this entry does. The review is mapped here at C1; its run and the replay are
+      not entered while the entry is held.
+    next_rung: >-
+      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at its
+      predecessor's own contraction margin is a new result. If it is not, the entry is withdrawn
+      and T-282 stays the house; if it is, the replay and the stage 4 review's clean-room run are
+      entered, both rungs rise to V3 and C3, and 172 is adopted under the house rule with both
+      strong generators' regularization and the flip, with T-285 at 199 and think-wju3's solve
+      decided the same way. The stage 4 review of 11 November is mapped, at C1; only the
+      evidence and the adoption wait on the owner.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 939 and 946 (L82,
+        think-o53d), prompted separately from the import lane (L78, think-2h88) and blind to its
+        work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-11'
+      scope: >-
+        Finite feasibility of #939's and #946's rational certificates, decided again by a
+        clean-room exact checker frozen before any producer or repository verifier code was read,
+        by two methods with 21 controls stated in advance, a self-test of 1,700 cases and four
+        mutated checkers; the quintics and their roots, the construction, the cores against
+        T-282, T-284 and Evan Daniel's held solve, the margins, gains and shares RV-3 turns on,
+        custody and credit; reconciled with the import lane after its findings were frozen.
+      verdict: accepted
+      covers:
+      - T-285
+      - T-286
+    unfinished_confirmations:
+    - what: >-
+        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and
+        the stage 4 review's clean-room run, both retained, entered as the stage 4 exit
+      rung: C3
+      link: think-ruu2
+      estimated_cost:
+        cpu_hours: 0.1
+        cpu_hours_high: 0.5
+        basis: >-
+          the replay and the sharp controls ran on 11 November and their receipts are retained;
+          the review is one count; what remains is records work
+        priced: '2026-11-11'
+    regularizations:
+    - n: 172
+      of: T-282
+      by: '[de Winter s172 upper bound 2026-11-10]'
+      method: >-
+        what the source calls the exact local optimum of the arrangement, solved from its contact
+        equations at about 390 digits and certified 1.56e-319 above the root of a quintic
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/identity-n172.json
+        one_to_one: true
+        moved: 0
+        max_move: 0.000141427
+        max_turn_deg: 0.00573
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

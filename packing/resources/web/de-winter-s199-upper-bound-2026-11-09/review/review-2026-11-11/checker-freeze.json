@@ -1,0 +1,8 @@
+{
+ "label": "checker frozen; self-test 1700 cases 0 failures; mutants gap0_overlap 409, one_axes 558, open_halfplanes 429, no_unit_check 5 failures (all caught)",
+ "frozen_at_utc": "2026-11-11T06:22:08Z",
+ "sha256": {
+  "l82_check.py": "03d58e600f67534334e40669f8401a17f308063262122ab98dfc3bdcfef37178",
+  "l82_selftest.py": "18bcc73e17f6c12bdc0443daecaab04adf6846efe17b5a49e982da3f654e8ff9"
+ }
+}
