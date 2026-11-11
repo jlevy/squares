@@ -1,0 +1,308 @@
+{
+ "program": "l109_make_plan.py",
+ "certificate_sha256": "80687bdceef5780f907c7f47a181802fbfb76a026d077aa18f7bb3eaa3ec3833",
+ "definitions": "contact: a margin or clearance of exactly 0; past: 1e-30 beyond it",
+ "controls": [
+  {
+   "id": "G1",
+   "change": "square 237 given square 1's corners",
+   "scope": "whole file, both methods",
+   "stated": "refused: exactly the pair (1, 237) overlapping, margin -1, area 1; no wall outside",
+   "expect": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      1,
+      237
+     ]
+    ],
+    "margin": "-1",
+    "area": "1",
+    "outside": [],
+    "touching_pairs": []
+   }
+  },
+  {
+   "id": "G2",
+   "change": "square 1 translated by (S, 0)",
+   "scope": "square 1's pairs and walls, both methods",
+   "stated": "refused: square 1 outside the right wall only; no pair overlapping or touching (square 1 clears the left wall by 6.089270889989e+00)",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "overlapping_pairs": [],
+    "touching_pairs": []
+   }
+  },
+  {
+   "id": "G3",
+   "change": "square 237's entry deleted (YAML and twin)",
+   "scope": "the reader",
+   "stated": "the reader refuses: 236 squares listed",
+   "expect": {
+    "reader_refuses_with": "236 squares listed, n = 237"
+   }
+  },
+  {
+   "id": "G4",
+   "change": "square 237's id set to 1 (YAML and twin)",
+   "scope": "the reader",
+   "stated": "the reader refuses the id",
+   "expect": {
+    "reader_refuses_with": "square 237: id 1"
+   }
+  },
+  {
+   "id": "G5",
+   "change": "square 1's third corner moved 1e-30 in x",
+   "scope": "square 1, both methods",
+   "stated": "refused: square 1 not a unit square by either method",
+   "expect": {
+    "verdict": "REFUSE",
+    "unit_failures_squares": [
+     1
+    ],
+    "unit_failures_methods": [
+     "A",
+     "B"
+    ]
+   }
+  },
+  {
+   "id": "G6",
+   "change": "every square reflected in its own horizontal centre line (the rotation read the other way)",
+   "scope": "whole file, both methods",
+   "stated": "refused for overlapping pairs (at least one); every square still a unit square, now clockwise, inside, wall contacts unchanged",
+   "expect": {
+    "verdict": "REFUSE",
+    "overlapping_pairs_at_least": 1,
+    "unit_failures": [],
+    "cw_squares": 237,
+    "outside": [],
+    "wall_contacts": [
+     [
+      67,
+      "bottom"
+     ],
+     [
+      152,
+      "left"
+     ],
+     [
+      236,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "G7",
+   "change": "the twin's side altered in its last digit (YAML unchanged)",
+   "scope": "the reader",
+   "stated": "the reader refuses: the twin differs",
+   "expect": {
+    "reader_refuses_with": "the JSON twin differs: $.witness.side: value differs"
+   }
+  },
+  {
+   "id": "G8",
+   "change": "every corner transposed, (x, y) to (y, x)",
+   "scope": "whole file, both methods",
+   "stated": "accepted, contacts transposed, every margin exactly unchanged (same margin-list digest), every square now clockwise",
+   "expect": {
+    "verdict": "ACCEPT",
+    "wall_contacts": [
+     [
+      67,
+      "left"
+     ],
+     [
+      152,
+      "bottom"
+     ],
+     [
+      236,
+      "right"
+     ]
+    ],
+    "margin_list_sha256": "b1fc664626d942800e216795baf43f4461cf79a15c03b04a0afac5898da1bc3a",
+    "cw_squares": 237,
+    "sum_of_clipped_pair_areas": "0"
+   }
+  },
+  {
+   "id": "G9",
+   "change": "the side written as 2p/2q (YAML and twin)",
+   "scope": "the reader",
+   "stated": "the reader refuses: not in lowest terms",
+   "expect": {
+    "reader_refuses_with": "side: not in lowest terms"
+   }
+  },
+  {
+   "id": "S1a",
+   "change": "the side lowered by 1/q, one unit of its own last place",
+   "scope": "every square's walls, both methods",
+   "stated": "refused: exactly [[236, 'top']] outside",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     [
+      236,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1b",
+   "change": "the side lowered by 1e-30",
+   "scope": "every square's walls, both methods",
+   "stated": "refused: exactly [[236, 'top']] outside (least positive far-wall clearance [227, 'top', '3.797445601203e-15'])",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     [
+      236,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1c",
+   "change": "the side set to its 12-place floor, 15.893805580572",
+   "scope": "every square's walls, both methods",
+   "stated": "refused: exactly the squares whose right or top clearance is below the drop of 5.741549617763e-13: [[129, 'right'], [130, 'right'], [131, 'right'], [140, 'right'], [202, 'top'], [209, 'top'], [216, 'top'], [222, 'top'], [227, 'top'], [231, 'top'], [236, 'top']]",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     [
+      129,
+      "right"
+     ],
+     [
+      130,
+      "right"
+     ],
+     [
+      131,
+      "right"
+     ],
+     [
+      140,
+      "right"
+     ],
+     [
+      202,
+      "top"
+     ],
+     [
+      209,
+      "top"
+     ],
+     [
+      216,
+      "top"
+     ],
+     [
+      222,
+      "top"
+     ],
+     [
+      227,
+      "top"
+     ],
+     [
+      231,
+      "top"
+     ],
+     [
+      236,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1d",
+   "change": "the side set to its 12-place ceiling, the claim 15.893805580573",
+   "scope": "every square's walls, both methods",
+   "stated": "accepted, wall contacts [[67, 'bottom'], [152, 'left']] only",
+   "expect": {
+    "verdict": "ACCEPT",
+    "wall_contacts": [
+     [
+      67,
+      "bottom"
+     ],
+     [
+      152,
+      "left"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S4c",
+   "change": "square 20 moved toward square 19 along their centre line to exact contact",
+   "scope": "square 20's pairs and walls, both methods",
+   "stated": "that pair alone touching by both, margin exactly 0; square 20 inside (move 2.049072e-13 shorter than its next margin or clearance 2.087940464717e-13)",
+   "expect": {
+    "verdict": "ACCEPT",
+    "touching_pairs": [
+     [
+      19,
+      20
+     ]
+    ],
+    "overlapping_pairs": [],
+    "outside": [],
+    "margin": "0"
+   }
+  },
+  {
+   "id": "S4p",
+   "change": "the same, 1e-30 past contact",
+   "scope": "square 20's pairs and walls, both methods",
+   "stated": "that pair alone overlapping by both, margin exactly -1e-30",
+   "expect": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      19,
+      20
+     ]
+    ],
+    "touching_pairs": [],
+    "outside": [],
+    "margin": "-1/1000000000000000000000000000000"
+   }
+  },
+  {
+   "id": "S5",
+   "change": "every pair below 1e-12 (192) closed along its centre line, and 1e-30 past",
+   "scope": "pair-level, both methods",
+   "stated": "touching by both at contact with margin exactly 0; overlapping by both past it with margin exactly -1e-30",
+   "expect": {
+    "pairs": 192,
+    "all_as_stated": true
+   }
+  },
+  {
+   "id": "S6",
+   "change": "every square moved to its nearest wall by its clearance, and 1e-30 past",
+   "scope": "square-level, both methods",
+   "stated": "contact at that wall by both; outside it by both past it",
+   "expect": {
+    "squares": 237,
+    "all_as_stated": true
+   }
+  }
+ ]
+}

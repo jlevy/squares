@@ -1,0 +1,331 @@
+{
+ "program": "l109_census.py",
+ "programs_sha256": {
+  "l109_reader.py": "49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79",
+  "l109_axes.py": "6ce32690e2eaba319e5775235e731b8d569065b806645fa67489ac3c4922f8d1",
+  "l109_check.py": "ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932",
+  "l109_census.py": "f838476a1054c6aea37cfcc6480d8f6f2a41783594903bcb6a5cef243ad0c54e"
+ },
+ "decides": "nothing",
+ "pair_margins_below_1": [
+  {
+   "decade": "[1e-13, 1e-12)",
+   "count": 192,
+   "least": [
+    19,
+    20,
+    "2.043794e-13"
+   ],
+   "greatest": [
+    207,
+    213,
+    "5.696662e-13"
+   ],
+   "members": null
+  },
+  {
+   "decade": "[1e-8, 1e-7)",
+   "count": 3,
+   "least": [
+    91,
+    92,
+    "1.759876e-08"
+   ],
+   "greatest": [
+    90,
+    91,
+    "2.322457e-08"
+   ],
+   "members": [
+    [
+     91,
+     92,
+     "1.759876e-08"
+    ],
+    [
+     92,
+     102,
+     "1.956054e-08"
+    ],
+    [
+     90,
+     91,
+     "2.322457e-08"
+    ]
+   ]
+  },
+  {
+   "decade": "[1e-6, 1e-5)",
+   "count": 1,
+   "least": [
+    120,
+    130,
+    "7.393466e-06"
+   ],
+   "greatest": [
+    120,
+    130,
+    "7.393466e-06"
+   ],
+   "members": [
+    [
+     120,
+     130,
+     "7.393466e-06"
+    ]
+   ]
+  },
+  {
+   "decade": "[1e-5, 1e-4)",
+   "count": 106,
+   "least": [
+    16,
+    20,
+    "1.410311e-05"
+   ],
+   "greatest": [
+    51,
+    54,
+    "9.898884e-05"
+   ],
+   "members": null
+  },
+  {
+   "decade": "[1e-4, 1e-3)",
+   "count": 320,
+   "least": [
+    84,
+    93,
+    "1.001365e-04"
+   ],
+   "greatest": [
+    119,
+    131,
+    "9.992977e-04"
+   ],
+   "members": null
+  },
+  {
+   "decade": "[1e-3, 1e-2)",
+   "count": 103,
+   "least": [
+    94,
+    102,
+    "1.003095e-03"
+   ],
+   "greatest": [
+    235,
+    237,
+    "9.820628e-03"
+   ],
+   "members": null
+  },
+  {
+   "decade": "[1e-2, 1e-1)",
+   "count": 49,
+   "least": [
+    79,
+    87,
+    "1.003221e-02"
+   ],
+   "greatest": [
+    39,
+    40,
+    "9.005237e-02"
+   ],
+   "members": null
+  },
+  {
+   "decade": "[1e-1, 1e-0)",
+   "count": 258,
+   "least": [
+    30,
+    106,
+    "1.039776e-01"
+   ],
+   "greatest": [
+    92,
+    103,
+    "9.999999e-01"
+   ],
+   "members": null
+  }
+ ],
+ "positive_wall_clearances_below_1": [
+  {
+   "decade": "[1e-17, 1e-16)",
+   "count": 1,
+   "least": [
+    43,
+    "bottom",
+    "5.004599e-17"
+   ],
+   "greatest": [
+    43,
+    "bottom",
+    "5.004599e-17"
+   ],
+   "members": [
+    [
+     43,
+     "bottom",
+     "5.004599e-17"
+    ]
+   ]
+  },
+  {
+   "decade": "[1e-15, 1e-14)",
+   "count": 3,
+   "least": [
+    227,
+    "top",
+    "3.797446e-15"
+   ],
+   "greatest": [
+    154,
+    "left",
+    "7.578270e-15"
+   ],
+   "members": [
+    [
+     227,
+     "top",
+     "3.797446e-15"
+    ],
+    [
+     231,
+     "top",
+     "6.627950e-15"
+    ],
+    [
+     154,
+     "left",
+     "7.578270e-15"
+    ]
+   ]
+  },
+  {
+   "decade": "[1e-14, 1e-13)",
+   "count": 14,
+   "least": [
+    140,
+    "right",
+    "1.126465e-14"
+   ],
+   "greatest": [
+    222,
+    "top",
+    "3.603294e-14"
+   ],
+   "members": null
+  },
+  {
+   "decade": "[1e-13, 1e-12)",
+   "count": 1,
+   "least": [
+    73,
+    "bottom",
+    "1.199495e-13"
+   ],
+   "greatest": [
+    73,
+    "bottom",
+    "1.199495e-13"
+   ],
+   "members": [
+    [
+     73,
+     "bottom",
+     "1.199495e-13"
+    ]
+   ]
+  },
+  {
+   "decade": "[1e-5, 1e-4)",
+   "count": 27,
+   "least": [
+    136,
+    "right",
+    "1.907489e-05"
+   ],
+   "greatest": [
+    61,
+    "bottom",
+    "9.702584e-05"
+   ],
+   "members": null
+  },
+  {
+   "decade": "[1e-4, 1e-3)",
+   "count": 8,
+   "least": [
+    118,
+    "bottom",
+    "1.182192e-04"
+   ],
+   "greatest": [
+    39,
+    "right",
+    "6.402978e-04"
+   ],
+   "members": null
+  },
+  {
+   "decade": "[1e-3, 1e-2)",
+   "count": 1,
+   "least": [
+    139,
+    "right",
+    "1.894301e-03"
+   ],
+   "greatest": [
+    139,
+    "right",
+    "1.894301e-03"
+   ],
+   "members": [
+    [
+     139,
+     "right",
+     "1.894301e-03"
+    ]
+   ]
+  },
+  {
+   "decade": "[1e-2, 1e-1)",
+   "count": 1,
+   "least": [
+    237,
+    "top",
+    "3.863395e-02"
+   ],
+   "greatest": [
+    237,
+    "top",
+    "3.863395e-02"
+   ],
+   "members": [
+    [
+     237,
+     "top",
+     "3.863395e-02"
+    ]
+   ]
+  },
+  {
+   "decade": "[1e-1, 1e-0)",
+   "count": 7,
+   "least": [
+    27,
+    "top",
+    "5.827819e-01"
+   ],
+   "greatest": [
+    43,
+    "left",
+    "8.938056e-01"
+   ],
+   "members": null
+  }
+ ]
+}
