@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 222
+version: 223
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -86,7 +86,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T21:55:26.589Z
+updated_at: 2026-11-11T21:55:54.356Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -334,3 +334,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 ~21:40Z: L100 handed back #956 (T-291 s(179), adopted at 179, L101 review mapped; head 23473980a; CI queued since 20:28Z and never started). L100's request that the coordinator cancel and re-run the runs was refused: the classifier had already refused L100, so not done. Senior review L106 running. L103 extended #955 (ae88e4262) with de Winter's answers; think-acm0 closed. #958 = de Winter's issue for 132/157, passed to L104/L105. intake label added to #954 and #958.
 
 2026-11-11 ~22:05Z: senior review L106 of #956: nothing blocking. S1: the author's 21:18Z comment on 954 points to #959 (s(179) <= 13.880960371559, 4.07e-4 below T-291). Decision: adopt T-291 now; #959 gets its own lane as T-294 (bead think-89i7; blind review L108 started; import after #956 merges). S2: credit sentence. S3: opened think-71uq (owner decision: notices for upstream starts; think-mdxq closed 4 Nov). L100 is addressing S1-S3, N1-N3 and stamp_landed. L104 handed back #961 (T-292 s(132), T-293 s(157), CI pending; waits for L105). Freed about 7.5 GB (stale scratch clone/work; worktrees l93 and l102).
+
+2026-11-11 21:53Z renewal (intake206): new #960 (Özden s(237) <= 15.893805580573, 8.8e-3 below T-189); bead think-my76; blind review L109 started; import after L100. L105 accepted both of de Winter's 132/157; L104 is mapping and adopting. Corrected my earlier wrong 'past midnight' note to L100/L104: no stamp_landed unless the date is 12 Nov. Intake labels added to #954, #958, #959 and #960. #957's Certificate page run is still in progress (slow runners).
