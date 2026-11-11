@@ -50,9 +50,13 @@ certificate:
 | `l101_identity.py` | the certificate against the house, pose by pose, under eight symmetries and five anchorings | the certificate, the house witness | `out/identity-n179.json` |
 | `l101_band.py` | the tilted bands at 179, 70 and 207, and the stated seed against the new band | the certificate, the house, the 70 and 207 witnesses | `out/band-n179.json` |
 | `l101_custody.py` | read-only Git plumbing on the clone and this repository | the clone, this repository | `out/custody.json` |
+| `l101_compare_lane.py` | the import lane’s receipts against this review’s, after reading them | lane L100’s packet at `2fb0df26c`, this directory’s receipts | `out/compare-lane.json` |
 | `l101_digests.py` | every program and receipt against the kept bytes and the frozen digests | this directory | `out/program-digests.json` |
 
-`run_after.sh SOURCE_DIR REPO_DIR OUT_DIR` reruns them.
+`run_after.sh SOURCE_DIR REPO_DIR OUT_DIR` reruns them, except `l101_compare_lane.py`,
+which reads the import lane’s packet as committed at `2fb0df26c` with its
+`receipts/exact-certification.json.xz` decompressed beside it, and printed
+`LANE_EQUALS_REVIEW`.
 `l101_digests.py` printed `ALL_RECEIPTS_MATCH`.
 
 ## What They Printed
