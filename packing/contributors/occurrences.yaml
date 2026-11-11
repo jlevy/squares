@@ -31956,6 +31956,390 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 941 2026-11-10]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 941 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Couzo, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 941 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Couzo, Levy
+  start: 16
+  end: 21
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 941 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Couzo, Levy
+  start: 23
+  end: 27
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 16
+  end: 27
+  label: Samanyu-dev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 29
+  end: 35
+  label: Deotte
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 37
+  end: 46
+  label: Lavrentev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 48
+  end: 55
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 57
+  end: 67
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 69
+  end: 82
+  label: malyshevdanil
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 84
+  end: 92
+  label: prvsiyan
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 94
+  end: 104
+  label: busyaprime
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 106
+  end: 121
+  label: nilanjansaha123
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 123
+  end: 130
+  label: jazivxt
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 132
+  end: 137
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 16
+  end: 27
+  label: Samanyu-dev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 29
+  end: 35
+  label: Deotte
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 37
+  end: 46
+  label: Lavrentev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 48
+  end: 55
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 57
+  end: 67
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 69
+  end: 82
+  label: malyshevdanil
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 84
+  end: 92
+  label: prvsiyan
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 94
+  end: 104
+  label: busyaprime
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 106
+  end: 121
+  label: nilanjansaha123
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 123
+  end: 130
+  label: jazivxt
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+  start: 132
+  end: 137
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

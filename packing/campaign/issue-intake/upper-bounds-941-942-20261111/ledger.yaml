@@ -1,0 +1,805 @@
+format: intake-ledger-v1
+read_at_main: 8afdabe8fef2c308d6352a48e610924d0c6edb05
+read_on: '2026-11-11'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l90
+  branch: claude/bold-ritchie-xo28us-l90
+  commit: 8afdabe8fef2c308d6352a48e610924d0c6edb05
+  note: The three packets' claim records, written on the lane's branch from main 8afdabe8f
+    and read here by path.
+reports:
+- report: '#941'
+  url: https://github.com/jlevy/squares/issues/941
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-10T13:30:51Z'
+  bead: think-cen3
+  claims:
+  - n: 413
+    printed: '20.8239520077'
+    rounding: up
+    exact: 208239520076197499288366425347451388893772652855846904081/10000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 1, moves 50 squares beyond 0.1, 98 beyond
+        1e-2 and 134 beyond 1e-3 (largest 0.890699), and turns 59 squares by more than 1e-6
+        radians, by up to 36.35 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n413.json
+    new_packing:
+      source: '#941: ''The packings for n = 413, 494, 543, 547, 738, 739 and 810 are square
+        sub-windows of Francisco Couzo''s packings for n = 544, 539, 590, 696, 851, 851 and
+        868 (issue #763 and franciscouzo/square-packing at 43f666c)'''
+      continues: Francisco Couzo's packing at 544 (#763, franciscouzo/square-packing 43f666c),
+        a square sub-window of it re-optimized
+    note: The row's certificate's uniform-contraction margin is 3.997e-9 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n413.json);
+      the gain, 8.120e-4, is 2.032e+05 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 494
+    printed: '22.7365988643'
+    rounding: up
+    exact: 113682994321241/5000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: 'one to one under the identity by nearest centres; the optimal assignment moves
+        0 squares beyond 0.1, 161 beyond 1e-2 and 223 beyond 1e-3 (largest 0.0991599), and
+        turns 163 squares by more than 1e-6 radians, by up to 9.955 degrees; no square moves
+        beyond a tenth: a refinement of the row''s packing'
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n494.json
+    new_packing:
+      source: '#941: ''The packings for n = 413, 494, 543, 547, 738, 739 and 810 are square
+        sub-windows of Francisco Couzo''s packings for n = 544, 539, 590, 696, 851, 851 and
+        868 (issue #763 and franciscouzo/square-packing at 43f666c)'''
+      continues: Francisco Couzo's packing at 539 (#763, franciscouzo/square-packing 43f666c),
+        a square sub-window of it re-optimized
+    note: The row's certificate's uniform-contraction margin is 1.952e-11 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n494.json);
+      the gain, 9.340e-4, is 4.786e+07 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 539
+    printed: '23.7365988643'
+    rounding: up
+    exact: 118682994321241/5000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        5 squares beyond 0.1, 85 beyond 1e-2 and 240 beyond 1e-3 (largest 0.173133), and turns
+        231 squares by more than 1e-6 radians, by up to 5.796 degrees; a further arrangement
+        of the row's packing, one to one with it
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n539.json
+    new_packing:
+      source: '#941: ''The packings for n = 539, 590, 794, 851, 867 and 910 add borders of
+        axis-aligned squares to the packings for n = 494, 543, 739 and 810'''
+      continues: the 494 certificate of this report with a border of 45 axis-aligned squares
+    note: The row's certificate's uniform-contraction margin is 1.868e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n539.json);
+      the gain, 7.081e-5, is 3.791e+07 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 543
+    printed: '23.8024287170'
+    rounding: up
+    exact: 238024287169329998040674496427696418242519321666666032219/10000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of tymchishin-22-3662-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 2, moves 104 squares beyond 0.1, 181 beyond
+        1e-2 and 275 beyond 1e-3 (largest 1.08703), and turns 206 squares by more than 1e-6
+        radians, by up to 26.94 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n543.json
+    new_packing:
+      source: '#941: ''The packings for n = 413, 494, 543, 547, 738, 739 and 810 are square
+        sub-windows of Francisco Couzo''s packings for n = 544, 539, 590, 696, 851, 851 and
+        868 (issue #763 and franciscouzo/square-packing at 43f666c)'''
+      continues: Francisco Couzo's packing at 590 (#763, franciscouzo/square-packing 43f666c),
+        a square sub-window of it re-optimized
+    note: The row's certificate's uniform-contraction margin is 9.144e-9 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n543.json);
+      the gain, 6.245e-4, is 6.83e+04 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 547
+    printed: '23.8787301198'
+    rounding: up
+    exact: 14924206324825788752634162242757998953882708136657540149/625000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one by nearest centres under symmetry 7; the optimal assignment, best
+        under symmetry 7, moves 16 squares beyond 0.1, 85 beyond 1e-2 and 353 beyond 1e-3
+        (largest 0.614324), and turns 289 squares by more than 1e-6 radians, by up to 19.12
+        degrees; a further arrangement of the row's packing, one to one with it
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n547.json
+    new_packing:
+      source: '#941: ''The packings for n = 413, 494, 543, 547, 738, 739 and 810 are square
+        sub-windows of Francisco Couzo''s packings for n = 544, 539, 590, 696, 851, 851 and
+        868 (issue #763 and franciscouzo/square-packing at 43f666c)'''
+      continues: Francisco Couzo's packing at 696 (#763, franciscouzo/square-packing 43f666c),
+        a square sub-window of it re-optimized (the sub-window was already at its local optimum)
+    note: The row's certificate's uniform-contraction margin is 4.804e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n547.json);
+      the gain, 3.975e-4, is 8.275e+07 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 590
+    printed: '24.8024287170'
+    rounding: up
+    exact: 248024287169329998040674496427696418242519321666666032219/10000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment moves 40 squares beyond 0.1, 94 beyond 1e-2 and 288 beyond
+        1e-3 (largest 0.851458), and turns 315 squares by more than 1e-6 radians, by up to
+        1.179 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n590.json
+    new_packing:
+      source: '#941: ''The packings for n = 539, 590, 794, 851, 867 and 910 add borders of
+        axis-aligned squares to the packings for n = 494, 543, 739 and 810'''
+      continues: the 543 certificate of this report with a border of 47 axis-aligned squares
+    note: The row's certificate's uniform-contraction margin is 4.766e-13 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n590.json);
+      the gain, 9.842e-5, is 2.065e+08 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 738
+    printed: '27.6912062515'
+    rounding: up
+    exact: 276912062514327/10000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T06:15:17Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 1, moves 406 squares beyond 0.1, 562 beyond
+        1e-2 and 612 beyond 1e-3 (largest 1.16201), and turns 518 squares by more than 1e-6
+        radians, by up to 45 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n738.json
+    new_packing:
+      source: '#941: ''The packings for n = 413, 494, 543, 547, 738, 739 and 810 are square
+        sub-windows of Francisco Couzo''s packings for n = 544, 539, 590, 696, 851, 851 and
+        868 (issue #763 and franciscouzo/square-packing at 43f666c)'''
+      continues: Francisco Couzo's packing at 851 (#763, franciscouzo/square-packing 43f666c),
+        a square sub-window of it re-optimized
+    note: The row's certificate's uniform-contraction margin is 5.339e-9 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n738.json);
+      the gain, 7.738e-5, is 1.449e+04 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 739
+    printed: '27.6912835939'
+    rounding: up
+    exact: 69228208984663/2500000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T06:15:17Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        19 squares beyond 0.1, 113 beyond 1e-2 and 333 beyond 1e-3 (largest 0.19485), and
+        turns 419 squares by more than 1e-6 radians, by up to 0.4083 degrees; a further arrangement
+        of the row's packing, one to one with it
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n739.json
+    new_packing:
+      source: '#941: ''The packings for n = 413, 494, 543, 547, 738, 739 and 810 are square
+        sub-windows of Francisco Couzo''s packings for n = 544, 539, 590, 696, 851, 851 and
+        868 (issue #763 and franciscouzo/square-packing at 43f666c)'''
+      continues: Francisco Couzo's packing at 851 (#763, franciscouzo/square-packing 43f666c),
+        a square sub-window of it re-optimized
+    note: The row's certificate's uniform-contraction margin is 7.185e-8 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n739.json);
+      the gain, 1.667e-4, is 2320 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 753
+    printed: '27.9026514302'
+    rounding: up
+    exact: 34878314287653/1250000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T06:15:17Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 4, moves 338 squares beyond 0.1, 403 beyond
+        1e-2 and 465 beyond 1e-3 (largest 1.17457), and turns 379 squares by more than 1e-6
+        radians, by up to 34.15 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n753.json
+    new_packing:
+      source: '#941: ''The packing for n = 753 is a sub-window of the n = 810 packing'''
+      continues: the 810 certificate of this report, itself a sub-window of Couzo's packing
+        at 868
+    note: The row's certificate's uniform-contraction margin is 5.672e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n753.json);
+      the gain, 5.333e-3, is 9.402e+08 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 794
+    printed: '28.6912835939'
+    rounding: up
+    exact: 71728208984663/2500000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T06:15:17Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        27 squares beyond 0.1, 46 beyond 1e-2 and 396 beyond 1e-3 (largest 0.864893), and
+        turns 507 squares by more than 1e-6 radians, by up to 0.4084 degrees; a further arrangement
+        of the row's packing, one to one with it
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n794.json
+    new_packing:
+      source: '#941: ''The packings for n = 539, 590, 794, 851, 867 and 910 add borders of
+        axis-aligned squares to the packings for n = 494, 543, 739 and 810'''
+      continues: the 739 certificate of this report with a border of 55 axis-aligned squares
+    note: The row's certificate's uniform-contraction margin is 9.921e-9 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n794.json);
+      the gain, 1.654e-4, is 1.667e+04 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 809
+    printed: '28.9079170470'
+    rounding: up
+    exact: 289079170469143/10000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 6, moves 208 squares beyond 0.1, 413 beyond
+        1e-2 and 506 beyond 1e-3 (largest 1.07115), and turns 347 squares by more than 1e-6
+        radians, by up to 42.86 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n809.json
+    new_packing:
+      source: '#941: ''The packing for n = 809 removes one square from the packing for n =
+        810'''
+      continues: the 810 certificate of this report, one square removed
+    note: The row's certificate's uniform-contraction margin is 5.734e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n809.json);
+      the gain, 1.191e-4, is 2.076e+07 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 810
+    printed: '28.9079170470'
+    rounding: up
+    exact: 289079170469143/10000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 4, moves 122 squares beyond 0.1, 317 beyond
+        1e-2 and 450 beyond 1e-3 (largest 0.899403), and turns 357 squares by more than 1e-6
+        radians, by up to 37.32 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n810.json
+    new_packing:
+      source: '#941: ''The packings for n = 413, 494, 543, 547, 738, 739 and 810 are square
+        sub-windows of Francisco Couzo''s packings for n = 544, 539, 590, 696, 851, 851 and
+        868 (issue #763 and franciscouzo/square-packing at 43f666c)'''
+      continues: Francisco Couzo's packing at 868 (#763, franciscouzo/square-packing 43f666c),
+        a square sub-window of it re-optimized
+    note: The row's certificate's uniform-contraction margin is 5.834e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n810.json);
+      the gain, 2.534e-3, is 4.344e+08 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 851
+    printed: '29.6912835939'
+    rounding: up
+    exact: 74228208984663/2500000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T06:15:17Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        28 squares beyond 0.1, 47 beyond 1e-2 and 397 beyond 1e-3 (largest 0.977634), and
+        turns 526 squares by more than 1e-6 radians, by up to 0.4084 degrees; a further arrangement
+        of the row's packing, one to one with it
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n851.json
+    new_packing:
+      source: '#941: ''The packings for n = 539, 590, 794, 851, 867 and 910 add borders of
+        axis-aligned squares to the packings for n = 494, 543, 739 and 810'''
+      continues: the 794 certificate of this report with a border of 57 axis-aligned squares
+    note: The row's certificate's uniform-contraction margin is 4.830e-9 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n851.json);
+      the gain, 1.654e-4, is 3.424e+04 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 867
+    printed: '29.9079170470'
+    rounding: up
+    exact: 299079170469143/10000000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-09T23:59:23Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 5, moves 367 squares beyond 0.1, 439 beyond
+        1e-2 and 574 beyond 1e-3 (largest 1.20131), and turns 382 squares by more than 1e-6
+        radians, by up to 41 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue941-2026-11-10/measure/identity-n867.json
+    new_packing:
+      source: '#941: ''The packings for n = 539, 590, 794, 851, 867 and 910 add borders of
+        axis-aligned squares to the packings for n = 494, 543, 739 and 810'''
+      continues: the 810 certificate of this report with a border of 57 axis-aligned squares
+    note: The row's certificate's uniform-contraction margin is 3.819e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n867.json);
+      the gain, 1.191e-4, is 3.117e+07 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 910
+    printed: '30.6912835939'
+    rounding: up
+    exact: 76728208984663/2500000000000
+    exact_from: packing/resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T06:15:17Z'
+    new_packing:
+      source: '#941: ''The packings for n = 539, 590, 794, 851, 867 and 910 add borders of
+        axis-aligned squares to the packings for n = 494, 543, 739 and 810'''
+      continues: the 851 certificate of this report with a border of 59 axis-aligned squares
+    note: 'No n-square certificate states the row at 910: it is Couzo''s n851.cert at 964ee2b,
+      one L step, so the pose-by-pose measurement has nothing to compare with here; the 851
+      measurement covers it, since both are L steps on their 851s. The row is an L-border
+      construction on Couzo''s n851.cert at 964ee2b, one L step, so its padding is its base''s:
+      that certificate''s uniform-contraction margin is 4.830e-9 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n910-base-n851.json),
+      and the gain, 1.654e-4, is 3.424e+04 times it, far outside it; not RV-3 material.'
+  note: 'The issue names 71da0d5 (committed 2026-11-10T06:15:17Z). d3a020e (2026-11-09T23:59:23Z)
+    first published the certificates at 413, 494, 539, 543, 547, 590, 809, 810 and 867, 13.5
+    hours before the issue, and 71da0d5 the other six; 71da0d5 touches no earlier certificate.
+    The issue dates every claim and each first commit is kept, as #763''s ledger did; no other
+    report reached any of these counts between d3a020e and the issue, so the verdicts are
+    the same if d3a020e is read as the report of its nine. Push times were not read (the activity
+    log and events API refused this session). The issue''s remark that public Kaggle files
+    hold smaller packings at 14 of the 15 counts names no packing that reached this repository.'
+- report: '#942'
+  url: https://github.com/jlevy/squares/issues/942
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-10T14:41:18Z'
+  bead: think-cen3
+  claims:
+  - n: 632
+    printed: '25.6456954277'
+    rounding: up
+    exact: 12822847713813/500000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    note: 'The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row''s. No n-square certificate states the row at 632: it is Couzo''s n583.cert at 43f666c,
+      one L step, so the pose-by-pose measurement has nothing to compare with. The row is
+      an L-border construction on Couzo''s n583.cert at 43f666c, one L step, so its padding
+      is its base''s: that certificate''s uniform-contraction margin is 4.903e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n632-base-n583.json),
+      and the gain, 1.116e-2, is 2.276e+09 times it, far outside it; not RV-3 material.'
+  - n: 637
+    printed: '25.7447388658'
+    rounding: up
+    exact: 257447388657659/10000000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 5, moves 320 squares beyond 0.1, 635 beyond
+        1e-2 and 636 beyond 1e-3 (largest 1.12069), and turns 293 squares by more than 1e-6
+        radians, by up to 31.59 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n637.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 5.474e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n637.json);
+      the gain, 2.455e-2, is 4.485e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 655
+    printed: '25.9996711101'
+    rounding: up
+    exact: 259996711100571/10000000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    note: 'The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row''s. No row stands at 655: the start is the grid, 26, below Göbel''s construction
+      26 + sqrt(2)/2. The standing side is the grid ceil(sqrt(655)) = 26, which no certificate
+      states, so there is no padding to measure.'
+  - n: 684
+    printed: '26.6456964776'
+    rounding: up
+    exact: 66614241193789/2500000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment moves 278 squares beyond 0.1, 574 beyond 1e-2 and 583 beyond
+        1e-3 (largest 1.10856), and turns 227 squares by more than 1e-6 radians, by up to
+        45 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n684.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 5.423e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n684.json);
+      the gain, 1.116e-2, is 2.058e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 685
+    printed: '26.6870020013'
+    rounding: up
+    exact: 66717505003039/2500000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of tymchishin-reclosure-v3-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 7, moves 433 squares beyond 0.1, 460 beyond
+        1e-2 and 485 beyond 1e-3 (largest 1.15072), and turns 399 squares by more than 1e-6
+        radians, by up to 45 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n685.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 2.877e-10 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n685.json);
+      the gain, 5.386e-3, is 1.872e+07 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 744
+    printed: '27.7601633593'
+    rounding: up
+    exact: 55520326718509/2000000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    note: 'The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row''s. No n-square certificate states the row at 744: it is Couzo''s n691.cert at 43f666c,
+      one L step, so the pose-by-pose measurement has nothing to compare with. The row is
+      an L-border construction on Couzo''s n691.cert at 43f666c, one L step, so its padding
+      is its base''s: that certificate''s uniform-contraction margin is 5.588e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n744-base-n691.json),
+      and the gain, 2.655e-2, is 4.752e+09 times it, far outside it; not RV-3 material.'
+  - n: 750
+    printed: '27.8595204745'
+    rounding: up
+    exact: 34824400593063/1250000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment moves 255 squares beyond 0.1, 381 beyond 1e-2 and 508 beyond
+        1e-3 (largest 1.24108), and turns 335 squares by more than 1e-6 radians, by up to
+        41.79 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n750.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 3.169e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n750.json);
+      the gain, 1.507e-2, is 4.754e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 756
+    printed: '27.9245802503'
+    rounding: up
+    exact: 279245802502239/10000000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 6, moves 279 squares beyond 0.1, 754 beyond
+        1e-2 and 756 beyond 1e-3 (largest 1.12032), and turns 345 squares by more than 1e-6
+        radians, by up to 42.17 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n756.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 5.640e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n756.json);
+      the gain, 2.502e-2, is 4.436e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 805
+    printed: '28.8450303356'
+    rounding: up
+    exact: 72112575838759/2500000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 7, moves 333 squares beyond 0.1, 770 beyond
+        1e-2 and 802 beyond 1e-3 (largest 1.16517), and turns 571 squares by more than 1e-6
+        radians, by up to 22.06 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n805.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 5.819e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n805.json);
+      the gain, 1.319e-2, is 2.266e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 814
+    printed: '28.9549571055'
+    rounding: up
+    exact: 36193696381817/1250000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 7, moves 233 squares beyond 0.1, 369 beyond
+        1e-2 and 463 beyond 1e-3 (largest 1.12729), and turns 309 squares by more than 1e-6
+        radians, by up to 37.97 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n814.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 1.582e-11 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n814.json);
+      the gain, 6.484e-3, is 4.098e+08 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 918
+    printed: '30.7867372035'
+    rounding: up
+    exact: 307867372034777/10000000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 1, moves 250 squares beyond 0.1, 465 beyond
+        1e-2 and 548 beyond 1e-3 (largest 1.08473), and turns 458 squares by more than 1e-6
+        radians, by up to 43.42 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n918.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 6.276e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n918.json);
+      the gain, 9.320e-3, is 1.485e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 921
+    printed: '30.8271449853'
+    rounding: up
+    exact: 308271449852089/10000000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 3, moves 383 squares beyond 0.1, 599 beyond
+        1e-2 and 897 beyond 1e-3 (largest 1.14301), and turns 621 squares by more than 1e-6
+        radians, by up to 41.94 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n921.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 6.242e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n921.json);
+      the gain, 1.248e-2, is 1.999e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 924
+    printed: '30.8553857463'
+    rounding: up
+    exact: 38569232182759/1250000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 6, moves 176 squares beyond 0.1, 913 beyond
+        1e-2 and 918 beyond 1e-3 (largest 0.957076), and turns 799 squares by more than 1e-6
+        radians, by up to 39.19 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n924.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 1.683e-11 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n924.json);
+      the gain, 1.544e-2, is 9.177e+08 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 935
+    printed: '30.9800571865'
+    rounding: up
+    exact: 154900285932009/5000000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-964ee2b-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 3, moves 410 squares beyond 0.1, 927 beyond
+        1e-2 and 933 beyond 1e-3 (largest 1.26573), and turns 442 squares by more than 1e-6
+        radians, by up to 35.91 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n935.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 6.323e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n935.json);
+      the gain, 1.412e-2, is 2.233e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 970
+    printed: '31.6389903231'
+    rounding: up
+    exact: 79097475807631/2500000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    note: 'The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row''s. No n-square certificate states the row at 970: it is Couzo''s n850.cert at 964ee2b,
+      two L steps (850 to 909 to 970), so the pose-by-pose measurement has nothing to compare
+      with. The row is an L-border construction on Couzo''s n850.cert at 964ee2b, two L steps
+      (850 to 909 to 970), so its padding is its base''s: that certificate''s uniform-contraction
+      margin is 6.115e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n970-base-n850.json),
+      and the gain, 1.786e-2, is 2.921e+09 times it, far outside it; not RV-3 material.'
+  - n: 989
+    printed: '31.8889473785'
+    rounding: up
+    exact: 318889473784151/10000000000000
+    exact_from: packing/resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T14:39:52Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 7, moves 427 squares beyond 0.1, 540 beyond
+        1e-2 and 549 beyond 1e-3 (largest 1.28441), and turns 474 squares by more than 1e-6
+        radians, by up to 40.1 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue942-2026-11-10/measure/identity-n989.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 6.472e-12 (packing/resources/web/de-winter-issue942-2026-11-10/measure/contraction-n989.json);
+      the gain, 2.073e-2, is 3.203e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  note: The issue names a9486ed, committed at 2026-11-10T14:39:52Z, 86 seconds before the
+    issue; push not read. Its 'best public competition value' column quotes Kaggle packings
+    no report brought to this repository, so none is a report here.
+- report: '#942 addendum'
+  url: https://github.com/jlevy/squares/issues/942#issuecomment-6772308414
+  kind: comment
+  holders: Joost de Winter
+  reported_at: '2026-11-10T16:02:47Z'
+  bead: think-cen3
+  claims:
+  - n: 597
+    printed: '24.8969258585'
+    rounding: up
+    exact: 124484629292487/5000000000000
+    exact_from: packing/resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T15:37:44Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 2, moves 262 squares beyond 0.1, 293 beyond
+        1e-2 and 337 beyond 1e-3 (largest 1.1258), and turns 300 squares by more than 1e-6
+        radians, by up to 36.7 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/identity-n597.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 4.779e-9 (packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/contraction-n597.json);
+      the gain, 4.225e-3, is 8.84e+05 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 754
+    printed: '27.9075316299'
+    rounding: up
+    exact: 1090137954291/39062500000
+    exact_from: packing/resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T15:37:44Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 3, moves 327 squares beyond 0.1, 728 beyond
+        1e-2 and 751 beyond 1e-3 (largest 1.22445), and turns 428 squares by more than 1e-6
+        radians, by up to 22.73 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/identity-n754.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 1.417e-11 (packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/contraction-n754.json);
+      the gain, 1.289e-2, is 9.096e+08 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 864
+    printed: '29.8530288378'
+    rounding: up
+    exact: 298530288377057/10000000000000
+    exact_from: packing/resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T15:37:44Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 3, moves 349 squares beyond 0.1, 842 beyond
+        1e-2 and 863 beyond 1e-3 (largest 1.11735), and turns 471 squares by more than 1e-6
+        radians, by up to 21.88 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/identity-n864.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 1.628e-11 (packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/contraction-n864.json);
+      the gain, 2.084e-2, is 1.28e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 865
+    printed: '29.8693054513'
+    rounding: up
+    exact: 298693054512023/10000000000000
+    exact_from: packing/resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T15:37:44Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 3, moves 243 squares beyond 0.1, 745 beyond
+        1e-2 and 863 beyond 1e-3 (largest 1.12571), and turns 498 squares by more than 1e-6
+        radians, by up to 42.11 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/identity-n865.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 6.128e-12 (packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/contraction-n865.json);
+      the gain, 1.451e-2, is 2.368e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 869
+    printed: '29.9122235088'
+    rounding: up
+    exact: 59824447017591/2000000000000
+    exact_from: packing/resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T15:37:44Z'
+    measured:
+      against: the row of couzo-issue763-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 1, moves 279 squares beyond 0.1, 382 beyond
+        1e-2 and 814 beyond 1e-3 (largest 0.939651), and turns 648 squares by more than 1e-6
+        radians, by up to 36.7 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/identity-n869.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 5.640e-13 (packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/contraction-n869.json);
+      the gain, 1.015e-3, is 1.8e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 991
+    printed: '31.9019684133'
+    rounding: up
+    exact: 319019684132617/10000000000000
+    exact_from: packing/resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l90@8afdabe8fef2c308d6352a48e610924d0c6edb05
+    first_committed: '2026-11-10T15:37:44Z'
+    measured:
+      against: the row of couzo-43f666c-2026-10-24
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 1, moves 343 squares beyond 0.1, 991 beyond
+        1e-2 and 991 beyond 1e-3 (largest 1.06507), and turns 486 squares by more than 1e-6
+        radians, by up to 22.69 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/identity-n991.json
+    note: The source calls it a public competition packing from the merged Kaggle file, re-optimized
+      with the arrangement unchanged; no report brought that packing to this repository, so
+      it refines no packing the record holds, and the measurement names its relation to the
+      row's. The row's certificate's uniform-contraction margin is 6.796e-12 (packing/resources/web/de-winter-a0c4fc8-2026-11-10/measure/contraction-n991.json);
+      the gain, 3.259e-2, is 4.796e+09 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  note: The author's comment of 16:02:47Z names a0c4fc8, committed at 2026-11-10T15:37:44Z,
+    25 minutes before it; the commit has no issue of its own. The comment dates the six claims
+    and the commit is kept as each one's first commit; nothing else reached these counts in
+    between, so the verdicts are the same if the commit is read as the report. Push not read.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+cross_check: []

@@ -5138,6 +5138,73 @@ sources:
       outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also
       carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in
       the credit's ASCII. Retained in web/ozden-s269-upper-bound-2026-11-11/.
+  - key: '[de Winter issue 941 2026-11-10]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: de Winter after Couzo, Levy
+    short_credit: de Winter after Couzo et al.
+    note: >-
+      JoostdeWinter/square-packing at 71da0d56fd91b7061addca2a728ee72ec9728b0b
+      (2026-11-10T06:15:17Z), the folder above324/: Joost de Winter's fifteen exact rational
+      centre/half-angle certificates in Evan Daniel's format beyond the case corpus, at 413 to 910,
+      nine of them first committed at d3a020e (2026-11-09T23:59:23Z), reported in
+      jlevy/squares#941. Seven are square sub-windows of Francisco Couzo's packings at 544, 539,
+      590, 696, 851, 851 and 868 (#763, franciscouzo/square-packing 43f666c), re-optimized, 753 a
+      sub-window of the 810 here, six are borders of axis-aligned squares on these and 809 the 810
+      less one square; the issue credits the source arrangements to Couzo. Beyond-horizon rows below
+      the rows of Couzo and Kirill Tymchishin at those counts. The source says the work was
+      produced with Claude (Anthropic) under his direction. No local or global optimality claim is
+      replayed; the issue's local-optimality statements rest on a numerical solution without
+      formal proof. The lineage builds on this project: the source arrangements are Couzo's
+      packings as #763 reported them here, and the issue compares with this repository's record.
+      Licensed MIT by LICENSE at the pin. Retained in web/de-winter-issue941-2026-11-10/.
+  - key: '[de Winter issue 942 2026-11-10]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: independent
+    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    short_credit: de Winter after Samanyu-dev et al.
+    note: >-
+      JoostdeWinter/square-packing at a9486ede74cd75996f488605f27d7fce32a73b3a
+      (2026-11-10T14:39:52Z), the folder above324_refined/: Joost de Winter's sixteen exact
+      rational certificates beyond the case corpus, at 632 to 989, reported in jlevy/squares#942.
+      Each is a public Kaggle packing for the competition "Squares in Squares" from the per-puzzle
+      merge data_out/best_certified_22.2226173_before_clearance.csv in
+      Samanyu-dev/squares_in_squares at 53551d7, locally re-optimized along a remaining descent
+      direction with the arrangement unchanged. The merged file names no author per packing; its
+      README credits Chris Deotte, lightningv08 (Vladislav Lavrentev), alexchilton (Alex Chilton),
+      kirilltym (Kirill Tymchishin), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt
+      and the register of Francisco Couzo, and the credit follows it. Beyond-horizon rows below the
+      record's rows at those counts. The source says the work was produced with Claude (Anthropic)
+      under his direction. No local or global optimality claim. The lineage is independent: the
+      arrangements are public Kaggle packings, and the source compares with this repository's
+      register without building on it. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-issue942-2026-11-10/.
+  - key: '[de Winter a0c4fc8 2026-11-10]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: independent
+    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    short_credit: de Winter after Samanyu-dev et al.
+    note: >-
+      JoostdeWinter/square-packing at a0c4fc80db67e9806026921654dce49a155ac31b
+      (2026-11-10T15:37:44Z): six more of Joost de Winter's exact rational certificates in
+      above324_refined/, at 597, 754, 864, 865, 869 and 991, reported by his addendum comment on
+      jlevy/squares#942 (issuecomment-6772308414, 16:02:47Z), from the same procedure and merged
+      Kaggle file as the issue's sixteen, with the arrangements unchanged; credited as
+      [de Winter issue 942 2026-11-10] is. Beyond-horizon rows below the record's rows at those
+      counts. Claude assistance disclosed. No local or global optimality claim. Licensed MIT by
+      LICENSE at the pin. Retained in web/de-winter-a0c4fc8-2026-11-10/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden

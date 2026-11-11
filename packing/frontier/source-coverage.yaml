@@ -12824,6 +12824,137 @@ sources:
     it as its house that day. The ledger of 11 November for this lane
     (campaign/issue-intake/upper-bounds-943-947-20261111) records it. All 3 native jobs have
     full outcomes.
+- id: de-winter-issue941-2026-11-10
+  title: Joost de Winter's fifteen certificates above the corpus at JoostdeWinter/square-packing 71da0d5 (nine first committed at d3a020e), issue 941
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/71da0d56fd91b7061addca2a728ee72ec9728b0b/above324
+  local: resources/web/de-winter-issue941-2026-11-10/
+  source_key: '[de Winter issue 941 2026-11-10]'
+  scope:
+    n_values:
+    - 413
+    - 494
+    - 539
+    - 543
+    - 547
+    - 590
+    - 738
+    - 739
+    - 753
+    - 794
+    - 809
+    - 810
+    - 851
+    - 867
+    - 910
+  reviewed: '2026-11-11'
+  source_date: '2026-11-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/de-winter-issue941-2026-11-10/acquisition/claims.json
+  - resources/web/de-winter-issue941-2026-11-10/acquisition/beyond-horizon-claims.json
+  evidence:
+  - E-de-winter-941-certificate-report
+  notes: >-
+    Joost de Winter's 15 exact rational certificates of issue 941 at 413 to 910, in the folder
+    above324/ of his watched repository at 71da0d5, the commit the issue names; nine were first
+    committed at d3a020e (2026-11-09T23:59:23Z) and six at 71da0d5 (2026-11-10T06:15:17Z), and each
+    is admitted only where its exact side rounds up to the side the issue prints at 10 places. The
+    issue says seven are square sub-windows of Francisco Couzo's packings at 544, 539, 590, 696,
+    851, 851 and 868 (issue 763, 43f666c), re-optimized, 753 a sub-window of the 810 here, six
+    borders of axis-aligned squares on these and 809 the 810 less one square. The ledger of 11
+    November for this import (campaign/issue-intake/upper-bounds-941-942-20261111), walked from
+    starts frozen at main 8afdabe8f, records all 15 as current beyond-horizon rows, 7.08e-05 to
+    5.33e-03 below the rows of couzo-issue763-2026-10-23, couzo-43f666c-2026-10-24,
+    tymchishin-22-3662-2026-10-23 and couzo-issue763-2026-10-23-recipes, which they supersede, and
+    below Göbel's construction; both maintained routes accept all 15 certificates and refuse their
+    gross and sharp controls (the packet's receipts). Assurance stays reported until the stage 4
+    review is mapped.
+  claims_record: resources/web/de-winter-issue941-2026-11-10/acquisition/beyond-horizon-claims.json
+- id: de-winter-issue942-2026-11-10
+  title: Joost de Winter's sixteen certificates above the corpus at JoostdeWinter/square-packing a9486ed, issue 942
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a9486ede74cd75996f488605f27d7fce32a73b3a/above324_refined
+  local: resources/web/de-winter-issue942-2026-11-10/
+  source_key: '[de Winter issue 942 2026-11-10]'
+  scope:
+    n_values:
+    - 632
+    - 637
+    - 655
+    - 684
+    - 685
+    - 744
+    - 750
+    - 756
+    - 805
+    - 814
+    - 918
+    - 921
+    - 924
+    - 935
+    - 970
+    - 989
+  reviewed: '2026-11-11'
+  source_date: '2026-11-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/de-winter-issue942-2026-11-10/acquisition/claims.json
+  - resources/web/de-winter-issue942-2026-11-10/acquisition/beyond-horizon-claims.json
+  evidence:
+  - E-de-winter-942-certificate-report
+  notes: >-
+    Joost de Winter's 16 exact rational certificates of issue 942 at 632 to 989, in the folder
+    above324_refined/ of his watched repository at a9486ed, the commit the issue names
+    (2026-11-10T14:39:52Z, 1 minute 26 seconds before the issue), each admitted only where its exact
+    side rounds up to the side the issue prints at 10 places. The issue says each is a public Kaggle
+    packing from the per-puzzle merge in Samanyu-dev/squares_in_squares 53551d7, locally
+    re-optimized along a remaining descent direction with the arrangement unchanged. The ledger of
+    11 November for this import (campaign/issue-intake/upper-bounds-941-942-20261111) records all 16
+    as current beyond-horizon rows, 5.39e-03 to 2.66e-02 below the rows they supersede
+    (couzo-43f666c-2026-10-24, couzo-issue763-2026-10-23, couzo-964ee2b-2026-10-23,
+    couzo-issue763-2026-10-23-recipes and tymchishin-reclosure-v3-2026-10-23) and, at 655, below the
+    grid and Göbel's construction; both maintained routes accept all 16 certificates and refuse
+    their gross and sharp controls (the packet's receipts). Assurance stays reported until the stage
+    4 review is mapped.
+  claims_record: resources/web/de-winter-issue942-2026-11-10/acquisition/beyond-horizon-claims.json
+- id: de-winter-a0c4fc8-2026-11-10
+  title: Joost de Winter's six certificates above the corpus at JoostdeWinter/square-packing a0c4fc8, issue 942's addendum
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a0c4fc80db67e9806026921654dce49a155ac31b/above324_refined
+  local: resources/web/de-winter-a0c4fc8-2026-11-10/
+  source_key: '[de Winter a0c4fc8 2026-11-10]'
+  scope:
+    n_values:
+    - 597
+    - 754
+    - 864
+    - 865
+    - 869
+    - 991
+  reviewed: '2026-11-11'
+  source_date: '2026-11-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/claims.json
+  - resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/beyond-horizon-claims.json
+  evidence:
+  - E-de-winter-a0c4fc8-certificate-report
+  notes: >-
+    Joost de Winter's six exact rational certificates at 597, 754, 864, 865, 869 and 991, added to
+    above324_refined/ of his watched repository at a0c4fc8 (2026-11-10T15:37:44Z) and reported 25
+    minutes later by #942's addendum comment issuecomment-6772308414, which names the commit; each
+    is admitted only where its exact side rounds up to the side the addendum prints at 10 places.
+    The addendum says they come from the same procedure and source file as #942's sixteen. The
+    ledger of 11 November for this import (campaign/issue-intake/upper-bounds-941-942-20261111)
+    records all six as current beyond-horizon rows, 1.02e-03 to 3.26e-02 below the rows of
+    couzo-issue763-2026-10-23 and couzo-43f666c-2026-10-24, which they supersede; both maintained
+    routes accept all six certificates and refuse their gross and sharp controls (the packet's
+    receipts). Assurance stays reported until the stage 4 review is mapped.
+  claims_record: resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/beyond-horizon-claims.json
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -27684,7 +27815,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.824764038662'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 414
   source_id: couzo-issue763-2026-10-23
@@ -27813,7 +27945,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.737532875219'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 495
   source_id: couzo-issue763-2026-10-23
@@ -27907,7 +28040,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.736669673811'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 542
   source_id: couzo-issue763-2026-10-23
@@ -27943,7 +28077,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.879127653315'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 548
   source_id: couzo-issue763-2026-10-23
@@ -28029,7 +28164,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.802527132871'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 591
   source_id: couzo-issue763-2026-10-23
@@ -28066,7 +28202,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.901150566387'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-a0c4fc8-2026-11-10
   bead: think-ptkk
 - n: 598
   source_id: couzo-issue763-2026-10-23
@@ -28380,7 +28517,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.691450272099'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 742
   source_id: couzo-issue763-2026-10-23
@@ -28416,7 +28554,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.874585541193'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-ptkk
 - n: 752
   source_id: couzo-issue763-2026-10-23
@@ -28431,7 +28570,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.907984230435'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 754
   source_id: couzo-issue763-2026-10-23
@@ -28477,7 +28617,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.691448980966'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 797
   source_id: couzo-issue763-2026-10-23
@@ -28528,7 +28669,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.858216341607'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-ptkk
 - n: 806
   source_id: couzo-issue763-2026-10-23
@@ -28551,14 +28693,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.908036098650'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 810
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '28.910451045451'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 811
   source_id: couzo-issue763-2026-10-23
@@ -28588,7 +28732,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.961440808824'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-ptkk
 - n: 815
   source_id: couzo-issue763-2026-10-23
@@ -28610,7 +28755,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.691448975560'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 855
   source_id: couzo-issue763-2026-10-23
@@ -28683,7 +28829,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.913238532580'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-a0c4fc8-2026-11-10
   bead: think-ptkk
 - n: 870
   source_id: couzo-issue763-2026-10-23
@@ -28758,7 +28905,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.839621660274'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-ptkk
 - n: 922
   source_id: couzo-issue763-2026-10-23
@@ -29032,7 +29180,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.994174058119'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-ptkk
 - n: 998
   source_id: couzo-964ee2b-2026-10-23
@@ -29783,7 +29932,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.692388159732'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-lyf9
 - n: 732
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -30041,7 +30191,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.803053261145'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-lyf9
 - n: 639
   source_id: tymchishin-22-3662-2026-10-23
@@ -30551,7 +30702,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.691448975560'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-g2qy
 - n: 966
   source_id: couzo-issue763-2026-10-23-recipes
@@ -30565,7 +30717,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.656854249499'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-g2qy
 - n: 330
   source_id: couzo-43f666c-2026-10-24
@@ -30845,14 +30998,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.656854249498'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-gn29
 - n: 637
   source_id: couzo-43f666c-2026-10-24
   claim: upper-bound
   value: '25.769289510287'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-gn29
 - n: 641
   source_id: couzo-43f666c-2026-10-24
@@ -30908,7 +31063,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.656854249498'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-gn29
 - n: 689
   source_id: couzo-43f666c-2026-10-24
@@ -30992,7 +31148,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.691283629524'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-gn29
 - n: 742
   source_id: couzo-43f666c-2026-10-24
@@ -31006,7 +31163,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.786715806974'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-gn29
 - n: 745
   source_id: couzo-43f666c-2026-10-24
@@ -31048,7 +31206,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.920422831462'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-a0c4fc8-2026-11-10
   bead: think-gn29
 - n: 755
   source_id: couzo-43f666c-2026-10-24
@@ -31062,7 +31221,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.949602638227'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-gn29
 - n: 757
   source_id: couzo-43f666c-2026-10-24
@@ -31216,21 +31376,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.873870986621'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-a0c4fc8-2026-11-10
   bead: think-gn29
 - n: 865
   source_id: couzo-43f666c-2026-10-24
   claim: upper-bound
   value: '29.883815809125'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-a0c4fc8-2026-11-10
   bead: think-gn29
 - n: 867
   source_id: couzo-43f666c-2026-10-24
   claim: upper-bound
   value: '29.908036097699'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-gn29
 - n: 870
   source_id: couzo-43f666c-2026-10-24
@@ -31279,7 +31442,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.796057688423'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-gn29
 - n: 919
   source_id: couzo-43f666c-2026-10-24
@@ -31293,7 +31457,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.870828693406'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-gn29
 - n: 929
   source_id: couzo-43f666c-2026-10-24
@@ -31377,14 +31542,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.909679351448'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue942-2026-11-10
   bead: think-gn29
 - n: 991
   source_id: couzo-43f666c-2026-10-24
   claim: upper-bound
   value: '31.934561612655'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-a0c4fc8-2026-11-10
   bead: think-gn29
 - n: 992
   source_id: couzo-43f666c-2026-10-24
@@ -31596,4 +31763,263 @@ beyond_horizon_claims:
   assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-h96r
+- n: 413
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '20.8239520077'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 494
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '22.7365988643'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 539
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '23.7365988643'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 543
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '23.8024287170'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 547
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '23.8787301198'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 590
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '24.8024287170'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 738
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '27.6912062515'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 739
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '27.6912835939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 753
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '27.9026514302'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 794
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '28.6912835939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 809
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '28.9079170470'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 810
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '28.9079170470'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 851
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '29.6912835939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 867
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '29.9079170470'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 910
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '30.6912835939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 632
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '25.6456954277'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 637
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '25.7447388658'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 655
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '25.9996711101'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 684
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '26.6456964776'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 685
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '26.6870020013'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 744
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '27.7601633593'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 750
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '27.8595204745'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 756
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '27.9245802503'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 805
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '28.8450303356'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 814
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '28.9549571055'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 918
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '30.7867372035'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 921
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '30.8271449853'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 924
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '30.8553857463'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 935
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '30.9800571865'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 970
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '31.6389903231'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 989
+  source_id: de-winter-issue942-2026-11-10
+  claim: upper-bound
+  value: '31.8889473785'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 597
+  source_id: de-winter-a0c4fc8-2026-11-10
+  claim: upper-bound
+  value: '24.8969258585'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 754
+  source_id: de-winter-a0c4fc8-2026-11-10
+  claim: upper-bound
+  value: '27.9075316299'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 864
+  source_id: de-winter-a0c4fc8-2026-11-10
+  claim: upper-bound
+  value: '29.8530288378'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 865
+  source_id: de-winter-a0c4fc8-2026-11-10
+  claim: upper-bound
+  value: '29.8693054513'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 869
+  source_id: de-winter-a0c4fc8-2026-11-10
+  claim: upper-bound
+  value: '29.9122235088'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 991
+  source_id: de-winter-a0c4fc8-2026-11-10
+  claim: upper-bound
+  value: '31.9019684133'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
 pending_catalogue_intake: []

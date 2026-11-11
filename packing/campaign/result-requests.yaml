@@ -30725,3 +30725,138 @@ issues:
       (F7); which replay is intended, certificate.replay or the README's rerun, and from which
       directory, and whether the schema path could name this repository's file (F12, F13). No
       reply has been posted.
+  - number: 941
+    title: 'Fifteen lowered upper bounds for n between 413 and 910: registration request'
+    author: JoostdeWinter
+    opened: '2026-11-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter (Delft University of Technology) asks for the registration of fifteen upper
+      bounds beyond the case corpus, at 413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 809, 810,
+      851, 867 and 910, each the exact rational side of a certificate in above324/ at
+      JoostdeWinter/square-packing 71da0d5, rounded up at 10 places; nine were first committed at
+      d3a020e, 13.5 hours before the issue. Seven are square sub-windows of Francisco Couzo's
+      packings at 544, 539, 590, 696, 851, 851 and 868, re-optimized, 753 a sub-window of the 810
+      here, six are borders of axis-aligned squares on these and 809 is the 810 less one square.
+      The issue says the sides at 413, 543 and 547 lie within 1e-43 of their arrangements' local
+      optima by a 65-digit numerical solution, with no formal proof, that his own two checkers in
+      Python's Fraction accept all fifteen, and that the work was produced with Claude under his
+      direction. Triaged and retained on 11 November 2026 in lane L90 (think-cen3): the
+      de-winter-issue941-2026-11-10 packet retains the folder under the source's MIT licence,
+      every digest in its SHA256SUMS holds, every print is the exact side rounded up, and both
+      maintained exact routes accept all fifteen and refuse their gross and sharp controls. Each
+      is 7.08e-05 (539) to 5.33e-03 (753) below the standing beyond-horizon row, and the ledger of
+      11 November records all fifteen as current rows. Assurance reported until the stage 4
+      review is mapped. Claude assistance disclosed.
+    read_through: '2026-11-10T13:30:51Z'
+    results:
+    - key: above324-15
+      claim: >-
+        s(n) <= the side of nNNNN.cert in above324/ at JoostdeWinter/square-packing 71da0d5, rounded
+        up at 10 places, at 413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 809, 810, 851, 867
+        and 910: sub-windows of Couzo's packings at larger counts, re-optimized, their borders and
+        one deletion.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: fifteen rows of source-coverage.yaml (source
+        de-winter-issue941-2026-11-10), not register entries. The ledger of 11 November for this
+        pass (upper-bounds-941-942-20261111), walked from starts frozen at main 8afdabe8f with
+        Göbel's construction beside each row, records all fifteen as current rows, each
+        superseding the row it is below. Both maintained exact routes accept every certificate,
+        with the gross and sharp controls as stated in advance; the replay and the stage 4
+        review's run are entered, and the rows raised to verified, when the review is mapped.
+      queued: false
+      bead: think-cen3
+    beads:
+    - think-cen3
+    answer_bead: think-cen3
+    replies: []
+    close_when: >-
+      The fifteen rows are on main with the stage 4 review mapped, and the reply on main says what
+      was retained, replayed and reviewed; nothing the author asked for is queued.
+    notes: >-
+      Read on 11 November 2026 from main 8afdabe8f; no comment yet. Report order: d3a020e
+      (2026-11-09T23:59:23Z) first published nine of the certificates and 71da0d5
+      (2026-11-10T06:15:17Z) the other six; the issue (13:30:51Z) names 71da0d5. The ledger dates
+      all fifteen by the issue with each first commit kept, as #763's ledger did; no other report
+      reached any of these counts in between, so the verdicts are the same if d3a020e is read as
+      the report of its nine. Push times were not read (the activity log and events API refused
+      this session). The issue's "best recorded value" column agrees with the standing rows; its
+      remark that public Kaggle files hold smaller packings at 14 of the 15 counts names no
+      packing that reached this repository, so no Kaggle file is a report here. The sides also
+      bound counts the issue does not claim, by deletion and the border step; those have no rows
+      (think-kzme).
+  - number: 942
+    title: 'Sixteen lowered upper bounds for n between 632 and 989: registration request'
+    author: JoostdeWinter
+    opened: '2026-11-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter (Delft University of Technology) asks for the registration of sixteen upper
+      bounds beyond the case corpus, at 632, 637, 655, 684, 685, 744, 750, 756, 805, 814, 918,
+      921, 924, 935, 970 and 989, each the exact rational side of a certificate in
+      above324_refined/ at JoostdeWinter/square-packing a9486ed, committed 1 minute 26 seconds
+      before the issue, rounded up at 10 places, and in an addendum of 16:02:47Z six more, at 597,
+      754, 864, 865, 869 and 991, added at a0c4fc8. Each is a public Kaggle packing from the
+      per-puzzle merge in Samanyu-dev/squares_in_squares 53551d7, locally re-optimized along a
+      remaining descent direction with the arrangement unchanged; the merged file names no author
+      per packing, so the issue credits its README's list. Triaged and retained on 11 November
+      2026 in lane L90 (think-cen3): the de-winter-issue942-2026-11-10 and
+      de-winter-a0c4fc8-2026-11-10 packets retain the folder at both commits under the source's MIT
+      licence, every digest in its SHA256SUMS holds, every print is the exact side rounded up, and
+      both maintained exact routes accept all 22 and refuse their gross and sharp controls. Each
+      is 1.02e-03 (869) to 3.26e-02 (991) below the standing row, at 655 the grid, and the ledger
+      of 11 November records all 22 as current rows. Assurance reported until the stage 4 review
+      is mapped. Claude assistance disclosed.
+    read_through: '2026-11-10T16:02:47Z'
+    results:
+    - key: above324-refined-16
+      claim: >-
+        s(n) <= the side of nNNNN.cert in above324_refined/ at JoostdeWinter/square-packing a9486ed,
+        rounded up at 10 places, at 632, 637, 655, 684, 685, 744, 750, 756, 805, 814, 918, 921, 924,
+        935, 970 and 989: public Kaggle packings re-optimized locally, arrangements unchanged.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: sixteen rows of source-coverage.yaml (source
+        de-winter-issue942-2026-11-10), not register entries. The ledger of 11 November for this
+        pass (upper-bounds-941-942-20261111) records all sixteen as current rows, each superseding
+        the row it is below. Both maintained exact routes accept every certificate, with the gross
+        and sharp controls as stated in advance; the replay and the stage 4 review's run are
+        entered, and the rows raised to verified, when the review is mapped.
+      queued: false
+      bead: think-cen3
+    - key: above324-refined-addendum-6
+      claim: >-
+        s(n) <= the side of nNNNN.cert in above324_refined/ at JoostdeWinter/square-packing a0c4fc8,
+        rounded up at 10 places, at 597, 754, 864, 865, 869 and 991, from the same procedure and
+        source file.
+      source: https://github.com/jlevy/squares/issues/942#issuecomment-6772308414
+      not_registered: >-
+        Beyond the n <= 324 corpus: six rows of source-coverage.yaml (source
+        de-winter-a0c4fc8-2026-11-10), not register entries. The ledger of 11 November records all
+        six as current rows, dated by the addendum with a0c4fc8 kept as each one's first commit.
+        Both maintained exact routes accept every certificate, with the gross and sharp controls as
+        stated in advance.
+      queued: false
+      bead: think-cen3
+    beads:
+    - think-cen3
+    answer_bead: think-cen3
+    replies: []
+    close_when: >-
+      The 22 rows are on main with the stage 4 review mapped, and the reply on main says what was
+      retained, replayed and reviewed; nothing the author asked for is queued.
+    notes: >-
+      Read on 11 November 2026 from main 8afdabe8f; the one comment is the author's addendum.
+      a9486ed (2026-11-10T14:39:52Z) precedes the issue (14:41:18Z) by 86 seconds, and a0c4fc8
+      (15:37:44Z) the addendum (16:02:47Z) by 25 minutes; the ledger dates each claim by the issue
+      or the comment, with the commit kept as its first commit. Nothing else reached these counts
+      in either window, and push times were not read. The issue's "best public competition value"
+      column quotes Kaggle packings no report brought to this repository, so none is a report
+      here; its "register value" column agrees with the standing rows (at 655 the grid). The
+      sides also bound counts the issue does not claim, by deletion and the border step; those
+      have no rows (think-kzme).

@@ -293,8 +293,14 @@ sources:
     landed: '2026-10-23'
   - id: couzo-verified-bounds-2026-10-14
     landed: '2026-10-16'
+  - id: de-winter-a0c4fc8-2026-11-10
+    landed: '2026-11-11'
   - id: de-winter-issue666-2026-10-17
     landed: '2026-10-22'
+  - id: de-winter-issue941-2026-11-10
+    landed: '2026-11-11'
+  - id: de-winter-issue942-2026-11-10
+    landed: '2026-11-11'
   - id: evand-compositions-2026-10-13
     landed: '2026-10-14'
   - id: evand-fresh-compositions-2026-10-14

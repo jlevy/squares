@@ -90,7 +90,16 @@ KRISTIANSEN_798 = "amundsk-issue798-2026-10-24"
 #: 26 October (`test_upper_bound_reports_819`).
 KRISTIANSEN_819 = "amundsk-issue819-2026-10-25"
 #: The packets that request nothing inside the corpus, so plan no register entry.
-BEYOND_ONLY = (EVAND_584, EVAND_596, DANIEL_702, KRISTIANSEN_798, KRISTIANSEN_819)
+BEYOND_ONLY = (
+    EVAND_584,
+    EVAND_596,
+    DANIEL_702,
+    KRISTIANSEN_798,
+    KRISTIANSEN_819,
+    "de-winter-issue941-2026-11-10",
+    "de-winter-issue942-2026-11-10",
+    "de-winter-a0c4fc8-2026-11-10",
+)
 #: Issue #528, Ostashev's three compositions in sqcert, and issue #529, Rio Calle's n = 102
 #: layout, whose exact certificate is derived here (`test_upper_bound_reports_528_529`).
 OSTASHEV_528 = "dostashev-records-2026-10-12"
@@ -210,6 +219,15 @@ L81_1111 = (
     "ozden-s268-upper-bound-2026-11-10",
     "ozden-s269-upper-bound-2026-11-11",
 )
+#: The intake pass's lane L90 of 11 November 2026 (`test_upper_bound_reports_l90_1111`):
+#: Joost de Winter's #941 at fifteen counts and #942 at sixteen, and the six of a0c4fc8
+#: that #942's addendum reports, all beyond the corpus, retained under MIT. The borders of
+#: #941's 539, 590, 794, 851, 867 and 910 touch the walls and each other.
+L90_1111 = (
+    "de-winter-issue941-2026-11-10",
+    "de-winter-issue942-2026-11-10",
+    "de-winter-a0c4fc8-2026-11-10",
+)
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -271,6 +289,7 @@ EVERY = (
     *L65_1109,
     L76_1109,
     *L81_1111,
+    *L90_1111,
 )
 
 
@@ -1321,7 +1340,9 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
     # to #931, #935, #936 and #938 and Yim's #895 touches the box. Couzo's #672 touches at
-    # 229 and clears every wall at 227, so its walls mix; every other source's clear it.
+    # 229 and clears every wall at 227, so its walls mix, as de Winter's #941 does, whose
+    # borders touch the box and whose other certificates clear it; every other source's
+    # clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
@@ -1341,13 +1362,13 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         *L81_1111,
     }
     assert (walls == {0}) is (name in touching)
-    assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
-    # Only #567's and #622's squares, and #938's grid squares, touch each other, an exact
-    # contact the kernel admits; every other source's pairs clear.
+    assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
+    # Only #567's and #622's squares, #938's grid squares and the borders of #941 touch
+    # each other, an exact contact the kernel admits; every other source's pairs clear.
     gaps = {
         Fraction(m["exact_verify_best_pair_gap"]) for m in reports.margins(positives).values()
     }
-    assert (0 in gaps) is (name in {PINGYOU_261, PINGYOU_622, L76_1109})
+    assert (0 in gaps) is (name in {PINGYOU_261, PINGYOU_622, L76_1109, L90_1111[0]})
 
 
 def _jobs_from_receipt(packet: Path, directory: Path) -> None:

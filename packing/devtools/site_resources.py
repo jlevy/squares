@@ -367,7 +367,9 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "Exact rational certificates for 227, 229 and 260 squares, replayed and "
             "reviewed here (T-196). The house packing at 260 was replaced by T-223 on "
             "21 October; Daniel's regularized views (T-225) now supply the house "
-            "packings at 227, 229 and 260."
+            "packings at 227, 229 and 260. Thirty-seven certificates beyond 324 squares, "
+            "from 413 to 991 (#941, #942), are replayed here as dated rows beyond the "
+            "case corpus."
         ),
     ),
     (
