@@ -1,0 +1,49 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/site_resources.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/n-180.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L81 of 11 November (think-xq4o): the stage 4 review of #943, #944, #945 and #947
+  (L83, think-x8oc) is mapped on T-285 to T-288, which the cases adopt at 156, 180, 268 and 269
+  in place of T-186, T-174, T-276 and T-174, with their credit, the house writer's prose and
+  sources, the poster credit hold, the bound citations, the composite figure, the gate's rigidity
+  totals, the settlements the new houses no longer need, and the requests and coverage text
+  that follow. No paper prints those counts, these records or those cards. Against main
+  f54ad1048 (#940): devtools.compare_paper_renders rendered each paper into empty site
+  directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
+  tree and once with that main's copies of the thirteen paths above swapped in. The
+  optimality review, the threshold-bound review and the methods survey are byte-identical
+  across the three, 43 files each. The explainer's 55 files are deterministic, and only its
+  Markdown and HTML differ from the baseline. Of its substitutions, the register count reads
+  288 here and 284 on that main ("one of 284 results the framework has registered so far"),
+  the count scored new reads 32 on both, and the composite totals it reads are those of the
+  1 to 100 composite, which no adopted count is in and whose totals are equal on both; so the
+  change is the live register count, which follows the site's data and is not a revision of
+  the paper, as this lane's record of the registration and the L71 and L76 records say. This
+  record read the substitutions rather than diffing a fresh pair of renders. No PDF was
+  printed; each prints from that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4
+  and v0.2.7.
