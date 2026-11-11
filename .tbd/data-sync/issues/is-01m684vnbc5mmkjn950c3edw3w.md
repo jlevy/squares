@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 200
+version: 201
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -81,7 +81,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T06:27:12.555Z
+updated_at: 2026-11-11T10:58:10.085Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -295,3 +295,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-09 06:55Z to 14:53Z (L63-L70): #927-#931 (Doğa Özden via kenaznia-doga, five upper bounds at 232, 268, 299, 303, 307) imported as T-275..T-279 at V3/C3, S3, adopted as houses (PR #932, adca8d352) after the L64 blind review (accept with findings) and the L66 senior review; final replies posted after deploy + verify-deployment, issues closed; follow-ups on #844, #893, #914; replies recorded (PR #933, ef1af4933); think-463r and think-rd0p closed. Watched repo vitamoon/vitamoon (Kaelan Yim) published 15 certificates without an issue (78eb9ea, e4209f6, c10e094, 546928a/ac14112): L65 (think-h96r) recorded them in draft PR #934 - eleven beyond-horizon rows 553-700 superseding Couzo's, 299 and the second 303 (1.18e-12 and 3.29e-12 below #929/#930, built from them) and 130 (envelope-only, 1.96e-14) held below adoption, first 303 nothing to import; new tool devtools/contraction_margin.py measures gains at 0.35, 0.97, 0.09 of the predecessor's padding margin (T-265 was 9.97). Blind stage-4 review L70 running. New bead think-5c9z (Daniel regularizer KKT points 3.30-3.53e-12 below T-275..T-279), held on RV-3. Owner decisions pending: #921 terms, #908/#909, #543, #919, think-8nim, and RV-3 (think-ruu2/think-ikku: is a gain inside the predecessor's rounding-padding margin a new result? recommended option C, restatement).
 
 2026-11-09 15:00Z to 2026-11-11 05:00Z: #934 (Yim, 553-700 rows; 299/303/130 held as T-280/T-281) merged 20f844dbf; #937 (#935/#936, T-282/T-283) merged 200f2ebc1; #940 (#938, T-284 = T-282 + L at 199) merged f54ad1048 on 10 November. #939 (de Winter s(199), same arrangement re-solved, 2.63e-12 below #938) in lane L78 (think-2h88), to be held as T-285 under RV-3; option D (re-solve counts only below the predecessor contracted to first contact, through any construction) put to the owner. Both Pages deploys after #937 and #940 failed on a GitHub Pages syncing_files timeout (site not updated since #934); re-running is refused to this integration. Six replies held for the deploy: #935, #936, #938 finals, #845, #703, #438 follow-ups. A weekly usage limit stopped all work 2026-11-10 ~01:00Z to 2026-11-11 04:00Z (28 renewals missed). New since: #941/#942 (de Winter, 31 bounds 413-989; think-cen3), #943/#944/#945/#947 (Özden; L81, think-xq4o), #946 (de Winter s(172) closed form; folded into L78), #847 count comment, watched-repo commits (evand, JoostdeWinter, TheSnakeFang).
+
+2026-11-11 10:53Z renewal (intake195): L91 opened #951 (records of the seven 11 Nov replies; CI green); senior review L92 running. All new intake items (#943/#944/#945/#947 closes, #593/#847/#928 replies) close with #951. #941/#942 and de Winter's repo stay with L90 (think-cen3). think-4ul6 (T-142/T-143 stage-4 review; the 4 Nov launch was lost, no review on main) relaunched as L93 (tbd-strong-max, blind), claimed by bold-ritchie-l93.
