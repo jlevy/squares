@@ -727,8 +727,8 @@ def test_a_raising_job_stops_the_run_and_keeps_the_receipts_written(
 ) -> None:
     """Over current receipts the command replays nothing and exits 0. With both receipts
     and the summary gone, a run whose first K = 6 job raises stops there: K = 5's
-    receipt, written before, is kept, at most one more row starts before the queue is
-    cancelled, `ReplayStoppedError` names the row, and the command exits 1. A rerun in
+    receipt, written before, is kept, no other row starts, since one worker runs the rows
+    here in order, `ReplayStoppedError` names the row, and the command exits 1. A rerun in
     which a route refuses a row writes the receipt and exits 1, naming the row."""
     monkeypatch.setattr(checker, "VERSIONS", {"5": routed})
     command = ["replay-all", "--version", "5", "--workers", "1"]
@@ -749,8 +749,7 @@ def test_a_raising_job_stops_the_run_and_keeps_the_receipts_written(
     monkeypatch.setattr(checker, "route_row", raising)
     with pytest.raises(checker.ReplayStoppedError, match=r"v5\.0 K=6 n=28: RuntimeError"):
         checker.replay_all(routed, 1, log=lambda _: None)
-    assert calls[:4] == [19, 18, 17, 28]
-    assert len(calls) <= 5
+    assert calls == [19, 18, 17, 28]
     assert sorted(path.name for path in routed.route_parts.iterdir()) == ["k005.json"]
     assert checker.main(command) == 1
     assert "STOPPED: v5.0 K=6 n=28" in capsys.readouterr().out
