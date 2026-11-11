@@ -5,7 +5,7 @@ title: "Import #941, #942: Joost de Winter's 31 lowered upper bounds for n betwe
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: bold-ritchie-l90
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:55.639Z
-updated_at: 2026-11-11T10:14:40.741Z
+updated_at: 2026-11-11T10:59:53.677Z
 started_at: 2026-11-11T09:58:23.522Z
 ---
 #941 (2026-11-10T13:30Z) fifteen lowered upper bounds n 413-910; #942 (14:41Z) sixteen n 632-989; JoostdeWinter. Beyond the atlas's 324, below the 1024 horizon: beyond-horizon rows. Precedent: Yim's 553-700 rows (PR #934). Starts after the Özden lane to stay within usage limits.
@@ -38,3 +38,10 @@ Controls stated in advance (before any run):
 - certify, each count on both routes: the certificate accepted; duplicate-square (square 2 a copy of square 1) refused; outside-container (a square moved the side and 2 outside) refused.
 - sharp-controls, each count on both routes (devtools.upper_bound_sharp_controls): side lowered to the extent accepted at contact with margin exactly 0 and refused 1e-30 past it; the tightest pair closed to contact accepted (margin 0), 1e-30 past refused; every square moved toward the near wall by the least near-wall clearance accepted at contact, refused 1e-30 past; one square of the tightest pair enlarged to contact refused for its shape alone with margin 0, past contact also for the overlap; the square nearest a wall enlarged to its wall likewise; the duplicated square refused. 11 controls a count, 407 in all, each as the module predicts.
 - contraction_margin, each count whose row holds a retained certificate (or the base of a recipe row): the margin of the row's certificate, uniform contraction to first contact, and this certificate's gain over it; --no-routes, since the margin is exact without them and the routes would only prove the contracted packing as a bound of its own (OR-14 economy; ~2.4 CPU-h saved).
+
+2026-11-11 L90 replay, measure, walk (11:05Z).
+- certify #941 packet: 45 jobs on both routes, all positives accepted and all 30 gross controls refused; 22,619,004 pair decisions, 3,821.6 route CPU s, longest job 168.4 s. Borders at 539, 590, 794, 851, 867, 910 touch walls and pairs (clearance 0); 413/543/547 clear by 5e-46 (walls) and 1e-45 (pairs); the rest 1e-10 to 9e-10. #942 and a0c4fc8 packets running.
+- Identity against the row's certificate (devtools.measure_identity): #941's 494 is one to one with Couzo's 494 under the identity, no square beyond 0.1 (largest 0.0992), a refinement by the record's word though the issue calls it a sub-window of 539; 539, 739, 794, 851 one to one, 5-28 beyond 0.1; 547 one to one under symmetry 7; the other eight and all 22 of #942/a0c4fc8 are other arrangements. 632, 744, 970, 910 rows are L-border recipes (no n-square certificate); 655 has no row (grid 26).
+- Contraction (devtools.contraction_margin --no-routes, exact): every gain is >= 2.3e3 times its row certificate's margin (least: 739, margin 7.2e-8, gain 1.67e-4); recipes measured at their bases (851, 583, 691, 850). No gain lies inside a margin: nothing here is RV-3 (think-ruu2) material.
+- Ledger campaign/issue-intake/upper-bounds-941-942-20261111 (starts frozen at main 8afdabe8f, both 23 October rulings): 3 reports, 37 claims, all recorded (15 new packings per #941's own word, 22 unclassified), 0 not recorded, 0 undecided; intake_ledger check OK.
+- Consequences not claimed: the new sides also beat rows/grid at other counts by deletion (e.g. 493, 538, 636, 683, 743, 755, 804, 813, 863, 917, 923, 934, 969, 988, 990) and by the border step (e.g. 586, 683, 688, 737, 799, 811, 862, 923, 928, 979, 982, 985, 996). No rows; think-kzme's question.
