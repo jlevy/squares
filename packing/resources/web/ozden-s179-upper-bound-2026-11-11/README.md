@@ -127,7 +127,8 @@ A measurement for credit; it decides nothing.
   move; aligned by box centres, 44 squares turn by more than a degree, as the issue says.
   Tilted beyond a degree: 36 here, 27.3 to 41.4 degrees from upright, all turned the same
   way; T-174’s 35, 41.2 to 44.4 degrees, near the diagonal, where no split by sign is
-  given. The house witness and the regularized view measure the same. So it is a new
+  given. T-174’s house witness and its regularized view, as they stood before this
+  adoption, measure the same. So it is a new
   arrangement relative to T-174’s packing, not a further arrangement of it, as the review
   finds (F9). Anchored at the lower-left corner, as here, or at the centres, every square
   moves beyond 10⁻³, since the sides differ by 2.4 × 10⁻³; the issue’s 146 beyond 10⁻³
@@ -207,12 +208,11 @@ the author’s repository, and its `certificate.replay` names the file but not w
 it, unlike the README’s rerun (F11); the adopted witness carries this repository’s own.
 Both are notes for the author.
 
-The band’s geometry is the registry’s 70 witness, which comes from PingYou Ltd’s PR 574
-algebraic supplement, a release with no licence file, kept here in the derived-only form.
-Whether a seed taken from it needs a notice of its own is, in the review’s words,
-`think-mdxq`’s question (F10), as the 9 November reviews put their upstream starts; that
-bead closed on 4 November with the lab’s own licence answer. It is noted here, not
-decided.
+The issue names the registry’s 70 as the band’s source; that witness comes from PingYou
+Ltd’s PR 574 algebraic supplement, a release with no licence file, kept here in the
+derived-only form. Whether a seed taken from it needs a notice of its own is the owner’s
+decision on `think-71uq` (F10; the review named `think-mdxq`, which closed on 4
+November). It is noted here, not decided.
 
 Its questions for the author, informational and holding nothing open:
 
@@ -238,7 +238,7 @@ improved it, credited as the search’s seed, and T-174’s packing as the recor
 selection, measured against this witness’s drawing, draws Evan Daniel’s same-side view:
 light, uneven and near-axis squares, angle classes and hues 7, 20, 5, 19 and 19 against
 0, 0, 0, 5 and 5, and full shared sides 475 and 505 against 550 and 550. His certified KKT
-solve lies 2.78 × 10⁻¹² below the side, about the certificate’s own contraction margin
+solve lies 2.78 × 10⁻¹² below the side, 1.06 of the certificate’s own contraction margin
 (2.62 × 10⁻¹²), held at row 3 as a register candidate and not admitted, as at 156, 172,
 180, 199, 268, 269 and 270 (RV-3). The rigidity block, derived again on the new witness,
 stays not rigid: 74 of its 179 squares translate, against 7 of T-174’s.

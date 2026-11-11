@@ -31302,7 +31302,7 @@ issues:
       13.883795490524 (kirilltym), is above it; the side-only leaderboard entry it quotes and
       states first, 13.880960371556 (team Nevska, 7 November), 4.07e-4 below this side, is
       unpublished and states no packing, so it is context only.
-    read_through: '2026-11-11T18:28:14Z'
+    read_through: '2026-11-11T21:18:29Z'
     results:
     - key: n179-band
       claim: >-
@@ -31328,8 +31328,8 @@ issues:
       retained and replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 11 November 2026 from main c8448724e; no comment yet. The commit bd262d8 precedes
-      the issue by 24 seconds. The issue does not carry the intake label; the lane did not add
-      it. T-174 was the house it improves. #574's follow-up of 19 October acknowledged the
+      the issue by 24 seconds. The issue carried no intake label when read; it was added on 11
+      November at 21:31Z. T-174 was the house it improves. #574's follow-up of 19 October acknowledged the
       rational houses PR #665 adopted from T-174, 179 among them; #574 is held for the owner
       (think-9v2k), so the follow-up naming the new house at 179 waits on that hold.
       Measured against padding, T-174's certificate at 179 has no padding to measure:
@@ -31345,12 +31345,12 @@ issues:
       lineage counts hold with the house reflected top to bottom and set against the
       upper-left corner (F6); the 207 bands have 19 squares each, not 20 (F7); and the stated
       seed lies within 0.05 of 28 of the 37 tilted squares, under one symmetry of the 70 box
-      and no other (F8). The band's geometry comes from PingYou Ltd's PR 574 algebraic
-      supplement, which has no licence file; whether the seed needs a notice of its own is, in
-      the review's words, think-mdxq's question (F10), a bead closed on 4 November with the
-      lab's licence answer, noted and not decided. The leaderboard entry the issue quotes,
-      Nevska's 13.880960371556, is exactly the registry's s(70) + 5 at 12 places, as the
-      review finds; it states no packing and reached this repository only as the issue's
+      and no other (F8). The issue names the registry's 70 as the band's source; that witness
+      comes from PingYou Ltd's PR 574 algebraic supplement, which has no licence file; whether
+      the seed needs a notice of its own is the owner's decision on think-71uq (F10; the review
+      named think-mdxq, which closed on 4 November), noted and not decided. The leaderboard
+      entry the issue quotes, Nevska's 13.880960371556, is exactly the registry's s(70) + 5 at
+      12 places, as the review finds; it states no packing and reached this repository only as the issue's
       quotation, so it is no report and nothing is recorded for it. The review's questions
       for the author, informational and holding nothing open: whether the final repair
       scaling was about 2e-13 rather than 1e-13 (F5); whether the lineage counts use the
@@ -31361,6 +31361,13 @@ issues:
       intended, certificate.replay or the README's rerun, and from which directory, and
       whether the schema path could name this repository's file (F11); and whether the
       band-design search and its seeds will be published. No reply has been posted.
+
+      On 11 November at 21:18Z (issuecomment-6807260149) the author reported #959, s(179) <=
+      13.880960371559, 4.07e-4 below this side by his account, the same method in a later
+      batch, and asked that it be adopted in place of this one; this certificate stays a valid
+      bound. #959 enters the record with triage pending under its own import bead and T-NNN;
+      T-291 is not replaced, and the house at 179 moves only when #959's certificate is
+      replayed, reviewed and adopted under the house rule.
   - number: 958
     title: 's(157) below 13 and a new s(132): two pinwheel packings: registration request'
     author: JoostdeWinter

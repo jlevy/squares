@@ -57,7 +57,7 @@ then full shared sides (house and stage), the drawing before against the view:
   drawing on every goal, but draw more angle classes than Evan Daniel’s view: 14 classes
   and hues and 526 and 528 shared sides at 0.5 degrees, and one view, 13 and 13 and 530
   and 532, at 1 and 5 degrees.
-- Evan Daniel’s certified KKT solve lies 2.78 × 10⁻¹² below the side, about the
+- Evan Daniel’s certified KKT solve lies 2.78 × 10⁻¹² below the side, 1.06 of the
   certificate’s own contraction margin (2.62 × 10⁻¹²). It is held at row 3 as a register
   candidate, not admitted, as at 156, 172, 180, 199, 268, 269 and 270; its registration
   is RV-3’s (think-ruu2, think-ikku).

@@ -60511,8 +60511,8 @@ evidence:
         to its work until its findings were frozen
       note: >-
         docs/project/reviews/review-2026-11-11-ozden-954.md accepted the certificate with
-        findings, all notes, none blocking: F4 on the claim's arithmetic, F5 to F7 for the
-        author, F8 to F10 for the records and F11 for both. Its clean-room run is
+        findings, all notes, none blocking: F4 on the claim's arithmetic, F5 and F7 for the
+        author, F8 to F10 for the records, and F6 and F11 for both. Its clean-room run is
         E-ozden-954-review-exact-feasibility, and the replay E-ozden-954-exact-feasibility.
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at bd262d8. A
@@ -60579,8 +60579,8 @@ evidence:
         to its work until its findings were frozen
       note: >-
         docs/project/reviews/review-2026-11-11-ozden-954.md accepted the certificate with
-        findings, all notes, none blocking: F4 on the claim's arithmetic, F5 to F7 for the
-        author, F8 to F10 for the records and F11 for both. Its clean-room run is
+        findings, all notes, none blocking: F4 on the claim's arithmetic, F5 and F7 for the
+        author, F8 to F10 for the records, and F6 and F11 for both. Its clean-room run is
         E-ozden-954-review-exact-feasibility, and the replay E-ozden-954-exact-feasibility.
     limitations: >-
       A replay of the one retained witness by two maintained exact routes that share this
@@ -60670,8 +60670,8 @@ evidence:
         to its work until its findings were frozen
       note: >-
         docs/project/reviews/review-2026-11-11-ozden-954.md accepted the certificate with
-        findings, all notes, none blocking: F4 on the claim's arithmetic, F5 to F7 for the
-        author, F8 to F10 for the records and F11 for both. Its clean-room run is
+        findings, all notes, none blocking: F4 on the claim's arithmetic, F5 and F7 for the
+        author, F8 to F10 for the records, and F6 and F11 for both. Its clean-room run is
         E-ozden-954-review-exact-feasibility, and the replay E-ozden-954-exact-feasibility.
     limitations: >-
       A clean-room decision of the one retained witness by two exact methods in one program, which

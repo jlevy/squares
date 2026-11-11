@@ -44173,8 +44173,8 @@ results:
 
       Measured pose by pose (measure/identity.json in the packet; a measurement, which decides
       nothing): at 179 no symmetry of the box pairs it one to one with T-174's packing by
-      nearest centres, and the house witness and the regularized view measure the same; the
-      optimal assignment of least summed squared move, under the best of the box's eight
+      nearest centres, and T-174's house witness and its regularized view, as they stood before
+      this adoption, measure the same; the optimal assignment of least summed squared move, under the best of the box's eight
       symmetries, moves 47 squares beyond a tenth and 60 beyond a hundredth (largest 0.885496)
       and turns 58 squares, by up to 44.36 degrees, 44 of them by more than a degree.
 
@@ -44199,12 +44199,11 @@ results:
       degrees, in one band along the main diagonal, as the issue says; its 207 has two mirrored
       bands of 19 squares each, not 20 (F7).
 
-      The band's geometry is the registry's 70 witness, which comes from PingYou Ltd's PR 574
-      algebraic supplement, a release with no licence file, kept here in the derived-only form.
-      Whether a seed taken from it needs a notice of its own is, in the review's words,
-      think-mdxq's question (F10), as the 9 November reviews put their upstream starts;
-      that bead closed on 4 November with the lab's own licence answer. It is noted here, not
-      decided.
+      The issue names the registry's 70 as the band's source; that witness comes from PingYou
+      Ltd's PR 574 algebraic supplement, a release with no licence file, kept here in the
+      derived-only form. Whether a seed taken from it needs a notice of its own is the owner's
+      decision on think-71uq (F10; the review named think-mdxq, which closed on 4 November). It
+      is noted here, not decided.
 
       Measured against padding: T-174's certificate at 179 has no padding to measure:
       contracted uniformly about the origin it meets first contact at once (1 - lambda* = 0),
@@ -44264,7 +44263,7 @@ results:
       sides (house and stage) 475 and 505 against 550 and 550.
 
       Evan Daniel's regularizer solved the witness to a certified KKT point 2.78e-12 below its
-      side, about the certificate's own contraction margin (2.62e-12), held at row 3 as a
+      side, 1.06 of the certificate's own contraction margin (2.62e-12), held at row 3 as a
       register candidate and not admitted; its registration waits on RV-3 (think-ruu2,
       think-ikku), as at 156, 172, 180, 199, 268, 269 and 270.
 

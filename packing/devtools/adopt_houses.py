@@ -2725,9 +2725,9 @@ CREDITS: dict[int, Credit] = {
     179: Credit(
         (OZDEN,),
         (),
-        "Doğa Özden’s packing from a band of the tilted squares of Ryan Xu’s n = 70 packing, "
-        "below Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta and PingYou Ltd "
-        "refined it",
+        "Doğa Özden’s packing from a band of the tilted squares of Ryan Xu’s n = 70 packing "
+        "as Evan Daniel and PingYou Ltd improved it, below Nate Chaoweeraprasit’s SQUISH "
+        "packing as Siddharth Gupta and PingYou Ltd refined it",
     ),
     # T-288 (adopted on 11 November 2026), Doğa Özden's issue 944: a new arrangement relative
     # to T-174's packing, 49 squares beyond a tenth, found by transplant search from an L added
