@@ -1,0 +1,114 @@
+# What `python -m devtools.intake_ledger gather` reads: the four upper bounds at n <= 324 that lane
+# L81 of the intake pass (think-3guf) takes in on 11 November 2026, Doğa Özden's #943 at 156, #944
+# at 180, #945 at 268 and #947 at 269, each posted by his AI agent's account kenaznia-doga 50, 51,
+# 52 and 13 seconds after the one commit of the repository that holds its certificate. GitHub's
+# activity log was not read, so no push time is recorded; each issue dates its report, and nothing
+# else reached these counts between the commits and the issues. The starts are frozen at main
+# f54ad1048 (#940's merge): T-186 at 156 (Daniil Ostashev's packing, refined by Francisco Couzo,
+# PingYou Ltd and Mishapolk), T-174 at 180 (Nate Chaoweeraprasit's packing, refined by Siddharth
+# Gupta, Francisco Couzo and PingYou Ltd) and at 269 (his SQUISH packing, improved by Evan Daniel
+# and PingYou Ltd), and T-276 at 268 (Evan Daniel's packing as Doğa Özden improved it, #928), in
+# both lanes, with no register bound pending adoption below them. Each claim's exact side is its
+# certificate's header, read by the packet's claim record (acquisition/claims.json), which the
+# lane wrote from main f54ad1048; each issue prints that side rounded up at 12 places, and the
+# claim record's admission holds the print to it. The Kaggle per-puzzle packings the issues quote
+# are above each claim. The side-only leaderboard entries they quote state no packing and are no
+# report: at 156, 12.977053087522, which the issue says is 2.4e-11 above its side; at 180, the
+# registry's side; at 268 and 269, 16.871868135138 and 16.889730079125, below each claim.
+format: intake-ledger-sources-v1
+read_at_main: f54ad1048080ce14151282dd1861a29b03b51714
+read_on: '2026-11-11'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l81
+  branch: claude/bold-ritchie-xo28us-l81
+  commit: f54ad1048080ce14151282dd1861a29b03b51714
+  note: The packets' claim records, written on the lane's branch from main f54ad1048 and read here by path.
+reports:
+- report: '#943'
+  issue: 943
+  holders: Doğa Özden
+  bead: think-xq4o
+  lanes:
+  - lane: l81
+    packet: ozden-s156-upper-bound-2026-11-10
+    record: claims.json
+    counts: [156]
+  claims:
+  - n: 156
+    measured:
+      against: T-186
+      finding: no symmetry of the box pairs it one to one with T-186's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 58 squares beyond 0.1 and 78 beyond 1e-2 (largest 0.908679) and turns 74 squares by more than 1e-6 radians, by up to 44.69 degrees; 60 tilted squares, 16.7 to 32.4 degrees from upright and all turned the same way, against T-186's 62, 6.9 to 26.4 degrees, 18 turned one way and 44 the other; a new arrangement relative to T-186's packing, not a further arrangement of T-186's packing, as the source's seed, the registry's 182, says
+      source: packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/identity.json
+  note: >-
+    The issue names 87c9292, committed at 2026-11-10T15:27:50Z, 50 seconds before the issue. It says the packing
+    was found by transplant search from the registry's 182 (Evan Daniel), a horizontal and a vertical unit strip cut
+    out and closed up, squares deleted to 156, then quenched and basin-hopped, and calls it an improvement on the
+    record, neither new nor a refinement of it, so the claim is not classified; the measurement names the relation.
+- report: '#944'
+  issue: 944
+  holders: Doğa Özden
+  bead: think-xq4o
+  lanes:
+  - lane: l81
+    packet: ozden-s180-upper-bound-2026-11-10
+    record: claims.json
+    counts: [180]
+  claims:
+  - n: 180
+    measured:
+      against: T-174
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 49 squares beyond 0.1 and 82 beyond 1e-2 (largest 0.921464) and turns 61 squares by more than 1e-6 radians, by up to 44.68 degrees; 40 tilted squares, 37.1 to 44.8 degrees from upright, against T-174's 44, 26.5 to 44.7 degrees, near the diagonal, where no split by sign is given (F16 of the 11 November review); a new arrangement relative to T-174's packing, not a further arrangement of T-174's packing, as the source's seed, the registry's 154, says
+      source: packing/resources/web/ozden-s180-upper-bound-2026-11-10/measure/identity.json
+  note: >-
+    The issue names 4cfcb90, committed at 2026-11-10T15:27:50Z, 51 seconds before the issue. It says the packing
+    was found by transplant search from the registry's 154 (Evan Daniel, improved by Francisco Couzo), an L of grid
+    squares added along two walls, squares deleted or inserted to 180, then quenched and basin-hopped, and calls it
+    an improvement on the record, neither new nor a refinement of it, so the claim is not classified; the
+    measurement names the relation.
+- report: '#945'
+  issue: 945
+  holders: Doğa Özden
+  bead: think-xq4o
+  lanes:
+  - lane: l81
+    packet: ozden-s268-upper-bound-2026-11-10
+    record: claims.json
+    counts: [268]
+  claims:
+  - n: 268
+    measured:
+      against: T-276
+      finding: no symmetry of the box pairs it one to one with T-276's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 125 squares beyond 0.1 and 151 beyond 1e-2 (largest 1.04105) and turns 156 squares by more than 1e-6 radians, by up to 43.99 degrees; 43 tilted squares, 35.4 to 44.2 degrees from upright, near the diagonal, where no split by sign is given (F16 of the 11 November review), against T-276's 99, 2.7 to 24.6 degrees and all turned the same way; a new arrangement relative to T-276's packing, not a further arrangement of T-276's packing, as the source's seed, the registry's 302, says
+      source: packing/resources/web/ozden-s268-upper-bound-2026-11-10/measure/identity.json
+  note: >-
+    The issue names b027aba, committed at 2026-11-10T15:27:50Z, 52 seconds before the issue. It improves the
+    author's own #928 (T-276), the house it is walked against. It says the packing was found by transplant search
+    from the registry's 302 (PingYou Ltd, improved by Francisco Couzo, Mishapolk and Evan Daniel), a horizontal and
+    a vertical unit strip cut out and closed up, then quenched and basin-hopped, and calls it an improvement on the
+    record, neither new nor a refinement of it, so the claim is not classified; the measurement names the relation.
+- report: '#947'
+  issue: 947
+  holders: Doğa Özden
+  bead: think-xq4o
+  lanes:
+  - lane: l81
+    packet: ozden-s269-upper-bound-2026-11-11
+    record: claims.json
+    counts: [269]
+  claims:
+  - n: 269
+    measured:
+      against: T-174
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 112 squares beyond 0.1 and 134 beyond 1e-2 (largest 1.10268) and turns 120 squares by more than 1e-6 radians, by up to 43.52 degrees; 100 tilted squares, 18.7 to 36.1 degrees from upright and all turned the same way, against T-174's 49, 34.0 to 44.9 degrees, near the diagonal, where no split by sign is given (F16 of the 11 November review); a new arrangement relative to T-174's packing, not a further arrangement of T-174's packing, as the source's seed, the registry's 304, says
+      source: packing/resources/web/ozden-s269-upper-bound-2026-11-11/measure/identity.json
+  note: >-
+    The issue names 6f93b07, committed at 2026-11-11T03:34:54Z, 13 seconds before the issue. It says the packing
+    was found by transplant search from the registry's 304 (Evan Daniel), a horizontal and a vertical unit strip cut
+    out and closed up at a random position, one of the most crowded squares deleted to reach 269, then quenched and
+    basin-hopped, and calls it an improvement on the record, neither new nor a refinement of it, so the claim is not
+    classified; the measurement names the relation.
+exceptions: []
+other_items: []

@@ -2450,8 +2450,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # s299 packet, which held nothing else: five sources more and two fewer. The issue 914
     # packet still holds 204, 293 and 304. The same day's last pass draws 199 from Özden's
     # issue 938 packet (T-284), one more source with no new name, and Gupta's rational
-    # refinements still hold other counts.
-    assert len(expected_sources) == 37
+    # refinements still hold other counts. The adoption of 11 November draws 156, 180, 268
+    # and 269 from Özden's four packets of that day (T-287 to T-290), and no longer from his
+    # 9 November s268 packet, which held nothing else: four sources more and one fewer.
+    assert len(expected_sources) == 40
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2595,16 +2597,23 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     height. The adoption of 9 November 2026 (think-463r) credits him as the improver at
     232, 268, 303 and 307 too, and at 299 again (T-275 to T-279), and the hold holds him at
     all five. Its later pass (think-he66) credits him at 172 and 270 (T-282, T-283), held
-    the same way, and its last (think-1goz) at 199 (T-284), held alike."""
+    the same way, and its last (think-1goz) at 199 (T-284), held alike. The adoption of 11
+    November 2026 (think-xq4o) credits him as the finder at 156, 180, 268 and 269 (T-287 to
+    T-290), held alike."""
     held = known_best_builder.PRINT_CREDIT_HELD
-    assert held == dict.fromkeys((172, 199, 232, 268, 270, 299, 303, 307), ("Doğa Özden",))
+    assert held == dict.fromkeys(
+        (156, 172, 180, 199, 232, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
+    )
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
     for n, found, improved in (
+        (156, ["Doğa Özden"], []),
         (172, ["Evan Daniel"], ["Doğa Özden"]),
+        (180, ["Doğa Özden"], []),
         (199, ["Evan Daniel"], ["Doğa Özden"]),
         (232, ["Alex Chilton"], ["Francisco Couzo", "Doğa Özden"]),
-        (268, ["Evan Daniel"], ["Doğa Özden"]),
+        (268, ["Doğa Özden"], []),
+        (269, ["Doğa Özden"], []),
         (270, ["Evan Daniel"], ["Doğa Özden"]),
         (299, ["Evan Daniel"], ["Doğa Özden"]),
         (303, ["Evan Daniel"], ["Doğa Özden"]),

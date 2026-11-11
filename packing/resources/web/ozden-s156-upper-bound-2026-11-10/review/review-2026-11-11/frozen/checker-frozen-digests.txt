@@ -1,0 +1,8 @@
+# L83 clean-room checker, frozen before any producer code or this repository's witness, verifier or promotion code was read
+# frozen 2026-11-11T06:36:12Z
+ab7b2cf73c61f0f707d92ef640176e1402f658136341caee8847f8665ab86526  l83_reader.py
+2236bccbeb4da6b635e0f43aa1c88c8e5aab3ed41de36a4eb87736a70706ced2  l83_sat.py
+c4987a55491fa98f61328d54a3d5353eccfe91514664fdcd4aec5a114319b218  l83_clip.py
+661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0  l83_check.py
+6542054ff2c45459de75e0fea2c73e0bf8481124daafb4f84439c587818cecd8  l83_geom.py
+de00c72fc8b9b6abe10f1bdd93e7fdc8afd6b4f278e1e826e6c24e5c4e07ce1c  l83_selftest.py

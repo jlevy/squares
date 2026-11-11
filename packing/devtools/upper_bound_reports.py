@@ -1678,6 +1678,12 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # Lane L76 of 9 November (think-3guf): Doğa Özden's issue 938 at 199 (think-1goz), the
     # 172 packing of issue 935 (T-282) plus an L of 27 grid squares.
     "[Özden s199 upper bound 2026-11-09]": _import("ozden-s199-upper-bound-2026-11-09"),
+    # Lane L81 of 11 November (think-3guf): Doğa Özden's issues 943, 944, 945 and 947 at 156,
+    # 180, 268 and 269 (think-xq4o), one repository and one packet each.
+    "[Özden s156 upper bound 2026-11-10]": _import("ozden-s156-upper-bound-2026-11-10"),
+    "[Özden s180 upper bound 2026-11-10]": _import("ozden-s180-upper-bound-2026-11-10"),
+    "[Özden s268 upper bound 2026-11-10]": _import("ozden-s268-upper-bound-2026-11-10"),
+    "[Özden s269 upper bound 2026-11-11]": _import("ozden-s269-upper-bound-2026-11-11"),
     # The intake pass's lane L65 of 9 November (think-h96r): Kaelan Yim's certificates at
     # vitamoon/vitamoon ac14112, which no issue reports; T-280 and T-281 are held below the
     # stage 4 exit for the owner (think-ruu2's RV-3, think-ikku).

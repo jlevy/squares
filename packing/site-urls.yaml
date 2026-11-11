@@ -5803,7 +5803,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/157.html
   canonical: cases/157.html
@@ -6019,7 +6019,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/181.html
   canonical: cases/181.html
@@ -6795,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-09'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -6803,7 +6803,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/27.html
   canonical: cases/27.html
@@ -23963,6 +23963,166 @@ urls:
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/README.md
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/decide-946.json
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/moves.json
+- path: result/t-287.html
+  canonical: result/t-287.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 156
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s156 upper bound 2026-11-10]'
+      published: '2026-11-10'
+    builds_on: null
+    evidence:
+    - E-ozden-943-certificate-report
+    - E-ozden-943-exact-feasibility
+    - E-ozden-943-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/README.md
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/acquisition/claims.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/n-156-candidate.yaml
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/n-156-decimal-pose.yaml
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/identity.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/contraction-n156.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/contraction-n156-own.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/l-step-scan.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/out/check-n156.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/out/controls-n156.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/out/identity-n156.json
+    - docs/project/reviews/review-2026-11-11-ozden-943-947.md
+    - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-288.html
+  canonical: result/t-288.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 180
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s180 upper bound 2026-11-10]'
+      published: '2026-11-10'
+    builds_on: null
+    evidence:
+    - E-ozden-944-certificate-report
+    - E-ozden-944-exact-feasibility
+    - E-ozden-944-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/README.md
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/acquisition/claims.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/source/n-180-candidate.yaml
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/source/n-180-decimal-pose.yaml
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/measure/identity.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/measure/contraction-n180.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/measure/contraction-n180-own.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/l-step-scan.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/review/review-2026-11-11/out/check-n180.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/review/review-2026-11-11/out/controls-n180.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/review/review-2026-11-11/out/identity-n180.json
+    - docs/project/reviews/review-2026-11-11-ozden-943-947.md
+    - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-289.html
+  canonical: result/t-289.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 268
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s268 upper bound 2026-11-10]'
+      published: '2026-11-10'
+    builds_on: null
+    evidence:
+    - E-ozden-945-certificate-report
+    - E-ozden-945-exact-feasibility
+    - E-ozden-945-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/README.md
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/acquisition/claims.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/source/n-268-candidate.yaml
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/source/n-268-decimal-pose.yaml
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/measure/identity.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/measure/contraction-n268.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/measure/contraction-n268-own.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/l-step-scan.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/review/review-2026-11-11/out/check-n268.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/review/review-2026-11-11/out/controls-n268.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/review/review-2026-11-11/out/identity-n268.json
+    - docs/project/reviews/review-2026-11-11-ozden-943-947.md
+    - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-290.html
+  canonical: result/t-290.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 269
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s269 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-ozden-947-certificate-report
+    - E-ozden-947-exact-feasibility
+    - E-ozden-947-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/README.md
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/source/n-269-candidate.yaml
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/source/n-269-decimal-pose.yaml
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/measure/contraction-n269.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/measure/contraction-n269-own.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/l-step-scan.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/review/review-2026-11-11/out/check-n269.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/review/review-2026-11-11/out/controls-n269.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/review/review-2026-11-11/out/identity-n269.json
+    - docs/project/reviews/review-2026-11-11-ozden-943-947.md
+    - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

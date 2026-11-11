@@ -59110,3 +59110,767 @@ evidence:
         it; F9 reports one control it mis-stated for this certificate; F10 to F12 correct this
         record's wording. Its clean-room run (V-de-winter-939-946-review-check, decide-946.json)
         and the replay are not entered while T-286 is held for the owner's RV-3 (think-ruu2).
+  - id: E-ozden-943-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 156
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s156 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-11'
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-943-review-exact-feasibility, and the replay E-ozden-943-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 87c9292. A
+      separate complete repository replay is retained for n = 156: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 72540 pair decisions; summed over the 3 jobs, the receipt records 27.83 route CPU
+      seconds and 28.2 job wall seconds, the longest job 9.47 seconds. In every positive squares
+      touch the box, a least wall clearance of exactly 0, and every pair clears by at least
+      2.01e-13. The packet's sharp controls meet those margins on both routes. The replay is
+      E-ozden-943-exact-feasibility, and the stage 4 review's clean-room run
+      E-ozden-943-review-exact-feasibility. The source's own sqcheck.py was not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share this repository's corner-witness reader (certificate
+      parsing and half-angle conversion), Fraction arithmetic and the separating-axis method;
+      the first is the packing-witness verify the author ran on the same file, so on that route
+      the replay is reproduced with the producer's code, and the second shares no verification
+      code with it. Because this repository's packing-witness promote made the exact
+      coordinates, neither route is independent of how they were rounded, as the issue says. No
+      human oversight or optimality is claimed.
+  - id: E-ozden-943-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 156
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s156 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/n-156-candidate.yaml
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19 on
+      two cores: python -m devtools.upper_bound_reports ozden-s156-upper-bound-2026-11-10
+      certify --workers 2 wrote the receipt on 11 November 2026 from the packet's retained
+      witness, and check --replay decides all 3 retained jobs, the witness with its
+      duplicate-square and outside-container controls, again through both maintained routes and
+      holds each to its retained row; check-claims rebuilds the frozen comparison, and reads the
+      retained JSON as the same packing. python -m devtools.upper_bound_reports
+      ozden-s156-upper-bound-2026-11-10 sharp-controls wrote the packet's sharp controls, all as
+      expected on both routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 156 that T-287 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-943-review-exact-feasibility, and the replay E-ozden-943-exact-feasibility.
+    limitations: >-
+      A replay of the one retained witness by two maintained exact routes that share this
+      repository's corner-witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The first route is the code the author
+      ran (packing-witness verify); the second shares no verification code with it. Neither is
+      independent of this repository's packing-witness promote, which made the coordinates. A
+      separate complete repository replay is retained for n = 156: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 72540 pair decisions; summed over the 3 jobs, the receipt records 27.83 route CPU
+      seconds and 28.2 job wall seconds, the longest job 9.47 seconds. In every positive squares
+      touch the box, a least wall clearance of exactly 0, and every pair clears by at least
+      2.01e-13. The receipt's controls are gross, and the packet's sharp controls meet those
+      margins. The source's own sqcheck.py was not run here. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-ozden-943-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 156
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s156 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/n-156-candidate.yaml
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python3 -I -B on a shared four-core host
+      at nice 19, 11 November 2026, from the review directory kept in the
+      ozden-s156-upper-bound-2026-11-10 packet (review/review-2026-11-11/programs/):
+      l83_check.py on n-156-candidate.yaml and its JSON twin (out/check-n156.json in this
+      packet's review/review-2026-11-11/, ACCEPT), deciding every format hypothesis, every
+      square a unit square, every wall and all 12,090 pairs by separating axes in Fraction and
+      again by exact clipped areas in gmpy2.mpq with no distance filter, in 6.2 CPU seconds: 3
+      exact wall contacts (left 1, top 66, bottom 122), the least positive wall clearance
+      8.70e-17, no pair touching, and the least pair margin 2.01838619433e-13, at squares 32 and
+      33. l83_controls.py decided the 15 controls the plan stated beforehand, by both methods
+      (out/controls-n156.json, 22.8 CPU seconds), each as stated; l83_selftest.py passed 92
+      cases. run_all.sh reruns everything.
+    replay_status: passed
+    verifiers:
+    - V-ozden-943-947-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 156: every square, every wall and every pair, by two exact methods
+          in two arithmetic libraries that share only the reader, with the stated controls
+          decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issues 943, 944, 945 and 947 (L83,
+          think-x8oc), strong tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were promoted to exact rationals by this repository's packing-witness
+          promote, whose witness tooling Claude agents co-authored, and the issue says AI agents
+          wrote and ran the lab's search and checks. The checker was written from the
+          mathematics, the Witness/v2 schema text and the certificates and frozen at
+          2026-11-11T06:36:12Z, before its author read any producer code or this repository's
+          witness, verifier or promotion code; it shares no code with the source's sqcheck.py or
+          this repository's maintained routes.
+    independence_record: >-
+      packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-943-review-exact-feasibility, and the replay E-ozden-943-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the one retained witness by two exact methods in one program, which
+      share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-ozden-944-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 180
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s180 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s180-upper-bound-2026-11-10/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-11'
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-944-review-exact-feasibility, and the replay E-ozden-944-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 4cfcb90. A
+      separate complete repository replay is retained for n = 180: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 96660 pair decisions; summed over the 3 jobs, the receipt records 42.39 route CPU
+      seconds and 42.89 job wall seconds, the longest job 14.63 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.00e-13. The packet's sharp controls meet those margins on both routes. The replay
+      is E-ozden-944-exact-feasibility, and the stage 4 review's clean-room run
+      E-ozden-944-review-exact-feasibility. The source's own sqcheck.py was not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share this repository's corner-witness reader (certificate
+      parsing and half-angle conversion), Fraction arithmetic and the separating-axis method;
+      the first is the packing-witness verify the author ran on the same file, so on that route
+      the replay is reproduced with the producer's code, and the second shares no verification
+      code with it. Because this repository's packing-witness promote made the exact
+      coordinates, neither route is independent of how they were rounded, as the issue says. No
+      human oversight or optimality is claimed.
+  - id: E-ozden-944-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 180
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s180 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s180-upper-bound-2026-11-10/source/n-180-candidate.yaml
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19 on
+      two cores: python -m devtools.upper_bound_reports ozden-s180-upper-bound-2026-11-10
+      certify --workers 2 wrote the receipt on 11 November 2026 from the packet's retained
+      witness, and check --replay decides all 3 retained jobs, the witness with its
+      duplicate-square and outside-container controls, again through both maintained routes and
+      holds each to its retained row; check-claims rebuilds the frozen comparison, and reads the
+      retained JSON as the same packing. python -m devtools.upper_bound_reports
+      ozden-s180-upper-bound-2026-11-10 sharp-controls wrote the packet's sharp controls, all as
+      expected on both routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 180 that T-288 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-944-review-exact-feasibility, and the replay E-ozden-944-exact-feasibility.
+    limitations: >-
+      A replay of the one retained witness by two maintained exact routes that share this
+      repository's corner-witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The first route is the code the author
+      ran (packing-witness verify); the second shares no verification code with it. Neither is
+      independent of this repository's packing-witness promote, which made the coordinates. A
+      separate complete repository replay is retained for n = 180: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 96660 pair decisions; summed over the 3 jobs, the receipt records 42.39 route CPU
+      seconds and 42.89 job wall seconds, the longest job 14.63 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.00e-13. The receipt's controls are gross, and the packet's sharp controls meet
+      those margins. The source's own sqcheck.py was not run here. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-ozden-944-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 180
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s180 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s180-upper-bound-2026-11-10/source/n-180-candidate.yaml
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python3 -I -B on a shared four-core host
+      at nice 19, 11 November 2026, from the review directory kept in the
+      ozden-s156-upper-bound-2026-11-10 packet (review/review-2026-11-11/programs/):
+      l83_check.py on n-180-candidate.yaml and its JSON twin (out/check-n180.json in this
+      packet's review/review-2026-11-11/, ACCEPT), deciding every format hypothesis, every
+      square a unit square, every wall and all 16,110 pairs by separating axes in Fraction and
+      again by exact clipped areas in gmpy2.mpq with no distance filter, in 9.9 CPU seconds: 3
+      exact wall contacts (top 48, left 108, bottom 132), the least positive wall clearance
+      4.28e-16, no pair touching, and the least pair margin 2.00744531389e-13, at squares 10 and
+      11. l83_controls.py decided the 15 controls the plan stated beforehand, by both methods
+      (out/controls-n180.json, 34.0 CPU seconds), each as stated; l83_selftest.py passed 92
+      cases. run_all.sh reruns everything.
+    replay_status: passed
+    verifiers:
+    - V-ozden-943-947-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 180: every square, every wall and every pair, by two exact methods
+          in two arithmetic libraries that share only the reader, with the stated controls
+          decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issues 943, 944, 945 and 947 (L83,
+          think-x8oc), strong tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were promoted to exact rationals by this repository's packing-witness
+          promote, whose witness tooling Claude agents co-authored, and the issue says AI agents
+          wrote and ran the lab's search and checks. The checker was written from the
+          mathematics, the Witness/v2 schema text and the certificates and frozen at
+          2026-11-11T06:36:12Z, before its author read any producer code or this repository's
+          witness, verifier or promotion code; it shares no code with the source's sqcheck.py or
+          this repository's maintained routes.
+    independence_record: >-
+      packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-944-review-exact-feasibility, and the replay E-ozden-944-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the one retained witness by two exact methods in one program, which
+      share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-ozden-945-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 268
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s268 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s268-upper-bound-2026-11-10/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-11'
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-945-review-exact-feasibility, and the replay E-ozden-945-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at b027aba. A
+      separate complete repository replay is retained for n = 268: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 214668 pair decisions; summed over the 3 jobs, the receipt records 80.57 route CPU
+      seconds and 82.48 job wall seconds, the longest job 27.99 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.01e-13. The packet's sharp controls meet those margins on both routes. The replay
+      is E-ozden-945-exact-feasibility, and the stage 4 review's clean-room run
+      E-ozden-945-review-exact-feasibility. The source's own sqcheck.py was not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share this repository's corner-witness reader (certificate
+      parsing and half-angle conversion), Fraction arithmetic and the separating-axis method;
+      the first is the packing-witness verify the author ran on the same file, so on that route
+      the replay is reproduced with the producer's code, and the second shares no verification
+      code with it. Because this repository's packing-witness promote made the exact
+      coordinates, neither route is independent of how they were rounded, as the issue says. No
+      human oversight or optimality is claimed.
+  - id: E-ozden-945-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 268
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s268 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s268-upper-bound-2026-11-10/source/n-268-candidate.yaml
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19 on
+      two cores: python -m devtools.upper_bound_reports ozden-s268-upper-bound-2026-11-10
+      certify --workers 2 wrote the receipt on 11 November 2026 from the packet's retained
+      witness, and check --replay decides all 3 retained jobs, the witness with its
+      duplicate-square and outside-container controls, again through both maintained routes and
+      holds each to its retained row; check-claims rebuilds the frozen comparison, and reads the
+      retained JSON as the same packing. python -m devtools.upper_bound_reports
+      ozden-s268-upper-bound-2026-11-10 sharp-controls wrote the packet's sharp controls, all as
+      expected on both routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 268 that T-289 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-945-review-exact-feasibility, and the replay E-ozden-945-exact-feasibility.
+    limitations: >-
+      A replay of the one retained witness by two maintained exact routes that share this
+      repository's corner-witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The first route is the code the author
+      ran (packing-witness verify); the second shares no verification code with it. Neither is
+      independent of this repository's packing-witness promote, which made the coordinates. A
+      separate complete repository replay is retained for n = 268: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 214668 pair decisions; summed over the 3 jobs, the receipt records 80.57 route CPU
+      seconds and 82.48 job wall seconds, the longest job 27.99 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.01e-13. The receipt's controls are gross, and the packet's sharp controls meet
+      those margins. The source's own sqcheck.py was not run here. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-ozden-945-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 268
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s268 upper bound 2026-11-10]'
+    certificate: packing/resources/web/ozden-s268-upper-bound-2026-11-10/source/n-268-candidate.yaml
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python3 -I -B on a shared four-core host
+      at nice 19, 11 November 2026, from the review directory kept in the
+      ozden-s156-upper-bound-2026-11-10 packet (review/review-2026-11-11/programs/):
+      l83_check.py on n-268-candidate.yaml and its JSON twin (out/check-n268.json in this
+      packet's review/review-2026-11-11/, ACCEPT), deciding every format hypothesis, every
+      square a unit square, every wall and all 35,778 pairs by separating axes in Fraction and
+      again by exact clipped areas in gmpy2.mpq with no distance filter, in 18.9 CPU seconds: 8
+      exact wall contacts (top 10, top 11, top 12, left 38, left 59, bottom 107, right 196,
+      right 208), the least positive wall clearance 8.73e-18, no pair touching, and the least
+      pair margin 2.01894970858e-13, at squares 55 and 65. l83_controls.py decided the 15
+      controls the plan stated beforehand, by both methods (out/controls-n268.json, 60.7 CPU
+      seconds), each as stated; l83_selftest.py passed 92 cases. run_all.sh reruns everything.
+    replay_status: passed
+    verifiers:
+    - V-ozden-943-947-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 268: every square, every wall and every pair, by two exact methods
+          in two arithmetic libraries that share only the reader, with the stated controls
+          decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issues 943, 944, 945 and 947 (L83,
+          think-x8oc), strong tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were promoted to exact rationals by this repository's packing-witness
+          promote, whose witness tooling Claude agents co-authored, and the issue says AI agents
+          wrote and ran the lab's search and checks. The checker was written from the
+          mathematics, the Witness/v2 schema text and the certificates and frozen at
+          2026-11-11T06:36:12Z, before its author read any producer code or this repository's
+          witness, verifier or promotion code; it shares no code with the source's sqcheck.py or
+          this repository's maintained routes.
+    independence_record: >-
+      packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-945-review-exact-feasibility, and the replay E-ozden-945-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the one retained witness by two exact methods in one program, which
+      share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-ozden-947-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 269
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s269 upper bound 2026-11-11]'
+    certificate: packing/resources/web/ozden-s269-upper-bound-2026-11-11/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-11'
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-947-review-exact-feasibility, and the replay E-ozden-947-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 6f93b07. A
+      separate complete repository replay is retained for n = 269: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 216276 pair decisions; summed over the 3 jobs, the receipt records 95.39 route CPU
+      seconds and 96.74 job wall seconds, the longest job 33.37 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.03e-13. The packet's sharp controls meet those margins on both routes. The replay
+      is E-ozden-947-exact-feasibility, and the stage 4 review's clean-room run
+      E-ozden-947-review-exact-feasibility. The source's own sqcheck.py was not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share this repository's corner-witness reader (certificate
+      parsing and half-angle conversion), Fraction arithmetic and the separating-axis method;
+      the first is the packing-witness verify the author ran on the same file, so on that route
+      the replay is reproduced with the producer's code, and the second shares no verification
+      code with it. Because this repository's packing-witness promote made the exact
+      coordinates, neither route is independent of how they were rounded, as the issue says. No
+      human oversight or optimality is claimed.
+  - id: E-ozden-947-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 269
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s269 upper bound 2026-11-11]'
+    certificate: packing/resources/web/ozden-s269-upper-bound-2026-11-11/source/n-269-candidate.yaml
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19 on
+      two cores: python -m devtools.upper_bound_reports ozden-s269-upper-bound-2026-11-11
+      certify --workers 2 wrote the receipt on 11 November 2026 from the packet's retained
+      witness, and check --replay decides all 3 retained jobs, the witness with its
+      duplicate-square and outside-container controls, again through both maintained routes and
+      holds each to its retained row; check-claims rebuilds the frozen comparison, and reads the
+      retained JSON as the same packing. python -m devtools.upper_bound_reports
+      ozden-s269-upper-bound-2026-11-11 sharp-controls wrote the packet's sharp controls, all as
+      expected on both routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 269 that T-290 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-947-review-exact-feasibility, and the replay E-ozden-947-exact-feasibility.
+    limitations: >-
+      A replay of the one retained witness by two maintained exact routes that share this
+      repository's corner-witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The first route is the code the author
+      ran (packing-witness verify); the second shares no verification code with it. Neither is
+      independent of this repository's packing-witness promote, which made the coordinates. A
+      separate complete repository replay is retained for n = 269: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 216276 pair decisions; summed over the 3 jobs, the receipt records 95.39 route CPU
+      seconds and 96.74 job wall seconds, the longest job 33.37 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.03e-13. The receipt's controls are gross, and the packet's sharp controls meet
+      those margins. The source's own sqcheck.py was not run here. Finite feasibility only.
+    source_reviewed: '2026-11-11'
+  - id: E-ozden-947-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 269
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s269 upper bound 2026-11-11]'
+    certificate: packing/resources/web/ozden-s269-upper-bound-2026-11-11/source/n-269-candidate.yaml
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python3 -I -B on a shared four-core host
+      at nice 19, 11 November 2026, from the review directory kept in the
+      ozden-s156-upper-bound-2026-11-10 packet (review/review-2026-11-11/programs/):
+      l83_check.py on n-269-candidate.yaml and its JSON twin (out/check-n269.json in this
+      packet's review/review-2026-11-11/, ACCEPT), deciding every format hypothesis, every
+      square a unit square, every wall and all 36,046 pairs by separating axes in Fraction and
+      again by exact clipped areas in gmpy2.mpq with no distance filter, in 22.0 CPU seconds: 3
+      exact wall contacts (bottom 225, left 227, right 260), the least positive wall clearance
+      5.83e-16, no pair touching, and the least pair margin 2.03649426436e-13, at squares 119
+      and 202. l83_controls.py decided the 15 controls the plan stated beforehand, by both
+      methods (out/controls-n269.json, 71.0 CPU seconds), each as stated; l83_selftest.py passed
+      92 cases. run_all.sh reruns everything.
+    replay_status: passed
+    verifiers:
+    - V-ozden-943-947-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 269: every square, every wall and every pair, by two exact methods
+          in two arithmetic libraries that share only the reader, with the stated controls
+          decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issues 943, 944, 945 and 947 (L83,
+          think-x8oc), strong tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were promoted to exact rationals by this repository's packing-witness
+          promote, whose witness tooling Claude agents co-authored, and the issue says AI agents
+          wrote and ran the lab's search and checks. The checker was written from the
+          mathematics, the Witness/v2 schema text and the certificates and frozen at
+          2026-11-11T06:36:12Z, before its author read any producer code or this repository's
+          witness, verifier or promotion code; it shares no code with the source's sqcheck.py or
+          this repository's maintained routes.
+    independence_record: >-
+      packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 943, 944,
+        945 and 947 (L83, think-x8oc), prompted separately from the import lane (L81,
+        think-xq4o) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-ozden-943-947.md accepted the certificate with
+        findings, all notes, none blocking: F4 to F7, F12 and F13 for the author, F8 to F11, F14
+        and F15 for the records, and F16 on this lane's tilt-sign wording. Its clean-room run is
+        E-ozden-947-review-exact-feasibility, and the replay E-ozden-947-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the one retained witness by two exact methods in one program, which
+      share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-11'

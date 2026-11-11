@@ -152,10 +152,13 @@ GOLDEN_UNSTABLE = {
         132,
         146,
         # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
-        # stable across tolerances.
+        # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
+        # certificates there (T-287, T-288, think-xq4o).
+        156,
         175,
         176,
         177,
+        180,
         181,
         199,
     ],
@@ -170,10 +173,13 @@ GOLDEN_UNSTABLE = {
         132,
         146,
         # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
-        # stable across tolerances.
+        # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
+        # certificates there (T-287, T-288, think-xq4o).
+        156,
         175,
         176,
         177,
+        180,
         181,
         199,
         204,

@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **247** programs: **54** external and **193** first-party; **166** decide claims and **81** check premises.
-- **720** of **919** evidence entries name the programs that verified them: 339 independently re-implemented, 307 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **248** programs: **54** external and **194** first-party; **167** decide claims and **81** check premises.
+- **728** of **931** evidence entries name the programs that verified them: 343 independently re-implemented, 311 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -89,8 +89,8 @@ second implementation agrees.
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 117 | 112 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 109 | 112 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 121 | 116 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 113 | 116 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -195,10 +195,10 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 90 | 95 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 94 | 99 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-build-field-configuration`](#v-build-field-configuration) | devtools.build_field_configuration | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 85 | 90 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 89 | 94 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -279,6 +279,7 @@ second implementation agrees.
 | [`V-ozden-938-review-check`](#v-ozden-938-review-check) | l77_check.py with l77_checker.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-yim-1109-review-check`](#v-yim-1109-review-check) | l70_check.py with l70_reader.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-de-winter-939-946-review-check`](#v-de-winter-939-946-review-check) | l82_check.py with l82_decide.py and l82_selftest.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-ozden-943-947-review-check`](#v-ozden-943-947-review-check) | l83_check.py with l83_reader.py | Squares Project (Levy) | first-party | decides | 4 | 4 |
 
 ## By Program
 
@@ -1523,6 +1524,10 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-ozden-935-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 172 that T-282 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-282 |
 | `E-ozden-936-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 270 that T-283 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-283 |
 | `E-ozden-938-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 199 that T-284 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-284 |
+| `E-ozden-943-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 156 that T-287 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-287 |
+| `E-ozden-944-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 180 that T-288 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-288 |
+| `E-ozden-945-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 268 that T-289 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-289 |
+| `E-ozden-947-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 269 that T-290 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-290 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1646,6 +1651,10 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-ozden-935-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 172 that T-282 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-282 |
 | `E-ozden-936-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 270 that T-283 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-283 |
 | `E-ozden-938-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 199 that T-284 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-284 |
+| `E-ozden-943-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 156 that T-287 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-287 |
+| `E-ozden-944-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 180 that T-288 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-288 |
+| `E-ozden-945-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 268 that T-289 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-289 |
+| `E-ozden-947-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 269 that T-290 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-290 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -3635,6 +3644,10 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-ozden-935-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 172 that T-282 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-282 |
 | `E-ozden-936-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 270 that T-283 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-283 |
 | `E-ozden-938-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 199 that T-284 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-284 |
+| `E-ozden-943-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 156 that T-287 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-287 |
+| `E-ozden-944-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 180 that T-288 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-288 |
+| `E-ozden-945-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 268 that T-289 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-289 |
+| `E-ozden-947-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 269 that T-290 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-290 |
 
 ### `V-algebraic-witness-reports`
 
@@ -3761,6 +3774,10 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-ozden-935-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 172 that T-282 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-282 |
 | `E-ozden-936-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 270 that T-283 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-283 |
 | `E-ozden-938-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 199 that T-284 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-284 |
+| `E-ozden-943-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 156 that T-287 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-287 |
+| `E-ozden-944-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 180 that T-288 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-288 |
+| `E-ozden-945-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 268 that T-289 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-289 |
+| `E-ozden-947-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 269 that T-290 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-290 |
 
 ### `V-rehwaldt-n68-verify`
 
@@ -4986,6 +5003,25 @@ The 11 November stage 4 review's exact checker of Joost de Winter's rational cer
 - Note: Written and run on 11 November 2026 for docs/project/reviews/review-2026-11-11-de-winter-939-946.md (SHA-256 03d58e600f67534334e40669f8401a17f308063262122ab98dfc3bdcfef37178 for l82_check.py and 18bcc73e17f6c12bdc0443daecaab04adf6846efe17b5a49e982da3f654e8ff9 for l82_selftest.py as frozen and retained), kept in the de-winter-s199-upper-bound-2026-11-09 packet's review/review-2026-11-11/, with the 172 receipts in the de-winter-s172-upper-bound-2026-11-10 packet's. Its runs (decide-939.json, decide-946.json) are not entered as evidence while T-285 and T-286 are held for the owner's RV-3 (think-ruu2), as T-280's are not. l82_algebra.py, l82_measure.py, l82_moves.py, l82_supplement.py, l82_print300.py, l82_freeze.py and l82_compare_lane.py, kept beside them, decide no certificate and are not registered.
 
 No evidence entry names it yet.
+
+### `V-ozden-943-947-review-check`
+
+**l83_check.py with l83_reader.py, l83_sat.py, l83_clip.py and l83_geom.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2 certificates of issues 943, 944, 945 and 947 (156, 180, 268, 269), with a strict reader of its own (l83_reader.py: every scalar an exact integer pair in lowest terms, ids 1 to n in order, the JSON twin held to the same tree, any unexpected layout refused): every format hypothesis, every square a unit square from its listed corners, every wall and every pair twice with no distance filter, by separating axes over the four edge normals in fractions.Fraction (l83_sat.py, method A) and by exact clipped areas in gmpy2.mpq (l83_clip.py, method B), each pair classed overlapping, touching or clear by both. l83_geom.py holds the exact constructions the controls use, the centre-line closing among them; l83_controls.py decides 15 controls a count stated in a plan hashed before it existed; l83_selftest.py holds both methods and the reader to 92 cases.
+
+- Source: [`packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_check.py`](../../packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_check.py), [`packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_reader.py`](../../packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_reader.py), [`packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_sat.py`](../../packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_sat.py), [`packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_clip.py`](../../packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_clip.py), [`packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_geom.py`](../../packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_geom.py), [`packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_selftest.py`](../../packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_selftest.py), [`packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_controls.py`](../../packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_controls.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md`](../../packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issues 943, 944, 945 and 947 (L83, think-x8oc), strong tier, prompted separately from the import lane (L81, think-xq4o)), with its own prompt and code; authorship in common with the producer’s: system-family, The coordinates were made by this repository's packing-witness promote, whose witness tooling Claude agents co-authored, and the issues say AI agents wrote and ran the lab's search and checks. The six checker files were frozen at 2026-11-11T06:36:12Z (frozen/checker-frozen-digests.txt), before their author read any producer code or this repository's witness, verifier or promotion code; they import nothing from this repository or the source.
+- Note: Written and run on 11 November 2026 for docs/project/reviews/review-2026-11-11-ozden-943-947.md (SHA-256 661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0 for l83_check.py, as frozen at 2026-11-11T06:36:12Z and as each receipt records), and kept with its receipts in the ozden-s156-upper-bound-2026-11-10 packet's review/review-2026-11-11/, each count's receipts in its own packet. l83_construct.py, l83_plan_facts.py, l83_sides.py, l83_houses.py, l83_house.py, l83_shares.py, l83_identity.py, l83_custody.py, l83_digests.py and l83_compare_lane.py, kept beside them, decide no certificate and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-943-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 156: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-287 |
+| `E-ozden-944-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 180: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-288 |
+| `E-ozden-945-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 268: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-289 |
+| `E-ozden-947-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 269: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-290 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

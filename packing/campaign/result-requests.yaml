@@ -11056,6 +11056,13 @@ issues:
       - result: ties-211-241
       corrects:
       - https://github.com/jlevy/squares/issues/593#issuecomment-6206056451
+      outdated:
+      - >-
+        since the adoption of 16 October, T-186 is the house at all twelve counts; it remains the
+        house only at 129, 176 and 264, the other nine having moved in the adoption passes the
+        case records date: 271 to T-219 on 19 October, 154 to T-222 on 20 October, 302 to T-193
+        on 23 October, 175, 204 and 304 to T-267, T-268 and T-273 on 5 November, 232 and 303 to
+        T-275 and T-278 on 9 November, and 156 to T-287 on 11 November
     blocked:
       type: owner-decision
       reason: >-
@@ -11069,6 +11076,15 @@ issues:
       October to the regenerated draft, once devtools.decide_undecided_comparisons had
       decided 17 of PR #574's undecided comparisons exactly (result-import.md,
       Report-Order Verdict Comments); the comment as recorded is the edited one.
+
+      The follow-up of 20 October said T-186 is the house at all twelve of its counts since the
+      adoption of 16 October. Eight had moved before 11 November with no follow-up here (271,
+      154, 302, 175, 204, 304, 232 and 303), and the adoption of 11 November 2026 (intake lane
+      L81, think-xq4o, #943) moved 156 to Doğa Özden's T-287. check_requests cannot see that
+      statement go stale, since replies before 26 October 2026 record no position, so it is
+      marked `outdated` on the 20 October follow-up; the follow-up it owes gives T-186's houses
+      now, 129, 176 and 264, and the house at each of the other nine counts, as #438's follow-up
+      of 11 November did for T-127.
   - number: 594
     title: 'Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)'
     author: bengreff
@@ -27849,7 +27865,7 @@ issues:
       record, data and code, and the code may also be used under MIT, as with v5. It also
       names his preprint doi:10.20944/preprints202610.2669.v1 as the citation for the
       two-strip records.
-    read_through: '2026-11-04T20:34:45Z'
+    read_through: '2026-11-10T19:22:29Z'
     results:
     - key: filled-end-v2
       claim: >-
@@ -27976,6 +27992,21 @@ issues:
       of 20:56:49Z (issuecomment-6641911906) acknowledges it, says so, and restates that no
       V2.0 or V1.0 row is recorded yet, the rows waiting on the walk above 1024
       (think-llit) and the owner's decision on V1.0.
+
+      The author's comment of 19:22:29Z on 10 November (issuecomment-6776987457) updates
+      his total record count: his currently active certified upper bounds are the union of
+      #836's v5 (5,308 rows, n = 1182 to 9944) and #847's V2.0 (5,134 rows, 1182 to 9946),
+      which overlap at 4,841 counts and so cover 5,601 distinct counts from 1182 to 9946;
+      #799's versions 1 (683 rows) and 2 (2,824 rows) are historical versions of the same
+      construction, contained in v5, and should not be added to the total. Each figure
+      holds in the retained files (karimi-two-strip-2026-10-24 and
+      karimi-records-2026-10-31): the union is 5,601 counts, and every count of versions 1
+      and 2 is also a v5 count. It reports no new row, bound or construction, so nothing is
+      imported and no bead is created; whether each row is below every earlier report and
+      below Goebel's construction is still the walk above 1024's to decide (think-llit), and
+      V1.0's rows still Q-847a's. Read on 11 November by lane L81 (think-xq4o). Reading it
+      into read_through on a later day than the last reply makes a reply due, which the
+      requests check lists.
   - number: 890
     title: "s(94) ≥ 1993/200 = 9.965 (dilation of Hosono's mixed_n94_L995 on a finer net): registration request"
     author: kenaznia-doga
@@ -30392,3 +30423,305 @@ issues:
       review's six questions, the same as on #939, and says that the issue stays open,
       labelled blocked:owner-decision, until the owner answers RV-3; the questions are
       informational and hold nothing open, and that a final reply follows then.
+  - number: 943
+    title: 's(156) ≤ 12.977053087498: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(156) <= 12.977053087498, the exact rational side of n-156-candidate.yaml rounded up at
+      12 places, 2.113e-03 below the house, Daniil Ostashev's packing, refined by Francisco
+      Couzo, PingYou Ltd and Mishapolk (T-186): a rational corner Witness/v2 at
+      kenaznia-doga/s156-upper-bound 87c9292, the repository's one commit, 50 seconds before the
+      issue, promoted to exact rationals with this repository's packing-witness promote at
+      f54ad104 from a decimal pose the repository retains. It reports packing-witness verify
+      VERIFIED (12090 pairs) and sqcheck.py VALID, and says the packing was found by transplant
+      search, a horizontal and a vertical unit-wide strip cut out of the registry's 182 (Evan
+      Daniel) and closed up, squares then deleted, then quenched and basin-hopped. Triaged and
+      retained on 11 November 2026 in lane L81 (think-xq4o): every stated digest holds, the
+      print is the exact side rounded up, and both maintained exact routes accept the witness
+      and refuse its gross and sharp controls; measured, it is a new arrangement relative to
+      T-186's packing, not one to one with it under any symmetry, 58 squares beyond a tenth. The
+      ledger of 11 November records it. Registered as T-287. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-11-ozden-943-947.md, think-x8oc, lane L83), written
+      blind in a separate lane, accepted it with findings, all notes, and scored it S3; its
+      clean-room checker decided it again, so the entry is confirmed, independently
+      re-implemented, at V3/C3, and the case adopts it at 156 under the house rule in the same
+      pass, with Doğa Özden the packing's finder and the seed's and house's holders credited as
+      the start and the record it improves, both strong generators' regularization of the new
+      house run in the same change. The Kaggle packing the issue quotes, 12.979165853846
+      (kirilltym), is above it; the side-only leaderboard entry it quotes states no packing.
+    read_through: '2026-11-10T15:28:40Z'
+    results:
+    - key: n156-transplant
+      claim: >-
+        s(156) <= 12.9770530874972048 (the exact rational side, rounded up at 16 places, of
+        n-156-candidate.yaml at kenaznia-doga/s156-upper-bound 87c9292), a packing seeded from
+        the registry's 182.
+      source: body
+      register:
+      - T-287
+      evidence:
+      - E-ozden-943-certificate-report
+      - E-ozden-943-exact-feasibility
+      - E-ozden-943-review-exact-feasibility
+    beads:
+    - think-xq4o
+    - think-x8oc
+    answer_bead: think-xq4o
+    replies: []
+    close_when: >-
+      T-287 is on main at V3/C3 as the house at 156, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 87c9292 precedes
+      the issue by 50 seconds. The issue carries the intake label. T-186 was the house it
+      improves. #593's follow-up of 20 October reported T-186 confirmed and the house at all
+      twelve of its counts since the adoption of 16 October. Eight of them had moved before this
+      adoption (154, 175, 204, 232, 271, 302, 303 and 304) and 156 moves now, so that statement
+      is marked outdated on #593's entry, and this adoption owes #593 a follow-up giving T-186's
+      houses now, 129, 176 and 264, and the house at each of the other nine counts. T-260
+      (#846), Polkovskyi's re-certification of T-186 lowered by 1e-41 and held on think-ikku, is
+      also above this certificate by 2.11e-3. Adopting this certificate moves the house at 156
+      whatever the owner rules on T-260, whose question stays open at 105, 146, 229 and 308
+      (F15). Measured against padding, T-186's certificate, contracted uniformly about the
+      origin to first contact and boxed, loses 1.30e-39 of side (1 - lambda* = 1.000000e-40), so
+      the gain is about 1.6e36 times the house's padding and none of it worth stating is
+      padding. This certificate's own margin, measured the same way, is 2.42e-12. Both receipts
+      are contraction_margin's, retained in the packet's measure/ directory. The review measured
+      the same house margins with its own programs (F9): no gain is near one, and these are not
+      re-certifications of a house, so RV-3 (think-ruu2) does not reach them. The L-step scan
+      finds that this bound carries to no other count. The review's questions for the author,
+      informational and holding nothing open: whether "our 15-place ceiling, 12.977053087497205,
+      is below that figure by 2.5e-11" says what the issue meant (F4); whether the final repair
+      scaling was about 2e-13 rather than 1e-13, since the margins are 2.0e-13 to 9.8e-13 of the
+      centres' separation (F6); which assignment the lineage counts use, least summed move with
+      lower-left anchoring reproducing them all (F7); which replay is intended,
+      certificate.replay or the README's rerun, and from which directory, and whether the schema
+      path could name this repository's file (F12, F13). No reply has been posted.
+  - number: 944
+    title: 's(180) ≤ 13.915618502791: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(180) <= 13.915618502791, the exact rational side of n-180-candidate.yaml rounded up at
+      12 places, 1.375e-03 below the house, Nate Chaoweeraprasit's packing, refined by Siddharth
+      Gupta, Francisco Couzo and PingYou Ltd (T-174): a rational corner Witness/v2 at
+      kenaznia-doga/s180-upper-bound 4cfcb90, the repository's one commit, 51 seconds before the
+      issue, promoted to exact rationals with this repository's packing-witness promote at
+      f54ad104 from a decimal pose the repository retains. It reports packing-witness verify
+      VERIFIED (16110 pairs) and sqcheck.py VALID, and says the packing was found by transplant
+      search, an L of axis-aligned grid squares added along two walls of the registry's 154
+      (Evan Daniel, improved by Francisco Couzo), squares then deleted or inserted, then
+      quenched and basin-hopped. Triaged and retained on 11 November 2026 in lane L81
+      (think-xq4o): every stated digest holds, the print is the exact side rounded up, and both
+      maintained exact routes accept the witness and refuse its gross and sharp controls;
+      measured, it is a new arrangement relative to T-174's packing, not one to one with it
+      under any symmetry, 49 squares beyond a tenth. The ledger of 11 November records it.
+      Registered as T-288. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-11-ozden-943-947.md, think-x8oc, lane L83), written
+      blind in a separate lane, accepted it with findings, all notes, and scored it S3; its
+      clean-room checker decided it again, so the entry is confirmed, independently
+      re-implemented, at V3/C3, and the case adopts it at 180 under the house rule in the same
+      pass, with Doğa Özden the packing's finder and the seed's and house's holders credited as
+      the start and the record it improves, both strong generators' regularization of the new
+      house run in the same change. The Kaggle packing the issue quotes, 13.916993522491
+      (kirilltym), is above it; the side-only leaderboard entry it quotes states no packing.
+    read_through: '2026-11-10T15:28:41Z'
+    results:
+    - key: n180-transplant
+      claim: >-
+        s(180) <= 13.9156185027900258 (the exact rational side, rounded up at 16 places, of
+        n-180-candidate.yaml at kenaznia-doga/s180-upper-bound 4cfcb90), a packing seeded from
+        the registry's 154.
+      source: body
+      register:
+      - T-288
+      evidence:
+      - E-ozden-944-certificate-report
+      - E-ozden-944-exact-feasibility
+      - E-ozden-944-review-exact-feasibility
+    beads:
+    - think-xq4o
+    - think-x8oc
+    answer_bead: think-xq4o
+    replies: []
+    close_when: >-
+      T-288 is on main at V3/C3 as the house at 180, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 4cfcb90 precedes
+      the issue by 51 seconds. The issue carries the intake label. T-174 was the house it
+      improves. #574's follow-up of 19 October acknowledged the rational houses PR #665 adopted
+      from T-174, 180 among them. #574 is held for the owner (think-9v2k), so the follow-up
+      naming the new house at 180 waits on that hold.
+      Measured against padding, T-174's certificate has no padding to measure: contracted
+      uniformly about the origin it meets first contact at once (1 - lambda* = 0), a pair
+      already touching, so none of the gain is the house's padding. This certificate's own
+      margin, measured the same way, is 2.58e-12. Both receipts are contraction_margin's,
+      retained in the packet's measure/ directory. The review measured the same house margins
+      with its own programs (F9): no gain is near one, and these are not re-certifications of a
+      house, so RV-3 (think-ruu2) does not reach them. The L-step scan finds that this bound
+      carries to no other count. The review's questions for the author, informational and
+      holding nothing open: how much of the stated seed, the registry's 154, the author expected
+      to remain after 1,281 basin-hopping trials, since the measured relation to it is no closer
+      than to the house (F8); whether the final repair scaling was about 2e-13 rather than
+      1e-13, since the margins are 2.0e-13 to 9.8e-13 of the centres' separation (F6); which
+      assignment the lineage counts use, least summed move with lower-left anchoring reproducing
+      them all (F7); which replay is intended, certificate.replay or the README's rerun, and
+      from which directory, and whether the schema path could name this repository's file (F12,
+      F13). No reply has been posted.
+  - number: 945
+    title: 's(268) ≤ 16.872029849085: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(268) <= 16.872029849085, the exact rational side of n-268-candidate.yaml rounded up at
+      12 places, 4.400e-04 below the house, Evan Daniel's packing as Doğa Özden improved it
+      (#928) (T-276): a rational corner Witness/v2 at kenaznia-doga/s268-upper-bound-16872029849
+      b027aba, the repository's one commit, 52 seconds before the issue, promoted to exact
+      rationals with this repository's packing-witness promote at f54ad104 from a decimal pose
+      the repository retains. It reports packing-witness verify VERIFIED (35778 pairs) and
+      sqcheck.py VALID, and says the packing was found by transplant search, a horizontal and a
+      vertical unit-wide strip cut out of the registry's 302 (PingYou Ltd, improved by Francisco
+      Couzo, Mishapolk and Evan Daniel) and closed up, then quenched and basin-hopped. It
+      improves the author's own #928 (T-276). Triaged and retained on 11 November 2026 in lane
+      L81 (think-xq4o): every stated digest holds, the print is the exact side rounded up, and
+      both maintained exact routes accept the witness and refuse its gross and sharp controls;
+      measured, it is a new arrangement relative to T-276's packing, not one to one with it
+      under any symmetry, 125 squares beyond a tenth. The ledger of 11 November records it.
+      Registered as T-289. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-11-ozden-943-947.md, think-x8oc, lane L83), written
+      blind in a separate lane, accepted it with findings, all notes, and scored it S3; its
+      clean-room checker decided it again, so the entry is confirmed, independently
+      re-implemented, at V3/C3, and the case adopts it at 268 under the house rule in the same
+      pass, with Doğa Özden the packing's finder and the seed's and house's holders credited as
+      the start and the record it improves, both strong generators' regularization of the new
+      house run in the same change. The Kaggle packing the issue quotes, 16.874361715873
+      (ntumlnoob), is above it; the side-only leaderboard entry it quotes states no packing.
+    read_through: '2026-11-10T15:28:42Z'
+    results:
+    - key: n268-transplant
+      claim: >-
+        s(268) <= 16.8720298490844502 (the exact rational side, rounded up at 16 places, of
+        n-268-candidate.yaml at kenaznia-doga/s268-upper-bound-16872029849 b027aba), a packing
+        seeded from the registry's 302.
+      source: body
+      register:
+      - T-289
+      evidence:
+      - E-ozden-945-certificate-report
+      - E-ozden-945-exact-feasibility
+      - E-ozden-945-review-exact-feasibility
+    beads:
+    - think-xq4o
+    - think-x8oc
+    answer_bead: think-xq4o
+    replies: []
+    close_when: >-
+      T-289 is on main at V3/C3 as the house at 268, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 11 November 2026 from main f54ad1048; no comment yet. The commit b027aba precedes
+      the issue by 52 seconds. The issue carries the intake label. T-276 was the house it
+      improves. #928's final reply of 9 November stated T-276 confirmed and current, so this
+      adoption owes #928 a follow-up naming the new house. Measured against padding, T-276's
+      certificate, contracted uniformly about the origin to first contact and boxed, loses
+      3.19e-12 of side (1 - lambda* = 2.012182e-13), so the gain is about 1.4e08 times the
+      house's padding and none of it worth stating is padding. This certificate's own margin,
+      measured the same way, is 3.20e-12. Both receipts are contraction_margin's, retained in
+      the packet's measure/ directory. The review measured the same house margins with its own
+      programs (F9): no gain is near one, and these are not re-certifications of a house, so
+      RV-3 (think-ruu2) does not reach them. The L-step scan finds that this bound carries to no
+      other count. The review's questions for the author, informational and holding nothing
+      open: whether the search snapped the eight wall squares to common values, and whether "the
+      squares that set each wall, ties included" describes them (F5); whether the final repair
+      scaling was about 2e-13 rather than 1e-13, since the margins are 2.0e-13 to 9.8e-13 of the
+      centres' separation (F6); which assignment the lineage counts use, least summed move with
+      lower-left anchoring reproducing them all (F7); which replay is intended,
+      certificate.replay or the README's rerun, and from which directory, and whether the schema
+      path could name this repository's file (F12, F13). No reply has been posted.
+  - number: 947
+    title: 's(269) ≤ 16.900994579952: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(269) <= 16.900994579952, the exact rational side of n-269-candidate.yaml rounded up at
+      12 places, 5.190e-04 below the house, Nate Chaoweeraprasit's SQUISH packing, improved by
+      Evan Daniel and PingYou Ltd (T-174): a rational corner Witness/v2 at
+      kenaznia-doga/s269-upper-bound 6f93b07, the repository's one commit, 13 seconds before the
+      issue, promoted to exact rationals with this repository's packing-witness promote at
+      f54ad104 from a decimal pose the repository retains. It reports packing-witness verify
+      VERIFIED (36046 pairs) and sqcheck.py VALID, and says the packing was found by transplant
+      search, a horizontal and a vertical unit-wide strip cut out of the registry's 304 (Evan
+      Daniel) and closed up, one square then deleted, then quenched and basin-hopped. Triaged
+      and retained on 11 November 2026 in lane L81 (think-xq4o): every stated digest holds, the
+      print is the exact side rounded up, and both maintained exact routes accept the witness
+      and refuse its gross and sharp controls; measured, it is a new arrangement relative to
+      T-174's packing, not one to one with it under any symmetry, 112 squares beyond a tenth.
+      The ledger of 11 November records it. Registered as T-290. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-11-ozden-943-947.md, think-x8oc, lane L83), written
+      blind in a separate lane, accepted it with findings, all notes, and scored it S3; its
+      clean-room checker decided it again, so the entry is confirmed, independently
+      re-implemented, at V3/C3, and the case adopts it at 269 under the house rule in the same
+      pass, with Doğa Özden the packing's finder and the seed's and house's holders credited as
+      the start and the record it improves, both strong generators' regularization of the new
+      house run in the same change. The Kaggle packing the issue quotes, 16.901513582205
+      (kirilltym), is above it; the side-only leaderboard entry it quotes states no packing.
+    read_through: '2026-11-11T03:35:07Z'
+    results:
+    - key: n269-transplant
+      claim: >-
+        s(269) <= 16.9009945799513249 (the exact rational side, rounded up at 16 places, of
+        n-269-candidate.yaml at kenaznia-doga/s269-upper-bound 6f93b07), a packing seeded from
+        the registry's 304.
+      source: body
+      register:
+      - T-290
+      evidence:
+      - E-ozden-947-certificate-report
+      - E-ozden-947-exact-feasibility
+      - E-ozden-947-review-exact-feasibility
+    beads:
+    - think-xq4o
+    - think-x8oc
+    answer_bead: think-xq4o
+    replies: []
+    close_when: >-
+      T-290 is on main at V3/C3 as the house at 269, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 6f93b07 precedes
+      the issue by 13 seconds. The issue carries the intake label. T-174 was the house it
+      improves. #574's follow-up of 19 October acknowledged the rational houses PR #665 adopted
+      from T-174, 269 among them. #574 is held for the owner (think-9v2k), so the follow-up
+      naming the new house at 269 waits on that hold.
+      Measured against padding, T-174's certificate has no padding to measure: contracted
+      uniformly about the origin it meets first contact at once (1 - lambda* = 0), a pair
+      already touching, so none of the gain is the house's padding. This certificate's own
+      margin, measured the same way, is 3.24e-12. Both receipts are contraction_margin's,
+      retained in the packet's measure/ directory. The review measured the same house margins
+      with its own programs (F9): no gain is near one, and these are not re-certifications of a
+      house, so RV-3 (think-ruu2) does not reach them. The L-step scan finds that this bound
+      carries to no other count. The review's questions for the author, informational and
+      holding nothing open: whether the final repair scaling was about 2e-13 rather than 1e-13,
+      since the margins are 2.0e-13 to 9.8e-13 of the centres' separation (F6); which assignment
+      the lineage counts use, least summed move with lower-left anchoring reproducing them all
+      (F7); which replay is intended, certificate.replay or the README's rerun, and from which
+      directory, and whether the schema path could name this repository's file (F12, F13). No
+      reply has been posted.

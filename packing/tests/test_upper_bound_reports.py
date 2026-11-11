@@ -200,6 +200,16 @@ L65_1109 = ("yim-certificates-2026-11-09", "yim-n303-2026-11-09")
 #: Doğa Özden's #938 at 199, his #935 witness at 172 (T-282) with an L of 27 unit grid
 #: squares at side S172 + 1, under CC BY 4.0 and MIT. Its grid squares touch each other.
 L76_1109 = "ozden-s199-upper-bound-2026-11-09"
+#: The intake pass's lane L81 of 11 November 2026 (`test_upper_bound_reports_l81_1111`):
+#: Doğa Özden's #943, #944, #945 and #947 at 156, 180, 268 and 269, each a corner witness
+#: his lab promoted to exact rationals with this repository's `packing-witness promote`
+#: from a decimal pose the packet retains, under CC BY 4.0 and MIT.
+L81_1111 = (
+    "ozden-s156-upper-bound-2026-11-10",
+    "ozden-s180-upper-bound-2026-11-10",
+    "ozden-s268-upper-bound-2026-11-10",
+    "ozden-s269-upper-bound-2026-11-11",
+)
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -260,6 +270,7 @@ EVERY = (
     *L63_1109,
     *L65_1109,
     L76_1109,
+    *L81_1111,
 )
 
 
@@ -1327,6 +1338,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         *L63_1109,
         *L71_1109,
         L76_1109,
+        *L81_1111,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
@@ -1615,6 +1627,8 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         **dict.fromkeys(L71_1109, "2026-11-09"),
         **dict.fromkeys(L65_1109, "2026-11-09"),
         L76_1109: "2026-11-09",
+        **dict.fromkeys(L81_1111[:3], "2026-11-10"),
+        L81_1111[3]: "2026-11-11",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
