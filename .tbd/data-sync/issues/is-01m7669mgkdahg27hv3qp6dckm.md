@@ -5,7 +5,7 @@ title: Import de Winter's s(132) <= 11.976048383604 and s(157) <= 12.99330261134
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l104
 labels:
   - intake
@@ -15,28 +15,26 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T20:55:21.870Z
-updated_at: 2026-11-11T21:46:29.400Z
+updated_at: 2026-11-11T23:11:36.061Z
 started_at: 2026-11-11T20:55:27.152Z
 ---
 
 ## Notes
 
-Lane L104 (bold-ritchie-l104), 11 November 2026. Claim map and stage status.
+Lane L104 (bold-ritchie-l104), 11 November 2026.
 
-Issue: jlevy/squares#958 (20:56:18Z), registration request, names JoostdeWinter/square-packing 6617869 (head, 20:52:23Z); n132/ and n157/ first committed at a491dad (20:49:44Z). Push not read (activity log refused); ledger dates by the issue with first commit kept; no other report reached 132/157 in the window.
+Issue jlevy/squares#958 (20:56:18Z), registration request at JoostdeWinter/square-packing 6617869; folders first committed at a491dad (20:49:44Z). Push not read; ledger dates by the issue with first commit kept (no other report at 132/157 in the window).
 
-Claims:
-- s(132) <= 11.9760483836034076 (12-place print 11.976048383604): T-292, V3/C3 on the replay, S3 draft. 9.63e-03 below T-174 (Daniel, improved by PingYou Ltd). New arrangement (84 squares beyond 0.1). T-174 margin 0 (pair 87,88), RV-3 n/a. Own margin 1.248e-59.
-- s(157) <= 12.9933026113432237 (12.993302611344): T-293, V3/C3 on the replay, S3 draft. 6.70e-03 below the grid 13; first below grid at 157 = 13^2-13+1 (k=13; T-220 k=14, T-163 k>=15). Grid margin 0. Own margin 1.349e-59.
-- Credit: de Winter after Samanyu-dev (pinwheel at 109, Samanyu-dev/squares_in_squares 53551d7).
-- L-step scan: neither bound carries; 184's L-extension from the grid at 157 lapses.
+Claims and state:
+- T-292: s(132) <= 11.9760483836034076, V3/C3, S3 (review-confirmed). New arrangement, 9.63e-03 below T-174. Adopted as the house at 132 on 11 November 2026.
+- T-293: s(157) <= 12.9933026113432237, V3/C3, S3. First below the grid 13 (k = 13 for s(k^2-k+1) < k). Adopted as the house at 157; integer conjecture withdrawn.
+- Credit: de Winter after Samanyu-dev (pinwheel at 109).
+- Margins: T-174 and grid margins 0 (RV-3 n/a); own margins 1.248e-59 / 1.349e-59.
 
-Packets: de-winter-s132-upper-bound-2026-11-11, de-winter-s157-upper-bound-2026-11-11. Ledger: campaign/issue-intake/upper-bounds-de-winter-132-157-20261111. intake-watch read through 6617869 covers 501cb8d (L103 owns #941/#942 entries).
+Review: L105 (docs/project/reviews/review-2026-11-11-dewinter-132-157.md) accepted both, 14 notes; mapped (V-de-winter-958-review-check, E-de-winter-s132/s157-review-exact-feasibility, external_review on four atoms, reviews on T-292/T-293). F11/F14/F12 (think-71uq)/F8-F10 and the six questions folded in.
 
-PR: https://github.com/jlevy/squares/pull/961 (draft), head 5315ad8e5. T-291 is L100's (#954); records tier fails contiguity until #954 merges.
+Regularization: grid-slack 0.5-degree views at both counts (packing/cases/regularized_drawings/think-bcfs-2026-11-11/); Daniel's solves above the sides, held at row 4.
 
-Next: merge L105's blind stage 4 review, map it (reviews on T-292/T-293, external_review on four atoms, verifier), then adopt 132 and 157 under the house rule with both strong generators and the flip; remove the two certificate-citation deferrals.
+PR https://github.com/jlevy/squares/pull/961 (draft), head 3e3617390. Merged L100's head and main (b5b12c206). Recorded #954's final reply (think-f65n closed) so the bead-tree gate passes.
 
-Open for coordinator: Samanyu-dev's 109 (10.949289581 < record 10.9497474683) is a candidate import; intake label on #958 and PR significance label not applied.
-
-2026-11-11 ~21:50Z coordinator: #958 names Samanyu-dev/squares_in_squares 53551d7 best_fit_101_500.csv, a 109-square packing at side 10.949289581, below the record's 10.94974746830583. Neither #958 nor any other report claims it, and the repo is not watched. By the precedent for Kaggle files named in issues ('no report brought here'), it is context, not an import. Record it as context in #958's notes and the reply; whether to watch the repo goes on the owner list as a low-priority question.
+Next: hosted CI; the replies lane answers #958 after merge (findings F8-F10 and six questions for the author). Landed 2026-11-11; if merged after midnight UTC, stamp_landed --apply and re-pin.
