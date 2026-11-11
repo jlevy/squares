@@ -31271,7 +31271,8 @@ issues:
     title: 's(179) ≤ 13.881367160110: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-11'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -31302,7 +31303,7 @@ issues:
       13.883795490524 (kirilltym), is above it; the side-only leaderboard entry it quotes and
       states first, 13.880960371556 (team Nevska, 7 November), 4.07e-4 below this side, is
       unpublished and states no packing, so it is context only.
-    read_through: '2026-11-11T21:18:29Z'
+    read_through: '2026-11-11T22:41:37Z'
     results:
     - key: n179-band
       claim: >-
@@ -31322,7 +31323,27 @@ issues:
     - think-ikku
     - think-tj4o
     answer_bead: think-f65n
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/954#issuecomment-6808834300
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n179-band
+        id: T-291
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n179-band
+        id: E-ozden-954-exact-feasibility
+        status: confirmed
+      - result: n179-band
+        id: E-ozden-954-review-exact-feasibility
+        status: confirmed
+      - result: n179-band
+        id: E-ozden-954-certificate-report
+        status: reviewed
     close_when: >-
       T-291 is on main at V3/C3 as the house at 179, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -31368,6 +31389,19 @@ issues:
       bound. #959 enters the record with triage pending under its own import bead and T-NNN;
       T-291 is not replaced, and the house at 179 moves only when #959's certificate is
       replayed, reviewed and adopted under the house rule.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6808834300, posted at
+      22:41:37Z), after #956 merged as b5b12c206 at 22:20:09Z, registering T-291 and adopting it as
+      the house at 179; recorded here by lane L104 (think-bcfs), whose change touches this record
+      after think-f65n closed, so the entry no longer defers to a closed bead. It states T-291 at
+      V3/C3, confirmed and current; E-ozden-954-exact-feasibility and
+      E-ozden-954-review-exact-feasibility, confirmed; and E-ozden-954-certificate-report, reviewed.
+      It says the review accepted the certificate with notes only and scored it S3, that T-174 stays
+      a verified bound kept as history, and that #959, which the author's comment of 21:18:29Z
+      reports at 13.880960371559 from the same method, is imported and reviewed as its own result
+      under think-89i7, the house at 179 moving only once that certificate is replayed, reviewed and
+      adopted. It asks the review's six questions, informational, holding nothing open.
+
   - number: 958
     title: 's(157) below 13 and a new s(132): two pinwheel packings: registration request'
     author: JoostdeWinter
