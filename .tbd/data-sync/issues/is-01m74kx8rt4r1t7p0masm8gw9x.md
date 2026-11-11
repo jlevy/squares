@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #939, #946 (de Winter's re-solved s(199) and s(1
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l82-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T06:14:47.834Z
-updated_at: 2026-11-11T06:38:09.969Z
+updated_at: 2026-11-11T06:45:02.028Z
 started_at: 2026-11-11T06:14:54.559Z
 ---
 
@@ -31,3 +31,6 @@ L82 review notes (bold-ritchie-l82-review)
 - #946 decided: ACCEPT by both methods, 14,706 pairs; no contacts; tight pairs at 1e-320, walls 1.5e-320. Controls as stated except S1 (mis-stated by me: no wall contacts); S1' (-1e-319) added after, refused.
 - Measured: T-282 margin 2.53345785621e-12 (binding 36,38); gain 2.63452919980e-12 (both); share 1.0398946; certificates 1.0107e-13 below contracted T-282 (+L at 199); 12-place prints all ...284 (cert, contracted house, root). K1, K2 as stated. Daniel's held solve = same point (63 places, same 16 free squares).
 - 06:38:01Z FINDINGS FROZEN: review-2026-11-11-de-winter-939-946.md sha256 51a61287179681303fdb198efd1befe39b975b8b1b526caebe69190f15a74e5b (490 lines, 30,063 bytes). Verdicts: both accepted; F1, F2 minor; none blocking. L78 not yet read.
+- Frozen text committed and pushed as 5ef8151fb (branch claude/bold-ritchie-xo28us-l82-review).
+- Reconciled with L78's PR #948 @ ded2c8df8: contraction receipts equal mine exactly (T-282 margin, T-284 base and whole, #946 own). T-285/T-286 held V0/C0, correct; mapping lifts to C1. Added F10 (minor: "84 moved off their contacts" wrong - 16 free, 68 keep tight contacts, 66 keep all), F11 (minor: significance rationale calls a 1.0399 share "padding" like T-280's sub-margin shares, leans on RV-3 option D), F12 (note: float fields underflow to subnormals, e.g. 1.561445e-319 vs exact 1.561468985e-319). Verdicts unchanged.
+- Reconciliation, programs and receipts committed 4f82c716a and pushed. Programs/receipts under review/review-2026-11-11/ in de-winter-s199-upper-bound-2026-11-09 (programs) and de-winter-s172-upper-bound-2026-11-10.
