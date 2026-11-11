@@ -5,7 +5,7 @@ title: "Import #954: Doğa Özden's s(179) <= 13.881367160110 (kenaznia-doga/s17
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l100
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T18:58:55.771Z
-updated_at: 2026-11-11T19:30:13.182Z
+updated_at: 2026-11-11T20:29:32.073Z
 started_at: 2026-11-11T18:58:59.914Z
 ---
 
@@ -38,3 +38,12 @@ Branch `claude/bold-ritchie-xo28us-l100`, cut from `origin/main` `c8448724e`. Dr
 **Commits.** ec3df6fe6 intake; 820354861 records; 2fb0df26c re-pin. Records tier 55/55; 704 tests passed (l100 test, importer, check_requests, suite_files, release, result_status, house_adoption). Release record: three papers byte-identical vs c8448724e, explainer moves only its register count (290 -> 291).
 
 **Owed after the blind review (L101) is mapped:** merge its branch, map it (verifier entry, E-ozden-954-review-exact-feasibility, adversarial accepted review, external_review), adopt 179 from T-174 (adopt_houses Prose and Credit for 179, ADOPTED, LATER_PASSES, packet_source T-291), PRINT_CREDIT_HELD gains 179, both strong generators on the new witness, derived records, stamp_landed, re-pin. #574 follow-up waits on think-9v2k. The issue lacks the intake label (not added by this lane).
+
+
+## Lane L100, after the review (11 November 2026)
+
+**Review mapped.** L101's blind stage 4 review merged as e9c10db81 (from e98751fb4): accepted, all findings notes, S3, LANE_EQUALS_REVIEW (24 comparisons). V-ozden-954-review-check registered clean-room with an independence record; E-ozden-954-review-exact-feasibility (independent implementation, full coverage); T-291's adversarial accepted review; external_review on the report and replay evidence; review in the document map; deferral removed. Findings folded in: F8 (seed within 0.05 of 28 of 37 tilted squares, one symmetry of the 70 box), F6 (issue's counts with the house reflected top to bottom, upper-left anchoring), F9, F10 (PR 574 supplement unlicensed; the review calls it think-mdxq's question, but think-mdxq closed 4 November: no open bead holds the upstream-notice question, noted not decided), wall sentence, margin source, 19-square bands at 207; six questions in packet README, entry, requests notes.
+
+**Adopted and regularized (0d7004eff).** 179 from T-174 to T-291; PRINT_CREDIT_HELD gains 179; landing stamped; same-day prior-state archive gains 179 only (L81's four byte-equal). Runs in packing/cases/regularized_drawings/think-f65n-2026-11-11/: Evan Daniel's same-side view drawn (7,20,5,19,19 -> 0,0,0,5,5; 475/505 -> 550/550), KKT solve 2.78e-12 below the side held at row 3 (RV-3). SETTLED 179 removed. Rigidity 74 translate (7 before); gate totals 736/2,328 and 2,493/6,402. Custody 73 houses, 240 inputs. URL registry re-derived from main's. Tests: house-adoption and atlas pins updated.
+
+**Head.** 23473980a (re-pin to 0d7004ef). Records tier 55/55; tests 234 + 875 passed after the adoption. Second release record (review and adoption): three papers byte-identical vs c8448724e, explainer register count only. PR #956 body updated (draft, labels intake, S3). Hosted CI on 2fb0df26c green (31 checks); on 23473980a running at the time of this note.
