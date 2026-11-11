@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 201
+version: 202
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -81,7 +81,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T10:58:10.085Z
+updated_at: 2026-11-11T11:55:04.745Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -297,3 +297,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-09 15:00Z to 2026-11-11 05:00Z: #934 (Yim, 553-700 rows; 299/303/130 held as T-280/T-281) merged 20f844dbf; #937 (#935/#936, T-282/T-283) merged 200f2ebc1; #940 (#938, T-284 = T-282 + L at 199) merged f54ad1048 on 10 November. #939 (de Winter s(199), same arrangement re-solved, 2.63e-12 below #938) in lane L78 (think-2h88), to be held as T-285 under RV-3; option D (re-solve counts only below the predecessor contracted to first contact, through any construction) put to the owner. Both Pages deploys after #937 and #940 failed on a GitHub Pages syncing_files timeout (site not updated since #934); re-running is refused to this integration. Six replies held for the deploy: #935, #936, #938 finals, #845, #703, #438 follow-ups. A weekly usage limit stopped all work 2026-11-10 ~01:00Z to 2026-11-11 04:00Z (28 renewals missed). New since: #941/#942 (de Winter, 31 bounds 413-989; think-cen3), #943/#944/#945/#947 (Özden; L81, think-xq4o), #946 (de Winter s(172) closed form; folded into L78), #847 count comment, watched-repo commits (evand, JoostdeWinter, TheSnakeFang).
 
 2026-11-11 10:53Z renewal (intake195): L91 opened #951 (records of the seven 11 Nov replies; CI green); senior review L92 running. All new intake items (#943/#944/#945/#947 closes, #593/#847/#928 replies) close with #951. #941/#942 and de Winter's repo stay with L90 (think-cen3). think-4ul6 (T-142/T-143 stage-4 review; the 4 Nov launch was lost, no review on main) relaunched as L93 (tbd-strong-max, blind), claimed by bold-ritchie-l93.
+
+2026-11-11 11:53Z renewal (intake196): #951 merged (591644a9e) after senior review L92 (no blocking; two optional nits skipped); think-xq4o closed. Intake clean apart from #941/#942/de Winter repo (L90, think-cen3) and think-4ul6 (L93 running).
