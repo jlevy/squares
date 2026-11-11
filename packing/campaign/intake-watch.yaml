@@ -1950,3 +1950,41 @@ repositories:
       than the certificate, which states no packing and which the lab cannot verify. The comment
       on #931 says the same; a side with no packing is no report, and the record notes it on #931.
       The ozden-s307-upper-bound-2026-11-09 packet stays at dbe8838. Nothing to import.
+  # The intake pass's lane L81 of 11 November 2026 (think-3guf, think-xq4o), from the
+  # coordinator's read.
+  - url: https://github.com/evand/square-packing
+    read_through: c801ab47c7cf83c3250c72459f5e19a2b2d9b0de
+    read_on: '2026-11-11'
+    note: >-
+      Ten commits of 5 to 11 November (19:08:24Z on 5 November to 01:02:50Z on 11 November)
+      past the bb4cc78e read, through c801ab4, the head. None adds a certificate, a bound or a
+      packing. 4c431a2 adds to Completed.md a line for #914's seven registrations, which the
+      record already holds (T-270 and the others of that import); e70a60e, 3ab0014, 235d2e8
+      and 541a0b3 change TODO.md and CLAUDE.md, the last also adding requirements.txt,
+      requirements.lock and search/packer/activate.sh for the packer's own Python
+      environment; ce647e0, 5e41680 and c801ab4 add options to the fq quench (frozen squares
+      as obstacles, frozen squares anchored to the right or top wall, opt-in ALM convergence
+      settings); 4620ca2 sets the task pool's default priority from PK_PRIO; and 2588ebb
+      raises exactsolve's threshold for releasing a slack-separated pair to the contact
+      tolerance, 1e-12, with a test, the commit saying the old threshold released a pair at
+      303 and reported a descent direction that overlaps it. That is a change to his local
+      optimality analysis, which certifies no bound here. Nothing to import.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: be93eb1668b8ec025ff08e1630abc9b4ad623a56
+    read_on: '2026-11-11'
+    bead: think-0fa1
+    note: >-
+      Two commits past the 3cea0f4 read: 11e1833 (06:28:08Z on 10 November) adds wedge/,
+      Kevin Fang's note "Lower bounds for the waste of unit-square packings in slabs and
+      trapezoids" (draft v0.1 of 9 November, doi:10.5281/zenodo.24099178) with its working
+      notes, four floating-point simulators and six language-model review reports, and
+      be93eb1 (17:56:52Z) adds three checkers for its Proposition 7.5 with their reports.
+      The note claims, among other bounds, that a region whose straight ceiling rises by
+      R >= 1 at slope at most 1 wastes at least 7e-6 sqrt(L R), which it calls Conjecture 1
+      of H. D. Bui's arXiv:2508.04603 with a constant, and says nothing is claimed for the
+      waste of a square or for c*(k) over all packings. Its README calls it claimed, not
+      verified: written by Claude as a research agent under Fang's direction, reviewed only
+      by language models, tested by floating-point simulation, with no certificate a program
+      can check. Slabs and trapezoids are another container, but the asymptotic records cite
+      Bui's paper and build on it, so think-0fa1 decides whether the note bears on any
+      record. Nothing under theorem-a/, composites/ or the strip folders changes.

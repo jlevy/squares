@@ -1,0 +1,75 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/943",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s156 upper bound 2026-11-10]",
+  "report_evidence": "E-ozden-943-certificate-report",
+  "receipt_format": "ozden-943-exact-replay-v1",
+  "witness_prefix": "W-ozden-943-n",
+  "claim_limitations": "Complete 2026-11-10 rational corner Witness/v2 at 156, promoted to exact rationals by this repository's packing-witness promote, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-11",
+  "read_at_main": "f54ad1048080ce14151282dd1861a29b03b51714",
+  "certificates": [
+    {
+      "n": 156,
+      "path": "n-156-candidate.yaml",
+      "format": "witness-corners",
+      "offered": "12.977053087498",
+      "first_committed": "2026-11-10T15:27:50Z",
+      "same_packing": [
+        {
+          "path": "n156-witness.json",
+          "format": "witness-corners"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    156
+  ],
+  "replayed": [
+    156
+  ],
+  "houses": [
+    {
+      "n": 156,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Daniil Ostashev, improved by Francisco Couzo, PingYou Ltd and Mishapolk",
+      "result": "T-186",
+      "reported_value": "12.97916585383427646",
+      "verified_value": "12.97916585383427646",
+      "evidence": [
+        "E-mishapolk-70a033f-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 156,
+      "report": "T-260 (#846)",
+      "url": "https://github.com/jlevy/squares/issues/846",
+      "holders": "Mykhailo Polkovskyi (Mishapolk), a re-certification of the house's certificate",
+      "result": "T-260",
+      "reader": "[Mishapolk issue 846 2026-10-30]"
+    }
+  ],
+  "register": {
+    "title": "Doğa Özden's packing of 156 squares at kenaznia-doga/s156-upper-bound 87c9292, issue 943",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "The issue says this repository's packing-witness verify, run unmodified on the witness at main f54ad104, reports VERIFIED (exact-algebraic, 12090 pairs), and that verifier/sqcheck.py, an exact checker the author's lab wrote separately from this repository's code, reports VALID (exact rational) and prints the exact side rounded up. It says the two share only the unit-square, wall and non-overlap definitions.\n\nThis repository's packing-witness promote --strategy robust-rational at f54ad104 made the exact coordinates from the lab's decimal pose, n-156-decimal-pose.yaml, with center_dilation 1 and no dilation, so packing-witness verify is not independent of how they were rounded, as the issue says. The issue says the pair margins of about 2e-13 are the decimal pose's own, that only the squares that set the left wall, the bottom wall and the side touch them exactly, and that other squares near a wall clear it by up to about 1e-12. Before promotion sqcheck.py certified the decimal pose in interval arithmetic at its own side. No local-optimality, rigidity or formal check is claimed. Those statements are the author's; no source program ran here.",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-xq4o",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER"
+    }
+  }
+}

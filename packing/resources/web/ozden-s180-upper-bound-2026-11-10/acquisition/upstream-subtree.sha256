@@ -1,0 +1,11 @@
+c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./LICENSE-evand-square-packing.txt
+5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c  ./LICENSE.md
+f218f507dcda6e8fc0caf97d073cd106b8b95ac4ffc843605af861cd476cbf90  ./README.md
+91447bf157126c4c62edcc6751b10892fd1cb1e0006de9a82e5020809e6676f9  ./n-180-candidate.yaml
+ec1c60c1354b568a9b7e22300b0e7ca261eed52424108c7a51c1412e64dd3883  ./n-180-decimal-pose.yaml
+7ab902b0dbd3c68bf797fe396cb62c630a66edfe09c8fe57a0e7e8ae1498754d  ./n180-witness.json
+c937f3532791e76b820fbb9f328bf3e8042d4395af8c5db6b1b905c86bfdd86f  ./packing-witness-verify.txt
+66d71792f8c3b27274f85f69b71f09bc8bef08be0e1742a2e405cd69c9018237  ./records/n-180-candidate-diff.png
+4e5be978101b85d5859f4040256419130229dcf566bb62e0e67ddad8b6c6fc19  ./sqcheck-output.txt
+596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce  ./verifier/README.md
+1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979  ./verifier/sqcheck.py

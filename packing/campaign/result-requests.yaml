@@ -27756,7 +27756,7 @@ issues:
       record, data and code, and the code may also be used under MIT, as with v5. It also
       names his preprint doi:10.20944/preprints202610.2669.v1 as the citation for the
       two-strip records.
-    read_through: '2026-11-04T20:34:45Z'
+    read_through: '2026-11-10T19:22:29Z'
     results:
     - key: filled-end-v2
       claim: >-
@@ -27883,6 +27883,21 @@ issues:
       of 20:56:49Z (issuecomment-6641911906) acknowledges it, says so, and restates that no
       V2.0 or V1.0 row is recorded yet, the rows waiting on the walk above 1024
       (think-llit) and the owner's decision on V1.0.
+
+      The author's comment of 19:22:29Z on 10 November (issuecomment-6776987457) updates
+      his total record count: his currently active certified upper bounds are the union of
+      #836's v5 (5,308 rows, n = 1182 to 9944) and #847's V2.0 (5,134 rows, 1182 to 9946),
+      which overlap at 4,841 counts and so cover 5,601 distinct counts from 1182 to 9946;
+      #799's versions 1 (683 rows) and 2 (2,824 rows) are historical versions of the same
+      construction, contained in v5, and should not be added to the total. Each figure
+      holds in the retained files (karimi-two-strip-2026-10-24 and
+      karimi-records-2026-10-31): the union is 5,601 counts, and every count of versions 1
+      and 2 is also a v5 count. It reports no new row, bound or construction, so nothing is
+      imported and no bead is created; whether each row is below every earlier report and
+      below Goebel's construction is still the walk above 1024's to decide (think-llit), and
+      V1.0's rows still Q-847a's. Read on 11 November by lane L81 (think-xq4o). Reading it
+      into read_through on a later day than the last reply makes a reply due, which the
+      requests check lists.
   - number: 890
     title: "s(94) ≥ 1993/200 = 9.965 (dilation of Hosono's mixed_n94_L995 on a finer net): registration request"
     author: kenaznia-doga
