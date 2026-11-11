@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #943, #944, #945, #947 (Özden's s(156), s(180),
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l83-review
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T06:27:09.085Z
-updated_at: 2026-11-11T07:03:46.108Z
+updated_at: 2026-11-11T07:09:36.392Z
 started_at: 2026-11-11T06:27:13.030Z
 ---
 
@@ -35,3 +35,7 @@ Results (scratch runs): all four certificates ACCEPT by both methods, classes eq
 Frozen text: packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/frozen/review-2026-11-11-ozden-943-947.frozen.md, 760 lines, 51,686 bytes, SHA-256 7240ecdcac2ed1d3b27144f4f9758df46184ff32f590d36f8a18bcdefaad1d66.
 Final run_all: every receipt ACCEPT / EVERY_CONTROL_AS_STATED / SIDES_AS_STATED / CUSTODY_HOLDS / NO_GAIN_INSIDE_ITS_HOUSE_MARGIN; l83_digests ALL_RECEIPTS_MATCH (24 receipts).
 Verdict: accepted at all four; S3 at all four; 15 findings, all notes.
+
+Reconciliation after the freeze: read L81 branch claude/bold-ritchie-xo28us-l81 @ 740fa72c5 (PR #949). l83_compare_lane.py: LANE_EQUALS_REVIEW (route least gaps and sides exact, house margins exact, moves/turns, tilt-sign counts). New F16 (note, records): tilt-sign splits at 180, 268 and 269's house lie 26-45 deg from upright; give ranges or drop the split. No verdict or score change.
+Commits on claude/bold-ritchie-xo28us-l83-review (pushed): 0eb9ec7fb (findings frozen), 4dadd0bb6 (reconciliation). No PR, no merge, no comments.
+Records lane to map: adversarial review accepted at #943/156, #944/180, #945/268, #947/269 (L81's T-285..T-288, to be renumbered T-287..T-290 after #948); V3/C3 with l83_check.py's run as exact-algebraic evidence, independently re-implemented, clean room, Claude agent; S3 at all four; wording dispositions F4, F5, F7, F8, F16; F10/F12 at adoption; F15 T-260 at 156.
