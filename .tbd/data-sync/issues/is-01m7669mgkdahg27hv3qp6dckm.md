@@ -5,7 +5,7 @@ title: Import de Winter's s(132) <= 11.976048383604 and s(157) <= 12.99330261134
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l104
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T20:55:21.870Z
-updated_at: 2026-11-11T23:11:36.061Z
+updated_at: 2026-11-11T23:47:46.267Z
 started_at: 2026-11-11T20:55:27.152Z
 ---
 
@@ -35,6 +35,6 @@ Review: L105 (docs/project/reviews/review-2026-11-11-dewinter-132-157.md) accept
 
 Regularization: grid-slack 0.5-degree views at both counts (packing/cases/regularized_drawings/think-bcfs-2026-11-11/); Daniel's solves above the sides, held at row 4.
 
-PR https://github.com/jlevy/squares/pull/961 (draft), head 3e3617390. Merged L100's head and main (b5b12c206). Recorded #954's final reply (think-f65n closed) so the bead-tree gate passes.
+PR https://github.com/jlevy/squares/pull/961 (draft), head 9a6a91d12, hosted CI green (31 success, 28 skipped). Merged L100's head and main (b5b12c206). Recorded #954's final reply (think-f65n closed) so the bead-tree gate passes.
 
-Next: hosted CI; the replies lane answers #958 after merge (findings F8-F10 and six questions for the author). Landed 2026-11-11; if merged after midnight UTC, stamp_landed --apply and re-pin.
+Next: the replies lane answers #958 after merge (findings F8-F10 and six questions for the author). Landed 2026-11-11; if merged after midnight UTC, stamp_landed --apply and re-pin.
