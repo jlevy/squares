@@ -59050,6 +59050,20 @@ evidence:
       The core's arrangement is T-282's, whose exact coordinates this repository's packing-witness
       promote made; the core's coordinates here are the source's own re-solve. No human oversight
       or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 939 and 946 (L82,
+        think-o53d), prompted separately from the import lane (L78, think-2h88) and blind to its
+        work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-de-winter-939-946.md accepted the certificate for
+        finite feasibility, no finding blocking: F1 and F2 (minor) ask the author to state #946's
+        bound as the side and to credit #938 for the L step, F3 to F9 are notes, and F10 to F12
+        (after its reconciliation) correct this record's wording. Its clean-room run
+        (V-de-winter-939-946-review-check, decide-939.json) and the replay are not entered while
+        T-285 is held for the owner's RV-3 (think-ruu2).
   - id: E-de-winter-946-certificate-report
     claim: upper-bound
     scope:
@@ -59082,3 +59096,17 @@ evidence:
       witness-center-basis-bare and center-direction-json), half-angle conversion, Fraction
       arithmetic and the separating-axis method, and share no code with the source's checker. No
       human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of issues 939 and 946 (L82,
+        think-o53d), prompted separately from the import lane (L78, think-2h88) and blind to its
+        work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-11-de-winter-939-946.md accepted the certificate for
+        finite feasibility, no finding blocking: F1 (minor) asks that the bound be the
+        certificate's side and the quintic's root only the asserted optimum, as the record has
+        it; F9 reports one control it mis-stated for this certificate; F10 to F12 correct this
+        record's wording. Its clean-room run (V-de-winter-939-946-review-check, decide-946.json)
+        and the replay are not entered while T-286 is held for the owner's RV-3 (think-ruu2).

@@ -23921,6 +23921,10 @@ urls:
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
     - packing/devtools/construction_checker.py
+    - docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/README.md
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/decide-939.json
+    - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/compare-lane.json
 - path: result/t-286.html
   canonical: result/t-286.html
   kind: result
@@ -23955,6 +23959,10 @@ urls:
     - packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
+    - docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/decide-946.json
+    - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/moves.json
 - path: results.html
   canonical: results.html
   kind: page

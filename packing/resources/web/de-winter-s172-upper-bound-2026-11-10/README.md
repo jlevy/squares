@@ -14,7 +14,7 @@ certificates at 37 counts above 324 under `above324/` and `above324_refined/`. T
 outside this scope and left for triage.
 
 Intake lane L78 (think-2h88) retained it, replayed it and registered it on 11 November
-2026 as **T-286, held at V0/C0** for the owner’s RV-3 (think-ruu2), beside #939’s T-285.
+2026 as **T-286, held at V0/C1** for the owner’s RV-3 (think-ruu2), beside #939’s T-285.
 The house at 172 stays T-282, and the case record is not touched.
 
 ## What the Source Claims
@@ -101,7 +101,10 @@ and `devtools.contraction_margin` the `contraction-*.json` receipts under
 
 - **Against T-282.** One to one under the identity. 84 squares move beyond 10⁻⁹ and none
   beyond 10⁻³ (largest 1.414 × 10⁻⁴), and 16 turn by 0.00573 degrees, exactly as #939’s
-  core does: the non-load-bearing squares the source moved off their contacts. T-282’s own
+  core does. Of the 84, 16 are free (no pair or wall touches them), each moved by about
+  (−10⁻⁴, −10⁻⁴) and turned by 10⁻⁴ rad. The other 68 slide along their contacts on the
+  flat motions, each keeping a tight pair. This follows the stage 4 review’s F10 and its
+  [moves.json](review/review-2026-11-11/moves.json). T-282’s own
   uniform-contraction margin is 2.533458 × 10⁻¹² (1 − λ\* = 2.008 × 10⁻¹³), and the gain
   is 1.0399 of it ([contraction-n172.json](measure/contraction-n172.json)). That is the
   same share as Evan Daniel’s held solve below T-282 (think-wju3).
@@ -112,23 +115,48 @@ and `devtools.contraction_margin` the `contraction-*.json` receipts under
   packet says, Git blob `d641e969`). The gain is 1.3615 × 10⁻¹⁹, again 1.0000 of that
   certificate’s own margin
   ([contraction-n172-daniel-held.json](measure/contraction-n172-daniel-held.json)). The
-  88 load-bearing squares agree within 10⁻⁹, and the other 84 lie on its flat motions.
+  88 squares that do not move agree within 10⁻⁹, and the other 84 lie on its flat
+  motions.
 - **Its own margin** is 1.56 × 10⁻³¹⁹ (1 − λ\* = 10⁻³²⁰;
   [contraction-n172-own.json](measure/contraction-n172-own.json)). It is the same point
   as #939’s core and as the held solve, with less padding each time.
+  - That receipt’s float fields, `margin_float` 1.561445 × 10⁻³¹⁹ and
+    `one_minus_lambda_star` 9.999889 × 10⁻³²¹, fall in binary64’s subnormal range, which
+    keeps fewer significant bits. The exact fractions beside them give 1.561469 × 10⁻³¹⁹
+    and 1.0 × 10⁻³²⁰ (the stage 4 review’s F12).
+  - The figures here and in the register are read from the fractions.
 
 ## The Register
 
-T-286 records the claim, held at V0/C0, S1, with a regularization item naming T-282. The
+T-286 records the claim, held at V0/C1, S1, with a regularization item naming T-282. The
 replay is not entered as evidence and nothing is adopted. Whether a re-certification at
-its predecessor’s own padding is a new result is the owner’s RV-3 (think-ruu2). The same
-answer settles T-285 at 199 and the held solve at 172 (think-wju3). The stage 4 review is
-to be written by a separate blind lane and mapped at C1 when it returns.
+its predecessor’s own contraction margin is a new result is the owner’s RV-3
+(think-ruu2). The same answer settles T-285 at 199 and the held solve at 172
+(think-wju3).
+
+The stage 4 review observes (F4) that the gain lies 1.0107 × 10⁻¹³ below T-282
+contracted, at its 12-place print and the root’s. So under option D of the question as
+put to the owner, no certificate of this arrangement could count, since its optimum
+prints as the contracted house does. Under options A to C it counts.
+
+## Stage 4 Review
+
+The stage 4 review of 11 November 2026
+([review-2026-11-11-de-winter-939-946.md](../../../../docs/project/reviews/review-2026-11-11-de-winter-939-946.md),
+lane L82, think-o53d) accepts this certificate with #939’s, and no finding blocks. Its
+receipts for #946 are in [review/review-2026-11-11/](review/review-2026-11-11/README.md),
+and its programs are in the s199 packet.
+
+- **Its controls.** It reports one control it mis-stated for this certificate (F9).
+- **F1** asks that the bound be the certificate’s side and the root only the asserted
+  optimum, as the register has it.
+- **Mapping.** It is mapped on T-286 and its certificate-report atom at C1.
+- **Its questions for the author** are listed in the
+  [s199 packet](../de-winter-s199-upper-bound-2026-11-09/README.md#questions-for-the-author).
 
 ## What Is Not Established
 
 - **The root as the local optimum**, and any optimality: not replayed here.
-- **Independent review**: none mapped yet.
 - **Human oversight**: no record is retained.
 
 ## Credit and Licence

@@ -29,9 +29,9 @@ reports:
     measured:
       against: T-284
       finding: one to one with T-284's packing under the identity by nearest centres; no square
-        moves beyond 1e-3 (largest 1.414e-4) and the 27 squares of the L do not move; 84 squares,
-        the arrangement's non-load-bearing ones, move beyond 1e-9, 16 of them also turned
-        by 0.00573 degrees; a refinement of T-284's packing
+        moves beyond 1e-3 (largest 1.414e-4) and the 27 squares of the L do not move; 84 squares
+        move beyond 1e-9, 16 free ones that also turn by 0.00573 degrees and 68 that slide
+        along their contacts on the flat motions; a refinement of T-284's packing
       source: packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n199.json
     refines:
       packing_of: Doğa Özden
@@ -44,7 +44,7 @@ reports:
       L step (2.533e-12, the margin of its base, measure/contraction-n172-base.json); its
       own uniform-contraction margin is 0, since its grid squares touch (measure/contraction-n199.json).
       Whether such a re-certification is a new result is the owner's open question (think-ruu2's
-      RV-3); T-285 is held below the stage-4 exit at V0/C0 and does not move the house, and
+      RV-3); T-285 is held below the stage-4 exit at V0/C1 and does not move the house, and
       its replay's entry and adoption to V3/C3 wait on the owner's answer.
   note: The issue names 702c7af, committed at 2026-11-09T21:54:59Z, 9 minutes before the issue.
     It says the side lies less than 1e-98 above the real root near 14.6147 of an irreducible
@@ -70,9 +70,10 @@ reports:
     measured:
       against: T-282
       finding: one to one with T-282's packing under the identity by nearest centres; no square
-        moves beyond 1e-3 (largest 1.414e-4); 84 squares, the arrangement's non-load-bearing
-        ones, move beyond 1e-9, 16 of them also turned by 0.00573 degrees; against the core
-        of issue 939's packing every square lies within 2.3e-99; a refinement of T-282's packing
+        moves beyond 1e-3 (largest 1.414e-4); 84 squares move beyond 1e-9, 16 free ones that
+        also turn by 0.00573 degrees and 68 that slide along their contacts on the flat motions;
+        against the core of issue 939's packing every square lies within 2.3e-99; a refinement
+        of T-282's packing
       source: packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/identity-n172.json
     refines:
       packing_of: Doğa Özden
@@ -84,7 +85,7 @@ reports:
       (packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172.json),
       the share of Evan Daniel's held solve (think-wju3), whose KKT point this is. Whether
       such a re-certification is a new result is the owner's open question (think-ruu2's RV-3);
-      T-286 is held below the stage-4 exit at V0/C0 and does not move the house.
+      T-286 is held below the stage-4 exit at V0/C1 and does not move the house.
   note: 'The issue names c4e65d0, committed at 2026-11-10T21:26:23Z, 47 seconds before the
     issue; 8c0de9d (21:20:44Z) first published n172/ at 1.4e-99 above the same root, and c4e65d0
     overwrote it. The issue prints the side cut at 56 places and says it lies 1.6e-319 above

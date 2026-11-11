@@ -29895,7 +29895,11 @@ issues:
       with its packing, the L unchanged: a refinement, which the ledger of 11 November records.
       The gain is 1.0399 of the padding T-284 carries from T-282 through the L step, and the core
       is the KKT point the record holds unregistered at 172 (think-wju3). Registered as T-285,
-      held at V0/C0 for the owner's RV-3 (think-ruu2); the house stays T-284.
+      held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-284. The 11 November
+      stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, think-o53d,
+      lane L82), written blind in a separate lane, accepts it with #946's, no finding blocking,
+      and is mapped at C1; its F2 asks the author to credit #938 for the L step at 199, and its
+      six questions for the author are informational.
     read_through: '2026-11-09T22:03:57Z'
     results:
     - key: n199-core-resolved
@@ -29913,19 +29917,20 @@ issues:
       - E-de-winter-939-certificate-report
     beads:
     - think-2h88
+    - think-o53d
     answer_bead: think-2h88
     replies: []
     blocked:
       type: owner-decision
       reason: >-
-        Whether a re-certification at the padding its predecessor carries, here T-282's padding
-        carried through T-284's L step, is a new result is the owner's RV-3 (think-ruu2); T-285
-        is held at V0/C0 until the answer, and the same answer settles the held solve at 172
-        (think-wju3).
+        Whether a re-certification at the contraction margin its predecessor carries, here
+        T-282's margin carried through T-284's L step, is a new result is the owner's RV-3
+        (think-ruu2); T-285 is held at V0/C1 until the answer, and the same answer settles the
+        held solve at 172 (think-wju3).
     close_when: >-
-      T-285 is on main, held at V0/C0, and the reply on main says what was retained and
-      replayed, that the gain lies at T-284's padding through the L step, and that the owner's
-      RV-3 answer decides it.
+      T-285 is on main, held at V0/C1, and the reply on main says what was retained, replayed
+      and reviewed, that the gain is 1.0399 of the margin T-284 carries through the L step, and
+      that the owner's RV-3 answer decides it.
     notes: >-
       Read on 10 November 2026 from main f54ad1048. The commit 702c7af precedes the issue by 9
       minutes; the issue carries the intake label and has no comments. The witness the issue calls
@@ -29955,7 +29960,11 @@ issues:
       the root check exactly (S lies 1.56e-319 above it). It is 2.63e-12 below T-282, one to one
       with its packing, 1.0399 of T-282's own uniform-contraction margin: a refinement, which the
       ledger of 11 November records, and the KKT point the record holds unregistered (think-wju3).
-      Registered as T-286, held at V0/C0 for the owner's RV-3 (think-ruu2); the house stays T-282.
+      Registered as T-286, held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-282.
+      The 11 November stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md,
+      think-o53d, lane L82), written blind in a separate lane, accepts it with #939's, no finding
+      blocking, and is mapped at C1; its F1 asks the author to state the bound as the
+      certificate's side, with the root as the asserted optimum, as the record has it.
     read_through: '2026-11-10T21:27:10Z'
     results:
     - key: n172-exact-local-optimum
@@ -29973,18 +29982,19 @@ issues:
       - E-de-winter-946-certificate-report
     beads:
     - think-2h88
+    - think-o53d
     answer_bead: think-2h88
     replies: []
     blocked:
       type: owner-decision
       reason: >-
-        Whether a re-certification at its predecessor's own padding is a new result is the
-        owner's RV-3 (think-ruu2); T-286 is held at V0/C0 until the answer, as T-285 is, and the
-        same answer settles the held solve at 172 (think-wju3).
+        Whether a re-certification at its predecessor's own contraction margin is a new result
+        is the owner's RV-3 (think-ruu2); T-286 is held at V0/C1 until the answer, as T-285 is,
+        and the same answer settles the held solve at 172 (think-wju3).
     close_when: >-
-      T-286 is on main, held at V0/C0, and the reply on main says what was retained and
-      replayed, that the gain lies at T-282's own padding, and that the owner's RV-3 answer
-      decides it.
+      T-286 is on main, held at V0/C1, and the reply on main says what was retained, replayed
+      and reviewed, that the gain is 1.0399 of T-282's own contraction margin, and that the
+      owner's RV-3 answer decides it.
     notes: >-
       Read on 11 November 2026 from main f54ad1048. The commit c4e65d0 precedes the issue by 47
       seconds; 8c0de9d, 6 minutes earlier, first published n172/ at 1.4e-99 above the same root,
