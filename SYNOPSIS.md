@@ -842,6 +842,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-927-931-20261109/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-935-936-20261109/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-938-20261109/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
@@ -993,6 +994,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issues 927 to 931 (think-463r)](packing/cases/regularized_drawings/think-463r-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issues 935 and 936 (think-he66)](packing/cases/regularized_drawings/think-he66-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 938 (think-1goz)](packing/cases/regularized_drawings/think-1goz-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption of Issues 943, 944, 945 and 947 (think-xq4o)](packing/cases/regularized_drawings/think-xq4o-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Certificates Below the Houses of 31 October 2026 (think-ruu2)](packing/cases/register_candidates/think-ruu2-2026-10-31/README.md) | source retention and archive policy | record | retained | — |
 | [Review code: project candidates at 130, 293 and 307 (think-ruu2)](packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of T-242 at 268 (think-3anz)](packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md) | source retention and archive policy | record | retained | — |
@@ -1052,6 +1054,7 @@ case or experiment separately.
 | [unnir’s Certificate for s(12) ≥ 9929/2500: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md) | dated review record | record | retained | — |
 | [Özden’s Certificates of #935 and #936: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-ozden-935-936.md) | dated review record | record | retained | — |
 | [Özden’s s(199) Certificate of #938: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-ozden-938.md) | dated review record | record | retained | — |
+| [Özden’s Certificates of #943, #944, #945 and #947: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-ozden-943-947.md) | dated review record | record | retained | — |
 | [Özden’s Five Certificates of #927 to #931: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-ozden-927-931-five.md) | dated review record | record | retained | — |
 | [Kaelan Yim’s Certificates in vitamoon/vitamoon: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-09-yim-vitamoon.md) | dated review record | record | retained | — |
 | [De Winter’s Re-Solved s(199) and s(172), #939 and #946: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-de-winter-939-946.md) | dated review record | record | retained | — |
