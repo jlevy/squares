@@ -1,0 +1,66 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/954",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s179 upper bound 2026-11-11]",
+  "report_evidence": "E-ozden-954-certificate-report",
+  "receipt_format": "ozden-954-exact-replay-v1",
+  "witness_prefix": "W-ozden-954-n",
+  "claim_limitations": "Complete 2026-11-11 rational corner Witness/v2 at 179, promoted to exact rationals by this repository's packing-witness promote, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-11",
+  "read_at_main": "c8448724edfb33053037f362d50bed961b7ada79",
+  "certificates": [
+    {
+      "n": 179,
+      "path": "n-179-candidate.yaml",
+      "format": "witness-corners",
+      "offered": "13.881367160110",
+      "first_committed": "2026-11-11T18:27:50Z",
+      "same_packing": [
+        {
+          "path": "n179-witness.json",
+          "format": "witness-corners"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    179
+  ],
+  "replayed": [
+    179
+  ],
+  "houses": [
+    {
+      "n": 179,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta and PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "13.88379549051089845",
+      "verified_value": "13.88379549051089845",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Doğa Özden's packing of 179 squares at kenaznia-doga/s179-upper-bound bd262d8, issue 954",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "The issue says this repository's packing-witness verify, run unmodified on the witness at main 591644a9, reports VERIFIED (exact-algebraic, 15931 pairs), and that verifier/sqcheck.py, an exact checker the author's lab wrote separately from this repository's code, reports VALID (exact rational) and prints the exact side rounded up. It says the two share only the unit-square, wall and non-overlap definitions.\n\nThis repository's packing-witness promote --strategy robust-rational at 591644a9 made the exact coordinates from the lab's decimal pose, n-179-decimal-pose.yaml, with center_dilation 1 and no dilation, so packing-witness verify is not independent of how they were rounded, as the issue says. The issue says the pair margins of about 2e-13 are the decimal pose's own, that only the squares that set the left wall, the bottom wall and the side touch them exactly, and that other squares near a wall clear it by up to about 1e-12. Before promotion sqcheck.py certified the decimal pose in interval arithmetic at its own side. No local-optimality, rigidity or formal check is claimed. Those statements are the author's; no source program ran here.",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-f65n",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER"
+    }
+  }
+}

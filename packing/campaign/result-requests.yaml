@@ -31452,3 +31452,104 @@ issues:
       (2026-11-11T19:41:30Z) corrects above324_refined/README.md to the same account of the two
       runs and the margin; the packets keep the folder at a9486ed and a0c4fc8 and note that
       edition.
+  - number: 954
+    title: 's(179) ≤ 13.881367160110: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(179) <= 13.881367160110, the exact rational side of n-179-candidate.yaml rounded up at
+      12 places, 2.428e-03 below the house, Nate Chaoweeraprasit's packing, improved by
+      Siddharth Gupta and PingYou Ltd (T-174): a rational corner Witness/v2 at
+      kenaznia-doga/s179-upper-bound bd262d8, the repository's one commit, 24 seconds before the
+      issue, promoted to exact rationals with this repository's packing-witness promote at
+      591644a9 from a decimal pose the repository retains. It reports packing-witness verify
+      VERIFIED (15931 pairs) and sqcheck.py VALID, and says the packing was found by a
+      band-design search, new for this filing: the tilted squares of the registry's 70 (Ryan
+      Xu, improved by Evan Daniel and PingYou Ltd) laid as a band along the diagonal, annealed
+      in a reduced model with the axis-parallel squares on the two wall-anchored staircase
+      lattices, then quenched once with Evan Daniel's code. Triaged and retained on 11 November
+      2026 in lane L100 (think-f65n): every stated digest holds, the print is the exact side
+      rounded up, and both maintained exact routes accept the witness and refuse its gross and
+      sharp controls; measured, it is a new arrangement relative to T-174's packing, not one to
+      one with it under any symmetry, 47 squares beyond a tenth. The ledger of 11 November
+      records it. Registered as T-291. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-11-ozden-954.md, lane L101), written blind in a
+      separate lane, accepted it with findings, all notes, and scored it S3; its clean-room
+      checker decided it again, so the entry is confirmed, independently re-implemented, at
+      V3/C3, and the case adopts it at 179 under the house rule in the same pass, with Doğa
+      Özden the packing's finder and the band's source packing and the house's holders
+      credited as the seed and the record it improves, both strong generators' regularization
+      of the new house run in the same change. The Kaggle packing the issue quotes,
+      13.883795490524 (kirilltym), is above it; the side-only leaderboard entry it quotes and
+      states first, 13.880960371556 (team Nevska, 7 November), 4.07e-4 below this side, is
+      unpublished and states no packing, so it is context only.
+    read_through: '2026-11-11T21:18:29Z'
+    results:
+    - key: n179-band
+      claim: >-
+        s(179) <= 13.8813671601098758 (the exact rational side, rounded up at 16 places, of
+        n-179-candidate.yaml at kenaznia-doga/s179-upper-bound bd262d8), a packing whose seed
+        band is built from the tilted squares of the registry's 70.
+      source: body
+      register:
+      - T-291
+      evidence:
+      - E-ozden-954-certificate-report
+      - E-ozden-954-exact-feasibility
+      - E-ozden-954-review-exact-feasibility
+    beads:
+    - think-f65n
+    - think-ruu2
+    - think-ikku
+    - think-tj4o
+    answer_bead: think-f65n
+    replies: []
+    close_when: >-
+      T-291 is on main at V3/C3 as the house at 179, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 11 November 2026 from main c8448724e; no comment yet. The commit bd262d8 precedes
+      the issue by 24 seconds. The issue carried no intake label when read; it was added on 11
+      November at 21:31Z. T-174 was the house it improves. #574's follow-up of 19 October acknowledged the
+      rational houses PR #665 adopted from T-174, 179 among them; #574 is held for the owner
+      (think-9v2k), so the follow-up naming the new house at 179 waits on that hold.
+      Measured against padding, T-174's certificate at 179 has no padding to measure:
+      contracted uniformly about the origin it meets first contact at once (1 - lambda* = 0),
+      squares 119 and 122 already touching, so none of the gain is the house's padding; the
+      review found the same touching pair with its own checker, so RV-3 (think-ruu2) does not
+      reach this entry. This certificate's own margin, measured the same way, is 2.62e-12.
+      Both receipts are contraction_margin's, retained in the packet's measure/ directory. The
+      L-step scan finds that this bound carries to no other count. The review measured the
+      issue's statements: exactly three squares touch a wall, the other 36 square-wall
+      clearances below 1e-12 at most 4.29e-14; the margins are the pose's own, 2.03 to
+      4.08e-13 of the centres' separation, about twice "about 1e-13 relative" (F5); the issue's
+      lineage counts hold with the house reflected top to bottom and set against the
+      upper-left corner (F6); the 207 bands have 19 squares each, not 20 (F7); and the stated
+      seed lies within 0.05 of 28 of the 37 tilted squares, under one symmetry of the 70 box
+      and no other (F8). The issue names the registry's 70 as the band's source; that witness
+      comes from PingYou Ltd's PR 574 algebraic supplement, which has no licence file; whether
+      the seed needs a notice of its own is the owner's decision on think-71uq (F10; the review
+      named think-mdxq, which closed on 4 November), noted and not decided. The leaderboard
+      entry the issue quotes, Nevska's 13.880960371556, is exactly the registry's s(70) + 5 at
+      12 places, as the review finds; it states no packing and reached this repository only as the issue's
+      quotation, so it is no report and nothing is recorded for it. The review's questions
+      for the author, informational and holding nothing open: whether the final repair
+      scaling was about 2e-13 rather than 1e-13 (F5); whether the lineage counts use the
+      house reflected top to bottom and set against the upper-left corner, and whether the
+      issue would name that convention (F6); whether "two such bands" at 207 means the 70
+      band cut where the two meet (F7); whether the seed took the 70 band from the registry's
+      witness or from Ryan Xu's or Evan Daniel's published coordinates; which replay is
+      intended, certificate.replay or the README's rerun, and from which directory, and
+      whether the schema path could name this repository's file (F11); and whether the
+      band-design search and its seeds will be published. No reply has been posted.
+
+      On 11 November at 21:18Z (issuecomment-6807260149) the author reported #959, s(179) <=
+      13.880960371559, 4.07e-4 below this side by his account, the same method in a later
+      batch, and asked that it be adopted in place of this one; this certificate stays a valid
+      bound. #959 enters the record with triage pending under its own import bead and T-NNN;
+      T-291 is not replaced, and the house at 179 moves only when #959's certificate is
+      replayed, reviewed and adopted under the house rule.

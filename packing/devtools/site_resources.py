@@ -333,6 +333,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ("A packing at 269 seeded from Evan Daniel's 304, 5.19e-4 below the record (T-290)."),
     ),
     (
+        "https://github.com/kenaznia-doga/s179-upper-bound",
+        "Doğa Özden",
+        (
+            "A packing at 179, a band built from the registry's 70, 2.43e-3 below the record"
+            " (T-291)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

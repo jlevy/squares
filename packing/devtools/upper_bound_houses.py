@@ -668,6 +668,10 @@ def _sources() -> dict[str, Source]:
         packet_source("T-288", "ozden-s180-upper-bound-2026-11-10"),
         packet_source("T-289", "ozden-s268-upper-bound-2026-11-10"),
         packet_source("T-290", "ozden-s269-upper-bound-2026-11-11"),
+        # Lane L100 of the same day (think-f65n) moved 179 from T-174 to Doğa Özden's issue
+        # 954 (T-291), a new arrangement relative to T-174's packing, found by a band-design
+        # search from the tilted squares of the registry's 70; T-174 still houses other counts.
+        packet_source("T-291", "ozden-s179-upper-bound-2026-11-11"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -739,7 +743,9 @@ def _sources() -> dict[str, Source]:
 #: (think-xq4o) adopted his issues 943, 944, 945 and 947 at 156 from T-186, 180 and 269 from
 #: T-174 and 268 from his own T-276 (T-287 to T-290), each a new arrangement relative to
 #: the house it replaces, Özden its finder; T-276 keeps no house here; T-186 and T-174
-#: still house other counts.
+#: still house other counts. Lane L100 of the same day (think-f65n) adopted his issue 954
+#: (T-291) at 179 from T-174, a new arrangement relative to T-174's packing, Özden its
+#: finder.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -766,7 +772,7 @@ ADOPTED: dict[int, str] = {
     172: "T-282",
     175: "T-267",
     176: "T-186",
-    179: "T-174",
+    179: "T-291",
     180: "T-288",
     181: "T-174",
     182: "T-243",
@@ -1007,7 +1013,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-05": frozenset({175, 204, 260, 268, 293, 303, 304}),
     "2026-11-06": frozenset({260}),
     "2026-11-09": frozenset({172, 199, 232, 268, 270, 299, 303, 307}),
-    "2026-11-11": frozenset({156, 180, 268, 269}),
+    "2026-11-11": frozenset({156, 179, 180, 268, 269}),
 }
 
 

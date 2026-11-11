@@ -237,11 +237,15 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: 947 (T-287 to T-290), new arrangements: separating and translating squares 15 and 16 at
 #: 156, 71 and 72 at 180, 217 and 227 at 268 and 191 and 195 at 269, against 39, 7, 120 and
 #: 20 translating before, so n=1..200 has 664 separating squares and 2,261 translating
-#: ones, and n=1..324 2,421 and 6,335, in the same records.
+#: ones, and n=1..324 2,421 and 6,335, in the same records. The same day's lane L100
+#: (think-f65n) moved 179 to his certificate of issue 954 (T-291), a new arrangement:
+#: separating and translating squares 74 and 74 against T-174's 2 and 7, so n=1..200 has
+#: 736 separating squares and 2,328 translating ones, and n=1..324 2,493 and 6,402, in the
+#: same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 664, 182, 2261),
-    "n=1..324": (125, 2421, 302, 6335),
+    "n=1..200": (67, 736, 182, 2328),
+    "n=1..324": (125, 2493, 302, 6402),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
