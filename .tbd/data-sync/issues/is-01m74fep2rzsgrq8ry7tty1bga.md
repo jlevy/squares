@@ -5,7 +5,7 @@ title: "Import #941, #942: Joost de Winter's 31 lowered upper bounds for n betwe
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: bold-ritchie-l90
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:55.639Z
-updated_at: 2026-11-11T10:59:53.677Z
+updated_at: 2026-11-11T11:54:52.228Z
 started_at: 2026-11-11T09:58:23.522Z
 ---
 #941 (2026-11-10T13:30Z) fifteen lowered upper bounds n 413-910; #942 (14:41Z) sixteen n 632-989; JoostdeWinter. Beyond the atlas's 324, below the 1024 horizon: beyond-horizon rows. Precedent: Yim's 553-700 rows (PR #934). Starts after the Özden lane to stay within usage limits.
@@ -45,3 +45,8 @@ Controls stated in advance (before any run):
 - Contraction (devtools.contraction_margin --no-routes, exact): every gain is >= 2.3e3 times its row certificate's margin (least: 739, margin 7.2e-8, gain 1.67e-4); recipes measured at their bases (851, 583, 691, 850). No gain lies inside a margin: nothing here is RV-3 (think-ruu2) material.
 - Ledger campaign/issue-intake/upper-bounds-941-942-20261111 (starts frozen at main 8afdabe8f, both 23 October rulings): 3 reports, 37 claims, all recorded (15 new packings per #941's own word, 22 unclassified), 0 not recorded, 0 undecided; intake_ledger check OK.
 - Consequences not claimed: the new sides also beat rows/grid at other counts by deletion (e.g. 493, 538, 636, 683, 743, 755, 804, 813, 863, 917, 923, 934, 969, 988, 990) and by the border step (e.g. 586, 683, 688, 737, 799, 811, 862, 923, 928, 979, 982, 985, 996). No rows; think-kzme's question.
+
+2026-11-11 L90 draft up (12:00Z): PR #952 (draft, labels intake + S2), head e9364f364 (069ca8c43 intake, c7d7079cc records, e9364f364 re-pin). certify done for all three packets: 111 jobs, 37 positives accepted, 74 gross controls refused; 10,339 route CPU s (3,821.6 + 4,686.1 + 1,831.0). Ledger upper-bounds-941-942-20261111 records all 37. Rows reported until the stage 4 review is mapped.
+Review hook (in the PR body): the blind lane reviews all 37 certificates in de-winter-{issue941,issue942,a0c4fc8}-2026-11-10/source/; outputs to docs/project/reviews/review-2026-11-1X-de-winter-941-942.md and packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-1X/. Mapping: per packet P add E-de-winter-P-exact-feasibility (this replay) and E-de-winter-P-review-exact-feasibility, external_review on E-de-winter-P-certificate-report, V-de-winter-1111-review-check, list both under each coverage source's evidence, raise the 37 rows to verified, flip test_the_rows to verified, update READMEs/requests notes, render inventory/verifiers, re-pin.
+Sharp controls: running in five chunks of two streams (sharp-plan), chunk 0 from 11:49Z; receipts and the lane's sharp test land in later commits.
+Not this lane's: the records tier's bead-tree step fails locally because result-requests.yaml #943-#947 name think-xq4o, now closed (a deferral should name the open owner).
