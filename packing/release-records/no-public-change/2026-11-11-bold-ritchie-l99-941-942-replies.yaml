@@ -17,3 +17,11 @@ reason: >-
   its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with
   that main's result-requests.yaml swapped in: 43 files each, all byte-identical across the
   three. No PDF was printed; it prints from that HTML. The paper keeps its version, v0.2.7.
+  Intake lane L103, on the same branch: Joost de Winter's answers on #941 (20:19:41Z) and #942
+  (20:20:02Z) are read into both entries, each read_through moving to its answer, and the notes
+  record what each answer says, that the answers settle the review's questions, and that n809
+  stays queued on think-kzme. No reply, issue state, result, rung, side, bound or mark changes;
+  the credit of the two #942 bibliography keys gains penguin069 and kmmmvs, and
+  bibliography.yaml is no input of this paper. Rendered again the same way against main
+  c8448724e with L103's result-requests.yaml: 43 files each, all byte-identical across the
+  three.

@@ -31124,7 +31124,7 @@ issues:
       (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
       blind in a separate lane, accepts all fifteen, nothing blocking. Claude assistance
       disclosed.
-    read_through: '2026-11-10T13:30:51Z'
+    read_through: '2026-11-11T20:19:41Z'
     results:
     - key: above324-15
       claim: >-
@@ -31246,6 +31246,28 @@ issues:
       what "a margin of about 5e-9 above the numerical optimum" measures, and whether 809 is
       meant as its own claim or as the deletion bound from 810; neither changes a bound or holds
       the issue open, and the project's question on 809 does.
+
+      The author answered both questions at 20:19:41Z on 11 November 2026
+      (issuecomment-6806337206), recorded in intake lane L103 (think-acm0). On 809 he says it is
+      the deletion bound from 810, the 810 certificate with its last square removed, at the same
+      side, and asks that it be handled under the rule the project adopts for deletion bounds.
+      On the margin he says the review's reading is right: it is the certificate's side less the
+      side of the floating-point result of the local optimization, at 494, 738, 739, 753 and
+      810. When the certificates were written, every centre and the side were multiplied by
+      f = 1 + 2e-10 + 4v, where v is the largest constraint violation left in the floating-point
+      packing, and the side was then rounded up at the 13th decimal, so the margin is (f - 1)
+      times the side; the clearances of 1.0e-10 at a wall for a square centred 0.5 from it and
+      2.0e-10 between two aligned squares one unit apart show the scaling. He gives the margin
+      as 4.6e-9, 5.5e-9 and 5.6e-9 at 494, 739 and 753, where v is below 1e-12, and by his
+      estimate 8.9e-9 at 810 (and 809), with v = 2.7e-11, and 3.0e-8 at 738, with v = 2.2e-10,
+      so "about 5e-9" was too low for 738; the floating-point packings are not in his
+      repository, so he estimated v from the clearances in the certificates. He says the
+      answers were prepared with Claude (Anthropic), like the certificates. The answers settle
+      the review's questions. The 809 answer leaves n809 queued on think-kzme, whose notes
+      record it, and the issue stays open for 809. His commit 501cb8d
+      (2026-11-11T19:41:30Z) gives the same account of the margin, with the same figures, in
+      above324/README.md; the de-winter-issue941-2026-11-10 packet keeps the folder at 71da0d5
+      and notes that edition.
   - number: 942
     title: 'Sixteen lowered upper bounds for n between 632 and 989: registration request'
     author: JoostdeWinter
@@ -31277,7 +31299,7 @@ issues:
       report brought here may hold smaller ones. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
       blind in a separate lane, accepts all 22, nothing blocking. Claude assistance disclosed.
-    read_through: '2026-11-11T18:53:12Z'
+    read_through: '2026-11-11T20:20:02Z'
     results:
     - key: above324-refined-16
       claim: >-
@@ -31393,3 +31415,40 @@ issues:
       margin of about 5e-9 above the numerical optimum" measures. The questions are
       informational and hold nothing open. It says that nothing the author asked for is queued,
       so the issue is closed with it. The issue was closed as completed at 18:53:16Z.
+
+      The author answered the four questions at 20:20:02Z on 11 November 2026
+      (issuecomment-6806342752), after the issue was closed; recorded in intake lane L103
+      (think-acm0). (1) The six addendum counts come from a later run. The first run followed
+      the descent for the packings with the strongest descent directions and kept the sixteen
+      results that ended more than 1e-7 below the best value he knew; a later run took the next
+      packings on that list, six improving by more than 1e-6, which form the addendum, and
+      eighteen more by less, which are not claimed. He says two of his sentences were
+      inaccurate: "sixteen still had one" in the issue was too narrow, since at least forty of
+      the 1000 packings had a descent direction, and "improved twenty-two packings by at least
+      1e-6" in the folder's README is wrong at 921, 924 and 935, which improved by 3.8e-7,
+      1.8e-7 and 2.8e-7. (2) The merge file states no licence, and Samanyu-dev/squares_in_squares
+      has no licence file at 53551d7; its README calls its own code "MIT-style" and says that
+      third-party notebooks and datasets "are used under their own licences". Public Kaggle
+      notebooks are released under Apache 2.0 by default, and each Kaggle dataset carries the
+      licence its uploader chose; he has not traced the 22 packings to a notebook or dataset, so
+      he cannot name a licence per packing. (3) The merge file and that repository's tables give
+      no source per puzzle; matching coordinates against the output of each public notebook and
+      dataset could identify the authors, which he has not done. That README introduces its ten
+      names with "among them", its score history names two further merged sources, penguin069
+      and kmmmvs, and it reports the owner's own results in the file (18 wins from its own AWS
+      runs at n = 650–990), so some of the 22 starting packings may be by Samanyu-dev. (4) The
+      margin is the certificate's side less the side of the floating-point result of the local
+      optimization, written as on #941: every centre and the side multiplied by
+      f = 1 + 2e-10 + 4v, v the largest constraint violation left, and the side rounded up at
+      the 13th decimal. For 18 of the 22, v is below 2e-12 and the margin 5.0e-9 to 6.4e-9; by
+      his estimate it is 8.4e-9 at 754, 1.1e-8 at 637 and 684 and 4.6e-8 at 805, where v was
+      2.6e-11 to 3.5e-10, so "about 5e-9" was too low for those four. He says the answers were
+      prepared with Claude (Anthropic), like the certificates. The answers settle the review's
+      questions, and the issue stays closed. The credit of [de Winter issue 942 2026-11-10] and
+      [de Winter a0c4fc8 2026-11-10] adds penguin069 and kmmmvs, and the bibliography and the
+      packets say that the starting packings' authors are not identified per puzzle, so some
+      may be Samanyu-dev's own, and that no licence is stated for them, public Kaggle notebooks
+      defaulting to Apache 2.0, none traced per packing. His commit 501cb8d
+      (2026-11-11T19:41:30Z) corrects above324_refined/README.md to the same account of the two
+      runs and the margin; the packets keep the folder at a9486ed and a0c4fc8 and note that
+      edition.

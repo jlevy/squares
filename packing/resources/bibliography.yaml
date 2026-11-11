@@ -5173,7 +5173,7 @@ sources:
     venue: GitHub
     dated: '2026-11-10'
     lineage: independent
-    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069, kmmmvs
     short_credit: de Winter after Samanyu-dev et al.
     note: >-
       JoostdeWinter/square-packing at a9486ede74cd75996f488605f27d7fce32a73b3a
@@ -5185,8 +5185,15 @@ sources:
       direction with the arrangement unchanged. The merged file names no author per packing; its
       README credits Chris Deotte, lightningv08 (Vladislav Lavrentev), alexchilton (Alex Chilton),
       kirilltym (Kirill Tymchishin), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt
-      and the register of Francisco Couzo, and the credit follows it; the licence of those
-      starting packings is not given. Beyond-horizon rows below the record's rows at those
+      and the register of Francisco Couzo, and the credit follows it, with penguin069 and kmmmvs:
+      the author's answer of 11 November (jlevy/squares#942, issuecomment-6806342752) says the
+      README introduces its ten names with "among them" and its score history names those two
+      further merged sources. The starting packings' authors are not identified per puzzle, and
+      the answer says the README reports the owner's own wins in the file at n = 650 to 990, so
+      some may be Samanyu-dev's own. No licence is stated for the starting packings: the answer
+      says the merge file states none and the repository has no licence file at 53551d7, and
+      that public Kaggle notebooks default to Apache 2.0, each dataset carrying its uploader's
+      choice; none was traced per packing. Beyond-horizon rows below the record's rows at those
       counts. These are bounds below the record, which the record does not call the best known
       packings (the review's F9): each arrangement is another holder's public Kaggle packing,
       re-optimized, and the issue's own table puts each side 1.8e-07 to 3.8e-04 below the best
@@ -5204,7 +5211,7 @@ sources:
     venue: GitHub
     dated: '2026-11-10'
     lineage: independent
-    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069, kmmmvs
     short_credit: de Winter after Samanyu-dev et al.
     note: >-
       JoostdeWinter/square-packing at a0c4fc80db67e9806026921654dce49a155ac31b
@@ -5212,7 +5219,12 @@ sources:
       above324_refined/, at 597, 754, 864, 865, 869 and 991, reported by his addendum comment on
       jlevy/squares#942 (issuecomment-6772308414, 16:02:47Z), from the same procedure and merged
       Kaggle file as the issue's sixteen, with the arrangements unchanged; credited as
-      [de Winter issue 942 2026-11-10] is; the licence of those starting packings is not given.
+      [de Winter issue 942 2026-11-10] is, after penguin069 and kmmmvs as well, the starting
+      packings' authors not identified per puzzle, so some may be Samanyu-dev's own; no licence
+      is stated for those starting packings, public Kaggle notebooks defaulting to Apache 2.0,
+      and none was traced per packing. The author's answer of 11 November
+      (jlevy/squares#942, issuecomment-6806342752) says the six came from a later run than the
+      issue's sixteen.
       Beyond-horizon rows below the record's rows at those counts. These are bounds below the
       record, which the record does not call the best known packings (the review's F9): each
       arrangement is another holder's public Kaggle packing, re-optimized, and the addendum's
