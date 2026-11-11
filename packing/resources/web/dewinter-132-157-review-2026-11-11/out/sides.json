@@ -1,0 +1,100 @@
+{
+ "program": "l105_sides.py",
+ "issue": {
+  "number": 958,
+  "created_at": "2026-11-11T20:56:18Z",
+  "updated_at": "2026-11-11T20:56:18Z"
+ },
+ "counts": {
+  "132": {
+   "side_40_places_floor": "11.9760483836034075237287169527136778245464",
+   "floor12": "11.976048383603",
+   "ceil12": "11.976048383604",
+   "brief_claim": "11.976048383604",
+   "brief_claim_is_ceil12": true,
+   "issue_new_side": "11.97604838360340752372871695271367782454646197183552",
+   "issue_new_side_rules": [
+    "floor",
+    "nearest"
+   ],
+   "readme_side": "11.97604838360340752372871695271367782454646197183552",
+   "readme_side_rules": [
+    "floor",
+    "nearest"
+   ],
+   "issue_equals_readme_print": true,
+   "record_print_main": "11.9856801988458088115",
+   "record_exact_main": "33074114147297189175252563891626809919040565156822769685670474811180499390323454482469274256326747136608727251993971986277527248261551551194020579640787997762313890274467152062118283161278100575692229150166362360799901543785878758492374113408923798812655672362131246060140146549606708678578716794700744651751385372723732131351623196796627186219934184427216697228783921514247854339081761951261911782718309054730603062414190296452798227265376463165151595270648762776148168747513/2759469099674638748938458484490725159877690459359679609203935679528188975537106161374286955389139677913414530308780976153944320589800789938772398224762134013461087511235397535454079552761105290595305883299212176505341995726723153245962565625411519446201212070017593391489266753823269495172501045092270422795719983416583522791152110516290993885518084350731355712415823990884607045967834295970698159139618690570909298860968628563113826476098160488461343752568355930089397710507",
+   "record_print_rules": [
+    "ceil"
+   ],
+   "issue_register": "11.9856801988458088115",
+   "issue_register_rules": [
+    "ceil"
+   ],
+   "readme_listed": "11.9856801988458088",
+   "readme_listed_rules": [
+    "floor",
+    "nearest"
+   ],
+   "gain_exact_sci": "9.63181524240e-3",
+   "issue_gain": "9.63e-3",
+   "issue_gain_matches_3sig": true,
+   "readme_improvement": "0.0096",
+   "readme_improvement_rules": [
+    "floor",
+    "nearest"
+   ],
+   "relative_gain_sci": "8.03610e-4",
+   "gain_in_12th_place_units": "9631815242"
+  },
+  "157": {
+   "side_40_places_floor": "12.9933026113432236413372793549657716631187",
+   "floor12": "12.993302611343",
+   "ceil12": "12.993302611344",
+   "brief_claim": "12.993302611344",
+   "brief_claim_is_ceil12": true,
+   "issue_new_side": "12.99330261134322364133727935496577166311874424252458",
+   "issue_new_side_rules": [
+    "floor",
+    "nearest"
+   ],
+   "readme_side": "12.99330261134322364133727935496577166311874424252458",
+   "readme_side_rules": [
+    "floor",
+    "nearest"
+   ],
+   "issue_equals_readme_print": true,
+   "record_print_main": "13.0",
+   "record_exact_main": "13",
+   "record_print_rules": "13 exactly",
+   "issue_register": "13 (grid)",
+   "issue_register_rules": "13 (grid)",
+   "readme_listed": "13",
+   "readme_listed_rules": "13",
+   "gain_exact_sci": "6.69738865677e-3",
+   "issue_gain": "6.70e-3",
+   "issue_gain_matches_3sig": true,
+   "readme_improvement": "0.0067",
+   "readme_improvement_rules": [
+    "ceil",
+    "nearest"
+   ],
+   "relative_gain_sci": "5.15183e-4",
+   "gain_in_12th_place_units": "6697388656"
+  }
+ },
+ "seed_109": {
+  "issue_seed_side": "10.949289581",
+  "issue_register_109": "10.949747468",
+  "record_109_value_main": "10.94974746830583",
+  "record_109_form": "6 + (7/2)sqrt(2)",
+  "record_109_enclosure_30": [
+   "10.949747468305832670805910534733",
+   "10.949747468305832670805910534733"
+  ],
+  "issue_register_109_is_floor": true,
+  "issue_register_109_is_nearest": true,
+  "seed_below_record_by_sci": "4.57887e-4"
+ }
+}

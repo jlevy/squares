@@ -39,6 +39,22 @@ and was run with CPython 3.14.7 as `python -I -B` from `packing/` of a checkout 
 `run_frozen.sh SOURCE_DIR OUT_DIR` reruns the self-test, the checks and the controls;
 SOURCE_DIR is a checkout of the source at `6617869`, holding `n132/` and `n157/`.
 
+Written and run after the findings were frozen, none of them a decider of either
+packing:
+
+| Program | What it measures | Reads | Writes |
+| --- | --- | --- | --- |
+| `l105_sides.py` | the claims’ arithmetic: the 12-place ceilings, the issue’s and READMEs’ prints, the record values, the gains, the seed’s comparison at 109 | the source, `programs/issue-958.json`, the case records at 109, 132 and 157 | `out/sides.json` |
+| `l105_construct.py` | tilt counts and angles, the near pairs’ opening, the wall squares, corner incidences | the source | `out/construct.json` |
+| `l105_lineage.py` | the two growth steps from the seed at 109, in binary64 with SciPy’s assignment | the seed’s `best_fit_101_500.csv`, the source | `out/lineage.json` |
+| `l105_identity.py` | the 132 packing against the house witness, eight symmetries and five anchorings | the source, `packing/witnesses/known-best/n-132.yaml` | `out/identity-n132.json` |
+| `l105_custody.py` | read-only Git plumbing on both clones; the licence against this repository’s retained copies; no e-mail addresses | both clones, this repository | `out/custody.json` |
+| `l105_digests.py` | every program and receipt against the kept bytes and the three frozen lists | this directory | `out/program-digests.json` |
+
+`run_after.sh SOURCE_DIR SEED_DIR REPO_DIR OUT_DIR` reruns them; SEED_DIR is a clone of
+`Samanyu-dev/squares_in_squares` at `53551d77513a`. `l105_digests.py` printed
+`ALL_RECEIPTS_MATCH`.
+
 ## What They Printed
 
 - `l105_selftest.py`: `PASSED 2213 cases, 0 failed, 0 errors`; the two mutants
