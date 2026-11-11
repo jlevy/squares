@@ -588,7 +588,6 @@ def _sources() -> dict[str, Source]:
         packet_source("T-186", "mishapolk-kkt-refinements-2026-10-14"),
         packet_source("T-187", "evand-n146-2026-10-14"),
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
-        packet_source("T-190", "couzo-n237-2026-10-15"),
         field_source("T-193", "evand-exact-cur-2026-10-16", FIELD_COUNTS["T-193"]),
         packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
         packet_source("T-197", "evand-n155-explorer-2026-10-17"),
@@ -672,6 +671,11 @@ def _sources() -> dict[str, Source]:
         # 954 (T-291), a new arrangement relative to T-174's packing, found by a band-design
         # search from the tilted squares of the registry's 70; T-174 still houses other counts.
         packet_source("T-291", "ozden-s179-upper-bound-2026-11-11"),
+        # Lane L110 of the same day (think-my76) moved 237 from T-190 to Doğa Özden's issue
+        # 960 (T-295), a new arrangement relative to T-190's packing, found by a band-design
+        # search from two copies of the tilted squares of the registry's 70. 237 was T-190's
+        # only count, so T-190 is no source here now.
+        packet_source("T-295", "ozden-s237-upper-bound-2026-11-11"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -745,7 +749,9 @@ def _sources() -> dict[str, Source]:
 #: the house it replaces, Özden its finder; T-276 keeps no house here; T-186 and T-174
 #: still house other counts. Lane L100 of the same day (think-f65n) adopted his issue 954
 #: (T-291) at 179 from T-174, a new arrangement relative to T-174's packing, Özden its
-#: finder.
+#: finder. Lane L110 of the same day (think-my76) adopted his issue 960 (T-295) at 237 from
+#: T-190, a new arrangement relative to T-190's packing, Özden its finder; T-190 keeps no
+#: house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -790,7 +796,7 @@ ADOPTED: dict[int, str] = {
     229: "T-225",
     232: "T-275",
     236: "T-218",
-    237: "T-190",
+    237: "T-295",
     238: "T-174",
     239: "T-174",
     240: "T-174",
@@ -1013,7 +1019,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-05": frozenset({175, 204, 260, 268, 293, 303, 304}),
     "2026-11-06": frozenset({260}),
     "2026-11-09": frozenset({172, 199, 232, 268, 270, 299, 303, 307}),
-    "2026-11-11": frozenset({156, 179, 180, 268, 269}),
+    "2026-11-11": frozenset({156, 179, 180, 237, 268, 269}),
 }
 
 

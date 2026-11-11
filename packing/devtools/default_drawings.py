@@ -864,20 +864,6 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
-    237: Settled(
-        DECIDED,
-        "[Couzo n237 2026-10-15]",
-        "resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert",
-        "58a783368d4b7e70bb800f0009ea9ca03e578739",
-        "7951301819129798440089572127137/500000000000000000000000000000",
-        _RUNZ7WN_B,
-        "every view, admitted at row 10, draws one more light and one more uneven "
-        "square than the axis tool's view of this witness (6 / 10 against 5 / 9), "
-        "though no near-axis square, no more angle classes and more shared sides: "
-        "Evan Daniel's same-side and solved views, and grid-slack's at all three "
-        "thresholds",
-        _README_R3CL,
-    ),
     240: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",

@@ -1583,19 +1583,19 @@
       "url": "https://github.com/evand/square-packing/blob/5ad00693899ef50ccf6502f0346187cc422cc914/search/packer/candidates/s236_bm3c.cert"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/n237.cert at 58a783368d4b7e70bb800f0009ea9ca03e578739",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s237-upper-bound/blob/13c4b231bb16437a6ee3751e75113ef95113b235/n-237-candidate.yaml at 13c4b231bb16437a6ee3751e75113ef95113b235",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         237
       ],
       "n": 237,
-      "path": "resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert",
+      "path": "resources/web/ozden-s237-upper-bound-2026-11-11/source/n-237-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-15",
+      "retrieved": "2026-11-11",
       "source_n": 237,
-      "url": "https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/n237.cert"
+      "url": "https://github.com/kenaznia-doga/s237-upper-bound/blob/13c4b231bb16437a6ee3751e75113ef95113b235/n-237-candidate.yaml"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n238.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

@@ -456,6 +456,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # arrangement of T-270's packing (T-276), to his issue-945 certificate (T-289);
         # T-174 and T-186 keep their other houses.
         "T-276",
+        # The same day's lane L110 took 237, the only house of Francisco Couzo's 15 October
+        # certificate (T-190), to Doğa Özden's issue-960 certificate (T-295).
+        "T-190",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -524,7 +527,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # T-263 (299), T-270 (268) and T-272 (303), which they supersede.
     # The adoption of 11 November 2026 took 156, 180, 268 and 269 to Doğa Özden's
     # certificates of issues 943 to 947 (T-287 to T-290): the last house of T-276 (268),
-    # which they supersede; T-174 and T-186 keep their other houses.
+    # which they supersede; T-174 and T-186 keep their other houses. Its lane L110 took
+    # 237, the only house of T-190, to Özden's issue-960 certificate (T-295), which
+    # supersedes it.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

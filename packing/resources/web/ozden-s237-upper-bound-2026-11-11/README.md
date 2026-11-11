@@ -16,8 +16,9 @@ prepared and posted both on his behalf.
   record T-189, Francisco Couzo’s issue-607 certificate, but prints the side of T-190, his
   15 October certificate of the same packing, 2.40e-11 below T-189, which is the case’s
   house; the gain against T-190 is 8.798e-03, as the issue states. The issue also prints
-  the exact side as 15.8938055805725735, 6.55 × 10⁻¹⁶ below it. It claims an upper bound
-  only: no KKT, local-optimality, rigidity or global-optimality claim.
+  the exact side as 15.8938055805725735, 6.55 × 10⁻¹⁶ below it: the side’s binary64
+  rounding printed to 16 places, as the review finds, which bounds nothing (F5). It claims
+  an upper bound only: no KKT, local-optimality, rigidity or global-optimality claim.
 - The exact coordinates were made by this repository’s own `packing-witness promote
   --strategy robust-rational` at `c8448724` from the lab’s decimal pose,
   `n-237-decimal-pose.yaml`, which the witness’s `source.path` names, with
@@ -26,7 +27,14 @@ prepared and posted both on his behalf.
   Evan Daniel’s quench (about 10⁻¹³ relative), that only the squares that set the left
   wall, the bottom wall and the side touch them exactly, and that other squares near a wall
   clear it by up to about 10⁻¹². The decimal pose’s side is 2.07 × 10⁻¹³ above the
-  certificate’s.
+  certificate’s. Measured by the review, exactly three squares touch a wall (67 at the
+  bottom, 152 at the left and 236 at the top), as the issue says; the other 19
+  square–wall clearances below 10⁻¹² are at most 1.20 × 10⁻¹³, and 35 lie between
+  1.91 × 10⁻⁵ and 6.40 × 10⁻⁴. The certificate is the decimal pose translated by about
+  1.1 × 10⁻¹³ toward the corner, every centre equal to the pose’s to 4.7 × 10⁻³⁸, so the
+  pair margins are the pose’s own, as the issue says; they lie between 2.01 and
+  5.70 × 10⁻¹³ of the centres’ separation along the binding axis, median 2.38 × 10⁻¹³,
+  about twice the issue’s “about 1e-13 relative” (F7).
 - `n237-witness.json` is the same file as JSON. `packing-witness-verify.txt` is the
   author’s run of this repository’s `packing-witness verify` at `c8448724` (VERIFIED,
   27,966 pairs); `sqcheck-output.txt` is the author’s run of `verifier/sqcheck.py`, an
@@ -127,7 +135,21 @@ nothing.
   view, as they stood before this adoption, measure the same. So it is a new arrangement
   relative to T-190’s packing, not a further arrangement of it. Anchored at the lower-left
   corner or at the centres, every square moves beyond 10⁻³, since the sides differ by
-  8.8 × 10⁻³, against the issue’s 236 of 237.
+  8.8 × 10⁻³; the issue’s 236 of 237, 78 beyond 0.05 and largest move 1.202 hold, as the
+  review measured, with the house turned a half turn, set against the upper-right corner
+  of the new box and paired by least summed move, a convention the issue does not name
+  (F8). The review finds the band straight, its centres closer to their line than the
+  house’s (standard deviation 0.70 against 1.28), with 35 of its tilted squares within
+  0.004 degrees of 42.215 and a 36th 0.024 degrees away, so “36 of its 43” holds with
+  “share” read loosely.
+- **The seed.** The review built the seed the issue states. The first copy of the 70
+  band, reflected in the anti-diagonal of its box at the origin, matches: turned by 0.39
+  degrees and moved by under 0.05, 19 of its 20 squares lie within 0.1 of a tilted square
+  here. The second, reflected in the main diagonal and shifted by (7, 7), does not lie
+  where stated: no tilted square here lies within 0.25 of it until it is turned by −1.20
+  degrees about the origin and shifted by (−0.45, 0.03), after which 9 of its 20 lie
+  within 0.1 and 18 within 0.25. Two copies of the 70 band hold 40 tilted squares, not
+  the 42 the issue counts (F9).
 
 ## Exact Replay
 
@@ -182,18 +204,92 @@ packing decided on both maintained routes.
 and monotonicity consequences as on `main`: this bound carries to no other count
 ([measure/l-step-scan.json](measure/l-step-scan.json)).
 
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 11 November 2026
+([review-2026-11-11-ozden-960.md](../../../../docs/project/reviews/review-2026-11-11-ozden-960.md)),
+written in a separate lane (L109) blind to this one throughout, accepts the certificate
+with findings, one minor for the author (F5) and the rest notes, none blocking, and scores
+it S3. Its clean-room checker decides every square, wall and pair by separating axes in
+`Fraction` and by exact clipped areas in GMP rationals, with 17 controls stated before
+they ran, and accepts the same squares in the box of the claim’s own side,
+15.893805580573 (F3); its programs and receipts are kept in the review-only directory
+beside this packet,
+[ozden-s237-review-2026-11-11](../ozden-s237-review-2026-11-11/README.md).
+Read against this packet’s receipts once both were done, its least pair margin is the
+replay’s exactly, its contraction receipts for T-190 and T-189 equal
+[measure/contraction-n237.json](measure/contraction-n237.json) and
+[measure/contraction-n237-t189.json](measure/contraction-n237-t189.json) in margin,
+factor and binding pair, and its identity measurement against T-190 and T-189 equals
+[measure/identity.json](measure/identity.json) under nearest centres, the optimal
+assignment and box-centred alignment.
+
+The review corrects the record’s id: the issue names T-189, but the value and fraction it
+quotes are T-190’s, the house since 16 October 2026 (F6). The issue dates its search for
+competing reports 13:50 PST, which is 21:50Z, twelve minutes after it was opened at
+21:37:50Z; either the body was edited or the time is misstated, and nothing in the bound
+depends on it (F12). The witness’s `softschema.schema` names `witness.schema.yaml`, which
+resolves to no file in the author’s repository, and its `certificate.replay` names the
+file but not where to run it, unlike the README’s rerun (F11); the adopted witness carries
+this repository’s own. Those are notes for the author.
+
+The issue names the registry’s 70 as the band’s source; that witness comes from PingYou
+Ltd’s PR 574 algebraic supplement, a release with no licence file, kept here in the
+derived-only form. Whether a seed taken from it needs a notice of its own is the owner’s
+open decision on `think-71uq` (F10; the review named `think-mdxq`, which closed on 4
+November). It is noted here, not decided.
+
+Its questions for the author, informational and holding nothing open:
+
+1. Was the final repair scaling about 2 × 10⁻¹³ rather than 10⁻¹³, since the margins are
+   2.01 to 5.70 × 10⁻¹³ of the centres’ separation, median 2.38 × 10⁻¹³ (F7)?
+2. Do the lineage counts use the house turned a half turn, set against the upper-right
+   corner of the new box and paired by least summed move, and would the issue name that
+   convention (F8)?
+3. About which point were the copies “rigidly rotated to a lean of 2.0°”, and what does
+   the lean measure, since the second copy as stated lies more than 0.25 from every new
+   tilted square (F9)?
+4. Two copies of the 70 band hold 40 tilted squares: where do the other two of the “42
+   tilted squares at band parameter 2.0” come from (F9)?
+5. Did the seed take the 70 band from the registry’s witness (PingYou Ltd’s algebraic
+   certificate) or from Ryan Xu’s or Evan Daniel’s published coordinates?
+6. Would the author correct the record’s id to T-190, and print the exact side as its
+   16-place ceiling, 15.8938055805725742, rather than the binary64 value
+   15.8938055805725735 (F5, F6)?
+7. Was the body edited after it was opened, or is the search time of 13:50 PST
+   misstated (F12)?
+8. Will the band-design search and its seeds be published, and which replay is intended,
+   `certificate.replay` or the README’s rerun, and from which directory (F11)?
+
+The case adopted the certificate as its house on 11 November 2026 under the house rule,
+as T-295, in place of T-190, which keeps its certificate as history, with Doğa Özden the
+packing’s finder, two copies of the band of Ryan Xu’s n = 70 packing, as Evan Daniel and
+PingYou Ltd improved it, credited as the search’s seed, and T-190’s packing, Nate
+Chaoweeraprasit’s as Francisco Couzo and Mishapolk improved it, as the record it improves
+(the review’s F10). Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-my76-2026-11-11/README.md)), and the
+selection, measured against this witness’s drawing, draws Evan Daniel’s same-side view:
+light, uneven and near-axis squares, angle classes and hues 33, 68, 68, 75 and 19 against
+0, 0, 0, 2 and 2, and full shared sides 331 and 721 against 788 and 788. His certified KKT
+solve lies 3.44 × 10⁻¹² below the side, 1.15 of the certificate’s own contraction margin
+(2.985 × 10⁻¹²), held at row 3 as a register candidate and not admitted, as at 156, 172,
+179, 180, 199, 268, 269 and 270 (RV-3). The rigidity block, derived again on the new
+witness, stays not rigid: 206 of its 237 squares translate, against 21 of T-190’s.
+
 ## What Is Not Established
 
-- **Human oversight.** No human oversight record.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
 
 ## Credit and Licence
 
-The packing is Doğa Özden’s, found by his lab’s band-design search from the tilted squares
-of the registry’s n = 70 packing, Ryan Xu’s, as Evan Daniel and PingYou Ltd improved it.
-The issue asks that the improvement be credited to Özden, the band’s source packing and
+The packing is Doğa Özden’s, found by his lab’s band-design search from two copies of the
+tilted squares of the registry’s n = 70 packing, Ryan Xu’s, as Evan Daniel and PingYou Ltd
+improved it. The case record credits Özden as the finder, the 70 packing’s holders as the
+band’s source and T-190’s holders as the record it improves (the review’s F10). The issue
+asks that the improvement be credited to Özden, the band’s source packing and
 the current record to their holders as the registry lists them, and the local optimizer
 to Evan Daniel. The record at 237 is T-190: Nate Chaoweeraprasit’s packing (itsnaka),
 improved by Francisco Couzo and Mishapolk (Mykhailo Polkovskyi). The issue says the search

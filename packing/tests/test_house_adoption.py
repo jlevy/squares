@@ -1741,7 +1741,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 2026 moved 232, 268, 299, 303 and 307 to Doğa Özden's further arrangements (T-275 to
     # T-279), and its later pass 172 and 270 (T-282, T-283). The adoption of 11 November 2026
     # moved 156, 180, 268 and 269 to his certificates of issues 943 to 947 (T-287 to T-290),
-    # and the same day's lane L100 179 to his certificate of issue 954 (T-291).
+    # and the same day's lane L100 179 to his certificate of issue 954 (T-291), and lane L110
+    # 237 to his certificate of issue 960 (T-295).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1771,6 +1772,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         180: "T-288",
         269: "T-290",
         179: "T-291",
+        237: "T-295",
     }
     before = {
         **houses.ADOPTED,
@@ -1804,6 +1806,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         180: "T-174",
         269: "T-174",
         179: "T-174",
+        237: "T-190",
     }
     # 199 was first adopted on 9 November 2026 (T-284), after this receipt was retained.
     for n in (183, 199, 227, 229, 260, 293, 299):

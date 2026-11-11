@@ -8123,3 +8123,62 @@ verifiers:
       l101_house.py, l101_pose.py, l101_identity.py, l101_band.py, l101_custody.py,
       l101_compare_lane.py and l101_digests.py, kept beside them, decide no certificate and are
       not registered; l101_house.py decides the house witness with the frozen l101_check.decide.
+  - id: V-ozden-960-review-check
+    program: l109_check.py with l109_reader.py, l109_axes.py, l109_clip.py and l109_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 960 (237), with a strict reader of its own (l109_reader.py: every
+      scalar an exact integer pair in lowest terms, ids 1 to n in order, the JSON twin held to
+      the same tree with floats, constants and duplicate keys refused, anchors, aliases, tags
+      and any unexpected layout refused): every format hypothesis, every square a unit square
+      from its listed corners, every wall and every pair twice with no distance filter, by
+      separating axes over the four edge directions in fractions.Fraction (l109_axes.py, method
+      A) and by exact clipped areas in gmpy2.mpq (l109_clip.py, method B), each pair classed
+      overlapping, touching or clear by both. l109_geom.py holds the exact constructions the
+      self-test and controls use, the centre-line closing among them; l109_controls.py decides
+      17 controls stated in a plan hashed before it existed; l109_selftest.py holds both methods
+      and the reader to 2,838 cases.
+    source:
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_check.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_reader.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_axes.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_clip.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_geom.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_selftest.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_controls.py
+    independence_record: packing/resources/web/ozden-s237-review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 960 (L109, under think-my76), strong
+            tier, prompted separately from the import lane (L110, think-my76)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-11T22:05:18Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source and share no code with lane L101's review of #954.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-ozden-960.md (SHA-256
+      ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932 for l109_check.py, as
+      frozen at 2026-11-11T22:05:18Z), and kept with its receipts in the review-only directory
+      ozden-s237-review-2026-11-11 beside the import lane's packet. l109_plan_facts.py,
+      l109_make_plan.py, l109_census.py, l109_sides.py, l109_pose.py, l109_identity.py,
+      l109_band.py, l109_custody.py and l109_digests.py, kept beside them, decide no
+      certificate and are not registered.
