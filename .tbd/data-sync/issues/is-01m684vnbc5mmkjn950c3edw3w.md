@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 224
+version: 225
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -86,7 +86,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T22:21:13.453Z
+updated_at: 2026-11-11T22:40:46.844Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -338,3 +338,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 21:53Z renewal (intake206): new #960 (Özden s(237) <= 15.893805580573, 8.8e-3 below T-189); bead think-my76; blind review L109 started; import after L100. L105 accepted both of de Winter's 132/157; L104 is mapping and adopting. Corrected my earlier wrong 'past midnight' note to L100/L104: no stamp_landed unless the date is 12 Nov. Intake labels added to #954, #958, #959 and #960. #957's Certificate page run is still in progress (slow runners).
 
 2026-11-11 22:22Z: #956 merged (b5b12c206): T-291 s(179) is the house at 179; 954 stays open until its reply. L107 importing #959 as T-294 (think-89i7, review L108 running). L111 checking the deploy and drafting the 954 reply. #960's import is deferred until a lane frees up (review L109 running).
+
+2026-11-11 ~22:50Z: #957 merged (0af33d857; think-doi6 closed). #955 merged with main (7f4b759fe; result-requests conflict kept both sides, occurrences regenerated); CI pending. L108's blind review of #959 accepted (440acdb99; RV-3 not reached; s(70)+5 within 2.6e-12; contracted side not registered), sent to L107. L109's review of #960 accepted; L110 importing as T-295 (the house is T-190, not T-189 as the issue says).
