@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 211
+version: 212
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -81,7 +81,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T18:37:26.234Z
+updated_at: 2026-11-11T18:53:43.639Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -317,3 +317,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 17:52Z renewal (intake202): no change. L90 handed back #952 (head 22c85caf9, CI green; 36 verified rows, 809 held on think-kzme, L96 mapped). Senior review L97 running.
 
 2026-11-11 ~18:45Z: #952 merged (c8448724e) after blind review L96 and senior review L97 plus fixes (f9074dac7, CI green): 36 de Winter rows verified above 324, 35 superseded, 809 queued on think-kzme (N3 note added there). L98 waiting on deploy, drafting the #941/#942 replies.
+
+2026-11-11 ~18:55Z: Pages deploy for c8448724e succeeded (run 43079349582; 6255/6255 checks). #941 had been auto-closed at 18:36:15Z by a closing keyword in #952's body; coordinator reopened it. Posted the #941 import reply (issuecomment-6804521353; stays open for n809/think-kzme) and the #942 final (-6804532105; closed 18:53:16Z). Both match their L98 drafts byte for byte. L99 is recording them (records PR).
