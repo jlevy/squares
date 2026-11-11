@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 202
+version: 203
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -81,7 +81,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T11:55:04.745Z
+updated_at: 2026-11-11T12:28:58.259Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -299,3 +299,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 10:53Z renewal (intake195): L91 opened #951 (records of the seven 11 Nov replies; CI green); senior review L92 running. All new intake items (#943/#944/#945/#947 closes, #593/#847/#928 replies) close with #951. #941/#942 and de Winter's repo stay with L90 (think-cen3). think-4ul6 (T-142/T-143 stage-4 review; the 4 Nov launch was lost, no review on main) relaunched as L93 (tbd-strong-max, blind), claimed by bold-ritchie-l93.
 
 2026-11-11 11:53Z renewal (intake196): #951 merged (591644a9e) after senior review L92 (no blocking; two optional nits skipped); think-xq4o closed. Intake clean apart from #941/#942/de Winter repo (L90, think-cen3) and think-4ul6 (L93 running).
+
+2026-11-11 ~12:40Z: CORRECTION to the 10:53Z note: the 4 Nov think-4ul6 review was not lost; it is review-2026-11-04-wand125-fine-net-n28-n30.md on #908's branch (l45, held for the owner), not on main. L93's #953 is a second, fresh review (accepts both). Senior review L94: maths sound; blocking B-1 (the "lost" text) and B-2 (DATA_REVISION pin); S-1..S-3 and nits. L95 addressing them. #953 labelled blocked:owner-decision: which review(s) the T-142/T-143 records cite (two reviews count toward C4) goes with the owner's #908 decision.
