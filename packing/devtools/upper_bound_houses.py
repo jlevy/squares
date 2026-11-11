@@ -660,14 +660,14 @@ def _sources() -> dict[str, Source]:
         # T-127 to Doğa Özden's issue 938, T-282's packing with one L step (T-284).
         packet_source("T-284", "ozden-s199-upper-bound-2026-11-09"),
         # Lane L81 of 11 November 2026 (think-xq4o) moved 156, 180, 268 and 269 to Doğa Özden's
-        # issues 943, 944, 945 and 947 (T-285 to T-288), each a new arrangement relative to the
+        # issues 943, 944, 945 and 947 (T-287 to T-290), each a new arrangement relative to the
         # house it replaces, found by transplant search from another count's registry packing.
         # 268 was T-276's only count, so T-276 is no source here now; T-186 and T-174 still
         # house other counts.
-        packet_source("T-285", "ozden-s156-upper-bound-2026-11-10"),
-        packet_source("T-286", "ozden-s180-upper-bound-2026-11-10"),
-        packet_source("T-287", "ozden-s268-upper-bound-2026-11-10"),
-        packet_source("T-288", "ozden-s269-upper-bound-2026-11-11"),
+        packet_source("T-287", "ozden-s156-upper-bound-2026-11-10"),
+        packet_source("T-288", "ozden-s180-upper-bound-2026-11-10"),
+        packet_source("T-289", "ozden-s268-upper-bound-2026-11-10"),
+        packet_source("T-290", "ozden-s269-upper-bound-2026-11-11"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -737,7 +737,7 @@ def _sources() -> dict[str, Source]:
 #: 938, T-282's packing with one L step (T-284), at 199, first adopted here, from the case
 #: record's own house, T-127, with T-193 staged there for the writer. Lane L81 of 11 November
 #: (think-xq4o) adopted his issues 943, 944, 945 and 947 at 156 from T-186, 180 and 269 from
-#: T-174 and 268 from his own T-276 (T-285 to T-288), each a new arrangement relative to
+#: T-174 and 268 from his own T-276 (T-287 to T-290), each a new arrangement relative to
 #: the house it replaces, Özden its finder; T-186 and T-276 keep no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
@@ -761,12 +761,12 @@ ADOPTED: dict[int, str] = {
     153: "T-174",
     154: "T-222",
     155: "T-197",
-    156: "T-285",
+    156: "T-287",
     172: "T-282",
     175: "T-267",
     176: "T-186",
     179: "T-174",
-    180: "T-286",
+    180: "T-288",
     181: "T-174",
     182: "T-243",
     183: "T-220",
@@ -795,8 +795,8 @@ ADOPTED: dict[int, str] = {
     263: "T-174",
     264: "T-186",
     267: "T-134",
-    268: "T-287",
-    269: "T-288",
+    268: "T-289",
+    269: "T-290",
     270: "T-283",
     271: "T-219",
     272: "T-174",

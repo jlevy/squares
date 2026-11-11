@@ -2451,7 +2451,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # packet still holds 204, 293 and 304. The same day's last pass draws 199 from Özden's
     # issue 938 packet (T-284), one more source with no new name, and Gupta's rational
     # refinements still hold other counts. The adoption of 11 November draws 156, 180, 268
-    # and 269 from Özden's four packets of that day (T-285 to T-288), and no longer from his
+    # and 269 from Özden's four packets of that day (T-287 to T-290), and no longer from his
     # 9 November s268 packet, which held nothing else: four sources more and one fewer.
     assert len(expected_sources) == 40
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
@@ -2598,8 +2598,8 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     232, 268, 303 and 307 too, and at 299 again (T-275 to T-279), and the hold holds him at
     all five. Its later pass (think-he66) credits him at 172 and 270 (T-282, T-283), held
     the same way, and its last (think-1goz) at 199 (T-284), held alike. The adoption of 11
-    November 2026 (think-xq4o) credits him as the finder at 156, 180, 268 and 269 (T-285 to
-    T-288), held alike."""
+    November 2026 (think-xq4o) credits him as the finder at 156, 180, 268 and 269 (T-287 to
+    T-290), held alike."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == dict.fromkeys(
         (156, 172, 180, 199, 232, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)

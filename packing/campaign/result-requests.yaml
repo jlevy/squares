@@ -29908,7 +29908,7 @@ issues:
       print is the exact side rounded up, and both maintained exact routes accept the witness
       and refuse its gross and sharp controls; measured, it is a new arrangement relative to
       T-186's packing, not one to one with it under any symmetry, 58 squares beyond a tenth. The
-      ledger of 11 November records it. Registered as T-285. The 11 November stage 4 review
+      ledger of 11 November records it. Registered as T-287. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-ozden-943-947.md, think-x8oc, lane L83), written
       blind in a separate lane, accepted it with findings, all notes, and scored it S3; its
       clean-room checker decided it again, so the entry is confirmed, independently
@@ -29926,7 +29926,7 @@ issues:
         the registry's 182.
       source: body
       register:
-      - T-285
+      - T-287
       evidence:
       - E-ozden-943-certificate-report
       - E-ozden-943-exact-feasibility
@@ -29937,7 +29937,7 @@ issues:
     answer_bead: think-xq4o
     replies: []
     close_when: >-
-      T-285 is on main at V3/C3 as the house at 156, and the reply on main says what was
+      T-287 is on main at V3/C3 as the house at 156, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 87c9292 precedes
@@ -29986,7 +29986,7 @@ issues:
       maintained exact routes accept the witness and refuse its gross and sharp controls;
       measured, it is a new arrangement relative to T-174's packing, not one to one with it
       under any symmetry, 49 squares beyond a tenth. The ledger of 11 November records it.
-      Registered as T-286. The 11 November stage 4 review
+      Registered as T-288. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-ozden-943-947.md, think-x8oc, lane L83), written
       blind in a separate lane, accepted it with findings, all notes, and scored it S3; its
       clean-room checker decided it again, so the entry is confirmed, independently
@@ -30004,7 +30004,7 @@ issues:
         the registry's 154.
       source: body
       register:
-      - T-286
+      - T-288
       evidence:
       - E-ozden-944-certificate-report
       - E-ozden-944-exact-feasibility
@@ -30015,7 +30015,7 @@ issues:
     answer_bead: think-xq4o
     replies: []
     close_when: >-
-      T-286 is on main at V3/C3 as the house at 180, and the reply on main says what was
+      T-288 is on main at V3/C3 as the house at 180, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 4cfcb90 precedes
@@ -30061,7 +30061,7 @@ issues:
       both maintained exact routes accept the witness and refuse its gross and sharp controls;
       measured, it is a new arrangement relative to T-276's packing, not one to one with it
       under any symmetry, 125 squares beyond a tenth. The ledger of 11 November records it.
-      Registered as T-287. The 11 November stage 4 review
+      Registered as T-289. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-ozden-943-947.md, think-x8oc, lane L83), written
       blind in a separate lane, accepted it with findings, all notes, and scored it S3; its
       clean-room checker decided it again, so the entry is confirmed, independently
@@ -30079,7 +30079,7 @@ issues:
         seeded from the registry's 302.
       source: body
       register:
-      - T-287
+      - T-289
       evidence:
       - E-ozden-945-certificate-report
       - E-ozden-945-exact-feasibility
@@ -30090,7 +30090,7 @@ issues:
     answer_bead: think-xq4o
     replies: []
     close_when: >-
-      T-287 is on main at V3/C3 as the house at 268, and the reply on main says what was
+      T-289 is on main at V3/C3 as the house at 268, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 11 November 2026 from main f54ad1048; no comment yet. The commit b027aba precedes
@@ -30134,7 +30134,7 @@ issues:
       print is the exact side rounded up, and both maintained exact routes accept the witness
       and refuse its gross and sharp controls; measured, it is a new arrangement relative to
       T-174's packing, not one to one with it under any symmetry, 112 squares beyond a tenth.
-      The ledger of 11 November records it. Registered as T-288. The 11 November stage 4 review
+      The ledger of 11 November records it. Registered as T-290. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-ozden-943-947.md, think-x8oc, lane L83), written
       blind in a separate lane, accepted it with findings, all notes, and scored it S3; its
       clean-room checker decided it again, so the entry is confirmed, independently
@@ -30152,7 +30152,7 @@ issues:
         the registry's 304.
       source: body
       register:
-      - T-288
+      - T-290
       evidence:
       - E-ozden-947-certificate-report
       - E-ozden-947-exact-feasibility
@@ -30163,7 +30163,7 @@ issues:
     answer_bead: think-xq4o
     replies: []
     close_when: >-
-      T-288 is on main at V3/C3 as the house at 269, and the reply on main says what was
+      T-290 is on main at V3/C3 as the house at 269, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
     notes: >-
       Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 6f93b07 precedes

@@ -2152,7 +2152,7 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
-    "T-285": Prose(
+    "T-287": Prose(
         author="Doğa Özden",
         reported="on [jlevy/squares#943](https://github.com/jlevy/squares/issues/943)",
         producer_route=True,
@@ -2190,7 +2190,7 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
-    "T-286": Prose(
+    "T-288": Prose(
         author="Doğa Özden",
         reported="on [jlevy/squares#944](https://github.com/jlevy/squares/issues/944)",
         producer_route=True,
@@ -2228,7 +2228,7 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
-    "T-287": Prose(
+    "T-289": Prose(
         author="Doğa Özden",
         reported="on [jlevy/squares#945](https://github.com/jlevy/squares/issues/945)",
         producer_route=True,
@@ -2268,7 +2268,7 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
-    "T-288": Prose(
+    "T-290": Prose(
         author="Doğa Özden",
         reported="on [jlevy/squares#947](https://github.com/jlevy/squares/issues/947)",
         producer_route=True,
@@ -2556,7 +2556,7 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s packing from a search started from Daniil Ostashev’s packing",
     ),
-    # T-285 (adopted on 11 November 2026), Doğa Özden's issue 943: a new arrangement relative
+    # T-287 (adopted on 11 November 2026), Doğa Özden's issue 943: a new arrangement relative
     # to T-186's packing, 58 squares beyond a tenth, found by transplant search from a strip
     # cut of Evan Daniel's n = 182 packing, which the 11 November review's cut model fits over
     # most of the box (F8, F10).
@@ -2608,7 +2608,7 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
         "SQUISH packing",
     ),
-    # T-286 (adopted on 11 November 2026), Doğa Özden's issue 944: a new arrangement relative
+    # T-288 (adopted on 11 November 2026), Doğa Özden's issue 944: a new arrangement relative
     # to T-174's packing, 49 squares beyond a tenth, found by transplant search from an L added
     # to Evan Daniel's n = 154 packing as Francisco Couzo improved it, the author's account,
     # which the 11 November review's cut model cannot tell from the house (F8, F10).
@@ -2855,7 +2855,7 @@ CREDITS: dict[int, Credit] = {
         "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
-    # T-287 (adopted on 11 November 2026), Doğa Özden's issue 945: a new arrangement relative
+    # T-289 (adopted on 11 November 2026), Doğa Özden's issue 945: a new arrangement relative
     # to his own T-276, 125 squares beyond a tenth, found by transplant search from a strip cut
     # of PingYou Ltd's n = 302 packing, which the 11 November review's cut model fits over most
     # of the box (F8, F10).
@@ -2866,7 +2866,7 @@ CREDITS: dict[int, Credit] = {
         "Couzo, Mishapolk and Evan Daniel improved it, below his own further arrangement of "
         "Evan Daniel’s packing",
     ),
-    # T-288 (adopted on 11 November 2026), Doğa Özden's issue 947: a new arrangement relative
+    # T-290 (adopted on 11 November 2026), Doğa Özden's issue 947: a new arrangement relative
     # to T-174's packing, 112 squares beyond a tenth, found by transplant search from a strip
     # cut of Evan Daniel's n = 304 packing, which the 11 November review's cut model fits over
     # two thirds of the box (F8, F10).

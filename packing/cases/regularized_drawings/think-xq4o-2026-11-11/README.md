@@ -8,10 +8,10 @@ review of 11 November 2026
 
 | n | House | Replaces | Adopted |
 | ---: | --- | --- | --- |
-| 156 | T-285 | T-186 | 11 November 2026 |
-| 180 | T-286 | T-174 | 11 November 2026 |
-| 268 | T-287 | T-276 | 11 November 2026 |
-| 269 | T-288 | T-174 | 11 November 2026 |
+| 156 | T-287 | T-186 | 11 November 2026 |
+| 180 | T-288 | T-174 | 11 November 2026 |
+| 268 | T-289 | T-276 | 11 November 2026 |
+| 269 | T-290 | T-174 | 11 November 2026 |
 
 Each house is a new arrangement relative to the one it replaces, found by Özden’s
 transplant search from another count’s registry packing.

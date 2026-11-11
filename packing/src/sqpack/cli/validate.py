@@ -234,7 +234,7 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: against T-127's 17 and 94, so n=1..200 has 587 separating squares and 2,219 translating
 #: ones, and n=1..324 2,060 and 6,011, in the same records. The adoption of 11 November
 #: (think-xq4o) moved 156, 180, 268 and 269 to his certificates of issues 943, 944, 945 and
-#: 947 (T-285 to T-288), new arrangements: separating and translating squares 15 and 16 at
+#: 947 (T-287 to T-290), new arrangements: separating and translating squares 15 and 16 at
 #: 156, 71 and 72 at 180, 217 and 227 at 268 and 191 and 195 at 269, against 39, 7, 120 and
 #: 20 translating before, so n=1..200 has 664 separating squares and 2,261 translating
 #: ones, and n=1..324 2,421 and 6,335, in the same records.

@@ -167,7 +167,7 @@ The witness's softschema.schema names witness.schema.yaml, which resolves to no 
 Its questions for the author, informational and holding nothing open: whether the final repair scaling was about 2e-13 rather than 1e-13, since the margins are 2.0e-13 to 9.8e-13 of the centres' separation (F6); which assignment the lineage counts use, least summed move with lower-left anchoring reproducing them all (F7); which replay is intended, certificate.replay or the README's rerun, and from which directory, and whether the schema path could name this repository's file (F12, F13).
 
 The case adopted the certificate as its house on 11 November 2026 under the house rule,
-as T-288, in place of T-174, which keeps its certificate as history, with Doğa Özden
+as T-290, in place of T-174, which keeps its certificate as history, with Doğa Özden
 the packing’s finder, Evan Daniel’s n = 304 packing credited as the search’s seed and T-174’s
 packing as the record it improves (the review’s F10). Both strong generators ran on the new witness ([the runs](../../../cases/regularized_drawings/think-xq4o-2026-11-11/README.md)), and the selection, measured against this witness’s drawing, draws grid-slack’s 0.5-degree view: light, uneven and near-axis squares, angle classes and hues 9, 28, 12, 44 and 19 against 1, 0, 0, 32 and 19, and full shared sides 565 and 709 against 646 and 718. Evan Daniel’s certified KKT solve lies 3.40 × 10⁻¹² below the side, about the certificate’s own contraction margin (3.24 × 10⁻¹²), held at row 3 as a register candidate and not admitted, as at 172, 199 and 270 (RV-3). The rigidity block, derived again on the new witness, stays not rigid: 195 of its 269 squares translate, against 20 of T-174’s.
 
