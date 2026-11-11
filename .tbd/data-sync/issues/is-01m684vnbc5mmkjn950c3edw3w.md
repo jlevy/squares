@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 228
+version: 229
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -86,7 +86,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T23:46:01.925Z
+updated_at: 2026-11-11T23:51:15.122Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -346,3 +346,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 22:53Z renewal (intake207): no new items; 954's reply and close are owned by L112 (#955), de Winter's repo read by L104 (#961). Running: L104 (#961), L107 (#959), L110 (#960), L112 (#955).
 
 2026-11-11 ~23:50Z: L113's senior review of #955: B1 (the #942 final reply's credit line goes outdated after L103 adds penguin069 and kmmmvs; mark it outdated, then post a follow-up after merge), plus S1–S3 and N1–N8. L114 is addressing them and drafting the #942 follow-up. Bead think-2rys filed (check_requests compares read_through by date only). L110 handed back #963 (T-295 s(237), adopted at 237, L109 mapped; CI red on T-id contiguity until #961/#959 merge). Senior review L115 running. Main's records tier fails its bead-tree check because think-f65n was closed before #955 recorded 954's close; #955's merge fixes it. Planned merge order: #955, #961 (T-292/293), #959 (T-294), #963 (T-295).
+
+2026-11-11 23:52Z: #955 merged (2fe557598) after senior review L113 and L114's fixes (CI green): replies on 941, 942 and 954, de Winter's answers, the credit adding penguin069 and kmmmvs, 942's final reply credit marked outdated. 941 still open. The #942 follow-up draft (L114) is checked; post it after the Pages deploy. #961 must now reconcile its own 954 entry with main's (take main's). Senior reviews running: L115 (#963), L116 (#961).
