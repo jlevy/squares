@@ -5,7 +5,7 @@ title: "Import #941, #942: Joost de Winter's 31 lowered upper bounds for n betwe
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 delegate: bold-ritchie-l90
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:55.639Z
-updated_at: 2026-11-11T18:35:25.675Z
+updated_at: 2026-11-11T19:55:13.479Z
 started_at: 2026-11-11T09:58:23.522Z
 ---
 #941 (2026-11-10T13:30Z) fifteen lowered upper bounds n 413-910; #942 (14:41Z) sixteen n 632-989; JoostdeWinter. Beyond the atlas's 324, below the 1024 horizon: beyond-horizon rows. Precedent: Yim's 553-700 rows (PR #934). Starts after the Özden lane to stay within usage limits.
@@ -56,3 +56,5 @@ Not this lane's: the records tier's bead-tree step fails locally because result-
 2026-11-11 L90 complete (17:50Z): PR #952 draft, head 22c85caf9, hosted CI green (packing-required, pages-required; 31 success, 28 skipped). All 407 sharp controls as stated (38,431 CPU s); certify 10,339 route CPU s; total about 14.6 CPU-h. Commits after 2fb1156eb: d9c4b5328, 20a47e404, fb96a8692 (sharp chunks 0-2), 4b67b5bba (merge of L96 review bdf45bd6c), 6bbffe3e1 (review mapped; 809 held; F7/F8/F9/F14), cd7310bc9 (independence records on the replay atoms), 4e9a32158 and fe04a551a (sharp chunks 3-4), 8da539170 (sharp text, lane test, release record against 591644a9e), 22c85caf9 (re-pin). Not merged, not marked ready, no GitHub comments. Open for the owner: think-kzme (809 among the claimed deletion bounds). Replies owed after merge (stage 7): #941 and #942, with the review's five questions.
 
 2026-11-11 L90 senior review fixes (18:35Z): 087c2252c applies S1 (809 its own queued result n809, blocked on think-kzme), S2 (no "not best known" assertion beyond #941's own 14 counts), S3 (credit de Winter after Couzo, Lavrentev, Tymchishin, Levy; census reconciled), S4 (#946 notes, s172 coverage, 939-946 ledger header name the addendum), N1-N4; f9074dac7 re-pins. Hosted CI green on f9074dac7 (31 success, 28 skipped). Records tier 55/55; targeted tests 647 passed, 1 skipped; papers byte-identical against 591644a9e.
+
+2026-11-11 19:55Z coordinator: JoostdeWinter/square-packing head 501cb8d (20:41:30+01:00) changes only above324/README.md and above324_refined/README.md. It answers the review's 5e-9 question (centres and side scaled by 1 + 2e-10 + 4v, rounded up at the 13th decimal; margins 4.6e-9 to 3.0e-8, per count) and the sixteen vs twenty-two question (a first run of sixteen more than 1e-7 below the best public value, then a second run of six above 1e-6; eighteen more below 1e-6 not listed). No certificate changed. Owed: a read in intake-watch.yaml or a README edition in the two packets, plus a follow-up record noting the answers. No comment on #941/#942 yet.
