@@ -5,7 +5,7 @@ title: "Import #939: Joost de Winter's s(199) <= 14.6146898532835806, T-282's ar
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l78
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T22:55:20.020Z
-updated_at: 2026-11-11T05:44:23.295Z
+updated_at: 2026-11-11T06:14:10.733Z
 started_at: 2026-11-09T22:55:23.747Z
 ---
 #939 (JoostdeWinter, 2026-11-09T22:03:57Z): s(199) side 14.61468985328358057514628890087947061619 (rounded up), <1e-98 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, claimed the local optimum of the arrangement (130-digit numerical solution; quintic identified numerically). Certificate: JoostdeWinter/square-packing @ 702c7af2 folder n199 (n199_witness.yaml center-basis rational; n199_exact.json; verify_exact.py). Construction: T-282's 172 arrangement (Daniel, Özden) re-optimized (core side 13.61468985328358..., 2.63e-12 below T-282) plus the same L of 27 as #938 (kenaznia-doga, 20:31Z, earlier). Gain over #938: ~2.63e-12, the same as Daniel's held KKT point below T-282 (think-wju3, 2.635e-12) -> RV-3 class (think-ruu2); but #938's own contraction margin is 0 (exact grid contacts), so the padding-share test needs care. Implied s(172) witness from the core (not claimed). AI assistance: Claude under the author's direction. Sequencing: after #938 (think-1goz) merges.
@@ -39,3 +39,4 @@ started_at: 2026-11-09T22:55:23.747Z
 - Phase-1 brief: scratchpad l78/phase1-brief.md. Proposal: T-285 held at V0/C1, S1, as T-280, pending RV-3; nothing at 172 (note on think-wju3); owner option (D) recommended (restatement unless the 12-place print falls below the padding-free predecessor's, contracted through any construction). Phase 2 waits on L76's merge.
 - 2026-11-11 phase 2 (after #940 merged, f54ad1048; resumed after a usage-limit stop): #939 registered as T-285 and #946 (s(172), JoostdeWinter/square-packing c4e65d0) as T-286, a separate entry (another issue, count, pin, date and source key). Both held for RV-3 at V0/C0: check_results refuses C1 without a mapped review, so each rises to C1 when the blind stage 4 review is mapped, as T-280 did. New packet de-winter-s172-upper-bound-2026-11-10: both routes accept #946 (14,706 pairs, wall 1.5e-320, gap 1e-320), gross and sharp controls as stated (plan ad... 914be026, 05:00:57Z); 1.56e-319 above the root of the shifted quintic (irreducible, one root in [S-1e-318,S]); 1.0399 of T-282's margin; #939's core with less padding (1.0000), Daniel's held solve (1.0000). measure_identity gains l-base:packet:NAME (contraction_margin reads it); T-284's base margin 2.533458e-12, #939 1.0399. Ledger upper-bounds-939-946-20261111: both recorded as refinements. The source's four commits between the pins add certificates at 37 counts above 324 (above324/, above324_refined/): not imported, left for triage. think-wju3 noted.
 - 2026-11-11: commits d522d8ee7, 1e8ec30d6, 5502c9e08 (re-pin), 19acc802e, 7b0e2f396 on claude/bold-ritchie-xo28us-l78, pushed; draft PR #948 (labels intake, S1), answers #939 and #946, no closing keywords. Local: records tier exit 0 on 7b0e2f396; 546 touched tests pass; test_release 20; release impact reviewed (compare_paper_renders: explainer register count 284 -> 286 only). Hosted CI pending at the time of this note.
+- 2026-11-11 ~06:30Z: hosted CI green on ded2c8df8 (31 success, 28 skipped, 0 failed; packing-required, pages-required, suites A-D). The fix commit ded2c8df8 reconciles the contributor census (10 unresolved spans) and counts 27 owner-decision blocks in test_check_requests. PR #948 stays a draft; nothing merged or commented. Waiting on the coordinator's blind stage 4 lane and the owner's RV-3.
