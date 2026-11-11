@@ -1,9 +1,10 @@
 {
  "verdict": "ALL_RECEIPTS_MATCH",
- "receipts_held": 24,
+ "receipts_held": 25,
  "kept_programs": {
   "l83_check.py": "661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0",
   "l83_clip.py": "c4987a55491fa98f61328d54a3d5353eccfe91514664fdcd4aec5a114319b218",
+  "l83_compare_lane.py": "f7de1d491e102a572393400b071be92d03c8f2ab5348a57ed02874cf55b27deb",
   "l83_construct.py": "d22443706f42d195c37f01e4e1f107dde8f1f5c02e9f2c0c1772598f326cdce7",
   "l83_controls.py": "7e17eaca86488b2996c38ab84d4aa555e5602550a814e866dc5a8618163fd619",
   "l83_custody.py": "1fa87f73bd0e56e2f642632e06730edde2c258a7880f16d1cb524f876ff23408",
