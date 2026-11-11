@@ -985,19 +985,19 @@
       "url": "https://github.com/evand/square-packing/blob/59326b86291b76c39d843f3f156e8f25fa0f6e3f/search/packer/candidates/s155_ex2.cert"
     },
     {
-      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n156.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s156-upper-bound/blob/87c92921a64216d38914a7af488a7d7a91cf1eb7/n-156-candidate.yaml at 87c92921a64216d38914a7af488a7d7a91cf1eb7",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         156
       ],
       "n": 156,
-      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-156.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/ozden-s156-upper-bound-2026-11-10/source/n-156-candidate.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-11",
       "source_n": 156,
-      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n156.cert"
+      "url": "https://github.com/kenaznia-doga/s156-upper-bound/blob/87c92921a64216d38914a7af488a7d7a91cf1eb7/n-156-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1145,19 +1145,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n179.cert.json"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n180.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s180-upper-bound/blob/4cfcb9058a5bc5e8e6986bda31c072ccefc3731f/n-180-candidate.yaml at 4cfcb9058a5bc5e8e6986bda31c072ccefc3731f",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         180
       ],
       "n": 180,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-180.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/ozden-s180-upper-bound-2026-11-10/source/n-180-candidate.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-11",
       "source_n": 180,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n180.cert.json"
+      "url": "https://github.com/kenaznia-doga/s180-upper-bound/blob/4cfcb9058a5bc5e8e6986bda31c072ccefc3731f/n-180-candidate.yaml"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n181.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
@@ -1821,34 +1821,34 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/02f969075f79d5e13fa21e09e381a44e8647b452/certificates/n267.cert"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s268-upper-bound/blob/a40a15d91081be002805b6eea35e099c9a2656db/n-268-candidate.yaml at a40a15d91081be002805b6eea35e099c9a2656db",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s268-upper-bound-16872029849/blob/b027aba9280d453ea075bd9b80694a5345257f4e/n-268-candidate.yaml at b027aba9280d453ea075bd9b80694a5345257f4e",
       "kind": "packet-derived-facts",
       "license_status": "CC-BY-4.0",
       "listed_n": [
         268
       ],
       "n": 268,
-      "path": "resources/web/ozden-s268-upper-bound-2026-11-09/source/n-268-candidate.yaml",
+      "path": "resources/web/ozden-s268-upper-bound-2026-11-10/source/n-268-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-09",
+      "retrieved": "2026-11-11",
       "source_n": 268,
-      "url": "https://github.com/kenaznia-doga/s268-upper-bound/blob/a40a15d91081be002805b6eea35e099c9a2656db/n-268-candidate.yaml"
+      "url": "https://github.com/kenaznia-doga/s268-upper-bound-16872029849/blob/b027aba9280d453ea075bd9b80694a5345257f4e/n-268-candidate.yaml"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n269.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s269-upper-bound/blob/6f93b07eac91e5f7b299c9a6420041d9a695a478/n-269-candidate.yaml at 6f93b07eac91e5f7b299c9a6420041d9a695a478",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         269
       ],
       "n": 269,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-269.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/ozden-s269-upper-bound-2026-11-11/source/n-269-candidate.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-11",
       "source_n": 269,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n269.cert.json"
+      "url": "https://github.com/kenaznia-doga/s269-upper-bound/blob/6f93b07eac91e5f7b299c9a6420041d9a695a478/n-269-candidate.yaml"
     },
     {
       "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s270-upper-bound/blob/78ab8cec9085e4e1d6489127113f0af2550e749b/n-270-candidate.yaml at 78ab8cec9085e4e1d6489127113f0af2550e749b",

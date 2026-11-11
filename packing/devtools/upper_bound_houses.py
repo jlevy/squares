@@ -648,7 +648,6 @@ def _sources() -> dict[str, Source]:
         # issues 927 to 931, T-275 to T-279, one packet each; T-256, T-263, T-270 and T-272
         # keep no house here now.
         packet_source("T-275", "ozden-s232-upper-bound-2026-11-09"),
-        packet_source("T-276", "ozden-s268-upper-bound-2026-11-09"),
         packet_source("T-277", "ozden-s299-upper-bound-2026-11-09"),
         packet_source("T-278", "ozden-s303-upper-bound-2026-11-09"),
         packet_source("T-279", "ozden-s307-upper-bound-2026-11-09"),
@@ -660,6 +659,15 @@ def _sources() -> dict[str, Source]:
         # The same day's last pass (think-1goz) moved 199, which no pass had adopted, from
         # T-127 to Doğa Özden's issue 938, T-282's packing with one L step (T-284).
         packet_source("T-284", "ozden-s199-upper-bound-2026-11-09"),
+        # Lane L81 of 11 November 2026 (think-xq4o) moved 156, 180, 268 and 269 to Doğa Özden's
+        # issues 943, 944, 945 and 947 (T-285 to T-288), each a new arrangement relative to the
+        # house it replaces, found by transplant search from another count's registry packing.
+        # 268 was T-276's only count, so T-276 is no source here now; T-186 and T-174 still
+        # house other counts.
+        packet_source("T-285", "ozden-s156-upper-bound-2026-11-10"),
+        packet_source("T-286", "ozden-s180-upper-bound-2026-11-10"),
+        packet_source("T-287", "ozden-s268-upper-bound-2026-11-10"),
+        packet_source("T-288", "ozden-s269-upper-bound-2026-11-11"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -727,7 +735,10 @@ def _sources() -> dict[str, Source]:
 #: 936, T-282 and T-283, at 172 from T-257 and 270 from T-224, each packing's finder Evan
 #: Daniel; T-257 and T-224 keep no house here. Its last pass (think-1goz) adopted his issue
 #: 938, T-282's packing with one L step (T-284), at 199, first adopted here, from the case
-#: record's own house, T-127, with T-193 staged there for the writer.
+#: record's own house, T-127, with T-193 staged there for the writer. Lane L81 of 11 November
+#: (think-xq4o) adopted his issues 943, 944, 945 and 947 at 156 from T-186, 180 and 269 from
+#: T-174 and 268 from his own T-276 (T-285 to T-288), each a new arrangement relative to
+#: the house it replaces, Özden its finder; T-186 and T-276 keep no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -750,12 +761,12 @@ ADOPTED: dict[int, str] = {
     153: "T-174",
     154: "T-222",
     155: "T-197",
-    156: "T-186",
+    156: "T-285",
     172: "T-282",
     175: "T-267",
     176: "T-186",
     179: "T-174",
-    180: "T-174",
+    180: "T-286",
     181: "T-174",
     182: "T-243",
     183: "T-220",
@@ -784,8 +795,8 @@ ADOPTED: dict[int, str] = {
     263: "T-174",
     264: "T-186",
     267: "T-134",
-    268: "T-276",
-    269: "T-174",
+    268: "T-287",
+    269: "T-288",
     270: "T-283",
     271: "T-219",
     272: "T-174",
@@ -995,6 +1006,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-05": frozenset({175, 204, 260, 268, 293, 303, 304}),
     "2026-11-06": frozenset({260}),
     "2026-11-09": frozenset({172, 199, 232, 268, 270, 299, 303, 307}),
+    "2026-11-11": frozenset({156, 180, 268, 269}),
 }
 
 

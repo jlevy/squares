@@ -159,7 +159,6 @@ NEXT_MOVED_LATER = {105: ("T-229", "2026-10-23")}
 MOVED_AGAIN = {
     129: ("T-186", "T-162"),
     146: ("T-187", "T-168"),
-    156: ("T-186", "T-161"),
     176: ("T-186", "T-165"),
 }
 #: The counts of the seven that a later pass moved once more: the adoption of 19 October
@@ -175,11 +174,13 @@ MOVED_AGAIN = {
 #: October 2026 moved to Amund Kristiansen's issue-755 certificate (T-239), that of 25
 #: October 2026 to Francisco Couzo's issue-763 certificate (T-240), that of 5 November
 #: 2026 to Evan Daniel's issue-914 certificate (T-272) and that of 9 November 2026 to Doğa
-#: Özden's further arrangement of it (T-278).
+#: Özden's further arrangement of it (T-278). The adoption of 11 November 2026 took 156 from
+#: T-186 to Doğa Özden's issue-943 certificate (T-285), a new arrangement.
 MOVED_LATER = {
     271: ("T-219", "2026-10-19"),
     204: ("T-268", "2026-11-05"),
     303: ("T-278", "2026-11-09"),
+    156: ("T-285", "2026-11-11"),
 }
 
 #: The counts a pass staged for its next pull request, with the result each moved to and
@@ -191,8 +192,9 @@ MOVED_LATER = {
 ADOPTED_NEXT_DAY = {268: ("T-242", "2026-10-26"), 260: ("T-269", "2026-11-06")}
 #: The counts of `ADOPTED_NEXT_DAY` a later pass moved again, with the result and the day:
 #: the adoption of 5 November 2026 took 268 to Evan Daniel's issue-914 certificate (T-270),
-#: and that of 9 November 2026 to Doğa Özden's further arrangement of it (T-276).
-MOVED_AFTER_NEXT_DAY = {268: ("T-276", "2026-11-09")}
+#: and that of 9 November 2026 to Doğa Özden's further arrangement of it (T-276), and that of
+#: 11 November 2026 to his issue-945 certificate, a new arrangement (T-287).
+MOVED_AFTER_NEXT_DAY = {268: ("T-287", "2026-11-11")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -270,8 +272,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # T-256, below T-174's sides there. The adoption of 9 November 2026 moved 268 and 307
     # on to Doğa Özden's further arrangements (T-276, T-279), and its later pass 172 and
     # 270 (T-282, T-283). 34 since its last pass moved 199, staged for T-193, to Özden's
-    # issue-938 certificate (T-284), below T-174's and T-193's sides there.
-    assert len(held_counts) == 34
+    # issue-938 certificate (T-284), below T-174's and T-193's sides there. 32 since the
+    # adoption of 11 November 2026 moved 180 and 269 to his issue-944 and issue-947
+    # certificates (T-286, T-288), below T-174's sides there.
+    assert len(held_counts) == 32
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
     t193 = {n for n, house in ALGEBRAIC_ADOPTED.items() if house == "T-193"}
@@ -288,8 +292,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         130: "T-259",
         155: "T-197",
         172: "T-282",
+        180: "T-286",
         182: "T-243",
-        268: "T-276",
+        268: "T-287",
+        269: "T-288",
         270: "T-283",
         307: "T-279",
         308: "T-221",
@@ -1647,8 +1653,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
         n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
     }
     # 31 since the adoption of 25 October 2026 moved 182 to Evan Daniel's issue-806
-    # certificate (T-243); 28 since the adoption of 31 October 2026 moved 130, 172 and 307.
-    assert len(adopted) == 28
+    # certificate (T-243); 28 since the adoption of 31 October 2026 moved 130, 172 and 307;
+    # 26 since the adoption of 11 November 2026 moved 180 and 269 (T-286, T-288).
+    assert len(adopted) == 26
     assert not adopted & set(select.PENDING_ADOPTION)
     # The pass of 23 October 2026 took the writer's twelve off once it wrote an algebraic
     # side, at the nine counts a derived number-field fact holds (think-ot5c).
@@ -1729,13 +1736,14 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # adoption of issue 914 moved 175, 204, 268, 293, 303 and 304 to Evan Daniel's
     # certificates the same day and 260 the next (T-267 to T-273), and that of 9 November
     # 2026 moved 232, 268, 299, 303 and 307 to Doğa Özden's further arrangements (T-275 to
-    # T-279), and its later pass 172 and 270 (T-282, T-283).
+    # T-279), and its later pass 172 and 270 (T-282, T-283). The adoption of 11 November 2026
+    # moved 156, 180, 268 and 269 to his certificates of issues 943 to 947 (T-285 to T-288).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
         175: "T-267",
         182: "T-243",
-        268: "T-276",
+        268: "T-287",
         293: "T-271",
         303: "T-278",
         304: "T-273",
@@ -1755,6 +1763,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         199: "T-284",
         232: "T-275",
         307: "T-279",
+        156: "T-285",
+        180: "T-286",
+        269: "T-288",
     }
     before = {
         **houses.ADOPTED,
@@ -1784,6 +1795,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         172: "T-174",
         232: "T-186",
         307: "T-174",
+        156: "T-186",
+        180: "T-174",
+        269: "T-174",
     }
     # 199 was first adopted on 9 November 2026 (T-284), after this receipt was retained.
     for n in (183, 199, 227, 229, 260, 293, 299):
@@ -1794,7 +1808,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
         set(houses.numbers_of("T-174")) - {70, 153, 207}
-        | {105, 130, 155, 172, 182, 268, 270, 307, 308}
+        | {105, 130, 155, 172, 180, 182, 268, 269, 270, 307, 308}
     )
 
 

@@ -22,7 +22,7 @@ prepared and posted both on his behalf.
   2 × 10⁻¹³ are the decimal pose’s own, left by the final binary64 repair scaling of
   Evan Daniel’s quench, that only the squares that set the left wall, the bottom wall
   and the side touch them exactly, and that other squares near a wall clear it by up to
-  about 10⁻¹².
+  about 10⁻¹². Measured by the review, eight squares touch a wall: 38 and 59 at the left, 107 at the bottom, 196 and 208 at the right, and 10, 11 and 12 at the top. The decimal pose gives each group one centre coordinate across its wall and one angle, so the promotion's translation and extent make them touch together, and the pose's x and y extents are exactly equal, so the side is set at the right wall and the top at once; the issue's "only the squares that set the left wall, the bottom wall and the side" holds only counting those ties. 29 square-wall pairs lie between 3.1e-6 and 9.7e-4 from a wall, a range the review gives for the 63 such pairs at 180, 268 and 269 together (F5). The pair margins are the decimal pose's own, as the issue says, and lie between 2.0e-13 and 9.8e-13 of the centres' separation along the separating axis, median 2.05e-13 here, about twice the issue's "about 1e-13 relative" (F6).
 - `n268-witness.json` is the same file as JSON. `packing-witness-verify.txt` is the
   author’s run of this repository’s `packing-witness verify` at `f54ad104` (VERIFIED,
   35,778 pairs); `sqcheck-output.txt` is the author’s run of `verifier/sqcheck.py`, an
@@ -95,13 +95,12 @@ A measurement for credit; it decides nothing.
   nearest centres. The optimal assignment, under the best of the box’s eight symmetries,
   moves 125 squares beyond 0.1 and 151 beyond 0.01
   (largest 1.04105) and turns 156 squares by more than 10⁻⁶
-  radians, by up to 43.99 degrees. Tilted beyond 1 degree: this packing
-  43, 17 turned one way and 26 the other;
-  T-276 99, all turned the same way. The house witness
-  measures the same, and against the regularized view the assignment moves
-  118 squares beyond 0.1. So it is not a further arrangement of
-  T-276’s packing; the issue names another count’s packing, the registry’s 302, as
-  its seed, which this measurement does not reach. The issue’s own counts against the house (230 centres beyond 1e-3, 111 squares re-tilted beyond a degree, largest move 1.041) are this measurement’s.
+  radians, by up to 43.99 degrees, under the assignment of least summed
+  squared move. Tilted beyond a degree: 43 here, 35.4 to 44.2 degrees from upright, near the diagonal, where no split by sign is given (F16); T-276's 99, 2.7 to 24.6 degrees, all turned the same way. The house witness measures the same, and against the
+  regularized view the assignment moves 118 squares beyond 0.1. So it is a new
+  arrangement relative to T-276’s packing, not a further arrangement of it (the review’s
+  F10). The issue's own counts against the house (230 centres beyond 1e-3, 130 beyond 0.05, the largest move 1.041, 111 squares re-tilted beyond a degree, the largest by 43.99 degrees) reproduce, as the review measured, with lower-left anchoring and the assignment of least summed move, and under least summed squared move as well (F7).
+- **The seed.** Modelled as the issue's C+1 cut of the registry's 302, the review's best fit (the identity, cut at (10.55, 14.55)) matches 235 squares within 0.05 and a degree, 24 of the 43 tilted ones, where the house under the same model matches 137 and no tilted one: the packing continues its seed over most of the box (F8).
 
 Its side is 3.27 × 10⁻¹² above 16.872029849081179973, which is 16 plus the first 18 decimal places that the exact sides of Evan Daniel’s certificates at 129, 153 and 302 share (T-145), and contracted to first contact (below) it is 6.6 × 10⁻¹⁴ above it. The issue names the registry’s 302 as its seed. Whether the packing shares the structure of those certificates is not measured here.
 
@@ -145,7 +144,7 @@ think-ruu2) does not reach it. This certificate’s own margin, measured the sam
 `devtools.contraction_margin` wrote both receipts,
 [measure/contraction-n268.json](measure/contraction-n268.json) and
 [measure/contraction-n268-own.json](measure/contraction-n268-own.json), each contracted
-packing decided on both maintained routes.
+packing decided on both maintained routes. The review measured the same house margins with its own programs (F9): no gain is near one, and these are not re-certifications of a house, so RV-3 (think-ruu2) does not reach them.
 
 ## The L Step
 
@@ -156,23 +155,38 @@ carries to no other count
 
 ## Stage 4 Review and Adoption
 
-The stage 4 mathematical review is written in a separate lane, blind to this one, and is
-not yet mapped. The case’s verified lane and the adoption of this certificate as the
-house at 268 in place of T-276 wait on its acceptance (the house rule), with both strong
-generators’ regularization of the new house in the same change.
+The stage 4 mathematical review of 11 November 2026
+([review-2026-11-11-ozden-943-947.md](../../../../docs/project/reviews/review-2026-11-11-ozden-943-947.md)),
+written in a separate lane (L83, think-x8oc) blind to this one until its findings were
+frozen, accepts the certificate with findings, all notes, none blocking, and scores it
+S3. Its clean-room checker decides every square, wall and pair by separating axes in
+`Fraction` and by exact clipped areas in GMP rationals, with 15 controls stated before
+they ran; its programs are kept once in the
+[156 packet’s review directory](../ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md),
+and this count’s receipts in [review/review-2026-11-11/out/](review/review-2026-11-11/out/).
+The witness's softschema.schema names witness.schema.yaml, which resolves to no file in the author's repository (F12), and its certificate.replay names the file but not where to run it, unlike the README's rerun (F13); the adopted witness carries this repository's own. Both are notes for the author.
+
+Its questions for the author, informational and holding nothing open: whether the search snapped the eight wall squares to common values, and whether "the squares that set each wall, ties included" describes them (F5); whether the final repair scaling was about 2e-13 rather than 1e-13, since the margins are 2.0e-13 to 9.8e-13 of the centres' separation (F6); which assignment the lineage counts use, least summed move with lower-left anchoring reproducing them all (F7); which replay is intended, certificate.replay or the README's rerun, and from which directory, and whether the schema path could name this repository's file (F12, F13).
+
+The case adopted the certificate as its house on 11 November 2026 under the house rule,
+as T-287, in place of T-276, which keeps its certificate as history, with Doğa Özden
+the packing’s finder, PingYou Ltd’s n = 302 packing as Francisco Couzo, Mishapolk and Evan Daniel improved it credited as the search’s seed and T-276’s
+packing as the record it improves (the review’s F10). Both strong generators ran on the new witness ([the runs](../../../cases/regularized_drawings/think-xq4o-2026-11-11/README.md)), and the selection, measured against this witness’s drawing, draws grid-slack’s 0.5-degree view: light, uneven and near-axis squares, angle classes and hues 24, 103, 18, 49 and 19 against 1, 22, 0, 32 and 19, and full shared sides 611 and 813 against 822 and 828. Evan Daniel’s certified KKT solve lies 3.27 × 10⁻¹² below the side, about the certificate’s own contraction margin (3.20 × 10⁻¹²), held at row 3 as a register candidate and not admitted, as at 172, 199 and 270 (RV-3). The rigidity block, derived again on the new witness, stays not rigid: 227 of its 268 squares translate, against 120 of T-276’s.
 
 ## What Is Not Established
 
-- **Human oversight.** No review is mapped yet; no human oversight record.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
 
 ## Credit and Licence
 
-The packing is Doğa Özden’s; the issue asks that the improvement be credited to Özden,
-the seed packing and the current record to their holders as the registry lists them, and
-the local optimizer to Evan Daniel.
+The packing is Doğa Özden’s, found by his lab’s transplant search from PingYou Ltd’s n = 302 packing as Francisco Couzo, Mishapolk and Evan Daniel improved it;
+the issue asks that the improvement be credited to Özden, the seed packing and the
+current record to their holders as the registry lists them, and the local optimizer to
+Evan Daniel. The case record credits Özden as the finder, the seed’s holders as the
+search’s start and T-276’s holders as the record it improves (the review’s F10).
 The issue says the search and its code were written and run by AI agents throughout and
 that the checks were run by code that did not produce the packing; it says the issue and
 repository were prepared and posted by his AI agent, and that Özden directed the work.
@@ -195,9 +209,9 @@ pinned against it.
 ## Commands
 
 From `packing/`, with the project interpreter. The identity measurement reads the house
-witness and its regularized view as they stand at main f54ad1048, so it reproduces there
-until an adoption replaces them; the contraction margins read the packets and reproduce
-anywhere `devtools.contraction_margin` is:
+witness and its regularized view as they stood at main f54ad1048, before this adoption
+replaced them, so it reproduces there; the contraction margins read the packets and
+reproduce anywhere `devtools.contraction_margin` is:
 
 ```bash
 python -m devtools.acquire_source ozden-s268-upper-bound-2026-11-10 --checkout CHECKOUT

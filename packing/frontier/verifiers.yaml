@@ -7895,3 +7895,62 @@ verifiers:
       packet's review/review-2026-11-09/. l70_sides.py, l70_contract.py, l70_identity.py,
       l70_relative303.py, l70_construct.py, l70_custody.py, l70_digests.py and
       l70_compare_lane.py, kept beside them, decide no certificate and are not registered.
+  - id: V-ozden-943-947-review-check
+    program: l83_check.py with l83_reader.py, l83_sat.py, l83_clip.py and l83_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificates of issues 943, 944, 945 and 947 (156, 180, 268, 269), with a strict reader of
+      its own (l83_reader.py: every scalar an exact integer pair in lowest terms, ids 1 to n in
+      order, the JSON twin held to the same tree, any unexpected layout refused): every format
+      hypothesis, every square a unit square from its listed corners, every wall and every pair
+      twice with no distance filter, by separating axes over the four edge normals in
+      fractions.Fraction (l83_sat.py, method A) and by exact clipped areas in gmpy2.mpq
+      (l83_clip.py, method B), each pair classed overlapping, touching or clear by both.
+      l83_geom.py holds the exact constructions the controls use, the centre-line closing among
+      them; l83_controls.py decides 15 controls a count stated in a plan hashed before it
+      existed; l83_selftest.py holds both methods and the reader to 92 cases.
+    source:
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_check.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_reader.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_sat.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_clip.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_geom.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_selftest.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_controls.py
+    independence_record: packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 943, 944, 945 and 947 (L83,
+            think-x8oc), strong tier, prompted separately from the import lane (L81, think-xq4o)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issues say AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-11T06:36:12Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-ozden-943-947.md (SHA-256
+      661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0 for l83_check.py, as
+      frozen at 2026-11-11T06:36:12Z and as each receipt records), and kept with its receipts in
+      the ozden-s156-upper-bound-2026-11-10 packet's review/review-2026-11-11/, each count's
+      receipts in its own packet. l83_construct.py, l83_plan_facts.py, l83_sides.py,
+      l83_houses.py, l83_house.py, l83_shares.py, l83_identity.py, l83_custody.py,
+      l83_digests.py and l83_compare_lane.py, kept beside them, decide no certificate and are
+      not registered.

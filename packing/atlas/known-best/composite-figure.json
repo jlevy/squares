@@ -4122,12 +4122,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"648958292691713822691804519015415761935309055406679/50000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"648852654374852353755125161419320205262325108517519100460480865981265775829850519452615985639917208560652327347262971218877375627787964220161046522562291163679743/49999999999999392625420305980539883800584911892231555650543140676793641372334456399329222570426017863765035947920189744639461855069670803668996512500000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(156) ≥ 12.510412","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.5104121494"},
         "n": 156,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"12.97916585383427646","source_url":"https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n156.cert","witness_id":"W-known-best-n156","witness_path":"packing/witnesses/known-best/n-156.yaml"},
+          "assessed_geometry": {"reported_side":"12.9770530874972048","source_url":"https://github.com/kenaznia-doga/s156-upper-bound/blob/87c92921a64216d38914a7af488a7d7a91cf1eb7/n-156-candidate.yaml","witness_id":"W-known-best-n156","witness_path":"packing/witnesses/known-best/n-156.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -4144,7 +4144,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(156) ≤ 12.979166","provenance":"frontier","relation":"upper-bound","value":"12.97916585383427646"}
+        "side": {"display":"s(156) ≤ 12.977054","provenance":"frontier","relation":"upper-bound","value":"12.9770530874972048"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
@@ -4746,12 +4746,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"1550250718166387393759200628389730918229760730029803687472101266058527206497804176471091974463011495435715517552277573859292095823368690985175739076661640585913909938466690325903615993872626942836769574581188489781581865270577161977167375393786132252959632859942696323050956793319412034/111392644946088548563025281722866036434015472538259760343998223706315572154469860903672492531437479793946143388554571154190457025143634968142296677746767463441071061419187202368177701564936584341034369708534155258566185944506049412778870332399306497554343199221015096444019032359522413","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"13915618502789673801411319593348972704354551090059480121116066666851949889445187561808992356520450912006407904602555992109401290151750066450932266398578251434607/999999999999974710179138602699522248600789814759713490659289307032798569908812174743543237716193653229598321881402331814688308092968027698141025000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(180) ≥ 13.432517","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.4325171563"},
         "n": 180,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"13.91699352247783249","source_url":"https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n180.cert.json","witness_id":"W-known-best-n180","witness_path":"packing/witnesses/known-best/n-180.yaml"},
+          "assessed_geometry": {"reported_side":"13.9156185027900258","source_url":"https://github.com/kenaznia-doga/s180-upper-bound/blob/4cfcb9058a5bc5e8e6986bda31c072ccefc3731f/n-180-candidate.yaml","witness_id":"W-known-best-n180","witness_path":"packing/witnesses/known-best/n-180.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -4768,7 +4768,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(180) ≤ 13.916994","provenance":"frontier","relation":"upper-bound","value":"13.91699352247783249"}
+        "side": {"display":"s(180) ≤ 13.915619","provenance":"frontier","relation":"upper-bound","value":"13.9156185027900258"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
@@ -7111,12 +7111,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"210905873722952236034905760696325244271659803434360286045042325621817918037841781834041470885941636042984742791065941455615975519785534492521129846982694500774460821372563389964320042972495553/12499999999999975129058159080855999188136085095192831727990759607627158644296402179626990471366286935091256102905396680271369883096051094562090701673945832959564265216275944900000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"3374405969816890029595865315813073355385774316126106655359677163132152278728954738221415957216840951428886537572102938513013789568473995385585083961052840056882819209506411031278124916066249751265182187057937344073297933957/200000000000000000000000000000012321774630372363696504551975160836113138735413504222550276199944534658022686795601862261432907170509162320345651241894274953313807160507505345076601894112112807932791517632450000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(268) ≥ 16.382380","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.3823801742"},
         "n": 268,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"16.8724698978362125","source_url":"https://github.com/kenaznia-doga/s268-upper-bound/blob/a40a15d91081be002805b6eea35e099c9a2656db/n-268-candidate.yaml","witness_id":"W-known-best-n268","witness_path":"packing/witnesses/known-best/n-268.yaml"},
+          "assessed_geometry": {"reported_side":"16.8720298490844502","source_url":"https://github.com/kenaznia-doga/s268-upper-bound-16872029849/blob/b027aba9280d453ea075bd9b80694a5345257f4e/n-268-candidate.yaml","witness_id":"W-known-best-n268","witness_path":"packing/witnesses/known-best/n-268.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -7133,16 +7133,16 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(268) ≤ 16.872470","provenance":"frontier","relation":"upper-bound","value":"16.8724698978362125"}
+        "side": {"display":"s(268) ≤ 16.872030","provenance":"frontier","relation":"upper-bound","value":"16.8720298490844502"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"762455321661214625154064717575663643223209516170114617954836114502409073914917350306062684974688108175698138394198328039661482509815313961445914973037400188315008896501350993871128847488533369930209358303422921792499221423993238497834934040341710705797262200466540592661253334264548983/45111659257824839102395844510075287639411941931091142308133831539304493554725538730586505928273109944096508731943061625604172188642108802879488059456112093682097138673317692898853025765103795703325919365728472905467297061887465330632167402750760142429709049654398016240842352148167624","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"422524864498783120504173140778928365461679347447944525737098975743494596211072089947926175707875276664168302257497715408172383643378226127847740006900344064613612022417462526959580596205877980788988926563428153251643/25000000000000000000000000000093860242471779587249869711099254672458047574339986490836196209699830616178807806796543184253415501611719489636237395031003202849963025343610104118983903513732675267204756250000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(269) ≥ 16.413830","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.4138304628"},
         "n": 269,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"16.901513582189132199","source_url":"https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n269.cert.json","witness_id":"W-known-best-n269","witness_path":"packing/witnesses/known-best/n-269.yaml"},
+          "assessed_geometry": {"reported_side":"16.9009945799513249","source_url":"https://github.com/kenaznia-doga/s269-upper-bound/blob/6f93b07eac91e5f7b299c9a6420041d9a695a478/n-269-candidate.yaml","witness_id":"W-known-best-n269","witness_path":"packing/witnesses/known-best/n-269.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -7159,7 +7159,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(269) ≤ 16.901514","provenance":"frontier","relation":"upper-bound","value":"16.901513582189132199"}
+        "side": {"display":"s(269) ≤ 16.900995","provenance":"frontier","relation":"upper-bound","value":"16.9009945799513249"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

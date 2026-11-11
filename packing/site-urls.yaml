@@ -23905,6 +23905,7 @@ urls:
     evidence:
     - E-ozden-943-certificate-report
     - E-ozden-943-exact-feasibility
+    - E-ozden-943-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s156-upper-bound-2026-11-10/README.md
     - packing/resources/web/ozden-s156-upper-bound-2026-11-10/acquisition/claims.json
@@ -23916,6 +23917,10 @@ urls:
     - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/contraction-n156.json
     - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/contraction-n156-own.json
     - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/l-step-scan.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/out/check-n156.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/out/controls-n156.json
+    - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/out/identity-n156.json
+    - docs/project/reviews/review-2026-11-11-ozden-943-947.md
     - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
     - packing/devtools/upper_bound_reports.py
 - path: result/t-286.html
@@ -23940,6 +23945,7 @@ urls:
     evidence:
     - E-ozden-944-certificate-report
     - E-ozden-944-exact-feasibility
+    - E-ozden-944-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s180-upper-bound-2026-11-10/README.md
     - packing/resources/web/ozden-s180-upper-bound-2026-11-10/acquisition/claims.json
@@ -23951,6 +23957,10 @@ urls:
     - packing/resources/web/ozden-s180-upper-bound-2026-11-10/measure/contraction-n180.json
     - packing/resources/web/ozden-s180-upper-bound-2026-11-10/measure/contraction-n180-own.json
     - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/l-step-scan.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/review/review-2026-11-11/out/check-n180.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/review/review-2026-11-11/out/controls-n180.json
+    - packing/resources/web/ozden-s180-upper-bound-2026-11-10/review/review-2026-11-11/out/identity-n180.json
+    - docs/project/reviews/review-2026-11-11-ozden-943-947.md
     - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
     - packing/devtools/upper_bound_reports.py
 - path: result/t-287.html
@@ -23975,6 +23985,7 @@ urls:
     evidence:
     - E-ozden-945-certificate-report
     - E-ozden-945-exact-feasibility
+    - E-ozden-945-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s268-upper-bound-2026-11-10/README.md
     - packing/resources/web/ozden-s268-upper-bound-2026-11-10/acquisition/claims.json
@@ -23986,6 +23997,10 @@ urls:
     - packing/resources/web/ozden-s268-upper-bound-2026-11-10/measure/contraction-n268.json
     - packing/resources/web/ozden-s268-upper-bound-2026-11-10/measure/contraction-n268-own.json
     - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/l-step-scan.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/review/review-2026-11-11/out/check-n268.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/review/review-2026-11-11/out/controls-n268.json
+    - packing/resources/web/ozden-s268-upper-bound-2026-11-10/review/review-2026-11-11/out/identity-n268.json
+    - docs/project/reviews/review-2026-11-11-ozden-943-947.md
     - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
     - packing/devtools/upper_bound_reports.py
 - path: result/t-288.html
@@ -24010,6 +24025,7 @@ urls:
     evidence:
     - E-ozden-947-certificate-report
     - E-ozden-947-exact-feasibility
+    - E-ozden-947-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s269-upper-bound-2026-11-11/README.md
     - packing/resources/web/ozden-s269-upper-bound-2026-11-11/acquisition/claims.json
@@ -24021,6 +24037,10 @@ urls:
     - packing/resources/web/ozden-s269-upper-bound-2026-11-11/measure/contraction-n269.json
     - packing/resources/web/ozden-s269-upper-bound-2026-11-11/measure/contraction-n269-own.json
     - packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/l-step-scan.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/review/review-2026-11-11/out/check-n269.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/review/review-2026-11-11/out/controls-n269.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-11/review/review-2026-11-11/out/identity-n269.json
+    - docs/project/reviews/review-2026-11-11-ozden-943-947.md
     - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
     - packing/devtools/upper_bound_reports.py
 - path: results.html

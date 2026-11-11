@@ -312,34 +312,25 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/kenaznia-doga/s156-upper-bound",
         "Doğa Özden",
-        (
-            "A packing at 156 seeded from Evan Daniel's 182, 2.11e-3 below the record;"
-            " replayed here, review pending (T-285)."
-        ),
+        ("A packing at 156 seeded from Evan Daniel's 182, 2.11e-3 below the record (T-285)."),
     ),
     (
         "https://github.com/kenaznia-doga/s180-upper-bound",
         "Doğa Özden",
-        (
-            "A packing at 180 seeded from Evan Daniel's 154, 1.38e-3 below the record;"
-            " replayed here, review pending (T-286)."
-        ),
+        ("A packing at 180 seeded from Evan Daniel's 154, 1.38e-3 below the record (T-286)."),
     ),
     (
         "https://github.com/kenaznia-doga/s268-upper-bound-16872029849",
         "Doğa Özden",
         (
-            "A packing at 268 seeded from the registry's 302, 4.40e-4 below his own T-276;"
-            " replayed here, review pending (T-287)."
+            "A packing at 268 seeded from the registry's 302, 4.40e-4 below his own"
+            " T-276 (T-287)."
         ),
     ),
     (
         "https://github.com/kenaznia-doga/s269-upper-bound",
         "Doğa Özden",
-        (
-            "A packing at 269 seeded from Evan Daniel's 304, 5.19e-4 below the record;"
-            " replayed here, review pending (T-288)."
-        ),
+        ("A packing at 269 seeded from Evan Daniel's 304, 5.19e-4 below the record (T-288)."),
     ),
     (
         "https://github.com/vitamoon/vitamoon",

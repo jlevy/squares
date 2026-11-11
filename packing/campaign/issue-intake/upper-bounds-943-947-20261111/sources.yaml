@@ -40,7 +40,7 @@ reports:
   - n: 156
     measured:
       against: T-186
-      finding: no symmetry of the box pairs it one to one with T-186's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 58 squares beyond 0.1 and 78 beyond 1e-2 (largest 0.908679) and turns 74 squares by more than 1e-6 radians, by up to 44.69 degrees; 60 tilted squares, all turned the same way, against T-186's 62, 18 turned one way and 44 the other; not a further arrangement of T-186's packing, as the source's seed, the registry's 182, says
+      finding: no symmetry of the box pairs it one to one with T-186's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 58 squares beyond 0.1 and 78 beyond 1e-2 (largest 0.908679) and turns 74 squares by more than 1e-6 radians, by up to 44.69 degrees; 60 tilted squares, 16.7 to 32.4 degrees from upright and all turned the same way, against T-186's 62, 6.9 to 26.4 degrees, 18 turned one way and 44 the other; a new arrangement relative to T-186's packing, not a further arrangement of T-186's packing, as the source's seed, the registry's 182, says
       source: packing/resources/web/ozden-s156-upper-bound-2026-11-10/measure/identity.json
   note: >-
     The issue names 87c9292, committed at 2026-11-10T15:27:50Z, 50 seconds before the issue. It says the packing
@@ -60,7 +60,7 @@ reports:
   - n: 180
     measured:
       against: T-174
-      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 49 squares beyond 0.1 and 82 beyond 1e-2 (largest 0.921464) and turns 61 squares by more than 1e-6 radians, by up to 44.68 degrees; 40 tilted squares, 12 turned one way and 28 the other, against T-174's 44, 24 turned one way and 20 the other; not a further arrangement of T-174's packing, as the source's seed, the registry's 154, says
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 49 squares beyond 0.1 and 82 beyond 1e-2 (largest 0.921464) and turns 61 squares by more than 1e-6 radians, by up to 44.68 degrees; 40 tilted squares, 37.1 to 44.8 degrees from upright, against T-174's 44, 26.5 to 44.7 degrees, near the diagonal, where no split by sign is given (F16 of the 11 November review); a new arrangement relative to T-174's packing, not a further arrangement of T-174's packing, as the source's seed, the registry's 154, says
       source: packing/resources/web/ozden-s180-upper-bound-2026-11-10/measure/identity.json
   note: >-
     The issue names 4cfcb90, committed at 2026-11-10T15:27:50Z, 51 seconds before the issue. It says the packing
@@ -81,7 +81,7 @@ reports:
   - n: 268
     measured:
       against: T-276
-      finding: no symmetry of the box pairs it one to one with T-276's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 125 squares beyond 0.1 and 151 beyond 1e-2 (largest 1.04105) and turns 156 squares by more than 1e-6 radians, by up to 43.99 degrees; 43 tilted squares, 17 turned one way and 26 the other, against T-276's 99, all turned the same way; not a further arrangement of T-276's packing, as the source's seed, the registry's 302, says
+      finding: no symmetry of the box pairs it one to one with T-276's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 125 squares beyond 0.1 and 151 beyond 1e-2 (largest 1.04105) and turns 156 squares by more than 1e-6 radians, by up to 43.99 degrees; 43 tilted squares, 35.4 to 44.2 degrees from upright, near the diagonal, where no split by sign is given (F16 of the 11 November review), against T-276's 99, 2.7 to 24.6 degrees and all turned the same way; a new arrangement relative to T-276's packing, not a further arrangement of T-276's packing, as the source's seed, the registry's 302, says
       source: packing/resources/web/ozden-s268-upper-bound-2026-11-10/measure/identity.json
   note: >-
     The issue names b027aba, committed at 2026-11-10T15:27:50Z, 52 seconds before the issue. It improves the
@@ -102,7 +102,7 @@ reports:
   - n: 269
     measured:
       against: T-174
-      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 112 squares beyond 0.1 and 134 beyond 1e-2 (largest 1.10268) and turns 120 squares by more than 1e-6 radians, by up to 43.52 degrees; 100 tilted squares, all turned the same way, against T-174's 49, 25 turned one way and 24 the other; not a further arrangement of T-174's packing, as the source's seed, the registry's 304, says
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves 112 squares beyond 0.1 and 134 beyond 1e-2 (largest 1.10268) and turns 120 squares by more than 1e-6 radians, by up to 43.52 degrees; 100 tilted squares, 18.7 to 36.1 degrees from upright and all turned the same way, against T-174's 49, 34.0 to 44.9 degrees, near the diagonal, where no split by sign is given (F16 of the 11 November review); a new arrangement relative to T-174's packing, not a further arrangement of T-174's packing, as the source's seed, the registry's 304, says
       source: packing/resources/web/ozden-s269-upper-bound-2026-11-11/measure/identity.json
   note: >-
     The issue names 6f93b07, committed at 2026-11-11T03:34:54Z, 13 seconds before the issue. It says the packing
