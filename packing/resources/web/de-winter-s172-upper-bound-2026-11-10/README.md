@@ -14,7 +14,7 @@ certificates at 37 counts above 324 under `above324/` and `above324_refined/`. T
 outside this scope and left for triage.
 
 Intake lane L78 (think-2h88) retained it, replayed it and registered it on 11 November
-2026 as **T-286, held at V0/C1** for the owner’s RV-3 (think-ruu2), beside #939’s T-285.
+2026 as **T-286, held at V0/C0** for the owner’s RV-3 (think-ruu2), beside #939’s T-285.
 The house at 172 stays T-282, and the case record is not touched.
 
 ## What the Source Claims
@@ -119,7 +119,7 @@ and `devtools.contraction_margin` the `contraction-*.json` receipts under
 
 ## The Register
 
-T-286 records the claim, held at V0/C1, S1, with a regularization item naming T-282. The
+T-286 records the claim, held at V0/C0, S1, with a regularization item naming T-282. The
 replay is not entered as evidence and nothing is adopted. Whether a re-certification at
 its predecessor’s own padding is a new result is the owner’s RV-3 (think-ruu2). The same
 answer settles T-285 at 199 and the held solve at 172 (think-wju3). The stage 4 review is

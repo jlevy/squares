@@ -13,7 +13,7 @@ packet retains, and the folders for 227, 229 and 260 are unchanged.
 Intake lane L78 (think-2h88) retained the source and replayed the certificate on 9
 November 2026, and on 10 November, after #938’s import (lane L76, PR #940) made T-284 the
 house at 199, compared it with T-284, measured it and registered it as **T-285, held at
-V0/C1** for the owner’s RV-3 (think-ruu2). The house stays T-284, and the case record is
+V0/C0** for the owner’s RV-3 (think-ruu2). The house stays T-284, and the case record is
 not touched.
 
 ## What the Source Claims
@@ -203,7 +203,7 @@ under [measure/](measure/):
 
 ## The Register
 
-- **T-285 records the claim, held at V0/C1, S1**, as T-280 is.
+- **T-285 records the claim, held at V0/C0, S1**, as T-280 is.
   - Its regularization item names T-284.
   - The replay above is not entered as evidence, and nothing is adopted.
   - Whether a re-certification at the padding its predecessor carries is a new result is

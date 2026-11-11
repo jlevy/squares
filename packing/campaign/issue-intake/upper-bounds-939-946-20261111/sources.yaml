@@ -53,7 +53,7 @@ reports:
       The gain, 2.635e-12, is 1.0399 of the padding T-284 carries from T-282 through the L step (2.533e-12, the
       margin of its base, measure/contraction-n172-base.json); its own uniform-contraction margin is 0, since its
       grid squares touch (measure/contraction-n199.json). Whether such a re-certification is a new result is the
-      owner's open question (think-ruu2's RV-3); T-285 is held below the stage-4 exit at V0/C1 and does not
+      owner's open question (think-ruu2's RV-3); T-285 is held below the stage-4 exit at V0/C0 and does not
       move the house, and its replay's entry and adoption to V3/C3 wait on the owner's answer.
   note: >-
     The issue names 702c7af, committed at 2026-11-09T21:54:59Z, 9 minutes before the issue. It says the side lies
@@ -89,7 +89,7 @@ reports:
       The gain, 2.635e-12, is 1.0399 of T-282's own uniform-contraction margin, 2.533e-12
       (packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172.json), the share of
       Evan Daniel's held solve (think-wju3), whose KKT point this is. Whether such a re-certification is a new
-      result is the owner's open question (think-ruu2's RV-3); T-286 is held below the stage-4 exit at V0/C1 and
+      result is the owner's open question (think-ruu2's RV-3); T-286 is held below the stage-4 exit at V0/C0 and
       does not move the house.
   note: >-
     The issue names c4e65d0, committed at 2026-11-10T21:26:23Z, 47 seconds before the issue; 8c0de9d (21:20:44Z)
