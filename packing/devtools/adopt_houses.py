@@ -2307,6 +2307,46 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-291": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#954](https://github.com/jlevy/squares/issues/954)",
+        producer_route=True,
+        ai=(
+            "Issue 954 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing was found by a band-design search: the tilted squares "
+            "of the registry’s n = 70 packing, Ryan Xu’s as Evan Daniel and PingYou Ltd "
+            "improved it, laid along the diagonal as a band and a copy shifted by (5, 5), "
+            "annealed in a reduced model with the axis-parallel squares on the two "
+            "wall-anchored staircase lattices, then quenched once with Evan Daniel’s ALM+SLP "
+            "code; the 11 November review finds that seed within 0.05 of 28 of its 37 tilted "
+            "squares, under one symmetry of the 70 box and no other. Against T-174’s packing, "
+            "this case’s house best packing before this adoption, it is a new arrangement: no "
+            "symmetry pairs nearest centres one to one, and the optimal assignment moves 47 "
+            "squares beyond a tenth, at most 0.886, its band on the main diagonal where the "
+            "house’s lies on the other. So Doğa Özden is the packing’s finder, from the band "
+            "of Ryan Xu’s packing as the seed, below the record it improves; the issue claims "
+            "the upper bound only. Three squares touch a wall, as the source says."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its 17 "
+            "controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2600,13 +2640,16 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s exact re-solve of Daniil Ostashev’s issue-575 n = 176 "
         "packing, after PingYou Ltd’s",
     ),
-    # T-174's regularization of T-127's packing, 42 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-291 (adopted on 11 November 2026), Doğa Özden's issue 954: a new arrangement relative
+    # to T-174's packing, 47 squares beyond a tenth, found by a band-design search from the
+    # tilted squares of Ryan Xu's n = 70 packing as Evan Daniel and PingYou Ltd improved it,
+    # which the 11 November review finds within 0.05 of 28 of its 37 tilted squares (F8, F9).
     179: Credit(
-        (SQUISH,),
-        ("Siddharth Gupta", PINGYOU),
-        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
-        "SQUISH packing",
+        (OZDEN,),
+        (),
+        "Doğa Özden’s packing from a band of the tilted squares of Ryan Xu’s n = 70 packing, "
+        "below Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta and PingYou Ltd "
+        "refined it",
     ),
     # T-288 (adopted on 11 November 2026), Doğa Özden's issue 944: a new arrangement relative
     # to T-174's packing, 49 squares beyond a tenth, found by transplant search from an L added

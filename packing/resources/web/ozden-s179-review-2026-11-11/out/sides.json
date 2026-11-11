@@ -1,0 +1,125 @@
+{
+ "program": "l101_sides.py",
+ "certificate_sha256": "75813e7cc0ee167557678ce6dab287359711c58796afa3048cd10ff2f6a8041b",
+ "side": {
+  "fraction_digits": [
+   159,
+   158
+  ],
+  "terminates": false,
+  "floor_40": "13.8813671601098757033920413889368491929999",
+  "floor_12": "13.881367160109",
+  "ceiling_12": "13.881367160110",
+  "floor_15": "13.881367160109875",
+  "ceiling_15": "13.881367160109876"
+ },
+ "claim": {
+  "printed": "13.881367160110",
+  "places": 12,
+  "is_floor": false,
+  "is_ceiling": true,
+  "is_nearest": true,
+  "printed_less_exact": "1.24296e-13",
+  "claim_above_side": true,
+  "claim_less_side": "1.24296e-13"
+ },
+ "author_prints": {
+  "readme_S": {
+   "printed": "13.881367160109875",
+   "places": 15,
+   "is_floor": true,
+   "is_ceiling": false,
+   "is_nearest": false,
+   "printed_less_exact": "-7.03392e-16",
+   "note": "followed by an ellipsis"
+  },
+  "packing_witness_verify_side_equals_certificate": true,
+  "packing_witness_verify_pairs": "15931",
+  "pairs_n_choose_2": 15931,
+  "sqcheck_side": {
+   "printed": "13.881367160109876",
+   "places": 15,
+   "is_floor": false,
+   "is_ceiling": true,
+   "is_nearest": true,
+   "printed_less_exact": "2.96607e-16"
+  }
+ },
+ "house": {
+  "record_exact_form_equals_witness_side": true,
+  "issue_fraction_equals_record": true,
+  "issue_print": {
+   "printed": "13.88379549051089845",
+   "places": 17,
+   "is_floor": false,
+   "is_ceiling": true,
+   "is_nearest": false,
+   "printed_less_exact": "9.82889e-18"
+  },
+  "record_value": {
+   "printed": "13.88379549051089845",
+   "places": 17,
+   "is_floor": false,
+   "is_ceiling": true,
+   "is_nearest": false,
+   "printed_less_exact": "9.82889e-18"
+  },
+  "floor_20": "13.88379549051089844017",
+  "credits": {
+   "found_by": [
+    "Nate Chaoweeraprasit (itsnaka)"
+   ],
+   "improved_by": [
+    "Siddharth Gupta",
+    "PingYou Ltd"
+   ]
+  }
+ },
+ "gain": {
+  "exact_positive": true,
+  "gap": "2.42833040102e-3",
+  "issue_gap": "2.428e-03",
+  "gap_rounds_to_issue": true,
+  "relative_to_house": "1.74903e-4",
+  "relative_to_new": "1.74934e-4",
+  "issue_relative": "1.75e-04",
+  "relative_rounds_to_issue": true,
+  "gap_in_units_of_12th_place": "2428330401"
+ },
+ "context": {
+  "nevska_below_claim": "4.06788e-4",
+  "nevska_below_claim_rounds_to_4.07e-4": true,
+  "nevska_below_side": "4.06788e-4",
+  "kirilltym_above_claim": "2.42833e-3",
+  "kirilltym_above_house": "1.31015e-11",
+  "kirilltym_is_house_rounded_12": "13.883795490511",
+  "nevska_less_5_is_70_print_12": true,
+  "frac_70_12_places": "0.880960371556",
+  "frac_207_12_places": "0.880960371556",
+  "frac_side_12_places": "0.881367160110",
+  "root207_less_root70": "6",
+  "issue_70_print": {
+   "printed": "8.880960371555579595",
+   "places": 18,
+   "is_floor": false,
+   "is_ceiling": true,
+   "is_nearest": true,
+   "printed_less_exact": "3.03308e-19"
+  },
+  "record_70_credits": {
+   "found_by": [
+    "Ryan Xu"
+   ],
+   "improved_by": [
+    "Evan Daniel",
+    "PingYou Ltd"
+   ]
+  },
+  "record_207_credits": {
+   "found_by": [
+    "PingYou Ltd"
+   ],
+   "improved_by": []
+  }
+ }
+}

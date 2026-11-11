@@ -1688,6 +1688,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Özden s180 upper bound 2026-11-10]": _import("ozden-s180-upper-bound-2026-11-10"),
     "[Özden s268 upper bound 2026-11-10]": _import("ozden-s268-upper-bound-2026-11-10"),
     "[Özden s269 upper bound 2026-11-11]": _import("ozden-s269-upper-bound-2026-11-11"),
+    # Lane L100 of 11 November (think-3guf): Doğa Özden's issue 954 at 179 (think-f65n), a
+    # band built from the registry's 70, one repository and one packet.
+    "[Özden s179 upper bound 2026-11-11]": _import("ozden-s179-upper-bound-2026-11-11"),
     # The intake pass's lane L65 of 9 November (think-h96r): Kaelan Yim's certificates at
     # vitamoon/vitamoon ac14112, which no issue reports; T-280 and T-281 are held below the
     # stage 4 exit for the owner (think-ruu2's RV-3, think-ikku).

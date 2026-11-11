@@ -12974,6 +12974,36 @@ sources:
     six again by a clean-room checker, so the rows are verified from
     E-de-winter-a0c4fc8-exact-feasibility and E-de-winter-a0c4fc8-review-exact-feasibility.
   claims_record: resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/beyond-horizon-claims.json
+- id: ozden-s179-upper-bound-2026-11-11
+  title: 'Doğa Özden''s packing of 179 squares at kenaznia-doga/s179-upper-bound bd262d8, issue 954'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s179-upper-bound/tree/bd262d8ba2966000e827547597fe6da24d0e118c
+  local: resources/web/ozden-s179-upper-bound-2026-11-11/
+  source_key: '[Özden s179 upper bound 2026-11-11]'
+  scope:
+    n_values:
+    - 179
+  reviewed: '2026-11-11'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s179-upper-bound-2026-11-11/acquisition/claims.json
+  evidence:
+  - E-ozden-954-certificate-report
+  - E-ozden-954-exact-feasibility
+  - E-ozden-954-review-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, bd262d8, but a raster diff image, two checker
+    files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
+    jlevy/squares#954, the certificate admitted only where its exact side rounds up to the side
+    the issue prints. T-291 records the in-horizon report at V3/C3 since the stage 4 review of
+    11 November (docs/project/reviews/review-2026-11-11-ozden-954.md), and the case adopted it
+    as its house that day. The ledger of 11 November for this lane
+    (campaign/issue-intake/upper-bounds-954-20261111) records it. All 3 native jobs have full
+    outcomes.
 - id: de-winter-s132-upper-bound-2026-11-11
   title: Joost de Winter's pinwheel packing of 132 squares at JoostdeWinter/square-packing 6617869, issue 958
   role: source-repository
@@ -13223,11 +13253,11 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 179
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '13.88379549051089845'
-  evidence: E-pingyou-574-certificate-report
+  source_id: ozden-s179-upper-bound-2026-11-11
+  value: '13.8813671601098758'
+  evidence: E-ozden-954-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+    a replay here and an accepted review, adopted on 2026-11-11 (T-291).
 - n: 180
   source_id: ozden-s180-upper-bound-2026-11-10
   value: '13.9156185027900258'
@@ -14049,7 +14079,7 @@ superseded_reports:
 - n: 179
   source_id: evand-square-packing-2026-10-05
   value: '13.895341069976490731724097384352'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: ozden-s179-upper-bound-2026-11-11
   reason: Certifies the catalogue's packing at a side 7.3e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -14782,7 +14812,7 @@ superseded_reports:
 - n: 179
   source_id: squish-update-2026-10-07
   value: '13.8913125657406980'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: ozden-s179-upper-bound-2026-11-11
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 180
@@ -14899,7 +14929,7 @@ superseded_reports:
 - n: 179
   source_id: ry-xu-new-packings-2026-10-08
   value: '13.8939549425138940'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: ozden-s179-upper-bound-2026-11-11
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 236
   source_id: ry-xu-new-packings-2026-10-08
@@ -14971,7 +15001,7 @@ superseded_reports:
 - n: 179
   source_id: squish-second-update-2026-10-07
   value: '13.8837954905121866'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: ozden-s179-upper-bound-2026-11-11
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 208
   source_id: squish-update-2026-10-07
@@ -15610,9 +15640,9 @@ superseded_reports:
 - n: 179
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '13.8837954905108985'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-291's exact
     side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: ozden-s179-upper-bound-2026-11-11
 - n: 180
   source_id: couzo-451-exact-refinements
   value: '13.9169935224778325'
@@ -16105,6 +16135,12 @@ superseded_reports:
   reason: The house from 2026-10-17 until 2026-11-11; its certificate stays retained and verified,
     and T-290's exact side is smaller.
   superseded_by: ozden-s269-upper-bound-2026-11-11
+- n: 179
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '13.88379549051089845'
+  reason: The house from 2026-10-17 until 2026-11-11; its certificate stays retained and verified,
+    and T-291's exact side is smaller.
+  superseded_by: ozden-s179-upper-bound-2026-11-11
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
