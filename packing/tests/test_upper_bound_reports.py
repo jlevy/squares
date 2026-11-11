@@ -233,6 +233,10 @@ L90_1111 = (
 #: repository's `packing-witness promote` from a decimal pose the packet retains, under
 #: CC BY 4.0 and MIT.
 L100_1111 = "ozden-s179-upper-bound-2026-11-11"
+#: The intake pass's lane L107 of 11 November 2026 (`test_upper_bound_reports_l107_1111`):
+#: the same author's #959 at 179, a further arrangement of his #954 promoted the same way,
+#: under CC BY 4.0 and MIT.
+L107_1111 = "ozden-s179-issue959-2026-11-11"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -296,6 +300,7 @@ EVERY = (
     *L81_1111,
     *L90_1111,
     L100_1111,
+    L107_1111,
 )
 
 
@@ -1345,7 +1350,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
-    # to #931, #935, #936, #938, #943 to #947 and #954 and Yim's #895 touches the box.
+    # to #931, #935, #936, #938, #943 to #947, #954 and #959 and Yim's #895 touches the box.
     # Couzo's #672 touches at 229 and clears every wall at 227, so its walls mix, as de
     # Winter's #941 does, whose borders touch the box and whose other certificates clear
     # it; every other source's clear it.
@@ -1367,6 +1372,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L76_1109,
         *L81_1111,
         L100_1111,
+        L107_1111,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1658,6 +1664,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         **dict.fromkeys(L81_1111[:3], "2026-11-10"),
         L81_1111[3]: "2026-11-11",
         L100_1111: "2026-11-11",
+        L107_1111: "2026-11-11",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

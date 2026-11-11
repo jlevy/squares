@@ -1574,6 +1574,7 @@ jobs:
             /packing/resources/web/ozden-s268-upper-bound-2026-11-10/
             /packing/resources/web/ozden-s269-upper-bound-2026-11-11/
             /packing/resources/web/ozden-s179-upper-bound-2026-11-11/
+            /packing/resources/web/ozden-s179-issue959-2026-11-11/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg
