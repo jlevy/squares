@@ -23,7 +23,15 @@ prepared and posted both on his behalf.
   2 × 10⁻¹³ are the decimal pose’s own, left by the final binary64 repair scaling of
   Evan Daniel’s quench, that only the squares that set the left wall, the bottom wall
   and the side touch them exactly, and that other squares near a wall clear it by up to
-  about 10⁻¹².
+  about 10⁻¹². Measured by the review, exactly three squares touch a wall (123 at the left,
+  39 at the bottom and 117 at the right), as the issue says; the other 36 square–wall
+  clearances below 10⁻¹² are at most 4.29 × 10⁻¹⁴, and eight square–wall pairs lie between
+  6.84 × 10⁻⁵ and 7.21 × 10⁻⁴ from a wall, which the issue’s “near a wall” does not cover.
+  The certificate is the decimal pose translated by about 1.04 × 10⁻¹³ toward the corner,
+  every centre equal to the pose’s to 1.8 × 10⁻³⁷, so the pair margins are the pose’s own,
+  as the issue says; they lie between 2.03 and 4.08 × 10⁻¹³ of the centres’ separation along
+  the binding axis, median 2.17 × 10⁻¹³, about twice the issue’s “about 1e-13 relative”
+  (F5).
 - `n179-witness.json` is the same file as JSON. `packing-witness-verify.txt` is the
   author’s run of this repository’s `packing-witness verify` at `591644a9` (VERIFIED,
   15,931 pairs); `sqcheck-output.txt` is the author’s run of `verifier/sqcheck.py`, an
@@ -43,7 +51,8 @@ prepared and posted both on his behalf.
   at `bb4cc78e`). The band is built from the tilted squares of the registry’s n = 70
   packing (Ryan Xu, improved by Evan Daniel and PingYou Ltd; side 8.880960371555579595),
   a two-row band of 20 squares at −40.7505 degrees along the diagonal; the registry’s
-  n = 207 packing (PingYou Ltd) is two such bands, mirrored. Its seed, `M_55_16_36`, is
+  n = 207 packing (PingYou Ltd) is two such bands, mirrored, which the review measures at
+  19 squares each, not 20 (F7). Its seed, `M_55_16_36`, is
   that band where x + y ≤ 16 and a second copy shifted by (5, 5) where x + y > 16,
   overlapping squares dropped and random adjacent squares added up to 36 tilted squares,
   annealed at side 13.8812 and then quenched; two other seeds of the same scan quench to
@@ -52,7 +61,9 @@ prepared and posted both on his behalf.
   Against the registry packing, matched by assignment up to the square’s symmetries, it
   reports 146 of 179 centres beyond 1e-3, 54 beyond 0.05 (largest 0.886), 44 squares
   re-tilted beyond 1 degree (largest 44.36), and 37 squares tilted beyond 0.5 degree
-  against the record’s 35.
+  against the record’s 35. The review reproduces every one of those counts with the house
+  reflected top to bottom and set against the upper-left corner of the new box, an
+  anchoring the issue does not name (F6).
 
 ## Retained Here
 
@@ -117,7 +128,16 @@ A measurement for credit; it decides nothing.
   Tilted beyond a degree: 36 here, 27.3 to 41.4 degrees from upright, all turned the same
   way; T-174’s 35, 41.2 to 44.4 degrees, near the diagonal, where no split by sign is
   given. The house witness and the regularized view measure the same. So it is a new
-  arrangement relative to T-174’s packing, not a further arrangement of it.
+  arrangement relative to T-174’s packing, not a further arrangement of it, as the review
+  finds (F9). Anchored at the lower-left corner, as here, or at the centres, every square
+  moves beyond 10⁻³, since the sides differ by 2.4 × 10⁻³; the issue’s 146 beyond 10⁻³
+  holds with the house reflected top to bottom and set against the upper-left corner (F6).
+- **The seed.** The seed the issue states, the 70 band where x + y ≤ 16 and its copy
+  shifted by (5, 5) where x + y > 16, lies within 0.05 of 28 of the 37 squares tilted here
+  beyond half a degree (31 within 0.1, 33 within 0.25), each turned by less than a degree,
+  under the identity of the 70 box and under none of its other seven symmetries; the review
+  reads that as strong support for the stated seed (F8). The new band runs corner to corner
+  along the main diagonal; T-174’s tilted squares lie along the other.
 
 ## Exact Replay
 
@@ -160,7 +180,9 @@ This certificate’s own margin, measured the same way, is 2.616e-12 (1 − λ\*
 `devtools.contraction_margin` wrote both receipts,
 [measure/contraction-n179.json](measure/contraction-n179.json) and
 [measure/contraction-n179-own.json](measure/contraction-n179-own.json), each contracted
-packing decided on both maintained routes.
+packing decided on both maintained routes. The review decided T-174’s witness with its own
+checker and found the same touching pair: the gain lies inside no padding margin and is no
+re-certification of the house, so RV-3 does not reach it.
 
 ## The L Step
 
@@ -170,13 +192,60 @@ and monotonicity consequences as on `main`: this bound carries to no other count
 
 ## Stage 4 Review and Adoption
 
-The stage 4 mathematical review runs in a separate lane, blind to this one, on the source
-repository. The case adopts the certificate at 179 once that review is mapped; until then
-T-174 stays the house.
+The stage 4 mathematical review of 11 November 2026
+([review-2026-11-11-ozden-954.md](../../../../docs/project/reviews/review-2026-11-11-ozden-954.md)),
+written in a separate lane (L101) blind to this one until its findings were frozen,
+accepts the certificate with findings, all notes, none blocking, and scores it S3. Its
+clean-room checker decides every square, wall and pair by separating axes in `Fraction`
+and by exact clipped areas in GMP rationals, with 17 controls stated before they ran, and
+accepts the same squares in the box of the claim’s own side, 13.881367160110 (F3); its
+programs and receipts are kept in the review-only directory beside this packet,
+[ozden-s179-review-2026-11-11](../ozden-s179-review-2026-11-11/README.md). Its comparison
+with this packet’s receipts printed `LANE_EQUALS_REVIEW` on 24 comparisons.
+The witness’s `softschema.schema` names `witness.schema.yaml`, which resolves to no file in
+the author’s repository, and its `certificate.replay` names the file but not where to run
+it, unlike the README’s rerun (F11); the adopted witness carries this repository’s own.
+Both are notes for the author.
+
+The band’s geometry is the registry’s 70 witness, which comes from PingYou Ltd’s PR 574
+algebraic supplement, a release with no licence file, kept here in the derived-only form.
+Whether a seed taken from it needs a notice of its own is, in the review’s words,
+`think-mdxq`’s question (F10), as the 9 November reviews put their upstream starts; that
+bead closed on 4 November with the lab’s own licence answer. It is noted here, not
+decided.
+
+Its questions for the author, informational and holding nothing open:
+
+1. Was the final repair scaling about 2 × 10⁻¹³ rather than 10⁻¹³, since the margins are
+   2.03 to 4.08 × 10⁻¹³ of the centres’ separation (F5)?
+2. Do the lineage counts use the house reflected top to bottom and set against the
+   upper-left corner, and would the issue name that convention (F6)?
+3. Does “two such bands” at 207 mean the 70 band cut where the two meet, since each has 19
+   tilted squares (F7)?
+4. Did the seed take the 70 band from the registry’s witness (PingYou Ltd’s algebraic
+   certificate) or from Ryan Xu’s or Evan Daniel’s published coordinates?
+5. Which replay is intended, `certificate.replay` or the README’s rerun, and from which
+   directory, and would the schema path name this repository’s file (F11)?
+6. Will the band-design search and its seeds be published? The record scores a reusable
+   technique on its own.
+
+The case adopted the certificate as its house on 11 November 2026 under the house rule,
+as T-291, in place of T-174, which keeps its certificate as history, with Doğa Özden the
+packing’s finder, the band of Ryan Xu’s n = 70 packing, as Evan Daniel and PingYou Ltd
+improved it, credited as the search’s seed, and T-174’s packing as the record it improves
+(the review’s F9). Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-f65n-2026-11-11/README.md)), and the
+selection, measured against this witness’s drawing, draws Evan Daniel’s same-side view:
+light, uneven and near-axis squares, angle classes and hues 7, 20, 5, 19 and 19 against
+0, 0, 0, 5 and 5, and full shared sides 475 and 505 against 550 and 550. His certified KKT
+solve lies 2.78 × 10⁻¹² below the side, about the certificate’s own contraction margin
+(2.62 × 10⁻¹²), held at row 3 as a register candidate and not admitted, as at 156, 172,
+180, 199, 268, 269 and 270 (RV-3). The rigidity block, derived again on the new witness,
+stays not rigid: 74 of its 179 squares translate, against 7 of T-174’s.
 
 ## What Is Not Established
 
-- **Human oversight.** No human oversight record.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
@@ -185,7 +254,8 @@ T-174 stays the house.
 
 The packing is Doğa Özden’s, found by his lab’s band-design search from the tilted squares
 of the registry’s n = 70 packing (Ryan Xu, improved by Evan Daniel and PingYou Ltd). The
-issue asks that the improvement be credited to Özden, the band’s source packing and the
+case record credits Özden as the finder, the 70 packing’s holders as the band’s source and
+T-174’s holders as the record it improves (the review’s F9). The issue asks that the improvement be credited to Özden, the band’s source packing and the
 current record to their holders as the registry lists them, and the local optimizer to
 Evan Daniel. The issue says the search and its code were written and run by AI agents
 throughout and that the checks were run by code that did not produce the packing; it says
@@ -208,8 +278,8 @@ and pinned against it.
 ## Commands
 
 From `packing/`, with the project interpreter. The identity measurement reads the house
-witness and its regularized view as they stood at main c8448724e, before an adoption
-replaces them, so it reproduces there; the contraction margins read the packets and
+witness and its regularized view as they stood at main c8448724e, before this adoption
+replaced them, so it reproduces there; the contraction margins read the packets and
 reproduce anywhere `devtools.contraction_margin` is:
 
 ```bash

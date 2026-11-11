@@ -336,8 +336,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/kenaznia-doga/s179-upper-bound",
         "Doğa Özden",
         (
-            "A packing at 179, a band built from the registry's 70, 2.43e-3 below the record;"
-            " replayed here, review pending (T-291)."
+            "A packing at 179, a band built from the registry's 70, 2.43e-3 below the record"
+            " (T-291)."
         ),
     ),
     (

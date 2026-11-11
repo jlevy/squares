@@ -24145,6 +24145,7 @@ urls:
     evidence:
     - E-ozden-954-certificate-report
     - E-ozden-954-exact-feasibility
+    - E-ozden-954-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s179-upper-bound-2026-11-11/README.md
     - packing/resources/web/ozden-s179-upper-bound-2026-11-11/acquisition/claims.json
@@ -24156,6 +24157,11 @@ urls:
     - packing/resources/web/ozden-s179-upper-bound-2026-11-11/measure/contraction-n179.json
     - packing/resources/web/ozden-s179-upper-bound-2026-11-11/measure/contraction-n179-own.json
     - packing/resources/web/ozden-s179-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s179-review-2026-11-11/out/check-n179.json
+    - packing/resources/web/ozden-s179-review-2026-11-11/out/controls-n179.json
+    - packing/resources/web/ozden-s179-review-2026-11-11/out/identity-n179.json
+    - packing/resources/web/ozden-s179-review-2026-11-11/out/band-n179.json
+    - docs/project/reviews/review-2026-11-11-ozden-954.md
     - packing/campaign/issue-intake/upper-bounds-954-20261111/README.md
     - packing/devtools/upper_bound_reports.py
 - path: results.html
