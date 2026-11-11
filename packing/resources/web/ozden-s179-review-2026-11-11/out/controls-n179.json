@@ -1,0 +1,925 @@
+{
+ "program": "l101_controls.py",
+ "programs_sha256": {
+  "l101_reader.py": "f64189ac7887bdca971b585e5d89495a30743a21aa020294d1a2152512c11a8e",
+  "l101_sat.py": "526397aa511d342cbb3770ee6c22957fa037b8959ac1346029cc1f6886464678",
+  "l101_clip.py": "6b26a64beb2602d576478dc8bbc30294f75be4440d85816bba8b316480601443",
+  "l101_check.py": "96b96450424033e0553fd4977e9980277eee3a136c36eaca5a82854296ab1c05",
+  "l101_geom.py": "8e7a1aa60619f61ef888b80fd22e90276913b7dd830fc729e0c412de19483f7e",
+  "l101_controls.py": "ac974072d159ae1f17a68b6848dee6e7cda953a761d060380ef9b48733237731"
+ },
+ "plan_sha256": "152681a326372a68f960c4ee0fe4b78c45e40168ddf2d6d62a4652fb3f61e6b9",
+ "facts_sha256": "c442b30f04839ff8c23fc6b4eb50547692c307244a05853bcaf1c093b57eea2f",
+ "input_yaml_sha256": "75813e7cc0ee167557678ce6dab287359711c58796afa3048cd10ff2f6a8041b",
+ "controls": [
+  {
+   "id": "G1",
+   "stated": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      1,
+      179
+     ]
+    ],
+    "margin": "-1",
+    "area": "1",
+    "touching_pairs": [],
+    "wall_outside": []
+   },
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [],
+    "wall_outside": [],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [
+     {
+      "pair": [
+       1,
+       179
+      ],
+      "margin": "-1",
+      "area": "1"
+     }
+    ],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 177,
+     "contact": 0,
+     "overlap": 1
+    },
+    "pair_classes_B": {
+     "clear": 177,
+     "contact": 0,
+     "overlap": 1
+    },
+    "pairs_decided": 178,
+    "walls_decided": 1,
+    "margins_sha256": "b9da067d94d50a21df32d1c585c903afe15df573b0c697c0bef211e34180b47f",
+    "inside_area_not_1": []
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G2",
+   "stated": {
+    "verdict": "REFUSE",
+    "wall_outside": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "why": "square 1 clears the left wall by 6.84488211750e-5, so it lands wholly beyond x = S"
+   },
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [],
+    "wall_outside": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 178,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pair_classes_B": {
+     "clear": 178,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pairs_decided": 178,
+    "walls_decided": 1,
+    "margins_sha256": "22a9b93883e5ab20ab9ca843f59ea8c4621b9076a2d419c5870e4d6041929851",
+    "inside_area_not_1": [
+     1
+    ]
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G3",
+   "stated": {
+    "reader": "refuses",
+    "reason_contains": "holds 178 entries"
+   },
+   "observed": {
+    "reader": "witness.squares holds 178 entries, not 179"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G4",
+   "stated": {
+    "reader": "refuses",
+    "reason_contains": "is not"
+   },
+   "observed": {
+    "reader": "squares[178]: id 1 is not 179"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G7",
+   "stated": {
+    "reader": "refuses",
+    "reason_contains": "JSON twin"
+   },
+   "observed": {
+    "reader": "JSON twin does not hold the same tree as the YAML"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G9",
+   "stated": {
+    "reader": "refuses",
+    "reason_contains": "lowest terms"
+   },
+   "observed": {
+    "reader": "witness.side: not in lowest terms",
+    "side_lines": 1
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G5",
+   "stated": {
+    "verdict": "REFUSE",
+    "not_unit_A": [
+     1
+    ],
+    "not_unit_B": [
+     1
+    ]
+   },
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_A": [
+     [
+      1,
+      "third corner is not p0 + u + v"
+     ]
+    ],
+    "not_unit_B": [
+     [
+      1,
+      "an edge is not of squared length 1"
+     ]
+    ],
+    "senses_agree": true,
+    "wall_contacts": [],
+    "wall_outside": [],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pair_classes_B": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pairs_decided": 0,
+    "walls_decided": 0,
+    "inside_area_not_1": []
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G6",
+   "stated": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": "some (count reported)",
+    "not_unit": [],
+    "wall_contacts": [
+     [
+      39,
+      "bottom"
+     ],
+     [
+      117,
+      "right"
+     ],
+     [
+      123,
+      "left"
+     ]
+    ],
+    "wall_outside": [],
+    "classes_agree": true
+   },
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [
+     [
+      39,
+      "bottom"
+     ],
+     [
+      117,
+      "right"
+     ],
+     [
+      123,
+      "left"
+     ]
+    ],
+    "wall_outside": [],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [
+     {
+      "pair": [
+       1,
+       2
+      ],
+      "margin": "~-1.15767665056e-2",
+      "area": "~9.77195645784e-3"
+     },
+     {
+      "pair": [
+       2,
+       38
+      ],
+      "margin": "~-1.73076225799e-2",
+      "area": "~3.04383028825e-4"
+     },
+     {
+      "pair": [
+       3,
+       4
+      ],
+      "margin": "~-3.18178981808e-2",
+      "area": "~2.25121476330e-2"
+     },
+     {
+      "pair": [
+       3,
+       6
+      ],
+      "margin": "~-1.76575953090e-2",
+      "area": "~1.42476330555e-2"
+     },
+     {
+      "pair": [
+       4,
+       9
+      ],
+      "margin": "~-1.72135753700e-2",
+      "area": "~1.38551757056e-2"
+     },
+     {
+      "pair": [
+       5,
+       7
+      ],
+      "margin": "~-1.37016280287e-2",
+      "area": "~8.70909276410e-3"
+     },
+     {
+      "pair": [
+       5,
+       40
+      ],
+      "margin": "~-3.32172176269e-2",
+      "area": "~1.12456524861e-3"
+     },
+     {
+      "pair": [
+       6,
+       9
+      ],
+      "margin": "~-3.20761122891e-2",
+      "area": "~2.27428462611e-2"
+     },
+     {
+      "pair": [
+       6,
+       36
+      ],
+      "margin": "~-1.51096321130e-2",
+      "area": "~5.01168672170e-4"
+     },
+     {
+      "pair": [
+       7,
+       120
+      ],
+      "margin": "~-2.40922208967e-2",
+      "area": "~5.89876913952e-4"
+     },
+     {
+      "pair": [
+       8,
+       9
+      ],
+      "margin": "~-1.11634355755e-1",
+      "area": "~1.28438604812e-2"
+     },
+     {
+      "pair": [
+       8,
+       10
+      ],
+      "margin": "~-9.95385709151e-3",
+      "area": "~8.55203921198e-3"
+     }
+    ],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 15882,
+     "contact": 0,
+     "overlap": 49
+    },
+    "pair_classes_B": {
+     "clear": 15882,
+     "contact": 0,
+     "overlap": 49
+    },
+    "pairs_decided": 15931,
+    "walls_decided": 179,
+    "margins_sha256": "75fe6c35fc3638a4daa9885293c788b48330751faf3fee7d475c1379783ef6f8",
+    "inside_area_not_1": [],
+    "overlapping_pairs_count": 49
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G8",
+   "stated": {
+    "verdict": "ACCEPT",
+    "wall_contacts": [
+     [
+      39,
+      "left"
+     ],
+     [
+      117,
+      "top"
+     ],
+     [
+      123,
+      "bottom"
+     ]
+    ],
+    "margins_sha256": "c68185fa5e6d50987c3ad7a5355b9f511ef8d15eeaff18502ff36b4a7442de23",
+    "classes_agree": true
+   },
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [
+     [
+      39,
+      "left"
+     ],
+     [
+      117,
+      "top"
+     ],
+     [
+      123,
+      "bottom"
+     ]
+    ],
+    "wall_outside": [],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 15931,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pair_classes_B": {
+     "clear": 15931,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pairs_decided": 15931,
+    "walls_decided": 179,
+    "margins_sha256": "c68185fa5e6d50987c3ad7a5355b9f511ef8d15eeaff18502ff36b4a7442de23",
+    "inside_area_not_1": []
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S1a",
+   "stated": {
+    "verdict": "REFUSE",
+    "wall_outside": [
+     [
+      117,
+      "right"
+     ]
+    ],
+    "why": "no positive far-wall clearance is below 1/q"
+   },
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [
+     [
+      39,
+      "bottom"
+     ],
+     [
+      123,
+      "left"
+     ]
+    ],
+    "wall_outside": [
+     [
+      117,
+      "right"
+     ]
+    ],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pair_classes_B": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pairs_decided": 0,
+    "walls_decided": 179,
+    "inside_area_not_1": [
+     117
+    ]
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S1b",
+   "stated": {
+    "verdict": "REFUSE",
+    "wall_outside": [
+     [
+      117,
+      "right"
+     ]
+    ],
+    "why": "the least positive far-wall clearance is 4.36332312998e-16"
+   },
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [
+     [
+      39,
+      "bottom"
+     ],
+     [
+      123,
+      "left"
+     ]
+    ],
+    "wall_outside": [
+     [
+      117,
+      "right"
+     ]
+    ],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pair_classes_B": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pairs_decided": 0,
+    "walls_decided": 179,
+    "inside_area_not_1": [
+     117
+    ]
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S1c",
+   "stated": {
+    "verdict": "REFUSE",
+    "squares_outside": [
+     32,
+     107,
+     108,
+     109,
+     110,
+     111,
+     112,
+     113,
+     114,
+     115,
+     116,
+     117,
+     118,
+     140,
+     149,
+     156,
+     167,
+     172,
+     176,
+     178,
+     179
+    ],
+    "why": "exactly these squares' right or top clearance is below the drop 8.75703392041e-13"
+   },
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [
+     [
+      39,
+      "bottom"
+     ],
+     [
+      123,
+      "left"
+     ]
+    ],
+    "wall_outside": [
+     [
+      32,
+      "top"
+     ],
+     [
+      107,
+      "right"
+     ],
+     [
+      108,
+      "right"
+     ],
+     [
+      109,
+      "right"
+     ],
+     [
+      110,
+      "right"
+     ],
+     [
+      111,
+      "right"
+     ],
+     [
+      112,
+      "right"
+     ],
+     [
+      113,
+      "right"
+     ],
+     [
+      114,
+      "right"
+     ],
+     [
+      115,
+      "right"
+     ],
+     [
+      116,
+      "right"
+     ],
+     [
+      117,
+      "right"
+     ],
+     [
+      118,
+      "right"
+     ],
+     [
+      140,
+      "top"
+     ],
+     [
+      149,
+      "top"
+     ],
+     [
+      156,
+      "top"
+     ],
+     [
+      167,
+      "top"
+     ],
+     [
+      172,
+      "top"
+     ],
+     [
+      176,
+      "top"
+     ],
+     [
+      178,
+      "top"
+     ],
+     [
+      179,
+      "top"
+     ]
+    ],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pair_classes_B": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pairs_decided": 0,
+    "walls_decided": 179,
+    "inside_area_not_1": [
+     32,
+     107,
+     108,
+     109,
+     110,
+     111,
+     112,
+     113,
+     114,
+     115,
+     116,
+     117,
+     118,
+     140,
+     149,
+     156,
+     167,
+     172,
+     176,
+     178,
+     179
+    ],
+    "squares_outside": [
+     32,
+     107,
+     108,
+     109,
+     110,
+     111,
+     112,
+     113,
+     114,
+     115,
+     116,
+     117,
+     118,
+     140,
+     149,
+     156,
+     167,
+     172,
+     176,
+     178,
+     179
+    ]
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S1d",
+   "stated": {
+    "verdict": "ACCEPT",
+    "wall_contacts": [
+     [
+      39,
+      "bottom"
+     ],
+     [
+      123,
+      "left"
+     ]
+    ],
+    "wall_outside": []
+   },
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [
+     [
+      39,
+      "bottom"
+     ],
+     [
+      123,
+      "left"
+     ]
+    ],
+    "wall_outside": [],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pair_classes_B": {
+     "clear": 0,
+     "contact": 0,
+     "overlap": 0
+    },
+    "pairs_decided": 0,
+    "walls_decided": 179,
+    "inside_area_not_1": []
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S4c",
+   "stated": {
+    "verdict": "ACCEPT",
+    "touching_pairs": [
+     [
+      14,
+      15
+     ]
+    ],
+    "overlapping_pairs": [],
+    "margin": "0",
+    "wall_outside": [],
+    "wall_contacts_of_moved": [],
+    "why": "the move, 2.03343e-13 in length, is below every other margin of square 15 (least 2.08127787066e-13)"
+   },
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [],
+    "wall_outside": [],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [],
+    "touching_pairs": [
+     [
+      14,
+      15
+     ]
+    ],
+    "pair_classes_A": {
+     "clear": 177,
+     "contact": 1,
+     "overlap": 0
+    },
+    "pair_classes_B": {
+     "clear": 177,
+     "contact": 1,
+     "overlap": 0
+    },
+    "pairs_decided": 178,
+    "walls_decided": 1,
+    "margins_sha256": "0d59d94202c6a23f600575633ed168cd1b1cef297e67d08d2146ed4bdd1a2a68",
+    "inside_area_not_1": [],
+    "t_matches_plan": true
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S4p",
+   "stated": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      14,
+      15
+     ]
+    ],
+    "margin": "-1e-30",
+    "touching_pairs": [],
+    "wall_outside": []
+   },
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_A": [],
+    "not_unit_B": [],
+    "senses_agree": true,
+    "wall_contacts": [],
+    "wall_outside": [],
+    "wall_disagreements": [],
+    "pair_disagreements": [],
+    "overlapping_pairs": [
+     {
+      "pair": [
+       14,
+       15
+      ],
+      "margin": "-1/1000000000000000000000000000000",
+      "area": "~5.30516476972e-47"
+     }
+    ],
+    "touching_pairs": [],
+    "pair_classes_A": {
+     "clear": 177,
+     "contact": 0,
+     "overlap": 1
+    },
+    "pair_classes_B": {
+     "clear": 177,
+     "contact": 0,
+     "overlap": 1
+    },
+    "pairs_decided": 178,
+    "walls_decided": 1,
+    "margins_sha256": "f8eedf33d8a04a8d97369cdac763501ab3d7a01e749898cfb5464c3094c16141",
+    "inside_area_not_1": [],
+    "t_matches_plan": true
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S5",
+   "stated": {
+    "at_contact": "contact by both, margin exactly 0",
+    "past": "overlap by both, margin exactly -1e-30",
+    "pairs": 389,
+    "why": "every active piece decreases at contact"
+   },
+   "observed": {
+    "pairs": 389,
+    "as_stated": 389,
+    "not_as_stated": []
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S6",
+   "stated": {
+    "at": "contact with that wall by both",
+    "past": "outside that wall by both",
+    "squares": 179,
+    "ties": []
+   },
+   "observed": {
+    "squares": 179,
+    "as_stated": 179,
+    "not_as_stated": []
+   },
+   "as_stated": true
+  }
+ ],
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "cpu_seconds": 36.5
+}
