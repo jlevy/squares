@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 215
+version: 217
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -79,10 +79,12 @@ child_order_hints:
   - is-01m74kx8rt4r1t7p0masm8gw9x
   - is-01m74mkwmxnkr1qseky1m2ddt0
   - is-01m75zme4v3ez66chn8cafb8be
+  - is-01m7669mgkdahg27hv3qp6dckm
+  - is-01m7669n9m9w2c38r80q0ggf50
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-11T19:55:20.209Z
+updated_at: 2026-11-11T20:55:22.675Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
