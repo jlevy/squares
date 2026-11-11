@@ -29928,9 +29928,10 @@ issues:
         (think-ruu2); T-285 is held at V0/C1 until the answer, and the same answer settles the
         held solve at 172 (think-wju3).
     close_when: >-
-      T-285 is on main, held at V0/C1, and the reply on main says what was retained, replayed
-      and reviewed, that the gain is 1.0399 of the margin T-284 carries through the L step, and
-      that the owner's RV-3 answer decides it.
+      The owner has answered RV-3 (think-ruu2), the record follows the answer for T-285
+      (withdrawn, or entered and adopted at 199), and the reply on main says so, with what was
+      retained, replayed and reviewed and that the gain is 1.0399 of the margin T-284 carries
+      through the L step.
     notes: >-
       Read on 10 November 2026 from main f54ad1048. The commit 702c7af precedes the issue by 9
       minutes; the issue carries the intake label and has no comments. The witness the issue calls
@@ -29992,9 +29993,10 @@ issues:
         is the owner's RV-3 (think-ruu2); T-286 is held at V0/C1 until the answer, as T-285 is,
         and the same answer settles the held solve at 172 (think-wju3).
     close_when: >-
-      T-286 is on main, held at V0/C1, and the reply on main says what was retained, replayed
-      and reviewed, that the gain is 1.0399 of T-282's own contraction margin, and that the
-      owner's RV-3 answer decides it.
+      The owner has answered RV-3 (think-ruu2), the record follows the answer for T-286
+      (withdrawn, or entered and adopted at 172), and the reply on main says so, with what was
+      retained, replayed and reviewed and that the gain is 1.0399 of T-282's own contraction
+      margin.
     notes: >-
       Read on 11 November 2026 from main f54ad1048. The commit c4e65d0 precedes the issue by 47
       seconds; 8c0de9d, 6 minutes earlier, first published n172/ at 1.4e-99 above the same root,
@@ -30002,5 +30004,7 @@ issues:
       T-098 at 206 as the same type of result: T-098 registered Evan Daniel's exact optima of 48
       known-best packings, 3.5e-13 to 5.0e-11 below each printed side, on 5 October 2026, before
       RV-3 was raised; the owner has not answered RV-3. The four commits between #939's pin
-      and this one add certificates at 37 counts above 324, which no issue reports here; they are
-      left for triage.
+      and this one add certificates at 37 counts above 324. The author's #941 reports 15 of them,
+      at 71da0d5 (above324/), and #942 reports 16, at a9486ed (above324_refined/); both are
+      triaged on think-cen3. No issue reports the six counts a0c4fc8 adds (597, 754, 864, 865,
+      869 and 991), which are left for triage.

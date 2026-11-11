@@ -12651,7 +12651,9 @@ sources:
     RV-3 (think-ruu2); the house stays T-282. The ledger of 11 November for this lane
     (campaign/issue-intake/upper-bounds-939-946-20261111) records it as a refinement of T-282's
     packing. The four commits between the two pins of this lane add certificates at 37 counts
-    above 324 under above324/ and above324_refined/, outside this scope and left for triage.
+    above 324, outside this scope: #941 reports the 15 under above324/ and #942 the 16 under
+    above324_refined/, both triaged on think-cen3, and no issue reports a0c4fc8's six, which are
+    left for triage.
 - id: yim-certificates-2026-11-09
   title: Kaelan Yim's certificates at vitamoon/vitamoon ac14112, watched publications with no issue
   role: source-repository

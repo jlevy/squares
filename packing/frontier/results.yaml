@@ -42554,10 +42554,10 @@ results:
 
       The issue says the side is less than 1e-98 above the real root near 14.6147 of 62x^5 -
       4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, the arrangement's local optimum by
-      a numerical solution of the optimality conditions to 130 digits, in which all 734
-      load-bearing or forced contacts close exactly and all other gaps stay open; that the
-      polynomial was identified numerically from 108 digits; and that local optimality has no
-      formal proof.
+      a numerical solution of the optimality conditions to 130 digits; that the polynomial was
+      identified numerically from 108 digits; and that local optimality has no formal proof. The
+      source's README (n199/README.md) adds that in that solution all 734 load-bearing or forced
+      contacts close exactly and all other gaps stay open.
 
       Checked here exactly: the quintic is irreducible over Q, exactly one of its three real roots
       lies in [S - 1e-98, S], and S lies 1.36e-99 above it. The certificate proves s(199) <= S and
@@ -42684,10 +42684,14 @@ results:
       root less one, consistent with the source's local-optimality claim.
 
       The stage 4 review observes (F4) that the gain lies 1.0107e-13 below the contracted
-      predecessor, at the same 12-place print as it and as the root. So under option D of the
-      RV-3 question as put to the owner, no certificate of this arrangement could count at 199
-      or at 172, since its optimum prints as the contracted house does; under options A to C it
-      counts. The record states this and decides nothing.
+      predecessor, at the same 12-place print as it and as the root. Under a rule that counts a
+      re-solve only if its 12-place print falls below the predecessor contracted to first
+      contact, through any construction, no certificate of this arrangement could count at 199
+      or at 172, since its optimum prints as the contracted house does. Under a rule that counts
+      any gain, a gain across the predecessor's own print, or a gain beyond its contraction
+      margin, it counts; a case-by-case judgment of whether the 4% beyond the margin is padding
+      could go either way. The question and its options are think-ruu2's (RV-3). The record
+      states this and decides nothing.
 
       The implied s(172) bound, this certificate's first 172 squares at S - 1, is not claimed
       here and not registered from this entry: it is think-wju3's held solve with less padding.
@@ -42901,10 +42905,14 @@ results:
       exact fractions beside them give 1.561469e-319 and 1.0e-320 (the review's F12).
 
       The stage 4 review observes (F4) that the gain lies 1.0107e-13 below the contracted
-      predecessor, at the same 12-place print as it and as the root. So under option D of the
-      RV-3 question as put to the owner, no certificate of this arrangement could count at 172
-      or at 199, since its optimum prints as the contracted house does; under options A to C it
-      counts. The record states this and decides nothing.
+      predecessor, at the same 12-place print as it and as the root. Under a rule that counts a
+      re-solve only if its 12-place print falls below the predecessor contracted to first
+      contact, through any construction, no certificate of this arrangement could count at 172
+      or at 199, since its optimum prints as the contracted house does. Under a rule that counts
+      any gain, a gain across the predecessor's own print, or a gain beyond its contraction
+      margin, it counts; a case-by-case judgment of whether the 4% beyond the margin is padding
+      could go either way. The question and its options are think-ruu2's (RV-3). The record
+      states this and decides nothing.
 
       The source's own checker was not run here. The two maintained routes share certificate
       parsing (the readers written for #939's files), half-angle conversion, Fraction arithmetic

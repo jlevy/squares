@@ -31744,9 +31744,13 @@ occurrences:
   end: 9
   label: de Winter
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s199 upper bound 2026-11-09]'
@@ -31756,9 +31760,13 @@ occurrences:
   end: 9
   label: de Winter
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s199 upper bound 2026-11-09]'
@@ -31804,9 +31812,13 @@ occurrences:
   end: 9
   label: de Winter
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s172 upper bound 2026-11-10]'
@@ -31816,9 +31828,13 @@ occurrences:
   end: 9
   label: de Winter
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s172 upper bound 2026-11-10]'

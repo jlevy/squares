@@ -33,11 +33,12 @@ not touched.
     rows, with the side and the coefficients of a quintic.
 - **The quintic.** The issue says the side is less than 10⁻⁹⁸ above the real root near
   14.6147 of 62x⁵ − 4426x⁴ + 125017x³ − 1746146x² + 12052670x − 32855154, and the README
-  says 1.4 × 10⁻⁹⁹. It calls that root the arrangement’s local optimum. The basis is a
-  numerical solution of the optimality conditions to 130 digits, in which “all 734
-  load-bearing or forced contacts close exactly and all other gaps stay open”. The
-  polynomial was identified numerically from 108 digits and reproduces the side to 129.
-  Local optimality has no formal proof, as the issue says.
+  says 1.4 × 10⁻⁹⁹. The issue calls that root the arrangement’s local optimum, by a
+  numerical solution of the optimality conditions to 130 digits. The polynomial was
+  identified numerically from 108 digits and reproduces the side to 129. Local optimality
+  has no formal proof, as the issue says. The source’s README (`n199/README.md`) adds
+  that in that solution “all 734 load-bearing or forced contacts close exactly and all
+  other gaps stay open”.
 - **The construction.** A 172-square core and an L of 27 axis-aligned squares, a row of
   14 and a column of 13: the step s(n + 2⌊s⌋ + 1) ≤ s(n) + 1. The core is the arrangement
   of [#935](https://github.com/jlevy/squares/issues/935) (T-282: Evan Daniel’s packing,
@@ -212,15 +213,20 @@ under [measure/](measure/):
     the owner’s RV-3 (think-ruu2). Its answer settles this entry and the held solve at
     172 alike.
   - The stage 4 review observes (F4) that the gain lies 1.0107 × 10⁻¹³ below the
-    contracted predecessor, at its 12-place print and the root’s. So under option D of
-    the question as put to the owner, no certificate of this arrangement could count,
-    since its optimum prints as the contracted house does. Under options A to C it
-    counts.
+    contracted predecessor, at its 12-place print and the root’s.
+  - Under a rule that counts a re-solve only if its 12-place print falls below the
+    predecessor contracted to first contact, through any construction, no certificate of
+    this arrangement could count, since its optimum prints as the contracted house does.
+  - Under a rule that counts any gain, a gain across the predecessor’s own print, or a
+    gain beyond its contraction margin, it counts. A case-by-case judgment of whether the
+    4% beyond the margin is padding could go either way.
+  - The question and its options are think-ruu2’s (RV-3). The record decides nothing.
 - **Nothing at 172 is registered from this packet.** The certificate’s first 172 squares
   at S − 1 prove s(172) ≤ S − 1, 2.63 × 10⁻¹² below T-282. That bound is not claimed here,
   and it is think-wju3’s held solve with less padding. #946 reported the same core a day
   later, 1.36 × 10⁻⁹⁹ lower, and T-286 records it, held alike
   ([de-winter-s172-upper-bound-2026-11-10](../de-winter-s172-upper-bound-2026-11-10/README.md)).
+
 ## Stage 4 Review
 
 The stage 4 mathematical review of 11 November 2026

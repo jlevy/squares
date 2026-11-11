@@ -20,6 +20,11 @@ review did not compare them with the packets’ `source/` copies.
 | `controls-plan.json`, `controls-freeze.json` | the 21 controls and their stated outcomes | 06:22:38Z |
 | `findings-freeze.json` | the review’s text before the import lane was read | 06:38:01Z |
 
+`review-2026-11-11-de-winter-939-946.frozen.md` is that text, kept by the records lane:
+490 lines, 30,063 bytes, SHA-256 `51a61287…`, the digest `findings-freeze.json` names.
+These are the bytes of the review branch’s commit `5ef8151fb` and of this branch’s
+cherry-pick `2fb7396b1`.
+
 ## Programs and Receipts
 
 | Program | Receipt |

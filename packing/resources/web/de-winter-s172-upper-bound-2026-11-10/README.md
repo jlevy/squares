@@ -10,8 +10,12 @@ The folder `n172/` first appeared at `8c0de9d` (21:20:44Z), with a certificate 1
 above the same root; `c4e65d0` overwrote it, and that version is pinned by its commit
 alone. The four commits between this source’s pin for #939 (`702c7af`, the
 [s199 packet](../de-winter-s199-upper-bound-2026-11-09/README.md)) and these add
-certificates at 37 counts above 324 under `above324/` and `above324_refined/`. They are
-outside this scope and left for triage.
+certificates at 37 counts above 324 under `above324/` and `above324_refined/`. The
+author’s [#941](https://github.com/jlevy/squares/issues/941) reports 15 of them, at
+`71da0d5` (`above324/`), and [#942](https://github.com/jlevy/squares/issues/942) reports
+16, at `a9486ed` (`above324_refined/`); both are triaged on think-cen3. No issue reports
+the six counts `a0c4fc8` adds (597, 754, 864, 865, 869 and 991), which are left for
+triage. None of the 37 is in this scope or imported here.
 
 Intake lane L78 (think-2h88) retained it, replayed it and registered it on 11 November
 2026 as **T-286, held at V0/C1** for the owner’s RV-3 (think-ruu2), beside #939’s T-285.
@@ -135,9 +139,13 @@ its predecessor’s own contraction margin is a new result is the owner’s RV-3
 (think-wju3).
 
 The stage 4 review observes (F4) that the gain lies 1.0107 × 10⁻¹³ below T-282
-contracted, at its 12-place print and the root’s. So under option D of the question as
-put to the owner, no certificate of this arrangement could count, since its optimum
-prints as the contracted house does. Under options A to C it counts.
+contracted, at its 12-place print and the root’s. Under a rule that counts a re-solve
+only if its 12-place print falls below the predecessor contracted to first contact,
+through any construction, no certificate of this arrangement could count, since its
+optimum prints as the contracted house does. Under a rule that counts any gain, a gain
+across the predecessor’s own print, or a gain beyond its contraction margin, it counts. A
+case-by-case judgment of whether the 4% beyond the margin is padding could go either
+way. The question and its options are think-ruu2’s (RV-3); the record decides nothing.
 
 ## Stage 4 Review
 
