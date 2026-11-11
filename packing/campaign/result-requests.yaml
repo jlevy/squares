@@ -31456,7 +31456,8 @@ issues:
     title: 's(179) ≤ 13.881367160110: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-11'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -31487,7 +31488,7 @@ issues:
       13.883795490524 (kirilltym), is above it; the side-only leaderboard entry it quotes and
       states first, 13.880960371556 (team Nevska, 7 November), 4.07e-4 below this side, is
       unpublished and states no packing, so it is context only.
-    read_through: '2026-11-11T21:18:29Z'
+    read_through: '2026-11-11T22:41:37Z'
     results:
     - key: n179-band
       claim: >-
@@ -31506,8 +31507,31 @@ issues:
     - think-ruu2
     - think-ikku
     - think-tj4o
+    - think-71uq
+    - think-mdxq
+    - think-89i7
     answer_bead: think-f65n
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/954#issuecomment-6808834300
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n179-band
+        id: T-291
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n179-band
+        id: E-ozden-954-exact-feasibility
+        status: confirmed
+      - result: n179-band
+        id: E-ozden-954-review-exact-feasibility
+        status: confirmed
+      - result: n179-band
+        id: E-ozden-954-certificate-report
+        status: reviewed
     close_when: >-
       T-291 is on main at V3/C3 as the house at 179, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -31553,3 +31577,95 @@ issues:
       bound. #959 enters the record with triage pending under its own import bead and T-NNN;
       T-291 is not replaced, and the house at 179 moves only when #959's certificate is
       replayed, reviewed and adopted under the house rule.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6808834300, posted at
+      22:41:37Z), after #956 merged as b5b12c206 at 22:20:09Z with the import, the replay and an
+      independent review, registering T-291 and adopting it as the house at 179; recorded in
+      intake lane L112. It states T-291 at V3/C3, confirmed and current, reproduced with the
+      author's own checker and re-verified by an independent implementation;
+      E-ozden-954-exact-feasibility and E-ozden-954-review-exact-feasibility, confirmed; and
+      E-ozden-954-certificate-report, reviewed, the issue's report recorded as the source's own.
+      It says that T-291, scored S3, became the house at 179 on 11 November under the house
+      rule in place of T-174, Nate Chaoweeraprasit's packing (itsnaka), improved by Siddharth
+      Gupta and PingYou Ltd, which stays a verified bound at V3/C3 and keeps its certificate as
+      history; T-174 is named only as the house replaced, is not this issue's result and is not
+      recorded under reported. On the print it says that the exact side, a fraction of 159
+      digits over 158, is 13.8813671601098758 rounded up at 16 places; that the issue's
+      13.881367160110 is that side rounded up at 12 places, so it bounds s(179), and the stated
+      improvement, 2.428e-03 (relative 1.75e-04), is the exact gap to T-174 rounded; and that
+      the README's 13.881367160109875… is the side's 15-place floor, right before an ellipsis.
+      It says what was checked: bd262d8, the repository's one commit, retained in the packet
+      ozden-s179-upper-bound-2026-11-11, the decimal pose included, with the SHA-256s stated;
+      both maintained exact routes accepting the witness over every wall and all 15,931 pairs
+      and refusing its duplicate-square and outside-container controls, 3 jobs and 95,586 pair
+      decisions, three squares touching the box and every pair clearing by at least 2.03e-13;
+      the first route being the packing-witness verify the author ran, so on it the replay
+      reproduces his own check, and the second the independent rational corner checker, which
+      shares the corner reader and the separating-axis method in Fraction arithmetic but no
+      verification code, neither route independent of the rounding this repository's
+      packing-witness promote made (F11); the sharp controls accepted at exact contact and
+      refused 1e-30 past it, as stated in advance; and sqcheck.py byte-identical to the copy the
+      s232 packet retains, not run here. It passes on the independent review, a Claude agent at
+      the strong tier, blind to the import lane until its findings were frozen, an AI review and
+      not a human one, which accepted the certificate with findings, all notes and none
+      blocking, and scored it S3: its clean-room checker deciding every square, wall and pair
+      again by two methods that share only the reader, the least pair margin 2.03083381521e-13
+      at squares 14 and 15; its 17 controls, every one as stated; the squares accepted in the
+      box of side 13.881367160110, so the certificate proves the claim as printed, while at the
+      12-place floor, 13.881367160109, 21 squares cross the right or top wall (F3); and the gain
+      real, T-174's certificate having a touching pair, squares 119 and 122, so none of the
+      2.43e-03 is padding and RV-3 does not reach it. It says that the review checked the
+      issue's statements about the promotion and each holds: squares 123, 39 and 117 touch the
+      left, bottom and right walls, the other 36 square–wall clearances below 1e-12 at most
+      4.29e-14; with center_dilation '1' the certificate is the decimal pose translated by about
+      1.04e-13 toward the corner, so the pair margins are the pose's own; and source.path and
+      certificate.replay name files the repository holds. It says that the packing is a new
+      arrangement relative to T-174's, the optimal assignment under the best symmetry moving 47
+      squares beyond a tenth (largest 0.885) and turning 58, by up to 44.36°, so the record
+      credits the author as its finder and T-174's holders as the record it improves, not as its
+      base (F9); and that the stated seed lies within 0.05 of 28 of the 37 tilted squares, each
+      turned by less than a degree, under the identity of the 70 box and none of its other seven
+      symmetries, which supports it strongly (F8). It says that both strong regularizers ran on
+      the new house, the case drawing 179 with Evan Daniel's same-side view; that his
+      regularizer reached a certified KKT point 2.78e-12 below the side, 1.06 times the
+      certificate's contraction margin of 2.62e-12, held as a candidate and not registered, its
+      registration waiting on RV-3 (think-ruu2 and think-ikku), as at 156, 172, 180, 199, 268,
+      269 and 270, and nothing claimed for it yet; and that the rigidity screen finds 74 of the
+      179 squares free to slide, against 7 of T-174's, which changes nothing about the bound,
+      since the issue claims no rigidity. It passes on the packet, the whole tree of bd262d8,
+      eleven files, four of them pinned by digest or against byte-identical copies already kept;
+      and on the licence, CC BY 4.0 and MIT, byte for byte the LICENSE.md of the author's lab's
+      earlier repositories, with Evan Daniel's MIT notice byte for byte the one retained in
+      evand-issue845-2026-10-29. On the seed band's licence it says: "The issue names the
+      registry's n = 70 witness as the band's source (question 4 below asks which coordinates
+      were used)"; that witness is PingYou Ltd's PR 574 algebraic supplement, a release with no
+      licence file that this repository keeps in derived-only form, and whether a packing seeded
+      from it needs a notice of its own is an open question with the project (think-71uq; the
+      review named think-mdxq, which closed on 4 November), which holds nothing and asks nothing
+      of the author. It passes on the credit, Ozden after Xu, Daniel, PingYou, Levy, Daniel also
+      credited for the ALM+SLP quench and T-174's holders as the record it improves, the atlas
+      posters holding the author's name off their credit block at 179 until the next
+      infographics cut (think-tj4o). It reads the Kaggle sides: the per-puzzle packing the issue
+      quotes, 13.883795490524 (kirilltym), is above T-291, and the side-only entry
+      13.880960371556 (team Nevska, 7 November), 4.07e-4 below its side, states no packing and
+      is not counted, the review finding it exactly the registry's s(70) + 5 at 12 places. It
+      asks the review's six questions: whether the final repair scaling was about 2e-13 rather
+      than 1e-13 (F5); whether the lineage counts use T-174's packing reflected top to bottom and
+      set against the upper-left corner, and whether the issue would name that convention (F6);
+      whether "two such bands" at 207 means the 70 band cut where the two meet (F7); whether the
+      seed took the 70 band from the registry's witness or from Ryan Xu's or Evan Daniel's
+      published coordinates; which replay is intended, certificate.replay or the README's rerun,
+      from which directory, and whether the schema path would name this repository's file
+      (F11); and whether the band-design search and its seeds will be published. The questions
+      are informational and hold nothing open. It says that the request to adopt #959 is carried
+      by #959 itself, so nothing the author asked for here is queued. The issue was closed as
+      completed at 22:41:42Z.
+
+      On #959 the final reply says that the author's comment of 21:18Z reports it at
+      13.880960371559, 4.07e-4 below this side, from the same method on a later batch; that it
+      is being imported and reviewed as its own result, under its own bead (think-89i7), with a
+      register entry of its own, and is answered there; and that T-291 is not replaced in place:
+      the house at 179 moves only when #959's certificate has been replayed here, reviewed and
+      adopted under the house rule, and until then T-291 is the house. Either way this issue's
+      certificate stays a valid bound, verified at V3/C3. #959's result is not this issue's and
+      is not recorded under reported here.
