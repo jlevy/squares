@@ -1,0 +1,28 @@
+{
+ "program": "l108_selftest.py",
+ "lane": "L108",
+ "python": "3.14.7",
+ "cases": 8453,
+ "failures": [],
+ "failure_count": 0,
+ "broken_method_a_zero_margin_clear": {
+  "cases": 8453,
+  "failure_count": 832,
+  "first": [
+   "edge d=0 ccw0/ccw0 pq: class A clear != contact",
+   "edge d=0 ccw0/ccw0 qp: class A clear != contact",
+   "edge d=0 ccw0/ccw2 pq: class A clear != contact"
+  ]
+ },
+ "broken_method_b_open_half_planes": {
+  "cases": 8453,
+  "failure_count": 908,
+  "first": [
+   "edge d=0 ccw0/ccw0 pq: class B clear != contact",
+   "edge d=0 ccw0/ccw0 qp: class B clear != contact",
+   "edge d=0 ccw0/ccw2 pq: class B clear != contact"
+  ]
+ },
+ "verdict": "PASSED",
+ "cpu_seconds": 2.6
+}
