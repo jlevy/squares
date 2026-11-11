@@ -5,7 +5,7 @@ title: "Decide: does a D6 deletion bound get a row (all 36, or where an issue cl
 kind: task
 status: open
 priority: 2
-version: 10
+version: 11
 labels:
   - decision
   - result-import
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m5pjxq31vpw03t0emgwnvhfe
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T15:28:13.698Z
-updated_at: 2026-11-11T15:36:34.008Z
+updated_at: 2026-11-11T18:07:48.420Z
 ---
 **The question.** The owner answered D6 on 23 October (think-f2io) by selecting the option labelled "Yes, an earlier report (Recommended)". The rest is the question the coordinator asked, not the owner's words: as coord-intake-1023 relayed it, the question was "a side obtained by deleting a square from a neighbour's certificate (e.g. Couzo's 985 from his 986)", and the selected option's description read "A published deletion bound counts like any stated bound; a later equal or higher side is not recorded". The owner-answers branch (PR #754) applies that: each such bound is recorded in the walk, and a later equal or higher side is not recorded (#732's 985). It gives the bound no row of its own, which is think-f2io's recommendation ("no rows, except where an issue claims the count"), not the owner's word. Three questions follow:
 1. Does a one-square deletion bound get a row of its own, as a stated bound with a certificate has? The selected option's description, the coordinator's words, said it "counts like any stated bound".
@@ -59,3 +59,5 @@ In #754 the 36 one-square bounds are settled (`beyond_horizon_replay.DELETION_AN
 blocked_on: none
 
 2026-11-11 bold-ritchie-l90 (think-cen3, PR #952): one more issue-claimed one-square deletion bound, at 809. Joost de Winter's #941 claims s(809) <= 28.9079170470, and its certificate above324/n0809.cert (JoostdeWinter/square-packing d3a020e, retained at 71da0d5) is the 810 certificate less its last square, at 810's side, claimed in the same issue as the 810 (the L96 stage 4 review's F5). Treated as 743, 798, 855 and 985 are: no row; the row of couzo-issue763-2026-10-23 (28.908036098650) stays current at 809, the de-winter-issue941-2026-11-10 declaration requests no row there, and the ledger upper-bounds-941-942-20261111 records the claim with a note naming this bead. Both maintained routes and the review accept the certificate. Unlike the four, the bound and the claim arrive in one report at one time, so no earlier report holds the count. Nothing here decides the question.
+
+2026-11-11 coordinator (senior review L97 of #952, N3): unlike 743/798/855/985, whose held bounds are index deletions with no file of their own, 809 (de Winter #941, n0809.cert at 71da0d5) is the issue's own certificate file, so it is also a stated bound with a certificate (question 1).
