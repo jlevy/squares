@@ -1,0 +1,294 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/941",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter issue 941 2026-11-10]",
+  "report_evidence": "E-de-winter-941-certificate-report",
+  "receipt_format": "dewinter-941-exact-replay-v1",
+  "witness_prefix": "W-dewinter-941-n",
+  "claim_limitations": "Complete JoostdeWinter/square-packing 71da0d5 above324/ rational centre/half-angle certificates in Evan Daniel's format with two comment lines, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-11",
+  "read_at_main": "8afdabe8fef2c308d6352a48e610924d0c6edb05",
+  "certificates": [
+    {
+      "n": 413,
+      "path": "above324/n0413.cert",
+      "format": "evand-cert",
+      "offered": "20.8239520077",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 494,
+      "path": "above324/n0494.cert",
+      "format": "evand-cert",
+      "offered": "22.7365988643",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 539,
+      "path": "above324/n0539.cert",
+      "format": "evand-cert",
+      "offered": "23.7365988643",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 543,
+      "path": "above324/n0543.cert",
+      "format": "evand-cert",
+      "offered": "23.8024287170",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 547,
+      "path": "above324/n0547.cert",
+      "format": "evand-cert",
+      "offered": "23.8787301198",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 590,
+      "path": "above324/n0590.cert",
+      "format": "evand-cert",
+      "offered": "24.8024287170",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 738,
+      "path": "above324/n0738.cert",
+      "format": "evand-cert",
+      "offered": "27.6912062515",
+      "first_committed": "2026-11-10T06:15:17Z"
+    },
+    {
+      "n": 739,
+      "path": "above324/n0739.cert",
+      "format": "evand-cert",
+      "offered": "27.6912835939",
+      "first_committed": "2026-11-10T06:15:17Z"
+    },
+    {
+      "n": 753,
+      "path": "above324/n0753.cert",
+      "format": "evand-cert",
+      "offered": "27.9026514302",
+      "first_committed": "2026-11-10T06:15:17Z"
+    },
+    {
+      "n": 794,
+      "path": "above324/n0794.cert",
+      "format": "evand-cert",
+      "offered": "28.6912835939",
+      "first_committed": "2026-11-10T06:15:17Z"
+    },
+    {
+      "n": 809,
+      "path": "above324/n0809.cert",
+      "format": "evand-cert",
+      "offered": "28.9079170470",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 810,
+      "path": "above324/n0810.cert",
+      "format": "evand-cert",
+      "offered": "28.9079170470",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 851,
+      "path": "above324/n0851.cert",
+      "format": "evand-cert",
+      "offered": "29.6912835939",
+      "first_committed": "2026-11-10T06:15:17Z"
+    },
+    {
+      "n": 867,
+      "path": "above324/n0867.cert",
+      "format": "evand-cert",
+      "offered": "29.9079170470",
+      "first_committed": "2026-11-09T23:59:23Z"
+    },
+    {
+      "n": 910,
+      "path": "above324/n0910.cert",
+      "format": "evand-cert",
+      "offered": "30.6912835939",
+      "first_committed": "2026-11-10T06:15:17Z"
+    }
+  ],
+  "requested": [
+    413,
+    494,
+    539,
+    543,
+    547,
+    590,
+    738,
+    739,
+    753,
+    794,
+    809,
+    810,
+    851,
+    867,
+    910
+  ],
+  "replayed": [
+    413,
+    494,
+    539,
+    543,
+    547,
+    590,
+    738,
+    739,
+    753,
+    794,
+    809,
+    810,
+    851,
+    867,
+    910
+  ],
+  "houses": [],
+  "pending": [
+    {
+      "n": 413,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "20.824764038662",
+      "rounding": "up"
+    },
+    {
+      "n": 494,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "22.737532875219",
+      "rounding": "up"
+    },
+    {
+      "n": 539,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Kirill Tymchishin",
+      "printed": "23.736669673811",
+      "rounding": "up"
+    },
+    {
+      "n": 543,
+      "report": "tymchishin-22-3662-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Kirill Tymchishin",
+      "printed": "23.803053261145",
+      "rounding": "up"
+    },
+    {
+      "n": 547,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "23.879127653315",
+      "rounding": "up"
+    },
+    {
+      "n": 590,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "24.802527132871",
+      "rounding": "up"
+    },
+    {
+      "n": 738,
+      "report": "couzo-43f666c-2026-10-24",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after aqibrazadev",
+      "printed": "27.691283629524",
+      "rounding": "up"
+    },
+    {
+      "n": 739,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "27.691450272099",
+      "rounding": "up"
+    },
+    {
+      "n": 753,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Kirill Tymchishin",
+      "printed": "27.907984230435",
+      "rounding": "up"
+    },
+    {
+      "n": 794,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Kirill Tymchishin",
+      "printed": "28.691448980966",
+      "rounding": "up"
+    },
+    {
+      "n": 809,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "28.908036098650",
+      "rounding": "up"
+    },
+    {
+      "n": 810,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "28.910451045451",
+      "rounding": "up"
+    },
+    {
+      "n": 851,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Kirill Tymchishin",
+      "printed": "29.691448975560",
+      "rounding": "up"
+    },
+    {
+      "n": 867,
+      "report": "couzo-43f666c-2026-10-24",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "29.908036097699",
+      "rounding": "up"
+    },
+    {
+      "n": 910,
+      "report": "couzo-issue763-2026-10-23-recipes",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, an L-border construction on his certificate n851.cert, after Kirill Tymchishin",
+      "printed": "30.691448975560",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Joost de Winter's fifteen beyond-horizon certificates at 413 to 910, JoostdeWinter/square-packing 71da0d5 (nine first committed at d3a020e), issue 941",
+    "headline": "De Winter's sub-windows of Couzo's larger packings, with borders and a deletion, certified exactly below the rows at fifteen counts from 413 to 910",
+    "significance": 2,
+    "source_checks": "The author reports that his verify_cert.py (fractions.Fraction: containment and a separating-axis test on all pairs with centres closer than sqrt(2)) accepts all fifteen certificates, and that a second script with separate code checked the same packings in the same arithmetic before the files were written; the issue says the checkers share one author, the separating-axis test and Fraction, and that the certificates were not replayed with this repository's checkers. It says the sides at 413, 543 and 547 lie less than 1e-43 above the local optimum of their arrangements and those at 494, 738, 739, 753 and 810 about 5e-9 above the numerical optimum, by a numerical solution of the optimality conditions to 65 digits, with no formal proof. Those are the source's statements. No source program ran here.",
+    "credit": "Credit Joost de Winter (Delft University of Technology), whose sub-window search found square windows of Francisco Couzo's packings at 544, 539, 590, 696, 851 and 868 (issue 763, franciscouzo/square-packing 43f666c) that hold more squares than the best recorded packing of the same side, re-optimized locally, with borders of axis-aligned squares and one deletion, as the issue says; the issue credits the source arrangements to Couzo. The search, optimization, certificates and checks were produced with Claude (Anthropic) under Joost de Winter's direction.",
+    "next_rung": "Record each count as a beyond-horizon row in report order, superseding the row it is below; beyond the case corpus, so no register entry records them.",
+    "bead": "think-cen3",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "de Winter after Couzo, Levy",
+      "short_credit": "de Winter after Couzo et al.",
+      "note": "Fifteen exact rational certificates beyond the case corpus at 413 to 910, in JoostdeWinter/square-packing above324/ at 71da0d56fd91b7061addca2a728ee72ec9728b0b, nine of them first committed at d3a020e: square sub-windows of Francisco Couzo's packings at larger counts, re-optimized, with borders of axis-aligned squares and one deletion. Beyond-horizon rows below Couzo's and Kirill Tymchishin's at those counts. Retained under the author's MIT licence. Claude assistance disclosed. No local or global optimality claim is replayed."
+    }
+  }
+}

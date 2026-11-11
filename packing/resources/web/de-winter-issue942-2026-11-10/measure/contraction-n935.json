@@ -1,0 +1,33 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 935,
+ "certificate": {
+  "label": "couzo-964ee2b",
+  "input": "evand-cert",
+  "path": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n935.cert",
+  "sha256": "3278f2bc22da4ba6705d2d7092b04b91423e294b06c341e780793921d1c70c43"
+ },
+ "side": "5931724681599557786191419461/191381924566750000000000000",
+ "lambda_star": "7090254767868540320020331400000000000000/7090254767870034437516159399635349684807",
+ "one_minus_lambda_star": "2.107283e-13",
+ "binding_pair": [
+  464,
+  485
+ ],
+ "contracted_side": "1682297568215785059626451083575063555603/54277864125741155712896437966650129469",
+ "margin": "85794604385384548303522161540514275829027/13569466031435288928224109491662532367250000000000000",
+ "margin_float": "6.322622e-12",
+ "against": {
+  "certificate": {
+   "label": "DE-WINTER",
+   "input": "packet",
+   "packet": "de-winter-issue942-2026-11-10"
+  },
+  "side": "154900285932009/5000000000000",
+  "gain": "2701714078007254734999311/191381924566750000000000000",
+  "gain_float": "1.411687e-02",
+  "gain_over_margin": "2232755924.4828",
+  "within_margin": false
+ },
+ "cpu_seconds": 23.4
+}

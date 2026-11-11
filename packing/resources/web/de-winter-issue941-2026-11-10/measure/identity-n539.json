@@ -1,0 +1,155 @@
+{
+ "format": "measure-identity-v1",
+ "n": 539,
+ "inputs": {
+  "DE-WINTER": {
+   "input": "packet",
+   "packet": "de-winter-issue941-2026-11-10",
+   "side": "118682994321241/5000000000000"
+  },
+  "couzo-issue763": {
+   "input": "evand-cert",
+   "path": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n539.cert",
+   "sha256": "63e841d9c0226208efd82b37acc44fa04739eedb1cc6f2bc4d0a088ba942ac04",
+   "side": "23874660298708270458321292451270013658117933162732742368849424232364433902903535355852255293/1005813394498629446911402566803117476520018662217068507100715868337767905696500000000000000"
+  }
+ },
+ "tilts": {
+  "DE-WINTER": {
+   "exactly_turned": 470,
+   "tilted_beyond_1_degree": 152,
+   "tilted_positive": 79,
+   "tilted_negative": 73,
+   "tilt_range_degrees": [
+    2.4950168334683718,
+    44.989408590626
+   ],
+   "near_upright": 318,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.5757857596183982,
+    -0.2998609603537119,
+    0.6778894191765811
+   ]
+  },
+  "couzo-issue763": {
+   "exactly_turned": 483,
+   "tilted_beyond_1_degree": 154,
+   "tilted_positive": 73,
+   "tilted_negative": 81,
+   "tilt_range_degrees": [
+    1.0623200631318521,
+    44.9936278272581
+   ],
+   "near_upright": 329,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.05440341547428318,
+    -0.031214018595022708,
+    -0.030882266075153098,
+    -0.021565830593146984,
+    -0.01120355657866412,
+    -0.009991017020738013,
+    -0.008705056061700134,
+    -0.0048505550873017,
+    -0.004549248085126578,
+    -0.003946802201184596,
+    -0.0031999113336524942,
+    -0.002629623277726978,
+    -0.0019331337299064444,
+    -0.0018378128771985303,
+    -0.0016062344431446718,
+    -0.0015325169355406842,
+    -0.001530060580265058,
+    -0.001516481229486999,
+    -0.0015067163203070777,
+    -0.0011100177435423575,
+    0.0010896846767251256,
+    0.0011141741260334832,
+    0.001117650025911697,
+    0.0011624311380988438,
+    0.0011649398043550485,
+    0.0012047158860980626,
+    0.0013817204633470562,
+    0.0013819953083337615,
+    0.0014336197144504852,
+    0.0014337819687300557,
+    0.001515268315867389,
+    0.001616127433455785,
+    0.0017416486319930971,
+    0.0018378747627084938,
+    0.0023948153372242457,
+    0.0024257469654010645,
+    0.0030481243723814912,
+    0.0065240904238535544,
+    0.017796860302147173,
+    0.018950966470501297,
+    0.020679547570986584,
+    0.3269087335467613,
+    0.4546138731521487
+   ]
+  }
+ },
+ "pairs": [
+  {
+   "view": "DE-WINTER",
+   "against": "couzo-issue763",
+   "side_difference": "-7.080956e-05",
+   "side_difference_exact": "-71221206475994692586146721041136213777754220005689830119614929000985730900332882383993/1005813394498629446911402566803117476520018662217068507100715868337767905696500000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "1.731335e-1",
+    "largest_turn_degrees": "5.796",
+    "moved_beyond": {
+     "1e-9": 539,
+     "1e-6": 535,
+     "1e-3": 240,
+     "1e-2": 85,
+     "1e-1": 5
+    },
+    "turned_beyond_1e-6": 231
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.173133",
+    "moved_beyond": {
+     "1e-9": 539,
+     "1e-6": 535,
+     "1e-3": 240,
+     "1e-2": 85,
+     "1e-1": 5
+    },
+    "largest_turn_degrees": "5.796",
+    "turned_beyond_1e-6": 231
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 139,
+    "tilted_paired_same_sign_within_1e-1": 139,
+    "tilted_paired_opposite_sign": 13,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 0,
+    "tilt_angles_shared_within_1e-4_degrees": 1
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 0,
+    "total_squared": "0.15641",
+    "runner_up_symmetry": 7,
+    "runner_up_total_squared": "34.3075",
+    "largest_move": "0.173098",
+    "rms_move": "0.0170348",
+    "bottleneck": "0.173098",
+    "moved_beyond": {
+     "1e-9": 539,
+     "1e-6": 539,
+     "1e-3": 240,
+     "1e-2": 85,
+     "1e-1": 5
+    },
+    "nearest_one_to_one": true,
+    "turned_beyond_1_degree": 3,
+    "tilts_reversed_beyond_1_degree": 13
+   }
+  }
+ ]
+}

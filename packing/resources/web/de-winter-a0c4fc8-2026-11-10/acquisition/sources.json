@@ -1,0 +1,160 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-11T10:03Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, fetched on 11 November 2026 for the intake of jlevy/squares#942's addendum (lane L90, think-cen3), when main's head was c4e65d0 (git ls-remote read the same head at 10:04Z). The pin is a0c4fc8 (committed 2026-11-10T15:37:44Z, 'Add six further refined square packings', the author's message), the commit the addendum comment issuecomment-6772308414 of 2026-11-10T16:02:47Z names, 25 minutes after it. It adds the certificates at 597, 754, 864, 865, 869 and 991 to above324_refined/ and changes that folder's README.md and SHA256SUMS and one line of the root README; the folder's other 16 certificates and verify_cert.py are unchanged from a9486ed, and no later commit through c4e65d0 changes the folder. The scope is the licence, the root README and the whole of above324_refined/. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains, and the 16 earlier certificates and verify_cert.py to the copies the de-winter-issue942-2026-11-10 packet retains from a9486ed (verify_cert.py through that packet's pin against the de-winter-issue941-2026-11-10 copy), and each is pinned against its copy. above324_refined/SHA256SUMS states the SHA-256 of all 22 certificates and verify_cert.py, and all 23 match. GitHub's activity log and events API were not readable from this session, so no push time is recorded. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "de-winter-a0c4fc8-2026-11-10",
+      "source_url": "https://github.com/JoostdeWinter/square-packing",
+      "source_ref": "main",
+      "source_commit": "a0c4fc80db67e9806026921654dce49a155ac31b",
+      "committed_utc": "2026-11-10T15:37:44Z",
+      "git_tree": "f7a7e6fd0a3a6486763c4adbe71b35fa7ad785b0",
+      "archived_path": "packing/resources/web/de-winter-a0c4fc8-2026-11-10/source",
+      "subtree_manifest": "packing/resources/web/de-winter-a0c4fc8-2026-11-10/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "above324_refined"
+      ],
+      "subtree_file_count": 27,
+      "subtree_total_bytes": 2181447,
+      "retained_file_count": 9,
+      "retained_total_bytes": 611711,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+          "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+          "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+        },
+        {
+          "path": "above324_refined/n0632.cert",
+          "bytes": 71019,
+          "sha256": "a3c403f3c12b9e23e3da65af8038983441b22501456011553077c7f2f714ecbb",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0632.cert"
+        },
+        {
+          "path": "above324_refined/n0637.cert",
+          "bytes": 85674,
+          "sha256": "d7650b96a76c9be9a479fb0f96603d11ea9379f1e84257aa5f70a9a9eb2cefc4",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0637.cert"
+        },
+        {
+          "path": "above324_refined/n0655.cert",
+          "bytes": 70156,
+          "sha256": "7d0f12e5a7218c681d68d81c8657b903d87115db62fbeeb1ae8fc24f21d99cf7",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0655.cert"
+        },
+        {
+          "path": "above324_refined/n0684.cert",
+          "bytes": 92406,
+          "sha256": "7673d284172589973fc2f9e2c870ddd8d3b36aa73e544554adae2ff19590ef49",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0684.cert"
+        },
+        {
+          "path": "above324_refined/n0685.cert",
+          "bytes": 75480,
+          "sha256": "51027a9f92ea7b78e1333c8d1685d26a86a295606a71995b725139cc11cb6938",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0685.cert"
+        },
+        {
+          "path": "above324_refined/n0744.cert",
+          "bytes": 81936,
+          "sha256": "8c6c85c24f9c8f4cc3e3bf78b76c6fcbca6c0f0ce5aaf8b54b8f55f1e4f40e48",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0744.cert"
+        },
+        {
+          "path": "above324_refined/n0750.cert",
+          "bytes": 101686,
+          "sha256": "092cec57a0760fd025034bcbc2da7f9460e83ca5fa8de2c4cb2a0f925e0665dd",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0750.cert"
+        },
+        {
+          "path": "above324_refined/n0756.cert",
+          "bytes": 81421,
+          "sha256": "6f37df2b3b619c07f11aadef78b94fd2746cec4929ee21f2cafd13ab8761b46d",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0756.cert"
+        },
+        {
+          "path": "above324_refined/n0805.cert",
+          "bytes": 108214,
+          "sha256": "252205719f5f362ff88fc082156e77bd7c90e17b121ab9b4eb3a2370dfa6cc7d",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0805.cert"
+        },
+        {
+          "path": "above324_refined/n0814.cert",
+          "bytes": 86963,
+          "sha256": "9951a39af864d610efbb075f31ce167f1ecbdcd92321636388695eb46863fbd1",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0814.cert"
+        },
+        {
+          "path": "above324_refined/n0918.cert",
+          "bytes": 123837,
+          "sha256": "45bb5bfebaf531433256078d3a4548b6cc2adb93c774bf5bda4bc31dae1473a0",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0918.cert"
+        },
+        {
+          "path": "above324_refined/n0921.cert",
+          "bytes": 124747,
+          "sha256": "a7c45972b9abb293814041c15313f04aaa0af7bdeb0162ab90ac2e3743fa8cf8",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0921.cert"
+        },
+        {
+          "path": "above324_refined/n0924.cert",
+          "bytes": 98585,
+          "sha256": "9388e7d210fc5b78623d85df50d1e171b1615eb23875d2af630594598eb89b89",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0924.cert"
+        },
+        {
+          "path": "above324_refined/n0935.cert",
+          "bytes": 100134,
+          "sha256": "aacb623775c6dcf15affe0f9e2ba128f90832b8ea97ef6aeee14d22269629d8e",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0935.cert"
+        },
+        {
+          "path": "above324_refined/n0970.cert",
+          "bytes": 131048,
+          "sha256": "8f28c4b19740daa379e9987523e58b737ff4d34f1f2ee30432fe7b82f1148222",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0970.cert"
+        },
+        {
+          "path": "above324_refined/n0989.cert",
+          "bytes": 132720,
+          "sha256": "9b35f26fa2f896a92315ebbbe62f2033cb8b791e9e1646cd620970114a7d4bbd",
+          "reason": "Unchanged since a9486ed; the de-winter-issue942-2026-11-10 packet retains it.",
+          "identical_to": "packing/resources/web/de-winter-issue942-2026-11-10/source/above324_refined/n0989.cert"
+        },
+        {
+          "path": "above324_refined/verify_cert.py",
+          "bytes": 2638,
+          "sha256": "df2bbc3355dda22a59287e81849f61b1919f2832b0ac3e00faa8460f8f423d49",
+          "reason": "The author's checker, unchanged since a9486ed and byte-identical to above324/verify_cert.py, which the de-winter-issue941-2026-11-10 packet retains from 71da0d5.",
+          "identical_to": "packing/resources/web/de-winter-issue941-2026-11-10/source/above324/verify_cert.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, added in 9bf5d9be on 2026-10-17 and byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The addendum says the six come from the same procedure and the same source file as #942's sixteen: public Kaggle packings merged in Samanyu-dev/squares_in_squares at 53551d7, whose individual authors the file does not name, re-optimized locally with the arrangements unchanged.",
+      "claims": [
+        "a0c4fc8 adds to above324_refined/ six exact rational certificates in the folder's format, at 597, 754, 864, 865, 869 and 991. #942's addendum comment and above324_refined/README.md print each side rounded up at 10 places: 597 24.8969258585, 754 27.9075316299, 864 29.8530288378, 865 29.8693054513, 869 29.9122235088, 991 31.9019684133, each below the register value and the best public competition value the author could find, which the addendum prints beside them. The addendum says the certificates, checker, margin (about 5e-9 above the numerical optimum), lineage and AI assistance are as #942 states.",
+        "The folder README at a0c4fc8 calls the 22 packings 'Refined public packings above n = 324', says the arrangements of the squares are unchanged from the starting packings, and that the descent test, local optimization, rational certificates and checking were produced with Claude (Anthropic) under Joost de Winter's direction. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}
