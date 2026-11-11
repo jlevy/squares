@@ -60055,6 +60055,28 @@ evidence:
           packet's receipts
         checked: 14
         of: 14
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and the
+            import lanes that wrote the evand-cert reader; each lane's tier and reasoning
+            setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates and the author's two checkers were produced with
+          Claude (Anthropic) under Joost de Winter's direction; the project's routes are
+          Claude's too, written from prompts of their own long before these certificates. No
+          route here is the source's code, and this lane never opened the source's
+          verify_cert.py. The routes' authors read Evan Daniel's format and, in earlier lanes,
+          other sources' checkers, so the record does not call them clean room.
     limitations: >-
       A replay by two maintained exact routes that share this repository's evand-cert reader
       (certificate parsing and half-angle conversion), Fraction arithmetic and the
@@ -60187,6 +60209,28 @@ evidence:
           packet's receipts
         checked: 16
         of: 16
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and the
+            import lanes that wrote the evand-cert reader; each lane's tier and reasoning
+            setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates and the author's two checkers were produced with
+          Claude (Anthropic) under Joost de Winter's direction; the project's routes are
+          Claude's too, written from prompts of their own long before these certificates. No
+          route here is the source's code, and this lane never opened the source's
+          verify_cert.py. The routes' authors read Evan Daniel's format and, in earlier lanes,
+          other sources' checkers, so the record does not call them clean room.
     limitations: >-
       A replay by two maintained exact routes that share this repository's evand-cert reader
       (certificate parsing and half-angle conversion), Fraction arithmetic and the
@@ -60319,6 +60363,28 @@ evidence:
           packet's receipts
         checked: 6
         of: 6
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and the
+            import lanes that wrote the evand-cert reader; each lane's tier and reasoning
+            setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates and the author's two checkers were produced with
+          Claude (Anthropic) under Joost de Winter's direction; the project's routes are
+          Claude's too, written from prompts of their own long before these certificates. No
+          route here is the source's code, and this lane never opened the source's
+          verify_cert.py. The routes' authors read Evan Daniel's format and, in earlier lanes,
+          other sources' checkers, so the record does not call them clean room.
     limitations: >-
       A replay by two maintained exact routes that share this repository's evand-cert reader
       (certificate parsing and half-angle conversion), Fraction arithmetic and the
