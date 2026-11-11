@@ -113,10 +113,13 @@ the module predicts on both routes:
 
 ## The Register
 
-T-293 records the claim at V3/C3 on the replay, S3 as a draft for the stage 4 review, the
-same score as T-057 at 211 and T-220 at 183. The case record is not touched until the
-review is mapped; then the house rule adopts it with both strong generators’
-regularization of the new house and its flip.
+T-293 records the claim at V3/C3, S3, the same score as T-057 at 211 and T-220 at 183, as
+the stage 4 review confirmed. The case adopted it as its house on 11 November 2026 under
+the house rule, in place of the grid, and withdrew its conjectured integer optimum. Both
+strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-bcfs-2026-11-11/README.md)): the
+picture is grid-slack’s 0.5-degree view, and Evan Daniel’s solve lies above the side,
+held.
 
 ## Stage 4 Review
 

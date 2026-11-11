@@ -133,10 +133,12 @@ lapses, its ceiling the grid’s 14 either way. Neither bound carries to another
 
 ## The Register
 
-T-292 records the claim at V3/C3 on the replay, S3 as a draft for the stage 4 review. The
-case record is not touched: the house rule adopts it once the review is mapped with an
-accepted verdict, with both strong generators’ regularization of the new house and its
-flip in the same change.
+T-292 records the claim at V3/C3, S3, as the stage 4 review confirmed. The case adopted it
+as its house on 11 November 2026 under the house rule, in place of T-174, which keeps its
+certificate as history. Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-bcfs-2026-11-11/README.md)): the
+picture is grid-slack’s 0.5-degree view, with no uneven or near-axis square and 14 angle
+classes against the axis tool’s 15, and Evan Daniel’s solve lies above the side, held.
 
 ## Stage 4 Review
 

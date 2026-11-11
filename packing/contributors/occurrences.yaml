@@ -19453,20 +19453,14 @@ occurrences:
     path: packing/frontier/n-132.md
     record_key: '132'
     field: /reported_upper_bound/found_by/0
-  expected_text: Evan Daniel
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Joost de Winter
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-132.md [132] /reported_upper_bound/found_by/0
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel. Keep finder,
-    improver and solver roles distinct.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-132.md
     record_key: '132'
@@ -19484,20 +19478,6 @@ occurrences:
   note: Reviewed packing/frontier/n-132.md [132] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-132.md
-    record_key: '132'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-133.md
     record_key: '133'
@@ -20062,6 +20042,18 @@ occurrences:
   note: Reviewed packing/frontier/n-157.md [157] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-157.md
+    record_key: '157'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-158.md
     record_key: '158'

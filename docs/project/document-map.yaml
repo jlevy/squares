@@ -255,6 +255,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-1goz-2026-11-09/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-xq4o-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-f65n-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-ruu2-2026-10-31/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
