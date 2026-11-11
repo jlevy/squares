@@ -3,9 +3,9 @@ type: is
 id: is-01m74mkwmxnkr1qseky1m2ddt0
 title: "Stage 4 blind review of #943, #944, #945, #947 (Özden's s(156), s(180), s(268), s(269); PR #949)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l83-review
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T06:27:09.085Z
-updated_at: 2026-11-11T07:09:36.392Z
+updated_at: 2026-11-11T07:10:38.628Z
 started_at: 2026-11-11T06:27:13.030Z
+closed_at: 2026-11-11T07:10:38.628Z
+close_reason: "Blind stage-4 review of #943/#944/#945/#947 done: all four accepted at S3 (16 notes, none blocking); clean-room l83_check ACCEPT, 60/60 controls; LANE_EQUALS_REVIEW; branch claude/bold-ritchie-xo28us-l83-review head 4dadd0bb6, to be folded into PR #949 (think-xq4o)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
