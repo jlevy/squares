@@ -42521,7 +42521,7 @@ results:
   - id: T-285
     kind: upper-bound
     registered: '2026-11-10'
-    landed: '2026-11-10'
+    landed: '2026-11-11'
     headline: >-
       De Winter's re-solve of T-284's packing at 199, 1.0399 of its margin through the L step; held
     claim: >-
