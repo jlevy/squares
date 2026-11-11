@@ -5167,6 +5167,24 @@ issues:
         id: T-127
       corrects:
       - https://github.com/jlevy/squares/issues/438#issuecomment-6127527608
+      outdated:
+      - >-
+        T-127 remains the house at 88, 130, 179, 199 and 208; it remains the house only at 88,
+        T-174 having held 179 and 208 since 19 October and 130 from 19 October to 31 October,
+        T-259 holding 130 since 31 October and T-284 holding 199 since 10 November
+    - url: https://github.com/jlevy/squares/issues/438#issuecomment-6791198157
+      date: '2026-11-11'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: precision-refinements-14
+        id: T-127
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      corrects:
+      - https://github.com/jlevy/squares/issues/438#issuecomment-6130070537
     close_when: The fourteen finite bounds and three withdrawals are published from main with their
       actual evidence scope, and the owner posts the final registration disposition.
     read_through: '2026-10-08T03:08:01Z'
@@ -5176,6 +5194,24 @@ issues:
       that statement is marked `outdated` on the final reply, and the follow-up posted that day,
       which says T-151 is now the house at both and T-127 remains it at 88, 130, 179, 199 and 208,
       names the final reply in `corrects` (think-fvz4, think-ckjc).
+
+      The follow-up of 08:37:41Z on 11 November 2026 (issuecomment-6791198157), posted after
+      #940 merged as f54ad1048 at 00:26:47Z on 10 November and recorded in intake lane L86,
+      was owed because the follow-up of 12 October said T-127 remains the house at 88, 130,
+      179, 199 and 208. check_requests cannot see that statement go stale, since replies
+      before 26 October 2026 record no position, so it is marked `outdated` on the 12 October
+      follow-up, and this one names that follow-up in `corrects`. It states T-127 at V3/C3, confirmed and current, since the house at 88 rests
+      on it, and gives the house at each of the five counts: T-127 at 88, with T-193 staged to
+      replace it once the case writer can take an algebraic side; T-259 at 130 since 31
+      October, T-174 having held the count from 19 October until then; T-174 at 179 and 208
+      since 19 October; and T-284 at 199 since 10 November, Doğa Özden's #935 packing at 172
+      (T-282) plus an L of 27 unit squares (#938), whose line starts from T-127's packing by
+      the L-cut of #845 (T-257). Its dates are the landing days in frontier/landings.yaml; the
+      case records date their adoptions by the pass that made them, 17 October at 179 and 208
+      and 9 November at 199. It names T-127, T-193, T-259, T-174, T-284, T-282 and T-257; only
+      T-127 is this issue's result and is recorded under reported. It follows #844's, #893's
+      and #914's supersession follow-ups of 9 November, and the posted text is lane L80's
+      draft as written; the issue stays closed.
   - number: 445
     title: 'verify_n17_bb_certificate.py: full mode keeps every internal node in memory'
     author: wand125
@@ -19411,6 +19447,17 @@ issues:
       - result: n270
       corrects:
       - https://github.com/jlevy/squares/issues/703#issuecomment-6308741545
+    - url: https://github.com/jlevy/squares/issues/703#issuecomment-6791194944
+      date: '2026-11-11'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n270
+        id: T-224
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       The certificate is registered on main and replayed here, the stage 4 review has been mapped,
       the case at 270 has adopted it and regularized its drawing with the requested credit, and the
@@ -19437,6 +19484,24 @@ issues:
       the bound: whether his matching in s270_sw_vs_prior.json pairs squares 269, 48, 23, 15, 3, 2
       and 216 differently from the identity on the certificates, or whether its 0.391 is the
       regularized views' displacement rather than the certificates'.
+
+      The follow-up of 08:37:31Z on 11 November 2026 (issuecomment-6791194944), recorded in
+      intake lane L86, was owed because the final reply of 21 October gave T-224 as the house
+      at 270, a position check_requests cannot see move, since replies before 26 October 2026
+      record none. It states T-224 at V3/C3, confirmed and superseded: Doğa Özden's T-283
+      (#936), a further arrangement of Daniel's packing 1.36e-5 below it, found by basin
+      hopping over local minima of his ALM+SLP quench, pairs one to one with it under the
+      identity and moves one square beyond a tenth, square 59, which straightens from −32.3
+      degrees to upright. T-283 was confirmed at V3/C3 when #937 merged, the case adopted it
+      as its house on 9 November, and T-224 is kept at 270 as history. The follow-up says that
+      the case still names Daniel as the packing's finder, in a search started from Nate
+      Chaoweeraprasit's SQUISH packing, with Özden its improver, that the record credits
+      Daniel's quench as the local optimizer of Özden's search, and that the drawing follows
+      the new house, grid-slack's 0.5-degree view of T-283 in place of Daniel's regularizer's
+      view of T-224. It names only T-224 and T-283; T-283 is not this issue's result and is
+      not recorded under reported. It follows #844's, #893's and #914's supersession
+      follow-ups of 9 November, and the posted text is lane L75's draft as written; the issue
+      stays closed.
   - number: 715
     title: '328-9913: registration request'
     author: franciscouzo
@@ -27278,6 +27343,17 @@ issues:
       - result: n172-n204-n260-n293
         id: E-evand-845-review-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/845#issuecomment-6791192480
+      date: '2026-11-11'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n172-n204-n260-n293
+        id: T-257
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       The results are registered with their replay and their review and adoption owned by their
       bead, and the reply on main says so; nothing the author asked for is queued.
@@ -27288,6 +27364,23 @@ issues:
       The final reply of 31 October (issuecomment-6543932512) was edited the same
       afternoon, after #860's review (A4), to name the confirmed replay and review
       entries this entry now lists; the reply as recorded is the edited one.
+
+      The follow-up of 08:37:23Z on 11 November 2026 (issuecomment-6791192480), recorded in
+      intake lane L86, was owed because the final reply stated T-257 current: T-257 still
+      stands as a verified bound, V3/C3, confirmed, and is superseded at 172, its last house,
+      by Doğa Özden's T-282 (#935), a further arrangement of Daniel's packing 3.25e-3 below
+      it, the optimal assignment under the identity moving 15 squares beyond a tenth in a
+      local change within a block of squares turned about 45 degrees. T-282 was confirmed at
+      V3/C3 when #937 merged, the case adopted it as its house on 9 November, and T-257 is
+      kept at 172 as history. The follow-up says that the case still names Daniel as the
+      packing's finder, with Özden its improver, that the record credits Daniel's ALM+SLP
+      quench as the local optimizer of Özden's search, that the drawing at 172 is now
+      Daniel's regularizer's view of T-282, and that at 204, 260 and 293 T-257 had already
+      stopped being the house, Daniel's #914 packings T-268, T-269 and T-271 holding those
+      counts. It names only T-257, T-282, T-268, T-269 and T-271; none but
+      T-257 is this issue's result, and only T-257 is recorded under reported. It follows
+      #844's, #893's and #914's supersession follow-ups of 9 November, and the posted text is
+      lane L75's draft as written; the issue stays closed.
   - number: 846
     title: 'New packings: 14 verified upper bounds for square packing (Category A records and Category
       B refinements, N in [105, 308]): registration request'
@@ -29641,7 +29734,8 @@ issues:
     title: 's(172) ≤ 13.614689853287: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-09'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -29671,7 +29765,7 @@ issues:
       both strong generators' regularization of the new house run in the same change. The
       Kaggle side the issue quotes, 13.617935700905 (jazivxt), is above it and states no
       packing.
-    read_through: '2026-11-09T20:53:03Z'
+    read_through: '2026-11-11T08:35:29Z'
     results:
     - key: n172-from-t257
       claim: >-
@@ -29688,8 +29782,31 @@ issues:
     beads:
     - think-he66
     - think-qqyg
+    - think-mdxq
+    - think-wju3
+    - think-tj4o
     answer_bead: think-he66
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/935#issuecomment-6791150945
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n172-from-t257
+        id: T-282
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n172-from-t257
+        id: E-ozden-935-exact-feasibility
+        status: confirmed
+      - result: n172-from-t257
+        id: E-ozden-935-review-exact-feasibility
+        status: confirmed
+      - result: n172-from-t257
+        id: E-ozden-935-certificate-report
+        status: reviewed
     close_when: >-
       T-282 is on main at V3/C3 as the house at 172, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -29717,11 +29834,46 @@ issues:
       changes nothing. The comment ends that this result is the best published packing with a
       certificate, not the smallest side anyone has scored. The same correction was committed to
       the repository's README as 204026b (20:53:12Z), read in campaign/intake-watch.yaml.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6791150945, posted at
+      08:35:29Z), after #948 merged as 9fd466fe1 at 08:21:27Z, T-282 having been on main
+      since #937 merged as 200f2ebc1 at 20:23:05Z on 9 November; recorded in intake lane L86.
+      Lane L75 drafted it from main 200f2ebc1, its record block rendered by check_requests
+      --draft 935 with the certificate-report line added by hand, as at #929, and the posted
+      text is that draft as written. It states T-282 at V3/C3, confirmed and current;
+      E-ozden-935-exact-feasibility and E-ozden-935-review-exact-feasibility, confirmed; and
+      E-ozden-935-certificate-report, reviewed. It says that T-282 became the house at 172 on 9
+      November in place of T-257, 3.25e-3 lower, and that T-257 stays a verified bound, kept
+      as history; T-257 is not this issue's result and is not recorded under reported. It says
+      that the review checked each of the author's answers to the 9 November points against
+      the files and each holds. It passes on the review's F6 (nearest centres match only 171
+      distinct squares of T-257, and the optimal assignment moves 15 beyond a tenth, so the
+      record calls it a further arrangement), F7, F11 and F15, and its notes for the author:
+      F4 (square 151 clears the top by 6.0e-5), F5 (the margins are 2.0 to 3.3e-13, about
+      twice the stated 1e-13), F12 (the decimal pose's softschema.schema names a path on the
+      author's machine) and F13 (the replay line). It passes on the licence, CC BY 4.0 and
+      MIT, noting that the author's repository now carries Evan Daniel's MIT notice as
+      LICENSE-evand-square-packing.txt, byte for byte the LICENSE this record retains in
+      evand-issue845-2026-10-29, and on the upstream-notice question (think-mdxq, F14). It
+      says that Daniel's regularizer reached a certified KKT point 2.635e-12 below the side,
+      1.04 times T-282's contraction margin of 2.53e-12, held as a candidate on think-wju3 and
+      the owner's open question on gains near a certificate's padding, and that the atlas
+      posters hold Özden's name off their credit block at 172 until the next infographics cut
+      (think-tj4o). It asks all five of the review's questions: whether the final repair
+      scaling was about 2e-13 rather than 1e-13; whether square 151 was free in the pose, and
+      whether "the other squares within 1e-12 of a wall" says what the author meant; whether
+      the pose's softschema.schema could name the schema's path in this repository, or a URL;
+      which replay is intended, and from which directory; and whether a swap or reinsert move
+      of the search made the change in the block of squares turned about 45 degrees. The
+      questions are informational and hold nothing open. The issue was closed as completed at
+      08:35:38Z. The supersession of T-257 owed a follow-up on #845, which was posted and is
+      recorded there.
   - number: 936
     title: 's(270) ≤ 16.928148603343: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-09'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -29751,7 +29903,7 @@ issues:
       both strong generators' regularization of the new house run in the same change. The
       Kaggle side the issue quotes, 16.928162252213 (kirilltym), is above it and states no
       packing.
-    read_through: '2026-11-09T20:53:04Z'
+    read_through: '2026-11-11T08:36:12Z'
     results:
     - key: n270-from-t224
       claim: >-
@@ -29768,8 +29920,31 @@ issues:
     beads:
     - think-he66
     - think-qqyg
+    - think-mdxq
+    - think-wju3
+    - think-tj4o
     answer_bead: think-he66
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/936#issuecomment-6791167354
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n270-from-t224
+        id: T-283
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n270-from-t224
+        id: E-ozden-936-exact-feasibility
+        status: confirmed
+      - result: n270-from-t224
+        id: E-ozden-936-review-exact-feasibility
+        status: confirmed
+      - result: n270-from-t224
+        id: E-ozden-936-certificate-report
+        status: reviewed
     close_when: >-
       T-283 is on main at V3/C3 as the house at 270, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -29791,11 +29966,48 @@ issues:
       changes nothing. The comment ends that this result is the best published packing with a
       certificate, not the smallest side anyone has scored. The same correction was committed to
       the repository's README as 107a3cf (20:53:18Z), read in campaign/intake-watch.yaml.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6791167354, posted at
+      08:36:12Z), after #948 merged as 9fd466fe1 at 08:21:27Z, T-283 having been on main
+      since #937 merged as 200f2ebc1 at 20:23:05Z on 9 November; recorded in intake lane L86.
+      Lane L75 drafted it from main 200f2ebc1, its record block rendered by check_requests
+      --draft 936 with the certificate-report line added by hand, and the posted text is that
+      draft as written. It states T-283 at V3/C3, confirmed and current;
+      E-ozden-936-exact-feasibility and E-ozden-936-review-exact-feasibility, confirmed; and
+      E-ozden-936-certificate-report, reviewed. It says that the review scored it S2, a
+      borderline call with S3 the stated alternative (F8); that T-283 became the house at 270
+      on 9 November in place of T-224, 1.36e-5 lower; and that T-224 stays a verified bound,
+      kept as history; T-224 is not this issue's result and is not recorded under reported. It
+      says that the review checked each of the author's answers to the 9 November points
+      against the files and each holds, and that the packing pairs one to one with T-224's
+      under the identity, square 59 alone moving beyond a tenth as it straightens from −32.3
+      degrees to upright. It passes on the review's F7 and F11, and its notes for the author:
+      F4 (31 more square–wall pairs clear their walls by 7.3e-8 to 2.9e-6), F5 (the margins
+      are 2.0 to 2.3e-13, about twice the stated 1e-13), F12 (the decimal pose's
+      softschema.schema names a path on the author's machine) and F13 (the replay line). It
+      passes on the licence, CC BY 4.0 and MIT, noting that the author's repository now
+      carries Evan Daniel's MIT notice as LICENSE-evand-square-packing.txt, byte for byte the
+      LICENSE this record retains in evand-n270-sweep-2026-10-20, and on the upstream-notice
+      question for Nate Chaoweeraprasit's #500 packing (think-mdxq, F14). It says that
+      grid-slack's 0.5-degree view now draws 270, that Daniel's regularizer reached a
+      certified KKT point 3.253e-12 below the side, 1.01 times T-283's contraction margin of
+      3.21e-12, held as a candidate on think-wju3 and the owner's open question on gains near
+      a certificate's padding, and that the atlas posters hold Özden's name off their credit
+      block at 270 until the next infographics cut (think-tj4o). It asks four of the review's
+      five questions, its 1 to 4, and points to #935 for question 5: whether the final repair
+      scaling was about 2e-13 rather than 1e-13; whether the squares of those 31 square–wall
+      pairs were free in the pose, and whether "the other squares within 1e-12 of a wall" says what the
+      author meant; whether the pose's softschema.schema could name the schema's path in this
+      repository, or a URL; and which replay is intended, and from which directory. The
+      questions are informational and hold nothing open. The issue was closed as completed at
+      08:36:20Z. The supersession of T-224 owed a follow-up on #703, which was posted and is
+      recorded there.
   - number: 938
     title: 's(199) ≤ 14.614689853287: improved packing, #935''s packing plus an L of 27 grid squares (registration request)'
     author: kenaznia-doga
     opened: '2026-11-09'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -29829,7 +30041,7 @@ issues:
       issue's statement at the print: 199 from 172 is the one step that crosses its count's
       12-place print, and monotonicity improves nothing. The Kaggle side the issue quotes,
       14.617572173606 (kirilltym), is above it and states no packing.
-    read_through: '2026-11-09T20:53:05Z'
+    read_through: '2026-11-11T08:37:01Z'
     results:
     - key: n199-from-t282
       claim: >-
@@ -29842,11 +30054,35 @@ issues:
       evidence:
       - E-ozden-938-certificate-report
       - E-ozden-938-exact-feasibility
+      - E-ozden-938-review-exact-feasibility
     beads:
     - think-1goz
     - think-ntcf
+    - think-mdxq
+    - think-ruu2
+    - think-tj4o
     answer_bead: think-1goz
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/938#issuecomment-6791185130
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n199-from-t282
+        id: T-284
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n199-from-t282
+        id: E-ozden-938-exact-feasibility
+        status: confirmed
+      - result: n199-from-t282
+        id: E-ozden-938-review-exact-feasibility
+        status: confirmed
+      - result: n199-from-t282
+        id: E-ozden-938-certificate-report
+        status: reviewed
     close_when: >-
       T-284 is on main at V3/C3 as the house at 199, and the reply on main says what was retained
       and replayed, what the review found and that the case adopted it.
@@ -29871,6 +30107,48 @@ issues:
       exactly 0. The review's five questions for the author (README line 11's print, the gaps
       between the parts, the certificate's blocks, sqcheck's 27 tight constraints, the commit to
       cite) are informational and hold nothing open. No reply has been posted.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6791185130, posted at
+      08:37:01Z), after #948 merged as 9fd466fe1 at 08:21:27Z, T-284 having been on main since
+      #940 merged as f54ad1048 at 00:26:47Z on 10 November; recorded in intake lane L86. Lane
+      L80 drafted it from #940's head, 3f7419065, its record block rendered by check_requests
+      --draft 938 with two lines added by hand: the certificate report, reviewed, which the
+      tool leaves out, as at #929 and #935; and E-ozden-938-review-exact-feasibility,
+      confirmed, which the tool left out because this result's evidence did not list it,
+      though T-284's evidence did. Lane L86 adds it here, as #935's and #936's results list
+      theirs, so that it can be recorded under reported. The posted text is that draft as
+      written. It states T-284 at V3/C3, confirmed and current;
+      E-ozden-938-exact-feasibility and E-ozden-938-review-exact-feasibility, confirmed; and
+      E-ozden-938-certificate-report, reviewed. It says that T-284 is the house at 199, on main
+      since 10 November, the landing day frontier/landings.yaml records; the case record dates
+      the adoption 9 November, the day of the pass that made it, as it dates every adoption.
+      It says that T-284 replaces T-127, 2.88e-3 lower, which stays a verified bound, kept as
+      history; T-127 is not this issue's result and is not recorded under reported. It passes
+      on the L-step scan: 172 to 199 is the only step that improves a ceiling across its
+      12-place print, and the ten steps inside a print, at 101, 125, 170, 174, 198, 201, 257,
+      262, 292 and 298, are recorded and not registered, material for the owner's RV-3
+      (think-ruu2); on X049's census, which listed 199 as a bound violation from T-282's
+      adoption at 172 until this one (F8); on the lineage loop through 199 (F10); on F9 and
+      F15; and on the review's notes for the author, F5 (README line 11 prints S172 1.96e-16
+      above it), F6 (the unstated gaps between the 172 part and the L, 43 pairs below 1e-12,
+      the least 1.50e-16), F7 (the certificate's blocks describe #935's promotion) and F12
+      (the repository has moved one commit past the pin, to 4fbff7b). It says that Daniel's
+      regularizer reached a certified KKT point 2.63e-12 below the side, held as the same
+      day's solves at 172 and 270 are; it passes on the licences, byte-identical to #935's,
+      and on the upstream-notice question (think-mdxq, F14); it says that #938 is the first
+      report of this bound however the owner answers RV-4, and that the atlas posters hold
+      Özden's name off their credit block at 199 until the next infographics cut
+      (think-tj4o). It reads the author's comment of 20:53:05Z: the side-only leaderboard
+      entry at 199, 14.6132098756 (team OigaZhDn), 1.48e-3 below, states no packing and is
+      recorded as information. It asks all five of the review's questions: whether README
+      line 11 meant the 16-place ceiling; whether the author would state the gaps between the
+      parts; whether the certificate's source and certificate blocks could describe the step,
+      and the pose's softschema.schema name a path a reader can follow; what sqcheck's 27
+      tight constraints count, against the certificate's 25 touching pairs and 29 grid–wall
+      contacts; and which commit the record should cite, d03ee0b or 4fbff7b. The questions
+      are informational and hold nothing open. The issue was closed as completed at 08:37:09Z.
+      The move of the house at 199 from T-127 owed a follow-up on #438, which was posted and
+      is recorded there.
   - number: 939
     title: 's(199) <= 14.6146898532835806: registration request'
     author: JoostdeWinter
@@ -29900,7 +30178,7 @@ issues:
       lane L82), written blind in a separate lane, accepts it with #946's, no finding blocking,
       and is mapped at C1; its F2 asks the author to credit #938 for the L step at 199, and its
       six questions for the author are informational.
-    read_through: '2026-11-09T22:03:57Z'
+    read_through: '2026-11-11T08:46:54Z'
     results:
     - key: n199-core-resolved
       validation:
@@ -29919,7 +30197,21 @@ issues:
     - think-2h88
     - think-o53d
     answer_bead: think-2h88
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/939#issuecomment-6791375129
+      date: '2026-11-11'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n199-core-resolved
+        id: T-285
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: n199-core-resolved
+        id: E-de-winter-939-certificate-report
+      beads: [think-ruu2]
     blocked:
       type: owner-decision
       reason: >-
@@ -29939,6 +30231,46 @@ issues:
       claim, a notes field, an id with capitals), so packing-witness verify cannot read it as
       published; a reply may mention it. Its core's bound at 172 is not claimed here; #946
       claims it, and T-286 records that.
+
+      The first reply, of 08:46:54Z on 11 November 2026 (issuecomment-6791375129), was posted
+      after #948 merged as 9fd466fe1 at 08:21:27Z and is recorded in intake lane L86. Lane
+      L85 drafted it from that main, its record block rendered by check_requests --draft 939
+      with the evidence id added, and the posted text is that draft as written. It is
+      recorded as `import`: it is the reply of the pull request that registered the result,
+      which result-import.md (stage 1) calls the import reply as well as the
+      acknowledgement, and it is not `final`, since it says that a final reply follows once
+      the owner answers RV-3. #846's reply of 31 October, also on an issue left open for the
+      owner, is recorded as `final`: it stated T-259 confirmed at V3/C3 beside the held
+      entries, and check_requests counted that issue closeable but for its block. This
+      reply's only result waits on the owner. It states T-285 at
+      V0/C1, reviewed and pending adoption, and names its evidence,
+      E-de-winter-939-certificate-report, with no status; it names think-ruu2, which owns
+      RV-3, recorded under the reply's beads. It says that T-284 stays the house at 199 until
+      the owner answers; that the issue's 0.00288 is the gap to T-127, the house before #938,
+      and that the gain over T-284 is 2.6345e-12 (F2); and what was checked: the packet
+      de-winter-s199-upper-bound-2026-11-09, both maintained routes through readers written
+      for its files, the controls, the YAML's missing softschema envelope, so that
+      packing-witness verify refuses it as published (informational), and the quintic,
+      irreducible, with S 1.36e-99 above its root. It says that while T-285 is held the replay
+      is retained but not entered as evidence. It passes on the stage 4 review (think-o53d):
+      its clean-room checker, the 25 touching pairs, the algebra and the construction
+      confirmed, and the core being the KKT point the record holds unregistered (think-wju3).
+      It sets out the question it waits on: the gain is 1.0399 times the 2.533e-12 of padding
+      T-282's certificate carries, which T-284 inherits through the L step, 1.0107e-13 beyond
+      it, and RV-3 asks whether such a gain is a new result; one answer settles this issue,
+      #946 and Daniel's held solve at 172. It passes on F2 (credit #938 for the L step), F6
+      and F8, and summarises F3 to F5, F7 and F9 to F12. It passes on the licence, MIT,
+      byte-identical to the copy the record has kept since October, and on the credit, de
+      Winter after Özden, Daniel and this project, with the AI-assistance statement as given.
+      It asks the review's six questions, the same on #946: whether #946's bound will be
+      stated as the certificate's side and the root as the asserted optimum (F1); whether #938
+      will be cited for the L step and #939's gain given against T-284 (F2); whether the 16
+      free squares' shift of about (1e-4, 1e-4) and turn of about 1e-4 radian was chosen, and
+      why; how the quintic was identified from 108 places, and whether the 390-place
+      solution is an independent code path; what the 734 contacts count; and which commit the
+      record should cite for #939, 702c7af2 or c4e65d0b. The questions are informational and
+      hold nothing open. It says that the issue stays open, labelled blocked:owner-decision,
+      until the owner answers RV-3, and no reply is due until the record moves.
   - number: 946
     title: 's(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request'
     author: JoostdeWinter
@@ -29966,7 +30298,7 @@ issues:
       think-o53d, lane L82), written blind in a separate lane, accepts it with #939's, no finding
       blocking, and is mapped at C1; its F1 asks the author to state the bound as the
       certificate's side, with the root as the asserted optimum, as the record has it.
-    read_through: '2026-11-10T21:27:10Z'
+    read_through: '2026-11-11T08:47:19Z'
     results:
     - key: n172-exact-local-optimum
       validation:
@@ -29985,7 +30317,21 @@ issues:
     - think-2h88
     - think-o53d
     answer_bead: think-2h88
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/946#issuecomment-6791384381
+      date: '2026-11-11'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n172-exact-local-optimum
+        id: T-286
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: n172-exact-local-optimum
+        id: E-de-winter-946-certificate-report
+      beads: [think-ruu2]
     blocked:
       type: owner-decision
       reason: >-
@@ -30008,3 +30354,40 @@ issues:
       at 71da0d5 (above324/), and #942 reports 16, at a9486ed (above324_refined/); both are
       triaged on think-cen3. No issue reports the six counts a0c4fc8 adds (597, 754, 864, 865,
       869 and 991), which are left for triage.
+
+      The first reply, of 08:47:19Z on 11 November 2026 (issuecomment-6791384381), was posted
+      after #948 merged as 9fd466fe1 at 08:21:27Z and is recorded in intake lane L86. Lane
+      L85 drafted it from that main, its record block rendered by check_requests --draft 946
+      with the evidence id added, and the posted text is that draft as written. It is
+      recorded as `import`, as #939's reply of the same minute is, for the same reasons. It
+      states T-286 at V0/C1, reviewed and pending adoption, and names its evidence,
+      E-de-winter-946-certificate-report, with no status; it names think-ruu2, which owns
+      RV-3, recorded under the reply's beads. It says that T-282 stays the house at 172 until
+      the owner answers, and passes on F1: the certificate proves s(172) <= S for its own
+      rational side, with a 670-digit denominator, 1.56e-319 above the quintic's root; the
+      root bounding s(172) would rest on the author's numerical solution; so the record
+      carries the side as the bound, 13.6146898532835806 at 16 places and 13.614689853284 at
+      12, and the root as the arrangement's asserted optimum. It says what was checked: the
+      packet de-winter-s172-upper-bound-2026-11-10, both maintained routes through the
+      readers written for #939's files, the least wall clearance 1.5e-320 and pair gap
+      1e-320, and the quintic, #939's shifted by one; and that while T-286 is held the replay
+      is retained but not entered as evidence. It passes on the stage 4 review (think-o53d):
+      its clean-room checker; its control S1, which failed because the plan assumed wall
+      contacts the certificate does not have, the review's own fault (F9), and the
+      replacement control marked as added; the algebra; the 336 tight pairs, all among
+      T-282's 342 below 1e-12; and the point being the KKT point the record holds
+      unregistered (think-wju3). It says that #939's core is this configuration to 2.3e-99,
+      the two entries naming each other (F3), and sets out the question it waits on: the gain
+      over T-282, 2.6345e-12, is 1.0399 times T-282's 2.533e-12 of padding, and RV-3 asks
+      whether such a gain is a new result; it notes the issue's comparison with T-098 at 206,
+      registered on 5 October 2026, before RV-3 was raised. It says that the quintic is new to
+      the record, which holds no minimal polynomial at 172; passes on F6 and F8; says the
+      review did not check the 734 contacts, the rank 285, the force balance, the 390-digit
+      solution or the T-098 precedent; and passes on the licence, MIT, and on the credit: the
+      arrangement stays Daniel's as Özden improved it, the re-solve, closed form and
+      certificate are de Winter's, the request to be credited as the arrangement's improver is
+      noted beside the entry while it is held, and T-286 is listed as de Winter after Özden,
+      Daniel and this project, with the AI-assistance statement as given. It asks the
+      review's six questions, the same as on #939, and says that the issue stays open,
+      labelled blocked:owner-decision, until the owner answers RV-3; the questions are
+      informational and hold nothing open, and no reply is due until the record moves.
