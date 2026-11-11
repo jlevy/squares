@@ -59013,3 +59013,72 @@ evidence:
       A clean-room decision of the one retained witness by two exact methods in one program, which
       share its reader. Finite feasibility only.
     source_reviewed: '2026-11-09'
+  - id: E-de-winter-939-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 199
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter s199 upper bound 2026-11-09]'
+    certificate: packing/resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-10'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 702c7af:
+      T-284's packing at 199 with its 172-square core re-solved to what the source calls the exact
+      local optimum of T-282's arrangement, and T-284's L of 27 unit grid squares at side S172' +
+      1. The source's verify_exact.py and a second script of the same author, both in Python's
+      Fraction, are reported to accept it; they were not run here. A separate complete repository
+      replay is retained for n = 199: 1 positive and 2 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 118206 pair decisions; summed over
+      the 3 jobs, the receipt records 35.39 route CPU seconds, the longest job 12.38 seconds. In
+      every positive the grid squares touch the box and each other, a least wall clearance and a
+      least pair gap of exactly 0, and the packet's sharp controls meet those margins on both
+      routes. That replay is not entered as evidence while T-285 is held for the owner's RV-3
+      (think-ruu2), as T-280's is not.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing (here two readers written for the source's files,
+      witness-center-basis-bare and center-direction-json), half-angle conversion, Fraction
+      arithmetic and the separating-axis method, and share no code with the source's checkers.
+      The core's arrangement is T-282's, whose exact coordinates this repository's packing-witness
+      promote made; the core's coordinates here are the source's own re-solve. No human oversight
+      or optimality is claimed.
+  - id: E-de-winter-946-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 172
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter s172 upper bound 2026-11-10]'
+    certificate: packing/resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-11'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at c4e65d0:
+      T-282's packing re-solved to what the source calls the exact local optimum of its
+      arrangement, 1.6e-319 above the root of a quintic, the core of #939's certificate with less
+      padding. The source's verify_exact.py, in Python's Fraction, is reported to accept it; it was
+      not run here. A separate complete repository replay is retained for n = 172: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on both
+      routes, and the packet's sharp controls meet the certificate's margins on both routes. That
+      replay is not entered as evidence while T-286 is held for the owner's RV-3 (think-ruu2), as
+      T-280's is not.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing (two readers written for the source's files,
+      witness-center-basis-bare and center-direction-json), half-angle conversion, Fraction
+      arithmetic and the separating-axis method, and share no code with the source's checker. No
+      human oversight or optimality is claimed.

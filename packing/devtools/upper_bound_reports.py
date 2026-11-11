@@ -1682,6 +1682,13 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # vitamoon/vitamoon ac14112, which no issue reports; T-280 and T-281 are held below the
     # stage 4 exit for the owner (think-ruu2's RV-3, think-ikku).
     "[Yim certificates 2026-11-09]": _import("yim-certificates-2026-11-09"),
+    # Lane L78 of 10 November (think-2h88): Joost de Winter's issue 939 at 199, T-284's
+    # packing with its core re-solved; T-285 is held below the stage 4 exit for the owner
+    # (think-ruu2's RV-3).
+    "[de Winter s199 upper bound 2026-11-09]": _import("de-winter-s199-upper-bound-2026-11-09"),
+    # The same lane, 11 November: his issue 946 at 172, that packing's core, T-282's
+    # arrangement re-solved; T-286 is held with T-285.
+    "[de Winter s172 upper bound 2026-11-10]": _import("de-winter-s172-upper-bound-2026-11-10"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

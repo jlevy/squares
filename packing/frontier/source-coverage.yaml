@@ -12594,6 +12594,64 @@ sources:
     (campaign/issue-intake/upper-bounds-938-20261109) records it. All 3 native jobs have full
     outcomes. A later commit, 4fbff7b, changes one line of the README and is read in
     campaign/intake-watch.yaml.
+- id: de-winter-s199-upper-bound-2026-11-09
+  title: Joost de Winter's packing of 199 squares at JoostdeWinter/square-packing 702c7af, issue 939
+  role: source-repository
+  url: >-
+    https://github.com/JoostdeWinter/square-packing/tree/702c7af2db04c9b69696455ee3d33883a2935e8a
+  local: resources/web/de-winter-s199-upper-bound-2026-11-09/
+  source_key: '[de Winter s199 upper bound 2026-11-09]'
+  scope:
+    n_values:
+    - 199
+  reviewed: '2026-11-10'
+  source_date: '2026-11-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/claims.json
+  evidence:
+  - E-de-winter-939-certificate-report
+  notes: >-
+    The licence, the root README and the folder n199/ of the commit 702c7af are retained for
+    jlevy/squares#939, the licence pinned against the byte-identical copy the
+    de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and the figure by digest; the
+    certificate is admitted only where its exact side rounds up to the side the issue prints. It is
+    T-284's packing with its 172-square core re-solved. T-285 records the in-horizon report at
+    V0/C1, held below the stage 4 exit for the owner's RV-3 (think-ruu2); the house stays T-284.
+    The ledger of 11 November for this lane (campaign/issue-intake/upper-bounds-939-946-20261111)
+    records it as a refinement of T-284's packing. All 3 native jobs have full outcomes.
+- id: de-winter-s172-upper-bound-2026-11-10
+  title: Joost de Winter's packing of 172 squares at JoostdeWinter/square-packing c4e65d0, issue 946
+  role: source-repository
+  url: >-
+    https://github.com/JoostdeWinter/square-packing/tree/c4e65d0b8c4d32e45bf32a907e8b760502f137af
+  local: resources/web/de-winter-s172-upper-bound-2026-11-10/
+  source_key: '[de Winter s172 upper bound 2026-11-10]'
+  scope:
+    n_values:
+    - 172
+  reviewed: '2026-11-11'
+  source_date: '2026-11-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s172-upper-bound-2026-11-10/acquisition/claims.json
+  evidence:
+  - E-de-winter-946-certificate-report
+  notes: >-
+    The licence, the root README and the folder n172/ of the commit c4e65d0 are retained for
+    jlevy/squares#946, the licence pinned against the byte-identical copy the
+    de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and the figure by digest; the
+    certificate is admitted only where its exact side rounds up to the side the source's README
+    prints. It is T-282's packing re-solved, the core of #939's certificate with less padding.
+    T-286 records the in-horizon report at V0/C1, held below the stage 4 exit for the owner's
+    RV-3 (think-ruu2); the house stays T-282. The ledger of 11 November for this lane
+    (campaign/issue-intake/upper-bounds-939-946-20261111) records it as a refinement of T-282's
+    packing. The four commits between the two pins of this lane add certificates at 37 counts
+    above 324 under above324/ and above324_refined/, outside this scope and left for triage.
 - id: yim-certificates-2026-11-09
   title: Kaelan Yim's certificates at vitamoon/vitamoon ac14112, watched publications with no issue
   role: source-repository

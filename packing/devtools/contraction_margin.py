@@ -37,6 +37,16 @@ format of `devtools.upper_bound_reports.ADAPTERS`. ``--against`` names a later c
 of the same count, held to the same exact wall and pair checks, whose gain over the first
 is compared with the margin.
 
+**Through an L step.** A certificate built by one L step, such as #938's and #939's at
+199, has margin 0, since its grid squares touch; its padding is its base's. The base is
+read with ``l-base:packet:NAME`` (`devtools.measure_identity.read_l_base`), at the base's
+count. Contracting the base and writing the L on it gives a packing one larger, so the
+base's margin is the margin the certificate carries through the step::
+
+    python -m devtools.contraction_margin --n 172 \\
+        'T-284=l-base:packet:ozden-s199-upper-bound-2026-11-09' \\
+        --against 'T-285=l-base:packet:de-winter-s199-upper-bound-2026-11-09'
+
 From ``packing/``, with the project interpreter::
 
     python -m devtools.contraction_margin --n 299 \\
@@ -103,6 +113,8 @@ def read_certificate(spec: str, n: int) -> Read:
                 raise ContractionError(f"{plain}: the packet declares no certificate at {n}")
             certificate = facts[n]
             source: dict[str, Any] = {"input": identity.PACKET, "packet": target}
+        elif kind == identity.L_BASE:
+            certificate, source = identity.read_l_base(target, n)
         elif kind in reports.ADAPTERS:
             path = Path(target)
             raw = retained_data.read_retained_bytes(path, limit=reports.MAX_SOURCE_BYTES)

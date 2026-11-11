@@ -1,0 +1,103 @@
+# What `python -m devtools.intake_ledger gather` reads: the upper bounds at n <= 324 that lane L78
+# of the intake pass (think-2h88) takes in on 11 November 2026, Joost de Winter's #939 at 199 and
+# #946 at 172, each opened minutes after the commit of JoostdeWinter/square-packing that holds its
+# certificate (702c7af, 21:54:59Z on 9 November; c4e65d0, 21:26:23Z on 10 November). GitHub's
+# activity log was not read, so no push time is recorded; each issue dates its report. The starts
+# are frozen at main f54ad1048 (#940's merge): T-284 at 199 (Doğa Özden's #938, T-282's packing
+# with the L step) and T-282 at 172 (his #935), each in both lanes. Each claim's exact side is its
+# certificate's header, read by its packet's claim record, which the lane wrote from main
+# f54ad1048. #939's certificate is T-284's packing with its 172-square core re-solved, and #946's
+# is that core alone, tightened, so each is a refinement of the house's packing at its count, and
+# the register holds both below the stage 4 exit for the owner's RV-3 (think-ruu2). #939's core
+# also bounds s(172), unclaimed; #946 is the first report at 172, since the record carries no
+# deletion of an L inside the corpus. JoostdeWinter/square-packing's four commits between the two
+# pins (d3a020e, 71da0d5, a9486ed and a0c4fc8) add certificates at 37 counts above 324, left for
+# triage; 8c0de9d (21:20:44Z on 10 November) first added n172/ at 1.4e-99 above the same root,
+# overwritten at c4e65d0 47 seconds before #946.
+format: intake-ledger-sources-v1
+read_at_main: f54ad1048080ce14151282dd1861a29b03b51714
+read_on: '2026-11-11'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l78
+  branch: claude/bold-ritchie-xo28us-l78
+  commit: f54ad1048080ce14151282dd1861a29b03b51714
+  note: The packets' claim records, written on the lane's branch from main f54ad1048 and read here by path.
+reports:
+- report: '#939'
+  issue: 939
+  holders: Joost de Winter
+  bead: think-2h88
+  lanes:
+  - lane: l78
+    packet: de-winter-s199-upper-bound-2026-11-09
+    record: claims.json
+    counts: [199]
+  claims:
+  - n: 199
+    measured:
+      against: T-284
+      finding: one to one with T-284's packing under the identity by nearest centres; no square moves beyond 1e-3
+        (largest 1.414e-4) and the 27 squares of the L do not move; 84 squares, the arrangement's non-load-bearing
+        ones, move beyond 1e-9, 16 of them also turned by 0.00573 degrees; a refinement of T-284's packing
+      source: packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n199.json
+    refines:
+      packing_of: Doğa Özden
+      entry: T-284
+      source: '#939: ''The core uses the arrangement of the 172-square packing found by Evan Daniel and improved by
+        Doğa Özden ... The core was re-optimized to the exact local optimum of that arrangement'', with a border of 27
+        axis-aligned squares (a row of 14 and a column of 13)'
+    note: >-
+      The gain, 2.635e-12, is 1.0399 of the padding T-284 carries from T-282 through the L step (2.533e-12, the
+      margin of its base, measure/contraction-n172-base.json); its own uniform-contraction margin is 0, since its
+      grid squares touch (measure/contraction-n199.json). Whether such a re-certification is a new result is the
+      owner's open question (think-ruu2's RV-3); T-285 is held below the stage-4 exit at V0/C1 and does not
+      move the house, and its replay's entry and adoption to V3/C3 wait on the owner's answer.
+  note: >-
+    The issue names 702c7af, committed at 2026-11-09T21:54:59Z, 9 minutes before the issue. It says the side lies
+    less than 1e-98 above the real root near 14.6147 of an irreducible quintic, the arrangement's local optimum by
+    a numerical solution to 130 digits, with no formal proof; the record finds the side 1.36e-99 above that root
+    exactly. The 172-square core is the KKT point Evan Daniel's regularizer reached from T-282's witness on 9
+    November and the record holds unregistered (think-wju3), its side equal to the root less one in all 63 places
+    the regularizer prints, with less padding (1.0000 of that solve's own margin).
+- report: '#946'
+  issue: 946
+  holders: Joost de Winter
+  bead: think-2h88
+  lanes:
+  - lane: l78
+    packet: de-winter-s172-upper-bound-2026-11-10
+    record: claims.json
+    counts: [172]
+  claims:
+  - n: 172
+    measured:
+      against: T-282
+      finding: one to one with T-282's packing under the identity by nearest centres; no square moves beyond 1e-3
+        (largest 1.414e-4); 84 squares, the arrangement's non-load-bearing ones, move beyond 1e-9, 16 of them also
+        turned by 0.00573 degrees; against the core of issue 939's packing every square lies within 2.3e-99; a
+        refinement of T-282's packing
+      source: packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/identity-n172.json
+    refines:
+      packing_of: Doğa Özden
+      entry: T-282
+      source: '#946: ''The side is the exact local optimum of the registered arrangement ... No square was added,
+        removed or moved to another place in the contact structure. Credit for the arrangement belongs to them'''
+    note: >-
+      The gain, 2.635e-12, is 1.0399 of T-282's own uniform-contraction margin, 2.533e-12
+      (packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172.json), the share of
+      Evan Daniel's held solve (think-wju3), whose KKT point this is. Whether such a re-certification is a new
+      result is the owner's open question (think-ruu2's RV-3); T-286 is held below the stage-4 exit at V0/C1 and
+      does not move the house.
+  note: >-
+    The issue names c4e65d0, committed at 2026-11-10T21:26:23Z, 47 seconds before the issue; 8c0de9d (21:20:44Z)
+    first published n172/ at 1.4e-99 above the same root, and c4e65d0 overwrote it. The issue prints the side cut
+    at 56 places and says it lies 1.6e-319 above the real root near 13.6147 of an irreducible quintic, the
+    arrangement's exact local optimum, with no formal proof; the record finds it 1.56e-319 above that root
+    exactly. It is #939's core, 1.36e-99 lower, and calls itself the same type of result as T-098, awaiting RV-3.
+    #939's certificate also bounds s(172), but #939 claims 199 only and the record carries no deletion of an L
+    inside the corpus, so #946 is the first report at 172.
+exceptions: []
+other_items: []

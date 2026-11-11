@@ -1,4 +1,4 @@
-"""The upper-bound import of the intake pass's lane L78 of 9 November 2026 (think-2h88).
+"""The upper-bound import of the intake pass's lane L78 of 10 November 2026 (think-2h88).
 
 One packet: Joost de Winter's #939 at 199 (JoostdeWinter/square-packing 702c7af), read by
 two adapters written for it. ``n199_witness.yaml`` follows Witness/v2's ``witness`` object
@@ -8,12 +8,15 @@ without the schema's envelope (`reports.witness_center_basis_bare`), and
 ``S - 1`` and the other 27 the L of #938, so the certificate is the L step on its own core,
 pose for pose, which `devtools.construction_checker` writes out. These tests hold the
 adapters to what they accept and refuse, and the packet to the prints the issue and
-README state, the digests its ``SHA256SUMS`` states, the construction and the comparison
-with the house; none needs the network.
+README state, the digests its ``SHA256SUMS`` states, the quintic the side lies just above,
+the construction, the comparison with the house (T-284), the ledger's verdict, the
+retained measurements, and the core's side against Evan Daniel's held solve at 172
+(think-wju3); none needs the network.
 """
 
 from __future__ import annotations
 
+import gzip
 import json
 import math
 from decimal import Decimal
@@ -22,6 +25,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import sympy
 import yaml
 
 from devtools import construction_checker as construction
@@ -40,7 +44,17 @@ STATED_DIGESTS = {
     ),
     "n199/n199_exact.json": "11bdfa7ad41f65d0ea7460cb50e11bdf724d52031aabf72274bb356c71135d21",
 }
-HOUSE = "[Gupta rational refinements 2026-10-08]"
+HOUSE = "[Özden s199 upper bound 2026-11-09]"
+#: The quintic #939 states, highest degree first.
+QUINTIC = (62, -4426, 125017, -1746146, 12052670, -32855154)
+#: Evan Daniel's regularizer's run on T-282's witness after the adoption of 9 November
+#: (think-he66), whose solve the record holds unregistered (think-wju3).
+HELD = (
+    reports.ROOT
+    / "cases/regularized_drawings/think-he66-2026-11-09"
+    / "adopt-2026-11-09-n172-270-evand/n-172/report.json.gz"
+)
+LEDGER = reports.ROOT / "campaign/issue-intake/upper-bounds-939-946-20261111"
 
 #: Two unit squares in a box of side 3: the second turned to the basis (4/5, 3/5), whose
 #: half-angle tangent is 1/3. The same packing as test_upper_bound_reports's fixtures.
@@ -289,18 +303,109 @@ def test_the_certificate_is_the_l_step_on_its_own_core() -> None:
     assert construction.write_out(recipe, core) == found
 
 
-def test_the_certificate_is_below_the_house_and_the_reports_before_it() -> None:
+def test_the_certificate_is_below_the_house_by_its_core_gain_and_across_its_print() -> None:
+    """T-284 is T-282 plus one, so the gain at 199 is the core's gain over T-282, exactly."""
     side = _certificate().side
-    assert f"{float(reports.house_side(HOUSE, 199) - side):.3e}" == "2.882e-03"
+    house = reports.house_side(HOUSE, 199)
+    gain = house - side
+    assert gain == reports.house_side("[Özden s172 upper bound 2026-11-09]", 172) - (side - 1)
+    assert f"{float(gain):.3e}" == "2.635e-12"
+    assert (_up(house, 12), _up(side, 12)) == (
+        Fraction(Decimal("14.614689853287")),
+        Fraction(Decimal(TABLE)),
+    )
     (row,) = reports.check_claims(reports.packet_path(PACKET))["results"]
-    assert (row["n"], row["smallest"], row["case"]["relation"]) == (199, reports.THIS, "below")
+    assert (row["n"], row["smallest"]) == (199, reports.THIS)
+    assert (row["case"]["result"], row["case"]["relation"]) == ("T-284", "below")
     assert {
         pending["report"].split()[0]: pending["relation"] for pending in row["pending"]
-    } == {
-        "T-174": "below",
-        "T-193": "below",
-        "#938": "below",
-    }
+    } == {"T-174": "below", "T-193": "below"}
+
+
+def test_the_side_lies_just_above_the_one_root_of_the_quintic_near_it() -> None:
+    """The quintic is irreducible over Q; it has exactly one root in [S - 1e-98, S] by
+    Sturm's theorem, with the sign changing there; and S lies 1.36e-99 to 1.37e-99 above
+    it, as the README's 1.4e-99 says. The certificate proves s(199) <= S and nothing about
+    the root."""
+    side = _certificate().side
+    x = sympy.Symbol("x")
+    quintic = sympy.Poly(QUINTIC, x, domain="QQ")
+    assert quintic.is_irreducible
+    assert len(quintic.real_roots()) == 3
+
+    def at(value: Fraction) -> Fraction:
+        total = Fraction(0)
+        for coefficient in QUINTIC:
+            total = total * value + coefficient
+        return total
+
+    def rational(value: Fraction) -> sympy.Rational:
+        return sympy.Rational(value.numerator, value.denominator)
+
+    low = side - Fraction(1, 10**98)
+    assert quintic.count_roots(rational(low), rational(side)) == 1
+    assert quintic.count_roots(13, 16) == 1
+    assert at(low) > 0 > at(side)
+    # The root lies between S - 1.37e-99 and S - 1.36e-99.
+    assert at(side - Fraction(137, 10**101)) > 0 > at(side - Fraction(136, 10**101))
+
+
+def test_the_core_is_the_held_kkt_point_in_every_place_the_solver_prints() -> None:
+    """Evan Daniel's regularizer solved T-282's witness to a KKT point the record holds
+    unregistered (think-wju3). Its side, printed at 63 places, is the core's side S - 1 in
+    every one of them, and its certificate lies 1.3615e-19 above the core."""
+    with gzip.open(HELD, "rt", encoding="utf-8") as stream:
+        solve = json.load(stream)["solve"]
+    printed = solve["S_exact"]
+    places = len(printed.split(".")[1])
+    assert places == 63
+    core = _certificate().side - 1
+    assert abs(Fraction(Decimal(printed)) - core) < Fraction(1, 10**places)
+    assert f"{float(Fraction(solve['S_cert']) - core):.4e}" == "1.3615e-19"
+
+
+def test_the_ledger_records_a_refinement_of_t284s_packing() -> None:
+    ledger = json.loads((LEDGER / "ledger.json").read_text("utf-8"))
+    text = json.dumps(ledger)
+    assert ledger["read_at_main"].startswith("f54ad1048")
+    assert "T-284" in text
+    assert "#939" in text
+    readme = (LEDGER / "README.md").read_text("utf-8")
+    assert (
+        "#939 14.614689853284: recorded, a refinement of Doğa Özden's packing (T-284)" in readme
+    )
+
+
+def test_the_measurements_the_register_cites() -> None:
+    """The retained receipts: one to one with T-284 under the identity, none beyond 1e-3;
+    the whole certificates' margins 0; the base's share of T-282's padding 1.0399."""
+    measure = reports.packet_path(PACKET) / "measure"
+
+    def read(name: str) -> dict[str, Any]:
+        return json.loads((measure / name).read_text("utf-8"))
+
+    (pair, *_) = read("identity-n199.json")["pairs"]
+    nearest = pair["nearest_centre"]
+    assert (pair["against"], nearest["one_to_one"], nearest["symmetry"]) == ("T-284", True, 0)
+    assert nearest["largest_displacement"] == "1.414270e-4"
+    assert nearest["moved_beyond"] == {"1e-9": 84, "1e-6": 84, "1e-3": 0, "1e-2": 0, "1e-1": 0}
+    assert (
+        read("contraction-n199.json")["margin"],
+        read("contraction-n199-own.json")["margin"],
+    ) == (
+        "0",
+        "0",
+    )
+    base = read("contraction-n172-base.json")
+    assert (base["margin_float"], base["against"]["gain_over_margin"]) == (
+        "2.533458e-12",
+        "1.0399",
+    )
+    held = read("contraction-n172-daniel-held.json")
+    assert held["against"]["gain_over_margin"] == "1.0000"
+    assert held["certificate"]["sha256"] == (
+        "720fcebe098e607650a82cc916e78e84ab105111fb4b2db11587b77f62e08337"
+    )
 
 
 def test_the_packet_records_its_retained_files_and_pins() -> None:
@@ -311,3 +416,81 @@ def test_the_packet_records_its_retained_files_and_pins() -> None:
     assert "702c7af2db04c9b69696455ee3d33883a2935e8a" in text
     assert "n199/n199_record.png" in text
     assert Path(reports.packet_path(PACKET) / "source/n199/n199_exact.json.gz").is_file()
+
+
+# --------------------------------------------------------------------------- #946 at 172
+
+PACKET_172 = "de-winter-s172-upper-bound-2026-11-10"
+#: The quintic #946 states: #939's, shifted by one.
+QUINTIC_172 = (62, -4116, 107933, -1397031, 8918035, -22427977)
+
+
+def _certificate_172() -> legacy.Certificate:
+    return reports.read_facts(reports.packet_path(PACKET_172), {172})[172]
+
+
+def test_946_is_t282s_packing_below_it_at_the_root_of_the_shifted_quintic() -> None:
+    """The source's README prints the side rounded up at 12 places; the quintic is #939's
+    shifted by one, irreducible, with one root in [S - 1e-318, S], 1.56e-319 below S; the
+    side is #939's core side less 1.36e-99, and 2.635e-12 below T-282, crossing its print."""
+    declaration = reports.load_declaration(reports.packet_path(PACKET_172))
+    (row,) = declaration["certificates"]
+    assert (row["n"], row["format"], row["offered"]) == (
+        172,
+        "witness-center-basis-bare",
+        "13.614689853284",
+    )
+    side = _certificate_172().side
+    assert _up(side, 12) == Fraction(Decimal("13.614689853284"))
+    x = sympy.Symbol("x")
+    quintic = sympy.Poly(QUINTIC_172, x, domain="QQ")
+    assert quintic == sympy.Poly(
+        sympy.Poly(QUINTIC, x).as_expr().subs(x, x + 1), x, domain="QQ"
+    )
+    assert quintic.is_irreducible
+    low = side - Fraction(1, 10**318)
+    assert (
+        quintic.count_roots(
+            sympy.Rational(low.numerator, low.denominator),
+            sympy.Rational(side.numerator, side.denominator),
+        )
+        == 1
+    )
+
+    def at(value: Fraction) -> Fraction:
+        total = Fraction(0)
+        for coefficient in QUINTIC_172:
+            total = total * value + coefficient
+        return total
+
+    assert at(side - Fraction(157, 10**321)) > 0 > at(side - Fraction(156, 10**321))
+    core = _certificate().side - 1
+    assert f"{float(core - side):.3e}" == "1.361e-99"
+    house = reports.house_side("[Özden s172 upper bound 2026-11-09]", 172)
+    assert f"{float(house - side):.3e}" == "2.635e-12"
+    (claim,) = reports.check_claims(reports.packet_path(PACKET_172))["results"]
+    assert (claim["smallest"], claim["case"]["result"], claim["case"]["relation"]) == (
+        reports.THIS,
+        "T-282",
+        "below",
+    )
+
+
+def test_946_measurements_and_ledger() -> None:
+    measure = reports.packet_path(PACKET_172) / "measure"
+
+    def read(name: str) -> dict[str, Any]:
+        return json.loads((measure / name).read_text("utf-8"))
+
+    contraction = read("contraction-n172.json")
+    assert (contraction["margin_float"], contraction["against"]["gain_over_margin"]) == (
+        "2.533458e-12",
+        "1.0399",
+    )
+    (pair, *_) = read("identity-n172.json")["pairs"]
+    assert (pair["against"], pair["nearest_centre"]["one_to_one"]) == ("T-282", True)
+    assert pair["nearest_centre"]["moved_beyond"]["1e-3"] == 0
+    readme = (LEDGER / "README.md").read_text("utf-8")
+    assert (
+        "#946 13.614689853284: recorded, a refinement of Doğa Özden's packing (T-282)" in readme
+    )

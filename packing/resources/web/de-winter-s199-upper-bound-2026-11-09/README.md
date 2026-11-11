@@ -10,9 +10,11 @@ is the revision the
 [de-winter-upper-bounds-227-229-260-2026-10-17](../de-winter-upper-bounds-227-229-260-2026-10-17/README.md)
 packet retains, and the folders for 227, 229 and 260 are unchanged.
 
-This is the intake lane’s first phase (L78, think-2h88). It retains the source and replays
-the certificate. The comparison is frozen at `main` `200f2ebc1`, before #938’s import
-(lane L76, think-1goz) merged; the register, the evidence and the case are not touched.
+Intake lane L78 (think-2h88) retained the source and replayed the certificate on 9
+November 2026, and on 10 November, after #938’s import (lane L76, PR #940) made T-284 the
+house at 199, compared it with T-284, measured it and registered it as **T-285, held at
+V0/C1** for the owner’s RV-3 (think-ruu2). The house stays T-284, and the case record is
+not touched.
 
 ## What the Source Claims
 
@@ -69,15 +71,19 @@ Git blob at the pin. The scope is the licence, the root README and the whole of 
 ## Against the Record
 
 [acquisition/claims.json](acquisition/claims.json) is the frozen comparison
-(`devtools.upper_bound_reports check-claims`, read from `main` `200f2ebc1`):
+(`devtools.upper_bound_reports check-claims`, read from `main` `f54ad1048`, after PR #940
+merged):
 
-- The certificate is below the case’s house, T-127 (Nate Chaoweeraprasit, improved by
-  Siddharth Gupta), by 2.882 × 10⁻³.
-- It is below the two re-certifications of T-127’s packing pending there, T-174 and
-  T-193.
-- It is below #938 (Doğa Özden, 20:31Z the same evening), compared by #938’s 12-place
-  print, 14.614689853287, since #938’s packet was not on `main`. By the exact sides, it
-  is 2.6345292 × 10⁻¹² below #938, whose side is T-282’s plus 1.
+- The certificate is below the case’s house, T-284 (#938, Doğa Özden, 20:31Z the same
+  evening; Evan Daniel’s packing as Özden improved it), by 2.6345292 × 10⁻¹². That is
+  exactly T-282’s side less S − 1, since T-284’s side is T-282’s plus 1. It crosses
+  T-284’s 12-place print: 14.614689853284 against 14.614689853287.
+- It is below T-174 and T-193, two re-certifications of the former house’s packing
+  (T-127), by 2.882 × 10⁻³.
+- The
+  [ledger of 11 November](../../../campaign/issue-intake/upper-bounds-939-946-20261111/README.md)
+  walks it from starts frozen at `f54ad1048` and records it, as a refinement of T-284’s
+  packing.
 
 ## The Construction
 
@@ -136,16 +142,88 @@ and the separating-axis method. Neither shares code with the author’s `verify_
 which was not run. The issue says the certificate was not replayed with this
 repository’s checkers.
 
+## The Quintic
+
+Checked exactly by the lane’s test with sympy over Q and sign tests in `Fraction`: the
+quintic is irreducible, with three real roots (near 9.670, 14.6147 and 19.065). Exactly
+one root r lies in [S − 10⁻⁹⁸, S] (a Sturm count), and the quintic changes sign there.
+S lies between 1.36 × 10⁻⁹⁹ and 1.37 × 10⁻⁹⁹ above r, as the README’s 1.4 × 10⁻⁹⁹ says.
+The core’s side S − 1 is then 1.36 × 10⁻⁹⁹ above r − 1, a root of the shifted quintic.
+
+## Pose by Pose
+
+`devtools.measure_identity` wrote [measure/identity-n199.json](measure/identity-n199.json)
+and [measure/identity-n172-base.json](measure/identity-n172-base.json); a measurement for
+credit, which decides nothing.
+
+- **Against T-284.** Nearest centres pair it one to one with T-284’s packing under the
+  identity. 84 squares move beyond 10⁻⁹ and none beyond 10⁻³ (largest 1.414 × 10⁻⁴), and
+  16 turn by 0.00573 degrees. The L does not move. So it is a refinement of T-284’s
+  packing. Against the regularized view at 199, 44 squares move beyond 10⁻³.
+- **The 84.** They are the arrangement’s non-load-bearing squares, which the source
+  moved off their contacts by about 10⁻⁴ (“all other gaps stay open”). The other 88
+  move by less than 10⁻⁹. The 16 turned squares are the free squares of Evan Daniel’s
+  KKT solve below.
+- **The base.** Read through `l-base`, the base is T-282’s certificate, pose for pose.
+
+## The Gain Against Padding
+
+`devtools.contraction_margin` contracts a certificate uniformly about the origin to first
+contact, boxes it, and decides the contracted packing on both routes. Every receipt is
+under [measure/](measure/):
+
+| Certificate (receipt) | 1 − λ\* | Margin | Against | Gain ÷ margin |
+| --- | --- | --- | --- | --- |
+| T-284 ([contraction-n199.json](measure/contraction-n199.json)) | 0 | 0, the grid pair 173–174 binding | this certificate, 2.634529 × 10⁻¹² | none (the margin is 0) |
+| this certificate ([contraction-n199-own.json](measure/contraction-n199-own.json)) | 0 | 0 | — | — |
+| T-284’s base, T-282 ([contraction-n172-base.json](measure/contraction-n172-base.json)) | 2.008339 × 10⁻¹³ | 2.533458 × 10⁻¹² | this certificate’s base, 2.634529 × 10⁻¹² | **1.0399** |
+| this certificate’s base ([contraction-n172-base-own.json](measure/contraction-n172-base-own.json)) | about 10⁻¹⁰⁰ | 1.361469 × 10⁻⁹⁹ | — | — |
+| Evan Daniel’s held solve ([contraction-n172-daniel-held.json](measure/contraction-n172-daniel-held.json)) | 10⁻²⁰ | 1.361469 × 10⁻¹⁹ | this certificate’s base, 1.361469 × 10⁻¹⁹ | **1.0000** |
+
+- **Whole-certificate contraction reads 0** for any certificate built by the L step,
+  since its grid squares touch. Its padding is its base’s. The spec
+  `l-base:packet:NAME` reads the base: the certificate’s first n squares at its side less
+  one, held to `construction_checker.write_out` reproducing the certificate.
+- **The gain is 1.0399 of the padding T-284 carries.** Contracting T-282 and writing the
+  L on it gives a 199-packing 2.533 × 10⁻¹² below T-284. This certificate is 1.0107 ×
+  10⁻¹³ below that, and both round up at 12 places to 14.614689853284.
+- **The core is Evan Daniel’s held KKT point.** His regularizer solved T-282’s witness on
+  9 November (think-he66), and the record holds that solve unregistered (think-wju3).
+  - Its side, printed at 63 places in the run’s retained report, is S − 1 in every
+    place.
+  - The core gains exactly that certificate’s own padding over it (1.0000).
+  - The 88 load-bearing squares agree with it within 10⁻⁹, and the other 84 lie on its
+    77 flat motions.
+  - The view was regenerated byte for byte from `main`’s T-282 witness by
+    `regularize_evand run`, with Git blob `d641e969`, the blob the think-he66 report
+    records. It is not retained; the receipts name it by its SHA-256.
+- **The base’s own margin is 1.36 × 10⁻⁹⁹**, and the contracted base lies 1.1 × 10⁻¹²⁴
+  above r − 1. That is consistent with the source’s local-optimality claim, and is no
+  proof of it.
+
+## The Register
+
+- **T-285 records the claim, held at V0/C1, S1**, as T-280 is.
+  - Its regularization item names T-284.
+  - The replay above is not entered as evidence, and nothing is adopted.
+  - Whether a re-certification at the padding its predecessor carries is a new result is
+    the owner’s RV-3 (think-ruu2). Its answer settles this entry and the held solve at
+    172 alike.
+- **Nothing at 172 is registered from this packet.** The certificate’s first 172 squares
+  at S − 1 prove s(172) ≤ S − 1, 2.63 × 10⁻¹² below T-282. That bound is not claimed here,
+  and it is think-wju3’s held solve with less padding. #946 reported the same core a day
+  later, 1.36 × 10⁻⁹⁹ lower, and T-286 records it, held alike
+  ([de-winter-s172-upper-bound-2026-11-10](../de-winter-s172-upper-bound-2026-11-10/README.md)).
+- **The stage 4 review** is to be written by a separate blind lane. When it returns, it
+  is mapped on T-285 and on `E-de-winter-939-certificate-report` at C1, with its programs
+  under `review/`.
+
 ## What Is Not Established
 
 - **The quintic’s root as the local optimum.** The certificate proves s(199) ≤ S, the
   rational side, and nothing about the root. Optimality of any kind, local or global, is
   not replayed here.
-- **The lineage and the measurements for credit.** Identity, contraction margins and the
-  comparison with Evan Daniel’s held solve at 172 (think-wju3) were measured in the
-  lane’s scratch with the maintained tools. They are written into this packet’s
-  `measure/` in the lane’s second phase, once #938’s packet is on `main` to read them
-  against.
+- **Independent review.** No stage 4 review is mapped yet.
 - **Human oversight.** No human oversight record is retained.
 
 ## Credit and Licence
@@ -157,7 +235,7 @@ University of Technology), and the issue credits the core arrangement to Daniel 
 rational certificate, checks and figure were produced with Claude (Anthropic) under his
 direction. The core is T-282’s arrangement, which starts from this repository’s
 regularized atlas, so the lineage builds on this project.
-The draft bibliography key is **[de Winter s199 upper bound 2026-11-09]**.
+The bibliography key is **[de Winter s199 upper bound 2026-11-09]**.
 
 Everything here is published under the MIT licence, copyright (c) 2026 Joost de Winter,
 by `LICENSE` at the pin, which the root README says covers all files. The licence is
@@ -165,16 +243,44 @@ byte-identical to the copy the October packet retains, and is pinned against it.
 
 ## Commands
 
-From `packing/`, with the project interpreter. They read the packet and reproduce
-anywhere; `check-claims` reads the case records as they stood at `main` `200f2ebc1`:
+From `packing/`, with the project interpreter. They read the packets and reproduce
+anywhere, except two:
+
+- `check-claims` reads the case records as they stood at `main` `f54ad1048`.
+- The comparison with the held solve reads its view, which `regularize_evand run`
+  regenerates from that commit’s T-282 witness in about a CPU-minute; `VIEW` is its
+  `n-172/view-solved.yaml`.
 
 ```bash
-python -m devtools.acquire_source de-winter-s199-upper-bound-2026-11-09 --checkout CHECKOUT
-python -m devtools.acquire_source de-winter-s199-upper-bound-2026-11-09 --check
-python -m devtools.upper_bound_reports de-winter-s199-upper-bound-2026-11-09 check-claims --write
-python -m devtools.upper_bound_reports de-winter-s199-upper-bound-2026-11-09 certify --jobs-dir "$TMPDIR/jobs" --workers 2
-python -m devtools.upper_bound_reports de-winter-s199-upper-bound-2026-11-09 check --replay
-python -m devtools.upper_bound_reports de-winter-s199-upper-bound-2026-11-09 sharp-controls
+P=de-winter-s199-upper-bound-2026-11-09
+H=ozden-s199-upper-bound-2026-11-09
+python -m devtools.acquire_source $P --checkout CHECKOUT
+python -m devtools.acquire_source $P --check
+python -m devtools.upper_bound_reports $P check-claims --write
+python -m devtools.upper_bound_reports $P certify --jobs-dir "$TMPDIR/jobs" --workers 2
+python -m devtools.upper_bound_reports $P check --replay
+python -m devtools.upper_bound_reports $P sharp-controls
+python -m devtools.measure_identity --n 199 "#939=packet:$P" "T-284=packet:$H" \
+  'regularized=witness-center-basis:atlas/known-best/regularized/n-199-regularized.yaml.gz' \
+  --out resources/web/$P/measure/identity-n199.json
+python -m devtools.measure_identity --n 172 "#939=l-base:packet:$P" \
+  'T-282=packet:ozden-s172-upper-bound-2026-11-09' "T-284=l-base:packet:$H" \
+  'regularized=witness-center-basis:atlas/known-best/regularized/n-172-regularized.yaml.gz' \
+  --out resources/web/$P/measure/identity-n172-base.json
+python -m devtools.contraction_margin --n 199 "T-284=packet:$H" --against "#939=packet:$P" \
+  --out resources/web/$P/measure/contraction-n199.json
+python -m devtools.contraction_margin --n 199 "#939=packet:$P" \
+  --out resources/web/$P/measure/contraction-n199-own.json
+python -m devtools.contraction_margin --n 172 "T-284=l-base:packet:$H" \
+  --against "#939=l-base:packet:$P" --out resources/web/$P/measure/contraction-n172-base.json
+python -m devtools.contraction_margin --n 172 "#939=l-base:packet:$P" \
+  --out resources/web/$P/measure/contraction-n172-base-own.json
+python -m devtools.regularize_evand run --run-dir "$TMPDIR/evand" --n 172 --workers 1
+python -m devtools.contraction_margin --n 172 "daniel-held=witness-center-basis:$VIEW" \
+  --against "#939=l-base:packet:$P" --out resources/web/$P/measure/contraction-n172-daniel-held.json
+python -m devtools.measure_identity --n 172 "#939=l-base:packet:$P" \
+  "daniel-held=witness-center-basis:$VIEW" \
+  --out resources/web/$P/measure/identity-n172-daniel-held.json
 ```
 
 ## Compressed Files
