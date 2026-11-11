@@ -1,0 +1,979 @@
+{
+ "program_sha256": {
+  "l105_plan.py": "5594f419908ba633294fbf61770420f1ff4fd8a55609474f34b8f53989e9ded5",
+  "l105_geom.py": "57f9fc07f5c8ccc8f752ba4a49e2b9e9a8b4314b449320f53c0327117b0fe361",
+  "l105_reader.py": "2e1cff6848c9b92bd9253bafb5ced916573868fdfc34a6d7e3511696997b8bdf",
+  "l105_sat.py": "86932296989a6dcf8e972039c6c8f08a6085945438c180533f257dc9bcc61e67",
+  "l105_check.py": "1e7b04cca2bfc3b2e0ef6c95c885e88b99a82615571af3c454ce245222e622b7"
+ },
+ "plans": {
+  "132": {
+   "n": 132,
+   "G1_duplicate": {
+    "what": "square 132 given square 1's four scalars; whole file decided by both methods",
+    "expect": {
+     "verdict": "REFUSE",
+     "overlapping_pairs": [
+      [
+       1,
+       132
+      ]
+     ],
+     "touching_pairs": [],
+     "walls_outside": [],
+     "margin_1n": "-1",
+     "area_1n": "1",
+     "margins_k_n_equal_base_k_1": true
+    }
+   },
+   "G2_translated": {
+    "what": "square 1 translated by (side, 0); whole file",
+    "expect": {
+     "verdict": "REFUSE",
+     "walls_outside": [
+      [
+       1,
+       "right"
+      ]
+     ],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "G3_deleted": {
+    "what": "square 132's entry deleted from the JSON and from the YAML",
+    "expect": {
+     "json_reader": "refuses: entries",
+     "yaml_reader": "refuses: entries"
+    }
+   },
+   "G4_id": {
+    "what": "YAML square 2's id set to 1",
+    "expect": {
+     "yaml_reader": "refuses: order"
+    }
+   },
+   "G5_not_unit": {
+    "what": "square 1's cos increased by 1e-30; whole file",
+    "expect": {
+     "verdict": "REFUSE",
+     "unit_squares_a": 131,
+     "unit_squares_b": 131
+    }
+   },
+   "G6_rotation_reversed": {
+    "what": "every square's sin negated (the rotation read the other way); whole file",
+    "expect": {
+     "verdict": "REFUSE",
+     "overlapping_pairs_at_least": 1,
+     "pair_class_disagreement_count": 0,
+     "unit_squares_a": 132,
+     "unit_squares_b": 132,
+     "walls_outside": [],
+     "wall_contacts": [
+      [
+       17,
+       "top"
+      ],
+      [
+       37,
+       "right"
+      ],
+      [
+       38,
+       "top"
+      ],
+      [
+       49,
+       "right"
+      ],
+      [
+       50,
+       "top"
+      ],
+      [
+       61,
+       "right"
+      ],
+      [
+       62,
+       "top"
+      ],
+      [
+       66,
+       "right"
+      ],
+      [
+       69,
+       "right"
+      ],
+      [
+       70,
+       "top"
+      ],
+      [
+       90,
+       "right"
+      ],
+      [
+       91,
+       "right"
+      ],
+      [
+       91,
+       "top"
+      ],
+      [
+       92,
+       "top"
+      ],
+      [
+       94,
+       "top"
+      ],
+      [
+       97,
+       "right"
+      ],
+      [
+       106,
+       "top"
+      ],
+      [
+       109,
+       "right"
+      ],
+      [
+       112,
+       "right"
+      ],
+      [
+       129,
+       "top"
+      ]
+     ],
+     "clearances_equal_base": true
+    }
+   },
+   "G7_twin_side": {
+    "what": "the YAML side's last numerator digit changed; the JSON unchanged",
+    "expect": {
+     "same_packing": false,
+     "side_equal": false,
+     "scalar_difference_count": 0
+    }
+   },
+   "G7b_twin_scalar": {
+    "what": "the YAML square 2's centre x last numerator digit changed",
+    "expect": {
+     "same_packing": false,
+     "side_equal": true,
+     "scalar_difference_count": 1
+    }
+   },
+   "G8_transposed": {
+    "what": "every square (x, y, c, s) -> (y, x, s, c); whole file",
+    "expect": {
+     "verdict": "ACCEPT",
+     "wall_contacts": [
+      [
+       17,
+       "right"
+      ],
+      [
+       37,
+       "top"
+      ],
+      [
+       38,
+       "right"
+      ],
+      [
+       49,
+       "top"
+      ],
+      [
+       50,
+       "right"
+      ],
+      [
+       61,
+       "top"
+      ],
+      [
+       62,
+       "right"
+      ],
+      [
+       66,
+       "top"
+      ],
+      [
+       69,
+       "top"
+      ],
+      [
+       70,
+       "right"
+      ],
+      [
+       90,
+       "top"
+      ],
+      [
+       91,
+       "right"
+      ],
+      [
+       91,
+       "top"
+      ],
+      [
+       92,
+       "right"
+      ],
+      [
+       94,
+       "right"
+      ],
+      [
+       97,
+       "top"
+      ],
+      [
+       106,
+       "right"
+      ],
+      [
+       109,
+       "top"
+      ],
+      [
+       112,
+       "top"
+      ],
+      [
+       129,
+       "right"
+      ]
+     ],
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "margin_list_sha256": "41feabaae9c0a4d97a38f5bffe05126501e92695eba5539d9c0655a4a592ed86",
+     "clearances_transposed_exactly": true
+    }
+   },
+   "S1a_side_minus_1_over_q": {
+    "side": "7485030239752129702330448095446048640341538732397201187644450072388780092466352170111088089863454498516098509068211270383410889627726759466705074513900974900733437009168095507066864894102281018495252385014035713601695049483532068880943592356527910970882072435519602514456441608473023889012652460151432769839777/625000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "drop_sci": "4.00000e-310",
+    "expect": {
+     "verdict": "REFUSE",
+     "walls_outside": [
+      [
+       17,
+       "top"
+      ],
+      [
+       37,
+       "right"
+      ],
+      [
+       38,
+       "top"
+      ],
+      [
+       49,
+       "right"
+      ],
+      [
+       50,
+       "top"
+      ],
+      [
+       61,
+       "right"
+      ],
+      [
+       62,
+       "top"
+      ],
+      [
+       66,
+       "right"
+      ],
+      [
+       69,
+       "right"
+      ],
+      [
+       70,
+       "top"
+      ],
+      [
+       90,
+       "right"
+      ],
+      [
+       91,
+       "right"
+      ],
+      [
+       91,
+       "top"
+      ],
+      [
+       92,
+       "top"
+      ],
+      [
+       94,
+       "top"
+      ],
+      [
+       97,
+       "right"
+      ],
+      [
+       106,
+       "top"
+      ],
+      [
+       109,
+       "right"
+      ],
+      [
+       112,
+       "right"
+      ],
+      [
+       129,
+       "top"
+      ]
+     ],
+     "wall_contacts": [],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "S1b_side_minus_1e-30": {
+    "side": "29940120959008518809321792381781694561366154929588804750577800289555120369865408680444352359453817994064394036272845081533643558510907037866820298055603899602933748036672382028267459576409124073981009540056142854406780197934128275523774369426111643883528289742078410057825766433892095556050609840605731079359109/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "drop_sci": "1.00000e-30",
+    "expect": {
+     "verdict": "REFUSE",
+     "walls_outside": [
+      [
+       17,
+       "top"
+      ],
+      [
+       37,
+       "right"
+      ],
+      [
+       38,
+       "top"
+      ],
+      [
+       49,
+       "right"
+      ],
+      [
+       50,
+       "top"
+      ],
+      [
+       61,
+       "right"
+      ],
+      [
+       62,
+       "top"
+      ],
+      [
+       66,
+       "right"
+      ],
+      [
+       69,
+       "right"
+      ],
+      [
+       70,
+       "top"
+      ],
+      [
+       90,
+       "right"
+      ],
+      [
+       91,
+       "right"
+      ],
+      [
+       91,
+       "top"
+      ],
+      [
+       92,
+       "top"
+      ],
+      [
+       94,
+       "top"
+      ],
+      [
+       97,
+       "right"
+      ],
+      [
+       106,
+       "top"
+      ],
+      [
+       109,
+       "right"
+      ],
+      [
+       112,
+       "right"
+      ],
+      [
+       129,
+       "top"
+      ]
+     ],
+     "wall_contacts": [],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "S1c_side_floor12": {
+    "side": "11976048383603/1000000000000",
+    "drop_sci": "4.07523e-13",
+    "expect": {
+     "verdict": "REFUSE",
+     "walls_outside": [
+      [
+       17,
+       "top"
+      ],
+      [
+       37,
+       "right"
+      ],
+      [
+       38,
+       "top"
+      ],
+      [
+       49,
+       "right"
+      ],
+      [
+       50,
+       "top"
+      ],
+      [
+       61,
+       "right"
+      ],
+      [
+       62,
+       "top"
+      ],
+      [
+       66,
+       "right"
+      ],
+      [
+       69,
+       "right"
+      ],
+      [
+       70,
+       "top"
+      ],
+      [
+       90,
+       "right"
+      ],
+      [
+       91,
+       "right"
+      ],
+      [
+       91,
+       "top"
+      ],
+      [
+       92,
+       "top"
+      ],
+      [
+       94,
+       "top"
+      ],
+      [
+       97,
+       "right"
+      ],
+      [
+       106,
+       "top"
+      ],
+      [
+       109,
+       "right"
+      ],
+      [
+       112,
+       "right"
+      ],
+      [
+       129,
+       "top"
+      ]
+     ],
+     "wall_contacts": [],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "S1d_side_ceil12": {
+    "side": "2994012095901/250000000000",
+    "drop_sci": "-5.92476e-13",
+    "expect": {
+     "verdict": "ACCEPT",
+     "walls_outside": [],
+     "wall_contacts": [],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "S3_tightest_pair_contact": {
+    "pair": [
+     7,
+     31
+    ],
+    "moved": 31,
+    "margin_sci": "9.99999999999e-61",
+    "move_length_sq_sci": "9.99999e-121",
+    "least_other_margin_sci": "9.99999e-61",
+    "least_wall_clearance_sci": "4.34669e+0",
+    "expect": {
+     "verdict": "ACCEPT",
+     "touching_pairs": [
+      [
+       7,
+       31
+      ]
+     ],
+     "overlapping_pairs": [],
+     "walls_outside": []
+    }
+   },
+   "S4_near_pairs": {
+    "what": "every pair with margin below 1e-50 closed along its centre line (the second square moved): pair-level, both methods",
+    "pairs": 302,
+    "expect": {
+     "contact": "A margin exactly 0, B contact",
+     "past": "A margin exactly -1e-30, B overlap"
+    }
+   },
+   "S5_walls": {
+    "what": "every square moved normal to its nearest wall by its clearance, and 1e-30 further: square-level, both methods",
+    "squares": 132,
+    "expect": {
+     "contact": "A clearance exactly 0, B contact, B clearance equal",
+     "past": "A clearance exactly -1e-30, B outside, B clearance equal"
+    }
+   }
+  },
+  "157": {
+   "n": 157,
+   "G1_duplicate": {
+    "what": "square 157 given square 1's four scalars; whole file decided by both methods",
+    "expect": {
+     "verdict": "REFUSE",
+     "overlapping_pairs": [
+      [
+       1,
+       157
+      ]
+     ],
+     "touching_pairs": [],
+     "walls_outside": [],
+     "margin_1n": "-1",
+     "area_1n": "1",
+     "margins_k_n_equal_base_k_1": true
+    }
+   },
+   "G2_translated": {
+    "what": "square 1 translated by (side, 0); whole file",
+    "expect": {
+     "verdict": "REFUSE",
+     "walls_outside": [
+      [
+       1,
+       "right"
+      ]
+     ],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "G3_deleted": {
+    "what": "square 157's entry deleted from the JSON and from the YAML",
+    "expect": {
+     "json_reader": "refuses: entries",
+     "yaml_reader": "refuses: entries"
+    }
+   },
+   "G4_id": {
+    "what": "YAML square 2's id set to 1",
+    "expect": {
+     "yaml_reader": "refuses: order"
+    }
+   },
+   "G5_not_unit": {
+    "what": "square 1's cos increased by 1e-30; whole file",
+    "expect": {
+     "verdict": "REFUSE",
+     "unit_squares_a": 156,
+     "unit_squares_b": 156
+    }
+   },
+   "G6_rotation_reversed": {
+    "what": "every square's sin negated (the rotation read the other way); whole file",
+    "expect": {
+     "verdict": "REFUSE",
+     "overlapping_pairs_at_least": 1,
+     "pair_class_disagreement_count": 0,
+     "unit_squares_a": 157,
+     "unit_squares_b": 157,
+     "walls_outside": [],
+     "wall_contacts": [
+      [
+       109,
+       "right"
+      ]
+     ],
+     "clearances_equal_base": true
+    }
+   },
+   "G7_twin_side": {
+    "what": "the YAML side's last numerator digit changed; the JSON unchanged",
+    "expect": {
+     "same_packing": false,
+     "side_equal": false,
+     "scalar_difference_count": 0
+    }
+   },
+   "G7b_twin_scalar": {
+    "what": "the YAML square 2's centre x last numerator digit changed",
+    "expect": {
+     "same_packing": false,
+     "side_equal": true,
+     "scalar_difference_count": 1
+    }
+   },
+   "G8_transposed": {
+    "what": "every square (x, y, c, s) -> (y, x, s, c); whole file",
+    "expect": {
+     "verdict": "ACCEPT",
+     "wall_contacts": [
+      [
+       109,
+       "top"
+      ]
+     ],
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "margin_list_sha256": "870fdebb66f5187575457f189ead0198aa519df67dea06c1dc3fea3a97600cd4",
+     "clearances_transposed_exactly": true
+    }
+   },
+   "S1a_side_minus_1_over_q": {
+    "side": "32483256528358059103343198387414429157796860606311450436070901698493554677514734398091677271762182834504382008322255820910691888643015864424609437415066049793486475221721602830297335766798798036654009089795951044056267326525119235380747149314028284778590245215535251825835339498877693673210649736602020988137597/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "drop_sci": "1.00000e-310",
+    "expect": {
+     "verdict": "REFUSE",
+     "walls_outside": [
+      [
+       109,
+       "right"
+      ]
+     ],
+     "wall_contacts": [],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "S1b_side_minus_1e-30": {
+    "side": "129933026113432236413372793549647716631187442425245801744283606793974218710058937592366709087048731338017528033289023283642767554572063457698437749660264199173945900886886411321189343067195192146616036359183804176225069306100476941522988597256113139114360980862141007303341357995510774692842598946408083952550389/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "drop_sci": "1.00000e-30",
+    "expect": {
+     "verdict": "REFUSE",
+     "walls_outside": [
+      [
+       17,
+       "top"
+      ],
+      [
+       20,
+       "right"
+      ],
+      [
+       37,
+       "right"
+      ],
+      [
+       38,
+       "top"
+      ],
+      [
+       49,
+       "right"
+      ],
+      [
+       50,
+       "top"
+      ],
+      [
+       61,
+       "right"
+      ],
+      [
+       62,
+       "top"
+      ],
+      [
+       66,
+       "right"
+      ],
+      [
+       67,
+       "top"
+      ],
+      [
+       69,
+       "right"
+      ],
+      [
+       70,
+       "top"
+      ],
+      [
+       90,
+       "right"
+      ],
+      [
+       91,
+       "right"
+      ],
+      [
+       91,
+       "top"
+      ],
+      [
+       92,
+       "top"
+      ],
+      [
+       94,
+       "top"
+      ],
+      [
+       97,
+       "right"
+      ],
+      [
+       106,
+       "top"
+      ],
+      [
+       109,
+       "right"
+      ],
+      [
+       112,
+       "right"
+      ],
+      [
+       129,
+       "top"
+      ],
+      [
+       136,
+       "right"
+      ],
+      [
+       153,
+       "top"
+      ]
+     ],
+     "wall_contacts": [],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "S1c_side_floor12": {
+    "side": "12993302611343/1000000000000",
+    "drop_sci": "2.23641e-13",
+    "expect": {
+     "verdict": "REFUSE",
+     "walls_outside": [
+      [
+       17,
+       "top"
+      ],
+      [
+       20,
+       "right"
+      ],
+      [
+       37,
+       "right"
+      ],
+      [
+       38,
+       "top"
+      ],
+      [
+       49,
+       "right"
+      ],
+      [
+       50,
+       "top"
+      ],
+      [
+       61,
+       "right"
+      ],
+      [
+       62,
+       "top"
+      ],
+      [
+       66,
+       "right"
+      ],
+      [
+       67,
+       "top"
+      ],
+      [
+       69,
+       "right"
+      ],
+      [
+       70,
+       "top"
+      ],
+      [
+       90,
+       "right"
+      ],
+      [
+       91,
+       "right"
+      ],
+      [
+       91,
+       "top"
+      ],
+      [
+       92,
+       "top"
+      ],
+      [
+       94,
+       "top"
+      ],
+      [
+       97,
+       "right"
+      ],
+      [
+       106,
+       "top"
+      ],
+      [
+       109,
+       "right"
+      ],
+      [
+       112,
+       "right"
+      ],
+      [
+       129,
+       "top"
+      ],
+      [
+       136,
+       "right"
+      ],
+      [
+       153,
+       "top"
+      ]
+     ],
+     "wall_contacts": [],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "S1d_side_ceil12": {
+    "side": "812081413209/62500000000",
+    "drop_sci": "-7.76358e-13",
+    "expect": {
+     "verdict": "ACCEPT",
+     "walls_outside": [],
+     "wall_contacts": [],
+     "overlapping_pairs": [],
+     "touching_pairs": []
+    }
+   },
+   "S3_tightest_pair_contact": {
+    "pair": [
+     88,
+     101
+    ],
+    "moved": 101,
+    "margin_sci": "9.99999999999e-61",
+    "move_length_sq_sci": "1.00026e-120",
+    "least_other_margin_sci": "1.01998e-60",
+    "least_wall_clearance_sci": "1.04060e+0",
+    "expect": {
+     "verdict": "ACCEPT",
+     "touching_pairs": [
+      [
+       88,
+       101
+      ]
+     ],
+     "overlapping_pairs": [],
+     "walls_outside": []
+    }
+   },
+   "S4_near_pairs": {
+    "what": "every pair with margin below 1e-50 closed along its centre line (the second square moved): pair-level, both methods",
+    "pairs": 408,
+    "expect": {
+     "contact": "A margin exactly 0, B contact",
+     "past": "A margin exactly -1e-30, B overlap"
+    }
+   },
+   "S5_walls": {
+    "what": "every square moved normal to its nearest wall by its clearance, and 1e-30 further: square-level, both methods",
+    "squares": 157,
+    "expect": {
+     "contact": "A clearance exactly 0, B contact, B clearance equal",
+     "past": "A clearance exactly -1e-30, B outside, B clearance equal"
+    }
+   }
+  }
+ }
+}
