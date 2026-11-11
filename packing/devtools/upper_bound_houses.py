@@ -738,7 +738,8 @@ def _sources() -> dict[str, Source]:
 #: record's own house, T-127, with T-193 staged there for the writer. Lane L81 of 11 November
 #: (think-xq4o) adopted his issues 943, 944, 945 and 947 at 156 from T-186, 180 and 269 from
 #: T-174 and 268 from his own T-276 (T-287 to T-290), each a new arrangement relative to
-#: the house it replaces, Özden its finder; T-186 and T-276 keep no house here.
+#: the house it replaces, Özden its finder; T-276 keeps no house here; T-186 and T-174
+#: still house other counts.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",

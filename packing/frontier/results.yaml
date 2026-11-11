@@ -37832,11 +37832,13 @@ results:
       claimed.
     next_rung: >-
       Held for the owner's question (think-ikku): whether the 23 October restatement ruling
-      reaches counts inside the corpus. If it does, the entry is withdrawn and no house
-      moves; if it does not, the replay and review evidence are entered, both rungs rise to
-      V3 and C3, and each count is adopted under the house rule with both strong generators'
-      regularization. The 31 October review accepted every certificate for finite
-      feasibility and recommends reading them as restatements.
+      reaches counts inside the corpus. If it does, the entry is withdrawn and no house moves;
+      if it does not, the replay and review evidence are entered, both rungs rise to V3 and C3,
+      and each count is adopted under the house rule with both strong generators'
+      regularization, except 156, where T-287, 2.11e-3 lower, is the house since 11 November
+      2026 and stays it whatever the answer (F15 of the review of 11 November). The 31 October
+      review accepted every certificate for finite feasibility and recommends reading them as
+      restatements.
     unfinished_confirmations:
     - what: >-
         The owner's answer to whether the 23 October restatement ruling reaches counts
@@ -43043,9 +43045,9 @@ results:
       that Özden directed the work. The best public Kaggle per-puzzle packing the issue found at
       156, 12.979165853846 (kirilltym), is above this; the side-only leaderboard entry
       12.977053087522 (team Cats and boxes, 25 October), which the issue states first, is
-      2.48e-11 above the exact side and 2.4e-11 above the 12-place claim; the issue prints
-      2.4e-11 for the first, calling the side's 15-place ceiling, 12.977053087497205, its exact
-      side (F4), states no packing and is no report.
+      2.48e-11 above the exact side and 2.4e-11 above the 12-place claim, states no packing and
+      is no report; the issue prints 2.4e-11 for the first, calling the side's 15-place
+      ceiling, 12.977053087497205, its exact side (F4).
     scope:
       n_values:
       - 156
@@ -43181,9 +43183,11 @@ results:
       whether the schema path could name this repository's file (F12, F13).
 
       T-186 stays a verified bound at V3/C3 and keeps its certificate as history. #593's
-      follow-up of 20 October reported T-186 confirmed, and the record on #593 has it the house
-      at all twelve of its counts since the adoption of 16 October, 156 among them, so this
-      adoption owes #593 a follow-up naming the new house.
+      follow-up of 20 October reported T-186 confirmed and the house at all twelve of its counts
+      since the adoption of 16 October. Eight of them had moved before this adoption (154, 175,
+      204, 232, 271, 302, 303 and 304) and 156 moves now, so that statement is marked outdated
+      on #593's entry, and this adoption owes #593 a follow-up giving T-186's houses now, 129,
+      176 and 264, and the house at each of the other nine counts.
 
       Adopted at 156 on 11 November 2026 under the house rule, in place of T-186, with the
       packing's credit to Doğa Özden, its finder, from Evan Daniel's n = 182 packing as the
@@ -43441,7 +43445,8 @@ results:
 
       T-174 stays a verified bound at V3/C3 and keeps its certificate as history. #574's
       follow-up of 19 October acknowledged the rational houses PR #665 adopted from T-174, 180
-      among them, so this adoption owes #574 a follow-up naming the new house.
+      among them. #574 is held for the owner (think-9v2k), so the follow-up naming the new
+      house at 180 waits on that hold.
 
       Adopted at 180 on 11 November 2026 under the house rule, in place of T-174, with the
       packing's credit to Doğa Özden, its finder, from Evan Daniel's n = 154 packing as
@@ -43960,7 +43965,8 @@ results:
 
       T-174 stays a verified bound at V3/C3 and keeps its certificate as history. #574's
       follow-up of 19 October acknowledged the rational houses PR #665 adopted from T-174, 269
-      among them, so this adoption owes #574 a follow-up naming the new house.
+      among them. #574 is held for the owner (think-9v2k), so the follow-up naming the new
+      house at 269 waits on that hold.
 
       Adopted at 269 on 11 November 2026 under the house rule, in place of T-174, with the
       packing's credit to Doğa Özden, its finder, from Evan Daniel's n = 304 packing as the

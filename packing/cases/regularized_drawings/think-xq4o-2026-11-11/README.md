@@ -39,10 +39,12 @@ python -m devtools.regularize_select --evand-run $RUNS/$P-evand \
 Then the two `layer` commands the selection printed, for Evan Daniel’s driver at 156 and
 180 and for grid-slack’s 0.5-degree run at 268 and 269, and the guide’s
 render-and-record step.
-The axis tool’s refresh had recorded the earlier witnesses’ views at 156 and 268 as
-lapsed, so each selection was measured against the drawing of the new witness, and no
-candidate carries the note that a run measured it against another drawing than the
-tree’s (think-xs9t’s stale-view failure does not recur).
+The axis tool’s refresh replaced the index entry at all four counts with its view of the
+new witness: at 156 and 268 the earlier witnesses’ strong views lapsed, and at 180 and
+269 it replaced its own views of T-174’s witnesses.
+So each selection was measured against a drawing of the new witness, and no candidate
+carries the note that a run measured it against another drawing than the tree’s
+(think-xs9t’s stale-view failure does not recur).
 The `SETTLED` entries at 180 and 269, decided on T-174’s witnesses, are taken off.
 
 ## What They Found

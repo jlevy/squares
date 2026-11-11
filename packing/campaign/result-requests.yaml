@@ -11020,6 +11020,13 @@ issues:
       - result: ties-211-241
       corrects:
       - https://github.com/jlevy/squares/issues/593#issuecomment-6206056451
+      outdated:
+      - >-
+        since the adoption of 16 October, T-186 is the house at all twelve counts; it remains the
+        house only at 129, 176 and 264, the other nine having moved in the adoption passes the
+        case records date: 271 to T-219 on 19 October, 154 to T-222 on 20 October, 302 to T-193
+        on 23 October, 175, 204 and 304 to T-267, T-268 and T-273 on 5 November, 232 and 303 to
+        T-275 and T-278 on 9 November, and 156 to T-287 on 11 November
     blocked:
       type: owner-decision
       reason: >-
@@ -11033,6 +11040,15 @@ issues:
       October to the regenerated draft, once devtools.decide_undecided_comparisons had
       decided 17 of PR #574's undecided comparisons exactly (result-import.md,
       Report-Order Verdict Comments); the comment as recorded is the edited one.
+
+      The follow-up of 20 October said T-186 is the house at all twelve of its counts since the
+      adoption of 16 October. Eight had moved before 11 November with no follow-up here (271,
+      154, 302, 175, 204, 304, 232 and 303), and the adoption of 11 November 2026 (intake lane
+      L81, think-xq4o, #943) moved 156 to Doğa Özden's T-287. check_requests cannot see that
+      statement go stale, since replies before 26 October 2026 record no position, so it is
+      marked `outdated` on the 20 October follow-up; the follow-up it owes gives T-186's houses
+      now, 129, 176 and 264, and the house at each of the other nine counts, as #438's follow-up
+      of 11 November did for T-127.
   - number: 594
     title: 'Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)'
     author: bengreff
@@ -30079,24 +30095,26 @@ issues:
     notes: >-
       Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 87c9292 precedes
       the issue by 50 seconds. The issue carries the intake label. T-186 was the house it
-      improves. #593's follow-up of 20 October reported T-186 confirmed, and the record on #593
-      has it the house at all twelve of its counts since the adoption of 16 October, 156 among
-      them, so this adoption owes #593 a follow-up naming the new house. T-260 (#846),
-      Polkovskyi's re-certification of T-186 lowered by 1e-41 and held on think-ikku, is also
-      above this certificate by 2.11e-3; Adopting it moves the house at 156 whatever the owner
-      rules on T-260, whose question stays open at 105, 146, 229 and 308 (F15). Measured against
-      padding, T-186's certificate, contracted uniformly about the origin to first contact and
-      boxed, loses 1.30e-39 of side (1 - lambda* = 1.000000e-40), so the gain is about 1.6e36
-      times the house's padding and none of it worth stating is padding. This certificate's own
-      margin, measured the same way, is 2.42e-12. Both receipts are contraction_margin's,
-      retained in the packet's measure/ directory. The review measured the same house margins
-      with its own programs (F9): no gain is near one, and these are not re-certifications of a
-      house, so RV-3 (think-ruu2) does not reach them. The L-step scan finds that this bound
-      carries to no other count. The review's questions for the author, informational and
-      holding nothing open: whether "our 15-place ceiling, 12.977053087497205, is below that
-      figure by 2.5e-11" says what the issue meant (F4); whether the final repair scaling was
-      about 2e-13 rather than 1e-13, since the margins are 2.0e-13 to 9.8e-13 of the centres'
-      separation (F6); which assignment the lineage counts use, least summed move with
+      improves. #593's follow-up of 20 October reported T-186 confirmed and the house at all
+      twelve of its counts since the adoption of 16 October. Eight of them had moved before this
+      adoption (154, 175, 204, 232, 271, 302, 303 and 304) and 156 moves now, so that statement
+      is marked outdated on #593's entry, and this adoption owes #593 a follow-up giving T-186's
+      houses now, 129, 176 and 264, and the house at each of the other nine counts. T-260
+      (#846), Polkovskyi's re-certification of T-186 lowered by 1e-41 and held on think-ikku, is
+      also above this certificate by 2.11e-3. Adopting this certificate moves the house at 156
+      whatever the owner rules on T-260, whose question stays open at 105, 146, 229 and 308
+      (F15). Measured against padding, T-186's certificate, contracted uniformly about the
+      origin to first contact and boxed, loses 1.30e-39 of side (1 - lambda* = 1.000000e-40), so
+      the gain is about 1.6e36 times the house's padding and none of it worth stating is
+      padding. This certificate's own margin, measured the same way, is 2.42e-12. Both receipts
+      are contraction_margin's, retained in the packet's measure/ directory. The review measured
+      the same house margins with its own programs (F9): no gain is near one, and these are not
+      re-certifications of a house, so RV-3 (think-ruu2) does not reach them. The L-step scan
+      finds that this bound carries to no other count. The review's questions for the author,
+      informational and holding nothing open: whether "our 15-place ceiling, 12.977053087497205,
+      is below that figure by 2.5e-11" says what the issue meant (F4); whether the final repair
+      scaling was about 2e-13 rather than 1e-13, since the margins are 2.0e-13 to 9.8e-13 of the
+      centres' separation (F6); which assignment the lineage counts use, least summed move with
       lower-left anchoring reproducing them all (F7); which replay is intended,
       certificate.replay or the README's rerun, and from which directory, and whether the schema
       path could name this repository's file (F12, F13). No reply has been posted.
@@ -30158,7 +30176,8 @@ issues:
       Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 4cfcb90 precedes
       the issue by 51 seconds. The issue carries the intake label. T-174 was the house it
       improves. #574's follow-up of 19 October acknowledged the rational houses PR #665 adopted
-      from T-174, 180 among them, so this adoption owes #574 a follow-up naming the new house.
+      from T-174, 180 among them. #574 is held for the owner (think-9v2k), so the follow-up
+      naming the new house at 180 waits on that hold.
       Measured against padding, T-174's certificate has no padding to measure: contracted
       uniformly about the origin it meets first contact at once (1 - lambda* = 0), a pair
       already touching, so none of the gain is the house's padding. This certificate's own
@@ -30306,7 +30325,8 @@ issues:
       Read on 11 November 2026 from main f54ad1048; no comment yet. The commit 6f93b07 precedes
       the issue by 13 seconds. The issue carries the intake label. T-174 was the house it
       improves. #574's follow-up of 19 October acknowledged the rational houses PR #665 adopted
-      from T-174, 269 among them, so this adoption owes #574 a follow-up naming the new house.
+      from T-174, 269 among them. #574 is held for the owner (think-9v2k), so the follow-up
+      naming the new house at 269 waits on that hold.
       Measured against padding, T-174's certificate has no padding to measure: contracted
       uniformly about the origin it meets first contact at once (1 - lambda* = 0), a pair
       already touching, so none of the gain is the house's padding. This certificate's own
