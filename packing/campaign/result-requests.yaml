@@ -30120,8 +30120,9 @@ issues:
       written. It states T-284 at V3/C3, confirmed and current;
       E-ozden-938-exact-feasibility and E-ozden-938-review-exact-feasibility, confirmed; and
       E-ozden-938-certificate-report, reviewed. It says that T-284 is the house at 199, on main
-      since 10 November, the landing day frontier/landings.yaml records; the case record dates
-      the adoption 9 November, the day of the pass that made it, as it dates every adoption.
+      since 10 November. That is the landing day frontier/landings.yaml records; the case
+      record dates the adoption 9 November, the day of the pass that made it, as it dates
+      every adoption.
       It says that T-284 replaces T-127, 2.88e-3 lower, which stays a verified bound, kept as
       history; T-127 is not this issue's result and is not recorded under reported. It passes
       on the L-step scan: 172 to 199 is the only step that improves a ceiling across its
@@ -30270,7 +30271,7 @@ issues:
       solution is an independent code path; what the 734 contacts count; and which commit the
       record should cite for #939, 702c7af2 or c4e65d0b. The questions are informational and
       hold nothing open. It says that the issue stays open, labelled blocked:owner-decision,
-      until the owner answers RV-3, and no reply is due until the record moves.
+      until the owner answers RV-3, and that a final reply follows then.
   - number: 946
     title: 's(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request'
     author: JoostdeWinter
@@ -30390,4 +30391,4 @@ issues:
       Daniel and this project, with the AI-assistance statement as given. It asks the
       review's six questions, the same as on #939, and says that the issue stays open,
       labelled blocked:owner-decision, until the owner answers RV-3; the questions are
-      informational and hold nothing open, and no reply is due until the record moves.
+      informational and hold nothing open, and that a final reply follows then.
