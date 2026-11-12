@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 231
+version: 232
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T00:01:11.682Z
+updated_at: 2026-11-12T00:05:07.832Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -351,3 +351,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 23:52Z: #955 merged (2fe557598) after senior review L113 and L114's fixes (CI green): replies on 941, 942 and 954, de Winter's answers, the credit adding penguin069 and kmmmvs, 942's final reply credit marked outdated. 941 still open. The #942 follow-up draft (L114) is checked; post it after the Pages deploy. #961 must now reconcile its own 954 entry with main's (take main's). Senior reviews running: L115 (#963), L116 (#961).
 
 2026-11-11 23:58Z renewal (intake208): new #962 (Özden s(269) <= 16.899469075856, 1.526e-3 below his T-290); his #947 comment points to it. Bead think-s418; blind review L117 started; import queued. L115's senior review of #963 found B1 (stamp_landed) and B2 (palette pin), plus S1/S2/N1 noted on think-my76; they will be applied in the rebase after #961/#959. think-ikku got a T-253/237 note. Main's records gate is green again since #955.
+
+2026-11-12 ~00:10Z: L116's senior review of #961: nothing blocking. The poster-test change is a legitimate use of the existing release rule 3 (COMPOSITES_MAY_TRAIL), so no owner decision is needed. #961 now merges after #955 and takes main's fuller 954 entry. L104 is merging main, adding a moved==[13] guard to the poster test, adding the think-mdxq note to the licence citations, fixing the 958 label note, then stamp_landed (12 Nov) and a re-pin. Process lesson: I closed think-f65n at 22:42Z before the records PR marking 954 closed had merged, against result-import.md close step 4; it tripped main's bead-tree gate until #955 merged. Close an answer bead only after its records PR merges.
