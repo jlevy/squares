@@ -31723,6 +31723,11 @@ issues:
       way this issue's certificate stays a valid bound, verified at V3/C3. #959's result is not
       this issue's and is not recorded under reported here.
 
+      #959 was registered as T-294 and adopted at 179 in place of T-291 on 12 November 2026
+      (intake lane L107, think-89i7), once its certificate was replayed here and its stage 4
+      review mapped; T-291 stays a verified bound at V3/C3 and keeps its certificate as history.
+      The reply owed on #959 says so; nothing more is owed here.
+
   - number: 958
     title: 's(157) below 13 and a new s(132): two pinwheel packings: registration request'
     author: JoostdeWinter
@@ -31956,3 +31961,108 @@ issues:
       and that his 809 stays held, with #941 open, until the project decides whether a deletion
       bound an issue claims gets a row of its own. It says that his answers on #942 are
       acknowledged there.
+  - number: 959
+    title: 's(179) ≤ 13.880960371559: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(179) <= 13.880960371559, the exact rational side of n-179-candidate.yaml rounded up at
+      12 places, 4.07e-4 below his own #954 (T-291, the house at 179 since that day) and
+      2.835e-03 below T-174 (Nate Chaoweeraprasit's packing, improved by Siddharth Gupta and
+      PingYou Ltd): a rational corner Witness/v2 at kenaznia-doga/s179-upper-bound-13880960371
+      6ab3cfe, the repository's one commit, 12 seconds before the issue, promoted to exact
+      rationals with this repository's packing-witness promote at c8448724 from a decimal pose
+      the repository retains. It reports packing-witness verify VERIFIED (15931 pairs) and
+      sqcheck.py VALID, and says the packing came from a later batch of #954's band-design
+      search, the band of the registry's 70 (Ryan Xu, improved by Evan Daniel and PingYou Ltd)
+      laid along the diagonal with a copy shifted by (5, 5), mutated, annealed and quenched once
+      with Evan Daniel's code, and that it supersedes #954. Triaged and retained on 11 November
+      2026 in lane L107 (think-89i7): every stated digest holds, the print is the exact side
+      rounded up, and both maintained exact routes accept the witness and refuse its gross and
+      sharp controls; measured, it is a further arrangement of T-291's packing, one to one with
+      it by nearest centres, 3 squares beyond a tenth. The ledger of 11 November records it.
+      Registered as T-294. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-12-ozden-959.md, lane L108), written blind in a
+      separate lane, accepted it with 13 findings, all notes, and scored it S3; its clean-room
+      checker decided it again, so the entry is confirmed, independently re-implemented, at
+      V3/C3, and the case adopts it at 179 in place of T-291 under the house rule in the pass of
+      12 November, in the same pull request, with Doğa Özden the packing's finder and the band's
+      source packing credited as the seed, both strong generators' regularization of the new
+      house run in the same change. The Kaggle packing the issue quotes, 13.883795490524
+      (kirilltym), is above it; the side-only leaderboard entry it quotes and states first,
+      13.880960371556 (team Nevska, 7 November), 2.2e-12 below this side and the registry's
+      s(70) + 5 at 12 places, is unpublished and states no packing, so it is context only.
+    read_through: '2026-11-11T21:18:24Z'
+    results:
+    - key: n179-band-second
+      claim: >-
+        s(179) <= 13.8809603715582251 (the exact rational side, rounded up at 16 places, of
+        n-179-candidate.yaml at kenaznia-doga/s179-upper-bound-13880960371 6ab3cfe), a further
+        arrangement of the author's own #954 packing, whose seed band is built from the tilted
+        squares of the registry's 70.
+      source: body
+      register:
+      - T-294
+      evidence:
+      - E-ozden-959-certificate-report
+      - E-ozden-959-exact-feasibility
+      - E-ozden-959-review-exact-feasibility
+    beads:
+    - think-89i7
+    answer_bead: think-89i7
+    replies: []
+    close_when: >-
+      T-294 is on main at V3/C3 as the house at 179, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 11 November 2026 from main b5b12c206; no comment yet. The commit 6ab3cfe precedes
+      the issue by 12 seconds. The issue carries the intake label. Five seconds after it opened,
+      at 21:18:29Z, the author commented on #954 (issuecomment-6807260149) that #959 supersedes
+      it and asked that #959 be adopted for T-291 in place of #954; #954's certificate stays a
+      valid bound. The register keeps one entry per report: T-291 stays #954's, adopted at 179
+      on 11 November and kept as history once a later house replaces it, and #959 is T-294,
+      since T-292 and T-293 are PR #961's (#958, s(132) and s(157)), which merged first.
+      Measured against padding, T-291's certificate at 179 contracts by 2.62e-12 (1 - lambda* =
+      2.03e-13, squares 14 and 15 binding), and the gain is 1.56e8 times that, so RV-3
+      (think-ruu2) does not reach this entry. This certificate's own margin, measured the same
+      way, is 2.57e-12, and contracted so its side lies 7.9e-14 above s(70) + 5. The L-step scan
+      finds that this bound carries to no other count. Measured against the registry's 70
+      (devtools.measure_core), the side lies 2.645e-12 above s(70) + 5, as the issue says; the
+      packing is no core with a border (five L steps round the 70 hold 175 squares at that side,
+      and no corner placement keeps more than 48 of the 70's squares within 1e-9), and laid at
+      both ends of the diagonal the 70 lies within 1e-9 of 15 of the 35 tilted squares here, 7
+      at (0, 0) and 8 at (5, 5), under the identity of its box alone: both ends of the 70's band
+      stay in place, with the band between re-laid. The issue names the registry's 70 as the
+      band's source; that witness comes from PingYou Ltd's PR 574 algebraic supplement, which
+      has no licence file; whether the seed needs a notice of its own is the owner's decision on
+      think-71uq, as for #954, noted and not decided. #574's follow-up of 19 October
+      acknowledged the rational houses PR #665 adopted from T-174, 179 among them; #574 is held
+      for the owner (think-9v2k), so a follow-up naming a new house at 179 waits on that hold.
+      The review measured the same where both measured (the gain, the least gap at 104 and
+      105, T-291's 2.616e-12 margin, the identity against T-291, the side's 2.645e-12 excess
+      and the 70's 48 squares at a corner), and adds: exactly three squares touch a wall (67
+      bottom, 123 left, 162 top); the margins are the pose's own, 1.99 to 2.71e-13 of the
+      centres' separation, about twice "about 1e-13 relative" (F6); the issue's lineage
+      counts hold with T-174 reflected top to bottom and set against the upper-left corner
+      (F7); 26 of the 36 tilted squares sit at the 70 band's angle to 1e-9 degrees, and the
+      seed as stated has 34 squares, not 35 (F9); the side's 12-place fractional part is
+      0.880960371558, agreeing with the 70's and 207's to 11 places, not 12, and "our exact side
+      13.880960371558224" is its binary64 value (F5); the squares contracted by 1 - 1.99e-13 are
+      accepted at side 13.88096037155566185, 3.4e-13 below the leaderboard's print, a side
+      inside the certificate's own dilation that is the owner's RV-3 question (think-ruu2),
+      noted and not registered (F10); the review names think-mdxq for the band's licence,
+      which closed on 4 November, so think-71uq stands (F11); the schema path and replay line
+      as at #954 (F12); and the issue's search time, 13:30 PST, twelve minutes after it opened
+      (F13). The review's questions for the author, informational and holding nothing open:
+      whether the lab would promote the pose with a contraction; whether there is an exact
+      construction at s(70) + 5, as the 207 is at s(70) + 6; whether the repair scaling was
+      about 2e-13 rather than 1e-13; whether the lineage counts use that reflection and
+      anchoring, and whether the issue would name it; whether the issue would correct the
+      binary64 print and the fractional part; which square the seed's 35th counts; which
+      search time is right; and whether the seed took the 70 band from the registry's witness
+      or from Ryan Xu's or Evan Daniel's published coordinates, and whether the band-design
+      search will be published. No reply has been posted.

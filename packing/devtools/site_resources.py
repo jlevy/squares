@@ -341,6 +341,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s179-upper-bound-13880960371",
+        "Doğa Özden",
+        (
+            "A further arrangement at 179 of his own T-291 band, 4.07e-4 below it, now the"
+            " record (T-294)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

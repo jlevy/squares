@@ -8123,6 +8123,65 @@ verifiers:
       l101_house.py, l101_pose.py, l101_identity.py, l101_band.py, l101_custody.py,
       l101_compare_lane.py and l101_digests.py, kept beside them, decide no certificate and are
       not registered; l101_house.py decides the house witness with the frozen l101_check.decide.
+  - id: V-ozden-959-review-check
+    program: l108_check.py with l108_reader.py, l108_sat.py, l108_clip.py and l108_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 959 (179), with a strict reader of its own (l108_reader.py: ids 1 to
+      n in order, every scalar an exact integer pair in lowest terms, the JSON twin held to the
+      same tree, any unexpected layout refused): every format hypothesis, every square a unit
+      square from its listed corners, every wall and every pair twice with no distance filter,
+      by separating axes in gmpy2.mpq (l108_sat.py, method A) and by exact clipping of closed
+      polygons in fractions.Fraction (l108_clip.py, method B), each pair classed overlapping,
+      touching or clear by both. l108_geom.py holds the exact constructions the self-test and
+      controls use; l108_controls.py decides 19 controls stated in a plan hashed before it
+      existed; l108_selftest.py holds both methods and the reader to 8,453 cases.
+    source:
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_check.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_reader.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_sat.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_clip.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_geom.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_selftest.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_controls.py
+    independence_record: packing/resources/web/ozden-s179-959-review-2026-11-12/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 959 (L108, under think-89i7), strong
+            tier, prompted separately from the import lane (L107, think-89i7)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-11T22:03:30Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source, and reuse no code of the review of issue 954 (L101), whose
+          programs their author did not open.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-12-ozden-959.md (SHA-256
+      6c6dbaff0369784888e087c7fb5bd6a9f05a0e5e095e60caf7e946a66616e6ef for l108_check.py, as
+      frozen at 2026-11-11T22:03:30Z), and kept with its receipts in the review-only directory
+      ozden-s179-959-review-2026-11-12 beside the import lane's packet. l108_plan_facts.py,
+      l108_make_plan.py, l108_wit.py, l108_sides.py, l108_house.py, l108_pose.py, l108_s70.py,
+      l108_identity.py, l108_contract.py, l108_custody.py and l108_digests.py, kept beside them,
+      decide no certificate and are not registered; l108_house.py and l108_contract.py decide
+      the house witnesses and the contracted squares with the frozen l108_check.decide.
   - id: V-de-winter-958-review-check
     program: l105_check.py with l105_reader.py, l105_sat.py, l105_clip.py and l105_geom.py
     author: Squares Project (Levy)
