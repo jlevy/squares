@@ -1746,7 +1746,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # moved 156, 180, 268 and 269 to his certificates of issues 943 to 947 (T-287 to T-290),
     # and the same day's lane L100 179 to his certificate of issue 954 (T-291), and lane L104
     # 132 and 157 to Joost de Winter's certificates of issue 958 (T-292, T-293). Lane L107
-    # moved 179 on to Özden's certificate of issue 959 (T-294) on 12 November.
+    # moved 179 on to Özden's certificate of issue 959 (T-294) on 12 November, and lane L110
+    # 237 to his certificate of issue 960 (T-295) the same day.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1778,6 +1779,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         179: "T-294",
         132: "T-292",
         157: "T-293",
+        237: "T-295",
     }
     before = {
         **houses.ADOPTED,
@@ -1812,6 +1814,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         269: "T-174",
         179: "T-174",
         132: "T-174",
+        237: "T-190",
     }
     # 199 was first adopted on 9 November 2026 (T-284), and 157 on 11 November 2026 (T-293),
     # after this receipt was retained.

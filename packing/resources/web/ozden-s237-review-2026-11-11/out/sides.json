@@ -1,0 +1,71 @@
+{
+ "program": "l109_sides.py",
+ "programs_sha256": {
+  "l109_reader.py": "49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79",
+  "l109_check.py": "ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932",
+  "l109_sides.py": "8cd01cdce347a2389a5fe58728d9e9946d58945168b4e21ece2227d75624ece3"
+ },
+ "side": {
+  "floor_40": "15.8938055805725741549617762524158445504338",
+  "floor_12": "15.893805580572",
+  "ceil_12": "15.893805580573",
+  "floor_15": "15.893805580572574",
+  "ceil_15": "15.893805580572575",
+  "round_15": "15.893805580572574",
+  "floor_16": "15.8938055805725741",
+  "ceil_16": "15.8938055805725742",
+  "round_16": "15.8938055805725742",
+  "numerator_digits": 187,
+  "denominator_digits": 186,
+  "denominator_factor_note": "the denominator is printed in full in the certificate"
+ },
+ "claim": {
+  "claim_is_ceil_12": true,
+  "claim_less_side": "4.258450e-13"
+ },
+ "record": {
+  "case_reported_value": "15.9026036382595969",
+  "case_reported_exact": "7951301819129798440089572127137/500000000000000000000000000000",
+  "case_verified_value": "15.9026036382595969",
+  "case_verified_exact_equals_reported": true,
+  "house_witness_side_equals_case_exact": true,
+  "house_floor_20": "15.90260363825959688017",
+  "house_value_is_ceil_16": true,
+  "t189_claim": "12163897896660350527924222391/764899771970500000000000000",
+  "t189_claim_floor_25": "15.9026036382835754528811493",
+  "t189_claim_equals_house": false,
+  "house_less_t189_claim": "-2.397857e-11",
+  "issue_states_exact": true
+ },
+ "gain": {
+  "house_less_side": "8.798057687e-03",
+  "relative_to_house": "5.532464e-04",
+  "t189_claim_less_side": "8.798057711e-03",
+  "issue_8.798e-03": true,
+  "issue_relative_5.53e-04": true,
+  "side_less_house_negative": true
+ },
+ "context": {
+  "elegans_less_side": "4.636426e-09",
+  "elegans_less_claim": "4.636000e-09",
+  "issue_4.64e-9": true,
+  "kirilltym_less_house": "1.440312e-11",
+  "kirilltym_less_side": "8.798058e-03",
+  "issue_8.80e-3_below_record": true,
+  "issue_exact_side_print_16": true,
+  "readme_print": "15.893805580572574\u2026",
+  "binary64_of_side": "15.893805580572574",
+  "binary64_of_side_exact_floor_19": "15.8938055805725735325",
+  "binary64_of_side_less_side": "-6.224122e-16",
+  "issue_print_16_is_binary64_rounded_16": true,
+  "issue_print_16_less_side": "-6.549618e-16"
+ },
+ "author_prints": {
+  "packing_witness_verify_side_equals": true,
+  "packing_witness_verify_pairs": "27966",
+  "pairs_expected": 27966,
+  "sqcheck_print": "15.893805580572575",
+  "sqcheck_print_is_ceil_15": true,
+  "sqcheck_print_is_round_15": false
+ }
+}

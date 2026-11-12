@@ -6270,19 +6270,19 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"7951301819129798440089572127137/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"7946902790286257950560892592790212320958676854694607924320412173363198622054157973944358922838901462991353136461368499165061680331955164844634344813782108987875995306999995495473410179037/499999999999998167404285406886123034824891787536070549392135121397247758199740083729787990057513880395962253368301469622325141378849372259504489115545014376665503124698090000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(237) ≥ 15.408051","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.4080515158"},
         "n": 237,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"15.9026036382595969","source_url":"https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/n237.cert","witness_id":"W-known-best-n237","witness_path":"packing/witnesses/known-best/n-237.yaml"},
+          "assessed_geometry": {"reported_side":"15.8938055805725742","source_url":"https://github.com/kenaznia-doga/s237-upper-bound/blob/13c4b231bb16437a6ee3751e75113ef95113b235/n-237-candidate.yaml","witness_id":"W-known-best-n237","witness_path":"packing/witnesses/known-best/n-237.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
               "evidence_refs": ["E-translation-escape-not-rigid"],
               "method": "numerical-multiprecision",
               "property": "not-rigid",
-              "scope": "Square 28 of the retained witness (witness id 29) translates 0.000335 along (0, -1) with the packing still valid, so the configuration admits a non-trivial feasible motion; 21 of its 237 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
+              "scope": "Square 2 of the retained witness (witness id 3) translates 0.005351 along (0.671912, -0.740631) with the packing still valid, so the configuration admits a non-trivial feasible motion; 206 of its 237 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
               "sources": [{"date_note":"The current retained screen has no generation date; the historical source-review date does not date the current witness assessments.","date_reference":null,"determination_precision":"unknown","determined_at":null,"evidence_ref":"E-translation-escape-not-rigid","recorded_at":"2026-10-08","recording_event":"Import of the unified displayed-packing rigidity assessment after the 2026-10-08 source audit.","reference":"packing/atlas/known-best/translation-escape-screen.json","reviewed_at":"2026-09-07"}]
             }
           ],
@@ -6292,7 +6292,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(237) ≤ 15.902604","provenance":"frontier","relation":"upper-bound","value":"15.9026036382595969"}
+        "side": {"display":"s(237) ≤ 15.893806","provenance":"frontier","relation":"upper-bound","value":"15.8938055805725742"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

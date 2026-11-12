@@ -2458,6 +2458,47 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-295": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#960](https://github.com/jlevy/squares/issues/960)",
+        producer_route=True,
+        ai=(
+            "Issue 960 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing was found by the band-design search of issue 954: two "
+            "copies of the tilted squares of the registry’s n = 70 packing, Ryan Xu’s as Evan "
+            "Daniel and PingYou Ltd improved it, laid along the diagonal as a band, annealed "
+            "in a reduced model with the axis-parallel squares on the two wall-anchored "
+            "staircase lattices, then quenched with Evan Daniel’s ALM+SLP code; the 11 "
+            "November review finds the first copy within 0.1 of 19 of its 20 squares after a "
+            "0.39-degree turn, and the second only after a −1.20-degree turn and a shift the "
+            "issue does not state. Against T-190’s packing, this case’s house best packing "
+            "before this adoption, it is a new arrangement: no symmetry pairs nearest centres "
+            "one to one, and the optimal assignment moves 72 squares beyond a tenth, at most "
+            "0.925, its band straight from corner to corner where the house’s is curved. So "
+            "Doğa Özden is the packing’s finder, from the band of Ryan Xu’s packing as the "
+            "seed, below the record it improves; the issue claims the upper bound only. Three "
+            "squares touch a wall, as the source says."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its 17 "
+            "controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2938,13 +2979,17 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s packing from a rebuild of Nate Chaoweeraprasit’s SQUISH composition",
     ),
-    # Couzo's refinement of issue 593's arrangement of his issue-561 design (T-190's
-    # regularization of T-183).
+    # T-295 (adopted on 12 November 2026), Doğa Özden's issue 960: a new arrangement relative
+    # to T-190's packing, 72 squares beyond a tenth, found by a band-design search from two
+    # copies of the tilted squares of Ryan Xu's n = 70 packing as Evan Daniel and PingYou Ltd
+    # improved it (the 11 November review's F9 and F10).
     237: Credit(
-        (SQUISH,),
-        (COUZO, POLKOVSKYI),
-        "Francisco Couzo’s refinement of Mykhailo Polkovskyi’s arrangement of Couzo’s "
-        "design, after Nate Chaoweeraprasit’s SQUISH packing",
+        (OZDEN,),
+        (),
+        "Doğa Özden’s packing from two copies of a band of the tilted squares of Ryan Xu’s "
+        "n = 70 packing as Evan Daniel and PingYou Ltd improved it, below Nate "
+        "Chaoweeraprasit’s SQUISH packing as Francisco Couzo and Mykhailo Polkovskyi refined "
+        "it",
     ),
     # T-174's regularization of T-151's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).

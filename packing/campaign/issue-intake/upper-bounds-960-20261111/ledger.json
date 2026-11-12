@@ -1,0 +1,52 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "b5b12c20646710a606bc86516f6c93168d00457e",
+  "read_on": "2026-11-11",
+  "counts": [
+    {
+      "n": 237,
+      "start": [{"label":"register T-253, pending adoption","holders":"[Mishapolk refinements 2026-10-23]","side":"15.902603638260","exact":true}],
+      "steps": [
+        {
+          "report": "#960",
+          "kind": "issue",
+          "reported_at": "2026-11-11T21:37:50Z",
+          "side": "15.893805580573",
+          "exact": true,
+          "verdict": "recorded",
+          "reason": "below",
+          "decided_against": ["register T-253, pending adoption"],
+          "difference": "below by 8.80e-03",
+          "first_committed": "2026-11-11T21:37:37Z",
+          "measured": "no symmetry of the box pairs it one to one with T-190's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves every square beyond 1e-3, 111 beyond 1e-2 and 72 beyond 0.1 (largest 0.924884) and turns 154 squares by more than 1e-6 radians, by up to 43.77 degrees; aligned by box centres, 73 squares turn by more than a degree, as the issue says; 42 squares tilted beyond a degree, 42.19 to 44.46 degrees from upright, 38 turned one way and 4 the other, and one more at 0.83 degrees, against T-190's 49, 1.14 to 43.62 degrees; T-189's packing, the house witness and its regularized view measure the same; a new arrangement relative to T-190's packing, not a further arrangement of it (F10 of the 11 November review); the issue's own counts (236 beyond 1e-3, 78 beyond 0.05, largest 1.202) hold with the house turned a half turn, set against the upper-right corner of the new box and paired by least summed move (F8); of the seed the issue states, the first copy of the 70 band matches, 19 of its 20 squares within 0.1 of a tilted square here after a 0.39-degree turn, and the second, shifted by (7, 7), lies more than 0.25 from every tilted square until turned by -1.20 degrees and shifted again; the two copies hold 40 tilted squares, not 42 (F9)"
+        }
+      ],
+      "best_now": [{"label":"#960","holders":"Doğa Özden","side":"15.893805580573","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":1,"claims":1,"recorded_new":0,"recorded_new_continuing":0,"recorded_refinement":0,"recorded_unclassified":1,"recorded_by_exception":0,"not_recorded":0,"undecided":0},
+  "cross_check": [],
+  "reports": [{"report":"#960","url":"https://github.com/jlevy/squares/issues/960","kind":"issue","holders":"Doğa Özden","reported_at":"2026-11-11T21:37:50Z","bead":"think-my76","counts":[237],"recorded":[237],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[237],"recorded_by_exception":[],"not_recorded":[],"undecided":[]}],
+  "owner_decisions": {
+    "exact_ties": [],
+    "first_commit_before_report": [],
+    "undecided": [],
+    "publication_dependent": [],
+    "unknown_times": [],
+    "refinement_chains": [],
+    "key_reason_candidates": [],
+    "measured_identity": [
+      {
+        "n": 237,
+        "report": "#960",
+        "verdict": "recorded",
+        "source_says": "nothing stated",
+        "against": "T-190",
+        "finding": "no symmetry of the box pairs it one to one with T-190's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves every square beyond 1e-3, 111 beyond 1e-2 and 72 beyond 0.1 (largest 0.924884) and turns 154 squares by more than 1e-6 radians, by up to 43.77 degrees; aligned by box centres, 73 squares turn by more than a degree, as the issue says; 42 squares tilted beyond a degree, 42.19 to 44.46 degrees from upright, 38 turned one way and 4 the other, and one more at 0.83 degrees, against T-190's 49, 1.14 to 43.62 degrees; T-189's packing, the house witness and its regularized view measure the same; a new arrangement relative to T-190's packing, not a further arrangement of it (F10 of the 11 November review); the issue's own counts (236 beyond 1e-3, 78 beyond 0.05, largest 1.202) hold with the house turned a half turn, set against the upper-right corner of the new box and paired by least summed move (F8); of the seed the issue states, the first copy of the 70 band matches, 19 of its 20 squares within 0.1 of a tilted square here after a 0.39-degree turn, and the second, shifted by (7, 7), lies more than 0.25 from every tilted square until turned by -1.20 degrees and shifted again; the two copies hold 40 tilted squares, not 42 (F9)",
+        "source": "packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/identity.json"
+      }
+    ]
+  },
+  "other_items": []
+}

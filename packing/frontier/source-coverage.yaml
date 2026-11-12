@@ -13106,6 +13106,36 @@ sources:
     as its house on 12 November, in place of T-291. The ledger of 11 November for this lane
     (campaign/issue-intake/upper-bounds-959-20261111) records it. All 3 native jobs have full
     outcomes.
+- id: ozden-s237-upper-bound-2026-11-11
+  title: 'Doğa Özden''s packing of 237 squares at kenaznia-doga/s237-upper-bound 13c4b23, issue 960'
+  role: source-repository
+  url: >-
+    https://github.com/kenaznia-doga/s237-upper-bound/tree/13c4b231bb16437a6ee3751e75113ef95113b235
+  local: resources/web/ozden-s237-upper-bound-2026-11-11/
+  source_key: '[Özden s237 upper bound 2026-11-11]'
+  scope:
+    n_values:
+    - 237
+  reviewed: '2026-11-11'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s237-upper-bound-2026-11-11/acquisition/claims.json
+  evidence:
+  - E-ozden-960-certificate-report
+  - E-ozden-960-exact-feasibility
+  - E-ozden-960-review-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, 13c4b23, but a raster diff image, two checker
+    files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
+    jlevy/squares#960, the certificate admitted only where its exact side rounds up to the side
+    the issue prints. T-295 records the in-horizon report at V3/C3 since the stage 4 review of
+    11 November (docs/project/reviews/review-2026-11-11-ozden-960.md), and the case adopted it
+    as its house on 12 November, in place of T-190. The ledger of 11 November for this lane
+    (campaign/issue-intake/upper-bounds-960-20261111) records it. All 3 native jobs have full
+    outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -13401,11 +13431,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-19 (T-218).
 - n: 237
-  source_id: couzo-n237-2026-10-15
-  value: '15.9026036382595969'
-  evidence: E-couzo-4e4c8ce-n237-certificate-report
+  source_id: ozden-s237-upper-bound-2026-11-11
+  value: '15.8938055805725742'
+  evidence: E-ozden-960-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-16 (T-190).
+    a replay here and an accepted review, adopted on 2026-11-12 (T-295).
 - n: 238
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.92410678532149466'
@@ -13610,7 +13640,7 @@ superseded_reports:
   value: '15.911191683001783031028912780176'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: couzo-n237-2026-10-15
+  superseded_by: ozden-s237-upper-bound-2026-11-11
 - n: 239
   source_id: evand-square-packing-2026-10-05
   value: '15.953819333480779915463620238818'
@@ -14391,14 +14421,14 @@ superseded_reports:
 - n: 237
   source_id: casson-square-packing-2026
   value: '15.91292783720833270'
-  superseded_by: couzo-n237-2026-10-15
+  superseded_by: ozden-s237-upper-bound-2026-11-11
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 237
   source_id: franciscouzo-square-packing-2026
   value: '15.911191683008479'
-  superseded_by: couzo-n237-2026-10-15
+  superseded_by: ozden-s237-upper-bound-2026-11-11
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 238
@@ -15051,7 +15081,7 @@ superseded_reports:
 - n: 237
   source_id: squish-update-2026-10-07
   value: '15.9036762351906287'
-  superseded_by: couzo-n237-2026-10-15
+  superseded_by: ozden-s237-upper-bound-2026-11-11
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 238
   source_id: squish-update-2026-10-07
@@ -15248,9 +15278,9 @@ superseded_reports:
 - n: 237
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.9036762351891381'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-190's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-295's exact
     side is smaller.
-  superseded_by: couzo-n237-2026-10-15
+  superseded_by: ozden-s237-upper-bound-2026-11-11
 - n: 258
   source_id: squish-update-2026-10-07
   value: '16.5634480021391540'
@@ -15435,8 +15465,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-10
   value: '15.9029496076778317'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-190's exact side is smaller.
-  superseded_by: couzo-n237-2026-10-15
+    and T-295's exact side is smaller.
+  superseded_by: ozden-s237-upper-bound-2026-11-11
 - n: 241
   source_id: evand-square-packing-2026-10-05
   value: '15.988132439524990848590591447359'
@@ -15567,8 +15597,8 @@ superseded_reports:
   source_id: mishapolk-records-2026-10-14
   value: '15.9027050578663668'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-190's exact side is smaller.
-  superseded_by: couzo-n237-2026-10-15
+    and T-295's exact side is smaller.
+  superseded_by: ozden-s237-upper-bound-2026-11-11
 - n: 264
   source_id: dostashev-records-2026-10-12
   value: '16.7747351323878329'
@@ -16193,6 +16223,12 @@ superseded_reports:
   reason: The house from 2026-10-17 until 2026-11-11; its certificate stays retained and verified,
     and T-292's exact side is smaller.
   superseded_by: de-winter-s132-upper-bound-2026-11-11
+- n: 237
+  source_id: couzo-n237-2026-10-15
+  value: '15.9026036382595969'
+  reason: The house from 2026-10-16 until 2026-11-12; its certificate stays retained and verified,
+    and T-295's exact side is smaller.
+  superseded_by: ozden-s237-upper-bound-2026-11-11
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

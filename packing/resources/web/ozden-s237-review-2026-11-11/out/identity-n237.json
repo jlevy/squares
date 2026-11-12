@@ -1,0 +1,180 @@
+{
+ "program": "l109_identity.py",
+ "programs_sha256": {
+  "l109_reader.py": "49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79",
+  "l109_check.py": "ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932",
+  "l109_identity.py": "dba7c8bd96d2ff3f3beafe32e471e95e88ec186d7bb6cbd0036925e0e006768b"
+ },
+ "decides": "nothing",
+ "new_side": 15.893805580572574,
+ "house_side": 15.902603638259597,
+ "anchorings": {
+  "least_summed_squared_move": {
+   "lower-left": {
+    "cost": 22.59135179540478,
+    "beyond_1e-3": 237,
+    "beyond_0.05": 79,
+    "beyond_0.1": 72,
+    "largest_move": 0.9249,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 230,
+    "symmetry": 2
+   },
+   "lower-right": {
+    "cost": 22.870751796650858,
+    "beyond_1e-3": 209,
+    "beyond_0.05": 80,
+    "beyond_0.1": 72,
+    "largest_move": 0.923,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 229,
+    "symmetry": 2
+   },
+   "upper-left": {
+    "cost": 22.338835718246038,
+    "beyond_1e-3": 184,
+    "beyond_0.05": 78,
+    "beyond_0.1": 72,
+    "largest_move": 0.9163,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 229,
+    "symmetry": 2
+   },
+   "upper-right": {
+    "cost": 22.61823571949212,
+    "beyond_1e-3": 236,
+    "beyond_0.05": 78,
+    "beyond_0.1": 72,
+    "largest_move": 0.9225,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 228,
+    "symmetry": 2
+   },
+   "centred": {
+    "cost": 22.595621167889345,
+    "beyond_1e-3": 237,
+    "beyond_0.05": 78,
+    "beyond_0.1": 72,
+    "largest_move": 0.9196,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 229,
+    "symmetry": 2
+   }
+  },
+  "least_summed_move": {
+   "lower-left": {
+    "cost": 38.20912633965132,
+    "beyond_1e-3": 237,
+    "beyond_0.05": 79,
+    "beyond_0.1": 72,
+    "largest_move": 1.2031,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 230,
+    "symmetry": 2
+   },
+   "lower-right": {
+    "cost": 38.31368190816547,
+    "beyond_1e-3": 209,
+    "beyond_0.05": 80,
+    "beyond_0.1": 72,
+    "largest_move": 1.209,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 229,
+    "symmetry": 2
+   },
+   "upper-left": {
+    "cost": 37.45432581493759,
+    "beyond_1e-3": 184,
+    "beyond_0.05": 78,
+    "beyond_0.1": 72,
+    "largest_move": 1.1965,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 229,
+    "symmetry": 2
+   },
+   "upper-right": {
+    "cost": 38.22869102267158,
+    "beyond_1e-3": 236,
+    "beyond_0.05": 78,
+    "beyond_0.1": 72,
+    "largest_move": 1.2024,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 228,
+    "symmetry": 2
+   },
+   "centred": {
+    "cost": 37.865132520148705,
+    "beyond_1e-3": 237,
+    "beyond_0.05": 78,
+    "beyond_0.1": 72,
+    "largest_move": 1.2028,
+    "turned_beyond_1_degree": 73,
+    "largest_turn_degrees": 43.77,
+    "nearest_centres_distinct": 229,
+    "symmetry": 2
+   }
+  }
+ },
+ "tilted": {
+  "new_beyond_0.5": 43,
+  "new_beyond_1": 42,
+  "house_beyond_0.5": 49,
+  "house_beyond_1": 49,
+  "new_angle_groups": [
+   {
+    "count": 1,
+    "from": -44.465,
+    "to": -44.465
+   },
+   {
+    "count": 1,
+    "from": -44.4033,
+    "to": -44.4033
+   },
+   {
+    "count": 1,
+    "from": -44.3866,
+    "to": -44.3866
+   },
+   {
+    "count": 1,
+    "from": -44.372,
+    "to": -44.372
+   },
+   {
+    "count": 1,
+    "from": 0.8301,
+    "to": 0.8301
+   },
+   {
+    "count": 1,
+    "from": 42.1907,
+    "to": 42.1907
+   },
+   {
+    "count": 35,
+    "from": 42.2148,
+    "to": 42.2188
+   },
+   {
+    "count": 1,
+    "from": 42.291,
+    "to": 42.291
+   },
+   {
+    "count": 1,
+    "from": 43.7659,
+    "to": 43.7659
+   }
+  ]
+ }
+}

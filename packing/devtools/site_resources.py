@@ -349,6 +349,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s237-upper-bound",
+        "Doğa Özden",
+        (
+            "A packing at 237, a band built from two copies of the registry's 70, 8.80e-3"
+            " below the record (T-295)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

@@ -32066,3 +32066,115 @@ issues:
       search time is right; and whether the seed took the 70 band from the registry's witness
       or from Ryan Xu's or Evan Daniel's published coordinates, and whether the band-design
       search will be published. No reply has been posted.
+  - number: 960
+    title: 's(237) ≤ 15.893805580573: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(237) <= 15.893805580573, the exact rational side of n-237-candidate.yaml rounded up at
+      12 places, 8.798e-03 below the house: a rational corner Witness/v2 at
+      kenaznia-doga/s237-upper-bound 13c4b23, the repository's one commit, 13 seconds before the
+      issue, promoted to exact rationals with this repository's packing-witness promote at
+      c8448724 from a decimal pose the repository retains. The issue names the record T-189,
+      but its value and fraction are T-190's, Francisco Couzo's certificate of Nate
+      Chaoweeraprasit's packing, improved by Couzo and Mishapolk, the house since 16 October.
+      It reports packing-witness verify VERIFIED (27966 pairs) and sqcheck.py VALID, and says
+      the packing was found by the band-design search of #954: two copies of the tilted squares
+      of the registry's 70 (Ryan Xu, improved by Evan Daniel and PingYou Ltd) laid as a band
+      along the diagonal, annealed in a reduced model with the axis-parallel squares on the two
+      wall-anchored staircase lattices, then quenched with Evan Daniel's code. Triaged and
+      retained on 11 November 2026 in lane L110 (think-my76): every stated digest holds, the
+      print is the exact side rounded up, and both maintained exact routes accept the witness
+      and refuse its gross and sharp controls; measured, it is a new arrangement relative to
+      T-190's packing, not one to one with it under any symmetry, 72 squares beyond a tenth.
+      The ledger of 11 November records it. Registered as T-295. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-11-ozden-960.md, lane L109), written blind in a
+      separate lane, accepted it with findings, one minor for the author and the rest notes,
+      and scored it S3; its clean-room checker decided it again, so the entry is confirmed,
+      independently re-implemented, at V3/C3, and the case adopted it at 237 under the house
+      rule on 12 November, in place of T-190, with Doğa Özden the packing's finder and the band's source packing
+      and the house's holders credited as the seed and the record it improves, both strong
+      generators' regularization of the new house run in the same change. The Kaggle packing
+      the issue quotes, 15.902603638274 (kirilltym), is above it; the side-only leaderboard
+      entry it quotes and states first, 15.893805585209 (team elegans, 5 November), 4.64e-9
+      above this side, is unpublished and states no packing, so it is context only.
+    read_through: '2026-11-11T21:55:37Z'
+    results:
+    - key: n237-band
+      claim: >-
+        s(237) <= 15.8938055805725742 (the exact rational side, rounded up at 16 places, of
+        n-237-candidate.yaml at kenaznia-doga/s237-upper-bound 13c4b23), a packing whose seed
+        band is built from two copies of the tilted squares of the registry's 70.
+      source: body
+      register:
+      - T-295
+      evidence:
+      - E-ozden-960-certificate-report
+      - E-ozden-960-exact-feasibility
+      - E-ozden-960-review-exact-feasibility
+    beads:
+    - think-my76
+    - think-ruu2
+    - think-ikku
+    - think-tj4o
+    - think-71uq
+    answer_bead: think-my76
+    replies: []
+    close_when: >-
+      T-295 is on main at V3/C3 as the house at 237, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 11 November 2026 from main b5b12c206; no comment yet. The commit 13c4b23 precedes
+      the issue by 13 seconds. The issue carried the intake label from 21:55:37Z, its only later
+      event. T-190 was the house it improves; the issue names T-189, Couzo's issue-607
+      certificate, 2.40e-11 above T-190, which the case record keeps as verified and not
+      selected, while the value 15.9026036382595969 and the fraction it quotes are T-190's, so
+      only the id is wrong (F6). T-253, Polkovskyi's sub-print re-certification of T-190's
+      packing, 1.59e-19 below it, is pending adoption at 237 (think-ikku); this certificate is
+      below it by the same 8.80e-3.
+
+      Measured against padding, T-190's certificate at 237 has 1.59e-19 of padding (1 - lambda*
+      = 1.0e-20, squares 54 and 55) and T-189's 2.39e-11 (squares 74 and 103), so none of the
+      gain is either's padding and RV-3 (think-ruu2) does not reach this entry; the review
+      measured both with the same tool and got the same receipts exactly. This certificate's
+      own margin, measured the same way, is 2.985e-12. The receipts are contraction_margin's,
+      retained in the packet's measure/ directory. The L-step scan finds that this bound
+      carries to no other count.
+
+      The review measured the issue's statements: exactly three squares touch a wall, the other
+      19 square-wall clearances below 1e-12 at most 1.20e-13; the issue's "our exact side
+      15.8938055805725735" is the side's binary64 rounding, 6.55e-16 below the exact side
+      (F5); the margins are the pose's own, 2.01 to 5.70e-13 of the centres' separation, about
+      twice "about 1e-13 relative" (F7); the issue's lineage counts hold with the house turned
+      a half turn, set against the upper-right corner and paired by least summed move (F8);
+      the seed's first copy matches, 19 of its 20 squares within 0.1 after a 0.39-degree turn,
+      but the second, reflected in the main diagonal and shifted by (7, 7), lies more than 0.25
+      from every tilted square as stated and fits only after a -1.20-degree turn and a further
+      shift, and two copies of the 70 band hold 40 tilted squares, not 42 (F9).
+
+      The issue names the registry's 70 as the band's source; that witness comes from PingYou
+      Ltd's PR 574 algebraic supplement, which has no licence file; whether the seed needs a
+      notice of its own is the owner's open decision on think-71uq (F10; the review named
+      think-mdxq, which closed on 4 November), noted and not decided. The issue's search for
+      competing reports is dated 13:50 PST, 21:50Z, twelve minutes after the issue was opened
+      (F12). The leaderboard entry the issue quotes, elegans's 15.893805585209, states no
+      packing and reached this repository only as the issue's quotation, so it is no report
+      and nothing is recorded for it.
+
+      The review's questions for the author, informational and holding nothing open: whether
+      the final repair scaling was about 2e-13 rather than 1e-13 (F7); whether the lineage
+      counts use the house turned a half turn, set against the upper-right corner and paired by
+      least summed move, and whether the issue would name that convention (F8); about which
+      point the copies were rigidly rotated to a lean of 2.0 degrees, and what the lean
+      measures (F9); where the other two of the 42 tilted squares come from, since two copies
+      of the 70 band hold 40 (F9); whether the seed took the 70 band from the registry's
+      witness or from Ryan Xu's or Evan Daniel's published coordinates; whether the author
+      would correct the record's id to T-190 and print the exact side as its 16-place ceiling,
+      15.8938055805725742 (F5, F6); whether the body was edited after 13:50 PST or the time is
+      misstated (F12); and whether the band-design search and its seeds will be published, and
+      which replay is intended, certificate.replay or the README's rerun, from which directory
+      (F11). No reply has been posted.
