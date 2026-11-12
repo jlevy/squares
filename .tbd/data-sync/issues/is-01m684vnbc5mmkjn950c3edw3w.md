@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 248
+version: 249
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -88,7 +88,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T03:55:08.776Z
+updated_at: 2026-11-12T03:55:35.236Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -187,3 +187,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~03:40Z: L123 handed back #968 (think-sj00). Root cause: the step's faulthandler_timeout C watchdog walks thread states without the GIL and segfaults when a ThreadingHTTPServer thread exits mid-walk. Fix: a Python-thread stack_watchdog plugin plus a ban scan, D-523. CI frontend still running on 3e9f52a2a. Senior review L125 running. L123 stopped after handback.
 
 2026-11-12 ~04:10Z: L125's senior review of #968: nothing blocking; the diagnosis was verified against CPython 3.14.7 source and repros; hosted CI is green including frontend. Should-fix: arm() exceptions must not skip the phase, and the unit test can deadlock on a pipe. Nits: GIL mechanism wording, thread restart, ban-scan scope, spec note. L126 is addressing them.
+
+2026-11-12 03:53Z renewal (intake212): new #967 (Özden s(269) <= 16.889730073596, 9.74e-3 below his #962/T-296; just under Kaggle's 16.889730079125); his #947 comment (-6813076182) points to it. Bead think-n73d; blind review L127 started; import after #966. #966/T-296 still merges (as with #954 and #959).
