@@ -155,9 +155,11 @@ VERIFIER_TABLE = re.compile(
 #: Counts whose body a pass marked as history by hand, in prose no tool writes in a fixed
 #: form (`historical`): the first pass, on 11 October 2026, the SQUISH update sections at
 #: 155, 258, 263 and 302 and the grid prose at 308, and the pass of 19 October 2026 the
-#: intake's staging paragraph, grid sentence and packing section at 183 (T-220). Only
-#: their owned parts are the writer's.
-HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
+#: intake's staging paragraph, grid sentence and packing section at 183 (T-220), and lane
+#: L104's pass of 11 November 2026 the grid sentence and packing section at 157 (T-293) and
+#: the packing section's opening at 132 (T-292), review F14 of #958. Only their owned parts
+#: are the writer's.
+HAND_MARKED = frozenset({132, 155, 157, 183, 258, 263, 302, 308})
 #: The first pass whose writer also marks the closing sentence of a T-155 view's section as
 #: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
 VIEW_SECTION_FROM = "2026-10-19"
@@ -707,6 +709,73 @@ RESULTS: dict[str, Prose] = {
             "finder, with #561’s packing and the SQUISH design it continues as its start, as "
             "at 146, 236 and 308; the case credits it so."
         ),
+    ),
+    "T-292": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#958](https://github.com/jlevy/squares/issues/958)",
+        producer_route=False,
+        ai=(
+            "The issue and the source’s README say the derivation, optimization, "
+            "high-precision solution, rational certificate, checking and figure were produced "
+            "with Claude Fable 5.2 (Anthropic) under Joost de Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the packing is a pinwheel, a central block of tilted squares with "
+            "four arms inside four blocks of axis-aligned squares, grown from the public "
+            "109-square packing of Samanyu-dev’s squares_in_squares by one step: cut along one "
+            "horizontal and one vertical line, the parts moved about one unit apart, each gap "
+            "filled with one layer of squares continuing the local lattice, and every square "
+            "re-optimized; credit for the pinwheel at 109 belongs to Samanyu-dev, and his own "
+            "contribution is the growth step and the optimization. The 11 November review "
+            "measured the step: under one symmetry the seed, cut at about x = 3.58 and y = "
+            "7.37 and moved apart, pairs each of its 109 squares with one here within 0.129, "
+            "the other 23 being 15 axis-aligned squares at the cuts and 8 tilted ones. Against "
+            "T-174’s packing, this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 84 squares beyond a tenth, at most 0.986. So Joost de Winter is "
+            "the packing’s finder, after Samanyu-dev’s pinwheel at 109, below the record it "
+            "improves."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it and its JSON twin again by separating axes in "
+            "rationals and by exact clipped areas in GMP rationals over every square, wall and "
+            "pair; its 16 controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-293": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#958](https://github.com/jlevy/squares/issues/958)",
+        producer_route=False,
+        ai=(
+            "The issue and the source’s README say the derivation, optimization, "
+            "high-precision solution, rational certificate, checking and figure were produced "
+            "with Claude Fable 5.2 (Anthropic) under Joost de Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the packing is a pinwheel grown from the public 109-square packing "
+            "of Samanyu-dev’s squares_in_squares by two cut-and-fill steps, the first giving "
+            "his packing of 132 (T-292); credit for the pinwheel at 109 belongs to "
+            "Samanyu-dev, and his own contribution is the growth steps and the optimization. "
+            "The 11 November review measured the second step: under one symmetry the 132, "
+            "cut at about x = 8.33 and y = 8.32 and moved apart, pairs each of its squares "
+            "with one here within 0.126, the other 25 being 17 axis-aligned squares at the "
+            "cuts and 8 tilted ones. It is the first packing of 157 squares below the 13 × 13 "
+            "grid on record: no symmetry pairs it one to one with the grid’s squares, the "
+            "optimal assignment moving 100 beyond a tenth, and its 61 tilted squares turn 24.0 "
+            "to 27.5 degrees. So Joost de Winter is the packing’s finder, after Samanyu-dev’s "
+            "pinwheel at 109."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it and its JSON twin again by separating axes in "
+            "rationals and by exact clipped areas in GMP rationals over every square, wall and "
+            "pair; its 16 controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
     ),
     "T-220": Prose(
         author="Evan Daniel",
@@ -2549,12 +2618,14 @@ CREDITS: dict[int, Credit] = {
         (PINGYOU,),
         "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing",
     ),
-    # T-174's regularization of T-141's packing, 18 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-292 (adopted on 11 November 2026), Joost de Winter's issue 958: a pinwheel grown from
+    # Samanyu-dev's 109 by one cut-and-fill step, which the 11 November review measured (F11);
+    # a new arrangement relative to T-174's packing, 84 squares beyond a tenth (F14).
     132: Credit(
-        (DANIEL,),
-        (PINGYOU,),
-        "PingYou Ltd’s refinement of Evan Daniel’s record-hunt packing",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s pinwheel grown from Samanyu-dev’s n = 109 packing, below Evan "
+        "Daniel’s record-hunt packing as PingYou Ltd refined it",
     ),
     # Evan Daniel's chain search from Ryan Xu's packing: nine squares beyond a tenth
     # against Xu's and Barnett's (RT-5 of the 16 October review; T-187 records no
@@ -2606,6 +2677,15 @@ CREDITS: dict[int, Credit] = {
         "Doğa Özden’s packing from a strip cut of Evan Daniel’s n = 182 packing, below "
         "Daniil Ostashev’s packing as Francisco Couzo, PingYou Ltd and Mykhailo Polkovskyi "
         "refined it",
+    ),
+    # T-293 (adopted on 11 November 2026), Joost de Winter's issue 958: a pinwheel grown from
+    # Samanyu-dev's 109 by two cut-and-fill steps through his 132, the first packing of 157
+    # squares below the grid (F11, F14).
+    157: Credit(
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s pinwheel grown from Samanyu-dev’s n = 109 packing, the first below "
+        "the 13 × 13 grid",
     ),
     # T-257 (adopted on 31 October 2026), Evan Daniel's packing of issue 845 from an L-cut of
     # the s(199) record, Chaoweeraprasit's packing as Gupta improved it, which the 31

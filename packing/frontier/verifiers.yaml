@@ -8123,3 +8123,61 @@ verifiers:
       l101_house.py, l101_pose.py, l101_identity.py, l101_band.py, l101_custody.py,
       l101_compare_lane.py and l101_digests.py, kept beside them, decide no certificate and are
       not registered; l101_house.py decides the house witness with the frozen l101_check.decide.
+  - id: V-de-winter-958-review-check
+    program: l105_check.py with l105_reader.py, l105_sat.py, l105_clip.py and l105_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Joost de Winter's rational centre-basis
+      certificates of issue 958 (132 and 157), with a strict reader of its own (l105_reader.py: the
+      JSON's [center_x, center_y, cos, sin] rows and the YAML's centre-basis witness, every scalar
+      an exact rational, ids in order, the two files held to the same packing scalar for scalar):
+      every format hypothesis, every square a unit square, every wall and every pair of both files
+      twice with no distance filter, by separating axes in fractions.Fraction (l105_sat.py, method
+      A) and by exact clipped areas in gmpy2.mpq (l105_clip.py, method B), each pair classed
+      overlapping, touching or clear by both. l105_geom.py holds the exact constructions the
+      self-test and controls use; l105_controls.py decides 16 controls a count stated in a plan
+      hashed before it existed; l105_selftest.py holds both methods and the reader to 2,213 cases,
+      and two mutated methods fail it.
+    source:
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_check.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_reader.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_sat.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_clip.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_geom.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_selftest.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_controls.py
+    independence_record: packing/resources/web/dewinter-132-157-review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 958 (L105, under think-bcfs), strong
+            tier, prompted separately from the import lane (L104, think-bcfs)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's READMEs and the issue say the derivation, optimization, certificates and
+          checking were produced with Claude Fable 5.2 (Anthropic) under Joost de Winter's
+          direction. The six checker files and run_frozen.sh were frozen at 2026-11-11T21:07:25Z
+          (frozen/checker-frozen-digests.txt), before their author read the source's
+          verify_exact.py, any of the import lane's work or this repository's witness, verifier or
+          promotion code; they import nothing from this repository or the source.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-dewinter-132-157.md (SHA-256
+      1e7b04cca2bfc3b2e0ef6c95c885e88b99a82615571af3c454ce245222e622b7 for l105_check.py, as frozen
+      at 2026-11-11T21:07:25Z), and kept with its receipts in the review-only directory
+      dewinter-132-157-review-2026-11-11 beside the import lane's packets. l105_plan.py,
+      l105_sides.py, l105_construct.py, l105_lineage.py, l105_identity.py, l105_custody.py,
+      l105_compare_lane.py and l105_digests.py, kept beside them, decide no certificate and are not
+      registered.

@@ -31680,3 +31680,110 @@ issues:
       here, reviewed and adopted under the house rule, and until then T-291 is the house. Either
       way this issue's certificate stays a valid bound, verified at V3/C3. #959's result is not
       this issue's and is not recorded under reported here.
+
+  - number: 958
+    title: 's(157) below 13 and a new s(132): two pinwheel packings: registration request'
+    author: JoostdeWinter
+    opened: '2026-11-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of two upper bounds, s(157) <= 12.993302611344 and
+      s(132) <= 11.976048383604, each the exact rational side of a centre-basis witness rounded up
+      at 12 places, at JoostdeWinter/square-packing 6617869 (folders n157 and n132), first committed
+      at a491dad (20:49:44Z), 6 minutes 34 seconds before the issue: 6.70e-03 below the grid's 13,
+      the first packing of 157 squares below it on record, and 9.63e-03 below the house at 132, Evan
+      Daniel's packing improved by PingYou Ltd (T-174). Each is a pinwheel he derives from the
+      public 109-square packing of Samanyu-dev/squares_in_squares 53551d7 by one cut-and-fill step
+      (132) or two (157), crediting the pinwheel at 109 to Samanyu-dev and claiming the two growth
+      steps and the optimization. Triaged and retained on 11 November 2026 in lane L104
+      (think-bcfs): every stated digest holds, each print is the exact side rounded up, and both
+      maintained exact routes accept both witnesses and refuse their gross and sharp controls;
+      measured, each is a new arrangement, not one to one with T-174's packing or the grid under any
+      symmetry. The ledger of 11 November records both. Registered as T-292 (132) and T-293 (157).
+      The 11 November stage 4 review (docs/project/reviews/review-2026-11-11-dewinter-132-157.md,
+      lane L105, under think-bcfs), written blind in a separate lane, accepted both with findings,
+      all notes, and scored both S3; its clean-room checker decided both files of each count again,
+      so both entries are confirmed, independently re-implemented, at V3/C3, and the cases adopt
+      them at 132 and 157 under the house rule in the same pass, with Joost de Winter the packings'
+      finder after Samanyu-dev's pinwheel at 109, both strong generators' regularization of the new
+      houses run in the same change.
+    read_through: '2026-11-11T20:56:18Z'
+    results:
+    - key: n157-pinwheel
+      claim: >-
+        s(157) <= 12.9933026113432237 (the exact rational side, rounded up at 16 places, of
+        n157/n157_witness.yaml at JoostdeWinter/square-packing 6617869), a pinwheel grown in two
+        steps from Samanyu-dev's 109, below the grid.
+      source: body
+      register:
+      - T-293
+      evidence:
+      - E-de-winter-s157-certificate-report
+      - E-de-winter-s157-exact-feasibility
+      - E-de-winter-s157-review-exact-feasibility
+    - key: n132-pinwheel
+      claim: >-
+        s(132) <= 11.9760483836034076 (the exact rational side, rounded up at 16 places, of
+        n132/n132_witness.yaml at JoostdeWinter/square-packing 6617869), a pinwheel grown in one
+        step from Samanyu-dev's 109.
+      source: body
+      register:
+      - T-292
+      evidence:
+      - E-de-winter-s132-certificate-report
+      - E-de-winter-s132-exact-feasibility
+      - E-de-winter-s132-review-exact-feasibility
+    beads:
+    - think-bcfs
+    - think-71uq
+    answer_bead: think-bcfs
+    replies: []
+    close_when: >-
+      T-292 and T-293 are on main at V3/C3 as the houses at 132 and 157, and the reply on main
+      says what was retained and replayed, what the review found and that the cases adopted
+      them.
+    notes: >-
+      Read on 11 November 2026 from main c8448724e; no comment yet, and no label. The intake label
+      was added on 11 November at 21:31:29Z. The lane first read the two folders at 20:58Z as a
+      publication in a watched repository with no issue; the issue, opened at 20:56:18Z, names
+      6617869, the head, which changes only the READMEs and checksums of a491dad's folders. GitHub's
+      activity log was not readable from this session, so the push of a491dad is not read: by the
+      rule of 14 October the publication would be a report from its first commit, 20:49:44Z, and the
+      ledger dates both claims by the issue with that first commit kept, since no other report
+      reached 132 or 157 between the two, so the verdicts are the same either way. The issue says
+      verify_exact.py, the checker used for #946 without its polynomial test, checks in rational
+      arithmetic that every edge direction is a unit vector, every square lies in the container and
+      all pairs have disjoint interiors, and that a floating-point separating-axis test and a
+      union-area test with Shapely (157.0000000000 and 132.0000000000), separate code outside the
+      repository, agree; none of them ran here. Local optimality rests on a 250-digit solution of
+      the contact equations, a floating-point first-order condition and 297 and 324 perturbation
+      trials, with no formal proof; the certificates' own contraction margins, 1.349e-59 and
+      1.248e-59, match the 1.4e-59 and 1.3e-59 the issue states. The issue has not seen the Kaggle
+      per-puzzle leaderboard at these counts, so unpublished smaller sides may exist. T-174's margin
+      at 132 and the grid's at 157 are both 0, so RV-3 (think-ruu2) does not reach either gain, and
+      the L-step scan finds that neither bound carries to another count. 157 = 13^2 - 13 + 1, so the
+      record now shows s(k^2 - k + 1) < k at k = 13, below Fang's k >= 15 (T-163) and Daniel's k =
+      14 (T-220).
+
+      Samanyu-dev's 109, side 10.949289581, is 4.58e-04 below the record at 109 (6 + 7/2 sqrt(2)),
+      as the issue says; the issue makes no claim there, and the seed's repository is not a watched
+      repository and is not retained, so the seed is context for this issue's lineage and not a
+      report (the review's F11). The review measured both growth steps as stated: under one symmetry
+      each parent, cut by one vertical and one horizontal line and moved about one unit apart, pairs
+      every parent square with a child square within 0.13, the 23 and 25 squares left over being 15
+      and 17 axis-aligned squares at the cuts and 8 tilted ones each time. The seed's repository has
+      no licence file, only its README's 'MIT-style' sentence (F12); that question is the owner's on
+      think-71uq, under think-gtmb (the review named think-mdxq, which closed on 4 November).
+
+      The review's notes for the author (F8 to F10) and its six questions, informational and holding
+      nothing open: whether the stated 1.3e-59 and 1.4e-59 were the measured 1.2476e-59 and
+      1.3493e-59 rounded up; how the 1,407 and 2,024 contact equations are counted, when corner
+      incidences within 1e-50 number 1,423 and 2,048; whether the YAML could carry the softschema
+      header, a claim block and a lowercase id; whether the measured cuts (about x = 3.58, y = 7.37
+      in the 109 turned three quarter turns, and x = 8.33, y = 8.32 in the 132 turned one quarter
+      turn) are his and which squares he added in each gap; whether the growth step's code, the
+      IPOPT model, the 250-digit solutions and the binary64 and Shapely checks will be published;
+      and whether Samanyu-dev agreed to the 109 being built on and 'MIT-style' covers the packing
+      data. No reply has been posted.

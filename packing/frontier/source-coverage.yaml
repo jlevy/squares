@@ -13004,6 +13004,78 @@ sources:
     as its house that day. The ledger of 11 November for this lane
     (campaign/issue-intake/upper-bounds-954-20261111) records it. All 3 native jobs have full
     outcomes.
+- id: de-winter-s132-upper-bound-2026-11-11
+  title: Joost de Winter's pinwheel packing of 132 squares at JoostdeWinter/square-packing 6617869, issue 958
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/6617869a3491b5872c6ecdff55db05cbee57d516
+  local: resources/web/de-winter-s132-upper-bound-2026-11-11/
+  source_key: '[de Winter s132 upper bound 2026-11-11]'
+  scope:
+    n_values:
+    - 132
+  reviewed: '2026-11-11'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s132-upper-bound-2026-11-11/acquisition/claims.json
+  evidence:
+  - E-de-winter-s132-certificate-report
+  - E-de-winter-s132-exact-feasibility
+  - E-de-winter-s132-review-exact-feasibility
+  notes: >-
+    The licence, the root README and the folder n132/ of the commit 6617869, the head when read, are
+    retained for jlevy/squares#958, the licence pinned against the byte-identical copy the
+    de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and the figure by digest; the
+    certificate is admitted only where its exact side rounds up to the side the root README prints.
+    n132/ was first committed at a491dad (2026-11-11T20:49:44Z), 6 minutes 34 seconds before the
+    issue, whose certificate bytes the pin keeps; 6617869 changes only the READMEs and checksums,
+    naming Claude Fable 5.2. The push of a491dad is not read; no other report reached 132 or 157
+    before the issue, which dates the claim. T-292 records the in-horizon report, 9.63e-03 below
+    T-174 (Evan Daniel's packing, improved by PingYou Ltd), at V3/C3 since the stage 4 review of 11
+    November (docs/project/reviews/review-2026-11-11-dewinter-132-157.md, lane L105), and the case
+    adopted it as its house that day. The ledger of 11 November for this lane
+    (campaign/issue-intake/upper-bounds-de-winter-132-157-20261111) records it as a new packing. All
+    3 native jobs have full outcomes. The commit 501cb8d before the pin is read in
+    campaign/intake-watch.yaml.
+- id: de-winter-s157-upper-bound-2026-11-11
+  title: Joost de Winter's pinwheel packing of 157 squares at JoostdeWinter/square-packing 6617869, issue 958
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/6617869a3491b5872c6ecdff55db05cbee57d516
+  local: resources/web/de-winter-s157-upper-bound-2026-11-11/
+  source_key: '[de Winter s157 upper bound 2026-11-11]'
+  scope:
+    n_values:
+    - 157
+  reviewed: '2026-11-11'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s157-upper-bound-2026-11-11/acquisition/claims.json
+  evidence:
+  - E-de-winter-s157-certificate-report
+  - E-de-winter-s157-exact-feasibility
+  - E-de-winter-s157-review-exact-feasibility
+  notes: >-
+    The licence, the root README and the folder n157/ of the commit 6617869, the head when read, are
+    retained for jlevy/squares#958, the licence pinned against the byte-identical copy the
+    de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and the figure by digest; the
+    certificate is admitted only where its exact side rounds up to the side the root README prints.
+    The root README and verify_exact.py are pinned against the copies the
+    de-winter-s132-upper-bound-2026-11-11 packet retains. n157/ was first committed at a491dad
+    (2026-11-11T20:49:44Z), 6 minutes 34 seconds before the issue, whose certificate bytes the pin
+    keeps; 6617869 changes only the READMEs and checksums, naming Claude Fable 5.2. The push of
+    a491dad is not read; no other report reached 132 or 157 before the issue, which dates the claim.
+    T-293 records the in-horizon report, 6.70e-03 below the 13 x 13 grid, the first packing of 157
+    squares below it on record, at V3/C3 since the stage 4 review of 11 November
+    (docs/project/reviews/review-2026-11-11-dewinter-132-157.md, lane L105), and the case adopted it
+    as its house that day. The ledger of 11 November for this lane
+    (campaign/issue-intake/upper-bounds-de-winter-132-157-20261111) records it as a new packing. All
+    3 native jobs have full outcomes. The commit 501cb8d before the pin is read in
+    campaign/intake-watch.yaml.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -13119,11 +13191,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 132
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '11.9856801988458088115'
-  evidence: E-pingyou-574-certificate-report
+  source_id: de-winter-s132-upper-bound-2026-11-11
+  value: '11.9760483836034076'
+  evidence: E-de-winter-s132-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+    a replay here and an accepted review, adopted on 2026-11-11 (T-292).
 - n: 146
   source_id: evand-n146-2026-10-14
   value: '12.5837821901518604'
@@ -13160,6 +13232,12 @@ selected_overrides:
   evidence: E-ozden-943-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-11 (T-287).
+- n: 157
+  source_id: de-winter-s157-upper-bound-2026-11-11
+  value: '12.9933026113432237'
+  evidence: E-de-winter-s157-certificate-report
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-11-11 (T-293).
 - n: 172
   source_id: ozden-s172-upper-bound-2026-11-09
   value: '13.6146898532862152'
@@ -13837,14 +13915,14 @@ superseded_reports:
 - n: 132
   source_id: casson-square-packing-2026
   value: '11.99134529315214159'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: de-winter-s132-upper-bound-2026-11-11
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 132
   source_id: franciscouzo-square-packing-2026
   value: '11.991327887694469'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: de-winter-s132-upper-bound-2026-11-11
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 145
@@ -15074,9 +15152,9 @@ superseded_reports:
 - n: 132
   source_id: evand-square-packing-2026-10-05
   value: '11.991327887691501411687842131585'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-292's exact
     side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: de-winter-s132-upper-bound-2026-11-11
 - n: 146
   source_id: ry-xu-new-packings-2026-10-08
   value: '12.5837822775125838'
@@ -15555,8 +15633,8 @@ superseded_reports:
   source_id: evand-record-hunt3-2026-10-10
   value: '11.985680198845808811522231964102'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-174's exact side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+    and T-292's exact side is smaller.
+  superseded_by: de-winter-s132-upper-bound-2026-11-11
 - n: 155
   source_id: dostashev-records-2026-10-11
   value: '12.9524254069584562'
@@ -16073,6 +16151,12 @@ superseded_reports:
   reason: The house from 2026-10-17 until 2026-11-11; its certificate stays retained and verified,
     and T-291's exact side is smaller.
   superseded_by: ozden-s179-upper-bound-2026-11-11
+- n: 132
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '11.9856801988458088115'
+  reason: The house from 2026-10-17 until 2026-11-11; its certificate stays retained and verified,
+    and T-292's exact side is smaller.
+  superseded_by: de-winter-s132-upper-bound-2026-11-11
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

@@ -1988,3 +1988,21 @@ repositories:
       can check. Slabs and trapezoids are another container, but the asymptotic records cite
       Bui's paper and build on it, so think-0fa1 decides whether the note bears on any
       record. Nothing under theorem-a/, composites/ or the strip folders changes.
+  # Lane L104 of 11 November 2026 (think-bcfs).
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 6617869a3491b5872c6ecdff55db05cbee57d516
+    read_on: '2026-11-11'
+    note: >-
+      Read through 6617869 (20:52:23Z on 11 November), the head, which the
+      de-winter-s132-upper-bound-2026-11-11 and de-winter-s157-upper-bound-2026-11-11 packets pin
+      with a491dad (20:49:44Z), the commit that adds n132/ and n157/, which jlevy/squares#958
+      reports (20:56:18Z). The read covers the one commit those pins contain whose changed paths no
+      packet retains: 501cb8d (19:41:30Z), "Correct the README statements on the descent runs and
+      the certificate margin", which changes one paragraph of above324/README.md and two of
+      above324_refined/README.md and no certificate. It says the certificates for 494, 738, 739, 753
+      and 810 and the 22 of above324_refined/ were written by multiplying every centre and the side
+      by 1 + 2e-10 + 4v, v the largest constraint violation left, and rounding the side up at the
+      13th decimal, the margin 5.0e-9 to 6.4e-9 for eighteen of the 22 and estimated at 8.4e-9 to
+      4.6e-8 for 754, 637, 684 and 805, and how the descent runs chose the 22. Those are statements
+      about #941's and #942's certificates, which their requests entries take in (lane L103); no
+      bound changes. Nothing else to import.

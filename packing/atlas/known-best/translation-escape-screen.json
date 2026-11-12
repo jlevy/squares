@@ -1,6 +1,6 @@
 {
   "screen": {
-    "aggregate": {"movable_squares":6402,"records_excluded":0,"records_screened":324,"records_with_movable_square":302,"records_with_separating_square":125,"separating_squares":2493,"squares_screened":52650,"tolerance_disagreement_ns":[68,84,86,88,105,106,129,132,146,156,175,176,177,180,181,199,204,206,227,229,232,241,259,260,261,264,266,267,268,269,270,273,293,297,299,301,304,307]},
+    "aggregate": {"movable_squares":6399,"records_excluded":0,"records_screened":324,"records_with_movable_square":302,"records_with_separating_square":125,"separating_squares":2491,"squares_screened":52650,"tolerance_disagreement_ns":[68,84,86,88,105,106,129,146,156,175,176,177,180,181,199,204,206,227,229,232,241,259,260,261,264,266,267,268,269,270,273,293,297,299,301,304,307]},
     "cases": [
       {"min_container_slack":"0.0","min_pair_separation":null,"movable_square_count":0,"movable_squares":[],"n":1,"reported_side":"1.0","separating_square_count":0,"square_count":1,"stable_across_tolerances":true},
       {"min_container_slack":"0.0","min_pair_separation":"0.0","movable_square_count":2,"movable_squares":[{"active_blockers":{"container_normals":2,"square_indices":[1]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":0,"witness_kind":"contact-preserving","witness_square_id":1},{"active_blockers":{"container_normals":2,"square_indices":[0]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":1,"witness_kind":"contact-preserving","witness_square_id":2}],"n":2,"reported_side":"2.0","separating_square_count":0,"square_count":2,"stable_across_tolerances":true},
@@ -2057,30 +2057,34 @@
         "stable_across_tolerances": true
       },
       {
-        "min_container_slack": "-6.68191177523048911535e-52",
+        "min_container_slack": "0.0",
         "min_pair_separation": "-2.13821176807375651691e-50",
-        "movable_square_count": 12,
+        "movable_square_count": 18,
         "movable_squares": [
-          {"active_blockers":{"container_normals":2,"square_indices":[]},"direction":{"x":"0.707106781186547524401","y":"-0.707106781186547524401"},"slide_distance":"0.00330722103953522122013","square_index":0,"witness_kind":"strict-separating","witness_square_id":1},
-          {"active_blockers":{"container_normals":1,"square_indices":[3,4]},"direction":{"x":"0.707106781186547524401","y":"0.707106781186547524401"},"slide_distance":"0.00807144262432033449741","square_index":2,"witness_kind":"strict-separating","witness_square_id":3},
-          {"active_blockers":{"container_normals":0,"square_indices":[35,36,44,51,80]},"direction":{"x":"-1.0","y":"0.0"},"slide_distance":"0.00497420839659335641642","square_index":43,"witness_kind":"contact-preserving","witness_square_id":44},
-          {"active_blockers":{"container_normals":0,"square_indices":[67,68,69,73,128]},"direction":{"x":"0.0","y":"-1.0"},"slide_distance":"0.00749249818986549159435","square_index":72,"witness_kind":"contact-preserving","witness_square_id":73},
-          {"active_blockers":{"container_normals":0,"square_indices":[58,65,81,104,108]},"direction":{"x":"-1.0","y":"0.0"},"slide_distance":"0.0546841999269546590099","square_index":79,"witness_kind":"contact-preserving","witness_square_id":80},
-          {"active_blockers":{"container_normals":0,"square_indices":[16,82,84,85]},"direction":{"x":"-0.437974951426580387312","y":"0.898987175616473713864"},"slide_distance":"0.00312656404468283858693","square_index":83,"witness_kind":"contact-preserving","witness_square_id":84},
-          {"active_blockers":{"container_normals":0,"square_indices":[26,83,84]},"direction":{"x":"0.437974951426580387312","y":"-0.898987175616473713864"},"slide_distance":"0.00517539204863916844768","square_index":85,"witness_kind":"contact-preserving","witness_square_id":86},
-          {"active_blockers":{"container_normals":0,"square_indices":[92,96,98]},"direction":{"x":"-0.897142382641066744482","y":"-0.441741491450723681347"},"slide_distance":"0.00764150808469520842612","square_index":95,"witness_kind":"contact-preserving","witness_square_id":96},
-          {"active_blockers":{"container_normals":0,"square_indices":[97,98]},"direction":{"x":"0.946070274302810568304","y":"-0.323961473142416688292"},"slide_distance":"0.0578014143476320448079","square_index":99,"witness_kind":"strict-separating","witness_square_id":100},
-          {"active_blockers":{"container_normals":0,"square_indices":[111,112]},"direction":{"x":"-0.876465945269166902201","y":"0.481463858231773954124"},"slide_distance":"0.00401114595481747929234","square_index":107,"witness_kind":"strict-separating","witness_square_id":108},
-          {"active_blockers":{"container_normals":1,"square_indices":[15,105,114]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"0.104301153701661341194","square_index":109,"witness_kind":"contact-preserving","witness_square_id":110},
-          {"active_blockers":{"container_normals":1,"square_indices":[109,110]},"direction":{"x":"1.0","y":"0.0"},"slide_distance":"0.0313167810800066485194","square_index":114,"witness_kind":"contact-preserving","witness_square_id":115}
+          {"active_blockers":{"container_normals":0,"square_indices":[]},"direction":{"x":"-0.707106781186547524401","y":"-0.707106781186547524401"},"slide_distance":"0.00056969224349601972855","square_index":5,"witness_kind":"strict-separating","witness_square_id":6},
+          {"active_blockers":{"container_normals":0,"square_indices":[23,115]},"direction":{"x":"-0.449008773037648087919","y":"-0.893527348062288369639"},"slide_distance":"0.00369387339365071421434","square_index":10,"witness_kind":"contact-preserving","witness_square_id":11},
+          {"active_blockers":{"container_normals":0,"square_indices":[9,41]},"direction":{"x":"-0.915647312447276712821","y":"0.401982585702514252796"},"slide_distance":"0.000699537941098851206419","square_index":12,"witness_kind":"contact-preserving","witness_square_id":13},
+          {"active_blockers":{"container_normals":0,"square_indices":[8,40]},"direction":{"x":"0.400285101309781640227","y":"0.916390657781613271621"},"slide_distance":"0.000832456390477654494486","square_index":15,"witness_kind":"contact-preserving","witness_square_id":16},
+          {"active_blockers":{"container_normals":0,"square_indices":[2,22,48,96]},"direction":{"x":"-1.0","y":"0.0"},"slide_distance":"0.00969484403000464567413","square_index":19,"witness_kind":"contact-preserving","witness_square_id":20},
+          {"active_blockers":{"container_normals":0,"square_indices":[29,32,84]},"direction":{"x":"-0.893527348062288369639","y":"0.449008773037648087919"},"slide_distance":"0.000187915375085534089378","square_index":28,"witness_kind":"contact-preserving","witness_square_id":29},
+          {"active_blockers":{"container_normals":0,"square_indices":[30,42]},"direction":{"x":"0.893527348062288369639","y":"-0.449008773037648087919"},"slide_distance":"0.0054233766515204467951","square_index":34,"witness_kind":"contact-preserving","witness_square_id":35},
+          {"active_blockers":{"container_normals":0,"square_indices":[54,78]},"direction":{"x":"1.0","y":"0.0"},"slide_distance":"0.00485922431096419416008","square_index":46,"witness_kind":"contact-preserving","witness_square_id":47},
+          {"active_blockers":{"container_normals":0,"square_indices":[]},"direction":{"x":"1.0","y":"0.0"},"slide_distance":"0.00421965733846408624818","square_index":66,"witness_kind":"strict-separating","witness_square_id":67},
+          {"active_blockers":{"container_normals":1,"square_indices":[25,36,59,90]},"direction":{"x":"-1.0","y":"0.0"},"slide_distance":"0.0111470123634627297727","square_index":69,"witness_kind":"contact-preserving","witness_square_id":70},
+          {"active_blockers":{"container_normals":0,"square_indices":[2,22,54]},"direction":{"x":"1.0","y":"0.0"},"slide_distance":"0.00969484403000464567413","square_index":75,"witness_kind":"contact-preserving","witness_square_id":76},
+          {"active_blockers":{"container_normals":0,"square_indices":[6,42]},"direction":{"x":"-0.893527348062288369639","y":"0.449008773037648087919"},"slide_distance":"0.0054233766515204467951","square_index":82,"witness_kind":"contact-preserving","witness_square_id":83},
+          {"active_blockers":{"container_normals":0,"square_indices":[35,79]},"direction":{"x":"-0.897961249133802863838","y":"0.440074533521380245659"},"slide_distance":"0.00338395382709971791619","square_index":83,"witness_kind":"contact-preserving","witness_square_id":84},
+          {"active_blockers":{"container_normals":0,"square_indices":[61,100]},"direction":{"x":"-0.449008773037648087919","y":"-0.893527348062288369639"},"slide_distance":"0.00280890692167461766221","square_index":87,"witness_kind":"contact-preserving","witness_square_id":88},
+          {"active_blockers":{"container_normals":0,"square_indices":[32,77]},"direction":{"x":"0.43582348780239493394","y":"0.90003215913641425518"},"slide_distance":"0.00108955589238684030812","square_index":101,"witness_kind":"contact-preserving","witness_square_id":102},
+          {"active_blockers":{"container_normals":0,"square_indices":[33,78]},"direction":{"x":"-0.906760542221947395685","y":"0.421645964132659467742"},"slide_distance":"0.000783865111720770167339","square_index":102,"witness_kind":"contact-preserving","witness_square_id":103},
+          {"active_blockers":{"container_normals":0,"square_indices":[7,13]},"direction":{"x":"0.893527348062288369639","y":"-0.449008773037648087919"},"slide_distance":"0.00109130211523741991793","square_index":103,"witness_kind":"contact-preserving","witness_square_id":104},
+          {"active_blockers":{"container_normals":1,"square_indices":[59]},"direction":{"x":"1.0","y":"0.0"},"slide_distance":"0.0111470123634627297727","square_index":105,"witness_kind":"contact-preserving","witness_square_id":106}
         ],
-        "movable_squares_by_tolerance": {"1e-10":[0,2,43,72,79,83,85,95,96,99,107,109,114],"1e-12":[0,2,43,72,79,83,85,95,96,99,107,109,114],"1e-6":[0,2,43,72,79,83,85,95,99,107,109,114],"1e-8":[0,2,43,72,79,83,85,95,99,107,109,114]},
         "n": 132,
-        "reported_side": "11.9856801988458088115",
-        "separating_square_count": 4,
-        "separating_squares_by_tolerance": {"1e-10":[0,2,99,107],"1e-12":[0,2,99,107],"1e-6":[0,2,99,107],"1e-8":[0,2,99,107]},
+        "reported_side": "11.9760483836034076",
+        "separating_square_count": 2,
         "square_count": 132,
-        "stable_across_tolerances": false
+        "stable_across_tolerances": true
       },
       {
         "min_container_slack": "0.0",
@@ -2728,25 +2732,16 @@
       },
       {
         "min_container_slack": "0.0",
-        "min_pair_separation": "0.0",
-        "movable_square_count": 13,
+        "min_pair_separation": "-2.13821176807375651691e-50",
+        "movable_square_count": 4,
         "movable_squares": [
-          {"active_blockers":{"container_normals":0,"square_indices":[130,131,132,143,145,156]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":144,"witness_kind":"contact-preserving","witness_square_id":145},
-          {"active_blockers":{"container_normals":0,"square_indices":[131,132,133,144,146]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":145,"witness_kind":"contact-preserving","witness_square_id":146},
-          {"active_blockers":{"container_normals":0,"square_indices":[132,133,134,145,147]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":146,"witness_kind":"contact-preserving","witness_square_id":147},
-          {"active_blockers":{"container_normals":0,"square_indices":[133,134,135,146,148]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":147,"witness_kind":"contact-preserving","witness_square_id":148},
-          {"active_blockers":{"container_normals":0,"square_indices":[134,135,136,147,149]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":148,"witness_kind":"contact-preserving","witness_square_id":149},
-          {"active_blockers":{"container_normals":0,"square_indices":[135,136,137,148,150]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":149,"witness_kind":"contact-preserving","witness_square_id":150},
-          {"active_blockers":{"container_normals":0,"square_indices":[136,137,138,149,151]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":150,"witness_kind":"contact-preserving","witness_square_id":151},
-          {"active_blockers":{"container_normals":0,"square_indices":[137,138,139,150,152]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":151,"witness_kind":"contact-preserving","witness_square_id":152},
-          {"active_blockers":{"container_normals":0,"square_indices":[138,139,140,151,153]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":152,"witness_kind":"contact-preserving","witness_square_id":153},
-          {"active_blockers":{"container_normals":0,"square_indices":[139,140,141,152,154]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":153,"witness_kind":"contact-preserving","witness_square_id":154},
-          {"active_blockers":{"container_normals":0,"square_indices":[140,141,142,153,155]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":154,"witness_kind":"contact-preserving","witness_square_id":155},
-          {"active_blockers":{"container_normals":1,"square_indices":[141,142,154]},"direction":{"x":"0.0","y":"1.0"},"slide_distance":"1.0","square_index":155,"witness_kind":"contact-preserving","witness_square_id":156},
-          {"active_blockers":{"container_normals":2,"square_indices":[143,144]},"direction":{"x":"1.0","y":"0.0"},"slide_distance":"12.0","square_index":156,"witness_kind":"contact-preserving","witness_square_id":157}
+          {"active_blockers":{"container_normals":0,"square_indices":[32,122]},"direction":{"x":"0.417074276376144250668","y":"0.908872404678080014277"},"slide_distance":"0.00165860301915252398429","square_index":80,"witness_kind":"contact-preserving","witness_square_id":81},
+          {"active_blockers":{"container_normals":0,"square_indices":[33,134]},"direction":{"x":"-0.908872404678080014277","y":"0.417074276376144250668"},"slide_distance":"0.00165977589645240152159","square_index":81,"witness_kind":"contact-preserving","witness_square_id":82},
+          {"active_blockers":{"container_normals":0,"square_indices":[34,78]},"direction":{"x":"-0.417074276376144250668","y":"-0.908872404678080014277"},"slide_distance":"0.00165874069133179006423","square_index":82,"witness_kind":"contact-preserving","witness_square_id":83},
+          {"active_blockers":{"container_normals":0,"square_indices":[35,79]},"direction":{"x":"0.908872404678080014277","y":"-0.417074276376144250668"},"slide_distance":"0.00165978724582889212463","square_index":83,"witness_kind":"contact-preserving","witness_square_id":84}
         ],
         "n": 157,
-        "reported_side": "13.0",
+        "reported_side": "12.9933026113432237",
         "separating_square_count": 0,
         "square_count": 157,
         "stable_across_tolerances": true

@@ -663,11 +663,15 @@ def pingyou_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
 #: The only frame and the schema names a corner witness may state for `witness_corners`: the
 #: file name a source's witness states, or the path the regularized atlas's own corner views
 #: state from `atlas/known-best/regularized/`, which the review of 9 November 2026 asked the
-#: reader to accept so that the 307 view could be measured (F14). Either way the document is
-#: validated against this repository's schema file.
+#: reader to accept so that the 307 view could be measured (F14), or the path the house
+#: witnesses state from `witnesses/known-best/`, so that a grid house, which has no packet,
+#: can be measured (think-bcfs, at 157). Either way the document is validated against this
+#: repository's schema file.
 CORNER_FRAME = {"origin": "lower-left", "axes": "x-right-y-up", "angle_unit": "not-applicable"}
 CORNER_SCHEMA = "witness.schema.yaml"
-CORNER_SCHEMAS = frozenset({CORNER_SCHEMA, "../../../witnesses/witness.schema.yaml"})
+CORNER_SCHEMAS = frozenset(
+    {CORNER_SCHEMA, "../../../witnesses/witness.schema.yaml", "../witness.schema.yaml"}
+)
 #: Corners as ``sqpack.witness`` materializes a centre and basis, in half-diagonal units.
 CORNER_ORDER = ((-1, -1), (1, -1), (1, 1), (-1, 1))
 
@@ -1698,6 +1702,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # The same lane, 11 November: his issue 946 at 172, that packing's core, T-282's
     # arrangement re-solved; T-286 is held with T-285.
     "[de Winter s172 upper bound 2026-11-10]": _import("de-winter-s172-upper-bound-2026-11-10"),
+    # Lane L104 of 11 November (think-bcfs): Joost de Winter's issue 958, pinwheels at 132 and
+    # 157 at JoostdeWinter/square-packing 6617869, one packet each.
+    "[de Winter s132 upper bound 2026-11-11]": _import("de-winter-s132-upper-bound-2026-11-11"),
+    "[de Winter s157 upper bound 2026-11-11]": _import("de-winter-s157-upper-bound-2026-11-11"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

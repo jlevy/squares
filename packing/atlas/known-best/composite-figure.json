@@ -2,7 +2,7 @@
   "figure": {
     "composites": [
       {"columns":10,"layout":"10 by 10, row-major n=1..100","range":{"count":100,"first_n":1,"last_n":100},"rows":10,"square_count":5050,"stem":"known-best-1-100","totals":{"degree_derived_here":82,"degree_known":98,"degree_recorded_upstream":16,"exact_value_known":98,"lower_bound_correction":16,"lower_bound_first_proved_here":0,"lower_bound_recent_result":81,"only_known_numerically":2,"proved_optimal":49,"rigidity_catalogue_annotated":2,"rigidity_established":12,"rigidity_known":14}},
-      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":229,"degree_known":318,"degree_recorded_upstream":89,"exact_value_known":318,"lower_bound_correction":213,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":6,"proved_optimal":81,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
+      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":228,"degree_known":318,"degree_recorded_upstream":90,"exact_value_known":318,"lower_bound_correction":213,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":6,"proved_optimal":81,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
     ],
     "entries": [
       {
@@ -3491,26 +3491,19 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {
-          "degree": 1,
-          "degree_provenance": "frontier",
-          "degree_recorded_upstream": true,
-          "exact_form": "33074114147297189175252563891626809919040565156822769685670474811180499390323454482469274256326747136608727251993971986277527248261551551194020579640787997762313890274467152062118283161278100575692229150166362360799901543785878758492374113408923798812655672362131246060140146549606708678578716794700744651751385372723732131351623196796627186219934184427216697228783921514247854339081761951261911782718309054730603062414190296452798227265376463165151595270648762776148168747513/2759469099674638748938458484490725159877690459359679609203935679528188975537106161374286955389139677913414530308780976153944320589800789938772398224762134013461087511235397535454079552761105290595305883299212176505341995726723153245962565625411519446201212070017593391489266753823269495172501045092270422795719983416583522791152110516290993885518084350731355712415823990884607045967834295970698159139618690570909298860968628563113826476098160488461343752568355930089397710507",
-          "minimal_polynomial": null,
-          "state": "minimal-polynomial"
-        },
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"29940120959008518809321792381784194561366154929588804750577800289555120369865408680444352359453817994064394036272845081533643558510907037866820298055603899602933748036672382028267459576409124073981009540056142854406780197934128275523774369426111643883528289742078410057825766433892095556050609840605731079359109/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(132) ≥ 11.511357","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.5113577727"},
         "n": 132,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"11.9856801988458088115","source_url":"https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n132.cert.json","witness_id":"W-known-best-n132","witness_path":"packing/witnesses/known-best/n-132.yaml"},
+          "assessed_geometry": {"reported_side":"11.9760483836034076","source_url":"https://github.com/JoostdeWinter/square-packing/blob/6617869a3491b5872c6ecdff55db05cbee57d516/n132/n132_witness.yaml","witness_id":"W-known-best-n132","witness_path":"packing/witnesses/known-best/n-132.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
               "evidence_refs": ["E-translation-escape-not-rigid"],
               "method": "numerical-multiprecision",
               "property": "not-rigid",
-              "scope": "Square 0 of the retained witness (witness id 1) translates 0.003307 along (0.707107, -0.707107) with the packing still valid, so the configuration admits a non-trivial feasible motion; 12 of its 132 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
+              "scope": "Square 5 of the retained witness (witness id 6) translates 0.00057 along (-0.707107, -0.707107) with the packing still valid, so the configuration admits a non-trivial feasible motion; 18 of its 132 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
               "sources": [{"date_note":"The current retained screen has no generation date; the historical source-review date does not date the current witness assessments.","date_reference":null,"determination_precision":"unknown","determined_at":null,"evidence_ref":"E-translation-escape-not-rigid","recorded_at":"2026-10-08","recording_event":"Import of the unified displayed-packing rigidity assessment after the 2026-10-08 source audit.","reference":"packing/atlas/known-best/translation-escape-screen.json","reviewed_at":"2026-09-07"}]
             }
           ],
@@ -3520,7 +3513,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(132) ≤ 11.985681","provenance":"frontier","relation":"upper-bound","value":"11.9856801988458088115"}
+        "side": {"display":"s(132) ≤ 11.976049","provenance":"frontier","relation":"upper-bound","value":"11.9760483836034076"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
@@ -4148,19 +4141,19 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13","minimal_polynomial":"s - 13 = 0","state":"closed-form"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"129933026113432236413372793549657716631187442425245801744283606793974218710058937592366709087048731338017528033289023283642767554572063457698437749660264199173945900886886411321189343067195192146616036359183804176225069306100476941522988597256113139114360980862141007303341357995510774692842598946408083952550389/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(157) ≥ 12.551970","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.5519707931"},
         "n": 157,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"13.0","source_url":null,"witness_id":"W-known-best-n157","witness_path":"packing/witnesses/known-best/n-157.yaml"},
+          "assessed_geometry": {"reported_side":"12.9933026113432237","source_url":"https://github.com/JoostdeWinter/square-packing/blob/6617869a3491b5872c6ecdff55db05cbee57d516/n157/n157_witness.yaml","witness_id":"W-known-best-n157","witness_path":"packing/witnesses/known-best/n-157.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
               "evidence_refs": ["E-translation-escape-not-rigid"],
               "method": "numerical-multiprecision",
               "property": "not-rigid",
-              "scope": "Square 144 of the retained witness (witness id 145) translates 1 along (0, 1) with the packing still valid, so the configuration admits a non-trivial feasible motion; 13 of its 157 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
+              "scope": "Square 80 of the retained witness (witness id 81) translates 0.001659 along (0.417074, 0.908872) with the packing still valid, so the configuration admits a non-trivial feasible motion; 4 of its 157 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
               "sources": [{"date_note":"The current retained screen has no generation date; the historical source-review date does not date the current witness assessments.","date_reference":null,"determination_precision":"unknown","determined_at":null,"evidence_ref":"E-translation-escape-not-rigid","recorded_at":"2026-10-08","recording_event":"Import of the unified displayed-packing rigidity assessment after the 2026-10-08 source audit.","reference":"packing/atlas/known-best/translation-escape-screen.json","reviewed_at":"2026-09-07"}]
             }
           ],
@@ -4170,7 +4163,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(157) ≤ 13","provenance":"frontier","relation":"upper-bound","value":"13.0"}
+        "side": {"display":"s(157) ≤ 12.993303","provenance":"frontier","relation":"upper-bound","value":"12.9933026113432237"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
@@ -8623,7 +8616,7 @@
     "generated_by": "python -m devtools.build_composite_figure_data",
     "provenance_vocabulary": {"absent":"No source on hand supplies it. Not a claim that the fact is unknown to mathematics.","catalogue":"Transcribed here from the retained catalogue, not carried by the frontier record.","derived":"Computed by this repository from a fact it already holds.","frontier":"Read from the case's frontier record, which transcribes a retained source."},
     "range": {"count":324,"first_n":1,"last_n":324},
-    "totals": {"degree_derived_here":229,"degree_known":318,"degree_recorded_upstream":89,"exact_value_known":318,"lower_bound_correction":213,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":6,"proved_optimal":81,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}
+    "totals": {"degree_derived_here":228,"degree_known":318,"degree_recorded_upstream":90,"exact_value_known":318,"lower_bound_correction":213,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":6,"proved_optimal":81,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}
   },
   "softschema": {"contract":"packing.squares:CompositeFigure/v1","envelope":"figure","schema":"composite-figure.schema.yaml","status":"enforced"}
 }

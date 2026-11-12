@@ -63,6 +63,7 @@ from sqpack.known_best import (
     COMPOSITE_PDF_EDITION_DATE,
     CompositeSpec,
     CorpusRange,
+    GridTransition,
     SourceGeometryError,
     catalogue_source_map,
     composite_pdf_name,
@@ -114,11 +115,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
         "packet-derived-facts": 7,
     },
     # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4),
-    # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-220).
+    # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-220), and 157
+    # from the grid to Joost de Winter's issue 958 packet on 11 November (T-293).
     "n=1..200": {
-        "exact-grid": 113,
+        "exact-grid": 112,
         "kingbird-derived-facts": 51,
-        "packet-derived-facts": 36,
+        "packet-derived-facts": 37,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
@@ -129,11 +131,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # Kingbird), to his issue 674 packet (T-199), and on 20 October 227 and 260 (both from
     # Kingbird), to Joost de Winter's issue 668 packet (T-196), and on 21 October 260 again,
     # to Francisco Couzo's issue 678 packet (T-223, think-xu4d), and on 31 October 293 and
-    # 299 (both from Kingbird), to Evan Daniel's issue 845 and issue 824 update packets.
+    # 299 (both from Kingbird), to Evan Daniel's issue 845 and issue 824 update packets, and
+    # on 11 November 157 (from the grid), to Joost de Winter's issue 958 packet (T-293).
     "n=1..324": {
-        "exact-grid": 174,
+        "exact-grid": 173,
         "kingbird-derived-facts": 70,
-        "packet-derived-facts": 80,
+        "packet-derived-facts": 81,
     },
 }
 
@@ -1216,10 +1219,28 @@ def test_poster_preserves_logical_square_bound_row_coordinates() -> None:
 
 
 def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
-    root = ET.fromstring(_committed_poster_svg())
+    svg_text = _committed_poster_svg()
+    root = ET.fromstring(svg_text)
     cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
     transitions = known_best_builder.resolved_composites()[1].transitions
     by_row = {transition.row: transition for transition in transitions}
+    # A poster that trails the pin (`sqpack.release`, rule 3) is laid out by the grid
+    # transitions of the data it was drawn from, which its cards record: a count that has
+    # left the grid since, as 157 did on 11 November 2026 (T-293), keeps its grid card
+    # until the next edition redraws the poster. Each such row is held to the layout the
+    # poster drew; every other row to the current one.
+    identity = known_best_builder.retained_identity(svg_text)
+    if not identity.current and COMPOSITES_MAY_TRAIL:
+        drawn: dict[int, int] = {}
+        for card in cards:
+            if card.attrib["data-segment"] == "grid":
+                drawn.setdefault(int(card.attrib["data-row"]) + 1, int(card.attrib["data-n"]))
+        # Only row 13 differs from the current layout: 157 left the grid on 11 November
+        # 2026 (T-293). A count that leaves or joins the grid before the redraw adds its
+        # row here, on purpose.
+        moved = sorted(row for row, first in drawn.items() if by_row[row].first_grid_n != first)
+        assert moved == [13], moved
+        by_row = {row: GridTransition(row, first) for row, first in drawn.items()}
     assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 325))
     for card in cards:
         n = int(card.attrib["data-n"])
@@ -2454,8 +2475,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # and 269 from Özden's four packets of that day (T-287 to T-290), and no longer from his
     # 9 November s268 packet, which held nothing else: four sources more and one fewer. The
     # same day's lane L100 draws 179 from Özden's issue 954 packet (T-291), one more source
-    # with no new name; PingYou Ltd's PR 574 certificates still hold other counts.
-    assert len(expected_sources) == 41
+    # with no new name; PingYou Ltd's PR 574 certificates still hold other counts. Lane L104
+    # of the same day draws 132 and 157 from Joost de Winter's two issue 958 packets (T-292,
+    # T-293), two more sources with no new name: de Winter is printed already, and 157 was
+    # the grid.
+    assert len(expected_sources) == 43
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
