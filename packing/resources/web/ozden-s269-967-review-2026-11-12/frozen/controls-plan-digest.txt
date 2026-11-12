@@ -1,0 +1,7 @@
+# Lane L127 controls plan, stated at 2026-11-12T04:09:52Z, before l127_controls.py existed (ls programs/: controls-plan.json issue-967.json l127_check.py l127_clip.py l127_geom.py l127_make_plan.py l127_plan_facts.py l127_reader.py l127_sat.py l127_selftest.py )
+8137e3177ccd10c15b4508f165ab985f16c9c6b73975fee3f70097fac6d9e267  programs/controls-plan.json
+febf092cbf3f9863cedfa5cf67e0c8b5a3a6c8f3d983451a41bf07ac1a1e7356  out/plan-facts-n269.json
+1536dface02ab5240f129210ac3b6f416e2a8528137a3790a7481b122bfdec09  out/check-n269.json
+4d3bf4310f64d1f7f476f87ecd8dcc87c97b1be523963538c11b88fc80aed0c2  programs/l127_plan_facts.py
+2f4d622f3933ffa9c77950286c92351449ba2216f716053c9ae586dea2d32285  programs/l127_make_plan.py
+b9d9820c2831aeb920936f83d49cc415cbf6cad31e9546500b8b79fd1c675233  programs/issue-967.json
