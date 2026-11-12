@@ -277,7 +277,8 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # certificates (T-288, T-290), below T-174's sides there. 31 since the same day's lane
     # L100 moved 179 to his issue-954 certificate (T-291), below T-174's side there. 30
     # since lane L104 moved 132 to Joost de Winter's issue-958 certificate (T-292). Lane
-    # L107 moved 179 on to his issue-959 certificate (T-294), which leaves the count.
+    # L107 moved 179 on to his issue-959 certificate (T-294), which leaves the count. Lane
+    # L120 of 12 November moved 269 on from T-290 to Özden's issue-962 certificate (T-296).
     assert len(held_counts) == 30
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -300,7 +301,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         180: "T-288",
         182: "T-243",
         268: "T-289",
-        269: "T-290",
+        269: "T-296",
         270: "T-283",
         307: "T-279",
         308: "T-221",
@@ -1746,8 +1747,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # moved 156, 180, 268 and 269 to his certificates of issues 943 to 947 (T-287 to T-290),
     # and the same day's lane L100 179 to his certificate of issue 954 (T-291), and lane L104
     # 132 and 157 to Joost de Winter's certificates of issue 958 (T-292, T-293). Lane L107
-    # moved 179 on to Özden's certificate of issue 959 (T-294) on 12 November, and lane L110
-    # 237 to his certificate of issue 960 (T-295) the same day.
+    # moved 179 on to Özden's certificate of issue 959 (T-294) on 12 November, lane L110
+    # 237 to his certificate of issue 960 (T-295) and lane L120 269 on from T-290 to his
+    # certificate of issue 962 (T-296), the same day.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1775,7 +1777,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         307: "T-279",
         156: "T-287",
         180: "T-288",
-        269: "T-290",
+        269: "T-296",
         179: "T-294",
         132: "T-292",
         157: "T-293",

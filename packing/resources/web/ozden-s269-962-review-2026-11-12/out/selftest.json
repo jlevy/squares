@@ -1,0 +1,10 @@
+{
+ "program": "l117_selftest.py",
+ "verdict": "PASSED",
+ "cases": 12445,
+ "failed": 0,
+ "failures": [],
+ "broken_method_A_failures": 814,
+ "broken_method_B_failures": 2078,
+ "cpu_seconds": 2.6
+}

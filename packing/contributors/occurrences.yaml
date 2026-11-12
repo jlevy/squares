@@ -32666,6 +32666,78 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s269 issue 962 2026-11-11]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s269 issue 962 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after PingYou, Xu, Daniel, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s269 issue 962 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after PingYou, Xu, Daniel, Levy
+  start: 12
+  end: 19
+  label: PingYou
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s269 issue 962 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after PingYou, Xu, Daniel, Levy
+  start: 21
+  end: 23
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s269 issue 962 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after PingYou, Xu, Daniel, Levy
+  start: 25
+  end: 31
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s269 issue 962 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after PingYou, Xu, Daniel, Levy
+  start: 33
+  end: 37
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

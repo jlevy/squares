@@ -30985,7 +30985,7 @@ issues:
       the start and the record it improves, both strong generators' regularization of the new
       house run in the same change. The Kaggle packing the issue quotes, 16.901513582205
       (kirilltym), is above it; the side-only leaderboard entry it quotes states no packing.
-    read_through: '2026-11-11T10:16:41Z'
+    read_through: '2026-11-11T23:35:10Z'
     results:
     - key: n269-transplant
       claim: >-
@@ -31093,6 +31093,18 @@ issues:
       intended, from which directory, and whether the schema path would name this repository's
       file. The questions are informational and hold nothing open. The issue was closed as
       completed at 10:16:49Z.
+
+      The author's agent commented here at 23:35:10Z on 11 November
+      (issuecomment-6809799112), six seconds after opening #962, which files a further
+      improvement of this packing's count, s(269) <= 16.899469075856, 1.526e-3 below T-290. #962
+      was registered as T-296 and adopted at 269 in place of T-290 on 12 November 2026 (intake
+      lane L120, think-s418), once its certificate was replayed here and its stage 4 review
+      mapped; it is a new arrangement relative to T-290's packing, not a further arrangement of
+      it. T-290 stays a verified bound at V3/C3 and keeps its certificate as history. The final
+      reply here (issuecomment-6793165538) stated T-290 current, so a follow-up is owed on this
+      issue once T-296 is on main, as #928's was when T-289 superseded T-276:
+      `check_requests --draft 947` states T-290 at V3/C3, confirmed, superseded. No follow-up
+      has been posted.
   - number: 941
     title: 'Fifteen lowered upper bounds for n between 413 and 910: registration request'
     author: JoostdeWinter
@@ -32178,3 +32190,120 @@ issues:
       misstated (F12); and whether the band-design search and its seeds will be published, and
       which replay is intended, certificate.replay or the README's rerun, from which directory
       (F11). No reply has been posted.
+  - number: 962
+    title: 's(269) ≤ 16.899469075856: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(269) <= 16.899469075856, the exact rational side of n-269-candidate.yaml rounded up at
+      12 places, 1.526e-03 below his own #947 (T-290, the house at 269 since 11 November) and
+      2.045e-03 below T-174 (Nate Chaoweeraprasit's packing, improved by Evan Daniel and PingYou
+      Ltd): a rational corner Witness/v2 at kenaznia-doga/s269-upper-bound-16899469076 fdab2c0,
+      the repository's one commit, 17 seconds before the issue, promoted to exact rationals with
+      this repository's packing-witness promote at 0af33d85 from a decimal pose the repository
+      retains. It reports packing-witness verify VERIFIED (36046 pairs) and sqcheck.py VALID,
+      and says the packing was found by the band-design search of #954 from tilted squares of
+      three clusters, of the registry's 207 (PingYou Ltd), of the registry's 70 (Ryan Xu,
+      improved by Evan Daniel and PingYou Ltd) and of the author's own 179 of #954, laid as a
+      band along the diagonal, annealed in a reduced model with the axis-parallel squares on the
+      two wall-anchored staircase lattices, then quenched with Evan Daniel's code and kicked and
+      quenched twice more. Triaged and retained on 12 November 2026 in lane L120 (think-s418):
+      every stated digest holds, the print is the exact side rounded up, and both maintained
+      exact routes accept the witness and refuse its gross and sharp controls; measured, it is a
+      new arrangement relative to T-290's packing, not one to one with it under any symmetry,
+      115 squares beyond a tenth. The ledger of 12 November records it. Registered as T-296. The
+      12 November stage 4 review (docs/project/reviews/review-2026-11-12-ozden-962.md, lane
+      L117), written blind in a separate lane, accepted it with 12 findings, all notes, and
+      scored it S3; its clean-room checker decided it again, so the entry is confirmed,
+      independently re-implemented, at V3/C3, and the case adopts it at 269 in place of T-290
+      under the house rule in the pass of 12 November, in the same pull request, with Doğa
+      Özden the packing's finder and the band's three source packings and the house's holder
+      credited as the seed and the record it improves, both strong generators' regularization of
+      the new house run in the same change. The Kaggle packing the issue quotes, 16.901513582205
+      (kirilltym), is above it; the side-only leaderboard entry it quotes and states first,
+      16.889730079125 (team elegans, 5 November), 9.74e-3 below this side, is unpublished and
+      states no packing, so it is context only.
+    read_through: '2026-11-12T00:01:06Z'
+    results:
+    - key: n269-band
+      claim: >-
+        s(269) <= 16.8994690758550466 (the exact rational side, rounded up at 16 places, of
+        n-269-candidate.yaml at kenaznia-doga/s269-upper-bound-16899469076 fdab2c0), a packing
+        whose seed band is built from tilted squares of the registry's 207 and 70 and the
+        author's own 179.
+      source: body
+      register:
+      - T-296
+      evidence:
+      - E-ozden-962-certificate-report
+      - E-ozden-962-exact-feasibility
+      - E-ozden-962-review-exact-feasibility
+    beads:
+    - think-s418
+    - think-ruu2
+    - think-ikku
+    - think-tj4o
+    - think-71uq
+    answer_bead: think-s418
+    replies: []
+    close_when: >-
+      T-296 is on main at V3/C3 as the house at 269, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 12 November 2026 from main 75cce00b6; no comment on the issue. The commit fdab2c0
+      precedes the issue by 17 seconds, and the author's agent pointed to it from #947 six
+      seconds after the issue (issuecomment-6809799112). The issue carried the intake label
+      from 00:01:06Z on 12 November, its only later event; GitHub records no edit of the body.
+      T-290, the author's own #947 certificate, was the house it improves. The issue's claim
+      paragraph describes T-290 as built from Nate Chaoweeraprasit's packing improved by Evan
+      Daniel and PingYou Ltd; the record, and the issue's own lineage paragraph, give it as a
+      strip cut of Evan Daniel's 304, below that packing, T-174 (F7). No register bound is
+      pending adoption at 269. #574's follow-up of 19 October acknowledged the rational houses
+      PR #665 adopted from T-174, 269 among them; #574 is held for the owner (think-9v2k), so a
+      follow-up naming the new house at 269 waits on that hold.
+
+      Measured against padding, T-290's certificate at 269 has 3.238e-12 of padding (1 -
+      lambda* = 2.036e-13, squares 119 and 202), and the gain is 4.71e8 times it, so none of
+      the gain is the house's padding and RV-3 (think-ruu2) does not reach this entry; the
+      review measured it with the same tool and got the same receipt exactly. This
+      certificate's own margin, measured the same way, is 3.234e-12 (squares 10 and 13);
+      contracted so, both routes accept it at side 16.89946907585181, which is the owner's RV-3
+      question and is not registered (F8). The receipts are contraction_margin's, retained in
+      the packet's measure/ directory. The L-step scan finds that this bound carries to no other
+      count.
+
+      The review measured the issue's statements: 11 squares touch a wall, nine of them the
+      upright squares at the left, and square 140 clears the right wall by 9.70e-8, beyond "up
+      to about 1e-12" (F12); the issue's "our exact side 16.8994690758550465" is the side's
+      16-place floor and the claim its 12-place ceiling (F4); the margins are the pose's own,
+      2.03 to 2.09e-13 of the centres' separation, about twice "about 1e-13 relative" (F5); the
+      issue's lineage counts hold, all five, with T-290 reflected left to right, set against the
+      lower-right corner of the new box and paired by least summed move, a convention the issue
+      does not name (F6); 46 squares are tilted beyond 0.5 degree, 16 at -42.88 degrees, as the
+      issue says. The search's dating against 0af33d85 is consistent.
+
+      The issue names the registry's 207 and 70 among the band's sources; both witnesses come
+      from PingYou Ltd's PR 574 algebraic supplement, which has no licence file; whether the
+      seed needs a notice of its own is the owner's open decision on think-71uq (F10; the
+      review named think-mdxq, which closed on 4 November), noted and not decided. The credit
+      follows the review's F9: the improvement to Özden, the band's source packings to the 207's
+      holder (PingYou Ltd), the 70's (Ryan Xu, improved by Evan Daniel and PingYou Ltd) and the
+      179's (Özden, T-291), and the local optimizer to Evan Daniel. The leaderboard entry the
+      issue quotes, elegans's 16.889730079125, states no packing and reached this repository
+      only as the issue's quotation, so it is no report and nothing is recorded for it.
+
+      The review's six questions for the author, informational and holding nothing open:
+      whether the final repair scaling was about 2e-13 rather than 1e-13 (F5); whether the
+      lineage counts use T-290 reflected left to right, set against the lower-right corner and
+      paired by least summed move, and whether the issue would name that convention (F6);
+      whether the author would correct the claim paragraph's description of T-290 (F7); whether
+      the lab would promote with a contraction (center_dilation below 1), since a side inside
+      the repair dilation is the owner's RV-3 question (F8); whether the band-design search and
+      its seed band will be published, and whether 207b and 70a came from the registry's
+      witnesses, PingYou Ltd's PR 574 release, or other published coordinates (F10); and
+      whether softschema.schema could point at a file that resolves in the author's repository,
+      with the replay line saying where to run it (F11). No reply has been posted.

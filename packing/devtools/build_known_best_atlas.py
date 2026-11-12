@@ -2805,6 +2805,8 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: day's lane L100 (think-f65n) credits him as the finder at 179 (T-291), held alike, and
 #: its lane L107 (think-89i7) again at 179 for his further arrangement of it (T-294); the
 #: same day's lane L110 (think-my76) credits him as the finder at 237 (T-295), held alike.
+#: Lane L120 of 12 November (think-s418) credits him as the finder at 269 again (T-296),
+#: already held for T-290.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = dict.fromkeys(
     (156, 172, 179, 180, 199, 232, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
 )

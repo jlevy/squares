@@ -5365,6 +5365,36 @@ sources:
       the pin; the pin also carries Evan Daniel's MIT notice, as
       LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in
       web/ozden-s237-upper-bound-2026-11-11/.
+  - key: '[Özden s269 issue 962 2026-11-11]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: builds-on-project
+    credit: 'Ozden after PingYou, Xu, Daniel, Levy'
+    short_credit: 'Ozden after PingYou et al.'
+    note: >-
+      kenaznia-doga/s269-upper-bound-16899469076 at fdab2c0073ea91701d0d8429663faa6e5c7f831f
+      (2026-11-11T23:34:47Z), Doğa Özden's certificate for s(269) <= 16.8994690758550466 (the
+      exact side rounded up at 16 places), printed 16.899469075856 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by the band-design search of #954, tilted
+      squares of three clusters, of the registry's 207 (PingYou Ltd), of the registry's 70
+      (Ryan Xu, improved by Evan Daniel and PingYou Ltd) and of the author's own 179 of #954
+      (T-291), laid along the diagonal as a seed band, annealed in a reduced model with the
+      axis-parallel squares on the two wall-anchored staircase lattices, then quenched with
+      Evan Daniel's ALM+SLP quench (evand/square-packing at bb4cc78e, MIT), a new arrangement
+      relative to the house's packing (T-290, the author's own, from a strip cut of Evan
+      Daniel's 304), its exact coordinates made by this repository's packing-witness promote
+      --strategy robust-rational from the decimal pose the source retains. Registration was
+      requested in jlevy/squares#962, posted on the author's behalf by his AI agent's account
+      kenaznia-doga; the issue says the search and its code were written and run by AI agents,
+      under his direction. No global optimality claim. The lineage builds on this project: the
+      band is built from registry packings and the exact coordinates are made with this
+      repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs,
+      write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries
+      Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the
+      credit's ASCII. Retained in web/ozden-s269-issue962-2026-11-11/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
