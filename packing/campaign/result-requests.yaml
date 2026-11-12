@@ -31478,8 +31478,9 @@ issues:
       runs and the margin; the packets keep the folder at a9486ed and a0c4fc8 and note that
       edition.
 
-      The follow-up of 00:05:24Z on 12 November 2026 (issuecomment-6810296603), recorded in
-      intake lane L119, was owed because the final reply's credit line is marked `outdated` since
+      The follow-up of 00:05:24Z on 12 November 2026 (issuecomment-6810296603), posted after #955
+      merged as 2fe557598 at 23:50:50Z on 11 November and recorded in intake lane L119, was owed
+      because the final reply's credit line is marked `outdated` since
       the author's answers; it names the final reply in `corrects`, as #593's and #438's
       follow-ups name the replies they correct. It thanks the author for his answers and says that
       the final reply said the rows credit de Winter after Samanyu-dev, Deotte, Lavrentev,
@@ -31906,8 +31907,8 @@ issues:
       at 157) and refusing each one's duplicate-square and outside-container controls, 6 jobs and
       125,352 pair decisions, squares touching the walls exactly and every pair clearing by at
       least 9.99e-61, the two routes sharing the centre-basis reader, Fraction arithmetic and the
-      separating-axis method, and neither sharing code with the author's verify_exact.py, retained
-      and not run, nor the binary64 and Shapely checks run; the sharp controls, the side lowered to
+      separating-axis method, and neither sharing code with the author's verify_exact.py, which
+      was retained and not run, the binary64 and Shapely checks the issue describes not run either; the sharp controls, the side lowered to
       the extent, the tightest pair (squares 14 and 119 at 132, 88 and 101 at 157) closed by its gap
       of 1e-60 and every square moved to its near wall, each accepted at contact and refused 1e-30
       past it, and an enlarged and a duplicated square refused; and the report order, both claims
@@ -31934,7 +31935,8 @@ issues:
       109 changes. It says that both strong regularizers ran on the new houses, each case drawing
       grid-slack's 0.5-degree view, and that Evan Daniel's regularizer solved each witness to a
       certified point above the side, by about 1.2e-19 at 132 and 1.3e-19 at 157, so it found no
-      smaller packing to hold as a candidate. It passes on the two packets, de-winter-s132-upper-bound-2026-11-11 and
+      smaller packing to hold as a candidate. It passes on the two packets,
+      de-winter-s132-upper-bound-2026-11-11 and
       de-winter-s157-upper-bound-2026-11-11, at 6617869, the licence, MIT, pinned against the copy
       already held with the certificates at 227, 229 and 260. On the seed's licence it says that
       Samanyu-dev's repository has no licence file, its README calling the repository's own code
