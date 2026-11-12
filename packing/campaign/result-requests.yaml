@@ -31045,8 +31045,6 @@ issues:
       - result: n269-transplant
         id: E-ozden-947-review-exact-feasibility
         status: confirmed
-      corrects:
-      - https://github.com/jlevy/squares/issues/947#issuecomment-6793165538
     close_when: >-
       T-290 is on main at V3/C3 as the house at 269, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -31132,10 +31130,10 @@ issues:
       (PR #966), #967 is the further improvement.
 
       The follow-up of 07:25:09Z on 12 November 2026 (issuecomment-6817476436), posted after
-      #966 merged as 45e2ecca2 at 07:08:09Z and recorded in intake lane L134, names the final
-      reply in `corrects`, since it corrects that reply's statement that T-290 is current, as
-      #942's follow-up names the reply it corrects; like #928's, it states the superseded
-      position. It says that the final reply gave T-290 as V3/C3, confirmed, current, the house
+      #966 merged as 45e2ecca2 at 07:08:09Z and recorded in intake lane L134, was owed because
+      the final reply stated T-290 current, as the note above says; like #928's, it states the
+      superseded position, and it names no reply in `corrects`, since the final reply carries no
+      `outdated` statement. It says that the final reply gave T-290 as V3/C3, confirmed, current, the house
       at 269; that since #966 merged on 12 November the author's #962 packing, T-296, is the
       house at 269 in place of T-290; that T-290 now reads V3/C3, confirmed, superseded, stays a
       verified bound and keeps its certificate as history; and that the reply on #962 says what
@@ -31659,8 +31657,6 @@ issues:
       - result: n179-band
         id: E-ozden-954-review-exact-feasibility
         status: confirmed
-      corrects:
-      - https://github.com/jlevy/squares/issues/954#issuecomment-6808834300
     close_when: >-
       T-291 is on main at V3/C3 as the house at 179, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -31806,10 +31802,11 @@ issues:
       The reply owed on #959 says so; nothing more is owed here.
 
       The follow-up of 05:55:34Z on 12 November 2026 (issuecomment-6815931661), posted after
-      #964 merged as 942256917 at 05:09:52Z and the final reply on #959 was posted at 05:23:56Z,
-      and recorded in intake lane L134, names the final reply in `corrects`, since it corrects
-      that reply's statement that T-291 is current, as #942's follow-up names the reply it
-      corrects; like #928's, it states the superseded position. It says that #959 has made the
+      #964 merged as 942256917 at 05:09:53Z and the final reply on #959 was posted at 05:23:56Z,
+      and recorded in intake lane L134, was owed because the final reply stated T-291 current,
+      though the note above says nothing more is owed here; like #928's, it states the
+      superseded position, and it names no reply in `corrects`, since the final reply carries no
+      `outdated` statement. It says that #959 has made the
       reply of 11 November out of date in one place: that reply gave T-291 as V3/C3, confirmed,
       current, the house at 179; since #964 merged on 12 November the author's #959 packing,
       T-294, is the house at 179, as his comment here asked, and T-291 now reads V3/C3,
@@ -32189,7 +32186,7 @@ issues:
       search will be published. No reply has been posted.
 
       Closed on 12 November 2026 with the final reply (issuecomment-6815463268, posted at
-      05:23:56Z), after #964 merged as 942256917 at 05:09:52Z with the import, the replay, an
+      05:23:56Z), after #964 merged as 942256917 at 05:09:53Z with the import, the replay, an
       independent review and the adoption; recorded in intake lane L134. It states T-294 at
       V3/C3, scored S3, confirmed and current, reproduced here with the author's own checker
       and re-verified here by an independent implementation; E-ozden-959-exact-feasibility and
@@ -32422,7 +32419,7 @@ issues:
       (F11). No reply has been posted.
 
       Closed on 12 November 2026 with the final reply (issuecomment-6816435262, posted at
-      06:25:48Z), after #963 merged as 455b5d20a at 06:06:23Z with the import, the replay, an
+      06:25:48Z), after #963 merged as 455b5d20a at 06:06:24Z with the import, the replay, an
       independent review and the adoption; recorded in intake lane L134. It states T-295 at
       V3/C3, scored S3, confirmed and current, reproduced here with the author's own checker
       and re-verified here by an independent implementation; E-ozden-960-exact-feasibility and

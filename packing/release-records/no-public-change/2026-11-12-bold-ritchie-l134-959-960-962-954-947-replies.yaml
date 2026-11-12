@@ -14,7 +14,7 @@ reason: >-
   issue's T-189 to T-190 and #962's acknowledgement of the author's 03:00:20Z comment pointing to
   #967. The follow-ups on #954 (05:55:34Z) and #947 (07:25:09Z) are recorded, stating T-291 and
   T-290 at V3/C3, confirmed and superseded, with their exact-feasibility and review ids, each
-  correcting its issue's final reply; both issues stay closed, #954's read_through is unchanged
+  stating the position its issue's final reply gave as current; both issues stay closed, #954's read_through is unchanged
   and #947's moves to the author's 03:00:21Z comment, which its follow-up acknowledges. No
   result, rung, side, bound, mark or credit changes. Against main 45e2ecca2 (#966): rendered by
   devtools.compare_paper_renders into empty site directories, its math pass in
