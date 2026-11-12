@@ -21,10 +21,10 @@ digits.
   border of unit squares that wide adds to the core by L steps, ``k (2 floor(s) + k)`` at
   width ``k`` on side ``s``, which is what a core and its border hold at that side;
 - ``core``: the core's box set flush in each corner of the view's box, under each of the
-  eight symmetries of the core's box; each core square is matched to the view square of
-  nearest centre, and counted within a bound where the centres lie within it and the two
-  turn by less than a degree modulo a quarter turn; every placement's counts, and the
-  best at each bound;
+  eight symmetries of the core's box; each core square is matched to the nearest view
+  square among those turned within a degree of it modulo a quarter turn, and counted
+  within a bound where their centres lie within it; every placement's counts, and the best
+  at each bound;
 - ``diagonal``: the core, under each symmetry, laid at each diagonal shift ``(k, k)`` from
   0 to the integer part of the difference of the sides; each of the view's squares is
   counted within a bound where some placed core square lies within it and turns by less

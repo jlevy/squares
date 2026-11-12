@@ -2444,16 +2444,16 @@ RESULTS: dict[str, Prose] = {
             "in its box, the 70 keeps at most 48 of its squares at any corner, so it is no 70 "
             "with a border, and laid at both ends of the diagonal it lies within 1e-9 of 15 of "
             "the 35 tilted squares, the 70 band’s ends kept in place; the side is "
-            "2.645e-12 above s(70) + 5, about its own repair dilation, as the 11 November "
-            "review also finds. So Doğa Özden stays the packing’s finder, from the band of "
+            "2.645e-12 above s(70) + 5, about its own repair dilation, as the review of issue "
+            "959 also finds. So Doğa Özden stays the packing’s finder, from the band of "
             "Ryan Xu’s packing as the seed; the issue claims the upper bound only. Three "
             "squares touch a wall, as the source says."
         ),
         third_route=(
-            ", and the 11 November review’s clean-room checker, frozen before any producer or "
-            "witness code was read, decided it again by separating axes in GMP rationals and "
-            "by exact clipping in rationals over every square, wall and pair; its 19 "
-            "controls, each stated beforehand, were each decided as stated"
+            ", and the clean-room checker of the review of issue 959, frozen before any "
+            "producer or witness code was read, decided it again by separating axes in GMP "
+            "rationals and by exact clipping in rationals over every square, wall and pair; "
+            "its 19 controls, each stated beforehand, were each decided as stated"
         ),
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
@@ -2766,14 +2766,13 @@ CREDITS: dict[int, Credit] = {
     # his own T-291 packing (issue 954, adopted the day before), one to one with it by nearest
     # centres, 3 squares beyond a tenth, from a band of the tilted squares of Ryan Xu's n = 70
     # packing as Evan Daniel and PingYou Ltd improved it, whose two ends it keeps in place to
-    # 1e-9 (lane L107's measure_core; the 11 November review's F8, F9).
+    # 1e-9 (lane L107's measure_core; the review of issue 959's F8, F9).
     179: Credit(
         (OZDEN,),
         (),
         "Doğa Özden’s further arrangement of his own packing from a band of the tilted "
         "squares of Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it, "
-        "below Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta and PingYou Ltd "
-        "refined it",
+        "below his earlier packing",
     ),
     # T-288 (adopted on 11 November 2026), Doğa Özden's issue 944: a new arrangement relative
     # to T-174's packing, 49 squares beyond a tenth, found by transplant search from an L added

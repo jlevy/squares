@@ -31822,13 +31822,11 @@ issues:
       checker decided it again, so the entry is confirmed, independently re-implemented, at
       V3/C3, and the case adopts it at 179 in place of T-291 under the house rule in the pass of
       12 November, in the same pull request, with Doğa Özden the packing's finder and the band's
-      source packing credited as the
-      seed, both strong generators' regularization of the new house run in the same change.
-      The Kaggle packing the issue
-      quotes, 13.883795490524 (kirilltym), is above it; the side-only leaderboard entry it
-      quotes and states first, 13.880960371556 (team Nevska, 7 November), 2.2e-12 below this
-      side and the registry's s(70) + 5 at 12 places, is unpublished and states no packing, so
-      it is context only.
+      source packing credited as the seed, both strong generators' regularization of the new
+      house run in the same change. The Kaggle packing the issue quotes, 13.883795490524
+      (kirilltym), is above it; the side-only leaderboard entry it quotes and states first,
+      13.880960371556 (team Nevska, 7 November), 2.2e-12 below this side and the registry's
+      s(70) + 5 at 12 places, is unpublished and states no packing, so it is context only.
     read_through: '2026-11-11T21:18:24Z'
     results:
     - key: n179-band-second
