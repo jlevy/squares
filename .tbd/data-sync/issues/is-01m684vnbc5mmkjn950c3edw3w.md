@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 269
+version: 270
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -89,7 +89,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T10:10:39.664Z
+updated_at: 2026-11-12T10:55:21.521Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -228,3 +228,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 09:53Z renewal (intake218): no new issues; the three listed items are owned (#967 by #970, waiting for the 00:10Z merge; #958 comment and de Winter's 57de046 by L136).
 
 2026-11-12 ~10:45Z: L138's senior review of #971: nothing blocking. S1 ('cannot state' -> 'does not state'); S2 (the s157 README asserted fourfold symmetry in the record's voice; 132 is not fourfold, so attribute it); N1–N6. L139 is applying them. The follow-up draft was rewritten by the coordinator per R1–R7 (blank lines, attribution, no unsupported claims, opens with the merge) as l136-replies/followup-958-v2.md; post after #971 merges, with MERGEDATE/MERGESHA filled.
+
+2026-11-12 ~10:56Z: #971 merged (0ee1e7622) after L138 and L139; Pages deploy 43202144155 succeeded. Posted the 958 follow-up (issuecomment-6821661969; the coordinator's R1–R7 rewrite); 958 stays closed. Recording owed in the next batch (with the 967 final and 962 follow-up after #970); think-c3p2 stays open until then. intake219: only #967 remains, owned by #970, which merges after 00:00Z.
