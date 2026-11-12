@@ -6,9 +6,11 @@ at `f496016d3ebccb00c00cbf146efe85e0cc952dda` (committed 2026-11-12T03:00:02Z), 
 repository’s one commit, which [issue #967](https://github.com/jlevy/squares/issues/967)
 names 12 seconds later.
 Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and posted both on
-his behalf. Seven seconds after the issue it pointed to it from his issue #947
+his behalf. Six seconds after the issue it pointed to it from his issue #962
+([comment](https://github.com/jlevy/squares/issues/962#issuecomment-6813075880)), a
+second later from his issue #947
 ([comment](https://github.com/jlevy/squares/issues/947#issuecomment-6813076182)), and a
-second later from pull request #966, which adopted his #962 at this count
+second after that from pull request #966, which adopted his #962 at this count
 ([comment](https://github.com/jlevy/squares/pull/966#issuecomment-6813076476)).
 
 ## What the Source Claims

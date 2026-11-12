@@ -45963,8 +45963,8 @@ results:
       The ledger of 12 November for this lane (campaign/issue-intake/upper-bounds-967-20261112)
       walks every report at 269 in report order from a start frozen on main on 12 November,
       after #966 merged, and records this entry's claim, the only report there. The author's agent
-      commented on #962 at 03:00:20Z, on #947 at 03:00:21Z and on PR #966 at 03:00:22Z, eight to
-      ten seconds after #967 opened, pointing to it as the further improvement; the comment on
+      commented on #962 at 03:00:20Z, on #947 at 03:00:21Z and on PR #966 at 03:00:22Z, six to
+      eight seconds after #967 opened, pointing to it as the further improvement; the comment on
       #947 says this side is "9.74e-3 below this issue's side", where #947's side is T-290's and
       the gap 1.126e-2; 9.74e-3 is the gap on #962 (F14).
 
