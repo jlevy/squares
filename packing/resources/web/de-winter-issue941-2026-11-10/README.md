@@ -62,6 +62,8 @@ session. `d3a020e` and `71da0d5` were public by 13:30:51Z, when the issue named
 The 753 is a sub-window of the 810 here, re-optimized.
 Six are borders of axis-aligned squares on these: 539 on 494, 590 on 543, 794 on 739,
 851 on 794, 867 on 810 and 910 on 851. The 809 is the 810 with one square removed.
+The author’s answers of 11 November give the margins as 4.6 × 10⁻⁹ to 3.0 × 10⁻⁸ (see
+[The Author’s Answers](#the-authors-answers)).
 
 - **What it does not claim.** The local-optimality statements rest on a numerical
   solution of the optimality conditions to 65 digits and have no formal proof.
@@ -277,6 +279,48 @@ The review’s five questions, informational; none bears on a verdict:
 4. What does “a margin of about 5e-9 above the numerical optimum” measure?
    The certificates leave about 10⁻¹⁰ at each wall and 2 × 10⁻¹⁰ between nearest pairs.
 5. Is 809 meant as its own claim, or as the deletion bound from 810?
+
+## The Author’s Answers
+
+Joost de Winter answered questions 4 and 5 on #941 at 20:19:41Z on 11 November 2026
+([issuecomment-6806337206](https://github.com/jlevy/squares/issues/941#issuecomment-6806337206)),
+and questions 1 to 4 for the refined packings on #942 21 seconds later, as the
+[#942 packet](../de-winter-issue942-2026-11-10/README.md#the-authors-answers) records.
+The answers settle the review’s questions and change no verdict or row.
+Intake lane L103 (think-acm0) recorded them.
+
+**809.** It is the deletion bound from 810: the 810 certificate with its last square
+removed, at the same side.
+He asks that it be handled under the rule the project adopts for deletion bounds.
+So 809 stays held for think-kzme, as above, and its notes record the answer.
+
+**The margin.** The review’s reading is right, he says: the margin is the certificate’s
+side less the side of the floating-point result of the local optimization, at 494, 738,
+739, 753 and 810. When these certificates were written, every centre and the side were
+multiplied by f = 1 + 2 × 10⁻¹⁰ + 4v, where v is the largest constraint violation left
+in the floating-point packing, and the side was then rounded up at the 13th decimal.
+The margin is (f − 1) times the side.
+That scaling is what leaves 1.0 × 10⁻¹⁰ at a wall for a square centred 0.5 from it and
+2.0 × 10⁻¹⁰ between two aligned squares one unit apart.
+
+| n | v | Margin |
+| ---: | --- | --- |
+| 494 | below 10⁻¹² | 4.6 × 10⁻⁹ |
+| 739 | below 10⁻¹² | 5.5 × 10⁻⁹ |
+| 753 | below 10⁻¹² | 5.6 × 10⁻⁹ |
+| 810 (and 809) | 2.7 × 10⁻¹¹, estimated | 8.9 × 10⁻⁹, estimated |
+| 738 | 2.2 × 10⁻¹⁰, estimated | 3.0 × 10⁻⁸, estimated |
+
+The floating-point packings are not in his repository, so at 738 and 810 he estimated v
+from the clearances in the certificates; “about 5e-9” was too low for 738. He says the
+answers were prepared with Claude (Anthropic), like the certificates.
+
+**The `501cb8d` edition.** His commit `501cb8daae75da118d00f8b274266058b222ee88`
+(2026-11-11T19:41:30Z) rewrites the folder README’s margin sentence to the same account
+and figures. It changes `above324/README.md` and `above324_refined/README.md` and
+nothing else, and `SHA256SUMS` covers neither, so every certificate retained here is
+unchanged.
+This packet keeps the folder at `71da0d5` and does not retain that edition.
 
 ## What Is Not Established
 

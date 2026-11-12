@@ -37,9 +37,29 @@ since `a9486ed`. No later commit through the head `c4e65d0` changes the folder.
   following the descent “improved twenty-two packings by at least 1e-6”, and the
   addendum calls its six “the same procedure” (the review’s F7). The record quotes each
   README at the pin it cites; whether the six fell below the threshold at first or came
-  from a later run is the review’s question 1 for the author.
+  from a later run was the review’s question 1 for the author.
 
 Those statements are the author’s; no source program ran here.
+
+## The Author’s Answers
+
+Joost de Winter answered the review’s questions on 11 November 2026, as the
+[#942 packet](../de-winter-issue942-2026-11-10/README.md#the-authors-answers) records,
+from
+[issuecomment-6806342752](https://github.com/jlevy/squares/issues/942#issuecomment-6806342752)
+(20:20:02Z). For the six here:
+
+- **A later run.** The six come from a later run, which took the next packings on his
+  list after the first run’s sixteen; each improved by more than 10⁻⁶.
+- **The README’s “at least 1e-6” is wrong** for three of the issue’s sixteen, not for
+  these six: 921, 924 and 935 improved by 3.8 × 10⁻⁷, 1.8 × 10⁻⁷ and 2.8 × 10⁻⁷. And at
+  least forty of the file’s 1000 packings had a descent direction, not sixteen.
+- **The margin.** By his estimate it is 8.4 × 10⁻⁹ at 754; the other five are among the
+  eighteen of the 22 he gives at 5.0 × 10⁻⁹ to 6.4 × 10⁻⁹.
+- **The `501cb8d` edition.** His commit `501cb8d` (2026-11-11T19:41:30Z) rewrites the
+  folder README’s paragraph on the descent runs and its margin sentence to that account,
+  and changes no certificate.
+  This packet keeps the folder at `a0c4fc8`, whose README is the one quoted above.
 
 ## Retained Here
 
@@ -159,9 +179,12 @@ As in the
 
 As in the [#942 packet](../de-winter-issue942-2026-11-10/README.md#credit-and-licence):
 Joost de Winter for the local re-optimization, after the public Kaggle packings of the
-merged file. The repository is MIT-licensed, copyright 2026 Joost de Winter; the licence
-of the Kaggle starting packings is not given (the review’s F8). Retaining a file grants
-no licence and relicenses nothing.
+merged file: the names its README credits, with penguin069 and kmmmvs.
+The starting packings’ authors are not identified per puzzle, so some may be
+Samanyu-dev’s own. The repository is MIT-licensed, copyright 2026 Joost de Winter.
+No licence is stated for the Kaggle starting packings: public Kaggle notebooks default
+to Apache 2.0, and none was traced per packing (the review’s F8 and the author’s
+answer). Retaining a file grants no licence and relicenses nothing.
 
 ## Commands
 

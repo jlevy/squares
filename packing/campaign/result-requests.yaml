@@ -31124,7 +31124,7 @@ issues:
       (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
       blind in a separate lane, accepts all fifteen, nothing blocking. Claude assistance
       disclosed.
-    read_through: '2026-11-10T13:30:51Z'
+    read_through: '2026-11-11T20:19:41Z'
     results:
     - key: above324-15
       claim: >-
@@ -31158,7 +31158,15 @@ issues:
     - think-cen3
     - think-kzme
     answer_bead: think-cen3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/941#issuecomment-6804521353
+      date: '2026-11-11'
+      by: jlevy
+      kind: import
+      reported:
+      - result: above324-15
+      - result: n809
+      beads: [think-kzme]
     close_when: >-
       The fourteen rows are on main, verified, 809 has a row or a recorded disposition under
       think-kzme, and the reply on main says so and asks the review's questions; nothing the
@@ -31182,11 +31190,90 @@ issues:
       what the "margin of about 5e-9 above the numerical optimum" measures, the certificates
       leaving about 1e-10 at each wall and 2e-10 between nearest pairs (F6); and whether 809 is
       meant as its own claim or as the deletion bound from 810. No reply has been posted.
+
+      GitHub closed the issue at 18:36:15Z on 11 November 2026, when #952 merged as c8448724e
+      at 18:36:12Z: a sentence in #952's description, on 809, "so the stage 7 reply does not
+      close #941", was read as a closing keyword. The pass's coordinator reopened it at
+      18:52:03Z, before the reply, and it is recorded open, with no `closed`.
+
+      The first reply, of 18:52:41Z on 11 November 2026 (issuecomment-6804521353), was posted
+      after #952 merged and is recorded in intake lane L99. It is recorded as `import`: it is
+      the reply of the pull request that imported the rows, and it is not `final`, since it says
+      that the issue stays open for 809 and that a reply will follow when the question is
+      decided. It says that fourteen of the fifteen, at 413, 494, 539, 543, 547, 590, 738, 739,
+      753, 794, 810, 851, 867 and 910, are rows of the record beyond the case corpus at
+      assurance verified, each the 10-place print, the exact side rounded up; that beyond n =
+      324 the record keeps dated rows in source-coverage.yaml, not register entries, so they
+      have no T-numbers, their source being de-winter-issue941-2026-11-10; and that each
+      supersedes the row that stood at its count, which stays listed, marked superseded, by
+      7.08e-5 (539) to 5.33e-3 (753). It says that each side is also below Göbel's construction
+      at its count, by 1.58e-2 to 0.532 (753); that these are bounds below the record, which
+      does not call them the best known packings; and that the Kaggle submission files the issue
+      mentions were not checked here, since none has reached this repository as a report. It
+      says that 809, the 810 certificate less its last square, is held, not recorded: both
+      routes and the review accept the certificate and its side is 1.19e-4 below the row at 809
+      (Couzo's #763), but whether a deletion bound an issue claims gets a row of its own is an
+      open question for the project (think-kzme), the one that leaves the deletion bounds at
+      743, 798, 855 and 985, which #715 and #732 claim, without rows, so until it is decided 809
+      has no row and Couzo's row stays current there. It says that GitHub closed the issue when
+      #952 merged, because a sentence in that pull request saying the merge would not close it
+      read as a closing keyword, that it has been reopened and stays open for 809, and that a
+      reply will follow when the question is decided. It says that the record classes 494 as a
+      refinement of Couzo's packing at 494, itself his refinement of Vladislav Lavrentev's
+      Kaggle packing, no square moving more than a tenth (largest 0.0992), where the issue calls
+      it a sub-window of his 539, and that both descriptions can hold (the review's F14). It
+      says what was checked: custody, all 16 lines of SHA256SUMS passing; both maintained exact
+      routes accepting all fifteen over every wall and pair, 45 jobs and 22,619,004 pair
+      decisions with the controls, the two routes sharing the reader, Fraction arithmetic and
+      the separating-axis method, and neither sharing code with the author's verify_cert.py,
+      retained as data and not run; the 30 gross controls refused and the 165 sharp controls
+      as stated; the prints, each the exact side's 10-place ceiling, and the issue's columns,
+      its 28.9080360986 at 809 rounding down a row that lies exactly half way; and the report
+      order, the ledger dating all fifteen by the issue with d3a020e and 71da0d5 kept as first
+      commits. It passes on the independent review, a Claude agent at the strong tier, blind to
+      the import lane until its findings were frozen, an AI review and not a human one: its
+      clean-room checker over all 3,769,834 pairs by two methods, its 135 controls, and its
+      confirmation of the construction statements. It names E-de-winter-941-certificate-report,
+      E-de-winter-941-exact-feasibility and E-de-winter-941-review-exact-feasibility, and says
+      that the fourteen rows are verified from the last two, which do not cover 809; those ids
+      map to neither of this issue's results, which are rows of source-coverage.yaml, not
+      register entries, so above324-15 and n809 are each recorded as spoken of, with no id, as
+      #763's beyond-horizon rows are, and think-kzme, which 809 waits on, under the reply's
+      beads. It passes on the packet at 71da0d5, the licence, MIT, pinned against the copy
+      already held with the certificates at 227, 229 and 260, and the credit, de Winter after
+      Couzo, Lavrentev, Tymchishin, Levy, with the AI assistance as stated; and says that the
+      Changelog for 11 November lists the fourteen rows. It asks the review's questions 4 and 5:
+      what "a margin of about 5e-9 above the numerical optimum" measures, and whether 809 is
+      meant as its own claim or as the deletion bound from 810; neither changes a bound or holds
+      the issue open, and the project's question on 809 does.
+
+      The author answered both questions at 20:19:41Z on 11 November 2026
+      (issuecomment-6806337206), recorded in intake lane L103 (think-acm0). On 809 he says it is
+      the deletion bound from 810, the 810 certificate with its last square removed, at the same
+      side, and asks that it be handled under the rule the project adopts for deletion bounds.
+      On the margin he says the review's reading is right: it is the certificate's side less the
+      side of the floating-point result of the local optimization, at 494, 738, 739, 753 and
+      810. When the certificates were written, every centre and the side were multiplied by
+      f = 1 + 2e-10 + 4v, where v is the largest constraint violation left in the floating-point
+      packing, and the side was then rounded up at the 13th decimal, so the margin is (f - 1)
+      times the side; the clearances of 1.0e-10 at a wall for a square centred 0.5 from it and
+      2.0e-10 between two aligned squares one unit apart show the scaling. He gives the margin
+      as 4.6e-9, 5.5e-9 and 5.6e-9 at 494, 739 and 753, where v is below 1e-12, and by his
+      estimate 8.9e-9 at 810 (and 809), with v = 2.7e-11, and 3.0e-8 at 738, with v = 2.2e-10,
+      so "about 5e-9" was too low for 738; the floating-point packings are not in his
+      repository, so he estimated v from the clearances in the certificates. He says the
+      answers were prepared with Claude (Anthropic), like the certificates. The answers settle
+      the review's questions. The 809 answer leaves n809 queued on think-kzme, whose notes
+      record it, and the issue stays open for 809. His commit 501cb8d
+      (2026-11-11T19:41:30Z) gives the same account of the margin, with the same figures, in
+      above324/README.md; the de-winter-issue941-2026-11-10 packet keeps the folder at 71da0d5
+      and notes that edition.
   - number: 942
     title: 'Sixteen lowered upper bounds for n between 632 and 989: registration request'
     author: JoostdeWinter
     opened: '2026-11-10'
-    state: open
+    state: closed
+    closed: '2026-11-11'
     kind: result-report
     triage: done
     summary: >-
@@ -31212,7 +31299,7 @@ issues:
       report brought here may hold smaller ones. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
       blind in a separate lane, accepts all 22, nothing blocking. Claude assistance disclosed.
-    read_through: '2026-11-10T16:02:47Z'
+    read_through: '2026-11-11T20:20:02Z'
     results:
     - key: above324-refined-16
       claim: >-
@@ -31247,7 +31334,21 @@ issues:
     beads:
     - think-cen3
     answer_bead: think-cen3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/942#issuecomment-6804532105
+      date: '2026-11-11'
+      by: jlevy
+      kind: final
+      reported:
+      - result: above324-refined-16
+      - result: above324-refined-addendum-6
+      outdated:
+      - >-
+        The rows credit "de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+        malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo"; since the
+        author's answer of 11 November (issuecomment-6806342752) both bibliography keys credit
+        penguin069 and kmmmvs after Couzo, two further merged sources the merge file's README
+        names
     close_when: >-
       The 22 rows are on main, verified, and the reply on main says what was retained, replayed
       and reviewed, and asks the review's questions; nothing the author asked for is queued.
@@ -31267,6 +31368,99 @@ issues:
       licence the Kaggle notebooks and datasets published the starting packings, and whether the
       merge file states one (F8); whether the individual authors of the 22 arrangements can be
       identified; and what the "margin of about 5e-9" measures (F6). No reply has been posted.
+
+      Closed on 11 November 2026 with the final reply (issuecomment-6804532105, posted at
+      18:53:12Z), after #952 merged as c8448724e at 18:36:12Z; recorded in intake lane L99. It
+      says that all 22 are rows of the record beyond the case corpus at assurance verified, each
+      the 10-place print, the exact side rounded up: the issue's sixteen as rows of the source
+      de-winter-issue942-2026-11-10, and the addendum's six as rows of
+      de-winter-a0c4fc8-2026-11-10, dated by the addendum comment (16:02:47Z) with a0c4fc8 kept
+      as each one's first commit; that beyond n = 324 the record keeps dated rows in
+      source-coverage.yaml, not register entries, so they have no T-numbers; and that each
+      supersedes the row that stood at its count, which stays listed, marked superseded, by
+      1.02e-3 (869) to 3.26e-2 (991), while at 655 no row stood and the side is 3.29e-4 below
+      the 26 × 26 grid. It says that each side is also below Göbel's construction at its count,
+      which at 655 lies above the grid; that these are bounds below the record, which does not
+      call them the best known packings, each arrangement another holder's public Kaggle
+      packing, re-optimized; that the issue's comparison with the best public packing, 1.8e-7
+      to 3.8e-4, was not checked here, and Kaggle files no report has brought here may hold
+      smaller packings; and that the issue's "register value" column agrees with the rows that
+      stood on main, and with the grid at 655. It says what was checked: custody, all 17 lines
+      of SHA256SUMS passing at a9486ed and the sixteen certificates of #942 having the same
+      digests in a0c4fc8's; both maintained exact routes accepting all 22 over every wall and
+      pair, 66 jobs and 43,939,824 pair decisions with the controls, the least wall clearance
+      1.0e-10 to 5.3e-10 and the least pair gap 2.0e-10 to 1.4e-9, the two routes sharing the
+      reader, Fraction arithmetic and the separating-axis method, and neither sharing code with
+      the author's verify_cert.py, which was not run; the 44 gross controls refused and the 242
+      sharp controls as stated; the prints, each the exact side's 10-place ceiling; against the
+      rows, that none of the nineteen with an n-square row certificate pairs one to one with it
+      under any symmetry, the rows at 632, 744 and 970 being Couzo's L-border recipe and at 655
+      the grid; and the report order, the sixteen dated by the issue, 86 seconds after a9486ed,
+      and the six by the addendum, 25 minutes after a0c4fc8, no other report reaching these
+      counts in either window. It passes on the independent review, a Claude agent at the
+      strong tier, blind to the import lane until its findings were frozen, an AI review and not
+      a human one: its clean-room checker over all 7,323,304 pairs by two methods and its 198
+      controls. It names
+      E-de-winter-942-certificate-report and E-de-winter-a0c4fc8-certificate-report as the two
+      reports, E-de-winter-942-exact-feasibility and E-de-winter-a0c4fc8-exact-feasibility as
+      the replays, and E-de-winter-942-review-exact-feasibility and
+      E-de-winter-a0c4fc8-review-exact-feasibility as the review's clean-room runs, the 22 rows
+      verified from the replays and the review's runs; those ids map to neither of this issue's
+      results, which are rows of source-coverage.yaml, not register entries, so
+      above324-refined-16 and above324-refined-addendum-6 are each recorded as spoken of, with
+      no id, as #763's beyond-horizon rows are. It names no bead. It passes on the two packets,
+      at a9486ed and a0c4fc8; on the licence, MIT, and that the licence of the starting
+      packings, the public Kaggle notebooks and datasets and the merge file in
+      Samanyu-dev/squares_in_squares at 53551d7, is not given, neither the issue nor the
+      repository stating one; retaining the files grants no licence and relicenses nothing; and
+      on the credit, de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+      malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, the merged file
+      naming no author per packing, with the AI assistance as stated. It says that the Changelog
+      for 11 November lists the rows, 16 at 632 to 989 and 6 at 597 to 991. It asks the review's
+      four questions: whether the six addendum counts were below the 1e-6 threshold at first or
+      found by a later run; under what licence the Kaggle notebooks and datasets published the
+      starting packings, and whether the merge file states one; whether the individual authors
+      of the 22 arrangements can be identified; and what "a margin of about 5e-9 above the
+      numerical optimum" measures. The questions are informational and hold nothing open. It
+      says that nothing the author asked for is queued, so the issue is closed with it. The issue
+      was closed as completed at 18:53:16Z.
+
+      The author answered the four questions at 20:20:02Z on 11 November 2026
+      (issuecomment-6806342752), after the issue was closed; recorded in intake lane L103
+      (think-acm0). (1) The six addendum counts come from a later run. The first run followed
+      the descent for the packings with the strongest descent directions and kept the sixteen
+      results that ended more than 1e-7 below the best value he knew; a later run took the next
+      packings on that list, six improving by more than 1e-6, which form the addendum, and
+      eighteen more by less, which are not claimed. He says two of his sentences were
+      inaccurate: "sixteen still had one" in the issue was too narrow, since at least forty of
+      the 1000 packings had a descent direction, and "improved twenty-two packings by at least
+      1e-6" in the folder's README is wrong at 921, 924 and 935, which improved by 3.8e-7,
+      1.8e-7 and 2.8e-7. (2) The merge file states no licence, and Samanyu-dev/squares_in_squares
+      has no licence file at 53551d7; its README calls its own code "MIT-style" and says that
+      third-party notebooks and datasets "are used under their own licences". Public Kaggle
+      notebooks are released under Apache 2.0 by default, and each Kaggle dataset carries the
+      licence its uploader chose; he has not traced the 22 packings to a notebook or dataset, so
+      he cannot name a licence per packing. (3) The merge file and that repository's tables give
+      no source per puzzle; matching coordinates against the output of each public notebook and
+      dataset could identify the authors, which he has not done. That README introduces its ten
+      names with "among them", its score history names two further merged sources, penguin069
+      and kmmmvs, and it reports the owner's own results in the file (18 wins from its own AWS
+      runs at n = 650–990), so some of the 22 starting packings may be by Samanyu-dev. (4) The
+      margin is the certificate's side less the side of the floating-point result of the local
+      optimization, written as on #941: every centre and the side multiplied by
+      f = 1 + 2e-10 + 4v, v the largest constraint violation left, and the side rounded up at
+      the 13th decimal. For 18 of the 22, v is below 2e-12 and the margin 5.0e-9 to 6.4e-9; by
+      his estimate it is 8.4e-9 at 754, 1.1e-8 at 637 and 684 and 4.6e-8 at 805, where v was
+      2.6e-11 to 3.5e-10, so "about 5e-9" was too low for those four. He says the answers were
+      prepared with Claude (Anthropic), like the certificates. The answers settle the review's
+      questions, and the issue stays closed. The credit of [de Winter issue 942 2026-11-10] and
+      [de Winter a0c4fc8 2026-11-10] adds penguin069 and kmmmvs, and the bibliography and the
+      packets say that the starting packings' authors are not identified per puzzle, so some
+      may be Samanyu-dev's own, and that no licence is stated for them, public Kaggle notebooks
+      defaulting to Apache 2.0, none traced per packing. His commit 501cb8d
+      (2026-11-11T19:41:30Z) corrects above324_refined/README.md to the same account of the two
+      runs and the margin; the packets keep the folder at a9486ed and a0c4fc8 and note that
+      edition.
   - number: 954
     title: 's(179) ≤ 13.881367160110: improved packing (registration request)'
     author: kenaznia-doga
@@ -31322,6 +31516,9 @@ issues:
     - think-ruu2
     - think-ikku
     - think-tj4o
+    - think-71uq
+    - think-mdxq
+    - think-89i7
     answer_bead: think-f65n
     replies:
     - url: https://github.com/jlevy/squares/issues/954#issuecomment-6808834300
@@ -31344,6 +31541,7 @@ issues:
       - result: n179-band
         id: E-ozden-954-certificate-report
         status: reviewed
+      beads: [think-ruu2, think-ikku, think-tj4o, think-71uq, think-89i7]
     close_when: >-
       T-291 is on main at V3/C3 as the house at 179, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -31391,16 +31589,97 @@ issues:
       replayed, reviewed and adopted under the house rule.
 
       Closed on 11 November 2026 with the final reply (issuecomment-6808834300, posted at
-      22:41:37Z), after #956 merged as b5b12c206 at 22:20:09Z, registering T-291 and adopting it as
-      the house at 179; recorded here by lane L104 (think-bcfs), whose change touches this record
-      after think-f65n closed, so the entry no longer defers to a closed bead. It states T-291 at
-      V3/C3, confirmed and current; E-ozden-954-exact-feasibility and
-      E-ozden-954-review-exact-feasibility, confirmed; and E-ozden-954-certificate-report, reviewed.
-      It says the review accepted the certificate with notes only and scored it S3, that T-174 stays
-      a verified bound kept as history, and that #959, which the author's comment of 21:18:29Z
-      reports at 13.880960371559 from the same method, is imported and reviewed as its own result
-      under think-89i7, the house at 179 moving only once that certificate is replayed, reviewed and
-      adopted. It asks the review's six questions, informational, holding nothing open.
+      22:41:37Z), after #956 merged as b5b12c206 at 22:20:09Z with the import, the replay and an
+      independent review, registering T-291 and adopting it as the house at 179; recorded in
+      intake lane L112. It states T-291 at V3/C3, confirmed and current, reproduced with the
+      author's own checker and re-verified by an independent implementation;
+      E-ozden-954-exact-feasibility and E-ozden-954-review-exact-feasibility, confirmed; and
+      E-ozden-954-certificate-report, reviewed, the issue's report recorded as the source's own.
+      It says that T-291, scored S3, became the house at 179 on 11 November under the house
+      rule in place of T-174, Nate Chaoweeraprasit's packing (itsnaka), improved by Siddharth
+      Gupta and PingYou Ltd, which stays a verified bound at V3/C3 and keeps its certificate as
+      history; T-174 is named as the house replaced and as the record the packing improves, not
+      as this issue's result, and is not recorded under reported. On the print it says that the
+      exact side, a fraction of 159 digits over 158, is 13.8813671601098758 rounded up at 16
+      places; that the issue's 13.881367160110 is that side rounded up at 12 places, so it
+      bounds s(179), and the stated improvement, 2.428e-03 (relative 1.75e-04), is the exact gap
+      to T-174 rounded; and that the README's 13.881367160109875… is the side's 15-place floor,
+      right before an ellipsis.
+      It says what was checked: bd262d8, the repository's one commit, retained in the packet
+      ozden-s179-upper-bound-2026-11-11, the decimal pose included, with the SHA-256s stated;
+      both maintained exact routes accepting the witness over every wall and all 15,931 pairs
+      and refusing its duplicate-square and outside-container controls, 3 jobs and 95,586 pair
+      decisions, three squares touching the box and every pair clearing by at least 2.03e-13;
+      the first route being the packing-witness verify the author ran, so on it the replay
+      reproduces his own check, and the second the independent rational corner checker, which
+      shares the corner reader and the separating-axis method in Fraction arithmetic but no
+      verification code, neither route independent of the rounding this repository's
+      packing-witness promote made (F11); the sharp controls accepted at exact contact and
+      refused 1e-30 past it, as stated in advance; and sqcheck.py byte-identical to the copy the
+      s232 packet retains, not run here. It passes on the independent review, a Claude agent at
+      the strong tier, blind to the import lane until its findings were frozen, an AI review and
+      not a human one, which accepted the certificate with findings, all notes and none
+      blocking, and scored it S3: its clean-room checker deciding every square, wall and pair
+      again by two methods that share only the reader, the least pair margin 2.03083381521e-13
+      at squares 14 and 15; its 17 controls, every one as stated; the squares accepted in the
+      box of side 13.881367160110, so the certificate proves the claim as printed, while at the
+      12-place floor, 13.881367160109, 21 squares cross the right or top wall (F3); and the gain
+      real, T-174's certificate having a touching pair, squares 119 and 122, so none of the
+      2.43e-03 is padding and RV-3 does not reach it. It says that the review checked the
+      issue's statements about the promotion and each holds: squares 123, 39 and 117 touch the
+      left, bottom and right walls, the other 36 square–wall clearances below 1e-12 at most
+      4.29e-14; with center_dilation '1' the certificate is the decimal pose translated by about
+      1.04e-13 toward the corner, so the pair margins are the pose's own; and source.path and
+      certificate.replay name files the repository holds. It says that the packing is a new
+      arrangement relative to T-174's, the optimal assignment under the best symmetry moving 47
+      squares beyond a tenth (largest 0.885) and turning 58, by up to 44.36°, so the record
+      credits the author as its finder and T-174's holders as the record it improves, not as its
+      base (F9); and that the stated seed lies within 0.05 of 28 of the 37 tilted squares, each
+      turned by less than a degree, under the identity of the 70 box and none of its other seven
+      symmetries, which supports it strongly (F8). It says that both strong regularizers ran on
+      the new house, the case drawing 179 with Evan Daniel's same-side view; that his
+      regularizer reached a certified KKT point 2.78e-12 below the side, 1.06 times the
+      certificate's contraction margin of 2.62e-12, held as a candidate and not registered, its
+      registration waiting on RV-3 (think-ruu2 and think-ikku), as at 156, 172, 180, 199, 268,
+      269 and 270, and nothing claimed for it yet; and that the rigidity screen finds 74 of the
+      179 squares free to slide, against 7 of T-174's, which changes nothing about the bound,
+      since the issue claims no rigidity. It passes on the packet, the whole tree of bd262d8,
+      eleven files, four of them pinned by digest or against byte-identical copies already kept;
+      and on the licence, CC BY 4.0 and MIT, byte for byte the LICENSE.md of the author's lab's
+      earlier repositories, with Evan Daniel's MIT notice byte for byte the one retained in
+      evand-issue845-2026-10-29. On the seed band's licence it says: "The issue names the
+      registry's n = 70 witness as the band's source (question 4 below asks which coordinates
+      were used)"; that witness is PingYou Ltd's PR 574 algebraic supplement, a release with no
+      licence file that this repository keeps in derived-only form, and whether a packing seeded
+      from it needs a notice of its own is an open question with the project (think-71uq; the
+      review named think-mdxq, which closed on 4 November), which holds nothing and asks nothing
+      of the author. It passes on the credit, Ozden after Xu, Daniel, PingYou, Levy, Daniel also
+      credited for the ALM+SLP quench and T-174's holders as the record it improves, the atlas
+      posters holding the author's name off their credit block at 179 until the next
+      infographics cut (think-tj4o). It reads the Kaggle sides: the per-puzzle packing the issue
+      quotes, 13.883795490524 (kirilltym), is above T-291, and the side-only entry
+      13.880960371556 (team Nevska, 7 November), 4.07e-4 below its side, states no packing and
+      is not counted, the review finding it exactly the registry's s(70) + 5 at 12 places. It
+      asks the review's six questions: whether the final repair scaling was about 2e-13 rather
+      than 1e-13 (F5); whether the lineage counts use T-174's packing reflected top to bottom and
+      set against the upper-left corner, and whether the issue would name that convention (F6);
+      whether "two such bands" at 207 means the 70 band cut where the two meet (F7); whether the
+      seed took the 70 band from the registry's witness or from Ryan Xu's or Evan Daniel's
+      published coordinates; which replay is intended, certificate.replay or the README's rerun,
+      from which directory, and whether the schema path would name this repository's file
+      (F11); and whether the band-design search and its seeds will be published. The questions
+      are informational and hold nothing open. It says that the request to adopt #959 is carried
+      by #959 itself, so nothing the author asked for here is queued. The issue was closed as
+      completed at 22:41:42Z.
+
+      On #959 the final reply says that the author's comment of 21:18Z reports it at
+      13.880960371559, 4.07e-4 below this side, from the same method on a later batch; that it
+      is being imported and reviewed as its own result, under its own bead (think-89i7), and
+      will have a register entry of its own, and is answered there; and that T-291 is not
+      replaced in place: the house at 179 moves only when #959's certificate has been replayed
+      here, reviewed and adopted under the house rule, and until then T-291 is the house. Either
+      way this issue's certificate stays a valid bound, verified at V3/C3. #959's result is not
+      this issue's and is not recorded under reported here.
 
   - number: 958
     title: 's(157) below 13 and a new s(132): two pinwheel packings: registration request'

@@ -32002,7 +32002,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 0
   end: 9
   label: de Winter
@@ -32015,7 +32016,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 16
   end: 27
   label: Samanyu-dev
@@ -32028,7 +32030,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 29
   end: 35
   label: Deotte
@@ -32041,7 +32044,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 37
   end: 46
   label: Lavrentev
@@ -32054,7 +32058,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 48
   end: 55
   label: Chilton
@@ -32067,7 +32072,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 57
   end: 67
   label: Tymchishin
@@ -32080,7 +32086,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 69
   end: 82
   label: malyshevdanil
@@ -32093,7 +32100,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 84
   end: 92
   label: prvsiyan
@@ -32106,7 +32114,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 94
   end: 104
   label: busyaprime
@@ -32119,7 +32128,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 106
   end: 121
   label: nilanjansaha123
@@ -32132,7 +32142,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 123
   end: 130
   label: jazivxt
@@ -32145,10 +32156,39 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 132
   end: 137
   label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
+  start: 139
+  end: 149
+  label: penguin069
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
+  start: 151
+  end: 157
+  label: kmmmvs
   role: prerequisite
   disposition: unresolved
   evidence: []
@@ -32170,7 +32210,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 0
   end: 9
   label: de Winter
@@ -32183,7 +32224,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 16
   end: 27
   label: Samanyu-dev
@@ -32196,7 +32238,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 29
   end: 35
   label: Deotte
@@ -32209,7 +32252,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 37
   end: 46
   label: Lavrentev
@@ -32222,7 +32266,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 48
   end: 55
   label: Chilton
@@ -32235,7 +32280,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 57
   end: 67
   label: Tymchishin
@@ -32248,7 +32294,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 69
   end: 82
   label: malyshevdanil
@@ -32261,7 +32308,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 84
   end: 92
   label: prvsiyan
@@ -32274,7 +32322,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 94
   end: 104
   label: busyaprime
@@ -32287,7 +32336,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 106
   end: 121
   label: nilanjansaha123
@@ -32300,7 +32350,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 123
   end: 130
   label: jazivxt
@@ -32313,10 +32364,39 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 132
   end: 137
   label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
+  start: 139
+  end: 149
+  label: penguin069
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
+  start: 151
+  end: 157
+  label: kmmmvs
   role: prerequisite
   disposition: unresolved
   evidence: []
