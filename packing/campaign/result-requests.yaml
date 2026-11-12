@@ -31849,7 +31849,7 @@ issues:
       them at 132 and 157 under the house rule in the same pass, with Joost de Winter the packings'
       finder after Samanyu-dev's pinwheel at 109, both strong generators' regularization of the new
       houses run in the same change.
-    read_through: '2026-11-12T00:41:50Z'
+    read_through: '2026-11-12T08:31:55Z'
     results:
     - key: n157-pinwheel
       claim: >-
@@ -32053,6 +32053,43 @@ issues:
       and that his 809 stays held, with #941 open, until the project decides whether a deletion
       bound an issue claims gets a row of its own. It says that his answers on #942 are
       acknowledged there.
+
+      Read on 12 November 2026 in lane L136 (think-c3p2): Joost de Winter answered the review's
+      six questions (issuecomment-6818738203, 08:31:55Z), and read_through moves to it. F8: the
+      stated 1.3e-59 and 1.4e-59 are the measured 1.2476e-59 and 1.3493e-59 rounded up to two
+      figures. F9: the 1,407 and 2,024 are the equations his high-precision solver used, one for
+      each corner of a square on the edge line of a neighbouring square, on a separating axis,
+      within 1e-6 in the binary64 solution, and one for each corner on a wall; edge lines and a
+      binary64 threshold give a count other than corners on edge segments within 1e-50. F10: done
+      in his commit 57de046 (08:30:46Z), both YAML files carrying the softschema header, a claim
+      block and a lowercase id, validating against witness.schema.yaml, with the squares and sides
+      unchanged. F11: his cuts were at x = 3.48, y = 8.61 in the 109 as published and at x = 9.71,
+      y = 3.33 in the 132; the packings have fourfold symmetry and a cut can sit anywhere inside an
+      axis-aligned block, so he reads the review's measured cuts as the same two steps. At each cut
+      the sides moved about 1.15 apart, every square in the layer next to the cut was copied once
+      across it (axis-aligned squares by one unit, tilted ones by 1/cos(theta) along the cut's
+      normal), copies overlapping another square by more than 0.15 were dropped and all squares
+      re-optimized together, so the added squares are copies of the squares that bordered each cut:
+      11 + 12 in the first step and 12 + 13 in the second, the 23 and 25 the review found left
+      unpaired. Method: published in the same commit as method_n132_n157/, the growth step, the
+      IPOPT model, the high-precision solver, the certificate scripts and the 250-digit solutions,
+      which he says reproduce both exact JSON files byte for byte from the public seed, the
+      binary64 and Shapely checks there written again for publication. F12: he has not contacted
+      Samanyu-dev, used the public file as published at 53551d7 and credited it, and cannot say
+      what 'MIT-style' covers beyond the code; that stays the owner's question on think-71uq.
+
+      The de-winter-method-132-157-2026-11-12 packet retains 57de046, the s132 and s157 packets
+      staying at 6617869, and campaign/intake-watch.yaml reads the repository through it. Its git
+      diff adds 10 lines to each witness file and removes 1, the header, the claim block and the
+      id, and changes no line of a square or a side, so T-292 and T-293 stand as recorded and no
+      rung moves. packing-witness inspect passes both files' JSON schema and refuses each on the
+      loader's rule that a verified claim carries a replayable certificate record; the record
+      writes its own witnesses, so nothing waits on it. No program of the method ran here: CasADi
+      with IPOPT and python-flint are not in the project environment and the seed is not retained,
+      so the byte-for-byte reproduction is the author's claim, unchecked. The review kept T-292
+      and T-293 at S3, not S4, because the growth step was described and not published as code,
+      and shown at two counts from one seed; the code is now published, the steps are still
+      shown at two counts from one seed, and this pass changes no score. The answers ask for nothing, and the issue stays closed.
   - number: 959
     title: 's(179) ≤ 13.880960371559: improved packing (registration request)'
     author: kenaznia-doga

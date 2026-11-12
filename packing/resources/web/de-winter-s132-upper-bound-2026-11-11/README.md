@@ -20,6 +20,10 @@ commit kept, and the verdicts are the same either way.
 The commit before them, `501cb8d` (19:41:30Z), corrects the READMEs of `above324/` and
 `above324_refined/`; it is outside this scope and read in
 [campaign/intake-watch.yaml](../../../campaign/intake-watch.yaml).
+The commit after them, `57de046` (2026-11-12T08:30:46Z), publishes the method and adds
+the schema envelope to both witness files, with the squares and the sides unchanged.
+The [method packet](../de-winter-method-132-157-2026-11-12/README.md) retains it, and
+this packet stays at `6617869`.
 
 Intake lane L104 (think-bcfs) retained it, replayed it and registered it on 11 November
 2026 as **T-292**. The blind stage 4 review of lane L105 accepted it the same day, so it
@@ -191,6 +195,50 @@ The stage 4 review’s six questions, informational, holding nothing open:
    and Shapely checks be published?
 6. Samanyu-dev’s repository has no licence file. Did its author agree to the 109 packing
    being built on, and does “MIT-style” cover the packing data as well as the code?
+
+## The Author’s Answers
+
+Joost de Winter answered the six questions on 12 November 2026
+([issuecomment-6818738203](https://github.com/jlevy/squares/issues/958#issuecomment-6818738203),
+08:31:55Z). The [s157 packet](../de-winter-s157-upper-bound-2026-11-11/README.md#the-authors-answers)
+points here.
+
+1. **The margin (F8).** The stated 1.3 and 1.4 × 10⁻⁵⁹ are the measured 1.2476 and
+   1.3493 × 10⁻⁵⁹, rounded up to two figures.
+2. **The count (F9).** The 1,407 and 2,024 are the equations his high-precision solver
+   used. Each is one corner of a square on the edge line of a neighbouring square, on an
+   axis that separates the two, within 10⁻⁶ in the binary64 solution, or one corner on a
+   wall. Counting edge lines at a binary64 threshold, rather than corners on edge segments
+   within 10⁻⁵⁰, gives the different number.
+3. **The witness (F10).** Done in `57de046`: both YAML files carry the `softschema`
+   header, a `claim` block and a lowercase id, and validate against
+   `witness.schema.yaml`, with the squares and the sides unchanged. The
+   [method packet](../de-winter-method-132-157-2026-11-12/README.md#what-was-checked-here)
+   retains them. The Git diff changes only the header, the claim block and the id, and
+   `packing-witness inspect` passes the schema but refuses the files on one loader rule:
+   a `verified` claim needs a replayable `certificate` record.
+   The record writes its own witness, so nothing waits on it.
+4. **The cuts (F11).** His cuts were at x = 3.48, y = 8.61 in the 109 packing as
+   published, and at x = 9.71, y = 3.33 in the 132. The packings have fourfold symmetry,
+   and a cut can sit anywhere inside an axis-aligned block with the same result, so he
+   reads the review’s measured cuts as the same two steps. At each cut the two sides moved
+   about 1.15 apart. Every square in the layer next to the cut was copied once across it,
+   axis-aligned squares by one unit and tilted ones by 1/cos θ along the cut’s normal.
+   Copies overlapping another square by more than 0.15 were dropped, and every square was
+   re-optimized together. So the added squares are copies of the squares that bordered
+   each cut: 11 + 12 in the first step and 12 + 13 in the second, the 23 and 25 squares
+   the review found left unpaired.
+5. **The method.** Published in `57de046` as `method_n132_n157/`, which the method packet
+   retains: the growth step, the IPOPT model, the high-precision solver, the certificate
+   scripts and the 250-digit solutions. He says that, run from the public seed, the
+   scripts reproduce both exact JSON files byte for byte, and that the binary64 and
+   Shapely checks there were written again for publication and repeat the two he
+   reported. None of it ran here: CasADi with IPOPT and python-flint are not in the
+   project environment, and the seed is not retained. The reproduction is the author’s
+   claim, unchecked.
+6. **The seed’s licence (F12).** He has not contacted Samanyu-dev. He used the public file
+   as published at `53551d7` and credited it, and cannot say what “MIT-style” covers
+   beyond the code. The question stays the owner’s on think-71uq.
 
 ## What Is Not Established
 

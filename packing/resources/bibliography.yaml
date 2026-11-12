@@ -5306,6 +5306,30 @@ sources:
       5.2 (Anthropic) under de Winter's direction. No global optimality claim. The lineage is
       independent of this project. Licensed MIT by LICENSE at the pin. Retained in
       web/de-winter-s157-upper-bound-2026-11-11/.
+  - key: '[de Winter method 132 157 2026-11-12]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-12'
+    lineage: independent
+    credit: de Winter after Samanyu-dev
+    note: >-
+      JoostdeWinter/square-packing at 57de0465c07f7ba94bbd1fd2a317ee3f08cfedca
+      (2026-11-12T08:30:46Z), the commit after 6617869 that Joost de Winter's answers on
+      jlevy/squares#958 (issuecomment-6818738203, 08:31:55Z) name: method_n132_n157/, the code
+      that produced his packings of 132 and 157 ([de Winter s132 upper bound 2026-11-11], T-292;
+      [de Winter s157 upper bound 2026-11-11], T-293), a growth step that cuts a packing along
+      one vertical and one horizontal line and copies the layer next to each cut across it, an
+      IPOPT model through CasADi, a 900-bit Newton solver of the contact equations, the
+      certificate scripts, the 250-digit solutions, and binary64 and Shapely checks; and both
+      witness files with this repository's softschema header, a claim block and a lowercase id,
+      their squares and sides unchanged. The method README says that, run from Samanyu-dev's
+      public 109-square packing (squares_in_squares 53551d7), the scripts reproduce both exact
+      JSON files byte for byte; not run here, so that is the author's claim. The README says the
+      code was written with Claude Fable 5.2 (Anthropic) under de Winter's direction. No new
+      bound. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-method-132-157-2026-11-12/.
   - key: '[Özden s179 issue 959 2026-11-11]'
     authors:
     - 'Özden'
