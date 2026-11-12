@@ -1,0 +1,20 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L119 of 12 November: the final reply on #958 (00:41:50Z) is recorded, stating
+  T-293 and T-292 at V3/C3, confirmed and current, with the three mapped evidence ids of each,
+  and naming think-71uq; the issue is recorded closed, read through its reply, and its notes
+  record what the reply says, among it that the reply acknowledges the author's #941 answers
+  and that 809 stays held with #941 open, which #941's notes also record. The follow-up on #942
+  (00:05:24Z) is recorded, speaking of above324-refined-16 and above324-refined-addendum-6 with
+  no id and correcting the final reply's outdated credit line; the issue stays closed and its
+  read_through is unchanged. No result, rung, side, bound, mark or credit changes. Against main
+  75cce00b6 (#961): rendered by devtools.compare_paper_renders into empty site directories, its
+  math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that
+  main's result-requests.yaml swapped in: 43 files each, all byte-identical across the three. No
+  PDF was printed; it prints from that HTML. The paper keeps its version, v0.2.7.
