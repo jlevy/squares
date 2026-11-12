@@ -31268,6 +31268,13 @@ issues:
       (2026-11-11T19:41:30Z) gives the same account of the margin, with the same figures, in
       above324/README.md; the de-winter-issue941-2026-11-10 packet keeps the folder at 71da0d5
       and notes that edition.
+
+      The final reply on #958, of 00:41:50Z on 12 November 2026 (issuecomment-6810906839,
+      recorded in intake lane L119), acknowledged these answers (issuecomment-6806337206): it
+      says that the record now carries the margins as he gives them, and that his 809 stays held,
+      with #941 open, until the project decides whether a deletion bound an issue claims gets a
+      row of its own. It is a reply on #958, not on this issue, so it is not recorded under this
+      issue's replies.
   - number: 942
     title: 'Sixteen lowered upper bounds for n between 632 and 989: registration request'
     author: JoostdeWinter
@@ -31349,6 +31356,15 @@ issues:
         author's answer of 11 November (issuecomment-6806342752) both bibliography keys credit
         penguin069 and kmmmvs after Couzo, two further merged sources the merge file's README
         names
+    - url: https://github.com/jlevy/squares/issues/942#issuecomment-6810296603
+      date: '2026-11-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: above324-refined-16
+      - result: above324-refined-addendum-6
+      corrects:
+      - https://github.com/jlevy/squares/issues/942#issuecomment-6804532105
     close_when: >-
       The 22 rows are on main, verified, and the reply on main says what was retained, replayed
       and reviewed, and asks the review's questions; nothing the author asked for is queued.
@@ -31461,6 +31477,32 @@ issues:
       (2026-11-11T19:41:30Z) corrects above324_refined/README.md to the same account of the two
       runs and the margin; the packets keep the folder at a9486ed and a0c4fc8 and note that
       edition.
+
+      The follow-up of 00:05:24Z on 12 November 2026 (issuecomment-6810296603), posted after #955
+      merged as 2fe557598 at 23:50:50Z on 11 November and recorded in intake lane L119, was owed
+      because the final reply's credit line is marked `outdated` since
+      the author's answers; it names the final reply in `corrects`, as #593's and #438's
+      follow-ups name the replies they correct. It thanks the author for his answers and says that
+      the final reply said the rows credit de Winter after Samanyu-dev, Deotte, Lavrentev,
+      Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo;
+      that since his answer both bibliography keys, [de Winter issue 942 2026-11-10] and
+      [de Winter a0c4fc8 2026-11-10], credit penguin069 and kmmmvs after Couzo, the two further
+      merged sources he says the merge file's README names; and that the starting packings'
+      authors are still not identified per puzzle, so some may be Samanyu-dev's own, and the
+      record says so. It says that the #942 and a0c4fc8 packets now record the margins as he
+      defines them, 5.0e-9 to 6.4e-9 at 18 of the 22 and by his estimate 8.4e-9 at 754, 1.1e-8 at
+      637 and 684 and 4.6e-8 at 805; the corrected figures, the addendum's six from his later run
+      and "at least 1e-6" in the folder's README wrong at 921, 924 and 935, which improved by
+      3.8e-7, 1.8e-7 and 2.8e-7; the licence note, no licence stated for the starting packings,
+      the merge file stating none and public Kaggle notebooks defaulting to Apache 2.0, none
+      traced per packing, and retaining the files granting no licence and relicensing nothing;
+      and his commit 501cb8d, which corrects the folder's README to the same account, the packets
+      keeping the folder at a9486ed and a0c4fc8 and noting that edition. It says that none of this
+      changes a row, a side or a verdict, all 22 rows staying verified, and that the issue stays
+      closed, the reply only correcting the credit line and recording his answers. It names no id
+      and no bead, so the two results are recorded as spoken of, with no id, as in the final
+      reply. It reads no comment into the record, so `read_through` stays at the author's answer,
+      and the issue stays closed.
   - number: 954
     title: 's(179) ≤ 13.881367160110: improved packing (registration request)'
     author: kenaznia-doga
@@ -31690,7 +31732,8 @@ issues:
     title: 's(157) below 13 and a new s(132): two pinwheel packings: registration request'
     author: JoostdeWinter
     opened: '2026-11-11'
-    state: open
+    state: closed
+    closed: '2026-11-12'
     kind: result-report
     triage: done
     summary: >-
@@ -31714,7 +31757,7 @@ issues:
       them at 132 and 157 under the house rule in the same pass, with Joost de Winter the packings'
       finder after Samanyu-dev's pinwheel at 109, both strong generators' regularization of the new
       houses run in the same change.
-    read_through: '2026-11-11T20:56:18Z'
+    read_through: '2026-11-12T00:41:50Z'
     results:
     - key: n157-pinwheel
       claim: >-
@@ -31744,7 +31787,43 @@ issues:
     - think-bcfs
     - think-71uq
     answer_bead: think-bcfs
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/958#issuecomment-6810906839
+      date: '2026-11-12'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n157-pinwheel
+        id: T-293
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n157-pinwheel
+        id: E-de-winter-s157-exact-feasibility
+        status: confirmed
+      - result: n157-pinwheel
+        id: E-de-winter-s157-review-exact-feasibility
+        status: confirmed
+      - result: n157-pinwheel
+        id: E-de-winter-s157-certificate-report
+        status: reviewed
+      - result: n132-pinwheel
+        id: T-292
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n132-pinwheel
+        id: E-de-winter-s132-exact-feasibility
+        status: confirmed
+      - result: n132-pinwheel
+        id: E-de-winter-s132-review-exact-feasibility
+        status: confirmed
+      - result: n132-pinwheel
+        id: E-de-winter-s132-certificate-report
+        status: reviewed
+      beads: [think-71uq]
     close_when: >-
       T-292 and T-293 are on main at V3/C3 as the houses at 132 and 157, and the reply on main
       says what was retained and replayed, what the review found and that the cases adopted
@@ -31792,6 +31871,96 @@ issues:
       IPOPT model, the 250-digit solutions and the binary64 and Shapely checks will be published;
       and whether Samanyu-dev agreed to the 109 being built on and 'MIT-style' covers the packing
       data. No reply has been posted.
+
+      Closed on 12 November 2026 with the final reply (issuecomment-6810906839, posted at
+      00:41:50Z), after #961 merged as 75cce00b6 at 00:25:06Z with the import, the replay, an
+      independent review and the adoption of both packings; recorded in intake lane L119. It
+      states T-293 and T-292 at V3/C3, scored S3, confirmed and current, each re-verified here by
+      an independent implementation; E-de-winter-s157-exact-feasibility,
+      E-de-winter-s157-review-exact-feasibility, E-de-winter-s132-exact-feasibility and
+      E-de-winter-s132-review-exact-feasibility, confirmed; and E-de-winter-s157-certificate-report
+      and E-de-winter-s132-certificate-report, the issue's report of each certificate recorded as
+      the source's own. It says that T-293 is the first packing of 157 squares below 13 on record,
+      6.70e-03 below the 13 × 13 grid, and is now the house at 157 under the house rule in place of
+      the grid, the case's conjectured integer optimum and its prose that nothing beats the grid
+      withdrawn, as at 183 and 211, and the grid staying the verified bound it was, kept as
+      history; that 157 = 13^2 - 13 + 1, so the record now shows s(k^2 - k + 1) < k at k = 13, Kevin
+      Fang's Theorem 1 giving it for every k >= 15 and Evan Daniel's packing of 183 at k = 14 while
+      111 and 133 stay at their grids, so the smallest such k on record drops from 14 to 13; and
+      that T-292 is 9.63e-03 below T-174, Evan Daniel's packing improved by PingYou Ltd, and is now
+      the house at 132 in place of T-174, which stays a verified bound at V3/C3, keeps its
+      certificate as history and still houses other counts. T-174 is named as the house replaced
+      and as the record the 132 improves, not as this issue's result, and is not recorded under
+      reported. It says that each is a new arrangement as measured here: no symmetry of the box
+      pairs the 132 one to one with T-174's packing by nearest centres, the optimal assignment
+      moving 84 squares beyond a tenth (largest 0.986), with 54 tilted squares against T-174's 39,
+      and at 157 the optimal assignment against the grid moves 100 squares beyond a tenth, so the
+      record credits the author as each packing's finder and T-174's holders as the record the 132
+      improves, not as its base; that T-174's certificate has a touching pair, squares 87 and 88,
+      and the grid's squares touch, so none of either gain is padding and RV-3 does not reach
+      either; and that by the L step neither bound carries to another count, landing above the
+      bounds at 155 and 182. On the prints it says that each 12-place side in the issue is the
+      exact side rounded up at 12 places, so it bounds s(n); that the 50-place sides are the exact
+      sides' 50-place floors, each before an ellipsis, the register column is the record's own print
+      and the gains are the exact differences to three figures (F7); and that the record prints the
+      sides rounded up at 16 places.
+
+      It says what was checked: custody, both folders retained at 6617869, every file equal to its
+      Git blob at the pin and both SHA256SUMS matching, a491dad (20:49:44Z) first publishing both
+      folders and 6617869 (20:52:23Z) changing only the READMEs and checksums; both maintained
+      exact routes accepting both witnesses over every wall and every pair (8,646 at 132 and 12,246
+      at 157) and refusing each one's duplicate-square and outside-container controls, 6 jobs and
+      125,352 pair decisions, squares touching the walls exactly and every pair clearing by at
+      least 9.99e-61, the two routes sharing the centre-basis reader, Fraction arithmetic and the
+      separating-axis method, and neither sharing code with the author's verify_exact.py, which
+      was retained and not run, the binary64 and Shapely checks the issue describes not run either; the sharp controls, the side lowered to
+      the extent, the tightest pair (squares 14 and 119 at 132, 88 and 101 at 157) closed by its gap
+      of 1e-60 and every square moved to its near wall, each accepted at contact and refused 1e-30
+      past it, and an enlarged and a duplicated square refused; and the report order, both claims
+      dated by the issue with a491dad kept as each certificate's first commit, the push of a491dad
+      not read, but no other report reaching 132 or 157 in between, so the dating changes no
+      verdict. It passes on the independent review, a Claude agent at the strong tier, blind to the
+      import lane until its findings were frozen, an AI review and not a human one, which accepted
+      both certificates with findings, all notes and none blocking, and scored both S3: its
+      clean-room checker deciding both files of each folder over every square, wall and pair by two
+      methods that share only the reader, no pair touching, the least pair margin 1e-60 less
+      9.3e-251 at 132 (squares 14 and 119) and 1e-60 less 1.3e-247 at 157 (squares 88 and 101), the
+      JSON and the YAML holding the same packing; its 32 controls, 16 a count, every one as stated;
+      the squares accepted in the boxes of the printed sides and refused in those of the 12-place
+      floors (F5); the construction statements holding, 54 tilted and 78 axis-aligned squares at
+      132 and 61 and 96 at 157, the 61 tilts in four clusters; both growth steps fitting the
+      issue's description (F11), the squares left unpaired numbering 23 and 25, 15 and 17
+      axis-aligned at the cuts and 8 tilted each time, and a single step from 109 to 157 fitting far
+      worse; and the import lane's receipts equal to the review's on all 51 comparisons where both
+      are exact.
+
+      It says that Samanyu-dev's 109 at 53551d7 (best_fit_101_500.csv) spans 10.94928958094538 in
+      binary64, 4.58e-04 below the record at 109, as the issue says, and is context only: no report
+      claims it, the repository is not one the project watches and is not retained, and nothing at
+      109 changes. It says that both strong regularizers ran on the new houses, each case drawing
+      grid-slack's 0.5-degree view, and that Evan Daniel's regularizer solved each witness to a
+      certified point above the side, by about 1.2e-19 at 132 and 1.3e-19 at 157, so it found no
+      smaller packing to hold as a candidate. It passes on the two packets,
+      de-winter-s132-upper-bound-2026-11-11 and
+      de-winter-s157-upper-bound-2026-11-11, at 6617869, the licence, MIT, pinned against the copy
+      already held with the certificates at 227, 229 and 260. On the seed's licence it says that
+      Samanyu-dev's repository has no licence file, its README calling the repository's own code
+      "MIT-style", and that whether a packing grown from another's coordinates needs a notice of
+      its own is an open question with the project (think-71uq; the review named think-mdxq, which
+      closed on 4 November), which holds neither the registration, the adoption nor the issue;
+      think-71uq is recorded under the reply's beads, and think-mdxq, named only as the bead the
+      review named, is not. It passes on the credit, de Winter after Samanyu-dev, with T-174's
+      holders, Evan Daniel and PingYou Ltd, credited at 132 as the record the packing improves, not
+      as its base, the case records, their pages and their bound citations crediting him now, and
+      the AI assistance as stated. It asks the review's six questions listed above, informational
+      and holding nothing open, and says that nothing the author asked for is queued, so the issue
+      is closed with it. The issue was closed as completed at 00:41:54Z.
+
+      The reply's second paragraph thanks the author for his answers on #941
+      (issuecomment-6806337206): it says that the record now carries the margins as he gives them,
+      and that his 809 stays held, with #941 open, until the project decides whether a deletion
+      bound an issue claims gets a row of its own. It says that his answers on #942 are
+      acknowledged there.
   - number: 959
     title: 's(179) ≤ 13.880960371559: improved packing (registration request)'
     author: kenaznia-doga
