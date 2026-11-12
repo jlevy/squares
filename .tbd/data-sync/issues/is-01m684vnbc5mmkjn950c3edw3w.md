@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 259
+version: 260
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -88,7 +88,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T07:09:09.547Z
+updated_at: 2026-11-12T07:25:21.027Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -209,3 +209,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 06:53Z renewal (intake215): no new issues. Items owed are the recordings of the 954 follow-up, the 959 final and the 960 final, for the batch records PR after #966. L131 is still finishing #966.
 
 2026-11-12 ~07:15Z: #966 merged (45e2ecca2) after L131 rebased it (LATER_PASSES 11-12 = {179, 237, 269}) and applied L124's review; CI green. T-296 is the house at 269. 962 still open. L132 is importing #967 as T-297 (think-n73d; it may hit a same-day second adoption at 269, so stop-and-report if the tool can't do it). L133 is on the deploy and drafting the 962 reply and the 947 follow-up. Next: one records batch for the 954 follow-up, the 959, 960 and 962 finals, and the 947 follow-up.
+
+2026-11-12 ~07:27Z: Pages deploy of 45e2ecca2 succeeded (run 43173034832; 6296/6296). Posted the 962 final (issuecomment-6817476078) and closed 962. Posted the 947 follow-up (-6817476436; L133's draft with the #962 link anchored to the new comment); 947 stays closed. Records batch owed for the 954 follow-up, the 959, 960 and 962 finals and the 947 follow-up.
