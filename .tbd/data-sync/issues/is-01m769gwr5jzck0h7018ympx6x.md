@@ -5,7 +5,7 @@ title: "Import #959: Doğa Özden's s(179) <= 13.880960371559 (supersedes his #9
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l107
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T21:51:45.413Z
-updated_at: 2026-11-12T00:32:58.044Z
+updated_at: 2026-11-12T00:45:56.215Z
 started_at: 2026-11-11T22:20:33.166Z
 ---
 
@@ -40,3 +40,5 @@ Branch `claude/bold-ritchie-xo28us-l107`, cut from `origin/main` `b5b12c206` (#9
 **Review mapped (L108, 440acdb99, merged).** Accepted, 13 findings all notes, S3. V-ozden-959-review-check registered clean-room; E-ozden-959-review-exact-feasibility; T-294's adversarial accepted review; external_review on report and replay; review in the document map; deferral removed. F5-F13 folded in; F10's contracted side (13.88096037155566185) noted, NOT registered (RV-3, think-ruu2); F11's think-mdxq -> think-71uq. Eight questions in packet README, entry and requests notes.
 
 **Adopted** 179 from T-291 to T-294 as the pass of 12 November (LATER_PASSES "2026-11-12"; the 11 November pass had already moved 179 and a day's archive holds one prior state a count, as at 260 and 268); adopt_houses Prose and Credit, ADOPTED, packet_source (T-291 no source now); landing stamped 2026-11-12. Regularization in packing/cases/regularized_drawings/think-89i7-2026-11-12/: Evan Daniel's same-side view admitted (6,11,5,17,17 -> 0,0,0,4,4; 497/530 -> 552/552); his KKT solve 2.645e-12 below the side, at s(70)+5+1.4e-19, held at row 3 (RV-3) and NOT registered. Rigidity 64 translate (74 before); gate totals 724/2,315 and 2,481/6,389 after merging main. Custody 74 houses. Refused: a pkill of my own stopped edit-tier processes (classifier); not retried.
+
+**PR.** Draft #964 (https://github.com/jlevy/squares/pull/964), head dccc4a407 (re-pin of 8319337d2, the merge of main 75cce00b6). Records tier 55/55; 1209 tests passed; edit tier all but the browser floor (no node_modules here). Hosted CI started on push.
