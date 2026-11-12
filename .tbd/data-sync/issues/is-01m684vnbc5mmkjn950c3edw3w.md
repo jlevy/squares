@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 235
+version: 236
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T00:42:00.160Z
+updated_at: 2026-11-12T00:43:51.552Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -359,3 +359,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~00:30Z: #961 merged (75cce00b6) after senior review L116 and L104's fixes (CI green; landed 12 Nov): T-292 s(132) and T-293 s(157) are houses. 958 still open. L118 checking the deploy and drafting the 958 reply. L107 told main moved (T-294 next). think-bcfs stays open until the records PR for 958's reply merges.
 
 2026-11-12 ~00:50Z: Pages deploy of 75cce00b6 succeeded (run 43127129857; 6275/6275). Posted the 958 final reply (issuecomment-6810906839; L118's draft plus one coordinator paragraph thanking him for the #941 answers, 809 held) and closed 958. Owed records: the 958 final reply, the #942 follow-up (-6810296603) and the #941 acknowledgement; think-bcfs stays open until that records PR merges. Evidence nit: E-de-winter-s157-review-exact-feasibility says 'about 1e-250', the receipt says 1.31e-247.
+
+2026-11-12 ~00:55Z: L117's blind review of #962 accepted (1b37943b9; RV-3 not reached; contracted side not registered). L120 importing it as T-296 (think-s418). L119 also formats the three #961 Markdown files the hook missed (adopt_houses --check stays OK).
