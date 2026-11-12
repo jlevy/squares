@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 237
+version: 238
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T00:54:26.588Z
+updated_at: 2026-11-12T01:17:40.423Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -363,3 +363,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~00:55Z: L117's blind review of #962 accepted (1b37943b9; RV-3 not reached; contracted side not registered). L120 importing it as T-296 (think-s418). L119 also formats the three #961 Markdown files the hook missed (adopt_houses --check stays OK).
 
 2026-11-12 00:52Z renewal (intake209): no new issues; 942/958 recording owned by L119. Running: L107 (#959), L119 (records), L120 (#962).
+
+2026-11-12 ~01:25Z: L107 handed back #964 (T-294 s(179) adopted on 12 Nov in a second pass, L108 mapped, new devtools.measure_core, CI green at dd7bef433). Senior review L122 running. L119 handed back #965 (records: 958 final, 942 follow-up, the formatting, the evidence nit); CI red only from a worker crash in test_site_atlas_views, which passes locally. Senior review L121 running. Labels added to #964 and #965.
