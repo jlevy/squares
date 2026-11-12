@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 246
+version: 247
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T03:32:31.107Z
+updated_at: 2026-11-12T03:53:07.986Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -184,3 +184,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 02:52Z renewal (intake211): no change. L124's senior review of #966: nothing blocking; S1 (a #947 follow-up is owed after merge), S2 (#947 read_through) and N1–N5 recorded on think-s418 for the rebase pass. think-xg1x filed (shard 4 at 10.0%). Waiting on L123 (flake fix think-sj00); then merge #964, #963 (fixes), #966.
 
 2026-11-12 ~03:40Z: L123 handed back #968 (think-sj00). Root cause: the step's faulthandler_timeout C watchdog walks thread states without the GIL and segfaults when a ThreadingHTTPServer thread exits mid-walk. Fix: a Python-thread stack_watchdog plugin plus a ban scan, D-523. CI frontend still running on 3e9f52a2a. Senior review L125 running. L123 stopped after handback.
+
+2026-11-12 ~04:10Z: L125's senior review of #968: nothing blocking; the diagnosis was verified against CPython 3.14.7 source and repros; hosted CI is green including frontend. Should-fix: arm() exceptions must not skip the phase, and the unit test can deadlock on a pipe. Nits: GIL mechanism wording, thread restart, ban-scan scope, spec note. L126 is addressing them.
