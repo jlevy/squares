@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 230
+version: 231
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T00:00:58.544Z
+updated_at: 2026-11-12T00:01:11.682Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -349,3 +349,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-11 ~23:50Z: L113's senior review of #955: B1 (the #942 final reply's credit line goes outdated after L103 adds penguin069 and kmmmvs; mark it outdated, then post a follow-up after merge), plus S1–S3 and N1–N8. L114 is addressing them and drafting the #942 follow-up. Bead think-2rys filed (check_requests compares read_through by date only). L110 handed back #963 (T-295 s(237), adopted at 237, L109 mapped; CI red on T-id contiguity until #961/#959 merge). Senior review L115 running. Main's records tier fails its bead-tree check because think-f65n was closed before #955 recorded 954's close; #955's merge fixes it. Planned merge order: #955, #961 (T-292/293), #959 (T-294), #963 (T-295).
 
 2026-11-11 23:52Z: #955 merged (2fe557598) after senior review L113 and L114's fixes (CI green): replies on 941, 942 and 954, de Winter's answers, the credit adding penguin069 and kmmmvs, 942's final reply credit marked outdated. 941 still open. The #942 follow-up draft (L114) is checked; post it after the Pages deploy. #961 must now reconcile its own 954 entry with main's (take main's). Senior reviews running: L115 (#963), L116 (#961).
+
+2026-11-11 23:58Z renewal (intake208): new #962 (Özden s(269) <= 16.899469075856, 1.526e-3 below his T-290); his #947 comment points to it. Bead think-s418; blind review L117 started; import queued. L115's senior review of #963 found B1 (stamp_landed) and B2 (palette pin), plus S1/S2/N1 noted on think-my76; they will be applied in the rebase after #961/#959. think-ikku got a T-253/237 note. Main's records gate is green again since #955.
