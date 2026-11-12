@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 272
+version: 273
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -89,7 +89,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T12:56:55.652Z
+updated_at: 2026-11-12T13:55:54.737Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -234,3 +234,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 11:53Z renewal (intake220): no new issues. #967 is owned by #970 (merge after 00:00Z); the 958 follow-up recording is in the post-#970 batch. Nothing running.
 
 2026-11-12 12:54Z renewal (intake221): no change. Waiting for 00:00Z to finish #970.
+
+2026-11-12 13:53Z renewal (intake222): no change.
