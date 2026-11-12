@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 242
+version: 243
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T01:54:56.657Z
+updated_at: 2026-11-12T02:01:39.386Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -373,3 +373,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~02:00Z: #965 merged (0352d7554) after CI green on 3ff23bc64. think-bcfs closed after check_bead_tree --before-close passed. 941 open, 942 and 958 closed. L107 will now merge main into #964.
 
 2026-11-12 01:53Z renewal (intake210): no new issues; the working tree stays clean after #965. Running: L107 (#964 fixes + merge main), L120 (#962 import).
+
+2026-11-12 ~02:30Z: L107 applied #964's review (S1, S2, N1–N3), merged main with #965, and re-pinned (head 67f40d9f0). CI red only on the same Chromium worker crash as #965 (test_site_atlas_views viewport test). Bead think-sj00 opened; L123 is diagnosing and fixing the flake (no skip or weakening). #964 merges main after the fix lands, which reruns CI.
