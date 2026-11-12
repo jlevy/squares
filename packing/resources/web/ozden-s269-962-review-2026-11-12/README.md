@@ -45,6 +45,24 @@ fetched, trimmed to their text and dates.
 `run_frozen.sh SOURCE_DIR OUT_DIR` reruns the self-test, the check, the plan facts, the
 plan and the controls.
 
+Written and run after the findings were frozen, none of them a decider of the
+certificate:
+
+| Program | What it measures | Reads | Writes |
+| --- | --- | --- | --- |
+| `l117_sides.py` | the claim’s arithmetic: the side’s prints, the gains on T-290 and T-174, the Kaggle and kirilltym values, the quench sides | the certificate, `n-269.md`, the house witness, the identity receipt, `programs/issue-962.json` | `out/sides.json` |
+| `l117_pose.py` | the certificate against its decimal pose at 60 digits, every near pair’s relative gap, the tilts and their clusters | the certificate, the decimal pose | `out/pose-n269.json` |
+| `l117_lineage.py` | the issue’s lineage counts against T-290, under eight symmetries, five anchorings and two assignments | the certificate, the house witness | `out/lineage-n269.json` |
+| `l117_custody.py` | read-only Git plumbing on the clone and this repository, and the issue’s times | the clone, this repository, `programs/issue-962.json` | `out/custody.json` |
+| `l117_digests.py` | every frozen digest against the kept bytes, and the digest of every file here | this directory | `out/program-digests.json` |
+
+Two of this repository’s devtools were run read-only, writing only here:
+`devtools.contraction_margin` (`out/contraction-t290.json`, T-290 against the
+certificate, and `out/contraction-new.json`, the certificate itself) and
+`devtools.measure_identity` (`out/identity-n269.json`, against T-290 and T-174).
+`run_after.sh SOURCE_DIR OUT_DIR`, from `packing/` of a checkout where T-290 is the
+house, reruns all of them except `l117_digests.py`.
+
 ## What They Printed
 
 - `l117_selftest.py`: `PASSED 12445 cases, 0 failed`; broken method A fails 814, broken
@@ -55,6 +73,15 @@ plan and the controls.
 - `l117_controls.py`: `NOT_EVERY_CONTROL_AS_STATED`, 19 of 20; G2 refused the file as
   stated, and method B read the right wall of a square beyond its slab as apart (F2 of
   the review).
+- `devtools.contraction_margin`: T-290 first touches at
+  $1 - \lambda^* = 2.036494 \times 10^{-13}$ (119, 202), a side margin of
+  $3.238 \times 10^{-12}$; the gain of $1.5255 \times 10^{-3}$ is not within it. The
+  certificate itself first touches at $2.034066 \times 10^{-13}$ (10, 13).
+- `devtools.measure_identity`: no symmetry pairs the certificate one to one with T-290
+  or T-174 by nearest centres.
+- `l117_lineage.py`: the issue’s counts (262, 124, 1.456, 116, 44.77°) under T-290
+  reflected left to right, anchored at the lower-right corner, least summed move.
+- `l117_digests.py`: `ALL_FROZEN_DIGESTS_HOLD`.
 
 ## Frozen Files
 
