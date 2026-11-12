@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 262
+version: 263
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -88,7 +88,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T08:08:48.639Z
+updated_at: 2026-11-12T08:31:49.225Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -215,3 +215,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 07:53Z renewal (intake216): no new issues; all new items (947/962 replies, comments, closes) are covered by L134's records batch. Running: L132 (#967 import), L134 (records).
 
 2026-11-12 ~08:20Z: L135's senior review of #969: nothing blocking. S1: my brief had wrongly told L134 to put corrects on the 947/954 follow-ups; neither final reply carries an outdated statement, so corrects would pre-clear a future correction. Dropped, with the notes saying why. S2: merge times from GitHub's merged_at. Coordinator applied both plus the release-record reason (1d61afb9f) and fixed the PR body; CI running. Lesson: corrects is only for replies with outdated statements; a position-superseded follow-up (#928 pattern) names none.
+
+2026-11-12 ~08:45Z: #969 merged (17de4fb55): the 954 and 947 follow-ups and the 959, 960 and 962 finals recorded. think-89i7, think-my76 and think-s418 closed after check_bead_tree --before-close passed. Remaining in flight: L132 (#967 import, T-297).
