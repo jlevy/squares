@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 261
+version: 262
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -88,7 +88,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T07:55:00.881Z
+updated_at: 2026-11-12T08:08:48.639Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -213,3 +213,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~07:27Z: Pages deploy of 45e2ecca2 succeeded (run 43173034832; 6296/6296). Posted the 962 final (issuecomment-6817476078) and closed 962. Posted the 947 follow-up (-6817476436; L133's draft with the #962 link anchored to the new comment); 947 stays closed. Records batch owed for the 954 follow-up, the 959, 960 and 962 finals and the 947 follow-up.
 
 2026-11-12 07:53Z renewal (intake216): no new issues; all new items (947/962 replies, comments, closes) are covered by L134's records batch. Running: L132 (#967 import), L134 (records).
+
+2026-11-12 ~08:20Z: L135's senior review of #969: nothing blocking. S1: my brief had wrongly told L134 to put corrects on the 947/954 follow-ups; neither final reply carries an outdated statement, so corrects would pre-clear a future correction. Dropped, with the notes saying why. S2: merge times from GitHub's merged_at. Coordinator applied both plus the release-record reason (1d61afb9f) and fixed the PR body; CI running. Lesson: corrects is only for replies with outdated statements; a position-superseded follow-up (#928 pattern) names none.
