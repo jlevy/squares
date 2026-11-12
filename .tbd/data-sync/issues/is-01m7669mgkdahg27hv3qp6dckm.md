@@ -3,9 +3,9 @@ type: is
 id: is-01m7669mgkdahg27hv3qp6dckm
 title: Import de Winter's s(132) <= 11.976048383604 and s(157) <= 12.993302611344 (JoostdeWinter/square-packing a491dad/6617869, no issue; report by first commit)
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l104
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T20:55:21.870Z
-updated_at: 2026-11-12T00:24:33.114Z
+updated_at: 2026-11-12T01:41:03.026Z
 started_at: 2026-11-11T20:55:27.152Z
+closed_at: 2026-11-12T01:41:03.026Z
+close_reason: "Done: #961 merged (75cce00b6), T-292/T-293 houses at 132/157; 958 final reply posted and closed, recorded by #965 (0352d7554); check_bead_tree --before-close ok."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
