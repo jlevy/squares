@@ -365,6 +365,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s269-upper-bound-1688973007",
+        "Doğa Özden",
+        (
+            "A third packing at 269, from a column-band designer, 9.74e-3 below his second"
+            " (T-297)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

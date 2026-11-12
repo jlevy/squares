@@ -687,8 +687,11 @@ def _sources() -> dict[str, Source]:
         # Lane L120 of 12 November 2026 (think-s418) moved 269 from T-290 to Doğa Özden's
         # issue 962 (T-296), a new arrangement relative to his own T-290's packing, found by a
         # band-design search from tilted squares of the registry's 207 and 70 and his own 179.
-        # 269 was T-290's only count, so T-290 is no source here now.
-        packet_source("T-296", "ozden-s269-issue962-2026-11-11"),
+        # 269 was T-290's only count, so T-290 is no source here now. Lane L132 (think-n73d)
+        # moved 269 on to the same author's issue 967 (T-297) in the pass of 13 November 2026,
+        # a new arrangement relative to T-296's packing, from his lab's column-band designer.
+        # 269 was T-296's only count, so T-296 is no source here now.
+        packet_source("T-297", "ozden-s269-upper-bound-2026-11-12"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -772,7 +775,9 @@ def _sources() -> dict[str, Source]:
 #: arrangement relative to T-190's packing, Özden its finder; T-190 keeps no house here.
 #: Lane L120 (think-s418) adopted his issue 962 (T-296) at 269 from his own T-290 in the
 #: same pass, a new arrangement relative to T-290's packing, Özden its finder; T-290 keeps
-#: no house here.
+#: no house here. Lane L132 (think-n73d) adopted his issue 967 (T-297) at 269 in place of
+#: T-296 in the pass of 13 November 2026, a new arrangement relative to T-296's packing,
+#: Özden its finder still; T-296 keeps no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -831,7 +836,7 @@ ADOPTED: dict[int, str] = {
     264: "T-186",
     267: "T-134",
     268: "T-289",
-    269: "T-296",
+    269: "T-297",
     270: "T-283",
     271: "T-219",
     272: "T-174",
@@ -962,7 +967,13 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: think-f65n), and a day's archive holds one prior state a count, as at 260 and 268.
 #: The same day's lane L110 (think-3guf, think-my76) adopted T-295 at 237, Doğa Özden's
 #: issue 960, from T-190; its import was made on 11 November, but it lands on 12 November,
-#: so it joins that day's pass, whose archive takes a row for 237.
+#: so it joins that day's pass, whose archive takes a row for 237. The same day's lane L120
+#: (think-3guf, think-s418) adopted T-296 at 269, Doğa Özden's issue 962, from his own T-290,
+#: which the pass of 11 November had adopted, so that day's archive takes a row for 269 too.
+#: The pass of 13 November 2026 (think-3guf, think-n73d) adopted T-297 at 269, Doğa Özden's
+#: issue 967, from his own T-296: the pass of 12 November had already moved 269 (lane L120),
+#: and a day's archive holds one prior state a count, as at 179, 260 and 268. It is dated by
+#: the day its pull request can merge at the earliest; lane L132 made it on 12 November.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1049,6 +1060,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-09": frozenset({172, 199, 232, 268, 270, 299, 303, 307}),
     "2026-11-11": frozenset({132, 156, 157, 179, 180, 268, 269}),
     "2026-11-12": frozenset({179, 237, 269}),
+    "2026-11-13": frozenset({269}),
 }
 
 

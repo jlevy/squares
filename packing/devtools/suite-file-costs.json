@@ -782,6 +782,7 @@
     "packing/tests/test_upper_bound_reports_fang_direct.py": 3.444,
     "packing/tests/test_upper_bound_reports_l107_1111.py": 7.474,
     "packing/tests/test_upper_bound_reports_l120_1112.py": 6.52,
+    "packing/tests/test_upper_bound_reports_l132_1112.py": 7.837,
     "packing/tests/test_upper_bound_reports_l65_1109.py": 3.397,
     "packing/tests/test_upper_bound_reports_n204.py": 0.429,
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 7.404,
@@ -978,6 +979,20 @@
       "reports": [
         {
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-l120-1112-2026-11-12.json",
+          "provenance": {},
+          "tests": 8
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_l132_1112.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-l132-1112-2026-11-12.json",
           "provenance": {},
           "tests": 8
         }

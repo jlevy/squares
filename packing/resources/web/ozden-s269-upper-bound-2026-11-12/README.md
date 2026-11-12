@@ -180,11 +180,10 @@ least 2.036e-13. `check --replay` decided the three jobs again.
 
 `devtools.upper_bound_reports sharp-controls` took the certificate to exact contact and
 10⁻³⁰ past it ([receipts/sharp-controls.json](receipts/sharp-controls.json)), with the
-expected verdicts stated before it ran (the plan’s SHA-256 `98f0635c…c4b294`, 07:18:10Z
-on 12 November). It lowered the side by the least far-wall clearance, closed the
-least-gap pair (squares 40 and 38) by its gap, and moved every square toward the nearer
-near wall by its least clearance: both routes accepted each at contact with margin 0 and
-refused each past it.
+expected verdicts stated before it ran, at 07:18:10Z on 12 November.
+It lowered the side by the least far-wall clearance, closed the least-gap pair (squares
+40 and 38) by its gap, and moved every square toward the nearer near wall by its least
+clearance: both routes accepted each at contact with margin 0 and refused each past it.
 It enlarged one square to its pair and one to its wall: both routes refused the first,
 square 38, at contact for its shape alone and accepted the second, square 48, which
 already touches its wall and so grew by 0, at contact; both refused each 10⁻³⁰ past it
@@ -227,9 +226,113 @@ packing decided on both maintained routes.
 and monotonicity consequences as on `main`: this bound carries to no other count
 ([measure/l-step-scan.json](measure/l-step-scan.json)).
 
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 12 November 2026
+([review-2026-11-12-ozden-967.md](../../../../docs/project/reviews/review-2026-11-12-ozden-967.md)),
+written in a separate lane (L127) that finished before this one began and so was blind
+to it throughout, accepts the certificate with 15 findings, all notes, none blocking,
+and scores it S3. Its clean-room checker decides every square, wall and pair by
+separating axes in Python integers and by exact convex clipping in GMP rationals, with
+20 controls stated before they ran, all 20 as stated, and accepts the same squares in
+the box of the claim’s own side, 16.889730073596, and refuses them in the box of its
+12-place floor (F3). Its programs and receipts are kept in the review-only directory
+beside this packet,
+[ozden-s269-967-review-2026-11-12](../ozden-s269-967-review-2026-11-12/README.md).
+Read against this packet’s receipts once both were done, its least pair margin (2.03645
+× 10⁻¹³, squares 38 and 40) and its three wall contacts are the replay’s exactly, its
+contraction receipts for #962’s certificate (T-296) and for this one equal
+[measure/contraction-n269.json](measure/contraction-n269.json) and
+[measure/contraction-n269-own.json](measure/contraction-n269-own.json) in margin,
+factor, binding pair and contracted side, and its identity measurement against T-290 and
+T-296 equals [measure/identity.json](measure/identity.json) under nearest centres, the
+optimal assignment and box-centred alignment, as do the tilt counts.
+This lane’s brief had relayed the review’s T-290 and T-296 margins, the certificate’s
+contracted side and the identity verdict before its runs, so on those the agreement is
+two runs of the same tools, not a blind comparison.
+
+The review finds the issue’s arithmetic right (F4): the claim is the side’s 12-place
+ceiling, the gains on T-290 and #962 and the distance below the Kaggle entry are as
+printed, and the issue’s 16.889730073595636 is the side’s 15-place floor.
+The pair margins are the pose’s own, 2.04 to 2.79 × 10⁻¹³ of the centres’ separation,
+median 2.13 × 10⁻¹³, about twice “about 1e-13 relative” (F5). The issue’s lineage counts
+hold, all five, with T-290 reflected top to bottom in the new box, set against its
+upper-left corner and paired by least summed move, a convention the issue does not name
+(F6). The claim paragraph’s “built from Nate Chaoweeraprasit’s packing” misdescribes
+T-290, as at #962 (F7). The certificate’s own squares, contracted by 1 − 2.036 × 10⁻¹³,
+are accepted at side 16.8897300735924008, a side only RV-3 could register, and it is not
+registered (F8). The band lies at 41.60° to 42.06° and the cluster, squares 42 to 45, at
+−44.33° to −44.38°, not “about 42.1°” and “about −44.9°” (F12). The “9e-14 higher” side
+of the local re-find is the decimal pose’s, 16.889730073595842, and the certificate’s
+exact side is 1.13 × 10⁻¹³ below the cloud job’s (F13). The author’s comment on #947
+gives this side as “9.74e-3 below this issue’s side”, where #947’s side is T-290’s and
+the gap is 1.126 × 10⁻²; 9.74 × 10⁻³ is the gap on #962 (F14). The issue dates its
+search for competing claims “2026-11-11 19:10 PST”, 03:10 UTC, ten minutes after it was
+opened, against `0352d755`, which was `main`’s head throughout (F15). The witness’s
+`softschema.schema` names `witness.schema.yaml`, which resolves to no file in the
+author’s repository, and its `certificate.replay` names the file but not where to run
+it, as at #947, #959 and #962; the adopted witness carries this repository’s own, and a
+`sqpack` replay is the author’s first check run again (F11). The side is not s(m) + k
+for any registry value below 269 and integer k up to 16 within 10⁻⁹; the nearest is
+s(19) + 12, 4.1 × 10⁻³ away.
+
+The issue credits the registry’s 207 and 70 and the lab’s 179 as “the band’s source
+packing” while saying the designer used no donor packing (F10). The registry’s 207 and
+70 witnesses come from PingYou Ltd’s PR 574 algebraic supplement, a release with no
+licence file, kept here in the derived-only form.
+If the band draws on them, whether a design taken from them needs a notice of its own is
+the owner’s open decision on `think-71uq` (the review named `think-mdxq`, which closed
+on 4 November). It is noted here, not decided.
+
+Its eight questions for the author, informational and holding nothing open:
+
+1. The margins and the pose’s side both point to a repair scaling of about 2 × 10⁻¹³, as
+   at #947, #959 and #962. Was it that, rather than 10⁻¹³ (F5)?
+2. The lineage counts reproduce with T-290 reflected in the new box’s horizontal
+   midline, under the assignment of least summed move, as #962’s did with a reflection
+   in its vertical midline.
+   Is that the tool’s convention, and would the issue name it (F6)?
+3. Would the author correct the claim paragraph’s and the README’s “built from Nate
+   Chaoweeraprasit’s packing (itsnaka) improved by Evan Daniel and PingYou Ltd”, since
+   the record and the issue’s own lineage paragraph have T-290 from a strip cut of Evan
+   Daniel’s 304, below that packing (F7)?
+4. The issue credits the 207, 70 and 179 packings as the band’s source while saying no
+   donor packing or registry seed was used.
+   What, if anything, does the designer take from them, and from which files (F10)?
+5. The search for competing claims is dated 19:10 PST, after the issue was opened at
+   19:00 PST. Which time was meant (F15)?
+6. The comment on #947 gives the gap on #947’s side as 9.74 × 10⁻³; it is 1.126 × 10⁻².
+   Would the author correct it (F14)?
+7. Will the column-band designer be published?
+   Would the lab promote with a contraction (`center_dilation` below 1), knowing that
+   whether the record registers a side inside the repair dilation is its owner’s
+   question (RV-3, F8)?
+8. Would the author point `softschema.schema` at a file that resolves in his repository,
+   and say in the replay line where to run it (F11)?
+
+The case adopted the certificate as its house in the pass of 13 November 2026 under the
+house rule, as T-297, in place of T-296, which keeps its certificate as history, with
+Doğa Özden the packing’s finder; the registry’s 207 (PingYou Ltd), Ryan Xu’s n = 70
+packing as Evan Daniel and PingYou Ltd improved it and his own n = 179 packing of #954
+named as the band’s source packing, as the issue asks; Evan Daniel credited for the
+optimizer; and T-296, his own band packing of #962, as the record it improves (the
+review’s F9). The pass is dated by the day its pull request can merge at the earliest,
+since the pass of 12 November had already moved 269 to T-296 and a day’s archive holds
+one prior state a count.
+Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-n73d-2026-11-12/README.md)), and
+the selection, measured against this witness’s drawing, draws grid-slack’s 0.5-degree
+view: light, uneven and near-axis squares, angle classes and hues 18, 54, 6, 19 and 19
+against 0, 0, 0, 13 and 13, and full shared sides 729 and 781 against 842 and 864. Evan
+Daniel’s driver refused its same-side view; his certified KKT solve lies 3.36 × 10⁻¹²
+below the side, 1.04 of the certificate’s own contraction margin (3.236 × 10⁻¹²), held
+at row 3 as a register candidate and not admitted, as at 156, 172, 179, 180, 199, 268,
+270, and 269 for T-290 and T-296 (RV-3). The rigidity block, derived again on the new
+witness, stays not rigid: 112 of its 269 squares translate, against 217 of T-296’s.
+
 ## What Is Not Established
 
-- **Human oversight.** No human oversight record.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
