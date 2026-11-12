@@ -5,8 +5,8 @@ title: "Import #960: Doğa Özden's s(237) <= 15.893805580573 (kenaznia-doga/s23
 kind: task
 status: in_progress
 priority: 1
-version: 7
-delegate: bold-ritchie-l129
+version: 8
+delegate: bold-ritchie-l130
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T21:55:26.589Z
-updated_at: 2026-11-12T05:52:58.956Z
+updated_at: 2026-11-12T06:06:56.820Z
 started_at: 2026-11-11T22:28:48.841Z
 ---
 
