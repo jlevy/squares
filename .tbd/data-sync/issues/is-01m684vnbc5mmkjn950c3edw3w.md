@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 265
+version: 266
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -89,7 +89,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T08:55:45.567Z
+updated_at: 2026-11-12T09:25:43.258Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -220,3 +220,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~08:45Z: #969 merged (17de4fb55): the 954 and 947 follow-ups and the 959, 960 and 962 finals recorded. think-89i7, think-my76 and think-s418 closed after check_bead_tree --before-close passed. Remaining in flight: L132 (#967 import, T-297).
 
 2026-11-12 08:53Z renewal (intake217): de Winter answered #958's six questions (comment 6818738203) and pushed 57de046 (method_n132_n157 published; witness YAMLs made valid). Bead think-c3p2 opened; L136 retaining the commit, recording the answers, checking 'unchanged' and the cheap reproduction, and drafting a short follow-up. #967 stays with L132.
+
+2026-11-12 ~09:40Z: L132 handed back #970 (T-297 s(269) adopted in a 2026-11-13 pass because 269 was already adopted on 11-12; landings stamped 11-12; results.html ceiling raised from 1.6 to 1.7 MB; CI green). Plan: senior review L137 now; merge only after 00:00Z on 13 Nov, then stamp_landed and re-pin, so pass and landing agree. Owed after merge: the 967 reply and the 962 follow-up.

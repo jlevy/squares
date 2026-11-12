@@ -5,7 +5,7 @@ title: "Licence: do seeded packings need notices for their upstream starts? (uno
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - licence
   - decision
@@ -13,7 +13,7 @@ labels:
 dependencies: []
 parent_id: is-01m4h60ewgy2as6epra7ngm11v
 created_at: 2026-11-11T21:51:18.323Z
-updated_at: 2026-11-11T21:51:18.323Z
+updated_at: 2026-11-12T09:07:27.447Z
 ---
 The stage 4 reviews of 9 November (#927–#931, #935/#936, #938) and 11 November (#943–#947; #954 F10) route "whether the upstream starts need notices of their own" to think-mdxq. That bead settled only the licence of Doğa Özden's own repositories (CC BY 4.0 data, MIT code) and closed on 4 November, so the question has no owner.
 
@@ -27,3 +27,7 @@ Owner decision:
 This holds no import, rung, adoption or reply.
 
 Resolution: record the decision in the affected packets' READMEs and declarations, and repoint every note that cites think-mdxq for an upstream start (results.yaml, result-requests.yaml, bibliography.yaml, intake-watch.yaml, the Özden packet READMEs).
+
+## Notes
+
+2026-11-12, lane L136 (think-c3p2), #958 F12: Joost de Winter answered the review's question 6 (jlevy/squares#958, issuecomment-6818738203, 08:31:55Z). He has not contacted Samanyu-dev; he used best_fit_101_500.csv as published at Samanyu-dev/squares_in_squares 53551d7 and credited it; and he cannot say what the README's 'MIT-style' covers beyond the code. So no permission or notice from Samanyu-dev is on record for the 109 seed of T-292 (132) and T-293 (157), and the method he published at JoostdeWinter/square-packing 57de046 (retained in packing/resources/web/de-winter-method-132-157-2026-11-12/) starts from that same file, which the record does not retain. This adds evidence to questions 1 and 2 and changes no import, rung, adoption or reply.
