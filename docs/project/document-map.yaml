@@ -256,6 +256,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-1goz-2026-11-09/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-xq4o-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-f65n-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-s418-2026-11-12/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-ruu2-2026-10-31/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/README.md, role: source-index, authority: record, lifecycle: retained}
@@ -322,6 +323,7 @@ documents:
   - {path: docs/project/reviews/review-2026-11-11-de-winter-939-946.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-ozden-954.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-12-ozden-962.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-dewinter-132-157.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md, role: review, authority: record, lifecycle: retained}

@@ -663,11 +663,11 @@ def _sources() -> dict[str, Source]:
         # issues 943, 944, 945 and 947 (T-287 to T-290), each a new arrangement relative to the
         # house it replaces, found by transplant search from another count's registry packing.
         # 268 was T-276's only count, so T-276 is no source here now; T-186 and T-174 still
-        # house other counts.
+        # house other counts. Lane L120 of 12 November moved 269 on from T-290, its only count,
+        # so T-290 is no source here now.
         packet_source("T-287", "ozden-s156-upper-bound-2026-11-10"),
         packet_source("T-288", "ozden-s180-upper-bound-2026-11-10"),
         packet_source("T-289", "ozden-s268-upper-bound-2026-11-10"),
-        packet_source("T-290", "ozden-s269-upper-bound-2026-11-11"),
         # Lane L100 of the same day (think-f65n) moved 179 from T-174 to Doğa Özden's issue
         # 954 (T-291), a new arrangement relative to T-174's packing, found by a band-design
         # search from the tilted squares of the registry's 70; T-174 still houses other counts.
@@ -677,6 +677,11 @@ def _sources() -> dict[str, Source]:
         # 109 by cut-and-fill steps, each a new arrangement; T-174 still houses other counts.
         packet_source("T-292", "de-winter-s132-upper-bound-2026-11-11"),
         packet_source("T-293", "de-winter-s157-upper-bound-2026-11-11"),
+        # Lane L120 of 12 November 2026 (think-s418) moved 269 from T-290 to Doğa Özden's
+        # issue 962 (T-296), a new arrangement relative to his own T-290's packing, found by a
+        # band-design search from tilted squares of the registry's 207 and 70 and his own 179.
+        # 269 was T-290's only count, so T-290 is no source here now.
+        packet_source("T-296", "ozden-s269-issue962-2026-11-11"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -752,7 +757,9 @@ def _sources() -> dict[str, Source]:
 #: (T-291) at 179 from T-174, a new arrangement relative to T-174's packing, Özden its
 #: finder. Lane L104 of the same day (think-bcfs) adopted Joost de Winter's issue 958 at 132
 #: from T-174 and at 157 from the grid (T-292 and T-293), pinwheels grown from Samanyu-dev's
-#: 109, de Winter their finder.
+#: 109, de Winter their finder. Lane L120 of 12 November (think-s418) adopted Özden's issue
+#: 962 (T-296) at 269 from his own T-290, a new arrangement relative to T-290's packing,
+#: Özden its finder; T-290 keeps no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -811,7 +818,7 @@ ADOPTED: dict[int, str] = {
     264: "T-186",
     267: "T-134",
     268: "T-289",
-    269: "T-290",
+    269: "T-296",
     270: "T-283",
     271: "T-219",
     272: "T-174",
@@ -1022,6 +1029,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-06": frozenset({260}),
     "2026-11-09": frozenset({172, 199, 232, 268, 270, 299, 303, 307}),
     "2026-11-11": frozenset({132, 156, 157, 179, 180, 268, 269}),
+    "2026-11-12": frozenset({269}),
 }
 
 

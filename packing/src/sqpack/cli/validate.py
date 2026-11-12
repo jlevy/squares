@@ -245,11 +245,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: Winter's certificates of issue 958 (T-292, T-293): separating 2 and 0 squares against
 #: T-174's 4 and the grid's 0, translating 18 and 4 against 12 and 13, so n=1..200 has 734
 #: separating squares and 2,325 translating ones, and n=1..324 2,491 and 6,399, in the
-#: same records.
+#: same records. Lane L120 of 12 November (think-s418) moved 269 to Doğa Özden's
+#: certificate of issue 962 (T-296), a new arrangement: separating and translating squares
+#: 182 and 217 against T-290's 191 and 195, so n=1..324 has 2,482 separating squares and
+#: 6,421 translating ones, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
     "n=1..200": (67, 734, 182, 2325),
-    "n=1..324": (125, 2491, 302, 6399),
+    "n=1..324": (125, 2482, 302, 6421),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

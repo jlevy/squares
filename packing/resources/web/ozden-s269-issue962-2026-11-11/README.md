@@ -154,8 +154,12 @@ A measurement for credit; it decides nothing.
   the other.
 - The issue’s own counts (262 of 269 beyond 10⁻³, 124 beyond 0.05, largest 1.456) are
   not those of the optimal assignment or of box-centred alignment, which give 230 and
-  249 beyond 10⁻³ and a largest move of 1.12355 and 1.12358; the issue does not name its
-  convention.
+  249 beyond 10⁻³ and a largest move of 1.12355 and 1.12358. All five of the issue’s
+  counts, 116 re-tilted beyond a degree and the largest turn of 44.77 degrees among
+  them, hold, as the review measured, with T-290 reflected left to right, set against
+  the lower-right corner of the new box and paired by least summed move, one of the 80
+  placements and assignments it tried; the issue names neither the symmetry nor the
+  anchoring (F6).
 
 ## Exact Replay
 
@@ -214,9 +218,95 @@ packing decided on both maintained routes.
 and monotonicity consequences as on `main`: this bound carries to no other count
 ([measure/l-step-scan.json](measure/l-step-scan.json)).
 
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 12 November 2026
+([review-2026-11-12-ozden-962.md](../../../../docs/project/reviews/review-2026-11-12-ozden-962.md)),
+written in a separate lane (L117) blind to this one throughout, accepts the certificate
+with 12 findings, all notes, none blocking, and scores it S3. Its clean-room checker
+decides every square, wall and pair by separating axes in Python integers and by the
+convex hull of vertices and edge crossings in GMP rationals, with 20 controls stated
+before they ran, and accepts the same squares in the box of the claim’s own side,
+16.899469075856, and refuses them in the box of its 12-place floor (F3). Of the 20
+controls, 19 came out as stated; the twentieth, G2, refused the file as stated, but its
+method B read the right wall of a square moved 13.48 beyond it as apart, a limit of the
+review’s own checker that bears on no square of the certificate (F2). Its programs and
+receipts are kept in the review-only directory beside this packet,
+[ozden-s269-962-review-2026-11-12](../ozden-s269-962-review-2026-11-12/README.md).
+Read against this packet’s receipts once both were done, its least pair margin is the
+replay’s exactly, its contraction receipts for T-290 and for the certificate itself
+equal [measure/contraction-n269.json](measure/contraction-n269.json) and
+[measure/contraction-n269-own.json](measure/contraction-n269-own.json) in margin,
+factor, binding pair and contracted side, and its identity measurement against T-290 and
+T-174 equals [measure/identity.json](measure/identity.json) under nearest centres, the
+optimal assignment and box-centred alignment, as do the tilt counts.
+
+The review finds the issue’s arithmetic right (F4): the claim is the side’s 12-place
+ceiling, the gain and the distance above the Kaggle entry are as printed, and “our exact
+side 16.8994690758550465” is the side’s 16-place floor.
+The pair margins are the pose’s own, 2.03 to 2.09 × 10⁻¹³ of the centres’ separation,
+median 2.06 × 10⁻¹³, about twice “about 1e-13 relative” (F5). The issue’s lineage counts
+hold with T-290 reflected left to right, set against the lower-right corner and paired
+by least summed move (F6, above).
+The claim paragraph’s “built from Nate Chaoweeraprasit’s packing” misdescribes T-290,
+which the record and the issue’s own lineage paragraph give as a strip cut of Evan
+Daniel’s 304 (F7). The certificate’s own squares, contracted by 1 − 2.034 × 10⁻¹³, are
+accepted at side 16.89946907585181, a side only RV-3 could register, and it is not
+registered (F8). The contact statement holds with eleven contacts, and square 140 clears
+the right wall by 9.7 × 10⁻⁸, beyond “up to about 1e-12” (F12). The witness’s
+`softschema.schema` names `witness.schema.yaml`, which resolves to no file in the
+author’s repository, and its `certificate.replay` names the file but not where to run
+it, as at #947 and #959; the adopted witness carries this repository’s own, and a
+`sqpack` replay is the author’s first check run again (F11). The issue’s search for
+competing claims is dated the minute it was opened, and the dating is consistent.
+
+The issue names the registry’s 207 and 70 among the band’s sources; both witnesses come
+from PingYou Ltd’s PR 574 algebraic supplement, a release with no licence file, kept
+here in the derived-only form.
+Whether a seed taken from them needs a notice of its own is the owner’s open decision on
+`think-71uq` (F10; the review named `think-mdxq`, which closed on 4 November).
+It is noted here, not decided.
+
+Its six questions for the author, informational and holding nothing open:
+
+1. The margins and the pose’s side both point to a repair scaling of about 2 × 10⁻¹³, as
+   at #947 and #959. Was it that, rather than 10⁻¹³ (F5)?
+2. The lineage counts reproduce with T-290 reflected left to right and set against the
+   lower-right corner of the new box, under the assignment of least summed move.
+   Is that the tool’s convention, and would the issue name it (F6)?
+3. Would the author correct the claim paragraph’s “built from Nate Chaoweeraprasit’s
+   packing (itsnaka) improved by Evan Daniel and PingYou Ltd”, since the record and the
+   issue’s own lineage paragraph have T-290 from a strip cut of Evan Daniel’s 304 (F7)?
+4. The squares, contracted uniformly by 1 − 2.034 × 10⁻¹³, are accepted exactly at side
+   16.89946907585181. Would the lab promote with a contraction (`center_dilation` below
+   1)? Whether the record registers a side inside the repair dilation is its owner’s
+   question (RV-3, F8).
+5. Will the band-design search and its seed band be published, and did `207b` and `70a`
+   come from the registry’s witnesses, PingYou Ltd’s PR 574 release, or other published
+   coordinates (F10)?
+6. Would the author point `softschema.schema` at a file that resolves in his repository,
+   and say in the replay line where to run it (F11)?
+
+The case adopted the certificate as its house on 12 November 2026 under the house rule,
+as T-296, in place of T-290, which keeps its certificate as history, with Doğa Özden the
+packing’s finder; the band’s source packings credited as the search’s seed, PingYou
+Ltd’s n = 207 packing, Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved
+it, and his own n = 179 packing (T-291); Evan Daniel credited for the optimizer; and
+T-290, his own packing from a strip cut of Evan Daniel’s 304, as the record it improves
+(the review’s F9). Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-s418-2026-11-12/README.md)), and
+the selection, measured against this witness’s drawing, draws grid-slack’s 1-degree
+view: light, uneven and near-axis squares, angle classes and hues 17, 52, 29, 54 and 19
+against 1, 3, 0, 24 and 19, and full shared sides 651 and 826 against 836 and 854. Evan
+Daniel’s driver refused its same-side view; his certified KKT solve lies 3.39 × 10⁻¹²
+below the side, 1.05 of the certificate’s own contraction margin (3.234 × 10⁻¹²), held
+at row 3 as a register candidate and not admitted, as at 156, 172, 179, 180, 199, 268,
+269 for T-290 and 270 (RV-3). The rigidity block, derived again on the new witness,
+stays not rigid: 217 of its 269 squares translate, against 195 of T-290’s.
+
 ## What Is Not Established
 
-- **Human oversight.** No human oversight record.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
@@ -226,16 +316,19 @@ and monotonicity consequences as on `main`: this bound carries to no other count
 The packing is Doğa Özden’s, found by his lab’s band-design search from tilted squares
 of three packings: the registry’s n = 207 packing, PingYou Ltd’s; the registry’s n = 70
 packing, Ryan Xu’s, as Evan Daniel and PingYou Ltd improved it; and his own n = 179
-packing of #954. The issue asks that the improvement be credited to Özden, the band’s
-source packings and the current record to their holders as the registry lists them, and
-the local optimizer to Evan Daniel.
-The record at 269 is T-290, Doğa Özden’s own packing from a strip cut of Evan Daniel’s n
-= 304 packing. The issue says the search and its code were written and run by AI agents
-throughout and that the checks were run by code that did not produce the packing; it
-says the issue and repository were prepared and posted by his AI agent, and that Özden
-directed the work. The source starts from this repository’s registry packings and makes
-its exact coordinates with this repository’s promotion tool, so its lineage builds on
-this project. The bibliography key is **[Özden s269 issue 962 2026-11-11]**.
+packing of #954 (T-291). The case record credits Özden as the finder, the three
+packings’ holders as the band’s sources, Evan Daniel for the local optimizer and T-290,
+his own, as the record it improves (the review’s F9). The issue asks that the
+improvement be credited to Özden, the band’s source packings and the current record to
+their holders as the registry lists them, and the local optimizer to Evan Daniel.
+The record at 269 before this adoption was T-290, Doğa Özden’s own packing from a strip
+cut of Evan Daniel’s n = 304 packing.
+The issue says the search and its code were written and run by AI agents throughout and
+that the checks were run by code that did not produce the packing; it says the issue and
+repository were prepared and posted by his AI agent, and that Özden directed the work.
+The source starts from this repository’s registry packings and makes its exact
+coordinates with this repository’s promotion tool, so its lineage builds on this
+project. The bibliography key is **[Özden s269 issue 962 2026-11-11]**.
 
 The witness, the JSON, the decimal pose, the checker outputs, the README and the diff
 image are published under CC BY 4.0, and `verifier/sqcheck.py` under the MIT licence,

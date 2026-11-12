@@ -8181,3 +8181,64 @@ verifiers:
       l105_sides.py, l105_construct.py, l105_lineage.py, l105_identity.py, l105_custody.py,
       l105_compare_lane.py and l105_digests.py, kept beside them, decide no certificate and are not
       registered.
+  - id: V-ozden-962-review-check
+    program: l117_check.py with l117_reader.py, l117_sat.py, l117_hull.py and l117_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 12 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 962 (269), with a strict reader of its own (l117_reader.py: every
+      scalar a canonical integer or p/q in lowest terms, ids 1 to n in order, the JSON twin held
+      to the same tree with floats, constants and duplicate keys refused, anchors, aliases, tags,
+      keys outside the schema and any unexpected layout refused): every format hypothesis, every
+      square a unit square from its listed corners, every wall and every pair twice with no
+      distance filter, by separating axes over the four edge normals in Python integers over
+      per-square denominators (l117_sat.py, method A) and by the convex hull of each pair's
+      contained vertices and edge crossings in gmpy2.mpq, with walls by centre and slabs
+      (l117_hull.py, method B), each pair classed overlapping, touching or apart by both.
+      l117_geom.py holds the exact constructions the self-test and controls use, the closed-form
+      margin from centres and half-widths and the centre-line closing among them;
+      l117_controls.py decides 20 controls stated in a plan hashed before it existed;
+      l117_selftest.py holds both methods and the reader to 12,445 cases.
+    source:
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_check.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_reader.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_sat.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_hull.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_geom.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_selftest.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_controls.py
+    independence_record: packing/resources/web/ozden-s269-962-review-2026-11-12/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 962 (L117, under think-s418), strong
+            tier, prompted separately from the import lane (L120, think-s418)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-12T00:12:46Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source and reuse no code of any earlier review, lane L108's review
+          of #959, the model for its method, among them.
+    note: >-
+      Written and run on 12 November 2026 for
+      docs/project/reviews/review-2026-11-12-ozden-962.md (SHA-256
+      7ea59b80c685e1ec98a3a2fa8a122356002e3ea11046f082584e6e6ecd8b0ca9 for l117_check.py, as
+      frozen at 2026-11-12T00:12:46Z), and kept with its receipts in the review-only directory
+      ozden-s269-962-review-2026-11-12 beside the import lane's packet. l117_plan_facts.py,
+      l117_make_plan.py, l117_sides.py, l117_pose.py, l117_lineage.py, l117_custody.py and
+      l117_digests.py, kept beside them, decide no certificate and are not registered.

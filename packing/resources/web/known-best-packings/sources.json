@@ -1851,19 +1851,19 @@
       "url": "https://github.com/kenaznia-doga/s268-upper-bound-16872029849/blob/b027aba9280d453ea075bd9b80694a5345257f4e/n-268-candidate.yaml"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s269-upper-bound/blob/6f93b07eac91e5f7b299c9a6420041d9a695a478/n-269-candidate.yaml at 6f93b07eac91e5f7b299c9a6420041d9a695a478",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s269-upper-bound-16899469076/blob/fdab2c0073ea91701d0d8429663faa6e5c7f831f/n-269-candidate.yaml at fdab2c0073ea91701d0d8429663faa6e5c7f831f",
       "kind": "packet-derived-facts",
       "license_status": "CC-BY-4.0",
       "listed_n": [
         269
       ],
       "n": 269,
-      "path": "resources/web/ozden-s269-upper-bound-2026-11-11/source/n-269-candidate.yaml",
+      "path": "resources/web/ozden-s269-issue962-2026-11-11/source/n-269-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-11",
+      "retrieved": "2026-11-12",
       "source_n": 269,
-      "url": "https://github.com/kenaznia-doga/s269-upper-bound/blob/6f93b07eac91e5f7b299c9a6420041d9a695a478/n-269-candidate.yaml"
+      "url": "https://github.com/kenaznia-doga/s269-upper-bound-16899469076/blob/fdab2c0073ea91701d0d8429663faa6e5c7f831f/n-269-candidate.yaml"
     },
     {
       "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s270-upper-bound/blob/78ab8cec9085e4e1d6489127113f0af2550e749b/n-270-candidate.yaml at 78ab8cec9085e4e1d6489127113f0af2550e749b",

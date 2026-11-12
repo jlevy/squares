@@ -2802,7 +2802,9 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: pass (think-1goz) at 199 (T-284, T-282's packing with one L step), held alike. The
 #: adoption of 11 November 2026 (think-xq4o) credits him as the finder at 156, 180, 268 and
 #: 269 (T-287 to T-290), held the same way; 268 was already held for T-276. The same
-#: day's lane L100 (think-f65n) credits him as the finder at 179 (T-291), held alike.
+#: day's lane L100 (think-f65n) credits him as the finder at 179 (T-291), held alike. Lane
+#: L120 of 12 November (think-s418) credits him as the finder at 269 again (T-296), already
+#: held for T-290.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = dict.fromkeys(
     (156, 172, 179, 180, 199, 232, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
 )
