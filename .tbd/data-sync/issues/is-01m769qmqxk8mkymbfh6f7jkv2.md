@@ -5,7 +5,7 @@ title: "Import #960: Doğa Özden's s(237) <= 15.893805580573 (kenaznia-doga/s23
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l129
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T21:55:26.589Z
-updated_at: 2026-11-12T05:11:10.720Z
+updated_at: 2026-11-12T05:52:58.956Z
 started_at: 2026-11-11T22:28:48.841Z
 ---
 
@@ -44,3 +44,14 @@ S1: adopt_houses.py ~2866-2868 credit phrase "Doğa Özden’s packing from two 
 S2: append to T-253 next_rung (results.yaml ~36439): "At 237 T-295, adopted on 11 November 2026, lies 8.80e-03 below this certificate, so if the entry stays recorded it is adopted at the other eight counts only." Fix the stale note at ~36393.
 N1: evidence.yaml ~60707, 60777, 60870 → "F6, F8, F9 and F11 for both, and F10 for the records". PR body → "F5, F7 and F12 are for the author; F6, F8, F9 and F11 for both".
 Contiguity clears once T-292..T-294 are on main.
+## Lane L129 (bold-ritchie-l129), 12 November 2026
+
+Worktree on `claude/bold-ritchie-xo28us-l110` (402455e82), merged origin/main 942256917 (#955, #957, #961, #964, #965, #968) and applied the senior review; pushed 402455e82..5fb3bdce2 to #963 (draft).
+
+**Merge 9dece3ec7.** Both sides kept in the hand-written records; generated views taken from main and derived again. Adoption moved to the pass of 12 November: LATER_PASSES["2026-11-12"] = {179, 237}; 237's prior-state row (byte-equal to main's n-237.md) added to house-adoption-prior-state-2026-11-12.json.xz with adopt_houses.retain_history; 11 November archive is main's. Layer index from main's + axis view at 237 + Evan Daniel's view layered from L110's original scratch run (retained copy lacks regularize.json; report/receipt byte-identical, view byte-identical to L110's). Gate totals n=1..324 2,683/6,574. Custody 74 houses, 248 inputs, 80 mutations refused. Synopsis 295 registered, 263 by others.
+
+**Review 897318c3e.** B1 stamp_landed --apply: T-295 and landings n=237 on 2026-11-12. B2 palette pin (103, 237), re-measured after the merge (next: 85 at 267). S1 credit phrase + adopt_houses --refresh --n 237. S2 T-253 next_rung sentence (12 November) and its 237 report-order note. N1 evidence F6, F8, F9 and F11 for both, F10 for the records; PR body likewise. Also source_reviewed 2026-11-12 at 237 (refresh does not write it; writer test needs it).
+
+**Re-pin 5fb3bdce2.** release_pin --update to 897318c3.
+
+**Validation.** records tier 55/55 (twice); check_results 295 contiguous; check_requests; adopt_houses/select_houses/upper_bound_houses checks; apply_closed_form; check-state moves 1 house (237); flips, composite, citations, release impact, release_pin --check. pytest -n 2: brief's list 378 passed; 14 more touched modules 1,070 passed, 1 skipped (only failure the pin, fixed after); test_release 20 passed after re-pin. Ruff/format/BasedPyright clean; flowmark check clean. PR body updated (check_pr_description --label intake ok).
