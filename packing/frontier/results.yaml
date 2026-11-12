@@ -44314,7 +44314,7 @@ results:
   - id: T-292
     kind: upper-bound
     registered: '2026-11-11'
-    landed: '2026-11-11'
+    landed: '2026-11-12'
     headline: >-
       De Winter's pinwheel at 132 from Samanyu-dev's 109, a new arrangement 9.63e-03 below T-174
     claim: >-
@@ -44574,7 +44574,7 @@ results:
   - id: T-293
     kind: upper-bound
     registered: '2026-11-11'
-    landed: '2026-11-11'
+    landed: '2026-11-12'
     headline: >-
       De Winter's pinwheel at 157 from Samanyu-dev's 109, the first below the grid's 13, by 6.70e-03
     claim: >-
