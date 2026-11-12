@@ -16,8 +16,8 @@ new arrangement relative to the packing it replaces.
 
 ## How They Were Run
 
-In the records branch `claude/bold-ritchie-xo28us-l104`, after `adopt_houses` had written
-both counts, and after `build_known_best_atlas --update`,
+In the records branch `claude/bold-ritchie-xo28us-l104`, after `adopt_houses` had
+written both counts, and after `build_known_best_atlas --update`,
 `regularize_axis_components --update-atlas --n 132 157` and `default_drawings --update`.
 From `packing/`, at most two processes, `nice -n 19`, in run directories named for the
 adoption’s day and its counts, with no dot in the grid-slack names:
@@ -34,16 +34,16 @@ python -m devtools.regularize_select --evand-run $RUNS/$P-evand \
 ```
 
 Then the one `layer` command the selection printed, for grid-slack’s 0.5-degree run at
-both counts, and the guide’s render-and-record step. The `SETTLED` entry at 132, decided
-on T-174’s witness, is taken off; 157 had none.
+both counts, and the guide’s render-and-record step.
+The `SETTLED` entry at 132, decided on T-174’s witness, is taken off; 157 had none.
 
 ## What They Found
 
 [selection-adopt-2026-11-11-n132-157.md](selection-adopt-2026-11-11-n132-157.md) is the
-selection’s table, and its JSON beside it the full report. Both views are drawn at the
-witness’s side and admitted at row 10. The figures are light, uneven and near-axis
-squares, angle classes and hues, then full shared sides (house and stage), the drawing
-before against the view:
+selection’s table, and its JSON beside it the full report.
+Both views are drawn at the witness’s side and admitted at row 10. The figures are
+light, uneven and near-axis squares, angle classes and hues, then full shared sides
+(house and stage), the drawing before against the view:
 
 | n | View drawn | Goals before → after | Shared sides before → after | Better on |
 | ---: | --- | --- | --- | --- |

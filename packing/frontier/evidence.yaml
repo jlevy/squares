@@ -61041,7 +61041,7 @@ evidence:
       pairs by separating axes in Fraction and again by exact clipped areas in gmpy2.mpq with no
       distance filter, in about 23 CPU seconds over both files: one exact wall contact (square 109,
       right), the least positive wall clearance 1.01e-248 (square 136, right), no pair touching, and
-      the least pair margin 1e-60 less about 1e-250, at squares 88 and 101; the two files hold the
+      the least pair margin 1e-60 less 1.31e-247, at squares 88 and 101; the two files hold the
       same packing scalar for scalar. l105_controls.py decided the 16 controls the plan stated
       beforehand, by both methods or the reader (out/controls-n157.json), each as stated, among them
       the squares accepted in the box of the claim's own side, 12.993302611344, and refused in the
