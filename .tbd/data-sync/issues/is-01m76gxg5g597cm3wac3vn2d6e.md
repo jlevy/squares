@@ -5,7 +5,7 @@ title: "Import #962: Doğa Özden's s(269) <= 16.899469075856 (kenaznia-doga/s26
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l120
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-12T00:00:58.544Z
-updated_at: 2026-11-12T01:50:32.932Z
+updated_at: 2026-11-12T02:17:53.362Z
 started_at: 2026-11-12T00:43:45.124Z
 ---
 
@@ -23,7 +23,7 @@ started_at: 2026-11-12T00:43:45.124Z
 
 ## Lane L120 (bold-ritchie-l120), 12 November 2026
 
-Branch `claude/bold-ritchie-xo28us-l120`, cut from `origin/main` `75cce00b6`. Draft PR #966 (https://github.com/jlevy/squares/pull/966), head 972f73d6e after merging main 0352d7554 (#965: conflicts in result-requests.yaml #958 notes and the pin, both kept) and re-pinning.
+Branch `claude/bold-ritchie-xo28us-l120`, cut from `origin/main` `75cce00b6`. Draft PR #966 (https://github.com/jlevy/squares/pull/966), head 800be138d: merged main 0352d7554 (#965; conflicts in result-requests.yaml #958 notes and the pin, both kept), then two fixes from hosted CI on 972f73d6e: composite-figure.json rebuilt for 269's new rigidity block (0291cf6a3; sweeps and shard C), and the lane test admitted to suite-file-costs.json with admit-local (49e9e7a3f; shard 4 was 10.4% unrecorded), re-pinned to 0291cf6a. CI on 800be138d at 02:17Z: all green but contiguity (validate, shard A register tests, shard D test_result_status); frontend still running.
 
 **Stage 2, retained.** `ozden-s269-issue962-2026-11-11` (same-day name collision with T-290's `ozden-s269-upper-bound-2026-11-11`, named as L107 named #959's), pinned at kenaznia-doga/s269-upper-bound-16899469076 fdab2c0 (23:34:47Z, 17 s before the issue; #947 comment 6809799112 six seconds after). Both stated digests hold (candidate 54b408b2...6b26b, JSON 4b7ac2a7...9cc0); acquire_source --check PACKET_MATCHES_ITS_CONTRACT. Pinned-only: diff PNG by digest; verifier/README.md, sqcheck.py, Evan Daniel's MIT notice identical_to the s299, s232 and evand-issue845 copies. CC BY 4.0 data / MIT code. House T-290 (author's own #947).
 
