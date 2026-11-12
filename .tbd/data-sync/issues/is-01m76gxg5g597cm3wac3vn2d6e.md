@@ -5,7 +5,7 @@ title: "Import #962: Doğa Özden's s(269) <= 16.899469075856 (kenaznia-doga/s26
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l120
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-12T00:00:58.544Z
-updated_at: 2026-11-12T02:17:53.362Z
+updated_at: 2026-11-12T02:33:24.583Z
 started_at: 2026-11-12T00:43:45.124Z
 ---
 
@@ -36,3 +36,12 @@ Branch `claude/bold-ritchie-xo28us-l120`, cut from `origin/main` `75cce00b6`. Dr
 **Adopted and regularized (56277b01c).** 269 from T-290 to T-296 on 12 Nov; T-290 no house source, superseded (test_result_status); T-290 next_rung updated. Credit phrase names seed packings' improvers. grid-slack 1-degree view drawn (17,52,29,54,19 -> 1,3,0,24,19; 651/826 -> 836/854), mirror across rising diagonal; Evan Daniel same-side refused (unmatched rotation); KKT solve 3.39e-12 below side (1.05 of own margin) held row 3 (RV-3). Rigidity 217 translate (195 before); gate n=1..324 2,482/6,421. Custody 74 houses, 248 inputs, 80 mutations refused. stamp_landed --apply done (269: T-296, 2026-11-12). Release record 2026-11-12-bold-ritchie-l120-962-t296.yaml. Re-pin f6efb568a.
 
 **Held / for the coordinator.** check_results contiguity red until T-294 (#964) and T-295 (#963) merge; then merge main again (conflicts expected: upper_bound_reports HOUSES, tests roster, results.yaml last_reviewed/regularized_drawings, upper_bound_houses LATER_PASSES "2026-11-12", prior-state archive 2026-11-12 (L107 also writes it), document map, flowmarkignore, workflow paths, SYNOPSIS counts, validate SCREEN_FINDINGS, resources README, site_resources, landings, release pin), rederive, re-pin. Bead tree was red on main's #958 entry naming think-bcfs until #965; green after the merge. Main has unformatted n-132.md, n-157.md, think-bcfs README from #961 (not touched here).
+
+2026-11-12 ~03:05Z, coordinator, after senior review L124 of #966 (head 800be138d; nothing blocking). Apply in the rebase pass after #964 and #963 merge:
+S1: result-requests.yaml ~31103-31104 (#947 notes): replace "T-290 stays a verified bound at V3/C3 and keeps its certificate as history. The reply owed on #962 says so; nothing more is owed here." with "T-290 stays a verified bound at V3/C3 and keeps its certificate as history. The final reply here (issuecomment-6793165538) stated T-290 current, so a follow-up is owed on this issue once T-296 is on main, as #928's was when T-289 superseded T-276: `check_requests --draft 947` states T-290 at V3/C3, confirmed, superseded. No follow-up has been posted." Post that #947 follow-up after merge, alongside the #962 reply.
+S2: #947 read_through (~30988) -> '2026-11-11T23:35:10Z'.
+N1 (optional): adopt_houses.py ~3047 credit -> "below his earlier packing from a strip cut of Evan Daniel's n = 304 packing"; "his own n = 179 packing" -> "his own n = 179 packing of issue 954"; then adopt_houses --refresh-openings --n 269 and re-derive.
+N2: merge recipe for the binary add/add conflict on house-adoption-prior-state-2026-11-12.json.xz: take main's archive and add the 269 row with adopt_houses.retain_history("2026-11-12", {269: <branch row>}); set LATER_PASSES["2026-11-12"] = frozenset({179, 269}). About 33 files conflict against #964 (see the review); landings merges cleanly.
+N3: add to the packet README and T-296 notes: "This lane's brief had relayed the review's T-290 margin, the certificate's contracted side and the identity verdict before its runs, so the agreement is two runs of the same tools, not a blind comparison."
+N4: correct the PR body's shard claim; shard 4 is at exactly 10.0% (bead filed).
+N5: record the News disposition and tick the checkbox.
