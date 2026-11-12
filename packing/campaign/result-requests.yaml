@@ -31745,26 +31745,27 @@ issues:
       says what was retained and replayed, what the review found and that the cases adopted
       them.
     notes: >-
-      Read on 11 November 2026 from main c8448724e; no comment yet, and no label. The lane first
-      read the two folders at 20:58Z as a publication in a watched repository with no issue; the
-      issue, opened at 20:56:18Z, names 6617869, the head, which changes only the READMEs and
-      checksums of a491dad's folders. GitHub's activity log was not readable from this session, so
-      the push of a491dad is not read: by the rule of 14 October the publication would be a report
-      from its first commit, 20:49:44Z, and the ledger dates both claims by the issue with that
-      first commit kept, since no other report reached 132 or 157 between the two, so the verdicts
-      are the same either way. The issue says verify_exact.py, the checker used for #946 without its
-      polynomial test, checks in rational arithmetic that every edge direction is a unit vector,
-      every square lies in the container and all pairs have disjoint interiors, and that a
-      floating-point separating-axis test and a union-area test with Shapely (157.0000000000 and
-      132.0000000000), separate code outside the repository, agree; none of them ran here. Local
-      optimality rests on a 250-digit solution of the contact equations, a floating-point
-      first-order condition and 297 and 324 perturbation trials, with no formal proof; the
-      certificates' own contraction margins, 1.349e-59 and 1.248e-59, match the 1.4e-59 and 1.3e-59
-      the issue states. The issue has not seen the Kaggle per-puzzle leaderboard at these counts, so
-      unpublished smaller sides may exist. T-174's margin at 132 and the grid's at 157 are both 0,
-      so RV-3 (think-ruu2) does not reach either gain, and the L-step scan finds that neither bound
-      carries to another count. 157 = 13^2 - 13 + 1, so the record now shows s(k^2 - k + 1) < k at k
-      = 13, below Fang's k >= 15 (T-163) and Daniel's k = 14 (T-220).
+      Read on 11 November 2026 from main c8448724e; no comment yet, and no label. The intake label
+      was added on 11 November at 21:31:29Z. The lane first read the two folders at 20:58Z as a
+      publication in a watched repository with no issue; the issue, opened at 20:56:18Z, names
+      6617869, the head, which changes only the READMEs and checksums of a491dad's folders. GitHub's
+      activity log was not readable from this session, so the push of a491dad is not read: by the
+      rule of 14 October the publication would be a report from its first commit, 20:49:44Z, and the
+      ledger dates both claims by the issue with that first commit kept, since no other report
+      reached 132 or 157 between the two, so the verdicts are the same either way. The issue says
+      verify_exact.py, the checker used for #946 without its polynomial test, checks in rational
+      arithmetic that every edge direction is a unit vector, every square lies in the container and
+      all pairs have disjoint interiors, and that a floating-point separating-axis test and a
+      union-area test with Shapely (157.0000000000 and 132.0000000000), separate code outside the
+      repository, agree; none of them ran here. Local optimality rests on a 250-digit solution of
+      the contact equations, a floating-point first-order condition and 297 and 324 perturbation
+      trials, with no formal proof; the certificates' own contraction margins, 1.349e-59 and
+      1.248e-59, match the 1.4e-59 and 1.3e-59 the issue states. The issue has not seen the Kaggle
+      per-puzzle leaderboard at these counts, so unpublished smaller sides may exist. T-174's margin
+      at 132 and the grid's at 157 are both 0, so RV-3 (think-ruu2) does not reach either gain, and
+      the L-step scan finds that neither bound carries to another count. 157 = 13^2 - 13 + 1, so the
+      record now shows s(k^2 - k + 1) < k at k = 13, below Fang's k >= 15 (T-163) and Daniel's k =
+      14 (T-220).
 
       Samanyu-dev's 109, side 10.949289581, is 4.58e-04 below the record at 109 (6 + 7/2 sqrt(2)),
       as the issue says; the issue makes no claim there, and the seed's repository is not a watched
@@ -31774,7 +31775,7 @@ issues:
       every parent square with a child square within 0.13, the 23 and 25 squares left over being 15
       and 17 axis-aligned squares at the cuts and 8 tilted ones each time. The seed's repository has
       no licence file, only its README's 'MIT-style' sentence (F12); that question is the owner's on
-      think-71uq, under think-gtmb.
+      think-71uq, under think-gtmb (the review named think-mdxq, which closed on 4 November).
 
       The review's notes for the author (F8 to F10) and its six questions, informational and holding
       nothing open: whether the stated 1.3e-59 and 1.4e-59 were the measured 1.2476e-59 and

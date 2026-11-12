@@ -1224,7 +1224,7 @@ def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
     cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
     transitions = known_best_builder.resolved_composites()[1].transitions
     by_row = {transition.row: transition for transition in transitions}
-    # A poster that trails the pin (`sqpack.release`, rule 5) is laid out by the grid
+    # A poster that trails the pin (`sqpack.release`, rule 3) is laid out by the grid
     # transitions of the data it was drawn from, which its cards record: a count that has
     # left the grid since, as 157 did on 11 November 2026 (T-293), keeps its grid card
     # until the next edition redraws the poster. Each such row is held to the layout the
@@ -1235,6 +1235,11 @@ def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
         for card in cards:
             if card.attrib["data-segment"] == "grid":
                 drawn.setdefault(int(card.attrib["data-row"]) + 1, int(card.attrib["data-n"]))
+        # Only row 13 differs from the current layout: 157 left the grid on 11 November
+        # 2026 (T-293). A count that leaves or joins the grid before the redraw adds its
+        # row here, on purpose.
+        moved = sorted(row for row, first in drawn.items() if by_row[row].first_grid_n != first)
+        assert moved == [13], moved
         by_row = {row: GridTransition(row, first) for row, first in drawn.items()}
     assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 325))
     for card in cards:
