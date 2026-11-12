@@ -499,9 +499,13 @@ cases in a fresh serial pytest process, then the four native-frontier load-budge
 in their separate serial process.
 All three commands keep one shared deadline and require Chromium through
 `SQPACK_REQUIRE_CHROMIUM=1`; a missing browser fails rather than skips.
-Each command enables `faulthandler_timeout=60` for stack diagnostics while retaining
-pytest’s default `faulthandler_exit_on_timeout=False`. This adds no ordinary CI job or
-dependency; the combined Linux cost of the three phases remains to be measured.
+Each command dumps every thread’s stack once a test’s setup, call or teardown has run 60
+seconds, through `devtools.stack_watchdog`, and the dump never ends the process.
+Until 2026-11-12 these dumps came from pytest’s `faulthandler_timeout=60`, with
+`faulthandler_exit_on_timeout=False`. Its C watchdog walks the threads without the GIL,
+and twice that day it crashed an xdist worker when a preview-server request thread ended
+during the walk (`D-523`). This adds no ordinary CI job or dependency; the combined
+Linux cost of the three phases remains to be measured.
 
 Use collected metadata/capabilities and the maintained family inventory to place tests,
 rather than hardcode a list of 210 historical identities.

@@ -1828,6 +1828,17 @@ def _xdist_distribution(jobs: int) -> tuple[str, ...]:
     return () if workers == 1 else ("-n", str(workers))
 
 
+def stack_watchdog(seconds: float) -> tuple[str, ...]:
+    """The pytest arguments that dump every stack once a test phase runs `seconds`.
+
+    Not `-o faulthandler_timeout`: CPython's C watchdog walks the threads without the
+    GIL, and a request thread of the preview server ending during the walk crashed an
+    xdist worker twice on 2026-11-12 (`D-523`). `devtools.stack_watchdog` takes the same
+    dump from a thread that holds the GIL.
+    """
+    return ("-p", "devtools.stack_watchdog", "-o", f"stack_watchdog_timeout={seconds:g}")
+
+
 _SUITE_FILES_PLUGIN = "devtools.suite_files"
 
 
@@ -2231,7 +2242,8 @@ def _site_layout_tests(context: Context) -> str:
     four native-frontier timing cases follow in their existing serial command. All
     three require Chromium, retain every assertion, and share the original total
     subprocess timeout. This isolates execution; the earlier Playwright stall's exact
-    cause remains unknown.
+    cause remains unknown. Each phase that runs a minute dumps every stack through
+    `stack_watchdog`, which does not end the process.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
@@ -2242,8 +2254,7 @@ def _site_layout_tests(context: Context) -> str:
         "-q",
         "-p",
         "no:cacheprovider",
-        "-o",
-        "faulthandler_timeout=60",
+        *stack_watchdog(60),
     )
     commands = (
         (
