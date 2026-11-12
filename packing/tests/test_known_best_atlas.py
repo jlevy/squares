@@ -2478,9 +2478,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # with no new name; PingYou Ltd's PR 574 certificates still hold other counts. Lane L104
     # of the same day draws 132 and 157 from Joost de Winter's two issue 958 packets (T-292,
     # T-293), two more sources with no new name: de Winter is printed already, and 157 was
-    # the grid. Lane L120 of 12 November draws 269 from Özden's issue 962 packet (T-296), and
-    # no longer from his issue 947 packet (T-290), which held nothing else: one source more
-    # and one fewer, with no new name.
+    # the grid. Lane L107 draws 179 from Özden's issue 959 packet (T-294) instead of his
+    # issue 954 packet, which held nothing else: one source more and one fewer. Lane L120
+    # of 12 November draws 269 from Özden's issue 962 packet (T-296), and no longer from his
+    # issue 947 packet (T-290), which held nothing else: one source more and one fewer, with
+    # no new name.
     assert len(expected_sources) == 43
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
@@ -2627,11 +2629,13 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     all five. Its later pass (think-he66) credits him at 172 and 270 (T-282, T-283), held
     the same way, and its last (think-1goz) at 199 (T-284), held alike. The adoption of 11
     November 2026 (think-xq4o) credits him as the finder at 156, 180, 268 and 269 (T-287 to
-    T-290), held alike, and the same day's lane L100 (think-f65n) at 179 (T-291). Lane L120 of
-    12 November (think-s418) credits him as the finder at 269 again (T-296), held as before."""
+    T-290), held alike, and the same day's lane L100 (think-f65n) at 179 (T-291), its
+    lane L107 (think-89i7) at 179 again for T-294, and its lane L110 (think-my76) at 237
+    (T-295). Lane L120 of 12 November (think-s418) credits him as the finder at 269 again
+    (T-296), held as before."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == dict.fromkeys(
-        (156, 172, 179, 180, 199, 232, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
+        (156, 172, 179, 180, 199, 232, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
     )
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
@@ -2642,6 +2646,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (180, ["Doğa Özden"], []),
         (199, ["Evan Daniel"], ["Doğa Özden"]),
         (232, ["Alex Chilton"], ["Francisco Couzo", "Doğa Özden"]),
+        (237, ["Doğa Özden"], []),
         (268, ["Doğa Özden"], []),
         (269, ["Doğa Özden"], []),
         (270, ["Evan Daniel"], ["Doğa Özden"]),

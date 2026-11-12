@@ -1691,6 +1691,13 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # Lane L100 of 11 November (think-3guf): Doğa Özden's issue 954 at 179 (think-f65n), a
     # band built from the registry's 70, one repository and one packet.
     "[Özden s179 upper bound 2026-11-11]": _import("ozden-s179-upper-bound-2026-11-11"),
+    # Lane L107 of 11 November (think-3guf): the same author's issue 959 at 179
+    # (think-89i7), 4.07e-4 below his 954 (T-291), the same band method on a later batch;
+    # one repository and one packet.
+    "[Özden s179 issue 959 2026-11-11]": _import("ozden-s179-issue959-2026-11-11"),
+    # Lane L110 of 11 November (think-3guf): Doğa Özden's issue 960 at 237 (think-my76), a
+    # band built from two copies of the registry's 70, one repository and one packet.
+    "[Özden s237 upper bound 2026-11-11]": _import("ozden-s237-upper-bound-2026-11-11"),
     # Lane L120 of 12 November (think-3guf): Doğa Özden's issue 962 at 269 (think-s418), a
     # band built from tilted squares of the registry's 207 and 70 and his own 179, below his
     # own T-290; one repository and one packet.

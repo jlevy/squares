@@ -1,0 +1,6 @@
+# Lane L108 controls plan, stated at 2026-11-11T22:05:38Z, before l108_controls.py existed (ls programs/: controls-plan.json l108_check.py l108_clip.py l108_geom.py l108_make_plan.py l108_plan_facts.py l108_reader.py l108_sat.py l108_selftest.py )
+febe78fe9425f2192b2a349cf92fa2e4f882fcdc5e92590aa59e694dcfaa53e5  programs/controls-plan.json
+219ddfee1e869ba8379fddfd3f9f5258b2d7c27ee6422eb64a5f604e267ed62b  out/plan-facts-n179.json
+ed2b381e24af9f7d40a6c40c274f7aa8fa1848223364467a064bcdcb8577550d  out/check-n179.json
+63e5820d17420c7bc641afeaf696b13e072f128d745ab4251ad851932f7d9506  programs/l108_plan_facts.py
+cbf8463347b44a6f1d0a139519b037ba4c08d4ca79b676719d17a3a2015e30bf  programs/l108_make_plan.py

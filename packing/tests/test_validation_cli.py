@@ -4650,8 +4650,10 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
         "-q",
         "-p",
         "no:cacheprovider",
+        "-p",
+        "devtools.stack_watchdog",
         "-o",
-        "faulthandler_timeout=60",
+        "stack_watchdog_timeout=60",
     )
     assert commands == [
         (

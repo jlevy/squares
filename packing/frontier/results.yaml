@@ -36391,7 +36391,8 @@ results:
 
       At n = 236 the certificate is below the case's ceiling (Evan Daniel, T-218) by 1.59e-19; smallest:
       this certificate. At n = 237 the certificate is below the case's ceiling (Nate Chaoweeraprasit
-      (itsnaka), improved by Francisco Couzo, Mishapolk, T-190) by 1.59e-19; smallest: this certificate.
+      (itsnaka), improved by Francisco Couzo, Mishapolk, T-190) by 1.59e-19; smallest: this certificate,
+      until Doğa Özden's T-295, 8.80e-03 below it, was adopted there on 12 November 2026.
       At n = 241 the certificate is below the case's ceiling (Daniil Ostashev, improved by Francisco
       Couzo, T-182) by 1.60e-19; smallest: this certificate. At n = 271 the certificate is below
       the case's ceiling (Evan Daniel, T-219) by 1.69e-19; smallest: this certificate.
@@ -36442,7 +36443,9 @@ results:
       moves; if it does not, the replay and review evidence are entered, both rungs rise to
       V3 and C3, and each count is adopted under the house rule with both strong generators'
       regularization. The 31 October review accepted every certificate for finite
-      feasibility and recommends reading them as restatements.
+      feasibility and recommends reading them as restatements. At 237 T-295, adopted on 12
+      November 2026, lies 8.80e-03 below this certificate, so if the entry stays recorded it
+      is adopted at the other eight counts only.
     unfinished_confirmations:
     - what: >-
         The owner's answer to whether the 23 October restatement ruling reaches counts
@@ -44286,10 +44289,11 @@ results:
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 11 November, is
-      retained. It is the smallest validated side at 179, and the case adopted it there on 11
-      November 2026 under the house rule, with both strong generators' regularization of the new
-      house; T-174 keeps its certificate as history. The review's questions for the author hold
-      no rung.
+      retained. The case adopted it at 179 on 11 November 2026 under the house rule, with both
+      strong generators' regularization of the new house, and the author's own further
+      arrangement of its packing, T-294 (#959), replaced it there on 12 November; it keeps its
+      certificate as history, as T-174 does. The review's questions for the author hold no
+      rung.
     reviews:
     - path: docs/project/reviews/review-2026-11-11-ozden-954.md
       kind: adversarial
@@ -44831,6 +44835,649 @@ results:
       covers:
       - T-292
       - T-293
+  - id: T-294
+    kind: upper-bound
+    registered: '2026-11-11'
+    landed: '2026-11-12'
+    headline: >-
+      Özden's further arrangement of his T-291 band at 179, 4.07e-04 below it, 2.645e-12 above s(70) + 5
+    claim: >-
+      One complete rational certificate proves s(179) <=
+      1388096037155822502128790515250755112992700071140158603216207237631759847022259162223365161028562708981913500156981545848997786790079746004217653486626222737561559114471095443533640028465316631511517257649915054413876043/100000000000000000000000000000382066398767479260730653096809429923440324843182790249464187167106629590077455771513675657320116033076253416959053569425215538797993845132515219355779258909325190694986680090000000000000000.
+      That side is 13.8809603715582251 rounded up at 16 places and 13.880960371559 at 12, as
+      #959 prints it.
+
+      It is 4.07e-04 below T-291 (the author's own packing from #954), the case's house best
+      packing until 12 November 2026, and 2.84e-03 below T-174 (Nate Chaoweeraprasit's packing,
+      improved by Siddharth Gupta and PingYou Ltd), the house before it. Measured here it is a
+      further arrangement of T-291's packing: nearest centres pair the two one to one under the
+      identity of the box, and the optimal assignment moves 3 squares beyond a tenth.
+
+      Both maintained exact routes accept the certificate, and the stage 4 review of 11 November
+      2026 accepts it, its clean-room checker independently re-implemented, and accepts the same
+      squares in the box of the claim's own side, 13.880960371559 (F3); the case adopted it as
+      its house on 12 November under the house rule, in place of T-291.
+
+      The issue says this repository's packing-witness verify, run unmodified on the witness,
+      reports VERIFIED (exact-algebraic, 15931 pairs), and that verifier/sqcheck.py, an exact
+      checker the author's lab wrote separately from this repository's code, reports VALID
+      (exact rational) and prints the exact side rounded up. It says the two share only the
+      unit-square, wall and non-overlap definitions.
+
+      This repository's packing-witness promote --strategy robust-rational made the exact
+      coordinates from the lab's decimal pose, n-179-decimal-pose.yaml, with center_dilation 1
+      and no dilation, so packing-witness verify is not independent of how they were rounded, as
+      the issue says. The issue says the pair margins of about 2e-13 are the decimal pose's own,
+      that only the squares that set the left wall, the bottom wall and the side touch them
+      exactly, and that other squares near a wall clear it by up to about 1e-12. Before
+      promotion sqcheck.py certified the decimal pose in interval arithmetic. No
+      local-optimality, rigidity or formal check is claimed. Those statements are the author's;
+      no source program ran here.
+
+      Measured by the review, exactly three squares touch a wall (67 at the bottom, 123 at the
+      left and 162 at the top, which sets the side), as the issue says; 38 other square-wall
+      clearances lie below 1e-13, from 7.03e-18 (squares 110 and 115, right) to 4.07e-14, and
+      six between 2.41e-5 and 5.53e-4, which the issue's "near a wall" does not cover. The pair
+      margins are the pose's own, as the issue says, 1.99 to 2.71e-13 of the centres' separation
+      along the binding axis, median 2.07e-13, about twice the issue's "about 1e-13 relative"
+      (F6).
+
+      Credit Doğa Özden (https://dogaozden.com/math/live/square-packing/), who reports a packing
+      from a later batch of #954's band-design search: the tilted squares of the registry's 70
+      (Ryan Xu, improved by Evan Daniel and PingYou Ltd), a two-row band of 20 squares, laid
+      along the diagonal with a copy shifted by (5, 5), mutated, annealed in a reduced model
+      with the axis-parallel squares on the two wall-anchored staircase lattices, then quenched
+      once with Evan Daniel's ALM+SLP code (https://github.com/evand/square-packing, MIT); its
+      exact coordinates were made by this repository's packing-witness promote.
+
+      The issue asks that the improvement be credited to Özden, the band's source packing, n =
+      70, and the current record to their holders as the registry lists them, and the local
+      optimizer to Evan Daniel.
+
+      The issue says the search and its code were written and run by AI agents and that the
+      checks were run by code that did not produce the packing; it says the issue and repository
+      were prepared and posted by Özden's AI agent, which uses the account kenaznia-doga, and
+      that Özden directed the work. The best public Kaggle per-puzzle packing the issue found at
+      179, 13.883795490524 (kirilltym), is above this. The issue says this supersedes the
+      author's own #954 (T-291), which stays a verified bound.
+
+      The side-only leaderboard entry the issue quotes, and states first, 13.880960371556 (team
+      Nevska, 7 November), is 2.2e-12 below this side, as the issue says; it is unpublished and
+      states no packing, so it is no report and is recorded as context only. It is the
+      registry's s(70) + 5 at 12 places, and this side is 2.645e-12 above s(70) + 5, as the
+      issue says; the review finds the side's 12-place fractional part, 0.880960371558, agrees
+      with the 70's and 207's 0.880960371556 to 11 places, not the issue's 12 (F5). The packing
+      is, to 8.2e-14 in side, a configuration at s(70) + 5 dilated by about 1 + 2e-13 (F9); no
+      exact construction at s(70) + 5 is shown here or by the source.
+    scope:
+      n_values:
+      - 179
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A further arrangement of T-291's packing at 179, 4.07e-04 below it, far above the S2/S3
+        line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3),
+        where continued arrangements are S3 as new ones are: beside T-277's 2.34e-04 and T-291's
+        2.43e-03; about 22 times the top of the band. The band-design search is #954's, described
+        and not published, and the packing is a further arrangement of the author's own, so not
+        S4; the relation to s(70) + 5 does not change the score, since the record already holds
+        s(207) = s(70) + 6 exactly and no exact construction at s(70) + 5 is shown. No lower
+        bound or optimum. The stage 4 review of 11 November confirms S3.
+      scored: '2026-11-11'
+      by: >-
+        think-89i7 Doğa Özden import (intake lane L107), confirmed by the stage 4 review of 11
+        November (lane L108)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Özden s179 issue 959 2026-11-11]'
+      published: '2026-11-11'
+    evidence:
+    - E-ozden-959-certificate-report
+    - E-ozden-959-exact-feasibility
+    - E-ozden-959-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/README.md
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/acquisition/claims.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/source/n-179-candidate.yaml
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/source/n-179-decimal-pose.yaml
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/identity.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/core-n070.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179-own.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/check-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/controls-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/identity-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/s70-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/contract-n179.json
+    - docs/project/reviews/review-2026-11-12-ozden-959.md
+    - packing/campaign/issue-intake/upper-bounds-959-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/measure_core.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l107_1111.py
+    - packing/tests/test_measure_core.py
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/controls-n179.json
+    notes: >-
+      A separate complete repository replay is retained for n = 179: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 95586 pair decisions; summed over the 3 jobs, the receipt records 39.82 route CPU
+      seconds and 61.91 job wall seconds, the longest job 23.62 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 1.99e-13. The replay is E-ozden-959-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), stated before they ran,
+      lowered the side by the least far-wall clearance, closed the least-gap pair (squares 104
+      and 105) by its gap and moved every square toward the nearer near wall by its least
+      clearance: both routes accepted each at exact contact, margin 0, and refused each 1e-30
+      past it. They refused one square enlarged to its pair at contact for its shape alone,
+      accepted one already touching its wall at contact (square 67, grown by 0), refused each
+      1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
+
+      At n = 179 the certificate is below the case's ceiling before this adoption (Doğa Özden,
+      T-291) by 4.07e-04; smallest: this certificate. No register bound was pending adoption at
+      179.
+
+      The ledger of 11 November for this lane (campaign/issue-intake/upper-bounds-959-20261111)
+      walks every report at 179 in report order from a start frozen on main on 11 November,
+      after T-291's adoption, and records this entry's claim, the only report there. The
+      author's comment on #954 at 21:18:29Z, five seconds after #959 opened, links the two and
+      asks that #959 be adopted in place of #954.
+
+      Measured pose by pose (measure/identity.json in the packet; a measurement, which decides
+      nothing): nearest centres pair it one to one with T-291's packing under the identity of
+      the box, and T-291's house witness and its regularized view, as they stood before this
+      adoption, measure the same; the optimal assignment moves 3 squares beyond a tenth, 31
+      beyond a hundredth and 85 beyond a thousandth (largest 0.218429), and turns 44 squares by
+      up to 27.79 degrees, 5 of them by more than a degree with the boxes centred.
+
+      Tilted beyond a degree: 35 here, 37.7 to 40.75 degrees from upright, all turned the same
+      way; T-291's 36, 27.3 to 41.4 degrees. So it is a further arrangement of T-291's packing,
+      by its own finder, as the review finds with its own measure (F8: 9 squares beyond 0.05, 3
+      beyond a tenth, 5 turned beyond a degree; 36 tilted beyond half a degree here against
+      T-291's 37).
+
+      Against T-174's, no symmetry pairs it one to one; the assignment moves 46 squares beyond a
+      tenth, and with the boxes centred 43 turn by more than a degree.
+
+      The issue's own counts against the house it names (143 centres beyond 1e-3, 48 beyond
+      0.05, the largest move 0.889, 43 re-tilted beyond a degree) reproduce, as the review
+      measured, with T-174 reflected top to bottom and set against the upper-left corner of the
+      new box; the issue does not name the anchoring (F7).
+
+      Measured against the registry's 70 (measure/core-n070.json, devtools.measure_core): the
+      side lies 2.645e-12 above s(70) + 5, 1.906e-13 of itself. It is no core with a border: a
+      border five wide round the 70, by five L steps, holds 175 squares at that side, four short
+      of 179, and set flush in any corner under any symmetry the 70 keeps at most 48 of its
+      squares within 1e-9.
+
+      Laid along the main diagonal at shifts (0, 0) to (5, 5) under the identity of its box, the
+      70 lies within 1e-9 of 15 of the 35 tilted squares here, 7 at (0, 0) and 8 at (5, 5), and
+      within 0.05 of 29; under no other symmetry is a tilted square within 0.01. So the packing
+      keeps both ends of the 70's band in place to 1e-9, where the issue's seed puts them, with
+      the band between them re-laid: a band re-laid from the 70's, as T-291's is, not the 70
+      with a border, which would credit its holders with the construction.
+
+      The review measures the same (F9): at most 48 of the 70's squares at any corner, 34 at the
+      lower left; seven of the tilted squares are the lower-left copy's and eight the
+      upper-right copy's to 1e-11, and 26 of the 36 tilted beyond half a degree sit at the 70
+      band's angle, -40.750530446306 degrees, to 1e-9 degrees, the other 21 band squares between
+      the copies on positions neither has; 103 upright squares lie on unit lattices anchored at
+      two walls. The seed as the issue states it has 34 squares, not 35, and lies within 0.05 of
+      28 of the 36 tilted squares under the identity of the 70 box and no other.
+
+      The issue names the registry's 70 as the band's source; that witness comes from PingYou
+      Ltd's PR 574 algebraic supplement, a release with no licence file, kept here in the
+      derived-only form. Whether a seed taken from it needs a notice of its own is the owner's
+      decision on think-71uq, as for T-291 (F11; the review names think-mdxq, which closed on 4
+      November). It is noted here, not decided.
+
+      Measured against padding: T-291's certificate at 179, contracted uniformly about the
+      origin to first contact, loses 2.62e-12 of its side (1 - lambda* = 2.03e-13, squares 14
+      and 15 the binding pair), and the gain is 1.56e8 times that, so none of it is the house's
+      padding, RV-3 (think-ruu2) does not reach it, and it is not held at V0/C1 as T-285 and
+      T-286 are.
+
+      This certificate's own margin, measured the same way, is 2.57e-12 (1 - lambda* = 1.99e-13,
+      the binding pair the replay's least-gap pair); contracted so, its side lies 7.9e-14 above
+      s(70) + 5. Both receipts are contraction_margin's, retained in the packet's measure/
+      directory.
+
+      The review decided T-291's witness with its own checker and found the same margin,
+      2.616e-12 (pair 14, 15), and decided this certificate's squares contracted by 1 -
+      1.99e-13, accepted at side 13.88096037155566185, s(70) + 5 + 8.2e-14 and 3.4e-13 below the
+      leaderboard's 13.880960371556, and refused at 1 - 2e-13 (F10). A side inside the
+      certificate's own dilation is the owner's open question RV-3 (think-ruu2), so that
+      contracted side is noted here and not registered.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json in the packet), with this
+      side stood in for 179's ceiling, finds the same L-step and monotonicity consequences as on
+      main, so this bound carries to no other count.
+
+      The source's own sqcheck.py was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share this
+      repository's corner-witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method; the first is the packing-witness
+      verify the author ran on the same file, so on that route the replay is reproduced with the
+      producer's code, and the second shares no verification code with it.
+
+      Because this repository's packing-witness promote made the exact coordinates, neither
+      route is independent of how they were rounded, as the issue says. A replay through
+      sqpack's verifier is the author's first check run again, from the package whose promotion
+      made the coordinates; the review's run is independently re-implemented, clean room, full
+      coverage, by a Claude agent (F12). No human oversight or optimality is claimed.
+
+      The witness's softschema.schema resolves to no file in the author's repository, and its
+      certificate.replay names the file but not where to run it, as at #954; the adopted witness
+      carries this repository's own (F12). The issue dates its search for competing claims
+      twelve minutes after it was opened (F13). Both are notes for the author.
+
+      The stage 4 review of 11 November 2026
+      (docs/project/reviews/review-2026-11-12-ozden-959.md, lane L108), written in a separate
+      lane blind to this one until its findings were frozen, accepts the certificate with
+      findings, all notes, none blocking: its clean-room checker decides every square, wall and
+      all 15931 pairs by separating axes in gmpy2.mpq and by exact clipping in Fraction, 3 exact
+      wall contacts (bottom 67, left 123, top 162) and the least pair margin
+      1.99223328482862e-13 at squares 104 and 105, and its 19 controls, stated beforehand, were
+      each decided as stated (E-ozden-959-review-exact-feasibility).
+
+      Its questions for the author, which hold no rung: whether the lab would promote the pose
+      with a contraction (center_dilation below 1), since the record's owner decides whether a
+      side inside the repair dilation is registered; whether there is an exact construction at
+      s(70) + 5, as the registry's 207 is at s(70) + 6, which would be scored on its own;
+      whether the repair scaling was about 2e-13 rather than 1e-13; and whether the lineage
+      counts use T-174 reflected top to bottom and set against the upper-left corner, and
+      whether the issue would name that convention.
+
+      It also asks whether the issue would correct "our exact side 13.880960371558224" (the
+      side's binary64 value) and the 12-place fractional part (0.880960371558, not
+      0.880960371556); which square the seed's 35th counts, since it has 34 by their centres;
+      which time is right for the search for other claims, since the time the issue gives falls
+      after it was opened; and whether the seed took the 70 band from the registry's witness or
+      from Ryan Xu's or Evan Daniel's published coordinates, and whether the band-design search
+      will be published.
+
+      T-291 stays a verified bound at V3/C3 and keeps its certificate as history, as T-174 does.
+      #574's follow-up of 19 October acknowledged the rational houses PR #665 adopted from
+      T-174, 179 among them. #574 is held for the owner (think-9v2k), so a follow-up naming the
+      new house at 179 waits on that hold.
+
+      Adopted at 179 on 12 November 2026 under the house rule, in place of T-291, with the
+      packing's credit to Doğa Özden, its finder, as a further arrangement of his own T-291
+      packing from the band of Ryan Xu's n = 70 packing, as Evan Daniel and PingYou Ltd improved
+      it, and T-174's packing as the record T-291 improved (F8), and both strong generators'
+      regularization of the new house, measured against the new witness, in the same change.
+
+      The rigidity block was derived again on the new witness and stays not rigid: 64 of its 179
+      squares translate, against 74 of T-291's. Both strong generators ran on the new witness
+      (packing/cases/regularized_drawings/think-89i7-2026-11-12/), and the selection, measured
+      against the drawing of this witness, draws Evan Daniel's same-side view, admitted at row
+      10: light, uneven, near-axis squares, angle classes and hues 6, 11, 5, 17 and 17 against
+      0, 0, 0, 4 and 4, and full shared sides (house and stage) 497 and 530 against 552 and 552.
+
+      Evan Daniel's regularizer solved the witness to a certified KKT point 2.645e-12 below its
+      side, at 13880960371555579594835501178639/10^30, which is s(70) + 5 + 1.4e-19, about the
+      certificate's own contraction margin (2.57e-12) and the configuration the review's F9
+      measures; it is held at row 3 as a register candidate and not admitted, and its
+      registration waits on RV-3 (think-ruu2, think-ikku), as at 156, 172, 180, 199, 268, 269
+      and 270 and at 179 for T-291.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit block
+      at 179 (PRINT_CREDIT_HELD has held 179 since T-291, think-tj4o) until the next
+      infographics cut redraws them; the case record, its page and its bound citation credit him
+      now.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 11 November, is
+      retained. It is the smallest validated side at 179, and the case adopted it there on 12
+      November 2026 under the house rule, in place of T-291, with both strong generators'
+      regularization of the new house; T-291 and T-174 keep their certificates as history. The
+      review's questions for the author hold no rung, and the contracted side its F10 measures
+      is the owner's RV-3 question, not registered.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-12-ozden-959.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 959 (L108,
+        under think-89i7), prompted separately from the import lane (L107, think-89i7) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-11'
+      scope: >-
+        Finite feasibility of the corner certificate of issue 959, decided again by a clean-room
+        exact checker frozen before any producer or witness code was read, by two methods, with
+        19 controls stated in advance and a self-test of 8,453 cases; the side and the issue's
+        prints, both houses' margins against the gains, the identity against T-174 and T-291,
+        the relation to s(70) + 5 and the 70 and 207 packings, an exact uniform contraction, the
+        stated seed, custody, licence, credit and the significance.
+      verdict: accepted
+      covers:
+      - T-294
+  - id: T-295
+    kind: upper-bound
+    registered: '2026-11-11'
+    landed: '2026-11-12'
+    headline: >-
+      Özden's packing at 237, a band from two copies of the registry's 70, 8.80e-03 below T-190
+    claim: >-
+      One complete rational certificate proves s(237) <=
+      7946902790286257950560892592790212320958676854694607924320412173363198622054157973944358922838901462991353136461368499165061680331955164844634344813782108987875995306999995495473410179037/499999999999998167404285406886123034824891787536070549392135121397247758199740083729787990057513880395962253368301469622325141378849372259504489115545014376665503124698090000000000000000.
+      That side is 15.8938055805725742 rounded up at 16 places and 15.893805580573 at 12, as
+      #960 prints it.
+
+      It is 8.80e-03 below T-190 (Francisco Couzo's certificate of Nate Chaoweeraprasit's
+      packing, improved by Couzo and Mishapolk), the case's house best packing until 12
+      November 2026. Measured here it is a new arrangement relative to T-190's packing, not one
+      to one with it under any symmetry of the box by nearest centres: the optimal assignment
+      moves 72 squares beyond a tenth.
+
+      Both maintained exact routes accept the certificate, and the stage 4 review of 11 November
+      2026 accepts it, its clean-room checker independently re-implemented, and accepts the same
+      squares in the box of the claim's own side, 15.893805580573 (F3); the case adopted it as
+      its house on 12 November under the house rule, in place of T-190.
+
+      The issue names the record it improves T-189, Couzo's issue-607 certificate, but quotes
+      T-190's side and fraction, the house since 16 October 2026; T-189 is 2.40e-11 above T-190,
+      and the gain the issue states, 8.798e-03, is against T-190 (F6).
+
+      The issue says this repository's packing-witness verify, run unmodified on the witness,
+      reports VERIFIED (exact-algebraic, 27966 pairs), and that verifier/sqcheck.py, an exact
+      checker the author's lab wrote separately from this repository's code, reports VALID
+      (exact rational) and prints the exact side rounded up. It says the two share only the
+      unit-square, wall and non-overlap definitions.
+
+      This repository's packing-witness promote --strategy robust-rational made the exact
+      coordinates from the lab's decimal pose, which the source retains, with no dilation, so
+      packing-witness verify is not independent of how they were rounded, as the issue says.
+      Before promotion sqcheck.py certified the decimal pose in interval arithmetic at its own
+      side. No local-optimality, rigidity or formal check is claimed. Those statements are the
+      author's; no source program ran here.
+
+      Measured by the review, exactly three squares touch a wall (67 at the bottom, 152 at the
+      left and 236 at the top), as the issue says; the other 19 square-wall clearances below
+      1e-12 are at most 1.20e-13, and 35 lie between 1.91e-5 and 6.40e-4.
+
+      The certificate is the decimal pose translated by about 1.1e-13 toward the corner, every
+      centre equal to the pose's to 4.7e-38, so the pair margins are the pose's own, as the
+      issue says; they lie between 2.01e-13 and 5.70e-13 of the centres' separation along the
+      binding axis, median 2.38e-13, about twice the issue's "about 1e-13 relative" (F7).
+
+      The issue also prints "our exact side 15.8938055805725735": that is the side's binary64
+      rounding printed to 16 places, 6.55e-16 below the exact side, so it bounds nothing; the
+      claim rests on the 12-place print, which is the side's ceiling (F5).
+
+      Credit Doğa Özden (https://dogaozden.com/math/live/square-packing/), who reports a packing
+      found by a band-design search, the one #954 described at 179: two copies of the band of
+      tilted squares of the registry's 70, Ryan Xu's packing as Evan Daniel and PingYou Ltd
+      improved it, laid along the diagonal as a seed band, annealed in a reduced model with the
+      axis-parallel squares on the two wall-anchored staircase lattices, then quenched with
+      Evan Daniel's ALM+SLP code (https://github.com/evand/square-packing, MIT); its exact
+      coordinates were made by this repository's packing-witness promote.
+
+      The issue asks that the improvement be credited to Özden, the band's source packing, n =
+      70, and the current record to their holders as the registry lists them, and the local
+      optimizer to Evan Daniel. The record at 237 is T-190: Nate Chaoweeraprasit's packing
+      (itsnaka), improved by Francisco Couzo and Mishapolk.
+
+      The issue says the search and its code were written and run by AI agents and that the
+      checks were run by code that did not produce the packing; it says the issue and repository
+      were prepared and posted by Özden's AI agent, which uses the account kenaznia-doga, and
+      that Özden directed the work. The best public Kaggle per-puzzle packing the issue found at
+      237, 15.902603638274 (kirilltym), is above this.
+
+      The side-only leaderboard entry the issue quotes, and states first, 15.893805585209 (team
+      elegans, 5 November), is 4.64e-9 above this side; it is unpublished and states no packing,
+      so it is no report and is recorded as context only.
+    scope:
+      n_values:
+      - 237
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 237 relative to T-190's packing, 8.80e-03 below it, 468 times the
+        top of the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's
+        1.88e-05 (S3), where new and continued arrangements are S3: beside T-282's 3.25e-03 and
+        T-291's 2.43e-03. The band-design search is described and not published, and is shown
+        at two counts by the same author, so not S4. No lower bound or optimum. The stage 4
+        review of 11 November confirms S3.
+      scored: '2026-11-11'
+      by: >-
+        think-my76 Doğa Özden import (intake lane L110), confirmed by the stage 4 review of 11
+        November (lane L109)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Özden s237 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    evidence:
+    - E-ozden-960-certificate-report
+    - E-ozden-960-exact-feasibility
+    - E-ozden-960-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/README.md
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/source/n-237-candidate.yaml
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/source/n-237-decimal-pose.yaml
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/contraction-n237.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/contraction-n237-t189.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/contraction-n237-own.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/check-n237.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/controls-n237.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/identity-n237.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/band-n237.json
+    - docs/project/reviews/review-2026-11-11-ozden-960.md
+    - packing/campaign/issue-intake/upper-bounds-960-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l110_1111.py
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/controls-n237.json
+    notes: >-
+      A separate complete repository replay is retained for n = 237: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 167796 pair decisions; summed over the 3 jobs, the receipt records 68.1 route CPU
+      seconds and 69.38 job wall seconds, the longest job 24.08 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.04e-13. The replay is E-ozden-960-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), stated before they ran,
+      lowered the side by the least far-wall clearance, closed the least-gap pair (squares 19
+      and 20) by its gap and moved every square toward the nearer near wall by its least
+      clearance: both routes accepted each at exact contact, margin 0, and refused each 1e-30
+      past it. They refused one square enlarged to its pair at contact for its shape alone,
+      accepted one already touching its wall at contact (square 67, grown by 0), refused each
+      1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
+
+      At n = 237 the certificate is below the case's ceiling before this adoption (Francisco
+      Couzo's certificate of Nate Chaoweeraprasit's packing, improved by Couzo and Mishapolk,
+      T-190) by 8.80e-03, and below T-253, Mykhailo Polkovskyi's sub-print re-certification of
+      T-190's packing pending adoption, by the same; smallest: this certificate. The issue names
+      the record T-189, Couzo's issue-607 certificate, 2.40e-11 above T-190, but its value and
+      fraction are T-190's (F6).
+
+      The ledger of 11 November for this lane (campaign/issue-intake/upper-bounds-960-20261111)
+      walks every report at 237 in report order from a start frozen on main on 11 November and
+      records this entry's claim, the only report there.
+
+      Measured pose by pose (measure/identity.json in the packet; a measurement, which decides
+      nothing): at 237 no symmetry of the box pairs it one to one with T-190's packing by
+      nearest centres, and T-189's packing, T-190's house witness and its regularized view, as
+      they stood before this adoption, measure the same; the optimal assignment of least summed
+      squared move, under the best of the box's eight symmetries, moves every square beyond
+      1e-3, 111 beyond a hundredth and 72 beyond a tenth (largest 0.924884) and turns 154
+      squares, by up to 43.77 degrees, 73 of them by more than a degree.
+
+      Tilted beyond a degree: 42 here, 42.19 to 44.46 degrees from upright, 38 turned one way
+      and 4 the other, with one more at 0.83 degrees, so 43 beyond half a degree, as the issue
+      says; T-190's 49, 1.14 to 43.62 degrees, 33 one way and 16 the other. The new band runs
+      straight from corner to corner, its centres closer to their line than the house's
+      (standard deviation 0.70 against 1.28), and 35 of its tilted squares lie within 0.004
+      degrees of 42.215, a 36th 0.024 degrees away, as the review measured. So it is a new
+      arrangement relative to T-190's packing, as the review finds (F10).
+
+      The issue's own counts against the house (236 centres beyond 1e-3, 78 beyond 0.05, the
+      largest move 1.202, 73 squares re-tilted beyond a degree, the largest by 43.77 degrees)
+      reproduce, as the review measured, with the house turned a half turn, set against the
+      upper-right corner of the new box and paired by least summed move; under least summed
+      squared move the largest move is 0.92 at every anchoring, and anchored at the lower-left
+      corner, as here, every square moves beyond 1e-3 (F8).
+
+      The seed the issue states is two copies of the registry's 70 band. The first, reflected
+      in the anti-diagonal of the 70 box and placed at the origin, matches: turned by 0.39
+      degrees and moved by under 0.05, 19 of its 20 squares lie within 0.1 of a tilted square
+      here. The second, reflected in the main diagonal and shifted by (7, 7), does not lie where
+      stated: no tilted square here lies within 0.25 of it until it is turned by -1.20 degrees
+      about the origin and shifted by (-0.45, 0.03), after which 9 of its 20 lie within 0.1 and
+      18 within 0.25.
+
+      Two copies of the 70 band hold 40 tilted squares, not the 42 the issue counts at band
+      parameter 2.0 (F9). The registry's 70 has 20 tilted squares, all at -40.7505 degrees, in
+      one band along the main diagonal; both reflections take them to +40.7505 degrees, 1.46
+      degrees short of the new band's 42.215.
+
+      The issue names the registry's 70 as the band's source; that witness comes from PingYou
+      Ltd's PR 574 algebraic supplement, a release with no licence file, kept here in the
+      derived-only form. Whether a seed taken from it needs a notice of its own is the owner's
+      open decision on think-71uq (F10; the review named think-mdxq, which closed on 4
+      November). It is noted here, not decided.
+
+      Measured against padding: T-190's certificate at 237, contracted uniformly about the
+      origin to first contact, loses 1.59e-19 of its side (1 - lambda* = 1.0e-20, squares 54
+      and 55), and T-189's 2.39e-11 (1 - lambda* = 1.60e-12, squares 74 and 103); the gain is
+      5.5e16 times the first and 3.7e8 times the second, so none of it is either certificate's
+      padding, and RV-3 (think-ruu2) does not reach it; it is not held at V0/C1 as T-285 and
+      T-286 are. T-253 lies below T-190 by the size of T-190's padding, as its review found.
+
+      This certificate's own margin, measured the same way, is 2.985e-12 (1 - lambda* =
+      2.007e-13, squares 36 and 140). All three receipts are contraction_margin's, retained in
+      the packet's measure/ directory; the review measured T-190's and T-189's with the same
+      tool and got exactly the same margins, factors and binding pairs.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json in the packet), with this
+      side stood in for 237's ceiling, finds the same L-step and monotonicity consequences as on
+      main, so this bound carries to no other count.
+
+      The issue dates its search for competing reports twelve minutes after the issue was
+      opened; either the body was edited after it was opened or the time is misstated, and
+      nothing in the bound depends on it (F12). The certificate's commit is 13 seconds older
+      than the issue.
+
+      The witness's softschema.schema names witness.schema.yaml, which resolves to no file in
+      the author's repository, and its certificate.replay names the file but not where to run
+      it, unlike the README's rerun; the adopted witness carries this repository's own (F11).
+      Both are notes for the author.
+
+      The stage 4 review of 11 November 2026
+      (docs/project/reviews/review-2026-11-11-ozden-960.md, lane L109), written in a separate
+      lane blind to this one throughout, accepts the certificate with findings, one minor for
+      the author (F5) and the rest notes, none blocking: its clean-room checker decides every
+      square, wall and all 27966 pairs by separating axes in Fraction and by exact clipped areas
+      in gmpy2.mpq, 3 exact wall contacts (bottom 67, left 152, top 236) and the least pair
+      margin 2.04379442361e-13 at squares 19 and 20, and its 17 controls, stated beforehand,
+      were each decided as stated (E-ozden-960-review-exact-feasibility).
+
+      Read against this lane's receipts after both were done, the review's least pair margin is
+      the replay's exactly, its contraction receipts for T-190 and T-189 equal the packet's in
+      margin, factor and binding pair, and its identity measurement against T-190 and T-189
+      equals the packet's under nearest centres, the optimal assignment and box-centred
+      alignment.
+
+      Its questions for the author, which hold no rung: whether the final repair scaling was
+      about 2e-13 rather than 1e-13 (F7); whether the lineage counts use the house turned a
+      half turn, set against the upper-right corner and paired by least summed move, and
+      whether the issue would name that convention (F8); about which point the copies were
+      rigidly rotated to a lean of 2.0 degrees, and what the lean measures (F9); where the
+      other two of the 42 tilted squares come from, since two copies of the 70 band hold 40
+      (F9); whether the seed took the 70 band from the registry's witness or from Ryan Xu's or
+      Evan Daniel's published coordinates; whether the author would correct the record's id to
+      T-190 and print the exact side as its 16-place ceiling, 15.8938055805725742 (F5, F6);
+      whether the body was edited after it was opened or its search time is misstated (F12);
+      and whether
+      the band-design search and its seeds will be published, and which replay is intended,
+      certificate.replay or the README's rerun, from which directory (F11).
+
+      T-190 stays a verified bound at V3/C3 and keeps its certificate as history, as does T-189;
+      T-253 stays held below the stage 4 exit for think-ikku.
+
+      Adopted at 237 on 12 November 2026 under the house rule, in place of T-190, with the
+      packing's credit to Doğa Özden, its finder, from two copies of the band of Ryan Xu's n =
+      70 packing, as Evan Daniel and PingYou Ltd improved it, as the search's seed, and T-190's
+      packing, Nate Chaoweeraprasit's as Francisco Couzo and Mishapolk improved it, as the
+      record it improves (F10), and both strong generators' regularization of the new house,
+      measured against the new witness, in the same change.
+
+      The rigidity block was derived again on the new witness (F10) and stays not rigid: 206 of
+      its 237 squares translate, against 21 of T-190's. Both strong generators ran on the new
+      witness (packing/cases/regularized_drawings/think-my76-2026-11-11/), and the selection,
+      measured against the drawing of this witness and carrying no note of another drawing,
+      draws Evan Daniel's same-side view, admitted at row 10: light, uneven, near-axis squares,
+      angle classes and hues 33, 68, 68, 75 and 19 against 0, 0, 0, 2 and 2, and full shared
+      sides (house and stage) 331 and 721 against 788 and 788, turned a half turn by the flip
+      record.
+
+      Evan Daniel's regularizer solved the witness to a certified KKT point 3.44e-12 below its
+      side, 1.15 of the certificate's own contraction margin (2.985e-12), held at row 3 as a
+      register candidate and not admitted; its registration waits on RV-3 (think-ruu2,
+      think-ikku), as at 156, 172, 179, 180, 199, 268, 269 and 270.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit block
+      at 237 (PRINT_CREDIT_HELD gains 237, think-tj4o) until the next infographics cut redraws
+      them; the case record, its page and its bound citation credit him now.
+
+      The source's own sqcheck.py was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share this
+      repository's corner-witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method; the first is the packing-witness
+      verify the author ran on the same file, so on that route the replay is reproduced with the
+      producer's code, and the second shares no verification code with it.
+
+      Because this repository's packing-witness promote made the exact coordinates, neither
+      route is independent of how they were rounded, as the issue says. A replay through
+      sqpack's verifier is the author's first check run again, from the package whose promotion
+      made the coordinates; the review's run is independently re-implemented, clean room, full
+      coverage, by a Claude agent (F11). No human oversight or optimality is claimed.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 11 November, is
+      retained. It is the smallest validated side at 237, and the case adopted it there on 12
+      November 2026 under the house rule, with both strong generators' regularization of the new
+      house; T-190 keeps its certificate as history. The review's questions for the author hold
+      no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-11-ozden-960.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 960 (L109,
+        under think-my76), prompted separately from the import lane (L110, think-my76) and blind
+        to its work throughout
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-11'
+      scope: >-
+        Finite feasibility of the corner certificate of issue 960, decided again by a clean-room
+        exact checker frozen before any producer or witness code was read, by two methods, with
+        17 controls stated in advance and a self-test of 2,838 cases; the side and the issue's
+        prints, the house's and T-189's margins against the gain, the identity against the house
+        and the stated seed, the bands at 237 and 70, the construction statements, custody,
+        licence, credit, dating and the significance.
+      verdict: accepted
+      covers:
+      - T-295
   - id: T-296
     kind: upper-bound
     registered: '2026-11-12'
@@ -45738,19 +46385,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-178-regularized.yaml.gz
     - n: 179
-      of: T-291
+      of: T-294
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
       modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
-      changes: {straightened: 9, re_angled: 6}
+      changes: {straightened: 7, re_angled: 6}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 67
-        max_move: 0.249093
-        max_turn_deg: 27.2593
+        moved: 56
+        max_move: 0.05477726
+        max_turn_deg: 2.96935
       view: packing/atlas/known-best/regularized/n-179-regularized.yaml.gz
     - n: 180
       of: T-288
@@ -46037,17 +46684,19 @@ regularized_drawings:
         max_turn_deg: 2.13886
       view: packing/atlas/known-best/regularized/n-236-regularized.yaml.gz
     - n: 237
-      of: T-190
+      of: T-295
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 104, re_angled: 9}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 3
-        max_move: 0.1393653
-        max_turn_deg: 0.00480146
+        moved: 137
+        max_move: 0.05955484
+        max_turn_deg: 3.41322
       view: packing/atlas/known-best/regularized/n-237-regularized.yaml.gz
     - n: 238
       of: T-174

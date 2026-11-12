@@ -22066,37 +22066,14 @@ occurrences:
     path: packing/frontier/n-237.md
     record_key: '237'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Doğa Özden
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 10
+  label: Doğa Özden
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
-    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
-    retained.
-- origin:
-    path: packing/frontier/n-237.md
-    record_key: '237'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - primary-byline
-  - bibliography
-  contributor_id: francisco-couzo
-  note: Reviewed packing/frontier/n-237.md [237] /reported_upper_bound/improved_by/0
-    span 0:15. The specific franciscouzo certificate/refinement lineage matches retained
-    acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
-    roles distinct.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-237.md
     record_key: '237'
@@ -22114,22 +22091,6 @@ occurrences:
   note: Reviewed packing/frontier/n-237.md [237] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-237.md
-    record_key: '237'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
 - origin:
     path: packing/frontier/n-238.md
     record_key: '238'
@@ -32557,6 +32518,150 @@ occurrences:
   start: 16
   end: 27
   label: Samanyu-dev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s179 issue 959 2026-11-11]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s179 issue 959 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s179 issue 959 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 12
+  end: 14
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s179 issue 959 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 16
+  end: 22
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s179 issue 959 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 24
+  end: 31
+  label: PingYou
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s179 issue 959 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 33
+  end: 37
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s237 upper bound 2026-11-11]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s237 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s237 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 12
+  end: 14
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s237 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 16
+  end: 22
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s237 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 24
+  end: 31
+  label: PingYou
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s237 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel, PingYou, Levy
+  start: 33
+  end: 37
+  label: Levy
   role: prerequisite
   disposition: unresolved
   evidence: []

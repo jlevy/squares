@@ -456,6 +456,12 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # arrangement of T-270's packing (T-276), to his issue-945 certificate (T-289);
         # T-174 and T-186 keep their other houses.
         "T-276",
+        # The adoption of 12 November 2026 (lane L107) took 179, the only house of Özden's
+        # issue-954 certificate (T-291), to his further arrangement of it (T-294).
+        "T-291",
+        # The same day's lane L110 took 237, the only house of Francisco Couzo's 15 October
+        # certificate (T-190), to Doğa Özden's issue-960 certificate (T-295).
+        "T-190",
         # Lane L120 of 12 November 2026 took 269, the only house of Doğa Özden's issue-947
         # certificate (T-290), to his issue-962 certificate (T-296).
         "T-290",
@@ -527,9 +533,11 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # T-263 (299), T-270 (268) and T-272 (303), which they supersede.
     # The adoption of 11 November 2026 took 156, 180, 268 and 269 to Doğa Özden's
     # certificates of issues 943 to 947 (T-287 to T-290): the last house of T-276 (268),
-    # which they supersede; T-174 and T-186 keep their other houses. Its lane L120 of 12
-    # November took 269, the only house of T-290, to Özden's issue-962 certificate (T-296),
-    # which supersedes it.
+    # which they supersede; T-174 and T-186 keep their other houses. The adoption of 12
+    # November 2026 took 179, T-291's only house, to T-294, which supersedes it, 237, the
+    # only house of T-190, to Özden's issue-960 certificate (T-295), which supersedes it,
+    # and 269, the only house of T-290, to his issue-962 certificate (T-296), which
+    # supersedes it.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records
