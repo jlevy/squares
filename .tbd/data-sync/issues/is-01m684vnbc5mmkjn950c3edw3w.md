@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 244
+version: 245
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T02:18:58.277Z
+updated_at: 2026-11-12T02:54:35.243Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -180,3 +180,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~02:30Z: L107 applied #964's review (S1, S2, N1–N3), merged main with #965, and re-pinned (head 67f40d9f0). CI red only on the same Chromium worker crash as #965 (test_site_atlas_views viewport test). Bead think-sj00 opened; L123 is diagnosing and fixing the flake (no skip or weakening). #964 merges main after the fix lands, which reruns CI.
 
 2026-11-12 ~02:45Z: L120 handed back #966 (T-296 s(269) adopted, L117 mapped; CI green apart from contiguity; frontend was pending). Senior review L124 running. Merge order: #964 (once L123's flake fix lands), then #963 (fixes + rebase), then #966 (rebase).
+
+2026-11-12 02:52Z renewal (intake211): no change. L124's senior review of #966: nothing blocking; S1 (a #947 follow-up is owed after merge), S2 (#947 read_through) and N1–N5 recorded on think-s418 for the rebase pass. think-xg1x filed (shard 4 at 10.0%). Waiting on L123 (flake fix think-sj00); then merge #964, #963 (fixes), #966.
