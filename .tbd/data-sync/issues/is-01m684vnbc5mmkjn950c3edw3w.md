@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 252
+version: 253
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -88,7 +88,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T04:56:17.374Z
+updated_at: 2026-11-12T05:11:18.770Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -195,3 +195,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~04:50Z: L127's blind review of #967 accepted (587375ed1; RV-3 not reached; new arrangement). Import (T-297) waits for #966; notes on think-n73d.
 
 2026-11-12 04:54Z renewal (intake213): no change. Waiting on L107 (#964 merging main for CI with the fix).
+
+2026-11-12 ~05:15Z: #964 merged (942256917): T-294 is the house at 179 (second pass on 12 Nov). L107 also admitted its two test modules to the test-cost record (shard 2 had reached 10.1% with #968's file). 959 still open. L128: deploy plus 959 reply draft. L129: rebase #963 onto main and apply L115's B1/B2/S1/S2/N1 (think-my76 delegated to l129; L110 stopped). Then #966, then #967's import.
