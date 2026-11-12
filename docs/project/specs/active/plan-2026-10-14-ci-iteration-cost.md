@@ -888,7 +888,8 @@ Assign the complete module to the existing required Chromium owner and exclude i
 the generic shards through the shared tuple.
 Add 60-second pytest stack dumps to both existing site-layout commands, retaining
 `faulthandler_exit_on_timeout=False`, their shared deadline, worker policy and
-assertions. These diagnostics do not add a command, job or dependency.
+assertions. These diagnostics do not add a command, job or dependency (replaced on
+2026-11-12 by `devtools.stack_watchdog`; `D-523`).
 
 A serial macOS reproduction passed that node in 25.68s and all 51 module cases in
 54.79s. These are single command-wall observations from a different platform, not Linux

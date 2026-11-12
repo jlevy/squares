@@ -17650,9 +17650,11 @@ defects:
     was correct.
   fix: >-
     devtools.stack_watchdog takes the same dump from a Python thread, through
-    faulthandler.dump_traceback, which holds the GIL and stops the world first (CPython
-    gh-128400). A thread unlinks its own state only while it holds the GIL, so this walk
-    never reaches a freed one. Setup, call and teardown are timed separately, the header
+    faulthandler.dump_traceback, which reads every thread's state while holding the GIL.
+    A thread unlinks its own state only while it holds the GIL (tstate_delete_common), so
+    the walk never reaches a freed one. CPython gh-128400 wrapped the same walk in a
+    stop-the-world for free-threaded builds; in this GIL build that call compiles to
+    nothing. Setup, call and teardown are timed separately, the header
     names the test, the phase and the worker, and the dump never ends the process. Its
     clock and calls are bound at import, so a test that replaces time.monotonic keeps its
     readings; the plugin's first push read the clock through the module, spent

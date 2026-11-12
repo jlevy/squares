@@ -13,11 +13,13 @@ browser test that is loading pages is never far from a thread ending. Twice on
 In both runs the replacement worker re-ran the test and it passed (think-sj00, D-523).
 
 This plugin keeps the diagnostic and removes the crash. A Python thread waits for the
-deadline and calls `faulthandler.dump_traceback`, which holds the GIL and stops the
-world before reading another thread's state (CPython gh-128400). A thread can unlink
-its own state only while it holds the GIL, so the walk never reaches a freed one. The
-dump goes to the stderr pytest's faulthandler uses, duplicated before capture can
-redirect it, and its header names the test, the phase and the worker.
+deadline and calls `faulthandler.dump_traceback`, which reads every thread's state
+while holding the GIL. A thread unlinks its own state only while it holds the GIL
+(`tstate_delete_common`), so the walk never reaches a freed one. (gh-128400 wrapped the
+same walk in a stop-the-world for free-threaded builds; in this GIL build that call
+compiles to nothing.) The dump goes to the stderr pytest's faulthandler uses,
+duplicated before capture can redirect it, and its header names the test, the phase
+and the worker.
 
 Setup, call and teardown are timed separately. A module fixture that takes two minutes
 to build on a starved runner shows as that test's slow setup rather than being added to
@@ -45,6 +47,7 @@ from faulthandler import dump_traceback
 from os import getpid, write
 from threading import Condition, Thread
 from time import monotonic
+from warnings import warn
 
 import pytest
 
@@ -69,7 +72,7 @@ class Watchdog:
         """Start timing `label`; the thread starts on first use, so an xdist controller,
         which runs no tests, never starts one."""
         with self._condition:
-            if self._thread is None:
+            if self._thread is None or not self._thread.is_alive():
                 self._thread = Thread(target=self._watch, name="stack-watchdog", daemon=True)
                 self._thread.start()
             self._armed = (label, monotonic())
@@ -115,8 +118,11 @@ class Watchdog:
             f"\nStack watchdog: {label} has run {elapsed:.1f}s, past {self.seconds:g}s, "
             f"on {self.worker} (pid {getpid()}); every thread follows.\n"
         )
-        write(self.fd, header.encode())
-        dump_traceback(file=self.fd, all_threads=True)
+        try:
+            write(self.fd, header.encode())
+            dump_traceback(file=self.fd, all_threads=True)
+        except OSError, RuntimeError:
+            return
         self.dumps += 1
 
 
@@ -179,7 +185,12 @@ def _timed(item: pytest.Item, phase: str) -> Generator[None, object, object]:
     watchdog = item.config.stash.get(WATCHDOG, None)
     if watchdog is None:
         return (yield)
-    watchdog.arm(f"{item.nodeid} {phase}")
+    try:
+        watchdog.arm(f"{item.nodeid} {phase}")
+    except Exception as error:  # noqa: BLE001 -- a diagnostic never stops the phase it times
+        message = f"stack watchdog not armed for {item.nodeid} {phase}: {error!r}"
+        warn(pytest.PytestWarning(message), stacklevel=1)
+        return (yield)
     try:
         return (yield)
     finally:
