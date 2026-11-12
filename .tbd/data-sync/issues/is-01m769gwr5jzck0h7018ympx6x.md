@@ -3,9 +3,9 @@ type: is
 id: is-01m769gwr5jzck0h7018ympx6x
 title: "Import #959: Doğa Özden's s(179) <= 13.880960371559 (supersedes his #954/T-291 by 4.07e-4; 2.2e-12 above Nevska's unpublished Kaggle side)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 10
 delegate: bold-ritchie-l128
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T21:51:45.413Z
-updated_at: 2026-11-12T05:11:11.127Z
+updated_at: 2026-11-12T08:31:30.843Z
 started_at: 2026-11-11T22:20:33.166Z
+closed_at: 2026-11-12T08:31:30.841Z
+close_reason: "Done: imported, adopted, replied, closed; replies recorded by #969 (17de4fb55); check_bead_tree --before-close ok."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

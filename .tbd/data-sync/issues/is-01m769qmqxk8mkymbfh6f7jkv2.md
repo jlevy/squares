@@ -3,9 +3,9 @@ type: is
 id: is-01m769qmqxk8mkymbfh6f7jkv2
 title: "Import #960: Doğa Özden's s(237) <= 15.893805580573 (kenaznia-doga/s237-upper-bound @ 13c4b231), 8.798e-3 below T-190 (the issue names T-189)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l130
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T21:55:26.589Z
-updated_at: 2026-11-12T06:06:56.820Z
+updated_at: 2026-11-12T08:31:32.907Z
 started_at: 2026-11-11T22:28:48.841Z
+closed_at: 2026-11-12T08:31:32.907Z
+close_reason: "Done: imported, adopted, replied, closed; replies recorded by #969 (17de4fb55); check_bead_tree --before-close ok."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

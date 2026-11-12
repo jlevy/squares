@@ -3,9 +3,9 @@ type: is
 id: is-01m76gxg5g597cm3wac3vn2d6e
 title: "Import #962: Doğa Özden's s(269) <= 16.899469075856 (kenaznia-doga/s269-upper-bound-16899469076 @ fdab2c00), 1.526e-3 below his own T-290"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 10
 delegate: bold-ritchie-l133
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-12T00:00:58.544Z
-updated_at: 2026-11-12T07:08:56.883Z
+updated_at: 2026-11-12T08:31:35.017Z
 started_at: 2026-11-12T00:43:45.124Z
+closed_at: 2026-11-12T08:31:35.017Z
+close_reason: "Done: imported, adopted, replied, closed; replies recorded by #969 (17de4fb55); check_bead_tree --before-close ok."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
