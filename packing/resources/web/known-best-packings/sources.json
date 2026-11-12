@@ -809,19 +809,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n131.cert.json"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n132.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/6617869a3491b5872c6ecdff55db05cbee57d516/n132/n132_witness.yaml at 6617869a3491b5872c6ecdff55db05cbee57d516",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         132
       ],
       "n": 132,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-132.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_witness.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-11",
       "source_n": 132,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n132.cert.json"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/6617869a3491b5872c6ecdff55db05cbee57d516/n132/n132_witness.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1000,6 +1000,21 @@
       "url": "https://github.com/kenaznia-doga/s156-upper-bound/blob/87c92921a64216d38914a7af488a7d7a91cf1eb7/n-156-candidate.yaml"
     },
     {
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/6617869a3491b5872c6ecdff55db05cbee57d516/n157/n157_witness.yaml at 6617869a3491b5872c6ecdff55db05cbee57d516",
+      "kind": "packet-derived-facts",
+      "license_status": "MIT",
+      "listed_n": [
+        157
+      ],
+      "n": 157,
+      "path": "resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_witness.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-11",
+      "source_n": 157,
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/6617869a3491b5872c6ecdff55db05cbee57d516/n157/n157_witness.yaml"
+    },
+    {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
       "kind": "kingbird-derived-facts",
       "license_status": "no-express-reuse-terms-found",
@@ -1130,19 +1145,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-178.svg"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s179-upper-bound/blob/bd262d8ba2966000e827547597fe6da24d0e118c/n-179-candidate.yaml at bd262d8ba2966000e827547597fe6da24d0e118c",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s179-upper-bound-13880960371/blob/6ab3cfe60db4d081092bed3b6bbb44c76b067230/n-179-candidate.yaml at 6ab3cfe60db4d081092bed3b6bbb44c76b067230",
       "kind": "packet-derived-facts",
       "license_status": "CC-BY-4.0",
       "listed_n": [
         179
       ],
       "n": 179,
-      "path": "resources/web/ozden-s179-upper-bound-2026-11-11/source/n-179-candidate.yaml",
+      "path": "resources/web/ozden-s179-issue959-2026-11-11/source/n-179-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
       "retrieved": "2026-11-11",
       "source_n": 179,
-      "url": "https://github.com/kenaznia-doga/s179-upper-bound/blob/bd262d8ba2966000e827547597fe6da24d0e118c/n-179-candidate.yaml"
+      "url": "https://github.com/kenaznia-doga/s179-upper-bound-13880960371/blob/6ab3cfe60db4d081092bed3b6bbb44c76b067230/n-179-candidate.yaml"
     },
     {
       "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s180-upper-bound/blob/4cfcb9058a5bc5e8e6986bda31c072ccefc3731f/n-180-candidate.yaml at 4cfcb9058a5bc5e8e6986bda31c072ccefc3731f",

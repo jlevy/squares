@@ -241,14 +241,21 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: (think-f65n) moved 179 to his certificate of issue 954 (T-291), a new arrangement:
 #: separating and translating squares 74 and 74 against T-174's 2 and 7, so n=1..200 has
 #: 736 separating squares and 2,328 translating ones, and n=1..324 2,493 and 6,402, in the
-#: same records. Lane L110 of the same day (think-my76) moved 237 to his certificate of
-#: issue 960 (T-295), a new arrangement: separating and translating squares 206 and 206
-#: against T-190's 4 and 21, so n=1..324 has 2,695 separating squares and 6,587 translating
-#: ones, in the same records.
+#: same records. The same day's lane L104 (think-bcfs) moved 132 and 157 to Joost de
+#: Winter's certificates of issue 958 (T-292, T-293): separating 2 and 0 squares against
+#: T-174's 4 and the grid's 0, translating 18 and 4 against 12 and 13, so n=1..200 has 734
+#: separating squares and 2,325 translating ones, and n=1..324 2,491 and 6,399, in the
+#: same records. Lane L107 (think-89i7) moved 179 on to Doğa Özden's certificate of issue 959
+#: (T-294) on 12 November, a further arrangement of T-291's: separating and translating
+#: squares 64 and 64 against 74 and 74, so n=1..200 has 724 and 2,315, and n=1..324 2,481
+#: and 6,389. Lane L110 (think-my76) moved 237 to his certificate of issue 960 (T-295) the
+#: same day, a new arrangement: separating and translating squares 206 and 206 against
+#: T-190's 4 and 21, so n=1..324 has 2,683 separating squares and 6,574 translating ones,
+#: in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 736, 182, 2328),
-    "n=1..324": (125, 2695, 302, 6587),
+    "n=1..200": (67, 724, 182, 2315),
+    "n=1..324": (125, 2683, 302, 6574),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -1827,6 +1834,17 @@ def _xdist_distribution(jobs: int) -> tuple[str, ...]:
     return () if workers == 1 else ("-n", str(workers))
 
 
+def stack_watchdog(seconds: float) -> tuple[str, ...]:
+    """The pytest arguments that dump every stack once a test phase runs `seconds`.
+
+    Not `-o faulthandler_timeout`: CPython's C watchdog walks the threads without the
+    GIL, and a request thread of the preview server ending during the walk crashed an
+    xdist worker twice on 2026-11-12 (`D-523`). `devtools.stack_watchdog` takes the same
+    dump from a thread that holds the GIL.
+    """
+    return ("-p", "devtools.stack_watchdog", "-o", f"stack_watchdog_timeout={seconds:g}")
+
+
 _SUITE_FILES_PLUGIN = "devtools.suite_files"
 
 
@@ -2230,7 +2248,8 @@ def _site_layout_tests(context: Context) -> str:
     four native-frontier timing cases follow in their existing serial command. All
     three require Chromium, retain every assertion, and share the original total
     subprocess timeout. This isolates execution; the earlier Playwright stall's exact
-    cause remains unknown.
+    cause remains unknown. Each phase that runs a minute dumps every stack through
+    `stack_watchdog`, which does not end the process.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
@@ -2241,8 +2260,7 @@ def _site_layout_tests(context: Context) -> str:
         "-q",
         "-p",
         "no:cacheprovider",
-        "-o",
-        "faulthandler_timeout=60",
+        *stack_watchdog(60),
     )
     commands = (
         (

@@ -261,7 +261,7 @@ Its questions for the author, informational and holding nothing open:
 8. Will the band-design search and its seeds be published, and which replay is intended,
    `certificate.replay` or the README’s rerun, and from which directory (F11)?
 
-The case adopted the certificate as its house on 11 November 2026 under the house rule,
+The case adopted the certificate as its house on 12 November 2026 under the house rule,
 as T-295, in place of T-190, which keeps its certificate as history, with Doğa Özden the
 packing’s finder, two copies of the band of Ryan Xu’s n = 70 packing, as Evan Daniel and
 PingYou Ltd improved it, credited as the search’s seed, and T-190’s packing, Nate

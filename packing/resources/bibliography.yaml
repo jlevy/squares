@@ -5173,7 +5173,7 @@ sources:
     venue: GitHub
     dated: '2026-11-10'
     lineage: independent
-    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069, kmmmvs
     short_credit: de Winter after Samanyu-dev et al.
     note: >-
       JoostdeWinter/square-packing at a9486ede74cd75996f488605f27d7fce32a73b3a
@@ -5185,8 +5185,15 @@ sources:
       direction with the arrangement unchanged. The merged file names no author per packing; its
       README credits Chris Deotte, lightningv08 (Vladislav Lavrentev), alexchilton (Alex Chilton),
       kirilltym (Kirill Tymchishin), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt
-      and the register of Francisco Couzo, and the credit follows it; the licence of those
-      starting packings is not given. Beyond-horizon rows below the record's rows at those
+      and the register of Francisco Couzo, and the credit follows it, with penguin069 and kmmmvs:
+      the author's answer of 11 November (jlevy/squares#942, issuecomment-6806342752) says the
+      README introduces its ten names with "among them" and its score history names those two
+      further merged sources. The starting packings' authors are not identified per puzzle, and
+      the answer says the README reports the owner's own wins in the file at n = 650 to 990, so
+      some may be Samanyu-dev's own. No licence is stated for the starting packings: the answer
+      says the merge file states none and the repository has no licence file at 53551d7, and
+      that public Kaggle notebooks default to Apache 2.0, each dataset carrying its uploader's
+      choice; none was traced per packing. Beyond-horizon rows below the record's rows at those
       counts. These are bounds below the record, which the record does not call the best known
       packings (the review's F9): each arrangement is another holder's public Kaggle packing,
       re-optimized, and the issue's own table puts each side 1.8e-07 to 3.8e-04 below the best
@@ -5204,7 +5211,7 @@ sources:
     venue: GitHub
     dated: '2026-11-10'
     lineage: independent
-    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069, kmmmvs
     short_credit: de Winter after Samanyu-dev et al.
     note: >-
       JoostdeWinter/square-packing at a0c4fc80db67e9806026921654dce49a155ac31b
@@ -5212,7 +5219,12 @@ sources:
       above324_refined/, at 597, 754, 864, 865, 869 and 991, reported by his addendum comment on
       jlevy/squares#942 (issuecomment-6772308414, 16:02:47Z), from the same procedure and merged
       Kaggle file as the issue's sixteen, with the arrangements unchanged; credited as
-      [de Winter issue 942 2026-11-10] is; the licence of those starting packings is not given.
+      [de Winter issue 942 2026-11-10] is, penguin069 and kmmmvs included; the starting
+      packings' authors are not identified per puzzle, so some may be Samanyu-dev's own; no
+      licence is stated for those starting packings, public Kaggle notebooks defaulting to
+      Apache 2.0, and none was traced per packing. The author's answer of 11 November
+      (jlevy/squares#942, issuecomment-6806342752) says the six came from a later run than the
+      issue's sixteen.
       Beyond-horizon rows below the record's rows at those counts. These are bounds below the
       record, which the record does not call the best known packings (the review's F9): each
       arrangement is another holder's public Kaggle packing, re-optimized, and the addendum's
@@ -5251,6 +5263,78 @@ sources:
       (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
       notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII.
       Retained in web/ozden-s179-upper-bound-2026-11-11/.
+  - key: '[de Winter s132 upper bound 2026-11-11]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: independent
+    credit: de Winter after Samanyu-dev
+    note: >-
+      JoostdeWinter/square-packing at 6617869a3491b5872c6ecdff55db05cbee57d516
+      (2026-11-11T20:52:23Z), Joost de Winter's certificate for s(132) <= 11.976048383604 (rounded
+      up at 12 places, as the root README prints it), first committed at
+      a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c (2026-11-11T20:49:44Z), 6 minutes 34 seconds before
+      jlevy/squares#958, which requested its registration: a rational centre-basis witness without
+      this repository's schema envelope (n132/n132_witness.yaml) and the same packing as JSON
+      (n132/n132_exact.json), a pinwheel derived from Samanyu-dev/squares_in_squares's public
+      109-square packing (53551d7) by one cut-and-fill step, 1.3e-59 above a 250-digit solution of
+      its contact equations; local optimality has no formal proof. The source credits the pinwheel
+      at 109 to Samanyu-dev and says the work was produced with Claude Fable 5.2 (Anthropic) under
+      de Winter's direction. No global optimality claim. The lineage is independent of this project.
+      Licensed MIT by LICENSE at the pin. Retained in web/de-winter-s132-upper-bound-2026-11-11/.
+  - key: '[de Winter s157 upper bound 2026-11-11]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: independent
+    credit: de Winter after Samanyu-dev
+    note: >-
+      JoostdeWinter/square-packing at 6617869a3491b5872c6ecdff55db05cbee57d516
+      (2026-11-11T20:52:23Z), Joost de Winter's certificate for s(157) <= 12.993302611344 (rounded
+      up at 12 places, as the root README prints it), below the 13 x 13 grid's 13, first committed
+      at a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c (2026-11-11T20:49:44Z), 6 minutes 34 seconds
+      before jlevy/squares#958, which requested its registration: a rational centre-basis witness
+      without this repository's schema envelope (n157/n157_witness.yaml) and the same packing as
+      JSON (n157/n157_exact.json), a pinwheel derived from Samanyu-dev/squares_in_squares's public
+      109-square packing (53551d7) by two cut-and-fill steps through his 132, 1.4e-59 above a
+      250-digit solution of its contact equations; local optimality has no formal proof. The source
+      credits the pinwheel at 109 to Samanyu-dev and says the work was produced with Claude Fable
+      5.2 (Anthropic) under de Winter's direction. No global optimality claim. The lineage is
+      independent of this project. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s157-upper-bound-2026-11-11/.
+  - key: '[Özden s179 issue 959 2026-11-11]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: builds-on-project
+    credit: 'Ozden after Xu, Daniel, PingYou, Levy'
+    short_credit: 'Ozden after Xu et al.'
+    note: >-
+      kenaznia-doga/s179-upper-bound-13880960371 at 6ab3cfe60db4d081092bed3b6bbb44c76b067230
+      (2026-11-11T21:18:12Z), Doğa Özden's second certificate at 179, for s(179) <=
+      13.8809603715582251 (the exact side rounded up at 16 places), printed 13.880960371559
+      rounded up at 12 places: a rational corner Witness/v2 of a packing from a later batch of
+      the band-design search of his #954, the tilted squares of the registry's 70 (Ryan Xu,
+      improved by Evan Daniel and PingYou Ltd), a two-row band of 20 squares, laid along the
+      diagonal with a copy shifted by (5, 5), annealed in a reduced model with the axis-parallel
+      squares on the two wall-anchored staircase lattices, then quenched once with Evan Daniel's
+      ALM+SLP quench (evand/square-packing at bb4cc78e, MIT), a further arrangement of his own
+      #954 packing (T-291) measured here, its exact coordinates made by this repository's
+      packing-witness promote --strategy robust-rational from the decimal pose the source
+      retains. Registration was requested in jlevy/squares#959, posted on the author's behalf by
+      his AI agent's account kenaznia-doga; the issue says the search and its code were written
+      and run by AI agents, under his direction. No global optimality claim. The lineage builds
+      on this project: the band is built from a registry packing and the exact coordinates are
+      made with this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal
+      pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin
+      also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is
+      Özden in the credit's ASCII. Retained in web/ozden-s179-issue959-2026-11-11/.
   - key: '[Özden s237 upper bound 2026-11-11]'
     authors:
     - 'Özden'

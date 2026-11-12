@@ -44031,7 +44031,6 @@ results:
       verdict: accepted
       covers:
       - T-290
-
   - id: T-291
     kind: upper-bound
     registered: '2026-11-11'
@@ -44287,10 +44286,11 @@ results:
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 11 November, is
-      retained. It is the smallest validated side at 179, and the case adopted it there on 11
-      November 2026 under the house rule, with both strong generators' regularization of the new
-      house; T-174 keeps its certificate as history. The review's questions for the author hold
-      no rung.
+      retained. The case adopted it at 179 on 11 November 2026 under the house rule, with both
+      strong generators' regularization of the new house, and the author's own further
+      arrangement of its packing, T-294 (#959), replaced it there on 12 November; it keeps its
+      certificate as history, as T-174 does. The review's questions for the author hold no
+      rung.
     reviews:
     - path: docs/project/reviews/review-2026-11-11-ozden-954.md
       kind: adversarial
@@ -44312,6 +44312,852 @@ results:
       verdict: accepted
       covers:
       - T-291
+  - id: T-292
+    kind: upper-bound
+    registered: '2026-11-11'
+    landed: '2026-11-12'
+    headline: >-
+      De Winter's pinwheel at 132 from Samanyu-dev's 109, a new arrangement 9.63e-03 below T-174
+    claim: >-
+      One complete rational certificate proves s(132) <=
+      29940120959008518809321792381784194561366154929588804750577800289555120369865408680444352359453817994064394036272845081533643558510907037866820298055603899602933748036672382028267459576409124073981009540056142854406780197934128275523774369426111643883528289742078410057825766433892095556050609840605731079359109/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      That side is 11.9760483836034076 rounded up at 16 places and 11.976048383604 at 12, as the
+      source's root README prints it.
+
+      It is 9.63e-03 below T-174 (Evan Daniel's packing, improved by PingYou Ltd), the case's house
+      best packing. Measured here it is a new arrangement relative to T-174's packing, not one to
+      one with it under any symmetry of the box by nearest centres: the optimal assignment moves 84
+      squares beyond a tenth.
+
+      Both maintained exact routes accept the certificate, and the stage 4 review of 11 November
+      2026 accepts it, its clean-room checker independently re-implemented; the case adopted it as
+      its house that day under the house rule.
+
+      n132/README.md says all squares were optimized together with an interior-point solver (IPOPT)
+      and the contact equations of the result then solved to 250 digits: all 1407 contact equations
+      (a corner of one square on the edge line of another, or a corner on a wall) are satisfied to
+      1e-269 and all other gaps stay open, and the certificate's side is 1.3e-59 above that
+      solution.
+
+      It says non-negative contact forces in balance exist, the first-order condition for a local
+      minimum, checked in floating point; that 324 perturbation trials, each re-optimized, found no
+      smaller side; that local optimality has no formal proof; and that a search for a minimal
+      polynomial of the side up to degree 16 found none. Measured here, the certificate's own
+      uniform-contraction margin is 1.248e-59 (1 - lambda* = 1e-60), about the distance the README
+      states. It says verify_exact.py, Python's standard library only, is the folder's exact
+      checker. Those statements are the author's; no source program ran here.
+
+      The issue says verify_exact.py, the checker used for #946 without its polynomial test, checks
+      in rational arithmetic that every edge direction is a unit vector, every square lies in the
+      container and all pairs have disjoint interiors, and that a floating-point separating-axis
+      test on all pairs and a union-area test with Shapely, separate code outside the repository,
+      agree, and that the exact checker has not been run against this repository's checkers. None of
+      them ran here.
+
+      The README says the Kaggle competition 'Squares in Squares' has a per-puzzle leaderboard that
+      lists sides without packings, that the author has not seen its values at 132, and so an
+      unpublished packing with a smaller side may exist. A side with no packing is no report; the
+      record compares with what has been published.
+
+      Credit Joost de Winter, who reports a pinwheel, a central block of tilted squares with four
+      arms surrounded by four blocks of axis-aligned squares, derived from the public 109-square
+      packing of Samanyu-dev/squares_in_squares (best_fit_101_500.csv, side 10.949289581) by one
+      step: the packing cut along one horizontal and one vertical line, the parts moved about one
+      unit apart, each gap filled with one layer of squares continuing the local lattice, and every
+      square re-optimized.
+
+      The README says credit for the pinwheel arrangement at n = 109 belongs to Samanyu-dev, whose
+      README reports that packing as a result of its own stretch and quench chains; the packing at
+      132 is credited to de Winter after Samanyu-dev.
+
+      Measured here, 54 squares turn, 53 of them by 23.6 to 31.4 degrees and one by 0.22 degrees,
+      all the same way, against the README's 54 tilted and 78 axis-aligned.
+
+      The README says the derivation, optimization, high-precision solution, rational certificate,
+      checking and figure were produced with Claude Fable 5.2 (Anthropic) under the direction of
+      Joost de Winter, as the issue does; the folder's first commit said Claude (Anthropic), and the
+      head names the model.
+    scope:
+      n_values:
+      - 132
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 132 relative to T-174's packing, 9.63e-03 below it, far above the S2/S3
+        line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where
+        new and continued arrangements are S3: beside T-287's 2.11e-03 and T-282's 3.25e-03. A
+        cut-and-fill step continues a known pinwheel, so no technique is new and it is not S4. No
+        lower bound or optimum.
+      scored: '2026-11-11'
+      by: >-
+        think-bcfs Joost de Winter import (intake lane L104), confirmed by the stage 4 review of
+        11 November (lane L105)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s132 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    evidence:
+    - E-de-winter-s132-certificate-report
+    - E-de-winter-s132-exact-feasibility
+    - E-de-winter-s132-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/README.md
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_witness.yaml
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_exact.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132-own.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-11-dewinter-132-157.md
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/README.md
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/check-n132.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/controls-n132.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/lineage.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/compare-lane.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l104_1111.py
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/controls-n132.json
+    notes: >-
+      A separate complete repository replay is retained for n = 132: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both routes,
+      51876 pair decisions; summed over the 3 jobs, the receipt records 54.61 route CPU seconds and
+      55.4 job wall seconds. In every positive squares touch the box, a least wall clearance of
+      exactly 0, and every pair clears by at least 9.99e-61. The replay is
+      E-de-winter-s132-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), as the module predicts them,
+      lowered the side by the least far-wall clearance (0), closed the least-gap pair (119 against
+      14) by its gap of 1e-60 and moved every square toward the nearer near wall by its least
+      clearance: both routes accepted each at exact contact and refused each 1e-30 past it. They
+      refused square 119 enlarged to its pair at contact for its shape alone, accepted square 17,
+      already touching its wall, grown by 0, refused it 1e-30 past for the wall and the overlap, and
+      refused a duplicated square.
+
+      At n = 132 the certificate is below the case's ceiling (Evan Daniel, improved by PingYou Ltd,
+      T-174) by 9.63e-03; smallest: this certificate. The ledger of 11 November for this lane
+      (campaign/issue-intake/upper-bounds-de-winter-132-157-20261111) walks #958 from starts frozen
+      on main on 11 November and records this claim as a new packing, the only report at 132.
+
+      #958 (20:56:18Z on 11 November) names the repository's head, which changes only the READMEs
+      and checksums of the commit that first published the folder, at 20:49:44Z, 6 minutes 34
+      seconds before the issue. Its push is not read (GitHub's activity log was not readable from
+      this session); the rule of 14 October would date the claim by it if it came first, but no
+      other report reached 132 or 157 in that window, so the ledger dates the claim by the issue
+      with the first commit kept, and the verdict is the same either way.
+
+      Measured against padding (RV-3, think-ruu2): T-174's certificate, contracted uniformly about
+      the origin, has margin 0, its pair 87 and 88 already touching (1 - lambda* = 0), so the whole
+      gain of 9.632e-03 lies outside the predecessor's padding (measure/contraction-n132.json) and
+      RV-3 does not reach it. This certificate's own margin, measured the same way, is 1.248e-59
+      (measure/contraction-n132-own.json).
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): no
+      symmetry of the box pairs it one to one with T-174's packing by nearest centres, and the house
+      witness and its regularized view measure the same; the optimal assignment of least summed
+      squared move moves 84 squares beyond a tenth and 91 beyond a hundredth (largest 0.986) and
+      turns 78, by up to 40.42 degrees. T-174 has 39 squares tilted beyond a degree, 18 turned one
+      way and 21 the other; this certificate 53, all one way.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side and T-293's
+      at 157 stood in, finds the L step and monotonicity consequences main finds: from 132 the step
+      lands at 155 at the side plus one, 12.976..., above 155's 12.952..., so the bound carries to
+      no other count.
+
+      Measured by the review (F11, its out/lineage.json): the growth step from the seed holds. Under
+      one symmetry of the box (three quarter turns), Samanyu-dev's 109, cut at about x = 3.58 and y
+      = 7.37 and its four parts moved about one unit apart, pairs every one of its 109 squares with
+      a square of this packing within 0.129 (median 0.008), 39 turned by more than a degree, up to
+      8.2 degrees; the 23 squares left over are 15 axis-aligned squares in the rows and columns at
+      the cuts and 8 tilted ones. The seed is 4.58e-04 below the record at 109, which holds 6 + 7/2
+      sqrt(2); the issue makes no claim there, and the seed's repository is not watched and not
+      retained, so it is context and not a report here.
+
+      The stage 4 review of 11 November 2026
+      (docs/project/reviews/review-2026-11-11-dewinter-132-157.md, lane L105, under think-bcfs),
+      written in a separate lane blind to this one until its findings were frozen, accepts the
+      certificate with findings, all notes, none blocking. Its clean-room checker decides both
+      files, every square, wall and all 8,646 pairs by separating axes in Fraction and by exact
+      clipped areas in gmpy2.mpq: 20 exact wall contacts (ten at the right wall, ten at the top),
+      the least positive wall clearance exactly 1.5e-60 (left and bottom), no pair touching, and the
+      least pair margin 1e-60 less about 1e-250, at squares 14 and 119.
+
+      Its 16 controls, stated beforehand, were each decided as stated, among them the squares
+      accepted in the box of side 11.976048383604 itself (F5); the JSON and the YAML hold the same
+      packing scalar for scalar (F3). Its comparison with this lane's receipts printed
+      LANE_EQUALS_REVIEW on 51 comparisons (E-de-winter-s132-review-exact-feasibility).
+
+      The review's notes for the author, which hold no rung: the certificate reads as a
+      configuration with touching near pairs scaled by 1 + 1e-60 and translated by 1e-60, so the
+      side lies 1.2476e-59 above it, the README's 1.3e-59 rounded up (F8); corner-on-edge and
+      corner-on-wall incidences within 1e-50 number 1,423, against the README's 1,407 contact
+      equations, with the counting convention not stated (F9); and the YAML has no softschema
+      header, no claim block, and an id with capitals, so it is not a valid Witness/v2 file as this
+      repository's schema defines it, though it is exact and equals the JSON, and the record writes
+      its own witness (F10).
+
+      The packings are MIT by LICENSE at the pin, byte for byte the copy the record already retains.
+      The seed's repository has no licence file, only its README's 'MIT-style' sentence (F12);
+      whether its terms cover building on the 109 packing is the owner's question on think-71uq,
+      under think-gtmb (the review named think-mdxq, which closed on 4 November), which decides
+      nothing here.
+
+      The review's questions for the author, informational and holding nothing open: whether the
+      stated 1.3e-59 and 1.4e-59 were rounded up or measured another way; how the 1,407 and 2,024
+      contact equations are counted; whether the YAML could carry the softschema header, a claim
+      block and a lowercase id; whether the measured cuts (about x = 3.58, y = 7.37 in the 109
+      turned three quarter turns, and x = 8.33, y = 8.32 in the 132 turned one quarter turn) are his
+      and which squares he added in each gap; whether the growth step's code, the IPOPT model, the
+      250-digit solutions and the binary64 and Shapely checks will be published; and whether
+      Samanyu-dev agreed to the 109 packing being built on, and whether 'MIT-style' covers the
+      packing data.
+
+      Adopted at 132 on 11 November 2026 under the house rule, in place of T-174, with the packing's
+      credit to Joost de Winter, its finder, after Samanyu-dev's pinwheel at 109, and T-174's
+      packing (Evan Daniel's, improved by PingYou Ltd) as the record it improves; the case's credit
+      fields are derived again for a new arrangement (F14). T-174 stays a verified bound at V3/C3,
+      keeps its certificate as history and still houses other counts.
+
+      Both strong generators ran on the new witness
+      (packing/cases/regularized_drawings/think-bcfs-2026-11-11/), and the selection, measured
+      against the axis tool's view of this witness, draws grid-slack's 0.5-degree view, admitted at
+      row 10 and better on every goal it changes: light, uneven and near-axis squares, angle classes
+      and hues 1, 3, 1, 15 and 15 against 0, 0, 0, 14 and 14, and full shared sides (house and
+      stage) 269 and 302 against 288 and 306. Evan Daniel's driver solved the witness to a certified
+      view about 1.2e-19 above its side, held at row 4, so there is no register candidate. The
+      SETTLED entry at 132, decided on T-174's witness, is taken off.
+
+      The source's own verify_exact.py was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share this repository's
+      centre-basis reader written for #939's files (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method; neither shares code with the author's
+      checker. The review's run is independently re-implemented, clean room, full coverage, by a
+      Claude agent, a system family that also produced the certificates. No human oversight or
+      optimality is claimed.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct reviewer
+      and a retained human oversight record; one AI review, of 11 November, is retained. It is the
+      smallest validated side at 132, and the case adopted it there on 11 November 2026 under the
+      house rule, with both strong generators' regularization of the new house; T-174 keeps its
+      place in the record as history. The review's questions for the author hold no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-11-dewinter-132-157.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 958 (L105,
+        under think-bcfs), prompted separately from the import lane (L104, think-bcfs) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-11'
+      scope: >-
+        Finite feasibility of the two centre-basis certificates of issue 958 at 132 and 157 and
+        their JSON twins, decided again by a clean-room exact checker frozen before any producer or
+        witness code was read, by two methods, with 16 controls a count stated in advance and a
+        self-test of 2,213 cases; the sides and the prints, the construction statements and the
+        growth steps measured from the seed, identity against the house, custody, licence, dating
+        and the significance; reconciled with the import lane after its findings were frozen.
+      verdict: accepted
+      covers:
+      - T-292
+      - T-293
+  - id: T-293
+    kind: upper-bound
+    registered: '2026-11-11'
+    landed: '2026-11-12'
+    headline: >-
+      De Winter's pinwheel at 157 from Samanyu-dev's 109, the first below the grid's 13, by 6.70e-03
+    claim: >-
+      One complete rational certificate proves s(157) <=
+      129933026113432236413372793549657716631187442425245801744283606793974218710058937592366709087048731338017528033289023283642767554572063457698437749660264199173945900886886411321189343067195192146616036359183804176225069306100476941522988597256113139114360980862141007303341357995510774692842598946408083952550389/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      That side is 12.9933026113432237 rounded up at 16 places and 12.993302611344 at 12, as the
+      source's root README prints it.
+
+      It is 6.70e-03 below the 13 x 13 grid's 13, which the case holds in both lanes; it is the
+      first packing of 157 squares below the grid on record. Measured here it is a new arrangement,
+      not one to one with the grid's 157 squares under any symmetry of the box by nearest centres:
+      the optimal assignment moves 100 squares beyond a tenth and turns 61.
+
+      Both maintained exact routes accept the certificate, and the stage 4 review of 11 November
+      2026 accepts it, its clean-room checker independently re-implemented; the case adopted it as
+      its house that day under the house rule.
+
+      n157/README.md says all squares were optimized together with an interior-point solver (IPOPT)
+      and the contact equations of the result then solved to 250 digits: all 2024 contact equations
+      (a corner of one square on the edge line of another, or a corner on a wall) are satisfied to
+      1e-247 and all other gaps stay open, and the certificate's side is 1.4e-59 above that
+      solution.
+
+      It says non-negative contact forces in balance exist, the first-order condition for a local
+      minimum, checked in floating point; that 297 perturbation trials, each re-optimized, found no
+      smaller side; that local optimality has no formal proof; and that a search for a minimal
+      polynomial of the side up to degree 16 found none. Measured here, the certificate's own
+      uniform-contraction margin is 1.349e-59 (1 - lambda* = 1e-60), about the distance the README
+      states. It says verify_exact.py, Python's standard library only, is the folder's exact
+      checker. Those statements are the author's; no source program ran here.
+
+      The issue says verify_exact.py, the checker used for #946 without its polynomial test, checks
+      in rational arithmetic that every edge direction is a unit vector, every square lies in the
+      container and all pairs have disjoint interiors, and that a floating-point separating-axis
+      test on all pairs and a union-area test with Shapely, separate code outside the repository,
+      agree, and that the exact checker has not been run against this repository's checkers. None of
+      them ran here.
+
+      The README says the Kaggle competition 'Squares in Squares' has a per-puzzle leaderboard that
+      lists sides without packings, that the author has not seen its values at 157, and so an
+      unpublished packing with a smaller side may exist. A side with no packing is no report; the
+      record compares with what has been published.
+
+      Credit Joost de Winter, who reports a pinwheel, a central block of tilted squares with four
+      arms surrounded by four blocks of axis-aligned squares, derived from the public 109-square
+      packing of Samanyu-dev/squares_in_squares (best_fit_101_500.csv, side 10.949289581) in two
+      steps, each cutting the packing along one horizontal and one vertical line, moving the parts
+      about one unit apart, filling each gap with one layer of squares that continues the local
+      lattice and re-optimizing every square; the first step gives his packing of 132 (T-292).
+
+      The README says credit for the pinwheel arrangement at n = 109 belongs to Samanyu-dev, whose
+      README reports that packing as a result of its own stretch and quench chains; the packing at
+      157 is credited to de Winter after Samanyu-dev.
+
+      Measured here, 61 squares turn, by 24.0 to 27.5 degrees, all the same way, against the
+      README's 61 tilted at four distinct angles between 24.0 and 27.6 degrees and 96 axis-aligned.
+
+      The README says the derivation, optimization, high-precision solution, rational certificate,
+      checking and figure were produced with Claude Fable 5.2 (Anthropic) under the direction of
+      Joost de Winter, as the issue does; the folder's first commit said Claude (Anthropic), and the
+      head names the model.
+    scope:
+      n_values:
+      - 157
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A count whose best known packing was the trivial grid now has one below it, as T-057 at 211
+        and T-220 at 183 (both S3). 157 = 13^2 - 13 + 1: Kevin Fang's Theorem 1 (T-163) gives
+        s(k^2 - k + 1) < k for every k >= 15, T-220 gave it at k = 14, and this certificate gives
+        it at k = 13; 111 and 133 (k = 11 and 12) stay at their grids. S3 by the anchor 'a
+        substantive case result', as T-220's is; the margin, about 0.0067, carries to no other
+        count, and a cut-and-fill step continues a known pinwheel, so no technique is new and it is
+        not S4. No lower bound or optimum.
+      scored: '2026-11-11'
+      by: >-
+        think-bcfs Joost de Winter import (intake lane L104), confirmed by the stage 4 review of
+        11 November (lane L105)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s157 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    evidence:
+    - E-de-winter-s157-certificate-report
+    - E-de-winter-s157-exact-feasibility
+    - E-de-winter-s157-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/README.md
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_witness.yaml
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_exact.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157-own.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-11-dewinter-132-157.md
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/README.md
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/check-n157.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/controls-n157.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/lineage.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/compare-lane.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l104_1111.py
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/controls-n157.json
+    notes: >-
+      A separate complete repository replay is retained for n = 157: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both routes,
+      73476 pair decisions; summed over the 3 jobs, the receipt records 78.42 route CPU seconds and
+      79.8 job wall seconds. In every positive squares touch the box, a least wall clearance of
+      exactly 0, and every pair clears by at least 9.99e-61. The replay is
+      E-de-winter-s157-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), as the module predicts them,
+      lowered the side by the least far-wall clearance (0), closed the least-gap pair (101 against
+      88) by its gap of 1e-60 and moved every square toward the nearer near wall by its least
+      clearance: both routes accepted each at exact contact and refused each 1e-30 past it. They
+      refused square 101 enlarged to its pair at contact for its shape alone, accepted square 109,
+      already touching its wall, grown by 0, refused it 1e-30 past for the wall and the overlap, and
+      refused a duplicated square.
+
+      At n = 157 the certificate is below the case's ceiling (the trivial grid, 13) by 6.70e-03;
+      smallest: this certificate. The ledger of 11 November for this lane
+      (campaign/issue-intake/upper-bounds-de-winter-132-157-20261111) walks #958 from starts frozen
+      on main on 11 November and records this claim as a new packing, the only report at 157.
+
+      #958 (20:56:18Z on 11 November) names the repository's head, which changes only the READMEs
+      and checksums of the commit that first published the folder, at 20:49:44Z, 6 minutes 34
+      seconds before the issue. Its push is not read (GitHub's activity log was not readable from
+      this session); the rule of 14 October would date the claim by it if it came first, but no
+      other report reached 132 or 157 in that window, so the ledger dates the claim by the issue
+      with the first commit kept, and the verdict is the same either way.
+
+      Measured against padding (RV-3, think-ruu2): the grid, contracted uniformly about the origin,
+      has margin 0, its squares touching (1 - lambda* = 0), so the whole gain of 6.697e-03 lies
+      outside any padding (measure/contraction-n157.json, which reads the house witness
+      witnesses/known-best/n-157.yaml). A packing below the grid is no re-certification of it, and
+      RV-3 does not reach it. This certificate's own margin, measured the same way, is 1.349e-59
+      (measure/contraction-n157-own.json).
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): no
+      symmetry of the box pairs it one to one with the grid's squares by nearest centres; the
+      optimal assignment of least summed squared move moves 100 squares beyond a tenth (largest
+      1.409) and turns 61.
+
+      The L-step scan (devtools.l_step_scan, retained in the de-winter-s132-upper-bound-2026-11-11
+      packet), with this side and T-292's at 132 stood in, finds the L step and monotonicity
+      consequences main finds but one: from 157 the step lands at 182 at the side plus one,
+      13.993..., above 182's 13.971..., and 184's L-extension of the grid at 157 lapses, its ceiling
+      the grid's 14 either way. So the bound carries to no other count.
+
+      Measured by the review (F11, its out/lineage.json): the growth step from the author's 132
+      holds. Under one symmetry of the box (one quarter turn), the 132, cut at about x = 8.33 and y
+      = 8.32 and its four parts moved about one unit apart, pairs every one of its 132 squares with
+      a square of this packing within 0.126, 42 turned by more than a degree, up to 3.9 degrees; the
+      25 squares left over are 17 axis-aligned squares in the rows and columns at the cuts and 8
+      tilted ones. The review measured the step from Samanyu-dev's 109 to the 132 as well (T-292).
+      The seed is 4.58e-04 below the record at 109; the issue makes no claim there, and the seed's
+      repository is not watched and not retained, so it is context and not a report here.
+
+      The stage 4 review of 11 November 2026
+      (docs/project/reviews/review-2026-11-11-dewinter-132-157.md, lane L105, under think-bcfs),
+      written in a separate lane blind to this one until its findings were frozen, accepts the
+      certificate with findings, all notes, none blocking. Its clean-room checker decides both
+      files, every square, wall and all 12,246 pairs by separating axes in Fraction and by exact
+      clipped areas in gmpy2.mpq: one exact wall contact (square 109, right), the least positive
+      wall clearance 1.01e-248 (square 136, right), no pair touching, and the least pair margin
+      1e-60 less about 1e-247, at squares 88 and 101.
+
+      Its 16 controls, stated beforehand, were each decided as stated, among them the squares
+      accepted in the box of side 12.993302611344 itself (F5); the JSON and the YAML hold the same
+      packing scalar for scalar (F3). Its comparison with this lane's receipts printed
+      LANE_EQUALS_REVIEW on 51 comparisons (E-de-winter-s157-review-exact-feasibility).
+
+      The review's notes for the author, which hold no rung: the certificate reads as a
+      configuration with touching near pairs scaled by 1 + 1e-60 and translated by 1e-60, so the
+      side lies 1.3493e-59 above it, the README's 1.4e-59 rounded up (F8); corner-on-edge and
+      corner-on-wall incidences within 1e-50 number 2,048, against the README's 2,024 contact
+      equations, with the counting convention not stated (F9); and the YAML has no softschema
+      header, no claim block, and an id with capitals, so it is not a valid Witness/v2 file as this
+      repository's schema defines it, though it is exact and equals the JSON, and the record writes
+      its own witness (F10).
+
+      The packings are MIT by LICENSE at the pin, byte for byte the copy the record already retains.
+      The seed's repository has no licence file, only its README's 'MIT-style' sentence (F12);
+      whether its terms cover building on the 109 packing is the owner's question on think-71uq,
+      under think-gtmb (the review named think-mdxq, which closed on 4 November), which decides
+      nothing here.
+
+      The review's questions for the author, informational and holding nothing open: whether the
+      stated 1.3e-59 and 1.4e-59 were rounded up or measured another way; how the 1,407 and 2,024
+      contact equations are counted; whether the YAML could carry the softschema header, a claim
+      block and a lowercase id; whether the measured cuts (about x = 3.58, y = 7.37 in the 109
+      turned three quarter turns, and x = 8.33, y = 8.32 in the 132 turned one quarter turn) are his
+      and which squares he added in each gap; whether the growth step's code, the IPOPT model, the
+      250-digit solutions and the binary64 and Shapely checks will be published; and whether
+      Samanyu-dev agreed to the 109 packing being built on, and whether 'MIT-style' covers the
+      packing data.
+
+      Adopted at 157 on 11 November 2026 under the house rule, in place of the 13 x 13 grid, with
+      the packing's credit to Joost de Winter, its finder, after Samanyu-dev's pinwheel at 109; the
+      case's conjectured integer optimum and its prose that nothing beats the grid are withdrawn
+      (F14), as at 183 and 211. The grid stays the verified bound it was, kept as history.
+
+      Both strong generators ran on the new witness
+      (packing/cases/regularized_drawings/think-bcfs-2026-11-11/), and the selection, measured
+      against the new witness's own drawing, draws grid-slack's 0.5-degree view, admitted at row 10:
+      light, uneven and near-axis squares, angle classes and hues unchanged at 0, 0, 0, 5 and 5, and
+      full shared sides (house and stage) 368 and 376 against 376 and 376. Evan Daniel's driver
+      solved the witness to a certified view about 1.3e-19 above its side, held at row 4, so there
+      is no register candidate.
+
+      The source's own verify_exact.py was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share this repository's
+      centre-basis reader written for #939's files (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method; neither shares code with the author's
+      checker. The review's run is independently re-implemented, clean room, full coverage, by a
+      Claude agent, a system family that also produced the certificates. No human oversight or
+      optimality is claimed.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct reviewer
+      and a retained human oversight record; one AI review, of 11 November, is retained. It is the
+      smallest validated side at 157, and the case adopted it there on 11 November 2026 under the
+      house rule, with both strong generators' regularization of the new house; the grid keeps its
+      place in the record as history. The review's questions for the author hold no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-11-dewinter-132-157.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 958 (L105,
+        under think-bcfs), prompted separately from the import lane (L104, think-bcfs) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-11'
+      scope: >-
+        Finite feasibility of the two centre-basis certificates of issue 958 at 132 and 157 and
+        their JSON twins, decided again by a clean-room exact checker frozen before any producer or
+        witness code was read, by two methods, with 16 controls a count stated in advance and a
+        self-test of 2,213 cases; the sides and the prints, the construction statements and the
+        growth steps measured from the seed, identity against the house, custody, licence, dating
+        and the significance; reconciled with the import lane after its findings were frozen.
+      verdict: accepted
+      covers:
+      - T-292
+      - T-293
+  - id: T-294
+    kind: upper-bound
+    registered: '2026-11-11'
+    landed: '2026-11-12'
+    headline: >-
+      Özden's further arrangement of his T-291 band at 179, 4.07e-04 below it, 2.645e-12 above s(70) + 5
+    claim: >-
+      One complete rational certificate proves s(179) <=
+      1388096037155822502128790515250755112992700071140158603216207237631759847022259162223365161028562708981913500156981545848997786790079746004217653486626222737561559114471095443533640028465316631511517257649915054413876043/100000000000000000000000000000382066398767479260730653096809429923440324843182790249464187167106629590077455771513675657320116033076253416959053569425215538797993845132515219355779258909325190694986680090000000000000000.
+      That side is 13.8809603715582251 rounded up at 16 places and 13.880960371559 at 12, as
+      #959 prints it.
+
+      It is 4.07e-04 below T-291 (the author's own packing from #954), the case's house best
+      packing until 12 November 2026, and 2.84e-03 below T-174 (Nate Chaoweeraprasit's packing,
+      improved by Siddharth Gupta and PingYou Ltd), the house before it. Measured here it is a
+      further arrangement of T-291's packing: nearest centres pair the two one to one under the
+      identity of the box, and the optimal assignment moves 3 squares beyond a tenth.
+
+      Both maintained exact routes accept the certificate, and the stage 4 review of 11 November
+      2026 accepts it, its clean-room checker independently re-implemented, and accepts the same
+      squares in the box of the claim's own side, 13.880960371559 (F3); the case adopted it as
+      its house on 12 November under the house rule, in place of T-291.
+
+      The issue says this repository's packing-witness verify, run unmodified on the witness,
+      reports VERIFIED (exact-algebraic, 15931 pairs), and that verifier/sqcheck.py, an exact
+      checker the author's lab wrote separately from this repository's code, reports VALID
+      (exact rational) and prints the exact side rounded up. It says the two share only the
+      unit-square, wall and non-overlap definitions.
+
+      This repository's packing-witness promote --strategy robust-rational made the exact
+      coordinates from the lab's decimal pose, n-179-decimal-pose.yaml, with center_dilation 1
+      and no dilation, so packing-witness verify is not independent of how they were rounded, as
+      the issue says. The issue says the pair margins of about 2e-13 are the decimal pose's own,
+      that only the squares that set the left wall, the bottom wall and the side touch them
+      exactly, and that other squares near a wall clear it by up to about 1e-12. Before
+      promotion sqcheck.py certified the decimal pose in interval arithmetic. No
+      local-optimality, rigidity or formal check is claimed. Those statements are the author's;
+      no source program ran here.
+
+      Measured by the review, exactly three squares touch a wall (67 at the bottom, 123 at the
+      left and 162 at the top, which sets the side), as the issue says; 38 other square-wall
+      clearances lie below 1e-13, from 7.03e-18 (squares 110 and 115, right) to 4.07e-14, and
+      six between 2.41e-5 and 5.53e-4, which the issue's "near a wall" does not cover. The pair
+      margins are the pose's own, as the issue says, 1.99 to 2.71e-13 of the centres' separation
+      along the binding axis, median 2.07e-13, about twice the issue's "about 1e-13 relative"
+      (F6).
+
+      Credit Doğa Özden (https://dogaozden.com/math/live/square-packing/), who reports a packing
+      from a later batch of #954's band-design search: the tilted squares of the registry's 70
+      (Ryan Xu, improved by Evan Daniel and PingYou Ltd), a two-row band of 20 squares, laid
+      along the diagonal with a copy shifted by (5, 5), mutated, annealed in a reduced model
+      with the axis-parallel squares on the two wall-anchored staircase lattices, then quenched
+      once with Evan Daniel's ALM+SLP code (https://github.com/evand/square-packing, MIT); its
+      exact coordinates were made by this repository's packing-witness promote.
+
+      The issue asks that the improvement be credited to Özden, the band's source packing, n =
+      70, and the current record to their holders as the registry lists them, and the local
+      optimizer to Evan Daniel.
+
+      The issue says the search and its code were written and run by AI agents and that the
+      checks were run by code that did not produce the packing; it says the issue and repository
+      were prepared and posted by Özden's AI agent, which uses the account kenaznia-doga, and
+      that Özden directed the work. The best public Kaggle per-puzzle packing the issue found at
+      179, 13.883795490524 (kirilltym), is above this. The issue says this supersedes the
+      author's own #954 (T-291), which stays a verified bound.
+
+      The side-only leaderboard entry the issue quotes, and states first, 13.880960371556 (team
+      Nevska, 7 November), is 2.2e-12 below this side, as the issue says; it is unpublished and
+      states no packing, so it is no report and is recorded as context only. It is the
+      registry's s(70) + 5 at 12 places, and this side is 2.645e-12 above s(70) + 5, as the
+      issue says; the review finds the side's 12-place fractional part, 0.880960371558, agrees
+      with the 70's and 207's 0.880960371556 to 11 places, not the issue's 12 (F5). The packing
+      is, to 8.2e-14 in side, a configuration at s(70) + 5 dilated by about 1 + 2e-13 (F9); no
+      exact construction at s(70) + 5 is shown here or by the source.
+    scope:
+      n_values:
+      - 179
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A further arrangement of T-291's packing at 179, 4.07e-04 below it, far above the S2/S3
+        line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3),
+        where continued arrangements are S3 as new ones are: beside T-277's 2.34e-04 and T-291's
+        2.43e-03; about 22 times the top of the band. The band-design search is #954's, described
+        and not published, and the packing is a further arrangement of the author's own, so not
+        S4; the relation to s(70) + 5 does not change the score, since the record already holds
+        s(207) = s(70) + 6 exactly and no exact construction at s(70) + 5 is shown. No lower
+        bound or optimum. The stage 4 review of 11 November confirms S3.
+      scored: '2026-11-11'
+      by: >-
+        think-89i7 Doğa Özden import (intake lane L107), confirmed by the stage 4 review of 11
+        November (lane L108)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Özden s179 issue 959 2026-11-11]'
+      published: '2026-11-11'
+    evidence:
+    - E-ozden-959-certificate-report
+    - E-ozden-959-exact-feasibility
+    - E-ozden-959-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/README.md
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/acquisition/claims.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/source/n-179-candidate.yaml
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/source/n-179-decimal-pose.yaml
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/identity.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/core-n070.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179-own.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/check-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/controls-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/identity-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/s70-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/contract-n179.json
+    - docs/project/reviews/review-2026-11-12-ozden-959.md
+    - packing/campaign/issue-intake/upper-bounds-959-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/measure_core.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l107_1111.py
+    - packing/tests/test_measure_core.py
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/controls-n179.json
+    notes: >-
+      A separate complete repository replay is retained for n = 179: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 95586 pair decisions; summed over the 3 jobs, the receipt records 39.82 route CPU
+      seconds and 61.91 job wall seconds, the longest job 23.62 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 1.99e-13. The replay is E-ozden-959-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), stated before they ran,
+      lowered the side by the least far-wall clearance, closed the least-gap pair (squares 104
+      and 105) by its gap and moved every square toward the nearer near wall by its least
+      clearance: both routes accepted each at exact contact, margin 0, and refused each 1e-30
+      past it. They refused one square enlarged to its pair at contact for its shape alone,
+      accepted one already touching its wall at contact (square 67, grown by 0), refused each
+      1e-30 past it for the overlap or the wall as well, and refused a duplicated square.
+
+      At n = 179 the certificate is below the case's ceiling before this adoption (Doğa Özden,
+      T-291) by 4.07e-04; smallest: this certificate. No register bound was pending adoption at
+      179.
+
+      The ledger of 11 November for this lane (campaign/issue-intake/upper-bounds-959-20261111)
+      walks every report at 179 in report order from a start frozen on main on 11 November,
+      after T-291's adoption, and records this entry's claim, the only report there. The
+      author's comment on #954 at 21:18:29Z, five seconds after #959 opened, links the two and
+      asks that #959 be adopted in place of #954.
+
+      Measured pose by pose (measure/identity.json in the packet; a measurement, which decides
+      nothing): nearest centres pair it one to one with T-291's packing under the identity of
+      the box, and T-291's house witness and its regularized view, as they stood before this
+      adoption, measure the same; the optimal assignment moves 3 squares beyond a tenth, 31
+      beyond a hundredth and 85 beyond a thousandth (largest 0.218429), and turns 44 squares by
+      up to 27.79 degrees, 5 of them by more than a degree with the boxes centred.
+
+      Tilted beyond a degree: 35 here, 37.7 to 40.75 degrees from upright, all turned the same
+      way; T-291's 36, 27.3 to 41.4 degrees. So it is a further arrangement of T-291's packing,
+      by its own finder, as the review finds with its own measure (F8: 9 squares beyond 0.05, 3
+      beyond a tenth, 5 turned beyond a degree; 36 tilted beyond half a degree here against
+      T-291's 37).
+
+      Against T-174's, no symmetry pairs it one to one; the assignment moves 46 squares beyond a
+      tenth, and with the boxes centred 43 turn by more than a degree.
+
+      The issue's own counts against the house it names (143 centres beyond 1e-3, 48 beyond
+      0.05, the largest move 0.889, 43 re-tilted beyond a degree) reproduce, as the review
+      measured, with T-174 reflected top to bottom and set against the upper-left corner of the
+      new box; the issue does not name the anchoring (F7).
+
+      Measured against the registry's 70 (measure/core-n070.json, devtools.measure_core): the
+      side lies 2.645e-12 above s(70) + 5, 1.906e-13 of itself. It is no core with a border: a
+      border five wide round the 70, by five L steps, holds 175 squares at that side, four short
+      of 179, and set flush in any corner under any symmetry the 70 keeps at most 48 of its
+      squares within 1e-9.
+
+      Laid along the main diagonal at shifts (0, 0) to (5, 5) under the identity of its box, the
+      70 lies within 1e-9 of 15 of the 35 tilted squares here, 7 at (0, 0) and 8 at (5, 5), and
+      within 0.05 of 29; under no other symmetry is a tilted square within 0.01. So the packing
+      keeps both ends of the 70's band in place to 1e-9, where the issue's seed puts them, with
+      the band between them re-laid: a band re-laid from the 70's, as T-291's is, not the 70
+      with a border, which would credit its holders with the construction.
+
+      The review measures the same (F9): at most 48 of the 70's squares at any corner, 34 at the
+      lower left; seven of the tilted squares are the lower-left copy's and eight the
+      upper-right copy's to 1e-11, and 26 of the 36 tilted beyond half a degree sit at the 70
+      band's angle, -40.750530446306 degrees, to 1e-9 degrees, the other 21 band squares between
+      the copies on positions neither has; 103 upright squares lie on unit lattices anchored at
+      two walls. The seed as the issue states it has 34 squares, not 35, and lies within 0.05 of
+      28 of the 36 tilted squares under the identity of the 70 box and no other.
+
+      The issue names the registry's 70 as the band's source; that witness comes from PingYou
+      Ltd's PR 574 algebraic supplement, a release with no licence file, kept here in the
+      derived-only form. Whether a seed taken from it needs a notice of its own is the owner's
+      decision on think-71uq, as for T-291 (F11; the review names think-mdxq, which closed on 4
+      November). It is noted here, not decided.
+
+      Measured against padding: T-291's certificate at 179, contracted uniformly about the
+      origin to first contact, loses 2.62e-12 of its side (1 - lambda* = 2.03e-13, squares 14
+      and 15 the binding pair), and the gain is 1.56e8 times that, so none of it is the house's
+      padding, RV-3 (think-ruu2) does not reach it, and it is not held at V0/C1 as T-285 and
+      T-286 are.
+
+      This certificate's own margin, measured the same way, is 2.57e-12 (1 - lambda* = 1.99e-13,
+      the binding pair the replay's least-gap pair); contracted so, its side lies 7.9e-14 above
+      s(70) + 5. Both receipts are contraction_margin's, retained in the packet's measure/
+      directory.
+
+      The review decided T-291's witness with its own checker and found the same margin,
+      2.616e-12 (pair 14, 15), and decided this certificate's squares contracted by 1 -
+      1.99e-13, accepted at side 13.88096037155566185, s(70) + 5 + 8.2e-14 and 3.4e-13 below the
+      leaderboard's 13.880960371556, and refused at 1 - 2e-13 (F10). A side inside the
+      certificate's own dilation is the owner's open question RV-3 (think-ruu2), so that
+      contracted side is noted here and not registered.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json in the packet), with this
+      side stood in for 179's ceiling, finds the same L-step and monotonicity consequences as on
+      main, so this bound carries to no other count.
+
+      The source's own sqcheck.py was not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share this
+      repository's corner-witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method; the first is the packing-witness
+      verify the author ran on the same file, so on that route the replay is reproduced with the
+      producer's code, and the second shares no verification code with it.
+
+      Because this repository's packing-witness promote made the exact coordinates, neither
+      route is independent of how they were rounded, as the issue says. A replay through
+      sqpack's verifier is the author's first check run again, from the package whose promotion
+      made the coordinates; the review's run is independently re-implemented, clean room, full
+      coverage, by a Claude agent (F12). No human oversight or optimality is claimed.
+
+      The witness's softschema.schema resolves to no file in the author's repository, and its
+      certificate.replay names the file but not where to run it, as at #954; the adopted witness
+      carries this repository's own (F12). The issue dates its search for competing claims
+      twelve minutes after it was opened (F13). Both are notes for the author.
+
+      The stage 4 review of 11 November 2026
+      (docs/project/reviews/review-2026-11-12-ozden-959.md, lane L108), written in a separate
+      lane blind to this one until its findings were frozen, accepts the certificate with
+      findings, all notes, none blocking: its clean-room checker decides every square, wall and
+      all 15931 pairs by separating axes in gmpy2.mpq and by exact clipping in Fraction, 3 exact
+      wall contacts (bottom 67, left 123, top 162) and the least pair margin
+      1.99223328482862e-13 at squares 104 and 105, and its 19 controls, stated beforehand, were
+      each decided as stated (E-ozden-959-review-exact-feasibility).
+
+      Its questions for the author, which hold no rung: whether the lab would promote the pose
+      with a contraction (center_dilation below 1), since the record's owner decides whether a
+      side inside the repair dilation is registered; whether there is an exact construction at
+      s(70) + 5, as the registry's 207 is at s(70) + 6, which would be scored on its own;
+      whether the repair scaling was about 2e-13 rather than 1e-13; and whether the lineage
+      counts use T-174 reflected top to bottom and set against the upper-left corner, and
+      whether the issue would name that convention.
+
+      It also asks whether the issue would correct "our exact side 13.880960371558224" (the
+      side's binary64 value) and the 12-place fractional part (0.880960371558, not
+      0.880960371556); which square the seed's 35th counts, since it has 34 by their centres;
+      which time is right for the search for other claims, since the time the issue gives falls
+      after it was opened; and whether the seed took the 70 band from the registry's witness or
+      from Ryan Xu's or Evan Daniel's published coordinates, and whether the band-design search
+      will be published.
+
+      T-291 stays a verified bound at V3/C3 and keeps its certificate as history, as T-174 does.
+      #574's follow-up of 19 October acknowledged the rational houses PR #665 adopted from
+      T-174, 179 among them. #574 is held for the owner (think-9v2k), so a follow-up naming the
+      new house at 179 waits on that hold.
+
+      Adopted at 179 on 12 November 2026 under the house rule, in place of T-291, with the
+      packing's credit to Doğa Özden, its finder, as a further arrangement of his own T-291
+      packing from the band of Ryan Xu's n = 70 packing, as Evan Daniel and PingYou Ltd improved
+      it, and T-174's packing as the record T-291 improved (F8), and both strong generators'
+      regularization of the new house, measured against the new witness, in the same change.
+
+      The rigidity block was derived again on the new witness and stays not rigid: 64 of its 179
+      squares translate, against 74 of T-291's. Both strong generators ran on the new witness
+      (packing/cases/regularized_drawings/think-89i7-2026-11-12/), and the selection, measured
+      against the drawing of this witness, draws Evan Daniel's same-side view, admitted at row
+      10: light, uneven, near-axis squares, angle classes and hues 6, 11, 5, 17 and 17 against
+      0, 0, 0, 4 and 4, and full shared sides (house and stage) 497 and 530 against 552 and 552.
+
+      Evan Daniel's regularizer solved the witness to a certified KKT point 2.645e-12 below its
+      side, at 13880960371555579594835501178639/10^30, which is s(70) + 5 + 1.4e-19, about the
+      certificate's own contraction margin (2.57e-12) and the configuration the review's F9
+      measures; it is held at row 3 as a register candidate and not admitted, and its
+      registration waits on RV-3 (think-ruu2, think-ikku), as at 156, 172, 180, 199, 268, 269
+      and 270 and at 179 for T-291.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Özden's name off their credit block
+      at 179 (PRINT_CREDIT_HELD has held 179 since T-291, think-tj4o) until the next
+      infographics cut redraws them; the case record, its page and its bound citation credit him
+      now.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 11 November, is
+      retained. It is the smallest validated side at 179, and the case adopted it there on 12
+      November 2026 under the house rule, in place of T-291, with both strong generators'
+      regularization of the new house; T-291 and T-174 keep their certificates as history. The
+      review's questions for the author hold no rung, and the contracted side its F10 measures
+      is the owner's RV-3 question, not registered.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-12-ozden-959.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 959 (L108,
+        under think-89i7), prompted separately from the import lane (L107, think-89i7) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-11'
+      scope: >-
+        Finite feasibility of the corner certificate of issue 959, decided again by a clean-room
+        exact checker frozen before any producer or witness code was read, by two methods, with
+        19 controls stated in advance and a self-test of 8,453 cases; the side and the issue's
+        prints, both houses' margins against the gains, the identity against T-174 and T-291,
+        the relation to s(70) + 5 and the 70 and 207 packings, an exact uniform contraction, the
+        stated seed, custody, licence, credit and the significance.
+      verdict: accepted
+      covers:
+      - T-294
   - id: T-295
     kind: upper-bound
     registered: '2026-11-11'
@@ -44325,7 +45171,7 @@ results:
       #960 prints it.
 
       It is 8.80e-03 below T-190 (Francisco Couzo's certificate of Nate Chaoweeraprasit's
-      packing, improved by Couzo and Mishapolk), the case's house best packing until 11
+      packing, improved by Couzo and Mishapolk), the case's house best packing until 12
       November 2026. Measured here it is a new arrangement relative to T-190's packing, not one
       to one with it under any symmetry of the box by nearest centres: the optimal assignment
       moves 72 squares beyond a tenth.
@@ -44333,7 +45179,7 @@ results:
       Both maintained exact routes accept the certificate, and the stage 4 review of 11 November
       2026 accepts it, its clean-room checker independently re-implemented, and accepts the same
       squares in the box of the claim's own side, 15.893805580573 (F3); the case adopted it as
-      its house that day under the house rule.
+      its house on 12 November under the house rule, in place of T-190.
 
       The issue names the record it improves T-189, Couzo's issue-607 certificate, but quotes
       T-190's side and fraction, the house since 16 October 2026; T-189 is 2.40e-11 above T-190,
@@ -44565,7 +45411,7 @@ results:
       T-190 stays a verified bound at V3/C3 and keeps its certificate as history, as does T-189;
       T-253 stays held below the stage 4 exit for think-ikku.
 
-      Adopted at 237 on 11 November 2026 under the house rule, in place of T-190, with the
+      Adopted at 237 on 12 November 2026 under the house rule, in place of T-190, with the
       packing's credit to Doğa Özden, its finder, from two copies of the band of Ryan Xu's n =
       70 packing, as Evan Daniel and PingYou Ltd improved it, as the search's seed, and T-190's
       packing, Nate Chaoweeraprasit's as Francisco Couzo and Mishapolk improved it, as the
@@ -44605,7 +45451,7 @@ results:
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 11 November, is
-      retained. It is the smallest validated side at 237, and the case adopted it there on 11
+      retained. It is the smallest validated side at 237, and the case adopted it there on 12
       November 2026 under the house rule, with both strong generators' regularization of the new
       house; T-190 keeps its certificate as history. The review's questions for the author hold
       no rung.
@@ -45013,17 +45859,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-131-regularized.yaml.gz
     - n: 132
-      of: T-174
+      of: T-292
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 8.676001e-95
-        max_turn_deg: 0.0
+        moved: 10
+        max_move: 0.02418548
+        max_turn_deg: 0.222242
       view: packing/atlas/known-best/regularized/n-132-regularized.yaml.gz
     - n: 146
       of: T-187
@@ -45113,6 +45960,20 @@ regularized_drawings:
         max_move: 0.3012276
         max_turn_deg: 0.157846
       view: packing/atlas/known-best/regularized/n-156-regularized.yaml.gz
+    - n: 157
+      of: T-293
+      by: project
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 4
+        max_move: 0.001659787
+        max_turn_deg: 2.26902e-245
+      view: packing/atlas/known-best/regularized/n-157-regularized.yaml.gz
     - n: 171
       of: T-155
       by: project
@@ -45201,19 +46062,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-178-regularized.yaml.gz
     - n: 179
-      of: T-291
+      of: T-294
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
       modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
-      changes: {straightened: 9, re_angled: 6}
+      changes: {straightened: 7, re_angled: 6}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 67
-        max_move: 0.249093
-        max_turn_deg: 27.2593
+        moved: 56
+        max_move: 0.05477726
+        max_turn_deg: 2.96935
       view: packing/atlas/known-best/regularized/n-179-regularized.yaml.gz
     - n: 180
       of: T-288

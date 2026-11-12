@@ -8,7 +8,7 @@ review of 11 November 2026
 
 | n | House | Replaces | Adopted |
 | ---: | --- | --- | --- |
-| 237 | T-295 | T-190 | 11 November 2026 |
+| 237 | T-295 | T-190 | 12 November 2026 |
 
 The house is a new arrangement relative to T-190’s packing, found by Özden’s band-design
 search from two copies of the tilted squares of the registry’s n = 70 packing.

@@ -1,0 +1,772 @@
+{
+ "format": "measure-core-v1",
+ "n": 179,
+ "m": 70,
+ "inputs": {
+  "view": {
+   "label": "#959",
+   "input": "packet",
+   "packet": "ozden-s179-issue959-2026-11-11",
+   "side": "1388096037155822502128790515250755112992700071140158603216207237631759847022259162223365161028562708981913500156981545848997786790079746004217653486626222737561559114471095443533640028465316631511517257649915054413876043/100000000000000000000000000000382066398767479260730653096809429923440324843182790249464187167106629590077455771513675657320116033076253416959053569425215538797993845132515219355779258909325190694986680090000000000000000"
+  },
+  "core": {
+   "path": "packing/witnesses/known-best/n-070.yaml",
+   "sha256": "8dea42c8e4a3e8d436dc6dafe99d5b4b6102d7948d187aff9450f8869b26a6d4",
+   "witness": "W-known-best-n070",
+   "scalar": "algebraic-number-field",
+   "side": "8.880960371555579594696692"
+  }
+ },
+ "bounds": [
+  "1e-9",
+  "1e-6",
+  "1e-3",
+  "1e-2",
+  "5e-2",
+  "1e-1"
+ ],
+ "side": {
+  "difference": "5.000000000002645426591214",
+  "plus": [
+   {
+    "plus": 0,
+    "excess": "5.000000",
+    "relative": "3.602056e-1",
+    "l_border_count": 70
+   },
+   {
+    "plus": 1,
+    "excess": "4.000000",
+    "relative": "2.881645e-1",
+    "l_border_count": 87
+   },
+   {
+    "plus": 2,
+    "excess": "3.000000",
+    "relative": "2.161234e-1",
+    "l_border_count": 106
+   },
+   {
+    "plus": 3,
+    "excess": "2.000000",
+    "relative": "1.440822e-1",
+    "l_border_count": 127
+   },
+   {
+    "plus": 4,
+    "excess": "1.000000",
+    "relative": "7.204112e-2",
+    "l_border_count": 150
+   },
+   {
+    "plus": 5,
+    "excess": "2.645427e-12",
+    "relative": "1.905795e-13",
+    "l_border_count": 175
+   }
+  ]
+ },
+ "core": {
+  "of": 70,
+  "best": {
+   "1e-9": 48,
+   "1e-6": 48,
+   "1e-3": 48,
+   "1e-2": 56,
+   "5e-2": 64,
+   "1e-1": 64
+  },
+  "placements": [
+   {
+    "symmetry": "identity",
+    "corner": "lower-left",
+    "matched": {
+     "1e-9": 34,
+     "1e-6": 34,
+     "1e-3": 34,
+     "1e-2": 43,
+     "5e-2": 64,
+     "1e-1": 64
+    }
+   },
+   {
+    "symmetry": "identity",
+    "corner": "lower-right",
+    "matched": {
+     "1e-9": 20,
+     "1e-6": 20,
+     "1e-3": 21,
+     "1e-2": 31,
+     "5e-2": 31,
+     "1e-1": 31
+    }
+   },
+   {
+    "symmetry": "identity",
+    "corner": "upper-left",
+    "matched": {
+     "1e-9": 17,
+     "1e-6": 17,
+     "1e-3": 17,
+     "1e-2": 22,
+     "5e-2": 23,
+     "1e-1": 23
+    }
+   },
+   {
+    "symmetry": "identity",
+    "corner": "upper-right",
+    "matched": {
+     "1e-9": 48,
+     "1e-6": 48,
+     "1e-3": 48,
+     "1e-2": 56,
+     "5e-2": 62,
+     "1e-1": 64
+    }
+   },
+   {
+    "symmetry": "quarter-turn",
+    "corner": "lower-left",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 2,
+     "5e-2": 2,
+     "1e-1": 2
+    }
+   },
+   {
+    "symmetry": "quarter-turn",
+    "corner": "lower-right",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 1,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "quarter-turn",
+    "corner": "upper-left",
+    "matched": {
+     "1e-9": 1,
+     "1e-6": 1,
+     "1e-3": 1,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "quarter-turn",
+    "corner": "upper-right",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "half-turn",
+    "corner": "lower-left",
+    "matched": {
+     "1e-9": 21,
+     "1e-6": 21,
+     "1e-3": 21,
+     "1e-2": 27,
+     "5e-2": 36,
+     "1e-1": 36
+    }
+   },
+   {
+    "symmetry": "half-turn",
+    "corner": "lower-right",
+    "matched": {
+     "1e-9": 11,
+     "1e-6": 11,
+     "1e-3": 12,
+     "1e-2": 18,
+     "5e-2": 18,
+     "1e-1": 18
+    }
+   },
+   {
+    "symmetry": "half-turn",
+    "corner": "upper-left",
+    "matched": {
+     "1e-9": 28,
+     "1e-6": 28,
+     "1e-3": 28,
+     "1e-2": 33,
+     "5e-2": 36,
+     "1e-1": 36
+    }
+   },
+   {
+    "symmetry": "half-turn",
+    "corner": "upper-right",
+    "matched": {
+     "1e-9": 29,
+     "1e-6": 29,
+     "1e-3": 29,
+     "1e-2": 35,
+     "5e-2": 35,
+     "1e-1": 35
+    }
+   },
+   {
+    "symmetry": "three-quarter-turn",
+    "corner": "lower-left",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 1,
+     "5e-2": 2,
+     "1e-1": 2
+    }
+   },
+   {
+    "symmetry": "three-quarter-turn",
+    "corner": "lower-right",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 0,
+     "1e-1": 0
+    }
+   },
+   {
+    "symmetry": "three-quarter-turn",
+    "corner": "upper-left",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "three-quarter-turn",
+    "corner": "upper-right",
+    "matched": {
+     "1e-9": 1,
+     "1e-6": 1,
+     "1e-3": 1,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "reflect-x",
+    "corner": "lower-left",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 2,
+     "5e-2": 2,
+     "1e-1": 2
+    }
+   },
+   {
+    "symmetry": "reflect-x",
+    "corner": "lower-right",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 1,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "reflect-x",
+    "corner": "upper-left",
+    "matched": {
+     "1e-9": 1,
+     "1e-6": 1,
+     "1e-3": 1,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "reflect-x",
+    "corner": "upper-right",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "reflect-y",
+    "corner": "lower-left",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 1,
+     "5e-2": 2,
+     "1e-1": 2
+    }
+   },
+   {
+    "symmetry": "reflect-y",
+    "corner": "lower-right",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 0,
+     "1e-1": 0
+    }
+   },
+   {
+    "symmetry": "reflect-y",
+    "corner": "upper-left",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "reflect-y",
+    "corner": "upper-right",
+    "matched": {
+     "1e-9": 1,
+     "1e-6": 1,
+     "1e-3": 1,
+     "1e-2": 1,
+     "5e-2": 1,
+     "1e-1": 1
+    }
+   },
+   {
+    "symmetry": "reflect-diagonal",
+    "corner": "lower-left",
+    "matched": {
+     "1e-9": 18,
+     "1e-6": 18,
+     "1e-3": 18,
+     "1e-2": 25,
+     "5e-2": 37,
+     "1e-1": 37
+    }
+   },
+   {
+    "symmetry": "reflect-diagonal",
+    "corner": "lower-right",
+    "matched": {
+     "1e-9": 11,
+     "1e-6": 11,
+     "1e-3": 12,
+     "1e-2": 18,
+     "5e-2": 18,
+     "1e-1": 18
+    }
+   },
+   {
+    "symmetry": "reflect-diagonal",
+    "corner": "upper-left",
+    "matched": {
+     "1e-9": 29,
+     "1e-6": 29,
+     "1e-3": 29,
+     "1e-2": 34,
+     "5e-2": 36,
+     "1e-1": 36
+    }
+   },
+   {
+    "symmetry": "reflect-diagonal",
+    "corner": "upper-right",
+    "matched": {
+     "1e-9": 30,
+     "1e-6": 30,
+     "1e-3": 30,
+     "1e-2": 35,
+     "5e-2": 35,
+     "1e-1": 35
+    }
+   },
+   {
+    "symmetry": "reflect-antidiagonal",
+    "corner": "lower-left",
+    "matched": {
+     "1e-9": 23,
+     "1e-6": 23,
+     "1e-3": 23,
+     "1e-2": 29,
+     "5e-2": 43,
+     "1e-1": 43
+    }
+   },
+   {
+    "symmetry": "reflect-antidiagonal",
+    "corner": "lower-right",
+    "matched": {
+     "1e-9": 19,
+     "1e-6": 19,
+     "1e-3": 20,
+     "1e-2": 31,
+     "5e-2": 31,
+     "1e-1": 31
+    }
+   },
+   {
+    "symmetry": "reflect-antidiagonal",
+    "corner": "upper-left",
+    "matched": {
+     "1e-9": 18,
+     "1e-6": 18,
+     "1e-3": 18,
+     "1e-2": 23,
+     "5e-2": 23,
+     "1e-1": 23
+    }
+   },
+   {
+    "symmetry": "reflect-antidiagonal",
+    "corner": "upper-right",
+    "matched": {
+     "1e-9": 38,
+     "1e-6": 38,
+     "1e-3": 38,
+     "1e-2": 45,
+     "5e-2": 45,
+     "1e-1": 45
+    }
+   }
+  ]
+ },
+ "diagonal": {
+  "view_squares": 179,
+  "core_squares": 70,
+  "shifts": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "symmetries": [
+   {
+    "symmetry": "identity",
+    "matched": {
+     "1e-9": 99,
+     "1e-6": 99,
+     "1e-3": 99,
+     "1e-2": 116,
+     "5e-2": 143,
+     "1e-1": 145
+    }
+   },
+   {
+    "symmetry": "quarter-turn",
+    "matched": {
+     "1e-9": 4,
+     "1e-6": 4,
+     "1e-3": 4,
+     "1e-2": 7,
+     "5e-2": 8,
+     "1e-1": 9
+    }
+   },
+   {
+    "symmetry": "half-turn",
+    "matched": {
+     "1e-9": 72,
+     "1e-6": 72,
+     "1e-3": 72,
+     "1e-2": 84,
+     "5e-2": 93,
+     "1e-1": 93
+    }
+   },
+   {
+    "symmetry": "three-quarter-turn",
+    "matched": {
+     "1e-9": 5,
+     "1e-6": 5,
+     "1e-3": 5,
+     "1e-2": 6,
+     "5e-2": 7,
+     "1e-1": 7
+    }
+   },
+   {
+    "symmetry": "reflect-x",
+    "matched": {
+     "1e-9": 4,
+     "1e-6": 4,
+     "1e-3": 4,
+     "1e-2": 7,
+     "5e-2": 7,
+     "1e-1": 7
+    }
+   },
+   {
+    "symmetry": "reflect-y",
+    "matched": {
+     "1e-9": 5,
+     "1e-6": 5,
+     "1e-3": 5,
+     "1e-2": 6,
+     "5e-2": 7,
+     "1e-1": 7
+    }
+   },
+   {
+    "symmetry": "reflect-diagonal",
+    "matched": {
+     "1e-9": 70,
+     "1e-6": 70,
+     "1e-3": 70,
+     "1e-2": 82,
+     "5e-2": 94,
+     "1e-1": 94
+    }
+   },
+   {
+    "symmetry": "reflect-antidiagonal",
+    "matched": {
+     "1e-9": 80,
+     "1e-6": 80,
+     "1e-3": 80,
+     "1e-2": 93,
+     "5e-2": 107,
+     "1e-1": 107
+    }
+   }
+  ],
+  "best_symmetry": "identity",
+  "by_shift": {
+   "0": {
+    "1e-9": 34,
+    "1e-6": 34,
+    "1e-3": 34,
+    "1e-2": 43,
+    "5e-2": 64,
+    "1e-1": 64
+   },
+   "1": {
+    "1e-9": 38,
+    "1e-6": 38,
+    "1e-3": 38,
+    "1e-2": 41,
+    "5e-2": 46,
+    "1e-1": 46
+   },
+   "2": {
+    "1e-9": 41,
+    "1e-6": 41,
+    "1e-3": 41,
+    "1e-2": 42,
+    "5e-2": 44,
+    "1e-1": 44
+   },
+   "3": {
+    "1e-9": 44,
+    "1e-6": 44,
+    "1e-3": 44,
+    "1e-2": 44,
+    "5e-2": 44,
+    "1e-1": 44
+   },
+   "4": {
+    "1e-9": 46,
+    "1e-6": 46,
+    "1e-3": 46,
+    "1e-2": 46,
+    "5e-2": 46,
+    "1e-1": 46
+   },
+   "5": {
+    "1e-9": 48,
+    "1e-6": 48,
+    "1e-3": 48,
+    "1e-2": 56,
+    "5e-2": 62,
+    "1e-1": 64
+   }
+  }
+ },
+ "band": {
+  "view_squares": 35,
+  "core_squares": 20,
+  "shifts": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "symmetries": [
+   {
+    "symmetry": "identity",
+    "matched": {
+     "1e-9": 15,
+     "1e-6": 15,
+     "1e-3": 15,
+     "1e-2": 17,
+     "5e-2": 29,
+     "1e-1": 31
+    }
+   },
+   {
+    "symmetry": "quarter-turn",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 1,
+     "1e-1": 2
+    }
+   },
+   {
+    "symmetry": "half-turn",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 0,
+     "1e-1": 0
+    }
+   },
+   {
+    "symmetry": "three-quarter-turn",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 0,
+     "1e-1": 0
+    }
+   },
+   {
+    "symmetry": "reflect-x",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 0,
+     "1e-1": 0
+    }
+   },
+   {
+    "symmetry": "reflect-y",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 0,
+     "1e-1": 0
+    }
+   },
+   {
+    "symmetry": "reflect-diagonal",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 0,
+     "1e-1": 0
+    }
+   },
+   {
+    "symmetry": "reflect-antidiagonal",
+    "matched": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "5e-2": 0,
+     "1e-1": 0
+    }
+   }
+  ],
+  "best_symmetry": "identity",
+  "by_shift": {
+   "0": {
+    "1e-9": 7,
+    "1e-6": 7,
+    "1e-3": 7,
+    "1e-2": 9,
+    "5e-2": 15,
+    "1e-1": 15
+   },
+   "1": {
+    "1e-9": 0,
+    "1e-6": 0,
+    "1e-3": 0,
+    "1e-2": 0,
+    "5e-2": 0,
+    "1e-1": 0
+   },
+   "2": {
+    "1e-9": 0,
+    "1e-6": 0,
+    "1e-3": 0,
+    "1e-2": 0,
+    "5e-2": 0,
+    "1e-1": 0
+   },
+   "3": {
+    "1e-9": 0,
+    "1e-6": 0,
+    "1e-3": 0,
+    "1e-2": 0,
+    "5e-2": 0,
+    "1e-1": 0
+   },
+   "4": {
+    "1e-9": 0,
+    "1e-6": 0,
+    "1e-3": 0,
+    "1e-2": 0,
+    "5e-2": 0,
+    "1e-1": 0
+   },
+   "5": {
+    "1e-9": 8,
+    "1e-6": 8,
+    "1e-3": 8,
+    "1e-2": 8,
+    "5e-2": 14,
+    "1e-1": 16
+   }
+  }
+ }
+}

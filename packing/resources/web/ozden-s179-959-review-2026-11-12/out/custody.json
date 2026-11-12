@@ -1,0 +1,107 @@
+{
+ "program": "l108_custody.py",
+ "repo_head": "5dc328b67c49e01e8cc6cf651c6e63af6c748a85",
+ "clone_head": "6ab3cfe60db4d081092bed3b6bbb44c76b067230",
+ "commits": 1,
+ "parents": [],
+ "author": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+ "authored": "2026-11-11T21:18:12+00:00",
+ "committer": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+ "committed": "2026-11-11T21:18:12+00:00",
+ "tree": "7232a795bfbb30efe9b15687ae58497449a86685",
+ "issue_created": "2026-11-11T21:18:24Z",
+ "issue_after_commit_seconds": 12.0,
+ "files": {
+  "LICENSE-evand-square-packing.txt": {
+   "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "working_tree_equals_blob": true,
+   "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+   "copies_in_repo": 46,
+   "copies_in_repo_first": [
+    "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt",
+    "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE",
+    "packing/resources/web/evand-compositions-2026-10-13/source/LICENSE",
+    "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/LICENSE"
+   ]
+  },
+  "LICENSE.md": {
+   "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "working_tree_equals_blob": true,
+   "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+   "copies_in_repo": 16,
+   "copies_in_repo_first": [
+    "packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/LICENSE.md",
+    "packing/resources/web/ozden-s172-upper-bound-2026-11-09/source/LICENSE.md",
+    "packing/resources/web/ozden-s180-upper-bound-2026-11-10/source/LICENSE.md",
+    "packing/resources/web/ozden-s199-upper-bound-2026-11-09/source/LICENSE.md"
+   ]
+  },
+  "README.md": {
+   "blob": "7c2f8cd3c37f60ce7e4917630147f291bf60290c",
+   "working_tree_equals_blob": true,
+   "sha256": "ccb5e0c8a70236c84e92655318ea54ccffd9d02c5bdcb5a6bfa7072cc938223d",
+   "copies_in_repo": 0,
+   "copies_in_repo_first": []
+  },
+  "n-179-candidate.yaml": {
+   "blob": "bd23540243b181a2ebea974ab68ed6d768049b0d",
+   "working_tree_equals_blob": true,
+   "sha256": "77ee3dd21e35ca6abd1410ad3a7ff25b44c5bbc0fe5ebd1031ae112126bf61fc",
+   "copies_in_repo": 0,
+   "copies_in_repo_first": []
+  },
+  "n-179-decimal-pose.yaml": {
+   "blob": "2fce716a68af211de069bfb306a163106377e12b",
+   "working_tree_equals_blob": true,
+   "sha256": "26dd38998b14ff0ae44f0c702c2b6dac0f9a454bd3449b665f7980cc98290cd5",
+   "copies_in_repo": 0,
+   "copies_in_repo_first": []
+  },
+  "n179-witness.json": {
+   "blob": "a7763a8d8def6572ecb3a52028f1d144a10384ab",
+   "working_tree_equals_blob": true,
+   "sha256": "4b2509fefd303ce1379084c0a7dc67b29233a9c6f415ee0fc9773c030559ae1a",
+   "copies_in_repo": 0,
+   "copies_in_repo_first": []
+  },
+  "packing-witness-verify.txt": {
+   "blob": "8a5c66aa9f784236d9665f8d7160dec7607360ac",
+   "working_tree_equals_blob": true,
+   "sha256": "521486b5f8d8e6d806f8b313083580bf82fb8c393e1fe92a8cdee00d3a6b4c89",
+   "copies_in_repo": 0,
+   "copies_in_repo_first": []
+  },
+  "records/n-179-candidate-diff.png": {
+   "blob": "6d4df42d86770907851827caff023872d5cb477b",
+   "working_tree_equals_blob": true,
+   "sha256": "3732184f3235cd9d9bea2ee86835f2375a3df4a21eb8e599ddbd92a923c5f948",
+   "copies_in_repo": 0,
+   "copies_in_repo_first": []
+  },
+  "sqcheck-output.txt": {
+   "blob": "32cf7db7b16e38fd59221bb46f5fe30287d405e1",
+   "working_tree_equals_blob": true,
+   "sha256": "0c0f559aeb37db22f9fd61d352c4592fc06b860a984ea1c1163ff4cc66a26a3a",
+   "copies_in_repo": 0,
+   "copies_in_repo_first": []
+  },
+  "verifier/README.md": {
+   "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+   "working_tree_equals_blob": true,
+   "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+   "copies_in_repo": 1,
+   "copies_in_repo_first": [
+    "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+   ]
+  },
+  "verifier/sqcheck.py": {
+   "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "working_tree_equals_blob": true,
+   "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+   "copies_in_repo": 1,
+   "copies_in_repo_first": [
+    "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+   ]
+  }
+ }
+}
