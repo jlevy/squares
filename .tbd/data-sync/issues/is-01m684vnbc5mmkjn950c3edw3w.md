@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 256
+version: 257
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -88,7 +88,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T06:07:35.206Z
+updated_at: 2026-11-12T06:25:56.500Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -203,3 +203,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 05:53Z renewal (intake214): the 959 close and reply need recording (owned by think-89i7). #954 owed a follow-up because T-291 is now superseded: posted issuecomment-6815931661 (from check_requests --draft 954, with a short opening and a link to the 959 reply); 954 stays closed. Recording owed in the next records batch.
 
 2026-11-12 ~06:10Z: #963 merged (455b5d20a) after L129 rebased it (the 237 adoption moved to 12 Nov; LATER_PASSES 11-12 = {179, 237}) and applied L115's review (CI green). T-295 is the house at 237. 960 still open. L130: deploy plus 960 reply draft. L131: rebase #966 and apply L124's review (think-s418). Worktrees l110 and l120 removed; 15 GB free.
+
+2026-11-12 ~06:27Z: Pages deploy of 455b5d20a succeeded (run 43165808073; 6289/6289). Posted the 960 final reply (issuecomment-6816435262; L130's draft unchanged) and closed 960. Recording owed in the next batch: 959 final, 954 follow-up, 960 final; think-89i7 and think-my76 stay open until then.
