@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 267
+version: 268
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -89,7 +89,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T09:42:26.284Z
+updated_at: 2026-11-12T09:54:54.348Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -224,3 +224,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~09:40Z: L132 handed back #970 (T-297 s(269) adopted in a 2026-11-13 pass because 269 was already adopted on 11-12; landings stamped 11-12; results.html ceiling raised from 1.6 to 1.7 MB; CI green). Plan: senior review L137 now; merge only after 00:00Z on 13 Nov, then stamp_landed and re-pin, so pass and landing agree. Owed after merge: the 967 reply and the 962 follow-up.
 
 2026-11-12 ~09:45Z: L137's senior review of #970: nothing blocking. The future-dated pass is acceptable (T-242/#807 precedent); stamp_landed then re-pin must be the last two commits after 00:00Z 13 Nov, with the merge the same day. The 1.7 MB results.html raise follows practice, but timing is unmeasured for the third time; think-v1qe noted (the 2 MB hard limit is about 3 weeks away and is the owner's). Merge plan on think-n73d; reminder scheduled for 00:10Z 13 Nov (trig_01G7Jg5YXNgLB21fouu18yAK).
+
+2026-11-12 09:53Z renewal (intake218): no new issues; the three listed items are owned (#967 by #970, waiting for the 00:10Z merge; #958 comment and de Winter's 57de046 by L136).
