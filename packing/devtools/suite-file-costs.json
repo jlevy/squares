@@ -363,6 +363,7 @@
     "packing/tests/test_math_loading.py": 0.376,
     "packing/tests/test_math_startup.py": 0.298,
     "packing/tests/test_measure_atlas_views.py": 0.03,
+    "packing/tests/test_measure_core.py": 0.482,
     "packing/tests/test_measure_release_assets.py": 1.323,
     "packing/tests/test_measure_threshold_net_refinement.py": 0.557,
     "packing/tests/test_merge_conflicts.py": 0.276,
@@ -779,6 +780,7 @@
     "packing/tests/test_upper_bound_reports_755.py": 51.0,
     "packing/tests/test_upper_bound_reports_couzo_670_672_675.py": 4.0,
     "packing/tests/test_upper_bound_reports_fang_direct.py": 3.444,
+    "packing/tests/test_upper_bound_reports_l107_1111.py": 7.474,
     "packing/tests/test_upper_bound_reports_l65_1109.py": 3.397,
     "packing/tests/test_upper_bound_reports_n204.py": 0.429,
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 7.404,
@@ -948,6 +950,21 @@
           "report": "packing/devtools/suite-file-cost-admissions/l65-new-modules-2026-11-09.json",
           "provenance": {},
           "tests": 30
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_measure_core.py",
+        "packing/tests/test_upper_bound_reports_l107_1111.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/l107-new-modules-2026-11-12.json",
+          "provenance": {},
+          "tests": 15
         }
       ]
     }
