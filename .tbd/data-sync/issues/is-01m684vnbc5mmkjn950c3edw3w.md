@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 234
+version: 235
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T00:26:15.809Z
+updated_at: 2026-11-12T00:42:00.160Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -357,3 +357,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~00:12Z: Pages deploy of 2fe557598 succeeded (run 43122907091). Posted the #942 follow-up correcting the credit (issuecomment-6810296603, byte-identical to L114's draft); 942 stays closed. Recording owed in a later records PR.
 
 2026-11-12 ~00:30Z: #961 merged (75cce00b6) after senior review L116 and L104's fixes (CI green; landed 12 Nov): T-292 s(132) and T-293 s(157) are houses. 958 still open. L118 checking the deploy and drafting the 958 reply. L107 told main moved (T-294 next). think-bcfs stays open until the records PR for 958's reply merges.
+
+2026-11-12 ~00:50Z: Pages deploy of 75cce00b6 succeeded (run 43127129857; 6275/6275). Posted the 958 final reply (issuecomment-6810906839; L118's draft plus one coordinator paragraph thanking him for the #941 answers, 809 held) and closed 958. Owed records: the 958 final reply, the #942 follow-up (-6810296603) and the #941 acknowledgement; think-bcfs stays open until that records PR merges. Evidence nit: E-de-winter-s157-review-exact-feasibility says 'about 1e-250', the receipt says 1.31e-247.
