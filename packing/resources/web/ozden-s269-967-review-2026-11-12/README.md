@@ -60,6 +60,57 @@ $PY $R/programs/l127_describe.py $SRC/n-269-candidate.yaml $SRC/n269-witness.jso
   $R/out/describe-n269.json
 ```
 
+Written and run after the findings were frozen, none of them a decider of the
+certificate:
+
+| Program | What it measures | Reads | Writes |
+| --- | --- | --- | --- |
+| `l127_sides.py` | the claim’s arithmetic: the side’s prints, the gains on T-290 and on #962, the Kaggle and kirilltym values, the decimal pose’s and the quench sides | the certificate, `results.yaml` on `main` and on PR #966’s branch, both house witnesses, #962’s certificate, the decimal pose, `programs/issue-967.json`, `out/contraction-new.json` | `out/sides.json` |
+| `l127_pose.py` | the certificate against its decimal pose at 60 digits, every near pair’s relative gap, the tilts | the certificate, the decimal pose | `out/pose-n269.json` |
+| `l127_lineage.py` | the issue’s lineage counts against T-290, under eight symmetries, five anchorings and two assignments | the certificate, the house witness, the issue | `out/lineage-n269.json` |
+| `l127_closedform.py` | the side against $s(m) + k$ for every registry value below 269 and $k \le 16$ | the certificate, `packing/frontier/n-NNN.md` | `out/closedform-n269.json` |
+| `l127_custody.py` | read-only Git plumbing on the clone and this repository, and the issue’s times | the clone, this repository, `programs/issue-967.json`, `programs/issue-967-timeline.json` | `out/custody.json` |
+| `l127_digests.py` | every frozen digest against the kept bytes, and the digest of every file here | this directory | `out/program-digests.json` |
+
+`programs/issue-967-timeline.json` is the issue’s REST timeline as fetched at 04:28Z,
+trimmed; GitHub’s edit history needs GraphQL, which the session refused.
+
+Two of this repository’s devtools were run read-only, writing only here, with
+`python -B` from `packing/`: `devtools.contraction_margin` (`out/contraction-t290.json`,
+T-290 against the certificate; `out/contraction-962.json`, #962’s certificate as PR
+#966’s house witness, against it; `out/contraction-new.json`, the certificate itself)
+and `devtools.measure_identity` (`out/identity-n269.json`, against T-290 and #962).
+
+From `packing/` of a checkout of `main` at `0352d7554`, with `SRC` the clone, `B` a
+directory holding `results-l120.yaml`, `n-269-house-pr966.yaml` and
+`n-269-candidate-962.yaml` (`git show` of `packing/frontier/results.yaml`,
+`packing/witnesses/known-best/n-269.yaml` and
+`packing/resources/web/ozden-s269-issue962-2026-11-11/source/n-269-candidate.yaml` at
+`origin/claude/bold-ritchie-xo28us-l120` `800be138d`):
+
+```bash
+DT="nice -n 19 uv run --frozen --all-extras --group dev python -B -m"
+CERT="#967=witness-corners:$SRC/n-269-candidate.yaml"
+$DT devtools.contraction_margin --n 269 "T-290=witness-center-basis:witnesses/known-best/n-269.yaml" \
+  --against "$CERT" --out $R/out/contraction-t290.json
+$DT devtools.contraction_margin --n 269 "#962=witness-center-basis:$B/n-269-house-pr966.yaml" \
+  --against "$CERT" --out $R/out/contraction-962.json
+$DT devtools.contraction_margin --n 269 "$CERT" --out $R/out/contraction-new.json
+$DT devtools.measure_identity --n 269 "$CERT" "T-290=witness-center-basis:witnesses/known-best/n-269.yaml" \
+  "#962=witness-center-basis:$B/n-269-house-pr966.yaml" --out $R/out/identity-n269.json
+Y="$SRC/n-269-candidate.yaml $SRC/n269-witness.json"
+$PY $R/programs/l127_sides.py $Y frontier/results.yaml $B/results-l120.yaml \
+  witnesses/known-best/n-269.yaml $B/n-269-house-pr966.yaml $B/n-269-candidate-962.yaml \
+  $SRC/n-269-decimal-pose.yaml $R/programs/issue-967.json $R/out/contraction-new.json $R/out/sides.json
+$PY $R/programs/l127_pose.py $Y $SRC/n-269-decimal-pose.yaml $R/out/pose-n269.json
+$PY $R/programs/l127_lineage.py $Y witnesses/known-best/n-269.yaml $R/programs/issue-967.json \
+  $R/out/lineage-n269.json
+$PY $R/programs/l127_closedform.py $Y frontier $R/out/closedform-n269.json
+$PY $R/programs/l127_custody.py $SRC .. f496016d3ebccb00c00cbf146efe85e0cc952dda \
+  $R/programs/issue-967.json $R/programs/issue-967-timeline.json $R/out/custody.json
+$PY $R/programs/l127_digests.py $R $R/out/program-digests.json
+```
+
 ## What They Printed
 
 - `l127_selftest.py`: `PASSED 26381 cases 0 failed`; broken method A fails 1,312,
@@ -68,6 +119,19 @@ $PY $R/programs/l127_describe.py $SRC/n-269-candidate.yaml $SRC/n269-witness.jso
   (square 48 left, 102 bottom, 199 top), least gap $2.03645031468039 \times 10^{-13}$
   at (38, 40).
 - `l127_controls.py`: `EVERY_CONTROL_AS_STATED`, 20 of 20.
+- `devtools.contraction_margin`: T-290 first touches at
+  $1 - \lambda^* = 2.036494 \times 10^{-13}$ (119, 202), a side margin of
+  $3.238 \times 10^{-12}$; #962 at $2.034066 \times 10^{-13}$ (10, 13), a side margin of
+  $3.234 \times 10^{-12}$; the gains, $1.1265 \times 10^{-2}$ and
+  $9.739 \times 10^{-3}$, are within neither. The certificate itself first touches at
+  $2.036450 \times 10^{-13}$ (38, 40), and both maintained routes accept it as given.
+- `devtools.measure_identity`: no symmetry pairs the certificate one to one with T-290
+  or #962 by nearest centres.
+- `l127_lineage.py`: the issue’s counts (261, 137, 1.879, 121, 44.4°) under T-290
+  reflected top to bottom, anchored at the upper-left corner, least summed move.
+- `l127_closedform.py`: no $s(m) + k$ within $10^{-9}$; the nearest, $s(19) + 12$, at
+  $4.1 \times 10^{-3}$.
+- `l127_digests.py`: `ALL_FROZEN_DIGESTS_HOLD`.
 
 ## Frozen Files
 
@@ -75,8 +139,8 @@ $PY $R/programs/l127_describe.py $SRC/n-269-candidate.yaml $SRC/n269-witness.jso
 | --- | --- | --- |
 | `frozen/checker-frozen-digests.txt` | the six checker files and the receipts they had written | 2026-11-12T04:06:28Z |
 | `frozen/controls-plan-digest.txt` | the controls plan, its facts and their programs, before `l127_controls.py` existed | 2026-11-12T04:09:52Z |
-| `frozen/findings-frozen-digest.txt` | the frozen review text and the receipts at the freeze | see the file |
-| `frozen/review-2026-11-12-ozden-967.frozen.md` | the review as frozen, before the author’s checkers, outputs or README, or this repository’s verifier, were read | see the digest list |
+| `frozen/findings-frozen-digest.txt` | the frozen review text and the receipts at the freeze | 2026-11-12T04:18:19Z |
+| `frozen/review-2026-11-12-ozden-967.frozen.md` | the review as frozen, before the author’s checkers, outputs or README, or this repository’s verifier, were read; pushed as `ae5191f9d` | 2026-11-12T04:18:19Z |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
