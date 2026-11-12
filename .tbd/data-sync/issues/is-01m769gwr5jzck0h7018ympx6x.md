@@ -5,7 +5,7 @@ title: "Import #959: Doğa Özden's s(179) <= 13.880960371559 (supersedes his #9
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l107
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T21:51:45.413Z
-updated_at: 2026-11-12T01:16:47.896Z
+updated_at: 2026-11-12T01:33:49.230Z
 started_at: 2026-11-11T22:20:33.166Z
 ---
 
@@ -44,3 +44,5 @@ Branch `claude/bold-ritchie-xo28us-l107`, cut from `origin/main` `b5b12c206` (#9
 **PR.** Draft #964 (https://github.com/jlevy/squares/pull/964), head dccc4a407 (re-pin of 8319337d2, the merge of main 75cce00b6). Records tier 55/55; 1209 tests passed; edit tier all but the browser floor (no node_modules here). Hosted CI started on push.
 
 **CI.** First head dccc4a407 failed sweeps, suite-c and suite-d: the composite figure kept T-291 rigidity scope at 179, and test_result_status lacked T-291 among superseded entries. Fixed in 5f6cd8120, re-pinned dd7bef433. Hosted on dd7bef433: 59 checks, 31 success, 28 skipped; packing-required and pages-required green. Owed after merge: the reply on #959 (this bead).
+
+**Senior review of #964.** S1 (179 credit "below his earlier packing", as at 268; adopt_houses --refresh --n 179), S2 (PR selected next entry; check_pr_description --label intake ok), N1-N3 applied in 599dfbf87; re-pinned 52342bd74 and pushed. Waiting for #965 (3ff23bc64) to merge, then merge main and re-pin.
