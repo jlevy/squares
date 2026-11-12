@@ -1,0 +1,813 @@
+{
+ "program": "l127_make_plan.py",
+ "certificate_margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59",
+ "certificate_contacts": [
+  [
+   48,
+   "left"
+  ],
+  [
+   102,
+   "bottom"
+  ],
+  [
+   199,
+   "top"
+  ]
+ ],
+ "contact_means": "a margin or clearance of exactly 0; past means 1e-30 beyond it",
+ "controls": [
+  {
+   "id": "G1",
+   "change": "square 269 given square 1's corners",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [
+     [
+      1,
+      269
+     ]
+    ],
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ],
+     [
+      199,
+      "top"
+     ]
+    ],
+    "verdict": "REFUSE",
+    "overlap_margin": "-1",
+    "overlap_area": "1"
+   },
+   "statement": "refused: exactly the pair (1, 269) overlapping, margin -1, area 1; contacts unchanged"
+  },
+  {
+   "id": "G2",
+   "change": "square 1 translated by (S, 0)",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "outside_b": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "not_inside_b": [
+     1
+    ],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ],
+     [
+      199,
+      "top"
+     ]
+    ],
+    "verdict": "REFUSE"
+   },
+   "statement": "refused: square 1 outside the right wall by both methods and not inside by B's area test; no pair overlapping or touching (square 1 clears the left wall by 7.29003e-01); contacts unchanged"
+  },
+  {
+   "id": "G3",
+   "change": "square 269's entry deleted, in the YAML and the twin",
+   "decided_by": "the reader",
+   "expect": {
+    "refused": "268 entries for n = 269"
+   },
+   "statement": "the reader refuses: 268 entries"
+  },
+  {
+   "id": "G4",
+   "change": "square 269's id set to 1, in the YAML and the twin",
+   "decided_by": "the reader",
+   "expect": {
+    "refused": "squares[268]: id is not 269"
+   },
+   "statement": "the reader refuses the id"
+  },
+  {
+   "id": "G5",
+   "change": "square 1's third corner moved 1e-30 in x",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "verdict": "REFUSE",
+    "not_unit_a": [
+     1
+    ],
+    "not_unit_b": [
+     1
+    ]
+   },
+   "statement": "refused: square 1 not a unit square by either method"
+  },
+  {
+   "id": "G6",
+   "change": "every square reflected in its own horizontal centre line (the rotation read the other way)",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": "nonempty",
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ],
+     [
+      199,
+      "top"
+     ]
+    ],
+    "verdict": "REFUSE",
+    "cw_count": 269,
+    "ccw_count": 0
+   },
+   "statement": "refused for overlapping pairs, the same classes by both methods; every square still a unit square inside (each reflection keeps the square's bounding box), contacts unchanged, all listed clockwise"
+  },
+  {
+   "id": "G7",
+   "change": "the twin's side altered in its last digit",
+   "decided_by": "the reader",
+   "expect": {
+    "refused": "json twin differs"
+   },
+   "statement": "the reader refuses: the twin differs"
+  },
+  {
+   "id": "G8",
+   "change": "every corner transposed, (x, y) -> (y, x)",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "bottom"
+     ],
+     [
+      102,
+      "left"
+     ],
+     [
+      199,
+      "right"
+     ]
+    ],
+    "verdict": "ACCEPT",
+    "cw_count": 269,
+    "ccw_count": 0,
+    "margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59"
+   },
+   "statement": "accepted, contacts transposed, all listed clockwise, the SHA-256 of the exact margin list unchanged"
+  },
+  {
+   "id": "G9",
+   "change": "the side written as 2p/2q, in the YAML and the twin",
+   "decided_by": "the reader",
+   "expect": {
+    "refused": "scalar not in lowest terms at side"
+   },
+   "statement": "the reader refuses: not in lowest terms"
+  },
+  {
+   "id": "G10",
+   "change": "every square listed from its second corner",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ],
+     [
+      199,
+      "top"
+     ]
+    ],
+    "verdict": "ACCEPT",
+    "ccw_count": 269,
+    "cw_count": 0,
+    "margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59"
+   },
+   "statement": "accepted, contacts and margin list unchanged"
+  },
+  {
+   "id": "G11",
+   "change": "every square listed in the reverse cyclic order",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ],
+     [
+      199,
+      "top"
+     ]
+    ],
+    "verdict": "ACCEPT",
+    "cw_count": 269,
+    "ccw_count": 0,
+    "margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59"
+   },
+   "statement": "accepted, contacts and margin list unchanged, all listed clockwise"
+  },
+  {
+   "id": "G12",
+   "change": "the whole packing turned a quarter about the box centre, (x, y) -> (S - y, x)",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "bottom"
+     ],
+     [
+      102,
+      "right"
+     ],
+     [
+      199,
+      "left"
+     ]
+    ],
+    "verdict": "ACCEPT",
+    "ccw_count": 269,
+    "cw_count": 0,
+    "margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59"
+   },
+   "statement": "accepted, contacts turned, all counterclockwise, margin list unchanged"
+  },
+  {
+   "id": "S1a",
+   "change": "the side lowered by 1/q, one unit of its own last place",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [
+     [
+      199,
+      "top"
+     ]
+    ],
+    "outside_b": [
+     [
+      199,
+      "top"
+     ]
+    ],
+    "not_inside_b": [
+     199
+    ],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ]
+    ],
+    "verdict": "REFUSE",
+    "margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59"
+   },
+   "statement": "refused: exactly square 199 outside, at the top wall"
+  },
+  {
+   "id": "S1b",
+   "change": "the side lowered by 1e-30",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [
+     [
+      199,
+      "top"
+     ]
+    ],
+    "outside_b": [
+     [
+      199,
+      "top"
+     ]
+    ],
+    "not_inside_b": [
+     199
+    ],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ]
+    ],
+    "verdict": "REFUSE",
+    "margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59"
+   },
+   "statement": "the same, since no positive right or top clearance is below 1e-30 (the least is 1.88790e-16)"
+  },
+  {
+   "id": "S1c",
+   "change": "the side set to its 12-place floor, 16.889730073595",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [
+     [
+      60,
+      "top"
+     ],
+     [
+      73,
+      "top"
+     ],
+     [
+      87,
+      "top"
+     ],
+     [
+      101,
+      "top"
+     ],
+     [
+      115,
+      "top"
+     ],
+     [
+      143,
+      "top"
+     ],
+     [
+      157,
+      "top"
+     ],
+     [
+      171,
+      "top"
+     ],
+     [
+      185,
+      "top"
+     ],
+     [
+      199,
+      "top"
+     ],
+     [
+      213,
+      "top"
+     ],
+     [
+      227,
+      "top"
+     ],
+     [
+      241,
+      "top"
+     ],
+     [
+      255,
+      "right"
+     ],
+     [
+      256,
+      "right"
+     ],
+     [
+      257,
+      "right"
+     ],
+     [
+      258,
+      "right"
+     ],
+     [
+      259,
+      "right"
+     ],
+     [
+      260,
+      "right"
+     ],
+     [
+      261,
+      "right"
+     ],
+     [
+      262,
+      "right"
+     ],
+     [
+      263,
+      "right"
+     ],
+     [
+      264,
+      "right"
+     ],
+     [
+      265,
+      "right"
+     ],
+     [
+      267,
+      "right"
+     ]
+    ],
+    "outside_b": [
+     [
+      60,
+      "top"
+     ],
+     [
+      73,
+      "top"
+     ],
+     [
+      87,
+      "top"
+     ],
+     [
+      101,
+      "top"
+     ],
+     [
+      115,
+      "top"
+     ],
+     [
+      143,
+      "top"
+     ],
+     [
+      157,
+      "top"
+     ],
+     [
+      171,
+      "top"
+     ],
+     [
+      185,
+      "top"
+     ],
+     [
+      199,
+      "top"
+     ],
+     [
+      213,
+      "top"
+     ],
+     [
+      227,
+      "top"
+     ],
+     [
+      241,
+      "top"
+     ],
+     [
+      255,
+      "right"
+     ],
+     [
+      256,
+      "right"
+     ],
+     [
+      257,
+      "right"
+     ],
+     [
+      258,
+      "right"
+     ],
+     [
+      259,
+      "right"
+     ],
+     [
+      260,
+      "right"
+     ],
+     [
+      261,
+      "right"
+     ],
+     [
+      262,
+      "right"
+     ],
+     [
+      263,
+      "right"
+     ],
+     [
+      264,
+      "right"
+     ],
+     [
+      265,
+      "right"
+     ],
+     [
+      267,
+      "right"
+     ]
+    ],
+    "not_inside_b": [
+     60,
+     73,
+     87,
+     101,
+     115,
+     143,
+     157,
+     171,
+     185,
+     199,
+     213,
+     227,
+     241,
+     255,
+     256,
+     257,
+     258,
+     259,
+     260,
+     261,
+     262,
+     263,
+     264,
+     265,
+     267
+    ],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ]
+    ],
+    "verdict": "REFUSE",
+    "margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59"
+   },
+   "statement": "refused: exactly the 25 right or top clearances below the drop of 6.36690e-13"
+  },
+  {
+   "id": "S1d",
+   "change": "the side set to its 12-place ceiling, the claim 16.889730073596",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [],
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ]
+    ],
+    "verdict": "ACCEPT",
+    "margin_list_sha256": "62cd09c59ddde446635f368d5c57c272d9014906abe9403333d6a329ebe5da59"
+   },
+   "statement": "accepted, contacts at the bottom and left walls only"
+  },
+  {
+   "id": "S4c",
+   "change": "square 40 moved toward square 38 along their centre line to exact contact",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [
+     [
+      38,
+      40
+     ]
+    ],
+    "overlapping_pairs": [],
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ],
+     [
+      199,
+      "top"
+     ]
+    ],
+    "verdict": "ACCEPT",
+    "least_margin_value": "0"
+   },
+   "statement": "the pair (38, 40) alone touching by both, margin exactly 0, square 40 inside; accepted"
+  },
+  {
+   "id": "S4p",
+   "change": "the same, 1e-30 past (over the least binding rate)",
+   "decided_by": "both methods, whole file",
+   "expect": {
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "pair_disagreements": [],
+    "wall_disagreements": [],
+    "touching_pairs": [],
+    "overlapping_pairs": [
+     [
+      38,
+      40
+     ]
+    ],
+    "outside_a": [],
+    "outside_b": [],
+    "not_inside_b": [],
+    "wall_contacts": [
+     [
+      48,
+      "left"
+     ],
+     [
+      102,
+      "bottom"
+     ],
+     [
+      199,
+      "top"
+     ]
+    ],
+    "verdict": "REFUSE",
+    "least_margin_value": "-1/1000000000000000000000000000000"
+   },
+   "statement": "that pair alone overlapping by both, margin exactly -1e-30"
+  },
+  {
+   "id": "S5",
+   "change": "every pair below 1e-12 closed along its centre line, to contact and 1e-30 past",
+   "decided_by": "both methods, pair level",
+   "expect": {
+    "pairs": 620,
+    "at": {
+     "margin": "0",
+     "class_a": "touch",
+     "class_b": "touch"
+    },
+    "past": {
+     "margin": "the closed form, -1e-30 for all",
+     "class_a": "overlap",
+     "class_b": "overlap"
+    },
+    "closing_digest": "800529159f83bf720b70c2912dd63a5299dd4a812dbfdb43971d1221a6c0e140"
+   },
+   "statement": "620 of 620: touching at contact by both, overlapping past, margins exactly 0 and -1e-30"
+  },
+  {
+   "id": "S6",
+   "change": "every square moved to its nearest wall by its clearance, and 1e-30 past",
+   "decided_by": "both methods, square level",
+   "expect": {
+    "squares": 269,
+    "at": {
+     "clearance": "0",
+     "class_a": "touch",
+     "class_b": "touch"
+    },
+    "past": {
+     "clearance": "-1/1000000000000000000000000000000",
+     "class_a": "outside",
+     "class_b": "outside",
+     "inside_b": false
+    }
+   },
+   "statement": "269 of 269: contact at, outside past, by both, clearance exactly 0 and -1e-30"
+  }
+ ]
+}
