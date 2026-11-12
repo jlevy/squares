@@ -5,7 +5,7 @@ title: "Import #962: Doğa Özden's s(269) <= 16.899469075856 (kenaznia-doga/s26
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l131
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-12T00:00:58.544Z
-updated_at: 2026-11-12T06:06:56.433Z
+updated_at: 2026-11-12T07:07:17.498Z
 started_at: 2026-11-12T00:43:45.124Z
 ---
 
@@ -45,3 +45,14 @@ N2: merge recipe for the binary add/add conflict on house-adoption-prior-state-2
 N3: add to the packet README and T-296 notes: "This lane's brief had relayed the review's T-290 margin, the certificate's contracted side and the identity verdict before its runs, so the agreement is two runs of the same tools, not a blind comparison."
 N4: correct the PR body's shard claim; shard 4 is at exactly 10.0% (bead filed).
 N5: record the News disposition and tick the checkbox.
+## Lane L131 (bold-ritchie-l131), 12 November 2026
+
+Merged main 455b5d20a (#963, #964, #968, records #955 #965) into `claude/bold-ritchie-xo28us-l120` and applied L124's review. Head 8a924f2de (merge f1f92ee14, review fixes 64d962b41, re-pin 8a924f2de to 64d962b4). Pushed; PR #966 body updated (REST), still draft.
+
+Merge: both sides kept in results (T-296 after T-295, above the regularized_drawings marker), evidence, verifiers, coverage, bibliography, requests (959, 960, then 962), resources table, document map, flowmarkignore, workflow paths, site_resources card, upper_bound_reports readers, upper_bound_houses sources/ADOPTED, adopt_houses Prose (T-294, T-295, T-296), poster-hold comment, suite-file costs (both admissions), tests. N2: main's 2026-11-12 archive plus the 269 row via retain_history (row byte-equal to main's n-269.md); LATER_PASSES["2026-11-12"] = {179, 237, 269}. Derived again: layer index (atlas_totals), flips (248/76), regularized_drawings block, translation-escape at 269 (n=1..324 2,674 / 6,596, SCREEN_FINDINGS), X049 censuses, custody (74 houses, 248 inputs, 80 mutations), reach, research tables, inventory, results, verifiers, synopsis row (296, 264 by others). Landings stay 12 Nov (date had not moved).
+
+Review: S1 (#947 notes: follow-up owed once T-296 is on main), S2 (#947 read_through 2026-11-11T23:35:10Z), N1 (credit "his own n = 179 packing of issue 954, below his earlier packing from a strip cut ..."; adopt_houses --refresh --n 269, since --refresh-openings left the certificate section's copy), N3 (packet README and T-296 notes), N4 and N5 in the PR body (shards now 9.6/9.3/9.0/10.0%, shard 4 21/210 at the guard, think-xg1x; News: editorial omission, checkbox ticked; labels intake, S3 already set).
+
+Validation: packing-validate --records --jobs 2, 55/55; pytest 378 passed (required modules incl. test_render_colors, test_suite_files, lane test) and 1,403 passed 1 skipped (touched modules); test_release_pin 5 passed; ruff/basedpyright clean. Hosted CI on 8a924f2de green (31 passed, 28 skipped), mergeable clean.
+
+Owed after merge (coordinator): the #962 reply and the #947 follow-up. The author commented on #966 at 03:00:22Z pointing to #967 (269 at 16.889730073596), its own import.
