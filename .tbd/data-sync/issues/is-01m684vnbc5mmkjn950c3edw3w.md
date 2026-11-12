@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 236
+version: 237
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T00:43:51.552Z
+updated_at: 2026-11-12T00:54:26.588Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -361,3 +361,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~00:50Z: Pages deploy of 75cce00b6 succeeded (run 43127129857; 6275/6275). Posted the 958 final reply (issuecomment-6810906839; L118's draft plus one coordinator paragraph thanking him for the #941 answers, 809 held) and closed 958. Owed records: the 958 final reply, the #942 follow-up (-6810296603) and the #941 acknowledgement; think-bcfs stays open until that records PR merges. Evidence nit: E-de-winter-s157-review-exact-feasibility says 'about 1e-250', the receipt says 1.31e-247.
 
 2026-11-12 ~00:55Z: L117's blind review of #962 accepted (1b37943b9; RV-3 not reached; contracted side not registered). L120 importing it as T-296 (think-s418). L119 also formats the three #961 Markdown files the hook missed (adopt_houses --check stays OK).
+
+2026-11-12 00:52Z renewal (intake209): no new issues; 942/958 recording owned by L119. Running: L107 (#959), L119 (records), L120 (#962).
