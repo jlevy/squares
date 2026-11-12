@@ -2987,8 +2987,9 @@ CREDITS: dict[int, Credit] = {
         (OZDEN,),
         (),
         "Doğa Özden’s packing from two copies of a band of the tilted squares of Ryan Xu’s "
-        "n = 70 packing, below Nate Chaoweeraprasit’s SQUISH packing as Francisco Couzo and "
-        "Mykhailo Polkovskyi refined it",
+        "n = 70 packing as Evan Daniel and PingYou Ltd improved it, below Nate "
+        "Chaoweeraprasit’s SQUISH packing as Francisco Couzo and Mykhailo Polkovskyi refined "
+        "it",
     ),
     # T-174's regularization of T-151's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).

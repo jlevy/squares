@@ -36391,7 +36391,8 @@ results:
 
       At n = 236 the certificate is below the case's ceiling (Evan Daniel, T-218) by 1.59e-19; smallest:
       this certificate. At n = 237 the certificate is below the case's ceiling (Nate Chaoweeraprasit
-      (itsnaka), improved by Francisco Couzo, Mishapolk, T-190) by 1.59e-19; smallest: this certificate.
+      (itsnaka), improved by Francisco Couzo, Mishapolk, T-190) by 1.59e-19; smallest: this certificate,
+      until Doğa Özden's T-295, 8.80e-03 below it, was adopted there on 12 November 2026.
       At n = 241 the certificate is below the case's ceiling (Daniil Ostashev, improved by Francisco
       Couzo, T-182) by 1.60e-19; smallest: this certificate. At n = 271 the certificate is below
       the case's ceiling (Evan Daniel, T-219) by 1.69e-19; smallest: this certificate.
@@ -36442,7 +36443,9 @@ results:
       moves; if it does not, the replay and review evidence are entered, both rungs rise to
       V3 and C3, and each count is adopted under the house rule with both strong generators'
       regularization. The 31 October review accepted every certificate for finite
-      feasibility and recommends reading them as restatements.
+      feasibility and recommends reading them as restatements. At 237 T-295, adopted on 12
+      November 2026, lies 8.80e-03 below this certificate, so if the entry stays recorded it
+      is adopted at the other eight counts only.
     unfinished_confirmations:
     - what: >-
         The owner's answer to whether the 23 October restatement ruling reaches counts
@@ -45161,7 +45164,7 @@ results:
   - id: T-295
     kind: upper-bound
     registered: '2026-11-11'
-    landed: '2026-11-11'
+    landed: '2026-11-12'
     headline: >-
       Özden's packing at 237, a band from two copies of the registry's 70, 8.80e-03 below T-190
     claim: >-

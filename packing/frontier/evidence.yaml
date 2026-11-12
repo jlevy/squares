@@ -61324,7 +61324,7 @@ evidence:
         docs/project/reviews/review-2026-11-11-ozden-960.md accepted the certificate with
         findings, one minor for the author (F5, the issue's 16-place print of the side) and the
         rest notes, none blocking: F4 on the claim's arithmetic, F5, F7 and F12 for the author,
-        F6, F8 and F9 for both, and F10 and F11 for the records. Its clean-room run is
+        F6, F8, F9 and F11 for both, and F10 for the records. Its clean-room run is
         E-ozden-960-review-exact-feasibility, and the replay E-ozden-960-exact-feasibility.
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at 13c4b23. A
@@ -61394,7 +61394,7 @@ evidence:
         docs/project/reviews/review-2026-11-11-ozden-960.md accepted the certificate with
         findings, one minor for the author (F5, the issue's 16-place print of the side) and the
         rest notes, none blocking: F4 on the claim's arithmetic, F5, F7 and F12 for the author,
-        F6, F8 and F9 for both, and F10 and F11 for the records. Its clean-room run is
+        F6, F8, F9 and F11 for both, and F10 for the records. Its clean-room run is
         E-ozden-960-review-exact-feasibility, and the replay E-ozden-960-exact-feasibility.
     limitations: >-
       A replay of the one retained witness by two maintained exact routes that share this
@@ -61487,7 +61487,7 @@ evidence:
         docs/project/reviews/review-2026-11-11-ozden-960.md accepted the certificate with
         findings, one minor for the author (F5, the issue's 16-place print of the side) and the
         rest notes, none blocking: F4 on the claim's arithmetic, F5, F7 and F12 for the author,
-        F6, F8 and F9 for both, and F10 and F11 for the records. Its clean-room run is
+        F6, F8, F9 and F11 for both, and F10 for the records. Its clean-room run is
         E-ozden-960-review-exact-feasibility, and the replay E-ozden-960-exact-feasibility.
     limitations: >-
       A clean-room decision of the one retained witness by two exact methods in one program, which
