@@ -49,6 +49,12 @@ def test_slow_call():
 
 def test_fast():
     pass
+
+
+def test_a_patched_clock_keeps_its_readings(monkeypatch):
+    readings = iter([1.0, 2.0])
+    monkeypatch.setattr(time, "monotonic", lambda: next(readings))
+    assert (time.monotonic(), time.monotonic()) == (1.0, 2.0)
 """
 
 HEADER = re.compile(r"^Stack watchdog: (\S+) (setup|call|teardown) has run", re.MULTILINE)
@@ -94,7 +100,12 @@ def test_a_phase_that_ends_inside_its_limit_dumps_nothing() -> None:
 
 def test_pytest_dumps_each_slow_phase_by_name_and_the_run_passes(tmp_path: Path) -> None:
     """Setup and call are timed apart, so a slow fixture is named as setup; a fast test
-    is not named at all, and the dump reaches the terminal through pytest's capture."""
+    is not named at all, and the dump reaches the terminal through pytest's capture.
+
+    A test that sets `time.monotonic` to a finite iterator keeps every reading it set:
+    `tests/test_site_rendering.py` does, and a watchdog that read the clock through the
+    module spent those readings, ended in StopIteration and left 595 errors in the
+    frontend job of #968's first push."""
     test_file = tmp_path / "test_probe.py"
     test_file.write_text(PROBE, encoding="utf-8")
     environment = {
@@ -128,7 +139,7 @@ def test_pytest_dumps_each_slow_phase_by_name_and_the_run_passes(tmp_path: Path)
     )
     output = result.stdout + result.stderr
     assert result.returncode == 0, output
-    assert "3 passed" in result.stdout
+    assert "4 passed" in result.stdout
     assert HEADER.findall(output) == [
         ("test_probe.py::test_slow_setup", "setup"),
         ("test_probe.py::test_slow_call", "call"),

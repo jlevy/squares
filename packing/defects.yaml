@@ -17653,8 +17653,11 @@ defects:
     faulthandler.dump_traceback, which holds the GIL and stops the world first (CPython
     gh-128400). A thread unlinks its own state only while it holds the GIL, so this walk
     never reaches a freed one. Setup, call and teardown are timed separately, the header
-    names the test, the phase and the worker, and the dump never ends the process.
-    validate.stack_watchdog(60) replaces -o faulthandler_timeout=60 in the site layout
+    names the test, the phase and the worker, and the dump never ends the process. Its
+    clock and calls are bound at import, so a test that replaces time.monotonic keeps its
+    readings; the plugin's first push read the clock through the module, spent
+    tests/test_site_rendering.py's patched readings and left 595 errors in #968's
+    frontend job. validate.stack_watchdog(60) replaces -o faulthandler_timeout=60 in the site layout
     commands, and stack_watchdog(45) replaces faulthandler_timeout=45 in the browser
     diagnostic. Measured under the same request-thread churn: dump_traceback_later
     re-armed every millisecond crashed 14 of 14 processes within 10 s, the six timed ones
@@ -17666,7 +17669,8 @@ defects:
     packing/tests/test_stack_watchdog.py: test_pytest_dumps_each_slow_phase_by_name_and_the_run_passes
     requires a "Current thread ... [stack-watchdog]" line in each dump, which only a dump
     taken on the plugin's own Python thread can write, and requires the slow setup and
-    the slow call to be named apart; test_the_plugin_refuses_to_run_beside_faulthandler_timeout
+    the slow call to be named apart, and a probe test that patches time.monotonic to two
+    readings to pass; test_the_plugin_refuses_to_run_beside_faulthandler_timeout
     and test_no_command_arms_cpython_s_c_watchdog refuse the C watchdog in any command,
     tool, workflow or pytest configuration. The crash depends on timing and has no
     deterministic test.

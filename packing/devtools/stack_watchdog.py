@@ -33,12 +33,18 @@ Enable with `-p devtools.stack_watchdog -o stack_watchdog_timeout=60`.
 
 from __future__ import annotations
 
-import faulthandler
 import os
 import sys
-import threading
-import time
 from collections.abc import Generator
+
+# Bound once, at import. The watchdog runs beside every test, and a test may replace
+# these module attributes: tests/test_site_rendering.py sets `time.monotonic` to a
+# finite iterator of readings. Looking them up at call time would spend the test's
+# readings and, once they ran out, raise StopIteration out of this plugin's own hooks.
+from faulthandler import dump_traceback
+from os import getpid, write
+from threading import Condition, Thread
+from time import monotonic
 
 import pytest
 
@@ -54,21 +60,19 @@ class Watchdog:
         self.fd = fd
         self.worker = worker
         self.dumps = 0
-        self._condition = threading.Condition()
+        self._condition = Condition()
         self._armed: tuple[str, float] | None = None
         self._closed = False
-        self._thread: threading.Thread | None = None
+        self._thread: Thread | None = None
 
     def arm(self, label: str) -> None:
         """Start timing `label`; the thread starts on first use, so an xdist controller,
         which runs no tests, never starts one."""
         with self._condition:
             if self._thread is None:
-                self._thread = threading.Thread(
-                    target=self._watch, name="stack-watchdog", daemon=True
-                )
+                self._thread = Thread(target=self._watch, name="stack-watchdog", daemon=True)
                 self._thread.start()
-            self._armed = (label, time.monotonic())
+            self._armed = (label, monotonic())
             self._condition.notify()
 
     def disarm(self) -> None:
@@ -98,7 +102,7 @@ class Watchdog:
                     self._condition.wait()
                     continue
                 label, started = self._armed
-                elapsed = time.monotonic() - started
+                elapsed = monotonic() - started
                 if elapsed < self.seconds:
                     self._condition.wait(self.seconds - elapsed)
                     continue
@@ -109,10 +113,10 @@ class Watchdog:
     def _dump(self, label: str, elapsed: float) -> None:
         header = (
             f"\nStack watchdog: {label} has run {elapsed:.1f}s, past {self.seconds:g}s, "
-            f"on {self.worker} (pid {os.getpid()}); every thread follows.\n"
+            f"on {self.worker} (pid {getpid()}); every thread follows.\n"
         )
-        os.write(self.fd, header.encode())
-        faulthandler.dump_traceback(file=self.fd, all_threads=True)
+        write(self.fd, header.encode())
+        dump_traceback(file=self.fd, all_threads=True)
         self.dumps += 1
 
 
