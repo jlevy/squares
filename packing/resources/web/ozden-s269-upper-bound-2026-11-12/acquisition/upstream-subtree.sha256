@@ -1,0 +1,11 @@
+c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./LICENSE-evand-square-packing.txt
+5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c  ./LICENSE.md
+246a85d4f78248ef1008f7d74b98a52e17fd1cb45ac2290e8898fe554e73303b  ./README.md
+35b1307a3a0dc2eb806ef064933c809a2f2b7eda73551bcc4ba6c411a307b5e6  ./n-269-candidate.yaml
+52e389457e9a4d6411ace6f0dcd7bc8efdf4a17cd870336331ed8ed5e76ce32e  ./n-269-decimal-pose.yaml
+a1c4caab16d420112732566c45fd5910ba6713ce65ded0fcf8be6e6032c18ca3  ./n269-witness.json
+02b86558d371bca85977560d757b2f7a15790ef679d3a9951e9efb3241bc3abc  ./packing-witness-verify.txt
+f16ab2a06db91331414a04e3a3275bcbc8b546a2680ed102fb777d3a9600ac15  ./records/n-269-candidate-diff.png
+4c9fd9149278a9b95e1b0e26297d9c9d8660a5157811cd115f62dab139c4a346  ./sqcheck-output.txt
+596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce  ./verifier/README.md
+1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979  ./verifier/sqcheck.py

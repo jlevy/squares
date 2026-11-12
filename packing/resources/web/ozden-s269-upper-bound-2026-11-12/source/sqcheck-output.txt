@@ -1,0 +1,1 @@
+VALID     n=269  exact-rational  s<=16.889730073595637 (exact side rounded up)  n-269-candidate.yaml
