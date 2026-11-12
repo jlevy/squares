@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 240
+version: 241
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T01:30:22.074Z
+updated_at: 2026-11-12T01:41:09.604Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -369,3 +369,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~01:40Z: L121's senior review of #965: nothing blocking; the frontend failure was a starved-runner worker crash, unrelated. Coordinator applied the PR-body fix and nits 1-3 (3ff23bc64), which also restarts CI.
 
 2026-11-12 ~01:50Z: L122's senior review of #964: nothing blocking. S1: the credit should say 'below his earlier packing' (T-291), as at 268. S2: the PR body lacks a Selected next entry. S3: #965 conflicts (result-requests tail, release.py). measure_core's conclusion confirmed by a wider offset scan. Sent to L107, which applies the fixes, then merges main after #965 lands.
+
+2026-11-12 ~02:00Z: #965 merged (0352d7554) after CI green on 3ff23bc64. think-bcfs closed after check_bead_tree --before-close passed. 941 open, 942 and 958 closed. L107 will now merge main into #964.
