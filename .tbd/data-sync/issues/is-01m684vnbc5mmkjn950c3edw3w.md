@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 254
+version: 255
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -88,7 +88,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T05:24:18.179Z
+updated_at: 2026-11-12T05:55:41.125Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -199,3 +199,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~05:15Z: #964 merged (942256917): T-294 is the house at 179 (second pass on 12 Nov). L107 also admitted its two test modules to the test-cost record (shard 2 had reached 10.1% with #968's file). 959 still open. L128: deploy plus 959 reply draft. L129: rebase #963 onto main and apply L115's B1/B2/S1/S2/N1 (think-my76 delegated to l129; L110 stopped). Then #966, then #967's import.
 
 2026-11-12 ~05:25Z: Pages deploy of 942256917 succeeded (run 43159519695; 6282/6282). Posted the 959 final reply (issuecomment-6815463268; L128's draft, which differs from the posted text only by a trailing blank line) and closed 959. Recording owed, to be batched with the next records PR (960, 962, 967 replies and the 947 follow-up); think-89i7 stays open until then.
+
+2026-11-12 05:53Z renewal (intake214): the 959 close and reply need recording (owned by think-89i7). #954 owed a follow-up because T-291 is now superseded: posted issuecomment-6815931661 (from check_requests --draft 954, with a short opening and a link to the 959 reply); 954 stays closed. Recording owed in the next records batch.
