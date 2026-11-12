@@ -1,0 +1,16 @@
+components:
+  - paper:n11-lower-bounds-explainer
+paths:
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+reason: >-
+  Lane L123 of 12 November (think-sj00, D-523): validate.py gains stack_watchdog(seconds), the
+  pytest arguments that load devtools.stack_watchdog, and the site layout step's three pytest
+  commands use it in place of -o faulthandler_timeout=60. Nothing the paper reads from the module
+  changes. Against main 0352d7554 (#965): devtools.compare_paper_renders rendered the explainer
+  into empty site directories, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice
+  from this tree and once with that main's validate.py swapped in: 55 files each, all
+  byte-identical across the three. No PDF was printed; it prints from that HTML. The paper keeps
+  its version, v0.4.35.

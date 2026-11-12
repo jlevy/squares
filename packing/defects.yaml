@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 522
+count: 523
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -17617,3 +17617,63 @@ defects:
     tests/test_goebel_construction.py holds the module to the retained program at every
     count to 1073 and proves every side to 10,000 final.
   recorded_in: packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.md
+- id: D-523
+  title: The site layout step's stack-dump timer crashed an xdist worker when a preview-server request thread ended during the dump
+  date: '2026-11-12'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    Four weeks, from e557f141d (2026-10-15), which added faulthandler_timeout=60 to the
+    three site layout commands and faulthandler_timeout=45 to devtools.browser_diagnostic,
+    to the two crashes of 2026-11-12.
+  severity: medium
+  status: fixed
+  bead: think-sj00
+  what: >-
+    pytest's faulthandler_timeout arms faulthandler.dump_traceback_later, whose C watchdog
+    walks every thread's state without the GIL. In CPython 3.14.7 the walk cannot detect a
+    freed thread state in a release build, so a thread that ends during the walk sends it
+    through a freed pointer. devtools.preview_site.serve answers each request on its own
+    thread, so a page load starts and ends dozens of them. The watchdog blocks every
+    signal, so the SIGSEGV killed the worker without a "Fatal Python error" line. The timer
+    was meant as a diagnostic only, with faulthandler_exit_on_timeout=False.
+  consequence: >-
+    The frontend job failed twice in two hours (job 130893681261 on #965 and job
+    130913531669 on #964) with "worker 'gw0' crashed while running"
+    test_viewport_size_prepaints_without_motion_and_keeps_explicit_choices, 1 failed and
+    514 passed, and no assertion failed. Both dumps stop at a socketserver
+    process_request_thread with <no Python frame> or <invalid frame>. In both jobs xdist
+    re-ran the test on the replacement worker and it passed. On those starved runners the
+    timer fired four and seven times in the step, and each firing that landed during page
+    loads could crash the worker. That blocked merges and blamed the crash on a test that
+    was correct.
+  fix: >-
+    devtools.stack_watchdog takes the same dump from a Python thread, through
+    faulthandler.dump_traceback, which reads every thread's state while holding the GIL.
+    A thread unlinks its own state only while it holds the GIL (tstate_delete_common), so
+    the walk never reaches a freed one. CPython gh-128400 wrapped the same walk in a
+    stop-the-world for free-threaded builds; in this GIL build that call compiles to
+    nothing. Setup, call and teardown are timed separately, the header
+    names the test, the phase and the worker, and the dump never ends the process. Its
+    clock and calls are bound at import, so a test that replaces time.monotonic keeps its
+    readings; the plugin's first push read the clock through the module, spent
+    tests/test_site_rendering.py's patched readings and left 595 errors in #968's
+    frontend job. validate.stack_watchdog(60) replaces -o faulthandler_timeout=60 in the site layout
+    commands, and stack_watchdog(45) replaces faulthandler_timeout=45 in the browser
+    diagnostic. Measured under the same request-thread churn: dump_traceback_later
+    re-armed every millisecond crashed 14 of 14 processes within 10 s, the six timed ones
+    in 0.3 to 4.8 s; one firing among four busy clients crashed 2 of 40; and in an xdist
+    run of 40 tests with one firing each, a worker crashed in 2 of 3 runs. The plugin's
+    watchdog took about 20,600 dumps in five 10-second runs, and 120 in three xdist runs,
+    with no crash.
+  regression: >-
+    packing/tests/test_stack_watchdog.py: test_pytest_dumps_each_slow_phase_by_name_and_the_run_passes
+    requires a "Current thread ... [stack-watchdog]" line in each dump, which only a dump
+    taken on the plugin's own Python thread can write, and requires the slow setup and
+    the slow call to be named apart, and a probe test that patches time.monotonic to two
+    readings to pass; test_the_plugin_refuses_to_run_beside_faulthandler_timeout
+    and test_no_command_arms_cpython_s_c_watchdog refuse the C watchdog in any command,
+    tool, workflow or pytest configuration. The crash depends on timing and has no
+    deterministic test.
+  recorded_in: packing/devtools/stack_watchdog.py
