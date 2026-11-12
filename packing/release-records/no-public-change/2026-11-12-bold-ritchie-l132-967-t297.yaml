@@ -9,6 +9,7 @@ paths:
   - packing/campaign/result-requests.yaml
   - packing/devtools/adopt_houses.py
   - packing/devtools/site_resources.py
+  - packing/devtools/site_urls.py
   - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/results.yaml
@@ -29,11 +30,12 @@ reason: >-
   adopts it at 269 in place of his own T-296 in the pass of 13 November, with its credit, the
   house writer's prose and source (T-296 no longer a house source), the bound citations, the
   composite figure, the gate's rigidity totals, the importer's packet reader, the
-  other-projects card, the requests entries for #967, #962 and #947 and the coverage text
-  that follow. No paper prints that count, these records or that card. Against main
-  45e2ecca2 (#966): devtools.compare_paper_renders rendered each paper into empty site
+  other-projects card, the results page's byte ceiling (1,600,000 to 1,700,000), the
+  requests entries for #967, #962 and #947 and the coverage text that follow. No paper
+  prints that count, these records, that ceiling or that card. Against main
+  17de4fb55 (#969): devtools.compare_paper_renders rendered each paper into empty site
   directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
-  tree and once with that main's copies of the ten paths above swapped in. The optimality
+  tree and once with that main's copies of the eleven paths above swapped in. The optimality
   review, the threshold-bound review and the methods survey are byte-identical across the
   three, 43 files each. The explainer's 55 files are deterministic, and only its Markdown
   and HTML differ from the baseline. Of its substitutions, the register count reads 297 here
