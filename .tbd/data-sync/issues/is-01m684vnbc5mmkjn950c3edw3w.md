@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 239
+version: 240
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T01:25:40.317Z
+updated_at: 2026-11-12T01:30:22.074Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -367,3 +367,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~01:25Z: L107 handed back #964 (T-294 s(179) adopted on 12 Nov in a second pass, L108 mapped, new devtools.measure_core, CI green at dd7bef433). Senior review L122 running. L119 handed back #965 (records: 958 final, 942 follow-up, the formatting, the evidence nit); CI red only from a worker crash in test_site_atlas_views, which passes locally. Senior review L121 running. Labels added to #964 and #965.
 
 2026-11-12 ~01:40Z: L121's senior review of #965: nothing blocking; the frontend failure was a starved-runner worker crash, unrelated. Coordinator applied the PR-body fix and nits 1-3 (3ff23bc64), which also restarts CI.
+
+2026-11-12 ~01:50Z: L122's senior review of #964: nothing blocking. S1: the credit should say 'below his earlier packing' (T-291), as at 268. S2: the PR body lacks a Selected next entry. S3: #965 conflicts (result-requests tail, release.py). measure_core's conclusion confirmed by a wider offset scan. Sent to L107, which applies the fixes, then merges main after #965 lands.
