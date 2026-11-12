@@ -178,8 +178,9 @@ records them in full. At 157:
   [method packet](../de-winter-method-132-157-2026-11-12/README.md) retains it, and this
   packet stays at `6617869`.
 - **The cuts (F11).** His second step cut the 132 at x = 9.71, y = 3.33, which he reads
-  as the review’s cuts under the packings’ fourfold symmetry. The squares added were
-  copies of the 12 + 13 that bordered the cuts, the 25 the review found left unpaired.
+  as the review’s cuts, since, he says, the packings have fourfold symmetry and a cut can
+  sit anywhere inside an axis-aligned block. He says the squares added were copies of the
+  12 + 13 that bordered the cuts, matching in number the 25 the review found left unpaired.
 - **The method.** Published in `57de046`, retained in the method packet and not run
   here, so the byte-for-byte reproduction from the seed is the author’s claim, unchecked.
 - **The seed’s licence (F12).** He has not contacted Samanyu-dev; it stays the owner’s

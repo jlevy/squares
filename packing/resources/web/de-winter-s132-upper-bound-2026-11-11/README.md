@@ -219,15 +219,15 @@ points here.
    a `verified` claim needs a replayable `certificate` record.
    The record writes its own witness, so nothing waits on it.
 4. **The cuts (F11).** His cuts were at x = 3.48, y = 8.61 in the 109 packing as
-   published, and at x = 9.71, y = 3.33 in the 132. The packings have fourfold symmetry,
-   and a cut can sit anywhere inside an axis-aligned block with the same result, so he
-   reads the review’s measured cuts as the same two steps. At each cut the two sides moved
-   about 1.15 apart. Every square in the layer next to the cut was copied once across it,
-   axis-aligned squares by one unit and tilted ones by 1/cos θ along the cut’s normal.
-   Copies overlapping another square by more than 0.15 were dropped, and every square was
-   re-optimized together. So the added squares are copies of the squares that bordered
-   each cut: 11 + 12 in the first step and 12 + 13 in the second, the 23 and 25 squares
-   the review found left unpaired.
+   published, and at x = 9.71, y = 3.33 in the 132. He says the packings have fourfold
+   symmetry, and that a cut can sit anywhere inside an axis-aligned block with the same
+   result, so he reads the review’s measured cuts as the same two steps. At each cut the
+   two sides moved about 1.15 apart. Every square in the layer next to the cut was copied
+   once across it, axis-aligned squares by one unit and tilted ones by 1/cos θ along the
+   cut’s normal. Copies overlapping another square by more than 0.15 were dropped, and
+   every square was re-optimized together. So the added squares are copies of the squares
+   that bordered each cut: 11 + 12 in the first step and 12 + 13 in the second, which
+   match in number the 23 and 25 squares the review found left unpaired.
 5. **The method.** Published in `57de046` as `method_n132_n157/`, which the method packet
    retains: the growth step, the IPOPT model, the high-precision solver, the certificate
    scripts and the 250-digit solutions. He says that, run from the public seed, the

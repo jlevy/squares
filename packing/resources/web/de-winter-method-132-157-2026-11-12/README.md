@@ -39,13 +39,14 @@ Intake lane L136 (think-c3p2) retained it on 12 November 2026.
   - a certificate (`package.py`, `mkcert.py`) that scales the solution by 1 + 10⁻⁶⁰,
     shifts it by 10⁻⁶⁰, writes it as exact rationals and checks it in rational
     arithmetic.
-- **Reproduction.** Run from the seed, the 109-square packing of `best_fit_101_500.csv`
-  at `Samanyu-dev/squares_in_squares` `53551d7`, with cuts at x = 3.48, y = 8.61 and
-  then x = 9.71, y = 3.33, the scripts print the sides 11.976048386602 and
-  12.993302615406 after the two growth steps. They then write `n132_exact.json` and
-  `n157_exact.json` byte for byte equal to the published files.
+- **Reproduction.** The README says that, run from the seed, the 109-square packing of
+  `best_fit_101_500.csv` at `Samanyu-dev/squares_in_squares` `53551d7`, with cuts at
+  x = 3.48, y = 8.61 and then x = 9.71, y = 3.33, the scripts print the sides
+  11.976048386602 and 12.993302615406 after the two growth steps. They then write
+  `n132_exact.json` and `n157_exact.json` byte for byte equal to the published files.
   The README names Python 3.10 or later with numpy, scipy, casadi, python-flint, mpmath
-  and matplotlib, and shapely for the second check.
+  and matplotlib, and, it says, shapely for the two checks (only `check_shapely.py`
+  imports it).
   The seed is not in the repository.
 - **The solutions.** `n132_solution_250_digits.txt` and `n157_solution_250_digits.txt`
   state the side and each square’s x, y and angle in radians to 250 places.
@@ -77,17 +78,17 @@ Intake lane L136 (think-c3p2) retained it on 12 November 2026.
   and then refuses each, `FAILED [semantic-invalid]: verified claims require a
   replayable certificate record`, exit 2.
   The files validate against `witness.schema.yaml`, as the answer says.
-  This repository’s loader adds one rule the schema cannot state: a claim of
+  This repository’s loader adds one rule the schema does not state: a claim of
   `coordinate_provenance: verified` must carry a replayable `certificate` record.
   The record keeps its own witnesses at 132 and 157, so this blocks nothing.
 - **The reproduction was not run.** CasADi (with IPOPT), python-flint, matplotlib and
   Shapely are not in the project environment, and adding them is not a cheap check.
   The seed is in a repository the project does not watch and does not retain.
-  The growth step’s re-optimization also stops on a wall-clock budget
-  (`nlp.compact(..., tmax=120)` in `grow.py`), so its binary64 result can depend on
-  the machine; the 900-bit Newton step then solves the contact equations that result
-  selects. That the scripts reproduce both exact JSON files byte for byte is the
-  author’s claim, unchecked here.
+  The growth step’s overlap repair and re-optimization can also stop on a wall-clock
+  budget (`slp.repair(..., tmax=20)` and `nlp.compact(..., tmax=120)` in `grow.py`), so
+  its binary64 result can depend on the machine; the 900-bit Newton step then solves the
+  contact equations that result selects. That the scripts reproduce both exact JSON
+  files byte for byte is the author’s claim, unchecked here.
 - **No program from the folder ran here.** The scripts and both checks are retained as
   data.
 
