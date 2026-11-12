@@ -3124,16 +3124,17 @@ CREDITS: dict[int, Credit] = {
     # T-296 (adopted on 12 November 2026), Doğa Özden's issue 962: a new arrangement relative
     # to his own T-290's packing, 115 squares beyond a tenth, found by a band-design search
     # from tilted squares of PingYou Ltd's n = 207 packing, Ryan Xu's n = 70 packing as Evan
-    # Daniel and PingYou Ltd improved it, and his own n = 179 packing (the 12 November
-    # review's F9). T-290, adopted on 11 November, was his packing from a strip cut of Evan
-    # Daniel's n = 304 packing (F7).
+    # Daniel and PingYou Ltd improved it, and his own n = 179 packing of issue 954 (T-291;
+    # the 12 November review's F9). T-290, adopted on 11 November, was his earlier packing
+    # from a strip cut of Evan Daniel's n = 304 packing (F7). Since T-294 is the house at 179
+    # now, the phrase names issue 954 (senior review N1 of #966).
     269: Credit(
         (OZDEN,),
         (),
         "Doğa Özden’s packing from a band of the tilted squares of PingYou Ltd’s n = 207 "
         "packing, Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it and "
-        "his own n = 179 packing, below his packing from a strip cut of Evan Daniel’s n = 304 "
-        "packing",
+        "his own n = 179 packing of issue 954, below his earlier packing from a strip cut of "
+        "Evan Daniel’s n = 304 packing",
     ),
     # Issue 703's packing, another arrangement of the design of issue 500's packing, which
     # T-174 refines to 1e-30: 15 squares beyond a tenth under the identity (the 21 October

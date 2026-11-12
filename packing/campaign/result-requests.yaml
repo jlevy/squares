@@ -30985,7 +30985,7 @@ issues:
       the start and the record it improves, both strong generators' regularization of the new
       house run in the same change. The Kaggle packing the issue quotes, 16.901513582205
       (kirilltym), is above it; the side-only leaderboard entry it quotes states no packing.
-    read_through: '2026-11-11T10:16:41Z'
+    read_through: '2026-11-11T23:35:10Z'
     results:
     - key: n269-transplant
       claim: >-
@@ -31100,8 +31100,11 @@ issues:
       was registered as T-296 and adopted at 269 in place of T-290 on 12 November 2026 (intake
       lane L120, think-s418), once its certificate was replayed here and its stage 4 review
       mapped; it is a new arrangement relative to T-290's packing, not a further arrangement of
-      it. T-290 stays a verified bound at V3/C3 and keeps its certificate as history. The reply
-      owed on #962 says so; nothing more is owed here.
+      it. T-290 stays a verified bound at V3/C3 and keeps its certificate as history. The final
+      reply here (issuecomment-6793165538) stated T-290 current, so a follow-up is owed on this
+      issue once T-296 is on main, as #928's was when T-289 superseded T-276:
+      `check_requests --draft 947` states T-290 at V3/C3, confirmed, superseded. No follow-up
+      has been posted.
   - number: 941
     title: 'Fifteen lowered upper bounds for n between 413 and 910: registration request'
     author: JoostdeWinter

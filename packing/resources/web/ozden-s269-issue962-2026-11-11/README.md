@@ -240,6 +240,9 @@ equal [measure/contraction-n269.json](measure/contraction-n269.json) and
 factor, binding pair and contracted side, and its identity measurement against T-290 and
 T-174 equals [measure/identity.json](measure/identity.json) under nearest centres, the
 optimal assignment and box-centred alignment, as do the tilt counts.
+This lane’s brief had relayed the review’s T-290 margin, the certificate’s contracted
+side and the identity verdict before its runs, so the agreement is two runs of the same
+tools, not a blind comparison.
 
 The review finds the issue’s arithmetic right (F4): the claim is the side’s 12-place
 ceiling, the gain and the distance above the Kaggle entry are as printed, and “our exact

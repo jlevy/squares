@@ -12,7 +12,7 @@ review of 12 November 2026
 
 The house is a new arrangement relative to T-290’s packing, the author’s own of the day
 before, found by his band-design search from tilted squares of the registry’s n = 207
-and n = 70 packings and his own n = 179 packing.
+and n = 70 packings and his own n = 179 packing of issue 954.
 
 ## How They Were Run
 
