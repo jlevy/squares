@@ -6003,7 +6003,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-11'
+  lastmod: '2026-11-12'
   status: live
 - path: cases/18.html
   canonical: cases/18.html
@@ -24186,6 +24186,7 @@ urls:
     evidence:
     - E-ozden-959-certificate-report
     - E-ozden-959-exact-feasibility
+    - E-ozden-959-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s179-issue959-2026-11-11/README.md
     - packing/resources/web/ozden-s179-issue959-2026-11-11/acquisition/claims.json
@@ -24198,6 +24199,12 @@ urls:
     - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179.json
     - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179-own.json
     - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/check-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/controls-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/identity-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/s70-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/contract-n179.json
+    - docs/project/reviews/review-2026-11-12-ozden-959.md
     - packing/campaign/issue-intake/upper-bounds-959-20261111/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/measure_core.py

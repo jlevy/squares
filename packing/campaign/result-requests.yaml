@@ -31321,11 +31321,13 @@ issues:
     - think-ruu2
     - think-ikku
     - think-tj4o
-    answer_bead: think-f65n
+    - think-89i7
+    answer_bead: think-89i7
     replies: []
     close_when: >-
-      T-291 is on main at V3/C3 as the house at 179, and the reply on main says what was
-      retained and replayed, what the review found and that the case adopted it.
+      T-291 is on main at V3/C3, adopted at 179 and replaced there on 12 November by T-294
+      (#959), and the reply on main says what was retained and replayed, what the review found,
+      that the case adopted it and that #959 replaced it.
     notes: >-
       Read on 11 November 2026 from main c8448724e; no comment yet. The commit bd262d8 precedes
       the issue by 24 seconds. The issue carried no intake label when read; it was added on 11
@@ -31366,8 +31368,10 @@ issues:
       13.880960371559, 4.07e-4 below this side by his account, the same method in a later
       batch, and asked that it be adopted in place of this one; this certificate stays a valid
       bound. #959 entered the record under its own import bead (think-89i7, lane L107) as
-      T-294; T-291 is not replaced, and the house at 179 moves only when #959's certificate is
-      replayed, reviewed and adopted under the house rule.
+      T-294; T-291 is not replaced in the register, and the house at 179 moved to T-294 on 12
+      November, once #959's certificate was replayed, reviewed and adopted under the house rule.
+      think-f65n closed once #956 merged with no reply posted, so the reply owed here, which
+      now also says that #959 replaced T-291 as the house, is think-89i7's.
   - number: 959
     title: 's(179) ≤ 13.880960371559: improved packing (registration request)'
     author: kenaznia-doga
@@ -31392,8 +31396,15 @@ issues:
       rounded up, and both maintained exact routes accept the witness and refuse its gross and
       sharp controls; measured, it is a further arrangement of T-291's packing, one to one with
       it by nearest centres, 3 squares beyond a tenth. The ledger of 11 November records it.
-      Registered as T-294, at V3/C3 on the replay; the stage 4 review, written in a separate
-      blind lane, is pending, and the adoption at 179 waits on it. The Kaggle packing the issue
+      Registered as T-294. The 11 November stage 4 review
+      (docs/project/reviews/review-2026-11-12-ozden-959.md, lane L108), written blind in a
+      separate lane, accepted it with 13 findings, all notes, and scored it S3; its clean-room
+      checker decided it again, so the entry is confirmed, independently re-implemented, at
+      V3/C3, and the case adopts it at 179 in place of T-291 under the house rule in the pass of
+      12 November, in the same pull request, with Doğa Özden the packing's finder and the band's
+      source packing credited as the
+      seed, both strong generators' regularization of the new house run in the same change.
+      The Kaggle packing the issue
       quotes, 13.883795490524 (kirilltym), is above it; the side-only leaderboard entry it
       quotes and states first, 13.880960371556 (team Nevska, 7 November), 2.2e-12 below this
       side and the registry's s(70) + 5 at 12 places, is unpublished and states no packing, so
@@ -31412,6 +31423,7 @@ issues:
       evidence:
       - E-ozden-959-certificate-report
       - E-ozden-959-exact-feasibility
+      - E-ozden-959-review-exact-feasibility
     beads:
     - think-89i7
     answer_bead: think-89i7
@@ -31444,4 +31456,27 @@ issues:
       think-71uq, as for #954, noted and not decided. #574's follow-up of 19 October
       acknowledged the rational houses PR #665 adopted from T-174, 179 among them; #574 is held
       for the owner (think-9v2k), so a follow-up naming a new house at 179 waits on that hold.
-      No reply has been posted.
+      The review measured the same where both measured (the gain, the least gap at 104 and
+      105, T-291's 2.616e-12 margin, the identity against T-291, the side's 2.645e-12 excess
+      and the 70's 48 squares at a corner), and adds: exactly three squares touch a wall (67
+      bottom, 123 left, 162 top); the margins are the pose's own, 1.99 to 2.71e-13 of the
+      centres' separation, about twice "about 1e-13 relative" (F6); the issue's lineage
+      counts hold with T-174 reflected top to bottom and set against the upper-left corner
+      (F7); 26 of the 36 tilted squares sit at the 70 band's angle to 1e-9 degrees, and the
+      seed as stated has 34 squares, not 35 (F9); the side's 12-place fractional part is
+      0.880960371558, agreeing with the 70's and 207's to 11 places, not 12, and "our exact side
+      13.880960371558224" is its binary64 value (F5); the squares contracted by 1 - 1.99e-13 are
+      accepted at side 13.88096037155566185, 3.4e-13 below the leaderboard's print, a side
+      inside the certificate's own dilation that is the owner's RV-3 question (think-ruu2),
+      noted and not registered (F10); the review names think-mdxq for the band's licence,
+      which closed on 4 November, so think-71uq stands (F11); the schema path and replay line
+      as at #954 (F12); and the issue's search time, 13:30 PST, twelve minutes after it opened
+      (F13). The review's questions for the author, informational and holding nothing open:
+      whether the lab would promote the pose with a contraction; whether there is an exact
+      construction at s(70) + 5, as the 207 is at s(70) + 6; whether the repair scaling was
+      about 2e-13 rather than 1e-13; whether the lineage counts use that reflection and
+      anchoring, and whether the issue would name it; whether the issue would correct the
+      binary64 print and the fractional part; which square the seed's 35th counts; which
+      search time is right; and whether the seed took the 70 band from the registry's witness
+      or from Ryan Xu's or Evan Daniel's published coordinates, and whether the band-design
+      search will be published. No reply has been posted.

@@ -9,7 +9,8 @@ prepared and posted both on his behalf. Five seconds after the issue, at 21:18:2
 same account commented on #954
 ([issuecomment-6807260149](https://github.com/jlevy/squares/issues/954#issuecomment-6807260149))
 that #959 supersedes it, and asked that #959 be adopted in place of #954. #954 is T-291,
-the house at 179 since 11 November 2026, retained in the
+the house at 179 from 11 November 2026 until this certificate’s adoption on 12 November,
+retained in the
 [ozden-s179-upper-bound-2026-11-11](../ozden-s179-upper-bound-2026-11-11/README.md)
 packet; it stays a verified bound.
 
@@ -203,9 +204,62 @@ and monotonicity consequences as on `main`: this bound carries to no other count
 
 ## Stage 4 Review and Adoption
 
-The stage 4 mathematical review runs in a separate lane, blind to this one, on the source
-repository. The case adopts the certificate at 179 once that review is mapped; until then
-T-291 stays the house.
+The stage 4 mathematical review of 11 November 2026,
+[review-2026-11-12-ozden-959.md](../../../../docs/project/reviews/review-2026-11-12-ozden-959.md)
+(lane L108), was written in a separate lane blind to this one until its findings were
+frozen, and keeps its programs and receipts in the review-only directory
+[ozden-s179-959-review-2026-11-12](../ozden-s179-959-review-2026-11-12/README.md). It
+accepts the certificate, every one of its 13 findings a note. Its clean-room checker,
+frozen at 22:03:30Z, decided every square, wall and pair by separating axes in GMP
+rationals and by exact clipping in Python fractions, and its 19 controls, stated
+beforehand, came out as stated; the squares are accepted in the box of the claim’s own
+side, 13.880960371559 (F3). The case adopted the certificate at 179 on 12 November, in place
+of T-291, with both strong generators’ regularization of the new house.
+
+Where the review and this lane measured the same thing, they agree:
+
+| Quantity | This lane | The review |
+| --- | --- | --- |
+| Gain on T-291 | 4.068e-04 | 4.06788552e-4 |
+| Least pair gap | 1.99e-13, squares 104 and 105 | 1.99223328482862e-13, squares 104 and 105 |
+| Wall contacts | the left, bottom and far walls touched exactly; square 67 at its wall | squares 67 bottom, 123 left, 162 top |
+| T-291’s contraction margin | 2.616e-12, pair 14 and 15 | 2.616e-12, pair 14 and 15 |
+| Identity against T-291 | one to one under the identity; 3 beyond 0.1, largest 0.218429; 5 turned beyond a degree | one to one at every anchor; 9 beyond 0.05, 3 beyond 0.1, largest 0.2181; 5 turned beyond a degree |
+| Tilted squares | 35 beyond a degree, against T-291’s 36 | 36 beyond half a degree, against T-291’s 37 (square 42 at +0.53 degrees) |
+| Side less s(70) + 5 | 2.645427e-12 | 2.6454e-12 |
+| Contracted to first contact | 1 − λ\* = 1.992233e-13, side s(70) + 5 + 7.9e-14 | accepted at 1 − 1.99e-13, side s(70) + 5 + 8.2e-14; refused at 1 − 2e-13 |
+| The 70 at a corner | at most 48 of 70 within 10⁻⁹ (upper right), 34 at the lower left | at most 48 (upper right), 34 at the lower left |
+| The 70’s band ends | 7 at (0, 0) and 8 at (5, 5) within 10⁻⁹, identity only | 7 and 8 within 10⁻¹¹ |
+
+The review adds what this lane did not measure: 26 of the 36 tilted squares sit at the 70
+band’s angle, −40.750530446306 degrees, to 10⁻⁹ degrees; 103 upright squares lie on unit
+lattices anchored at two walls; the 207 placed at the lower left matches 106 squares;
+and the seed as the issue states it has 34 squares, not 35 (F9). Its F10 measures the
+contracted side, 13.88096037155566185, 3.4e-13 below the leaderboard’s 13.880960371556:
+a side inside the certificate’s own dilation is the owner’s open question RV-3
+(think-ruu2), so it is noted and not registered. Its F11 names `think-mdxq` for the
+band’s licence; that bead closed on 4 November, and the owner’s decision is
+`think-71uq`.
+
+The review’s questions for the author, which hold no rung:
+
+1. Would the lab promote the pose with a contraction (`center_dilation` below 1)?
+   Whether the record registers a side inside the repair dilation is its owner’s
+   question.
+2. Is there an exact construction at side s(70) + 5, as the registry’s 207 is at
+   s(70) + 6? It would be scored on its own.
+3. Was the repair scaling about 2 × 10⁻¹³ rather than 10⁻¹³ (F6)?
+4. Do the lineage counts use T-174 reflected top to bottom and set against the
+   upper-left corner, and would the issue name that convention (F7)?
+5. Would the issue correct “our exact side 13.880960371558224”, the side’s binary64
+   value, and the side’s 12-place fractional part, 0.880960371558 rather than
+   0.880960371556 (F5)?
+6. The seed as stated has 34 squares by their centres, not 35: which square does the
+   35th count?
+7. The issue dates its search for other claims 13:30 PST, after it was opened at 13:18
+   PST: which time is right (F13)?
+8. Did the seed take the 70 band from the registry’s witness or from Ryan Xu’s or Evan
+   Daniel’s published coordinates, and will the band-design search be published?
 
 ## What Is Not Established
 

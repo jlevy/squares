@@ -1001,6 +1001,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issue 938 (think-1goz)](packing/cases/regularized_drawings/think-1goz-2026-11-09/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issues 943, 944, 945 and 947 (think-xq4o)](packing/cases/regularized_drawings/think-xq4o-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 954 (think-f65n)](packing/cases/regularized_drawings/think-f65n-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption of Issue 959 (think-89i7)](packing/cases/regularized_drawings/think-89i7-2026-11-12/README.md) | source retention and archive policy | record | retained | — |
 | [Certificates Below the Houses of 31 October 2026 (think-ruu2)](packing/cases/register_candidates/think-ruu2-2026-10-31/README.md) | source retention and archive policy | record | retained | — |
 | [Review code: project candidates at 130, 293 and 307 (think-ruu2)](packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of T-242 at 268 (think-3anz)](packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md) | source retention and archive policy | record | retained | — |
@@ -1066,6 +1067,7 @@ case or experiment separately.
 | [De Winter’s Re-Solved s(199) and s(172), #939 and #946: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-de-winter-939-946.md) | dated review record | record | retained | — |
 | [De Winter’s Thirty-Seven Upper Bounds of #941 and #942: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #954: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-ozden-954.md) | dated review record | record | retained | — |
+| [Özden’s Certificate of #959: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-12-ozden-959.md) | dated review record | record | retained | — |
 | [sqverify-fast Declared Nets: Re-Check of the Fixes for DR-1 to DR-3 (`36b52538a`) and the Proposed Flip](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md) | dated review record | record | retained | — |
 | [Review: wand125’s Checker on ValidTilt9 (`T-081`), Lane R3](docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md) | dated review record | record | retained | — |
 | [Review of the sqverify-fast format T route: census rows and controls for T-068’s 34 rectangle certificates](docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md) | dated review record | record | retained | — |

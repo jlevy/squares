@@ -13024,13 +13024,14 @@ sources:
   evidence:
   - E-ozden-959-certificate-report
   - E-ozden-959-exact-feasibility
+  - E-ozden-959-review-exact-feasibility
   notes: >-
     The whole tree of the repository's one commit, 6ab3cfe, but a raster diff image, two checker
     files and Evan Daniel's licence notice pinned against byte-identical copies, is retained for
     jlevy/squares#959, the certificate admitted only where its exact side rounds up to the side
-    the issue prints. T-294 records the in-horizon report at V3/C3 on the replay; the stage 4
-    review, in a separate blind lane, is pending, and the case's house stays T-291 until it is
-    mapped. The ledger of 11 November for this lane
+    the issue prints. T-294 records the in-horizon report at V3/C3 since the stage 4 review of
+    11 November (docs/project/reviews/review-2026-11-12-ozden-959.md), and the case adopted it
+    as its house on 12 November, in place of T-291. The ledger of 11 November for this lane
     (campaign/issue-intake/upper-bounds-959-20261111) records it. All 3 native jobs have full
     outcomes.
 selected_overrides:
@@ -13214,11 +13215,11 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 179
-  source_id: ozden-s179-upper-bound-2026-11-11
-  value: '13.8813671601098758'
-  evidence: E-ozden-954-certificate-report
+  source_id: ozden-s179-issue959-2026-11-11
+  value: '13.8809603715582251'
+  evidence: E-ozden-959-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-11 (T-291).
+    a replay here and an accepted review, adopted on 2026-11-12 (T-294).
 - n: 180
   source_id: ozden-s180-upper-bound-2026-11-10
   value: '13.9156185027900258'
@@ -14040,7 +14041,7 @@ superseded_reports:
 - n: 179
   source_id: evand-square-packing-2026-10-05
   value: '13.895341069976490731724097384352'
-  superseded_by: ozden-s179-upper-bound-2026-11-11
+  superseded_by: ozden-s179-issue959-2026-11-11
   reason: Certifies the catalogue's packing at a side 7.3e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -14773,7 +14774,7 @@ superseded_reports:
 - n: 179
   source_id: squish-update-2026-10-07
   value: '13.8913125657406980'
-  superseded_by: ozden-s179-upper-bound-2026-11-11
+  superseded_by: ozden-s179-issue959-2026-11-11
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 180
@@ -14890,7 +14891,7 @@ superseded_reports:
 - n: 179
   source_id: ry-xu-new-packings-2026-10-08
   value: '13.8939549425138940'
-  superseded_by: ozden-s179-upper-bound-2026-11-11
+  superseded_by: ozden-s179-issue959-2026-11-11
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 236
   source_id: ry-xu-new-packings-2026-10-08
@@ -14962,7 +14963,7 @@ superseded_reports:
 - n: 179
   source_id: squish-second-update-2026-10-07
   value: '13.8837954905121866'
-  superseded_by: ozden-s179-upper-bound-2026-11-11
+  superseded_by: ozden-s179-issue959-2026-11-11
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 208
   source_id: squish-update-2026-10-07
@@ -15601,9 +15602,9 @@ superseded_reports:
 - n: 179
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '13.8837954905108985'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-291's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-294's exact
     side is smaller.
-  superseded_by: ozden-s179-upper-bound-2026-11-11
+  superseded_by: ozden-s179-issue959-2026-11-11
 - n: 180
   source_id: couzo-451-exact-refinements
   value: '13.9169935224778325'
@@ -16100,8 +16101,14 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '13.88379549051089845'
   reason: The house from 2026-10-17 until 2026-11-11; its certificate stays retained and verified,
-    and T-291's exact side is smaller.
-  superseded_by: ozden-s179-upper-bound-2026-11-11
+    and T-294's exact side is smaller.
+  superseded_by: ozden-s179-issue959-2026-11-11
+- n: 179
+  source_id: ozden-s179-upper-bound-2026-11-11
+  value: '13.8813671601098758'
+  reason: The house from 2026-11-11 until 2026-11-12; its certificate stays retained and verified,
+    and T-294's exact side is smaller.
+  superseded_by: ozden-s179-issue959-2026-11-11
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

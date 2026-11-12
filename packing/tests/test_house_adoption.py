@@ -275,7 +275,8 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # issue-938 certificate (T-284), below T-174's and T-193's sides there. 32 since the
     # adoption of 11 November 2026 moved 180 and 269 to his issue-944 and issue-947
     # certificates (T-288, T-290), below T-174's sides there. 31 since the same day's lane
-    # L100 moved 179 to his issue-954 certificate (T-291), below T-174's side there.
+    # L100 moved 179 to his issue-954 certificate (T-291), below T-174's side there, and its
+    # lane L107 on to his issue-959 certificate (T-294).
     assert len(held_counts) == 31
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -293,7 +294,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         130: "T-259",
         155: "T-197",
         172: "T-282",
-        179: "T-291",
+        179: "T-294",
         180: "T-288",
         182: "T-243",
         268: "T-289",
@@ -1741,7 +1742,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 2026 moved 232, 268, 299, 303 and 307 to Doğa Özden's further arrangements (T-275 to
     # T-279), and its later pass 172 and 270 (T-282, T-283). The adoption of 11 November 2026
     # moved 156, 180, 268 and 269 to his certificates of issues 943 to 947 (T-287 to T-290),
-    # and the same day's lane L100 179 to his certificate of issue 954 (T-291).
+    # and the same day's lane L100 179 to his certificate of issue 954 (T-291), and its lane
+    # L107 on to his certificate of issue 959 (T-294).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1770,7 +1772,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         156: "T-287",
         180: "T-288",
         269: "T-290",
-        179: "T-291",
+        179: "T-294",
     }
     before = {
         **houses.ADOPTED,

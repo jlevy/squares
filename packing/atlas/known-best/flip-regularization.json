@@ -184,7 +184,7 @@
     {"n":176,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-176.svg","rotate":270,"flip":false,"decided_by":"quadrants","quadrants":[1.0,0.896756,0.917608,0.884551]},
     {"n":177,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-177.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[0.993483,0.867355,0.979092,0.865425]},
     {"n":178,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-178.svg","rotate":0,"flip":false,"decided_by":"grid-4","quadrants":[0.98447,0.872306,0.98447,0.872306]},
-    {"n":179,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-179.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[1.0,0.877534,0.972433,0.8658]},
+    {"n":179,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-179.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[1.0,0.876152,0.973932,0.865901]},
     {"n":180,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-180.svg","rotate":270,"flip":true,"decided_by":"quadrants","quadrants":[1.0,0.892266,0.944846,0.881043]},
     {"n":181,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-181.svg","rotate":180,"flip":true,"decided_by":"quadrants","quadrants":[1.0,0.905537,0.910004,0.904426]},
     {"n":182,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-182.svg","rotate":270,"flip":true,"decided_by":"quadrants","quadrants":[1.0,0.905183,0.919701,0.904882]},

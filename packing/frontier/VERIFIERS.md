@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **250** programs: **54** external and **196** first-party; **169** decide claims and **81** check premises.
-- **737** of **945** evidence entries name the programs that verified them: 350 independently re-implemented, 313 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **251** programs: **54** external and **197** first-party; **170** decide claims and **81** check premises.
+- **738** of **946** evidence entries name the programs that verified them: 351 independently re-implemented, 313 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -282,6 +282,7 @@ second implementation agrees.
 | [`V-ozden-943-947-review-check`](#v-ozden-943-947-review-check) | l83_check.py with l83_reader.py | Squares Project (Levy) | first-party | decides | 4 | 4 |
 | [`V-de-winter-941-942-review-check`](#v-de-winter-941-942-review-check) | l96_check.py with l96_read.py | Squares Project (Levy) | first-party | decides | 3 | 0 |
 | [`V-ozden-954-review-check`](#v-ozden-954-review-check) | l101_check.py with l101_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-ozden-959-review-check`](#v-ozden-959-review-check) | l108_check.py with l108_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -5078,6 +5079,22 @@ The 11 November stage 4 review's exact checker of Doğa Özden's rational corner
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-ozden-954-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 179: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-291 |
+
+### `V-ozden-959-review-check`
+
+**l108_check.py with l108_reader.py, l108_sat.py, l108_clip.py and l108_geom.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2 certificate of issue 959 (179), with a strict reader of its own (l108_reader.py: ids 1 to n in order, every scalar an exact integer pair in lowest terms, the JSON twin held to the same tree, any unexpected layout refused): every format hypothesis, every square a unit square from its listed corners, every wall and every pair twice with no distance filter, by separating axes in gmpy2.mpq (l108_sat.py, method A) and by exact clipping of closed polygons in fractions.Fraction (l108_clip.py, method B), each pair classed overlapping, touching or clear by both. l108_geom.py holds the exact constructions the self-test and controls use; l108_controls.py decides 19 controls stated in a plan hashed before it existed; l108_selftest.py holds both methods and the reader to 8,453 cases.
+
+- Source: [`packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_check.py`](../../packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_check.py), [`packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_reader.py`](../../packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_reader.py), [`packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_sat.py`](../../packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_sat.py), [`packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_clip.py`](../../packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_clip.py), [`packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_geom.py`](../../packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_geom.py), [`packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_selftest.py`](../../packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_selftest.py), [`packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_controls.py`](../../packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_controls.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/ozden-s179-959-review-2026-11-12/README.md`](../../packing/resources/web/ozden-s179-959-review-2026-11-12/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 959 (L108, under think-89i7), strong tier, prompted separately from the import lane (L107, think-89i7)), with its own prompt and code; authorship in common with the producer’s: system-family, The coordinates were made by this repository's packing-witness promote, whose witness tooling Claude agents co-authored, and the issue says AI agents wrote and ran the lab's search and checks. The six checker files were frozen at 2026-11-11T22:03:30Z (frozen/checker-frozen-digests.txt), before their author read any producer code or this repository's witness, verifier or promotion code; they import nothing from this repository or the source, and reuse no code of the review of issue 954 (L101), whose programs their author did not open.
+- Note: Written and run on 11 November 2026 for docs/project/reviews/review-2026-11-12-ozden-959.md (SHA-256 6c6dbaff0369784888e087c7fb5bd6a9f05a0e5e095e60caf7e946a66616e6ef for l108_check.py, as frozen at 2026-11-11T22:03:30Z), and kept with its receipts in the review-only directory ozden-s179-959-review-2026-11-12 beside the import lane's packet. l108_plan_facts.py, l108_make_plan.py, l108_wit.py, l108_sides.py, l108_house.py, l108_pose.py, l108_s70.py, l108_identity.py, l108_contract.py, l108_custody.py and l108_digests.py, kept beside them, decide no certificate and are not registered; l108_house.py and l108_contract.py decide the house witnesses and the contracted squares with the frozen l108_check.decide.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-959-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 179: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-294 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
