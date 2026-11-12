@@ -1,0 +1,50 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "de-winter-method-132-157-2026-11-12",
+  "source_url": "https://github.com/JoostdeWinter/square-packing",
+  "source_ref": "main",
+  "source_commit": "57de0465c07f7ba94bbd1fd2a317ee3f08cfedca",
+  "retrieved_at_utc": "2026-11-12T08:56Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, a watched repository, fetched in lane L136 (bead think-c3p2) after the author's answers on jlevy/squares#958 (issuecomment-6818738203, 2026-11-12T08:31:55Z), which name the commit. The pin is the head of main when it was read at 08:56Z and again at 09:02Z, 57de046 (committed 2026-11-12T08:30:46Z, 'Publish the method for n = 132 and n = 157 and make both witness files valid Witness/v2', the author's message), the one commit after 6617869, the pin of the de-winter-s132-upper-bound-2026-11-11 and de-winter-s157-upper-bound-2026-11-11 packets. It adds the folder method_n132_n157/ and changes the root README, n132/README.md, n132/SHA256SUMS, n132/n132_witness.yaml and the same three files of n157/. The scope is the licence, the root README, the whole of method_n132_n157/ and the folders n132/ and n157/. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and is pinned against it; n132/n132_exact.json, n157/n157_exact.json and both copies of verify_exact.py are byte-identical to the copies the 6617869 packets retain and are pinned against them; the two figures are pinned by digest only. Both SHA256SUMS state the SHA-256 of the five other files of their folder, and they match. No source program ran in writing this packet; the method's scripts and both checkers are retained as data and never executed here.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The method's reproduction starts from the public 109-square packing of Samanyu-dev/squares_in_squares (53551d7, best_fit_101_500.csv), which the method README says is not part of the repository; it is not retained here and its licence is not stated in this source.",
+  "claims": [
+    "method_n132_n157/README.md says the folder holds the code that produced the packings in n132/ and n157/ and the high-precision solutions behind the two certificates, in four steps: a growth step (grow.py, surgery.py) that cuts the packing along one vertical and one horizontal line, moves the parts about 1.15 apart, copies every square in the layer next to a cut once across it (axis-aligned squares by one unit, tilted squares by 1/cos(theta) along the cut's normal) and drops a copy that overlaps another square by more than 0.15; an optimization (slp.py, nlp.py) that removes overlaps with linear programs at a fixed side and then minimizes the side with IPOPT through CasADi under wall constraints and one separating-axis constraint per corner of each pair of nearby squares; a high-precision solution (newton.py) of the contact equations by Newton's method at 900 bits with python-flint, one equation for each corner within 1e-6 of the edge line of a neighbouring square on a separating axis and one for each corner within 1e-6 of a wall, 1407 for n = 132 and 2024 for n = 157; and a certificate (package.py, mkcert.py) that scales the solution by 1 + 1e-60, shifts it by 1e-60, writes it as exact rationals and checks it in rational arithmetic.",
+    "method_n132_n157/README.md says that, run from the seed, the 109-square packing of best_fit_101_500.csv at Samanyu-dev/squares_in_squares 53551d7, by grow.py with cuts at x = 3.48, y = 8.61 and then x = 9.71, y = 3.33, newton.py and package.py, the scripts print the sides 11.976048386602 and 12.993302615406 after the two growth steps and write n132_exact.json and n157_exact.json byte for byte equal to the files in n132/ and n157/; it names Python 3.10 or later with numpy, scipy, casadi, python-flint, mpmath and matplotlib, and shapely for the second check.",
+    "n132_solution_250_digits.txt and n157_solution_250_digits.txt state the solutions of the contact equations to 250 decimal places: the side, then x, y and the angle in radians of each square. check_binary64.py (a separating-axis test over all pairs in binary64, least separation about -2e-15 at 132 and -4e-15 at 157) and check_shapely.py (the area of the union with Shapely, 132.0000000000 and 157.0000000000) read the exact JSON; the README says they were written for the folder and repeat the two checks reported with the packings, and that the perturbation trials and the force-balance check are outside the folder.",
+    "n132/n132_witness.yaml and n157/n157_witness.yaml at the pin add a softschema header naming packing.squares:Witness/v2 and this repository's witness.schema.yaml, a claim block (coordinate_provenance: verified, method: exact-algebraic, and limitations naming verify_exact.py and no optimality statement) and a lowercase id (W-n132-de-winter, W-n157-de-winter); the commit message says the squares and the sides are unchanged. The folder READMEs now call each file a Squares Project witness file (Witness/v2, center-basis, rational) and point to method_n132_n157/. The method README says the code was written with Claude Fable 5.2 (Anthropic) under the direction of Joost de Winter. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "LICENSE",
+    "README.md",
+    "method_n132_n157",
+    "n132",
+    "n157"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+      "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+    },
+    {
+      "match": "n132/n132_exact.json",
+      "reason": "The exact JSON at 132, unchanged since a491dad and byte-identical to the copy the de-winter-s132-upper-bound-2026-11-11 packet retains at 6617869.",
+      "identical_to": "packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_exact.json"
+    },
+    {
+      "match": "n157/n157_exact.json",
+      "reason": "The exact JSON at 157, unchanged since a491dad and byte-identical to the copy the de-winter-s157-upper-bound-2026-11-11 packet retains at 6617869.",
+      "identical_to": "packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_exact.json"
+    },
+    {
+      "match": "n*/verify_exact.py",
+      "reason": "The author's exact checker, unchanged since a491dad, the same bytes in both folders and byte-identical to the copy the de-winter-s132-upper-bound-2026-11-11 packet retains; retained as data and not run here.",
+      "identical_to": "packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/verify_exact.py"
+    },
+    {
+      "match": "n*/n*_record.png",
+      "reason": "Raster figures of the packings, unchanged since a491dad, which decide nothing; pinned by digest only."
+    }
+  ]
+}
