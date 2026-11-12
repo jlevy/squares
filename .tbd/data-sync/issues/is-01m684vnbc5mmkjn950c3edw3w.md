@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 250
+version: 251
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -88,7 +88,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T04:33:13.540Z
+updated_at: 2026-11-12T04:37:42.926Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -191,3 +191,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 03:53Z renewal (intake212): new #967 (Özden s(269) <= 16.889730073596, 9.74e-3 below his #962/T-296; just under Kaggle's 16.889730079125); his #947 comment (-6813076182) points to it. Bead think-n73d; blind review L127 started; import after #966. #966/T-296 still merges (as with #954 and #959).
 
 2026-11-12 ~04:40Z: #968 merged (bc152e8b4) after L126 applied L125's review (CI green incl. frontend). think-sj00 closed. L107 is merging main into #964 to re-run CI with the fix. L126 noted a one-off local load-budget timing failure in test_site_rendering (passed on rerun and in CI); not filed.
+
+2026-11-12 ~04:50Z: L127's blind review of #967 accepted (587375ed1; RV-3 not reached; new arrangement). Import (T-297) waits for #966; notes on think-n73d.
