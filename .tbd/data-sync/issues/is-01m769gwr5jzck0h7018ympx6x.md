@@ -5,7 +5,7 @@ title: "Import #959: Doğa Özden's s(179) <= 13.880960371559 (supersedes his #9
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l107
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T21:51:45.413Z
-updated_at: 2026-11-12T02:00:39.173Z
+updated_at: 2026-11-12T05:09:23.806Z
 started_at: 2026-11-11T22:20:33.166Z
 ---
 
@@ -48,3 +48,5 @@ Branch `claude/bold-ritchie-xo28us-l107`, cut from `origin/main` `b5b12c206` (#9
 **Senior review of #964.** S1 (179 credit "below his earlier packing", as at 268; adopt_houses --refresh --n 179), S2 (PR selected next entry; check_pr_description --label intake ok), N1-N3 applied in 599dfbf87; re-pinned 52342bd74 and pushed. Waiting for #965 (3ff23bc64) to merge, then merge main and re-pin.
 
 **Merged #965** (0352d7554) as aa842ea3f, re-pinned 67f40d9f0 (the head). Records tier 55/55; check_requests ok. Hosted on 67f40d9f0: frontend failed (worker gw0 crashed after 60 s faulthandler timeouts in test_site_atlas_views viewport prepaint; 514 passed, 1 failed), so packing-required red; every other check passed or skipped. No site/test code changed since green dd7bef433. Not re-run.
+
+**Merged #968** (bc152e8b4) cleanly as 43018ee26 (pin already current at aa842ea3f). suite-a then failed the suite-files record (shard 2 at 10.1% unrecorded); 897281554 admits this branch's two new modules' costs. Hosted on 897281554: 59 checks, 31 success, 28 skipped; packing-required and pages-required green. Owed after merge: the #959 reply (this bead).
