@@ -19453,20 +19453,14 @@ occurrences:
     path: packing/frontier/n-132.md
     record_key: '132'
     field: /reported_upper_bound/found_by/0
-  expected_text: Evan Daniel
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Joost de Winter
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-132.md [132] /reported_upper_bound/found_by/0
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel. Keep finder,
-    improver and solver roles distinct.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-132.md
     record_key: '132'
@@ -19484,20 +19478,6 @@ occurrences:
   note: Reviewed packing/frontier/n-132.md [132] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-132.md
-    record_key: '132'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-133.md
     record_key: '133'
@@ -20062,6 +20042,18 @@ occurrences:
   note: Reviewed packing/frontier/n-157.md [157] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-157.md
+    record_key: '157'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-158.md
     record_key: '158'
@@ -32010,7 +32002,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 0
   end: 9
   label: de Winter
@@ -32023,7 +32016,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 16
   end: 27
   label: Samanyu-dev
@@ -32036,7 +32030,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 29
   end: 35
   label: Deotte
@@ -32049,7 +32044,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 37
   end: 46
   label: Lavrentev
@@ -32062,7 +32058,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 48
   end: 55
   label: Chilton
@@ -32075,7 +32072,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 57
   end: 67
   label: Tymchishin
@@ -32088,7 +32086,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 69
   end: 82
   label: malyshevdanil
@@ -32101,7 +32100,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 84
   end: 92
   label: prvsiyan
@@ -32114,7 +32114,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 94
   end: 104
   label: busyaprime
@@ -32127,7 +32128,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 106
   end: 121
   label: nilanjansaha123
@@ -32140,7 +32142,8 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 123
   end: 130
   label: jazivxt
@@ -32153,10 +32156,39 @@ occurrences:
     record_key: '[de Winter issue 942 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 132
   end: 137
   label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
+  start: 139
+  end: 149
+  label: penguin069
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 942 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
+  start: 151
+  end: 157
+  label: kmmmvs
   role: prerequisite
   disposition: unresolved
   evidence: []
@@ -32178,7 +32210,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 0
   end: 9
   label: de Winter
@@ -32191,7 +32224,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 16
   end: 27
   label: Samanyu-dev
@@ -32204,7 +32238,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 29
   end: 35
   label: Deotte
@@ -32217,7 +32252,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 37
   end: 46
   label: Lavrentev
@@ -32230,7 +32266,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 48
   end: 55
   label: Chilton
@@ -32243,7 +32280,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 57
   end: 67
   label: Tymchishin
@@ -32256,7 +32294,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 69
   end: 82
   label: malyshevdanil
@@ -32269,7 +32308,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 84
   end: 92
   label: prvsiyan
@@ -32282,7 +32322,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 94
   end: 104
   label: busyaprime
@@ -32295,7 +32336,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 106
   end: 121
   label: nilanjansaha123
@@ -32308,7 +32350,8 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 123
   end: 130
   label: jazivxt
@@ -32321,10 +32364,39 @@ occurrences:
     record_key: '[de Winter a0c4fc8 2026-11-10]'
     field: /credit
   expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
-    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
   start: 132
   end: 137
   label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
+  start: 139
+  end: 149
+  label: penguin069
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter a0c4fc8 2026-11-10]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin,
+    malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069,
+    kmmmvs
+  start: 151
+  end: 157
+  label: kmmmvs
   role: prerequisite
   disposition: unresolved
   evidence: []
@@ -32397,6 +32469,94 @@ occurrences:
   start: 33
   end: 37
   label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s132 upper bound 2026-11-11]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s132 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s132 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev
+  start: 16
+  end: 27
+  label: Samanyu-dev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s157 upper bound 2026-11-11]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s157 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s157 upper bound 2026-11-11]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev
+  start: 16
+  end: 27
+  label: Samanyu-dev
   role: prerequisite
   disposition: unresolved
   evidence: []

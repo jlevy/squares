@@ -35,9 +35,12 @@ the issue dates the claims.
   The file does not name the author of each packing.
   - A linear program on the contact constraints found a remaining descent direction in
     sixteen of the file’s 1000 packings.
+    The author’s answer of 11 November says that was too narrow: at least forty had one
+    (see [The Author’s Answers](#the-authors-answers)).
   - Following it to convergence gave these sides, “the arrangements of the squares are
     unchanged”. Each certificate carries a margin of about 5 × 10⁻⁹ above the numerical
-    optimum.
+    optimum. The answer gives the margins as 5.0 × 10⁻⁹ to 6.4 × 10⁻⁹ at most counts and
+    up to 4.6 × 10⁻⁸ (805).
   - The issue claims only the local re-optimization and cannot credit the sixteen
     arrangements individually.
 - **The checks.** `verify_cert.py`, byte-identical to `above324/verify_cert.py`, and a
@@ -181,6 +184,81 @@ public packing it found, a comparison not checked here; Kaggle files no report b
 here may hold smaller ones.
 Against this record the sides are 3.3 × 10⁻⁴ (655, below the grid) to 2.7 × 10⁻² lower.
 
+## The Author’s Answers
+
+Joost de Winter answered the review’s questions 1 to 4 on #942 at 20:20:02Z on 11
+November 2026
+([issuecomment-6806342752](https://github.com/jlevy/squares/issues/942#issuecomment-6806342752)),
+after the issue was closed, and questions 4 and 5 on #941, as the
+[#941 packet](../de-winter-issue941-2026-11-10/README.md#the-authors-answers) records.
+The answers settle the review’s questions and change no verdict or row.
+Intake lane L103 (think-acm0) recorded them.
+
+**Sixteen and twenty-two.** The first run followed the descent for the packings with the
+strongest descent directions and kept the sixteen results that ended more than 10⁻⁷
+below the best value he knew: the sixteen here.
+A later run took the next packings on that list.
+Six improved by more than 10⁻⁶ and form the addendum (the
+[a0c4fc8 packet](../de-winter-a0c4fc8-2026-11-10/README.md)); eighteen more improved by
+less and are not claimed.
+He says two of his sentences were inaccurate:
+
+- “Sixteen still had one”, in the issue, was too narrow: at least forty of the 1000
+  packings had a descent direction.
+- “Improved twenty-two packings by at least 1e-6”, in the folder’s README at `a0c4fc8`,
+  is wrong at 921, 924 and 935, which improved by 3.8 × 10⁻⁷, 1.8 × 10⁻⁷ and 2.8 × 10⁻⁷.
+  Those are the gaps the issue’s own table gives below the best public packing at those
+  counts.
+
+**The margin.** It is the certificate’s side less the side of the floating-point result
+of the local optimization, written as for #941: every centre and the side multiplied by
+f = 1 + 2 × 10⁻¹⁰ + 4v, where v is the largest constraint violation left in the
+floating-point packing, and the side rounded up at the 13th decimal (the
+[#941 packet](../de-winter-issue941-2026-11-10/README.md#the-authors-answers) has the
+whole account).
+For 18 of the 22 refined certificates v is below 2 × 10⁻¹² and the margin
+is 5.0 × 10⁻⁹ to 6.4 × 10⁻⁹. For the other four he estimated v from the clearances in
+the certificates, at 2.6 × 10⁻¹¹ to 3.5 × 10⁻¹⁰, since the floating-point packings are
+not in his repository:
+
+| n | Packet | Margin, estimated |
+| ---: | --- | --- |
+| 637 | this one | 1.1 × 10⁻⁸ |
+| 684 | this one | 1.1 × 10⁻⁸ |
+| 754 | [a0c4fc8](../de-winter-a0c4fc8-2026-11-10/README.md) | 8.4 × 10⁻⁹ |
+| 805 | this one | 4.6 × 10⁻⁸ |
+
+“About 5e-9” was too low for those four.
+
+**Licence.** The merge file states none, and `Samanyu-dev/squares_in_squares` has no
+licence file at `53551d7`. Its README calls its own code “MIT-style” and says that
+third-party notebooks and datasets “are used under their own licences”.
+Public Kaggle notebooks are released under Apache 2.0 by default, and each Kaggle
+dataset carries the licence its uploader chose.
+He has not traced the 22 packings to a notebook or dataset, so he cannot name a licence
+per packing.
+
+**Individual authors.** Neither the merge file nor that repository’s tables give a
+source per puzzle. Matching coordinates against the output of each public notebook and
+dataset could identify the authors; he has not done this.
+The README introduces its ten names with “among them”, its score history names two
+further merged sources, penguin069 and kmmmvs, and it reports the owner’s own results in
+the file (18 wins from its own AWS runs at n = 650 to 990), so some of the 22 starting
+packings may be by Samanyu-dev.
+
+He says the answers were prepared with Claude (Anthropic), like the certificates.
+`Samanyu-dev/squares_in_squares` is not retained, and the GitHub API refused it from
+this session, so what the answers say of it is the author’s.
+
+**The `501cb8d` edition.** His commit `501cb8daae75da118d00f8b274266058b222ee88`
+(2026-11-11T19:41:30Z) rewrites the folder README’s paragraph on the descent runs and
+its margin sentence to the same account: a first run gave sixteen values more than 10⁻⁷
+below the best public competition value, a second run on the next packings six more with
+a gain above 10⁻⁶, and eighteen further packings improved by less than 10⁻⁶ and are not
+listed. It changes `above324/README.md` and `above324_refined/README.md` and nothing
+else, and `SHA256SUMS` covers neither, so the sixteen certificates here are unchanged.
+This packet keeps the folder at `a9486ed` and does not retain that edition.
+
 ## What Is Not Established
 
 - **Human oversight**, **push times**, **optimality** and **the consequences** stand as
@@ -188,6 +266,8 @@ Against this record the sides are 3.3 × 10⁻⁴ (655, below the grid) to 2.7 �
   [#941 packet](../de-winter-issue941-2026-11-10/README.md#what-is-not-established).
 - **Each packing’s finder.** The merged file names no author per packing, so the record
   cannot credit the arrangements individually either.
+  The author has not matched them against the public notebooks and datasets, and some
+  may be Samanyu-dev’s own.
 
 ## Credit and Licence
 
@@ -195,14 +275,18 @@ Credit Joost de Winter (Delft University of Technology) for the local re-optimiz
 after the public Kaggle packings of the merged file, whose README credits Chris Deotte,
 Vladislav Lavrentev (lightningv08), Alex Chilton (alexchilton), Kirill Tymchishin
 (kirilltym), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt and Francisco
-Couzo’s register. The work was AI-assisted (Claude).
+Couzo’s register, a list it introduces with “among them”, and after penguin069 and
+kmmmvs, two further merged sources its score history names, as the author’s answer says.
+The starting packings’ authors are not identified per puzzle, so some may be
+Samanyu-dev’s own. The work was AI-assisted (Claude).
 
 The repository is MIT-licensed, copyright 2026 Joost de Winter, by its `LICENSE`, which
 the packet pins against the byte-identical copy `main` retains.
-The licence of the starting packings, the public Kaggle notebooks and datasets and the
-merge file `Samanyu-dev/squares_in_squares` `53551d7`, is not given: neither the issue
-nor the repository states one, and none is retained (the review’s F8; its question 2
-asks). Retaining a file grants no licence and relicenses nothing.
+No licence is stated for the starting packings: the author’s answer says the merge file
+states none and `Samanyu-dev/squares_in_squares` has no licence file at `53551d7`, and
+that public Kaggle notebooks default to Apache 2.0, each dataset carrying the licence
+its uploader chose. None was traced per packing, by the author or here, and none is
+retained (the review’s F8). Retaining a file grants no licence and relicenses nothing.
 
 ## Commands
 

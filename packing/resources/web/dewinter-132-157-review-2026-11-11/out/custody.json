@@ -1,0 +1,192 @@
+{
+ "program": "l105_custody.py",
+ "source_head": "6617869a3491b5872c6ecdff55db05cbee57d516",
+ "working_tree_clean": true,
+ "commits": {
+  "6617869": {
+   "commit": "6617869a3491b5872c6ecdff55db05cbee57d516",
+   "parents": [
+    "a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c"
+   ],
+   "tree": "8fba98b70e8ab1d56759d8a740a3acc2710f97e8",
+   "author": "Joost de Winter",
+   "authored": "2026-11-11T21:52:23+01:00",
+   "committer": "Joost de Winter",
+   "committed": "2026-11-11T21:52:23+01:00",
+   "subject": "Name Claude Fable 5.2 in the AI assistance statements for n = 132 and n = 157"
+  },
+  "a491dad": {
+   "commit": "a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c",
+   "parents": [
+    "501cb8daae75da118d00f8b274266058b222ee88"
+   ],
+   "tree": "dc1311215b4974fb7dddfdea42d7800648b4476b",
+   "author": "Joost de Winter",
+   "authored": "2026-11-11T21:49:44+01:00",
+   "committer": "Joost de Winter",
+   "committed": "2026-11-11T21:49:44+01:00",
+   "subject": "Add square packings for n = 132 and n = 157 (side below 13) that improve the Squares Project records"
+  }
+ },
+ "a491dad_to_6617869": [
+  "M\tREADME.md",
+  "M\tn132/README.md",
+  "M\tn132/SHA256SUMS",
+  "M\tn157/README.md",
+  "M\tn157/SHA256SUMS"
+ ],
+ "first_commit_of_each_file": {
+  "n132/README.md": "a491dad 2026-11-11T21:49:44+01:00",
+  "n132/SHA256SUMS": "a491dad 2026-11-11T21:49:44+01:00",
+  "n132/n132_exact.json": "a491dad 2026-11-11T21:49:44+01:00",
+  "n132/n132_record.png": "a491dad 2026-11-11T21:49:44+01:00",
+  "n132/n132_witness.yaml": "a491dad 2026-11-11T21:49:44+01:00",
+  "n132/verify_exact.py": "a491dad 2026-11-11T21:49:44+01:00",
+  "n157/README.md": "a491dad 2026-11-11T21:49:44+01:00",
+  "n157/SHA256SUMS": "a491dad 2026-11-11T21:49:44+01:00",
+  "n157/n157_exact.json": "a491dad 2026-11-11T21:49:44+01:00",
+  "n157/n157_record.png": "a491dad 2026-11-11T21:49:44+01:00",
+  "n157/n157_witness.yaml": "a491dad 2026-11-11T21:49:44+01:00",
+  "n157/verify_exact.py": "a491dad 2026-11-11T21:49:44+01:00"
+ },
+ "folders": {
+  "n132": {
+   "files": {
+    "README.md": {
+     "blob": "76c6dddf08b228c355a271666d7e2d98914ed90f",
+     "blob_computed_equal": true,
+     "sha256": "8b6e5930df9c635bb2c364e6822101947042bcbca21a751b5d263d7d2f7f8827",
+     "sha256sums_line_equal": true,
+     "bytes": 2895
+    },
+    "SHA256SUMS": {
+     "blob": "6cf0eac639e7b9a2bbb5ffb8e156d6789d67c155",
+     "blob_computed_equal": true,
+     "sha256": "70288eb3e32a5906490b0e7ab37c7fbd5720d0927f3312d8e911866c29453869",
+     "sha256sums_line_equal": null,
+     "bytes": 406
+    },
+    "n132_exact.json": {
+     "blob": "bb2294b5555e715ac16810e475231558a56c4971",
+     "blob_computed_equal": true,
+     "sha256": "d718cb81cb7dbda951422c22ce65ea480254922f9375b9665a6d79e7caddb68d",
+     "sha256sums_line_equal": true,
+     "bytes": 227046
+    },
+    "n132_record.png": {
+     "blob": "01d9a4344cde46c719bc84528dc90c23c9218802",
+     "blob_computed_equal": true,
+     "sha256": "aff43c1e131ab6b90514841db9d787904232d7d35c59aa7f03152040b0a7f846",
+     "sha256sums_line_equal": true,
+     "bytes": 88493
+    },
+    "n132_witness.yaml": {
+     "blob": "10a0a574f2d263f25b421357b373e7daab531404",
+     "blob_computed_equal": true,
+     "sha256": "837b32b5aeb98d97041c3a510ec7a7e56c7a66bea3774cd12383f38eb8151d11",
+     "sha256sums_line_equal": true,
+     "bytes": 232977
+    },
+    "verify_exact.py": {
+     "blob": "be8a6f4515aa666203d68f4e979ce8b22d210ea5",
+     "blob_computed_equal": true,
+     "sha256": "584fdc11264de51d5039c7e80ebc362e8dfa666fb2535b94c06d369846b2301f",
+     "sha256sums_line_equal": true,
+     "bytes": 2438
+    }
+   },
+   "sha256sums_entries": 5,
+   "all_listed_equal": true
+  },
+  "n157": {
+   "files": {
+    "README.md": {
+     "blob": "73e77a7d1896701f6716eab5bc01036262f2fc34",
+     "blob_computed_equal": true,
+     "sha256": "be5821d8988d144770e24a0f1460bc637e2e4ec80613d02e5e3fb1a93773dc93",
+     "sha256sums_line_equal": true,
+     "bytes": 3008
+    },
+    "SHA256SUMS": {
+     "blob": "cf814a7ead3e926c7deb9bf72defc586392bf9a6",
+     "blob_computed_equal": true,
+     "sha256": "285e0befdf952296b82f64ea3e0774c069abe0f71ce1cab51326f4a9ce591444",
+     "sha256sums_line_equal": null,
+     "bytes": 406
+    },
+    "n157_exact.json": {
+     "blob": "079d4cb10b480835717b4349ea4dba25be0001d8",
+     "blob_computed_equal": true,
+     "sha256": "b6c28446c4cb6169c8219c3bcc8801d02d15d02935beb124960684877685e051",
+     "sha256sums_line_equal": true,
+     "bytes": 306900
+    },
+    "n157_record.png": {
+     "blob": "54c5b97d45daab8cc219a8d720770609d37e6059",
+     "blob_computed_equal": true,
+     "sha256": "831273582dc2d316240d8693fab524df2550dbdbf0c27008120c7096de8c63d3",
+     "sha256sums_line_equal": true,
+     "bytes": 89532
+    },
+    "n157_witness.yaml": {
+     "blob": "097a4c391bb6e8ca35f29e553f577cf4659ffced",
+     "blob_computed_equal": true,
+     "sha256": "e73c5cff8d84b7d9459e12bf26417ce843fc5bfb79b382e5c0c4d73fe5aa0c59",
+     "sha256sums_line_equal": true,
+     "bytes": 313978
+    },
+    "verify_exact.py": {
+     "blob": "be8a6f4515aa666203d68f4e979ce8b22d210ea5",
+     "blob_computed_equal": true,
+     "sha256": "584fdc11264de51d5039c7e80ebc362e8dfa666fb2535b94c06d369846b2301f",
+     "sha256sums_line_equal": true,
+     "bytes": 2438
+    }
+   },
+   "sha256sums_entries": 5,
+   "all_listed_equal": true
+  }
+ },
+ "verify_exact_identical": true,
+ "licence": {
+  "LICENSE_blob": "17e795f2a70c232c04633f4d7318191f7c198abe",
+  "LICENSE_sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+  "LICENSE_first_line": "MIT License",
+  "LICENSE_copyright": "Copyright (c) 2026 Joost de Winter",
+  "LICENSE_first_commit": "9bf5d9b 2026-10-17T16:27:31+02:00",
+  "root_readme_licence_line": "All files are released under the MIT licence (see `LICENSE`).",
+  "root_readme_rows": [
+   "| [132](n132/) | 11.976048383604 | 11.9856801988458088 | 11 November 2026 |",
+   "| [157](n157/) | 12.993302611344 | 13 | 11 November 2026 |"
+  ],
+  "retained_copies_here": {
+   "packing/resources/web/de-winter-issue666-2026-10-17/source/square-packing-above-324/LICENSE": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+   "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a"
+  },
+  "equals_every_retained_copy": true
+ },
+ "seed": {
+  "head": "53551d77513a9f5c180a731f291baf7eda7c3009",
+  "commit": {
+   "commit": "53551d77513a9f5c180a731f291baf7eda7c3009",
+   "parents": [],
+   "tree": "3a1df45c6e3599332e5105326472996768338ae5",
+   "author": "Samsie",
+   "authored": "2026-11-08T01:50:31+05:30",
+   "committer": "Samsie",
+   "committed": "2026-11-08T01:50:31+05:30",
+   "subject": "8 Nov: Kaggle 22.2228889, certified 22.2226173; progress report, evo/lattice search, chain+AWS tooling, per-puzzle leaderboard analysis"
+  },
+  "csv_blob": "b2c6a7e0dc926a213f18a7dd465418363206a2ef",
+  "csv_blob_computed_equal": true,
+  "csv_sha256": "377b9177febf1b89f08d655531880fb683666e494a3b303f10645e7440996c04",
+  "licence_files_at_root": [],
+  "readme_licence_line": "Our own code is MIT-style; use it freely. The best values in the submission come from the work of many Kaggle competitors, among them Chris Deotte (fault-line DP and gadget catalog), `lightningv08` (CUDA packing search), `alexchilton`, `kirilltym`, `malyshevdanil`, `prvsiyan`, `busyaprime`, `nilanjansaha123`, `jazivxt`, and the exact register of Francisco Couzo (MIT, `franciscouzo/square-packing`). Third-party notebooks and datasets are used under their own licences and are not redistributed here.",
+  "summary_row_109": "109,10.949289580945,0.048751736513,11,improved,0.00485718,True,official-metric certified"
+ },
+ "dating": {
+  "first_commit": "a491dad",
+  "first_commit_committed": "2026-11-11T21:49:44+01:00",
+  "push_time": "not read: the GitHub API refused the source repository in this session (HTTP 403)"
+ }
+}
