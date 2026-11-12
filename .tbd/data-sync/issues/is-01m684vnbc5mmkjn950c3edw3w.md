@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 233
+version: 234
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -87,7 +87,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-12T00:05:32.032Z
+updated_at: 2026-11-12T00:26:15.809Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -355,3 +355,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 ~00:10Z: L116's senior review of #961: nothing blocking. The poster-test change is a legitimate use of the existing release rule 3 (COMPOSITES_MAY_TRAIL), so no owner decision is needed. #961 now merges after #955 and takes main's fuller 954 entry. L104 is merging main, adding a moved==[13] guard to the poster test, adding the think-mdxq note to the licence citations, fixing the 958 label note, then stamp_landed (12 Nov) and a re-pin. Process lesson: I closed think-f65n at 22:42Z before the records PR marking 954 closed had merged, against result-import.md close step 4; it tripped main's bead-tree gate until #955 merged. Close an answer bead only after its records PR merges.
 
 2026-11-12 ~00:12Z: Pages deploy of 2fe557598 succeeded (run 43122907091). Posted the #942 follow-up correcting the credit (issuecomment-6810296603, byte-identical to L114's draft); 942 stays closed. Recording owed in a later records PR.
+
+2026-11-12 ~00:30Z: #961 merged (75cce00b6) after senior review L116 and L104's fixes (CI green; landed 12 Nov): T-292 s(132) and T-293 s(157) are houses. 958 still open. L118 checking the deploy and drafting the 958 reply. L107 told main moved (T-294 next). think-bcfs stays open until the records PR for 958's reply merges.
