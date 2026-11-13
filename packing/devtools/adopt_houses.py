@@ -3173,13 +3173,15 @@ CREDITS: dict[int, Credit] = {
     # packing of issue 954 (the 12 November review's F9 and F10), so the phrase names them as
     # T-296's did, with their improvers. T-296, adopted on 12 November, was his earlier band
     # packing of issue 962, and T-290 before it his packing from a strip cut of Evan Daniel's
-    # n = 304 packing (F7).
+    # n = 304 packing (F7). The phrase ends "below his earlier packing", as 179's does: the
+    # adoption sentence follows it with the new house's id, so naming issue 962 there read
+    # as if T-297 were that issue's.
     269: Credit(
         (OZDEN,),
         (),
         "Doğa Özden’s column-band packing, whose band he credits to PingYou Ltd’s n = 207 "
         "packing, Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it and "
-        "his own n = 179 packing of issue 954, below his earlier band packing of issue 962",
+        "his own n = 179 packing of issue 954, below his earlier packing",
     ),
     # Issue 703's packing, another arrangement of the design of issue 500's packing, which
     # T-174 refines to 1e-30: 15 squares beyond a tenth under the identity (the 21 October
