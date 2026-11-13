@@ -31922,6 +31922,22 @@ issues:
         id: E-de-winter-s132-certificate-report
         status: reviewed
       beads: [think-71uq]
+    - url: https://github.com/jlevy/squares/issues/958#issuecomment-6821661969
+      date: '2026-11-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n157-pinwheel
+        id: T-293
+        verification: V3
+        confirmation: C3
+        position: current
+      - result: n132-pinwheel
+        id: T-292
+        verification: V3
+        confirmation: C3
+        position: current
+      beads: [think-71uq]
     close_when: >-
       T-292 and T-293 are on main at V3/C3 as the houses at 132 and 157, and the reply on main
       says what was retained and replayed, what the review found and that the cases adopted
@@ -32100,6 +32116,48 @@ issues:
       say a cut-and-fill step continues a known pinwheel, so no technique is new, and a score
       follows the claim (epistemics.md), which 57de046 leaves unchanged. The answers ask for
       nothing, and the issue stays closed.
+
+      The follow-up of 10:55:14Z on 12 November 2026 (issuecomment-6821661969), posted after
+      #971 merged as 0ee1e7622 at 10:38:21Z and recorded in intake lane L142, acknowledges the
+      author's answers of 08:31:55Z, which #971 read into the record, so `read_through`
+      already stands at that comment and stays there. Like the follow-up of 1 November on
+      #842, which acknowledged its authors' answer, it states the results as they stand: T-292
+      and T-293 at V3/C3 as the houses at 132 and 157, the position the final reply gave, with
+      no status word, so none is recorded. It names no evidence id, and no reply in
+      `corrects`, since the final reply carries no `outdated` statement. It thanks the author
+      for answering all six questions and for publishing the method and updating the witness
+      files in 57de046, and says that #971 merged on 12 November as 0ee1e7622 and records
+      them. It says that the record carries the answers in this entry and in the READMEs of
+      the s132 and s157 packets; that the stated margins are the measured 1.2476e-59 and
+      1.3493e-59, rounded up; that the 1,407 and 2,024 are his solver's equations, counted on
+      edge lines, on a separating axis, within 1e-6 in binary64, which he gives as why they
+      differ from the review's 1,423 and 2,048 corners on edge segments within 1e-50, and that
+      they have not been recounted under his convention; that he reads the review's measured
+      cuts as his two steps, by what he describes as the packings' fourfold symmetry and since
+      a cut can sit anywhere inside an axis-aligned block, and that his added squares, 11 + 12
+      and then 12 + 13, match in number the 23 and 25 the review found left unpaired; and that
+      his note that he has not contacted Samanyu-dev is recorded with the project's open
+      question on notices for seeded packings (think-71uq), which holds nothing here.
+
+      It says that 57de046 is retained as a new packet, de-winter-method-132-157-2026-11-12
+      (MIT, by his LICENSE), with method_n132_n157/ and both edited witness files, the s132
+      and s157 packets staying at 6617869; and that the Git diff changes only the header, the
+      claim block and the id of each witness file, so the squares and sides are the ones T-292
+      and T-293 record, and both stay at V3/C3 as the houses at 132 and 157. In a note on the
+      witness files whose gap it calls the project's, it says that question 3 asked only for
+      the header, the claim block and the id; that both files validate against
+      witness.schema.yaml, but packing-witness adds a rule the schema does not state, that a
+      claim with coordinate_provenance verified must carry a certificate record, and refuses
+      both with "verified claims require a replayable certificate record"; and that the record
+      keeps its own witnesses at 132 and 157, so nothing waits on this. It says that the
+      method's scripts were not run here, CasADi with IPOPT and python-flint not being in the
+      environment and the seed not retained here, so the record states the byte-for-byte
+      reproduction of both exact JSON files as his claim, not checked here. It says that the
+      review kept both packings at S3 in part because the growth step was not published as
+      code and was shown at two counts from one seed; that it is published now; and that,
+      shown at further counts, it could be scored as a technique on its own, after a review.
+      It says that the issue stays closed and that nothing is queued. think-71uq, which it
+      names, is recorded under its beads, as under the final reply's.
   - number: 959
     title: 's(179) ≤ 13.880960371559: improved packing (registration request)'
     author: kenaznia-doga
@@ -32644,6 +32702,23 @@ issues:
         id: E-ozden-962-certificate-report
         status: reviewed
       beads: [think-ruu2, think-ikku, think-tj4o, think-71uq]
+    - url: https://github.com/jlevy/squares/issues/962#issuecomment-6840725487
+      date: '2026-11-13'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n269-band
+        id: T-296
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n269-band
+        id: E-ozden-962-exact-feasibility
+        status: confirmed
+      - result: n269-band
+        id: E-ozden-962-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-296 is on main at V3/C3 as the house at 269, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -32827,11 +32902,31 @@ issues:
       T-296 stays a verified bound at V3/C3 and keeps its certificate as history. The final
       reply here stated T-296 current, so a follow-up is owed on this issue once T-297 is on
       main, as #947's was when T-296 superseded T-290.
+
+      The follow-up of 01:08:18Z on 13 November 2026 (issuecomment-6840725487), posted after
+      #970 merged as 2bae82a34 at 00:44:08Z and recorded in intake lane L142, was owed because
+      the final reply stated T-296 current, as the note above says; like #928's and #947's, it
+      states the superseded position, and it names no reply in `corrects`, since the final
+      reply carries no `outdated` statement. Under the heading Correction it says that #967
+      has made the reply of 12 November out of date in one place: that reply gave T-296 as
+      V3/C3, confirmed, current, the house at 269; since #970 merged on 13 November the
+      author's #967 packing, T-297, is the house at 269 in place of T-296; T-296 now reads
+      V3/C3, confirmed, superseded, stays a verified bound and keeps its certificate as
+      history, as that reply said a smaller side registered later would leave it; and the
+      reply on #967 says what was done with the new certificate. It states what is registered
+      from this issue: T-296, confirmed at V3/C3, reproduced here with the author's own
+      checker and re-verified here by an independent implementation, superseded on the
+      frontier by a later result; and E-ozden-962-exact-feasibility and
+      E-ozden-962-review-exact-feasibility, confirmed here. It names no bead, and T-297,
+      #967's result, is not this issue's and is not recorded under reported. It reads no
+      comment into the record, so `read_through` stays at the final reply. It says that the
+      issue stays closed and that the follow-up brings what the record says up to date.
   - number: 967
     title: 's(269) ≤ 16.889730073596: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-12'
-    state: open
+    state: closed
+    closed: '2026-11-13'
     kind: result-report
     triage: done
     summary: >-
@@ -32863,7 +32958,7 @@ issues:
       the issue quotes, 16.901513582205 (kirilltym), is above it; the side-only leaderboard
       entry it quotes and states first, 16.889730079125 (team elegans, 5 November), 5.53e-9
       above this side, is unpublished and states no packing, so it is context only.
-    read_through: '2026-11-12T03:55:16Z'
+    read_through: '2026-11-13T01:08:17Z'
     results:
     - key: n269-column-band
       claim: >-
@@ -32884,7 +32979,28 @@ issues:
     - think-tj4o
     - think-71uq
     answer_bead: think-n73d
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/967#issuecomment-6840725232
+      date: '2026-11-13'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n269-column-band
+        id: T-297
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n269-column-band
+        id: E-ozden-967-exact-feasibility
+        status: confirmed
+      - result: n269-column-band
+        id: E-ozden-967-review-exact-feasibility
+        status: confirmed
+      - result: n269-column-band
+        id: E-ozden-967-certificate-report
+        status: reviewed
+      beads: [think-ruu2, think-ikku, think-tj4o, think-71uq]
     close_when: >-
       T-297 is on main at V3/C3 as the house at 269, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -32953,3 +33069,162 @@ issues:
       the repair dilation is the owner's RV-3 question (F8); and whether softschema.schema could
       point at a file that resolves in the author's repository, with the replay line saying
       where to run it (F11). No reply has been posted.
+
+      Closed on 13 November 2026 with the final reply (issuecomment-6840725232, posted at
+      01:08:17Z), after #970 merged as 2bae82a34 at 00:44:08Z with the import, the replay, an
+      independent review and the adoption; recorded in intake lane L142. It states T-297 at
+      V3/C3, scored S3, confirmed and current, reproduced here with the author's own checker
+      and re-verified here by an independent implementation; E-ozden-967-exact-feasibility and
+      E-ozden-967-review-exact-feasibility, confirmed; and E-ozden-967-certificate-report,
+      reviewed, the issue's report of the certificate recorded as the source's own. It says
+      that on 13 November T-297 became the house at 269 under the house rule in place of
+      T-296, the author's own packing from #962 and the house since 12 November; that T-296
+      stays a verified bound at V3/C3, now superseded, and keeps its certificate as history,
+      as T-290 does; and that the register keeps one entry per report, so T-296 stays #962's
+      and T-297 is this issue's. It names T-296 as the house replaced, T-290 and T-174 as the
+      houses before it, all three as records the packing is measured against, and T-291 as the
+      band's third source; none is this issue's result, and none is recorded under reported.
+      It thanks the author for his notes of 12 November at 03:00Z on #962, #947 and #966 that
+      point to this issue, and corrects one figure in them (F14): the note on #947 gives this
+      side as "9.74e-3 below this issue's side", while #947's side is T-290's,
+      16.9009945799513249, and the gap on it is 1.126e-2, as this issue says, 9.74e-3 being
+      the gap on #962's side; its question 6 asks the author to correct it. The issue has no
+      comment but the reply, and `read_through` moves to it.
+
+      It says that, measured here, the packing is a new arrangement relative to T-296's and to
+      T-290's, not a further arrangement of either: under no symmetry of the box do nearest
+      centres pair it one to one with either, the optimal assignment moving 53 squares beyond
+      a tenth against T-296 (largest 0.950) and 127 against T-290 (largest 1.255) and, aligned
+      by box centres, 57 and 122 turning by more than a degree; of the squares tilted beyond a
+      degree, its 45 are a band of 41 leaning one way and a cluster of four leaning the other,
+      where T-296's 45 lean 22 one way and 23 the other and T-290's 100 all lean one way; and
+      against T-174 it is new as well, with 75 squares beyond a tenth, the review measuring
+      the same against T-296 and T-290 with the same identity tool (F9). It says that the
+      issue's claim paragraph and the README describe T-290 as built from Nate
+      Chaoweeraprasit's packing (itsnaka) improved by Evan Daniel and PingYou Ltd, while the
+      record, and the author's own lineage paragraph, give T-290 as his packing from a strip
+      cut of Evan Daniel's n = 304 packing, the house it replaced, T-174, being Nate
+      Chaoweeraprasit's SQUISH packing as Evan Daniel and PingYou Ltd improved it (F7, as at
+      #962). On the print it says that the exact side, a fraction of 189 digits over 188, is
+      16.8897300735956367 rounded up at 16 places; that the issue's 16.889730073596 is that
+      side rounded up at 12 places, so it bounds s(269), and the gains stated, 1.126e-02
+      (relative 6.66e-04) on T-290 and 9.74e-3 on #962, are the exact gaps, 1.12645e-2 and
+      9.73900e-3, rounded; that packing-witness-verify.txt prints the side exactly and
+      sqcheck-output.txt prints 16.889730073595637, its 15-place ceiling; and that the
+      16.889730073595636 of the issue and the author's comments is its 15-place floor, 6.9e-16
+      below it, which the README marks with an ellipsis, the claim resting on the 12-place
+      print, the ceiling (F4).
+
+      It says that T-296's certificate, contracted uniformly to first contact, loses 3.234e-12
+      of its side (squares 10 and 13 binding), and the 9.74e-3 is 3.01e9 times that, and that
+      T-290's loses 3.238e-12 (squares 119 and 202), and the 1.126e-2 is 3.48e9 times that, so
+      none of the gain is either certificate's padding and RV-3 does not reach T-297 (F8). The
+      certificate's own margin is 3.236e-12 (squares 38 and 40 binding), contracted so the
+      squares are accepted by both maintained routes at side 16.8897300735924008, and Evan
+      Daniel's regularizer, run on the new house, solved the witness to a certified KKT point
+      3.36e-12 below the side, 1.04 times that margin; neither smaller side is registered,
+      both held under RV-3 (think-ruu2 and think-ikku), the KKT point as a register candidate,
+      as at 156, 172, 179, 180, 199, 268 and 270 and at 269 for T-290 and T-296, with nothing
+      claimed for either yet. It reads the leaderboard: the side-only entry 16.889730079125
+      (team elegans, 5 November) is 5.53e-9 above the exact side, as the author says, and
+      above the 12-place claim too; it is unpublished and states no packing, so it is context
+      only, no report here, and nothing at 269 changes for it; and the per-puzzle packing
+      quoted, 16.901513582205 (kirilltym), is 1.18e-2 above this one.
+
+      It says what was checked: f496016, the repository's one commit, 12 seconds before the
+      issue, retained in the packet ozden-s269-upper-bound-2026-11-12, the decimal pose
+      included; n-269-candidate.yaml with the SHA-256 the issue states and n269-witness.json
+      the one the README states, the JSON reading as the same packing; both maintained exact
+      routes accepting the witness over every wall and all 36,046 pairs and refusing its
+      duplicate-square and outside-container controls, 3 jobs and 216,276 pair decisions,
+      three squares touching a wall exactly and every pair clearing by at least 2.036e-13; the
+      first route being the packing-witness verify the author ran (F11), and the second the
+      independent rational corner checker, which shares the corner reader and the
+      separating-axis method in Fraction arithmetic but no verification code, neither
+      independent of the rounding this repository's packing-witness promote made; the sharp
+      controls, stated before they ran, at the far and near walls, where squares 199, 48 and
+      102 already touch, and at the closest pair, squares 38 and 40, all 11 as stated;
+      sqcheck.py byte-identical to the copy the s232 packet retains, not run here; and the
+      L-step scan finding that the bound carries to no other count, the review finding that
+      the side is not s(m) + k for any registry value below 269 and integer k up to 16 within
+      1e-9, the nearest being s(19) + 12, at 4.1e-3. It passes on the independent review, a
+      separately prompted review lane, a Claude agent at the strong tier, blind to the import
+      lane throughout, an AI review and not a human one, which accepted the certificate with
+      15 findings, all notes and none blocking, and scored it S3: its clean-room checker,
+      frozen before any of the author's code, his checkers' outputs or this repository's
+      witness code was read, deciding every square, wall and pair again by two methods that
+      share only the reader, separating axes in Python integers and exact convex clipping in
+      GMP rationals, no pair touching, the least pair margin 2.03645e-13 at squares 38 and 40,
+      with the three wall contacts exactly the replay's, and the rotation read the other way
+      making 57 pairs overlap; its 20 controls, every one as stated, lowering the side by one
+      unit of its last place pushing out exactly square 199, at the top wall, all 620 pairs
+      within 1e-12 closed along their centre lines to exact contact and taken 1e-30 past it,
+      and every square taken to its nearest wall and past it; the squares accepted in the box
+      of side 16.889730073596, while at the 12-place floor 25 squares cross the right or top
+      wall (F3); and, after its findings were frozen, this repository's contraction and
+      identity tools run by the review giving receipts equal to the import lane's for T-296's
+      margin, the certificate's own margin and contracted side and the identity against T-290
+      and T-296, and a T-290 margin equal to the one #962's packet holds, the import lane's
+      brief having carried the review's figures before its own runs, so that agreement is two
+      runs of the same tools, not a blind comparison.
+
+      It says that the review checked the issue's statements about the promotion: three
+      squares touch a wall exactly, 48 at the left, 102 at the bottom and 199 at the top,
+      which sets the side, and none touches the right wall, where the extent in x falls
+      2.0e-15 short; the other 47 square-wall clearances below 1e-13 are at most 7.84e-15, and
+      ten more lie between 9.16e-6 and 9.32e-4, beyond "up to about 1e-12"; with
+      center_dilation '1' the certificate is the decimal pose translated by about 1.04e-13
+      toward the corner, each square turned by at most 5e-35 degrees, so the pair margins are
+      the pose's own, measuring 2.04 to 2.79e-13 of the centres' separation along the binding
+      axis on the 620 pairs below 1e-12, median 2.13e-13 (F5); source.path names
+      n-269-decimal-pose.yaml, which the repository holds at the pin, and certificate.replay
+      the certificate's own file, while, as at #947, #959 and #962, the witness's
+      softschema.schema resolves to no file in the author's repository and the replay line
+      does not say where to run it, the adopted witness carrying this repository's own (F11);
+      the lineage counts against T-290 (261 centres beyond 1e-3, 137 beyond 0.05, largest
+      1.879, 121 re-tilted beyond a degree, largest 44.4 degrees) reproduce, all five, with
+      T-290 reflected top to bottom, set against the upper-left corner of the new box and
+      paired by least summed move (F6); 45 squares are tilted beyond half a degree, as the
+      issue says; the band lies at 41.60 to 42.06 degrees and the cluster at the upper-right
+      end, squares 42 to 45, at -44.33 to -44.38 degrees, a little off the issue's "about
+      42.1" and "about -44.9" (F12); the side "9e-14 higher" than the cloud job's
+      16.88973007359575 is the decimal pose's, 16.889730073595842, and the certificate's exact
+      side is 1.13e-13 below the cloud job's (F13); and the search for competing claims is
+      dated 19:10 PST against 0352d755, ten minutes after the issue was opened at 19:00 PST,
+      0352d755 being main's head throughout (F15).
+
+      It says that both strong regularizers ran on the new house in the same pull request, the
+      case drawing 269 with grid-slack's 0.5-degree view, Evan Daniel's driver having refused
+      its same-side view for an unmatched rotation, and that the rigidity screen finds 112 of
+      the 269 squares free to slide, against 217 of T-296's, which, the issue claiming no
+      rigidity, changes nothing about the bound. It passes on the packet, the whole tree of
+      f496016, eleven files, seven under source/ and four pinned, the diff image by its digest
+      and verifier/README.md, verifier/sqcheck.py and Evan Daniel's notice against
+      byte-identical copies already kept; on the licence, LICENSE.md, copyright 2026 Doğa
+      Özden, putting the witness, the JSON, the decimal pose, the checker outputs, the README
+      and the diff image under CC BY 4.0 and verifier/sqcheck.py under MIT, byte for byte the
+      LICENSE.md of the author's lab's earlier repositories, #962's among them, with
+      LICENSE-evand-square-packing.txt byte for byte Evan Daniel's MIT notice, pinned against
+      the copy evand-issue845-2026-10-29 retains; and on the band's licence, the issue naming
+      the registry's 207 and 70 among the band's source packing, both witnesses coming from
+      PingYou Ltd's PR 574 algebraic supplement, a release with no licence file kept in
+      derived-only form, and, if the band draws on them, whether a design taken from them
+      needs a notice of its own being an open question with the project (think-71uq; the
+      review named think-mdxq, which closed on 4 November) that holds nothing, not the
+      registration, the adoption or this issue, with nothing asked of the author about the
+      licence. It passes on the credit, Ozden after PingYou, Xu, Daniel, Levy, the source's
+      credit line in its ASCII spelling (bibliography key [Özden s269 upper bound
+      2026-11-12]): the author first, as the packing's finder; PingYou Ltd's n = 207 packing
+      and Ryan Xu, Evan Daniel and PingYou Ltd's n = 70 packing as the band's source packing
+      the issue names, Daniel also credited for the ALM+SLP quench, as the author asked; this
+      project, since the issue credits registry packings as the band's source and its
+      promotion made the exact coordinates; the author's own n = 179 packing of #954 (T-291)
+      as the third source the issue names, and T-296, also his, as the record it improves
+      (F9); the case record, its page and its bound citation crediting him now, and the atlas
+      posters, drawn for the v0.7.0 edition, holding his name off their credit block at 269
+      until the next infographics cut (think-tj4o); and the AI-assistance statement recorded
+      as he gives it. think-ruu2, think-ikku, think-71uq and think-tj4o are recorded under the
+      reply's beads, and think-mdxq, named only as the bead the review named, is not. It asks
+      the review's eight questions listed above, informational and holding nothing open, and
+      says that nothing the author asked for is queued, so the issue is closed with it. The
+      issue was closed as completed at 01:08:22Z.
