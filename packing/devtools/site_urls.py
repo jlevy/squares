@@ -204,8 +204,16 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        1_600_000,
+        1_700_000,
         (
+            "On 12 November 2026 the 297-result page measures 1,600,513 bytes in hosted run "
+            "43182861315, past the 1,600,000 ceiling, once #967's import registers T-297; the "
+            "room the 5 November note expected through 291 results was used, and six more "
+            "registrations fitted in its margin. Measured locally the page is 1,600,513 "
+            "source bytes at a 90th-percentile row of 4,587 bytes. The ceiling moves to "
+            "1,700,000 as the same measured choice, which leaves 99,487 source bytes, 21 rows "
+            "at that row cost with 3,160 bytes to spare, so the room runs through 318 "
+            "results; its timing was not re-measured, and the lightening stays think-v1qe's. "
             "On 5 November 2026 the 273-result page measures 1,510,022 bytes in hosted run "
             "42112356624, past the 1,500,000 ceiling, when one intake (#914) registers seven "
             "results, T-267 to T-273, at once; the room the 26 October note expected through "

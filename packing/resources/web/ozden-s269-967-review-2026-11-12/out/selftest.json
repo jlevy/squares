@@ -1,0 +1,26 @@
+{
+ "program": "l127_selftest.py",
+ "verdict": "PASSED",
+ "suite": {
+  "cases": 26381,
+  "failed": 0,
+  "per_section": {
+   "contacts": 2688,
+   "senses": 32,
+   "walls": 780,
+   "shapes": 18,
+   "random": 22800,
+   "reader": 63
+  },
+  "first_failures": []
+ },
+ "broken_method_a_zero_margin_counted_apart": {
+  "cases": 26381,
+  "failed": 1312
+ },
+ "broken_method_b_open_half_planes": {
+  "cases": 26381,
+  "failed": 1952
+ },
+ "cpu_seconds": 3.4
+}

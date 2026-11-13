@@ -465,6 +465,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # Lane L120 of 12 November 2026 took 269, the only house of Doğa Özden's issue-947
         # certificate (T-290), to his issue-962 certificate (T-296).
         "T-290",
+        # Lane L132 took 269, the only house of Özden's issue-962 certificate (T-296), to his
+        # issue-967 certificate (T-297) in the pass of 13 November 2026.
+        "T-296",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -537,7 +540,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # November 2026 took 179, T-291's only house, to T-294, which supersedes it, 237, the
     # only house of T-190, to Özden's issue-960 certificate (T-295), which supersedes it,
     # and 269, the only house of T-290, to his issue-962 certificate (T-296), which
-    # supersedes it.
+    # supersedes it. The pass of 13 November took 269, T-296's only house, on to his
+    # issue-967 certificate (T-297), which supersedes it.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

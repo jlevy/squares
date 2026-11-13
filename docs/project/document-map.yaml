@@ -107,6 +107,7 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-959-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-960-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-962-20261112/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-967-20261112/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}
@@ -259,6 +260,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-xq4o-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-f65n-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-s418-2026-11-12/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-n73d-2026-11-12/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-89i7-2026-11-12/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-my76-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
@@ -328,6 +330,7 @@ documents:
   - {path: docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-ozden-954.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-12-ozden-962.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-12-ozden-967.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-dewinter-132-157.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-12-ozden-959.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-ozden-960.md, role: review, authority: record, lifecycle: retained}

@@ -249,6 +249,10 @@ L110_1111 = "ozden-s237-upper-bound-2026-11-11"
 #: the same author's #962 at 269, a band below his #947 promoted the same way, under
 #: CC BY 4.0 and MIT.
 L120_1112 = "ozden-s269-issue962-2026-11-11"
+#: The intake pass's lane L132 of 12 November 2026 (`test_upper_bound_reports_l132_1112`):
+#: the same author's #967 at 269, a column-band design below his #962 promoted the same
+#: way, under CC BY 4.0 and MIT.
+L132_1112 = "ozden-s269-upper-bound-2026-11-12"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -316,6 +320,7 @@ EVERY = (
     L107_1111,
     L110_1111,
     L120_1112,
+    L132_1112,
 )
 
 
@@ -1391,6 +1396,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L107_1111,
         L110_1111,
         L120_1112,
+        L132_1112,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1686,6 +1692,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L107_1111: "2026-11-11",
         L110_1111: "2026-11-11",
         L120_1112: "2026-11-11",
+        L132_1112: "2026-11-12",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

@@ -2543,6 +2543,50 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-297": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#967](https://github.com/jlevy/squares/issues/967)",
+        producer_route=True,
+        ai=(
+            "Issue 967 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing was found by an AI-run column-band designer, new for "
+            "this filing: tilted squares stood in columns across a band along the diagonal, "
+            "the axis-parallel squares on the two wall-anchored staircase lattices, the design "
+            "chosen by an exact dynamic programme over the columns, then quenched with Evan "
+            "Daniel’s ALM+SLP code and kicked and quenched twice more. It says the designer "
+            "used no donor packing, and also names PingYou Ltd’s n = 207 packing, Ryan Xu’s "
+            "n = 70 packing as Evan Daniel and PingYou Ltd improved it and Doğa Özden’s own "
+            "n = 179 packing of issue 954 as the band’s source packing; the designer and its "
+            "design are neither published nor retained, and the 12 November review did not "
+            "rebuild them. Against T-296’s packing, his own and this case’s house best packing "
+            "before this adoption, it is a new arrangement: no symmetry pairs nearest centres "
+            "one to one, and the optimal assignment moves 53 squares beyond a tenth, at most "
+            "0.950, its 45 tilted squares a band of 41 leaning one way and a cluster of four "
+            "the other, where T-296’s lean 22 one way and 23 the other; against T-290’s it "
+            "moves 127. So Doğa Özden is the packing’s finder, below the record it improves; "
+            "the issue claims the upper bound only. Three squares touch a wall, one at each of "
+            "the left, the bottom and the top, as the source says."
+        ),
+        third_route=(
+            ", and the 12 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by "
+            "exact convex clipping in GMP rationals over every square, wall and pair; all 20 "
+            "of its controls, each stated beforehand, were decided as stated"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -3121,20 +3165,21 @@ CREDITS: dict[int, Credit] = {
         "Couzo, Mishapolk and Evan Daniel improved it, below his own further arrangement of "
         "Evan Daniel’s packing",
     ),
-    # T-296 (adopted on 12 November 2026), Doğa Özden's issue 962: a new arrangement relative
-    # to his own T-290's packing, 115 squares beyond a tenth, found by a band-design search
-    # from tilted squares of PingYou Ltd's n = 207 packing, Ryan Xu's n = 70 packing as Evan
-    # Daniel and PingYou Ltd improved it, and his own n = 179 packing of issue 954 (T-291;
-    # the 12 November review's F9). T-290, adopted on 11 November, was his earlier packing
-    # from a strip cut of Evan Daniel's n = 304 packing (F7). Since T-294 is the house at 179
-    # now, the phrase names issue 954 (senior review N1 of #966).
+    # T-297 (adopted in the pass of 13 November 2026), Doğa Özden's issue 967: a new
+    # arrangement relative to his own T-296's packing, 53 squares beyond a tenth, and to
+    # T-290's, 127, found by his lab's column-band designer. The issue says the designer used
+    # no donor packing and names as the band's source packing PingYou Ltd's n = 207 packing,
+    # Ryan Xu's n = 70 packing as Evan Daniel and PingYou Ltd improved it, and his own n = 179
+    # packing of issue 954 (the 12 November review's F9 and F10), so the phrase names them as
+    # T-296's did, with their improvers. T-296, adopted on 12 November, was his earlier band
+    # packing of issue 962, and T-290 before it his packing from a strip cut of Evan Daniel's
+    # n = 304 packing (F7).
     269: Credit(
         (OZDEN,),
         (),
-        "Doğa Özden’s packing from a band of the tilted squares of PingYou Ltd’s n = 207 "
+        "Doğa Özden’s column-band packing, whose band he credits to PingYou Ltd’s n = 207 "
         "packing, Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it and "
-        "his own n = 179 packing of issue 954, below his earlier packing from a strip cut of "
-        "Evan Daniel’s n = 304 packing",
+        "his own n = 179 packing of issue 954, below his earlier band packing of issue 962",
     ),
     # Issue 703's packing, another arrangement of the design of issue 500's packing, which
     # T-174 refines to 1e-30: 15 squares beyond a tenth under the identity (the 21 October
