@@ -5,8 +5,8 @@ title: "Import #967: Doğa Özden's s(269) <= 16.889730073596 (supersedes his #9
 kind: task
 status: in_progress
 priority: 1
-version: 4
-delegate: bold-ritchie-l132
+version: 5
+delegate: bold-ritchie-l140
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-12T03:55:08.776Z
-updated_at: 2026-11-12T09:42:07.354Z
+updated_at: 2026-11-13T00:12:03.322Z
 started_at: 2026-11-12T07:08:56.494Z
 ---
 
