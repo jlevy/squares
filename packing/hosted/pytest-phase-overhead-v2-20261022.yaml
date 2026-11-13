@@ -1,0 +1,14 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+
+description: Privacy-redacted replay evidence for the single Session 188 phase-overhead-v2 comparison; see REDACTION.md inside the archive.
+
+repository: jlevy/squares
+tag: data/pytest-phase-overhead-v2-20261022-v1
+objects:
+- path: packing/benchmarks/data/phase-overhead-v2-20261022/phase-overhead-v2-20261022.tar.gz
+  asset: phase-overhead-v2-20261022.tar.gz
+  size: 397579
+  sha256: 3c47faf148839c3632a4e7d626d9e14524570069a432ba2effd735acf7f823f5

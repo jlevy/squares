@@ -3,19 +3,24 @@
 from __future__ import annotations
 
 import json
+import math
 import os
+import signal
 import subprocess
 import sys
 import time
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import suppress
 from datetime import datetime
 from pathlib import Path
-from typing import cast
+from typing import Literal, cast
+from unittest.mock import Mock
+from xml.etree import ElementTree as ET
 
 import pytest
 
-from devtools import reachable_tests
+from devtools import reachable_progress, reachable_tests
 from sqpack.cli import validate
 
 PACKING = Path(__file__).resolve().parents[1]
@@ -722,3 +727,448 @@ def test_pool_phases_have_distinct_receipts_and_effective_resource_identity(
         assert (
             environment["PACKING_REACHABLE_TEST_MARKER"] == command[command.index("-m", 2) + 1]
         )
+
+
+def _timed_environment(stem: Path, *, workers: int) -> dict[str, str]:
+    environment = _environment(stem, workers=workers)
+    plugin = Path(reachable_progress.__file__).resolve()
+    environment.update(
+        {
+            "PACKING_REACHABLE_TEST_PHASES": "1",
+            reachable_progress.PHASE_PLUGIN_PATH: str(plugin),
+        }
+    )
+    environment.pop("PYTEST_ADDOPTS", None)
+    return environment
+
+
+@pytest.mark.parametrize(
+    ("outcome", "seconds"), [("passed", 0.0), ("failed", 0.125), ("skipped", 0.375)]
+)
+@pytest.mark.parametrize("phase", ["setup", "call", "teardown"])
+def test_phase_row_uses_actual_report_duration_once(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    outcome: Literal["passed", "failed", "skipped"],
+    seconds: float,
+    phase: Literal["setup", "call", "teardown"],
+) -> None:
+    monkeypatch.setenv("PACKING_REACHABLE_TEST_PHASES", "1")
+    stem = tmp_path / "measured"
+    writer = reachable_progress.ProgressWriter(
+        stem, worker_id="main", run_id="actual-duration", source_commit=SOURCE, workers=1
+    )
+    nodeid = "test_probe.py::test_actual"
+    writer.pytest_runtest_logstart(nodeid, ("test_probe.py", 1, "test_actual"))
+    report = pytest.TestReport(
+        nodeid=nodeid,
+        location=("test_probe.py", 1, "test_actual"),
+        keywords={},
+        outcome=outcome,
+        longrepr="retained failure" if outcome == "failed" else None,
+        when=phase,
+        sections=[],
+        duration=seconds,
+        start=10.0,
+        stop=99.0,
+    )
+    writer.pytest_runtest_logreport(report)
+    writer.pytest_sessionfinish(0)
+    rows = _rows(Path(f"{stem}.progress-main.jsonl"))
+    measured = [row for row in rows if "duration_seconds" in row]
+    assert len(measured) == 1
+    assert measured[0]["event"] == "phase_finish"
+    assert measured[0]["duration_seconds"] == seconds
+    assert measured[0]["outcome"] == outcome
+    assert measured[0]["phase"] == phase
+    assert rows[0]["phase_timing_capability"] == reachable_progress.PHASE_CAPABILITY
+
+
+@pytest.mark.parametrize("workers", [1, 2])
+def test_quantitative_phases_match_the_same_run_junit(tmp_path: Path, workers: int) -> None:
+    test_file = tmp_path / "test_probe.py"
+    test_file.write_text(
+        "import pytest\n"
+        "@pytest.fixture\n"
+        "def prepared():\n"
+        "    assert sum(range(100)) == 4950\n"
+        "    yield\n"
+        "    assert sum(range(100)) == 4950\n"
+        "class TestPhases:\n"
+        "    @pytest.mark.parametrize('value', [0, 1], ids=['has::separator', 'ordinary'])\n"
+        "    def test_actual(self, prepared, value):\n"
+        "        assert value in (0, 1)\n",
+        encoding="utf-8",
+    )
+    stem = tmp_path / "timed"
+    result = subprocess.run(
+        _probe(
+            stem,
+            test_file,
+            workers=workers,
+            extra=(
+                f"--reachable-phase-timings={reachable_progress.PHASE_CAPABILITY}",
+                "-o",
+                "junit_duration_report=total",
+            ),
+        ),
+        cwd=PACKING,
+        env=_timed_environment(stem, workers=workers),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=30,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    paths = sorted(tmp_path.glob("timed.progress-*.jsonl"))
+    assert len(paths) == workers
+    durations: dict[tuple[str, str], list[float]] = {}
+    for path in paths:
+        rows = _rows(path)
+        assert rows[0]["phase_plugin_path"] == str(Path(reachable_progress.__file__).resolve())
+        assert rows[0]["phase_timing_capability"] == reachable_progress.PHASE_CAPABILITY
+        assert rows[-1]["event"] == "session_finish"
+        for row in rows:
+            if row["event"] != "phase_finish":
+                assert "duration_seconds" not in row
+                continue
+            seconds = row["duration_seconds"]
+            assert isinstance(seconds, (int, float))
+            assert not isinstance(seconds, bool)
+            assert math.isfinite(seconds)
+            assert seconds >= 0
+            # This controlled class has a single class separator; parameter :: stays intact.
+            _, class_name, name = str(row["nodeid"]).split("::", 2)
+            durations.setdefault((class_name, name), []).append(float(seconds))
+    cases = ET.parse(Path(f"{stem}.junit.xml")).findall(".//testcase")
+    assert len(cases) == 2
+    assert set(durations) == {
+        ("TestPhases", "test_actual[has::separator]"),
+        ("TestPhases", "test_actual[ordinary]"),
+    }
+    for case in cases:
+        key = (case.get("classname", "").rsplit(".", 1)[-1], case.get("name", ""))
+        assert len(durations[key]) == 3
+        assert float(case.get("time", "")) == pytest.approx(sum(durations[key]), abs=0.001)
+
+
+@pytest.mark.parametrize("explicit", [True, False])
+def test_actual_worker_only_identity_mismatch_refuses_before_collection(
+    tmp_path: Path, *, explicit: bool
+) -> None:
+    markers = tmp_path / "admission-markers"
+    markers.mkdir()
+    probe_plugin = tmp_path / "worker_admission_probe.py"
+    setting = reachable_progress.PHASE_PLUGIN_PATH
+    mismatch = str(tmp_path / "other-plugin.py")
+    injected = (
+        f"        os.environ[{setting!r}] = {mismatch!r}\n"
+        if explicit
+        else "        raise pytest.UsageError('controlled worker startup failure')\n"
+    )
+    probe_plugin.write_text(
+        "import os\nfrom pathlib import Path\nimport pytest\n"
+        "@pytest.hookimpl(tryfirst=True)\n"
+        "def pytest_configure(config):\n"
+        "    worker = getattr(config, 'workerinput', {}).get('workerid', 'controller')\n"
+        f"    markers = Path({str(markers)!r})\n"
+        "    if worker == 'gw1':\n"
+        "        (markers / 'gw1-mismatch').write_text('injected before admission')\n"
+        + injected
+        + "@pytest.hookimpl(tryfirst=True)\n"
+        "def pytest_sessionstart(session):\n"
+        "    if not hasattr(session.config, 'workerinput'):\n"
+        f"        (Path({str(markers)!r}) / 'controller-admitted')"
+        ".write_text('configure completed')\n",
+        encoding="utf-8",
+    )
+    test_file = tmp_path / "test_worker_sentinel.py"
+    test_file.write_text(
+        "import os\nfrom pathlib import Path\n"
+        "worker = os.environ.get('PYTEST_XDIST_WORKER', 'controller')\n"
+        f"markers = Path({str(markers)!r})\n"
+        "(markers / f'collected-{worker}').write_text('collected')\n"
+        "def test_sentinel():\n"
+        "    (markers / f'executed-{worker}').write_text('executed')\n",
+        encoding="utf-8",
+    )
+    stem = tmp_path / "worker-refusal"
+    environment = _timed_environment(stem, workers=2)
+    environment["PYTHONPATH"] = os.pathsep.join((str(tmp_path), environment["PYTHONPATH"]))
+    process = subprocess.Popen(
+        _probe(
+            stem,
+            test_file,
+            workers=2,
+            extra=(
+                "-p",
+                "worker_admission_probe",
+                *(
+                    (f"--reachable-phase-timings={reachable_progress.PHASE_CAPABILITY}",)
+                    if explicit
+                    else ()
+                ),
+                "--max-worker-restart=0",
+            ),
+        ),
+        cwd=PACKING,
+        env=environment,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        start_new_session=True,
+    )
+    try:
+        stdout, stderr = process.communicate(timeout=30)
+    finally:
+        with suppress(ProcessLookupError):
+            os.killpg(process.pid, signal.SIGKILL)
+        process.wait(timeout=5)
+    assert process.returncode != 0, stdout + stderr
+    expected_error = (
+        "actual phase timing plugin path or settings differ"
+        if explicit
+        else "controlled worker startup failure"
+    )
+    assert expected_error in stdout + stderr
+    assert (markers / "controller-admitted").is_file()
+    assert (markers / "gw1-mismatch").is_file()
+    assert not (markers / "collected-gw1").exists()
+    assert not (markers / "executed-gw1").exists()
+    assert not Path(f"{stem}.progress-gw1.jsonl").exists()
+    # A healthy worker may have started before controller abort; retain its raw evidence.
+    for path in tmp_path.glob("worker-refusal.progress-*.jsonl"):
+        assert path.name == "worker-refusal.progress-gw0.jsonl"
+    assert all(row["worker_id"] == "gw0" for row in _flushed_progress(stem))
+
+
+def _flushed_progress(stem: Path) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for path in sorted(stem.parent.glob(f"{stem.name}.progress-*.jsonl")):
+        # Poll only complete rows while a worker may be writing its final line.
+        rows.extend(
+            json.loads(line)
+            for line in path.read_text(encoding="utf-8").splitlines(keepends=True)
+            if line.endswith("\n")
+        )
+    return rows
+
+
+def test_actual_worker_death_preserves_other_workers_measured_phases(tmp_path: Path) -> None:
+    release = tmp_path / "release"
+    test_file = tmp_path / "test_probe.py"
+    test_file.write_text(
+        "import os, time\nfrom pathlib import Path\n"
+        "def test_a_healthy(): pass\n"
+        "def test_b_healthy(): pass\n"
+        "def test_c_crash():\n"
+        f"    release = Path({str(release)!r})\n"
+        "    deadline = time.monotonic() + 15\n"
+        "    while not release.exists():\n"
+        "        assert time.monotonic() < deadline\n"
+        "        time.sleep(0.01)\n"
+        "    os._exit(23)\n"
+        "def test_d_after(): pass\n",
+        encoding="utf-8",
+    )
+    stem = tmp_path / "worker-death"
+    process = subprocess.Popen(
+        _probe(
+            stem,
+            test_file,
+            workers=2,
+            extra=(
+                f"--reachable-phase-timings={reachable_progress.PHASE_CAPABILITY}",
+                "--max-worker-restart=0",
+            ),
+        ),
+        cwd=PACKING,
+        env=_timed_environment(stem, workers=2),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        start_new_session=True,
+    )
+    try:
+        deadline = time.monotonic() + 15
+        while time.monotonic() < deadline:
+            rows = _flushed_progress(stem)
+            healthy = any(
+                row["event"] == "finish" and str(row["nodeid"]).endswith("::test_a_healthy")
+                for row in rows
+            )
+            crash_setup = any(
+                row["event"] == "phase_finish"
+                and row["phase"] == "setup"
+                and str(row["nodeid"]).endswith("::test_c_crash")
+                for row in rows
+            )
+            if healthy and crash_setup:
+                break
+            if process.poll() is not None:
+                pytest.fail(f"worker-death probe exited early: {process.returncode}")
+            time.sleep(0.02)
+        else:
+            pytest.fail("worker-death probe never reached both observed phases")
+        release.write_bytes(b"release")
+        assert process.wait(timeout=15) != 0
+    finally:
+        with suppress(ProcessLookupError):
+            os.killpg(process.pid, signal.SIGKILL)
+        process.wait(timeout=5)
+    paths = list(tmp_path.glob("worker-death.progress-*.jsonl"))
+    assert len(paths) == 2
+    rows = _flushed_progress(stem)
+    healthy_rows = [row for row in rows if str(row["nodeid"]).endswith("::test_a_healthy")]
+    crash_rows = [row for row in rows if str(row["nodeid"]).endswith("::test_c_crash")]
+    assert {row["phase"] for row in healthy_rows if row["event"] == "phase_finish"} == {
+        "setup",
+        "call",
+        "teardown",
+    }
+    assert all(
+        "duration_seconds" in row for row in healthy_rows if row["event"] == "phase_finish"
+    )
+    assert any(row["phase"] == "setup" for row in crash_rows if row["event"] == "phase_finish")
+    assert not any(
+        row["event"] == "finish" or row.get("phase") in {"call", "teardown"}
+        for row in crash_rows
+    )
+    assert {row["worker_id"] for row in healthy_rows}.isdisjoint(
+        {row["worker_id"] for row in crash_rows}
+    )
+
+
+def test_unsupported_phase_capability_refuses_before_collection(tmp_path: Path) -> None:
+    sentinel = tmp_path / "collected"
+    source = tmp_path / "test_probe.py"
+    source.write_text(
+        f"from pathlib import Path\nPath({str(sentinel)!r}).write_text('collected')\n"
+        "def test_complete(): pass\n",
+        encoding="utf-8",
+    )
+    stem = tmp_path / "unsupported"
+    result = subprocess.run(
+        _probe(stem, source, workers=1, extra=("--reachable-phase-timings=unsupported",)),
+        cwd=PACKING,
+        env=_timed_environment(stem, workers=1),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=15,
+    )
+    assert result.returncode != 0
+    assert not sentinel.exists()
+    assert not list(tmp_path.glob("unsupported.progress-*.jsonl"))
+
+
+def test_worker_journal_exclusive_create_preserves_existing_evidence(tmp_path: Path) -> None:
+    stem = tmp_path / "exclusive"
+    writer = reachable_progress.ProgressWriter(
+        stem, worker_id="main", run_id="exclusive", source_commit=SOURCE, workers=1
+    )
+    writer.pytest_sessionfinish(0)
+    path = Path(f"{stem}.progress-main.jsonl")
+    before = path.read_bytes()
+    with pytest.raises(FileExistsError):
+        reachable_progress.ProgressWriter(
+            stem, worker_id="main", run_id="other-run", source_commit=SOURCE, workers=1
+        )
+    assert path.read_bytes() == before
+
+
+@pytest.mark.parametrize(
+    ("requested", "error", "incoming", "current", "expected"),
+    [
+        (False, "startup error", 0, 0, 0),
+        (True, None, 0, 0, 0),
+        (True, "startup error", 0, 0, 3),
+        (True, "startup error", 1, 1, 1),
+        (True, "startup error", 0, 1, 1),
+        (True, "startup error", 3, 3, 3),
+    ],
+)
+def test_opted_in_worker_failure_preserves_nonzero_exit_status(
+    *,
+    requested: bool,
+    error: str | None,
+    incoming: int,
+    current: int,
+    expected: int,
+) -> None:
+    config = Mock(spec=pytest.Config)
+    config.stash = pytest.Stash()
+    config.stash[reachable_progress._PHASE_REQUESTED] = requested  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    node = Mock()
+    node.config = config
+    session = Mock(spec=pytest.Session)
+    session.config = config
+    session.exitstatus = current
+    reachable_progress.pytest_testnodedown(node, error)
+    reachable_progress.pytest_sessionfinish(session, incoming)
+    assert session.exitstatus == expected
+
+
+@pytest.mark.parametrize("duration", [float("nan"), float("inf"), -0.1])
+def test_writer_refuses_invalid_quantitative_phase(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, duration: float
+) -> None:
+    monkeypatch.setenv("PACKING_REACHABLE_TEST_PHASES", "1")
+    writer = reachable_progress.ProgressWriter(
+        tmp_path / "invalid",
+        worker_id="main",
+        run_id="invalid",
+        source_commit=SOURCE,
+        workers=1,
+    )
+    try:
+        with pytest.raises(ValueError, match="finite and nonnegative"):
+            writer.pytest_runtest_logreport(
+                pytest.TestReport(
+                    nodeid="test_invalid.py::test_value",
+                    location=("test_invalid.py", 1, "test_value"),
+                    keywords={},
+                    outcome="passed",
+                    longrepr=None,
+                    when="call",
+                    duration=duration,
+                )
+            )
+    finally:
+        writer.pytest_sessionfinish(3)
+
+
+def test_actual_failed_and_skipped_phases_keep_only_reported_durations(tmp_path: Path) -> None:
+    source = tmp_path / "test_failures.py"
+    source.write_text(
+        "import pytest\n"
+        "@pytest.fixture\ndef bad_setup(): assert False\n"
+        "@pytest.fixture\ndef bad_teardown():\n    yield\n    assert False\n"
+        "def test_setup(bad_setup): pass\n"
+        "def test_teardown(bad_teardown): pass\n"
+        "def test_call(): assert False\n"
+        "def test_skip(): pytest.skip('controlled skip')\n"
+    )
+    stem = tmp_path / "failed-phases"
+    result = subprocess.run(
+        _probe(stem, source, workers=1),
+        cwd=PACKING,
+        env=_timed_environment(stem, workers=1),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=20,
+    )
+    assert result.returncode == 1, result.stdout + result.stderr
+    rows = _rows(Path(f"{stem}.progress-main.jsonl"))
+    phases = [row for row in rows if row["event"] == "phase_finish"]
+    setup = [row for row in phases if str(row["nodeid"]).endswith("::test_setup")]
+    assert [(row["phase"], row["outcome"]) for row in setup] == [
+        ("setup", "failed"),
+        ("teardown", "passed"),
+    ]
+    assert any(row["phase"] == "teardown" and row["outcome"] == "failed" for row in phases)
+    assert any(row["phase"] == "call" and row["outcome"] == "skipped" for row in phases)
+    assert all(
+        isinstance(row["duration_seconds"], float) and row["duration_seconds"] >= 0
+        for row in phases
+    )
