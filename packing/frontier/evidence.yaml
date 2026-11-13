@@ -61717,7 +61717,7 @@ evidence:
       note: >-
         docs/project/reviews/review-2026-11-12-ozden-967.md accepted the certificate with
         findings, all notes, none blocking: F1 and F3 on feasibility and the claim's own box, F2
-        on the review's own controls, F4 on the claim's arithmetic, F5, F7 and F10 to F15 for the
+        on the review's own controls, F4 on the claim's arithmetic, F5 to F7 and F10 to F15 for the
         author, and F6 and F8 to F11 for the records. Its clean-room run is
         E-ozden-967-review-exact-feasibility, and the replay E-ozden-967-exact-feasibility.
     limitations: >-
@@ -61787,7 +61787,7 @@ evidence:
       note: >-
         docs/project/reviews/review-2026-11-12-ozden-967.md accepted the certificate with
         findings, all notes, none blocking: F1 and F3 on feasibility and the claim's own box, F2
-        on the review's own controls, F4 on the claim's arithmetic, F5, F7 and F10 to F15 for the
+        on the review's own controls, F4 on the claim's arithmetic, F5 to F7 and F10 to F15 for the
         author, and F6 and F8 to F11 for the records. Its clean-room run is
         E-ozden-967-review-exact-feasibility, and the replay E-ozden-967-exact-feasibility.
     limitations: >-
@@ -61882,7 +61882,7 @@ evidence:
       note: >-
         docs/project/reviews/review-2026-11-12-ozden-967.md accepted the certificate with
         findings, all notes, none blocking: F1 and F3 on feasibility and the claim's own box, F2
-        on the review's own controls, F4 on the claim's arithmetic, F5, F7 and F10 to F15 for the
+        on the review's own controls, F4 on the claim's arithmetic, F5 to F7 and F10 to F15 for the
         author, and F6 and F8 to F11 for the records. Its clean-room run is
         E-ozden-967-review-exact-feasibility, and the replay E-ozden-967-exact-feasibility.
     limitations: >-

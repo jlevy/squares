@@ -3179,7 +3179,7 @@ CREDITS: dict[int, Credit] = {
         (),
         "Doğa Özden’s column-band packing, whose band he credits to PingYou Ltd’s n = 207 "
         "packing, Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it and "
-        "his own n = 179 packing of issue 954, below his earlier packing",
+        "his own n = 179 packing of issue 954, below his earlier band packing of issue 962",
     ),
     # Issue 703's packing, another arrangement of the design of issue 500's packing, which
     # T-174 refines to 1e-30: 15 squares beyond a tenth under the identity (the 21 October
