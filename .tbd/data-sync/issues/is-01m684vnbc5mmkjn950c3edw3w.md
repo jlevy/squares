@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 274
+version: 275
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -89,7 +89,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-13T00:44:54.996Z
+updated_at: 2026-11-13T00:57:24.874Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -238,3 +238,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-12 13:53Z renewal (intake222): no change.
 
 2026-11-13 ~00:48Z: #970 merged (2bae82a34) on 13 Nov after L140 merged main (#971), applied N1–N3, stamped landings to 11-13 and re-pinned last (CI green on ae901e10b). T-297 is the house at 269. 967 open. L141: deploy plus 967 reply and 962 follow-up drafts. Then a final records batch (967 final, 962 follow-up, 958 follow-up) and close think-n73d and think-c3p2.
+
+2026-11-13 00:52Z renewal (intake233): no new issues. Items owed: the 967 final, the 962 follow-up (both drafting, L141 restarted after the container restart) and the 958 follow-up recording. Final records batch after posting.
