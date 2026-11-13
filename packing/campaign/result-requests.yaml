@@ -32122,8 +32122,9 @@ issues:
       author's answers of 08:31:55Z, which #971 read into the record, so `read_through`
       already stands at that comment and stays there. Like the follow-up of 1 November on
       #842, which acknowledged its authors' answer, it states the results as they stand: T-292
-      and T-293 at V3/C3 as the houses at 132 and 157, the position the final reply gave, with
-      no status word, so none is recorded. It names no evidence id, and no reply in
+      and T-293 at V3/C3 as the houses at 132 and 157, the position the final reply gave.
+      Unlike that follow-up, which called T-252 confirmed, it uses no status word, so none is
+      recorded and the final reply's stands. It names no evidence id, and no reply in
       `corrects`, since the final reply carries no `outdated` statement. It thanks the author
       for answering all six questions and for publishing the method and updating the witness
       files in 57de046, and says that #971 merged on 12 November as 0ee1e7622 and records
@@ -32907,8 +32908,9 @@ issues:
       #970 merged as 2bae82a34 at 00:44:08Z and recorded in intake lane L142, was owed because
       the final reply stated T-296 current, as the note above says; like #928's and #947's, it
       states the superseded position, and it names no reply in `corrects`, since the final
-      reply carries no `outdated` statement. Under the heading Correction it says that #967
-      has made the reply of 12 November out of date in one place: that reply gave T-296 as
+      reply carries no `outdated` statement. It says that #967 has made the reply of 12
+      November out of date in one place and, under the heading Correction, that that reply gave
+      T-296 as
       V3/C3, confirmed, current, the house at 269; since #970 merged on 13 November the
       author's #967 packing, T-297, is the house at 269 in place of T-296; T-296 now reads
       V3/C3, confirmed, superseded, stays a verified bound and keeps its certificate as
