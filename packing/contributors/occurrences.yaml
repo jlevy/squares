@@ -32810,6 +32810,50 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter method 132 157 2026-11-12]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter method 132 157 2026-11-12]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter method 132 157 2026-11-12]'
+    field: /credit
+  expected_text: de Winter after Samanyu-dev
+  start: 16
+  end: 27
+  label: Samanyu-dev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

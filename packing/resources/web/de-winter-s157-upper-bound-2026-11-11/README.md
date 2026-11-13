@@ -162,6 +162,30 @@ The stage 4 review’s six questions, informational, holding nothing open:
 6. Samanyu-dev’s repository has no licence file. Did its author agree to the 109 packing
    being built on, and does “MIT-style” cover the packing data as well as the code?
 
+## The Author’s Answers
+
+Joost de Winter answered the six questions on 12 November 2026
+([issuecomment-6818738203](https://github.com/jlevy/squares/issues/958#issuecomment-6818738203),
+08:31:55Z); the
+[s132 packet](../de-winter-s132-upper-bound-2026-11-11/README.md#the-authors-answers)
+records them in full. At 157:
+
+- **The margin (F8).** The stated 1.4 × 10⁻⁵⁹ is the measured 1.3493 × 10⁻⁵⁹ rounded up.
+- **The count (F9).** The 2,024 are the equations his solver used, counted on edge lines
+  within 10⁻⁶ in the binary64 solution, not on edge segments within 10⁻⁵⁰.
+- **The witness (F10).** `57de046` adds the header, the claim block and the lowercase
+  id, with the squares and the side unchanged; the
+  [method packet](../de-winter-method-132-157-2026-11-12/README.md) retains it, and this
+  packet stays at `6617869`.
+- **The cuts (F11).** His second step cut the 132 at x = 9.71, y = 3.33, which he reads
+  as the review’s cuts, since, he says, the packings have fourfold symmetry and a cut can
+  sit anywhere inside an axis-aligned block. He says the squares added were copies of the
+  12 + 13 that bordered the cuts, matching in number the 25 the review found left unpaired.
+- **The method.** Published in `57de046`, retained in the method packet and not run
+  here, so the byte-for-byte reproduction from the seed is the author’s claim, unchecked.
+- **The seed’s licence (F12).** He has not contacted Samanyu-dev; it stays the owner’s
+  question on think-71uq.
+
 ## What Is Not Established
 
 - **The 250-digit solution as a local optimum**, and any optimality: not replayed here.
