@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 276
+version: 277
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -89,7 +89,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-13T01:08:50.947Z
+updated_at: 2026-11-13T02:17:16.595Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -242,3 +242,5 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-13 00:52Z renewal (intake233): no new issues. Items owed: the 967 final, the 962 follow-up (both drafting, L141 restarted after the container restart) and the 958 follow-up recording. Final records batch after posting.
 
 2026-11-13 ~01:12Z: Pages deploy of 2bae82a34 succeeded (run 43339421096; 6303/6303). Posted the 967 final (issuecomment-6840725232) and closed 967. Posted the 962 follow-up (-6840725487, anchored to the 967 reply); 962 stays closed. L142 is opening the final records batch (967 final, 962 follow-up, 958 follow-up, and reverting the 269 credit phrase that made n-269 read 'issue 962 (T-297)'). Then close think-n73d and think-c3p2.
+
+2026-11-13: #972 (records for #958 answers, #962 follow-up, #967 adoption) merged 0db247de7; think-n73d and think-c3p2 closed; think-u70i filed (adoption sentence T-id placement). All submissions through #967 imported, replied, closed. Open owner decisions unchanged (#921, #908/#909, #543, #919, think-8nim, RV-3/think-ruu2, T-142/T-143 #953, think-71uq).

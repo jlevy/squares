@@ -3,9 +3,9 @@ type: is
 id: is-01m76ya938mxjsy82rhp5gt007
 title: "Import #967: Doğa Özden's s(269) <= 16.889730073596 (supersedes his #962/T-296 by 9.74e-3)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l140
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-12T03:55:08.776Z
-updated_at: 2026-11-13T00:12:03.322Z
+updated_at: 2026-11-13T02:17:13.910Z
 started_at: 2026-11-12T07:08:56.494Z
+closed_at: 2026-11-13T02:17:13.909Z
+close_reason: "Issue 967 answered, recorded in #972 (merged 0db247de7)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
