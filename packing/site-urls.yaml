@@ -24457,6 +24457,8 @@ urls:
     - E-khalili-973-valid11-report
     - E-khalili-973-lean-report
     - E-khalili-973-review-partial-checks
+    - E-khalili-973-replay-sample
+    - E-khalili-973-review-replay-sample
     - E-basic-grid-upper
     artifacts:
     - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/README.md

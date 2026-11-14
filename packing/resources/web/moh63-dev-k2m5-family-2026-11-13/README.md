@@ -97,12 +97,18 @@ mathematicians.
 
 On 14 November 2026, on a four-core x86-64 Linux container, Python 3.14.7 and rustc
 1.97.0, at most two jobs at `nice -n 19`. Every run went through
-[`devtools.replay_k2m5_family`](../../../devtools/replay_k2m5_family.py), which stages
-the retained tree with each file held to the manifest and `cov.tar.xz` to its pinned
-digest, and runs the source’s own programs under `devtools.replay_receipt`; each receipt
-is in [`receipts/`](receipts/), and
+[`devtools.replay_k2m5_family`](../../../devtools/replay_k2m5_family.py), which, at
+878434367 when these receipts were written, held each staged file to the manifest; since
+72db93496 it holds only the pinned-only `cov.tar.xz` to its digest and leaves the
+retained files’ custody to `acquire_source --check` (OR-16).
+It runs the source’s own programs under `devtools.replay_receipt`; each receipt is in
+[`receipts/`](receipts/), and
 [`receipts/compare.json.gz`](receipts/compare.json.gz) sets each run beside the source’s
 record of it.
+The runs are registered as the sample `E-khalili-973-replay-sample`, which sets no rung.
+`compare.json.gz` was written again from the same receipts on 14 November (lane L147)
+after the tool renamed one field of its `cropped` entries, `mass` to `weight_sum`, the
+sum of the integer segment weights; nothing else in it changed.
 Python ran with `-I`, the script’s directory appended to `sys.path` so that
 the source’s sibling imports resolve and nothing it ships can shadow a standard module.
 
@@ -142,14 +148,16 @@ the source’s sibling imports resolve and nothing it ships can shadow a standar
   default cap of 200 uncertified boxes and stops at 226, as the source’s sweep did.
 - **Root 9632, whole.** The patched `zmx2` on that root alone, with `--uncert-cap
   100000000` as `tight_tile/run_cov.sh` passes for the 75 dumps
-  ([`receipts/r9632/dump.log.gz`](receipts/r9632/dump.log.gz)), 229 CPU-seconds: 168,563
+  ([`receipts/r9632/dump.log.gz`](receipts/r9632/dump.log.gz)), 233 CPU-seconds: 168,563
   boxes, 77,432 certified, 6,850 uncertified, every box the source’s `dump.out` lists.
   Without the cap, at `zmx2`’s default of 200, the root stops at 226 boxes
   ([`receipts/r9632/dump_cap200.log`](receipts/r9632/dump_cap200.log)), so the dump
   needs the flag, which neither its header nor the release records.
   `qx2_zm.py` (`6294052a…`, with `zm_mixed.py`, `mixed_cover.py` and `zeromargin.py`
-  `3cb95fb7…` staged by digest from the evand packets) on the source’s cropped cover
-  with the source’s arguments, `--nproc 1`
+  `3cb95fb7…` staged from the evand packets, held to their digests at 878434367 when
+  these receipts were written; since 72db93496 their custody is
+  `acquire_source --check`’s) on the source’s cropped cover with the source’s arguments,
+  `--nproc 1`
   ([`receipts/r9632/zm.log`](receipts/r9632/zm.log)), 1,274 CPU-seconds: 2,357 boxes to
   depth 18, 83 uncertified, the leaf census equal to the source’s and the list of 83
   byte for byte its `zm_unc.txt`. The source’s `check_9632.py` on these two outputs
@@ -185,8 +193,9 @@ the source’s sibling imports resolve and nothing it ships can shadow a standar
     of 11,025 windows without an integer translate in $\mu_{11}$, as the source reports.
   - `ctl_rise.py`, the Tight-Tile control: on the real board the control’s chart region
     certifies in 155 cells with none refused; on `ctl_rise.txt`, one segment moved by
-    $1/10$, it refuses 443 cells within 2,000, 6 of them at the face point $(1, 1)$,
-    every one shown a failed bound.
+    $1/10$, it refuses 443 cells within the 2,000-cell cap, 83 of them only because the
+    cap was reached, and 6 contain the face point $(1, 1)$; the four failures it prints
+    are failed bounds.
     The run is capped at 2,000 cells of the script’s default 20,000; a first run at the
     default was stopped after 1,400 cells with 248 refused
     ([`receipts/controls/tight-ctl-rise-stopped.log`](receipts/controls/tight-ctl-rise-stopped.log)).
@@ -234,11 +243,16 @@ The blind stage 4 review,
 shared no context with this lane), with its programs and outputs in
 [`khalili-gharabaghi-k2m5-973-review-2026-11-14/`](../khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md),
 accepts the argument as written with no blocking defect.
-Its clean-room programs decide the mass, the family, Lemma 7’s premises, the whole
-$\theta = 0$ face, the coverage of the 75 tight-tile roots and root 9632’s closure; it
-re-derived the Tight-Tile Lemma and read its code in full, and replayed the source’s
-programs on samples of its own, which agree with this lane’s wherever both ran (`cert0`,
-columns 29 and 30, root 9632, the controls).
+It ran at `tbd-strong`, not at the `tbd-strong-max` tier with maximum reasoning that the
+runbook asks of a stage 4 review.
+Its own exact programs (independently re-implemented after reading the producer’s code;
+the record does not call them clean-room) decide the mass, the family, Lemma 7’s
+premises, the whole $\theta = 0$ face, the coverage of the 75 tight-tile roots and root
+9632’s closure; it re-derived the Tight-Tile Lemma and read its code in full, and
+replayed the source’s programs on samples of its own
+(`E-khalili-973-review-replay-sample`), which agree with this lane’s wherever both ran
+(`cert0`, columns 29 and 30, root 9632, the Tight-Tile job `d2.5_s-1_line_1.6_2.5`, the
+controls).
 Its two major findings are for the record: F1, `zmx2`’s area-density and first-order
 lemmas, on which the 12,024 general-position roots rest, have no review here; and F2,
 the Tight-Tile Lemma has one implementation and no full replay.
@@ -264,12 +278,12 @@ measured on the same programs here:
 | `zmx2` sweep: `cert0` and 55 columns | 45,366 CPU-s (12.6 CPU-h) | about 14.4 CPU-h, at 1.14 times the source’s CPU over the 30 sampled columns | `cert0` and 30 columns, 4,545 CPU-s |
 | The 75 coverage dumps (`tight_tile/run_cov.sh`) | 65,802 CPU-s (18.3 CPU-h), run six at a time | about 14 CPU-h, at the 0.75 to 0.79 times the stage 4 review measured on three roots; 20.9 at this lane’s sweep factor | none |
 | Root 9632: the dump and `qx2_zm.py` | 1,834 CPU-s | 0.4 CPU-h | all, 1,507 CPU-s |
-| Tight-Tile jobs: 308 and 15, with 3 reruns | 1,007,447 CPU-s (279.8 CPU-h), run eight at a time | about 102 CPU-h at 0.37 times, the factor of the 26 jobs sampled here, all among the cheapest, or 115 to 150 at the review’s 0.41 to 0.53 over 8 random jobs of at most 120 s; up to 280 at the source’s own speed, since no larger job (up to 66,225 CPU-s) was sampled | 26 jobs, 252 CPU-s |
+| Tight-Tile jobs: 308 and 15, with 3 reruns | 1,007,447 CPU-s (279.8 CPU-h), run eight at a time | about 115 to 150 CPU-h at the review’s 0.41 to 0.53 over 8 random jobs of at most 120 s, which the total uses (the 0.37 of the 26 jobs sampled here, all among the cheapest, would give about 102); up to 280 at the source’s own speed, since no larger job (up to 66,225 CPU-s) was sampled | 26 jobs, 252 CPU-s |
 | The source’s controls | 3,193 CPU-s for the two whose CPU is recorded | about 0.7 CPU-h | all four, 2,433 CPU-s |
 | The Lean build of `lean/K2m5` | not recorded | 1 to 2 CPU-hours by the review, on a host with at least 24 GB of memory or swap (the precedent build needed about 13 GB resident and 9.6 GB of swap) and about 10 GB of disk | none |
 | **All** | about 313 CPU-h with the Lean build | **about 145 to 180 CPU-h, up to about 320** | about 2.5 CPU-h |
 
-`verify.sh --full` alone is about 117 to 165 CPU-hours here at these factors, up to
+`verify.sh --full` alone is about 130 to 165 CPU-hours here at these factors, up to
 about 295. The stage 4 review priced the whole at about 145 to 180 CPU-hours from its
 own samples; the two lanes agree but for the dumps, where the review’s measurement
 stands.
@@ -339,7 +353,7 @@ The table gives the Git blob and SHA-256 of the decompressed bytes, and
 | `k2m5-family/verification/controls/box12_onemutation.txt.gz` | upstream | `ce545eda70ce0511f2cfca9928ca1f9527c9f0d4` | `24a71da62e0ec718aeb64027e8750596d375affbbc2ef2b314a32e8d2083afcf` |
 | `k2m5-family/verification/controls/scale0993_box11.txt.gz` | upstream | `2a6aef05118101fbaa5aa7419bc2c1173d4a4d5a` | `e1a3658ae3d555735af4fd4644ae247f864c0a77af8190e25ca30f452ca6b021` |
 | `k2m5-family/verification/controls/scale0999_box11.txt.gz` | upstream | `364bca861883b4180b395243a03ab77b24206184` | `f75c36e4f653a4eea4461411cd796e5c2fbc9e07320e895a119dba79309db591` |
-| `receipts/compare.json.gz` | receipt | `a663991527843056414ac8a6a391680bc55d7aed` | `303091215fd7850b94b756318c4150c11ec91a3b5751b44eada58b1d8cf48078` |
+| `receipts/compare.json.gz` | receipt | `3196422779daaf629d4d7cf057c8d9d2dba55f31` | `f663764017b8c57b979e8ae565209ef99bea0d6f6cbc83fcd7f17eae059b3bb8` |
 | `receipts/r9632/dump.log.gz` | receipt | `48dab02e6bb20fdfe88b0b14a4aa2a78a73bfffe` | `d8ba5f205e3376e7fcf7e46e1823b907c4316402191d4c356a2d68b5916cd0cb` |
 
 <!-- This document follows common-doc-guidelines.md.

@@ -146,3 +146,20 @@ def test_tight_tile_sample_equals_the_source() -> None:
     for name, entry in tight.items():
         assert entry["equal"], name
         assert entry["final"] == {"final": "ALL-OK"}, name
+
+
+def test_receipts_equal_the_source_records() -> None:
+    logs = replay.TREE / "verification/logs/zmx2_box11"
+    for receipt in sorted((RECEIPTS / "zmx2").glob("c*.log")):
+        if receipt.name.endswith("_roots.log"):
+            continue
+        record = logs / ("cert0.txt" if receipt.stem == "cert0" else f"{receipt.stem}.out")
+        ours = replay.zmx2_summary(_text(f"zmx2/{receipt.name}"))
+        assert ours == replay.zmx2_summary(read_retained_bytes(record).decode("utf-8")), (
+            receipt.stem
+        )
+    for receipt in sorted((RECEIPTS / "tight").glob("*.log")):
+        record = replay.TREE / "tight_tile/out" / f"{receipt.stem}.out"
+        assert replay.tt_lines(_text(f"tight/{receipt.name}")) == replay.tt_lines(
+            read_retained_bytes(record).decode("utf-8")
+        ), receipt.stem

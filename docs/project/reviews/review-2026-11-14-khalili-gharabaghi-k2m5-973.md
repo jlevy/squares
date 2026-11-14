@@ -720,8 +720,17 @@ review lane committed it at `f58b34b7b`, repeated §11 word for word and ended i
 token, `S-LANE`; the repetition is removed here, and nothing else in the review is
 changed. The records lane mapped the review from §§2, 8, 9, 11 and 12: it is recorded as
 the `external_review` of `T-298`’s three report entries and in `T-298`’s `reviews`, its
-clean-room programs as `V-khalili-973-review-check`, and what they decide in full as
-`E-khalili-973-review-partial-checks`. Its price (§9) and F1 are in `think-0h7r`.
+own programs as `V-khalili-973-review-check`, and what they decide in full as
+`E-khalili-973-review-partial-checks`. Its price (§9) and F2’s full replay are in
+`think-0h7r`; F1’s review is held on `think-kn13`.
+
+*Records lane L147, 14 November 2026, after the senior review of the mapping:* the
+review and its packet README call its own programs clean-room in the sense of importing
+no source code; the record’s independence entry (`V-khalili-973-review-check`) does not,
+since the lane read the source’s verification and Tight-Tile code before freezing them.
+Its runs of the source’s and Daniel’s code on samples are recorded as
+`E-khalili-973-review-replay-sample`. The review ran at `tbd-strong`, not at the
+`tbd-strong-max` tier with maximum reasoning that the runbook asks of a stage 4 review.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

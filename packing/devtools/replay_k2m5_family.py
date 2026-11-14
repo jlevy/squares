@@ -80,8 +80,9 @@ COV = "tight_tile/cov.tar.xz"
 BOARD = "certificate/sol_exact_box11.txt"
 PATCH = "verification/zmx2_print_all.patch"
 CHECKER = "e2bb84e9"
-#: ``qx2_zm.py`` and its imports at 659ee62: the retained copy and, for the reader, its
-#: SHA-256 (the copies' custody is ``devtools.acquire_source --check``'s).
+#: ``qx2_zm.py`` and its imports at 659ee62: the retained copy and, for the reader only,
+#: its SHA-256. Nothing reads the digests at run time: the copies are retained in Git, and
+#: their custody is ``devtools.acquire_source --check``'s (OR-16).
 QX2_FILES = {
     "qx2_zm.py": (
         WEB / "evand-square-packing-2026-10-03/square-packing/s12/certificates/k2m4/qx2_zm"
@@ -290,13 +291,15 @@ def build(work: Path) -> tuple[Path, Path]:
         raise SystemExit(f"{PATCH}: touches {files}, removes {len(removed)} lines")
     root = work / "zmx2/print-all"
     crate = root / "verify2"
+    binary = crate / "target/release/zmx2"
+    receipt = root / "build.log"
+    # A finished build is reused before anything is copied: copying the unpatched sources
+    # over a patched crate would leave its zmx2.rs unpatched beside a patched binary.
+    if binary.exists() and receipt.exists():
+        return plain, binary
     source = plain.parents[2]
     for relative in ("Cargo.toml", "Cargo.lock", "src/main.rs", "src/bin/zmx2.rs"):
         _write(crate / relative, (source / relative).read_bytes())
-    binary = crate / "target/release/zmx2"
-    receipt = root / "build.log"
-    if binary.exists() and receipt.exists():
-        return plain, binary
     applied = subprocess.run(
         ["patch", "-p1", "--forward", "-i", str(work / "k2m5-family" / PATCH)],
         cwd=root,
@@ -385,8 +388,8 @@ def root9632(work: Path, out: Path, python: str) -> int:
              "--progress", "60", "--unc-out", str(unc.resolve())],
             zm, chdir=work / "qx2",
             label="qx2/: qx2_zm.py, zm_mixed.py, zeromargin.py and mixed_cover.py of evand/"
-            "square-packing@659ee62 from the evand packets by SHA-256, and the source's "
-            "verification/r9632/c9632.txt",
+            "square-packing@659ee62 from the evand packets (retained copies; their custody "
+            "is acquire_source --check's), and the source's verification/r9632/c9632.txt",
             python=f"{python} -I (script directory appended to sys.path)",
         )  # fmt: skip
     status |= _receipt(
@@ -499,7 +502,8 @@ def qx2_summary(text: str) -> dict[str, object]:
 
 #: Fields of a ``run_tt.py`` chart line that are not results: its seconds, and ``K``, which
 #: the retained ``run_tt.py`` prints and the source's recorded outputs, written by an
-#: earlier version of it, do not (the K they ran under is the job's default, 4).
+#: earlier version of it, do not. The K they ran under is inferred to be the job's default,
+#: 4, not read from them: they do not record it (the stage 4 review's F3).
 TT_IGNORED = ("secs", "K")
 
 
@@ -518,7 +522,11 @@ def tt_lines(text: str) -> list[dict[str, object]]:
 
 
 def cropped(tree: Path, name: str) -> dict[str, object]:
-    """Whether every segment of a cropped cover is a segment of the board, with its mass."""
+    """Whether every segment of a cropped cover is a segment of the board, with its mass.
+
+    ``weight_sum`` is the sum of the cover's integer segment weights, before the header's
+    scale divides them and without the Lebesgue square, so it is not the measure's mass.
+    """
 
     def parse(path: Path) -> tuple[list[str], list[tuple[str, ...]], list[str]]:
         rows = [line.split() for line in path.read_text(encoding="utf-8").splitlines()]
@@ -540,7 +548,7 @@ def cropped(tree: Path, name: str) -> dict[str, object]:
         "distinct": len(set(c_segments)) == len(c_segments),
         "header_equal": c_head == head,
         "tail_equal": c_tail == tail,
-        "mass": str(sum((Fraction(int(s[4])) for s in c_segments), Fraction(0))),
+        "weight_sum": str(sum((Fraction(int(s[4])) for s in c_segments), Fraction(0))),
     }
 
 

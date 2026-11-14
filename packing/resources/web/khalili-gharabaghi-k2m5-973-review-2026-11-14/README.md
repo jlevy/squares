@@ -47,6 +47,21 @@ source or of evand/square-packing.
 | `tt_region.py` | driver and oracle | Runs the source’s `ttbox.run` on one chart and face region; wraps `ttbox.analyse` to record each certified cell’s vertices and bound T, maps each vertex to a pose by this file’s own chart formulas, and requires exact `mu(P) − 1 ≥ T` |
 | `run_jobs.sh` | driver | Runs a job list one or two at a time under `nice -n 19` with a wall cap, recording real, user and system time |
 
+*Records lane L147, 14 November 2026.* Two evidence entries cite these programs.
+`E-khalili-973-review-partial-checks` cites `k2m5_cover.py`, `k2m5_axis.py`,
+`k2m5_coverage.py` and `closure_9632.py`, with `k2m5_exact.py` through
+`V-khalili-973-review-check`. `E-khalili-973-review-replay-sample` cites `run_jobs.sh`,
+`compare_uncert.py` and `compare_tt.py`, which ran the source’s code on the review’s
+samples and compared the outputs with the source’s records.
+No evidence entry cites the others: `k2m5_samples.py`, `draw_samples.py`,
+`make_mutants.py`, `mutate_cov.py`, `m3_search.py`, `submeasure.py`,
+`boards_vs_family.py`, `lean_data_link.py`, `zmx2_leaf_probe.py`, `tt_region.py`,
+`package_outputs.py` and `freeze.py`. Their probes and controls support the review’s
+findings and set no rung.
+[`receipts/freeze.sha256`](receipts/freeze.sha256) also lists three bytecode files,
+`programs/__pycache__/k2m5_cover.cpython-314.pyc`, `k2m5_coverage.cpython-314.pyc` and
+`k2m5_exact.cpython-314.pyc`, which were not retained.
+
 ## What the Runs Printed
 
 | Run | Result |

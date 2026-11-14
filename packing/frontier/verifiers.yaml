@@ -3222,13 +3222,15 @@ verifiers:
           own material on the claim.
     note: >-
       Written and run on 14 November 2026 for
-      docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md and kept with its
-      outputs in khalili-gharabaghi-k2m5-973-review-2026-11-14 beside the import lane's
-      packet. The lane's other programs (draw_samples.py, make_mutants.py, mutate_cov.py,
-      m3_search.py, submeasure.py, boards_vs_family.py, lean_data_link.py, compare_uncert.py,
-      compare_tt.py, zmx2_leaf_probe.py, tt_region.py, package_outputs.py, freeze.py and
-      run_jobs.sh) draw samples, build mutants, compare runs or drive the source's code, and
-      are not registered.
+      docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md and kept with
+      its outputs in khalili-gharabaghi-k2m5-973-review-2026-11-14 beside the import lane's
+      packet. The lane's other programs (k2m5_samples.py, draw_samples.py, make_mutants.py,
+      mutate_cov.py, m3_search.py, submeasure.py, boards_vs_family.py, lean_data_link.py,
+      compare_uncert.py, compare_tt.py, zmx2_leaf_probe.py, tt_region.py,
+      package_outputs.py, freeze.py and run_jobs.sh) evaluate samples, draw them, build
+      mutants, compare runs or drive the source's code, and are not registered. The review
+      ran at tbd-strong, not at the tbd-strong-max tier with maximum reasoning that the
+      runbook asks of a stage 4 review.
 
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-ozden-890-review-premises
@@ -4063,12 +4065,13 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Stages Khalili and Gharabaghi's k^2 - 5 release from its packet with every file held
-      to the manifest, builds zmx2 e2bb84e9 by devtools.replay_evand_zmx2 and a copy with
-      the source's one-line print-all patch, runs the source's verify.sh, zmx2 columns,
-      root 9632 (zmx2 dump, qx2_zm.py and check_9632.py), controls and tight-tile jobs under
-      receipts, and compares each with the source's record; it decides nothing about the
-      board.
+      Stages Khalili and Gharabaghi's k^2 - 5 release from its packet, holding the
+      pinned-only tight_tile/cov.tar.xz to its digest and leaving the retained files'
+      custody to devtools.acquire_source --check (OR-16), builds zmx2 e2bb84e9 by
+      devtools.replay_evand_zmx2 and a copy with the source's one-line print-all patch, runs
+      the source's verify.sh, zmx2 columns, root 9632 (zmx2 dump, qx2_zm.py and
+      check_9632.py), controls and tight-tile jobs under receipts, and compares each with
+      the source's record; it decides nothing about the board.
     source: [packing/devtools/replay_k2m5_family.py]
 
   - id: V-audit-evand-mixed-covers
