@@ -797,7 +797,20 @@ def test_the_firefox_and_webkit_system_packages_are_cached_and_installed_the_sam
     for name in ("font-loading", "browser-geometry"):
         steps = jobs[name]["steps"]
         image = next(step for step in steps if step.get("id") == "image")
-        assert image["run"] == 'echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"'
+        assert image["run"].splitlines() == [
+            'echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"',
+            'echo "os=${ImageOS}" >> "$GITHUB_OUTPUT"',
+        ]
+        # Playwright's Firefox and WebKit builds belong to an Ubuntu release, so a browser
+        # restored from another release's cache fails at launch (PR #974, 14 November 2026).
+        browser = next(
+            step for step in steps if step.get("name") == "Cache the Playwright browser"
+        )
+        assert browser["with"]["key"] == (
+            "playwright-${{ runner.os }}-${{ steps.image.outputs.os }}-${{ matrix.browser }}-"
+            "${{ hashFiles('packing/uv.lock') }}"
+        )
+        assert "restore-keys" not in browser["with"]
         cache = next(
             step for step in steps if step.get("name") == "Cache the browser's system packages"
         )
@@ -813,7 +826,12 @@ def test_the_firefox_and_webkit_system_packages_are_cached_and_installed_the_sam
         playwright = "uv run --frozen --group dev python -m playwright"
         assert f"{playwright} install --with-deps ${{{{ matrix.browser }}}}" in lines
         assert any('Dir::Cache::Archives \\"$HOME/apt-archives/\\"' in line for line in lines)
-        assert steps.index(image) < steps.index(cache) < steps.index(install)
+        assert (
+            steps.index(image)
+            < steps.index(browser)
+            < steps.index(cache)
+            < steps.index(install)
+        )
 
 
 def test_live_verification_waits_for_the_exact_deployed_revision() -> None:
