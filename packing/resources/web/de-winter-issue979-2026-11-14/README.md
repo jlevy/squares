@@ -164,6 +164,18 @@ method and its questions for the author.
 Both rows are verified from the replay, E-de-winter-979-exact-feasibility, and the
 review’s clean-room run, E-de-winter-979-review-exact-feasibility.
 
+The author answered F13 and F14, and the review’s request for Witness/v2 files or a named
+box here (F6), on 14 November 2026 in `66849f2`; the
+[s297 packet](../de-winter-s297-upper-bound-2026-11-14/README.md#the-authors-answers)
+gives the answers. The folder’s README now gives the corner square’s exact direction and
+says that the 409 row places its squares differently from T-174 + 3, so his 409 shares
+only the idea of extending a packing of 297 squares. The commit adds `n332_witness.yaml`
+and `n409_witness.yaml`, names the box in the `format` line of both JSON files and makes
+both checkers raise. Compared as exact rationals against this packet’s pin, every square
+and side of both JSON files is unchanged, and each new file equals its JSON value for
+value, which `packing-witness inspect` reads. Neither row changes, and this packet keeps
+its pin; the new files are not retained, since they add no bound, certificate or method.
+
 ## What Is Not Established
 
 - **Optimality** of any kind at either count.

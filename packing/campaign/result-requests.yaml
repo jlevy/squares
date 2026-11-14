@@ -26484,6 +26484,21 @@ issues:
         status: confirmed
       - result: negative-searches
       beads: [think-3trq, think-ot5c, think-ikku, think-vv1q]
+    - url: https://github.com/jlevy/squares/issues/804#issuecomment-6880172387
+      date: '2026-11-14'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: exact-sides-new
+        id: T-244
+      - result: configurations-172-263
+        id: T-244
+      - result: side-297
+        id: T-247
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       The 88, 126 and 199 sides have been answered as values T-193 holds. The author's
       configurations at 172 and 263 are decided exactly (think-4rzl), and T-244 is validated, or
@@ -26574,6 +26589,28 @@ issues:
       main gave the issue closeable with a final comment, and it was closed as completed at
       03:43:26Z. It asks no question. The deployed pages were not fetched from the session
       host, whose proxy refuses squaremath.org; verify-deployment checked them.
+
+      The follow-up of 15:56:07Z on 14 November 2026 (issuecomment-6880172387), posted by
+      jlevy after #981 merged as 6865af7d6 at 15:55:33Z and recorded in lane L158, was owed
+      because the final reply stated T-247 pending adoption and the case at 297 has since
+      adopted another packing: #980, merged as 3605269b8 at 15:03:42Z on 14 November, made
+      Joost de Winter's T-299 (#977) the house there. It states T-247, the exact side of
+      T-174's packing at 297 (the degree-21 root, 17.7404172875438018…), unchanged at V3/C3,
+      confirmed and still that packing's exact side, and its position superseded: T-299 is a
+      new arrangement 9.617e-4 below T-174's side, so T-174's packing, and with it T-247, is
+      no longer the best the record holds at 297. T-174 and T-299 are named as context, not
+      as this issue's results, and neither is recorded under reported (#900). It says that
+      nothing else in the earlier replies changes and that T-244 at 172 and 263 stands as it
+      was; that names T-244 without stating a rung, status or position, so T-244 is recorded
+      under its two results with no field and the final reply's statement of it stands. It
+      names no evidence id and no bead, and says the issue stays closed. It is recorded as a
+      follow-up, as #928's of 11 November is, and names no reply in `corrects`: a moved
+      position is a field the register shows, which `reported` records, while `outdated` is
+      kept for statements gone out of date for a reason the register cannot show, and the
+      final reply carries none. check_requests --draft 804 lists the move under its heading
+      "Corrections to earlier replies", which it uses for every moved field; that heading
+      does not make the reply a correction. read_through stays at the author's comment of 31
+      October, since replies are not read through.
   - number: 806
     title: 's(182) ≤ 13.970916436215: registration request'
     author: evand
@@ -30334,6 +30371,16 @@ issues:
       - result: n199-core-resolved
         id: E-de-winter-939-certificate-report
       beads: [think-ruu2]
+    - url: https://github.com/jlevy/squares/issues/939#issuecomment-6880172854
+      date: '2026-11-14'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n199-core-resolved
+        id: T-285
+        verification: V0
+        confirmation: C1
+        status: reviewed
     blocked:
       type: owner-decision
       reason: >-
@@ -30420,6 +30467,32 @@ issues:
       packing-witness inspect passes both files' schema and refuses both on the loader's rule
       that a verified claim needs a replayable certificate record, as at 57de046 on #958. T-285
       attributes the 734 sentence to n199/README.md at the pin, where it still stands.
+
+      The follow-up of 15:56:09Z on 14 November 2026 (issuecomment-6880172854), posted by
+      jlevy after #981 merged as 6865af7d6 at 15:55:33Z and recorded in lane L158,
+      acknowledges the author's answers, which #981 read into the record, so read_through
+      stays at his comment. It was edited at 15:56:24Z; the edit history is not readable
+      from this session, whose GraphQL requests are refused, and the text recorded is the
+      edited one. It says that his answers on #946 cover this issue too and are in the record
+      with his commit 6760360; on question 6, that the record's packet for this issue pins
+      702c7af, the commit the issue names, and that the files of n199/ are byte-identical at
+      c4e65d0b, so both commits name the same certificate, the pin to be settled when the
+      record next changes here. This change sets no pin, and no ask is recorded for it, the
+      question having been informational. It states T-285 at V0/C1, reviewed, held with
+      T-286 for the owner's decision on gains about the size of a predecessor's padding
+      margin (RV-3), and that the issue stays open until then. It states no position, so the
+      import reply's stands. T-286 is #946's result, named as context, and is not recorded
+      under reported (#900); it names no evidence id and no bead. As #958's follow-up of 12
+      November, which acknowledged its author's answers, it is recorded as a follow-up, with
+      no reply in `corrects`, since no earlier reply here carries an `outdated` statement.
+      The issue stays open, blocked:owner-decision.
+
+      The author's commit 66849f2 (15:33:56Z on 14 November), read in
+      campaign/intake-watch.yaml, changes n199_witness.yaml and n172_witness.yaml only in
+      their claim block's coordinate_provenance, from verified to reported, and their
+      SHA256SUMS lines; every square and side equals those at the s199 (702c7af) and s172
+      (c4e65d0) packets' pins, compared as exact rationals, and packing-witness inspect now
+      reads both files, which it refused at 6760360. T-285 and T-286 stand as recorded.
   - number: 946
     title: 's(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request'
     author: JoostdeWinter
@@ -30481,6 +30554,16 @@ issues:
       - result: n172-exact-local-optimum
         id: E-de-winter-946-certificate-report
       beads: [think-ruu2]
+    - url: https://github.com/jlevy/squares/issues/946#issuecomment-6880172616
+      date: '2026-11-14'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n172-exact-local-optimum
+        id: T-286
+        verification: V0
+        confirmation: C1
+        status: reviewed
     blocked:
       type: owner-decision
       reason: >-
@@ -30574,6 +30657,25 @@ issues:
       bound as the side and the root as the asserted optimum, and the issue stays open,
       blocked:owner-decision. His commit 6760360, which his comment on #939 names, is
       recorded in that entry.
+
+      The follow-up of 15:56:08Z on 14 November 2026 (issuecomment-6880172616), posted by
+      jlevy after #981 merged as 6865af7d6 at 15:55:33Z and recorded in lane L158,
+      acknowledges the author's answers, which #981 read into the record, so read_through
+      stays at his comment. It was edited at 15:56:24Z; the edit history is not readable
+      from this session, whose GraphQL requests are refused, and the text recorded is the
+      edited one. It thanks him for the answers to all six questions, says they are in this
+      entry and in the s199 packet's README with his commit 6760360, the Witness/v2
+      envelopes, and that the commit changes no square or side, so T-286 and T-285 stand as
+      recorded. It states T-286 at V0/C1, reviewed; that, as the import reply explained, its
+      gain is 1.04 times the padding in T-282's own contraction margin, about the size of
+      that padding; that whether a gain of that size is a new result is still with the owner
+      (RV-3); and that the issue stays open until that is decided, with a reply then. It
+      states no position, so the import reply's stands. T-285, #939's result, and T-282 are
+      named as context and are not recorded under reported (#900); it names no evidence id
+      and no bead. It is recorded as a follow-up, as on #939, with no reply in `corrects`.
+      The issue stays open, blocked:owner-decision. The author's commit 66849f2, which
+      changes the witness file's coordinate_provenance and no square or side, is recorded in
+      #939's entry.
   - number: 943
     title: 's(156) ≤ 12.977053087498: improved packing (registration request)'
     author: kenaznia-doga
@@ -33677,6 +33779,34 @@ issues:
       placed otherwise, is built in the same way from T-174 (F14). It names no bead. It says
       that nothing the author asked for is still queued, so the issue is closed with it, and
       that answers are welcome at any time. The issue was closed as completed at 15:18:19Z.
+
+      Read on 14 November 2026 in lane L158: Joost de Winter answered five of the reply's six
+      questions by commit, not by comment, in 66849f2 (15:33:56Z, "Answer the review of the
+      n = 297, 332 and 409 packings"), read in campaign/intake-watch.yaml; no comment of his
+      has followed on this issue. 1 (F8): n297_witness.yaml now states
+      coordinate_provenance: reported, and packing-witness inspect reads it, where it refuses
+      the file at the pin, 7b4701f. 3 (F13): above324_from_n297/README.md now calls the
+      corner square at 409 tilted by about 45 degrees, 44.999964, and gives its edge
+      direction, (803761/1136689, 803760/1136689), which is square 404's in n409_exact.json
+      exactly. 4 (F15): n297/verify_exact.py and check_area.py, and their copies in
+      above324_from_n297/, stop through a require function that raises SystemExit instead of
+      deciding by assert, so python -O no longer removes the checks. 5 (F6): Witness/v2 files
+      for 332 and 409 are added, and the format line of both JSON files names the box, [0,
+      side] x [0, side] with the origin at the lower left corner. 6 (F14): the README now
+      says that the value recorded at 332 was T-174 plus the same 35 squares, which is what
+      the review found for 332's side; that the value recorded at 409 (20.740417290708,
+      Kirill Tymchishin) lies 3.16e-9 above T-174 + 3 and places its squares differently,
+      so his 409 shares only the idea of extending a packing of 297 squares; and, in its
+      lineage, that the added squares at 332 are those of the row it supersedes and the
+      corner arrangement at 409 is his own. Question 2, whether the left and bottom walls'
+      clearance of 1.5e-60 was deliberate, has no answer. The commit says all squares and
+      sides are unchanged, and compared as exact rationals against the s297 packet's pin
+      they are: every square and the side of n297_exact.json and of n297_witness.yaml, 1,190
+      scalars each, and the twin still equals the JSON. The questions were informational and
+      no awaiting_author was recorded, so nothing is cleared. The answers change no result:
+      T-299 stays at V3/C3, confirmed and current, and the packet keeps its pin and records
+      the answers in its README. read_through stays at the final reply, since the answers
+      came by commit.
   - number: 979
     title: 'Lowered upper bounds for n = 332 and n = 409: registration request'
     author: JoostdeWinter
@@ -33789,3 +33919,21 @@ issues:
       bead, says that the other questions are on #977 and that nothing the author asked for is
       still queued, so the issue is closed with it. The issue was closed as completed at
       15:18:21Z.
+
+      Read on 14 November 2026 in lane L158: the author answered both of the reply's notes,
+      and #977's question 5, by commit, in 66849f2 (15:33:56Z), read in
+      campaign/intake-watch.yaml; #977's entry records the answers in full, and no comment of
+      his has followed on this issue. above324_from_n297/README.md now says that the value
+      recorded at 409 lies 3.16e-9 above T-174 + 3 and places its squares differently, so his
+      409 shares only the idea of extending a packing of 297 squares, and that its corner
+      arrangement is his own (F14); it gives the corner square's exact direction,
+      (803761/1136689, 803760/1136689), at about 45 degrees, 44.999964 (F13); and the commit
+      adds n332_witness.yaml and n409_witness.yaml as Witness/v2 files and names the box in
+      both JSON files' format line (F6). Compared as exact rationals against the issue 979
+      packet's pin, c70defa, n332_exact.json and n409_exact.json change only that line, every
+      square and side unchanged (1,330 and 1,638 scalars); each new Witness/v2 file equals
+      its JSON scalar for scalar, its ids 1 to n in order, and packing-witness inspect reads
+      both; squares 1 to 297 are still the 297 certificate translated by (1, 1) and (3, 3),
+      and the sides that side plus 1 and plus 3. Neither row changes, the packet keeps its
+      pin, and the new files are not retained, since they add no bound, certificate or
+      method.
