@@ -97,6 +97,63 @@ done
   pairs from $9.99999999999999 \times 10^{-61}$ to $1.2071 \times 10^{-60}$, then
   $2.103 \times 10^{-7}$.
 
+## After the Freeze
+
+Written and run after the findings were frozen, none of them a decider of the
+certificates:
+
+| Program | What it measures | Reads | Writes |
+| --- | --- | --- | --- |
+| `l153_sides.py` | the claims’ arithmetic: prints, gains on T-174 and the rows at 332 and 409, the author’s close-pair counts, the 250-digit solution’s side, the Kaggle value | the three certificates, `n-297.md`, the house witness, `source-coverage.yaml`, the two row certificates, the solution file, the issues | `out/sides.json` |
+| `l153_lineage.py` | the issue’s counts against T-174: blocks, band, leans, lean direction along the band | the 297 certificate, the house witness | `out/lineage-n297.json` |
+| `l153_construct.py` | the 332 and 409 files against the 297 file, exactly, and the added squares | the three certificates | `out/construct.json` |
+| `l153_closedform.py` | the 297 side against $s(m) + k$ for every registry value below 297 and $k \le 16$ | the 297 certificate, `packing/frontier/n-NNN.md` | `out/closedform.json` |
+| `l153_custody.py` | read-only Git plumbing on the clone and its two pin worktrees, the issues’ times, the licence | the clone, `programs/issue-977-979.json` | `out/custody.json` |
+| `l153_digests.py` | every frozen digest against the kept bytes, and the digest of every file here | this directory | `out/program-digests.json` |
+
+Three of this repository’s devtools were run read-only, writing only here, with
+`python -B` from `packing/`. From `packing/` of a checkout of `main` at `da5091505`,
+with `A`, `C`, `R` as above and `S` the clone:
+
+```bash
+DT="nice -n 19 uv run --frozen --all-extras --group dev python -B -m"
+N297="#977=center-direction-json:$A/n297/n297_exact.json"
+H297="T-174=witness-center-basis:witnesses/known-best/n-297.yaml"
+R332=resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n332.cert
+R409=resources/web/couzo-issue763-2026-10-23/source/certificates/best/n409.cert
+$DT devtools.contraction_margin --n 297 "$H297" --against "$N297" --out $R/out/contraction-t174.json
+$DT devtools.contraction_margin --n 297 "$N297" --out $R/out/contraction-new.json
+$DT devtools.contraction_margin --n 332 "row-332=evand-cert:$R332" \
+  --against "#979=center-direction-json:$J332" --out $R/out/contraction-row332.json
+$DT devtools.contraction_margin --n 409 "row-409=evand-cert:$R409" \
+  --against "#979=center-direction-json:$J409" --out $R/out/contraction-row409.json
+$DT devtools.measure_identity --n 297 "$N297" "$H297" --out $R/out/identity-n297.json
+$DT devtools.measure_identity --n 332 "#979=center-direction-json:$J332" \
+  "row-332=evand-cert:$R332" --out $R/out/identity-n332.json
+$DT devtools.measure_identity --n 409 "#979=center-direction-json:$J409" \
+  "row-409=evand-cert:$R409" --out $R/out/identity-n409.json
+$PY $R/programs/l153_sides.py $A/n297/n297_exact.json $J332 $J409 frontier/n-297.md \
+  witnesses/known-best/n-297.yaml frontier/source-coverage.yaml $R332 $R409 \
+  $A/n297/n297_solution_250_digits.txt $R/programs/issue-977-979.json $R/out/sides.json
+$PY $R/programs/l153_lineage.py $A/n297/n297_exact.json witnesses/known-best/n-297.yaml \
+  $R/out/lineage-n297.json
+$PY $R/programs/l153_construct.py $A/n297/n297_exact.json $J332 $J409 $R/out/construct.json
+$PY $R/programs/l153_closedform.py frontier $R/out/closedform.json 297=$A/n297/n297_exact.json
+$PY $R/programs/l153_custody.py $S $A $C $R/programs/issue-977-979.json $R/out/custody.json
+$PY $R/programs/l153_digests.py $R $R/out/program-digests.json
+```
+
+They printed: T-174’s contraction margin 0 (squares 274 and 292 touch); the 297
+certificate’s first contact at $1 - \lambda^* = 10^{-60}$ (232, 237), a side margin of
+$1.824 \times 10^{-59}$; the 332 and 409 rows’ margins $1.874 \times 10^{-19}$ and
+$1.546 \times 10^{-9}$; every gain `within_margin: false`. No symmetry pairs the 297
+certificate with T-174 one to one by nearest centres; 55 squares move beyond a tenth
+under the best assignment.
+Squares 1 to 297 of the 332 and 409 files are the 297 file translated by $(1, 1)$ and
+$(3, 3)$ exactly, and the sides are exactly $S_{297} + 1$ and $S_{297} + 3$. No
+$s(m) + k$ lies within $10^{-9}$ of the 297 side.
+Custody holds, and `l153_digests.py` printed `ALL_FROZEN_DIGESTS_HOLD`.
+
 ## Frozen Files
 
 | File | What it fixes | When |
