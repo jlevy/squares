@@ -1,0 +1,7 @@
+# Lane L159 controls plan, stated at 2026-11-14T19:15:44Z, before l159_controls.py existed (ls programs/: controls-plan.json issue-983.json l159_check.py l159_clip.py l159_geom.py l159_make_plan.py l159_plan_facts.py l159_reader.py l159_sat.py l159_selftest.py )
+185e87922867f541f423a326088e900f6761a69bc1590baa13c5582815bc8476  programs/controls-plan.json
+afa533b0be63fac743214e3b983106eaf8e4a6c8d3ef0bf9780a350467073a99  out/plan-facts-n228.json
+7d17f80bb91aef69ff054d041047cb210dc30157963efe0233d3c0fe7f786213  out/check-n228.json
+2df1744e4022f2f67989e88d562876652c3e67cd3afb882132d9e428c9280527  programs/l159_plan_facts.py
+9c0116eee9d90aeb887964f3dc55eb507c4a0a6fba3f588c1c7797cc2f64d7d1  programs/l159_make_plan.py
+9bc47f522de8a573de4291f97d13f504b2a3adf087d5c1111574191c30b47975  programs/issue-983.json
