@@ -1,0 +1,8 @@
+file: runs/2026-11-11_fable-5.2/evidence/registration/n147.strict.json
+n = 147; side = 12.651043556587696471904370629016… (exact fraction in the file)
+pairs: 10731 in all; 328 with centres at squared distance < 2 tested on the four edge normals
+smallest pair margin: 3.003e-10 (exact: 1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200)
+smallest wall margin: 1.000e-15 (exact: 1/1000000000000000)
+STRICT VALID
+seconds: 0.1
+exported: runs/2026-11-11_fable-5.2/evidence/registration/n147.strict.cert

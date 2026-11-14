@@ -1,0 +1,67 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-14T21:07Z",
+  "git_scope": "A full clone of RobertoOno/squares-in-square, fetched at 21:07Z on 14 November 2026 for the intake of jlevy/squares#984 and #985. git ls-remote at 21:13Z gives main at b5636fd (committed 2026-11-14T20:26:58Z), the merge of the run branch claude/square-packing-improvements-18eadd at 956f868 (20:11:53Z, 'Record the two registration requests for n=147 and n=228', the author's message) into the earlier main, 680ee04 (tag harness-v1), and the packet pins it. Both issues name fce076f (20:10:31Z), 956f868's parent, 54 and 55 seconds before them; 956f868 changes only the run's FOLLOWUP.md, which records the posting, and the two issue texts as posted, and every certificate, text copy and check output retained here has the same blob at fce076f and at the pin. The certificate n228_S59604312.json was first committed in be713b7 (2026-11-11T22:15:40Z), and FOLLOWUP.md says the branch was pushed to the public repository at fce076f before the issues were posted; GitHub's activity log was not read. The scope is the repository's root licence, README, frozen verifier and its digest file, the run's report, run record and follow-up, its leaderboard and candidate notes, the two checkers the issue names, the search README and attack.py, the two n = 228 certificates and every n = 228 file under evidence/registration. The SHA-256 the issue states for n228_S59604312.json, n228.cert and n228.strict.cert match the files. The raster cand228_refined.png is pinned by digest only. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "ono-issue984-2026-11-14",
+      "source_url": "https://github.com/RobertoOno/squares-in-square",
+      "source_ref": "main",
+      "source_commit": "b5636fd6694d2cc7aa5811ae33f441268b81b714",
+      "committed_utc": "2026-11-14T20:26:58Z",
+      "git_tree": "886c4ba7e7243ea24f58778281723fd342e061d6",
+      "archived_path": "packing/resources/web/ono-issue984-2026-11-14/source",
+      "subtree_manifest": "packing/resources/web/ono-issue984-2026-11-14/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "VERIFIER.sha256",
+        "runs/2026-11-11_fable-5.2/FOLLOWUP.md",
+        "runs/2026-11-11_fable-5.2/REPORT.md",
+        "runs/2026-11-11_fable-5.2/RUN.md",
+        "runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json",
+        "runs/2026-11-11_fable-5.2/certificates/n228_S59708491.json",
+        "runs/2026-11-11_fable-5.2/evidence/cand228_refined.png",
+        "runs/2026-11-11_fable-5.2/evidence/candidates_notes.md",
+        "runs/2026-11-11_fable-5.2/evidence/kaggle_per_puzzle_check.md",
+        "runs/2026-11-11_fable-5.2/evidence/registration/frozen_verifier_n228.strict.txt",
+        "runs/2026-11-11_fable-5.2/evidence/registration/frozen_verifier_n228.txt",
+        "runs/2026-11-11_fable-5.2/evidence/registration/indep_check_n228.txt",
+        "runs/2026-11-11_fable-5.2/evidence/registration/issue_n228.md",
+        "runs/2026-11-11_fable-5.2/evidence/registration/n228.cert",
+        "runs/2026-11-11_fable-5.2/evidence/registration/n228.strict.cert",
+        "runs/2026-11-11_fable-5.2/evidence/registration/n228.strict.json",
+        "runs/2026-11-11_fable-5.2/evidence/registration/strict_check_n228.strict.txt",
+        "runs/2026-11-11_fable-5.2/evidence/registration/strict_check_n228.txt",
+        "runs/2026-11-11_fable-5.2/search/README.md",
+        "runs/2026-11-11_fable-5.2/search/attack.py",
+        "runs/2026-11-11_fable-5.2/search/fu_strict_check.py",
+        "runs/2026-11-11_fable-5.2/search/indep_check.py",
+        "verify.py"
+      ],
+      "subtree_file_count": 25,
+      "subtree_total_bytes": 589477,
+      "retained_file_count": 24,
+      "retained_total_bytes": 461296,
+      "compressed": [
+        "source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json.gz",
+        "source/runs/2026-11-11_fable-5.2/certificates/n228_S59708491.json.gz",
+        "source/runs/2026-11-11_fable-5.2/evidence/registration/n228.strict.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "runs/2026-11-11_fable-5.2/evidence/cand228_refined.png",
+          "bytes": 128181,
+          "sha256": "932e679e9407d5e3500acc33b370aa913e2df75b5762551d7586b9f7faa0f232",
+          "reason": "A raster picture of the packing for inspection, which decides nothing; pinned by digest only."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Roberto Ono, as LICENSE at the pin states (1,068 bytes), for the repository's files: the harness, the frozen verifier, the run's code, report, certificates and evidence. The repository states no other licence for its data; the certificates and their text copies are retained under the same notice, which the packet keeps beside them. The issue says the packing was found, certified and checked by an AI coding agent (Claude, by Anthropic) working in the repository's harness, directed by a person who set the harness up and read the request before it was posted.",
+      "claims": [
+        "n228_S59604312.json is an exact rational certificate of 228 unit squares, each its centre (cx, cy) in [0, S]^2 and t = tan(theta/2), in a square of rational side S whose 12-place ceiling #984 prints as the bound, 15.596043120921; the issue also prints the exact side to 30 places, 15.596043120920791646977220704185..., and states that it is 0.008558354808882 below the registry's 15.60460147572967429 (T-174, Francisco Couzo, improved by PingYou Ltd), read at main fa980f8e. evidence/registration/n228.cert is the same packing as text (n S, then x y t per square). n228.strict.cert and n228.strict.json are the packing moved by (1e-15, 1e-15) in a square of side S + 2e-15, for checkers that need positive wall margins. The issue says the packing touches the four walls (wall margin exactly 0). Feasibility only: no optimality, KKT or rigidity claim.",
+        "The issue reports three checks, run by the author: the repository's frozen verifier verify.py (exact Fraction, separating axes, all 25878 pairs) VALID; search/indep_check.py (exact rational polygon clipping, 525 close pairs) PASSED; and search/fu_strict_check.py on the strict copy (four edge normals, positive wall margins) STRICT VALID, least pair margin 2.389e-10, least wall margin 1e-15. It says the first and third share the separating-axis method and the half-angle parametrisation, that the second and third were written by the agent that found the packing and the first fixed before the search, and that none is this registry's verifier. Those statements are the author's; no source program ran here.",
+        "The issue discloses first that the packing does not beat the Kaggle per-puzzle leaderboard's side-only entries at 228: 15.596043116631669919627353... (team Nevska, 8 November), 4.289e-09 below this side, and 15.596043116646272293906688... (team square1000, 29 October), 4.275e-09 below; neither supplies a packing. It says the open request #983 (15.600801734812, Doga Ozden) lies 0.004758613890 above this packing and that the two arrangements were not compared. Its lineage: Francisco Couzo's n = 404 packing as this registry retains it (couzo-issue763-2026-10-23, n404.cert), mirrored, every square with 13.8 <= x + y < 23.8 deleted and the rest moved by (-5, -5), removing five periods of the band; a penalty step and an exact-constraint sequential-LP polish give 15.597084912 (n228_S59708491.json, also certified), and basin hopping that re-seats cells at the band's ends (search/attack.py) gives the claimed side. It asks that Couzo's n = 404 packing be credited as the start and Roberto Ono as the credit name, and says the packing was found, certified and checked by an AI coding agent (Claude, by Anthropic) directed by a person."
+      ]
+    }
+  ]
+}

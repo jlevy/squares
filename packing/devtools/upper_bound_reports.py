@@ -1020,6 +1020,35 @@ def centred_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
     return _certificate(n, side, rows)
 
 
+def ono_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Roberto Ono's harness JSON (#984, #985): ``side`` and ``{cx, cy, t}`` squares.
+
+    Centres lie in [0, S]^2 and ``t = tan(theta/2)``, as in Evan Daniel's format, whose text
+    copy the source keeps beside each certificate. ``side_decimal_info_only`` is the
+    source's display, read and not believed; the copies the source moves off the walls for
+    strict checkers carry no such field.
+    """
+    _no_options(options, "ono-json")
+    value = _json(raw)
+    squares = _squares(value, n)
+    required = {"n", "side", "squares"}
+    _require(
+        required <= set(value) <= required | {"side_decimal_info_only"}
+        and type(value.get("side_decimal_info_only", "")) is str,
+        f"n={n}: not a harness certificate with only the known fields",
+    )
+    side = _literal(value["side"], f"n={n} side")
+    rows: list[tuple[Fraction, Fraction, Fraction]] = []
+    for index, square in enumerate(squares, start=1):
+        _require(
+            type(square) is dict and set(square) == {"cx", "cy", "t"},
+            f"n={n} square {index}: exactly cx, cy and t",
+        )
+        x, y, t = (_literal(square[key], f"n={n} square {index}") for key in ("cx", "cy", "t"))
+        rows.append((x, y, t))
+    return _certificate(n, side, rows)
+
+
 def sqcert(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
     """Daniil Ostashev's ``.sqcert`` (#501): ``n N``, ``s S``, then ``x y t`` per square.
 
@@ -1268,6 +1297,7 @@ ADAPTERS: dict[str, Adapter] = {
     "center-basis-json": center_basis_json,
     "center-direction-json": center_direction_json,
     "centred-json": centred_json,
+    "ono-json": ono_json,
     "decimal-dilation": decimal_dilation,
     "sqcert": sqcert,
     "calle-txt": calle_txt,
@@ -1766,6 +1796,11 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # Lane L160 of 14 November (think-14i2): Doğa Özden's issue 983 at 228, a column-band
     # design of his own, below T-174's packing; one repository and one packet.
     "[Özden s228 upper bound 2026-11-14]": _import("ozden-s228-upper-bound-2026-11-14"),
+    # Lane L164 of 14 November (think-17ex): Roberto Ono's issues 984 at 228, five band
+    # periods cut from Francisco Couzo's 404, and 985 at 147, one period cut from Evan Daniel's
+    # 229; one repository, squares-in-square b5636fd, and a packet for each issue.
+    "[Ono issue 984 2026-11-14]": _import("ono-issue984-2026-11-14"),
+    "[Ono issue 985 2026-11-14]": _import("ono-issue985-2026-11-14"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
