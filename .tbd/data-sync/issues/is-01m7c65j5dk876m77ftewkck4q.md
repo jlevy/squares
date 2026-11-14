@@ -5,14 +5,14 @@ title: Review zmx2's area-density and first-order lemmas (Lemmas 1-3, K, K(d), U
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m7bwabjnw739a8whwmhq1sre
 created_at: 2026-11-14T04:48:34.989Z
-updated_at: 2026-11-14T04:48:34.989Z
+updated_at: 2026-11-14T06:54:53.837Z
 ---
 Finding F1 of the stage 4 review of #973 (docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md, lane L144, think-h10k), held for the owner as a priced option: the record has never reviewed zmx2's area-density lemmas or its first-order lemmas, and T-298's 12,024 general-position roots of Valid11 rest on them.
 
@@ -25,3 +25,8 @@ Finding F1 of the stage 4 review of #973 (docs/project/reviews/review-2026-11-14
 - Depends on: nothing; independent of think-0h7r's replay, which reruns the producer's code and would not close F1.
 - Done when: a mapped review document reads the lemmas against zmx2.rs, with its controls retained and V-evand-zmx2's note updated; T-298's next_rung and the Valid11 report's external_review say F1 is closed or what remains.
 - Machine note: the controls need zmx2 built from retained bytes (devtools.replay_evand_zmx2 build --checker e2bb84e9) and small covers; shares the host with anything.
+
+## Notes
+
+2026-11-14 06:55Z coordinator: #973 is answered and closed (T-298 merged in #974). This lemma review (review F1) is held for the owner's decision: one strongest-tier review lane, under 1 CPU-hour.
+blocked_on: the owner's decision
