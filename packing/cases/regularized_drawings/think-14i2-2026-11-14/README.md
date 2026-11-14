@@ -2,8 +2,9 @@
 
 These are the strong generators’ runs on the witness that the adoption of Doğa Özden’s
 issue 983 wrote at 228, under
-[the house rule](../../../campaign/result-import.md#the-house-rule), on the accepted verdict of the stage 4 review of 14 November 2026, read from its frozen
-findings at about 19:25Z, before its post-freeze checks were done
+[the house rule](../../../campaign/result-import.md#the-house-rule), on the accepted
+verdict of the stage 4 review of 14 November 2026, read from its frozen findings at
+about 19:25Z, before its post-freeze checks were done
 ([review-2026-11-14-ozden-983.md](../../../../docs/project/reviews/review-2026-11-14-ozden-983.md)):
 
 | n | House | Replaces | Adopted |
@@ -63,9 +64,9 @@ light, uneven and near-axis squares, angle classes and hues, then full shared si
   review: 32 per-square counts fell while no total did.
   Its certified KKT solve lies 3.013 × 10⁻¹² below the side, 1.02 of the certificate’s
   own contraction margin (2.949 × 10⁻¹²), so its solved view is held at row 3 as a
-  register candidate and not admitted; registering a solved side about the certificate’s own
-  padding below it, here 6.4 × 10⁻¹⁴ beyond the contracted side, is RV-3’s question (think-ruu2, think-ikku), as at 156, 172, 179, 180, 199,
-  268, 269 and 270.
+  register candidate and not admitted; registering a solved side about the certificate’s
+  own padding below it, here 6.4 × 10⁻¹⁴ beyond the contracted side, is RV-3’s question
+  (think-ruu2, think-ikku), as at 156, 172, 179, 180, 199, 268, 269 and 270.
 - The record’s comparison with the base branch: T-174’s witness was drawn as its house
   drawing (665 full shared sides, no uneven or near-axis square, decided no better); the
   new witness draws grid-slack’s view (4 uneven, no near-axis square, 672 full shared
