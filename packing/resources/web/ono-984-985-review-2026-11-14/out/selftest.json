@@ -1,0 +1,16 @@
+{
+ "lane": "L163",
+ "program": "l163_selftest.py",
+ "cases": 13326,
+ "failed": 0,
+ "failed_names": [],
+ "broken_method_a_failures": 815,
+ "broken_method_b_failures": 1770,
+ "verdict": "PASSED",
+ "cpu_seconds": 3.4,
+ "versions": {
+  "python": "3.14.7",
+  "gmpy2": "2.3.1",
+  "gmp": "GMP 6.3.0"
+ }
+}

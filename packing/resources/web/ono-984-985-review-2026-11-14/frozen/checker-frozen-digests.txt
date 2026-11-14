@@ -1,0 +1,22 @@
+# Lane L163 checker, frozen at 2026-11-14T21:07:22Z, before the controls plan, the findings, the author's README.md, REPORT.md, FOLLOWUP.md, RUN.md, verify.py, VERIFIER.sha256 contents, certify.py, search/ (indep_check.py, fu_strict_check.py and the rest), evidence outputs and notes, any packing-witness code, the register entries at 228 or 147, or import lane work (PR #986's branch included) was read.
+# source certificates (clone of RobertoOno/squares-in-square at fce076f2bf459a25be3645d899e8950b93ed977c, under runs/2026-11-11_fable-5.2/):
+98987101c5a14e84cc1bdcb7497cc139be6ef71a17f7e7ec9ce3f89c80274944  fce076f:certificates/n228_S59604312.json
+be120af6c2fc1e7b6a56deb8a3cee31e2abc4606be98ecfcfebcc889ab51e3f4  fce076f:evidence/registration/n228.cert
+e243de776d011ab24f6221df42bbf6fc55de33c9c7612b92a2008777cff48569  fce076f:evidence/registration/n228.strict.cert
+f6f4457cb8d767b70e8b3599ab424033203d3d464f61b7f2a7176fc8fb14e7e7  fce076f:evidence/registration/n228.strict.json
+fce8c8c20bf3812173c76c6a2c1295541a72b23a9c948bdf380cc905d2038135  fce076f:certificates/n147_S65104355.json
+0e09260712370f6561df1e9c0c835adc04f7d9f49ad40ad0e603c6c6a8cc11af  fce076f:evidence/registration/n147.cert
+cfe0079654a433e4cb2739405f9d523c5557f7182618bc8fb33b656999a7a6ce  fce076f:evidence/registration/n147.strict.cert
+f054b39d539cceb6404211ab0c448df15beda2b2c6d6d4293080cc81055bbde1  fce076f:evidence/registration/n147.strict.json
+# checker programs:
+aff21943f0f13ff06dfc07a4089ee4bc0c201e6463c2efa173c0315cb4e3136d  l163_reader.py
+b64c761137003e26b209a6a50238288b98fd8195bfb5fd9dc06641c7028cd89b  l163_sat.py
+c33ac11579f64bd6075888e1823350c90f2798d477759958426c5c42595b824f  l163_clip.py
+5a7a7f277a0f17ef1d60bd66bdcbc6357675964c11f8fd82634b4d2add4f2d29  l163_decide.py
+8c55a1b9ff1fb0eac074429fe6ee1284de459a4fd3ad5963123243ccdffa1e0a  l163_check.py
+5e670dcda859321fe2e70127ea336e00a28b1ca87066eff09841af122e430063  l163_geom.py
+7e2f96d1fbcd349ef01e7c871b23dd061bfdcf9547feaef7354c948256bde09e  l163_selftest.py
+# receipts written by the frozen checker:
+c6b5090c917de8083d02da83b550b1e57b0761ba0bd5d9f2d98495bdc5926e96  out/selftest.json
+e7fd617d4bd2e5d1ebc4a7e17423abd9434e3af04e597b878c8cf5a5642e48e8  out/check-n228.json
+60a11814ef210ba31e589c0f5f041513f3eb8237a4657c86141d992c218e67e7  out/check-n147.json
