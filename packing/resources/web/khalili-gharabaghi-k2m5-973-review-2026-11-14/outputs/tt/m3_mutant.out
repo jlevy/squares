@@ -1,0 +1,1 @@
+{"chart": "C_u", "d0": "5/2", "sign": -1, "yb": "9/2", "face": [["15/4", "-1/4"], ["4", "-1/4"], ["4", "1/4"], ["15/4", "1/4"]], "h0": "1/4000", "ok": 5232, "cells": 20073, "fails": 4805, "worst": 0.0, "fail_reasons": ["bound", "maxcells"], "secs_checker": 2782.4, "failed_cells_face_bbox": [3.75, 4.0, -0.2, 0.25]}

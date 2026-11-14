@@ -1,0 +1,14 @@
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "C_u", "h0": "1/4000", "K": "4", "ok": 192, "cells": 383, "fails": 0, "worst": 0.006198217749235288, "secs": 28}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_t t+1", "h0": "1/4000", "K": "4", "ok": 18, "cells": 35, "fails": 0, "worst": 0.013339454916, "secs": 3}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_t t-1", "h0": "1/4000", "K": "4", "ok": 18, "cells": 35, "fails": 0, "worst": 0.0070321015512, "secs": 3}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_d d+1", "h0": "1/4000", "K": "4", "ok": 14, "cells": 27, "fails": 0, "worst": 0.007278805098, "secs": 2}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_d d-1", "h0": "1/4000", "K": "4", "ok": 14, "cells": 27, "fails": 0, "worst": 0.0259655979595, "secs": 2}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t+1 d+1 a", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.013515127378, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t+1 d+1 b", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.013515127378, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t+1 d-1 a", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0322019202395, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t+1 d-1 b", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0322019202395, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t-1 d+1 a", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.007278805342, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t-1 d+1 b", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.00721760642063, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t-1 d-1 a", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0259655982035, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t-1 d-1 b", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.02590819588429, "secs": 1}
+ALL-OK

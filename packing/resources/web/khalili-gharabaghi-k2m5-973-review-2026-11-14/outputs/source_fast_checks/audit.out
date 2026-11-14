@@ -1,0 +1,8 @@
+cover hashes of the cov/ dumps (same settings: d4, first-order, depth 40, node cap 2e7): ['a53f06f25d54b3df']
+cert0: 2,500 roots VERIFIED; columns 55, roots 12100, cover hash ['a53f06f25d54b3df'], totals ['28909433072241/250000000000']
+roots with uncertified boxes: 76; tight-tile roots dumped: 75; other: [9632]
+ZMX2-AUDIT-OK
+
+real	0m0.027s
+user	0m0.019s
+sys	0m0.008s
