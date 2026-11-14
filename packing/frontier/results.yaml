@@ -46755,7 +46755,7 @@ results:
         A new arrangement at 228 relative to T-174's packing and every other registered packing
         there, 3.80e-03 below T-174, about 200 times the top of the S2/S3 line T-239's rationale
         draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new and continued
-        arrangements are S3: beside T-297's 9.74e-03 and T-288's at 180. The column-band proposal
+        arrangements are S3: beside T-297's 9.74e-03 at 269 and T-288's 1.38e-03 at 180. The column-band proposal
         designer is described and not published, so not S4. No lower bound or optimum. The stage
         4 review of 14 November confirms S3.
       scored: '2026-11-14'
@@ -46855,14 +46855,14 @@ results:
       neither published nor retained, and neither this lane nor the review rebuilt them; the
       lineage beyond the measurements above is the issue's.
 
-      The search's filed hit
-      (hit-n228-114-0.txt) and its metadata are retained, and the review finds its 228 rows
-      equal to the decimal pose's in binary64. The certificate is the decimal pose translated by
-      about -1.03e-13 in each coordinate, each square turned by at most 5e-35 degrees, so the
-      pair margins are the pose's own, 2.020e-13 to 2.101e-13 of the centres' separation on the
-      434 pairs below 1e-12, and the pose's side lies 2.042e-13 above the certificate's, as the
-      issue says. The side is not s(m) + k for any registry value below 228 and integer k up to
-      16 within 1e-9, the nearest s(37) + 9 at 2.18e-3, as the review found.
+      The search's filed hit (hit-n228-114-0.txt) and its metadata are retained, and the review
+      finds its 228 rows equal to the decimal pose's in binary64. The certificate is the
+      decimal pose translated by about -1.03e-13 in each coordinate, each square turned by at
+      most 5e-35 degrees, so the pair margins are the pose's own, 2.020e-13 to 2.101e-13 of the
+      centres' separation on the 434 pairs below 1e-12, and the pose's side lies 2.042e-13
+      above the certificate's, as the issue says. The side is not s(m) + k for any registry
+      value below 228 and integer k up to 16 within 1e-9, the nearest s(37) + 9 at 2.18e-3, as
+      the review found.
 
       The reports under checks/ name the promoted witness W-colband-n228-sol1114-rational from
       W-colband-n228-sol1114, at local paths, where the retained certificate is
@@ -46882,6 +46882,13 @@ results:
       three exact wall contacts and the least pair margin 101/500000000000000 at squares 118 and
       119 and six more pairs, and all 20 of its controls, stated beforehand, came out as stated
       (F2; E-ozden-983-review-exact-feasibility).
+
+      This lane committed its replay, controls and measurements at 19:15Z and registered
+      T-300 at 19:20Z, before it read the review. It read the review's frozen findings
+      (frozen at 19:23Z, verdict accepted) at about 19:25Z and began the adoption on that
+      verdict, its regularization runs from 19:27Z, while the review's post-freeze checks
+      ran; it merged the review's final text (19:41Z) once the coordinator reported it
+      landed, and mapped F4 to F9 from that text.
 
       Read against this lane's receipts after both were done, the review's least pair margin is
       the replay's exactly, and square 63, the one this lane's sharp controls grew at its wall,
@@ -46940,8 +46947,8 @@ results:
       Fraction arithmetic and the separating-axis method.
 
       The first route is the packing-witness verify the author ran on the same file, so on that
-      route the replay is reproduced with the producer's code, and the second shares no verification code with it. Because this
-      repository's packing-witness promote made the exact coordinates, neither route is
+      route the replay is reproduced with the producer's code, and the second shares no
+      verification code with it. Because this repository's packing-witness promote made the exact coordinates, neither route is
       independent of how they were rounded. A replay through sqpack's verifier is the author's
       first check run again; the review's run is independently re-implemented, clean room,
       full coverage, by a Claude agent (F9). No human oversight or optimality is claimed.
@@ -46950,8 +46957,8 @@ results:
       reviewer and a retained human oversight record; one AI review, of 14 November, is
       retained. It is the smallest validated side at 228, and the case adopted it there in the
       pass of 14 November 2026 under the house rule, in place of T-174, with both strong
-      generators' regularization of the new house; T-174, T-128 and T-098 keep their
-      certificates as history. The review's questions for the author hold no rung, and the
+      generators' regularization of the new house; T-174, T-128, T-098, T-092 and T-056 keep
+      their certificates as history. The review's questions for the author hold no rung, and the
       contracted side its F5 measures and the regularizer's KKT side are the owner's RV-3
       question, not registered.
     reviews:

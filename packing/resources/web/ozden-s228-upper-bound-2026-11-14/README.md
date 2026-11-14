@@ -222,9 +222,12 @@ all 20 as stated, and accepts the same squares in the box of the claim’s own s
 and receipts are kept in the review-only directory beside this packet,
 [ozden-s228-983-review-2026-11-14](../ozden-s228-983-review-2026-11-14/README.md).
 
-This lane recorded its replay, controls and measurements in its intake commit before it
-read the review; it read the review’s frozen findings once that commit was made, and
-began the adoption on their accepted verdict while the review’s later checks ran.
+This lane recorded its replay, controls and measurements in its intake commit
+(`1cc92c9dc`, 19:15Z) and registered T-300 (`07cf0d714`, 19:20Z) before it read the
+review. It read the review’s frozen findings (`c2ed4e00c`, 19:23Z) at about 19:25Z and
+began the adoption on their accepted verdict, its regularization runs from 19:27Z, while
+the review’s later checks ran; it merged the review’s final head (`fcdfe8086`, 19:41Z)
+once the coordinator reported it landed.
 Read against this packet’s receipts once both were done, the review’s least pair margin
 (101/500000000000000, squares 118 and 119 and six more pairs) is the replay’s exactly,
 and square 63, the square the sharp controls grew at its wall, is one of its three wall
