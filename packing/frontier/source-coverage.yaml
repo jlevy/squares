@@ -13335,6 +13335,63 @@ sources:
     lane L159), and the case adopted it as its house in the pass of that day, in place of T-174.
     The ledger of 14 November for this lane (campaign/issue-intake/upper-bounds-983-20261114)
     records it as a new packing. All 3 native jobs have full outcomes.
+- id: ono-issue984-2026-11-14
+  title: 'Roberto Ono''s packing of 228 squares at RobertoOno/squares-in-square b5636fd, issue 984'
+  role: source-repository
+  url: https://github.com/RobertoOno/squares-in-square/tree/b5636fd6694d2cc7aa5811ae33f441268b81b714
+  local: resources/web/ono-issue984-2026-11-14/
+  source_key: '[Ono issue 984 2026-11-14]'
+  scope:
+    n_values:
+    - 228
+  reviewed: '2026-11-14'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ono-issue984-2026-11-14/acquisition/claims.json
+  evidence:
+  - E-ono-984-certificate-report
+  - E-ono-984-exact-feasibility
+  notes: >-
+    The n = 228 certificate of the run of 11 November, its text and strict copies, the
+    intermediate certificate at 15.597084912, the author's check outputs, the run's report and
+    follow-up, the frozen verifier and the two checkers the issue names are retained for
+    jlevy/squares#984 at the repository's main, b5636fd, whose ancestor fce076f the issue
+    names, the certificate admitted only where its exact side rounds up to the side the issue
+    prints. T-301 records the in-horizon report, 4.76e-03 below T-300 (Doğa Özden's column-band
+    packing), the house; its stage 4 review is a separate lane blind to this one (think-jbwm).
+    The ledger of 14 November for this lane (campaign/issue-intake/upper-bounds-984-985-20261114)
+    records it as a new packing. All 3 native jobs have full outcomes.
+- id: ono-issue985-2026-11-14
+  title: 'Roberto Ono''s packing of 147 squares at RobertoOno/squares-in-square b5636fd, issue 985'
+  role: source-repository
+  url: https://github.com/RobertoOno/squares-in-square/tree/b5636fd6694d2cc7aa5811ae33f441268b81b714
+  local: resources/web/ono-issue985-2026-11-14/
+  source_key: '[Ono issue 985 2026-11-14]'
+  scope:
+    n_values:
+    - 147
+  reviewed: '2026-11-14'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ono-issue985-2026-11-14/acquisition/claims.json
+  evidence:
+  - E-ono-985-certificate-report
+  - E-ono-985-exact-feasibility
+  notes: >-
+    The n = 147 certificate of the same run, its text and strict copies, the author's check
+    outputs and the polish the issue names are retained for jlevy/squares#985 at b5636fd, the
+    files shared with the 228 packet pinned against its copies, the certificate admitted only
+    where its exact side rounds up to the side the issue prints. T-302 records the in-horizon
+    report, 5.81e-03 below the Kingbird catalogue's 7 + 4*sqrt(2), the house, which T-155's
+    exact ceiling verifies; its stage 4 review is a separate lane blind to this one
+    (think-jbwm). The ledger of 14 November for this lane records it as a new packing. All 3
+    native jobs have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

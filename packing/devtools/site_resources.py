@@ -386,6 +386,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ("A packing at 228 from a column-band proposal design, 3.80e-3 below T-174 (T-300)."),
     ),
     (
+        "https://github.com/RobertoOno/squares-in-square",
+        "Roberto Ono",
+        (
+            "A coding-agent harness whose run cut band periods from registered packings: 228,"
+            " 4.76e-3 below T-300 (T-301), and 147, 5.81e-3 below 7 + 4√2 (T-302)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

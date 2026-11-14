@@ -62889,3 +62889,179 @@ evidence:
       A clean-room decision of the one retained witness by two exact methods in one program, which
       share its reader. Finite feasibility only.
     source_reviewed: '2026-11-14'
+  - id: E-ono-984-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 228
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Ono issue 984 2026-11-14]'
+    certificate: packing/resources/web/ono-issue984-2026-11-14/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at b5636fd,
+      the revision fce076f the issue names holding the same certificate. A separate complete repository replay is retained for n = 228: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 155268 pair decisions; summed over the 3 jobs, the receipt records 24.43 route CPU seconds and 24.61 job wall seconds, the longest job 8.51 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least 2.389e-10. The
+      packet's sharp controls meet those margins on both routes. The replay is
+      E-ono-984-exact-feasibility.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational corner checker, share this repository's reader of the source's JSON (certificate parsing), half-angle conversion, Fraction arithmetic and the separating-axis method, and share no code with the author's three checkers, which were not run here. No human oversight or optimality is claimed.
+  - id: E-ono-984-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 228
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Ono issue 984 2026-11-14]'
+    certificate: packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19 on
+      two cores: python -m devtools.upper_bound_reports ono-issue984-2026-11-14 certify wrote
+      the receipt on 14 November 2026 from the packet's retained certificate, and check --replay
+      decides all 3 retained jobs, the certificate with its duplicate-square and
+      outside-container controls, again through both maintained routes and holds each to its
+      retained row; check-claims rebuilds the frozen comparison, and reads the retained text copy
+      as the same packing. python -m devtools.upper_bound_reports ono-issue984-2026-11-14
+      sharp-controls wrote the packet's sharp controls, all 11 as stated before they ran, on both
+      routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 228 that T-301 cites, every wall and every pair decided by
+          both maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and lane L164
+            of 14 November 2026, which wrote the ono-json reader from the certificate's field
+            names; each lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the certificate and the author's three checkers were produced by an AI
+          coding agent (Claude, by Anthropic) in the author's harness; the project's routes are
+          Claude's too, written from prompts of their own long before this certificate. No route
+          here is the source's code, and this lane never opened the source's verify.py,
+          certify.py, indep_check.py or fu_strict_check.py; it read the certificate's fields to
+          write its reader. The routes' authors read other sources' formats and, in earlier
+          lanes, other sources' checkers, so the record does not call them clean room.
+    limitations: >-
+      A replay of the one retained certificate by two maintained exact routes. The two maintained routes, the sqpack rational witness verifier and the independent rational corner checker, share this repository's reader of the source's JSON (certificate parsing), half-angle conversion, Fraction arithmetic and the separating-axis method, and share no code with the author's three checkers, which were not run here.
+      A separate complete repository replay is retained for n = 228: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 155268 pair decisions; summed over the 3 jobs, the receipt records 24.43 route CPU seconds and 24.61 job wall seconds, the longest job 8.51 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least 2.389e-10. The receipt's controls are gross, and the packet's sharp controls meet
+      those margins. Finite feasibility only.
+    source_reviewed: '2026-11-14'
+  - id: E-ono-985-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 147
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Ono issue 985 2026-11-14]'
+    certificate: packing/resources/web/ono-issue985-2026-11-14/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at b5636fd,
+      the revision fce076f the issue names holding the same certificate. A separate complete repository replay is retained for n = 147: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 64386 pair decisions; the 3 jobs took about 11 job wall seconds in all. In every positive squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least 3.003e-10. The
+      packet's sharp controls meet those margins on both routes. The replay is
+      E-ono-985-exact-feasibility.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational corner checker, share this repository's reader of the source's JSON (certificate parsing), half-angle conversion, Fraction arithmetic and the separating-axis method, and share no code with the author's three checkers, which were not run here. No human oversight or optimality is claimed.
+  - id: E-ono-985-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 147
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Ono issue 985 2026-11-14]'
+    certificate: packing/resources/web/ono-issue985-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19 on
+      two cores: python -m devtools.upper_bound_reports ono-issue985-2026-11-14 certify wrote
+      the receipt on 14 November 2026 from the packet's retained certificate, and check --replay
+      decides all 3 retained jobs, the certificate with its duplicate-square and
+      outside-container controls, again through both maintained routes and holds each to its
+      retained row; check-claims rebuilds the frozen comparison, and reads the retained text copy
+      as the same packing. python -m devtools.upper_bound_reports ono-issue985-2026-11-14
+      sharp-controls wrote the packet's sharp controls, all 11 as stated before they ran, on both
+      routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 147 that T-302 cites, every wall and every pair decided by
+          both maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and lane L164
+            of 14 November 2026, which wrote the ono-json reader from the certificate's field
+            names; each lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the certificate and the author's three checkers were produced by an AI
+          coding agent (Claude, by Anthropic) in the author's harness; the project's routes are
+          Claude's too, written from prompts of their own long before this certificate. No route
+          here is the source's code, and this lane never opened the source's verify.py,
+          certify.py, indep_check.py or fu_strict_check.py; it read the certificate's fields to
+          write its reader. The routes' authors read other sources' formats and, in earlier
+          lanes, other sources' checkers, so the record does not call them clean room.
+    limitations: >-
+      A replay of the one retained certificate by two maintained exact routes. The two maintained routes, the sqpack rational witness verifier and the independent rational corner checker, share this repository's reader of the source's JSON (certificate parsing), half-angle conversion, Fraction arithmetic and the separating-axis method, and share no code with the author's three checkers, which were not run here.
+      A separate complete repository replay is retained for n = 147: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 64386 pair decisions; the 3 jobs took about 11 job wall seconds in all. In every positive squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least 3.003e-10. The receipt's controls are gross, and the packet's sharp controls meet
+      those margins. Finite feasibility only.
+    source_reviewed: '2026-11-14'
