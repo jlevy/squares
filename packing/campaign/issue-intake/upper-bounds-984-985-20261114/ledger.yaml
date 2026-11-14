@@ -35,7 +35,11 @@ reports:
         to 43.68 degrees, 19 one way and 36 the other, against T-300's 48, all one way; against
         T-174 likewise no symmetry pairs them, 89 squares beyond 0.1 (largest 0.906908); the
         house witness and its regularized view measure as T-300; a new arrangement relative
-        to T-300's and T-174's packings
+        to T-300's and T-174's packings, and relative to T-128, T-098, T-092 and T-056 as
+        the review measured (F12); the issue's cut of Couzo's 404 gives 228 squares only under
+        the mirror x -> S - x and with two squares dropped whose centres land outside the
+        new box, which the issue does not name, and the certificate lies 34 squares beyond
+        a tenth from that seed (F9)
       source: packing/resources/web/ono-issue984-2026-11-14/measure/identity.json
     new_packing:
       source: '#984: ''Start: Francisco Couzo''s packing of n = 404 ... Operation: mirror
@@ -73,7 +77,9 @@ reports:
         beyond 1e-3, 116 beyond 1e-2 and 92 beyond 0.1 (largest 1.13164) and turns 78 squares
         by more than 1e-6 radians; 44 squares tilted beyond a degree, 25.84 to 27.72 degrees,
         all one way, against the house's 64 at 45 degrees; a new arrangement relative to the
-        house's packing
+        house's packing and to T-101, as the review measured (F12); the issue's cut of Evan
+        Daniel's 229 reproduces exactly, and the certificate is a refinement of that seed,
+        one to one with it, no square beyond 0.046 (F10)
       source: packing/resources/web/ono-issue985-2026-11-14/measure/identity.json
     new_packing:
       source: '#985: ''Start: the registry''s n = 229 record (Evan Daniel, 2026-10-20 ...)

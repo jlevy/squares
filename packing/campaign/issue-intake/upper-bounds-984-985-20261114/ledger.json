@@ -6,7 +6,22 @@
     {
       "n": 147,
       "start": [{"label":"record [Kingbird] (reported lane)","holders":"[Kingbird]","side":"12.65685424949238","exact":false}],
-      "steps": [{"report":"#985","kind":"issue","reported_at":"2026-11-14T20:11:26Z","side":"12.651043556588","exact":true,"verdict":"recorded","reason":"below","decided_against":["record [Kingbird] (reported lane)"],"difference":"below by at least 5.81e-03","first_committed":"2026-11-11T22:15:40Z","measured":"no symmetry of the box pairs it one to one with the house's packing (the Kingbird catalogue's 45-degree arrangement shared with 148, as T-155's exact view states it) by nearest centres; the optimal assignment, best under symmetry 1, moves 140 squares beyond 1e-3, 116 beyond 1e-2 and 92 beyond 0.1 (largest 1.13164) and turns 78 squares by more than 1e-6 radians; 44 squares tilted beyond a degree, 25.84 to 27.72 degrees, all one way, against the house's 64 at 45 degrees; a new arrangement relative to the house's packing","packing":{"kind":"new packing"}}],
+      "steps": [
+        {
+          "report": "#985",
+          "kind": "issue",
+          "reported_at": "2026-11-14T20:11:26Z",
+          "side": "12.651043556588",
+          "exact": true,
+          "verdict": "recorded",
+          "reason": "below",
+          "decided_against": ["record [Kingbird] (reported lane)"],
+          "difference": "below by at least 5.81e-03",
+          "first_committed": "2026-11-11T22:15:40Z",
+          "measured": "no symmetry of the box pairs it one to one with the house's packing (the Kingbird catalogue's 45-degree arrangement shared with 148, as T-155's exact view states it) by nearest centres; the optimal assignment, best under symmetry 1, moves 140 squares beyond 1e-3, 116 beyond 1e-2 and 92 beyond 0.1 (largest 1.13164) and turns 78 squares by more than 1e-6 radians; 44 squares tilted beyond a degree, 25.84 to 27.72 degrees, all one way, against the house's 64 at 45 degrees; a new arrangement relative to the house's packing and to T-101, as the review measured (F12); the issue's cut of Evan Daniel's 229 reproduces exactly, and the certificate is a refinement of that seed, one to one with it, no square beyond 0.046 (F10)",
+          "packing": {"kind":"new packing"}
+        }
+      ],
       "best_now": [{"label":"#985","holders":"Roberto Ono","side":"12.651043556588","exact":true}],
       "publication_dependent": []
     },
@@ -25,7 +40,7 @@
           "decided_against": ["record T-300"],
           "difference": "below by 4.76e-03",
           "first_committed": "2026-11-11T22:15:40Z",
-          "measured": "no symmetry of the box pairs it one to one with T-300's packing by nearest centres; the optimal assignment, best under symmetry 0, moves 227 squares beyond 1e-3, 137 beyond 1e-2 and 96 beyond 0.1 (largest 0.963975) and turns 90 squares by more than 1e-6 radians, by up to 43.68 degrees; aligned by box centres, 72 squares turn by more than a degree and 22 tilts reverse; 55 squares tilted beyond a degree, 1.29 to 43.68 degrees, 19 one way and 36 the other, against T-300's 48, all one way; against T-174 likewise no symmetry pairs them, 89 squares beyond 0.1 (largest 0.906908); the house witness and its regularized view measure as T-300; a new arrangement relative to T-300's and T-174's packings",
+          "measured": "no symmetry of the box pairs it one to one with T-300's packing by nearest centres; the optimal assignment, best under symmetry 0, moves 227 squares beyond 1e-3, 137 beyond 1e-2 and 96 beyond 0.1 (largest 0.963975) and turns 90 squares by more than 1e-6 radians, by up to 43.68 degrees; aligned by box centres, 72 squares turn by more than a degree and 22 tilts reverse; 55 squares tilted beyond a degree, 1.29 to 43.68 degrees, 19 one way and 36 the other, against T-300's 48, all one way; against T-174 likewise no symmetry pairs them, 89 squares beyond 0.1 (largest 0.906908); the house witness and its regularized view measure as T-300; a new arrangement relative to T-300's and T-174's packings, and relative to T-128, T-098, T-092 and T-056 as the review measured (F12); the issue's cut of Couzo's 404 gives 228 squares only under the mirror x -> S - x and with two squares dropped whose centres land outside the new box, which the issue does not name, and the certificate lies 34 squares beyond a tenth from that seed (F9)",
           "packing": {"kind":"new packing"}
         }
       ],
@@ -45,8 +60,16 @@
     "refinement_chains": [],
     "key_reason_candidates": [],
     "measured_identity": [
-      {"n":147,"report":"#985","verdict":"recorded","source_says":"a new packing","against":"T-155","finding":"no symmetry of the box pairs it one to one with the house's packing (the Kingbird catalogue's 45-degree arrangement shared with 148, as T-155's exact view states it) by nearest centres; the optimal assignment, best under symmetry 1, moves 140 squares beyond 1e-3, 116 beyond 1e-2 and 92 beyond 0.1 (largest 1.13164) and turns 78 squares by more than 1e-6 radians; 44 squares tilted beyond a degree, 25.84 to 27.72 degrees, all one way, against the house's 64 at 45 degrees; a new arrangement relative to the house's packing","source":"packing/resources/web/ono-issue985-2026-11-14/measure/identity.json"},
-      {"n":228,"report":"#984","verdict":"recorded","source_says":"a new packing","against":"T-300","finding":"no symmetry of the box pairs it one to one with T-300's packing by nearest centres; the optimal assignment, best under symmetry 0, moves 227 squares beyond 1e-3, 137 beyond 1e-2 and 96 beyond 0.1 (largest 0.963975) and turns 90 squares by more than 1e-6 radians, by up to 43.68 degrees; aligned by box centres, 72 squares turn by more than a degree and 22 tilts reverse; 55 squares tilted beyond a degree, 1.29 to 43.68 degrees, 19 one way and 36 the other, against T-300's 48, all one way; against T-174 likewise no symmetry pairs them, 89 squares beyond 0.1 (largest 0.906908); the house witness and its regularized view measure as T-300; a new arrangement relative to T-300's and T-174's packings","source":"packing/resources/web/ono-issue984-2026-11-14/measure/identity.json"}
+      {"n":147,"report":"#985","verdict":"recorded","source_says":"a new packing","against":"T-155","finding":"no symmetry of the box pairs it one to one with the house's packing (the Kingbird catalogue's 45-degree arrangement shared with 148, as T-155's exact view states it) by nearest centres; the optimal assignment, best under symmetry 1, moves 140 squares beyond 1e-3, 116 beyond 1e-2 and 92 beyond 0.1 (largest 1.13164) and turns 78 squares by more than 1e-6 radians; 44 squares tilted beyond a degree, 25.84 to 27.72 degrees, all one way, against the house's 64 at 45 degrees; a new arrangement relative to the house's packing and to T-101, as the review measured (F12); the issue's cut of Evan Daniel's 229 reproduces exactly, and the certificate is a refinement of that seed, one to one with it, no square beyond 0.046 (F10)","source":"packing/resources/web/ono-issue985-2026-11-14/measure/identity.json"},
+      {
+        "n": 228,
+        "report": "#984",
+        "verdict": "recorded",
+        "source_says": "a new packing",
+        "against": "T-300",
+        "finding": "no symmetry of the box pairs it one to one with T-300's packing by nearest centres; the optimal assignment, best under symmetry 0, moves 227 squares beyond 1e-3, 137 beyond 1e-2 and 96 beyond 0.1 (largest 0.963975) and turns 90 squares by more than 1e-6 radians, by up to 43.68 degrees; aligned by box centres, 72 squares turn by more than a degree and 22 tilts reverse; 55 squares tilted beyond a degree, 1.29 to 43.68 degrees, 19 one way and 36 the other, against T-300's 48, all one way; against T-174 likewise no symmetry pairs them, 89 squares beyond 0.1 (largest 0.906908); the house witness and its regularized view measure as T-300; a new arrangement relative to T-300's and T-174's packings, and relative to T-128, T-098, T-092 and T-056 as the review measured (F12); the issue's cut of Couzo's 404 gives 228 squares only under the mirror x -> S - x and with two squares dropped whose centres land outside the new box, which the issue does not name, and the certificate lies 34 squares beyond a tenth from that seed (F9)",
+        "source": "packing/resources/web/ono-issue984-2026-11-14/measure/identity.json"
+      }
     ]
   },
   "other_items": []

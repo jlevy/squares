@@ -34140,8 +34140,11 @@ issues:
       controls; measured, it is a new arrangement relative to T-300's and T-174's packings, not
       one to one with either under any symmetry, 96 and 89 squares beyond a tenth. T-300's
       contraction margin is 2.949e-12, so the gain lies wholly outside its padding. The ledger
-      of 14 November records it. Its stage 4 review is a separate lane, blind to this one
-      (think-jbwm).
+      of 14 November records it. The 14 November stage 4 review
+      (docs/project/reviews/review-2026-11-14-ono-984-985.md, lane L163, think-jbwm), written
+      blind in a separate lane, accepts it with #985's, fourteen findings, all notes, and scores
+      each S3; its clean-room checker decided it again, so the entry is confirmed,
+      independently re-implemented, at V3/C3.
     read_through: '2026-11-14T20:11:25Z'
     results:
     - key: n228-band-cut
@@ -34198,6 +34201,27 @@ issues:
       certificate at 15.597084912 the issue names (n228_S59708491.json) is retained and is
       above the claim, so it is not recorded. The run's calibration certificates at 11, 17, 18
       and 19 are not claimed.
+
+      The review measured the issue's statements: the prints hold, the claim the side's 12-place
+      ceiling and the gains and 30-place sides floors (F14); the packing touches three walls,
+      not four, the top cleared by 1.77e-12 at square 114 (F5); the stated cut of Couzo's 404
+      gives 228 squares only under the mirror x -> S - x and with two squares dropped whose
+      centres land outside the new box, which the issue does not name, and the certificate lies
+      34 squares beyond a tenth from that seed (F9); removing a band period is new to the record
+      (F10); it is a new arrangement relative to T-300, T-174, T-128, T-098, T-092 and T-056
+      (F12); RV-3 does not apply (F11); and two of the author's checkers decide by assert
+      (F13). This lane read the review's frozen findings at 21:45Z and its final head at
+      21:56Z, after its own replay, controls, measurements and registration were committed;
+      read against the packet's receipts, the review's margins, contraction receipts and
+      identity measurement equal the packet's.
+
+      The review's six questions for the author, informational and holding nothing open: which
+      mirror was applied to Couzo's 404 and whether the two squares landing outside were
+      deleted (F9); whether the issue would say three walls (F5); whether the format would state
+      the box and the sense of theta (F6); whether two checkers would raise rather than assert
+      and verify.py refuse a missing t and unknown keys (F13); whether the strict JSON's digests
+      would be stated (F7); and whether the diagonal-period sweep's near misses will be
+      published. No reply has been posted.
   - number: 985
     title: 's(147) ≤ 12.651043556588: first public packing below 7 + 4√2 (registration request)'
     author: RobertoOno
@@ -34221,8 +34245,9 @@ issues:
       certificate and refuse its gross and sharp controls; measured, it is a new arrangement
       relative to the house's packing, 92 squares beyond a tenth. The house's view has
       contraction margin 0, so the gain lies wholly outside its padding. The ledger of 14
-      November records it. Its stage 4 review is a separate lane, blind to this one
-      (think-jbwm).
+      November records it. The 14 November stage 4 review, written blind in a separate lane
+      (lane L163, think-jbwm), accepts it with #984's and scores it S3; its clean-room checker
+      decided it again, so the entry is confirmed, independently re-implemented, at V3/C3.
     read_through: '2026-11-14T20:11:26Z'
     results:
     - key: n147-band-cut
@@ -34269,3 +34294,12 @@ issues:
       leaderboard entry, 12.651043553173, states no packing and is no report. The run's report
       ranked 147 first among its targets before any attack, since its record was the 148
       packing less a square.
+
+      The review measured the issue's statements: the prints hold (F14); the packing touches
+      three walls, not four, the right cleared by 1.92e-13 at square 106 (F5); the stated cut of
+      Daniel's 229 reproduces exactly, and the certificate is a refinement of that seed, one to
+      one with it, no square beyond 0.046 (F10); it is a new arrangement relative to T-101,
+      T-155 and the house, the 148 house less one corner square, so s(148) is not moved, and the
+      case's listed conjectured optimum is beaten (F12). This lane read the review as #984's
+      entry says. Its questions for the author are #984's, and hold nothing open. No reply has
+      been posted.
