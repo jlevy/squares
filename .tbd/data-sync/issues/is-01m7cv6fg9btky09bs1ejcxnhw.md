@@ -3,9 +3,9 @@ type: is
 id: is-01m7cv6fg9btky09bs1ejcxnhw
 title: "Import #977 (s(297) <= 17.739455558289) and #979 (s(332), s(409), beyond the horizon, built from it): Joost de Winter's double-step staircase variant of T-174"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l154
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-14T10:56:05.125Z
-updated_at: 2026-11-14T14:09:45.062Z
+updated_at: 2026-11-14T15:55:47.751Z
 started_at: 2026-11-14T10:56:06.869Z
+closed_at: 2026-11-14T15:55:47.748Z
+close_reason: "#977 (T-299 house at 297) and #979 (rows at 332, 409) imported in #980 (3605269b8), answered and closed; replies recorded in #981 (6865af7d6)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
