@@ -5,14 +5,14 @@ title: "Price and run the full replay of #973's Valid11 and Lean reduction (k2m5
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m7bwabjnw739a8whwmhq1sre
 created_at: 2026-11-14T02:17:04.972Z
-updated_at: 2026-11-14T03:39:17.475Z
+updated_at: 2026-11-14T04:49:08.580Z
 ---
 Priced full replay of Mohsen Khalili and Sara Gharabaghi's s(k^2 - 5) = k (jlevy/squares#973), held above the import lane's budget; the import is think-2vgx (lane L145, 14 November 2026).
 
@@ -29,3 +29,4 @@ Priced full replay of Mohsen Khalili and Sara Gharabaghi's s(k^2 - 5) = k (jlevy
 ## Notes
 
 2026-11-14 (lane L145): priced from the import lane's runs on this four-core host (packet moh63-dev-k2m5-family-2026-11-13, README section The Price of a Full Replay). Measured speed against the source's recorded CPU: zmx2 1.14x over 30 sampled columns (4,545 s here vs 3,977 recorded); Tight-Tile checker 0.37x over 26 of the cheapest jobs (252 s vs 687); qx2_zm.py 0.77x on root 9632 (1,274 s vs 1,652). Parts, here: zmx2 sweep about 14.4 CPU-h (25 columns left, about 13.1); the 75 coverage dumps about 20.9; tight-tile jobs about 102 at 0.37x, up to 280 at the source's own speed (the largest jobs, up to 66,225 s, were not sampled); root 9632 and the controls done here; Lean build a few CPU-hours (estimate), about 10 GB of disk and about 6 GB of memory a module. Full replay about 140 CPU-hours, up to about 320. verify.sh --full alone (sweep + tight jobs) about 117, up to about 295. Subsets under the 40 CPU-hour item cap: the Lean build; the zmx2 sweep with the coverage dumps (about 35). The replay tool is devtools.replay_k2m5_family (stage, build, zmx2 --columns, root9632, controls, tight --jobs, compare); the coverage dumps need a new subcommand mirroring run_cov.sh (ZMX2_PRINT_ALL, --uncert-cap 100000000, one root each).
+2026-11-14 (lane L145, after mapping the L144 review): the stage 4 review (docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md, section 9) prices a full replay on this host at about 145 to 180 CPU-hours: zmx2 sweep about 15 (1.13 to 1.20 times the source over its 3 columns); the 75 coverage dumps about 14 (0.75 to 0.79 over 3 roots: the source ran them six at a time, so its recorded CPU overstates them); root 9632 measured (228 + 1,301 CPU-s); the 323 Tight-Tile jobs and 3 reruns about 115 to 150 (0.41 to 0.53 over 8 random jobs of at most 120 s; the source ran eight at a time); the Lean build about 1 to 2 CPU-hours but only on a host with at least 24 GB of memory or swap and 10 GB of disk (F6: the precedent Sqpack.Bentz build needed about 13 GB resident plus 9.6 GB swap; this host has 15 GB and no swap). Reconciled with the import lane's sample (zmx2 1.14x over 30 columns; Tight-Tile 0.37x over its 26 cheapest jobs): the price recorded on T-298 is about 145 CPU-hours, up to about 320 if the unsampled large Tight-Tile jobs (up to 66,225 CPU-s recorded) run no faster than at the source. Use the review's dump factor, not the import lane's 1.14x. Neither lane sampled a Tight-Tile job above 120 s; a pilot of two or three of the largest jobs would narrow the range before the owner commits the budget. The full replay reruns the producer's code and does not close the review's F1 (zmx2's area-density and first-order lemmas unreviewed), which is held separately on think-kn13.
