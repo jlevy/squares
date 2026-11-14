@@ -55,6 +55,14 @@ allowlist:
       digest is compared with the one the packet pinned, so the bound it states is bound
       to the retained bytes. The retained certificates are read from Git and compared
       with nothing; their custody is acquire_source --check's.
+  - path: packing/devtools/replay_k2m5_family.py
+    kind: download
+    boundary: >-
+      `stage` reads tight_tile/cov.tar.xz of moh63-dev/k2m5-family at 2c0b1b9, which the
+      moh63-dev-k2m5-family-2026-11-13 packet pins by digest and does not retain (8.7 MB,
+      over the per-blob ceiling), from a path outside the repository; the file is held to
+      the packet manifest's digest before it is staged. The retained files are read from
+      Git and compared with nothing; their custody is acquire_source --check's.
   - path: packing/devtools/evand_s29_replay.py
     kind: download
     boundary: >-

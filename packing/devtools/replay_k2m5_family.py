@@ -10,10 +10,10 @@ records. It decides nothing about the board itself: what a run shows is in its r
 and in the comparison it writes.
 
 ``stage --work DIR --cov PATH``
-    Writes the retained tree to ``DIR/k2m5-family``, every file checked against the
-    packet's manifest, with ``tight_tile/cov.tar.xz`` (pinned by digest, not retained)
-    copied from ``PATH`` after the same check; stages ``qx2_zm.py`` and the three files
-    it imports in ``DIR/qx2`` from the evand packets, each by its SHA-256; and writes
+    Writes the retained tree to ``DIR/k2m5-family``, with ``tight_tile/cov.tar.xz``
+    (pinned by digest, not retained) copied from ``PATH`` once it holds the digest the
+    packet's manifest pins; stages ``qx2_zm.py`` and the three files it imports in
+    ``DIR/qx2`` from the evand packets, whose digests the table below records; and writes
     ``DIR/shim/python3``, which runs a script under the given interpreter with ``-I`` and
     the script's own directory appended to ``sys.path``, so the source's sibling imports
     resolve and nothing it ships can shadow the standard library.
@@ -80,7 +80,8 @@ COV = "tight_tile/cov.tar.xz"
 BOARD = "certificate/sol_exact_box11.txt"
 PATCH = "verification/zmx2_print_all.patch"
 CHECKER = "e2bb84e9"
-#: ``qx2_zm.py`` and its imports at 659ee62: the retained copy and its SHA-256.
+#: ``qx2_zm.py`` and its imports at 659ee62: the retained copy and, for the reader, its
+#: SHA-256 (the copies' custody is ``devtools.acquire_source --check``'s).
 QX2_FILES = {
     "qx2_zm.py": (
         WEB / "evand-square-packing-2026-10-03/square-packing/s12/certificates/k2m4/qx2_zm"
@@ -200,17 +201,19 @@ def _write(target: Path, data: bytes) -> None:
 def stage(work: Path, cov: Path, python: str) -> Path:
     """Write the staged tree, the qx2 directory and the shim; return the tree."""
     tree = work / "k2m5-family"
-    for path, digest in manifest().items():
-        data = cov.read_bytes() if path == COV else read_retained_bytes(TREE / path)
-        if sha256(data) != digest:
-            raise SystemExit(f"{path}: SHA-256 {sha256(data)}, manifest {digest}")
+    for path, pinned in manifest().items():
+        # Retained files come from Git, whose custody is acquire_source --check's; the one
+        # file pinned by digest and not retained comes from outside and is held to the pin.
+        if path != COV:
+            _write(tree / path, read_retained_bytes(TREE / path))
+            continue
+        data = cov.read_bytes()
+        if sha256(data) != pinned:
+            raise SystemExit(f"{cov}: SHA-256 {sha256(data)}, the packet pins {pinned}")
         _write(tree / path, data)
     qx2 = work / "qx2"
-    for name, (retained, digest) in QX2_FILES.items():
-        data = retained.read_bytes()
-        if sha256(data) != digest:
-            raise SystemExit(f"{retained}: SHA-256 {sha256(data)}, expected {digest}")
-        _write(qx2 / name, data)
+    for name, (retained, _) in QX2_FILES.items():
+        _write(qx2 / name, retained.read_bytes())
     for name in ("c9632.txt",):
         _write(qx2 / name, (tree / "verification/r9632" / name).read_bytes())
     control = tree / "verification/controls/c9632_scale0999.txt"
@@ -249,8 +252,8 @@ def _receipt(
 def _label(where: str) -> str:
     return (
         f"{where} of the k2m5-family tree staged by devtools.replay_k2m5_family from "
-        f"{PACKET.relative_to(REPO)} (pinned 2c0b1b99), every file checked against its "
-        "manifest"
+        f"{PACKET.relative_to(REPO)} (pinned 2c0b1b99), the pinned-only cov.tar.xz held "
+        "to its digest"
     )
 
 
