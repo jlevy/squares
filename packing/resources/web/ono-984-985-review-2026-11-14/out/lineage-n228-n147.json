@@ -1,0 +1,181 @@
+{
+ "lane": "L163",
+ "program": "l163_lineage.py",
+ "inputs": {
+  "resources/web/couzo-issue763-2026-10-23/source/certificates/best/n404.cert": "8c8c8b45f40cfb1d1261baa479be41f9de89d83ceabc03f9ce72a1d42bb67f2e",
+  "witnesses/known-best/n-229.yaml": "c3d5bf6e4d22b12c857f3ce1f793acea396372d0fbd25fb4c31595dea1bbca43",
+  "witnesses/known-best/n-147.yaml": "45c3ed7ecf31d3f99375c7a3771bf185a9745c6595dfad950269c726d12670a4",
+  "witnesses/known-best/n-148.yaml": "be9431ceaa703c393f5cbe2926515ce44f555b3a7f9cd9a76e766db0641b70e2"
+ },
+ "n228_from_n404": {
+  "source_side": "20.591378149727",
+  "seed_side": "15.591378149727",
+  "by_symmetry": [
+   {
+    "symmetry": "identity",
+    "squares": 244,
+    "within_0.05_of_13.8_or_23.8": 0,
+    "centres_outside_new_box": 2,
+    "crossing_a_wall": 6
+   },
+   {
+    "symmetry": "quarter turn",
+    "squares": 230,
+    "within_0.05_of_13.8_or_23.8": 0,
+    "centres_outside_new_box": 2,
+    "crossing_a_wall": 2,
+    "dropping_centres_outside": {
+     "squares": 228,
+     "dropped_centres": [
+      [
+       "15.091",
+       "-0.500"
+      ],
+      [
+       "-0.500",
+       "15.091"
+      ]
+     ],
+     "overlapping_pairs": 7,
+     "deepest_overlap": "5.27086e-1",
+     "deepest_pair": [
+      132,
+      218
+     ],
+     "least_wall_clearance": "1.00000e-15"
+    }
+   },
+   {
+    "symmetry": "half turn",
+    "squares": 232,
+    "within_0.05_of_13.8_or_23.8": 0,
+    "centres_outside_new_box": 1,
+    "crossing_a_wall": 3
+   },
+   {
+    "symmetry": "three-quarter turn",
+    "squares": 230,
+    "within_0.05_of_13.8_or_23.8": 0,
+    "centres_outside_new_box": 2,
+    "crossing_a_wall": 2,
+    "dropping_centres_outside": {
+     "squares": 228,
+     "dropped_centres": [
+      [
+       "-0.500",
+       "15.091"
+      ],
+      [
+       "15.091",
+       "-0.500"
+      ]
+     ],
+     "overlapping_pairs": 6,
+     "deepest_overlap": "1.01287e-1",
+     "deepest_pair": [
+      146,
+      209
+     ],
+     "least_wall_clearance": "1.00000e-15"
+    }
+   },
+   {
+    "symmetry": "mirror x",
+    "squares": 230,
+    "within_0.05_of_13.8_or_23.8": 0,
+    "centres_outside_new_box": 2,
+    "crossing_a_wall": 2,
+    "dropping_centres_outside": {
+     "squares": 228,
+     "dropped_centres": [
+      [
+       "15.091",
+       "-0.500"
+      ],
+      [
+       "-0.500",
+       "15.091"
+      ]
+     ],
+     "overlapping_pairs": 6,
+     "deepest_overlap": "1.01287e-1",
+     "deepest_pair": [
+      146,
+      209
+     ],
+     "least_wall_clearance": "1.00000e-15",
+     "written": "seed-n228-mirror-x-dropped.cert"
+    }
+   },
+   {
+    "symmetry": "mirror y",
+    "squares": 230,
+    "within_0.05_of_13.8_or_23.8": 0,
+    "centres_outside_new_box": 2,
+    "crossing_a_wall": 2,
+    "dropping_centres_outside": {
+     "squares": 228,
+     "dropped_centres": [
+      [
+       "-0.500",
+       "15.091"
+      ],
+      [
+       "15.091",
+       "-0.500"
+      ]
+     ],
+     "overlapping_pairs": 7,
+     "deepest_overlap": "5.27086e-1",
+     "deepest_pair": [
+      132,
+      218
+     ],
+     "least_wall_clearance": "1.00000e-15",
+     "written": "seed-n228-mirror-y-dropped.cert"
+    }
+   },
+   {
+    "symmetry": "transpose",
+    "squares": 244,
+    "within_0.05_of_13.8_or_23.8": 0,
+    "centres_outside_new_box": 2,
+    "crossing_a_wall": 6
+   },
+   {
+    "symmetry": "anti-transpose",
+    "squares": 232,
+    "within_0.05_of_13.8_or_23.8": 0,
+    "centres_outside_new_box": 1,
+    "crossing_a_wall": 3
+   }
+  ]
+ },
+ "n147_from_n229": {
+  "squares": 147,
+  "source_side": "15.650161513876",
+  "seed_side": "12.650161513876",
+  "overlapping_pairs": 9,
+  "deepest_overlap": "9.77944e-3",
+  "deepest_pair": [
+   44,
+   102
+  ],
+  "least_wall_clearance": "5.00000e-21",
+  "written": "seed-n147.cert",
+  "removed_tilted_beyond_1e-6": 16,
+  "source_tilted_beyond_1e-6": 60
+ },
+ "house147_within_house148": {
+  "squares_147_found_in_148": 147,
+  "of": 147,
+  "squares_148_not_in_147": [
+   [
+    "12.15685424949238019520675489684",
+    "12.15685424949238019520675489684",
+    "0"
+   ]
+  ]
+ },
+ "cpu_seconds": 0.7
+}

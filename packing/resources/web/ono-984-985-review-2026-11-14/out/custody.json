@@ -1,0 +1,222 @@
+{
+ "lane": "L163",
+ "program": "l163_custody.py",
+ "pin": "fce076f2bf459a25be3645d899e8950b93ed977c",
+ "commits": [
+  {
+   "commit": "b5636fd6694d",
+   "author": "RobertoOno",
+   "authored": "2026-11-14T20:26:58Z",
+   "committed": "2026-11-14T20:26:58Z",
+   "parents": [
+    "680ee044dd76",
+    "956f868ea482"
+   ],
+   "subject": "Merge pull request #1 from RobertoOno/claude/square-packing-improvements-18eadd"
+  },
+  {
+   "commit": "956f868ea482",
+   "author": "RobertoOno",
+   "authored": "2026-11-14T20:11:53Z",
+   "committed": "2026-11-14T20:11:53Z",
+   "parents": [
+    "fce076f2bf45"
+   ],
+   "subject": "Record the two registration requests for n=147 and n=228"
+  },
+  {
+   "commit": "fce076f2bf45",
+   "author": "RobertoOno",
+   "authored": "2026-11-14T20:10:31Z",
+   "committed": "2026-11-14T20:10:31Z",
+   "parents": [
+    "be713b78d6dd"
+   ],
+   "subject": "Add follow-up to run 2026-11-11_fable-5.2 and registration files for n=147 and n=228"
+  },
+  {
+   "commit": "be713b78d6dd",
+   "author": "RobertoOno",
+   "authored": "2026-11-11T21:26:52Z",
+   "committed": "2026-11-11T22:15:40Z",
+   "parents": [
+    "680ee044dd76"
+   ],
+   "subject": "Add run 2026-11-11_fable-5.2: null result (two rediscoveries, n=147 and n=228)"
+  },
+  {
+   "commit": "680ee044dd76",
+   "author": "Roberto Ono",
+   "authored": "2026-11-11T12:02:10Z",
+   "committed": "2026-11-11T12:02:10Z",
+   "parents": [
+    "8eb8b8318b39"
+   ],
+   "subject": "Make the harness model-agnostic"
+  },
+  {
+   "commit": "8eb8b8318b39",
+   "author": "Roberto Ono",
+   "authored": "2026-11-11T11:04:57Z",
+   "committed": "2026-11-11T11:55:36Z",
+   "parents": [
+    "39ddd1a7b1f2"
+   ],
+   "subject": "Certified verifier and agent setup for squares-in-square record hunt"
+  },
+  {
+   "commit": "39ddd1a7b1f2",
+   "author": "RobertoOno",
+   "authored": "2026-11-11T11:54:09Z",
+   "committed": "2026-11-11T11:54:09Z",
+   "parents": [],
+   "subject": "Initial commit"
+  }
+ ],
+ "pin_on_origin_main": true,
+ "origin_main": "b5636fd6694d",
+ "working_tree_clean_at_pin": true,
+ "tree_files_at_pin": 94,
+ "files": {
+  "VERIFIER.sha256": {
+   "first_commit": "8eb8b83",
+   "committed": "2026-11-11T11:55:36Z",
+   "commits_touching": [
+    "8eb8b83"
+   ]
+  },
+  "verify.py": {
+   "first_commit": "8eb8b83",
+   "committed": "2026-11-11T11:55:36Z",
+   "commits_touching": [
+    "8eb8b83"
+   ]
+  },
+  "tests/test_verify.py": {
+   "first_commit": "8eb8b83",
+   "committed": "2026-11-11T11:55:36Z",
+   "commits_touching": [
+    "8eb8b83"
+   ]
+  },
+  "LICENSE": {
+   "first_commit": "680ee04",
+   "committed": "2026-11-11T12:02:10Z",
+   "commits_touching": [
+    "680ee04"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/RUN.md": {
+   "first_commit": "be713b7",
+   "committed": "2026-11-11T22:15:40Z",
+   "commits_touching": [
+    "be713b7"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/search/attack.py": {
+   "first_commit": "be713b7",
+   "committed": "2026-11-11T22:15:40Z",
+   "commits_touching": [
+    "be713b7"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/search/opt.py": {
+   "first_commit": "be713b7",
+   "committed": "2026-11-11T22:15:40Z",
+   "commits_touching": [
+    "be713b7"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/search/indep_check.py": {
+   "first_commit": "be713b7",
+   "committed": "2026-11-11T22:15:40Z",
+   "commits_touching": [
+    "be713b7"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/search/fu_strict_check.py": {
+   "first_commit": "fce076f",
+   "committed": "2026-11-14T20:10:31Z",
+   "commits_touching": [
+    "fce076f"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json": {
+   "first_commit": "be713b7",
+   "committed": "2026-11-11T22:15:40Z",
+   "commits_touching": [
+    "be713b7"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json": {
+   "first_commit": "be713b7",
+   "committed": "2026-11-11T22:15:40Z",
+   "commits_touching": [
+    "be713b7"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/evidence/registration/n228.cert": {
+   "first_commit": "fce076f",
+   "committed": "2026-11-14T20:10:31Z",
+   "commits_touching": [
+    "fce076f"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/evidence/registration/n147.cert": {
+   "first_commit": "fce076f",
+   "committed": "2026-11-14T20:10:31Z",
+   "commits_touching": [
+    "fce076f"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/evidence/registration/n228.strict.cert": {
+   "first_commit": "fce076f",
+   "committed": "2026-11-14T20:10:31Z",
+   "commits_touching": [
+    "fce076f"
+   ]
+  },
+  "runs/2026-11-11_fable-5.2/evidence/registration/n147.strict.cert": {
+   "first_commit": "fce076f",
+   "committed": "2026-11-14T20:10:31Z",
+   "commits_touching": [
+    "fce076f"
+   ]
+  }
+ },
+ "verifier_sha256": {
+  "commit": "8eb8b8318b39",
+  "entries": {
+   "verify.py": {
+    "listed": "aa603403f5e07445d206bffb9af23da0cf1e2b744d206443bcfa87ba70d63891",
+    "equals_at_its_commit": true,
+    "equals_at_pin": true
+   },
+   "tests/test_verify.py": {
+    "listed": "26229d0a782a51a40d66ba86f13fe31b05db65ddcb899513345d355581cb14c1",
+    "equals_at_its_commit": true,
+    "equals_at_pin": true
+   }
+  }
+ },
+ "licence_first_lines": [
+  "MIT License",
+  "Copyright (c) 2026 Roberto Ono"
+ ],
+ "run_stated": {
+  "started": "2026-11-11T12:13:06Z",
+  "ended": "2026-11-11T19:54:11Z"
+ },
+ "issues": [
+  {
+   "number": 984,
+   "created": "2026-11-14T20:11:25Z",
+   "seconds_after_pin_commit": 54
+  },
+  {
+   "number": 985,
+   "created": "2026-11-14T20:11:26Z",
+   "seconds_after_pin_commit": 55
+  }
+ ]
+}

@@ -1,0 +1,651 @@
+{
+ "label": "n228",
+ "lane": "L163",
+ "program": "l163_controls.py",
+ "check_receipt_least_margin": "2.38935e-10",
+ "facts_n": 228,
+ "controls": [
+  {
+   "id": "G1",
+   "stated": "refused: exactly the pair (1, 228) overlapping, margin -1, B area 1; contacts [[22, 'left'], [31, 'bottom'], [34, 'bottom'], [144, 'right']]",
+   "came_out": {
+    "verdict": "REFUSE",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 1,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping": [
+     [
+      1,
+      228
+     ]
+    ],
+    "margin_of": {
+     "pair": [
+      1,
+      228
+     ],
+     "value": "-1/1",
+     "area_b": "1"
+    }
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G2",
+   "stated": "refused: square 1 across the right wall by both methods and not inside by B's area; no pair overlapping or touching; other contacts unchanged",
+   "came_out": {
+    "verdict": "REFUSE",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping": []
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G3",
+   "stated": "the reader refuses: 227 entries",
+   "came_out": {
+    "reader": "refused",
+    "reason": "227 entries for n = 228"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G4",
+   "stated": "the reader refuses: not in lowest terms",
+   "came_out": {
+    "reader": "refused",
+    "reason": "side: not in lowest terms"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G5a",
+   "stated": "refused: square 22's left clearance exactly -9.99999e-31, across the left wall by both; no pair changes class",
+   "came_out": {
+    "verdict": "REFUSE",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [
+     [
+      22,
+      "left"
+     ]
+    ],
+    "contacts": [
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "clearances_of_sci": [
+     "-9.99999e-31",
+     "1.03104e+1",
+     "1.45960e+1",
+     "4.28560e+0"
+    ]
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G5b",
+   "stated": "accepted: square 22's left clearance exactly 9.99999e-31, off the wall by both; no pair changes class",
+   "came_out": {
+    "verdict": "ACCEPT",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "clearances_of_sci": [
+     "9.99999e-31",
+     "1.03104e+1",
+     "1.45960e+1",
+     "4.28560e+0"
+    ]
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G6",
+   "stated": "refused: exactly 68 pairs overlapping by both methods (list digest f6d2138d), none touching; every square still inside, contacts and clearances unchanged",
+   "came_out": {
+    "verdict": "REFUSE",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 68,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping_sha256": "f6d2138d2af2925b31a82087f34bc374c2cef7c13405c934be4abd0ac863c284",
+    "least_margin": "-9.71834e-2",
+    "clearance_multiset_sha256": "2f5a326126f8d60299df3e34672154d0154d5e55ae9a92b9680c117895237db2"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G7",
+   "stated": "refused: the twin differs from the JSON file",
+   "came_out": {
+    "twin_differs": true,
+    "twin_unaltered_equal": true
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G8",
+   "stated": "accepted; contacts transposed; the margin list unchanged",
+   "came_out": {
+    "verdict": "ACCEPT",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "bottom"
+     ],
+     [
+      31,
+      "left"
+     ],
+     [
+      34,
+      "left"
+     ],
+     [
+      144,
+      "top"
+     ]
+    ],
+    "overlapping": [],
+    "margin_list_sha256": "42e0aeabd3b920a4bdc570103e53e5f818bce06defd99b84e7a1e25a61688a22"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G9",
+   "stated": "accepted; the same squares: contacts, margin list and clearance list unchanged",
+   "came_out": {
+    "verdict": "ACCEPT",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "margin_list_sha256": "42e0aeabd3b920a4bdc570103e53e5f818bce06defd99b84e7a1e25a61688a22",
+    "clearance_multiset_sha256": "2f5a326126f8d60299df3e34672154d0154d5e55ae9a92b9680c117895237db2"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G10",
+   "stated": "accepted; the same squares: contacts, margin list and clearance list unchanged",
+   "came_out": {
+    "verdict": "ACCEPT",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "margin_list_sha256": "42e0aeabd3b920a4bdc570103e53e5f818bce06defd99b84e7a1e25a61688a22",
+    "clearance_multiset_sha256": "2f5a326126f8d60299df3e34672154d0154d5e55ae9a92b9680c117895237db2"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "G11",
+   "stated": "accepted; contacts turned (left to bottom, bottom to right, right to top, top to left); margin list unchanged",
+   "came_out": {
+    "verdict": "ACCEPT",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "bottom"
+     ],
+     [
+      31,
+      "right"
+     ],
+     [
+      34,
+      "right"
+     ],
+     [
+      144,
+      "top"
+     ]
+    ],
+    "overlapping": [],
+    "margin_list_sha256": "42e0aeabd3b920a4bdc570103e53e5f818bce06defd99b84e7a1e25a61688a22"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S1a",
+   "stated": "refused: exactly [[144, 'right']] across, by both; pairs unchanged",
+   "came_out": {
+    "verdict": "REFUSE",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [
+     [
+      144,
+      "right"
+     ]
+    ],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ]
+    ],
+    "overlapping": [],
+    "margin_list_sha256": "42e0aeabd3b920a4bdc570103e53e5f818bce06defd99b84e7a1e25a61688a22",
+    "side": "15.596043120920791"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S1b",
+   "stated": "refused: exactly [[144, 'right']] across, by both; pairs unchanged",
+   "came_out": {
+    "verdict": "REFUSE",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [
+     [
+      144,
+      "right"
+     ]
+    ],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ]
+    ],
+    "overlapping": [],
+    "margin_list_sha256": "42e0aeabd3b920a4bdc570103e53e5f818bce06defd99b84e7a1e25a61688a22",
+    "side": "15.596043120920791"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S1c",
+   "stated": "refused: exactly [[142, 'right'], [144, 'right'], [146, 'right'], [147, 'right'], [148, 'right'], [149, 'right'], [150, 'right'], [151, 'right']] across, by both; pairs unchanged",
+   "came_out": {
+    "verdict": "REFUSE",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [
+     [
+      142,
+      "right"
+     ],
+     [
+      144,
+      "right"
+     ],
+     [
+      146,
+      "right"
+     ],
+     [
+      147,
+      "right"
+     ],
+     [
+      148,
+      "right"
+     ],
+     [
+      149,
+      "right"
+     ],
+     [
+      150,
+      "right"
+     ],
+     [
+      151,
+      "right"
+     ]
+    ],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ]
+    ],
+    "overlapping": [],
+    "margin_list_sha256": "42e0aeabd3b920a4bdc570103e53e5f818bce06defd99b84e7a1e25a61688a22",
+    "side": "15.596043120920000"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S1d",
+   "stated": "accepted; contacts only [[22, 'left'], [31, 'bottom'], [34, 'bottom']]",
+   "came_out": {
+    "verdict": "ACCEPT",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ]
+    ],
+    "overlapping": [],
+    "margin_list_sha256": "42e0aeabd3b920a4bdc570103e53e5f818bce06defd99b84e7a1e25a61688a22",
+    "side": "15.596043120921000"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S4c",
+   "stated": "accepted: the pair [9, 21] alone touching by both, margin exactly 0; contacts unchanged",
+   "came_out": {
+    "verdict": "ACCEPT",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 0,
+    "touching": [
+     [
+      9,
+      21
+     ]
+    ],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping": [],
+    "margin_of": {
+     "pair": [
+      9,
+      21
+     ],
+     "value": "0/1",
+     "area_b": "0"
+    }
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S4p",
+   "stated": "refused: the pair [9, 21] alone overlapping by both, margin exactly -1e-30; contacts unchanged",
+   "came_out": {
+    "verdict": "REFUSE",
+    "pair_classes_agree": true,
+    "wall_classes_agree": true,
+    "containment_agrees": true,
+    "overlapping_count": 1,
+    "touching": [],
+    "crossings": [],
+    "contacts": [
+     [
+      22,
+      "left"
+     ],
+     [
+      31,
+      "bottom"
+     ],
+     [
+      34,
+      "bottom"
+     ],
+     [
+      144,
+      "right"
+     ]
+    ],
+    "overlapping": [
+     [
+      9,
+      21
+     ]
+    ],
+    "margin_of": {
+     "pair": [
+      9,
+      21
+     ],
+     "value": "-1/1000000000000000000000000000000",
+     "area_b": "29465822627806732515006537460826614473449985113159607764838473208137899672765098098910936368046090456014480893572856969/3129098417416894909460934233715252005951443567345022096660621306606550051811302397094558113969820403028174680000000000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S5",
+   "stated": "515 of 515: touching at contact by both, margin exactly 0; overlapping past by both, margin exactly -1e-30; closing times digest 2c6333a8",
+   "came_out": {
+    "pairs": 515,
+    "as_stated": 515,
+    "closing_times_sha256": "2c6333a8ceac9552d426e7ebd5492f70fac1354d9bfc8f2a0568eb43714461fc"
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S6",
+   "stated": "228 of 228: contact at, crossing past, by both; clearance exactly 0 and -1e-30; inside by B's area at contact, not past",
+   "came_out": {
+    "squares": 228,
+    "as_stated": 228,
+    "nearest_list_sha256": "9b4c9767988935483ad2691389b943c71cd59487018062c9ab815d788a32e728"
+   },
+   "as_stated": true
+  }
+ ],
+ "summary": "EVERY_CONTROL_AS_STATED",
+ "as_stated": 20,
+ "of": 20,
+ "cpu_seconds": 31.3
+}
