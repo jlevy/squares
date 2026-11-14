@@ -109,7 +109,7 @@ defect.**
 | Root 9632 | Holds, given `zmx2` and `qx2_zm.py` | Both replayed in full on the root; closure clean-room |
 | Tight-Tile Lemma | Sound as an argument and as code read | Proof re-derived, code read; 9 jobs replayed exactly; vertex oracle clean; F2 |
 | Coverage of the 75 roots | Holds | Clean-room exact over all 1,255,023 boxes; 3 dumps replayed box for box |
-| Controls | Refuse as required | Yours replayed; five of mine (§6) |
+| Controls | Refuse as required | Yours replayed, one with different cell counts (F8); five of mine (§6) |
 
 This is a reproduction with the producer’s code for the `zmx2`, `qx2_zm.py` and
 Tight-Tile parts, and an independent re-implementation for the mass, the family, the
@@ -596,11 +596,107 @@ Of it:
 
 ## 10. Frozen Digests
 
-PENDING-FREEZE
+The freeze was written at 2026-11-14T04:41:26Z, before anything of §11 was read, and
+committed as `2e04440f` on this lane’s branch.
+[`receipts/freeze.sha256`](../../../packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/receipts/freeze.sha256)
+(SHA-256 `34624a421901ca271edd59403b2c0b418cafb4a7e5683131acea86cdaf57355d`) holds the
+verdicts of §2 and the digests of the packet’s 284 files and of this review’s draft.
+The plan’s own digest is `c2844104…`, recorded at 02:17:26Z, before any sample ran.
+
+| File | SHA-256 |
+| --- | --- |
+| `programs/k2m5_exact.py` | `6fa4dc3d6070713324b27f42f61e76e79d2809f1199ec0290a0b90068ef0ab48` |
+| `programs/k2m5_cover.py` | `82012d288121b61ecbe046f4aded87dddb1a8fbf0130d030dd9533f76eb92f16` |
+| `programs/k2m5_axis.py` | `ea4d0802141415ec0e041c926cea35766f70db48539b5b9186bb3c42de6e6a21` |
+| `programs/k2m5_coverage.py` | `415fcded1ca2488758fdd1cfb9897d435f9f6c320c565da2197a89b41e732e99` |
+| `programs/closure_9632.py` | `513f2850ebd5559e6569fbfb59ccdf9ed49e5702a952c920224aeb7485ba8a77` |
+| `programs/tt_region.py` | `cd3085bbca7c2dc202ba611ad1413a460069581a226afdba57bc876ae62c9bc1` |
+| `programs/zmx2_leaf_probe.py` | `5be1cbe4a4ef332a44baaf31eb5dc09ff02e9ae153e756292f61821405306190` |
+| `programs/m3_search.py` | `9318c48f45d4b278de43f5e900782e5ef8260365a43b5b9334e24031ffa5ba8d` |
+| `outputs/cover.json` | `607e8d9bf72a6c46ad3b8b677a6c2340026453674dbc1f4299cac8809b8e2036` |
+| `outputs/axis_mu11.json` | `bd7f17d8bdf5e7ddae3d0399bbea5a09c8da70bfcada81ab53686db0723da35f` |
+| `outputs/coverage.json` | `67d5d42675e01f02c9b84d891dbd38e7aaef921d3bfb20d6e4c72259e6df53f3` |
+| `outputs/closure_9632.json` | `17b8c8bbc5b036c7770632875b790b3a2026db26f7efc11c2c226d827c0cba10` |
+| `outputs/samples_eval.json` | `8859f65d0bc6f0a8fbd2656137cf55d178e8c56c7f17292bb9bcdd86dc230da8` |
+| `outputs/leaf_probe.json` | `c76f7fd917190db893867a6ee475852210311f81f7a4775ade3bbe46a3d8c1bb` |
+| `outputs/comparisons.jsonl` | `3233e08d11fd67eaa3b1e16c80b1d0e63b0aaee1f27ae62715e083d7dd76840c` |
+
+Bulk files are not kept.
+`outputs/bulk_not_kept.json` gives each one’s digest and the program that remakes it:
+the drawn samples, the tight-leaf dumps and the mutant covers.
+Each `zmx2` output keeps its census and the digest of its sorted box strings.
 
 ## 11. Relation to the Record
 
-PENDING-RECORD
+Read after the freeze: the register entries of `T-064`, `T-066`, `T-081`, `T-184`,
+`T-191` and `T-252` in `results.yaml`, `n-095.md`, the frontier records of the nine
+counts, and the 16 October review of Greff’s `s(76)` and `s(95)` covers.
+
+Read before it, as the brief’s models or for the checkers’ history:
+
+- the 3 October claim-chain review of `T-081`, which is about `k² − 4`;
+- the 31 October review of the authors’ `s(44)` cover (`T-252`), for `zmx2`’s state at
+  `e2bb84e9`;
+- the 3 November review of Özden’s `s(94)`, for form;
+- the `evidence.yaml` note and the 4 October evand packet’s README on `ZMX2_AREA.md`.
+
+**The base cases stand at their entries.**
+
+| k | n | Entry | Rung |
+| --- | --- | --- | --- |
+| 7 | 44 | `T-252`: the authors’ own mixed cover | V3/C3 |
+| 8 | 59 | `T-066`: Hosono’s | V3/C3 |
+| 9 | 76 | `T-184`: Greff’s | V3/C3 |
+
+The source’s table says the same.
+
+**k = 10.** `s(95) = 10` is already `T-191`, Greff’s cover, at V3/C3, as the paper says.
+The family is a second route there, through `Valid11`.
+
+**The counts the family newly decides.** At `n ≤ 324` they are `n = 116, 139, 164, 191,
+220, 251, 284` and `319` (k = 11 to 18). Each is open in the record.
+`n-116.md`, for one, holds the grid’s upper bound 11 against Hosono’s counting lower
+bound `10.9113`. With `n = 95` already proved, eight counts are new, not nine.
+
+**Second routes by monotonicity.** Since `s` is nondecreasing, `s(k² − 5) = k` gives
+`s(k² − a) = k` for `a = 1` to 4. At `k = 10` to 18 that is a second route to `T-081`’s
+instances `n = 96, 117, …, 320`, which stand at V0/C1 until `ValidTilt9`’s full replay,
+and a further route to `T-064`’s (V3/C3). These routes are only as good as `Valid11`’s
+own replay and review.
+
+**Against `T-081`’s method.** The structure is Daniel’s, at a finer grid:
+
+|  | `T-081` (`k² − 4`) | This family (`k² − 5`) |
+| --- | --- | --- |
+| Corner module and band depth | `R = 3` | `R = 4` |
+| Grid pitch | 1/5 | 1/10 |
+| Lebesgue square starts at | 14/5 | 19/5 |
+| Board | box 9 | box 11 |
+| D | about 1.074 | about 1.341 |
+
+The Lean is `BentzFam.lean`’s reduction ported to the 1/10 grid.
+The difference is in the finite statement’s checker.
+`T-081`’s `ValidTilt9` is decided by the exact `qx2_zm.py`; the 3 October review
+recorded that `zmx2` left 4,844 tiny-tilt boxes on box 9 and so was not a second route
+there. Here `zmx2` with `--first-order` and area densities decides 12,024 roots, and the
+Tight-Tile Lemma closes what it leaves at the tight tiles.
+That is the new step, and its two new trust points are F1 and F2.
+
+**Against the 16 October review.** That review ran `zmx2` on covers with no polygon and
+no `--first-order`. It trusted Lemmas P, C, M, S, Z, W, H, T, E, DP and R, the ones the
+record re-derived for `6b7f0f79`. So it does not reach the area and first-order lemmas
+this claim uses, and F1 stands after reading it.
+
+Its framing section says Greff’s covers carry nothing to another k “without a lemma for
+the inserted band”. This source supplies such a lemma for its own family, as Lemma 7 and
+in Lean, and it holds (§3.3).
+
+The 16 October review’s practice of exact poses at every uncertified box and germ, and
+of mutants each shown invalid at an exhibited pose, is the one followed here (S4, M-1,
+M-3).
+
+**Earlier reviews of this claim.** None was on `main` when this lane started, so there
+is none to compare.
 
 ## 12. Questions for the Authors
 
@@ -619,7 +715,75 @@ PENDING-RECORD
 
 ## 13. For the Records Lane
 
-PENDING-RECORDS-LANE
+Read after the freeze: the register entries of `T-064`, `T-066`, `T-081`, `T-184`,
+`T-191` and `T-252` in `results.yaml`, `n-095.md`, the frontier records of the nine
+counts, and the 16 October review of Greff’s `s(76)` and `s(95)` covers.
+
+Read before it, as the brief’s models or for the checkers’ history:
+
+- the 3 October claim-chain review of `T-081`, which is about `k² − 4`;
+- the 31 October review of the authors’ `s(44)` cover (`T-252`), for `zmx2`’s state at
+  `e2bb84e9`;
+- the 3 November review of Özden’s `s(94)`, for form;
+- the `evidence.yaml` note and the 4 October evand packet’s README on `ZMX2_AREA.md`.
+
+**The base cases stand at their entries.**
+
+| k | n | Entry | Rung |
+| --- | --- | --- | --- |
+| 7 | 44 | `T-252`: the authors’ own mixed cover | V3/C3 |
+| 8 | 59 | `T-066`: Hosono’s | V3/C3 |
+| 9 | 76 | `T-184`: Greff’s | V3/C3 |
+
+The source’s table says the same.
+
+**k = 10.** `s(95) = 10` is already `T-191`, Greff’s cover, at V3/C3, as the paper says.
+The family is a second route there, through `Valid11`.
+
+**The counts the family newly decides.** At `n ≤ 324` they are `n = 116, 139, 164, 191,
+220, 251, 284` and `319` (k = 11 to 18). Each is open in the record.
+`n-116.md`, for one, holds the grid’s upper bound 11 against Hosono’s counting lower
+bound `10.9113`. With `n = 95` already proved, eight counts are new, not nine.
+
+**Second routes by monotonicity.** Since `s` is nondecreasing, `s(k² − 5) = k` gives
+`s(k² − a) = k` for `a = 1` to 4. At `k = 10` to 18 that is a second route to `T-081`’s
+instances `n = 96, 117, …, 320`, which stand at V0/C1 until `ValidTilt9`’s full replay,
+and a further route to `T-064`’s (V3/C3). These routes are only as good as `Valid11`’s
+own replay and review.
+
+**Against `T-081`’s method.** The structure is Daniel’s, at a finer grid:
+
+|  | `T-081` (`k² − 4`) | This family (`k² − 5`) |
+| --- | --- | --- |
+| Corner module and band depth | `R = 3` | `R = 4` |
+| Grid pitch | 1/5 | 1/10 |
+| Lebesgue square starts at | 14/5 | 19/5 |
+| Board | box 9 | box 11 |
+| D | about 1.074 | about 1.341 |
+
+The Lean is `BentzFam.lean`’s reduction ported to the 1/10 grid.
+The difference is in the finite statement’s checker.
+`T-081`’s `ValidTilt9` is decided by the exact `qx2_zm.py`; the 3 October review
+recorded that `zmx2` left 4,844 tiny-tilt boxes on box 9 and so was not a second route
+there. Here `zmx2` with `--first-order` and area densities decides 12,024 roots, and the
+Tight-Tile Lemma closes what it leaves at the tight tiles.
+That is the new step, and its two new trust points are F1 and F2.
+
+**Against the 16 October review.** That review ran `zmx2` on covers with no polygon and
+no `--first-order`. It trusted Lemmas P, C, M, S, Z, W, H, T, E, DP and R, the ones the
+record re-derived for `6b7f0f79`. So it does not reach the area and first-order lemmas
+this claim uses, and F1 stands after reading it.
+
+Its framing section says Greff’s covers carry nothing to another k “without a lemma for
+the inserted band”. This source supplies such a lemma for its own family, as Lemma 7 and
+in Lean, and it holds (§3.3).
+
+The 16 October review’s practice of exact poses at every uncertified box and germ, and
+of mutants each shown invalid at an exhibited pose, is the one followed here (S4, M-1,
+M-3).
+
+**Earlier reviews of this claim.** None was on `main` when this lane started, so there
+is none to compare.S-LANE
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

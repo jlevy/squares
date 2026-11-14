@@ -19,8 +19,10 @@ printed, in small form.
 - [`PLAN.md`](PLAN.md) is the pre-stated plan, frozen by
   [`receipts/plan.sha256`](receipts/plan.sha256) before any sample or control ran.
 - [`receipts/freeze.sha256`](receipts/freeze.sha256) lists the SHA-256 of every program
-  and output, written before the lane read the record’s own material on the claim (step
-  5 of the brief).
+  and output, written at 2026-11-14T04:41:26Z, before the lane read the record’s own
+  material on the claim (step 5 of the brief), and committed as `2e04440f`. After it,
+  only this README’s prose and the review’s §§11 and 13 (with its §10 digest table)
+  changed; no program or output did.
 
 ## Programs
 
@@ -44,6 +46,22 @@ source or of evand/square-packing.
 | `zmx2_leaf_probe.py` | clean-room | Exact `mu` against `zmx2`’s certified bound in its tightest certified leaves |
 | `tt_region.py` | driver and oracle | Runs the source’s `ttbox.run` on one chart and face region; wraps `ttbox.analyse` to record each certified cell’s vertices and bound T, maps each vertex to a pose by this file’s own chart formulas, and requires exact `mu(P) − 1 ≥ T` |
 | `run_jobs.sh` | driver | Runs a job list one or two at a time under `nice -n 19` with a wall cap, recording real, user and system time |
+
+## What the Runs Printed
+
+| Run | Result |
+| --- | --- |
+| `k2m5_cover.py` | total `121 − 4D`, D = 1340566927759/10¹²; D4-invariant; built `mu_11` = board; totals `k² − 4D` for k = 10 to 40; Lemma 7’s premises hold; 0 window mismatches for k = 10, 12, 13, 14, 20, 25; the self-control mismatches 3 windows |
+| `k2m5_axis.py` | least corner limit exactly 1 (3,000 of 40,000; 750 of 10,000 in the D4 region); M-2: `999999999913/10¹²` |
+| `k2m5_samples.py` | S1–S4, 41,268 poses: none below 1; S5: `ctl_rise` mutant `1 − 1.3356·10⁻⁷`, `mu_11` `1 + 1.2205·10⁻⁷`; M-1: 1 and 0.999999 |
+| `k2m5_coverage.py` | 1,255,023 boxes covered; 308 + 15 jobs certified chart by chart; 325 of the 326 job outputs do not record `K`; M-4 (re-chosen box) refused |
+| `closure_9632.py` | closed; M-5 and the source’s ×0.999 window cover refused |
+| `zmx2` (`outputs/zmx2/`) | `cert0` both ways verified; columns 29, 30, 48 equal to the source’s census; 40 random roots certified; root 9632 and roots 3436, 3472, 5668 box for box equal; controls as in the review |
+| `zmx2_leaf_probe.py` | 32,476 evaluations in 3,300 tightest leaves: no mass below the certified bound |
+| `qx2_zm.py` (`outputs/qx2/`, `outputs/qx2c/`) | the window and its ×0.999 control equal to the source’s runs |
+| Tight-Tile (`outputs/tt/`) | 8 jobs and the wedge-corner rerun equal to the source’s outputs; the oracle found no vertex with `mu − 1 < T` at 7,548 vertices; `ctl_rise` and M-3 refused |
+
+`outputs/comparisons.jsonl` holds every replay-against-source comparison.
 
 ## Departures From the Plan
 
