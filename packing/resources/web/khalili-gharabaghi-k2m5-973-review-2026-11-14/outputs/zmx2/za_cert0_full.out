@@ -1,0 +1,4 @@
+# zmx2 cert0 (theta = 0) hash=a53f06f25d54b3df mode=full depth=40 area=1
+done0 in 0.1s: roots 10000, boxes 10000, certified 10000, uncertified 0, max depth 0
+VERIFIED (theta = 0): every closed axis-parallel unit square in [0,s]^2 has mu >= 1
+# L144 packaging: 0 UNCERT lines removed; sha256 of their sorted box strings e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

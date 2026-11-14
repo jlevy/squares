@@ -1,0 +1,6 @@
+tight-tile jobs (u0 = 1/4000): 308; not certified: 0
+u0 = 1/2000 jobs: 15; not certified: 0
+extra u0 = 1/2000 regions used: 5 of 5
+files 75 (finished 75); uncertified boxes 1255023; inside certified tight-tile regions 1255022; OUTSIDE 1
+  outside: ('10000', [4.50748291015625, 4.5074951171875, 2.5, 2.50001220703125, 0.0, 0.0002500000009094947])
+COVERAGE-NOT-OK
