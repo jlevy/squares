@@ -24582,6 +24582,7 @@ urls:
     evidence:
     - E-ono-984-certificate-report
     - E-ono-984-exact-feasibility
+    - E-ono-984-review-exact-feasibility
     artifacts:
     - packing/resources/web/ono-issue984-2026-11-14/README.md
     - packing/resources/web/ono-issue984-2026-11-14/acquisition/claims.json
@@ -24594,6 +24595,9 @@ urls:
     - packing/resources/web/ono-issue984-2026-11-14/measure/contraction-n228-t174.json
     - packing/resources/web/ono-issue984-2026-11-14/measure/contraction-n228-own.json
     - packing/resources/web/ono-issue984-2026-11-14/measure/l-step-scan.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/check-n228.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n228.json
+    - docs/project/reviews/review-2026-11-14-ono-984-985.md
     - packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
@@ -24620,6 +24624,7 @@ urls:
     evidence:
     - E-ono-985-certificate-report
     - E-ono-985-exact-feasibility
+    - E-ono-985-review-exact-feasibility
     artifacts:
     - packing/resources/web/ono-issue985-2026-11-14/README.md
     - packing/resources/web/ono-issue985-2026-11-14/acquisition/claims.json
@@ -24631,6 +24636,9 @@ urls:
     - packing/resources/web/ono-issue985-2026-11-14/measure/contraction-n147-t155.json
     - packing/resources/web/ono-issue985-2026-11-14/measure/contraction-n147-own.json
     - packing/resources/web/ono-issue985-2026-11-14/measure/l-step-scan.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/check-n147.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n147.json
+    - docs/project/reviews/review-2026-11-14-ono-984-985.md
     - packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py

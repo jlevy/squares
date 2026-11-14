@@ -47001,8 +47001,9 @@ results:
       nearest centres: the optimal assignment moves 96 squares beyond a tenth of T-300's and 89
       of T-174's.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-jbwm).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 14
+      November 2026 accepts it, its clean-room checker independently re-implemented, and
+      accepts the same squares in the box of the claim's own side, 15.596043120921 (F4).
 
       The issue says the repository's frozen verifier, verify.py (exact Fraction arithmetic,
       separating axes, all 25878 pairs), reports VALID; that search/indep_check.py, exact
@@ -47046,11 +47047,14 @@ results:
         A new arrangement at 228 relative to T-300's and T-174's packings, 4.76e-03 below T-300,
         far above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and
         T-226's 1.88e-05 (S3), where new and continued arrangements are S3: beside T-300's
-        3.80e-03 there and T-297's 9.74e-03 at 269. Cutting band periods from a larger band
-        packing continues a known construction, as T-290's strip cut of a 304 did, so no
-        technique is new and it is not S4. No lower bound or optimum.
+        3.80e-03 there and T-297's 9.74e-03 at 269. Removing band periods is new to the
+        record, but here it is one hit of a sweep its author reports over the whole record,
+        and whether it is a reusable technique depends on its carrying further, so not S4. No
+        lower bound or optimum. The stage 4 review of 14 November confirms S3.
       scored: '2026-11-14'
-      by: think-17ex Roberto Ono import (intake lane L164), a draft for the stage 4 review
+      by: >-
+        think-17ex Roberto Ono import (intake lane L164), confirmed by the stage 4 review of 14
+        November (lane L163)
     novelty: previously-published
     attribution:
       source_keys:
@@ -47059,6 +47063,7 @@ results:
     evidence:
     - E-ono-984-certificate-report
     - E-ono-984-exact-feasibility
+    - E-ono-984-review-exact-feasibility
     artifacts:
     - packing/resources/web/ono-issue984-2026-11-14/README.md
     - packing/resources/web/ono-issue984-2026-11-14/acquisition/claims.json
@@ -47071,6 +47076,9 @@ results:
     - packing/resources/web/ono-issue984-2026-11-14/measure/contraction-n228-t174.json
     - packing/resources/web/ono-issue984-2026-11-14/measure/contraction-n228-own.json
     - packing/resources/web/ono-issue984-2026-11-14/measure/l-step-scan.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/check-n228.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n228.json
+    - docs/project/reviews/review-2026-11-14-ono-984-985.md
     - packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
@@ -47079,6 +47087,7 @@ results:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l164_1114.py
     - packing/resources/web/ono-issue984-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n228.json
     notes: >-
       A separate complete repository replay is retained for n = 228: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -47137,13 +47146,76 @@ results:
       repository's reader of the source's JSON (certificate parsing), half-angle conversion,
       Fraction arithmetic and the separating-axis method, and share no code with the author's
       checkers. No human oversight or optimality is claimed.
+
+      The stage 4 review of 14 November 2026
+      (docs/project/reviews/review-2026-11-14-ono-984-985.md, lane L163), written in a separate
+      lane blind to this one throughout, accepts the certificate with #985's, fourteen findings,
+      all notes, none blocking: its clean-room checker decides every square, wall and all 25878
+      pairs by separating axes in Python integers and by exact Sutherland-Hodgman clipping in
+      gmpy2.mpq, no pair touching, the least pair margin 2.38935e-10 at squares 8 and 21, and all
+      20 of its controls at this count, stated beforehand, came out as stated (F1, F3;
+      E-ono-984-review-exact-feasibility).
+
+      It finds the packing touching three walls, not four
+      as the issue says: squares 22 at the left, 31 and 34 at the bottom and 144 at the right,
+      the top cleared by 1.77e-12 at square 114, so the side is the extent in x (F5).
+
+      After its freeze the review rebuilt the stated cut: it gives 228 squares only under the
+      mirror x -> S - x (or a quarter turn) and with two squares dropped whose centres land
+      outside the new box, neither of which the issue names; so read, the deepest overlap is
+      0.101287, as stated, and the certificate lies 34 squares beyond a tenth from that seed
+      (F9). It is a new arrangement relative to every registered packing at 228, T-300, T-174,
+      T-128, T-098, T-092 and T-056 (F12); no s(m) + k is its side within 1e-9, the nearest
+      s(37) + 9 at 2.58e-3; and removing a band period is new to the record (F10).
+
+      This lane recorded its replay, controls and measurements at 21:29Z on 14 November and
+      registered this entry at 21:44Z, before it read the review. It read the review's frozen
+      findings (frozen at 21:17Z, verdict accepted) at 21:45Z and its final head, the checks
+      after the freeze (committed at 21:54Z), at 21:56Z, and merged that head before mapping
+      it.
+
+      Read against this lane's receipts after both were done, the review's least pair margin
+      is the replay's exactly, and square 22, the one this lane's sharp controls grew at its
+      wall, is one of its wall contacts; its contraction receipts for T-174, T-300 and the
+      certificate itself equal the packet's in margin, factor and binding pair, and its
+      identity measurement against T-300 and T-174 equals the packet's under nearest centres,
+      the optimal assignment and box-centred alignment, as do the tilt counts. No disagreement.
+
+      Its six questions for the author hold no rung: which mirror was applied to Couzo's 404
+      and whether the two squares landing outside were deleted (F9); whether the issue would
+      say three walls (F5); whether the format would state the box and the sense of theta
+      (F6); whether two checkers would raise rather than assert, and verify.py refuse a missing
+      t and unknown keys (F13); whether the strict JSON's digests would be stated (F7); and
+      whether the diagonal-period sweep's near misses will be published.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one, under
-      think-jbwm): its mathematics, a clean-room exact checker with sharp controls, the identity
-      against T-300's and T-174's packings and the construction the source states, mapped as an
-      adversarial review, whose acceptance the house rule waits on. Then adopt it at 228 in
-      place of T-300 under the house rule, with both strong generators' regularization,
-      measured against the new witness, and the flip of the new house in the same change.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 14 November, is
+      retained. It is the smallest validated side at 228; adopt it there in place of T-300
+      under the house rule, with both strong generators' regularization, measured against the
+      new witness, and the flip of the new house in the same change. The review's questions
+      for the author hold no rung, and the contracted side its F11 measures is the owner's RV-3
+      question, not registered.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-14-ono-984-985.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 984 and
+        985 (L163, under think-jbwm), prompted separately from the import lane (L164,
+        think-17ex) and blind to its work throughout
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-14'
+      scope: >-
+        Finite feasibility of the centre and half-angle certificate of issue 984 (228),
+        decided again by a clean-room exact checker frozen before any producer or witness code
+        was read, by two methods, with 20 controls at this count stated in advance and a
+        self-test of 13,326 cases; the claim's arithmetic and the issue's prints, the padding of
+        T-174 and T-300 against the gain and the certificate's own, the identity against every registered
+        packing at 228, the lineage rebuilt from Couzo's 404, the closed-form and L-step question,
+        custody, licence, the author's checkers and the significance.
+      verdict: accepted
+      covers:
+      - T-301
   - id: T-302
     kind: upper-bound
     registered: '2026-11-14'
@@ -47162,8 +47234,9 @@ results:
       to the house's packing, not one to one with it under any symmetry of the box by nearest
       centres: the optimal assignment moves 92 squares beyond a tenth.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-jbwm).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 14
+      November 2026 accepts it, its clean-room checker independently re-implemented, and
+      accepts the same squares in the box of the claim's own side, 12.651043556588 (F4).
 
       The issue says the repository's frozen verifier, verify.py (all 10731 pairs), reports
       VALID; that search/indep_check.py (exact rational polygon clipping, 328 close pairs)
@@ -47207,11 +47280,15 @@ results:
         A new arrangement at 147 relative to the house's 45-degree packing, 5.81e-03 below 7 +
         4*sqrt(2), the first packing below that closed form at 147, as T-196 was the first below
         11 + 4*sqrt(2) at 260 (S3); far above the S2/S3 line T-239's rationale draws between
-        T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3). Cutting a band period from a larger
-        band packing continues a known construction, as T-290's strip cut of a 304 did, so no
-        technique is new and it is not S4. No lower bound or optimum.
+        T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), and as T-248 at 299 was below the
+        catalogue's closed-form construction there. A conjectured optimum beaten is not a
+        resolved dispute, and removing band periods, new to the record, is not yet shown to
+        carry beyond its two counts, so not S4. No lower bound or optimum. The stage 4 review
+        of 14 November confirms S3.
       scored: '2026-11-14'
-      by: think-17ex Roberto Ono import (intake lane L164), a draft for the stage 4 review
+      by: >-
+        think-17ex Roberto Ono import (intake lane L164), confirmed by the stage 4 review of 14
+        November (lane L163)
     novelty: previously-published
     attribution:
       source_keys:
@@ -47220,6 +47297,7 @@ results:
     evidence:
     - E-ono-985-certificate-report
     - E-ono-985-exact-feasibility
+    - E-ono-985-review-exact-feasibility
     artifacts:
     - packing/resources/web/ono-issue985-2026-11-14/README.md
     - packing/resources/web/ono-issue985-2026-11-14/acquisition/claims.json
@@ -47231,6 +47309,9 @@ results:
     - packing/resources/web/ono-issue985-2026-11-14/measure/contraction-n147-t155.json
     - packing/resources/web/ono-issue985-2026-11-14/measure/contraction-n147-own.json
     - packing/resources/web/ono-issue985-2026-11-14/measure/l-step-scan.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/check-n147.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n147.json
+    - docs/project/reviews/review-2026-11-14-ono-984-985.md
     - packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
@@ -47239,6 +47320,7 @@ results:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l164_1114.py
     - packing/resources/web/ono-issue985-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n147.json
     notes: >-
       A separate complete repository replay is retained for n = 147: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -47289,14 +47371,71 @@ results:
       repository's reader of the source's JSON, half-angle conversion, Fraction arithmetic and
       the separating-axis method, and share no code with the author's checkers. No human
       oversight or optimality is claimed.
+
+      The stage 4 review of 14 November 2026
+      (docs/project/reviews/review-2026-11-14-ono-984-985.md, lane L163), written in a separate
+      lane blind to this one throughout, accepts the certificate with #984's, fourteen findings,
+      all notes, none blocking: its clean-room checker decides every square, wall and all 10731
+      pairs by separating axes in Python integers and by exact Sutherland-Hodgman clipping in
+      gmpy2.mpq, no pair touching, the least pair margin 3.00262e-10 at squares 101 and 108,
+      and all 20 of its controls at this count, stated beforehand, came out as stated (F2, F3;
+      E-ono-985-review-exact-feasibility).
+
+      It finds the packing touching three walls, not four
+      as the issue says: squares 3 at the left, 65 at the bottom and 134 at the top, the right
+      cleared by 1.92e-13 at square 106, so the side is the extent in y (F5).
+
+      After its freeze the review rebuilt the stated cut exactly: 147 squares, the deepest
+      overlap 0.00978, and the certificate a refinement of that seed, one to one with it, no
+      square moved beyond 0.046 (F10); removing a band period is new to the record. It is a new
+      arrangement relative to T-101, T-155 and the house, the 148 house less one corner square,
+      so s(148) is not moved, and the case's listed conjectured optimum, 7 + 4*sqrt(2), is
+      beaten, as the catalogue's values at 260 and 299 were (F12). No s(m) + k is its side
+      within 1e-9 but the old record itself, s(66) + 4 and s(124) + 1.
+
+      This lane recorded its replay, controls and measurements at 21:29Z on 14 November and
+      registered this entry at 21:44Z, before it read the review. It read the review's frozen
+      findings (frozen at 21:17Z, verdict accepted) at 21:45Z and its final head, the checks
+      after the freeze (committed at 21:54Z), at 21:56Z, and merged that head before mapping
+      it.
+
+      Read against this lane's receipts after both were done, the review's least pair margin
+      is the replay's exactly, and square 3, the one this lane's sharp controls grew at its
+      wall, is one of its wall contacts; its contraction receipts for T-155 and the certificate
+      itself equal the packet's in margin, factor and binding pair, and its identity
+      measurement against the house's packing equals the packet's, as do the tilt counts. No
+      disagreement.
+
+      Its questions for the author, shared with #984's entry, hold no rung.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one, under
-      think-jbwm): its mathematics, a clean-room exact checker with sharp controls, the identity
-      against the house's packing and the construction the source states, mapped as an
-      adversarial review, whose acceptance the house rule waits on. Then adopt it at 147, first
-      adopted here, in place of the case record's own house under the house rule, with both
-      strong generators' regularization, measured against the new witness, and the flip of the
-      new house in the same change.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 14 November, is
+      retained. It is the smallest validated side at 147; adopt it there, first adopted here, in
+      place of the case record's own house under the house rule, with both strong generators'
+      regularization, measured against the new witness, and the flip of the new house in the
+      same change. The review's questions for the author hold no rung, and the contracted side
+      its F11 measures is the owner's RV-3 question, not registered.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-14-ono-984-985.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 984 and
+        985 (L163, under think-jbwm), prompted separately from the import lane (L164,
+        think-17ex) and blind to its work throughout
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-14'
+      scope: >-
+        Finite feasibility of the centre and half-angle certificate of issue 985 (147),
+        decided again by a clean-room exact checker frozen before any producer or witness code
+        was read, by two methods, with 20 controls at this count stated in advance and a
+        self-test of 13,326 cases; the claim's arithmetic and the issue's prints, the padding of
+        T-155 and T-101 against the gain and the certificate's own, the identity against every registered
+        packing at 147, the lineage rebuilt from Evan Daniel's 229, the closed-form and L-step question,
+        custody, licence, the author's checkers and the significance.
+      verdict: accepted
+      covers:
+      - T-302
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

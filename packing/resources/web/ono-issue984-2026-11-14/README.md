@@ -199,9 +199,63 @@ first contact and boxed it, each contracted packing decided on both maintained r
 and monotonicity consequences as on `main`: this bound carries to no other count
 ([measure/l-step-scan.json](measure/l-step-scan.json)).
 
+## Stage 4 Review
+
+The stage 4 mathematical review of 14 November 2026
+([review-2026-11-14-ono-984-985.md](../../../../docs/project/reviews/review-2026-11-14-ono-984-985.md)),
+written in a separate lane (L163) blind to this one throughout, accepts both
+certificates with fourteen findings, all notes, none blocking, and scores each S3. Its
+clean-room checker decides every square, wall and pair by separating axes in Python
+integers and by exact Sutherland–Hodgman clipping in GMP rationals, with 40 controls
+stated before they ran, all 40 as stated, and accepts the squares in the box of the
+claim’s own side, 15.596043120921, and refuses them in the box of its 12-place floor
+(F4). Its programs and receipts are kept in the review-only directory beside this
+packet, [ono-984-985-review-2026-11-14](../ono-984-985-review-2026-11-14/README.md).
+
+This lane recorded its replay, controls and measurements in its intake commit
+(`3f0976140`, 21:29Z) and registered T-301 and T-302 (`fcce6be56`, 21:44Z) before it
+read the review. It read the review’s frozen findings (`8504d8e04`, frozen at 21:17Z) at
+21:45Z and its final head, the checks after the freeze (`6d1e3383e`, 21:54Z), at 21:56Z,
+and merged that head before mapping it.
+Read against this packet’s receipts once both were done, the review’s least pair margin
+(2.38935 × 10⁻¹⁰, squares 8 and 21) is the replay’s exactly, and square 22, the square
+the sharp controls grew at its wall, is one of its four wall contacts (22 at the left,
+31 and 34 at the bottom, 144 at the right).
+Its contraction receipts for T-174 (0, squares 201 and 227), T-300 (2.949 × 10⁻¹²,
+squares 118 and 119) and this certificate (3.488 × 10⁻⁹, squares 8 and 21) equal
+[measure/](measure/)’s in margin, factor and binding pair, and its identity measurement
+against T-300 and T-174 equals [measure/identity.json](measure/identity.json) under
+nearest centres, the optimal assignment and box-centred alignment, as do the tilt
+counts. No disagreement.
+
+What the review adds:
+
+- **Three walls, not four** (F5): no square touches the top wall, cleared by 1.77 ×
+  10⁻¹² at square 114, so the side is the packing’s extent in x.
+- **The lineage** (F9): the stated cut of Couzo’s 404 gives 228 squares only under the
+  mirror x → S − x (or a quarter turn) and with two squares dropped whose centres land
+  outside the new box, neither of which the issue names; so read, the deepest overlap is
+  0.101287, as stated, and the certificate lies 34 squares beyond a tenth from that
+  seed. Removing a band period is new to the record (F10).
+- **A new arrangement** relative to every registered packing at 228: T-300, T-174,
+  T-128, T-098, T-092 and T-056 (F12). No s(m) + k is the side within 10⁻⁹; the nearest
+  is s(37) + 9, 2.58 × 10⁻³ away.
+- **The prints** hold (F14), and two of the author’s checkers decide by `assert` (F13).
+
+Its six questions for the author, informational and holding nothing open:
+
+1. Which mirror was applied to Couzo’s 404, and were the two squares landing outside the
+   new box deleted (F9)?
+2. Would the issue say three walls, naming the wall each packing misses (F5)?
+3. Would the format state the box [0, S]² and the sense of θ (F6)?
+4. Would `indep_check.py` and `fu_strict_check.py` raise rather than assert, and
+   `verify.py` refuse a missing `t` and unknown or duplicate keys (F13)?
+5. Would the `.strict.json` digests be stated beside the `.strict.cert` ones (F7)?
+6. Will the diagonal-period sweep’s table of near misses be published?
+
 ## What Is Not Established
 
-- **Human oversight.** No human oversight record.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows; the cut

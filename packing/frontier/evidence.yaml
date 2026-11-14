@@ -62905,6 +62905,21 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-14'
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 984 and
+        985 (L163, under think-jbwm), prompted separately from the import lane (L164,
+        think-17ex) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-ono-984-985.md accepted both certificates with fourteen
+        findings, all notes, none blocking: F1 on feasibility at 228, F3 on the review's own 40
+        controls, F4 on the claim's own box, F5 (three walls touched, not four), F6, F7, F13
+        and F14 for the author, F9 on the lineage's unstated mirror and dropped squares, F8, F11 and F12 for the records (padding, RV-3 not
+        applying, a new arrangement relative to every registered packing at the count), and S3.
+        Its clean-room run is E-ono-984-review-exact-feasibility, and the replay
+        E-ono-984-exact-feasibility.
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at b5636fd,
       the revision fce076f the issue names holding the same certificate. A separate complete repository replay is retained for n = 228: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 155268 pair decisions; summed over the 3 jobs, the receipt records 24.43 route CPU seconds and 24.61 job wall seconds, the longest job 8.51 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least 2.389e-10. The
@@ -62972,6 +62987,21 @@ evidence:
           certify.py, indep_check.py or fu_strict_check.py; it read the certificate's fields to
           write its reader. The routes' authors read other sources' formats and, in earlier
           lanes, other sources' checkers, so the record does not call them clean room.
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 984 and
+        985 (L163, under think-jbwm), prompted separately from the import lane (L164,
+        think-17ex) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-ono-984-985.md accepted both certificates with fourteen
+        findings, all notes, none blocking: F1 on feasibility at 228, F3 on the review's own 40
+        controls, F4 on the claim's own box, F5 (three walls touched, not four), F6, F7, F13
+        and F14 for the author, F9 on the lineage's unstated mirror and dropped squares, F8, F11 and F12 for the records (padding, RV-3 not
+        applying, a new arrangement relative to every registered packing at the count), and S3.
+        Its clean-room run is E-ono-984-review-exact-feasibility, and the replay
+        E-ono-984-exact-feasibility.
     limitations: >-
       A replay of the one retained certificate by two maintained exact routes. The two maintained routes, the sqpack rational witness verifier and the independent rational corner checker, share this repository's reader of the source's JSON (certificate parsing), half-angle conversion, Fraction arithmetic and the separating-axis method, and share no code with the author's three checkers, which were not run here.
       A separate complete repository replay is retained for n = 228: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 155268 pair decisions; summed over the 3 jobs, the receipt records 24.43 route CPU seconds and 24.61 job wall seconds, the longest job 8.51 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least 2.389e-10. The receipt's controls are gross, and the packet's sharp controls meet
@@ -62993,6 +63023,21 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-14'
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 984 and
+        985 (L163, under think-jbwm), prompted separately from the import lane (L164,
+        think-17ex) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-ono-984-985.md accepted both certificates with fourteen
+        findings, all notes, none blocking: F2 on feasibility at 147, F3 on the review's own 40
+        controls, F4 on the claim's own box, F5 (three walls touched, not four), F6, F7, F13
+        and F14 for the author, F10 on the lineage, which reproduces exactly, F8, F11 and F12 for the records (padding, RV-3 not
+        applying, a new arrangement relative to every registered packing at the count), and S3.
+        Its clean-room run is E-ono-985-review-exact-feasibility, and the replay
+        E-ono-985-exact-feasibility.
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at b5636fd,
       the revision fce076f the issue names holding the same certificate. A separate complete repository replay is retained for n = 147: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 64386 pair decisions; the 3 jobs took about 11 job wall seconds in all. In every positive squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least 3.003e-10. The
@@ -63060,8 +63105,193 @@ evidence:
           certify.py, indep_check.py or fu_strict_check.py; it read the certificate's fields to
           write its reader. The routes' authors read other sources' formats and, in earlier
           lanes, other sources' checkers, so the record does not call them clean room.
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 984 and
+        985 (L163, under think-jbwm), prompted separately from the import lane (L164,
+        think-17ex) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-ono-984-985.md accepted both certificates with fourteen
+        findings, all notes, none blocking: F2 on feasibility at 147, F3 on the review's own 40
+        controls, F4 on the claim's own box, F5 (three walls touched, not four), F6, F7, F13
+        and F14 for the author, F10 on the lineage, which reproduces exactly, F8, F11 and F12 for the records (padding, RV-3 not
+        applying, a new arrangement relative to every registered packing at the count), and S3.
+        Its clean-room run is E-ono-985-review-exact-feasibility, and the replay
+        E-ono-985-exact-feasibility.
     limitations: >-
       A replay of the one retained certificate by two maintained exact routes. The two maintained routes, the sqpack rational witness verifier and the independent rational corner checker, share this repository's reader of the source's JSON (certificate parsing), half-angle conversion, Fraction arithmetic and the separating-axis method, and share no code with the author's three checkers, which were not run here.
       A separate complete repository replay is retained for n = 147: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 64386 pair decisions; the 3 jobs took about 11 job wall seconds in all. In every positive squares touch the box, a least wall clearance of exactly 0, and every pair clears by at least 3.003e-10. The receipt's controls are gross, and the packet's sharp controls meet
       those margins. Finite feasibility only.
+    source_reviewed: '2026-11-14'
+  - id: E-ono-984-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 228
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Ono issue 984 2026-11-14]'
+    certificate: packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B on a shared host at nice 19,
+      14 November 2026, from the review-only directory ono-984-985-review-2026-11-14
+      (programs/): l163_check.py on n228_S59604312.json, its .cert twin and its strict variants
+      (out/check-n228.json, ACCEPT), deciding every reading hypothesis, every square a unit
+      square, every wall and all 25,878 pairs by separating axes in Python integers over
+      per-square denominators and again by exact Sutherland-Hodgman clipping in gmpy2.mpq, with
+      containment by area, with no distance filter, in about 4 CPU seconds: four squares touch three walls (22 left, 31 and 34 bottom, 144 right; the top is cleared by 1.77e-12, square 114),
+      the least positive wall clearance 7.99e-19 (square 1 and nine more, bottom), no pair touching, and the least pair
+      margin 2.38935e-10, at squares 8 and 21. l163_controls.py decided the 20 controls the plan stated
+      beforehand at this count, by both methods or the reader (out/controls-n228.json,
+      31.3 CPU seconds), all 20 as stated; among them the squares accepted in the box of
+      the claim's own side, 15.596043120921, and refused in the box of its 12-place floor, the
+      rotation read the other way refused for 68 overlapping pairs, and each of the
+      515 pairs below 1e-6 closed along its centre line to exact contact and 1e-30 past it;
+      l163_selftest.py passed 13,326 cases. The review gives the commands.
+    replay_status: passed
+    verifiers:
+    - V-ono-984-985-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 228: every square, every wall and every pair, by two exact
+          methods in two arithmetic libraries that share only the reader, with the stated
+          controls decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issues 984 and 985 (L163, under think-jbwm),
+          strong tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the packings were found, certified and checked by a Claude agent in the
+          author's harness. The checker was written from the mathematics, the issues and the
+          certificate files and frozen at 2026-11-14T21:07:22Z, before its author read any
+          producer code, the author's checkers or their outputs, or this repository's witness,
+          verifier or promotion code; it shares no code with the source's checkers, this
+          repository's maintained routes or any earlier review's programs.
+    independence_record: packing/resources/web/ono-984-985-review-2026-11-14/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 984 and
+        985 (L163, under think-jbwm), prompted separately from the import lane (L164,
+        think-17ex) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-ono-984-985.md accepted both certificates with fourteen
+        findings, all notes, none blocking: F1 on feasibility at 228, F3 on the review's own 40
+        controls, F4 on the claim's own box, F5 (three walls touched, not four), F6, F7, F13
+        and F14 for the author, F9 on the lineage's unstated mirror and dropped squares, F8, F11 and F12 for the records (padding, RV-3 not
+        applying, a new arrangement relative to every registered packing at the count), and S3.
+        Its clean-room run is E-ono-984-review-exact-feasibility, and the replay
+        E-ono-984-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the one retained certificate by two exact methods in one program,
+      which share its reader. Finite feasibility only.
+    source_reviewed: '2026-11-14'
+  - id: E-ono-985-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 147
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Ono issue 985 2026-11-14]'
+    certificate: packing/resources/web/ono-issue985-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B on a shared host at nice 19,
+      14 November 2026, from the review-only directory ono-984-985-review-2026-11-14
+      (programs/): l163_check.py on n147_S65104355.json, its .cert twin and its strict variants
+      (out/check-n147.json, ACCEPT), deciding every reading hypothesis, every square a unit
+      square, every wall and all 10,731 pairs by separating axes in Python integers over
+      per-square denominators and again by exact Sutherland-Hodgman clipping in gmpy2.mpq, with
+      containment by area, with no distance filter, in about 2 CPU seconds: three squares touch three walls (3 left, 65 bottom, 134 top; the right is cleared by 1.92e-13, square 106),
+      the least positive wall clearance 2.72e-15 (square 28, left), no pair touching, and the least pair
+      margin 3.00262e-10, at squares 101 and 108. l163_controls.py decided the 20 controls the plan stated
+      beforehand at this count, by both methods or the reader (out/controls-n147.json,
+      14.6 CPU seconds), all 20 as stated; among them the squares accepted in the box of
+      the claim's own side, 12.651043556588, and refused in the box of its 12-place floor, the
+      rotation read the other way refused for 56 overlapping pairs, and each of the
+      326 pairs below 1e-6 closed along its centre line to exact contact and 1e-30 past it;
+      l163_selftest.py passed 13,326 cases. The review gives the commands.
+    replay_status: passed
+    verifiers:
+    - V-ono-984-985-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 147: every square, every wall and every pair, by two exact
+          methods in two arithmetic libraries that share only the reader, with the stated
+          controls decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issues 984 and 985 (L163, under think-jbwm),
+          strong tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the packings were found, certified and checked by a Claude agent in the
+          author's harness. The checker was written from the mathematics, the issues and the
+          certificate files and frozen at 2026-11-14T21:07:22Z, before its author read any
+          producer code, the author's checkers or their outputs, or this repository's witness,
+          verifier or promotion code; it shares no code with the source's checkers, this
+          repository's maintained routes or any earlier review's programs.
+    independence_record: packing/resources/web/ono-984-985-review-2026-11-14/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 984 and
+        985 (L163, under think-jbwm), prompted separately from the import lane (L164,
+        think-17ex) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-ono-984-985.md accepted both certificates with fourteen
+        findings, all notes, none blocking: F2 on feasibility at 147, F3 on the review's own 40
+        controls, F4 on the claim's own box, F5 (three walls touched, not four), F6, F7, F13
+        and F14 for the author, F10 on the lineage, which reproduces exactly, F8, F11 and F12 for the records (padding, RV-3 not
+        applying, a new arrangement relative to every registered packing at the count), and S3.
+        Its clean-room run is E-ono-985-review-exact-feasibility, and the replay
+        E-ono-985-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the one retained certificate by two exact methods in one program,
+      which share its reader. Finite feasibility only.
     source_reviewed: '2026-11-14'

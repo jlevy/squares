@@ -163,9 +163,44 @@ house at 147, 7 + 4√2, was the L step from 124’s 6 + 4√2, and this side is
 The L step from this side lands at 172 above its house, so the bound carries to no other
 count.
 
+## Stage 4 Review
+
+The stage 4 review of 14 November 2026
+([review-2026-11-14-ono-984-985.md](../../../../docs/project/reviews/review-2026-11-14-ono-984-985.md),
+lane L163), written blind to this lane throughout, accepts this certificate with #984’s,
+fourteen findings, all notes, none blocking, and scores it S3, as the record scored
+T-196 at 260 and T-248 at 299. Its clean-room checker decides every square, wall and all
+10,731 pairs twice, all 20 of its controls at this count as stated, and accepts the
+squares in the box of the claim’s own side, 12.651043556588 (F4). This lane read it as
+the [228 packet’s README](../ono-issue984-2026-11-14/README.md#stage-4-review) says: its
+frozen findings at 21:45Z and its final head at 21:56Z, after its own replay, controls
+and measurements (21:29Z) and registration (21:44Z) were committed.
+Read against this packet’s receipts, the review’s least pair margin (3.00262 × 10⁻¹⁰,
+squares 101 and 108) is the replay’s exactly, square 3, which the sharp controls grew at
+its wall, is one of its three wall contacts (3 at the left, 65 at the bottom, 134 at the
+top), and its contraction receipts for T-155 (0, squares 1 and 2) and this certificate
+(2.934 × 10⁻⁹, squares 145 and 147) and its identity measurement against the house’s
+packing equal [measure/](measure/)’s. No disagreement.
+
+What the review adds:
+
+- **Three walls, not four** (F5): no square touches the right wall, cleared by 1.92 ×
+  10⁻¹³ at square 106, so the side is the packing’s extent in y.
+- **The lineage reproduces exactly** (F10): the stated cut of Evan Daniel’s 229 leaves
+  147 squares with deepest overlap 0.00978, and the certificate is a refinement of that
+  seed, one to one with it, no square moved beyond 0.046.
+- **A new arrangement** relative to T-101, T-155 and the house, which is the 148 house
+  less one corner square, so s(148) is not moved; the case’s listed conjectured optimum,
+  7 + 4√2, is beaten, as the catalogue’s values at 260 and 299 were (F12). No s(m) + k
+  is the side within 10⁻⁹ but the old record itself, s(66) + 4 and s(124) + 1.
+- T-101, the earlier exact certificate of the house’s packing, has margin 1.27 × 10⁻¹⁹,
+  and RV-3 does not apply (F11).
+
+Its questions for the author are shared with #984 and listed in the 228 packet’s README.
+
 ## What Is Not Established
 
-- **Human oversight.** No human oversight record.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind.
 - **The lineage** the source states, beyond what the measurement above shows; the cut
   from Daniel’s 229 was not rebuilt here.

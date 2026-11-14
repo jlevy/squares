@@ -1094,6 +1094,7 @@ case or experiment separately.
 | [Özden’s Certificate of #967: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-12-ozden-967.md) | dated review record | record | retained | — |
 | [De Winter’s Certificates of #977 and #979: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-de-winter-977-979.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #983: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ozden-983.md) | dated review record | record | retained | — |
+| [Ono’s Certificates of #984 and #985: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ono-984-985.md) | dated review record | record | retained | — |
 | [Proof Review: Khalili and Gharabaghi’s `s(k² − 5) = k` for Every `k ≥ 7`](docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md) | dated review record | record | retained | — |
 | [De Winter’s Packings at 132 and 157: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-dewinter-132-157.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #959: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-12-ozden-959.md) | dated review record | record | retained | — |
