@@ -3,9 +3,9 @@ type: is
 id: is-01m7bwac8g3ns9chyz5wfgfhx7
 title: "Blind stage-4 review of #973 (k² − 5 family): μ₁₁ validity, locality reduction, Tight-Tile Lemma"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l144
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-14T01:56:27.023Z
-updated_at: 2026-11-14T04:45:46.148Z
+updated_at: 2026-11-14T08:13:57.789Z
 started_at: 2026-11-14T01:56:28.496Z
+closed_at: 2026-11-14T08:13:57.789Z
+close_reason: "Blind stage-4 review landed (f58b34b7b), mapped in #974; recorded in #976."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

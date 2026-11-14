@@ -5,14 +5,14 @@ title: "Price and run the full replay of #973's Valid11 and Lean reduction (k2m5
 kind: task
 status: open
 priority: 2
-version: 5
+version: 6
 labels:
   - validation
   - result-import
 dependencies: []
-parent_id: is-01m7bwabjnw739a8whwmhq1sre
+parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-14T02:17:04.972Z
-updated_at: 2026-11-14T06:56:22.845Z
+updated_at: 2026-11-14T08:13:50.774Z
 ---
 Priced full replay of Mohsen Khalili and Sara Gharabaghi's s(k^2 - 5) = k (jlevy/squares#973), held above the import lane's budget; the import is think-2vgx (lane L145, 14 November 2026).
 

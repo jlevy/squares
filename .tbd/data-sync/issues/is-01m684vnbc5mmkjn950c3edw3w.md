@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 285
+version: 288
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -89,10 +89,12 @@ child_order_hints:
   - is-01m7bwabjnw739a8whwmhq1sre
   - is-01m7bwac8g3ns9chyz5wfgfhx7
   - is-01m7c8z1ev7zzxpneb0h3816nw
+  - is-01m7bxg56ccnr8yr3dr26nrtd2
+  - is-01m7c65j5dk876m77ftewkck4q
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-14T06:51:37.231Z
+updated_at: 2026-11-14T08:13:58.196Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -251,3 +253,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-14 ~02:00Z: NEW #973 (moh63-dev: Khalili & Gharabaghi), s(k^2-5)=k for all k>=7; k>=10 by one periodic family reduced to board mu_11 (Valid11), Lean k2m5_of_valid11, new Tight-Tile Lemma for 75 roots; on Daniel zmx2/qx2_zm @659ee62. Labelled intake. Beads: import think-2vgx (lane L145, tbd-strong, 4 CPU-h timebox, full replay = owner-priced option), blind review think-h10k (lane L144, tbd-strong, 6 CPU-h). Precedent T-064/T-081. Reply owed after import merges.
 2026-11-14 ~05:30Z: L144 review done (f58b34b7b; accepted, F1/F2 major; 8 new counts; replay 145-320 CPU-h held think-0h7r; lemma review think-kn13). L145 import = draft #974 (T-298 V0/C1, head ca558e53). L146 senior review: B1 clean-room wording, B2 case files silent on F1/F2, B3 S4 label+News; 9 S. Labels S4+intake applied. L147 addressing. WebKit CI failure diagnosed: Playwright browser cache key lacks Ubuntu release, ubuntu-latest -> 26.04 restores ubuntu24 WebKit; fix = PR #975 (bca5f0dd3), review L148, CI waiting.
 2026-11-14 06:51Z: #975 CI fix merged b526521e4 (think-46as closed). L147 addressed L146 (B1-B3, S1-S9, notes) on #974; CI green incl. WebKit; #974 merged 9adc3a0ad 06:36Z (T-298 V0/C1 S4). Deploy+verify ok (run 43567161807). Final reply posted on #973 (issuecomment-6873382321), issue closed. L149 records+News PR in progress; then close think-2vgx, think-h10k. Owner-held: think-0h7r (full replay 145-320 CPU-h + Lean on >=24 GB host), think-kn13 (zmx2 lemma review).
+2026-11-14 ~08:30Z: #976 (records of #973 reply incl. edited Record ids paragraph; T-298 S4 News) reviewed by L151 (B1 + S1-S4 + notes applied), merged 7629f5ade. think-2vgx and think-h10k closed; think-0h7r and think-kn13 re-parented to this epic, blocked_on the owner decision.

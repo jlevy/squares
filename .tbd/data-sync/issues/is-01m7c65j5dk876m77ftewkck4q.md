@@ -5,14 +5,14 @@ title: Review zmx2's area-density and first-order lemmas (Lemmas 1-3, K, K(d), U
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - validation
   - result-import
 dependencies: []
-parent_id: is-01m7bwabjnw739a8whwmhq1sre
+parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-14T04:48:34.989Z
-updated_at: 2026-11-14T06:54:53.837Z
+updated_at: 2026-11-14T08:13:53.822Z
 ---
 Finding F1 of the stage 4 review of #973 (docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md, lane L144, think-h10k), held for the owner as a priced option: the record has never reviewed zmx2's area-density lemmas or its first-order lemmas, and T-298's 12,024 general-position roots of Valid11 rest on them.
 
