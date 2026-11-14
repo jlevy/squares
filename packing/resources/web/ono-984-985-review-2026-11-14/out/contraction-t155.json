@@ -1,0 +1,64 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 147,
+ "certificate": {
+  "label": "T-155",
+  "input": "witness-center-basis",
+  "path": "packing/cases/regularized_bounds/views/n-147.yaml.gz",
+  "sha256": "8ba39d1323c0957297c51a22e09ff0f045bbf982bd55147a49b557d1fde47faf"
+ },
+ "side": "316421356237309504880168872421/25000000000000000000000000000",
+ "lambda_star": "1",
+ "one_minus_lambda_star": "0.000000e+00",
+ "binding_pair": [
+  1,
+  2
+ ],
+ "contracted_side": "316421356237309504880168872421/25000000000000000000000000000",
+ "margin": "0",
+ "margin_float": "0.000000e+00",
+ "certificate_routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes_accept": true,
+ "against": {
+  "certificate": {
+   "label": "#985",
+   "input": "evand-cert",
+   "path": "n147.cert",
+   "outside_repository": true,
+   "sha256": "0e09260712370f6561df1e9c0c835adc04f7d9f49ad40ad0e603c6c6a8cc11af"
+  },
+  "side": "11864804754111373311404579236459661610708446554466063961080880819368560222888047487421179/937851861867402376107974997050677704744266630455345333352649906089505616661381854003200",
+  "gain": "40602454240614250686990460679499380644443407373376398220749644336231103635680908636886234728855915816721/6987540884818154395431093849619311874689658213074098030870034591030371313254400000000000000000000000000000",
+  "gain_float": "5.810693e-03",
+  "gain_over_margin": null,
+  "within_margin": false
+ },
+ "cpu_seconds": 5.95
+}
