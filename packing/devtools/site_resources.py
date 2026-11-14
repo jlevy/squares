@@ -223,6 +223,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/moh63-dev/k2m5-family",
+        "Mohsen Khalili and Sara Gharabaghi",
+        (
+            "One family of measures for s(k^2 - 5) = k at every k >= 10, reduced to an"
+            " 11 x 11 board, with a Tight-Tile Lemma and a Lean reduction (T-298)."
+        ),
+    ),
+    (
         "https://github.com/kenaznia-doga/s94-lower-bound",
         "Doğa Özden",
         (

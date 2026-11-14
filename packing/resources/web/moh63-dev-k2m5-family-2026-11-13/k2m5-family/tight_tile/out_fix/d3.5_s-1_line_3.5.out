@@ -1,0 +1,57 @@
+  .. refused 11 [(-0.19999999526515602, 2.6440247893333435e-09), (-0.1999999967701733, 1.891516149044037e-09), (-0.1999999982751906, 1.0477378964424133e-09), (-0.1999999998241663, 2.503395080566406e-10), (7.148832082748413e-09, 3.2922253012657167e-09), (5.6438148021697994e-09, 2.5397166609764098e-09), (3.38628888130188e-09, 1.4109537005424499e-09), (2.633780241012573e-09, 1.0346993803977966e-09), (1.8812716007232666e-09, 7.525086402893067e-10), (1.12876296043396e-09, 2.8219074010849e-10), (5.016724268595377e-10, 1.2541810671488443e-10)]
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WCORNER", "cells": 31, "fails": 0}
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 a", "cells": 1, "fails": 0}
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b", "cells": 63, "fails": 10}
+  .. ray 1/2 meets 9 of 10 refused cells
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY NEAR lam=1/2", "cells": 21, "fails": 0}
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY ABOVE 1 lam=1/2", "cells": 1, "fails": 0}
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY ABOVE 2 lam=1/2", "cells": 1, "fails": 0}
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY BELOW 1 lam=1/2", "cells": 1, "fails": 0}
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY BELOW 2 lam=1/2", "cells": 1, "fails": 0}
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR -1 a", "cells": 1, "fails": 0}
+  .. {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR -1 b", "cells": 1, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WCORNER", "cells": 15, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 a", "cells": 1, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b", "cells": 110, "fails": 12}
+  .. ray 1/2 meets 11 of 12 refused cells
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY NEAR lam=1/2", "cells": 23, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY ABOVE 1 lam=1/2", "cells": 1, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY ABOVE 2 lam=1/2", "cells": 1, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY BELOW 1 lam=1/2", "cells": 1, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY BELOW 2 lam=1/2", "cells": 1, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR -1 a", "cells": 1, "fails": 0}
+  .. {"corner": "0", "rho": "1/67108864", "chart": "WFAR -1 b", "cells": 1, "fails": 0}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_t t+1 corners", "corners": 2, "corner_cells": 277, "corner_fails": 22, "unresolved": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WCORNER", "cells": 31, "fails": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 a", "cells": 1, "fails": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b", "cells": 63, "fails": 10}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY NEAR lam=1/2", "cells": 21, "fails": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY ABOVE 1 lam=1/2", "cells": 1, "fails": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY ABOVE 2 lam=1/2", "cells": 1, "fails": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY BELOW 1 lam=1/2", "cells": 1, "fails": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR +1 b / RAY BELOW 2 lam=1/2", "cells": 1, "fails": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR -1 a", "cells": 1, "fails": 0}
+  WCORNER {"corner": "-1/5", "rho": "1/134217728", "chart": "WFAR -1 b", "cells": 1, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WCORNER", "cells": 15, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 a", "cells": 1, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b", "cells": 110, "fails": 12}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY NEAR lam=1/2", "cells": 23, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY ABOVE 1 lam=1/2", "cells": 1, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY ABOVE 2 lam=1/2", "cells": 1, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY BELOW 1 lam=1/2", "cells": 1, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR +1 b / RAY BELOW 2 lam=1/2", "cells": 1, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR -1 a", "cells": 1, "fails": 0}
+  WCORNER {"corner": "0", "rho": "1/67108864", "chart": "WFAR -1 b", "cells": 1, "fails": 0}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_t t+1", "h0": "1/4000", "ok": 804, "cells": 1517, "fails": 0, "worst": 0.0, "secs": 366}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_t t-1", "h0": "1/4000", "ok": 15, "cells": 29, "fails": 0, "worst": 0.0172046006625, "secs": 5}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_d d+1", "h0": "1/4000", "ok": 18, "cells": 35, "fails": 0, "worst": 0.0055652236427316745, "secs": 5}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_d d-1", "h0": "1/4000", "ok": 18, "cells": 35, "fails": 0, "worst": 0.02279507145256021, "secs": 5}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_td t+1 d+1 a", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.005814643036200576, "secs": 2}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_td t+1 d+1 b", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.005814643036200576, "secs": 2}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_td t+1 d-1 a", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0230296458545, "secs": 1}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_td t+1 d-1 b", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0230296458545, "secs": 1}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_td t-1 d+1 a", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0230296458545, "secs": 2}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_td t-1 d+1 b", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0230296458545, "secs": 2}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_td t-1 d-1 a", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0402235149117761, "secs": 1}
+{"tile": "d0=7/2 sign=-1 line 3.5", "chart": "W_td t-1 d-1 b", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0402235149117761, "secs": 2}
+ALL-OK

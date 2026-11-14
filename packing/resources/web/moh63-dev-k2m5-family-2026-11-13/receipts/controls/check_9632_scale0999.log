@@ -1,0 +1,9 @@
+# command: /home/user/squares-l145/packing/.venv/bin/python3 -I -c 'import multiprocessing, os, runpy, sys; multiprocessing.set_start_method('"'"'fork'"'"'); sys.argv = sys.argv[1:]; sys.path.append(os.path.dirname(os.path.abspath(sys.argv[0]))); runpy.run_path(sys.argv[0], run_name='"'"'__main__'"'"')' /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l145-work/k2m5-family/verification/r9632/check_9632.py /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l145-out/r9632/dump.log /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l145-out/controls/qx2-scale0999-r9632.log /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l145-out/controls/q9632_scale0999_unc.txt
+# cwd: receipts of this run: the root-9632 dump and the scaled qx2 control
+# python3: /home/user/squares-l145/packing/.venv/bin/python3 -I (script directory appended to sys.path)
+# host: 4 cores; load 4.17 4.16 4.12; started 2026-11-14T03:22:10Z
+zmx2 uncertified boxes: 6850; all inside W: True
+qx2_zm run on W: True; one qx2 root meets W: True; qx2 uncertified boxes: 87 (log says 87)
+qx2-uncertified boxes meeting a zmx2-uncertified box: 3486
+ROOT-9632-NOT-CLOSED
+# finished 2026-11-14T03:22:11Z; exit 0; wall 0.762 s; CPU 0.8 s (user 0.758 + sys 0.004); load 4.17 4.16 4.12

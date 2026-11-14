@@ -4415,6 +4415,52 @@ sources:
       the checks and this write-up." MIT licence for the scripts; the README releases the
       certificate into the public domain (CC0). Retained whole but for .gitignore in
       web/moh63-dev-s44-equals-7-2026-10-29/. Dated by that revision, 2026-10-29 UTC.
+  - key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    authors: [Khalili, Gharabaghi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-13'
+    credit: Khalili, Gharabaghi after Daniel
+    lineage: independent
+    note: >-
+      moh63-dev/k2m5-family at 2c0b1b9979bcb67d92eb215366dc5ee19286c1d8
+      (2026-11-13T23:50:51Z), the repository's one commit: Mohsen Khalili and Sara
+      Gharabaghi's s(k^2 - 5) = k for every k >= 7, k = 7, 8 and 9 by the s(44), s(59) and
+      s(76) certificates (theirs, Hiroaki Hosono's and Benjamin Greff's) and every k >= 10
+      by one family of measures, a corner module, a period-1 wall pattern of depth 4 and
+      Lebesgue measure in the middle, of total k^2 - 4D with D = 1340566927759/10^12 > 5/4,
+      reduced by locality to the 11 x 11 board certificate/sol_exact_box11.txt. The board
+      is decided by Evan Daniel's zmx2 (first-order, D4-reduced) on 12,024 of 12,100 roots,
+      by zmx2 with his qx2_zm.py on root 9632, and by the authors' Tight-Tile Lemma and
+      checker on the 75 roots where zmx2 stalls at wall tiles of mass exactly one; the Lean
+      reduction k2m5_of_valid11 takes the board's validity as a hypothesis. Registration
+      was requested in jlevy/squares#973; the paper, paper/k2m5.pdf, is a draft not yet peer
+      reviewed. The paper thanks Evan Daniel for the linear program, checkers, format and
+      Lean reductions it builds on, Hiroaki Hosono and B. Greff for their public
+      certificates and "the Squares Project for its records", and cites T-252, T-066, T-184
+      and T-191 for the cases k = 7 to 10; it names no debt to this project's methods.
+      Acknowledgments: "The search, the certificate, the Tight-Tile checker and its proof,
+      and the verification runs were produced with Claude (Anthropic) under the authors'
+      direction; the authors reviewed the method, the checks and the text." MIT licence
+      (LICENSE); the README adds CC BY 4.0 for text and data. Retained but for .gitignore
+      and the 8.7 MB tight_tile/cov.tar.xz, pinned by digest, in
+      web/moh63-dev-k2m5-family-2026-11-13/. Dated by that revision, 2026-11-13 UTC.
+  - key: '[evand square-packing 2026-10-24]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-24'
+    credit: Daniel
+    lineage: independent
+    note: >-
+      evand/square-packing at 659ee62e4a9d39542a1146e8b011cc3ab6407ede
+      (2026-10-24T05:01:33Z), the commit Mohsen Khalili and Sara Gharabaghi's releases pin
+      for Evan Daniel's checkers: zmx2 (verify2/src/bin/zmx2.rs e2bb84e9) and qx2_zm.py
+      with the files it imports. Only search/zeromargin.py (3cb95fb7), LICENSE and
+      CREDITS.md are retained, in web/evand-square-packing-2026-10-24/; the other checker
+      files are byte-identical to copies earlier evand packets retain and are pinned to
+      them. MIT; CREDITS.md says the work was produced by Claude (Anthropic) in a single
+      session under human direction.
   - key: '[Mishapolk refinements 2026-10-23]'
     authors:
     - Polkovskyi

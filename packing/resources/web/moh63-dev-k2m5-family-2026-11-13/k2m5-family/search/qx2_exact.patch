@@ -1,0 +1,173 @@
+--- /tmp/claude-0/up_qx2_exact.py	2026-11-01 08:20:34.203364807 -0800
++++ /home/claude/sq/release/k2m5-family/search/qx2_exact.py	2026-11-01 08:20:32.940826296 -0800
+@@ -12,7 +12,7 @@
+ 
+ Everything that certifies is Fraction arithmetic.  The float LP only chooses the basis.
+ """
+-import sys, os, math, json, argparse, time
++import sys, os, glob, math, json, argparse, time
+ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+ from fractions import Fraction as F
+ import numpy as np
+@@ -296,7 +296,14 @@
+             eqs.append(({j: c for j, c in co.items() if j in sup}, 1 - ar, v))
+     ngz = len(eqs)
+     if germs:
+-        for pose, co, ar in germ_rows_exact(EM, m.R, nproc=nproc):
++        ck = os.environ.get('GERMCKPT')
++        files = sorted(glob.glob(os.path.join(ck, 'c*.pkl'))) if ck else []
++        if len(files) == 64:      # stream the cached chunks: keep only tight rows (memory)
++            import pickle, gc
++            src = (r for f in files for r in pickle.load(open(f, 'rb')))
++        else:
++            src = germ_rows_exact(EM, m.R, nproc=nproc)
++        for pose, co, ar in src:
+             v = float(ar) + sum(float(c) * x[j] for j, c in co.items())
+             if v < 1 + tol:
+                 eqs.append(({j: c for j, c in co.items() if j in sup}, 1 - ar, v))
+@@ -345,6 +352,95 @@
+     return res
+ 
+ 
++def project_fast(path, tol=1e-7, den=10 ** 12, out=None, nproc=8):
++    """Same result as project(), for large tight sets: dedupe the tight rows, choose an independent subset and the
++    free columns by float QR with pivoting, round the free variables to 1/den, solve the pivot variables exactly
++    (FLINT fmpq_mat), then check every tight row exactly (reports rows that end up below / above 1)."""
++    import qx2_tools as T, pickle, flint, numpy as np, scipy.linalg as sl
++    m, x, args, d = T.load(path)
++    EM = ExactModel(m)
++    sup = [j for j in range(m.nvar) if x[j] > 1e-13]
++    col = {j: k for k, j in enumerate(sup)}; n = len(sup)
++    cache = path.replace('.npz', '_eqs.pkl')
++    if os.path.exists(cache):
++        eqs = pickle.load(open(cache, 'rb'))
++    else:
++        eqs = []
++        for cx, cy, sx, sy in axis_corners(EM, m.R):
++            co, ar = EM.coeffs(cx, cy, 0, sx, sy)
++            v = float(ar) + sum(float(c) * x[j] for j, c in co.items())
++            if v < 1 + tol: eqs.append((co, ar))
++        ck = os.environ.get('GERMCKPT')
++        files = sorted(glob.glob(os.path.join(ck, 'c*.pkl'))) if ck else []
++        src = (r for f in files for r in pickle.load(open(f, 'rb'))) if len(files) == 64 else germ_rows_exact(EM, m.R, nproc=nproc)
++        for pose, co, ar in src:
++            v = float(ar) + sum(float(c) * x[j] for j, c in co.items())
++            if v < 1 + tol: eqs.append((co, ar))
++        pickle.dump(eqs, open(cache, 'wb'))
++    print(f"tight rows: {len(eqs)}", flush=True)
++    # every tight row must not touch a variable outside the support with nonzero coefficient (those are 0 anyway)
++    U = {}
++    for co, ar in eqs:
++        key = (tuple(sorted((col[j], F(c)) for j, c in co.items() if j in col and c != 0)), F(1) - F(ar))
++        U[key] = 1
++    rows = list(U); print(f"distinct: {len(rows)}", flush=True)
++    sig = ({col[j]: F(EM.csig[j]) for j in sup if EM.csig[j] != 0}, F(EM.w) - F(EM.const_sig))
++    A = np.zeros((len(rows) + 1, n)); b = np.zeros(len(rows) + 1)
++    for i, (co, rhs) in enumerate(rows):
++        for k, c in co: A[i, k] = float(c)
++        b[i] = float(rhs)
++    for k, c in sig[0].items(): A[-1, k] = float(c)
++    b[-1] = float(sig[1])
++    # independent rows: QR of A^T with column pivoting (sigma row first by scaling it up)
++    A[-1] *= 1e3; b[-1] *= 1e3
++    Q, Rm, prow = sl.qr(A.T, mode='economic', pivoting=True)
++    dg = np.abs(np.diag(Rm)); r = int((dg > dg[0] * 1e-10).sum())
++    sel = prow[:r]
++    print(f"float rank {r} (diag ratio at cut {dg[r-1]/dg[0]:.2e}" + (f", next {dg[r]/dg[0]:.2e})" if r < len(dg) else ")"), flush=True)
++    # pivot columns: QR of the selected rows with column pivoting
++    xw = np.array([float(x[j]) for j in sup])
++    _, R2, pcol = sl.qr(A[sel] * xw[None, :], mode='economic', pivoting=True)   # prefer large-valued pivots
++    pivc = sorted(pcol[:r]); free = [k for k in range(n) if k not in set(pivc)]
++    xs = [None] * n
++    for k in free: xs[k] = F(int(round(float(x[sup[k]]) * den)), den)
++    def exrow(i):
++        if i == len(rows): return sig[0], sig[1]
++        co, rhs = rows[i]; return dict(co), rhs
++    Mx = flint.fmpq_mat(r, r); bx = flint.fmpq_mat(r, 1)
++    pidx = {k: t for t, k in enumerate(pivc)}
++    for t, i in enumerate(sel):
++        co, rhs = exrow(i); rr = rhs
++        for k, c in co.items():
++            if k in pidx: Mx[t, pidx[k]] = flint.fmpq(c.numerator, c.denominator)
++            else: rr -= c * xs[k]
++        bx[t, 0] = flint.fmpq(rr.numerator, rr.denominator)
++    sol = Mx.solve(bx)
++    for k, t in pidx.items():
++        v = sol[t, 0]; xs[k] = F(int(v.p), int(v.q))
++    # exact check of every tight row and sigma
++    below = above = 0; worst = F(0)
++    for co, rhs in rows:
++        lhs = sum(c * xs[k] for k, c in co)
++        if lhs < rhs:
++            below += 1; worst = min(worst, lhs - rhs)
++        elif lhs > rhs: above += 1
++    sres = sum(c * xs[k] for k, c in sig[0].items()) - sig[1]
++    print(f"exact check: rows below 1: {below} (worst {float(worst):.3e}), above 1: {above}, sigma residual {sres}", flush=True)
++    xe = [F(0)] * m.nvar
++    for k, j in enumerate(sup): xe[j] = xs[k]
++    neg = [j for j in sup if xe[j] < 0]
++    dev = max(abs(float(xe[j]) - x[j]) for j in range(m.nvar))
++    D = m.R ** 2 - sum(EM.cobj[j] * xe[j] for j in range(m.nvar)) - EM.const_obj
++    sg = EM.w - EM.const_sig - sum(EM.csig[j] * xe[j] for j in range(m.nvar))
++    print(f"exact: D = {float(D):.12f} (float LP {float(d['D']):.12f}); sigma = {sg}; negative: {len(neg)}; "
++          f"max |x_exact - x_float| = {dev:.3e}; denominators up to {max(v.denominator for v in xe)}", flush=True)
++    res = dict(sol=path, args=vars(args), x=[str(v) for v in xe], D=str(D), Dfloat=float(D), sigma=str(sg),
++               n_eq=len(rows), rank=r, inconsistent=below, negative=neg, dev=dev)
++    out = out or path.replace('.npz', '_exact.json')
++    json.dump(res, open(out, 'w')); print("wrote", out)
++    return res
++
++
+ def gauss(Arows, b, cols):
+     n = len(cols); idx = {c: k for k, c in enumerate(cols)}
+     M = [[F(0)] * n + [F(bi)] for bi in b]
+@@ -505,12 +601,33 @@
+     import multiprocessing as mp
+     G = germ_grid(R, **kw)
+     _GEM = EM
+-    chunks = [G[i::nproc * 8] for i in range(nproc * 8)]
++    import os, pickle
++    NC = 64
++    chunks = [G[i::NC] for i in range(NC)]
++    ck = os.environ.get('GERMCKPT')
++    res = [None] * NC
++    if ck:
++        os.makedirs(ck, exist_ok=True)
++        for i in range(NC):
++            p = os.path.join(ck, f'c{i:03d}.pkl')
++            if os.path.exists(p): res[i] = pickle.load(open(p, 'rb'))
++    todo = [i for i in range(NC) if res[i] is None]
++    print(f'germ chunks: {NC - len(todo)} cached, {len(todo)} to do', flush=True)
+     with mp.get_context('fork').Pool(nproc) as pool:
+-        res = pool.map(_germ_work, chunks)
++        for i, part in pool.imap_unordered(_germ_work_i, [(i, chunks[i]) for i in todo]):
++            res[i] = part
++            if ck:
++                p = os.path.join(ck, f'c{i:03d}.pkl')
++                pickle.dump(part, open(p + '.tmp', 'wb')); os.replace(p + '.tmp', p)
++            print(f'germ chunk {i} done', flush=True)
+     return [r for part in res for r in part]
+ 
+ 
++def _germ_work_i(arg):
++    i, ch = arg
++    return i, _germ_work(ch)
++
++
+ def write_family(path_exact, out):
+     """human-readable exact description of the family (pi, nu) behind a sol_exact.json."""
+     m, EM, xe, d = load_exact(path_exact)
+@@ -539,11 +656,12 @@
+ 
+ if __name__ == '__main__':
+     ap = argparse.ArgumentParser()
+-    ap.add_argument('cmd', choices=['resolve', 'project', 'axis', 'cover', 'family'])
++    ap.add_argument('cmd', choices=['resolve', 'project', 'projectf', 'axis', 'cover', 'family'])
+     ap.add_argument('path'); ap.add_argument('--k', type=int, default=7); ap.add_argument('--out', default='')
+     a = ap.parse_args()
+     if a.cmd == 'resolve': resolve(a.path)
+     elif a.cmd == 'project': project(a.path)
++    elif a.cmd == 'projectf': project_fast(a.path)
+     elif a.cmd == 'axis': axis_check(a.path)
+     elif a.cmd == 'cover': write_cover(a.path, a.k, a.out or a.path.replace('.json', f'_box{a.k}.txt'))
+     elif a.cmd == 'family': write_family(a.path, a.out or a.path.replace('.json', '_family.txt'))

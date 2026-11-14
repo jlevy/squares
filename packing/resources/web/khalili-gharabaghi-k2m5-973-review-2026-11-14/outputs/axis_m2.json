@@ -1,0 +1,19 @@
+{
+ "cover": "m2_minus1.txt",
+ "cells": 10000,
+ "corner_limits": 40000,
+ "min_mass": "999999999913/1000000000000",
+ "min_at_cell_corner_tenths": [
+  25,
+  42,
+  25,
+  43
+ ],
+ "corners_at_exactly_1": 2304,
+ "min_ge_1": false,
+ "d4_region": {
+  "corners": 10000,
+  "at_exactly_1": 576,
+  "min_mass": "999999999913/1000000000000"
+ }
+}

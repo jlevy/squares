@@ -979,7 +979,6 @@ Use the structured form to query or plot; use these tables to read.
 | 113 | 11 | grid | — | 10.768589 | counting | 0.2314 |
 | 114 | 11 | grid | — | 10.8 | counting | 0.2 |
 | 115 | 11 | grid | — | 10.854957 | counting | 0.145 |
-| 116 | 11 | grid | — | 10.911282 | counting | 0.0887 |
 | 122 | `8 + (5/2)√2` = 11.53553391 | extension | — | 11.229281 | unavoidable points | 0.3063 |
 | 123 | `root(s^6-50s^5+971s^4-9068s^3+39604s^2-55382s-48483, 11.5913781454976981594349494020130208086995, 11.5913781454976981594349494020130208086996)` = 11.59137815 | — | 6 | 11.229281 | monotone | 0.3621 |
 | 124 | `6 + 4 √2` = 11.65685425 | hand | — | 11.229281 | monotone | 0.4276 |
@@ -997,7 +996,6 @@ Use the structured form to query or plot; use these tables to read.
 | 136 | 12 | grid | — | 11.792119 | counting | 0.2079 |
 | 137 | 12 | grid | — | 11.818851 | counting | 0.1811 |
 | 138 | 12 | grid | — | 11.869673 | counting | 0.1303 |
-| 139 | 12 | grid | — | 11.920235 | counting | 0.0798 |
 | 145 | `9 + (5/2)√2` = 12.53553391 | extension | — | 12.24 | counting | 0.2955 |
 | 146 | `12583782190151860342292508597077/1000000000000000000000000000000` = 12.58378219 | — | 1 | 12.24 | monotone | 0.3438 |
 | 147 | `7 + 4 √2` = 12.65685425 | hand | — | 12.24 | monotone | 0.4169 |
@@ -1017,7 +1015,6 @@ Use the structured form to query or plot; use these tables to read.
 | 161 | 13 | grid | — | 12.8 | counting | 0.2 |
 | 162 | 13 | grid | — | 12.835591 | counting | 0.1644 |
 | 163 | 13 | grid | — | 12.881663 | counting | 0.1183 |
-| 164 | 13 | grid | — | 12.927541 | counting | 0.0725 |
 | 170 | `10 + (5/2)√2` = 13.53553391 | extension | — | 13.200123 | unavoidable points | 0.3354 |
 | 171 | `13 + (4/7)` = 13.57142857 | composition | — | 13.200123 | monotone | 0.3713 |
 | 172 | `1361468985328621177764979119129233399545470048102052769370427095468316966616209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000` = 13.61468985 | — | 1 | 13.200123 | monotone | 0.4146 |
@@ -1039,7 +1036,6 @@ Use the structured form to query or plot; use these tables to read.
 | 188 | 14 | grid | — | 13.807188 | counting | 0.1928 |
 | 189 | 14 | grid | — | 13.849481 | counting | 0.1505 |
 | 190 | 14 | grid | — | 13.891624 | counting | 0.1084 |
-| 191 | 14 | grid | — | 13.933617 | counting | 0.0664 |
 | 197 | `11 + (5/2)√2` = 14.53553391 | extension | — | 14.187765 | unavoidable points | 0.3478 |
 | 198 | `14 + (4/7)` = 14.57142857 | extension | — | 14.187765 | monotone | 0.3837 |
 | 199 | `1461468985328621153330369591208625293096183957845596937754957265273646011066209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000` = 14.61468985 | extension | 1 | 14.187765 | monotone | 0.4269 |
@@ -1063,7 +1059,6 @@ Use the structured form to query or plot; use these tables to read.
 | 217 | 15 | grid | — | 14.822241 | counting | 0.1778 |
 | 218 | 15 | grid | — | 14.861195 | counting | 0.1388 |
 | 219 | 15 | grid | — | 14.900031 | counting | 0.1 |
-| 220 | 15 | grid | — | 14.938751 | counting | 0.0612 |
 | 226 | `12 + (5/2)√2` = 15.53553391 | extension | — | 15.176574 | unavoidable points | 0.359 |
 | 227 | `7781812826162574542396221861851/500000000000000000000000000000` = 15.56362565 | — | 1 | 15.176574 | monotone | 0.3871 |
 | 228 | `81948695622242743406583885455629643551588893415142761463009212036964483311755603944810431596664817946260573321741429238134361699165705247080593964048766062042687992006427669727874901828361402863145549814389084262126120428063889082073471290642932394480073117972064778190120213790911706981258384522203621265266533117951358259937704965831322389921654702656750316315228947287587625872802207845509483204201099699676132835060914753240032261244865476454248909348419000888189290166/5251572476855632483667460657852875439254182406020529880753548190924046185669801353348281757990728441567542533254170942371057521496676706922233751751083196758275857817052273662330602126087972603034105932424636772547375700342385676958325063813751905276310789204955755529632857538615756628754205416245547432750722805395532318888303909732100685830132679940488465796557591470754105466880219739251748136077630375930351553807059740053124557825129922908223347140881687824268888523` = 15.60460148 | — | 1 | 15.176574 | monotone | 0.428 |
@@ -1089,7 +1084,6 @@ Use the structured form to query or plot; use these tables to read.
 | 248 | 16 | grid | — | 15.835101 | counting | 0.1649 |
 | 249 | 16 | grid | — | 15.87121 | counting | 0.1288 |
 | 250 | 16 | grid | — | 15.907225 | counting | 0.0928 |
-| 251 | 16 | grid | — | 15.943146 | counting | 0.0569 |
 | 257 | `13 + (5/2)√2` = 16.53553391 | extension | — | 16.166376 | unavoidable points | 0.3692 |
 | 258 | `root(16s^8-1856s^7+96688s^6-2961168s^5+58397980s^4-760410616s^3+6395601648s^2-31839825596s+71986131121, 16.5634480021337893796001817112513963158640, 16.5634480021337893796001817112513963158641)` = 16.563448 | — | 8 | 16.166376 | monotone | 0.3971 |
 | 259 | `root(s^6-80s^5+2596s^4-43488s^3+393149s^2-1792022s+3130777, 16.5913781454976981594349494020130208086995, 16.5913781454976981594349494020130208086996)` = 16.59137815 | — | 6 | 16.166376 | monotone | 0.425 |
@@ -1117,7 +1111,6 @@ Use the structured form to query or plot; use these tables to read.
 | 281 | 17 | grid | — | 16.846217 | counting | 0.1538 |
 | 282 | 17 | grid | — | 16.879871 | counting | 0.1201 |
 | 283 | 17 | grid | — | 16.913449 | counting | 0.0866 |
-| 284 | 17 | grid | — | 16.946952 | counting | 0.053 |
 | 290 | `14 + (5/2)√2` = 17.53553391 | composition | — | 17.157031 | unavoidable points | 0.3785 |
 | 291 | `14 + (5/2)√2` = 17.53553391 | composition | — | 17.157031 | monotone | 0.3785 |
 | 292 | `4397844536374424539902715795867/250000000000000000000000000000` = 17.59137815 | — | 1 | 17.157031 | monotone | 0.4343 |
@@ -1147,7 +1140,6 @@ Use the structured form to query or plot; use these tables to read.
 | 316 | 18 | grid | — | 17.855922 | counting | 0.1441 |
 | 317 | 18 | grid | — | 17.887437 | counting | 0.1126 |
 | 318 | 18 | grid | — | 17.918889 | counting | 0.0811 |
-| 319 | 18 | grid | — | 17.95028 | counting | 0.0497 |
 
 <!-- END GENERATED: frontier-open -->
 
@@ -1208,41 +1200,49 @@ Use the structured form to query or plot; use these tables to read.
 | 98 | `10` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 99 | `10` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 100 | `10` | perfect square | classical | proved |
+| 116 | `11` | counting | Khalili, Gharabaghi (2026) | proof audit pending |
 | 117 | `11` | counting | Evan Daniel (2026) | proof audit pending |
 | 118 | `11` | counting | Evan Daniel (2026) | proved |
 | 119 | `11` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 120 | `11` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 121 | `11` | perfect square | classical | proved |
+| 139 | `12` | counting | Khalili, Gharabaghi (2026) | proof audit pending |
 | 140 | `12` | counting | Evan Daniel (2026) | proof audit pending |
 | 141 | `12` | counting | Evan Daniel (2026) | proved |
 | 142 | `12` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 143 | `12` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 144 | `12` | perfect square | classical | proved |
+| 164 | `13` | counting | Khalili, Gharabaghi (2026) | proof audit pending |
 | 165 | `13` | counting | Evan Daniel (2026) | proof audit pending |
 | 166 | `13` | counting | Evan Daniel (2026) | proved |
 | 167 | `13` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 168 | `13` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 169 | `13` | perfect square | classical | proved |
+| 191 | `14` | counting | Khalili, Gharabaghi (2026) | proof audit pending |
 | 192 | `14` | counting | Evan Daniel (2026) | proof audit pending |
 | 193 | `14` | counting | Evan Daniel (2026) | proved |
 | 194 | `14` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 195 | `14` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 196 | `14` | perfect square | classical | proved |
+| 220 | `15` | counting | Khalili, Gharabaghi (2026) | proof audit pending |
 | 221 | `15` | counting | Evan Daniel (2026) | proof audit pending |
 | 222 | `15` | counting | Evan Daniel (2026) | proved |
 | 223 | `15` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 224 | `15` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 225 | `15` | perfect square | classical | proved |
+| 251 | `16` | counting | Khalili, Gharabaghi (2026) | proof audit pending |
 | 252 | `16` | counting | Evan Daniel (2026) | proof audit pending |
 | 253 | `16` | counting | Evan Daniel (2026) | proved |
 | 254 | `16` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 255 | `16` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 256 | `16` | perfect square | classical | proved |
+| 284 | `17` | counting | Khalili, Gharabaghi (2026) | proof audit pending |
 | 285 | `17` | counting | Evan Daniel (2026) | proof audit pending |
 | 286 | `17` | counting | Evan Daniel (2026) | proved |
 | 287 | `17` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 288 | `17` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 289 | `17` | perfect square | classical | proved |
+| 319 | `18` | counting | Khalili, Gharabaghi (2026) | proof audit pending |
 | 320 | `18` | counting | Evan Daniel (2026) | proof audit pending |
 | 321 | `18` | counting | Evan Daniel (2026) | proved |
 | 322 | `18` | Nagamochi | Hiroshi Nagamochi (2005) | proved |

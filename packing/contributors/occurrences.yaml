@@ -18933,19 +18933,26 @@ occurrences:
     path: packing/frontier/n-116.md
     record_key: '116'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-116.md [116] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-116.md
+    record_key: '116'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-117.md
     record_key: '117'
@@ -19584,19 +19591,26 @@ occurrences:
     path: packing/frontier/n-139.md
     record_key: '139'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-139.md [139] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-139.md
+    record_key: '139'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-140.md
     record_key: '140'
@@ -20160,19 +20174,26 @@ occurrences:
     path: packing/frontier/n-164.md
     record_key: '164'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-164.md [164] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-164.md
+    record_key: '164'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-165.md
     record_key: '165'
@@ -20823,19 +20844,26 @@ occurrences:
     path: packing/frontier/n-191.md
     record_key: '191'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-191.md [191] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-191.md
+    record_key: '191'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-192.md
     record_key: '192'
@@ -21589,19 +21617,26 @@ occurrences:
     path: packing/frontier/n-220.md
     record_key: '220'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-220.md [220] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-220.md
+    record_key: '220'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-221.md
     record_key: '221'
@@ -22452,19 +22487,26 @@ occurrences:
     path: packing/frontier/n-251.md
     record_key: '251'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-251.md [251] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-251.md
+    record_key: '251'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-252.md
     record_key: '252'
@@ -23451,19 +23493,26 @@ occurrences:
     path: packing/frontier/n-284.md
     record_key: '284'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-284.md [284] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-284.md
+    record_key: '284'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-285.md
     record_key: '285'
@@ -24481,19 +24530,26 @@ occurrences:
     path: packing/frontier/n-319.md
     record_key: '319'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: Khalili
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: Khalili
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-319.md [319] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-319.md
+    record_key: '319'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-320.md
     record_key: '320'
@@ -32851,6 +32907,90 @@ occurrences:
   end: 27
   label: Samanyu-dev
   role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    field: /authors/0
+  expected_text: Khalili
+  start: 0
+  end: 7
+  label: Khalili
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    field: /authors/1
+  expected_text: Gharabaghi
+  start: 0
+  end: 10
+  label: Gharabaghi
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    field: /credit
+  expected_text: Khalili, Gharabaghi after Daniel
+  start: 0
+  end: 7
+  label: Khalili
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    field: /credit
+  expected_text: Khalili, Gharabaghi after Daniel
+  start: 9
+  end: 19
+  label: Gharabaghi
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    field: /credit
+  expected_text: Khalili, Gharabaghi after Daniel
+  start: 26
+  end: 32
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[evand square-packing 2026-10-24]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[evand square-packing 2026-10-24]'
+    field: /credit
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
   disposition: unresolved
   evidence: []
   note: Identity review pending.

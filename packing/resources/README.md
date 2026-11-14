@@ -681,6 +681,7 @@ key remain bound to the bytes they originally named.
 | [bengreff/s76-certificate](https://github.com/bengreff/s76-certificate) | Benjamin Greff’s mixed cover for `s(76) = 9`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #594 | **[bengreff s76 certificate 2026-10-14]**; [14 October packet](web/bengreff-s76-certificate-2026-10-14/README.md), pinned `1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f` |
 | [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate) | Benjamin Greff’s mixed cover for `s(95) = 10`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #610 | **[bengreff s95 certificate 2026-10-15]**; [15 October packet](web/bengreff-s95-certificate-2026-10-15/README.md), pinned `dd7297d06adc664268c65005369b895e4ded7547` |
 | [moh63-dev/s44-equals-7](https://github.com/moh63-dev/s44-equals-7) | Mohsen Khalili and Sara Gharabaghi’s closed mixed cover for `s(44) = 7`, decided by Evan Daniel’s `zmx2`; issue #842 | **[Khalili Gharabaghi s44 cover 2026-10-29]**; [29 October packet](web/moh63-dev-s44-equals-7-2026-10-29/README.md), pinned `b5b1bc9d7354a8f62efcb6b7abeb30d1eb576aaf` |
+| [moh63-dev/k2m5-family](https://github.com/moh63-dev/k2m5-family) | Mohsen Khalili and Sara Gharabaghi’s `s(k² − 5) = k` for every `k ≥ 7`: one family of measures for `k ≥ 10`, reduced to an 11 × 11 board decided by Evan Daniel’s `zmx2` and `qx2_zm.py` and the authors’ Tight-Tile checker, with a Lean reduction; issue #973 | **[Khalili Gharabaghi k2m5 family 2026-11-13]**; [13 November packet](web/moh63-dev-k2m5-family-2026-11-13/README.md), pinned `2c0b1b9979bcb67d92eb215366dc5ee19286c1d8`, with the import lane’s replay receipts; `tight_tile/cov.tar.xz` pinned by digest; MIT; and **[evand square-packing 2026-10-24]**, the [checker files at `659ee62`](web/evand-square-packing-2026-10-24/README.md) it pins |
 | [kenaznia-doga/s94-lower-bound](https://github.com/kenaznia-doga/s94-lower-bound) | Doğa Özden’s `s(94) ≥ 1993/200`, Hosono’s `mixed_n94_L995` measure dilated onto a 600-direction declared net and decided by this repository’s `sqverify-fast`; issue #890 | **[Özden s94 dilation 2026-11-03]**; [3 November packet](web/ozden-s94-lower-bound-2026-11-03/README.md), pinned `9d76ad5549e99e952c899462b36d2bd765517969`; CC BY 4.0 data and MIT code by the `LICENSE.md` of `484ad20f`, retained |
 | [kenaznia-doga/s94-lower-bound-9972](https://github.com/kenaznia-doga/s94-lower-bound-9972) | Doğa Özden’s `s(94) ≥ 2493/250`, Hosono’s `mixed_n94_L995` measure dilated onto a 4,972-direction declared net, with the lab’s receipts of this repository’s `sqverify-fast` at every direction; issue #910 | **[Özden s94 lower bound 2026-11-05]**; [5 November packet](web/ozden-s94-lower-bound-9972-2026-11-05/README.md), pinned `7d21f9bdf707102dd4ebf47e52f81b502a01004d`; CC BY 4.0 data and MIT code by its `LICENSE.md` |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
@@ -1823,6 +1824,36 @@ public mixed-cover certificates, and says the search, the certificate, the separ
 tool and the verification runs “were produced with Claude (Anthropic) under our
 direction”. The authors asked for its registration in issue #842 on 26 October 2026;
 T-252 records it.
+
+**[Khalili Gharabaghi k2m5 family 2026-11-13]**: Mohsen Khalili and Sara Gharabaghi’s
+(GitHub moh63-dev) $s(k^2 - 5) = k$ for every $k \ge 7$. The cases $k = 7, 8, 9$ are the
+$s(44)$, $s(59)$ and $s(76)$ certificates (theirs, Hiroaki Hosono’s and Benjamin
+Greff’s); every $k \ge 10$ is one family of measures $\mu_k$ on $[0,k]^2$, a corner
+module, a period-1 wall pattern of depth 4 and Lebesgue measure in the middle, of total
+$k^2 - 4D$ with $D = 1340566927759/10^{12} > 5/4$, reduced by locality to the board
+$\mu_{11}$, `certificate/sol_exact_box11.txt`. It is pinned in
+[moh63-dev/k2m5-family](https://github.com/moh63-dev/k2m5-family) at
+`2c0b1b9979bcb67d92eb215366dc5ee19286c1d8` (13 November 2026, the repository’s one
+commit) and retained but for `.gitignore` and the 8.7 MB `tight_tile/cov.tar.xz`, which
+is pinned by digest; [packet](web/moh63-dev-k2m5-family-2026-11-13/README.md).
+MIT licence; the README adds CC BY 4.0 for text and data.
+The source decides the board with Daniel’s `zmx2` (first-order, D4-reduced) on 12,024 of
+12,100 roots, with `zmx2` and his `qx2_zm.py` on root 9632, and with its own Tight-Tile
+Lemma and checker on the other 75; its Lean reduction `k2m5_of_valid11` takes the
+board’s validity as a hypothesis.
+Its paper thanks Daniel for the linear program, checkers, format and Lean reductions it
+builds on, Hosono and Greff for their public certificates and the Squares Project for
+its records, and says the search, the certificate, the Tight-Tile checker and its proof,
+and the verification runs “were produced with Claude (Anthropic) under the authors’
+direction”. The authors asked for its registration in issue #973 on 14 November 2026.
+
+**[evand square-packing 2026-10-24]**: Evan Daniel’s repository at `659ee62e`, the
+commit Khalili and Gharabaghi’s releases pin for `zmx2` and `qx2_zm.py`. Only
+`search/zeromargin.py` (`3cb95fb7`), which `qx2_zm.py` imports there and no earlier
+packet holds, `LICENSE` and `CREDITS.md` are retained; the other checker files are
+byte-identical to copies earlier evand packets keep and are pinned to them;
+[packet](web/evand-square-packing-2026-10-24/README.md).
+MIT.
 
 **[Özden s94 dilation 2026-11-03]**: Doğa Özden’s certificate for
 $s(94) \ge 1993/200 = 9.965$: Hiroaki Hosono’s `mixed_n94_L995` rectangle measure

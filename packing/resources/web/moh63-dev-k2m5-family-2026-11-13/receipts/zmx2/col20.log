@@ -1,0 +1,21 @@
+# command: /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l145-work/zmx2/e2bb84e9/verify2/target/release/zmx2 cert certificate/sol_exact_box11.txt --d4 --first-order --threads 1 --depth 40 --node-cap 20000000 --xlo 20 --xhi 20 --log /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l145-out/zmx2/col20_roots.log
+# cwd: the root of the k2m5-family tree staged by devtools.replay_k2m5_family from packing/resources/web/moh63-dev-k2m5-family-2026-11-13 (pinned 2c0b1b99), every file checked against its manifest
+# python3: not used by this command
+# host: 4 cores; load 3.09 3.30 3.26; started 2026-11-14T02:51:47Z
+D4: measure invariant under x->s-x and x<->y (exact)
+# zmx2 cert hash=a53f06f25d54b3df mode=d4 atoms=grid+fo depth=40 node_cap=20000000 kappa=1.5 K=30 region=x20-20,y0-54,bins0-3 area=1
+cover: s = 11/1, 0 points, 13244 segments, total 28909433072241/250000000000 = 115.63773228896
+area densities: 1 rectangle(s) (ZMX2_AREA.md)
+roots: 220 in region, 0 already done (log), 220 to run, 1 threads
+progress 25/220 roots, 0s
+progress 50/220 roots, 2s
+progress 75/220 roots, 6s
+progress 100/220 roots, 6s
+progress 125/220 roots, 7s
+progress 150/220 roots, 14s
+progress 175/220 roots, 17s
+progress 200/220 roots, 25s
+progress 220/220 roots, 31s
+done in 31s wall: roots 220 (missing 0), boxes 216374, certified 100278, empty 8019, uncertified 0, max depth 25, cpu 31s
+REGION CLEAN (restricted region; no verdict for the whole cover)
+# finished 2026-11-14T02:52:18Z; exit 0; wall 30.846 s; CPU 30.5 s (user 30.435 + sys 0.019); load 3.13 3.28 3.26

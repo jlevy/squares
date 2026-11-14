@@ -1,0 +1,9 @@
+# command: /home/user/squares-l145/packing/.venv/bin/python3 -I -c 'import multiprocessing, os, runpy, sys; multiprocessing.set_start_method('"'"'fork'"'"'); sys.argv = sys.argv[1:]; sys.path.append(os.path.dirname(os.path.abspath(sys.argv[0]))); runpy.run_path(sys.argv[0], run_name='"'"'__main__'"'"')' run_tt.py ../certificate/sol_exact_box11.txt 2.5 -1 strip 3.5+ 3.6-
+# cwd: tight_tile/ of the k2m5-family tree staged by devtools.replay_k2m5_family from packing/resources/web/moh63-dev-k2m5-family-2026-11-13 (pinned 2c0b1b99), every file checked against its manifest
+# python3: /home/user/squares-l145/packing/.venv/bin/python3
+# host: 4 cores; load 2.68 2.94 3.52; started 2026-11-14T03:33:24Z
+{"tile": "d0=5/2 sign=-1 strip 3.5+ 3.6-", "chart": "S_u", "h0": "1/4000", "K": "4", "ok": 19, "cells": 37, "fails": 0, "worst": 0.0011817115648393999, "secs": 3}
+{"tile": "d0=5/2 sign=-1 strip 3.5+ 3.6-", "chart": "S_d d+1", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.00258997546431, "secs": 1}
+{"tile": "d0=5/2 sign=-1 strip 3.5+ 3.6-", "chart": "S_d d-1", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.01869874579939, "secs": 1}
+ALL-OK
+# finished 2026-11-14T03:33:29Z; exit 0; wall 5.352 s; CPU 5.3 s (user 5.285 + sys 0.028); load 2.70 2.94 3.51
