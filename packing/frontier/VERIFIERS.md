@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **255** programs: **54** external and **201** first-party; **174** decide claims and **81** check premises.
-- **748** of **961** evidence entries name the programs that verified them: 358 independently re-implemented, 316 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **259** programs: **57** external and **202** first-party; **176** decide claims and **83** check premises.
+- **751** of **964** evidence entries name the programs that verified them: 358 independently re-implemented, 319 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -44,13 +44,13 @@ second implementation agrees.
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | Hosono | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | Hosono | external | decides | 5 | 1 |
 | [`V-wand125-valid7-checker`](#v-wand125-valid7-checker) | valid7-independent-check (Tier A, Tier B and the record checker) | Hosono | external | decides | 2 | 2 |
-| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 25 | 12 |
+| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 27 | 13 |
 | [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 11 | 9 |
 | [`V-evand-zeromargin-py`](#v-evand-zeromargin-py) | zeromargin.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-angle-net-verify`](#v-evand-angle-net-verify) | verify (the angle-net arrangement sweep) | Evan Daniel | external | decides | 12 | 6 |
 | [`V-evand-xcheck-py`](#v-evand-xcheck-py) | xcheck.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-zmcheck`](#v-evand-zmcheck) | zmcheck (verify2/src/main.rs) | Evan Daniel | external | decides | 3 | 2 |
-| [`V-evand-qx2-zm-py`](#v-evand-qx2-zm-py) | qx2_zm.py | Evan Daniel | external | decides | 4 | 2 |
+| [`V-evand-qx2-zm-py`](#v-evand-qx2-zm-py) | qx2_zm.py | Evan Daniel | external | decides | 6 | 3 |
 | [`V-evand-verify-cert-py`](#v-evand-verify-cert-py) | verify_cert.py (s12/search/exact/) | Evan Daniel | external | decides | 8 | 6 |
 | [`V-evand-verify-cert2-py`](#v-evand-verify-cert2-py) | verify_cert2.py (s12/search/exact/) | Evan Daniel | external | decides | 8 | 6 |
 | [`V-couzo-verify-bound-certificate`](#v-couzo-verify-bound-certificate) | verify_bound_certificate.py | Evan Daniel, modified by Francisco Couzo with Codex | external | decides | 1 | 1 |
@@ -81,13 +81,16 @@ second implementation agrees.
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
 | [`V-ozden-integer-checker`](#v-ozden-integer-checker) | independent.py with intcheck_final.cpp | Doğa Özden's research lab (an OpenAI Codex agent) | external | decides | 1 | 1 |
+| [`V-khalili-tight-tile`](#v-khalili-tight-tile) | ttbox.py with ttpoly.py and ttarea.py | Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic, under their direction) | external | decides | 2 | 1 |
+| [`V-khalili-k2m5-lean`](#v-khalili-k2m5-lean) | lean/K2m5 (Grid10, Fam10, InstData, InstFam, InstC1 to InstC7, Inst) | Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic), porting Evan Daniel's Sqpack/BentzFam.lean to the 1/10 grid | external | decides | 2 | 1 |
+| [`V-khalili-k2m5-checks`](#v-khalili-k2m5-checks) | verification/verify.sh with sanity_k2m5.py | Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic, under their direction) | external | premises | 1 | 1 |
 | [`V-ozden-890-review-axis`](#v-ozden-890-review-axis) | dm_axis.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-ozden-890-review-sample`](#v-ozden-890-review-sample) | dm_sample.py and dm_receipts.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-ozden-910-review-axis`](#v-ozden-910-review-axis) | axis_exact.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-ozden-910-review-bnb`](#v-ozden-910-review-bnb) | bnb.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-ozden-910-review-exact`](#v-ozden-910-review-exact) | bnb_exact.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
-| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 18 |
+| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 19 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 131 | 123 |
 | [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 123 | 123 |
@@ -181,6 +184,7 @@ second implementation agrees.
 | [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 170 | 34 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 8 | 8 |
+| [`V-replay-k2m5-family`](#v-replay-k2m5-family) | devtools.replay_k2m5_family | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 12 | 11 |
 | [`V-audit-s12-reweighted`](#v-audit-s12-reweighted) | devtools.audit_s12_reweighted | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-s12-v11`](#v-audit-s12-v11) | devtools.audit_s12_v11_certificate | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -680,7 +684,7 @@ Decides Valid7 for Evan Daniel's k = 7 cover: every closed unit square in [0,7]^
 Decides a zero-margin point-and-segment cover by branch and bound over centre and angle boxes, each acceptance an exact integer test on outward-rounded binary64 enclosures, over the D4 region (--d4) or the unreduced pose space (--full).
 
 - Source: [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/verify2/src/bin/zmx2.rs`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/verify2/src/bin/zmx2.rs), [`packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs`](../../packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs), [`packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs`](../../packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs)
-- Versions run: SHA-256 `6b7f0f79466b…` (the 2026-09-28 packet's post-audit parser, which made the shipped records and which Hiroaki Hosono's verify.sh pins); SHA-256 `92a4cfe87b4e…`, revision `e4af291cf527` (the --sym-atoms version, for the unreduced s(32) sweep; of `zmx2.rs`); SHA-256 `e2bb84e9e059…`, revision `b8157df7a7c7` (the version that accepts a side that is not a multiple of 1/10, with which the source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and at 659ee62, the commit Mohsen Khalili and Sara Gharabaghi's verify.sh builds, and run here on their s(44) cover on 31 October 2026 (E-khalili-842-cover-replay), where its decision path is 6b7f0f79's; of `zmx2.rs`)
+- Versions run: SHA-256 `6b7f0f79466b…` (the 2026-09-28 packet's post-audit parser, which made the shipped records and which Hiroaki Hosono's verify.sh pins); SHA-256 `92a4cfe87b4e…`, revision `e4af291cf527` (the --sym-atoms version, for the unreduced s(32) sweep; of `zmx2.rs`); SHA-256 `e2bb84e9e059…`, revision `b8157df7a7c7` (the version that accepts a side that is not a multiple of 1/10, with which the source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and at 659ee62, the commit Mohsen Khalili and Sara Gharabaghi's verify.sh builds, and run here on their s(44) cover on 31 October 2026 (E-khalili-842-cover-replay), where its decision path is 6b7f0f79's; their k^2 - 5 family's box-11 board (jlevy/squares#973) runs it with --first-order and an area density, a decision path no review here has read, and the import lane of 14 November 2026 ran it on a sample of that board's sweep, root 9632 and the source's controls (with the source's one-line print-all patch for the dump), as diagnostics; of `zmx2.rs`)
 - Note: Hosono verified his own covers with zmx2 as well, so a zmx2 replay of one of Hosono's covers is a replay of the producer's code.
 
 | evidence | run | code | coverage | results |
@@ -710,6 +714,8 @@ Decides a zero-margin point-and-segment cover by branch and bound over centre an
 | `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 | `E-khalili-842-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-252 |
 | `E-khalili-842-cover-replay` | replayed here | reproduced with the producer’s code | full, 39,200 of 39,200: root cells of the unreduced pose space, centres in [0, 7]^2 and u in [0, 1/2], for the cover and its reflection y -> 7 - y; and, a second sweep, of the D4 region, centres in [0, 7/2]^2 | T-252 |
+| `E-khalili-973-k2m5-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
+| `E-khalili-973-valid11-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
 
 ### `V-evand-zm-mixed-py`
 
@@ -742,7 +748,7 @@ The source's exact mixed point-and-segment cover checker, the predecessor zmx2 w
 The source's exhaustive exact point-cover checker over the D4 region's root boxes.
 
 - Source: [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py), [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zm_d4_sweep.py`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zm_d4_sweep.py)
-- Versions run: SHA-256 `640fe453c1a3…` (zeromargin.py); SHA-256 `cc7fa8c70f7a…` (zm_d4_sweep.py; of `zm_d4_sweep.py`)
+- Versions run: SHA-256 `640fe453c1a3…` (zeromargin.py); SHA-256 `3cb95fb74ce4…`, revision `659ee62e4a9d` (zeromargin.py at 659ee62: 640fe453's code with an int64 guard on CHAIN totals and assertions on the pitch, which qx2_zm.py and zm_mixed.py import there; Khalili and Gharabaghi's qx2_zm.py runs (jlevy/squares#842, #973) used it; of `zeromargin.py`); SHA-256 `cc7fa8c70f7a…` (zm_d4_sweep.py; of `zm_d4_sweep.py`)
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -813,7 +819,7 @@ The source's separately written Rust point-cover checker, over the full domain o
 The source's exact-rational checker of Valid7, the finite statement its k^2 - 3 family rests on, over every root box of [0,7]^2 and tilt.
 
 - Source: [`packing/resources/web/evand-square-packing-2026-10-01/source/s12/search/qx2_zm.py`](../../packing/resources/web/evand-square-packing-2026-10-01/source/s12/search/qx2_zm.py)
-- Versions run: SHA-256 `6294052a37ce…`
+- Versions run: SHA-256 `6294052a37ce…` (unchanged at 659ee62, where Mohsen Khalili and Sara Gharabaghi ran it with zeromargin.py 3cb95fb7 on a cropped cover of their k^2 - 5 board's root 9632 (jlevy/squares#973); the import lane of 14 November 2026 ran that window and its scaled control here, as diagnostics)
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -821,6 +827,8 @@ The source's exact-rational checker of Valid7, the finite statement its k^2 - 3 
 | `E-k2m3-evand-valid7-qx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-064 |
 | `E-k2m4-evand-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-081 |
 | `E-k2m4-evand-validtilt9-qx2-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-081 |
+| `E-khalili-973-k2m5-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
+| `E-khalili-973-valid11-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
 
 ### `V-evand-verify-cert-py`
 
@@ -1284,6 +1292,48 @@ Decides a format M rectangle-measure certificate on its declared net: exact Frac
 | --- | --- | --- | --- | --- |
 | `E-ozden-890-n94-9965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-262 |
 
+### `V-khalili-tight-tile`
+
+**ttbox.py with ttpoly.py and ttarea.py, run by run_tt.py, and cov_check.py** · Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic, under their direction) · external · decides · Python · exact-algebraic, interval-certified
+
+Proves the source's Tight-Tile Lemma for the box-11 board of the k^2 - 5 family: in coordinates blown up in the tilt around each axis-parallel wall tile of mass exactly one, bounds the mass on each cell of a chart from below by a concave function built from exact limit values and outward-rounded interval derivative bounds, checked at the cell's vertices in rational arithmetic (run_tt.py, one job per base line or strip); cov_check.py then requires every job finished with no refused cell and every box zmx2 left in the 75 tight-tile roots to lie in the certified region, by exact comparisons.
+
+- Source: [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttbox.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttbox.py), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttpoly.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttpoly.py), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttarea.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttarea.py), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/run_tt.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/run_tt.py), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/cov_check.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/cov_check.py)
+- Versions run: SHA-256 `11551b3bdaf7…`, revision `2c0b1b9979bc` (ttbox.py; at the same revision ttpoly.py is 538f9685..., ttarea.py 61b36385..., run_tt.py a536996d... and cov_check.py 259b229f.... The source's 308 jobs at u0 = 1/4000, 15 at 1/2000 and 3 reruns recorded about 1,007,447 CPU-seconds; their outputs are retained, and the import lane re-ran a sample of jobs on 14 November 2026 (packet receipts/tight/).)
+- Note: New with jlevy/squares#973. The source reports one adversarial review of the Tight-Tile proof and code by a separate agent (docs/CHECKING.md) and the paper is not peer reviewed. It reads the board through its own loader, not Daniel's format code.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-khalili-973-k2m5-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
+| `E-khalili-973-valid11-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
+
+### `V-khalili-k2m5-lean`
+
+**lean/K2m5 (Grid10, Fam10, InstData, InstFam, InstC1 to InstC7, Inst), on Evan Daniel's Lean library at evand/square-packing 659ee62, with scripts/gen_fam10_data.py emitting InstData.lean from the board and family files** · Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic), porting Evan Daniel's Sqpack/BentzFam.lean to the 1/10 grid · external · decides · Lean 4, Python · proof-assistant-checked
+
+Kernel-checks k2m5_of_valid11 : Valid11 -> forall k >= 10, minSide (k^2 - 5) = k: that the board file read verbatim is the family's mu_11, that mu_k has total k^2 - 4D for every k >= 9 with D = 2681133855518/(2 * 10^12), and the reduction to the board. Valid11, every closed unit square in [0,11]^2 has mass at least one under the board, is a hypothesis it does not prove.
+
+- Source: [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Inst.lean`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Inst.lean), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Fam10.lean`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Fam10.lean), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Grid10.lean`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Grid10.lean), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/InstData.lean`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/InstData.lean), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/scripts/gen_fam10_data.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/scripts/gen_fam10_data.py)
+- Versions run: SHA-256 `252b7eff19cf…`, revision `2c0b1b9979bc` (Inst.lean; Fam10.lean is 828f164d..., Grid10.lean f4021764... and InstData.lean 5ddfd973... at the same revision. The source's build of 12 November 2026 reports the axioms propext, Classical.choice and Quot.sound (lean/build.log); not built here (think-0h7r).)
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-khalili-973-k2m5-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
+| `E-khalili-973-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
+
+### `V-khalili-k2m5-checks`
+
+**verification/verify.sh with sanity_k2m5.py, locality_check.py, audit_zmx2.py, r9632/check_9632.py and tight_tile/summarize_tt.py** · Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic, under their direction) · external · checks premises · Python, Bash · exact-algebraic
+
+The source's exact bookkeeping and record audits: the board's total 121 - 4D, D > 5/4 and D4 invariance against the family file; locality of the family on built boards k = 10, 12, 13 and 20; that the recorded zmx2 sweep covers all 12,100 D4 roots at one settings hash and leaves uncertified boxes in exactly the 75 tight-tile roots and root 9632; and that root 9632's zmx2-uncertified boxes lie in the one qx2_zm.py root of the window, none meeting a box qx2_zm.py left.
+
+- Source: [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/verify.sh`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/verify.sh), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/sanity_k2m5.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/sanity_k2m5.py), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/locality_check.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/locality_check.py), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/audit_zmx2.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/audit_zmx2.py), [`packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/r9632/check_9632.py`](../../packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/r9632/check_9632.py)
+- Versions run: SHA-256 `f3faf96524ad…`, revision `2c0b1b9979bc` (verify.sh; sanity_k2m5.py a7cc2db1..., locality_check.py b55d4376..., audit_zmx2.py a2274b02... and check_9632.py d77c6df3... at the same revision. The fast mode ran here on 14 November 2026 on the retained bytes and passed (receipts/verify_fast.log); it reads the recorded runs and recomputes no tilted box.)
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-khalili-973-valid11-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-298 |
+
 ### `V-ozden-890-review-axis`
 
 **dm_axis.py, with dmlib.py** · Squares Project (Levy) · first-party · decides · Python · interval-certified, exact-algebraic
@@ -1385,7 +1435,7 @@ Derives and checks the elementary bounds exactly: the grid upper bound, the area
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191, T-237, T-252 |
+| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191, T-237, T-252, T-298 |
 | `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | T-237 |
 | `E-n012-monotonicity-lower` | replayed here | independently re-implemented | not recorded | - |
 
@@ -3364,6 +3414,17 @@ Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the 
 | `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
 | `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 | `E-khalili-842-cover-replay` | replayed here | reproduced with the producer’s code | full, 39,200 of 39,200: root cells of the unreduced pose space, centres in [0, 7]^2 and u in [0, 1/2], for the cover and its reflection y -> 7 - y; and, a second sweep, of the D4 region, centres in [0, 7/2]^2 | T-252 |
+
+### `V-replay-k2m5-family`
+
+**devtools.replay_k2m5_family** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Stages Khalili and Gharabaghi's k^2 - 5 release from its packet with every file held to the manifest, builds zmx2 e2bb84e9 by devtools.replay_evand_zmx2 and a copy with the source's one-line print-all patch, runs the source's verify.sh, zmx2 columns, root 9632 (zmx2 dump, qx2_zm.py and check_9632.py), controls and tight-tile jobs under receipts, and compares each with the source's record; it decides nothing about the board.
+
+- Source: [`packing/devtools/replay_k2m5_family.py`](../../packing/devtools/replay_k2m5_family.py)
+- Versions run: this repository's commits, which Git holds
+
+No evidence entry names it yet.
 
 ### `V-audit-evand-mixed-covers`
 

@@ -5451,7 +5451,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/117.html
   canonical: cases/117.html
@@ -5651,7 +5651,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/14.html
   canonical: cases/14.html
@@ -5875,7 +5875,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/165.html
   canonical: cases/165.html
@@ -6115,7 +6115,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/192.html
   canonical: cases/192.html
@@ -6379,7 +6379,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/221.html
   canonical: cases/221.html
@@ -6651,7 +6651,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/252.html
   canonical: cases/252.html
@@ -6939,7 +6939,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/285.html
   canonical: cases/285.html
@@ -7251,7 +7251,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/32.html
   canonical: cases/32.html
@@ -7403,7 +7403,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/45.html
   canonical: cases/45.html
@@ -7531,7 +7531,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/6.html
   canonical: cases/6.html
@@ -7683,7 +7683,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-02'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/77.html
   canonical: cases/77.html
@@ -7851,7 +7851,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-02'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/96.html
   canonical: cases/96.html
@@ -24422,6 +24422,51 @@ urls:
     - docs/project/reviews/review-2026-11-12-ozden-967.md
     - packing/campaign/issue-intake/upper-bounds-967-20261112/README.md
     - packing/devtools/upper_bound_reports.py
+- path: result/t-298.html
+  canonical: result/t-298.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-14'
+  lastmod: '2026-11-14'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 44
+      - 59
+      - 76
+      - 95
+      - 116
+      - 139
+      - 164
+      - 191
+      - 220
+      - 251
+      - 284
+      - 319
+    established: null
+    attribution:
+      source_keys:
+      - '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+      published: '2026-11-13'
+    builds_on: null
+    evidence:
+    - E-khalili-973-k2m5-family-report
+    - E-khalili-973-valid11-report
+    - E-khalili-973-lean-report
+    - E-basic-grid-upper
+    artifacts:
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/README.md
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/README.md
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/certificate/sol_exact_box11.txt.gz
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/paper/k2m5.pdf
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Inst.lean
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/receipts/verify_fast.log
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/receipts/compare.json.gz
+    - packing/resources/web/evand-square-packing-2026-10-24/README.md
+    - packing/devtools/replay_k2m5_family.py
 - path: results.html
   canonical: results.html
   kind: page

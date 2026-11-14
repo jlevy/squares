@@ -28,7 +28,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-11-04'
+last_reviewed: '2026-11-14'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -33230,3 +33230,101 @@ issues:
       the review's eight questions listed above, informational and holding nothing open, and
       says that nothing the author asked for is queued, so the issue is closed with it. The
       issue was closed as completed at 01:08:22Z.
+  - number: 973
+    title: 's(k² − 5) = k for every k ≥ 7 (family k ≥ 10 by one periodic measure; k = 7, 8, 9 known)'
+    author: moh63-dev
+    opened: '2026-11-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mohsen Khalili and Sara Gharabaghi report s(k^2 - 5) = k for every integer k >= 7: k =
+      7, 8 and 9 by T-252 (theirs), T-066 (Hosono) and T-184 (Greff), and every k >= 10 by one
+      family of measures mu_k, a corner module, a period-1 wall pattern of depth 4 and Lebesgue
+      measure on [19/5, k - 19/5]^2, of total k^2 - 4D with D = 1340566927759/10^12 > 5/4,
+      reduced by locality (paper Lemma 7, and Lean k2m5_of_valid11 : Valid11 -> forall k >=
+      10, minSide (k^2 - 5) = k) to the single board mu_11, certificate/sol_exact_box11.txt
+      (SHA-256 d259fed5...12099), at moh63-dev/k2m5-family 2c0b1b9 (2026-11-13T23:50:51Z,
+      the repository's one commit). The board is decided at the source by Evan Daniel's zmx2
+      (theta = 0, and 12,024 of 12,100 D4 roots in first-order mode), by zmx2 with his
+      qx2_zm.py on root 9632, and by the authors' Tight-Tile Lemma on the 75 roots where zmx2
+      stalls at wall tiles of mass exactly one (323 jobs, about 2.75 million cells, 1,255,023
+      leftover boxes covered), with checker controls. Triaged, retained and registered on 14
+      November 2026 in lane L145 (think-2vgx) as T-298, a reported family at V0/C0, scored
+      S4 as a claim: new to this record are k = 11 to 18 (n = 116 to 319), whose reported
+      lanes move to k and verified lanes stay; n = 95 is already proved by Greff's T-191. The
+      source's fast verify.sh passed on the retained bytes, and zmx2 cert0 and 30 of the 55
+      columns, root 9632 whole with both checkers, 26 tight-tile jobs and the source's
+      controls re-ran, each equal to the source's records, in about 2.5 CPU-hours. The full
+      replay (about 140 CPU-hours here, up to about 320, nearly all of it the tight-tile jobs) and the Lean
+      build are priced and held for the owner (think-0h7r). The stage 4 review runs blind in
+      lane L144 (think-h10k). The authors state AI assistance (Claude, Anthropic) and build on
+      Evan Daniel's linear program, format, checkers and Lean reduction.
+    read_through: '2026-11-14T01:33:59Z'
+    results:
+    - key: k2m5-family
+      claim: >-
+        s(k^2 - 5) = k for every integer k >= 7: k = 7, 8 and 9 by the s(44), s(59) and s(76)
+        certificates, every k >= 10 by one family of measures reduced to the 11 x 11 board
+        mu_11, with the k x k grid.
+      source: body
+      register:
+      - T-298
+      validation:
+      - think-0h7r
+      - think-h10k
+      evidence:
+      - E-khalili-973-k2m5-family-report
+      - E-khalili-973-valid11-report
+      - E-khalili-973-lean-report
+    beads:
+    - think-2vgx
+    - think-0h7r
+    - think-h10k
+    answer_bead: think-2vgx
+    replies: []
+    close_when: >-
+      T-298 is on main with the stage 4 review mapped, and the reply on main says what was
+      retained and run, what the review found, and that the full replay is priced and owned
+      by think-0h7r; nothing the authors asked for is queued.
+    notes: >-
+      Read on 14 November 2026 from main 0db247de7: the issue body, by moh63-dev, opened at
+      01:33:59Z and labelled intake when read, with no comment. The source's one commit,
+      2c0b1b9 (2026-11-13T23:50:51Z), is the pin, retained in the packet
+      moh63-dev-k2m5-family-2026-11-13 but for .gitignore and tight_tile/cov.tar.xz (8.7 MB,
+      pinned by digest, over the per-blob ceiling); the board's SHA-256 is the issue's, and
+      every line of the release's SHA256SUMS_ALL holds. Licence MIT, the README adding CC BY
+      4.0 for text and data. The paper's acknowledgments: "The search, the certificate, the
+      Tight-Tile checker and its proof, and the verification runs were produced with Claude
+      (Anthropic) under the authors' direction; the authors reviewed the method, the checks
+      and the text." It thanks Evan Daniel for the linear program, checkers, format and Lean
+      reductions it builds on: zmx2 and qx2_zm.py at evand/square-packing 659ee62, whose
+      zeromargin.py (3cb95fb7) no packet held, so the evand-square-packing-2026-10-24 packet
+      retains it. No other open report states a lower bound at these counts above what the
+      record holds; the reported lower lanes at n = 116 to 319 were Hosono's closed form
+      (T-180), below k, and n = 95 is proved by Greff's T-191.
+
+      Run here (devtools.replay_k2m5_family, receipts in the packet), about 2.5 CPU-hours
+      under the lane's box of about 4: the source's fast verify.sh, which passed; zmx2
+      e2bb84e9, rebuilt to the 31 October binary, on cert0 and 30 of the 55 columns (6,600 of
+      12,100 roots), every census and listed box equal to the source's; root 9632 whole, the
+      patched zmx2's 6,850 boxes and qx2_zm.py's 83 the source's exactly, closed by the
+      source's check_9632.py on this run's outputs; 26 of the 323 tight-tile jobs, each
+      ALL-OK with every chart line the recorded output's; and the source's controls, zmx2
+      refusing both scaled boards, qx2_zm.py the scaled root-9632 cover (the source's 87
+      boxes, 3 meeting zmx2's, NOT-CLOSED), locality_check.py the mutated mu_12 and the
+      Tight-Tile checker the moved-segment board, each where the published board passes. The
+      patch is one line of zmx2.rs, output only. The root-9632 dump needs zmx2's
+      --uncert-cap raised (10^8, as run_cov.sh passes), which nothing in the release records.
+      The full replay, priced at about 140 CPU-hours here and up to about 320 (the zmx2 sweep
+      about 15, the 75 coverage dumps about 21, the tight-tile jobs about 100 to 280, root
+      9632 done), and the Lean build, a few CPU-hours and about 10 GB of disk, are held for
+      the owner on think-0h7r.
+
+      The draft reply, owed once the pull request carrying T-298 has merged and the review
+      has landed, acknowledges the registration, states T-298 at its rungs as a report, asks
+      the nine questions of the packet README (the dump's command; crop_cover.py; the Lemma Z
+      and axis-check runs; the two missing Tight-Tile controls; the licence file; the patch
+      step's || true; the whole Lean build log; the Zenodo record; and which run_tt.py wrote
+      the recorded tight-tile outputs), and says that the full replay is priced and held
+      (think-0h7r). No reply has been posted.

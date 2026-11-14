@@ -1,0 +1,36 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "moh63-dev-k2m5-family",
+  "source_url": "https://github.com/moh63-dev/k2m5-family",
+  "source_ref": "2c0b1b9979bcb67d92eb215366dc5ee19286c1d8",
+  "source_commit": "2c0b1b9979bcb67d92eb215366dc5ee19286c1d8",
+  "retrieved_at_utc": "2026-11-14T02:00Z",
+  "git_scope": "Full clone of main at the pinned commit, the repository's one commit and its head when cloned (2026-11-13T23:50:51Z, 1 hour 43 minutes before jlevy/squares#973 was opened), which first publishes the certificate. The tree is retained but for .gitignore and tight_tile/cov.tar.xz, which is pinned by digest (8,693,760 bytes, over the 5 MiB per-blob ceiling of OR-18); SHA256SUMS_ALL lists all 466 other files and every line holds at the pin. Evan Daniel's checkers are not in the tree: verification/verify.sh --full clones evand/square-packing at 659ee62e4a9d39542a1146e8b011cc3ab6407ede and applies verification/zmx2_print_all.patch. At that commit verify2/src/bin/zmx2.rs is SHA-256 e2bb84e9e05938db416940ad608d2583ca9a0c248d59820937c4ce59d607ead7, retained in the evand-square-packing-2026-10-04 packet, and search/qx2_zm.py is 6294052a37ce66c5d84b55afd606e3a52f463e22b876bf44b5aa903aefb7e737, retained in the evand-square-packing-2026-10-03 packet; search/zeromargin.py, 3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc, which the source's qx2_zm.py runs imported, is retained in the evand-square-packing-2026-10-24 packet. Nothing in the tree was executed in the repository.",
+  "archived_dir": "k2m5-family",
+  "license": "MIT, copyright 2026 Mohsen Khalili and Sara Gharabaghi (LICENSE); README.md says 'Code: MIT. Text and data: CC BY 4.0. (See LICENSE.)', though LICENSE carries the MIT text alone. LICENSE also says search/cover_loop.py and search/tilesep.py import, and verification/verify.sh downloads, code from evand/square-packing (copyright 2026 Evan Daniel, MIT); neither search file is in the tree at the pin. The paper's acknowledgments say the search, the certificate, the Tight-Tile checker and its proof, and the verification runs were produced with Claude (Anthropic) under the authors' direction, and that the authors reviewed the method, the checks and the text; it thanks Evan Daniel for the linear program, checkers, format and Lean reductions the work builds on, Hiroaki Hosono and B. Greff for their public certificates, and the Squares Project for its records. The authors submitted the source in jlevy/squares#973.",
+  "claims": [
+    "s(k^2 - 5) = k for every integer k >= 7 (README.md, paper/k2m5.pdf): k = 7, 8 and 9 are the s(44) = 7, s(59) = 8 and s(76) = 9 certificates of the authors, Hiroaki Hosono and Benjamin Greff, and every k >= 10 is one family of measures mu_k on [0,k]^2, a corner module in each corner, a period-1 wall pattern of depth 4 along each side and Lebesgue measure on [19/5, k - 19/5]^2, of total mass k^2 - 4D with D = 1340566927759/10^12 > 5/4 (paper Lemma 6), so below k^2 - 5.",
+    "Locality (paper Lemma 7) reduces every k >= 10 to one board, mu_11 = certificate/sol_exact_box11.txt (SHA-256 d259fed5c9d5eb02c6fed85f5d1070e86d48f5717305f9e056c9a88adbd12099), 13,244 weighted segments on the 1/10 grid with masses w/(2*10^12) and Lebesgue measure on [19/5, 36/5]^2, in Evan Daniel's mixed format; the Lean 4 development lean/K2m5 states k2m5_of_valid11 : Valid11 -> forall k >= 10, minSide (k^2 - 5) = k, built by the authors on 12 November 2026 against Daniel's Lean library at 659ee62 with the axioms propext, Classical.choice and Quot.sound (lean/build.log).",
+    "Validity of mu_11 (paper Theorem 10): theta = 0 by Daniel's Lemma Z at 10,000 limit corners, an exact axis check at 7,717 corners and zmx2 cert0 on 2,500 roots; 12,024 of 12,100 D4 roots by zmx2 cert --d4 --first-order --depth 40 --node-cap 20000000 in 55 columns (verification/logs/zmx2_box11/, about 45,366 CPU-seconds recorded); root 9632, whose 6,850 zmx2-uncertified boxes lie in one qx2_zm.py root that qx2_zm.py at depth 18 leaves with 83 uncertified boxes, none meeting them (verification/r9632/check_9632.py); and the 75 tight-tile roots by the Tight-Tile Lemma (tight_tile/, paper section 6 and paper/tight_tile_report.pdf), 308 jobs at u0 = 1/4000 and 15 at 1/2000, about 2.75 million cells, with all 1,255,023 boxes zmx2 leaves there inside the certified region (tight_tile/cov_check.py, COVERAGE-OK).",
+    "Controls (docs/CHECKING.md): zmx2 refuses every segment mass scaled by 999/1000 and 993/1000 at root (15, 36), which it certifies for the real board; qx2_zm.py at root 9632 with masses scaled by 999/1000 leaves 87 boxes, 3 meeting zmx2's, so check_9632.py says NOT-CLOSED; the Tight-Tile checker refuses masses times 0.99, the line x = 2 lowered by 1% and one moved segment with the same theta = 0 limits and a smaller first-order growth (tight_tile/ctl_rise.txt, a true violation of mass 1 - 1.34e-7); locality_check.py refuses a one-weight mutation of mu_12.",
+    "verification/verify.sh (fast) re-checks the certificate hashes, the exact bookkeeping, locality on built boards k = 10, 12, 13 and 20, and exact audits of the recorded zmx2 sweep, root 9632 and every tight-tile job and the coverage; --full re-runs zmx2 and the tight-tile jobs (hours for zmx2, CPU-days for the tight tiles). The authors report a separate agent's adversarial review of the Tight-Tile proof and code (docs/CHECKING.md) and no review by outside mathematicians; the paper is not peer reviewed."
+  ],
+  "scope": [
+    "LICENSE",
+    "README.md",
+    "SHA256SUMS_ALL",
+    "certificate",
+    "docs",
+    "lean",
+    "paper",
+    "search",
+    "tight_tile",
+    "verification"
+  ],
+  "pinned_only": [
+    {
+      "match": "tight_tile/cov.tar.xz",
+      "reason": "8,693,760 bytes of xz-compressed zmx2 dumps of the uncertified boxes in the 75 tight-tile roots, over the 5 MiB per-blob ceiling of OR-18 (packing/devtools/added-blobs.yaml); pinned by SHA-256, fetched from the pinned commit for the replay and read there, and owed a hosted data release before a full replay relies on it (think-0h7r)"
+    }
+  ]
+}

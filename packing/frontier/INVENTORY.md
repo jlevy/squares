@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **961** evidence records. **561** are formal; **552** of those were established here. **14** are samples, counted separately.
-- **380** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **964** evidence records. **561** are formal; **552** of those were established here. **14** are samples, counted separately.
+- **383** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -670,7 +670,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-fang-excess-lean-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-wand125-linear-n145-1224-report` | 4 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
 | `E-wand125-linear-n145-1224-source-replay` | 5 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | full, 201 of 201: net angles, each decided by the source's checker over its quadrant of centres | `V-wand125-unified-linear-verify-cpp`, `V-audit-wand125-linear` |
-| `E-wand125-closed-form-report` | 153 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-replay4d` |
+| `E-wand125-closed-form-report` | 145 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-replay4d` |
 | `E-mishapolk-593-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-mishapolk-593-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
 | `E-bengreff-594-cover-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-zm-mixed-py` |
@@ -984,13 +984,16 @@ results, it is a statement about what this repository has itself examined.
 | `E-ozden-967-certificate-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-ozden-967-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | full, 1 of 1: the witness at n = 269 that T-297 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
 | `E-ozden-967-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the witness at n = 269: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | `V-ozden-967-review-check` |
+| `E-khalili-973-k2m5-family-report` | 8 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-qx2-zm-py`, `V-khalili-tight-tile`, `V-khalili-k2m5-lean` |
+| `E-khalili-973-valid11-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-qx2-zm-py`, `V-khalili-tight-tile`, `V-khalili-k2m5-checks` |
+| `E-khalili-973-lean-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-khalili-k2m5-lean` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 382, verified 574
-- **method**: exact-algebraic 320, interval-certified 236, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 382
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 900
-- **relationship to the producer's code**: generator 5, independent-implementation 358, not-applicable 35, same-implementation 505, shared-components 52, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 385, verified 574
+- **method**: exact-algebraic 320, interval-certified 236, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 385
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 903
+- **relationship to the producer's code**: generator 5, independent-implementation 358, not-applicable 35, same-implementation 508, shared-components 52, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

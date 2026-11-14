@@ -13196,6 +13196,40 @@ sources:
     as its house in the pass of 13 November, in place of the author's own T-296. The ledger of
     12 November for this lane (campaign/issue-intake/upper-bounds-967-20261112) records it. All
     3 native jobs have full outcomes.
+- id: moh63-dev-k2m5-family-2026-11-13
+  title: Mohsen Khalili and Sara Gharabaghi's s(k^2 - 5) = k for every k >= 7, issue 973
+  role: source-repository
+  url: https://github.com/moh63-dev/k2m5-family/tree/2c0b1b9979bcb67d92eb215366dc5ee19286c1d8
+  local: resources/web/moh63-dev-k2m5-family-2026-11-13/
+  source_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+  scope: {n_values: [44, 59, 76, 95, 116, 139, 164, 191, 220, 251, 284, 319]}
+  reviewed: '2026-11-14'
+  source_date: '2026-11-13'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-095.md
+  - frontier/n-116.md
+  - frontier/n-139.md
+  - frontier/n-164.md
+  - frontier/n-191.md
+  - frontier/n-220.md
+  - frontier/n-251.md
+  - frontier/n-284.md
+  - frontier/n-319.md
+  - frontier/results.yaml
+  - resources/web/moh63-dev-k2m5-family-2026-11-13/README.md
+  evidence: [E-khalili-973-k2m5-family-report, E-khalili-973-valid11-report, E-khalili-973-lean-report]
+  notes: >-
+    The repository's one commit is retained but for .gitignore and tight_tile/cov.tar.xz
+    (8.7 MB, pinned by digest; a hosted release is owed with think-0h7r). The family is
+    reported to settle s(k^2 - 5) = k for every k >= 10, so k = 10 to 18 here, with k = 7, 8
+    and 9 the certificates T-252, T-066 and T-184 hold. The import lane ran the source's fast
+    verify.sh, a sample of the zmx2 sweep, root 9632 with both checkers and the source's
+    controls on the retained bytes, as diagnostics; the full replay and the Lean build are
+    priced and held (think-0h7r), so T-298 is a report and no verified lane moves. Evan
+    Daniel's checker files at the pinned 659ee62 are in
+    resources/web/evand-square-packing-2026-10-24/, retaining zeromargin.py 3cb95fb7.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

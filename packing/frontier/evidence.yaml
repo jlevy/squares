@@ -61889,3 +61889,133 @@ evidence:
       A clean-room decision of the one retained witness by two exact methods in one program, which
       share its reader. Finite feasibility only.
     source_reviewed: '2026-11-12'
+
+  - id: E-khalili-973-k2m5-family-report
+    claim: lower-bound
+    scope: {n_values: [44, 59, 76, 95, 116, 139, 164, 191, 220, 251, 284, 319]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    certificate: packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/certificate/sol_exact_box11.txt.gz
+    replay_status: not-attempted
+    verifiers: [V-evand-zmx2, V-evand-qx2-zm-py, V-khalili-tight-tile, V-khalili-k2m5-lean]
+    limitations: >-
+      moh63-dev/k2m5-family at 2c0b1b9979bcb67d92eb215366dc5ee19286c1d8, committed
+      2026-11-13T23:50:51Z, the repository's one commit, reports s(k^2 - 5) = k for every
+      integer k >= 7 and asks for its registration in jlevy/squares#973. The lower halves at
+      k = 7, 8 and 9 are s(44) = 7, s(59) = 8 and s(76) = 9, which this record holds as
+      T-252 (the same authors), T-066 (Hiroaki Hosono) and T-184 (Benjamin Greff). Every k
+      >= 10 rests on one family of measures on [0,k]^2: a corner module on [0,4]^2 at each
+      corner, a wall pattern of depth 4 and period 1 carried by weighted segments on the
+      lines of the 1/10 grid, and Lebesgue measure on [19/5, k - 19/5]^2, of total mass k^2 -
+      4D with D = 1340566927759/10^12 > 5/4 (paper Lemma 6). The source reduces every k >= 10
+      to the 11 x 11 board by integer translations (paper Lemma 7, and Lean), the board being
+      certificate/sol_exact_box11.txt (SHA-256 d259fed5...12099, the issue's: 13,244
+      segments and the Lebesgue square [19/5, 36/5]^2, mass 121 - 4D), and states that every
+      closed unit square in [0,11]^2 has mass at least 1 (Valid11, paper Theorem 10). This is
+      the public-claim entry; the source's runs of Valid11 and its Lean reduction are the two
+      entries after it. The scope is the projection onto the cases this record holds, n <=
+      324, which is k = 7 to 18; the reported theorem does not end at k = 18, and at n = 95
+      the verified lower bound is already Greff's cover (T-191). Here the source's fast
+      verify.sh passed on the retained bytes on 14 November 2026: the board's total 121 - 4D
+      exactly, D > 5/4, its D4 invariance and its agreement with the family file, and the
+      locality check on the built boards k = 10, 12, 13 and 20, each exact (receipts in the
+      packet). Lemma 7 itself was not re-derived here.
+    source_reviewed: '2026-11-14'
+
+  - id: E-khalili-973-valid11-report
+    claim: lower-bound
+    scope: {n_values: [95, 116, 139, 164, 191, 220, 251, 284, 319]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    certificate: packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/certificate/sol_exact_box11.txt.gz
+    replay_status: not-attempted
+    verifiers: [V-evand-zmx2, V-evand-qx2-zm-py, V-khalili-tight-tile, V-khalili-k2m5-checks]
+    limitations: >-
+      The source decides Valid11 in four parts (paper Theorem 10, docs/CHECKING.md). The axis
+      face theta = 0: Evan Daniel's Lemma Z at 10,000 limit corners, an exact axis check at
+      7,717 corners, neither in the release, and zmx2 cert0 on all 2,500 roots, each with least
+      mass exactly 1. General position: zmx2 cert --d4 --first-order --depth 40 --node-cap
+      20000000 at evand/square-packing 659ee62 (zmx2.rs e2bb84e9), in 55 columns of 220 roots
+      over centres in [0, 11/2]^2 and u = tan(theta/2) in [0, 1/2], certifies 12,024 of the
+      12,100 D4 roots, 45,366 CPU-seconds recorded. Root 9632: zmx2, with the source's
+      one-line patch that lists every uncertified box and a cap of 10^8 on them, leaves 6,850
+      boxes, all inside one root of Daniel's exact-rational qx2_zm.py (6294052a, importing
+      zeromargin.py 3cb95fb7), which at depth 18 on the board cropped to the root's
+      3/4-neighbourhood and its D4 images certifies that root but for 83 boxes, none meeting a
+      zmx2 box (check_9632.py). The 75 tight-tile roots: the source's Tight-Tile Lemma and its
+      checker ttbox, 308 jobs at u0 = 1/4000 and 15 at 1/2000 with 3 reruns, about 2.75 million
+      cells and 1,007,447 CPU-seconds recorded, and cov_check.py's exact check that each of the
+      1,255,023 boxes zmx2 leaves in those roots lies in the certified region. Here, on 14
+      November 2026, from the retained bytes (devtools.replay_k2m5_family, receipts in the
+      packet): the source's fast verify.sh passed, auditing the recorded sweep, root 9632,
+      every tight-tile job and the coverage from their records. zmx2 e2bb84e9, built from
+      retained bytes to the binary digest of the 31 October build, re-ran cert0 (2,500 roots
+      certified) and 30 of the 55 columns, 6,600 of the 12,100 roots, each column's census and
+      listed uncertified boxes equal to the source's records; those columns hold 8.8% of the
+      sweep's recorded CPU. Root 9632 was re-run whole with both checkers: zmx2 with the
+      patch, rebuilt here, listed the source's 6,850 boxes exactly; qx2_zm.py made the source's
+      2,357 boxes and 83 uncertified ones, its list byte for byte the source's; and
+      check_9632.py on this run's own outputs printed ROOT-9632-CLOSED. Every one of the
+      cropped cover's 632 segments is a segment of the board with its mass, and its header and
+      Lebesgue square are the board's, so the cropped cover is no heavier than the board.
+      The Tight-Tile checker re-ran 26 of the 323 jobs, 22 strips and
+      4 lines across d0 = 3/2, 5/2 and 7/2 and both tilt signs, all among the cheapest, each
+      ALL-OK with every chart line equal to the recorded output's (the retained run_tt.py
+      also prints K = 4, which the recorded outputs, written by an earlier version, lack). The source's controls ran: zmx2 refuses both scaled boards at root (15, 36),
+      which it certifies for the real one, each census equal to the source's record; qx2_zm.py at root 9632 with the cropped
+      cover's masses scaled by 999/1000 leaves the source's 87 boxes exactly, 3 of them
+      meeting a zmx2 box, so check_9632.py says ROOT-9632-NOT-CLOSED;
+      locality_check.py refuses the one-weight mutation of mu_12 at 176 windows; and the
+      Tight-Tile checker certifies the control's region of the real board in 155 cells and
+      refuses the moved-segment board there, 443 cells refused within 2,000 cells, 6 at the face
+      point. So root 9632 and the axis face's zmx2 part are decided here; the rest is sampled,
+      a diagnostic and not a replay. Not run here: the other 25 columns, the 75 coverage dumps,
+      which verify.sh --full does not regenerate either, and the other tight-tile jobs, priced
+      with the Lean build in think-0h7r; nor have zmx2's first-order mode and area density,
+      been reviewed here.
+    source_reviewed: '2026-11-14'
+
+  - id: E-khalili-973-lean-report
+    claim: lower-bound
+    scope: {n_values: [95, 116, 139, 164, 191, 220, 251, 284, 319]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    certificate: packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Inst.lean
+    replay_status: not-attempted
+    verifiers: [V-khalili-k2m5-lean]
+    limitations: >-
+      The source reports that Lean 4 with Mathlib, toolchain v4.33.1 on Evan Daniel's
+      library at evand/square-packing 659ee62, kernel-checks
+      SquarePacking.K2m5Inst.k2m5_of_valid11 : Valid11 -> forall k >= 10, minSide (k^2 - 5) =
+      k with the axioms propext, Classical.choice and Quot.sound (lean/build.log, its build of
+      12 November 2026, which keeps only the last lines). Read here: Valid11 is stated as
+      every closed unit square sq c theta 1 inside box 11 having mass at least 1 under the
+      board file read verbatim (InstData.lean, generated from the board and family files by
+      scripts/gen_fam10_data.py, its header naming both files' SHA-256, the board's equal to
+      the issue's); box11Cover_measure proves the file is the family's mu_11 by kernel
+      evaluation in seven modules; famCover_total5 proves the total k^2 - 4D for every k >=
+      9; and the reduction applies the authors' Fam10.lean, a port of Daniel's BentzFam.lean
+      to the 1/10 grid. That statement is no stronger than the four computations the source
+      reports decide, which cover every pose: the axis face, and every tilt by D4 reduction
+      to centres in [0, 11/2]^2 and u = tan(theta/2) in [0, 1/2]. The D4 reduction of the zmx2
+      sweep is the checker's, not the Lean's. The definitions minSide, sq, box and the
+      mixed-cover measure are Daniel's at 659ee62, whose lean/ directory is not retained here.
+      Nothing was built here: the toolchain and Mathlib cache need about 10 GB of disk, and
+      the source reports about 6 GB of memory for each kernel-check module; the build is
+      priced in think-0h7r.
+    source_reviewed: '2026-11-14'

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-12'
+last_reviewed: '2026-11-14'
 results:
   - id: T-001
     kind: lower-bound
@@ -8320,6 +8320,12 @@ results:
       Lean build of 3 October entered the evidence as E-k2m4-evand-bentz4-lean-build
       (think-1b7c), the replayed half of the series; with the premise unreplayed it moves
       no rung either.
+
+      Evidence update, 2026-11-14 (think-2vgx): Mohsen Khalili and Sara Gharabaghi's
+      s(k^2 - 5) = k for every k >= 7 (T-298), a family whose total k^2 - 4D lies below k^2 -
+      5, gives s(k^2 - 4) >= k for every k >= 10 by monotonicity, so a second reported route
+      at n = 96 and at k = 11 to 18. It is reported and not replayed here in full, adds no
+      evidence to this entry and moves no rung.
 
   - id: T-082
     kind: lower-bound
@@ -27385,6 +27391,11 @@ results:
       at 95 was below 10: T-090's 1993/200, which held both lanes of the case, T-091's 199/20 by
       monotonicity from 94, T-082's 249/25, T-068's and T-074's 49259/5000, T-046's and T-070's 49209/5000,
       and the closed forms of T-007, T-083 and T-180.
+
+      Evidence update, 2026-11-14 (think-2vgx): Mohsen Khalili and Sara Gharabaghi's family
+      s(k^2 - 5) = k for every k >= 7 (T-298) gives s(95) = 10 again at k = 10, by one
+      family of measures reduced to an 11 x 11 board. It is reported and not replayed here
+      in full; the verified bound at 95 stays this entry's.
   - id: T-192
     kind: lower-bound
     registered: '2026-10-15'
@@ -46138,6 +46149,165 @@ results:
       verdict: accepted
       covers:
       - T-297
+  - id: T-298
+    kind: optimality
+    registered: '2026-11-14'
+    landed: '2026-11-14'
+    headline: "`s(k² − 5) = k` for every integer k from 7 up, held here at k = 7 to 18"
+    claim: >-
+      Mohsen Khalili and Sara Gharabaghi's theorem s(k^2 - 5) = k for every integer k >= 7,
+      published on 13 November 2026: the lower half at k = 7, 8 and 9 by the s(44), s(59)
+      and s(76) certificates, and at every k >= 10 by one family of periodic measures; the
+      upper half by the k x k grid.
+
+      This entry's scope is its projection onto n <= 324, k = 7 to 18: s(44) = 7, s(59) =
+      8, s(76) = 9, s(95) = 10, s(116) = 11, s(139) = 12, s(164) = 13, s(191) = 14, s(220) =
+      15, s(251) = 16, s(284) = 17 and s(319) = 18. New to this record are k = 11 to 18;
+      k = 7, 8 and 9 are T-252, T-066 and T-184, and s(95) = 10 is Greff's T-191, which this
+      family reaches by a second, reported route.
+
+      For k >= 10 the measure on [0,k]^2 is a corner module in each corner, a wall pattern of
+      depth 4 and period one on the lines of the 1/10 grid, and Lebesgue measure on [19/5, k -
+      19/5]^2, of total k^2 - 4D with D = 1340566927759/1000000000000, so 4D exceeds 5. The
+      source reduces every k >= 10 to one finite statement on the 11 x 11 board, Valid11, and
+      its Lean development, the source reports, kernel-checks that reduction; it does not
+      prove Valid11.
+
+      Valid11 is decided at the source by Evan Daniel's interval checker zmx2 at theta = 0
+      and on 12,024 of the 12,100 D4 roots, by zmx2 with his exact-rational qx2_zm.py on root
+      9632, and on the 75 roots where zmx2 stalls at wall tiles of mass exactly one by the
+      authors' Tight-Tile Lemma, a blow-up argument in the tilt checked by exact rationals and
+      outward-rounded intervals. The source reports one adversarial AI review of that lemma
+      and none by outside mathematicians.
+
+      Here the source's fast checks, zmx2 on cert0 and 30 of the 55 columns, root 9632 with
+      both checkers, 26 tight-tile jobs and the source's controls ran on the retained bytes,
+      each equal to the source's records, in about 2.5 CPU-hours: a diagnostic, not a replay.
+      The full replay and the Lean build are priced and held, so the verified lower bounds are
+      unchanged.
+
+      Mohsen Khalili and Sara Gharabaghi,
+      [k2m5-family](https://github.com/moh63-dev/k2m5-family/tree/2c0b1b9979bcb67d92eb215366dc5ee19286c1d8),
+      building on Evan Daniel's families for k^2 - 3 and k^2 - 4, his linear program, format,
+      checkers and Lean reduction, at the request of jlevy/squares#973. The paper says the
+      search, the certificate, the Tight-Tile checker and its proof, and the verification runs
+      were produced with Claude (Anthropic) under the authors' direction.
+    scope: {n_values: [44, 59, 76, 95, 116, 139, 164, 191, 220, 251, 284, 319]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 4
+      rationale: >-
+        Scored as a claim: a bound family, the deficit-5 case of Friedman's conjecture, which
+        would settle eight open cases of this record, k = 11 to 18, and every later k if the
+        finite premise and its reduction pass replay and review here, with a new argument,
+        the Tight-Tile Lemma, for wall tiles where box subdivision stalls. S4 by the anchor "a
+        reusable technique, bound family", as T-064 and T-081 are; not S5, since no case it
+        settles is central to this project. The score gates nothing; the stage 4 review
+        confirms or changes it.
+      scored: '2026-11-14'
+      by: 'the import lane L145 of issue 973 (think-2vgx), a draft for the stage 4 review (think-h10k)'
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Khalili Gharabaghi k2m5 family 2026-11-13]']
+      published: '2026-11-13'
+    composition: >-
+      Compound, and the minimum is set by the lower half at k >= 10. The upper half is the k
+      x k grid, E-basic-grid-upper. At k = 7, 8 and 9 the lower half is the certificates this
+      record holds as T-252, T-066 and T-184, and this entry adds no evidence to them.
+
+      At k >= 10 it is two parts in series: the finite premise Valid11, reported by the
+      source's runs (E-khalili-973-valid11-report), and the reduction from it to every k >=
+      10, the source's Lean (E-khalili-973-lean-report), not built here. Both are reports, so
+      the entry is V0; no review is recorded yet, so it is C0.
+
+      The scope lists the cases this record holds; the theorem's own domain is every k >= 7,
+      and a scope that can say so is think-kqi1.
+    evidence:
+      - E-khalili-973-k2m5-family-report
+      - E-khalili-973-valid11-report
+      - E-khalili-973-lean-report
+      - E-basic-grid-upper
+    artifacts:
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/README.md
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/README.md
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/certificate/sol_exact_box11.txt.gz
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/paper/k2m5.pdf
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Inst.lean
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/receipts/verify_fast.log
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/receipts/compare.json.gz
+      - packing/resources/web/evand-square-packing-2026-10-24/README.md
+      - packing/devtools/replay_k2m5_family.py
+    controls:
+      - packing/tests/test_replay_k2m5_family.py
+    next_rung: >-
+      Valid11 replayed in full and the Lean reduction built (think-0h7r): the zmx2 sweep's
+      remaining columns, the 75 coverage dumps, which the source's verify.sh --full does not
+      regenerate, the 323 tight-tile jobs and the coverage check, priced at about 140
+      CPU-hours here and up to about 320, the tight-tile jobs nearly all of it; and the build of lean/K2m5 on
+      Daniel's library at the commit the source pins, a few CPU-hours and about 10 GB of disk. Then replayed
+      entries for Valid11 and the reduction, and the verified lower bounds at k = 11 to 18.
+      The stage 4 review (think-h10k) reads the claim chain, the Tight-Tile Lemma and zmx2's
+      first-order and area-density path, which no review here has read, and is recorded on
+      the report entries once it lands.
+    unfinished_confirmations:
+      - what: >-
+          Valid11 replayed in full with the source's programs and the Lean reduction built
+          from the retained bytes, each with its controls, as replayed entries: the zmx2
+          sweep (cert0 and 55 columns), the 75 coverage dumps, the 308 + 15 tight-tile jobs
+          and 3 reruns with cov_check.py on the regenerated dumps, root 9632, and lean/K2m5
+          with #print axioms
+        rung: C3
+        link: think-0h7r
+        estimated_cost:
+          cpu_hours: 140
+          cpu_hours_high: 320
+          basis: >-
+            The source's recorded CPU for each part scaled by this host's speed on the same
+            programs here (packing/resources/web/moh63-dev-k2m5-family-2026-11-13/README.md,
+            The Price of a Full Replay): the zmx2 sweep (45,366 CPU-seconds recorded) and the
+            75 coverage dumps (65,802) at 1.14 times, measured over the 30 columns sampled,
+            about 35 CPU-hours; the tight-tile jobs (1,007,447 recorded) at 0.37 times, the
+            factor of the 26 cheapest jobs sampled, about 102, or at the source's own speed,
+            280, the upper end; root 9632 and the controls, about 1, run here; and the Lean
+            build, a few CPU-hours by estimate, with about 10 GB of disk.
+          priced: '2026-11-14'
+    notes: >-
+      V0/C0 at registration on 14 November 2026: every cited entry is a report, the source's,
+      and no review is recorded yet; the stage 4 review runs blind in its own lane
+      (think-h10k). The import lane (L145, think-2vgx) retained the source and ran, on the
+      retained bytes, the source's fast verify.sh, which passed; zmx2 cert0 and 30 of the 55
+      columns of the first-order sweep, every census and uncertified box equal to the source's
+      records; root 9632 whole with both checkers, closed by the source's check on this run's
+      outputs; 26 of the 323 tight-tile jobs, each ALL-OK with every chart line
+      the recorded output's; and the source's controls, each refused where the published board
+      is not.
+
+      That is about 2.5 CPU-hours, a diagnostic and not a replay, so no rung moves and
+      the verified lower bounds at k = 11 to 18 stay Karakuş's strip bounds.
+
+      New to this record are k = 11 to 18: their case records' reported lower lanes move from
+      Hosono's closed form (T-180) to k, so their reported status is proved, and their
+      verified lanes and status are unchanged. At k = 10 the record already proves s(95) = 10
+      by Greff's cover (T-191), which this family reaches again by another route; at k = 7, 8
+      and 9 it cites T-252, T-066 and T-184 and adds nothing to them. The family's total lies
+      below k^2 - 4 as well, so it gives T-081's s(k^2 - 4) = k for every k >= 10 by
+      monotonicity; T-081 gains a sentence naming this route, and no entry is added.
+
+      The source's root-9632 dump lists every uncertified box only with zmx2's --uncert-cap
+      raised, as tight_tile/run_cov.sh raises it for the 75 dumps (10^8); at the default cap
+      of 200 the root stops at 226 boxes. Neither the dump's header nor the release records
+      that flag. verify.sh --full regenerates neither the coverage dumps nor root 9632's runs;
+      the price in think-0h7r counts them. tight_tile/cov.tar.xz (8.7 MB) is pinned by digest
+      only, over the per-blob ceiling; a hosted release of it is owed before a full replay
+      cites receipts compared with it.
+
+      The packet README lists nine questions for the authors, which hold no rung: the dump's
+      command; crop_cover.py, which made the cropped cover and is not in the release; the
+      Lemma Z and axis-check runs for theta = 0, which are not in the release; the two
+      Tight-Tile controls not in the release; the licence file; the patch step's || true; the
+      whole Lean build log; the Zenodo record; and which version of run_tt.py wrote the
+      recorded tight-tile outputs, which lack a field the shipped one prints.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

@@ -126,10 +126,13 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # not Nagamochi-bounded, so the formal-open and reported-open counts fall by two in
     # every corpus. The same day the s(95) cover, its total below 96, adopted s(96) = 10
     # in the verified lane (T-191); n = 96 was reported-proved already (T-081), so only
-    # the formal-open count falls, by one in every corpus.
+    # the formal-open count falls, by one in every corpus. 2026-11-14: Khalili and
+    # Gharabaghi's reported family s(k^2 - 5) = k (T-298) made n = 116, 139, 164, 191,
+    # 220, 251, 284 and 319 reported-proved, their verified lanes open, so only the
+    # reported-open count falls, by four up to 200 and by eight up to 324.
     "n=1..100": (51, 49, 0),
-    "n=1..200": (135, 129, 0),
-    "n=1..324": (243, 233, 0),
+    "n=1..200": (135, 125, 0),
+    "n=1..324": (243, 225, 0),
 }
 #: n = 68, 103, 105, 110 and 131 left the exclusions on 2026-09-29, when their records
 #: moved from UnitSquare renderings to Francisco Couzo's packings (T-056), and n = 69, the

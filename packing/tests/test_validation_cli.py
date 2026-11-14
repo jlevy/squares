@@ -58,10 +58,12 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 # lane only. 2026-10-31: T-252 closes n = 44 in both lanes, so this one too. 2026-11-02:
 # T-184 and T-191 at C3 close n = 76 and 95 in both lanes; n = 96, which T-191 also
 # closes, was reported-proved already (T-081), so this lane does not move for it.
+# 2026-11-14: Khalili and Gharabaghi's reported s(k^2 - 5) = k (T-298) closes n = 116,
+# 139, 164, 191, 220, 251, 284 and 319 in this lane only.
 REPORTED_LANE_SPLIT: dict[str, tuple[int, int]] = {
     "n=1..100": (51, 49),
-    "n=1..200": (71, 129),
-    "n=1..324": (91, 233),
+    "n=1..200": (75, 125),
+    "n=1..324": (99, 225),
 }
 
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
