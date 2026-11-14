@@ -33234,7 +33234,8 @@ issues:
     title: 's(k² − 5) = k for every k ≥ 7 (family k ≥ 10 by one periodic measure; k = 7, 8, 9 known)'
     author: moh63-dev
     opened: '2026-11-14'
-    state: open
+    state: closed
+    closed: '2026-11-14'
     kind: result-report
     triage: done
     summary: >-
@@ -33267,7 +33268,7 @@ issues:
       replay (F2); mapped, it puts T-298 at C1. The authors state AI assistance (Claude,
       Anthropic) and build on Evan Daniel's linear program, format, checkers and Lean
       reduction.
-    read_through: '2026-11-14T01:33:59Z'
+    read_through: '2026-11-14T06:51:14Z'
     results:
     - key: k2m5-family
       claim: >-
@@ -33293,7 +33294,19 @@ issues:
     - think-h10k
     - think-kn13
     answer_bead: think-2vgx
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/973#issuecomment-6873382321
+      date: '2026-11-14'
+      by: jlevy
+      kind: final
+      reported:
+      - result: k2m5-family
+        id: T-298
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: current
+      beads: [think-0h7r, think-kn13]
     close_when: >-
       T-298 is on main with the stage 4 review mapped, and the reply on main says what was
       retained and run, what the review found, and that the full replay is priced and owned
@@ -33359,3 +33372,70 @@ issues:
       crop_cover.py, the Lemma Z and axis-check runs, the two missing Tight-Tile controls,
       the licence file, the patch step's || true, the whole Lean build log and the Zenodo
       record). No reply has been posted.
+
+      Closed on 14 November 2026 with the final reply (issuecomment-6873382321, posted by
+      jlevy at 06:51:14Z), after #974 merged as 9adc3a0ad at 06:36:21Z with the import, the
+      time-boxed replay and the mapped stage 4 review, and after that merge's Pages deploy
+      and verify-deployment passed (run 43567161807); recorded in lane L149. It states T-298
+      at V0/C1, reviewed (the argument read here, no blocking defect found, no full replay
+      run yet), with the record holding k = 7 to 18, and says that the eight counts n = 116
+      to 319 are new and each now recorded as proved by a reported result, s(n) = k, citing
+      T-298, their verified lower bounds unchanged until Valid11 is replayed here in full;
+      that is its position, current. It names T-252, T-066 and T-184 (V3/C3) as the proofs
+      the record already held at k = 7, 8 and 9, Benjamin Greff's T-191 (V3/C3) at n = 95,
+      where the family is a second route, and Evan Daniel's k^2 - 4 family T-081, the level
+      at which T-298's significance is drafted, S4; none is this issue's result, and none is
+      recorded under reported. It names none of the six evidence ids, so none is recorded
+      under reported and each stays a reply due until a reply names it, since a reply may
+      record only ids its text names (#900).
+
+      It says that two lanes worked separately, about 5.6 CPU-hours in all. The stage 4
+      review accepted the argument with no blocking defect: it read the locality lemma, its
+      premises and the Lean statement of k2m5_of_valid11 (Valid11 matching the board segment
+      for segment, minSide the record's own S32.lean by digest), re-derived the Tight-Tile
+      Lemma with its code read in full, decided the mass, D, D4 invariance and the family's
+      construction, the theta = 0 face, the coverage of all 1,255,023 boxes at the 75
+      tight-tile roots and root 9632's closure by its own exact programs, written after
+      reading the authors' code and so independent but not clean-room, ran the authors' code
+      on 3 columns, 40 random roots and 9 Tight-Tile runs, and found one gap in Lemma 7,
+      whose proof needs every piece to be an elementary 1/10 piece, which holds and the
+      paper does not say. The import lane rebuilt zmx2 from evand/square-packing 659ee62,
+      the binary the record already holds, confirmed the one-line patch, and ran the fast
+      verify.sh, cert0, 30 of the 55 columns, root 9632 with both checkers and 26 of the 323
+      Tight-Tile jobs, every census, box list and output line equal to the authors' records.
+      The authors' controls refused where they should, and so did five of the review's own,
+      one a genuinely invalid first-order-only mutant refused where mu_11 certifies the same
+      region.
+
+      It reports the review's two major findings, for the record and not against the
+      argument: F1, zmx2's area-density lemmas (1 to 3, K, K(d)) and its first-order Lemmas
+      U and V, never reviewed in this record, a review of them held as think-kn13; and F2,
+      the Tight-Tile Lemma's one implementation and no full replay. It prices the full
+      replay at about 145 to 180 CPU-hours, up to about 320 if the unsampled large
+      Tight-Tile jobs run no faster than at the source, with the Lean build needing a host
+      with at least 24 GB, both held for the maintainer's decision on think-0h7r, nothing at
+      the new counts confirmed until then, and the replay closing the second half of F2 but
+      not the first. It says that the review ran at a lower model tier than the runbook asks
+      for stage 4. It reports two small discrepancies, neither affecting soundness: the
+      ctl_rise control's cell counts (the paper's 6,079 processed and 1,190 refused; the
+      review's run to its 20,083-cell cap, 3,819 refused; the import lane's run to a
+      2,000-cell cap, 443 refused, 83 of them only at the cap), and the root-9632 dump
+      listing all 6,850 boxes only with --uncert-cap 100000000, which the release does not
+      record, and stopping at 226 boxes at the default cap of 200.
+
+      It asks fifteen questions, the review's and the packet README's merged: the dump's
+      command and a verify.sh --full that regenerates it, root 9632's qx2_zm.py run and the
+      75 coverage dumps; the zmx2 --log files with their ROOT lines; the Tight-Tile
+      revision, the K field and the checker digests; whether run_cov.sh ran with B and NP
+      set; the Python, numpy and scipy versions and the ctl_rise log; crop_cover.py; the
+      Lemma Z and exact axis-check programs and outputs; the two missing Tight-Tile
+      controls; the Tight-Tile reviewing agent's report; any review of Lemmas U and V;
+      elementary pieces stated in Lemma 7; LICENSE stating both grants; the patch step's ||
+      true; the whole Lean build log; and the Zenodo DOI. They are informational and hold
+      nothing open, so none is recorded under awaiting_author. It links RESULTS.md, the
+      review and STATUS.md on main, says that nothing the authors asked for is still queued,
+      so the issue is closed with it, that the replay and the lemma review stay owned by
+      think-0h7r and think-kn13, recorded under the reply's beads, and that a follow-up will
+      be posted whenever T-298's levels, status or position change. The issue has no comment
+      but the reply, and read_through moves to it. The issue was closed as completed at
+      06:51:14Z.

@@ -9,6 +9,47 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-11-14"></a>
+
+### 2026-11-14
+
+<a id="changelog-entry-khalili-gharabaghi-k2m5-family-reported"></a>
+
+#### Khalili and Gharabaghi Report s(k² − 5) = k for Every k ≥ 7
+
+Significance S4: T-298, scored S4 as a claim by the import lane: a bound family, the deficit-5 case of Friedman’s conjecture, that would settle eight open counts, n = 116 to 319 (k = 11 to 18), with a new argument, the Tight-Tile Lemma, as T-064 and T-081 are S4 families. The stage 4 review stated no score. Reported at V0/C1: limited by the held replay, the held lemma review and the review’s F1 and F2.
+
+Mohsen Khalili and Sara Gharabaghi report that $k^2 - 5$ unit squares need a square
+of side $k$ for every $k \ge 7$. One periodic family of measures reduces every
+$k \ge 10$ to a single finite statement on an $11 \times 11$ board, decided with
+[Evan Daniel](packing/contributors/people/evan-daniel.md)’s interval checkers and a
+new Tight-Tile Lemma where box subdivision stalls. New to the record are eight open
+counts, $n = 116$ to $319$. T-298 is reported at V0/C1.
+
+- $k = 7$, $8$ and $9$ rest on certificates the record already holds (T-252, T-066
+  and T-184), and $s(95) = 10$ is Greff’s T-191. At $n = 116$ to $319$ the reported
+  lower bounds move to $k$; the verified ones are unchanged.
+- What ran here, about 2.5 CPU-hours: the source’s fast checks, 30 of the 55 columns
+  of Daniel’s `zmx2` sweep, root 9632 with both checkers and 26 of the 326 Tight-Tile
+  runs, each equal to the source’s records, and the source’s controls, refused as
+  reported. That is a diagnostic, not a replay. The full replay, about 145 to 320
+  CPU-hours, and the Lean build are held for the owner.
+- A stage 4 review by a separately prompted Claude agent, at the strong tier rather
+  than the strongest the runbook asks for, found no blocking defect and two major
+  findings: `zmx2`’s area-density and first-order lemmas, on which most of the
+  board’s poses rest, have no review in this record (F1, held), and the Tight-Tile
+  Lemma has one implementation and no full replay (F2).
+- The paper says the search, the certificate, the Tight-Tile checker and its proof,
+  and the verification runs were produced with Claude (Anthropic) under the authors’
+  direction. It builds on Daniel’s linear program, format, checkers and Lean
+  reduction. Not peer reviewed.
+
+Published artifacts: [Current T-298 record](https://squaremath.org/result/t-298.html).
+
+First public: 2026-11-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/43567161807)).
+
+Issues, PRs and supporting records: [Issue \#973](https://github.com/jlevy/squares/issues/973) · [PR \#974](https://github.com/jlevy/squares/pull/974) · [Source, retention and the checks made here](packing/resources/web/moh63-dev-k2m5-family-2026-11-13/README.md) · [Stage 4 mathematical review](docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md).
+
 <a id="changelog-date-2026-10-31"></a>
 
 ### 2026-10-31

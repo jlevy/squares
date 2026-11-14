@@ -1,0 +1,20 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane L149 of 14 November: the final reply on #973 (06:51:14Z, by jlevy) is recorded,
+  stating T-298 at V0/C1, reviewed and current, and naming think-0h7r and think-kn13 as the
+  owners of the held replay and lemma review; #973 is recorded closed on 14 November, read
+  through its reply, and its notes record what the reply says. The reply names none of the
+  six evidence ids, so none is recorded under reported. The same change adds T-298's S4 News
+  item, with #974's delivery row and coverage number, to packing/site-changelog.yaml, which
+  no paper declares as an input. No result, rung, side, bound, mark or credit holder changes.
+  Against origin/main 9adc3a0ad (#974): devtools.compare_paper_renders rendered the methods
+  survey into empty site directories, the math passes in /usr/bin/google-chrome
+  (SQPACK_CHROMIUM), twice from this tree and once with that main's result-requests.yaml
+  swapped in: its 43 files were byte-identical across the three. No PDF was printed; it
+  prints from that HTML. The survey keeps its version, v0.2.7.
