@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 302
+version: 303
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -103,7 +103,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-14T20:55:09.322Z
+updated_at: 2026-11-14T20:55:44.807Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -268,3 +268,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-14 ~16:00Z: #981 (records of #977/#979 replies, #939/#946 answers) merged 6865af7d6; think-g2ax, think-gabn closed. Posted: #804 follow-up (T-247 superseded by T-299), acknowledgements on #946 and #939 (edited within 15 s to say the gain is 1.04x T-282 padding, not inside it). de Winter commit 66849f2 answers review Q1/4/5/6 (squares unchanged per author). L158 records PR in progress.
 2026-11-14 ~16:45Z: #982 (records of #804 follow-up, #946/#939 acknowledgements, de Winter 66849f2: squares/sides unchanged, answers review Q1,2,4,5,6; Q3 open) merged fa980f8e7.
 2026-11-14 ~19:00Z: NEW #983 (Özden via kenaznia-doga, s(228) <= 15.600801734812, -3.80e-3 vs Couzo/PingYou house; side-only leaderboard 15.596043 not beaten, context). Labelled intake. Import think-14i2 (L160), blind review think-5y6d (L159).
+2026-11-14 ~21:00Z: L159 review (#983 accepted, S3) + L160 import = #986 (T-300 at 228); L161 senior review no B; coordinator applied S1/S2/N1-N3 (b80ab61bb, re-pin 4544c4c96), CI running, merge before 23:59Z. NEW #984 (Roberto Ono, s(228) <= 15.596043120921, beats #983 by 4.76e-3) and #985 (Ono, s(147) <= 12.651043556588, below 7+4sqrt2): labelled intake; import think-17ex (after #986 merges; T-301 supersedes T-300 in a 2026-11-15 pass), blind review think-jbwm (L163 running).
