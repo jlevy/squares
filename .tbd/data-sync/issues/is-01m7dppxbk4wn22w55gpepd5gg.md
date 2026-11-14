@@ -5,7 +5,7 @@ title: "Import #983: Doğa Özden's s(228) <= 15.600801734812 (column-band arran
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: bold-ritchie-l160
 labels:
   - intake
@@ -15,10 +15,10 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-14T18:56:55.152Z
-updated_at: 2026-11-14T19:04:34.608Z
+updated_at: 2026-11-14T20:18:28.216Z
 started_at: 2026-11-14T18:56:56.574Z
 ---
 
 ## Notes
 
-L160 (bold-ritchie-l160), 2026-11-14: packet ozden-s228-upper-bound-2026-11-14 retained from kenaznia-doga/s228-upper-bound 8bebf3f78ef50baa0b47341a836b5e45717c49cc (acquire_source --check passes). Controls plan stated before any run: scratch l160-notes/controls-plan.md, SHA-256 c56e906d5797db868db3d11a53ddc1badb0ecaa52f36db574b1678f10746a23f, written 2026-11-14T19:04:20Z; 3 gross jobs and 11 sharp controls, each on both routes. check-claims: below T-174 (Couzo, improved PingYou Ltd) at 228; no pending register bound.
+L160 (bold-ritchie-l160), 2026-11-14: packet ozden-s228-upper-bound-2026-11-14 retained from kenaznia-doga/s228-upper-bound 8bebf3f78ef50baa0b47341a836b5e45717c49cc. Controls plan stated before any run: scratch l160-notes/controls-plan.md, SHA-256 c56e906d5797db868db3d11a53ddc1badb0ecaa52f36db574b1678f10746a23f, 19:04:20Z; all 3 gross and 11 sharp controls as stated. Registered T-300; review L159 (fcdfe8086) merged and mapped, accepted, F1-F9 notes; adopted at 228 in the pass of 14 November (LATER_PASSES 2026-11-14 = {228, 297}); grid-slack 1-degree view drawn; Evan Daniel KKT side 3.01e-12 below, held at row 3 for RV-3. Stamped landed 14 November; draft PR jlevy/squares#986 head 9d24eedd0. Reply on #983 owed after merge (stage 7).
