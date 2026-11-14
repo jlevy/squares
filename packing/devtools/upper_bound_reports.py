@@ -1763,6 +1763,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # Lane L154 of 14 November (think-g2ax): Joost de Winter's issue 977 at 297, T-174's layout
     # with a double step in each staircase, at JoostdeWinter/square-packing 7b4701f.
     "[de Winter s297 upper bound 2026-11-14]": _import("de-winter-s297-upper-bound-2026-11-14"),
+    # Lane L160 of 14 November (think-14i2): Doğa Özden's issue 983 at 228, a column-band
+    # design of his own, below T-174's packing; one repository and one packet.
+    "[Özden s228 upper bound 2026-11-14]": _import("ozden-s228-upper-bound-2026-11-14"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

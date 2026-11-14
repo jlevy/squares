@@ -21775,15 +21775,14 @@ occurrences:
     path: packing/frontier/n-228.md
     record_key: '228'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Doğa Özden
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 10
+  label: Doğa Özden
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-228.md
     record_key: '228'
@@ -21799,20 +21798,6 @@ occurrences:
   note: Reviewed 2026-10-21 against the named profile sources; the printed source
     text and credit role are retained.
   contributor_id: trevor-green
-- origin:
-    path: packing/frontier/n-228.md
-    record_key: '228'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-229.md
     record_key: '229'
@@ -33105,6 +33090,54 @@ occurrences:
   expected_text: de Winter after Couzo, Daniel, PingYou, Levy
   start: 40
   end: 44
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s228 upper bound 2026-11-14]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s228 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s228 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 12
+  end: 18
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s228 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: Ozden after Daniel, Levy
+  start: 20
+  end: 24
   label: Levy
   role: prerequisite
   disposition: unresolved

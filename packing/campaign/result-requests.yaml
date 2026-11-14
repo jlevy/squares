@@ -33937,3 +33937,124 @@ issues:
       and the sides that side plus 1 and plus 3. Neither row changes, the packet keeps its
       pin, and the new files are not retained, since they add no bound, certificate or
       method.
+  - number: 983
+    title: 's(228) ≤ 15.600801734812: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden, through his AI agent's account kenaznia-doga, asks for the registration of
+      s(228) <= 15.600801734812, the exact rational side of n-228-candidate.yaml rounded up at
+      12 places, 3.80e-03 below T-174 (Francisco Couzo's packing as PingYou Ltd improved it),
+      the house at 228 since 17 October: a rational corner Witness/v2 at
+      kenaznia-doga/s228-upper-bound 8bebf3f, the repository's one commit, 36 seconds before the
+      issue, promoted to exact rationals with this repository's packing-witness promote at
+      fa980f8e from a decimal pose the repository retains. It discloses first a side-only Kaggle
+      leaderboard entry at 228, 15.596043116646 (square1000), which it does not beat and which
+      supplies no packing. It reports packing-witness verify VERIFIED (25878 pairs) and
+      sqcheck.py VALID, and says the packing is an original AI-run column-band proposal design,
+      not a donor or transplant start or a public recovery, quenched once with Evan Daniel's
+      code with no random kicks, and asks that Özden be recorded as the finder of this new
+      arrangement. Triaged, retained and registered on 14 November 2026 in lane L160
+      (think-14i2) as T-300: the stated digest holds, the print is the exact side rounded up,
+      and both maintained exact routes accept the witness and refuse its gross and sharp
+      controls; measured, it is a new arrangement relative to T-174's packing, not one to one
+      with it under any symmetry, 75 squares beyond a tenth. T-174's contraction margin is 0,
+      so the gain lies wholly outside its padding. The ledger of 14 November records it. The
+      14 November stage 4 review (docs/project/reviews/review-2026-11-14-ozden-983.md, lane
+      L159, think-5y6d), written blind in a separate lane, accepts it with nine findings, all
+      notes, and scores it S3; its clean-room checker decided it again, so the entry is
+      confirmed, independently re-implemented, at V3/C3, and the case adopts it at 228 in place
+      of T-174 under the house rule in the pass of 14 November, in the same pull request, with
+      Doğa Özden the finder of a new arrangement below Couzo's packing as PingYou Ltd improved
+      it, Evan Daniel's optimizer credited, and both strong generators' regularization of the
+      new house run in the same change.
+    read_through: '2026-11-14T18:34:35Z'
+    results:
+    - key: n228-column-band
+      claim: >-
+        s(228) <= 15.6008017348117539 (the exact rational side, rounded up at 16 places, of
+        n-228-candidate.yaml at kenaznia-doga/s228-upper-bound 8bebf3f), a packing from the
+        author's column-band proposal design.
+      source: body
+      register:
+      - T-300
+      evidence:
+      - E-ozden-983-certificate-report
+      - E-ozden-983-exact-feasibility
+      - E-ozden-983-review-exact-feasibility
+    beads:
+    - think-14i2
+    - think-5y6d
+    - think-ruu2
+    - think-ikku
+    - think-tj4o
+    answer_bead: think-14i2
+    replies: []
+    close_when: >-
+      T-300 is on main at V3/C3 as the house at 228, and the reply on main says what was
+      retained and replayed, what the review found and that the case adopted it.
+    notes: >-
+      Read on 14 November 2026 from main fa980f8e7; no comment on the issue, which carried the
+      intake label from 18:57:20Z, its only event. The commit 8bebf3f (18:33:59Z) precedes the
+      issue by 36 seconds; GitHub's activity log was not read, so no push time is recorded, and
+      no other report reached 228 in the window, so the issue dates the claim. The account's
+      issues of 11 and 12 November, #947, #954, #959, #960, #962 and #967, are closed and none
+      is at 228; no comment on them points to this one. The issue's "15.60460147572967429
+      (Couzo, improved PingYou Ltd, 2026-10-13)" is T-174's side as both lanes state it, and the
+      gain it states, 0.00379974091792048, is the exact gap rounded; its 43 places before an
+      ellipsis and sqcheck's 15-place print are the side rounded up there. No register bound is
+      pending adoption at 228. #574's follow-up of 19 October acknowledged the rational houses
+      PR #665 adopted from T-174, 228 among them; #574 is held for the owner (think-9v2k), so a
+      follow-up naming a new house at 228 waits on that hold.
+
+      Measured against padding, T-174's certificate at 228 has margin 0 (squares 201 and 227
+      touch), so none of the gain is the house's padding and RV-3 (think-ruu2) does not reach
+      this entry. This certificate's own margin is 2.949e-12 (squares 118 and 119, the least-gap
+      pair); contracted so, both routes accept it at side 15.6008017348088045, which is the
+      owner's RV-3 question and is not registered. The receipts are contraction_margin's,
+      retained in the packet's measure/ directory. The L-step scan finds that this bound
+      carries to no other count.
+
+      Measured pose by pose, 48 squares are tilted beyond a degree, all one way, and two more
+      beyond half a degree, so 50, as the issue counts, against T-174's 51; every centre moves
+      beyond 1e-3 under the optimal assignment, the largest by 0.940, and 59 squares turn beyond
+      a degree aligned by box centres, as the issue says. The column-band proposal designer is
+      described and not published. The leaderboard entry the issue discloses, square1000's
+      15.596043116646, 4.76e-3 below this side, states no packing and reached this repository
+      only as the issue's quotation, so it is no report and nothing is recorded for it; the best
+      public Kaggle packing the issue quotes, 15.604601475744 (kirilltym), is above this side.
+
+      The review measured the issue's statements: the claim is the side's 12-place ceiling, the
+      gain the exact gap's 17-place floor relative to T-174's side, and the 43-place print is
+      rounded up, its ellipsis reading as a truncation it is not (F4); T-174 has no contraction
+      margin, and the certificate's own contracted side, 15.6008017348088, is a side only RV-3
+      could register (F5); the issue's lineage counts hold, all four, with T-174 transposed and
+      set against the lower-left corner of the new box under either assignment, a convention the
+      issue does not name, and under the placement of least total move 52 upright squares stay
+      within 1e-3 (F6); it is a new arrangement relative to T-174, T-128, T-098, T-092 and
+      T-056 (F7); the reports under checks/ name a witness with other ids than the retained
+      file's while agreeing with it in side, pairs, least gap and wall clearance (F8); and
+      softschema.schema and the replay line are as at #967 (F9). It found no s(m) + k closed form
+      within 1e-9, the nearest s(37) + 9 at 2.18e-3. Read against this lane's receipts after
+      both were done, its least margin, contraction receipts and identity measurement equal the
+      packet's.
+
+      The review's six questions for the author, informational and holding nothing open:
+      whether the lineage counts use T-174 transposed and anchored at the lower-left corner, and
+      whether the issue would name that convention (F6); whether W-candidate-n228 was made from
+      the reports' witness by changing its ids alone (F8); whether the author would print the
+      43-place side's floor or drop the ellipsis (F4); whether the column-band designer will be
+      published, and whether nt = 48 is the band's 48 squares; whether softschema.schema could
+      point at a file that resolves, with the replay line saying where to run it (F9); and
+      whether the lab would promote with a contraction (center_dilation below 1), since a side
+      inside the certificate's own padding is the owner's RV-3 question (F5). No reply has been
+      posted.
+
+      Both strong generators ran on the adopted witness: grid-slack's 1-degree view is drawn,
+      and Evan Daniel's certified KKT solve, 3.01e-12 below the side, 1.02 of the certificate's
+      own contraction margin, is held at row 3 for RV-3 (think-ruu2, think-ikku) and not
+      registered. The posters hold Özden's name off their credit block at 228 until the next
+      infographics cut (think-tj4o).

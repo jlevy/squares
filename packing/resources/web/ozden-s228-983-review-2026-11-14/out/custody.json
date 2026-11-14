@@ -1,0 +1,261 @@
+{
+ "program": "l159_custody.py",
+ "clone_head": "8bebf3f78ef50baa0b47341a836b5e45717c49cc",
+ "clone_head_is_pin": true,
+ "commits_reachable_from_pin": 1,
+ "branches_and_tags": [
+  "refs/heads/main 8bebf3f78ef50baa0b47341a836b5e45717c49cc",
+  "refs/remotes/origin/HEAD 8bebf3f78ef50baa0b47341a836b5e45717c49cc",
+  "refs/remotes/origin/main 8bebf3f78ef50baa0b47341a836b5e45717c49cc"
+ ],
+ "commit": {
+  "sha": "8bebf3f78ef50baa0b47341a836b5e45717c49cc",
+  "parents": [],
+  "author": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+  "authored": "2026-11-14T18:33:59+00:00",
+  "committer": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+  "committed": "2026-11-14T18:33:59+00:00",
+  "tree": "9742ebef094b29c5af42ff82cdbd57b55e4897a9",
+  "subject": "Certify n228 original column-band packing, side <=15.600801734812"
+ },
+ "files": [
+  {
+   "path": "LICENSE-evand-square-packing.txt",
+   "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "size": 1068,
+   "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+   "working_tree_equal": true
+  },
+  {
+   "path": "LICENSE.md",
+   "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "size": 1484,
+   "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+   "working_tree_equal": true
+  },
+  {
+   "path": "README.md",
+   "blob": "47fcc146c7cc888e32b13a3eaf10973450237143",
+   "size": 5302,
+   "sha256": "c71fedbfd612031168a25ddf4f4118aa0c66b315f5011a18a3fd54d39cde66b1",
+   "working_tree_equal": true
+  },
+  {
+   "path": "checks/exact.json",
+   "blob": "4a4caa4d0543deaa8b26ed2bcc85a78c8f3851d1",
+   "size": 311,
+   "sha256": "80400f9052941f68676f9a05fea37422261a7c120a353b1a71f671b4e97c15c1",
+   "working_tree_equal": true
+  },
+  {
+   "path": "checks/interval.json",
+   "blob": "d8fd70495ce674443fb9c8e131b0cea2522e599e",
+   "size": 357,
+   "sha256": "3364c3b718194e37bcc7ba91aa3afc90ef8352959e45c11613dd7903afd4591f",
+   "working_tree_equal": true
+  },
+  {
+   "path": "checks/promote.json",
+   "blob": "aa9f35bc1dc51d30914ae5782a9ce65932d695ee",
+   "size": 1468,
+   "sha256": "b93191eeead101f1a27219425f7ad010b34eb9fd15594701ef00c1514980e18c",
+   "working_tree_equal": true
+  },
+  {
+   "path": "checks/registry.json",
+   "blob": "4d97b7ae5d5bf58f680eb84a0c048cc3a831acfb",
+   "size": 961,
+   "sha256": "8881418a3bc94187b8bb50abc2c9a595f7c6e647a99ec349d34e7bcb20b508de",
+   "working_tree_equal": true
+  },
+  {
+   "path": "hit-n228-114-0.json",
+   "blob": "a108d1e47970c39362c65372e6c165f3aeda23e1",
+   "size": 378,
+   "sha256": "0d0f6193621a0b5627e331e937a9153f9576168aa9639bcce12ec8167348b8b1",
+   "working_tree_equal": true
+  },
+  {
+   "path": "hit-n228-114-0.txt",
+   "blob": "c09b2c247669e9baad0c3742f3b429b52e5b649c",
+   "size": 13597,
+   "sha256": "18dad468007e8fb8058104772dcfc5887c48bf0baa2789c5bcbee03f1cf2bfe5",
+   "working_tree_equal": true
+  },
+  {
+   "path": "n-228-candidate.yaml",
+   "blob": "b14ecfb31a77f92f3bbe824a766ce414917e370f",
+   "size": 623114,
+   "sha256": "4dc2075f5fb06bb7a1ca68aabd8eebd0d326c16c5f408151876a165d2246b747",
+   "working_tree_equal": true
+  },
+  {
+   "path": "n-228-decimal-pose.yaml",
+   "blob": "3963385e90bde83e42f1b147efcbe306d1b4cf93",
+   "size": 23416,
+   "sha256": "97c58de9df284c3626dcd34d6d861b3794fa76676449180460515f331b290cb1",
+   "working_tree_equal": true
+  },
+  {
+   "path": "n228-witness.json",
+   "blob": "6f1da4b17f0f6864b0e26688833905e3a741107a",
+   "size": 667353,
+   "sha256": "2d4066b6962e8131e3d8e37b2fbf3d36816543c139b6e0cfb5d5602ac1274ebb",
+   "working_tree_equal": true
+  },
+  {
+   "path": "records/n-228-candidate-diff.png",
+   "blob": "305d78047accd5ed09631b474630e022e988dd22",
+   "size": 265611,
+   "sha256": "c8065a11dd04207e42b427eca6fb9cee2a7da888cf086b339ede0a750dd7224c",
+   "working_tree_equal": true
+  },
+  {
+   "path": "records/n-228-candidate-diff.svg",
+   "blob": "7fb245d73fe2f9ad2d535ce9560dc16c3fecfcd3",
+   "size": 76066,
+   "sha256": "484a512ff16c90b27eb95ea7389d51a85666fcdf1ecca7fa2044967b0bc8fc40",
+   "working_tree_equal": true
+  },
+  {
+   "path": "sqcheck-228.txt",
+   "blob": "4648030957193b28ba44a13474bdd95455c94b5a",
+   "size": 101,
+   "sha256": "03922c0bcdb0cdabe5a646a7f772c43749b71a0c4683a59725ddf1e07eb7078c",
+   "working_tree_equal": true
+  },
+  {
+   "path": "verifier/README.md",
+   "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+   "size": 3441,
+   "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+   "working_tree_equal": true
+  },
+  {
+   "path": "verifier/sqcheck.py",
+   "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "size": 17654,
+   "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+   "working_tree_equal": true
+  },
+  {
+   "path": "verify-228.txt",
+   "blob": "55578749a4456667270cf423fa030d2de4852f6b",
+   "size": 621,
+   "sha256": "7979aa6712acdfcc886300a07a50382693121a84b25149389aab66a2401f1280",
+   "working_tree_equal": true
+  }
+ ],
+ "every_working_file_equals_its_blob": true,
+ "clone_status_clean": true,
+ "certificate_sha256": "4dc2075f5fb06bb7a1ca68aabd8eebd0d326c16c5f408151876a165d2246b747",
+ "twin_sha256": "2d4066b6962e8131e3d8e37b2fbf3d36816543c139b6e0cfb5d5602ac1274ebb",
+ "retained_here_by_blob": {
+  "LICENSE-evand-square-packing.txt": {
+   "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "copies_here": 47,
+   "first": [
+    "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt",
+    "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE",
+    "packing/resources/web/evand-compositions-2026-10-13/source/LICENSE"
+   ]
+  },
+  "LICENSE.md": {
+   "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "copies_here": 21,
+   "first": [
+    "packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/LICENSE.md",
+    "packing/resources/web/ozden-s172-upper-bound-2026-11-09/source/LICENSE.md",
+    "packing/resources/web/ozden-s179-issue959-2026-11-11/source/LICENSE.md"
+   ]
+  },
+  "n-228-candidate.yaml": {
+   "blob": "b14ecfb31a77f92f3bbe824a766ce414917e370f",
+   "copies_here": 0,
+   "first": []
+  },
+  "n228-witness.json": {
+   "blob": "6f1da4b17f0f6864b0e26688833905e3a741107a",
+   "copies_here": 0,
+   "first": []
+  },
+  "verifier/README.md": {
+   "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+   "copies_here": 1,
+   "first": [
+    "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+   ]
+  },
+  "verifier/sqcheck.py": {
+   "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "copies_here": 1,
+   "first": [
+    "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+   ]
+  }
+ },
+ "repo_head": "c2ed4e00c038759790f0fd48a93ef3c2907cc0d1",
+ "fa980f8e7": "fa980f8e70479ee59c5e9c22cc450d7ac2d246f9 2026-11-14T08:37:32-08:00 Merge pull request #982 from jlevy/claude/bold-ritchie-xo28us-l158",
+ "issue_created": "2026-11-14T18:34:35Z",
+ "issue_created_after_commit_seconds": 36.0,
+ "fa980f8e7_committed_before_issue_seconds": 7023.0,
+ "issue_updated_at": "2026-11-14T18:57:20Z",
+ "timeline": [
+  {
+   "actor": "jlevy",
+   "created_at": "2026-11-14T18:57:20Z",
+   "event": "labeled",
+   "label": "intake",
+   "source": null
+  },
+  {
+   "actor": "jlevy",
+   "created_at": "2026-11-14T19:15:53Z",
+   "event": "referenced",
+   "label": null,
+   "source": null
+  },
+  {
+   "actor": "jlevy",
+   "created_at": "2026-11-14T19:23:09Z",
+   "event": "referenced",
+   "label": null,
+   "source": null
+  }
+ ],
+ "timeline_fetched_at": "2026-11-14T19:27:19Z",
+ "issue_now": {
+  "comments": 0,
+  "labels": [
+   "intake"
+  ],
+  "updated_at": "2026-11-14T18:57:20Z"
+ },
+ "issues_named": [
+  {
+   "is_pr": false,
+   "number": 593,
+   "state": "open",
+   "title": "73 new upper bounds across N=51..308: registration request"
+  },
+  {
+   "is_pr": false,
+   "number": 375,
+   "state": "open",
+   "title": "Analytic optima of 48 recent records (s(n) bounds 3e-13 \u2026 5e-11 below the register) and exact certificates for every record n \u2264 104: registration request"
+  },
+  {
+   "is_pr": false,
+   "number": 419,
+   "state": "open",
+   "title": "Mechanized exact forms for 269 best-known packings, n \u2264 324 (minimal polynomial, isolating interval, exact configuration), checked independently and in Lean: registration request"
+  },
+  {
+   "is_pr": false,
+   "number": 405,
+   "state": "open",
+   "title": "Prove n = 17 optimality: Bidwell family, explainer paper, and verifiable proof"
+  }
+ ],
+ "evand_square_packing_head": "not checked: the GitHub API call was refused (access to that repository is not enabled for this session), and a git ls-remote of it was refused by the session permission system; neither was retried"
+}

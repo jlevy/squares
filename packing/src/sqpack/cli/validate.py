@@ -264,11 +264,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: (think-g2ax) moved 297 to Joost de Winter's certificate of issue 977 (T-299) in the pass
 #: of 14 November, a new arrangement in T-174's layout: separating and translating squares
 #: 18 and 62 against T-174's 12 and 41, so n=1..324 has 2,608 separating squares and 6,512
-#: translating ones, in the same records.
+#: translating ones, in the same records. Lane L160 (think-14i2) moved 228 to Doğa Özden's
+#: certificate of issue 983 (T-300) in the same pass, a new arrangement: separating and
+#: translating squares 80 and 123 against T-174's 5 and 18, so n=1..324 has 2,683
+#: separating squares and 6,617 translating ones, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
     "n=1..200": (67, 724, 182, 2315),
-    "n=1..324": (125, 2608, 302, 6512),
+    "n=1..324": (125, 2683, 302, 6617),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

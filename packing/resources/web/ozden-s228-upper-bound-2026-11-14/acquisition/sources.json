@@ -1,0 +1,80 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-14T19:00Z",
+  "git_scope": "A full clone of kenaznia-doga/s228-upper-bound, fetched for the intake of jlevy/squares#983; the repository holds one commit, 8bebf3f (committed 2026-11-14T18:33:59Z, 'Certify n228 original column-band packing, side <=15.600801734812', the author's message), 36 seconds before the issue, of 18 files, and the scope is the whole tree. #983 names this commit, and git ls-remote at 19:01Z on 14 November 2026 gives it as the head. The SHA-256 the issue and the README state for n-228-candidate.yaml, 4dc2075f...b747, matches the file, and the one the README states for the hit file's harvested copy, 18dad468...f2bfe5, is that of hit-n228-114-0.txt. verifier/README.md is byte-identical to the copy the ozden-s299-upper-bound-2026-11-03 packet retains and is pinned against it; verifier/sqcheck.py is byte-identical to the copy the ozden-s232-upper-bound-2026-11-09 packet retains and is pinned against it; LICENSE-evand-square-packing.txt is byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains from Evan Daniel's evand/square-packing and is pinned against it. n-228-decimal-pose.yaml, the decimal pose the witness's source.path names, the search's hit file and its metadata, and the four JSON reports under checks/ are new at this pin and retained. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "ozden-s228-upper-bound-2026-11-14",
+      "source_url": "https://github.com/kenaznia-doga/s228-upper-bound",
+      "source_ref": "main",
+      "source_commit": "8bebf3f78ef50baa0b47341a836b5e45717c49cc",
+      "committed_utc": "2026-11-14T18:33:59Z",
+      "git_tree": "9742ebef094b29c5af42ff82cdbd57b55e4897a9",
+      "archived_path": "packing/resources/web/ozden-s228-upper-bound-2026-11-14/source",
+      "subtree_manifest": "packing/resources/web/ozden-s228-upper-bound-2026-11-14/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE-evand-square-packing.txt",
+        "LICENSE.md",
+        "README.md",
+        "checks",
+        "hit-n228-114-0.json",
+        "hit-n228-114-0.txt",
+        "n-228-candidate.yaml",
+        "n-228-decimal-pose.yaml",
+        "n228-witness.json",
+        "records",
+        "sqcheck-228.txt",
+        "verifier",
+        "verify-228.txt"
+      ],
+      "subtree_file_count": 18,
+      "subtree_total_bytes": 1702303,
+      "retained_file_count": 13,
+      "retained_total_bytes": 1338463,
+      "compressed": [
+        "source/n228-witness.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "LICENSE-evand-square-packing.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT notice for evand/square-packing, which the source carries for his quench code; byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains.",
+          "identical_to": "packing/resources/web/evand-issue845-2026-10-29/source/LICENSE"
+        },
+        {
+          "path": "records/n-228-candidate-diff.png",
+          "bytes": 265611,
+          "sha256": "c8065a11dd04207e42b427eca6fb9cee2a7da888cf086b339ede0a750dd7224c",
+          "reason": "A raster comparison of the candidate with the registry packing, which decides nothing; pinned by digest only, as the 3, 9, 10, 11 and 12 November packets pin theirs."
+        },
+        {
+          "path": "records/n-228-candidate-diff.svg",
+          "bytes": 76066,
+          "sha256": "484a512ff16c90b27eb95ea7389d51a85666fcdf1ecca7fa2044967b0bc8fc40",
+          "reason": "The same comparison as a vector drawing, which decides nothing; pinned by digest only, as its raster twin is."
+        },
+        {
+          "path": "verifier/README.md",
+          "bytes": 3441,
+          "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+          "reason": "The README of the author's exact checker, byte-identical to the copy the ozden-s299-upper-bound-2026-11-03 packet retains.",
+          "identical_to": "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+        },
+        {
+          "path": "verifier/sqcheck.py",
+          "bytes": 17654,
+          "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+          "reason": "The author's exact checker, the source says implemented separately from this repository's code; byte-identical to the copy the ozden-s232-upper-bound-2026-11-09 packet retains, and never executed here.",
+          "identical_to": "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+        }
+      ],
+      "license": "CC BY 4.0 for the witness, the JSON, the decimal pose, the hit file and its metadata, the check reports and outputs, the README and the two comparison figures, and MIT for verifier/sqcheck.py, copyright (c) 2026 Do\u011fa \u00d6zden, as LICENSE.md at the pin states (1,484 bytes, SHA-256 5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c, byte-identical to the LICENSE.md the lab's s172, s199, s270, s156, s180, s268, s269, s179 and s237 repositories carry, the ones #962's and #967's s269 repositories carry, and the one the lab added to its s299, s204 and s94 repositories on 4 November 2026, announced on jlevy/squares#890, issuecomment-6637821113). LICENSE.md is retained under source/ with the rest of the tree. LICENSE-evand-square-packing.txt is Evan Daniel's MIT notice for evand/square-packing, which the source carries for his quench code. The issue says the packing is an original column-band proposal design, not a donor or transplant start or a public recovery, and that its local optimizer is Evan Daniel's MIT-licensed ALM+SLP fq quench from evand/square-packing search/packer, built from bb4cc78e.",
+      "claims": [
+        "n-228-candidate.yaml is a packing.squares:Witness/v2 file (corners, rational scalars, 228 squares) whose exact rational side, rounded up at 12 places, #983 prints as the bound, 15.600801734812; the issue and README also print the exact side as 15.6008017348117538028514559173910014808630264..., and sqcheck-228.txt prints it rounded up at 15 places, 15.600801734811754. Its exact coordinates were produced by this repository's packing-witness promote --strategy robust-rational at fa980f8e from the lab's decimal pose, n-228-decimal-pose.yaml, with center_dilation '1' and no dilation; translating the least corner coordinates to zero and taking the greatest corner extent as the side lowered the pose's side by about 2.04e-13, which the issue calls normalization and not part of the 0.0038 gain. The decimal pose was certified in interval arithmetic by sqcheck.py at its own side, pair margin at least 2.02e-13 and wall margin at least 1.01e-13. An upper bound only: no optimality, KKT or rigidity claim.",
+        "n228-witness.json is the same witness as JSON. verify-228.txt is the author's unmodified run of this repository's packing-witness verify at fa980f8e (VERIFIED, exact-algebraic over Q, 25878 pairs); checks/registry.json reports the same run's least best pair gap, exactly 101/500000000000000, and least wall clearance, 0. sqcheck-228.txt is the author's run of verifier/sqcheck.py, an exact checker the source says was implemented separately (VALID, exact rational, the exact side rounded up at 15 places). checks/promote.json, checks/exact.json and checks/interval.json are the promotion's report and sqcheck.py's JSON reports on the exact witness and on the decimal pose. The issue says promotion shares code with packing-witness verify and that sqcheck.py is separate. Those statements are the author's; no source program ran here.",
+        "The issue and README say the packing is an original AI-run column-band proposal design (the lab's Sol near1 director, gpt-6.1-sol), not a donor or transplant start or a public recovery: axis-parallel squares occupy two wall-anchored staircase or corner domains, tilted stacks span a diagonal band, and a finite-memory dynamic programme over the columns generates proposals, with no global count optimality asserted for arbitrary-angle junctions. Full emitted-count and far-overlap audits precede one quench with Evan Daniel's ALM+SLP fq optimizer from evand/square-packing search/packer, built from bb4cc78e, MIT; no random kicks were used for this hit. hit-n228-114-0.txt is the filed hit, of kind design, from the proposal f = 0.596543, delta 1 degree, tolerance 0.03, count 228, 48 tilted squares, column offset 0.026742, variant 1, corner layout t:4,4, final decimal side 15.60080173481195764 at 121 seconds of search; hit-n228-114-0.json records that metadata. They say the final packing has 50 squares tilted beyond 0.5 degree against the record's 51, and, against the registry packing matched up to the square's eight symmetries, that all 228 centres move by more than 0.001, 93 by more than 0.05 (largest 0.940), and 59 squares retilt by more than 1 degree. The issue names the record s(228) <= 15.60460147572967429 (Francisco Couzo, improved by PingYou Ltd, 2026-10-13) and the gain on it, 0.00379974091792048 by exact Fraction comparison, relative 2.435e-4. It states first a side-only Kaggle leaderboard entry at 228, 15.596043116646 (square1000, 29 October, cache of 9 November 20:52 UTC), 0.004758618166 below this side, which this packing does not beat and which supplies no packing; and it quotes the best public Kaggle packing it found, 15.604601475744 (kirilltym, data of 11 November), above this side. They ask that Do\u011fa \u00d6zden be recorded as found_by for this new arrangement, that the old record stay credited to Francisco Couzo and PingYou Ltd, and that Evan Daniel be credited for the optimizer. The issue says search, checks and filing were AI-assisted throughout, and that the issue and repository were prepared and posted on \u00d6zden's behalf by his AI agent, which uses the account kenaznia-doga."
+      ]
+    }
+  ]
+}

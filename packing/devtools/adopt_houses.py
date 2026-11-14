@@ -2620,6 +2620,43 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family that also produced the certificate",
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-300": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#983](https://github.com/jlevy/squares/issues/983)",
+        producer_route=True,
+        ai=(
+            "Issue 983 says the search, the checks and the filing were AI-assisted "
+            "throughout, and that Doğa Özden’s AI agent, which uses the account "
+            "kenaznia-doga, prepared and posted the issue and the repository on his behalf."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing is an original AI-run column-band proposal design, not "
+            "a donor or transplant start or a public recovery: axis-parallel squares in two "
+            "wall-anchored staircase or corner domains and tilted stacks across a diagonal "
+            "band, proposals from a finite-memory dynamic programme over the columns, quenched "
+            "once with Evan Daniel’s ALM+SLP code and no random kicks; the designer and its "
+            "design are neither published nor retained. Against T-174’s packing, Francisco "
+            "Couzo’s as PingYou Ltd improved it and this case’s house best packing before this "
+            "adoption, it is a new arrangement: no symmetry pairs nearest centres one to one, "
+            "and the optimal assignment moves 75 squares beyond a tenth, at most 0.940; its 48 "
+            "tilted squares all lean one way, where T-174’s 51 lean 45 one way and 6 the "
+            "other. So Doğa Özden is the packing’s finder, below the record it improves, as "
+            "the issue asks; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 14 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again over every square, wall and pair"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -3061,12 +3098,18 @@ CREDITS: dict[int, Credit] = {
         via=COUZO,
         how=" as refined in Francisco Couzo’s #672 report",
     ),
-    # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-300 (adopted in the pass of 14 November 2026), Doğa Özden's issue 983: a new
+    # arrangement relative to T-174's packing, PingYou Ltd's refinement of Francisco Couzo's
+    # refinement of his own packing, 75 squares beyond a tenth, from his lab's column-band
+    # proposal designer with no donor packing. The issue asks that he be recorded as the new
+    # arrangement's finder and the old record credited to Couzo and PingYou Ltd, so the phrase
+    # names him the finder, below Couzo's packing as PingYou Ltd improved it, as the 179 and
+    # 269 phrases name the record they improve.
     228: Credit(
-        (COUZO,),
-        (PINGYOU,),
-        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
+        (OZDEN,),
+        (),
+        "Doğa Özden’s column-band packing, a new arrangement below Francisco Couzo’s packing "
+        "as PingYou Ltd improved it",
     ),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of his own
     # issue-674 packing (T-199), polished to its exact side 1.91e-11 below #674's

@@ -1,0 +1,180 @@
+{
+ "program": "l159_digests.py",
+ "verdict": "ALL_FROZEN_DIGESTS_HOLD",
+ "checked": [
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "l159_reader.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "l159_sat.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "l159_clip.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "l159_check.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "l159_geom.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "l159_selftest.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "out/selftest.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "out/check-n228.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "programs/controls-plan.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "out/plan-facts-n228.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "out/check-n228.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "programs/l159_plan_facts.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "programs/l159_make_plan.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "programs/issue-983.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "frozen/review-2026-11-14-ozden-983.frozen.md",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "frozen/checker-frozen-digests.txt",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "frozen/controls-plan-digest.txt",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/selftest.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/check-n228.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/plan-facts-n228.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/controls-n228.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/describe-n228.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "programs/controls-plan.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "programs/l159_controls.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "programs/l159_describe.py",
+   "holds": true
+  }
+ ],
+ "files": {
+  "README.md": "86bd6e5e0d4c1503885b3458af841974125ba2978dac2f4b282472af3a1c6b1b",
+  "frozen/checker-frozen-digests.txt": "0b12963d8bb6b29377ae0607884de5cb39d1d33cea5b4eed2eb579af603b1e30",
+  "frozen/controls-plan-digest.txt": "5cd04e9149cdd6746b440f7c333862bf4c6cd458c2130f56537d39833c799843",
+  "frozen/findings-frozen-digest.txt": "e86b990d68114cd0d096066682cdb2e59613e0d66f02bc8893fdfef229d66137",
+  "frozen/review-2026-11-14-ozden-983.frozen.md": "fd5a3f5edb780eac3bc404107ecd8d58b1cb309424fe3a29ba91af4c1e236b61",
+  "out/check-n228.json": "7d17f80bb91aef69ff054d041047cb210dc30157963efe0233d3c0fe7f786213",
+  "out/closedform-n228.json": "63136d57af25a789f6d8d9a188268e2707af6bf1a873adeef01afc3ee321c862",
+  "out/contraction-new.json": "668b1a61bc86be226780db186eda222e9083ef1d373b00264892e7301e9debc0",
+  "out/contraction-t174.json": "566b21891732b4205586fd156eec001c96832f71a979edc9cf6269cf3dd7ae49",
+  "out/controls-n228.json": "37046970dca8fba8f3363b23e9e0e92a09d03d623064ad00b1515a8b3d5d2e70",
+  "out/custody.json": "e7f8b4b86d8db1f7b4fe813ee6e18d031bcf89adf323d81eb8d14adadcce6df4",
+  "out/describe-n228.json": "78d2b8a6fb192b7688366d5e4b86a69bd62ddc5dbf790b46d960dc478e101f4d",
+  "out/identity-n228.json": "1a1253297b7ea5576f6361b234c616bf432a5cda7cdda0eba5b397f5237901dd",
+  "out/lineage-n228.json": "b75590c876b436deebd14d226afc63ccdbc0721d0e5ad61f2c803e0dbf522357",
+  "out/plan-facts-n228.json": "afa533b0be63fac743214e3b983106eaf8e4a6c8d3ef0bf9780a350467073a99",
+  "out/pose-n228.json": "ff6117c6fe094697b13b8b62c7d0276926c5c955a6b3ef5c61a5817706125a1b",
+  "out/selftest.json": "8a3f7cfa3a03da6c5f046262d2f366bfae697bf0d5436018edccb1cfc3296daa",
+  "out/sides.json": "46f8fc303435b7375597ccc8617ec11d8f8b2df4fd201b037076e9033b9c3135",
+  "programs/controls-plan.json": "185e87922867f541f423a326088e900f6761a69bc1590baa13c5582815bc8476",
+  "programs/issue-983-context.json": "a4103b613b5aef24fa159267d2837c3a9c620f7df95afb003f8f1a1a2f8723b1",
+  "programs/issue-983-timeline.json": "42c7dc548b522023a4ab1fbb4b22fed543569179b3810547ada0f3a120aa6d70",
+  "programs/issue-983.json": "9bc47f522de8a573de4291f97d13f504b2a3adf087d5c1111574191c30b47975",
+  "programs/l159_check.py": "6ea41979038f2527cc7fcdff308fc0884acdf4a156967e345d2d26bcf2506a93",
+  "programs/l159_clip.py": "2925a00883afc2cc7683b5869c899ae1664792e26f0deca60ec67260bfdab343",
+  "programs/l159_closedform.py": "02ca329c89c709d377f19095b1b88b9683e5022700870901dee2375e1530ecf2",
+  "programs/l159_controls.py": "14a612a3f0cb101d176e968ac3b805e0aecf31b553a1846ecc67e107a10cf00e",
+  "programs/l159_custody.py": "1fc58d1d1f7b4a7974e4792a78603fedc0bdb08133aa966b44528c4ab03b1064",
+  "programs/l159_describe.py": "b54215ee4c1e4639a893a6ef69acfd3ce49aa4efdcd72f226d6fd8b503c157af",
+  "programs/l159_digests.py": "95ca60567b54538b2c70a9882f471b365c56e6fbdf0a20c1207412bc2de09d55",
+  "programs/l159_geom.py": "0645b8520582f4d322b708909a26c231c237542334529daf55c0c9401a2ec200",
+  "programs/l159_lineage.py": "be1137e425128c5c481c87098941f5458e257278e39f6716caa7137d097de4ef",
+  "programs/l159_make_plan.py": "9c0116eee9d90aeb887964f3dc55eb507c4a0a6fba3f588c1c7797cc2f64d7d1",
+  "programs/l159_plan_facts.py": "2df1744e4022f2f67989e88d562876652c3e67cd3afb882132d9e428c9280527",
+  "programs/l159_pose.py": "899adfa75144d10b24ea5e1bd51fa5fa1b4742eb8bf5332eebd0e26a7bd5ccec",
+  "programs/l159_reader.py": "544bdec8f02570156dd2b34d7c94c9f2432e3afb9d6f744e128681b24b23def4",
+  "programs/l159_sat.py": "728439dcbd329b095e5e78c58cae9f61116d6b1238d69d5621e1500ee25c19ec",
+  "programs/l159_selftest.py": "768b1dc7326b2e85ca582170411af2a7930e3a72c6d378bf4187a2dabd7e0949",
+  "programs/l159_sides.py": "ac3c434c6b18681e1b521592f4ee1f127563947cdee2366843740a5f8aec64be"
+ },
+ "rerun_reproduces": {
+  "selftest.json": true,
+  "check-n228.json": true,
+  "plan-facts-n228.json": true,
+  "controls-n228.json": true,
+  "describe-n228.json": true,
+  "controls-plan.json (bytes)": true
+ },
+ "rerun_verdict": "RERUN_REPRODUCES_EVERY_RECEIPT"
+}

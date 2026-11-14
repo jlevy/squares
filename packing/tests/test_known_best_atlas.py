@@ -2486,8 +2486,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # issue 962 packet, which held nothing else: one source more and one fewer, with no new
     # name. Lane L154 of 14 November draws 297 from Joost de Winter's issue 977 packet
     # (T-299), one more source with no new name; PingYou Ltd's PR 574 certificates still
-    # hold other counts.
-    assert len(expected_sources) == 44
+    # hold other counts. Lane L160 of the same day draws 228 from Özden's issue 983 packet
+    # (T-300), one more source with no new name, Özden held off the block; PingYou Ltd's PR
+    # 574 certificates still hold other counts.
+    assert len(expected_sources) == 45
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2637,10 +2639,11 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     lane L107 (think-89i7) at 179 again for T-294, and its lane L110 (think-my76) at 237
     (T-295). Lane L120 of 12 November (think-s418) credits him as the finder at 269 again
     (T-296), held as before, and lane L132 (think-n73d) a third time there (T-297, in the
-    pass of 13 November), held alike."""
+    pass of 13 November), held alike. Lane L160 of 14 November (think-14i2) credits him as
+    the finder at 228 (T-300, in the pass of 14 November), held alike."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == dict.fromkeys(
-        (156, 172, 179, 180, 199, 232, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
+        (156, 172, 179, 180, 199, 228, 232, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
     )
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
@@ -2650,6 +2653,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (179, ["Doğa Özden"], []),
         (180, ["Doğa Özden"], []),
         (199, ["Evan Daniel"], ["Doğa Özden"]),
+        (228, ["Doğa Özden"], []),
         (232, ["Alex Chilton"], ["Francisco Couzo", "Doğa Özden"]),
         (237, ["Doğa Özden"], []),
         (268, ["Doğa Özden"], []),

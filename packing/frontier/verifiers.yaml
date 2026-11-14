@@ -8679,3 +8679,67 @@ verifiers:
       l153_make_plan.py, l153_describe.py, l153_sides.py, l153_lineage.py, l153_construct.py,
       l153_closedform.py, l153_custody.py and l153_digests.py, kept beside them, decide no
       certificate and are not registered.
+  - id: V-ozden-983-review-check
+    program: l159_check.py with l159_reader.py, l159_sat.py, l159_clip.py and l159_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 14 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 983 (228), with a strict reader of its own (l159_reader.py: every
+      scalar a canonical integer or p/q in lowest terms, ids 1 to n in order, the JSON twin held
+      to the same tree with floats, constants and duplicate keys refused, anchors, aliases, tags,
+      keys outside the schema and any unexpected layout refused): every format hypothesis, every
+      square a unit square from its listed corners, every wall and every pair twice with no
+      distance filter, by separating axes over the four edge normals in Python integers over
+      per-square denominators (l159_sat.py, method A) and by exact Sutherland-Hodgman clipping
+      in gmpy2.mpq, each square a unit square by its sides and diagonals, each pair and each
+      wall classed by the intersection exactly and containment decided by area (l159_clip.py,
+      method B), each pair classed overlapping, touching or apart by both. l159_geom.py holds
+      the exact constructions the self-test and controls use, the closed-form margin from
+      centres and half-widths and the centre-line closing among them; l159_controls.py decides
+      20 controls stated in a plan hashed before it existed; l159_selftest.py holds both methods
+      and the reader to 32,833 cases.
+    source:
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_check.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_reader.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_sat.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_clip.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_geom.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_selftest.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_controls.py
+    independence_record: packing/resources/web/ozden-s228-983-review-2026-11-14/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 983 (L159, under think-5y6d), strong
+            tier, prompted separately from the import lane (L160, think-14i2)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says the lab's search, checks and
+          filing were AI-assisted throughout. The six checker files were frozen at
+          2026-11-14T19:12:07Z (frozen/checker-frozen-digests.txt), before their author read
+          any producer code or this repository's witness, verifier or promotion code; they
+          import nothing from this repository or the source and reuse no code of any earlier
+          review, lane L127's review of #967, the model for its method, among them, whose
+          programs it did not open.
+    note: >-
+      Written and run on 14 November 2026 for
+      docs/project/reviews/review-2026-11-14-ozden-983.md (SHA-256
+      6ea41979038f2527cc7fcdff308fc0884acdf4a156967e345d2d26bcf2506a93 for l159_check.py, as
+      frozen at 2026-11-14T19:12:07Z), and kept with its receipts in the review-only directory
+      ozden-s228-983-review-2026-11-14 beside the import lane's packet. l159_plan_facts.py,
+      l159_make_plan.py, l159_describe.py, l159_sides.py, l159_pose.py, l159_lineage.py,
+      l159_closedform.py, l159_custody.py and l159_digests.py, kept beside them, decide no
+      certificate and are not registered.
