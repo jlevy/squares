@@ -122,6 +122,7 @@ from devtools.retained_data import read_retained_bytes
 from sqpack.field import FieldElement
 from sqpack.witness import (
     WitnessError,
+    check_witness_semantics,
     validate_witness_document,
     witness_document,
     witness_envelope,
@@ -750,6 +751,32 @@ def witness_center_basis(raw: bytes, n: int, options: Mapping[str, str]) -> lega
     where ``c^2 + s^2 = 1``.
     """
     _no_options(options, "witness-center-basis")
+    return _center_basis_witness(raw, n, unreplayed=False)
+
+
+#: The one semantic rule `witness_center_basis_unreplayed` reads past.
+UNREPLAYED_CLAIM = "verified claims require a replayable certificate record"
+
+
+def witness_center_basis_unreplayed(
+    raw: bytes, n: int, options: Mapping[str, str]
+) -> legacy.Certificate:
+    """A rational centre-basis Witness/v2 whose verified claim names no certificate (#977).
+
+    Joost de Winter's witnesses from ``57de046`` on carry the envelope and a ``claim`` of
+    ``coordinate_provenance: verified`` with no ``certificate`` record. They pass this
+    repository's witness schema, and the loader refuses them on one rule the schema does not
+    state, `UNREPLAYED_CLAIM` (the de-winter-method-132-157-2026-11-12 packet's README).
+    This reads such a file as `witness_center_basis` does, held to the schema and to every
+    other semantic rule, and refuses it unless that rule is the only problem: the claim is
+    read and not believed, since a replay here decides the geometry, not the claim.
+    """
+    _no_options(options, "witness-center-basis-unreplayed")
+    return _center_basis_witness(raw, n, unreplayed=True)
+
+
+def _center_basis_witness(raw: bytes, n: int, *, unreplayed: bool) -> legacy.Certificate:
+    """`witness_center_basis`, or with ``unreplayed`` its reading past `UNREPLAYED_CLAIM`."""
     try:
         document = load_yaml(_text(raw))
     except yaml.YAMLError as error:
@@ -766,8 +793,19 @@ def witness_center_basis(raw: bytes, n: int, options: Mapping[str, str]) -> lega
             path=WITNESS_SCHEMA,
             fallback_schema=WITNESS_SCHEMA,
         )
+        _require(not unreplayed, f"n={n}: the witness's claim is replayable; read it as such")
     except WitnessError as error:
-        raise ReportError(f"n={n}: not a valid witness: {error}") from error
+        # The semantic rules run only once the schema has passed, so a semantic refusal
+        # whose every problem is the unreplayed claim leaves a witness the schema admits.
+        stated: Any = fields.get("witness")
+        if not (
+            unreplayed
+            and error.kind == "semantic-invalid"
+            and type(stated) is dict
+            and check_witness_semantics(cast("dict[str, Any]", stated)) == [UNREPLAYED_CLAIM]
+        ):
+            raise ReportError(f"n={n}: not a valid witness: {error}") from error
+        witness = cast("dict[str, Any]", stated)
     _require(
         witness["n"] == n
         and witness["representation"] == "center-basis"
@@ -1226,6 +1264,7 @@ ADAPTERS: dict[str, Adapter] = {
     "witness-corners": witness_corners,
     "witness-center-basis": witness_center_basis,
     "witness-center-basis-bare": witness_center_basis_bare,
+    "witness-center-basis-unreplayed": witness_center_basis_unreplayed,
     "center-basis-json": center_basis_json,
     "center-direction-json": center_direction_json,
     "centred-json": centred_json,
@@ -1721,6 +1760,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # 157 at JoostdeWinter/square-packing 6617869, one packet each.
     "[de Winter s132 upper bound 2026-11-11]": _import("de-winter-s132-upper-bound-2026-11-11"),
     "[de Winter s157 upper bound 2026-11-11]": _import("de-winter-s157-upper-bound-2026-11-11"),
+    # Lane L154 of 14 November (think-g2ax): Joost de Winter's issue 977 at 297, T-174's layout
+    # with a double step in each staircase, at JoostdeWinter/square-packing 7b4701f.
+    "[de Winter s297 upper bound 2026-11-14]": _import("de-winter-s297-upper-bound-2026-11-14"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

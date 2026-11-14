@@ -205,8 +205,8 @@ houses:
     result: T-193
     landed: '2026-10-24'
   - n: 297
-    result: T-174
-    landed: '2026-10-19'
+    result: T-299
+    landed: '2026-11-14'
   - n: 299
     result: T-277
     landed: '2026-11-09'
@@ -304,6 +304,8 @@ sources:
     landed: '2026-11-11'
   - id: de-winter-issue942-2026-11-10
     landed: '2026-11-11'
+  - id: de-winter-issue979-2026-11-14
+    landed: '2026-11-14'
   - id: evand-compositions-2026-10-13
     landed: '2026-10-14'
   - id: evand-fresh-compositions-2026-10-14

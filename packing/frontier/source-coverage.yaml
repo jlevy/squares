@@ -13230,6 +13230,81 @@ sources:
     priced and held (think-0h7r), so T-298 is a report and no verified lane moves. Evan
     Daniel's checker files at the pinned 659ee62 are in
     resources/web/evand-square-packing-2026-10-24/, retaining zeromargin.py 3cb95fb7.
+- id: de-winter-s297-upper-bound-2026-11-14
+  title: Joost de Winter's double-step packing of 297 squares at JoostdeWinter/square-packing 7b4701f, issue 977
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/7b4701f35e815301e4f467d214fab4205ded5eb1
+  local: resources/web/de-winter-s297-upper-bound-2026-11-14/
+  source_key: '[de Winter s297 upper bound 2026-11-14]'
+  scope:
+    n_values:
+    - 297
+  reviewed: '2026-11-14'
+  source_date: '2026-11-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s297-upper-bound-2026-11-14/acquisition/claims.json
+  evidence:
+  - E-de-winter-s297-certificate-report
+  - E-de-winter-s297-exact-feasibility
+  - E-de-winter-s297-review-exact-feasibility
+  notes: >-
+    The licence, the root README and the folder n297/ of the commit 7b4701f, which
+    jlevy/squares#977 names, are retained, the licence and verify_exact.py pinned against the
+    byte-identical copies the de-winter-upper-bounds-227-229-260-2026-10-17 and
+    de-winter-s132-upper-bound-2026-11-11 packets retain and the two figures by digest; the
+    certificate is admitted only where its exact side rounds up to the side the issue prints.
+    n297/ was first committed at e008214 (2026-11-14T10:02:54Z), 10 minutes 24 seconds before
+    the issue, whose certificate bytes the pin keeps; 7b4701f adds a second checker. The push
+    of e008214 is not read; no other report reached 297 before the issue, which dates the
+    claim. T-299 records the in-horizon report, 9.62e-04 below T-174 (Francisco Couzo's
+    packing, improved by Evan Daniel and PingYou Ltd), at V3/C3 since the stage 4 review of
+    14 November (docs/project/reviews/review-2026-11-14-de-winter-977-979.md, lane L153), and
+    the case adopted it as its house in the pass of that day. The ledger of 14 November for this
+    lane (campaign/issue-intake/upper-bounds-977-979-20261114) records it as a new packing.
+    All 3 native jobs have full outcomes. The commit 5fcb350 after the pin is read in
+    campaign/intake-watch.yaml.
+- id: de-winter-issue979-2026-11-14
+  title: Joost de Winter's packings of 332 and 409 squares from his 297 at JoostdeWinter/square-packing c70defa, issue 979
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/c70defaf39af47db220d1e7c2922590637ffb664/above324_from_n297
+  local: resources/web/de-winter-issue979-2026-11-14/
+  source_key: '[de Winter issue 979 2026-11-14]'
+  scope:
+    n_values:
+    - 332
+    - 409
+  reviewed: '2026-11-14'
+  source_date: '2026-11-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/de-winter-issue979-2026-11-14/acquisition/claims.json
+  - resources/web/de-winter-issue979-2026-11-14/acquisition/beyond-horizon-claims.json
+  evidence:
+  - E-de-winter-979-certificate-report
+  - E-de-winter-979-exact-feasibility
+  - E-de-winter-979-review-exact-feasibility
+  notes: >-
+    Joost de Winter's 2 exact rational certificates of issue 979 at 332 and 409, in the folder
+    above324_from_n297/ of his watched repository at c70defa (2026-11-14T10:39:38Z), the head
+    and the commit the issue names, 1 minute 45 seconds before it; each is admitted only where
+    its exact side rounds up to the side the issue prints at 12 places. Each is his packing of
+    297 (#977, T-299) with axis-aligned squares added, at its side plus 1 and plus 3: a border
+    of 35 at 332, and two arms of 3 x 17 and ten corner squares at 409. The ledger of 14
+    November for this import (campaign/issue-intake/upper-bounds-977-979-20261114), walked from
+    starts frozen at main da5091505, records both as current beyond-horizon rows, 9.62e-04
+    below the rows of couzo-02f9690-2026-10-09 (332) and tymchishin-reclosure-v3-2026-10-23
+    (409), which they supersede, and below Göbel's construction by 0.231 and 0.160; both
+    maintained routes accept both certificates and refuse their gross and sharp controls (the
+    packet's receipts), and the stage 4 review of 14 November
+    (docs/project/reviews/review-2026-11-14-de-winter-977-979.md, lane L153) decides both
+    again by a clean-room checker and finds each the 297 certificate translated exactly, so the
+    rows are verified from E-de-winter-979-exact-feasibility and
+    E-de-winter-979-review-exact-feasibility.
+  claims_record: resources/web/de-winter-issue979-2026-11-14/acquisition/beyond-horizon-claims.json
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -13657,11 +13732,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 297
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '17.740417287543801851'
-  evidence: E-pingyou-574-certificate-report
+  source_id: de-winter-s297-upper-bound-2026-11-14
+  value: '17.7394555582889518'
+  evidence: E-de-winter-s297-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+    a replay here and an accepted review, adopted on 2026-11-14 (T-299).
 - n: 299
   source_id: ozden-s299-upper-bound-2026-11-09
   value: '17.8010044342552937'
@@ -14798,14 +14873,14 @@ superseded_reports:
 - n: 297
   source_id: casson-square-packing-2026
   value: '17.74092885618564353'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: de-winter-s297-upper-bound-2026-11-14
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 297
   source_id: franciscouzo-square-packing-2026
   value: '17.740417287548325'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: de-winter-s297-upper-bound-2026-11-14
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 298
@@ -15918,9 +15993,9 @@ superseded_reports:
 - n: 297
   source_id: evand-square-packing-2026-10-05
   value: '17.74041728754380185115320576776'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-299's exact
     side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: de-winter-s297-upper-bound-2026-11-14
 - n: 305
   source_id: couzo-certificates-2026-10-11-in-corpus
   value: '17.9504664821377123'
@@ -16335,6 +16410,12 @@ superseded_reports:
   reason: The house from 2026-11-12 until 2026-11-13; its certificate stays retained and verified,
     and T-297's exact side is smaller.
   superseded_by: ozden-s269-upper-bound-2026-11-12
+- n: 297
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '17.740417287543801851'
+  reason: The house from 2026-10-17 until 2026-11-14; its certificate stays retained and verified,
+    and T-299's exact side is smaller.
+  superseded_by: de-winter-s297-upper-bound-2026-11-14
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
@@ -23836,7 +23917,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.740417287544'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue979-2026-11-14
   bead: think-a4wq
 - n: 336
   source_id: couzo-02f9690-2026-10-09
@@ -30124,7 +30206,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.740417290708'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue979-2026-11-14
   bead: think-lyf9
 - n: 445
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -32331,4 +32414,18 @@ beyond_horizon_claims:
   assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-cen3
+- n: 332
+  source_id: de-winter-issue979-2026-11-14
+  claim: upper-bound
+  value: '18.739455558289'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-g2ax
+- n: 409
+  source_id: de-winter-issue979-2026-11-14
+  claim: upper-bound
+  value: '20.739455558289'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-g2ax
 pending_catalogue_intake: []

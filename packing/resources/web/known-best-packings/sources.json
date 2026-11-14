@@ -2030,19 +2030,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-296.svg"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n297.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/7b4701f35e815301e4f467d214fab4205ded5eb1/n297/n297_witness.yaml at 7b4701f35e815301e4f467d214fab4205ded5eb1",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         297
       ],
       "n": 297,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-297.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_witness.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-14",
       "source_n": 297,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n297.cert.json"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/7b4701f35e815301e4f467d214fab4205ded5eb1/n297/n297_witness.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

@@ -1,0 +1,24 @@
+# Lane L153 findings frozen at 2026-11-14T11:28:52Z, before the author's README.md, REGISTRATION.md, SHA256SUMS, verify_exact.py, check_area.py, build.py, n297_solution_250_digits.txt or figures, the register entries, case records or house witnesses at 297, 332 or 409, the record's beyond-horizon listing, import lane L154's work, or this repository's verifier, promotion or identity code was opened.
+b364e3562a57b91a70f4d7793828d41169e24ba8636c25e0214f3c8a0a9bd5c7  frozen/review-2026-11-14-de-winter-977-979.frozen.md
+# lines and bytes: 483 33539
+# checker list:
+45766f987eeea12732331aec22a4e9db656c19d3aa9d4f5819ff0e26d0daacb7  frozen/checker-frozen-digests.txt
+# controls plan list:
+646c2121455c35532f9af5d0503ef7ec279acb2ea36c1898999410795b52a7e2  frozen/controls-plan-digest.txt
+# receipts and programs at the freeze:
+a3d14b2906b77b02b082b5364ce7b915c5b9b9006a9ab97992541d195aa26a6d  out/selftest.json
+d240ebc820499b878cb3a786fa177401975f6fecc6cd46048f028f03f474af30  out/check-n297.json
+380cd359ed0d2115afc57c7bcdd6e08c74e1a56a437da0a253a688230bad2bfb  out/check-n332.json
+74346ccb028200bf2b7d95039ce91180b4bc58c429457d2aa58aed15de7d493c  out/check-n409.json
+651c91ce3c262f504cf29f9d5efc82e61b223d71e626b7a0f31685c7d6fb5eb9  out/plan-facts-n297.json
+4a727ec1dee4b3ba338ca186ba8a77b175e896f9155eb41a8c4b99066066f9ea  out/plan-facts-n332.json
+7090d83239adad3380a11b74eba0aa761f5ee98061887f234866da63cb273142  out/plan-facts-n409.json
+765ac51829c94444d4f435d40956e8e74c479f7aba3d1f314faa20ce2fee57b2  out/controls-n297.json
+a4523a791069f13ecfc4f833f8abcffcb26bb978fec204111d06097e5c705e59  out/controls-n332.json
+0639f3b4101ae399acba3093b63e28ef9877c3d109998a8bd42ec97ee6613896  out/controls-n409.json
+9f0344e1c6f6036fa1b81e4d34c7e1a709c67283fe2d2e779cf44d5117106a06  out/describe-n297.json
+6111bc3d5e24d364fc632c712a9893d7cea2ba01b354e90a5aaf805b7fdc79f9  out/describe-n332.json
+3f9c444809c92b24144ae9bcb2cfb7f55e697c5b73dcf2bd3554d74e69053ec1  out/describe-n409.json
+398d21280e9fc12d0ebf91f0c058e2257ed23499a56ce3fa86dae7b0bab5fcf2  programs/controls-plan.json
+6c517d7e62dc967ddcc73d940493253d2f73f9d0694554dcf001101a7e0705da  programs/l153_controls.py
+b913db7cfd4789f19950e04d30e6078d76db94fb281b2c28961122389287e98e  programs/l153_describe.py

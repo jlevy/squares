@@ -692,6 +692,10 @@ def _sources() -> dict[str, Source]:
         # a new arrangement relative to T-296's packing, from his lab's column-band designer.
         # 269 was T-296's only count, so T-296 is no source here now.
         packet_source("T-297", "ozden-s269-upper-bound-2026-11-12"),
+        # Lane L154 of 14 November 2026 (think-g2ax) moved 297 from T-174 to Joost de Winter's
+        # issue 977 (T-299), T-174's layout with a double step in each staircase, a new
+        # arrangement relative to T-174's packing; T-174 still houses other counts.
+        packet_source("T-299", "de-winter-s297-upper-bound-2026-11-14"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -777,7 +781,10 @@ def _sources() -> dict[str, Source]:
 #: same pass, a new arrangement relative to T-290's packing, Özden its finder; T-290 keeps
 #: no house here. Lane L132 (think-n73d) adopted his issue 967 (T-297) at 269 in place of
 #: T-296 in the pass of 13 November 2026, a new arrangement relative to T-296's packing,
-#: Özden its finder still; T-296 keeps no house here.
+#: Özden its finder still; T-296 keeps no house here. Lane L154 (think-g2ax) adopted Joost de
+#: Winter's issue 977 (T-299) at 297 from T-174 in the pass of 14 November 2026, T-174's
+#: layout with a double step in each staircase, a new arrangement relative to T-174's
+#: packing, de Winter its finder; T-174 still houses other counts.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -844,7 +851,7 @@ ADOPTED: dict[int, str] = {
     292: "T-146",
     293: "T-271",
     295: "T-193",
-    297: "T-174",
+    297: "T-299",
     299: "T-277",
     302: "T-193",
     303: "T-278",
@@ -974,6 +981,8 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: issue 967, from his own T-296: the pass of 12 November had already moved 269 (lane L120),
 #: and a day's archive holds one prior state a count, as at 179, 260 and 268. It is dated by
 #: the day its pull request can merge at the earliest; lane L132 made it on 12 November.
+#: The pass of 14 November 2026 (think-3guf, think-g2ax) adopted T-299 at 297, Joost de
+#: Winter's issue 977, from T-174, whose house 297 had been since the pass of 17 October.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1061,6 +1070,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-11": frozenset({132, 156, 157, 179, 180, 268, 269}),
     "2026-11-12": frozenset({179, 237, 269}),
     "2026-11-13": frozenset({269}),
+    "2026-11-14": frozenset({297}),
 }
 
 

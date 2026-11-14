@@ -1,0 +1,133 @@
+format: intake-ledger-v1
+read_at_main: da5091505ffd57f07cd95e8eb0cc2659f5cd2822
+read_on: '2026-11-14'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l154
+  branch: claude/bold-ritchie-xo28us-l154
+  commit: da5091505ffd57f07cd95e8eb0cc2659f5cd2822
+  note: The two packets' claim records, written on the lane's branch from main da5091505 and
+    read here by path.
+reports:
+- report: '#977'
+  url: https://github.com/jlevy/squares/issues/977
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-14T10:13:18Z'
+  bead: think-g2ax
+  claims:
+  - n: 297
+    printed: '17.739455558289'
+    rounding: up
+    exact: 2771789930982648706964773143376521183579542254469769042281514821668318400855235528876372121118923392199805279917691597900244395470466500399244703088837555169406502653157316418063170272472749700766022952357153436794707246798261523123813034222349783199652472152271757293343837277652953159175956044287440349952533/156250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-s297-upper-bound-2026-11-14/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l154@da5091505ffd57f07cd95e8eb0cc2659f5cd2822
+    first_committed: '2026-11-14T10:02:54Z'
+    measured:
+      against: T-174
+      finding: not one to one with T-174's packing under any symmetry of the box by nearest
+        centres; the optimal assignment, best under symmetry 5, moves 55 squares beyond 0.1,
+        69 beyond 1e-2 and 117 beyond 1e-3 (largest 0.700149) and turns 114 squares by more
+        than 1e-6 radians, by up to 44.74 degrees; 110 squares are tilted beyond a degree,
+        44.11 to 44.95 degrees, 61 one way and 49 the other, against T-174's 107, 44.74 to
+        44.98 degrees, 63 and 44; the house witness and its regularized view measure as T-174;
+        a new arrangement relative to T-174's packing, in its layout
+      source: packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/identity.json
+    new_packing:
+      source: 'n297/README.md: ''The packing keeps the layout of the Squares Project record
+        T-174 (packing by Francisco Couzo, exact optimum by Evan Daniel, refinement by PingYou
+        Ltd). ... Two things are new. 1. Each staircase has two steps of double size ... 2.
+        The band columns lean in two groups.'''
+      continues: T-174's layout at 297 (Francisco Couzo's packing as Evan Daniel and PingYou
+        Ltd improved it), with a double step in each staircase taken from the author's 132
+        and 157
+    note: T-174's own uniform-contraction margin at 297 is 0, a pair (274, 292) touching,
+      so the gain, 9.617e-4, lies wholly outside the predecessor's padding (packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/contraction-n297.json)
+      and RV-3 (think-ruu2) does not reach it.
+  note: The issue names 7b4701f, committed at 2026-11-14T10:05:30Z, 7 minutes 48 seconds before
+    it, which adds n297/check_area.py; e008214, committed at 10:02:54Z, 10 minutes 24 seconds
+    before it, first published the folder's certificate, which 7b4701f keeps byte for byte.
+    e008214's push was not read (GitHub's activity log was not readable from this session),
+    so it may have made the certificate public up to 10 minutes 24 seconds before the issue,
+    when the rule of 14 October would date it by it; the ledger dates the claim by the issue
+    with the first commit kept, and no other report reached 297 in that window, so the verdict
+    is the same either way. The README says the certificate's side is 1.8e-59 above a 330-digit
+    solution of the contact equations, a numerical local optimum with no formal proof, and
+    that the Kaggle per-puzzle leaderboard listed 17.7404101723 at 297 on 13 November, a side
+    with no packing, which is no report and lies above the claim.
+- report: '#979'
+  url: https://github.com/jlevy/squares/issues/979
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-14T10:41:23Z'
+  bead: think-g2ax
+  claims:
+  - n: 332
+    printed: '18.739455558289'
+    rounding: up
+    exact: 2928039930982648706964773143376521183579542254469769042281514821668318400855235528876372121118923392199805279917691597900244395470466500399244703088837555169406502653157316418063170272472749700766022952357153436794707246798261523123813034222349783199652472152271757293343837277652953159175956044287440349952533/156250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue979-2026-11-14/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l154@da5091505ffd57f07cd95e8eb0cc2659f5cd2822
+    first_committed: '2026-11-14T10:39:38Z'
+    measured:
+      against: the row of couzo-02f9690-2026-10-09
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under symmetry 5, moves 94 squares beyond 0.1, 120 beyond
+        1e-2 and 175 beyond 1e-3 (largest 0.740417), and turns 117 squares by more than 1e-6
+        radians, by up to 44.74 degrees; another arrangement than the row's, whose core is
+        Couzo's own earlier packing at 297
+      source: packing/resources/web/de-winter-issue979-2026-11-14/measure/identity-n332.json
+    new_packing:
+      source: '#979: ''For n = 332, 35 axis-aligned squares are added along two walls.'''
+      continues: 'the 297 certificate of #977, moved by (1, 1), with 18 axis-aligned squares
+        along the bottom wall and 17 along the left, at its side plus 1'
+    note: The row's certificate's uniform-contraction margin is 1.874e-19 (packing/resources/web/de-winter-issue979-2026-11-14/measure/contraction-n332.json);
+      the gain, 9.617e-4, is 5.13e+15 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  - n: 409
+    printed: '20.739455558289'
+    rounding: up
+    exact: 3240539930982648706964773143376521183579542254469769042281514821668318400855235528876372121118923392199805279917691597900244395470466500399244703088837555169406502653157316418063170272472749700766022952357153436794707246798261523123813034222349783199652472152271757293343837277652953159175956044287440349952533/156250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue979-2026-11-14/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l154@da5091505ffd57f07cd95e8eb0cc2659f5cd2822
+    first_committed: '2026-11-14T10:39:38Z'
+    measured:
+      against: the row of tymchishin-reclosure-v3-2026-10-23
+      finding: no symmetry pairs it square for square with the row's packing by nearest centres;
+        the optimal assignment, best under the identity, moves 262 squares beyond 0.1, 269
+        beyond 1e-2 and 279 beyond 1e-3 (largest 1.09164), and turns 187 squares by more than
+        1e-6 radians, by up to 45 degrees; another arrangement than the row's
+      source: packing/resources/web/de-winter-issue979-2026-11-14/measure/identity-n409.json
+    new_packing:
+      source: '#979: ''For n = 409, two arms of 3 x 17 axis-aligned squares and 10 squares
+        in the corner are added. Five of these 10 lie in a square of side 2.72, one of them
+        tilted by 45 degrees.'''
+      continues: 'the 297 certificate of #977, moved by (3, 3), with two arms of 3 x 17 axis-aligned
+        squares and ten in the corner, at its side plus 3'
+    note: The row's certificate's uniform-contraction margin is 1.546e-9 (packing/resources/web/de-winter-issue979-2026-11-14/measure/contraction-n409.json);
+      the gain, 9.617e-4, is 6.22e+05 times it, far outside it, so the gain is no re-certification
+      of the row's padding and not RV-3 material.
+  note: 'The issue names c70defa, committed at 2026-11-14T10:39:38Z, 1 minute 45 seconds before
+    it, the commit that first published above324_from_n297/. Its push was not read, and no
+    other report reached 332 or 409 in that window, so the ledger dates both claims by the
+    issue with the first commit kept. Both certificates are the 297 certificate of #977 plus
+    axis-aligned squares, so they come after it in report order; the issue says the added
+    squares follow the construction of the recorded values at 332 and 409, which are built
+    the same way from T-174 at 297. Two L steps from the 297 give 369 a side above Göbel''s
+    construction there, so no bound; deletions bound counts no report claims, which have no
+    rows (think-kzme). The review''s F14 finds the 409 row 3.164e-9 above T-174 + 3 and placed
+    otherwise.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+cross_check: []

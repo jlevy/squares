@@ -62259,3 +62259,437 @@ evidence:
       records, not that they are sound; the review's F1 and F2 stand. A sample decides the
       runs it repeated and nothing about the others, and it sets no rung.
     source_reviewed: '2026-11-14'
+  - id: E-de-winter-s297-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 297
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter s297 upper bound 2026-11-14]'
+    certificate: packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-14'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 7b4701f,
+      first committed at e008214 and named by jlevy/squares#977. A separate complete
+      repository replay is retained for n = 297: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 263736 pair
+      decisions; summed over the 3 jobs, the receipt records 184.09 route CPU seconds and
+      185.63 job wall seconds, the longest job 63.52 seconds. In every positive squares touch
+      the box, a least wall clearance of exactly 0, and every pair clears by at least 1e-60
+      less about 1.1e-250. The packet's sharp controls meet those margins on both routes. The
+      replay is E-de-winter-s297-exact-feasibility. The source's own verify_exact.py and
+      check_area.py were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share this repository's witness reader (certificate parsing and
+      half-angle conversion), Fraction arithmetic and the separating-axis method; neither
+      shares code with the author's checkers. The README's 330-digit solution, its first-order
+      condition and its restarts are not decided here. No human oversight or optimality is
+      claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 977 and
+        979 (L153, under think-gabn), prompted separately from the import lane (L154,
+        think-g2ax) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted all three
+        certificates, nothing blocking or major: F1 to F5 on feasibility, the controls and the
+        claims' boxes, F6 and F13 to F15 for the author, F7 and F9 to F12 for the records, and
+        F8, the one minor finding, on the twin's unreplayed claim. Its clean-room run is
+        E-de-winter-s297-review-exact-feasibility, and the replay
+        E-de-winter-s297-exact-feasibility.
+  - id: E-de-winter-s297-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 297
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s297 upper bound 2026-11-14]'
+    certificate: packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_witness.yaml
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19
+      on two cores: python -m devtools.upper_bound_reports de-winter-s297-upper-bound-2026-11-14
+      certify --workers 2 wrote the receipt on 14 November 2026 from the packet's retained
+      witness, read by the witness-center-basis-unreplayed reader, and check --replay decided
+      all 3 retained jobs again, the witness with its duplicate-square and outside-container
+      controls, through both maintained routes; check-claims rebuilds the frozen comparison,
+      and reads the retained JSON as the same packing. python -m devtools.upper_bound_reports
+      de-winter-s297-upper-bound-2026-11-14 sharp-controls wrote the packet's sharp controls,
+      all 11 as stated in advance on both routes: contact accepted at margin 0 and refused
+      1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 297 that T-299 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and the
+            import lanes that wrote the centre-basis witness readers; each lane's tier and
+            reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says the certificate and the author's checkers were produced with
+          Claude Fable 5.2 (Anthropic) under Joost de Winter's direction; the project's routes
+          are Claude's too, written from prompts of their own long before this certificate. No
+          route here is the source's code, and this lane never opened the source's
+          verify_exact.py or check_area.py. The routes' authors read other sources' formats
+          and, in earlier lanes, other sources' checkers, so the record does not call them
+          clean room.
+    limitations: >-
+      A replay of the one retained witness by two maintained exact routes that share this
+      repository's witness reader (certificate parsing and half-angle conversion), Fraction
+      arithmetic and the separating-axis method. The author's own checkers are his and were not
+      run here; neither route shares code with them. A separate complete repository replay is
+      retained for n = 297: 1 positive and 2 duplicate-square and outside-container controls
+      passed their required outcomes on both routes, 263736 pair decisions; summed over the 3
+      jobs, the receipt records 184.09 route CPU seconds and 185.63 job wall seconds, the
+      longest job 63.52 seconds. In every positive squares touch the box, a least wall
+      clearance of exactly 0, and every pair clears by at least 1e-60 less about 1.1e-250. The
+      receipt's controls are gross, and the packet's sharp controls meet those margins. Finite
+      feasibility only.
+    source_reviewed: '2026-11-14'
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 977 and
+        979 (L153, under think-gabn), prompted separately from the import lane (L154,
+        think-g2ax) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted all three
+        certificates, nothing blocking or major: F1 to F5 on feasibility, the controls and the
+        claims' boxes, F6 and F13 to F15 for the author, F7 and F9 to F12 for the records, and
+        F8, the one minor finding, on the twin's unreplayed claim. Its clean-room run is
+        E-de-winter-s297-review-exact-feasibility, and the replay
+        E-de-winter-s297-exact-feasibility.
+  - id: E-de-winter-979-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [332, 409]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter issue 979 2026-11-14]'
+    certificate: packing/resources/web/de-winter-issue979-2026-11-14/source/above324_from_n297/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-14'
+    limitations: >-
+      This atom records the source author's report, in issue 979, of 2 exact rational
+      certificates beyond the case corpus in above324_from_n297/ of
+      JoostdeWinter/square-packing at c70defa, its n = 297 packing (#977, T-299) with a border
+      at 332 and an L-border and a corner of ten squares at 409, both of which the ledger of 14
+      November for this pass records. A separate complete repository replay is retained for
+      both: 2 positives and 4 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 830292 pair decisions; summed over the 6 jobs, the
+      receipt records 468.38 route CPU seconds, the longest job 93.96 seconds. The added
+      axis-aligned squares touch the box and each other, so the least wall clearance and the
+      least pair gap are exactly 0. The packet's sharp controls, 11 a count at exact contact
+      and 1e-30 past it, are as expected on both routes (22 controls,
+      receipts/sharp-controls-nNNN.json). That replay is E-de-winter-979-exact-feasibility,
+      which cites the rows.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 977 and
+        979 (L153, under think-gabn), prompted separately from the import lane (L154,
+        think-g2ax) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted both certificates
+        for finite feasibility, nothing blocking or major, by a clean-room checker deciding every
+        square, wall and pair by two exact methods; F12 finds each the 297 certificate
+        translated exactly, with the added squares as the source describes. The rows' runs are
+        E-de-winter-979-exact-feasibility and E-de-winter-979-review-exact-feasibility.
+  - id: E-de-winter-979-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [332, 409]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter issue 979 2026-11-14]'
+    certificate: packing/resources/web/de-winter-issue979-2026-11-14/source/above324_from_n297/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19
+      on two cores: python -m devtools.upper_bound_reports de-winter-issue979-2026-11-14
+      certify --workers 2 wrote the receipt on 14 November 2026 from the packet's retained
+      certificates, read by the center-direction-json reader (6 jobs, 468.38 route CPU
+      seconds), and check --replay decided every retained job again. python -m
+      devtools.upper_bound_reports de-winter-issue979-2026-11-14 sharp-controls wrote the
+      packet's sharp controls (receipts/sharp-controls-nNNN.json), all 11 a count with the
+      outcome stated in advance on both routes: contact accepted at margin 0 and refused 1e-30
+      past it; for square 299 enlarged past contact the plan named the shape and the overlap,
+      and the receipt also names the wall it touches. The 409 controls were still running when
+      the coordinator relayed a summary of the stage 4 review.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates the source's beyond-horizon rows state, every wall and every
+          pair decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 2
+        of: 2
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and the
+            import lane that wrote the centre-direction reader for #939's files; each lane's
+            tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the construction and the author's checkers were produced with Claude
+          Fable 5.2 (Anthropic) under Joost de Winter's direction; the project's routes are
+          Claude's too, written from prompts of their own long before these certificates. No
+          route here is the source's code, and this lane never opened the source's
+          verify_exact.py, check_area.py or build.py. The routes' authors read other sources'
+          formats and, in earlier lanes, other sources' checkers, so the record does not call
+          them clean room.
+    limitations: >-
+      A replay by two maintained exact routes that share this repository's centre-direction
+      reader (certificate parsing and half-angle conversion), Fraction arithmetic and the
+      separating-axis method. The author's own checkers are his and were not run here; neither
+      route shares code with them. The receipt's controls are gross, and the packet's sharp
+      controls meet each certificate's least margins. Finite feasibility only.
+    source_reviewed: '2026-11-14'
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 977 and
+        979 (L153, under think-gabn), prompted separately from the import lane (L154,
+        think-g2ax) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted both certificates
+        for finite feasibility, nothing blocking or major, by a clean-room checker deciding every
+        square, wall and pair by two exact methods; F12 finds each the 297 certificate
+        translated exactly, with the added squares as the source describes. The rows' runs are
+        E-de-winter-979-exact-feasibility and E-de-winter-979-review-exact-feasibility.
+  - id: E-de-winter-s297-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 297
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s297 upper bound 2026-11-14]'
+    certificate: packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_exact.json.gz
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B on a shared host at nice 19,
+      14 November 2026, from the review-only directory de-winter-977-979-review-2026-11-14
+      (programs/): l153_check.py on n297_exact.json and its Witness/v2 twin
+      (out/check-n297.json, ACCEPT), deciding every format hypothesis, every square a unit
+      square, every wall and all 43,956 pairs by separating axes in Python integers over
+      per-square denominators and again by exact convex clipping in gmpy2.mpq, with containment
+      by area, with no distance filter, in 14 CPU seconds: 33 exact wall contacts (16 top, 17
+      right), the least positive wall clearance 1.5e-60 (square 1, left), no pair touching, and
+      the least pair margin 9.99999999999999e-61, at squares 232 and 237. l153_controls.py
+      decided the 19 controls the plan stated beforehand, by both methods or the reader
+      (out/controls-n297.json, 179 CPU seconds), all 19 as stated; among them the squares
+      accepted in the box of the claim's own side, 17.739455558289, and refused in the box of
+      its 12-place floor, the rotation read the other way refused for 112 overlapping pairs,
+      and every one of the 794 pairs below 1e-12 closed along its centre line to exact contact
+      and 1e-90 past it; l153_selftest.py passed 7,720 cases. The review packet's README gives
+      the commands.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-977-979-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 297 and its twin: every square, every wall and every pair, by
+          two exact methods in two arithmetic libraries that share only the reader, with the
+          stated controls decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issues 977 and 979 (L153, under think-gabn),
+          strong tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the certificate and the author's two checkers were produced with Claude
+          Fable 5.2 (Anthropic) under Joost de Winter's direction. The checker was written from
+          the mathematics, the Witness/v2 schema text and the certificates and frozen at
+          2026-11-14T11:11:08Z, before its author read the author's checkers or this
+          repository's witness, verifier or promotion code; it shares no code with the source's
+          checkers, this repository's maintained routes or any earlier review's programs.
+    independence_record: packing/resources/web/de-winter-977-979-review-2026-11-14/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 977 and
+        979 (L153, under think-gabn), prompted separately from the import lane (L154,
+        think-g2ax) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted all three
+        certificates, nothing blocking or major: F1 to F5 on feasibility, the controls and the
+        claims' boxes, F6 and F13 to F15 for the author, F7 and F9 to F12 for the records, and
+        F8, the one minor finding, on the twin's unreplayed claim. Its clean-room run is
+        E-de-winter-s297-review-exact-feasibility, and the replay
+        E-de-winter-s297-exact-feasibility.
+    limitations: >-
+      The stage 4 review's own exact checker, a clean-room implementation by a Claude agent, the
+      system family that also produced the certificate: two methods sharing only a strict
+      reader, over every square, wall and pair. Finite feasibility only; the 330-digit contact
+      solution and any optimality are not decided.
+    source_reviewed: '2026-11-14'
+  - id: E-de-winter-979-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [332, 409]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter issue 979 2026-11-14]'
+    certificate: packing/resources/web/de-winter-issue979-2026-11-14/source/above324_from_n297/
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B on a shared host at nice 19,
+      14 November 2026, from the review-only directory de-winter-977-979-review-2026-11-14
+      (programs/): l153_check.py on n332_exact.json and n409_exact.json (out/check-n332.json and
+      out/check-n409.json, ACCEPT each), deciding every format hypothesis, every square a unit
+      square, every wall and all 54,946 and 83,436 pairs by separating axes in Python integers
+      and again by exact convex clipping in gmpy2.mpq, with containment by area, with no
+      distance filter, in 17 and 23 CPU seconds: 35 and 302 pairs touching, all among the added
+      upright squares, none overlapping, and the least positive pair margin
+      9.99999999999999e-61 at squares 232 and 237 in both. l153_controls.py decided the 18
+      controls a count the plan stated beforehand (out/controls-n332.json and
+      out/controls-n409.json, 205 and 296 CPU seconds), all as stated, among them the squares
+      accepted in the box of each claim's own side and refused in the box of its 12-place
+      floor. The review packet's README gives the commands.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-977-979-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates the source's beyond-horizon rows state: every square, every wall
+          and every pair, by two exact methods that share only the reader, with the stated
+          controls decided by both
+        checked: 2
+        of: 2
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issues 977 and 979 (L153, under think-gabn),
+          strong tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the construction and the author's two checkers were produced with
+          Claude Fable 5.2 (Anthropic) under Joost de Winter's direction. The checker was
+          written from the mathematics, the schema text and the certificates and frozen at
+          2026-11-14T11:11:08Z, before its author read the author's checkers or build script or
+          this repository's witness, verifier or promotion code; it shares no code with them,
+          this repository's maintained routes or any earlier review's programs.
+    independence_record: packing/resources/web/de-winter-977-979-review-2026-11-14/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 977 and
+        979 (L153, under think-gabn), prompted separately from the import lane (L154,
+        think-g2ax) and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted both certificates,
+        nothing blocking or major; F12 finds squares 1 to 297 the 297 certificate translated by
+        (1, 1) and (3, 3) exactly at sides S297 + 1 and + 3, F13 the corner square at
+        44.999964 degrees and F14 the 409 row 3.164e-9 above T-174 + 3 and placed otherwise. Its
+        clean-room run is E-de-winter-979-review-exact-feasibility, and the replay
+        E-de-winter-979-exact-feasibility.
+    limitations: >-
+      The stage 4 review's own exact checker, a clean-room implementation by a Claude agent, the
+      system family that also produced the certificates: two methods sharing only a strict
+      reader, over every square, wall and pair. Finite feasibility only.
+    source_reviewed: '2026-11-14'

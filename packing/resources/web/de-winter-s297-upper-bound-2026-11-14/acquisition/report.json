@@ -1,0 +1,66 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/977",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter s297 upper bound 2026-11-14]",
+  "report_evidence": "E-de-winter-s297-certificate-report",
+  "receipt_format": "de-winter-s297-exact-replay-v1",
+  "witness_prefix": "W-de-winter-s297-n",
+  "claim_limitations": "Complete 2026-11-14 rational centre-basis Witness/v2 at 297, read exactly from the retained source file, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#977 names: T-174's layout with a double step in each staircase and the band's lean changing direction once. Finite construction feasibility only; the 330-digit contact solution, local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-14",
+  "read_at_main": "da5091505ffd57f07cd95e8eb0cc2659f5cd2822",
+  "certificates": [
+    {
+      "n": 297,
+      "path": "n297/n297_witness.yaml",
+      "format": "witness-center-basis-unreplayed",
+      "offered": "17.739455558289",
+      "printed_in": "https://github.com/jlevy/squares/issues/977",
+      "first_committed": "2026-11-14T10:02:54Z",
+      "same_packing": [
+        {
+          "path": "n297/n297_exact.json",
+          "format": "center-direction-json"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    297
+  ],
+  "replayed": [
+    297
+  ],
+  "houses": [
+    {
+      "n": 297,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Francisco Couzo, improved by Evan Daniel and PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "17.740417287543801851",
+      "verified_value": "17.740417287543801851",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Joost de Winter's double-step packing of 297 squares at JoostdeWinter/square-packing 7b4701f, issue 977",
+    "headline": "De Winter's double step in both staircases of T-174's layout at 297, 9.62e-04 below T-174",
+    "significance": 3,
+    "source_checks": "n297/README.md says the band was optimized by a sequence of linear programs, restarted many times from random changes to groups of band squares, and that two series of restarts with different seeds ended at the same side, 17.7394555582889; that a linear program over all 297 squares then found no first-order improvement; that the 4289 contact equations of the result (a corner of one square on the edge line of another, or a corner on a wall) were solved in 330-digit arithmetic and hold to 1e-306, the 33 other near contacts staying open by at least 2.1e-7; and that the certificate's side is 1.8e-59 above that solution. It says the place where the lean changes direction was also tried one and two columns either side of the middle, before the restarts, at 17.7394733018 for the middle and 17.7394781380 for the four others, and that the local optimum statement rests on that numerical work and has no formal proof. The issue says verify_exact.py (separating axes) and check_area.py (the area of each close pair's clipped intersection), both Python's fractions.Fraction and sharing one author and the input file but no code, report 297 squares and 632 close pairs, and that the witness validates against this repository's witness.schema.yaml at 7629f5a. Those statements are the author's; no source program ran here.\n\nThe README says the Kaggle competition 'Squares in Squares' per-puzzle leaderboard listed 17.7404101723 as the best side for n = 297 on 13 November 2026 and shows no packings. A side with no packing is no report; the record compares with what has been published.",
+    "credit": "Credit Joost de Winter, who reports a packing that keeps the layout of T-174 at 297 (Francisco Couzo's packing as Evan Daniel and PingYou Ltd improved it): an upper left and a lower right block of axis-aligned squares with staircase edges, a block of 10 squares in each of two corners and a diagonal band of 18 columns of tilted squares. Two things are new: each staircase has two steps of double size, at the 6th and 13th band columns, between which the band lies one staircase step closer to the upper left block, so the upper left block holds 6 squares fewer, the lower right block 4 more and the band 2 more; and the band's columns lean in two groups, so the lean changes direction once where T-174's changes three times. The double step was taken from the staircases of his n = 132 and n = 157 pinwheels (T-292 and T-293). The issue asks that the result be credited to Joost de Winter as a packing that builds on T-174.\n\nThe README and the issue say the construction, optimization, high-precision solution, rational certificate, checks and figures were produced with Claude Fable 5.2 (Anthropic) under Joost de Winter's direction.",
+    "next_rung": "Independently review the certificate (stage 4, a separate lane blind to this one): its mathematics, a clean-room exact checker with sharp controls, the identity against T-174's packing and the construction the source states, mapped as an adversarial review, whose acceptance the verified lane and the house rule wait on. Then adopt it at 297 in place of T-174 under the house rule, with both strong generators' regularization, measured against the new witness, and the flip of the new house in the same change.",
+    "bead": "think-g2ax",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "de Winter after Couzo, Daniel, PingYou, Levy",
+      "note": "JoostdeWinter/square-packing at 7b4701f35e815301e4f467d214fab4205ded5eb1 (2026-11-14T10:05:30Z), Joost de Winter's certificate for s(297) <= 17.739455558289 (rounded up at 12 places), first committed at e0082144fa1c9e19ae71299f808337f4b4f58855 (2026-11-14T10:02:54Z), 10 minutes 24 seconds before jlevy/squares#977, which requested its registration: a rational centre-basis Witness/v2 (n297/n297_witness.yaml) whose verified claim names no certificate record, and the same packing as JSON (n297/n297_exact.json). The packing keeps the layout of T-174 (Francisco Couzo's packing as Evan Daniel and PingYou Ltd improved it) with a double step in each staircase and the band's lean changing direction once, the double step taken from the source's own n = 132 and n = 157 pinwheels; 1.8e-59 above a 330-digit solution of its contact equations; local optimality has no formal proof. The source says the work was produced with Claude Fable 5.2 (Anthropic) under de Winter's direction. No global optimality claim. Licensed MIT by LICENSE at the pin. Retained in web/de-winter-s297-upper-bound-2026-11-14/."
+    }
+  }
+}

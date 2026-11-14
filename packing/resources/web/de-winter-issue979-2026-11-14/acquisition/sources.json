@@ -1,0 +1,59 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-14T10:59Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, a watched repository, fetched at 10:59Z on 14 November 2026 for the intake of jlevy/squares#979 (lane L154, bead think-g2ax); the pin is the head of main when it was read, c70defa (committed 2026-11-14T10:39:38Z, 'Add square packings for n = 332 and n = 409 built from the n = 297 packing', the author's message), which git ls-remote read again at 11:01Z and #979 (10:41:23Z) names. It first adds above324_from_n297/ and one paragraph of the root README, and changes nothing else. The n = 297 packing it builds on is n297/n297_exact.json, retained by the de-winter-s297-upper-bound-2026-11-14 packet at 7b4701f, whose bytes c70defa keeps. GitHub's activity log was not readable from this session, so the push time is not read. The scope is the licence, the root README and the whole of above324_from_n297/. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and is pinned against it; verify_exact.py and check_area.py are byte-identical to the n297/ copies the de-winter-s297-upper-bound-2026-11-14 packet retains or pins and are pinned against them. above324_from_n297/SHA256SUMS states the SHA-256 of the six other files of the folder, and they match. No source program ran in writing this packet; build.py, verify_exact.py and check_area.py are retained as data and never executed here.",
+  "sources": [
+    {
+      "id": "de-winter-issue979-2026-11-14",
+      "source_url": "https://github.com/JoostdeWinter/square-packing",
+      "source_ref": "main",
+      "source_commit": "c70defaf39af47db220d1e7c2922590637ffb664",
+      "committed_utc": "2026-11-14T10:39:38Z",
+      "git_tree": "524e41541e9b4ebd8462c58dad013fb5c89fb83c",
+      "archived_path": "packing/resources/web/de-winter-issue979-2026-11-14/source",
+      "subtree_manifest": "packing/resources/web/de-winter-issue979-2026-11-14/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "above324_from_n297"
+      ],
+      "subtree_file_count": 9,
+      "subtree_total_bytes": 993822,
+      "retained_file_count": 6,
+      "retained_total_bytes": 986966,
+      "compressed": [
+        "source/above324_from_n297/n332_exact.json.gz",
+        "source/above324_from_n297/n409_exact.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+          "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+          "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+        },
+        {
+          "path": "above324_from_n297/check_area.py",
+          "bytes": 3346,
+          "sha256": "4e55678c0d542bdc3a6886da0f140014eb7b664d1ed75afe026bf9a3f0d68965",
+          "reason": "The folder's clipped-area checker, byte-identical to the n297/check_area.py the de-winter-s297-upper-bound-2026-11-14 packet retains from 7b4701f; never executed here.",
+          "identical_to": "packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/check_area.py"
+        },
+        {
+          "path": "above324_from_n297/verify_exact.py",
+          "bytes": 2438,
+          "sha256": "584fdc11264de51d5039c7e80ebc362e8dfa666fb2535b94c06d369846b2301f",
+          "reason": "The folder's separating-axis checker, byte-identical to the n132/verify_exact.py the de-winter-s132-upper-bound-2026-11-11 packet retains from 6617869 (and to n297/verify_exact.py at 7b4701f); never executed here.",
+          "identical_to": "packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/verify_exact.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The source says both packings are its n = 297 packing plus axis-aligned squares, that its n = 297 packing keeps the layout of this project's T-174 (packing by Francisco Couzo, exact optimum by Evan Daniel, refinement by PingYou Ltd), and that the added squares follow the construction of the recorded values at 332 and 409.",
+      "claims": [
+        "above324_from_n297/n332_exact.json and n409_exact.json state 332 and 409 unit squares as [center_x, center_y, cos, sin] rows of exact rationals with the side; the folder's README and #979 round the sides up at 12 places as 18.739455558289 and 20.739455558289 and give the best recorded values as 18.740417287544 and 20.740417290708 (jlevy/squares at 7629f5a), an improvement of 0.00096 each.",
+        "above324_from_n297/README.md and build.py say both are the n = 297 packing of n297/ plus axis-aligned squares: at 332 the side S + 1, the 297 packing moved by (1, 1), 18 squares along the bottom wall and 17 along the left; at 409 the side S + 3, the 297 packing moved by (3, 3), two arms of 3 x 17 squares against the far walls and 10 squares in the corner, five of them in a square of side 2.72 (68/25), one of those tilted by the rotation whose half-angle tangent is 408/985, close to 45 degrees. It says the recorded values at 332 and 409 are built the same way from T-174 at 297, and that the credit stated in n297/ applies: the layout is T-174's (packing by Francisco Couzo, exact optimum by Evan Daniel, refinement by PingYou Ltd).",
+        "verify_exact.py (separating axes) and check_area.py (area of the clipped intersection), Python's fractions.Fraction and standard library only, are the folder's two exact checkers; the README and #979 say they report 332 squares with 729 close pairs and 409 squares with 875, that they share one author, Fraction and the input files, and that the certificates were not checked with this project's tools. The README says the construction and the checks were produced with Claude Fable 5.2 (Anthropic) under the direction of Joost de Winter. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

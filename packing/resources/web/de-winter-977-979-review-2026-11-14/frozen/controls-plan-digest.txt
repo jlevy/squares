@@ -1,0 +1,11 @@
+# Lane L153 controls plan, stated at 2026-11-14T11:16:43Z, before l153_controls.py existed (ls programs/: controls-plan.json issue-977-979.json l153_check.py l153_clip.py l153_geom.py l153_make_plan.py l153_plan_facts.py l153_reader.py l153_sat.py l153_selftest.py )
+398d21280e9fc12d0ebf91f0c058e2257ed23499a56ce3fa86dae7b0bab5fcf2  programs/controls-plan.json
+651c91ce3c262f504cf29f9d5efc82e61b223d71e626b7a0f31685c7d6fb5eb9  out/plan-facts-n297.json
+4a727ec1dee4b3ba338ca186ba8a77b175e896f9155eb41a8c4b99066066f9ea  out/plan-facts-n332.json
+7090d83239adad3380a11b74eba0aa761f5ee98061887f234866da63cb273142  out/plan-facts-n409.json
+d240ebc820499b878cb3a786fa177401975f6fecc6cd46048f028f03f474af30  out/check-n297.json
+380cd359ed0d2115afc57c7bcdd6e08c74e1a56a437da0a253a688230bad2bfb  out/check-n332.json
+74346ccb028200bf2b7d95039ce91180b4bc58c429457d2aa58aed15de7d493c  out/check-n409.json
+b9f7985d81061555b2d6526db52e8e3ee6523627440c62c6eddbd77f7d1111ca  programs/l153_plan_facts.py
+b81960b20c7526bd8e4d173be8163c61c7e38f0b1fd5b58aaae873e5dc0e0ba9  programs/l153_make_plan.py
+7b4b83ac9d2b75783b8c31a5a243c0ad160521b0dce9f68874241787776842eb  programs/issue-977-979.json

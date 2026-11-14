@@ -5497,6 +5497,52 @@ sources:
       LICENSE.md at the pin; the pin also carries Evan Daniel's MIT notice, as
       LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in
       web/ozden-s269-upper-bound-2026-11-12/.
+  - key: '[de Winter s297 upper bound 2026-11-14]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: de Winter after Couzo, Daniel, PingYou, Levy
+    short_credit: de Winter after Couzo et al.
+    note: >-
+      JoostdeWinter/square-packing at 7b4701f35e815301e4f467d214fab4205ded5eb1
+      (2026-11-14T10:05:30Z), Joost de Winter's certificate for s(297) <= 17.739455558289
+      (rounded up at 12 places), first committed at e0082144fa1c9e19ae71299f808337f4b4f58855
+      (2026-11-14T10:02:54Z), 10 minutes 24 seconds before jlevy/squares#977, which requested
+      its registration: a rational centre-basis Witness/v2 (n297/n297_witness.yaml) whose
+      verified claim names no certificate record, and the same packing as JSON
+      (n297/n297_exact.json). The packing keeps the layout of T-174 (Francisco Couzo's packing
+      as Evan Daniel and PingYou Ltd improved it) with a double step in each staircase and the
+      band's lean changing direction once, the double step taken from the source's own n = 132
+      and n = 157 pinwheels; a new arrangement relative to T-174's packing, 1.8e-59 above a
+      330-digit solution of its contact equations; local optimality has no formal proof. The
+      source says the work was produced with Claude Fable 5.2 (Anthropic) under de Winter's
+      direction. No global optimality claim. The lineage builds on this project: the layout is
+      the record's T-174. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s297-upper-bound-2026-11-14/.
+  - key: '[de Winter issue 979 2026-11-14]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: de Winter after Couzo, Daniel, PingYou, Levy
+    short_credit: de Winter after Couzo et al.
+    note: >-
+      JoostdeWinter/square-packing at c70defaf39af47db220d1e7c2922590637ffb664
+      (2026-11-14T10:39:38Z), the folder above324_from_n297/: Joost de Winter's two exact
+      rational certificates beyond the case corpus at 332 and 409, 1 minute 45 seconds before
+      jlevy/squares#979, which requested their registration. Each is his packing of 297
+      (jlevy/squares#977, [de Winter s297 upper bound 2026-11-14]), which keeps the layout of
+      T-174 (Francisco Couzo's packing as Evan Daniel and PingYou Ltd improved it), with
+      axis-aligned squares added: a border of 35 at the side plus 1, and two arms of 3 x 17 and
+      ten squares in the corner at the side plus 3, following the construction of the rows they
+      supersede. Beyond-horizon rows below Couzo's and Kirill Tymchishin's at those counts.
+      Claude Fable 5.2 assistance disclosed. No local or global optimality claim. Licensed MIT
+      by LICENSE at the pin. Retained in web/de-winter-issue979-2026-11-14/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden

@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#977","kind":"issue","number":977,"url":"https://github.com/jlevy/squares/issues/977","author":"JoostdeWinter","created_at":"2026-11-14T10:13:18Z","state":"open","closed_at":null,"title":"Lowered upper bound for n = 297 (side 17.739455558289): registration request"},{"report":"#979","kind":"issue","number":979,"url":"https://github.com/jlevy/squares/issues/979","author":"JoostdeWinter","created_at":"2026-11-14T10:41:23Z","state":"open","closed_at":null,"title":"Lowered upper bounds for n = 332 and n = 409: registration request"}]
+}
