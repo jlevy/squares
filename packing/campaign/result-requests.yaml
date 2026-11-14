@@ -33941,7 +33941,8 @@ issues:
     title: 's(228) ≤ 15.600801734812: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-14'
-    state: open
+    state: closed
+    closed: '2026-11-14'
     kind: result-report
     triage: done
     summary: >-
@@ -33971,7 +33972,7 @@ issues:
       Doğa Özden the finder of a new arrangement below Couzo's packing as PingYou Ltd improved
       it, Evan Daniel's optimizer credited, and both strong generators' regularization of the
       new house run in the same change.
-    read_through: '2026-11-14T18:34:35Z'
+    read_through: '2026-11-14T21:17:32Z'
     results:
     - key: n228-column-band
       claim: >-
@@ -33992,7 +33993,27 @@ issues:
     - think-ikku
     - think-tj4o
     answer_bead: think-14i2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/983#issuecomment-6884336616
+      date: '2026-11-14'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n228-column-band
+        id: T-300
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n228-column-band
+        id: E-ozden-983-exact-feasibility
+        status: confirmed
+      - result: n228-column-band
+        id: E-ozden-983-certificate-report
+        status: reviewed
+      - result: n228-column-band
+        id: E-ozden-983-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-300 is on main at V3/C3 as the house at 228, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -34058,3 +34079,38 @@ issues:
       own contraction margin, is held at row 3 for RV-3 (think-ruu2, think-ikku) and not
       registered. The posters hold Özden's name off their credit block at 228 until the next
       infographics cut (think-tj4o).
+
+      Closed on 14 November 2026 with the final reply (issuecomment-6884336616, posted by
+      jlevy at 21:17:32Z), after #986 merged as 473577f42 at 21:06Z with the import, the
+      replay, the mapped stage 4 review and the adoption at 228, and after that merge's Pages
+      deploy and verify-deployment passed (run 43640967893); recorded in lane L164
+      (think-17ex). It states T-300, s(228) <= 15.6008017348117539, the exact rational side of
+      n-228-candidate.yaml at 8bebf3f rounded up at 16 places, of which the author's 12-place
+      print is the ceiling, at V3/C3, confirmed, significance S3, and adopted as the case's
+      house in place of T-174, 3.79974e-3 below it; that is its position, current. It names
+      E-ozden-983-exact-feasibility, confirmed, E-ozden-983-certificate-report, reviewed, and
+      E-ozden-983-review-exact-feasibility, confirmed, so all three are recorded under
+      reported (#900). T-174 is named as the house replaced, and T-174, T-128, T-098, T-092
+      and T-056 as the packings the arrangement is new against, not as this issue's results,
+      and none is recorded under reported. It credits the author as the finder of a new
+      column-band arrangement below Francisco Couzo's packing as PingYou Ltd improved it,
+      with Evan Daniel's optimizer named.
+
+      It says what was checked: both of the record's maintained exact routes accept the
+      certificate and all 11 sharp controls stated in advance came out as stated, the least
+      pair gap 101/500000000000000 at squares 118 and 119, three squares touching walls; the
+      blind stage 4 review's own exact checker, separating axes in integers and clipping
+      exactly in rationals with no distance filter, accepted the packing with nothing
+      blocking, its 20 pre-stated controls as stated; T-174's contraction margin is exactly 0,
+      squares 201 and 227 touching, so the whole gain is not padding, and the certificate's
+      own margin is 2.949e-12, its contracted side and Evan Daniel's KKT solve 3.01e-12 below
+      the side held for the owner's open question and not registered; the arrangement is new
+      against all five packings the record holds at 228, and the lineage counts reproduce
+      against T-174 transposed and set against the lower-left corner; and the side-only
+      leaderboard entry the author disclosed, 15.596043116646, is context only. It says that
+      #984 has since reported a packing at 228 about 4.76e-3 below this one, now in intake,
+      and that if it is confirmed it becomes the house at 228, T-300 is marked superseded, and
+      a follow-up will be posted here. It asks the review's six questions, which hold nothing
+      open, and names no bead. It says that nothing the author asked for is still queued, so
+      the issue is closed with it, and that answers are welcome at any time. The issue was
+      closed as completed at 21:17:33Z.
