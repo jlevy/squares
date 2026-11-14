@@ -30300,7 +30300,7 @@ issues:
       lane L82), written blind in a separate lane, accepts it with #946's, no finding blocking,
       and is mapped at C1; its F2 asks the author to credit #938 for the L step at 199, and its
       six questions for the author are informational.
-    read_through: '2026-11-11T08:46:54Z'
+    read_through: '2026-11-14T11:04:59Z'
     results:
     - key: n199-core-resolved
       validation:
@@ -30393,6 +30393,33 @@ issues:
       record should cite for #939, 702c7af2 or c4e65d0b. The questions are informational and
       hold nothing open. It says that the issue stays open, labelled blocked:owner-decision,
       until the owner answers RV-3, and that a final reply follows then.
+
+      Read on 14 November 2026 in lane L157 (think-2h88): Joost de Winter answered the
+      review's questions here (issuecomment-6876335132, 11:04:59Z), and read_through moves to
+      it. He says that the six questions are the same as on #946 and that his answers are in
+      his comment there (issuecomment-6876291132, recorded in #946's entry), and gives the two
+      that concern this issue. 2 (F2): yes; the border of 27 axis-aligned squares at 199 is
+      the step of #938, the gain of this certificate against the house T-284
+      (14.6146898532862152) is 2.63e-12, and the issue's 0.00288 is the gap to the earlier
+      record T-127. 6: please cite c4e65d0b; the files of this issue are the same at both
+      commits. He says that the number 734 has been taken out of the README for n = 199, and
+      that the witness files for n = 172 and n = 199 now follow the Witness/v2 envelope
+      (commit 6760360664227985358b1f9364f49c9b13e698a7), the squares and the sides
+      unchanged. The questions were informational and no awaiting_author was recorded, so
+      nothing is cleared. The answers change no result: T-285 stays held at V0/C1 for the
+      owner's RV-3 (think-ruu2), and the issue stays open, blocked:owner-decision.
+
+      The record's packet for this issue, de-winter-s199-upper-bound-2026-11-09, pins 702c7af,
+      the commit the issue names, and the Git diff from 702c7af to c4e65d0 is empty for n199/
+      and LICENSE, so the commit he asks to be cited holds the same files; this lane changes
+      no pin. 6760360 (11:03:30Z) is read in campaign/intake-watch.yaml and not retained:
+      against the pins of the s199 (702c7af) and s172 (c4e65d0) packets its Git diff changes,
+      in n199/ and n172/, only each witness file's softschema header, claim block, id and
+      notes line, their SHA256SUMS lines and n199/README.md's sentence on the 734 contacts,
+      and no line of a square or a side, so T-285 and T-286 stand as recorded.
+      packing-witness inspect passes both files' schema and refuses both on the loader's rule
+      that a verified claim needs a replayable certificate record, as at 57de046 on #958. T-285
+      attributes the 734 sentence to n199/README.md at the pin, where it still stands.
   - number: 946
     title: 's(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request'
     author: JoostdeWinter
@@ -30420,7 +30447,7 @@ issues:
       think-o53d, lane L82), written blind in a separate lane, accepts it with #939's, no finding
       blocking, and is mapped at C1; its F1 asks the author to state the bound as the
       certificate's side, with the root as the asserted optimum, as the record has it.
-    read_through: '2026-11-11T08:47:19Z'
+    read_through: '2026-11-14T11:02:01Z'
     results:
     - key: n172-exact-local-optimum
       validation:
@@ -30514,6 +30541,39 @@ issues:
       review's six questions, the same as on #939, and says that the issue stays open,
       labelled blocked:owner-decision, until the owner answers RV-3; the questions are
       informational and hold nothing open, and that a final reply follows then.
+
+      Read on 14 November 2026 in lane L157 (think-2h88): Joost de Winter answered the
+      review's six questions, for #946 and #939, in one comment here
+      (issuecomment-6876291132, 11:02:01Z), and read_through moves to it. 1 (F1): yes; the
+      bound is the rational side of the certificate, 13.6146898532835806 rounded up at 16
+      places (14.6146898532835806 for n = 199), and the root of the quintic is the asserted
+      optimum of the arrangement, supported numerically. 2 (F2): yes; the step from 172 to 199
+      squares, a border of 27 axis-aligned squares, is the step of #938, and #939's gain
+      against the house T-284 (14.6146898532862152) is 2.63e-12, the same as at 172. 3: the
+      offset was set by the procedure and has no meaning for the result: the squares that
+      touch nothing at the optimum were moved by a fixed (-1e-4, -1e-4) and turned by 1e-4
+      radian, so that they stay clear of their neighbours in the certificate, which a
+      comparison with T-282 shows; the other moved squares slide along their contacts, as the
+      review's F6 describes, and the side does not depend on these positions. 4: the quintic
+      was found numerically, by an integer relation search on the powers of the side using
+      108 digits of a 130-digit solution, and confirmed by the sign test in verify_exact.py.
+      The two solutions come from separate programs: the 130-digit one solved the optimality
+      conditions with the contact forces as unknowns, and the 390-digit one, written later as
+      a new program, applies Newton's method to the contact equations only, starts from the
+      certificate, and uses no forces and no input from the quintic. Both programs have the
+      same author (Claude Fable 5.2 under his direction), and a derivation of the quintic from
+      the contact equations is absent. 5: the 734 counts the contact conditions the
+      130-digit solver kept closed, those with a positive contact force and those it closed to
+      keep the solution determined, so a pair touching along an edge counts more than once;
+      he could not reproduce the number from the published files, asks that the record use
+      its own counts (336 tight pairs at 172, and 380 tight pairs and 25 grid contacts at
+      199), and says he will take it out of the README for n = 199. 6: c4e65d0b; the files of
+      #939 are the same at both commits. The questions were informational and no
+      awaiting_author was recorded, so nothing is cleared. The answers change no result: T-286
+      stays held at V0/C1 for the owner's RV-3 (think-ruu2), the record already carries the
+      bound as the side and the root as the asserted optimum, and the issue stays open,
+      blocked:owner-decision. His commit 6760360, which his comment on #939 names, is
+      recorded in that entry.
   - number: 943
     title: 's(156) ≤ 12.977053087498: improved packing (registration request)'
     author: kenaznia-doga
@@ -33466,7 +33526,8 @@ issues:
     title: 'Lowered upper bound for n = 297 (side 17.739455558289): registration request'
     author: JoostdeWinter
     opened: '2026-11-14'
-    state: open
+    state: closed
+    closed: '2026-11-14'
     kind: result-report
     triage: done
     summary: >-
@@ -33498,7 +33559,7 @@ issues:
       packing's finder in the layout of Couzo's packing as Evan Daniel and PingYou Ltd improved
       it, and both strong generators' regularization of the new house run in the same change.
       Claude Fable 5.2 assistance disclosed.
-    read_through: '2026-11-14T10:13:18Z'
+    read_through: '2026-11-14T15:18:18Z'
     results:
     - key: n297-double-step
       claim: >-
@@ -33516,7 +33577,27 @@ issues:
     - think-g2ax
     - think-gabn
     answer_bead: think-g2ax
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/977#issuecomment-6879566179
+      date: '2026-11-14'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n297-double-step
+        id: T-299
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n297-double-step
+        id: E-de-winter-s297-exact-feasibility
+        status: confirmed
+      - result: n297-double-step
+        id: E-de-winter-s297-review-exact-feasibility
+        status: confirmed
+      - result: n297-double-step
+        id: E-de-winter-s297-certificate-report
+        status: reviewed
     close_when: >-
       T-299 is on main at V3/C3 with the stage 4 review mapped and adopted as the house at 297,
       and the reply on main says what was retained and replayed, what the review found and
@@ -33557,11 +33638,51 @@ issues:
       that raise rather than assert (F15). The L-step scan finds
       that the bound carries to no other count of the corpus; the L step from it lands at 332,
       beyond the horizon, which #979 reports.
+
+      Closed on 14 November 2026 with the final reply (issuecomment-6879566179, posted by
+      jlevy at 15:18:18Z), after #980 merged as 3605269b8 at 15:03:42Z with the import, the
+      replay, the mapped stage 4 review and the adoption at 297, and after that merge's Pages
+      deploy and verify-deployment passed (run 43608111891); recorded in lane L157. It states
+      T-299, s(297) <= 17.7394555582889518, the exact rational side of n297/n297_witness.yaml
+      at 7b4701f rounded up at 16 places, of which the author's 12-place print is the ceiling,
+      at V3/C3, confirmed, and adopted as the case's house in place of T-174, 9.617e-4 below
+      it; that is its position, current. It names E-de-winter-s297-exact-feasibility and
+      E-de-winter-s297-review-exact-feasibility, confirmed, and
+      E-de-winter-s297-certificate-report, reviewed, so all three are recorded under reported
+      (#900). T-174 is named as the house replaced and the layout the packing keeps, not as
+      this issue's result, and is not recorded under reported. It credits the packing to the
+      author as one with a double step in each staircase of Francisco Couzo's layout, below
+      Couzo's packing as Evan Daniel and PingYou Ltd improved it.
+
+      It says what was checked: both of the record's maintained exact routes accept the
+      certificate, the record holding the JSON and the Witness/v2 twin agreeing with it value
+      for value; the top and right walls are touched, the left and bottom cleared by 1.5e-60,
+      and the least pair gap is 1e-60, at squares 232 and 237; and all 11 sharp controls
+      stated in advance came out as stated. It passes on the blind stage 4 review, whose own
+      exact checker, separating axes in integers and clipping exactly in rationals with no
+      distance filter, accepted the packing with nothing blocking, its 55 pre-stated controls
+      all as stated. It says that T-174's contraction margin is exactly 0, two of its squares
+      already touching, so the whole gain is a real improvement and not padding, and that the
+      certificate's own margin, 1.824e-59, matches the author's 1.8e-59; and that the packing
+      is a new arrangement in T-174's layout, not one to one with it under any symmetry, with
+      55 squares moved by more than 0.1, the author's block and band counts holding once
+      T-174's upright square 207 is counted in its band. It asks six questions, which hold
+      nothing open, the sixth also covering #979: a certificate record for
+      n297_witness.yaml, which says coordinate_provenance verified with none, or reported
+      (F8); whether the left and bottom clearances of 1.5e-60 were deliberate; whether the
+      corner square called tilted by 45 degrees, at 44.999964, is about 45 or has an exact
+      direction (F13); checkers that raise rather than assert, which python -O removes (F15);
+      Witness/v2 twins for 332 and 409, or the box and its origin named in the JSON format
+      line (F6); and in what sense the 409 row, 3.16e-9 above T-174 + 3 with its squares
+      placed otherwise, is built in the same way from T-174 (F14). It names no bead. It says
+      that nothing the author asked for is still queued, so the issue is closed with it, and
+      that answers are welcome at any time. The issue was closed as completed at 15:18:19Z.
   - number: 979
     title: 'Lowered upper bounds for n = 332 and n = 409: registration request'
     author: JoostdeWinter
     opened: '2026-11-14'
-    state: open
+    state: closed
+    closed: '2026-11-14'
     kind: result-report
     triage: done
     summary: >-
@@ -33584,7 +33705,7 @@ issues:
       each the 297 certificate translated by (1, 1) and (3, 3) exactly (F12), and scores them
       S3 carried from the 297, S2 on their own content; the rows are verified. Claude Fable 5.2
       assistance disclosed.
-    read_through: '2026-11-14T10:41:23Z'
+    read_through: '2026-11-14T15:18:20Z'
     results:
     - key: above324-from-n297
       claim: >-
@@ -33608,7 +33729,13 @@ issues:
     - think-gabn
     - think-kzme
     answer_bead: think-g2ax
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/979#issuecomment-6879566655
+      date: '2026-11-14'
+      by: jlevy
+      kind: final
+      reported:
+      - result: above324-from-n297
     close_when: >-
       The two rows are on main, verified with the stage 4 review mapped, and the reply on main
       says so; nothing the author asked for is queued.
@@ -33633,3 +33760,32 @@ issues:
       409 row lies 3.164e-9 above T-174 + 3 and is placed otherwise, so the README's "built in
       the same way from the record T-174" holds for 332's side only; the 409 gain is
       9.61732e-4, 3.16e-9 more than the 297 gain.
+
+      Closed on 14 November 2026 with the final reply (issuecomment-6879566655, posted by
+      jlevy at 15:18:20Z), after #980 merged as 3605269b8 at 15:03:42Z and that merge's Pages
+      deploy and verify-deployment passed (run 43608111891); recorded in lane L157. It says
+      that counts above 324 are tracked without register numbers, as rows of the record's
+      source coverage, and that both packings are now current rows there, at assurance
+      verified, under the source de-winter-issue979-2026-11-14: s(332) <= 18.739455558289,
+      superseding Francisco Couzo's row (18.740417287544), and s(409) <= 20.739455558289,
+      superseding Kirill Tymchishin's row (20.740417290708), each 9.617e-4 below the row it
+      supersedes and below Göbel's classical construction at its count, 18.9706 at 332 and
+      20.8995 at 409, so neither is marked as above it; and that two L steps from the 297
+      would give 19.7395 at 369, above Göbel's 19.7071 there, so nothing is claimed at 369. It
+      says what was checked: both maintained exact routes accepting both certificates, all 22
+      sharp controls as stated in advance (E-de-winter-979-exact-feasibility), with one
+      wording slip, the plan naming the shape and the overlap of the square enlarged past
+      contact but not the wall that square also touches; the blind stage 4 review deciding
+      both again with its own checker (E-de-winter-979-review-exact-feasibility); squares 1 to
+      297 of each file being exactly the 297 certificate translated by (1, 1) and by (3, 3),
+      the sides exactly that side plus 1 and plus 3, and the added squares as the README says;
+      and the superseded rows' contraction margins, 1.874e-19 and 1.546e-9, so neither gain is
+      padding. Those two ids are not this result's entries, since the result is two rows of
+      source-coverage.yaml and not register entries, so above324-from-n297 is recorded as
+      spoken of, with no id, as #942's rows are (#900). It passes on two notes of the review:
+      that the 409 row lies 3.16e-9 above T-174 + 3 with its squares placed otherwise, which
+      is question 6 on #977 (F14), and that the corner square called tilted by 45 degrees is
+      at 44.999964 (F13). T-174 is named as context, not as this issue's result. It names no
+      bead, says that the other questions are on #977 and that nothing the author asked for is
+      still queued, so the issue is closed with it. The issue was closed as completed at
+      15:18:21Z.

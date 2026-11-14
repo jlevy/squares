@@ -160,7 +160,10 @@ and its programs are in the s199 packet.
   optimum, as the register has it.
 - **Mapping.** It is mapped on T-286 and its certificate-report atom at C1.
 - **Its questions for the author** are listed in the
-  [s199 packet](../de-winter-s199-upper-bound-2026-11-09/README.md#questions-for-the-author).
+  [s199 packet](../de-winter-s199-upper-bound-2026-11-09/README.md#questions-for-the-author),
+  with [his answers](../de-winter-s199-upper-bound-2026-11-09/README.md#the-authors-answers)
+  of 14 November 2026. He confirms F1, and `6760360` makes `n172_witness.yaml` Witness/v2
+  with its squares and side unchanged; nothing here changes.
 
 ## What Is Not Established
 
