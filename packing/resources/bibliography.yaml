@@ -5543,6 +5543,37 @@ sources:
       supersede. Beyond-horizon rows below Couzo's and Kirill Tymchishin's at those counts.
       Claude Fable 5.2 assistance disclosed. No local or global optimality claim. Licensed MIT
       by LICENSE at the pin. Retained in web/de-winter-issue979-2026-11-14/.
+  - key: '[Özden s228 upper bound 2026-11-14]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s228-upper-bound at 8bebf3f78ef50baa0b47341a836b5e45717c49cc
+      (2026-11-14T18:33:59Z), Doğa Özden's certificate for s(228) <= 15.6008017348117539 (the
+      exact side rounded up at 16 places), printed 15.600801734812 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by an AI-run column-band proposal design,
+      axis-parallel squares in two wall-anchored staircase or corner domains and tilted stacks
+      across a diagonal band, proposals from a finite-memory dynamic programme over the
+      columns, quenched once with Evan Daniel's ALM+SLP fq optimizer (evand/square-packing
+      search/packer, built from bb4cc78e, MIT), with no random kicks; a new arrangement
+      relative to the house's packing (T-174, Francisco Couzo's packing as PingYou Ltd improved
+      it), its exact coordinates made by this repository's packing-witness promote --strategy
+      robust-rational from the decimal pose the source retains. The issue says the design took
+      no donor or transplant start and is no public recovery. Registration was requested in
+      jlevy/squares#983, posted on the author's behalf by his AI agent's account
+      kenaznia-doga; the issue says search, checks and filing were AI-assisted throughout. It
+      discloses first a side-only Kaggle leaderboard entry at 228, 15.596043116646, below this
+      side and with no packing. No global optimality claim. The lineage builds on this
+      project: the exact coordinates are made with this repository's promotion tool. Licensed
+      CC BY 4.0 (witness, JSON, decimal pose, hit file, check reports and outputs, write-ups)
+      and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan
+      Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's
+      ASCII. Retained in web/ozden-s228-upper-bound-2026-11-14/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden

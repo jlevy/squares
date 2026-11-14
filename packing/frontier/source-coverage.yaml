@@ -13305,6 +13305,34 @@ sources:
     rows are verified from E-de-winter-979-exact-feasibility and
     E-de-winter-979-review-exact-feasibility.
   claims_record: resources/web/de-winter-issue979-2026-11-14/acquisition/beyond-horizon-claims.json
+- id: ozden-s228-upper-bound-2026-11-14
+  title: 'Doğa Özden''s packing of 228 squares at kenaznia-doga/s228-upper-bound 8bebf3f, issue 983'
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s228-upper-bound/tree/8bebf3f78ef50baa0b47341a836b5e45717c49cc
+  local: resources/web/ozden-s228-upper-bound-2026-11-14/
+  source_key: '[Özden s228 upper bound 2026-11-14]'
+  scope:
+    n_values:
+    - 228
+  reviewed: '2026-11-14'
+  source_date: '2026-11-14'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s228-upper-bound-2026-11-14/acquisition/claims.json
+  evidence:
+  - E-ozden-983-certificate-report
+  - E-ozden-983-exact-feasibility
+  notes: >-
+    The whole tree of the repository's one commit, 8bebf3f, but a raster and a vector diff
+    image, two checker files and Evan Daniel's licence notice pinned against byte-identical
+    copies or by digest, is retained for jlevy/squares#983, the certificate admitted only where
+    its exact side rounds up to the side the issue prints. T-300 records the in-horizon report,
+    3.80e-03 below T-174 (Francisco Couzo's packing, improved by PingYou Ltd), the house; its
+    stage 4 review is a separate lane blind to this one (think-5y6d). The ledger of 14 November
+    for this lane (campaign/issue-intake/upper-bounds-983-20261114) records it as a new packing.
+    All 3 native jobs have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

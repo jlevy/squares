@@ -381,6 +381,11 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s228-upper-bound",
+        "Doğa Özden",
+        ("A packing at 228 from a column-band proposal design, 3.80e-3 below T-174 (T-300)."),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

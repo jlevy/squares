@@ -6443,7 +6443,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/229.html
   canonical: cases/229.html
@@ -24516,6 +24516,43 @@ urls:
     - packing/resources/web/de-winter-977-979-review-2026-11-14/out/controls-n297.json
     - packing/resources/web/de-winter-977-979-review-2026-11-14/out/lineage-n297.json
     - packing/resources/web/de-winter-977-979-review-2026-11-14/out/sides.json
+- path: result/t-300.html
+  canonical: result/t-300.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-14'
+  lastmod: '2026-11-14'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 228
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s228 upper bound 2026-11-14]'
+      published: '2026-11-14'
+    builds_on: null
+    evidence:
+    - E-ozden-983-certificate-report
+    - E-ozden-983-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/README.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/acquisition/claims.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/source/n-228-candidate.yaml
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/source/n-228-decimal-pose.yaml
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/identity.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/contraction-n228.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/contraction-n228-own.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-983-20261114/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
 - path: results.html
   canonical: results.html
   kind: page
