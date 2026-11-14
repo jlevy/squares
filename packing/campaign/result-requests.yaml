@@ -33268,7 +33268,7 @@ issues:
       replay (F2); mapped, it puts T-298 at C1. The authors state AI assistance (Claude,
       Anthropic) and build on Evan Daniel's linear program, format, checkers and Lean
       reduction.
-    read_through: '2026-11-14T06:51:14Z'
+    read_through: '2026-11-14T07:26:34Z'
     results:
     - key: k2m5-family
       claim: >-
@@ -33306,6 +33306,24 @@ issues:
         confirmation: C1
         status: reviewed
         position: current
+      - result: k2m5-family
+        id: E-khalili-973-k2m5-family-report
+        status: reviewed
+      - result: k2m5-family
+        id: E-khalili-973-valid11-report
+        status: reviewed
+      - result: k2m5-family
+        id: E-khalili-973-lean-report
+        status: reviewed
+      - result: k2m5-family
+        id: E-khalili-973-review-partial-checks
+        status: confirmed
+      - result: k2m5-family
+        id: E-khalili-973-replay-sample
+        status: recorded
+      - result: k2m5-family
+        id: E-khalili-973-review-replay-sample
+        status: recorded
       beads: [think-0h7r, think-kn13]
     close_when: >-
       T-298 is on main with the stage 4 review mapped, and the reply on main says what was
@@ -33385,9 +33403,14 @@ issues:
       the record already held at k = 7, 8 and 9, Benjamin Greff's T-191 (V3/C3) at n = 95,
       where the family is a second route, and Evan Daniel's k^2 - 4 family T-081, the level
       at which T-298's significance is drafted, S4; none is this issue's result, and none is
-      recorded under reported. It names none of the six evidence ids, so none is recorded
-      under reported and each stays a reply due until a reply names it, since a reply may
-      record only ids its text names (#900).
+      recorded under reported. As posted it named none of the six evidence ids; at
+      07:26:34Z the coordinator edited it to add a Record ids paragraph, marked as an edit,
+      that names all six with the states the record gives them: the three reports
+      (E-khalili-973-k2m5-family-report, E-khalili-973-valid11-report and
+      E-khalili-973-lean-report) reviewed, E-khalili-973-review-partial-checks confirmed,
+      and the two sample entries (E-khalili-973-replay-sample and
+      E-khalili-973-review-replay-sample) recorded. So all six are recorded under reported,
+      as #446's edited follow-up was (#900: a reply records only ids its text names).
 
       It says that two lanes worked separately, about 5.6 CPU-hours in all. The stage 4
       review accepted the argument with no blocking defect: it read the locality lemma, its
