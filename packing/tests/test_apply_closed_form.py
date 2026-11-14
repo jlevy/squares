@@ -24,7 +24,10 @@ def test_every_record_is_written() -> None:
 
 def test_the_lanes_it_raises_and_the_ones_it_leaves() -> None:
     raised = {plan.n for plan in tool.plans()}
-    assert len(raised) == 153
+    # 2026-11-14: Khalili and Gharabaghi's reported s(k^2 - 5) = k (T-298) holds a
+    # stronger reported lane at n = 116, 139, 164, 191, 220, 251, 284 and 319.
+    assert len(raised) == 145
+    assert not {116, 139, 164, 191, 220, 251, 284, 319} & raised
     # The later fine-net adoption now holds a stronger lane at 108.
     assert 108 not in raised
     # A registered report pending adoption is stronger at 125 (T-144) and 148 (T-179).
