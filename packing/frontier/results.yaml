@@ -46409,8 +46409,9 @@ results:
       symmetry of the box by nearest centres: the optimal assignment moves 55 squares beyond a
       tenth.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-gabn).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 14 November
+      2026 accepts it, its clean-room checker independently re-implemented; the case adopted it
+      as its house in the pass of that day under the house rule.
 
       n297/README.md says the band was optimized by a sequence of linear programs, restarted
       many times from random changes to groups of band squares, and that two series of
@@ -46451,7 +46452,8 @@ results:
       Daniel and PingYou Ltd improved it.
 
       Measured here, 110 squares turn, by 44.11 to 44.95 degrees, 61 one way and 49 the other,
-      the band of 110 the README counts; T-174 has 107, by 44.74 to 44.98 degrees.
+      the band of 110 the README counts; T-174 has 107, by 44.74 to 44.98 degrees, and an
+      upright square that closes its band, so 108 in its band, as the README counts.
 
       The README and the issue say the construction, optimization, high-precision solution,
       rational certificate, checks and figures were produced with Claude Fable 5.2 (Anthropic)
@@ -46471,7 +46473,9 @@ results:
         staircase-and-band layout is no new technique, so it is not S4. No lower bound or
         optimum.
       scored: '2026-11-14'
-      by: think-g2ax Joost de Winter import (intake lane L154), a draft for the stage 4 review
+      by: >-
+        think-g2ax Joost de Winter import (intake lane L154), confirmed by the stage 4 review of
+        14 November (lane L153)
     novelty: previously-published
     attribution:
       source_keys:
@@ -46480,6 +46484,7 @@ results:
     evidence:
     - E-de-winter-s297-certificate-report
     - E-de-winter-s297-exact-feasibility
+    - E-de-winter-s297-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/README.md
     - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/acquisition/claims.json
@@ -46495,10 +46500,17 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-14-de-winter-977-979.md
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/README.md
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/check-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/controls-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/lineage-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/sides.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l154_1114.py
     - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/controls-n297.json
     notes: >-
       A separate complete repository replay is retained for n = 297: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -46551,9 +46563,12 @@ results:
       summed squared move, best under symmetry 5, moves 55 squares beyond a tenth, 69 beyond a
       hundredth and 117 beyond a thousandth (largest 0.700) and turns 114, by up to 44.74
       degrees; aligned by box centres, 11 squares turn by more than a degree and 34 reverse
-      their tilt. T-174 has 107 squares tilted beyond a degree, 63 one way and 44 the other,
-      and 190 upright within 1e-3 degrees, where the README's counts imply a band of 108 in
-      T-174; this certificate 110, 61 and 49, and 187 exactly upright.
+      their tilt.
+
+      T-174 has 107 squares tilted beyond a degree, 63 one way and 44 the other,
+      and 190 upright within 1e-3 degrees, one of them, square 207, closing its band, so a band
+      of 108 as the README counts (the review's F11); this certificate 110, 61 and 49, and 187
+      exactly upright.
 
       The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side stood
       in, finds the L step and monotonicity consequences main finds, so the bound carries to
@@ -46561,19 +46576,102 @@ results:
       the side plus one: that is #979's 332, recorded as a beyond-horizon row of the
       de-winter-issue979-2026-11-14 source with its 409.
 
+      The stage 4 review of 14 November 2026
+      (docs/project/reviews/review-2026-11-14-de-winter-977-979.md, lane L153, under
+      think-gabn), written in a separate lane blind to this one throughout, accepts the
+      certificate, nothing blocking or major. Its clean-room checker decides the JSON and its
+      Witness/v2 twin, every square, wall and all 43,956 pairs, by separating axes in Python
+      integers and by exact clipped areas in gmpy2.mpq, with no distance filter: 33 wall
+      contacts (16 top, 17 right), the least positive wall clearance exactly 1.5e-60 (square 1,
+      left), no pair touching, and the least pair margin 9.99999999999999e-61, at squares 232
+      and 237.
+
+      Its 19 controls at 297, stated beforehand, were each decided as stated, among
+      them the squares accepted in the box of side 17.739455558289 itself and refused in the
+      box of its 12-place floor (F5) (E-de-winter-s297-review-exact-feasibility).
+
+      Read against this lane's receipts once both were done, its least pair margin, wall
+      contacts and near-wall clearance are the replay's exactly, and its contraction receipts
+      (T-174's margin 0 at squares 274 and 292; this certificate's 1.824e-59 at squares 232 and
+      237) and identity against T-174 (55 squares beyond a tenth, largest 0.700; 11 turned and
+      34 reversed by box centres) equal this packet's. The 409 sharp controls were still
+      running when the review was read; nothing else here ran after it.
+
+      Findings folded in: F8, the one minor finding, the twin's verified claim with no
+      certificate record, which this repository's loader refuses (the import reads it with
+      witness-center-basis-unreplayed); F9, the gain 9.6173e-04 and the 12-place ceiling;
+      F10, no padding reached (RV-3 does not apply); F11, the lineage counts hold, the
+      upper-left block 72 against T-174's 78, the lower-right 95 against 91, the band 110
+      against 108, counting T-174's upright square 207 at the top wall that closes its band, 89
+      band squares leaning 0.375 degrees against T-174's 98 at 0.260, and one change of lean
+      against three.
+
+      The review found no s(m) + k closed form within 1e-9; the nearest are
+      s(85) + 8 and s(126) + 6, both 3.19e-3 away. The README's 250-digit solution lies
+      1.824e-59 below the side and its next near contact, 2.103e-7 (squares 246 and 253), is
+      the review's next pair after the 794 below 1e-30. F15 notes that the author's checkers
+      decide by assert.
+
+      The review's questions for the author, which hold no rung: whether the
+      twin could carry a certificate record or a reported provenance; whether the left and
+      bottom clearances of 1.5e-60 were deliberate; and whether the checkers could raise
+      rather than assert.
+
+      Adopted at 297 in the pass of 14 November 2026 under the house rule, in place of T-174,
+      with the packing's credit to Joost de Winter, its finder, in the layout of Francisco
+      Couzo's packing as Evan Daniel and PingYou Ltd improved it, which is the record it
+      improves (F11). T-174 stays a verified bound at V3/C3, keeps its certificate as history
+      and still houses other counts.
+
+      Both strong generators ran on the new witness
+      (packing/cases/regularized_drawings/think-g2ax-2026-11-14/), and the selection,
+      measured against the axis tool's view of this witness, draws grid-slack's 0.5-degree
+      view, admitted at row 10, no worse on any goal and better on both totals of full shared
+      sides (house and stage) 774 and 904 against 728 and 886, with no light, uneven or
+      near-axis square and 17 angle classes and hues either way.
+
+      Evan Daniel's driver refused
+      its same-side view; his certified KKT solve lies 1.824e-59 below the side, 1.0 of the
+      certificate's own contraction margin, and its solved view 1.77e-19 above it, held at row
+      4, so there is no register candidate; a side inside the certificate's padding is RV-3's
+      question. The SETTLED entry at 297, decided on T-174's witness, is taken off. The
+      rigidity block, derived again, stays not rigid: 62 of 297 squares translate, against 41
+      of T-174's.
+
       The source's own verify_exact.py and check_area.py were not run here. The two maintained
       routes, the sqpack rational witness verifier and the independent rational corner
       checker, share this repository's witness reader (certificate parsing and half-angle
       conversion), Fraction arithmetic and the separating-axis method; neither shares code
-      with the author's checkers. No human oversight or optimality is claimed.
+      with the author's checkers. The review's run is independently re-implemented, clean
+      room, full coverage, by a Claude agent, a system family that also produced the
+      certificate. No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one, under
-      think-gabn): its mathematics, a clean-room exact checker with sharp controls, the
-      identity against T-174's packing and the construction the source states, mapped as an
-      adversarial review, whose acceptance the verified lane and the house rule wait on. Then
-      adopt it at 297 in place of T-174 under the house rule, with both strong generators'
-      regularization, measured against the new witness, and the flip of the new house in the
-      same change.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 14 November, is
+      retained. It is the smallest validated side at 297, and the case adopted it there in the
+      pass of 14 November 2026 under the house rule, with both strong generators'
+      regularization of the new house; T-174 keeps its place in the record as history. The
+      review's questions for the author hold no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-14-de-winter-977-979.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issues 977 and
+        979 (L153, under think-gabn), prompted separately from the import lane (L154,
+        think-g2ax) and blind to its work throughout
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-14'
+      scope: >-
+        Finite feasibility of the centre-basis certificates of issues 977 at 297 and 979 at 332
+        and 409 and the 297 Witness/v2 twin, decided again by a clean-room exact checker frozen
+        before any producer or witness code was read, by two methods, with 55 controls stated in
+        advance and a self-test of 7,720 cases; the sides and the prints, the padding, the
+        identity and lineage against T-174, the 332 and 409 constructions, custody, licence and
+        the significance.
+      verdict: accepted
+      covers:
+      - T-299
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
@@ -47738,17 +47836,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-293-regularized.yaml.gz
     - n: 297
-      of: T-174
+      of: T-299
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 2.379619e-90
-        max_turn_deg: 2.96678e-90
+        moved: 15
+        max_move: 0.01721845
+        max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-297-regularized.yaml.gz
     - n: 299
       of: T-277

@@ -502,7 +502,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 298 | 298 registered, 266 by others |
+| Frontier results | 299 | 299 registered, 267 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -861,6 +861,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-960-20261111/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-962-20261112/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-967-20261112/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-977-979-20261114/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
@@ -1014,6 +1015,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issue 954 (think-f65n)](packing/cases/regularized_drawings/think-f65n-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 962 (think-s418)](packing/cases/regularized_drawings/think-s418-2026-11-12/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 967 (think-n73d)](packing/cases/regularized_drawings/think-n73d-2026-11-12/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption of Issue 977 (think-g2ax)](packing/cases/regularized_drawings/think-g2ax-2026-11-14/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 958 (think-bcfs)](packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 959 (think-89i7)](packing/cases/regularized_drawings/think-89i7-2026-11-12/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 960 (think-my76)](packing/cases/regularized_drawings/think-my76-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
@@ -1084,6 +1086,7 @@ case or experiment separately.
 | [Özden’s Certificate of #954: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-ozden-954.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #962: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-12-ozden-962.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #967: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-12-ozden-967.md) | dated review record | record | retained | — |
+| [De Winter’s Certificates of #977 and #979: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-de-winter-977-979.md) | dated review record | record | retained | — |
 | [Proof Review: Khalili and Gharabaghi’s `s(k² − 5) = k` for Every `k ≥ 7`](docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md) | dated review record | record | retained | — |
 | [De Winter’s Packings at 132 and 157: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-dewinter-132-157.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #959: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-12-ozden-959.md) | dated review record | record | retained | — |

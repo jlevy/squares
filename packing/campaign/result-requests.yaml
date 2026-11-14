@@ -33489,8 +33489,15 @@ issues:
       accept the witness and refuse its gross and sharp controls; measured, it is a new
       arrangement relative to T-174's packing, not one to one with it under any symmetry, 55
       squares beyond a tenth. T-174's contraction margin is 0, so the gain lies wholly outside
-      its padding. The ledger of 14 November records it. The stage 4 review is a separate
-      lane, blind to this one (think-gabn). Claude Fable 5.2 assistance disclosed.
+      its padding. The ledger of 14 November records it. The 14 November stage 4 review
+      (docs/project/reviews/review-2026-11-14-de-winter-977-979.md, lane L153, think-gabn),
+      written blind in a separate lane, accepts it, nothing blocking or major, and scores it S3;
+      its clean-room checker decided it again, so the entry is confirmed, independently
+      re-implemented, at V3/C3, and the case adopts it at 297 in place of T-174 under the house
+      rule in the pass of 14 November, in the same pull request, with Joost de Winter the
+      packing's finder in the layout of Couzo's packing as Evan Daniel and PingYou Ltd improved
+      it, and both strong generators' regularization of the new house run in the same change.
+      Claude Fable 5.2 assistance disclosed.
     read_through: '2026-11-14T10:13:18Z'
     results:
     - key: n297-double-step
@@ -33504,6 +33511,7 @@ issues:
       evidence:
       - E-de-winter-s297-certificate-report
       - E-de-winter-s297-exact-feasibility
+      - E-de-winter-s297-review-exact-feasibility
     beads:
     - think-g2ax
     - think-gabn
@@ -33535,8 +33543,18 @@ issues:
 
       Measured, 110 squares turn by 44.11 to 44.95 degrees, 61 one way and 49 the other, the
       band of 110 the README counts; T-174 has 107 tilted squares and 190 upright, where the
-      README's counts (a band 2 larger than T-174's) imply 108. The certificate's own
-      contraction margin is 1.824e-59, the 1.8e-59 the README states. The L-step scan finds
+      README's counts (a band 2 larger than T-174's) imply 108; the review's F11 finds the 108
+      with T-174's upright square 207, which closes its band at the top wall, and the block
+      counts 72 against 78 and 95 against 91, as the README says. The certificate's own
+      contraction margin is 1.824e-59, the 1.8e-59 the README states.
+
+      The review's findings are notes but F8, minor, the twin's verified claim with no
+      certificate record (read here with witness-center-basis-unreplayed). Its questions for
+      the author, which hold nothing open: a certificate record or a reported provenance for
+      the twin (F8); a Witness/v2 twin for 332 and 409, or a format line naming the box (F6);
+      whether the left and bottom clearances of 1.5e-60 were deliberate; in what sense the 409
+      row is built from T-174 (F14); the corner square's exact direction (F13); and checkers
+      that raise rather than assert (F15). The L-step scan finds
       that the bound carries to no other count of the corpus; the L step from it lands at 332,
       beyond the horizon, which #979 reports.
   - number: 979
@@ -33560,8 +33578,12 @@ issues:
       the 297 side plus 1 or plus 3, and both maintained exact routes accept both certificates
       and refuse their gross and sharp controls. The ledger of 14 November records both as
       beyond-horizon rows, each superseding the row it is below (Couzo's 02f9690 at 332,
-      Tymchishin's notebook packing at 409) and below Göbel's construction there. Claude Fable
-      5.2 assistance disclosed.
+      Tymchishin's notebook packing at 409) and below Göbel's construction there. The 14
+      November stage 4 review (docs/project/reviews/review-2026-11-14-de-winter-977-979.md, lane
+      L153), written blind in a separate lane, accepts both, nothing blocking or major, finds
+      each the 297 certificate translated by (1, 1) and (3, 3) exactly (F12), and scores them
+      S3 carried from the 297, S2 on their own content; the rows are verified. Claude Fable 5.2
+      assistance disclosed.
     read_through: '2026-11-14T10:41:23Z'
     results:
     - key: above324-from-n297
@@ -33576,8 +33598,9 @@ issues:
         this pass (upper-bounds-977-979-20261114), walked from starts frozen at main da5091505
         with Göbel's construction beside each row, records both as current rows, each
         superseding the row it is below, from both maintained exact routes with the gross and
-        sharp controls as stated in advance (E-de-winter-979-exact-feasibility); assurance
-        stays reported until the stage 4 review is mapped.
+        sharp controls as stated in advance (E-de-winter-979-exact-feasibility) and the stage 4
+        review's clean-room run (E-de-winter-979-review-exact-feasibility), at assurance
+        verified.
       queued: false
       bead: think-g2ax
     beads:
@@ -33605,4 +33628,8 @@ issues:
       from the 297 give 369 its side plus 2, 19.7395, above Göbel's construction there (19 +
       sqrt(2)/2, 19.7071), so no bound; deletions bound counts below each certificate, which no
       report claims, so they have no rows (think-kzme). build.py, verify_exact.py
-      and check_area.py are retained as data and were not run.
+      and check_area.py are retained as data and were not run. The review's F13: the corner
+      square is at 44.999964 degrees, edge direction (803761, 803760)/1136689, not 45; F14: the
+      409 row lies 3.164e-9 above T-174 + 3 and is placed otherwise, so the README's "built in
+      the same way from the record T-174" holds for 332's side only; the 409 gain is
+      9.61732e-4, 3.16e-9 more than the 297 gain.

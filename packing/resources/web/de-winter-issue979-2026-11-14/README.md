@@ -127,6 +127,38 @@ the separating-axis method; neither shares code with the source’s checkers.
 
 So neither gain is a re-certification of a row’s padding, and neither is RV-3 material.
 
+## Stage 4 Review
+
+The stage 4 review of 14 November 2026
+([review-2026-11-14-de-winter-977-979.md](../../../../docs/project/reviews/review-2026-11-14-de-winter-977-979.md),
+lane L153), written in a separate lane blind to this one throughout, accepts both
+certificates, nothing blocking or major; the
+[s297 packet](../de-winter-s297-upper-bound-2026-11-14/README.md#stage-4-review) gives its
+method and its questions for the author.
+
+- **Feasibility.** Its clean-room checker decides both files, every square, wall and all
+  54,946 and 83,436 pairs, by two exact methods: 35 and 302 pairs touch, all among the
+  added squares, none overlaps, and the least positive pair margin is the 297’s, at
+  squares 232 and 237. Its 18 controls a count, stated beforehand, came out as stated,
+  among them the squares accepted in the box of each claim’s own side.
+- **The constructions (F12).** Squares 1 to 297 are the 297 certificate translated by
+  (1, 1) and (3, 3) exactly, the sides exactly the 297 side plus 1 and plus 3, and the
+  added squares as the README describes.
+- **The corner square (F13)** is at 44.999964 degrees, edge direction
+  (803761, 803760)/1136689, not 45.
+- **The 409 row (F14)** lies 3.164 × 10⁻⁹ above T-174 + 3 and its squares are placed
+  otherwise (262 beyond a tenth under the best assignment), so the README’s “built in the
+  same way from the record T-174” holds for 332’s side only; the 409 gain is
+  9.6173242 × 10⁻⁴, 3.16 × 10⁻⁹ more than the 297 gain.
+- **Padding (F10).** The rows’ margins are 1.874 × 10⁻¹⁹ and 1.546 × 10⁻⁹, as measured
+  here; RV-3 does not apply.
+- **Significance.** S3 carried from the 297 by the register’s rule for derived bounds,
+  S2 on their own content; rows beyond the horizon are no register entries, so the score
+  bears on the import’s label only.
+
+Both rows are verified from the replay, E-de-winter-979-exact-feasibility, and the
+review’s clean-room run, E-de-winter-979-review-exact-feasibility.
+
 ## What Is Not Established
 
 - **Optimality** of any kind at either count.

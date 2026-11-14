@@ -2587,6 +2587,39 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-299": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#977](https://github.com/jlevy/squares/issues/977)",
+        producer_route=False,
+        ai=(
+            "The issue and the source’s README say the construction, optimization, "
+            "high-precision solution, rational certificate, checks and figures were produced "
+            "with Claude Fable 5.2 (Anthropic) under Joost de Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the packing keeps the layout of T-174’s packing, Francisco "
+            "Couzo’s as Evan Daniel and PingYou Ltd improved it: two blocks of axis-aligned "
+            "squares with staircase edges, two corner blocks of 10 and a diagonal band of 18 "
+            "columns of tilted squares. Two things are new: each staircase has two steps of "
+            "double size, taken from the staircases of his own pinwheels at 132 and 157, "
+            "between which the band lies one step closer to the upper left block, and the "
+            "band’s columns change their lean once, where T-174’s change three times. Against "
+            "T-174’s packing, this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 55 squares beyond a tenth, at most 0.700; its 110 tilted squares "
+            "lean 61 one way and 49 the other. So Joost de Winter is the packing’s finder, in "
+            "Couzo’s layout, below the record it improves, as the issue asks."
+        ),
+        third_route=(
+            ", and the 14 November review’s clean-room checker, frozen before any producer "
+            "or witness code was read, decided it and its Witness/v2 twin again by separating "
+            "axes in integers and by exact clipped areas in GMP rationals over every square, "
+            "wall and pair; its 19 controls, each stated beforehand, were each decided as "
+            "stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -3236,13 +3269,17 @@ CREDITS: dict[int, Credit] = {
         "multi-gadget fault DP",
     ),
     295: _exact_form(XU, (DANIEL, PINGYOU), "his display regularization of Ryan Xu’s"),
-    # T-174's regularization of T-098's packing, 119 squares moved beyond 1e-3, one to
-    # one; that it is that packing is the source's statement (the 14 October review of PR
-    # 574).
+    # T-299 (adopted in the pass of 14 November 2026), Joost de Winter's issue 977: the layout
+    # of T-174's packing, Francisco Couzo's as Evan Daniel and PingYou Ltd improved it, with a
+    # double step in each staircase taken from his own 132 and 157 pinwheels and the band's
+    # lean changing direction once; a new arrangement relative to T-174's packing, 55
+    # squares beyond a tenth. The issue asks that it be credited to him as a packing that
+    # builds on T-174, so the phrase names the layout's finder and its improvers.
     297: Credit(
-        (COUZO,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s packing with a double step in each staircase of Francisco Couzo’s "
+        "layout, below Couzo’s packing as Evan Daniel and PingYou Ltd improved it",
     ),
     # T-263 (adopted on 4 November 2026), Doğa Özden's further arrangement of issue 893 of
     # T-258's packing, one to one with it under the identity (the 4 November review): the

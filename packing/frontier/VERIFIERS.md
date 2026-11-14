@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **260** programs: **57** external and **203** first-party; **177** decide claims and **83** check premises.
-- **756** of **971** evidence entries name the programs that verified them: 361 independently re-implemented, 321 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **261** programs: **57** external and **204** first-party; **178** decide claims and **83** check premises.
+- **758** of **973** evidence entries name the programs that verified them: 363 independently re-implemented, 321 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -292,6 +292,7 @@ second implementation agrees.
 | [`V-ozden-960-review-check`](#v-ozden-960-review-check) | l109_check.py with l109_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-ozden-962-review-check`](#v-ozden-962-review-check) | l117_check.py with l117_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-ozden-967-review-check`](#v-ozden-967-review-check) | l127_check.py with l127_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-de-winter-977-979-review-check`](#v-de-winter-977-979-review-check) | l153_check.py with l153_reader.py | Squares Project (Levy) | first-party | decides | 2 | 1 |
 
 ## By Program
 
@@ -5279,6 +5280,23 @@ The 12 November stage 4 review's exact checker of Doğa Özden's rational corner
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-ozden-967-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 269: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-297 |
+
+### `V-de-winter-977-979-review-check`
+
+**l153_check.py with l153_reader.py, l153_sat.py, l153_clip.py and l153_geom.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 14 November stage 4 review's exact checker of Joost de Winter's rational centre-basis certificates of issues 977 (297) and 979 (332 and 409), with a strict reader of its own (l153_reader.py: the JSON's five keys only, every scalar a canonical integer or p/q in lowest terms, floats, constants and duplicate keys refused; for 297 the Witness/v2 twin held to the same n, side and squares, with anchors, aliases, tags, keys outside the schema and any other resolved type refused): every square a unit square, every wall and every pair twice with no distance filter, by separating axes over the four edge normals in Python integers over per-square denominators (l153_sat.py, method A) and by exact convex clipping of the corners in gmpy2.mpq, each square a unit square by its sides and diagonals, each pair and each wall classed by the intersection exactly and containment decided by area (l153_clip.py, method B), each pair classed overlapping, touching or apart by both. l153_geom.py holds the exact constructions the self-test and controls use; l153_controls.py decides 55 controls stated in a plan hashed before it existed; l153_selftest.py holds both methods and the reader to 7,720 cases.
+
+- Source: [`packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_check.py`](../../packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_check.py), [`packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_reader.py`](../../packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_reader.py), [`packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_sat.py`](../../packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_sat.py), [`packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_clip.py`](../../packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_clip.py), [`packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_geom.py`](../../packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_geom.py), [`packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_selftest.py`](../../packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_selftest.py), [`packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_controls.py`](../../packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_controls.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/de-winter-977-979-review-2026-11-14/README.md`](../../packing/resources/web/de-winter-977-979-review-2026-11-14/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issues 977 and 979 (L153, under think-gabn), strong tier, prompted separately from the import lane (L154, think-g2ax)), with its own prompt and code; authorship in common with the producer’s: system-family, The issues say the construction, the certificates and the author's two checkers were produced with Claude Fable 5.2 (Anthropic) under Joost de Winter's direction. The six checker files were frozen at 2026-11-14T11:11:08Z (frozen/checker-frozen-digests.txt), before their author read the author's README, checkers or build script, or this repository's witness, verifier or promotion code; they import nothing from this repository or the source and reuse no code of any earlier review, lane L127's review of #967, the model for its method, among them, whose programs it did not open.
+- Note: Written and run on 14 November 2026 for docs/project/reviews/review-2026-11-14-de-winter-977-979.md (SHA-256 02bfdf2ee535d66ae57930f301213348b4694c6a1fc179cb610d79289562eada for l153_check.py, as frozen at 2026-11-14T11:11:08Z), and kept with its receipts in the review-only directory de-winter-977-979-review-2026-11-14 beside the import lane's packets. l153_plan_facts.py, l153_make_plan.py, l153_describe.py, l153_sides.py, l153_lineage.py, l153_construct.py, l153_closedform.py, l153_custody.py and l153_digests.py, kept beside them, decide no certificate and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-s297-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 297 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-299 |
+| `E-de-winter-979-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the two certificates the source's beyond-horizon rows state: every square, every wall and every pair, by two exact methods that share only the reader, with the stated controls decided by both | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

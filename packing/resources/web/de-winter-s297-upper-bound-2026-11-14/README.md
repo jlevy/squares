@@ -23,7 +23,8 @@ The head, `c70defa` (10:39:38Z), adds `above324_from_n297/`, which
 [de-winter-issue979-2026-11-14](../de-winter-issue979-2026-11-14/README.md) packet retains.
 
 Intake lane L154 (think-g2ax) retained it, replayed it and registered it on 14 November
-2026 as **T-299**.
+2026 as **T-299**. The blind stage 4 review of lane L153 accepted it the same day, so it
+is at V3/C3, and the case adopted it as its house in place of T-174 under the house rule.
 
 ## What the Source Claims
 
@@ -173,9 +174,82 @@ at 332, beyond the horizon, at this side plus one: that is #979’s 332, a certi
 [issue 979 packet](../de-winter-issue979-2026-11-14/README.md) retains and the record
 holds as a beyond-horizon row.
 
+## Stage 4 Review
+
+The stage 4 review of 14 November 2026
+([review-2026-11-14-de-winter-977-979.md](../../../../docs/project/reviews/review-2026-11-14-de-winter-977-979.md),
+lane L153, under think-gabn), written in a separate lane blind to this one throughout,
+accepts this certificate and #979’s two, nothing blocking or major. Its programs and
+receipts are in the review-only directory
+[de-winter-977-979-review-2026-11-14](../de-winter-977-979-review-2026-11-14/README.md).
+
+- **Feasibility.** Its clean-room checker decides the JSON and the Witness/v2 twin,
+  every square, wall and all 43,956 pairs, by separating axes in Python integers and by
+  exact clipped areas in `gmpy2.mpq`, with no distance filter: 33 wall contacts (16 top,
+  17 right), the left and bottom cleared by exactly 1.5 × 10⁻⁶⁰, no pair touching, and
+  the least pair margin 10⁻⁶⁰ less about 10⁻²⁵⁰, at squares 232 and 237. Its 19 controls
+  at 297, stated beforehand, came out as stated, among them the squares accepted in the
+  box of side 17.739455558289 itself and refused in the box of its 12-place floor (F5),
+  and the rotation read the other way refused for 112 overlapping pairs.
+- **Against this lane.** Read against this packet’s receipts once both were done, its
+  least pair margin, wall contacts and near-wall clearance are the replay’s exactly, and
+  its contraction receipts (T-174’s margin 0 at squares 274 and 292; this certificate’s
+  1.824 × 10⁻⁵⁹ at squares 232 and 237) and identity against T-174 (55 squares beyond a
+  tenth, largest 0.700; 11 turned and 34 reversed by box centres) equal
+  [measure/](measure/)’s. The 409 sharp controls of the issue 979 packet were still running
+  when the review was read; nothing else here ran after it.
+- **The lineage (F11).** The README’s counts hold: the upper-left block has 72 squares
+  against T-174’s 78, the lower-right 95 against 91, and the band 110 against 108,
+  counting T-174’s upright square 207 at the top wall, which closes its band and belongs
+  to neither block; 89 band squares lean by 0.375 degrees against T-174’s 98 at 0.260,
+  and the lean changes direction once against three times. That is the band of 108 this
+  packet’s own tilt count left open.
+- **The arithmetic (F9, F10).** The claim is the side’s 12-place ceiling, the gain
+  9.6173 × 10⁻⁴; no padding is reached, and RV-3 does not apply. The README’s 250-digit
+  solution lies 1.824 × 10⁻⁵⁹ below the side, and its next near contact, 2.103 × 10⁻⁷
+  (squares 246 and 253), is the review’s next pair after the 794 below 10⁻³⁰. No
+  s(m) + k closed form lies within 10⁻⁹.
+- **The twin (F8, minor).** The review’s one finding above a note is the twin’s verified
+  claim with no certificate record, which this repository’s loader refuses; this packet
+  reads the twin with `witness-center-basis-unreplayed`, and the review read the JSON.
+- **Notes for the author.** F6 (the JSON names no box), F13 and F14 (at 409, below), and
+  F15: both checkers decide by `assert`, which `python -O` removes.
+
+### Questions for the Author
+
+The review’s questions, informational and holding nothing open:
+
+1. Would you add a `certificate` record to `n297_witness.yaml`, or set its
+   `coordinate_provenance` to `reported`, so that this repository’s witness reader
+   accepts it (F8)?
+2. Would you add Witness/v2 twins for 332 and 409, or name the box and its origin in the
+   JSON `format` line (F6)?
+3. The left and bottom walls of the 297 box are cleared by 1.5 × 10⁻⁶⁰ rather than
+   touched, while the top and right are touched. Was that deliberate?
+4. In what sense is the recorded value at 409 “built in the same way from the record
+   T-174”, when its side lies 3.16 × 10⁻⁹ above T-174 + 3 and its squares are placed
+   otherwise (F14)?
+5. Would you say “about 45°” for the corner square at 409, or give its exact direction
+   (F13)?
+6. Would you make both checkers raise rather than `assert` (F15)?
+
 ## The Register
 
-REGISTER-PLACEHOLDER
+T-299 records the claim at V3/C3, S3, as the stage 4 review confirmed. The case adopted
+it as its house in the pass of 14 November 2026 under the house rule, in place of T-174,
+which keeps its certificate as history and still houses other counts, with Joost de
+Winter the packing’s finder in the layout of Francisco Couzo’s packing as Evan Daniel and
+PingYou Ltd improved it. Both strong generators ran on the new
+witness ([the runs](../../../cases/regularized_drawings/think-g2ax-2026-11-14/README.md)):
+the picture is grid-slack’s 0.5-degree view, admitted at row 10, with no light, uneven or
+near-axis square and 17 angle classes, as the axis tool’s view has, and more full shared
+sides (774 and 904 against 728 and 886), mirrored across the falling diagonal by the flip
+record. Evan Daniel’s driver refused its same-side view; its certified KKT solve lies
+1.824 × 10⁻⁵⁹ below the side, the certificate’s own margin, and its solved view,
+1.77 × 10⁻¹⁹ above it, is held at row 4, so there is no register candidate (RV-3). The
+settlement of 297 on T-174’s witness lapsed with the adoption. The rigidity block,
+derived again on the new witness, stays not rigid: 62 of its 297 squares translate,
+against 41 of T-174’s.
 
 ## What Is Not Established
 

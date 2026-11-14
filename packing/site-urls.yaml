@@ -24494,6 +24494,7 @@ urls:
     evidence:
     - E-de-winter-s297-certificate-report
     - E-de-winter-s297-exact-feasibility
+    - E-de-winter-s297-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/README.md
     - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/acquisition/claims.json
@@ -24509,6 +24510,12 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-14-de-winter-977-979.md
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/README.md
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/check-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/controls-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/lineage-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/sides.json
 - path: results.html
   canonical: results.html
   kind: page

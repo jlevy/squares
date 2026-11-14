@@ -2484,8 +2484,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # issue 947 packet (T-290), which held nothing else: one source more and one fewer, with
     # no new name. Lane L132 draws 269 from Özden's issue 967 packet (T-297) instead of his
     # issue 962 packet, which held nothing else: one source more and one fewer, with no new
-    # name.
-    assert len(expected_sources) == 43
+    # name. Lane L154 of 14 November draws 297 from Joost de Winter's issue 977 packet
+    # (T-299), one more source with no new name; PingYou Ltd's PR 574 certificates still
+    # hold other counts.
+    assert len(expected_sources) == 44
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
