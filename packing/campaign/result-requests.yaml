@@ -33404,7 +33404,7 @@ issues:
       where the family is a second route, and Evan Daniel's k^2 - 4 family T-081, the level
       at which T-298's significance is drafted, S4; none is this issue's result, and none is
       recorded under reported. As posted it named none of the six evidence ids; at
-      07:26:34Z the coordinator edited it to add a Record ids paragraph, marked as an edit,
+      07:26:34Z it was edited to add a Record ids paragraph, marked as an edit,
       that names all six with the states the record gives them: the three reports
       (E-khalili-973-k2m5-family-report, E-khalili-973-valid11-report and
       E-khalili-973-lean-report) reviewed, E-khalili-973-review-partial-checks confirmed,
@@ -33441,7 +33441,7 @@ issues:
       not the first. It says that the review ran at a lower model tier than the runbook asks
       for stage 4. It reports two small discrepancies, neither affecting soundness: the
       ctl_rise control's cell counts (the paper's 6,079 processed and 1,190 refused; the
-      review's run to its 20,083-cell cap, 3,819 refused; the import lane's run to a
+      review's run to its cap, 20,083 cells, 3,819 refused; the import lane's run to a
       2,000-cell cap, 443 refused, 83 of them only at the cap), and the root-9632 dump
       listing all 6,850 boxes only with --uncert-cap 100000000, which the release does not
       record, and stopping at 226 boxes at the default cap of 200.
