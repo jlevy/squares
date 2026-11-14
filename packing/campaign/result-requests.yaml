@@ -33250,15 +33250,18 @@ issues:
       qx2_zm.py on root 9632, and by the authors' Tight-Tile Lemma on the 75 roots where zmx2
       stalls at wall tiles of mass exactly one (323 jobs, about 2.75 million cells, 1,255,023
       leftover boxes covered), with checker controls. Triaged, retained and registered on 14
-      November 2026 in lane L145 (think-2vgx) as T-298, a reported family at V0/C0, scored
+      November 2026 in lane L145 (think-2vgx) as T-298, a reported family at V0/C1, scored
       S4 as a claim: new to this record are k = 11 to 18 (n = 116 to 319), whose reported
       lanes move to k and verified lanes stay; n = 95 is already proved by Greff's T-191. The
       source's fast verify.sh passed on the retained bytes, and zmx2 cert0 and 30 of the 55
       columns, root 9632 whole with both checkers, 26 tight-tile jobs and the source's
       controls re-ran, each equal to the source's records, in about 2.5 CPU-hours. The full
-      replay (about 140 CPU-hours here, up to about 320, nearly all of it the tight-tile jobs) and the Lean
-      build are priced and held for the owner (think-0h7r). The stage 4 review runs blind in
-      lane L144 (think-h10k). The authors state AI assistance (Claude, Anthropic) and build on
+      replay (about 145 CPU-hours here, up to about 320, nearly all of it the tight-tile jobs)
+      and the Lean build are priced and held for the owner (think-0h7r). The stage 4 review,
+      written blind in lane L144 (think-h10k), accepted the claim chain with no blocking defect
+      and two major findings for the record: zmx2's area-density and first-order lemmas are
+      unreviewed here (F1, a review held on think-kn13) and the Tight-Tile Lemma has one
+      implementation and no full replay (F2); mapped, it puts T-298 at C1. The authors state AI assistance (Claude, Anthropic) and build on
       Evan Daniel's linear program, format, checkers and Lean reduction.
     read_through: '2026-11-14T01:33:59Z'
     results:
@@ -33272,7 +33275,7 @@ issues:
       - T-298
       validation:
       - think-0h7r
-      - think-h10k
+      - think-kn13
       evidence:
       - E-khalili-973-k2m5-family-report
       - E-khalili-973-valid11-report
@@ -33281,6 +33284,7 @@ issues:
     - think-2vgx
     - think-0h7r
     - think-h10k
+    - think-kn13
     answer_bead: think-2vgx
     replies: []
     close_when: >-
@@ -33321,10 +33325,25 @@ issues:
       9632 done), and the Lean build, a few CPU-hours and about 10 GB of disk, are held for
       the owner on think-0h7r.
 
-      The draft reply, owed once the pull request carrying T-298 has merged and the review
-      has landed, acknowledges the registration, states T-298 at its rungs as a report, asks
-      the nine questions of the packet README (the dump's command; crop_cover.py; the Lemma Z
-      and axis-check runs; the two missing Tight-Tile controls; the licence file; the patch
-      step's || true; the whole Lean build log; the Zenodo record; and which run_tt.py wrote
-      the recorded tight-tile outputs), and says that the full replay is priced and held
-      (think-0h7r). No reply has been posted.
+      The stage 4 review (docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md,
+      L144, merged into this branch at f58b34b7b) accepted the argument as written with no
+      blocking defect: the mass, Lemma 7 (using that every piece is an elementary 1/10 piece,
+      F5), the Lean statement, the theta = 0 face, the coverage and root 9632's closure, each
+      decided clean-room, and the Tight-Tile Lemma re-derived and its code read. Its replays
+      agree with the import lane's wherever both ran. It found eight new counts, not nine,
+      since n = 95 is T-191's, and priced a full replay at about 145 to 180 CPU-hours, with the
+      Lean build on a host with at least 24 GB; T-298 records about 145, up to 320. Its F1 is
+      held on think-kn13 and its price in think-0h7r; its F3 and F8 agree with the import
+      lane's own findings.
+
+      The draft reply, owed once the pull request carrying T-298 has merged, acknowledges the
+      registration, states T-298 at V0/C1 as a reported family, summarises the review (no
+      blocking defect, F1 and F2), says that the full replay is priced and held (think-0h7r)
+      and the lemma review held (think-kn13), and asks the questions of the review (its
+      section 12: the per-root zmx2 logs, the run_tt.py revision and K, run_cov.sh as run,
+      the separate agent's review of the Tight-Tile Lemma, any review of Lemmas U and V,
+      elementary pieces in Lemma 7, and the Python, numpy and scipy versions with the ctl_rise
+      log) merged with the packet README's (the dump's --uncert-cap, crop_cover.py, the
+      Lemma Z and axis-check runs, the two missing Tight-Tile controls, the licence file, the
+      patch step's || true, the whole Lean build log and the Zenodo record). No reply has
+      been posted.

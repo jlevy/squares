@@ -61925,6 +61925,25 @@ evidence:
       exactly, D > 5/4, its D4 invariance and its agreement with the family file, and the
       locality check on the built boards k = 10, 12, 13 and 20, each exact (receipts in the
       packet). Lemma 7 itself was not re-derived here.
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        Claude (AI review), strong sub-agent tier, the stage 4 mathematical review lane L144
+        of issue 973 (think-h10k), separately prompted and sharing no context with the
+        import lane (docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md)
+      note: >-
+        Accepted as reviewed, no blocking defect. Its clean-room programs re-derived the
+        board's total 121 - 4D and D, its D4 invariance as a measure, the family built into
+        mu_k by Definition 3 (equal to the board at k = 11, total k^2 - 4D for k = 10 to 40)
+        and Lemma 7's premises and window identity for six values of k; the proof of Lemma
+        7 holds, using that every piece is an elementary 1/10 piece, which the paper does
+        not say (F5). The base cases stand at T-252, T-066 and T-184, and n = 95 at T-191,
+        so the family newly decides eight counts, k = 11 to 18. Two major findings for the
+        record: zmx2's area-density Lemmas 1 to 3, K and K(d) and its first-order Lemmas U
+        and V, which decide the 12,024 general-position roots, have no review here (F1);
+        and the Tight-Tile Lemma, sound as an argument and as code read, has one
+        implementation and no full replay (F2).
     source_reviewed: '2026-11-14'
 
   - id: E-khalili-973-valid11-report
@@ -61983,6 +62002,29 @@ evidence:
       which verify.sh --full does not regenerate either, and the other tight-tile jobs, priced
       with the Lean build in think-0h7r; nor have zmx2's first-order mode and area density,
       been reviewed here.
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        Claude (AI review), strong sub-agent tier, the stage 4 mathematical review lane L144
+        of issue 973 (think-h10k), separately prompted and sharing no context with the
+        import lane (docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md)
+      note: >-
+        Accepted as reviewed, no blocking defect, with two major findings for the record.
+        Decided here clean-room and in full: the theta = 0 face without symmetry (least
+        one-sided limit exactly 1, at 3,000 of 40,000 corners), the coverage step (all
+        1,255,023 leftover boxes in the Tight-Tile Lemma's domain, every needed job
+        certified chart by chart) and root 9632's closure. Replayed with the producer's
+        code on pre-stated samples: zmx2 cert0 both ways, columns 29, 30 and 48, 40 random
+        roots, root 9632 and three tight-tile roots box for box, qx2_zm.py on the 9632
+        window, 8 Tight-Tile jobs and the wedge-corner rerun chart for chart; exact probes
+        found no pose below 1 in 41,268 and no certified bound above the exact mass. The
+        Tight-Tile Lemma's proof was re-derived and its code read in full. F1: zmx2's
+        area-density and first-order lemmas, on which the 12,024 roots rest, have no review
+        here; F2: the Tight-Tile Lemma has one implementation and no full replay. Minor:
+        325 of 326 Tight-Tile outputs lack the K field the shipped run_tt.py prints (F3);
+        the sweep's per-root logs are not released (F4); the ctl_rise control's cell counts
+        do not reproduce, though it refuses where it must (F8).
     source_reviewed: '2026-11-14'
 
   - id: E-khalili-973-lean-report
@@ -62018,4 +62060,86 @@ evidence:
       Nothing was built here: the toolchain and Mathlib cache need about 10 GB of disk, and
       the source reports about 6 GB of memory for each kernel-check module; the build is
       priced in think-0h7r.
+    external_review:
+      state: informally-verified
+      date: '2026-11-14'
+      reviewed_by: >-
+        Claude (AI review), strong sub-agent tier, the stage 4 mathematical review lane L144
+        of issue 973 (think-h10k), separately prompted and sharing no context with the
+        import lane (docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md)
+      note: >-
+        Accepted as reviewed: k2m5_of_valid11 states the reduction with Valid11 about the
+        board file verbatim (the review's parser found InstData equal to the board's 13,244
+        segment lines, polygon and weight) and minSide as Daniel's S32.lean defines it,
+        byte-identical to the record's copies; no file of lean/K2m5 holds sorry,
+        native_decide, implemented_by, extern, unsafe, axiom or admit. Not built (F6): the
+        precedent needed about 13 GB resident and 9.6 GB of swap, and the review's host had
+        15 GB and none.
+    source_reviewed: '2026-11-14'
+
+  - id: E-khalili-973-review-partial-checks
+    claim: derived-structure
+    scope: {n_values: [95, 116, 139, 164, 191, 220, 251, 284, 319]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    certificate: packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/certificate/sol_exact_box11.txt.gz
+    replay: >-
+      From packing/, with the source staged at 2c0b1b9: .venv/bin/python3 -I
+      resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_cover.py,
+      k2m5_axis.py, k2m5_coverage.py and closure_9632.py, as that packet's README gives them;
+      their outputs and digests are frozen in its receipts/freeze.sha256.
+    replay_status: passed
+    verifiers: [V-khalili-973-review-check]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the six parts the review's exact programs decide: the board's mass, D and D4
+          invariance with the family build; Lemma 7's premises and window identity at k = 10,
+          12, 13, 14, 20 and 25; the theta = 0 face; the coverage of the 75 tight-tile roots'
+          1,255,023 leftover boxes; and root 9632's closure, each in full. Not Valid11: the
+          12,024 general-position roots and the Tight-Tile cells are outside the unit
+        checked: 6
+        of: 6
+      read:
+      - mathematics
+      - proof-text
+      - certificate-format
+      - producer-code
+      - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issue 973 (L144, think-h10k), strong tier,
+          reasoning setting not recorded
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source says Claude produced its search, certificate, Tight-Tile checker and
+          verification runs. The programs import no code of the source or of
+          evand/square-packing, but the lane read the source's verification and Tight-Tile
+          code in full during the review, and its README does not record that the programs
+          were frozen before that reading.
+    independence_record: packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md
+    limitations: >-
+      What the 14 November stage 4 review's clean-room programs decide in full, not the
+      bound: the board's exact total 121 - 4D, D = 1340566927759/10^12 and D4 invariance;
+      the family built into mu_k equal to the board at k = 11 with total k^2 - 4D for k = 10
+      to 40; Lemma 7's premises and window identity for k = 10, 12, 13, 14, 20 and 25; the
+      whole theta = 0 face of mu_11, least one-sided limit exactly 1, with no symmetry used;
+      that all 1,255,023 boxes zmx2 leaves in the 75 tight-tile roots lie in the Tight-Tile
+      Lemma's domain with every needed job certified; and root 9632's closure from the two
+      checkers' outputs. It decides none of the 12,024 general-position roots and no
+      Tight-Tile cell, so Valid11 is not decided here and no lower bound rests on this
+      entry. Written by a Claude agent, the system family the source's work used.
     source_reviewed: '2026-11-14'

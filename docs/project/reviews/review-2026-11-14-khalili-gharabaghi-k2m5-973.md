@@ -715,75 +715,13 @@ is none to compare.
 
 ## 13. For the Records Lane
 
-Read after the freeze: the register entries of `T-064`, `T-066`, `T-081`, `T-184`,
-`T-191` and `T-252` in `results.yaml`, `n-095.md`, the frontier records of the nine
-counts, and the 16 October review of Greff’s `s(76)` and `s(95)` covers.
-
-Read before it, as the brief’s models or for the checkers’ history:
-
-- the 3 October claim-chain review of `T-081`, which is about `k² − 4`;
-- the 31 October review of the authors’ `s(44)` cover (`T-252`), for `zmx2`’s state at
-  `e2bb84e9`;
-- the 3 November review of Özden’s `s(94)`, for form;
-- the `evidence.yaml` note and the 4 October evand packet’s README on `ZMX2_AREA.md`.
-
-**The base cases stand at their entries.**
-
-| k | n | Entry | Rung |
-| --- | --- | --- | --- |
-| 7 | 44 | `T-252`: the authors’ own mixed cover | V3/C3 |
-| 8 | 59 | `T-066`: Hosono’s | V3/C3 |
-| 9 | 76 | `T-184`: Greff’s | V3/C3 |
-
-The source’s table says the same.
-
-**k = 10.** `s(95) = 10` is already `T-191`, Greff’s cover, at V3/C3, as the paper says.
-The family is a second route there, through `Valid11`.
-
-**The counts the family newly decides.** At `n ≤ 324` they are `n = 116, 139, 164, 191,
-220, 251, 284` and `319` (k = 11 to 18). Each is open in the record.
-`n-116.md`, for one, holds the grid’s upper bound 11 against Hosono’s counting lower
-bound `10.9113`. With `n = 95` already proved, eight counts are new, not nine.
-
-**Second routes by monotonicity.** Since `s` is nondecreasing, `s(k² − 5) = k` gives
-`s(k² − a) = k` for `a = 1` to 4. At `k = 10` to 18 that is a second route to `T-081`’s
-instances `n = 96, 117, …, 320`, which stand at V0/C1 until `ValidTilt9`’s full replay,
-and a further route to `T-064`’s (V3/C3). These routes are only as good as `Valid11`’s
-own replay and review.
-
-**Against `T-081`’s method.** The structure is Daniel’s, at a finer grid:
-
-|  | `T-081` (`k² − 4`) | This family (`k² − 5`) |
-| --- | --- | --- |
-| Corner module and band depth | `R = 3` | `R = 4` |
-| Grid pitch | 1/5 | 1/10 |
-| Lebesgue square starts at | 14/5 | 19/5 |
-| Board | box 9 | box 11 |
-| D | about 1.074 | about 1.341 |
-
-The Lean is `BentzFam.lean`’s reduction ported to the 1/10 grid.
-The difference is in the finite statement’s checker.
-`T-081`’s `ValidTilt9` is decided by the exact `qx2_zm.py`; the 3 October review
-recorded that `zmx2` left 4,844 tiny-tilt boxes on box 9 and so was not a second route
-there. Here `zmx2` with `--first-order` and area densities decides 12,024 roots, and the
-Tight-Tile Lemma closes what it leaves at the tight tiles.
-That is the new step, and its two new trust points are F1 and F2.
-
-**Against the 16 October review.** That review ran `zmx2` on covers with no polygon and
-no `--first-order`. It trusted Lemmas P, C, M, S, Z, W, H, T, E, DP and R, the ones the
-record re-derived for `6b7f0f79`. So it does not reach the area and first-order lemmas
-this claim uses, and F1 stands after reading it.
-
-Its framing section says Greff’s covers carry nothing to another k “without a lemma for
-the inserted band”. This source supplies such a lemma for its own family, as Lemma 7 and
-in Lean, and it holds (§3.3).
-
-The 16 October review’s practice of exact poses at every uncertified box and germ, and
-of mutants each shown invalid at an exhibited pose, is the one followed here (S4, M-1,
-M-3).
-
-**Earlier reviews of this claim.** None was on `main` when this lane started, so there
-is none to compare.S-LANE
+*Records lane L145, 14 November 2026, on mapping this review:* this section, as the
+review lane committed it at `f58b34b7b`, repeated §11 word for word and ended in a stray
+token, `S-LANE`; the repetition is removed here, and nothing else in the review is
+changed. The records lane mapped the review from §§2, 8, 9, 11 and 12: it is recorded as
+the `external_review` of `T-298`’s three report entries and in `T-298`’s `reviews`, its
+clean-room programs as `V-khalili-973-review-check`, and what they decide in full as
+`E-khalili-973-review-partial-checks`. Its price (§9) and F1 are in `think-0h7r`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

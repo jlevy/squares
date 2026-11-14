@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **259** programs: **57** external and **202** first-party; **176** decide claims and **83** check premises.
-- **751** of **964** evidence entries name the programs that verified them: 358 independently re-implemented, 319 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **260** programs: **57** external and **203** first-party; **177** decide claims and **83** check premises.
+- **752** of **965** evidence entries name the programs that verified them: 359 independently re-implemented, 319 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -154,6 +154,7 @@ second implementation agrees.
 | [`V-couzo-670-672-675-review-check`](#v-couzo-670-672-675-review-check) | review_0nse_check.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
 | [`V-mishapolk-719-review-check`](#v-mishapolk-719-review-check) | review_t229_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-evand-gradec-review-check`](#v-evand-gradec-review-check) | check_theorem_c.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-khalili-973-review-check`](#v-khalili-973-review-check) | k2m5_cover.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-ozden-890-review-premises`](#v-ozden-890-review-premises) | dm_premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-ozden-890-review-controls`](#v-ozden-890-review-controls) | dm_mutants.py and dm_selftest.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-ozden-890-review-compare`](#v-ozden-890-review-compare) | dm_compare.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
@@ -2710,6 +2711,22 @@ For Evan Daniel's grade-C configurations, decides exactly in Q[t]/f, with signs 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-gradec-local-minima-233-review-check` | replayed here | independently re-implemented after reading the producer’s code | full: the 233 configurations the release's grade-C archive certifies, each decided in full: the record's packing property, every kept row, the multipliers, null L0 and the flat family, the affine null vectors and the reduced Hessian | T-261 |
+
+### `V-khalili-973-review-check`
+
+**k2m5_cover.py, k2m5_axis.py, k2m5_coverage.py and closure_9632.py, with k2m5_exact.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 14 November stage 4 review's exact programs for Khalili and Gharabaghi's k^2 - 5 family (issue 973): the board's total, D and D4 invariance and the family built by Definition 3 with Lemma 7's premises and window identity (k2m5_cover.py); the whole theta = 0 face by one-sided corner limits on every 1/10 cell, no symmetry used (k2m5_axis.py); every leftover zmx2 box of the 75 tight-tile roots against the Tight-Tile Lemma's domain and the jobs it needs (k2m5_coverage.py); root 9632's closure from the two checkers' outputs (closure_9632.py); and exact mass of a rational pose by clipping in Fractions (k2m5_exact.py), with which the review probed poses, zmx2's tightest leaves and the Tight-Tile bound's cell vertices.
+
+- Source: [`packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_cover.py`](../../packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_cover.py), [`packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_axis.py`](../../packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_axis.py), [`packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_coverage.py`](../../packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_coverage.py), [`packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/closure_9632.py`](../../packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/closure_9632.py), [`packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_exact.py`](../../packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md`](../../packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 973 (L144, think-h10k), strong tier, reasoning setting not recorded, prompted separately from the import lane (L145, think-2vgx)), with its own prompt and code; authorship in common with the producer’s: system-family, The source says Claude produced its search, certificate, Tight-Tile checker and verification runs. The programs were written from the paper's statements and import no code of the source or of evand/square-packing, but the review lane read the source's verification and Tight-Tile code in full as part of the review, and its README does not record that the programs were frozen before that reading, so the record does not call them clean-room. They were frozen with their outputs at 2026-11-14T04:41:26Z (receipts/freeze.sha256), before the lane read the record's own material on the claim.
+- Note: Written and run on 14 November 2026 for docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md and kept with its outputs in khalili-gharabaghi-k2m5-973-review-2026-11-14 beside the import lane's packet. The lane's other programs (draw_samples.py, make_mutants.py, mutate_cov.py, m3_search.py, submeasure.py, boards_vs_family.py, lean_data_link.py, compare_uncert.py, compare_tt.py, zmx2_leaf_probe.py, tt_region.py, package_outputs.py, freeze.py and run_jobs.sh) draw samples, build mutants, compare runs or drive the source's code, and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-khalili-973-review-partial-checks` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six parts the review's exact programs decide: the board's mass, D and D4 invariance with the family build; Lemma 7's premises and window identity at k = 10, 12, 13, 14, 20 and 25; the theta = 0 face; the coverage of the 75 tight-tile roots' 1,255,023 leftover boxes; and root 9632's closure, each in full. Not Valid11: the 12,024 general-position roots and the Tight-Tile cells are outside the unit | T-298 |
 
 ### `V-ozden-890-review-premises`
 

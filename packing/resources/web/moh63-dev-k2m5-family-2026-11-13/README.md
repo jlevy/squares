@@ -219,13 +219,35 @@ In all, the runs here took about 2.5 CPU-hours.
   and the authors’ exact axis check at 7,717 corners are named in the paper and
   `docs/CHECKING.md`, but neither their programs nor their outputs are in the release;
   only `cert0`’s record is, and it re-ran here.
-- **The mathematics.** The mass lemma, the locality lemma (Lemma 7), the D4 reduction,
-  the Tight-Tile Lemma’s charts, cell certificate and corner zones, and `zmx2`’s
-  first-order mode and area density, which Daniel’s own notes count among his
-  least-reviewed lemmas, are the stage 4 review’s (`think-h10k`). No review here has
-  read `zmx2`’s first-order path before; the reviews of 28 September, 2 October and 31
-  October read its other modes.
+- **The mathematics** is the stage 4 review’s
+  ([The Stage 4 Review](#the-stage-4-review)). `zmx2`’s area-density and first-order
+  lemmas, which Daniel’s own notes count among his least-reviewed, have no review in
+  this record (its F1, held on `think-kn13`); the reviews of 28 September, 2 October and
+  31 October read the checker’s other modes.
 - **The search.** `search/` is not part of the proof and was read, not run.
+
+## The Stage 4 Review
+
+The blind stage 4 review,
+[review-2026-11-14-khalili-gharabaghi-k2m5-973.md](../../../../docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md)
+(lane L144, `think-h10k`, a separately prompted Claude agent at the strong tier that
+shared no context with this lane), with its programs and outputs in
+[`khalili-gharabaghi-k2m5-973-review-2026-11-14/`](../khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md),
+accepts the argument as written with no blocking defect.
+Its clean-room programs decide the mass, the family, Lemma 7’s premises, the whole
+$\theta = 0$ face, the coverage of the 75 tight-tile roots and root 9632’s closure; it
+re-derived the Tight-Tile Lemma and read its code in full, and replayed the source’s
+programs on samples of its own, which agree with this lane’s wherever both ran (`cert0`,
+columns 29 and 30, root 9632, the controls).
+Its two major findings are for the record: F1, `zmx2`’s area-density and first-order
+lemmas, on which the 12,024 general-position roots rest, have no review here; and F2,
+the Tight-Tile Lemma has one implementation and no full replay.
+It found the same missing `K` field (its F3) and the same `ctl_rise` counts that do not
+reproduce (its F8; it ran the mutant to the 20,000-cell cap, this lane to 2,000), and
+seven questions for the authors (its §12), which the reply asks with the nine above.
+Its price is in [The Price of a Full Replay](#the-price-of-a-full-replay).
+Its §13, as committed, repeated §11 and ended in a stray token; this lane removed the
+repetition and said so there.
 
 ## The Price of a Full Replay
 
@@ -240,17 +262,20 @@ measured on the same programs here:
 | Part | Recorded at the source | Here, at the measured speed | Run here |
 | --- | --- | --- | --- |
 | `zmx2` sweep: `cert0` and 55 columns | 45,366 CPU-s (12.6 CPU-h) | about 14.4 CPU-h, at 1.14 times the source’s CPU over the 30 sampled columns | `cert0` and 30 columns, 4,545 CPU-s |
-| The 75 coverage dumps (`tight_tile/run_cov.sh`) | 65,802 CPU-s (18.3 CPU-h) | about 20.9 CPU-h, at the same factor | none |
+| The 75 coverage dumps (`tight_tile/run_cov.sh`) | 65,802 CPU-s (18.3 CPU-h), run six at a time | about 14 CPU-h, at the 0.75 to 0.79 times the stage 4 review measured on three roots; 20.9 at this lane’s sweep factor | none |
 | Root 9632: the dump and `qx2_zm.py` | 1,834 CPU-s | 0.4 CPU-h | all, 1,507 CPU-s |
-| Tight-Tile jobs: 308 and 15, with 3 reruns | 1,007,447 CPU-s (279.8 CPU-h) | about 102 CPU-h at 0.37 times, the factor of the 26 jobs sampled here, all among the cheapest; up to 280 at the source’s own speed, since the largest jobs (up to 66,225 CPU-s) were not sampled | 26 jobs, 252 CPU-s |
+| Tight-Tile jobs: 308 and 15, with 3 reruns | 1,007,447 CPU-s (279.8 CPU-h), run eight at a time | about 102 CPU-h at 0.37 times, the factor of the 26 jobs sampled here, all among the cheapest, or 115 to 150 at the review’s 0.41 to 0.53 over 8 random jobs of at most 120 s; up to 280 at the source’s own speed, since no larger job (up to 66,225 CPU-s) was sampled | 26 jobs, 252 CPU-s |
 | The source’s controls | 3,193 CPU-s for the two whose CPU is recorded | about 0.7 CPU-h | all four, 2,433 CPU-s |
-| The Lean build of `lean/K2m5` | not recorded | a few CPU-hours, an estimate; about 10 GB of disk for the toolchain and Mathlib cache, and about 6 GB of memory for each kernel-check module by the source | none |
-| **All** | about 313 CPU-h with the Lean build | **about 140 CPU-h, up to about 320** | about 2.5 CPU-h |
+| The Lean build of `lean/K2m5` | not recorded | 1 to 2 CPU-hours by the review, on a host with at least 24 GB of memory or swap (the precedent build needed about 13 GB resident and 9.6 GB of swap) and about 10 GB of disk | none |
+| **All** | about 313 CPU-h with the Lean build | **about 145 to 180 CPU-h, up to about 320** | about 2.5 CPU-h |
 
-`verify.sh --full` alone is about 117 CPU-hours here at these factors, up to about 295.
-The full replay is above this lane’s box and the owner’s 40 CPU-hour item cap; it is
-held for the owner on `think-0h7r`, which lists subsets under the cap: the Lean build,
-and the `zmx2` sweep with the coverage dumps, about 35 CPU-hours.
+`verify.sh --full` alone is about 117 to 165 CPU-hours here at these factors, up to
+about 295. The stage 4 review priced the whole at about 145 to 180 CPU-hours from its
+own samples; the two lanes agree but for the dumps, where the review’s measurement
+stands.
+The full replay is above this lane’s box and the owner’s 40 CPU-hour item cap; it
+is held for the owner on `think-0h7r`, which lists subsets under the cap: the Lean
+build, and the `zmx2` sweep with the coverage dumps, about 29 CPU-hours.
 The tight-tile jobs are nearly all of the rest.
 
 ## Questions for the Authors

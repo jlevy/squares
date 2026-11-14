@@ -3172,6 +3172,64 @@ verifiers:
       lapses after 30 days, and no case record has a block for local minimality
       (think-8xy2).
 
+  - id: V-khalili-973-review-check
+    program: k2m5_cover.py, k2m5_axis.py, k2m5_coverage.py and closure_9632.py, with k2m5_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 14 November stage 4 review's exact programs for Khalili and Gharabaghi's k^2 - 5
+      family (issue 973): the board's total, D and D4 invariance and the family built by
+      Definition 3 with Lemma 7's premises and window identity (k2m5_cover.py); the whole
+      theta = 0 face by one-sided corner limits on every 1/10 cell, no symmetry used
+      (k2m5_axis.py); every leftover zmx2 box of the 75 tight-tile roots against the
+      Tight-Tile Lemma's domain and the jobs it needs (k2m5_coverage.py); root 9632's
+      closure from the two checkers' outputs (closure_9632.py); and exact mass of a rational
+      pose by clipping in Fractions (k2m5_exact.py), with which the review probed poses,
+      zmx2's tightest leaves and the Tight-Tile bound's cell vertices.
+    source:
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_cover.py
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_axis.py
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_coverage.py
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/closure_9632.py
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_exact.py
+    independence_record: packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 973 (L144, think-h10k), strong
+            tier, reasoning setting not recorded, prompted separately from the import lane
+            (L145, think-2vgx)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source says Claude produced its search, certificate, Tight-Tile checker and
+          verification runs. The programs were written from the paper's statements and import
+          no code of the source or of evand/square-packing, but the review lane read the
+          source's verification and Tight-Tile code in full as part of the review, and its
+          README does not record that the programs were frozen before that reading, so the
+          record does not call them clean-room. They were frozen with their outputs at
+          2026-11-14T04:41:26Z (receipts/freeze.sha256), before the lane read the record's
+          own material on the claim.
+    note: >-
+      Written and run on 14 November 2026 for
+      docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md and kept with its
+      outputs in khalili-gharabaghi-k2m5-973-review-2026-11-14 beside the import lane's
+      packet. The lane's other programs (draw_samples.py, make_mutants.py, mutate_cov.py,
+      m3_search.py, submeasure.py, boards_vs_family.py, lean_data_link.py, compare_uncert.py,
+      compare_tt.py, zmx2_leaf_probe.py, tt_region.py, package_outputs.py, freeze.py and
+      run_jobs.sh) draw samples, build mutants, compare runs or drive the source's code, and
+      are not registered.
+
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-ozden-890-review-premises
     program: dm_premises.py, with dmlib.py

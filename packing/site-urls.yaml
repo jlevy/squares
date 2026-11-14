@@ -24456,6 +24456,7 @@ urls:
     - E-khalili-973-k2m5-family-report
     - E-khalili-973-valid11-report
     - E-khalili-973-lean-report
+    - E-khalili-973-review-partial-checks
     - E-basic-grid-upper
     artifacts:
     - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/README.md
@@ -24466,6 +24467,8 @@ urls:
     - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/receipts/verify_fast.log
     - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/receipts/compare.json.gz
     - packing/resources/web/evand-square-packing-2026-10-24/README.md
+    - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md
+    - docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md
     - packing/devtools/replay_k2m5_family.py
 - path: results.html
   canonical: results.html
