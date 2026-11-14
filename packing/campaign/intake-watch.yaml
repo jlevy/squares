@@ -1988,14 +1988,31 @@ repositories:
       can check. Slabs and trapezoids are another container, but the asymptotic records cite
       Bui's paper and build on it, so think-0fa1 decides whether the note bears on any
       record. Nothing under theorem-a/, composites/ or the strip folders changes.
-  # Lane L104 of 11 November 2026 (think-bcfs); lane L136 of 12 November (think-c3p2); lane
-  # L154 of 14 November (think-g2ax).
+  # Lane L104 of 11 November 2026 (think-bcfs); lane L136 of 12 November (think-c3p2); lanes
+  # L154 (think-g2ax) and L157 (think-2h88) of 14 November.
   - url: https://github.com/JoostdeWinter/square-packing
-    read_through: c70defaf39af47db220d1e7c2922590637ffb664
+    read_through: 6760360664227985358b1f9364f49c9b13e698a7
     read_on: '2026-11-14'
     note: >-
-      Read through c70defa (10:39:38Z on 14 November), the head at 10:59Z and 11:01Z, four
-      commits past the 57de046 read. e008214 (10:02:54Z) adds n297/, a packing of 297 squares
+      Read through 6760360 (11:03:30Z on 14 November), the head at 15:27Z, one commit past the
+      c70defa read: "Make the witness files for n = 172 and n = 199 valid Witness/v2 and remove
+      the contact count from the n = 199 README", which the author's answer on
+      jlevy/squares#939 (issuecomment-6876335132, 11:04:59Z) names. It adds the softschema
+      header and a claim block to n172/n172_witness.yaml and n199/n199_witness.yaml, lowercases
+      their ids and drops their notes line, updates both SHA256SUMS, and removes from
+      n199/README.md the sentence on the 734 load-bearing or forced contacts, which his answer
+      on jlevy/squares#946 (issuecomment-6876291132, 11:02:01Z) withdraws. Against the pins of
+      the de-winter-s172-upper-bound-2026-11-10 (c4e65d0) and
+      de-winter-s199-upper-bound-2026-11-09 (702c7af) packets, the Git diff changes no other
+      file of n172/ or n199/ and no line of a square or a side, so T-286 and T-285 stand as
+      recorded. packing-witness inspect passes both files' schema and refuses both on the
+      loader's rule that a verified claim needs a replayable certificate record, as at
+      57de046. No packet retains it: it adds no bound, certificate or method, and the two
+      packets keep the same squares and sides. Lane L157 (think-2h88) records the answers in
+      both requests entries and the s199 packet's README. Nothing to import.
+
+      The read of 14 November (lane L154) was through c70defa (10:39:38Z on 14 November), the
+      head at 10:59Z and 11:01Z, four commits past the 57de046 read. e008214 (10:02:54Z) adds n297/, a packing of 297 squares
       that jlevy/squares#977 (10:13:18Z) reports, and a row of the root README; 7b4701f
       (10:05:30Z) adds n297/check_area.py; the de-winter-s297-upper-bound-2026-11-14 packet pins
       7b4701f, the commit the issue names, and retains n297/. 5fcb350 (10:10:06Z) adds
