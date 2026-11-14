@@ -1,0 +1,62 @@
+# What `python -m devtools.intake_ledger gather` reads: the upper bound at n <= 324 that lane L160 of the
+# intake pass (think-3guf) takes in on 14 November 2026, Doğa Özden's #983 at 228, posted by his AI agent's
+# account kenaznia-doga 36 seconds after the one commit of the repository that holds its certificate. GitHub's
+# activity log was not read, so no push time is recorded; the issue dates its report, and nothing else reached
+# this count between the commit and the issue. The start is frozen at main fa980f8e7 (#982's merge): T-174 at
+# 228 in both lanes (Francisco Couzo's packing as PingYou Ltd improved it), with no register bound pending
+# adoption below it. The claim's exact side is its certificate's header, read by the packet's claim record
+# (acquisition/claims.json), which the lane wrote from main fa980f8e7; the issue prints that side rounded up at
+# 12 places, and the claim record's admission holds the print to it. The Kaggle per-puzzle packing the issue
+# quotes, 15.604601475744 (kirilltym), is above the claim. The side-only leaderboard entry it quotes first,
+# 15.596043116646 (square1000, 29 October), is 4.76e-3 below the claim, as the issue says, but is unpublished
+# and states no packing, so it is no report and context only.
+format: intake-ledger-sources-v1
+read_at_main: fa980f8e70479ee59c5e9c22cc450d7ac2d246f9
+read_on: '2026-11-14'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l160
+  branch: claude/bold-ritchie-xo28us-l160
+  commit: fa980f8e70479ee59c5e9c22cc450d7ac2d246f9
+  note: The packet's claim record, written on the lane's branch from main fa980f8e7 and read here by path.
+reports:
+- report: '#983'
+  issue: 983
+  holders: Doğa Özden
+  bead: think-14i2
+  lanes:
+  - lane: l160
+    packet: ozden-s228-upper-bound-2026-11-14
+    record: claims.json
+    counts: [228]
+  claims:
+  - n: 228
+    measured:
+      against: T-174
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal
+        assignment, best under symmetry 7, moves every square beyond 1e-3, 108 beyond 1e-2 and 75 beyond 0.1 (largest
+        0.940075) and turns 74 squares by more than 1e-6 radians, by up to 42.93 degrees; aligned by box centres, 59
+        squares turn by more than a degree and 36 tilts reverse; 48 squares tilted beyond a degree, 41.02 to 43.03
+        degrees, all one way, and two more beyond half a degree, against T-174's 51, 38.43 to 42.93 degrees, 45 one way
+        and 6 the other; the house witness and its regularized view measure as T-174; a new arrangement relative to
+        T-174's packing, not a further arrangement of it
+      source: packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/identity.json
+    new_packing:
+      source: '#983: ''Please record Doğa Özden as found_by for this new arrangement ... an original AI-run column-band
+        proposal design (Sol near1, gpt-6.1-sol), not a donor/transplant start or public recovery.'''
+    note: >-
+      T-174's own uniform-contraction margin at 228 is 0, a pair (201, 227) touching, so the gain, 3.7997e-3, lies
+      wholly outside the predecessor's padding
+      (packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/contraction-n228.json) and RV-3 (think-ruu2)
+      does not reach it.
+  note: >-
+    The issue names 8bebf3f, committed at 2026-11-14T18:33:59Z, 36 seconds before it. It says the packing is an
+    original AI-run column-band proposal design, not a donor or transplant start or a public recovery: axis-parallel
+    squares in two wall-anchored staircase or corner domains and tilted stacks across a diagonal band, proposals from a
+    finite-memory dynamic programme over the columns, quenched once with Evan Daniel's code and no random kicks; it
+    asks that Doğa Özden be recorded as the finder of this new arrangement, with the old record credited to
+    Francisco Couzo and PingYou Ltd.
+exceptions: []
+other_items: []

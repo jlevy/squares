@@ -1,0 +1,30 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "fa980f8e70479ee59c5e9c22cc450d7ac2d246f9",
+  "read_on": "2026-11-14",
+  "counts": [
+    {
+      "n": 228,
+      "start": [{"label":"record T-174","holders":"Francisco Couzo, improved by PingYou Ltd","side":"15.604601475730","exact":true}],
+      "steps": [
+        {"report":"#983","kind":"issue","reported_at":"2026-11-14T18:34:35Z","side":"15.600801734812","exact":true,"verdict":"recorded","reason":"below","decided_against":["record T-174"],"difference":"below by 3.80e-03","first_committed":"2026-11-14T18:33:59Z","measured":"no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, best under symmetry 7, moves every square beyond 1e-3, 108 beyond 1e-2 and 75 beyond 0.1 (largest 0.940075) and turns 74 squares by more than 1e-6 radians, by up to 42.93 degrees; aligned by box centres, 59 squares turn by more than a degree and 36 tilts reverse; 48 squares tilted beyond a degree, 41.02 to 43.03 degrees, all one way, and two more beyond half a degree, against T-174's 51, 38.43 to 42.93 degrees, 45 one way and 6 the other; the house witness and its regularized view measure as T-174; a new arrangement relative to T-174's packing, not a further arrangement of it","packing":{"kind":"new packing"}}
+      ],
+      "best_now": [{"label":"#983","holders":"Doğa Özden","side":"15.600801734812","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":1,"claims":1,"recorded_new":1,"recorded_new_continuing":0,"recorded_refinement":0,"recorded_unclassified":0,"recorded_by_exception":0,"not_recorded":0,"undecided":0},
+  "cross_check": [],
+  "reports": [{"report":"#983","url":"https://github.com/jlevy/squares/issues/983","kind":"issue","holders":"Doğa Özden","reported_at":"2026-11-14T18:34:35Z","bead":"think-14i2","counts":[228],"recorded":[228],"recorded_new":[228],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[]}],
+  "owner_decisions": {
+    "exact_ties": [],
+    "first_commit_before_report": [],
+    "undecided": [],
+    "publication_dependent": [],
+    "unknown_times": [],
+    "refinement_chains": [],
+    "key_reason_candidates": [],
+    "measured_identity": [{"n":228,"report":"#983","verdict":"recorded","source_says":"a new packing","against":"T-174","finding":"no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, best under symmetry 7, moves every square beyond 1e-3, 108 beyond 1e-2 and 75 beyond 0.1 (largest 0.940075) and turns 74 squares by more than 1e-6 radians, by up to 42.93 degrees; aligned by box centres, 59 squares turn by more than a degree and 36 tilts reverse; 48 squares tilted beyond a degree, 41.02 to 43.03 degrees, all one way, and two more beyond half a degree, against T-174's 51, 38.43 to 42.93 degrees, 45 one way and 6 the other; the house witness and its regularized view measure as T-174; a new arrangement relative to T-174's packing, not a further arrangement of it","source":"packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/identity.json"}]
+  },
+  "other_items": []
+}

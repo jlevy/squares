@@ -259,6 +259,10 @@ L132_1112 = "ozden-s269-upper-bound-2026-11-12"
 #: names no certificate, and his #979 at 332 and 409, beyond the corpus, that packing with
 #: borders of axis-aligned squares, which touch the walls and each other; retained under MIT.
 L154_1114 = ("de-winter-s297-upper-bound-2026-11-14", "de-winter-issue979-2026-11-14")
+#: The intake pass's lane L160 of 14 November 2026 (`test_upper_bound_reports_l160_1114`):
+#: Doğa Özden's #983 at 228, a column-band design below T-174 promoted the same way as his
+#: #967, under CC BY 4.0 and MIT.
+L160_1114 = "ozden-s228-upper-bound-2026-11-14"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -328,6 +332,7 @@ EVERY = (
     L120_1112,
     L132_1112,
     *L154_1114,
+    L160_1114,
 )
 
 
@@ -1405,6 +1410,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L120_1112,
         L132_1112,
         *L154_1114,
+        L160_1114,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1704,6 +1710,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L120_1112: "2026-11-11",
         L132_1112: "2026-11-12",
         L154_1114[0]: "2026-11-14",
+        L160_1114: "2026-11-14",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

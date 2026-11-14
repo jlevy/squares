@@ -1,0 +1,1 @@
+{"file": "/home/doga/work/sqp-q1108/nov14/exact/n228.yaml", "n": 228, "mode": "exact-rational", "side": 15.600801734811753, "min_wall_margin": 0.0, "min_pair_margin": 2.02e-13, "verdict": "VALID", "certified_side": 15.600801734811753, "certified_side_upper": "15.600801734811754", "certified_side_exact": null}

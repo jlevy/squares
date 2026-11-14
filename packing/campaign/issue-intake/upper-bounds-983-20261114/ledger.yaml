@@ -1,0 +1,58 @@
+format: intake-ledger-v1
+read_at_main: fa980f8e70479ee59c5e9c22cc450d7ac2d246f9
+read_on: '2026-11-14'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l160
+  branch: claude/bold-ritchie-xo28us-l160
+  commit: fa980f8e70479ee59c5e9c22cc450d7ac2d246f9
+  note: The packet's claim record, written on the lane's branch from main fa980f8e7 and read
+    here by path.
+reports:
+- report: '#983'
+  url: https://github.com/jlevy/squares/issues/983
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-14T18:34:35Z'
+  bead: think-14i2
+  claims:
+  - n: 228
+    printed: '15.600801734812'
+    rounding: up
+    exact: 2496128277569880608456232946784067658876105198533881000031076351067767905994143823546978155670208204882752156955406194327585270209774082067458803679745651277953505877007771559713446938963495638598661950372557464105851753/160000000000000000000000000000096624645556343967712787053863023914465696789877534418272517211148459359303353530695729018518107388867387281680255906517187071662554956852110346763759081839945150445043680001000000000000000
+    exact_from: packing/resources/web/ozden-s228-upper-bound-2026-11-14/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l160@fa980f8e70479ee59c5e9c22cc450d7ac2d246f9
+    first_committed: '2026-11-14T18:33:59Z'
+    measured:
+      against: T-174
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest
+        centres; the optimal assignment, best under symmetry 7, moves every square beyond
+        1e-3, 108 beyond 1e-2 and 75 beyond 0.1 (largest 0.940075) and turns 74 squares by
+        more than 1e-6 radians, by up to 42.93 degrees; aligned by box centres, 59 squares
+        turn by more than a degree and 36 tilts reverse; 48 squares tilted beyond a degree,
+        41.02 to 43.03 degrees, all one way, and two more beyond half a degree, against T-174's
+        51, 38.43 to 42.93 degrees, 45 one way and 6 the other; the house witness and its
+        regularized view measure as T-174; a new arrangement relative to T-174's packing,
+        not a further arrangement of it
+      source: packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/identity.json
+    new_packing:
+      source: '#983: ''Please record Doğa Özden as found_by for this new arrangement ... an
+        original AI-run column-band proposal design (Sol near1, gpt-6.1-sol), not a donor/transplant
+        start or public recovery.'''
+    note: T-174's own uniform-contraction margin at 228 is 0, a pair (201, 227) touching,
+      so the gain, 3.7997e-3, lies wholly outside the predecessor's padding (packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/contraction-n228.json)
+      and RV-3 (think-ruu2) does not reach it.
+  note: 'The issue names 8bebf3f, committed at 2026-11-14T18:33:59Z, 36 seconds before it.
+    It says the packing is an original AI-run column-band proposal design, not a donor or
+    transplant start or a public recovery: axis-parallel squares in two wall-anchored staircase
+    or corner domains and tilted stacks across a diagonal band, proposals from a finite-memory
+    dynamic programme over the columns, quenched once with Evan Daniel''s code and no random
+    kicks; it asks that Doğa Özden be recorded as the finder of this new arrangement, with
+    the old record credited to Francisco Couzo and PingYou Ltd.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []
