@@ -62939,7 +62939,7 @@ evidence:
     origin: replayed-here
     novelty: previously-published
     source_key: '[Ono issue 984 2026-11-14]'
-    certificate: packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json
+    certificate: packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json.gz
     replay: >-
       From packing/ with the project interpreter (Python 3.14.7) on a shared host, at nice 19 on
       two cores: python -m devtools.upper_bound_reports ono-issue984-2026-11-14 certify wrote
@@ -63137,7 +63137,7 @@ evidence:
     origin: replayed-here
     novelty: previously-published
     source_key: '[Ono issue 984 2026-11-14]'
-    certificate: packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json
+    certificate: packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json.gz
     replay: >-
       With the project interpreter (Python 3.14.7) as python -I -B on a shared host at nice 19,
       14 November 2026, from the review-only directory ono-984-985-review-2026-11-14
