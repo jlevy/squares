@@ -236,6 +236,39 @@ The review’s questions, informational and holding nothing open:
    (F13)?
 6. Would you make both checkers raise rather than `assert` (F15)?
 
+### The Author’s Answers
+
+Joost de Winter answered five of the six by commit on 14 November 2026, in
+[`66849f2`](https://github.com/JoostdeWinter/square-packing/commit/66849f2bd41502a989b091b01d9b0da71c2ab7c9)
+(15:33:56Z), “Answer the review of the n = 297, 332 and 409 packings”, which
+[campaign/intake-watch.yaml](../../../campaign/intake-watch.yaml) reads. #977’s final
+reply asked them in another order: its questions 1 to 6 are 1, 3, 5, 6, 2 and 4 here.
+The answers change no result: T-299 stays at V3/C3, the house at 297, and this packet
+keeps its pin.
+
+1. **The witness reader (F8).** `n297_witness.yaml` now states
+   `coordinate_provenance: reported`, and `packing-witness inspect` reads it; at this
+   packet’s pin it refuses the file, as above.
+2. **The box (F6).** Witness/v2 files for 332 and 409 are added, and the `format` line of
+   both JSON files names the box: [0, side] × [0, side], the origin at the lower left
+   corner.
+3. **The left and bottom walls.** No answer.
+4. **The 409 row (F14).** The value recorded at 332 was T-174 plus the same 35 squares, as
+   the review found for 332’s side. The value recorded at 409 lies 3.16 × 10⁻⁹ above
+   T-174 + 3 and places its squares differently, so his 409 shares only the idea of
+   extending a packing of 297 squares, and its corner arrangement is his own.
+5. **The corner square (F13).** Tilted by about 45°, at 44.999964°, edge direction
+   (803761/1136689, 803760/1136689): square 404’s in `n409_exact.json` exactly.
+6. **The checkers (F15).** Both, and their copies in `above324_from_n297/`, now stop
+   through a `require` function that raises `SystemExit`, so `python -O` no longer removes
+   the checks.
+
+The commit says all squares and sides are unchanged. Compared as exact rationals against
+this packet’s pin, every square and the side of `n297_exact.json` and of
+`n297_witness.yaml` are, and the twin still equals the JSON. The commit is not retained:
+it adds no bound, certificate or method. Its new 332 and 409 files are read in the
+[issue 979 packet](../de-winter-issue979-2026-11-14/README.md#stage-4-review).
+
 ## The Register
 
 T-299 records the claim at V3/C3, S3, as the stage 4 review confirmed. The case adopted
