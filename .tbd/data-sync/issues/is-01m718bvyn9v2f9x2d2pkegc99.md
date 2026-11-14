@@ -5,7 +5,7 @@ title: "Import #939: Joost de Winter's s(199) <= 14.6146898532835806, T-282's ar
 kind: task
 status: open
 priority: 1
-version: 13
+version: 14
 delegate: null
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: blocked
 hold_until: null
 created_at: 2026-11-09T22:55:20.020Z
-updated_at: 2026-11-14T11:56:24.835Z
+updated_at: 2026-11-14T16:37:48.221Z
 started_at: 2026-11-09T22:55:23.747Z
 ---
 #939 (JoostdeWinter, 2026-11-09T22:03:57Z): s(199) side 14.61468985328358057514628890087947061619 (rounded up), <1e-98 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, claimed the local optimum of the arrangement (130-digit numerical solution; quintic identified numerically). Certificate: JoostdeWinter/square-packing @ 702c7af2 folder n199 (n199_witness.yaml center-basis rational; n199_exact.json; verify_exact.py). Construction: T-282's 172 arrangement (Daniel, Özden) re-optimized (core side 13.61468985328358..., 2.63e-12 below T-282) plus the same L of 27 as #938 (kenaznia-doga, 20:31Z, earlier). Gain over #938: ~2.63e-12, the same as Daniel's held KKT point below T-282 (think-wju3, 2.635e-12) -> RV-3 class (think-ruu2); but #938's own contraction margin is 0 (exact grid contacts), so the padding-share test needs care. Implied s(172) witness from the core (not claimed). AI assistance: Claude under the author's direction. Sequencing: after #938 (think-1goz) merges.
@@ -46,4 +46,6 @@ started_at: 2026-11-09T22:55:23.747Z
 2026-11-11 08:55Z coordinator: PR #948 merged as 9fd466fe1 (T-285, T-286 held at V0/C1 after the L82 review and L84 senior review); replies posted on #939 (issuecomment-6791375129) and #946 (issuecomment-6791384381); both issues open, blocked:owner-decision; lane L78 has ended, claim released. What remains is the owner's RV-3 answer, then withdraw or enter evidence and adopt, and the final replies.
 
 2026-11-14 ~12:00Z coordinator: de Winter answered the L82 review's six questions on #946 (issuecomment-6876291132, 11:02Z) and #939 (issuecomment-6876335132, 11:04Z): the bound is the rational side rounded up at 16 places; the 199 step is #938's border of 27 (gain on T-284 2.63e-12); the fixed (-1e-4,-1e-4) offset and 1e-4 rad turn of free squares is procedural; the quintic came from an integer-relation search on a 130-digit solution, confirmed by the sign test, with a separate 390-digit Newton solve, both by one author (Claude Fable 5.2), no derivation; 734 counts contact conditions and is withdrawn from the README; cite c4e65d0b. New commit 6760360 makes the 172 and 199 witness files valid Witness/v2, squares and sides unchanged. To record (read_through, notes, retain 6760360 if precedent asks) in a records change after #977/#979's import PR merges; no result changes; RV-3 still the owner's.
+
+2026-11-14 ~16:45Z coordinator: answers recorded in #981 and acknowledgements posted on #946/#939 (recorded in #982, fa980f8e7). Open for the RV-3 follow-through: #939's packet pins 702c7af while the author asks to cite c4e65d0b (n199/ byte-identical); settle the pin, and whether T-285 keeps the 734 sentence, when the record next changes here.
 blocked_on: think-ruu2

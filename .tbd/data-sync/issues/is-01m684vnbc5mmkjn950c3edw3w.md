@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 296
+version: 297
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -99,7 +99,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-14T15:56:50.139Z
+updated_at: 2026-11-14T16:37:48.597Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -262,3 +262,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-14 ~11:05Z: #978 merged da5091505 (hidden slow-lane F: test_check_declared_bounds, ryu MAX_PIECES unnamed since #884; think-42jg closed; gap filed think-jyc2; timeout think-m2th held for owner with measurements). NEW #977 (de Winter s(297) <= 17.739455558289, -9.6e-4 vs T-174) and #979 (s(332), s(409) beyond horizon, from the 297 packing): labelled intake; import think-g2ax (L154), blind review think-gabn (L153).
 2026-11-14 ~15:20Z: L153 review (accepted, S3) + L154 import = #980; L155 senior review (no B; S1-S4 + N1-N5 applied by L156); #980 merged 3605269b8 15:03Z: T-299 house at 297 (V3/C3), beyond-horizon rows 332/409 (source de-winter-issue979-2026-11-14). Deploy ok (run 43608111891). Replies posted and #977/#979 closed 15:18Z. de Winter answered L82 questions on #946/#939 (RV-3 held). L157 records PR for all four in progress. Filed think-f0rj (grid-slack dir names).
 2026-11-14 ~16:00Z: #981 (records of #977/#979 replies, #939/#946 answers) merged 6865af7d6; think-g2ax, think-gabn closed. Posted: #804 follow-up (T-247 superseded by T-299), acknowledgements on #946 and #939 (edited within 15 s to say the gain is 1.04x T-282 padding, not inside it). de Winter commit 66849f2 answers review Q1/4/5/6 (squares unchanged per author). L158 records PR in progress.
+2026-11-14 ~16:45Z: #982 (records of #804 follow-up, #946/#939 acknowledgements, de Winter 66849f2: squares/sides unchanged, answers review Q1,2,4,5,6; Q3 open) merged fa980f8e7.
