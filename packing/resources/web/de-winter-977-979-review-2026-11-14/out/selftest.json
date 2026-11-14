@@ -1,0 +1,25 @@
+{
+ "program": "l153_selftest.py",
+ "verdict": "PASSED",
+ "cases": 7720,
+ "failures": 0,
+ "failure_examples": [],
+ "broken_a_contact_as_apart": {
+  "cases": 7667,
+  "failures": 2512,
+  "examples": [
+   "edge-edge upright n01 d0: A class apart != contact",
+   "edge-edge upright n01 d0: A class apart != contact",
+   "edge-edge upright n01 d0: A class apart != contact"
+  ]
+ },
+ "broken_b_open_half_planes": {
+  "cases": 7667,
+  "failures": 2512,
+  "examples": [
+   "edge-edge upright n01 d0: B class apart != contact",
+   "edge-edge upright n01 d0: B class apart != contact",
+   "edge-edge upright n01 d0: B class apart != contact"
+  ]
+ }
+}
