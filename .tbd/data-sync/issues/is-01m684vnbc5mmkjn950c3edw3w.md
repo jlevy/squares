@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 280
+version: 281
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -91,7 +91,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-14T01:56:27.023Z
+updated_at: 2026-11-14T01:57:56.884Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -247,3 +247,4 @@ started_at: 2026-10-31T08:37:28.427Z
 
 2026-11-13: #972 (records for #958 answers, #962 follow-up, #967 adoption) merged 0db247de7; think-n73d and think-c3p2 closed; think-u70i filed (adoption sentence T-id placement). All submissions through #967 imported, replied, closed. Open owner decisions unchanged (#921, #908/#909, #543, #919, think-8nim, RV-3/think-ruu2, T-142/T-143 #953, think-71uq).
 2026-11-13 02:52-22:52Z: hourly renewals intake235-254 all identical; no new submissions, no PR movement; main at 0db247de7. Scheduler skipped 12:52 and 14:52 runs and fired 13:52 late (15:25), back on time from 16:52.
+2026-11-14 ~02:00Z: NEW #973 (moh63-dev: Khalili & Gharabaghi), s(k^2-5)=k for all k>=7; k>=10 by one periodic family reduced to board mu_11 (Valid11), Lean k2m5_of_valid11, new Tight-Tile Lemma for 75 roots; on Daniel zmx2/qx2_zm @659ee62. Labelled intake. Beads: import think-2vgx (lane L145, tbd-strong, 4 CPU-h timebox, full replay = owner-priced option), blind review think-h10k (lane L144, tbd-strong, 6 CPU-h). Precedent T-064/T-081. Reply owed after import merges.
