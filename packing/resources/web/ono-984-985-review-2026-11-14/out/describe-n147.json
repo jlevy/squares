@@ -1,0 +1,206 @@
+{
+ "label": "n147",
+ "lane": "L163",
+ "program": "l163_describe.py",
+ "side_decimal_info_only": {
+  "string": "12.65104355658769447190\u2026",
+  "floor_at_its_places": "12.65104355658769447190",
+  "equals_floor": true,
+  "side_45_places": "12.651043556587694471904370629016850446284092771"
+ },
+ "tilts": {
+  "exactly_upright": 38,
+  "below_1e-9_deg_nonzero": 64,
+  "below_1e-3_deg": 102,
+  "below_0.5_deg": 103,
+  "beyond_0.5_deg": 44,
+  "beyond_0.5_positive": 44,
+  "beyond_0.5_negative": 0,
+  "beyond_0.5_range": [
+   25.8437,
+   27.7207
+  ],
+  "beyond_0.5_abs_mean": 26.6538,
+  "beyond_0.5_rounded_0.01_top": [
+   [
+    26.19,
+    18
+   ],
+   [
+    27.72,
+    15
+   ],
+   [
+    25.84,
+    6
+   ],
+   [
+    26.22,
+    2
+   ],
+   [
+    25.95,
+    1
+   ],
+   [
+    25.91,
+    1
+   ],
+   [
+    26.08,
+    1
+   ]
+  ],
+  "between_1e-3_and_0.5_deg": [
+   [
+    111,
+    -0.00314
+   ]
+  ],
+  "largest_t_digits": 16,
+  "distinct_t": 61
+ },
+ "pairs": {
+  "centres_closer_than_sqrt2": 328,
+  "below_1e-3": 380,
+  "below_1e-6": 326,
+  "below_1e-6_range_sci": [
+   "3.00262e-10",
+   "7.83110e-7"
+  ],
+  "below_1e-6_median_sci": "3.00400e-10",
+  "below_1e-6_distinct_6_figures": 91,
+  "below_1e-6_common_6_figures": [
+   [
+    "3.00399e-10",
+    75
+   ],
+   [
+    "3.00400e-10",
+    54
+   ],
+   [
+    "3.00398e-10",
+    21
+   ],
+   [
+    "3.00401e-10",
+    14
+   ],
+   [
+    "3.00397e-10",
+    9
+   ]
+  ],
+  "first_above_1e-6": [
+   "1.27286e-6",
+   9,
+   46
+  ],
+  "least_10": [
+   [
+    101,
+    108,
+    "3.00262e-10"
+   ],
+   [
+    101,
+    125,
+    "3.00262e-10"
+   ],
+   [
+    101,
+    127,
+    "3.00269e-10"
+   ],
+   [
+    94,
+    97,
+    "3.00292e-10"
+   ],
+   [
+    71,
+    73,
+    "3.00302e-10"
+   ],
+   [
+    91,
+    97,
+    "3.00306e-10"
+   ],
+   [
+    125,
+    134,
+    "3.00309e-10"
+   ],
+   [
+    78,
+    79,
+    "3.00342e-10"
+   ],
+   [
+    125,
+    127,
+    "3.00351e-10"
+   ],
+   [
+    84,
+    107,
+    "3.00355e-10"
+   ]
+  ]
+ },
+ "walls": {
+  "left": {
+   "contacts": [
+    3
+   ],
+   "positive_below_1e-12": 9,
+   "least_positive": [
+    "2.72004e-15",
+    28
+   ]
+  },
+  "bottom": {
+   "contacts": [
+    65
+   ],
+   "positive_below_1e-12": 11,
+   "least_positive": [
+    "4.99600e-14",
+    70
+   ]
+  },
+  "right": {
+   "contacts": [],
+   "positive_below_1e-12": 7,
+   "least_positive": [
+    "1.92456e-13",
+    106
+   ]
+  },
+  "top": {
+   "contacts": [
+    134
+   ],
+   "positive_below_1e-12": 8,
+   "least_positive": [
+    "1.05471e-13",
+    94
+   ]
+  }
+ },
+ "extents": {
+  "x_extent_less_side_sci": "-1.92456e-13",
+  "y_extent_less_side_sci": "0",
+  "walls_touched": [
+   "left",
+   "bottom",
+   "top"
+  ],
+  "side_is_x_extent": false,
+  "side_is_y_extent": true
+ },
+ "check_least_margin": "3.00262e-10",
+ "cpu_seconds": 0.3
+}
