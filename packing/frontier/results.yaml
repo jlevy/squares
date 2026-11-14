@@ -46594,8 +46594,11 @@ results:
       contacts and near-wall clearance are the replay's exactly, and its contraction receipts
       (T-174's margin 0 at squares 274 and 292; this certificate's 1.824e-59 at squares 232 and
       237) and identity against T-174 (55 squares beyond a tenth, largest 0.700; 11 turned and
-      34 reversed by box centres) equal this packet's. The 409 sharp controls were still
-      running when the review was read; nothing else here ran after it.
+      34 reversed by box centres) equal this packet's. The coordinator relayed a summary of the
+      review to this lane while the 409 sharp controls of the issue 979 packet, stated in
+      advance at 11:06:15Z and started at 11:39Z, were still running; no other check of the
+      three certificates started after the relay, and the review itself was read against these
+      receipts once both were done.
 
       Findings folded in: F8, the one minor finding, the twin's verified claim with no
       certificate record, which this repository's loader refuses (the import reads it with
@@ -46630,13 +46633,12 @@ results:
       sides (house and stage) 774 and 904 against 728 and 886, with no light, uneven or
       near-axis square and 17 angle classes and hues either way.
 
-      Evan Daniel's driver refused
-      its same-side view; his certified KKT solve lies 1.824e-59 below the side, 1.0 of the
-      certificate's own contraction margin, and its solved view 1.77e-19 above it, held at row
-      4, so there is no register candidate; a side inside the certificate's padding is RV-3's
-      question. The SETTLED entry at 297, decided on T-174's witness, is taken off. The
-      rigidity block, derived again, stays not rigid: 62 of 297 squares translate, against 41
-      of T-174's.
+      Evan Daniel's driver refused its same-side view; his certified KKT solve lies 1.824e-59
+      below the side, equal to the certificate's own contraction margin to the precision of the
+      driver's printed side, and its solved view 1.77e-19 above it, held at row 4, so there is
+      no register candidate; a side inside the certificate's padding is RV-3's question. The
+      SETTLED entry at 297, decided on T-174's witness, is taken off. The rigidity block,
+      derived again, stays not rigid: 62 of 297 squares translate, against 41 of T-174's.
 
       The source's own verify_exact.py and check_area.py were not run here. The two maintained
       routes, the sqpack rational witness verifier and the independent rational corner

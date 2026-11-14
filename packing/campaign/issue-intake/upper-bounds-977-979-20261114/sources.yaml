@@ -115,7 +115,8 @@ reports:
     #977 plus axis-aligned squares, so they come after it in report order; the issue says the added squares follow the
     construction of the recorded values at 332 and 409, which are built the same way from T-174 at 297. Two L steps
     from the 297 give 369 a side above Göbel's construction there, so no bound; deletions bound counts no report
-    claims, which have no rows (think-kzme).
+    claims, which have no rows (think-kzme). The review's F14 finds the 409 row 3.164e-9 above T-174 + 3 and placed
+    otherwise.
 exceptions: []
 other_items: []
 rulings:

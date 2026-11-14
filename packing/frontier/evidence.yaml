@@ -62303,8 +62303,8 @@ evidence:
       note: >-
         docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted all three
         certificates, nothing blocking or major: F1 to F5 on feasibility, the controls and the
-        claims' boxes, F6, F13 and F15 for the author, F7 and F9 to F12 for the records, and F8,
-        the one minor finding, on the twin's unreplayed claim. Its clean-room run is
+        claims' boxes, F6 and F13 to F15 for the author, F7 and F9 to F12 for the records, and
+        F8, the one minor finding, on the twin's unreplayed claim. Its clean-room run is
         E-de-winter-s297-review-exact-feasibility, and the replay
         E-de-winter-s297-exact-feasibility.
   - id: E-de-winter-s297-exact-feasibility
@@ -62381,7 +62381,6 @@ evidence:
       receipt's controls are gross, and the packet's sharp controls meet those margins. Finite
       feasibility only.
     source_reviewed: '2026-11-14'
-    independence_record: docs/project/reviews/review-2026-11-14-de-winter-977-979.md
     external_review:
       state: informally-verified
       date: '2026-11-14'
@@ -62392,8 +62391,8 @@ evidence:
       note: >-
         docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted all three
         certificates, nothing blocking or major: F1 to F5 on feasibility, the controls and the
-        claims' boxes, F6, F13 and F15 for the author, F7 and F9 to F12 for the records, and F8,
-        the one minor finding, on the twin's unreplayed claim. Its clean-room run is
+        claims' boxes, F6 and F13 to F15 for the author, F7 and F9 to F12 for the records, and
+        F8, the one minor finding, on the twin's unreplayed claim. Its clean-room run is
         E-de-winter-s297-review-exact-feasibility, and the replay
         E-de-winter-s297-exact-feasibility.
   - id: E-de-winter-979-certificate-report
@@ -62462,8 +62461,11 @@ evidence:
       certificates, read by the center-direction-json reader (6 jobs, 468.38 route CPU
       seconds), and check --replay decided every retained job again. python -m
       devtools.upper_bound_reports de-winter-issue979-2026-11-14 sharp-controls wrote the
-      packet's sharp controls (receipts/sharp-controls-nNNN.json), all 11 a count as stated in
-      advance on both routes: contact accepted at margin 0 and refused 1e-30 past it.
+      packet's sharp controls (receipts/sharp-controls-nNNN.json), all 11 a count with the
+      outcome stated in advance on both routes: contact accepted at margin 0 and refused 1e-30
+      past it; for square 299 enlarged past contact the plan named the shape and the overlap,
+      and the receipt also names the wall it touches. The 409 controls were still running when
+      the coordinator relayed a summary of the stage 4 review.
     replay_status: passed
     verifiers:
     - V-sqpack-verify
@@ -62509,7 +62511,6 @@ evidence:
       route shares code with them. The receipt's controls are gross, and the packet's sharp
       controls meet each certificate's least margins. Finite feasibility only.
     source_reviewed: '2026-11-14'
-    independence_record: docs/project/reviews/review-2026-11-14-de-winter-977-979.md
     external_review:
       state: informally-verified
       date: '2026-11-14'
@@ -62600,8 +62601,8 @@ evidence:
       note: >-
         docs/project/reviews/review-2026-11-14-de-winter-977-979.md accepted all three
         certificates, nothing blocking or major: F1 to F5 on feasibility, the controls and the
-        claims' boxes, F6, F13 and F15 for the author, F7 and F9 to F12 for the records, and F8,
-        the one minor finding, on the twin's unreplayed claim. Its clean-room run is
+        claims' boxes, F6 and F13 to F15 for the author, F7 and F9 to F12 for the records, and
+        F8, the one minor finding, on the twin's unreplayed claim. Its clean-room run is
         E-de-winter-s297-review-exact-feasibility, and the replay
         E-de-winter-s297-exact-feasibility.
     limitations: >-

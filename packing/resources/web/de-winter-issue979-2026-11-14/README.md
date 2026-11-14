@@ -108,6 +108,11 @@ the module predicts:
 The plan stated each of these in advance, though for the pair enlarged past contact it
 named the shape and the overlap and not the wall that square 299 also touches.
 
+The coordinator relayed a summary of the stage 4 review to this lane while the 409 sharp
+controls, stated in advance at 11:06:15Z and started at 11:39Z, were still running;
+their receipt was written after the relay, and no other check of either certificate
+started after it.
+
 The two routes share this repository’s centre-direction reader, `Fraction` arithmetic and
 the separating-axis method; neither shares code with the source’s checkers.
 

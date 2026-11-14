@@ -196,8 +196,11 @@ receipts are in the review-only directory
   its contraction receipts (T-174’s margin 0 at squares 274 and 292; this certificate’s
   1.824 × 10⁻⁵⁹ at squares 232 and 237) and identity against T-174 (55 squares beyond a
   tenth, largest 0.700; 11 turned and 34 reversed by box centres) equal
-  [measure/](measure/)’s. The 409 sharp controls of the issue 979 packet were still running
-  when the review was read; nothing else here ran after it.
+  [measure/](measure/)’s. The coordinator relayed a summary of the review to this lane
+  while the 409 sharp controls of the issue 979 packet, stated in advance at 11:06:15Z and
+  started at 11:39Z, were still running; no other check of the three certificates started
+  after the relay, and the review itself was read against these receipts once both were
+  done.
 - **The lineage (F11).** The README’s counts hold: the upper-left block has 72 squares
   against T-174’s 78, the lower-right 95 against 91, and the band 110 against 108,
   counting T-174’s upright square 207 at the top wall, which closes its band and belongs
@@ -261,10 +264,10 @@ against 41 of T-174’s.
 ## Credit and Licence
 
 The packing is Joost de Winter’s, in the layout of T-174 (Francisco Couzo’s packing, as
-Evan Daniel and PingYou Ltd improved it), whose certificate the record holds, so its
-lineage builds on this project. The source says the construction, optimization,
-high-precision solution, rational certificate, checks and figures were produced with Claude
-Fable 5.2 (Anthropic) under his direction. The bibliography key is
+Evan Daniel and PingYou Ltd improved it), whose certificate this repository holds. The
+source says the construction, optimization, high-precision solution, rational certificate,
+checks and figures were produced with Claude Fable 5.2 (Anthropic) under his direction.
+The bibliography key is
 **[de Winter s297 upper bound 2026-11-14]**.
 
 Everything here is published under the MIT licence, copyright (c) 2026 Joost de Winter, by
