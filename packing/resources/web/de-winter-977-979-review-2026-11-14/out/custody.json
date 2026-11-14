@@ -1,0 +1,112 @@
+{
+ "program": "l153_custody.py",
+ "commits_in_clone": 17,
+ "head": "c70defaf39af47db220d1e7c2922590637ffb664",
+ "branches": [
+  "origin/HEAD",
+  "->",
+  "origin/main",
+  "origin/main"
+ ],
+ "977": {
+  "commit": {
+   "sha": "7b4701f35e815301e4f467d214fab4205ded5eb1",
+   "parents": [
+    "e0082144fa1c9e19ae71299f808337f4b4f58855"
+   ],
+   "author": "Joost de Winter <31475448+JoostdeWinter@users.noreply.github.com>",
+   "authored": "2026-11-14T11:05:30+01:00",
+   "committer": "Joost de Winter <31475448+JoostdeWinter@users.noreply.github.com>",
+   "committed": "2026-11-14T11:05:30+01:00",
+   "subject": "Add a second exact checker for n = 297"
+  },
+  "issue_created": "2026-11-14T10:13:18Z",
+  "seconds_from_commit_to_issue": 468.0,
+  "commits_after_pin_before_issue": [
+   "5fcb3508f7fa 2026-11-14T11:10:06+01:00 Add the registration request for n = 297"
+  ],
+  "on_default_branch": true,
+  "worktree_clean": true,
+  "files": {
+   "n297/n297_exact.json": {
+    "blob": "b200b925626838325641b2da5fd548c74d36ac6c",
+    "worktree_blob": "b200b925626838325641b2da5fd548c74d36ac6c",
+    "sha256": "7ff1712fc2efe66661377481e1d37b8577b30a9979f10c83d2539cd2e31d6632",
+    "first_commit": [
+     "e008214 2026-11-14T11:02:54+01:00"
+    ]
+   },
+   "n297/n297_witness.yaml": {
+    "blob": "b6c8f046ac61ee1d3078d0251977a6afcf9962fc",
+    "worktree_blob": "b6c8f046ac61ee1d3078d0251977a6afcf9962fc",
+    "sha256": "96941f37d9c937b041f5e76efee7859485639f23c41a9bebcea01acef1be1bc5",
+    "first_commit": [
+     "e008214 2026-11-14T11:02:54+01:00"
+    ]
+   }
+  }
+ },
+ "979": {
+  "commit": {
+   "sha": "c70defaf39af47db220d1e7c2922590637ffb664",
+   "parents": [
+    "5fcb3508f7fa7bc2055677e5e5e13386b784253b"
+   ],
+   "author": "Joost de Winter <31475448+JoostdeWinter@users.noreply.github.com>",
+   "authored": "2026-11-14T11:39:38+01:00",
+   "committer": "Joost de Winter <31475448+JoostdeWinter@users.noreply.github.com>",
+   "committed": "2026-11-14T11:39:38+01:00",
+   "subject": "Add square packings for n = 332 and n = 409 built from the n = 297 packing"
+  },
+  "issue_created": "2026-11-14T10:41:23Z",
+  "seconds_from_commit_to_issue": 105.0,
+  "commits_after_pin_before_issue": [],
+  "on_default_branch": true,
+  "worktree_clean": true,
+  "files": {
+   "above324_from_n297/n332_exact.json": {
+    "blob": "5e9e34725840cf831b21641bbdb4ccc0bb0d678a",
+    "worktree_blob": "5e9e34725840cf831b21641bbdb4ccc0bb0d678a",
+    "sha256": "d6fb8424688c6272acd452c7a0e46104e69f1bcd20def89741e1ac55062d0873",
+    "first_commit": [
+     "c70defa 2026-11-14T11:39:38+01:00"
+    ]
+   },
+   "above324_from_n297/n409_exact.json": {
+    "blob": "e2b188f961d7ee31489304aa18ca06658f9cd6fb",
+    "worktree_blob": "e2b188f961d7ee31489304aa18ca06658f9cd6fb",
+    "sha256": "513a40e3cbb182f344ed0194e4fe8974d7f518a27d1ad7bff4d2f267eac4a443",
+    "first_commit": [
+     "c70defa 2026-11-14T11:39:38+01:00"
+    ]
+   }
+  }
+ },
+ "licence": {
+  "blob_at_979_pin": "17e795f2a70c232c04633f4d7318191f7c198abe",
+  "blob_at_977_pin": "17e795f2a70c232c04633f4d7318191f7c198abe",
+  "first_line": "MIT License",
+  "copyright_line": "Copyright (c) 2026 Joost de Winter",
+  "added_in": "9bf5d9b 2026-10-17T16:27:31+02:00 Add MIT licence",
+  "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a"
+ },
+ "all_commits": [
+  "c70defaf39af 2026-11-14T11:39:38+01:00 Add square packings for n = 332 and n = 409 built from the n = 297 packing",
+  "5fcb3508f7fa 2026-11-14T11:10:06+01:00 Add the registration request for n = 297",
+  "7b4701f35e81 2026-11-14T11:05:30+01:00 Add a second exact checker for n = 297",
+  "e0082144fa1c 2026-11-14T11:02:54+01:00 Add square packing for n = 297 with double steps in both staircases that improves the Squares Project record",
+  "57de0465c07f 2026-11-12T09:30:46+01:00 Publish the method for n = 132 and n = 157 and make both witness files valid Witness/v2",
+  "6617869a3491 2026-11-11T21:52:23+01:00 Name Claude Fable 5.2 in the AI assistance statements for n = 132 and n = 157",
+  "a491dad8b092 2026-11-11T21:49:44+01:00 Add square packings for n = 132 and n = 157 (side below 13) that improve the Squares Project records",
+  "501cb8daae75 2026-11-11T20:41:30+01:00 Correct the README statements on the descent runs and the certificate margin",
+  "c4e65d0b8c4d 2026-11-10T22:26:23+01:00 Tighten the n = 172 certificate to 1.6e-319 above the optimum and add 300-digit coordinates",
+  "8c0de9dd69ed 2026-11-10T22:20:44+01:00 Add square packing for n = 172 at the exact local optimum of the Daniel-\u00d6zden arrangement",
+  "a0c4fc80db67 2026-11-10T16:37:44+01:00 Add six further refined square packings",
+  "a9486ede74cd 2026-11-10T15:39:52+01:00 Add sixteen refined square packings for n between 632 and 989",
+  "71da0d56fd91 2026-11-10T07:15:17+01:00 Add six further square packings above n = 324",
+  "d3a020eae21f 2026-11-10T00:59:23+01:00 Add nine square packings above n = 324 that improve the recorded values",
+  "702c7af2db04 2026-11-09T22:54:59+01:00 Add square packing for n = 199 that improves the Squares Project record",
+  "9bf5d9be4d0c 2026-10-17T16:27:31+02:00 Add MIT licence",
+  "c95c4938f068 2026-10-17T15:52:56+02:00 Add square packings for n = 227, 229 and 260 that improve the Squares Project record"
+ ]
+}

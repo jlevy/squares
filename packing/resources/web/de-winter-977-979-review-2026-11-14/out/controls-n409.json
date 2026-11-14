@@ -1,0 +1,572 @@
+{
+ "program": "l153_controls.py",
+ "label": "n409",
+ "plan_sha256": "398d21280e9fc12d0ebf91f0c058e2257ed23499a56ce3fa86dae7b0bab5fcf2",
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "as_stated": 18,
+ "controls": [
+  {
+   "id": "G1",
+   "what": "square 409 given square 1's pose",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlaps": [
+     [
+      1,
+      409
+     ]
+    ],
+    "overlap_count": 1,
+    "overlap_margin": "-1",
+    "overlap_area": "1",
+    "contacts": {
+     "count": 299,
+     "sha256": "ee4715a78d572ae829ca75351d91b3a444174869ae1d5a2c707e61cf770b8d57"
+    },
+    "wall_contacts": {
+     "count": 80,
+     "sha256": "9205017dd2a1bc4248aadca7656f85e1fbd4861ee42ae419734a2062d81d8dfd"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "ca92e276354fc5e57a6e437fa54979ec4bad2a87a010b7df83d22bbdc9f94bd1",
+    "clearance_list_sha256": "27e98d0187b2eeb3f6b0b715020e7c7e13f95ecad3fa85954c8a35473767d488",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61",
+    "least_margin": "-1.00000e+0"
+   },
+   "cpu_seconds": 24.7
+  },
+  {
+   "id": "G2",
+   "what": "square 1 translated by (S, 0)",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 79,
+     "sha256": "1a6e67774ff470472adbaf477480ee8be93c11f54301ac6fa46e9a9a035550c5"
+    },
+    "crossing": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [
+     1
+    ],
+    "margin_list_sha256": "0c30ce369a9a578d708aff958bb80a0794b50bf587c491ea1858b711f6dfa4f5",
+    "clearance_list_sha256": "7fba358b667d9aa49ea4dc426a3c79ebe9945513691dc7cc34185291f824e3bc",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 22.3
+  },
+  {
+   "id": "G3",
+   "what": "square 409's entry deleted",
+   "as_stated": true,
+   "came_out": {
+    "reader": "refuses",
+    "reason": "408 squares listed, n = 409"
+   },
+   "cpu_seconds": 0.0
+  },
+  {
+   "id": "G4",
+   "what": "the side written as 2p/2q",
+   "as_stated": true,
+   "came_out": {
+    "reader": "refuses",
+    "reason": "side: not in lowest terms"
+   },
+   "cpu_seconds": 0.0
+  },
+  {
+   "id": "G5",
+   "what": "square 1's sin moved by 10^-30",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "not_unit": [
+     1
+    ],
+    "unit_disagree": []
+   },
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "G6",
+   "what": "every basis (c, s) read as (c, -s): each square reflected in its own horizontal centre line, the rotation read the other way",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlaps": {
+     "count": 112,
+     "sha256": "0a73360383905faf03d8e6d74d7effb9c251e2be2d1a79f0143440277a42d102"
+    },
+    "overlap_count": 112,
+    "overlaps_nonempty": true,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 79,
+     "sha256": "1a6e67774ff470472adbaf477480ee8be93c11f54301ac6fa46e9a9a035550c5"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "533b84a92242778c35231c81de76e6362ebc20acca84a368470b806bb04efa05",
+    "clearance_list_sha256": "60a531418d46274051f784a8f9793a5328623b66bc9b3067cadb63bacdeac0ad",
+    "classes_agree": true,
+    "least_positive_margin": "1.00000000000000e-60",
+    "least_margin": "-1.27011e-2"
+   },
+   "cpu_seconds": 21.1
+  },
+  {
+   "id": "G8",
+   "what": "every square transposed: (cx, cy, c, s) to (cy, cx, s, c)",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 79,
+     "sha256": "5240166cdb8ed35a45249e931b1107b411f15d1ecf9cce4ec151d43b40b0ef35"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "ad3d959a8cc14e20367af4c443566d50ce9a91a51af26ecce3f0475ea4b40e1d",
+    "clearance_list_sha256": "38a1d36bcbbf1e5f4f01231637461f3ffec354bad8253023a36bf61b41769083",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 21.6
+  },
+  {
+   "id": "G9",
+   "what": "every basis replaced by the square's other edge direction (-s, c)",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 79,
+     "sha256": "1a6e67774ff470472adbaf477480ee8be93c11f54301ac6fa46e9a9a035550c5"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "ad3d959a8cc14e20367af4c443566d50ce9a91a51af26ecce3f0475ea4b40e1d",
+    "clearance_list_sha256": "60a531418d46274051f784a8f9793a5328623b66bc9b3067cadb63bacdeac0ad",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 21.9
+  },
+  {
+   "id": "G10",
+   "what": "every basis negated (-c, -s)",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 79,
+     "sha256": "1a6e67774ff470472adbaf477480ee8be93c11f54301ac6fa46e9a9a035550c5"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "ad3d959a8cc14e20367af4c443566d50ce9a91a51af26ecce3f0475ea4b40e1d",
+    "clearance_list_sha256": "60a531418d46274051f784a8f9793a5328623b66bc9b3067cadb63bacdeac0ad",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 21.6
+  },
+  {
+   "id": "G11",
+   "what": "the packing turned a quarter about the box centre: (x, y) to (S - y, x), basis (c, s) to (-s, c)",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 79,
+     "sha256": "9507c27385217f0d8d2aefa6f761000c0871bfe0e8c956ff1cabff40944c4e5a"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "ad3d959a8cc14e20367af4c443566d50ce9a91a51af26ecce3f0475ea4b40e1d",
+    "clearance_list_sha256": "25a75b5a7f7e60209796d7106afe85cd9513129acfe8a95a22d6a06eec721976",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 23.1
+  },
+  {
+   "id": "S1a",
+   "what": "the side lowered by 1/q, one unit of its own last place",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 40,
+     "sha256": "0f76096e0aff3552d246f0c1ea89b49d945f2b5280c26a8435c7df334c2a38ea"
+    },
+    "crossing": {
+     "count": 39,
+     "sha256": "cb1e0df1bd5ea1c5a9a1af3d5fbec9ee53359825b67dd243c9e8ebc89ad543f2"
+    },
+    "crossing_b_equals_a": true,
+    "not_inside_b": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     73,
+     86,
+     98,
+     109,
+     119,
+     128,
+     137,
+     145,
+     152,
+     158,
+     162,
+     165,
+     167,
+     169,
+     171,
+     173,
+     175,
+     177,
+     183,
+     187,
+     298,
+     299,
+     300,
+     349,
+     350,
+     351
+    ],
+    "margin_list_sha256": "ad3d959a8cc14e20367af4c443566d50ce9a91a51af26ecce3f0475ea4b40e1d",
+    "clearance_list_sha256": "b118d403aca2031700c2b35fe8207d76906490aa9ef2c6616b715e2a08debc7c",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 24.1
+  },
+  {
+   "id": "S1b",
+   "what": "the side lowered by 10^-90",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 40,
+     "sha256": "0f76096e0aff3552d246f0c1ea89b49d945f2b5280c26a8435c7df334c2a38ea"
+    },
+    "crossing": {
+     "count": 39,
+     "sha256": "cb1e0df1bd5ea1c5a9a1af3d5fbec9ee53359825b67dd243c9e8ebc89ad543f2"
+    },
+    "crossing_b_equals_a": true,
+    "not_inside_b": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     73,
+     86,
+     98,
+     109,
+     119,
+     128,
+     137,
+     145,
+     152,
+     158,
+     162,
+     165,
+     167,
+     169,
+     171,
+     173,
+     175,
+     177,
+     183,
+     187,
+     298,
+     299,
+     300,
+     349,
+     350,
+     351
+    ],
+    "margin_list_sha256": "ad3d959a8cc14e20367af4c443566d50ce9a91a51af26ecce3f0475ea4b40e1d",
+    "clearance_list_sha256": "0d3331f46963e6bd8e7ebc66f245a9409757c3b4a2d33b51f44787ad1bf5c3b0",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 23.1
+  },
+  {
+   "id": "S1c",
+   "what": "the side set to its 12-place floor, 20.739455558288",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 40,
+     "sha256": "0f76096e0aff3552d246f0c1ea89b49d945f2b5280c26a8435c7df334c2a38ea"
+    },
+    "crossing": {
+     "count": 39,
+     "sha256": "cb1e0df1bd5ea1c5a9a1af3d5fbec9ee53359825b67dd243c9e8ebc89ad543f2"
+    },
+    "crossing_b_equals_a": true,
+    "not_inside_b": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     73,
+     86,
+     98,
+     109,
+     119,
+     128,
+     137,
+     145,
+     152,
+     158,
+     162,
+     165,
+     167,
+     169,
+     171,
+     173,
+     175,
+     177,
+     183,
+     187,
+     298,
+     299,
+     300,
+     349,
+     350,
+     351
+    ],
+    "margin_list_sha256": "ad3d959a8cc14e20367af4c443566d50ce9a91a51af26ecce3f0475ea4b40e1d",
+    "clearance_list_sha256": "4d3dec4c56f5dc83d9eb655ae3b96f6d7dbf14836f6c981f6dc070dc3463122b",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 21.6
+  },
+  {
+   "id": "S1d",
+   "what": "the side set to its 12-place ceiling, the claim 20.739455558289",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 40,
+     "sha256": "0f76096e0aff3552d246f0c1ea89b49d945f2b5280c26a8435c7df334c2a38ea"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "ad3d959a8cc14e20367af4c443566d50ce9a91a51af26ecce3f0475ea4b40e1d",
+    "clearance_list_sha256": "cbdda8cb0f7ba38981e24c1d13215adf4001ea954ed2123b28bed29e69187c21",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61"
+   },
+   "cpu_seconds": 23.3
+  },
+  {
+   "id": "S4c",
+   "what": "square 188 moved toward square 194 along their centre line to exact contact (t = t_contact of the plan facts)",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "overlaps": [],
+    "overlap_count": 0,
+    "contacts": {
+     "count": 303,
+     "sha256": "a40f0cd7eaf2d5c2416b5acec64b319f11995c1eed81099a6312c1365e5693fb"
+    },
+    "wall_contacts": {
+     "count": 79,
+     "sha256": "1a6e67774ff470472adbaf477480ee8be93c11f54301ac6fa46e9a9a035550c5"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "81e8b37be109f12d6a7aed91bfc040b4f3a113f96ec1da4013ba34e0a73ebb3a",
+    "clearance_list_sha256": "c9528b4f3577aff55d3c710408aafa0a17aee0f2b802b0cd81104d28939b3214",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61",
+    "pair_margin": {
+     "pair": [
+      188,
+      194
+     ],
+     "value": "0"
+    }
+   },
+   "cpu_seconds": 23.0
+  },
+  {
+   "id": "S4p",
+   "what": "the same, 10^-90 past contact over the slowest binding rate (t = t_past)",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlaps": [
+     [
+      188,
+      194
+     ]
+    ],
+    "overlap_count": 1,
+    "overlap_margin": "-1/1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "overlap_area": "1153736641822485010830126782227711389162880513755137392199889306925007247022537960572271290870448591696511213980857032427734823725452314148392147572141055649795558218470825913932296245817617090348693244369247781881047362056275689949906749749048048305134461189772482559106496282733876149189610215727235826843046236651209509365914671815775619021949061477073345879153572483608750230289564646637740076467954761776958658006039172987865324775752526934774474498411188515668198342175863377466283031420019096472699866541805432351591322387218595497588126508283755112044162389911981497877684598119899404935179962982320401285514648491124952572659086070607821995593621947794716061269844155181319119586738011520476192035346565707945767128724859106232977712140126425773181344698843664475346144589907963919375486870130989062188099432763357179220843111262623/1168412148652004227489384224750128875599947057112544482492888037882815998850222883692466547590675889500370294517485969867434403854264391073905006854982495884128327624439231716274906433390679806055287437821681083623981679168752148910057097931489261424911346451685802352672975441160320237699556938798074017181938581607918297488705960991001858596875180837134984543273742228938620003829495819425878564912440946609124555591932886400883228121563377763312491245651577098989390903187596024430661378009727087375212203567398561101949169824313459977376949848671172319847947377220222503715637122495556734426857697446817723535477872452254492603279282381263950606173404027105330198095606676914728341415362360813804183320710187570480021515576496683711416753477211960000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "contacts": {
+     "count": 302,
+     "sha256": "4dd590ac1cd0544d7d3c4738432851a87f43a3f274ca79c3103f8f77db423b6b"
+    },
+    "wall_contacts": {
+     "count": 79,
+     "sha256": "1a6e67774ff470472adbaf477480ee8be93c11f54301ac6fa46e9a9a035550c5"
+    },
+    "crossing": [],
+    "crossing_b_equals_a": true,
+    "not_inside_b": [],
+    "margin_list_sha256": "a3a7496cb6e8815b6c975d212cf24c8bf486c1ac849d4c6b11177d897537fce5",
+    "clearance_list_sha256": "793dbefabf0f256570004d8b7d5c0ed96f424d2ab6a3ead9dd32085e2482e9fd",
+    "classes_agree": true,
+    "least_positive_margin": "9.99999999999999e-61",
+    "least_margin": "-1.00000e-90"
+   },
+   "cpu_seconds": 23.0
+  },
+  {
+   "id": "S5",
+   "what": "every positive pair below 10^-12 (882) closed along its centre line, the second square moving (pair-level, both methods)",
+   "as_stated": true,
+   "came_out": {
+    "pairs": 882,
+    "at_contact_as_stated": 882,
+    "past_as_stated": 882,
+    "digest_times_and_past_margins": "79aa4fdafb619a0e373d38180d0471250e6fc8ce025691c8a2cd3d9819eaf21d",
+    "past_margin_minus_1e90_exactly": 882
+   },
+   "cpu_seconds": 1.8
+  },
+  {
+   "id": "S6",
+   "what": "every square (409) moved to its nearest wall by its clearance, and 10^-90 past (square-level, both methods)",
+   "as_stated": true,
+   "came_out": {
+    "squares": 409,
+    "at_as_stated": 409,
+    "past_as_stated": 409,
+    "by_wall": {
+     "left": 106,
+     "right": 104,
+     "bottom": 104,
+     "top": 95
+    }
+   },
+   "cpu_seconds": 0.2
+  }
+ ],
+ "cpu_seconds_total": 296.3
+}
