@@ -32994,6 +32994,150 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 16
+  end: 21
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 23
+  end: 29
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 31
+  end: 38
+  label: PingYou
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 40
+  end: 44
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 16
+  end: 21
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 23
+  end: 29
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 31
+  end: 38
+  label: PingYou
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 40
+  end: 44
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

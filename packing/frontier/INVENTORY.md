@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **967** evidence records. **562** are formal; **553** of those were established here. **16** are samples, counted separately.
-- **383** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **971** evidence records. **564** are formal; **555** of those were established here. **16** are samples, counted separately.
+- **385** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -990,13 +990,17 @@ results, it is a statement about what this repository has itself examined.
 | `E-khalili-973-review-partial-checks` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 6 of 6: the six parts the review's exact programs decide: the board's mass, D and D4 invariance; the family built into mu_k; Lemma 7's premises and window identity at k = 10, 12, 13, 14, 20 and 25; the theta = 0 face; the coverage of the 75 tight-tile roots' 1,255,023 leftover boxes; and root 9632's closure, each in full. Not Valid11: the 12,024 general-position roots and the Tight-Tile cells are outside the unit | `V-khalili-973-review-check` |
 | `E-khalili-973-replay-sample` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | sample, 59 of 459: runs of the source's Valid11 computation as its release records them: cert0, the 55 columns of the first-order sweep, root 9632's zmx2 dump and qx2_zm.py run, the 75 coverage dumps and the 326 Tight-Tile job runs (308 at u0 = 1/4000, 15 at 1/2000 and 3 reruns) | `V-evand-zmx2`, `V-evand-qx2-zm-py`, `V-khalili-tight-tile`, `V-khalili-k2m5-checks`, `V-replay-k2m5-family` |
 | `E-khalili-973-review-replay-sample` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | sample, 18 of 459: runs of the source's Valid11 computation as its release records them: cert0, the 55 columns of the first-order sweep, root 9632's zmx2 dump and qx2_zm.py run, the 75 coverage dumps and the 326 Tight-Tile job runs (308 at u0 = 1/4000, 15 at 1/2000 and 3 reruns) | `V-evand-zmx2`, `V-evand-qx2-zm-py`, `V-khalili-tight-tile` |
+| `E-de-winter-s297-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-de-winter-s297-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: the witness at n = 297 that T-299 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
+| `E-de-winter-979-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-de-winter-979-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: the two certificates the source's beyond-horizon rows state, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 385, verified 577
-- **method**: exact-algebraic 321, interval-certified 238, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 385
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 906
-- **relationship to the producer's code**: generator 5, independent-implementation 359, not-applicable 35, same-implementation 510, shared-components 52, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 387, verified 579
+- **method**: exact-algebraic 323, interval-certified 238, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 387
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 910
+- **relationship to the producer's code**: generator 5, independent-implementation 361, not-applicable 35, same-implementation 512, shared-components 52, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

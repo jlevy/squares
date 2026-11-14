@@ -7051,7 +7051,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-26'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/298.html
   canonical: cases/298.html
@@ -24472,6 +24472,43 @@ urls:
     - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md
     - docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md
     - packing/devtools/replay_k2m5_family.py
+- path: result/t-299.html
+  canonical: result/t-299.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-14'
+  lastmod: '2026-11-14'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 297
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s297 upper bound 2026-11-14]'
+      published: '2026-11-14'
+    builds_on: null
+    evidence:
+    - E-de-winter-s297-certificate-report
+    - E-de-winter-s297-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/README.md
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/acquisition/claims.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_witness.yaml
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_exact.json.gz
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/identity.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/contraction-n297.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/contraction-n297-own.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-977-979-20261114/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
 - path: results.html
   canonical: results.html
   kind: page

@@ -46389,6 +46389,191 @@ results:
       six at a time, about 14, and the price uses the review's. The review lists seven
       questions for the authors and the packet README nine; the reply on #973 asks both,
       merged.
+  - id: T-299
+    kind: upper-bound
+    registered: '2026-11-14'
+    landed: '2026-11-14'
+    headline: >-
+      De Winter's double-step staircases in T-174's layout at 297, a new arrangement 9.62e-04
+      below it
+    claim: >-
+      One complete rational certificate proves s(297) <=
+      2771789930982648706964773143376521183579542254469769042281514821668318400855235528876372121118923392199805279917691597900244395470466500399244703088837555169406502653157316418063170272472749700766022952357153436794707246798261523123813034222349783199652472152271757293343837277652953159175956044287440349952533/156250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+
+      That side is 17.7394555582889518 rounded up at 16 places and 17.739455558289 at 12, as
+      the issue and the source's root README print it.
+
+      It is 9.62e-04 below T-174 (Francisco Couzo's packing, improved by Evan Daniel and
+      PingYou Ltd), the case's house best packing. Measured here it is a new arrangement
+      relative to T-174's packing, in T-174's layout, not one to one with it under any
+      symmetry of the box by nearest centres: the optimal assignment moves 55 squares beyond a
+      tenth.
+
+      Both maintained exact routes accept the certificate; the stage 4 review is a separate
+      lane, blind to this one (think-gabn).
+
+      n297/README.md says the band was optimized by a sequence of linear programs, restarted
+      many times from random changes to groups of band squares, and that two series of
+      restarts with different seeds ended at the same side, 17.7394555582889; that a linear
+      program over all 297 squares then found no first-order improvement; and that the 4289
+      contact equations of the result (a corner of one square on the edge line of another, or
+      a corner on a wall) were solved in 330-digit arithmetic and hold to 1e-306, the 33 other
+      near contacts staying open by at least 2.1e-7, with the certificate's side 1.8e-59 above
+      that solution. Measured here, the certificate's own uniform-contraction margin is
+      1.824e-59 (1 - lambda* = 1e-60), the distance the README states.
+
+      It says the place where the lean changes direction was also tried one and two columns
+      either side of the middle, before the restarts, at 17.7394733018 for the middle and
+      17.7394781380 for the four others, and that the local optimum statement rests on that
+      numerical work and has no formal proof. The issue says verify_exact.py (separating axes)
+      and check_area.py (the area of each close pair's clipped intersection), both Python's
+      fractions.Fraction and sharing one author and the input file but no code, report 297
+      squares and 632 close pairs, and that the witness validates against this repository's
+      witness.schema.yaml. Those statements are the author's; no source program ran here.
+
+      The README says the Kaggle competition 'Squares in Squares' per-puzzle leaderboard
+      listed 17.7404101723 as the best side for n = 297 on 13 November 2026 and shows no
+      packings. A side with no packing is no report; the record compares with what has been
+      published.
+
+      Credit Joost de Winter, who reports a packing that keeps the layout of T-174: an upper
+      left and a lower right block of axis-aligned squares with staircase edges, a block of 10
+      squares in each of two corners and a diagonal band of 18 columns of tilted squares. Two
+      things are new: each staircase has two steps of double size, at the 6th and 13th band
+      columns, between which the band lies one staircase step closer to the upper left block,
+      so the upper left block holds 6 squares fewer, the lower right block 4 more and the band
+      2 more; and the band's columns lean in two groups, so the lean changes direction once
+      where T-174's changes three times. The double step was taken from the staircases of his
+      own pinwheels at 132 and 157 (T-292 and T-293).
+
+      The issue asks that the result be credited to Joost de Winter as a packing that builds
+      on T-174; it is credited to him as its finder, after Francisco Couzo's packing as Evan
+      Daniel and PingYou Ltd improved it.
+
+      Measured here, 110 squares turn, by 44.11 to 44.95 degrees, 61 one way and 49 the other,
+      the band of 110 the README counts; T-174 has 107, by 44.74 to 44.98 degrees.
+
+      The README and the issue say the construction, optimization, high-precision solution,
+      rational certificate, checks and figures were produced with Claude Fable 5.2 (Anthropic)
+      under Joost de Winter's direction.
+    scope:
+      n_values:
+      - 297
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 297 relative to T-174's packing, 9.62e-04 below it, far above the
+        S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05
+        (S3), where new and continued arrangements are S3: beside T-292's 9.63e-03 and T-287's
+        2.11e-03. A double step transplanted from the author's own pinwheels into a known
+        staircase-and-band layout is no new technique, so it is not S4. No lower bound or
+        optimum.
+      scored: '2026-11-14'
+      by: think-g2ax Joost de Winter import (intake lane L154), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s297 upper bound 2026-11-14]'
+      published: '2026-11-14'
+    evidence:
+    - E-de-winter-s297-certificate-report
+    - E-de-winter-s297-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/README.md
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/acquisition/claims.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_witness.yaml
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_exact.json.gz
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/identity.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/contraction-n297.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/contraction-n297-own.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-977-979-20261114/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l154_1114.py
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 297: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 263736 pair decisions; summed over the 3 jobs, the receipt records 184.09 route
+      CPU seconds and 185.63 job wall seconds. In every positive squares touch the box, a
+      least wall clearance of exactly 0, and every pair clears by at least 1e-60 less about
+      1.1e-250. The replay is E-de-winter-s297-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), stated in advance and as
+      the module predicts them, lowered the side by the least far-wall clearance (0), closed the least-gap pair
+      (237 against 232) by its gap of 1e-60 less about 1.1e-250 and moved every square toward
+      the nearer near wall by its least clearance, 1.5e-60: both routes accepted each at exact
+      contact and refused each 1e-30 past it. They refused square 237 enlarged to its pair at
+      contact for its shape alone, accepted square 1, already touching its wall, grown by 0,
+      refused it 1e-30 past for the wall, its shape and an overlap, and refused a duplicated
+      square.
+
+      At n = 297 the certificate is below the case's ceiling (Francisco Couzo, improved by Evan
+      Daniel and PingYou Ltd, T-174) by 9.62e-04; smallest: this certificate. It is also below
+      T-247, Hyukdong Kim's exact degree-21 side of T-174's packing, registered and not the
+      house, by 9.62e-04. The ledger of 14 November for this lane
+      (campaign/issue-intake/upper-bounds-977-979-20261114) walks #977 and #979 from starts
+      frozen on main that day and records this claim as a new packing, the only report at
+      297.
+
+      #977 names the commit that adds a second checker to the folder, which the source first
+      published 10 minutes 24 seconds before the issue, with the certificate's bytes unchanged
+      since. That first commit's push is not read (GitHub's activity log was
+      not readable from this session); the rule of 14 October would date the claim by it if it
+      came first, but no other report reached 297 in that window, so the ledger dates the claim
+      by the issue with the first commit kept, and the verdict is the same either way.
+
+      The source's Witness/v2 passes this repository's witness schema, and the loader refuses
+      it on one rule the schema does not state: its claim is coordinate_provenance: verified
+      with no certificate record. The import reads it with witness-center-basis-unreplayed,
+      the strict reading held to every other rule with the claim read and not believed, and
+      holds the source's JSON to it as the same packing, scalar for scalar.
+
+      Measured against padding (RV-3, think-ruu2): T-174's certificate at 297, contracted
+      uniformly about the origin, has margin 0, its pair 274 and 292 already touching (1 -
+      lambda* = 0), so the whole gain of 9.617e-04 lies outside the predecessor's padding
+      (measure/contraction-n297.json) and RV-3 does not reach it. This certificate's own
+      margin, measured the same way, is 1.824e-59, the binding pair squares 232 and 237
+      (measure/contraction-n297-own.json); contracted, its side would be
+      17.7394555582889517245..., which nobody reported and which is not registered.
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): no
+      symmetry of the box pairs it one to one with T-174's packing by nearest centres, and the
+      house witness and its regularized view measure the same; the optimal assignment of least
+      summed squared move, best under symmetry 5, moves 55 squares beyond a tenth, 69 beyond a
+      hundredth and 117 beyond a thousandth (largest 0.700) and turns 114, by up to 44.74
+      degrees; aligned by box centres, 11 squares turn by more than a degree and 34 reverse
+      their tilt. T-174 has 107 squares tilted beyond a degree, 63 one way and 44 the other,
+      and 190 upright within 1e-3 degrees, where the README's counts imply a band of 108 in
+      T-174; this certificate 110, 61 and 49, and 187 exactly upright.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side stood
+      in, finds the L step and monotonicity consequences main finds, so the bound carries to
+      no other count of the corpus. From 297 the L step lands at 332, beyond the horizon, at
+      the side plus one: that is #979's 332, recorded as a beyond-horizon row of the
+      de-winter-issue979-2026-11-14 source with its 409.
+
+      The source's own verify_exact.py and check_area.py were not run here. The two maintained
+      routes, the sqpack rational witness verifier and the independent rational corner
+      checker, share this repository's witness reader (certificate parsing and half-angle
+      conversion), Fraction arithmetic and the separating-axis method; neither shares code
+      with the author's checkers. No human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the certificate (stage 4, a separate lane blind to this one, under
+      think-gabn): its mathematics, a clean-room exact checker with sharp controls, the
+      identity against T-174's packing and the construction the source states, mapped as an
+      adversarial review, whose acceptance the verified lane and the house rule wait on. Then
+      adopt it at 297 in place of T-174 under the house rule, with both strong generators'
+      regularization, measured against the new witness, and the flip of the new house in the
+      same change.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

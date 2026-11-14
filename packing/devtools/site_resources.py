@@ -419,7 +419,10 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "from 413 to 991 (#941, #942), are replayed and reviewed here; thirty-six are "
             "dated rows beyond the case corpus, and the deletion bound at 809 waits on the "
             "owner. Pinwheel packings of 132 and 157 squares, 157 the first below the "
-            "13-by-13 grid, are replayed, reviewed and adopted here (T-292, T-293)."
+            "13-by-13 grid, are replayed, reviewed and adopted here (T-292, T-293). A "
+            "packing of 297 squares in T-174's layout with a double step in each "
+            "staircase is replayed here (T-299), and with borders it gives rows at 332 "
+            "and 409 (#979)."
         ),
     ),
     (
