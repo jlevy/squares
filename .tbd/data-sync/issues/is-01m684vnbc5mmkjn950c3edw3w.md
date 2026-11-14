@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 304
+version: 305
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -103,7 +103,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-14T21:17:47.303Z
+updated_at: 2026-11-14T22:54:34.758Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -270,3 +270,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-14 ~19:00Z: NEW #983 (Özden via kenaznia-doga, s(228) <= 15.600801734812, -3.80e-3 vs Couzo/PingYou house; side-only leaderboard 15.596043 not beaten, context). Labelled intake. Import think-14i2 (L160), blind review think-5y6d (L159).
 2026-11-14 ~21:00Z: L159 review (#983 accepted, S3) + L160 import = #986 (T-300 at 228); L161 senior review no B; coordinator applied S1/S2/N1-N3 (b80ab61bb, re-pin 4544c4c96), CI running, merge before 23:59Z. NEW #984 (Roberto Ono, s(228) <= 15.596043120921, beats #983 by 4.76e-3) and #985 (Ono, s(147) <= 12.651043556588, below 7+4sqrt2): labelled intake; import think-17ex (after #986 merges; T-301 supersedes T-300 in a 2026-11-15 pass), blind review think-jbwm (L163 running).
 2026-11-14 21:17Z: #986 merged 473577f42 21:06Z (T-300 house at 228, stamped 11-14). Deploy ok (run 43640967893). #983 final reply posted (issuecomment-6884336616) and closed; recording folded into L164 (#984/#985 import). #987 formatting-only rewrap of #986 runs README (hook-less worktree edit), CI running.
+2026-11-14 ~22:55Z: L163 review of #984/#985 landed (6d1e3383e; both accepted, all notes, S3 each, RV-3 n/a, 147 beats conjectured optimum 7+4sqrt2). L164 import running (adoption in a 2026-11-15 pass). #987 rewrap merged ed7aff650.
