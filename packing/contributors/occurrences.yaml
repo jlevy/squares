@@ -23782,28 +23782,14 @@ occurrences:
     path: packing/frontier/n-297.md
     record_key: '297'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Joost de Winter
   start: 0
   end: 15
-  label: Francisco Couzo
+  label: Joost de Winter
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-297.md
-    record_key: '297'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-297.md
     record_key: '297'
@@ -23821,20 +23807,6 @@ occurrences:
   note: Reviewed packing/frontier/n-297.md [297] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-297.md
-    record_key: '297'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-298.md
     record_key: '298'
@@ -32991,6 +32963,150 @@ occurrences:
   end: 6
   label: Daniel
   role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 16
+  end: 21
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 23
+  end: 29
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 31
+  end: 38
+  label: PingYou
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s297 upper bound 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 40
+  end: 44
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 16
+  end: 21
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 23
+  end: 29
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 31
+  end: 38
+  label: PingYou
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 979 2026-11-14]'
+    field: /credit
+  expected_text: de Winter after Couzo, Daniel, PingYou, Levy
+  start: 40
+  end: 44
+  label: Levy
+  role: prerequisite
   disposition: unresolved
   evidence: []
   note: Identity review pending.

@@ -1,0 +1,74 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/979",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter issue 979 2026-11-14]",
+  "report_evidence": "E-de-winter-979-certificate-report",
+  "receipt_format": "de-winter-979-exact-replay-v1",
+  "witness_prefix": "W-de-winter-979-n",
+  "claim_limitations": "Complete JoostdeWinter/square-packing c70defa above324_from_n297/ rational centre-direction certificates at 332 and 409, read exactly from the retained source files: the source's n = 297 packing plus axis-aligned squares. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-14",
+  "read_at_main": "da5091505ffd57f07cd95e8eb0cc2659f5cd2822",
+  "certificates": [
+    {
+      "n": 332,
+      "path": "above324_from_n297/n332_exact.json",
+      "format": "center-direction-json",
+      "offered": "18.739455558289",
+      "printed_in": "https://github.com/jlevy/squares/issues/979",
+      "first_committed": "2026-11-14T10:39:38Z"
+    },
+    {
+      "n": 409,
+      "path": "above324_from_n297/n409_exact.json",
+      "format": "center-direction-json",
+      "offered": "20.739455558289",
+      "printed_in": "https://github.com/jlevy/squares/issues/979",
+      "first_committed": "2026-11-14T10:39:38Z"
+    }
+  ],
+  "requested": [
+    332,
+    409
+  ],
+  "replayed": [
+    332,
+    409
+  ],
+  "houses": [],
+  "pending": [
+    {
+      "n": 332,
+      "report": "couzo-02f9690-2026-10-09",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "18.740417287544",
+      "rounding": "up"
+    },
+    {
+      "n": 409,
+      "report": "tymchishin-reclosure-v3-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Kirill Tymchishin",
+      "printed": "20.740417290708",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Joost de Winter's packings of 332 and 409 squares from his 297, JoostdeWinter/square-packing c70defa, issue 979",
+    "headline": "De Winter's 297 with a border at 332 and an L-border and corner at 409, certified exactly below the rows there",
+    "significance": 2,
+    "source_checks": "The issue and above324_from_n297/README.md say verify_exact.py (separating axes) and check_area.py (the area of each close pair's clipped intersection), both Python's fractions.Fraction, report 332 squares with 729 close pairs and 409 squares with 875, that the checkers share one author, Fraction and the input files, and that the certificates were not checked with this repository's tools. build.py writes both files from n297/n297_exact.json. Those are the source's statements. No source program ran here.",
+    "credit": "Credit Joost de Winter, whose packing of 297 squares (issue 977, which builds on T-174, Francisco Couzo's packing as Evan Daniel and PingYou Ltd improved it) is the core of both: at 332 it is moved by (1, 1) in a box one unit larger, with 18 axis-aligned squares along the bottom wall and 17 along the left; at 409 it is moved by (3, 3) in a box three units larger, with two arms of 3 x 17 axis-aligned squares against the far walls and 10 squares in the corner, five of them in a square of side 2.72 with one turned by about 45 degrees. The issue says this follows the construction of the recorded values at 332 and 409, which are built the same way from T-174 at 297, and asks that both be credited to Joost de Winter as packings that build on T-174. The construction and the checks were produced with Claude Fable 5.2 (Anthropic) under his direction.",
+    "next_rung": "Record 332 and 409 as beyond-horizon rows in report order, each superseding the row it is below (couzo-02f9690-2026-10-09 at 332, tymchishin-reclosure-v3-2026-10-23 at 409), and each below Göbel's construction at its count; beyond the case corpus, so no register entry records them. Two L steps from the 297 give 369 a side above Göbel's construction there, so no bound; deletions bound counts no report claims, which have no rows (think-kzme).",
+    "bead": "think-g2ax",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "de Winter after Couzo, Daniel, PingYou, Levy",
+      "note": "Two exact rational certificates beyond the case corpus at 332 and 409, in JoostdeWinter/square-packing above324_from_n297/ at c70defaf39af47db220d1e7c2922590637ffb664 (2026-11-14T10:39:38Z), 1 minute 45 seconds before jlevy/squares#979: the source's n = 297 packing (issue 977), which builds on T-174 (Francisco Couzo's packing as Evan Daniel and PingYou Ltd improved it), plus a border of axis-aligned squares at 332 and an L-border with a corner of ten squares at 409, at its side plus 1 and plus 3. Beyond-horizon rows below Couzo's and Kirill Tymchishin's at those counts. Retained under the author's MIT licence. Claude Fable 5.2 assistance disclosed. No local or global optimality claim."
+    }
+  }
+}

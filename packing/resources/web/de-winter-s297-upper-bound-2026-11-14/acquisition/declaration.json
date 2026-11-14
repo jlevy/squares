@@ -1,0 +1,38 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "de-winter-s297-upper-bound-2026-11-14",
+  "source_url": "https://github.com/JoostdeWinter/square-packing",
+  "source_ref": "main",
+  "source_commit": "7b4701f35e815301e4f467d214fab4205ded5eb1",
+  "retrieved_at_utc": "2026-11-14T10:59Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, a watched repository, fetched at 10:59Z on 14 November 2026 for the intake of jlevy/squares#977 (lane L154, bead think-g2ax), when main's head was c70defa (git ls-remote read the same head at 11:01Z). The pin is 7b4701f (committed 2026-11-14T10:05:30Z, 'Add a second exact checker for n = 297', the author's message), the commit #977 (10:13:18Z) names; it adds n297/check_area.py and changes n297/README.md and n297/SHA256SUMS. Its parent e008214 (10:02:54Z, 'Add square packing for n = 297 with double steps in both staircases that improves the Squares Project record') first added n297/ with the certificate, the Witness/v2 file, the 250-digit solution, two figures, verify_exact.py, README.md and SHA256SUMS, and one row of the root README, so the certificate's bytes are e008214's. The next commit, 5fcb350 (10:10:06Z, 'Add the registration request for n = 297'), adds n297/REGISTRATION.md and changes n297/README.md and n297/SHA256SUMS only, and c70defa (10:39:38Z) adds above324_from_n297/, which the de-winter-issue979-2026-11-14 packet retains; neither changes a file of n297/ this packet retains but README.md and SHA256SUMS. GitHub's activity log was not readable from this session, so the push times are not read. The scope is the licence, the root README and the whole of n297/. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and is pinned against it; n297/verify_exact.py is byte-identical to the de-winter-s132-upper-bound-2026-11-11 packet's n132/verify_exact.py and is pinned against it. n297/SHA256SUMS states the SHA-256 of the eight other files of n297/, and they match. The two figures are pinned by digest only. No source program ran in writing this packet; verify_exact.py and check_area.py are retained as data and never executed here.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The source says the packing keeps the layout of this project's T-174 (packing by Francisco Couzo, exact optimum by Evan Daniel, refinement by PingYou Ltd), whose certificate the pingyou-pr574-certificates-2026-10-13 packet holds as a derived fact, and that the double step was taken from the staircases of its own n = 132 and n = 157 packings.",
+  "claims": [
+    "n297/n297_witness.yaml states 297 unit squares, centre and basis (cos, sin) as exact rationals, in a square of exact rational side, as a packing.squares:Witness/v2 document with the softschema envelope and a claim block; the root README and n297/README.md round the side up at 12 places as 17.739455558289, and n297/README.md cuts it at 50 places, 17.73945555828895172457454811760973557490907042860652. n297/n297_exact.json states the same packing as [center_x, center_y, cos, sin] rows with the side.",
+    "n297/README.md says the packing keeps the layout of the Squares Project record T-174 (packing by Francisco Couzo, exact optimum by Evan Daniel, refinement by PingYou Ltd): an upper left and a lower right block of axis-aligned squares with staircase edges, a block of 10 squares in the lower left and in the upper right corner, and a diagonal band of 18 columns of tilted squares. It says two things are new: each staircase has two steps of double size, at the 6th and 13th band columns, between which the band lies one staircase step closer to the upper left block, the upper left block holding 6 squares fewer and the lower right block 4 more, the column at each double step holding 7 squares and the other 16 columns 6, so the band holds 110 squares and the blocks 187; and the band columns lean in two groups, by 0.375 degrees one way on the lower left and the other way on the upper right (89 of the 110 band squares), where the record's columns lean in four groups by 0.260 degrees, so one change of lean direction remains where the record has three. It says the double step was taken from the staircases of its n = 132 and n = 157 pinwheels.",
+    "n297/README.md says the band was optimized by a sequence of linear programs, restarted many times from random changes to groups of band squares; two series of restarts with different seeds ended at 17.7394555582889; a linear program over all 297 squares found no first-order improvement; the 4289 contact equations of the result were solved in 330-digit arithmetic and hold to 1e-306, the 33 other near contacts staying open by at least 2.1e-7; and the certificate's side is 1.8e-59 above that solution. It says the place where the lean changes was tried one and two columns either side of the middle, before the restarts, at 17.7394733018 for the middle and 17.7394781380 for the others; that the local optimum statement has no formal proof; and that the Kaggle competition 'Squares in Squares' per-puzzle leaderboard listed 17.7404101723 as the best side for n = 297 on 13 November 2026 and shows no packings.",
+    "verify_exact.py (separating axes) and check_area.py (area of the clipped intersection of each close pair), both Python's fractions.Fraction and standard library only, are the folder's two exact checkers; #977 says they share one author, Fraction and the input file but no code, report 297 squares and 632 close pairs, and that the witness validates against this repository's witness.schema.yaml at 7629f5a. n297_solution_250_digits.txt gives the side and each square's x, y and angle in radians. The README says the construction, optimization, high-precision solution, rational certificate, checking and figures were produced with Claude Fable 5.2 (Anthropic) under the direction of Joost de Winter. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "LICENSE",
+    "README.md",
+    "n297"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+      "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+    },
+    {
+      "match": "n297/verify_exact.py",
+      "reason": "The folder's separating-axis checker, byte-identical to the n132/verify_exact.py the de-winter-s132-upper-bound-2026-11-11 packet retains from 6617869; never executed here.",
+      "identical_to": "packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/verify_exact.py"
+    },
+    {
+      "match": "n297/*.png",
+      "reason": "Two raster figures, the packing and T-174's packing beside it, which decide nothing; pinned by digest only."
+    }
+  ]
+}

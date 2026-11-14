@@ -1,0 +1,88 @@
+{
+ "program": "l153_sides.py",
+ "sides": {
+  "297": {
+   "side_floor_40": "17.7394555582889517245745481176097355749090",
+   "floor12": "17.739455558288",
+   "ceil12": "17.739455558289",
+   "claim": "17.739455558289",
+   "claim_is_ceil12": true,
+   "claim_minus_side": "4.8275425e-14",
+   "close_pairs_centres_below_sqrt2": 632
+  },
+  "332": {
+   "side_floor_40": "18.7394555582889517245745481176097355749090",
+   "floor12": "18.739455558288",
+   "ceil12": "18.739455558289",
+   "claim": "18.739455558289",
+   "claim_is_ceil12": true,
+   "claim_minus_side": "4.8275425e-14",
+   "close_pairs_centres_below_sqrt2": 729
+  },
+  "409": {
+   "side_floor_40": "20.7394555582889517245745481176097355749090",
+   "floor12": "20.739455558288",
+   "ceil12": "20.739455558289",
+   "claim": "20.739455558289",
+   "claim_is_ceil12": true,
+   "claim_minus_side": "4.8275425e-14",
+   "close_pairs_centres_below_sqrt2": 875
+  },
+  "332_minus_297": "1",
+  "409_minus_297": "3"
+ },
+ "record": {
+  "T-174": {
+   "print": "17.740417287543801851",
+   "exact_equals_house_witness_side": true,
+   "floor_40": "17.7404172875438018509758015948842895936406",
+   "print_is": "ceil18",
+   "print_minus_exact": "2.41984e-20",
+   "gain": "9.61729254850e-4",
+   "relative_gain": "5.42111e-5"
+  },
+  "332": {
+   "current_rows": [
+    {
+     "source_id": "couzo-02f9690-2026-10-09",
+     "value": "18.740417287544",
+     "disposition": "tracked-outside-case-corpus"
+    }
+   ],
+   "rows_listed_at_count": 2,
+   "exact_side_of_cited_certificate_floor_30": "18.740417287543801851163205767760",
+   "print_is_ceil12_of_exact": true,
+   "gain_on_printed_row": "9.61729255048e-4",
+   "gain_on_exact_row": "9.61729254850e-4",
+   "relative_gain_exact": "5.13184e-5",
+   "exact_row_minus_T174_plus_1": "1.8740417e-19",
+   "new_side_minus_T174_plus_1": "-9.61729254850e-4"
+  },
+  "409": {
+   "current_rows": [
+    {
+     "source_id": "tymchishin-reclosure-v3-2026-10-23",
+     "value": "20.740417290708",
+     "disposition": "tracked-outside-case-corpus"
+    }
+   ],
+   "rows_listed_at_count": 7,
+   "exact_side_of_cited_certificate_floor_30": "20.740417290707974524069097725631",
+   "print_is_ceil12_of_exact": true,
+   "gain_on_printed_row": "9.61732419048e-4",
+   "gain_on_exact_row": "9.61732419022e-4",
+   "relative_gain_exact": "4.63699e-5",
+   "exact_row_minus_T174_plus_3": "3.1641726e-9",
+   "new_side_minus_T174_plus_3": "-9.61729254850e-4"
+  }
+ },
+ "solution_250": {
+  "first_line_digits": 253,
+  "certificate_side_minus_solution_side": "1.82394e-59"
+ },
+ "kaggle_297_by_author": {
+  "value": "17.7404101723",
+  "minus_side": "9.5461401e-4",
+  "minus_T174": "-7.1152438e-6"
+ }
+}

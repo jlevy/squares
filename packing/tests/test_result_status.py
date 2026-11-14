@@ -468,6 +468,10 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # Lane L132 took 269, the only house of Özden's issue-962 certificate (T-296), to his
         # issue-967 certificate (T-297) in the pass of 13 November 2026.
         "T-296",
+        # Hyukdong Kim's exact degree-21 side at 297 (T-247), 3.4e-90 below T-174's and never
+        # the house, is superseded once lane L154 adopted Joost de Winter's issue-977
+        # certificate (T-299) there in the pass of 14 November 2026, 9.62e-04 below it.
+        "T-247",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -541,7 +545,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # only house of T-190, to Özden's issue-960 certificate (T-295), which supersedes it,
     # and 269, the only house of T-290, to his issue-962 certificate (T-296), which
     # supersedes it. The pass of 13 November took 269, T-296's only house, on to his
-    # issue-967 certificate (T-297), which supersedes it.
+    # issue-967 certificate (T-297), which supersedes it. The pass of 14 November took 297 to
+    # Joost de Winter's issue-977 certificate (T-299), which supersedes T-247 there; T-174
+    # keeps its other houses.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

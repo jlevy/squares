@@ -1,0 +1,269 @@
+{
+ "program": "l153_digests.py",
+ "verdict": "ALL_FROZEN_DIGESTS_HOLD",
+ "checked": [
+  [
+   "checker-frozen-digests.txt",
+   "l153_reader.py",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "l153_sat.py",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "l153_clip.py",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "l153_check.py",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "l153_geom.py",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "l153_selftest.py",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "out/selftest.json",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "out/check-n297.json",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "out/check-n332.json",
+   true
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "out/check-n409.json",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "programs/controls-plan.json",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "out/plan-facts-n297.json",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "out/plan-facts-n332.json",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "out/plan-facts-n409.json",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "out/check-n297.json",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "out/check-n332.json",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "out/check-n409.json",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "programs/l153_plan_facts.py",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "programs/l153_make_plan.py",
+   true
+  ],
+  [
+   "controls-plan-digest.txt",
+   "programs/issue-977-979.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "frozen/review-2026-11-14-de-winter-977-979.frozen.md",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "frozen/checker-frozen-digests.txt",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "frozen/controls-plan-digest.txt",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/selftest.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/check-n297.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/check-n332.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/check-n409.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/plan-facts-n297.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/plan-facts-n332.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/plan-facts-n409.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/controls-n297.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/controls-n332.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/controls-n409.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/describe-n297.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/describe-n332.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "out/describe-n409.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "programs/controls-plan.json",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "programs/l153_controls.py",
+   true
+  ],
+  [
+   "findings-frozen-digest.txt",
+   "programs/l153_describe.py",
+   true
+  ]
+ ],
+ "not_in_this_directory": [
+  [
+   "checker-frozen-digests.txt",
+   "7b4701f:n297/n297_exact.json"
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "7b4701f:n297/n297_witness.yaml"
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "c70defa:above324_from_n297/n332_exact.json"
+  ],
+  [
+   "checker-frozen-digests.txt",
+   "c70defa:above324_from_n297/n409_exact.json"
+  ]
+ ],
+ "files": {
+  "README.md": "ff90f3982883e63383bce52a47f2db1be859a0317f935dbe292768ead08530bf",
+  "frozen/checker-frozen-digests.txt": "45766f987eeea12732331aec22a4e9db656c19d3aa9d4f5819ff0e26d0daacb7",
+  "frozen/controls-plan-digest.txt": "646c2121455c35532f9af5d0503ef7ec279acb2ea36c1898999410795b52a7e2",
+  "frozen/findings-frozen-digest.txt": "2af21793d38c92c0c088665d3921494a85700c8c0e994da5a63b47ef54e1c1d4",
+  "frozen/review-2026-11-14-de-winter-977-979.frozen.md": "b364e3562a57b91a70f4d7793828d41169e24ba8636c25e0214f3c8a0a9bd5c7",
+  "out/check-n297.json": "d240ebc820499b878cb3a786fa177401975f6fecc6cd46048f028f03f474af30",
+  "out/check-n332.json": "380cd359ed0d2115afc57c7bcdd6e08c74e1a56a437da0a253a688230bad2bfb",
+  "out/check-n409.json": "74346ccb028200bf2b7d95039ce91180b4bc58c429457d2aa58aed15de7d493c",
+  "out/closedform.json": "9494d7252f127482e197b8767e062aa5f1e14f1a1bf19f9c789e16011166782c",
+  "out/construct.json": "ed34886ab9e9eed3e764bdbcd3dd625dabae8716caa1eab70e90a447ce89a468",
+  "out/contraction-new.json": "cacd56681c7913669c07fde318d4d406091e7094d9bf45d876bdb24aa996d127",
+  "out/contraction-row332.json": "09bc722414d3bc733e851a2fbea7e2d0b6ec640cd71620dbbe3d0b68a77ff53c",
+  "out/contraction-row409.json": "a844438847767d64bfe616071ff7317d550950f613d4021dd5adb6e6584eb189",
+  "out/contraction-t174.json": "48d01cd57262f4a845dfefb41edd6008d31059c5913c96d131f1e779ca855359",
+  "out/controls-n297.json": "765ac51829c94444d4f435d40956e8e74c479f7aba3d1f314faa20ce2fee57b2",
+  "out/controls-n332.json": "a4523a791069f13ecfc4f833f8abcffcb26bb978fec204111d06097e5c705e59",
+  "out/controls-n409.json": "0639f3b4101ae399acba3093b63e28ef9877c3d109998a8bd42ec97ee6613896",
+  "out/custody.json": "e272fb418786a0810e775bafc3ff1398415ee821e17afa554678fe981875939b",
+  "out/describe-n297.json": "9f0344e1c6f6036fa1b81e4d34c7e1a709c67283fe2d2e779cf44d5117106a06",
+  "out/describe-n332.json": "6111bc3d5e24d364fc632c712a9893d7cea2ba01b354e90a5aaf805b7fdc79f9",
+  "out/describe-n409.json": "3f9c444809c92b24144ae9bcb2cfb7f55e697c5b73dcf2bd3554d74e69053ec1",
+  "out/identity-n297.json": "e6d678b650f0f99e882c3d4ea63c16c7ede490a7fc94d73d322a86cf1deab797",
+  "out/identity-n332.json": "08b6bca9d4dfb978ac08ce82299514e9d935cabea4538c9c01858788f2fb3b9b",
+  "out/identity-n409.json": "ff39ff7fc6557460ffa127a1de5afd0fa81b0e9ad11322fdf295d81995a842a5",
+  "out/lineage-n297.json": "afacb976fd77d82b5c883da8bf6668d66a5d489c01867fa42a69f5211b053d8a",
+  "out/plan-facts-n297.json": "651c91ce3c262f504cf29f9d5efc82e61b223d71e626b7a0f31685c7d6fb5eb9",
+  "out/plan-facts-n332.json": "4a727ec1dee4b3ba338ca186ba8a77b175e896f9155eb41a8c4b99066066f9ea",
+  "out/plan-facts-n409.json": "7090d83239adad3380a11b74eba0aa761f5ee98061887f234866da63cb273142",
+  "out/selftest.json": "a3d14b2906b77b02b082b5364ce7b915c5b9b9006a9ab97992541d195aa26a6d",
+  "out/sides.json": "65087ea9e7656d2afa153fa70ed2dadd14daecc4d298e922cc7d076e34e3f4d3",
+  "programs/controls-plan.json": "398d21280e9fc12d0ebf91f0c058e2257ed23499a56ce3fa86dae7b0bab5fcf2",
+  "programs/issue-977-979.json": "7b4b83ac9d2b75783b8c31a5a243c0ad160521b0dce9f68874241787776842eb",
+  "programs/l153_check.py": "02bfdf2ee535d66ae57930f301213348b4694c6a1fc179cb610d79289562eada",
+  "programs/l153_clip.py": "676b2eb7ff112a0c1d3a1195c9c5fc65ef1c0ae3a54ed67dc81a5e70d391a4fa",
+  "programs/l153_closedform.py": "5b015a0a355823be4a0808490fda53586d830c746c568b6ea381950100064b7e",
+  "programs/l153_construct.py": "050236dba565412960282d460636acf6d244bb92d3fec94884be6a882bf5ba8e",
+  "programs/l153_controls.py": "6c517d7e62dc967ddcc73d940493253d2f73f9d0694554dcf001101a7e0705da",
+  "programs/l153_custody.py": "fb766e48bdc8c74f7ae31f948fb4b47b090487107bbc240767d7ce2586c846a3",
+  "programs/l153_describe.py": "b913db7cfd4789f19950e04d30e6078d76db94fb281b2c28961122389287e98e",
+  "programs/l153_digests.py": "95db08b7bc778e07e176f74beb16a45565c88db906b1bf4b5e5abec25c580042",
+  "programs/l153_geom.py": "2756bb23384ce6b6d789d9e29cad4dcff811c1b8d4b33e3e7346c51867c6fcb3",
+  "programs/l153_lineage.py": "ea15f163772daed2342f89252a5d770ff7de43a8bc6efa5b960a6bd61c5bb74a",
+  "programs/l153_make_plan.py": "b81960b20c7526bd8e4d173be8163c61c7e38f0b1fd5b58aaae873e5dc0e0ba9",
+  "programs/l153_plan_facts.py": "b9f7985d81061555b2d6526db52e8e3ee6523627440c62c6eddbd77f7d1111ca",
+  "programs/l153_reader.py": "5d1836e72d901cb6b20ce0770212c4b53c29b5764c4e0f4a9c57bbc5321c6f55",
+  "programs/l153_sat.py": "d479b16c0aeabf8a5dfc36a05d30ad10707478f486c514245de2a0ec9d427eb9",
+  "programs/l153_selftest.py": "d53b46a4f0c5368bff89d6472c1b04ff3106806db7b5d1d5deefce45784973ad",
+  "programs/l153_sides.py": "abc64511e813eefad2ff4088095636621ed9a0efb3107efef5ebe65ab95644c9"
+ }
+}

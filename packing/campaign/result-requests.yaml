@@ -33462,3 +33462,174 @@ issues:
       be posted whenever T-298's levels, status or position change. The issue has no comment
       but the reply, and read_through moves to it. The issue was closed as completed at
       06:51:14Z.
+  - number: 977
+    title: 'Lowered upper bound for n = 297 (side 17.739455558289): registration request'
+    author: JoostdeWinter
+    opened: '2026-11-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter (Delft University of Technology) asks for the registration of s(297) <=
+      17.739455558289, the exact rational side of n297/n297_witness.yaml and n297_exact.json
+      rounded up at 12 places, 9.62e-04 below T-174 (Francisco Couzo's packing, improved by
+      Evan Daniel and PingYou Ltd), the house: a rational centre-basis Witness/v2 at
+      JoostdeWinter/square-packing 7b4701f, first committed at e008214, 10 minutes 24 seconds
+      before the issue. It says the packing keeps T-174's layout, two staircase blocks of
+      axis-aligned squares, two corner blocks of 10 and a diagonal band of 18 columns of tilted
+      squares, with two things new: a double step in each staircase, taken from his pinwheels
+      at 132 and 157 (T-292, T-293), so that the band lies one step closer to the upper left
+      block between them, and the band's lean changing direction once where T-174's changes
+      three times. It reports two exact checkers of his own in Python's Fraction, by separating
+      axes and by clipped areas, and a 330-digit solution of 4,289 contact equations 1.8e-59
+      below the side, a numerical local optimum with no formal proof, and asks that the result
+      be credited to him as a packing that builds on T-174. Triaged, retained and registered on
+      14 November 2026 in lane L154 (think-g2ax) as T-299: every digest the folder's SHA256SUMS
+      states holds, the print is the exact side rounded up, and both maintained exact routes
+      accept the witness and refuse its gross and sharp controls; measured, it is a new
+      arrangement relative to T-174's packing, not one to one with it under any symmetry, 55
+      squares beyond a tenth. T-174's contraction margin is 0, so the gain lies wholly outside
+      its padding. The ledger of 14 November records it. The 14 November stage 4 review
+      (docs/project/reviews/review-2026-11-14-de-winter-977-979.md, lane L153, think-gabn),
+      written blind in a separate lane, accepts it, nothing blocking or major, and scores it S3;
+      its clean-room checker decided it again, so the entry is confirmed, independently
+      re-implemented, at V3/C3, and the case adopts it at 297 in place of T-174 under the house
+      rule in the pass of 14 November, in the same pull request, with Joost de Winter the
+      packing's finder in the layout of Couzo's packing as Evan Daniel and PingYou Ltd improved
+      it, and both strong generators' regularization of the new house run in the same change.
+      Claude Fable 5.2 assistance disclosed.
+    read_through: '2026-11-14T10:13:18Z'
+    results:
+    - key: n297-double-step
+      claim: >-
+        s(297) <= 17.7394555582889518 (the exact rational side, rounded up at 16 places, of
+        n297/n297_witness.yaml at JoostdeWinter/square-packing 7b4701f), T-174's layout with a
+        double step in each staircase.
+      source: body
+      register:
+      - T-299
+      evidence:
+      - E-de-winter-s297-certificate-report
+      - E-de-winter-s297-exact-feasibility
+      - E-de-winter-s297-review-exact-feasibility
+    beads:
+    - think-g2ax
+    - think-gabn
+    answer_bead: think-g2ax
+    replies: []
+    close_when: >-
+      T-299 is on main at V3/C3 with the stage 4 review mapped and adopted as the house at 297,
+      and the reply on main says what was retained and replayed, what the review found and
+      that the case adopted it; nothing the author asked for is queued.
+    notes: >-
+      Read on 14 November 2026 from main da5091505; no comment on the issue, which carried the
+      intake label when read. The issue names 7b4701f (10:05:30Z), which adds check_area.py to
+      n297/; e008214 (10:02:54Z) first published the folder with the certificate, whose bytes
+      7b4701f keeps. The next commit, 5fcb350 (10:10:06Z), adds n297/REGISTRATION.md, the
+      issue's text in the registration template's form with four phrases reworded, read in
+      intake-watch.yaml. GitHub's activity log was not read, so no push time is recorded; no
+      other report reached 297 in the window, so the issue dates the claim. The issue's "the
+      record holds 17.740417287543801851 ... at commit 7629f5a" is T-174's side as both lanes
+      state it. T-247, Hyukdong Kim's exact degree-21 side of T-174's packing, registered and
+      not the house, is 3.4e-90 below T-174, so the claim is below it too, by 9.62e-04. The
+      README's Kaggle note, a per-puzzle leaderboard side of 17.7404101723 on 13 November with
+      no packing, is no report and lies above the claim.
+
+      The source's Witness/v2 passes this repository's witness schema, as the issue says, and
+      the loader refuses it on one rule the schema does not state: its claim is
+      coordinate_provenance: verified with no certificate record, as the source's 132 and 157
+      witnesses were from 57de046. The import reads it with witness-center-basis-unreplayed,
+      written for it, and holds the JSON to it as the same packing.
+
+      Measured, 110 squares turn by 44.11 to 44.95 degrees, 61 one way and 49 the other, the
+      band of 110 the README counts; T-174 has 107 tilted squares and 190 upright, where the
+      README's counts (a band 2 larger than T-174's) imply 108; the review's F11 finds the 108
+      with T-174's upright square 207, which closes its band at the top wall, and the block
+      counts 72 against 78 and 95 against 91, as the README says. The certificate's own
+      contraction margin is 1.824e-59, the 1.8e-59 the README states.
+
+      The review's findings are notes but F8, minor, the twin's verified claim with no
+      certificate record (read here with witness-center-basis-unreplayed). Its questions for
+      the author, which hold nothing open: a certificate record or a reported provenance for
+      the twin (F8); a Witness/v2 twin for 332 and 409, or a format line naming the box (F6);
+      whether the left and bottom clearances of 1.5e-60 were deliberate; in what sense the 409
+      row is built from T-174 (F14); the corner square's exact direction (F13); and checkers
+      that raise rather than assert (F15). The L-step scan finds
+      that the bound carries to no other count of the corpus; the L step from it lands at 332,
+      beyond the horizon, which #979 reports.
+  - number: 979
+    title: 'Lowered upper bounds for n = 332 and n = 409: registration request'
+    author: JoostdeWinter
+    opened: '2026-11-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter (Delft University of Technology) asks for the registration of s(332) <=
+      18.739455558289 and s(409) <= 20.739455558289, each the exact rational side of a
+      certificate in above324_from_n297/ at JoostdeWinter/square-packing c70defa, rounded up at
+      12 places, 9.62e-04 below the record's 18.740417287544 and 20.740417290708. Both are his
+      packing of 297 (#977) with axis-aligned squares added: at 332 a border of 18 along the
+      bottom and 17 along the left at the side plus 1, and at 409 two arms of 3 x 17 and ten
+      corner squares, five in a square of side 2.72 with one turned by about 45 degrees, at the
+      side plus 3, which he says follows the construction of the recorded values. Triaged and
+      retained on 14 November 2026 in lane L154 (think-g2ax): every digest the folder's
+      SHA256SUMS states holds, each print is the exact side rounded up, each side is exactly
+      the 297 side plus 1 or plus 3, and both maintained exact routes accept both certificates
+      and refuse their gross and sharp controls. The ledger of 14 November records both as
+      beyond-horizon rows, each superseding the row it is below (Couzo's 02f9690 at 332,
+      Tymchishin's notebook packing at 409) and below Göbel's construction there. The 14
+      November stage 4 review (docs/project/reviews/review-2026-11-14-de-winter-977-979.md, lane
+      L153), written blind in a separate lane, accepts both, nothing blocking or major, finds
+      each the 297 certificate translated by (1, 1) and (3, 3) exactly (F12), and scores them
+      S3 carried from the 297, S2 on their own content; the rows are verified. Claude Fable 5.2
+      assistance disclosed.
+    read_through: '2026-11-14T10:41:23Z'
+    results:
+    - key: above324-from-n297
+      claim: >-
+        s(332) <= 18.739455558289 and s(409) <= 20.739455558289, the sides of n332_exact.json and
+        n409_exact.json in above324_from_n297/ at JoostdeWinter/square-packing c70defa, rounded
+        up at 12 places: the 297 of #977 with a border and with an L-border and corner.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: two rows of source-coverage.yaml (source
+        de-winter-issue979-2026-11-14), not register entries. The ledger of 14 November for
+        this pass (upper-bounds-977-979-20261114), walked from starts frozen at main da5091505
+        with Göbel's construction beside each row, records both as current rows, each
+        superseding the row it is below, from both maintained exact routes with the gross and
+        sharp controls as stated in advance (E-de-winter-979-exact-feasibility) and the stage 4
+        review's clean-room run (E-de-winter-979-review-exact-feasibility), at assurance
+        verified.
+      queued: false
+      bead: think-g2ax
+    beads:
+    - think-g2ax
+    - think-gabn
+    - think-kzme
+    answer_bead: think-g2ax
+    replies: []
+    close_when: >-
+      The two rows are on main, verified with the stage 4 review mapped, and the reply on main
+      says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 14 November 2026 from main da5091505; no comment on the issue, which carried the
+      intake label when read. The issue names c70defa (10:39:38Z), the head, which first
+      published the folder, 1 minute 45 seconds before the issue; its push is not read, and no
+      other report reached 332 or 409 in that window. The issue's best recorded values are the
+      standing rows: 18.740417287544, Francisco Couzo's certificate of 9 October
+      (couzo-02f9690-2026-10-09), his own earlier 297 with the same border, and
+      20.740417290708, Kirill Tymchishin's Kaggle notebook packing (tymchishin-reclosure-v3-2026-10-23).
+      Göbel's construction is 18.970562748478 at 332 (the corner-touching strip 2 + 12 sqrt 2)
+      and 20.899494936612 at 409 (the Göbel square 11 + 7 sqrt 2 of 416 less 7), so neither row
+      is above the classical construction. Measured, neither certificate is one to one with the
+      row's packing it supersedes (94 and 262 squares beyond a tenth), and the rows'
+      contraction margins are 1.874e-19 and 1.546e-9, so neither gain is padding. Two L steps
+      from the 297 give 369 its side plus 2, 19.7395, above Göbel's construction there (19 +
+      sqrt(2)/2, 19.7071), so no bound; deletions bound counts below each certificate, which no
+      report claims, so they have no rows (think-kzme). build.py, verify_exact.py
+      and check_area.py are retained as data and were not run. The review's F13: the corner
+      square is at 44.999964 degrees, edge direction (803761, 803760)/1136689, not 45; F14: the
+      409 row lies 3.164e-9 above T-174 + 3 and is placed otherwise, so the README's "built in
+      the same way from the record T-174" holds for 332's side only; the 409 gain is
+      9.61732e-4, 3.16e-9 more than the 297 gain.
