@@ -281,8 +281,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # L120 of 12 November moved 269 on from T-290 to Özden's issue-962 certificate (T-296),
     # and lane L132 on to his issue-967 certificate (T-297) in the pass of 13 November. 29
     # since lane L154 moved 297 to Joost de Winter's issue-977 certificate (T-299) in the
-    # pass of 14 November.
-    assert len(held_counts) == 29
+    # pass of 14 November. 28 since lane L160 moved 228 to Doğa Özden's issue-983
+    # certificate (T-300) in the same pass.
+    assert len(held_counts) == 28
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
     t193 = {n for n, house in ALGEBRAIC_ADOPTED.items() if house == "T-193"}
@@ -305,6 +306,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         182: "T-243",
         268: "T-289",
         269: "T-297",
+        228: "T-300",
         270: "T-283",
         297: "T-299",
         307: "T-279",
@@ -1667,8 +1669,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     # 26 since the adoption of 11 November 2026 moved 180 and 269 (T-288, T-290); 25 since
     # the same day's lane L100 moved 179 (T-291); 24 since lane L104 moved 132 (T-292); 23
     # since lane L154 moved 297 to Joost de Winter's issue-977 certificate (T-299) in the
-    # pass of 14 November 2026.
-    assert len(adopted) == 23
+    # pass of 14 November 2026; 22 since lane L160 moved 228 to Doğa Özden's issue-983
+    # certificate (T-300) in the same pass.
+    assert len(adopted) == 22
     assert not adopted & set(select.PENDING_ADOPTION)
     # The pass of 23 October 2026 took the writer's twelve off once it wrote an algebraic
     # side, at the nine counts a derived number-field fact holds (think-ot5c).
@@ -1757,7 +1760,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 237 to his certificate of issue 960 (T-295) and lane L120 269 on from T-290 to his
     # certificate of issue 962 (T-296), the same day. Lane L132 moved 269 on to his
     # certificate of issue 967 (T-297) in the pass of 13 November, and lane L154 297 to Joost
-    # de Winter's certificate of issue 977 (T-299) in the pass of 14 November.
+    # de Winter's certificate of issue 977 (T-299) in the pass of 14 November, and lane L160
+    # 228 to Özden's certificate of issue 983 (T-300) in the same pass.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1791,6 +1795,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         157: "T-293",
         237: "T-295",
         297: "T-299",
+        228: "T-300",
     }
     before = {
         **houses.ADOPTED,
@@ -1827,6 +1832,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         132: "T-174",
         237: "T-190",
         297: "T-174",
+        228: "T-174",
     }
     # 199 was first adopted on 9 November 2026 (T-284), and 157 on 11 November 2026 (T-293),
     # after this receipt was retained.
@@ -1838,7 +1844,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
         set(houses.numbers_of("T-174")) - {70, 153, 207}
-        | {105, 130, 132, 155, 172, 179, 180, 182, 268, 269, 270, 297, 307, 308}
+        | {105, 130, 132, 155, 172, 179, 180, 182, 228, 268, 269, 270, 297, 307, 308}
     )
 
 

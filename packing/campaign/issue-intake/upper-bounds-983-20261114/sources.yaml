@@ -41,7 +41,10 @@ reports:
         squares turn by more than a degree and 36 tilts reverse; 48 squares tilted beyond a degree, 41.02 to 43.03
         degrees, all one way, and two more beyond half a degree, against T-174's 51, 38.43 to 42.93 degrees, 45 one way
         and 6 the other; the house witness and its regularized view measure as T-174; a new arrangement relative to
-        T-174's packing, not a further arrangement of it
+        T-174's packing, not a further arrangement of it, and relative to T-128, T-098, T-092 and T-056 as the
+        review measured (F7); the issue's own counts (all 228 beyond 1e-3, 93 beyond 0.05, largest 0.940, 59 re-tilted
+        beyond a degree) hold, as the review measured, with T-174 transposed and set against the lower-left corner of the
+        new box, a convention the issue does not name (F6)
       source: packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/identity.json
     new_packing:
       source: '#983: ''Please record Doğa Özden as found_by for this new arrangement ... an original AI-run column-band

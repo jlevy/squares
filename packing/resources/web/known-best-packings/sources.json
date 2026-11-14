@@ -1467,19 +1467,19 @@
       "url": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-227.cert.gz"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n228.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s228-upper-bound/blob/8bebf3f78ef50baa0b47341a836b5e45717c49cc/n-228-candidate.yaml at 8bebf3f78ef50baa0b47341a836b5e45717c49cc",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         228
       ],
       "n": 228,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-228.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/ozden-s228-upper-bound-2026-11-14/source/n-228-candidate.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-14",
       "source_n": 228,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n228.cert.json"
+      "url": "https://github.com/kenaznia-doga/s228-upper-bound/blob/8bebf3f78ef50baa0b47341a836b5e45717c49cc/n-228-candidate.yaml"
     },
     {
       "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-229.cert.gz at 0075967bace18a3deabcc0baa64c2fb294fc80a0",

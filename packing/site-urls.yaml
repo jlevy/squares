@@ -24538,6 +24538,7 @@ urls:
     evidence:
     - E-ozden-983-certificate-report
     - E-ozden-983-exact-feasibility
+    - E-ozden-983-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s228-upper-bound-2026-11-14/README.md
     - packing/resources/web/ozden-s228-upper-bound-2026-11-14/acquisition/claims.json
@@ -24549,6 +24550,12 @@ urls:
     - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/contraction-n228.json
     - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/contraction-n228-own.json
     - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/l-step-scan.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/check-n228.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/controls-n228.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/identity-n228.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/lineage-n228.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/contraction-new.json
+    - docs/project/reviews/review-2026-11-14-ozden-983.md
     - packing/campaign/issue-intake/upper-bounds-983-20261114/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py

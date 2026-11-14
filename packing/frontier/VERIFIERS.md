@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **261** programs: **57** external and **204** first-party; **178** decide claims and **83** check premises.
-- **759** of **975** evidence entries name the programs that verified them: 363 independently re-implemented, 322 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **262** programs: **57** external and **205** first-party; **179** decide claims and **83** check premises.
+- **760** of **976** evidence entries name the programs that verified them: 364 independently re-implemented, 322 reproduced with the producer’s code, 52 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -293,6 +293,7 @@ second implementation agrees.
 | [`V-ozden-962-review-check`](#v-ozden-962-review-check) | l117_check.py with l117_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-ozden-967-review-check`](#v-ozden-967-review-check) | l127_check.py with l127_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-de-winter-977-979-review-check`](#v-de-winter-977-979-review-check) | l153_check.py with l153_reader.py | Squares Project (Levy) | first-party | decides | 2 | 1 |
+| [`V-ozden-983-review-check`](#v-ozden-983-review-check) | l159_check.py with l159_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -5301,6 +5302,22 @@ The 14 November stage 4 review's exact checker of Joost de Winter's rational cen
 | --- | --- | --- | --- | --- |
 | `E-de-winter-s297-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 297 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-299 |
 | `E-de-winter-979-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the two certificates the source's beyond-horizon rows state: every square, every wall and every pair, by two exact methods that share only the reader, with the stated controls decided by both | - |
+
+### `V-ozden-983-review-check`
+
+**l159_check.py with l159_reader.py, l159_sat.py, l159_clip.py and l159_geom.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 14 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2 certificate of issue 983 (228), with a strict reader of its own (l159_reader.py: every scalar a canonical integer or p/q in lowest terms, ids 1 to n in order, the JSON twin held to the same tree with floats, constants and duplicate keys refused, anchors, aliases, tags, keys outside the schema and any unexpected layout refused): every format hypothesis, every square a unit square from its listed corners, every wall and every pair twice with no distance filter, by separating axes over the four edge normals in Python integers over per-square denominators (l159_sat.py, method A) and by exact Sutherland-Hodgman clipping in gmpy2.mpq, each square a unit square by its sides and diagonals, each pair and each wall classed by the intersection exactly and containment decided by area (l159_clip.py, method B), each pair classed overlapping, touching or apart by both. l159_geom.py holds the exact constructions the self-test and controls use, the closed-form margin from centres and half-widths and the centre-line closing among them; l159_controls.py decides 20 controls stated in a plan hashed before it existed; l159_selftest.py holds both methods and the reader to 32,833 cases.
+
+- Source: [`packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_check.py`](../../packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_check.py), [`packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_reader.py`](../../packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_reader.py), [`packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_sat.py`](../../packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_sat.py), [`packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_clip.py`](../../packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_clip.py), [`packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_geom.py`](../../packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_geom.py), [`packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_selftest.py`](../../packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_selftest.py), [`packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_controls.py`](../../packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_controls.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/ozden-s228-983-review-2026-11-14/README.md`](../../packing/resources/web/ozden-s228-983-review-2026-11-14/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 983 (L159, under think-5y6d), strong tier, prompted separately from the import lane (L160, think-14i2)), with its own prompt and code; authorship in common with the producer’s: system-family, The coordinates were made by this repository's packing-witness promote, whose witness tooling Claude agents co-authored, and the issue says the lab's search, checks and filing were AI-assisted throughout. The six checker files were frozen at 2026-11-14T19:12:07Z (frozen/checker-frozen-digests.txt), before their author read any producer code or this repository's witness, verifier or promotion code; they import nothing from this repository or the source and reuse no code of any earlier review, lane L127's review of #967, the model for its method, among them, whose programs it did not open.
+- Note: Written and run on 14 November 2026 for docs/project/reviews/review-2026-11-14-ozden-983.md (SHA-256 6ea41979038f2527cc7fcdff308fc0884acdf4a156967e345d2d26bcf2506a93 for l159_check.py, as frozen at 2026-11-14T19:12:07Z), and kept with its receipts in the review-only directory ozden-s228-983-review-2026-11-14 beside the import lane's packet. l159_plan_facts.py, l159_make_plan.py, l159_describe.py, l159_sides.py, l159_pose.py, l159_lineage.py, l159_closedform.py, l159_custody.py and l159_digests.py, kept beside them, decide no certificate and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-983-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the witness at n = 228: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-300 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

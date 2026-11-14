@@ -6022,26 +6022,19 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {
-          "degree": 1,
-          "degree_provenance": "frontier",
-          "degree_recorded_upstream": true,
-          "exact_form": "81948695622242743406583885455629643551588893415142761463009212036964483311755603944810431596664817946260573321741429238134361699165705247080593964048766062042687992006427669727874901828361402863145549814389084262126120428063889082073471290642932394480073117972064778190120213790911706981258384522203621265266533117951358259937704965831322389921654702656750316315228947287587625872802207845509483204201099699676132835060914753240032261244865476454248909348419000888189290166/5251572476855632483667460657852875439254182406020529880753548190924046185669801353348281757990728441567542533254170942371057521496676706922233751751083196758275857817052273662330602126087972603034105932424636772547375700342385676958325063813751905276310789204955755529632857538615756628754205416245547432750722805395532318888303909732100685830132679940488465796557591470754105466880219739251748136077630375930351553807059740053124557825129922908223347140881687824268888523",
-          "minimal_polynomial": null,
-          "state": "minimal-polynomial"
-        },
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"2496128277569880608456232946784067658876105198533881000031076351067767905994143823546978155670208204882752156955406194327585270209774082067458803679745651277953505877007771559713446938963495638598661950372557464105851753/160000000000000000000000000000096624645556343967712787053863023914465696789877534418272517211148459359303353530695729018518107388867387281680255906517187071662554956852110346763759081839945150445043680001000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(228) ≥ 15.103081","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.1030818665"},
         "n": 228,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"15.60460147572967429","source_url":"https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n228.cert.json","witness_id":"W-known-best-n228","witness_path":"packing/witnesses/known-best/n-228.yaml"},
+          "assessed_geometry": {"reported_side":"15.6008017348117539","source_url":"https://github.com/kenaznia-doga/s228-upper-bound/blob/8bebf3f78ef50baa0b47341a836b5e45717c49cc/n-228-candidate.yaml","witness_id":"W-known-best-n228","witness_path":"packing/witnesses/known-best/n-228.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
               "evidence_refs": ["E-translation-escape-not-rigid"],
               "method": "numerical-multiprecision",
               "property": "not-rigid",
-              "scope": "Square 71 of the retained witness (witness id 72) translates 0.008115 along (0.707107, -0.707107) with the packing still valid, so the configuration admits a non-trivial feasible motion; 18 of its 228 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
+              "scope": "Square 0 of the retained witness (witness id 1) translates 0.082145 along (0.707107, 0.707107) with the packing still valid, so the configuration admits a non-trivial feasible motion; 123 of its 228 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
               "sources": [{"date_note":"The current retained screen has no generation date; the historical source-review date does not date the current witness assessments.","date_reference":null,"determination_precision":"unknown","determined_at":null,"evidence_ref":"E-translation-escape-not-rigid","recorded_at":"2026-10-08","recording_event":"Import of the unified displayed-packing rigidity assessment after the 2026-10-08 source audit.","reference":"packing/atlas/known-best/translation-escape-screen.json","reviewed_at":"2026-09-07"}]
             }
           ],
@@ -6051,7 +6044,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(228) ≤ 15.604602","provenance":"frontier","relation":"upper-bound","value":"15.60460147572967429"}
+        "side": {"display":"s(228) ≤ 15.600802","provenance":"frontier","relation":"upper-bound","value":"15.6008017348117539"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

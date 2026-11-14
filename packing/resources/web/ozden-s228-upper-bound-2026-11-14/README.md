@@ -209,9 +209,87 @@ packing decided on both maintained routes.
 and monotonicity consequences as on `main`: this bound carries to no other count
 ([measure/l-step-scan.json](measure/l-step-scan.json)).
 
+## Stage 4 Review and Adoption
+
+The stage 4 mathematical review of 14 November 2026
+([review-2026-11-14-ozden-983.md](../../../../docs/project/reviews/review-2026-11-14-ozden-983.md)),
+written in a separate lane (L159) blind to this one throughout, accepts the certificate
+with nine findings, all notes, none blocking, and scores it S3. Its clean-room checker
+decides every square, wall and pair by separating axes in Python integers and by exact
+Sutherland–Hodgman clipping in GMP rationals, with 20 controls stated before they ran,
+all 20 as stated, and accepts the same squares in the box of the claim’s own side,
+15.600801734812, and refuses them in the box of its 12-place floor (F3). Its programs
+and receipts are kept in the review-only directory beside this packet,
+[ozden-s228-983-review-2026-11-14](../ozden-s228-983-review-2026-11-14/README.md).
+
+This lane recorded its replay, controls and measurements in its intake commit before it
+read the review; it read the review’s frozen findings once that commit was made, and
+began the adoption on their accepted verdict while the review’s later checks ran.
+Read against this packet’s receipts once both were done, the review’s least pair margin
+(101/500000000000000, squares 118 and 119 and six more pairs) is the replay’s exactly,
+and square 63, the square the sharp controls grew at its wall, is one of its three wall
+contacts (63 at the left, 167 at the bottom, 213 at the top).
+Its contraction receipts for T-174 and for this certificate equal
+[measure/contraction-n228.json](measure/contraction-n228.json) and
+[measure/contraction-n228-own.json](measure/contraction-n228-own.json) in margin, factor,
+binding pair and contracted side, and its identity measurement against T-174 equals
+[measure/identity.json](measure/identity.json) under nearest centres, the optimal
+assignment and box-centred alignment, as do the tilt counts.
+No disagreement.
+
+The review finds the issue’s arithmetic right (F4): the claim is the side’s 12-place
+ceiling and the gain the exact gap’s 17-place floor, relative to T-174’s side; the
+43-place exact side is rounded up and followed by an ellipsis that reads as a truncation.
+T-174 has no contraction margin, so RV-3 does not reach the gain, and the certificate’s
+own contracted side, 15.6008017348088, is a side only RV-3 could register (F5).
+The issue’s lineage counts hold, all four, with T-174 transposed and set against the
+lower-left corner of the new box under either assignment, a convention the issue does
+not name; under the placement of least total move 52 upright squares stay within 10⁻³ of
+T-174’s (F6). It is a new arrangement relative to T-174 and to T-128, T-098, T-092 and
+T-056, every other registered packing at 228 (F7).
+The reports under `checks/` name the promoted witness `W-colband-n228-sol1114-rational`
+from `W-colband-n228-sol1114`, where the retained certificate is `W-candidate-n228` from
+`W-colband-near1-n228`; they agree with it in side, pairs, least gap and wall clearance
+(F8). The witness’s `softschema.schema` resolves to no file in the author’s repository
+and its `certificate.replay` names no directory, as at #967; the adopted witness carries
+this repository’s own (F9). The side is not s(m) + k for any registry value below 228
+and integer k up to 16 within 10⁻⁹; the nearest is s(37) + 9, 2.18 × 10⁻³ away.
+
+Its six questions for the author, informational and holding nothing open:
+
+1. The lineage counts reproduce with T-174 transposed in the new box and set against its
+   lower-left corner. Is that the tool’s convention, and would the issue name it (F6)?
+2. Was the retained `W-candidate-n228` made from the reports’ witness by changing its ids
+   alone (F8)?
+3. Would the author print the 43-place side’s floor, or drop the ellipsis (F4)?
+4. Will the column-band designer and its dynamic programme be published, and is the
+   proposal’s `nt = 48` the band’s 48 squares?
+5. Would the author point `softschema.schema` at a file that resolves in his repository,
+   and say in the replay line where to run it (F9)?
+6. Would the lab promote with a contraction (`center_dilation` below 1), knowing that
+   whether the record registers a side inside the certificate’s own padding is its
+   owner’s question (RV-3, F5)?
+
+The case adopted the certificate as its house in the pass of 14 November 2026 under the
+house rule, as T-300, in place of T-174, which keeps its certificate as history, with
+Doğa Özden the finder of a new arrangement below Francisco Couzo’s packing as PingYou
+Ltd improved it, and Evan Daniel credited for the optimizer, as the issue asks (F7).
+228 joins the day’s pass beside 297, whose archive takes a row for each count.
+Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-14i2-2026-11-14/README.md)), and
+the selection, measured against the axis tool’s drawing of this witness, draws
+grid-slack’s 1-degree view: light, uneven and near-axis squares, angle classes and hues
+35, 78, 12, 30 and 19 against 0, 4, 0, 16 and 16, and full shared sides 475 and 577
+against 672 and 680. Evan Daniel’s driver drew a same-side view that its row 7 holds for
+review; his certified KKT solve lies 3.01 × 10⁻¹² below the side, 1.02 of the
+certificate’s own contraction margin (2.949 × 10⁻¹²), held at row 3 as a register
+candidate and not admitted, as at 156, 172, 179, 180, 199, 268, 269 and 270 (RV-3).
+The rigidity block, derived again on the new witness, stays not rigid: 123 of its 228
+squares translate, against 18 of T-174’s.
+
 ## What Is Not Established
 
-- **Human oversight.** No human oversight record.
+- **Human oversight.** One AI review is retained; no human oversight record.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.
 - **The lineage** the source states, beyond what the measurement above shows.
