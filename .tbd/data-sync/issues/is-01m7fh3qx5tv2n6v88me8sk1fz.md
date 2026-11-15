@@ -5,7 +5,7 @@ title: "Import #996/#997: Joost de Winter's s(90) <= 9.994038766610 (fa53fb0, re
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l181
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T11:57:32.962Z
-updated_at: 2026-11-15T12:57:07.632Z
+updated_at: 2026-11-15T13:25:36.579Z
 started_at: 2026-11-15T11:57:34.424Z
 ---
 
@@ -28,3 +28,5 @@ Intake commit 35e33e184 (12:17:43Z): packet de-winter-s90-upper-bound-2026-11-15
 Read L180's frozen findings (4622bdfb8) at 12:39Z; merged (249a0dd08), mapped (d1e0283f7): accepted, 26/26 controls, F1-F7 notes, no disagreement. Read final head (95ad4bc8a) at 12:43Z; merged (8f15a2305), mapped (8cd27803b): F8-F13 notes, S3, six questions for the author; agrees with packet measurements. Adoption (pass of 2026-11-16, LATER_PASSES {90}), regularization, stamps and re-pin wait for 16 November UTC.
 
 Change of input (coordinator, 12:55Z): de Winter's #997 (12:08:33Z) replaces #996's certificate with fa53fb0d734fbf438bcfb73c1434a15894bb2bc5 (side 99940387666098521323/10000000000000000000 = 9.994038766610 at 12 places, 9e-8 below), asking to pin it and disregard 64d5ee7. Head 6c0ad56 (12:07:15Z) changes only n90/REGISTRATION.md (the commit named) and n90/SHA256SUMS (the new digests). New controls plan stated before any run of the fa53fb0 certificate: scratch l181-notes/controls-plan-n90-fa53fb0.md SHA-256 88b26ff1b8fb96a7ee5bf9909193b237f85fc0808cc494bb0ec0e36364ef8cf2, hashed 12:56:59Z; 3 gross and 11 sharp controls, the touching-square branch stated in advance.
+
+fa53fb0 intake 48bf8278b (13:08:49Z): packet de-winter-s90-upper-bound-2026-11-15 now pins fa53fb0 (head 6c0ad56 differs only in REGISTRATION.md, SHA256SUMS); 64d5ee7 moved to retention-only packet de-winter-s90-64d5ee7-2026-11-15 (superseded by author). Replay: 24,030 pair decisions, 3 gross + 11 sharp all as stated (plan 88b26ff1, 12:56:59Z); edge contacts at left/bottom, far wall 2.51e-22, least gap 2.0264e-12 (2,40). Identity: vs T-303 6 beyond 0.1 (0.645), all 40 tilted same sign -> T-303 improved (found_by jazivxt, improved_by de Winter at adoption); vs #996 one-to-one, largest 0.0142. Margins: T-303 1.0988e-11 (gain 3.86e8x), #996 9.533e-12 (step 9539x), own 1.8187e-11. New reader witness-corners-opposite holds the twin as same packing. Ledger renamed upper-bounds-996-997-20261115 (#997 recorded, #996 other item: replaced by author). Records 20c8c89e4 (13:21:03Z): T-304 = fa53fb0, evidence E-de-winter-997-*, #996 entry not_registered, #997 entry T-304. Addendum (L182, 83ac8ceec) read 13:21Z after those commits; merged 86ce0aa8d; mapped 09a290837: accepted, 26/26, F14 F15, S3; no disagreement. Re-pin 2f0da862a. Adoption, regularization, stamps on 16 Nov.
