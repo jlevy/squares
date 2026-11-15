@@ -263,6 +263,11 @@ L154_1114 = ("de-winter-s297-upper-bound-2026-11-14", "de-winter-issue979-2026-1
 #: Doğa Özden's #983 at 228, a column-band design below T-174 promoted the same way as his
 #: #967, under CC BY 4.0 and MIT.
 L160_1114 = "ozden-s228-upper-bound-2026-11-14"
+#: The intake pass's lane L164 of 14 November 2026 (`test_upper_bound_reports_l164_1114`):
+#: Roberto Ono's #984 at 228, five band periods cut from Francisco Couzo's 404, below T-300,
+#: and #985 at 147, one period cut from Evan Daniel's 229, below 7 + 4 sqrt(2); the source's
+#: harness JSON, read by ``ono-json``, under MIT.
+L164_1114 = ("ono-issue984-2026-11-14", "ono-issue985-2026-11-14")
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -333,6 +338,7 @@ EVERY = (
     L132_1112,
     *L154_1114,
     L160_1114,
+    *L164_1114,
 )
 
 
@@ -1411,6 +1417,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L132_1112,
         *L154_1114,
         L160_1114,
+        *L164_1114,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1711,6 +1718,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L132_1112: "2026-11-12",
         L154_1114[0]: "2026-11-14",
         L160_1114: "2026-11-14",
+        **dict.fromkeys(L164_1114, "2026-11-11"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

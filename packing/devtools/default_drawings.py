@@ -546,6 +546,18 @@ _README_463R = (
     "beside the runs' receipt, blocks and reports"
 )
 
+_RUN17EX = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-15-n147-228-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg5"),
+)
+_README_17EX = (
+    "packing/cases/regularized_drawings/think-17ex-2026-11-15/README.md and "
+    "selection-adopt-2026-11-15-n147-228.md, the selection of 15 November 2026 "
+    "(think-17ex), beside the runs' receipt, blocks and reports"
+)
+
 
 _RUNYK2H = (
     ("evand-regularize", "evand-regularize-yk2h-2026-10-31-n39-291-evand"),
@@ -1020,6 +1032,22 @@ SETTLED: dict[int, Settled] = {
         "solve is 3.48e-12 below the side and held at row 3 as a register candidate, never "
         "admitted here; the axis tool's view stays drawn",
         _README_463R,
+    ),
+    228: Settled(
+        DECIDED,
+        "[Ono issue 984 2026-11-14]",
+        "resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/"
+        "n228_S59604312.json.gz",
+        "b5636fd6694d2cc7aa5811ae33f441268b81b714",
+        "87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/"
+        "5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680",
+        _RUN17EX,
+        "on T-301's witness grid-slack's views at all three thresholds go to review at row 7, "
+        "2 per-square counts falling while no total does, Evan Daniel's same-side view is "
+        "refused at row 7, a total of shared sides falling, and his KKT solve, 4.29e-09 below "
+        "the side, beyond the certificate's own contraction margin, is held at row 3 as a "
+        "register candidate, never admitted here; the axis tool's view stays drawn",
+        _README_17EX,
     ),
 }
 

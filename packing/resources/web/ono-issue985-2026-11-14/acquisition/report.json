@@ -1,0 +1,67 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/985",
+  "author": "Roberto Ono",
+  "source_key": "[Ono issue 985 2026-11-14]",
+  "report_evidence": "E-ono-985-certificate-report",
+  "receipt_format": "ono-985-exact-replay-v1",
+  "witness_prefix": "W-ono-985-n",
+  "claim_limitations": "Complete 2026-11-11 exact rational centre and half-angle certificate at 147, the source's own harness JSON, read exactly from the retained source file, with its text copy held to the same packing. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-14",
+  "read_at_main": "473577f42a42c4a454190944e13d0a3ef8fa4c1d",
+  "certificates": [
+    {
+      "n": 147,
+      "path": "runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json",
+      "format": "ono-json",
+      "offered": "12.651043556588",
+      "first_committed": "2026-11-11T22:15:40Z",
+      "same_packing": [
+        {
+          "path": "runs/2026-11-11_fable-5.2/evidence/registration/n147.cert",
+          "format": "evand-cert"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    147
+  ],
+  "replayed": [
+    147
+  ],
+  "houses": [
+    {
+      "n": 147,
+      "reader": "[Daniel regularizer 2026-10-11]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue, verified by T-155's exact ceiling",
+      "result": "T-155",
+      "reported_value": "12.65685424949238",
+      "verified_value": "12.65685424949239",
+      "evidence": [
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Roberto Ono's packing of 147 squares at RobertoOno/squares-in-square b5636fd, issue 985",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-17ex",
+    "bibliography": {
+      "authors": [
+        "Ono"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER"
+    }
+  }
+}

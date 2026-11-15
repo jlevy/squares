@@ -5574,6 +5574,58 @@ sources:
       and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan
       Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's
       ASCII. Retained in web/ozden-s228-upper-bound-2026-11-14/.
+  - key: '[Ono issue 984 2026-11-14]'
+    authors:
+    - Ono
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: 'Ono after Couzo, Levy'
+    short_credit: 'Ono after Couzo et al.'
+    note: >-
+      RobertoOno/squares-in-square at b5636fd6694d2cc7aa5811ae33f441268b81b714
+      (2026-11-14T20:26:58Z), whose ancestor fce076f2bf459a25be3645d899e8950b93ed977c the issue
+      names, Roberto Ono's certificate for s(228) <= 15.5960431209207917 (the exact side rounded
+      up at 16 places), printed 15.596043120921 rounded up at 12 places: an exact rational
+      certificate of centres and half-angle tangents from the harness's run of 11 November
+      2026, made from Francisco Couzo's packing of 404 squares as this registry retains it
+      (couzo-issue763-2026-10-23) by cutting five periods of its band, then a penalty step, an
+      exact-constraint sequential-LP polish and basin hopping; a new arrangement relative to
+      T-300's packing (Doğa Özden's column-band packing, the house it replaced at 228) and to
+      T-174. Registration was
+      requested in jlevy/squares#984, the account's first contribution; the issue says the
+      packing was found, certified and checked by an AI coding agent (Claude, by Anthropic)
+      working in the harness, directed by a person. It discloses first two side-only Kaggle
+      leaderboard entries at 228 below this side, with no packing. No optimality claim. The
+      lineage builds on this project: the harness reads its starting packings from this
+      registry's witnesses. Licensed MIT by LICENSE at the pin. Retained in
+      web/ono-issue984-2026-11-14/.
+  - key: '[Ono issue 985 2026-11-14]'
+    authors:
+    - Ono
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: 'Ono after Daniel, Levy'
+    short_credit: 'Ono after Daniel et al.'
+    note: >-
+      RobertoOno/squares-in-square at b5636fd6694d2cc7aa5811ae33f441268b81b714
+      (2026-11-14T20:26:58Z), whose ancestor fce076f2bf459a25be3645d899e8950b93ed977c the issue
+      names, Roberto Ono's certificate for s(147) <= 12.6510435565876945 (the exact side rounded
+      up at 16 places), printed 12.651043556588 rounded up at 12 places: an exact rational
+      certificate of centres and half-angle tangents from the same run, made from Evan Daniel's
+      packing of 229 squares as this registry holds it by cutting one period of its band and
+      polishing; the first packing below 7 + 4*sqrt(2) at 147 the record holds, a new
+      arrangement relative to the Kingbird catalogue's 45-degree packing there. Registration was
+      requested in jlevy/squares#985, the account's first contribution with #984; the issue
+      says the packing was found by an AI coding agent (Claude, by Anthropic) working in the
+      harness, directed by a person. It discloses first a side-only Kaggle leaderboard entry at
+      147 below this side, with no packing. No optimality claim. The lineage builds on this
+      project: the harness reads its starting packings from this registry's witnesses. Licensed
+      MIT by LICENSE at the pin, which web/ono-issue984-2026-11-14/ retains. Retained in
+      web/ono-issue985-2026-11-14/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
@@ -5631,3 +5683,4 @@ credited_names:
   Alex Chilton: Chilton
   ntumlnoob: ntumlnoob
   unnir: unnir
+  Roberto Ono: Ono

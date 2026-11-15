@@ -136,9 +136,11 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     260 Francisco Couzo's issue-678 certificate (T-223) replaced T-196 on 21 October 2026.
     At n = 293 and 299 Evan Daniel's certificates of issue 845 and of his issue 824 update
     (T-257, T-258) replaced the catalogue's packings on 31 October 2026, the first adoption
-    at each."""
+    at each. At n = 147 Roberto Ono's certificate of issue 985 (T-302) replaced the
+    catalogue's 45-degree packing on 15 November 2026, the first adoption there."""
     assert [n for n in registered.committed() if registered.readopted(n)] == [
         29,
+        147,
         204,
         227,
         229,
@@ -150,6 +152,16 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     for n in (293, 299):
         text = (registered.FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
         assert registered.apply_case(n, text) == text
+    assert registered.readopted_by(147, "T-155")
+    assert not registered.readopted_by(147, "T-156")
+    text = (registered.FRONTIER / "n-147.md").read_text(encoding="utf-8")
+    assert registered.apply_case(147, text) == text
+    flat = _flat(147)
+    assert (
+        "the verified upper bound until 15 November 2026 (T-155), which the record printed "
+        "as $12.65685424949239$"
+    ) in flat
+    assert "which the record still prints" not in flat
     assert registered.readopted_by(229, "T-155")
     text = (registered.FRONTIER / "n-229.md").read_text(encoding="utf-8")
     assert registered.apply_case(229, text) == text

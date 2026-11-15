@@ -33941,7 +33941,8 @@ issues:
     title: 's(228) ≤ 15.600801734812: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-14'
-    state: open
+    state: closed
+    closed: '2026-11-14'
     kind: result-report
     triage: done
     summary: >-
@@ -33971,7 +33972,7 @@ issues:
       Doğa Özden the finder of a new arrangement below Couzo's packing as PingYou Ltd improved
       it, Evan Daniel's optimizer credited, and both strong generators' regularization of the
       new house run in the same change.
-    read_through: '2026-11-14T18:34:35Z'
+    read_through: '2026-11-14T21:17:32Z'
     results:
     - key: n228-column-band
       claim: >-
@@ -33992,7 +33993,27 @@ issues:
     - think-ikku
     - think-tj4o
     answer_bead: think-14i2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/983#issuecomment-6884336616
+      date: '2026-11-14'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n228-column-band
+        id: T-300
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n228-column-band
+        id: E-ozden-983-exact-feasibility
+        status: confirmed
+      - result: n228-column-band
+        id: E-ozden-983-certificate-report
+        status: reviewed
+      - result: n228-column-band
+        id: E-ozden-983-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-300 is on main at V3/C3 as the house at 228, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -34058,3 +34079,250 @@ issues:
       own contraction margin, is held at row 3 for RV-3 (think-ruu2, think-ikku) and not
       registered. The posters hold Özden's name off their credit block at 228 until the next
       infographics cut (think-tj4o).
+
+      Closed on 14 November 2026 with the final reply (issuecomment-6884336616, posted by
+      jlevy at 21:17:32Z), after #986 merged as 473577f42 at 21:06Z with the import, the
+      replay, the mapped stage 4 review and the adoption at 228, and after that merge's Pages
+      deploy and verify-deployment passed (run 43640967893); recorded in lane L164
+      (think-17ex). It states T-300, s(228) <= 15.6008017348117539, the exact rational side of
+      n-228-candidate.yaml at 8bebf3f rounded up at 16 places, of which the author's 12-place
+      print is the ceiling, at V3/C3, confirmed, significance S3, and adopted as the case's
+      house in place of T-174, 3.79974e-3 below it; that is its position, current. It names
+      E-ozden-983-exact-feasibility, confirmed, E-ozden-983-certificate-report, reviewed, and
+      E-ozden-983-review-exact-feasibility, confirmed, so all three are recorded under
+      reported (#900). T-174 is named as the house replaced, and T-174, T-128, T-098, T-092
+      and T-056 as the packings the arrangement is new against, not as this issue's results,
+      and none is recorded under reported. It credits the author as the finder of a new
+      column-band arrangement below Francisco Couzo's packing as PingYou Ltd improved it,
+      with Evan Daniel's optimizer named.
+
+      It says what was checked: both of the record's maintained exact routes accept the
+      certificate and all 11 sharp controls stated in advance came out as stated, the least
+      pair gap 101/500000000000000 at squares 118 and 119, three squares touching walls; the
+      blind stage 4 review's own exact checker, separating axes in integers and clipping
+      exactly in rationals with no distance filter, accepted the packing with nothing
+      blocking, its 20 pre-stated controls as stated; T-174's contraction margin is exactly 0,
+      squares 201 and 227 touching, so the whole gain is not padding, and the certificate's
+      own margin is 2.949e-12, its contracted side and Evan Daniel's KKT solve 3.01e-12 below
+      the side held for the owner's open question and not registered; the arrangement is new
+      against all five packings the record holds at 228, and the lineage counts reproduce
+      against T-174 transposed and set against the lower-left corner; and the side-only
+      leaderboard entry the author disclosed, 15.596043116646, is context only. It says that
+      #984 has since reported a packing at 228 about 4.76e-3 below this one, now in intake,
+      and that if it is confirmed it becomes the house at 228, T-300 is marked superseded, and
+      a follow-up will be posted here. It asks the review's six questions, which hold nothing
+      open, and names no bead. It says that nothing the author asked for is still queued, so
+      the issue is closed with it, and that answers are welcome at any time. The issue was
+      closed as completed at 21:17:33Z.
+  - number: 984
+    title: 's(228) ≤ 15.596043120921: first public packing at the leaderboard side (registration request)'
+    author: RobertoOno
+    opened: '2026-11-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Roberto Ono, in his account's first contribution, asks for the registration of s(228) <=
+      15.596043120921, the exact rational side of n228_S59604312.json rounded up at 12 places,
+      4.76e-03 below T-300 (Doğa Özden's column-band packing of #983, the house at 228 since the
+      pass of 14 November) and 8.56e-03 below T-174, the house before it: an exact rational
+      certificate of centres and half-angle tangents from his squares-in-square harness, at the
+      revision fce076f the issue names, made by an AI coding agent from Francisco Couzo's packing
+      of 404 squares as this registry retains it by cutting five periods of its band, then a
+      penalty step, an exact-constraint polish and basin hopping. It discloses first two
+      side-only Kaggle leaderboard entries at 228, 4.29e-09 and 4.27e-09 below this side, which
+      it does not beat and which supply no packing, and calls this the first public packing at
+      that side. It reports the repository's frozen verifier VALID, an exact clipping check
+      PASSED and a strict check STRICT VALID, and asks that Couzo's n = 404 packing be credited
+      as the start. Triaged, retained and registered on 14 November 2026 in lane L164
+      (think-17ex) as T-301: the stated digests hold, the print is the exact side rounded up,
+      and both maintained exact routes accept the certificate and refuse its gross and sharp
+      controls; measured, it is a new arrangement relative to T-300's and T-174's packings, not
+      one to one with either under any symmetry, 96 and 89 squares beyond a tenth. T-300's
+      contraction margin is 2.949e-12, so the gain lies wholly outside its padding. The ledger
+      of 14 November records it. The 14 November stage 4 review
+      (docs/project/reviews/review-2026-11-14-ono-984-985.md, lane L163, think-jbwm), written
+      blind in a separate lane, accepts it with #985's, fourteen findings, all notes, and scores
+      each S3; its clean-room checker decided it again, so the entry is confirmed,
+      independently re-implemented, at V3/C3.
+    read_through: '2026-11-14T20:11:25Z'
+    results:
+    - key: n228-band-cut
+      claim: >-
+        s(228) <= 15.5960431209207917 (the exact rational side, rounded up at 16 places, of
+        runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json at
+        RobertoOno/squares-in-square fce076f, the same file at b5636fd), a packing made by
+        cutting five band periods from Francisco Couzo's n = 404 packing.
+      source: body
+      register:
+      - T-301
+      evidence:
+      - E-ono-984-certificate-report
+      - E-ono-984-exact-feasibility
+    beads:
+    - think-17ex
+    - think-jbwm
+    answer_bead: think-17ex
+    replies: []
+    close_when: >-
+      T-301 is on main with its stage 4 review mapped and adopted as the house at 228, and the
+      reply on main says what was retained and replayed, what the review found and that the
+      case adopted it.
+    notes: >-
+      Read on 14 November 2026 from main 473577f42; no comment on the issue, which carried
+      the intake label from 20:55:17Z, its only event. The account's only issues on this
+      repository are this one and #985, posted one second later; neither had a comment, so
+      this is its first contribution, and no contributor profile exists for Ono: the census
+      spans the registration adds stay unresolved for identity review. The issue names
+      fce076f (20:10:31Z), 54 seconds before it; the packet pins the repository's main,
+      b5636fd, whose one commit past fce076f records the posting, the certificate unchanged.
+      The certificate was first committed on 11 November (be713b7); the run's FOLLOWUP.md
+      says the branch was pushed at fce076f before the issues were posted, and GitHub's
+      activity log was not read, so the issue dates the claim. The issue's
+      "15.60460147572967429 (Francisco Couzo, improved by PingYou Ltd, 2026-10-13)" is
+      T-174's side, the registry it read at main fa980f8e; its gain on it,
+      0.008558354808882, is the exact gap's floor, and the gap it states to #983's side,
+      0.004758613890, is the floor of the exact gap to T-300's side (F14). #983 became T-300
+      and the house at 228 in #986, merged at 21:06Z, after this issue was posted; the reply
+      on #983 names this report.
+
+      Measured against padding, T-300's certificate at 228 has margin 2.949e-12 (squares 118
+      and 119), which the gain exceeds 1.61e9 times, and T-174's has margin 0 (squares 201 and
+      227 touch), so none of the gain is a predecessor's padding and RV-3 (think-ruu2) does not
+      reach this entry. This certificate's own margin is 3.49e-09 (squares 8 and 21, the
+      least-gap pair); its contracted side is the owner's RV-3 question and is not registered.
+      The L-step scan finds that this bound carries to no other count.
+
+      Measured pose by pose, 55 squares are tilted beyond a degree, 19 one way and 36 the other,
+      against T-300's 48, all one way. The side-only leaderboard entries the issue discloses,
+      Nevska's 15.596043116632 and square1000's 15.596043116646, state no packing and reached
+      this repository only as the issue's quotations, so they are no reports and nothing is
+      recorded for them. The run's report says the run first called this packing an
+      improvement and withdrew the word when it found those entries. The intermediate
+      certificate at 15.597084912 the issue names (n228_S59708491.json) is retained and is
+      above the claim, so it is not recorded. The run's calibration certificates at 11, 17, 18
+      and 19 are not claimed.
+
+      The review measured the issue's statements: the prints hold, the claim the side's 12-place
+      ceiling and the gains and 30-place sides floors (F14); the packing touches three walls,
+      not four, the top cleared by 1.77e-12 at square 114 (F5); the stated cut of Couzo's 404
+      gives 228 squares only under the mirror x -> S - x and with two squares dropped whose
+      centres land outside the new box, which the issue does not name, and the certificate lies
+      34 squares beyond a tenth from that seed (F9); removing a band period is new to the record
+      (F10); it is a new arrangement relative to T-300, T-174, T-128, T-098, T-092 and T-056
+      (F12); RV-3 does not apply (F11); and two of the author's checkers decide by assert
+      (F13). This lane read the review's frozen findings at 21:45Z and its final head at
+      21:56Z, after its own replay, controls, measurements and registration were committed;
+      read against the packet's receipts, the review's margins, contraction receipts and
+      identity measurement equal the packet's.
+
+      The review's six questions for the author, informational and holding nothing open: which
+      mirror was applied to Couzo's 404 and whether the two squares landing outside were
+      deleted (F9); whether the issue would say three walls (F5); whether the format would state
+      the box and the sense of theta (F6); whether two checkers would raise rather than assert
+      and verify.py refuse a missing t and unknown keys (F13); whether the strict JSON's digests
+      would be stated (F7); and whether the diagonal-period sweep's near misses will be
+      published. No reply has been posted.
+
+      Adopted at 228 in the pass of 15 November 2026 (written at 00:01Z) under the house rule,
+      in place of T-300, with Roberto Ono the finder of a packing from a band cut of Francisco
+      Couzo's n = 404 packing, below Doğa Özden's column-band packing; T-300 keeps its
+      certificate as history. Both strong generators ran on the new witness: grid-slack's
+      views go to review at row 7 and Evan Daniel's same-side view is refused, so the axis
+      tool's view stays drawn and the count is decided no better on it. Evan Daniel's KKT
+      solve, a local minimum 4.289e-09 below the side, 1.23 times the certificate's own
+      contraction margin and beyond it, its certificate not validating, is held at row 3 for
+      RV-3 (think-ruu2, think-ikku); its side agrees with Nevska's side-only entry at all 24
+      printed places. The posters hold Ono's name off their credit block until the next
+      infographics cut (think-tj4o). #983's final reply promised a follow-up there once T-300
+      is superseded, which this adoption does; it is owed after the merge.
+  - number: 985
+    title: 's(147) ≤ 12.651043556588: first public packing below 7 + 4√2 (registration request)'
+    author: RobertoOno
+    opened: '2026-11-14'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Roberto Ono, in his account's first contribution with #984, asks for the registration of
+      s(147) <= 12.651043556588, the exact rational side of n147_S65104355.json rounded up at
+      12 places, 5.81e-03 below 7 + 4*sqrt(2), the Kingbird catalogue's 45-degree packing 147
+      shares with 148, the house, which T-155's exact ceiling verifies: an exact rational
+      certificate of centres and half-angle tangents from the same harness run, made by an AI
+      coding agent from Evan Daniel's packing of 229 squares by cutting one period of its band
+      and polishing. It discloses first a side-only Kaggle leaderboard entry at 147, 3.42e-09
+      below this side, which it does not beat and which supplies no packing, and calls this the
+      first public packing below 7 + 4*sqrt(2). It reports the same three checks as #984 and
+      asks that Daniel's n = 229 packing be credited as the start. Triaged, retained and
+      registered on 14 November 2026 in lane L164 (think-17ex) as T-302: the stated digests
+      hold, the print is the exact side rounded up, and both maintained exact routes accept the
+      certificate and refuse its gross and sharp controls; measured, it is a new arrangement
+      relative to the house's packing, 92 squares beyond a tenth. The house's view has
+      contraction margin 0, so the gain lies wholly outside its padding. The ledger of 14
+      November records it. The 14 November stage 4 review, written blind in a separate lane
+      (lane L163, think-jbwm), accepts it with #984's and scores it S3; its clean-room checker
+      decided it again, so the entry is confirmed, independently re-implemented, at V3/C3.
+    read_through: '2026-11-14T20:11:26Z'
+    results:
+    - key: n147-band-cut
+      claim: >-
+        s(147) <= 12.6510435565876945 (the exact rational side, rounded up at 16 places, of
+        runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json at
+        RobertoOno/squares-in-square fce076f, the same file at b5636fd), a packing made by
+        cutting one band period from Evan Daniel's n = 229 packing.
+      source: body
+      register:
+      - T-302
+      evidence:
+      - E-ono-985-certificate-report
+      - E-ono-985-exact-feasibility
+    beads:
+    - think-17ex
+    - think-jbwm
+    answer_bead: think-17ex
+    replies: []
+    close_when: >-
+      T-302 is on main with its stage 4 review mapped and adopted as the house at 147, and the
+      reply on main says what was retained and replayed, what the review found and that the
+      case adopted it.
+    notes: >-
+      Read on 14 November 2026 from main 473577f42; no comment on the issue, which carried the
+      intake label from 20:55:18Z, its only event. The account's first contribution, with #984
+      (see that entry). The issue names fce076f, 55 seconds before it; the packet pins b5636fd,
+      the n = 147 files unchanged, and the files shared with #984's packet are pinned against
+      its copies. The issue's "12.65685424949238 (= 7 + 4√2)" is the case's reported lane, and
+      its gain, 0.005810692904685, is the exact gap's floor, against T-155's exact ceiling and
+      against 7 + 4*sqrt(2) alike to 1.2e-30. No register bound is pending adoption at 147 and
+      no request had been opened for it.
+
+      Measured against padding, T-155's exact view of the house's packing has margin 0 (squares
+      1 and 2 of its grid touch), so the gain lies wholly outside the predecessor's padding and
+      RV-3 (think-ruu2) does not reach this entry. This certificate's own margin is 2.93e-09
+      (squares 145 and 147); its contracted side is not registered. The L-step scan finds that
+      this bound carries to no other count; it ends the L extension from 124 that the house's
+      7 + 4*sqrt(2) was.
+
+      Measured pose by pose, 44 squares are tilted beyond a degree, 25.84 to 27.72 degrees, all
+      one way, against the house's 64 at 45 degrees; the 229 packing the issue names as the
+      start is at another count, which the measurement cannot pair. Nevska's side-only
+      leaderboard entry, 12.651043553173, states no packing and is no report. The run's report
+      ranked 147 first among its targets before any attack, since its record was the 148
+      packing less a square.
+
+      The review measured the issue's statements: the prints hold (F14); the packing touches
+      three walls, not four, the right cleared by 1.92e-13 at square 106 (F5); the stated cut of
+      Daniel's 229 reproduces exactly, and the certificate is a refinement of that seed, one to
+      one with it, no square beyond 0.046 (F10); it is a new arrangement relative to T-101,
+      T-155 and the house, the 148 house less one corner square, so s(148) is not moved, and the
+      case's listed conjectured optimum is beaten (F12). This lane read the review as #984's
+      entry says. Its questions for the author are #984's, and hold nothing open. No reply has
+      been posted.
+
+      Adopted at 147 in the pass of 15 November 2026 (written at 00:01Z) under the house rule,
+      the first adoption at 147, with Roberto Ono the finder of a packing from a band cut of
+      Evan Daniel's n = 229 packing, the first below 7 + 4*sqrt(2); the conjectured optimum is
+      withdrawn. Both strong generators ran on the new witness, and grid-slack's 0.5-degree
+      view is drawn. Evan Daniel's certified KKT solve, 3.415e-09 below the side, 1.16 times the
+      certificate's own contraction margin and beyond it, is held at row 3 for RV-3
+      (think-ruu2, think-ikku); its side agrees with Nevska's side-only entry at all 24
+      printed places.

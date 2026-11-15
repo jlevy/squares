@@ -853,19 +853,19 @@
       "url": "https://github.com/evand/square-packing/blob/e006ce6230f2240457b083199755a3a5d287692c/search/packer/candidates/tt2_n146.cert"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Roberto Ono, https://github.com/RobertoOno/squares-in-square/blob/b5636fd6694d2cc7aa5811ae33f441268b81b714/runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json at b5636fd6694d2cc7aa5811ae33f441268b81b714",
+      "kind": "packet-derived-facts",
+      "license_status": "MIT",
       "listed_n": [
-        147,
-        148
+        147
       ],
       "n": 147,
-      "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
-      "source_n": 148,
-      "url": "https://kingbird.myphotos.cc/packing/square-148.svg"
+      "path": "resources/web/ono-issue985-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-14",
+      "source_n": 147,
+      "url": "https://github.com/RobertoOno/squares-in-square/blob/b5636fd6694d2cc7aa5811ae33f441268b81b714/runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1467,19 +1467,19 @@
       "url": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-227.cert.gz"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s228-upper-bound/blob/8bebf3f78ef50baa0b47341a836b5e45717c49cc/n-228-candidate.yaml at 8bebf3f78ef50baa0b47341a836b5e45717c49cc",
+      "attribution": "Roberto Ono, https://github.com/RobertoOno/squares-in-square/blob/b5636fd6694d2cc7aa5811ae33f441268b81b714/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json at b5636fd6694d2cc7aa5811ae33f441268b81b714",
       "kind": "packet-derived-facts",
-      "license_status": "CC-BY-4.0",
+      "license_status": "MIT",
       "listed_n": [
         228
       ],
       "n": 228,
-      "path": "resources/web/ozden-s228-upper-bound-2026-11-14/source/n-228-candidate.yaml",
+      "path": "resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json.gz",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
       "retrieved": "2026-11-14",
       "source_n": 228,
-      "url": "https://github.com/kenaznia-doga/s228-upper-bound/blob/8bebf3f78ef50baa0b47341a836b5e45717c49cc/n-228-candidate.yaml"
+      "url": "https://github.com/RobertoOno/squares-in-square/blob/b5636fd6694d2cc7aa5811ae33f441268b81b714/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json"
     },
     {
       "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-229.cert.gz at 0075967bace18a3deabcc0baa64c2fb294fc80a0",

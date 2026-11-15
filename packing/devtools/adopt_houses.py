@@ -2657,6 +2657,68 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-301": Prose(
+        author="Roberto Ono",
+        reported="on [jlevy/squares#984](https://github.com/jlevy/squares/issues/984)",
+        producer_route=False,
+        ai=(
+            "Issue 984 says the packing was found, certified and checked by an AI coding "
+            "agent (Claude, by Anthropic) working in the author’s harness, directed by a "
+            "person who set the harness up and read the request before it was posted."
+        ),
+        lineage=(
+            "The issue says the packing was made from Francisco Couzo’s packing of 404 "
+            "squares, as this registry retains it: mirrored, every square with "
+            "13.8 ≤ x + y < 23.8 deleted and the rest moved by (−5, −5), which removes five "
+            "periods of its band, then a penalty step, an exact-constraint polish and basin "
+            "hopping that re-seats cells at the band’s ends; it asks that Couzo’s packing be "
+            "credited as the start. Against T-300’s packing, Doğa Özden’s column-band packing "
+            "and this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 96 squares beyond a tenth, at most 0.964; its 55 tilted squares "
+            "lean 36 one way and 19 the other, where T-300’s 48 all lean one way. So Roberto "
+            "Ono is the packing’s finder, from Couzo’s band, below the record it improves; "
+            "the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 14 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by "
+            "exact clipping in GMP rationals over every square, wall and pair; its 20 "
+            "controls at this count, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+    ),
+    "T-302": Prose(
+        author="Roberto Ono",
+        reported="on [jlevy/squares#985](https://github.com/jlevy/squares/issues/985)",
+        producer_route=False,
+        ai=(
+            "Issue 985 says the packing was found, certified and checked by an AI coding "
+            "agent (Claude, by Anthropic) working in the author’s harness, directed by a "
+            "person who set the harness up and read the request before it was posted."
+        ),
+        lineage=(
+            "The issue says the packing was made from Evan Daniel’s packing of 229 squares, "
+            "this registry’s record there, a three-wide diagonal band of tilted squares "
+            "between two corner-anchored grids: every square with 13 ≤ x + y < 19 deleted "
+            "and the squares beyond moved by (−3, −3), which removes one period of the band, "
+            "then a penalty step and an exact-constraint polish that remove the overlaps left; "
+            "it asks that Daniel’s packing be credited as the start. Against the case’s house "
+            "best packing before this adoption, the Kingbird catalogue’s 45-degree packing at "
+            "7 + 4√2 that 147 shares with 148, it is a new arrangement: no symmetry pairs "
+            "nearest centres one to one, and the optimal assignment moves 92 squares beyond "
+            "a tenth; its 44 tilted squares lean one way at 25.8 to 27.7 degrees, where the "
+            "house’s 64 stand at 45. So Roberto Ono is the packing’s finder, from Daniel’s "
+            "band, the first below 7 + 4√2; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 14 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by "
+            "exact clipping in GMP rationals over every square, wall and pair; its 20 "
+            "controls at this count, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2676,6 +2738,7 @@ CHILTON = "Alex Chilton"
 NTUMLNOOB = "ntumlnoob"
 OZDEN = "Doğa Özden"
 YIM = "Kaelan Yim"
+ONO = "Roberto Ono"
 
 
 @dataclass(frozen=True)
@@ -2876,6 +2939,19 @@ CREDITS: dict[int, Credit] = {
         (DANIEL,),
         (),
         "Evan Daniel’s packing from a chain search started from Ryan Xu’s n = 146 packing",
+    ),
+    # T-302 (adopted in the pass of 15 November 2026, the first adoption at 147), Roberto Ono's
+    # issue 985: one band period cut from Evan Daniel's n = 229 packing (T-225's record there)
+    # and polished, a new arrangement relative to the Kingbird catalogue's 45-degree packing at
+    # 7 + 4*sqrt(2), 92 squares beyond a tenth. The issue asks that Daniel's packing be
+    # credited as the start, so the phrase names it, as the 156 and 268 phrases name the
+    # packings their strip cuts were taken from, and the closed form it is the first below,
+    # as the 157 phrase names the grid.
+    147: Credit(
+        (ONO,),
+        (),
+        "Roberto Ono’s packing from a band cut of Evan Daniel’s n = 229 packing, the first "
+        "below 7 + 4√2",
     ),
     # PingYou Ltd's algebraic certificate of its own n = 153 packing (T-174's regularization
     # of T-148, by the source's statement), the one root of a degree-7 polynomial; issue
@@ -3098,18 +3174,17 @@ CREDITS: dict[int, Credit] = {
         via=COUZO,
         how=" as refined in Francisco Couzo’s #672 report",
     ),
-    # T-300 (adopted in the pass of 14 November 2026), Doğa Özden's issue 983: a new
-    # arrangement relative to T-174's packing, PingYou Ltd's refinement of Francisco Couzo's
-    # refinement of his own packing, 75 squares beyond a tenth, from his lab's column-band
-    # proposal designer with no donor packing. The issue asks that he be recorded as the new
-    # arrangement's finder and the old record credited to Couzo and PingYou Ltd, so the phrase
-    # names him the finder, below Couzo's packing as PingYou Ltd improved it, as the 179 and
-    # 269 phrases name the record they improve.
+    # T-301 (adopted in the pass of 15 November 2026), Roberto Ono's issue 984: five band
+    # periods cut from Francisco Couzo's n = 404 packing and polished, a new arrangement
+    # relative to T-300's packing, Doğa Özden's column-band packing adopted the day before,
+    # 96 squares beyond a tenth. The issue asks that Couzo's packing be credited as the start,
+    # so the phrase names it, as the 156 and 268 phrases name the packings their strip cuts
+    # were taken from, and names the packing it is below, as the 179 and 269 phrases do.
     228: Credit(
-        (OZDEN,),
+        (ONO,),
         (),
-        "Doğa Özden’s column-band packing, a new arrangement below Francisco Couzo’s packing "
-        "as PingYou Ltd improved it",
+        "Roberto Ono’s packing from a band cut of Francisco Couzo’s n = 404 packing, below "
+        "Doğa Özden’s column-band packing",
     ),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of his own
     # issue-674 packing (T-199), polished to its exact side 1.91e-11 below #674's

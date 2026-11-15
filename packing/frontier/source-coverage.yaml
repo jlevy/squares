@@ -13335,6 +13335,63 @@ sources:
     lane L159), and the case adopted it as its house in the pass of that day, in place of T-174.
     The ledger of 14 November for this lane (campaign/issue-intake/upper-bounds-983-20261114)
     records it as a new packing. All 3 native jobs have full outcomes.
+- id: ono-issue984-2026-11-14
+  title: 'Roberto Ono''s packing of 228 squares at RobertoOno/squares-in-square b5636fd, issue 984'
+  role: source-repository
+  url: https://github.com/RobertoOno/squares-in-square/tree/b5636fd6694d2cc7aa5811ae33f441268b81b714
+  local: resources/web/ono-issue984-2026-11-14/
+  source_key: '[Ono issue 984 2026-11-14]'
+  scope:
+    n_values:
+    - 228
+  reviewed: '2026-11-14'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ono-issue984-2026-11-14/acquisition/claims.json
+  evidence:
+  - E-ono-984-certificate-report
+  - E-ono-984-exact-feasibility
+  notes: >-
+    The n = 228 certificate of the run of 11 November, its text and strict copies, the
+    intermediate certificate at 15.597084912, the author's check outputs, the run's report and
+    follow-up, the frozen verifier and the two checkers the issue names are retained for
+    jlevy/squares#984 at the repository's main, b5636fd, whose ancestor fce076f the issue
+    names, the certificate admitted only where its exact side rounds up to the side the issue
+    prints. T-301 records the in-horizon report, 4.76e-03 below T-300 (Doğa Özden's column-band
+    packing), the house; its stage 4 review is a separate lane blind to this one (think-jbwm).
+    The ledger of 14 November for this lane (campaign/issue-intake/upper-bounds-984-985-20261114)
+    records it as a new packing. All 3 native jobs have full outcomes.
+- id: ono-issue985-2026-11-14
+  title: 'Roberto Ono''s packing of 147 squares at RobertoOno/squares-in-square b5636fd, issue 985'
+  role: source-repository
+  url: https://github.com/RobertoOno/squares-in-square/tree/b5636fd6694d2cc7aa5811ae33f441268b81b714
+  local: resources/web/ono-issue985-2026-11-14/
+  source_key: '[Ono issue 985 2026-11-14]'
+  scope:
+    n_values:
+    - 147
+  reviewed: '2026-11-14'
+  source_date: '2026-11-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ono-issue985-2026-11-14/acquisition/claims.json
+  evidence:
+  - E-ono-985-certificate-report
+  - E-ono-985-exact-feasibility
+  notes: >-
+    The n = 147 certificate of the same run, its text and strict copies, the author's check
+    outputs and the polish the issue names are retained for jlevy/squares#985 at b5636fd, the
+    files shared with the 228 packet pinned against its copies, the certificate admitted only
+    where its exact side rounds up to the side the issue prints. T-302 records the in-horizon
+    report, 5.81e-03 below the Kingbird catalogue's 7 + 4*sqrt(2), the house, which T-155's
+    exact ceiling verifies; its stage 4 review is a separate lane blind to this one
+    (think-jbwm). The ledger of 14 November for this lane records it as a new packing. All 3
+    native jobs have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -13461,6 +13518,12 @@ selected_overrides:
   evidence: E-evand-606-n146-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-16 (T-187).
+- n: 147
+  source_id: ono-issue985-2026-11-14
+  value: '12.6510435565876945'
+  evidence: E-ono-985-certificate-report
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-11-15 (T-302).
 - n: 152
   source_id: evand-square-packing-2026-10-05
   value: '12.830718800976609954993823643412'
@@ -13606,11 +13669,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 228
-  source_id: ozden-s228-upper-bound-2026-11-14
-  value: '15.6008017348117539'
-  evidence: E-ozden-983-certificate-report
+  source_id: ono-issue984-2026-11-14
+  value: '15.5960431209207917'
+  evidence: E-ono-984-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-14 (T-300).
+    a replay here and an accepted review, adopted on 2026-11-15 (T-301).
 - n: 229
   source_id: evand-regularized-2026-10-20
   value: '15.6501615138764311'
@@ -14201,7 +14264,7 @@ superseded_reports:
 - n: 147
   source_id: evand-square-packing-2026-10-05
   value: '12.656854249492380195333323439334'
-  superseded_by: kingbird-current
+  superseded_by: ono-issue985-2026-11-14
   reason: Certifies the catalogue's packing at a side 2.0e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -14539,20 +14602,20 @@ superseded_reports:
 - n: 228
   source_id: casson-square-packing-2026
   value: '15.60895620815939289'
-  superseded_by: ozden-s228-upper-bound-2026-11-14
+  superseded_by: ono-issue984-2026-11-14
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026
   value: '15.604638007678682'
-  superseded_by: ozden-s228-upper-bound-2026-11-14
+  superseded_by: ono-issue984-2026-11-14
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026-10-03
   value: '15.604602454552252'
-  superseded_by: ozden-s228-upper-bound-2026-11-14
+  superseded_by: ono-issue984-2026-11-14
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 229
@@ -15465,9 +15528,9 @@ superseded_reports:
 - n: 228
   source_id: evand-square-packing-2026-10-05
   value: '15.604602454546056967137037190451'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-300's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-301's exact
     side is smaller.
-  superseded_by: ozden-s228-upper-bound-2026-11-14
+  superseded_by: ono-issue984-2026-11-14
 - n: 236
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.8678008394199166'
@@ -15958,8 +16021,8 @@ superseded_reports:
   source_id: couzo-451-exact-refinements
   value: '15.6046014757296743'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-300's exact side is smaller.
-  superseded_by: ozden-s228-upper-bound-2026-11-14
+    and T-301's exact side is smaller.
+  superseded_by: ono-issue984-2026-11-14
 - n: 238
   source_id: squish-500-fourth-request-2026-10-11
   value: '15.9241067853214947'
@@ -16450,8 +16513,14 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.60460147572967429'
   reason: The house from 2026-10-17 until 2026-11-14; its certificate stays retained and verified,
-    and T-300's exact side is smaller.
-  superseded_by: ozden-s228-upper-bound-2026-11-14
+    and T-301's exact side is smaller.
+  superseded_by: ono-issue984-2026-11-14
+- n: 228
+  source_id: ozden-s228-upper-bound-2026-11-14
+  value: '15.6008017348117539'
+  reason: The house from 2026-11-14 until 2026-11-15; its certificate stays retained and verified,
+    and T-301's exact side is smaller.
+  superseded_by: ono-issue984-2026-11-14
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

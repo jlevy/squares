@@ -19736,6 +19736,18 @@ occurrences:
     credit. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-147.md
+    record_key: '147'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Roberto Ono
+  start: 0
+  end: 11
+  label: Roberto Ono
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-148.md
     record_key: '148'
     field: /reported_lower_bound/proved_by/0
@@ -21775,10 +21787,10 @@ occurrences:
     path: packing/frontier/n-228.md
     record_key: '228'
     field: /reported_upper_bound/found_by/0
-  expected_text: Doğa Özden
+  expected_text: Roberto Ono
   start: 0
-  end: 10
-  label: Doğa Özden
+  end: 11
+  label: Roberto Ono
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -33138,6 +33150,102 @@ occurrences:
   expected_text: Ozden after Daniel, Levy
   start: 20
   end: 24
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ono issue 984 2026-11-14]'
+    field: /authors/0
+  expected_text: Ono
+  start: 0
+  end: 3
+  label: Ono
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ono issue 984 2026-11-14]'
+    field: /credit
+  expected_text: Ono after Couzo, Levy
+  start: 0
+  end: 3
+  label: Ono
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ono issue 984 2026-11-14]'
+    field: /credit
+  expected_text: Ono after Couzo, Levy
+  start: 10
+  end: 15
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ono issue 984 2026-11-14]'
+    field: /credit
+  expected_text: Ono after Couzo, Levy
+  start: 17
+  end: 21
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ono issue 985 2026-11-14]'
+    field: /authors/0
+  expected_text: Ono
+  start: 0
+  end: 3
+  label: Ono
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ono issue 985 2026-11-14]'
+    field: /credit
+  expected_text: Ono after Daniel, Levy
+  start: 0
+  end: 3
+  label: Ono
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ono issue 985 2026-11-14]'
+    field: /credit
+  expected_text: Ono after Daniel, Levy
+  start: 10
+  end: 16
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ono issue 985 2026-11-14]'
+    field: /credit
+  expected_text: Ono after Daniel, Levy
+  start: 18
+  end: 22
   label: Levy
   role: prerequisite
   disposition: unresolved

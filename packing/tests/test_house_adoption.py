@@ -282,7 +282,8 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # and lane L132 on to his issue-967 certificate (T-297) in the pass of 13 November. 29
     # since lane L154 moved 297 to Joost de Winter's issue-977 certificate (T-299) in the
     # pass of 14 November. 28 since lane L160 moved 228 to Doğa Özden's issue-983
-    # certificate (T-300) in the same pass.
+    # certificate (T-300) in the same pass, and lane L164 on to Roberto Ono's issue-984
+    # certificate (T-301) in the pass of 15 November.
     assert len(held_counts) == 28
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -306,7 +307,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         182: "T-243",
         268: "T-289",
         269: "T-297",
-        228: "T-300",
+        228: "T-301",
         270: "T-283",
         297: "T-299",
         307: "T-279",
@@ -1761,7 +1762,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # certificate of issue 962 (T-296), the same day. Lane L132 moved 269 on to his
     # certificate of issue 967 (T-297) in the pass of 13 November, and lane L154 297 to Joost
     # de Winter's certificate of issue 977 (T-299) in the pass of 14 November, and lane L160
-    # 228 to Özden's certificate of issue 983 (T-300) in the same pass.
+    # 228 to Özden's certificate of issue 983 (T-300) in the same pass. Lane L164 moved 228 on
+    # to Roberto Ono's certificate of issue 984 (T-301) in the pass of 15 November.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1795,7 +1797,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         157: "T-293",
         237: "T-295",
         297: "T-299",
-        228: "T-300",
+        228: "T-301",
     }
     before = {
         **houses.ADOPTED,
@@ -1834,9 +1836,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         297: "T-174",
         228: "T-174",
     }
-    # 199 was first adopted on 9 November 2026 (T-284), and 157 on 11 November 2026 (T-293),
-    # after this receipt was retained.
-    for n in (157, 183, 199, 227, 229, 260, 293, 299):
+    # 199 was first adopted on 9 November 2026 (T-284), 157 on 11 November 2026 (T-293) and
+    # 147 on 15 November 2026 (T-302), after this receipt was retained.
+    for n in (147, 157, 183, 199, 227, 229, 260, 293, 299):
         del before[n]
     assert "183" not in historical["houses"]
     assert "260" not in historical["houses"]
@@ -3071,7 +3073,9 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     293 and 299, whose reported prints and T-101's verified ceilings differ; the pass of 4
     November 2026 replays 299 from T-258's record, and that of 5 November 2026 293 from
     T-257's, whose two lanes agree, so 29 and 132 remained. Lane L104's pass of 11 November
-    2026 replays 132 from T-174's record, whose two lanes agree, so 29 remains."""
+    2026 replays 132 from T-174's record, whose two lanes agree, so 29 remains. The pass of
+    15 November 2026 replaced the catalogue's packing at 147, whose reported print of
+    7 + 4*sqrt(2) and T-155's verified ceiling differ, with T-302, so 147 joins it."""
     differing = {
         29: (
             Fraction(
@@ -3085,6 +3089,14 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
                 "is a print `9.19e-15` below the new side, within one unit of its last place, "
                 "so it does not order them"
             ),
+        ),
+        147: (
+            Fraction("316421356237309504880168872421/25000000000000000000000000000"),
+            "12.65685424949238",
+            "12.65685424949239",
+            "T-155",
+            "[Kingbird]",
+            "lies `5.81e-03` above the new side",
         ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():
