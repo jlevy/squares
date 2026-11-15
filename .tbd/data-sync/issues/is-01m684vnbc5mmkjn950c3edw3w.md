@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 329
+version: 330
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -115,7 +115,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T11:57:33.551Z
+updated_at: 2026-11-15T11:58:40.526Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -295,3 +295,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~08:40Z: L176 senior review of #994: no B; S1 Goebel wording, S2 vacuous check, S3 dated note in review, S4 beads. Coordinator did S4 (think-7j3i retitled with F11 measurement, linked to think-zkxy as one two-part owner question) and N9; labels S2+intake. L177 addressing S1-S3, N1-N8, N10.
 2026-11-15 ~09:35Z: L177 applied L176; #994 merged 538b7833a (#992 not recorded; diamond_staircases). Deploy ok (run 43697866071). Merged main into #993 (a08ccd897, conflict resolved additively) -> fresh run green incl. D-509 pdf; #993 merged 942c1271f. #992 final reply posted and closed (09:30Z). Closed think-i8y9, think-176a, think-hisc, think-u58c. think-ud9e re-delegated L175->L179 (L175 ended); L179 records PR for #992 reply.
 2026-11-15 ~10:05Z: #995 (#992 final reply record) merged 91acf2022; think-ud9e closed. Intake clear: every issue, reply and comment recorded. Open owner decisions: #921, #908/#909, #543, #919, think-8nim, RV-3 think-ruu2 (#939/#946 and KKT sides at 147/172/228/269/297/90), T-142/T-143 #953, think-71uq, think-0h7r, think-kn13, think-m2th, think-7j3i+think-zkxy, #991 research points (X-008 grammar, 37/63 calibration).
+2026-11-15 ~12:00Z: NEW #996 (de Winter, s(90) <= 9.994038857546, -4.24e-3 vs T-303 adopted this morning; local search from T-303). Intake; import think-32cl (L181; adoption in a 2026-11-16 pass, stamps and merge on 11-16), blind review think-uhav (L180). de Winter repo 3 new commits (9cafa33) to read.
