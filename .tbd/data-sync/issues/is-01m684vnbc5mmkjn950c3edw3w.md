@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 339
+version: 340
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -117,7 +117,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T18:47:16.917Z
+updated_at: 2026-11-15T18:56:20.189Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -305,3 +305,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~18:15Z: L183 = #999: Lean build NOT run (disk plan 9.54 GB > 9 GB cap; Sqpack.Bentz needs ~13 GB + swap, so the 24 GB premise stands for that module; coordinator was wrong to call it void). Records #973 comment + 355f83e read; adds devtools.lean_disk_price + integrity-ceremony allowlist entry. think-0h7r re-priced (Lean 0.5 CPU-h, ~11 GB disk, swap or 24 GB). L184 senior review of #999 (tool and allowlist scrutiny). Sequence: #998 (11-16) then #999.
 2026-11-15 ~19:00Z: L184 review of #999: keep a slimmed lean_disk_price (OR-1, cited numbers), DROP the integrity allowlist entry (no independent pin; added to pass a gate), B1 truncation guard fix, S1-S3 memory/disk wording (2 Oct packet: 16 GB free should need no swap). L185 addressing. #999 merges after #998 (11-16).
 2026-11-15 ~19:10Z: #999 merged f46b05370 (L185 applied L184: slim tool, allowlist dropped, B1 fix, memory/disk wording); think-o79q closed. Remaining: #998 (#996/#997, adopt 11-16; must merge main first).
+- 2026-11-15T18:55Z renewal (intake298): main f46b05370. 3 unowned items (#996, #997, de Winter repo at 6c0ad56) are all carried by #998 (L181, think-32cl), which reads through 6c0ad56 and waits for 16 November UTC to adopt T-304, stamp and pin. #973 comment and k2m5-family 355f83e read on main via #999. Nothing else new.
