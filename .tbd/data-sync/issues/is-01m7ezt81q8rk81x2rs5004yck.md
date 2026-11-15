@@ -3,9 +3,9 @@ type: is
 id: is-01m7ezt81q8rk81x2rs5004yck
 title: "Import #992: Miguel Lara's s(977) <= 17 + 21/sqrt(2) (45-degree central diamond of 441 + four corner staircases of 134), beyond the horizon; decided by devtools.diamond_staircases; not recorded (Couzo #763 row below)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: bold-ritchie-l179
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T06:55:16.022Z
-updated_at: 2026-11-15T09:42:20.068Z
+updated_at: 2026-11-15T09:59:36.626Z
 started_at: 2026-11-15T06:55:17.600Z
+closed_at: 2026-11-15T09:59:36.625Z
+close_reason: "#992 taken in as not recorded (#994, 538b7833a; Couzo #763 row below the claim), answered and closed; reply recorded in #995 (91acf2022)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
