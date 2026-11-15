@@ -5,14 +5,14 @@ title: "Price and run the full replay of #973's Valid11 and Lean reduction (k2m5
 kind: task
 status: open
 priority: 2
-version: 8
+version: 9
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-14T02:17:04.972Z
-updated_at: 2026-11-15T02:52:42.863Z
+updated_at: 2026-11-15T03:00:26.718Z
 ---
 Priced full replay of Mohsen Khalili and Sara Gharabaghi's s(k^2 - 5) = k (jlevy/squares#973), held above the import lane's budget; the import is think-2vgx (lane L145, 14 November 2026).
 
@@ -41,4 +41,5 @@ blocked_on: the owner's budget decision
 (4) verify.sh --full now also regenerates root 9632's runs (step 6b) and the 75 coverage dumps (step 9: run_cov.sh with OUTD, B and NP now set), and stops when the print-all patch fails, so it would cover all but the Lean build and the controls. As committed, step 6b runs qx2_zm.py in build/square-packing/qx2, a directory evand/square-packing lacks at 659ee62 (qx2_zm.py is search/qx2_zm.py), so under set -euo pipefail it stops there, before the sweep (read, not run). Keep to devtools.replay_k2m5_family; the dumps subcommand it lacks can mirror the fixed run_cov.sh.
 (5) Lean. lean/build_inst.sh would log each module's wall time and peak memory to build_full.log, but runs /home/claude/lean/mk.sh, outside the release, and no build_full.log is published, so the build's price stays the review's estimate.
 (6) Tight-Tile jobs, nearly all of the price: unchanged. Their outputs still lack K and name no ttbox or run_tt.py revision (#973's question 3, unanswered), and versions.txt gives only Python 3.13.0, for the control run, its numpy and scipy line failing.
+(7) 9ccfe82 (02:56:10Z), the head at 02:59Z, read after the above, changes only .zenodo.json, CITATION.cff, README.md and SHA256SUMS_ALL, giving the paper's DOI, 10.5281/zenodo.24237740; nothing above changes, and intake-watch.yaml reads through 9ccfe82.
 blocked_on: the owner's budget decision
