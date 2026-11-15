@@ -1,0 +1,6 @@
+# Lane L169 controls plan, stated at 2026-11-15T03:21:48Z (digest list written 2026-11-15T03:21:52Z), before l169_controls.py existed (ls programs/: controls-plan.json l169_check.py l169_clip.py l169_decide.py l169_geom.py l169_make_plan.py l169_plan_facts.py l169_reader.py l169_sat.py l169_selftest.py )
+71bee737ce47ea67876ff0df0ce704838a48a95f7970ab7454c4bb53cb1663f9  programs/controls-plan.json
+b9258aa5d431fdca9e66e51dd0c512cf7680795f1836d4734995a7143cc46ced  out/plan-facts-n90.json
+1522d283a79cd99210f00017e95eeb2fdc5f9c85e7b3bd3c7f6d658f6bf58d78  out/check-n90.json
+a320a45027a71fcee1f3d208446712dac2d52be4afbb597e9cb252f8f7b68129  programs/l169_plan_facts.py
+2cb3e7eb56a3170e726dc13b9ec4904321a13623ca91005ee7929381cf0acd10  programs/l169_make_plan.py

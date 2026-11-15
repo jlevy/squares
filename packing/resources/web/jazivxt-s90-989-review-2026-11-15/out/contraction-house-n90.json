@@ -1,0 +1,64 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 90,
+ "certificate": {
+  "label": "house",
+  "input": "witness-corners",
+  "path": "packing/witnesses/known-best/n-090.yaml",
+  "sha256": "48883a656acd765bd4dac3d8d850afcb0448876dee8d7f42e7f80f19cf129007"
+ },
+ "side": "10",
+ "lambda_star": "1",
+ "one_minus_lambda_star": "0.000000e+00",
+ "binding_pair": [
+  1,
+  2
+ ],
+ "contracted_side": "10",
+ "margin": "0",
+ "margin_float": "0.000000e+00",
+ "certificate_routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes_accept": true,
+ "against": {
+  "certificate": {
+   "label": "#989",
+   "input": "evand-cert",
+   "path": "n90.cert",
+   "outside_repository": true,
+   "sha256": "88c93b2f1d1f3061d1e6815f790d13f3d8f174dd3431f50d8d4d9d4383b3d466"
+  },
+  "side": "4999138583463/500000000000",
+  "gain": "861416537/500000000000",
+  "gain_float": "1.722833e-03",
+  "gain_over_margin": null,
+  "within_margin": false
+ },
+ "cpu_seconds": 1.03
+}

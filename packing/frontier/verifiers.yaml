@@ -8804,3 +8804,63 @@ verifiers:
       review-only directory ono-984-985-review-2026-11-14 beside the import lane's packets.
       l163_plan_facts.py, l163_make_plan.py and l163_describe.py, kept beside them, decide no
       certificate and are not registered.
+  - id: V-jazivxt-989-review-check
+    program: l169_check.py with l169_reader.py, l169_sat.py, l169_clip.py, l169_decide.py and l169_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 15 November stage 4 review's exact checker of jazivxt's centre and half-angle
+      certificate of issue 989 (90), in Evan Daniel's text format, with a strict reader of its
+      own (l169_reader.py: the header n S and exactly n rows of three tokens, every scalar
+      canonical, an integer or p/q in lowest terms with q >= 2, one line terminator throughout,
+      nothing else): every reading hypothesis, every square a unit square, every wall and every
+      pair twice with no distance filter, by separating axes over the four edge normals in
+      Python integers over per-square denominators, the edge directions taken from t as
+      Pythagorean triples (l169_sat.py, method A), and by exact Sutherland-Hodgman clipping of
+      the corners in gmpy2.mpq, each square a unit square by its sides and diagonals and listed
+      counterclockwise, each pair clipped both ways round and each wall classed by the
+      intersection exactly, containment decided by area (l169_clip.py, method B); l169_decide.py
+      runs both and requires their classes to agree. l169_geom.py holds the closed-form margins
+      and constructions the self-test and controls use; l169_controls.py decides 23 controls
+      stated in a plan hashed before it existed; l169_selftest.py holds both methods and the
+      reader to 6,166 cases.
+    source:
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_check.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_reader.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_sat.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_clip.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_decide.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_geom.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_selftest.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_controls.py
+    independence_record: packing/resources/web/jazivxt-s90-989-review-2026-11-15/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 989 (L169, under think-176a), strong
+            tier, prompted separately from the import lane (L170, think-i8y9)
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue and the source's README say GPT-6 Astra Ultra was the AI collaborator on the
+          search and verification; the review was written by a Claude agent. The seven checker
+          files were frozen at 2026-11-15T03:19:25Z (frozen/checker-frozen-digests.txt), before
+          their author read the source's README, Francisco Couzo's checker, or this repository's
+          witness, verifier or promotion code; they import nothing from this repository or the
+          source and reuse no code of any earlier review, lanes L163's and L159's reviews, the
+          models for its method, among them, whose programs it did not open.
+    note: >-
+      Written and run on 15 November 2026 for docs/project/reviews/review-2026-11-15-jazivxt-989.md,
+      and kept with its receipts in the review-only directory jazivxt-s90-989-review-2026-11-15
+      beside the import lane's packet. l169_plan_facts.py, l169_make_plan.py and
+      l169_describe.py, kept beside them, decide no certificate and are not registered.

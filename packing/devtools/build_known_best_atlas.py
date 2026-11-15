@@ -2811,12 +2811,15 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: finder at 228 (T-300, in the pass of 14 November), held alike. Lane L164 (think-17ex)
 #: credits Roberto Ono, a new name, as the finder at 228 (T-301) in place of Özden and at 147
 #: (T-302), in the pass of 15 November, so the hold holds Ono at both and Özden no longer at
-#: 228, where no case record names him now.
+#: 228, where no case record names him now. Lane L170 (think-i8y9) credits jazivxt, a new
+#: name, as the finder at 90 (T-303), in the same pass, where the grid credited no one, so
+#: the hold holds jazivxt there.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(
         (156, 172, 179, 180, 199, 232, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
     ),
     **dict.fromkeys((147, 228), ("Roberto Ono",)),
+    90: ("jazivxt",),
 }
 #: The infographic edition the hold was set under. While the hold is not empty, a version
 #: bump or a poster drawn for any other edition fails the pull-request suite

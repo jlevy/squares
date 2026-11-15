@@ -1,0 +1,58 @@
+# What `python -m devtools.intake_ledger gather` reads: the upper bound at n <= 324 that lane L170 of the
+# intake pass takes in on 15 November 2026 (think-i8y9), jazivxt's packing of 90 squares, which the account
+# dpre4ai reported in #989 (03:00:53Z), 11 seconds after 179fcba, the commit the issue names, and 51 seconds
+# after e5c2ecc, which first committed the certificate. GitHub's activity log was not readable from this
+# session, so no push time is recorded: by the owner's rule of 14 October e5c2ecc would date the claim if its
+# push came first, but no other report reached 90 in that window, so the issue dates the claim, with the
+# first commit kept, and the verdict is the same either way. The start is frozen at main a4f36ae70 (#988's
+# merge): the 10 x 10 grid at 90 in both lanes, with no register bound pending adoption below it. The claim's
+# exact side is its certificate's header, read by the packet's claim record (acquisition/claims.json), which
+# the lane wrote from main a4f36ae70; the issue prints that side, which terminates at 12 places, exactly.
+format: intake-ledger-sources-v1
+read_at_main: a4f36ae70e5ffa3fb1f88b49c8e8befda8a38e45
+read_on: '2026-11-15'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l170
+  branch: claude/bold-ritchie-xo28us-l170
+  commit: a4f36ae70e5ffa3fb1f88b49c8e8befda8a38e45
+  note: The packet's claim record, written on the lane's branch from main a4f36ae70 and read here by path.
+reports:
+- report: '#989'
+  issue: 989
+  holders: jazivxt
+  bead: think-i8y9
+  lanes:
+  - lane: l170
+    packet: jazivxt-s90-upper-bound-2026-11-15
+    record: claims.json
+    counts: [90]
+  claims:
+  - n: 90
+    measured:
+      against: the 10 x 10 grid
+      finding: not one to one with the grid's 90 squares under any symmetry of the box by nearest centres; the
+        optimal assignment moves every square beyond 1e-3, 54 beyond 1e-2 and 52 beyond 0.1 (largest 1.332) and turns
+        48 squares by more than 1e-6 radians; 44 squares are tilted beyond a degree, 22.6 to 31.6 degrees, all turned
+        the same way, and five more within 0.07 degrees of upright; a new arrangement, the first below the grid at 90
+      source: packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/identity.json
+    new_packing:
+      source: '#989: ''We started with a rectangular crop of Joost de Winter’s N157 packing ... Shifting successive
+        copies horizontally by one unit reduced their vertical spacing from approximately 9.353384 to 9.019403. A square
+        window spanning two copies contained 90 tiles. We tightened their positions and orientations and converted the
+        result to exact rational coordinates.'''
+      continues: Joost de Winter's packing of 157 squares (T-293), by a crop, shifted copies and a window of two
+    note: >-
+      The grid's uniform-contraction margin is 0, its squares touching, so the gain, 1.7228e-3, lies wholly outside
+      any padding (packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/contraction-n090.json); a packing
+      below the grid is no re-certification of the grid, and RV-3 (think-ruu2) does not reach it.
+  note: >-
+    The issue names 179fcba, committed at 2026-11-15T03:00:42Z, 11 seconds before it; e5c2ecc, committed at
+    03:00:02Z, first published the certificate with the same bytes, and 179fcba changes only the name of the AI
+    collaborator in README.md and README.md's digest. The issue asks for credit to 'jazivxt and GPT-6 Astra Ultra'
+    and says GPT-6 Astra Ultra was the AI collaborator on the search and verification. It names the case record's
+    side 10 and no other report at 90; the packet's head, f9b31b4, adds a construction figure after the issue.
+exceptions: []
+other_items: []

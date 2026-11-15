@@ -93,5 +93,6 @@ def test_every_stored_frame_passes_at_catalogue_precision_and_some_need_it() -> 
     # October 2026 (think-jh4w): T-220's tilted n = 183 replaced the 14 x 14 grid, and its
     # rounded frame is the one added. 151 since lane L104's adoption of 11 November 2026
     # (think-bcfs): T-293's tilted n = 157 replaced the 13 x 13 grid, and its rounded frame
-    # is the one added.
-    assert len(needing_precision) == 151, (len(needing_precision), worst_pair, worst_wall)
+    # is the one added. 152 since lane L170's adoption of 15 November 2026 (think-i8y9):
+    # T-303's tilted n = 90 replaced the 10 x 10 grid, and its rounded frame is the one added.
+    assert len(needing_precision) == 152, (len(needing_precision), worst_pair, worst_wall)

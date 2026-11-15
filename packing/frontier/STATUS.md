@@ -99,7 +99,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`87`](n-087.md) | `9.83881526994826` | `2459703817487065565091120335551/250000000000000000000000000000` | `479/50` | `479/50` | open | upper: replayed here; lower: replayed here | — | 2026-10-06 |
 | [`88`](n-088.md) | `9882451030481246819427281665997/1000000000000000000000000000000` | `9882451030481246819427281665997/1000000000000000000000000000000` | `481/50` | `481/50` | open | upper: replayed here; lower: replayed here | — | 2026-10-08 |
 | [`89`](n-089.md) | `5 + (7/2)√2` | `5 + (7/2)√2` | `193/20` | `193/20` | open | upper: replayed here; lower: replayed here | — | 2026-10-03 |
-| [`90`](n-090.md) | `10` | `10` | `973/100` | `973/100` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |
+| [`90`](n-090.md) | `4999138583463/500000000000` | `4999138583463/500000000000` | `973/100` | `973/100` | open | upper: replayed here; lower: replayed here | — | 2026-11-15 |
 | [`91`](n-091.md) | `10` | `10` | `781/80` | `781/80` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |
 | [`92`](n-092.md) | `10` | `10` | `977/100` | `977/100` | open | upper: replayed here; lower: replayed here | — | 2026-10-03 |
 | [`93`](n-093.md) | `10` | `10` | `247/25` | `247/25` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |

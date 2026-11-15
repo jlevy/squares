@@ -129,6 +129,18 @@ Nothing here bears on feasibility, where the standard is exactness and stays exa
 They differ by nine components across the whole corpus, and a claim that changed with
 the choice would be a claim about the tolerance rather than about the packings.
 
+## Addendum, 2026-11-15 — Two Packings Now Hold Tilted Residue
+
+The finding above held for the corpus on 30 August 2026 and no longer does.
+Since October 2026 the radical n = 51 strip has two tilted residue components, five
+squares each at 45 degrees and touching no wall.
+Since 15 November 2026 jazivxt’s packing at 90 (T-303, adopted in place of the 10 × 10
+grid) has one: seven squares at 67.09 degrees in the census’s quarter-turn convention
+(−22.91 degrees, the clockwise tilt T-303’s measurements report), interior.
+Every other tilted component is still a singleton, bar, L or rectangle, and the rest of
+the residue is axis-aligned.
+`tests/test_chunk_taxonomy.py` pins the current state.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

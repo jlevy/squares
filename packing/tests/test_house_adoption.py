@@ -1763,7 +1763,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # certificate of issue 967 (T-297) in the pass of 13 November, and lane L154 297 to Joost
     # de Winter's certificate of issue 977 (T-299) in the pass of 14 November, and lane L160
     # 228 to Özden's certificate of issue 983 (T-300) in the same pass. Lane L164 moved 228 on
-    # to Roberto Ono's certificate of issue 984 (T-301) in the pass of 15 November.
+    # to Roberto Ono's certificate of issue 984 (T-301) in the pass of 15 November, and lane
+    # L170 90 from the grid to jazivxt's certificate of issue 989 (T-303) in the same pass.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1798,6 +1799,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         237: "T-295",
         297: "T-299",
         228: "T-301",
+        90: "T-303",
     }
     before = {
         **houses.ADOPTED,
@@ -1837,8 +1839,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         228: "T-174",
     }
     # 199 was first adopted on 9 November 2026 (T-284), 157 on 11 November 2026 (T-293) and
-    # 147 on 15 November 2026 (T-302), after this receipt was retained.
-    for n in (147, 157, 183, 199, 227, 229, 260, 293, 299):
+    # 147 and 90 on 15 November 2026 (T-302, T-303), after this receipt was retained.
+    for n in (90, 147, 157, 183, 199, 227, 229, 260, 293, 299):
         del before[n]
     assert "183" not in historical["houses"]
     assert "260" not in historical["houses"]

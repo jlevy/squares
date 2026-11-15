@@ -13392,6 +13392,37 @@ sources:
     exact ceiling verifies; its stage 4 review is a separate lane blind to this one
     (think-jbwm). The ledger of 14 November for this lane records it as a new packing. All 3
     native jobs have full outcomes.
+- id: jazivxt-s90-upper-bound-2026-11-15
+  title: 'jazivxt''s packing of 90 squares at dpre4ai/n90-square-packing f9b31b4, issue 989'
+  role: source-repository
+  url: https://github.com/dpre4ai/n90-square-packing/tree/f9b31b4ebddb278a128b6cb5c43836a305a24dca
+  local: resources/web/jazivxt-s90-upper-bound-2026-11-15/
+  source_key: '[jazivxt s90 upper bound 2026-11-15]'
+  scope:
+    n_values:
+    - 90
+  reviewed: '2026-11-15'
+  source_date: '2026-11-15'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/claims.json
+  evidence:
+  - E-jazivxt-989-certificate-report
+  - E-jazivxt-989-exact-feasibility
+  notes: >-
+    The n = 90 certificate, in Evan Daniel's text format, its rounded CSV, the author's README
+    and digests are retained for jlevy/squares#989 at the repository's main, f9b31b4, whose
+    parent 179fcba the issue names, the certificate admitted only where its exact side equals
+    the side the issue prints; de Winter's MIT notice for the donor and the two figures are
+    pinned. The repository states no licence; the account submitted it (think-cnn7). T-303
+    records the in-horizon report, 1.72e-03 below the 10 x 10 grid, confirmed at V3/C3 by the
+    replay and the stage 4 review of 15 November 2026 (lane L169), and the case adopted it as
+    its house in the pass of that day, the first adoption at 90, in place of the grid. The
+    ledger of 15 November for this lane (campaign/issue-intake/upper-bounds-989-20261115)
+    records it as a new packing.
+    All 3 native jobs have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -13434,6 +13465,12 @@ selected_overrides:
   evidence: E-gupta-438-rational-report
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
+- n: 90
+  source_id: jazivxt-s90-upper-bound-2026-11-15
+  value: '9.9982771669260000'
+  evidence: E-jazivxt-989-certificate-report
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-11-15 (T-303).
 - n: 102
   source_id: evand-exact-cur-2026-10-16
   value: '10.60582869643157837'

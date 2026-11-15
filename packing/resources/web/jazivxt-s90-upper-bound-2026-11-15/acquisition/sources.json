@@ -1,0 +1,58 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-15T03:13Z",
+  "git_scope": "A full clone of dpre4ai/n90-square-packing, fetched at 03:13Z on 15 November 2026 for the intake of jlevy/squares#989 (lane L170, bead think-i8y9); git ls-remote read the head of main again at 03:15Z. The repository holds four commits, all by the account's committer 'Daniel'. The pin is that head, f9b31b4 (committed 2026-11-15T03:10:54Z, 'Add the original three-panel N90 construction figure'), which adds n90-construction.png and changes nothing else; its parent 179fcba (2026-11-15T03:00:42Z, 'Publish the exact 90-square packing by jazivxt and GPT-6 Astra Ultra') is the revision #989 (03:00:53Z) names, 11 seconds before the issue, and every other file retained or pinned here has the same Git blob at both. 179fcba's parent e5c2ecc (03:00:02Z, 'Publish the exact 90-square packing by jazivxt and Codex Astra Ultra') first committed n90.cert, n90.csv, n90.png and DONOR-LICENSE.txt with the bytes the pin keeps; 179fcba changed only the AI collaborator's name in README.md, from 'Codex Astra Ultra' to 'GPT-6 Astra Ultra', and README.md's line in SHA256SUMS. The scope is the whole tree. The SHA-256 the issue states for n90.cert, 88c93b2f...d466, is the file's, and SHA256SUMS states the digests of README.md, n90.cert, n90.csv, n90.png and DONOR-LICENSE.txt, which match; it predates n90-construction.png and does not list it. DONOR-LICENSE.txt is byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and is pinned against it. GitHub's activity log was not readable from this session, so no push time is recorded. No source program ran in writing this packet; the repository holds none.",
+  "sources": [
+    {
+      "id": "jazivxt-s90-upper-bound-2026-11-15",
+      "source_url": "https://github.com/dpre4ai/n90-square-packing",
+      "source_ref": "main",
+      "source_commit": "f9b31b4ebddb278a128b6cb5c43836a305a24dca",
+      "committed_utc": "2026-11-15T03:10:54Z",
+      "git_tree": "9c4d6ca39aef7fab13d11aabe311e0f68ffb6c83",
+      "archived_path": "packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/source",
+      "subtree_manifest": "packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "DONOR-LICENSE.txt",
+        "README.md",
+        "SHA256SUMS",
+        "n90-construction.png",
+        "n90.cert",
+        "n90.csv",
+        "n90.png"
+      ],
+      "subtree_file_count": 7,
+      "subtree_total_bytes": 266193,
+      "retained_file_count": 4,
+      "retained_total_bytes": 19592,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "DONOR-LICENSE.txt",
+          "bytes": 1072,
+          "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+          "reason": "Joost de Winter's MIT licence for JoostdeWinter/square-packing, which the source carries for its donor packing; byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains.",
+          "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+        },
+        {
+          "path": "n90-construction.png",
+          "bytes": 124983,
+          "sha256": "0ab0b1d46a52040f841a3a3f123a20eca377bc99f977588d0775e2ab44be260d",
+          "reason": "A raster figure of the construction in three panels, added after the issue, which decides nothing; pinned by digest only."
+        },
+        {
+          "path": "n90.png",
+          "bytes": 120546,
+          "sha256": "81eaae7e8196587c0b3ea28ee8fec955630483344e3b3714a64e3922e7e3093e",
+          "reason": "A raster drawing of the packing, which decides nothing; pinned by digest only."
+        }
+      ],
+      "license": "The repository states no licence for its own data or prose: the tree has no LICENSE, and README.md states no reuse terms. DONOR-LICENSE.txt is Joost de Winter's MIT licence for JoostdeWinter/square-packing, copyright (c) 2026 Joost de Winter, which the source carries for the n = 157 packing its construction starts from; it covers that donor, not the new packing. The account dpre4ai submitted this source to the repository in issue #989, and the owner ruled on 24 October 2026 that a source its author submitted carries a presumption of permission to retain and import it (think-cnn7), as for issue #843's packet; the licence follow-up is think-86c1, and the stage 7 reply asks the author (the review's question 1). The certificate is factual data under the owner decision of 2026-10-09 as well (resources/web/known-best-packings/README.md, Retained Factual Data).",
+      "claims": [
+        "n90.cert, Evan Daniel's text format (the count and the side, then each square's centre x y in [0, S]^2 and t = tan(theta/2), all rational), states s(90) <= 4999138583463/500000000000 = 9.998277166926, the side terminating at 12 places; #989 (opened 2026-11-15T03:00:53Z by dpre4ai) and README.md print it, 0.001722833074 below the 10 x 10 grid's 10, which the issue reads from this registry's n = 90 case record. The README says the origin is the lower left corner and positive theta rotates counterclockwise. n90.csv lists the same squares' centres rounded and their angles in degrees, in certificate order, and n90.png draws the packing. An upper bound only: the issue says the exact optimum remains open; no optimality, KKT or rigidity claim.",
+        "The issue and README say Francisco Couzo's public checker verify_bound_certificate.py, at franciscouzo/square-packing 712c6a6e9ef58a9521784e6b7e236af813422de7 ('based on Evan Daniel's verifier'), accepted the certificate in strict mode, positive clearance from each wall and separation between every pair, and that a separate exact-arithmetic check tested all four walls per square and all 4,005 pairs, both in rational arithmetic by the separating-axis criterion, the least pair separation on a certifying axis about 1.19448e-12. No output of either check is published, and the second checker is not. Those statements are the author's; no source program ran here.",
+        "The issue and README say the construction started from a rectangular crop, about 12.993303 wide and 9.353384 high, of Joost de Winter's n = 157 packing (JoostdeWinter/square-packing c70defaf39af47db220d1e7c2922590637ffb664, n157/n157_exact.json); successive copies offset horizontally by one unit fit together at a vertical pitch of 9.019403 in place of about 9.353384; a square window across two copies held 90 squares, whose centres and orientations were then fitted and converted to exact rationals. The README says the arrangement was found during Kaggle's Squares in Squares competition. They ask that the result be credited to 'jazivxt and GPT-6 Astra Ultra', name jazivxt's Kaggle profile, and say GPT-6 Astra Ultra was the AI collaborator on the search and verification; e5c2ecc's README named it 'Codex Astra Ultra'."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1152 @@
+{
+ "program": "l169_controls.py",
+ "plan_sha256": "71bee737ce47ea67876ff0df0ce704838a48a95f7970ab7454c4bb53cb1663f9",
+ "status": "EVERY_CONTROL_AS_STATED",
+ "as_stated": 23,
+ "controls": 23,
+ "results": [
+  {
+   "id": "G1",
+   "what": "square 90 given square 1's centre and t",
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      1,
+      90
+     ]
+    ],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      1,
+      90
+     ],
+     "margin": "-1/1",
+     "approx": "-1.00000e0"
+    },
+    "margin_list_sha256": "95d46ded245aba41b567eb3a5f706ff9de3965b9aa46ba36d52590e62063193d",
+    "clearance_list_sha256": "e8b4080fb8e48c60e623f8b8e614692c045b06fd793b266828238a0dc14260bc"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G2",
+   "what": "square 1 translated by (S, 0)",
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "not_inside_by_B_area": [
+     1
+    ],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "39ecf465b25d8a9f4c58840b0ba62fcbed5f138e20ae37d9cc8890be71b5766e",
+    "clearance_list_sha256": "c069ede3a4e1a3aecdc3fbc21e38f1a17fabff356007fd07c21c6a9455948db1"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G3",
+   "what": "square 90's row deleted",
+   "outcome": "reader refused: header says 90 squares, the file has 89 rows",
+   "as_stated": true
+  },
+  {
+   "id": "G4",
+   "what": "the side written as 2p/2q",
+   "outcome": "reader refused: not in lowest terms: '9998277166926/1000000000000'",
+   "as_stated": true
+  },
+  {
+   "id": "G5a",
+   "what": "square 60, the turned square nearest a wall, moved to the left wall by its clearance, then t + 1e-30",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "ead999faf113530818577f3567c7fa23742fdfe5b6de64da0c287778f66fb18a",
+    "clearance_list_sha256": "3e84280b37a43083d7aabfddbc5afd55b127b3f371462e15fb991b36017efe7b"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G5b",
+   "what": "the same, then t - 1e-30",
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [
+     [
+      60,
+      "left"
+     ]
+    ],
+    "not_inside_by_B_area": [
+     60
+    ],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "1982959272eb8a9fbbdda4b9ccfe4b956e5df3c24e8ee7ec99caaef177b1d328",
+    "clearance_list_sha256": "d78fd93a74658ef3636a8f647cc3bca9e52abe3fa476ae80265ec24db7adc0df"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G6",
+   "what": "every t negated (the rotation read the other way)",
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      2,
+      15
+     ],
+     [
+      2,
+      18
+     ],
+     [
+      2,
+      40
+     ],
+     [
+      2,
+      56
+     ],
+     [
+      3,
+      15
+     ],
+     [
+      3,
+      16
+     ],
+     [
+      3,
+      41
+     ],
+     [
+      3,
+      64
+     ],
+     [
+      4,
+      16
+     ],
+     [
+      4,
+      17
+     ],
+     [
+      4,
+      42
+     ],
+     [
+      4,
+      53
+     ],
+     [
+      5,
+      17
+     ],
+     [
+      5,
+      18
+     ],
+     [
+      5,
+      43
+     ],
+     [
+      5,
+      54
+     ],
+     [
+      6,
+      9
+     ],
+     [
+      6,
+      12
+     ],
+     [
+      7,
+      13
+     ],
+     [
+      7,
+      73
+     ],
+     [
+      8,
+      25
+     ],
+     [
+      8,
+      81
+     ],
+     [
+      9,
+      24
+     ],
+     [
+      15,
+      19
+     ],
+     [
+      15,
+      44
+     ],
+     [
+      16,
+      20
+     ],
+     [
+      16,
+      44
+     ],
+     [
+      17,
+      21
+     ],
+     [
+      17,
+      44
+     ],
+     [
+      18,
+      22
+     ],
+     [
+      18,
+      44
+     ],
+     [
+      19,
+      40
+     ],
+     [
+      19,
+      64
+     ],
+     [
+      19,
+      72
+     ],
+     [
+      20,
+      41
+     ],
+     [
+      20,
+      53
+     ],
+     [
+      21,
+      42
+     ],
+     [
+      21,
+      54
+     ],
+     [
+      22,
+      43
+     ],
+     [
+      22,
+      56
+     ],
+     [
+      22,
+      60
+     ],
+     [
+      25,
+      41
+     ],
+     [
+      25,
+      70
+     ],
+     [
+      27,
+      39
+     ],
+     [
+      31,
+      46
+     ],
+     [
+      32,
+      45
+     ],
+     [
+      38,
+      52
+     ],
+     [
+      39,
+      42
+     ],
+     [
+      39,
+      53
+     ],
+     [
+      40,
+      58
+     ],
+     [
+      40,
+      65
+     ],
+     [
+      41,
+      66
+     ],
+     [
+      43,
+      57
+     ],
+     [
+      45,
+      50
+     ],
+     [
+      46,
+      51
+     ],
+     [
+      52,
+      72
+     ],
+     [
+      54,
+      86
+     ],
+     [
+      56,
+      58
+     ],
+     [
+      57,
+      60
+     ],
+     [
+      57,
+      89
+     ],
+     [
+      63,
+      65
+     ],
+     [
+      64,
+      66
+     ],
+     [
+      65,
+      72
+     ],
+     [
+      66,
+      70
+     ],
+     [
+      73,
+      80
+     ],
+     [
+      79,
+      81
+     ]
+    ],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      21,
+      54
+     ],
+     "margin": "-4930900313893011344155403601240582669002322762044093119486519088383451914065791/16935757082232084968614158472708383395930356522726801000000000000000000000000000",
+     "approx": "-2.91153e-1"
+    },
+    "margin_list_sha256": "4bf7ddc50eb69e0ac7bdcbffa9326ee50c0147d726430ef4287a3aeb1830cdf6",
+    "clearance_list_sha256": "a77498f5658eba011f732cbe0c954a19ca5d1d007526ff792a58af886585bb4a"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G7a",
+   "what": "the text with LF line ends",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "a77498f5658eba011f732cbe0c954a19ca5d1d007526ff792a58af886585bb4a"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G7b",
+   "what": "the header's count written as 91",
+   "outcome": "reader refused: header says 91 squares, the file has 90 rows",
+   "as_stated": true
+  },
+  {
+   "id": "G8",
+   "what": "every square transposed, (x, y, t) -> (y, x, -t)",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "2a6cb813f883327fd43403106f9035c61f5671ce418ad32be273a33ceabe274a"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G9",
+   "what": "every t -> (t + 1)/(1 - t), the angle plus 90 degrees",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "a77498f5658eba011f732cbe0c954a19ca5d1d007526ff792a58af886585bb4a"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G10",
+   "what": "every t -> (t - 1)/(1 + t), the angle less 90 degrees",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "a77498f5658eba011f732cbe0c954a19ca5d1d007526ff792a58af886585bb4a"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "G11",
+   "what": "the packing turned a quarter about the box centre, (x, y, t) -> (S - y, x, t)",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "1e3ba416249d8c5b23ca1cdfda2e5ecfcbe46fae92425d2090437b68ddb0b42e"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S1a",
+   "what": "the side lowered by 1/q, one unit of its own last place",
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [
+     [
+      11,
+      "right"
+     ],
+     [
+      31,
+      "right"
+     ],
+     [
+      34,
+      "right"
+     ],
+     [
+      35,
+      "right"
+     ],
+     [
+      47,
+      "right"
+     ],
+     [
+      49,
+      "right"
+     ],
+     [
+      55,
+      "right"
+     ],
+     [
+      82,
+      "top"
+     ],
+     [
+      83,
+      "right"
+     ],
+     [
+      83,
+      "top"
+     ],
+     [
+      84,
+      "top"
+     ],
+     [
+      85,
+      "top"
+     ],
+     [
+      88,
+      "top"
+     ],
+     [
+      90,
+      "top"
+     ]
+    ],
+    "not_inside_by_B_area": [
+     11,
+     31,
+     34,
+     35,
+     47,
+     49,
+     55,
+     82,
+     83,
+     84,
+     85,
+     88,
+     90
+    ],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "14ec3d941dc633d24081e3ae2465769869353cd01365544c348c5c1ce1bacbbe"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S1b",
+   "what": "the side lowered by 1e-30",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "a97f3d92cbdea03f3f5305e61fc5d6d3bf0d0c2177c2b7e598953cfc885467be"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S1c",
+   "what": "the side lowered by the least right-or-top clearance",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [
+     [
+      11,
+      "right"
+     ],
+     [
+      31,
+      "right"
+     ],
+     [
+      34,
+      "right"
+     ],
+     [
+      35,
+      "right"
+     ],
+     [
+      47,
+      "right"
+     ],
+     [
+      49,
+      "right"
+     ],
+     [
+      55,
+      "right"
+     ],
+     [
+      82,
+      "top"
+     ],
+     [
+      83,
+      "right"
+     ],
+     [
+      83,
+      "top"
+     ],
+     [
+      84,
+      "top"
+     ],
+     [
+      85,
+      "top"
+     ],
+     [
+      88,
+      "top"
+     ],
+     [
+      90,
+      "top"
+     ]
+    ],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "3fe3da28e0a33f0abb79a21aa69f392f3170841d2d7f58e9944b933303479c18"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S1d",
+   "what": "the side lowered by that clearance and 1e-30 more",
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [
+     [
+      11,
+      "right"
+     ],
+     [
+      31,
+      "right"
+     ],
+     [
+      34,
+      "right"
+     ],
+     [
+      35,
+      "right"
+     ],
+     [
+      47,
+      "right"
+     ],
+     [
+      49,
+      "right"
+     ],
+     [
+      55,
+      "right"
+     ],
+     [
+      82,
+      "top"
+     ],
+     [
+      83,
+      "right"
+     ],
+     [
+      83,
+      "top"
+     ],
+     [
+      84,
+      "top"
+     ],
+     [
+      85,
+      "top"
+     ],
+     [
+      88,
+      "top"
+     ],
+     [
+      90,
+      "top"
+     ]
+    ],
+    "not_inside_by_B_area": [
+     11,
+     31,
+     34,
+     35,
+     47,
+     49,
+     55,
+     82,
+     83,
+     84,
+     85,
+     88,
+     90
+    ],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "5dfa87441ec9e8478b34f242a66c6300965a6f4ea49b6e10bfeb57d4b775a13e"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S1e",
+   "what": "the packing translated by minus the least left and bottom clearances, in the box of its extent",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [
+     [
+      11,
+      "right"
+     ],
+     [
+      28,
+      "bottom"
+     ],
+     [
+      31,
+      "right"
+     ],
+     [
+      33,
+      "bottom"
+     ],
+     [
+      34,
+      "right"
+     ],
+     [
+      35,
+      "right"
+     ],
+     [
+      47,
+      "right"
+     ],
+     [
+      49,
+      "right"
+     ],
+     [
+      55,
+      "right"
+     ],
+     [
+      61,
+      "left"
+     ],
+     [
+      62,
+      "left"
+     ],
+     [
+      71,
+      "left"
+     ],
+     [
+      75,
+      "bottom"
+     ],
+     [
+      82,
+      "top"
+     ],
+     [
+      83,
+      "right"
+     ],
+     [
+      83,
+      "top"
+     ],
+     [
+      84,
+      "top"
+     ],
+     [
+      85,
+      "top"
+     ],
+     [
+      88,
+      "top"
+     ],
+     [
+      90,
+      "top"
+     ]
+    ],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "8bb2e85685ee4dc8b4ceeeeddc04413b8db34fcef8b95f3e2333fa76546a4237"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S1f",
+   "what": "the same box less 1e-30",
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [],
+    "touching_pairs": [],
+    "wall_contacts": [
+     [
+      28,
+      "bottom"
+     ],
+     [
+      33,
+      "bottom"
+     ],
+     [
+      61,
+      "left"
+     ],
+     [
+      62,
+      "left"
+     ],
+     [
+      71,
+      "left"
+     ],
+     [
+      75,
+      "bottom"
+     ]
+    ],
+    "wall_crossings": [
+     [
+      11,
+      "right"
+     ],
+     [
+      31,
+      "right"
+     ],
+     [
+      34,
+      "right"
+     ],
+     [
+      35,
+      "right"
+     ],
+     [
+      47,
+      "right"
+     ],
+     [
+      49,
+      "right"
+     ],
+     [
+      55,
+      "right"
+     ],
+     [
+      82,
+      "top"
+     ],
+     [
+      83,
+      "right"
+     ],
+     [
+      83,
+      "top"
+     ],
+     [
+      84,
+      "top"
+     ],
+     [
+      85,
+      "top"
+     ],
+     [
+      88,
+      "top"
+     ],
+     [
+      90,
+      "top"
+     ]
+    ],
+    "not_inside_by_B_area": [
+     11,
+     31,
+     34,
+     35,
+     47,
+     49,
+     55,
+     82,
+     83,
+     84,
+     85,
+     88,
+     90
+    ],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "32296977323562883056444517974947533982758768123620781252412642106443229/27038412442818069712711531287179582788838055151457899561000000000000000000000000000",
+     "approx": "1.19448e-12"
+    },
+    "margin_list_sha256": "27523799defe3ee68c570bb5e9d34c5d2fa3d4f21ec1daaf4c481574eeffc115",
+    "clearance_list_sha256": "5d6c687e8ad809d9d2d73ada1f8a183af0548c123be8f21398d30d297fbb3b28"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S4c",
+   "what": "square 79 moved toward 81 along their centre line to exact contact",
+   "outcome": {
+    "verdict": "ACCEPT",
+    "overlapping_pairs": [],
+    "touching_pairs": [
+     [
+      79,
+      81
+     ]
+    ],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "0/1",
+     "approx": "0"
+    },
+    "margin_list_sha256": "fbf11bdac2f59ea25bd2d104a2ba09e5125971ce3503cb1e5d1942b1cb46eb5f",
+    "clearance_list_sha256": "6dcd840c91e01b2c948b3b913d08ab0f80cacf4820ebddea88d1f1028f04ae5a"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S4p",
+   "what": "the same, 1e-30 past contact",
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping_pairs": [
+     [
+      79,
+      81
+     ]
+    ],
+    "touching_pairs": [],
+    "wall_contacts": [],
+    "wall_crossings": [],
+    "not_inside_by_B_area": [],
+    "least_margin": {
+     "pair": [
+      79,
+      81
+     ],
+     "margin": "-1/1000000000000000000000000000000",
+     "approx": "-1.00000e-30"
+    },
+    "margin_list_sha256": "53745fe97ed04b5a38987577164fb183d81a288a2a87589c5a336f739eaf0108",
+    "clearance_list_sha256": "5b59204bcb60bb552b13920084919ae57eef87e271300cdb0241c26a7a2fec97"
+   },
+   "mismatches": [],
+   "as_stated": true
+  },
+  {
+   "id": "S5",
+   "what": "every pair closed along its centre line to exact contact and 1e-30 past it",
+   "outcome": {
+    "pairs_done": 4005,
+    "as_stated_pairs": 4005,
+    "closing_times_sha256": "2d35ab2186d5c9be2a300bedd63c606380d7f29a5552287347ddcc17f28bcbca",
+    "failures": []
+   },
+   "as_stated": true
+  },
+  {
+   "id": "S6",
+   "what": "every square moved to its nearest wall by its clearance, and 1e-30 past",
+   "outcome": {
+    "squares_done": 90,
+    "list_sha256": "99662f3464877a60a875998697e87da9f29da6695d48032de7bc8976c6cd619c",
+    "failures": [],
+    "as_stated_squares": 90
+   },
+   "as_stated": true
+  }
+ ],
+ "cpu_seconds": 10.36
+}
