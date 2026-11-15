@@ -47521,8 +47521,8 @@ results:
       holds it; k = 11 to 18 (110 to 306) were already below their grids, and k = 4 to 9 (12 to 72)
       stay at them.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate lane,
-      blind to this one (think-176a).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 15 November
+      2026 accepts it, its clean-room checker independently re-implemented.
 
       The issue and README say Francisco Couzo's public checker verify_bound_certificate.py, at
       franciscouzo/square-packing 712c6a6 ('based on Evan Daniel's verifier'), accepted the
@@ -47573,6 +47573,7 @@ results:
     evidence:
     - E-jazivxt-989-certificate-report
     - E-jazivxt-989-exact-feasibility
+    - E-jazivxt-989-review-exact-feasibility
     artifacts:
     - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/README.md
     - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/claims.json
@@ -47587,10 +47588,15 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-15-jazivxt-989.md
+    - packing/resources/web/jazivxt-s90-989-review-2026-11-15/out/check-n90.json
+    - packing/resources/web/jazivxt-s90-989-review-2026-11-15/out/controls-n90.json
+    - packing/resources/web/jazivxt-s90-989-review-2026-11-15/out/describe-n90.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l170_1115.py
     - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
+    - packing/resources/web/jazivxt-s90-989-review-2026-11-15/out/controls-n90.json
     notes: >-
       A separate complete repository replay is retained for n = 90: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -47648,13 +47654,56 @@ results:
       states no licence; the account submitted it in the issue, so the presumption of permission of
       24 October 2026 (think-cnn7) applies, and DONOR-LICENSE.txt is de Winter's MIT notice for the
       donor. No human oversight or optimality is claimed.
+
+      The stage 4 review of 15 November 2026
+      (docs/project/reviews/review-2026-11-15-jazivxt-989.md, lane L169, under think-176a),
+      written in a separate lane blind to this one, accepts the certificate with seven findings,
+      all notes, none blocking. Its clean-room checker decides every square, wall and all 4,005
+      pairs by separating axes in Python integers and by exact clipping in gmpy2.mpq, with no
+      distance filter: every pair strictly apart, no square touching a wall, the least clearance
+      2.1000000001021e-15 (squares 28, 33 and 75 at the bottom, 61, 62 and 71 at the left), and
+      the least pair margin 1.194484972e-12, at squares 79 and 81, the replay's exactly. Its 23
+      controls, stated beforehand, were each decided as stated, among them the rotation read the
+      other way (66 pairs overlap), the side lowered by one unit of its last place (13 squares
+      cross the right and top walls) and every one of the 4,005 pairs closed to exact contact and
+      1e-30 past it (E-jazivxt-989-review-exact-feasibility).
+
+      The review's findings for the record, which hold no rung: the side is the claim exactly
+      (F3); the side is not the packing's extent, the left and bottom cleared by 2.1e-15 and the
+      right and top by 2.377e-13, so the squares fit, translated, a box 2.398228330832381e-13
+      smaller and not 1e-30 less (F4); the near pairs are a contact arrangement opened by about
+      1.2e-12, 174 pairs from 1.19448e-12 to 8.16e-12 and then none below 2.05e-4 (F5); 41
+      squares upright, 44 turned clockwise by 22.6 to 31.6 degrees and five within 0.07 degrees,
+      25 of them at -22.914477 degrees under seven values of t (F7). For the author: the file
+      states neither the box nor the sense of the rotation, which reads clockwise to 66 overlapping
+      pairs (F6).
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one, under
-      think-176a): its mathematics, a clean-room exact checker with sharp controls, the identity
-      against the grid and the construction the source states, mapped as an adversarial review,
-      whose acceptance the house rule waits on. Then adopt it at 90, first adopted here, in place of
-      the grid under the house rule, with both strong generators' regularization, measured against
-      the new witness, and the flip of the new house in the same change.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 15 November, is retained.
+      It is the smallest validated side at 90, and the case adopts it there, the first adoption at
+      90, in the pass of 15 November 2026 under the house rule, in place of the 10 x 10 grid, with
+      both strong generators' regularization of the new house; the grid keeps its replay as
+      history. The review's question for the author holds no rung, and the contracted side its
+      F4 measures is the owner's RV-3 question, not registered.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-15-jazivxt-989.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 989 (L169,
+        under think-176a), prompted separately from the import lane (L170, think-i8y9) and blind
+        to its work throughout
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-15'
+      scope: >-
+        Finite feasibility of the centre and half-angle certificate of issue 989 (90), decided
+        again by a clean-room exact checker frozen before any producer or witness code was read,
+        by two methods, with 23 controls stated in advance and a self-test of 6,166 cases; the
+        claim's arithmetic, the side against the packing's extent, the near pairs, the tilts and
+        the rotation sense.
+      verdict: accepted
+      covers:
+      - T-303
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

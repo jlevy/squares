@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **263** programs: **57** external and **206** first-party; **180** decide claims and **83** check premises.
-- **765** of **984** evidence entries name the programs that verified them: 368 independently re-implemented, 322 reproduced with the producer’s code, 53 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **264** programs: **57** external and **207** first-party; **181** decide claims and **83** check premises.
+- **766** of **985** evidence entries name the programs that verified them: 369 independently re-implemented, 322 reproduced with the producer’s code, 53 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -295,6 +295,7 @@ second implementation agrees.
 | [`V-de-winter-977-979-review-check`](#v-de-winter-977-979-review-check) | l153_check.py with l153_reader.py | Squares Project (Levy) | first-party | decides | 2 | 1 |
 | [`V-ozden-983-review-check`](#v-ozden-983-review-check) | l159_check.py with l159_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-ono-984-985-review-check`](#v-ono-984-985-review-check) | l163_check.py with l163_reader.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
+| [`V-jazivxt-989-review-check`](#v-jazivxt-989-review-check) | l169_check.py with l169_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -5349,6 +5350,22 @@ The 14 November stage 4 review's exact checker of Roberto Ono's centre and half-
 | --- | --- | --- | --- | --- |
 | `E-ono-984-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 228: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-301 |
 | `E-ono-985-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 147: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-302 |
+
+### `V-jazivxt-989-review-check`
+
+**l169_check.py with l169_reader.py, l169_sat.py, l169_clip.py, l169_decide.py and l169_geom.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 15 November stage 4 review's exact checker of jazivxt's centre and half-angle certificate of issue 989 (90), in Evan Daniel's text format, with a strict reader of its own (l169_reader.py: the header n S and exactly n rows of three tokens, every scalar canonical, an integer or p/q in lowest terms with q >= 2, one line terminator throughout, nothing else): every reading hypothesis, every square a unit square, every wall and every pair twice with no distance filter, by separating axes over the four edge normals in Python integers over per-square denominators, the edge directions taken from t as Pythagorean triples (l169_sat.py, method A), and by exact Sutherland-Hodgman clipping of the corners in gmpy2.mpq, each square a unit square by its sides and diagonals and listed counterclockwise, each pair clipped both ways round and each wall classed by the intersection exactly, containment decided by area (l169_clip.py, method B); l169_decide.py runs both and requires their classes to agree. l169_geom.py holds the closed-form margins and constructions the self-test and controls use; l169_controls.py decides 23 controls stated in a plan hashed before it existed; l169_selftest.py holds both methods and the reader to 6,166 cases.
+
+- Source: [`packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_check.py`](../../packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_check.py), [`packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_reader.py`](../../packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_reader.py), [`packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_sat.py`](../../packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_sat.py), [`packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_clip.py`](../../packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_clip.py), [`packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_decide.py`](../../packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_decide.py), [`packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_geom.py`](../../packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_geom.py), [`packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_selftest.py`](../../packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_selftest.py), [`packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_controls.py`](../../packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_controls.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-15-jazivxt-989.md`](../../docs/project/reviews/review-2026-11-15-jazivxt-989.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 989 (L169, under think-176a), strong tier, prompted separately from the import lane (L170, think-i8y9)), with its own prompt and code; authorship in common with the producer’s: none, The issue and the source's README say GPT-6 Astra Ultra was the AI collaborator on the search and verification; the review was written by a Claude agent. The seven checker files were frozen at 2026-11-15T03:19:25Z (frozen/checker-frozen-digests.txt), before their author read the source's README, Francisco Couzo's checker, or this repository's witness, verifier or promotion code; they import nothing from this repository or the source and reuse no code of any earlier review, lanes L163's and L159's reviews, the models for its method, among them, whose programs it did not open.
+- Note: Written and run on 15 November 2026 for docs/project/reviews/review-2026-11-15-jazivxt-989.md, and kept with its receipts in the review-only directory jazivxt-s90-989-review-2026-11-15 beside the import lane's packet. l169_plan_facts.py, l169_make_plan.py and l169_describe.py, kept beside them, decide no certificate and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-jazivxt-989-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 90: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-303 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

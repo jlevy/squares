@@ -170,6 +170,41 @@ grid at 111, 11, was the L step from the grid at 90, and that step now lands at 
 9.9497… is already below this side.
 So the bound carries to no other count.
 
+## Stage 4 Review
+
+The stage 4 review of 15 November 2026
+([review-2026-11-15-jazivxt-989.md](../../../../docs/project/reviews/review-2026-11-15-jazivxt-989.md),
+lane L169), written blind to this lane, accepts the certificate with seven findings, all
+notes, none blocking.
+Its clean-room checker decides every square, wall and all 4,005 pairs twice, by
+separating axes in Python integers and by exact clipping in GMP rationals, and all 23 of
+its controls were decided as stated.
+This lane read its frozen findings at 03:33Z on 15 November, after its own replay,
+controls and measurements (03:25Z) and registration (03:32Z) were committed.
+Read against this packet’s receipts, the review’s least pair margin (1.194484972 ×
+10⁻¹², squares 79 and 81) is the replay’s exactly; its least wall clearance,
+2.1000000001021 × 10⁻¹⁵, at squares 28, 33 and 75 (bottom) and 61, 62 and 71 (left), is
+the replay’s, and square 28, which the sharp controls grew at its wall, is one of them;
+its right and top clearance, 928604816731/3906250000000000000000000, is the amount the
+sharp controls lowered the side by; and its tilts (41 upright, 44 turned clockwise by
+22.6 to 31.6 degrees, five within 0.07 degrees) are
+[measure/identity.json](measure/identity.json)’s. No disagreement.
+
+What the review adds:
+
+- **The side is not the packing’s extent** (F4): the squares fit, translated, a box
+  2.398228330832381 × 10⁻¹³ smaller, accepted by both its methods, and not that box less
+  10⁻³⁰. The record registers the side the issue claims; the smaller box is padding, the
+  owner’s RV-3 question, and is not registered.
+- **A contact arrangement opened by about 1.2 × 10⁻¹²** (F5): 174 pairs from 1.19448 ×
+  10⁻¹² to 8.16 × 10⁻¹², then none below 2.05 × 10⁻⁴.
+- **The tilts** (F7): 25 squares at −22.914477 degrees under seven values of t spanning
+  1.24 × 10⁻¹².
+
+Its question for the author (F6): the file states neither the box nor the sense of the
+rotation; read clockwise, 66 pairs overlap.
+A comment line saying “[0, S]², θ counterclockwise with y up” would settle it.
+
 ## What Is Not Established
 
 - **Optimality** of any kind.
